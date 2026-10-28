@@ -642,6 +642,34 @@
         "installedRealpathInsideSuccessor": true,
         "evidence": "work/hermes-review/frontend-final-physical-binding/PHYSICAL-BINDING-RESULT.txt"
       }
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.28-d7e2cd9d-71c0e042a6d1.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.28",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "d7e2cd9df7f2be3db39958d6999e5704a2c782da",
+      "sourceTree": "dfaebcc6b4d6d593181d6b533d73746ffdffd5fd",
+      "bytes": 1582327,
+      "sha256": "71c0e042a6d14afabdb7e78a9d10d235ab56de7ec87896083c447bca291b07f5",
+      "integrity": "sha512-SU56HA9QtH99eaSK+XrK58Z7R5KUdHNmt59p5p5BG9wxNyJSVGpSlohcCfH8NeeavT2U1uTJDASHAXr2ZcN1AA==",
+      "regularEntryCount": 75,
+      "status": "source-merged-consumer-bound",
+      "purpose": "Native memory approval, exact pending-candidate submission and current review readback; installed canonical public receiver."
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.15-d7e2cd9d-d9f625f3984e.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.15",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "d7e2cd9df7f2be3db39958d6999e5704a2c782da",
+      "sourceTree": "dfaebcc6b4d6d593181d6b533d73746ffdffd5fd",
+      "bytes": 3634,
+      "sha256": "d9f625f3984e3381f104cc2c2ba5d8af45b78eacc59eda2a3c20f69ce1a2ffde",
+      "integrity": "sha512-t0gBsGxt3TBjJEsVL4iWiZU+n0CYDDb5sBdB/2dQ+VWhgt3ZX7H+sEIskDD5If0MY3vbdf3PX+yrORBIelKF0g==",
+      "regularEntryCount": 6,
+      "status": "source-merged-consumer-bound",
+      "purpose": "Metadata-only peer compatibility with contracts0.1.28; runtime and declaration bytes unchanged."
     }
   ]
 }

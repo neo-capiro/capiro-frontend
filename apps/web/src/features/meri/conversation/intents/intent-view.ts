@@ -7,6 +7,13 @@ import {
 } from "./legislative-document-view";
 import { savedNoteRow } from "./note-view";
 import {
+  isNativeMemoryOutcome,
+  isMemoryProposal,
+  memoryProposalFields,
+  memoryOutcomeLook,
+  memoryResultFields,
+} from "./memory-view";
+import {
   isClientRecordProposal,
   clientRecordFields,
   clientRecordRow,
@@ -101,6 +108,7 @@ export function proposalFields(
   if (isLegislativeDocumentProposal(proposal))
     return legislativeDocumentFields(proposal);
   const command = proposal.command;
+  if (isMemoryProposal(proposal)) return memoryProposalFields(proposal);
   const args = command.arguments as Record<string, unknown>;
   const fields: IntentField[] = [
     { label: "Action", value: actionLabels[command.action] ?? command.action },
@@ -150,6 +158,8 @@ function resultFields(
 ): readonly IntentField[] {
   if (isNativeMailOutcome(execution.outcome))
     return mailResultFields(execution.outcome);
+  if (isNativeMemoryOutcome(execution.outcome))
+    return memoryResultFields(execution.outcome);
   if ("version" in execution.outcome) {
     const { version } = execution.outcome;
     return [
@@ -485,6 +495,9 @@ export function intentRow(
     ...row,
     ...(item.phase === "completed" && !completed ? phaseLooks.unknown : look),
     ...(completed ? filingLook(completed) : null),
+    ...(completed && isNativeMemoryOutcome(completed.outcome)
+      ? memoryOutcomeLook(completed.outcome)
+      : null),
     decision,
     title: actionLabels[item.proposal.command.action] ?? row.title,
     proposal: item.proposal,

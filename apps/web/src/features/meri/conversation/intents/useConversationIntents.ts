@@ -26,6 +26,7 @@ import { isWatchProposal, watchSettled } from "./watch-view";
 import { isBizdevProposal, bizdevSettled } from "./bizdev-view";
 import { isLegiwatchProposal, legiwatchSettled } from "./legiwatch-view";
 import { isMailSendProposal, mailOutcomeSettled } from "./mail-view";
+import { isMemoryProposal, isNativeMemoryOutcome } from "./memory-view";
 import { useIntentExpiry } from "./useIntentExpiry";
 import { useResearchShareResults } from "./useResearchShareResults";
 import {
@@ -76,6 +77,8 @@ function settledOwnerOutcome(
     execution.state !== "completed"
   )
     return false;
+  if (isMemoryProposal(item.proposal))
+    return isNativeMemoryOutcome(execution.outcome);
   return isMailSendProposal(item.proposal)
     ? mailOutcomeSettled(execution.outcome)
     : true;
@@ -264,6 +267,7 @@ export function useConversationIntents(
           isLegiwatchProposal(proposal) ||
           isClientRecordProposal(proposal) ||
           isMailSendProposal(proposal) ||
+          isMemoryProposal(proposal) ||
           isLegislativeDocumentProposal(proposal))
       ) {
         try {
