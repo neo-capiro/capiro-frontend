@@ -5542,18 +5542,18 @@
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "d23a5d3825d7955092642952c3d53da36f9a89b0ab08ae2370732cd3fab203d8",
-    "reason": "reviewed-accept — file was already >400 nonblank; single proposal→row registry retained",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "fingerprint": "1008ca06e7faef749095109fd3f214f463fc7791cc3d8b5629942b61a3ed0302",
+    "reason": "reviewed-accept — file was already >400 nonblank (509→536); the added unit is filingLinks, one pure projection of the retained filing outcome beside the existing filing receipt projection. Single proposal→row registry retained; no new domain or authority owner.",
+    "reviewedBy": "Hermes Agent source review 20261027_154620_698336",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "function",
     "symbol": "intentRow",
-    "fingerprint": "548fe3c6137b0f5edf455d6337c506883bad3f3ccffdf458b89e7aeab9c3efb4",
-    "reason": "reviewed-accept — adds the research_action branch",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "fingerprint": "e6b74bb9372b3818bb9c505358f498ad75fb087d05f560479f92458da986de06",
+    "reason": "reviewed-accept — adds saved-file links to the existing native proposal row; the helper owns the filing completion projection (native-artifact-file). No new authority or domain owner.",
+    "reviewedBy": "Hermes Agent source review 20261027_154620_698336",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6831,9 +6831,9 @@
     "file": "apps/web/src/features/meri/conversation/intents/ConversationIntents.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "0852eba753737f136ad0c58b5c0bcdac5be2f7146c2f547571da0167d96cd06b",
-    "reason": "5. ConversationIntents.tsx / module <module> / line 1 / nonblank 411 / fingerprint 0852eba753737f136ad0c58b5c0bcdac5be2f7146c2f547571da0167d96cd06b / changed. The file was already over 400 nonblank at base; this change adds one import and a presentation wrapper. Contents stay within one bounded domain (prepared-action intent approvals): classification predicates, DecisionControls, IntentCard, Body, container. No duplicate registry, no parallel switch chain, no new dependency direction introduced. ACCEPT WITH NOTE: at the upper bound; further growth should extract the proposal-kind predicates.",
-    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
+    "fingerprint": "a982a37ae1d4e454604d59fae3283fa23c1ef8a63e308d9b2c744de3c644a174",
+    "reason": "reviewed-accept — composed 421-nonblank module (411 at the Wave4 base plus the 10-line saved-filing receipt link block in IntentCard). IntentCard is byte-identical to the reviewed c462f484 card (2baf8e7c…), Body and DecisionControls are byte-identical to the reviewed 2146faae bodies (9cc9ac3b…, 66fb493c…), and the only other delta vs the reviewed MF19 tree is the already-reviewed Wave4 unavailable-panel/Refresh ui.outline styling. Content stays in one bounded prepared-action domain — classification predicates, DecisionControls, IntentCard, Body, container — with no new domain, effect, lifecycle owner, authority owner, dependency direction or shared-file write surface; a split is not required.",
+    "reviewedBy": "Hermes Agent source review 20261027_205545_91530e",
     "reviewedOn": "2026-10-27"
   },
   {
