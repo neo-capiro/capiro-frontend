@@ -71,14 +71,35 @@ const selected = (
   },
 });
 
-it("covers all fourteen installed public skill identities", () =>
-  expect(skills).toHaveLength(14));
-it("scope choices cover all fourteen without assigning client tasks to General", () => {
+it("preserves the original fourteen public identities alongside the cited-report workflow", () => {
+  expect(skills.toSorted()).toEqual(
+    [
+      "research_company",
+      "relationship_brief",
+      "client_changes",
+      "portfolio_changes",
+      "portfolio_overlap",
+      "mail_history",
+      "meeting_prep",
+      "commitments_audit",
+      "funding_opportunity_match",
+      "pe_deep_dive",
+      "bill_watch",
+      "hearing_watch",
+      "representation_lookup",
+      "regulatory_docket_brief",
+      "cited_report",
+    ]
+      .map((name) => `quick_skill.${name}`)
+      .toSorted(),
+  );
+});
+it("scope choices cover every installed identity without assigning client tasks to General", () => {
   const client = skillsForScope(id(5)),
     general = skillsForScope(null);
   expect(
-    new Set([...client, ...general].map((skill) => skill.skillId)).size,
-  ).toBe(14);
+    new Set([...client, ...general].map((skill) => skill.skillId)),
+  ).toEqual(new Set(skills));
   expect(client.every((skill) => skill.subjectKinds.includes("client"))).toBe(
     true,
   );
