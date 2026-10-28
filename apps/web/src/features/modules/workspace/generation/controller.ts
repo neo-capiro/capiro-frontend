@@ -33,6 +33,12 @@ export type GenerationPlan =
       kind: "request";
       operation: WorkspaceGenerationOperationKey;
       input: GenerationRequestInput;
+      /**
+       * The identity of the attempt being sent: the derived key and the digest
+       * of its exact request. The caller mints the journal fence and retains the
+       * record itself.
+       */
+      retain?: Pick<IntakeRecoveryRecord, "key" | "digest">;
     }
   | { kind: "replay"; entry: IntakeRecoveryRecord }
   | { kind: "refusal"; reason: string }
@@ -228,6 +234,12 @@ const writeAuthority: Partial<
   "workspace.generation.cancel": "edit",
   "workspace.generation.quality.fix": "edit",
   "workspace.generation.intake": "edit",
+  // The retry route asserts canEdit before any effect: retrying overwrites
+  // section content in this document.
+  "workspace.generation.run.retryFailed": "edit",
+  // The document retry re-checks the SAME canEdit access before it admits the
+  // attempt, and a reviewer alone cannot start paid generation.
+  "workspace.generation.document.retry": "edit",
   "workspace.generation.proposal.accept": "review",
   "workspace.generation.proposal.reject": "review",
 };

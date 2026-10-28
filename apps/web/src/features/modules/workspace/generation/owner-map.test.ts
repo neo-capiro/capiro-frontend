@@ -32,23 +32,36 @@ it("wires only Workspace-owned operations and withholds every model-backed one",
   }
   for (const entry of withheldGenerationActions()) {
     expect(entry.withheldReason, entry.action).toBeTruthy();
-    // A withheld action is either an unbridged greenfield Meri phase or the
-    // durable intake, whose run is drafted by the legacy provider path.
-    expect(
-      entry.owner === "meri-greenfield" || entry.action === "intake.submit",
-      entry.action,
-    ).toBe(true);
+    // Every remaining withheld action is an unbridged greenfield Meri phase. The
+    // durable intake is wired: its run's drafting stage is served by the
+    // greenfield native conversation owner, so withholding it would leave a dead
+    // control over an approved owner.
+    expect(entry.owner, entry.action).toBe("meri-greenfield");
   }
 });
 
-it("mounts the durable intake receipt reads but never its submit or run retry", () => {
+it("mounts the durable intake submit and its run continuation with their reads", () => {
   const mounted = [...mountedGenerationOperations()];
   expect(mounted).toContain("workspace.generation.intake.capability");
+  expect(mounted).toContain("workspace.generation.intake");
   expect(mounted).toContain("workspace.generation.run.status");
-  for (const withheld of [
-    "workspace.generation.intake",
-  ])
-    expect(mounted, withheld).not.toContain(withheld);
+  // The run continuation is served by the same approved durable-intake owner as
+  // the intake and the run read, so it is mounted with its own operation.
+  expect(mounted).toContain("workspace.generation.run.retryFailed");
+  const retry = wiredGenerationActions().find(
+    (entry) => entry.action === "run.retryFailed",
+  );
+  expect(retry?.operation).toBe("workspace.generation.run.retryFailed");
+  expect(retry?.owner).toBe("workspace-durable-intake");
+  // The DOCUMENT retry is now mounted on the greenfield native owner with its own
+  // operation, so a mounted control for it dispatches the native route and nothing
+  // reaches the legacy provider path through it.
+  const document = wiredGenerationActions().find(
+    (entry) => entry.action === "generation.retry",
+  );
+  expect(document?.operation).toBe("workspace.generation.document.retry");
+  expect(document?.owner).toBe("workspace-native-retry");
+  expect(document?.withheldReason).toBeUndefined();
 });
 
 it("mounts the five supported generated phases on the greenfield native owner", () => {
@@ -76,12 +89,11 @@ it("declares exactly the operations the owner map accounts for", () => {
   for (const entry of withheldGenerationActions())
     if (entry.operation) accounted.add(entry.operation);
   expect([...accounted].sort()).toEqual(declared);
-  // The durable intake is declared with its required request identity but is
-  // not mounted, so no panel may dispatch it.
+  // The durable intake is declared with its required request identity and is
+  // mounted: its run's drafting stage is served by the greenfield native
+  // conversation owner, so the submit is a real greenfield generation.
   expect(declared).toContain("workspace.generation.intake");
-  expect(isMountedGenerationOperation("workspace.generation.intake")).toBe(
-    false,
-  );
+  expect(isMountedGenerationOperation("workspace.generation.intake")).toBe(true);
 });
 
 it("accounts for every advertised action exactly once", () => {
@@ -121,19 +133,22 @@ it("covers the actions the WS-22 ticket advertises", () => {
     "quality.fix",
     "intake.submit",
     "run.status",
+    "run.retryFailed",
   ])
     expect(accounted, action).toContain(action);
 });
 
 it("keeps every model-backed action WITHOUT a greenfield owner withheld", () => {
   const withheld = withheldGenerationActions().map((entry) => entry.action);
-  for (const action of [
-    "recommend",
-    "message.send",
-    "generation.retry",
-    "run.retryFailed",
-  ])
+  for (const action of ["recommend", "message.send"])
     expect(withheld, action).toContain(action);
+  // The document retry now HAS a greenfield native owner, so it is mounted rather
+  // than withheld.
+  expect(withheld).not.toContain("generation.retry");
+  // The run continuation is wired: its route is served by the approved
+  // durable-intake owner and reaches the legacy provider path for no run this
+  // consumer may name.
+  expect(withheld).not.toContain("run.retryFailed");
   // The five supported generated phases are wired, not withheld: their greenfield
   // native owner exists now, so withholding them would leave a dead control.
   const wired = wiredGenerationActions().map((entry) => entry.action);

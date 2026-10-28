@@ -29,6 +29,7 @@ import {
   planNativeBriefSynthesis,
   planNativeContextAnalyze,
   planNativeContextRecommend,
+  planNativeDocumentRetry,
   planNativeGenerationStart,
   planNativeOutlineGeneration,
 } from "./native-generation";
@@ -308,6 +309,18 @@ function ProposalGate({ props }: { props: GenerationPanelProps }) {
   );
 }
 
+/**
+ * The retry control's plan. A run that carries a retained native request is retried
+ * through the NATIVE document retry (the same owner as a first document turn); a run
+ * that does not keeps the existing legacy planner and its withheld reason, so this
+ * control never offers the native-only operation to a run the server would refuse.
+ */
+export function documentRetryPlan(props: GenerationPanelProps): GenerationPlan {
+  return props.state.generation.lastRun?.requestId === undefined
+    ? planRetry(props.run)
+    : planNativeDocumentRetry(props.state, props.draftId);
+}
+
 function GenerationGate({ props }: { props: GenerationPanelProps }) {
   const progress = runStageProgress(props.run);
   const units = unitRetryPlan(props.run);
@@ -359,7 +372,7 @@ function GenerationGate({ props }: { props: GenerationPanelProps }) {
         role={props.role}
       />
       <PlannedButton
-        plan={planRetry(props.run)}
+        plan={documentRetryPlan(props)}
         label="Retry failed units"
         busy={props.busy}
         dispatch={props.dispatch}

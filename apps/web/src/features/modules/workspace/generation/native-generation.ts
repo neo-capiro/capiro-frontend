@@ -100,10 +100,41 @@ export function planNativeOutlineGeneration(
 }
 
 /**
- * POST /drafts/:draftId/agent/generate — starts the document run as one native
- * turn. Every approval pin must be stamped first, because the server refuses the
- * paid run otherwise.
+ * POST /drafts/:draftId/agent/generation/retry — retry the units a terminal NATIVE
+ * document run failed, through the same retained native request owner and as a
+ * genuinely deliberate paid attempt.
+ *
+ * The plan is only offered for a run that actually carries a retained native
+ * request (the server's own native-only selector) and that has settled: proposing a
+ * retry while the run is still in flight, or for a legacy engine run, would be a
+ * request the server refuses. The explicit intent is declared here, where the
+ * request is declared — the check/recover path never sends it.
  */
+export function planNativeDocumentRetry(
+  state: DocumentAgentState,
+  draftId: string,
+): GenerationPlan {
+  const run = state.generation.lastRun;
+  if (run?.requestId === undefined)
+    return refusal(
+      "This document has no retained native generation run, so its units cannot be retried.",
+    );
+  if (run.status === "active")
+    return refusal("The run is still in flight; retry its failed units once it has settled.");
+  return {
+    kind: "request",
+    operation: "workspace.generation.document.retry",
+    input: {
+      params: { draftId },
+      // `intent` is the deliberate paid form of this retry and is REQUIRED by the
+      // route; `sectionIds` is omitted so the server scopes the attempt from the run's
+      // own failed units. No `paidGeneration` field: this route's own closed body does
+      // not carry one, and the intent is the acknowledgement it asks for.
+      body: { expectedRevision: state.revision, intent: "retry-failed-units" },
+    },
+  };
+}
+
 export function planNativeGenerationStart(
   state: DocumentAgentState,
   draftId: string,

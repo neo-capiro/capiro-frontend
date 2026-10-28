@@ -156,6 +156,13 @@ export const generationStage = z.strictObject({
 });
 export const agentRunSummary = z.strictObject({
   runId: z.string().min(1),
+  /**
+   * The retained native generation request identity this run was admitted under.
+   * The surface reads it to offer the NATIVE failed-unit retry only for a run the
+   * route will actually serve: without it a retry would be a request the server
+   * refuses, and the run's own failed units could not be re-derived from its facts.
+   */
+  requestId: z.string().min(1).optional(),
   mode: generationMode,
   startedAt: z.string(),
   completedAt: z.string().optional(),
@@ -173,6 +180,27 @@ export const agentRunSummary = z.strictObject({
       z.strictObject({
         status: z.enum(["succeeded", "failed", "stale"]),
         error: z.string().optional(),
+      }),
+    )
+    .optional(),
+  /** The revision pin this native run was admitted under. */
+  expectedRevision: z.number().int().optional(),
+  /** The failed-unit retry ATTEMPT of this run, when one is bound. */
+  retry: z
+    .strictObject({
+      requestId: z.string().min(1),
+      sectionIds: z.array(z.string().min(1)),
+      generation: z.number().int(),
+      expectedRevision: z.number().int(),
+      outcome: z.enum(["unknown", "failed", "completed"]),
+    })
+    .optional(),
+  /** Every attempt of this run that definitively failed, in order. */
+  retryCustody: z
+    .array(
+      z.strictObject({
+        requestId: z.string().min(1),
+        sectionIds: z.array(z.string().min(1)),
       }),
     )
     .optional(),
@@ -292,6 +320,27 @@ export const generationRunStatus = z.strictObject({
   completedAt: z.string().optional(),
 });
 
+// The exact statuses POST `/document-agent/runs/:runId/retry-failed` reports
+// (`quick-draft/generation-run-worker.service.ts`): a durable-intake run answers
+// with its own real status after the continuation, `awaiting-current-access` when
+// the caller holds no current session credential, and a run that is not a durable
+// intake answers `queued` as before. The worker's atomic claim accepts only
+// `queued` or an expired-lease `active` run, so a run that already resolved
+// (`complete`/`partial`/`failed`/`cancelled`) cannot be continued at all and is
+// reported rather than promised.
+export const runRetryStatus = z.enum([
+  "queued",
+  "active",
+  "complete",
+  "partial",
+  "failed",
+  "cancelled",
+  "awaiting-current-access",
+]);
+export const runRetryResponse = z.strictObject({
+  runId: workspaceId,
+  status: runRetryStatus,
+});
 export const intakeBody = z
   .strictObject({
     goal: z.string().min(3).max(10_000),
@@ -405,6 +454,7 @@ export type AgentMessage = z.infer<typeof agentMessage>;
 export type AgentQualityEvaluation = z.infer<typeof agentQualityEvaluation>;
 export type AgentQualityCheck = z.infer<typeof agentQualityCheck>;
 export type GenerationRunStatus = z.infer<typeof generationRunStatus>;
+export type RunRetryResponse = z.infer<typeof runRetryResponse>;
 export type AgentRunSummary = z.infer<typeof agentRunSummary>;
 export type OutlineSection = z.infer<typeof outlineSection>;
 export type ContextConflict = z.infer<typeof contextConflict>;

@@ -8,6 +8,7 @@ import {
 
 const draftId = "00000000-0000-4000-8000-000000000001";
 const proposalId = "00000000-0000-4000-8000-000000000002";
+const runId = "00000000-0000-4000-8000-000000000003";
 const issueId = "size.over_budget";
 const servicePath =
   /^\/(?:[A-Za-z0-9_-]+|:[A-Za-z][A-Za-z0-9_]*)(?:\/(?:[A-Za-z0-9_-]+|:[A-Za-z][A-Za-z0-9_]*))*$/;
@@ -21,8 +22,14 @@ const operations = workspaceGenerationOperations;
 const withheldRoutes: readonly [string, string][] = [
   ["POST", "/document-agent/recommend"],
   ["POST", "/drafts/:draftId/agent/messages"],
-  ["POST", "/drafts/:draftId/agent/generation/retry"],
-  ["POST", "/document-agent/runs/:runId/retry-failed"],
+];
+
+// The DOCUMENT retry is declared now (below): for a run that carries a retained
+// native request the approved greenfield native owner serves it, and it is that
+// owner's answer — not the legacy provider handler's — that the surface reads.
+const documentRetryRoute: readonly [string, string] = [
+  "POST",
+  "/drafts/:draftId/agent/generation/retry",
 ];
 
 // The five SUPPORTED generated phases are declared now: the approved greenfield
@@ -92,6 +99,95 @@ it("does not declare any model-backed generation route without a greenfield owne
   );
   for (const [method, path] of withheldRoutes)
     expect(declared, `${method} ${path}`).not.toContain(`${method} ${path}`);
+});
+
+it("declares the document failed-unit retry with its closed paid intent and no paidGeneration field", () => {
+  const definition = operations["workspace.generation.document.retry"];
+  expect(`${definition.method} ${definition.path}`).toBe(
+    `${documentRetryRoute[0]} ${documentRetryRoute[1]}`,
+  );
+  const parses = (body: unknown) =>
+    definition.request.safeParse({
+      params: { draftId: "33333333-3333-4333-8333-333333333333" },
+      body,
+    }).success;
+  // The explicit intent IS the acknowledgement this route asks for.
+  expect(parses({ expectedRevision: 3, intent: "retry-failed-units" })).toBe(true);
+  // Without it the body is not a retry, and the route's closed body carries no
+  // `paidGeneration` field: a leaked one is refused rather than silently ignored.
+  expect(parses({ expectedRevision: 3 })).toBe(false);
+  expect(
+    parses({ expectedRevision: 3, intent: "retry-failed-units", paidGeneration: true }),
+  ).toBe(false);
+  expect(parses({ expectedRevision: 3, intent: "retry" })).toBe(false);
+  // Its answer is the document STATE — never a native admission.
+  expect(definition.response.safeParse({ state: stateFixture }).success).toBe(true);
+});
+
+it("declares the durable run continuation with its exact route and statuses", () => {
+  const definition = operations["workspace.generation.run.retryFailed"];
+  const marker = { workflow: "native-retained" } as const;
+  expect(definition.method).toBe("POST");
+  expect(definition.path).toBe("/document-agent/runs/:runId/retry-failed");
+  // The body is exactly the closed native-only discriminator: it selects the
+  // route's native workflow, so a run the durable-intake owner did not create is
+  // refused there rather than handed to the legacy owner. No request header: the
+  // receipt is a correlation, not an identity.
+  expect(definition.idempotency).toBeUndefined();
+  expect(
+    definition.request.safeParse({ params: { runId }, body: marker }).success,
+  ).toBe(true);
+  for (const input of [
+    {},
+    // The historical no-body call is a different consumer of the same route and
+    // is deliberately not what this operation builds.
+    { params: { runId } },
+    { params: { runId }, body: {} },
+    { params: { runId }, body: { workflow: "legacy" } },
+    { params: { runId }, body: { workflow: "NATIVE-RETAINED" } },
+    { params: { runId }, body: { workflow: "native-retained " } },
+    { params: { runId }, body: { workflow: "native-retained", runId } },
+    {
+      params: { runId },
+      body: { workflow: "native-retained", status: "complete" },
+    },
+    { params: { runId }, body: { nativeOnly: true } },
+    {
+      params: { runId },
+      body: marker,
+      idempotencyKey: "ws22-intake-00000000-00000000",
+    },
+    { params: { runId: "not-a-uuid" }, body: marker },
+  ])
+    expect(
+      definition.request.safeParse(input).success,
+      JSON.stringify(input),
+    ).toBe(false);
+  // The exact statuses the route reports, and nothing wider: the run's own real
+  // status, `awaiting-current-access` without a current credential, and `queued`
+  // for a run that is not a durable intake.
+  for (const status of [
+    "queued",
+    "active",
+    "complete",
+    "partial",
+    "failed",
+    "cancelled",
+    "awaiting-current-access",
+  ])
+    expect(
+      definition.response.safeParse({ runId, status }).success,
+      status,
+    ).toBe(true);
+  for (const drifted of [
+    { runId, status: "succeeded" },
+    { runId, status: "queued", extra: true },
+    { runId: "not-a-uuid", status: "queued" },
+  ])
+    expect(
+      definition.response.safeParse(drifted).success,
+      JSON.stringify(drifted),
+    ).toBe(false);
 });
 
 it("declares the five supported phases with the truthful explicit paid intent", () => {

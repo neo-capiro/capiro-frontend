@@ -1,18 +1,26 @@
 // WS-22 scoped intake recovery leaf. Purpose-specific and deliberately pure so
 // the exact-request equality, the request identity and the unknown-outcome rule
-// are testable in this repository's node test environment; the browser journal
-// (`@/shared/session/recovery/journal`) remains the storage owner and this leaf
-// only decides what may be keyed, replayed or sent.
+// are testable in this repository's node test environment; the canonical browser
+// journal (`shared/session/recovery/journal`) remains the storage owner and this
+// leaf only decides what may be keyed, resumed, replayed or retired.
 //
 // Three rules, all enforced here rather than in a panel:
 //   * the idempotency key is derived from the acting identity and the exact
 //     canonical request, so reloading the same intake keeps the same key and a
 //     changed payload can never reuse it;
-//   * a retained request with no confirmed receipt is UNKNOWN and must be
-//     reconciled against the authoritative run read before another attempt;
-//   * a retained request for a different payload is retired, never reused.
+//   * an attempt whose request was never confirmed keeps the identity it already
+//     has and is only ever re-sent as that SAME request - the endpoint replays a
+//     repeated key and cannot start a second run from it;
+//   * a retained attempt for a different payload is retired, never reused.
+//
+// The record's `fence` is the canonical journal's correlation id for one
+// attempt. It is not authority and not an identity of the server's: the Core
+// intake id, the run id and the `Idempotency-Key` are separate things, and only
+// the endpoint decides what a key means.
+import { z } from "zod";
 import { intakeBody } from "../../../../shared/capiro/operations/workspace-generation-schemas";
 import type { IntakeBody } from "../../../../shared/capiro/operations/workspace-generation-schemas";
+import type { RecoveryContract } from "../../../../shared/session/recovery/journal";
 
 export type IntakeActor = {
   tenantId: string;
@@ -28,19 +36,21 @@ export type IntakeReceipt = {
 
 /** What the journal holds for one acting identity's intake attempt. */
 export type IntakeRecoveryRecord = {
+  /** The journal's correlation id for this attempt (a UUID); never authority. */
+  fence: string;
+  /** The `Idempotency-Key` this exact request is sent with. */
   key: string;
   digest: string;
+  /** The exact request body the attempt was built from. */
+  body: IntakeBody;
+  /** Present only once the authoritative response named a draft and a run. */
   receipt?: IntakeReceipt;
 };
 
 export type IntakeRecoveryDecision =
-  | { kind: "send"; key: string; digest: string }
+  | { kind: "send"; key: string; digest: string; body: IntakeBody }
+  | { kind: "check"; record: IntakeRecoveryRecord; reason: string }
   | { kind: "replay"; record: IntakeRecoveryRecord }
-  | {
-      kind: "reconcile";
-      record: IntakeRecoveryRecord;
-      reason: string;
-    }
   | { kind: "retire"; record: IntakeRecoveryRecord; reason: string };
 
 /**
@@ -104,14 +114,83 @@ export function intakeIdempotencyKey(
   return `ws22-intake-${hash.toString(16).padStart(8, "0")}-${digest.slice(-8)}`;
 }
 
+export const intakeReceiptSchema = z.strictObject({
+  draftId: z.string().min(1).max(200),
+  runId: z.string().min(1).max(200),
+  agentRevision: z.number().int().min(0).max(2147483647),
+});
+
+/** The journal record, closed: an unreadable or drifted record is not a record. */
+export const intakeRetainedSchema = z.strictObject({
+  fence: z.uuid(),
+  key: z.string().min(8).max(128),
+  digest: z.string().min(1).max(200),
+  body: intakeBody,
+  receipt: intakeReceiptSchema.optional(),
+});
+
+/**
+ * The canonical journal contract for one attempt: the request and the confirmed
+ * receipt are immutable once written, so an attempt can never quietly become a
+ * different request, and a confirmed receipt is never replaced by another.
+ */
+export const intakeRecoveryContract: RecoveryContract<IntakeRecoveryRecord> = {
+  schema: intakeRetainedSchema,
+  requestId: (value) => value.fence,
+  validateUpdate(previous, next) {
+    if (
+      previous.fence !== next.fence ||
+      previous.key !== next.key ||
+      previous.digest !== next.digest ||
+      canonical(previous.body) !== canonical(next.body) ||
+      (previous.receipt !== undefined &&
+        canonical(previous.receipt) !== canonical(next.receipt))
+    )
+      throw new Error(
+        "A retained intake attempt cannot change its request or its confirmed receipt.",
+      );
+  },
+};
+
+/** Two attempts are the same request only if key, digest and body all agree. */
+export function sameIntakeRequest(
+  left: Pick<IntakeRecoveryRecord, "key" | "digest" | "body">,
+  right: Pick<IntakeRecoveryRecord, "key" | "digest" | "body">,
+): boolean {
+  return (
+    left.key === right.key &&
+    left.digest === right.digest &&
+    canonical(left.body) === canonical(right.body)
+  );
+}
+
 /** The entry a panel retains only after it has read the authoritative receipt. */
 export function intakeRetainedRecord(
-  record: IntakeRecoveryRecord | null | undefined,
+  record: IntakeRecoveryRecord,
   receipt: IntakeReceipt,
 ): IntakeRecoveryRecord {
-  if (!record) throw new Error("A retained intake record is required.");
-  return { key: record.key, digest: record.digest, receipt };
+  return { ...record, receipt };
 }
+
+/** Why an attempt with no confirmed receipt is not re-sent as a new request. */
+export const intakeUnconfirmedReason =
+  "An earlier submit of this exact request has no confirmed receipt. Checking it repeats that same request, which the endpoint replays by its key; it cannot start a second run.";
+
+/**
+ * Why changed input cannot ride on an unresolved attempt's identity, when that
+ * attempt has a confirmed receipt: its run exists and can be read and settled.
+ */
+export const intakeChangedReason =
+  "A different intake for this identity is still unresolved. Read its run, then dismiss it before submitting changed input.";
+
+/**
+ * The same refusal for an attempt that was never confirmed. It has no receipt,
+ * so there is no run to read and nothing to dismiss yet: the only thing that may
+ * happen to it is the explicit check of its own exact request, which is what
+ * this reason sends the operator to.
+ */
+export const intakeChangedUnconfirmedReason =
+  "A different intake for this identity has no confirmed receipt yet. Check the interrupted submit first: that repeats the retained exact request, which the endpoint replays by its key, and only then can changed input be submitted.";
 
 export function reviewIntakeRecovery(
   retained: IntakeRecoveryRecord | null | undefined,
@@ -122,20 +201,17 @@ export function reviewIntakeRecovery(
     throw new Error("An intake plan cannot be built from an invalid body.");
   const digest = intakeDigest(parsed.data);
   const key = intakeIdempotencyKey(next.actor, digest);
-  if (!retained) return { kind: "send", key, digest };
-  if (retained.digest !== digest)
+  const current = { key, digest, body: parsed.data };
+  if (!retained) return { kind: "send", ...current };
+  if (!sameIntakeRequest(retained, current))
     return {
       kind: "retire",
       record: retained,
-      reason:
-        "A different intake for this identity is still unresolved. Read its run before submitting changed input.",
+      reason: retained.receipt
+        ? intakeChangedReason
+        : intakeChangedUnconfirmedReason,
     };
   if (!retained.receipt)
-    return {
-      kind: "reconcile",
-      record: retained,
-      reason:
-        "An earlier attempt for this exact request has no confirmed receipt. Read the authoritative run status before submitting again.",
-    };
+    return { kind: "check", record: retained, reason: intakeUnconfirmedReason };
   return { kind: "replay", record: retained };
 }
