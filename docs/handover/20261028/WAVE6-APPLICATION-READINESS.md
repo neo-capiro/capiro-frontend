@@ -85,3 +85,11 @@ Keep domain logic with existing Core owners and frontend feature modules; reuse 
 **Dependencies/decisions.** Select sources, supported types, meaning of confidence and launch inclusion. Domain-owned provenance/revision history precedes a new calendar adapter. Do not infer response deadlines from anticipated award dates or raw source text. No source contract or shared calendar type is changed speculatively.
 
 **Finite next slice/acceptance.** Once selected, admit one approximate forecast type through its source owner and add a distinct read-only calendar view/export. Check month/range precision in multiple zones, revision/withdrawal history, stale sources, denied access and coexistence with confirmed events. Fifty-two focused funding calendar tests passed; these verify existing exclusion/precision/composition boundaries, not forecast delivery. Forecast ingestion, display and live acceptance remain outstanding.
+
+## B9 — module hub metrics
+
+**Owners/disposition.** `modules/hub/ModuleHub.tsx` and the shared module catalog currently render navigation cards for Engagement, Planner, Workspace, Strategies, Directory, Intelligence and Research Portfolios. Keep these honest navigation entries until a metric is selected. The client-scope roster is not a module activity total. Reuse the existing ModuleCard and domain query owners; do not add a second dashboard aggregation authority in the frontend.
+
+**Requirements/decisions.** Specify each selected card's authoritative owner, unit, counted statuses, full eligible population, time window, client filter, freshness and actor-versus-tenant scope. Empty, denied, unavailable and stale are separate states. One owner's failure must not replace other cards' observations. Reuse B2 definitions when the underlying population and meaning are identical; do not silently reuse a similarly named total with different scope.
+
+**Finite next slice/acceptance.** Select one card metric or retain navigation-only; publish its domain-owned aggregate/coverage contract, then render through the existing card. Check pagination, access withdrawal, filtered scope, zero/denied/stale and independent failures. Three existing hub tests passed, covering navigation and honest roster failure. No metric definitions, public contracts or fabricated counts are introduced; metric delivery and live acceptance remain pending.
