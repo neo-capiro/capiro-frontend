@@ -149,6 +149,12 @@
   display: grid;
   gap: 18px;
 }
+.form :is(input, select) {
+  /* Native controls keep a content-driven intrinsic width — a file input's UA
+     316px, a select sized to its widest option — and do not shrink inside a
+     narrow fieldset, so they overflow it. Cap them at the available width. */
+  max-width: 100%;
+}
 .link {
   border: 0;
   background: transparent;
