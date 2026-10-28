@@ -35,3 +35,14 @@ Keep domain logic with existing Core owners and frontend feature modules; reuse 
 **Dependencies and acceptance limits.** Current Core/Meri/Strategy service mounting, authorization, durable request/output persistence and actual Planner destination must be verified together after deployment. Local tests do not demonstrate model generation, database idempotency or live destination creation. Keep actual applied work separate from generated suggestions and distinguish unavailable readback from empty outputs.
 
 **Finite next slice.** Exercise the existing connected saved-Objective journey against isolated service/database fixtures, then the authorized deployed path: generation, exact review/application, lost acknowledgement and reload, stale Objective and foreign output refusal. Repair demonstrated owner crossings; do not create a second planner/intake subsystem. Thirty-nine focused generation-start, plan-session and Strategy-intake tests passed. Application/image builds, provider calls and live acceptance not run.
+
+## B4 — Objective Questions and Automation
+
+**Disposition/owners.** Explicitly unavailable pending supported question transitions and automation producers/actions. Existing Core Objective operational-read owners and frontend `objectives/operational/ObjectiveOperationalPage.tsx` provide linked-work context. The current question section states status unavailable and offers no fake question mutation. Reading operational work does not start or continue generation. Preserve existing applied-work receivers from B3 instead of adding a second automation producer.
+
+**Required contract.** Durable question ID, author, source version, lifecycle, evidence/provenance and explicit review/decision permissions. Authorized list/filter/detail and history must survive normal lifecycle changes while rechecking access to restricted source content. Automation status must identify actual applied automation and its results; start/continue is a separate authorized effect with durable outcome. Empty, unsupported, pending and unavailable are distinct.
+
+**Dependencies/decisions.** Select question producer and transitions, automation producer/action catalog and review roles before exposing new actions. Existing endpoints or generated text alone are not product authorization. Coordinate canonical public contracts and persistence with Core; no shared contract, schema or new UI promise is added here.
+
+**Finite next slice/acceptance.** Once selected, deliver read-only question list/detail with source identity and accurate lifecycle, then one exact-version decision through its domain owner. Prove pagination, restricted-source history, role change, stale decision, duplicate outcome and unavailable versus empty. Automation follows only a selected real producer. Ten focused operational-contract tests passed; no question/automation connected or live acceptance is claimed.
+
