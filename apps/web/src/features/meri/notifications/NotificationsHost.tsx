@@ -29,6 +29,7 @@ import {
 import { runRecordHref } from "../runs/RunRecord";
 import { NotificationCategoryControls } from "./NotificationCategoryControls";
 import { useUpdatesFeed } from "./useUpdatesFeed";
+import { useMemoryNotificationActions } from "./useMemoryNotificationActions";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./notifications.module.css";
 
@@ -131,6 +132,10 @@ function OwnedUpdates({
     controller.snapshot,
     controller.snapshot,
   );
+  const notificationActions = useMemoryNotificationActions(
+    refresh,
+    onAccessLost,
+  );
   // Reattachment may repeat this read; an earlier aborted generation remains
   // fenced. Ordinary renders do not reload and no write is replayed.
   useEffect(() => {
@@ -214,6 +219,21 @@ function OwnedUpdates({
   const count = projection.notices.length;
   return (
     <section aria-label="Meri updates" className={styles.panel}>
+      <p role="status">
+        {notificationActions.unread.loading
+          ? "Checking unread memory reviews."
+          : notificationActions.unread.error
+            ? "Unread memory-review count is unavailable."
+            : notificationActions.unread.data?.enabled
+              ? `${notificationActions.unread.data.count} unread memory-review notifications.`
+              : "Memory-review notifications are not enabled."}
+      </p>
+      {notificationActions.error && (
+        <p role="alert">
+          The read acknowledgement could not be confirmed. Unread status is
+          preserved; refresh to check the current result.
+        </p>
+      )}
       <p role="status" aria-live="polite">
         {projection.state === "loading"
           ? "Loading updates from their owners."
@@ -266,11 +286,32 @@ function OwnedUpdates({
       ) : null}
       <ul className={styles.rows} aria-label="Observed updates">
         {projection.notices.map((notice) => (
-          <NoticeRow key={notice.id} notice={notice} clientId={clientId} />
+          <NoticeRow
+            key={notice.id}
+            notice={notice}
+            clientId={clientId}
+            markRead={(id) => void notificationActions.markRead(id)}
+            readDisabled={
+              notificationActions.pending ||
+              notificationActions.unread.data?.enabled !== true
+            }
+          />
         ))}
       </ul>
       {snapshot.moreError ? <p role="alert">{snapshot.moreError}</p> : null}
       <div className={styles.actions}>
+        <button
+          type="button"
+          className={ui.outline}
+          disabled={
+            notificationActions.pending ||
+            notificationActions.unread.data?.enabled !== true ||
+            notificationActions.unread.data.count === 0
+          }
+          onClick={() => void notificationActions.markRead(null)}
+        >
+          Mark all memory reviews read
+        </button>
         {projection.nextCursor ? (
           <button
             type="button"
@@ -283,7 +324,10 @@ function OwnedUpdates({
         <button
           type="button"
           className={ui.outline}
-          onClick={() => void refresh()}
+          onClick={() => {
+            notificationActions.refreshCount();
+            void refresh();
+          }}
         >
           Refresh updates
         </button>
@@ -341,16 +385,20 @@ function OwnedUpdates({
 function NoticeRow({
   notice,
   clientId,
+  markRead,
+  readDisabled,
 }: {
   notice: ProjectedNotice;
   clientId: string | null;
+  markRead: (id: string) => void;
+  readDisabled: boolean;
 }) {
   return (
     <li className={styles.row} data-source={notice.source}>
       <div className={styles.rowHead}>
         <span>{notice.title}</span>
         {notice.delivery === "required" ? (
-          <span className={styles.required}>Always delivered</span>
+          <span className={styles.required}>Required in-app notice</span>
         ) : null}
       </div>
       <p className={styles.meta}>{notice.detail}</p>
@@ -365,6 +413,21 @@ function NoticeRow({
       {notice.run ? (
         <Link href={runRecordHref(notice.run, clientId)}>Open run</Link>
       ) : null}
+      {notice.reviewRequestId && (
+        <Link href={`/meri/memory/review/${notice.reviewRequestId}`}>
+          Open memory review
+        </Link>
+      )}
+      {notice.source === "memory-review" && notice.read === false && (
+        <button
+          type="button"
+          className={ui.outline}
+          disabled={readDisabled}
+          onClick={() => markRead(notice.id.slice("memory-review:".length))}
+        >
+          Mark read
+        </button>
+      )}
     </li>
   );
 }

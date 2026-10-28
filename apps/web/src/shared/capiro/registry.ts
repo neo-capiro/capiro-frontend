@@ -1,4 +1,5 @@
 import type { OperationRegistry } from "./contracts";
+import { memoryReviewOperations } from "./operations/memory-review";
 import { completedReportOperations } from "./operations/meri-completed-reports";
 import { meriFirmSkillOperations } from "./operations/meri-firm-skills";
 import { meriProcedureOperations } from "./operations/meri-procedures";
@@ -46,6 +47,7 @@ import {
 
 // Reviewed feature groups are composed here. This registry is the gateway allowlist.
 export const capiroOperations = {
+  ...memoryReviewOperations,
   ...completedReportOperations,
   ...meriFirmSkillOperations,
   ...meriProcedureOperations,

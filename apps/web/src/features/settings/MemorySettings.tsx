@@ -12,8 +12,7 @@ import {
 } from "./components";
 import styles from "./styles";
 
-const reason =
-  "Memory governance, file, and notification settings do not have verified service contracts yet.";
+const reason = "Memory governance and file settings are not connected yet.";
 const governanceTabs = [
   "Overview",
   "Active",
@@ -29,19 +28,18 @@ const governanceTabs = [
 export function MemorySettings({ reviewEnabled }: { reviewEnabled: boolean }) {
   return (
     <div className={styles.stack} data-design-target="411:67920">
-      <SettingsNotice title="Memory governance, files, and notifications unavailable">
-        {reason}
+      <SettingsNotice title="New memory writes from Settings are unavailable">
+        Retention and offboarding rules for personal, client and firm owners
+        must be approved before Settings can create proposals or corrections.
       </SettingsNotice>
       <MemoryReviewCard enabled={reviewEnabled} />
-      <SettingsCard
-        title="Review notifications"
-        action={
-          <SettingsButton small disabled title={reason}>
-            Mark all read
-          </SettingsButton>
-        }
-      >
-        <p className={styles.empty}>Review notifications are unavailable.</p>
+      <SettingsCard title="Review notifications">
+        <p className={styles.description}>
+          View your in-app review notices and unread count, open the exact
+          review, or mark notices read in Updates. External delivery is not
+          confirmed here.
+        </p>
+        <Link href="/meri/updates">Open review notifications</Link>
       </SettingsCard>
       <MemoryGovernanceCard />
       <MemoryFilesCard />
