@@ -23,6 +23,7 @@ export default async function SettingsPage({
         }
         meriPreferences={
           <MeriPreferencesPanel
+            procedureGovernanceEnabled={!readOnlyPreview}
             usageEnabled={readConversationConfig(process.env).enabled}
             tenantSettingsEnabled={
               process.env.MERI_TENANT_SETTINGS_ENABLED === "true"

@@ -7,22 +7,15 @@
  * pending writes exactly as it does in the product, and the account itself still comes from the
  * authenticated Core `me` read rather than from the session hint.
  *
- * TEST-ONLY REGISTRY COMPOSITION. The shared registry (`src/shared/capiro/registry.ts`) is the gateway
- * allowlist and is composed by the parent; the reviewed leaf operations are deliberately not spread in
- * by this lane. `createCapiroApi` resolves an operation key from the registry object at request time,
- * so this page composes the reviewed leaf over that object in the browser only. No file under `src/` is
- * modified, and the served application does not receive this composition. The spec asserts the keys
- * were absent before the override, so the override cannot be mistaken for the parent's registry change.
+ * Uses the actual production gateway registry. This harness observes its seven operation keys and
+ * never adds operations, so an omitted production registration cannot be hidden by a test override.
  */
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
 import { ProcedureGovernanceHost } from "../../src/features/meri/procedures/ProcedureGovernanceHost";
 import { capiroOperations } from "../../src/shared/capiro/registry";
-import {
-  meriFirmSkillOperationKeys,
-  meriFirmSkillOperations,
-} from "../../src/shared/capiro/operations/meri-firm-skills";
+import { meriFirmSkillOperationKeys } from "../../src/shared/capiro/operations/meri-firm-skills";
 import "../../src/app/globals.css";
 import "./font.css";
 
@@ -30,7 +23,6 @@ const registry = capiroOperations as unknown as Record<string, unknown>;
 const missingBefore = meriFirmSkillOperationKeys.filter(
   (key) => !Object.hasOwn(registry, key),
 );
-Object.assign(registry, meriFirmSkillOperations);
 Object.assign(window as unknown as Record<string, unknown>, {
   procedureRegistryFixture: {
     missingBefore: [...missingBefore],

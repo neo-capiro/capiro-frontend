@@ -48,7 +48,7 @@ test("an admin read settles once and renders the stored rows under replayed effe
   expectProcedureIsolation(fixture);
 });
 
-test("the reviewed leaf is composed by this page only, not by the shared registry", async ({
+test("the seven procedure operations come from the production registry", async ({
   page,
 }) => {
   await procedureFixture(page);
@@ -64,7 +64,7 @@ test("the reviewed leaf is composed by this page only, not by the shared registr
         }
       ).procedureRegistryFixture,
   );
-  expect(composition.missingBefore).toHaveLength(7);
+  expect(composition.missingBefore).toHaveLength(0);
   expect(composition.registered).toHaveLength(7);
 });
 

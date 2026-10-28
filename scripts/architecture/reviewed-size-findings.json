@@ -7052,5 +7052,89 @@
     "reason": "One feed lifecycle and state machine: generation and abort fences for late requests, retention of previously authorized rows only while a replacement scope is verified, one dispatch across the account-scoped memory owner and the client-scoped run owner, strict load-more admission (repeated or non-advancing windows keep the verified page), and permanent retire on loss with React StrictMode reattachment reviving only a non-retired feed. The clients own transport and the controllers own persistence; this body owns only feed state, so it is cohesive rather than a second authority. Accepted.",
     "reviewedBy": "Hermes20261028_022819_6090a8",
     "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/procedures/ProcedureGovernance.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 455,
+    "fingerprint": "fb05e6d897e57b0abb55522d2ff36923a88fbe6a2a3fae1729f0e34d971faed3",
+    "reviewedSha256": "2fea3b1f1b7fd182ab01929fd25ec82381affd042f3d06c7bb4ed3e0a771fa56",
+    "reason": "One governed-procedure settings surface module: a prop-driven presentation/action owner plus three small local helpers (field renderer, mutationTarget capture, ProcedureField). It owns no transport, no store, no account lifetime and no authority of its own; the host owns the read, the account scope, the run lifetime and the message/readback sequence, and the governance client owns custody and the viewed-version fence. The file's length comes from four bounded regions (status/notice/blocked copy, table with per-row Restore/Enable/Edit/Remove, edit form, remove dialog), each single-purpose. Splitting further would move props between components without changing responsibility. Accepted as one surface owner; the seven reviewed blocking size findings are all in this module's own governance boundary.",
+    "reviewedBy": "Hermes20261028_015256_7c546a",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/procedures/ProcedureGovernance.tsx",
+    "kind": "function",
+    "symbol": "ProcedureGovernance",
+    "line": 122,
+    "nonblank": 328,
+    "fingerprint": "8868c4f5203e25db38a12294f20d08c4f00871e1cd7116051608ef3b9c0b880f",
+    "reviewedSha256": "2fea3b1f1b7fd182ab01929fd25ec82381affd042f3d06c7bb4ed3e0a771fa56",
+    "reason": "One component body whose responsibility is exactly 'render the host-owned rows/status and dispatch user actions through the host's run': local form/draft/removal state, validation memo, view projection memo, locked = busy || !permitted || blocked, and action handlers that capture the row's viewed version at the moment the operator acts. It does not read, mutate, retain custody or own a lifetime. Accepted; extraction of the row-action cell or the edit form would be cosmetic churn, not a responsibility split.",
+    "reviewedBy": "Hermes20261028_015256_7c546a",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/procedures/ProcedureGovernance.tsx",
+    "kind": "function",
+    "symbol": "ProcedureGovernance > <anonymous> #3",
+    "line": 240,
+    "nonblank": 104,
+    "fingerprint": "436ab9852eb3b5e1948eed647dafe4d620d7400c4705b6ba7dab03982fe93b7a",
+    "reviewedSha256": "2fea3b1f1b7fd182ab01929fd25ec82381affd042f3d06c7bb4ed3e0a771fa56",
+    "reason": "The table-row render callback: one row's version cell, Restore select, digest cell and Enable/Edit/Remove controls. It reads only the already-projected view and the matching raw row, captures mutationTarget at click time, and delegates every dispatch to the host run. Single row responsibility; no hidden state or authority. Accepted.",
+    "reviewedBy": "Hermes20261028_015256_7c546a",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/procedures/ProcedureGovernanceHost.tsx",
+    "kind": "function",
+    "symbol": "Connected",
+    "line": 61,
+    "nonblank": 81,
+    "fingerprint": "c1377a18d72e5ff58c061124f63c92266df8b2278e0f0a19e9edbb7f3e8c868e",
+    "reviewedSha256": "6acaa30cc4ef3ca8c177ff6bade0f56fba3c8886068dddfc5831e1d243c9f8c2",
+    "reason": "The mounted composition owner: stable account-keyed client and lifetime memos, permitted-gated read, blocked/retired derivation, applyProcedureRun wiring, and retirement on unmount and role revocation. It owns exactly the async custody boundary the surface must not own (list, message, lifetime), and delegates row rendering/actions to ProcedureGovernance. 81 nonblank is at the threshold, not over it; the body has one responsibility and no separable second concern. Accepted.",
+    "reviewedBy": "Hermes20261028_015256_7c546a",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-procedures/client.ts",
+    "kind": "function",
+    "symbol": "createProcedureGovernanceClient",
+    "line": 107,
+    "nonblank": 178,
+    "fingerprint": "0db66de203e3f7e6f63c0add054b39e8048b5fd29e4defa63ada873358fd67ae",
+    "reviewedSha256": "c216602c8ad7cd9194317ddab4e0a9763ed9fc76356358abe8a26f7a12a0300e",
+    "reason": "One closure that composes the seven operation calls behind one command journal: authority check, custody gate, viewed-version fence, settle-on-definite-refusal, custody-on-unknown, readback-releases-older-custody, stale-account retirement. The length is seven thin operation wrappers plus the shared mutate/list journal, which is one responsibility (transport custody for one account) and cannot be split without duplicating the journal or exporting mutable state. Accepted.",
+    "reviewedBy": "Hermes20261028_015256_7c546a",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-procedures/governance.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 604,
+    "fingerprint": "0d355946e94f151816a4c8dd089dbd7bbad70f7f97d8e9a1ba6a2769c139a659",
+    "reviewedSha256": "9b75a4e6b3931809449508025474a2445f5af0d8cd8d65014f03670a598cfe00",
+    "reason": "Pure, transport-free governance rules in one module: view/status projection, form validation, edit planning with stored-field preservation, account/role authority, command journal types and retirement, failure classification, and the mounted-lifetime/applyProcedureRun sequence. Every export is pure or a small factory with no I/O and no authority of its own; the module is the single owner of the honesty rules (no native-execution claim, unknown outcomes never replayed). Length is a consequence of covering one coherent rule set. Accepted as one governance module.",
+    "reviewedBy": "Hermes20261028_015256_7c546a",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-procedures/governance.ts",
+    "kind": "function",
+    "symbol": "procedureEditPlan",
+    "line": 245,
+    "nonblank": 97,
+    "fingerprint": "2aabda92f3fa848662b3680ce7c219f515a47f197e5d26dc8d53255278aac184",
+    "reviewedSha256": "9b75a4e6b3931809449508025474a2445f5af0d8cd8d65014f03670a598cfe00",
+    "reason": "One decision function: read the stored row, refuse on pre-existing validation errors, unknown payloads, unsupported fields, identity mismatch, or unreadable triggers/tools/template/procedure, otherwise return the frozen viewedTarget plus the pre-filled form and the preserved template/procedure. It deliberately refuses rather than erasing stored semantics. Refusal branches are ordered guards over one payload shape, so splitting would fragment a single refusal contract. Accepted.",
+    "reviewedBy": "Hermes20261028_015256_7c546a",
+    "reviewedOn": "2026-10-28"
   }
 ]

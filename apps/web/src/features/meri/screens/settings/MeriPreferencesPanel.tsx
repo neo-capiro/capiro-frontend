@@ -10,6 +10,7 @@ import { PrivacyDeletionScreen } from "./PrivacyDeletionScreen";
 import { SkillsTemplatesScreen } from "./SkillsTemplatesScreen";
 import { UsageLimitsScreen } from "./UsageLimitsScreen";
 import { UsageOverviewHost } from "../../usage-overview/UsageOverviewHost";
+import { ProcedureGovernanceHost } from "../../procedures/ProcedureGovernanceHost";
 import {
   preferencePages as pages,
   unavailablePreferences as views,
@@ -30,11 +31,13 @@ export function MeriPreferencesPanel({
   userPreferencesEnabled = false,
   tenantSettingsEnabled = false,
   usageEnabled = false,
+  procedureGovernanceEnabled = false,
   reportContent,
 }: {
   userPreferencesEnabled?: boolean;
   tenantSettingsEnabled?: boolean;
   usageEnabled?: boolean;
+  procedureGovernanceEnabled?: boolean;
   reportContent?: ReactNode;
 }) {
   const [page, setPage] = useState<PreferencePageId>("personal");
@@ -101,7 +104,26 @@ export function MeriPreferencesPanel({
         />
       );
     case "skills":
-      return <SkillsTemplatesScreen chrome={chrome} view={views.skills} />;
+      return (
+        <SkillsTemplatesScreen
+          chrome={
+            procedureGovernanceEnabled
+              ? {
+                  ...chrome,
+                  notice: {
+                    title: "Firm procedure governance",
+                    detail:
+                      "Current administrators can manage stored firm procedures. Native execution and template attachment retain their own availability checks.",
+                  },
+                }
+              : chrome
+          }
+          view={views.skills}
+          governance={
+            procedureGovernanceEnabled ? <ProcedureGovernanceHost /> : undefined
+          }
+        />
+      );
     case "updates":
       return (
         <NotificationsAccountScreen
