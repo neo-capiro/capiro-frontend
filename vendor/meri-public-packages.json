@@ -532,6 +532,36 @@
       "status": "producer-verified-pending-Hermes-consumer-binding-review",
       "purpose": "Peer-only compatibility for contracts0.1.24; UI runtime/types unchanged.",
       "independentSourceReview": "Hermes bounded union PASS 2026-10-27; outputs/WAVE5-PREVIEW-RUNS-REVISION-COHORT-HERMES-REVIEW.txt"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.25-96dcd187-404ed3892a4e.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.25",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "96dcd18703fd3f51999c0385d4948740727f3173",
+      "sourceTree": "fd13ba975cd192758aa3ea8de5809f206376672d",
+      "bytes": 1354075,
+      "sha256": "404ed3892a4e7691e455548973b1e96cd0c469833dbd3e9116c95f23abdd3614",
+      "integrity": "sha512-5l7uz6O4SKLAsf1zNOmF6CLJJDtstCb7wXXPbD7KqUh10VFZyPPohzfbtK7qcyn3kvrH0Q2E6OFwMz8SM7OSDg==",
+      "regularEntryCount": 70,
+      "status": "producer-verified-pending-independent-consumer-binding",
+      "purpose": "Reviewed Bill Watch1.1.0 descriptor and usage overview receiver; consumer binding, native and deployed acceptance separate.",
+      "independentSourceReview": "Hermes bounded union PASS 2026-10-28; outputs/WAVE5-BILL-USAGE-COHORT-HERMES-REVIEW.txt"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.12-96dcd187-50f235dbdac2.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.12",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "96dcd18703fd3f51999c0385d4948740727f3173",
+      "sourceTree": "fd13ba975cd192758aa3ea8de5809f206376672d",
+      "bytes": 3578,
+      "sha256": "50f235dbdac246b84fa5351c30b99d98142e548bd942220959c95780261a2c6a",
+      "integrity": "sha512-gBlJf2bGAz6/QLmo2HKqyeSRIfVlPjN9pqB9/1MdYYmEjAkEWsllg7lJY5S94QtU2czUA+pk25fW9+eZZykR3Q==",
+      "regularEntryCount": 6,
+      "status": "producer-verified-pending-independent-consumer-binding",
+      "purpose": "Peer-only compatibility for contracts0.1.25; UI runtime/types unchanged.",
+      "independentSourceReview": "Hermes bounded union PASS 2026-10-28; outputs/WAVE5-BILL-USAGE-COHORT-HERMES-REVIEW.txt"
     }
   ]
 }
