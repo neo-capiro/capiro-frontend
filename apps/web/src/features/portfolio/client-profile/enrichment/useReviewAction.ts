@@ -10,7 +10,7 @@ import {
   type ReviewAction,
   type ReviewActor,
 } from "./actions";
-import { latestReviewKey } from "./queries";
+import { latestReviewKey, loadRun } from "./queries";
 import type { FillRun } from "./contracts";
 export function useReviewAction(
   clientId: string,
@@ -22,6 +22,8 @@ export function useReviewAction(
   const lifetime = useRef<AbortController | null>(null);
   const [uncertain, setUncertain] = useState(false);
   const [receipt, setReceipt] = useState<string>();
+  const [uncertainReview, setUncertainReview] = useState<FillRun>();
+  const [readError, setReadError] = useState<unknown>();
   useLayoutEffect(() => {
     const controller = new AbortController();
     lifetime.current = controller;
@@ -57,12 +59,14 @@ export function useReviewAction(
           () => {
             dispatched = true;
             setUncertain(true);
+            setUncertainReview(review);
             setReceipt(undefined);
           },
         );
         guard();
         cache.setQueryData(latestReviewKey(clientId, actor), result);
         setUncertain(false);
+        setUncertainReview(undefined);
         setReceipt(
           action.kind === "apply"
             ? `${action.findingIds.filter((id) => result.findings.some((f) => f.id === id && f.status === "accepted")).length} of ${action.findingIds.length} selected findings are now accepted. Review any remaining pending findings.`
@@ -129,5 +133,36 @@ export function useReviewAction(
       assertReviewAccess(cache, actor, true);
     };
   }
-  return { mutation, uncertain, receipt, createUploadGuard };
+  async function refreshUncertainReview() {
+    const controller = lifetime.current;
+    if (!uncertainReview || !open || !controller) return;
+    setReadError(undefined);
+    try {
+      controller.signal.throwIfAborted();
+      assertReviewAccess(cache, actor, false);
+      const saved = await loadRun(
+        api,
+        clientId,
+        uncertainReview.id,
+        controller.signal,
+      );
+      controller.signal.throwIfAborted();
+      assertReviewAccess(cache, actor, false);
+      if (lifetime.current === controller) setUncertainReview(saved);
+      // Status is useful evidence, but without an operation receipt it cannot
+      // prove this request's outcome or authorize a retry.
+    } catch (error) {
+      if (!controller.signal.aborted && lifetime.current === controller)
+        setReadError(error);
+    }
+  }
+  return {
+    mutation,
+    uncertain,
+    uncertainReview,
+    readError,
+    refreshUncertainReview,
+    receipt,
+    createUploadGuard,
+  };
 }
