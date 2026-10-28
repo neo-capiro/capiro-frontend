@@ -7027,5 +7027,38 @@
     "reason": "One artifact starter-dialog session for a single selected client: the title/format/body fields, the receiver-matched whole-draft 32,000 bound, and the unsent client-bound handoff into the existing client-handoff journal followed by navigation. It writes no document, files nothing, sends nothing and prepares nothing; the journal receiver and the admitted conversation own reception. The size is cohesive typed form + status + one handoff, not a second responsibility.",
     "reviewedBy": "Hermes Agent independent source/design review (session 20261028_015918_5b9924)",
     "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/notifications/NotificationsHost.tsx",
+    "kind": "function",
+    "symbol": "OwnedUpdates",
+    "line": 73,
+    "nonblank": 257,
+    "fingerprint": "4b29348bc8a66df6c0c6f051ed3355536bca45ea2be71191069600de86202c44",
+    "reason": "One Updates surface composition, unchanged in responsibility from the accepted ff24e4e2 review: identity gate, single feed/controller wiring, preference-change protocol, projection memo, status copy and row presentation, with observation/transport/lifetime/persistence remaining with the approved clients, feed, projection and UserPreferencesController. This revision closes the copy finding only: the disabled preference controls now receive the controller's actual current-state view.message as their reason, falling back to the static unavailable string only when that message is absent, so saving/conflict/unknown states no longer display the fixture-era contract copy. No transport, auth, currentness or save change.",
+    "reviewedBy": "Hermes20261028_022819_6090a8",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-notifications/projection.ts",
+    "kind": "function",
+    "symbol": "projectUpdates",
+    "line": 193,
+    "nonblank": 106,
+    "fingerprint": "8a15945279f15890d1bbccc315ad817e2b48dd78ced3a37b1749f7a5c69b8a7c",
+    "reason": "One pure presentation projection over observed owner data, unchanged in responsibility: three canonical keys, mandatory notices outside personal preferences, stable primitive keys, no I/O or stored state. This revision closes the copy finding only: optional reviewed outcomes (review_approved/review_rejected) now say the submitted proposal was reviewed and requires no further action, while required assignment/requested-change rows say to open the current review to check available actions and that those notices are always delivered. Outcome recipients are no longer told they can act, and no approval authority is implied. Delivery classification, filtering and counted withhold remain unchanged.",
+    "reviewedBy": "Hermes20261028_022819_6090a8",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/notifications/updates-feed.ts",
+    "kind": "function",
+    "symbol": "createUpdatesFeed",
+    "line": 82,
+    "nonblank": 182,
+    "fingerprint": "698338e3e735b42cc3832182905c1051fcf33fe8b645d08a627b408b19620cc0",
+    "reason": "One feed lifecycle and state machine: generation and abort fences for late requests, retention of previously authorized rows only while a replacement scope is verified, one dispatch across the account-scoped memory owner and the client-scoped run owner, strict load-more admission (repeated or non-advancing windows keep the verified page), and permanent retire on loss with React StrictMode reattachment reviving only a non-retired feed. The clients own transport and the controllers own persistence; this body owns only feed state, so it is cohesive rather than a second authority. Accepted.",
+    "reviewedBy": "Hermes20261028_022819_6090a8",
+    "reviewedOn": "2026-10-28"
   }
 ]
