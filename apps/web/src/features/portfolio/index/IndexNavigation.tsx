@@ -1,10 +1,10 @@
 "use client";
 import type { RefObject } from "react";
 import Link from "next/link";
+import { isClientRecord } from "@/shared/portfolio/domain/profile-type";
 import type { Client } from "./contracts";
 import type { PortfolioIndexState } from "./filter";
 import { IndexFilters } from "./IndexFilters";
-import { isClientRecord } from "./profile-type";
 import styles from "./portfolio.module.css";
 
 export function IndexNavigation({

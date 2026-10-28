@@ -1,11 +1,11 @@
+import { isClientRecord } from "@/shared/portfolio/domain/profile-type";
 import type { Client } from "./contracts";
-import { isClientRecord } from "./profile-type";
 import styles from "./portfolio.module.css";
 
 /**
- * Metrics the portfolio service does not report yet. They render an explicit
- * "not reported" state instead of a bare em dash so a missing read cannot be
- * mistaken for a measured zero.
+ * Metrics no portfolio read supplies yet. The tile keeps the design's em dash
+ * (the accepted layout has no slot for a label) and carries the explanation as
+ * its title and accessible name, so "no read" is not silently read as zero.
  */
 const UNREPORTED = [
   [
@@ -40,9 +40,6 @@ export function PortfolioPulse({
             to an objective
           </small>
         </div>
-        <small className={styles.pulseUnavailable}>
-          Objective linkage is not reported yet
-        </small>
       </div>
       <div
         className={styles.pulseStats}
@@ -58,10 +55,9 @@ export function PortfolioPulse({
           <span className="eyebrow">Clients</span>
         </div>
         {UNREPORTED.map(([label, reason]) => (
-          <div key={label} title={reason}>
+          <div key={label} title={reason} aria-label={`${label}: ${reason}`}>
             <strong>—</strong>
             <span className="eyebrow">{label}</span>
-            <small className={styles.pulseUnavailable}>Not reported yet</small>
           </div>
         ))}
       </div>

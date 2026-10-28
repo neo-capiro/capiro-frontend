@@ -1,4 +1,8 @@
 import type { Prospect } from "@/features/portfolio/prospects/public";
+import {
+  isClientRecord,
+  isProspectRecord,
+} from "@/shared/portfolio/domain/profile-type";
 import type { Client } from "./contracts";
 import {
   filterClients,
@@ -6,7 +10,6 @@ import {
   sortClients,
   type PortfolioIndexState,
 } from "./filter";
-import { isClientRecord, isProspectRecord } from "./profile-type";
 
 /** Compose the two accessible catalogs without counting a linked Core prospect twice. */
 export function projectPortfolioCatalog({
