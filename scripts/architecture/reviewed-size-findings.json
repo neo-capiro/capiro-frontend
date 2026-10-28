@@ -5440,10 +5440,10 @@
     "file": "apps/web/src/shared/meri-conversations/host-controller.ts",
     "kind": "function",
     "symbol": "constructor",
-    "fingerprint": "5bb2933df0b4329486e4c41ff2ceef13cedc4f0c8d69bd7764697763f425b1f7",
-    "reason": "This constructor remains composition for one conversation session and its public ports. The extra artifact pending predicate is an observation supplied by the existing bounded artifact-access owner, parallel to feedback pending. The unchanged SessionLifetimeController owns renewal polling, hard expiry, revocation and cleanup. No file receiver, credential issuer, retry, replay or independent lifetime logic is added here; keeping the predicate beside other active-port checks preserves one renewal owner. Actual-host and mounted Preview/Download evidence proves early deferral while hard expiry/revocation/detach still abort.",
-    "reviewedBy": "Codex independent file-renewal reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "0cbf18a944c32eab2491d3cc472a0636541bd87a68a9a942656560477e5b1199",
+    "reason": "Session composition for one conversation session and its public ports, now including the uploads port created by the existing meri-uploads access owner beside artifact, intents and feedback. No file receiver, credential issuer, retry or lifetime owner is added here.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/dashboard-layout.test.ts",
@@ -6290,19 +6290,19 @@
     "file": "apps/web/src/features/meri/MeriComposer.tsx",
     "kind": "function",
     "symbol": "MeriComposer",
-    "fingerprint": "03ff1b2a826ee7625229893640a613a87aa8ecaf70399f31c3ab870254dbb303",
-    "reason": "The Meri turn composer surface. Renders the draft textarea, its tool row and the send/stop action; the co-located ComposerTools/ComposerAction helpers are private markup for this one component. Single responsibility = present and submit the composed turn; canonical owner is the features/meri composer surface.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "b8985ca15d0b63f7c9bd0f364252c3e1cb0c5c112ac81ef6f138b3f883c9bb7d",
+    "reason": "Unchanged responsibility: present and submit one composed Meri turn. The attachment slot is mounted from the existing uploads port binding and adds no run, transport, session or authority owner; this remains one presentation concern.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/meri/conversation/ConversationView.tsx",
     "kind": "function",
     "symbol": "SessionComposer",
-    "fingerprint": "9a6533c6794cde516e6ac41bfdc787310392a762b6216ab86f571dc3474c6722",
-    "reason": "Composer shell. The revision-draft affordance is the twin of the existing ClientHandoffDraft block: same ready-port key, same disabled owner, and the onChange delegates selection retention to the existing initial-draft owner and rethrows on refusal. It adds no run, session, SDK or authority owner and no new publication path; 127 nonblank lines remain one presentation responsibility.",
-    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "2147aedf8c872b47481b86631c51e2f034810a24e7b4c161d5995906fa6d1e3e",
+    "reason": "Composer shell for one conversation, extended with the attachment slot. The slot binds to the same ready port that already gates the handoff and revision drafts and only subscribes to the session upload access; it adds no publication path, run or authority owner.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/meri/conversation/SkillSelectionPicker.tsx",
@@ -7159,6 +7159,51 @@
     "fingerprint": "2e5a3079ad8fd758f2d701f6f68b9a14af8551cf802689f422ec6d94f4fe8e85",
     "reason": "reviewed-accept - the describe callback of the single history suite: the whole case table for one feature contract, sharing its synthetic page/attachment fixtures and the cache/execution fixture. It grew from 218 to 320 nonblank by adding the legacy-missing-field, unsafe-link, per-navigation re-read and historical-refusal cases; those cases are the delta under review, not a second concern. Splitting it would fragment the fixtures and the single contract narrative without reducing coupling. Recorded under the same bounded test-scope practice as the module record.",
     "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_033930_49f89b)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/uploads/MeriAttachmentPicker.tsx",
+    "kind": "function",
+    "symbol": "MeriAttachmentPicker",
+    "fingerprint": "0d55f271bd138a7bad27fb2c3247e9e20fc281d8dc8a476ace60917d123545eb",
+    "reason": "Presentation for the composer attachment rows. It renders only controller-owned canonical values (format, bytes, scan and extraction state) and forwards pick, check, remove and cancel to the uploads port; it owns no custody, digest, scan or deletion authority and issues no request of its own.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/host-controller.ts",
+    "kind": "function",
+    "symbol": "constructor > createPort",
+    "fingerprint": "7f4238aa47ecfddb7e4a89386074b51bc9274724732ea155149563a9fae0b805",
+    "reason": "The same session port factory advertises the uploads access and its dispose alongside the existing bounded port predicates; it adds no independent transport, authority or conversation owner.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-uploads/proxy.ts",
+    "kind": "function",
+    "symbol": "proxyUploadOriginal",
+    "fingerprint": "46f10607eefa2681522d679b71484f9fb96f7ab22b38fa8a6ddffd0634ac23ad",
+    "reason": "One proxy concern for the original write: enforce the same-origin, session-header and declared-length preconditions, forward the bytes to the custody owner at the canonical original path and relay the canonical envelope. It owns no custody, storage or authorization decision.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-uploads/upload-controller.ts",
+    "kind": "function",
+    "symbol": "createUploadController",
+    "fingerprint": "e12f3e234667b56d093ae0a981e8677a24b665f55f9bce3dec3a534b46d96243",
+    "reason": "The composer-facing upload state machine for one controller, port and conversation: retained local ledger, admitted declarations, one original write per attempt, status-only recovery and the ordered selection handed to the turn. Transport is delegated to the uploads wire and all custody authority stays server-side; no second write, deletion claim or cross-account publication exists.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-uploads/upload-wire.ts",
+    "kind": "function",
+    "symbol": "createUploadWire",
+    "fingerprint": "727033615062f63f2260ab6d5cbfb64be03ffce7ea56ad660ea397026bc02027",
+    "reason": "One transport concern for the uploads wire: canonical request admission, one attempted command per operation, bounded bytes and deadlines, and response admission through the canonical public receivers. It holds no UI state and no custody or deletion authority.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
     "reviewedOn": "2026-10-28"
   }
 ]
