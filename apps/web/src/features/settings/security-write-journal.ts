@@ -26,6 +26,7 @@ const retainedValues = [
   "restoreDefault",
   "expectedModelOverride",
   "expectedUpdatedAt",
+  "expectedVersion",
   "confirmed",
   "relationshipType",
   "rollUpAwards",

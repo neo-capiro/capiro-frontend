@@ -1,4 +1,5 @@
 import { CapiroApiError } from "../../shared/capiro/http";
+import { governanceReceiptMatches } from "./memory/governance-reconciliation";
 
 type Row = Record<string, unknown>;
 const row = (value: unknown): Row =>
@@ -38,6 +39,28 @@ export function assertSettingsReceipt(write: SettingsWrite, value: unknown) {
   const { params = {}, body = {} } = write.input;
   let confirmed = false;
   switch (write.operation) {
+    case "settings.memory.review.approve":
+      confirmed =
+        receipt.ok === true &&
+        receipt.candidateId === params.id &&
+        ["activated", "duplicate", "conflict"].includes(
+          String(receipt.outcome),
+        );
+      break;
+    case "settings.memory.review.reject":
+      confirmed =
+        receipt.ok === true &&
+        receipt.candidateId === params.id &&
+        receipt.outcome === "rejected";
+      break;
+    case "settings.memory.governance.approve":
+    case "settings.memory.governance.confirm":
+    case "settings.memory.governance.markStale":
+    case "settings.memory.governance.revoke":
+    case "settings.memory.governance.secondApprove":
+    case "settings.memory.governance.retry":
+      confirmed = governanceReceiptMatches(write, receipt);
+      break;
     case "settings.memory.grants.create":
       confirmed =
         receipt.ok === true &&
