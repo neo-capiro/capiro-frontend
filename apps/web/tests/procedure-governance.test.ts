@@ -17,9 +17,11 @@ import {
   hasProcedureFormErrors,
   mayRetryProcedure,
   procedureAccountKey,
+  procedureEditPlan,
   procedureFormBody,
   procedureStatus,
   procedureStatusLabel,
+  procedureUpdateBody,
   procedureView,
   restorableVersions,
   retireStaleAccountCommands,
@@ -65,6 +67,17 @@ function row(
   };
 }
 
+/** The exact stored payload Core's validateFirmSkill persists for a complete row. */
+const storedSkill = () => ({
+  id: "custom_procedure",
+  name: "Custom procedure",
+  triggers: ["custom_procedure", "case_status_check"],
+  systemAddendum: "Read the case file before answering.",
+  requiredTools: ["get_client_context"],
+  template: { heading: "Case", sections: ["Facts", "Next steps"] },
+  procedure: { purpose: "Summarise the case", scopes: ["client"] },
+});
+
 const admin = { userId: "user-1", tenantId: "tenant-1", role: "user_admin" };
 const capiroAdmin = {
   userId: "user-2",
@@ -77,6 +90,12 @@ const standard = {
   role: "standard_user",
 };
 
+const write = {
+  id: "custom_procedure",
+  name: "Custom",
+  triggers: ["custom_procedure"],
+};
+
 function api(): { api: ProcedureApi; request: ReturnType<typeof vi.fn> } {
   const request = vi.fn(async () => ({}));
   return {
@@ -86,8 +105,9 @@ function api(): { api: ProcedureApi; request: ReturnType<typeof vi.fn> } {
 }
 
 function client(fake: ProcedureApi) {
+  let attempts = 0;
   return createProcedureGovernanceClient(fake, {
-    attemptId: () => "attempt-1",
+    attemptId: () => `attempt-${++attempts}`,
   });
 }
 
@@ -131,11 +151,12 @@ describe("procedure governance status and honesty", () => {
 });
 
 describe("procedure form validation", () => {
-  it("requires a contract-shaped id, name and 1-5 triggers", () => {
+  it("requires a contract-shaped id, name, 1-5 triggers and the addendum Core requires", () => {
     const errors = validateProcedureForm(emptyProcedureForm());
     expect(errors.id).toBeDefined();
     expect(errors.name).toBeDefined();
     expect(errors.triggers).toBeDefined();
+    expect(errors.systemAddendum).toBeDefined();
     expect(hasProcedureFormErrors(errors)).toBe(true);
     expect(
       hasProcedureFormErrors(
@@ -144,10 +165,21 @@ describe("procedure form validation", () => {
           name: "Custom",
           triggers: "custom_procedure, second_trigger",
           requiredTools: "get_client_context",
-          systemAddendum: "",
+          systemAddendum: "Read the case file first.",
         }),
       ),
     ).toBe(false);
+    // Core rejects a procedure whose addendum is empty or blank, so the surface refuses it before
+    // dispatch instead of silently dropping the field.
+    expect(
+      validateProcedureForm({
+        id: "custom_procedure",
+        name: "Custom",
+        triggers: "custom_procedure",
+        requiredTools: "",
+        systemAddendum: "   ",
+      }).systemAddendum,
+    ).toBeDefined();
   });
 
   it("caps triggers and tools and builds a structured body without authority fields", () => {
@@ -157,7 +189,7 @@ describe("procedure form validation", () => {
         name: "Custom",
         triggers: "a, b, c, d, e, f",
         requiredTools: "",
-        systemAddendum: "",
+        systemAddendum: "Guidance",
       }).triggers,
     ).toBeDefined();
     const body = procedureFormBody({
@@ -175,6 +207,103 @@ describe("procedure form validation", () => {
       systemAddendum: "Guidance",
     });
     expect(Object.keys(body)).not.toContain("allowedTools");
+  });
+});
+
+describe("edit planning keeps the stored semantics", () => {
+  const complete = () => row({ skill: storedSkill() });
+
+  it("prepopulates the editable fields and freezes the row it opened", () => {
+    const plan = procedureEditPlan(complete());
+    expect(plan.ok).toBe(true);
+    if (!plan.ok) return;
+    expect(plan.draft.form).toEqual({
+      id: "custom_procedure",
+      name: "Custom procedure",
+      triggers: "custom_procedure, case_status_check",
+      requiredTools: "get_client_context",
+      systemAddendum: "Read the case file before answering.",
+    });
+    // The version the operator actually viewed, not whatever a later refresh holds.
+    expect(plan.draft.viewedTarget).toEqual({
+      id: UUID,
+      version: 3,
+      procedureDigest: "a".repeat(64),
+    });
+  });
+
+  it("carries the stored template and procedure through an update unchanged", () => {
+    const plan = procedureEditPlan(complete());
+    if (!plan.ok) throw new Error("expected an editable draft");
+    const body = procedureUpdateBody(plan.draft, {
+      ...plan.draft.form,
+      name: "Renamed procedure",
+      triggers: "custom_procedure",
+    });
+    expect(body.name).toBe("Renamed procedure");
+    expect(body.triggers).toEqual(["custom_procedure"]);
+    // Core re-validates the whole payload on update: an edit that dropped these would erase the
+    // accepted template and procedure manifest.
+    expect(body.template).toEqual(storedSkill().template);
+    expect(body.procedure).toEqual(storedSkill().procedure);
+    // The fence is not part of the stored content.
+    expect(Object.keys(body)).not.toContain("expectedVersion");
+  });
+
+  it("refuses to edit a stored payload this form cannot represent", () => {
+    const cases: Array<[string, FirmSkillGovernanceRow]> = [
+      ["validation errors", row({ validationErrors: ["unmapped capability"] })],
+      ["not an object", row({ skill: "tampered" })],
+      [
+        "unsupported field",
+        row({ skill: { ...storedSkill(), effectPolicy: { mode: "auto" } } }),
+      ],
+      [
+        "identity drift",
+        row({ skill: { ...storedSkill(), id: "other_procedure" } }),
+      ],
+      ["no triggers", row({ skill: { ...storedSkill(), triggers: [] } })],
+      ["no addendum", row({ skill: { ...storedSkill(), systemAddendum: "" } })],
+      [
+        "unreadable tools",
+        row({
+          skill: { ...storedSkill(), requiredTools: "get_client_context" },
+        }),
+      ],
+      [
+        "unreadable template",
+        row({ skill: { ...storedSkill(), template: "Heading" } }),
+      ],
+      [
+        "unreadable procedure",
+        row({ skill: { ...storedSkill(), procedure: "manifest" } }),
+      ],
+    ];
+    for (const [label, broken] of cases) {
+      const plan = procedureEditPlan(broken);
+      expect(plan.ok, label).toBe(false);
+      if (plan.ok) continue;
+      expect(plan.reason.length, label).toBeGreaterThan(20);
+    }
+  });
+
+  it("accepts the stored payload Core emits for a row with no template or manifest", () => {
+    const plan = procedureEditPlan(
+      row({
+        skill: {
+          id: "custom_procedure",
+          name: "Custom procedure",
+          triggers: ["custom_procedure"],
+          systemAddendum: "Read the case file first.",
+          requiredTools: [],
+          template: null,
+        },
+      }),
+    );
+    expect(plan.ok).toBe(true);
+    if (!plan.ok) return;
+    expect(plan.draft.preserved.template).toBeNull();
+    expect(plan.draft.preserved.procedure).toBeUndefined();
   });
 });
 
@@ -270,7 +399,7 @@ describe("governance client dispatches the existing ordinary owner", () => {
   it("lists through the existing admin operation with no session-admission gate", async () => {
     const { api: fake, request } = api();
     request.mockResolvedValueOnce([]);
-    await expect(client(fake).list()).resolves.toEqual([]);
+    await expect(client(fake).list(admin)).resolves.toEqual([]);
     expect(request).toHaveBeenCalledWith(
       "meri.procedures.list",
       {},
@@ -297,6 +426,22 @@ describe("governance client dispatches the existing ordinary owner", () => {
     );
   });
 
+  it("carries the frozen viewed version even when a listed row has moved on", async () => {
+    const { api: fake, request } = api();
+    const governed = client(fake);
+    // The operator opened version 2; the list has since advanced to version 3.
+    await governed.update(
+      admin,
+      { id: UUID, version: 2, procedureDigest: null },
+      write,
+    );
+    expect(request).toHaveBeenCalledWith(
+      "meri.procedures.update",
+      { params: { id: UUID }, body: { ...write, expectedVersion: 2 } },
+      { signal: undefined },
+    );
+  });
+
   it("refuses to dispatch a mutation when the viewed version is unusable", async () => {
     const { api: fake, request } = api();
     const governed = client(fake);
@@ -304,11 +449,7 @@ describe("governance client dispatches the existing ordinary owner", () => {
       governed.setEnabled(admin, row({ version: 0 }), false),
     ).rejects.toThrow(ProcedureRevisionConflict);
     await expect(
-      governed.update(admin, row({ version: 0 }), {
-        id: "custom_procedure",
-        name: "Custom",
-        triggers: ["custom_procedure"],
-      }),
+      governed.update(admin, row({ version: 0 }), write),
     ).rejects.toThrow(ProcedureRevisionConflict);
     expect(request).not.toHaveBeenCalled();
   });
@@ -339,16 +480,12 @@ describe("governance client dispatches the existing ordinary owner", () => {
     await expect(governed.remove(standard, row())).rejects.toThrow(
       ProcedureRoleDenied,
     );
-    await expect(
-      governed.update(standard, row(), {
-        id: "custom_procedure",
-        name: "C",
-        triggers: ["c"],
-      }),
-    ).rejects.toThrow(ProcedureRoleDenied);
-    await expect(
-      governed.create(standard, { id: "x_y", name: "X", triggers: ["x_y"] }),
-    ).rejects.toThrow(ProcedureRoleDenied);
+    await expect(governed.update(standard, row(), write)).rejects.toThrow(
+      ProcedureRoleDenied,
+    );
+    await expect(governed.create(standard, write)).rejects.toThrow(
+      ProcedureRoleDenied,
+    );
     expect(request).not.toHaveBeenCalled();
   });
 
@@ -356,25 +493,25 @@ describe("governance client dispatches the existing ordinary owner", () => {
     const { api: fake, request } = api();
     request.mockResolvedValueOnce({ version: 4 });
     const governed = client(fake);
-    await governed.update(admin, row(), {
-      id: "custom_procedure",
-      name: "Custom",
-      triggers: ["custom_procedure"],
-    });
+    await governed.update(admin, row(), write);
     expect(request).toHaveBeenCalledWith(
       "meri.procedures.update",
       {
         params: { id: UUID },
-        body: {
-          id: "custom_procedure",
-          name: "Custom",
-          triggers: ["custom_procedure"],
-          expectedVersion: 3,
-        },
+        body: { ...write, expectedVersion: 3 },
       },
       { signal: undefined },
     );
     expect(governed.commands).toHaveLength(0);
+  });
+
+  it("settles a created command exactly once so it is not retained", async () => {
+    const { api: fake, request } = api();
+    request.mockResolvedValueOnce({ version: 1 });
+    const governed = client(fake);
+    await governed.create(admin, write);
+    expect(governed.commands).toHaveLength(0);
+    expect(governed.requiresReadback(admin)).toBe(false);
   });
 
   it("holds an UNKNOWN outcome as uncertain and never replays the request", async () => {
@@ -391,19 +528,92 @@ describe("governance client dispatches the existing ordinary owner", () => {
     expect(governed.commands[0]?.state).toBe("unknown");
   });
 
+  it("holds an UNKNOWN create too, and refuses every further mutation until a read-back", async () => {
+    const { api: fake, request } = api();
+    request.mockRejectedValueOnce(
+      Object.assign(new Error("gateway"), { status: 502 }),
+    );
+    const governed = client(fake);
+    await expect(governed.create(admin, write)).rejects.toThrow(
+      ProcedureUncertainWrite,
+    );
+    expect(governed.requiresReadback(admin)).toBe(true);
+    expect(governed.unknownCustody(admin)).toHaveLength(1);
+
+    request.mockClear();
+    await expect(governed.create(admin, write)).rejects.toThrow(
+      ProcedureUncertainWrite,
+    );
+    await expect(governed.setEnabled(admin, row(), false)).rejects.toThrow(
+      ProcedureUncertainWrite,
+    );
+    expect(request).not.toHaveBeenCalled();
+
+    // The authoritative read-back is what releases the hold, and then the surface may act again.
+    request.mockResolvedValueOnce([]);
+    await expect(governed.list(admin)).resolves.toEqual([]);
+    expect(governed.requiresReadback(admin)).toBe(false);
+
+    request.mockResolvedValueOnce({ version: 1 });
+    await governed.create(admin, write);
+    expect(request).toHaveBeenLastCalledWith(
+      "meri.procedures.create",
+      { body: write },
+      { signal: undefined },
+    );
+  });
+
+  it("never settles an unknown outcome with a read that began before it", async () => {
+    const { api: fake, request } = api();
+    const releases: Array<(rows: unknown) => void> = [];
+    request.mockImplementationOnce(
+      () =>
+        new Promise((resolve) =>
+          releases.push(resolve as (rows: unknown) => void),
+        ),
+    );
+    const governed = client(fake);
+    const inFlight = governed.list(admin);
+    request.mockRejectedValueOnce(
+      Object.assign(new Error("gateway"), { status: 502 }),
+    );
+    await expect(governed.setEnabled(admin, row(), false)).rejects.toThrow(
+      ProcedureUncertainWrite,
+    );
+    releases[0]?.([]);
+    await inFlight;
+    // That read started before the write, so it cannot be the read-back for it.
+    expect(governed.requiresReadback(admin)).toBe(true);
+
+    request.mockResolvedValueOnce([]);
+    await governed.list(admin);
+    expect(governed.requiresReadback(admin)).toBe(false);
+  });
+
+  it("retires another account's retained result instead of replaying it", async () => {
+    const { api: fake, request } = api();
+    request.mockRejectedValueOnce(
+      Object.assign(new Error("gateway"), { status: 502 }),
+    );
+    const governed = client(fake);
+    await expect(governed.setEnabled(admin, row(), false)).rejects.toThrow(
+      ProcedureUncertainWrite,
+    );
+    expect(governed.commands).toHaveLength(1);
+    const retired = governed.retireStaleCommands(capiroAdmin);
+    expect(retired).toHaveLength(1);
+    expect(retired[0]?.operation).toBe("meri.procedures.setEnabled");
+    expect(governed.commands).toHaveLength(0);
+    expect(governed.requiresReadback(capiroAdmin)).toBe(false);
+  });
+
   it("clears a definite rejection so the operator can correct the input", async () => {
     const { api: fake, request } = api();
     request.mockRejectedValueOnce(
       Object.assign(new Error("invalid"), { status: 400 }),
     );
     const governed = client(fake);
-    await expect(
-      governed.create(admin, {
-        id: "custom_procedure",
-        name: "Custom",
-        triggers: ["custom_procedure"],
-      }),
-    ).rejects.toThrow(/refused/i);
+    await expect(governed.create(admin, write)).rejects.toThrow(/refused/i);
     expect(governed.commands).toHaveLength(0);
   });
 

@@ -7,7 +7,10 @@
  *     ever described as native SDK execution. The native selected-procedure bridge does not exist yet.
  *  2. A write whose outcome is unknown is never replayed; it must be reconciled by read-back.
  */
-import type { FirmSkillGovernanceRow } from "../capiro/operations/meri-firm-skills";
+import type {
+  FirmSkillGovernanceRow,
+  FirmSkillWriteBody,
+} from "../capiro/operations/meri-firm-skills";
 
 export type ProcedureStatus = "disabled" | "invalid" | "available";
 
@@ -153,7 +156,10 @@ export function validateProcedureForm(
     errors.triggers = "Each trigger must be 64 characters or fewer.";
   const tools = splitList(input.requiredTools);
   if (tools.length > 12) errors.requiredTools = "Use 12 tools or fewer.";
-  if (input.systemAddendum.length > 2000)
+  if (input.systemAddendum.trim().length === 0)
+    errors.systemAddendum =
+      "Guidance addendum is required; Core rejects a procedure without one.";
+  else if (input.systemAddendum.length > 2000)
     errors.systemAddendum = "Use 2000 characters or fewer.";
   return errors;
 }
@@ -178,6 +184,176 @@ export function procedureFormBody(input: ProcedureFormInput): {
 
 export function hasProcedureFormErrors(errors: ProcedureFormErrors): boolean {
   return Object.keys(errors).length > 0;
+}
+
+// ── Edit planning: the stored semantics are never erased by a save ────────────
+
+/** The exact stored row identity/version/digest one mutation is fenced to. */
+export type ProcedureMutationTarget = {
+  id: string;
+  version: number;
+  procedureDigest: string | null;
+};
+
+/**
+ * The row the operator opened for editing, frozen at open time.
+ *
+ * The submit path uses `viewedTarget`, never "the row with this id as the list currently holds it":
+ * a refresh between opening and saving must fail the fence rather than silently rebind the edit onto
+ * a newer stored row.
+ */
+export type ProcedureEditDraft = {
+  viewedTarget: ProcedureMutationTarget;
+  form: ProcedureFormInput;
+  /**
+   * Stored fields this structured form does not edit, carried through the update unchanged, so saving
+   * an edited trigger cannot destroy the accepted template or procedure manifest.
+   */
+  preserved: { template?: unknown; procedure?: unknown };
+};
+
+export type ProcedureEditPlan =
+  | { ok: true; draft: ProcedureEditDraft }
+  | { ok: false; reason: string };
+
+/** The fields the structured form owns. Anything else stored is not representable here. */
+const SUPPORTED_STORED_KEYS: ReadonlySet<string> = new Set([
+  "id",
+  "name",
+  "triggers",
+  "systemAddendum",
+  "requiredTools",
+  "template",
+  "procedure",
+]);
+
+const isStoredRecord = (value: unknown): value is Record<string, unknown> =>
+  value !== null && typeof value === "object" && !Array.isArray(value);
+
+const storedStringList = (value: unknown): string[] | null =>
+  Array.isArray(value) && value.every((entry) => typeof entry === "string")
+    ? (value as string[])
+    : null;
+
+/**
+ * Build the edit draft from the stored row, or refuse with a reason for the operator.
+ *
+ * Refusing is deliberate. Core re-validates the whole payload on update and requires a non-empty
+ * guidance addendum (apps/api/src/meri/meri-firm-skills.helpers.ts:373-376, :419-428), so a payload this
+ * form cannot represent must be reported rather than rewritten into an empty one.
+ */
+export function procedureEditPlan(
+  row: FirmSkillGovernanceRow,
+): ProcedureEditPlan {
+  if (row.validationErrors.length > 0)
+    return {
+      ok: false,
+      reason: `This stored procedure already fails the rules the turn path applies, so it is not edited over: ${row.validationErrors.join(
+        "; ",
+      )}`,
+    };
+  const stored = row.skill;
+  if (!isStoredRecord(stored))
+    return {
+      ok: false,
+      reason: "The stored payload is not a structured skill object.",
+    };
+  const unsupported = Object.keys(stored).filter(
+    (key) => !SUPPORTED_STORED_KEYS.has(key),
+  );
+  if (unsupported.length > 0)
+    return {
+      ok: false,
+      reason: `The stored payload carries fields this form cannot preserve: ${unsupported.join(
+        ", ",
+      )}.`,
+    };
+  if (stored.id !== row.skillId)
+    return {
+      ok: false,
+      reason: `The stored payload identity "${String(
+        stored.id,
+      )}" does not match the stored row identity "${row.skillId}".`,
+    };
+  const triggers = storedStringList(stored.triggers);
+  if (!triggers || triggers.length === 0)
+    return {
+      ok: false,
+      reason: "The stored payload has no readable triggers.",
+    };
+  if (
+    typeof stored.systemAddendum !== "string" ||
+    stored.systemAddendum.trim().length === 0
+  )
+    return {
+      ok: false,
+      reason:
+        "The stored payload has no guidance addendum. Core requires one, so saving would either invent or erase it.",
+    };
+  const tools =
+    stored.requiredTools === undefined
+      ? []
+      : storedStringList(stored.requiredTools);
+  if (tools === null)
+    return {
+      ok: false,
+      reason: "The stored payload has unreadable required tools.",
+    };
+  if (stored.template !== undefined && stored.template !== null) {
+    const template = stored.template;
+    if (
+      !isStoredRecord(template) ||
+      typeof template.heading !== "string" ||
+      !storedStringList(template.sections)
+    )
+      return {
+        ok: false,
+        reason: "The stored payload has a template this form cannot preserve.",
+      };
+  }
+  if (stored.procedure !== undefined && !isStoredRecord(stored.procedure))
+    return {
+      ok: false,
+      reason:
+        "The stored payload has a procedure manifest this form cannot preserve.",
+    };
+  return {
+    ok: true,
+    draft: {
+      viewedTarget: {
+        id: row.id,
+        version: row.version,
+        procedureDigest: row.procedureDigest,
+      },
+      form: {
+        id: row.skillId,
+        name: row.name,
+        triggers: triggers.join(", "),
+        requiredTools: tools.join(", "),
+        systemAddendum: stored.systemAddendum,
+      },
+      preserved: {
+        ...(stored.template === undefined ? {} : { template: stored.template }),
+        ...(stored.procedure === undefined
+          ? {}
+          : { procedure: stored.procedure }),
+      },
+    },
+  };
+}
+
+/**
+ * The update body: the edited structured fields plus the stored template/procedure carried through
+ * unchanged. It adds no field that could grant a tool, an effect or a memory permission.
+ */
+export function procedureUpdateBody(
+  draft: ProcedureEditDraft,
+  form: ProcedureFormInput,
+): FirmSkillWriteBody {
+  return {
+    ...procedureFormBody(form),
+    ...draft.preserved,
+  } as FirmSkillWriteBody;
 }
 
 // ── Current account / role authority (no admin identity is inferred from browser state) ──
@@ -237,13 +413,19 @@ export type ProcedureCommand = {
   operation: string;
   state: "pending" | "unknown";
   expected: { id: string; version: number; digest: string | null } | null;
+  /**
+   * Dispatch order within this client. A read-back may only release custody recorded before the read
+   * started, so a read issued before an unknown write can never settle it.
+   */
+  attempt: number;
 };
 
 export function beginProcedureCommand(
   identity: ProcedureAccountIdentity,
   operation: string,
-  row: FirmSkillGovernanceRow | null,
+  target: ProcedureMutationTarget | null,
   attemptId: string,
+  attempt = 0,
 ): ProcedureCommand {
   if (!canGovernProcedures(identity)) throw new ProcedureRoleDenied();
   return {
@@ -251,9 +433,14 @@ export function beginProcedureCommand(
     accountKey: procedureAccountKey(identity),
     operation,
     state: "pending",
-    expected: row
-      ? { id: row.id, version: row.version, digest: row.procedureDigest }
+    expected: target
+      ? {
+          id: target.id,
+          version: target.version,
+          digest: target.procedureDigest,
+        }
       : null,
+    attempt,
   };
 }
 
@@ -350,4 +537,117 @@ export function mayRetryProcedure(
     command.state === "pending" &&
     classifyProcedureFailure(status) === "rejected"
   );
+}
+
+// ── Mounted lifetime: a result from a superseded account never reaches the surface ──
+
+/**
+ * One mounted account scope. Shaped after the repository's existing lifetime fences — the current-read
+ * generation in features/meri/conversation/evidence/useCurrentRead.ts and the runs host fence in
+ * features/meri/runs/MeriRunsHost.tsx (`isCurrent` + `onAccessLost`) — so a transport that ignores the
+ * abort is still refused by the generation check.
+ */
+export type ProcedureLifetime = {
+  /** The generation of the currently mounted account scope. */
+  current(): number;
+  /** Ends this scope: bumps the generation and aborts everything in flight under it. */
+  retire(): void;
+  /** The signal in-flight procedure requests must carry so retirement cancels them. */
+  signal(): AbortSignal;
+  isCurrent(generation: number): boolean;
+};
+
+export function createProcedureLifetime(): ProcedureLifetime {
+  let generation = 0;
+  let controller = new AbortController();
+  return {
+    current: () => generation,
+    retire() {
+      generation += 1;
+      controller.abort();
+      controller = new AbortController();
+    },
+    signal: () => controller.signal,
+    isCurrent: (candidate) => candidate === generation,
+  };
+}
+
+/**
+ * Whether a settled mutation result may still be rendered. It must belong to the same mounted
+ * generation and to the same current, still-permitted account that dispatched it; otherwise it is
+ * retired: not shown, and not turned into a reload of the new account's list.
+ */
+export function procedureResultStillApplies(
+  lifetime: ProcedureLifetime,
+  generation: number,
+  dispatchedUnder: string,
+  identityNow: ProcedureAccountIdentity | null,
+): boolean {
+  return (
+    lifetime.isCurrent(generation) &&
+    identityNow !== null &&
+    canGovernProcedures(identityNow) &&
+    procedureAccountKey(identityNow) === dispatchedUnder
+  );
+}
+
+const procedureRunFailureMessage = (error: unknown): string => {
+  if (
+    error instanceof ProcedureRevisionConflict ||
+    error instanceof ProcedureUncertainWrite ||
+    error instanceof ProcedureRoleDenied
+  )
+    return error.message;
+  return error instanceof Error
+    ? error.message
+    : "The firm procedure request failed.";
+};
+
+/**
+ * One mutation under one mounted account scope — the exact sequence the governance host runs.
+ *
+ * The host supplies its own state setters, so the sequence is testable without a renderer: the role is
+ * checked before dispatch, the request carries the scope signal, and a result that no longer belongs
+ * to this scope is retired — `setMessage` and `readback` are never called for another account's result,
+ * and `setBusy` is only released while the scope is still current.
+ */
+export async function applyProcedureRun(options: {
+  lifetime: ProcedureLifetime;
+  identity: ProcedureAccountIdentity | null;
+  /** The account key this run was dispatched under. */
+  dispatchedUnder: string;
+  work: (signal: AbortSignal) => Promise<unknown>;
+  describe: (value: unknown) => string;
+  setMessage: (message: string | null) => void;
+  /** Authoritative re-read after a result was actually applied for this scope. */
+  readback: () => void;
+  setBusy: (value: boolean) => void;
+}): Promise<boolean> {
+  if (!canGovernProcedures(options.identity)) {
+    options.setMessage(new ProcedureRoleDenied().message);
+    return false;
+  }
+  const generation = options.lifetime.current();
+  options.setBusy(true);
+  options.setMessage(null);
+  const stillApplies = () =>
+    procedureResultStillApplies(
+      options.lifetime,
+      generation,
+      options.dispatchedUnder,
+      options.identity,
+    );
+  try {
+    const result = await options.work(options.lifetime.signal());
+    if (!stillApplies()) return false;
+    options.setMessage(options.describe(result));
+    options.readback();
+    return true;
+  } catch (error) {
+    if (!stillApplies()) return false;
+    options.setMessage(procedureRunFailureMessage(error));
+    return false;
+  } finally {
+    if (options.lifetime.isCurrent(generation)) options.setBusy(false);
+  }
 }
