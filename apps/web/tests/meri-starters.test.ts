@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { CONVERSATION_SKILLS } from "@capiro/meri-contracts/conversation-application";
 import {
   artifactStarterMessage,
   artifactStarterProblem,
@@ -20,7 +21,9 @@ import {
   readFirstChatIntent,
   type FirstChatScope,
 } from "../src/shared/meri-conversations/first-chat-intent";
+import type { ConversationSkillSelection } from "../src/shared/meri-conversations/query-journal";
 import {
+  clearMeriConversationScope,
   syncMeriTabIdentity,
   tabRecord,
   type TabStorage,
@@ -47,6 +50,30 @@ const resolved = {
   capacity: "allowed",
   duplicate: "clear",
 } as const;
+const draftContext = {
+  tenantId,
+  actorId,
+  selectedClientId: null,
+  conversationId,
+  runId: "77777777-7777-4777-8777-777777777777",
+};
+const submitRequest = {
+  requestId: "a0000000-0000-4000-8000-00000000000a",
+  prompt: "First question",
+};
+const catalogueSkill = CONVERSATION_SKILLS[0]!;
+const skillSelection: ConversationSkillSelection = {
+  skill: {
+    skillId: catalogueSkill.skillId,
+    skillVersion: catalogueSkill.version,
+  },
+  windowRequest: {
+    basis: "explicit",
+    startInclusive: "2026-10-31T04:00:00.000Z",
+    endExclusive: "2026-11-02T05:00:00.000Z",
+    timezone: "America/New_York",
+  },
+};
 
 function intentStorage() {
   const values = new Map<string, string>();
@@ -394,9 +421,10 @@ describe("profile starter handoff", () => {
   });
 });
 
-// The Portfolio feature may not import the Meri conversation feature, so the starter writes the
-// conversation's draft through shared/meri-starters/starter-draft. These cases read the result
-// back with the REAL mounted owner, so a drift in that private record shape fails here.
+// The starter hands the draft to the canonical conversation owner, which now lives in
+// shared/meri-conversations/initial-draft.ts. Every case below reads the result back through the
+// forwarding feature path the mounted conversation actually uses, so the record shape, the
+// forwarding export and the owner's refusal and fence rules are exercised together.
 describe("starter draft handoff", () => {
   const scope = { tenantId, actorId, clientId: null, conversationId };
 
@@ -442,27 +470,87 @@ describe("starter draft handoff", () => {
     );
   });
 
-  it("refuses while the conversation has an unresolved message", () => {
+  it("refuses a pending submission and leaves the capture untouched", () => {
     const storage = tabStorage();
-    // Seed the same record with a pending capture, as an in-flight send leaves behind.
-    tabRecord(scope, "draft", (value) => value, "", storage).write({
-      draft: "",
-      revision: 3,
-      pending: {
-        draft: "Sent text",
-        revision: 2,
-        run: "run",
-        request: "request",
-        continuation: false,
-      },
-      reserved: null,
-    });
+    createInitialDraftOwner(scope, storage).begin(
+      draftContext,
+      submitRequest,
+      "First question",
+    );
+    expect(() =>
+      writeStarterDraft({ scope, draft: "Starter message", storage }),
+    ).toThrow(/unresolved message/);
+    const owner = createInitialDraftOwner(scope, storage);
+    expect(owner.hasPending(draftContext)).toBe(true);
+    expect(owner.draft()).toBe("");
+    expect(owner.revision()).toBe(0);
+  });
+
+  it("refuses a reserved next-turn submission and leaves it bindable", () => {
+    const storage = tabStorage();
+    createInitialDraftOwner(scope, storage).reserve(
+      "Next question",
+      submitRequest,
+    );
     expect(() =>
       writeStarterDraft({ scope, draft: "Starter message", storage }),
     ).toThrow(/unresolved message/);
     const owner = createInitialDraftOwner(scope, storage);
     expect(owner.draft()).toBe("");
-    expect(owner.revision()).toBe(3);
+    expect(owner.revision()).toBe(0);
+    // The reservation still binds its own next turn instead of being replaced by the starter.
+    owner.bindNext(draftContext, submitRequest);
+    expect(owner.hasPending(draftContext)).toBe(true);
+  });
+
+  it("preserves a selection the person already made", () => {
+    const storage = tabStorage();
+    createInitialDraftOwner(scope, storage).selectSkill(skillSelection);
+    const retained = createInitialDraftOwner(scope, storage).selection();
+    expect(retained).toBeDefined();
+    writeStarterDraft({ scope, draft: "Draft a profile", storage });
+    const owner = createInitialDraftOwner(scope, storage);
+    expect(owner.draft()).toBe("Draft a profile");
+    expect(owner.selection()).toEqual(retained);
+  });
+
+  it("refuses a malformed stored record instead of replacing it", () => {
+    // A well-formed envelope whose value does not match the owner's record shape.
+    const wrongShape = tabStorage();
+    tabRecord(scope, "draft", (value) => value, "", wrongShape).write({
+      bogus: true,
+    });
+    // An empty record replaced by bytes that are not a decodable record at all.
+    const undecodable = tabStorage();
+    tabRecord(scope, "draft", (value) => value, "", undecodable).write({
+      draft: "",
+      revision: 0,
+      pending: null,
+      reserved: null,
+    });
+    const key = [...Array(undecodable.length).keys()]
+      .map((index) => undecodable.key(index))
+      .find((found) => found?.includes('"draft"'))!;
+    expect(key).toBeDefined();
+    undecodable.setItem(key, "{");
+
+    for (const storage of [wrongShape, undecodable]) {
+      expect(() =>
+        writeStarterDraft({ scope, draft: "Starter message", storage }),
+      ).toThrow();
+      expect(createInitialDraftOwner(scope, storage).error()).toBeDefined();
+    }
+  });
+
+  it("refuses to recreate a revoked conversation scope from a late write", () => {
+    const storage = tabStorage();
+    const live = createInitialDraftOwner(scope, storage);
+    writeStarterDraft({ scope, draft: "Draft a profile", storage });
+    clearMeriConversationScope(scope, storage);
+    // The mounted owner that outlived the revocation must never restore the record.
+    expect(live.error()).toBeDefined();
+    expect(() => live.startUnsentStarter("Second attempt")).toThrow();
+    expect(createInitialDraftOwner(scope, storage).draft()).toBe("");
   });
 
   it("reports an unusable tab instead of silently dropping the draft", () => {
@@ -478,5 +566,34 @@ describe("starter draft handoff", () => {
     expect(() =>
       writeStarterDraft({ scope, draft: "Draft a profile", storage: refused }),
     ).toThrow();
+  });
+
+  it("keeps ordinary draft and recovery behaviour through the forwarding path", () => {
+    const storage = tabStorage();
+    createInitialDraftOwner(scope, storage).edit("Typed by hand");
+    expect(createInitialDraftOwner(scope, storage).draft()).toBe(
+      "Typed by hand",
+    );
+    const live = createInitialDraftOwner(scope, storage);
+    live.begin(draftContext, submitRequest, "Typed by hand");
+    expect(live.hasPending(draftContext)).toBe(true);
+    // An unresolved submit retains the capture; the observed one consumes it exactly once.
+    expect(
+      live.acknowledge(
+        draftContext,
+        { ...submitRequest, state: "unknown" },
+        "Typed by hand",
+      ),
+    ).toBe(false);
+    expect(live.hasPending(draftContext)).toBe(true);
+    expect(
+      live.acknowledge(
+        draftContext,
+        { ...submitRequest, state: "observed" },
+        "Typed by hand",
+      ),
+    ).toBe(true);
+    expect(live.hasPending(draftContext)).toBe(false);
+    expect(live.draft()).toBe("");
   });
 });
