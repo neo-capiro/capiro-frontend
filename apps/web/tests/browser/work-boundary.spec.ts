@@ -202,7 +202,7 @@ for (const source of ["documents", "client", "clients"] as const) {
     await expectDocuments(page, false);
     await expect(page.getByRole("alert")).toBeVisible();
     await expect(
-      page.getByText("No documents can be matched to this client."),
+      page.getByText("No documents are linked to this client."),
     ).toHaveCount(0);
     await expect(
       page.getByRole("heading", { name: firstStrategy.title, exact: true }),
@@ -267,7 +267,7 @@ test("a unique same-name catalog row for another client cannot supply current-cl
     page.getByRole("heading", { name: firstStrategy.title, exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByText("No documents can be matched to this client."),
+    page.getByText("No documents are linked to this client."),
   ).toBeVisible();
   await expectDocuments(page, false);
   expect(unexpected).toEqual([]);
@@ -286,7 +286,7 @@ test("a mismatched current Client response cannot establish the Workspace associ
   await expect(page.getByRole("alert")).toBeVisible();
   await expectDocuments(page, false);
   await expect(
-    page.getByText("No documents can be matched to this client."),
+    page.getByText("No documents are linked to this client."),
   ).toHaveCount(0);
   state.client = client;
   state.clients = [client];

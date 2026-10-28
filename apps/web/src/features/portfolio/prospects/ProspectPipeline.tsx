@@ -264,6 +264,14 @@ export function ProspectPipeline({
                   records={legacy.filter((row) => row.stage === stage)}
                   renderCard={card}
                   emptyLabel="No prospects"
+                  marker={
+                    <span
+                      className="eyebrow"
+                      title="Previous stage — existing stage values are preserved until migration."
+                    >
+                      Previous
+                    </span>
+                  }
                 />
               ))}
           </div>

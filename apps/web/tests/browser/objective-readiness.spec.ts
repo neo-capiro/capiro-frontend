@@ -170,7 +170,10 @@ test("an objective status filter has a recoverable empty state", async ({
 }) => {
   const unexpected = await installFixtures(page);
   await page.goto(`/portfolio/${clientId}/objectives`);
-  await page.getByLabel("Objective status").selectOption("ready");
+  await page
+    .getByRole("group", { name: "Filter objectives" })
+    .getByRole("button", { name: "Ready", exact: true })
+    .click();
   await expect(
     page.getByRole("heading", { name: "No objectives match this status" }),
   ).toBeVisible();

@@ -78,7 +78,7 @@ test("pointer rearrangement and cancel are local until Save", async ({
   expect(writes).toBe(0);
 });
 for (const status of [404, 503])
-  test(`unavailable ${status} conceals the unadmitted layout catalog and refuses writes`, async ({
+  test(`unavailable ${status} keeps the accessible roster visible with no reorder authority and no write`, async ({
     page,
   }) => {
     await layoutFixtures(page);
@@ -91,9 +91,13 @@ for (const status of [404, 503])
     await expect(
       page.getByText("Saved profile ordering is unavailable", { exact: false }),
     ).toBeVisible();
+    await expect.poll(() => positions(page)).toEqual(cardIds);
     await expect(
       page.getByRole("button", { name: "Move Aerospace One later" }),
-    ).toHaveCount(0);
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("button", { name: "Drag Aerospace One to rearrange" }),
+    ).toBeDisabled();
     expect(writes).toBe(0);
   });
 test("conflict retains draft and requires explicit latest order review", async ({
@@ -169,8 +173,13 @@ test("wrong actor successful receipt is not published", async ({ page }) => {
   await expect(
     page.getByText("The saved layout response does not match this session."),
   ).toBeVisible();
+  // The foreign receipt is refused, so the caller keeps its own roster without
+  // any reorder authority: the rejected order is never published as theirs.
   await expect(
     page.getByRole("button", { name: "Move Aerospace One later" }),
+  ).toBeDisabled();
+  await expect(
+    page.getByRole("button", { name: "Save order", exact: true }),
   ).toHaveCount(0);
 });
 test("portal role never reads or writes the layout catalog", async ({
@@ -184,7 +193,15 @@ test("portal role never reads or writes the layout catalog", async ({
   });
   await page.goto(path);
   await expect(
+    page.getByText("Your role does not allow changing saved profile order.", {
+      exact: false,
+    }),
+  ).toBeVisible();
+  await expect(
     page.getByRole("button", { name: "Move Aerospace One later" }),
+  ).toBeDisabled();
+  await expect(
+    page.getByRole("button", { name: "Save order", exact: true }),
   ).toHaveCount(0);
   expect(calls).toBe(0);
 });

@@ -55,7 +55,12 @@ export function PortfolioPulse({
           <span className="eyebrow">Clients</span>
         </div>
         {UNREPORTED.map(([label, reason]) => (
-          <div key={label} title={reason} aria-label={`${label}: ${reason}`}>
+          <div
+            key={label}
+            role="group"
+            title={reason}
+            aria-label={`${label}: ${reason}`}
+          >
             <strong>—</strong>
             <span className="eyebrow">{label}</span>
           </div>

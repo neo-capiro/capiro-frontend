@@ -60,38 +60,46 @@ export function BillResults({
         </thead>
         <tbody>
           {columns.flatMap((column) =>
-            column.bills.map((bill) => (
-              <tr key={bill.billId}>
-                <td>
-                  <button
-                    className="button ghost mono"
-                    onClick={() => onOpen(bill)}
-                  >
-                    {bill.displayNum}
-                  </button>
-                </td>
-                <td className={styles.titleCell}>
-                  {bill.title ?? "Title unavailable"}
-                  {bill.terminalRisk && (
-                    <small className="danger">Terminal risk</small>
-                  )}
-                </td>
-                <td>
-                  {bill.latestActionText ?? bill.changeLabel ?? "—"}
-                  {bill.latestActionText && bill.latestActionDate && " · "}
-                  <small>{bill.latestActionDate?.slice(0, 10) ?? ""}</small>
-                </td>
-                <td>{bill.canonicalStatus ?? column.label}</td>
-                <td>
-                  <span
-                    className="chip"
-                    title="Estimate supplied by the configured backend; not a confirmed outcome."
-                  >
-                    {Math.round(bill.probability * 100)}%
-                  </span>
-                </td>
-              </tr>
-            )),
+            column.bills.map((bill) => {
+              // The visible latest action is the action text or, when the
+              // service supplied only a change label, that label. Both the
+              // separator and the empty placeholder follow what is displayed so
+              // the text and date can never run together.
+              const latestAction = bill.latestActionText ?? bill.changeLabel;
+              const latestDate = bill.latestActionDate?.slice(0, 10);
+              return (
+                <tr key={bill.billId}>
+                  <td>
+                    <button
+                      className="button ghost mono"
+                      onClick={() => onOpen(bill)}
+                    >
+                      {bill.displayNum}
+                    </button>
+                  </td>
+                  <td className={styles.titleCell}>
+                    {bill.title ?? "Title unavailable"}
+                    {bill.terminalRisk && (
+                      <small className="danger">Terminal risk</small>
+                    )}
+                  </td>
+                  <td>
+                    {latestAction ?? (latestDate ? null : "—")}
+                    {latestAction && latestDate ? " · " : null}
+                    {latestDate && <small>{latestDate}</small>}
+                  </td>
+                  <td>{bill.canonicalStatus ?? column.label}</td>
+                  <td>
+                    <span
+                      className="chip"
+                      title="Estimate supplied by the configured backend; not a confirmed outcome."
+                    >
+                      {Math.round(bill.probability * 100)}%
+                    </span>
+                  </td>
+                </tr>
+              );
+            }),
           )}
         </tbody>
       </table>

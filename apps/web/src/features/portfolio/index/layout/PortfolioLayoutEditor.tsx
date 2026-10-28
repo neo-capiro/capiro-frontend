@@ -69,19 +69,19 @@ function EditorSession({
       "The accessible profile catalog changed. Review before saving.",
     );
   }
-  // A failed saved-order read must not empty the editor: fall back to the
-  // accessible catalog order so the profiles stay visible (editing is still
-  // blocked by `layout.allowed`).
-  const baseIds = layout.orderedIds.length
-    ? layout.orderedIds
-    : layout.catalogIds;
-  const currentIds = draft?.scope === layout.scope ? draft.ids : baseIds;
-  const ids = editing
-    ? orderedClientIds(
-        currentIds.map((id) => `client:${id}`),
-        layout.catalogIds,
-      )
-    : currentIds;
+  const currentIds =
+    draft?.scope === layout.scope ? draft.ids : layout.orderedIds;
+  // Only an authoritative saved-order read may narrow the visible roster. A
+  // failed or pending read keeps the same accessible roster the ordinary board
+  // shows, with `layout.allowed` refusing every move and save; an authoritative
+  // empty or filtered catalog keeps exactly the membership it reports.
+  const ids =
+    editing && layout.catalogKnown
+      ? orderedClientIds(
+          currentIds.map((id) => `client:${id}`),
+          layout.catalogIds,
+        )
+      : currentIds;
   const changed =
     draft?.scope === layout.scope && !sameOrder(draft.ids, layout.orderedIds);
   const blocked =
