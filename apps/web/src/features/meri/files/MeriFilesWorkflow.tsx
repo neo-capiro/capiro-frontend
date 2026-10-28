@@ -39,12 +39,13 @@ export function MeriFilesWorkflow({
       ) : (
         <section
           className={styles.notice}
-          aria-label="Document service unavailable"
+          aria-label="Document creation unavailable"
         >
-          <h2>Document service unavailable</h2>
+          <h2>Document creation unavailable</h2>
           <p>
-            A configured document service and a verified connection are required
-            to create, revise, inspect or download a version.
+            A configured document creation service and a verified connection are
+            required to create or revise a version. Saved-file reads use the
+            library connection above.
           </p>
           <p>
             No document operation runs when you open this page. The connection

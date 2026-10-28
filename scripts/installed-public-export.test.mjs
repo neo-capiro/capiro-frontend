@@ -10,7 +10,11 @@ import {
 for (const name of ["intents", "user-preferences", "document-access"]) {
   test(`${name} SDK exports the actual installed canonical receiver`, async () => {
     const checked = checkInstalledPublicExport(name, `${name}-application`);
-    assert.equal(checked.packageVersion, "0.1.21");
+    assert.equal(checked.packageVersion, "0.1.25");
+    assert.equal(
+      checked.contractVersion,
+      name === "document-access" ? "0.2.0" : "0.1.0",
+    );
     assert.equal(checked.records.length, 4);
     const require = createRequire(
       new URL("../packages/meri-client/package.json", import.meta.url),

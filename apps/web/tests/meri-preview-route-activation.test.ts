@@ -1,6 +1,8 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { NextRequest, type NextFetchEvent } from "next/server";
 import packageJson from "../package.json";
+import { RUN_INDEX_PATHS } from "@capiro/meri-contracts/conversation-history";
+import { usageOverviewMetadata } from "@capiro/meri-contracts/conversation-usage";
 import proxy, { config as proxyConfig } from "../src/proxy";
 import { POST as actionPost } from "../src/app/api/action-followthrough/[operation]/route";
 import { POST as conversationPost } from "../src/app/api/conversations/[...path]/route";
@@ -428,5 +430,51 @@ it("holds wrong direct Meri paths and queries before Clerk", async () => {
   ];
   for (const response of responses) expect(response.status).toBe(503);
   expect(clerk.auth).not.toHaveBeenCalled();
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+it("admits the exact qualified Runs and usage read paths through the existing native identity boundary", async () => {
+  const paths = [...Object.values(RUN_INDEX_PATHS), usageOverviewMetadata.path];
+  for (const path of paths) {
+    expect(previewMeriConversationRoute(environment, request(path)), path).toBe(
+      true,
+    );
+    expect(
+      previewBackendRejection(environment, request(path)),
+      path,
+    ).toBeNull();
+    const result = await proxy(
+      new NextRequest(`${origin}${path}`, { method: "POST" }),
+      {} as NextFetchEvent,
+    );
+    expect(await (result as Response).text()).toBe("native Clerk middleware");
+    for (const method of ["GET", "HEAD", "PUT", "DELETE"])
+      expect(
+        previewMeriConversationRoute(environment, request(path, method)),
+      ).toBe(false);
+    for (const suffix of ["/extra", "?cursor=forged", "#fragment"])
+      expect(
+        previewMeriConversationRoute(environment, request(path + suffix)),
+      ).toBe(false);
+    expect(
+      previewMeriConversationRoute(
+        {
+          ...environment,
+          CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION: "0.1.0",
+        },
+        request(path),
+      ),
+    ).toBe(false);
+    expect(
+      previewMeriConversationRoute(
+        {
+          ...environment,
+          CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED: "false",
+        },
+        request(path),
+      ),
+    ).toBe(false);
+  }
+  expect(clerk.middleware).toHaveBeenCalledTimes(3);
   expect(fetcher).not.toHaveBeenCalled();
 });

@@ -16,6 +16,7 @@ export default function MeriFilesPage() {
       <RequireSession>
         <MeriFilesHost
           enabled={config.enabled}
+          readEnabled={config.readEnabled}
           operation={config.operation ?? "create_word"}
         />
       </RequireSession>

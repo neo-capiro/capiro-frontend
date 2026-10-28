@@ -4,7 +4,7 @@ import { portfolioPreviewFrontendOrigin } from "../meri-conversations/frontend-o
 type Environment = Record<string, string | undefined>;
 
 /** The app's pinned @capiro/meri-contracts distribution. */
-export const previewMeriContractsPackageVersion = "0.1.21";
+export const previewMeriContractsPackageVersion = "0.1.25";
 const sourceCommit = /^[0-9a-f]{40}$/;
 const imageDigest = /^sha256:[0-9a-f]{64}$/;
 const meriHost =
@@ -41,6 +41,9 @@ const postPaths = new Set([
   "/api/conversations/manage",
   "/api/conversations/source-read",
   "/api/conversations/usage",
+  "/api/conversations/runs/list",
+  "/api/conversations/runs/detail",
+  "/api/conversations/usage-overview",
   "/api/conversations/input/allocate",
   "/api/conversations/input/admit",
 ]);

@@ -71,7 +71,8 @@ type Kind =
   | "management"
   | "lifecycle"
   | "feedback"
-  | "handoff";
+  | "handoff"
+  | "preview";
 
 /** Pending management commands stay recoverable after the row moves to Archive or Trash. */
 export function pendingManagementScopes(

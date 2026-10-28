@@ -203,6 +203,32 @@ function resultFields(
 }
 
 type Look = Readonly<{ status: string; tone: IntentTone; detail: string }>;
+/** The public receiver correlates these saved attachment IDs with the retained filing command. */
+function filingLinks(
+  proposal: IntentsNativeProposal,
+  execution: Completed | null,
+): IntentRow["fileLinks"] {
+  const outcome = execution?.outcome;
+  if (
+    proposal.command.action !== "artifact.file" ||
+    !outcome ||
+    !("execution" in outcome) ||
+    !("kind" in outcome.execution) ||
+    outcome.execution.kind !== "native-artifact-file" ||
+    !("result" in outcome) ||
+    !("files" in outcome.result)
+  )
+    return;
+  const { clientId } = proposal.command.arguments as Record<string, unknown>;
+  if (typeof clientId !== "string") return;
+  return outcome.result.files.flatMap((file) =>
+    file.status === "saved" &&
+    file.documentId !== undefined &&
+    file.fileName !== null
+      ? [{ clientId, documentId: file.documentId, fileName: file.fileName }]
+      : [],
+  );
+}
 function filingLook(execution: Completed): Look | null {
   if (
     !("result" in execution.outcome) ||
@@ -466,6 +492,7 @@ export function intentRow(
     result: completed
       ? resultFields(completed, item.proposal.command.action)
       : [],
+    fileLinks: filingLinks(item.proposal, completed),
     ...(completed &&
     "execution" in completed.outcome &&
     "kind" in completed.outcome.execution &&
