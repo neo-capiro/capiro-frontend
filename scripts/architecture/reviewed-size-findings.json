@@ -5803,10 +5803,20 @@
     "file": "apps/web/src/features/meri/screens/settings/MeriPreferencesPanel.tsx",
     "kind": "function",
     "symbol": "MeriPreferencesPanel",
-    "fingerprint": "7bec29b6a9b3dfefab74cb538f45987ba55f26aa18ad83275c51c77449c4308d",
-    "reason": "One preferences tab shell owns page selection and chrome, delegating reads, writes and authorization to each canonical page owner. Its size is the switch and per-page framing; no split is needed. Independent decision: work/hermes-review/frontend-responsibility/RESPONSIBILITY-FINDINGS.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "d07b3a85ca5c8d0f485dc633a7f09723dbd60e3970391b9d420cb331a9674e0b",
+    "sourceFingerprint": "d07b3a85ca5c8d0f485dc633a7f09723dbd60e3970391b9d420cb331a9674e0b",
+    "reason": "The Settings preferences tab shell owns page selection and the shared chrome object, then delegates every page to its canonical owner (UserPreferencesHost, ConnectorAccountsHost, SkillsTemplatesScreen, NotificationsAccountScreen, PrivacyDeletionScreen, HelpShortcutsScreen) and now routes the usage page to UsageOverviewHost when readConversationConfig enables usage, otherwise to the existing UsageLimitsScreen with the existing TenantModelSettings as configurationContent. The added usage branch is pure routing to already-owned read-only views; it adds no domain, authority, accounting, transport or persistence responsibility. The switch over the seven page ids remains the single cohesive responsibility, so a split would add indirection without reducing coupling.",
+    "rationale": "Accepted change to an existing reviewed shell: the 12 added lines only select between two already-owned usage owners and pass the existing tenant-settings owner through. Same single responsibility as the superseded record; only the usage routing was added. No new authority, transport or accounting logic enters this body.",
+    "evidence": [
+      "apps/web/src/features/meri/screens/settings/MeriPreferencesPanel.tsx lines 29-131 (body)",
+      "apps/web/src/app/settings/[section]/page.tsx (usageEnabled={readConversationConfig(process.env).enabled})",
+      "apps/web/src/features/meri/usage-overview/UsageOverviewHost.tsx (canonical usage owner)",
+      "apps/web/tests/meri-usage-overview-binding.test.ts, meri-usage-overview-presentation.test.ts",
+      "work/m7-usage-fe-architecture.json sizeFindings (nonblank 93, fingerprint d07b3a85..., reviewStatus changed-since-review)",
+      "work/m7-usage-fe-final-focused.txt (21/21 PASS)"
+    ],
+    "reviewedBy": "Hermes Agent independent source review (session 20261028_004952_c1f9fa)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/read.ts",
@@ -6960,6 +6970,25 @@
     "fingerprint": "6d30835092219fa9686d13e986939bb4395093831e3438ea8be7fbd3ed638d12",
     "reason": "reviewed-accept - one account/client-scoped completed legacy reports list-and-reader view. It owns only presentation and user intent: one Load/Refresh plus conditional Load-more, status/alert and empty-page messaging, the report list, and one selected-report article with a current-authorized Download and Close. Transport is in the dedicated createLegacyReportClient canonical registered Capiro GET operations and paging/correlation/lifetime are in the dedicated LegacyReportController; the host keys this by [tenantId, actorId, clientId] and unmount abandons in-flight reads. It holds no authority decision (Core owns current source/client/held authorization), no cross-account cache or stored report body, no model loop, renderer or job settlement, and no second transport. The two JSX regions share one view state and one component lifecycle; a split would add indirection rather than reduce coupling.",
     "reviewedBy": "Hermes Agent independent architecture review (session 20261028_001012_2888e9)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/usage-overview/projection.ts",
+    "kind": "function",
+    "symbol": "projectUsageOverview",
+    "fingerprint": "b8fef83f252b38da9e5f002d5f8c53b99e5a75482f1979d08457a3acf781fd72",
+    "sourceFingerprint": "b8fef83f252b38da9e5f002d5f8c53b99e5a75482f1979d08457a3acf781fd72",
+    "reason": "One pure projection of the received tenant usage-overview contract into the Settings Usage view model: day / Monday-UTC-week / month cohorts, the separate monthly admission ledger, recorded vs unavailable vs not-recorded accounting, read-only canonical policy limits, durable queue state counts and an explicit unavailable capacity/economics statement. It performs no fetch, no polling, no local policy threshold, no zero-for-unknown substitution, no capacity or economic inference and no authority decision; every emitted value is either a received fact or the explicit string Unavailable. Formatting helpers (dollars, periodLabel) are module-local and stateless. No second domain or responsibility is present, so extraction would add indirection rather than reduce coupling.",
+    "rationale": "New cohesive presentation mapper for one contract, under the 400-line file and just over the 80-line function threshold. The body is a single declarative return of received facts; the two distinct accounting bases (run.createdAt cohorts vs sdk_usage_recorded_at admission) are kept separate in the same view rather than merged, which is the required behaviour. Accept as one reviewed body.",
+    "evidence": [
+      "apps/web/src/features/meri/usage-overview/projection.ts lines 35-135 (body)",
+      "apps/web/tests/meri-usage-overview-presentation.test.ts (7 cases: cohorts, ledger, unknowns, cap states, capacity, queue permission, staleness)",
+      "apps/web/tests/meri-usage-overview-fixtures.ts (physical .25 response shape)",
+      "node_modules/@capiro/meri-contracts@0.1.25 dist/conversation-usage.mjs (schema + overview semantics)",
+      "work/m7-usage-fe-architecture.json sizeFindings (nonblank 98, fingerprint b8fef83f..., reviewStatus unreviewed)",
+      "work/m7-usage-fe-final-focused.txt (21/21 PASS)"
+    ],
+    "reviewedBy": "Hermes Agent independent source review (session 20261028_004952_c1f9fa)",
     "reviewedOn": "2026-10-28"
   }
 ]
