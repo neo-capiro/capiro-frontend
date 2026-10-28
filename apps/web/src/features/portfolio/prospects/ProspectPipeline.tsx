@@ -35,6 +35,14 @@ export function ProspectPipeline({
   const [dragId, setDragId] = useState<string>();
   const owners = useMemberOptions();
   const legacy = data.prospects.filter((row) => !isPortfolioStage(row.stage));
+  const legacyStagesSet = new Set(legacy.map((row) => row.stage));
+  const legacyStageCounts = Object.fromEntries(
+    Array.from(legacyStagesSet).map((stage) => [
+      stage,
+      data.counts.byStage[stage] ??
+        legacy.filter((r) => r.stage === stage).length,
+    ]),
+  );
   function card(record: Prospect) {
     const canMove = Boolean(
       catalog &&
@@ -204,15 +212,28 @@ export function ProspectPipeline({
               );
             })}
             {legacy.length > 0 && (
-              <section className={styles.pipelineColumn} data-empty={false}>
-                <header className={styles.pipelineColumnHeader}>
-                  <h3>Previous stages</h3>
-                </header>
-                <p className={styles.pipelineEmpty}>
-                  Existing stage values are preserved until migration.
-                </p>
-                {legacy.map(card)}
-              </section>
+              <>
+                {Array.from(legacyStagesSet).map((stage) => {
+                  const records = legacy.filter((row) => row.stage === stage);
+                  const count = legacyStageCounts[stage] ?? 0;
+                  return (
+                    <section
+                      className={styles.pipelineColumn}
+                      data-empty={records.length === 0}
+                      key={stage}
+                    >
+                      <header className={styles.pipelineColumnHeader}>
+                        <h3>{stageLabel(stage)}</h3>
+                        <span className={styles.pipelineCount}>{count}</span>
+                      </header>
+                      {records.map(card)}
+                      {records.length === 0 && (
+                        <p className={styles.pipelineEmpty}>No prospects</p>
+                      )}
+                    </section>
+                  );
+                })}
+              </>
             )}
           </div>
         </div>

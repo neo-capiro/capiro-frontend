@@ -12,7 +12,23 @@ export const lifecycleStatuses = [
   "archived",
 ] as const;
 export const legacyStatuses = ["open", "resolved", "stalled"] as const;
-export const statusLabel = (status: string) => status.replaceAll("_", " ");
+export const statusLabels = {
+  planning: "Planning",
+  active: "Active",
+  monitoring: "Monitoring",
+  outcome_observed: "Outcome observed",
+  successful: "Successful",
+  partially_successful: "Partially successful",
+  unsuccessful: "Unsuccessful",
+  withdrawn: "Withdrawn",
+  archived: "Archived",
+  open: "Open",
+  resolved: "Resolved",
+  stalled: "Stalled",
+} as const;
+export const statusLabel = (status: string) =>
+  statusLabels[status as keyof typeof statusLabels] ??
+  status.replaceAll("_", " ");
 export function matchesMatter(matter: Matter, search: string, status: string) {
   const text = [
     matter.title,

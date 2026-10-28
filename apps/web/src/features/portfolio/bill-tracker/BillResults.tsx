@@ -78,9 +78,8 @@ export function BillResults({
                 </td>
                 <td>
                   {bill.latestActionText ?? bill.changeLabel ?? "—"}
-                  {bill.latestActionDate && (
-                    <small>{bill.latestActionDate.slice(0, 10)}</small>
-                  )}
+                  {bill.latestActionText && bill.latestActionDate && " · "}
+                  <small>{bill.latestActionDate?.slice(0, 10) ?? ""}</small>
                 </td>
                 <td>{bill.canonicalStatus ?? column.label}</td>
                 <td>

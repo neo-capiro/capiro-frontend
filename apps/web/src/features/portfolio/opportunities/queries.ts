@@ -18,6 +18,9 @@ export function useMatchedOpportunities(
         clientSearchSchema(clientId, page),
         { signal },
       ),
+    enabled: !!clientId,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 }
 export function useRelevantPrograms(clientId: string, page: number) {
@@ -34,5 +37,8 @@ export function useRelevantPrograms(clientId: string, page: number) {
         ),
         { signal },
       ),
+    enabled: !!clientId,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 }
