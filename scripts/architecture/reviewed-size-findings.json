@@ -7183,8 +7183,8 @@
     "file": "apps/web/src/shared/meri-uploads/proxy.ts",
     "kind": "function",
     "symbol": "proxyUploadOriginal",
-    "fingerprint": "46f10607eefa2681522d679b71484f9fb96f7ab22b38fa8a6ddffd0634ac23ad",
-    "reason": "One proxy concern for the original write: enforce the same-origin, session-header and declared-length preconditions, forward the bytes to the custody owner at the canonical original path and relay the canonical envelope. It owns no custody, storage or authorization decision.",
+    "fingerprint": "3516e27b84a62275edcc1423d920fa98c0d560e1ed3496f0dcc2433cf4775555",
+    "reason": "One concern for the bounded original write: the purpose-specific route takes one canonical upload id and one PUT of the exact declared bytes, enforcing the receiving bound, an exact content-length and a digest of what actually arrived before anything is forwarded, and it relays the canonical envelope unchanged. This candidate only reflows the body and names the lost-reply dispatch outcome explicitly; the responsibility, the refusals and the absence of custody, storage or authorization authority are unchanged.",
     "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
     "reviewedOn": "2026-10-28"
   },
@@ -7203,6 +7203,33 @@
     "symbol": "createUploadWire",
     "fingerprint": "727033615062f63f2260ab6d5cbfb64be03ffce7ea56ad660ea397026bc02027",
     "reason": "One transport concern for the uploads wire: canonical request admission, one attempted command per operation, bounded bytes and deadlines, and response admission through the canonical public receivers. It holds no UI state and no custody or deletion authority.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-uploads/proxy.ts",
+    "kind": "function",
+    "symbol": "proxyUploadRequest",
+    "fingerprint": "59ebe8223ad239049951bb9793e81eb198a71d9da83be7595139fbc39a21c9e0",
+    "reason": "One proxy concern for the fixed generic upload leaves: same-origin, exact-pathname, opaque session-header and declared-length preconditions, then the browser's exact admitted bytes forwarded to the remote application. This candidate extends the reachable leaf set by the two saved-source reads only (inspect, read) and makes the lost-reply outcome explicit per operation: a read reports READ_UNAVAILABLE, a dispatch leaf reports UNKNOWN, and no outcome is ever invented. A read relays exactly the six canonical download headers and nothing else. It owns no custody, storage or authorization decision.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-uploads/current-read.ts",
+    "kind": "function",
+    "symbol": "createUploadCurrentRead",
+    "fingerprint": "b6a21dba866903f83349edc41ef50c287f8df82de9b8917fddbdef24efb1e462",
+    "reason": "One concern for re-resolving current custody of a saved upload reference and returning the original bytes: a fresh canonical inspect on every read (never the saved event's own claim), exact correlation of the current record with the saved reference (upload id, digest, version, filename, media type and byte count), a bounded canonical read only while the owner admits the original as stored and readable, and the canonical download receiver's own admission of the returned bytes. A refused, quarantined, revoked, changed or cancelled reference yields no bytes; the read is discarded when the session moves on and no command is ever repeated after an unknown reply. All authority, custody and effects stay with the remote application.",
+    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/evidence/UploadSourceView.tsx",
+    "kind": "function",
+    "symbol": "UploadCustody",
+    "fingerprint": "c41089f3f2bef817c52432ac18031103a99758161e265f10db82ff47ce48a2ab",
+    "reason": "One presentation concern for the saved upload's current original: it renders the recorded saved state, re-asks the owner through the session's current-read port on demand and never on selection, keeps one bounded action at a time, discards work that a later action superseded, publishes the one document URL only on an admitted read and clears it on refusal and unmount, and states plainly that the saved event is custody metadata rather than extracted text or a claim that the answer used the file. It makes no custody, authorization or retention decision.",
     "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
     "reviewedOn": "2026-10-28"
   }

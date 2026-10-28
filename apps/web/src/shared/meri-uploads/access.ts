@@ -4,6 +4,10 @@ import {
   type UploadController,
 } from "./upload-controller";
 import { createUploadWire } from "./upload-wire";
+import {
+  createUploadCurrentRead,
+  type UploadCurrentRead,
+} from "./current-read";
 
 /**
  * The conversation session's upload access. It is the explicit port member every attachment
@@ -25,6 +29,11 @@ export type MeriUploadAccess = Readonly<{
   check: UploadController["check"];
   remove: UploadController["remove"];
   cancel: UploadController["cancel"];
+  /**
+   * The current read of an upload the conversation already holds, under this same session: a saved
+   * upload source event names an original, and only this owner may re-query it.
+   */
+  current: UploadCurrentRead;
   dispose: () => void;
 }>;
 
@@ -48,11 +57,17 @@ export function createUploadAccess(options: {
     isCurrent: options.isCurrent,
     ...(options.established ? { established: options.established } : {}),
   });
+  const current = createUploadCurrentRead(
+    options.credential,
+    options.lifetime,
+    options.isCurrent,
+    options.fetcher,
+  );
   const dispose = () => {
     options.lifetime.removeEventListener("abort", dispose);
     controller.dispose();
   };
   if (options.lifetime.aborted) dispose();
   else options.lifetime.addEventListener("abort", dispose, { once: true });
-  return Object.freeze({ ...controller, dispose });
+  return Object.freeze({ ...controller, current, dispose });
 }

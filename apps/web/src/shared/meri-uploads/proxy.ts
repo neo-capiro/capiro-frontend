@@ -15,7 +15,27 @@ import { sameRequestOrigin } from "../request-origin";
 import type { readUploadConfig } from "./config";
 
 /** The fixed forwarding leaves this deployment has a caller for; nothing else is reachable. */
-const routes = new Set<string>(["initiate", "status", "remove"]);
+const routes = new Set<string>([
+  "initiate",
+  "status",
+  "remove",
+  // The saved-source read: inspect re-resolves current custody, read returns the original bytes.
+  "inspect",
+  "read",
+]);
+/**
+ * The exact original-download headers the read leaf relays, and nothing else: the canonical
+ * download receiver admits a read response only when every one of them is present and exact, so a
+ * relayed read carries no header Meri did not set and no header it set is dropped.
+ */
+const downloadHeaders = [
+  "content-type",
+  "content-length",
+  "content-disposition",
+  "x-meri-upload-id",
+  "x-meri-upload-sha256",
+  "x-meri-upload-version",
+] as const;
 const jsonHeaders = {
   "Content-Type": "application/json",
   "Cache-Control": "no-store",
@@ -39,11 +59,15 @@ const refused = (
   status: number,
   code: string,
   outcome: Outcome = "NOT_DISPATCHED",
-) => Response.json({ error: { code, outcome } }, { status, headers: jsonHeaders });
+) =>
+  Response.json({ error: { code, outcome } }, { status, headers: jsonHeaders });
 
-/** The reply was lost after the command left this server; no outcome is invented. */
-const lost = () =>
-  refused(503, "UPLOAD_UNAVAILABLE", "UNKNOWN");
+/** The reply was lost after the request left this server; no dispatch outcome is invented. */
+const lost = (route: string) =>
+  route === "read"
+    ? // A read has no dispatch outcome to report, and its own canonical outcome is READ_UNAVAILABLE.
+      refused(503, "UPLOAD_UNAVAILABLE", "READ_UNAVAILABLE")
+    : refused(503, "UPLOAD_UNAVAILABLE", "UNKNOWN");
 
 const hex = (bytes: Uint8Array) =>
   Array.from(bytes)
@@ -67,10 +91,12 @@ const sameOriginAndHeaders = (
 };
 
 /**
- * Fixed upload command forwarding only: initiate, status and remove. The admitted body is the
- * browser's exact bytes, re-admitted here through the same public receiver the caller used, so a
- * malformed or out-of-contract command never reaches the remote application. The remote application
- * owns current authority, custody and every effect.
+ * Fixed upload route forwarding only: the write commands initiate, complete, status and remove, and
+ * the saved-source reads inspect and read. The admitted body is the browser's exact bytes,
+ * re-admitted here through the same public receiver the caller used, so a malformed or
+ * out-of-contract request never reaches the remote application. A read relays the canonical
+ * original bytes with exactly the download headers Meri set, and relays nothing else. The remote
+ * application owns current authority, custody and every effect.
  */
 export async function proxyUploadRequest(
   request: Request,
@@ -87,7 +113,7 @@ export async function proxyUploadRequest(
     return refused(400, "UPLOAD_FORMAT");
   if (request.headers.has("content-encoding"))
     return refused(400, "UPLOAD_ENCODING");
-  if (!config.enabled) return refused(503, "UPLOAD_UNAVAILABLE", "UNKNOWN");
+  if (!config.enabled) return lost(operation);
   try {
     return await withActionDeadline([request.signal], async (signal) => {
       const nativeToken = await getNativeToken();
@@ -102,7 +128,10 @@ export async function proxyUploadRequest(
           signal,
           uploadApplicationMetadata.requestBytes,
         );
-        receiveUploadRequest(operation as Exclude<UploadRoute, "complete" | "read">, body);
+        receiveUploadRequest(
+          operation as Exclude<UploadRoute, "complete">,
+          body,
+        );
       } catch {
         signal.throwIfAborted();
         return refused(400, "INVALID_BODY");
@@ -124,29 +153,44 @@ export async function proxyUploadRequest(
         });
       } catch {
         signal.throwIfAborted();
-        return lost();
+        return lost(operation);
       }
       try {
         signal.throwIfAborted();
         if (response.redirected) throw new Error("Redirected upload response");
+        // A canonical read answers 200 with the original bytes; every other reply is the JSON shape.
+        const download = operation === "read" && response.status === 200;
+        if (download && response.headers.has("content-encoding"))
+          throw new Error("Encoded upload download");
         const bytes = await boundedResponseBytes(
           response,
           signal,
-          uploadApplicationMetadata.responseBytes,
+          download
+            ? UPLOAD_LIMITS.originalBytes
+            : uploadApplicationMetadata.responseBytes,
         );
         signal.throwIfAborted();
-        return new Response(bytes, {
-          status: response.status,
-          headers: jsonHeaders,
-        });
+        if (!download)
+          return new Response(bytes, {
+            status: response.status,
+            headers: jsonHeaders,
+          });
+        // The canonical no-store/nosniff pair plus exactly the download headers Meri set.
+        const headers = new Headers(jsonHeaders);
+        headers.delete("Content-Type");
+        for (const name of downloadHeaders) {
+          const value = response.headers.get(name);
+          if (value !== null) headers.set(name, value);
+        }
+        return new Response(bytes, { status: response.status, headers });
       } finally {
         if (!response.bodyUsed)
           void response.body?.cancel().catch(() => undefined);
       }
     });
   } catch {
-    // An interrupted command may have reached Meri; no dispatch outcome is invented.
-    return lost();
+    // An interrupted request may have reached Meri; no dispatch outcome is invented.
+    return lost(operation);
   }
 }
 
@@ -166,7 +210,9 @@ export async function proxyUploadOriginal(
 ) {
   if (!uploadIdShape.test(uploadId)) return refused(404, "NOT_FOUND");
   if (request.method !== "PUT") return refused(405, "METHOD_NOT_ALLOWED");
-  if (!sameOriginAndHeaders(request, `/api/uploads/original/${uploadId}`, config))
+  if (
+    !sameOriginAndHeaders(request, `/api/uploads/original/${uploadId}`, config)
+  )
     return refused(404, "NOT_FOUND");
   if (request.headers.get("content-type") !== "application/octet-stream")
     return refused(400, "UPLOAD_FORMAT");
@@ -202,7 +248,10 @@ export async function proxyUploadOriginal(
       signal.throwIfAborted();
       if (bytes.byteLength !== Number(declared))
         return refused(413, "UPLOAD_SIZE");
-      if (hex(new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))) !== digest)
+      if (
+        hex(new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))) !==
+        digest
+      )
         return refused(400, "UPLOAD_ORIGINAL_MISMATCH");
       let response: Response;
       try {
@@ -224,7 +273,7 @@ export async function proxyUploadOriginal(
         );
       } catch {
         signal.throwIfAborted();
-        return lost();
+        return lost("complete");
       }
       try {
         signal.throwIfAborted();
@@ -245,6 +294,6 @@ export async function proxyUploadOriginal(
       }
     });
   } catch {
-    return lost();
+    return lost("complete");
   }
 }
