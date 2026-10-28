@@ -23,6 +23,15 @@ const baseUrl = "https://meri.example";
 const uploadId = "11111111-1111-4111-8111-111111111111";
 const pdf = new Uint8Array([37, 80, 68, 70, 45, 49, 46, 55, 10, 1, 2, 3]);
 const pdfSha256 = createHash("sha256").update(pdf).digest("hex");
+/** The canonical original-download headers a read reply carries. */
+const downloadHeaders = {
+  "content-type": "application/pdf",
+  "content-length": String(pdf.byteLength),
+  "content-disposition": `attachment; filename="${uploadId}.pdf"`,
+  "x-meri-upload-id": uploadId,
+  "x-meri-upload-sha256": pdfSha256,
+  "x-meri-upload-version": "3",
+};
 const config = {
   enabled: true,
   baseUrl,
@@ -95,6 +104,20 @@ const bodyOf = async (response: Response) =>
     error: { code: string; outcome: string };
   };
 
+/** A binary read reply; captures only the forwarded URL because the read path relays bytes. */
+const readUpstream = (
+  status: number,
+  bytes: Uint8Array<ArrayBuffer>,
+  headers: Record<string, string> = downloadHeaders,
+) => {
+  const calls: string[] = [];
+  const fetcher: typeof fetch = async (input) => {
+    calls.push(String(input));
+    return new Response(bytes, { status, headers });
+  };
+  return { fetcher, calls };
+};
+
 describe("the fixed upload proxy", () => {
   it("forwards one admitted command to the configured application origin", async () => {
     const { fetcher, forwarded } = upstream(200, {
@@ -126,6 +149,82 @@ describe("the fixed upload proxy", () => {
     );
   });
 
+  it("forwards one inspect for the saved source and relays only the JSON shape", async () => {
+    const { fetcher, forwarded } = upstream(200, {
+      uploadId,
+      storageStatus: "stored",
+      originalBytesAvailable: true,
+    });
+    const response = await proxyUploadRequest(
+      jsonRequest("inspect", { uploadId }),
+      "inspect",
+      config,
+      nativeToken,
+      fetcher,
+    );
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({
+      uploadId,
+      storageStatus: "stored",
+      originalBytesAvailable: true,
+    });
+    expect(response.headers.get("content-type")).toBe("application/json");
+    expect(response.headers.get("cache-control")).toBe("no-store");
+    expect(forwarded).toHaveLength(1);
+    expect(forwarded[0]!.url).toBe(`${baseUrl}/api/uploads/inspect`);
+    expect(forwarded[0]!.method).toBe("POST");
+  });
+
+  it("relays the original bytes with exactly the six canonical download headers", async () => {
+    const { fetcher, calls } = readUpstream(200, pdf, {
+      ...downloadHeaders,
+      "x-upstream-private": "never-relayed",
+    });
+    const response = await proxyUploadRequest(
+      jsonRequest("read", { uploadId }),
+      "read",
+      config,
+      nativeToken,
+      fetcher,
+    );
+    expect(calls).toEqual([`${baseUrl}/api/uploads/read`]);
+    expect(response.status).toBe(200);
+    expect(new Uint8Array(await response.arrayBuffer())).toEqual(pdf);
+    expect(response.headers.get("content-type")).toBe("application/pdf");
+    expect(response.headers.get("content-length")).toBe(String(pdf.byteLength));
+    expect(response.headers.get("content-disposition")).toBe(
+      downloadHeaders["content-disposition"],
+    );
+    expect(response.headers.get("x-meri-upload-id")).toBe(uploadId);
+    expect(response.headers.get("x-meri-upload-sha256")).toBe(pdfSha256);
+    expect(response.headers.get("x-meri-upload-version")).toBe("3");
+    // The no-store/nosniff pair stays; nothing the upstream added survives the relay.
+    expect(response.headers.get("cache-control")).toBe("no-store");
+    expect(response.headers.get("x-content-type-options")).toBe("nosniff");
+    expect(response.headers.get("x-upstream-private")).toBeNull();
+  });
+
+  it("reports a lost read reply as READ_UNAVAILABLE without inventing a dispatch outcome", async () => {
+    let attempts = 0;
+    const fetcher: typeof fetch = async () => {
+      attempts += 1;
+      throw new Error("socket closed");
+    };
+    const response = await proxyUploadRequest(
+      jsonRequest("read", { uploadId }),
+      "read",
+      config,
+      nativeToken,
+      fetcher,
+    );
+    expect(attempts).toBe(1);
+    expect(response.status).toBe(503);
+    expect(await bodyOf(response)).toEqual({
+      error: { code: "UPLOAD_UNAVAILABLE", outcome: "READ_UNAVAILABLE" },
+    });
+    expect(response.headers.get("cache-control")).toBe("no-store");
+  });
+
   it("refuses anything that is not this fixed, enabled, authenticated leaf", async () => {
     const { fetcher, forwarded } = upstream();
     const refused = async (
@@ -137,10 +236,11 @@ describe("the fixed upload proxy", () => {
       expect(response.status).toBe(status);
       expect(await bodyOf(response)).toEqual({ error: { code, outcome } });
     };
+    // An operation outside the five reachable leaves stays unreachable; "purge" is not canonical.
     await refused(
       await proxyUploadRequest(
-        jsonRequest("inspect", { uploadId }),
-        "inspect",
+        jsonRequest("purge", { uploadId }),
+        "purge",
         config,
         nativeToken,
         fetcher,
