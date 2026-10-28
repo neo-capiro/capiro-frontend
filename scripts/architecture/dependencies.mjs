@@ -107,6 +107,7 @@ export const publicExports = new Set([
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
   '@capiro/meri-contracts/action-application', '@capiro/meri-contracts/conversation-application',
   '@capiro/meri-contracts/conversation-history',
+  '@capiro/meri-contracts/uploads-application',
   '@capiro/meri-contracts/conversation-lifecycle',
   '@capiro/meri-contracts/conversation-input',
   '@capiro/meri-contracts/conversation-initial-input',
@@ -178,6 +179,11 @@ export const serverAdapters = new Map([
     previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
     `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-usage/operations.ts`,
   ])],
+  ...['app/api/uploads/[operation]/route.ts', 'app/api/uploads/original/[uploadId]/route.ts'].map(route => [
+    `${appSource}${route}`, new Set([
+      previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-uploads/config.ts`, `${appSource}shared/meri-uploads/proxy.ts`,
+    ]),
+  ]),
   [`${appSource}app/api/documents/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-documents/config.ts`, `${appSource}shared/meri-documents/proxy.ts`,

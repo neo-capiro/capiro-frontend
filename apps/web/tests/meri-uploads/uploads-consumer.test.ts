@@ -9,9 +9,9 @@ import {
   type AdmittedUploadReceipt,
   type AdmittedUploadRequest,
   type UploadReceipt,
-} from "./facade";
-import { createUploadController } from "./upload-controller";
-import { createUploadWire } from "./upload-wire";
+} from "../../src/shared/meri-uploads/facade";
+import { createUploadController } from "../../src/shared/meri-uploads/upload-controller";
+import { createUploadWire } from "../../src/shared/meri-uploads/upload-wire";
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
@@ -44,7 +44,11 @@ const pendingExtraction: UploadReceipt["extraction"] = {
 };
 
 /** Receipts a real service may answer with, each built to the canonical state invariants. */
-const awaiting = (uploadId: string, requestId: string, original: Original): UploadReceipt => ({
+const awaiting = (
+  uploadId: string,
+  requestId: string,
+  original: Original,
+): UploadReceipt => ({
   uploadId,
   requestId,
   original: { ...original, versionId: null },
@@ -54,7 +58,11 @@ const awaiting = (uploadId: string, requestId: string, original: Original): Uplo
   extraction: pendingExtraction,
   originalBytesAvailable: false,
 });
-const storedPending = (uploadId: string, requestId: string, original: Original): UploadReceipt => ({
+const storedPending = (
+  uploadId: string,
+  requestId: string,
+  original: Original,
+): UploadReceipt => ({
   uploadId,
   requestId,
   original: { ...original, versionId: "version-1" },
@@ -64,7 +72,11 @@ const storedPending = (uploadId: string, requestId: string, original: Original):
   extraction: pendingExtraction,
   originalBytesAvailable: false,
 });
-const storedClean = (uploadId: string, requestId: string, original: Original): UploadReceipt => ({
+const storedClean = (
+  uploadId: string,
+  requestId: string,
+  original: Original,
+): UploadReceipt => ({
   uploadId,
   requestId,
   original: { ...original, versionId: "version-1" },
@@ -74,7 +86,11 @@ const storedClean = (uploadId: string, requestId: string, original: Original): U
   extraction: { status: "available", limitations: [] },
   originalBytesAvailable: true,
 });
-const scanUnavailable = (uploadId: string, requestId: string, original: Original): UploadReceipt => ({
+const scanUnavailable = (
+  uploadId: string,
+  requestId: string,
+  original: Original,
+): UploadReceipt => ({
   uploadId,
   requestId,
   original: { ...original, versionId: "version-1" },
@@ -84,7 +100,11 @@ const scanUnavailable = (uploadId: string, requestId: string, original: Original
   extraction: { status: "unavailable", limitations: ["SCAN_UNAVAILABLE"] },
   originalBytesAvailable: false,
 });
-const removed = (uploadId: string, requestId: string, original: Original): UploadReceipt => ({
+const removed = (
+  uploadId: string,
+  requestId: string,
+  original: Original,
+): UploadReceipt => ({
   uploadId,
   requestId,
   original: { ...original, versionId: "version-1" },
@@ -159,10 +179,15 @@ function createUploadServer(
         json(attempt.receipt),
         complete,
       );
-      if ("error" in expected) throw new Error("server receipt is not canonical");
+      if ("error" in expected)
+        throw new Error("server receipt is not canonical");
       // The service verifies the bounded original against its own expectation before storing it.
       await receiveUploadOriginal(body, complete, expected);
-      const committed = storedPending(uploadId, attempt.requestId, attempt.original);
+      const committed = storedPending(
+        uploadId,
+        attempt.requestId,
+        attempt.original,
+      );
       issued = { ...attempt, receipt: committed };
       attempts.set(uploadId, issued);
       return respond(committed);
@@ -204,7 +229,11 @@ const controllerFor = (
 ) => {
   const lifetime = new AbortController();
   const wire = createUploadWire(credential, lifetime.signal, server.fetcher);
-  return { lifetime, wire, controller: createUploadController({ wire, isCurrent }) };
+  return {
+    lifetime,
+    wire,
+    controller: createUploadController({ wire, isCurrent }),
+  };
 };
 
 const refusalOf = async (run: () => unknown) => {
@@ -233,7 +262,9 @@ describe("uploads consumer", () => {
     expect(item?.uploadId).toBe(attempt.uploadId);
 
     // The declaration the service admitted is exactly the closed field set.
-    const declared = JSON.parse(decoder.decode(server.calls[0]?.body as Uint8Array));
+    const declared = JSON.parse(
+      decoder.decode(server.calls[0]?.body as Uint8Array),
+    );
     expect(Object.keys(declared).sort()).toEqual([
       "bytes",
       "filename",
@@ -274,10 +305,14 @@ describe("uploads consumer", () => {
       scanStatus: "clean",
       originalBytesAvailable: true,
     });
-    const reads = server.calls.filter((call) => call.url === "/api/uploads/status");
+    const reads = server.calls.filter(
+      (call) => call.url === "/api/uploads/status",
+    );
     expect(reads).toHaveLength(1);
     expect(reads[0]?.body).toEqual(json({ uploadId: attempt.uploadId }));
-    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(1);
+    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(
+      1,
+    );
   });
 
   it("repeats one exact request for the same attempt and never a second original write", async () => {
@@ -287,10 +322,14 @@ describe("uploads consumer", () => {
     const requestId = controller.items()[0]?.requestId as string;
     await controller.check(requestId);
     await controller.check(requestId);
-    const reads = server.calls.filter((call) => call.url === "/api/uploads/status");
+    const reads = server.calls.filter(
+      (call) => call.url === "/api/uploads/status",
+    );
     expect(reads).toHaveLength(2);
     expect(reads[0]?.body).toEqual(reads[1]?.body);
-    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(1);
+    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(
+      1,
+    );
   });
 
   it("keeps an uncertain write out of the argument and only reads status afterwards", async () => {
@@ -310,7 +349,9 @@ describe("uploads consumer", () => {
       uncertain: true,
     });
     expect(controller.sendArgument()).toEqual([]);
-    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(1);
+    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(
+      1,
+    );
 
     // Only a status read may re-resolve this attempt; it never re-writes the original.
     // The write had in fact landed before the reply was lost, which only the service can say.
@@ -320,7 +361,9 @@ describe("uploads consumer", () => {
     await controller.check(item?.requestId as string);
     expect(controller.items()[0]?.state).toBe("stored");
     expect(controller.sendArgument()).toHaveLength(1);
-    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(1);
+    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(
+      1,
+    );
 
     // Before the service confirms the write, a status read leaves the attempt uncertain.
     const uncertain = createUploadServer({
@@ -335,7 +378,9 @@ describe("uploads consumer", () => {
     await second.controller.check(secondItem?.requestId as string);
     expect(second.controller.items()[0]?.state).toBe("unknown");
     expect(second.controller.sendArgument()).toEqual([]);
-    expect(uncertain.calls.filter((call) => call.method === "PUT")).toHaveLength(1);
+    expect(
+      uncertain.calls.filter((call) => call.method === "PUT"),
+    ).toHaveLength(1);
   });
 
   it("discards a late result once the conversation, account or client changes", async () => {
@@ -349,7 +394,9 @@ describe("uploads consumer", () => {
     expect(controller.items()[0]?.state).toBe("declaring");
     expect(controller.items()[0]?.uploadId).toBeNull();
     expect(controller.sendArgument()).toEqual([]);
-    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(0);
+    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(
+      0,
+    );
   });
 
   it("cancels before a declaration and removes an admitted attachment", async () => {
@@ -394,14 +441,18 @@ describe("uploads consumer", () => {
   it("surfaces a service refusal instead of an attachment", async () => {
     const server = createUploadServer({
       fault: (route) =>
-        route === "initiate" ? errors("UPLOAD_HASH", "NOT_DISPATCHED") : undefined,
+        route === "initiate"
+          ? errors("UPLOAD_HASH", "NOT_DISPATCHED")
+          : undefined,
     });
     const { controller } = controllerFor(server);
     await controller.add([file()]);
     expect(controller.items()[0]?.state).toBe("refused");
     expect(controller.items()[0]?.refusal?.code).toBe("UPLOAD_HASH");
     expect(controller.sendArgument()).toEqual([]);
-    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(0);
+    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(
+      0,
+    );
   });
 
   it("refuses to write when the service expects other bytes than this page declared", async () => {
@@ -425,7 +476,9 @@ describe("uploads consumer", () => {
     await controller.add([file()]);
     expect(controller.items()[0]?.state).toBe("refused");
     expect(controller.items()[0]?.refusal?.code).toBe("UPLOAD_CORRELATION");
-    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(0);
+    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(
+      0,
+    );
   });
 });
 
@@ -506,9 +559,9 @@ describe("the public receiver refuses what this consumer must never invent", () 
     expect(
       await refuse({ ...declaration, url: "https://signed.example/x" }),
     ).toBe("INVALID_UPLOAD_REQUEST");
-    expect(
-      receiveUploadRequest("initiate", json(declaration)).requestId,
-    ).toBe(requestId);
+    expect(receiveUploadRequest("initiate", json(declaration)).requestId).toBe(
+      requestId,
+    );
   });
 
   it("refuses an uncorrelated, unauthorised or impossible receipt", async () => {
@@ -516,7 +569,9 @@ describe("the public receiver refuses what this consumer must never invent", () 
     const admit = (value: unknown) => () =>
       receiveUploadResponse("complete", 200, json(value), complete);
     expect(
-      await refusalOf(admit(storedPending(crypto.randomUUID(), requestId, original))),
+      await refusalOf(
+        admit(storedPending(crypto.randomUUID(), requestId, original)),
+      ),
     ).toBe("UPLOAD_CORRELATION");
     expect(
       await refusalOf(
@@ -555,7 +610,9 @@ describe("the public receiver refuses what this consumer must never invent", () 
         receiveUploadResponse(
           "complete",
           503,
-          json({ error: { code: "UPLOAD_PUT_UNKNOWN", outcome: "NOT_DISPATCHED" } }),
+          json({
+            error: { code: "UPLOAD_PUT_UNKNOWN", outcome: "NOT_DISPATCHED" },
+          }),
           complete,
         ),
       ),

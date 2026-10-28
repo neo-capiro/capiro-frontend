@@ -20,7 +20,7 @@ const artifact = (family: string) => {
     ? join(process.env.MERI_CONTRACTS_DIST, file)
     : fileURLToPath(
         new URL(
-          `../../../../../../wave5-upload-input-20261028/packages/contracts/dist/${file}`,
+          `../../../../../wave5-upload-input-20261028/packages/contracts/dist/${file}`,
           import.meta.url,
         ),
       );

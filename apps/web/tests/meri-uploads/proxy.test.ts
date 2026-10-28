@@ -1,8 +1,11 @@
 import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
-import { UPLOAD_LIMITS } from "./facade";
-import { readUploadConfig } from "./config";
-import { proxyUploadOriginal, proxyUploadRequest } from "./proxy";
+import { UPLOAD_LIMITS } from "../../src/shared/meri-uploads/facade";
+import { readUploadConfig } from "../../src/shared/meri-uploads/config";
+import {
+  proxyUploadOriginal,
+  proxyUploadRequest,
+} from "../../src/shared/meri-uploads/proxy";
 
 /**
  * The fixed proxy leaves this app added for attachments.
@@ -87,13 +90,17 @@ const originalRequest = (
     },
   });
 
-const bodyOf = async (response: Response) => (await response.json()) as {
-  error: { code: string; outcome: string };
-};
+const bodyOf = async (response: Response) =>
+  (await response.json()) as {
+    error: { code: string; outcome: string };
+  };
 
 describe("the fixed upload proxy", () => {
   it("forwards one admitted command to the configured application origin", async () => {
-    const { fetcher, forwarded } = upstream(200, { uploadId, storageStatus: "stored" });
+    const { fetcher, forwarded } = upstream(200, {
+      uploadId,
+      storageStatus: "stored",
+    });
     const response = await proxyUploadRequest(
       jsonRequest("status", { uploadId }),
       "status",
@@ -102,7 +109,10 @@ describe("the fixed upload proxy", () => {
       fetcher,
     );
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ uploadId, storageStatus: "stored" });
+    expect(await response.json()).toEqual({
+      uploadId,
+      storageStatus: "stored",
+    });
     // Local response headers are always the no-store JSON ones, never the upstream's.
     expect(response.headers.get("cache-control")).toBe("no-store");
     expect(response.headers.get("x-content-type-options")).toBe("nosniff");
@@ -176,7 +186,11 @@ describe("the fixed upload proxy", () => {
     );
     await refused(
       await proxyUploadRequest(
-        jsonRequest("status", { uploadId }, { origin: "https://attacker.example" }),
+        jsonRequest(
+          "status",
+          { uploadId },
+          { origin: "https://attacker.example" },
+        ),
         "status",
         config,
         nativeToken,
@@ -189,7 +203,11 @@ describe("the fixed upload proxy", () => {
     // A browser bearer would shadow the native cookie; this leaf never accepts one.
     await refused(
       await proxyUploadRequest(
-        jsonRequest("status", { uploadId }, { authorization: "Bearer browser" }),
+        jsonRequest(
+          "status",
+          { uploadId },
+          { authorization: "Bearer browser" },
+        ),
         "status",
         config,
         nativeToken,
@@ -253,11 +271,7 @@ describe("the fixed upload proxy", () => {
 
   it("bounds the original write and refuses before anything is forwarded", async () => {
     const { fetcher, forwarded } = upstream();
-    const held = async (
-      response: Response,
-      status: number,
-      code: string,
-    ) => {
+    const held = async (response: Response, status: number, code: string) => {
       expect(response.status).toBe(status);
       const body = await bodyOf(response);
       expect(body.error.code).toBe(code);
@@ -389,8 +403,7 @@ describe("the fixed upload proxy", () => {
     );
     await held(
       await proxyUploadOriginal(
-        originalRequest({},
-          new Uint8Array(UPLOAD_LIMITS.originalBytes + 1)),
+        originalRequest({}, new Uint8Array(UPLOAD_LIMITS.originalBytes + 1)),
         uploadId,
         config,
         nativeToken,
@@ -417,7 +430,9 @@ describe("the fixed upload proxy", () => {
     );
     expect(response.status).toBe(200);
     expect(forwarded).toHaveLength(1);
-    expect(forwarded[0]!.url).toBe(`${baseUrl}/api/uploads/original/${uploadId}`);
+    expect(forwarded[0]!.url).toBe(
+      `${baseUrl}/api/uploads/original/${uploadId}`,
+    );
     expect(forwarded[0]!.method).toBe("PUT");
     expect(forwarded[0]!.authorization).toBe(`Bearer ${credential}`);
     // The forwarded bytes are the verified original, so the length Meri sees is the declared one.

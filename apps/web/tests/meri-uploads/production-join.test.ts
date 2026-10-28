@@ -9,20 +9,20 @@ import {
   receiveUploadRequest,
   receiveUploadResponse,
   type UploadReceipt,
-} from "./facade";
-import { createUploadAccess } from "./access";
+} from "../../src/shared/meri-uploads/facade";
+import { createUploadAccess } from "../../src/shared/meri-uploads/access";
 import {
   ConversationHostController,
   type MeriConversationPort,
-} from "../meri-conversations/host-controller";
-import type { ConversationIntent } from "../meri-conversations/query-journal";
+} from "../../src/shared/meri-conversations/host-controller";
+import type { ConversationIntent } from "../../src/shared/meri-conversations/query-journal";
 import {
   matchesStoredRequest,
   recoverRequest,
   sendRequest,
   type IntentRecord,
-} from "../../features/meri/conversation/run-commands";
-import { useComposerAttachments } from "../../features/meri/uploads/useComposerAttachments";
+} from "../../src/features/meri/conversation/run-commands";
+import { useComposerAttachments } from "../../src/features/meri/uploads/useComposerAttachments";
 
 /**
  * Production-join proof for the session that owns attachments.
@@ -138,13 +138,26 @@ function createJoinServer(
       return respond({
         credential,
         expiresAtMs: settledAt + 600_000,
-        context: { tenantId, actorId, conversationId, runId, selectedClientId: null },
+        context: {
+          tenantId,
+          actorId,
+          conversationId,
+          runId,
+          selectedClientId: null,
+        },
       });
     if (url === "/api/conversations/input/admit") {
       admit.push({ body, session: headers.get("x-meri-action-session") });
       return respond({ error: { code: "CONVERSATION_UNAVAILABLE" } }, 503);
     }
-    calls.push(Object.freeze({ url, method, body, session: headers.get("x-meri-action-session") }));
+    calls.push(
+      Object.freeze({
+        url,
+        method,
+        body,
+        session: headers.get("x-meri-action-session"),
+      }),
+    );
     if (url.startsWith("/api/uploads/original/") && body) {
       const uploadId = url.split("/").at(-1) as string;
       const attempt = attempts.get(uploadId);
@@ -159,7 +172,10 @@ function createJoinServer(
           ),
         );
       if (options.unknownWrite)
-        return respond({ error: { code: "UPLOAD_PUT_UNKNOWN", outcome: "UNKNOWN" } }, 503);
+        return respond(
+          { error: { code: "UPLOAD_PUT_UNKNOWN", outcome: "UNKNOWN" } },
+          503,
+        );
       const complete = receiveUploadRequest(
         "complete",
         encoder.encode(JSON.stringify({ uploadId })),
@@ -196,14 +212,16 @@ function createJoinServer(
       });
       return respond(awaiting(uploadId, declared.requestId, original));
     }
-    if ((url === "/api/uploads/status" || url === "/api/uploads/remove") && body) {
+    if (
+      (url === "/api/uploads/status" || url === "/api/uploads/remove") &&
+      body
+    ) {
       const id = receiveUploadRequest(
         url.endsWith("status") ? "status" : "remove",
         body,
       );
       const attempt = attempts.get(id.uploadId);
-      if (!attempt)
-        return failed("UPLOAD_NOT_FOUND", "READ_UNAVAILABLE");
+      if (!attempt) return failed("UPLOAD_NOT_FOUND", "READ_UNAVAILABLE");
       return respond(attempt.receipt);
     }
     return failed("INVALID_COMMAND", "NOT_DISPATCHED");
@@ -258,7 +276,9 @@ describe("the session's own attachment access", () => {
     expect(argument[0]?.sha256).toBe(pdfSha256);
     expect(server.writes()).toHaveLength(1);
 
-    await expect(sendRequest(port, record, "read the evidence", false)).rejects.toBeDefined();
+    await expect(
+      sendRequest(port, record, "read the evidence", false),
+    ).rejects.toBeDefined();
 
     // The bytes the SDK actually dispatched are canonical conversation input, uploads included.
     expect(server.admit).toHaveLength(1);
@@ -307,8 +327,12 @@ describe("the session's own attachment access", () => {
       }),
     ).toBe(false);
 
-    await expect(recoverRequest(port, record, storedRequest)).rejects.toBeDefined();
-    const recovered = receiveConversationInputRequest(server.admit.at(-1)!.body!);
+    await expect(
+      recoverRequest(port, record, storedRequest),
+    ).rejects.toBeDefined();
+    const recovered = receiveConversationInputRequest(
+      server.admit.at(-1)!.body!,
+    );
     expect(recovered.requestId).toBe(requestId);
     expect(recovered.uploads).toEqual(argument);
     expect(server.writes()).toHaveLength(1);
@@ -336,7 +360,9 @@ describe("the session's own attachment access", () => {
     await expect(
       sendRequest(second.port, record, "after renewal", false),
     ).rejects.toBeDefined();
-    const dispatched = receiveConversationInputRequest(server.admit.at(-1)!.body!);
+    const dispatched = receiveConversationInputRequest(
+      server.admit.at(-1)!.body!,
+    );
     expect(dispatched.uploads).toBeUndefined();
     expect(server.writes()).toHaveLength(1);
     second.detach();
@@ -348,7 +374,8 @@ describe("the session's own attachment access", () => {
     const pending = port.uploads.add([file()]);
     const deadline = Date.now() + 2_000;
     while (port.uploads.items()[0]?.state !== "uploading") {
-      if (Date.now() > deadline) throw new Error("the original write never started");
+      if (Date.now() > deadline)
+        throw new Error("the original write never started");
       await new Promise((resolve) => setTimeout(resolve, 5));
     }
     const item = port.uploads.items()[0]!;
@@ -407,7 +434,10 @@ describe("the session's own attachment access", () => {
     const { controller, detach, port } = await connectedPort(server);
     await port.uploads.add([file()]);
     const Harness = ({ binding }: { binding: MeriConversationPort }) => {
-      const slot = useComposerAttachments(binding, "attachments are unavailable");
+      const slot = useComposerAttachments(
+        binding,
+        "attachments are unavailable",
+      );
       return createElement(
         "div",
         null,
@@ -427,7 +457,9 @@ describe("the session's own attachment access", () => {
         ),
       );
     };
-    const markup = renderToStaticMarkup(createElement(Harness, { binding: port }));
+    const markup = renderToStaticMarkup(
+      createElement(Harness, { binding: port }),
+    );
     expect(markup).toContain("available:true");
     expect(markup).toContain("argument:1");
     expect(markup).toContain('data-state="stored"');
@@ -435,7 +467,9 @@ describe("the session's own attachment access", () => {
     // With no session on screen the composer keeps its existing unavailable control.
     expect(
       renderToStaticMarkup(
-        createElement(Harness, { binding: null as unknown as MeriConversationPort }),
+        createElement(Harness, {
+          binding: null as unknown as MeriConversationPort,
+        }),
       ),
     ).toContain("available:false");
     detach();
