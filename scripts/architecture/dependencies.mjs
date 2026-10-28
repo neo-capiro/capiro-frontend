@@ -171,6 +171,10 @@ export const serverAdapters = new Map([
     previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
     `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-runs/operations.ts`,
   ])],
+  [`${appSource}app/api/conversations/usage-overview/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
+    `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-usage/operations.ts`,
+  ])],
   [`${appSource}app/api/documents/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-documents/config.ts`, `${appSource}shared/meri-documents/proxy.ts`,

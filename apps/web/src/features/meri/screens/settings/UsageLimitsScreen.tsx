@@ -28,7 +28,11 @@ export type UsageRow = {
 export type UsageLimitsView = {
   heading: SettingsHeading;
   metrics: readonly { label: string; value: string; caption: string }[];
-  runUsage: { title: string; rows: readonly UsageRow[] };
+  runUsage: {
+    title: string;
+    firstColumnLabel?: string;
+    rows: readonly UsageRow[];
+  };
   configuration: {
     title: string;
     fields: readonly SettingsField[];
@@ -90,7 +94,15 @@ export function UsageLimitsScreen({
           <SettingsCard title={view.runUsage.title}>
             <DataTable
               caption={view.runUsage.title}
-              columns={columns}
+              columns={
+                view.runUsage.firstColumnLabel
+                  ? columns.map((column) =>
+                      column.key === "run"
+                        ? { ...column, label: view.runUsage.firstColumnLabel! }
+                        : column,
+                    )
+                  : columns
+              }
               rows={view.runUsage.rows}
             />
           </SettingsCard>

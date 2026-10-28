@@ -9,6 +9,7 @@ import { PersonalPreferencesScreen } from "./PersonalPreferencesScreen";
 import { PrivacyDeletionScreen } from "./PrivacyDeletionScreen";
 import { SkillsTemplatesScreen } from "./SkillsTemplatesScreen";
 import { UsageLimitsScreen } from "./UsageLimitsScreen";
+import { UsageOverviewHost } from "../../usage-overview/UsageOverviewHost";
 import {
   preferencePages as pages,
   unavailablePreferences as views,
@@ -28,10 +29,12 @@ const unavailable =
 export function MeriPreferencesPanel({
   userPreferencesEnabled = false,
   tenantSettingsEnabled = false,
+  usageEnabled = false,
   reportContent,
 }: {
   userPreferencesEnabled?: boolean;
   tenantSettingsEnabled?: boolean;
+  usageEnabled?: boolean;
   reportContent?: ReactNode;
 }) {
   const [page, setPage] = useState<PreferencePageId>("personal");
@@ -68,6 +71,15 @@ export function MeriPreferencesPanel({
         />
       );
     case "usage":
+      if (usageEnabled)
+        return (
+          <UsageOverviewHost
+            chrome={chrome}
+            configurationContent={
+              tenantSettingsEnabled ? <TenantModelSettings /> : undefined
+            }
+          />
+        );
       return (
         <UsageLimitsScreen
           chrome={
