@@ -127,3 +127,31 @@ Keep domain logic with existing Core owners and frontend feature modules; reuse 
 **Required contracts.** Each domain owns durable candidate identity, source evidence, current version, reviewer authorization and exact decision/reason. List/filter/paging and detail must read the same authorized population. Acceptance/rejection atomically commits the canonical relation/record and durable decision receipt; stale or concurrent decisions conflict or reconcile, and replay returns the original outcome. Refresh queue counts/detail from the authoritative result. Reviewing one candidate must never mutate a different entity selected by name or a stale row index.
 
 **Finite next slice/dependencies.** Allocate versioned list/detail/decision contracts and durable receipt ownership separately for Provision-to-PE and SAM; use existing domain persistence and shared Settings table, status and QueuePagination components. Deliver one complete evidence-review-decision-readback path per queue before advertising either as usable. Tests must cover reviewer loss, foreign candidate/source, concurrent decisions, exact expected revision, lost acknowledgment, repeat decision and correct count/result. Source inspection and diff check only; these two connected queues and their acceptance remain undelivered, with explicit unavailable UI preserved.
+
+## B14 — administrative disposition inventory
+
+The following inventory describes current source surfaces, not a fresh activation or live acceptance claim. Existing domain permissions and mutation recovery remain required; a route's existence alone grants no new product scope.
+
+| Capability | Disposition for this batch | Existing owner / boundary |
+| --- | --- | --- |
+| Team listing, invitations/resend, role/billing permission and permitted member removal | App-supported source | TeamSettings, tenant-admin and identity outbox; permission-specific controls |
+| Branding name/logo upload, contact info, client sharing and usage | App-supported source | Existing Settings feature modules and canonical tenant/client owners |
+| Billing customer views/comp, HQ tenant creation/deletion and AI credential administration | App-supported source, only current supported controls | HQ role and existing billing/tenant/credential owners; no broader authority inferred |
+| Existing analyst reconciliation, PE-to-Program, people, aliases, quarantine and HQ audit | App-supported source | Existing analyst panels and domain operations; B13 additions remain unavailable |
+| Tenant redacted audit log | Intentionally API-only in this batch; optional UI decision pending | Core `tenant-admin/audit-logs`, separate from HQ raw audit |
+| HQ impersonation | API-only with frontend unavailable | B11 trusted binding/expiry/exit work required |
+| Managed import operator completion | API/operator-managed; job UI unavailable | Onboard API setup owner; B12 job contract not supplied by billing |
+| Password reset | Externally managed hosted identity flow | Core helper returns the hosted sign-in/forgot-password destination; no new reset UI |
+| Logo deletion and invitation cancellation | No added app controls; API/operator-only where supported | Existing tenant/identity owners must establish exact supported operation before selection |
+| New policy editing or providers | Deferred; externally managed existing configuration only | No new controls or provider commitments from backend utilities |
+| Provision-to-PE and SAM review | Unavailable pending domain contracts | B13, separate queues and exact durable decisions |
+
+**Audit requirements if selected.** Reuse Core's redacted tenant projection with current tenant-admin authorization and server-side authorized filters/pagination. The existing service scopes both query/count to tenant and omits HQ before/after payloads, internal staff identity and request metadata. Never repurpose the HQ audit operation or fetch privileged rows and redact in the browser. Use existing Settings table/status/pagination components and keep routes thin.
+
+**Finite next slice/acceptance.** User selects additional UI at batch end; absent selection the dispositions above remain. For tenant audit, connect only the existing redacted read route and test foreign-tenant/ordinary-role refusal, redaction, filters, paging and access change. Source inspection and diff check complete this inventory. No additional administrative controls or live audit acceptance are delivered.
+
+## Item 16 preparation outcome and next bounded delivery
+
+All B1–B14 now have current owners, contract/dependency boundaries, acceptance requirements and finite next slices. This is requirements preparation, not completion of the full application feature set. B1 includes an original-run uncertain-readback correction; other items preserve existing behavior and name missing product work rather than fabricate success.
+
+The first implementation slice with a concrete demonstrated defect is B7: retain one exact refresh proposal in the existing Core brief owner, bind base/source/edit-treatment, accept it once with a durable version receipt, then wire the preview-only frontend. Allocate the public contract and persistence with the Core owner before edits. B6, B10, B11 and B13 need their named receiving integrations; B2/B4/B5/B8/B9/B12/B14 need the listed decisions. B3 needs connected acceptance of the existing source path. Provider calls, builds, deployments and live acceptance remain outside this source-only pass.
