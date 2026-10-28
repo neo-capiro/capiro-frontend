@@ -2,18 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { TextArea } from "../../shared/module-ui";
 import { MemoryAccessGrants } from "./memory/MemoryAccessGrants";
-import {
-  SettingField,
-  SettingsButton,
-  SettingsCard,
-  SettingsNotice,
-  SettingsTabs,
-} from "./components";
+import { MemoryFiles } from "./memory/MemoryFiles";
+import { SettingsCard, SettingsNotice, SettingsTabs } from "./components";
 import styles from "./styles";
 
-const reason = "Memory governance and file settings are not connected yet.";
 const governanceTabs = [
   "Overview",
   "Active",
@@ -49,7 +42,7 @@ export function MemorySettings({
         <Link href="/meri/updates">Open review notifications</Link>
       </SettingsCard>
       <MemoryGovernanceCard readOnly={readOnlyPreview} />
-      <MemoryFilesCard />
+      <MemoryFiles />
     </div>
   );
 }
@@ -94,41 +87,6 @@ function MemoryGovernanceCard({ readOnly }: { readOnly: boolean }) {
           verified.
         </p>
       )}
-    </SettingsCard>
-  );
-}
-
-function MemoryFilesCard() {
-  const [fileTab, setFileTab] = useState("Firm");
-  return (
-    <SettingsCard title="Memory files">
-      <SettingsTabs
-        label="Memory files"
-        items={["Firm", "My files"].map((label) => ({ id: label, label }))}
-        value={fileTab}
-        onChange={setFileTab}
-      />
-      <div className={styles.row}>
-        <h3 className={styles.grow}>
-          {fileTab === "Firm"
-            ? "Firm profile and positioning"
-            : "Personal memory files"}
-        </h3>
-        <SettingsButton disabled title={reason}>
-          Submit for review
-        </SettingsButton>
-      </div>
-      <SettingField label="Who we are">
-        <TextArea placeholder="How the firm describes itself." disabled />
-      </SettingField>
-      <SettingField label="Positioning">
-        <TextArea placeholder="What the firm wants to be known for." disabled />
-      </SettingField>
-      <h3>Active clients</h3>
-      <p className={styles.description}>
-        Updated automatically from your portfolio after the memory service is
-        connected.
-      </p>
     </SettingsCard>
   );
 }
