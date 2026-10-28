@@ -30,7 +30,9 @@ function MatterList({
           <small>
             {matter.recordCount} records · {matter.outcomeCount} outcomes
           </small>
-          {matter.summary && <p className="muted">{matter.summary}</p>}
+          {matter.summary && matter.summary !== matter.title && (
+            <p className="muted">{matter.summary}</p>
+          )}
         </button>
       ))}
       {matters.length === 0 && (

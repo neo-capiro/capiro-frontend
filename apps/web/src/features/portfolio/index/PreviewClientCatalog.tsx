@@ -5,6 +5,7 @@ import type { Destinations } from "@/shared/portfolio/config/config";
 import { Shell } from "@/shared/portfolio/shell/Shell";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useCapiroQuery } from "@/shared/capiro/queries";
+import { isClientRecord } from "@/shared/portfolio/domain/profile-type";
 import { clientSectorLabel } from "./contracts";
 import { filterClients } from "./filter";
 import styles from "./portfolio.module.css";
@@ -21,7 +22,7 @@ export function PreviewClientCatalog({
   const [search, setSearch] = useState("");
   const roster =
     clients.data && !clients.error
-      ? clients.data.filter((client) => client.profileType === "CLIENT")
+      ? clients.data.filter((client) => isClientRecord(client.profileType))
       : undefined;
   const rows = roster
     ? filterClients(roster, { search, status: "", sector: "", owner: "" }, {})

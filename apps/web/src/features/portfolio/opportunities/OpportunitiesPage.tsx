@@ -63,14 +63,17 @@ export function OpportunitiesPage({
       </header>
       <section className={styles.stats} aria-label="Opportunity summary">
         {[
-          [result?.counts.active ?? "—", "Active matched opportunities"],
-          [workflows?.pursuing ?? "—", "Pursuing · this page"],
-          [workflows?.saved ?? "—", "Saved · this page"],
-          [programResult?.data.length ?? "—", "Programs shown"],
+          [
+            result?.counts.active ?? "Unavailable",
+            "Active matched opportunities",
+          ],
+          [workflows?.pursuing ?? "Unavailable", "Pursuing · this page"],
+          [workflows?.saved ?? "Unavailable", "Saved · this page"],
+          [programResult?.data.length ?? "Unavailable", "Programs shown"],
           [
             result?.opportunities.length
               ? opportunityDate(result.opportunities[0]?.deadline ?? null)
-              : "—",
+              : "Unavailable",
             "First deadline · this page",
           ],
         ].map(([value, label]) => (

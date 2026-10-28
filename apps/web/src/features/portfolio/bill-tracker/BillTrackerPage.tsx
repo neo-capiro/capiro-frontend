@@ -105,7 +105,7 @@ function ConfiguredTracker({
         </div>
         <section className={styles.results} aria-label="Tracked bill results">
           <header className={styles.resultsHeader}>
-            <h3>Tracked bills</h3>
+            <h3>Bill results</h3>
             <div className={styles.resultsControls}>
               <input
                 aria-label="Filter loaded bills"

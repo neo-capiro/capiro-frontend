@@ -13,6 +13,11 @@ async function refresh(page: Page) {
     window.dispatchEvent(new Event("objective-current-read-refresh")),
   );
 }
+/** The objective status control is the current filter pill group, not a select. */
+const objectiveFilter = (page: Page, name: string) =>
+  page
+    .getByRole("group", { name: "Filter objectives" })
+    .getByRole("button", { name, exact: true });
 async function currentFixture(page: Page) {
   const unexpected = await installFixtures(page);
   const state = { status: 200, records: [objective], reads: 0 };
@@ -69,12 +74,14 @@ for (const status of [403, 503]) {
     await expect(
       page.getByRole("button", { name: "Test outcome", exact: true }),
     ).toBeVisible();
-    await page.getByLabel("Objective status").selectOption("draft");
+    await objectiveFilter(page, "Draft").click();
     state.status = status;
     await refresh(page);
     await expect(page.getByRole("alert")).toBeVisible();
     await expect(page.getByRole("article")).toHaveCount(0);
-    await expect(page.getByLabel("Objective status")).toHaveCount(0);
+    await expect(
+      page.getByRole("group", { name: "Filter objectives" }),
+    ).toHaveCount(0);
     await expect(page.getByText("No objectives match this status")).toHaveCount(
       0,
     );
@@ -109,16 +116,19 @@ for (const status of [403, 503]) {
     await expect(
       page.getByRole("button", { name: "New objective", exact: true }),
     ).toBeEnabled();
-    await expect(page.getByLabel("Objective status")).toHaveValue("draft");
+    await expect(objectiveFilter(page, "Draft")).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
     await expect(page.getByText("Test outcome", { exact: true })).toHaveCount(
       0,
     );
-    await page.getByLabel("Objective status").selectOption("ready");
+    await objectiveFilter(page, "Ready").click();
     await expect(page.getByRole("article")).toHaveCount(0);
     await expect(
       page.getByText("No objectives match this status"),
     ).toBeVisible();
-    await page.getByLabel("Objective status").selectOption("draft");
+    await objectiveFilter(page, "Draft").click();
     await expect(
       page.getByRole("button", {
         name: "Current recovered outcome",
