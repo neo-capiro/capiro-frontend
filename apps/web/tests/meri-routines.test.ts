@@ -10,7 +10,10 @@ import {
   local,
   barrier,
 } from "./command-recovery-platform";
-import { RoutinesWorkspace } from "../src/features/meri/routines/RoutinesWorkspace";
+import {
+  RoutinesWorkspace,
+  routineRows,
+} from "../src/features/meri/routines/RoutinesWorkspace";
 import { MeriRoutinesHost } from "../src/features/meri/routines/MeriRoutinesHost";
 import { RoutineReview } from "../src/features/meri/routines/RoutineReview";
 import { ConversationRoutine } from "../src/features/meri/routines/ConversationRoutine";
@@ -210,6 +213,32 @@ const wire = () =>
     ),
   );
 const f = wire();
+it("shows next and recent routine activity in the saved timezone across daylight-saving changes", () => {
+  const routine = wire().listed.page.rows[0];
+  routine.projection.timezone = "America/New_York";
+  routine.inspection.temporal.nextActionTimes = ["2026-07-01T14:00:00Z"];
+  routine.inspection.temporal.recentActions = [
+    { takenAt: "2026-01-01T14:00:00Z" },
+  ];
+  const row = routineRows([routine], "Client")[0]!;
+  expect(row.nextRun).toBe("1 Jul, 10:00 America/New_York");
+  expect(row.lastOutcome).toBe("Started 1 Jan, 9:00 America/New_York");
+});
+
+it("does not promise a next run for paused or cancelled routines even when an inspection contains a future time", () => {
+  const routine = wire().listed.page.rows[0];
+  routine.inspection.temporal.nextActionTimes = ["2026-11-01T14:00:00Z"];
+  routine.projection.state = "paused";
+  expect(routineRows([routine], "Client")[0]!.nextRun).toBe("Paused");
+  routine.projection.state = "cancelled";
+  expect(routineRows([routine], "Client")[0]!.nextRun).toBe("Cancelled");
+  routine.projection.state = "active";
+  routine.inspection.temporal.paused = true;
+  expect(routineRows([routine], "Client")[0]!.nextRun).toBe("Paused");
+  routine.inspection = null;
+  expect(routineRows([routine], "Client")[0]!.nextRun).toBe("Not available");
+});
+
 it("admits the exact chat schedule history fixture through the public receiver", async () => {
   const result = {
     conversationId: f.context.conversationId,
@@ -523,7 +552,9 @@ it("the installed receiver still admits the legacy list shape and the canonical 
   // asked for or an out-of-order page.
   const observed = { ...request, observation: "consent" as const };
   await expect(
-    receiveCanonical("list", 200, JSON.stringify(f.listed), { request: observed }),
+    receiveCanonical("list", 200, JSON.stringify(f.listed), {
+      request: observed,
+    }),
   ).resolves.toEqual(f.listed);
   await expect(
     receiveCanonical("list", 200, JSON.stringify(f.listed), { request }),
@@ -531,7 +562,9 @@ it("the installed receiver still admits the legacy list shape and the canonical 
   const invalid = wire().listed;
   invalid.page.rows.push(invalid.page.rows[0]);
   await expect(
-    receiveCanonical("list", 200, JSON.stringify(invalid), { request: observed }),
+    receiveCanonical("list", 200, JSON.stringify(invalid), {
+      request: observed,
+    }),
   ).rejects.toThrow();
 });
 
@@ -1486,9 +1519,7 @@ it("the renewal review is read-only until the owner explicitly confirms it, and 
   expect(String(approval.requestId)).toMatch(/^[0-9a-f-]{36}$/u);
   // The outcome shown is Core's own window re-read canonically, and no routine operation was dispatched.
   expect(renewed).toContain("Renewal recorded and current for generation 1");
-  expect(renewed).toContain(
-    "does not resume, start or re-enable the routine",
-  );
+  expect(renewed).toContain("does not resume, start or re-enable the routine");
   expect(calls.map((call) => call.route)).toEqual([
     "list",
     "consentReview",
@@ -1588,15 +1619,11 @@ it("an uncertain answer stays unproven while a definite refusal is reported and 
   await readWorkspace(port);
   await settle(port, "Review renewal");
   const uncertain = await settle(port, "Renew consent now");
-  expect(uncertain).toContain(
-    "The outcome of this approval is not confirmed",
-  );
+  expect(uncertain).toContain("The outcome of this approval is not confirmed");
   expect(port.getSnapshot().consent?.unknown).toBe(true);
   answer = "refused";
   const refused = await settle(port, "Retry this exact approval");
-  expect(refused).toContain(
-    "The routine renewal was refused (ROUTINES_STALE)",
-  );
+  expect(refused).toContain("The routine renewal was refused (ROUTINES_STALE)");
   expect(port.getSnapshot().consent?.unknown).toBe(false);
   expect(port.getSnapshot().consent?.window).toBeNull();
   // A fresh review after a refusal is a NEW decision; the refused one is never reused.
@@ -1645,7 +1672,9 @@ it("the existing same-origin adapter admits both renewal routes and addresses th
     baseUrl: "https://meri.synthetic.invalid",
     requestOrigin: "https://frontend.synthetic.invalid",
   };
-  const upstream = vi.fn<typeof fetch>(async () => Response.json(consent().review));
+  const upstream = vi.fn<typeof fetch>(async () =>
+    Response.json(consent().review),
+  );
   const req = (body: unknown, path: string) =>
     new Request(
       `https://frontend.synthetic.invalid/api/action-followthrough/${path}`,
@@ -1692,7 +1721,10 @@ it("the existing same-origin adapter admits both renewal routes and addresses th
   expect(
     (
       await proxyActionRequest(
-        req({ ...consent().decision, decidedAtMs: Date.now() }, "routine-consentApprove"),
+        req(
+          { ...consent().decision, decidedAtMs: Date.now() },
+          "routine-consentApprove",
+        ),
         "routine-consentApprove",
         config,
         async () => "native",
