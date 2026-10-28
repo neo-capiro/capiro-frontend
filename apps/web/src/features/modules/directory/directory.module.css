@@ -248,11 +248,17 @@
   font-size: 14px;
 }
 @media (max-width: 900px) {
+  /*
+   * Keep the explicit zero minimum the desktop tracks above use. A bare `1fr` leaves the
+   * track's automatic minimum at the panel's min-content, so selecting a contact (which
+   * switches .single to .split) sized the single column to the table's min-content and made
+   * the whole document scroll horizontally.
+   */
   .split {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .personnelSplit {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .staff {
     grid-template-columns: 1fr;
