@@ -5341,13 +5341,13 @@
     "reviewedOn": "2026-10-26"
   },
   {
-    "file": "apps/web/src/shared/module-ui/module-ui.module.css",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "d5fda4dc6c37c72aafeff433368b3390a3ef63aa83310c8193beff405008fe42",
-    "reason": "Shared design-system stylesheet of presentation primitives consumed across\n    modules. This change is additive and opt-in: a new .wrappedTabs rule (flex-wrap/overflow\n    visible/min-width 0) applied only when a caller passes wrap, so existing consumers are\n    untouched. Single cohesive design-system scope, no logic.",
-    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
-    "reviewedOn": "2026-10-27"
+      "file": "apps/web/src/shared/module-ui/module-ui.module.css",
+      "kind": "file",
+      "symbol": "<module>",
+      "fingerprint": "fd3c4166c651ee35314692712235ffed406e0338e313a2295fdaa433cc21b5ca",
+      "reason": "Shared design-system stylesheet of presentation primitives consumed across modules. This entry's change is one containment declaration: .panel now sets min-width 0, so a panel used as a grid item in an auto-sized track can no longer hold that track wider than a phone viewport. Measured on the deployed Research Portfolios tabs at 390px: document scrollWidth Sharing 819->375 and Outputs 413->375, with every other consumer unchanged. Single cohesive design-system scope, no logic or state.",
+      "reviewedBy": "Hermes Agent item-6 narrow-screen containment review 20261028",
+      "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useLiveRun.ts",

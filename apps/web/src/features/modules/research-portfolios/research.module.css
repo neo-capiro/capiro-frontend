@@ -99,6 +99,11 @@
   display: grid;
   gap: 20px;
 }
+.stack fieldset {
+  /* Native fieldset defaults to min-inline-size: min-content, so it refuses to
+     shrink and pushes the page past a phone viewport. */
+  min-inline-size: 0;
+}
 .row {
   display: flex;
   align-items: center;
