@@ -18,6 +18,7 @@ import { ModelSelectionPicker } from "../model-selection/ModelSelectionPicker";
 import modelStyles from "../model-selection/model-selection.module.css";
 import { SkillSelectionPicker } from "./SkillSelectionPicker";
 import { WorkSelectionPicker } from "../work/WorkSelectionPicker";
+import { ProcedureSelectionPicker } from "./ProcedureSelectionPicker";
 import { ClientHandoffDraft } from "./ClientHandoffDraft";
 import { FeedbackContext } from "./feedback/FeedbackContext";
 import { useComposerAttachments } from "../uploads/useComposerAttachments";
@@ -119,6 +120,22 @@ export function SessionComposer({
             disabled={modelDisabled}
             onChange={session.setSkillSelection}
           />
+          {/*
+            The native procedure control lists what Core currently offers this account and tenant, and
+            retires a choice the catalog no longer lists. Listing is not execution: the canonical
+            receiver still decides what a draft may carry, and Core re-resolves the exact procedure,
+            version, digest and client access when the message is actually sent.
+          */}
+          {session.ready && (
+            <ProcedureSelectionPicker
+              key={`procedure:${JSON.stringify(session.ready.port.context)}`}
+              tenantId={session.ready.port.context.tenantId}
+              lifetime={JSON.stringify(session.ready.port.context)}
+              selection={session.skillSelection}
+              disabled={modelDisabled}
+              onChange={session.setSkillSelection}
+            />
+          )}
           {!session.accessLost && session.modelCatalog && (
             <div className={modelStyles.slot}>
               {modelDocument ? (

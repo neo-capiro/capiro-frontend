@@ -1,6 +1,7 @@
 import type { OperationRegistry } from "./contracts";
 import { completedReportOperations } from "./operations/meri-completed-reports";
 import { meriFirmSkillOperations } from "./operations/meri-firm-skills";
+import { meriProcedureOperations } from "./operations/meri-procedures";
 import { calendarOperations } from "./operations/calendar";
 import { directoryOperations } from "./operations/directory";
 import { directoryObjectiveOperations } from "./operations/directory-objective-destination";
@@ -46,6 +47,7 @@ import {
 export const capiroOperations = {
   ...completedReportOperations,
   ...meriFirmSkillOperations,
+  ...meriProcedureOperations,
   ...settingsOperations,
   ...plannerOperations,
   ...engagementOperations,

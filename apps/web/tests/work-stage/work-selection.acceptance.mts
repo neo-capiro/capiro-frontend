@@ -22,6 +22,7 @@ import {
   conversationIntentJournal,
   receiveSkillSelection,
   withDocumentRevision,
+  withProcedureSelection,
   withoutDocumentRevision,
   type ConversationSkillSelection,
 } from "../../src/shared/meri-conversations/query-journal";
@@ -34,6 +35,7 @@ import {
   type TabStorage,
 } from "../../src/shared/meri-conversations/tab-journal";
 import { workSelectionLabel } from "../../src/features/meri/work/WorkSelectionPicker";
+import { CapiroDataProvider } from "../../src/shared/capiro/CapiroBoundary";
 
 const id = (n: number) =>
   `${String(n).padStart(8, "0")}-0000-4000-8000-000000000000`;
@@ -84,8 +86,12 @@ const ineligible = CONVERSATION_SKILLS.map((entry) => ({
   skillVersion: entry.version,
 })).find(
   (pin) =>
-    !(pin.skillId === "quick_skill.bill_watch" && pin.skillVersion === "2.0.0") &&
-    !(pin.skillId === "quick_skill.cited_report" && pin.skillVersion === "1.0.0"),
+    !(
+      pin.skillId === "quick_skill.bill_watch" && pin.skillVersion === "2.0.0"
+    ) &&
+    !(
+      pin.skillId === "quick_skill.cited_report" && pin.skillVersion === "1.0.0"
+    ),
 )!;
 const bytes = (value: unknown) =>
   new TextEncoder().encode(JSON.stringify(value));
@@ -111,6 +117,18 @@ const workMarkup = (html: string) => {
   const at = html.indexOf("Work for next message: ");
   return at < 0 ? "" : html.slice(at, html.indexOf("</details>", at));
 };
+/**
+ * The composer now also mounts the native procedure control, which reads through the product's own
+ * Capiro data provider, so this mounted proof supplies that provider exactly as the product page does.
+ */
+const composer = (props: ComponentProps<typeof SessionComposer>) =>
+  renderToStaticMarkup(
+    createElement(
+      CapiroDataProvider,
+      { onSessionExpired: () => undefined },
+      createElement(SessionComposer, props),
+    ),
+  );
 
 it("admits the exact ordered work definition through the canonical public receiver", () => {
   const fields = receiveSkillSelection({ work });
@@ -126,6 +144,31 @@ it("admits the exact ordered work definition through the canonical public receiv
   expect(admitted.prompt).toBe("Start the research");
 });
 
+it("admits a native procedure beside a work definition under the successor contract", () => {
+  /**
+   * SOURCE STAGE ONLY, pending the new physical cohort: the successor conversation contract this suite
+   * resolves is the artifact that carries both members. The installed immutable 0.1.26 package cannot
+   * make this check — it predates the work definition — so this combined result is recorded here and
+   * never as an installed-package claim.
+   */
+  const selector = {
+    source: "firm" as const,
+    recordId: id(12),
+    version: 2,
+    manifestDigest: "1".repeat(64),
+  };
+  const fields = receiveSkillSelection(
+    withProcedureSelection({ work }, selector),
+  );
+  expect(fields.work).toEqual(work);
+  expect(fields.procedure).toEqual(selector);
+  const admitted = receiveConversationInputRequest(
+    bytes({ requestId: id(5), prompt: "Draft the case brief", ...fields }),
+  );
+  expect(admitted.procedure).toEqual(selector);
+  expect(admitted.work).toEqual(work);
+});
+
 it("keeps the exact definition and refuses a member the canonical schema never stated", () => {
   expect(receiveSkillSelection({ work: delegated }).work).toEqual(delegated);
   for (const invalid of [
@@ -136,7 +179,10 @@ it("keeps the exact definition and refuses a member the canonical schema never s
     { ...work, allowedTools: ["*"] },
     { ...work, scheduledOrigin: "unattended" },
     { entry: work.entry, jobKind: work.jobKind },
-    { ...work, deliverables: Array.from({ length: 21 }, (_, i) => `item-${i}`) },
+    {
+      ...work,
+      deliverables: Array.from({ length: 21 }, (_, i) => `item-${i}`),
+    },
     { ...work, deliverables: ["same", "same"] },
   ])
     expect(() => receiveSkillSelection({ work: invalid })).toThrow();
@@ -171,8 +217,7 @@ it("persists the work choice on the draft and retains no stale definition after 
   });
   // ...and a retired client scope is a different draft owner that carries neither forward.
   expect(
-    createInitialDraftOwner({ ...scope, clientId: id(9) }, storage)
-      .selection(),
+    createInitialDraftOwner({ ...scope, clientId: id(9) }, storage).selection(),
   ).toBeUndefined();
 });
 
@@ -190,7 +235,10 @@ it("keeps the exact work definition through adopting, sending and removing a doc
   // The two pins the frozen submit schema names as eligible survive a revision unchanged.
   expect(
     withDocumentRevision(
-      { skill: { skillId: "quick_skill.cited_report", skillVersion: "1.0.0" }, work },
+      {
+        skill: { skillId: "quick_skill.cited_report", skillVersion: "1.0.0" },
+        work,
+      },
       revision,
     ),
   ).toEqual({
@@ -240,7 +288,10 @@ it("dispatches the exact work request and an uncertain retry re-sends the same r
     journal = conversationIntentJournal(cache, context),
     selection = { work };
   const captured: Array<{ requestId: string; work?: unknown }> = [];
-  const submitInitial = async (request: { requestId: string; work?: unknown }) => {
+  const submitInitial = async (request: {
+    requestId: string;
+    work?: unknown;
+  }) => {
     expect(journal.read().submit).toMatchObject(selection);
     captured.push(structuredClone(request));
     if (captured.length === 1) throw Error("lost response");
@@ -275,9 +326,12 @@ it("dispatches the exact work request and an uncertain retry re-sends the same r
       plainJournal = conversationIntentJournal(plain, context);
     const plainCaptured: Array<Record<string, unknown>> = [];
     await sendRequest(
-      { submitInitial: async (request: Record<string, unknown>) => {
-        plainCaptured.push(structuredClone(request));
-      }, getSnapshot: () => ({ submit: "idle" }) } as unknown as MeriConversationPort,
+      {
+        submitInitial: async (request: Record<string, unknown>) => {
+          plainCaptured.push(structuredClone(request));
+        },
+        getSnapshot: () => ({ submit: "idle" }),
+      } as unknown as MeriConversationPort,
       plainJournal,
       "Ordinary fast chat",
       false,
@@ -330,7 +384,10 @@ it("retains the exact definition across reload and refuses a changed one", async
     expect(
       restored.write({
         ...restored.read()!,
-        work: { ...work, deliverables: ["Sponsor summary", "Current bill text"] },
+        work: {
+          ...work,
+          deliverables: ["Sponsor summary", "Current bill text"],
+        },
       }),
     ).toBe(false);
     // Replacing the tab session retires the retained definition with the rest of the identity.
@@ -409,13 +466,7 @@ it("mounts Start Work / Delegate through the real composer and labels the applie
         readMapping: async () => false,
       },
     } as unknown as Session;
-    return renderToStaticMarkup(
-      createElement(SessionComposer, {
-        channel,
-        session,
-        scope: "Synthetic client",
-      }),
-    );
+    return composer({ channel, session, scope: "Synthetic client" });
   };
   const applied = prepare({ work });
   expect(applied).toContain("Work for next message: ");
@@ -429,32 +480,30 @@ it("mounts Start Work / Delegate through the real composer and labels the applie
     "Delegate · Scheduled routine",
   );
   // The same control is disabled by the composer's own existing block, never by its own state.
-  const blocked = renderToStaticMarkup(
-    createElement(SessionComposer, {
-      channel: createConversationComposer(),
-      session: {
-        selectedId: null,
-        accessLost: false,
-        connection: { state: { status: "connecting" } },
-        draft: "Start the research",
-        setDraft: () => undefined,
-        textarea: { current: null },
-        skillSelection: {},
-        setSkillSelection: () => undefined,
-        continuation: {
-          intent: undefined,
-          busy: false,
-          failed: false,
-          notReady: false,
-          storageError: undefined,
-          start: async () => false,
-          retry: async () => false,
-          readMapping: async () => false,
-        },
-      } as unknown as Session,
-      scope: "Synthetic client",
-    }),
-  );
+  const blocked = composer({
+    channel: createConversationComposer(),
+    session: {
+      selectedId: null,
+      accessLost: false,
+      connection: { state: { status: "connecting" } },
+      draft: "Start the research",
+      setDraft: () => undefined,
+      textarea: { current: null },
+      skillSelection: {},
+      setSkillSelection: () => undefined,
+      continuation: {
+        intent: undefined,
+        busy: false,
+        failed: false,
+        notReady: false,
+        storageError: undefined,
+        start: async () => false,
+        retry: async () => false,
+        readMapping: async () => false,
+      },
+    } as unknown as Session,
+    scope: "Synthetic client",
+  });
   expect(blocked).toContain("Work · None");
   expect(workMarkup(blocked)).toMatch(/\sdisabled/);
 });

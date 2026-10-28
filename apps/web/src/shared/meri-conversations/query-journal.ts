@@ -43,12 +43,15 @@ export type SelectedWork = Omit<WorkMember, "deliverables" | "dependencies"> & {
  * journal and persistence state hold this shape; only the public receiver turns a draft into the
  * bounded canonical request, and only the admitted request is dispatched.
  */
-export type ConversationDraftRequest = Omit<ConversationSubmitRequest, "work"> & {
+export type ConversationDraftRequest = Omit<
+  ConversationSubmitRequest,
+  "work"
+> & {
   work?: SelectedWork;
 };
 export type ConversationSkillSelection = Pick<
   ConversationSubmitRequest,
-  "skill" | "windowRequest" | "documentRevision"
+  "skill" | "windowRequest" | "documentRevision" | "procedure"
 > & {
   work?: SelectedWork;
 };
@@ -58,6 +61,8 @@ export function skillSelectionFields(input: ConversationSkillSelection) {
   const copy = structuredClone({
     ...(input.skill ? { skill: input.skill } : {}),
     ...(input.windowRequest ? { windowRequest: input.windowRequest } : {}),
+    // A native procedure is one exact closed selector: source, id, version and Core's digest.
+    ...(input.procedure ? { procedure: { ...input.procedure } } : {}),
     ...(input.documentRevision
       ? { documentRevision: input.documentRevision }
       : {}),
@@ -76,6 +81,7 @@ export function skillSelectionFields(input: ConversationSkillSelection) {
   if (copy.skill) Object.freeze(copy.skill);
   if (copy.documentRevision) Object.freeze(copy.documentRevision);
   if (copy.windowRequest) Object.freeze(copy.windowRequest);
+  if (copy.procedure) Object.freeze(copy.procedure);
   if (copy.work) {
     Object.freeze(copy.work.deliverables);
     Object.freeze(copy.work.dependencies);
@@ -91,6 +97,7 @@ export function receiveSkillSelection(value: unknown) {
       skill: z.unknown().optional(),
       windowRequest: z.unknown().optional(),
       documentRevision: z.unknown().optional(),
+      procedure: z.unknown().optional(),
       work: z.unknown().optional(),
     })
     .parse(value);
@@ -138,6 +145,31 @@ export function withoutDocumentRevision(
 }
 
 /**
+ * Choosing (or clearing) the native procedure is one choice. The canonical submit contract makes the
+ * static quick-skill pin and the native procedure mutually exclusive, so a procedure replaces a
+ * selected skill pin while every other admitted input stays selected. The receiver decides — nothing
+ * here restates eligibility — and a combination it still refuses is refused here, never carried into
+ * the draft.
+ */
+export function withProcedureSelection(
+  selection: ConversationSkillSelection,
+  procedure: ConversationSkillSelection["procedure"],
+): ConversationSkillSelection {
+  const beside = { ...selection, procedure };
+  if (!procedure) {
+    delete beside.procedure;
+    return receiveSkillSelection(beside);
+  }
+  try {
+    return receiveSkillSelection(beside);
+  } catch {
+    const replaced = { ...beside };
+    delete replaced.skill;
+    return receiveSkillSelection(replaced);
+  }
+}
+
+/**
  * Recover the original requested window, skill and attachment selection, never the normalized
  * execution window: the stored uploads echo is what a recovered message re-sends unchanged.
  */
@@ -149,6 +181,8 @@ export function storedSubmission(
     new TextEncoder().encode(
       JSON.stringify({
         requestId: stored.requestId,
+        // The stored procedure selector is re-sent unchanged — same source, id, version and digest.
+        ...(stored.procedure ? { procedure: { ...stored.procedure } } : {}),
         ...(stored.documentRevision
           ? { documentRevision: stored.documentRevision }
           : {}),
@@ -200,6 +234,7 @@ export const submissionIdentity = (input: ConversationDraftRequest) =>
 function snapshotSubmit(submit: NonNullable<ConversationIntent["submit"]>) {
   const copy = structuredClone(submit);
   if (copy.windowRequest) Object.freeze(copy.windowRequest);
+  if (copy.procedure) Object.freeze(copy.procedure);
   if (copy.skill) Object.freeze(copy.skill);
   if (copy.documentRevision) Object.freeze(copy.documentRevision);
   if (copy.modelSelection) Object.freeze(copy.modelSelection);
@@ -209,8 +244,7 @@ function snapshotSubmit(submit: NonNullable<ConversationIntent["submit"]>) {
     Object.freeze(copy.work);
   }
   // A retained attachment reference is an exact id and digest, frozen like every other field.
-  if (copy.uploads)
-    for (const upload of copy.uploads) Object.freeze(upload);
+  if (copy.uploads) for (const upload of copy.uploads) Object.freeze(upload);
   return Object.freeze(copy);
 }
 /** Only canonical request fields and local uncertainty survive reload; no receipt grants authority. */

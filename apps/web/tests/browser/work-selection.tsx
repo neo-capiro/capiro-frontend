@@ -23,7 +23,28 @@ import {
   syncMeriTabIdentity,
 } from "@/shared/meri-conversations/tab-journal";
 import type { LiveComposer } from "@/features/meri/MeriComposer";
+import { CapiroDataProvider } from "@/shared/capiro/CapiroBoundary";
 import "@/app/globals.css";
+
+/**
+ * The composer now mounts the native procedure control, which reads through the product's own Capiro
+ * data provider. Its boundary answer is stubbed here — this host serves the work journey, not the
+ * catalog — so the mounted composer is the same one the product mounts and nothing reaches a service.
+ */
+window.fetch = async (input: RequestInfo | URL) => {
+  const url =
+    typeof input === "string"
+      ? input
+      : input instanceof URL
+        ? input.href
+        : input.url;
+  return url.includes("/api/capiro/")
+    ? new Response("{}", {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      })
+    : new Response(null, { status: 503 });
+};
 
 const context: ConversationContext = {
   tenantId: "synthetic-tenant",
@@ -118,4 +139,8 @@ function Harness() {
     </main>
   );
 }
-createRoot(document.getElementById("root")!).render(<Harness />);
+createRoot(document.getElementById("root")!).render(
+  <CapiroDataProvider onSessionExpired={() => undefined}>
+    <Harness />
+  </CapiroDataProvider>,
+);
