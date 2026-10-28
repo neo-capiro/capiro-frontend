@@ -3,6 +3,7 @@ import {
   submissionIdentity,
   receiveSkillSelection,
   skillSelectionFields,
+  type ConversationDraftRequest,
   type ConversationSkillSelection,
   type ConversationIntent,
 } from "./query-journal";
@@ -13,7 +14,6 @@ import {
   type TabStorage,
 } from "./tab-journal";
 import type { ConversationContext } from "./session";
-import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 
 const capture = z.strictObject({
   draft: z.string(),
@@ -161,7 +161,7 @@ class DraftOwner {
   }
   begin(
     context: ConversationContext,
-    request: ConversationSubmitRequest,
+    request: ConversationDraftRequest,
     draft: string,
     capturedRevision = this.state.revision,
     continuation = false,
@@ -190,7 +190,7 @@ class DraftOwner {
     )
       this.save({ ...this.state, pending: null });
   }
-  reserve(draft: string, request: ConversationSubmitRequest) {
+  reserve(draft: string, request: ConversationDraftRequest) {
     this.save({
       ...this.state,
       reserved: {
@@ -200,7 +200,7 @@ class DraftOwner {
       },
     });
   }
-  bindNext(context: ConversationContext, request: ConversationSubmitRequest) {
+  bindNext(context: ConversationContext, request: ConversationDraftRequest) {
     const captured = this.state.reserved;
     if (captured && captured.request !== submissionIdentity(request)) return;
     if (captured)

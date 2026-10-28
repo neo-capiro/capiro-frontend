@@ -17,6 +17,7 @@ import type { useConversationSession } from "./useConversationSession";
 import { ModelSelectionPicker } from "../model-selection/ModelSelectionPicker";
 import modelStyles from "../model-selection/model-selection.module.css";
 import { SkillSelectionPicker } from "./SkillSelectionPicker";
+import { WorkSelectionPicker } from "../work/WorkSelectionPicker";
 import { ClientHandoffDraft } from "./ClientHandoffDraft";
 import { FeedbackContext } from "./feedback/FeedbackContext";
 import { useComposerAttachments } from "../uploads/useComposerAttachments";
@@ -108,6 +109,13 @@ export function SessionComposer({
             key={JSON.stringify(session.skillSelection)}
             selection={session.skillSelection}
             clientId={session.ready?.port.context.selectedClientId ?? null}
+            disabled={modelDisabled}
+            onChange={session.setSkillSelection}
+          />
+          {/* Start Work / Delegate is additive: it never withdraws another selected input. */}
+          <WorkSelectionPicker
+            key={JSON.stringify(session.skillSelection.work ?? null)}
+            selection={session.skillSelection}
             disabled={modelDisabled}
             onChange={session.setSkillSelection}
           />

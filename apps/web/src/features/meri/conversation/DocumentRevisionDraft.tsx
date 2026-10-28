@@ -5,7 +5,11 @@ import {
   type RevisionHandoff,
 } from "../../../shared/meri-documents/revision-handoff";
 import type { ConversationContext } from "../../../shared/meri-conversations/session";
-import type { ConversationSkillSelection } from "../../../shared/meri-conversations/query-journal";
+import {
+  withDocumentRevision,
+  withoutDocumentRevision,
+  type ConversationSkillSelection,
+} from "../../../shared/meri-conversations/query-journal";
 
 /** Choosing this source changes only the unsent draft; Send and UNKNOWN recovery retain their owners. */
 export function DocumentRevisionDraft({
@@ -36,7 +40,8 @@ export function DocumentRevisionDraft({
       const owner = revisionHandoff(context);
       if (JSON.stringify(owner.read()) !== JSON.stringify(pending))
         throw Error("Selection changed");
-      onChange(pending.selection);
+      // Every other admitted selected input — the Work definition included — survives this choice.
+      onChange(withDocumentRevision(selection, pending.selection));
       owner.clear(pending);
       setPending(undefined);
     } catch {
@@ -66,7 +71,7 @@ export function DocumentRevisionDraft({
           <button
             type="button"
             disabled={disabled}
-            onClick={() => onChange({})}
+            onClick={() => onChange(withoutDocumentRevision(selection))}
           >
             Remove document selection
           </button>

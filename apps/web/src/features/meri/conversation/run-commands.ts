@@ -73,6 +73,10 @@ export async function reconcileStoredRequest(
  * Attachments attach at this one funnel: a new request carries the exact ordered argument the
  * session's upload access holds, and a retry or recovery re-sends the retained request verbatim, so
  * no retry can ever declare or write an original again.
+ *
+ * The selected-input funnel carries every explicit choice, the Start Work / Delegate definition
+ * included. An installed contract that does not admit a work definition refuses the proposal here,
+ * before the journal write, so the refusal is fail-closed and dispatches nothing.
  */
 export async function sendRequest(
   port: MeriConversationPort,
