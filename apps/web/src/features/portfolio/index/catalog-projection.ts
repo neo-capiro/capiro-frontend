@@ -6,6 +6,7 @@ import {
   sortClients,
   type PortfolioIndexState,
 } from "./filter";
+import { isClientRecord, isProspectRecord } from "./profile-type";
 
 /** Compose the two accessible catalogs without counting a linked Core prospect twice. */
 export function projectPortfolioCatalog({
@@ -31,17 +32,17 @@ export function projectPortfolioCatalog({
   );
   const coreOnlyProspects = (records ?? []).filter(
     (client) =>
-      client.profileType === "PROSPECT" && !linkedCoreIds.has(client.id),
+      isProspectRecord(client.profileType) && !linkedCoreIds.has(client.id),
   );
   const allCore = (records ?? []).filter(
     (client) =>
-      client.profileType !== "PROSPECT" || !linkedCoreIds.has(client.id),
+      !isProspectRecord(client.profileType) || !linkedCoreIds.has(client.id),
   );
   const allBd = (prospectRecords ?? []).filter((prospect) => {
     const linked = prospect.linkedClientId
       ? coreById.get(prospect.linkedClientId)
       : undefined;
-    return !linked || linked.profileType === "PROSPECT";
+    return !linked || isProspectRecord(linked.profileType);
   });
   const rows = sortClients(
     filterClients(
@@ -49,7 +50,7 @@ export function projectPortfolioCatalog({
       state,
       owners,
     ).filter(
-      (client) => state.type !== "CLIENT" || client.profileType === "CLIENT",
+      (client) => state.type !== "CLIENT" || isClientRecord(client.profileType),
     ),
     state.sort,
   );

@@ -28,7 +28,7 @@ export function PortfolioAttention({
           </span>
         )}
         <span className={styles.order} title="Ordered by the source service">
-          ↑↓ Most urgent
+          Most urgent
         </span>
       </header>
       <p className={styles.description}>

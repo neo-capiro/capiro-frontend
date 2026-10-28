@@ -69,8 +69,13 @@ function EditorSession({
       "The accessible profile catalog changed. Review before saving.",
     );
   }
-  const currentIds =
-    draft?.scope === layout.scope ? draft.ids : layout.orderedIds;
+  // A failed saved-order read must not empty the editor: fall back to the
+  // accessible catalog order so the profiles stay visible (editing is still
+  // blocked by `layout.allowed`).
+  const baseIds = layout.orderedIds.length
+    ? layout.orderedIds
+    : layout.catalogIds;
+  const currentIds = draft?.scope === layout.scope ? draft.ids : baseIds;
   const ids = editing
     ? orderedClientIds(
         currentIds.map((id) => `client:${id}`),

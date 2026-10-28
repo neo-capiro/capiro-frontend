@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Client } from "./contracts";
 import type { PortfolioIndexState } from "./filter";
 import { IndexFilters } from "./IndexFilters";
+import { isClientRecord } from "./profile-type";
 import styles from "./portfolio.module.css";
 
 export function IndexNavigation({
@@ -36,7 +37,7 @@ export function IndexNavigation({
         {
           label: "Clients",
           value: "CLIENT",
-          count: records?.filter((client) => client.profileType === "CLIENT")
+          count: records?.filter((client) => isClientRecord(client.profileType))
             .length,
         },
         { label: "Prospects", value: "PROSPECT", count: prospectCount },

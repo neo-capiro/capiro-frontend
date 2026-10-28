@@ -46,6 +46,11 @@
 .pulse [class="eyebrow"] {
   color: #a8a29e;
 }
+.pulse .pulseUnavailable {
+  font-size: 11px;
+  line-height: 1.25;
+  color: #78716c;
+}
 .columns {
   display: grid;
   grid-template-columns: minmax(0, 1.8fr) minmax(260px, 1fr);
