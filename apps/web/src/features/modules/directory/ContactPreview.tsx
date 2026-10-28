@@ -2,6 +2,7 @@
 import { useState } from "react";
 import type { DirectoryContact } from "../../../shared/capiro/operations/directory-schemas";
 import { ActionButton, Panel } from "../../../shared/module-ui";
+import { MemberPhoto } from "./MemberPhoto";
 import styles from "./directory.module.css";
 export function ContactPreview({
   contact,
@@ -23,6 +24,13 @@ export function ContactPreview({
         .filter(Boolean)
         .join(" · ")}
     >
+      <div className={styles.previewHead}>
+        <MemberPhoto
+          name={contact.fullName}
+          photoUrl={contact.photoUrl}
+          variant="profile"
+        />
+      </div>
       <dl className={styles.details}>
         {[
           ["Committees", contact.committees?.join(", ")],

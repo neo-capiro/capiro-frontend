@@ -14,6 +14,7 @@ import {
   Tabs,
   TextArea,
 } from "../../../shared/module-ui";
+import { MemberPhoto } from "./MemberPhoto";
 import styles from "./directory.module.css";
 const tabs = [
   "Contact",
@@ -117,6 +118,15 @@ export function MemberProfile({
         ]
           .filter(Boolean)
           .join(" · ")}
+        titleAccessory={
+          <span className={styles.titlePhoto}>
+            <MemberPhoto
+              name={contact.fullName}
+              photoUrl={contact.photoUrl}
+              variant="profile"
+            />
+          </span>
+        }
         actions={
           <>
             <ActionButton disabled={busy} onClick={favorite}>
