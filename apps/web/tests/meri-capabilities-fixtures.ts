@@ -29,8 +29,8 @@ export const allCapabilitiesEnv = {
 
 export const previewCapabilitiesEnv = {
   ...allCapabilitiesEnv,
-  CAPIRO_REQUEST_ORIGIN: "https://portfolio-preview.app.capiro.ai",
-  CAPIRO_EXISTING_APP_URL: "https://portfolio-preview.app.capiro.ai",
+  CAPIRO_REQUEST_ORIGIN: "https://app.capiro.ai",
+  CAPIRO_EXISTING_APP_URL: "https://app.capiro.ai",
   CAPIRO_PREVIEW_READ_ONLY: "true",
   CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED: "true",
   CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE: "a".repeat(40),

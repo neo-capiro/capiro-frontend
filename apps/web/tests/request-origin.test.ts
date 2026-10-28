@@ -7,15 +7,15 @@ import {
 
 // Behind the preview ALB the standalone Next server builds request.url from its bind address
 // (HOSTNAME=0.0.0.0, PORT=5188) and X-Forwarded-Proto, never from the public host.
-const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+const publicOrigin = "https://app.capiro.ai";
 const bindUrl = "https://0.0.0.0:5188/api/action-followthrough/session";
 const request = (origin: string | null, url = bindUrl) =>
   new Request(url, {
     method: "POST",
     body: "{}",
     headers: {
-      host: "portfolio-preview.app.capiro.ai",
-      "x-forwarded-host": "portfolio-preview.app.capiro.ai",
+      host: "app.capiro.ai",
+      "x-forwarded-host": "app.capiro.ai",
       "x-forwarded-proto": "https",
       "content-type": "application/json",
       ...(origin === null ? {} : { origin }),

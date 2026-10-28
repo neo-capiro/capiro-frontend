@@ -1,5 +1,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: DNS validated TLS certificate for the isolated Portfolio preview
+Metadata:
+  AppOriginCertificate:
+    Applicability: One-time issuance record for the legacy portfolio host only. Do not apply this template for the app.capiro.ai origin.
+    AppOriginIntent: The served browser origin is app.capiro.ai; it reuses the already issued certificate recorded for app.capiro.ai/capiro.ai/*.capiro.ai after the current owner reads that certificate back.
+    Prohibited: Requesting a new ACM certificate, or treating this legacy-host certificate as app.capiro.ai coverage.
 
 Resources:
   PortfolioPreviewCertificate:

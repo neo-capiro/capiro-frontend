@@ -22,7 +22,7 @@ const env = {
   MERI_DOCUMENT_OPERATION: "create_word",
 };
 const config = readDocumentConfig(env);
-const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+const publicOrigin = "https://app.capiro.ai";
 const boundConfig = readDocumentConfig({
   ...env,
   CAPIRO_REQUEST_ORIGIN: publicOrigin,
@@ -69,8 +69,8 @@ const boundRequest = (originHeader = publicOrigin) =>
       Origin: originHeader,
       "Content-Type": "application/json",
       "X-Meri-Action-Session": credential,
-      Host: "portfolio-preview.app.capiro.ai",
-      "X-Forwarded-Host": "portfolio-preview.app.capiro.ai",
+      Host: "app.capiro.ai",
+      "X-Forwarded-Host": "app.capiro.ai",
       "X-Forwarded-Proto": "https",
     },
   });

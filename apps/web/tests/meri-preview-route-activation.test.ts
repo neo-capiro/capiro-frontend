@@ -18,7 +18,7 @@ vi.mock("@clerk/nextjs/server", () => ({
   clerkMiddleware: () => clerk.middleware,
 }));
 
-const origin = "https://portfolio-preview.app.capiro.ai";
+const origin = "https://app.capiro.ai";
 const meriOrigin = "https://meri-preview.synthetic.invalid";
 const conversationId = "11111111-1111-4111-8111-111111111111";
 const actionSession = `action_session_${"a".repeat(43)}`;
@@ -122,7 +122,7 @@ it("admits the configured public origin when Next sees only its bind address", (
       body: "{}",
       headers: {
         Origin: origin,
-        Host: "portfolio-preview.app.capiro.ai",
+        Host: "app.capiro.ai",
         "X-Forwarded-Proto": "https",
       },
     },

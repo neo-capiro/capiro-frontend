@@ -29,7 +29,7 @@ const conversationOnly = readDocumentConfig({
   ...base,
   MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
 });
-const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+const publicOrigin = "https://app.capiro.ai";
 const boundConfig = readDocumentConfig({
   ...base,
   MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
@@ -64,8 +64,8 @@ const boundLinkRequest = (originHeader = publicOrigin) =>
       Origin: originHeader,
       "Content-Type": "application/json",
       "X-Meri-Action-Session": credential,
-      Host: "portfolio-preview.app.capiro.ai",
-      "X-Forwarded-Host": "portfolio-preview.app.capiro.ai",
+      Host: "app.capiro.ai",
+      "X-Forwarded-Host": "app.capiro.ai",
       "X-Forwarded-Proto": "https",
     },
   });

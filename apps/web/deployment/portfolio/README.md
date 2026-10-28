@@ -86,10 +86,21 @@ targets and the preferences flag; keep the verified image and data unchanged.
 The source-only preview profile now follows backend
 [PR2483 at 0f1e663d](https://github.com/neo-capiro/capirov2/pull/2483).
 Core `/api`, Workspace `/workspace-api` and Intelligence `/intel-api` target
-`https://portfolio-preview.app.capiro.ai`. Their backend services remain held
-at zero capacity. Strategy and Onboard remain unconfigured. Meri defaults to an
-empty origin and false workflow flags. These targets are not evidence of live
-availability.
+`https://app.capiro.ai`. Their backend services remain held at zero capacity.
+Strategy and Onboard remain unconfigured. Meri defaults to an empty origin and
+false workflow flags. These targets are not evidence of live availability.
+
+`https://app.capiro.ai` is the single authoritative public browser origin, and it
+is fixed in source (`frontend-origin.ts`, this proposal and the service template).
+`os.capiro.ai` and the retired `portfolio-preview.app.capiro.ai` host are not
+implicit aliases, and backend, Meri, Clerk, native and OAuth callback origins keep
+their own hostnames. This origin change does not re-issue TLS and does not move
+DNS: shipment reuses the already issued certificate recorded for
+`app.capiro.ai`/`capiro.ai`/`*.capiro.ai` only after the current owner reads it
+back, while [`certificate.yml`](certificate.yml) records the legacy portfolio host
+and must not be applied for this move. Serving the app origin also has to preserve
+the mail/OAuth callback, Recall and `/webhooks/*` owners held by the production
+ALB, so host-level readiness stays with the shipping owner.
 
 `preview-config.mjs` reads one explicit local JSON file containing exactly
 `clerkIssuer`, `clerkApplicationId`, `clerkPublishableKeyArn`, `clerkSecretArn`
@@ -124,7 +135,7 @@ Image, certificate and ingress review remain with the shipping owner.
 With the default contained profile, the service template constrains the same preview parameters. Read and bootstrap
 target the separate Core bare API origin when enabled; ordinary `CORE_API_BASE_URL`
 still points to this frontend's `/api`. `CAPIRO_PREVIEW_READ_ONLY` remains true
-and `CAPIRO_REQUEST_ORIGIN` remains the Portfolio preview origin. First-chat
+and `CAPIRO_REQUEST_ORIGIN` remains the single public app origin `https://app.capiro.ai`. First-chat
 and Meri routes are held by default. A proposed nonempty Meri origin or opt-in
 is not evidence that its service, model grant or dispatch is ready. The
 [PR70 build-input and activation handoff](../../../../docs/non-meri-continuation-20261016/PR70-PREVIEW-CONFIG-AND-IMAGE-PREP-20261017.md)

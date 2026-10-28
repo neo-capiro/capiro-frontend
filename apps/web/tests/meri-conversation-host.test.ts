@@ -61,8 +61,8 @@ it("binds preview conversation admission to the fixed Portfolio browser origin",
     CLERK_SECRET_KEY: "sk_test_fixture",
     MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
     CAPIRO_PREVIEW_READ_ONLY: "true",
-    CAPIRO_REQUEST_ORIGIN: "https://portfolio-preview.app.capiro.ai",
-    CAPIRO_EXISTING_APP_URL: "https://portfolio-preview.app.capiro.ai",
+    CAPIRO_REQUEST_ORIGIN: "https://app.capiro.ai",
+    CAPIRO_EXISTING_APP_URL: "https://app.capiro.ai",
   };
   expect(readConversationConfig(preview)).toMatchObject({
     enabled: true,

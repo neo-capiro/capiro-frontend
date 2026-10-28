@@ -11,7 +11,7 @@ const receiptIds = z.array(text).min(1);
 export const m1ReleaseSchema = z.strictObject({
   schema: z.literal("meri.m1.release/1"),
   deployment: z.strictObject({
-    origin: z.literal("https://portfolio-preview.app.capiro.ai"),
+    origin: z.literal("https://app.capiro.ai"),
     profile: z.literal("restricted-preview"),
     testOnly: z.literal(true),
     operatorApprovalReceiptId: text,
