@@ -1,4 +1,11 @@
 /* Figma 3.4 09 · Settings pages (09.01–09.07): navigation, two content columns and preference cards. */
+/* The two-column card can be narrow before the shared table's phone breakpoint. */
+.connectionsTable > div {
+  overflow-x: auto;
+}
+.connectionsTable table {
+  min-width: 640px;
+}
 .connectionStatus {
   white-space: nowrap;
 }

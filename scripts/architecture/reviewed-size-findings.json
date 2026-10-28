@@ -5794,10 +5794,10 @@
     "file": "apps/web/src/features/meri/screens/settings/ConnectorAccountsScreen.tsx",
     "kind": "function",
     "symbol": "ConnectorAccountsScreen",
-    "fingerprint": "4c177e08cc7859f090e4b4e883f424160b9a736b35623f6047ace65477242736",
-    "reason": "1. ConnectorAccountsScreen.tsx:110 function ConnectorAccountsScreen — 101 nonblank, fp 4c177e08cc7859f090e4b4e883f424160b9a736b35623f6047ace65477242736 (base 64cafb17…), changed. One cohesive settings screen: the connections table, the single selected-row detail and the disconnect confirmation. Delta is a column descriptor plus a derived selection; the single piece of selection state stays owned here and the host still supplies one detail per row. ACCEPT (bounded responsibility).",
+    "fingerprint": "9f419fb760798453309701795d6b940ded96a3c19ead712b07a5a7237ff529a0",
+    "reason": "The ConnectorAccountsScreen function is the single composition root of the 09.02 Connections screen: it derives the current selection against supplied rows, resolves the selected account's grantedScope/coverage/disconnect fallbacks, and composes the primary SettingsCard (DataTable plus ConnectionActions), the supporting scope/coverage callouts and the disconnect dialog with its return-focus target. All authority and state stay with the host view, useState selection and the shared DataTable; this change adds one layout wrapper div and two Connections-scoped CSS rules with no new state, effect, handler, column weight, action or policy. Responsibility is cohesive single-screen composition and coupling is prop-only, so the body is acceptable as written and no extraction or split is required; its length is JSX markup for one screen, not multiple concerns.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
-    "reviewedOn": "2026-10-27"
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/meri/screens/settings/MeriPreferencesPanel.tsx",

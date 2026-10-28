@@ -148,13 +148,17 @@ export function ConnectorAccountsScreen({
           title={connections.title}
           description={connections.description}
         >
-          <DataTable
-            caption={`${connections.title}; select a row to act on it`}
-            columns={columns}
-            rows={connections.rows}
-            selectedId={selectedId}
-            onSelect={connections.initialSelectedId ? setSelectedId : undefined}
-          />
+          <div className={styles.connectionsTable}>
+            <DataTable
+              caption={`${connections.title}; select a row to act on it`}
+              columns={columns}
+              rows={connections.rows}
+              selectedId={selectedId}
+              onSelect={
+                connections.initialSelectedId ? setSelectedId : undefined
+              }
+            />
+          </div>
           <ConnectionActions
             chrome={chrome}
             coverageHref={view.coverageHref}
