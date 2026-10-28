@@ -84,7 +84,11 @@ export async function currentFileDestination(
 }
 
 /** Own the pending navigation and any blank preview window until the current read succeeds. */
-export function useFileNavigation(clientId: string, context: string) {
+export function useFileNavigation(
+  clientId: string,
+  context: string,
+  readDestination: typeof currentFileDestination = currentFileDestination,
+) {
   const api = useApi();
   const cache = useQueryClient();
   const scope = useFileScope(clientId, context);
@@ -95,7 +99,10 @@ export function useFileNavigation(clientId: string, context: string) {
     error?: Error;
   }>();
   const visible = state?.scope === scope.key ? state : undefined;
-  async function navigate(file: Attachment, kind: FileNavigation) {
+  async function navigate(
+    file: Pick<Attachment, "id" | "source">,
+    kind: FileNavigation,
+  ) {
     if (operation.current && !operation.current.signal.aborted) return;
     let execution: FileExecution | undefined;
     let preview: Window | null = null;
@@ -118,7 +125,7 @@ export function useFileNavigation(clientId: string, context: string) {
         preview.document.title = "Checking current file access";
       }
       execution.signal.addEventListener("abort", closePreview, { once: true });
-      const destination = await currentFileDestination(
+      const destination = await readDestination(
         api,
         cache,
         clientId,

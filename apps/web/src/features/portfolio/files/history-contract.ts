@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { signedUrl } from "./contracts";
 
 const uuid = z.uuid();
+const historyLink = z.string().refine((value) => Boolean(signedUrl(value)));
 const version = z.object({
   attachmentId: uuid,
   versionIndex: z.number().int().positive(),
@@ -23,6 +25,9 @@ const version = z.object({
   lifecycleStatus: z.string(),
   scanStatus: z.string().nullable(),
   usable: z.boolean(),
+  // Older metadata-only Core responses deliberately expose no navigation.
+  downloadUrl: historyLink.nullable().optional().default(null),
+  previewUrl: historyLink.nullable().optional().default(null),
   blockedReason: z.string().optional(),
   scanDisclosure: z.string().optional(),
   supersededByAttachmentId: uuid.nullable(),

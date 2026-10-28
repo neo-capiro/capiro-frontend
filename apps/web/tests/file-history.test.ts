@@ -12,7 +12,10 @@ import {
   currentFileReader,
   currentFilesKey,
 } from "../src/features/portfolio/files/file-reader";
-import { readFileHistory } from "../src/features/portfolio/files/history-access";
+import {
+  currentFileHistoryDestination,
+  readFileHistory,
+} from "../src/features/portfolio/files/history-access";
 import {
   fileHistorySchema,
   type FileHistoryPage,
@@ -62,6 +65,8 @@ function page(offset = 0): FileHistoryPage {
         lifecycleStatus: "ready",
         scanStatus: "clean",
         usable: true,
+        downloadUrl: null,
+        previewUrl: null,
         supersededByAttachmentId: ordinal === 25 ? null : id(ordinal + 1),
       };
     }),
@@ -129,9 +134,7 @@ describe("current native attachment history", () => {
     };
     const html = renderToStaticMarkup(createElement(DataProvider, props));
     expect(html).toContain("Load history");
-    expect(html).toContain(
-      "History does not grant access to earlier file bytes",
-    );
+    expect(html).toContain("Issued links expire after five minutes");
     expect(fetcher).not.toHaveBeenCalled();
   });
   it("reads both bounded pages through the existing GET owner and only sends opaque selectors", async () => {
@@ -270,6 +273,114 @@ describe("current native attachment history", () => {
     ).rejects.toMatchObject({ status: 409 });
     expect(fetcher).not.toHaveBeenCalled();
   });
+
+  it("keeps old metadata-only responses readable without inventing links", () => {
+    const legacy = page();
+    const rows = legacy.versions.map((row) =>
+      Object.fromEntries(
+        Object.entries(row).filter(
+          ([key]) => key !== "downloadUrl" && key !== "previewUrl",
+        ),
+      ),
+    );
+    const parsed = fileHistorySchema(first).parse({
+      ...legacy,
+      versions: rows,
+    });
+    expect(
+      parsed.versions.every(
+        (row) => row.downloadUrl === null && row.previewUrl === null,
+      ),
+    ).toBe(true);
+  });
+
+  it.each([
+    "javascript:alert(1)",
+    "http://synthetic.invalid/file",
+    "https://user:secret@synthetic.invalid/file",
+  ])("refuses an unsafe original-version link %s", (url) => {
+    const value = page();
+    value.versions[0]!.downloadUrl = url;
+    expect(fileHistorySchema(first).safeParse(value).success).toBe(false);
+  });
+
+  it("re-reads original-version links through Core for each navigation without writing or using a cached URL", async () => {
+    const { cache, execution } = fixture();
+    let read = 0;
+    const fetcher = vi.fn<typeof fetch>(async (_input, options) => {
+      expect(options?.method).toBe("GET");
+      expect(options?.body).toBeUndefined();
+      const value = page();
+      value.versions[0]!.downloadUrl = `https://synthetic.invalid/original?read=${++read}`;
+      value.versions[0]!.previewUrl = `https://synthetic.invalid/preview?read=${read}`;
+      return Response.json(value);
+    });
+    const api = createApiClient(fetcher);
+    const selected = { id: id(1), source: "upload" };
+    const request = { ...first, previous: page() };
+    const download = await currentFileHistoryDestination(
+      api,
+      cache,
+      clientId,
+      request,
+      selected,
+      "download",
+      execution,
+    );
+    expect(download.url).toBe("https://synthetic.invalid/original?read=1");
+    const preview = await currentFileHistoryDestination(
+      api,
+      cache,
+      clientId,
+      request,
+      selected,
+      "preview",
+      execution,
+    );
+    expect(preview.url).toBe("https://synthetic.invalid/preview?read=2");
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    cache.setQueryData(currentFilesKey(cache, clientId), []);
+    expect(() => preview.guard()).toThrow();
+  });
+
+  it.each([
+    "missing link",
+    "blocked",
+    "wrong source",
+    "removed version",
+    "revoked",
+    "late identity",
+  ])(
+    "refuses historical navigation after %s without falling back to a stored link",
+    async (kind) => {
+      const { cache, execution } = fixture();
+      const api = createApiClient(async () => {
+        if (kind === "revoked") return Response.json({}, { status: 403 });
+        const value = page();
+        value.versions[0]!.downloadUrl =
+          kind === "missing link" ? null : "https://synthetic.invalid/original";
+        if (kind === "blocked") value.versions[0]!.usable = false;
+        if (kind === "wrong source") value.versions[0]!.source = "other";
+        if (kind === "late identity")
+          cache.setQueryData(["identity"], {
+            user: { id: "other" },
+            tenant: { id: "synthetic-tenant" },
+          });
+        return Response.json(value);
+      });
+      await expect(
+        currentFileHistoryDestination(
+          api,
+          cache,
+          clientId,
+          { ...first, previous: page() },
+          { id: kind === "removed version" ? id(99) : id(1), source: "upload" },
+          "download",
+          execution,
+        ),
+      ).rejects.toThrow();
+    },
+  );
 
   it.each(["identity", "files", "abort"] as const)(
     "withholds a late response after %s changes",

@@ -4,7 +4,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useFileScope } from "./file-scope";
-import { readFileHistory } from "./history-access";
+import {
+  currentFileHistoryDestination,
+  readFileHistory,
+} from "./history-access";
+import { useFileNavigation } from "./navigation";
 import type { FileHistoryPage, FileHistoryRequest } from "./history-contract";
 
 export function FileVersionHistory({
@@ -21,12 +25,30 @@ export function FileVersionHistory({
   const [state, setState] = useState<{
     scope: string;
     page?: FileHistoryPage;
+    request?: FileHistoryRequest;
     pending?: boolean;
     error?: Error;
   }>();
   const visible =
     state?.scope === scope.key && scope.canRead ? state : undefined;
   const page = visible?.page;
+  const navigation = useFileNavigation(
+    clientId,
+    `history:${attachmentId}:${page?.headId ?? ""}:${page?.offset ?? ""}`,
+    (reader, queryCache, selectedClient, selected, kind, execution) => {
+      if (!visible?.request)
+        throw new Error("Refresh this history page before opening a version.");
+      return currentFileHistoryDestination(
+        reader,
+        queryCache,
+        selectedClient,
+        visible.request,
+        selected,
+        kind,
+        execution,
+      );
+    },
+  );
   async function load(next = false) {
     if (pending.current && !pending.current.aborted) return;
     let signal: AbortSignal | undefined;
@@ -50,7 +72,11 @@ export function FileVersionHistory({
         execution,
       );
       execution.guard();
-      setState({ scope: scope.key, page: result });
+      setState({
+        scope: scope.key,
+        page: result,
+        request: { ...request, previous: result },
+      });
     } catch (error) {
       if (!signal?.aborted)
         setState({
@@ -68,12 +94,14 @@ export function FileVersionHistory({
     <section className="stack" aria-label="File version history">
       <h3>Version history</h3>
       <p>
-        Saved file records, oldest first. History does not grant access to
-        earlier file bytes.
+        Saved file records, oldest first. Opening a version checks current
+        access again. Issued links expire after five minutes.
       </p>
       <button
         className="button"
-        disabled={!scope.canRead || visible?.pending}
+        disabled={
+          !scope.canRead || visible?.pending || Boolean(navigation.pendingId)
+        }
         onClick={() => void load()}
       >
         {visible?.pending
@@ -83,6 +111,10 @@ export function FileVersionHistory({
             : "Load history"}
       </button>
       <QueryState error={visible?.error} />
+      <QueryState error={navigation.error} />
+      {navigation.pendingId && (
+        <p role="status">Checking current version access…</p>
+      )}
       {page && (
         <>
           <p role="status">
@@ -114,6 +146,48 @@ export function FileVersionHistory({
                     : (item.blockedReason ?? item.lifecycleStatus)}
                 </p>
                 {item.scanDisclosure && <p>{item.scanDisclosure}</p>}
+                {item.usable && (item.downloadUrl || item.previewUrl) ? (
+                  <div className="row">
+                    {item.previewUrl && (
+                      <button
+                        type="button"
+                        role="link"
+                        className="button"
+                        disabled={
+                          !navigation.canRead || Boolean(navigation.pendingId)
+                        }
+                        onClick={() =>
+                          void navigation.navigate(
+                            { id: item.attachmentId, source: item.source },
+                            "preview",
+                          )
+                        }
+                      >
+                        Open this version
+                      </button>
+                    )}
+                    {item.downloadUrl && (
+                      <button
+                        type="button"
+                        role="link"
+                        className="button"
+                        disabled={
+                          !navigation.canRead || Boolean(navigation.pendingId)
+                        }
+                        onClick={() =>
+                          void navigation.navigate(
+                            { id: item.attachmentId, source: item.source },
+                            "download",
+                          )
+                        }
+                      >
+                        Download this version
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <p>Original bytes are unavailable for this version.</p>
+                )}
               </li>
             ))}
           </ol>
