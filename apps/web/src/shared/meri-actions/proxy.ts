@@ -6,15 +6,15 @@ import { receivedActionSession } from "./session-header";
 import type { readActionConfig } from "./config";
 import {
   routineRoute,
+  routinePaths,
   receivedRoutineManagementSession,
 } from "../meri-routines/routes";
 import {
-  routinesPaths,
   routinesMetadata,
   receiveRoutinesRequest,
   routineManagementSessionPath,
   receiveRoutineManagementSessionRequest,
-} from "@capiro/meri-contracts/routines-application";
+} from "../meri-routines/canonical-receiver";
 import {
   objectiveGenerationStartMetadata,
   requireObjectiveGenerationStartRequest,
@@ -40,6 +40,12 @@ const unavailable = (status: number) =>
     { error: { code: "FRONTEND_ACTION_UNAVAILABLE" } },
     { status, headers },
   );
+// The installed published declarations predate the two renewal routes, so the admitted name is not statically known to
+// them. The canonical receiver still validates the body; no header, credential or authority path changes here.
+const receiveRequest = receiveRoutinesRequest as unknown as (
+  route: string,
+  body: string,
+) => Promise<unknown>;
 
 /** A fixed same-origin adapter. The Meri host still owns every authority check. */
 export async function proxyActionRequest(
@@ -88,7 +94,7 @@ export async function proxyActionRequest(
       );
       if (route === "session")
         actionSessionHints.or(conversationSessionHints).parse(JSON.parse(body));
-      if (routine) await receiveRoutinesRequest(routine, body);
+      if (routine) await receiveRequest(routine, body);
       if (managementSession) receiveRoutineManagementSessionRequest(body);
       const objective =
         route === "objective-start"
@@ -96,7 +102,7 @@ export async function proxyActionRequest(
           : undefined;
       signal.throwIfAborted();
       const response = await fetcher(
-        `${config.baseUrl}${managementSession ? routineManagementSessionPath : routine ? routinesPaths[routine] : objective ? objectiveGenerationStartMetadata.path : `/api/action-followthrough/${route}`}`,
+        `${config.baseUrl}${managementSession ? routineManagementSessionPath : routine ? routinePaths[routine] : objective ? objectiveGenerationStartMetadata.path : `/api/action-followthrough/${route}`}`,
         {
           method: "POST",
           body,

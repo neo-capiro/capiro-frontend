@@ -30,6 +30,7 @@ import { bootstrapRoutineSession } from "../src/shared/meri-routines/session";
 import { createApiClient } from "../src/shared/portfolio/api/http";
 import { proxyActionRequest } from "../src/shared/meri-actions/proxy";
 import { receiveRoutinesResponse } from "@capiro/meri-contracts/routines-application";
+import { receiveRoutinesResponse as receiveCanonical } from "../src/shared/meri-routines/canonical-receiver";
 import { receiveIntentsResponse } from "@capiro/meri-contracts/intents-application";
 
 installPlatform();
@@ -149,6 +150,23 @@ vi.mock("../src/features/meri/routines/RoutineForm", () => ({
   RoutineCancellation: () =>
     createElement("p", null, "Routine cancellation editor"),
 }));
+/**
+ * MR-04 SOURCE-STAGE QUALIFICATION. This suite qualifies the canonical receiving boundary the observation opt-in, the
+ * facet and the two renewal routes belong to. The installed `@capiro/meri-contracts@0.1.26` is immutable until the new
+ * cohort and can admit none of them, so the frontend resolves that boundary in exactly one module and the suite points
+ * that module at the source-stage bundle named by MERI_SOURCE_STAGE_ROUTINES_RECEIVER. Production keeps the published
+ * package; no private path is imported and no package, lockfile or vendor directory is written.
+ */
+const sourceStage = vi.hoisted(
+  () => process.env.MERI_SOURCE_STAGE_ROUTINES_RECEIVER ?? "",
+);
+vi.mock("../src/shared/meri-routines/canonical-receiver", async () => {
+  if (!sourceStage)
+    throw new Error(
+      "MERI_SOURCE_STAGE_ROUTINES_RECEIVER must name the source-stage routines receiver bundle",
+    );
+  return await import(/* @vite-ignore */ sourceStage);
+});
 beforeEach(() => {
   view.values = [];
   view.buttons = [];
@@ -503,15 +521,27 @@ it("chat history for another actor never becomes a displayed approvable seed", a
   expect(fetch).not.toHaveBeenCalled();
 });
 
-it("public list receiver accepts canonical bounded list and rejects out-of-order rows", async () => {
+it("the installed receiver still admits the legacy list shape and the canonical boundary admits the observed one", async () => {
   const request = { limit: 20, historyLimit: 10, afterScheduleId: null };
+  // The installed published receiver admits the exact legacy shape: the facet is a requested answer, never a default.
+  const legacy = wire().listed;
+  for (const row of legacy.page.rows) delete row.consent;
   await expect(
-    receiveRoutinesResponse("list", 200, JSON.stringify(f.listed), { request }),
+    receiveRoutinesResponse("list", 200, JSON.stringify(legacy), { request }),
+  ).resolves.toEqual(legacy);
+  // The canonical boundary admits the same rows with the observation this read asks for, and refuses a facet nobody
+  // asked for or an out-of-order page.
+  const observed = { ...request, observation: "consent" as const };
+  await expect(
+    receiveCanonical("list", 200, JSON.stringify(f.listed), { request: observed }),
   ).resolves.toEqual(f.listed);
+  await expect(
+    receiveCanonical("list", 200, JSON.stringify(f.listed), { request }),
+  ).rejects.toThrow();
   const invalid = wire().listed;
   invalid.page.rows.push(invalid.page.rows[0]);
   await expect(
-    receiveRoutinesResponse("list", 200, JSON.stringify(invalid), { request }),
+    receiveCanonical("list", 200, JSON.stringify(invalid), { request: observed }),
   ).rejects.toThrow();
 });
 
@@ -1322,4 +1352,264 @@ it("existing proxy permits only fixed admitted routine paths with current cookie
     ).status,
   ).toBe(404);
   expect(upstream).toHaveBeenCalledTimes(1);
+});
+
+/**
+ * MR-04 CONSENT OBSERVATION AND RENEWAL. Every assertion below runs through the real workflow owner, the real access
+ * owner, the real mounted workspace and the real same-origin adapter; only the external Meri transport is synthetic.
+ */
+async function settle(port: RoutineWorkflow, label: string) {
+  renderWorkspace(port);
+  clickRoutine(label);
+  await vi.waitFor(() => expect(port.getSnapshot().busy).toBe(false));
+  return renderWorkspace(port);
+}
+const consent = () => f.consent;
+const scheduleId = () => f.listed.page.rows[0].projection.scheduleId;
+
+it("the routines read asks for the observation explicitly and shows it apart from the schedule state", async () => {
+  const calls: { route: string; body: unknown }[] = [];
+  const fetch = fetcher((route, body) => {
+    calls.push({ route, body });
+    return Response.json(f.listed);
+  });
+  const port = workflow(fetch);
+  await port.load();
+  const html = await readWorkspace(port);
+  expect(calls.map((call) => call.route)).toEqual(["list"]);
+  expect(calls[0]!.body).toEqual({
+    afterScheduleId: null,
+    limit: 20,
+    historyLimit: 10,
+    observation: "consent",
+  });
+  // Two separate facts: the schedule's own status and the consent Core actually holds for these exact pins.
+  expect(html).toContain("Read consent: Expired");
+  expect(html).toContain("Active");
+  expect(html).not.toContain("Read consent: Not observable");
+});
+
+it("the renewal review is read-only until the owner explicitly confirms it, and confirming records one window", async () => {
+  const calls: { route: string; body: unknown }[] = [];
+  const fetch = fetcher((route, body) => {
+    calls.push({ route, body });
+    if (route === "consentReview") return Response.json(consent().review);
+    if (route === "consentApprove") return Response.json(consent().window);
+    return Response.json(f.listed);
+  });
+  const port = workflow(fetch);
+  await port.load();
+  await readWorkspace(port);
+  const reviewed = await settle(port, "Review renewal");
+  // Read-only: the review names the exact schedule and sends no approval, no preparation and no execution.
+  expect(calls.map((call) => call.route)).toEqual(["list", "consentReview"]);
+  expect(calls[1]!.body).toEqual({ scheduleId: scheduleId() });
+  // The review shows the ORIGINAL intent: its own digest, destination, scopes and effective limits, with the current
+  // observation. The stored intent carries the instruction digest, never its text.
+  expect(reviewed).toContain(
+    consent().review.intent.taskInstructionSha256.slice(0, 16),
+  );
+  expect(reviewed).toContain(
+    `Destination: ${consent().review.intent.projection.destinationId}`,
+  );
+  expect(reviewed).toContain(
+    "Effective per run: $0.001000, 60 seconds, 0 retries.",
+  );
+  expect(reviewed).toContain("Reviewed consent: Expired");
+  expect(reviewed).toContain("Renew consent now");
+  expect(reviewed).not.toContain("Renewal recorded");
+  const renewed = await settle(port, "Renew consent now");
+  const approval = calls.find((call) => call.route === "consentApprove")!
+    .body as Record<string, unknown>;
+  expect(Object.keys(approval).sort()).toEqual([
+    "decision",
+    "requestId",
+    "reviewSha256",
+    "scheduleId",
+  ]);
+  expect(approval).toMatchObject({
+    scheduleId: scheduleId(),
+    reviewSha256: consent().review.reviewSha256,
+    decision: "approved",
+  });
+  expect(String(approval.requestId)).toMatch(/^[0-9a-f-]{36}$/u);
+  // The outcome shown is Core's own window re-read canonically, and no routine operation was dispatched.
+  expect(renewed).toContain("Renewal recorded and current for generation 1");
+  expect(renewed).toContain(
+    "does not resume, start or re-enable the routine",
+  );
+  expect(calls.map((call) => call.route)).toEqual([
+    "list",
+    "consentReview",
+    "consentApprove",
+    "consentReview",
+  ]);
+});
+
+it("a lost acknowledgement keeps ONE decision and re-presents it instead of minting another", async () => {
+  const bodies: Record<string, unknown>[] = [];
+  let lost = true;
+  const fetch = fetcher((route, body) => {
+    if (route === "list") return Response.json(f.listed);
+    if (route === "consentReview") return Response.json(consent().review);
+    bodies.push(body as Record<string, unknown>);
+    if (lost) throw new Error("lost approval acknowledgement");
+    return Response.json(consent().window);
+  });
+  const port = workflow(fetch);
+  await port.load();
+  await readWorkspace(port);
+  await settle(port, "Review renewal");
+  const unconfirmed = await settle(port, "Renew consent now");
+  // Unproven, not refused: the review stays and the same decision is retained for an exact retry.
+  expect(unconfirmed).toContain(
+    "The outcome of this approval is not confirmed",
+  );
+  expect(unconfirmed).toContain("Retry this exact approval");
+  expect(port.getSnapshot().consent?.unknown).toBe(true);
+  expect(port.getSnapshot().consent?.window).toBeNull();
+  lost = false;
+  await settle(port, "Retry this exact approval");
+  expect(bodies).toHaveLength(2);
+  expect(bodies[1]).toEqual(bodies[0]);
+  expect(port.getSnapshot().consent?.window).toEqual(consent().window);
+});
+
+it("an uncertain answer stays unproven while a definite refusal is reported and a new review mints a new decision", async () => {
+  const bodies: Record<string, unknown>[] = [];
+  let answer: "unknown" | "refused" | "renewed" = "unknown";
+  const fetch = fetcher((route, body) => {
+    if (route === "list") return Response.json(f.listed);
+    if (route === "consentReview") return Response.json(consent().review);
+    bodies.push(body as Record<string, unknown>);
+    if (answer === "unknown")
+      return Response.json(
+        { error: { code: "ROUTINES_CORE_UNAVAILABLE", outcome: "UNKNOWN" } },
+        { status: 503 },
+      );
+    if (answer === "refused")
+      return Response.json(
+        { error: { code: "ROUTINES_STALE", outcome: "NOT_DISPATCHED" } },
+        { status: 409 },
+      );
+    return Response.json(consent().window);
+  });
+  const port = workflow(fetch);
+  await port.load();
+  await readWorkspace(port);
+  await settle(port, "Review renewal");
+  const uncertain = await settle(port, "Renew consent now");
+  expect(uncertain).toContain(
+    "The outcome of this approval is not confirmed",
+  );
+  expect(port.getSnapshot().consent?.unknown).toBe(true);
+  answer = "refused";
+  const refused = await settle(port, "Retry this exact approval");
+  expect(refused).toContain(
+    "The routine renewal was refused (ROUTINES_STALE)",
+  );
+  expect(port.getSnapshot().consent?.unknown).toBe(false);
+  expect(port.getSnapshot().consent?.window).toBeNull();
+  // A fresh review after a refusal is a NEW decision; the refused one is never reused.
+  answer = "renewed";
+  await settle(port, "Review renewal");
+  await settle(port, "Renew consent now");
+  expect(bodies).toHaveLength(3);
+  expect(new Set(bodies.map((body) => body.requestId)).size).toBe(2);
+  expect(port.getSnapshot().consent?.window).toEqual(consent().window);
+});
+
+it("retiring the routine session retires the shown renewal review and a late answer cannot restore it", async () => {
+  const started = barrier();
+  const release = barrier();
+  const fetch = fetcher(async (route) => {
+    if (route === "list") return Response.json(f.listed);
+    started.resolve();
+    await release.promise;
+    return Response.json(consent().review);
+  });
+  const controller = new AbortController();
+  const life = controller.signal;
+  const port = new RoutineWorkflow({
+    context: f.context,
+    access: createRoutinesAccess("synthetic", life, fetch),
+    signal: life,
+    isCurrent: () => true,
+  });
+  await port.load();
+  await readWorkspace(port);
+  renderWorkspace(port);
+  clickRoutine("Review renewal");
+  await started.promise;
+  controller.abort();
+  release.resolve();
+  await vi.waitFor(() => expect(port.getSnapshot().busy).toBe(false));
+  expect(port.getSnapshot().consent).toBeNull();
+  expect(renderWorkspace(port)).not.toContain(
+    consent().review.intent.taskInstructionSha256.slice(0, 16),
+  );
+});
+
+it("the existing same-origin adapter admits both renewal routes and addresses the canonical upstream paths", async () => {
+  const config = {
+    enabled: true,
+    baseUrl: "https://meri.synthetic.invalid",
+    requestOrigin: "https://frontend.synthetic.invalid",
+  };
+  const upstream = vi.fn<typeof fetch>(async () => Response.json(consent().review));
+  const req = (body: unknown, path: string) =>
+    new Request(
+      `https://frontend.synthetic.invalid/api/action-followthrough/${path}`,
+      {
+        method: "POST",
+        headers: {
+          Origin: "https://frontend.synthetic.invalid",
+          "Content-Type": "application/json",
+          "x-meri-action-session": "action_session_" + "a".repeat(43),
+        },
+        body: JSON.stringify(body),
+      },
+    );
+  expect(
+    (
+      await proxyActionRequest(
+        req({ scheduleId: scheduleId() }, "routine-consentReview"),
+        "routine-consentReview",
+        config,
+        async () => "native",
+        upstream,
+      )
+    ).status,
+  ).toBe(200);
+  expect(upstream.mock.calls[0]![0]).toBe(
+    "https://meri.synthetic.invalid/api/routines/consent/review",
+  );
+  expect(
+    (
+      await proxyActionRequest(
+        req(consent().decision, "routine-consentApprove"),
+        "routine-consentApprove",
+        config,
+        async () => "native",
+        upstream,
+      )
+    ).status,
+  ).toBe(200);
+  expect(upstream.mock.calls[1]![0]).toBe(
+    "https://meri.synthetic.invalid/api/routines/consent/approve",
+  );
+  // A decision carrying anything a browser might try to mint is refused before any upstream call.
+  const before = upstream.mock.calls.length;
+  expect(
+    (
+      await proxyActionRequest(
+        req({ ...consent().decision, decidedAtMs: Date.now() }, "routine-consentApprove"),
+        "routine-consentApprove",
+        config,
+        async () => "native",
+        upstream,
+      )
+    ).status,
+  ).toBe(502);
+  expect(upstream).toHaveBeenCalledTimes(before);
 });

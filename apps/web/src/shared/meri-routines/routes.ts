@@ -1,8 +1,15 @@
-import {
-  routinesPaths,
-  type RoutinesRoute,
-} from "@capiro/meri-contracts/routines-application";
+import { routinesPaths as publishedRoutinePaths } from "@capiro/meri-contracts/routines-application";
+import { routineConsentPaths, type RoutineRouteName } from "./consent";
 import { actionSessionHeader } from "../meri-actions/session-header";
+
+/**
+ * The published routines family plus the two source-stage renewal routes. The upstream path is resolved from here so
+ * that a route the installed package does not know yet is still addressed canonically, without touching the package.
+ */
+export const routinePaths = Object.freeze({
+  ...publishedRoutinePaths,
+  ...routineConsentPaths,
+}) as Readonly<Record<RoutineRouteName, string>>;
 
 /** Purpose-specific transport shape only; Meri authenticates this credential on every operation. */
 export function receivedRoutineManagementSession(
@@ -15,7 +22,7 @@ export function receivedRoutineManagementSession(
 }
 
 /** Only these literal operations enter the existing authenticated action adapter. */
-export function routineRoute(operation: string): RoutinesRoute | null {
+export function routineRoute(operation: string): RoutineRouteName | null {
   const name = operation.startsWith("routine-") ? operation.slice(8) : "";
-  return Object.hasOwn(routinesPaths, name) ? (name as RoutinesRoute) : null;
+  return Object.hasOwn(routinePaths, name) ? (name as RoutineRouteName) : null;
 }

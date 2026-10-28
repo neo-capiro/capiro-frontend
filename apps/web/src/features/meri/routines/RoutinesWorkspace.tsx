@@ -9,6 +9,8 @@ import {
 import { Button } from "@capiro/ui/button";
 import type { RoutinesListResponse } from "@capiro/meri-contracts/routines-application";
 import type { RoutineWorkflow } from "../../../shared/meri-routines/workflow";
+import type { RoutinesConsentObservation } from "../../../shared/meri-routines/consent";
+import { ConsentReview } from "./ConsentReview";
 import { RoutineReview } from "./RoutineReview";
 import { RoutineForm, RoutineCancellation } from "./RoutineForm";
 import { MeriPageHeading } from "../ui/MeriPageHeading";
@@ -19,8 +21,12 @@ import styles from "../ui/meri-ui.module.css";
 import cards from "../ui/phone-cards.module.css";
 import phone from "../ui/phone-page.module.css";
 
+/** The canonical row plus the observation facet this read asks for, which the installed declarations do not carry. */
+type ListedRoutine = RoutinesListResponse["page"]["rows"][number] & {
+  consent?: RoutinesConsentObservation;
+};
 type Page = Omit<RoutinesListResponse["page"], "rows"> & {
-  rows: RoutinesListResponse["page"]["rows"][number][];
+  rows: ListedRoutine[];
 };
 type Routine = Page["rows"][number];
 type RoutineRow = {
@@ -311,6 +317,15 @@ export function RoutinesWorkspace({
               Cancel routine
             </Button>
           </div>
+          {routine && (
+            <ConsentReview
+              key={routine.projection.scheduleId}
+              port={port}
+              scheduleId={routine.projection.scheduleId}
+              observation={routine.consent ?? null}
+              disabled={rowBlocked}
+            />
+          )}
           {routine && (
             <details key={routine.projection.scheduleId}>
               <summary>Recent activity</summary>

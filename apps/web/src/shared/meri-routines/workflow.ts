@@ -2,10 +2,17 @@ import {
   receiveRoutinesRequest,
   type RoutinesPrepareRequest,
   type RoutinesListResponse,
-  type RoutinesRoute,
-  type RoutinesRequestMap,
-  type RoutinesExpectationMap,
 } from "@capiro/meri-contracts/routines-application";
+import {
+  consentObservation,
+  type RoutineExpectationOf,
+  type RoutineRequestOf,
+  type RoutineResponseOf,
+  type RoutineRouteName,
+  type RoutinesConsentApproveRequest,
+  type RoutinesConsentApproveResponse,
+  type RoutinesConsentReviewResponse,
+} from "./consent";
 import { sameJson } from "../meri-actions/correlation";
 import { RoutinesAccessDenied, type RoutinesAccess } from "./access";
 import {
@@ -19,6 +26,18 @@ import {
   type SavedRoutine,
 } from "./recovery";
 
+/** MR-04 renewal custody in this view: the exact review shown, its ONE decision id, and the outcome seen so far. */
+export type RoutineConsentState = Readonly<{
+  scheduleId: string;
+  /** Stable decision identity for exactly this review. Every attempt of it re-presents this one id, so a lost
+   *  acknowledgement can never become a second durable decision. */
+  requestId: string;
+  review: RoutinesConsentReviewResponse;
+  /** Core's own window after a confirmed renewal; the observation is re-read canonically alongside it. */
+  window: RoutinesConsentApproveResponse | null;
+  /** An attempt whose outcome is not proven. The decision stays claimed and is never read as a refusal. */
+  unknown: boolean;
+}>;
 export type RoutineState = Readonly<{
   ready: boolean;
   busy: boolean;
@@ -26,6 +45,8 @@ export type RoutineState = Readonly<{
   message: string | null;
   settled: boolean;
   accessDenied: boolean;
+  /** Read consent and renewal for one routine. Read-only until the owner explicitly approves the review. */
+  consent: RoutineConsentState | null;
 }>;
 type Options = {
   context: RoutineContext;
@@ -47,6 +68,7 @@ export class RoutineWorkflow {
     message: null,
     settled: false,
     accessDenied: false,
+    consent: null,
   };
   private listeners = new Set<() => void>();
   private disposed = false;
@@ -85,10 +107,13 @@ export class RoutineWorkflow {
     if (this.options.signal.aborted) this.endLifetime();
   }
   private endLifetime = () => {
+    // Retiring the lifetime retires the privileged review and any confirmed window with it; the durable decision and
+    // its outcome live in the runtime journal, not in this view, and are never replayed from here.
     this.state = Object.freeze({
       ...this.state,
       saved: null,
       settled: false,
+      consent: null,
     });
     for (const listener of this.listeners) listener();
   };
@@ -110,11 +135,11 @@ export class RoutineWorkflow {
     this.state = Object.freeze({ ...this.state, ...change });
     for (const listener of this.listeners) listener();
   }
-  private async exchange<R extends RoutinesRoute>(
+  private async exchange<R extends RoutineRouteName>(
     route: R,
-    request: RoutinesRequestMap[R],
-    expectation: RoutinesExpectationMap[R],
-  ) {
+    request: RoutineRequestOf<R>,
+    expectation: RoutineExpectationOf<R>,
+  ): Promise<RoutineResponseOf<R>> {
     this.guard();
     try {
       const response = await this.options.access.exchange(
@@ -355,7 +380,14 @@ export class RoutineWorkflow {
     afterScheduleId: string | null = null,
   ): Promise<RoutinesListResponse> => {
     this.guard();
-    const request = { afterScheduleId, limit: 20, historyLimit: 10 };
+    // MR-04 visibility: this read asks for the consent observation explicitly. The opt-in is metadata only and grants
+    // nothing, and an unchanged body is still answered with the exact legacy shape by the same receiving boundary.
+    const request = {
+      afterScheduleId,
+      limit: 20,
+      historyLimit: 10,
+      observation: consentObservation,
+    };
     const response = await this.exchange("list", request, { request });
     this.guard();
     if ("error" in response)
@@ -368,4 +400,95 @@ export class RoutineWorkflow {
         throw new Error("The routine list account changed.");
     return response;
   };
+  /**
+   * MR-04 renewal review: read-only. It shows the exact original intent, its scopes and its EFFECTIVE limits together
+   * with Core's current observation, and it mints this view's ONE decision id for exactly that review. It creates no
+   * consent, no schedule generation and no dispatch, and it admits no model budget.
+   */
+  reviewConsent = (scheduleId: string) =>
+    this.perform(async () => {
+      const request = { scheduleId };
+      const response = await this.exchange("consentReview", request, {
+        request,
+      });
+      if ("error" in response)
+        throw new Error(
+          `The routine renewal review could not be read (${response.error.code}).`,
+        );
+      this.publish({
+        consent: Object.freeze({
+          scheduleId,
+          requestId: crypto.randomUUID(),
+          review: response,
+          window: null,
+          unknown: false,
+        }),
+      });
+    });
+  /**
+   * MR-04 renewal approval: the owner's explicit decision over exactly the review this view is showing. Every attempt
+   * re-presents the SAME decision id, so a lost acknowledgement can never become a second durable approval, and an
+   * unproven outcome is reported as unknown rather than as a refusal. It starts no execution and resumes no routine.
+   */
+  renewConsent = () =>
+    this.perform(async () => {
+      const held = this.state.consent;
+      if (!held)
+        throw new Error("Review the routine renewal before approving it.");
+      if (held.window) return;
+      const request: RoutinesConsentApproveRequest = {
+        scheduleId: held.scheduleId,
+        reviewSha256: held.review.reviewSha256,
+        requestId: held.requestId,
+        decision: "approved",
+      };
+      let definite = false;
+      try {
+        const response = await this.exchange("consentApprove", request, {
+          request,
+          review: held.review,
+        });
+        if ("error" in response) {
+          // The receiving boundary's own disposition decides. A proven non-dispatch is a definite refusal; anything
+          // else is an unproven Core/effect outcome and stays UNKNOWN with the same decision retained.
+          definite = response.error.outcome === "NOT_DISPATCHED";
+          this.publish({ consent: Object.freeze({ ...held, unknown: !definite }) });
+          throw new Error(
+            definite
+              ? `The routine renewal was refused (${response.error.code}). Re-read the current review before deciding again.`
+              : `The routine renewal outcome is not confirmed (${response.error.code}). The same approval is retained; retry it exactly.`,
+          );
+        }
+        // Core's own window for the reviewed generation, then the canonical observation re-read: the view shows what
+        // Core actually holds. Nothing is executed, resumed or dispatched by a renewal.
+        this.publish({
+          consent: Object.freeze({
+            ...held,
+            window: response,
+            unknown: false,
+          }),
+        });
+        const reread = await this.exchange(
+          "consentReview",
+          { scheduleId: held.scheduleId },
+          { request: { scheduleId: held.scheduleId } },
+        );
+        if (!("error" in reread) && this.state.consent)
+          this.publish({
+            consent: Object.freeze({ ...this.state.consent, review: reread }),
+          });
+      } catch (error) {
+        if (!definite) {
+          try {
+            if (this.state.consent && !this.state.consent.unknown)
+              this.publish({
+                consent: Object.freeze({ ...this.state.consent, unknown: true }),
+              });
+          } catch {
+            /* The former view cannot adopt anything. */
+          }
+        }
+        throw error;
+      }
+    });
 }

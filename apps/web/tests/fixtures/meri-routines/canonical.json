@@ -315,7 +315,20 @@
               }
             }
           },
-          "inspectionState": "observed"
+          "inspectionState": "observed",
+          "consent": {
+            "state": "expired",
+            "pinsMatched": true,
+            "stale": false,
+            "observedAtMs": 1792238400000,
+            "generation": 1,
+            "consentGeneration": 1,
+            "issuedAtMs": 1789646400000,
+            "expiresAtMs": 1792152000000,
+            "scopeCount": 1,
+            "cause": null,
+            "rightsSha256": null
+          }
         }
       ],
       "hasMore": false,
@@ -334,6 +347,118 @@
         "complete": false,
         "currentRetryVerified": false
       }
+    }
+  },
+  "consent": {
+    "review": {
+      "status": "review_required",
+      "scheduleId": "10000000-0000-4000-8000-000000000100",
+      "generation": 1,
+      "intentSha256": "f629c015f892cf27d11198f7e7f4701ae10f261212211324c23c506b256f591c",
+      "projectionSha256": "7ebae26b0631953a3b3e1abfa37de0c42a22221194a55de2bc0b3c9f337e906a",
+      "scopesSha256": "78f247d3012fa1c2dc61bd8781b2365c4ea124cf44c5acf3a93ce2e43ee24343",
+      "limits": {
+        "maxCostMicrousd": 1000,
+        "maxRuntimeSeconds": 60,
+        "retryLimit": 0
+      },
+      "intent": {
+        "intentId": "10000000-0000-4000-8000-000000000101",
+        "operation": "schedule_task",
+        "expectedGeneration": 0,
+        "generation": 1,
+        "previousProjectionSha256": null,
+        "projection": {
+          "scheduleId": "10000000-0000-4000-8000-000000000100",
+          "owner": {
+            "tenantId": "tenant-a",
+            "actorId": "owner-a"
+          },
+          "temporalScheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+          "timezone": "UTC",
+          "scopes": [
+            {
+              "kind": "client",
+              "tenantId": "tenant-a",
+              "resourceId": "10000000-0000-4000-8000-000000000005",
+              "policyRevision": "p1"
+            }
+          ],
+          "state": "active",
+          "maxCostMicrousd": 1000,
+          "maxRuntimeSeconds": 60,
+          "retryLimit": 0,
+          "destinationId": "meri-inbox",
+          "createdAt": "2026-10-17T12:00:00.000Z"
+        },
+        "configuration": {
+          "spec": {
+            "calendars": [],
+            "intervals": [
+              {
+                "every": 60000,
+                "offset": 0
+              }
+            ],
+            "cronExpressions": [],
+            "skip": [],
+            "startAt": null,
+            "endAt": null,
+            "jitterMs": 0,
+            "timezone": "UTC"
+          },
+          "overlap": "SKIP",
+          "catchupWindowMs": 60000,
+          "pauseOnFailure": true,
+          "remainingActions": null,
+          "paused": false,
+          "note": "Explicit test policy",
+          "runNow": false,
+          "runNowOverlap": "ALLOW_ALL",
+          "task": {
+            "taskId": "10000000-0000-4000-8000-000000000020",
+            "version": 1,
+            "manifestSha256": "dc7f9358bd9d646d6d6ca88c9528ad16edbc7552d6765b0d97d945c31d1bc7ed"
+          },
+          "workflow": {
+            "workflowType": "meriScheduledDispatchWorkflow",
+            "taskQueue": "meri-schedules",
+            "workflowId": "meri/schedules/10000000-0000-4000-8000-000000000100"
+          }
+        },
+        "cancel": null,
+        "taskInstructionSha256": "a0abbaf048a6cf2038b5fa132955b66cc650e883954a21021c01c865b3d2de6f"
+      },
+      "consent": {
+        "state": "expired",
+        "pinsMatched": true,
+        "stale": false,
+        "observedAtMs": 1792238400000,
+        "generation": 1,
+        "consentGeneration": 1,
+        "issuedAtMs": 1789646400000,
+        "expiresAtMs": 1792152000000,
+        "scopeCount": 1,
+        "cause": null,
+        "rightsSha256": null
+      },
+      "reviewSha256": "dbf107ad14666e8c01f9714be5c16743d1042a763d7b3a8419be9cabea4bd636"
+    },
+    "window": {
+      "status": "renewed",
+      "state": "active",
+      "generation": 1,
+      "policyRevision": "p1",
+      "issuedAtMs": 1792238400000,
+      "expiresAtMs": 1794830400000,
+      "observedAtMs": 1792238400000,
+      "idempotent": false
+    },
+    "decision": {
+      "scheduleId": "10000000-0000-4000-8000-000000000100",
+      "reviewSha256": "dbf107ad14666e8c01f9714be5c16743d1042a763d7b3a8419be9cabea4bd636",
+      "requestId": "fe-fixture-renewal",
+      "decision": "approved"
     }
   }
 }
