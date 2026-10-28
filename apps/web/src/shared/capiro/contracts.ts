@@ -10,10 +10,24 @@ export const serviceNames = [
 export type CapiroService = (typeof serviceNames)[number];
 export type CapiroMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 export type QueryScalar = string | number | boolean;
+/**
+ * A browser-supplied request identity, never authentication, scope or an
+ * arbitrary header value. It is an opaque bounded token: no whitespace, comma,
+ * colon-separated-header or header-folding characters, so it can only ever be
+ * sent as the single header the operation declared.
+ */
+export const requestIdentity = z
+  .string()
+  .min(8)
+  .max(128)
+  .regex(/^[A-Za-z0-9._:-]+$/);
+/** The only request header a registered operation may declare. */
+export type IdempotencyHeader = "Idempotency-Key";
 export type OperationInput = {
   params?: Record<string, string | number>;
   query?: Record<string, QueryScalar | readonly QueryScalar[] | undefined>;
   body?: unknown;
+  idempotencyKey?: string;
 };
 export type MultipartPolicy = {
   files: readonly {
@@ -62,6 +76,13 @@ export type OperationDefinition<
     ticketField: "ticket";
     ticketQuery: "ticket";
   };
+  /**
+   * Server-owned request-header capability. The registered operation names the
+   * one reviewed header it needs; the gateway forwards exactly that header with
+   * the request's `idempotencyKey` and never any other, and an operation that
+   * does not declare it can never send it (its request schema is strict).
+   */
+  idempotency?: IdempotencyHeader;
   encoding?: "json" | "multipart";
   multipart?: MultipartPolicy;
   responseMode?: "json" | "binary";

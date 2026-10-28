@@ -28,6 +28,7 @@ import { settingsOperations } from "./operations/settings";
 import { settingsAdminOperations } from "./operations/settings-admin";
 import { strategiesOperations } from "./operations/strategies";
 import { workspaceOperations } from "./operations/workspace";
+import { workspaceGenerationOperations } from "./operations/workspace-generation";
 import { onboardFunnelOperations } from "./operations/onboard-funnel";
 import { onboardSetupOperations } from "./operations/onboard-setup";
 import { onboardCoreOperations } from "./operations/onboard-core";
@@ -53,6 +54,7 @@ export const capiroOperations = {
   ...engagementOperations,
   ...newsletterDeliveryOperations,
   ...workspaceOperations,
+  ...workspaceGenerationOperations,
   ...strategiesOperations,
   ...directoryOperations,
   ...directoryObjectiveOperations,

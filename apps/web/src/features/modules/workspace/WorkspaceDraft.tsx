@@ -34,6 +34,7 @@ import {
   OrdinarySaveRecovery,
   type OrdinarySave,
 } from "./ordinary-save/OrdinaryDraftSave";
+import { GenerationPanelHost } from "./generation/GenerationPanelHost";
 
 function DraftEditor({
   draft,
@@ -164,6 +165,11 @@ function DraftEditor({
         disabled={pending || Boolean(ordinarySave?.frozen)}
         onBound={onOrdinaryBound ?? setBoundDraft}
       />
+      {/* The WS-22 document-agent panel. Ordinary saved drafts only: a prospect
+          origin is an immutable manual-only document, and the newsletter
+          workflow owns its own screen. The panel resolves its own role from the
+          canonical collaborators list and refuses anything not activated. */}
+      {!draft.prospectId && <GenerationPanelHost draftId={currentDraft.id} />}
       <CopiedTabs draft={currentDraft} />
       {ordinarySave && <OrdinarySaveRecovery save={ordinarySave} />}
       {draft.prospectId && prospectSave && (
