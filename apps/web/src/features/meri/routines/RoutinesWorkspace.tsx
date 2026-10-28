@@ -44,13 +44,14 @@ const STATE_LABEL: Record<Routine["projection"]["state"], string> = {
   paused: "Paused",
   cancelled: "Cancelled",
 };
-const when = (iso: string) =>
-  new Date(iso).toLocaleString("en-GB", {
+const when = (iso: string, timezone: string) =>
+  `${new Date(iso).toLocaleString("en-GB", {
+    timeZone: timezone,
     day: "numeric",
     month: "short",
     hour: "numeric",
     minute: "2-digit",
-  });
+  })} ${timezone}`;
 
 /** Figma 08.01 columns from the bounded list read; the schedule has no user title in its projection. */
 export function routineRows(
@@ -66,11 +67,19 @@ export function routineRows(
         routine.unresolved ? " · unresolved change" : ""
       }`,
       client,
-      nextRun: next ? when(next) : "Not available",
+      nextRun:
+        routine.projection.state === "cancelled"
+          ? "Cancelled"
+          : routine.projection.state === "paused" ||
+              routine.inspection?.temporal.paused
+            ? "Paused"
+            : next
+              ? when(next, routine.projection.timezone)
+              : "Not available",
       status: STATE_LABEL[routine.projection.state],
       lastOutcome: routine.inspection
         ? last
-          ? `Started ${when(last.takenAt)}`
+          ? `Started ${when(last.takenAt, routine.projection.timezone)}`
           : "No runs observed"
         : "Not available",
       routine,
