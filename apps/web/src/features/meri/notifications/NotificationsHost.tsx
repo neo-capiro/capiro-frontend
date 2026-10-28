@@ -219,13 +219,15 @@ function OwnedUpdates({
   const count = projection.notices.length;
   return (
     <section aria-label="Meri updates" className={styles.panel}>
+      {/* The owner scan is bounded, so this count is a recent observation of a
+          limited set and never a complete unread total. */}
       <p role="status">
         {notificationActions.unread.loading
           ? "Checking unread memory reviews."
           : notificationActions.unread.error
             ? "Unread memory-review count is unavailable."
             : notificationActions.unread.data?.enabled
-              ? `${notificationActions.unread.data.count} unread memory-review notifications.`
+              ? `Recent check found ${notificationActions.unread.data.count} unread memory-review ${notificationActions.unread.data.count === 1 ? "notification" : "notifications"}. Older unread notifications may not be included.`
               : "Memory-review notifications are not enabled."}
       </p>
       {notificationActions.error && (
@@ -299,6 +301,13 @@ function OwnedUpdates({
         ))}
       </ul>
       {snapshot.moreError ? <p role="alert">{snapshot.moreError}</p> : null}
+      {notificationActions.unread.data?.enabled ? (
+        <p className={styles.meta}>
+          {notificationActions.unread.data.count === 0
+            ? "The recent check found no unread memory-review notifications in the set it observed. A row above marked not read was unread before that check, so acknowledge it with its own Mark read action."
+            : "Mark recent memory reviews read acknowledges only the set the recent check observed. Older unread notifications can remain and are acknowledged from their own row."}
+        </p>
+      ) : null}
       <div className={styles.actions}>
         <button
           type="button"
@@ -310,7 +319,7 @@ function OwnedUpdates({
           }
           onClick={() => void notificationActions.markRead(null)}
         >
-          Mark all memory reviews read
+          Mark recent memory reviews read
         </button>
         {projection.nextCursor ? (
           <button
