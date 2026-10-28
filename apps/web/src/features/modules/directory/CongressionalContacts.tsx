@@ -12,6 +12,7 @@ import {
 } from "../../../shared/module-ui";
 import { ContactPreview } from "./ContactPreview";
 import { DirectoryPagination } from "./DirectoryPagination";
+import { MemberPhoto } from "./MemberPhoto";
 import { MemberProfile } from "./MemberProfile";
 import styles from "./directory.module.css";
 
@@ -164,13 +165,10 @@ export function CongressionalContacts({
                         >
                           {expanded.has(c.id) ? "−" : "+"}
                         </button>
-                        <span className={styles.avatar}>
-                          {c.fullName
-                            .split(" ")
-                            .map((p) => p[0])
-                            .slice(-2)
-                            .join("")}
-                        </span>
+                        <MemberPhoto
+                          name={c.fullName}
+                          photoUrl={c.photoUrl}
+                        />
                         <button
                           className={`${styles.link} ${styles.personLabel}`}
                           onClick={() => setSelected(c)}
