@@ -24,6 +24,7 @@ import { isResearchActionProposal } from "./research-action-view";
 import { isWatchProposal } from "./watch-view";
 import { isBizdevProposal } from "./bizdev-view";
 import { isMailSendProposal } from "./mail-view";
+import { isMemoryProposal } from "./memory-view";
 import { ResearchShareReview } from "./ResearchShareReview";
 import { ResearchShareResult } from "./ResearchShareResult";
 
@@ -42,6 +43,11 @@ function FieldList({
           <dt>{field.label}</dt>
           <dd
             className={field.label === "Command hash" ? styles.hash : undefined}
+            style={
+              field.label === "Exact proposed content"
+                ? { whiteSpace: "pre-wrap" }
+                : undefined
+            }
           >
             {field.value}
           </dd>
@@ -55,6 +61,8 @@ function FieldList({
 function uncertainOutcome(row: IntentRow): string | null {
   const p = row.proposal;
   if (!p) return null;
+  if (isMemoryProposal(p))
+    return "The memory submission outcome is not confirmed. Check the original request; this proposal will not be submitted again.";
   if (isWatchProposal(p))
     return "The watch outcome is not confirmed. Check the recorded state; this action will not be sent again.";
   if (isBizdevProposal(p))
