@@ -139,6 +139,48 @@ function setup() {
 }
 
 describe("personal preferences captured saves and reconciliation", () => {
+  it("resets supported defaults with the observed revision while preserving notification and client choices", async () => {
+    const f = setup();
+    const previous = changed();
+    f.read.mockResolvedValue(document(9, previous));
+    await f.controller.load();
+    await f.controller.resetPersonalDefaults();
+    const request = f.save.mock.calls[0]![0];
+    expect(request).toEqual({
+      expectedRevision: 9,
+      preferences: {
+        ...USER_PREFERENCE_DEFAULTS,
+        notifications: previous.notifications,
+        defaultClientId: previous.defaultClientId,
+      },
+    });
+    await f.controller.resetPersonalDefaults();
+    expect(f.save).toHaveBeenCalledTimes(1);
+    f.read.mockResolvedValue(document(10, request.preferences));
+    await f.controller.load();
+    expect(f.controller.snapshot().status).toBe("ready");
+  });
+  it.each(["conflict", "unknown"] as const)(
+    "holds reset after %s and recovers only by readback",
+    async (outcome) => {
+      const f = setup();
+      await f.controller.load();
+      if (outcome === "conflict")
+        f.save.mockResolvedValueOnce({
+          error: { code: "SETTINGS_REVISION_CONFLICT" },
+        } as never);
+      else
+        f.save.mockRejectedValueOnce(new Error("Lost reset acknowledgement"));
+      await f.controller.resetPersonalDefaults();
+      await f.controller.resetPersonalDefaults();
+      expect(f.controller.snapshot().status).toBe(outcome);
+      expect(f.save).toHaveBeenCalledTimes(1);
+      f.read.mockResolvedValue(document(4));
+      await f.controller.load();
+      expect(f.controller.snapshot().status).toBe("ready");
+      expect(f.save).toHaveBeenCalledTimes(1);
+    },
+  );
   it("loads, captures all unexposed values immutably, saves once and confirms by separate read", async () => {
     const f = setup();
     await f.controller.load();
