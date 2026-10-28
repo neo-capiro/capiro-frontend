@@ -88,7 +88,11 @@ export function ConsentReview({
             {held.review.limits.retryLimit} retries.
           </p>
           <p className={styles.muted}>
-            Original instruction digest {held.review.intent.taskInstructionSha256.slice(0, 16)}.
+            {/* The canonical intent allows the digest to be ABSENT; an absent digest is shown as unavailable rather
+                than as an invented or truncated value, and it is never dereferenced. */}
+            {held.review.intent.taskInstructionSha256
+              ? `Original instruction digest ${held.review.intent.taskInstructionSha256.slice(0, 16)}.`
+              : "Original instruction digest unavailable."}{" "}
             Destination: {held.review.intent.projection.destinationId}. Timezone:{" "}
             {held.review.intent.projection.timezone}. Reviewed consent:{" "}
             {consentLabel(held.review.consent)}

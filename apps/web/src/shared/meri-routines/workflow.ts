@@ -11,8 +11,13 @@ import {
   type RoutineRouteName,
   type RoutinesConsentApproveRequest,
   type RoutinesConsentApproveResponse,
-  type RoutinesConsentReviewResponse,
 } from "./consent";
+/** The retained review is the CANONICAL published contract, not the local source-stage subset: the installed package now
+ *  publishes the renewal routes, so the exchange's own expectation and response types are the canonical ones and the
+ *  held review must be the same type. The canonical intent allows an ABSENT instruction digest and carries the members
+ *  the subset dropped (expectedGeneration, previousProjectionSha256, configuration, cancel), so the held state keeps the
+ *  complete actual intent and its exact identity instead of a narrowed facsimile. */
+import type { RoutinesConsentReviewResponse } from "@capiro/meri-contracts/routines-application";
 import { sameJson } from "../meri-actions/correlation";
 import { RoutinesAccessDenied, type RoutinesAccess } from "./access";
 import {

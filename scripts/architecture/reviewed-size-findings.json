@@ -7289,10 +7289,10 @@
     "kind": "file",
     "symbol": "<module>",
     "line": 1,
-    "nonblank": 492,
-    "fingerprint": "1c916681e2c258afff98e977509f20183f7146b4c537f4ca68d1d2afb5987f86",
-    "reason": "One current-context RoutineWorkflow owns the view lifetime and serializes prepare, approval, recovery and consent renewal through the same existing access port and journal lock. The added consent review and explicit renewal share its currentness guard, publication fence, access-loss retirement and one-review decision identity; they add no transport, durable store, scheduling executor or authority owner. Per-action methods remain bounded and request/response receiving, correlation and persistence are delegated to existing owners. Keeping these related state transitions together avoids splitting a single guarded lifecycle solely to satisfy the file threshold. Accepted exact module after reading the full body and its delta, reusing the independent source assessment; final installed-package and deployed acceptance remain required.",
-    "reviewedBy": "Codex M5 bounded full-module validation, reusing independent Hermes consent-consumer review beb06061feee5ea7bbf0d732e53aac90848e902c2c08898abf65a5687272e89d section 5",
+    "nonblank": 497,
+    "fingerprint": "ed3aac1805f3d0cc161749be5766f27531e4354b25982f6918396563b86383c8",
+    "reason": "One current-context RoutineWorkflow owns the view lifetime and serializes prepare, approval, recovery and consent renewal through the same access port and journal lock. The physical-package correction changes only the retained review type import to the full published contract; the runtime review, approval expectation, same-decision retry, currentness guards and retirement behavior remain unchanged. No transport, durable store, scheduling executor or authority owner is added. Per-action methods remain bounded and receiving, correlation and persistence remain delegated. Accepted exact module after full-body and delta review, retaining the prior single-lifecycle rationale and the physical-package consent proof.",
+    "reviewedBy": "Codex M7 bounded full-module review of physical MR04 correction, reusing the accepted M5 module review at 96d3a436 and actual canonical-package consent tests",
     "reviewedOn": "2026-10-28"
   },
   {
@@ -7304,6 +7304,17 @@
     "fingerprint": "3b4ad7926632f187c09520ba32bb3cf61a13432ffc94265da0f1b113a91a014c",
     "reason": "One usage-settings presentation boundary using the existing SettingsLayout, cards, DataTable, notices and configuration slot. The additive optional wholeJobs card renders only supplied view facts and cost labels; other callers omit it without changed behavior. It adds no request, authority, state lifetime, cost calculation or policy decision. Keeping the related usage sections together preserves this screen's single render responsibility. Exact body validated at f4857debb9f1a1def551d63574144c11c7ac82f3; real mounted host initial/refresh/denial/account-retirement checks and received-count regression are retained. Final installed .27 typing and deployed acceptance remain separate.",
     "reviewedBy": "Codex bounded exact-body/source validation with designated Hermes SCRUM-220 session 20261028_102632_b2fd57 evidence: 26 focused checks and 4 mounted browser checks",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/routines/ConsentReview.tsx",
+    "kind": "function",
+    "symbol": "ConsentReview",
+    "line": 43,
+    "nonblank": 82,
+    "fingerprint": "e7d5e0db75cf8a18ae52b090043d564e8e4ceb4bd4f5a25e1b3eff48b991e034",
+    "reason": "One consent-review view subscribes to the existing routine workflow and renders its observation, reviewed intent and limits, explicit approval control, confirmed window and uncertain result. The correction only renders an absent optional instruction digest as unavailable instead of dereferencing it. The component delegates requests and decision custody to RoutineWorkflow; it adds no authorization, persistence, automatic retry or execution. Keeping this short related review surface together preserves the visible state-to-control relationship. Accepted exact 82-line body after full-body review; the new size finding is acknowledged, with physical canonical receiver and synthetic rendering coverage.",
+    "reviewedBy": "Codex M7 bounded full-function review of physical MR04 optional-digest correction and actual canonical-package consent tests",
     "reviewedOn": "2026-10-28"
   }
 ]

@@ -151,22 +151,12 @@ vi.mock("../src/features/meri/routines/RoutineForm", () => ({
     createElement("p", null, "Routine cancellation editor"),
 }));
 /**
- * MR-04 SOURCE-STAGE QUALIFICATION. This suite qualifies the canonical receiving boundary the observation opt-in, the
- * facet and the two renewal routes belong to. The installed `@capiro/meri-contracts@0.1.26` is immutable until the new
- * cohort and can admit none of them, so the frontend resolves that boundary in exactly one module and the suite points
- * that module at the source-stage bundle named by MERI_SOURCE_STAGE_ROUTINES_RECEIVER. Production keeps the published
- * package; no private path is imported and no package, lockfile or vendor directory is written.
+ * MR-04 PHYSICAL RECEIVING. This suite qualifies the canonical receiving boundary the observation opt-in, the facet and
+ * the two renewal routes belong to. The installed canonical `@capiro/meri-contracts@0.1.27` publishes them, so the suite
+ * resolves that boundary through the real installed package by default: no source alias, no environment flag and no
+ * private path. The historical source-stage qualification stays in its own frozen source and evidence and is not a
+ * prerequisite of the current physical tests.
  */
-const sourceStage = vi.hoisted(
-  () => process.env.MERI_SOURCE_STAGE_ROUTINES_RECEIVER ?? "",
-);
-vi.mock("../src/shared/meri-routines/canonical-receiver", async () => {
-  if (!sourceStage)
-    throw new Error(
-      "MERI_SOURCE_STAGE_ROUTINES_RECEIVER must name the source-stage routines receiver bundle",
-    );
-  return await import(/* @vite-ignore */ sourceStage);
-});
 beforeEach(() => {
   view.values = [];
   view.buttons = [];
@@ -1505,6 +1495,44 @@ it("the renewal review is read-only until the owner explicitly confirms it, and 
     "consentApprove",
     "consentReview",
   ]);
+});
+
+it("a retained review whose original intent carries no instruction digest is admitted and shown as unavailable", async () => {
+  // The canonical intent allows the digest to be ABSENT. This is the exact retained review otherwise, with the same
+  // identity and hash, so the absent digest must be admitted by the real receiver, shown truthfully and never
+  // dereferenced; the review is then supplied to the approval unchanged.
+  const review = structuredClone(consent().review);
+  delete review.intent.taskInstructionSha256;
+  const calls: { route: string; body: unknown }[] = [];
+  const fetch = fetcher((route, body) => {
+    calls.push({ route, body });
+    if (route === "consentReview") return Response.json(review);
+    if (route === "consentApprove") return Response.json(consent().window);
+    return Response.json(f.listed);
+  });
+  const port = workflow(fetch);
+  await port.load();
+  await readWorkspace(port);
+  const reviewed = await settle(port, "Review renewal");
+  expect(reviewed).toContain("Original instruction digest unavailable.");
+  expect(reviewed).not.toContain(
+    consent().review.intent.taskInstructionSha256.slice(0, 16),
+  );
+  // Everything else the review shows is unchanged: the destination, the effective limits and the current observation.
+  expect(reviewed).toContain(
+    `Destination: ${consent().review.intent.projection.destinationId}`,
+  );
+  expect(reviewed).toContain(
+    "Effective per run: $0.001000, 60 seconds, 0 retries.",
+  );
+  expect(reviewed).toContain("Reviewed consent: Expired");
+  await settle(port, "Renew consent now");
+  // The exact retained review is what the approval supplied, unchanged: the hash that was read is the hash that was
+  // echoed back, which the real receiver checks against the expectation.
+  const approval = calls.find((call) => call.route === "consentApprove")!
+    .body as Record<string, unknown>;
+  expect(approval.reviewSha256).toBe(consent().review.reviewSha256);
+  expect(port.getSnapshot().consent?.window).toEqual(consent().window);
 });
 
 it("a lost acknowledgement keeps ONE decision and re-presents it instead of minting another", async () => {
