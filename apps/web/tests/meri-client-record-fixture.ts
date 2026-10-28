@@ -94,6 +94,7 @@ export function clientRecordFixture(
       expiresAt: proposal.expiresAt,
       status,
       receipt: status === "succeeded" ? receipt : null,
+      preflight: null,
     },
   };
 }
@@ -119,4 +120,33 @@ export function clientDecisionResponse(item: ClientItem) {
     proposalId: item.proposal.proposalId,
     result: item.result,
   };
+}
+/**
+ * The owner's answer carries exactly one bounded nullable preflight, so the fixture does too and
+ * this helper only substitutes a declared reading for the default `null`. Both arguments are the
+ * binding's own types.
+ */
+export function withPreflight(
+  item: ClientItem,
+  preflight: ClientResult["preflight"],
+): ClientItem {
+  return item.result === "unavailable"
+    ? item
+    : { ...item, result: { ...item.result, preflight } };
+}
+/**
+ * Shapes no canonical receiver admits (out-of-enum verdict, non-object, hidden extra keys, or the
+ * key omitted). Admission refuses every one of them — proved executably in the focused spec — so
+ * they are only ever projected directly here to show the display invents nothing. Passing
+ * `undefined` is how the retained key-less answer is built: JSON.stringify omits an undefined
+ * value, so the serialized page carries no preflight key at all. This one boundary cast is the
+ * only non-canonical construction in the fixture; product source has none.
+ */
+export function withHostilePreflight(
+  item: ClientItem,
+  preflight: unknown,
+): ClientItem {
+  return item.result === "unavailable"
+    ? item
+    : ({ ...item, result: { ...item.result, preflight } } as ClientItem);
 }
