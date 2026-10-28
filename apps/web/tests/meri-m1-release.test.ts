@@ -8,7 +8,7 @@ import {
 const approved = () => ({
   schema: "meri.m1.release/1",
   deployment: {
-    origin: "https://app.capiro.ai",
+    origin: "https://portfolio-preview.app.capiro.ai",
     profile: "restricted-preview",
     testOnly: true,
     operatorApprovalReceiptId: "synthetic-approval",
