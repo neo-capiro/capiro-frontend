@@ -5,6 +5,7 @@ import {
   planNativeBriefSynthesis,
   planNativeContextAnalyze,
   planNativeContextRecommend,
+  planNativeDocumentRetry,
   planNativeGenerationStart,
   planNativeOutlineGeneration,
 } from "./native-generation";
@@ -145,4 +146,49 @@ it("treats an unconfirmed native admission as reconcile, never as success", () =
   expect(nativeAdmissionOutcome("proposed")).toBe("applied");
   expect(nativeAdmissionOutcome("approval-required")).toBe("applied");
   expect(nativeAdmissionOutcome("unknown")).toBe("unknown");
+});
+
+// The DOCUMENT retry is the native-only control: it is planned with the truthful
+// deliberate paid intent, only for a run that carries a retained native request,
+// and only once that run has settled.
+const settledNativeRun = (
+  status: NonNullable<DocumentAgentState["generation"]["lastRun"]>["status"],
+) => ({
+  generation: {
+    mode: "standard" as const,
+    lastRun: {
+      runId: "run-retained-1",
+      requestId: `wsgen:${"ab".repeat(32)}`,
+      mode: "standard" as const,
+      startedAt: "2026-10-28T00:00:00.000Z",
+      status,
+      stages: [],
+      expectedRevision: 7,
+    },
+  },
+});
+
+it("plans the document retry as an explicit paid native attempt on the retained request", () => {
+  const plan = planNativeDocumentRetry(approved(settledNativeRun("failed")), draftId);
+  if (plan.kind !== "request")
+    throw new Error(`expected a request, got ${plan.kind}`);
+  expect(plan.operation).toBe("workspace.generation.document.retry");
+  expect(plan.input.params).toEqual({ draftId });
+  // The explicit intent, the revision pin, and NO `paidGeneration` field: this
+  // route's own closed body does not carry one, and a leaked field is a refusal.
+  expect(plan.input.body).toEqual({
+    expectedRevision: 7,
+    intent: "retry-failed-units",
+  });
+});
+
+it("refuses the document retry for a run with no retained native request or one still in flight", () => {
+  const legacy = planNativeDocumentRetry(approved(), draftId);
+  expect(legacy.kind).toBe("refusal");
+  expect(legacy.kind === "refusal" ? legacy.reason : "").toContain(
+    "no retained native generation run",
+  );
+  const active = planNativeDocumentRetry(approved(settledNativeRun("active")), draftId);
+  expect(active.kind).toBe("refusal");
+  expect(active.kind === "refusal" ? active.reason : "").toContain("still in flight");
 });

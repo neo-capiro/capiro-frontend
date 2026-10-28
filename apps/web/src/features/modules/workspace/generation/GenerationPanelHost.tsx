@@ -46,7 +46,12 @@ export function GenerationPanelHost({ draftId }: { draftId: string }) {
           </StatusPanel>
         </StatusPanel>
       </Panel>
-      <IntakePanel capability={reads.capability} actor={role.actor} />
+      <IntakePanel
+        capability={reads.capability}
+        actor={role.actor}
+        role={role.role}
+        onSettled={reads.reload}
+      />
     </section>
   );
 }

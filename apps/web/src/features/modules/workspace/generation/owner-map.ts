@@ -17,7 +17,8 @@
 //   workspace-quality       — `document-agent-quality.service.ts` (evaluate,
 //                             createFixProposal with its canEdit gate).
 //   workspace-durable-intake— `quick-draft/two-step-draft.controller.ts`
-//                             (two-step-draft-capability, intakes, runs/:runId/status).
+//                             (two-step-draft-capability, intakes,
+//                             runs/:runId/status, runs/:runId/retry-failed).
 //
 // The remaining model-backed actions have no approved greenfield owner yet: they
 // are still served by the legacy MeriV3/provider handler, so they are marked
@@ -32,6 +33,8 @@ export type WorkspaceGenerationOperationKey =
 export type GenerationOwner =
   | "workspace-state"
   | "workspace-native-generation"
+  /** The greenfield native owner's failed-unit retry: it answers with the state, not an admission. */
+  | "workspace-native-retry"
   | "workspace-quality"
   | "workspace-durable-intake"
   | "meri-greenfield";
@@ -49,15 +52,16 @@ const withheld =
   "Model-backed action: still served by the legacy MeriV3/provider handler. Withheld until a greenfield Meri public owner exists.";
 
 /**
- * The durable intake receipt is real and idempotent, but the run it creates is
- * drafted by `GenerationRunWorkerService` -> `GenerationService`, which performs
- * direct Anthropic provider IO and holds the dormant MeriV2 orchestrator proxy.
- * Submitting one therefore starts legacy provider generation, so the action is
- * unactivated even though its contract and request identity are shipped.
+ * The durable intake receipt is real and idempotent, and the run it creates is
+ * now drafted by the approved greenfield native conversation owner: the durable
+ * worker's drafting stage issues one canonical turn on the SAME
+ * `NATIVE_GENERATION_TURN` owner (and closed wire protocol) the five Workspace
+ * document-agent phases use, and never reaches the legacy provider handler.
+ * Submitting one therefore starts greenfield native generation. Availability
+ * still depends on this environment's real current configuration and the
+ * caller's current credential: the capability read gates the control, and an
+ * unbound owner is reported by the run itself instead of being retried blindly.
  */
-export const intakeGenerationWithheld =
-  "The durable receipt is real, but the run's drafting stage delegates to GenerationService (direct Anthropic provider IO plus the dormant MeriV2 orchestrator proxy) - legacy provider generation. Intake submission stays unactivated until the greenfield Meri owner is bridged.";
-
 export const advertisedGenerationActions: readonly AdvertisedGenerationAction[] =
   [
     {
@@ -239,8 +243,18 @@ export const advertisedGenerationActions: readonly AdvertisedGenerationAction[] 
       action: "generation.retry",
       method: "POST",
       path: "/drafts/:draftId/agent/generation/retry",
-      owner: "meri-greenfield",
-      withheldReason: withheld,
+      // Served by the greenfield native owner for a run that carries a retained native
+      // request: the retry re-enters the same native bridge/turn for the run's own
+      // failed units and lands them as an existing pending `content_revision` proposal,
+      // so it never reaches the legacy provider handler for such a run. It answers with
+      // the document STATE, not a native admission, so it is named as its own Workspace
+      // owner: a mounted control for it must never be classified as an admission (that
+      // would report a successful retry as unconfirmed) and it is not one of the five
+      // supported generated phases. Its control is planned by `planNativeDocumentRetry`,
+      // which refuses a run with no retained request, and a legacy engine run keeps the
+      // withheld legacy planner instead of this operation.
+      owner: "workspace-native-retry",
+      operation: "workspace.generation.document.retry",
     },
     {
       action: "generation.cancel",
@@ -276,7 +290,9 @@ export const advertisedGenerationActions: readonly AdvertisedGenerationAction[] 
       path: "/document-agent/intakes",
       owner: "workspace-durable-intake",
       operation: "workspace.generation.intake",
-      withheldReason: intakeGenerationWithheld,
+      // Activated: the run's drafting stage is served by the greenfield native
+      // conversation owner (see the note above), and the request is idempotent
+      // per caller, so a retry inside one user action cannot be billed twice.
     },
     {
       action: "run.status",
@@ -289,8 +305,14 @@ export const advertisedGenerationActions: readonly AdvertisedGenerationAction[] 
       action: "run.retryFailed",
       method: "POST",
       path: "/document-agent/runs/:runId/retry-failed",
-      owner: "meri-greenfield",
-      withheldReason: withheld,
+      owner: "workspace-durable-intake",
+      operation: "workspace.generation.run.retryFailed",
+      // Activated for ONE case only: this surface's own current durable-intake
+      // receipt, whose run is still live. The worker's atomic claim accepts only
+      // `queued` or an expired-lease `active` run, so a run that already resolved
+      // is reported as such and never promised a continuation; a caller without a
+      // current credential is answered `awaiting-current-access` and its retained
+      // request is left exactly as it is.
     },
   ];
 

@@ -16,6 +16,8 @@ request against an approved owner, or an explicit refusal.
 | `controller.ts`     | plan shape, the read set, failure classification and recovery                                     |
 | `plans.ts`          | planners for the manual state-machine writes                                                      |
 | `intake.ts`         | durable intake planning, payload digest and replay guard                                          |
+| `run-retry.ts`      | durable run continuation: the plan, the reply correlation and its truthful wording                |
+| `use-intake-run.ts` | the run the retained receipt named, read through this surface's own run read                      |
 | `GeneratePanel.tsx` | draft gates: brief, context, outline, proposals, generation, quality                              |
 | `IntakePanel.tsx`   | two-step intake form and submit                                                                   |
 
@@ -47,14 +49,71 @@ Wired (Workspace-owned, no model call):
 - `workspace-quality` - quality read and `quality/issues/:issueId/fix`. The fix
   endpoint creates a proposal and is gated by the service's `canEdit`, mirrored in
   `access.ts`.
-- `workspace-durable-intake` - two-step capability (read), intakes, run status.
+- `workspace-native-retry` - `generation/retry`, with the explicit
+  `intent: "retry-failed-units"` acknowledgement. The server derives failed units
+  from the retained native run, preserves successful sections and manual edits,
+  and returns changes through the existing proposal owner.
+- `workspace-durable-intake` - two-step capability (read), intakes, run status,
+  and `runs/:runId/retry-failed`.
 
-Withheld (`meri-greenfield`, no operation declared): `recommend`,
-`message.send`, `generation.retry`, `run.retryFailed`. These still route to the
-legacy MeriV3/provider handler (`WorkspaceReasoningGateway` / model IO) and have
+Withheld (`meri-greenfield`, no operation declared): `recommend` and
+`message.send`. These still route to the legacy
+MeriV3/provider handler (`WorkspaceReasoningGateway` / model IO) and have
 no approved greenfield owner, so no operation is declared and the panels render
 the withheld reason instead of a button. `workspace-generation.test.ts` fails if
 any of those routes is re-added to the registry.
+
+### Durable run continuation
+
+`run.retryFailed` is wired for ONE case: the run this surface's own current
+durable-intake receipt named. The route is served by the same
+`quick-draft/two-step-draft.controller.ts` owner as the intake and the run read,
+and its recovery control re-reads/replays the SAME retained native request with
+the caller's own current credential. Recovery never asks for a new paid turn.
+A separate **Retry failed units** control is available for failed or partial
+runs; it adds `intent: "retry-failed-units"` to acknowledge new generation for
+the server-derived failed units. The receipt only correlates, so neither control carries a
+request identity and can only ever name the run that receipt already names
+(`run-retry.ts`).
+
+Both controls carry the route's closed native-only
+discriminator: `{ workflow: "native-retained" }`. It selects the route's native
+workflow so that a run the durable-intake owner did not create is refused at the
+route instead of being handed to the legacy generation owner - a browser receipt
+is untrusted and cannot enforce that boundary by itself. It is a workflow
+selector and nothing more: it grants no authority, carries no status, secret or
+scan result, and the route still applies its own tenant, acting-actor and
+edit-ACL checks. The operation's request schema pins the value as a literal, so
+no other workflow can be asked for from here, and a route that does not accept
+this marker at all rejects the request before the handler runs.
+
+Three facts of the producer decide what the control may offer and what its answer
+may be said to mean, and all three are read from the worker rather than assumed:
+
+- ordinary recovery accepts only a `queued` run or an `active` run whose lease
+  has expired. Terminal runs require the separate deliberate failed-unit retry;
+  complete and cancelled runs are not offered that action;
+- without a current session credential a durable-intake run answers
+  `awaiting-current-access` and is left exactly as it is, which the panel reports
+  in those words; and
+- the route answers with the run's CURRENT status and never reports what the
+  reconciliation did: it awaits `reconcileRetainedNativeRequest` and discards its
+  boolean, which is itself false for a run with nothing retained, for a
+  current-access refusal and for a lease another worker still holds. A
+  `queued`/`active` answer therefore does not prove that any work resumed, and a
+  terminal answer may equally follow a real resume. The panel reports the
+  correlated status and leaves the disposition pending instead of claiming an
+  effect in either direction.
+
+The reply is read through the operation's own closed schema
+(`runRetryResponse`), correlated with the run that was asked about - a reply for
+another run never updates this one - and the same run is then re-read for its
+current status. An unparseable or failed reply is unconfirmed: the receipt stays,
+no second request is sent, and the caller is sent to the run's status read.
+The release of that reply is also checked against the journal's own lifetime after
+the send resolves, so a scope that was disposed or replaced while the reply was in
+flight never receives this attempt's notice or run read
+(`intake-run-continuation.test.ts`).
 
 ### Paid-generation intent
 
@@ -94,8 +153,14 @@ paid run, and only the owner can tell which.
    reachable there without a second mount and a doubled read set.
 4. **Intake.** `intake-recovery.ts` is the scoped leaf: digest, derived
    `Idempotency-Key`, and the send/replay/reconcile/retire decision. The submit
-   action stays unactivated (`withheld`) because the run it queues is drafted by
-   the legacy provider path; the capability and run-status reads are mounted.
+   action is ACTIVATED: the run it queues is drafted by the approved greenfield
+   native conversation owner (the durable worker's drafting stage issues one
+   canonical turn on the same owner), so the capability read, the submit and the
+   run-status read are all mounted. `planIntake` hands the caller the identity it
+   must retain, `IntakePanel` retains it per acting scope, and an unconfirmed
+   outcome is reconciled against that same request instead of a second submit.
+   The credential is not a panel concern: `gateway.ts` attaches the current
+   session bearer server-side.
 
 ## Still parent/other-owner
 
@@ -113,8 +178,11 @@ paid run, and only the owner can tell which.
   conversation owner is not composed" refusal — a real control with an honest,
   non-legacy failure, never a silent fallback to the provider path. No deployment
   claim is made here.
-- The size-review record for the edited `DraftEditor` function
-  (`docs/architecture-size-reviews.json` is an architecture-registry write).
+- The durable intake submit and the durable run continuation are both real
+  requests with no interactive UI test in this checkout (no DOM test environment
+  is installed): they are covered by the planner/recovery/view/continuation leaf
+  tests plus the mounted static-markup test, which proves what is rendered and
+  that rendering dispatches nothing.
 
 ## Reads never execute
 
@@ -128,8 +196,7 @@ before another write.
 
 ```
 node node_modules/vitest/vitest.mjs run \
-  --root apps/web/src/shared/capiro \
-  --config apps/web/src/shared/capiro/vitest.config.mts
+  --root apps/web/src/shared/capiro --config vitest.config.mts
 ```
 
 Covered: flag off, missing key/source, capability-disabled intake, duplicate key
