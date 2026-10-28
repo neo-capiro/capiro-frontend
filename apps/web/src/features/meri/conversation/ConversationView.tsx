@@ -19,6 +19,7 @@ import modelStyles from "../model-selection/model-selection.module.css";
 import { SkillSelectionPicker } from "./SkillSelectionPicker";
 import { ClientHandoffDraft } from "./ClientHandoffDraft";
 import { FeedbackContext } from "./feedback/FeedbackContext";
+import { useComposerAttachments } from "../uploads/useComposerAttachments";
 
 type Session = ReturnType<typeof useConversationSession>;
 
@@ -53,6 +54,12 @@ export function SessionComposer({
     !!session.continuation.busy;
   const selection =
     current?.controls.modelSelection ?? session.modelSelection ?? null;
+  const live = current?.controls ?? pendingConversationComposer(session, scope);
+  // The attachment slot follows the displayed conversation; a replaced port discards its results.
+  const attachments = useComposerAttachments(
+    current?.port ?? null,
+    live.attachUnavailable,
+  );
   return (
     <MeriComposer
       draft={session.accessLost ? "" : session.draft}
@@ -60,7 +67,8 @@ export function SessionComposer({
       textareaRef={session.textarea}
       assetSet="cited-answer"
       running={current?.running ?? false}
-      live={current?.controls ?? pendingConversationComposer(session, scope)}
+      live={live}
+      attachments={attachments}
       modelControl={
         <>
           {session.ready && (
