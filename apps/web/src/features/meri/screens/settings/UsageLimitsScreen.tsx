@@ -45,6 +45,14 @@ export type UsageLimitsView = {
     notices: readonly SettingsNotice[];
     queue: SettingsLink;
   };
+  /** Additive whole-job economics; other callers keep the plain attempt view by omitting it. */
+  wholeJobs?: {
+    title: string;
+    description: string;
+    facts: readonly { label: string; value: string }[];
+    cost: { label: string; value: string; caption: string };
+    footnote: string;
+  };
 };
 
 const columns: readonly DataColumn<UsageRow>[] = [
@@ -106,6 +114,27 @@ export function UsageLimitsScreen({
               rows={view.runUsage.rows}
             />
           </SettingsCard>
+          {view.wholeJobs ? (
+            <SettingsCard
+              title={view.wholeJobs.title}
+              description={view.wholeJobs.description}
+            >
+              <dl className={styles.policy}>
+                {view.wholeJobs.facts.map((fact) => (
+                  <div key={fact.label}>
+                    <dt>{fact.label}</dt>
+                    <dd>{fact.value}</dd>
+                  </div>
+                ))}
+                <div>
+                  <dt>{view.wholeJobs.cost.label}</dt>
+                  <dd>{view.wholeJobs.cost.value}</dd>
+                </div>
+              </dl>
+              <p className={surfaces.caption}>{view.wholeJobs.cost.caption}</p>
+              <p className={ui.muted}>{view.wholeJobs.footnote}</p>
+            </SettingsCard>
+          ) : null}
           <SettingsCard title={configuration.title}>
             {configurationContent ?? (
               <>

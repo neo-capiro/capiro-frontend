@@ -1,17 +1,21 @@
 import { expect, it, vi } from "vitest";
 import {
-  USAGE_OVERVIEW_SCHEMA,
-  receiveUsageOverviewRequest,
-  receiveUsageOverviewResponse,
+  USAGE_OVERVIEW_SCHEMA_V2,
+  usageOverviewMetadataV2,
+  receiveUsageOverviewRequestV2,
+  receiveUsageOverviewResponseV2,
 } from "@capiro/meri-contracts/conversation-usage";
 import { usageOverviewOperation } from "../src/shared/meri-usage/operations";
 import { createUsageOverviewClient } from "../src/shared/meri-usage/client";
 import { proxyConversationNativeRead } from "../src/shared/meri-conversations/history-proxy";
-import { usageOverviewFixture } from "./meri-usage-overview-fixtures";
+import {
+  usageOverviewFixture,
+  usageOverviewFixtureWithoutSuccessfulJobs,
+} from "./meri-usage-overview-fixtures";
 
 const bytes = (value: unknown) =>
   new TextEncoder().encode(JSON.stringify(value));
-const input = { schemaVersion: USAGE_OVERVIEW_SCHEMA };
+const input = { schemaVersion: USAGE_OVERVIEW_SCHEMA_V2 };
 const origin = "https://frontend.example.test";
 const config = {
   enabled: true,
@@ -28,12 +32,63 @@ const request = (
     headers: { Origin: origin, "Content-Type": "application/json", ...headers },
     body: JSON.stringify(body),
   });
+const admitted = () => receiveUsageOverviewRequestV2(bytes(input));
 
-it("receives the physical .25 tenant overview with actual calendar boundaries and honest unknowns", () => {
-  const admitted = receiveUsageOverviewRequest(bytes(input));
+it("the operation is the published /2 read, not a local path or version", async () => {
+  expect(usageOverviewOperation.path).toBe(usageOverviewMetadataV2.path);
+  expect(usageOverviewOperation.requestBytes).toBe(
+    usageOverviewMetadataV2.requestBytes,
+  );
+  expect(usageOverviewOperation.responseBytes).toBe(
+    usageOverviewMetadataV2.responseBytes,
+  );
+  expect(input.schemaVersion).toBe("meri.usage-overview/2");
+  const admit = await usageOverviewOperation.admit(bytes(input));
+  expect(await admit(200, bytes(usageOverviewFixture()))).toEqual(
+    usageOverviewFixture(),
+  );
+  expect(() =>
+    usageOverviewOperation.admit(
+      bytes({ schemaVersion: "meri.usage-overview/1" }),
+    ),
+  ).toThrow();
+});
+
+it("receives whole-job economics through the real /2 receiver and keeps the raw canonical coverage exact", () => {
+  const receivedView = receiveUsageOverviewResponseV2(
+    200,
+    bytes(usageOverviewFixture()),
+    admitted(),
+  );
+  if ("error" in receivedView)
+    throw new Error("the receiver refused the fixture");
+  const view = receivedView;
+  expect(view).toEqual(usageOverviewFixture());
   expect(
-    receiveUsageOverviewResponse(200, bytes(usageOverviewFixture()), admitted),
-  ).toEqual(usageOverviewFixture());
+    receiveUsageOverviewResponseV2(
+      200,
+      bytes(usageOverviewFixtureWithoutSuccessfulJobs()),
+      admitted(),
+    ),
+  ).toEqual(usageOverviewFixtureWithoutSuccessfulJobs());
+  // The canonical coverage literals cross the boundary unchanged; the display layer translates them.
+  expect(view.wholeJobs.basis).toContain("canonical ROOT Work/Delegate");
+  expect(view.wholeJobs.window).toBe(
+    "root revision created within the admitted month window",
+  );
+  expect(view.wholeJobs.coverage.chargeAttribution).toBe(
+    "whole-job-lineage-at-root-revision-window",
+  );
+  expect(view.wholeJobs.coverage.windowEdge).toContain("excluded and counted");
+  expect(view.jobIdentity.states).toEqual([
+    "successful",
+    "partial",
+    "failed",
+    "cancelled",
+    "unclosed",
+  ]);
+  expect(view.categories).toEqual(usageOverviewFixture().categories);
+  expect(view.denominators).toEqual(usageOverviewFixture().denominators);
   for (const field of [
     "tenantId",
     "actorId",
@@ -42,19 +97,36 @@ it("receives the physical .25 tenant overview with actual calendar boundaries an
     "session",
   ]) {
     expect(() =>
-      receiveUsageOverviewRequest(bytes({ ...input, [field]: "forged" })),
+      receiveUsageOverviewRequestV2(bytes({ ...input, [field]: "forged" })),
     ).toThrow();
   }
-  const invalid = usageOverviewFixture();
-  invalid.periods[1].endExclusive = invalid.observedAt;
+});
+
+it("refuses malformed, semantically inconsistent and invented whole-job bodies", () => {
+  const inconsistent = usageOverviewFixture();
+  inconsistent.wholeJobs.revisions = inconsistent.wholeJobs.attempts + 1;
   expect(() =>
-    receiveUsageOverviewResponse(200, bytes(invalid), admitted),
+    receiveUsageOverviewResponseV2(200, bytes(inconsistent), admitted()),
   ).toThrow();
+
+  // A missing per-job denominator is null, never an invented zero cost.
+  const invented = usageOverviewFixtureWithoutSuccessfulJobs();
+  invented.wholeJobs.microUsdPerSuccessfulJob = 0;
   expect(() =>
-    receiveUsageOverviewResponse(
+    receiveUsageOverviewResponseV2(200, bytes(invented), admitted()),
+  ).toThrow();
+
+  const boundary = usageOverviewFixture();
+  boundary.periods[1].endExclusive = boundary.observedAt;
+  expect(() =>
+    receiveUsageOverviewResponseV2(200, bytes(boundary), admitted()),
+  ).toThrow();
+
+  expect(() =>
+    receiveUsageOverviewResponseV2(
       200,
       bytes({ ...usageOverviewFixture(), privateRows: [] }),
-      admitted,
+      admitted(),
     ),
   ).toThrow();
 });
@@ -87,13 +159,14 @@ it("forwards only the exact aggregate read with native credentials and no sessio
   ).toEqual(input);
 });
 
-it("refuses wrong route, authority, cross-origin and non-read methods before dispatch", async () => {
+it("refuses wrong route, authority, cross-origin, superseded version and non-read methods before dispatch", async () => {
   const fetcher = vi.fn<typeof fetch>();
   for (const invalid of [
     request(input, { Authorization: "Bearer browser" }),
     request(input, { Origin: "https://foreign.example.test" }),
     request(input, {}, "/api/conversations/usage-overview?tenantId=forged"),
     request({ ...input, tenantId: "forged" }),
+    request({ schemaVersion: "meri.usage-overview/1" }),
     new Request(origin + usageOverviewOperation.path, { method: "GET" }),
   ]) {
     const result = await proxyConversationNativeRead(
@@ -157,7 +230,7 @@ it("the browser performs one read and retires membership-denied results", async 
   expect(fetcher).toHaveBeenCalledOnce();
 });
 
-it("an account switch while a response is pending cannot release former tenant totals", async () => {
+it('an account switch while a response is "pending" cannot release former tenant totals', async () => {
   let current = true;
   let release!: (response: Response) => void;
   const fetcher = vi.fn<typeof fetch>(

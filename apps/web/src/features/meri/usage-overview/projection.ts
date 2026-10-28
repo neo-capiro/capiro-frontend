@@ -1,4 +1,4 @@
-import type { UsageOverviewResponse } from "@capiro/meri-contracts/conversation-usage";
+import type { UsageOverviewResponse2 } from "@capiro/meri-contracts/conversation-usage";
 import type { UsageLimitsView } from "../screens/settings/UsageLimitsScreen";
 
 const dollars = (micro: number) =>
@@ -13,8 +13,18 @@ const periodLabel = {
   week: "This week · Monday UTC",
   month: "This month · UTC",
 };
+const jobStateLabel = {
+  successful: "Successful jobs",
+  partial: "Partial jobs",
+  failed: "Failed jobs",
+  cancelled: "Cancelled jobs",
+  unclosed: "Unclosed jobs",
+};
 
-export function usageSnapshotNotice(value: UsageOverviewResponse, now: number) {
+export function usageSnapshotNotice(
+  value: UsageOverviewResponse2,
+  now: number,
+) {
   const age = now - Date.parse(value.observedAt);
   return {
     title:
@@ -33,10 +43,11 @@ export function usageSnapshotNotice(value: UsageOverviewResponse, now: number) {
 
 /** Render only received numeric facts; no local policy thresholds or zero-for-unknown. */
 export function projectUsageOverview(
-  value: UsageOverviewResponse,
+  value: UsageOverviewResponse2,
   queueHref?: string,
 ): UsageLimitsView {
   const { policy, monthlyAdmission: admission, queue } = value;
+  const whole = value.wholeJobs;
   const unknown =
     value.periods[2].recording.unavailable +
     value.periods[2].recording.notRecorded;
@@ -77,9 +88,43 @@ export function projectUsageOverview(
         id: period.kind,
         run: periodLabel[period.kind],
         outcome: `${period.states.completed} completed · ${period.states.failed} failed · ${period.states.cancelled} cancelled`,
-        attempts: `${period.attempts} total · ${period.completedAttemptsWithRecordedUsage} completed with recorded usage`,
+        // completedAttempts.attempts IS the recorded completed count: the canonical receiver ties it to
+        // recorded.completed and ties attemptsWithoutRecordedUsage to states.completed - recorded.completed,
+        // so subtracting that gap again would undercount and can drive this row negative.
+        attempts: `${period.attempts} total · ${period.recorded.completed} completed with recorded usage`,
         usage: `${dollars(period.knownChargeMicroUsd)} known · ${period.recording.unavailable} unavailable · ${period.recording.notRecorded} not recorded`,
       })),
+    },
+    wholeJobs: {
+      // The month label comes from the received month period; the window start is the received
+      // admission start, so the UI states no window it did not receive.
+      title: `Whole jobs · ${periodLabel.month}`,
+      description: `One whole job is a root objective together with every continuation of it; a single attempt, conversation thread or child assignment is never a job. Counted when the objective's root revision was created in the admitted month window from ${admission.startInclusive}.`,
+      facts: [
+        ...(Object.keys(jobStateLabel) as (keyof typeof jobStateLabel)[]).map(
+          (state) => ({
+            label: jobStateLabel[state],
+            value: `${whole.states[state].jobs} jobs · ${whole.states[state].attempts} attempts · ${dollars(whole.states[state].knownChargeMicroUsd)} known SDK estimate`,
+          }),
+        ),
+        {
+          label: "Jobs with usable accounting",
+          value: `${whole.coverage.jobsWithRecordedUsage} recorded · ${whole.coverage.jobsWithUnavailableUsage} without usable accounting`,
+        },
+        {
+          label: "Continuations outside this month",
+          value: `${whole.coverage.revisionsWithRootOutsideWindow} excluded and counted`,
+        },
+      ],
+      cost: {
+        label: "Cost per successful job",
+        value:
+          whole.microUsdPerSuccessfulJob === null
+            ? "Unavailable"
+            : dollars(whole.microUsdPerSuccessfulJob),
+        caption: `SDK list-price estimate attributed to each objective from its root revision, and it is never a provider bill; provider billing stays unavailable. ${whole.coverage.jobsWithUnavailableUsage} jobs without usable accounting leave the known charge partial, so a missing cost is not zero.`,
+      },
+      footnote: `A job stays unclosed while ${whole.unsettledChildren} child receipts are unsettled, ${whole.unresolvedSuccessors} successor continuations are unresolved, or ${whole.closurePending} revisions still need their completion proof. A revision created after the window is not read, so a job whose continuation falls outside the window is reported from the revisions inside it only; a continuation whose root revision is outside the window is excluded and counted.`,
     },
     configuration: {
       title: "Effective workspace policy",
@@ -122,7 +167,7 @@ export function projectUsageOverview(
         },
         {
           title: "Accounting coverage",
-          detail: `${unknown} attempts created this month lack usable accounting. Complete-job cost and provider bills are unavailable; missing cost is not zero.`,
+          detail: `${unknown} attempts created this month lack usable accounting. Whole-job cost is an SDK list-price estimate and provider billing remains unavailable; missing cost is not zero.`,
           tone: unknown ? "warning" : "neutral",
         },
       ],
