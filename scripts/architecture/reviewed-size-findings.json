@@ -6993,9 +6993,11 @@
     "file": "apps/web/src/features/portfolio/files/FileVersionHistory.tsx",
     "kind": "function",
     "symbol": "FileVersionHistory",
-    "fingerprint": "e6b79e9e07e7744d3a1a329d78094f8509b3933c947a114e39f78773d71c9504",
-    "reason": "reviewed-accept - one bounded metadata history read/display lifetime, 119 nonblank. It owns exactly the explicit Load/Refresh/Next/First control set, one page state keyed by the canonical file-scope lifetime key, a ref-held AbortSignal latch that refuses overlapping reads and withholds a late completion or failure after identity, files-list or abort change, and the version list with its 'Versions X-Y of N' status. It owns no transport (readFileHistory over the existing canonical Core attachment GET), no authority (useFileScope/file-reader plus Core decide current access; the panel grants nothing and shows no old-version bytes or links), no cursor semantics (the Core cursor is passed through opaquely and anchor/offset/page-size/original/head/count/order/duplicate/continuation correlation is asserted by the shared response-receiver schema), and no model or budget turn (nothing runs until the operator clicks; the file contains no effect hook). The 119 lines are one cohesive read-and-render state machine; splitting the controls, the list and the status line into siblings would fragment one lifetime without removing any coupling.",
-    "reviewedBy": "Hermes Agent independent architecture review (session 20261028_015237_721345)",
+    "line": 14,
+    "nonblank": 189,
+    "fingerprint": "d94145a0adfac4291a9f75052da433ee4a9cc58d963948c364e162b29cde9ccc",
+    "reason": "reviewed-accept - one bounded version-history surface owner, 189 nonblank (119 at b580e81c; the delta adds the per-row original-version open wiring). It owns exactly: the explicit Load/Refresh/Next/First controls; one page state keyed by the canonical file-scope lifetime key together with the FileHistoryRequest that produced it; a ref-held AbortSignal latch that refuses overlapping reads and withholds a late completion or failure after identity, files-list or abort change; the 'Versions X-Y of N' status; the row list; and the per-row Open this version / Download this version controls. It owns no transport (readFileHistory over the existing canonical Core attachment GET), no authority (useFileScope/currentFileReader plus Core decide current access; the panel grants nothing and renders no version bytes or links of its own), no cursor semantics (the Core cursor is passed through opaquely; anchor/offset/page-size/original/head/count/order/duplicate/continuation correlation is asserted by the shared response-receiver schema), and no destination construction (currentFileHistoryDestination in history-access.ts re-reads the displayed page through the current owner and returns the guarded URL; the panel only binds that callback into the shared navigation owner, passing the clicked row's id and source). The link controls mirror the already-accepted FilePreview current-file controls exactly: same role=link button, same disabled={!canRead || pendingId} expression, same 'Checking current ... access' status pattern. No effect hook; nothing runs until the operator clicks. The 189 lines are one read-render-bind state machine over one page lifetime: extracting the controls, the row list or the row link actions would require lifting the page/request state that the navigation callback must reuse, i.e. moving props without removing coupling.",
+    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_033930_49f89b)",
     "reviewedOn": "2026-10-28"
   },
   {
@@ -7135,6 +7137,28 @@
     "reviewedSha256": "9b75a4e6b3931809449508025474a2445f5af0d8cd8d65014f03670a598cfe00",
     "reason": "One decision function: read the stored row, refuse on pre-existing validation errors, unknown payloads, unsupported fields, identity mismatch, or unreadable triggers/tools/template/procedure, otherwise return the frozen viewedTarget plus the pre-filled form and the preserved template/procedure. It deliberately refuses rather than erasing stored semantics. Refusal branches are ordered guards over one payload shape, so splitting would fragment a single refusal contract. Accepted.",
     "reviewedBy": "Hermes20261028_015256_7c546a",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/tests/file-history.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 413,
+    "fingerprint": "f8b0da61d3fc26d83f99ce9ba94d8217a56e4550ee8d16328bcf2014815acd25",
+    "reason": "reviewed-accept - one bounded receiver-contract suite for the current native attachment history surface, 413 nonblank. It is a single test module of focused cases over one feature: the response-receiver schema refusals (anchor, offset, duplicate version, broken parent chain, terminal page, current row, original, continuation), the two bounded page reads through the existing GET owner, unsafe or absent per-row links, a fresh Core read per navigation with no cached-URL use, and the historical-navigation refusals (missing link, blocked, wrong source, removed version, revoked, late identity) plus the withheld late-response cases. Its length is the case matrix for one contract, not several responsibilities; the fixtures (synthetic id page/first/fixture) are shared by all cases and belong with it. Recorded under the established bounded test-scope practice: the canonical CLI discover() walks apps/web/src and packages/meri-client/src only, while the registry already carries 31 apps/web/tests records (7 of them file-level).",
+    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_033930_49f89b)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/tests/file-history.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "line": 97,
+    "nonblank": 320,
+    "fingerprint": "2e5a3079ad8fd758f2d701f6f68b9a14af8551cf802689f422ec6d94f4fe8e85",
+    "reason": "reviewed-accept - the describe callback of the single history suite: the whole case table for one feature contract, sharing its synthetic page/attachment fixtures and the cache/execution fixture. It grew from 218 to 320 nonblank by adding the legacy-missing-field, unsafe-link, per-navigation re-read and historical-refusal cases; those cases are the delta under review, not a second concern. Splitting it would fragment the fixtures and the single contract narrative without reducing coupling. Recorded under the same bounded test-scope practice as the module record.",
+    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_033930_49f89b)",
     "reviewedOn": "2026-10-28"
   }
 ]
