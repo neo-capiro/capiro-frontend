@@ -7291,5 +7291,16 @@
     "reason": "Shared conversation draft and journal module. The file-level size is the accumulated public shape of one responsibility: the selected-input shell (skill, window request, document revision, work, and now the native procedure), the canonical-JSON submission identity, the stored echo that a recovered or uncertain message re-sends unchanged, and the retained-intent snapshot. This change adds the procedure member to the selection and draft shapes, copies and freezes it, admits it in the closed field set of the selection receiver, re-sends it unchanged from the stored submission, and adds withProcedureSelection, which resolves the canonical mutual exclusion between the static quick-skill pin and the native procedure through the receiver instead of restating eligibility. Every admission still belongs to the one canonical receiver; no authority, store, run or second owner was added. A size-based split would separate the shape from the identity and replay rules that constrain it.",
     "reviewedBy": "Hermes independent source review session 20261028_071126_e8a975 (configured-default Hermes)",
     "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-routines/workflow.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 492,
+    "fingerprint": "1c916681e2c258afff98e977509f20183f7146b4c537f4ca68d1d2afb5987f86",
+    "reason": "One current-context RoutineWorkflow owns the view lifetime and serializes prepare, approval, recovery and consent renewal through the same existing access port and journal lock. The added consent review and explicit renewal share its currentness guard, publication fence, access-loss retirement and one-review decision identity; they add no transport, durable store, scheduling executor or authority owner. Per-action methods remain bounded and request/response receiving, correlation and persistence are delegated to existing owners. Keeping these related state transitions together avoids splitting a single guarded lifecycle solely to satisfy the file threshold. Accepted exact module after reading the full body and its delta, reusing the independent source assessment; final installed-package and deployed acceptance remain required.",
+    "reviewedBy": "Codex M5 bounded full-module validation, reusing independent Hermes consent-consumer review beb06061feee5ea7bbf0d732e53aac90848e902c2c08898abf65a5687272e89d section 5",
+    "reviewedOn": "2026-10-28"
   }
 ]
