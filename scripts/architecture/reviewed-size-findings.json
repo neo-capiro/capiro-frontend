@@ -6911,10 +6911,12 @@
     "file": "apps/web/src/features/meri/files/DocumentLibrary.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "0b7636bd5bb9838306a010c5600f6b7c3dfc97198334d6f572b20b9bc74969fb",
-    "reason": "One feature-local Files library surface: the saved-conversation entry plus three private render helpers over the unchanged DocumentLibraryController/SessionLifetimeController/port owners. It owns no transport, storage, session or permission authority, and the +23 nonblank over the already registered 407-line module is JSX inside LibraryPage, so it is not split for a line threshold.",
-    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
-    "reviewedOn": "2026-10-27"
+    "line": 1,
+    "nonblank": 437,
+    "fingerprint": "4bc9e3f19e6a0b0218294d41a369d1b54216ad49060f3f9c4912ae2a76a15a77",
+    "reason": "reviewed-accept - the same single feature-local Files library surface, 437 nonblank, +7 over the recorded base body (430 at 657c9458, which is the reviewed 0b7636bd fingerprint). The whole delta is the narrow mount of the additive native-result surface: one import plus one NativeResultFiles element rendered as a sibling above LibraryPages inside the same already-reviewed ready branch, keyed `results:${state.lifetimeKey}` on the same session lifetime key and receiving the same host `state.port` (the accepted DocumentLibraryAccess) that LibraryPages already uses. No function body in this module changed: DocumentLibrary (d422e510...) and LibraryPage (1b8f2cad...) are byte-identical to their accepted records. The module still owns no transport, storage, session, model, run, approval or permission authority, and adds no second lifetime, request, cursor or error owner. The 437 lines remain one JSX module over the reviewed controller/session-lifetime/port owners; extracting the mount into another file would move one import and one element without removing any coupling.",
+    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_075000_8b6a19)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/meri/files/DocumentLibrary.tsx",
@@ -6938,19 +6940,23 @@
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest",
-    "fingerprint": "e44b61c73a2f27e42a575423269fa15afed05dcdfa2a0548b8ad1865ede61566",
-    "reason": "One same-origin forwarding owner. The preview routes reuse the existing origin/session/deadline/ bounded-read path and add an explicit binary header allowlist (CSP plus six x-meri-preview-* headers) with an 8 MiB read bound; admission uses the canonical preview request receiver and publication permission remains with the remote application, so readEnabled only enables forwarding and never grants a write.",
-    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
-    "reviewedOn": "2026-10-27"
+    "line": 49,
+    "nonblank": 113,
+    "fingerprint": "e17052b938144e60c5767e76232a44688157e11ad536505aad4d863bdf92317b",
+    "reason": "reviewed-accept - the same one same-origin document forwarding owner, 113 nonblank, +7 over the reviewed e44b61c7 body (106 at base). The delta is three additive lines in existing branches: 'results' joins the one fixed route set and its union; the single admission chain gains one branch that admits only the canonical receiver's closed empty object before dispatch; and the bounded read selects the contract's own 256 KiB results bound. Every pre-existing constraint is untouched and still applies to results: exact path `/api/documents/${operation}`, empty query, sameRequestOrigin, refusal of an `authorization` or `content-encoding` header, unchanged write gating (results is a read gated only by readEnabled), the same native token and action-session header, the same redirect refusal and the same json/binary header policy. No new HTTP, credential, session, storage or error owner; no existing route branch changed, so the existing routes keep their reviewed behavior byte-for-byte.",
+    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_075000_8b6a19)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/shared/meri-documents/library-access.ts",
     "kind": "function",
     "symbol": "createDocumentLibraryAccess",
-    "fingerprint": "48ce112f281b3803fabdd4534d3bcba025071d0ff4cc8cb832a93f585d13e79e",
-    "reason": "One library port factory. It composes the existing artifact/HTTP owners with the new preview leaf and routes preview read/publish access loss and busy state through the same onAccessLost and pending() budget as the existing metadata/inspect/download paths; no new transport, header, session or retry owner.",
-    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
-    "reviewedOn": "2026-10-27"
+    "line": 67,
+    "nonblank": 93,
+    "fingerprint": "1815ee1df355f751374ab3f2718813d52e0982a777afc8fdaaf763c02f27c8de",
+    "reason": "reviewed-accept - the same one library port factory, 93 nonblank, +10 over the reviewed 48ce112f body (83 at base). The delta is purely compositional: it composes the additive read leaf (createNativeResultsAccess) beside the existing transport/artifact/preview owners on the same `AbortSignal.any([lifetime, owned.signal])` signal and the same fetcher; it delegates results through the existing access-loss owner (onAccessLost only when reply.accessDenied) and includes the leaf in pending() so an early session renewal cannot cut an active bounded read. No new transport, header, credential, retry, storage or error-vocabulary owner is introduced, and the existing list/history/inspect/download branches are unchanged.",
+    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_075000_8b6a19)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/shared/meri-documents/preview-access.ts",
@@ -7231,6 +7237,28 @@
     "fingerprint": "c41089f3f2bef817c52432ac18031103a99758161e265f10db82ff47ce48a2ab",
     "reason": "One presentation concern for the saved upload's current original: it renders the recorded saved state, re-asks the owner through the session's current-read port on demand and never on selection, keeps one bounded action at a time, discards work that a later action superseded, publishes the one document URL only on an admitted read and clears it on refusal and unmount, and states plainly that the saved event is custody metadata rather than extracted text or a claim that the answer used the file. It makes no custody, authorization or retention decision.",
     "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/NativeResultFiles.tsx",
+    "kind": "function",
+    "symbol": "NativeResultFiles",
+    "line": 23,
+    "nonblank": 153,
+    "fingerprint": "3b0740f53776b3831179c79548f252b120fde59869ac7e71c063627bea0d75dc",
+    "reason": "reviewed-accept - one bounded metadata-read surface for the captured run of this saved conversation's own session: the file module itself is 256 nonblank (under the 400 file threshold) and this is its only function trigger. It owns exactly: the explicit 'Read captured run results' control with no read on open; one admitted page state; one superseding request controller plus generation latch that aborts the prior action, discards a late answer and cancels on unmount; the three separate explicit actions (read the page, inspect current bytes, verify download) which each delegate to the existing canonical artifact owner through the port; the closed refusal copy that clears page, inspection, verified URL and download together; and text-only rendering of entry names with truthful bounded-page/empty-vs-bound labels. It owns no transport, URL, header, credential, authority, byte read, allocation, model or file generation, and no executable preview: the verifier/download reply is held only as a local revoking object URL (DocumentDownloadUrl). The pure row presentation is already extracted (NativeResultRows, exported, no trigger of its own), so the remaining 153 lines are one read-inspect-download state machine over one page lifetime sharing the controller, generation counter, problem state and URL owner; splitting it further would require lifting exactly the state that makes the supersede/discard guard correct.",
+    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_075000_8b6a19)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-documents/proxy.ts",
+    "kind": "function",
+    "symbol": "proxyDocumentRequest > <anonymous>",
+    "line": 80,
+    "nonblank": 83,
+    "fingerprint": "9db2dd1e2627bed3c1327fac4dd05c76c3c9734e75aa6e62878ad9a7d8cfbafb",
+    "reason": "reviewed-accept - NEW trigger, not a second forwarder. This is the existing inline deadline callback of the same single proxyDocumentRequest (`withActionDeadline([request.signal], async (signal) => ...)`); it was under the 80-line function threshold at base and crossed it with the additive results admission branch and its bounded-read selection. It shares the enclosing owner's config, request, route, fetcher, native-token/session gates, error path and signal, and it owns nothing of its own: no client, no state, no authority, no route vocabulary beyond the enclosing fixed set. The design assessment is the proxyDocumentRequest record above; this record exists only because the canonical scanner measures the nested body separately and the trigger must not be left unreviewed. Extracting the callback would move routing/config/fetcher/signal handling behind a hand-passed parameter list inside one forwarding owner without reducing coupling.",
+    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_075000_8b6a19)",
     "reviewedOn": "2026-10-28"
   }
 ]
