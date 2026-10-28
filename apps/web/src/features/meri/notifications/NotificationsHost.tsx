@@ -324,7 +324,7 @@ function OwnedUpdates({
         <NotificationCategoryControls
           preferences={view.document.preferences}
           editable={editable}
-          unavailable={unavailable}
+          unavailable={view.message || unavailable}
           onChange={(key, value) => void change(key, value)}
         />
       ) : null}

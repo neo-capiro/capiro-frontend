@@ -225,7 +225,9 @@ export function projectUpdates(input: {
           source: "memory-review",
           title: row.title,
           detail:
-            "A memory proposal you can act on. Assignment and changes-requested notices are always delivered.",
+            delivery === "optional-outcome"
+              ? "A memory proposal you submitted was reviewed. This outcome notice does not require another action."
+              : "A memory review assignment or requested change. Open the current review to check available actions; these notices are always delivered.",
           occurredAt: row.createdAt,
           read: row.readAt !== null,
           delivery: delivery === "required" ? "required" : "optional",
