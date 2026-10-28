@@ -917,10 +917,10 @@
     "file": "apps/web/src/features/portfolio/files/FilePreview.tsx",
     "kind": "function",
     "symbol": "FilePreview",
-    "fingerprint": "14bf7a6dec33d35cf4a4ad75818162d6ceb4c90370cf90c5198aefe78c66dfef",
-    "reason": "Presents one selected attachment and restores its connected opener when the modal closes. Readiness controls which original-file links and extracted-text controls appear; current URL resolution and text extraction are delegated to navigation and extraction. It displays only the owners' current scoped state, so actor/source/view replacement removes obsolete text. The 103-line body consists of one modal with readiness, current-navigation and extracted-text branches; retain the presentation together without another lifecycle owner.",
-    "reviewedBy": "Codex portfolio_prospects_files; independent root integration review",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "0cd1ddc081b12f8ae5e123061fec5be5bb41707ff8eb9f78128e724d7e6b0235",
+    "reason": "reviewed-accept - one selected-attachment preview modal, 104 nonblank against 103 in the previously registered body. The entire delta is one <FileVersionHistory clientId attachmentId> mount appended inside the existing stack div: no import-time authority, no transport, no lifecycle, no state and no new owner are added, and no line was removed. The body remains one coherent responsibility - the readiness branch (scan disclosure, role=alert unusable message, inline-preview status), the current-navigation row (Open in new tab / Download behind navigation.canRead and pendingId), the extraction control with its receipt and error surface, and the new sibling history panel. Every read, permission and URL decision stays with navigation, extraction, file-scope and Core; the component renders their current scoped state only. Splitting the added mount into its own host would relocate no responsibility, so the >80 threshold is a size signal here, not a cohesion defect.",
+    "reviewedBy": "Hermes Agent independent architecture review (session 20261028_015237_721345)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx",
@@ -6989,6 +6989,15 @@
       "work/m7-usage-fe-final-focused.txt (21/21 PASS)"
     ],
     "reviewedBy": "Hermes Agent independent source review (session 20261028_004952_c1f9fa)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/FileVersionHistory.tsx",
+    "kind": "function",
+    "symbol": "FileVersionHistory",
+    "fingerprint": "e6b79e9e07e7744d3a1a329d78094f8509b3933c947a114e39f78773d71c9504",
+    "reason": "reviewed-accept - one bounded metadata history read/display lifetime, 119 nonblank. It owns exactly the explicit Load/Refresh/Next/First control set, one page state keyed by the canonical file-scope lifetime key, a ref-held AbortSignal latch that refuses overlapping reads and withholds a late completion or failure after identity, files-list or abort change, and the version list with its 'Versions X-Y of N' status. It owns no transport (readFileHistory over the existing canonical Core attachment GET), no authority (useFileScope/file-reader plus Core decide current access; the panel grants nothing and shows no old-version bytes or links), no cursor semantics (the Core cursor is passed through opaquely and anchor/offset/page-size/original/head/count/order/duplicate/continuation correlation is asserted by the shared response-receiver schema), and no model or budget turn (nothing runs until the operator clicks; the file contains no effect hook). The 119 lines are one cohesive read-and-render state machine; splitting the controls, the list and the status line into siblings would fragment one lifetime without removing any coupling.",
+    "reviewedBy": "Hermes Agent independent architecture review (session 20261028_015237_721345)",
     "reviewedOn": "2026-10-28"
   }
 ]
