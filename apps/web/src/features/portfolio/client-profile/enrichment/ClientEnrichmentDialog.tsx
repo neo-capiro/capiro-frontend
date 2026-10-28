@@ -69,7 +69,11 @@ function ClientEnrichmentReview({
     userId: identity.data?.user.id ?? "",
     tenantId: identity.data?.tenant?.id ?? "",
   });
-  const run = !latest.error ? latest.data : undefined;
+  const run = action.uncertain
+    ? action.uncertainReview
+    : !latest.error
+      ? latest.data
+      : undefined;
   const chosen =
     run?.findings
       .filter((f) => selected.includes(f.id) && canSelectFinding(f))
@@ -144,6 +148,7 @@ function ClientEnrichmentReview({
               retry={() => void latest.refetch()}
             />
             <QueryState error={action.mutation.error} />
+            <QueryState error={action.readError} />
             {action.uncertain && (
               <div role="alert" className="status error">
                 The request may have saved changes. Do not repeat it. Refresh
@@ -151,7 +156,7 @@ function ClientEnrichmentReview({
                 operation receipt for resolving an ambiguous response.
                 <button
                   className="button"
-                  onClick={() => void latest.refetch()}
+                  onClick={() => void action.refreshUncertainReview()}
                 >
                   Refresh saved review
                 </button>
