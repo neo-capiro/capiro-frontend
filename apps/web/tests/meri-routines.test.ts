@@ -891,6 +891,67 @@ function renderReview(port: RoutineWorkflow) {
   view.changed = false;
   return renderToStaticMarkup(createElement(RoutineReview, { port }));
 }
+/** The same reviewed routine, carrying the approved work definition the immutable intent covers. */
+function workConsumer(
+  connection: NonNullable<IntentsAccess["routines"]>,
+  proposalId: string,
+  work: unknown,
+) {
+  return new RoutineWorkflow({
+    ...connection,
+    seed: {
+      requestId: proposalId,
+      context: {
+        ...f.context,
+        selectedClientId: connection.context.selectedClientId,
+      },
+      // The reviewed request is the producer's own: the definition the approval shows is the one the request carried,
+      // so the saved request carries it too and the receiving boundary correlates the two.
+      prepare: {
+        ...f.request,
+        requestId: proposalId,
+        request: { ...f.request.request, work },
+      },
+      proposal: { ...f.prepared.proposal, proposalId, work },
+      approving: false,
+    },
+    isCurrent: () => !connection.signal.aborted,
+  });
+}
+it("shows the approved work definition the intent covers, and no work section for an ordinary routine", async () => {
+  const fetcher = vi.fn<typeof fetch>(async (url) =>
+    String(url) === "/api/action-followthrough/session"
+      ? Response.json(conversationReceipt())
+      : new Response("refused", { status: 403 }),
+  );
+  const host = conversationHost(fetcher);
+  const detach = host.attach();
+  try {
+    await host.connect();
+    const connection = readyConnection(host);
+    const proposalId = "11111111-1111-4111-8111-111111111111";
+    // An ordinary routine states no work: the review shows none and the owner is not asked to review one.
+    const ordinary = conversationConsumer(connection, proposalId);
+    await ordinary.load();
+    expect(renderReview(ordinary)).not.toContain("Work this routine starts");
+    // A routine that starts work shows exactly the definition the intent covers, member for member.
+    const carrying = workConsumer(connection, proposalId, {
+      entry: "start-work",
+      jobKind: "research",
+      deliverables: ["committee brief"],
+      dependencies: ["intake"],
+    });
+    await carrying.load();
+    const shown = renderReview(carrying);
+    expect(shown).toContain("Work this routine starts");
+    expect(shown).toContain("Entry: Start work. Kind: research.");
+    expect(shown).toContain("Deliverables: committee brief.");
+    expect(shown).toContain("Dependencies: intake.");
+    expect(shown).toContain("and the work this routine starts");
+  } finally {
+    detach();
+  }
+});
 function scheduleItem(proposalId: string) {
   return {
     deliveryId: "sdk:" + "b".repeat(64),

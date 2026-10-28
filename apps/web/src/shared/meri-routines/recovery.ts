@@ -1,12 +1,16 @@
 import { z } from "zod";
 import {
-  receiveRoutinesRequest,
-  receiveRoutinesResponse,
   type RoutinesPrepareRequest,
   type RoutinesProposal,
   type RoutinesApproveRequest,
   type RoutinesReconcileRequest,
 } from "@capiro/meri-contracts/routines-application";
+// The receiving boundary is resolved in exactly one module, so a saved routine is re-admitted by the same boundary the
+// rest of the app uses — and the source-stage bundle can be qualified without a second import path.
+import {
+  receiveRoutinesRequest,
+  receiveRoutinesResponse,
+} from "./canonical-receiver";
 import { actionContextSchema } from "../meri-actions/session-receipt";
 import { sameJson } from "../meri-actions/correlation";
 import {
