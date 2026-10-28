@@ -5809,19 +5809,11 @@
     "file": "apps/web/src/features/meri/screens/settings/MeriPreferencesPanel.tsx",
     "kind": "function",
     "symbol": "MeriPreferencesPanel",
-    "fingerprint": "d07b3a85ca5c8d0f485dc633a7f09723dbd60e3970391b9d420cb331a9674e0b",
-    "sourceFingerprint": "d07b3a85ca5c8d0f485dc633a7f09723dbd60e3970391b9d420cb331a9674e0b",
-    "reason": "The Settings preferences tab shell owns page selection and the shared chrome object, then delegates every page to its canonical owner (UserPreferencesHost, ConnectorAccountsHost, SkillsTemplatesScreen, NotificationsAccountScreen, PrivacyDeletionScreen, HelpShortcutsScreen) and now routes the usage page to UsageOverviewHost when readConversationConfig enables usage, otherwise to the existing UsageLimitsScreen with the existing TenantModelSettings as configurationContent. The added usage branch is pure routing to already-owned read-only views; it adds no domain, authority, accounting, transport or persistence responsibility. The switch over the seven page ids remains the single cohesive responsibility, so a split would add indirection without reducing coupling.",
-    "rationale": "Accepted change to an existing reviewed shell: the 12 added lines only select between two already-owned usage owners and pass the existing tenant-settings owner through. Same single responsibility as the superseded record; only the usage routing was added. No new authority, transport or accounting logic enters this body.",
-    "evidence": [
-      "apps/web/src/features/meri/screens/settings/MeriPreferencesPanel.tsx lines 29-131 (body)",
-      "apps/web/src/app/settings/[section]/page.tsx (usageEnabled={readConversationConfig(process.env).enabled})",
-      "apps/web/src/features/meri/usage-overview/UsageOverviewHost.tsx (canonical usage owner)",
-      "apps/web/tests/meri-usage-overview-binding.test.ts, meri-usage-overview-presentation.test.ts",
-      "work/m7-usage-fe-architecture.json sizeFindings (nonblank 93, fingerprint d07b3a85..., reviewStatus changed-since-review)",
-      "work/m7-usage-fe-final-focused.txt (21/21 PASS)"
-    ],
-    "reviewedBy": "Hermes Agent independent source review (session 20261028_004952_c1f9fa)",
+    "line": 29,
+    "nonblank": 103,
+    "fingerprint": "ea358d0339aca5db18c04277e276666c07c2318052a5b4ba4d77766d1d4b442f",
+    "reason": "One preferences tab shell for the composed union: it holds only the selected page id, builds the shared SettingsChrome (nav/select/embedded/notice/unavailable/localDrafts false/headerOverlays false) and delegates every page to its canonical owner. The composition adds exactly the accepted owner's Updates case (NotificationsAccountScreen with the Updates notice, whose NotificationsHost, /meri/updates route and capiro-template route auth are owner-exact blobs separately accepted in the ff24e4e2 and 6ce6fc93 reviews) while preserving the union's Usage branch byte-for-byte: usageEnabled routes to UsageOverviewHost with configurationContent = tenantSettingsEnabled ? TenantModelSettings : undefined, otherwise the existing UsageLimitsScreen keeps the same tenant-settings configurationContent and the tenant model-limits notice. The switch over the seven page ids remains the single responsibility; this body owns no notification, run, preference, usage, accounting, transport or persistence state and adds no new authority, so a split would add indirection without reducing coupling. This fingerprint is the composed body: it differs from the owner body (ccc933ed2e5080652e1e7227cd96a804205bf013894c6881e4e504f12b95cf10) and from the superseded base-union record (d07b3a85ca5c8d0f485dc633a7f09723dbd60e3970391b9d420cb331a9674e0b), so neither stale binding is applied to these bytes.",
+    "reviewedBy": "Hermes20261028_032621_33b84d",
     "reviewedOn": "2026-10-28"
   },
   {
