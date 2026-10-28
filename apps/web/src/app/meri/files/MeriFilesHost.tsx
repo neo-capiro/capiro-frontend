@@ -12,6 +12,7 @@ import ui from "../../../features/meri/ui/meri-ui.module.css";
 import { MeriPageHeading } from "../../../features/meri/ui/MeriPageHeading";
 import { MeriFilesWorkflow } from "../../../features/meri/files/MeriFilesWorkflow";
 import { DocumentLibrary } from "../../../features/meri/files/DocumentLibrary";
+import { LegacyReportLibrary } from "../../../features/meri/files/LegacyReportLibrary";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { scopedHref } from "../../../shared/session/client-route";
 import { useMeriCapabilities } from "../../../shared/meri-resources/CapabilityContext";
@@ -54,6 +55,12 @@ export function MeriFilesHost({
     selected.state === "no-selection" || selected.state === "authorized-client";
   return (
     <>
+      {account && available && (
+        <LegacyReportLibrary
+          key={JSON.stringify([account.tenantId, account.actorId, clientId])}
+          {...(clientId ? { clientId } : {})}
+        />
+      )}
       {readEnabled &&
         (account && available ? (
           <DocumentLibrary
