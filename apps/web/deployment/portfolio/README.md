@@ -92,7 +92,8 @@ false workflow flags. These targets are not evidence of live availability.
 
 `https://app.capiro.ai` is the single authoritative public browser origin, and it
 is fixed in source (`frontend-origin.ts`, this proposal and the service template).
-`os.capiro.ai` and the retired `portfolio-preview.app.capiro.ai` host are not
+`os.capiro.ai` and the previous `portfolio-preview.app.capiro.ai` origin — still
+deployed until this shipment changes it — are not
 implicit aliases, and backend, Meri, Clerk, native and OAuth callback origins keep
 their own hostnames. This origin change does not re-issue TLS and does not move
 DNS: shipment reuses the already issued certificate recorded for

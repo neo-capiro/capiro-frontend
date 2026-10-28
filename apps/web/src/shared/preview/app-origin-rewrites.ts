@@ -11,6 +11,12 @@
 /** The frontend's own browser host. No other host is admitted by these rewrites. */
 export const appBrowserHost = "app.capiro.ai";
 
+/**
+ * Next compiles `has.value` as a regular expression, so an unescaped literal host
+ * would also admit `app-capiro.ai` or `appxcapiroyai`. The gate is this escaped form.
+ */
+export const appBrowserHostPattern = "app\\.capiro\\.ai";
+
 /** The original edge that still owns the retained app-host callbacks and links. */
 export const retainedAppCapabilitiesOrigin = "https://os.capiro.ai";
 
@@ -45,6 +51,6 @@ export function appOriginRewrites(): AppOriginRewrite[] {
   return forwardedPaths.map((path) => ({
     source: path,
     destination: `${retainedAppCapabilitiesOrigin}${path}`,
-    has: [{ type: "host" as const, value: appBrowserHost }],
+    has: [{ type: "host" as const, value: appBrowserHostPattern }],
   }));
 }

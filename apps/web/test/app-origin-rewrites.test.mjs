@@ -4,6 +4,7 @@ import { createRequire } from "node:module";
 import test from "node:test";
 import {
   appBrowserHost,
+  appBrowserHostPattern,
   appOriginRewrites,
   retainedAppCapabilitiesOrigin,
 } from "../src/shared/preview/app-origin-rewrites.ts";
@@ -31,14 +32,39 @@ const required = [
   `/api/engagement/newsletter-public/${token}/survey`,
   `/workspace-api/newsletters/assets/file/${token}`,
 ];
+// The query a provider or a mail client actually sends through this edge.
+const incomingQuery = {
+  code: "synthetic-code",
+  state: "synthetic-state",
+  validationToken: "synthetic-validation-token",
+};
 
-/** First rewrite whose host gate and source pattern both accept this request. */
-function matched(pathname, host = appBrowserHost) {
-  return rewrites.find((rewrite) => {
-    const matches = matchHas({ headers: { host } }, {}, rewrite.has);
-    if (matches === false) return false;
-    return getPathMatch(rewrite.source)(pathname) !== false;
+/**
+ * Mirrors resolve-routes: path params and host-gate params are merged into one
+ * object and handed to prepareDestination with appendParamsToQuery.
+ */
+function resolveRewrite(rewrite, pathname, host = appBrowserHost) {
+  const hasParams = matchHas({ headers: { host } }, incomingQuery, rewrite.has);
+  if (hasParams === false) return false;
+  const pathParams = getPathMatch(rewrite.source)(pathname);
+  if (pathParams === false) return false;
+  const prepared = prepareDestination({
+    appendParamsToQuery: true,
+    destination: rewrite.destination,
+    params: { ...pathParams, ...hasParams },
+    query: incomingQuery,
   });
+  return {
+    newUrl: prepared.newUrl,
+    query: prepared.parsedDestination.query,
+    origin: prepared.parsedDestination.origin,
+    url: formatUrl({ ...prepared.parsedDestination, pathname: prepared.newUrl }),
+  };
+}
+
+/** First rewrite whose escaped host gate and source pattern both accept this request. */
+function matched(pathname, host = appBrowserHost) {
+  return rewrites.find((rewrite) => resolveRewrite(rewrite, pathname, host) !== false);
 }
 
 test("Next's route validator accepts the rewrite definitions", () => {
@@ -48,9 +74,12 @@ test("Next's route validator accepts the rewrite definitions", () => {
   assert.equal(rewrites.length, required.length);
 });
 
-test("every rewrite is gated on the app host alone with one fixed destination", () => {
+test("every rewrite is gated on the escaped app host with one fixed destination", () => {
   for (const rewrite of rewrites) {
-    assert.deepEqual(rewrite.has, [{ type: "host", value: appBrowserHost }]);
+    // A positive, escaped host gate. A `missing` condition would also admit a
+    // request that carries no Host header at all.
+    assert.deepEqual(rewrite.has, [{ type: "host", value: appBrowserHostPattern }]);
+    assert.equal(rewrite.missing, undefined);
     assert.equal(rewrite.destination, `${retainedAppCapabilitiesOrigin}${rewrite.source}`);
     const destination = new URL(rewrite.destination.replace(/:[a-z]+/g, "x"));
     assert.equal(destination.origin, retainedAppCapabilitiesOrigin);
@@ -61,38 +90,71 @@ test("every rewrite is gated on the app host alone with one fixed destination", 
   }
   assert.equal(retainedAppCapabilitiesOrigin, "https://os.capiro.ai");
   assert.equal(appBrowserHost, "app.capiro.ai");
+  assert.equal(appBrowserHostPattern, "app\\.capiro\\.ai");
 });
 
-test("the app host reaches every retained route and keeps its query string", () => {
+test("the host gate is an exact host, not a regex fragment", () => {
+  const has = rewrites[0].has;
+  const gate = (host) =>
+    matchHas(host === undefined ? { headers: {} } : { headers: { host } }, {}, has);
+  // Accepted: the app host, case-insensitively and with a port.
+  assert.deepEqual(gate("app.capiro.ai"), { host: "app.capiro.ai" });
+  assert.deepEqual(gate("APP.capiro.ai:443"), { host: "app.capiro.ai" });
+  for (const rejected of [
+    "app-capiro.ai", // dot -> hyphen substitution
+    "appxcapiroyai", // dot -> x substitution
+    "appacapiroaai",
+    "os.capiro.ai",
+    "portfolio-preview.app.capiro.ai",
+    "first-chat-preview.app-dev.capiro.ai",
+    "app.capiro.ai.evil.example",
+    "app.capiro.ai.example",
+    "xapp.capiro.ai",
+    undefined, // no Host header at all
+  ])
+    assert.equal(gate(rejected), false, String(rejected));
+});
+
+test("the app host reaches every retained route with the real query assembly", () => {
+  const original = `code=${incomingQuery.code}&state=${incomingQuery.state}&validationToken=${incomingQuery.validationToken}`;
   for (const path of required) {
     const rewrite = matched(path);
     assert.ok(rewrite, path);
-    const params = getPathMatch(rewrite.source)(path);
-    assert.notEqual(params, false, path);
-    const prepared = prepareDestination({
-      appendParamsToQuery: true,
-      destination: rewrite.destination,
-      params,
-      query: { utm_source: "mail", retry: "2" },
-    });
-    // Next compiles the destination path separately from the parsed external URL.
-    assert.equal(prepared.newUrl, path, path);
-    assert.equal(prepared.parsedDestination.origin, retainedAppCapabilitiesOrigin, path);
-    assert.equal(
-      formatUrl({ ...prepared.parsedDestination, pathname: prepared.newUrl }),
-      `${retainedAppCapabilitiesOrigin}${path}?utm_source=mail&retry=2`,
-      path,
-    );
+    const resolved = resolveRewrite(rewrite, path);
+    assert.notEqual(resolved, false, path);
+    assert.equal(resolved.newUrl, path, path);
+    assert.equal(resolved.origin, retainedAppCapabilitiesOrigin, path);
+    if (rewrite.source.includes(":")) {
+      // A dynamic token is consumed by the destination path, so appendParamsToQuery
+      // adds nothing and the original query is forwarded unchanged.
+      assert.deepEqual(resolved.query, { ...incomingQuery }, path);
+      assert.equal(resolved.url, `${retainedAppCapabilitiesOrigin}${path}?${original}`, path);
+    } else {
+      // A static host-gated route acquires the host param from matchHas, so the
+      // framework appends an extra host field. The known controllers ignore
+      // query.host, but this is not byte-identical to the original query.
+      assert.deepEqual(resolved.query, { ...incomingQuery, host: appBrowserHost }, path);
+      assert.deepEqual(Object.keys(resolved.query), [...Object.keys(incomingQuery), "host"], path);
+      assert.equal(
+        resolved.url,
+        `${retainedAppCapabilitiesOrigin}${path}?${original}&host=${appBrowserHost}`,
+        path,
+      );
+    }
   }
 });
 
-test("os and foreign hosts never match, so neither can borrow these routes", () => {
-  assert.equal(matchHas({ headers: { host: "os.capiro.ai" } }, {}, rewrites[0].has), false);
-  assert.deepEqual(matchHas({ headers: { host: "APP.capiro.ai:443" } }, {}, rewrites[0].has), { host: "app.capiro.ai" });
+test("os, previous-portfolio, foreign and suffixed hosts never match these routes", () => {
   for (const path of required) {
-    assert.equal(matched(path, "os.capiro.ai"), undefined, path);
-    assert.equal(matched(path, "app.capiro.ai.evil.example"), undefined, path);
-    assert.equal(matched(path, "first-chat-preview.app-dev.capiro.ai"), undefined, path);
+    for (const host of [
+      "os.capiro.ai",
+      "portfolio-preview.app.capiro.ai",
+      "app.capiro.ai.evil.example",
+      "app-capiro.ai",
+      "appxcapiroyai",
+      "first-chat-preview.app-dev.capiro.ai",
+    ])
+      assert.equal(matched(path, host), undefined, `${host}${path}`);
   }
 });
 
@@ -101,6 +163,7 @@ test("only the enumerated paths are forwarded", () => {
     "/api/conversations/submit",
     "/api/capiro/core.list",
     "/api/engagement/integrations/microsoft/callbackExtra",
+    "/api/engagement/integrations/microsoft/callback/extra",
     "/api/engagement/newsletter-public/token/other",
     "/workspace-api/newsletters/assets/file",
     "/workspace-api/other",

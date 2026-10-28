@@ -132,18 +132,23 @@ it("admits the configured public origin when Next sees only its bind address", (
 });
 
 it("refuses a paired but unreviewed preview public origin", () => {
-  const other = "https://elsewhere.synthetic.invalid";
-  const env = {
-    ...environment,
-    CAPIRO_REQUEST_ORIGIN: other,
-    CAPIRO_EXISTING_APP_URL: other,
-  };
-  const current = new Request(
-    "https://0.0.0.0:5188/api/action-followthrough/session",
-    { method: "POST", headers: { Origin: other }, body: "{}" },
-  );
-  expect(previewMeriConversationRoute(env, current)).toBe(false);
-  expect(previewBackendRejection(env, current)?.status).toBe(503);
+  for (const other of [
+    "https://elsewhere.synthetic.invalid",
+    "https://os.capiro.ai",
+    "https://portfolio-preview.app.capiro.ai",
+  ]) {
+    const env = {
+      ...environment,
+      CAPIRO_REQUEST_ORIGIN: other,
+      CAPIRO_EXISTING_APP_URL: other,
+    };
+    const current = new Request(
+      "https://0.0.0.0:5188/api/action-followthrough/session",
+      { method: "POST", headers: { Origin: other }, body: "{}" },
+    );
+    expect(previewMeriConversationRoute(env, current)).toBe(false);
+    expect(previewBackendRejection(env, current)?.status).toBe(503);
+  }
 });
 
 it("binds the preview conversation gate to the app's pinned contract package", () => {
