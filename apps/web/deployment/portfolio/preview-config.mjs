@@ -26,12 +26,16 @@ const nonMeriHosts = new Set([
   'core-roster-preview.capiro.ai',
 ]);
 const fixedParameters = Object.freeze({
-  CoreApiBaseUrl: `${origin}/api`,
+  // The preview API transports stay on the verified first-chat origin; only the browser
+  // origin (ExistingAppUrl / CapiroRequestOrigin) becomes app.capiro.ai.
+  CoreApiBaseUrl: corePreviewApi,
   StrategyApiBaseUrl: '',
-  WorkspaceApiBaseUrl: `${origin}/workspace-api`,
-  IntelligenceApiBaseUrl: `${origin}/intel-api`,
+  WorkspaceApiBaseUrl: 'https://first-chat-preview.app-dev.capiro.ai/workspace-api',
+  IntelligenceApiBaseUrl: 'https://first-chat-preview.app-dev.capiro.ai/intel-api',
   ExistingAppUrl: origin,
   TrackerBackend: 'intelligence',
+  // Held until the owner binds a preview onboarding endpoint; empty keeps it disabled.
+  OnboardApiBaseUrl: '',
 });
 const ordinaryServiceParameters = Object.freeze({
   CoreApiBaseUrl: corePreviewApi,
@@ -49,6 +53,7 @@ const optionalBindings = [
   'memoryOwnerReviewEnabled',
   'meriActionWorkflowEnabled', 'meriTaskCommandWorkflowEnabled',
   'meriIntentApprovalsWorkflowEnabled', 'meriDocumentWorkflowEnabled', 'meriDocumentOperation',
+  'onboardApiBaseUrl',
 ];
 const patterns = Object.freeze({
   clerkIssuer: /^https:\/\/clerk\.app\.capiro\.ai$/,
@@ -67,6 +72,30 @@ function closedRecord(input, keys, code, optionalKeys = []) {
       || ownKeys.some(key => !Object.hasOwn(Object.getOwnPropertyDescriptor(input, key), 'value'))) {
     throw Error(code);
   }
+}
+
+/**
+ * Existing onboarding service base. Empty means onboarding stays disabled. A supplied
+ * value is the service root only (no operation path), so it must be exactly the
+ * `/onboard-api` prefix the gateway calls append their operation paths to. One trailing
+ * slash is accepted and normalised away; the emitted value never carries it.
+ */
+function readOnboardConfiguration(bindings) {
+  const value = Object.hasOwn(bindings, 'onboardApiBaseUrl') ? bindings.onboardApiBaseUrl : '';
+  if (typeof value !== 'string' || value.length > 1024
+      || /[\u0000-\u0020\u007f\\]/.test(value))
+    throw Error('PREVIEW_ONBOARD_BINDING_INVALID');
+  if (value === '') return { baseUrl: '' };
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    throw Error('PREVIEW_ONBOARD_BINDING_INVALID');
+  }
+  if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash
+      || (url.pathname !== '/onboard-api' && url.pathname !== '/onboard-api/'))
+    throw Error('PREVIEW_ONBOARD_BINDING_INVALID');
+  return { baseUrl: `${url.origin}/onboard-api` };
 }
 
 function readMeriConfiguration(bindings) {
@@ -181,8 +210,10 @@ export function renderPreviewConfiguration(bindings) {
   if (userPreferencesEnabled && (!meri.baseUrl || previewReadOnly))
     throw Error('PREVIEW_USER_PREFERENCES_DEPENDENCY_HELD');
   const services = previewReadOnly ? fixedParameters : { ...fixedParameters, ...ordinaryServiceParameters };
+  const onboard = readOnboardConfiguration(bindings);
   const values = {
     ...services,
+    OnboardApiBaseUrl: onboard.baseUrl,
     CapiroRequestOrigin: origin,
     CapiroPreviewReadOnly: String(previewReadOnly),
     MeriUserPreferencesEnabled: String(userPreferencesEnabled),
@@ -231,7 +262,7 @@ export function renderPreviewConfiguration(bindings) {
       INTELLIGENCE_API_BASE_URL: services.IntelligenceApiBaseUrl,
       CAPIRO_EXISTING_APP_URL: origin,
       TRACKER_BACKEND: 'intelligence',
-      ONBOARD_API_BASE_URL: '',
+      ONBOARD_API_BASE_URL: values.OnboardApiBaseUrl,
       MERI_API_BASE_URL: meri.baseUrl,
       MERI_CONVERSATION_WORKFLOW_ENABLED: String(meri.enabled),
       MERI_ACTION_WORKFLOW_ENABLED: values.MeriActionWorkflowEnabled,
@@ -268,7 +299,13 @@ export function renderPreviewConfiguration(bindings) {
       applicationId: bindings.clerkApplicationId,
       requiredEnvironment: 'configured-core-issuer-unverified',
     },
-    holds: previewReadOnly ? ['strategy', 'onboard', 'meri'] : ['onboard'],
+    // The onboarding entry is a qualification of the actual service binding: a validated
+    // nonempty base means the surface is no longer held; no other hold is affected.
+    holds: previewReadOnly
+      ? ['strategy', ...(onboard.baseUrl ? [] : ['onboard']), 'meri']
+      : onboard.baseUrl
+      ? []
+      : ['onboard'],
     activationStatus: !previewReadOnly
       ? 'unverified ordinary authenticated routing; verify backend routes and credential compatibility before activation'
       : meri.enabled

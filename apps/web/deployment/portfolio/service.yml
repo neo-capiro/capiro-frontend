@@ -41,20 +41,26 @@ Parameters:
     Description: Explicit owner of Bill Tracker requests
   CoreApiBaseUrl:
     Type: String
-    Default: https://app.capiro.ai/api
-    AllowedValues: ["https://app.capiro.ai/api", "https://first-chat-preview.app-dev.capiro.ai/api"]
+    Default: https://first-chat-preview.app-dev.capiro.ai/api
+    AllowedValues: ["https://first-chat-preview.app-dev.capiro.ai/api"]
+    Description: Core transport. The reviewed preview binding is the first-chat API path, not the browser origin.
   StrategyApiBaseUrl:
     Type: String
     Default: ""
     AllowedValues: ["", "https://first-chat-preview.app-dev.capiro.ai/strategy-api"]
   WorkspaceApiBaseUrl:
     Type: String
-    Default: https://app.capiro.ai/workspace-api
-    AllowedValues: ["https://app.capiro.ai/workspace-api", "https://first-chat-preview.app-dev.capiro.ai/workspace-api"]
+    Default: https://first-chat-preview.app-dev.capiro.ai/workspace-api
+    AllowedValues: ["https://first-chat-preview.app-dev.capiro.ai/workspace-api"]
   IntelligenceApiBaseUrl:
     Type: String
-    Default: https://app.capiro.ai/intel-api
-    AllowedValues: ["https://app.capiro.ai/intel-api", "https://first-chat-preview.app-dev.capiro.ai/intel-api"]
+    Default: https://first-chat-preview.app-dev.capiro.ai/intel-api
+    AllowedValues: ["https://first-chat-preview.app-dev.capiro.ai/intel-api"]
+  OnboardApiBaseUrl:
+    Type: String
+    Default: ""
+    AllowedPattern: "^$|^https://[a-z0-9][a-z0-9.-]*[a-z0-9](:[0-9]{1,5})?/onboard-api$"
+    Description: Existing onboarding service base for the accepted invitation receiver, exactly the /onboard-api prefix in canonical form with no trailing slash. Empty keeps onboarding disabled; the onboarding-service owner supplies the target, never this template.
   ExistingAppUrl:
     Type: String
     Default: https://app.capiro.ai
@@ -580,7 +586,7 @@ Resources:
             - Name: TRACKER_BACKEND
               Value: !Ref TrackerBackend
             - Name: ONBOARD_API_BASE_URL
-              Value: ""
+              Value: !Ref OnboardApiBaseUrl
             - Name: MERI_API_BASE_URL
               Value: !Ref MeriApiBaseUrl
             - Name: MERI_CONVERSATION_WORKFLOW_ENABLED
