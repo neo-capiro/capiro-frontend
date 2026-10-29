@@ -6310,10 +6310,10 @@
     "file": "apps/web/src/features/meri/conversation/SkillSelectionPicker.tsx",
     "kind": "function",
     "symbol": "SkillSelectionPicker",
-    "fingerprint": "74597d3ac78d69e3fa11092393acda7b079fac99a85fa2337d9e5dd86c9ede69",
-    "reason": "Skill plus time-window-basis picker. Its size is pre-existing and comes from the enumerated window-basis form variants rendered inline; all variants serve the one responsibility of selecting a skill and its evidence window. This change only makes that selection additive within the same responsibility: clearing a skill keeps an applied work definition, and applying a skill keeps it, instead of replacing the whole selected input.",
-    "reviewedBy": "Hermes independent source review session 20261028_071126_e8a975 (configured-default Hermes)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "c5d282bf5e91074a1828c03dd48a8a04359def39d6a7809f16e43519be9be0fb",
+    "reason": "Author structural assessment for source-only A3 continuation: the existing skill/window picker now preserves the independently selected website task when applying or clearing a skill, just as it preserves Work. The existing inline window form remains one selection concern; no catalog, authority, session or website execution owner is added. Mounted checks exercise the preservation through reload. No independent review is claimed; see docs/site-workflow-selection-20261029.md.",
+    "reviewedBy": "Codex implementation author; structural assessment only, independent review explicitly excluded",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/features/meri/conversation/feedback/FeedbackFields.tsx",
@@ -7279,10 +7279,10 @@
     "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "06edd952b0f3ee911d942a29676d62509080e3e8e8d5dd18bfac37180442c22c",
-    "reason": "Shared conversation draft and journal module. The file-level size is the accumulated public shape of one responsibility: the selected-input shell (skill, window request, document revision, work, and now the native procedure), the canonical-JSON submission identity, the stored echo that a recovered or uncertain message re-sends unchanged, and the retained-intent snapshot. This change adds the procedure member to the selection and draft shapes, copies and freezes it, admits it in the closed field set of the selection receiver, re-sends it unchanged from the stored submission, and adds withProcedureSelection, which resolves the canonical mutual exclusion between the static quick-skill pin and the native procedure through the receiver instead of restating eligibility. Every admission still belongs to the one canonical receiver; no authority, store, run or second owner was added. A size-based split would separate the shape from the identity and replay rules that constrain it.",
-    "reviewedBy": "Hermes independent source review session 20261028_071126_e8a975 (configured-default Hermes)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "32aea34909f4972028f8cb824dc06c0892a0f9eb99cd1192e9b04d7dc98a009f",
+    "reason": "Author structural assessment for source-only A3 continuation: the existing selected-input and journal owner admits siteWorkflow through the published conversation receiver, snapshots it independently, and preserves the exact selector through stored submission and retry. The nine-line extension follows the existing procedure member without creating a schema copy, second store, authority or execution owner. Splitting only for size would separate immutable selection from its existing recovery identity. No independent review is claimed; see docs/site-workflow-selection-20261029.md.",
+    "reviewedBy": "Codex implementation author; structural assessment only, independent review explicitly excluded",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/shared/meri-routines/workflow.ts",

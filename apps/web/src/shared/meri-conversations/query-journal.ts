@@ -51,7 +51,7 @@ export type ConversationDraftRequest = Omit<
 };
 export type ConversationSkillSelection = Pick<
   ConversationSubmitRequest,
-  "skill" | "windowRequest" | "documentRevision" | "procedure"
+  "skill" | "windowRequest" | "documentRevision" | "procedure" | "siteWorkflow"
 > & {
   work?: SelectedWork;
 };
@@ -63,6 +63,7 @@ export function skillSelectionFields(input: ConversationSkillSelection) {
     ...(input.windowRequest ? { windowRequest: input.windowRequest } : {}),
     // A native procedure is one exact closed selector: source, id, version and Core's digest.
     ...(input.procedure ? { procedure: { ...input.procedure } } : {}),
+    ...(input.siteWorkflow ? { siteWorkflow: { ...input.siteWorkflow } } : {}),
     ...(input.documentRevision
       ? { documentRevision: input.documentRevision }
       : {}),
@@ -82,6 +83,7 @@ export function skillSelectionFields(input: ConversationSkillSelection) {
   if (copy.documentRevision) Object.freeze(copy.documentRevision);
   if (copy.windowRequest) Object.freeze(copy.windowRequest);
   if (copy.procedure) Object.freeze(copy.procedure);
+  if (copy.siteWorkflow) Object.freeze(copy.siteWorkflow);
   if (copy.work) {
     Object.freeze(copy.work.deliverables);
     Object.freeze(copy.work.dependencies);
@@ -98,6 +100,7 @@ export function receiveSkillSelection(value: unknown) {
       windowRequest: z.unknown().optional(),
       documentRevision: z.unknown().optional(),
       procedure: z.unknown().optional(),
+      siteWorkflow: z.unknown().optional(),
       work: z.unknown().optional(),
     })
     .parse(value);
@@ -183,6 +186,9 @@ export function storedSubmission(
         requestId: stored.requestId,
         // The stored procedure selector is re-sent unchanged — same source, id, version and digest.
         ...(stored.procedure ? { procedure: { ...stored.procedure } } : {}),
+        ...(stored.siteWorkflow
+          ? { siteWorkflow: { ...stored.siteWorkflow } }
+          : {}),
         ...(stored.documentRevision
           ? { documentRevision: stored.documentRevision }
           : {}),
@@ -233,6 +239,7 @@ export const submissionIdentity = (input: ConversationDraftRequest) =>
 
 function snapshotSubmit(submit: NonNullable<ConversationIntent["submit"]>) {
   const copy = structuredClone(submit);
+  if (copy.siteWorkflow) Object.freeze(copy.siteWorkflow);
   if (copy.windowRequest) Object.freeze(copy.windowRequest);
   if (copy.procedure) Object.freeze(copy.procedure);
   if (copy.skill) Object.freeze(copy.skill);
