@@ -3608,10 +3608,10 @@
     "file": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "f3377dfce3f36a3cc93d59e0174a780c09270b524006e8a1de9287207e49edfd",
-    "reason": "One generated-document workflow lifetime: branded version handles, immutable receipt correlation, read/create/revise orchestration, and one shared busy/unknown attempt journal. Public package receivers own schemas and byte verification; workflow-transport owns fixed HTTP/credential lifetime; the journal owns persistent local uncertainty. The native-file union is explicitly refused as a generated revision target rather than assimilated into a second workflow. No provider, renderer, server authority or unrelated feature is added.",
-    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
-    "reviewedOn": "2026-10-24"
+    "fingerprint": "1711a64804fd53ee91908b94686d459d1dce42df0ad43dcf4b6f2b2c70639f5c",
+    "reason": "Author structural assessment in docs/federal-workbench.md: Existing generated-document workflow lifetime adds optional federal port custody and disposal only. Its receiving, journal, immutable handles and ordinary write behavior remain unchanged; the separate federal access port owns its distinct review transaction. Independent review remains held.",
+    "reviewedBy": "Codex implementation author (independent review held)",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "packages/meri-client/src/conversation-client.ts",
@@ -3835,10 +3835,10 @@
     "file": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
     "kind": "function",
     "symbol": "ConnectedFiles",
-    "fingerprint": "e7cb7bbda23fc42685437f2d16b8d511fa37f2b1bef77413e4808005e3887885",
-    "reason": "1. MeriFilesHost.tsx / function ConnectedFiles / line 90 / nonblank 116 / fingerprint e7cb7bbda23fc42685437f2d16b8d511fa37f2b1bef77413e4808005e3887885 / changed. Responsibility: single \"document connection\" gate renderer for a Files page â€” connect status machine plus one optional capability-gated link. The change is presentation-only (shared heading + ui classes). Cohesive, one reason to change; extraction not needed. ACCEPT (bounded responsibility).",
-    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "4ad6c621a9697922188e21d635cdae96bb8583a450d924c6862266c11408c1e8",
+    "reason": "Author structural assessment in docs/federal-workbench.md: Existing document connection composition; adds the optional public federal port using the same session, account/client lifetime and shared attempt journal. No new bootstrap, durable store or authority. Independent review remains held.",
+    "reviewedBy": "Codex implementation author (independent review held)",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/features/meri/routines/MeriRoutinesHost.tsx",
@@ -6944,12 +6944,10 @@
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest",
-    "line": 49,
-    "nonblank": 113,
-    "fingerprint": "e17052b938144e60c5767e76232a44688157e11ad536505aad4d863bdf92317b",
-    "reason": "reviewed-accept - the same one same-origin document forwarding owner, 113 nonblank, +7 over the reviewed e44b61c7 body (106 at base). The delta is three additive lines in existing branches: 'results' joins the one fixed route set and its union; the single admission chain gains one branch that admits only the canonical receiver's closed empty object before dispatch; and the bounded read selects the contract's own 256 KiB results bound. Every pre-existing constraint is untouched and still applies to results: exact path `/api/documents/${operation}`, empty query, sameRequestOrigin, refusal of an `authorization` or `content-encoding` header, unchanged write gating (results is a read gated only by readEnabled), the same native token and action-session header, the same redirect refusal and the same json/binary header policy. No new HTTP, credential, session, storage or error owner; no existing route branch changed, so the existing routes keep their reviewed behavior byte-for-byte.",
-    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_075000_8b6a19)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "da4745cbfa027c68d8a75fbf8b87b8604654d9f78f371e592486863bb3e2681f",
+    "reason": "Author structural assessment in docs/federal-workbench.md: Existing fixed document forwarding owner and its same-deadline callback admit three public federal routes. Native session, request origin, bounded bytes, cancellation and remote authority remain canonical. No dynamic URL, provider, new credential, authorization or persistence owner is added. Independent review remains held.",
+    "reviewedBy": "Codex implementation author (independent review held)",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/shared/meri-documents/library-access.ts",
@@ -7250,12 +7248,10 @@
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest > <anonymous>",
-    "line": 80,
-    "nonblank": 83,
-    "fingerprint": "9db2dd1e2627bed3c1327fac4dd05c76c3c9734e75aa6e62878ad9a7d8cfbafb",
-    "reason": "reviewed-accept - NEW trigger, not a second forwarder. This is the existing inline deadline callback of the same single proxyDocumentRequest (`withActionDeadline([request.signal], async (signal) => ...)`); it was under the 80-line function threshold at base and crossed it with the additive results admission branch and its bounded-read selection. It shares the enclosing owner's config, request, route, fetcher, native-token/session gates, error path and signal, and it owns nothing of its own: no client, no state, no authority, no route vocabulary beyond the enclosing fixed set. The design assessment is the proxyDocumentRequest record above; this record exists only because the canonical scanner measures the nested body separately and the trigger must not be left unreviewed. Extracting the callback would move routing/config/fetcher/signal handling behind a hand-passed parameter list inside one forwarding owner without reducing coupling.",
-    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_075000_8b6a19)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "c248b08f1815c976cf6331373df33d5a5500c7683bd7206dcb74146891c8d83c",
+    "reason": "Author structural assessment in docs/federal-workbench.md: Existing fixed document forwarding owner and its same-deadline callback admit three public federal routes. Native session, request origin, bounded bytes, cancellation and remote authority remain canonical. No dynamic URL, provider, new credential, authorization or persistence owner is added. Independent review remains held.",
+    "reviewedBy": "Codex implementation author (independent review held)",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/features/meri/work/WorkSelectionPicker.tsx",
@@ -7359,6 +7355,33 @@
     "symbol": "SiteWorkflowPicker",
     "fingerprint": "e91db735f66fe65979949182415c9aca4320c9100f4a299532a1f09f6358b27d",
     "reason": "Author responsibility assessment in docs/site-workflow-catalog.md: existing composer presentation and cohesive current catalog selection; no new authority, transport or persistence owner. This is not an independent review.",
+    "reviewedBy": "Codex implementation author (independent review held)",
+    "reviewedOn": "2026-10-29"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "2d9941209df2a0c1d2bf2e81dd8c3ca29085328b4aa6b45a0c90ea075f9ace06",
+    "reason": "Author structural assessment in docs/federal-workbench.md: One exact-text review presentation lifetime: form edits invalidate prepared outputs and confirmation; browse/history, explicit publication and recovery expose the same selected revision. Compilation, byte receiving, journal, transport and authorization are delegated. Keeping these related transitions and controls together avoids scattering confirmation and uncertain-write state. Independent review remains held.",
+    "reviewedBy": "Codex implementation author (independent review held)",
+    "reviewedOn": "2026-10-29"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
+    "kind": "function",
+    "symbol": "FederalWorkbench",
+    "fingerprint": "060517838e8184b1769d652a053c74d1825b2687a8112613f2a6afb51a0ff50d",
+    "reason": "Author structural assessment in docs/federal-workbench.md: One exact-text review presentation lifetime: form edits invalidate prepared outputs and confirmation; browse/history, explicit publication and recovery expose the same selected revision. Compilation, byte receiving, journal, transport and authorization are delegated. Keeping these related transitions and controls together avoids scattering confirmation and uncertain-write state. Independent review remains held.",
+    "reviewedBy": "Codex implementation author (independent review held)",
+    "reviewedOn": "2026-10-29"
+  },
+  {
+    "file": "apps/web/src/shared/meri-documents/federal-workbench.ts",
+    "kind": "function",
+    "symbol": "publish",
+    "fingerprint": "8dc3837dc1d517eb998dca0dd6e4180fd06e79e66443931be4f336a1296fbee5",
+    "reason": "Author structural assessment in docs/federal-workbench.md: One original-delivery publication transaction: exact source/revision/output ancestry fingerprint, shared pending/uncertain journal, original delivery reuse, public response correlation and definite/unknown disposition. Ordered transitions share one effect boundary; existing journal and transport owners remain separate. Independent review remains held.",
     "reviewedBy": "Codex implementation author (independent review held)",
     "reviewedOn": "2026-10-29"
   }

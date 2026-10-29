@@ -127,6 +127,7 @@ export const publicExports = new Set([
   '@capiro/meri-contracts/conversation-usage',
   '@capiro/meri-contracts/document-access-application',
   '@capiro/meri-contracts/office-application',
+  '@capiro/meri-contracts/federal-workbench',
   '@capiro/meri-contracts/intents-application',
   '@capiro/meri-contracts/routines-application',
   '@capiro/meri-contracts/objective-generation',

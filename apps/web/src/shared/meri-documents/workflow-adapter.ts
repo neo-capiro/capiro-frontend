@@ -8,6 +8,7 @@ import {
 } from "@capiro/meri-contracts/document-application";
 import type { ActionSessionReceipt } from "../meri-actions/session-receipt";
 import type { DocumentAttemptJournal } from "./attempt-journal";
+import type { FederalWorkbenchPort } from "./federal-workbench";
 import {
   DocumentAccessUnavailable,
   type DocumentTransport,
@@ -21,6 +22,7 @@ import type {
 } from "./workflow-port";
 
 type Options = {
+  federal?: FederalWorkbenchPort;
   session: Pick<ActionSessionReceipt, "context" | "expiresAtMs">;
   operation: DocumentContentRequest["operation"];
   transport: DocumentTransport;
@@ -54,12 +56,14 @@ const sameId = (left: string, right: string) =>
 
 /** One host lifetime owns branded receipts; the canonical cache owns uncertainty. */
 export class DocumentWorkflow implements DocumentWorkflowPort {
+  readonly federal?: FederalWorkbenchPort;
   private readonly lifetime = new AbortController();
   private handles = new WeakMap<object, Held>();
   private known = new Map<string, GeneratedVersion>();
   private busy = false;
   private readonly options: Options;
   constructor(options: Options) {
+    this.federal = options.federal;
     this.options = {
       ...options,
       session: {
@@ -72,6 +76,7 @@ export class DocumentWorkflow implements DocumentWorkflowPort {
     return this.options.journal.read();
   }
   dispose() {
+    this.federal?.dispose();
     this.lifetime.abort();
     this.handles = new WeakMap();
     this.known.clear();
