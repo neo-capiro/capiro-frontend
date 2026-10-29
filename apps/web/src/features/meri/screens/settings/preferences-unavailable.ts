@@ -1,10 +1,11 @@
 import * as account from "./unavailable-account";
 import * as workspace from "./unavailable-workspace";
 
-/** The seven Settings pages, in Figma navigation order. */
+/** The Settings pages, in Figma navigation order. */
 export const preferencePages = [
   { id: "personal", label: "Personal defaults" },
   { id: "connections", label: "Connections" },
+  { id: "connected-services", label: "Connected services" },
   { id: "usage", label: "Usage and limits" },
   { id: "skills", label: "Skills and templates" },
   { id: "updates", label: "Workspace updates" },

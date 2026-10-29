@@ -27,9 +27,11 @@ import { sameScreen } from "./same-screen";
 import type { FixtureScreen } from "./types";
 
 /** Figma 3.4 09 Settings navigation: one fixture route per page. */
-const pageHrefs: Record<PreferencePageId, string> = {
+const pageHrefs: Record<PreferencePageId, string | undefined> = {
   personal: fixtureHref("personal-preferences"),
   connections: fixtureHref("connector-accounts"),
+  // No Figma 3.4 frame exists for this page yet, so the fixture gallery has no route for it.
+  "connected-services": undefined,
   usage: fixtureHref("usage-limits"),
   skills: fixtureHref("skills-templates"),
   updates: fixtureHref("notifications-account"),
