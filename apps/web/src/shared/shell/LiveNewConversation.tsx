@@ -1,19 +1,15 @@
 "use client";
 
-import { useContext, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useContext } from "react";
+import { useSearchParams } from "next/navigation";
 import { useIdentity } from "../portfolio/auth/identity";
-import {
-  beginNewChatIntent,
-  newChatIntentEvent,
-  type FirstChatScope,
-} from "../meri-conversations/first-chat-intent";
 import { SessionContext } from "../session/SessionContext";
 import { useSelectedClient } from "../session/SelectedClient";
-import { productHref } from "../session/client-route";
 import { unavailableTitle } from "../meri-resources/unavailable";
 import { DesignIcon } from "./DesignIcon";
 import { UnavailableControlReason } from "./UnavailableControlReason";
+import { DefaultConversationStart } from "./DefaultConversationStart";
+import { useNewConversationNavigation } from "./useNewConversationNavigation";
 
 type Props = {
   assetSet: "home" | "cited-answer";
@@ -70,14 +66,13 @@ function NewConversationButton({
 function VerifiedNewConversation(props: Props) {
   const identity = useIdentity();
   const selected = useSelectedClient();
-  const router = useRouter();
   const params = useSearchParams();
   const general = params.get("scope") === "general" && !params.has("clientId");
   const invalidScope =
     (params.has("scope") &&
       (!general || params.getAll("scope").length !== 1)) ||
     params.getAll("clientId").length > 1;
-  const [error, setError] = useState<string | null>(null);
+  const { start, error } = useNewConversationNavigation(props.onNavigate);
   const current =
     identity.isSuccess && !identity.isFetching && !identity.error
       ? identity.data
@@ -93,44 +88,51 @@ function VerifiedNewConversation(props: Props) {
         : !current?.tenant?.id || !current.user.id
           ? "A verified account is required to start a conversation."
           : undefined;
-  const start = () => {
+  const explicitStart = () => {
     if (unavailable || (!general && !client) || !current?.tenant?.id) return;
-    const scope: FirstChatScope = general
-      ? {
-          tenantId: current.tenant.id,
-          actorId: current.user.id,
-          scopeKind: "general",
-          clientId: null,
-        }
-      : {
-          tenantId: current.tenant.id,
-          actorId: current.user.id,
-          clientId: client!.id,
-        };
-    try {
-      beginNewChatIntent(scope, window.sessionStorage);
-      setError(null);
-      window.dispatchEvent(new Event(newChatIntentEvent));
-      router.push(
-        general ? "/meri?scope=general" : productHref("meri", client!.id),
-      );
-      props.onNavigate?.();
-    } catch (cause) {
-      setError(
-        cause instanceof Error
-          ? cause.message
-          : "The new conversation request could not be saved.",
-      );
-    }
+    start(
+      general
+        ? {
+            tenantId: current.tenant.id,
+            actorId: current.user.id,
+            scopeKind: "general",
+            clientId: null,
+          }
+        : {
+            tenantId: current.tenant.id,
+            actorId: current.user.id,
+            clientId: client!.id,
+          },
+    );
   };
   return (
     <>
-      <NewConversationButton
-        {...props}
-        disabled={Boolean(unavailable)}
-        title={unavailable}
-        onClick={start}
-      />
+      {current?.tenant?.id &&
+      current.user.id &&
+      selected.state === "no-selection" &&
+      !params.has("scope") &&
+      !params.has("clientId") ? (
+        <DefaultConversationStart
+          key={`${current.tenant.id}:${current.user.id}`}
+          owner={{ tenantId: current.tenant.id, actorId: current.user.id }}
+          start={(clientId) =>
+            start({
+              tenantId: current.tenant!.id,
+              actorId: current.user.id,
+              clientId,
+            })
+          }
+        >
+          {(control) => <NewConversationButton {...props} {...control} />}
+        </DefaultConversationStart>
+      ) : (
+        <NewConversationButton
+          {...props}
+          disabled={Boolean(unavailable)}
+          title={unavailable}
+          onClick={explicitStart}
+        />
+      )}
       {error && <p role="alert">{error}</p>}
     </>
   );

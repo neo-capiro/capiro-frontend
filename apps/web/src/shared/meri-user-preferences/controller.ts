@@ -247,10 +247,12 @@ export class UserPreferencesController {
   }
   async resetPersonalDefaults() {
     if (this.view.status !== "ready" || !this.view.document) return;
-    const { defaultModel, theme, density, timezone } = USER_PREFERENCE_DEFAULTS;
+    const { defaultModel, defaultClientId, theme, density, timezone } =
+      USER_PREFERENCE_DEFAULTS;
     await this.save({
       ...this.view.document.preferences,
       defaultModel,
+      defaultClientId,
       theme,
       density,
       timezone,

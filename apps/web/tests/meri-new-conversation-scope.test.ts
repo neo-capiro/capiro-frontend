@@ -48,6 +48,14 @@ vi.mock("../src/shared/session/SelectedClient", () => ({
     client: { id: mocks.clientId, status: mocks.status },
   }),
 }));
+// The asynchronous fallback is exercised with actual hooks in the browser suite.
+vi.mock("../src/shared/shell/DefaultConversationStart", () => ({
+  DefaultConversationStart: ({
+    children,
+  }: {
+    children: (value: { disabled: boolean; title: string }) => ReactNode;
+  }) => children({ disabled: false, title: "Use your saved default client" }),
+}));
 const account = {
   tenantId: "11111111-1111-4111-8111-111111111111",
   actorId: "22222222-2222-4222-8222-222222222222",
@@ -163,16 +171,23 @@ it.each([
   expect(entries.size).toBe(0);
   expect(mocks.push).not.toHaveBeenCalled();
 });
-it.each(["loading", "unavailable", "no-selection"])(
-  "refuses %s client selection",
-  (state) => {
-    mocks.state = state;
-    const b = button();
-    expect(b.disabled).toBe(true);
-    b.onClick?.();
-    expect(entries.size).toBe(0);
-  },
-);
+it.each(["loading", "unavailable"])("refuses %s client selection", (state) => {
+  mocks.state = state;
+  const b = button();
+  expect(b.disabled).toBe(true);
+  b.onClick?.();
+  expect(entries.size).toBe(0);
+});
+it("offers the saved-default path only when no scope is selected", () => {
+  mocks.state = "no-selection";
+  expect(button()).toMatchObject({
+    disabled: false,
+    title: "Use your saved default client",
+  });
+  expect(entries.size).toBe(0);
+  mocks.search = "clientId=unavailable";
+  expect(button().disabled).toBe(true);
+});
 it("holds archived clients, refreshing accounts and signed-out sessions", () => {
   for (const condition of ["archived", "fetching", "signed-out"]) {
     mocks.status = condition === "archived" ? "archived" : "active";

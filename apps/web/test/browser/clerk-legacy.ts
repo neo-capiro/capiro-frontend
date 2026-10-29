@@ -7,3 +7,10 @@ export function useSignUp() {
     setActive: undefined,
   };
 }
+export function useSignIn() {
+  return {
+    isLoaded: useAuth().isLoaded,
+    signIn: undefined,
+    setActive: undefined,
+  };
+}

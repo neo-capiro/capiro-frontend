@@ -139,7 +139,7 @@ function setup() {
 }
 
 describe("personal preferences captured saves and reconciliation", () => {
-  it("resets supported defaults with the observed revision while preserving notification and client choices", async () => {
+  it("resets supported defaults with the observed revision while preserving notification choices", async () => {
     const f = setup();
     const previous = changed();
     f.read.mockResolvedValue(document(9, previous));
@@ -151,7 +151,6 @@ describe("personal preferences captured saves and reconciliation", () => {
       preferences: {
         ...USER_PREFERENCE_DEFAULTS,
         notifications: previous.notifications,
-        defaultClientId: previous.defaultClientId,
       },
     });
     await f.controller.resetPersonalDefaults();
