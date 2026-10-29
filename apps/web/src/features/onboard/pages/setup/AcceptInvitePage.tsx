@@ -2,7 +2,7 @@ import { clerkInputAttempt } from "../../lib/clerk-input-attempt";
 import { useOnboardApi } from "@/shared/capiro/onboard-api";
 import { useOnboardAttempt } from "../../lib/use-onboard-attempt";
 import { AttemptStatus } from "../../ui/AttemptStatus";
-import { useSignUp } from "@clerk/nextjs/legacy";
+import { useSignIn, useSignUp } from "@clerk/nextjs/legacy";
 // 2A.0 — Admin invite → credential creation. Port of the prototype
 // AcceptInvite create phase (the email-preview phase was demo-only), wired to
 // Clerk's headless ticket flow (?__clerk_ticket=…).
@@ -18,6 +18,13 @@ import {
   Wordmark,
 } from "../../ui/primitives";
 import { ErrorText, errorMessage } from "../funnel/shared";
+import {
+  acceptInvitePhase,
+  ticketFallbackAllowed,
+  ticketRejectedByProvider,
+  ticketReturnPath,
+  type AcceptInvitePhase,
+} from "../../lib/accept-invite-flow";
 
 const inlineErrorStyle: React.CSSProperties = {
   fontSize: 11.5,
@@ -38,11 +45,10 @@ function TicketAcceptance({ ticket }: { ticket: string | null }) {
   const { isLoaded: authLoaded, isSignedIn } = useAuth();
   const { isLoaded: userLoaded, user } = useUser();
   const { isLoaded: signUpLoaded, signUp, setActive } = useSignUp();
+  const { signIn } = useSignIn();
   const clerk = useClerk();
 
-  const [localPhase, setPhase] = React.useState<
-    "loading" | "ready" | "create" | "expired" | "signed-in-conflict"
-  >("loading");
+  const [localPhase, setPhase] = React.useState<AcceptInvitePhase>("loading");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [submitting, setSubmitting] = React.useState(false);
@@ -52,25 +58,38 @@ function TicketAcceptance({ ticket }: { ticket: string | null }) {
     confirmPassword.length > 0 && confirmPassword !== password;
   const sessionEmail = user?.primaryEmailAddress?.emailAddress ?? null;
 
-  const phase =
-    !authLoaded || !signUpLoaded
-      ? "loading"
-      : isSignedIn && ticket
-        ? "signed-in-conflict"
-        : !ticket
-          ? "expired"
-          : localPhase === "loading"
-            ? "ready"
-            : localPhase;
+  const phase = acceptInvitePhase({
+    authLoaded,
+    signUpLoaded,
+    isSignedIn,
+    ticket,
+    localPhase,
+  });
 
   const begin = async () => {
     if (!ticket || !signUp || isSignedIn || write.blocked()) return;
     try {
       await write.run("Accept this invitation", async (guard) => {
-        await guard.wait(() => signUp.create({ strategy: "ticket", ticket }));
-        setPhase("create");
+        try {
+          await guard.wait(() => signUp.create({ strategy: "ticket", ticket }));
+          setPhase("create");
+        } catch (err) {
+          // An invited person who already has an account accepts this same ticket through
+          // sign-in. A ticket the provider rejects outright is never retried.
+          if (!ticketFallbackAllowed(err, Boolean(signIn))) throw err;
+          const attempt = await guard.wait(() =>
+            clerkInputAttempt(() => signIn.create({ strategy: "ticket", ticket })),
+          );
+          if (attempt.status !== "complete") {
+            setPhase("invalid-ticket");
+            return;
+          }
+          await guard.wait(() => setActive({ session: attempt.createdSessionId }));
+          navigate("/setup", { replace: true });
+        }
       });
     } catch (err) {
+      if (ticketRejectedByProvider(err)) setPhase("invalid-ticket");
       setError(errorMessage(err));
     }
   };
@@ -107,8 +126,11 @@ function TicketAcceptance({ ticket }: { ticket: string | null }) {
   // string, so the signed-out effect above picks it up and runs the real invite
   // flow for the invited address.
   const signOutAndAccept = () => {
-    // The root boundary preserves this route/query when the session ends.
-    void clerk.signOut();
+    // Return to this route with the ticket explicitly rather than relying on the provider's
+    // sign-out navigation to keep the query string.
+    void clerk
+      .signOut()
+      .then(() => navigate(ticketReturnPath(ticket), { replace: true }));
   };
 
   if (authLoaded && isSignedIn && !ticket)
@@ -152,6 +174,18 @@ function TicketAcceptance({ ticket }: { ticket: string | null }) {
           >
             <Spinner size={18} />
           </div>
+        ) : phase === "invalid-ticket" ? (
+          <Card>
+            <h2>This invitation can&apos;t be used</h2>
+            <p>
+              This link is malformed, has expired or was already accepted. Ask an
+              administrator for a new invitation, or sign in if you already have an
+              account.
+            </p>
+            <Btn variant="primary" onClick={() => navigate("/sign-in")}>
+              Go to sign in
+            </Btn>
+          </Card>
         ) : phase === "signed-in-conflict" ? (
           <div style={{ width: "100%", maxWidth: 420, marginTop: 12 }}>
             <div style={{ textAlign: "center", marginBottom: 18 }}>
