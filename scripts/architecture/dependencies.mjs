@@ -79,7 +79,7 @@ function approvedNewsletterRelationshipImport(from, to, entry) {
 
 function approvedSnapshotImport(file, entry) {
   return (file === objectiveSnapshotOwner || file === `${clientBriefCopyOwner}command.ts`
-    || file === `${appSource}features/modules/workspace/ordinary-save/ordinary-save.ts`)
+    || file === `${appSource}shared/capiro/workspace-snapshot.ts`)
     && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
 }
 

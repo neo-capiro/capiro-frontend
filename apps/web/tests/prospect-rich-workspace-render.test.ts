@@ -29,8 +29,10 @@ vi.mock("../src/shared/capiro/queries", () => ({
 vi.mock(
   "../src/features/modules/workspace/prospects/useProspectDraftSave",
   () => ({
-    useProspectDraftSave: () => ({
+    useProspectDraftSave: (currentDraft: typeof draft) => ({
+      currentDraft,
       ready: true,
+      canSave: !state.pending,
       pending: state.pending,
       save: vi.fn(),
       readCurrent: vi.fn(),

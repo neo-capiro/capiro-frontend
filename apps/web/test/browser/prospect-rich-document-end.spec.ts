@@ -70,7 +70,7 @@ test("document-end collapses AllSelection before table insertion and preserves p
   expect(fixture.writes).toHaveLength(0);
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
-  await expect.poll(() => fixture.writes.length).toBe(2);
+  await expect.poll(() => fixture.writes.length).toBe(1);
   await expect(
     page.getByRole("button", { name: "Save draft", exact: true }),
   ).toBeEnabled();
