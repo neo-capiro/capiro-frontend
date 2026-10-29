@@ -754,6 +754,34 @@
       "regularEntryCount": 6,
       "status": "source-merged-consumer-bound",
       "purpose": "Peer compatibility only; stream runtime and declarations unchanged."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.32-76405cff-55f5103c1c78.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.32",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "76405cff8a5209e8de04375aea63f7a7334d606a",
+      "sourceTree": "ccbb6348a17380a1b3440e9899177a237e89a2d8",
+      "bytes": 1649996,
+      "sha256": "55f5103c1c787a0cc7f5b12782cd7649cfe585483482d45de44fc7b704f9c2d0",
+      "integrity": "sha512-dl1R8i3MwUXARPQX2av1tOn5IMTRhZQT+oHWhBMWT2BYwssJoPqZTweTtzouTXodALspQ49WaezjiysCKwXcmA==",
+      "regularEntryCount": 81,
+      "status": "source-merged-consumer-bound",
+      "purpose": "Exact admin-configured site workflow selection in public conversation and retained input/history contracts."
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.19-76405cff-e4e711dbdc3a.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.19",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "76405cff8a5209e8de04375aea63f7a7334d606a",
+      "sourceTree": "ccbb6348a17380a1b3440e9899177a237e89a2d8",
+      "bytes": 3697,
+      "sha256": "e4e711dbdc3ab51b35105bed90818b7f97c0fb5040c9b1fd49e4b420cc8125ac",
+      "integrity": "sha512-wj1xb9KV/Jkpo7uHVCayyDkkfCnMrguKe+eQuWx5uctqj3DqDvK3S5e23cmPQxN/9D6fChqh9Wm28XVEawCntw==",
+      "regularEntryCount": 6,
+      "status": "source-merged-consumer-bound",
+      "purpose": "Peer compatibility only; stream runtime and declarations unchanged."
     }
   ]
 }
