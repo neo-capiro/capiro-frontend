@@ -1,0 +1,573 @@
+{
+  "note": "Synthetic current Core reader and native document route outputs; no live legal source or production qualification.",
+  "input": {
+    "selection": {
+      "billId": "119-hr-1",
+      "versionCode": "enr",
+      "revisionId": "11111111-1111-4111-8111-111111111111",
+      "versionHash": "b564e47b50ce4b67fa8734690f761a1472b5bbf92ce232f9244787636c7b9e18",
+      "textHash": "2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba"
+    },
+    "deliveryId": "c3ed6ab4-07e4-47f9-8d1f-a2da3f0b966e"
+  },
+  "imported": {
+    "schema": "meri.federal-source.v1",
+    "selection": {
+      "billId": "119-hr-1",
+      "versionCode": "enr",
+      "revisionId": "11111111-1111-4111-8111-111111111111",
+      "versionHash": "b564e47b50ce4b67fa8734690f761a1472b5bbf92ce232f9244787636c7b9e18",
+      "textHash": "2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba"
+    },
+    "source": {
+      "documentId": "119-hr-1",
+      "publisher": "govinfo",
+      "sourceVersion": "enr/11111111-1111-4111-8111-111111111111",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/html/BILLS-119hr1enr.htm",
+      "publishedAt": "2026-01-01",
+      "parserVersion": "federal-plain-text/1",
+      "text": "SEC. 1. Synthetic authorization.\nThe amount is $20.\n",
+      "sha256": "2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba",
+      "coverage": {
+        "complete": true,
+        "limitations": [
+          "One flat full-document scope; legal structure, numbering, cross-references, arithmetic and substantive law require review.",
+          "Core retained UTF-8 content and extracted text hashes verified; original HTTP bytes and extraction normalization are unreported.",
+          "Current at read only. Enactment and legal currency are unresolved; an enrolled bill is not proof of enactment.",
+          "Canonical federal source metadata: {\"billId\":\"119-hr-1\",\"collection\":\"BILLS\",\"evidenceParserVersion\":\"federal-legislative-exact-code-v1\",\"fetchedAt\":\"2026-01-03T00:00:00.000Z\",\"lineageKey\":\"bill:119-hr-1\",\"packageId\":\"BILLS-119hr1enr\",\"provider\":\"govinfo\",\"publishedAt\":\"2026-01-01T00:00:00.000Z\",\"revisionId\":\"11111111-1111-4111-8111-111111111111\",\"sourceKey\":\"fixture-bill\",\"sourceLocator\":\"https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/html/BILLS-119hr1enr.htm\",\"sourceModifiedAt\":\"2026-01-02T00:00:00.000Z\",\"textHash\":\"2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba\",\"versionCode\":\"enr\",\"versionHash\":\"b564e47b50ce4b67fa8734690f761a1472b5bbf92ce232f9244787636c7b9e18\"}"
+        ]
+      },
+      "scopes": [
+        {
+          "id": "document",
+          "label": "the selected bill text",
+          "start": 0,
+          "end": 52,
+          "sha256": "2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba"
+        }
+      ]
+    },
+    "publication": {
+      "version": {
+        "contractVersion": "0.2.0",
+        "artifactId": "816e3b67-1731-4c91-86ad-2f787e789e72",
+        "versionId": "e389542f-2a81-43dd-834b-6143d1fa6fb2",
+        "parentVersionId": null,
+        "binding": {
+          "tenantId": "33333333-3333-4333-8333-000000000100",
+          "actorId": "33333333-3333-4333-8333-000000000101",
+          "conversationId": "33333333-3333-4333-8333-000000000102",
+          "runId": "33333333-3333-4333-8333-000000000103",
+          "attemptId": "33333333-3333-4333-8333-000000000104",
+          "workerId": "33333333-3333-4333-8333-000000000105",
+          "writerFence": 1
+        },
+        "object": {
+          "objectId": "7667a5a3-8355-4093-8677-970ce5185a06",
+          "versionId": "SYNTHETIC_7667a5a3-8355-4093-8677-970ce5185a06",
+          "sha256": "0affcc4c77519631cb8f3d558d31d7b375fe9d842f01bd606fe247ca6359faa3",
+          "bytes": 2043,
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ]
+        },
+        "filename": "Federal source _59ec87497199a9c1798823f14f005351ec73b65768262a0b9630ade598450c23__ 119-hr-1.txt",
+        "mimeType": "text/plain; charset=utf-8",
+        "scopes": [
+          {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "kind": "client",
+            "resourceId": "33333333-3333-4333-8333-000000000106",
+            "policyRevision": "policy1"
+          }
+        ],
+        "evidence": [],
+        "generationStatus": "draft",
+        "previewStatus": "pending",
+        "createdAt": "2026-10-13T18:00:00.000Z"
+      },
+      "inspection": {
+        "sha256": "0affcc4c77519631cb8f3d558d31d7b375fe9d842f01bd606fe247ca6359faa3",
+        "bytes": 2043,
+        "format": "txt",
+        "nativeOpened": false,
+        "rendered": false,
+        "recalculated": false,
+        "members": [],
+        "details": {
+          "encoding": "UTF-8",
+          "whitespace": "unchanged"
+        }
+      },
+      "execution": {
+        "kind": "native-document",
+        "invocationId": "sdk:957529fc3255aa91a2d978266143aac39b52d5151ecc2c33c45900cacb2cf52b",
+        "requestSha256": "d634df0003dde6e3acf93fad27c1db9231ee9d4d8ba2e43c54890bf32a91ea84",
+        "authorizationReceiptId": "6d27caaf-4c8b-457d-8d60-3690f4e39080",
+        "objectCommitted": true,
+        "versionCommitted": true,
+        "nativeQualified": false
+      }
+    }
+  },
+  "review": {
+    "schema": "meri.federal-review.v1",
+    "selection": {
+      "versionId": "e389542f-2a81-43dd-834b-6143d1fa6fb2",
+      "expectedArtifactSha256": "0affcc4c77519631cb8f3d558d31d7b375fe9d842f01bd606fe247ca6359faa3",
+      "operations": [
+        {
+          "id": "amendment-1",
+          "scopeId": "document",
+          "kind": "replace",
+          "expectedScopeSha256": "2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba",
+          "expectedText": "$20",
+          "expectedTextSha256": "1f67972ce8b9d3da71256e750035aa4ffd0a58c0796b2172492afd8b96426416",
+          "dependsOn": [],
+          "text": "$25"
+        }
+      ]
+    },
+    "prepared": {
+      "sourceArtifact": {
+        "versionId": "e389542f-2a81-43dd-834b-6143d1fa6fb2",
+        "sha256": "0affcc4c77519631cb8f3d558d31d7b375fe9d842f01bd606fe247ca6359faa3",
+        "specSha256": "8b2cbbe47b83bc492ba56ff2afbd7537b41199ba27c6f2bd633bfc665e60be11"
+      },
+      "draft": {
+        "parserVersion": "federal-plain-text/1",
+        "source": {
+          "documentId": "119-hr-1",
+          "publisher": "govinfo",
+          "sourceVersion": "enr/11111111-1111-4111-8111-111111111111",
+          "sourceUrl": "https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/html/BILLS-119hr1enr.htm",
+          "publishedAt": "2026-01-01",
+          "parserVersion": "federal-plain-text/1",
+          "text": "SEC. 1. Synthetic authorization.\nThe amount is $20.\n",
+          "sha256": "2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba",
+          "coverage": {
+            "complete": true,
+            "limitations": [
+              "One flat full-document scope; legal structure, numbering, cross-references, arithmetic and substantive law require review.",
+              "Core retained UTF-8 content and extracted text hashes verified; original HTTP bytes and extraction normalization are unreported.",
+              "Current at read only. Enactment and legal currency are unresolved; an enrolled bill is not proof of enactment.",
+              "Canonical federal source metadata: {\"billId\":\"119-hr-1\",\"collection\":\"BILLS\",\"evidenceParserVersion\":\"federal-legislative-exact-code-v1\",\"fetchedAt\":\"2026-01-03T00:00:00.000Z\",\"lineageKey\":\"bill:119-hr-1\",\"packageId\":\"BILLS-119hr1enr\",\"provider\":\"govinfo\",\"publishedAt\":\"2026-01-01T00:00:00.000Z\",\"revisionId\":\"11111111-1111-4111-8111-111111111111\",\"sourceKey\":\"fixture-bill\",\"sourceLocator\":\"https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/html/BILLS-119hr1enr.htm\",\"sourceModifiedAt\":\"2026-01-02T00:00:00.000Z\",\"textHash\":\"2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba\",\"versionCode\":\"enr\",\"versionHash\":\"b564e47b50ce4b67fa8734690f761a1472b5bbf92ce232f9244787636c7b9e18\"}"
+            ]
+          },
+          "scopes": [
+            {
+              "id": "document",
+              "label": "the selected bill text",
+              "start": 0,
+              "end": 52,
+              "sha256": "2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba"
+            }
+          ]
+        },
+        "operations": [
+          {
+            "id": "amendment-1",
+            "scopeId": "document",
+            "kind": "replace",
+            "expectedScopeSha256": "2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba",
+            "expectedText": "$20",
+            "expectedTextSha256": "1f67972ce8b9d3da71256e750035aa4ffd0a58c0796b2172492afd8b96426416",
+            "dependsOn": [],
+            "text": "$25"
+          }
+        ],
+        "outputs": {
+          "operative": "Source: 119-hr-1; govinfo; version enr/11111111-1111-4111-8111-111111111111; published 2026-01-01; https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/html/BILLS-119hr1enr.htm; SHA-256 2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba\nOperations apply in the stated order.\n\namendment-1. In the selected bill text, strike \"$20\" and insert \"$25\".\n",
+          "consolidated": "SEC. 1. Synthetic authorization.\nThe amount is $25.\n",
+          "redline": "Source: 119-hr-1; govinfo; version enr/11111111-1111-4111-8111-111111111111; published 2026-01-01; https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/html/BILLS-119hr1enr.htm; SHA-256 2624cd7c99b91e7bf18b85433c634ec22a0ccb2875ce95311d20bc6e6e20b9ba\nExact legal text comparison; each line is a JSON text segment.\n{\"kind\":\"unchanged\",\"text\":\"SEC. 1. Synthetic authorization.\\nThe amount is $2\"}\n{\"kind\":\"delete\",\"text\":\"0\"}\n{\"kind\":\"insert\",\"text\":\"5\"}\n{\"kind\":\"unchanged\",\"text\":\".\\n\"}\n",
+          "segments": [
+            {
+              "kind": "unchanged",
+              "text": "SEC. 1. Synthetic authorization.\nThe amount is $2"
+            },
+            {
+              "kind": "delete",
+              "text": "0"
+            },
+            {
+              "kind": "insert",
+              "text": "5"
+            },
+            {
+              "kind": "unchanged",
+              "text": ".\n"
+            }
+          ]
+        },
+        "findings": [
+          {
+            "category": "source-integrity",
+            "status": "passed",
+            "location": "119-hr-1",
+            "severity": "info"
+          },
+          {
+            "category": "exact-target",
+            "status": "passed",
+            "location": "document",
+            "operationId": "amendment-1",
+            "severity": "info"
+          },
+          {
+            "category": "numbering",
+            "status": "unresolved",
+            "location": "119-hr-1",
+            "severity": "review-required"
+          },
+          {
+            "category": "cross-references",
+            "status": "unresolved",
+            "location": "119-hr-1",
+            "severity": "review-required"
+          },
+          {
+            "category": "arithmetic",
+            "status": "unresolved",
+            "location": "119-hr-1",
+            "severity": "review-required"
+          },
+          {
+            "category": "substantive-law",
+            "status": "unresolved",
+            "location": "119-hr-1",
+            "severity": "review-required"
+          }
+        ],
+        "outputHashes": {
+          "operative": "945d55a4a3b1c362626d7bdc39f50e4b87763c297b77101b6fa58aa4dd3f0a3e",
+          "consolidated": "da85f1816ee623d1ed15a812b184ea375f55d09c58ddb34d4ee7ac847d8e07f1",
+          "redline": "328dd1af0f13e93ac93dac46385cc648a2b51009c163bb56f96ce47d87827b73"
+        },
+        "revisionSha256": "d7af3b5095af5d38cff1db0b11ef12688b9c13c5855f59d4cc66e801acba0316",
+        "approval": "unapproved"
+      },
+      "revisionSha256": "85497507308ebaf42c6a1ce4a6f86f101b22cf5fd68e2bd34b98535c3b4a6507",
+      "approval": "unapproved"
+    },
+    "savedDraft": null
+  },
+  "publications": {
+    "draft": {
+      "schema": "meri.federal-review.v1",
+      "sourceArtifact": {
+        "versionId": "e389542f-2a81-43dd-834b-6143d1fa6fb2",
+        "sha256": "0affcc4c77519631cb8f3d558d31d7b375fe9d842f01bd606fe247ca6359faa3",
+        "specSha256": "8b2cbbe47b83bc492ba56ff2afbd7537b41199ba27c6f2bd633bfc665e60be11"
+      },
+      "revisionSha256": "85497507308ebaf42c6a1ce4a6f86f101b22cf5fd68e2bd34b98535c3b4a6507",
+      "output": "draft",
+      "review": "unapproved",
+      "publication": {
+        "version": {
+          "contractVersion": "0.2.0",
+          "artifactId": "4e03bf9d-ba5b-4532-8828-131cca1f9fac",
+          "versionId": "7b18ec92-7024-48db-8152-772f9fe8eef1",
+          "parentVersionId": null,
+          "binding": {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "actorId": "33333333-3333-4333-8333-000000000101",
+            "conversationId": "33333333-3333-4333-8333-000000000102",
+            "runId": "33333333-3333-4333-8333-000000000103",
+            "attemptId": "33333333-3333-4333-8333-000000000104",
+            "workerId": "33333333-3333-4333-8333-000000000105",
+            "writerFence": 1
+          },
+          "object": {
+            "objectId": "48a5cb68-fe4e-4950-8be5-cab20f0c309a",
+            "versionId": "SYNTHETIC_48a5cb68-fe4e-4950-8be5-cab20f0c309a",
+            "sha256": "875b5a7f6f7eba6cab7c60c30f5b6f60ec0d3e751cc8ec543e3bfe7ff68a2909",
+            "bytes": 4652,
+            "scopes": [
+              {
+                "tenantId": "33333333-3333-4333-8333-000000000100",
+                "kind": "client",
+                "resourceId": "33333333-3333-4333-8333-000000000106",
+                "policyRevision": "policy1"
+              }
+            ]
+          },
+          "filename": "Federal review _85497507308ebaf42c6a1ce4a6f86f101b22cf5fd68e2bd34b98535c3b4a6507__ 119-hr-1.txt",
+          "mimeType": "text/plain; charset=utf-8",
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ],
+          "evidence": [],
+          "generationStatus": "draft",
+          "previewStatus": "pending",
+          "createdAt": "2026-10-13T18:00:00.000Z"
+        },
+        "inspection": {
+          "sha256": "875b5a7f6f7eba6cab7c60c30f5b6f60ec0d3e751cc8ec543e3bfe7ff68a2909",
+          "bytes": 4652,
+          "format": "txt",
+          "nativeOpened": false,
+          "rendered": false,
+          "recalculated": false,
+          "members": [],
+          "details": {
+            "encoding": "UTF-8",
+            "whitespace": "unchanged"
+          }
+        },
+        "execution": {
+          "kind": "native-document",
+          "invocationId": "sdk:e38f0043a27db1b91545b45590295e075724b7c405cfb1a6492a2a167ffd75a6",
+          "requestSha256": "c1ea3751dd1fe84e247712a3c87d05714bd26e2538ea52b3697b9cbbe7a3f8b1",
+          "authorizationReceiptId": "c620980a-680d-4d76-81f8-26cd48809e26",
+          "objectCommitted": true,
+          "versionCommitted": true,
+          "nativeQualified": false
+        }
+      }
+    },
+    "operative": {
+      "schema": "meri.federal-review.v1",
+      "sourceArtifact": {
+        "versionId": "e389542f-2a81-43dd-834b-6143d1fa6fb2",
+        "sha256": "0affcc4c77519631cb8f3d558d31d7b375fe9d842f01bd606fe247ca6359faa3",
+        "specSha256": "8b2cbbe47b83bc492ba56ff2afbd7537b41199ba27c6f2bd633bfc665e60be11"
+      },
+      "revisionSha256": "85497507308ebaf42c6a1ce4a6f86f101b22cf5fd68e2bd34b98535c3b4a6507",
+      "output": "operative",
+      "review": "confirmed-for-export",
+      "publication": {
+        "version": {
+          "contractVersion": "0.2.0",
+          "artifactId": "ee30d172-1b81-4bad-821c-5944a5fa7754",
+          "versionId": "f08ba4c2-4186-4277-8509-a3707c817782",
+          "parentVersionId": null,
+          "binding": {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "actorId": "33333333-3333-4333-8333-000000000101",
+            "conversationId": "33333333-3333-4333-8333-000000000102",
+            "runId": "33333333-3333-4333-8333-000000000103",
+            "attemptId": "33333333-3333-4333-8333-000000000104",
+            "workerId": "33333333-3333-4333-8333-000000000105",
+            "writerFence": 1
+          },
+          "object": {
+            "objectId": "67b62206-8b80-4bf8-8bdf-bc37fdc396f9",
+            "versionId": "SYNTHETIC_67b62206-8b80-4bf8-8bdf-bc37fdc396f9",
+            "sha256": "945d55a4a3b1c362626d7bdc39f50e4b87763c297b77101b6fa58aa4dd3f0a3e",
+            "bytes": 360,
+            "scopes": [
+              {
+                "tenantId": "33333333-3333-4333-8333-000000000100",
+                "kind": "client",
+                "resourceId": "33333333-3333-4333-8333-000000000106",
+                "policyRevision": "policy1"
+              }
+            ]
+          },
+          "filename": "Operative amendment _85497507308ebaf42c6a1ce4a6f86f101b22cf5fd68e2bd34b98535c3b4a6507__ 119-hr-1.txt",
+          "mimeType": "text/plain; charset=utf-8",
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ],
+          "evidence": [],
+          "generationStatus": "draft",
+          "previewStatus": "pending",
+          "createdAt": "2026-10-13T18:00:00.000Z"
+        },
+        "inspection": {
+          "sha256": "945d55a4a3b1c362626d7bdc39f50e4b87763c297b77101b6fa58aa4dd3f0a3e",
+          "bytes": 360,
+          "format": "txt",
+          "nativeOpened": false,
+          "rendered": false,
+          "recalculated": false,
+          "members": [],
+          "details": {
+            "encoding": "UTF-8",
+            "whitespace": "unchanged"
+          }
+        },
+        "execution": {
+          "kind": "native-document",
+          "invocationId": "sdk:b187eb5e7e624f3ad755b422e648a5a045e70df223778b043ce8a2af51e00050",
+          "requestSha256": "c1f257b23dc4a0d8cf1f18de48247cda98587bf4bbfac4f94f8297e7ff2c3251",
+          "authorizationReceiptId": "19e7af34-f240-4458-ba94-d1bf0f709de0",
+          "objectCommitted": true,
+          "versionCommitted": true,
+          "nativeQualified": false
+        }
+      }
+    },
+    "consolidated": {
+      "schema": "meri.federal-review.v1",
+      "sourceArtifact": {
+        "versionId": "e389542f-2a81-43dd-834b-6143d1fa6fb2",
+        "sha256": "0affcc4c77519631cb8f3d558d31d7b375fe9d842f01bd606fe247ca6359faa3",
+        "specSha256": "8b2cbbe47b83bc492ba56ff2afbd7537b41199ba27c6f2bd633bfc665e60be11"
+      },
+      "revisionSha256": "85497507308ebaf42c6a1ce4a6f86f101b22cf5fd68e2bd34b98535c3b4a6507",
+      "output": "consolidated",
+      "review": "confirmed-for-export",
+      "publication": {
+        "version": {
+          "contractVersion": "0.2.0",
+          "artifactId": "567e6606-cbb4-4bab-85df-cf2385043a59",
+          "versionId": "2cb7b822-f5d0-42cd-83ac-dc5a9c84a72c",
+          "parentVersionId": null,
+          "binding": {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "actorId": "33333333-3333-4333-8333-000000000101",
+            "conversationId": "33333333-3333-4333-8333-000000000102",
+            "runId": "33333333-3333-4333-8333-000000000103",
+            "attemptId": "33333333-3333-4333-8333-000000000104",
+            "workerId": "33333333-3333-4333-8333-000000000105",
+            "writerFence": 1
+          },
+          "object": {
+            "objectId": "c7e16776-ac69-4cd2-8348-8e75aa6d9103",
+            "versionId": "SYNTHETIC_c7e16776-ac69-4cd2-8348-8e75aa6d9103",
+            "sha256": "da85f1816ee623d1ed15a812b184ea375f55d09c58ddb34d4ee7ac847d8e07f1",
+            "bytes": 52,
+            "scopes": [
+              {
+                "tenantId": "33333333-3333-4333-8333-000000000100",
+                "kind": "client",
+                "resourceId": "33333333-3333-4333-8333-000000000106",
+                "policyRevision": "policy1"
+              }
+            ]
+          },
+          "filename": "Consolidated text _85497507308ebaf42c6a1ce4a6f86f101b22cf5fd68e2bd34b98535c3b4a6507__ 119-hr-1.txt",
+          "mimeType": "text/plain; charset=utf-8",
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ],
+          "evidence": [],
+          "generationStatus": "draft",
+          "previewStatus": "pending",
+          "createdAt": "2026-10-13T18:00:00.000Z"
+        },
+        "inspection": {
+          "sha256": "da85f1816ee623d1ed15a812b184ea375f55d09c58ddb34d4ee7ac847d8e07f1",
+          "bytes": 52,
+          "format": "txt",
+          "nativeOpened": false,
+          "rendered": false,
+          "recalculated": false,
+          "members": [],
+          "details": {
+            "encoding": "UTF-8",
+            "whitespace": "unchanged"
+          }
+        },
+        "execution": {
+          "kind": "native-document",
+          "invocationId": "sdk:e7f80cced7a2b129924abb60d4dd81843be32e8f9b7b7f6cdbba9e77b62aabdc",
+          "requestSha256": "6e82a57dabe02171505657c13d64f2ba49171d32d20071b9e57744b29475ee2c",
+          "authorizationReceiptId": "2e68e08e-8a09-4f2c-9e19-d12ff9785fc3",
+          "objectCommitted": true,
+          "versionCommitted": true,
+          "nativeQualified": false
+        }
+      }
+    },
+    "redline": {
+      "schema": "meri.federal-review.v1",
+      "sourceArtifact": {
+        "versionId": "e389542f-2a81-43dd-834b-6143d1fa6fb2",
+        "sha256": "0affcc4c77519631cb8f3d558d31d7b375fe9d842f01bd606fe247ca6359faa3",
+        "specSha256": "8b2cbbe47b83bc492ba56ff2afbd7537b41199ba27c6f2bd633bfc665e60be11"
+      },
+      "revisionSha256": "85497507308ebaf42c6a1ce4a6f86f101b22cf5fd68e2bd34b98535c3b4a6507",
+      "output": "redline",
+      "review": "confirmed-for-export",
+      "publication": {
+        "version": {
+          "contractVersion": "0.2.0",
+          "artifactId": "93463141-dd47-4a3a-877b-bf5e8d0e6bed",
+          "versionId": "5b438fa4-0946-4e49-88df-1260c87aff36",
+          "parentVersionId": null,
+          "binding": {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "actorId": "33333333-3333-4333-8333-000000000101",
+            "conversationId": "33333333-3333-4333-8333-000000000102",
+            "runId": "33333333-3333-4333-8333-000000000103",
+            "attemptId": "33333333-3333-4333-8333-000000000104",
+            "workerId": "33333333-3333-4333-8333-000000000105",
+            "writerFence": 1
+          },
+          "object": {
+            "objectId": "860f6964-e91c-47ee-8f4f-d75f8f7ce50d",
+            "versionId": "SYNTHETIC_860f6964-e91c-47ee-8f4f-d75f8f7ce50d",
+            "sha256": "328dd1af0f13e93ac93dac46385cc648a2b51009c163bb56f96ce47d87827b73",
+            "bytes": 486,
+            "scopes": [
+              {
+                "tenantId": "33333333-3333-4333-8333-000000000100",
+                "kind": "client",
+                "resourceId": "33333333-3333-4333-8333-000000000106",
+                "policyRevision": "policy1"
+              }
+            ]
+          },
+          "filename": "Legal redline _85497507308ebaf42c6a1ce4a6f86f101b22cf5fd68e2bd34b98535c3b4a6507__ 119-hr-1.txt",
+          "mimeType": "text/plain; charset=utf-8",
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ],
+          "evidence": [],
+          "generationStatus": "draft",
+          "previewStatus": "pending",
+          "createdAt": "2026-10-13T18:00:00.000Z"
+        },
+        "inspection": {
+          "sha256": "328dd1af0f13e93ac93dac46385cc648a2b51009c163bb56f96ce47d87827b73",
+          "bytes": 486,
+          "format": "txt",
+          "nativeOpened": false,
+          "rendered": false,
+          "recalculated": false,
+          "members": [],
+          "details": {
+            "encoding": "UTF-8",
+            "whitespace": "unchanged"
+          }
+        },
+        "execution": {
+          "kind": "native-document",
+          "invocationId": "sdk:40c25757d357569419df92353018f314cc18d99aab65a559e7ca28413e083d26",
+          "requestSha256": "762a24404e380cd2c0a30b5edcda80e8b9f849dabc6395ad2a7fe82ee94026dd",
+          "authorizationReceiptId": "a9333067-a351-4f2b-8584-39db4de1a813",
+          "objectCommitted": true,
+          "versionCommitted": true,
+          "nativeQualified": false
+        }
+      }
+    }
+  }
+}

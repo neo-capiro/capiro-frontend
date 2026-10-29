@@ -8,12 +8,14 @@ import type {
 } from "@capiro/meri-contracts/federal-workbench";
 import {
   federalTextHash,
+  FederalSourceStaleError,
   type FederalSourceView,
   type FederalWorkbenchPort,
 } from "../../../shared/meri-documents/federal-workbench";
 import type { LibraryVersion } from "../../../shared/meri-documents/library-access";
 import { DocumentDownloadUrl } from "./download-url";
 import styles from "./files.module.css";
+import { FederalSourceImporter } from "./FederalSourceImporter";
 
 /** Exact text amendment review. Source claims, coverage and unresolved legal
  * checks remain visible; confirming export never labels a draft legally approved. */
@@ -42,6 +44,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
   const [pendingOutput, setPendingOutput] = useState<
     FederalPublication["output"] | null
   >(null);
+  const [pendingImport, setPendingImport] = useState(false);
   const [page, setPage] = useState<{
     cursor: string | null;
     historyVersionId: string | null;
@@ -55,7 +58,8 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
       urls.clear();
     };
   }, [urls]);
-  const locked = busy || (port.unresolved() && pendingOutput !== null);
+  const locked =
+    busy || (port.unresolved() && (pendingOutput !== null || pendingImport));
   function changed() {
     setReview(null);
     setConfirmed(false);
@@ -72,6 +76,11 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     try {
       await action();
     } catch (error) {
+      if (
+        error instanceof FederalSourceStaleError &&
+        !controller.signal.aborted
+      )
+        setConfirmed(false);
       if (!controller.signal.aborted)
         setProblem(
           error instanceof Error
@@ -99,6 +108,9 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
   }
   async function openSource(versionId: string) {
     const selected = await port.source(versionId, lifetime.current.signal);
+    applySource(selected);
+  }
+  function applySource(selected: FederalSourceView) {
     changed();
     setBase(undefined);
     setSource(selected);
@@ -153,14 +165,20 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     setConfirmed(false);
   }
   async function publish(output: FederalPublication["output"]) {
-    if (!review || (output !== "draft" && !confirmed)) return;
+    if (
+      !review ||
+      (output !== "draft" &&
+        !confirmed &&
+        !(port.unresolved() && pendingOutput === output))
+    )
+      return;
     const choosingRecovery = port.unresolved() && pendingOutput === null;
     setPendingOutput(output);
     let value: FederalPublication;
     try {
       value = await port.publish(review, output, lifetime.current.signal);
     } catch (error) {
-      if (choosingRecovery) setPendingOutput(null);
+      if (choosingRecovery || !port.unresolved()) setPendingOutput(null);
       throw error;
     }
     setPendingOutput(null);
@@ -222,21 +240,31 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     <section className={styles.panel} aria-labelledby={id}>
       <h2 id={id}>Federal amendment review</h2>
       <p>
-        Open a retained source or saved review, prepare an exact text amendment,
-        then review the three outputs before exporting.
+        Import an official bill version or open a retained source or saved
+        review, prepare an exact text amendment, then review the three outputs
+        before exporting.
       </p>
       <p className={styles.muted}>
-        Source publisher details are retained claims. Legal currency, enactment,
-        numbering and substantive law still require review. Exports are plain
-        text.
+        Official imports are checked against the current source before
+        preparation and export. Other source publisher details are retained
+        claims. Legal currency, enactment, numbering and substantive law still
+        require review. Exports are plain text.
       </p>
       {problem && <p role="alert">{problem}</p>}
       {port.unresolved() && (
         <p role="status">
-          A previous file operation needs recovery. Keep its exact revision and
-          output selected.
+          A previous file operation needs recovery. Keep its exact source,
+          revision and output selected.
         </p>
       )}
+      <FederalSourceImporter
+        port={port}
+        disabled={busy || (port.unresolved() && pendingOutput !== null)}
+        signal={() => lifetime.current.signal}
+        run={run}
+        onPending={setPendingImport}
+        onImported={applySource}
+      />
       <Button disabled={locked} onClick={() => void run(browse)}>
         Browse source files and saved reviews
       </Button>
