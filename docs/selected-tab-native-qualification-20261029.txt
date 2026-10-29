@@ -1,0 +1,34 @@
+Selected-tab native composer qualification — 29 October 2026
+
+Purpose and owners
+
+Close the gap between the unpacked Chromium extension and the actual frontend composer/upload client. The extension owns explicit activeTab consent, capture filtering and one-use share. The installed public contract owns document-ID and exact-byte validation. Existing conversation, SelectedTabAccess and upload owners retain currentness, correlation and unknown-outcome readback. No product implementation, session credential transport or contract is replaced by this test.
+
+The existing component harness can use a real native extension port through the explicit test-only ?port=native query. Ordinary component tests keep their synthetic port. A separate opt-in Playwright configuration requires SELECTED_TAB_EXTENSION_ROOT, verifies the extension's permissions and exact recipient origin, and loads that owned source in an isolated persistent Chromium profile. Its native popup driver uses the browser's test debug protocol; the extension itself requests only activeTab and scripting.
+
+The real recipient origin is intercepted entirely inside the test browser and served from the existing loopback component server. Other page requests and WebSockets are blocked. Identity and upload service responses are synthetic; no public host, account, model, backend database or deployed upload service is contacted. The real upload client sends its synthetic action-session header only to the synthetic application endpoint.
+
+Assertions
+
+The native toolbar action and popup confirmation precede capture. Native Chrome document IDs pass the installed contracts0.1.36 receiver. The exact title/source/text UTF-8 original reaches the existing upload owner once, with matching length and SHA-256; forms, hidden text and query/fragment data are absent. A committed synthetic storage write loses its response, leaving the extension unable to recapture. The actual composer Check control reads the same receipt and resolves stored without a second write. A pending second capture is erased by application Pause; explicit popup approval resumes it. Ending the native conversation lifetime erases another pending capture and disables capture at the extension. No chat turn is submitted.
+
+Execution
+
+Set SELECTED_TAB_EXTENSION_ROOT to the absolute owned Meri apps/browser-extension/selected-tab source directory and CAPIRO_COMPONENT_TEST_PORT to an available local development port. Run:
+  npm run test:browser --workspace @capiro/web -- --config playwright.selected-tab.config.ts
+
+The test writes a content-free JSON evidence attachment and a synthetic composer screenshot under test-results. The persistent test browser is closed in finally; no WSL or service restart is involved. This is focused development qualification, not an application/image build, store submission, independent acceptance or deployment.
+
+Limits
+
+Real account authentication, Core authorization, upload storage/scan/extraction persistence, installation/distribution/update policy, managed-device behavior and deployed acceptance remain unqualified. A displayed stored receipt here comes from the synthetic service. Browser source captures retain their existing privacy/format limits. No host/viewer, A3 site activation or Objective/Strategy/Planner work is changed.
+
+Recorded development results
+
+The joined native extension test passed, as did the 17 selected-tab client tests and all five existing rendered-component cases, with no skips. Full web TypeScript, touched ESLint/Prettier and diff checks passed. Architecture results exactly match unchanged main344: four existing errors and 84 blocking fingerprints, none introduced. Runtime source a08ceec887e8faff026dbb0f8c1be8bf1534d6c9 passed both selected-tab generator and extension receiver parity checks. The frontend uses the existing contracts0.1.36 archive with SHA-256 c3564efeb72727150ac720b11a0e99de26a8ea332ef8a9278272d87b2fb3b32f; no public package, manifest, lockfile or frontend dependency pin was changed here.
+
+The first existing component run failed because its synthetic fixture assumed window.chrome already existed in every headless browser. That assumption was removed only in the synthetic fixture; the opt-in native test never installs that replacement. The failed run and diagnostic are retained in the task history; the final five-case rerun passed. Both native runs of the complete pause/session-loss scenario passed. No independent review or live acceptance is claimed.
+
+Author structure assessment
+
+The harness selects the test transport only; the native driver owns only toolbar popup protocol access; the native test owns one joined extension-to-composer scenario and its synthetic HTTP responses. No application authority is moved into test fixtures and no second upload controller is introduced. This assessment is not an independent review.

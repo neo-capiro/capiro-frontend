@@ -11,7 +11,9 @@ import {
 import "../../src/app/globals.css";
 import "./test-font.css";
 
-window.__tabFixture = installTabPortFixture();
+const nativeExtension =
+  new URLSearchParams(location.search).get("port") === "native";
+if (!nativeExtension) window.__tabFixture = installTabPortFixture();
 function Harness() {
   const [draft, setDraft] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -45,8 +47,8 @@ function Harness() {
     <main style={{ padding: 24, maxWidth: 860, margin: "auto" }}>
       <h1>Selected-tab component fixture</h1>
       <p>
-        Synthetic native port and service responses; real composer and upload
-        owners.
+        {nativeExtension ? "Native extension" : "Synthetic native port"} and
+        synthetic service responses; real composer and upload owners.
       </p>
       <button onClick={() => owner.lifetime.abort()}>End native session</button>
       <div style={{ paddingTop: 360 }}>
