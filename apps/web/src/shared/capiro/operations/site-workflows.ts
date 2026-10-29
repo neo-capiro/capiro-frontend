@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
   parseSaveSiteWorkflow,
   parseSiteWorkflowManifest,
+  parseSiteWorkflowConversationId,
 } from "@capiro/shared/site-workflows";
 import { defineOperation } from "../contracts";
 import { publicContract } from "../public-contract";
@@ -24,6 +25,22 @@ const receipt = z
   })
   .strict();
 export const siteWorkflowOperations = {
+  "meri.siteWorkflows.catalog": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/clio/site-workflows/catalog",
+    source: "Core site-workflows/controller.ts @721f0ed00 (native-session conversation catalog)",
+    request: z
+      .object({
+        body: z
+          .object({
+            conversationId: parsed(parseSiteWorkflowConversationId),
+          })
+          .strict(),
+      })
+      .strict(),
+    response: z.object({ workflows: z.array(configuration).max(256) }).strict(),
+  }),
   "settings.siteWorkflows.list": defineOperation({
     service: "core",
     method: "GET",

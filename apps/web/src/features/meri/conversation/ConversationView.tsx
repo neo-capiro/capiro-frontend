@@ -17,6 +17,7 @@ import type { useConversationSession } from "./useConversationSession";
 import { ModelSelectionPicker } from "../model-selection/ModelSelectionPicker";
 import modelStyles from "../model-selection/model-selection.module.css";
 import { SkillSelectionPicker } from "./SkillSelectionPicker";
+import { SiteWorkflowPicker } from "./SiteWorkflowPicker";
 import { WorkSelectionPicker } from "../work/WorkSelectionPicker";
 import { ProcedureSelectionPicker } from "./ProcedureSelectionPicker";
 import { ClientHandoffDraft } from "./ClientHandoffDraft";
@@ -113,6 +114,15 @@ export function SessionComposer({
             disabled={modelDisabled}
             onChange={session.setSkillSelection}
           />
+          {current && (
+            <SiteWorkflowPicker
+              key={`website:${JSON.stringify(current.port.context)}`}
+              conversationId={current.port.context.conversationId}
+              selection={session.skillSelection}
+              disabled={modelDisabled}
+              onChange={session.setSkillSelection}
+            />
+          )}
           {/* Start Work / Delegate is additive: it never withdraws another selected input. */}
           <WorkSelectionPicker
             key={JSON.stringify(session.skillSelection.work ?? null)}
