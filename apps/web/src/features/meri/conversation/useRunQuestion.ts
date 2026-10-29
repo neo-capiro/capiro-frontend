@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import {
   ConversationUnavailable,
   answerControl,
@@ -9,13 +9,64 @@ import {
 } from "@capiro/meri-client/conversation";
 import type {
   PendingQuestion,
+  QuestionAnswerValue,
   QuestionSelection,
 } from "@capiro/meri-client/conversation";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import { isSettled } from "./conversation-view";
 import type { QuestionCardState } from "./QuestionCard";
 
-type Phase = "open" | "waiting" | "unknown" | "rejected" | "local" | "error";
+export type QuestionPhase =
+  | "open"
+  | "waiting"
+  | "unknown"
+  | "rejected"
+  | "local"
+  | "error";
+
+export type QuestionAction =
+  | { readonly type: "reset" }
+  | { readonly type: "invalid" }
+  | { readonly type: "submitted" }
+  | { readonly type: "receipt"; readonly state: string }
+  | { readonly type: "refused" }
+  | { readonly type: "failed" };
+
+/** The card's own phase: what the last submission attempt did, independent of the run's durable state.
+ *
+ * A correctable local selection problem and an explicitly refused answer both stay answerable; a delivered answer that
+ * has not been confirmed yet waits; a delivery whose outcome the server reported as unknown latches, because resending
+ * it under a fresh control id would assert a delivery this client cannot prove. */
+export function questionPhase(phase: QuestionPhase, action: QuestionAction): QuestionPhase {
+  switch (action.type) {
+    case "reset":
+      return "open";
+    case "invalid":
+      return "local";
+    case "submitted":
+      return "waiting";
+    case "receipt":
+      return action.state === "UNKNOWN" ? "unknown" : "waiting";
+    case "refused":
+      return "rejected";
+    case "failed":
+      return "error";
+    default:
+      return phase;
+  }
+}
+
+/** What the card may act on: a question whose run already settled, or whose own deadline passed, is never answerable. */
+export function questionCardState(
+  phase: QuestionPhase,
+  { pending, terminal, expired }: {
+    readonly pending: PendingQuestion | null;
+    readonly terminal: boolean;
+    readonly expired: boolean;
+  },
+): QuestionCardState {
+  return pending === null || terminal || expired ? "unavailable" : phase;
+}
 
 export interface RunQuestion {
   readonly questionId: string | null;
@@ -54,7 +105,7 @@ export function useRunQuestion(port: MeriConversationPort | null): RunQuestion {
   const [pending, setPending] = useState<PendingQuestion | null>(null);
   const [terminal, setTerminal] = useState(true);
   const [expired, setExpired] = useState(false);
-  const [phase, setPhase] = useState<Phase>("open");
+  const [phase, dispatch] = useReducer(questionPhase, "open");
 
   useEffect(() => {
     if (!port) {
@@ -68,7 +119,7 @@ export function useRunQuestion(port: MeriConversationPort | null): RunQuestion {
       const next = pendingQuestion(observation?.events ?? []);
       setPending((current) => {
         // A different question is a fresh decision: the previous phase never carries over.
-        if (current?.questionId !== next?.questionId) setPhase("open");
+        if (current?.questionId !== next?.questionId) dispatch({ type: "reset" });
         return next;
       });
       setTerminal(observation ? isSettled(observation.runState) : true);
@@ -81,32 +132,34 @@ export function useRunQuestion(port: MeriConversationPort | null): RunQuestion {
   const submit = useCallback(
     (selection: QuestionSelection, freeText: Readonly<Record<string, string>>) => {
       if (!port || !pending) return;
-      let answers: Record<string, string | string[]>;
+      let answers: Record<string, QuestionAnswerValue>;
       try {
         answers = questionAnswers(pending, selection, freeText);
       } catch {
         // A correctable local selection problem: nothing is sent and the card stays editable.
-        setPhase("local");
+        dispatch({ type: "invalid" });
         return;
       }
-      setPhase("waiting");
+      dispatch({ type: "submitted" });
       void (async () => {
         try {
           const receipt = await port.control(
             answerControl(pending.questionId, answers, crypto.randomUUID()),
           );
-          // The durable record settles the card; an unknown delivery is never retried blindly as a new control.
-          setPhase(receipt.state === "UNKNOWN" ? "unknown" : "waiting");
+          dispatch("state" in receipt
+            ? { type: "receipt", state: String(receipt.state) }
+            : { type: "refused" });
         } catch (cause) {
-          setPhase(cause instanceof ConversationUnavailable ? "error" : "rejected");
+          dispatch({
+            type: cause instanceof ConversationUnavailable ? "failed" : "refused",
+          });
         }
       })();
     },
     [port, pending],
   );
 
-  const state: QuestionCardState =
-    pending === null || terminal || expired ? "unavailable" : phase;
+  const state = questionCardState(phase, { pending, terminal, expired });
   return {
     questionId: pending?.questionId ?? null,
     pending,

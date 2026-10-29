@@ -10,6 +10,8 @@
  * The submitted `answers` record is keyed by the asked question text. Multi-select selections stay arrays here and are
  * comma-joined only at the native SDK boundary inside the worker.
  */
+import type { ConversationLifecycleControlRequest } from "@capiro/meri-contracts/conversation-lifecycle";
+
 export interface ConversationQuestionOption {
   readonly label: string;
   readonly description: string;
@@ -27,6 +29,14 @@ export interface PendingQuestion {
 }
 export type QuestionOutcome = "answered" | "cancelled" | null;
 export type QuestionSelection = Readonly<Record<string, string | readonly string[]>>;
+/** One submitted answer: the chosen label, typed text, or the offered labels of a multi-select question. The tuple
+ * forms are the wire contract's own bounds (one to four options), so no cast is needed at the client boundary. */
+export type QuestionAnswerValue =
+  | string
+  | [string]
+  | [string, string]
+  | [string, string, string]
+  | [string, string, string, string];
 
 type Event = { readonly type: string; readonly data?: unknown; readonly sequence?: number };
 
@@ -88,8 +98,9 @@ export function questionAnswers(
   pending: PendingQuestion,
   selection: QuestionSelection,
   freeText: Readonly<Record<string, string>> = {},
-): Record<string, string | string[]> {
-  const answers: Record<string, string | string[]> = {};
+
+): Record<string, QuestionAnswerValue> {
+  const answers: Record<string, QuestionAnswerValue> = {};
   for (const question of pending.questions) {
     const typed = freeText[question.question]?.trim();
     if (typed) {
@@ -103,7 +114,7 @@ export function questionAnswers(
       const labels = question.options.map((option) => option.label);
       const unique = [...new Set(value)];
       if (!unique.length || unique.some((label) => !labels.includes(label))) throw new Error("QUESTION_SELECTION_INVALID");
-      answers[question.question] = unique;
+      answers[question.question] = labelsTuple(unique);
       continue;
     }
     if (typeof value !== "string" || !value.trim()) throw new Error("QUESTION_SELECTION_INVALID");
@@ -116,11 +127,19 @@ export function questionAnswers(
   return answers;
 }
 
+const labelsTuple = (labels: readonly string[]): QuestionAnswerValue => {
+  if (labels.length === 1) return [labels[0]!];
+  if (labels.length === 2) return [labels[0]!, labels[1]!];
+  if (labels.length === 3) return [labels[0]!, labels[1]!, labels[2]!];
+  if (labels.length === 4) return [labels[0]!, labels[1]!, labels[2]!, labels[3]!];
+  throw new Error("QUESTION_SELECTION_INVALID");
+};
+
 /** The one lifecycle control a browser submits for an answer. The id makes the submission idempotent per attempt. */
 export function answerControl(
   questionId: string,
-  answers: Readonly<Record<string, string | string[]>>,
+  answers: Readonly<Record<string, QuestionAnswerValue>>,
   controlId: string,
-): { controlId: string; intent: "answer"; questionId: string; answers: Record<string, string | string[]> } {
+): Extract<ConversationLifecycleControlRequest, { intent: "answer" }> {
   return { controlId, intent: "answer", questionId, answers: { ...answers } };
 }

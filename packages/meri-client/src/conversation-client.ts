@@ -544,6 +544,7 @@ export type {
   ConversationQuestion,
   ConversationQuestionOption,
   PendingQuestion,
+  QuestionAnswerValue,
   QuestionOutcome,
   QuestionSelection,
 } from "./conversation-questions.js";

@@ -23,5 +23,5 @@ export declare class ConversationObservation {
             "x-meri-resume-sequence": string;
         }>;
     }>;
-    accept(event: ConversationEvent): void;
+    accept(event: unknown): void;
 }
