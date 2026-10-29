@@ -18,12 +18,15 @@ import {
   Wordmark,
 } from "../../ui/primitives";
 import { ErrorText, errorMessage } from "../funnel/shared";
+import { ConfirmedInputRefusal } from "../../lib/attempt-journal";
 import {
+  acceptInvitationTicket,
   acceptInvitePhase,
-  ticketFallbackAllowed,
-  ticketRejectedByProvider,
-  ticketReturnPath,
+  invitationReturnPath,
+  readInvitationStatus,
   type AcceptInvitePhase,
+  type InvitationStatus,
+  type ProviderOutcome,
 } from "../../lib/accept-invite-flow";
 
 const inlineErrorStyle: React.CSSProperties = {
@@ -35,17 +38,30 @@ const inlineErrorStyle: React.CSSProperties = {
 export function AcceptInvitePage() {
   const [params] = useSearchParams();
   const ticket = params.get("__clerk_ticket");
-  return <TicketAcceptance key={ticket ?? "none"} ticket={ticket} />;
+  const status = readInvitationStatus(params.get("__clerk_status"));
+  return (
+    <TicketAcceptance
+      key={`${ticket ?? "none"}:${status ?? "none"}`}
+      ticket={ticket}
+      status={status}
+    />
+  );
 }
 
-function TicketAcceptance({ ticket }: { ticket: string | null }) {
+function TicketAcceptance({
+  ticket,
+  status,
+}: {
+  ticket: string | null;
+  status: InvitationStatus | null;
+}) {
   const navigate = useNavigate();
   const api = useOnboardApi();
   const write = useOnboardAttempt(api, `accept-invitation:${ticket ?? "none"}`);
   const { isLoaded: authLoaded, isSignedIn } = useAuth();
   const { isLoaded: userLoaded, user } = useUser();
   const { isLoaded: signUpLoaded, signUp, setActive } = useSignUp();
-  const { signIn } = useSignIn();
+  const { isLoaded: signInLoaded, signIn } = useSignIn();
   const clerk = useClerk();
 
   const [localPhase, setPhase] = React.useState<AcceptInvitePhase>("loading");
@@ -53,6 +69,7 @@ function TicketAcceptance({ ticket }: { ticket: string | null }) {
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [submitting, setSubmitting] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const [holdStatus, setHoldStatus] = React.useState<string | null>(null);
 
   const confirmMismatch =
     confirmPassword.length > 0 && confirmPassword !== password;
@@ -61,37 +78,75 @@ function TicketAcceptance({ ticket }: { ticket: string | null }) {
   const phase = acceptInvitePhase({
     authLoaded,
     signUpLoaded,
+    signInLoaded,
     isSignedIn,
     ticket,
+    status,
     localPhase,
   });
 
-  const begin = async () => {
-    if (!ticket || !signUp || isSignedIn || write.blocked()) return;
-    try {
-      await write.run("Accept this invitation", async (guard) => {
-        try {
-          await guard.wait(() => signUp.create({ strategy: "ticket", ticket }));
-          setPhase("create");
-        } catch (err) {
-          // An invited person who already has an account accepts this same ticket through
-          // sign-in. A ticket the provider rejects outright is never retried.
-          if (!ticketFallbackAllowed(err, Boolean(signIn))) throw err;
-          const attempt = await guard.wait(() =>
-            clerkInputAttempt(() => signIn.create({ strategy: "ticket", ticket })),
+  /**
+   * The single provider effect the invitation status selects, run inside the existing
+   * attempt journal. An uncertain result is recorded against this attempt and the ticket is
+   * never resubmitted from it.
+   */
+  const providerCall = (action: "sign_up" | "sign_in"): Promise<ProviderOutcome> =>
+    write
+      .run("Accept this invitation", async (guard) => {
+        if (action === "sign_up") {
+          if (!signUp) return { kind: "unknown" } as ProviderOutcome;
+          await guard.wait(() =>
+            signUp.create({ strategy: "ticket", ticket: ticket! }),
           );
-          if (attempt.status !== "complete") {
-            setPhase("invalid-ticket");
-            return;
-          }
-          await guard.wait(() => setActive({ session: attempt.createdSessionId }));
-          navigate("/setup", { replace: true });
+          return { kind: "ok" } as ProviderOutcome;
         }
+        if (!signIn) return { kind: "unknown" } as ProviderOutcome;
+        const attempt = await guard.wait(() =>
+          clerkInputAttempt(() =>
+            signIn.create({ strategy: "ticket", ticket: ticket! }),
+          ),
+        );
+        if (attempt.status === "complete" && attempt.createdSessionId)
+          await guard.wait(() => setActive({ session: attempt.createdSessionId }));
+        return {
+          kind: "ok",
+          status: attempt.status,
+          createdSessionId: attempt.createdSessionId,
+        } as ProviderOutcome;
+      })
+      .catch((err): ProviderOutcome => {
+        if (err instanceof ConfirmedInputRefusal)
+          return { kind: "refused", message: errorMessage(err) };
+        // Transport error, 5xx or any other provider error: the journal already holds the
+        // unknown outcome, so this attempt issues no second authentication effect.
+        return { kind: "unknown" };
       });
-    } catch (err) {
-      if (ticketRejectedByProvider(err)) setPhase("invalid-ticket");
-      setError(errorMessage(err));
+
+  const begin = async () => {
+    if (!ticket || !status || isSignedIn || write.blocked()) return;
+    if ((status === "sign_up" ? !signUp : !signIn) || !signIn) return;
+    setError(null);
+    const outcome = await acceptInvitationTicket({ status, run: providerCall });
+    if (outcome.kind === "signup-started") {
+      setPhase("create");
+      return;
     }
+    if (outcome.kind === "signed-in" || outcome.kind === "complete") {
+      navigate("/setup", { replace: true });
+      return;
+    }
+    if (outcome.kind === "verification-hold") {
+      setHoldStatus(outcome.status);
+      setPhase("verification-hold");
+      return;
+    }
+    if (outcome.kind === "refused") {
+      setError(outcome.message);
+      return;
+    }
+    setError(
+      "We could not confirm this invitation. Check your current status before trying again.",
+    );
   };
 
   const submit = async () => {
@@ -122,18 +177,17 @@ function TicketAcceptance({ ticket }: { ticket: string | null }) {
     }
   };
 
-  // Sign out, then land back on this same URL. The ticket is still in the query
-  // string, so the signed-out effect above picks it up and runs the real invite
-  // flow for the invited address.
+  // Sign out straight to the fixed same-origin invitation URL, which carries both provider
+  // values. The provider performs the navigation, so nothing depends on post-sign-out
+  // client navigation and no caller-supplied return URL is involved.
   const signOutAndAccept = () => {
-    // Return to this route with the ticket explicitly rather than relying on the provider's
-    // sign-out navigation to keep the query string.
-    void clerk
-      .signOut()
-      .then(() => navigate(ticketReturnPath(ticket), { replace: true }));
+    void clerk.signOut({ redirectUrl: invitationReturnPath(ticket, status) });
   };
 
   if (authLoaded && isSignedIn && !ticket)
+    return <Navigate to="/setup" replace />;
+  // A completed invitation is never consumed again; the current session just continues.
+  if (authLoaded && isSignedIn && status === "complete")
     return <Navigate to="/setup" replace />;
 
   return (
@@ -182,6 +236,27 @@ function TicketAcceptance({ ticket }: { ticket: string | null }) {
               administrator for a new invitation, or sign in if you already have an
               account.
             </p>
+            <Btn variant="primary" onClick={() => navigate("/sign-in")}>
+              Go to sign in
+            </Btn>
+          </Card>
+        ) : phase === "verification-hold" ? (
+          <Card>
+            <h2>One more step to accept</h2>
+            <p>
+              This account needs an additional verification step before the invitation
+              can be accepted
+              {holdStatus ? ` (${holdStatus.replace(/_/g, " ")})` : ""}. Finish that
+              step in sign in — this link is not reused.
+            </p>
+            <Btn variant="primary" onClick={() => navigate("/sign-in")}>
+              Go to sign in
+            </Btn>
+          </Card>
+        ) : phase === "complete" ? (
+          <Card>
+            <h2>This invitation is already accepted</h2>
+            <p>Sign in with the invited address to continue.</p>
             <Btn variant="primary" onClick={() => navigate("/sign-in")}>
               Go to sign in
             </Btn>
