@@ -62,7 +62,10 @@ const library = {
           output?.publication.version.filename ?? "synthetic-source.txt",
         mimeType: "text/plain; charset=utf-8",
         bytes: new TextEncoder().encode(
-          output && output.output !== "draft"
+          output &&
+            (output.output === "operative" ||
+              output.output === "consolidated" ||
+              output.output === "redline")
             ? fixture.review.prepared.draft.outputs[output.output]
             : JSON.stringify(fixture.source),
         ),

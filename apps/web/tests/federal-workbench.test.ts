@@ -7,10 +7,13 @@ import {
   idleDocumentAttempt,
   type DocumentAttempt,
 } from "../src/shared/meri-documents/attempt-journal";
-import type { FederalSelection } from "@capiro/meri-contracts/federal-workbench";
-const selection = fixture.review.selection as FederalSelection;
+import { receiveFederalRequest } from "@capiro/meri-contracts/federal-workbench";
 const encode = (value: unknown) =>
   new TextEncoder().encode(JSON.stringify(value));
+const { selection } = receiveFederalRequest(
+  "federal-prepare",
+  encode({ selection: fixture.review.selection }),
+);
 function setup() {
   let attempt: DocumentAttempt = idleDocumentAttempt,
     current = true,

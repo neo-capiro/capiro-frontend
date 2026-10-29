@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type MouseEvent } from "react";
 import { Button } from "@capiro/ui/button";
 import { Textarea } from "@capiro/ui/textarea";
 import type {
@@ -106,7 +106,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     setExpected("");
     setText("");
   }
-  function useReview(value: AdmittedFederalReview) {
+  function applyReview(value: AdmittedFederalReview) {
     setBase(value);
     setReview(value);
     setConfirmed(false);
@@ -171,7 +171,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
         value.publication.version.object.sha256,
         lifetime.current.signal,
       );
-      useReview(saved);
+      applyReview(saved);
       setPublication(value);
     }
   }
@@ -190,6 +190,17 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
       append ? [...previous, ...result.value.versions] : result.value.versions,
     );
     setPage({ cursor: result.value.nextCursor, historyVersionId: versionId });
+  }
+  function handlePublish(event: MouseEvent<HTMLButtonElement>) {
+    const output = event.currentTarget.value;
+    if (
+      output === "draft" ||
+      output === "operative" ||
+      output === "consolidated" ||
+      output === "redline"
+    ) {
+      void run(() => publish(output));
+    }
   }
   async function downloadPublication() {
     if (!publication) return;
@@ -251,7 +262,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                 disabled={locked}
                 onClick={() =>
                   void run(async () =>
-                    useReview(
+                    applyReview(
                       await port.load(
                         row.versionId,
                         row.object.sha256,
@@ -360,7 +371,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
               <label className={styles.field}>
                 Exact text to find
                 <Textarea
-                aria-label="Exact text to find"
+                  aria-label="Exact text to find"
                   value={expected}
                   onChange={(event) => {
                     changed();
@@ -387,7 +398,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                 <label className={styles.field}>
                   New text
                   <Textarea
-                  aria-label="New text"
+                    aria-label="New text"
                     value={text}
                     onChange={(event) => {
                       changed();
@@ -442,10 +453,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
             text.
           </label>
           <div>
-            <Button
-              disabled={locked}
-              onClick={() => void run(() => publish("draft"))}
-            >
+            <Button disabled={locked} value="draft" onClick={handlePublish}>
               Save review revision
             </Button>
             {(["operative", "consolidated", "redline"] as const).map(
@@ -453,7 +461,8 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                 <Button
                   key={output}
                   disabled={locked || !confirmed}
-                  onClick={() => void run(() => publish(output))}
+                  value={output}
+                  onClick={handlePublish}
                 >
                   Export {output}
                 </Button>
@@ -462,7 +471,8 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
             {port.unresolved() && pendingOutput && (
               <Button
                 disabled={busy}
-                onClick={() => void run(() => publish(pendingOutput))}
+                value={pendingOutput}
+                onClick={handlePublish}
               >
                 Recover original operation
               </Button>
@@ -474,7 +484,8 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                   <Button
                     key={"recover-" + output}
                     disabled={busy || (output !== "draft" && !confirmed)}
-                    onClick={() => void run(() => publish(output))}
+                    value={output}
+                    onClick={handlePublish}
                   >
                     Recover original {output}
                   </Button>
