@@ -416,6 +416,8 @@ export async function installFixtures(page: Page) {
     }
     if (path === "core/business-development/prospect-stages")
       return json(route, { message: "New stages unavailable" }, 404);
+    if (path === "core/clients/metrics")
+      return json(route, { message: "Portfolio metrics unavailable" }, 404);
     if (path === "core/me/portfolio-layout")
       return json(route, { message: "Saved ordering unavailable" }, 404);
     if (path === `core/clients/${clientId}/files/storage-usage`)
