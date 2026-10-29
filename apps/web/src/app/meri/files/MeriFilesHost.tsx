@@ -30,7 +30,12 @@ import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { firstChatCoreOperationKey } from "../../../shared/capiro/operations/meri-first-chat";
 import { resolveFirstChatConversation } from "../../../shared/meri-conversations/first-chat-bootstrap";
 import { DocumentWorkflow } from "../../../shared/meri-documents/workflow-adapter";
-import { documentTransport } from "../../../shared/meri-documents/workflow-transport";
+import {
+  documentTransport,
+  federalTransport,
+} from "../../../shared/meri-documents/workflow-transport";
+import { FederalWorkbenchAccess } from "../../../shared/meri-documents/federal-workbench";
+import { createDocumentLibraryAccess } from "../../../shared/meri-documents/library-access";
 import { documentQueryJournal } from "../../../shared/meri-documents/query-journal";
 import { documentSessionContext } from "../../../shared/meri-documents/session-context";
 
@@ -187,6 +192,22 @@ function ConnectedFiles({
           new DocumentWorkflow({
             session,
             operation,
+            ...(operation === "create_word"
+              ? {
+                  federal: new FederalWorkbenchAccess({
+                    session,
+                    library: createDocumentLibraryAccess({
+                      credential: session.credential,
+                      context: session.context,
+                      lifetime: signal,
+                      onAccessLost: lifetime.onAccessLost,
+                    }),
+                    transport: federalTransport(session.credential, signal),
+                    journal: documentQueryJournal(queryClient, session.context),
+                    ...lifetime,
+                  }),
+                }
+              : {}),
             transport: documentTransport(session.credential, signal),
             journal: documentQueryJournal(queryClient, session.context),
             ...lifetime,

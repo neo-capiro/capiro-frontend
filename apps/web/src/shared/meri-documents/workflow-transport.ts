@@ -24,6 +24,12 @@ import {
   withActionDeadline,
 } from "../meri-actions/bounded-json";
 import { actionSessionHeader } from "../meri-actions/session-header";
+import {
+  receiveFederalResponse,
+  type FederalRoute,
+  type AdmittedFederalRequest,
+  type AdmittedFederalReview,
+} from "@capiro/meri-contracts/federal-workbench";
 
 type JsonRoute = Exclude<DocumentRoute, "download">;
 /** The admitted native-result request is the receiver's own shape; no contract type is re-declared. */
@@ -72,6 +78,7 @@ function documentReceiver(
     route:
       | DocumentRoute
       | DocumentAccessRoute
+      | FederalRoute
       | "preview"
       | "preview-publish"
       | "results",
@@ -90,6 +97,9 @@ function documentReceiver(
         "preview",
         "preview-publish",
         "results",
+        "federal-prepare",
+        "federal-load",
+        "federal-publish",
       ].includes(route)
     )
       throw new Error("Unknown document route");
@@ -162,6 +172,30 @@ export function documentTransport(
       );
     },
   };
+}
+
+/** Uses the existing authenticated, bounded document transport. */
+export function federalTransport(
+  credential: string,
+  lifetime: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  const receive = documentReceiver(credential, lifetime, fetcher);
+  return <R extends FederalRoute>(
+    route: R,
+    request: AdmittedFederalRequest<R>,
+    signal: AbortSignal,
+    review?: AdmittedFederalReview,
+  ) =>
+    receive(route, request, signal, async (response, current) =>
+      receiveFederalResponse(
+        route,
+        response.status,
+        await boundedJsonBytes(response, current, 2 * 1024 * 1024),
+        request,
+        review,
+      ),
+    );
 }
 
 /** Artifact inspection uses the same B2 receiver instance as signed-link byte admission. */

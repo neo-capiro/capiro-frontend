@@ -10,6 +10,7 @@ import { DocumentEditor } from "./DocumentEditor";
 import { WorkbookEditor } from "./WorkbookEditor";
 import { DocumentVersionPanel } from "./DocumentVersionPanel";
 import { DocumentNotice } from "./DocumentNotice";
+import { FederalWorkbench } from "./FederalWorkbench";
 import styles from "./files.module.css";
 
 /** The host supplies a disposal identity and operation, never browser-selected authority. */
@@ -85,6 +86,9 @@ function ConnectedFiles({
   return (
     <>
       <DocumentNotice state={state} />
+      {operation === "create_word" && port.federal && (
+        <FederalWorkbench port={port.federal} />
+      )}
       <div className={styles.columns}>
         {operation === "create_word" ? (
           <DocumentEditor

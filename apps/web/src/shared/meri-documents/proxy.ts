@@ -1,6 +1,10 @@
 import { receiveDocumentRequest } from "@capiro/meri-contracts/document-application";
 import type { DocumentRoute } from "@capiro/meri-contracts/document-application";
 import {
+  receiveFederalRequest,
+  type FederalRoute,
+} from "@capiro/meri-contracts/federal-workbench";
+import {
   receiveDocumentRequest as receiveAccessRequest,
   type DocumentAccessRoute,
   receiveDocumentPreviewRequest,
@@ -25,6 +29,9 @@ const routes = new Set<string>([
   "preview",
   "preview-publish",
   "results",
+  "federal-prepare",
+  "federal-load",
+  "federal-publish",
 ]);
 const jsonHeaders = {
   "Content-Type": "application/json",
@@ -66,6 +73,7 @@ export async function proxyDocumentRequest(
   )
     return unavailable(400);
   const route = operation as
+    | FederalRoute
     | DocumentRoute
     | DocumentAccessRoute
     | "preview"
@@ -73,8 +81,11 @@ export async function proxyDocumentRequest(
     | "results";
   // Generation needs the bound document family. Preview publication is an explicit derived write
   // with its own current remote permission; readEnabled only enables forwarding, never grants it.
-  const write = route === "create" || route === "revise";
+  const write =
+    route === "create" || route === "revise" || route === "federal-publish";
   if (!(write ? config.enabled && config.operation : config.readEnabled))
+    return unavailable(503);
+  if (route === "federal-publish" && config.operation !== "create_word")
     return unavailable(503);
   try {
     return await withActionDeadline([request.signal], async (signal) => {
@@ -88,8 +99,9 @@ export async function proxyDocumentRequest(
         signal,
         2 * 1024 * 1024,
       );
-      const admitted =
-        route === "results"
+      const admitted = route.startsWith("federal-")
+        ? receiveFederalRequest(route as FederalRoute, body)
+        : route === "results"
           ? receiveNativeResultsRequest(body)
           : route === "preview" || route === "preview-publish"
             ? receiveDocumentPreviewRequest(

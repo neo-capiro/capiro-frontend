@@ -3,6 +3,7 @@ import type {
   DocumentInspectionResponse,
 } from "@capiro/meri-contracts/document-application";
 import type { DocumentAttempt, DocumentProblem } from "./attempt-journal";
+import type { FederalWorkbenchPort } from "./federal-workbench";
 export type { DocumentProblem } from "./attempt-journal";
 export type DocumentReply<T> =
   | { ok: true; value: T }
@@ -32,6 +33,7 @@ export type DocumentDownloadView = Readonly<{
 
 /** No credential, branded receipt or backend authority is exposed to the view. */
 export interface DocumentWorkflowPort {
+  readonly federal?: FederalWorkbenchPort;
   create(
     content: unknown,
     signal: AbortSignal,
