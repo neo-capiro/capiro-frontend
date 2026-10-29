@@ -3,7 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
-import { runSchema, setupSchema } from "./contracts";
+import { runSchema, setupSchema, type FillRun } from "./contracts";
+import { reviewSnapshotSchema } from "./review-contracts";
 export const enrichmentKey = (clientId: string) =>
   ["client-enrichment", clientId] as const;
 export const latestReviewKey = (
@@ -32,7 +33,28 @@ export async function loadRun(
   );
   if (run.clientId !== clientId || run.id !== runId)
     throw new ApiError(502, "The review returned a different client or run.");
-  return run;
+  return attachReview(api, clientId, run, signal);
+}
+async function attachReview(
+  api: ApiClient,
+  clientId: string,
+  run: FillRun,
+  signal?: AbortSignal,
+): Promise<FillRun> {
+  signal?.throwIfAborted();
+  const review = await api.request(
+    "core",
+    `${enrichmentPath(clientId)}/runs/${run.id}/review`,
+    reviewSnapshotSchema.refine(
+      (value) => value.clientId === clientId && value.runId === run.id,
+    ),
+    { signal },
+  );
+  return {
+    ...run,
+    clientRevision: review.clientRevision,
+    findings: review.findings,
+  };
 }
 export function useEnrichmentAccess() {
   const identity = useIdentity();
@@ -71,7 +93,7 @@ export function useLatestReview(clientId: string, enabled: boolean) {
       );
       if (run && run.clientId !== clientId)
         throw new ApiError(502, "The review returned a different client.");
-      return run;
+      return run ? attachReview(api, clientId, run, signal) : null;
     },
     refetchInterval: (q) =>
       !q.state.error && q.state.data?.status === "running" ? 2000 : false,
