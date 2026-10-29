@@ -35,6 +35,9 @@ export function DeleteConversationDialog({
       description={explanation}
       width="compact"
     >
+      <p className={ui.muted}>
+        Private Office drafts are discarded immediately and cannot be restored.
+      </p>
       <div className={styles.stackedActions}>
         <button
           type="button"
