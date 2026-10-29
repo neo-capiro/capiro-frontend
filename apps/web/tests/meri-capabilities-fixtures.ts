@@ -1,4 +1,6 @@
 /** Disconnected, synthetic serving configuration; never a deployment receipt. */
+import { previewMeriContractsPackageVersion } from "../src/shared/preview/meri-conversation-route.server";
+
 export const capabilityFixtureEnv: Record<string, string | undefined> = {
   CORE_API_BASE_URL: "https://core.synthetic.invalid/api",
   MERI_API_BASE_URL: "https://meri.synthetic.invalid",
@@ -36,7 +38,7 @@ export const previewCapabilitiesEnv = {
   CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE: "a".repeat(40),
   CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST: `sha256:${"b".repeat(64)}`,
   CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN: "https://meri.synthetic.invalid",
-  CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION: "0.1.14",
+  CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION: previewMeriContractsPackageVersion,
   CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE:
     "c64f0005cf14d69683aabafa11def4964d766832",
   CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL:
