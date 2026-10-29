@@ -6,9 +6,9 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { DocumentPreviewPanel } from "./DocumentPreviewPanel";
-import { DocumentRevisionLink } from "./DocumentRevisionLink";
 import { NativeResultFiles } from "./NativeResultFiles";
+import { LibrarySelectedVersion } from "./LibrarySelectedVersion";
+import { LibraryVersions } from "./LibraryVersions";
 import { Button } from "@capiro/ui/button";
 import type { ConversationListPage } from "../../../shared/meri-conversations/history-client";
 import {
@@ -328,31 +328,14 @@ function LibraryPage({
           Reload {history ? "history" : "files"}
         </Button>
       )}
-      {state.versions.length > 0 && (
-        <ul className={styles.stack}>
-          {state.versions.map((version) => (
-            <li key={version.versionId}>
-              <Button
-                variant="outline"
-                className={styles.button}
-                disabled={state.busy}
-                onClick={() =>
-                  history ? controller.select(version) : onHistory(version)
-                }
-              >
-                {version.filename} ·{" "}
-                {new Date(version.createdAt).toLocaleString()}
-              </Button>
-              <p className={styles.muted}>
-                {version.mimeType} · {version.object.bytes} bytes
-                {history && version.parentVersionId === null
-                  ? " · Original version"
-                  : ""}
-              </p>
-            </li>
-          ))}
-        </ul>
-      )}
+      <LibraryVersions
+        versions={state.versions}
+        busy={state.busy}
+        history={history}
+        onSelect={(version) =>
+          history ? controller.select(version) : onHistory(version)
+        }
+      />
       {state.loaded && state.versions.length === 0 && (
         <p role="status">
           {state.nextCursor === null
@@ -379,63 +362,12 @@ function LibraryPage({
           </p>
         )}
       {history && state.selected && (
-        <div className={styles.stack}>
-          <p className={styles.identifier}>
-            Selected version: {state.selected.versionId}
-          </p>
-          <div className={styles.controls}>
-            <Button
-              variant="outline"
-              disabled={state.busy}
-              onClick={() => void controller.inspect()}
-            >
-              Inspect version
-            </Button>
-            <Button
-              variant="outline"
-              disabled={state.busy}
-              onClick={() => void controller.download()}
-            >
-              Verify download
-            </Button>
-          </div>
-          {state.inspection && (
-            <p role="status">
-              Current bytes verified for {state.inspection.filename}. This
-              inspection does not claim a rendered preview.
-            </p>
-          )}
-          {state.inspection?.kind === "generated" && (
-            <>
-              <DocumentPreviewPanel
-                key={state.selected.versionId}
-                port={port}
-                versionId={state.selected.versionId}
-              />
-              {state.selected.versionId === state.versions[0]?.versionId ? (
-                <DocumentRevisionLink
-                  key={`revision:${state.selected.versionId}`}
-                  port={port}
-                  versionId={state.selected.versionId}
-                />
-              ) : (
-                <p>
-                  Select the latest version to revise. Earlier versions remain
-                  available to inspect and download.
-                </p>
-              )}
-            </>
-          )}
-          {state.download && (
-            <a
-              className={styles.download}
-              href={state.download.url}
-              download={state.download.filename}
-            >
-              Download {state.download.filename}
-            </a>
-          )}
-        </div>
+        <LibrarySelectedVersion
+          port={port}
+          controller={controller}
+          state={state}
+          selected={state.selected}
+        />
       )}
     </section>
   );
