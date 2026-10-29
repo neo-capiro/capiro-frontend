@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { researchBillOperations } from "@/shared/capiro/operations/research-bills";
 import {
+  researchAnalytics,
   researchEvent,
   researchMember,
 } from "@/shared/capiro/operations/research-schemas";
@@ -43,6 +44,73 @@ describe("research bill operations", () => {
       params: { kind: "state_bill", billId: "TX-20252026-HB123" },
     });
     expect(parsed.success && parsed.data.params.billId).toBe("TX-20252026-HB123");
+  });
+});
+
+describe("analytics contract accepts a tracked bill", () => {
+  // The exact failure this guards: the backend emits `not_applicable` with a null basis
+  // for bills, and a strict response schema without that value makes the whole Analytics
+  // tab fail validation the moment a portfolio tracks a bill.
+  const projection = {
+    portfolioId: "p1",
+    portfolioRevision: 9,
+    calculationVersion: "research-portfolio-analytics-v2" as const,
+    availability: "partial" as const,
+    totals: [],
+    contributions: [
+      {
+        contributionId: "c1",
+        memberId: "m1",
+        targetKind: "federal_bill" as const,
+        targetId: "119-hr-8800",
+        label: "H.R. 8800 — Defense Appropriations",
+        basis: null,
+        value: null,
+        disposition: "not_applicable" as const,
+        sourceDisposition: null,
+        reason: "A tracked bill carries legislative status, not funding; no funding figure applies",
+        sourceObservationId: null,
+        sourceRevisionIds: [],
+        evidence: [],
+        dedupKey: null,
+        overlapsContributionId: null,
+      },
+    ],
+    coverage: {
+      eligibleMembers: 1,
+      supportedMembers: 0,
+      includedContributions: 0,
+      excludedContributions: 0,
+      overlapContributions: 0,
+      unavailableMembers: 0,
+      notApplicableMembers: 1,
+    },
+    limitations: [
+      "Tracked bills carry legislative status, not funding; they are not applicable to funding totals.",
+    ],
+    observedAt: "2026-10-29T00:00:00.000Z",
+    readAt: "2026-10-29T00:00:00.000Z",
+  };
+
+  it("parses a not_applicable bill contribution with a null basis", () => {
+    const parsed = researchAnalytics.safeParse(projection);
+    expect(parsed.success).toBe(true);
+  });
+
+  it("keeps the bill out of totals and counts it separately from unavailable", () => {
+    const parsed = researchAnalytics.parse(projection);
+    expect(parsed.totals).toEqual([]);
+    expect(parsed.coverage.notApplicableMembers).toBe(1);
+    expect(parsed.coverage.unavailableMembers).toBe(0);
+    expect(parsed.contributions[0]?.value).toBeNull();
+  });
+
+  it("still refuses an invented disposition", () => {
+    const invalid = {
+      ...projection,
+      contributions: [{ ...projection.contributions[0], disposition: "zero" }],
+    };
+    expect(researchAnalytics.safeParse(invalid).success).toBe(false);
   });
 });
 

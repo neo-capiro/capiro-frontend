@@ -141,6 +141,9 @@ export const researchAnalytics = z.object({
         "missing",
         "unavailable",
         "withheld",
+        // A tracked bill carries legislative status, not funding: distinct from a
+        // funding reader that failed ("unavailable") and from a zero.
+        "not_applicable",
       ]),
       sourceDisposition: z
         .enum(["observed", "missing", "partial", "unavailable", "withheld"])
@@ -161,6 +164,8 @@ export const researchAnalytics = z.object({
     excludedContributions: z.number(),
     overlapContributions: z.number(),
     unavailableMembers: z.number(),
+    /** Included subjects with no funding basis (bills). Never zero, never unavailable. */
+    notApplicableMembers: z.number(),
   }),
   limitations: z.array(z.string()),
   observedAt: z.string(),
