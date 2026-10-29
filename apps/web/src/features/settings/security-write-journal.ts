@@ -1,4 +1,4 @@
-import { type SettingsWrite } from "./security-writes";
+import { type SettingsWrite } from "./security-write-types";
 
 type StoragePort = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 export async function settingsRequestHash(input: unknown) {

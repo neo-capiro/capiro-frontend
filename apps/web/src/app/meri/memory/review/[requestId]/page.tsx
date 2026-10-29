@@ -1,4 +1,4 @@
-import { MemoryReviewDetail } from "../../../../../features/meri/memory-review/MemoryReviewDetail";
+import { MemoryReviewDetail } from "../../../../../features/settings/memory/review/MemoryReviewDetail";
 import { ProductShell } from "../../../../../shared/shell/ProductShell";
 import { RequireSession } from "../../../../../shared/session/SessionContext";
 

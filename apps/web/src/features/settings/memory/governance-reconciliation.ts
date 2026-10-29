@@ -1,6 +1,6 @@
 import type { CapiroApi } from "../../../shared/capiro/http";
 import type { capiroOperations } from "../../../shared/capiro/registry";
-import type { SettingsWrite } from "../security-writes";
+import type { SettingsWrite } from "../security-write-types";
 
 export async function reconcileMemoryGovernance(
   api: CapiroApi<typeof capiroOperations>,
