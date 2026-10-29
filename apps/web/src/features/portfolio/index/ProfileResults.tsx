@@ -108,6 +108,7 @@ export function ProfileCard({
               href={`/portfolio/${client.id}`}
               aria-label={`Open ${client.name}`}
               aria-describedby={descriptionId}
+              title={client.name}
             >
               {client.name}
             </Link>

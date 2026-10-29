@@ -68,8 +68,8 @@ export function PortfolioAttention({
           )}
           <footer className={styles.footer}>
             <p>
-              Limited feed: up to 50 alerts from the first 40 active clients,
-              with up to 20 per client. Some sources may be unavailable.
+              Showing up to 50 alerts across your active clients. Some sources
+              may be unavailable, so this is not a complete record.
             </p>
             <div className={styles.freshness}>
               <span>

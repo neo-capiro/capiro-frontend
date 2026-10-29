@@ -40,8 +40,8 @@ export function PortfolioHeaderActions({
           <Link
             className="button ghost iconButton"
             href="/portfolio?search=1"
-            aria-label="Search Portfolio"
-            title="Search"
+            aria-label="Search clients by name"
+            title="Search clients by name"
           >
             <img src={asset("imgIcon5.svg")} alt="" />
           </Link>
