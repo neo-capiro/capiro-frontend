@@ -40,7 +40,7 @@ test("transient form POST, private Save and explicit released-editor Publish", a
     .getByRole("button", { name: "Save private draft", exact: true })
     .click();
   await expect(page.getByLabel("Service operations")).toHaveText(
-    "open,launch,read",
+    "open,launch,read,read",
   );
   await expect(page.getByLabel("Retained view")).not.toContainText(
     "synthetic.",
@@ -50,13 +50,13 @@ test("transient form POST, private Save and explicit released-editor Publish", a
     .click();
   await expect(page.locator("iframe")).toHaveCount(0);
   await expect(page.getByLabel("Service operations")).toHaveText(
-    "open,launch,read,release",
+    "open,launch,read,read,release",
   );
   await page
     .getByRole("button", { name: "Publish saved revision", exact: true })
     .click();
   await expect(page.getByLabel("Service operations")).toHaveText(
-    "open,launch,read,release,publish",
+    "open,launch,read,read,release,publish",
   );
   await expect(
     page.getByText("A new immutable version has been published.", {
@@ -138,6 +138,6 @@ test("access loss removes the frame and clears private draft metadata immediatel
     page.getByRole("button", { name: "Publish saved revision", exact: true }),
   ).toBeDisabled();
   await expect(page.getByLabel("Service operations")).toHaveText(
-    "open,launch,read",
+    "open,launch,read,read",
   );
 });

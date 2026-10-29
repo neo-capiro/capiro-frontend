@@ -146,13 +146,18 @@ describe("attended Office state", () => {
     f.frame.save.mockImplementationOnce(() => ack.promise);
     const save = f.editor.save();
     await Promise.resolve();
-    expect(f.calls.map((c) => c.route)).toEqual(["open", "launch"]);
+    expect(f.calls.map((c) => c.route)).toEqual(["open", "launch", "read"]);
     await f.editor.publish();
     expect(f.published).not.toHaveBeenCalled();
     f.setSaved(snapshot(1, selection.editorId));
     ack.resolve();
     await save;
-    expect(f.calls.map((c) => c.route)).toEqual(["open", "launch", "read"]);
+    expect(f.calls.map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "read",
+      "read",
+    ]);
     expect(f.editor.getSnapshot().snapshot?.draft.sequence).toBe(1);
     expect(JSON.stringify(f.editor.getSnapshot())).not.toContain(
       "synthetic-secret",
@@ -189,6 +194,44 @@ describe("attended Office state", () => {
     });
     await f.editor.publish();
     expect(f.calls.some((c) => c.route === "publish")).toBe(false);
+  });
+  it("a local CODE Save acknowledgement cannot confirm an older stored draft after editing", async () => {
+    const f = fixture();
+    f.setSaved(snapshot(1));
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    f.frame.save.mockImplementationOnce(async () => f.editor.modified(false));
+    await f.editor.save();
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      uncertain: true,
+    });
+    expect(f.editor.getSnapshot().notice).not.toContain("Save confirmed");
+    await f.editor.publish();
+    expect(f.published).not.toHaveBeenCalled();
+  });
+  it("late modified status during Save still requires a newer stored revision", async () => {
+    const f = fixture();
+    f.setSaved(snapshot(1));
+    await f.editor.open();
+    f.editor.ready();
+    f.frame.save.mockImplementationOnce(async () => {
+      f.editor.modified(true);
+      f.editor.modified(false);
+    });
+    await f.editor.save();
+    expect(f.editor.getSnapshot().uncertain).toBe(true);
+  });
+  it("an editor replacement during Save cannot confirm another editor's revision", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.frame.save.mockImplementationOnce(async () =>
+      f.setSaved(snapshot(2, "another-editor")),
+    );
+    await f.editor.save();
+    expect(f.editor.getSnapshot().uncertain).toBe(true);
   });
   it("access loss aborts pending work, clears metadata, and refuses a late result", async () => {
     const f = fixture(),

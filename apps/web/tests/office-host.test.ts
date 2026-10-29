@@ -43,6 +43,7 @@ async function fixture() {
     }),
     dispose: vi.fn(),
   };
+  let editor = officeWireSnapshot().editor;
   const fetcher = vi.fn(async (_url: RequestInfo | URL, init?: RequestInit) => {
     const request = JSON.parse(init?.body as string),
       route = String(_url).split("/").at(-1);
@@ -50,6 +51,7 @@ async function fixture() {
     snapshot = {
       ...snapshot,
       draft: { ...snapshot.draft, draftId: recovery.selection.draftId },
+      editor,
     };
     if (route === "launch" || route === "renew") {
       const expiresAtMs = Date.now() + 120_000;
@@ -61,6 +63,7 @@ async function fixture() {
           expiresAt: new Date(expiresAtMs).toISOString(),
         },
       };
+      editor = snapshot.editor;
       snapshot = {
         ...snapshot,
         launch: {
@@ -128,7 +131,8 @@ describe("Office native session composition", () => {
     });
     acknowledge();
     await saving;
-    expect(f.fetcher).toHaveBeenCalledTimes(2);
+    expect(f.frame.save).toHaveBeenCalledTimes(1);
+    expect(f.fetcher).toHaveBeenCalledTimes(3);
   });
   it("cache clear and detach retire the frame; reattach starts from cleared local state", async () => {
     const f = await fixture();

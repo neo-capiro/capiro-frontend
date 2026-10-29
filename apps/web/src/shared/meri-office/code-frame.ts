@@ -28,6 +28,8 @@ export class CodeFrameChannel {
   private save: Save | null = null;
   private expiry: ReturnType<typeof setTimeout> | undefined;
   private renewal: ReturnType<typeof setTimeout> | undefined;
+  private renewAt = 0;
+  private renewalRequested = false;
   private readonly now: () => number;
   constructor(
     private readonly options: {
@@ -72,13 +74,19 @@ export class CodeFrameChannel {
       throw new Error("Editor token expired");
     clearTimeout(this.expiry);
     clearTimeout(this.renewal);
+    this.renewalRequested = false;
+    const renewIn = Math.max(1, remaining - Math.min(30_000, remaining / 2));
+    this.renewAt = this.now() + renewIn;
     this.expiry = setTimeout(() => this.stop("expired"), remaining);
-    this.renewal = setTimeout(
-      () => {
-        if (!this.closed) this.options.callbacks.renew();
-      },
-      Math.max(1, remaining - Math.min(30_000, remaining / 2)),
-    );
+    this.renewal = setTimeout(() => this.requestRenewal(), renewIn);
+  }
+  private requestRenewal() {
+    // CODE warns immediately for short tokens, including after every reset.
+    // The host's signed expiry determines one renewal window per token.
+    if (this.closed || this.renewalRequested || this.now() < this.renewAt)
+      return;
+    this.renewalRequested = true;
+    this.options.callbacks.renew();
   }
   /** Both fields are mandatory. Sending does not establish that CODE accepted them. */
   renew(launch: OfficeLaunch) {
@@ -170,7 +178,7 @@ export class CodeFrameChannel {
       message.MessageId === "App_TokenExpiring" ||
       message.MessageId === "App_TokenExpired"
     )
-      this.options.callbacks.renew();
+      this.requestRenewal();
     else if (
       message.MessageId === "UI_Close" ||
       message.MessageId === "Session_Closed"
