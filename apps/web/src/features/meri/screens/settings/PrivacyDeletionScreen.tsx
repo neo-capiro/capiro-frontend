@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
+import styles from "./settings.module.css";
 import { SettingsCard } from "./SettingsCard";
 import { SettingsCallout } from "./SettingsCallout";
 import { SettingsLayout } from "./SettingsLayout";
@@ -49,12 +50,14 @@ export function PrivacyDeletionScreen({
   outcome,
   policyState,
   conversationActions,
+  deletionRequests,
 }: {
   chrome: SettingsChrome;
   view: PrivacyDeletionView;
   outcome?: SettingsOutcome | undefined;
   policyState?: ReactNode;
   conversationActions?: ReactNode;
+  deletionRequests?: ReactNode;
 }) {
   const { stores, retained } = view;
   return (
@@ -89,22 +92,25 @@ export function PrivacyDeletionScreen({
         </SettingsCard>
       }
       supporting={
-        <SettingsCard
-          title={retained.title}
-          description={retained.description}
-          emphasis
-        >
-          {retained.notices.map((notice) => (
-            <SettingsCallout key={notice.title} notice={notice} />
-          ))}
-          <LinkAction
-            variant="outline"
-            href={retained.states.href}
-            unavailable={chrome.unavailable}
+        <div className={styles.stack}>
+          {deletionRequests}
+          <SettingsCard
+            title={retained.title}
+            description={retained.description}
+            emphasis
           >
-            {retained.states.label}
-          </LinkAction>
-        </SettingsCard>
+            {retained.notices.map((notice) => (
+              <SettingsCallout key={notice.title} notice={notice} />
+            ))}
+            <LinkAction
+              variant="outline"
+              href={retained.states.href}
+              unavailable={chrome.unavailable}
+            >
+              {retained.states.label}
+            </LinkAction>
+          </SettingsCard>
+        </div>
       }
     />
   );

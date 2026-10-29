@@ -810,6 +810,34 @@
       "regularEntryCount": 6,
       "status": "source-merged-consumer-bound",
       "purpose": "Peer compatibility only; stream runtime and declarations unchanged."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.34-56f19b39-b14765c45994.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.34",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "56f19b3946458cbba9418b424ee3a9df67396c62",
+      "sourceTree": "65b1ed52c8e98a5f179378a0b123fa9b26efb9cb",
+      "bytes": 1715902,
+      "sha256": "b14765c45994d4094fe113c93128bddba7432fedcc83f99300d3d06c2f11e10d",
+      "integrity": "sha512-0jm8bajAB7+NZLv1ZgWdktTnYuNbORBz5s6XGZfofNtkTZQSaZKK6sa1JXLxtY0ChTfwjCa7zw8Id6Vu2p7F9A==",
+      "regularEntryCount": 85,
+      "status": "source-merged-consumer-bound",
+      "purpose": "Content-free conversation deletion requests and verified cleanup status."
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.21-56f19b39-7e51baa203a2.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.21",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "56f19b3946458cbba9418b424ee3a9df67396c62",
+      "sourceTree": "65b1ed52c8e98a5f179378a0b123fa9b26efb9cb",
+      "bytes": 3712,
+      "sha256": "7e51baa203a2d69c12a5579a466c926badbc5b47b83e1695e808afcb2fd87f4f",
+      "integrity": "sha512-mrB8EzosZsdMHHc6ai/KBZVvSS5I/f0wz5D0o63e1o/ZVoFyYwad4rWFViCVe8eFfXQ5KQiTSsCEGQeyfFB0iQ==",
+      "regularEntryCount": 6,
+      "status": "source-merged-consumer-bound",
+      "purpose": "Peer compatibility only; stream runtime and declarations unchanged."
     }
   ]
 }

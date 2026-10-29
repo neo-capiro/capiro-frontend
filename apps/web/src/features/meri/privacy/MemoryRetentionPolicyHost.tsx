@@ -6,6 +6,7 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { PrivacyDeletionScreen } from "../screens/settings/PrivacyDeletionScreen";
 import type { SettingsChrome } from "../screens/settings/settings-view";
 import { memoryPrivacyView } from "./retention-policy-view";
+import { ConversationDeletionRequests } from "./ConversationDeletionRequests";
 import ui from "../ui/meri-ui.module.css";
 
 export function MemoryRetentionPolicyHost({
@@ -25,9 +26,10 @@ export function MemoryRetentionPolicyHost({
             "Read the installed memory policy for your current account. Other data stores and request actions retain their own availability.",
         },
         unavailable:
-          "Individual retention status and memory deletion requests are not connected here.",
+          "Individual memory deletion requests are not connected here.",
       }}
       view={memoryPrivacyView(read)}
+      deletionRequests={<ConversationDeletionRequests />}
       conversationActions={
         <div>
           <Link className={ui.outline} href={conversationSearchHref(undefined)}>
