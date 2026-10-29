@@ -2,6 +2,8 @@
 import { DocumentRevisionDraft } from "./DocumentRevisionDraft";
 import { useState, useSyncExternalStore } from "react";
 import { MeriComposer } from "../MeriComposer";
+import { QuestionCard } from "./QuestionCard";
+import { useRunQuestion } from "./useRunQuestion";
 import {
   ConnectionPending,
   pendingConversationComposer,
@@ -63,7 +65,21 @@ export function SessionComposer({
     current?.port ?? null,
     live.attachUnavailable,
   );
+  // A clarifying question is durable run state: it is re-derived from this conversation's own events on every render,
+  // survives a refresh, and is answered with one lifecycle control.
+  const question = useRunQuestion(current?.port ?? null);
   return (
+    <>
+      {question.pending !== null && (
+        <QuestionCard
+          question={question.pending}
+          state={
+            current === null ? "unavailable" : question.state
+          }
+          error={question.error}
+          onSubmit={question.submit}
+        />
+      )}
     <MeriComposer
       draft={session.accessLost ? "" : session.draft}
       onDraft={session.setDraft}
@@ -199,6 +215,7 @@ export function SessionComposer({
         </>
       }
     />
+    </>
   );
 }
 

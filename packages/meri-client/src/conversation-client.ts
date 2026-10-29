@@ -532,3 +532,18 @@ export function createMeriConversation(options: ConversationLifetime) {
     dispose: connection.dispose,
   });
 }
+
+/** Clarifying questions: pending projection from the run's durable events, answer mapping and the answer control. */
+export {
+  pendingQuestion,
+  questionOutcome,
+  questionAnswers,
+  answerControl,
+} from "./conversation-questions.js";
+export type {
+  ConversationQuestion,
+  ConversationQuestionOption,
+  PendingQuestion,
+  QuestionOutcome,
+  QuestionSelection,
+} from "./conversation-questions.js";
