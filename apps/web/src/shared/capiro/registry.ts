@@ -1,4 +1,5 @@
 import type { OperationRegistry } from "./contracts";
+import { siteWorkflowOperations } from "./operations/site-workflows";
 import { memoryReviewOperations } from "./operations/memory-review";
 import { memoryGrantOperations } from "./operations/memory-grants";
 import { memoryFilesOperations } from "./operations/memory-files";
@@ -50,6 +51,7 @@ import {
 
 // Reviewed feature groups are composed here. This registry is the gateway allowlist.
 export const capiroOperations = {
+  ...siteWorkflowOperations,
   ...memoryReviewOperations,
   ...memoryGrantOperations,
   ...memoryFilesOperations,

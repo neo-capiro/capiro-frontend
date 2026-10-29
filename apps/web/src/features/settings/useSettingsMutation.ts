@@ -79,6 +79,7 @@ export function useSettingsMutation(section: string) {
         try {
           if (
             operation.startsWith("settings.memory.") ||
+            operation === "settings.siteWorkflows.save" ||
             operation === "me.update" ||
             operation === "me.emailSignature.update" ||
             operation === "settings.branding.update" ||

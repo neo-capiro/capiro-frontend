@@ -5,6 +5,7 @@ import { settingsRequestHash } from "./security-write-journal";
 import { reconcileMemoryGrant } from "./memory/grant-reconciliation";
 import { reconcileMemoryReview } from "./memory/review-reconciliation";
 import { reconcileMemoryGovernance } from "./memory/governance-reconciliation";
+import { reconcileSiteWorkflow } from "./site-workflows/recovery";
 type Api = CapiroApi<typeof capiroOperations>;
 const row = (value: unknown): Record<string, unknown> =>
   value && typeof value === "object" ? (value as Record<string, unknown>) : {};
@@ -18,6 +19,8 @@ export async function reconcileSettingsWrite(
   signal.throwIfAborted();
   const { params = {}, body = {} } = write.input;
   switch (write.operation) {
+    case "settings.siteWorkflows.save":
+      return reconcileSiteWorkflow(api, write, signal);
     case "settings.memory.review.approve":
     case "settings.memory.review.reject":
       return reconcileMemoryReview(api, write, signal);

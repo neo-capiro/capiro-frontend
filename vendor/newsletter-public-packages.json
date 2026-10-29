@@ -273,6 +273,25 @@
         "@capiro/shared/prospect-brief-refresh"
       ],
       "status": "active-packed-frontend-input; application build and deployed acceptance not run"
+    },
+    {
+      "file": "capiro-shared-0.0.0-c8e583c1-0fba422087a4.tgz",
+      "name": "@capiro/shared",
+      "version": "0.0.0",
+      "repository": "https://github.com/neo-capiro/capiro-backend",
+      "sourceCommit": "c8e583c109aab7d0788df19acaea16945c9c1e90",
+      "sourceTree": "a18cc83533c6f9741f87a9db33bb5bd6612dfd2c",
+      "sha256": "0fba422087a4b48f63c50bdeb873292d774941b21c36a79348b3eed289015622",
+      "integrity": "sha512-nR9aw9f4tT/8GhH/4heZ4K6nR1tjsDOGCPYglfg1WKgrFWHjrsK5t0YwB6ENK8Ka9z4gHQSo3t4BC8nuWd0uXQ==",
+      "bytes": 796359,
+      "browserExports": [
+        "@capiro/shared/prospect-brief-refresh",
+        "@capiro/shared/site-workflows"
+      ],
+      "status": "source-merged-admin-workflow-consumer",
+      "distributionPath": "vendor/capiro-shared-0.0.0-c8e583c1-0fba422087a4.tgz",
+      "regularEntryCount": 368,
+      "qualification": "Focused shared types and Core contract/ordinary-role PostgreSQL tests; no application/image build or live qualification."
     }
   ],
   "activeFile": "capiro-shared-0.0.0-588c00e1-ea851e52ea29.tgz"
