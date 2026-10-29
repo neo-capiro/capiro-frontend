@@ -50,6 +50,7 @@ export class OfficeEditorController {
   private work: AbortController | null = null;
   private closed = false;
   private renewalPending = false;
+  private modificationEpoch = 0;
   constructor(
     private readonly options: {
       selection: { versionId: string; draftId: string; editorId: string };
@@ -159,7 +160,10 @@ export class OfficeEditorController {
     this.update({ ready: true });
     if (this.renewalPending && !this.work) void this.renew();
   };
-  modified = (value: boolean) => this.update({ modified: value });
+  modified = (value: boolean) => {
+    if (value) this.modificationEpoch++;
+    this.update({ modified: value });
+  };
   frameUnavailable = (
     reason: "closed" | "expired" | "save-unknown" | "disposed",
   ) => {
@@ -255,10 +259,24 @@ export class OfficeEditorController {
   save = () => {
     if (!this.state.frame || !this.state.ready) return Promise.resolve();
     return this.run("Saving private draft…", async (port, signal) => {
+      const epoch = this.modificationEpoch,
+        modified = this.state.modified,
+        before = await this.request(port, "read", this.key(), signal);
+      if (before.editor.editorId !== this.options.selection.editorId)
+        throw new Error("Editor lease changed");
       await this.options.frame.save(signal);
       signal.throwIfAborted();
       const saved = await this.request(port, "read", this.key(), signal);
-      if (saved.draft.sequence < 1 || !saved.draft.sha256)
+      // CODE can acknowledge its local Save before WOPI storage succeeds.
+      // An older saved revision cannot confirm changes from this operation.
+      if (
+        saved.draft.sequence < 1 ||
+        !saved.draft.sha256 ||
+        saved.editor.editorId !== before.editor.editorId ||
+        saved.editor.epoch !== before.editor.epoch ||
+        ((modified || this.modificationEpoch !== epoch) &&
+          saved.draft.sequence <= before.draft.sequence)
+      )
         throw new Error("No saved revision confirmed");
       this.keep(saved);
       this.update({

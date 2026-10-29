@@ -152,6 +152,31 @@ describe("CODE frame channel", () => {
     f.owner.dispose();
     expect(f.callbacks.unavailable).toHaveBeenCalledTimes(1);
   });
+  it("early CODE token warnings cannot create a renewal loop after each reset", async () => {
+    const f = fixture();
+    f.ready();
+    for (let n = 0; n < 20; n++)
+      f.receive("App_TokenExpiring", { Timeout: 60_000 });
+    expect(f.callbacks.renew).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(30_000);
+    for (let n = 0; n < 20; n++)
+      f.receive("App_TokenExpiring", { Timeout: 30_000 });
+    expect(f.callbacks.renew).toHaveBeenCalledTimes(1);
+    const expiresAtMs = Date.now() + 180_000;
+    f.owner.renew({
+      editorOrigin: "https://office.example.test",
+      expiresAtMs,
+      fields: {
+        access_token: "synthetic-renewal",
+        access_token_ttl: String(expiresAtMs),
+      },
+    } as OfficeLaunch);
+    for (let n = 0; n < 20; n++)
+      f.receive("App_TokenExpiring", { Timeout: 180_000 });
+    expect(f.callbacks.renew).toHaveBeenCalledTimes(1);
+    await vi.advanceTimersByTimeAsync(150_000);
+    expect(f.callbacks.renew).toHaveBeenCalledTimes(2);
+  });
   it("malformed or oversized messages convey no ready, modified or Save acknowledgement", () => {
     const f = fixture();
     for (const data of [
