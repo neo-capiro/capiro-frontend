@@ -6,13 +6,17 @@ import {
   prospectId,
   otherId,
 } from "../../tests/prospect-resources-fixtures";
+import {
+  prospectStateFixture,
+  prospectReceiptFixture,
+} from "../../tests/prospect-atomic-fixture";
 export const richDetail = `/modules/workspace?prospectId=${prospectId}&draftId=${draft.id}`;
 export const richSource =
   "<p>A <strong>formatted</strong> draft with <em>emphasis</em>.</p>";
 export async function richWorkspaceFixture(
   page: Page,
   initial = richSource,
-  held?: "update" | "snapshot",
+  held?: "save",
   loseReceipt = false,
 ) {
   await onlyLocalRequests(page);
@@ -22,65 +26,71 @@ export async function richWorkspaceFixture(
     ...structuredClone(draft),
     config: { sections: ["Body"], sectionContent: { Body: initial } },
   };
-  const writes: { operation: string; body: unknown }[] = [];
-  let entered = false;
-  let routeSettled = false;
-  let requestCompleted = false;
+  const writes: { operation: string; body: unknown }[] = [],
+    receipts = new Map<
+      string,
+      Awaited<ReturnType<typeof prospectReceiptFixture>>
+    >();
+  let entered = false,
+    routeSettled = false,
+    requestCompleted = false,
+    release!: () => void;
   const completed = (request: Request) => {
-    if (held && request.url().endsWith(`workspace.draft.${held}`))
+    if (held && request.url().endsWith("workspace.prospect.save"))
       requestCompleted = true;
   };
   page.on("requestfinished", completed);
   page.on("requestfailed", completed);
-  let release!: () => void;
   const gate = new Promise<void>((resolve) => {
     release = resolve;
   });
-  const version = {
-    id: otherId,
-    draftId: draft.id,
-    label: "Manual save",
-    authorId: "test-user",
-    authorKind: "human",
-    createdAt: "2026-10-12T12:01:00Z",
-  };
   await operationFixtures(page, {
     ...moduleRouteFixtures,
     "workspace.prospect.drafts": { drafts: [] },
-    "workspace.draft": current,
-    "workspace.draft.versions": [version],
-  });
-  await page.route("**/api/capiro/workspace.draft?*", (route) =>
-    route.fulfill({ json: current }),
-  );
-  for (const operation of ["update", "snapshot"] as const)
-    await page.route(
-      `**/api/capiro/workspace.draft.${operation}`,
-      async (route) => {
-        const { body } = route.request().postDataJSON();
-        writes.push({ operation, body });
-        const isHeld = held === operation && !entered;
-        try {
-          if (isHeld) {
-            entered = true;
-            await gate;
-            if (loseReceipt) return route.abort("connectionreset");
-          }
-          if (operation === "update")
-            current = {
-              ...current,
-              docTitle: body.docTitle,
-              config: body.config,
-              updatedAt: "2026-10-12T12:01:00Z",
-            };
-          await route.fulfill({
-            json: operation === "update" ? current : version,
-          });
-        } finally {
-          if (isHeld) routeSettled = true;
-        }
+    "workspace.draft": () => current,
+    "workspace.prospect.state": () =>
+      prospectStateFixture(
+        current,
+        receipts.size ? "b".repeat(64) : "a".repeat(64),
+      ),
+    "workspace.draft.versions": [
+      {
+        id: otherId,
+        draftId: draft.id,
+        label: "Manual save",
+        authorId: "test-user",
+        authorKind: "human",
+        createdAt: "2026-10-12T12:01:00Z",
       },
-    );
+    ],
+  });
+  await page.route("**/api/capiro/workspace.prospect.save", async (route) => {
+    const { body } = route.request().postDataJSON();
+    writes.push({ operation: "save", body });
+    const isHeld = Boolean(held && !entered);
+    try {
+      if (isHeld) {
+        entered = true;
+        await gate;
+      }
+      if (!receipts.has(body.requestId)) {
+        current = {
+          ...current,
+          docTitle: body.title,
+          config: { sections: body.names, sectionContent: body.sections },
+          updatedAt: new Date().toISOString(),
+        };
+        receipts.set(
+          body.requestId,
+          await prospectReceiptFixture(current, body),
+        );
+      }
+      if (isHeld && loseReceipt) return route.abort("connectionreset");
+      await route.fulfill({ json: receipts.get(body.requestId) });
+    } finally {
+      if (isHeld) routeSettled = true;
+    }
+  });
   return {
     writes,
     errors,
