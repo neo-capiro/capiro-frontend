@@ -118,6 +118,7 @@ export const publicExports = new Set([
   '@capiro/meri-contracts/action-application', '@capiro/meri-contracts/conversation-application',
   '@capiro/meri-contracts/conversation-history',
   '@capiro/meri-contracts/uploads-application',
+  '@capiro/meri-contracts/selected-tab-application',
   '@capiro/meri-contracts/conversation-lifecycle',
   '@capiro/meri-contracts/conversation-input',
   '@capiro/meri-contracts/conversation-initial-input',

@@ -63,6 +63,14 @@ after a lost storage acknowledgement. Chrome component checks exercise the real
 composer, identity query, native-port connector and upload owner with explicitly
 synthetic extension/service endpoints, including keyboard access and narrow layout.
 
+Validation on the source candidate: 66 selected-tab, conversation-host and upload
+tests; 16 package and architecture boundary tests; 5 Chrome component cases; full
+web TypeScript; affected ESLint; public package byte checks; and diff checks pass.
+The architecture scan retains exactly the same four errors and 47 blocking size
+fingerprints as untouched Frontend317, with no introduced error or blocking signal.
+The parent released the shared registry files for this source change; the public
+export and the explicit author assessment above are now registered there.
+
 These checks do not qualify an installed extension, extension permission prompts,
 its popup, authenticated end-to-end upload, deployment or restart durability. The
 existing upload ledger is in-memory for a native session: reload/session replacement
