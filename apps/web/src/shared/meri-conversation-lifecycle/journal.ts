@@ -15,12 +15,29 @@ const receive = (value: unknown) =>
     "control",
     new TextEncoder().encode(JSON.stringify(value)),
   );
+/** An answer is identified by the question it answers and the exact labels submitted, key order included out of the
+ * comparison by sorting: two different answers to the same question must never be treated as the same retained control. */
+const answerBytes = (
+  answers: Readonly<Record<string, string | readonly string[]>>,
+) =>
+  JSON.stringify(
+    Object.keys(answers)
+      .sort()
+      .map((key) => [
+        key,
+        typeof answers[key] === "string" ? answers[key] : [...(answers[key] as readonly string[])],
+      ]),
+  );
 const same = (
   left: ConversationLifecycleControlRequest,
   right: ConversationLifecycleControlRequest,
 ) =>
   left.controlId === right.controlId &&
   left.intent === right.intent &&
+  (left.intent !== "answer" ||
+    (right.intent === "answer" &&
+      left.questionId === right.questionId &&
+      answerBytes(left.answers) === answerBytes(right.answers))) &&
   (left.intent !== "steer" ||
     (right.intent === "steer" && left.text === right.text)) &&
   (left.intent !== "approval.wait" ||

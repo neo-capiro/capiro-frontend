@@ -78,6 +78,7 @@ export function SessionComposer({
           }
           error={question.error}
           onSubmit={question.submit}
+          onCheckAgain={question.retryable ? question.reconcile : undefined}
         />
       )}
     <MeriComposer

@@ -15,6 +15,7 @@ export type QuestionCardState =
   | "unknown"
   | "rejected"
   | "local"
+  | "retention"
   | "unavailable"
   | "error";
 
@@ -30,6 +31,7 @@ export function QuestionCard({
   state,
   error,
   onSubmit,
+  onCheckAgain,
 }: {
   question: PendingQuestion;
   state: QuestionCardState;
@@ -38,6 +40,8 @@ export function QuestionCard({
     selection: QuestionSelection,
     freeText: Readonly<Record<string, string>>,
   ) => void;
+  /** Ask the run again about the answer already attempted, under that same control identity. */
+  onCheckAgain?: () => void;
 }) {
   const [selection, setSelection] = useState<QuestionSelection>({});
   const [freeText, setFreeText] = useState<Record<string, string>>({});
@@ -49,6 +53,7 @@ export function QuestionCard({
     state === "waiting" ||
     state === "unknown" ||
     state === "unavailable" ||
+    state === "retention" ||
     state === "error";
   // A different question is a fresh decision: no selection or typed text carries over from the previous one.
   useEffect(() => {
@@ -88,9 +93,11 @@ export function QuestionCard({
                   ? "Not accepted"
                   : state === "local"
                     ? "Choose an answer"
-                    : state === "error"
-                      ? "Conversation not current"
-                      : "Waiting for you"}
+                    : state === "retention"
+                      ? "Answer not recorded"
+                      : state === "error"
+                        ? "Conversation not current"
+                        : "Waiting for you"}
         </span>
       </div>
       {error !== null && (
@@ -151,6 +158,11 @@ export function QuestionCard({
         >
           Send answer
         </Button>
+        {state === "unknown" && onCheckAgain ? (
+          <Button type="button" variant="secondary" onClick={onCheckAgain}>
+            Check the same answer again
+          </Button>
+        ) : null}
       </div>
     </section>
   );
