@@ -69,6 +69,8 @@ export function BillDetailPanel({
               ["Latest action", detail.data.latestActionText || "not reported"],
               ["Latest action date", detail.data.latestActionDate || "not reported"],
               ["Source revision", detail.data.sourceRevision || "not reported"],
+              ["Last source check", detail.data.refreshedAt || "not reported"],
+              ["Check result", detail.data.refreshStatus || "not reported"],
             ].map(([label, value]) => (
               <div key={label}>
                 <dt>{label}</dt>
@@ -81,6 +83,14 @@ export function BillDetailPanel({
               <a href={detail.data.sourceUrl} rel="noreferrer" target="_blank">
                 Open the source record
               </a>
+            </p>
+          )}
+          {detail.data.refreshFailed && (
+            <p role="status">
+              The last source check failed
+              {detail.data.refreshStatus ? ` (${detail.data.refreshStatus})` : ""}. This
+              record may be stale, so an absence of recent changes is not evidence that
+              nothing changed.
             </p>
           )}
           <h3>Sponsors</h3>

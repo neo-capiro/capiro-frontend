@@ -52,6 +52,10 @@ export const researchBillDetail = z.object({
   latestActionDate: z.string().nullable(),
   sourceUrl: z.string().nullable(),
   sourceRevision: z.string().nullable(),
+  /** Freshness of the source read; a failed check means unknown, not "no change". */
+  refreshedAt: z.string().nullable(),
+  refreshStatus: z.string().nullable(),
+  refreshFailed: z.boolean(),
   sponsors: z.array(
     z.object({
       name: z.string(),
