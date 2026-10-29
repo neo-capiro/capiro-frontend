@@ -334,88 +334,116 @@ export function groupedCards(
  * `addFromCatalog` is not idempotent and its response is captured BEFORE tool discovery, so two
  * facts have to survive a refresh:
  *
- * - `unresolvedCatalogId`: an add whose outcome is unknown (transport failure / 5xx). One list
- *   response cannot prove the write did not happen, so that entry stays blocked from a second
- *   ordinary add until a current read actually shows its row.
+ * - `unresolvedCatalogIds`: adds whose outcome is unknown (transport failure / 5xx). One list
+ *   response cannot prove the write did not happen, so each such entry stays blocked from a second
+ *   ordinary add until a current read actually shows its row. Each entry is kept independently, so
+ *   an unknown created on one service can never release or overwrite another.
  * - `knownCreated`: rows this surface did create. Their ids stay usable for an authorization retry
  *   even when the immediate re-read fails and therefore does not list them yet.
  *
  * This is mounted-flow state only: no persistence, no backend contract change, no approval step.
  */
 export type CreateRecovery = {
-  unresolvedCatalogId: string | undefined;
+  unresolvedCatalogIds: readonly string[];
   knownCreated: readonly ConnectorRow[];
 };
 
 export const noCreateRecovery: CreateRecovery = Object.freeze({
-  unresolvedCatalogId: undefined,
+  unresolvedCatalogIds: Object.freeze([]),
   knownCreated: Object.freeze([]),
 });
 
-/** A row Core actually returned: keep it (by id) for authorization retry. */
-function remember(
-  recovery: CreateRecovery,
-  connector: ConnectorRow,
-): CreateRecovery {
-  return {
-    unresolvedCatalogId:
-      recovery.unresolvedCatalogId !== undefined &&
-      recovery.unresolvedCatalogId === connector.catalogId
-        ? undefined
-        : recovery.unresolvedCatalogId,
-    knownCreated: [
-      ...recovery.knownCreated.filter((row) => row.id !== connector.id),
-      connector,
-    ],
-  };
-}
+/**
+ * Every change to the recovery state goes through this one reducer, so the host's setter, its
+ * current-read commit and the tests all exercise the same binding.
+ *
+ * `read` is the authoritative successful read: it retires each unresolved entry whose row is now
+ * listed and each known row the read itself lists, and it changes nothing for a read that failed or
+ * is still in flight (the host never dispatches it in those states).
+ */
+export type RecoveryAction =
+  | {
+      type: "connect";
+      catalogId: string;
+      result: { kind: string; connector?: ConnectorRow };
+    }
+  | { type: "removal"; rowId: string }
+  | { type: "read"; servers: readonly ConnectorRow[] };
 
-/** The add may or may not have written a row: block this entry from another add. */
-function markUnresolved(
+export function reduceRecovery(
   recovery: CreateRecovery,
-  catalogId: string,
+  action: RecoveryAction,
 ): CreateRecovery {
-  return { ...recovery, unresolvedCatalogId: catalogId };
-}
-
-/** Fold one connect outcome into the recovery state the host renders from. */
-export function applyConnectOutcome(
-  recovery: CreateRecovery,
-  catalogId: string,
-  result: {
-    kind: string;
-    connector?: ConnectorRow;
-  },
-): CreateRecovery {
-  if (result.kind === "unknown_create")
-    return markUnresolved(recovery, catalogId);
-  if (result.connector && result.kind !== "refused")
-    return remember(recovery, result.connector);
-  return recovery;
+  switch (action.type) {
+    case "connect": {
+      const { result } = action;
+      if (result.kind === "unknown_create")
+        return recovery.unresolvedCatalogIds.includes(action.catalogId)
+          ? recovery
+          : {
+              ...recovery,
+              unresolvedCatalogIds: [
+                ...recovery.unresolvedCatalogIds,
+                action.catalogId,
+              ],
+            };
+      const connector = result.connector;
+      if (result.kind === "refused" || !connector) return recovery;
+      return {
+        unresolvedCatalogIds: recovery.unresolvedCatalogIds.filter(
+          (id) => id !== connector.catalogId,
+        ),
+        knownCreated: [
+          ...recovery.knownCreated.filter((row) => row.id !== connector.id),
+          connector,
+        ],
+      };
+    }
+    case "removal": {
+      const known = recovery.knownCreated.filter(
+        (row) => row.id !== action.rowId,
+      );
+      return known.length === recovery.knownCreated.length
+        ? recovery
+        : { ...recovery, knownCreated: known };
+    }
+    case "read": {
+      const listedIds = new Set(action.servers.map((row) => row.id));
+      const listedCatalogIds = new Set(
+        action.servers
+          .map((row) => row.catalogId)
+          .filter((id): id is string => typeof id === "string"),
+      );
+      const unresolved = recovery.unresolvedCatalogIds.filter(
+        (id) => !listedCatalogIds.has(id),
+      );
+      const known = recovery.knownCreated.filter(
+        (row) => !listedIds.has(row.id),
+      );
+      if (
+        unresolved.length === recovery.unresolvedCatalogIds.length &&
+        known.length === recovery.knownCreated.length
+      )
+        return recovery;
+      return { unresolvedCatalogIds: unresolved, knownCreated: known };
+    }
+  }
 }
 
 /**
- * Reconcile recovery with one current read.
+ * What the host renders for one current read: the rows to show (current read plus any created row
+ * it does not list yet) and the recovery state that read implies.
  *
- * A successful read that lists the unresolved entry's row is the only thing that releases the
- * block; a failed or still-loading read releases nothing. Rows this surface created are kept while
- * the read does not list them, and dropped once it does (the read is then authoritative).
+ * This is a projection only — the host commits `reconcileCreate(...).recovery` through
+ * `reduceRecovery` on the same successful read, so nothing here needs to persist itself.
  */
 export function reconcileCreate(
   recovery: CreateRecovery,
   servers: readonly ConnectorRow[],
 ): { recovery: CreateRecovery; rows: ConnectorRow[] } {
   const listed = new Set(servers.map((row) => row.id));
-  const unresolved = recovery.unresolvedCatalogId;
   return {
-    recovery: {
-      unresolvedCatalogId:
-        unresolved !== undefined &&
-        servers.some((row) => row.catalogId === unresolved)
-          ? undefined
-          : unresolved,
-      knownCreated: recovery.knownCreated.filter((row) => !listed.has(row.id)),
-    },
+    recovery: reduceRecovery(recovery, { type: "read", servers }),
     rows: [
       ...servers,
       ...recovery.knownCreated.filter((row) => !listed.has(row.id)),
@@ -423,14 +451,15 @@ export function reconcileCreate(
   };
 }
 
-/** One card, marked while its catalog entry has an unresolved add. */
+/** Cards marked while their catalog entry has an add whose outcome is unknown. */
 export function markReconciling(
   cards: readonly LibraryCard[],
-  catalogId: string | undefined,
+  unresolvedCatalogIds: readonly string[],
 ): LibraryCard[] {
-  if (catalogId === undefined) return [...cards];
+  if (!unresolvedCatalogIds.length) return [...cards];
+  const blocked = new Set(unresolvedCatalogIds);
   return cards.map((card) =>
-    card.id === catalogId ? { ...card, reconciling: true } : card,
+    blocked.has(card.id) ? { ...card, reconciling: true } : card,
   );
 }
 
@@ -439,7 +468,8 @@ export function markReconciling(
  *
  * `addFromCatalog` returns `redact(ctx, row)` from the row captured BEFORE `discoverTools(...)` ran
  * (and that call swallows its own failure), so neither `lastError: null` nor an empty allowlist in
- * this response is evidence that discovery succeeded. Only a later current read can say that.
+ * this response is evidence that discovery succeeded. Only a later current read can say that, so the
+ * user-facing copy says saved and points at the refresh.
  */
 export function savedOutcome(entry: { name: string }): {
   title: string;
@@ -447,8 +477,7 @@ export function savedOutcome(entry: { name: string }): {
 } {
   return {
     title: `${entry.name} saved`,
-    detail:
-      "Core stored the connection. This response is captured before tool discovery, so it does not establish which tools were found — the connected list below reports what the current read says.",
+    detail: "Connection saved. Refresh to check available tools.",
   };
 }
 
@@ -458,14 +487,14 @@ export function pendingOutcome(
   reason: string,
 ): { title: string; detail: string } {
   return {
-    title: `${entry.name} created, authorization not started`,
-    detail: `${reason} The connection is listed below with its own id; use Reconnect there instead of connecting again.`,
+    title: `${entry.name} saved, not authorized yet`,
+    detail: `${reason} Use Reconnect on the connection below instead of connecting again.`,
   };
 }
 
 /** An add with an unknown outcome: say so, and say what this view will and will not do. */
 export function unknownCreateMessage(entry: { name: string }): string {
-  return `Core did not confirm whether ${entry.name} was created, and creating a connector is not idempotent. This view will not add it again until the current connection list shows its row; refresh and check the connected list.`;
+  return `Meri could not confirm whether ${entry.name} was connected. It will not be added again here until the connection list shows it — refresh and check the connected list.`;
 }
 
 /**

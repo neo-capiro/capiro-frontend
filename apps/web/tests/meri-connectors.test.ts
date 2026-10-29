@@ -9,7 +9,6 @@
  */
 import { describe, expect, it } from "vitest";
 import {
-  applyConnectOutcome,
   cardCommand,
   connectGate,
   connectedServiceRow,
@@ -19,10 +18,12 @@ import {
   markReconciling,
   noCreateRecovery,
   reconcileCreate,
+  reduceRecovery,
   savedOutcome,
   statusLabel,
   storedConnectorFor,
   type ConnectDraft,
+  type RecoveryAction,
 } from "../src/shared/meri-connectors/view";
 import {
   createConnectorClient,
@@ -568,15 +569,34 @@ describe("connector client", () => {
 });
 
 /**
- * The host's own create-recovery transitions, driven through the real client with a recording
- * transport and then through the exact functions `ConnectorLibraryHost` calls to render.
+ * The host's mounted-state transitions, driven through the real client with a recording transport
+ * and then through the exact reducer `ConnectorLibraryHost` commits with.
  *
- * These are the F1/F2 residuals: a saved response carries no discovery evidence, and an unknown
- * create must not be reconciled away by a single empty read so that a second (non-idempotent) add
- * becomes clickable again.
+ * `hostState()` mirrors the host's own binding: every change goes through
+ * `setRecovery((previous) => reduceRecovery(previous, action))`, including the authoritative
+ * successful-read commit the host performs inside its current-read function. The sequences below are
+ * the multi-step ones from the mounted-state review, so a missing commit or an overwritten unknown
+ * fails here instead of being hidden by a helper's return value.
  */
 describe("create recovery", () => {
   const emptyRead: ConnectorRow[] = [];
+
+  /** The host's state binding: sequential commits through the same reducer. */
+  function hostState() {
+    let state = noCreateRecovery;
+    return {
+      commit(action: RecoveryAction) {
+        state = reduceRecovery(state, action);
+        return state;
+      },
+      read(servers: readonly ConnectorRow[]) {
+        return this.commit({ type: "read", servers });
+      },
+      get recovery() {
+        return state;
+      },
+    };
+  }
 
   it("a saved response with lastError null cannot claim discovery success", async () => {
     const added = {
@@ -604,11 +624,11 @@ describe("create recovery", () => {
     expect(wording).not.toMatch(/accepted its first tool discovery/i);
     expect(wording).not.toMatch(/can use the tools/i);
     expect(wording).not.toMatch(/discovery succeeded/i);
-    expect(wording).toContain("before tool discovery");
-    expect(wording).toContain("current read");
+    expect(wording).toContain("saved");
+    expect(wording).toContain("Refresh to check available tools");
   });
 
-  it("an unknown first add stays blocked against an empty or failed read", async () => {
+  it("an unknown add stays blocked across empty reads and clears only when a read lists it", async () => {
     const { api } = fakeApi(() => {
       throw new CapiroApiError(
         502,
@@ -620,43 +640,121 @@ describe("create recovery", () => {
       noDraft,
     );
     expect(outcome.kind).toBe("unknown_create");
-    const recovery = applyConnectOutcome(noCreateRecovery, "notion", outcome);
-    expect(recovery.unresolvedCatalogId).toBe("notion");
-    expect(recovery.knownCreated).toEqual([]);
 
-    // Empty rows from a ready read, a failed read or an in-flight read are all the same here:
-    // none of them proves the write did not happen, so the entry stays blocked.
-    const reconciled = reconcileCreate(recovery, emptyRead);
-    expect(reconciled.recovery.unresolvedCatalogId).toBe("notion");
-    const cards = markReconciling(
-      libraryCards([oauthEntry()], reconciled.rows),
-      reconciled.recovery.unresolvedCatalogId,
-    );
-    expect(cardCommand(cards[0]!, false)).toEqual({ kind: "none" });
-    expect(cardCommand(cards[0]!, true)).toEqual({ kind: "none" });
-  });
+    const host = hostState();
+    host.commit({ type: "connect", catalogId: "notion", result: outcome });
+    expect(host.recovery.unresolvedCatalogIds).toEqual(["notion"]);
+    expect(host.recovery.knownCreated).toEqual([]);
 
-  it("an observed row releases the block and is re-authorized by its own id", async () => {
+    // The host dispatches no `read` action while the read is failed or in flight, so nothing here
+    // can release the block; an empty successful read commits and still keeps it.
+    const empty = reconcileCreate(host.recovery, emptyRead);
+    expect(
+      cardCommand(
+        markReconciling(
+          libraryCards([oauthEntry()], empty.rows),
+          empty.recovery.unresolvedCatalogIds,
+        )[0]!,
+        true,
+      ),
+    ).toEqual({ kind: "none" });
+    host.read(emptyRead);
+    expect(host.recovery.unresolvedCatalogIds).toEqual(["notion"]);
+
+    // A current read that lists the row settles it, and a later empty read must not revert that.
     const row = storedRow({
       id: "88888888-8888-4888-8888-888888888888",
       connectionStatus: "pending",
     });
-    const blocked = applyConnectOutcome(noCreateRecovery, "notion", {
-      kind: "unknown_create",
-    });
-    const reconciled = reconcileCreate(blocked, [row]);
-    expect(reconciled.recovery.unresolvedCatalogId).toBeUndefined();
-    const cards = markReconciling(
-      libraryCards([oauthEntry()], reconciled.rows),
-      reconciled.recovery.unresolvedCatalogId,
-    );
-    expect(cardCommand(cards[0]!, false)).toEqual({
-      kind: "reauthorize",
-      connectorId: row.id,
-    });
+    host.read([row]);
+    expect(host.recovery.unresolvedCatalogIds).toEqual([]);
+    const settled = reconcileCreate(host.recovery, [row]);
+    expect(
+      cardCommand(
+        markReconciling(
+          libraryCards([oauthEntry()], settled.rows),
+          settled.recovery.unresolvedCatalogIds,
+        )[0]!,
+        false,
+      ),
+    ).toEqual({ kind: "reauthorize", connectorId: row.id });
+
+    host.read(emptyRead);
+    expect(host.recovery.unresolvedCatalogIds).toEqual([]);
   });
 
-  it("a known created row survives a failed refresh and stays retryable", async () => {
+  it("unknown A then unknown B keeps both blocked and never re-enables A", () => {
+    const host = hostState();
+    host.commit({
+      type: "connect",
+      catalogId: "notion",
+      result: { kind: "unknown_create" },
+    });
+    host.commit({
+      type: "connect",
+      catalogId: "tavily",
+      result: { kind: "unknown_create" },
+    });
+    expect(host.recovery.unresolvedCatalogIds).toEqual(["notion", "tavily"]);
+
+    const blocked = markReconciling(
+      libraryCards([oauthEntry(), tokenEntry()], []),
+      host.recovery.unresolvedCatalogIds,
+    );
+    expect(
+      cardCommand(blocked.find((card) => card.id === "notion")!, true),
+    ).toEqual({ kind: "none" });
+    expect(
+      cardCommand(blocked.find((card) => card.id === "tavily")!, true),
+    ).toEqual({ kind: "none" });
+
+    // Management of an already-known connection is still available while anything is unresolved.
+    const known = storedRow({
+      id: "77777777-7777-4777-8777-777777777777",
+      catalogId: "box",
+      connectionStatus: "needs_reauth",
+    });
+    host.commit({
+      type: "connect",
+      catalogId: "box",
+      result: { kind: "authorization_pending", connector: known },
+    });
+    const withKnown = reconcileCreate(host.recovery, []);
+    const managed = markReconciling(
+      libraryCards(
+        [oauthEntry(), tokenEntry(), oauthEntry({ id: "box" })],
+        withKnown.rows,
+      ),
+      withKnown.recovery.unresolvedCatalogIds,
+    );
+    expect(
+      cardCommand(managed.find((card) => card.id === "box")!, false),
+    ).toEqual({
+      kind: "reauthorize",
+      connectorId: known.id,
+    });
+
+    // Resolving B's own row releases B only; A stays blocked.
+    host.read([
+      storedRow({
+        id: "66666666-6666-4666-8666-666666666666",
+        catalogId: "tavily",
+        authType: "token",
+      }),
+    ]);
+    expect(host.recovery.unresolvedCatalogIds).toEqual(["notion"]);
+    expect(
+      cardCommand(
+        markReconciling(
+          libraryCards([oauthEntry()], []),
+          host.recovery.unresolvedCatalogIds,
+        )[0]!,
+        true,
+      ),
+    ).toEqual({ kind: "none" });
+  });
+
+  it("a known row is retired by the read, so a later acknowledged removal cannot resurrect it", () => {
     const added = {
       ...storedRow({
         id: "99999999-9999-4999-8999-999999999999",
@@ -664,35 +762,57 @@ describe("create recovery", () => {
       }),
       oauthRequired: true,
     };
-    const { api } = fakeApi((key) => {
-      if (key === "meri.connectors.add") return added;
-      throw new Error("OAuth is not configured for this deployment.");
+    const host = hostState();
+    host.commit({
+      type: "connect",
+      catalogId: "notion",
+      result: {
+        kind: "authorization_pending",
+        connector: added,
+      },
     });
-    const outcome = await createConnectorClient(api).connect(
-      oauthEntry() as McpCatalogEntry,
-      noDraft,
-    );
-    expect(outcome.kind).toBe("authorization_pending");
-    const recovery = applyConnectOutcome(noCreateRecovery, "notion", outcome);
-    expect(recovery.knownCreated.map((row) => row.id)).toEqual([added.id]);
-    expect(recovery.unresolvedCatalogId).toBeUndefined();
+    expect(host.recovery.knownCreated.map((row) => row.id)).toEqual([added.id]);
 
-    // The immediate re-read fails (or is still empty): the created row must not disappear.
-    const failed = reconcileCreate(recovery, []);
-    expect(failed.rows.map((row) => row.id)).toEqual([added.id]);
+    // The authoritative read lists the row, and the host commits that read.
+    host.read([added]);
+    expect(host.recovery.knownCreated).toEqual([]);
+
+    // Acknowledged removal, then a successful empty read: the row must not come back.
+    host.commit({ type: "removal", rowId: added.id });
+    host.read([]);
+    expect(reconcileCreate(host.recovery, []).rows).toEqual([]);
+    expect(host.recovery.knownCreated).toEqual([]);
+  });
+
+  it("a known created row survives a failed refresh and stays retryable", () => {
+    const added = {
+      ...storedRow({
+        id: "99999999-9999-4999-8999-999999999998",
+        connectionStatus: "pending",
+      }),
+      oauthRequired: true,
+    };
+    const host = hostState();
+    host.commit({
+      type: "connect",
+      catalogId: "notion",
+      result: {
+        kind: "authorization_pending",
+        connector: added,
+      },
+    });
+
+    // A failed read dispatches no `read` action: the created row must not disappear.
+    const rows = reconcileCreate(host.recovery, []).rows;
+    expect(rows.map((row) => row.id)).toEqual([added.id]);
     const cards = markReconciling(
-      libraryCards([oauthEntry()], failed.rows),
-      failed.recovery.unresolvedCatalogId,
+      libraryCards([oauthEntry()], rows),
+      host.recovery.unresolvedCatalogIds,
     );
     expect(cardCommand(cards[0]!, false)).toEqual({
       kind: "reauthorize",
       connectorId: added.id,
     });
-
-    // Once the read lists it, the row appears exactly once and is no longer recovery state.
-    const listed = reconcileCreate(recovery, [added]);
-    expect(listed.rows.map((row) => row.id)).toEqual([added.id]);
-    expect(listed.recovery.knownCreated).toEqual([]);
   });
 });
 

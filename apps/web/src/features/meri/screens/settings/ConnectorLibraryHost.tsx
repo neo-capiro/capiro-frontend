@@ -19,7 +19,6 @@ import {
   type ConnectOutcome,
 } from "../../../../shared/meri-connectors/client";
 import {
-  applyConnectOutcome,
   connectedServiceRows,
   groupedCards,
   libraryCards,
@@ -28,6 +27,7 @@ import {
   noCreateRecovery,
   pendingOutcome,
   reconcileCreate,
+  reduceRecovery,
   savedOutcome,
   unknownCreateMessage,
   type ConnectedServiceRow,
@@ -66,15 +66,27 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
     () => createConnectorClient(api as unknown as ConnectorApi),
     [api],
   );
+  // Mounted-flow recovery for catalog adds this view cannot yet reconcile.
+  const [recovery, setRecovery] = useState(noCreateRecovery);
   // The existing current-read hook owns the request lifetime: it aborts a superseded read and never
   // renders a value from a previous account or generation.
   const read = useCurrentRead(
     "connected-services",
     useCallback(
-      (signal: AbortSignal) =>
-        Promise.all([client.library(signal), client.servers(signal)]).then(
-          ([library, servers]) => ({ library, servers }),
-        ),
+      async (signal: AbortSignal) => {
+        const [library, servers] = await Promise.all([
+          client.library(signal),
+          client.servers(signal),
+        ]);
+        // A read that actually completed is the only authority that retires recovery state: it
+        // drops unresolved entries whose row it now lists and known rows it can see itself. A
+        // failed, aborted or in-flight read never reaches here, so ids are kept across those.
+        if (!signal.aborted)
+          setRecovery((previous) =>
+            reduceRecovery(previous, { type: "read", servers }),
+          );
+        return { library, servers };
+      },
       [client],
     ),
   );
@@ -86,8 +98,6 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
   const [busyId, setBusyId] = useState<string | undefined>();
   // Bumped after a settled request so the screen remounts and drops any drafted secret.
   const [settled, setSettled] = useState(0);
-  // Mounted-flow recovery for a catalog add whose outcome this view cannot yet reconcile.
-  const [recovery, setRecovery] = useState(noCreateRecovery);
   const readState: ConnectorReadState = read.error
     ? "unavailable"
     : read.loading
@@ -100,7 +110,11 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
   const settle = useCallback(
     (result: ConnectOutcome, entry: McpCatalogEntry) => {
       setRecovery((previous) =>
-        applyConnectOutcome(previous, entry.id, result),
+        reduceRecovery(previous, {
+          type: "connect",
+          catalogId: entry.id,
+          result,
+        }),
       );
       if (result.kind === "authorization_required") {
         // Core built the URL and holds the signed state; this is only navigation.
@@ -201,6 +215,11 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
     void client
       .disconnect({ id: row.id, authType: row.authType })
       .then((result) => {
+        // An acknowledged end of the connection also retires the remembered row, so a later empty
+        // read cannot resurrect it from this view's own state.
+        setRecovery((previous) =>
+          reduceRecovery(previous, { type: "removal", rowId: row.id }),
+        );
         setOutcome(
           result.kind === "authorization_revoked"
             ? {
@@ -251,7 +270,7 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
 
   const cards = markReconciling(
     libraryCards(library?.connectors ?? [], rows),
-    reconciled.recovery.unresolvedCatalogId,
+    reconciled.recovery.unresolvedCatalogIds,
   );
   return (
     <ConnectorLibraryScreen
