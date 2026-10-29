@@ -17,9 +17,11 @@ export function QueuePagination({
   return (
     <div className={styles.row}>
       <p className={`${styles.description} ${styles.grow}`}>
-        {total
-          ? `${(page - 1) * limit + 1} to ${Math.min(page * limit, total)} of ${total}`
-          : "No records"}
+        {total && (page - 1) * limit >= total
+          ? "No records on this page (" + total + " total)"
+          : total
+            ? `${(page - 1) * limit + 1} to ${Math.min(page * limit, total)} of ${total}`
+            : "No records"}
       </p>
       <SettingsButton
         small
