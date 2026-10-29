@@ -6,6 +6,12 @@
  * every entry is gated on the app host alone, and its destination is the same path
  * on one fixed retained origin, so each provider keeps its existing verification,
  * state and signature owner and still receives the original body and query.
+ *
+ * One entry is carried to the selected Core backend instead: the MCP OAuth
+ * callback must reach the Core that issued the state and owns the connector rows
+ * (the origin `CORE_API_BASE_URL` names), not the original edge. The browser keeps
+ * `https://app.capiro.ai/api/clio/mcp-oauth/callback` as the registered redirect;
+ * only the service transport host differs, and the path/query are unchanged.
  */
 
 /** The frontend's own browser host. No other host is admitted by these rewrites. */
@@ -21,6 +27,15 @@ export const appBrowserHostPattern = "app\\.capiro\\.ai";
 export const retainedAppCapabilitiesOrigin = "https://os.capiro.ai";
 
 /**
+ * The selected Core backend origin that owns the connector library, OAuth state and
+ * connection rows — the deployment `CORE_API_BASE_URL` points at. The MCP OAuth
+ * callback is transported here while the browser keeps the public app callback.
+ * Release must keep this rewrite and that value on the same Core.
+ */
+export const selectedCoreServiceOrigin =
+  "https://first-chat-preview.app-dev.capiro.ai";
+
+/**
  * Exact app-host paths whose owner is not this frontend.
  *
  * `/webhooks/recall` has no suffix route in the current Core route table, so it is
@@ -31,7 +46,8 @@ const forwardedPaths = [
   "/api/engagement/integrations/microsoft/callback",
   "/api/engagement/integrations/google/callback",
   "/api/engagement/integrations/microsoft/notifications",
-  // Clio MCP OAuth callback: Core owns the handler and the state/token record.
+  // Clio MCP OAuth callback: the selected Core owns the handler, the state
+  // signature and the state/token record, so only this path is transported there.
   "/api/clio/mcp-oauth/callback",
   "/webhooks/recall",
   "/webhooks/clerk",
@@ -41,6 +57,14 @@ const forwardedPaths = [
   "/api/engagement/newsletter-public/:token/survey",
   "/workspace-api/newsletters/assets/file/:token",
 ] as const;
+
+/**
+ * The one existing path whose fixed origin is the selected Core backend rather than
+ * the original edge. Every other path keeps `retainedAppCapabilitiesOrigin`.
+ */
+const selectedCorePaths: ReadonlySet<string> = new Set([
+  "/api/clio/mcp-oauth/callback",
+]);
 
 export type AppOriginRewrite = {
   source: string;
@@ -52,7 +76,7 @@ export type AppOriginRewrite = {
 export function appOriginRewrites(): AppOriginRewrite[] {
   return forwardedPaths.map((path) => ({
     source: path,
-    destination: `${retainedAppCapabilitiesOrigin}${path}`,
+    destination: `${selectedCorePaths.has(path) ? selectedCoreServiceOrigin : retainedAppCapabilitiesOrigin}${path}`,
     has: [{ type: "host" as const, value: appBrowserHostPattern }],
   }));
 }

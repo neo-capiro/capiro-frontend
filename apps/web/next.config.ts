@@ -12,7 +12,9 @@ const config: NextConfig = {
   // Qualification worktrees retain build evidence, not reusable compiler caches.
   experimental: { turbopackFileSystemCacheForBuild: false },
   // Retained app-host callbacks and already-issued links keep their original
-  // owners; see src/shared/preview/app-origin-rewrites.ts for the exact set.
+  // owners, except the MCP OAuth callback, which is transported to the selected
+  // Core that owns its state and rows; see src/shared/preview/app-origin-rewrites.ts
+  // for the exact set.
   async rewrites() {
     return appOriginRewrites();
   },

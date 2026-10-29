@@ -12,6 +12,7 @@ import {
   appBrowserHostPattern,
   appOriginRewrites,
   retainedAppCapabilitiesOrigin,
+  selectedCoreServiceOrigin,
 } from "../src/shared/preview/app-origin-rewrites.ts";
 
 // The framework's own matching/compilation, not a second implementation of it.
@@ -35,6 +36,11 @@ const patchScript = path.resolve(import.meta.dirname, "../../../scripts/patch-ne
 
 const rewrites = appOriginRewrites();
 const token = "opaque_token_abc123";
+// The one app-host path whose transport owner is the selected Core backend rather
+// than the original edge; every other forwarded path keeps the retained origin.
+const coreCallbackPath = "/api/clio/mcp-oauth/callback";
+const expectedOrigin = (path) =>
+  path === coreCallbackPath ? selectedCoreServiceOrigin : retainedAppCapabilitiesOrigin;
 const required = [
   "/api/engagement/integrations/microsoft/callback",
   "/api/engagement/integrations/google/callback",
@@ -96,17 +102,45 @@ test("every rewrite is gated on the escaped app host with one fixed destination"
     // request that carries no Host header at all.
     assert.deepEqual(rewrite.has, [{ type: "host", value: appBrowserHostPattern }]);
     assert.equal(rewrite.missing, undefined);
-    assert.equal(rewrite.destination, `${retainedAppCapabilitiesOrigin}${rewrite.source}`);
+    assert.equal(rewrite.destination, `${expectedOrigin(rewrite.source)}${rewrite.source}`);
     const destination = new URL(rewrite.destination.replace(/:[a-z]+/g, "x"));
-    assert.equal(destination.origin, retainedAppCapabilitiesOrigin);
+    assert.equal(destination.origin, expectedOrigin(rewrite.source));
+    assert.equal(destination.pathname, rewrite.source.replace(/:[a-z]+/g, "x"));
     assert.equal(destination.search, "");
     assert.equal(destination.hash, "");
     // No catch-all prefix: a forwarded route must name every dynamic segment.
     assert.doesNotMatch(rewrite.source, /\/\*|:path\*/);
   }
   assert.equal(retainedAppCapabilitiesOrigin, "https://os.capiro.ai");
+  assert.equal(selectedCoreServiceOrigin, "https://first-chat-preview.app-dev.capiro.ai");
   assert.equal(appBrowserHost, "app.capiro.ai");
   assert.equal(appBrowserHostPattern, "app\\.capiro\\.ai");
+});
+
+test("the MCP callback keeps its public app path and is transported to the selected Core", () => {
+  const rewrite = matched(coreCallbackPath);
+  assert.ok(rewrite, coreCallbackPath);
+  // Same exact app-host path, so the registered redirect stays
+  // https://app.capiro.ai/api/clio/mcp-oauth/callback — no prefix, suffix or wildcard.
+  assert.equal(rewrite.source, coreCallbackPath);
+  assert.equal(rewrite.destination, `${selectedCoreServiceOrigin}${coreCallbackPath}`);
+  assert.deepEqual(rewrite.has, [{ type: "host", value: appBrowserHostPattern }]);
+
+  const resolved = resolveRewrite(rewrite, coreCallbackPath);
+  assert.notEqual(resolved, false);
+  assert.equal(resolved.origin, selectedCoreServiceOrigin);
+  assert.equal(resolved.newUrl, coreCallbackPath);
+  // The framework's own query assembly is unchanged: provider query plus the host param.
+  assert.deepEqual(resolved.query, { ...incomingQuery, host: appBrowserHost });
+  assert.equal(
+    resolved.url,
+    `${selectedCoreServiceOrigin}${coreCallbackPath}?code=${incomingQuery.code}&state=${incomingQuery.state}&validationToken=${incomingQuery.validationToken}&host=${appBrowserHost}`,
+  );
+  // Exactly one forwarded path uses the selected Core origin; the retained edge owns the rest.
+  assert.deepEqual(
+    rewrites.filter((row) => row.destination.startsWith(selectedCoreServiceOrigin)).map((row) => row.source),
+    [coreCallbackPath],
+  );
 });
 
 test("the host gate is an exact host, not a regex fragment", () => {
@@ -131,7 +165,7 @@ test("the host gate is an exact host, not a regex fragment", () => {
     assert.equal(gate(rejected), false, String(rejected));
 });
 
-test("the app host reaches every retained route with the real query assembly", () => {
+test("the app host reaches every forwarded route with the real query assembly", () => {
   const original = `code=${incomingQuery.code}&state=${incomingQuery.state}&validationToken=${incomingQuery.validationToken}`;
   for (const path of required) {
     const rewrite = matched(path);
@@ -139,12 +173,12 @@ test("the app host reaches every retained route with the real query assembly", (
     const resolved = resolveRewrite(rewrite, path);
     assert.notEqual(resolved, false, path);
     assert.equal(resolved.newUrl, path, path);
-    assert.equal(resolved.origin, retainedAppCapabilitiesOrigin, path);
+    assert.equal(resolved.origin, expectedOrigin(path), path);
     if (rewrite.source.includes(":")) {
       // A dynamic token is consumed by the destination path, so appendParamsToQuery
       // adds nothing and the original query is forwarded unchanged.
       assert.deepEqual(resolved.query, { ...incomingQuery }, path);
-      assert.equal(resolved.url, `${retainedAppCapabilitiesOrigin}${path}?${original}`, path);
+      assert.equal(resolved.url, `${expectedOrigin(path)}${path}?${original}`, path);
     } else {
       // A static host-gated route acquires the host param from matchHas, so the
       // framework appends an extra host field. The known controllers ignore
@@ -153,7 +187,7 @@ test("the app host reaches every retained route with the real query assembly", (
       assert.deepEqual(Object.keys(resolved.query), [...Object.keys(incomingQuery), "host"], path);
       assert.equal(
         resolved.url,
-        `${retainedAppCapabilitiesOrigin}${path}?${original}&host=${appBrowserHost}`,
+        `${expectedOrigin(path)}${path}?${original}&host=${appBrowserHost}`,
         path,
       );
     }
