@@ -18,7 +18,7 @@ Parameters:
     AllowedPattern: "^[0-9]{12}\\.dkr\\.ecr\\.us-east-1\\.amazonaws\\.com/capiro/portfolio-preview@sha256:[0-9a-f]{64}$"
   CertificateArn:
     Type: String
-    Description: ISSUED ACM certificate for portfolio-preview.app.capiro.ai
+    Description: ISSUED ACM certificate covering app.capiro.ai; reuse after the current owner reads it back, never re-issue here
   AllowedIngressCidr:
     Type: String
     Description: Approved browser source IPv4 /32
@@ -41,28 +41,28 @@ Parameters:
     Description: Explicit owner of Bill Tracker requests
   CoreApiBaseUrl:
     Type: String
-    Default: https://portfolio-preview.app.capiro.ai/api
-    AllowedValues: ["https://portfolio-preview.app.capiro.ai/api", "https://first-chat-preview.app-dev.capiro.ai/api"]
+    Default: https://app.capiro.ai/api
+    AllowedValues: ["https://app.capiro.ai/api", "https://first-chat-preview.app-dev.capiro.ai/api"]
   StrategyApiBaseUrl:
     Type: String
     Default: ""
     AllowedValues: ["", "https://first-chat-preview.app-dev.capiro.ai/strategy-api"]
   WorkspaceApiBaseUrl:
     Type: String
-    Default: https://portfolio-preview.app.capiro.ai/workspace-api
-    AllowedValues: ["https://portfolio-preview.app.capiro.ai/workspace-api", "https://first-chat-preview.app-dev.capiro.ai/workspace-api"]
+    Default: https://app.capiro.ai/workspace-api
+    AllowedValues: ["https://app.capiro.ai/workspace-api", "https://first-chat-preview.app-dev.capiro.ai/workspace-api"]
   IntelligenceApiBaseUrl:
     Type: String
-    Default: https://portfolio-preview.app.capiro.ai/intel-api
-    AllowedValues: ["https://portfolio-preview.app.capiro.ai/intel-api", "https://first-chat-preview.app-dev.capiro.ai/intel-api"]
+    Default: https://app.capiro.ai/intel-api
+    AllowedValues: ["https://app.capiro.ai/intel-api", "https://first-chat-preview.app-dev.capiro.ai/intel-api"]
   ExistingAppUrl:
     Type: String
-    Default: https://portfolio-preview.app.capiro.ai
-    AllowedValues: ["https://portfolio-preview.app.capiro.ai"]
+    Default: https://app.capiro.ai
+    AllowedValues: ["https://app.capiro.ai"]
   CapiroRequestOrigin:
     Type: String
-    Default: https://portfolio-preview.app.capiro.ai
-    AllowedValues: ["https://portfolio-preview.app.capiro.ai"]
+    Default: https://app.capiro.ai
+    AllowedValues: ["https://app.capiro.ai"]
   CapiroPreviewReadOnly:
     Type: String
     Default: "true"

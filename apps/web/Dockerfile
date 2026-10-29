@@ -10,7 +10,13 @@ RUN npm install --global npm@11.9.0 --ignore-scripts --no-audit --no-fund \
     && test "$(npm --version)" = 11.9.0
 COPY . .
 RUN npm ci --ignore-scripts --no-audit --no-fund
+# Next 16.4.1's proxy error sink logs the full proxied target and re-rejects the raw upstream
+# error. Bring the installed package to the pinned corrected bytes before the build; the step
+# is idempotent and refuses an unexpected package or file.
+RUN node scripts/patch-next-proxy-error-log.cjs
 RUN NODE_OPTIONS=--max-old-space-size=4096 CIRCLE_NODE_TOTAL=2 npm run build
+# Fail the image build if the corrected framework file is not in the packaged standalone output.
+RUN node scripts/patch-next-proxy-error-log.cjs --verify-standalone apps/web/.next/standalone
 
 FROM base AS runtime
 RUN rm -rf /usr/local/lib/node_modules/npm /opt/yarn-v1.22.22 \

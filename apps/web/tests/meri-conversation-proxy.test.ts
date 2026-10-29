@@ -657,7 +657,7 @@ for (const response of [
   });
 
 // Behind the ALB, Next builds request.url from HOSTNAME/PORT (https://0.0.0.0:5188).
-const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+const publicOrigin = "https://app.capiro.ai";
 const configuredPublic: ConversationProxyConfig = {
   ...config,
   requestOrigin: publicOrigin,
@@ -669,7 +669,7 @@ const bound = (path: string, headers: Record<string, string> = {}) =>
     ...(path === reconnect ? {} : { body: JSON.stringify(payloads.submit) }),
     headers: {
       "x-meri-action-session": credential,
-      Host: "portfolio-preview.app.capiro.ai",
+      Host: "app.capiro.ai",
       "X-Forwarded-Proto": "https",
       ...(path === reconnect
         ? {}

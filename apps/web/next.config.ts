@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import { fileURLToPath } from "node:url";
 import { responseHeaders } from "./src/shared/response-headers";
+import { appOriginRewrites } from "./src/shared/preview/app-origin-rewrites";
 
 const config: NextConfig = {
   output: "standalone",
@@ -10,6 +11,11 @@ const config: NextConfig = {
   turbopack: { root: fileURLToPath(new URL("../..", import.meta.url)) },
   // Qualification worktrees retain build evidence, not reusable compiler caches.
   experimental: { turbopackFileSystemCacheForBuild: false },
+  // Retained app-host callbacks and already-issued links keep their original
+  // owners; see src/shared/preview/app-origin-rewrites.ts for the exact set.
+  async rewrites() {
+    return appOriginRewrites();
+  },
   async headers() {
     return [
       {

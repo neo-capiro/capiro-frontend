@@ -7,7 +7,7 @@ import {
 } from "../src/shared/preview/memory-owner-route.server";
 import { config as proxyConfig } from "../src/proxy";
 
-const origin = "https://portfolio-preview.app.capiro.ai";
+const origin = "https://app.capiro.ai";
 const id = "11111111-1111-4111-8111-111111111111";
 const request = (method: string, path: string) =>
   new Request(`${origin}${path}`, { method });

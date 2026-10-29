@@ -5,6 +5,12 @@ import { clientSectors, type Client } from "./contracts";
 import { type PortfolioIndexState } from "./filter";
 import styles from "./portfolio.module.css";
 
+/** Option labels read as words; the stored value stays the raw enum. */
+function humanStatus(status: string) {
+  const words = status.replaceAll("_", " ").toLowerCase();
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
 export function IndexFilters({
   state,
   clients,
@@ -38,7 +44,9 @@ export function IndexFilters({
           </option>
         )}
         {statuses.map((status) => (
-          <option key={status}>{status}</option>
+          <option key={status} value={status}>
+            {humanStatus(status)}
+          </option>
         ))}
       </select>
       <select
