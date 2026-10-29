@@ -141,7 +141,7 @@ export async function selectedTabFixture(options: { lostAck?: boolean } = {}) {
   await vi.waitFor(() => {
     if (access.getSnapshot().state !== "active") throw Error("waiting");
   });
-  const share = () =>
+  const share = (documentId: string = randomUUID()) =>
     createSelectedTabShare({
       schema,
       type: "share",
@@ -150,7 +150,7 @@ export async function selectedTabFixture(options: { lostAck?: boolean } = {}) {
       selectionId: randomUUID(),
       binding: pair.binding,
       tabId: 4,
-      documentId: randomUUID(),
+      documentId,
       url: "https://example.invalid/page",
       title: "Fixture source",
       capturedAtMs: now,
