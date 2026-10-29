@@ -211,5 +211,4 @@ export const hqOperations = {
   }),
 } as const;
 
-// Impersonation is not registered: the gateway does not yet bind an audited admin
-// scope to subsequent requests. Starting a backend session alone would misstate access.
+// Audited support-session operations are owned by ./impersonation.ts.
