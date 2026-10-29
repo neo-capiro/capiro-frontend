@@ -1,27 +1,13 @@
 import { z } from "zod";
-// Wire contract candidate: capirov2 PR 2362, objective-rules.ts / presentObjective.
-export const askTypes = {
-  funding: "Funding",
-  policy_authority: "Policy or authority",
-  both: "Both",
-  protect_funding: "Protect existing funding",
-  meri_propose: "Not sure, let Meri propose",
-} as const;
-export const objectiveFieldsSchema = z.object({
-  outcome: z.string().trim().max(2000),
-  governmentProblem: z.string().trim().max(4000),
-  askType: z
-    .enum([
-      "funding",
-      "policy_authority",
-      "both",
-      "protect_funding",
-      "meri_propose",
-    ])
-    .nullable(),
-  minimumWin: z.string().trim().max(2000),
-  limits: z.string().trim().max(4000),
-});
+import {
+  objectiveFieldsSchema,
+  objectiveStatus,
+} from "@/shared/capiro/operations/objective-fields";
+export {
+  objectiveFieldsSchema,
+  askTypes,
+  objectiveStatusLabels as statusLabels,
+} from "@/shared/capiro/operations/objective-fields";
 export type ObjectiveFields = z.infer<typeof objectiveFieldsSchema>;
 export const readinessFields = [
   ["outcome", "Outcome"],
@@ -56,7 +42,7 @@ export const objectiveSchema = objectiveFieldsSchema
     clientId: z.string().uuid(),
     requestId: z.string().uuid(),
     ownerUserId: z.string().nullable(),
-    status: z.enum(["draft", "in_review", "ready"]),
+    status: objectiveStatus,
     version: z.number().int().positive(),
     readyAt: z.string().nullable(),
     reviewRequestedAt: z.string().nullable(),
@@ -95,11 +81,6 @@ export const scopedObjectivesSchema = (clientId: string) =>
         new Set(records.map((record) => record.id)).size === records.length,
       "Objectives do not identify the selected client uniquely",
     );
-export const statusLabels = {
-  draft: "Draft",
-  in_review: "In review",
-  ready: "Ready",
-} as const;
 export const emptyFields: ObjectiveFields = {
   outcome: "",
   governmentProblem: "",
