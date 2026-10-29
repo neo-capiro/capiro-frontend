@@ -8,6 +8,7 @@
 import { describe, expect, it } from "vitest";
 import {
   controlOutcome,
+  projectRetainedAnswer,
   questionPhase,
   retainedAnswer,
   sendAnswer,
@@ -357,6 +358,82 @@ describe("retained identity across a second invocation and a reload", () => {
         answers: { "How should I format the output?": "Summary" },
       }),
     ).toThrow();
+  });
+});
+
+describe("a replay refusal cannot erase an earlier unknown delivery", () => {
+  it("keeps the original identity after UNKNOWN then a NOT_DISPATCHED reconciliation", async () => {
+    const target = port({ events: [pendingEvent(question())], runState: "streaming", context });
+    const journal = journalFor(memory());
+    target.control = async (request: unknown) => {
+      target.sent.push(request as { controlId: string; intent: string });
+      return unknownReceipt();
+    };
+    expect(await send(target, journal)).toEqual({ kind: "phase", phase: "unknown" });
+    expect(retainedAnswer(journal)?.controlId).toBe(C1);
+    // The user asks again and the replay is refused before dispatch: that says nothing about the earlier delivery.
+    target.control = async (request: unknown) => {
+      target.sent.push(request as { controlId: string; intent: string });
+      return refusedReceipt();
+    };
+    expect(await send(target, journal, { reconcile: true, controlId: C2 })).toEqual({
+      kind: "phase",
+      phase: "unknown",
+    });
+    expect(retainedAnswer(journal)?.controlId).toBe(C1);
+    // A fresh answer is therefore still refused, and no third request exists.
+    expect(await send(target, journal, { controlId: C2 })).toEqual({ kind: "refused", reason: "retained" });
+    expect(target.sent.map((entry) => entry.controlId)).toEqual([C1, C1]);
+  });
+
+  it("still retires a known fresh non-dispatch", async () => {
+    const target = port({ events: [pendingEvent(question())], runState: "streaming", context });
+    target.control = async (request: unknown) => {
+      target.sent.push(request as { controlId: string; intent: string });
+      return refusedReceipt();
+    };
+    const journal = journalFor(memory());
+    expect(await send(target, journal)).toEqual({ kind: "phase", phase: "rejected" });
+    expect(journal.read()).toBeUndefined();
+  });
+});
+
+describe("retained projection when the journal arrives after the question", () => {
+  it("projects nothing without a journal, then unknown once the same pending question has one", async () => {
+    const target = port({ events: [pendingEvent(question())], runState: "streaming", context });
+    target.control = async (request: unknown) => {
+      target.sent.push(request as { controlId: string; intent: string });
+      return unknownReceipt();
+    };
+    // First read: the journal effect has not produced a record yet.
+    expect(projectRetainedAnswer(null, question())).toBeNull();
+    const storage = memory();
+    const first = journalFor(storage);
+    await send(target, first, { controlId: C1 });
+    // Same pending question, journal now available: the retained attempt is projected independently of a question change.
+    const recovered = journalFor(storage);
+    expect(projectRetainedAnswer(recovered, question())).toBe("unknown");
+    // A different question in the same run is not that attempt.
+    expect(projectRetainedAnswer(recovered, question({ questionId: OTHER }))).toBeNull();
+    // The matching durable outcome settles it, and the projection then disappears.
+    expect(settleRetainedAnswer(recovered, [answeredEvent(ID, "answered")], ID)).toBe("answered");
+    expect(projectRetainedAnswer(recovered, question())).toBeNull();
+  });
+
+  it("projects nothing when the remembered record belongs to another run", async () => {
+    const otherRun = { ...context, runId: id(3) } as unknown as typeof context;
+    const storage = memory();
+    const first = journalFor(storage);
+    // Retain under this run, then read through a journal bound to a different run.
+    const command = {
+      controlId: C1,
+      intent: "answer" as const,
+      questionId: ID,
+      answers: { "How should I format the output?": "Summary" },
+    };
+    first.retain(command);
+    expect(lifecycleJournal(otherRun, storage).read()).toBeUndefined();
+    expect(projectRetainedAnswer(null, question())).toBeNull();
   });
 });
 

@@ -101,6 +101,28 @@ export function retainedAnswer(journal: AnswerJournal | null): AnswerControl | n
   return held !== undefined && held.intent === "answer" ? held : null;
 }
 
+/** A journal whose tab record is no longer readable simply holds nothing: reading it must never throw into a render. */
+export function safeRetainedAnswer(journal: AnswerJournal | null): AnswerControl | null {
+  try {
+    return retainedAnswer(journal);
+  } catch {
+    return null;
+  }
+}
+
+/** The phase a question starts in when this run already holds an answer for it, independent of how the journal arrived.
+ *
+ * The journal and the durable view are produced by two different effects, so a question can be pending before the tab
+ * record is available. The retained attempt is therefore projected from the pair, not from a question-changing event. */
+export function projectRetainedAnswer(
+  journal: AnswerJournal | null,
+  question: PendingQuestion | null,
+): QuestionPhase | null {
+  if (journal === null || question === null) return null;
+  const held = safeRetainedAnswer(journal);
+  return held !== null && held.questionId === question.questionId ? "unknown" : null;
+}
+
 /** Retire a retained answer only when the run's own durable projection says this exact question is settled.
  *
  * A pending event, a missing event in a partial page, an unavailable view or the refusal of an earlier attempt are all
@@ -115,8 +137,15 @@ export function settleRetainedAnswer(
     questionId,
   );
   if (outcome === null) return null;
-  const held = retainedAnswer(journal);
-  if (held !== null && held.questionId === questionId) journal?.clear(held);
+  const held = safeRetainedAnswer(journal);
+  if (held !== null && held.questionId === questionId) {
+    try {
+      journal?.clear(held);
+    } catch {
+      // A record that cannot be cleared stays held; the durable outcome still settles the question itself.
+      return outcome;
+    }
+  }
   return outcome;
 }
 
@@ -147,16 +176,24 @@ async function dispatchAnswer(
   port: MeriConversationPort,
   journal: AnswerJournal,
   command: AnswerControl,
+  fresh: boolean,
 ): Promise<AnswerCommandResult> {
   try {
     const receipt = await port.control(command);
     if ("error" in receipt) {
       const outcome = controlOutcome(receipt);
-      // A refusal proves the effect did not happen, so the identity can be retired and the card corrected.
-      if (outcome === "NOT_DISPATCHED") {
-        journal.clear(command);
+      // Only a known FRESH non-dispatch retires the identity. A refusal of a replay says nothing about the earlier
+      // attempt it was replaying, so an unknown delivery stays retained and the card stays unconfirmed.
+      if (outcome === "NOT_DISPATCHED" && fresh) {
+        try {
+          journal.clear(command);
+        } catch {
+          // The tab record is no longer readable; keep refusing rather than assert a retirement we could not write.
+          return { kind: "phase", phase: "retention" };
+        }
         return { kind: "phase", phase: "rejected" };
       }
+      // A replayed refusal, or any other refusal body, leaves the earlier unknown delivery exactly as it was.
       return { kind: "phase", phase: "unknown" };
     }
     // The retained identity outlives an applied answer until the run's own events say the question is settled.
@@ -198,7 +235,7 @@ export async function sendAnswer({
     if (held.questionId !== pending.questionId) return { kind: "refused", reason: "retained" };
     const settled = answerGuard(port, pending, now);
     if (settled !== null) return { kind: "skipped", reason: settled };
-    return dispatchAnswer(port, journal, held);
+    return dispatchAnswer(port, journal, held, false);
   }
   if (held !== null) return { kind: "refused", reason: "retained" };
   const guarded = answerGuard(port, pending, now);
@@ -218,7 +255,7 @@ export async function sendAnswer({
     return { kind: "refused", reason: "retained" };
   }
   if (retained.intent !== "answer") return { kind: "refused", reason: "retained" };
-  return dispatchAnswer(port, journal, retained);
+  return dispatchAnswer(port, journal, retained, true);
 }
 
 /** What the card may act on: a question whose run already settled, or whose own deadline passed, is never answerable. */
@@ -280,10 +317,15 @@ export function useRunQuestion(port: MeriConversationPort | null): RunQuestion {
   const [pending, setPending] = useState<PendingQuestion | null>(null);
   const [terminal, setTerminal] = useState(true);
   const [expired, setExpired] = useState(false);
-  const [journal, setJournal] = useState<AnswerJournal | null>(null);
+  // The journal is only ever used with the port it was created for: a record from a previous port/run is never read.
+  const [binding, setBinding] = useState<{
+    readonly port: MeriConversationPort;
+    readonly journal: AnswerJournal | null;
+  } | null>(null);
   const [retention, setRetention] = useState(true);
   const [phase, dispatch] = useReducer(questionPhase, "open");
   const active = useRef(false);
+  const projected = useRef<string | null>(null);
   // The question and port the card currently shows: a completion that arrives after either changed must not touch the
   // newly mounted question's phase.
   const showing = useRef<{ port: MeriConversationPort | null; questionId: string | null }>({
@@ -293,16 +335,20 @@ export function useRunQuestion(port: MeriConversationPort | null): RunQuestion {
   showing.current = { port, questionId: pending?.questionId ?? null };
 
   useEffect(() => {
-    if (!port) return;
+    if (!port) {
+      setBinding(null);
+      return;
+    }
     try {
-      setJournal(lifecycleJournal(port.context));
+      setBinding({ port, journal: lifecycleJournal(port.context) });
       setRetention(true);
     } catch {
       // No durable place to hold an answer identity means no safe answer can be sent from this tab.
-      setJournal(null);
+      setBinding({ port, journal: null });
       setRetention(false);
     }
   }, [port]);
+  const journal = binding !== null && binding.port === port ? binding.journal : null;
 
   useEffect(() => {
     if (!port) {
@@ -316,16 +362,13 @@ export function useRunQuestion(port: MeriConversationPort | null): RunQuestion {
       const events = observation?.events ?? [];
       const next = pendingQuestion(events);
       // Only the run's own settled projection retires a retained answer; absence proves nothing.
-      const held = retainedAnswer(journal);
+      const held = safeRetainedAnswer(journal);
       if (held !== null) settleRetainedAnswer(journal, events, held.questionId);
       setPending((current) => {
         // A different question is a fresh decision: the previous phase never carries over.
         if (current?.questionId !== next?.questionId) {
           dispatch({ type: "reset" });
-          // A question this run already attempted reopens as unresolved rather than as a fresh decision.
-          if (next && retainedAnswer(journal)?.questionId === next.questionId) {
-            dispatch({ type: "result", phase: "unknown" });
-          }
+          projected.current = null;
         }
         return next;
       });
@@ -350,6 +393,15 @@ export function useRunQuestion(port: MeriConversationPort | null): RunQuestion {
       if (deadline !== null) clearTimeout(deadline);
     };
   }, [port, journal]);
+
+  // The retained attempt is projected from the journal/question pair itself, so a journal that arrives after the pending
+  // question (two effects, one render apart) still reopens the card as unresolved rather than editable.
+  useEffect(() => {
+    const phase = projectRetainedAnswer(journal, pending);
+    if (phase === null || projected.current === pending?.questionId) return;
+    projected.current = pending?.questionId ?? null;
+    dispatch({ type: "result", phase });
+  }, [journal, pending]);
 
   const run = useCallback(
     (action: "send" | "reconcile", selection: QuestionSelection, freeText: Readonly<Record<string, string>>) => {
