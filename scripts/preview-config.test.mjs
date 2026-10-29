@@ -76,6 +76,37 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
   validatePreviewParameters(p.parameters.toReversed(), bindings);
 });
 
+test('an owner-supplied onboarding base must be the exact service prefix', () => {
+  const base = 'https://onboarding.example.test/onboard-api';
+  const input = { ...bindings, onboardApiBaseUrl: base };
+  const p = renderPreviewConfiguration(input);
+  assert.equal(p.parameters.find(item => item.ParameterKey === 'OnboardApiBaseUrl').ParameterValue, base);
+  assert.equal(p.environment.ONBOARD_API_BASE_URL, base);
+  validatePreviewParameters(p.parameters, input);
+  // One trailing slash is normalised away so the emitted base is always canonical.
+  const slashed = renderPreviewConfiguration({ ...bindings, onboardApiBaseUrl: `${base}/` });
+  assert.equal(slashed.environment.ONBOARD_API_BASE_URL, base);
+  assert.equal(slashed.parameters.find(item => item.ParameterKey === 'OnboardApiBaseUrl').ParameterValue, base);
+  const block = template.match(/^  OnboardApiBaseUrl:\n([\s\S]*?)(?=^  \w+:|^Resources:)/m)?.[1] ?? '';
+  const pattern = JSON.parse(block.match(/AllowedPattern: (".*")/)?.[1] ?? 'null');
+  assert.equal(typeof pattern, 'string');
+  assert.match(base, new RegExp(pattern));
+  assert.doesNotMatch(`${base}/`, new RegExp(pattern));
+  for (const invalid of [
+    'https://onboarding.example.test',
+    'https://onboarding.example.test/onboard-api/v1',
+    'https://onboarding.example.test/onboard-api/extra',
+    'https://onboarding.example.test/api',
+    'http://onboarding.example.test/onboard-api',
+    'https://user:pw@onboarding.example.test/onboard-api',
+    'https://onboarding.example.test/onboard-api?x=1',
+    'https://onboarding.example.test/onboard-api#frag',
+    ` ${base}`,
+    42,
+    null,
+  ]) assert.throws(() => renderPreviewConfiguration({ ...bindings, onboardApiBaseUrl: invalid }), /PREVIEW_ONBOARD_BINDING_INVALID/);
+});
+
 test('ordinary authenticated mode switches every service target together and enables the existing catalogue', () => {
   const input = { ...bindings, ...meriEnabled, previewReadEnabled: true,
     firstChatBootstrapEnabled: true, previewReadOnly: false, userPreferencesEnabled: true };

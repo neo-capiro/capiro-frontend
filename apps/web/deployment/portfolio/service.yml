@@ -59,8 +59,8 @@ Parameters:
   OnboardApiBaseUrl:
     Type: String
     Default: ""
-    AllowedPattern: "^$|^https://[a-z0-9][a-z0-9.-]*[a-z0-9](/[A-Za-z0-9._~/-]*)?$"
-    Description: Existing onboarding API base for the accepted invitation receiver. Empty keeps onboarding disabled; a target is supplied only by the onboarding-service owner, never guessed here.
+    AllowedPattern: "^$|^https://[a-z0-9][a-z0-9.-]*[a-z0-9](:[0-9]{1,5})?/onboard-api$"
+    Description: Existing onboarding service base for the accepted invitation receiver, exactly the /onboard-api prefix in canonical form with no trailing slash. Empty keeps onboarding disabled; the onboarding-service owner supplies the target, never this template.
   ExistingAppUrl:
     Type: String
     Default: https://app.capiro.ai

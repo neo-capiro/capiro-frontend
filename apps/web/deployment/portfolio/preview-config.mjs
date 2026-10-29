@@ -53,6 +53,7 @@ const optionalBindings = [
   'memoryOwnerReviewEnabled',
   'meriActionWorkflowEnabled', 'meriTaskCommandWorkflowEnabled',
   'meriIntentApprovalsWorkflowEnabled', 'meriDocumentWorkflowEnabled', 'meriDocumentOperation',
+  'onboardApiBaseUrl',
 ];
 const patterns = Object.freeze({
   clerkIssuer: /^https:\/\/clerk\.app\.capiro\.ai$/,
@@ -71,6 +72,30 @@ function closedRecord(input, keys, code, optionalKeys = []) {
       || ownKeys.some(key => !Object.hasOwn(Object.getOwnPropertyDescriptor(input, key), 'value'))) {
     throw Error(code);
   }
+}
+
+/**
+ * Existing onboarding service base. Empty means onboarding stays disabled. A supplied
+ * value is the service root only (no operation path), so it must be exactly the
+ * `/onboard-api` prefix the gateway calls append their operation paths to. One trailing
+ * slash is accepted and normalised away; the emitted value never carries it.
+ */
+function readOnboardConfiguration(bindings) {
+  const value = Object.hasOwn(bindings, 'onboardApiBaseUrl') ? bindings.onboardApiBaseUrl : '';
+  if (typeof value !== 'string' || value.length > 1024
+      || /[\u0000-\u0020\u007f\\]/.test(value))
+    throw Error('PREVIEW_ONBOARD_BINDING_INVALID');
+  if (value === '') return { baseUrl: '' };
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    throw Error('PREVIEW_ONBOARD_BINDING_INVALID');
+  }
+  if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash
+      || (url.pathname !== '/onboard-api' && url.pathname !== '/onboard-api/'))
+    throw Error('PREVIEW_ONBOARD_BINDING_INVALID');
+  return { baseUrl: `${url.origin}/onboard-api` };
 }
 
 function readMeriConfiguration(bindings) {
@@ -185,8 +210,10 @@ export function renderPreviewConfiguration(bindings) {
   if (userPreferencesEnabled && (!meri.baseUrl || previewReadOnly))
     throw Error('PREVIEW_USER_PREFERENCES_DEPENDENCY_HELD');
   const services = previewReadOnly ? fixedParameters : { ...fixedParameters, ...ordinaryServiceParameters };
+  const onboard = readOnboardConfiguration(bindings);
   const values = {
     ...services,
+    OnboardApiBaseUrl: onboard.baseUrl,
     CapiroRequestOrigin: origin,
     CapiroPreviewReadOnly: String(previewReadOnly),
     MeriUserPreferencesEnabled: String(userPreferencesEnabled),
