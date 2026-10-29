@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@capiro/ui/button";
 import type {
   ConversationQuestion,
@@ -9,7 +9,14 @@ import type {
 } from "@capiro/meri-client/conversation";
 import styles from "./question-card.module.css";
 
-export type QuestionCardState = "open" | "waiting" | "unavailable" | "error";
+export type QuestionCardState =
+  | "open"
+  | "waiting"
+  | "unknown"
+  | "rejected"
+  | "local"
+  | "unavailable"
+  | "error";
 
 /**
  * The clarifying question Claude asked, as the run's own durable events describe it.
@@ -34,7 +41,15 @@ export function QuestionCard({
 }) {
   const [selection, setSelection] = useState<QuestionSelection>({});
   const [freeText, setFreeText] = useState<Record<string, string>>({});
-  const disabled = state !== "open";
+  // Only a state that genuinely cannot accept input locks the card. A local selection problem or a rejected answer stays
+  // editable so the user can correct it and send again; a delivered or unknown answer does not.
+  const disabled =
+    state === "waiting" || state === "unknown" || state === "unavailable";
+  // A different question is a fresh decision: no selection or typed text carries over from the previous one.
+  useEffect(() => {
+    setSelection({});
+    setFreeText({});
+  }, [question.questionId]);
 
   const select = (questionText: string, label: string, multiSelect: boolean) =>
     setSelection((current) => {
@@ -60,19 +75,19 @@ export function QuestionCard({
         <span className={styles.state} role="status">
           {state === "waiting"
             ? "Sending answer"
-            : state === "unavailable"
-              ? "No longer answerable"
-              : state === "error"
-                ? "Answer not accepted"
-                : "Waiting for you"}
+            : state === "unknown"
+              ? "Delivery unconfirmed"
+              : state === "unavailable"
+                ? "No longer answerable"
+                : state === "rejected"
+                  ? "Not accepted"
+                  : state === "local"
+                    ? "Choose an answer"
+                    : state === "error"
+                      ? "Conversation not current"
+                      : "Waiting for you"}
         </span>
       </div>
-      {state === "unavailable" && (
-        <p className={styles.notice}>
-          This run is no longer waiting for an answer, so the question can no
-          longer reach it. Nothing was sent.
-        </p>
-      )}
       {error !== null && (
         <p className={styles.error} role="alert">
           {error}
