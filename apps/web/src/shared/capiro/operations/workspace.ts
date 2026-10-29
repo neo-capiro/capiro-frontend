@@ -7,6 +7,7 @@ import { workspaceThemeStudioOperations } from "./workspace-theme-studio";
 import { workspaceExportOperations } from "./workspace-exports";
 import { workspaceHillDayOperations } from "./workspace-hillday";
 import { workspaceProspectOperations } from "./workspace-prospects";
+import { workspaceProspectSaveOperations } from "./workspace-prospect-save";
 import { newsletterStagingOperations } from "./workspace-newsletter-staging";
 import { workspaceObjectiveOperations } from "./objective-work-destinations";
 import { richNewsletterOperations } from "./rich-newsletter";
@@ -48,5 +49,6 @@ export const workspaceOperations = {
   ...workspaceExportOperations,
   ...workspaceCommentOperations,
   ...workspaceProspectOperations,
+  ...workspaceProspectSaveOperations,
   ...newsletterStagingOperations,
 } as const;

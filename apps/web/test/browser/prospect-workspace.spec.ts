@@ -1,3 +1,7 @@
+import {
+  prospectStateFixture,
+  prospectReceiptFixture,
+} from "../../tests/prospect-atomic-fixture";
 import { test, expect, type Page } from "@playwright/test";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 import { moduleRouteFixtures } from "./module-route-fixtures";
@@ -15,6 +19,13 @@ const version = {
   authorId: "test-user",
   authorKind: "human",
   createdAt: "2026-10-12T12:01:00Z",
+  snapshot: {
+    docTitle: draft.docTitle,
+    config: draft.config,
+    prospectId: draft.prospectId,
+    clientId: null,
+    documents: [],
+  },
 };
 async function setup(page: Page) {
   await onlyLocalRequests(page);
@@ -24,6 +35,7 @@ async function setup(page: Page) {
     ...moduleRouteFixtures,
     "workspace.prospect.drafts": { drafts: [] },
     "workspace.draft": draft,
+    "workspace.prospect.state": prospectStateFixture(draft),
     "workspace.draft.versions": [version],
   });
   const writes: { key: string; body: unknown }[] = [];
@@ -78,22 +90,22 @@ test("manual content, version history and exports use only reviewed draft operat
 }) => {
   const { writes, errors } = await setup(page);
   let current = structuredClone(draft);
+  await page.route("**/api/capiro/workspace.prospect.state?*", (route) =>
+    route.fulfill({ json: prospectStateFixture(current) }),
+  );
   await page.route("**/api/capiro/workspace.draft?*", (route) =>
     route.fulfill({ json: current }),
   );
-  await page.route("**/api/capiro/workspace.draft.update", (route) => {
+  await page.route("**/api/capiro/workspace.prospect.save", async (route) => {
     const { body } = route.request().postDataJSON();
     current = {
       ...current,
-      docTitle: body.docTitle,
-      config: body.config,
+      docTitle: body.title,
+      config: { sections: body.names, sectionContent: body.sections },
       updatedAt: "2026-10-12T12:01:00Z",
     };
-    return route.fulfill({ json: current });
+    return route.fulfill({ json: await prospectReceiptFixture(current, body) });
   });
-  await page.route("**/api/capiro/workspace.draft.snapshot", (route) =>
-    route.fulfill({ json: version }),
-  );
   await page.route("**/api/capiro/workspace.draft.pdf?*", (route) =>
     route.fulfill({
       status: 200,
@@ -104,14 +116,12 @@ test("manual content, version history and exports use only reviewed draft operat
   await page.goto(detail);
   await page.getByLabel("Body content").fill("Manually written prospect text.");
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
-  await expect.poll(() => writes.length).toBe(2);
+  await expect.poll(() => writes.length).toBe(1);
   await expect(page.getByLabel("Body content")).toHaveValue(
     "Manually written prospect text.",
   );
-  expect(writes.map((write) => write.key)).toEqual([
-    "workspace.draft.update",
-    "workspace.draft.snapshot",
-  ]);
+  expect(writes.map((write) => write.key)).toEqual(["workspace.prospect.save"]);
+  await expect(page.getByRole("button", { name: "Save draft", exact: true })).toBeEnabled();
   await page.getByRole("button", { name: "History", exact: true }).click();
   await expect(page.getByRole("dialog")).toContainText("Manual save");
   await page.keyboard.press("Escape");
@@ -119,13 +129,13 @@ test("manual content, version history and exports use only reviewed draft operat
   await page.getByRole("button", { name: "Export saved PDF" }).click();
   expect((await download).suggestedFilename()).toBe("workspace-document.pdf");
   expect(errors).toEqual([]);
-  expect(writes).toHaveLength(2);
+  expect(writes).toHaveLength(1);
 });
 test("an uncertain save retains edits across navigation and requires read-back before explicit save", async ({
   page,
 }) => {
   const { writes } = await setup(page);
-  await page.route("**/api/capiro/workspace.draft.update", (route) =>
+  await page.route("**/api/capiro/workspace.prospect.save", (route) =>
     route.abort("connectionreset"),
   );
   await page.goto(detail);
@@ -145,7 +155,7 @@ test("an uncertain save retains edits across navigation and requires read-back b
   await page.getByRole("button", { name: "Read current document" }).click();
   await expect(
     page.getByRole("button", { name: "Save draft", exact: true }),
-  ).toBeEnabled();
+  ).toBeDisabled();
   expect(writes).toHaveLength(1);
 });
 for (const field of ["prospectId", "tenantId"] as const)
@@ -179,31 +189,40 @@ test("prospect Newsletter origin cannot open its sending workflow", async ({
   ).toHaveCount(0);
   expect(writes).toEqual([]);
 });
-test("a changed document blocks PATCH and shows the saved content for deliberate review", async ({
+test("a changed document is refused by the atomic owner and retains edits for review", async ({
   page,
 }) => {
   const { writes } = await setup(page);
-  let reads = 0;
-  await page.route("**/api/capiro/workspace.draft?*", (route) =>
+  let conflicted = false;
+  await page.route("**/api/capiro/workspace.prospect.state?*", (route) =>
     route.fulfill({
-      json:
-        ++reads === 1
-          ? draft
-          : {
+      json: prospectStateFixture(
+        conflicted
+          ? {
               ...draft,
-              updatedAt: "2026-10-12T12:02:00Z",
+              updatedAt: "2026-10-29T12:00:00Z",
               config: {
                 sections: ["Body"],
                 sectionContent: { Body: "Another editor's text" },
               },
-            },
+            }
+          : draft,
+        conflicted ? "b".repeat(64) : "a".repeat(64),
+      ),
     }),
   );
+  await page.route("**/api/capiro/workspace.prospect.save", (route) => {
+    conflicted = true;
+    return route.fulfill({
+      status: 409,
+      json: { code: "WORKSPACE_SAVE_STATE_CONFLICT", message: "Changed" },
+    });
+  });
   await page.goto(detail);
   await page.getByLabel("Body content").fill("My text");
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
-  await expect(page.getByRole("alert")).toContainText("changed since");
-  expect(writes).toEqual([]);
+  await expect(page.getByRole("alert")).toContainText("document changed");
+  expect(writes).toHaveLength(1);
   await page.getByRole("button", { name: "Read current document" }).click();
   await page.getByText("Current saved content", { exact: true }).click();
   await expect(
@@ -211,6 +230,7 @@ test("a changed document blocks PATCH and shows the saved content for deliberate
   ).toBeVisible();
   await expect(page.getByLabel("Body content")).toHaveValue("My text");
 });
+
 test("mobile prospect manual editor preserves keyboard fields and stays in the viewport", async ({
   page,
 }) => {
@@ -244,13 +264,18 @@ test("leaving during save preflight aborts the write and retains the uncertain e
   const held = new Promise<void>((resolve) => {
     release = resolve;
   });
-  await page.route("**/api/capiro/workspace.draft?*", async (route) => {
-    if (saving && !started) {
-      started = true;
-      await held;
-    }
-    await route.fulfill({ json: draft }).catch(() => {});
-  });
+  await page.route(
+    "**/api/capiro/workspace.prospect.state?*",
+    async (route) => {
+      if (saving && !started) {
+        started = true;
+        await held;
+      }
+      await route
+        .fulfill({ json: prospectStateFixture(draft) })
+        .catch(() => {});
+    },
+  );
   await page.goto(detail);
   await page.getByLabel("Body content").fill("Interrupted manual text");
   saving = true;
@@ -332,7 +357,7 @@ test("reload preserves uncertain manual edits and the read-back requirement", as
   page,
 }) => {
   const { writes } = await setup(page);
-  await page.route("**/api/capiro/workspace.draft.update", (route) =>
+  await page.route("**/api/capiro/workspace.prospect.save", (route) =>
     route.abort("connectionreset"),
   );
   await page.goto(detail);
@@ -351,7 +376,7 @@ test("reload preserves uncertain manual edits and the read-back requirement", as
   await page.getByRole("button", { name: "Read current document" }).click();
   await expect(
     page.getByRole("button", { name: "Save draft", exact: true }),
-  ).toBeEnabled();
+  ).toBeDisabled();
   expect(writes).toHaveLength(1);
 });
 
@@ -363,7 +388,7 @@ for (const kind of ["creation", "manual-save"] as const) {
     await page.route("**/api/capiro/workspace.prospect.create", (route) =>
       route.abort("connectionreset"),
     );
-    await page.route("**/api/capiro/workspace.draft.update", (route) =>
+    await page.route("**/api/capiro/workspace.prospect.save", (route) =>
       route.abort("connectionreset"),
     );
     await page.goto(kind === "creation" ? base : detail);

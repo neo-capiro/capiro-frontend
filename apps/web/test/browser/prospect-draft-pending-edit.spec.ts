@@ -6,29 +6,17 @@ import {
   prospectId,
   otherId,
 } from "../../tests/prospect-resources-fixtures";
-
+import {
+  prospectStateFixture,
+  prospectReceiptFixture,
+} from "../../tests/prospect-atomic-fixture";
 const detail = `/modules/workspace?prospectId=${prospectId}&draftId=${draft.id}`;
 const submitted = {
   title: "Submitted prospect title",
   body: "Submitted prospect body",
   summary: "Submitted prospect summary",
 };
-const version = {
-  id: otherId,
-  draftId: draft.id,
-  label: "Manual save",
-  authorId: "test-user",
-  authorKind: "human",
-  createdAt: "2026-10-12T12:01:00Z",
-};
-type Phase = "update" | "snapshot";
-type Outcome = "success" | "failure" | "lost receipt";
-
-async function heldSave(
-  page: Page,
-  phase: Phase,
-  outcome: Outcome = "success",
-) {
+async function heldSave(page: Page, outcome = "success") {
   await onlyLocalRequests(page);
   let current = {
     ...structuredClone(draft),
@@ -37,53 +25,73 @@ async function heldSave(
       sectionContent: { Body: "", Summary: "" },
     },
   };
-  await operationFixtures(page, {
-    ...moduleRouteFixtures,
-    "workspace.prospect.drafts": { drafts: [] },
-    "workspace.draft": current,
-    "workspace.draft.versions": [version],
-  });
-  const writes: string[] = [];
-  let entered = false;
-  let release!: () => void;
+  const writes: string[] = [],
+    bodies: unknown[] = [],
+    versions = new Map<
+      string,
+      Awaited<ReturnType<typeof prospectReceiptFixture>>
+    >();
+  let entered = false,
+    release!: () => void,
+    revision = 0;
   const held = new Promise<void>((resolve) => {
     release = resolve;
   });
-  await page.route("**/api/capiro/workspace.draft?*", (route) =>
-    route.fulfill({ json: current }),
-  );
-  for (const operation of ["update", "snapshot"] as const)
-    await page.route(
-      `**/api/capiro/workspace.draft.${operation}`,
-      async (route) => {
-        writes.push(operation);
-        if (operation === phase && !entered) {
-          entered = true;
-          await held;
-          if (outcome === "failure")
-            return route.fulfill({
-              status: 500,
-              json: { message: "Save failed" },
-            });
-          if (outcome === "lost receipt") return route.abort("connectionreset");
-        }
-        if (operation === "update") {
-          const { body } = route.request().postDataJSON();
-          current = {
-            ...current,
-            docTitle: body.docTitle,
-            config: body.config,
-            updatedAt: "2026-10-12T12:01:00Z",
-          };
-        }
-        await route.fulfill({
-          json: operation === "update" ? current : version,
+  await operationFixtures(page, {
+    ...moduleRouteFixtures,
+    "workspace.prospect.drafts": { drafts: [] },
+    "workspace.draft": () => current,
+    "workspace.draft.versions": [],
+    "workspace.prospect.state": () =>
+      prospectStateFixture(current, revision ? "b".repeat(64) : "a".repeat(64)),
+  });
+  await page.route("**/api/capiro/workspace.prospect.save", async (route) => {
+    const { body } = route.request().postDataJSON();
+    writes.push("save");
+    bodies.push(body);
+    const first = !entered;
+    if (first) {
+      entered = true;
+      await held;
+    }
+    if (first && outcome === "failure")
+      return route.fulfill({
+        status: 503,
+        json: { message: "Synthetic failure before commit" },
+      });
+    if (!versions.has(body.requestId)) {
+      if (outcome === "conflict" && first) {
+        current = {
+          ...current,
+          docTitle: "Newer editor",
+          updatedAt: "2026-10-29T12:00:00Z",
+        };
+        revision++;
+        return route.fulfill({
+          status: 409,
+          json: { code: "WORKSPACE_SAVE_STATE_CONFLICT", message: "Changed" },
         });
-      },
-    );
-  return { writes, release, started: () => entered };
+      }
+      current = {
+        ...current,
+        docTitle: body.title,
+        config: { sections: body.names, sectionContent: body.sections },
+        updatedAt: "2026-10-29T12:00:01Z",
+      };
+      revision++;
+      versions.set(body.requestId, await prospectReceiptFixture(current, body));
+    }
+    if (first && outcome === "lost receipt")
+      return route.fulfill({
+        status: 503,
+        json: { message: "Synthetic lost acknowledgement after commit" },
+      });
+    return route.fulfill({
+      json: { ...versions.get(body.requestId), replayed: !first },
+    });
+  });
+  return { writes, bodies, versions, release, started: () => entered };
 }
-
 function fields(page: Page) {
   return [
     page.getByLabel("Document title", { exact: true }),
@@ -105,98 +113,79 @@ async function expectSubmitted(page: Page) {
   await expect(body).toHaveValue(submitted.body);
   await expect(summary).toHaveValue(submitted.summary);
 }
-
-for (const phase of ["update", "snapshot"] as const) {
-  for (const outcome of ["success", "failure", "lost receipt"] as const) {
-    test(`prospect fields freeze during held ${phase}; ${outcome} preserves submitted text`, async ({
-      page,
-    }) => {
-      const control = await heldSave(page, phase, outcome);
-      await beginSave(page);
-      await expect.poll(control.started).toBe(true);
-      for (const field of fields(page)) await expect(field).toBeDisabled();
-      await expectSubmitted(page);
-      control.release();
-      const save = page.getByRole("button", {
-        name: "Save draft",
-        exact: true,
-      });
-      if (outcome === "success") {
-        await expect(save).toBeEnabled();
-        await expectSubmitted(page);
-        expect(control.writes).toEqual(["update", "snapshot"]);
-        await page.reload();
-        await expectSubmitted(page);
-        await expect(
-          page.getByText(/previous save is not confirmed/),
-        ).toHaveCount(0);
-      } else {
-        await expect(
-          page.getByText(/previous save is not confirmed/),
-        ).toBeVisible();
-        await expect(save).toBeDisabled();
-        const originalWrites =
-          phase === "update" ? ["update"] : ["update", "snapshot"];
-        expect(control.writes).toEqual(originalWrites);
-        await page.reload();
-        await expectSubmitted(page);
-        await expect(save).toBeDisabled();
-        await page
-          .getByRole("button", { name: "Read current document" })
-          .click();
-        await expect(save).toBeEnabled();
-        await expectSubmitted(page);
-        expect(control.writes).toEqual(originalWrites);
-        await save.click();
-        await expect(save).toBeEnabled();
-        expect(control.writes).toEqual([
-          ...originalWrites,
-          "update",
-          "snapshot",
-        ]);
-      }
-      for (const field of fields(page)) await expect(field).toBeEditable();
-      await page.getByLabel("Body content").fill("Next deliberate edit");
-      await expect(page.getByLabel("Body content")).toHaveValue(
-        "Next deliberate edit",
-      );
-    });
-  }
-
-  test(`leaving during held ${phase} retains the original intent without continuing the old save`, async ({
+for (const outcome of ["success", "failure", "lost receipt"])
+  test(`atomic prospect save freezes fields and recovers ${outcome} with one version`, async ({
     page,
   }) => {
-    const control = await heldSave(page, phase);
+    const control = await heldSave(page, outcome);
     await beginSave(page);
     await expect.poll(control.started).toBe(true);
     for (const field of fields(page)) await expect(field).toBeDisabled();
-    await page
-      .getByRole("button", { name: "← Workspace", exact: true })
-      .click();
-    await expect(
-      page.getByRole("heading", { name: "Prospect Workspace", exact: true }),
-    ).toBeVisible();
-    control.release();
-    await page.goBack();
     await expectSubmitted(page);
-    await expect(
-      page.getByText(/previous save is not confirmed/),
-    ).toBeVisible();
-    await page.getByRole("button", { name: "Read current document" }).click();
-    await expect(
-      page.getByRole("button", { name: "Save draft", exact: true }),
-    ).toBeEnabled();
-    expect(control.writes).toEqual(
-      phase === "update" ? ["update"] : ["update", "snapshot"],
-    );
+    control.release();
+    const save = page.getByRole("button", { name: "Save draft", exact: true });
+    if (outcome !== "success") {
+      await expect(
+        page.getByRole("button", { name: "Recover original save" }),
+      ).toBeEnabled();
+      await page.reload();
+      await expectSubmitted(page);
+      await expect(save).toBeDisabled();
+      expect(control.writes).toHaveLength(1);
+      await page.getByRole("button", { name: "Read current document" }).click();
+      await expect(save).toBeDisabled();
+      await page.getByRole("button", { name: "Recover original save" }).click();
+    }
+    await expect(save).toBeEnabled();
+    await expectSubmitted(page);
+    expect(control.versions.size).toBe(1);
+    if (outcome !== "success")
+      expect(control.bodies[0]).toEqual(control.bodies[1]);
+    await page.reload();
+    await expectSubmitted(page);
   });
-}
-
+test("a definite version conflict requires current-content review and a new request", async ({
+  page,
+}) => {
+  const control = await heldSave(page, "conflict");
+  await beginSave(page);
+  await expect.poll(control.started).toBe(true);
+  control.release();
+  await expect(page.getByRole("alert")).toContainText("document changed");
+  const save = page.getByRole("button", { name: "Save draft", exact: true });
+  await expect(save).toBeDisabled();
+  await page.getByRole("button", { name: "Read current document" }).click();
+  await expect(page.getByRole("status")).toContainText("Compare");
+  await expect(save).toBeEnabled();
+  await expectSubmitted(page);
+  await save.click();
+  await expect(save).toBeEnabled();
+  expect(control.versions.size).toBe(1);
+  expect(control.bodies[0]).not.toEqual(control.bodies[1]);
+});
+test("leaving during an atomic save retains the original request without continuing the old editor", async ({
+  page,
+}) => {
+  const control = await heldSave(page);
+  await beginSave(page);
+  await expect.poll(control.started).toBe(true);
+  await page.getByRole("button", { name: "← Workspace", exact: true }).click();
+  await expect(
+    page.getByRole("heading", { name: "Prospect Workspace", exact: true }),
+  ).toBeVisible();
+  control.release();
+  await page.goBack();
+  await expectSubmitted(page);
+  await expect(
+    page.getByRole("button", { name: "Recover original save" }),
+  ).toBeEnabled();
+  expect(control.writes).toEqual(["save"]);
+});
 for (const replacement of ["user", "tenant", "prospect", "client"] as const)
-  test(`a ${replacement} replacement during PATCH cannot restore or finish the former editor`, async ({
+  test(`a ${replacement} replacement during atomic save cannot restore or finish the former editor`, async ({
     page,
   }) => {
-    const control = await heldSave(page, "update");
+    const control = await heldSave(page);
     await beginSave(page);
     await expect.poll(control.started).toBe(true);
     for (const field of fields(page)) await expect(field).toBeDisabled();
@@ -275,5 +264,5 @@ for (const replacement of ["user", "tenant", "prospect", "client"] as const)
     await expect(page.getByText(submitted.body, { exact: true })).toHaveCount(
       0,
     );
-    expect(control.writes).toEqual(["update"]);
+    expect(control.writes).toEqual(["save"]);
   });

@@ -11,7 +11,7 @@ export function isOrdinarySaveOperation(operation: OperationDefinition) {
   return (
     operation.service === "workspace" &&
     operation.method === "POST" &&
-    operation.path === "/drafts/:id/save"
+    ["/drafts/:id/save", "/drafts/:id/prospect-save"].includes(operation.path)
   );
 }
 /** Only the reviewed producer's exact save409codes cross the existing gateway. */

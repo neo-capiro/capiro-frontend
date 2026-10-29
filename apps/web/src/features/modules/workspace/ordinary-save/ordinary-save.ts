@@ -1,4 +1,5 @@
-import { canonicalWorkspaceSnapshot } from "@capiro/shared";
+import { workspaceSnapshotHash } from "@/shared/capiro/workspace-snapshot";
+import { canonicalWorkspaceSnapshot } from "@/shared/capiro/workspace-snapshot";
 import { z } from "zod";
 import {
   ordinaryDraftState,
@@ -75,19 +76,13 @@ export async function ordinaryRequestHash(
   scope: OrdinarySaveScope,
   body: OrdinarySaveBody,
 ) {
-  const bytes = new TextEncoder().encode(
-    canonicalWorkspaceSnapshot({
-      operation: "save_ordinary_draft",
-      tenantId: scope.tenantId,
-      draftId: scope.draftId,
-      actorId: scope.actorId,
-      input: JSON.parse(JSON.stringify(body)),
-    }),
-  );
-  const digest = await crypto.subtle.digest("SHA-256", bytes);
-  return Array.from(new Uint8Array(digest), (byte) =>
-    byte.toString(16).padStart(2, "0"),
-  ).join("");
+  return workspaceSnapshotHash({
+    operation: "save_ordinary_draft",
+    tenantId: scope.tenantId,
+    draftId: scope.draftId,
+    actorId: scope.actorId,
+    input: JSON.parse(JSON.stringify(body)),
+  });
 }
 export async function bindOrdinaryReceipt(
   value: unknown,

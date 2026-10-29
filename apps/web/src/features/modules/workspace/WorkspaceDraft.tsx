@@ -16,11 +16,10 @@ import {
 } from "./prospects/manual-draft";
 import { useProspectDraftSave } from "./prospects/useProspectDraftSave";
 import type { ProspectWriter } from "./prospects/recovery-authority";
-import { ProspectDraftExport } from "./prospects/ProspectDraftExport";
+import { ProspectSaveRecovery } from "./prospects/ProspectSaveRecovery";
 import { NewsletterWorkflow } from "./newsletter/NewsletterWorkflow";
 import { DocumentPreview } from "./rich-document/DocumentPreview";
 import { SectionEditor } from "./rich-document/SectionEditor";
-import { SectionPreview } from "./rich-document/SectionPreview";
 import { sectionSizeError } from "./rich-document/content";
 import styles from "./workspace.module.css";
 import presentation from "./ordinary-presentation.module.css";
@@ -135,6 +134,7 @@ function DraftEditor({
             primary
             disabled={
               (ordinarySave && !ordinarySave.canSave) ||
+              (prospectSave && !prospectSave.canSave) ||
               prospectSave?.pending ||
               Boolean(prospectSave?.retained?.uncertain) ||
               invalidSection ||
@@ -173,52 +173,7 @@ function DraftEditor({
       <CopiedTabs draft={currentDraft} />
       {ordinarySave && <OrdinarySaveRecovery save={ordinarySave} />}
       {draft.prospectId && prospectSave && (
-        <>
-          <p>
-            Immutable prospect origin: {draft.prospectId}. Manual edits only.
-          </p>
-          {prospectSave?.error && <p role="alert">{prospectSave?.error}</p>}
-          {prospectSave?.readback && (
-            <details>
-              <summary>Current saved content</summary>
-              <h2>{prospectSave?.readback.docTitle}</h2>
-              {Object.entries(
-                prospectSave?.readback.config.sectionContent ?? {},
-              ).map(([name, content]) => (
-                <section key={name}>
-                  <h3>{name}</h3>
-                  <SectionPreview value={content} />
-                </section>
-              ))}
-            </details>
-          )}
-          {prospectSave?.message && (
-            <p role="status">{prospectSave?.message}</p>
-          )}
-          {prospectSave?.retained?.uncertain && (
-            <p role="status">
-              The previous save is not confirmed. No automatic retry will run.
-              Read current document before another save.
-            </p>
-          )}
-          <ActionButton
-            disabled={prospectSave?.pending}
-            onClick={() => void prospectSave?.readCurrent()}
-          >
-            Read current document
-          </ActionButton>
-          <ProspectDraftExport
-            scope={{
-              id: draft.id,
-              tenantId: draft.tenantId!,
-              prospectId: draft.prospectId,
-            }}
-            disabled={
-              prospectSave?.pending ||
-              Boolean(prospectSave?.retained?.uncertain)
-            }
-          />
-        </>
+        <ProspectSaveRecovery draft={draft} save={prospectSave} />
       )}
       <Field label="Document title" htmlFor="workspace-document-title">
         <TextInput
@@ -286,8 +241,8 @@ function ProspectDraftEditor({
     );
   return (
     <DraftEditor
-      key={save.retained?.requestId ?? "current"}
-      draft={draft}
+      key={`${save.retained?.requestId ?? "current"}:${save.currentDraft.updatedAt}`}
+      draft={save.currentDraft}
       onClose={onClose}
       prospectSave={save}
     />
