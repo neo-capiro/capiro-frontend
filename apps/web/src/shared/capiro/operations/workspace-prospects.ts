@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
-import { workspaceDraft } from "./workspace-documents";
+import { workspaceDraft, workspaceBlueprintPin } from "./workspace-documents";
 import { workspaceId } from "./workspace-schemas";
 
 const source =
-  "capirov2@9c2765224fc38d111df0fe184ca50229c6128373 apps/workspace/src/drafts/{drafts.controller,drafts.service,dto/draft.dto}.ts and prospect-resources/prospect-draft-create.ts (PR2400 source-only)";
+  "capiro-backend apps/workspace/src/drafts/{drafts.controller,drafts.service,dto/draft.dto}.ts; prospect-resources/prospect-draft-create.ts; template-studio/blueprint-pin.ts: exact optional published-template pin";
 export const prospectWorkspaceDraft = workspaceDraft
   .extend({ prospectId: workspaceId, tenantId: workspaceId })
   .refine(
@@ -38,6 +38,7 @@ export const prospectDraftCreateBody = z
     prospectId: workspaceId,
     requestId: workspaceId,
     docTitle: z.string().trim().min(1).max(500),
+    blueprintPin: workspaceBlueprintPin.optional(),
   })
   .strict();
 export const workspaceProspectOperations = {

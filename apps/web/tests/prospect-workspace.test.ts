@@ -9,6 +9,8 @@ import {
   assertManualSave,
 } from "../src/features/modules/workspace/prospects/manual-draft";
 import { clientDrafts } from "../src/features/portfolio/work/contracts";
+import { publishedPin } from "./document-blueprint-fixtures";
+import { sameBlueprintPin } from "../src/features/modules/workspace/document-templates/blueprint-adoption";
 import {
   actor,
   prospectId,
@@ -17,6 +19,16 @@ import {
   draft,
 } from "./prospect-resources-fixtures";
 const scope = { id: draft.id, tenantId: actor.tenantId, prospectId };
+it("retains an exact published template tuple and refuses partial or changed pin receipts", () => {
+  const pin = publishedPin();
+  const body = { prospectId, requestId, docTitle: "Proposal", blueprintPin: pin };
+  expect(prospectDraftCreateBody.parse(body)).toEqual(body);
+  expect(sameBlueprintPin(pin, body.blueprintPin)).toBe(true);
+  expect(sameBlueprintPin({ ...pin, version: 99 }, body.blueprintPin)).toBe(false);
+  expect(sameBlueprintPin(undefined, pin)).toBe(false);
+  expect(sameBlueprintPin(undefined, undefined)).toBe(true);
+  expect(prospectDraftCreateBody.safeParse({ ...body, blueprintPin: { blueprintId: pin.blueprintId } }).success).toBe(false);
+});
 it("requires a stable canonical creation key and rejects extra association or generation fields", () => {
   const body = { prospectId, requestId, docTitle: "Manual" };
   expect(prospectDraftCreateBody.parse(body)).toEqual(body);
