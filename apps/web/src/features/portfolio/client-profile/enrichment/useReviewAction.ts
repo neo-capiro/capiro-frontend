@@ -23,7 +23,7 @@ export function useReviewAction(
   const [uncertain, setUncertain] = useState(false);
   const [receipt, setReceipt] = useState<string>();
   const [uncertainReview, setUncertainReview] = useState<FillRun>();
-  const [readError, setReadError] = useState<unknown>();
+  const [readError, setReadError] = useState<Error>();
   useLayoutEffect(() => {
     const controller = new AbortController();
     lifetime.current = controller;
@@ -153,7 +153,13 @@ export function useReviewAction(
       // prove this request's outcome or authorize a retry.
     } catch (error) {
       if (!controller.signal.aborted && lifetime.current === controller)
-        setReadError(error);
+        setReadError(
+          error instanceof Error
+            ? error
+            : new Error("The saved review could not be refreshed.", {
+                cause: error,
+              }),
+        );
     }
   }
   return {
