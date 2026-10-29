@@ -3,6 +3,9 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { existsSync, realpathSync } from "node:fs";
 const app = fileURLToPath(new URL("../../", import.meta.url));
+const port = Number(process.env.CAPIRO_COMPONENT_TEST_PORT ?? 5191);
+if (!Number.isInteger(port) || port < 1024 || port > 65535)
+  throw Error("Invalid component harness port");
 const navigation = path.join(app, "tests/browser/navigation.tsx");
 // Worktree dependency installs may be junctions outside this checkout. Vite
 // resolves font imports to the real path, so allow the installed dependency
@@ -54,10 +57,10 @@ const server = await createServer({
   },
   server: {
     host: "127.0.0.1",
-    port: 5191,
+    port,
     strictPort: true,
     fs: { allow: [app, path.join(app, "../../packages/ui"), ...dependencies] },
   },
 });
 await server.listen();
-console.log("Test-only component server: http://127.0.0.1:5191");
+console.log(`Test-only component server: http://127.0.0.1:${port}`);

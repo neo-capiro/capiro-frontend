@@ -3,6 +3,7 @@ import { siteWorkflowOperations } from "./operations/site-workflows";
 import { memoryReviewOperations } from "./operations/memory-review";
 import { memoryGrantOperations } from "./operations/memory-grants";
 import { memoryFilesOperations } from "./operations/memory-files";
+import { memoryDraftOperations } from "./operations/memory-drafts";
 import { memoryGovernanceOperations } from "./operations/memory-governance";
 import { completedReportOperations } from "./operations/meri-completed-reports";
 import { meriFirmSkillOperations } from "./operations/meri-firm-skills";
@@ -55,6 +56,7 @@ export const capiroOperations = {
   ...memoryReviewOperations,
   ...memoryGrantOperations,
   ...memoryFilesOperations,
+  ...memoryDraftOperations,
   ...memoryGovernanceOperations,
   ...completedReportOperations,
   ...meriFirmSkillOperations,

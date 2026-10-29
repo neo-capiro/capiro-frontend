@@ -4,18 +4,11 @@ import {
   parseSiteWorkflowManifest,
 } from "@capiro/shared/site-workflows";
 import { defineOperation } from "../contracts";
+import { publicContract } from "../public-contract";
 const source =
   "Core site-workflows/controller.ts @c8e583c109aab7d0788df19acaea16945c9c1e90";
-function parsed<T>(parse: (raw: unknown) => T) {
-  return z.unknown().transform((raw, ctx) => {
-    try {
-      return parse(raw);
-    } catch {
-      ctx.addIssue({ code: "custom", message: "Invalid site workflow" });
-      return z.NEVER;
-    }
-  });
-}
+const parsed = <T>(parse: (raw: unknown) => T) =>
+  publicContract(parse, "Invalid site workflow");
 const configuration = z
   .object({
     manifest: parsed(parseSiteWorkflowManifest),

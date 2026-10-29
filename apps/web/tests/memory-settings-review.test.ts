@@ -30,7 +30,7 @@ it("holds the native personal review route when the server gate is closed", () =
   expect(html).toContain("Personal memory review unavailable");
   expect(html).not.toContain('href="/meri/memory"');
   expect(html).not.toContain("Needs my review");
-  expect(html).toContain("New memory writes from Settings are unavailable");
+  expect(html).not.toContain("Retention and offboarding rules");
 });
 
 it("links to the Core-backed personal review and correction route when enabled", () => {

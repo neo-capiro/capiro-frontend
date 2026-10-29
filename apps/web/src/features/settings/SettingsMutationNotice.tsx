@@ -2,6 +2,8 @@
 import { SettingsButton, SettingsNotice } from "./components";
 import type { SettingsWrite } from "./security-write-types";
 const labels: Record<string, string> = {
+  "settings.memory.drafts.save": "Private memory draft change",
+  "settings.memory.drafts.submit": "Memory draft submission",
   "settings.siteWorkflows.save": "Website workflow change",
   "settings.memory.grants.create": "Memory grant creation",
   "settings.memory.grants.revoke": "Memory grant revocation",

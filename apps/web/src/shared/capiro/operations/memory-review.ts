@@ -7,6 +7,7 @@ import {
   MEMORY_REVIEW_INBOX_VIEWS,
 } from "@capiro/shared/memory-review";
 import { defineOperation } from "../contracts";
+import { publicContract } from "../public-contract";
 
 const source =
   "Core memory-review-inbox.controller.ts and memory-review-inbox.service.ts; @capiro/shared/memory-review";
@@ -14,18 +15,8 @@ const id = z.string().uuid();
 const empty = z.object({}).strict();
 const selected = z.object({ params: z.object({ id }).strict() }).strict();
 /** Use the released owner codecs instead of maintaining a second review DTO. */
-const received = <T>(parse: (value: unknown) => T) =>
-  z.unknown().transform((value, context) => {
-    try {
-      return parse(value);
-    } catch {
-      context.addIssue({
-        code: "custom",
-        message: "Memory review response could not be verified.",
-      });
-      return z.NEVER;
-    }
-  });
+const received = <T>(parse: (raw: unknown) => T) =>
+  publicContract(parse, "Memory review response could not be verified.");
 export const memoryReviewOperations = {
   "settings.memory.review.approve": defineOperation({
     service: "core",
@@ -72,6 +63,14 @@ export const memoryReviewOperations = {
     service: "core",
     method: "GET",
     path: "/memory/review/inbox/requests/:id",
+    source,
+    request: selected,
+    response: received(parseMemoryReviewDetail),
+  }),
+  "memory.review.candidate": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/memory/review/inbox/candidates/:id",
     source,
     request: selected,
     response: received(parseMemoryReviewDetail),

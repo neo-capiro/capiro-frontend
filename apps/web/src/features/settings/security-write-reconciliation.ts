@@ -6,6 +6,7 @@ import { reconcileMemoryGrant } from "./memory/grant-reconciliation";
 import { reconcileMemoryReview } from "./memory/review-reconciliation";
 import { reconcileMemoryGovernance } from "./memory/governance-reconciliation";
 import { reconcileSiteWorkflow } from "./site-workflows/recovery";
+import { reconcileMemoryDraft } from "./memory/drafts/recovery";
 type Api = CapiroApi<typeof capiroOperations>;
 const row = (value: unknown): Record<string, unknown> =>
   value && typeof value === "object" ? (value as Record<string, unknown>) : {};
@@ -19,6 +20,9 @@ export async function reconcileSettingsWrite(
   signal.throwIfAborted();
   const { params = {}, body = {} } = write.input;
   switch (write.operation) {
+    case "settings.memory.drafts.save":
+    case "settings.memory.drafts.submit":
+      return reconcileMemoryDraft(api, write, signal);
     case "settings.siteWorkflows.save":
       return reconcileSiteWorkflow(api, write, signal);
     case "settings.memory.review.approve":
@@ -338,6 +342,8 @@ export async function reconcileSettingsWrite(
 
 export const settingsWriteNeedsReadback = (operation: string) =>
   [
+    "settings.memory.drafts.save",
+    "settings.memory.drafts.submit",
     "settings.memory.grants.create",
     "settings.memory.grants.revoke",
     "me.emailSignature.update",
