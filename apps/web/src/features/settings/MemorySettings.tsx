@@ -1,50 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { DataTable, TextArea } from "../../shared/module-ui";
-import {
-  SettingField,
-  SettingsButton,
-  SettingsCard,
-  SettingsNotice,
-  SettingsTabs,
-} from "./components";
+import { MemoryGovernanceCenter } from "./memory/MemoryGovernanceCenter";
+import { MemoryFiles } from "./memory/MemoryFiles";
+import { SettingsCard, SettingsNotice } from "./components";
 import styles from "./styles";
 
-const reason =
-  "Memory governance, file, and notification settings do not have verified service contracts yet.";
-const governanceTabs = [
-  "Overview",
-  "Active",
-  "Pending review",
-  "Conflicts",
-  "Review due",
-  "History",
-  "Access grants",
-  "Transition history",
-  "Projection health",
-];
-
-export function MemorySettings({ reviewEnabled }: { reviewEnabled: boolean }) {
+export function MemorySettings({
+  reviewEnabled,
+  readOnlyPreview = false,
+}: {
+  reviewEnabled: boolean;
+  readOnlyPreview?: boolean;
+}) {
   return (
     <div className={styles.stack} data-design-target="411:67920">
-      <SettingsNotice title="Memory governance, files, and notifications unavailable">
-        {reason}
+      <SettingsNotice title="New memory writes from Settings are unavailable">
+        Retention and offboarding rules for personal, client and firm owners
+        must be approved before Settings can create proposals or corrections.
       </SettingsNotice>
       <MemoryReviewCard enabled={reviewEnabled} />
-      <SettingsCard
-        title="Review notifications"
-        action={
-          <SettingsButton small disabled title={reason}>
-            Mark all read
-          </SettingsButton>
-        }
-      >
-        <p className={styles.empty}>Review notifications are unavailable.</p>
+      <SettingsCard title="Review notifications">
+        <p className={styles.description}>
+          View your in-app review notices and unread count, open the exact
+          review, or mark notices read in Updates. External delivery is not
+          confirmed here.
+        </p>
+        <Link href="/meri/updates">Open review notifications</Link>
       </SettingsCard>
-      <MemoryGovernanceCard />
-      <MemoryFilesCard />
+      <MemoryGovernanceCenter readOnly={readOnlyPreview} />
+      <MemoryFiles />
     </div>
   );
 }
@@ -67,90 +52,6 @@ function MemoryReviewCard({ enabled }: { enabled: boolean }) {
           workspace.
         </SettingsNotice>
       )}
-    </SettingsCard>
-  );
-}
-
-function MemoryGovernanceCard() {
-  const [governance, setGovernance] = useState("Overview");
-  return (
-    <SettingsCard title="Memory Governance Center">
-      <SettingsTabs
-        label="Memory governance"
-        items={governanceTabs.map((label) => ({ id: label, label }))}
-        value={governance}
-        onChange={setGovernance}
-      />
-      {governance === "Access grants" ? (
-        <>
-          <div className={styles.row}>
-            <div className={styles.grow}>
-              <SettingField label="Client">
-                <select className={styles.input} disabled>
-                  <option>Client memory unavailable</option>
-                </select>
-              </SettingField>
-            </div>
-            <SettingsButton primary disabled title={reason}>
-              Add grant
-            </SettingsButton>
-          </div>
-          <DataTable
-            rows={[]}
-            rowKey={() => ""}
-            caption="Memory access grants"
-            emptyMessage="Access grant data is unavailable."
-            columns={[
-              "User",
-              "Permissions",
-              "Status",
-              "Expires",
-              "Reason",
-              "Actions",
-            ].map((label) => ({ key: label, label, render: () => "—" }))}
-          />
-        </>
-      ) : (
-        <p className={styles.empty}>
-          {governance} governance data is unavailable until its contract is
-          verified.
-        </p>
-      )}
-    </SettingsCard>
-  );
-}
-
-function MemoryFilesCard() {
-  const [fileTab, setFileTab] = useState("Firm");
-  return (
-    <SettingsCard title="Memory files">
-      <SettingsTabs
-        label="Memory files"
-        items={["Firm", "My files"].map((label) => ({ id: label, label }))}
-        value={fileTab}
-        onChange={setFileTab}
-      />
-      <div className={styles.row}>
-        <h3 className={styles.grow}>
-          {fileTab === "Firm"
-            ? "Firm profile and positioning"
-            : "Personal memory files"}
-        </h3>
-        <SettingsButton disabled title={reason}>
-          Submit for review
-        </SettingsButton>
-      </div>
-      <SettingField label="Who we are">
-        <TextArea placeholder="How the firm describes itself." disabled />
-      </SettingField>
-      <SettingField label="Positioning">
-        <TextArea placeholder="What the firm wants to be known for." disabled />
-      </SettingField>
-      <h3>Active clients</h3>
-      <p className={styles.description}>
-        Updated automatically from your portfolio after the memory service is
-        connected.
-      </p>
     </SettingsCard>
   );
 }

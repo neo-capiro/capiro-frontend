@@ -95,6 +95,34 @@ test("actual index saves the complete canonical catalog and restores it after re
   expect(unexpected).toEqual([]);
 });
 
+test("Customize keeps the accessible roster when the saved order read fails, with reordering refused", async ({
+  page,
+}) => {
+  const unexpected = await fixtures(page);
+  let writes = 0;
+  await page.route(endpoint, (route) => {
+    if (route.request().method() !== "GET") writes++;
+    return route.fulfill({ status: 503, json: { message: "Unavailable" } });
+  });
+  await page.goto("/portfolio");
+  await page.getByRole("button", { name: "Customize", exact: true }).click();
+  await expect(
+    page.getByText("Saved profile ordering is unavailable", { exact: false }),
+  ).toBeVisible();
+  // The failed read leaves the catalog unknown, so the same accessible roster
+  // the ordinary board shows stays visible; only reordering and saving stop.
+  await expect.poll(() => positions(page)).toEqual([clientId, secondId]);
+  await expect(
+    page.getByRole("button", {
+      name: "Move Test Aerospace later",
+      exact: true,
+    }),
+  ).toBeDisabled();
+  await expect(page.getByRole("button", { name: /Save order/ })).toHaveCount(0);
+  expect(writes).toBe(0);
+  expect(unexpected).toEqual([]);
+});
+
 test("name, recent, filters and list presentation never persist a subset or overwrite saved order", async ({
   page,
 }) => {

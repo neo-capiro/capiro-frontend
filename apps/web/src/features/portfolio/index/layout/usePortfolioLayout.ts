@@ -95,6 +95,12 @@ export function usePortfolioLayout(clientIds: readonly string[]) {
   const catalogIds = !query.error
     ? (query.data?.order ?? []).map((token) => token.slice(7))
     : [];
+  // A successful actor-bound GET is the only authority for reorderable
+  // membership. A failed or pending read leaves the catalog unknown, so callers
+  // may keep showing the accessible roster they already display; an
+  // authoritative empty or filtered order stays exactly as the receipt states,
+  // and `allowed` still refuses every save without a current catalog.
+  const catalogKnown = Boolean(actor) && !query.error && Boolean(query.data);
   const guardReceipt = (receipt: LayoutReceipt) => {
     guard();
     const current = cache.getQueryState<LayoutReceipt>(key);
@@ -250,6 +256,7 @@ export function usePortfolioLayout(clientIds: readonly string[]) {
   };
   return {
     catalogIds,
+    catalogKnown,
     orderedIds: query.data && !query.error ? catalogIds : [...clientIds],
     receipt: actor && !query.error ? query.data : undefined,
     pending: identity.isPending || (Boolean(actor) && query.isPending),

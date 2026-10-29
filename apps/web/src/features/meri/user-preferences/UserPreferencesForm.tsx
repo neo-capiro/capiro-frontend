@@ -7,6 +7,7 @@ import {
   type UserPreferencesResponse,
 } from "@capiro/meri-client/user-preferences";
 import styles from "./user-preferences.module.css";
+import { TimezonePreview } from "./TimezonePreview";
 import { ModelSelectionPicker } from "../model-selection/ModelSelectionPicker";
 import {
   selectionAvailable,
@@ -97,13 +98,14 @@ export function UserPreferencesForm({
             placeholder="Use tenant default"
             onChange={(event) => setTimezone(event.target.value)}
             aria-describedby="preferences-timezone-help"
-            maxLength={100}
+            maxLength={64}
           />
         </label>
         <p id="preferences-timezone-help">
           A canonical IANA timezone, such as America/New_York. Leave empty to
           use the tenant default.
         </p>
+        <TimezonePreview timezone={timezone} />
         <button
           type="submit"
           disabled={

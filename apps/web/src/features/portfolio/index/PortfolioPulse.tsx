@@ -1,5 +1,24 @@
+import { isClientRecord } from "@/shared/portfolio/domain/profile-type";
 import type { Client } from "./contracts";
 import styles from "./portfolio.module.css";
+
+/**
+ * Metrics no portfolio read supplies yet. The tile keeps the design's em dash
+ * (the accepted layout has no slot for a label) and carries the explanation as
+ * its title and accessible name, so "no read" is not silently read as zero.
+ */
+const UNREPORTED = [
+  [
+    "Need attention",
+    "Alert coverage is not reported by the portfolio service.",
+  ],
+  [
+    "Objectives",
+    "Objective coverage is not reported by the portfolio service.",
+  ],
+  ["Off track", "Objective health is not reported by the portfolio service."],
+  ["Strategies", "Strategy coverage is not reported by the portfolio service."],
+] as const;
 export function PortfolioPulse({
   clients,
   fiscalYear,
@@ -28,18 +47,21 @@ export function PortfolioPulse({
         aria-label="Portfolio pulse metrics"
         tabIndex={0}
       >
-        {[
-          [
-            "Clients",
-            clients?.filter((c) => c.profileType === "CLIENT").length,
-          ],
-          ["Need attention", undefined],
-          ["Objectives", undefined],
-          ["Off track", undefined],
-          ["Strategies", undefined],
-        ].map(([label, count]) => (
-          <div key={label}>
-            <strong>{count ?? "—"}</strong>
+        <div>
+          <strong>
+            {clients?.filter((c) => isClientRecord(c.profileType)).length ??
+              "—"}
+          </strong>
+          <span className="eyebrow">Clients</span>
+        </div>
+        {UNREPORTED.map(([label, reason]) => (
+          <div
+            key={label}
+            role="group"
+            title={reason}
+            aria-label={`${label}: ${reason}`}
+          >
+            <strong>—</strong>
             <span className="eyebrow">{label}</span>
           </div>
         ))}

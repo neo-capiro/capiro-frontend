@@ -75,3 +75,83 @@ Keep domain logic with existing Core owners and frontend feature modules; reuse 
 **Dependencies and finite next slice.** Extend the existing Core brief owner with retained proposal custody and exact source/version/selection binding, using a coordinated public contract and persistence allocation. Reuse existing version/idempotency owner for publication and canonical authorization. Then replace preview-only with a distinct accept action and readback. No standalone browser cache becomes proposal authority; no new schema/public contract is silently edited in this lane.
 
 **Acceptance limits.** Test reviewed A/source change B, edited brief, changed keep-user-edits, wrong prospect/proposal, lost response and repeat acceptance; saved bytes/citations must equal A or be refused. Existing frontend brief tests verify current preview/read/save restrictions only. Full B7 exact refresh remains incomplete; no database or live refresh acceptance is claimed.
+
+## B8 — government calendar forecasts
+
+**Owners/current behavior.** Calendar composition and `funding-{feed,deadline}.ts` use canonical Intelligence funding records. Agency forecasts are excluded from confirmed response deadlines, and unsupported date precision is not converted into a date. The calendar explicitly marks government forecasts unavailable. Existing confirmed meetings, hearings, deadlines and effective dates remain separately owned feeds. No concrete forecast source/contract is approved in this lane.
+
+**Required contract and presentation.** The forecast owner supplies stable identity, source identity/URL, observation date, approximate month/quarter/range with explicit precision, confidence definition, revision and withdrawn/stale status. Preserve uncertainty in filters and exports; timezone conversion must not manufacture a midnight event. Revision changes update forecast history, and a confirmed event has its own linked canonical identity rather than a duplicate forecast presented as confirmed. Reuse calendar composition and status presentation only after their public shapes can represent these distinctions.
+
+**Dependencies/decisions.** Select sources, supported types, meaning of confidence and launch inclusion. Domain-owned provenance/revision history precedes a new calendar adapter. Do not infer response deadlines from anticipated award dates or raw source text. No source contract or shared calendar type is changed speculatively.
+
+**Finite next slice/acceptance.** Once selected, admit one approximate forecast type through its source owner and add a distinct read-only calendar view/export. Check month/range precision in multiple zones, revision/withdrawal history, stale sources, denied access and coexistence with confirmed events. Fifty-two focused funding calendar tests passed; these verify existing exclusion/precision/composition boundaries, not forecast delivery. Forecast ingestion, display and live acceptance remain outstanding.
+
+## B9 — module hub metrics
+
+**Owners/disposition.** `modules/hub/ModuleHub.tsx` and the shared module catalog currently render navigation cards for Engagement, Planner, Workspace, Strategies, Directory, Intelligence and Research Portfolios. Keep these honest navigation entries until a metric is selected. The client-scope roster is not a module activity total. Reuse the existing ModuleCard and domain query owners; do not add a second dashboard aggregation authority in the frontend.
+
+**Requirements/decisions.** Specify each selected card's authoritative owner, unit, counted statuses, full eligible population, time window, client filter, freshness and actor-versus-tenant scope. Empty, denied, unavailable and stale are separate states. One owner's failure must not replace other cards' observations. Reuse B2 definitions when the underlying population and meaning are identical; do not silently reuse a similarly named total with different scope.
+
+**Finite next slice/acceptance.** Select one card metric or retain navigation-only; publish its domain-owned aggregate/coverage contract, then render through the existing card. Check pagination, access withdrawal, filtered scope, zero/denied/stale and independent failures. Three existing hub tests passed, covering navigation and honest roster failure. No metric definitions, public contracts or fabricated counts are introduced; metric delivery and live acceptance remain pending.
+
+## B10 — prospect and copied-document lifecycle
+
+**Owners/current behavior.** Existing `workspace/brief-copy`, prospect brief `client-copy` and Files `upload-copy` use their canonical Workspace commands/receipts and shared encrypted recovery journal. Reviewed commands bind prospect, destination client, exact source version and state. Unknown outcomes retain the original command; readback does not generate a replacement identity. Workspace copy editing preserves original Core source evidence separately from edited body; it never saves back through Core brief APIs. Fresh authority and matching state/detail admission guard current access.
+
+**Remaining receiving gaps.** Copy history lists saved Workspace versions, but a list of version identifiers is not individual saved-version inspection or exact-version export. Whole-draft restore remains explicitly unavailable for drafts containing copied briefs. Do not enable share/send/generation or reuse a general export route without proof that it exports the selected saved copy version with current access. Prospect conversion must retain original prospect/source provenance and re-evaluate destination access rather than inheriting permission from conversion alone.
+
+**Finite next slice/dependencies.** Use the existing Workspace saved-version owner to resolve one historical copied document and export that exact supported body/version. Coordinate the version-detail/export receiving contract where missing; keep copy/create/save separate and reuse existing command receipts/recovery. No alternate document store, copy journal or source evidence authority is introduced.
+
+**Acceptance.** Copy, edit, save, read history and export exact saved content; refuse stale revision/source/destination mismatch; repeat/lost-ack/reload must resolve one destination/version. Prove original Core bytes unchanged and converted/archive/access transitions cannot expose content. One hundred sixteen focused copy, recovery, admission and transaction tests passed. Historical-version inspection/export and connected service/database/browser acceptance are not established by those source tests; full lifecycle completion remains outstanding.
+
+## B11 — audited HQ impersonation
+
+**Owners/current boundary.** Core `capiro-admin` owns session start/end and audit records; tenant middleware and application authority own each request's current actor/tenant/session checks. Start requires a recorded reason and creates a sixty-minute server session. Request tenant selection requires an active matching session and HQ role, so a browser header alone is not authority. Explicit end records each affected session's tenant. Frontend `settings/hq/TenantSettings.tsx` currently disables start and states the missing trusted session binding.
+
+**Required connected slice.** Integrate the existing session owner with the shared frontend session/authority lifecycle, persistent acting-as tenant/operator/expiry indicator and explicit exit. Invalidate incompatible queries, drafts and in-flight responses on enter/exit/expiry/revocation across tabs. Revalidate at authoritative mutation boundaries. Enumerate supported surfaces, and refuse sensitive personal and approval operations where impersonation is unsupported. Do not add a parallel tenant-header authority, browser-only expiry, or standalone cache-clearing scheme.
+
+**Dependencies/acceptance.** Coordinate shared session/auth and Core current-authority contracts with their owner before edits; parent owns concurrent shared Settings work. Audit start, replacement/end and supported actions. Verify unauthorized entry, missing reason, mismatched tenant, changed role, expired/revoked sessions, concurrent tabs and in-flight writes, explicit exit and inaccessible personal/approval paths. Source inspection confirms current owners and disabled entry only; no complete impersonation journey, browser test or new session API is claimed. Finite next slice is one supported read-only surface with server binding and full exit/expiry handling, before writes are enabled.
+
+## B12 — managed-import status
+
+**Owners/current distinction.** Onboard API `setup` exposes an HQ managed-import roster and operator mark-complete action. Its setup task completion is not an import job's row-level progress ledger. Core `intelligence/firm-onboarding` imports selected LDA clients synchronously; Research Portfolios owns a different import-job domain. Frontend `settings/hq/CustomerSettings.tsx` correctly says billing does not supply managed-import status. Existing onboarding chunk receipts distinguish acknowledged, unknown and unattempted client IDs, but do not establish a managed job queue.
+
+**Required contract/decisions.** Choose the canonical managed-import job owner and whether retry/cancel are owner-supported or operator-managed. A job needs durable request identity, tenant/target, queued/running/partial/failed/completed state, observed/updated time, and defined processed/succeeded/rejected/outstanding counts tied to authoritative results. Errors must be actionable and redacted. Pagination and stale readback must be explicit. Never infer completion from client counts, billing slots, provider sync or setup preferences.
+
+**Finite next slice/acceptance.** Publish a read-only list/detail projection from the chosen existing owner with authoritative result reconciliation; wire shared Settings tables/status/pagination. Keep recovery controls absent unless supported by that owner. Test tenant access, full pagination, partial/unknown state, stale observations, count equations and independent source failure. Preparation uses source inspection and diff check; no job API, producer or live managed-import acceptance is delivered here. The operator roster remains distinct from the requested job lifecycle.
+
+## B13 — Provision-to-PE and SAM analyst queues
+
+**Owners/current boundary.** Frontend `settings/analyst/AnalystSettings.tsx` has separate unavailable Provision and SAM panels. Existing reconciliation, program-match and people queues do not supply either requested decision workflow. Core HQ review counts read `provisionPeLink` candidate totals; a count is not a candidate evidence/detail/decision contract. Defense Budget provision linking produces evidence candidates, while SAM belongs to its own funding/source domain. Do not route either decision through unrelated PE-to-Program review.
+
+**Required contracts.** Each domain owns durable candidate identity, source evidence, current version, reviewer authorization and exact decision/reason. List/filter/paging and detail must read the same authorized population. Acceptance/rejection atomically commits the canonical relation/record and durable decision receipt; stale or concurrent decisions conflict or reconcile, and replay returns the original outcome. Refresh queue counts/detail from the authoritative result. Reviewing one candidate must never mutate a different entity selected by name or a stale row index.
+
+**Finite next slice/dependencies.** Allocate versioned list/detail/decision contracts and durable receipt ownership separately for Provision-to-PE and SAM; use existing domain persistence and shared Settings table, status and QueuePagination components. Deliver one complete evidence-review-decision-readback path per queue before advertising either as usable. Tests must cover reviewer loss, foreign candidate/source, concurrent decisions, exact expected revision, lost acknowledgment, repeat decision and correct count/result. Source inspection and diff check only; these two connected queues and their acceptance remain undelivered, with explicit unavailable UI preserved.
+
+## B14 — administrative disposition inventory
+
+The following inventory describes current source surfaces, not a fresh activation or live acceptance claim. Existing domain permissions and mutation recovery remain required; a route's existence alone grants no new product scope.
+
+| Capability | Disposition for this batch | Existing owner / boundary |
+| --- | --- | --- |
+| Team listing, invitations/resend, role/billing permission and permitted member removal | App-supported source | TeamSettings, tenant-admin and identity outbox; permission-specific controls |
+| Branding name/logo upload, contact info, client sharing and usage | App-supported source | Existing Settings feature modules and canonical tenant/client owners |
+| Billing customer views/comp, HQ tenant creation/deletion and AI credential administration | App-supported source, only current supported controls | HQ role and existing billing/tenant/credential owners; no broader authority inferred |
+| Existing analyst reconciliation, PE-to-Program, people, aliases, quarantine and HQ audit | App-supported source | Existing analyst panels and domain operations; B13 additions remain unavailable |
+| Tenant redacted audit log | Intentionally API-only in this batch; optional UI decision pending | Core `tenant-admin/audit-logs`, separate from HQ raw audit |
+| HQ impersonation | API-only with frontend unavailable | B11 trusted binding/expiry/exit work required |
+| Managed import operator completion | API/operator-managed; job UI unavailable | Onboard API setup owner; B12 job contract not supplied by billing |
+| Password reset | Externally managed hosted identity flow | Core helper returns the hosted sign-in/forgot-password destination; no new reset UI |
+| Logo deletion and invitation cancellation | No added app controls; API/operator-only where supported | Existing tenant/identity owners must establish exact supported operation before selection |
+| New policy editing or providers | Deferred; externally managed existing configuration only | No new controls or provider commitments from backend utilities |
+| Provision-to-PE and SAM review | Unavailable pending domain contracts | B13, separate queues and exact durable decisions |
+
+**Audit requirements if selected.** Reuse Core's redacted tenant projection with current tenant-admin authorization and server-side authorized filters/pagination. The existing service scopes both query/count to tenant and omits HQ before/after payloads, internal staff identity and request metadata. Never repurpose the HQ audit operation or fetch privileged rows and redact in the browser. Use existing Settings table/status/pagination components and keep routes thin.
+
+**Finite next slice/acceptance.** User selects additional UI at batch end; absent selection the dispositions above remain. For tenant audit, connect only the existing redacted read route and test foreign-tenant/ordinary-role refusal, redaction, filters, paging and access change. Source inspection and diff check complete this inventory. No additional administrative controls or live audit acceptance are delivered.
+
+## Item 16 preparation outcome and next bounded delivery
+
+All B1–B14 now have current owners, contract/dependency boundaries, acceptance requirements and finite next slices. This is requirements preparation, not completion of the full application feature set. B1 includes an original-run uncertain-readback correction; other items preserve existing behavior and name missing product work rather than fabricate success.
+
+The first implementation slice with a concrete demonstrated defect is B7: retain one exact refresh proposal in the existing Core brief owner, bind base/source/edit-treatment, accept it once with a durable version receipt, then wire the preview-only frontend. Allocate the public contract and persistence with the Core owner before edits. B6, B10, B11 and B13 need their named receiving integrations; B2/B4/B5/B8/B9/B12/B14 need the listed decisions. B3 needs connected acceptance of the existing source path. Provider calls, builds, deployments and live acceptance remain outside this source-only pass.

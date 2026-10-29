@@ -50,7 +50,10 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   ),
   integrations: () => <IntegrationSettings />,
   memory: (context) => (
-    <MemorySettings reviewEnabled={context.memoryReviewEnabled} />
+    <MemorySettings
+      reviewEnabled={context.memoryReviewEnabled}
+      readOnlyPreview={context.readOnlyPreview}
+    />
   ),
   "meri-preferences": (context) => context.meriPreferences,
   billing: () => <BillingSettings />,
@@ -82,7 +85,7 @@ const titles: Record<string, string> = {
   "meri-preferences": "Preferences",
 };
 const descriptions: Record<string, string> = {
-  personal: "The only Settings page everyone sees.",
+  personal: "Personal settings for your workspace account.",
   "contact-info": "Your organization’s contact details.",
   "client-sharing":
     "Research Portfolio links your firm has shared with clients, and the workspace-wide switch.",

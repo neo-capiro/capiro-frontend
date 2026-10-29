@@ -26,6 +26,7 @@ const retainedValues = [
   "restoreDefault",
   "expectedModelOverride",
   "expectedUpdatedAt",
+  "expectedVersion",
   "confirmed",
   "relationshipType",
   "rollUpAwards",
@@ -46,14 +47,16 @@ export async function persistSettingsWrite(
     write.expectedInvitationHash = await settingsRequestHash(
       write.expectedInvitation,
     );
-  const body =
-    write.operation === "settings.support.create"
-      ? { id: write.input.body?.id }
-      : Object.fromEntries(
-          Object.entries(write.input.body ?? {}).filter(([name]) =>
-            retainedValues.includes(name),
-          ),
-        );
+  const body = [
+    "settings.support.create",
+    "settings.memory.grants.create",
+  ].includes(write.operation)
+    ? { id: write.input.body?.id }
+    : Object.fromEntries(
+        Object.entries(write.input.body ?? {}).filter(([name]) =>
+          retainedValues.includes(name),
+        ),
+      );
   storage.setItem(
     key,
     JSON.stringify({

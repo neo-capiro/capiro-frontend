@@ -1,6 +1,7 @@
 "use client";
 import type { RefObject } from "react";
 import Link from "next/link";
+import { isClientRecord } from "@/shared/portfolio/domain/profile-type";
 import type { Client } from "./contracts";
 import type { PortfolioIndexState } from "./filter";
 import { IndexFilters } from "./IndexFilters";
@@ -36,7 +37,7 @@ export function IndexNavigation({
         {
           label: "Clients",
           value: "CLIENT",
-          count: records?.filter((client) => client.profileType === "CLIENT")
+          count: records?.filter((client) => isClientRecord(client.profileType))
             .length,
         },
         { label: "Prospects", value: "PROSPECT", count: prospectCount },

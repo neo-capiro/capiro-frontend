@@ -14,7 +14,7 @@ export type IntentRow = Readonly<{
   /** Present only for a visible command proposal; the exact content the server retained. */
   proposal: IntentsProposal | null;
   fields: readonly IntentField[];
-  /** The owner's observed task or published document result. */
+  /** The owner's observed result, including submission and current memory review state. */
   result: readonly IntentField[];
   task?: Readonly<{ id: string; clientId: string | null }>;
   /** Saved Client Files attachments, distinct from Meri artifact or version IDs. */

@@ -41,7 +41,7 @@ export function UserPreferencesHost({ chrome }: { chrome: SettingsChrome }) {
         description: "Your revisioned personal Meri settings.",
       }}
       primary={
-        owner ? (
+        owner && !identity.loading && !identity.error ? (
           <OwnedPreferences key={JSON.stringify(owner)} owner={owner} />
         ) : (
           <p role="status">
@@ -118,10 +118,28 @@ function PreferencesView({
           save={(preferences) => {
             void controller.save(preferences).then(() => {
               if (controller.snapshot().status === "saved")
-                toast.success("Personal preferences saved");
+                toast.success(
+                  "Save accepted. Check current preferences to confirm.",
+                );
             });
           }}
         />
+      ) : null}
+      {view.status === "ready" && view.document ? (
+        <div>
+          <button
+            type="button"
+            className={ui.outline}
+            onClick={() => void controller.resetPersonalDefaults()}
+          >
+            Reset model and panel defaults
+          </button>
+          <p>
+            Restores the configured model, system theme, comfortable density and
+            default timezone through a revision-checked save. Notification
+            choices and the stored default client are preserved.
+          </p>
+        </div>
       ) : null}
       {view.status !== "access-lost" &&
       view.status !== "saving" &&

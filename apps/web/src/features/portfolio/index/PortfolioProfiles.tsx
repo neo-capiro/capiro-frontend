@@ -34,9 +34,13 @@ export function PortfolioProfiles({
     (client) => client.status !== "archived",
   );
   const layout = usePortfolioLayout(currentCatalog.map(({ id }) => id));
-  const layoutCatalog = currentCatalog.filter(({ id }) =>
-    layout.catalogIds.includes(id),
-  );
+  // The layout receipt owns reorderable membership, so only an authoritative read
+  // may narrow the rendered set. A failed read keeps the accessible roster
+  // visible (the hook already refuses reordering and saving) instead of hiding
+  // every card behind the Customize surface.
+  const layoutCatalog = layout.catalogKnown
+    ? currentCatalog.filter(({ id }) => layout.catalogIds.includes(id))
+    : currentCatalog;
   const byId = new Map(
     (customizing ? layoutCatalog : rows).map((client) => [client.id, client]),
   );

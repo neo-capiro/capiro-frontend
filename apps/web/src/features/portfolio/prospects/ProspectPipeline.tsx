@@ -16,10 +16,58 @@ import {
   type Prospect,
   type StageCatalog,
 } from "./contracts";
+import type { DragEvent, ReactNode } from "react";
 import type { z } from "zod";
 import { StageEditor } from "./StageEditor";
 import styles from "./pipeline.module.css";
 type PipelineData = z.infer<typeof prospectListSchema>;
+
+/**
+ * One board column. Portfolio stages and pre-migration stages share this shell so
+ * a stage can never be rendered differently depending on which vocabulary it
+ * belongs to. `marker` and `add` are the only design differences between them.
+ */
+function PipelineColumn({
+  stage,
+  count,
+  records,
+  renderCard,
+  emptyLabel,
+  marker,
+  add,
+  drop,
+}: {
+  stage: string;
+  count: number;
+  records: Prospect[];
+  renderCard: (record: Prospect) => ReactNode;
+  emptyLabel: string;
+  marker?: ReactNode;
+  add?: ReactNode;
+  drop?: { dragging: boolean; onDrop: (event: DragEvent) => void };
+}) {
+  return (
+    <section
+      className={styles.pipelineColumn}
+      data-empty={records.length === 0}
+      onDragOver={
+        drop?.dragging ? (event) => event.preventDefault() : undefined
+      }
+      onDrop={drop?.onDrop}
+    >
+      <header className={styles.pipelineColumnHeader}>
+        {marker}
+        <h3>{stageLabel(stage)}</h3>
+        <span className={styles.pipelineCount}>{count}</span>
+        {add}
+      </header>
+      {records.map(renderCard)}
+      {records.length === 0 && (
+        <p className={styles.pipelineEmpty}>{emptyLabel}</p>
+      )}
+    </section>
+  );
+}
 export function ProspectPipeline({
   data,
   catalog,
@@ -35,6 +83,14 @@ export function ProspectPipeline({
   const [dragId, setDragId] = useState<string>();
   const owners = useMemberOptions();
   const legacy = data.prospects.filter((row) => !isPortfolioStage(row.stage));
+  const legacyStagesSet = new Set(legacy.map((row) => row.stage));
+  const legacyStageCounts = Object.fromEntries(
+    Array.from(legacyStagesSet).map((stage) => [
+      stage,
+      data.counts.byStage[stage] ??
+        legacy.filter((r) => r.stage === stage).length,
+    ]),
+  );
   function card(record: Prospect) {
     const canMove = Boolean(
       catalog &&
@@ -149,31 +205,19 @@ export function ProspectPipeline({
               );
               const count = data.counts.byStage[stage] ?? 0;
               return (
-                <section
-                  className={styles.pipelineColumn}
-                  data-empty={records.length === 0}
+                <PipelineColumn
                   key={stage}
-                  onDragOver={(event) => {
-                    if (dragId) event.preventDefault();
-                  }}
-                  onDrop={(event) => {
-                    event.preventDefault();
-                    const record = data.prospects.find(
-                      (row) =>
-                        row.id === dragId &&
-                        row.id === event.dataTransfer.getData("text/plain"),
-                    );
-                    if (record && record.stage !== stage)
-                      setMoving({ record, stage });
-                    setDragId(undefined);
-                  }}
-                >
-                  <header className={styles.pipelineColumnHeader}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                  stage={stage}
+                  count={count}
+                  records={records}
+                  renderCard={card}
+                  emptyLabel={count ? "Not in loaded results" : "No prospects"}
+                  marker={
+                    /* eslint-disable-next-line @next/next/no-img-element */
                     <img src="/design/411-44335-imgEllipse.svg" alt="" />
-                    <h3>{stageLabel(stage)}</h3>
-                    <span className={styles.pipelineCount}>{count}</span>
-                    {stage === "identified" && catalog ? (
+                  }
+                  add={
+                    stage === "identified" && catalog ? (
                       <Link
                         className={styles.pipelineAdd}
                         href="/portfolio/prospects?new=1"
@@ -192,28 +236,44 @@ export function ProspectPipeline({
                       >
                         +
                       </button>
-                    )}
-                  </header>
-                  {records.map(card)}
-                  {records.length === 0 && (
-                    <p className={styles.pipelineEmpty}>
-                      {count ? "Not in loaded results" : "No prospects"}
-                    </p>
-                  )}
-                </section>
+                    )
+                  }
+                  drop={{
+                    dragging: Boolean(dragId),
+                    onDrop: (event) => {
+                      event.preventDefault();
+                      const record = data.prospects.find(
+                        (row) =>
+                          row.id === dragId &&
+                          row.id === event.dataTransfer.getData("text/plain"),
+                      );
+                      if (record && record.stage !== stage)
+                        setMoving({ record, stage });
+                      setDragId(undefined);
+                    },
+                  }}
+                />
               );
             })}
-            {legacy.length > 0 && (
-              <section className={styles.pipelineColumn} data-empty={false}>
-                <header className={styles.pipelineColumnHeader}>
-                  <h3>Previous stages</h3>
-                </header>
-                <p className={styles.pipelineEmpty}>
-                  Existing stage values are preserved until migration.
-                </p>
-                {legacy.map(card)}
-              </section>
-            )}
+            {legacy.length > 0 &&
+              Array.from(legacyStagesSet).map((stage) => (
+                <PipelineColumn
+                  key={stage}
+                  stage={stage}
+                  count={legacyStageCounts[stage] ?? 0}
+                  records={legacy.filter((row) => row.stage === stage)}
+                  renderCard={card}
+                  emptyLabel="No prospects"
+                  marker={
+                    <span
+                      className="eyebrow"
+                      title="Previous stage — existing stage values are preserved until migration."
+                    >
+                      Previous
+                    </span>
+                  }
+                />
+              ))}
           </div>
         </div>
         <footer className={styles.pipelineFooter}>

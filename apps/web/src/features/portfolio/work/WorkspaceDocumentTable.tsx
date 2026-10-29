@@ -92,7 +92,7 @@ export function WorkspaceDocumentTable({
         </tbody>
       </table>
       {rows.length === 0 && (
-        <p className="empty">No documents can be matched to this client.</p>
+        <p className="empty">No documents are linked to this client.</p>
       )}
     </div>
   );
