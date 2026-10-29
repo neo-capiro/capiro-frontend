@@ -94,8 +94,9 @@ export function AdvocacyBrowser({
           />
           {timeline.data && (
             <p className={styles.loaded}>
-              {timeline.data.length} loaded events · Latest 500 at most; older
-              history may be outside this view.
+              {timeline.data.length} recent{" "}
+              {timeline.data.length === 1 ? "event" : "events"}. Older history
+              may not be listed.
             </p>
           )}
           {events ? (
