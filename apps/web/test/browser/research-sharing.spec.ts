@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 import {
   dashboard,
   design,
@@ -1019,4 +1019,160 @@ test("unavailable publication recovery storage prevents a new write", async ({
   expect(
     writes.filter((row) => row.key === "research.shareLinks.publish"),
   ).toHaveLength(0);
+});
+
+/** Press Tab until the target owns focus; returns the number of presses or -1. */
+async function tabTo(page: Page, target: Locator, limit = 80) {
+  for (let presses = 1; presses <= limit; presses += 1) {
+    await page.keyboard.press("Tab");
+    if (await target.evaluate((node) => node === document.activeElement))
+      return presses;
+  }
+  return -1;
+}
+
+const overflowingLinks = [
+  { ...link, id: "10000000-0000-4000-8000-000000000011" },
+  {
+    ...link,
+    id: "10000000-0000-4000-8000-000000000012",
+    clientName: "Synthetic client two",
+    snapshotName: "Synthetic snapshot two",
+  },
+  {
+    ...link,
+    id: "10000000-0000-4000-8000-000000000013",
+    clientName: "Synthetic client three",
+    status: "revoked",
+  },
+];
+
+test("overflowing sharing tables are keyboard scroll regions that never activate a row", async ({
+  page,
+}) => {
+  const writes = await sharingApi(page, {
+    enabled: true,
+    links: overflowingLinks,
+  });
+  // ReuseDesign queries research.list, which the shared harness mock does not
+  // stub (that gap already fails the pre-existing sharing cases at this base).
+  // Stub it here only, so this case can exercise the tables without editing the
+  // shared fixture; the inherited failure stays visible.
+  await page.route(/\/api\/capiro\/research\.list(\?|$)/, (route) =>
+    route.fulfill({
+      json: { items: [{ id: ids.portfolio, name: portfolio.name }] },
+    }),
+  );
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/research-sharing.html");
+
+  const linksRegion = page.getByRole("region", {
+    name: "Published client links",
+  });
+  const designsRegion = page.getByRole("region", { name: "Dashboard designs" });
+  await expect(linksRegion).toBeVisible();
+  await expect(designsRegion).toBeVisible();
+  // Named from the table's existing caption, and a real tab stop while clipped.
+  await expect(linksRegion).toHaveAttribute("tabindex", "0");
+  await expect(designsRegion).toHaveAttribute("tabindex", "0");
+
+  const geometry = await linksRegion.evaluate((node) => ({
+    client: node.clientWidth,
+    scroll: node.scrollWidth,
+  }));
+  expect(geometry.scroll).toBeGreaterThan(geometry.client);
+
+  // Reachable by Tab alone, and visibly indicated once focused.
+  expect(await tabTo(page, linksRegion)).toBeGreaterThan(0);
+  const focusRing = await linksRegion.evaluate((node) => {
+    const style = getComputedStyle(node);
+    return { width: style.outlineWidth, style: style.outlineStyle };
+  });
+  expect(focusRing.style).not.toBe("none");
+  expect(focusRing.width).not.toBe("0px");
+
+  // Arrow keys move the horizontal viewport to the clipped last column.
+  expect(await linksRegion.evaluate((node) => node.scrollLeft)).toBe(0);
+  for (let press = 0; press < 40; press += 1)
+    await page.keyboard.press("ArrowRight");
+  await expect
+    .poll(() => linksRegion.evaluate((node) => node.scrollLeft))
+    .toBeGreaterThan(0);
+  const scrolled = await linksRegion.evaluate((node) => {
+    const box = node.getBoundingClientRect();
+    const headers = node.querySelectorAll("th");
+    const last = headers[headers.length - 1]!;
+    return {
+      right: box.right,
+      lastColumnRight: last.getBoundingClientRect().right,
+    };
+  });
+  expect(scrolled.lastColumnRight).toBeLessThanOrEqual(scrolled.right + 1);
+
+  // Tab leaves the region (no trap) and Shift+Tab returns to it.
+  await page.keyboard.press("Tab");
+  expect(
+    await linksRegion.evaluate((node) => node === document.activeElement),
+  ).toBe(false);
+  await page.keyboard.press("Shift+Tab");
+  expect(
+    await linksRegion.evaluate((node) => node === document.activeElement),
+  ).toBe(true);
+
+  // Scrolling and tabbing activated nothing: no write, no dialog, no navigation.
+  expect(writes).toEqual([]);
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  expect(new URL(page.url()).hostname).toBe("127.0.0.1");
+
+  // The second overflowing wrapper behaves the same way.
+  expect(await tabTo(page, designsRegion)).toBeGreaterThan(0);
+  for (let press = 0; press < 40; press += 1)
+    await page.keyboard.press("ArrowRight");
+  await expect
+    .poll(() => designsRegion.evaluate((node) => node.scrollLeft))
+    .toBeGreaterThan(0);
+  expect(writes).toEqual([]);
+});
+
+test("a table that fits keeps its geometry and adds no keyboard stop", async ({
+  page,
+}) => {
+  const writes = await sharingApi(page, {
+    enabled: true,
+    links: overflowingLinks,
+  });
+  // ReuseDesign queries research.list, which the shared harness mock does not
+  // stub (that gap already fails the pre-existing sharing cases at this base).
+  // Stub it here only, so this case can exercise the tables without editing the
+  // shared fixture; the inherited failure stays visible.
+  await page.route(/\/api\/capiro\/research\.list(\?|$)/, (route) =>
+    route.fulfill({
+      json: { items: [{ id: ids.portfolio, name: portfolio.name }] },
+    }),
+  );
+  await page.setViewportSize({ width: 1440, height: 1040 });
+  await page.goto("/research-sharing.html");
+
+  // Nothing is clipped at desktop width, so neither wrapper is a region or a stop.
+  await expect(
+    page.getByRole("region", { name: "Published client links" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("region", { name: "Dashboard designs" }),
+  ).toHaveCount(0);
+  await expect(page.getByRole("table")).toHaveCount(2);
+  for (const wrapper of await page.locator("[class*='tableScroll']").all()) {
+    const geometry = await wrapper.evaluate((node) => ({
+      client: node.clientWidth,
+      scroll: node.scrollWidth,
+      tabIndex: node.getAttribute("tabindex"),
+      role: node.getAttribute("role"),
+    }));
+    expect(geometry.scroll - geometry.client).toBeLessThanOrEqual(1);
+    expect(geometry.tabIndex).toBeNull();
+    expect(geometry.role).toBeNull();
+  }
+  // Native table semantics are unchanged by the containment wrapper.
+  await expect(page.getByRole("table")).toHaveCount(2);
+  expect(writes).toEqual([]);
 });

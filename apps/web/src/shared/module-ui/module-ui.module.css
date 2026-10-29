@@ -252,6 +252,12 @@
   border-radius: 10px;
   background: var(--card);
 }
+/* An overflowing table scrolls horizontally, so the wrapper is a tab stop and
+   needs the ordinary focus indication; a container that fits is not focusable. */
+.tableScroll:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+}
 .table {
   width: 100%;
   border-collapse: collapse;

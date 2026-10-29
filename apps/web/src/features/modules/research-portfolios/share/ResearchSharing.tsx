@@ -216,6 +216,7 @@ export function ResearchSharing({ portfolio }: { portfolio: ResearchDetail }) {
             rowKey={(d) => d.id}
             caption="Dashboard designs"
             emptyMessage="No designs yet. Create one to publish a link."
+            scrollRegion
             columns={[
               { key: "name", label: "Design", render: (d) => d.name },
               { key: "version", label: "Version", render: (d) => d.version },
@@ -639,6 +640,7 @@ function ShareLinks({
           rowKey={(l) => l.id}
           caption="Published client links"
           emptyMessage="No links published yet."
+          scrollRegion
           columns={[
             { key: "client", label: "Client", render: (l) => l.clientName },
             {
