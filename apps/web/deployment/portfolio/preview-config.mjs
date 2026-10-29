@@ -26,12 +26,16 @@ const nonMeriHosts = new Set([
   'core-roster-preview.capiro.ai',
 ]);
 const fixedParameters = Object.freeze({
-  CoreApiBaseUrl: `${origin}/api`,
+  // The preview API transports stay on the verified first-chat origin; only the browser
+  // origin (ExistingAppUrl / CapiroRequestOrigin) becomes app.capiro.ai.
+  CoreApiBaseUrl: corePreviewApi,
   StrategyApiBaseUrl: '',
-  WorkspaceApiBaseUrl: `${origin}/workspace-api`,
-  IntelligenceApiBaseUrl: `${origin}/intel-api`,
+  WorkspaceApiBaseUrl: 'https://first-chat-preview.app-dev.capiro.ai/workspace-api',
+  IntelligenceApiBaseUrl: 'https://first-chat-preview.app-dev.capiro.ai/intel-api',
   ExistingAppUrl: origin,
   TrackerBackend: 'intelligence',
+  // Held until the owner binds a preview onboarding endpoint; empty keeps it disabled.
+  OnboardApiBaseUrl: '',
 });
 const ordinaryServiceParameters = Object.freeze({
   CoreApiBaseUrl: corePreviewApi,
@@ -231,7 +235,7 @@ export function renderPreviewConfiguration(bindings) {
       INTELLIGENCE_API_BASE_URL: services.IntelligenceApiBaseUrl,
       CAPIRO_EXISTING_APP_URL: origin,
       TRACKER_BACKEND: 'intelligence',
-      ONBOARD_API_BASE_URL: '',
+      ONBOARD_API_BASE_URL: values.OnboardApiBaseUrl,
       MERI_API_BASE_URL: meri.baseUrl,
       MERI_CONVERSATION_WORKFLOW_ENABLED: String(meri.enabled),
       MERI_ACTION_WORKFLOW_ENABLED: values.MeriActionWorkflowEnabled,
