@@ -3,6 +3,10 @@ import { z } from "zod";
 import type { CapiroConfig } from "./config";
 import { defineOperation } from "./contracts";
 import { handleCapiroRequest } from "./gateway";
+import {
+  intelligenceOperations,
+  normalizeBillId,
+} from "./operations/intelligence";
 
 const registry = {
   "people.read": defineOperation({
@@ -363,4 +367,190 @@ it("bounds input size before dispatch and preserves acknowledged 204 responses",
   );
   expect(deleted.status).toBe(204);
   expect(await deleted.text()).toBe("");
+});
+
+/**
+ * Bill detail receiver: an identifier-only report link resolves the existing global
+ * factual dossier. These cover the operation, path, auth forwarding and the negative
+ * response/auth cases; the page route and its Clerk matcher are checked separately.
+ */
+const dossierRegistry = {
+  "intelligence.bills.dossier":
+    intelligenceOperations["intelligence.bills.dossier"],
+};
+const dossierConfig: CapiroConfig = {
+  services: {
+    core: "https://api.example.test/api",
+    intelligence: "https://intel.example.test/api",
+  },
+  authConfigured: true,
+  issues: [],
+};
+const dossier = {
+  bill: {
+    id: "119-hr-1234",
+    num: "H.R. 1234",
+    title: "An illustrative official title",
+    statusLabel: "Referred to Committee",
+    statusAt: "2025-03-04",
+    jurisdiction: "federal",
+    isState: false,
+    url: "https://www.congress.gov/bill/119th-congress/house-bill/1234",
+  },
+  latest: { text: "Referred to the Committee on Rules.", date: "2025-03-04" },
+  provenance: { lastSyncedAt: "2025-03-05T00:00:00.000Z", sourceCheckedAt: null },
+};
+
+it.each([
+  ["119-hr-1234", "federal"],
+  ["tx-2025-hb1234", "state"],
+])(
+  "reads the one global dossier for a canonical %s id",
+  async (billId) => {
+    const fetcher = vi.fn(async () =>
+      Response.json({
+        ...dossier,
+        bill: {
+          ...dossier.bill,
+          id: billId,
+          isState: billId.startsWith("tx-"),
+        },
+      }),
+    );
+    const response = await handleCapiroRequest(
+      read({ params: { billId } }, "intelligence.bills.dossier"),
+      "intelligence.bills.dossier",
+      dossierRegistry,
+      dossierConfig,
+      token,
+      fetcher,
+    );
+    expect(response.status).toBe(200);
+    const [url, options] = fetcher.mock.calls[0]! as unknown as [
+      URL,
+      RequestInit,
+    ];
+    expect(url.toString()).toBe(
+      `https://intel.example.test/api/bills/${billId}/dossier`,
+    );
+    expect(options.method).toBe("GET");
+    const headers = new Headers(options.headers);
+    expect(headers.get("Authorization")).toBe("Bearer existing-clerk-token");
+    expect(headers.get("X-Capiro-Tenant")).toBeNull();
+    expect(await response.json()).toEqual({
+      ...dossier,
+      bill: { ...dossier.bill, id: billId, isState: billId.startsWith("tx-") },
+    });
+  },
+);
+
+it.each([
+  ["119-hr", "an incomplete federal id"],
+  ["119-hr-1234/records", "a trailing path segment"],
+  ["119-hr-1234?section=votes", "query text"],
+  ["119%2Fhr-1234", "an encoded separator"],
+  ["119-hr-12.34", "a dot separator"],
+  ["../hr-1234", "traversal"],
+  ["119-HR-1234", "non-canonical casing"],
+  ["tx-2025-hb", "an incomplete state key"],
+  ["", "an empty id"],
+  ["1".repeat(65), "an over-long id"],
+])("refuses %s before transport (%s)", async (billId) => {
+  const fetcher = vi.fn();
+  const response = await handleCapiroRequest(
+    read({ params: { billId } }, "intelligence.bills.dossier"),
+    "intelligence.bills.dossier",
+    dossierRegistry,
+    dossierConfig,
+    token,
+    fetcher,
+  );
+  expect(response.status).toBe(400);
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+it("rejects an anonymous read without calling the service", async () => {
+  const fetcher = vi.fn();
+  const response = await handleCapiroRequest(
+    read({ params: { billId: "119-hr-1234" } }, "intelligence.bills.dossier"),
+    "intelligence.bills.dossier",
+    dossierRegistry,
+    dossierConfig,
+    async () => null,
+    fetcher,
+  );
+  expect(response.status).toBe(401);
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+it.each([404, 403, 500])(
+  "preserves a %s dossier outcome instead of rendering facts",
+  async (status) => {
+    const fetcher = vi.fn(async () =>
+      Response.json({ message: "denied" }, { status }),
+    );
+    const response = await handleCapiroRequest(
+      read({ params: { billId: "119-hr-1234" } }, "intelligence.bills.dossier"),
+      "intelligence.bills.dossier",
+      dossierRegistry,
+      dossierConfig,
+      token,
+      fetcher,
+    );
+    expect(response.status).toBe(status);
+  },
+);
+
+it("reports a malformed dossier as an upstream failure and accepts nullable facts", async () => {
+  const malformed = vi.fn(async () => Response.json({ bill: { id: "x" } }));
+  expect(
+    (
+      await handleCapiroRequest(
+        read({ params: { billId: "119-hr-1234" } }, "intelligence.bills.dossier"),
+        "intelligence.bills.dossier",
+        dossierRegistry,
+        dossierConfig,
+        token,
+        malformed,
+      )
+    ).status,
+  ).toBe(502);
+
+  const nullable = vi.fn(async () =>
+    Response.json({
+      bill: {
+        id: "119-hr-1234",
+        num: "H.R. 1234",
+        title: "An illustrative official title",
+        statusLabel: "Referred to Committee",
+        statusAt: null,
+        jurisdiction: null,
+        isState: false,
+        url: null,
+      },
+      latest: { text: null, date: null },
+      provenance: { lastSyncedAt: null, sourceCheckedAt: null },
+    }),
+  );
+  const ok = await handleCapiroRequest(
+    read({ params: { billId: "119-hr-1234" } }, "intelligence.bills.dossier"),
+    "intelligence.bills.dossier",
+    dossierRegistry,
+    dossierConfig,
+    token,
+    nullable,
+  );
+  expect(ok.status).toBe(200);
+  const body = (await ok.json()) as { bill: { url: null }; latest: { text: null } };
+  expect(body.bill.url).toBeNull();
+  expect(body.latest.text).toBeNull();
+});
+
+it("normalizes canonical bill ids and rejects everything else", () => {
+  expect(normalizeBillId(" 119-HR-1234 ")).toBe("119-hr-1234");
+  expect(normalizeBillId("tx-2025-hb1234")).toBe("tx-2025-hb1234");
+  expect(normalizeBillId("119-hr-1234/records")).toBeNull();
+  expect(normalizeBillId("119%2Fhr-1234")).toBeNull();
+  expect(normalizeBillId("../bills")).toBeNull();
+  expect(normalizeBillId("")).toBeNull();
 });
