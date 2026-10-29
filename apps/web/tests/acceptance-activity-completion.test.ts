@@ -25,16 +25,19 @@ afterEach(() => {
   for (const cache of caches.splice(0)) cache.clear();
 });
 
-it("refreshes only the existing exact feed while the original actor remains current", async () => {
+it("refreshes the existing feed and its counts while the original actor remains current", async () => {
   const { cache, completion } = setup();
   const otherClient = profileKey("client-b", "activity");
   const descendant = [...activityKey, "unrelated-projection"];
+  const metrics = [...activityKey, "metrics", "current-actor"];
   cache.setQueryData(otherClient, []);
   cache.setQueryData(descendant, []);
+  cache.setQueryData(metrics, { counts: {} });
   await completion.invalidate();
   expect(cache.getQueryState(activityKey)?.isInvalidated).toBe(true);
   expect(cache.getQueryState(otherClient)?.isInvalidated).toBe(false);
   expect(cache.getQueryState(descendant)?.isInvalidated).toBe(false);
+  expect(cache.getQueryState(metrics)?.isInvalidated).toBe(true);
   completion.dispose();
 });
 
