@@ -57,6 +57,12 @@ function approvedClientBriefAuthorityImport(from, to, entry) {
   return to === prospectActionsEntry && allowed && ['named', 'other'].includes(entry.kind)
     && entry.names.length > 0 && entry.names.every(name => allowed.has(name));
 }
+const memoryDraftEditorEntry = `${appSource}features/settings/memory-drafts-public.ts`;
+function approvedOnboardMemoryEditorImport(from, to, entry) {
+  return from === `${appSource}features/onboard/pages/setup/AiSettingsOverlay.tsx`
+    && to === memoryDraftEditorEntry && entry.kind === 'named'
+    && entry.names.length === 1 && entry.names[0] === 'MemoryDraftEditor';
+}
 const newsletterDeliveryOwner = `${appSource}features/modules/engagement/newsletter-delivery/`;
 const newsletterRelationshipImports = new Map([
   [`${newsletterDeliveryOwner}delivery-api.ts`, new Set(['sendingMailboxesSchema', 'SendingMailbox'])],
@@ -248,7 +254,7 @@ function edgeViolation(from, to, entry, module) {
   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;
   if (from.startsWith(`${appSource}shared/`) && /^apps\/web\/src\/(?:features|app)\//.test(to)) return `${from}: foundations import ${to}`;
   if (feature(from) && to.startsWith(`${appSource}app/`)) return `${from}: feature imports app composition ${to}`;
-  if (feature(from) && feature(to) && feature(from) !== feature(to) && !approvedClientBriefAuthorityImport(from, to, entry) && !approvedNewsletterRelationshipImport(from, to, entry) && !approvedTaskDestinationImport(from, to, entry) && !approvedResearchSharePreviewImport(from, to, entry)) return `${from}: private cross-feature import ${to}`;
+  if (feature(from) && feature(to) && feature(from) !== feature(to) && !approvedClientBriefAuthorityImport(from, to, entry) && !approvedNewsletterRelationshipImport(from, to, entry) && !approvedTaskDestinationImport(from, to, entry) && !approvedResearchSharePreviewImport(from, to, entry) && !approvedOnboardMemoryEditorImport(from, to, entry)) return `${from}: private cross-feature import ${to}`;
   if (feature(from) === 'portfolio' && feature(to) === 'portfolio' && portfolioArea(from) !== portfolioArea(to) && !publicEntry(to)) return `${from}: private Portfolio domain import ${to}; use public.ts or a named *-public.ts entry`;
   return undefined;
 }

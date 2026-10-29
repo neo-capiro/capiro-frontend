@@ -337,3 +337,23 @@ test('document Blueprint consumers use the exact governed public receiver export
     assert.ok(inspectSources(new Map([[file, `import '${specifier}';`]])).errors.some(error => error.includes('non-public package')), specifier);
   }
 });
+
+test('onboarding consumes only the canonical Settings draft editor public entry', () => {
+  const from = 'apps/web/src/features/onboard/pages/setup/AiSettingsOverlay.tsx';
+  const entry = 'apps/web/src/features/settings/memory-drafts-public.ts';
+  const inspect = (reader, source, target = entry) => inspectSources(new Map([
+    [reader, source], [target, 'export const MemoryDraftEditor = () => null;'],
+  ])).errors;
+  assert.deepEqual(inspect(from, "import { MemoryDraftEditor } from '@/features/settings/memory-drafts-public';"), []);
+  for (const source of [
+    "import * as editor from '@/features/settings/memory-drafts-public';",
+    "export * from '@/features/settings/memory-drafts-public';",
+    "import { MemoryDraftEditor, privateWriter } from '@/features/settings/memory-drafts-public';",
+  ]) assert.ok(inspect(from, source).some(error => error.includes('private cross-feature')));
+  assert.ok(inspect(from.replace('AiSettingsOverlay', 'AnotherReader'),
+    "import { MemoryDraftEditor } from '@/features/settings/memory-drafts-public';")
+    .some(error => error.includes('private cross-feature')));
+  assert.ok(inspect(from, "import { MemoryDraftEditor } from '@/features/settings/memory/drafts/MemoryDraftEditor';",
+    'apps/web/src/features/settings/memory/drafts/MemoryDraftEditor.tsx')
+    .some(error => error.includes('private cross-feature')));
+});

@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "@capiro/ui/dialog";
 import { Icon } from "./icons";
+import dialogStyles from "@/shared/portfolio/ui/dialog.module.css";
 
 /** Adopted dialog owns Escape, focus containment and dismissal. */
 export function Modal({
@@ -29,7 +30,7 @@ export function Modal({
       }}
     >
       <DialogContent
-        className="onboard-surface"
+        className={`${dialogStyles.content} onboard-surface`}
         showCloseButton={false}
         onOpenAutoFocus={() => {
           opener.current =

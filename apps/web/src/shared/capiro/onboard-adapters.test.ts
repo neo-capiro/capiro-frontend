@@ -170,49 +170,6 @@ describe("Onboard native request and receipt correlation", () => {
       }).core.setRegistrant(11),
     ).rejects.toMatchObject({ status: 502 });
   });
-  it.each(["type", "slug", "clientId"])(
-    "refuses a current firm memory response with wrong %s",
-    async (field) => {
-      const memory = {
-        type: "firm-soul",
-        slug: "firm",
-        title: "Firm",
-        visibility: "tenant",
-        clientId: null,
-        updatedAt: null,
-        exists: false,
-        pendingReview: null,
-        sections: [],
-        [field]: field === "clientId" ? id : "other",
-      };
-      await expect(
-        consumer(memory).core.getFirmMemorySections("firm-soul"),
-      ).rejects.toMatchObject({ status: 502 });
-    },
-  );
-  it("preserves pending-review memory submission instead of claiming active save", async () => {
-    const receipt = {
-      status: "pending_review",
-      candidateId: "candidate-1",
-      activeItemUnchanged: true,
-    };
-    expect(
-      await consumer(receipt).core.putFirmMemorySections("firm-soul", [
-        { key: "purpose", body: "Draft" },
-      ]),
-    ).toEqual(receipt);
-  });
-  it("refuses a pending memory receipt without a candidate identifier", async () => {
-    await expect(
-      consumer({
-        status: "pending_review",
-        candidateId: "",
-        activeItemUnchanged: true,
-      }).core.putFirmMemorySections("firm-soul", [
-        { key: "purpose", body: "Draft" },
-      ]),
-    ).rejects.toMatchObject({ status: 502 });
-  });
   it("reuses the team owner and binds normalized recipient and role", async () => {
     const receipt = {
       status: "invited",

@@ -6,9 +6,6 @@ import type { capiroOperations } from "./registry";
 type Registry = typeof capiroOperations;
 type Body<Key extends keyof Registry> =
   OperationRequest<Registry[Key]> extends { body: infer T } ? T : never;
-type MemoryType = OperationRequest<
-  Registry["onboard.core.memoryRead"]
->["params"]["type"];
 const nativeClientId = z.uuid();
 
 /** Onboard-specific receipt bindings; existing me/client/invitation owners survive. */
@@ -68,30 +65,6 @@ export function createOnboardCoreApi(api: CapiroApi<Registry>) {
         );
       return result;
     },
-    getMemoryCatalog: () => api.request("onboard.core.memoryCatalog", {}),
-    async getFirmMemorySections(type: MemoryType) {
-      const result = await api.request("onboard.core.memoryRead", {
-        params: { type },
-      });
-      if (
-        result.type !== type ||
-        result.slug !== "firm" ||
-        result.clientId !== null
-      )
-        throw new CapiroApiError(
-          502,
-          "The memory response does not match the requested firm file.",
-        );
-      return result;
-    },
-    putFirmMemorySections: (
-      type: MemoryType,
-      sections: Body<"onboard.core.memoryWrite">["sections"],
-    ) =>
-      api.request("onboard.core.memoryWrite", {
-        params: { type },
-        body: { sections },
-      }),
     async inviteTeamMember(
       body: Omit<Body<"settings.team.invite">, "redirectUrl">,
     ) {

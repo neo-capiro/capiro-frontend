@@ -9,8 +9,6 @@ export type {
   ImportCandidate,
   ImportCandidatesResult,
   ImportResult,
-  MemoryFileDef,
-  MemorySectionsFile,
   TeamInviteRole,
 } from "@/shared/capiro/onboard-contracts";
 export function useCapiroApi() {
