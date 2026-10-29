@@ -1,14 +1,16 @@
-import { previewOnlyDependency, type FillRun } from "./contracts";
+import type { FillRun } from "./contracts";
 import { SourceOutcome, sourceName } from "./SourceOutcome";
 import styles from "./enrichment.module.css";
 export function RunLedger({
   run,
   busy,
   onCancel,
+  onRetry,
 }: {
   run: FillRun;
   busy: boolean;
   onCancel: () => void;
+  onRetry?: (task: NonNullable<FillRun["tasks"]>[number]) => void;
 }) {
   return (
     <section className={styles.ledger} aria-label="Task ledger">
@@ -50,8 +52,17 @@ export function RunLedger({
           </div>
           <span>{task.status}</span>
           {task.status === "failed" && (
-            <button className="button" disabled title={previewOnlyDependency}>
-              Retry unavailable
+            <button
+              className="button"
+              disabled={
+                busy ||
+                !onRetry ||
+                run.status === "cancelled" ||
+                (run.workflowVersion ?? 1) < 2
+              }
+              onClick={() => onRetry?.(task)}
+            >
+              Retry task
             </button>
           )}
         </div>

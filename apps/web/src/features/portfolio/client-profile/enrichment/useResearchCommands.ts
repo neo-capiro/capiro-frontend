@@ -3,13 +3,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { useRetainedIntent } from "@/shared/session/recovery/useRetainedIntent";
 import { assertReviewAccess, type ReviewActor } from "./actions";
-import { setupSchema, type FillRun } from "./contracts";
+import { setupSchema } from "./contracts";
 import { enrichmentPath, latestReviewKey } from "./queries";
 import { researchRecoveryContract, researchScope } from "./research-recovery";
 import { researchOperations } from "./research-operations";
 import type { ResearchInput } from "./research-contracts";
+import type { RetrySelection } from "./retry-contracts";
+type Intent =
+  | { kind: "start"; input: ResearchInput }
+  | { kind: "retry"; selection: RetrySelection };
 
-export function useResearchStart(
+export function useResearchCommands(
   clientId: string,
   actor: ReviewActor,
   open: boolean,
@@ -50,37 +54,48 @@ export function useResearchStart(
     signal: retained.signal,
     install: retained.install,
   });
-  const display = async (run?: FillRun) => {
+  const display = async (
+    result: Awaited<ReturnType<typeof operations.recover>>,
+  ) => {
     guard();
-    if (run) cache.setQueryData(latestReviewKey(clientId, actor), run);
+    if (result)
+      cache.setQueryData(latestReviewKey(clientId, actor), result.run);
     else
       await cache.invalidateQueries({
         queryKey: latestReviewKey(clientId, actor),
       });
-    return run;
+    return result;
   };
-  const start = useMutation({
+  const mutation = useMutation({
     retry: false,
-    mutationFn: async (input: ResearchInput) => {
+    mutationFn: async (intent: Intent) => {
       guard();
       if (!retained.ready)
         throw new Error("Check saved research requests before continuing.");
-      return display(await operations.start(input));
+      return display(
+        await (intent.kind === "start"
+          ? operations.start(intent.input)
+          : operations.retry(intent.selection)),
+      );
     },
   });
   const recover = useMutation({
     retry: false,
-    onSuccess: () => start.reset(),
+    onSuccess: () => mutation.reset(),
     mutationFn: async () => {
       await retained.verify();
       return display(await operations.recover());
     },
   });
+  const latest =
+    mutation.submittedAt >= recover.submittedAt ? mutation : recover;
   return {
-    start,
+    mutation,
     recover,
     retained,
-    busy: start.isPending || recover.isPending,
+    result: latest.data?.retry,
+    error: latest.error,
+    busy: mutation.isPending || recover.isPending,
     blocked: !retained.ready || Boolean(retained.record),
   };
 }

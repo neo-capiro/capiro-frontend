@@ -16,7 +16,7 @@ import { ResearchSetup } from "./ResearchSetup";
 import { RunLedger } from "./RunLedger";
 import { ReviewFeedback } from "./ReviewFeedback";
 import { ReviewConfirmation } from "./ReviewConfirmation";
-import { useResearchStart } from "./useResearchStart";
+import { useResearchCommands } from "./useResearchCommands";
 import { ResearchFeedback } from "./ResearchFeedback";
 import { EnrichmentToolbar } from "./EnrichmentToolbar";
 import styles from "./enrichment.module.css";
@@ -66,7 +66,7 @@ function ClientEnrichmentReview({
   }>();
   const [showSetup, setShowSetup] = useState(false);
   const [upload, setUpload] = useState<{ beforeDispatch: () => void }>();
-  const research = useResearchStart(
+  const research = useResearchCommands(
     clientId,
     {
       userId: identity.data?.user.id ?? "",
@@ -154,7 +154,7 @@ function ClientEnrichmentReview({
               canEdit={canEdit}
               onRecovered={() => setConfirm(undefined)}
             />
-            <ResearchFeedback research={research} />
+            <ResearchFeedback research={research} runId={run?.id} />
             {(showSetup || (!latest.isPending && !latest.error && !run)) && (
               <>
                 <QueryState
@@ -170,9 +170,12 @@ function ClientEnrichmentReview({
                     previous={run ?? undefined}
                     disabled={!canRead || busy || run?.status === "running"}
                     onStart={(input) =>
-                      research.start.mutate(input, {
-                        onSuccess: () => setShowSetup(false),
-                      })
+                      research.mutation.mutate(
+                        { kind: "start", input },
+                        {
+                          onSuccess: () => setShowSetup(false),
+                        },
+                      )
                     }
                   />
                 )}
@@ -184,6 +187,12 @@ function ClientEnrichmentReview({
                   run={run}
                   busy={busy}
                   onCancel={() => request({ kind: "cancel" })}
+                  onRetry={(task) =>
+                    research.mutation.mutate({
+                      kind: "retry",
+                      selection: { runId: run.id, task },
+                    })
+                  }
                 />
                 <header className={styles.findingsHead}>
                   <h3>Findings · {run.findings.length}</h3>

@@ -117,7 +117,7 @@ describe("saved enrichment outcome presentation", () => {
     expect(html).toContain("partial");
     expect(html).toContain('dateTime="2026-09-03T17:31:41Z"');
     expect(html).toMatch(
-      /<button[^>]*disabled=""[^>]*>Retry unavailable<\/button>/,
+      /<button[^>]*disabled=""[^>]*>Retry task<\/button>/,
     );
     expect(html).toContain("Contact support");
     expect(run).toEqual(before);
