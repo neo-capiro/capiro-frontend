@@ -112,6 +112,22 @@ export function summarizeConversations(
   return request("summaries", input, signal, fetcher);
 }
 
+export function listConversationDeletions(
+  input: unknown,
+  signal: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  return request("deletions", input, signal, fetcher);
+}
+
+export function readConversationDeletionStatus(
+  input: unknown,
+  signal: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  return request("deletionStatus", input, signal, fetcher);
+}
+
 export async function exportConversationMessages(
   input: unknown,
   signal: AbortSignal,
