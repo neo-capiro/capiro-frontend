@@ -8,7 +8,9 @@ import {
   ordinarySaveConflictCode,
   type OrdinarySaveConflictCode,
   type PublicationConflictCode,
+  type GenerationConflictCode,
   isProspectPublication,
+  isProspectGeneration,
 } from "./workspace-ordinary-save-errors";
 import { readBoundedJson } from "./gateway-input";
 import {
@@ -31,7 +33,8 @@ export const jsonError = (
   code?:
     | WorkspaceBriefConflictCode
     | OrdinarySaveConflictCode
-    | PublicationConflictCode,
+    | PublicationConflictCode
+    | GenerationConflictCode,
 ) =>
   Response.json(
     { message, ...(code ? { code } : {}) },
@@ -105,6 +108,7 @@ export async function serviceErrorResponse(
     | WorkspaceBriefConflictCode
     | OrdinarySaveConflictCode
     | PublicationConflictCode
+    | GenerationConflictCode
     | undefined;
   if (
     !publicCapability &&
@@ -112,6 +116,7 @@ export async function serviceErrorResponse(
     (isWorkspaceBriefOperation(operation) ||
       isOrdinarySaveOperation(operation) ||
       isProspectPublication(operation) ||
+      isProspectGeneration(operation) ||
       isResearchSharePublication(operation))
   ) {
     try {

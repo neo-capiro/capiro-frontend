@@ -34,7 +34,7 @@ import {
   type OrdinarySave,
 } from "./ordinary-save/OrdinaryDraftSave";
 import { GenerationPanelHost } from "./generation/GenerationPanelHost";
-import { ProspectPublication } from "./prospects/ProspectPublication";
+import { ProspectVersionActions } from "./prospects/ProspectVersionActions";
 import { canonicalWorkspaceSnapshot } from "@/shared/capiro/workspace-snapshot";
 
 function DraftEditor({
@@ -128,7 +128,8 @@ function DraftEditor({
             renderSelected={
               draft.prospectId && prospectWriter
                 ? (version) => (
-                    <ProspectPublication
+                    <ProspectVersionActions
+                      onLoadSaved={() => void prospectSave?.loadSaved()}
                       scope={{
                         id: draft.id,
                         tenantId: prospectWriter.tenantId,
@@ -195,8 +196,8 @@ function DraftEditor({
         disabled={pending || Boolean(ordinarySave?.frozen)}
         onBound={onOrdinaryBound ?? setBoundDraft}
       />
-      {/* The WS-22 document-agent panel. Ordinary saved drafts only: a prospect
-          origin is an immutable manual-only document, and the newsletter
+      {/* The WS-22 document-agent panel. Ordinary saved drafts only: prospects
+          use the saved-source proposal flow in version history, and the newsletter
           workflow owns its own screen. The panel resolves its own role from the
           canonical collaborators list and refuses anything not activated. */}
       {!draft.prospectId && <GenerationPanelHost draftId={currentDraft.id} />}
