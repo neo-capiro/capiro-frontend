@@ -26,11 +26,13 @@ import { NotesDialog } from "./NotesDialog";
 import { QuickLog } from "./QuickLog";
 import { FocusTags } from "./tags/public";
 import { useTeam, useActivity } from "./queries";
+import { useActivityMetrics } from "./useActivityMetrics";
 import styles from "./overview.module.css";
 export function ClientOverview({ clientId }: { clientId: string }) {
   const client = useClient(clientId);
   const team = useTeam(clientId);
   const activity = useActivity(clientId);
+  const metrics = useActivityMetrics(clientId);
   const currentActivity =
     activity.isSuccess && !activity.error ? activity.data : undefined;
   const params = useSearchParams();
@@ -129,7 +131,7 @@ export function ClientOverview({ clientId }: { clientId: string }) {
               </button>
             </div>
           </section>
-          <EngagementPulse records={currentActivity} />
+          <EngagementPulse records={currentActivity} metrics={metrics} />
           <ObjectiveSummary clientId={clientId} />
         </div>
         <div className={styles.column}>
@@ -138,7 +140,7 @@ export function ClientOverview({ clientId }: { clientId: string }) {
             <EngagementHealth />
           </div>
           <FacilitiesCard clientId={clientId} clientName={value.name} />
-          <DeadlineAndRequests />
+          <DeadlineAndRequests metrics={metrics} />
         </div>
       </div>
       <ActivityTimeline clientId={clientId} />
