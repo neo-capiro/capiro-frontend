@@ -6,6 +6,7 @@ import type {
   OfficeResponseMap,
 } from "@capiro/meri-contracts/office-application";
 import type { OfficeTransport, OfficeInput } from "./transport";
+import { confirmOfficeSave } from "./save-confirmation";
 
 export interface OfficeFrame {
   launch(value: OfficeLaunch): void;
@@ -266,18 +267,13 @@ export class OfficeEditorController {
         throw new Error("Editor lease changed");
       await this.options.frame.save(signal);
       signal.throwIfAborted();
-      const saved = await this.request(port, "read", this.key(), signal);
-      // CODE can acknowledge its local Save before WOPI storage succeeds.
-      // An older saved revision cannot confirm changes from this operation.
-      if (
-        saved.draft.sequence < 1 ||
-        !saved.draft.sha256 ||
-        saved.editor.editorId !== before.editor.editorId ||
-        saved.editor.epoch !== before.editor.epoch ||
-        ((modified || this.modificationEpoch !== epoch) &&
-          saved.draft.sequence <= before.draft.sequence)
-      )
-        throw new Error("No saved revision confirmed");
+      const saved = await confirmOfficeSave({
+        before,
+        read: (readSignal) =>
+          this.request(port, "read", this.key(), readSignal),
+        modified: () => modified || this.modificationEpoch !== epoch,
+        signal,
+      });
       this.keep(saved);
       this.update({
         notice:

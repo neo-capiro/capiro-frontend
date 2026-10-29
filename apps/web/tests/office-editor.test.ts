@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { OfficeEditorController } from "../src/shared/meri-office/editor-controller";
 import type {
   OfficeSnapshot,
@@ -138,6 +138,8 @@ function fixture() {
 }
 
 describe("attended Office state", () => {
+  beforeEach(() => vi.useFakeTimers());
+  afterEach(() => vi.useRealTimers());
   it("Save waits for frame acknowledgement and a current Core read; Publish needs a separate released-editor action", async () => {
     const f = fixture();
     await f.editor.open();
@@ -187,7 +189,9 @@ describe("attended Office state", () => {
     const f = fixture();
     await f.editor.open();
     f.editor.ready();
-    await f.editor.save();
+    const saving = f.editor.save();
+    await vi.advanceTimersByTimeAsync(5_000);
+    await saving;
     expect(f.editor.getSnapshot()).toMatchObject({
       frame: false,
       uncertain: true,
@@ -202,7 +206,9 @@ describe("attended Office state", () => {
     f.editor.ready();
     f.editor.modified(true);
     f.frame.save.mockImplementationOnce(async () => f.editor.modified(false));
-    await f.editor.save();
+    const saving = f.editor.save();
+    await vi.advanceTimersByTimeAsync(5_000);
+    await saving;
     expect(f.editor.getSnapshot()).toMatchObject({
       frame: false,
       uncertain: true,
@@ -220,8 +226,82 @@ describe("attended Office state", () => {
       f.editor.modified(true);
       f.editor.modified(false);
     });
-    await f.editor.save();
+    const saving = f.editor.save();
+    await vi.advanceTimersByTimeAsync(5_000);
+    await saving;
     expect(f.editor.getSnapshot().uncertain).toBe(true);
+  });
+  it("waits for a delayed Core commit after CODE acknowledgement without sending Save again", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    const saving = f.editor.save();
+    await vi.advanceTimersByTimeAsync(500);
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: true,
+      uncertain: false,
+    });
+    expect(f.editor.getSnapshot().snapshot?.draft.sequence).toBe(0);
+    f.setSaved(snapshot(1, selection.editorId));
+    await vi.advanceTimersByTimeAsync(250);
+    await saving;
+    expect(f.editor.getSnapshot().notice).toContain("Save confirmed");
+    expect(f.editor.getSnapshot().snapshot?.draft.sequence).toBe(1);
+    expect(f.frame.save).toHaveBeenCalledTimes(1);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+  it("refuses an epoch replacement while waiting for the commit", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    const saving = f.editor.save();
+    await vi.advanceTimersByTimeAsync(250);
+    const replacement = snapshot(1, selection.editorId);
+    f.setSaved({ ...replacement, editor: { ...replacement.editor, epoch: 2 } });
+    await vi.advanceTimersByTimeAsync(250);
+    await saving;
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      uncertain: true,
+    });
+    expect(vi.getTimerCount()).toBe(0);
+  });
+  it("does not retry a failed authoritative read while waiting for the commit", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    const saving = f.editor.save();
+    await vi.advanceTimersByTimeAsync(250);
+    f.port.request = vi.fn(async () => {
+      throw new Error("Current access unavailable");
+    });
+    await vi.advanceTimersByTimeAsync(250);
+    await saving;
+    await vi.advanceTimersByTimeAsync(5_000);
+    expect(f.port.request).toHaveBeenCalledTimes(1);
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      uncertain: true,
+    });
+    expect(vi.getTimerCount()).toBe(0);
+  });
+  it("access loss cancels the commit wait and prevents further reads", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    const saving = f.editor.save();
+    await vi.advanceTimersByTimeAsync(250);
+    const count = f.calls.length;
+    f.editor.accessLost();
+    await saving;
+    await vi.advanceTimersByTimeAsync(5_000);
+    expect(f.calls).toHaveLength(count);
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      snapshot: null,
+    });
+    expect(vi.getTimerCount()).toBe(0);
   });
   it("an editor replacement during Save cannot confirm another editor's revision", async () => {
     const f = fixture();
