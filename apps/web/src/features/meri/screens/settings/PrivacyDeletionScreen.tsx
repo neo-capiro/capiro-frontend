@@ -48,11 +48,13 @@ export function PrivacyDeletionScreen({
   view,
   outcome,
   policyState,
+  conversationActions,
 }: {
   chrome: SettingsChrome;
   view: PrivacyDeletionView;
   outcome?: SettingsOutcome | undefined;
   policyState?: ReactNode;
+  conversationActions?: ReactNode;
 }) {
   const { stores, retained } = view;
   return (
@@ -69,19 +71,20 @@ export function PrivacyDeletionScreen({
             rows={stores.rows}
           />
           <div className={ui.row}>
-            {["Export permitted messages", "Delete conversation"].map(
-              (action) => (
-                <button
-                  key={action}
-                  type="button"
-                  className={ui.outline}
-                  disabled
-                  title={chrome.unavailable}
-                >
-                  {action}
-                </button>
-              ),
-            )}
+            {conversationActions ??
+              ["Export permitted messages", "Delete conversation"].map(
+                (action) => (
+                  <button
+                    key={action}
+                    type="button"
+                    className={ui.outline}
+                    disabled
+                    title={chrome.unavailable}
+                  >
+                    {action}
+                  </button>
+                ),
+              )}
           </div>
         </SettingsCard>
       }
