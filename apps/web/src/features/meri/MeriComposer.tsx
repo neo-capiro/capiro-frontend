@@ -13,6 +13,7 @@ import { Button } from "@capiro/ui/button";
 import { X } from "lucide-react";
 import { DesignIcon } from "../../shared/shell/DesignIcon";
 import { MeriAttachmentPicker } from "./uploads/MeriAttachmentPicker";
+import { SelectedTabSharing } from "./selected-tab/SelectedTabSharing";
 import type { ComposerAttachments } from "./uploads/attachment-slot";
 import styles from "./home.module.css";
 
@@ -188,6 +189,9 @@ function ComposerTools({
         <DesignIcon name="chevron" assetSet={assetSet} />
         {live ? live.scope : "Anduril"}
       </PromptInputButton>
+      {attachments?.selectedTab && live && (
+        <SelectedTabSharing {...attachments.selectedTab} scope={live.scope} />
+      )}
       {live ? modelControl : null}
     </PromptInputTools>
   );
