@@ -22,6 +22,8 @@ import {
 } from "../../../../shared/module-ui";
 import {
   awardTargets,
+  billTargets,
+  isBillTargetKind,
   researchTargets,
   type MemberTarget,
 } from "./member-discovery";
@@ -55,21 +57,30 @@ export function MemberDiscovery({
   const add = useCapiroMutation("research.members.add");
   const resolve = useCapiroMutation("research.members.resolve");
   const action = resolving ? resolve : add;
+  const billKind = isBillTargetKind(kind);
   const search = useCapiroQuery(
     "research.members.search",
     { query: { q: submitted, semanticEnabled: false } },
-    { enabled: !!submitted && kind !== "award" },
+    { enabled: !!submitted && kind !== "award" && !billKind },
   );
   const awards = useCapiroQuery(
     "research.members.awards",
     { query: { q: submitted, page, pageSize: 20 } },
     { enabled: !!submitted && kind === "award" },
   );
-  const query = kind === "award" ? awards : search;
+  // Bills are served by the legislative catalog, not the corpus search.
+  const bills = useCapiroQuery(
+    "research.bills.search",
+    { query: { q: submitted, limit: 20 } },
+    { enabled: !!submitted && billKind },
+  );
+  const query = kind === "award" ? awards : billKind ? bills : search;
   const targets =
     kind === "award"
       ? awardTargets(awards.data)
-      : researchTargets(search.data, kind);
+      : billKind
+        ? billTargets(bills.data, kind)
+        : researchTargets(search.data, kind);
   const locked = action.pending || unknown;
   const editable =
     portfolio.myRole !== "viewer" && portfolio.lifecycle === "active";
@@ -165,6 +176,8 @@ export function MemberDiscovery({
                 "project",
                 "budget_line",
                 "award",
+                "federal_bill",
+                "state_bill",
               ] as const
             ).map((value) => (
               <option key={value} value={value}>
@@ -190,7 +203,11 @@ export function MemberDiscovery({
             label={
               kind === "award"
                 ? "Find by contractor, PIID, agency or description"
-                : "Find by name, code, alias or capability"
+                : kind === "federal_bill"
+                  ? "Find a federal bill by number, title or subject"
+                  : kind === "state_bill"
+                    ? "Find a state bill by number, title or subject"
+                    : "Find by name, code, alias or capability"
             }
             htmlFor="member-discovery-term"
           >
