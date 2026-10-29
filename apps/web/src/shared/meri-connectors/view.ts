@@ -247,6 +247,8 @@ export type LibraryCard = {
   authorization: ConnectorRow["connectionStatus"] | undefined;
   /** Which inputs the connect step must collect for this entry. */
   inputs: ConnectInputs;
+  /** True while this entry has an add whose outcome is unknown (no second add). */
+  reconciling: boolean;
   /** Setup prerequisite from the catalog, shown in the drawer. Never a secret. */
   setupNote: string | undefined;
   docsHref: string | undefined;
@@ -307,6 +309,7 @@ export function libraryCards(
         connectorId: stored?.id,
         authorization: stored?.connectionStatus,
         inputs: connectInputs(entry),
+        reconciling: false,
         setupNote: entry.setupNote,
         docsHref: entry.docsUrl,
       } satisfies LibraryCard;
@@ -326,6 +329,146 @@ export function groupedCards(
 }
 
 /**
+ * What this surface remembers about a catalog add, for as long as it stays mounted.
+ *
+ * `addFromCatalog` is not idempotent and its response is captured BEFORE tool discovery, so two
+ * facts have to survive a refresh:
+ *
+ * - `unresolvedCatalogId`: an add whose outcome is unknown (transport failure / 5xx). One list
+ *   response cannot prove the write did not happen, so that entry stays blocked from a second
+ *   ordinary add until a current read actually shows its row.
+ * - `knownCreated`: rows this surface did create. Their ids stay usable for an authorization retry
+ *   even when the immediate re-read fails and therefore does not list them yet.
+ *
+ * This is mounted-flow state only: no persistence, no backend contract change, no approval step.
+ */
+export type CreateRecovery = {
+  unresolvedCatalogId: string | undefined;
+  knownCreated: readonly ConnectorRow[];
+};
+
+export const noCreateRecovery: CreateRecovery = Object.freeze({
+  unresolvedCatalogId: undefined,
+  knownCreated: Object.freeze([]),
+});
+
+/** A row Core actually returned: keep it (by id) for authorization retry. */
+function remember(
+  recovery: CreateRecovery,
+  connector: ConnectorRow,
+): CreateRecovery {
+  return {
+    unresolvedCatalogId:
+      recovery.unresolvedCatalogId !== undefined &&
+      recovery.unresolvedCatalogId === connector.catalogId
+        ? undefined
+        : recovery.unresolvedCatalogId,
+    knownCreated: [
+      ...recovery.knownCreated.filter((row) => row.id !== connector.id),
+      connector,
+    ],
+  };
+}
+
+/** The add may or may not have written a row: block this entry from another add. */
+function markUnresolved(
+  recovery: CreateRecovery,
+  catalogId: string,
+): CreateRecovery {
+  return { ...recovery, unresolvedCatalogId: catalogId };
+}
+
+/** Fold one connect outcome into the recovery state the host renders from. */
+export function applyConnectOutcome(
+  recovery: CreateRecovery,
+  catalogId: string,
+  result: {
+    kind: string;
+    connector?: ConnectorRow;
+  },
+): CreateRecovery {
+  if (result.kind === "unknown_create")
+    return markUnresolved(recovery, catalogId);
+  if (result.connector && result.kind !== "refused")
+    return remember(recovery, result.connector);
+  return recovery;
+}
+
+/**
+ * Reconcile recovery with one current read.
+ *
+ * A successful read that lists the unresolved entry's row is the only thing that releases the
+ * block; a failed or still-loading read releases nothing. Rows this surface created are kept while
+ * the read does not list them, and dropped once it does (the read is then authoritative).
+ */
+export function reconcileCreate(
+  recovery: CreateRecovery,
+  servers: readonly ConnectorRow[],
+): { recovery: CreateRecovery; rows: ConnectorRow[] } {
+  const listed = new Set(servers.map((row) => row.id));
+  const unresolved = recovery.unresolvedCatalogId;
+  return {
+    recovery: {
+      unresolvedCatalogId:
+        unresolved !== undefined &&
+        servers.some((row) => row.catalogId === unresolved)
+          ? undefined
+          : unresolved,
+      knownCreated: recovery.knownCreated.filter((row) => !listed.has(row.id)),
+    },
+    rows: [
+      ...servers,
+      ...recovery.knownCreated.filter((row) => !listed.has(row.id)),
+    ],
+  };
+}
+
+/** One card, marked while its catalog entry has an unresolved add. */
+export function markReconciling(
+  cards: readonly LibraryCard[],
+  catalogId: string | undefined,
+): LibraryCard[] {
+  if (catalogId === undefined) return [...cards];
+  return cards.map((card) =>
+    card.id === catalogId ? { ...card, reconciling: true } : card,
+  );
+}
+
+/**
+ * What a stored-but-undiscovered connection may be called.
+ *
+ * `addFromCatalog` returns `redact(ctx, row)` from the row captured BEFORE `discoverTools(...)` ran
+ * (and that call swallows its own failure), so neither `lastError: null` nor an empty allowlist in
+ * this response is evidence that discovery succeeded. Only a later current read can say that.
+ */
+export function savedOutcome(entry: { name: string }): {
+  title: string;
+  detail: string;
+} {
+  return {
+    title: `${entry.name} saved`,
+    detail:
+      "Core stored the connection. This response is captured before tool discovery, so it does not establish which tools were found — the connected list below reports what the current read says.",
+  };
+}
+
+/** A created row whose authorization did not start: retry on this row, never by adding again. */
+export function pendingOutcome(
+  entry: { name: string },
+  reason: string,
+): { title: string; detail: string } {
+  return {
+    title: `${entry.name} created, authorization not started`,
+    detail: `${reason} The connection is listed below with its own id; use Reconnect there instead of connecting again.`,
+  };
+}
+
+/** An add with an unknown outcome: say so, and say what this view will and will not do. */
+export function unknownCreateMessage(entry: { name: string }): string {
+  return `Core did not confirm whether ${entry.name} was created, and creating a connector is not idempotent. This view will not add it again until the current connection list shows its row; refresh and check the connected list.`;
+}
+
+/**
  * What one card's button does, decided once so the screen cannot drift from it.
  *
  * The critical case is the connected OAuth card: it must re-authorize the row that already exists.
@@ -339,6 +482,8 @@ export type CardCommand =
   | { kind: "none" };
 
 export function cardCommand(card: LibraryCard, open: boolean): CardCommand {
+  // An unresolved add blocks a second one for this entry until a current read shows its row.
+  if (card.reconciling) return { kind: "none" };
   if (card.connected)
     return card.action === "authorize" && card.connectorId
       ? { kind: "reauthorize", connectorId: card.connectorId }

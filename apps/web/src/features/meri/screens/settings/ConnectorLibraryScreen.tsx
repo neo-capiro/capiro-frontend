@@ -309,7 +309,9 @@ export function ConnectorLibraryScreen({
                         }}
                       >
                         {command.kind === "none"
-                          ? "Refresh to manage"
+                          ? card.reconciling
+                            ? "Checking for the created connection…"
+                            : "Refresh to manage"
                           : command.kind === "reauthorize"
                             ? card.authorization === "needs_reauth"
                               ? "Reconnect"

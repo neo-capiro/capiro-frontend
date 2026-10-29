@@ -19,10 +19,17 @@ import {
   type ConnectOutcome,
 } from "../../../../shared/meri-connectors/client";
 import {
+  applyConnectOutcome,
   connectedServiceRows,
   groupedCards,
   libraryCards,
   libraryNotice,
+  markReconciling,
+  noCreateRecovery,
+  pendingOutcome,
+  reconcileCreate,
+  savedOutcome,
+  unknownCreateMessage,
   type ConnectedServiceRow,
   type ConnectDraft,
   type ConnectorReadState,
@@ -79,24 +86,32 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
   const [busyId, setBusyId] = useState<string | undefined>();
   // Bumped after a settled request so the screen remounts and drops any drafted secret.
   const [settled, setSettled] = useState(0);
+  // Mounted-flow recovery for a catalog add whose outcome this view cannot yet reconcile.
+  const [recovery, setRecovery] = useState(noCreateRecovery);
   const readState: ConnectorReadState = read.error
     ? "unavailable"
     : read.loading
       ? "loading"
       : "ready";
+  const reconciled = reconcileCreate(recovery, servers);
+  // Rows this view created stay listed (and retryable) until a current read lists them itself.
+  const rows = reconciled.rows;
 
   const settle = useCallback(
-    (result: ConnectOutcome, name: string) => {
+    (result: ConnectOutcome, entry: McpCatalogEntry) => {
+      setRecovery((previous) =>
+        applyConnectOutcome(previous, entry.id, result),
+      );
       if (result.kind === "authorization_required") {
         // Core built the URL and holds the signed state; this is only navigation.
         window.location.assign(result.authUrl);
         return;
       }
       if (result.kind === "unknown_create") {
-        // The add may have written a row. Reconcile from Core before offering anything else.
-        setFailure(
-          `${result.reason} The creation outcome is unknown, so the current connections were re-read; check them before trying again.`,
-        );
+        // One list response cannot prove the write did not happen: block this entry until a
+        // current read shows its row, and never offer a second ordinary add here.
+        setFailure(unknownCreateMessage(entry));
+        setSettled((value) => value + 1);
         read.reload();
         return;
       }
@@ -105,26 +120,24 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
         return;
       }
       if (result.kind === "authorization_pending") {
-        setFailure(result.reason);
+        setOutcome(pendingOutcome(entry, result.reason));
+        setFailure(undefined);
         setOpenCardId(undefined);
         setSettled((value) => value + 1);
         read.reload();
         return;
       }
       setFailure(undefined);
-      const stored = result.connector;
-      setOutcome({
-        title:
-          result.kind === "already_connected"
-            ? `${name} is already authorized`
-            : `${name} saved`,
-        detail:
-          result.kind === "already_connected"
-            ? "Core reports an existing authorization for this connection."
-            : stored.lastError
-              ? `Core stored the connection but reported: ${stored.lastError} Meri can only use the tools Core actually discovered.`
-              : "Core stored the connection and accepted its first tool discovery. Meri still re-checks the connection on every call.",
-      });
+      setOutcome(
+        result.kind === "already_connected"
+          ? {
+              title: `${entry.name} is already authorized`,
+              detail:
+                "Core reports an existing authorization for this connection.",
+            }
+          : // The add response precedes discovery, so only "saved" is supportable here.
+            savedOutcome(entry),
+      );
       setOpenCardId(undefined);
       setSettled((value) => value + 1);
       read.reload();
@@ -142,7 +155,7 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
     setFailure(undefined);
     void client
       .connect(entry, draft)
-      .then((result) => settle(result, entry.name))
+      .then((result) => settle(result, entry))
       .catch((error: unknown) =>
         setFailure(
           error instanceof Error && error.message
@@ -236,7 +249,10 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
       .finally(() => setBusyId(undefined));
   };
 
-  const cards = libraryCards(library?.connectors ?? [], servers);
+  const cards = markReconciling(
+    libraryCards(library?.connectors ?? [], rows),
+    reconciled.recovery.unresolvedCatalogId,
+  );
   return (
     <ConnectorLibraryScreen
       key={settled}
@@ -259,7 +275,7 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
           title: "Connected",
           description:
             "Stored authorizations Core reports for this account. A stored row is not a health claim; Meri still checks the connection on every call.",
-          rows: connectedServiceRows(servers),
+          rows: connectedServiceRows(rows),
         },
         openCardId,
         busyId,

@@ -9,12 +9,17 @@
  */
 import { describe, expect, it } from "vitest";
 import {
+  applyConnectOutcome,
   cardCommand,
   connectGate,
   connectedServiceRow,
   connectionEndAction,
   libraryCards,
   libraryNotice,
+  markReconciling,
+  noCreateRecovery,
+  reconcileCreate,
+  savedOutcome,
   statusLabel,
   storedConnectorFor,
   type ConnectDraft,
@@ -559,6 +564,135 @@ describe("connector client", () => {
       { key: "meri.connectors.remove", input: { params: { id } } },
       { key: "meri.connectors.remove", input: { params: { id } } },
     ]);
+  });
+});
+
+/**
+ * The host's own create-recovery transitions, driven through the real client with a recording
+ * transport and then through the exact functions `ConnectorLibraryHost` calls to render.
+ *
+ * These are the F1/F2 residuals: a saved response carries no discovery evidence, and an unknown
+ * create must not be reconciled away by a single empty read so that a second (non-idempotent) add
+ * becomes clickable again.
+ */
+describe("create recovery", () => {
+  const emptyRead: ConnectorRow[] = [];
+
+  it("a saved response with lastError null cannot claim discovery success", async () => {
+    const added = {
+      ...storedRow({
+        authType: "token",
+        catalogId: "tavily",
+        lastError: null,
+        lastSyncAt: null,
+        toolAllowlist: [],
+        readOnlyTools: [],
+      }),
+      oauthRequired: false,
+    };
+    const { api } = fakeApi(() => added);
+    const outcome = await createConnectorClient(api).connect(
+      tokenEntry() as McpCatalogEntry,
+      { authToken: "key" },
+    );
+    expect(outcome.kind).toBe("saved");
+    // The add response is pre-discovery: these fields prove nothing about tool discovery.
+    const saved = outcome.kind === "saved" ? outcome.connector : undefined;
+    expect(saved?.lastSyncAt).toBeNull();
+    expect(saved?.toolAllowlist).toEqual([]);
+    const wording = `${savedOutcome({ name: "Tavily" }).title} ${savedOutcome({ name: "Tavily" }).detail}`;
+    expect(wording).not.toMatch(/accepted its first tool discovery/i);
+    expect(wording).not.toMatch(/can use the tools/i);
+    expect(wording).not.toMatch(/discovery succeeded/i);
+    expect(wording).toContain("before tool discovery");
+    expect(wording).toContain("current read");
+  });
+
+  it("an unknown first add stays blocked against an empty or failed read", async () => {
+    const { api } = fakeApi(() => {
+      throw new CapiroApiError(
+        502,
+        "The service returned an unexpected response.",
+      );
+    });
+    const outcome = await createConnectorClient(api).connect(
+      oauthEntry() as McpCatalogEntry,
+      noDraft,
+    );
+    expect(outcome.kind).toBe("unknown_create");
+    const recovery = applyConnectOutcome(noCreateRecovery, "notion", outcome);
+    expect(recovery.unresolvedCatalogId).toBe("notion");
+    expect(recovery.knownCreated).toEqual([]);
+
+    // Empty rows from a ready read, a failed read or an in-flight read are all the same here:
+    // none of them proves the write did not happen, so the entry stays blocked.
+    const reconciled = reconcileCreate(recovery, emptyRead);
+    expect(reconciled.recovery.unresolvedCatalogId).toBe("notion");
+    const cards = markReconciling(
+      libraryCards([oauthEntry()], reconciled.rows),
+      reconciled.recovery.unresolvedCatalogId,
+    );
+    expect(cardCommand(cards[0]!, false)).toEqual({ kind: "none" });
+    expect(cardCommand(cards[0]!, true)).toEqual({ kind: "none" });
+  });
+
+  it("an observed row releases the block and is re-authorized by its own id", async () => {
+    const row = storedRow({
+      id: "88888888-8888-4888-8888-888888888888",
+      connectionStatus: "pending",
+    });
+    const blocked = applyConnectOutcome(noCreateRecovery, "notion", {
+      kind: "unknown_create",
+    });
+    const reconciled = reconcileCreate(blocked, [row]);
+    expect(reconciled.recovery.unresolvedCatalogId).toBeUndefined();
+    const cards = markReconciling(
+      libraryCards([oauthEntry()], reconciled.rows),
+      reconciled.recovery.unresolvedCatalogId,
+    );
+    expect(cardCommand(cards[0]!, false)).toEqual({
+      kind: "reauthorize",
+      connectorId: row.id,
+    });
+  });
+
+  it("a known created row survives a failed refresh and stays retryable", async () => {
+    const added = {
+      ...storedRow({
+        id: "99999999-9999-4999-8999-999999999999",
+        connectionStatus: "pending",
+      }),
+      oauthRequired: true,
+    };
+    const { api } = fakeApi((key) => {
+      if (key === "meri.connectors.add") return added;
+      throw new Error("OAuth is not configured for this deployment.");
+    });
+    const outcome = await createConnectorClient(api).connect(
+      oauthEntry() as McpCatalogEntry,
+      noDraft,
+    );
+    expect(outcome.kind).toBe("authorization_pending");
+    const recovery = applyConnectOutcome(noCreateRecovery, "notion", outcome);
+    expect(recovery.knownCreated.map((row) => row.id)).toEqual([added.id]);
+    expect(recovery.unresolvedCatalogId).toBeUndefined();
+
+    // The immediate re-read fails (or is still empty): the created row must not disappear.
+    const failed = reconcileCreate(recovery, []);
+    expect(failed.rows.map((row) => row.id)).toEqual([added.id]);
+    const cards = markReconciling(
+      libraryCards([oauthEntry()], failed.rows),
+      failed.recovery.unresolvedCatalogId,
+    );
+    expect(cardCommand(cards[0]!, false)).toEqual({
+      kind: "reauthorize",
+      connectorId: added.id,
+    });
+
+    // Once the read lists it, the row appears exactly once and is no longer recovery state.
+    const listed = reconcileCreate(recovery, [added]);
+    expect(listed.rows.map((row) => row.id)).toEqual([added.id]);
+    expect(listed.recovery.knownCreated).toEqual([]);
   });
 });
 
