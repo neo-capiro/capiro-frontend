@@ -95,13 +95,12 @@ function DraftEditor({
             <ActionButton onClick={onClose}>← Workspace</ActionButton>
           )}
           <h1>{ordinarySave ? currentDraft.docTitle : draft.docTitle}</h1>
-          {!draft.prospectId &&
-            currentDraft.config.documentAgent?.blueprintPin && (
-              <p>
-                Document blueprint · pinned v
-                {currentDraft.config.documentAgent.blueprintPin.version}
-              </p>
-            )}
+          {currentDraft.config.documentAgent?.blueprintPin && (
+            <p>
+              Document blueprint · pinned v
+              {currentDraft.config.documentAgent.blueprintPin.version}
+            </p>
+          )}
           <p>
             {currentDraft.product ?? "Document"}
             {currentDraft.client

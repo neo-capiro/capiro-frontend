@@ -1,5 +1,20 @@
 import type { WorkspaceBlueprintVersionMetadata } from "@capiro/shared/workspace-template-studio";
 import type { WorkspaceDraftDocument } from "../../../../shared/capiro/operations/workspace-documents";
+import { workspaceBlueprintPin } from "../../../../shared/capiro/operations/workspace-documents";
+
+export function sameBlueprintPin(actual: unknown, expected: unknown) {
+  if (actual === undefined && expected === undefined) return true;
+  const left = workspaceBlueprintPin.safeParse(actual),
+    right = workspaceBlueprintPin.safeParse(expected);
+  return (
+    left.success &&
+    right.success &&
+    left.data.blueprintId === right.data.blueprintId &&
+    left.data.versionId === right.data.versionId &&
+    left.data.version === right.data.version &&
+    left.data.definitionHash === right.data.definitionHash
+  );
+}
 
 export function blueprintPin(version: WorkspaceBlueprintVersionMetadata) {
   return {
@@ -33,12 +48,6 @@ export function adoptedBlueprint(
     !draft.prospectId &&
     (draft.clientId ?? null) === clientId &&
     (draft.config.clientId ?? null) === clientId &&
-    Boolean(
-      pin &&
-      pin.blueprintId === version.blueprintId &&
-      pin.versionId === version.id &&
-      pin.version === version.version &&
-      pin.definitionHash === version.definitionHash,
-    )
+    sameBlueprintPin(pin, blueprintPin(version))
   );
 }

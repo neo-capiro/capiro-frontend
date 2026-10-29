@@ -18,6 +18,8 @@ import {
 } from "../../../../shared/capiro/operations/workspace-prospects";
 import { ActionButton, Field, TextInput } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
+import { ProspectTemplatePicker } from "./ProspectTemplatePicker";
+import { sameBlueprintPin } from "../document-templates/blueprint-adoption";
 
 const recoveryContract = {
   schema: prospectDraftCreateBody,
@@ -66,6 +68,7 @@ export function ProspectDraftCreate({
     },
   );
   const [title, setTitle] = useState("");
+  const [pin, setPin] = useState<CreateInput["blueprintPin"]>();
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
   const working = useRef(false);
@@ -79,6 +82,7 @@ export function ProspectDraftCreate({
           prospectId,
           requestId: crypto.randomUUID(),
           docTitle: title,
+          ...(pin ? { blueprintPin: pin } : {}),
         });
     } catch {
       setError("Enter a document title of up to 500 characters.");
@@ -89,8 +93,6 @@ export function ProspectDraftCreate({
     setError("");
     let verified = false;
     try {
-      await retained.verify();
-      verified = true;
       const original = await reserveRecovery(
         scope,
         body.requestId,
@@ -106,11 +108,17 @@ export function ProspectDraftCreate({
         return;
       }
       body = original;
+      await retained.verify();
+      verified = true;
       const draft = await api.request("workspace.prospect.create", { body });
       if (
         draft.prospectId !== prospectId ||
         draft.tenantId !== tenantId ||
-        draft.ownerId !== ownerId
+        draft.ownerId !== ownerId ||
+        !sameBlueprintPin(
+          draft.config.documentAgent?.blueprintPin ?? undefined,
+          body.blueprintPin,
+        )
       )
         throw new Error(
           "The draft receipt does not match this prospect and current owner. Recover only the original request.",
@@ -150,6 +158,11 @@ export function ProspectDraftCreate({
     );
   return (
     <div className={styles.form}>
+      <ProspectTemplatePicker
+        pin={retained.record ? retained.record.blueprintPin : pin}
+        disabled={pending || Boolean(retained.record)}
+        onChange={setPin}
+      />
       <Field label="New prospect document title" htmlFor="prospect-draft-title">
         <TextInput
           id="prospect-draft-title"
@@ -175,7 +188,9 @@ export function ProspectDraftCreate({
           ? "Creating…"
           : retained.record
             ? "Recover original draft"
-            : "Create manual draft"}
+            : pin
+              ? "Create proposal draft"
+              : "Create manual draft"}
       </ActionButton>
     </div>
   );
