@@ -125,6 +125,7 @@ export const publicExports = new Set([
   '@capiro/meri-contracts/conversation-sources',
   '@capiro/meri-contracts/conversation-usage',
   '@capiro/meri-contracts/document-access-application',
+  '@capiro/meri-contracts/office-application',
   '@capiro/meri-contracts/intents-application',
   '@capiro/meri-contracts/routines-application',
   '@capiro/meri-contracts/objective-generation',
@@ -197,6 +198,9 @@ export const serverAdapters = new Map([
   [`${appSource}app/api/documents/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-documents/config.ts`, `${appSource}shared/meri-documents/proxy.ts`,
+  ])],
+  [`${appSource}app/api/meri/office/[operation]/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-office/config.ts`, `${appSource}shared/meri-office/proxy.ts`,
   ])],
   [`${appSource}app/api/documents/links/[action]/route.ts`, new Set([
     previewPolicy,
