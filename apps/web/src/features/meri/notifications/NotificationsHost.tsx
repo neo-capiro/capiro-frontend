@@ -219,13 +219,15 @@ function OwnedUpdates({
   const count = projection.notices.length;
   return (
     <section aria-label="Meri updates" className={styles.panel}>
+      {/* The owner scan is bounded, so this count is a recent observation of a
+          limited set and never a complete unread total. */}
       <p role="status">
         {notificationActions.unread.loading
           ? "Checking unread memory reviews."
           : notificationActions.unread.error
             ? "Unread memory-review count is unavailable."
             : notificationActions.unread.data?.enabled
-              ? `${notificationActions.unread.data.count} unread memory-review notifications.`
+              ? `Recent check found ${notificationActions.unread.data.count} unread memory-review ${notificationActions.unread.data.count === 1 ? "notification" : "notifications"}. Older unread notifications may not be included.`
               : "Memory-review notifications are not enabled."}
       </p>
       {notificationActions.error && (
@@ -299,6 +301,13 @@ function OwnedUpdates({
         ))}
       </ul>
       {snapshot.moreError ? <p role="alert">{snapshot.moreError}</p> : null}
+      {notificationActions.unread.data?.enabled ? (
+        <p className={styles.meta}>
+          {notificationActions.unread.data.count === 0
+            ? "The recent check found no unread memory-review notifications in the set it observed. The check covers a limited recent set, so other unread notifications may remain; acknowledge one with its own Mark read action."
+            : "When selected, Mark recent memory reviews read checks and acknowledges a limited recent set. Other unread notifications may remain and are acknowledged with their own Mark read action."}
+        </p>
+      ) : null}
       <div className={styles.actions}>
         <button
           type="button"
@@ -310,7 +319,7 @@ function OwnedUpdates({
           }
           onClick={() => void notificationActions.markRead(null)}
         >
-          Mark all memory reviews read
+          Mark recent memory reviews read
         </button>
         {projection.nextCursor ? (
           <button
