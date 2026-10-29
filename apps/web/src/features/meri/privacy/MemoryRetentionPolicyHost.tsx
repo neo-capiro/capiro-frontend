@@ -7,6 +7,7 @@ import { PrivacyDeletionScreen } from "../screens/settings/PrivacyDeletionScreen
 import type { SettingsChrome } from "../screens/settings/settings-view";
 import { memoryPrivacyView } from "./retention-policy-view";
 import { ConversationDeletionRequests } from "./ConversationDeletionRequests";
+import { MemoryCleanupRestriction } from "./MemoryCleanupRestriction";
 import ui from "../ui/meri-ui.module.css";
 
 export function MemoryRetentionPolicyHost({
@@ -29,7 +30,12 @@ export function MemoryRetentionPolicyHost({
           "Individual memory deletion requests are not connected here.",
       }}
       view={memoryPrivacyView(read)}
-      deletionRequests={<ConversationDeletionRequests />}
+      deletionRequests={
+        <>
+          <MemoryCleanupRestriction />
+          <ConversationDeletionRequests />
+        </>
+      }
       conversationActions={
         <div>
           <Link className={ui.outline} href={conversationSearchHref(undefined)}>

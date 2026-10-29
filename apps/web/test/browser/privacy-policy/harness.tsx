@@ -1,6 +1,7 @@
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { CapiroDataProvider } from "../../../src/shared/capiro/CapiroBoundary";
+import { DataProvider } from "../../../src/shared/portfolio/api/provider";
 import { MeriPreferencesPanel } from "../../../src/features/meri/screens/settings/MeriPreferencesPanel";
 import "../../../src/app/globals.css";
 function Harness() {
@@ -15,7 +16,9 @@ function Harness() {
         {expired ? (
           <p role="alert">Session expired</p>
         ) : (
-          <MeriPreferencesPanel />
+          <DataProvider onSessionExpired={() => setExpired(true)}>
+            <MeriPreferencesPanel />
+          </DataProvider>
         )}
       </CapiroDataProvider>
     </main>

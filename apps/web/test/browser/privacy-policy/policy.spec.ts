@@ -1,6 +1,39 @@
 import { test, expect, type Page } from "@playwright/test";
 import { policyRead } from "../../../tests/memory-retention-policy-fixture";
 const endpoint = "**/api/capiro/memory.retentionPolicy.read?*";
+const restrictionEndpoint =
+  "**/api/capiro/memory.retentionPolicy.cleanupRestriction?*";
+const restrictionRead = {
+  schemaVersion: 1,
+  owner: policyRead.owner,
+  observedAt: policyRead.observedAt,
+  check: "submission_receipt_disposition",
+  restriction: "none",
+};
+test.beforeEach(async ({ page }) => {
+  await page.route("**/api/backend/core/me", (route) =>
+    route.fulfill({
+      json: {
+        user: { id: policyRead.owner.userId, email: null },
+        tenant: { id: policyRead.owner.tenantId, name: "Synthetic" },
+        role: "standard_user",
+      },
+    }),
+  );
+  await page.route("**/api/conversations/deletions/list", (route) =>
+    route.fulfill({
+      json: {
+        version: "meri.conversation-management.v1",
+        requests: [],
+        olderRequestsUnavailable: false,
+        nextBefore: null,
+      },
+    }),
+  );
+  await page.route(restrictionEndpoint, (route) =>
+    route.fulfill({ json: restrictionRead }),
+  );
+});
 async function open(page: Page) {
   page.on("pageerror", (error) => {
     throw error;
@@ -10,6 +43,71 @@ async function open(page: Page) {
     .getByRole("tab", { name: "Privacy and retention", exact: true })
     .click();
 }
+
+test("cleanup restriction shows current blocked status and removes stale clearance after a failed refresh", async ({
+  page,
+}) => {
+  let restriction = "legacy_receipt_disposition_required",
+    fail = false;
+  const methods: string[] = [];
+  await page.route(endpoint, (route) => route.fulfill({ json: policyRead }));
+  await page.route(restrictionEndpoint, (route) => {
+    methods.push(route.request().method());
+    return fail
+      ? route.fulfill({
+          status: 503,
+          json: { message: "Restriction unavailable" },
+        })
+      : route.fulfill({ json: { ...restrictionRead, restriction } });
+  });
+  await open(page);
+  await expect(
+    page.getByRole("status").filter({
+      hasText: "Legacy submission records need a retention decision",
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("This checks legacy submission records only.", {
+      exact: false,
+    }),
+  ).toBeVisible();
+  restriction = "none";
+  await page
+    .getByRole("button", { name: "Refresh cleanup restriction" })
+    .click();
+  await expect(
+    page
+      .getByRole("status")
+      .filter({ hasText: "No legacy submission-record restriction" }),
+  ).toBeVisible();
+  fail = true;
+  await page
+    .getByRole("button", { name: "Refresh cleanup restriction" })
+    .click();
+  await expect(
+    page
+      .getByRole("status")
+      .filter({ hasText: "Cleanup eligibility cannot be confirmed" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/No legacy submission-record restriction/),
+  ).toHaveCount(0);
+  await expect(
+    page.getByText(/eligible for cleanup after 30 days/),
+  ).toBeVisible();
+  fail = false;
+  restriction = "legacy_receipt_disposition_required";
+  await page
+    .getByRole("button", { name: "Refresh cleanup restriction" })
+    .click();
+  await expect(
+    page.getByRole("status").filter({
+      hasText: "Legacy submission records need a retention decision",
+    }),
+  ).toBeVisible();
+  expect(methods.length).toBeGreaterThanOrEqual(4);
+  expect(methods.every((method) => method === "GET")).toBe(true);
+});
 test("connected Settings shows installed rules and links to canonical conversation actions", async ({
   page,
 }) => {

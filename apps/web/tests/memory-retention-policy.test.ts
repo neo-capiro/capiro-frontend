@@ -2,9 +2,57 @@ import { expect, it } from "vitest";
 import {
   memoryRetentionPolicyRead,
   memoryRetentionPolicyOperations,
+  memoryCleanupRestrictionRead,
 } from "../src/shared/capiro/operations/memory-retention-policy";
-import { memoryPrivacyView } from "../src/features/meri/privacy/retention-policy-view";
+import {
+  memoryPrivacyView,
+  cleanupRestrictionNotice,
+} from "../src/features/meri/privacy/retention-policy-view";
 import { policyRead } from "./memory-retention-policy-fixture";
+
+it("exposes the actual cleanup restriction independently without claiming request completion", () => {
+  const response = {
+    schemaVersion: 1,
+    owner: policyRead.owner,
+    observedAt: policyRead.observedAt,
+    check: "submission_receipt_disposition",
+    restriction: "legacy_receipt_disposition_required",
+  };
+  expect(
+    cleanupRestrictionNotice(memoryCleanupRestrictionRead.parse(response)),
+  ).toContain("retention decision");
+  expect(
+    cleanupRestrictionNotice(
+      memoryCleanupRestrictionRead.parse({ ...response, restriction: "none" }),
+    ),
+  ).toContain("does not mean");
+  expect(cleanupRestrictionNotice()).toContain("unavailable");
+  expect(
+    cleanupRestrictionNotice(
+      memoryCleanupRestrictionRead.parse({
+        ...response,
+        restriction: "unavailable",
+      }),
+    ),
+  ).toContain("cannot be confirmed");
+  for (const extra of [
+    { restriction: "completed" },
+    { payload: "private" },
+    { check: "all_stores" },
+  ])
+    expect(
+      memoryCleanupRestrictionRead.safeParse({ ...response, ...extra }).success,
+    ).toBe(false);
+  const op =
+    memoryRetentionPolicyOperations[
+      "memory.retentionPolicy.cleanupRestriction"
+    ];
+  expect(op.method).toBe("GET");
+  expect(
+    op.request.safeParse({ body: { tenantId: policyRead.owner.tenantId } })
+      .success,
+  ).toBe(false);
+});
 
 it("admits only the supported installed policy and a no-input read", () => {
   expect(memoryRetentionPolicyRead.parse(policyRead)).toEqual(policyRead);
