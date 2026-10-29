@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import type {
   SavedVersion,
   WorkspaceDraftDocument,
@@ -24,7 +24,13 @@ import {
  * Selecting a version only shows its own saved snapshot, and a row that does
  * not belong to this draft/client association is refused rather than shown.
  */
-export function VersionHistory({ draft }: { draft: WorkspaceDraftDocument }) {
+export function VersionHistory({
+  draft,
+  renderSelected,
+}: {
+  draft: WorkspaceDraftDocument;
+  renderSelected?: (version: SavedVersion) => ReactNode;
+}) {
   const [open, setOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string>();
   const [compareId, setCompareId] = useState<string>();
@@ -63,8 +69,9 @@ export function VersionHistory({ draft }: { draft: WorkspaceDraftDocument }) {
           onRetry={query.reload}
         >
           <p className={presentation.qualifier}>
-            Read-only saved versions. Opening or comparing never changes the
-            document.
+            {renderSelected
+              ? "Select a saved version to inspect its content and publication options."
+              : "Read-only saved versions. Opening or comparing never changes the document."}
           </p>
           {versions.length ? (
             <ul
@@ -106,6 +113,7 @@ export function VersionHistory({ draft }: { draft: WorkspaceDraftDocument }) {
             <p>No saved versions yet.</p>
           )}
           {selected && !other && <SavedVersionDetail version={selected} />}
+          {selected && !other && !query.loading && renderSelected?.(selected)}
           {selected && other && selected.id === other.id && (
             <p>Choose two different saved versions to compare.</p>
           )}

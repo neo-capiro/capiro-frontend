@@ -34,6 +34,8 @@ import {
   type OrdinarySave,
 } from "./ordinary-save/OrdinaryDraftSave";
 import { GenerationPanelHost } from "./generation/GenerationPanelHost";
+import { ProspectPublication } from "./prospects/ProspectPublication";
+import { canonicalWorkspaceSnapshot } from "@/shared/capiro/workspace-snapshot";
 
 function DraftEditor({
   draft,
@@ -41,12 +43,14 @@ function DraftEditor({
   prospectSave,
   ordinarySave,
   onOrdinaryBound,
+  prospectWriter,
 }: {
   draft: WorkspaceDraftDocument;
   onClose: () => void;
   prospectSave?: ReturnType<typeof useProspectDraftSave>;
   ordinarySave?: OrdinarySave;
   onOrdinaryBound?: (draft: WorkspaceDraftDocument) => void;
+  prospectWriter?: ProspectWriter;
 }) {
   const initial = prospectSave?.retained?.input ?? manualDraftInput(draft);
   const [localTitle, setLocalTitle] = useState(initial.title);
@@ -121,6 +125,33 @@ function DraftEditor({
           <VersionHistory
             key={`${currentDraft.id}:${currentDraft.clientId ?? ""}:${ordinarySave ? currentDraft.updatedAt : ""}`}
             draft={currentDraft}
+            renderSelected={
+              draft.prospectId && prospectWriter
+                ? (version) => (
+                    <ProspectPublication
+                      scope={{
+                        id: draft.id,
+                        tenantId: prospectWriter.tenantId,
+                        prospectId: draft.prospectId!,
+                      }}
+                      actor={prospectWriter}
+                      version={version}
+                      clean={
+                        !pending &&
+                        !prospectSave?.retained &&
+                        canonicalWorkspaceSnapshot({
+                          title,
+                          sections,
+                          names,
+                        }) ===
+                          canonicalWorkspaceSnapshot(
+                            manualDraftInput(currentDraft),
+                          )
+                      }
+                    />
+                  )
+                : undefined
+            }
           />
           {/* Safe preview of the supported section projection only. An ordinary
               document whose stored body is not a supported projection is
@@ -244,6 +275,7 @@ function ProspectDraftEditor({
       draft={save.currentDraft}
       onClose={onClose}
       prospectSave={save}
+      prospectWriter={actor}
     />
   );
 }

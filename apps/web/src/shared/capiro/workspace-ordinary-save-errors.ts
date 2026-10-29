@@ -5,6 +5,22 @@ export const ordinarySaveConflictCodes = [
   "WORKSPACE_SAVE_REQUEST_CONFLICT",
   "WORKSPACE_SAVE_CLIENT_CONFLICT",
 ] as const;
+export const publicationConflictCodes = [
+  "WORKSPACE_PUBLICATION_RECEIPT_CONFLICT",
+  "WORKSPACE_PUBLICATION_ORIGIN_CONFLICT",
+  "WORKSPACE_PUBLICATION_REQUEST_CONFLICT",
+  "WORKSPACE_PUBLICATION_CURRENT_CONFLICT",
+  "WORKSPACE_PUBLICATION_STATE_CONFLICT",
+  "WORKSPACE_PUBLICATION_SOURCE_CONFLICT",
+] as const;
+export type PublicationConflictCode = (typeof publicationConflictCodes)[number];
+export function isProspectPublication(operation: OperationDefinition) {
+  return (
+    operation.service === "workspace" &&
+    operation.method === "POST" &&
+    operation.path === "/drafts/:draftId/prospect-publication"
+  );
+}
 export type OrdinarySaveConflictCode =
   (typeof ordinarySaveConflictCodes)[number];
 export function isOrdinarySaveOperation(operation: OperationDefinition) {
@@ -22,13 +38,15 @@ export function ordinarySaveConflictCode(
 ) {
   if (
     status !== 409 ||
-    !isOrdinarySaveOperation(operation) ||
+    !(isOrdinarySaveOperation(operation) || isProspectPublication(operation)) ||
     !payload ||
     typeof payload !== "object" ||
     !Object.hasOwn(payload, "code")
   )
     return undefined;
-  return ordinarySaveConflictCodes.find(
-    (code) => code === Reflect.get(payload, "code"),
-  );
+  return (
+    isOrdinarySaveOperation(operation)
+      ? ordinarySaveConflictCodes
+      : publicationConflictCodes
+  ).find((code) => code === Reflect.get(payload, "code"));
 }
