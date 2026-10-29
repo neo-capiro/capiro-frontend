@@ -630,3 +630,27 @@ test('configured-client narrowing is removed from operator input, parameters and
   assert.equal(p.parameters.some(p=>p.ParameterKey==='MeriFirstChatClientId'), false);
   assert.equal(Object.hasOwn(p.environment,'MERI_FIRST_CHAT_CLIENT_ID'), false);
 });
+
+test('onboarding hold membership follows the validated service binding', () => {
+  const base = 'https://first-chat-preview.app-dev.capiro.ai/onboard-api';
+  // Omitted and empty both keep the surface held.
+  for (const input of [bindings, { ...bindings, onboardApiBaseUrl: '' }]) {
+    const p = renderPreviewConfiguration({ ...input, previewReadOnly: false });
+    assert.deepEqual(p.holds, ['onboard']);
+    assert.equal(p.environment.ONBOARD_API_BASE_URL, '');
+  }
+  // A validated nonempty binding removes only the onboarding entry.
+  const bound = renderPreviewConfiguration({ ...bindings, previewReadOnly: false, onboardApiBaseUrl: base });
+  assert.deepEqual(bound.holds, []);
+  assert.equal(bound.environment.ONBOARD_API_BASE_URL, base);
+  const boundWithSlash = renderPreviewConfiguration({ ...bindings, previewReadOnly: false, onboardApiBaseUrl: `${base}/` });
+  assert.deepEqual(boundWithSlash.holds, []);
+  // Read-only mode keeps its other holds and drops onboarding alone.
+  assert.deepEqual(
+    renderPreviewConfiguration({ ...bindings, previewReadOnly: true, onboardApiBaseUrl: base }).holds,
+    ['strategy', 'meri'],
+  );
+  assert.deepEqual(renderPreviewConfiguration({ ...bindings, previewReadOnly: true }).holds, ['strategy', 'onboard', 'meri']);
+  // Activation status is an independent qualification and does not move with the binding.
+  assert.equal(bound.activationStatus, renderPreviewConfiguration({ ...bindings, previewReadOnly: false }).activationStatus);
+});

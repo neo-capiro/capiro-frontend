@@ -299,7 +299,13 @@ export function renderPreviewConfiguration(bindings) {
       applicationId: bindings.clerkApplicationId,
       requiredEnvironment: 'configured-core-issuer-unverified',
     },
-    holds: previewReadOnly ? ['strategy', 'onboard', 'meri'] : ['onboard'],
+    // The onboarding entry is a qualification of the actual service binding: a validated
+    // nonempty base means the surface is no longer held; no other hold is affected.
+    holds: previewReadOnly
+      ? ['strategy', ...(onboard.baseUrl ? [] : ['onboard']), 'meri']
+      : onboard.baseUrl
+      ? []
+      : ['onboard'],
     activationStatus: !previewReadOnly
       ? 'unverified ordinary authenticated routing; verify backend routes and credential compatibility before activation'
       : meri.enabled
