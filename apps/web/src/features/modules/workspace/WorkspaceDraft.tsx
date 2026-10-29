@@ -34,6 +34,8 @@ import {
   type OrdinarySave,
 } from "./ordinary-save/OrdinaryDraftSave";
 import { GenerationPanelHost } from "./generation/GenerationPanelHost";
+import { ProspectVersionActions } from "./prospects/ProspectVersionActions";
+import { canonicalWorkspaceSnapshot } from "@/shared/capiro/workspace-snapshot";
 
 function DraftEditor({
   draft,
@@ -41,12 +43,14 @@ function DraftEditor({
   prospectSave,
   ordinarySave,
   onOrdinaryBound,
+  prospectWriter,
 }: {
   draft: WorkspaceDraftDocument;
   onClose: () => void;
   prospectSave?: ReturnType<typeof useProspectDraftSave>;
   ordinarySave?: OrdinarySave;
   onOrdinaryBound?: (draft: WorkspaceDraftDocument) => void;
+  prospectWriter?: ProspectWriter;
 }) {
   const initial = prospectSave?.retained?.input ?? manualDraftInput(draft);
   const [localTitle, setLocalTitle] = useState(initial.title);
@@ -121,6 +125,34 @@ function DraftEditor({
           <VersionHistory
             key={`${currentDraft.id}:${currentDraft.clientId ?? ""}:${ordinarySave ? currentDraft.updatedAt : ""}`}
             draft={currentDraft}
+            renderSelected={
+              draft.prospectId && prospectWriter
+                ? (version) => (
+                    <ProspectVersionActions
+                      onLoadSaved={() => void prospectSave?.loadSaved()}
+                      scope={{
+                        id: draft.id,
+                        tenantId: prospectWriter.tenantId,
+                        prospectId: draft.prospectId!,
+                      }}
+                      actor={prospectWriter}
+                      version={version}
+                      clean={
+                        !pending &&
+                        !prospectSave?.retained &&
+                        canonicalWorkspaceSnapshot({
+                          title,
+                          sections,
+                          names,
+                        }) ===
+                          canonicalWorkspaceSnapshot(
+                            manualDraftInput(currentDraft),
+                          )
+                      }
+                    />
+                  )
+                : undefined
+            }
           />
           {/* Safe preview of the supported section projection only. An ordinary
               document whose stored body is not a supported projection is
@@ -164,8 +196,8 @@ function DraftEditor({
         disabled={pending || Boolean(ordinarySave?.frozen)}
         onBound={onOrdinaryBound ?? setBoundDraft}
       />
-      {/* The WS-22 document-agent panel. Ordinary saved drafts only: a prospect
-          origin is an immutable manual-only document, and the newsletter
+      {/* The WS-22 document-agent panel. Ordinary saved drafts only: prospects
+          use the saved-source proposal flow in version history, and the newsletter
           workflow owns its own screen. The panel resolves its own role from the
           canonical collaborators list and refuses anything not activated. */}
       {!draft.prospectId && <GenerationPanelHost draftId={currentDraft.id} />}
@@ -244,6 +276,7 @@ function ProspectDraftEditor({
       draft={save.currentDraft}
       onClose={onClose}
       prospectSave={save}
+      prospectWriter={actor}
     />
   );
 }

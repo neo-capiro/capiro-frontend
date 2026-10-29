@@ -4,6 +4,8 @@ import { richNewsletterSaveRefusal } from "./rich-newsletter-errors";
 import {
   ordinarySaveConflictCode,
   type OrdinarySaveConflictCode,
+  type PublicationConflictCode,
+  type GenerationConflictCode,
 } from "./workspace-ordinary-save-errors";
 import { objectiveAssociationFailure } from "./objective-association-errors";
 import type { OperationalFailure } from "./operations/objective-operational";
@@ -22,7 +24,11 @@ import {
 
 export class CapiroApiError extends Error {
   readonly status: number;
-  readonly code?: WorkspaceBriefConflictCode | OrdinarySaveConflictCode;
+  readonly code?:
+    | WorkspaceBriefConflictCode
+    | OrdinarySaveConflictCode
+    | PublicationConflictCode
+    | GenerationConflictCode;
   /**
    * The upstream machine code from a refusal body (`error.code`), when present.
    * Distinguishes conditions a retry cannot fix - a held or unconfigured backend -
@@ -34,7 +40,11 @@ export class CapiroApiError extends Error {
   constructor(
     status: number,
     message: string,
-    code?: WorkspaceBriefConflictCode | OrdinarySaveConflictCode,
+    code?:
+      | WorkspaceBriefConflictCode
+      | OrdinarySaveConflictCode
+      | PublicationConflictCode
+      | GenerationConflictCode,
     associationFailure?: OperationalFailure,
     newsletterSaveRefusal?: NewsletterSaveRefusal,
     upstreamCode?: string,

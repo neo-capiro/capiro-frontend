@@ -10,6 +10,7 @@ import { memoryGovernanceOperations } from "./operations/memory-governance";
 import { completedReportOperations } from "./operations/meri-completed-reports";
 import { meriFirmSkillOperations } from "./operations/meri-firm-skills";
 import { meriProcedureOperations } from "./operations/meri-procedures";
+import { meriConnectorOperations } from "./operations/meri-connectors";
 import { calendarOperations } from "./operations/calendar";
 import { directoryOperations } from "./operations/directory";
 import { directoryObjectiveOperations } from "./operations/directory-objective-destination";
@@ -66,6 +67,7 @@ export const capiroOperations = {
   ...completedReportOperations,
   ...meriFirmSkillOperations,
   ...meriProcedureOperations,
+  ...meriConnectorOperations,
   ...settingsOperations,
   ...plannerOperations,
   ...engagementOperations,

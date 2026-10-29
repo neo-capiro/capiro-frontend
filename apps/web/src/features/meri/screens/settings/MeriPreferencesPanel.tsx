@@ -1,8 +1,10 @@
 "use client";
 import { useState, type ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
 import { UserPreferencesHost } from "../../user-preferences/UserPreferencesHost";
 import { TenantModelSettings } from "../../tenant-settings/TenantModelSettings";
 import { ConnectorAccountsHost } from "./ConnectorAccountsHost";
+import { ConnectorLibraryHost } from "./ConnectorLibraryHost";
 import { HelpShortcutsScreen } from "./HelpShortcutsScreen";
 import { NotificationsAccountScreen } from "./NotificationsAccountScreen";
 import { PersonalPreferencesScreen } from "./PersonalPreferencesScreen";
@@ -40,7 +42,16 @@ export function MeriPreferencesPanel({
   procedureGovernanceEnabled?: boolean;
   reportContent?: ReactNode;
 }) {
-  const [page, setPage] = useState<PreferencePageId>("personal");
+  const params = useSearchParams();
+  // The OAuth callback returns to `/settings/meri-preferences?page=connected-services` (Core's
+  // CLIO_MCP_OAUTH_SUCCESS_REDIRECT). Only a known page id is honoured, so a stray value cannot
+  // select anything the panel does not own.
+  const requested = params.get("page");
+  const [page, setPage] = useState<PreferencePageId>(() =>
+    pages.some((item) => item.id === requested)
+      ? (requested as PreferencePageId)
+      : "personal",
+  );
   const chrome: SettingsChrome = {
     nav: pages.map((item) => ({ ...item, current: item.id === page })),
     select: (id) => setPage(pages.find((item) => item.id === id)?.id ?? page),
@@ -73,6 +84,8 @@ export function MeriPreferencesPanel({
           }}
         />
       );
+    case "connected-services":
+      return <ConnectorLibraryHost chrome={chrome} />;
     case "usage":
       if (usageEnabled)
         return (

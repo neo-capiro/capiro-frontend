@@ -100,6 +100,7 @@ function documentReceiver(
         "federal-prepare",
         "federal-load",
         "federal-publish",
+        "federal-import",
       ].includes(route)
     )
       throw new Error("Unknown document route");

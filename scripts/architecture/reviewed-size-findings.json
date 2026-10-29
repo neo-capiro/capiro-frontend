@@ -6944,8 +6944,8 @@
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest",
-    "fingerprint": "da4745cbfa027c68d8a75fbf8b87b8604654d9f78f371e592486863bb3e2681f",
-    "reason": "Author structural assessment in docs/federal-workbench.md: Existing fixed document forwarding owner and its same-deadline callback admit three public federal routes. Native session, request origin, bounded bytes, cancellation and remote authority remain canonical. No dynamic URL, provider, new credential, authorization or persistence owner is added. Independent review remains held.",
+    "fingerprint": "2d83ea3378cb9e2140909dddaf7108505c40dd5aa3d69b8ea72f353f7103b6e7",
+    "reason": "Author structural assessment in docs/federal-workbench.md: Existing fixed native document forwarding adds the published import route and requires enabled Word generation for both federal writes. Session, origin, deadline and bounded receiving owners remain unchanged; no new authority or credential path. Independent review remains held.",
     "reviewedBy": "Codex implementation author (independent review held)",
     "reviewedOn": "2026-10-29"
   },
@@ -7249,7 +7249,7 @@
     "kind": "function",
     "symbol": "proxyDocumentRequest > <anonymous>",
     "fingerprint": "c248b08f1815c976cf6331373df33d5a5500c7683bd7206dcb74146891c8d83c",
-    "reason": "Author structural assessment in docs/federal-workbench.md: Existing fixed document forwarding owner and its same-deadline callback admit three public federal routes. Native session, request origin, bounded bytes, cancellation and remote authority remain canonical. No dynamic URL, provider, new credential, authorization or persistence owner is added. Independent review remains held.",
+    "reason": "Author structural assessment in docs/federal-workbench.md: Existing fixed native document forwarding adds the published import route and requires enabled Word generation for both federal writes. Session, origin, deadline and bounded receiving owners remain unchanged; no new authority or credential path. Independent review remains held.",
     "reviewedBy": "Codex implementation author (independent review held)",
     "reviewedOn": "2026-10-29"
   },
@@ -7362,8 +7362,8 @@
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "2d9941209df2a0c1d2bf2e81dd8c3ca29085328b4aa6b45a0c90ea075f9ace06",
-    "reason": "Author structural assessment in docs/federal-workbench.md: One exact-text review presentation lifetime: form edits invalidate prepared outputs and confirmation; browse/history, explicit publication and recovery expose the same selected revision. Compilation, byte receiving, journal, transport and authorization are delegated. Keeping these related transitions and controls together avoids scattering confirmation and uncertain-write state. Independent review remains held.",
+    "fingerprint": "75fb27410e985327136c7555918870079cfa26bd32508df4bba5dd5567f53b73",
+    "reason": "Author structural assessment in docs/federal-workbench.md: One exact-text review presentation lifetime coordinates confirmation invalidation, selected source/revision and uncertain export recovery. Import selection has its own component; the parent prevents competing writes and clears confirmation on stale-source refusal while preserving the original recoverable export. Independent review remains held.",
     "reviewedBy": "Codex implementation author (independent review held)",
     "reviewedOn": "2026-10-29"
   },
@@ -7371,17 +7371,26 @@
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "function",
     "symbol": "FederalWorkbench",
-    "fingerprint": "060517838e8184b1769d652a053c74d1825b2687a8112613f2a6afb51a0ff50d",
-    "reason": "Author structural assessment in docs/federal-workbench.md: One exact-text review presentation lifetime: form edits invalidate prepared outputs and confirmation; browse/history, explicit publication and recovery expose the same selected revision. Compilation, byte receiving, journal, transport and authorization are delegated. Keeping these related transitions and controls together avoids scattering confirmation and uncertain-write state. Independent review remains held.",
+    "fingerprint": "c270fd457cd3b5fd9bb5b9599b8a63a9ad5c5927c0483b4b291fc1e950c1375a",
+    "reason": "Author structural assessment in docs/federal-workbench.md: One exact-text review presentation lifetime coordinates confirmation invalidation, selected source/revision and uncertain export recovery. Import selection has its own component; the parent prevents competing writes and clears confirmation on stale-source refusal while preserving the original recoverable export. Independent review remains held.",
+    "reviewedBy": "Codex implementation author (independent review held)",
+    "reviewedOn": "2026-10-29"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/FederalSourceImporter.tsx",
+    "kind": "function",
+    "symbol": "FederalSourceImporter",
+    "fingerprint": "956f66a0caba50582fc86d0dcf527d5a8e85f592320e382aa8dec4ec9eec28da",
+    "reason": "Author structural assessment in docs/federal-workbench.md: Citation page selection and pending-import presentation form one mounted lifetime. Existing history, public contracts, delivery journal and Core authority remain their owners; the component reports pending selection to the parent review lifetime. Independent review remains held.",
     "reviewedBy": "Codex implementation author (independent review held)",
     "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/shared/meri-documents/federal-workbench.ts",
     "kind": "function",
-    "symbol": "publish",
-    "fingerprint": "8dc3837dc1d517eb998dca0dd6e4180fd06e79e66443931be4f336a1296fbee5",
-    "reason": "Author structural assessment in docs/federal-workbench.md: One original-delivery publication transaction: exact source/revision/output ancestry fingerprint, shared pending/uncertain journal, original delivery reuse, public response correlation and definite/unknown disposition. Ordered transitions share one effect boundary; existing journal and transport owners remain separate. Independent review remains held.",
+    "symbol": "deliver",
+    "fingerprint": "25f43484405d6f0162481afad3c9549e5fec39b8923a01a4603834c6bb456faa",
+    "reason": "Author structural assessment in docs/federal-workbench.md: The former publish-only transaction is replaced by one import/export delivery method using the existing shared journal, immutable input fingerprint, original delivery ID and definite/uncertain response classification. Busy reservation covers hashing; source selection and review content never enter another ledger. Independent review remains held.",
     "reviewedBy": "Codex implementation author (independent review held)",
     "reviewedOn": "2026-10-29"
   }
