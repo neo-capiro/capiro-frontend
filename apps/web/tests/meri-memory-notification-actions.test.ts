@@ -151,6 +151,9 @@ const claimPatterns = [
   /all read/i,
   /caught up/i,
   /nothing unread/i,
+  // The count and the feed are separate reads, and bulk re-scans on selection.
+  /before that check/i,
+  /acknowledges only/i,
 ];
 
 beforeEach(() => {
@@ -245,6 +248,8 @@ describe("bounded unread observation in the notifications host", () => {
     );
     expect(markup).toContain("Older unread notifications may not be included.");
     expect(markup).toContain("Mark recent memory reviews read");
+    // Bulk is described as a fresh bounded check on selection, not a known snapshot.
+    expect(markup).toContain("checks and acknowledges a limited recent set");
     for (const claim of claimPatterns) expect(markup).not.toMatch(claim);
     // Observed unread rows stay actionable through the bounded action.
     expect(
@@ -266,8 +271,11 @@ describe("bounded unread observation in the notifications host", () => {
     expect(markup).toContain("Memory review assignment");
     expect(markup).toContain(`href="/meri/memory/review/${reviewRequestId}"`);
     expect(markup).toContain("not read");
-    // A zero observation is scoped to the recent set, not an empty population.
-    expect(markup).toContain("was unread before that check");
+    // A zero observation is scoped to the recent set, not an empty population, and
+    // it states no temporal relation between the separate count and feed reads.
+    expect(markup).toContain(
+      "The check covers a limited recent set, so other unread notifications may remain",
+    );
     for (const claim of claimPatterns) expect(markup).not.toMatch(claim);
     // The per-row acknowledgement is never gated on the sampled count.
     expect(controlAttributes(markup, "Mark read").has("disabled")).toBe(false);

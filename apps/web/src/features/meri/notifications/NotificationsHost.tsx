@@ -304,8 +304,8 @@ function OwnedUpdates({
       {notificationActions.unread.data?.enabled ? (
         <p className={styles.meta}>
           {notificationActions.unread.data.count === 0
-            ? "The recent check found no unread memory-review notifications in the set it observed. A row above marked not read was unread before that check, so acknowledge it with its own Mark read action."
-            : "Mark recent memory reviews read acknowledges only the set the recent check observed. Older unread notifications can remain and are acknowledged from their own row."}
+            ? "The recent check found no unread memory-review notifications in the set it observed. The check covers a limited recent set, so other unread notifications may remain; acknowledge one with its own Mark read action."
+            : "When selected, Mark recent memory reviews read checks and acknowledges a limited recent set. Other unread notifications may remain and are acknowledged with their own Mark read action."}
         </p>
       ) : null}
       <div className={styles.actions}>
