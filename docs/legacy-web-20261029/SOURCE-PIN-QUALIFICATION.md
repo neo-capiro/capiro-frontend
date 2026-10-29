@@ -90,8 +90,10 @@ image instead, so the Dockerfile is unchanged from `ee470d7d`.
   down), so the deployed image needs the app's own variable names at runtime: the
   Clerk publishable/secret pair and `CORE_API_BASE_URL` are required;
   `STRATEGY_API_BASE_URL`, `WORKSPACE_API_BASE_URL` and
-  `INTELLIGENCE_API_BASE_URL` enable those features; Onboarding stays excluded,
-  so `ONBOARD_API_BASE_URL` is neither required nor enabled. The legacy task
-  definitions supply different names (`API_BASE_URL`, `WEB_SURFACE`,
-  `CLERK_PUBLISHABLE_KEY`), so a cutover needs that explicit mapping — it is not
-  implied by a healthy `/healthz`.
+  `INTELLIGENCE_API_BASE_URL` enable those features. Onboarding is not configured
+  by the current candidate: this record neither requires nor sets
+  `ONBOARD_API_BASE_URL`, and its contribution to the next bundle is subject to
+  the owner's forthcoming prerequisite audit rather than a permanent exclusion —
+  nothing is enabled here. The legacy task definitions supply different names
+  (`API_BASE_URL`, `WEB_SURFACE`, `CLERK_PUBLISHABLE_KEY`), so a cutover needs
+  that explicit mapping — it is not implied by a healthy `/healthz`.
