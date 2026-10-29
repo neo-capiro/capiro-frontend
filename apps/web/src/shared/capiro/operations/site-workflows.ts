@@ -29,7 +29,7 @@ export const siteWorkflowOperations = {
     service: "core",
     method: "POST",
     path: "/clio/site-workflows/catalog",
-    source,
+    source: "Core site-workflows/controller.ts @721f0ed00 (native-session conversation catalog)",
     request: z
       .object({
         body: z
