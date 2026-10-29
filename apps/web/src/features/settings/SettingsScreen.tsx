@@ -28,6 +28,7 @@ import { ProfileSettings } from "./ProfileSettings";
 import { SettingsNavigation } from "./SettingsNavigation";
 import styles from "./styles";
 import { TeamSettings } from "./TeamSettings";
+import { SiteWorkflowSettings } from "./site-workflows/SiteWorkflowSettings";
 import { UsageSettings } from "./UsageSettings";
 
 type ScreenContext = {
@@ -66,6 +67,9 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   "hq-ai-keys": () => <AiKeysSettings />,
   "hq-broadcasts": () => <BroadcastSettings />,
   "hq-support": () => <SupportRequestsSettings />,
+  "hq-site-workflows": (context) => (
+    <SiteWorkflowSettings readOnlyPreview={context.readOnlyPreview} />
+  ),
   "intelligence-mappings": () => <MappingSettings />,
   "hq-personnel": () => <PersonnelMergeQueue />,
   "hq-reconciliation": () => <ReconciliationQueue />,

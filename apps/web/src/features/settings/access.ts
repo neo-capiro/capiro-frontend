@@ -54,6 +54,7 @@ export const settingsNavigation = [
       ["hq-customers", "Customers"],
       ["hq-broadcasts", "Broadcasts"],
       ["hq-support", "Support requests"],
+      ["hq-site-workflows", "Website workflows"],
       ["hq-analyst", "Analyst console"],
       ["hq-reconciliation", "PE reconciliation"],
       ["hq-matches", "PE match queue"],

@@ -94,6 +94,7 @@ function approvedPricingImport(file, module, entry) {
 
 export const publicExports = new Set([
   '@capiro/shared/prospect-brief-refresh',
+  '@capiro/shared/site-workflows',
   '@capiro/shared/memory-review',
   '@capiro/ui/cascader',
   '@capiro/ui/motion',
