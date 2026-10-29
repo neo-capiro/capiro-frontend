@@ -163,4 +163,4 @@ export const safeEvidenceUrl = (value: string | null | undefined) => {
   }
 };
 export const previewOnlyDependency =
-  "New research and retries need a review-only service contract. The current service can save website, identity mappings and facility districts before approval.";
+  "Task retry is unavailable until the service can recover the original retry request without starting an additional attempt.";

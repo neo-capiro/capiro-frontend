@@ -3,11 +3,7 @@ import { useState, type ComponentProps } from "react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { UploadDialog } from "@/features/portfolio/files/public";
-import {
-  canSelectFinding,
-  previewOnlyDependency,
-  type FillRun,
-} from "./contracts";
+import { canSelectFinding, type FillRun } from "./contracts";
 import {
   useEnrichmentAccess,
   useEnrichmentSetup,
@@ -20,6 +16,9 @@ import { ResearchSetup } from "./ResearchSetup";
 import { RunLedger } from "./RunLedger";
 import { ReviewFeedback } from "./ReviewFeedback";
 import { ReviewConfirmation } from "./ReviewConfirmation";
+import { useResearchStart } from "./useResearchStart";
+import { ResearchFeedback } from "./ResearchFeedback";
+import { EnrichmentToolbar } from "./EnrichmentToolbar";
 import styles from "./enrichment.module.css";
 export function ClientEnrichmentDialog({
   clientId,
@@ -67,6 +66,15 @@ function ClientEnrichmentReview({
   }>();
   const [showSetup, setShowSetup] = useState(false);
   const [upload, setUpload] = useState<{ beforeDispatch: () => void }>();
+  const research = useResearchStart(
+    clientId,
+    {
+      userId: identity.data?.user.id ?? "",
+      tenantId: identity.data?.tenant?.id ?? "",
+    },
+    open,
+    canRead,
+  );
   const action = useReviewAction(
     clientId,
     open,
@@ -89,6 +97,8 @@ function ClientEnrichmentReview({
     action.mutation.isPending ||
     action.recovery.isPending ||
     action.checkingRecovery ||
+    research.busy ||
+    research.blocked ||
     latest.isFetching ||
     action.uncertain;
   const request = (next: ReviewAction) => {
@@ -116,36 +126,16 @@ function ClientEnrichmentReview({
         )}
         {canRead && (
           <>
-            <div className={styles.sourceBar}>
-              <span>{setup.data?.website ?? "Saved client sources"}</span>
-              <button
-                className="button"
-                disabled={!canEdit || busy}
-                title="Upload saves a client file immediately; it does not start research."
-                onClick={() =>
-                  setUpload({ beforeDispatch: action.createUploadGuard() })
-                }
-              >
-                Upload
-              </button>
-              <button
-                className="button"
-                onClick={() => setShowSetup((v) => !v)}
-              >
-                Research setup
-              </button>
-              <button
-                className="button primary"
-                disabled
-                title={previewOnlyDependency}
-              >
-                Run again
-              </button>
-            </div>
-            <p className={styles.uploadNotice}>
-              Uploading saves a client file immediately. It does not start
-              research or add the file to a run.
-            </p>
+            <EnrichmentToolbar
+              website={setup.data?.website}
+              canEdit={canEdit}
+              busy={busy}
+              running={run?.status === "running"}
+              onSetup={() => setShowSetup(true)}
+              onUpload={() =>
+                setUpload({ beforeDispatch: action.createUploadGuard() })
+              }
+            />
             {upload && canEdit && (
               <UploadDialog
                 clientId={clientId}
@@ -164,6 +154,7 @@ function ClientEnrichmentReview({
               canEdit={canEdit}
               onRecovered={() => setConfirm(undefined)}
             />
+            <ResearchFeedback research={research} />
             {(showSetup || (!latest.isPending && !latest.error && !run)) && (
               <>
                 <QueryState
@@ -172,7 +163,18 @@ function ClientEnrichmentReview({
                   retry={() => void setup.refetch()}
                 />
                 {setup.data && !setup.error && (
-                  <ResearchSetup clientId={clientId} setup={setup.data} />
+                  <ResearchSetup
+                    key={run?.id ?? "new"}
+                    clientId={clientId}
+                    setup={setup.data}
+                    previous={run ?? undefined}
+                    disabled={!canRead || busy || run?.status === "running"}
+                    onStart={(input) =>
+                      research.start.mutate(input, {
+                        onSuccess: () => setShowSetup(false),
+                      })
+                    }
+                  />
                 )}
               </>
             )}
