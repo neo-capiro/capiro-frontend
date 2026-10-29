@@ -5349,13 +5349,13 @@
     "reviewedOn": "2026-10-26"
   },
   {
-      "file": "apps/web/src/shared/module-ui/module-ui.module.css",
-      "kind": "file",
-      "symbol": "<module>",
-      "fingerprint": "fd3c4166c651ee35314692712235ffed406e0338e313a2295fdaa433cc21b5ca",
-      "reason": "Shared design-system stylesheet of presentation primitives consumed across modules. This entry's change is one containment declaration: .panel now sets min-width 0, so a panel used as a grid item in an auto-sized track can no longer hold that track wider than a phone viewport. Measured on the deployed Research Portfolios tabs at 390px: document scrollWidth Sharing 819->375 and Outputs 413->375, with every other consumer unchanged. Single cohesive design-system scope, no logic or state.",
-      "reviewedBy": "Hermes Agent item-6 narrow-screen containment review 20261028",
-      "reviewedOn": "2026-10-28"
+    "file": "apps/web/src/shared/module-ui/module-ui.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "e5e502cfc0789a24f2b1da834939a7726d91af811031267d76dd6377c88be625",
+    "reason": "Shared design-system stylesheet of presentation primitives consumed across modules. This entry's change is one containment declaration: .panel now sets min-width 0, so a panel used as a grid item in an auto-sized track can no longer hold that track wider than a phone viewport. Measured on the deployed Research Portfolios tabs at 390px: document scrollWidth Sharing 819->375 and Outputs 413->375, with every other consumer unchanged. Single cohesive design-system scope, no logic or state. 2026-10-29 sharing keyboard-scroll correction: the two sharing tables now pass the opt-in scrollRegion prop, so an overflowing wrapper becomes a keyboard-reachable scroll region named from its caption and gets the ordinary focus outline; a table that fits adds no tab stop. No handler, state, query, copy, column or contract changed.",
+    "reviewedBy": "Hermes Agent sharing keyboard-scroll correction review 20261029",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useLiveRun.ts",
@@ -5649,19 +5649,19 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "03c963b6006c00091e01a9fd594ed26a5c72cc6948224b2013f31f0e1f68bacf",
-    "reason": "Feature module holding the whole sharing surface family in one import graph:\n    SharePinAttempts, useAction, ResearchSharing, SharingSettings, CopiedDesignEditor,\n    ReuseDesign, linkTone and ShareLinks. It is the largest file, but every member is a distinct\n    sharing sub-surface and the module shares one concern; a future extraction of the copy/reuse\n    sub-surfaces (CopiedDesignEditor/ReuseDesign) would be reasonable housekeeping, not a\n    correctness need.",
-    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "7cdb25bf0239952a89a46affe1a7ae8d045afcef330b9c6572bc4f633817afb4",
+    "reason": "Feature module holding the whole sharing surface family in one import graph:\n    SharePinAttempts, useAction, ResearchSharing, SharingSettings, CopiedDesignEditor,\n    ReuseDesign, linkTone and ShareLinks. It is the largest file, but every member is a distinct\n    sharing sub-surface and the module shares one concern; a future extraction of the copy/reuse\n    sub-surfaces (CopiedDesignEditor/ReuseDesign) would be reasonable housekeeping, not a\n    correctness need. 2026-10-29 sharing keyboard-scroll correction: the two sharing tables now pass the opt-in scrollRegion prop, so an overflowing wrapper becomes a keyboard-reachable scroll region named from its caption and gets the ordinary focus outline; a table that fits adds no tab stop. No handler, state, query, copy, column or contract changed.",
+    "reviewedBy": "Hermes Agent sharing keyboard-scroll correction review 20261029",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
     "kind": "function",
     "symbol": "ResearchSharing",
-    "fingerprint": "a3ebe7997e02fd540b301ab0e32282b55d0eb81323037703d7f133292e430c34",
-    "reason": "Thin tab coordinator: issues the settings/designs/shareLinks reads, drives the\n    open() flow and renders the child sharing surfaces; owns almost no state of its own.",
-    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "6cc803c829d06618d4b70c4638508c409f8d003f68a50b366352d0fb6c279a2d",
+    "reason": "Thin tab coordinator: issues the settings/designs/shareLinks reads, drives the\n    open() flow and renders the child sharing surfaces; owns almost no state of its own. 2026-10-29 sharing keyboard-scroll correction: the two sharing tables now pass the opt-in scrollRegion prop, so an overflowing wrapper becomes a keyboard-reachable scroll region named from its caption and gets the ordinary focus outline; a table that fits adds no tab stop. No handler, state, query, copy, column or contract changed.",
+    "reviewedBy": "Hermes Agent sharing keyboard-scroll correction review 20261029",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
@@ -5676,10 +5676,10 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
     "kind": "function",
     "symbol": "ShareLinks",
-    "fingerprint": "67c0f41c7b9068557b662c2ac93484d16996f693b4f71168b97f58941baf8801",
-    "reason": "reviewed-accept â€” SH5 verified, degrades safely",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "098465269a8b1e000345aa73796e5c61ae5161623180c80c796733ac16e57d58",
+    "reason": "reviewed-accept â€” SH5 verified, degrades safely 2026-10-29 sharing keyboard-scroll correction: the two sharing tables now pass the opt-in scrollRegion prop, so an overflowing wrapper becomes a keyboard-reachable scroll region named from its caption and gets the ordinary focus outline; a table that fits adds no tab stop. No handler, state, query, copy, column or contract changed.",
+    "reviewedBy": "Hermes Agent sharing keyboard-scroll correction review 20261029",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/share.module.css",
