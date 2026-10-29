@@ -63,5 +63,7 @@ export const config = {
     "/api/task-commands/:path*",
     "/api/settings/:path*",
     "/api/memory/owner/:path*",
+    "/api/uploads/:path*",
+    "/api/meri/notifications",
   ],
 };
