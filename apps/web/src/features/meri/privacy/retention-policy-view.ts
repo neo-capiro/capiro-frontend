@@ -1,5 +1,18 @@
-import type { MemoryRetentionPolicyRead } from "@/shared/capiro/operations/memory-retention-policy";
+import type {
+  MemoryCleanupRestrictionRead,
+  MemoryRetentionPolicyRead,
+} from "@/shared/capiro/operations/memory-retention-policy";
 import type { PrivacyDeletionView } from "../screens/settings/PrivacyDeletionScreen";
+
+export function cleanupRestrictionNotice(
+  read?: MemoryCleanupRestrictionRead,
+): string {
+  if (!read || read.restriction === "unavailable")
+    return "The current submission-record cleanup restriction is unavailable. Cleanup eligibility cannot be confirmed from this check.";
+  return read.restriction === "legacy_receipt_disposition_required"
+    ? "Legacy submission records need a retention decision before memory cleanup can complete. Reaching the retention date does not remove this restriction."
+    : "No legacy submission-record restriction was found at the time of this check. This does not mean that a deletion has completed.";
+}
 
 export function memoryPrivacyView(
   read?: MemoryRetentionPolicyRead,

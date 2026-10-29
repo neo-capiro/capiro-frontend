@@ -42,7 +42,32 @@ export const memoryRetentionPolicyRead = z
 export type MemoryRetentionPolicyRead = z.infer<
   typeof memoryRetentionPolicyRead
 >;
+export const memoryCleanupRestrictionRead = z
+  .object({
+    schemaVersion: z.literal(1),
+    owner: z.object({ tenantId: z.uuid(), userId: z.uuid() }).strict(),
+    observedAt: z.iso.datetime(),
+    check: z.literal("submission_receipt_disposition"),
+    restriction: z.enum([
+      "none",
+      "legacy_receipt_disposition_required",
+      "unavailable",
+    ]),
+  })
+  .strict();
+export type MemoryCleanupRestrictionRead = z.infer<
+  typeof memoryCleanupRestrictionRead
+>;
 export const memoryRetentionPolicyOperations = {
+  "memory.retentionPolicy.cleanupRestriction": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/memory/retention-policy/cleanup-restriction",
+    request: z.object({}).strict(),
+    response: memoryCleanupRestrictionRead,
+    source:
+      "neo-capiro/capiro-backend@58274e76354ab020cc951b88499bbb5d87bcb61a apps/api/src/memory/memory-retention-policy.controller.ts; read-only canonical receipt disposition prerequisite",
+  }),
   "memory.retentionPolicy.read": defineOperation({
     service: "core",
     method: "GET",
