@@ -878,7 +878,7 @@
    "sha256": "d9f5962686db3f75a0d36166264854881b5cae2c0c2592814b383b3478f89bad",
    "integrity": "sha512-ZvnOoxn5+vSVbapFHFOyRwHTKEnrZZ3aN6mYn9HYFKwzm7fPta6/Nv9qYdJ+9wHB5IFYVv4COf14tVNT56yiJg==",
    "regularEntryCount": 85,
-   "status": "source-committed-consumer-pinned",
+   "status": "superseded-source-only",
    "purpose": "Exact answer control, durable question events and the current main federal import contracts, validated by the installed receiver."
   },
   {
@@ -894,6 +894,20 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "Peer compatibility only; stream runtime and declarations are byte-identical to the members committed at f3fd895d."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.36-9f4be028-c3564efeb727.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.36",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "9f4be0287cf795f246d46087ae535bd0a9f76766",
+   "sourceTree": "c6bc5d36d2ea2cf51b356a744bc0f2584bd3e688",
+   "bytes": 1748821,
+   "sha256": "c3564efeb72727150ac720b11a0e99de26a8ea332ef8a9278272d87b2fb3b32f",
+   "integrity": "sha512-yyCiQhOzy7d1AoMUcSnwj2QGfzvW4vW0fRBoi+VvqFh1YZ+UZHMxp0vT8I+4wZDsCQfRI2REGowvgeNJdKr8pg==",
+   "regularEntryCount": 85,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Final Question answer/durable-question contracts composed with the accepted 237 usage/reads DTOs, retrieval catalogs, search installation pin and official federal import receiver."
   }
  ]
 }
