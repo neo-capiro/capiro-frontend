@@ -1,5 +1,7 @@
 "use client";
 import { useCapiroQuery } from "@/shared/capiro/queries";
+import Link from "next/link";
+import { conversationSearchHref } from "@/shared/meri-conversations/conversation-navigation";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { PrivacyDeletionScreen } from "../screens/settings/PrivacyDeletionScreen";
 import type { SettingsChrome } from "../screens/settings/settings-view";
@@ -23,9 +25,22 @@ export function MemoryRetentionPolicyHost({
             "Read the installed memory policy for your current account. Other data stores and request actions retain their own availability.",
         },
         unavailable:
-          "Privacy export, deletion and individual retention-status services are not connected here.",
+          "Individual retention status and memory deletion requests are not connected here.",
       }}
       view={memoryPrivacyView(read)}
+      conversationActions={
+        <div>
+          <Link className={ui.outline} href={conversationSearchHref(undefined)}>
+            Choose a conversation to export or delete
+          </Link>
+          <p>
+            Export saved prompts and assistant messages after a fresh access
+            check. Deleting a conversation requires confirmation and moves it to
+            Trash; this does not confirm permanent deletion of held records or
+            other data.
+          </p>
+        </div>
+      }
       policyState={
         <div className={ui.row}>
           <QueryState

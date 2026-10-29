@@ -10,7 +10,7 @@ async function open(page: Page) {
     .getByRole("tab", { name: "Privacy and retention", exact: true })
     .click();
 }
-test("connected Settings shows installed rules and no enabled export or deletion actions", async ({
+test("connected Settings shows installed rules and links to canonical conversation actions", async ({
   page,
 }) => {
   const methods: string[] = [];
@@ -32,11 +32,13 @@ test("connected Settings shows installed rules and no enabled export or deletion
     page.getByRole("note", { name: "Legal holds and related records" }),
   ).toContainText("remain retained");
   await expect(
-    page.getByRole("button", { name: "Export permitted messages" }),
-  ).toBeDisabled();
+    page.getByRole("link", {
+      name: "Choose a conversation to export or delete",
+    }),
+  ).toHaveAttribute("href", "/meri/conversations#chat-title-search");
   await expect(
     page.getByRole("button", { name: "Delete conversation" }),
-  ).toBeDisabled();
+  ).toHaveCount(0);
   expect(methods.length).toBeGreaterThan(0);
   expect(methods.every((method) => method === "GET")).toBe(true);
 });
