@@ -343,7 +343,7 @@
       "regularEntryCount": 69,
       "status": "superseded-by capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz; historical archive retained",
       "purpose": "Replacement archive after Meri280 (feedback JSONB fix) and the skills-catalog/provenance refresh merged to meri-greenfield main: regenerated conversation-application (feedback contracts for FE225) and the conversation-sources hearing exports (FE222) in one package.",
-      "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614\u00e2\u20ac\u00a6/5a1cf815\u00e2\u20ac\u00a6). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
+      "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614â€¦/5a1cf815â€¦). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
     },
     {
       "file": "capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz",
@@ -838,6 +838,20 @@
       "regularEntryCount": 6,
       "status": "source-merged-consumer-bound",
       "purpose": "Peer compatibility only; stream runtime and declarations unchanged."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.36-2a49d68b-e2699bb1c73d.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.36",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "2a49d68bf2a206467c45e3f2c4d54483cd94eb68",
+      "sourceTree": "c1e11989328e2017aceb1cd46e2fae95445b7802",
+      "bytes": 1726531,
+      "sha256": "e2699bb1c73d1994ccc51ab59202cfa79a2a5850e095d300dd8e427daf418eb0",
+      "integrity": "sha512-hOt+MyKi5o2HLDzwZrr66A1g1YHQrLY9cdSgv+coCrS+kuYgQG1p0o5thlRybDWv3LQSlurWrU5wh8yombw5Ow==",
+      "regularEntryCount": 87,
+      "status": "source-branch-unmerged",
+      "purpose": "Outreach launch wire used by the preview Outreach workflow generation start."
     }
   ]
 }
