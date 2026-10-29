@@ -1,6 +1,6 @@
 import type { CapiroApi } from "../../../shared/capiro/http";
 import type { capiroOperations } from "../../../shared/capiro/registry";
-import type { SettingsWrite } from "../security-writes";
+import type { SettingsWrite } from "../security-write-types";
 import { settingsRequestHash } from "../security-write-journal";
 import type { MemoryGrant } from "../../../shared/capiro/operations/memory-grants";
 

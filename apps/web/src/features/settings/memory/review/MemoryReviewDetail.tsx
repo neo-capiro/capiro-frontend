@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useCapiroQuery } from "../../../shared/capiro/queries";
-import { SettingsCard, SettingsNotice } from "../../settings/components";
+import { useCapiroQuery } from "../../../../shared/capiro/queries";
+import { SettingsCard, SettingsNotice } from "../../components";
 import { MemoryReviewActions } from "./MemoryReviewActions";
 
 /** Shared protected detail destination for Settings and in-app review notifications. */

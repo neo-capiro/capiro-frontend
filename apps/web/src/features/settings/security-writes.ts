@@ -15,21 +15,8 @@ const sameMembers = (a: unknown, b: unknown) => {
     left.every((id, index) => id === right[index])
   );
 };
-export type SettingsWrite = {
-  operation: string;
-  attemptId: string;
-  input: { params?: Row; body?: Row };
-  state: "pending" | "unknown";
-  expectedInvitation?: { email: string; role: string };
-  expectedInvitationHash?: string;
-  expectedAccount?: { userId: string; tenantId: string };
-  requestHash?: string;
-  resultHash?: string;
-  inputFields?: string[];
-  receiptId?: string;
-  acceptedResult?: boolean;
-  startedAt: string;
-};
+export type { SettingsWrite } from "./security-write-types";
+import type { SettingsWrite } from "./security-write-types";
 export const uncertainSettingsWrite =
   "The result is not confirmed. This write will not be sent again. Check the recorded target before making another change.";
 
