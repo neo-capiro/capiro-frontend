@@ -26,6 +26,75 @@ const navigate = async (page: Page, path: string) =>
     dispatchEvent(new PopStateEvent("popstate"));
   }, path);
 
+test("default client persists through reload, reset clears it, and accessibility shortcuts navigate", async ({
+  page,
+}) => {
+  await identity(page);
+  const clientId = "30000000-0000-4000-8000-000000000001";
+  let stored = structuredClone(captured.read);
+  let writes = 0;
+  await page.route("**/api/capiro/clients.list*", (route) =>
+    route.fulfill({
+      json: [
+        {
+          id: clientId,
+          name: "Synthetic default client",
+          status: "active",
+          profileStatus: "active",
+        },
+      ],
+    }),
+  );
+  await page.route(endpoint, (route) => {
+    if (route.request().url().endsWith("/save")) {
+      const request = route.request().postDataJSON();
+      expect(request.expectedRevision).toBe(stored.revision);
+      stored = {
+        ...stored,
+        revision: stored.revision + 1,
+        preferences: request.preferences,
+      };
+      writes++;
+    }
+    return route.fulfill({ json: stored });
+  });
+  await page.goto("/settings/meri-preferences");
+  await page.getByRole("button", { name: "Load current preferences" }).click();
+  await page
+    .getByRole("combobox", { name: "Default client", exact: true })
+    .selectOption(clientId);
+  await page.getByRole("button", { name: "Save personal preferences" }).click();
+  await page.getByRole("button", { name: "Check current preferences" }).click();
+  await expect(
+    page.getByRole("combobox", { name: "Default client", exact: true }),
+  ).toHaveValue(clientId);
+  await page.reload();
+  await page.getByRole("button", { name: "Load current preferences" }).click();
+  await expect(
+    page.getByRole("combobox", { name: "Default client", exact: true }),
+  ).toHaveValue(clientId);
+  await page
+    .getByRole("button", { name: "Reset conversation and panel defaults" })
+    .click();
+  await page.getByRole("button", { name: "Check current preferences" }).click();
+  await expect(
+    page.getByRole("combobox", { name: "Default client", exact: true }),
+  ).toHaveValue("");
+  expect(writes).toBe(2);
+  expect(stored.preferences.notifications).toEqual(
+    captured.read.preferences.notifications,
+  );
+  await page
+    .getByRole("button", { name: "Keyboard shortcuts", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", {
+      name: "Available keyboard controls",
+      exact: true,
+    }),
+  ).toBeVisible();
+});
+
 test("personal preferences remain disabled without literal opt-in", async ({
   page,
 }) => {
@@ -74,7 +143,9 @@ test("current synthetic application replies support complete save/readback and l
   await page.getByLabel("Timezone", { exact: true }).fill("America/New_York");
   await page.getByRole("button", { name: "Save personal preferences" }).focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByText(/Save accepted/)).toBeVisible();
+  await expect(
+    page.getByRole("status").filter({ hasText: /^Save accepted/ }),
+  ).toBeVisible();
   expect(writes).toEqual([captured.request]);
   await page.getByRole("button", { name: "Check current preferences" }).click();
   await expect(page.getByText(/Current saved preferences match/)).toBeVisible();
