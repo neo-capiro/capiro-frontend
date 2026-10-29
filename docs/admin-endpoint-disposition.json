@@ -1,0 +1,2462 @@
+{
+  "schemaVersion": 1,
+  "scope": "Settings/HQ administration controllers and Onboard billing: literal routes with an explicit tenant-admin/HQ minimum role. The companion capability disposition covers externally managed and service-authorized Settings features.",
+  "controllerDomains": [
+    "capiro-admin/",
+    "tenant-admin/",
+    "branding/",
+    "ai-usage/",
+    "admin-broadcasts/",
+    "help/support-requests/",
+    "meri/site-workflows/",
+    "program-element/",
+    "acquisition-personnel/",
+    "intelligence/",
+    "memory/",
+    "billing/",
+    "meri/meri-policy-pack.controller.ts"
+  ],
+  "generatedFrom": {
+    "core": "1b731022b034a8960d65300b66ddd1ce3c6922ff",
+    "frontend": "bac6de57305456cd8bfe723f0b562b4977f92e07"
+  },
+  "classification": {
+    "app-supported": "An existing application consumer is present. This is source coverage, not deployment or live qualification.",
+    "intentionally-api-only": "Preserve the existing authorized API. A backend utility alone does not select a new product screen.",
+    "externally-managed": "The named external owner retains the operation; the app may link to it or display state."
+  },
+  "limitations": [
+    "Endpoint enumeration covers literal HTTP routes with an explicit minimum Roles requirement of user_admin or capiro_admin. Service-authorized and internal machine routes are represented by the Settings/utility capability records, not inferred as additional product scope.",
+    "Static consumer discovery records direct operation keys. It does not prove browser behavior or provider availability.",
+    "Objective Questions/Automation, Objective-to-Strategy-to-Planner workflow, and hub formulas remain deferred by the user.",
+    "No new administrative UI was selected by B14. Tenant audit viewing remains API-only. B12 managed-import delivery is a separate pending requirement."
+  ],
+  "endpoints": [
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/admin/acquisition-personnel/merge-queue/:id/resolve",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/acquisition-personnel/acquisition-personnel.controller.ts",
+      "handler": "resolveMergeQueue",
+      "sourceSha256": "596d4e8f8e93b5baf8ecda4754e54c0059ce8afcc88e0a975520e8d51d6d893c",
+      "operations": [
+        "settings.analyst.personnelMerge.decide"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-personnel.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/PersonReviewQueues.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/admin/acquisition-personnel/merge-queue",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/acquisition-personnel/acquisition-personnel.controller.ts",
+      "handler": "mergeQueue",
+      "sourceSha256": "596d4e8f8e93b5baf8ecda4754e54c0059ce8afcc88e0a975520e8d51d6d893c",
+      "operations": [
+        "settings.analyst.personnelMerge.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-personnel.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/PersonReviewQueues.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/admin/program-elements/person-candidates/:id/resolve",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/acquisition-personnel/acquisition-personnel.controller.ts",
+      "handler": "resolvePersonCandidate",
+      "sourceSha256": "596d4e8f8e93b5baf8ecda4754e54c0059ce8afcc88e0a975520e8d51d6d893c",
+      "operations": [
+        "settings.analyst.personCandidates.decide"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-personnel.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/PersonReviewQueues.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/admin/program-elements/person-candidates",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/acquisition-personnel/acquisition-personnel.controller.ts",
+      "handler": "personCandidates",
+      "sourceSha256": "596d4e8f8e93b5baf8ecda4754e54c0059ce8afcc88e0a975520e8d51d6d893c",
+      "operations": [
+        "settings.analyst.personCandidates.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-personnel.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/PersonReviewQueues.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/ai-usage/credential",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/ai-usage/ai-usage.controller.ts",
+      "handler": "listCredentials",
+      "sourceSha256": "d7b60e436936a78a8586c63b26d584929553c6c122fc1a373ed731ce5d45ec72",
+      "operations": [
+        "settings.aiUsage.credentials"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/UsageSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/ai-usage/events",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/ai-usage/ai-usage.controller.ts",
+      "handler": "events",
+      "sourceSha256": "d7b60e436936a78a8586c63b26d584929553c6c122fc1a373ed731ce5d45ec72",
+      "operations": [
+        "settings.aiUsage.events"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/ai-usage/summary",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/ai-usage/ai-usage.controller.ts",
+      "handler": "summary",
+      "sourceSha256": "d7b60e436936a78a8586c63b26d584929553c6c122fc1a373ed731ce5d45ec72",
+      "operations": [
+        "settings.aiUsage.summary"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/UsageSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/billing/summary",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/billing/billing.controller.ts",
+      "handler": "summary",
+      "sourceSha256": "661e9e4d48f3d987308c92d42c7b54d2947c0b0dc8d740ce717e9abf96152a3d",
+      "operations": [
+        "settings.billing.summary"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/BillingSettings.tsx",
+        "apps/web/src/features/settings/billingFlow.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/ai-usage",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "getAiUsageAllTenants",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.ai.usage"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/AiKeysSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/analyst-links/:kind/:id/decision",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/analyst-links/analyst-link-review.controller.ts",
+      "handler": "decide",
+      "sourceSha256": "ec23927e6978bc1f5b70b4075e371f18e9b36b32f59054a2e24ade27c64e8e20",
+      "operations": [
+        "settings.analyst.links.decide"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-links.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/useLinkReview.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/analyst-links/:kind/:id",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/analyst-links/analyst-link-review.controller.ts",
+      "handler": "detail",
+      "sourceSha256": "ec23927e6978bc1f5b70b4075e371f18e9b36b32f59054a2e24ade27c64e8e20",
+      "operations": [
+        "settings.analyst.links.detail"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-links.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/LinkReviewDetail.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/analyst-links/:kind",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/analyst-links/analyst-link-review.controller.ts",
+      "handler": "list",
+      "sourceSha256": "ec23927e6978bc1f5b70b4075e371f18e9b36b32f59054a2e24ade27c64e8e20",
+      "operations": [
+        "settings.analyst.links.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-links.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AnalystLinkQueue.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/analyst-links/receipts/:requestId",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/analyst-links/analyst-link-review.controller.ts",
+      "handler": "receipt",
+      "sourceSha256": "ec23927e6978bc1f5b70b4075e371f18e9b36b32f59054a2e24ade27c64e8e20",
+      "operations": [
+        "settings.analyst.links.receipt"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-links.ts"
+      ],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/audit-logs",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "listAuditLogs",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.analyst.audit.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-audit.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AuditAndQuarantine.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/billing/customers",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "listBillingCustomers",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.customers.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/CustomerSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/broadcasts/:id/archive",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/admin-broadcasts/admin-broadcasts.controller.ts",
+      "handler": "archive",
+      "sourceSha256": "b9a9ff67ee34f3204deec6e4a83c3ffc942dfbecb3285e2bf0f5c4b303f63b29",
+      "operations": [
+        "settings.hq.broadcasts.archive"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/broadcasts.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/hq/BroadcastDetail.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/broadcasts/:id",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/admin-broadcasts/admin-broadcasts.controller.ts",
+      "handler": "detail",
+      "sourceSha256": "b9a9ff67ee34f3204deec6e4a83c3ffc942dfbecb3285e2bf0f5c4b303f63b29",
+      "operations": [
+        "settings.hq.broadcasts.detail"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/broadcasts.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/BroadcastDetail.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/broadcasts/tenant-members",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/admin-broadcasts/admin-broadcasts.controller.ts",
+      "handler": "listTenantMembers",
+      "sourceSha256": "b9a9ff67ee34f3204deec6e4a83c3ffc942dfbecb3285e2bf0f5c4b303f63b29",
+      "operations": [
+        "settings.hq.broadcasts.members"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/broadcasts.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/BroadcastSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/broadcasts",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/admin-broadcasts/admin-broadcasts.controller.ts",
+      "handler": "list",
+      "sourceSha256": "b9a9ff67ee34f3204deec6e4a83c3ffc942dfbecb3285e2bf0f5c4b303f63b29",
+      "operations": [
+        "settings.hq.broadcasts.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/broadcasts.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/BroadcastSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/broadcasts",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/admin-broadcasts/admin-broadcasts.controller.ts",
+      "handler": "create",
+      "sourceSha256": "b9a9ff67ee34f3204deec6e4a83c3ffc942dfbecb3285e2bf0f5c4b303f63b29",
+      "operations": [
+        "settings.hq.broadcasts.send"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/broadcasts.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/hq/BroadcastSettings.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/impersonate/:sessionId/workspace",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/impersonation.controller.ts",
+      "handler": "workspace",
+      "sourceSha256": "3e959a70553906d55c3d8af456c575b40c8c82614b5714718b6b4b53fde74611",
+      "operations": [
+        "settings.hq.impersonation.workspace"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/impersonation.ts"
+      ],
+      "consumers": [
+        "apps/web/src/shared/impersonation/SupportWorkspace.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/impersonate/:sessionId",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/impersonation.controller.ts",
+      "handler": "read",
+      "sourceSha256": "3e959a70553906d55c3d8af456c575b40c8c82614b5714718b6b4b53fde74611",
+      "operations": [
+        "settings.hq.impersonation.read"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/impersonation.ts"
+      ],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/impersonate/end",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/impersonation.controller.ts",
+      "handler": "end",
+      "sourceSha256": "3e959a70553906d55c3d8af456c575b40c8c82614b5714718b6b4b53fde74611",
+      "operations": [
+        "settings.hq.impersonation.end"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/impersonation.ts"
+      ],
+      "consumers": [
+        "apps/web/src/shared/impersonation/useImpersonationSession.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/impersonate",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/impersonation.controller.ts",
+      "handler": "active",
+      "sourceSha256": "3e959a70553906d55c3d8af456c575b40c8c82614b5714718b6b4b53fde74611",
+      "operations": [
+        "settings.hq.impersonation.active"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/impersonation.ts"
+      ],
+      "consumers": [
+        "apps/web/src/shared/impersonation/useImpersonationSession.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/impersonate",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/impersonation.controller.ts",
+      "handler": "start",
+      "sourceSha256": "3e959a70553906d55c3d8af456c575b40c8c82614b5714718b6b4b53fde74611",
+      "operations": [
+        "settings.hq.impersonation.start"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/impersonation.ts"
+      ],
+      "consumers": [
+        "apps/web/src/shared/impersonation/useImpersonationStart.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/quarantine/:type/:id/discard",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "discardQuarantine",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.analyst.quarantine.discard"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-audit.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AuditAndQuarantine.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/quarantine/:type/:id/reprocess",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "reprocessQuarantine",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.analyst.quarantine.reprocess"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-audit.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AuditAndQuarantine.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/quarantine",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "listQuarantine",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.analyst.quarantine.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-audit.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AuditAndQuarantine.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/review-counts",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "getReviewCounts",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.analyst.counts"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-audit.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AnalystSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/support-requests/:id",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/help/support-requests/support-requests.controller.ts",
+      "handler": "detail",
+      "sourceSha256": "c915c77c1770aba947b3f4023f784d2e1bd6dc6586f09c60e07e43e0b196a26c",
+      "operations": [
+        "settings.hq.support.detail"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/support-requests.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/SupportRequestsSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/support-requests",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/help/support-requests/support-requests.controller.ts",
+      "handler": "list",
+      "sourceSha256": "c915c77c1770aba947b3f4023f784d2e1bd6dc6586f09c60e07e43e0b196a26c",
+      "operations": [
+        "settings.hq.support.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/support-requests.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/SupportRequestsSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/tenants/:tenantId/admins/resend",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "resendAdminInvitation",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.tenants.resendInvitation"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/hq/TenantDialogs.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "DELETE",
+      "path": "/capiro-admin/tenants/:tenantId/ai-credential/:provider",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "removeTenantAiCredential",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.ai.removeCredential"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/hq/AiKeysSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/tenants/:tenantId/ai-credential/model",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "updateTenantAiCredentialModel",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.ai.updateModel"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/hq/AiKeysSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/tenants/:tenantId/ai-credential",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "listTenantAiCredentials",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.ai.credentials"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/AiKeysSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/tenants/:tenantId/ai-credential",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "setTenantAiCredential",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.ai.setCredential"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/hq/AiKeysSettings.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/tenants/:tenantId/ai-usage",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "getTenantAiUsage",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.ai.tenantUsage"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/AiKeysSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/tenants/:tenantId/meriv2-flags",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "setMeriV2Flag",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/tenants/:tenantId/meriv3/enabled",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/meriv3-admin.controller.ts",
+      "handler": "setEnabled",
+      "sourceSha256": "bc33074b974a1c067a5a63072a72a9c19a0bdd76d9fd24d9b36c73f642654dea",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "DELETE",
+      "path": "/capiro-admin/tenants/:tenantId/users/:userId",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "removeUser",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "DELETE",
+      "path": "/capiro-admin/tenants/:tenantId",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "deleteTenant",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.tenants.delete"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/hq/TenantSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/tenants/:tenantId",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "getTenant",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.tenants.detail"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/TenantDialogs.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/capiro-admin/tenants",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "listTenants",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.tenants.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/hq/BroadcastSettings.tsx",
+        "apps/web/src/features/settings/hq/SupportRequestsSettings.tsx",
+        "apps/web/src/features/settings/hq/TenantSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/tenants",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "createTenant",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [
+        "settings.hq.tenants.create"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/hq.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/hq/TenantDialogs.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/capiro-admin/users/:clerkUserId/password-reset",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/capiro-admin/capiro-admin.controller.ts",
+      "handler": "sendPasswordReset",
+      "sourceSha256": "8156d44f89c4f070f75e470c0d48d1e08e2e975c254142d493dbb368d40d6de5",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/clio/policy-packs/:packId/events",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "events",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/clio/policy-packs/:packId/publish",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "publish",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/clio/policy-packs/:packId/retire",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "retire",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/clio/policy-packs/:packId/review",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "review",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/clio/policy-packs/:packId/rollback/:targetId",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "rollback",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/clio/policy-packs/:packId/second-approve",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "secondApprove",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/clio/policy-packs/:packId/simulate",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "simulate",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/clio/policy-packs/:packId/submit-review",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "submitReview",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "PATCH",
+      "path": "/clio/policy-packs/:packId",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "revise",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/clio/policy-packs/decisions/recent",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "decisions",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/clio/policy-packs/seed-baseline",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "seed",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/clio/policy-packs",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "list",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/clio/policy-packs",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin",
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/meri/meri-policy-pack.controller.ts",
+      "handler": "create",
+      "sourceSha256": "d897362320fecdcafeb058219520cd11a79770cd4b2051bf2f7d148d4b18fbc8",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/firm/import",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/intelligence/firm-onboarding.controller.ts",
+      "handler": "importClients",
+      "sourceSha256": "b67d89c1a68b7ecc9100ce38bbb4158cba41a38f04ade4c5012c87b9bd6d6a4b",
+      "operations": [
+        "onboard.core.import"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/onboard-core.ts"
+      ],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "PUT",
+      "path": "/firm/registrant",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/intelligence/firm-onboarding.controller.ts",
+      "handler": "setRegistrant",
+      "sourceSha256": "b67d89c1a68b7ecc9100ce38bbb4158cba41a38f04ade4c5012c87b9bd6d6a4b",
+      "operations": [
+        "onboard.core.setRegistrant"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/onboard-core.ts"
+      ],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/intelligence/mappings/:clientId/manual",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/intelligence/intelligence.controller.ts",
+      "handler": "createManualMapping",
+      "sourceSha256": "c73327bd30cd78164ebb56856b63262aae76a93f70b854cd4c889ac1e172f3f0",
+      "operations": [
+        "settings.mappings.manual"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/mappings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/mappings/AttachFederalRecord.tsx",
+        "apps/web/src/features/settings/mappings/ContractorIdentity.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/intelligence/mappings/:clientId/reject-candidate",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/intelligence/intelligence.controller.ts",
+      "handler": "rejectMappingCandidate",
+      "sourceSha256": "c73327bd30cd78164ebb56856b63262aae76a93f70b854cd4c889ac1e172f3f0",
+      "operations": [
+        "settings.mappings.rejectContractorCandidate"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/mappings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/mappings/ContractorIdentity.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "PATCH",
+      "path": "/intelligence/mappings/:mappingId",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/intelligence/intelligence.controller.ts",
+      "handler": "confirmMapping",
+      "sourceSha256": "c73327bd30cd78164ebb56856b63262aae76a93f70b854cd4c889ac1e172f3f0",
+      "operations": [
+        "settings.mappings.confirmIndividual"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/mappings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/mappings/ContractorIdentity.tsx",
+        "apps/web/src/features/settings/mappings/MappingReview.tsx",
+        "apps/web/src/features/settings/mappings/MappingSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/intelligence/mappings/match-contractor-identifiers",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/intelligence/intelligence.controller.ts",
+      "handler": "matchContractorIdentifiers",
+      "sourceSha256": "c73327bd30cd78164ebb56856b63262aae76a93f70b854cd4c889ac1e172f3f0",
+      "operations": [
+        "settings.mappings.exactIdentifiers"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/mappings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/mappings/MappingSettings.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/intelligence/resolve-all",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/intelligence/intelligence.controller.ts",
+      "handler": "resolveAll",
+      "sourceSha256": "c73327bd30cd78164ebb56856b63262aae76a93f70b854cd4c889ac1e172f3f0",
+      "operations": [
+        "settings.mappings.resolveAll"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/mappings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/mappings/MappingSettings.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/candidates/:id/approve",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory.controller.ts",
+      "handler": "approveCandidate",
+      "sourceSha256": "715fd32cee567e90dd05ab6268b845119c04439de08df22f70a296872020d55d",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/candidates/:id/reject",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory.controller.ts",
+      "handler": "rejectCandidate",
+      "sourceSha256": "715fd32cee567e90dd05ab6268b845119c04439de08df22f70a296872020d55d",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/memory/candidates",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory.controller.ts",
+      "handler": "listCandidates",
+      "sourceSha256": "715fd32cee567e90dd05ab6268b845119c04439de08df22f70a296872020d55d",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "DELETE",
+      "path": "/memory/clients/:clientId/grants/:userId",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory.controller.ts",
+      "handler": "revokeGrant",
+      "sourceSha256": "715fd32cee567e90dd05ab6268b845119c04439de08df22f70a296872020d55d",
+      "operations": [
+        "settings.memory.grants.revoke"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-grants.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/memory/MemoryAccessGrants.tsx",
+        "apps/web/src/features/settings/memory/grant-reconciliation.ts",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/memory/clients/:clientId/grants",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory.controller.ts",
+      "handler": "listGrants",
+      "sourceSha256": "715fd32cee567e90dd05ab6268b845119c04439de08df22f70a296872020d55d",
+      "operations": [
+        "settings.memory.grants.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-grants.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryAccessGrants.tsx",
+        "apps/web/src/features/settings/memory/grant-reconciliation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/clients/:clientId/grants",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory.controller.ts",
+      "handler": "createGrant",
+      "sourceSha256": "715fd32cee567e90dd05ab6268b845119c04439de08df22f70a296872020d55d",
+      "operations": [
+        "settings.memory.grants.create"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-grants.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/memory/MemoryAccessGrants.tsx",
+        "apps/web/src/features/settings/security-write-journal.ts",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/memory/governance/clients",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "listClients",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/items/:id/approve",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "approve",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.approve"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/items/:id/confirm",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "confirm",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.confirm"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/items/:id/mark-stale",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "markStale",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.markStale"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/items/:id/revoke",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "revoke",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.revoke"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/items/:id/second-approve",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "secondApprove",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.secondApprove"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/memory/governance/items/:id",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "getItem",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.item"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx",
+        "apps/web/src/features/settings/memory/governance-reconciliation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/memory/governance/items",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "listItems",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.items"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceViews.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/memory/governance/projection-health",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "projectionHealth",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.projections"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceViews.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/projection-jobs/:id/retry",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "retryProjection",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.retry"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/memory/governance/projection-jobs/:id",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "getProjectionJob",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.job"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx",
+        "apps/web/src/features/settings/memory/governance-reconciliation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/memory/governance/transitions",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "listTransitions",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.transitions"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceViews.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/memory/governance",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory-governance.controller.ts",
+      "handler": "overview",
+      "sourceSha256": "09336780bebed47174db3df1d9122a216b125606fcbe43b9e98fcf0d2505e8ba",
+      "operations": [
+        "settings.memory.governance.overview"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/memory-governance.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/memory/MemoryGovernanceCenter.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/purge/client/:clientId",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/memory/memory.controller.ts",
+      "handler": "purgeClient",
+      "sourceSha256": "715fd32cee567e90dd05ab6268b845119c04439de08df22f70a296872020d55d",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/program-elements/:peCode/suggest-person",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/acquisition-personnel/acquisition-personnel.controller.ts",
+      "handler": "suggestPerson",
+      "sourceSha256": "596d4e8f8e93b5baf8ecda4754e54c0059ce8afcc88e0a975520e8d51d6d893c",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/program-elements/admin/data-issues/:id/resolve",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/program-element.controller.ts",
+      "handler": "resolveDataIssue",
+      "sourceSha256": "66fa4e669cd759a451ee564198a4df194a12b7c3e799a30b76f03263943d5972",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/program-elements/admin/data-issues",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/program-element.controller.ts",
+      "handler": "listDataIssuesAdmin",
+      "sourceSha256": "66fa4e669cd759a451ee564198a4df194a12b7c3e799a30b76f03263943d5972",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/program-elements/admin/reconciliation-queue/:id/approve",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/program-element.controller.ts",
+      "handler": "approveReconciliation",
+      "sourceSha256": "66fa4e669cd759a451ee564198a4df194a12b7c3e799a30b76f03263943d5972",
+      "operations": [
+        "settings.analyst.reconciliation.approve"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-reconciliation.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/ReconciliationQueue.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/program-elements/admin/reconciliation-queue/:id/resolve",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/program-element.controller.ts",
+      "handler": "resolveReconciliation",
+      "sourceSha256": "66fa4e669cd759a451ee564198a4df194a12b7c3e799a30b76f03263943d5972",
+      "operations": [
+        "settings.analyst.reconciliation.resolve"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-reconciliation.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/ReconciliationQueue.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/program-elements/admin/reconciliation-queue",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/program-element.controller.ts",
+      "handler": "reconciliationQueue",
+      "sourceSha256": "66fa4e669cd759a451ee564198a4df194a12b7c3e799a30b76f03263943d5972",
+      "operations": [
+        "settings.analyst.reconciliation.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-reconciliation.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/ReconciliationQueue.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/programs/admin/:programId/aliases",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/programs/programs.controller.ts",
+      "handler": "listAliases",
+      "sourceSha256": "ea35b355688824dee257aa61adfb037fd82274a575bb67fef46ab78a9f814d09",
+      "operations": [
+        "settings.analyst.aliases.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-programs.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AliasManager.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/programs/admin/:programId/aliases",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/programs/programs.controller.ts",
+      "handler": "createAlias",
+      "sourceSha256": "ea35b355688824dee257aa61adfb037fd82274a575bb67fef46ab78a9f814d09",
+      "operations": [
+        "settings.analyst.aliases.add"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-programs.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AliasManager.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "DELETE",
+      "path": "/programs/admin/aliases/:id",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/programs/programs.controller.ts",
+      "handler": "deleteAlias",
+      "sourceSha256": "ea35b355688824dee257aa61adfb037fd82274a575bb67fef46ab78a9f814d09",
+      "operations": [
+        "settings.analyst.aliases.delete"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-programs.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AliasManager.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "PATCH",
+      "path": "/programs/admin/aliases/:id",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/programs/programs.controller.ts",
+      "handler": "updateAlias",
+      "sourceSha256": "ea35b355688824dee257aa61adfb037fd82274a575bb67fef46ab78a9f814d09",
+      "operations": [
+        "settings.analyst.aliases.update"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-programs.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AliasManager.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/programs/admin/duplicate-aliases",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/programs/programs.controller.ts",
+      "handler": "duplicateAliases",
+      "sourceSha256": "ea35b355688824dee257aa61adfb037fd82274a575bb67fef46ab78a9f814d09",
+      "operations": [
+        "settings.analyst.aliases.duplicates"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-programs.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/AliasManager.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/programs/admin/match-queue/:id/resolve",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/programs/programs.controller.ts",
+      "handler": "resolveMatch",
+      "sourceSha256": "ea35b355688824dee257aa61adfb037fd82274a575bb67fef46ab78a9f814d09",
+      "operations": [
+        "settings.analyst.programMatches.decide"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-programs.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/ProgramMatchQueue.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/programs/admin/match-queue",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/programs/programs.controller.ts",
+      "handler": "matchQueue",
+      "sourceSha256": "ea35b355688824dee257aa61adfb037fd82274a575bb67fef46ab78a9f814d09",
+      "operations": [
+        "settings.analyst.programMatches.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-programs.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/ProgramMatchQueue.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/programs/admin/merge",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "capiro_admin"
+      ],
+      "owner": "apps/api/src/program-element/programs/programs.controller.ts",
+      "handler": "merge",
+      "sourceSha256": "ea35b355688824dee257aa61adfb037fd82274a575bb67fef46ab78a9f814d09",
+      "operations": [
+        "settings.analyst.programs.merge"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings-admin/analyst-programs.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/analyst/MergePrograms.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/tenant-admin/audit-logs",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "auditLogs",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.auditLogs"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/tenant-admin/billing",
+      "disposition": "intentionally-api-only",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "billing",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [],
+      "contracts": [],
+      "consumers": [],
+      "note": "No selected application consumer. Retain the existing API and its authorization; no additional UI is promised."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/tenant-admin/branding/logo/confirm",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/branding/branding.controller.ts",
+      "handler": "confirm",
+      "sourceSha256": "b2816ce2a53caf2b266ee6be68dc9b6a77b2a2f7ad53fd3c0708d8b8ac441f6b",
+      "operations": [
+        "settings.branding.logoConfirm"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/BrandingSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/tenant-admin/branding/logo/upload-url",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/branding/branding.controller.ts",
+      "handler": "uploadUrl",
+      "sourceSha256": "b2816ce2a53caf2b266ee6be68dc9b6a77b2a2f7ad53fd3c0708d8b8ac441f6b",
+      "operations": [
+        "settings.branding.logoUploadUrl"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/BrandingSettings.tsx"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/tenant-admin/branding/sync",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "retryBrandingSync",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.branding.sync"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/branding-sync.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "PUT",
+      "path": "/tenant-admin/branding",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "branding",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.branding.update"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/BrandingSettings.tsx",
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts",
+        "apps/web/src/features/settings/useSettingsMutation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "PUT",
+      "path": "/tenant-admin/contact-info",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "updateContactInfo",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.contact.update"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/ContactSettings.tsx",
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts",
+        "apps/web/src/features/settings/useSettingsMutation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "PUT",
+      "path": "/tenant-admin/team/:userId/billing-admin",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "setBillingAdmin",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.team.setBillingAdmin"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/TeamSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "PUT",
+      "path": "/tenant-admin/team/:userId/role",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "updateRole",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.team.setRole"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/TeamSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts",
+        "apps/web/src/features/settings/team-permissions.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "DELETE",
+      "path": "/tenant-admin/team/:userId",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "remove",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.team.remove"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/TeamSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts",
+        "apps/web/src/features/settings/team-permissions.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/tenant-admin/team/invitations/:invitationId/resend",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "resend",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.team.resend"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/TeamSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/security-writes.ts",
+        "apps/web/src/features/settings/useSettingsMutation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/tenant-admin/team/invitations",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "invitations",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.team.invitations"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/TeamSettings.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/useSettingsMutation.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/tenant-admin/team/invite",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "invite",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.team.invite"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/InviteMember.tsx",
+        "apps/web/src/features/settings/SettingsMutationNotice.tsx",
+        "apps/web/src/features/settings/security-writes.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    },
+    {
+      "service": "core",
+      "method": "GET",
+      "path": "/tenant-admin/team",
+      "disposition": "app-supported",
+      "requiredRoles": [
+        "user_admin"
+      ],
+      "owner": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "handler": "team",
+      "sourceSha256": "77345d0d329583f86fe1bb20352b6cfc616906236c33a072f0a477451efb240a",
+      "operations": [
+        "settings.team.list"
+      ],
+      "contracts": [
+        "apps/web/src/shared/capiro/operations/settings.ts"
+      ],
+      "consumers": [
+        "apps/web/src/features/settings/TeamSettings.tsx",
+        "apps/web/src/features/settings/memory/MemoryAccessGrants.tsx",
+        "apps/web/src/features/settings/security-write-reconciliation.ts",
+        "apps/web/src/features/settings/team-permissions.ts"
+      ],
+      "note": "Existing application consumer; canonical backend authorization still applies."
+    }
+  ]
+}
