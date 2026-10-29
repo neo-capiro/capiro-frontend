@@ -1,6 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
-// The installed Clerk error class itself, so the refusal path is the real type guard.
-import { ClerkAPIResponseError } from "@qualification/clerk-errors";
+// The provider's own public error surface: Clerk Next re-exports the class that the
+// receiver's isClerkAPIResponseError guard tests against.
+import { ClerkAPIResponseError } from "@clerk/nextjs/errors";
 import { describe, expect, it, vi } from "vitest";
 import { createOnboardAttempt } from "../src/features/onboard/lib/attempt-journal";
 import {
