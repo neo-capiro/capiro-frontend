@@ -27,6 +27,12 @@ export type ConnectorNotice = {
   tone?: "neutral" | "warning" | "danger";
 };
 
+/**
+ * Whether the connection list is still being read, could not be read, or is genuinely known.
+ * A failed read is never presented as "nothing is connected".
+ */
+export type ConnectorReadState = "loading" | "unavailable" | "ready";
+
 export const CATEGORY_ORDER = [
   "productivity",
   "research",
@@ -71,6 +77,8 @@ export type ConnectedServiceRow = {
   detail: string | undefined;
   canManage: boolean;
   canAuthorize: boolean;
+  /** `oauth` rows are ended by revoking authorization; `token`/`none` rows by removal. */
+  authType: ConnectorRow["authType"];
 };
 
 const months = [
@@ -125,6 +133,7 @@ export function connectedServiceRow(row: ConnectorRow): ConnectedServiceRow {
     detail: row.lastError ?? undefined,
     canManage: row.canManage,
     canAuthorize: row.canManage && row.authType === "oauth",
+    authType: row.authType,
   };
 }
 
@@ -168,7 +177,11 @@ export type ConnectAllowed = { ok: true; body: AddConnectorBody };
  * It exists so the drawer cannot post an add that is certain to be refused (a manual-OAuth entry
  * with no client, a self-hosted entry with no URL). It is NOT an authority check: Core re-validates
  * every field, resolves the tenant/member scope, refuses a firm-wide add by a non-admin, applies
- * the endpoint SSRF rules and gates catalog entries behind their feature flag.
+ * the endpoint SSRF rules and re-checks the catalog feature flag on every add.
+ *
+ * `requiresFeature` is deliberately NOT re-checked here. Core only returns a flagged entry once the
+ * tenant's flag is enabled (and keeps an already-connected entry visible when it is turned off),
+ * so metadata alone does not mean "unavailable" — refusing on it blocked entries Core had admitted.
  */
 export function connectGate(
   entry: McpCatalogEntry,
@@ -178,11 +191,6 @@ export function connectGate(
     return {
       ok: false,
       reason: "This entry cannot be connected from Meri.",
-    };
-  if (entry.requiresFeature)
-    return {
-      ok: false,
-      reason: "This service is not available for this workspace.",
     };
   const body: AddConnectorBody = { catalogId: entry.id };
   if (connectInputs(entry).endpoint) {
@@ -228,6 +236,15 @@ export type LibraryCard = {
   connected: boolean;
   scope: string;
   action: "manage" | "authorize" | "connect";
+  /**
+   * The stored row that already carries this entry, when one exists.
+   *
+   * Re-authorizing or disconnecting MUST use this id: `addFromCatalog` is not idempotent, so going
+   * back through the add path for an existing connection creates a second row.
+   */
+  connectorId: string | undefined;
+  /** The stored row's provider status, when a row exists. Never inferred from the card. */
+  authorization: ConnectorRow["connectionStatus"] | undefined;
   /** Which inputs the connect step must collect for this entry. */
   inputs: ConnectInputs;
   /** Setup prerequisite from the catalog, shown in the drawer. Never a secret. */
@@ -235,9 +252,29 @@ export type LibraryCard = {
   docsHref: string | undefined;
 };
 
-/** Browse cards in catalog order, grouped by category, connected entries last per group. */
+/**
+ * The stored row that represents `catalogId` for this caller.
+ *
+ * A caller can legitimately hold more than one row for the same catalog entry (a personal one and a
+ * firm-wide one). A row they manage wins, then their own personal row, then whatever Core returned
+ * first — the same row the management table lists first.
+ */
+export function storedConnectorFor(
+  servers: readonly ConnectorRow[],
+  catalogId: string,
+): ConnectorRow | undefined {
+  const rows = servers.filter((row) => row.catalogId === catalogId);
+  return (
+    rows.find((row) => row.canManage) ??
+    rows.find((row) => row.scope === "user") ??
+    rows[0]
+  );
+}
+
+/** Browse cards in catalog order, grouped by category, connected entries first per group. */
 export function libraryCards(
   connectors: readonly LibraryConnector[],
+  servers: readonly ConnectorRow[] = [],
 ): LibraryCard[] {
   return connectors
     .map((entry, index) => ({ entry, index }))
@@ -249,24 +286,31 @@ export function libraryCards(
         return a.entry.connected ? -1 : 1;
       return a.index - b.index;
     })
-    .map(({ entry }) => ({
-      id: entry.id,
-      name: entry.name,
-      summary: entry.description,
-      detail: entry.longDescription,
-      category: CATEGORY_LABELS[entry.category],
-      verified: entry.verified,
-      connected: entry.connected,
-      scope: entry.defaultScope === "tenant" ? "Firm-wide" : "Personal",
-      action: entry.connected
-        ? entry.authType === "oauth"
-          ? "authorize"
-          : "manage"
-        : "connect",
-      inputs: connectInputs(entry),
-      setupNote: entry.setupNote,
-      docsHref: entry.docsUrl,
-    }));
+    .map(({ entry }) => {
+      const stored = storedConnectorFor(servers, entry.id);
+      const connected = entry.connected || stored !== undefined;
+      const authType = stored?.authType ?? entry.authType;
+      return {
+        id: entry.id,
+        name: entry.name,
+        summary: entry.description,
+        detail: entry.longDescription,
+        category: CATEGORY_LABELS[entry.category],
+        verified: entry.verified,
+        connected,
+        scope: entry.defaultScope === "tenant" ? "Firm-wide" : "Personal",
+        action: connected
+          ? authType === "oauth"
+            ? "authorize"
+            : "manage"
+          : "connect",
+        connectorId: stored?.id,
+        authorization: stored?.connectionStatus,
+        inputs: connectInputs(entry),
+        setupNote: entry.setupNote,
+        docsHref: entry.docsUrl,
+      } satisfies LibraryCard;
+    });
 }
 
 export function groupedCards(
@@ -279,6 +323,40 @@ export function groupedCards(
     else groups.set(card.category, [card]);
   }
   return [...groups].map(([category, items]) => ({ category, cards: items }));
+}
+
+/**
+ * What one card's button does, decided once so the screen cannot drift from it.
+ *
+ * The critical case is the connected OAuth card: it must re-authorize the row that already exists.
+ * `MeriMcpService.addFromCatalog` creates a new row on every call (unique name per call), so a
+ * connected card that fell through to `connect` would add a second, unreachable connection.
+ */
+export type CardCommand =
+  | { kind: "reauthorize"; connectorId: string }
+  | { kind: "connect" }
+  | { kind: "open" }
+  | { kind: "none" };
+
+export function cardCommand(card: LibraryCard, open: boolean): CardCommand {
+  if (card.connected)
+    return card.action === "authorize" && card.connectorId
+      ? { kind: "reauthorize", connectorId: card.connectorId }
+      : { kind: "none" };
+  return open ? { kind: "connect" } : { kind: "open" };
+}
+
+/**
+ * How a stored connection is ended, from the row's own auth type.
+ *
+ * `oauth/disconnect` only clears OAuth state; a token/none row would keep `enabled` true and its
+ * encrypted key, which is exactly what Core's execution guard reads for those rows. Those rows are
+ * removed instead.
+ */
+export function connectionEndAction(
+  row: ConnectedServiceRow,
+): "revoke" | "remove" {
+  return row.authType === "oauth" ? "revoke" : "remove";
 }
 
 /**

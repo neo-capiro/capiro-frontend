@@ -9,11 +9,14 @@
  */
 import { describe, expect, it } from "vitest";
 import {
+  cardCommand,
   connectGate,
   connectedServiceRow,
+  connectionEndAction,
   libraryCards,
   libraryNotice,
   statusLabel,
+  storedConnectorFor,
   type ConnectDraft,
 } from "../src/shared/meri-connectors/view";
 import {
@@ -29,6 +32,7 @@ import {
   catalogResponse,
   connectorRow,
 } from "../src/shared/capiro/operations/meri-connectors";
+import { CapiroApiError } from "../src/shared/capiro/http";
 
 const entryShape = {
   category: "productivity",
@@ -112,17 +116,20 @@ describe("connectGate", () => {
     expect(gate.ok === false && gate.reason).toContain("cannot be connected");
   });
 
-  it("refuses an entry this workspace has not been given", () => {
+  it("does not re-refuse a feature-gated entry that Core admitted", () => {
+    // Core only returns a flagged entry once the tenant flag is on (and keeps an already-connected
+    // one visible when it is off), so the browser must let the add through and let Core re-check.
     const gate = connectGate(
       tokenEntry({
         requiresFeature: "funding_opportunities_tango_mcp",
       }) as McpCatalogEntry,
       { authToken: "key" },
     );
-    expect(gate.ok).toBe(false);
-    expect(gate.ok === false && gate.reason).toContain(
-      "not available for this workspace",
-    );
+    expect(gate.ok).toBe(true);
+    expect(gate.ok && gate.body).toEqual({
+      catalogId: "tavily",
+      authToken: "key",
+    });
   });
 
   it("requires an https server URL when the entry has no published endpoint", () => {
@@ -259,6 +266,81 @@ describe("library cards", () => {
     expect(connectedToken?.action).toBe("manage");
     expect(fresh?.action).toBe("connect");
   });
+
+  it("binds a connected card to the stored row so it can re-authorize that row", () => {
+    const row = storedRow({ id: "22222222-2222-4222-8222-222222222222" });
+    const [card] = libraryCards([oauthEntry({ connected: true })], [row]);
+    expect(card).toMatchObject({
+      id: "notion",
+      connected: true,
+      connectorId: row.id,
+      authorization: "connected",
+      action: "authorize",
+    });
+  });
+
+  it("prefers the row the caller manages when the same entry has several", () => {
+    const firm = storedRow({
+      id: "33333333-3333-4333-8333-333333333333",
+      scope: "tenant",
+      canManage: false,
+    });
+    const mine = storedRow({
+      id: "44444444-4444-4444-8444-444444444444",
+      canManage: true,
+    });
+    expect(storedConnectorFor([firm, mine], "notion")?.id).toBe(mine.id);
+    expect(storedConnectorFor([firm], "notion")?.id).toBe(firm.id);
+    expect(storedConnectorFor([], "notion")).toBeUndefined();
+  });
+});
+
+describe("card commands", () => {
+  it("re-authorizes the existing row for a connected OAuth card and never adds", () => {
+    const row = storedRow();
+    const [card] = libraryCards([oauthEntry({ connected: true })], [row]);
+    expect(cardCommand(card!, false)).toEqual({
+      kind: "reauthorize",
+      connectorId: row.id,
+    });
+  });
+
+  it("offers no add for a connected card whose row is not visible in the current read", () => {
+    const [card] = libraryCards([oauthEntry({ connected: true })], []);
+    expect(cardCommand(card!, true)).toEqual({ kind: "none" });
+  });
+
+  it("opens setup first, then connects on the second click", () => {
+    const [card] = libraryCards([oauthEntry({ connected: false })], []);
+    expect(cardCommand(card!, false)).toEqual({ kind: "open" });
+    expect(cardCommand(card!, true)).toEqual({ kind: "connect" });
+  });
+
+  it("leaves a connected key-based card to the connection table", () => {
+    const row = storedRow({
+      id: "55555555-5555-4555-8555-555555555555",
+      authType: "token",
+      catalogId: "tavily",
+      hasAuthToken: true,
+    });
+    const [card] = libraryCards([tokenEntry({ connected: true })], [row]);
+    expect(card?.action).toBe("manage");
+    expect(cardCommand(card!, true)).toEqual({ kind: "none" });
+  });
+
+  it("ends an OAuth connection by revocation and a key-based one by removal", () => {
+    expect(connectionEndAction(connectedServiceRow(storedRow()))).toBe(
+      "revoke",
+    );
+    expect(
+      connectionEndAction(
+        connectedServiceRow(storedRow({ authType: "token" })),
+      ),
+    ).toBe("remove");
+    expect(
+      connectionEndAction(connectedServiceRow(storedRow({ authType: "none" }))),
+    ).toBe("remove");
+  });
 });
 
 describe("library notice", () => {
@@ -322,6 +404,7 @@ describe("connector client", () => {
     );
     expect(outcome).toEqual({
       kind: "authorization_required",
+      connector: added,
       authUrl: "https://provider.example/authorize?state=abc",
     });
     expect(recorded.map((call) => call.key)).toEqual([
@@ -332,15 +415,16 @@ describe("connector client", () => {
   });
 
   it("stops at the add for a key-based connector", async () => {
-    const { api, recorded } = fakeApi(() => ({
+    const stored = {
       ...storedRow({ authType: "token" }),
       oauthRequired: false,
-    }));
+    };
+    const { api, recorded } = fakeApi(() => stored);
     const outcome = await createConnectorClient(api).connect(
       tokenEntry() as McpCatalogEntry,
       { authToken: "key" },
     );
-    expect(outcome.kind).toBe("connected");
+    expect(outcome).toEqual({ kind: "saved", connector: stored });
     expect(recorded.map((call) => call.key)).toEqual(["meri.connectors.add"]);
   });
 
@@ -367,11 +451,40 @@ describe("connector client", () => {
       oauthEntry() as McpCatalogEntry,
       noDraft,
     );
-    expect(outcome).toEqual({ kind: "already_connected" });
+    expect(outcome).toEqual({ kind: "already_connected", connector: added });
   });
 
-  it("reports a missing authorization URL honestly rather than pretending success", async () => {
-    const added = { ...storedRow(), oauthRequired: true };
+  it("keeps the created row when authorization cannot start", async () => {
+    const added = {
+      ...storedRow({ connectionStatus: "pending" }),
+      oauthRequired: true,
+    };
+    const { api, recorded } = fakeApi((key) => {
+      if (key === "meri.connectors.add") return added;
+      throw new Error("OAuth is not configured for this deployment.");
+    });
+    const outcome = await createConnectorClient(api).connect(
+      oauthEntry() as McpCatalogEntry,
+      noDraft,
+    );
+    expect(outcome.kind).toBe("authorization_pending");
+    expect(
+      outcome.kind === "authorization_pending" && outcome.connector.id,
+    ).toBe(added.id);
+    expect(
+      outcome.kind === "authorization_pending" && outcome.reason,
+    ).toContain("OAuth is not configured");
+    // The add ran exactly once: retrying must reuse this row, not create another.
+    expect(
+      recorded.filter((call) => call.key === "meri.connectors.add"),
+    ).toHaveLength(1);
+  });
+
+  it("reports a missing authorization URL as pending on the created row", async () => {
+    const added = {
+      ...storedRow({ connectionStatus: "pending" }),
+      oauthRequired: true,
+    };
     const { api } = fakeApi((key) =>
       key === "meri.connectors.add" ? added : { authUrl: null },
     );
@@ -379,24 +492,71 @@ describe("connector client", () => {
       oauthEntry() as McpCatalogEntry,
       noDraft,
     );
-    expect(outcome.kind).toBe("refused");
-    expect(outcome.kind === "refused" && outcome.reason).toContain(
-      "authorization page",
-    );
+    expect(outcome.kind).toBe("authorization_pending");
+    expect(
+      outcome.kind === "authorization_pending" && outcome.reason,
+    ).toContain("authorization page");
+    expect(
+      outcome.kind === "authorization_pending" && outcome.connector.id,
+    ).toBe(added.id);
   });
 
-  it("revokes and removes through the existing Core routes", async () => {
-    const { api, recorded } = fakeApi((key) =>
-      key === "meri.connectors.oauthDisconnect"
-        ? { disconnected: true }
-        : { deleted: true },
+  it("reports Core's refusal without pretending a row exists", async () => {
+    const { api } = fakeApi(() => {
+      throw new CapiroApiError(400, "Unknown catalog connector");
+    });
+    const outcome = await createConnectorClient(api).connect(
+      oauthEntry() as McpCatalogEntry,
+      noDraft,
     );
-    const client = createConnectorClient(api);
-    const id = storedRow().id;
-    await client.disconnect(id);
-    await client.remove(id);
+    expect(outcome).toEqual({
+      kind: "refused",
+      reason: "Unknown catalog connector",
+    });
+  });
+
+  it("reports an ambiguous add as unknown instead of inviting a duplicate retry", async () => {
+    const { api, recorded } = fakeApi(() => {
+      throw new CapiroApiError(
+        502,
+        "The service returned an unexpected response.",
+      );
+    });
+    const outcome = await createConnectorClient(api).connect(
+      oauthEntry() as McpCatalogEntry,
+      noDraft,
+    );
+    expect(outcome.kind).toBe("unknown_create");
+    expect(recorded.map((call) => call.key)).toEqual(["meri.connectors.add"]);
+  });
+
+  it("revokes an OAuth connection through the OAuth owner", async () => {
+    const { api, recorded } = fakeApi(() => ({ disconnected: true }));
+    const outcome = await createConnectorClient(api).disconnect({
+      id: storedRow().id,
+      authType: "oauth",
+    });
+    expect(outcome).toEqual({ kind: "authorization_revoked" });
     expect(recorded).toEqual([
-      { key: "meri.connectors.oauthDisconnect", input: { params: { id } } },
+      {
+        key: "meri.connectors.oauthDisconnect",
+        input: { params: { id: storedRow().id } },
+      },
+    ]);
+  });
+
+  it("removes a key-based connection instead of only clearing OAuth state", async () => {
+    const id = "66666666-6666-4666-8666-666666666666";
+    const { api, recorded } = fakeApi(() => ({ deleted: true }));
+    const client = createConnectorClient(api);
+    expect(await client.disconnect({ id, authType: "token" })).toEqual({
+      kind: "connection_removed",
+    });
+    expect(await client.disconnect({ id, authType: "none" })).toEqual({
+      kind: "connection_removed",
+    });
+    expect(recorded).toEqual([
+      { key: "meri.connectors.remove", input: { params: { id } } },
       { key: "meri.connectors.remove", input: { params: { id } } },
     ]);
   });

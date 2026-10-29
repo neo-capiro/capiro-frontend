@@ -4,12 +4,19 @@
  * gateway attaches the reviewed capiro-template session token and Core resolves tenant/member scope,
  * ownership, OAuth state and token custody itself.
  *
- * What it does add is the one sequencing decision a person cannot make for us: a catalog add for an
- * OAuth entry is not finished until the provider authorizes it, so `connect` reports whether the
- * caller must now follow a returned authorization URL. The URL is Core's; this module never builds
- * one, never stores the verifier and never sees a token.
+ * Two sequencing rules live here because a person cannot express them by clicking:
+ *
+ * 1. A catalog add is NOT idempotent — `MeriMcpService.addFromCatalog` always creates a new row with
+ *    a disambiguated name. So an add that succeeded but could not start authorization returns the
+ *    created row and is retried against that row id, never re-added. An add whose outcome is unknown
+ *    (transport failure, 5xx) is reported as unknown so the surface reconciles before offering
+ *    another add.
+ * 2. `POST …/oauth/disconnect` only clears OAuth state (`connectionStatus: 'disconnected'` plus the
+ *    credential rows). For a token/none connector that would leave `enabled` true and the encrypted
+ *    key in place, and Core's execution guard consults `connectionStatus` only for OAuth rows — so a
+ *    non-OAuth connection is ended through the existing delete owner, not by the OAuth route.
  */
-import type { CapiroApi } from "../capiro/http";
+import { CapiroApiError, type CapiroApi } from "../capiro/http";
 import {
   meriConnectorOperations,
   type AddConnectorBody,
@@ -22,10 +29,23 @@ import { connectGate, type ConnectDraft } from "./view";
 export type ConnectorApi = CapiroApi<typeof meriConnectorOperations>;
 
 export type ConnectOutcome =
-  | { kind: "connected"; connector: ConnectorRow }
-  | { kind: "authorization_required"; authUrl: string }
-  | { kind: "already_connected" }
-  | { kind: "refused"; reason: string };
+  /** Stored; Core discovery may still have failed — check `connector.lastError`. */
+  | { kind: "saved"; connector: ConnectorRow }
+  /** Stored and waiting for the provider; follow Core's URL. */
+  | { kind: "authorization_required"; connector: ConnectorRow; authUrl: string }
+  /** Stored, but authorization did not start. Retry against `connector.id`, never by re-adding. */
+  | { kind: "authorization_pending"; connector: ConnectorRow; reason: string }
+  | { kind: "already_connected"; connector: ConnectorRow }
+  /** Core refused before creating anything. */
+  | { kind: "refused"; reason: string }
+  /** The add may or may not have created a row. Reconcile from the current read; do not re-add. */
+  | { kind: "unknown_create"; reason: string };
+
+export type DisconnectOutcome =
+  /** OAuth authorization cleared. Core keeps the row, now disconnected. */
+  | { kind: "authorization_revoked" }
+  /** The stored connection and its key were deleted through the existing remove owner. */
+  | { kind: "connection_removed" };
 
 export type ConnectorClient = {
   library(signal?: AbortSignal): Promise<ConnectorLibrary>;
@@ -35,17 +55,39 @@ export type ConnectorClient = {
     draft: ConnectDraft,
     signal?: AbortSignal,
   ): Promise<ConnectOutcome>;
-  /** Re-run authorization for an existing OAuth connector (reconnect / repair). */
+  /** Re-run authorization for an existing OAuth connector (reconnect / repair), by row id. */
   reauthorize(
     id: string,
     signal?: AbortSignal,
   ): Promise<{ authUrl: string | null; alreadyConnected: boolean }>;
-  disconnect(id: string, signal?: AbortSignal): Promise<void>;
-  remove(id: string, signal?: AbortSignal): Promise<void>;
+  /** End a stored connection through the owner that actually governs it. */
+  disconnect(
+    connector: Pick<ConnectorRow, "id" | "authType">,
+    signal?: AbortSignal,
+  ): Promise<DisconnectOutcome>;
   refresh(
     signal?: AbortSignal,
   ): Promise<{ tools: string[]; refreshedAt: string }>;
 };
+
+function messageOf(error: unknown, fallback: string): string {
+  return error instanceof Error && error.message ? error.message : fallback;
+}
+
+/**
+ * A 4xx is Core refusing the add before it wrote anything; anything else (transport failure, 5xx,
+ * timeout) could have created the row, so it must not be retried blindly.
+ */
+function createFailure(error: unknown): ConnectOutcome {
+  const reason = messageOf(error, "The connection request failed.");
+  if (
+    error instanceof CapiroApiError &&
+    error.status >= 400 &&
+    error.status < 500
+  )
+    return { kind: "refused", reason };
+  return { kind: "unknown_create", reason };
+}
 
 export function createConnectorClient(api: ConnectorApi): ConnectorClient {
   return {
@@ -56,25 +98,44 @@ export function createConnectorClient(api: ConnectorApi): ConnectorClient {
       const gate = connectGate(entry, draft);
       if (!gate.ok) return { kind: "refused", reason: gate.reason };
       const body: AddConnectorBody = gate.body;
-      const added = await api.request(
-        "meri.connectors.add",
-        { body },
-        { signal },
-      );
-      if (!added.oauthRequired) return { kind: "connected", connector: added };
-      const started = await api.request(
-        "meri.connectors.oauthStart",
-        { params: { id: added.id } },
-        { signal },
-      );
-      if (started.authUrl)
-        return { kind: "authorization_required", authUrl: started.authUrl };
-      if (started.alreadyConnected) return { kind: "already_connected" };
-      return {
-        kind: "refused",
-        reason:
-          "The service did not return an authorization page. Try connecting again from Connected services.",
-      };
+      let added: ConnectorRow & { oauthRequired: boolean };
+      try {
+        added = await api.request("meri.connectors.add", { body }, { signal });
+      } catch (error) {
+        return createFailure(error);
+      }
+      if (!added.oauthRequired) return { kind: "saved", connector: added };
+      try {
+        const started = await api.request(
+          "meri.connectors.oauthStart",
+          { params: { id: added.id } },
+          { signal },
+        );
+        if (started.authUrl)
+          return {
+            kind: "authorization_required",
+            connector: added,
+            authUrl: started.authUrl,
+          };
+        if (started.alreadyConnected)
+          return { kind: "already_connected", connector: added };
+        return {
+          kind: "authorization_pending",
+          connector: added,
+          reason:
+            "The service did not return an authorization page. The connection was created and is listed below as authorization pending; retry it there instead of connecting again.",
+        };
+      } catch (error) {
+        // The row exists. Losing its id here is what used to create a duplicate row per retry.
+        return {
+          kind: "authorization_pending",
+          connector: added,
+          reason: messageOf(
+            error,
+            "Authorization could not be started. The connection was created and is listed below as authorization pending.",
+          ),
+        };
+      }
     },
 
     async reauthorize(id, signal) {
@@ -89,20 +150,23 @@ export function createConnectorClient(api: ConnectorApi): ConnectorClient {
       };
     },
 
-    async disconnect(id, signal) {
-      await api.request(
-        "meri.connectors.oauthDisconnect",
-        { params: { id } },
-        { signal },
-      );
-    },
-
-    async remove(id, signal) {
+    async disconnect(connector, signal) {
+      if (connector.authType === "oauth") {
+        await api.request(
+          "meri.connectors.oauthDisconnect",
+          { params: { id: connector.id } },
+          { signal },
+        );
+        return { kind: "authorization_revoked" };
+      }
+      // token / none: the delete owner is the only path that also clears `enabled` and the stored
+      // key, so Meri's execution guard can no longer reach the service.
       await api.request(
         "meri.connectors.remove",
-        { params: { id } },
+        { params: { id: connector.id } },
         { signal },
       );
+      return { kind: "connection_removed" };
     },
 
     refresh: (signal) => api.request("meri.connectors.refresh", {}, { signal }),

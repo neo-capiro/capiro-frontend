@@ -23,7 +23,9 @@ import {
   groupedCards,
   libraryCards,
   libraryNotice,
+  type ConnectedServiceRow,
   type ConnectDraft,
+  type ConnectorReadState,
 } from "../../../../shared/meri-connectors/view";
 import type {
   ConnectorLibrary,
@@ -75,6 +77,13 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
   const [outcome, setOutcome] = useState<SettingsOutcome | undefined>();
   const [openCardId, setOpenCardId] = useState<string | undefined>();
   const [busyId, setBusyId] = useState<string | undefined>();
+  // Bumped after a settled request so the screen remounts and drops any drafted secret.
+  const [settled, setSettled] = useState(0);
+  const readState: ConnectorReadState = read.error
+    ? "unavailable"
+    : read.loading
+      ? "loading"
+      : "ready";
 
   const settle = useCallback(
     (result: ConnectOutcome, name: string) => {
@@ -83,22 +92,41 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
         window.location.assign(result.authUrl);
         return;
       }
+      if (result.kind === "unknown_create") {
+        // The add may have written a row. Reconcile from Core before offering anything else.
+        setFailure(
+          `${result.reason} The creation outcome is unknown, so the current connections were re-read; check them before trying again.`,
+        );
+        read.reload();
+        return;
+      }
       if (result.kind === "refused") {
         setFailure(result.reason);
         return;
       }
+      if (result.kind === "authorization_pending") {
+        setFailure(result.reason);
+        setOpenCardId(undefined);
+        setSettled((value) => value + 1);
+        read.reload();
+        return;
+      }
       setFailure(undefined);
+      const stored = result.connector;
       setOutcome({
         title:
           result.kind === "already_connected"
             ? `${name} is already authorized`
-            : `${name} connected`,
+            : `${name} saved`,
         detail:
           result.kind === "already_connected"
             ? "Core reports an existing authorization for this connection."
-            : "Meri can use the tools Core allows on this connection.",
+            : stored.lastError
+              ? `Core stored the connection but reported: ${stored.lastError} Meri can only use the tools Core actually discovered.`
+              : "Core stored the connection and accepted its first tool discovery. Meri still re-checks the connection on every call.",
       });
       setOpenCardId(undefined);
+      setSettled((value) => value + 1);
       read.reload();
     },
     [read],
@@ -154,24 +182,33 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
       .finally(() => setBusyId(undefined));
   };
 
-  const onDisconnect = (connectorId: string) => {
-    setBusyId(connectorId);
+  const onDisconnect = (row: ConnectedServiceRow) => {
+    setBusyId(row.id);
     setFailure(undefined);
     void client
-      .disconnect(connectorId)
-      .then(() => {
-        setOutcome({
-          title: "Disconnected",
-          detail:
-            "Core revoked the stored authorization, so Meri can no longer call this service's tools.",
-        });
+      .disconnect({ id: row.id, authType: row.authType })
+      .then((result) => {
+        setOutcome(
+          result.kind === "authorization_revoked"
+            ? {
+                title: "Authorization revoked",
+                detail:
+                  "Core cleared the stored OAuth authorization. The connection is listed as disconnected and Meri cannot call its tools until you authorize it again.",
+              }
+            : {
+                title: "Connection removed",
+                detail:
+                  "Core deleted the stored connection and its API key, so Meri can no longer call this service's tools.",
+              },
+        );
+        setSettled((value) => value + 1);
         read.reload();
       })
       .catch((error: unknown) =>
         setFailure(
           error instanceof Error && error.message
             ? error.message
-            : "The connector could not be disconnected.",
+            : "The connection could not be ended.",
         ),
       )
       .finally(() => setBusyId(undefined));
@@ -199,9 +236,10 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
       .finally(() => setBusyId(undefined));
   };
 
-  const cards = libraryCards(library?.connectors ?? []);
+  const cards = libraryCards(library?.connectors ?? [], servers);
   return (
     <ConnectorLibraryScreen
+      key={settled}
       chrome={{
         ...chrome,
         notice: failure
@@ -215,6 +253,7 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
             "Browse the external services Capiro can reach, connect one under your own identity, and review or revoke what is connected.",
         },
         notice: libraryNotice(library),
+        state: readState,
         groups: groupedCards(cards),
         connected: {
           title: "Connected",
@@ -231,6 +270,7 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
       onReauthorize={onReauthorize}
       onDisconnect={onDisconnect}
       onRefresh={onRefresh}
+      onRetry={read.reload}
     />
   );
 }

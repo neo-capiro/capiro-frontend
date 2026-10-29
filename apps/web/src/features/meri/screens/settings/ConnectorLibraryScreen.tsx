@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { FormField } from "../../ui/FormField";
 import ui from "../../ui/meri-ui.module.css";
+import field from "../../ui/panel.module.css";
 import { SettingsCard } from "./SettingsCard";
 import { SettingsCallout } from "./SettingsCallout";
 import { SettingsLayout } from "./SettingsLayout";
@@ -13,10 +14,13 @@ import type {
   SettingsNotice,
   SettingsOutcome,
 } from "./settings-view";
-import type {
-  ConnectDraft,
-  ConnectedServiceRow,
-  LibraryCard,
+import {
+  cardCommand,
+  connectionEndAction,
+  type ConnectDraft,
+  type ConnectedServiceRow,
+  type ConnectorReadState,
+  type LibraryCard,
 } from "../../../../shared/meri-connectors/view";
 
 /** One category of the reviewed library, in catalog order. */
@@ -25,6 +29,8 @@ export type LibraryGroup = { category: string; cards: readonly LibraryCard[] };
 export type ConnectorLibraryView = {
   heading: SettingsHeading;
   notice: SettingsNotice;
+  /** Distinguishes a read in flight or failed from a genuinely empty connection list. */
+  state: ConnectorReadState;
   groups: readonly LibraryGroup[];
   connected: {
     title: string;
@@ -67,12 +73,48 @@ const connectedColumns: readonly DataColumn<ConnectedServiceRow>[] = [
 ];
 
 /**
+ * A feature-local secret field.
+ *
+ * The shared `FormField` renders a plain text input, and a credential must not be shown on screen
+ * while it is typed. This keeps the value out of sight without changing a shared component or
+ * adding a place to store it: the draft lives only until this surface is re-mounted after settling.
+ */
+function SecretField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const id = useId();
+  return (
+    <div className={field.field}>
+      <label htmlFor={id}>{label}</label>
+      <input
+        id={id}
+        type="password"
+        autoComplete="new-password"
+        spellCheck={false}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      />
+    </div>
+  );
+}
+
+/**
  * 09.07 Connected services — Capiro's reviewed external-service library.
  *
  * Every action here is a request to Core: the surface never records a connection, never treats a
  * stored row as a working one, and never shows a credential it was given. The connect step collects
- * only the fields the entry's own catalog definition asks for; a catalog entry the workspace has not
- * been given, or one whose only transport is a local command, is not offered.
+ * only the fields the entry's own catalog definition asks for; an entry whose only transport is a
+ * local command is not offered.
+ *
+ * End-of-connection wording follows the owner that performs it: an OAuth row's authorization is
+ * revoked, while a token/none row is removed — the only path that also clears its stored key and
+ * `enabled`.
  */
 export function ConnectorLibraryScreen({
   chrome,
@@ -83,6 +125,7 @@ export function ConnectorLibraryScreen({
   onReauthorize,
   onDisconnect,
   onRefresh,
+  onRetry,
 }: {
   chrome: SettingsChrome;
   view: ConnectorLibraryView;
@@ -90,8 +133,10 @@ export function ConnectorLibraryScreen({
   onOpenCard?: (cardId: string) => void;
   onConnect?: (cardId: string, draft: ConnectDraft) => void;
   onReauthorize?: (connectorId: string) => void;
-  onDisconnect?: (connectorId: string) => void;
+  onDisconnect?: (row: ConnectedServiceRow) => void;
   onRefresh?: () => void;
+  /** Re-run the current read after a failed result. */
+  onRetry?: () => void;
 }) {
   const [drafts, setDrafts] = useState<Record<string, ConnectDraft>>({});
   const busy = view.busyId;
@@ -122,7 +167,28 @@ export function ConnectorLibraryScreen({
               Refresh tool lists
             </button>
           </div>
-          {view.connected.rows.length ? (
+          {view.state === "loading" ? (
+            <p role="status">
+              Reading the connected services for this account…
+            </p>
+          ) : view.state === "unavailable" ? (
+            <>
+              <p role="alert">
+                The connected services for this account could not be read, so no
+                connection is shown here. Nothing is known to be disconnected.
+              </p>
+              <div className={ui.row}>
+                <button
+                  type="button"
+                  className={ui.outline}
+                  onClick={onRetry}
+                  disabled={onRetry === undefined}
+                >
+                  Try again
+                </button>
+              </div>
+            </>
+          ) : view.connected.rows.length ? (
             <DataTable
               caption={view.connected.title}
               columns={connectedColumns}
@@ -133,31 +199,39 @@ export function ConnectorLibraryScreen({
               No external service is connected for this account yet.
             </p>
           )}
-          {view.connected.rows.map((row) => (
-            <div key={row.id} className={ui.row}>
-              <button
-                type="button"
-                className={ui.ghost}
-                disabled={!row.canAuthorize || busy !== undefined}
-                onClick={() => onReauthorize?.(row.id)}
-              >
-                {row.status === "Reconnect required"
-                  ? "Reconnect"
-                  : "Re-authorize"}
-              </button>
-              <button
-                type="button"
-                className={ui.ghost}
-                disabled={!row.canManage || busy !== undefined}
-                onClick={() => onDisconnect?.(row.id)}
-              >
-                Disconnect
-              </button>
-              {row.detail ? (
-                <span className={styles.connectionStatus}>{row.detail}</span>
-              ) : null}
-            </div>
-          ))}
+          {view.state === "ready"
+            ? view.connected.rows.map((row) => (
+                <div key={row.id} className={ui.row}>
+                  {row.authType === "oauth" ? (
+                    <button
+                      type="button"
+                      className={ui.ghost}
+                      disabled={!row.canAuthorize || busy !== undefined}
+                      onClick={() => onReauthorize?.(row.id)}
+                    >
+                      {row.status === "Reconnect required"
+                        ? "Reconnect"
+                        : "Re-authorize"}
+                    </button>
+                  ) : null}
+                  <button
+                    type="button"
+                    className={ui.ghost}
+                    disabled={!row.canManage || busy !== undefined}
+                    onClick={() => onDisconnect?.(row)}
+                  >
+                    {connectionEndAction(row) === "revoke"
+                      ? "Revoke authorization"
+                      : "Remove connection"}
+                  </button>
+                  {row.detail ? (
+                    <span className={styles.connectionStatus}>
+                      {row.detail}
+                    </span>
+                  ) : null}
+                </div>
+              ))
+            : null}
         </SettingsCard>
       }
       supporting={
@@ -167,6 +241,7 @@ export function ConnectorLibraryScreen({
             <SettingsCard key={group.category} title={group.category}>
               {group.cards.map((card) => {
                 const open = view.openCardId === card.id;
+                const command = cardCommand(card, open);
                 return (
                   <div key={card.id} className={styles.card}>
                     <p className={ui.muted}>
@@ -175,7 +250,7 @@ export function ConnectorLibraryScreen({
                       {card.scope}
                     </p>
                     <p>{card.summary}</p>
-                    {open ? (
+                    {open && !card.connected ? (
                       <>
                         {card.inputs.endpoint ? (
                           <FormField
@@ -188,7 +263,7 @@ export function ConnectorLibraryScreen({
                           />
                         ) : null}
                         {card.inputs.apiKey ? (
-                          <FormField
+                          <SecretField
                             label="API key"
                             value={draftFor(card.id).authToken ?? ""}
                             onChange={(value) =>
@@ -205,7 +280,7 @@ export function ConnectorLibraryScreen({
                                 setDraft(card.id, "oauthClientId", value)
                               }
                             />
-                            <FormField
+                            <SecretField
                               label="OAuth Client Secret"
                               value={draftFor(card.id).oauthClientSecret ?? ""}
                               onChange={(value) =>
@@ -223,20 +298,23 @@ export function ConnectorLibraryScreen({
                       <button
                         type="button"
                         className={open ? ui.primary : ui.outline}
-                        disabled={
-                          busy !== undefined || card.action === "manage"
-                        }
-                        onClick={() =>
-                          open
-                            ? onConnect?.(card.id, draftFor(card.id))
-                            : onOpenCard?.(card.id)
-                        }
+                        disabled={busy !== undefined || command.kind === "none"}
+                        onClick={() => {
+                          if (command.kind === "reauthorize")
+                            onReauthorize?.(command.connectorId);
+                          else if (command.kind === "connect")
+                            onConnect?.(card.id, draftFor(card.id));
+                          else if (command.kind === "open")
+                            onOpenCard?.(card.id);
+                        }}
                       >
-                        {card.action === "manage"
-                          ? "Connected"
-                          : card.action === "authorize"
-                            ? "Re-authorize"
-                            : open
+                        {command.kind === "none"
+                          ? "Refresh to manage"
+                          : command.kind === "reauthorize"
+                            ? card.authorization === "needs_reauth"
+                              ? "Reconnect"
+                              : "Re-authorize"
+                            : command.kind === "connect"
                               ? "Connect"
                               : "Set up"}
                       </button>
