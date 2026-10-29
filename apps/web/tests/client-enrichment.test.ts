@@ -21,6 +21,7 @@ const findingId = "10000000-0000-4000-8000-000000000003";
 const raw = {
   id: runId,
   clientId,
+  clientRevision: "a".repeat(64),
   status: "completed",
   requestedSources: ["lda"],
   sourceStates: { lda: { status: "completed", count: 1 } },
@@ -31,6 +32,7 @@ const raw = {
   findings: [
     {
       id: findingId,
+      revision: "b".repeat(64),
       runId,
       clientId,
       kind: "profile_field",
@@ -47,6 +49,12 @@ const raw = {
     },
   ],
 };
+const snapshot = (value = raw) => ({
+  clientId: value.clientId,
+  runId: value.id,
+  clientRevision: value.clientRevision,
+  findings: value.findings,
+});
 const review = () => runSchema.parse(raw);
 const response = (value: unknown) =>
   new Response(JSON.stringify(value), { status: 200 });
@@ -128,12 +136,14 @@ describe("enrichment contracts and scoped actions", () => {
     );
   });
   it("freshly rechecks changed values and makes zero writes", async () => {
-    const fetcher = vi.fn().mockResolvedValue(
-      response({
-        ...raw,
-        findings: [{ ...raw.findings[0], proposedValue: "Changed" }],
-      }),
-    );
+    const changed = {
+      ...raw,
+      findings: [{ ...raw.findings[0]!, proposedValue: "Changed" }],
+    };
+    const fetcher = vi
+      .fn()
+      .mockResolvedValueOnce(response(changed))
+      .mockResolvedValueOnce(response(snapshot(changed)));
     await expect(
       executeReviewAction(
         createApiClient(fetcher),
@@ -145,7 +155,10 @@ describe("enrichment contracts and scoped actions", () => {
         () => {},
       ),
     ).rejects.toThrow("Findings changed");
-    expect(fetcher).toHaveBeenCalledTimes(1);
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(fetcher.mock.calls.every((call) => call[1]?.method === "GET")).toBe(
+      true,
+    );
     expect(fetcher.mock.calls[0]?.[1]?.method).toBe("GET");
   });
   it("aborts unmounted preflight before POST", async () => {
@@ -167,11 +180,23 @@ describe("enrichment contracts and scoped actions", () => {
     ).rejects.toThrow();
     expect(fetcher).toHaveBeenCalledTimes(1);
   });
-  it("uses full-run apply receipt and preserves partial selected status", async () => {
-    const fetcher = vi
-      .fn()
-      .mockResolvedValueOnce(response(raw))
-      .mockResolvedValueOnce(response(raw));
+  it("uses the original review revisions and returns the exact application result", async () => {
+    const fetcher = vi.fn(
+      async (url: RequestInfo | URL, options?: RequestInit) => {
+        if (options?.method === "POST") {
+          const command = JSON.parse(String(options.body));
+          return response({
+            requestId: command.requestId,
+            status: "refused",
+            applied: [],
+            alreadyApplied: [],
+            errors: [{ findingId, message: "Client changed" }],
+            replayed: false,
+          });
+        }
+        return response(String(url).endsWith("/review") ? snapshot() : raw);
+      },
+    );
     const dispatched = vi.fn();
     const result = await executeReviewAction(
       createApiClient(fetcher),
@@ -182,22 +207,35 @@ describe("enrichment contracts and scoped actions", () => {
       new AbortController().signal,
       dispatched,
     );
+    expect(result.application?.status).toBe("refused");
     expect(result.findings[0]?.status).toBe("pending");
     expect(dispatched).toHaveBeenCalledOnce();
-    expect(JSON.parse(fetcher.mock.calls[1]?.[1]?.body ?? "{}")).toEqual({
-      findingIds: [findingId],
+    const post = fetcher.mock.calls.find((call) => call[1]?.method === "POST");
+    expect(JSON.parse(String(post?.[1]?.body))).toEqual({
+      requestId: expect.any(String),
+      expectedClientRevision: raw.clientRevision,
+      findings: [{ id: findingId, revision: "b".repeat(64) }],
     });
   });
   it("reject/restore acknowledgments require ok:true followed by scoped readback", async () => {
     const fetcher = vi
       .fn()
       .mockResolvedValueOnce(response(raw))
+      .mockResolvedValueOnce(response(snapshot()))
       .mockResolvedValueOnce(response({ ok: true }))
       .mockResolvedValueOnce(
         response({
           ...raw,
           findings: [{ ...raw.findings[0], status: "rejected" }],
         }),
+      )
+      .mockResolvedValueOnce(
+        response(
+          snapshot({
+            ...raw,
+            findings: [{ ...raw.findings[0]!, status: "rejected" }],
+          }),
+        ),
       );
     const result = await executeReviewAction(
       createApiClient(fetcher),
@@ -209,7 +247,7 @@ describe("enrichment contracts and scoped actions", () => {
       () => {},
     );
     expect(result.findings[0]?.status).toBe("rejected");
-    expect(JSON.parse(fetcher.mock.calls[1]?.[1]?.body ?? "{}")).toEqual({
+    expect(JSON.parse(fetcher.mock.calls[2]?.[1]?.body ?? "{}")).toEqual({
       reason: "Wrong source",
     });
   });
@@ -217,6 +255,7 @@ describe("enrichment contracts and scoped actions", () => {
     const fetcher = vi
       .fn()
       .mockResolvedValueOnce(response(raw))
+      .mockResolvedValueOnce(response(snapshot()))
       .mockRejectedValueOnce(new Error("lost response"));
     await expect(
       executeReviewAction(
@@ -229,7 +268,7 @@ describe("enrichment contracts and scoped actions", () => {
         () => {},
       ),
     ).rejects.toThrow("lost response");
-    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(fetcher).toHaveBeenCalledTimes(3);
   });
   it("fails closed for stale, invalidated, role-changed and different actor cache", () => {
     const cache = new QueryClient();
@@ -276,13 +315,13 @@ describe("enrichment contracts and scoped actions", () => {
       tenant: { id: "tenant", name: "Test" },
       role: "user_admin",
     });
-    const fetcher = vi.fn(async () => {
+    const fetcher = vi.fn(async (url: RequestInfo | URL) => {
       cache.setQueryData(["identity"], {
         user: { id: "second", email: null },
         tenant: { id: "tenant", name: "Test" },
         role: "user_admin",
       });
-      return response(raw);
+      return response(String(url).endsWith("/review") ? snapshot() : raw);
     });
     await expect(
       executeReviewAction(
@@ -295,7 +334,7 @@ describe("enrichment contracts and scoped actions", () => {
         () => {},
       ),
     ).rejects.toThrow("current session");
-    expect(fetcher).toHaveBeenCalledOnce();
+    expect(fetcher).toHaveBeenCalledTimes(2);
   });
   it("refuses identity state carrying a current error even with stale success data", () => {
     const cache = new QueryClient();
@@ -317,7 +356,13 @@ describe("enrichment contracts and scoped actions", () => {
     );
   });
   it("rejects cancellation receipt which still reports running", async () => {
-    const fetcher = vi.fn(async () => response({ ...raw, status: "running" }));
+    const fetcher = vi.fn(async (url: RequestInfo | URL) =>
+      response(
+        String(url).endsWith("/review")
+          ? snapshot()
+          : { ...raw, status: "running" },
+      ),
+    );
     await expect(
       executeReviewAction(
         createApiClient(fetcher),
@@ -329,14 +374,16 @@ describe("enrichment contracts and scoped actions", () => {
         () => {},
       ),
     ).rejects.toThrow("Cancellation was not confirmed");
-    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(fetcher).toHaveBeenCalledTimes(3);
   });
   it("rejects ignore acknowledgment without a rejected saved finding", async () => {
     const fetcher = vi
       .fn()
       .mockResolvedValueOnce(response(raw))
+      .mockResolvedValueOnce(response(snapshot()))
       .mockResolvedValueOnce(response({ ok: true }))
-      .mockResolvedValueOnce(response(raw));
+      .mockResolvedValueOnce(response(raw))
+      .mockResolvedValueOnce(response(snapshot()));
     await expect(
       executeReviewAction(
         createApiClient(fetcher),

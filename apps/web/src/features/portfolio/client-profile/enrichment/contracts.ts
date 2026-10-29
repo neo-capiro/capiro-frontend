@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { ApplicationResult } from "./application-result";
 // Values intentionally remain JSON: finding kinds carry different server-owned
 // payloads. The review renders them without synthesizing domain fields.
 const json = z.json();
@@ -11,6 +12,10 @@ export const sources = {
   bill_tracker: "Bill Tracker",
 } as const;
 export const findingSchema = z.object({
+  revision: z
+    .string()
+    .regex(/^[a-f0-9]{64}$/)
+    .optional(),
   id: z.string().uuid(),
   runId: z.string().uuid(),
   clientId: z.string().uuid().optional(),
@@ -35,11 +40,16 @@ export const findingSchema = z.object({
   rejectionReason: z.string().nullable().optional(),
   appliedAt: z.string().nullable(),
   createdAt: z.string(),
+  updatedAt: z.string().optional(),
 });
 export const runSchema = z
   .object({
     id: z.string().uuid(),
     clientId: z.string().uuid(),
+    clientRevision: z
+      .string()
+      .regex(/^[a-f0-9]{64}$/)
+      .optional(),
     status: z.enum(["running", "completed", "partial", "failed", "cancelled"]),
     requestedSources: z.array(z.string()),
     sourceStates: z.record(z.string(), json),
@@ -120,7 +130,9 @@ export const setupSchema = z.object({
   suggestedIdentities: z.array(identityOption),
   taskPreview: z.array(z.string()),
 });
-export type FillRun = z.infer<typeof runSchema>;
+export type FillRun = z.infer<typeof runSchema> & {
+  application?: ApplicationResult;
+};
 export type Finding = z.infer<typeof findingSchema>;
 export type Setup = z.infer<typeof setupSchema>;
 export type JsonValue = z.infer<typeof json>;

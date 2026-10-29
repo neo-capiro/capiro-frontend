@@ -7,6 +7,13 @@ import {
 } from "@/shared/portfolio/auth/identity";
 import { canSelectFinding, runSchema, type FillRun } from "./contracts";
 import { enrichmentPath, loadRun } from "./queries";
+import {
+  applicationCommand,
+  applicationAttemptSchema,
+  type ApplicationAttempt,
+  type ApplicationResult,
+} from "./review-contracts";
+import { sendApplication } from "./application-api";
 export type ReviewActor = { userId: string; tenantId: string };
 export type ReviewAction =
   | { kind: "apply"; findingIds: string[] }
@@ -59,8 +66,12 @@ export async function executeReviewAction(
   action: ReviewAction,
   guard: () => void,
   signal: AbortSignal,
-  onDispatched: () => void,
-) {
+  onDispatched: (attempt?: ApplicationAttempt) => void | Promise<void>,
+  onReceived?: (
+    attempt: ApplicationAttempt,
+    result: ApplicationResult,
+  ) => Promise<void>,
+): Promise<FillRun> {
   guard();
   const fresh = await loadRun(api, clientId, review.id, signal);
   guard();
@@ -73,7 +84,10 @@ export async function executeReviewAction(
         : [];
   if (
     ids.length &&
-    (!selectedUnchanged(review, fresh, ids) || new Set(ids).size !== ids.length)
+    (!selectedUnchanged(review, fresh, ids) ||
+      new Set(ids).size !== ids.length ||
+      ((action.kind === "apply" || action.kind === "assign") &&
+        review.clientRevision !== fresh.clientRevision))
   )
     throw new ApiError(
       409,
@@ -118,64 +132,65 @@ export async function executeReviewAction(
     );
   guard();
   signal.throwIfAborted();
-  onDispatched();
   const path = enrichmentPath(clientId);
   const runPath = `${path}/runs/${review.id}`;
-  if (action.kind === "apply" || action.kind === "cancel") {
+  if (action.kind === "apply" || action.kind === "assign") {
+    const attempt = applicationAttemptSchema.parse({
+      kind: action.kind,
+      ...(action.kind === "assign"
+        ? { findingId: action.findingId, target: action.target }
+        : {}),
+      runId: review.id,
+      command: applicationCommand(review, ids),
+    });
+    await onDispatched(attempt);
+    const application = await sendApplication(
+      api,
+      clientId,
+      attempt,
+      guard,
+      signal,
+      onReceived,
+    );
+    const result = await loadRun(api, clientId, review.id, signal);
+    guard();
+    return { ...result, application };
+  }
+  await onDispatched();
+  guard();
+  signal.throwIfAborted();
+  if (action.kind === "cancel") {
     const result = await api.request(
       "core",
       `${runPath}/${action.kind}`,
       runSchema.refine((r) => r.id === review.id && r.clientId === clientId),
       {
         method: "POST",
-        body: action.kind === "apply" ? { findingIds: ids } : {},
+        body: {},
         signal,
       },
     );
-    if (action.kind === "cancel" && result.status !== "cancelled")
+    if (result.status !== "cancelled")
       throw new ApiError(
         502,
         "Cancellation was not confirmed by the saved run.",
       );
     return result;
   }
-  if (action.kind === "assign")
-    await api.request(
-      "core",
-      `${runPath}/findings/${action.findingId}/assign-matter`,
-      z
-        .object({
-          findingId: z.literal(action.findingId),
-          matterId: z.string().uuid().nullable(),
-          alreadyApplied: z.boolean(),
-        })
-        .refine((r) =>
-          "matterId" in action.target
-            ? r.matterId === action.target.matterId
-            : r.matterId !== null,
-        ),
-      { method: "POST", body: action.target, signal },
-    );
-  else
-    await api.request(
-      "core",
-      `${path}/findings/${action.findingId}/${action.kind}`,
-      z.object({ ok: z.literal(true) }),
-      {
-        method: "POST",
-        body: action.kind === "reject" ? { reason: action.reason.trim() } : {},
-        signal,
-      },
-    );
+  await api.request(
+    "core",
+    `${path}/findings/${action.findingId}/${action.kind}`,
+    z.object({ ok: z.literal(true) }),
+    {
+      method: "POST",
+      body: action.kind === "reject" ? { reason: action.reason.trim() } : {},
+      signal,
+    },
+  );
   guard();
   signal.throwIfAborted();
   const result = await loadRun(api, clientId, review.id, signal);
-  const expected =
-    action.kind === "reject"
-      ? "rejected"
-      : action.kind === "restore"
-        ? "pending"
-        : "accepted";
+  const expected = action.kind === "reject" ? "rejected" : "pending";
   if (
     result.findings.find((f) => f.id === action.findingId)?.status !== expected
   )

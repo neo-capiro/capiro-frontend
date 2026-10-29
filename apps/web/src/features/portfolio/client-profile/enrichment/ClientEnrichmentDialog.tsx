@@ -18,6 +18,8 @@ import type { ReviewAction } from "./actions";
 import { FindingReview } from "./FindingReview";
 import { ResearchSetup } from "./ResearchSetup";
 import { RunLedger } from "./RunLedger";
+import { ReviewFeedback } from "./ReviewFeedback";
+import { ReviewConfirmation } from "./ReviewConfirmation";
 import styles from "./enrichment.module.css";
 export function ClientEnrichmentDialog({
   clientId,
@@ -65,10 +67,15 @@ function ClientEnrichmentReview({
   }>();
   const [showSetup, setShowSetup] = useState(false);
   const [upload, setUpload] = useState<{ beforeDispatch: () => void }>();
-  const action = useReviewAction(clientId, open, {
-    userId: identity.data?.user.id ?? "",
-    tenantId: identity.data?.tenant?.id ?? "",
-  });
+  const action = useReviewAction(
+    clientId,
+    open,
+    {
+      userId: identity.data?.user.id ?? "",
+      tenantId: identity.data?.tenant?.id ?? "",
+    },
+    canRead,
+  );
   const run = action.uncertain
     ? action.uncertainReview
     : !latest.error
@@ -79,7 +86,11 @@ function ClientEnrichmentReview({
       .filter((f) => selected.includes(f.id) && canSelectFinding(f))
       .map((f) => f.id) ?? [];
   const busy =
-    action.mutation.isPending || latest.isFetching || action.uncertain;
+    action.mutation.isPending ||
+    action.recovery.isPending ||
+    action.checkingRecovery ||
+    latest.isFetching ||
+    action.uncertain;
   const request = (next: ReviewAction) => {
     if (run) setConfirm({ run, action: next });
   };
@@ -147,26 +158,12 @@ function ClientEnrichmentReview({
               error={latest.error}
               retry={() => void latest.refetch()}
             />
-            <QueryState error={action.mutation.error} />
-            <QueryState error={action.readError} />
-            {action.uncertain && (
-              <div role="alert" className="status error">
-                The request may have saved changes. Do not repeat it. Refresh
-                the saved review to inspect current status; this service has no
-                operation receipt for resolving an ambiguous response.
-                <button
-                  className="button"
-                  onClick={() => void action.refreshUncertainReview()}
-                >
-                  Refresh saved review
-                </button>
-              </div>
-            )}
-            {action.receipt && (
-              <p role="status" className="status">
-                {action.receipt}
-              </p>
-            )}
+            <ReviewFeedback
+              action={action}
+              findings={run?.findings ?? []}
+              canEdit={canEdit}
+              onRecovered={() => setConfirm(undefined)}
+            />
             {(showSetup || (!latest.isPending && !latest.error && !run)) && (
               <>
                 <QueryState
@@ -237,53 +234,20 @@ function ClientEnrichmentReview({
                   />
                 ))}
                 {confirm && (
-                  <section
-                    className={styles.confirm}
-                    role="region"
-                    aria-label="Confirm review action"
-                  >
-                    <h3>
-                      {confirm.action.kind === "apply"
-                        ? `Apply ${confirm.action.findingIds.length} selected findings?`
-                        : confirm.action.kind === "cancel"
-                          ? "Cancel this run?"
-                          : confirm.action.kind === "assign"
-                            ? "Apply finding and assign matter?"
-                            : confirm.action.kind === "reject"
-                              ? "Ignore this finding?"
-                              : "Restore this finding?"}
-                    </h3>
-                    <p>
-                      {confirm.action.kind === "cancel"
-                        ? "Cancellation stops remaining work. It does not undo changes already saved."
-                        : "This changes the saved client review immediately. The service rechecks pending findings; a group apply can partially succeed."}
-                    </p>
-                    <div className="row">
-                      <button
-                        className="button"
-                        disabled={action.mutation.isPending}
-                        onClick={() => setConfirm(undefined)}
-                      >
-                        Back to review
-                      </button>
-                      <button
-                        className="button primary"
-                        disabled={
-                          busy ||
-                          (!canEdit && confirm.action.kind !== "cancel") ||
-                          !canRead
-                        }
-                        onClick={() =>
-                          action.mutation.mutate(
-                            { review: confirm.run, action: confirm.action },
-                            { onSuccess: () => setConfirm(undefined) },
-                          )
-                        }
-                      >
-                        Confirm {confirm.action.kind}
-                      </button>
-                    </div>
-                  </section>
+                  <ReviewConfirmation
+                    action={confirm.action}
+                    pending={action.mutation.isPending}
+                    busy={busy}
+                    canRead={canRead}
+                    canEdit={canEdit}
+                    onBack={() => setConfirm(undefined)}
+                    onConfirm={() =>
+                      action.mutation.mutate(
+                        { review: confirm.run, action: confirm.action },
+                        { onSuccess: () => setConfirm(undefined) },
+                      )
+                    }
+                  />
                 )}
               </>
             )}

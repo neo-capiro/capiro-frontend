@@ -85,9 +85,19 @@ test("saved run current/proposed, sources, selection and explicit partial apply"
     .getByRole("button", { name: "Confirm apply", exact: true })
     .click();
   await expect(drawer).toContainText(
-    "1 of 2 selected findings are now accepted",
+    "Application partial: 1 applied, 0 already applied, 1 not applied.",
   );
-  expect(state.posts[0]?.body).toEqual({ findingIds: [findingId, advocacyId] });
+  expect(state.posts[0]?.body).toEqual({
+    requestId: expect.any(String),
+    expectedClientRevision: "a".repeat(64),
+    findings: [findingId, advocacyId].map((id) => ({
+      id,
+      revision: "b".repeat(64),
+    })),
+  });
+  await expect(drawer).toContainText(
+    "The source evidence could not be applied.",
+  );
   expect(unexpected).toEqual([]);
 });
 test("ignore with reason then restore uses persisted acknowledgments", async ({
@@ -143,9 +153,14 @@ test("matter assignment explicitly applies immediately with exact receipt", asyn
     .getByRole("button", { name: "Confirm assign", exact: true })
     .click();
   await expect(drawer).toContainText(
-    "Finding applied and matter assignment acknowledged",
+    "Application completed: 1 applied, 0 already applied, 0 not applied.",
   );
-  expect(state.posts[0]?.body).toEqual({ matterId });
+  expect(state.posts[0]?.body).toEqual({
+    matterId,
+    requestId: expect.any(String),
+    expectedClientRevision: "a".repeat(64),
+    findings: [{ id: advocacyId, revision: "b".repeat(64) }],
+  });
   expect(unexpected).toEqual([]);
 });
 test("wrong matter receipt cannot show assignment success", async ({
@@ -168,10 +183,10 @@ test("wrong matter receipt cannot show assignment success", async ({
     .getByRole("button", { name: "Confirm assign", exact: true })
     .click();
   await expect(drawer).toContainText("The request may have saved changes");
-  await expect(drawer).not.toContainText("assignment acknowledged");
+  await expect(drawer).not.toContainText("Application completed");
   expect(state.posts).toHaveLength(1);
 });
-test("lost apply response freezes repeat writes even after closing/reopening", async ({
+test("lost apply response survives reload and recovers the exact original request", async ({
   page,
 }) => {
   const { state } = await installEnrichment(page);
@@ -198,6 +213,17 @@ test("lost apply response freezes repeat writes even after closing/reopening", a
     drawer.getByRole("button", { name: "Select all new" }),
   ).toBeDisabled();
   expect(state.posts).toHaveLength(1);
+  drawer = await openReview(page);
+  await expect(drawer).toContainText("The request may have saved changes");
+  await drawer
+    .getByRole("button", { name: "Recover application result" })
+    .click();
+  await expect(drawer).toContainText("Application completed: 2 applied");
+  expect(state.posts).toHaveLength(2);
+  expect(state.posts[1]).toEqual(state.posts[0]);
+  await expect(
+    drawer.getByRole("button", { name: "Select all new" }),
+  ).toBeEnabled();
 });
 test("changed finding preflight preserves review and prevents POST", async ({
   page,
