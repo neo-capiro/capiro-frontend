@@ -6,7 +6,7 @@ import { ConnectorAccountsHost } from "./ConnectorAccountsHost";
 import { HelpShortcutsScreen } from "./HelpShortcutsScreen";
 import { NotificationsAccountScreen } from "./NotificationsAccountScreen";
 import { PersonalPreferencesScreen } from "./PersonalPreferencesScreen";
-import { PrivacyDeletionScreen } from "./PrivacyDeletionScreen";
+import { MemoryRetentionPolicyHost } from "../../privacy/MemoryRetentionPolicyHost";
 import { SkillsTemplatesScreen } from "./SkillsTemplatesScreen";
 import { UsageLimitsScreen } from "./UsageLimitsScreen";
 import { UsageOverviewHost } from "../../usage-overview/UsageOverviewHost";
@@ -139,7 +139,7 @@ export function MeriPreferencesPanel({
         />
       );
     case "privacy":
-      return <PrivacyDeletionScreen chrome={chrome} view={views.privacy} />;
+      return <MemoryRetentionPolicyHost chrome={chrome} />;
     case "help":
       return (
         <HelpShortcutsScreen

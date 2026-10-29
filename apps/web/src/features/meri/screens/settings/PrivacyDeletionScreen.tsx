@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
@@ -46,10 +47,12 @@ export function PrivacyDeletionScreen({
   chrome,
   view,
   outcome,
+  policyState,
 }: {
   chrome: SettingsChrome;
   view: PrivacyDeletionView;
   outcome?: SettingsOutcome | undefined;
+  policyState?: ReactNode;
 }) {
   const { stores, retained } = view;
   return (
@@ -59,6 +62,7 @@ export function PrivacyDeletionScreen({
       outcome={outcome}
       primary={
         <SettingsCard title={stores.title} description={stores.description}>
+          {policyState}
           <DataTable
             caption={stores.title}
             columns={columns}
