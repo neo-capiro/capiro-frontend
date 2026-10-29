@@ -1,5 +1,6 @@
 import { it, expect } from "vitest";
 import fixture from "./fixtures/federal-workbench.json";
+import official from "./fixtures/federal-official-source.json";
 import { proxyDocumentRequest } from "../src/shared/meri-documents/proxy";
 import { readDocumentConfig } from "../src/shared/meri-documents/config";
 const origin = "https://frontend.example.test",
@@ -62,21 +63,45 @@ it("refuses a widened workbench body before forwarding", async () => {
   expect(response.status).not.toBe(200);
   expect(calls).toBe(0);
 });
-it("requires enabled word generation for workbench publication", async () => {
+it.each(["federal-publish", "federal-import"])(
+  "requires enabled word generation for %s",
+  async (route) => {
+    let calls = 0;
+    const response = await proxyDocumentRequest(
+      request(route, {}),
+      route,
+      readDocumentConfig({
+        ...environment,
+        MERI_DOCUMENT_OPERATION: "create_excel",
+      }),
+      async () => "native-cookie-token",
+      (async () => {
+        calls++;
+        return Response.json({});
+      }) as typeof fetch,
+    );
+    expect(response.status).toBe(503);
+    expect(calls).toBe(0);
+  },
+);
+it("forwards exact official-source pins with the existing native credential", async () => {
   let calls = 0;
   const response = await proxyDocumentRequest(
-    request("federal-publish", {}),
-    "federal-publish",
-    readDocumentConfig({
-      ...environment,
-      MERI_DOCUMENT_OPERATION: "create_excel",
-    }),
+    request("federal-import", official.input),
+    "federal-import",
+    readDocumentConfig(environment),
     async () => "native-cookie-token",
-    (async () => {
+    (async (url, init) => {
       calls++;
-      return Response.json({});
+      expect(String(url)).toBe(
+        "https://meri.example.test/api/documents/federal-import",
+      );
+      expect(
+        JSON.parse(new TextDecoder().decode(init?.body as Uint8Array)),
+      ).toEqual(official.input);
+      return Response.json(official.imported);
     }) as typeof fetch,
   );
-  expect(response.status).toBe(503);
-  expect(calls).toBe(0);
+  expect(response.status).toBe(200);
+  expect(calls).toBe(1);
 });

@@ -32,6 +32,7 @@ const routes = new Set<string>([
   "federal-prepare",
   "federal-load",
   "federal-publish",
+  "federal-import",
 ]);
 const jsonHeaders = {
   "Content-Type": "application/json",
@@ -82,10 +83,16 @@ export async function proxyDocumentRequest(
   // Generation needs the bound document family. Preview publication is an explicit derived write
   // with its own current remote permission; readEnabled only enables forwarding, never grants it.
   const write =
-    route === "create" || route === "revise" || route === "federal-publish";
+    route === "create" ||
+    route === "revise" ||
+    route === "federal-publish" ||
+    route === "federal-import";
   if (!(write ? config.enabled && config.operation : config.readEnabled))
     return unavailable(503);
-  if (route === "federal-publish" && config.operation !== "create_word")
+  if (
+    (route === "federal-publish" || route === "federal-import") &&
+    config.operation !== "create_word"
+  )
     return unavailable(503);
   try {
     return await withActionDeadline([request.signal], async (signal) => {
