@@ -5,6 +5,7 @@ import { MeriDialog } from "../ui/MeriDialog";
 import type { LibraryVersion } from "../../../shared/meri-documents/library-access";
 import { OfficeEditorControls } from "./OfficeEditorControls";
 import { useOfficeEditor } from "./useOfficeEditor";
+import { OfficeDownloadLink } from "./OfficeDownloadLink";
 import styles from "./office.module.css";
 
 export function OfficeEditor({
@@ -74,6 +75,15 @@ export function OfficeEditor({
           </div>
         )}
         <OfficeEditorControls editor={host.editor} state={state} />
+        {connection.status === "ready" && (
+          <OfficeDownloadLink
+            key={`${connection.lifetimeKey}:${state.snapshot?.draft.publishedVersionId ?? version.versionId}`}
+            port={connection.port}
+            versionId={
+              state.snapshot?.draft.publishedVersionId ?? version.versionId
+            }
+          />
+        )}
         <div ref={container} className={styles.frame} hidden={!state.frame} />
         <p className={styles.note}>
           Closing keeps the saved draft private. Discard removes it. Saved

@@ -1,7 +1,7 @@
 import { SessionLifetimeController } from "../meri-actions/opaque-session-controller";
 import { bootstrapLibrarySession } from "../meri-documents/library-session";
 import { OfficeEditorController, type OfficeFrame } from "./editor-controller";
-import { createOfficeTransport } from "./transport";
+import { createOfficeBrowserPort } from "./file-access";
 import type { officeDraftSelection } from "./draft-selection";
 
 /** Reuses the existing native session owner; routine renewal preserves the frame,
@@ -29,7 +29,7 @@ export function createOfficeEditorHost(options: {
         signal,
       }),
     createPort: ({ session: receipt, signal, isCurrent, onAccessLost }) =>
-      createOfficeTransport({
+      createOfficeBrowserPort({
         credential: receipt.credential,
         lifetime: signal,
         isCurrent: () => isCurrent() && options.recovery.isCurrent(),
