@@ -85,9 +85,13 @@ image instead, so the Dockerfile is unchanged from `ee470d7d`.
 - Local container serving, `capiro-dev-web` (ALB default, 8080) and
   `capiro-dev-web-vnext` (os.capiro.ai, 8080) route/auth/proxy/MCP behaviour,
   authenticated browser behaviour and visual/UI acceptance are all unverified.
-  The legacy task definitions supply `API_BASE_URL`, `WEB_SURFACE`,
-  `CLERK_PUBLISHABLE_KEY` and release-SHA variables, while this app reads
-  `CORE_API_BASE_URL`/`STRATEGY_API_BASE_URL`/`WORKSPACE_API_BASE_URL`/
-  `INTELLIGENCE_API_BASE_URL`/`ONBOARD_API_BASE_URL`,
-  `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY`. A cutover therefore
-  needs that explicit mapping; it is not implied by a healthy `/healthz`.
+  Runtime configuration is resolved per request (`apps/web/src/app/layout.tsx`
+  awaits `connection()` and passes `readCapiroConfig(process.env).publishableKey`
+  down), so the deployed image needs the app's own variable names at runtime: the
+  Clerk publishable/secret pair and `CORE_API_BASE_URL` are required;
+  `STRATEGY_API_BASE_URL`, `WORKSPACE_API_BASE_URL` and
+  `INTELLIGENCE_API_BASE_URL` enable those features; Onboarding stays excluded,
+  so `ONBOARD_API_BASE_URL` is neither required nor enabled. The legacy task
+  definitions supply different names (`API_BASE_URL`, `WEB_SURFACE`,
+  `CLERK_PUBLISHABLE_KEY`), so a cutover needs that explicit mapping — it is not
+  implied by a healthy `/healthz`.
