@@ -7,6 +7,8 @@ import {
   isOrdinarySaveOperation,
   ordinarySaveConflictCode,
   type OrdinarySaveConflictCode,
+  type PublicationConflictCode,
+  isProspectPublication,
 } from "./workspace-ordinary-save-errors";
 import { readBoundedJson } from "./gateway-input";
 import {
@@ -26,7 +28,10 @@ import {
 export const jsonError = (
   status: number,
   message: string,
-  code?: WorkspaceBriefConflictCode | OrdinarySaveConflictCode,
+  code?:
+    | WorkspaceBriefConflictCode
+    | OrdinarySaveConflictCode
+    | PublicationConflictCode,
 ) =>
   Response.json(
     { message, ...(code ? { code } : {}) },
@@ -96,12 +101,17 @@ export async function serviceErrorResponse(
       // A malformed native response cannot establish a rejected command.
     }
   }
-  let code: WorkspaceBriefConflictCode | OrdinarySaveConflictCode | undefined;
+  let code:
+    | WorkspaceBriefConflictCode
+    | OrdinarySaveConflictCode
+    | PublicationConflictCode
+    | undefined;
   if (
     !publicCapability &&
     response.status === 409 &&
     (isWorkspaceBriefOperation(operation) ||
       isOrdinarySaveOperation(operation) ||
+      isProspectPublication(operation) ||
       isResearchSharePublication(operation))
   ) {
     try {

@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 import fixture from "./fixtures/federal-workbench.json";
+import official from "./fixtures/federal-official-source.json";
+import { FederalSourceStaleError } from "../src/shared/meri-documents/federal-workbench";
 import { FederalWorkbenchAccess } from "../src/shared/meri-documents/federal-workbench";
 import { federalTransport } from "../src/shared/meri-documents/workflow-transport";
 import type { DocumentLibraryAccess } from "../src/shared/meri-documents/library-access";
@@ -20,7 +22,8 @@ function setup() {
     lost = 0,
     fail = false,
     tamper = false,
-    foreign = false;
+    foreign = false,
+    stale: "NOT_DISPATCHED" | "UNKNOWN" | "RESULT_NOT_RELEASED" | null = null;
   const requests: { route: string; body: Record<string, unknown> }[] = [],
     life = new AbortController();
   const context = {
@@ -60,14 +63,21 @@ function setup() {
       body = JSON.parse(String(init?.body));
     requests.push({ route, body });
     if (fail) throw Error("Synthetic lost acknowledgement");
+    if (stale)
+      return Response.json(
+        { error: { code: "DRAFT_SOURCE_STALE", outcome: stale } },
+        { status: 409 },
+      );
     const result = structuredClone(
-      route === "federal-prepare"
-        ? fixture.review
-        : route === "federal-load"
-          ? fixture.savedReview
-          : fixture.publications[
-              body.output as keyof typeof fixture.publications
-            ],
+      route === "federal-import"
+        ? official.imported
+        : route === "federal-prepare"
+          ? fixture.review
+          : route === "federal-load"
+            ? fixture.savedReview
+            : fixture.publications[
+                body.output as keyof typeof fixture.publications
+              ],
     );
     if (route === "federal-publish") {
       const publication = result as typeof fixture.publications.draft;
@@ -107,6 +117,9 @@ function setup() {
     setFail: (v: boolean) => {
       fail = v;
     },
+    setStale: (v: typeof stale) => {
+      stale = v;
+    },
     tamper: () => {
       tamper = true;
     },
@@ -119,6 +132,76 @@ function setup() {
   };
 }
 describe("federal review session", () => {
+  it("imports the exact official source through the installed public receiver and shares export recovery", async () => {
+    const x = setup(),
+      signal = new AbortController().signal;
+    x.setFail(true);
+    await expect(
+      x.port.importSource(official.input.selection, signal),
+    ).rejects.toThrow();
+    const original = x.requests[0]!.body;
+    expect(x.attempt().status).toBe("unresolved");
+    await expect(
+      x.port.importSource(
+        { ...official.input.selection, textHash: "b".repeat(64) },
+        signal,
+      ),
+    ).rejects.toThrow("original");
+    const review = await (async () => {
+      x.setFail(false);
+      return x.port.prepare(selection, signal);
+    })();
+    await expect(x.port.publish(review, "operative", signal)).rejects.toThrow(
+      "original",
+    );
+    expect(x.requests).toHaveLength(2);
+    const source = await x.port.importSource(official.input.selection, signal);
+    expect(x.requests.at(-1)!.body).toEqual(original);
+    expect(source).toEqual({
+      versionId: official.imported.publication.version.versionId,
+      sha256: official.imported.publication.version.object.sha256,
+      source: official.imported.source,
+    });
+    expect(x.attempt().status).toBe("idle");
+  });
+  it("reserves the busy slot before asynchronous hashing can race two file writes", async () => {
+    const x = setup(),
+      signal = new AbortController().signal;
+    const first = x.port.importSource(official.input.selection, signal);
+    await expect(
+      x.port.importSource(official.input.selection, signal),
+    ).rejects.toThrow("in progress");
+    await first;
+    expect(x.requests).toHaveLength(1);
+  });
+  it.each(["NOT_DISPATCHED", "UNKNOWN", "RESULT_NOT_RELEASED"] as const)(
+    "stale official source preserves %s delivery semantics",
+    async (outcome) => {
+      const x = setup(),
+        signal = new AbortController().signal;
+      x.setStale(outcome);
+      await expect(
+        x.port.importSource(official.input.selection, signal),
+      ).rejects.toBeInstanceOf(FederalSourceStaleError);
+      const original = x.requests[0]!.body;
+      expect(x.attempt().status).toBe(
+        outcome === "NOT_DISPATCHED" ? "idle" : "unresolved",
+      );
+      x.setStale(null);
+      await x.port.importSource(official.input.selection, signal);
+      if (outcome !== "NOT_DISPATCHED")
+        expect(x.requests[1]!.body).toEqual(original);
+    },
+  );
+  it("surfaces stale source preparation without replacing the review or starting a file delivery", async () => {
+    const x = setup(),
+      signal = new AbortController().signal;
+    x.setStale("NOT_DISPATCHED");
+    await expect(x.port.prepare(selection, signal)).rejects.toBeInstanceOf(
+      FederalSourceStaleError,
+    );
+    expect(x.attempt().status).toBe("idle");
+  });
   it("reads exact retained source, prepares and publishes through the actual public receiver", async () => {
     const x = setup(),
       signal = new AbortController().signal;

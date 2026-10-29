@@ -1,6 +1,7 @@
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import fixture from "../../../tests/fixtures/federal-workbench.json";
+import official from "../../../tests/fixtures/federal-official-source.json";
 import { FederalWorkbench } from "../../../src/features/meri/files/FederalWorkbench";
 import { FederalWorkbenchAccess } from "../../../src/shared/meri-documents/federal-workbench";
 import { federalTransport } from "../../../src/shared/meri-documents/workflow-transport";
@@ -17,6 +18,8 @@ declare global {
 window.federalCalls = [];
 let attempt: DocumentAttempt = idleDocumentAttempt;
 let loseOnce = new URL(location.href).searchParams.has("unknown");
+const officialMode = new URL(location.href).searchParams.has("official");
+let staleOnce = new URL(location.href).searchParams.has("stale");
 const library = {
   dispose() {},
   context: {},
@@ -77,10 +80,24 @@ const fetcher = (async (url, init) => {
   const route = String(url).split("/").at(-1)!,
     body = JSON.parse(String(init?.body));
   window.federalCalls.push({ route, body });
-  if (route === "federal-publish" && loseOnce) {
+  if ((route === "federal-publish" || route === "federal-import") && loseOnce) {
     loseOnce = false;
     throw Error("Synthetic interrupted acknowledgement");
   }
+  if (route === "federal-publish" && staleOnce) {
+    staleOnce = false;
+    return Response.json(
+      { error: { code: "DRAFT_SOURCE_STALE", outcome: "UNKNOWN" } },
+      { status: 409 },
+    );
+  }
+  if (route === "federal-import") return Response.json(official.imported);
+  if (officialMode && route === "federal-prepare")
+    return Response.json(official.review);
+  if (officialMode && route === "federal-publish")
+    return Response.json(
+      official.publications[body.output as keyof typeof official.publications],
+    );
   return Response.json(
     route === "federal-prepare"
       ? fixture.review
@@ -93,6 +110,18 @@ const fetcher = (async (url, init) => {
 }) as typeof fetch;
 const port = new FederalWorkbenchAccess({
   library,
+  readSources: async (_context, after) => ({
+    sources:
+      after === 0
+        ? []
+        : [
+            {
+              eventId: "synthetic-citation",
+              selection: official.input.selection,
+            },
+          ],
+    nextAfter: after === 0 ? 100 : null,
+  }),
   session: {
     expiresAtMs: Date.now() + 300000,
     context: {
