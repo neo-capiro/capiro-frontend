@@ -14,6 +14,7 @@ import { useTargetContact } from "./directory-queries";
 import { useTargetMutation } from "./target-queries";
 import { ContactMail } from "./ContactMail";
 import { MemberNoteForm } from "./member-notes/public";
+import { TargetContext } from "./TargetContext";
 export function TargetDrawer({
   clientId,
   target,
@@ -141,13 +142,7 @@ export function TargetDrawer({
           }}
         />
       )}
-      <section className="card stack">
-        <h3>Target context</h3>
-        <p className="muted">
-          Linked strategy, ask and next-action information is not available from
-          this target record.
-        </p>
-      </section>
+      <TargetContext clientId={clientId} targetId={target.id} />
       {target.sourceDirectory === "congress" &&
         details.isSuccess &&
         !details.error && (
