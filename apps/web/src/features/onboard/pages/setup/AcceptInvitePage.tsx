@@ -18,16 +18,17 @@ import {
   Wordmark,
 } from "../../ui/primitives";
 import { ErrorText, errorMessage } from "../funnel/shared";
-import { ConfirmedInputRefusal } from "../../lib/attempt-journal";
 import {
-  acceptInvitationTicket,
   acceptInvitePhase,
   invitationReturnPath,
   readInvitationStatus,
   type AcceptInvitePhase,
   type InvitationStatus,
-  type ProviderOutcome,
 } from "../../lib/accept-invite-flow";
+import {
+  retainedSignInHold,
+  runAcceptInvitation,
+} from "../../lib/accept-invite-run";
 
 const inlineErrorStyle: React.CSSProperties = {
   fontSize: 11.5,
@@ -74,59 +75,39 @@ function TicketAcceptance({
   const confirmMismatch =
     confirmPassword.length > 0 && confirmPassword !== password;
   const sessionEmail = user?.primaryEmailAddress?.emailAddress ?? null;
+  // Only a loaded, true auth state counts as an existing session; an unloaded provider state
+  // is not narrowed into "signed in" or into any settled outcome.
+  const signedIn = authLoaded === true && isSignedIn === true;
+  // The provider keeps an unfinished attempt on its own resource, so the hold survives a
+  // remount; it is read from that resource, never from the query text.
+  const retainedHold = retainedSignInHold(signIn);
+  const hold = retainedHold ?? holdStatus;
 
   const phase = acceptInvitePhase({
-    authLoaded,
-    signUpLoaded,
-    signInLoaded,
-    isSignedIn,
+    authLoaded: authLoaded === true,
+    signUpLoaded: signUpLoaded === true,
+    signInLoaded: signInLoaded === true,
+    isSignedIn: signedIn,
     ticket,
     status,
+    retainedHold,
     localPhase,
   });
 
   /**
-   * The single provider effect the invitation status selects, run inside the existing
-   * attempt journal. An uncertain result is recorded against this attempt and the ticket is
-   * never resubmitted from it.
+   * Acceptance is orchestrated by the existing attempt owner: the provider effect and the
+   * journaled outcome live together, so an unfinished or unconfirmed result can never settle
+   * this attempt as completed and the ticket is never re-consumed.
    */
-  const providerCall = (action: "sign_up" | "sign_in"): Promise<ProviderOutcome> =>
-    write
-      .run("Accept this invitation", async (guard) => {
-        if (action === "sign_up") {
-          if (!signUp) return { kind: "unknown" } as ProviderOutcome;
-          await guard.wait(() =>
-            signUp.create({ strategy: "ticket", ticket: ticket! }),
-          );
-          return { kind: "ok" } as ProviderOutcome;
-        }
-        if (!signIn) return { kind: "unknown" } as ProviderOutcome;
-        const attempt = await guard.wait(() =>
-          clerkInputAttempt(() =>
-            signIn.create({ strategy: "ticket", ticket: ticket! }),
-          ),
-        );
-        if (attempt.status === "complete" && attempt.createdSessionId)
-          await guard.wait(() => setActive({ session: attempt.createdSessionId }));
-        return {
-          kind: "ok",
-          status: attempt.status,
-          createdSessionId: attempt.createdSessionId,
-        } as ProviderOutcome;
-      })
-      .catch((err): ProviderOutcome => {
-        if (err instanceof ConfirmedInputRefusal)
-          return { kind: "refused", message: errorMessage(err) };
-        // Transport error, 5xx or any other provider error: the journal already holds the
-        // unknown outcome, so this attempt issues no second authentication effect.
-        return { kind: "unknown" };
-      });
-
   const begin = async () => {
-    if (!ticket || !status || isSignedIn || write.blocked()) return;
-    if ((status === "sign_up" ? !signUp : !signIn) || !signIn) return;
+    if (!ticket || !status || signedIn || write.blocked()) return;
     setError(null);
-    const outcome = await acceptInvitationTicket({ status, run: providerCall });
+    const outcome = await runAcceptInvitation({
+      status,
+      ticket,
+      write,
+      resources: { signUp, signIn, setActive },
+    });
     if (outcome.kind === "signup-started") {
       setPhase("create");
       return;
@@ -144,13 +125,15 @@ function TicketAcceptance({
       setError(outcome.message);
       return;
     }
+    // `not-ready`: the selected provider API is not available yet, so nothing was attempted.
+    if (outcome.kind === "not-ready") return;
     setError(
       "We could not confirm this invitation. Check your current status before trying again.",
     );
   };
 
   const submit = async () => {
-    if (!signUp || submitting || write.blocked()) return;
+    if (!signUp || !setActive || submitting || write.blocked()) return;
     if (password.length === 0 || password !== confirmPassword) return;
     setSubmitting(true);
     setError(null);
@@ -184,11 +167,9 @@ function TicketAcceptance({
     void clerk.signOut({ redirectUrl: invitationReturnPath(ticket, status) });
   };
 
-  if (authLoaded && isSignedIn && !ticket)
-    return <Navigate to="/setup" replace />;
+  if (signedIn && !ticket) return <Navigate to="/setup" replace />;
   // A completed invitation is never consumed again; the current session just continues.
-  if (authLoaded && isSignedIn && status === "complete")
-    return <Navigate to="/setup" replace />;
+  if (signedIn && status === "complete") return <Navigate to="/setup" replace />;
 
   return (
     <div
@@ -246,7 +227,7 @@ function TicketAcceptance({
             <p>
               This account needs an additional verification step before the invitation
               can be accepted
-              {holdStatus ? ` (${holdStatus.replace(/_/g, " ")})` : ""}. Finish that
+              {hold ? ` (${hold.replace(/_/g, " ")})` : ""}. Finish that
               step in sign in — this link is not reused.
             </p>
             <Btn variant="primary" onClick={() => navigate("/sign-in")}>

@@ -129,7 +129,14 @@ test("sign-out carries the ticket and the provider status to the fixed same-orig
 });
 
 test("the receiver phase respects the selected status and the existing session", () => {
-  const base = { ...loaded, isSignedIn: false, ticket, status, localPhase: "loading" };
+  const base = {
+    ...loaded,
+    isSignedIn: false,
+    ticket,
+    status,
+    retainedHold: null,
+    localPhase: "loading",
+  };
   assert.equal(acceptInvitePhase(base), "ready");
   assert.equal(acceptInvitePhase({ ...base, localPhase: "create" }), "create");
   // No ticket → the ordinary expired state; no selector → fail safe with no effect.
@@ -146,5 +153,24 @@ test("the receiver phase respects the selected status and the existing session",
   assert.equal(
     acceptInvitePhase({ ...base, status: "sign_in", signInLoaded: true }),
     "ready",
+  );
+  // A provider-paused attempt shows the hold before any click and after a remount; it never
+  // overrides a real session conflict or a completed invitation.
+  assert.equal(
+    acceptInvitePhase({ ...base, status: "sign_in", retainedHold: "needs_second_factor" }),
+    "verification-hold",
+  );
+  assert.equal(
+    acceptInvitePhase({
+      ...base,
+      status: "sign_in",
+      retainedHold: "needs_second_factor",
+      isSignedIn: true,
+    }),
+    "signed-in-conflict",
+  );
+  assert.equal(
+    acceptInvitePhase({ ...base, status: "complete", retainedHold: "needs_second_factor" }),
+    "complete",
   );
 });

@@ -31,6 +31,8 @@ export type AcceptInviteInput = {
   isSignedIn: boolean;
   ticket: string | null;
   status: InvitationStatus | null;
+  /** A provider status the retained sign-in resource is still paused at, if any. */
+  retainedHold: string | null;
   localPhase: AcceptInvitePhase;
 };
 
@@ -42,6 +44,7 @@ export function acceptInvitePhase({
   isSignedIn,
   ticket,
   status,
+  retainedHold,
   localPhase,
 }: AcceptInviteInput): AcceptInvitePhase {
   const loaded = status === "sign_in" ? signInLoaded : signUpLoaded;
@@ -53,6 +56,9 @@ export function acceptInvitePhase({
   // An existing session must not absorb someone else's invitation; the visitor signs out
   // and the same ticket returns. This is a deliberate conflict, not an error recovery.
   if (isSignedIn) return "signed-in-conflict";
+  // The provider still holds this attempt (a verification step, before or after a remount).
+  // It is resumed from the provider resource and never re-created from the ticket.
+  if (status === "sign_in" && retainedHold) return "verification-hold";
   return localPhase === "loading" ? "ready" : localPhase;
 }
 
@@ -64,6 +70,7 @@ export type TicketStatus = {
 export type ProviderOutcome =
   | TicketStatus
   | { kind: "refused"; message: string }
+  | { kind: "hold"; status: string }
   | { kind: "unknown" };
 export type ProviderCall = (action: "sign_up" | "sign_in") => Promise<ProviderOutcome>;
 
@@ -90,6 +97,7 @@ export async function acceptInvitationTicket(input: {
   const outcome = await run(status === "sign_in" ? "sign_in" : "sign_up");
   if (outcome.kind === "unknown") return { kind: "failed" };
   if (outcome.kind === "refused") return { kind: "refused", message: outcome.message };
+  if (outcome.kind === "hold") return { kind: "verification-hold", status: outcome.status };
   if (status === "sign_up") return { kind: "signup-started" };
   // `needs_second_factor`, `needs_client_trust`, `needs_new_password`,
   // `needs_protect_check` and every other non-complete status are a verification hold:
