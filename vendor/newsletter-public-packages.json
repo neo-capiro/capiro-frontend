@@ -258,7 +258,22 @@
       "status": "active-packed-frontend-input; deployed-acceptance-separate",
       "qualification": "Release actual installed checks reused; Integration exact physical archive/entry/install and accepted client source hashes verified. No build/install/tests repeated. Client remains native workspace; this archive records the exact installed qualifier, not a replacement workspace link.",
       "releaseReceiptSha256": "3fd80763218583795d5a3c11a99296e74e6ab886adfcc1e205f7eedfd8283c9f"
+    },
+    {
+      "file": "capiro-shared-0.0.0-588c00e1-ea851e52ea29.tgz",
+      "name": "@capiro/shared",
+      "version": "0.0.0",
+      "repository": "https://github.com/neo-capiro/capiro-backend",
+      "sourceCommit": "588c00e1f8a54350216c49eb35c654e8f608296a",
+      "sourceTree": "1c75a57cf0879ae948a98e0719ef9b3aa6fb3f06",
+      "sha256": "ea851e52ea29f594390f5cce034dc07ae8ab9e355e6ee98579bb731d9dbb39cb",
+      "integrity": "sha512-iYrmi46xVRTvIFBYE+sVYbQ8weoBS5yaazwNwIbU3LPQqq2OiURIDg9tZVrJccn7F4s0AGH1LQHzKa6jjJohww==",
+      "bytes": 790211,
+      "browserExports": [
+        "@capiro/shared/prospect-brief-refresh"
+      ],
+      "status": "active-packed-frontend-input; application build and deployed acceptance not run"
     }
   ],
-  "activeFile": "capiro-shared-0.0.0-88aaabbe-d7e21965815b.tgz"
+  "activeFile": "capiro-shared-0.0.0-588c00e1-ea851e52ea29.tgz"
 }

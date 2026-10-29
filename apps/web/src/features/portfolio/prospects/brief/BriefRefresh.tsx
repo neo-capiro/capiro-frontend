@@ -1,70 +1,69 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
-import { useApi } from "@/shared/portfolio/api/provider";
-import { QueryState } from "@/shared/portfolio/ui/QueryState";
-import { readRefresh } from "./api";
-import { sectionLabels } from "./contracts";
-import styles from "./brief.module.css";
-import { BriefDate } from "./BriefDate";
+import { useIdentity } from "@/shared/portfolio/auth/identity";
+import type { BriefScope } from "./api";
+import { useBriefRefresh } from "./refresh/useBriefRefresh";
+import type { RefreshScope } from "./refresh/api";
+import { RefreshControls } from "./refresh/RefreshControls";
+import { RefreshReview } from "./refresh/RefreshReview";
 export function BriefRefresh({
-  prospectId,
+  scope,
   versionNumber,
 }: {
-  prospectId: string;
+  scope: BriefScope;
   versionNumber: number;
 }) {
-  const api = useApi();
-  const proposal = useQuery({
-    queryKey: ["prospect-brief-refresh", prospectId, versionNumber],
-    queryFn: ({ signal }) =>
-      readRefresh(api, prospectId, versionNumber, signal),
-    staleTime: 0,
-  });
-  const current =
-    proposal.isSuccess && !proposal.error ? proposal.data : undefined;
+  const identity = useIdentity(),
+    userId = identity.data?.user.id;
+  if (
+    !identity.isSuccess ||
+    identity.error ||
+    identity.data.tenant?.id !== scope.tenantId ||
+    !userId
+  )
+    return <p>Sign in to this account to prepare a refresh.</p>;
+  return (
+    <RefreshSession
+      key={JSON.stringify([scope.tenantId, userId, scope.prospectId])}
+      scope={{ ...scope, userId }}
+      versionNumber={versionNumber}
+    />
+  );
+}
+function RefreshSession({
+  scope,
+  versionNumber,
+}: {
+  scope: RefreshScope;
+  versionNumber: number;
+}) {
+  const flow = useBriefRefresh(scope);
+  const result =
+    flow.result?.proposal.proposalId === flow.attempt?.request.proposalId
+      ? flow.result
+      : null;
   return (
     <section className="stack" aria-label="Refresh comparison">
-      <h3>Compare current dossier</h3>
-      <QueryState
-        pending={proposal.isPending}
-        error={proposal.error}
-        retry={() => void proposal.refetch()}
-      />
-      <p role="note">
-        Preview only. Saving a refresh is unavailable until the reviewed text
-        and citations can be preserved together.
+      <h3>Refresh saved brief</h3>
+      <p>
+        Prepare a comparison, review the exact proposed text and sources, then
+        save it as a new version.
       </p>
-      {current && (
-        <>
-          <small>
-            Compared against version {current.baseVersionNumber}. Snapshot
-            generated <BriefDate value={current.sourceSnapshot.generatedAt} />.
-          </small>
-          {current.diff.map((item) => (
-            <section className="stack" key={item.section}>
-              <h3>
-                {sectionLabels[item.section]} ·{" "}
-                {item.changed ? "Source text changed" : "No source text change"}
-              </h3>
-              <div className={styles.comparison}>
-                <div>
-                  <strong>Saved text</strong>
-                  <p>{item.baseText}</p>
-                </div>
-                <div>
-                  <strong>Fresh source text</strong>
-                  <p>{item.proposedText}</p>
-                </div>
-              </div>
-              {current.proposed[item.section].provenance === "edited" && (
-                <p role="note">
-                  Your edited section remains preserved in the proposed result.
-                </p>
-              )}
-            </section>
-          ))}
-        </>
+      {flow.error && <p role="alert">{flow.error}</p>}
+      <RefreshControls
+        flow={flow}
+        versionNumber={versionNumber}
+        result={result}
+      />
+      {flow.busy && (
+        <p role="status">Checking or saving the original refresh…</p>
       )}
+      {result?.acceptedVersion && (
+        <p role="status">
+          Saved as version {result.acceptedVersion.versionNumber}. The exact
+          reviewed text and citations are preserved.
+        </p>
+      )}
+      {result && <RefreshReview flow={flow} result={result} />}
     </section>
   );
 }
