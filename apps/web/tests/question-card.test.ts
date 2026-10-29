@@ -95,7 +95,9 @@ describe("question phase transitions", () => {
 
   it("latches on an unknown delivery instead of retrying it under a new control id", () => {
     expect(run([{ type: "submitted" }, { type: "receipt", state: "UNKNOWN" }])).toBe("unknown");
-    // The latch survives an unrelated local attempt and is only cleared by a different question.
+    // An unrelated local action does move the phase (it is a different attempt on the same card) — that is not a latch
+    // proof. The latch is only released by a new question, which is what reset does. The no-blind-resend guarantee itself
+    // is proven on the real command path in answer-command.test.ts (a single control per attempt).
     expect(q(questionPhase("unknown", { type: "invalid" }), question)).toBe("local");
     expect(q(questionPhase("unknown", { type: "reset" }), question)).toBe("open");
   });

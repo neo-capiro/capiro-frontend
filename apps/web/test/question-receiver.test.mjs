@@ -75,34 +75,48 @@ test("the real client control boundary accepts an answer control and refuses a m
   }
 });
 
-test("the installed event receiver schema carries the durable question events", async () => {
-  // The installed package's own conversation-application schema is what the client's event receiver validates with:
-  // compile that exact file and drive a question event through it, instead of re-declaring the shape locally.
-  const { default: Ajv } = await import("ajv/dist/2020.js");
-  const schema = JSON.parse(
-    readFileSync(
-      new URL("../../../node_modules/@capiro/meri-contracts/dist/conversation-application.schema.json", import.meta.url),
-      "utf8",
-    ),
+test("the real installed event receiver admits both question events and refuses a malformed one", async () => {
+  // Same fixture shape the contracts package uses for its own admitted view: a real submit receipt is the only thing the
+  // private cursor brand accepts, so the events travel through createConversationCursor/receiveConversationEvent exactly
+  // as conversation-observation does. No local re-declaration and no bypass of the receiver's brand.
+  const run = {
+    binding, scopes, state: "queued", policyRevision: "p1", createdAt: "2026-10-13T12:00:00Z",
+    versions: {
+      imageDigest: "sha256:" + "a".repeat(64), sdk: "0.3.295", cli: "2.1.295",
+      contracts: "0.1.0", skillsDigest: "b".repeat(64), checkpointFormat: "0.1.0",
+    },
+  };
+  const submitted = { run, requestId: id(6), lastSequence: 1, replayed: false };
+  const view = await receiveConversationResponse(
+    "submit", 200, bytes(submitted),
+    receiveConversationRequest("submit", bytes({ requestId: id(6), prompt: "Hello" })),
   );
-  const validate = new Ajv({ strict: false, allErrors: true }).compile(schema);
   const envelope = (sequence, type, data) => ({
-    contractVersion: "0.1.0", eventId: id(30 + sequence), binding, sequence,
-    createdAt: "2026-10-13T12:00:01Z", scopes, type, data,
+    contractVersion: "0.1.0", eventId: id(30 + sequence), binding, scopes, sequence,
+    createdAt: "2026-10-13T12:00:01Z", type, data,
   });
-  const pending = envelope(1, "question.pending", {
-    questionId: id(21), toolUseId: "toolu_1", questionsSha256: "c".repeat(64),
-    expiresAt: "2026-10-13T12:15:00.000Z",
-    questions: [{
-      question: "How should I format the output?", header: "Format", multiSelect: false,
-      options: [{ label: "Summary", description: "Brief" }, { label: "Detailed", description: "Full" }],
-    }],
-  });
-  assert.equal(validate({ ...pending, runId: id(2), attemptId: id(3) }), true, JSON.stringify(validate.errors));
-  const answered = envelope(2, "question.answered", { questionId: id(21), outcome: "answered", reasonCode: null });
-  assert.equal(validate({ ...answered, runId: id(2), attemptId: id(3) }), true, JSON.stringify(validate.errors));
-  // The per-event strictness (required fields, closed payloads) is enforced by the durable owner's validator; this
-  // asserts the installed event schema the client ships with actually carries both question branches.
-  assert.match(JSON.stringify(schema), /question\.pending/);
-  assert.match(JSON.stringify(schema), /question\.answered/);
+  // The submit receipt acknowledges sequence 1, so the question opens the stream at 2 and its answer follows at 3.
+  const pending = receiveConversationEvent(
+    bytes(envelope(1, "question.pending", {
+      questionId: id(21), toolUseId: "toolu_1", questionsSha256: "c".repeat(64),
+      expiresAt: "2026-10-13T12:15:00.000Z",
+      questions: [{
+        question: "How should I format the output?", header: "Format", multiSelect: false,
+        options: [{ label: "Summary", description: "Brief" }, { label: "Detailed", description: "Full" }],
+      }],
+    })),
+    createConversationCursor(view),
+  );
+  assert.equal(pending.event.type, "question.pending");
+  assert.equal(pending.event.data.questions[0].options[1].label, "Detailed");
+  assert.equal(pending.cursor.after, 1);
+  const answered = receiveConversationEvent(
+    bytes(envelope(2, "question.answered", { questionId: id(21), outcome: "answered", reasonCode: null })),
+    pending.cursor,
+  );
+  assert.equal(answered.event.data.outcome, "answered");
+  // The same receiver refuses an event that is not a complete durable question payload, and the cursor does not advance.
+  const broken = envelope(3, "question.pending", { questionId: id(21) });
+  assert.throws(() => receiveConversationEvent(bytes(broken), answered.cursor), /INVALID_EVENT|ConversationResponseError/);
+  assert.equal(answered.cursor.after, 2);
 });

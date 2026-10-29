@@ -43,8 +43,13 @@ export function QuestionCard({
   const [freeText, setFreeText] = useState<Record<string, string>>({});
   // Only a state that genuinely cannot accept input locks the card. A local selection problem or a rejected answer stays
   // editable so the user can correct it and send again; a delivered or unknown answer does not.
+  // A conversation that is no longer current cannot deliver an answer at all, so "error" is locked like the other
+  // terminal states; only a correctable local problem or an explicit refusal stays editable.
   const disabled =
-    state === "waiting" || state === "unknown" || state === "unavailable";
+    state === "waiting" ||
+    state === "unknown" ||
+    state === "unavailable" ||
+    state === "error";
   // A different question is a fresh decision: no selection or typed text carries over from the previous one.
   useEffect(() => {
     setSelection({});
