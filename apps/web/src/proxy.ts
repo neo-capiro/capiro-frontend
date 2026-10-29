@@ -42,6 +42,9 @@ export const config = {
     "/meri/:path*",
     "/api/backend/:path*",
     "/modules/:path*",
+    // The bill detail receiver is an authenticated product route; Clerk must see it
+    // so the page renders under the existing SessionBoundary.
+    "/bills/:path*",
     "/settings/:path*",
     "/sign-in/:path*",
     "/register",
