@@ -104,9 +104,9 @@ the mail/OAuth callback, Recall and `/webhooks/*` owners held by the production
 ALB, so host-level readiness stays with the shipping owner.
 
 While this frontend serves that origin, `apps/web/src/shared/preview/app-origin-rewrites.ts`
-forwards ten exact app-host paths — the Microsoft/Google integration callbacks and
-Graph notifications, `/webhooks/recall`, `/webhooks/clerk` and the newsletter
-plus asset-token routes — to the fixed retained `https://os.capiro.ai` origin, so
+forwards eleven exact app-host paths — the Microsoft/Google integration callbacks and
+Graph notifications, the Clio MCP OAuth callback, `/webhooks/recall`, `/webhooks/clerk`
+and the newsletter plus asset-token routes — to the fixed retained `https://os.capiro.ai` origin, so
 those already-issued capabilities keep their original owner. Nothing else under
 `/api`, `/workspace-api`, `/intel-api` or `/webhooks` is rewritten, and
 `/newsletter/*` is served from `apps/web/public/newsletter` here.

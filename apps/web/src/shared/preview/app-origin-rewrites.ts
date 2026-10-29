@@ -31,6 +31,8 @@ const forwardedPaths = [
   "/api/engagement/integrations/microsoft/callback",
   "/api/engagement/integrations/google/callback",
   "/api/engagement/integrations/microsoft/notifications",
+  // Clio MCP OAuth callback: Core owns the handler and the state/token record.
+  "/api/clio/mcp-oauth/callback",
   "/webhooks/recall",
   "/webhooks/clerk",
   "/api/engagement/newsletter-public/:token/archive",

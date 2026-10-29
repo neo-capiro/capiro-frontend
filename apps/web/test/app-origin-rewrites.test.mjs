@@ -24,6 +24,7 @@ const required = [
   "/api/engagement/integrations/microsoft/callback",
   "/api/engagement/integrations/google/callback",
   "/api/engagement/integrations/microsoft/notifications",
+  "/api/clio/mcp-oauth/callback",
   "/webhooks/recall",
   "/webhooks/clerk",
   `/api/engagement/newsletter-public/${token}/archive`,
@@ -252,7 +253,7 @@ test("Next's external-rewrite proxy keeps the raw signed body, query and headers
   }
 });
 
-test("the app host keeps exactly the ten forwarded routes", () => {
+test("the app host keeps exactly the eleven forwarded routes", () => {
   assert.deepEqual(
     rewrites.map((rewrite) => rewrite.source).sort(),
     [...required]
