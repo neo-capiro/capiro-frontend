@@ -6301,10 +6301,10 @@
     "file": "apps/web/src/features/meri/conversation/ConversationView.tsx",
     "kind": "function",
     "symbol": "SessionComposer",
-    "fingerprint": "982bf8ae97b259af2aa572cfa26ff247d61a282b44f3f7f5dd10eb4c76168dee",
-    "reason": "Composer shell for one conversation. It subscribes to the published controls, computes the one disabled predicate and lays the control row (client handoff, document revision, skill, Start Work / Delegate, and now the native procedure control) into MeriComposer. The added procedure control is mounted under the same ready gate as its siblings, is keyed by the account/client/session lifetime with a namespaced key, and writes through the existing selected-input channel, so it adds no publication path, run, authority owner, catalog store or second model loop. The size still comes from the pre-existing model slot and its recovery states, which belong to the same shell responsibility.",
-    "reviewedBy": "Hermes independent source review session 20261028_071126_e8a975 (configured-default Hermes)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "73cce771e0364584df51b1d16406345c24e877fbe46b796c45ecb0c199167ed1",
+    "reason": "Author responsibility assessment in docs/site-workflow-catalog.md: existing composer presentation and cohesive current catalog selection; no new authority, transport or persistence owner. This is not an independent review.",
+    "reviewedBy": "Codex implementation author (independent review held)",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/features/meri/conversation/SkillSelectionPicker.tsx",
@@ -7352,5 +7352,14 @@
     "reason": "Independent full-body review of PR267: one member-profile composition owns tabs and existing typed notes, favorites, news and FEC views. The new title accessory delegates only decorative photo/fallback rendering to MemberPhoto. Existing API calls, state transitions, explicit mutations and unavailable capabilities are unchanged. This is a coherent profile surface with no new authorization, persistence or domain policy; splitting it for this small presentation delta is unnecessary.",
     "reviewedBy": "Codex Wave5 orchestrator independent PR267 source review",
     "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/SiteWorkflowPicker.tsx",
+    "kind": "function",
+    "symbol": "SiteWorkflowPicker",
+    "fingerprint": "e91db735f66fe65979949182415c9aca4320c9100f4a299532a1f09f6358b27d",
+    "reason": "Author responsibility assessment in docs/site-workflow-catalog.md: existing composer presentation and cohesive current catalog selection; no new authority, transport or persistence owner. This is not an independent review.",
+    "reviewedBy": "Codex implementation author (independent review held)",
+    "reviewedOn": "2026-10-29"
   }
 ]
