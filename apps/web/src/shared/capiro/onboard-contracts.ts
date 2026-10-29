@@ -33,6 +33,4 @@ export type ImportCandidatesResult = z.infer<
 export type ImportResult = z.infer<typeof Core.importChunkResultSchema> & {
   capMessage: string | null;
 };
-export type MemoryFileDef = z.infer<typeof Core.memoryFileDefSchema>;
-export type MemorySectionsFile = z.infer<typeof Core.memorySectionsFileSchema>;
 export type TeamInviteRole = z.infer<typeof editableTeamRoleSchema>;
