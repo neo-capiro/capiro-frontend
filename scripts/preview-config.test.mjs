@@ -36,16 +36,16 @@ const meriEnabled = {
 
 test('preview proposes held Meri defaults while unavailable services stay disabled', () => {
   const p = renderPreviewConfiguration(bindings);
-  assert.equal(p.environment.CORE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/api');
-  assert.equal(p.environment.WORKSPACE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/workspace-api');
-  assert.equal(p.environment.INTELLIGENCE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/intel-api');
+  assert.equal(p.environment.CORE_API_BASE_URL, 'https://first-chat-preview.app-dev.capiro.ai/api');
+  assert.equal(p.environment.WORKSPACE_API_BASE_URL, 'https://first-chat-preview.app-dev.capiro.ai/workspace-api');
+  assert.equal(p.environment.INTELLIGENCE_API_BASE_URL, 'https://first-chat-preview.app-dev.capiro.ai/intel-api');
   for (const name of ['STRATEGY_API_BASE_URL', 'ONBOARD_API_BASE_URL', 'MERI_API_BASE_URL', 'MERI_DOCUMENT_OPERATION']) assert.equal(p.environment[name], '');
   assert.equal(p.environment.MERI_ACTION_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_TASK_COMMAND_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_INTENT_APPROVALS_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_CONVERSATION_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_DOCUMENT_WORKFLOW_ENABLED, 'false');
-  assert.equal(p.environment.CAPIRO_REQUEST_ORIGIN, 'https://portfolio-preview.app.capiro.ai');
+  assert.equal(p.environment.CAPIRO_REQUEST_ORIGIN, 'https://app.capiro.ai');
   assert.equal(p.environment.CAPIRO_PREVIEW_READ_ONLY, 'true');
   for (const name of ['CAPIRO_PREVIEW_READ_BACKEND_SOURCE', 'CAPIRO_PREVIEW_READ_API_BASE_URL',
     'CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE', 'CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL',
@@ -56,7 +56,7 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
   for (const name of ['CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE', 'CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL']) assert.equal(p.environment[name], '', name);
   for (const name of ['MERI_FIRST_CHAT_BOOTSTRAP_ENABLED', 'CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED',
     'MERI_MEMORY_OWNER_REVIEW_ENABLED', 'CAPIRO_PREVIEW_MEMORY_OWNER_ROUTES_ENABLED']) assert.equal(p.environment[name], 'false', name);
-  assert.equal(p.parameters.length, 35);
+  assert.equal(p.parameters.length, 36);
   assert.deepEqual(p.parameters.filter(item => item.ParameterKey.startsWith('Meri')), [
     { ParameterKey: 'MeriUserPreferencesEnabled', ParameterValue: 'false' },
     { ParameterKey: 'MeriFirstChatBootstrapEnabled', ParameterValue: 'false' },
@@ -76,6 +76,37 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
   validatePreviewParameters(p.parameters.toReversed(), bindings);
 });
 
+test('an owner-supplied onboarding base must be the exact service prefix', () => {
+  const base = 'https://onboarding.example.test/onboard-api';
+  const input = { ...bindings, onboardApiBaseUrl: base };
+  const p = renderPreviewConfiguration(input);
+  assert.equal(p.parameters.find(item => item.ParameterKey === 'OnboardApiBaseUrl').ParameterValue, base);
+  assert.equal(p.environment.ONBOARD_API_BASE_URL, base);
+  validatePreviewParameters(p.parameters, input);
+  // One trailing slash is normalised away so the emitted base is always canonical.
+  const slashed = renderPreviewConfiguration({ ...bindings, onboardApiBaseUrl: `${base}/` });
+  assert.equal(slashed.environment.ONBOARD_API_BASE_URL, base);
+  assert.equal(slashed.parameters.find(item => item.ParameterKey === 'OnboardApiBaseUrl').ParameterValue, base);
+  const block = template.match(/^  OnboardApiBaseUrl:\n([\s\S]*?)(?=^  \w+:|^Resources:)/m)?.[1] ?? '';
+  const pattern = JSON.parse(block.match(/AllowedPattern: (".*")/)?.[1] ?? 'null');
+  assert.equal(typeof pattern, 'string');
+  assert.match(base, new RegExp(pattern));
+  assert.doesNotMatch(`${base}/`, new RegExp(pattern));
+  for (const invalid of [
+    'https://onboarding.example.test',
+    'https://onboarding.example.test/onboard-api/v1',
+    'https://onboarding.example.test/onboard-api/extra',
+    'https://onboarding.example.test/api',
+    'http://onboarding.example.test/onboard-api',
+    'https://user:pw@onboarding.example.test/onboard-api',
+    'https://onboarding.example.test/onboard-api?x=1',
+    'https://onboarding.example.test/onboard-api#frag',
+    ` ${base}`,
+    42,
+    null,
+  ]) assert.throws(() => renderPreviewConfiguration({ ...bindings, onboardApiBaseUrl: invalid }), /PREVIEW_ONBOARD_BINDING_INVALID/);
+});
+
 test('ordinary authenticated mode switches every service target together and enables the existing catalogue', () => {
   const input = { ...bindings, ...meriEnabled, previewReadEnabled: true,
     firstChatBootstrapEnabled: true, previewReadOnly: false, userPreferencesEnabled: true };
@@ -88,13 +119,20 @@ test('ordinary authenticated mode switches every service target together and ena
   assert.equal(p.environment.MERI_USER_PREFERENCES_ENABLED, 'true');
   assert.equal(p.environment.MERI_FIRST_CHAT_BOOTSTRAP_ENABLED, 'true');
   assert.equal(p.environment.MERI_CONVERSATION_WORKFLOW_ENABLED, 'true');
-  assert.equal(p.environment.CAPIRO_REQUEST_ORIGIN, 'https://portfolio-preview.app.capiro.ai');
+  assert.equal(p.environment.CAPIRO_REQUEST_ORIGIN, 'https://app.capiro.ai');
   assert.equal(p.expectedCoreDeployment, null); // Old preview metadata is not a new deployment assertion.
   assert.deepEqual(p.secretReferences, renderPreviewConfiguration(bindings).secretReferences);
   validatePreviewParameters(p.parameters, input);
   for (const key of ['CoreApiBaseUrl', 'StrategyApiBaseUrl', 'WorkspaceApiBaseUrl', 'IntelligenceApiBaseUrl']) {
-    const old = renderPreviewConfiguration(bindings).parameters.find(item => item.ParameterKey === key);
-    assert.throws(() => validatePreviewParameters(p.parameters.map(item => item.ParameterKey === key ? old : item), input), /PREVIEW_PARAMETER_MISMATCH/);
+    const held = renderPreviewConfiguration(bindings).parameters.find(item => item.ParameterKey === key);
+    const ordinaryValue = p.parameters.find(item => item.ParameterKey === key);
+    if (key === 'StrategyApiBaseUrl') {
+      // Strategy stays disabled in the held profile, so the two mode values must disagree.
+      assert.throws(() => validatePreviewParameters(p.parameters.map(item => item.ParameterKey === key ? held : item), input), /PREVIEW_PARAMETER_MISMATCH/);
+    } else {
+      // The API transports are internal and identical in both modes; the browser origin is the switch.
+      assert.equal(ordinaryValue.ParameterValue, held.ParameterValue);
+    }
     assert.match(template, new RegExp(`- Assert: !Equals \\[!Ref ${key}, "https://first-chat-preview\\.app-dev\\.capiro\\.ai/`));
   }
   assert.match(template, /OrdinaryBackendTargets:\n +RuleCondition: !Equals \[!Ref CapiroPreviewReadOnly, "false"\]/);
@@ -203,8 +241,8 @@ test('Meri opt-in requires an explicit canonical HTTPS root origin', () => {
   for (const meriApiBaseUrl of [null, 1, 'http://meri.example.test', 'https://meri.example.test/',
     'https://meri.example.test/path', 'https://user@meri.example.test', 'https://meri.example.test?x=1',
     'https://meri.example.test#part', 'https://meri..example.test', 'https://MERI.example.test',
-    'https://127.0.0.1', 'https://portfolio-preview.app.capiro.ai', 'https://first-chat-preview.app-dev.capiro.ai',
-    'https://core-roster-preview.capiro.ai']) {
+    'https://127.0.0.1', 'https://app.capiro.ai', 'https://portfolio-preview.app.capiro.ai',
+    'https://first-chat-preview.app-dev.capiro.ai', 'https://core-roster-preview.capiro.ai']) {
     assert.throws(() => renderPreviewConfiguration({ ...bindings, meriApiBaseUrl }), /PREVIEW_MERI_ORIGIN_INVALID/);
   }
   for (const meriConversationWorkflowEnabled of [null, 1, 'true']) {
@@ -250,7 +288,7 @@ test('Core read and first chat remain held until all exact bindings are supplied
   const active = { ...bindings, ...meriEnabled, previewReadEnabled: true,
     firstChatBootstrapEnabled: true };
   const p = renderPreviewConfiguration(active);
-  assert.equal(p.environment.CORE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/api');
+  assert.equal(p.environment.CORE_API_BASE_URL, coreApi);
   assert.equal(p.environment.CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL, coreApi);
   assert.equal(p.environment.CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE, coreBootstrapSource);
   assert.equal(Object.hasOwn(p.environment, 'MERI_FIRST_CHAT_CLIENT_ID'), false);
@@ -343,7 +381,7 @@ test('qualified Core roster adds a separate pair without switching first-chat re
     'https://user@core-roster-preview.capiro.ai/api', 'https://core-roster-preview.capiro.ai:443/api',
     'https://core-roster-preview.capiro.ai:8443/api', 'https://CORE-ROSTER-PREVIEW.capiro.ai/api',
     'https://127.0.0.1/api', 'https://localhost/api',
-    'https://portfolio-preview.app.capiro.ai/api', 'https://os.capiro.ai/api', coreApi,
+    'https://portfolio-preview.app.capiro.ai/api', 'https://app.capiro.ai/api', 'https://os.capiro.ai/api', coreApi,
   ]) assert.throws(() => renderPreviewConfiguration({ ...qualified,
     qualifiedCoreClientRosterApiBaseUrl: target }), /PREVIEW_CORE_ROSTER_ORIGIN_INVALID/);
   assert.throws(() => renderPreviewConfiguration({ ...qualified, ...meriEnabled,
@@ -447,10 +485,22 @@ test('preview template constrains every explicit configuration value and keeps h
       assert.match(block, /Default: ""/);
       const allowed = JSON.parse(block.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null');
       assert.deepEqual(allowed, ['', optionalExact.get(item.ParameterKey)]);
+    } else if (item.ParameterKey === 'OnboardApiBaseUrl') {
+      // Held by default: empty keeps onboarding disabled until its owner binds a target.
+      assert.equal(item.ParameterValue, '');
+      assert.match(block, /Default: ""/);
+      const pattern = JSON.parse(block.match(/AllowedPattern: (".*")/)?.[1] ?? 'null');
+      assert.equal(typeof pattern, 'string', item.ParameterKey);
+      assert.match('', new RegExp(pattern));
+      assert.match('https://onboarding.example.test/onboard-api', new RegExp(pattern));
+      assert.doesNotMatch('https://onboarding.example.test/onboard-api?x=1', new RegExp(pattern));
+      assert.doesNotMatch('http://onboarding.example.test', new RegExp(pattern));
+      assert.doesNotMatch('https://user:pw@onboarding.example.test', new RegExp(pattern));
     } else if (['CoreApiBaseUrl', 'StrategyApiBaseUrl', 'WorkspaceApiBaseUrl', 'IntelligenceApiBaseUrl', 'CapiroPreviewReadOnly'].includes(item.ParameterKey)) {
       const ordinary = renderPreviewConfiguration({ ...bindings, previewReadOnly: false }).parameters.find(p => p.ParameterKey === item.ParameterKey);
       const allowed = JSON.parse(block.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null');
-      assert.deepEqual(allowed, [item.ParameterValue, ordinary.ParameterValue]);
+      // A transport that is identical in both modes is a single permitted value.
+      assert.deepEqual(allowed, [...new Set([item.ParameterValue, ordinary.ParameterValue])]);
     } else {
       const allowed = JSON.parse(block.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null');
       assert.deepEqual(allowed, [item.ParameterValue], item.ParameterKey);
@@ -467,6 +517,7 @@ test('preview template constrains every explicit configuration value and keeps h
       MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: 'MeriFirstChatBootstrapEnabled',
       MERI_USER_PREFERENCES_ENABLED: 'MeriUserPreferencesEnabled',
       CAPIRO_REQUEST_ORIGIN: 'CapiroRequestOrigin', CAPIRO_PREVIEW_READ_ONLY: 'CapiroPreviewReadOnly',
+      ONBOARD_API_BASE_URL: 'OnboardApiBaseUrl',
       CAPIRO_PREVIEW_READ_BACKEND_SOURCE: 'CapiroPreviewReadBackendSource', CAPIRO_PREVIEW_READ_API_BASE_URL: 'CapiroPreviewReadApiBaseUrl',
       CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: 'CapiroPreviewClientRosterBackendSource',
       CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL: 'CapiroPreviewClientRosterApiBaseUrl',
@@ -550,7 +601,7 @@ test('preview CLI is import-safe, ignores hostile ambient values and never echoe
     writeFileSync(input, JSON.stringify(bindings));
     const good = run([script, '--bindings', input]);
     assert.equal(good.status, 0, good.stderr);
-    assert.equal(JSON.parse(good.stdout).environment.CORE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/api');
+    assert.equal(JSON.parse(good.stdout).environment.CORE_API_BASE_URL, coreApi);
     assert.doesNotMatch(good.stdout, /do_not_echo|os\.capiro\.ai/);
     const aliasGood = run([alias, '--bindings', input]);
     assert.equal(aliasGood.status, 0); assert.equal(aliasGood.stdout, good.stdout);
@@ -578,4 +629,28 @@ test('configured-client narrowing is removed from operator input, parameters and
   const p=renderPreviewConfiguration({...bindings,...meriEnabled,previewReadEnabled:true,firstChatBootstrapEnabled:true});
   assert.equal(p.parameters.some(p=>p.ParameterKey==='MeriFirstChatClientId'), false);
   assert.equal(Object.hasOwn(p.environment,'MERI_FIRST_CHAT_CLIENT_ID'), false);
+});
+
+test('onboarding hold membership follows the validated service binding', () => {
+  const base = 'https://first-chat-preview.app-dev.capiro.ai/onboard-api';
+  // Omitted and empty both keep the surface held.
+  for (const input of [bindings, { ...bindings, onboardApiBaseUrl: '' }]) {
+    const p = renderPreviewConfiguration({ ...input, previewReadOnly: false });
+    assert.deepEqual(p.holds, ['onboard']);
+    assert.equal(p.environment.ONBOARD_API_BASE_URL, '');
+  }
+  // A validated nonempty binding removes only the onboarding entry.
+  const bound = renderPreviewConfiguration({ ...bindings, previewReadOnly: false, onboardApiBaseUrl: base });
+  assert.deepEqual(bound.holds, []);
+  assert.equal(bound.environment.ONBOARD_API_BASE_URL, base);
+  const boundWithSlash = renderPreviewConfiguration({ ...bindings, previewReadOnly: false, onboardApiBaseUrl: `${base}/` });
+  assert.deepEqual(boundWithSlash.holds, []);
+  // Read-only mode keeps its other holds and drops onboarding alone.
+  assert.deepEqual(
+    renderPreviewConfiguration({ ...bindings, previewReadOnly: true, onboardApiBaseUrl: base }).holds,
+    ['strategy', 'meri'],
+  );
+  assert.deepEqual(renderPreviewConfiguration({ ...bindings, previewReadOnly: true }).holds, ['strategy', 'onboard', 'meri']);
+  // Activation status is an independent qualification and does not move with the binding.
+  assert.equal(bound.activationStatus, renderPreviewConfiguration({ ...bindings, previewReadOnly: false }).activationStatus);
 });

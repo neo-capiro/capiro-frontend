@@ -34,7 +34,7 @@ export class ConversationObservation {
   }
   get snapshot() { return this.state; }
   reconnect() { return conversationReconnect(this.cursor); }
-  accept(event: ConversationEvent) {
+  accept(event: unknown) {
     const admitted = receiveConversationEvent(new TextEncoder().encode(JSON.stringify(event)), this.cursor);
     const events = [...this.state.events, admitted.event];
     const truncated = events.length > 1000;

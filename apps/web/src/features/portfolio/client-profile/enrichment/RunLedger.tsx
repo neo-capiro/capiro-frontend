@@ -1,25 +1,16 @@
-import { previewOnlyDependency, sources, type FillRun } from "./contracts";
-import { FindingValue } from "./FindingReview";
+import type { FillRun } from "./contracts";
+import { SourceOutcome, sourceName } from "./SourceOutcome";
 import styles from "./enrichment.module.css";
-const taskNames: Record<string, string> = {
-  ...sources,
-  client_document: "Client document",
-  federal_market: "Federal Market",
-  facility_resolution: "Facilities",
-  district_nexus: "District Nexus",
-  advocacy_history: "Advocacy History",
-  lifecycle_outcomes: "Lifecycle Outcomes",
-  reconciliation: "Reconciliation",
-  completion_audit: "Profile Completion",
-};
 export function RunLedger({
   run,
   busy,
   onCancel,
+  onRetry,
 }: {
   run: FillRun;
   busy: boolean;
   onCancel: () => void;
+  onRetry?: (task: NonNullable<FillRun["tasks"]>[number]) => void;
 }) {
   return (
     <section className={styles.ledger} aria-label="Task ledger">
@@ -33,7 +24,12 @@ export function RunLedger({
           {new Date(run.startedAt).toLocaleString()}
         </time>
       </p>
-      {run.error && <p role="alert">{run.error}</p>}
+      {run.error && (
+        <p role="alert">
+          This saved run reported a problem. Review the task statuses and
+          available findings.
+        </p>
+      )}
       {run.tasks?.map((task) => (
         <div className={styles.task} key={task.id}>
           <span aria-hidden="true">
@@ -44,16 +40,29 @@ export function RunLedger({
                 : "○"}
           </span>
           <div>
-            {taskNames[task.taskType] ?? task.taskType}
+            {sourceName(task.taskType)}
             <small>
               Attempt {task.attempt} of {task.maxAttempts}
-              {task.errorMessage ? ` · ${task.errorMessage}` : ""}
+              {task.errorMessage
+                ? task.status === "failed"
+                  ? " · This task could not complete."
+                  : " · An earlier attempt reported a problem."
+                : ""}
             </small>
           </div>
           <span>{task.status}</span>
           {task.status === "failed" && (
-            <button className="button" disabled title={previewOnlyDependency}>
-              Retry unavailable
+            <button
+              className="button"
+              disabled={
+                busy ||
+                !onRetry ||
+                run.status === "cancelled" ||
+                (run.workflowVersion ?? 1) < 2
+              }
+              onClick={() => onRetry?.(task)}
+            >
+              Retry task
             </button>
           )}
         </div>
@@ -64,11 +73,20 @@ export function RunLedger({
           below.
         </p>
       )}
+      {(run.error ||
+        run.tasks?.some(
+          (task) => task.status === "failed" || task.errorMessage,
+        )) && (
+        <p className="muted">
+          Contact support with this run’s start time if you need help. Technical
+          details remain in the saved run.
+        </p>
+      )}
       <details>
         <summary>Saved scope and source outcomes</summary>
         <p>
           Sources:{" "}
-          {run.requestedSources.map((s) => taskNames[s] ?? s).join(", ") ||
+          {run.requestedSources.map(sourceName).join(", ") ||
             "No connected sources"}
         </p>
         <p>
@@ -80,8 +98,8 @@ export function RunLedger({
         </p>
         {Object.entries(run.sourceStates).map(([source, state]) => (
           <div key={source}>
-            <h4>{taskNames[source] ?? source}</h4>
-            <FindingValue value={state} />
+            <h4>{sourceName(source)}</h4>
+            <SourceOutcome value={state} />
           </div>
         ))}
       </details>

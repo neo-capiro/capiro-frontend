@@ -172,7 +172,7 @@ function CandidateCard({
   const needsReason =
     candidate.kind !== "addition" && confirmation === "reject";
   return (
-    <article className={styles.card}>
+    <article className={styles.card} id={`memory-candidate-${candidate.id}`}>
       <div className={styles.cardHeading}>
         <h2>{ownerCandidateTitle(candidate)}</h2>
         <span className={styles.kind}>{candidate.kind}</span>

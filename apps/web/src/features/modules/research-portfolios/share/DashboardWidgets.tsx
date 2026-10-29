@@ -1,8 +1,10 @@
+import { useState } from "react";
 import type {
   ResearchDashboardWidget,
   ResearchShareDashboard,
 } from "../../../../shared/capiro/operations/research-share-schemas";
-import { Badge, DataTable } from "../../../../shared/module-ui";
+import { ActionButton, Badge, DataTable } from "../../../../shared/module-ui";
+import { SourceEvidence, contributionSources } from "./SourceEvidence";
 import styles from "./share.module.css";
 
 /**
@@ -37,7 +39,7 @@ export function basisLabel(basis: Total["basis"]): string {
     `known at ${basis.knownAt ?? "unspecified"}`,
   ].join(" · ");
 }
-function basisKey(basis: Total["basis"]): string {
+export function basisKey(basis: Total["basis"]): string {
   return JSON.stringify([
     basis.fundingFiscalYear,
     basis.stage,
@@ -48,6 +50,63 @@ function basisKey(basis: Total["basis"]): string {
     basis.requestEdition,
     basis.knownAt,
   ]);
+}
+/** Select existing frozen rows only. Totals are never recomputed from filtered subjects. */
+export function selectWidgetDashboard(
+  widget: ResearchDashboardWidget,
+  dashboard: ResearchShareDashboard,
+): ResearchShareDashboard {
+  const settings = widget.settings;
+  const financial = [
+    "key_totals",
+    "funding_table",
+    "sources",
+    "snapshot_comparison",
+  ].includes(widget.kind);
+  const subjectFilter =
+    ["subjects", "funding_table", "sources"].includes(widget.kind) &&
+    Array.isArray(settings.subjectIds);
+  const subjectIds = subjectFilter
+    ? new Set(settings.subjectIds as unknown[])
+    : undefined;
+  const matchesBasis = (basis: Total["basis"] | null) =>
+    !financial ||
+    ((settings.fundingFiscalYear === undefined ||
+      basis?.fundingFiscalYear === settings.fundingFiscalYear) &&
+      (settings.basisKey === undefined ||
+        (basis && basisKey(basis) === settings.basisKey)));
+  const contributions = dashboard.data.contributions.filter(
+    (row) =>
+      row.disposition === "included" &&
+      matchesBasis(row.basis) &&
+      (!subjectIds || subjectIds.has(row.memberId)),
+  );
+  const filteredSources =
+    widget.kind === "sources" &&
+    (subjectFilter ||
+      settings.fundingFiscalYear !== undefined ||
+      settings.basisKey !== undefined);
+  return {
+    ...dashboard,
+    data: {
+      ...dashboard.data,
+      totals: dashboard.data.totals.filter((total) =>
+        matchesBasis(total.basis),
+      ),
+      contributions,
+      subjects: dashboard.data.subjects.filter(
+        (subject) =>
+          subject.disposition === "included" &&
+          (!subjectIds || subjectIds.has(subject.id)),
+      ),
+      sources: filteredSources
+        ? contributionSources(
+            dashboard,
+            contributions.flatMap((row) => row.sourceRevisionIds),
+          )
+        : dashboard.data.sources,
+    },
+  };
 }
 function text(
   settings: Record<string, unknown>,
@@ -71,13 +130,22 @@ function date(value: string): string {
 function Header({
   widget,
   dashboard,
+  logoUrl,
 }: {
   widget: ResearchDashboardWidget;
   dashboard: ResearchShareDashboard;
+  logoUrl?: string | null;
 }) {
   return (
     <div className={styles.header}>
       <div>
+        {logoUrl && dashboard.branding && (
+          <img
+            className={styles.logo}
+            src={logoUrl}
+            alt={`${dashboard.branding.firmName} logo`}
+          />
+        )}
         <p className={styles.eyebrow}>
           {dashboard.branding
             ? `${dashboard.branding.firmName} · Research Portfolio`
@@ -90,6 +158,9 @@ function Header({
           {text(widget.settings, "subtitle") ??
             `Prepared for ${dashboard.preparedFor.clientName}`}
         </p>
+        {dashboard.portfolioPurpose && (
+          <p className={styles.description}>{dashboard.portfolioPurpose}</p>
+        )}
       </div>
       <p className={styles.muted}>As of {date(dashboard.asOf)}</p>
     </div>
@@ -105,7 +176,24 @@ function KeyTotals({ dashboard }: { dashboard: ResearchShareDashboard }) {
       {totals.map((total) => (
         <div key={basisKey(total.basis)} className={styles.metric}>
           <span>{basisLabel(total.basis)}</span>
-          <strong>{formatTotal(total)}</strong>
+          <details>
+            <summary>
+              <strong>{formatTotal(total)}</strong>
+            </summary>
+            <SourceEvidence
+              sources={contributionSources(
+                dashboard,
+                dashboard.data.contributions
+                  .filter(
+                    (row) =>
+                      row.disposition === "included" &&
+                      row.basis &&
+                      basisKey(row.basis) === basisKey(total.basis),
+                  )
+                  .flatMap((row) => row.sourceRevisionIds),
+              )}
+            />
+          </details>
           <small className={styles.muted}>
             {total.contributionCount} contribution
             {total.contributionCount === 1 ? "" : "s"}
@@ -123,52 +211,86 @@ function FundingTable({
   widget: ResearchDashboardWidget;
   dashboard: ResearchShareDashboard;
 }) {
-  const rows = dashboard.data.contributions
-    .filter((c) => c.disposition === "included")
-    .slice(0, limit(widget.settings, 25));
+  const [expanded, setExpanded] = useState(false);
+  const all = dashboard.data.contributions.filter(
+    (c) => c.disposition === "included",
+  );
+  const initialCount = limit(widget.settings, 25);
+  const rows = expanded ? all : all.slice(0, initialCount);
   if (!rows.length)
     return (
       <Empty>
-        Line items appear once the snapshot has included contributions.
+        No included contributions match this widget&apos;s selection.
       </Empty>
     );
   return (
-    <DataTable
-      rows={rows}
-      rowKey={(r) => r.contributionId}
-      caption="Funding by subject"
-      columns={[
-        {
-          key: "subject",
-          label: "Subject",
-          render: (r) => r.label ?? r.targetId,
-        },
-        {
-          key: "kind",
-          label: "Kind",
-          render: (r) => r.targetKind.replaceAll("_", " "),
-        },
-        {
-          key: "basis",
-          label: "Basis",
-          render: (r) => (r.basis ? basisLabel(r.basis) : "—"),
-        },
-        {
-          key: "value",
-          label: "Value",
-          align: "right",
-          render: (r) =>
-            r.value && r.basis ? `${r.value} ${unitLabel(r.basis.unit)}` : "—",
-        },
-      ]}
-    />
+    <>
+      <DataTable
+        rows={rows}
+        rowKey={(r) => r.contributionId}
+        caption="Funding by subject"
+        columns={[
+          {
+            key: "subject",
+            label: "Subject",
+            render: (r) => r.label ?? r.targetId,
+          },
+          {
+            key: "kind",
+            label: "Kind",
+            render: (r) => r.targetKind.replaceAll("_", " "),
+          },
+          {
+            key: "basis",
+            label: "Basis",
+            render: (r) => (r.basis ? basisLabel(r.basis) : "—"),
+          },
+          {
+            key: "value",
+            label: "Value",
+            align: "right",
+            render: (r) =>
+              r.value && r.basis ? (
+                <>
+                  {r.value} {unitLabel(r.basis.unit)}
+                </>
+              ) : (
+                "—"
+              ),
+          },
+          ...(widget.settings.showSources === false
+            ? []
+            : [
+                {
+                  key: "sources",
+                  label: "Sources",
+                  render: (
+                    r: ResearchShareDashboard["data"]["contributions"][number],
+                  ) => (
+                    <SourceEvidence
+                      sources={contributionSources(
+                        dashboard,
+                        r.sourceRevisionIds,
+                      )}
+                    />
+                  ),
+                },
+              ]),
+        ]}
+      />
+      {all.length > initialCount && (
+        <ActionButton onClick={() => setExpanded(!expanded)}>
+          {expanded ? "Show fewer rows" : `Show all ${all.length} rows`}
+        </ActionButton>
+      )}
+    </>
   );
 }
 
 function ClientFit({ dashboard }: { dashboard: ResearchShareDashboard }) {
   const fit = dashboard.data.clientFit;
   if (!fit || fit.fitScore == null)
-    return <Empty>Fit is not available for this portfolio yet.</Empty>;
+    return <Empty>Insufficient evidence for this client&apos;s fit.</Empty>;
   return (
     <div className={styles.fit}>
       <span className={styles.widgetLabel}>
@@ -178,6 +300,47 @@ function ClientFit({ dashboard }: { dashboard: ResearchShareDashboard }) {
         <progress max={100} value={fit.fitScore} aria-label="Client fit" />
         <strong>{fit.fitScore}%</strong>
       </div>
+      {fit.availability === "partial" && (
+        <p className={styles.muted}>Partial evidence</p>
+      )}
+      {fit.basis ? (
+        <details>
+          <summary>Fit basis and coverage</summary>
+          {typeof fit.basis.scoreBasis === "string" && (
+            <p>
+              {fit.basis.scoreBasis === "direct_qualified_pe_association_share"
+                ? "Share of supported subjects with a direct qualified program-element association."
+                : fit.basis.scoreBasis.replaceAll("_", " ")}
+            </p>
+          )}
+          <dl className={styles.evidence}>
+            {(
+              [
+                ["totalIncludedMemberCount", "Included subjects"],
+                ["supportedMemberCount", "Supported subjects"],
+                ["matchedMemberCount", "Matched subjects"],
+              ] as const
+            ).map(([key, label]) =>
+              typeof fit.basis?.[key] === "number" ? (
+                <div key={key}>
+                  <dt>{label}</dt>
+                  <dd>{String(fit.basis[key])}</dd>
+                </div>
+              ) : null,
+            )}
+          </dl>
+          {Array.isArray(fit.basis.limitations) &&
+            fit.basis.limitations
+              .filter((value): value is string => typeof value === "string")
+              .map((value, index) => (
+                <p key={index} className={styles.muted}>
+                  {value}
+                </p>
+              ))}
+        </details>
+      ) : (
+        <p className={styles.muted}>Fit basis was not captured.</p>
+      )}
       {fit.refreshedAt && (
         <small className={styles.muted}>
           Refreshed {date(fit.refreshedAt)}
@@ -211,7 +374,10 @@ function Changes({
 
 function Subjects({ dashboard }: { dashboard: ResearchShareDashboard }) {
   const rows = dashboard.data.subjects;
-  if (!rows.length) return <Empty>This portfolio has no subjects yet.</Empty>;
+  if (!rows.length)
+    return (
+      <Empty>No included subjects match this widget&apos;s selection.</Empty>
+    );
   return (
     <ul className={styles.list}>
       {rows.map((subject) => (
@@ -234,26 +400,52 @@ function Subjects({ dashboard }: { dashboard: ResearchShareDashboard }) {
   );
 }
 
-function Sources({ dashboard }: { dashboard: ResearchShareDashboard }) {
+function Sources({
+  dashboard,
+  widget,
+}: {
+  dashboard: ResearchShareDashboard;
+  widget: ResearchDashboardWidget;
+}) {
   const count = dashboard.data.sources.length;
   const coverage = dashboard.data.coverage;
+  const filtered = ["subjectIds", "fundingFiscalYear", "basisKey"].some(
+    (key) => widget.settings[key] !== undefined,
+  );
+  if (!count)
+    return (
+      <Empty>
+        No source evidence is available for this widget&apos;s selection.
+      </Empty>
+    );
   return (
     <div className={styles.metrics}>
       <div className={styles.metric}>
         <span>Source documents</span>
         <strong>{count}</strong>
       </div>
-      <div className={styles.metric}>
-        <span>Subjects covered</span>
-        <strong>
-          {coverage.supportedMembers} of {coverage.eligibleMembers}
-        </strong>
-      </div>
+      {!filtered && (
+        <div className={styles.metric}>
+          <span>Subjects covered</span>
+          <strong>
+            {coverage.supportedMembers} of {coverage.eligibleMembers}
+          </strong>
+        </div>
+      )}
+      {filtered && (
+        <p className={styles.muted}>
+          Evidence for the selected included contributions. Portfolio coverage
+          is not a subtotal of this selection.
+        </p>
+      )}
       {dashboard.data.limitations.length > 0 && (
         <p className={`${styles.muted} ${styles.span}`}>
           {dashboard.data.limitations.join(" ")}
         </p>
       )}
+      <div className={styles.span}>
+        <SourceEvidence sources={dashboard.data.sources} />
+      </div>
     </div>
   );
 }
@@ -317,15 +509,25 @@ function Commentary({ widget }: { widget: ResearchDashboardWidget }) {
 function FirmMark({
   widget,
   dashboard,
+  logoUrl,
 }: {
   widget: ResearchDashboardWidget;
   dashboard: ResearchShareDashboard;
+  logoUrl?: string | null;
 }) {
   if (!dashboard.branding)
     return <Empty>Shown when branding is on for the link.</Empty>;
   return (
     <div className={styles.firmMark}>
-      <strong>{dashboard.branding.firmName}</strong>
+      {logoUrl ? (
+        <img
+          className={styles.logoLarge}
+          src={logoUrl}
+          alt={`${dashboard.branding.firmName} logo`}
+        />
+      ) : (
+        <strong>{dashboard.branding.firmName}</strong>
+      )}
       {text(widget.settings, "caption") && (
         <span className={styles.muted}>{text(widget.settings, "caption")}</span>
       )}
@@ -340,13 +542,33 @@ function Empty({ children }: { children: string }) {
 export function WidgetContent({
   widget,
   dashboard,
+  logoUrl,
 }: {
   widget: ResearchDashboardWidget;
   dashboard: ResearchShareDashboard;
+  logoUrl?: string | null;
 }) {
+  dashboard = selectWidgetDashboard(widget, dashboard);
+  return (
+    <>
+      {!["header", "commentary"].includes(widget.kind) &&
+        text(widget.settings, "title") && (
+          <h2 className={styles.widgetLabel}>
+            {text(widget.settings, "title")}
+          </h2>
+        )}
+      {renderWidget(widget, dashboard, logoUrl)}
+    </>
+  );
+}
+function renderWidget(
+  widget: ResearchDashboardWidget,
+  dashboard: ResearchShareDashboard,
+  logoUrl?: string | null,
+) {
   switch (widget.kind) {
     case "header":
-      return <Header widget={widget} dashboard={dashboard} />;
+      return <Header widget={widget} dashboard={dashboard} logoUrl={logoUrl} />;
     case "key_totals":
       return <KeyTotals dashboard={dashboard} />;
     case "funding_table":
@@ -358,12 +580,14 @@ export function WidgetContent({
     case "subjects":
       return <Subjects dashboard={dashboard} />;
     case "sources":
-      return <Sources dashboard={dashboard} />;
+      return <Sources dashboard={dashboard} widget={widget} />;
     case "snapshot_comparison":
       return <SnapshotComparison dashboard={dashboard} />;
     case "commentary":
       return <Commentary widget={widget} />;
     case "image":
-      return <FirmMark widget={widget} dashboard={dashboard} />;
+      return (
+        <FirmMark widget={widget} dashboard={dashboard} logoUrl={logoUrl} />
+      );
   }
 }

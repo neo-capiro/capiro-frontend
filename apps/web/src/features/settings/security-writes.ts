@@ -1,4 +1,7 @@
 import { CapiroApiError } from "../../shared/capiro/http";
+import { governanceReceiptMatches } from "./memory/governance-reconciliation";
+import { workflowReceiptMatches } from "./site-workflows/recovery";
+import { memoryDraftReceiptMatches } from "./memory/drafts/recovery";
 
 type Row = Record<string, unknown>;
 const row = (value: unknown): Row =>
@@ -14,21 +17,8 @@ const sameMembers = (a: unknown, b: unknown) => {
     left.every((id, index) => id === right[index])
   );
 };
-export type SettingsWrite = {
-  operation: string;
-  attemptId: string;
-  input: { params?: Row; body?: Row };
-  state: "pending" | "unknown";
-  expectedInvitation?: { email: string; role: string };
-  expectedInvitationHash?: string;
-  expectedAccount?: { userId: string; tenantId: string };
-  requestHash?: string;
-  resultHash?: string;
-  inputFields?: string[];
-  receiptId?: string;
-  acceptedResult?: boolean;
-  startedAt: string;
-};
+export type { SettingsWrite } from "./security-write-types";
+import type { SettingsWrite } from "./security-write-types";
 export const uncertainSettingsWrite =
   "The result is not confirmed. This write will not be sent again. Check the recorded target before making another change.";
 
@@ -38,6 +28,45 @@ export function assertSettingsReceipt(write: SettingsWrite, value: unknown) {
   const { params = {}, body = {} } = write.input;
   let confirmed = false;
   switch (write.operation) {
+    case "settings.memory.drafts.save":
+    case "settings.memory.drafts.submit":
+      confirmed = memoryDraftReceiptMatches(write, value);
+      break;
+    case "settings.siteWorkflows.save":
+      confirmed = workflowReceiptMatches(write, receipt);
+      break;
+    case "settings.memory.review.approve":
+      confirmed =
+        receipt.ok === true &&
+        receipt.candidateId === params.id &&
+        ["activated", "duplicate", "conflict"].includes(
+          String(receipt.outcome),
+        );
+      break;
+    case "settings.memory.review.reject":
+      confirmed =
+        receipt.ok === true &&
+        receipt.candidateId === params.id &&
+        receipt.outcome === "rejected";
+      break;
+    case "settings.memory.governance.approve":
+    case "settings.memory.governance.confirm":
+    case "settings.memory.governance.markStale":
+    case "settings.memory.governance.revoke":
+    case "settings.memory.governance.secondApprove":
+    case "settings.memory.governance.retry":
+      confirmed = governanceReceiptMatches(write, receipt);
+      break;
+    case "settings.memory.grants.create":
+      confirmed =
+        receipt.ok === true &&
+        receipt.id === body.id &&
+        receipt.expiresAt === body.expiresAt &&
+        sameMembers(receipt.permissions, body.permissions);
+      break;
+    case "settings.memory.grants.revoke":
+      confirmed = receipt.ok === true && typeof receipt.revoked === "boolean";
+      break;
     case "settings.support.create":
       confirmed =
         !!write.expectedAccount &&

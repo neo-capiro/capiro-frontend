@@ -151,17 +151,11 @@ it("a proposal past its expiry is never offered for a decision, even before the 
   ).toMatchObject({ status: "Expired", decision: "closed" });
 });
 
-it("held kinds and other approvers are shown but never decidable", () => {
+it("proposals for other approvers are shown but never decidable", () => {
   const item = structuredClone(first("listAwaiting")) as Extract<
     IntentsItem,
     { kind: "proposal"; proposal: unknown }
   >;
-  const memory = structuredClone(item);
-  (memory.proposal.command as { action: string }).action = "memory.propose";
-  expect(intentRow(memory, now, viewer)).toMatchObject({
-    decision: "held",
-    status: "Prepared",
-  });
   expect(
     intentRow(item, now, { ...viewer, actorId: "someone-else" }),
   ).toMatchObject({ decision: "held", status: "Needs another approver" });

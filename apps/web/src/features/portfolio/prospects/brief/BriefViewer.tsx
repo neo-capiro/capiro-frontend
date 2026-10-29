@@ -140,7 +140,7 @@ export function BriefViewer({
         />
       ) : panel === "refresh" && data.currentVersion ? (
         <BriefRefresh
-          prospectId={scope.prospectId}
+          scope={scope}
           versionNumber={data.currentVersion.versionNumber}
         />
       ) : (

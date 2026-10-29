@@ -16,6 +16,7 @@ import type {
 } from "../../../shared/meri-documents/artifact-access";
 import { unavailableResources } from "../../../shared/meri-resources/unavailable";
 import { DocumentInspectionSummary } from "../files/DocumentInspectionSummary";
+import { DocumentSourcePanel } from "../files/DocumentSourcePanel";
 import { DocumentDownloadUrl } from "../files/download-url";
 import { StatusPill } from "../ui/StatusPill";
 import type { ConversationFile as Listed } from "./intents/prepared-files";
@@ -188,6 +189,7 @@ function ConversationArtifact({
             <>
               <p>{preview.path}</p>
               <StatusPill>Stored bytes verified</StatusPill>
+              <DocumentSourcePanel access={access} preview={preview} />
             </>
           ) : (
             <>

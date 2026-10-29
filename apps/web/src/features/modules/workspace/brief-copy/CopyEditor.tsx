@@ -38,7 +38,7 @@ export function CopyEditor({
           Workspace draft {detail.draftId} · tab {detail.document.id}
         </p>
       </details>
-      <CopyHistory draftId={detail.draftId} />
+      <CopyHistory detail={detail} />
       <Field label="Copied tab name" htmlFor="workspace-copy-name">
         <TextInput
           id="workspace-copy-name"

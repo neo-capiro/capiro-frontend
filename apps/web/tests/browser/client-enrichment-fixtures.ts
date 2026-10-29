@@ -1,9 +1,14 @@
 import type { Page } from "@playwright/test";
+import type { RetryResult } from "../../src/features/portfolio/client-profile/enrichment/retry-contracts";
 import { clientId, installFixtures, json } from "./fixtures";
 import {
   runSchema,
   type FillRun,
 } from "../../src/features/portfolio/client-profile/enrichment/contracts";
+import {
+  applicationResultSchema,
+  type ApplicationResult,
+} from "../../src/features/portfolio/client-profile/enrichment/review-contracts";
 export const runId = "e0000000-0000-4000-8000-000000000001";
 export const findingId = "e0000000-0000-4000-8000-000000000002";
 export const advocacyId = "e0000000-0000-4000-8000-000000000003";
@@ -11,6 +16,7 @@ export const matterId = "e0000000-0000-4000-8000-000000000004";
 export function syntheticRun(): FillRun {
   const finding = {
     id: findingId,
+    revision: "b".repeat(64),
     runId,
     clientId,
     kind: "profile_field",
@@ -34,6 +40,7 @@ export function syntheticRun(): FillRun {
   };
   return runSchema.parse({
     id: runId,
+    clientRevision: "a".repeat(64),
     clientId,
     status: "completed",
     stage: "review_ready",
@@ -126,6 +133,11 @@ export async function installEnrichment(page: Page) {
     runGets: 0,
     latestGets: 0,
     role: "user_admin",
+    receipts: new Map<string, ApplicationResult>(),
+    starts: new Map<string, FillRun>(),
+    dropStartOnce: false,
+    retries: new Map<string, RetryResult>(),
+    dropRetryOnce: false,
   };
   await page.route("**/api/backend/core/me", (route) =>
     json(route, {
@@ -176,7 +188,14 @@ export async function installEnrichment(page: Page) {
                 origin: "imported",
               },
             ],
-            suggestedIdentities: [],
+            suggestedIdentities: [
+              {
+                id: 73,
+                name: "Synthetic suggested identity",
+                selected: false,
+                origin: "suggested",
+              },
+            ],
             taskPreview: ["Public web", "LDA"],
           });
         if (state.mode === "load-fail")
@@ -193,19 +212,121 @@ export async function installEnrichment(page: Page) {
         }
         if (run && state.mode === "drift" && path.startsWith("runs/"))
           run.findings[0]!.proposedValue = "Changed after review";
+        if (run && path.endsWith("/review"))
+          return json(route, {
+            clientId: run.clientId,
+            runId: run.id,
+            clientRevision: run.clientRevision,
+            findings: run.findings,
+          });
         return json(route, run).catch(() => {});
       }
       const body = route.request().postDataJSON() as Record<string, unknown>;
       state.posts.push({ path, body });
+      if (path === "runs") {
+        const id = String(body.requestId);
+        const previous = state.starts.get(id);
+        if (previous) return json(route, previous);
+        state.run = runSchema.parse({
+          ...syntheticRun(),
+          id,
+          status: "running",
+          stage: "research",
+          completedAt: null,
+          requestedSources: body.sources,
+          attachmentIds: body.attachmentIds,
+          selectedLdaIds: [12, ...(body.ldaClientIds as number[])],
+          setup: {
+            website: body.website,
+            sources: body.sources,
+            attachmentIds: body.attachmentIds,
+          },
+          tasks: [],
+          findings: [],
+        });
+        state.starts.set(id, structuredClone(state.run));
+        if (state.dropStartOnce) {
+          state.dropStartOnce = false;
+          return route.abort("failed");
+        }
+        return json(route, state.run);
+      }
       if (!state.run) return json(route, { message: "Run unavailable" }, 404);
-      if (path.endsWith("/apply"))
-        for (const f of state.run.findings)
+      if (path.endsWith("/retry")) {
+        const requestId = String(body.requestId);
+        const saved = state.retries.get(requestId);
+        if (saved) return json(route, { ...saved, replayed: true });
+        const taskId = path.split("/")[3]!;
+        const task = state.run.tasks?.find((value) => value.id === taskId);
+        const queued =
+          state.run.status !== "cancelled" &&
+          task?.status === "failed" &&
+          task.attempt === body.expectedAttempt &&
+          task.taskType === body.expectedTaskType;
+        const result: RetryResult = {
+          requestId,
+          runId: state.run.id,
+          taskId,
+          expectedAttempt: Number(body.expectedAttempt),
+          expectedTaskType: String(body.expectedTaskType),
+          status: queued ? "queued" : "refused",
+          reason: queued ? null : "The task changed.",
+        };
+        if (queued) {
+          task!.status = "queued";
+          state.run.status = "running";
+        }
+        state.retries.set(requestId, result);
+        if (state.dropRetryOnce) {
+          state.dropRetryOnce = false;
+          return route.abort("failed");
+        }
+        return json(route, { ...result, replayed: false });
+      }
+      if (path.endsWith("/apply") || path.endsWith("/assign-matter")) {
+        const requestId = String(body.requestId);
+        const saved = state.receipts.get(requestId);
+        if (saved) return json(route, { ...saved, replayed: true });
+        const result: ApplicationResult = {
+          requestId,
+          status: "completed",
+          applied: [],
+          alreadyApplied: [],
+          errors: [],
+          replayed: false,
+        };
+        for (const selected of body.findings as {
+          id: string;
+          revision: string;
+        }[]) {
+          const finding = state.run.findings.find((f) => f.id === selected.id);
           if (
-            Array.isArray(body.findingIds) &&
-            body.findingIds.includes(f.id) &&
-            !(state.mode === "partial" && f.id === advocacyId)
-          )
-            f.status = "accepted";
+            !finding ||
+            (state.mode === "partial" && finding.id === advocacyId)
+          ) {
+            result.errors.push({
+              findingId: selected.id,
+              message: "The source evidence could not be applied.",
+            });
+          } else {
+            finding.status = "accepted";
+            result.applied.push(finding.id);
+          }
+        }
+        result.status = result.errors.length
+          ? result.applied.length
+            ? "partial"
+            : "refused"
+          : "completed";
+        state.receipts.set(requestId, applicationResultSchema.parse(result));
+        if (state.mode === "lost") return route.abort("failed");
+        return json(
+          route,
+          state.mode === "wrong-assignment"
+            ? { ...result, requestId: runId }
+            : result,
+        );
+      }
       if (path.endsWith("/cancel")) state.run.status = "cancelled";
       if (path.endsWith("/reject")) {
         const f = state.run.findings.find((f) => path.includes(f.id));
@@ -214,16 +335,6 @@ export async function installEnrichment(page: Page) {
       if (path.endsWith("/restore")) {
         const f = state.run.findings.find((f) => path.includes(f.id));
         if (f) f.status = "pending";
-      }
-      if (path.endsWith("/assign-matter")) {
-        const f = state.run.findings.find((f) => path.includes(f.id));
-        if (f) f.status = "accepted";
-        if (state.mode === "lost") return route.abort("failed");
-        return json(route, {
-          findingId: advocacyId,
-          matterId: state.mode === "wrong-assignment" ? runId : matterId,
-          alreadyApplied: false,
-        });
       }
       if (state.mode === "lost") return route.abort("failed");
       return json(

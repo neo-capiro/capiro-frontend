@@ -1,4 +1,21 @@
 /* Figma 3.4 09 · Settings pages (09.01–09.07): navigation, two content columns and preference cards. */
+/* The two-column card can be narrow before the shared table's phone breakpoint.
+   The Panel lays its children out from flex-start, so the wrapper sizes itself to
+   the table's own 640px and the shared frame can never scroll: the table is pushed
+   over the neighbouring card instead. Capping the wrapper at the card width lets the
+   frame scroll the table inside the card; at cards wider than 640px nothing changes. */
+.connectionsTable {
+  max-width: 100%;
+}
+.connectionsTable > div {
+  overflow-x: auto;
+}
+.connectionsTable table {
+  min-width: 640px;
+}
+.connectionStatus {
+  white-space: nowrap;
+}
 .page {
   display: flex;
   flex-direction: column;
@@ -118,6 +135,11 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+}
+/* Scoped disabled affordance for this surface's action row: globals.css only sets
+   the cursor, so a gated control would otherwise paint as an enabled one. */
+.actions button:disabled {
+  opacity: 0.4;
 }
 .choices {
   display: flex;

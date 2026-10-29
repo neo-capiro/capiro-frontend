@@ -1,6 +1,7 @@
 import type { RuntimeConfig, Service } from "../config/config";
 import { sameRequestOrigin } from "../../request-origin";
 import { portfolioCommandRefusal } from "./portfolio-command-refusals";
+import { incomingMailFilesReadRefusal } from "./incoming-mail-files-refusal";
 import { coreSessionAuthentication } from "../../preview/core-session-authentication";
 const permittedRoots: Record<Service, readonly string[]> = {
   core: [
@@ -160,11 +161,18 @@ export async function proxyRequest(
           headers: { "Cache-Control": "no-store" },
         });
       let message =
-        response.status === 404
+        incomingMailFilesReadRefusal(
+          selected,
+          request.method,
+          path,
+          response.status,
+          payload,
+        ) ??
+        (response.status === 404
           ? "The requested action or record is unavailable from the current service."
           : response.status >= 500
             ? "The service is unavailable. Please retry."
-            : "The operation was rejected.";
+            : "The operation was rejected.");
       if (
         response.status < 500 &&
         response.status !== 404 &&

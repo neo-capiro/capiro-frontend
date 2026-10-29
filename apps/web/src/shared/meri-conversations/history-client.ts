@@ -5,6 +5,7 @@ import {
   DISCOVERY_SCHEMA,
   HISTORY_SCHEMA,
   TURN_SCHEMA,
+  EXPORT_SCHEMA,
   MANAGEMENT_VERSION,
 } from "@capiro/meri-contracts/conversation-history";
 export { MANAGEMENT_VERSION };
@@ -109,6 +110,36 @@ export function summarizeConversations(
   fetcher: typeof fetch = fetch,
 ) {
   return request("summaries", input, signal, fetcher);
+}
+
+export function listConversationDeletions(
+  input: unknown,
+  signal: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  return request("deletions", input, signal, fetcher);
+}
+
+export function readConversationDeletionStatus(
+  input: unknown,
+  signal: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  return request("deletionStatus", input, signal, fetcher);
+}
+
+export async function exportConversationMessages(
+  input: unknown,
+  signal: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  const value = await request("export", input, signal, fetcher);
+  if (value.schema !== EXPORT_SCHEMA)
+    throw new ConversationHistoryUnavailable(
+      502,
+      "CONVERSATION_RESPONSE_INVALID",
+    );
+  return value;
 }
 
 export function manageConversation(

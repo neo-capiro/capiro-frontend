@@ -23,6 +23,7 @@ export const hillDayPhases = [
 ] as const;
 export type HillDayPhase = (typeof hillDayPhases)[number];
 type Destination =
+  | { kind: "task"; taskId: string }
   | { kind: "newsletter-review"; newsletterId: string }
   | { kind: "view"; view: WorkspaceView }
   | { kind: "draft"; draftId: string; prospectId?: string }
@@ -41,6 +42,7 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
     "prospectId",
     "hilldayId",
     "newsletterId",
+    "taskId",
   ];
   if (
     [
@@ -63,6 +65,18 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
   const prospectId = query.get("prospectId") ?? undefined;
   const hilldayId = query.get("hilldayId") ?? undefined;
   const newsletterId = query.get("newsletterId") ?? undefined;
+  const taskId = query.get("taskId") ?? undefined;
+  if (taskId)
+    return view === "documents" &&
+      !draftId &&
+      !prospectId &&
+      !hilldayId &&
+      !newsletterId &&
+      !query.has("briefSource") &&
+      !query.has("copyDocumentId") &&
+      !query.has("hilldayPhase")
+      ? { kind: "task", taskId, clientId }
+      : { kind: "invalid" };
   const phase = hillDayPhases.find(
     (value) => value === query.get("hilldayPhase"),
   );
@@ -98,6 +112,7 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
 export function workspaceHref(destination: Destination & Scope) {
   const query = new URLSearchParams();
   if (destination.clientId) query.set("clientId", destination.clientId);
+  if (destination.kind === "task") query.set("taskId", destination.taskId);
   if (destination.kind === "view" && destination.view !== "documents")
     query.set("view", destination.view);
   if (destination.kind === "draft") {

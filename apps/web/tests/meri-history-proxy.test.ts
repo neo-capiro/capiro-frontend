@@ -447,7 +447,7 @@ describe("synthetic native history browser client", () => {
 
 describe("standalone bind address behind the ALB", () => {
   // Next builds request.url from HOSTNAME/PORT (https://0.0.0.0:5188), never the public host.
-  const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+  const publicOrigin = "https://app.capiro.ai";
   const configured: ConversationProxyConfig = {
     ...config,
     requestOrigin: publicOrigin,
@@ -460,7 +460,7 @@ describe("standalone bind address behind the ALB", () => {
       headers: {
         Origin: publicOrigin,
         "Content-Type": "application/json",
-        Host: "portfolio-preview.app.capiro.ai",
+        Host: "app.capiro.ai",
         "X-Forwarded-Proto": "https",
         ...headers,
       },

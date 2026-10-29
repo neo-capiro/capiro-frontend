@@ -1,45 +1,50 @@
 import type { Activity } from "./contracts";
+import type { ActivityMetricsView } from "./useActivityMetrics";
+import { ActivityMetricStatus } from "./ActivityMetricStatus";
 import styles from "./overview.module.css";
 
 /** The activity feed is a history list, not a touch, reply, or deadline summary. */
 export function EngagementPulse({
   records,
+  metrics,
 }: {
   records: Activity[] | undefined;
+  metrics: ActivityMetricsView;
 }) {
   return (
     <section className={`card ${styles.pulse}`} aria-label="Engagement pulse">
       <header className="row between">
         <div>
           <h2>Engagement pulse</h2>
-          <small>Source-backed engagement metrics are unavailable</small>
+          <small>Saved CRM activity · last 30 days · UTC</small>
         </div>
         <a href="#activity-timeline">Open timeline →</a>
       </header>
       <div className={styles.pulseGrid}>
         {[
-          ["Touches", "Touch count unavailable"],
-          ["Awaiting reply", "Reply status unavailable"],
-          ["Overdue", "Deadline status unavailable"],
-        ].map(([label, description]) => (
+          ["Recorded activities", metrics.data?.counts.recordedActivities],
+          ["Open requests", metrics.data?.counts.openRequests],
+          ["Overdue requests", metrics.data?.counts.overdueRequests],
+        ].map(([label, count]) => (
           <div key={label}>
-            <strong>—</strong>
+            <strong>{count ?? "—"}</strong>
             <small>{label}</small>
-            <small>{description}</small>
           </div>
         ))}
       </div>
       <div className={styles.pulseTrend}>
-        <span className="eyebrow">Touches per week</span>
+        <ActivityMetricStatus metrics={metrics} />
         <small>
-          A verified touch summary is not available for this client.
+          Activity counts cover saved CRM entries. Open requests are unsettled
+          requests over all time; overdue requests have a saved due time before
+          the count time. Meetings, mail and Planner work are excluded.
         </small>
       </div>
       <div className={styles.pulseLatest}>
         <div className="row between">
           <span className="eyebrow">Latest</span>
           <span className={styles.recordCount}>
-            <small>Recent activity items</small>
+            <small>Loaded timeline items</small>
             <strong>{records?.length ?? "—"}</strong>
           </span>
         </div>
@@ -73,21 +78,32 @@ export function EngagementHealth() {
   );
 }
 
-export function DeadlineAndRequests() {
+export function DeadlineAndRequests({
+  metrics,
+}: {
+  metrics: ActivityMetricsView;
+}) {
   return (
     <section
       className={`card ${styles.deadlines}`}
       aria-label="Deadline stress and requests"
     >
       <div>
-        <h2>Deadline stress</h2>
-        <strong>—</strong>
-        <small>Planner due dates are unavailable in this profile.</small>
+        <h2>Overdue commitments</h2>
+        <strong>{metrics.data?.counts.overdueCommitments ?? "—"}</strong>
+        <small>
+          Unsettled CRM commitments with a saved due time before the count time,
+          across all time. Planner work is excluded.
+        </small>
+        <ActivityMetricStatus metrics={metrics} />
       </div>
       <div>
-        <h2>Open requests by type</h2>
-        <strong>—</strong>
-        <small>Request counts are unavailable in this profile.</small>
+        <h2>Open commitments</h2>
+        <strong>{metrics.data?.counts.openCommitments ?? "—"}</strong>
+        <small>
+          All unsettled CRM commitments, including those with no due date. Each
+          saved entry is counted once.
+        </small>
       </div>
     </section>
   );

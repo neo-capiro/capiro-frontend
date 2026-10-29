@@ -2,6 +2,7 @@ import { z } from "zod";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import { readMailAttachments, attachmentRefusal } from "./attachments";
 import { mailRecipient } from "./recipients";
+import { mailReplyContextSchema } from "./read";
 import {
   confirmReviewedMailbox,
   senderReceiptMatches,
@@ -9,6 +10,13 @@ import {
 } from "./mailboxes";
 
 export const sendInputSchema = z.object({
+  operation: z.enum(["reply", "reply_all", "forward"]).optional(),
+  originalMessageId: z.uuid().optional(),
+  originalUpdatedAt: z.iso.datetime({ offset: true }).optional(),
+  originalBodySha256: z
+    .string()
+    .regex(/^[a-f0-9]{64}$/)
+    .optional(),
   clientId: z.uuid(),
   personIds: z.array(z.uuid()).max(50).optional(),
   to: z.array(mailRecipient).min(1).max(50),
@@ -25,6 +33,40 @@ export type SendInput = z.infer<typeof sendInputSchema> & {
   /** Frozen local review evidence; excluded from the server DTO. */
   reviewedSender?: SendingMailbox;
 };
+export function replyReceiptMatches(
+  receipt: {
+    operation?: string;
+    originalMessageId?: string;
+    originalThreadId?: string;
+    originalUpdatedAt?: string;
+    originalBodySha256?: string;
+    threadId?: string;
+  },
+  input: Pick<
+    SendInput,
+    | "operation"
+    | "originalMessageId"
+    | "originalUpdatedAt"
+    | "threadId"
+    | "originalBodySha256"
+  >,
+) {
+  return input.operation === "reply" ||
+    input.operation === "reply_all" ||
+    input.operation === "forward"
+    ? Boolean(
+        input.originalMessageId && input.originalUpdatedAt && input.threadId,
+      ) &&
+        receipt.operation === input.operation &&
+        receipt.originalMessageId === input.originalMessageId &&
+        receipt.originalThreadId === input.threadId &&
+        receipt.originalUpdatedAt === input.originalUpdatedAt &&
+        (input.operation !== "forward" ||
+          (Boolean(input.originalBodySha256) &&
+            receipt.originalBodySha256 === input.originalBodySha256))
+    : receipt.operation === undefined &&
+        (!input.threadId || receipt.threadId === input.threadId);
+}
 export class MailSendError extends Error {
   constructor(
     message: string,
@@ -44,6 +86,25 @@ export async function sendReviewedMail(
   try {
     body = sendInputSchema.parse(input);
     if (
+      (body.threadId ||
+        body.operation ||
+        body.originalMessageId ||
+        body.originalUpdatedAt ||
+        body.originalBodySha256) &&
+      (!["reply", "reply_all", "forward"].includes(body.operation ?? "") ||
+        !body.threadId ||
+        !body.originalMessageId ||
+        !body.originalUpdatedAt ||
+        !body.senderConnectionId ||
+        (body.operation === "forward"
+          ? !body.originalBodySha256
+          : body.originalBodySha256 !== undefined) ||
+        (body.operation === "reply" &&
+          (body.to.length !== 1 || body.cc?.length)) ||
+        body.bcc?.length)
+    )
+      throw new Error("Review a supported original message before replying.");
+    if (
       Boolean(body.senderConnectionId) !== Boolean(input.reviewedSender) ||
       (input.reviewedSender &&
         input.reviewedSender.id !== body.senderConnectionId)
@@ -60,19 +121,49 @@ export async function sendReviewedMail(
     if (body.threadId) {
       await api.request(
         "core",
-        `engagement/mail-threads/${body.threadId}`,
+        `engagement/mail-threads/${body.threadId}?messageId=${body.originalMessageId}`,
         z
           .object({
             id: z.uuid(),
             clientId: z.string().nullable(),
             connectionId: z.uuid().optional(),
+            messages: z.array(
+              z.object({
+                id: z.uuid(),
+                replyContext: mailReplyContextSchema.optional(),
+                replyAllContext: mailReplyContextSchema.optional(),
+                forwardContext: mailReplyContextSchema.optional(),
+              }),
+            ),
           })
-          .refine(
-            (thread) =>
+          .refine((thread) => {
+            const original = thread.messages[0];
+            const context =
+              body.operation === "forward"
+                ? original?.forwardContext
+                : body.operation === "reply_all"
+                  ? original?.replyAllContext
+                  : original?.replyContext;
+            return (
               thread.id === body.threadId &&
+              thread.messages.length === 1 &&
+              original?.id === body.originalMessageId &&
+              context?.supported === true &&
+              context.operation === body.operation &&
+              context.originalMessageId === body.originalMessageId &&
+              context.originalUpdatedAt === body.originalUpdatedAt &&
+              context.senderConnectionId === body.senderConnectionId &&
+              context.subject === body.subject &&
+              (body.operation === "forward"
+                ? context.originalBodySha256 === body.originalBodySha256
+                : JSON.stringify(context.to.map((row) => row.email)) ===
+                    JSON.stringify(body.to.map((row) => row.email)) &&
+                  JSON.stringify((context.cc ?? []).map((row) => row.email)) ===
+                    JSON.stringify((body.cc ?? []).map((row) => row.email))) &&
               (thread.clientId === body.clientId || thread.clientId === null) &&
-              (!sender || thread.connectionId === sender.id),
-          ),
+              (!sender || thread.connectionId === sender.id)
+            );
+          }),
       );
       assert();
     }
@@ -110,11 +201,19 @@ export async function sendReviewedMail(
           senderName: z.string().nullable().optional(),
           signaturePolicy: z.literal("actor").optional(),
           signatureAppended: z.boolean().optional(),
+          operation: z.enum(["reply", "reply_all", "forward"]).optional(),
+          originalMessageId: z.uuid().optional(),
+          originalThreadId: z.uuid().optional(),
+          originalUpdatedAt: z.iso.datetime({ offset: true }).optional(),
+          originalBodySha256: z
+            .string()
+            .regex(/^[a-f0-9]{64}$/)
+            .optional(),
         })
         .refine(
           (receipt) =>
             receipt.requestKey === requestKey &&
-            (!body.threadId || receipt.threadId === body.threadId) &&
+            replyReceiptMatches(receipt, body) &&
             (!sender ||
               (senderReceiptMatches(receipt, sender) &&
                 (body.appendSignature || receipt.signatureAppended === false))),

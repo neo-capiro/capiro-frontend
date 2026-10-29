@@ -30,7 +30,9 @@ function MatterList({
           <small>
             {matter.recordCount} records · {matter.outcomeCount} outcomes
           </small>
-          {matter.summary && <p className="muted">{matter.summary}</p>}
+          {matter.summary && matter.summary !== matter.title && (
+            <p className="muted">{matter.summary}</p>
+          )}
         </button>
       ))}
       {matters.length === 0 && (
@@ -92,8 +94,9 @@ export function AdvocacyBrowser({
           />
           {timeline.data && (
             <p className={styles.loaded}>
-              {timeline.data.length} loaded events · Latest 500 at most; older
-              history may be outside this view.
+              {timeline.data.length} recent{" "}
+              {timeline.data.length === 1 ? "event" : "events"}. Older history
+              may not be listed.
             </p>
           )}
           {events ? (

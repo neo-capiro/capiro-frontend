@@ -87,13 +87,17 @@ export function FileTable({
                   {file.fileName}
                 </button>
                 <small>{file.source}</small>
+                {file.scanDisclosure && (
+                  <small className={styles.scanDisclosure}>
+                    {file.scanDisclosure}
+                  </small>
+                )}
               </td>
               <td>{file.folder ?? "Unfiled"}</td>
               <td>{new Date(file.createdAt).toLocaleDateString()}</td>
               <td>{file.uploadedByName ?? "Unknown"}</td>
               <td>
                 <span className="chip">{fileStatus(file)}</span>
-                {file.scanDisclosure && <small>{file.scanDisclosure}</small>}
               </td>
               <td>
                 <DropdownMenu.Root>

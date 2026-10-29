@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useId, useLayoutEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
@@ -30,6 +30,7 @@ function FocusTagSession({ clientId }: { clientId: string }) {
   const cache = useQueryClient();
   const identity = useIdentity();
   const client = useClient(clientId);
+  const tagHintId = useId();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
@@ -139,13 +140,18 @@ function FocusTagSession({ clientId }: { clientId: string }) {
           <label className="field">
             Focus tag
             <input
+              aria-describedby={tagHintId}
               autoComplete="off"
+              placeholder="Enter a focus area"
               maxLength={100}
               value={value}
               disabled={!allowed || pending || uncertain}
               onChange={(event) => setValue(event.target.value)}
             />
           </label>
+          <small id={tagHintId}>
+            1–100 characters · Leading and trailing spaces are removed.
+          </small>
           {error && <p role="alert">{error}</p>}
           {uncertain && (
             <p className="status">

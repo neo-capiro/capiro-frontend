@@ -1,3 +1,4 @@
+import { prospectStateFixture } from "../../tests/prospect-atomic-fixture";
 import { test, expect } from "@playwright/test";
 import { randomUUID } from "node:crypto";
 import { onlyLocalRequests, operationFixtures } from "./fixtures";
@@ -23,6 +24,13 @@ test("lost prospect draft creation retains its original request through reload r
           record.id === (input as { params: { id: string } }).params.id,
       ),
     "workspace.draft.versions": [],
+    "workspace.prospect.state": (input: unknown) =>
+      prospectStateFixture(
+        [...records.values()].find(
+          (record) =>
+            record.id === (input as { params: { id: string } }).params.id,
+        )!,
+      ),
   });
   await page.route("**/api/capiro/workspace.prospect.create", async (route) => {
     const { body } = route.request().postDataJSON();

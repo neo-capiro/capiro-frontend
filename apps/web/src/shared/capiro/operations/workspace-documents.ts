@@ -145,7 +145,7 @@ const savedVersionSnapshot = z
     documents: z.array(savedVersionDocument).optional(),
   })
   .passthrough();
-const version = z.object({
+export const savedWorkspaceVersion = z.object({
   id: workspaceId,
   draftId: workspaceId,
   label: z.string().nullable(),
@@ -357,7 +357,7 @@ export const workspaceDocumentOperations = {
     method: "GET",
     path: "/drafts/:draftId/versions",
     request: z.object({ params: draftParams }).strict(),
-    response: z.array(version),
+    response: z.array(savedWorkspaceVersion),
     source,
   }),
   "workspace.draft.snapshot": defineOperation({
@@ -370,7 +370,7 @@ export const workspaceDocumentOperations = {
         body: z.object({ label: z.string().max(300).optional() }).strict(),
       })
       .strict(),
-    response: version,
+    response: savedWorkspaceVersion,
     source,
   }),
   "workspace.shares": defineOperation({
@@ -440,6 +440,6 @@ export const workspaceDocumentOperations = {
 export type NewsletterBody = z.infer<typeof newsletterBody>;
 export type NewsletterBlock = z.infer<typeof newsletterBlock>;
 export type WorkspaceDraftDocument = z.infer<typeof workspaceDraft>;
-export type SavedVersion = z.infer<typeof version>;
+export type SavedVersion = z.infer<typeof savedWorkspaceVersion>;
 export type SavedVersionSnapshot = z.infer<typeof savedVersionSnapshot>;
 export type SavedVersionDocument = z.infer<typeof savedVersionDocument>;

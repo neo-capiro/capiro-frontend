@@ -11,6 +11,7 @@ import type {
   ConversationStoredRequest,
   ConversationSubmitRequest,
 } from "@capiro/meri-contracts/conversation-application";
+import { receiveConversationInputRequest } from "@capiro/meri-contracts/conversation-input";
 
 /**
  * Meri answers the contract's 404 NOT_FOUND for a session's history before the conversation's
@@ -68,6 +69,14 @@ export async function reconcileStoredRequest(
 /**
  * Sends the run's single request, or retries the exact retained one. A failure after dispatch is
  * recorded as uncertain so the same request id and prompt are retried, never a new request.
+ *
+ * Attachments attach at this one funnel: a new request carries the exact ordered argument the
+ * session's upload access holds, and a retry or recovery re-sends the retained request verbatim, so
+ * no retry can ever declare or write an original again.
+ *
+ * The selected-input funnel carries every explicit choice, the Start Work / Delegate definition
+ * included. An installed contract that does not admit a work definition refuses the proposal here,
+ * before the journal write, so the refusal is fail-closed and dispatches nothing.
  */
 export async function sendRequest(
   port: MeriConversationPort,
@@ -82,22 +91,38 @@ export async function sendRequest(
   const retained = intent.read().submit;
   if ((!retry && retained) || (retry && !retained))
     throw new ConversationUnavailable("retained-submit-intent");
+  // Only a stored attempt enters the argument: an uncertain write is never sent as if it were stored.
+  // The one port factory always binds this access, and a port without it can offer no selection at
+  // all, so nothing a person chose can be dropped here.
+  const uploads = retry ? [] : (port.uploads?.sendArgument() ?? []);
   const input = retry
     ? retained!
     : {
         requestId: crypto.randomUUID(),
         prompt,
         ...skillSelectionFields(selection),
+        ...(uploads.length ? { uploads } : {}),
         ...(modelSelection
           ? { modelSelection: Object.freeze({ ...modelSelection }) }
           : {}),
         state: "pending" as const,
         ...(initial ? { workflow: "initial" as const } : {}),
       };
-  intent.write({ ...intent.read(), submit: { ...input, state: "pending" } });
-  const { workflow, ...request } = input;
-  Reflect.deleteProperty(request, "state");
-  Object.freeze(request);
+  const { workflow, ...proposal } = input;
+  Reflect.deleteProperty(proposal, "state");
+  // The canonical public receiver is the only constructor of a request this app may submit, and it is
+  // what gives the attachments field its exact tuple type. A locally shaped object is a proposal until
+  // it admits it, so a locally refused request leaves the journal untouched and dispatches nothing.
+  const request = receiveConversationInputRequest(
+    new TextEncoder().encode(JSON.stringify(proposal)),
+  );
+  // Only the admitted request is journaled: the retained identity is the canonical one, plus the two
+  // local fields this page owns (its own uncertainty and its local recovery route).
+  const journal = {
+    ...request,
+    ...(workflow ? { workflow: "initial" as const } : {}),
+  };
+  intent.write({ ...intent.read(), submit: { ...journal, state: "pending" } });
   try {
     if (!retry) onRecorded?.(request);
     if (retry && port.getSnapshot().submit === "unknown")
@@ -109,9 +134,9 @@ export async function sendRequest(
         await port.submitInitial(request);
       else await port.submit(request);
     }
-    intent.write({ ...intent.read(), submit: { ...input, state: "observed" } });
+    intent.write({ ...intent.read(), submit: { ...journal, state: "observed" } });
   } catch (cause) {
-    intent.write({ ...intent.read(), submit: { ...input, state: "unknown" } });
+    intent.write({ ...intent.read(), submit: { ...journal, state: "unknown" } });
     throw cause;
   }
 }

@@ -86,6 +86,32 @@ export const researchShareOperations = {
     "/research-portfolios/:id/share-links",
     z.array(s.researchShareLink),
   ),
+  "research.sharePreview": post(
+    "/research-portfolios/:id/share-preview",
+    z
+      .object({
+        snapshotId: z.uuid(),
+        designId: z.uuid(),
+        clientId: z.uuid(),
+        branding: z.boolean(),
+      })
+      .strict(),
+    s.researchSharePreview,
+  ),
+  "research.shareLinks.operation": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/research-portfolios/:id/share-links/operations/:operationKey",
+    request: z
+      .object({
+        params: params
+          .extend({ operationKey: z.string().min(1).max(128) })
+          .strict(),
+      })
+      .strict(),
+    response: z.object({ link: s.researchShareLink.nullable() }),
+    source,
+  }),
   "research.shareLinks.publish": post(
     "/research-portfolios/:id/share-links",
     z
@@ -95,6 +121,8 @@ export const researchShareOperations = {
         designId: z.uuid(),
         clientId: z.uuid(),
         branding: z.boolean(),
+        previewHash: z.string().regex(/^[0-9a-f]{64}$/),
+        expectedDesignVersion: z.number().int().min(1),
       })
       .strict(),
     s.researchShareLinkPublished,
@@ -110,6 +138,46 @@ export const researchShareOperations = {
       })
       .strict(),
     response: s.researchShareLink,
+    source,
+  }),
+  // Tenant administrators: every live link in the workspace, and the workspace-wide switch.
+  "research.shareLinks.tenant": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/research-share-links",
+    request: z.object({}).strict(),
+    response: z.array(s.researchShareLink),
+    source,
+  }),
+  "research.shareLinks.tenantRevoke": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/research-share-links/:linkId/revoke",
+    request: z
+      .object({
+        params: z.object({ linkId: z.uuid() }).strict(),
+        body: z.object({}).strict(),
+      })
+      .strict(),
+    response: s.researchShareLink,
+    source,
+  }),
+  "research.tenantSharing": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/research-share-links/settings",
+    request: z.object({}).strict(),
+    response: s.researchTenantSharing,
+    source,
+  }),
+  "research.tenantSharing.set": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/research-share-links/settings",
+    request: z
+      .object({ body: z.object({ enabled: z.boolean() }).strict() })
+      .strict(),
+    response: s.researchTenantSharing,
     source,
   }),
 } as const;

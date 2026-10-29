@@ -383,9 +383,11 @@ export function IntegrationSettings() {
                 )}
                 {capability?.data && !capability.data.configured && (
                   <p className={styles.description}>
-                    This provider is not configured on the server. A Capiro
-                    administrator must add the OAuth credentials before accounts
-                    can be connected.
+                    {rows.length > 0 &&
+                      "Saved account records are shown above; they do not establish current provider availability. "}
+                    Current server configuration for this provider is missing. A
+                    Capiro administrator must add the OAuth credentials before
+                    accounts can connect or reconnect.
                   </p>
                 )}
                 {capability?.data?.actions?.connect.reason ===

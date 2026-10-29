@@ -7,6 +7,7 @@ import { DeleteConversationDialog } from "../screens/conversation/DeleteConversa
 import { RenameConversationDialog } from "./RenameConversationDialog";
 import { SavedChatTranscript } from "./SavedChatTranscript";
 import { useManagedChange } from "./useManagedChange";
+import { ConversationExportAction } from "./ConversationExportAction";
 import ui from "../ui/meri-ui.module.css";
 import conversation from "../screens/conversation/conversation.module.css";
 import styles from "./conversation-history.module.css";
@@ -64,6 +65,11 @@ export function SelectedConversationActions({
         className={`${ui.row} ${conversation.historyActions}`}
         aria-label="Selected conversation actions"
       >
+        <ConversationExportAction
+          row={row}
+          account={account}
+          available={available && current && !busy && !intent}
+        />
         {row.status === "active" ? (
           <Link
             className={ui.primary}

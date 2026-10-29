@@ -1,4 +1,15 @@
 import type { OperationRegistry } from "./contracts";
+import { memoryRetentionPolicyOperations } from "./operations/memory-retention-policy";
+import { targetContextOperations } from "./operations/target-context";
+import { siteWorkflowOperations } from "./operations/site-workflows";
+import { memoryReviewOperations } from "./operations/memory-review";
+import { memoryGrantOperations } from "./operations/memory-grants";
+import { memoryFilesOperations } from "./operations/memory-files";
+import { memoryDraftOperations } from "./operations/memory-drafts";
+import { memoryGovernanceOperations } from "./operations/memory-governance";
+import { completedReportOperations } from "./operations/meri-completed-reports";
+import { meriFirmSkillOperations } from "./operations/meri-firm-skills";
+import { meriProcedureOperations } from "./operations/meri-procedures";
 import { calendarOperations } from "./operations/calendar";
 import { directoryOperations } from "./operations/directory";
 import { directoryObjectiveOperations } from "./operations/directory-objective-destination";
@@ -11,10 +22,23 @@ import { legiwatchOperations } from "./operations/legiwatch";
 import { plannerOperations } from "./operations/planner";
 import { researchPortfolioOperations } from "./operations/research-portfolios";
 import { researchShareOperations } from "./operations/research-share";
+import { researchRuleOperations } from "./operations/research-rules";
+import { researchImportOperations } from "./operations/research-imports";
+import { researchOutputOperations } from "./operations/research-outputs";
+import { researchWorkflowOperations } from "./operations/research-workflow";
+import { researchDraftOperations } from "./operations/research-drafts";
+import { researchComparisonOperations } from "./operations/research-comparisons";
+import { defenseResearchOperations } from "./operations/defense-research";
+import { defenseProductCoverageOperations } from "./operations/defense-product-coverage";
+import { defenseEvidenceOperations } from "./operations/defense-evidence";
+import { federalEvidenceOperations } from "./operations/federal-evidence";
+import { researchMemberDiscoveryOperations } from "./operations/research-member-discovery";
+import { defenseChangesOperations } from "./operations/defense-changes";
 import { settingsOperations } from "./operations/settings";
 import { settingsAdminOperations } from "./operations/settings-admin";
 import { strategiesOperations } from "./operations/strategies";
 import { workspaceOperations } from "./operations/workspace";
+import { workspaceGenerationOperations } from "./operations/workspace-generation";
 import { onboardFunnelOperations } from "./operations/onboard-funnel";
 import { onboardSetupOperations } from "./operations/onboard-setup";
 import { onboardCoreOperations } from "./operations/onboard-core";
@@ -32,6 +56,17 @@ import {
 
 // Reviewed feature groups are composed here. This registry is the gateway allowlist.
 export const capiroOperations = {
+  ...memoryRetentionPolicyOperations,
+  ...targetContextOperations,
+  ...siteWorkflowOperations,
+  ...memoryReviewOperations,
+  ...memoryGrantOperations,
+  ...memoryFilesOperations,
+  ...memoryDraftOperations,
+  ...memoryGovernanceOperations,
+  ...completedReportOperations,
+  ...meriFirmSkillOperations,
+  ...meriProcedureOperations,
   ...settingsOperations,
   ...plannerOperations,
   ...engagementOperations,
@@ -39,6 +74,7 @@ export const capiroOperations = {
   ...outreachSourceOperations,
   ...newsletterDeliveryOperations,
   ...workspaceOperations,
+  ...workspaceGenerationOperations,
   ...strategiesOperations,
   ...directoryOperations,
   ...directoryObjectiveOperations,
@@ -48,6 +84,18 @@ export const capiroOperations = {
   ...intelligenceOperations,
   ...researchPortfolioOperations,
   ...researchShareOperations,
+  ...researchRuleOperations,
+  ...researchImportOperations,
+  ...researchOutputOperations,
+  ...researchWorkflowOperations,
+  ...researchDraftOperations,
+  ...researchComparisonOperations,
+  ...defenseResearchOperations,
+  ...defenseProductCoverageOperations,
+  ...defenseEvidenceOperations,
+  ...federalEvidenceOperations,
+  ...researchMemberDiscoveryOperations,
+  ...defenseChangesOperations,
   ...onboardFunnelOperations,
   ...onboardSetupOperations,
   ...onboardCoreOperations,

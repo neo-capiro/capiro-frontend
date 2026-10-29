@@ -62,6 +62,8 @@ Owner: Core economic evidence owner + Portfolio frontend/design. Acceptance choi
 
 ## DG-05 · Pulse and Overview aggregate coverage
 
+27 October follow-up: [recovered metric source assessment](METRIC-SOURCE-STATUS.md) and [Overview source/design inventory update](OVERVIEW-FOLLOWUPS-20261027.md). The recovered table is historical, not approved schema or a fresh Core audit; this request remains subject to the existing owner contracts.
+
 Nearest current frames: [1064:153351](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-153351), [1064:153668](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-153668), [1064:153830](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-153830), [1064:153955](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-153955), [1064:154082](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-154082), [1064:154208](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-154208), [1064:154325](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-154325), [1064:159034](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-159034), [1064:159117](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-159117).
 
 **Missing/inconsistent state:** Success drilldowns are designed, but authoritative definitions/coverage and partial/permission/failure examples are not established by those sample totals.

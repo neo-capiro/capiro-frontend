@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "selection": "Preserve already implemented administrative UI. No additional B14 UI surface has been selected.",
+  "sourceQualification": "Inventory describes source coverage only. It does not claim deployment, provider availability, independent review, or live acceptance.",
+  "capabilities": [
+    {
+      "id": "personal",
+      "name": "Personal profile and email signature",
+      "disposition": "app-supported",
+      "section": "personal",
+      "source": "frontend:apps/web/src/features/settings/PersonalSettings.tsx",
+      "note": "Existing profile fields and signature actions."
+    },
+    {
+      "id": "team",
+      "name": "Team membership and invitations",
+      "disposition": "app-supported",
+      "section": "team",
+      "source": "frontend:apps/web/src/features/settings/TeamSettings.tsx",
+      "note": "Invite, resend, remove membership, change role and billing permission through existing controls."
+    },
+    {
+      "id": "profiles",
+      "name": "Client profiles and account owners",
+      "disposition": "app-supported",
+      "section": "profiles",
+      "source": "frontend:apps/web/src/features/settings/ProfileSettings.tsx",
+      "note": "Existing create, owner assignment, archive and restore workflows."
+    },
+    {
+      "id": "branding",
+      "name": "Firm name, logo upload and synchronization",
+      "disposition": "app-supported",
+      "section": "branding",
+      "source": "frontend:apps/web/src/features/settings/BrandingSettings.tsx",
+      "note": "Upload/replace and synchronization controls; logo deletion is separately unselected."
+    },
+    {
+      "id": "sharing",
+      "name": "Research Portfolio client sharing",
+      "disposition": "app-supported",
+      "section": "client-sharing",
+      "source": "frontend:apps/web/src/features/settings/ClientSharingSettings.tsx",
+      "note": "Workspace sharing switch, authorized link list and revocation."
+    },
+    {
+      "id": "contact",
+      "name": "Firm contact details",
+      "disposition": "app-supported",
+      "section": "contact-info",
+      "source": "frontend:apps/web/src/features/settings/ContactSettings.tsx",
+      "note": "Current role controls editing; read access is defined by the canonical backend."
+    },
+    {
+      "id": "billing",
+      "name": "Billing summary and approved billing flows",
+      "disposition": "app-supported",
+      "section": "billing",
+      "source": "frontend:apps/web/src/features/settings/BillingSettings.tsx",
+      "note": "Billing-admin/HQ visibility and existing checkout, cancellation and portal flows."
+    },
+    {
+      "id": "usage",
+      "name": "AI usage summaries",
+      "disposition": "app-supported",
+      "section": "ai-usage",
+      "source": "frontend:apps/web/src/features/settings/UsageSettings.tsx",
+      "note": "Existing aggregate usage; the event endpoint is API-only."
+    },
+    {
+      "id": "integrations",
+      "name": "Configured account integrations",
+      "disposition": "app-supported",
+      "section": "integrations",
+      "source": "frontend:apps/web/src/features/settings/IntegrationSettings.tsx",
+      "note": "Existing providers and their declared capabilities only. Availability is returned by the current provider owner."
+    },
+    {
+      "id": "memory",
+      "name": "Private memory drafts and governed review",
+      "disposition": "app-supported",
+      "section": "memory",
+      "source": "frontend:apps/web/src/features/settings/MemorySettings.tsx",
+      "note": "Existing owner-aware drafts, assigned review, governance and retention display. External deletion/restoration acceptance remains tracked separately."
+    },
+    {
+      "id": "preferences",
+      "name": "Meri personal preferences",
+      "disposition": "app-supported",
+      "section": "meri-preferences",
+      "source": "frontend:apps/web/src/features/settings/SettingsScreen.tsx",
+      "note": "Existing Meri-owned settings are composed into Settings; unsupported preferences remain explicit."
+    },
+    {
+      "id": "hq-tenants",
+      "name": "HQ tenant administration",
+      "disposition": "app-supported",
+      "section": "hq-tenants",
+      "source": "frontend:apps/web/src/features/settings/hq/TenantSettings.tsx",
+      "note": "Existing create/detail/delete/resend operations. Restricted audited support mode is owned by the impersonation module."
+    },
+    {
+      "id": "hq-customers",
+      "name": "HQ billing customers",
+      "disposition": "app-supported",
+      "section": "hq-customers",
+      "source": "frontend:apps/web/src/features/settings/hq/CustomerSettings.tsx",
+      "note": "Existing billing list and comp status. Managed import orchestration is still a separate B12 requirement."
+    },
+    {
+      "id": "hq-credentials",
+      "name": "HQ AI credential metadata and controls",
+      "disposition": "app-supported",
+      "section": "hq-ai-keys",
+      "source": "frontend:apps/web/src/features/settings/hq/AiKeysSettings.tsx",
+      "note": "Existing supported credential providers and model controls; no new provider is selected."
+    },
+    {
+      "id": "hq-broadcasts",
+      "name": "HQ broadcasts",
+      "disposition": "app-supported",
+      "section": "hq-broadcasts",
+      "source": "frontend:apps/web/src/features/settings/hq/BroadcastSettings.tsx",
+      "note": "Existing draft/review/publish and audience controls."
+    },
+    {
+      "id": "hq-support",
+      "name": "HQ support requests",
+      "disposition": "app-supported",
+      "section": "hq-support",
+      "source": "frontend:apps/web/src/features/settings/hq/SupportRequestsSettings.tsx",
+      "note": "Existing authorized request listing and handling."
+    },
+    {
+      "id": "hq-websites",
+      "name": "HQ website task configuration",
+      "disposition": "app-supported",
+      "section": "hq-site-workflows",
+      "source": "frontend:apps/web/src/features/settings/site-workflows/SiteWorkflowSettings.tsx",
+      "note": "Approved A3 catalog configuration. Runtime host/provider qualification is tracked separately."
+    },
+    {
+      "id": "mappings",
+      "name": "Intelligence identity mappings",
+      "disposition": "app-supported",
+      "section": "intelligence-mappings",
+      "source": "frontend:apps/web/src/features/settings/mappings/MappingSettings.tsx",
+      "note": "Existing source search and reviewed mapping operations."
+    },
+    {
+      "id": "hq-analyst",
+      "name": "HQ analyst console",
+      "disposition": "app-supported",
+      "section": "hq-analyst",
+      "source": "frontend:apps/web/src/features/settings/analyst/AnalystSettings.tsx",
+      "note": "Existing reconciliation, PE-program, aliases, person/merge, quarantine and HQ audit panels; exact Provision-to-PE and SAM review added in Core273/Frontend330."
+    },
+    {
+      "id": "hq-personnel",
+      "name": "HQ personnel merge queue",
+      "disposition": "app-supported",
+      "section": "hq-personnel",
+      "source": "frontend:apps/web/src/features/settings/analyst/PersonReviewQueues.tsx",
+      "note": "Existing alternate entry to the same canonical merge queue."
+    },
+    {
+      "id": "hq-reconciliation",
+      "name": "HQ PE reconciliation queue",
+      "disposition": "app-supported",
+      "section": "hq-reconciliation",
+      "source": "frontend:apps/web/src/features/settings/analyst/ReconciliationQueue.tsx",
+      "note": "Existing alternate entry to reconciliation."
+    },
+    {
+      "id": "hq-matches",
+      "name": "HQ PE-program match queue",
+      "disposition": "app-supported",
+      "section": "hq-matches",
+      "source": "frontend:apps/web/src/features/settings/analyst/ProgramMatchQueue.tsx",
+      "note": "Existing alternate entry to program matches."
+    }
+  ],
+  "utilities": [
+    {
+      "id": "account-security",
+      "name": "Self-service email, password and MFA",
+      "disposition": "externally-managed",
+      "owner": "Clerk account management",
+      "note": "The existing Personal screen opens Clerk. No separate app security editor is selected.",
+      "source": "frontend:apps/web/src/features/settings/PersonalSettings.tsx"
+    },
+    {
+      "id": "payment-methods",
+      "name": "Payment methods and invoice management",
+      "disposition": "externally-managed",
+      "owner": "Existing billing provider portal",
+      "note": "Settings uses the canonical billing destination; payment data stays with its provider.",
+      "source": "frontend:apps/web/src/features/settings/BillingSettings.tsx"
+    },
+    {
+      "id": "hq-password-reset",
+      "name": "HQ-initiated password reset",
+      "disposition": "intentionally-api-only",
+      "owner": "Core CapiroAdminController",
+      "note": "Retain the existing authorized utility. No additional password-reset button is selected.",
+      "source": "core:apps/api/src/capiro-admin/capiro-admin.controller.ts"
+    },
+    {
+      "id": "hq-user-removal",
+      "name": "Cross-tenant HQ user removal",
+      "disposition": "intentionally-api-only",
+      "owner": "Core CapiroAdminController",
+      "note": "Distinct from the existing tenant Team removal screen. No new cross-tenant removal UI is selected.",
+      "source": "core:apps/api/src/capiro-admin/capiro-admin.controller.ts"
+    },
+    {
+      "id": "tenant-audit",
+      "name": "Tenant redacted audit log",
+      "disposition": "intentionally-api-only",
+      "owner": "Core TenantAdminController and TenantAdminService",
+      "note": "Existing tenant-scoped filters and pagination select redacted fields. No tenant audit screen is selected; do not reuse the HQ before/after projection for ordinary administrators.",
+      "source": "core:apps/api/src/tenant-admin/tenant-admin.service.ts"
+    },
+    {
+      "id": "rollout-flags",
+      "name": "HQ Meri rollout switches",
+      "disposition": "intentionally-api-only",
+      "owner": "Existing HQ rollout controllers",
+      "note": "Retain existing guarded administration APIs. No tenant-facing toggle is selected.",
+      "source": "core:apps/api/src/capiro-admin/meriv3-admin.controller.ts"
+    },
+    {
+      "id": "policy-packs",
+      "name": "Policy-pack editing and publication",
+      "disposition": "intentionally-api-only",
+      "owner": "Core MeriPolicyPackController",
+      "note": "Existing review/simulation/publication APIs retain their policy. No policy editor UI is selected.",
+      "source": "core:apps/api/src/meri/meri-policy-pack.controller.ts"
+    },
+    {
+      "id": "logo-deletion",
+      "name": "Firm logo deletion",
+      "disposition": "externally-managed",
+      "owner": "Controlled Capiro asset maintenance",
+      "note": "No logo-delete route or product button is added. Existing Settings supports upload/replacement; deletion requires a separately specified maintenance operation.",
+      "source": "core:apps/api/src/branding/branding.controller.ts"
+    },
+    {
+      "id": "invite-cancellation",
+      "name": "Invitation cancellation",
+      "disposition": "externally-managed",
+      "owner": "Identity-provider administration",
+      "note": "Existing app operations invite and resend. Cancellation is not selected as a new Settings workflow.",
+      "source": "core:apps/api/src/tenant-admin/tenant-admin.controller.ts"
+    },
+    {
+      "id": "new-providers",
+      "name": "Additional integration or AI providers",
+      "disposition": "externally-managed",
+      "owner": "Capiro integration engineering and provider configuration",
+      "note": "Only existing supported providers are exposed. Backend/provider utilities do not select additional providers.",
+      "source": "frontend:apps/web/src/features/settings/IntegrationSettings.tsx"
+    },
+    {
+      "id": "retention-policy-editing",
+      "name": "Memory retention policy changes",
+      "disposition": "externally-managed",
+      "owner": "Approved Capiro retention-policy owner",
+      "note": "Installed retention rules are displayed; no arbitrary policy editor is selected.",
+      "source": "core:apps/api/src/memory/memory-retention-policy.controller.ts"
+    },
+    {
+      "id": "managed-imports",
+      "name": "Managed customer imports",
+      "disposition": "externally-managed",
+      "owner": "Existing onboarding/operator owners pending B12 selection",
+      "note": "Customer billing does not establish import orchestration. Existing firm import utility remains API-only; B12 completion is not claimed.",
+      "source": "frontend:apps/web/src/features/settings/hq/CustomerSettings.tsx"
+    }
+  ],
+  "dynamicConsumers": [
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/items/:id/approve",
+      "operation": "settings.memory.governance.approve",
+      "contract": "apps/web/src/shared/capiro/operations/memory-governance.ts",
+      "consumer": "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/items/:id/confirm",
+      "operation": "settings.memory.governance.confirm",
+      "contract": "apps/web/src/shared/capiro/operations/memory-governance.ts",
+      "consumer": "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/items/:id/mark-stale",
+      "operation": "settings.memory.governance.markStale",
+      "contract": "apps/web/src/shared/capiro/operations/memory-governance.ts",
+      "consumer": "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/items/:id/revoke",
+      "operation": "settings.memory.governance.revoke",
+      "contract": "apps/web/src/shared/capiro/operations/memory-governance.ts",
+      "consumer": "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/items/:id/second-approve",
+      "operation": "settings.memory.governance.secondApprove",
+      "contract": "apps/web/src/shared/capiro/operations/memory-governance.ts",
+      "consumer": "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+    },
+    {
+      "service": "core",
+      "method": "POST",
+      "path": "/memory/governance/projection-jobs/:id/retry",
+      "operation": "settings.memory.governance.retry",
+      "contract": "apps/web/src/shared/capiro/operations/memory-governance.ts",
+      "consumer": "apps/web/src/features/settings/memory/MemoryGovernanceActions.tsx"
+    }
+  ],
+  "authority": "Canonical Core authorization remains authoritative. Inventory labels and frontend visibility are documentation, not permission grants.",
+  "unsupportedActions": "No new buttons are introduced by this inventory. Existing unsupported notices and backend refusals remain in place.",
+  "regenerate": "node scripts/inventory-admin-capabilities.mjs <canonical-Core-checkout>"
+}

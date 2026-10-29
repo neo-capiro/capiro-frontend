@@ -203,6 +203,7 @@
 }
 :where(body:has([data-portfolio-root])) .primary {
   background: var(--dark-gradient);
+  background-color: #0a0a0a;
   border-color: #242424;
   color: #fff;
 }

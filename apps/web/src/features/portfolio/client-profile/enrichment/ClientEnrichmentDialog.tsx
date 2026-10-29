@@ -3,11 +3,7 @@ import { useState, type ComponentProps } from "react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { UploadDialog } from "@/features/portfolio/files/public";
-import {
-  canSelectFinding,
-  previewOnlyDependency,
-  type FillRun,
-} from "./contracts";
+import { canSelectFinding, type FillRun } from "./contracts";
 import {
   useEnrichmentAccess,
   useEnrichmentSetup,
@@ -18,6 +14,11 @@ import type { ReviewAction } from "./actions";
 import { FindingReview } from "./FindingReview";
 import { ResearchSetup } from "./ResearchSetup";
 import { RunLedger } from "./RunLedger";
+import { ReviewFeedback } from "./ReviewFeedback";
+import { ReviewConfirmation } from "./ReviewConfirmation";
+import { useResearchCommands } from "./useResearchCommands";
+import { ResearchFeedback } from "./ResearchFeedback";
+import { EnrichmentToolbar } from "./EnrichmentToolbar";
 import styles from "./enrichment.module.css";
 export function ClientEnrichmentDialog({
   clientId,
@@ -65,17 +66,41 @@ function ClientEnrichmentReview({
   }>();
   const [showSetup, setShowSetup] = useState(false);
   const [upload, setUpload] = useState<{ beforeDispatch: () => void }>();
-  const action = useReviewAction(clientId, open, {
-    userId: identity.data?.user.id ?? "",
-    tenantId: identity.data?.tenant?.id ?? "",
-  });
-  const run = !latest.error ? latest.data : undefined;
+  const research = useResearchCommands(
+    clientId,
+    {
+      userId: identity.data?.user.id ?? "",
+      tenantId: identity.data?.tenant?.id ?? "",
+    },
+    open,
+    canRead,
+  );
+  const action = useReviewAction(
+    clientId,
+    open,
+    {
+      userId: identity.data?.user.id ?? "",
+      tenantId: identity.data?.tenant?.id ?? "",
+    },
+    canRead,
+  );
+  const run = action.uncertain
+    ? action.uncertainReview
+    : !latest.error
+      ? latest.data
+      : undefined;
   const chosen =
     run?.findings
       .filter((f) => selected.includes(f.id) && canSelectFinding(f))
       .map((f) => f.id) ?? [];
   const busy =
-    action.mutation.isPending || latest.isFetching || action.uncertain;
+    action.mutation.isPending ||
+    action.recovery.isPending ||
+    action.checkingRecovery ||
+    research.busy ||
+    research.blocked ||
+    latest.isFetching ||
+    action.uncertain;
   const request = (next: ReviewAction) => {
     if (run) setConfirm({ run, action: next });
   };
@@ -101,36 +126,16 @@ function ClientEnrichmentReview({
         )}
         {canRead && (
           <>
-            <div className={styles.sourceBar}>
-              <span>{setup.data?.website ?? "Saved client sources"}</span>
-              <button
-                className="button"
-                disabled={!canEdit || busy}
-                title="Upload saves a client file immediately; it does not start research."
-                onClick={() =>
-                  setUpload({ beforeDispatch: action.createUploadGuard() })
-                }
-              >
-                Upload
-              </button>
-              <button
-                className="button"
-                onClick={() => setShowSetup((v) => !v)}
-              >
-                Research setup
-              </button>
-              <button
-                className="button primary"
-                disabled
-                title={previewOnlyDependency}
-              >
-                Run again
-              </button>
-            </div>
-            <p className={styles.uploadNotice}>
-              Uploading saves a client file immediately. It does not start
-              research or add the file to a run.
-            </p>
+            <EnrichmentToolbar
+              website={setup.data?.website}
+              canEdit={canEdit}
+              busy={busy}
+              running={run?.status === "running"}
+              onSetup={() => setShowSetup(true)}
+              onUpload={() =>
+                setUpload({ beforeDispatch: action.createUploadGuard() })
+              }
+            />
             {upload && canEdit && (
               <UploadDialog
                 clientId={clientId}
@@ -143,25 +148,13 @@ function ClientEnrichmentReview({
               error={latest.error}
               retry={() => void latest.refetch()}
             />
-            <QueryState error={action.mutation.error} />
-            {action.uncertain && (
-              <div role="alert" className="status error">
-                The request may have saved changes. Do not repeat it. Refresh
-                the saved review to inspect current status; this service has no
-                operation receipt for resolving an ambiguous response.
-                <button
-                  className="button"
-                  onClick={() => void latest.refetch()}
-                >
-                  Refresh saved review
-                </button>
-              </div>
-            )}
-            {action.receipt && (
-              <p role="status" className="status">
-                {action.receipt}
-              </p>
-            )}
+            <ReviewFeedback
+              action={action}
+              findings={run?.findings ?? []}
+              canEdit={canEdit}
+              onRecovered={() => setConfirm(undefined)}
+            />
+            <ResearchFeedback research={research} runId={run?.id} />
             {(showSetup || (!latest.isPending && !latest.error && !run)) && (
               <>
                 <QueryState
@@ -170,7 +163,21 @@ function ClientEnrichmentReview({
                   retry={() => void setup.refetch()}
                 />
                 {setup.data && !setup.error && (
-                  <ResearchSetup clientId={clientId} setup={setup.data} />
+                  <ResearchSetup
+                    key={run?.id ?? "new"}
+                    clientId={clientId}
+                    setup={setup.data}
+                    previous={run ?? undefined}
+                    disabled={!canRead || busy || run?.status === "running"}
+                    onStart={(input) =>
+                      research.mutation.mutate(
+                        { kind: "start", input },
+                        {
+                          onSuccess: () => setShowSetup(false),
+                        },
+                      )
+                    }
+                  />
                 )}
               </>
             )}
@@ -180,6 +187,12 @@ function ClientEnrichmentReview({
                   run={run}
                   busy={busy}
                   onCancel={() => request({ kind: "cancel" })}
+                  onRetry={(task) =>
+                    research.mutation.mutate({
+                      kind: "retry",
+                      selection: { runId: run.id, task },
+                    })
+                  }
                 />
                 <header className={styles.findingsHead}>
                   <h3>Findings · {run.findings.length}</h3>
@@ -232,53 +245,20 @@ function ClientEnrichmentReview({
                   />
                 ))}
                 {confirm && (
-                  <section
-                    className={styles.confirm}
-                    role="region"
-                    aria-label="Confirm review action"
-                  >
-                    <h3>
-                      {confirm.action.kind === "apply"
-                        ? `Apply ${confirm.action.findingIds.length} selected findings?`
-                        : confirm.action.kind === "cancel"
-                          ? "Cancel this run?"
-                          : confirm.action.kind === "assign"
-                            ? "Apply finding and assign matter?"
-                            : confirm.action.kind === "reject"
-                              ? "Ignore this finding?"
-                              : "Restore this finding?"}
-                    </h3>
-                    <p>
-                      {confirm.action.kind === "cancel"
-                        ? "Cancellation stops remaining work. It does not undo changes already saved."
-                        : "This changes the saved client review immediately. The service rechecks pending findings; a group apply can partially succeed."}
-                    </p>
-                    <div className="row">
-                      <button
-                        className="button"
-                        disabled={action.mutation.isPending}
-                        onClick={() => setConfirm(undefined)}
-                      >
-                        Back to review
-                      </button>
-                      <button
-                        className="button primary"
-                        disabled={
-                          busy ||
-                          (!canEdit && confirm.action.kind !== "cancel") ||
-                          !canRead
-                        }
-                        onClick={() =>
-                          action.mutation.mutate(
-                            { review: confirm.run, action: confirm.action },
-                            { onSuccess: () => setConfirm(undefined) },
-                          )
-                        }
-                      >
-                        Confirm {confirm.action.kind}
-                      </button>
-                    </div>
-                  </section>
+                  <ReviewConfirmation
+                    action={confirm.action}
+                    pending={action.mutation.isPending}
+                    busy={busy}
+                    canRead={canRead}
+                    canEdit={canEdit}
+                    onBack={() => setConfirm(undefined)}
+                    onConfirm={() =>
+                      action.mutation.mutate(
+                        { review: confirm.run, action: confirm.action },
+                        { onSuccess: () => setConfirm(undefined) },
+                      )
+                    }
+                  />
                 )}
               </>
             )}

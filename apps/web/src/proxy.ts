@@ -17,6 +17,7 @@ export default function proxy(request: NextRequest, event: NextFetchEvent) {
   // These namespaces have their own closed public capability allowlists in the route.
   if (
     request.nextUrl.pathname.startsWith("/api/capiro/public-onboard.") ||
+    request.nextUrl.pathname.startsWith("/api/capiro/public-share.") ||
     request.nextUrl.pathname.startsWith("/api/capiro/public-research-share.")
   )
     return NextResponse.next();
@@ -41,6 +42,9 @@ export const config = {
     "/meri/:path*",
     "/api/backend/:path*",
     "/modules/:path*",
+    // The bill detail receiver is an authenticated product route; Clerk must see it
+    // so the page renders under the existing SessionBoundary.
+    "/bills/:path*",
     "/settings/:path*",
     "/sign-in/:path*",
     "/register",
@@ -62,5 +66,7 @@ export const config = {
     "/api/task-commands/:path*",
     "/api/settings/:path*",
     "/api/memory/owner/:path*",
+    "/api/uploads/:path*",
+    "/api/meri/notifications",
   ],
 };

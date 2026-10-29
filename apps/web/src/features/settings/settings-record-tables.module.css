@@ -147,6 +147,20 @@
   gap: 12px;
   min-width: 0;
 }
+.billingReason {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 4px;
+  color: var(--muted-foreground);
+  background: transparent;
+  cursor: help;
+}
+.billingReasonContent {
+  max-width: 240px;
+}
 .memberAvatar {
   display: inline-flex;
   flex: 0 0 32px;

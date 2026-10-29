@@ -12,17 +12,24 @@ import { useProfileNotesEditor } from "./useProfileNotesEditor";
 
 export function NotesDialog({
   clientId,
+  clientName,
   open,
   onOpenChange,
 }: {
   clientId: string;
+  clientName: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
   useIdentity();
   const actor = useProfileActor();
   return (
-    <Dialog open={open} onOpenChange={onOpenChange} title="Profile notes">
+    <Dialog
+      open={open}
+      onOpenChange={onOpenChange}
+      title="Profile notes"
+      description={`${clientName} · Profile notes are separate from internal intake notes.`}
+    >
       {open && (
         <ProfileNotesEditor
           key={`${clientId}:${profileActorKey(actor)}`}
@@ -60,6 +67,7 @@ function ProfileNotesEditor({
       <TextareaField
         label="Notes"
         name="notes"
+        hint="Maximum 20,000 characters"
         value={editor.client.data ? editor.draft : ""}
         onChange={(event) => editor.setDraft(event.target.value)}
         readOnly={!editor.editable || !editor.client.source || editor.pending}
@@ -106,9 +114,12 @@ function ProfileNotesEditor({
         </>
       )}
       <QueryState error={editor.error} />
-      <button className="button primary" disabled={!editor.canSave}>
-        {editor.pending ? "Saving…" : "Save notes"}
-      </button>
+      <small>Unsaved changes will be discarded when you close.</small>
+      <div className="row" style={{ justifyContent: "flex-end" }}>
+        <button className="button primary" disabled={!editor.canSave}>
+          {editor.pending ? "Saving…" : "Save notes"}
+        </button>
+      </div>
     </form>
   );
 }

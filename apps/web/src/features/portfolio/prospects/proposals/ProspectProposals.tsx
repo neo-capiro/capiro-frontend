@@ -22,8 +22,8 @@ export function ProspectProposals({
     <section className={`card ${styles.card}`} aria-label="Proposal">
       <h2>Proposal</h2>
       <p>
-        Review available templates in Workspace. Creating and sending a proposal
-        for this prospect is unavailable.
+        Create and edit proposal drafts in the prospect Workspace. Choose a
+        published template version there, or start with a blank document.
       </p>
       <QueryState
         pending={identity.isPending}
@@ -51,8 +51,8 @@ export function ProspectProposals({
         </p>
       ) : null}
       <small className="muted">
-        Proposal documents and send history cannot be linked to this prospect
-        yet.
+        Drafts retain this prospect as their origin. Sending and sharing remain
+        unavailable.
       </small>
       {authorized && tenantId && open && (
         <TemplateCatalog

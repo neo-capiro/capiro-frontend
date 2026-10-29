@@ -94,18 +94,30 @@ function ConfiguredTracker({
             <strong>{pages[0]?.total ?? "—"}</strong>
             <small>Tracked bills</small>
           </div>
-          <div>
-            <strong>—</strong>
-            <small>Material changes</small>
-          </div>
-          <div>
-            <strong>—</strong>
-            <small>Watchlist coverage</small>
-          </div>
+          {[
+            [
+              "Material changes",
+              "No tracked-bill change read is available yet.",
+            ],
+            [
+              "Watchlist coverage",
+              "No watchlist coverage read is available yet.",
+            ],
+          ].map(([label, reason]) => (
+            <div
+              key={label}
+              role="group"
+              title={reason}
+              aria-label={`${label}: ${reason}`}
+            >
+              <strong aria-hidden="true">—</strong>
+              <small>{label}</small>
+            </div>
+          ))}
         </div>
         <section className={styles.results} aria-label="Tracked bill results">
           <header className={styles.resultsHeader}>
-            <h3>Tracked bills</h3>
+            <h3>Bill results</h3>
             <div className={styles.resultsControls}>
               <input
                 aria-label="Filter loaded bills"

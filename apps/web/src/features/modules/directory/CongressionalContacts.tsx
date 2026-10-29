@@ -12,6 +12,7 @@ import {
 } from "../../../shared/module-ui";
 import { ContactPreview } from "./ContactPreview";
 import { DirectoryPagination } from "./DirectoryPagination";
+import { MemberPhoto } from "./MemberPhoto";
 import { MemberProfile } from "./MemberProfile";
 import styles from "./directory.module.css";
 
@@ -117,11 +118,11 @@ export function CongressionalContacts({
         error={query.error}
         onRetry={query.reload}
       >
-        <div className={styles.split}>
+        <div className={selected ? styles.split : styles.single}>
           <Panel
             title={
               data
-                ? `${data.total.toLocaleString()} offices · ${data.totals.staff.toLocaleString()} staff`
+                ? `${data.total.toLocaleString()} ${Object.values(filters).some(Boolean) ? "matching " : ""}offices · ${data.totals.staff.toLocaleString()} staff across the directory`
                 : "Congressional Staff"
             }
             actions={
@@ -144,7 +145,7 @@ export function CongressionalContacts({
                 {
                   key: "person",
                   label: "Office / person",
-                  width: "30%",
+                  width: "34%",
                   render: (c) => (
                     <div>
                       <div className={styles.person}>
@@ -164,16 +165,22 @@ export function CongressionalContacts({
                         >
                           {expanded.has(c.id) ? "−" : "+"}
                         </button>
-                        <span className={styles.avatar}>
-                          {c.fullName
-                            .split(" ")
-                            .map((p) => p[0])
-                            .slice(-2)
-                            .join("")}
-                        </span>
+                        <MemberPhoto
+                          name={c.fullName}
+                          photoUrl={c.photoUrl}
+                        />
                         <button
-                          className={styles.link}
+                          className={`${styles.link} ${styles.personLabel}`}
                           onClick={() => setSelected(c)}
+                          title={[
+                            c.fullName,
+                            c.party,
+                            c.state,
+                            c.district,
+                            c.title,
+                          ]
+                            .filter(Boolean)
+                            .join(" · ")}
                         >
                           <strong>{c.fullName}</strong>
                           <div className={styles.muted}>
@@ -204,7 +211,7 @@ export function CongressionalContacts({
                 {
                   key: "office",
                   label: "Office",
-                  width: "22%",
+                  width: "20%",
                   render: (c) => (
                     <span className={styles.cellClamp}>
                       {c.officeLocation || "—"}
@@ -214,7 +221,7 @@ export function CongressionalContacts({
                 {
                   key: "committee",
                   label: "Committee",
-                  width: "26%",
+                  width: "24%",
                   render: (c) => (
                     <span className={styles.cellClamp}>
                       {c.committees?.join(" · ") || "—"}

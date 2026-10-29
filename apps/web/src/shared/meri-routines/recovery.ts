@@ -1,12 +1,16 @@
 import { z } from "zod";
 import {
-  receiveRoutinesRequest,
-  receiveRoutinesResponse,
   type RoutinesPrepareRequest,
   type RoutinesProposal,
   type RoutinesApproveRequest,
   type RoutinesReconcileRequest,
 } from "@capiro/meri-contracts/routines-application";
+// The receiving boundary is resolved in exactly one module, so a saved routine is re-admitted by the same boundary the
+// rest of the app uses — and the source-stage bundle can be qualified without a second import path.
+import {
+  receiveRoutinesRequest,
+  receiveRoutinesResponse,
+} from "./canonical-receiver";
 import { actionContextSchema } from "../meri-actions/session-receipt";
 import { sameJson } from "../meri-actions/correlation";
 import {
@@ -19,9 +23,19 @@ import {
   discardUnapprovedRoutineRecovery,
 } from "../session/recovery/journal";
 
-export const routineContextSchema = actionContextSchema.extend({
+const executionContextSchema = actionContextSchema.extend({
   selectedClientId: z.uuid().nullable(),
 });
+const managementContextSchema = actionContextSchema
+  .pick({ tenantId: true, actorId: true })
+  .extend({
+    kind: z.literal("routine-management"),
+    selectedClientId: z.uuid().nullable(),
+  });
+export const routineContextSchema = z.union([
+  executionContextSchema,
+  managementContextSchema,
+]);
 export type RoutineContext = z.infer<typeof routineContextSchema>;
 const savedSchema = z.strictObject({
   requestId: z.uuid(),
@@ -44,7 +58,19 @@ export type SavedRoutine = Omit<Stored, "prepare" | "proposal"> & {
 export type RoutineOwner = Pick<
   RoutineContext,
   "tenantId" | "actorId" | "selectedClientId"
->;
+> & { kind?: "routine-management" };
+export const isRoutineManagement = (value: RoutineOwner) =>
+  value.kind === "routine-management";
+export function requireFutureRoutineChange(value: RoutinesPrepareRequest) {
+  if (
+    value.operation !== "cancel_scheduled_task" ||
+    value.request.running !== "leave" ||
+    value.request.runs.length !== 0
+  )
+    throw new Error(
+      "Connect to create or edit routines. Management only changes future scheduling.",
+    );
+}
 export function routineDecision(value: SavedRoutine): RoutinesReconcileRequest {
   if (!value.proposal)
     throw new Error("The exact routine proposal is unavailable.");
@@ -69,6 +95,7 @@ export async function receiveSavedRoutine(raw: Stored): Promise<SavedRoutine> {
   );
   if (prepare.requestId !== raw.requestId)
     throw new Error("Saved routine identity changed.");
+  if (isRoutineManagement(raw.context)) requireFutureRoutineChange(prepare);
   const result: SavedRoutine = { ...raw, prepare, proposal: undefined };
   if (raw.proposal !== undefined) {
     const admitted = await receiveRoutinesResponse(
@@ -140,7 +167,9 @@ export function routineRecovery(
   proposalId?: string,
 ) {
   const scope = JSON.stringify([
-    "meri-routine-v1",
+    isRoutineManagement(owner)
+      ? "meri-routine-management-v1"
+      : "meri-routine-v1",
     owner.tenantId,
     owner.actorId,
     proposalId ? ["proposal", proposalId] : ["client", owner.selectedClientId],
@@ -151,6 +180,7 @@ export function routineRecovery(
       value.context.tenantId !== owner.tenantId ||
       value.context.actorId !== owner.actorId ||
       value.context.selectedClientId !== owner.selectedClientId ||
+      isRoutineManagement(value.context) !== isRoutineManagement(owner) ||
       (proposalId && value.proposal?.proposalId !== proposalId)
     )
       throw new Error("Saved routine belongs to another account or scope.");

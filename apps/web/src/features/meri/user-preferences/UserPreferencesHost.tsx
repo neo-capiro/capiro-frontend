@@ -7,10 +7,8 @@ import { userPreferencesJournal } from "../../../shared/meri-user-preferences/jo
 import { UserPreferencesController } from "../../../shared/meri-user-preferences/controller";
 import { userPreferencesTransport } from "../../../shared/meri-user-preferences/transport";
 import { SettingsLayout } from "../screens/settings/SettingsLayout";
-import { SettingsCard } from "../screens/settings/SettingsCard";
-import { SettingsFields } from "../screens/settings/SettingsFields";
 import type { SettingsChrome } from "../screens/settings/settings-view";
-import { unavailablePreferences } from "../screens/settings/preferences-unavailable";
+import { PreferenceSupportCard } from "./PreferenceSupportCard";
 import { UserPreferencesForm } from "./UserPreferencesForm";
 import { toast, Toaster } from "@capiro/ui/sonner";
 import ui from "../ui/meri-ui.module.css";
@@ -33,7 +31,7 @@ export function UserPreferencesHost({ chrome }: { chrome: SettingsChrome }) {
         notice: {
           title: "Personal Meri preferences",
           detail:
-            "Personal model defaults, appearance and timezone settings are connected. Other Meri settings remain unavailable.",
+            "Personal model and client defaults, panel appearance and timezone settings are connected.",
         },
       }}
       heading={{
@@ -41,7 +39,7 @@ export function UserPreferencesHost({ chrome }: { chrome: SettingsChrome }) {
         description: "Your revisioned personal Meri settings.",
       }}
       primary={
-        owner ? (
+        owner && !identity.loading && !identity.error ? (
           <OwnedPreferences key={JSON.stringify(owner)} owner={owner} />
         ) : (
           <p role="status">
@@ -52,25 +50,7 @@ export function UserPreferencesHost({ chrome }: { chrome: SettingsChrome }) {
         )
       }
       supporting={
-        <SettingsCard
-          title="Additional preferences unavailable"
-          description="These design controls have no connected preference contract."
-        >
-          <fieldset
-            disabled
-            className={styles.unsupported}
-            aria-label="Additional settings unavailable"
-          >
-            <SettingsFields
-              fields={unavailablePreferences.personal.defaults.fields}
-              mode="inactive"
-            />
-            <SettingsFields
-              fields={unavailablePreferences.personal.accessibility.fields}
-              mode="inactive"
-            />
-          </fieldset>
-        </SettingsCard>
+        <PreferenceSupportCard select={chrome.select} nav={chrome.nav} />
       }
     />
   );
@@ -118,10 +98,28 @@ function PreferencesView({
           save={(preferences) => {
             void controller.save(preferences).then(() => {
               if (controller.snapshot().status === "saved")
-                toast.success("Personal preferences saved");
+                toast.success(
+                  "Save accepted. Check current preferences to confirm.",
+                );
             });
           }}
         />
+      ) : null}
+      {view.status === "ready" && view.document ? (
+        <div>
+          <button
+            type="button"
+            className={ui.outline}
+            onClick={() => void controller.resetPersonalDefaults()}
+          >
+            Reset conversation and panel defaults
+          </button>
+          <p>
+            Restores the configured model, asks for a conversation scope, and
+            resets the system theme, comfortable density and default timezone
+            through a revision-checked save. Notification choices are preserved.
+          </p>
+        </div>
       ) : null}
       {view.status !== "access-lost" &&
       view.status !== "saving" &&

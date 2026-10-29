@@ -1,13 +1,6 @@
-import { createMeriConversation } from "@capiro/meri-client/conversation";
-import {
-  createArtifactAccess,
-  type ArtifactAccess,
-} from "../meri-documents/artifact-access";
-import {
-  createIntentsAccess,
-  type IntentsAccess,
-} from "../meri-intents/access";
 import { SessionLifetimeController } from "../meri-actions/opaque-session-controller";
+import { createConversationPort, type MeriConversationPort } from "./port";
+export type { MeriConversationPort } from "./port";
 import {
   bootstrapConversationSession,
   conversationSessionHints,
@@ -15,24 +8,6 @@ import {
   type ConversationContext,
 } from "./session";
 import type { ConversationSessionReceipt } from "@capiro/meri-contracts/conversation-session";
-import {
-  createFeedbackAccess,
-  type FeedbackAccess,
-} from "../meri-feedback/access";
-import {
-  createConversationReads,
-  type ConversationReads,
-} from "./current-reads";
-
-export type MeriConversationPort = ReturnType<typeof createMeriConversation> & {
-  readonly context: ConversationContext;
-  /** Read-only artifact preview/download under the same session lifetime. */
-  readonly artifacts: ArtifactAccess;
-  /** Prepared-action list and decisions, checked by the public receiver under the same session lifetime. */
-  readonly intents: IntentsAccess;
-  readonly reads: ConversationReads;
-  readonly feedback: FeedbackAccess;
-};
 export type ConversationAccount = Readonly<{
   tenantId: string;
   actorId: string;
@@ -69,7 +44,8 @@ export class ConversationHostController extends SessionLifetimeController<
           snapshot.cancel === "pending" ||
           snapshot.status === "loading" ||
           port.feedback.pending() ||
-          port.artifacts.pending()
+          port.artifacts.pending() ||
+          port.uploads.pending()
         );
       },
       createPort: ({ session, signal, ...lifetime }) => {
@@ -79,46 +55,10 @@ export class ConversationHostController extends SessionLifetimeController<
           session.context.actorId !== account.actorId
         )
           throw new Error("Conversation account mismatch");
-        const port = Object.freeze({
-          ...createMeriConversation({
-            context: session.context,
-            credential: session.credential,
-            expiresAtMs: session.expiresAtMs,
-            signal,
-            ...lifetime,
-            fetchImpl: fetcher,
-            origin,
-            // The same-origin proxy needs its own header; a trusted direct Meri origin expects a bearer.
-            credentialHeader: origin
-              ? "authorization"
-              : "x-meri-action-session",
-          }),
-          context: session.context,
-          feedback: createFeedbackAccess({
-            credential: session.credential,
-            context: session.context,
-            lifetime: signal,
-            isCurrent: lifetime.isCurrent,
-            onAccessLost: lifetime.onAccessLost,
-            fetcher,
-            origin,
-          }),
-          reads: createConversationReads(
-            session.context,
-            signal,
-            lifetime.isCurrent,
-            lifetime.onAccessLost,
-            fetcher,
-          ),
-          artifacts: createArtifactAccess(session.credential, signal, fetcher),
-          intents: createIntentsAccess(
-            session.credential,
-            signal,
-            fetcher,
-            session.context,
-            lifetime.onAccessLost,
-          ),
-        });
+        const port = createConversationPort(
+          { session, signal, ...lifetime },
+          { fetcher, origin },
+        );
         try {
           onBound?.(session.context);
           signal.throwIfAborted();

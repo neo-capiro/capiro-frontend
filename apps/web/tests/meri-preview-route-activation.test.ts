@@ -1,6 +1,8 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { NextRequest, type NextFetchEvent } from "next/server";
 import packageJson from "../package.json";
+import { RUN_INDEX_PATHS } from "@capiro/meri-contracts/conversation-history";
+import { usageOverviewMetadata } from "@capiro/meri-contracts/conversation-usage";
 import proxy, { config as proxyConfig } from "../src/proxy";
 import { POST as actionPost } from "../src/app/api/action-followthrough/[operation]/route";
 import { POST as conversationPost } from "../src/app/api/conversations/[...path]/route";
@@ -16,7 +18,7 @@ vi.mock("@clerk/nextjs/server", () => ({
   clerkMiddleware: () => clerk.middleware,
 }));
 
-const origin = "https://portfolio-preview.app.capiro.ai";
+const origin = "https://app.capiro.ai";
 const meriOrigin = "https://meri-preview.synthetic.invalid";
 const conversationId = "11111111-1111-4111-8111-111111111111";
 const actionSession = `action_session_${"a".repeat(43)}`;
@@ -120,7 +122,7 @@ it("admits the configured public origin when Next sees only its bind address", (
       body: "{}",
       headers: {
         Origin: origin,
-        Host: "portfolio-preview.app.capiro.ai",
+        Host: "app.capiro.ai",
         "X-Forwarded-Proto": "https",
       },
     },
@@ -130,24 +132,29 @@ it("admits the configured public origin when Next sees only its bind address", (
 });
 
 it("refuses a paired but unreviewed preview public origin", () => {
-  const other = "https://elsewhere.synthetic.invalid";
-  const env = {
-    ...environment,
-    CAPIRO_REQUEST_ORIGIN: other,
-    CAPIRO_EXISTING_APP_URL: other,
-  };
-  const current = new Request(
-    "https://0.0.0.0:5188/api/action-followthrough/session",
-    { method: "POST", headers: { Origin: other }, body: "{}" },
-  );
-  expect(previewMeriConversationRoute(env, current)).toBe(false);
-  expect(previewBackendRejection(env, current)?.status).toBe(503);
+  for (const other of [
+    "https://elsewhere.synthetic.invalid",
+    "https://os.capiro.ai",
+    "https://portfolio-preview.app.capiro.ai",
+  ]) {
+    const env = {
+      ...environment,
+      CAPIRO_REQUEST_ORIGIN: other,
+      CAPIRO_EXISTING_APP_URL: other,
+    };
+    const current = new Request(
+      "https://0.0.0.0:5188/api/action-followthrough/session",
+      { method: "POST", headers: { Origin: other }, body: "{}" },
+    );
+    expect(previewMeriConversationRoute(env, current)).toBe(false);
+    expect(previewBackendRejection(env, current)?.status).toBe(503);
+  }
 });
 
 it("binds the preview conversation gate to the app's pinned contract package", () => {
   const tarball = packageJson.dependencies["@capiro/meri-contracts"];
   const version =
-    /^file:\.\.\/\.\.\/vendor\/capiro-meri-contracts-(\d+\.\d+\.\d+)\.tgz$/.exec(
+    /^file:\.\.\/\.\.\/vendor\/capiro-meri-contracts-(\d+\.\d+\.\d+)(?:-[0-9a-f]{8}-[0-9a-f]{12})?\.tgz$/.exec(
       tarball,
     )?.[1];
   expect(version).toBeDefined();
@@ -428,5 +435,51 @@ it("holds wrong direct Meri paths and queries before Clerk", async () => {
   ];
   for (const response of responses) expect(response.status).toBe(503);
   expect(clerk.auth).not.toHaveBeenCalled();
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+it("admits the exact qualified Runs and usage read paths through the existing native identity boundary", async () => {
+  const paths = [...Object.values(RUN_INDEX_PATHS), usageOverviewMetadata.path];
+  for (const path of paths) {
+    expect(previewMeriConversationRoute(environment, request(path)), path).toBe(
+      true,
+    );
+    expect(
+      previewBackendRejection(environment, request(path)),
+      path,
+    ).toBeNull();
+    const result = await proxy(
+      new NextRequest(`${origin}${path}`, { method: "POST" }),
+      {} as NextFetchEvent,
+    );
+    expect(await (result as Response).text()).toBe("native Clerk middleware");
+    for (const method of ["GET", "HEAD", "PUT", "DELETE"])
+      expect(
+        previewMeriConversationRoute(environment, request(path, method)),
+      ).toBe(false);
+    for (const suffix of ["/extra", "?cursor=forged", "#fragment"])
+      expect(
+        previewMeriConversationRoute(environment, request(path + suffix)),
+      ).toBe(false);
+    expect(
+      previewMeriConversationRoute(
+        {
+          ...environment,
+          CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION: "0.1.0",
+        },
+        request(path),
+      ),
+    ).toBe(false);
+    expect(
+      previewMeriConversationRoute(
+        {
+          ...environment,
+          CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED: "false",
+        },
+        request(path),
+      ),
+    ).toBe(false);
+  }
+  expect(clerk.middleware).toHaveBeenCalledTimes(3);
   expect(fetcher).not.toHaveBeenCalled();
 });

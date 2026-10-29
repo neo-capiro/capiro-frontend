@@ -83,7 +83,7 @@ it("applies the chosen scope through the existing scoped route only", () => {
 
   expect(html).toContain(`href="/meri?clientId=${activeId}"`);
   expect(html).toContain('aria-current="page"');
-  expect(html).toContain("Selected · Authorized client workspace");
+  expect(html).toContain("Current scope · Authorized client workspace");
   expect(html).toContain("Data scope");
   expect(html).toContain("Your draft is preserved");
   expect(html).not.toContain(archivedId);
@@ -102,6 +102,12 @@ it("shows an empty roster without selecting a client", () => {
 
   expect(html).toContain("No available clients were returned");
   expect(html).toContain('href="/meri?scope=general"');
+  expect(html).toContain("Not applied · Your permitted firm sources");
+  expect(html).toContain("Ready to apply General workspace");
+  expect(html).not.toContain("Current scope ·");
+  expect(html.indexOf('href="/meri?scope=general"')).toBeLessThan(
+    html.indexOf('aria-label="Permitted scopes"'),
+  );
   expect(html).not.toContain('href="/meri?clientId=');
 });
 

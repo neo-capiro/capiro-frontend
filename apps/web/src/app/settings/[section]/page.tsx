@@ -2,6 +2,7 @@ import { ConnectedModule } from "../../../shared/shell/ConnectedModule";
 import { SettingsScreen } from "../../../features/settings";
 import { MeriPreferencesPanel } from "../../../features/meri/screens/settings/MeriPreferencesPanel";
 import { SupportRequestForm } from "../../../features/settings/SupportRequestForm";
+import { readConversationConfig } from "../../../shared/meri-conversations/config";
 
 export default async function SettingsPage({
   params,
@@ -22,6 +23,8 @@ export default async function SettingsPage({
         }
         meriPreferences={
           <MeriPreferencesPanel
+            procedureGovernanceEnabled={!readOnlyPreview}
+            usageEnabled={readConversationConfig(process.env).enabled}
             tenantSettingsEnabled={
               process.env.MERI_TENANT_SETTINGS_ENABLED === "true"
             }

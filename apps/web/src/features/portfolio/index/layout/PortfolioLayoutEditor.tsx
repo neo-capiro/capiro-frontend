@@ -71,12 +71,17 @@ function EditorSession({
   }
   const currentIds =
     draft?.scope === layout.scope ? draft.ids : layout.orderedIds;
-  const ids = editing
-    ? orderedClientIds(
-        currentIds.map((id) => `client:${id}`),
-        layout.catalogIds,
-      )
-    : currentIds;
+  // Only an authoritative saved-order read may narrow the visible roster. A
+  // failed or pending read keeps the same accessible roster the ordinary board
+  // shows, with `layout.allowed` refusing every move and save; an authoritative
+  // empty or filtered catalog keeps exactly the membership it reports.
+  const ids =
+    editing && layout.catalogKnown
+      ? orderedClientIds(
+          currentIds.map((id) => `client:${id}`),
+          layout.catalogIds,
+        )
+      : currentIds;
   const changed =
     draft?.scope === layout.scope && !sameOrder(draft.ids, layout.orderedIds);
   const blocked =

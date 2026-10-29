@@ -29,6 +29,9 @@ export type TurnIntent = Readonly<{
   modelSelection?: ConversationSubmitRequest["modelSelection"];
   skill?: ConversationSubmitRequest["skill"];
   windowRequest?: ConversationSubmitRequest["windowRequest"];
+  work?: ConversationSkillSelection["work"];
+  procedure?: ConversationSubmitRequest["procedure"];
+  siteWorkflow?: ConversationSubmitRequest["siteWorkflow"];
   state: "reserving" | "unknown" | "ready";
   receipt?: ConversationTurnReceipt;
 }>;

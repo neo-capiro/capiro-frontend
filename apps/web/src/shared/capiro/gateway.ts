@@ -12,6 +12,7 @@ import type {
   OperationInput,
   OperationRegistry,
 } from "./contracts";
+import { requestIdentity } from "./contracts";
 import {
   backendMultipart,
   parseMultipartRequest,
@@ -20,39 +21,16 @@ import {
 import { publicPlannerFormOperations } from "./operations/planner-public-forms";
 import { publicOnboardOperations } from "./operations/onboard-public";
 import { publicResearchShareOperations } from "./operations/research-share-public";
+import { publicShareOperations } from "./operations/share-public";
 
 import { jsonError, serviceErrorResponse } from "./gateway-errors";
+import { browserHandoff } from "./gateway-handoff";
 import { reportStrategyValidation } from "./strategy-validation-diagnostic";
 import { sameRequestOrigin } from "../request-origin";
 import { coreSessionAuthentication } from "../preview/core-session-authentication";
 
 const requestLimit = 2_000_000;
 const responseLimit = 8_000_000;
-
-function browserHandoff(
-  payload: unknown,
-  operation: OperationDefinition,
-  input: OperationInput,
-  base: string,
-): unknown {
-  if (!operation.websocket) return payload;
-  if (
-    !payload ||
-    typeof payload !== "object" ||
-    !("ticket" in payload) ||
-    typeof payload.ticket !== "string"
-  )
-    throw new Error("Invalid hearing ticket.");
-  const socket = new URL(
-    `${base}${operationPath({ ...operation, path: operation.websocket.path }, input)}`,
-  );
-  const sessionId = input.params?.[operation.websocket.sessionParam];
-  if (sessionId === undefined) throw new Error("Invalid hearing session.");
-  socket.protocol = socket.protocol === "https:" ? "wss:" : "ws:";
-  socket.searchParams.set("ticket", payload.ticket);
-  socket.searchParams.set("sessionId", String(sessionId));
-  return { ...payload, socketUrl: socket.href };
-}
 
 async function serviceResponse(
   response: Response,
@@ -161,6 +139,15 @@ async function dispatch(
       : input.body === undefined
         ? undefined
         : JSON.stringify(input.body);
+    // The declared request identity. Validated here as well as in the operation
+    // schema, so a request that does not declare the header can never send one
+    // and a declared header with no valid identity is refused rather than sent
+    // without it.
+    const identity = operation.idempotency
+      ? requestIdentity.safeParse(input.idempotencyKey)
+      : undefined;
+    if (operation.idempotency && !identity?.success)
+      return jsonError(400, "The request is missing its request identity.");
     const response = await abortable(
       fetcher(url, {
         method: operation.method,
@@ -169,6 +156,7 @@ async function dispatch(
           Accept:
             operation.binary?.contentTypes.join(", ") ?? "application/json",
           ...(!multipart ? { "Content-Type": "application/json" } : {}),
+          ...(identity?.success ? { "Idempotency-Key": identity.data } : {}),
         },
         body,
         cache: "no-store",
@@ -297,6 +285,21 @@ export function handlePublicResearchShareRequest(
     request,
     key,
     publicResearchShareOperations,
+    config,
+    fetcher,
+  );
+}
+
+export function handlePublicShareRequest(
+  request: Request,
+  key: string,
+  config: CapiroConfig,
+  fetcher: typeof fetch = fetch,
+) {
+  return handlePublicOperationRequest(
+    request,
+    key,
+    publicShareOperations,
     config,
     fetcher,
   );

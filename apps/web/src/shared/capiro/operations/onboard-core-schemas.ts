@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-/** Existing HTTP contract: capirov2@7b5a9644, Core firm/memory controllers. */
+/** Existing HTTP contract: capirov2@7b5a9644, Core firm controller. */
 export const registrantHitSchema = z.object({
   id: z.number(),
   name: z.string(),
@@ -38,46 +38,4 @@ export const importChunkResultSchema = z.object({
   skipped: z.array(
     z.object({ ldaClientId: z.number().int(), reason: z.string() }),
   ),
-});
-export const memorySectionDefSchema = z.object({
-  key: z.string(),
-  heading: z.string(),
-  prompt: z.string(),
-  example: z.string(),
-});
-export const memoryFileDefSchema = z.object({
-  type: z.string(),
-  scope: z.enum(["firm", "client", "user"]),
-  label: z.string(),
-  blurb: z.string(),
-  sections: z.array(memorySectionDefSchema),
-});
-export const firmMemoryTypeSchema = z.enum([
-  "firm-soul",
-  "firm-compass",
-  "playbook",
-]);
-export const memorySectionsFileSchema = z.object({
-  type: z.string(),
-  slug: z.string(),
-  title: z.string(),
-  visibility: z.string(),
-  clientId: z.string().nullable(),
-  updatedAt: z.string().nullable(),
-  exists: z.boolean(),
-  pendingReview: z
-    .object({
-      candidateId: z.string().min(1),
-      status: z.literal("pending_review"),
-      submittedAt: z.string(),
-    })
-    .nullable(),
-  sections: z.array(
-    memorySectionDefSchema.extend({ owner: z.string(), body: z.string() }),
-  ),
-});
-export const memoryReviewReceiptSchema = z.object({
-  status: z.literal("pending_review"),
-  candidateId: z.string().min(1),
-  activeItemUnchanged: z.literal(true),
 });

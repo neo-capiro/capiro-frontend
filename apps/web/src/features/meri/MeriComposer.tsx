@@ -12,6 +12,9 @@ import {
 import { Button } from "@capiro/ui/button";
 import { X } from "lucide-react";
 import { DesignIcon } from "../../shared/shell/DesignIcon";
+import { MeriAttachmentPicker } from "./uploads/MeriAttachmentPicker";
+import { SelectedTabSharing } from "./selected-tab/SelectedTabSharing";
+import type { ComposerAttachments } from "./uploads/attachment-slot";
 import styles from "./home.module.css";
 
 type AssetSet = "home" | "cited-answer";
@@ -42,6 +45,7 @@ export function MeriComposer({
   running = false,
   live,
   modelControl,
+  attachments,
 }: {
   draft: string;
   onDraft: (value: string) => void;
@@ -51,6 +55,8 @@ export function MeriComposer({
   running?: boolean;
   live?: LiveComposer;
   modelControl?: React.ReactNode;
+  /** The current conversation's attachment slot; absent until a session binds upload access. */
+  attachments?: ComposerAttachments;
 }) {
   const helpId = useId();
   const canSend =
@@ -108,6 +114,7 @@ export function MeriComposer({
             live={live}
             assetSet={assetSet}
             modelControl={modelControl}
+            attachments={attachments}
           />
           <ComposerAction
             running={running}
@@ -134,36 +141,42 @@ export function MeriComposer({
   );
 }
 
-/** Attach stays unavailable; the scope chip shows the verified client in live mode. */
+/** Attach delegates to the upload slot when a session bound one; otherwise it stays unavailable. */
 function ComposerTools({
   live,
   assetSet,
   modelControl,
+  attachments,
 }: {
   live: LiveComposer | undefined;
   assetSet: AssetSet;
   modelControl?: React.ReactNode;
+  attachments?: ComposerAttachments;
 }) {
   return (
     <PromptInputTools
       className={styles.tools}
       style={{ flexWrap: "wrap", minWidth: 0 }}
     >
-      <PromptInputButton
-        className={styles.toolButton}
-        disabled
-        title={
-          live
-            ? live.attachUnavailable
-            : "Attachments require the connected artifact contract"
-        }
-      >
-        <DesignIcon
-          name={assetSet === "home" ? "plus" : "plus-secondary"}
-          assetSet={assetSet}
-        />
-        Attach
-      </PromptInputButton>
+      {attachments?.available ? (
+        <MeriAttachmentPicker slot={attachments} assetSet={assetSet} />
+      ) : (
+        <PromptInputButton
+          className={styles.toolButton}
+          disabled
+          title={
+            live
+              ? live.attachUnavailable
+              : "Attachments require the connected artifact contract"
+          }
+        >
+          <DesignIcon
+            name={assetSet === "home" ? "plus" : "plus-secondary"}
+            assetSet={assetSet}
+          />
+          Attach
+        </PromptInputButton>
+      )}
       <PromptInputButton
         className={styles.toolButton}
         disabled
@@ -176,6 +189,9 @@ function ComposerTools({
         <DesignIcon name="chevron" assetSet={assetSet} />
         {live ? live.scope : "Anduril"}
       </PromptInputButton>
+      {attachments?.selectedTab && live && (
+        <SelectedTabSharing {...attachments.selectedTab} scope={live.scope} />
+      )}
       {live ? modelControl : null}
     </PromptInputTools>
   );

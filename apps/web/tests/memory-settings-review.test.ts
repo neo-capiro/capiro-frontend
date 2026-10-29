@@ -3,6 +3,9 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, expect, it, vi } from "vitest";
 import SettingsPage from "../src/app/settings/[section]/page";
 import { MemorySettings } from "../src/features/settings/MemorySettings";
+vi.mock("../src/shared/capiro/queries", () => ({
+  useCapiroQuery: () => ({ loading: true, reload: vi.fn() }),
+}));
 
 afterEach(() => vi.unstubAllEnvs());
 
@@ -27,9 +30,7 @@ it("holds the native personal review route when the server gate is closed", () =
   expect(html).toContain("Personal memory review unavailable");
   expect(html).not.toContain('href="/meri/memory"');
   expect(html).not.toContain("Needs my review");
-  expect(html).toContain(
-    "Memory governance, files, and notifications unavailable",
-  );
+  expect(html).not.toContain("Retention and offboarding rules");
 });
 
 it("links to the Core-backed personal review and correction route when enabled", () => {
@@ -39,6 +40,7 @@ it("links to the Core-backed personal review and correction route when enabled",
   expect(html).toContain('href="/meri/memory"');
   expect(html).toContain("Open personal memory review");
   expect(html).toContain("propose corrections");
+  expect(html).toContain('href="/meri/updates"');
   expect(html).not.toContain("Needs my review");
   expect(html).not.toContain("Memory review data is unavailable");
 });

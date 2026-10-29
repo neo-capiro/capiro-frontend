@@ -1,5 +1,6 @@
 import { previewReadTarget } from "./read-config.server";
 import { previewReadRoute } from "./read-route.server";
+import { previewNotetakerWriteRoute } from "./notetaker-write.server";
 import { previewFirstChatWriteTarget } from "./first-chat-write.server";
 import { previewMeriConversationRoute } from "./meri-conversation-route.server";
 import { previewMemoryOwnerTarget } from "./memory-owner-route.server";
@@ -13,6 +14,9 @@ export function previewBackendRejection(
   // Preserve the ordinary app; malformed configured preview values fail closed.
   if (mode === undefined || mode === "false") return null;
   if (request && previewReadTarget(env, request) && previewReadRoute(request))
+    return null;
+  // Meri note-taker preview writes (attendance, preparation, notes, debrief).
+  if (request && previewReadTarget(env, request) && previewNotetakerWriteRoute(request))
     return null;
   if (request && previewFirstChatWriteTarget(env, request)) return null;
   if (request && previewMeriConversationRoute(env, request)) return null;

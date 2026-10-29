@@ -103,7 +103,15 @@ export function SkillSelectionPicker({
   const apply = () => {
     if (disabled) return;
     if (!skillId) {
-      onChange({});
+      // Clearing the skill keeps an additive work definition; other selected inputs clear as before.
+      onChange(
+        receiveSkillSelection({
+          ...(selection.work ? { work: selection.work } : {}),
+          ...(selection.siteWorkflow
+            ? { siteWorkflow: selection.siteWorkflow }
+            : {}),
+        }),
+      );
       return;
     }
     if (!selected || !selected.windowBases.includes(basis)) return;
@@ -131,6 +139,11 @@ export function SkillSelectionPicker({
                       })();
       onChange(
         receiveSkillSelection({
+          // Work is additive intent, so an applied work definition survives a skill change.
+          ...(selection.work ? { work: selection.work } : {}),
+          ...(selection.siteWorkflow
+            ? { siteWorkflow: selection.siteWorkflow }
+            : {}),
           skill: { skillId: selected.skillId, skillVersion: selected.version },
           windowRequest,
         }),

@@ -1,0 +1,16 @@
+.history {
+  min-width: 0;
+}
+.historyRow {
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  justify-content: flex-start;
+  text-align: left;
+  white-space: normal;
+}
+.historyRow > span {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}

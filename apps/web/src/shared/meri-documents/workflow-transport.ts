@@ -11,14 +11,29 @@ import {
 import {
   receiveDocumentResponse as receiveDocumentAccessResponse,
   type AdmittedDocumentRequest as AdmittedAccessRequest,
+  type DocumentAccessRoute,
+  type AdmittedGeneratedDocumentVersion,
+  type AdmittedDocumentPreviewRequest,
+  receiveDocumentPreview,
+  receiveDocumentPreviewPublication,
+  receiveNativeResultsRequest,
+  receiveNativeResultsResponse,
 } from "@capiro/meri-client/document-access";
 import {
   boundedJsonBytes,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
 import { actionSessionHeader } from "../meri-actions/session-header";
+import {
+  receiveFederalResponse,
+  type FederalRoute,
+  type AdmittedFederalRequest,
+  type AdmittedFederalReview,
+} from "@capiro/meri-contracts/federal-workbench";
 
 type JsonRoute = Exclude<DocumentRoute, "download">;
+/** The admitted native-result request is the receiver's own shape; no contract type is re-declared. */
+type NativeResultsRequest = ReturnType<typeof receiveNativeResultsRequest>;
 export interface DocumentTransport {
   request<R extends JsonRoute>(
     route: R,
@@ -60,12 +75,33 @@ function documentReceiver(
     { once: true },
   );
   return async function receive<T>(
-    route: DocumentRoute,
+    route:
+      | DocumentRoute
+      | DocumentAccessRoute
+      | FederalRoute
+      | "preview"
+      | "preview-publish"
+      | "results",
     request: unknown,
     caller: AbortSignal,
     decode: (response: Response, signal: AbortSignal) => Promise<T>,
   ): Promise<{ status: number; value: T }> {
-    if (!["create", "revise", "inspect", "download"].includes(route))
+    if (
+      ![
+        "create",
+        "revise",
+        "inspect",
+        "download",
+        "history",
+        "list",
+        "preview",
+        "preview-publish",
+        "results",
+        "federal-prepare",
+        "federal-load",
+        "federal-publish",
+      ].includes(route)
+    )
       throw new Error("Unknown document route");
     const body = JSON.stringify(request);
     let accessLost = false;
@@ -138,6 +174,30 @@ export function documentTransport(
   };
 }
 
+/** Uses the existing authenticated, bounded document transport. */
+export function federalTransport(
+  credential: string,
+  lifetime: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  const receive = documentReceiver(credential, lifetime, fetcher);
+  return <R extends FederalRoute>(
+    route: R,
+    request: AdmittedFederalRequest<R>,
+    signal: AbortSignal,
+    review?: AdmittedFederalReview,
+  ) =>
+    receive(route, request, signal, async (response, current) =>
+      receiveFederalResponse(
+        route,
+        response.status,
+        await boundedJsonBytes(response, current, 2 * 1024 * 1024),
+        request,
+        review,
+      ),
+    );
+}
+
 /** Artifact inspection uses the same B2 receiver instance as signed-link byte admission. */
 export function documentAccessTransport(
   credential: string,
@@ -146,6 +206,19 @@ export function documentAccessTransport(
 ) {
   const receive = documentReceiver(credential, lifetime, fetcher);
   return {
+    metadata: <R extends "list" | "history">(
+      route: R,
+      request: AdmittedAccessRequest<R>,
+      signal: AbortSignal,
+    ) =>
+      receive(route, request, signal, async (response, current) =>
+        receiveDocumentAccessResponse(
+          route,
+          response.status,
+          await boundedJsonBytes(response, current, 16 * 1024 * 1024),
+          request,
+        ),
+      ),
     inspect: (request: AdmittedAccessRequest<"inspect">, signal: AbortSignal) =>
       receive("inspect", request, signal, async (response, current) =>
         receiveDocumentAccessResponse(
@@ -154,6 +227,56 @@ export function documentAccessTransport(
           await boundedJsonBytes(response, current, 16 * 1024 * 1024),
           request,
         ),
+      ),
+    /**
+     * The additive native-result discovery read. The wire request is the receiver's own closed empty
+     * object; the admitted `request` is the correlation token the canonical receiver checks the
+     * answer against, so the browser never supplies a scope, run, actor or client binding. It admits
+     * no version for inspect or download, leaving the existing inspect/download receiver the byte
+     * authority.
+     */
+    results: (request: NativeResultsRequest, signal: AbortSignal) =>
+      receive("results", {}, signal, async (response, current) =>
+        receiveNativeResultsResponse(
+          response.status,
+          await boundedJsonBytes(response, current, 256 * 1024),
+          request,
+        ),
+      ),
+  };
+}
+
+/** Read never triggers publication. Both routes retain the same current session and public receiver. */
+export function documentPreviewTransport(
+  credential: string,
+  lifetime: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  const receive = documentReceiver(credential, lifetime, fetcher);
+  return {
+    publish: (
+      request: AdmittedDocumentPreviewRequest<"publish">,
+      version: AdmittedGeneratedDocumentVersion,
+      signal: AbortSignal,
+    ) =>
+      receive("preview-publish", request, signal, async (response, current) =>
+        receiveDocumentPreviewPublication(
+          response.status,
+          await boundedJsonBytes(response, current, 65536),
+          request,
+          version,
+        ),
+      ),
+    read: (
+      request: AdmittedDocumentPreviewRequest<"read">,
+      version: AdmittedGeneratedDocumentVersion,
+      signal: AbortSignal,
+    ) =>
+      receive("preview", request, signal, async (response, current) =>
+        receiveDocumentPreview(response, version, {
+          signal: current,
+          maxBytes: 8 * 1024 * 1024,
+        }),
       ),
   };
 }

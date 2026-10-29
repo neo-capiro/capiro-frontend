@@ -75,6 +75,10 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
   private readonly now: () => number;
   private readonly options: Options;
   private knownRequestId: string | null = null;
+  private observed: {
+    requestId: string;
+    prepared: ActionPrepareResponse;
+  } | null = null;
   constructor(options: Options) {
     this.options = {
       ...options,
@@ -91,6 +95,7 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
     this.selections = new WeakMap();
     this.drafts = new WeakMap();
     this.proposals = new WeakMap();
+    this.observed = null;
   }
   private current(signal: AbortSignal) {
     signal.throwIfAborted();
@@ -262,6 +267,7 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
       if (!retained) {
         this.settle();
         this.knownRequestId = null;
+        this.observed = null;
         return { ok: true, value: { phase: "empty" } };
       }
       this.knownRequestId = retained.saved.requestId;
@@ -362,10 +368,82 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
         this.selections = new WeakMap();
         this.drafts = new WeakMap();
         this.proposals = new WeakMap();
+        this.observed = null;
         this.settle();
         return { ok: true, value: { phase: "empty" } };
       });
     } catch {
+      return refused("unknown");
+    } finally {
+      this.busy = false;
+    }
+  }
+  async startNew(
+    handle: object,
+    caller: AbortSignal,
+  ): Promise<WorkflowReply<void>> {
+    const prepared = this.proposals.get(handle),
+      observed = this.observed;
+    if (
+      !prepared ||
+      !observed ||
+      observed.requestId !== this.knownRequestId ||
+      !sameJson(prepared, observed.prepared)
+    )
+      return refused("not-dispatched");
+    if (this.options.isCurrent?.() === false) return refused("not-dispatched");
+    try {
+      this.current(caller);
+    } catch {
+      return refused("access-lost");
+    }
+    if (this.busy) return refused("not-dispatched");
+    const attempt = this.options.journal.read();
+    if (attempt.status !== "idle")
+      return refused(
+        attempt.status === "pending" ? "unknown" : attempt.problem,
+      );
+    this.busy = true;
+    this.options.journal.write({ status: "pending" });
+    const signal = AbortSignal.any([caller, this.lifetime.signal]);
+    try {
+      // Existing recovery owner serializes this local transition against another tab.
+      const reply: WorkflowReply<void> = await this.recovery(signal).lock(
+        async () => {
+          const recovery = this.recovery(signal);
+          try {
+            if (await recovery.load()) return refused("not-dispatched");
+            if (!(await recovery.acknowledged(observed.requestId)))
+              return refused("unknown");
+          } finally {
+            this.current(signal);
+          }
+          if (
+            this.observed !== observed ||
+            this.knownRequestId !== observed.requestId
+          )
+            return refused("not-dispatched");
+          this.selections = new WeakMap();
+          this.drafts = new WeakMap();
+          this.proposals = new WeakMap();
+          this.knownRequestId = null;
+          this.observed = null;
+          return { ok: true, value: undefined };
+        },
+      );
+      this.current(signal);
+      this.settle(reply.ok ? undefined : reply.problem);
+      return reply;
+    } catch {
+      this.settle("unknown");
+      if (
+        !caller.aborted &&
+        (this.options.isCurrent?.() === false ||
+          this.now() >= this.options.session.expiresAtMs)
+      ) {
+        if (!this.lifetime.signal.aborted) this.loseAccess();
+        return refused("access-lost");
+      }
       return refused("unknown");
     } finally {
       this.busy = false;
@@ -497,6 +575,7 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
             throw new Error("Saved task changed; review it before retrying");
         } else await this.recovery(current).reserve(saved);
         this.knownRequestId = saved.requestId;
+        this.observed = null;
       },
     );
   }
@@ -576,6 +655,10 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
           return { status: "indeterminate" };
         }
         if (saved) await this.recovery(signal).acknowledge(saved);
+        const requestId = saved?.requestId ?? this.knownRequestId;
+        if (!requestId) throw new Error("Missing observed task request");
+        this.current(signal);
+        this.observed = { requestId, prepared };
         const proof =
           "execution" in execution.outcome
             ? execution.outcome.execution
@@ -587,6 +670,15 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
             "kind" in proof ? proof.proposalId : proof.receiptId,
           completedAt: proof.completedAt,
           taskTitle: execution.outcome.result.title,
+          ...("execution" in execution.outcome &&
+          execution.outcome.execution.kind === "native-task"
+            ? {
+                task: {
+                  id: execution.outcome.result.id,
+                  clientId: execution.outcome.result.clientId,
+                },
+              }
+            : {}),
         };
       },
       retry,

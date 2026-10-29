@@ -1,0 +1,758 @@
+{
+  "note": "Synthetic canonical artifact/compiler owner outputs; no official source or native production qualification.",
+  "binding": {
+    "tenantId": "33333333-3333-4333-8333-000000000100",
+    "actorId": "33333333-3333-4333-8333-000000000101",
+    "conversationId": "33333333-3333-4333-8333-000000000102",
+    "runId": "33333333-3333-4333-8333-000000000103",
+    "attemptId": "33333333-3333-4333-8333-000000000104",
+    "workerId": "33333333-3333-4333-8333-000000000105",
+    "writerFence": 1
+  },
+  "clientId": "33333333-3333-4333-8333-000000000106",
+  "source": {
+    "documentId": "Synthetic Act",
+    "publisher": "Synthetic federal publisher",
+    "sourceVersion": "introduced-1",
+    "sourceUrl": "https://legislation.example/act/introduced-1",
+    "publishedAt": "2026-10-28",
+    "parserVersion": "federal-plain-text/1",
+    "text": "Synthetic Federal Act\nSEC. 1. Payment is $100.\nSEC. 2. Payment is $100.\nEnd.\n",
+    "sha256": "e7945cfb0242e9471d9971dc5d81e3fd42c8315bbf7fab3d570e338f80509834",
+    "coverage": {
+      "complete": false,
+      "limitations": [
+        "Synthetic plain-text test source; no official source verification."
+      ]
+    },
+    "scopes": [
+      {
+        "id": "section-1",
+        "label": "section 1",
+        "start": 22,
+        "end": 47,
+        "sha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7"
+      },
+      {
+        "id": "section-2",
+        "label": "section 2",
+        "start": 47,
+        "end": 72,
+        "sha256": "131e18f3f84ce44ac99fb3c73862344ba996f89ad5468f8ca3417f158f7e3e01"
+      }
+    ]
+  },
+  "sourceVersion": {
+    "contractVersion": "0.2.0",
+    "artifactId": "f5dc4366-61d1-439d-8ac4-5bec2f10f8f9",
+    "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+    "parentVersionId": null,
+    "binding": {
+      "tenantId": "33333333-3333-4333-8333-000000000100",
+      "actorId": "33333333-3333-4333-8333-000000000101",
+      "conversationId": "33333333-3333-4333-8333-000000000102",
+      "runId": "33333333-3333-4333-8333-000000000103",
+      "attemptId": "33333333-3333-4333-8333-000000000104",
+      "workerId": "33333333-3333-4333-8333-000000000105",
+      "writerFence": 1
+    },
+    "object": {
+      "objectId": "e4fba38b-31ee-4268-86fd-36073dbcdc76",
+      "versionId": "SYNTHETIC_e4fba38b-31ee-4268-86fd-36073dbcdc76",
+      "sha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+      "bytes": 791,
+      "scopes": [
+        {
+          "tenantId": "33333333-3333-4333-8333-000000000100",
+          "kind": "client",
+          "resourceId": "33333333-3333-4333-8333-000000000106",
+          "policyRevision": "policy1"
+        }
+      ]
+    },
+    "filename": "Synthetic federal source.txt",
+    "mimeType": "text/plain; charset=utf-8",
+    "scopes": [
+      {
+        "tenantId": "33333333-3333-4333-8333-000000000100",
+        "kind": "client",
+        "resourceId": "33333333-3333-4333-8333-000000000106",
+        "policyRevision": "policy1"
+      }
+    ],
+    "evidence": [],
+    "generationStatus": "draft",
+    "previewStatus": "pending",
+    "createdAt": "2026-10-13T18:00:00.000Z"
+  },
+  "review": {
+    "schema": "meri.federal-review.v1",
+    "selection": {
+      "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+      "expectedArtifactSha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+      "operations": [
+        {
+          "id": "amendment-1",
+          "scopeId": "section-1",
+          "kind": "replace",
+          "expectedScopeSha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7",
+          "expectedText": "$100",
+          "expectedTextSha256": "797c7d463af6ea7fa7f88d50602cea0531e3e0da8cb59be3b0983bb98958cce8",
+          "dependsOn": [],
+          "text": "$150"
+        }
+      ]
+    },
+    "prepared": {
+      "sourceArtifact": {
+        "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+        "sha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+        "specSha256": "1df590f32f633cd5e5277b1293dcb7b0100140ce05e506b6dbe8d7646ce35a8b"
+      },
+      "draft": {
+        "parserVersion": "federal-plain-text/1",
+        "source": {
+          "documentId": "Synthetic Act",
+          "publisher": "Synthetic federal publisher",
+          "sourceVersion": "introduced-1",
+          "sourceUrl": "https://legislation.example/act/introduced-1",
+          "publishedAt": "2026-10-28",
+          "parserVersion": "federal-plain-text/1",
+          "text": "Synthetic Federal Act\nSEC. 1. Payment is $100.\nSEC. 2. Payment is $100.\nEnd.\n",
+          "sha256": "e7945cfb0242e9471d9971dc5d81e3fd42c8315bbf7fab3d570e338f80509834",
+          "coverage": {
+            "complete": false,
+            "limitations": [
+              "Synthetic plain-text test source; no official source verification."
+            ]
+          },
+          "scopes": [
+            {
+              "id": "section-1",
+              "label": "section 1",
+              "start": 22,
+              "end": 47,
+              "sha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7"
+            },
+            {
+              "id": "section-2",
+              "label": "section 2",
+              "start": 47,
+              "end": 72,
+              "sha256": "131e18f3f84ce44ac99fb3c73862344ba996f89ad5468f8ca3417f158f7e3e01"
+            }
+          ]
+        },
+        "operations": [
+          {
+            "id": "amendment-1",
+            "scopeId": "section-1",
+            "kind": "replace",
+            "expectedScopeSha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7",
+            "expectedText": "$100",
+            "expectedTextSha256": "797c7d463af6ea7fa7f88d50602cea0531e3e0da8cb59be3b0983bb98958cce8",
+            "dependsOn": [],
+            "text": "$150"
+          }
+        ],
+        "outputs": {
+          "operative": "Source: Synthetic Act; Synthetic federal publisher; version introduced-1; published 2026-10-28; https://legislation.example/act/introduced-1; SHA-256 e7945cfb0242e9471d9971dc5d81e3fd42c8315bbf7fab3d570e338f80509834\nOperations apply in the stated order.\n\namendment-1. In section 1, strike \"$100\" and insert \"$150\".\n",
+          "consolidated": "Synthetic Federal Act\nSEC. 1. Payment is $150.\nSEC. 2. Payment is $100.\nEnd.\n",
+          "redline": "Source: Synthetic Act; Synthetic federal publisher; version introduced-1; published 2026-10-28; https://legislation.example/act/introduced-1; SHA-256 e7945cfb0242e9471d9971dc5d81e3fd42c8315bbf7fab3d570e338f80509834\nExact legal text comparison; each line is a JSON text segment.\n{\"kind\":\"unchanged\",\"text\":\"Synthetic Federal Act\\n\"}\n{\"kind\":\"unchanged\",\"text\":\"SEC. 1. Payment is $1\"}\n{\"kind\":\"delete\",\"text\":\"0\"}\n{\"kind\":\"insert\",\"text\":\"5\"}\n{\"kind\":\"unchanged\",\"text\":\"0.\\n\"}\n{\"kind\":\"unchanged\",\"text\":\"SEC. 2. Payment is $100.\\n\"}\n{\"kind\":\"unchanged\",\"text\":\"End.\\n\"}\n",
+          "segments": [
+            {
+              "kind": "unchanged",
+              "text": "Synthetic Federal Act\n"
+            },
+            {
+              "kind": "unchanged",
+              "text": "SEC. 1. Payment is $1"
+            },
+            {
+              "kind": "delete",
+              "text": "0"
+            },
+            {
+              "kind": "insert",
+              "text": "5"
+            },
+            {
+              "kind": "unchanged",
+              "text": "0.\n"
+            },
+            {
+              "kind": "unchanged",
+              "text": "SEC. 2. Payment is $100.\n"
+            },
+            {
+              "kind": "unchanged",
+              "text": "End.\n"
+            }
+          ]
+        },
+        "findings": [
+          {
+            "category": "source-integrity",
+            "status": "passed",
+            "location": "Synthetic Act",
+            "severity": "info"
+          },
+          {
+            "category": "exact-target",
+            "status": "passed",
+            "location": "section-1",
+            "operationId": "amendment-1",
+            "severity": "info"
+          },
+          {
+            "category": "numbering",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          },
+          {
+            "category": "cross-references",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          },
+          {
+            "category": "arithmetic",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          },
+          {
+            "category": "substantive-law",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          }
+        ],
+        "outputHashes": {
+          "operative": "528c4c9669f15aa91cd962cf5b7fdec88699e84baaa0371b82344aea2a2458d5",
+          "consolidated": "2396b19354fd9530770d2e6a803472388a4bf09a324963b7363a9593313f3241",
+          "redline": "210617fbd5377321cb1010e9504e12c322f77720eebaddc613c610c53903a8df"
+        },
+        "revisionSha256": "69ce2f31bbb3cd95450164029074ac5946bc9fa9a6bdbf852c63ff95b91f0f32",
+        "approval": "unapproved"
+      },
+      "revisionSha256": "55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb",
+      "approval": "unapproved"
+    },
+    "savedDraft": null
+  },
+  "savedReview": {
+    "schema": "meri.federal-review.v1",
+    "selection": {
+      "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+      "expectedArtifactSha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+      "operations": [
+        {
+          "id": "amendment-1",
+          "scopeId": "section-1",
+          "kind": "replace",
+          "expectedScopeSha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7",
+          "expectedText": "$100",
+          "expectedTextSha256": "797c7d463af6ea7fa7f88d50602cea0531e3e0da8cb59be3b0983bb98958cce8",
+          "dependsOn": [],
+          "text": "$150"
+        }
+      ]
+    },
+    "prepared": {
+      "sourceArtifact": {
+        "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+        "sha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+        "specSha256": "1df590f32f633cd5e5277b1293dcb7b0100140ce05e506b6dbe8d7646ce35a8b"
+      },
+      "draft": {
+        "parserVersion": "federal-plain-text/1",
+        "source": {
+          "documentId": "Synthetic Act",
+          "publisher": "Synthetic federal publisher",
+          "sourceVersion": "introduced-1",
+          "sourceUrl": "https://legislation.example/act/introduced-1",
+          "publishedAt": "2026-10-28",
+          "parserVersion": "federal-plain-text/1",
+          "text": "Synthetic Federal Act\nSEC. 1. Payment is $100.\nSEC. 2. Payment is $100.\nEnd.\n",
+          "sha256": "e7945cfb0242e9471d9971dc5d81e3fd42c8315bbf7fab3d570e338f80509834",
+          "coverage": {
+            "complete": false,
+            "limitations": [
+              "Synthetic plain-text test source; no official source verification."
+            ]
+          },
+          "scopes": [
+            {
+              "id": "section-1",
+              "label": "section 1",
+              "start": 22,
+              "end": 47,
+              "sha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7"
+            },
+            {
+              "id": "section-2",
+              "label": "section 2",
+              "start": 47,
+              "end": 72,
+              "sha256": "131e18f3f84ce44ac99fb3c73862344ba996f89ad5468f8ca3417f158f7e3e01"
+            }
+          ]
+        },
+        "operations": [
+          {
+            "id": "amendment-1",
+            "scopeId": "section-1",
+            "kind": "replace",
+            "expectedScopeSha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7",
+            "expectedText": "$100",
+            "expectedTextSha256": "797c7d463af6ea7fa7f88d50602cea0531e3e0da8cb59be3b0983bb98958cce8",
+            "dependsOn": [],
+            "text": "$150"
+          }
+        ],
+        "outputs": {
+          "operative": "Source: Synthetic Act; Synthetic federal publisher; version introduced-1; published 2026-10-28; https://legislation.example/act/introduced-1; SHA-256 e7945cfb0242e9471d9971dc5d81e3fd42c8315bbf7fab3d570e338f80509834\nOperations apply in the stated order.\n\namendment-1. In section 1, strike \"$100\" and insert \"$150\".\n",
+          "consolidated": "Synthetic Federal Act\nSEC. 1. Payment is $150.\nSEC. 2. Payment is $100.\nEnd.\n",
+          "redline": "Source: Synthetic Act; Synthetic federal publisher; version introduced-1; published 2026-10-28; https://legislation.example/act/introduced-1; SHA-256 e7945cfb0242e9471d9971dc5d81e3fd42c8315bbf7fab3d570e338f80509834\nExact legal text comparison; each line is a JSON text segment.\n{\"kind\":\"unchanged\",\"text\":\"Synthetic Federal Act\\n\"}\n{\"kind\":\"unchanged\",\"text\":\"SEC. 1. Payment is $1\"}\n{\"kind\":\"delete\",\"text\":\"0\"}\n{\"kind\":\"insert\",\"text\":\"5\"}\n{\"kind\":\"unchanged\",\"text\":\"0.\\n\"}\n{\"kind\":\"unchanged\",\"text\":\"SEC. 2. Payment is $100.\\n\"}\n{\"kind\":\"unchanged\",\"text\":\"End.\\n\"}\n",
+          "segments": [
+            {
+              "kind": "unchanged",
+              "text": "Synthetic Federal Act\n"
+            },
+            {
+              "kind": "unchanged",
+              "text": "SEC. 1. Payment is $1"
+            },
+            {
+              "kind": "delete",
+              "text": "0"
+            },
+            {
+              "kind": "insert",
+              "text": "5"
+            },
+            {
+              "kind": "unchanged",
+              "text": "0.\n"
+            },
+            {
+              "kind": "unchanged",
+              "text": "SEC. 2. Payment is $100.\n"
+            },
+            {
+              "kind": "unchanged",
+              "text": "End.\n"
+            }
+          ]
+        },
+        "findings": [
+          {
+            "category": "source-integrity",
+            "status": "passed",
+            "location": "Synthetic Act",
+            "severity": "info"
+          },
+          {
+            "category": "exact-target",
+            "status": "passed",
+            "location": "section-1",
+            "operationId": "amendment-1",
+            "severity": "info"
+          },
+          {
+            "category": "numbering",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          },
+          {
+            "category": "cross-references",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          },
+          {
+            "category": "arithmetic",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          },
+          {
+            "category": "substantive-law",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          }
+        ],
+        "outputHashes": {
+          "operative": "528c4c9669f15aa91cd962cf5b7fdec88699e84baaa0371b82344aea2a2458d5",
+          "consolidated": "2396b19354fd9530770d2e6a803472388a4bf09a324963b7363a9593313f3241",
+          "redline": "210617fbd5377321cb1010e9504e12c322f77720eebaddc613c610c53903a8df"
+        },
+        "revisionSha256": "69ce2f31bbb3cd95450164029074ac5946bc9fa9a6bdbf852c63ff95b91f0f32",
+        "approval": "unapproved"
+      },
+      "revisionSha256": "55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb",
+      "approval": "unapproved"
+    },
+    "savedDraft": {
+      "contractVersion": "0.2.0",
+      "artifactId": "ed876962-b7c3-44a0-8960-8a7586e80b34",
+      "versionId": "3648ad2d-839f-4f29-89c8-27559f960087",
+      "parentVersionId": null,
+      "binding": {
+        "tenantId": "33333333-3333-4333-8333-000000000100",
+        "actorId": "33333333-3333-4333-8333-000000000101",
+        "conversationId": "33333333-3333-4333-8333-000000000102",
+        "runId": "33333333-3333-4333-8333-000000000103",
+        "attemptId": "33333333-3333-4333-8333-000000000104",
+        "workerId": "33333333-3333-4333-8333-000000000105",
+        "writerFence": 1
+      },
+      "object": {
+        "objectId": "ca27283a-416c-4f6b-83aa-b69bf5c2f62e",
+        "versionId": "SYNTHETIC_ca27283a-416c-4f6b-83aa-b69bf5c2f62e",
+        "sha256": "aea7b05e841fe6397af58dc3ecbe30ffea37696f71661cfe5734a3cc883d7692",
+        "bytes": 3954,
+        "scopes": [
+          {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "kind": "client",
+            "resourceId": "33333333-3333-4333-8333-000000000106",
+            "policyRevision": "policy1"
+          }
+        ]
+      },
+      "filename": "Federal review _55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb__ Synthetic Act.txt",
+      "mimeType": "text/plain; charset=utf-8",
+      "scopes": [
+        {
+          "tenantId": "33333333-3333-4333-8333-000000000100",
+          "kind": "client",
+          "resourceId": "33333333-3333-4333-8333-000000000106",
+          "policyRevision": "policy1"
+        }
+      ],
+      "evidence": [],
+      "generationStatus": "draft",
+      "previewStatus": "pending",
+      "createdAt": "2026-10-13T18:00:00.000Z"
+    }
+  },
+  "publications": {
+    "draft": {
+      "schema": "meri.federal-review.v1",
+      "sourceArtifact": {
+        "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+        "sha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+        "specSha256": "1df590f32f633cd5e5277b1293dcb7b0100140ce05e506b6dbe8d7646ce35a8b"
+      },
+      "revisionSha256": "55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb",
+      "output": "draft",
+      "review": "unapproved",
+      "publication": {
+        "version": {
+          "contractVersion": "0.2.0",
+          "artifactId": "ed876962-b7c3-44a0-8960-8a7586e80b34",
+          "versionId": "3648ad2d-839f-4f29-89c8-27559f960087",
+          "parentVersionId": null,
+          "binding": {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "actorId": "33333333-3333-4333-8333-000000000101",
+            "conversationId": "33333333-3333-4333-8333-000000000102",
+            "runId": "33333333-3333-4333-8333-000000000103",
+            "attemptId": "33333333-3333-4333-8333-000000000104",
+            "workerId": "33333333-3333-4333-8333-000000000105",
+            "writerFence": 1
+          },
+          "object": {
+            "objectId": "ca27283a-416c-4f6b-83aa-b69bf5c2f62e",
+            "versionId": "SYNTHETIC_ca27283a-416c-4f6b-83aa-b69bf5c2f62e",
+            "sha256": "aea7b05e841fe6397af58dc3ecbe30ffea37696f71661cfe5734a3cc883d7692",
+            "bytes": 3954,
+            "scopes": [
+              {
+                "tenantId": "33333333-3333-4333-8333-000000000100",
+                "kind": "client",
+                "resourceId": "33333333-3333-4333-8333-000000000106",
+                "policyRevision": "policy1"
+              }
+            ]
+          },
+          "filename": "Federal review _55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb__ Synthetic Act.txt",
+          "mimeType": "text/plain; charset=utf-8",
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ],
+          "evidence": [],
+          "generationStatus": "draft",
+          "previewStatus": "pending",
+          "createdAt": "2026-10-13T18:00:00.000Z"
+        },
+        "inspection": {
+          "sha256": "aea7b05e841fe6397af58dc3ecbe30ffea37696f71661cfe5734a3cc883d7692",
+          "bytes": 3954,
+          "format": "txt",
+          "nativeOpened": false,
+          "rendered": false,
+          "recalculated": false,
+          "members": [],
+          "details": {
+            "encoding": "UTF-8",
+            "whitespace": "unchanged"
+          }
+        },
+        "execution": {
+          "kind": "native-document",
+          "invocationId": "sdk:d7f6050a2c5856b97c0d13b2f8ecbab7353f747fe8f877c17011d06fbc0b72df",
+          "requestSha256": "b317104602a845615f42620d016020052764c24ab9a5b8d6368ea617ec82c5ff",
+          "authorizationReceiptId": "33333333-3333-4333-8333-000000000900",
+          "objectCommitted": true,
+          "versionCommitted": true,
+          "nativeQualified": false
+        }
+      }
+    },
+    "operative": {
+      "schema": "meri.federal-review.v1",
+      "sourceArtifact": {
+        "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+        "sha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+        "specSha256": "1df590f32f633cd5e5277b1293dcb7b0100140ce05e506b6dbe8d7646ce35a8b"
+      },
+      "revisionSha256": "55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb",
+      "output": "operative",
+      "review": "confirmed-for-export",
+      "publication": {
+        "version": {
+          "contractVersion": "0.2.0",
+          "artifactId": "055d4c51-cb31-4771-8f0a-b6058c1fec72",
+          "versionId": "8111f8da-bcd9-41f5-85a3-2c0a50984cc7",
+          "parentVersionId": null,
+          "binding": {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "actorId": "33333333-3333-4333-8333-000000000101",
+            "conversationId": "33333333-3333-4333-8333-000000000102",
+            "runId": "33333333-3333-4333-8333-000000000103",
+            "attemptId": "33333333-3333-4333-8333-000000000104",
+            "workerId": "33333333-3333-4333-8333-000000000105",
+            "writerFence": 1
+          },
+          "object": {
+            "objectId": "224f67bf-9e81-4d6a-8b96-fc426516e243",
+            "versionId": "SYNTHETIC_224f67bf-9e81-4d6a-8b96-fc426516e243",
+            "sha256": "528c4c9669f15aa91cd962cf5b7fdec88699e84baaa0371b82344aea2a2458d5",
+            "bytes": 314,
+            "scopes": [
+              {
+                "tenantId": "33333333-3333-4333-8333-000000000100",
+                "kind": "client",
+                "resourceId": "33333333-3333-4333-8333-000000000106",
+                "policyRevision": "policy1"
+              }
+            ]
+          },
+          "filename": "Operative amendment _55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb__ Synthetic Act.txt",
+          "mimeType": "text/plain; charset=utf-8",
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ],
+          "evidence": [],
+          "generationStatus": "draft",
+          "previewStatus": "pending",
+          "createdAt": "2026-10-13T18:00:00.000Z"
+        },
+        "inspection": {
+          "sha256": "528c4c9669f15aa91cd962cf5b7fdec88699e84baaa0371b82344aea2a2458d5",
+          "bytes": 314,
+          "format": "txt",
+          "nativeOpened": false,
+          "rendered": false,
+          "recalculated": false,
+          "members": [],
+          "details": {
+            "encoding": "UTF-8",
+            "whitespace": "unchanged"
+          }
+        },
+        "execution": {
+          "kind": "native-document",
+          "invocationId": "sdk:8183d92bcddf0b922d5682bbf3d9be53c27cc719d3fdc2448e932c6a514e481d",
+          "requestSha256": "44932d7617df88f20dd07c6ab1560c153f498e9794e49c34fcfa003aa6b3b26c",
+          "authorizationReceiptId": "33333333-3333-4333-8333-000000000900",
+          "objectCommitted": true,
+          "versionCommitted": true,
+          "nativeQualified": false
+        }
+      }
+    },
+    "consolidated": {
+      "schema": "meri.federal-review.v1",
+      "sourceArtifact": {
+        "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+        "sha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+        "specSha256": "1df590f32f633cd5e5277b1293dcb7b0100140ce05e506b6dbe8d7646ce35a8b"
+      },
+      "revisionSha256": "55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb",
+      "output": "consolidated",
+      "review": "confirmed-for-export",
+      "publication": {
+        "version": {
+          "contractVersion": "0.2.0",
+          "artifactId": "e4871ee6-56de-4f13-8f4c-3c8802f743a4",
+          "versionId": "096b8688-3ffe-447a-83f7-0c2f98663ea7",
+          "parentVersionId": null,
+          "binding": {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "actorId": "33333333-3333-4333-8333-000000000101",
+            "conversationId": "33333333-3333-4333-8333-000000000102",
+            "runId": "33333333-3333-4333-8333-000000000103",
+            "attemptId": "33333333-3333-4333-8333-000000000104",
+            "workerId": "33333333-3333-4333-8333-000000000105",
+            "writerFence": 1
+          },
+          "object": {
+            "objectId": "e07bba2e-58e2-4780-8984-01a6f7ba7dc7",
+            "versionId": "SYNTHETIC_e07bba2e-58e2-4780-8984-01a6f7ba7dc7",
+            "sha256": "2396b19354fd9530770d2e6a803472388a4bf09a324963b7363a9593313f3241",
+            "bytes": 77,
+            "scopes": [
+              {
+                "tenantId": "33333333-3333-4333-8333-000000000100",
+                "kind": "client",
+                "resourceId": "33333333-3333-4333-8333-000000000106",
+                "policyRevision": "policy1"
+              }
+            ]
+          },
+          "filename": "Consolidated text _55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb__ Synthetic Act.txt",
+          "mimeType": "text/plain; charset=utf-8",
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ],
+          "evidence": [],
+          "generationStatus": "draft",
+          "previewStatus": "pending",
+          "createdAt": "2026-10-13T18:00:00.000Z"
+        },
+        "inspection": {
+          "sha256": "2396b19354fd9530770d2e6a803472388a4bf09a324963b7363a9593313f3241",
+          "bytes": 77,
+          "format": "txt",
+          "nativeOpened": false,
+          "rendered": false,
+          "recalculated": false,
+          "members": [],
+          "details": {
+            "encoding": "UTF-8",
+            "whitespace": "unchanged"
+          }
+        },
+        "execution": {
+          "kind": "native-document",
+          "invocationId": "sdk:32d7be5de70518f530f91e72c02606836bb0bc7ea0a53d91cd47bc154edb4554",
+          "requestSha256": "cc57d537876f3a9d62b26531ebe8c1291777036502b2e34528e769933c08aa22",
+          "authorizationReceiptId": "33333333-3333-4333-8333-000000000900",
+          "objectCommitted": true,
+          "versionCommitted": true,
+          "nativeQualified": false
+        }
+      }
+    },
+    "redline": {
+      "schema": "meri.federal-review.v1",
+      "sourceArtifact": {
+        "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+        "sha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+        "specSha256": "1df590f32f633cd5e5277b1293dcb7b0100140ce05e506b6dbe8d7646ce35a8b"
+      },
+      "revisionSha256": "55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb",
+      "output": "redline",
+      "review": "confirmed-for-export",
+      "publication": {
+        "version": {
+          "contractVersion": "0.2.0",
+          "artifactId": "9a106ee1-a061-4dae-8040-415c29bf8311",
+          "versionId": "38eaa648-a39b-48a7-84af-44d816a256d6",
+          "parentVersionId": null,
+          "binding": {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "actorId": "33333333-3333-4333-8333-000000000101",
+            "conversationId": "33333333-3333-4333-8333-000000000102",
+            "runId": "33333333-3333-4333-8333-000000000103",
+            "attemptId": "33333333-3333-4333-8333-000000000104",
+            "workerId": "33333333-3333-4333-8333-000000000105",
+            "writerFence": 1
+          },
+          "object": {
+            "objectId": "80150027-722c-436c-8036-f1bc4f5e8e73",
+            "versionId": "SYNTHETIC_80150027-722c-436c-8036-f1bc4f5e8e73",
+            "sha256": "210617fbd5377321cb1010e9504e12c322f77720eebaddc613c610c53903a8df",
+            "bytes": 571,
+            "scopes": [
+              {
+                "tenantId": "33333333-3333-4333-8333-000000000100",
+                "kind": "client",
+                "resourceId": "33333333-3333-4333-8333-000000000106",
+                "policyRevision": "policy1"
+              }
+            ]
+          },
+          "filename": "Legal redline _55c155e5c828703a9c2dae9176a562385f494011deb5e1a9e6de9afcfc87eecb__ Synthetic Act.txt",
+          "mimeType": "text/plain; charset=utf-8",
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ],
+          "evidence": [],
+          "generationStatus": "draft",
+          "previewStatus": "pending",
+          "createdAt": "2026-10-13T18:00:00.000Z"
+        },
+        "inspection": {
+          "sha256": "210617fbd5377321cb1010e9504e12c322f77720eebaddc613c610c53903a8df",
+          "bytes": 571,
+          "format": "txt",
+          "nativeOpened": false,
+          "rendered": false,
+          "recalculated": false,
+          "members": [],
+          "details": {
+            "encoding": "UTF-8",
+            "whitespace": "unchanged"
+          }
+        },
+        "execution": {
+          "kind": "native-document",
+          "invocationId": "sdk:b2cf4d6ea4bdf3549bc7ac639c2ac42b5f47e3df75969d75ea55bcbb16e6edf6",
+          "requestSha256": "5f1a6b61f9cd86be512ac9ca1ba7bb5300806f64491f7f8c275fd1b604296b86",
+          "authorizationReceiptId": "33333333-3333-4333-8333-000000000900",
+          "objectCommitted": true,
+          "versionCommitted": true,
+          "nativeQualified": false
+        }
+      }
+    }
+  }
+}

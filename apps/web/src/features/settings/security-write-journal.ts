@@ -1,10 +1,13 @@
-import { type SettingsWrite } from "./security-writes";
+import { type SettingsWrite } from "./security-write-types";
 
 type StoragePort = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 export async function settingsRequestHash(input: unknown) {
+  return settingsBytesHash(JSON.stringify(input));
+}
+export async function settingsBytesHash(bytes: string) {
   const digest = await crypto.subtle.digest(
     "SHA-256",
-    new TextEncoder().encode(JSON.stringify(input)),
+    new TextEncoder().encode(bytes),
   );
   return [...new Uint8Array(digest)]
     .map((byte) => byte.toString(16).padStart(2, "0"))
@@ -26,6 +29,10 @@ const retainedValues = [
   "restoreDefault",
   "expectedModelOverride",
   "expectedUpdatedAt",
+  "expectedVersion",
+  "expectedRevision",
+  "action",
+  "requestId",
   "confirmed",
   "relationshipType",
   "rollUpAwards",
@@ -46,20 +53,23 @@ export async function persistSettingsWrite(
     write.expectedInvitationHash = await settingsRequestHash(
       write.expectedInvitation,
     );
-  const body =
-    write.operation === "settings.support.create"
-      ? { id: write.input.body?.id }
-      : Object.fromEntries(
-          Object.entries(write.input.body ?? {}).filter(([name]) =>
-            retainedValues.includes(name),
-          ),
-        );
+  const body = [
+    "settings.support.create",
+    "settings.memory.grants.create",
+  ].includes(write.operation)
+    ? { id: write.input.body?.id }
+    : Object.fromEntries(
+        Object.entries(write.input.body ?? {}).filter(([name]) =>
+          retainedValues.includes(name),
+        ),
+      );
   storage.setItem(
     key,
     JSON.stringify({
       version: 1,
       attemptId: write.attemptId,
       requestHash,
+      domainRequestHash: write.domainRequestHash,
       resultHash: write.resultHash,
       expectedInvitationHash: write.expectedInvitationHash,
       expectedAccount: write.expectedAccount,
@@ -109,6 +119,10 @@ export function restoreSettingsWrite(
       input: data.input as SettingsWrite["input"],
       startedAt: data.startedAt,
       requestHash: data.requestHash,
+      ...(typeof data.domainRequestHash === "string" &&
+      /^[a-f0-9]{64}$/.test(data.domainRequestHash)
+        ? { domainRequestHash: data.domainRequestHash }
+        : {}),
       ...(typeof data.expectedInvitationHash === "string" &&
       /^[a-f0-9]{64}$/.test(data.expectedInvitationHash)
         ? { expectedInvitationHash: data.expectedInvitationHash }

@@ -11362,6 +11362,54 @@
       "section": "Design dependencies · Editable shared masters",
       "designUrl": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE/?node-id=1064-150832",
       "coverageId": "coverage-79"
+    },
+    {
+      "file": "mpXWnySldUFzdVna8i69Ki",
+      "node": "3139:86185",
+      "name": "More actions (author-reported name)",
+      "route": "/portfolio/[clientId]",
+      "state": "more-actions",
+      "status": "current-verification-pending",
+      "area": "client-overview",
+      "coverageId": "coverage-80",
+      "section": "03 · Portfolio / Overview additions reported 2026-10-27",
+      "designUrl": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/?node-id=3139-86185"
+    },
+    {
+      "file": "mpXWnySldUFzdVna8i69Ki",
+      "node": "3139:85856",
+      "name": "OV · notes · Profile notes",
+      "route": "/portfolio/[clientId]",
+      "state": "profile-notes-dialog",
+      "status": "current-verification-pending",
+      "area": "client-overview",
+      "coverageId": "coverage-81",
+      "section": "03 · Portfolio / Overview additions reported 2026-10-27",
+      "designUrl": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/?node-id=3139-85856"
+    },
+    {
+      "file": "mpXWnySldUFzdVna8i69Ki",
+      "node": "3139:86035",
+      "name": "OV · tag · Add focus tag",
+      "route": "/portfolio/[clientId]",
+      "state": "focus-tag-dialog",
+      "status": "current-verification-pending",
+      "area": "client-overview",
+      "coverageId": "coverage-82",
+      "section": "03 · Portfolio / Overview additions reported 2026-10-27",
+      "designUrl": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/?node-id=3139-86035"
+    },
+    {
+      "file": "mpXWnySldUFzdVna8i69Ki",
+      "node": "3132:78373",
+      "name": "Timeline recovery (author-reported name)",
+      "route": "/portfolio/[clientId]",
+      "state": "timeline-recovery",
+      "status": "current-verification-pending",
+      "area": "client-overview",
+      "coverageId": "coverage-83",
+      "section": "03 · Portfolio / Overview additions reported 2026-10-27",
+      "designUrl": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/?node-id=3132-78373"
     }
   ],
   "missingDesign": [
@@ -11540,10 +11588,10 @@
     }
   ],
   "physicalNonMeriPageTemplateCount": 18,
-  "routeCountNote": "Physical page templates exclude Meri, onboarding, sign-in and public forms. /modules/[module] currently expands to 8 registered modules; /settings/[section] expands to 19 registered Settings sections. The 946 Figma frames are separate reference scope.",
+  "routeCountNote": "Physical page templates exclude Meri, onboarding, sign-in and public forms. /modules/[module] currently expands to 8 registered modules; /settings/[section] expands to 19 registered Settings sections. The 950 Figma references (946 original frames plus four exact additions reported on 27 October) are separate reference scope.",
   "statusCounts": {
     "reference-only": 10,
-    "current-verification-pending": 881,
+    "current-verification-pending": 885,
     "implemented/unverified": 32,
     "superseded": 11,
     "outside-assignment": 12
@@ -12972,7 +13020,69 @@
       "mappingConfidence": "reference-only",
       "blocker": "",
       "externalBlocker": ""
+    },
+    "coverage-80": {
+      "evidence": "Author return for PR251 identifies this exact node and prior PASS; no fresh Figma metadata or browser review is claimed here.",
+      "sourceFiles": [
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx"
+      ],
+      "inheritedBrowserSpecs": [],
+      "implementationStatus": "Existing surface and/or contract-gated controls; see source handoff, not a completeness claim.",
+      "stateCoverage": "Not independently accepted at the current candidate.",
+      "currentVerification": "Pending Hermes review of the final candidate.",
+      "owner": "Wave 4 implementation owner; Hermes independent review",
+      "mappingConfidence": "exact-node-reported",
+      "blocker": "",
+      "externalBlocker": ""
+    },
+    "coverage-81": {
+      "evidence": "Hermes Figma metadata/render inspected27October:640x525; deployed FE46 copy/constraint check passed13:03-13:05UTC. Later layout refinements still need current verification.",
+      "sourceFiles": [
+        "apps/web/src/features/portfolio/client-profile/NotesDialog.tsx"
+      ],
+      "inheritedBrowserSpecs": [],
+      "implementationStatus": "Existing surface and/or contract-gated controls; see source handoff, not a completeness claim.",
+      "stateCoverage": "Not independently accepted at the current candidate.",
+      "currentVerification": "Pending Hermes review of the final candidate.",
+      "owner": "Wave 4 implementation owner; Hermes independent review",
+      "mappingConfidence": "exact-frame-metadata",
+      "blocker": "",
+      "externalBlocker": ""
+    },
+    "coverage-82": {
+      "evidence": "Hermes Figma metadata/render inspected27October:520x312; deployed FE46 copy/constraint check passed13:03-13:05UTC. Later placeholder refinement still needs current verification.",
+      "sourceFiles": [
+        "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx"
+      ],
+      "inheritedBrowserSpecs": [],
+      "implementationStatus": "Existing surface and/or contract-gated controls; see source handoff, not a completeness claim.",
+      "stateCoverage": "Not independently accepted at the current candidate.",
+      "currentVerification": "Pending Hermes review of the final candidate.",
+      "owner": "Wave 4 implementation owner; Hermes independent review",
+      "mappingConfidence": "exact-frame-metadata",
+      "blocker": "",
+      "externalBlocker": ""
+    },
+    "coverage-83": {
+      "evidence": "Exact node reported by author; frame not inspected. DG-09 remains unverified and receipt/replay controls remain governed by the existing service contract.",
+      "sourceFiles": [
+        "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx"
+      ],
+      "inheritedBrowserSpecs": [],
+      "implementationStatus": "Existing surface and/or contract-gated controls; see source handoff, not a completeness claim.",
+      "stateCoverage": "Not independently accepted at the current candidate.",
+      "currentVerification": "Pending Hermes review of the final candidate.",
+      "owner": "Wave 4 implementation owner; Hermes independent review",
+      "mappingConfidence": "exact-node-reported",
+      "blocker": "",
+      "externalBlocker": ""
     }
   },
-  "resolution": "For a row, resolve coverageRecords[row.coverageId] for inherited source/spec/evidence/owner details. Interning is lossless; no status is promoted by normalization."
+  "resolution": "For a row, resolve coverageRecords[row.coverageId] for inherited source/spec/evidence/owner details. Interning is lossless; no status is promoted by normalization.",
+  "additionalDiscovery": {
+    "asOf": "2026-10-27",
+    "scope": "Four exact Overview nodes. Original19October metadata/method and verification counts are historical and unchanged. These additions include small dialog frames and author-reported targets.",
+    "source": "../figma-34-audit-20261016/portfolio/OVERVIEW-FOLLOWUPS-20261027.md",
+    "unrecovered": "Eleven intermediate IDs in the13Timeline target set3110:63793 through3113:77148; unnamed nodes in families3132,3134,3139:87xxx,3140,3146. Do not invent rows or infer acceptance from family prefixes."
+  }
 }

@@ -16,7 +16,7 @@ export type TaskUpdateDraft = Readonly<{
 }>;
 type State = Readonly<{
   draft: TaskUpdateDraft;
-  busy: "prepare" | "execute" | "recover" | "discard" | null;
+  busy: "prepare" | "execute" | "recover" | "discard" | "start-new" | null;
   proposal: TaskUpdateProposalView | null;
   execution: TaskUpdateExecutionView | null;
   problem: WorkflowProblem | null;
@@ -155,7 +155,7 @@ export class TaskUpdateController {
       this.set({ draft: Object.freeze({ ...draft }) });
   };
   private async run<T>(
-    operation: "prepare" | "execute" | "recover" | "discard",
+    operation: "prepare" | "execute" | "recover" | "discard" | "start-new",
     invoke: (signal: AbortSignal) => Promise<WorkflowReply<T>>,
     accept: (value: T) => void,
   ) {
@@ -200,6 +200,19 @@ export class TaskUpdateController {
       if (this.request === request) this.request = undefined;
     }
   }
+  startNew = async (handle: object) => {
+    if (
+      !this.port.startNew ||
+      this.state.proposal?.handle !== handle ||
+      this.state.execution?.status !== "observed"
+    )
+      return;
+    await this.run(
+      "start-new",
+      (signal) => this.port.startNew!(handle, signal),
+      () => this.set(initial()),
+    );
+  };
   prepare = async () => {
     if (this.state.proposal) return;
     const draft = this.state.draft;

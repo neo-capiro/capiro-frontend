@@ -1,29 +1,66 @@
+import { isWatchProposal, watchFields, watchRow } from "./watch-view";
+import { isBizdevProposal, bizdevFields, bizdevRow } from "./bizdev-view";
+import {
+  isLegislativeDocumentProposal,
+  legislativeDocumentFields,
+  legislativeDocumentRow,
+} from "./legislative-document-view";
+import { savedNoteRow } from "./note-view";
+import {
+  isNativeMemoryOutcome,
+  isMemoryProposal,
+  memoryProposalFields,
+  memoryOutcomeLook,
+  memoryResultFields,
+} from "./memory-view";
+import {
+  isClientRecordProposal,
+  clientRecordFields,
+  clientRecordRow,
+} from "./client-record-view";
+import {
+  isLegiwatchProposal,
+  legiwatchFields,
+  legiwatchRow,
+} from "./legiwatch-view";
 import {
   intentsMetadata,
   type IntentsItem,
   type IntentsProposal,
+  type IntentsNativeProposal,
 } from "@capiro/meri-client/intents";
+import {
+  isResearchShareProposal,
+  researchShareFields,
+  researchShareRow,
+} from "./research-share-view";
+import {
+  isResearchActionProposal,
+  researchActionFields,
+  researchActionRow,
+} from "./research-action-view";
+import {
+  isMailSendProposal,
+  isNativeMailOutcome,
+  mailFields,
+  mailResultFields,
+  mailRow,
+} from "./mail-view";
 
-export type IntentTone = "neutral" | "success" | "warning" | "danger";
-/** What the person may do with a row: decide it, only read it (held), or nothing (closed). */
-export type IntentDecision = "approvable" | "held" | "closed";
-export type IntentField = Readonly<{ label: string; value: string }>;
-export type IntentRow = Readonly<{
-  deliveryId: string;
-  createdAt: string;
-  title: string;
-  status: string;
-  tone: IntentTone;
-  detail: string;
-  decision: IntentDecision;
-  /** Present only for a visible command proposal; the exact content the server retained. */
-  proposal: IntentsProposal | null;
-  fields: readonly IntentField[];
-  /** The owner's observed task or published document result. */
-  result: readonly IntentField[];
-}>;
-export type Viewer = Readonly<{ tenantId: string; actorId: string }>;
-
+import type {
+  IntentTone,
+  IntentDecision,
+  IntentField,
+  IntentRow,
+  Viewer,
+} from "./intent-view-types";
+export type {
+  IntentTone,
+  IntentDecision,
+  IntentField,
+  IntentRow,
+  Viewer,
+} from "./intent-view-types";
 const operationLabels: Readonly<Record<string, string>> = {
   create_task: "Create a task",
   create_word: "Prepare a document",
@@ -41,6 +78,7 @@ const actionLabels: Readonly<Record<string, string>> = {
   "document.draft": "Prepare a document",
   "memory.propose": "Propose a memory for review",
   "artifact.file": "File attachments to a client",
+  "mail.send": "Send an email",
 };
 const cap = (value: string, length = 400) =>
   value.length > length ? `${value.slice(0, length)}…` : value;
@@ -60,7 +98,17 @@ const day = (iso: string) => iso.slice(0, 10);
 export function proposalFields(
   proposal: IntentsProposal,
 ): readonly IntentField[] {
+  if (isWatchProposal(proposal)) return watchFields(proposal);
+  if (isBizdevProposal(proposal)) return bizdevFields(proposal);
+  if (isResearchShareProposal(proposal)) return researchShareFields(proposal);
+  if (isResearchActionProposal(proposal)) return researchActionFields(proposal);
+  if (isLegiwatchProposal(proposal)) return legiwatchFields(proposal);
+  if (isClientRecordProposal(proposal)) return clientRecordFields(proposal);
+  if (isMailSendProposal(proposal)) return mailFields(proposal);
+  if (isLegislativeDocumentProposal(proposal))
+    return legislativeDocumentFields(proposal);
   const command = proposal.command;
+  if (isMemoryProposal(proposal)) return memoryProposalFields(proposal);
   const args = command.arguments as Record<string, unknown>;
   const fields: IntentField[] = [
     { label: "Action", value: actionLabels[command.action] ?? command.action },
@@ -106,8 +154,12 @@ type Completed = Extract<
 >;
 function resultFields(
   execution: Completed,
-  action: IntentsProposal["command"]["action"],
+  action: IntentsNativeProposal["command"]["action"],
 ): readonly IntentField[] {
+  if (isNativeMailOutcome(execution.outcome))
+    return mailResultFields(execution.outcome);
+  if (isNativeMemoryOutcome(execution.outcome))
+    return memoryResultFields(execution.outcome);
   if ("version" in execution.outcome) {
     const { version } = execution.outcome;
     return [
@@ -161,6 +213,32 @@ function resultFields(
 }
 
 type Look = Readonly<{ status: string; tone: IntentTone; detail: string }>;
+/** The public receiver correlates these saved attachment IDs with the retained filing command. */
+function filingLinks(
+  proposal: IntentsNativeProposal,
+  execution: Completed | null,
+): IntentRow["fileLinks"] {
+  const outcome = execution?.outcome;
+  if (
+    proposal.command.action !== "artifact.file" ||
+    !outcome ||
+    !("execution" in outcome) ||
+    !("kind" in outcome.execution) ||
+    outcome.execution.kind !== "native-artifact-file" ||
+    !("result" in outcome) ||
+    !("files" in outcome.result)
+  )
+    return;
+  const { clientId } = proposal.command.arguments as Record<string, unknown>;
+  if (typeof clientId !== "string") return;
+  return outcome.result.files.flatMap((file) =>
+    file.status === "saved" &&
+    file.documentId !== undefined &&
+    file.fileName !== null
+      ? [{ clientId, documentId: file.documentId, fileName: file.fileName }]
+      : [],
+  );
+}
 function filingLook(execution: Completed): Look | null {
   if (
     !("result" in execution.outcome) ||
@@ -356,6 +434,18 @@ export function intentRow(
     return closed(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
+  if (item.kind === "watch_action") return watchRow(item, now, viewer);
+  if (item.kind === "bizdev_action") return bizdevRow(item, now, viewer);
+  if (item.kind === "legiwatch_action") return legiwatchRow(item, now, viewer);
+  if (item.kind === "legislative_document_action")
+    return legislativeDocumentRow(item, now, viewer);
+  if (item.kind === "saved_note") return savedNoteRow(item);
+  if (item.kind === "client_record_action")
+    return clientRecordRow(item, now, viewer);
+  if (item.kind === "research_share")
+    return researchShareRow(item, now, viewer);
+  if (item.kind === "research_action")
+    return researchActionRow(item, now, viewer);
   if (item.kind === "schedule_proposal")
     return closed(
       [
@@ -389,6 +479,10 @@ export function intentRow(
     };
   }
   if ("withheld" in item) return closed(plainLooks.withheldProposal);
+  if (item.kind === "proposal" && isMailSendProposal(item.proposal)) {
+    const mail = mailRow(item, now, viewer);
+    if (mail) return mail;
+  }
   const { look, decision } = proposalLook(item, now, viewer);
   const execution = item.execution;
   const completed =
@@ -401,6 +495,9 @@ export function intentRow(
     ...row,
     ...(item.phase === "completed" && !completed ? phaseLooks.unknown : look),
     ...(completed ? filingLook(completed) : null),
+    ...(completed && isNativeMemoryOutcome(completed.outcome)
+      ? memoryOutcomeLook(completed.outcome)
+      : null),
     decision,
     title: actionLabels[item.proposal.command.action] ?? row.title,
     proposal: item.proposal,
@@ -408,6 +505,20 @@ export function intentRow(
     result: completed
       ? resultFields(completed, item.proposal.command.action)
       : [],
+    fileLinks: filingLinks(item.proposal, completed),
+    ...(completed &&
+    "execution" in completed.outcome &&
+    "kind" in completed.outcome.execution &&
+    completed.outcome.execution.kind === "native-task" &&
+    "result" in completed.outcome &&
+    "id" in completed.outcome.result
+      ? {
+          task: {
+            id: completed.outcome.result.id,
+            clientId: completed.outcome.result.clientId,
+          },
+        }
+      : {}),
   };
 }
 

@@ -85,9 +85,19 @@ test("saved run current/proposed, sources, selection and explicit partial apply"
     .getByRole("button", { name: "Confirm apply", exact: true })
     .click();
   await expect(drawer).toContainText(
-    "1 of 2 selected findings are now accepted",
+    "Application partial: 1 applied, 0 already applied, 1 not applied.",
   );
-  expect(state.posts[0]?.body).toEqual({ findingIds: [findingId, advocacyId] });
+  expect(state.posts[0]?.body).toEqual({
+    requestId: expect.any(String),
+    expectedClientRevision: "a".repeat(64),
+    findings: [findingId, advocacyId].map((id) => ({
+      id,
+      revision: "b".repeat(64),
+    })),
+  });
+  await expect(drawer).toContainText(
+    "The source evidence could not be applied.",
+  );
   expect(unexpected).toEqual([]);
 });
 test("ignore with reason then restore uses persisted acknowledgments", async ({
@@ -143,9 +153,14 @@ test("matter assignment explicitly applies immediately with exact receipt", asyn
     .getByRole("button", { name: "Confirm assign", exact: true })
     .click();
   await expect(drawer).toContainText(
-    "Finding applied and matter assignment acknowledged",
+    "Application completed: 1 applied, 0 already applied, 0 not applied.",
   );
-  expect(state.posts[0]?.body).toEqual({ matterId });
+  expect(state.posts[0]?.body).toEqual({
+    matterId,
+    requestId: expect.any(String),
+    expectedClientRevision: "a".repeat(64),
+    findings: [{ id: advocacyId, revision: "b".repeat(64) }],
+  });
   expect(unexpected).toEqual([]);
 });
 test("wrong matter receipt cannot show assignment success", async ({
@@ -168,10 +183,10 @@ test("wrong matter receipt cannot show assignment success", async ({
     .getByRole("button", { name: "Confirm assign", exact: true })
     .click();
   await expect(drawer).toContainText("The request may have saved changes");
-  await expect(drawer).not.toContainText("assignment acknowledged");
+  await expect(drawer).not.toContainText("Application completed");
   expect(state.posts).toHaveLength(1);
 });
-test("lost apply response freezes repeat writes even after closing/reopening", async ({
+test("lost apply response survives reload and recovers the exact original request", async ({
   page,
 }) => {
   const { state } = await installEnrichment(page);
@@ -198,6 +213,17 @@ test("lost apply response freezes repeat writes even after closing/reopening", a
     drawer.getByRole("button", { name: "Select all new" }),
   ).toBeDisabled();
   expect(state.posts).toHaveLength(1);
+  drawer = await openReview(page);
+  await expect(drawer).toContainText("The request may have saved changes");
+  await drawer
+    .getByRole("button", { name: "Recover application result" })
+    .click();
+  await expect(drawer).toContainText("Application completed: 2 applied");
+  expect(state.posts).toHaveLength(2);
+  expect(state.posts[1]).toEqual(state.posts[0]);
+  await expect(
+    drawer.getByRole("button", { name: "Select all new" }),
+  ).toBeEnabled();
 });
 test("changed finding preflight preserves review and prevents POST", async ({
   page,
@@ -268,24 +294,225 @@ test("running review polls and cancellation is explicit and scoped", async ({
   );
   expect(state.posts[0]?.path).toMatch(/\/cancel$/);
 });
-test("empty/setup blocks unsafe new research and task retry", async ({
+test("empty setup requires explicit source selection before starting research", async ({
   page,
 }) => {
   const { state, unexpected } = await installEnrichment(page);
   state.run = null;
   const drawer = await openReview(page);
-  await expect(drawer).toContainText(
-    "current service can save website, identity mappings and facility districts before approval",
-  );
+  await expect(drawer).toContainText("Research saves provisional findings");
   await expect(
-    drawer.getByRole("button", { name: "Start research unavailable" }),
+    drawer.getByRole("button", { name: "Start selected research" }),
   ).toBeDisabled();
+  await drawer
+    .getByRole("checkbox", { name: "Public web", exact: true })
+    .check();
   await expect(
-    drawer.getByRole("button", { name: "Run again" }),
-  ).toBeDisabled();
+    drawer.getByRole("button", { name: "Start selected research" }),
+  ).toBeEnabled();
   expect(state.posts).toHaveLength(0);
   expect(unexpected).toEqual([]);
 });
+
+test("starting research submits only the selected sources, offered identities and ready documents", async ({
+  page,
+}) => {
+  const { state, unexpected } = await installEnrichment(page);
+  state.run = null;
+  const drawer = await openReview(page);
+  await drawer
+    .getByLabel("Research website", { exact: true })
+    .fill("https://research.example/");
+  await drawer
+    .getByRole("checkbox", { name: "Public web", exact: true })
+    .check();
+  await drawer.getByRole("checkbox", { name: "LDA", exact: true }).check();
+  await drawer
+    .getByRole("checkbox", { name: "Synthetic suggested identity" })
+    .check();
+  await expect(
+    drawer.getByRole("checkbox", { name: "Synthetic imported identity" }),
+  ).toBeChecked();
+  await drawer
+    .getByRole("checkbox", { name: "Program overview.txt · Ready" })
+    .check();
+  await drawer.getByRole("button", { name: "Start selected research" }).click();
+  await expect(drawer).toContainText("Research is still running");
+  expect(state.posts).toHaveLength(1);
+  expect(state.posts[0]?.body).toEqual({
+    requestId: expect.any(String),
+    sources: ["public_web", "lda"],
+    website: "https://research.example/",
+    ldaClientIds: [73],
+    attachmentIds: ["60000000-0000-4000-8000-000000000002"],
+  });
+  await expect(
+    drawer.getByRole("button", { name: "Run again" }),
+  ).toBeDisabled();
+  expect(unexpected).toEqual([]);
+});
+
+test("a lost start response survives reload and recovers the same request", async ({
+  page,
+}) => {
+  const { state } = await installEnrichment(page);
+  state.run = null;
+  state.dropStartOnce = true;
+  let drawer = await openReview(page);
+  await drawer
+    .getByRole("checkbox", { name: "Public web", exact: true })
+    .check();
+  await drawer.getByRole("button", { name: "Start selected research" }).click();
+  await expect(
+    drawer.getByRole("button", { name: "Recover research request" }),
+  ).toBeEnabled();
+  await page.reload();
+  drawer = await openReview(page);
+  await expect(
+    drawer.getByRole("button", { name: "Run again" }),
+  ).toBeDisabled();
+  await drawer
+    .getByRole("button", { name: "Recover research request" })
+    .click();
+  await expect(
+    drawer.getByRole("button", { name: "Recover research request" }),
+  ).toHaveCount(0);
+  expect(state.posts).toHaveLength(2);
+  expect(state.posts[1]).toEqual(state.posts[0]);
+  expect(state.starts.size).toBe(1);
+});
+test("run again opens saved choices and creates a new run only after submission", async ({
+  page,
+}) => {
+  const { state } = await installEnrichment(page);
+  const priorId = state.run!.id;
+  const drawer = await openReview(page);
+  await drawer.getByRole("button", { name: "Run again", exact: true }).click();
+  await expect(
+    drawer.getByRole("checkbox", { name: "Public web", exact: true }),
+  ).toBeChecked();
+  await expect(
+    drawer.getByRole("checkbox", { name: "LDA", exact: true }),
+  ).toBeChecked();
+  expect(state.posts).toHaveLength(0);
+  await drawer.getByRole("button", { name: "Start selected research" }).click();
+  await expect(drawer).toContainText("Research is still running");
+  expect(state.posts).toHaveLength(1);
+  expect(state.posts[0]?.body.requestId).not.toBe(priorId);
+});
+
+test("closing during research preflight prevents the start POST", async ({
+  page,
+}) => {
+  const { state } = await installEnrichment(page);
+  state.run = null;
+  const drawer = await openReview(page);
+  await drawer
+    .getByRole("checkbox", { name: "Public web", exact: true })
+    .check();
+  let release = () => {},
+    entered = false;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/fill-with-meri/setup", async (route) => {
+    entered = true;
+    await gate;
+    await route.fallback().catch(() => {});
+  });
+  await drawer.getByRole("button", { name: "Start selected research" }).click();
+  await expect.poll(() => entered).toBe(true);
+  await drawer.getByRole("button", { name: "Close review" }).click();
+  release();
+  await expect(drawer).toBeHidden();
+  expect(state.posts).toHaveLength(0);
+});
+
+test("a selected failed task queues an exact retry and refreshes current progress", async ({
+  page,
+}) => {
+  const { state } = await installEnrichment(page);
+  state.run!.status = "partial";
+  Object.assign(state.run!.tasks![0]!, {
+    status: "failed",
+    attempt: 3,
+    maxAttempts: 3,
+  });
+  const drawer = await openReview(page);
+  await drawer.getByRole("button", { name: "Retry task", exact: true }).click();
+  await expect(drawer).toContainText(
+    "Retry queued. The task ledger shows its current progress.",
+  );
+  expect(state.posts).toHaveLength(1);
+  expect(state.posts[0]?.body).toEqual({
+    requestId: expect.any(String),
+    expectedAttempt: 3,
+    expectedTaskType: "public_web",
+  });
+  expect(state.run!.tasks![0]!.status).toBe("queued");
+  await expect(
+    drawer.getByRole("button", { name: "Retry task", exact: true }),
+  ).toHaveCount(0);
+});
+
+test("lost retry recovery does not restart a later failed attempt", async ({
+  page,
+}) => {
+  const { state } = await installEnrichment(page);
+  state.run!.status = "partial";
+  state.dropRetryOnce = true;
+  Object.assign(state.run!.tasks![0]!, {
+    status: "failed",
+    attempt: 3,
+    maxAttempts: 3,
+  });
+  let drawer = await openReview(page);
+  await drawer.getByRole("button", { name: "Retry task", exact: true }).click();
+  await expect(
+    drawer.getByRole("button", { name: "Recover task retry" }),
+  ).toBeEnabled();
+  Object.assign(state.run!.tasks![0]!, {
+    status: "failed",
+    attempt: 4,
+    maxAttempts: 6,
+  });
+  state.run!.status = "partial";
+  await page.reload();
+  drawer = await openReview(page);
+  await expect(
+    drawer.getByRole("button", { name: "Retry task", exact: true }),
+  ).toBeDisabled();
+  await drawer.getByRole("button", { name: "Recover task retry" }).click();
+  await expect(drawer).toContainText(
+    "Retry queued. The task ledger shows its current progress.",
+  );
+  await expect(drawer).toContainText("Attempt 4 of 6");
+  expect(state.run!.tasks![0]!.status).toBe("failed");
+  expect(state.posts).toHaveLength(2);
+  expect(state.posts[1]).toEqual(state.posts[0]);
+  expect(state.retries.size).toBe(1);
+});
+
+test("changed task preflight refuses without a retry POST", async ({
+  page,
+}) => {
+  const { state } = await installEnrichment(page);
+  state.run!.status = "partial";
+  Object.assign(state.run!.tasks![0]!, {
+    status: "failed",
+    attempt: 3,
+    maxAttempts: 3,
+  });
+  const drawer = await openReview(page);
+  await expect(drawer).toContainText("Attempt 3 of 3");
+  state.run!.tasks![0]!.attempt = 4;
+  await drawer.getByRole("button", { name: "Retry task", exact: true }).click();
+  await expect(drawer).toContainText(
+    "The task changed. Refresh its saved status before retrying.",
+  );
+  expect(state.posts).toHaveLength(0);
+});
+
 test("wrong-client response hides review; unavailable read can retry", async ({
   page,
 }) => {

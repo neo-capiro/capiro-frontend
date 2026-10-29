@@ -140,7 +140,7 @@ export const fileStatus = (file: Attachment) =>
         ? "Text partial"
         : file.extractionStatus === "empty"
           ? "No readable text"
-          : (file.extractionStatus ?? "Text status unavailable");
+          : (file.extractionStatus ?? "Unknown");
 export function filterFiles(
   files: Attachment[],
   search: string,

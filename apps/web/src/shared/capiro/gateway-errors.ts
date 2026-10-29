@@ -18,6 +18,10 @@ import {
   workspaceBriefConflictCode,
   type WorkspaceBriefConflictCode,
 } from "./workspace-brief-copy-errors";
+import {
+  isResearchSharePublication,
+  researchShareWidgetRefusal,
+} from "./research-share-errors";
 
 export const jsonError = (
   status: number,
@@ -96,12 +100,16 @@ export async function serviceErrorResponse(
   if (
     !publicCapability &&
     response.status === 409 &&
-    (isWorkspaceBriefOperation(operation) || isOrdinarySaveOperation(operation))
+    (isWorkspaceBriefOperation(operation) ||
+      isOrdinarySaveOperation(operation) ||
+      isResearchSharePublication(operation))
   ) {
     try {
       const payload = await readBoundedJson(response.body, 4096, signal);
       if (signal.aborted)
         throw new DOMException("Request aborted.", "AbortError");
+      const widgetRefusal = researchShareWidgetRefusal(operation, payload);
+      if (widgetRefusal) return jsonError(409, widgetRefusal);
       code =
         workspaceBriefConflictCode(operation, response.status, payload) ??
         ordinarySaveConflictCode(operation, response.status, payload);

@@ -59,7 +59,7 @@ test("a newer authorized GET cannot be overwritten by a late held PUT receipt", 
   ).toBeEnabled();
   expect(writes).toBe(1);
 });
-test("a failed GET conceals the catalog but same-catalog recovery preserves the unsaved order", async ({
+test("a failed GET keeps the accessible roster and its unsaved order while refusing writes", async ({
   page,
 }) => {
   await layoutFixtures(page);
@@ -83,7 +83,17 @@ test("a failed GET conceals the catalog but same-catalog recovery preserves the 
   await expect(
     page.getByRole("button", { name: "Retry saved order", exact: true }),
   ).toBeVisible();
-  await expect.poll(() => positions(page)).toEqual([]);
+  // A failed read leaves the catalog unknown: the accessible roster and the
+  // local draft stay visible, but no move or save is offered.
+  await expect
+    .poll(() => positions(page))
+    .toEqual([cardIds[1], cardIds[0], cardIds[2]]);
+  await expect(
+    page.getByRole("button", { name: "Save order", exact: true }),
+  ).toBeDisabled();
+  await expect(
+    page.getByRole("button", { name: "Move Civic Two later", exact: true }),
+  ).toBeDisabled();
   failed = false;
   await page
     .getByRole("button", { name: "Retry saved order", exact: true })
@@ -92,7 +102,27 @@ test("a failed GET conceals the catalog but same-catalog recovery preserves the 
     .poll(() => positions(page))
     .toEqual([cardIds[1], cardIds[0], cardIds[2]]);
   await expect(
+    page.getByRole("button", { name: "Move Civic Two later", exact: true }),
+  ).toBeEnabled();
+  await expect(
     page.getByRole("button", { name: "Save order", exact: true }),
   ).toBeEnabled();
   expect(writes).toBe(0);
+});
+test("an authoritative empty order is never refilled from roster metadata", async ({
+  page,
+}) => {
+  await layoutFixtures(page);
+  await page.route(endpoint, (route) =>
+    route.fulfill({ json: layoutReceipt(1, []) }),
+  );
+  await page.goto("/__test/portfolio-layout");
+  await expect(page.locator("[data-client-id]")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /^Move / })).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Save order", exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByText("Saved profile ordering is unavailable", { exact: false }),
+  ).toHaveCount(0);
 });

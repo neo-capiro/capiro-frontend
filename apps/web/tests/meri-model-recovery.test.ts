@@ -10,6 +10,7 @@ import type { MeriConversationPort } from "../src/shared/meri-conversations/host
 import {
   conversationIntentJournal,
   storedSubmission,
+  type ConversationDraftRequest,
 } from "../src/shared/meri-conversations/query-journal";
 import {
   conversationTurnJournal,
@@ -231,7 +232,7 @@ it("the live next-turn hook seeds the exact target command before opening its se
         createElement(Probe),
       ),
     );
-    const capture = vi.fn((request: ConversationSubmitRequest) =>
+    const capture = vi.fn((request: ConversationDraftRequest) =>
       expect(request.modelSelection).toEqual(selection),
     );
     expect(await hook.start(source, input.prompt, capture, selection)).toBe(

@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import styles from "./module-ui.module.css";
 
 export type TableColumn<Row> = {
@@ -19,6 +19,7 @@ export function DataTable<Row>({
   selectedRowKey,
   onRowActivate,
   rowActionLabel,
+  scrollRegion = false,
 }: {
   rows: readonly Row[];
   columns: readonly TableColumn<Row>[];
@@ -28,9 +29,21 @@ export function DataTable<Row>({
   selectedRowKey?: string | null;
   onRowActivate?: (row: Row) => void;
   rowActionLabel?: (row: Row) => string;
+  /**
+   * Make an overflowing scroll container keyboard reachable as a named region.
+   * Off by default; when the table fits, no extra tab stop or role is added.
+   */
+  scrollRegion?: boolean;
 }) {
+  const [scrollRef, overflowing] = useScrollOverflow(scrollRegion);
   return (
-    <div className={styles.tableScroll}>
+    <div
+      ref={scrollRegion ? scrollRef : undefined}
+      className={styles.tableScroll}
+      tabIndex={overflowing ? 0 : undefined}
+      role={overflowing ? "region" : undefined}
+      aria-label={overflowing ? caption : undefined}
+    >
       <table className={styles.table}>
         <caption className="sr-only">{caption}</caption>
         <TableHeader columns={columns} />
@@ -97,6 +110,31 @@ export function DataTable<Row>({
       </table>
     </div>
   );
+}
+
+/**
+ * Track whether a scroll container actually overflows horizontally. Only an
+ * overflowing container becomes a tab stop, so a table that fits at desktop
+ * width adds no keyboard stop and no role.
+ */
+function useScrollOverflow(active: boolean) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [overflowing, setOverflowing] = useState(false);
+  useEffect(() => {
+    const wrapper = ref.current;
+    if (!wrapper || !active) {
+      setOverflowing(false);
+      return;
+    }
+    const sync = () =>
+      setOverflowing(wrapper.scrollWidth - wrapper.clientWidth > 1);
+    sync();
+    const observer = new ResizeObserver(sync);
+    observer.observe(wrapper);
+    for (const child of Array.from(wrapper.children)) observer.observe(child);
+    return () => observer.disconnect();
+  }, [active]);
+  return [ref, overflowing] as const;
 }
 
 /** Keep a column's accessible name when its visible label is blank by design. */

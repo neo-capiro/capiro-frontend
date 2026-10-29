@@ -1,4 +1,5 @@
 "use client";
+import { DocumentRevisionDraft } from "./DocumentRevisionDraft";
 import { useState, useSyncExternalStore } from "react";
 import { MeriComposer } from "../MeriComposer";
 import {
@@ -16,8 +17,12 @@ import type { useConversationSession } from "./useConversationSession";
 import { ModelSelectionPicker } from "../model-selection/ModelSelectionPicker";
 import modelStyles from "../model-selection/model-selection.module.css";
 import { SkillSelectionPicker } from "./SkillSelectionPicker";
+import { SiteWorkflowPicker } from "./SiteWorkflowPicker";
+import { WorkSelectionPicker } from "../work/WorkSelectionPicker";
+import { ProcedureSelectionPicker } from "./ProcedureSelectionPicker";
 import { ClientHandoffDraft } from "./ClientHandoffDraft";
 import { FeedbackContext } from "./feedback/FeedbackContext";
+import { useComposerAttachments } from "../uploads/useComposerAttachments";
 
 type Session = ReturnType<typeof useConversationSession>;
 
@@ -52,6 +57,12 @@ export function SessionComposer({
     !!session.continuation.busy;
   const selection =
     current?.controls.modelSelection ?? session.modelSelection ?? null;
+  const live = current?.controls ?? pendingConversationComposer(session, scope);
+  // The attachment slot follows the displayed conversation; a replaced port discards its results.
+  const attachments = useComposerAttachments(
+    current?.port ?? null,
+    live.attachUnavailable,
+  );
   return (
     <MeriComposer
       draft={session.accessLost ? "" : session.draft}
@@ -59,7 +70,8 @@ export function SessionComposer({
       textareaRef={session.textarea}
       assetSet="cited-answer"
       running={current?.running ?? false}
-      live={current?.controls ?? pendingConversationComposer(session, scope)}
+      live={live}
+      attachments={attachments}
       modelControl={
         <>
           {session.ready && (
@@ -78,6 +90,23 @@ export function SessionComposer({
               disabled={modelDisabled}
             />
           )}
+          {session.ready && (
+            <DocumentRevisionDraft
+              key={JSON.stringify(session.ready.port.context)}
+              context={session.ready.port.context}
+              selection={session.skillSelection}
+              disabled={modelDisabled}
+              onChange={(selection) => {
+                session.setSkillSelection(selection);
+                if (
+                  session.initialDraft.error() ||
+                  JSON.stringify(session.initialDraft.selection()) !==
+                    JSON.stringify(selection)
+                )
+                  throw Error("Selection could not be retained");
+              }}
+            />
+          )}
           <SkillSelectionPicker
             key={JSON.stringify(session.skillSelection)}
             selection={session.skillSelection}
@@ -85,6 +114,38 @@ export function SessionComposer({
             disabled={modelDisabled}
             onChange={session.setSkillSelection}
           />
+          {current && (
+            <SiteWorkflowPicker
+              key={`website:${JSON.stringify(current.port.context)}`}
+              conversationId={current.port.context.conversationId}
+              selection={session.skillSelection}
+              disabled={modelDisabled}
+              onChange={session.setSkillSelection}
+            />
+          )}
+          {/* Start Work / Delegate is additive: it never withdraws another selected input. */}
+          <WorkSelectionPicker
+            key={JSON.stringify(session.skillSelection.work ?? null)}
+            selection={session.skillSelection}
+            disabled={modelDisabled}
+            onChange={session.setSkillSelection}
+          />
+          {/*
+            The native procedure control lists what Core currently offers this account and tenant, and
+            retires a choice the catalog no longer lists. Listing is not execution: the canonical
+            receiver still decides what a draft may carry, and Core re-resolves the exact procedure,
+            version, digest and client access when the message is actually sent.
+          */}
+          {session.ready && (
+            <ProcedureSelectionPicker
+              key={`procedure:${JSON.stringify(session.ready.port.context)}`}
+              tenantId={session.ready.port.context.tenantId}
+              lifetime={JSON.stringify(session.ready.port.context)}
+              selection={session.skillSelection}
+              disabled={modelDisabled}
+              onChange={session.setSkillSelection}
+            />
+          )}
           {!session.accessLost && session.modelCatalog && (
             <div className={modelStyles.slot}>
               {modelDocument ? (

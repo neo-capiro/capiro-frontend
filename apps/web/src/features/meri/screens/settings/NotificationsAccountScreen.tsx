@@ -1,9 +1,11 @@
 "use client";
+import Link from "next/link";
 import { useEffect } from "react";
 import {
   openHeaderOverlay,
   type HeaderOverlay,
 } from "../../../../shared/shell/header-overlays";
+import { NotificationsHost } from "../../notifications/NotificationsHost";
 import ui from "../../ui/meri-ui.module.css";
 import { SettingsCard } from "./SettingsCard";
 import { SettingsFields } from "./SettingsFields";
@@ -34,8 +36,12 @@ export type NotificationsAccountView = {
 };
 
 /**
- * 09.05 Notifications and account menu. The Updates panel and Account menu are the
- * header's own overlays, so this page opens them rather than drawing a second copy.
+ * 09.05 Notifications and account menu.
+ *
+ * When the fixture header supplies the Updates panel and Account menu overlays,
+ * this page opens those overlays as the design reference shows. Otherwise the page
+ * is the live Updates surface: real revisioned notification preferences over
+ * observed rows, and a real account route instead of a preview control.
  */
 export function NotificationsAccountScreen({
   chrome,
@@ -62,18 +68,22 @@ export function NotificationsAccountScreen({
           title={view.updates.title}
           description={view.updates.description}
         >
-          <SettingsFields fields={view.updates.fields} mode="inactive" />
-          <SettingsCallout notice={view.updates.notice} />
-          <button
-            type="button"
-            className={ui.primary}
-            aria-haspopup="dialog"
-            disabled={!chrome.headerOverlays}
-            title={chrome.headerOverlays ? undefined : chrome.unavailable}
-            onClick={() => openHeaderOverlay("updates")}
-          >
-            Preview Updates panel
-          </button>
+          {chrome.headerOverlays ? (
+            <>
+              <SettingsFields fields={view.updates.fields} mode="inactive" />
+              <SettingsCallout notice={view.updates.notice} />
+              <button
+                type="button"
+                className={ui.primary}
+                aria-haspopup="dialog"
+                onClick={() => openHeaderOverlay("updates")}
+              >
+                Preview Updates panel
+              </button>
+            </>
+          ) : (
+            <NotificationsHost unavailable={chrome.unavailable} />
+          )}
         </SettingsCard>
       }
       supporting={
@@ -83,19 +93,27 @@ export function NotificationsAccountScreen({
             description={view.account.description}
             emphasis
           >
-            <SettingsFields fields={view.account.fields} mode="inactive" />
-            <button
-              type="button"
-              className={ui.outline}
-              aria-haspopup="menu"
-              disabled={!chrome.headerOverlays}
-              title={chrome.headerOverlays ? undefined : chrome.unavailable}
-              onClick={() => openHeaderOverlay("account")}
-            >
-              Open profile menu
-            </button>
+            {chrome.headerOverlays ? (
+              <>
+                <SettingsFields fields={view.account.fields} mode="inactive" />
+                <button
+                  type="button"
+                  className={ui.outline}
+                  aria-haspopup="menu"
+                  onClick={() => openHeaderOverlay("account")}
+                >
+                  Open profile menu
+                </button>
+              </>
+            ) : (
+              <Link className={ui.outline} href="/settings/personal">
+                Open account settings
+              </Link>
+            )}
           </SettingsCard>
-          <SettingsCallout notice={view.empty} />
+          {chrome.headerOverlays ? (
+            <SettingsCallout notice={view.empty} />
+          ) : null}
         </>
       }
     />

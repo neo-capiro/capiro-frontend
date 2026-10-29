@@ -9,6 +9,9 @@ export type OwnerCorrectionItem = Readonly<{
   scope: "user_private";
   clientId: string | null;
   updatedAt: string;
+  displayTitle?: string;
+  contentStatus?: "available" | "metadata_only" | "empty";
+  contentLimitation?: string | null;
 }>;
 
 export type OwnerCorrectionPage = Readonly<{
@@ -31,6 +34,26 @@ export function ownerCorrectionHoldKey(
 
 const uuid = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i;
 const microsecondUtc = /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{6}Z$/;
+
+/** Core classifies stored content; the browser never guesses from JSON or rewrites it. */
+function receivePresentation(item: Record<string, unknown>) {
+  const keys = ["displayTitle", "contentStatus", "contentLimitation"];
+  if (keys.every((key) => !Object.hasOwn(item, key))) return {};
+  const { displayTitle, contentStatus, contentLimitation } = item;
+  if (
+    !keys.every((key) => Object.hasOwn(item, key)) ||
+    typeof displayTitle !== "string" ||
+    !displayTitle.trim() ||
+    (contentStatus !== "available" &&
+      contentStatus !== "metadata_only" &&
+      contentStatus !== "empty") ||
+    (contentStatus === "available"
+      ? contentLimitation !== null
+      : typeof contentLimitation !== "string" || !contentLimitation.trim())
+  )
+    throw new Error("Invalid memory presentation");
+  return { displayTitle, contentStatus, contentLimitation };
+}
 
 export function receiveOwnerCorrectionPage(
   value: unknown,
@@ -76,6 +99,7 @@ export function receiveOwnerCorrectionPage(
       scope: "user_private" as const,
       clientId: item.clientId,
       updatedAt: item.updatedAt,
+      ...receivePresentation(item),
     } as OwnerCorrectionItem;
   });
   if (items.length === 0 && page.nextCursor !== null)

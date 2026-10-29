@@ -1,5 +1,10 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { Fragment, type ReactElement } from "react";
+import {
+  Children,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import { LiveNewConversation } from "../src/shared/shell/LiveNewConversation";
 import {
   readFirstChatIntent,
@@ -20,6 +25,7 @@ vi.mock("react", async (importOriginal) => ({
   ...(await importOriginal<typeof import("react")>()),
   useContext: () => mocks.session,
   useState: () => [null, mocks.error],
+  useId: () => "synthetic-availability-reason",
 }));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: mocks.push }),
@@ -41,6 +47,14 @@ vi.mock("../src/shared/session/SelectedClient", () => ({
     state: mocks.state,
     client: { id: mocks.clientId, status: mocks.status },
   }),
+}));
+// The asynchronous fallback is exercised with actual hooks in the browser suite.
+vi.mock("../src/shared/shell/DefaultConversationStart", () => ({
+  DefaultConversationStart: ({
+    children,
+  }: {
+    children: (value: { disabled: boolean; title: string }) => ReactNode;
+  }) => children({ disabled: false, title: "Use your saved default client" }),
 }));
 const account = {
   tenantId: "11111111-1111-4111-8111-111111111111",
@@ -77,24 +91,25 @@ function button() {
     conversationEnabled: true,
     firstChatBootstrapEnabled: true,
   }) as ReactElement<Record<string, unknown>>;
-  for (let depth = 0; depth < 5; depth++) {
+  for (let depth = 0; depth < 8; depth++) {
     if (element.type === "button")
       return element.props as {
         disabled: boolean;
         onClick?: () => void;
         title?: string;
       };
-    if (element.type === Fragment)
-      element = (
-        element.props.children as ReactElement<Record<string, unknown>>[]
-      )[0]!;
-    else {
-      expect(typeof element.type).toBe("function");
+    if (typeof element.type === "function") {
       element = (
         element.type as (
           props: Record<string, unknown>,
         ) => ReactElement<Record<string, unknown>>
       )(element.props);
+    } else {
+      const child = Children.toArray(element.props.children as ReactNode).find(
+        isValidElement,
+      );
+      expect(child).toBeDefined();
+      element = child as ReactElement<Record<string, unknown>>;
     }
   }
   throw Error("New conversation button missing");
@@ -156,16 +171,23 @@ it.each([
   expect(entries.size).toBe(0);
   expect(mocks.push).not.toHaveBeenCalled();
 });
-it.each(["loading", "unavailable", "no-selection"])(
-  "refuses %s client selection",
-  (state) => {
-    mocks.state = state;
-    const b = button();
-    expect(b.disabled).toBe(true);
-    b.onClick?.();
-    expect(entries.size).toBe(0);
-  },
-);
+it.each(["loading", "unavailable"])("refuses %s client selection", (state) => {
+  mocks.state = state;
+  const b = button();
+  expect(b.disabled).toBe(true);
+  b.onClick?.();
+  expect(entries.size).toBe(0);
+});
+it("offers the saved-default path only when no scope is selected", () => {
+  mocks.state = "no-selection";
+  expect(button()).toMatchObject({
+    disabled: false,
+    title: "Use your saved default client",
+  });
+  expect(entries.size).toBe(0);
+  mocks.search = "clientId=unavailable";
+  expect(button().disabled).toBe(true);
+});
 it("holds archived clients, refreshing accounts and signed-out sessions", () => {
   for (const condition of ["archived", "fetching", "signed-out"]) {
     mocks.status = condition === "archived" ? "archived" : "active";

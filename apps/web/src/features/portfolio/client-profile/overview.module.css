@@ -129,12 +129,12 @@
   white-space: nowrap;
 }
 .health:global(.card) {
-  height: 104px;
+  min-height: 104px;
   padding: 14px 16px;
   display: grid;
   align-content: start;
   gap: 2px;
-  overflow: hidden;
+  overflow: visible;
 }
 .health > strong {
   font-size: 20px;
@@ -204,6 +204,11 @@
   justify-content: flex-start;
   max-width: 100%;
   padding-left: 0;
+  /* The list sits beside the map and gets narrow: break between words only, so
+     facility names never split mid-word ("Melbourn/e"). */
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
 }
 .block {
   display: block;

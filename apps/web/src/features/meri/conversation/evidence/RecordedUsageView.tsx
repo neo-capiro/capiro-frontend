@@ -168,7 +168,7 @@ export function RecordedUsageView({
   reads,
 }: {
   runId: string;
-  reads: ConversationReads;
+  reads: Pick<ConversationReads, "usage">;
 }) {
   const read = useCallback(
     (signal: AbortSignal) => reads.usage(runId, signal),

@@ -45,7 +45,11 @@ export function observeActivityCompletion(
   });
   return {
     async invalidate() {
-      if (isCurrent()) await cache.invalidateQueries({ queryKey, exact: true });
+      if (isCurrent())
+        await Promise.all([
+          cache.invalidateQueries({ queryKey, exact: true }),
+          cache.invalidateQueries({ queryKey: [...queryKey, "metrics"] }),
+        ]);
     },
     dispose() {
       current = false;

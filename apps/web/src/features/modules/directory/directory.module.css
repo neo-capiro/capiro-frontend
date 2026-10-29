@@ -52,6 +52,9 @@
   gap: 20px;
   align-items: start;
 }
+.single {
+  min-width: 0;
+}
 .personnelSplit {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 340px);
@@ -153,6 +156,7 @@
 }
 .avatar {
   display: grid;
+  flex: 0 0 30px;
   place-items: center;
   width: 30px;
   height: 30px;
@@ -160,6 +164,43 @@
   background: #f5f5f4;
   color: #78716c;
   font-size: 11px;
+}
+.photo {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f5f5f4;
+}
+.profilePhoto {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f5f5f4;
+}
+.profileInitials {
+  display: grid;
+  flex: 0 0 44px;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f5f5f4;
+  color: #78716c;
+  font-size: 14px;
+}
+.previewHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.titlePhoto {
+  display: flex;
+  margin-left: 10px;
 }
 .link {
   border: 0;
@@ -172,6 +213,16 @@
 }
 .link:hover {
   text-decoration: underline;
+}
+.personLabel {
+  min-width: 0;
+}
+.personLabel > strong,
+.personLabel > div {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .staff {
   margin-left: 34px;
@@ -234,11 +285,17 @@
   font-size: 14px;
 }
 @media (max-width: 900px) {
+  /*
+   * Keep the explicit zero minimum the desktop tracks above use. A bare `1fr` leaves the
+   * track's automatic minimum at the panel's min-content, so selecting a contact (which
+   * switches .single to .split) sized the single column to the table's min-content and made
+   * the whole document scroll horizontally.
+   */
   .split {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .personnelSplit {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .staff {
     grid-template-columns: 1fr;

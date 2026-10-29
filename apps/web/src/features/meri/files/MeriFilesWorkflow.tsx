@@ -10,6 +10,7 @@ import { DocumentEditor } from "./DocumentEditor";
 import { WorkbookEditor } from "./WorkbookEditor";
 import { DocumentVersionPanel } from "./DocumentVersionPanel";
 import { DocumentNotice } from "./DocumentNotice";
+import { FederalWorkbench } from "./FederalWorkbench";
 import styles from "./files.module.css";
 
 /** The host supplies a disposal identity and operation, never browser-selected authority. */
@@ -39,12 +40,13 @@ export function MeriFilesWorkflow({
       ) : (
         <section
           className={styles.notice}
-          aria-label="Document service unavailable"
+          aria-label="Document creation unavailable"
         >
-          <h2>Document service unavailable</h2>
+          <h2>Document creation unavailable</h2>
           <p>
-            A configured document service and a verified connection are required
-            to create, revise, inspect or download a version.
+            A configured document creation service and a verified connection are
+            required to create or revise a version. Saved-file reads use the
+            library connection above.
           </p>
           <p>
             No document operation runs when you open this page. The connection
@@ -84,6 +86,9 @@ function ConnectedFiles({
   return (
     <>
       <DocumentNotice state={state} />
+      {operation === "create_word" && port.federal && (
+        <FederalWorkbench port={port.federal} />
+      )}
       <div className={styles.columns}>
         {operation === "create_word" ? (
           <DocumentEditor

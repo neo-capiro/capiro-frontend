@@ -1,21 +1,22 @@
 "use client";
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
+import type { z } from "zod";
 import type {
   ResearchDetail,
   ResearchMember,
+  researchReceipt,
 } from "../../../shared/capiro/operations/research-schemas";
 import {
   ActionButton,
   Badge,
   DataTable,
-  Field,
-  Modal,
   Panel,
-  TextArea,
-  TextInput,
 } from "../../../shared/module-ui";
+import { MemberDiscovery } from "./members/MemberDiscovery";
+import { MemberDecision } from "./members/MemberDecision";
+import { unresolvedMember } from "./members/member-discovery";
 import styles from "./research.module.css";
+
 export function ResearchMembers({
   portfolio,
   onReload,
@@ -23,70 +24,26 @@ export function ResearchMembers({
   portfolio: ResearchDetail;
   onReload: () => void;
 }) {
-  const api = useCapiro();
   const [adding, setAdding] = useState(false);
-  const [kind, setKind] =
-    useState<ResearchMember["targetKind"]>("program_element");
-  const [targetId, setTargetId] = useState("");
-  const [label, setLabel] = useState("");
-  const [decision, setDecision] = useState<ResearchMember>();
-  const [reason, setReason] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string>();
+  const [resolving, setResolving] = useState<ResearchMember>();
+  const [selected, setSelected] = useState<string[]>([]);
+  const [decision, setDecision] = useState<{
+    members: ResearchMember[];
+    disposition: "included" | "excluded";
+  }>();
+  const [receipt, setReceipt] = useState<z.infer<typeof researchReceipt>>();
   const editable =
     portfolio.myRole !== "viewer" && portfolio.lifecycle === "active";
-  async function add() {
-    setBusy(true);
-    setError(undefined);
-    try {
-      await api.request("research.members.add", {
-        params: { id: portfolio.id },
-        body: {
-          expectedRevision: portfolio.revision,
-          idempotencyKey: crypto.randomUUID(),
-          targetKind: kind,
-          targetId,
-          label: label || null,
-        },
-      });
-      setAdding(false);
-      setTargetId("");
-      setLabel("");
-      onReload();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Could not add member");
-    } finally {
-      setBusy(false);
-    }
-  }
-  async function decide() {
-    if (!decision) return;
-    setBusy(true);
-    setError(undefined);
-    try {
-      await api.request("research.members.decide", {
-        params: { id: portfolio.id },
-        body: {
-          expectedRevision: portfolio.revision,
-          idempotencyKey: crypto.randomUUID(),
-          decisions: [
-            {
-              memberId: decision.id,
-              disposition:
-                decision.disposition === "included" ? "excluded" : "included",
-              reason,
-            },
-          ],
-        },
-      });
-      setDecision(undefined);
-      setReason("");
-      onReload();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Could not apply decision");
-    } finally {
-      setBusy(false);
-    }
+  const chosen = portfolio.members.filter((member) =>
+    selected.includes(member.id),
+  );
+  function saved(next: z.infer<typeof researchReceipt>) {
+    setReceipt(next);
+    setAdding(false);
+    setResolving(undefined);
+    setDecision(undefined);
+    setSelected([]);
+    onReload();
   }
   return (
     <>
@@ -102,137 +59,175 @@ export function ResearchMembers({
           </ActionButton>
         }
       >
+        <div className={styles.toolbar}>
+          <span>{chosen.length} selected · up to 100 per decision</span>
+          <ActionButton
+            disabled={
+              !editable || !chosen.length || chosen.some(unresolvedMember)
+            }
+            onClick={() =>
+              setDecision({ members: chosen, disposition: "included" })
+            }
+          >
+            Include selected
+          </ActionButton>
+          <ActionButton
+            disabled={!editable || !chosen.length}
+            onClick={() =>
+              setDecision({ members: chosen, disposition: "excluded" })
+            }
+          >
+            Exclude selected
+          </ActionButton>
+          <ActionButton
+            disabled={!selected.length}
+            onClick={() => setSelected([])}
+          >
+            Clear selection
+          </ActionButton>
+        </div>
         <DataTable
           rows={portfolio.members}
-          rowKey={(r) => r.id}
+          rowKey={(row) => row.id}
           caption="Research portfolio members"
           columns={[
             {
+              key: "select",
+              label: "Select",
+              render: (row) => (
+                <input
+                  type="checkbox"
+                  aria-label={`Select member ${row.label || row.targetId}`}
+                  checked={selected.includes(row.id)}
+                  disabled={
+                    !editable ||
+                    (!selected.includes(row.id) && selected.length >= 100)
+                  }
+                  onChange={(event) =>
+                    setSelected(
+                      event.target.checked
+                        ? [...selected, row.id]
+                        : selected.filter((id) => id !== row.id),
+                    )
+                  }
+                />
+              ),
+            },
+            {
               key: "label",
               label: "Member",
-              render: (r) => <strong>{r.label || r.targetId}</strong>,
+              render: (row) => <strong>{row.label || row.targetId}</strong>,
             },
             {
               key: "kind",
               label: "Type",
-              render: (r) => r.targetKind.replaceAll("_", " "),
+              render: (row) => row.targetKind.replaceAll("_", " "),
             },
             {
               key: "origin",
               label: "Origin",
-              render: (r) => r.origin || "Not provided",
+              render: (row) => row.origin || "Not provided",
             },
             {
               key: "status",
               label: "Disposition",
-              render: (r) => <Badge>{r.disposition}</Badge>,
+              render: (row) => (
+                <>
+                  <Badge>{row.disposition}</Badge>
+                  {unresolvedMember(row) &&
+                    row.disposition !== "unresolved" && (
+                      <p>Resolution required before inclusion</p>
+                    )}
+                </>
+              ),
             },
-            { key: "reason", label: "Reason", render: (r) => r.reason || "—" },
+            {
+              key: "reason",
+              label: "Reason",
+              render: (row) => row.reason || "—",
+            },
             {
               key: "action",
               label: "Decision",
-              render: (r) => (
-                <ActionButton
-                  disabled={!editable || busy || r.disposition === "unresolved"}
-                  onClick={() => {
-                    setDecision(r);
-                    setReason("");
-                  }}
-                >
-                  {r.disposition === "included" ? "Exclude" : "Include"}
-                </ActionButton>
-              ),
+              render: (row) =>
+                unresolvedMember(row) ? (
+                  <ActionButton
+                    disabled={!editable}
+                    onClick={() => setResolving(row)}
+                  >
+                    Resolve
+                  </ActionButton>
+                ) : (
+                  <ActionButton
+                    disabled={!editable}
+                    onClick={() =>
+                      setDecision({
+                        members: [row],
+                        disposition:
+                          row.disposition === "included"
+                            ? "excluded"
+                            : "included",
+                      })
+                    }
+                  >
+                    {row.disposition === "included" ? "Exclude" : "Include"}
+                  </ActionButton>
+                ),
             },
           ]}
         />
       </Panel>
-      {error && (
-        <p role="alert">
-          {error}{" "}
-          <ActionButton onClick={onReload}>Reload portfolio</ActionButton>
-        </p>
-      )}
-      <Modal
-        open={adding}
-        onOpenChange={setAdding}
-        title="Add portfolio member"
-        footer={
-          <ActionButton
-            primary
-            disabled={busy || !targetId.trim()}
-            onClick={add}
-          >
-            Add member
-          </ActionButton>
-        }
-      >
-        <div className={styles.form}>
-          <Field label="Type" htmlFor="research-kind">
-            <select
-              id="research-kind"
-              className={styles.select}
-              value={kind}
-              onChange={(e) => setKind(e.target.value as typeof kind)}
-            >
-              {[
-                "program",
-                "program_element",
-                "project",
-                "budget_line",
-                "award",
-              ].map((k) => (
-                <option key={k}>{k}</option>
-              ))}
-            </select>
-          </Field>
-          <Field label="Source identifier" htmlFor="research-target">
-            <TextInput
-              id="research-target"
-              value={targetId}
-              onChange={(e) => setTargetId(e.target.value)}
-              maxLength={300}
-            />
-          </Field>
-          <Field label="Label" htmlFor="research-label">
-            <TextInput
-              id="research-label"
-              value={label}
-              onChange={(e) => setLabel(e.target.value)}
-              maxLength={500}
-            />
-          </Field>
-        </div>
-      </Modal>
-      <Modal
-        open={!!decision}
-        onOpenChange={(v) => {
-          if (!v) setDecision(undefined);
-        }}
-        title={
-          decision?.disposition === "included"
-            ? "Exclude member"
-            : "Include member"
-        }
-        footer={
-          <ActionButton
-            primary
-            disabled={busy || !reason.trim()}
-            onClick={decide}
-          >
-            Confirm decision
-          </ActionButton>
-        }
-      >
-        <p>{decision?.label || decision?.targetId}</p>
-        <Field label="Reason" htmlFor="research-reason">
-          <TextArea
-            id="research-reason"
-            value={reason}
-            onChange={(e) => setReason(e.target.value)}
-            maxLength={4000}
+      {receipt && (
+        <Panel
+          title="Member decision receipt"
+          description={`Portfolio revision ${receipt.resultingRevision} · ${receipt.replayed ? "Replayed receipt" : "Confirmed"}`}
+        >
+          <DataTable
+            caption="Member operation outcomes"
+            rows={receipt.outcomes}
+            rowKey={(row) => `${row.targetType}:${row.id ?? row.targetId}`}
+            columns={[
+              {
+                key: "member",
+                label: "Member",
+                render: (row) =>
+                  portfolio.members.find((member) => member.id === row.id)
+                    ?.label || row.targetId,
+              },
+              { key: "status", label: "Result", render: (row) => row.status },
+              {
+                key: "message",
+                label: "Detail",
+                render: (row) => row.message || "—",
+              },
+            ]}
           />
-        </Field>
-      </Modal>
+        </Panel>
+      )}
+      {(adding || resolving) && (
+        <MemberDiscovery
+          key={`${portfolio.id}:${resolving?.id ?? "add"}`}
+          portfolio={portfolio}
+          resolving={resolving}
+          onClose={() => {
+            setAdding(false);
+            setResolving(undefined);
+          }}
+          onSaved={saved}
+          onReload={onReload}
+        />
+      )}
+      {decision && (
+        <MemberDecision
+          key={`${portfolio.id}:${decision.disposition}:${decision.members.map((member) => member.id).join(",")}`}
+          portfolio={portfolio}
+          members={decision.members}
+          disposition={decision.disposition}
+          onClose={() => setDecision(undefined)}
+          onSaved={saved}
+          onReload={onReload}
+        />
+      )}
     </>
   );
 }

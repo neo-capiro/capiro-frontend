@@ -2,10 +2,9 @@ import { z } from "zod";
 import type { RunBinding } from "@capiro/meri-contracts";
 import {
   receiveConversationRequest,
-  type ConversationSubmitRequest,
 } from "@capiro/meri-contracts/conversation-application";
 import { receiveConversationHistoryRequest } from "@capiro/meri-contracts/conversation-history";
-import { skillSelectionFields } from "./query-journal";
+import { skillSelectionFields, type ConversationDraftRequest } from "./query-journal";
 import {
   tabRecord,
   TabJournalUnavailable,
@@ -60,8 +59,9 @@ export function persistedTurn(scope: TabScope, storage?: TabStorage) {
           }
         : undefined;
     },
+    /** The retained draft is admitted by the public receiver here, never stored as a local shape. */
     write(
-      intent: ConversationSubmitRequest & {
+      intent: ConversationDraftRequest & {
         source: Pick<
           RunBinding,
           "tenantId" | "actorId" | "conversationId" | "runId"

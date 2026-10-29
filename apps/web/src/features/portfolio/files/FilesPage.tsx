@@ -20,6 +20,7 @@ import { UploadDialog } from "./UploadDialog";
 import { FileStorageUsage } from "./FileStorageUsage";
 import { DocumentState } from "./DocumentState";
 import { useLinkedFileArrival } from "./linked-arrival";
+import { MeriArtifactStarterDialog } from "./MeriArtifactStarterDialog";
 import styles from "./files.module.css";
 export function FilesPage({
   clientId,
@@ -75,6 +76,7 @@ export function FilesPage({
     deleteFile?: Attachment;
   }>();
   const [uploadView, setUploadView] = useState<string>();
+  const [meriStarter, setMeriStarter] = useState(false);
   const [folderAccess, setFolderAccess] = useState<{
     view: string;
     folder: string | null;
@@ -152,8 +154,16 @@ export function FilesPage({
           </button>
           <button
             className="button primary"
-            disabled
-            title="Meri starter contract is awaiting coordination"
+            disabled={!destinations.meri}
+            title={
+              destinations.meri
+                ? "Draft a document with Meri"
+                : "Meri destination is not configured."
+            }
+            onClick={() => {
+              arrival.dismiss();
+              setMeriStarter(true);
+            }}
           >
             Create with Meri
           </button>
@@ -427,6 +437,15 @@ export function FilesPage({
         <UploadDialog
           clientId={clientId}
           onClose={() => setUploadView(undefined)}
+        />
+      )}
+      {meriStarter && (
+        <MeriArtifactStarterDialog
+          open
+          onOpenChange={setMeriStarter}
+          clientId={clientId}
+          clientName={client.data?.name ?? "this client"}
+          destinations={destinations}
         />
       )}
       {!destinations.meri && <small>Meri destination is not configured.</small>}

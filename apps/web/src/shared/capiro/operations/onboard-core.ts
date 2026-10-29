@@ -1,22 +1,15 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
 import {
-  firmMemoryTypeSchema,
   importCandidatesSchema,
   importChunkResultSchema,
-  memoryFileDefSchema,
-  memoryReviewReceiptSchema,
-  memorySectionsFileSchema,
   registrantHitSchema,
   tenantRegistrantSchema,
 } from "./onboard-core-schemas";
 
 const firmSource =
   "apps/api/src/intelligence/firm-onboarding.controller.ts + firm-onboarding.service.ts @7b5a9644d30d22389b23f0e07f923c8925682047";
-const memorySource =
-  "apps/api/src/memory/memory.controller.ts @7b5a9644d30d22389b23f0e07f923c8925682047";
 const empty = z.object({}).strict();
-const memoryParams = z.object({ type: firmMemoryTypeSchema }).strict();
 export const onboardCoreOperations = {
   "onboard.core.registrants": defineOperation({
     service: "core",
@@ -72,40 +65,5 @@ export const onboardCoreOperations = {
       })
       .strict(),
     response: importChunkResultSchema,
-  }),
-  "onboard.core.memoryCatalog": defineOperation({
-    service: "core",
-    method: "GET",
-    path: "/memory/catalog",
-    source: memorySource,
-    request: empty,
-    response: z.array(memoryFileDefSchema),
-  }),
-  "onboard.core.memoryRead": defineOperation({
-    service: "core",
-    method: "GET",
-    path: "/memory/items/:type/firm/sections",
-    source: memorySource,
-    request: z.object({ params: memoryParams }).strict(),
-    response: memorySectionsFileSchema,
-  }),
-  "onboard.core.memoryWrite": defineOperation({
-    service: "core",
-    method: "PUT",
-    path: "/memory/items/:type/firm/sections",
-    source: memorySource,
-    request: z
-      .object({
-        params: memoryParams,
-        body: z
-          .object({
-            sections: z.array(
-              z.object({ key: z.string(), body: z.string() }).strict(),
-            ),
-          })
-          .strict(),
-      })
-      .strict(),
-    response: memoryReviewReceiptSchema,
   }),
 } as const;

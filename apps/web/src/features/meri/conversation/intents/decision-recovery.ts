@@ -1,10 +1,21 @@
+import { isWatchProposal } from "./watch-view";
+import { isBizdevProposal } from "./bizdev-view";
+import { isLegislativeDocumentProposal } from "./legislative-document-view";
+import { isClientRecordProposal } from "./client-record-view";
+import { isLegiwatchProposal } from "./legiwatch-view";
 import { z } from "zod";
 import {
   receiveIntentsRequest,
   type IntentsDecideRequest,
   type IntentsProposal,
+  type IntentsDecideResponse,
 } from "@capiro/meri-client/intents";
 import type { IntentsAccess } from "@/shared/meri-intents/access";
+import {
+  isResearchShareProposal,
+  intentDecisionSettled,
+} from "./research-share-view";
+import { isResearchActionProposal } from "./research-action-view";
 import {
   acknowledgeRecovery,
   readRecovery,
@@ -59,14 +70,24 @@ export function intentDecisionRecovery(
     proposal: IntentsProposal,
     deliveryId: string,
   ) {
+    const sharing =
+      isWatchProposal(proposal) ||
+      isBizdevProposal(proposal) ||
+      isResearchShareProposal(proposal) ||
+      isResearchActionProposal(proposal) ||
+      isLegiwatchProposal(proposal) ||
+      isClientRecordProposal(proposal) ||
+      isLegislativeDocumentProposal(proposal);
+    const binding = sharing ? proposal.binding : proposal.command.binding;
+    const approver = sharing ? proposal.binding : proposal.requiredApprover;
     if (
       proposal.proposalId !== proposalId ||
       request.commandSha256 !== proposal.commandSha256 ||
       request.deliveryId !== deliveryId ||
-      proposal.command.binding.tenantId !== actor.tenantId ||
-      proposal.command.binding.conversationId !== actor.conversationId ||
-      proposal.requiredApprover.tenantId !== actor.tenantId ||
-      proposal.requiredApprover.actorId !== actor.actorId
+      binding.tenantId !== actor.tenantId ||
+      binding.conversationId !== actor.conversationId ||
+      approver.tenantId !== actor.tenantId ||
+      approver.actorId !== actor.actorId
     )
       throw new Error(
         "The current proposal does not match this saved decision.",
@@ -89,6 +110,7 @@ export function intentDecisionRecovery(
       request: IntentsDecideRequest,
       proposal: IntentsProposal,
       signal: AbortSignal,
+      onAccepted?: (reply: IntentsDecideResponse) => void,
     ) {
       return withRecoveryCommandLock(scope, guard, async () => {
         const input = await capture(request);
@@ -109,7 +131,9 @@ export function intentDecisionRecovery(
         signal.throwIfAborted();
         const reply = await access.decide(exact, proposal, signal);
         guard();
-        if (reply.kind === "ok" && reply.value.status !== "indeterminate")
+        // Preserve an admitted one-time result even if acknowledging local recovery fails.
+        if (reply.kind === "ok") onAccepted?.(reply.value);
+        if (reply.kind === "ok" && intentDecisionSettled(reply.value))
           await acknowledgeRecovery(scope, proposalId, guard);
         return reply;
       });

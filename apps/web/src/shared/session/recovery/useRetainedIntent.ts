@@ -9,6 +9,7 @@ export function useRetainedIntent<Data>(
   scope: string,
   contract: RecoveryContract<Data>,
   authorize: Authority,
+  lifetimeKey?: string,
 ) {
   const [revision, setRevision] = useState(0);
   const [snapshot, setSnapshot] = useState<Snapshot<Data>>();
@@ -20,7 +21,7 @@ export function useRetainedIntent<Data>(
   useLayoutEffect(() => {
     authority.current = authorize;
   }, [authorize]);
-  const token = JSON.stringify([scope, revision]);
+  const token = JSON.stringify([scope, revision, lifetimeKey]);
   useLayoutEffect(() => {
     const controller = new AbortController();
     lifetime.current = { token, controller };

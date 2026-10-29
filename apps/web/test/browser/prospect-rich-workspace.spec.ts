@@ -58,7 +58,7 @@ test("plain text explicitly gains rich formatting, link, lists, table, insert, u
   expect(fixture.writes).toHaveLength(0);
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
-  await expect.poll(() => fixture.writes.length).toBe(2);
+  await expect.poll(() => fixture.writes.length).toBe(1);
   await expect(
     page.getByRole("button", { name: "Save draft", exact: true }),
   ).toBeEnabled();
@@ -78,12 +78,9 @@ test("opening and saving existing supported HTML preserves its exact native stri
     "formatted",
   );
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
-  await expect.poll(() => fixture.writes.length).toBe(2);
+  await expect.poll(() => fixture.writes.length).toBe(1);
   expect(fixture.current().config.sectionContent.Body).toBe(richSource);
-  expect(fixture.writes.map((write) => write.operation)).toEqual([
-    "update",
-    "snapshot",
-  ]);
+  expect(fixture.writes.map((write) => write.operation)).toEqual(["save"]);
   expect(fixture.errors).toEqual([]);
 });
 
@@ -99,7 +96,7 @@ test("unsupported stored markup needs review and no executable content reaches e
   await expect(page.getByText(/saved source is unchanged/)).toBeVisible();
   await expect(body.locator("img,script")).toHaveCount(0);
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
-  await expect.poll(() => fixture.writes.length).toBe(2);
+  await expect.poll(() => fixture.writes.length).toBe(1);
   expect(fixture.current().config.sectionContent.Body).toBe(original);
   await page
     .getByRole("button", { name: "Edit supported content", exact: true })
@@ -107,7 +104,7 @@ test("unsupported stored markup needs review and no executable content reaches e
   await expect(body).toHaveAttribute("contenteditable", "true");
   await body.fill("Reviewed replacement");
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
-  await expect.poll(() => fixture.writes.length).toBe(4);
+  await expect.poll(() => fixture.writes.length).toBe(2);
   expect(fixture.current().config.sectionContent.Body).toBe(
     "<p>Reviewed replacement</p>",
   );
@@ -115,7 +112,7 @@ test("unsupported stored markup needs review and no executable content reaches e
   expect(fixture.errors).toEqual([]);
 });
 
-for (const phase of ["update", "snapshot"] as const)
+for (const phase of ["save"] as const)
   for (const lost of [false, true]) {
     test(`rich fields freeze through ${phase}; ${lost ? "lost receipt retains exact HTML" : "success preserves formatting"}`, async ({
       page,
@@ -152,12 +149,12 @@ for (const phase of ["update", "snapshot"] as const)
         ).toBeDisabled();
         const count = fixture.writes.length;
         await page
-          .getByRole("button", { name: "Read current document", exact: true })
+          .getByRole("button", { name: "Recover original save", exact: true })
           .click();
         await expect(
           page.getByRole("button", { name: "Save draft", exact: true }),
         ).toBeEnabled();
-        expect(fixture.writes).toHaveLength(count);
+        expect(fixture.writes).toHaveLength(count + 1);
         await page
           .getByRole("button", { name: "Save draft", exact: true })
           .click();
@@ -176,7 +173,7 @@ for (const phase of ["update", "snapshot"] as const)
 test("client replacement while a rich PATCH is held removes former content and prevents snapshot", async ({
   page,
 }) => {
-  const fixture = await richWorkspaceFixture(page, richSource, "update");
+  const fixture = await richWorkspaceFixture(page, richSource, "save");
   await page.goto(richDetail);
   await richBody(page);
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
@@ -204,7 +201,7 @@ test("client replacement while a rich PATCH is held removes former content and p
       ),
   );
   await expect(page.getByLabel("Body content")).toHaveCount(0);
-  expect(fixture.writes.map((write) => write.operation)).toEqual(["update"]);
+  expect(fixture.writes.map((write) => write.operation)).toEqual(["save"]);
 });
 
 test("rich editing is keyboard reachable and contained at phone width", async ({

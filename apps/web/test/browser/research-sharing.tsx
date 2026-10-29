@@ -5,6 +5,10 @@ import { ResearchSharing } from "../../src/features/modules/research-portfolios/
 import { ResearchShareRecipient } from "../../src/features/modules/research-portfolios/share/ResearchShareRecipient";
 import { DashboardDesigner } from "../../src/features/modules/research-portfolios/share/DashboardDesigner";
 import { DashboardGrid } from "../../src/features/modules/research-portfolios/share/DashboardGrid";
+import { ResearchSettings } from "../../src/features/modules/research-portfolios/ResearchSettings";
+import { ClientSharingSettings } from "../../src/features/settings/ClientSharingSettings";
+import { PublicShareRecipient } from "../../src/features/modules/workspace/PublicShareRecipient";
+import { MeriSharingFixture } from "./research-sharing-meri";
 import type { ResearchDashboardLayout } from "../../src/shared/capiro/operations/research-share-schemas";
 import { dashboard, portfolio, shareToken } from "./research-sharing-fixture";
 import "../../src/app/globals.css";
@@ -16,13 +20,17 @@ function Fixture() {
   const mode = query.get("mode");
   const [saved, setSaved] = useState<ResearchDashboardLayout>();
   const [token, setToken] = useState(query.get("token") ?? shareToken);
-  if (mode === "public")
+  if (mode === "public" || mode === "shared")
     return (
       <>
         <button onClick={() => setToken("c".repeat(64))}>
           Switch synthetic token
         </button>
-        <ResearchShareRecipient key={token} token={token} />
+        {mode === "shared" ? (
+          <PublicShareRecipient token={token} />
+        ) : (
+          <ResearchShareRecipient token={token} />
+        )}
       </>
     );
   if (mode === "widgets")
@@ -45,12 +53,18 @@ function Fixture() {
     );
   return (
     <CapiroDataProvider onSessionExpired={() => undefined}>
-      <ResearchSharing
-        portfolio={{
-          ...portfolio,
-          myRole: query.get("role") === "viewer" ? "viewer" : "owner",
-        }}
-      />
+      {mode === "meri" ? <MeriSharingFixture /> : mode === "admin" ? (
+        <ClientSharingSettings />
+      ) : mode === "settings" ? (
+        <ResearchSettings portfolio={portfolio} onReload={() => undefined} />
+      ) : (
+        <ResearchSharing
+          portfolio={{
+            ...portfolio,
+            myRole: query.get("role") === "viewer" ? "viewer" : "owner",
+          }}
+        />
+      )}
     </CapiroDataProvider>
   );
 }

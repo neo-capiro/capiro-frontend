@@ -27,6 +27,23 @@ const memoryOwnerProxy = `${appSource}features/meri/memory-review/owner-review-p
 const objectiveSnapshotOwner = `${appSource}shared/capiro/operations/objective-workspace-receiving.ts`;
 const clientBriefCopyOwner = `${appSource}features/portfolio/prospects/brief/client-copy/`;
 const prospectActionsEntry = `${appSource}features/modules/workspace/prospect-actions-public.ts`;
+const taskDestinationEntry = `${appSource}features/modules/workspace/task-destination-public.ts`;
+const taskDestinationReaders = new Set([
+  `${appSource}features/meri/actions/ProposalPanel.tsx`,
+  `${appSource}features/meri/conversation/intents/ConversationIntents.tsx`,
+  `${appSource}features/meri/task-updates/TaskUpdateProposal.tsx`,
+]);
+function approvedTaskDestinationImport(from, to, entry) {
+  return to === taskDestinationEntry && taskDestinationReaders.has(from)
+    && entry.kind === 'named' && entry.names.length === 1
+    && entry.names[0] === 'workspaceTaskHref';
+}
+function approvedResearchSharePreviewImport(from, to, entry) {
+  return from === `${appSource}features/meri/conversation/intents/ResearchShareReview.tsx`
+    && to === `${appSource}features/modules/research-portfolios/share-preview-public.ts`
+    && entry.kind === 'named' && entry.names.length === 2
+    && ['ShareExposure', 'ResearchDashboardView'].every(name => entry.names.includes(name));
+}
 const clientBriefAuthorityImports = new Map([
   [`${clientBriefCopyOwner}authority.ts`, new Set(['verifyProspectWriter', 'ProspectWriter'])],
   [`${clientBriefCopyOwner}command.ts`, new Set(['prospectIntentScope', 'ProspectWriter'])],
@@ -39,6 +56,12 @@ function approvedClientBriefAuthorityImport(from, to, entry) {
   // The scanner marks whole-clause import type as other, retaining only its explicit named bindings.
   return to === prospectActionsEntry && allowed && ['named', 'other'].includes(entry.kind)
     && entry.names.length > 0 && entry.names.every(name => allowed.has(name));
+}
+const memoryDraftEditorEntry = `${appSource}features/settings/memory-drafts-public.ts`;
+function approvedOnboardMemoryEditorImport(from, to, entry) {
+  return from === `${appSource}features/onboard/pages/setup/AiSettingsOverlay.tsx`
+    && to === memoryDraftEditorEntry && entry.kind === 'named'
+    && entry.names.length === 1 && entry.names[0] === 'MemoryDraftEditor';
 }
 const newsletterDeliveryOwner = `${appSource}features/modules/engagement/newsletter-delivery/`;
 const newsletterRelationshipImports = new Map([
@@ -59,7 +82,7 @@ function approvedNewsletterRelationshipImport(from, to, entry) {
 
 function approvedSnapshotImport(file, entry) {
   return (file === objectiveSnapshotOwner || file === `${clientBriefCopyOwner}command.ts`
-    || file === `${appSource}features/modules/workspace/ordinary-save/ordinary-save.ts`)
+    || file === `${appSource}shared/capiro/workspace-snapshot.ts`)
     && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
 }
 
@@ -79,6 +102,10 @@ function approvedPricingImport(file, module, entry) {
 }
 
 export const publicExports = new Set([
+  '@capiro/shared/prospect-brief-refresh',
+  '@capiro/shared/site-workflows',
+  '@capiro/shared/settings-memory-drafts',
+  '@capiro/shared/memory-review',
   '@capiro/ui/cascader',
   '@capiro/ui/motion',
   '@capiro/ui/sonner',
@@ -93,6 +120,8 @@ export const publicExports = new Set([
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
   '@capiro/meri-contracts/action-application', '@capiro/meri-contracts/conversation-application',
   '@capiro/meri-contracts/conversation-history',
+  '@capiro/meri-contracts/uploads-application',
+  '@capiro/meri-contracts/selected-tab-application',
   '@capiro/meri-contracts/conversation-lifecycle',
   '@capiro/meri-contracts/conversation-input',
   '@capiro/meri-contracts/conversation-initial-input',
@@ -100,6 +129,8 @@ export const publicExports = new Set([
   '@capiro/meri-contracts/conversation-sources',
   '@capiro/meri-contracts/conversation-usage',
   '@capiro/meri-contracts/document-access-application',
+  '@capiro/meri-contracts/office-application',
+  '@capiro/meri-contracts/federal-workbench',
   '@capiro/meri-contracts/intents-application',
   '@capiro/meri-contracts/routines-application',
   '@capiro/meri-contracts/objective-generation',
@@ -120,6 +151,9 @@ export const serverAdapters = new Map([
   [`${appSource}app/api/outreach-generation/start/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
     `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-conversations/outreach-start.ts`,
+  ])],
+  [`${appSource}app/api/meri/notifications/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-notifications/memory-proxy.server.ts`,
   ])],
   [`${appSource}app/api/memory/owner/candidates/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', `${appSource}features/meri/memory-review/owner-inbox-proxy.server.ts`,
@@ -158,9 +192,25 @@ export const serverAdapters = new Map([
     '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`, `${appSource}shared/meri-conversations/proxy.ts`,
     `${appSource}shared/meri-conversations/history-proxy.ts`,
   ])],
+  [`${appSource}app/api/conversations/runs/[operation]/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
+    `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-runs/operations.ts`,
+  ])],
+  [`${appSource}app/api/conversations/usage-overview/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
+    `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-usage/operations.ts`,
+  ])],
+  ...['app/api/uploads/[operation]/route.ts', 'app/api/uploads/original/[uploadId]/route.ts'].map(route => [
+    `${appSource}${route}`, new Set([
+      previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-uploads/config.ts`, `${appSource}shared/meri-uploads/proxy.ts`,
+    ]),
+  ]),
   [`${appSource}app/api/documents/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-documents/config.ts`, `${appSource}shared/meri-documents/proxy.ts`,
+  ])],
+  [`${appSource}app/api/meri/office/[operation]/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-office/config.ts`, `${appSource}shared/meri-office/proxy.ts`,
   ])],
   [`${appSource}app/api/documents/links/[action]/route.ts`, new Set([
     previewPolicy,
@@ -218,7 +268,7 @@ function edgeViolation(from, to, entry, module) {
   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;
   if (from.startsWith(`${appSource}shared/`) && /^apps\/web\/src\/(?:features|app)\//.test(to)) return `${from}: foundations import ${to}`;
   if (feature(from) && to.startsWith(`${appSource}app/`)) return `${from}: feature imports app composition ${to}`;
-  if (feature(from) && feature(to) && feature(from) !== feature(to) && !approvedClientBriefAuthorityImport(from, to, entry) && !approvedNewsletterRelationshipImport(from, to, entry)) return `${from}: private cross-feature import ${to}`;
+  if (feature(from) && feature(to) && feature(from) !== feature(to) && !approvedClientBriefAuthorityImport(from, to, entry) && !approvedNewsletterRelationshipImport(from, to, entry) && !approvedTaskDestinationImport(from, to, entry) && !approvedResearchSharePreviewImport(from, to, entry) && !approvedOnboardMemoryEditorImport(from, to, entry)) return `${from}: private cross-feature import ${to}`;
   if (feature(from) === 'portfolio' && feature(to) === 'portfolio' && portfolioArea(from) !== portfolioArea(to) && !publicEntry(to)) return `${from}: private Portfolio domain import ${to}; use public.ts or a named *-public.ts entry`;
   return undefined;
 }

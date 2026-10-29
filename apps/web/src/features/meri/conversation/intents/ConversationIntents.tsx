@@ -1,5 +1,7 @@
 "use client";
 import { useState, type ReactNode } from "react";
+import Link from "next/link";
+import { workspaceTaskHref } from "../../../modules/workspace/task-destination-public";
 import type { IntentsItem } from "@capiro/meri-client/intents";
 import { Button } from "@capiro/ui/button";
 import type { IntentsAccess } from "../../../../shared/meri-intents/access";
@@ -12,7 +14,19 @@ import {
   type IntentScope,
 } from "./useConversationIntents";
 import styles from "./intents.module.css";
+import ui from "../../ui/meri-ui.module.css";
 import { ConversationRoutine } from "../../routines/ConversationRoutine";
+import { isLegislativeDocumentProposal } from "./legislative-document-view";
+import { isClientRecordProposal } from "./client-record-view";
+import { isLegiwatchProposal } from "./legiwatch-view";
+import { isResearchShareProposal } from "./research-share-view";
+import { isResearchActionProposal } from "./research-action-view";
+import { isWatchProposal } from "./watch-view";
+import { isBizdevProposal } from "./bizdev-view";
+import { isMailSendProposal } from "./mail-view";
+import { isMemoryProposal } from "./memory-view";
+import { ResearchShareReview } from "./ResearchShareReview";
+import { ResearchShareResult } from "./ResearchShareResult";
 
 function FieldList({
   fields,
@@ -29,6 +43,11 @@ function FieldList({
           <dt>{field.label}</dt>
           <dd
             className={field.label === "Command hash" ? styles.hash : undefined}
+            style={
+              field.label === "Exact proposed content"
+                ? { whiteSpace: "pre-wrap" }
+                : undefined
+            }
           >
             {field.value}
           </dd>
@@ -38,25 +57,55 @@ function FieldList({
   );
 }
 
-/** Two explicit steps for a decision; after an uncertain attempt only the identical request can be sent again. */
+/** Owners whose uncertain decision is recovered by reading the recorded status, never by resending. */
+function uncertainOutcome(row: IntentRow): string | null {
+  const p = row.proposal;
+  if (!p) return null;
+  if (isMemoryProposal(p))
+    return "The memory submission outcome is not confirmed. Check the original request; this proposal will not be submitted again.";
+  if (isWatchProposal(p))
+    return "The watch outcome is not confirmed. Check the recorded state; this action will not be sent again.";
+  if (isBizdevProposal(p))
+    return "The saved brief outcome is not confirmed. Check the current recorded status; the save will not be sent again.";
+  if (isLegislativeDocumentProposal(p))
+    return "The document save outcome is not confirmed. Check the recorded status; this save will not be sent again.";
+  if (isClientRecordProposal(p))
+    return "The client action outcome is not confirmed. Check the current recorded status; the action will not be sent again.";
+  if (isLegiwatchProposal(p))
+    return "The suggestion action outcome is not confirmed. Check the current recorded status; the action will not be sent again.";
+  if (isResearchShareProposal(p))
+    return "The share action outcome is not confirmed. Check the current recorded status before any new action.";
+  if (isResearchActionProposal(p))
+    return "The Research Portfolio action outcome is not confirmed. Check the current recorded status; the action will not be sent again.";
+  if (isMailSendProposal(p))
+    return "The message outcome is not confirmed. Check the current recorded status; the message will not be sent again.";
+  return null;
+}
+
+/** Explicit confirmation; uncertain owner actions read their recorded status without another write. */
 function DecisionControls({
   row,
   attempt,
   onDecide,
+  onRefresh,
   disabled,
+  approvalDisabled = false,
 }: {
   row: IntentRow;
   attempt: Attempt | undefined;
   onDecide: (row: IntentRow, decision: Choice) => void;
+  onRefresh: () => void;
   disabled: boolean;
+  approvalDisabled?: boolean;
 }) {
   const [confirming, setConfirming] = useState<Choice | null>(null);
   const busy = disabled || attempt?.state === "pending";
+  const uncertain = uncertainOutcome(row);
   if (attempt?.state === "uncertain")
     return (
       <>
         <p role="status" className={styles.refusal}>
-          {attempt.message ?? (
+          {uncertain ?? attempt.message ?? (
             <>
               We could not confirm whether your decision to{" "}
               {attempt.decision === "approved" ? "approve" : "reject"} this was
@@ -70,7 +119,9 @@ function DecisionControls({
             type="button"
             variant="outline"
             disabled={busy}
-            onClick={() => onDecide(row, attempt.decision)}
+            onClick={() =>
+              uncertain ? onRefresh() : onDecide(row, attempt.decision)
+            }
           >
             Check result
           </Button>
@@ -83,7 +134,7 @@ function DecisionControls({
       <div className={styles.actions}>
         <Button
           type="button"
-          disabled={busy}
+          disabled={busy || approvalDisabled}
           onClick={() => setConfirming("approved")}
         >
           Approve…
@@ -112,7 +163,7 @@ function DecisionControls({
       <div className={styles.actions}>
         <Button
           type="button"
-          disabled={busy}
+          disabled={busy || (confirming === "approved" && approvalDisabled)}
           onClick={() => {
             setConfirming(null);
             onDecide(row, confirming);
@@ -138,11 +189,13 @@ function IntentCard({
   row,
   attempt,
   onDecide,
+  onRefresh,
   disabled,
 }: {
   row: IntentRow;
   attempt: Attempt | undefined;
   onDecide: (row: IntentRow, decision: Choice) => void;
+  onRefresh: () => void;
   disabled: boolean;
 }) {
   const titleId = `intent-${row.deliveryId.slice(4, 16)}`;
@@ -155,12 +208,57 @@ function IntentCard({
       <p className={styles.muted}>{row.detail}</p>
       <FieldList fields={row.fields} />
       <FieldList fields={row.result} label="Recorded result" />
-      <DecisionControls
-        row={row}
-        attempt={attempt}
-        onDecide={onDecide}
-        disabled={disabled}
-      />
+      {row.fileLinks?.map((file, index) => (
+        <Button key={`${file.documentId}:${index}`} variant="outline" asChild>
+          <Link
+            prefetch={false}
+            href={`/portfolio/${encodeURIComponent(file.clientId)}/files?file=${encodeURIComponent(file.documentId)}`}
+          >
+            Open {file.fileName} in Client Files
+          </Link>
+        </Button>
+      ))}
+      {row.researchDraft && (
+        <Button variant="outline" asChild>
+          <Link
+            prefetch={false}
+            href={`/modules/research-portfolios?portfolioId=${encodeURIComponent(row.researchDraft.portfolioId)}&view=drafts&artifactId=${encodeURIComponent(row.researchDraft.artifactId)}`}
+          >
+            Open saved research draft
+          </Link>
+        </Button>
+      )}
+      {row.task && (
+        <Button variant="outline" asChild>
+          <Link prefetch={false} href={workspaceTaskHref(row.task)}>
+            Open task in Workspace
+          </Link>
+        </Button>
+      )}
+      {row.proposal &&
+      isResearchShareProposal(row.proposal) &&
+      row.decision === "approvable" ? (
+        <ResearchShareReview proposal={row.proposal}>
+          {(ready) => (
+            <DecisionControls
+              row={row}
+              attempt={attempt}
+              onDecide={onDecide}
+              onRefresh={onRefresh}
+              disabled={disabled}
+              approvalDisabled={!ready}
+            />
+          )}
+        </ResearchShareReview>
+      ) : (
+        <DecisionControls
+          row={row}
+          attempt={attempt}
+          onDecide={onDecide}
+          onRefresh={onRefresh}
+          disabled={disabled}
+        />
+      )}
     </article>
   );
 }
@@ -172,6 +270,7 @@ function Body({
   retry,
   loadMore,
   decide,
+  refresh,
   decisionsReady,
   recoveryError,
   access,
@@ -186,13 +285,22 @@ function Body({
     return <p className={styles.muted}>Reading the actions Meri prepared…</p>;
   if (list.status === "unavailable")
     return (
-      <p className={styles.muted} role="status">
-        Prepared actions could not be read right now. Their outcomes remain
-        unconfirmed.{" "}
-        <Button type="button" variant="outline" onClick={retry}>
-          Try again
-        </Button>
-      </p>
+      <div className={styles.panel} role="status">
+        <p className={styles.muted}>
+          Prepared actions could not be read right now. Their outcomes remain
+          unconfirmed.
+        </p>
+        <div className={styles.actions}>
+          <Button
+            type="button"
+            variant="outline"
+            className={ui.outline}
+            onClick={retry}
+          >
+            Try again
+          </Button>
+        </div>
+      </div>
     );
   if (rows.length === 0)
     return (
@@ -234,6 +342,7 @@ function Body({
                     row.proposal ? attempts[row.proposal.proposalId] : undefined
                   }
                   onDecide={decide}
+                  onRefresh={() => void refresh()}
                   disabled={!decisionsReady}
                 />
               )}
@@ -304,6 +413,7 @@ export function ConversationIntents({
             <Button
               type="button"
               variant="outline"
+              className={ui.outline}
               onClick={() => void state.refresh()}
             >
               Refresh
@@ -311,6 +421,13 @@ export function ConversationIntents({
           )}
         </div>
         <Body {...state} access={access} />
+        {state.oneTimeResults.map((result) => (
+          <ResearchShareResult
+            key={`${result.proposalId}:${result.commandSha256}`}
+            sharePath={result.sharePath}
+            onDismiss={() => state.dismissOneTime(result.proposalId)}
+          />
+        ))}
       </section>
       {children?.(displayed.status === "ready" ? displayed.items : [])}
     </>

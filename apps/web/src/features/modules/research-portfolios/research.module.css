@@ -99,6 +99,11 @@
   display: grid;
   gap: 20px;
 }
+.stack fieldset {
+  /* Native fieldset defaults to min-inline-size: min-content, so it refuses to
+     shrink and pushes the page past a phone viewport. */
+  min-inline-size: 0;
+}
 .row {
   display: flex;
   align-items: center;
@@ -143,6 +148,12 @@
 .form {
   display: grid;
   gap: 18px;
+}
+.form :is(input, select) {
+  /* Native controls keep a content-driven intrinsic width — a file input's UA
+     316px, a select sized to its widest option — and do not shrink inside a
+     narrow fieldset, so they overflow it. Cap them at the available width. */
+  max-width: 100%;
 }
 .link {
   border: 0;

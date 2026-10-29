@@ -51,6 +51,7 @@ const envelope = z.discriminatedUnion("state", [
         "FILE_BATCH_MOVE_REFUSED",
         "TASK_EXECUTION_NOT_EXECUTED",
         "FILE_ACCESS_REFUSED",
+        "ANALYST_LINK_REVIEW_REFUSED",
       ]),
     })
     .strict(),

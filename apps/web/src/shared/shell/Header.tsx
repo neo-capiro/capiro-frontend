@@ -16,7 +16,7 @@ const actions = [
   { label: "Quick log", icon: "quick-log", href: "/?log=1" },
   { label: "Master calendar", icon: "calendar", href: "/calendar" },
   { label: "Search", icon: "search", href: "/modules/intelligence" },
-  { label: "Updates", icon: "updates" },
+  { label: "Updates", icon: "updates", href: "/meri/updates" },
 ];
 
 export function Header({
@@ -55,38 +55,21 @@ export function Header({
       }
       actions={
         <div className={styles.globalActions}>
-          {(fixture ? actions.filter((action) => action.href) : actions).map(
-            (action) =>
-              action.href ? (
-                <Button
-                  key={action.label}
-                  asChild
-                  variant="ghost"
-                  className={styles.action}
-                >
-                  <ScopedLink href={action.href} aria-label={action.label}>
-                    <DesignIcon
-                      name={action.icon}
-                      assetSet="header-34-20261016"
-                    />
-                  </ScopedLink>
-                </Button>
-              ) : (
-                <Button
-                  key={action.label}
-                  type="button"
-                  variant="ghost"
-                  className={styles.action}
-                  disabled
-                  aria-label={`${action.label} — unavailable`}
-                >
-                  <DesignIcon
-                    name={action.icon}
-                    assetSet="header-34-20261016"
-                  />
-                </Button>
-              ),
-          )}
+          {(fixture
+            ? actions.filter((action) => action.label !== "Updates")
+            : actions
+          ).map((action) => (
+            <Button
+              key={action.label}
+              asChild
+              variant="ghost"
+              className={styles.action}
+            >
+              <ScopedLink href={action.href} aria-label={action.label}>
+                <DesignIcon name={action.icon} assetSet="header-34-20261016" />
+              </ScopedLink>
+            </Button>
+          ))}
           {fixture ? (
             <FixtureHeaderActions assetSet={assetSet} />
           ) : (

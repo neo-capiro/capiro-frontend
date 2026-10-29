@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useId } from "react";
 import { useSearchParams } from "next/navigation";
 import { useIdentity } from "../../shared/portfolio/auth/identity";
 import { QueryState } from "../../shared/portfolio/ui/QueryState";
@@ -79,7 +80,10 @@ export function MeriHome({
           ) : selected.state === "authorized-client" ? (
             <p>Selected client: {selected.client.name}</p>
           ) : (
-            <p>Choose a permitted client above to work in its scope.</p>
+            <p>
+              Choose General or a permitted client above to start a
+              conversation.
+            </p>
           )}
           <Link href="/">Open Portfolio</Link>
         </section>
@@ -120,38 +124,47 @@ function MeriWorkspaceLinks({
   memoryReviewEnabled: boolean;
 }) {
   const capabilities = useMeriCapabilities();
+  const reasonId = useId();
   return (
-    <section aria-label="Available Meri workspaces">
-      {(
-        [
-          ["files", "Open document files"],
-          ["actions", "Open recommendation actions"],
-          ["taskUpdates", "Open task updates"],
-          ...(memoryReviewEnabled
-            ? ([["memory", "Review personal memory"]] as const)
-            : []),
-        ] as const
-      ).map(([id, label]) => {
-        const href = meriCapabilityHref(id, capabilities);
-        return href ? (
-          <Link key={id} href={scopedHref(href, clientId)}>
-            {label}{" "}
-          </Link>
-        ) : (
-          <Button
-            key={id}
-            type="button"
-            variant="ghost"
-            disabled
-            title={capabilities[id].reason}
-          >
-            {label}
-          </Button>
-        );
-      })}
-      <p>
-        Some workspaces are not available yet. Disabled controls explain why.
-      </p>
+    <section
+      className={styles.workspaceLinks}
+      aria-label="Available Meri workspaces"
+    >
+      <nav
+        className={styles.workspaceNavigation}
+        aria-label="Meri workspace links"
+      >
+        {(
+          [
+            ["files", "Open document files"],
+            ["actions", "Open recommendation actions"],
+            ["taskUpdates", "Open task updates"],
+            ...(memoryReviewEnabled
+              ? ([["memory", "Review personal memory"]] as const)
+              : []),
+          ] as const
+        ).map(([id, label]) => {
+          const href = meriCapabilityHref(id, capabilities);
+          return href ? (
+            <Link key={id} href={scopedHref(href, clientId)}>
+              {label}
+            </Link>
+          ) : (
+            <div key={id} className={styles.unavailableWorkspace}>
+              <Button
+                type="button"
+                variant="ghost"
+                disabled
+                aria-describedby={`${reasonId}-${id}`}
+              >
+                {label}
+              </Button>
+              <small id={`${reasonId}-${id}`}>{capabilities[id].reason}</small>
+            </div>
+          );
+        })}
+      </nav>
+      <p>Unavailable workspaces show their current reason.</p>
     </section>
   );
 }

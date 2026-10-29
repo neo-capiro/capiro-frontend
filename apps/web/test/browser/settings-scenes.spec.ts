@@ -122,7 +122,9 @@ test("All analyst queues and Meri preference screens are reachable with explicit
     await expect(page.getByText("Loading…", { exact: true })).toHaveCount(0);
     await expect(page.getByRole("alert")).toHaveCount(0);
   }
-  await expect(page.getByText("SAM review unavailable")).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "SAM.gov matches" }),
+  ).toBeVisible();
   await page.goto("/settings/meri-preferences");
   for (const name of [
     "Connections",

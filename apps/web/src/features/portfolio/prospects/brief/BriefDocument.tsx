@@ -1,5 +1,5 @@
 import type { BriefVersion } from "./contracts";
-import { sectionKeys, sectionLabels } from "./contracts";
+import { BriefSectionsView } from "./BriefSectionsView";
 import styles from "./brief.module.css";
 import { BriefDate } from "./BriefDate";
 
@@ -26,26 +26,7 @@ export function BriefDocument({
         <BriefDate value={version.createdAt} />
       </p>
       <h2>{title}</h2>
-      {sectionKeys.map((key) => (
-        <section key={key}>
-          <div className="row between">
-            <h3>{sectionLabels[key]}</h3>
-            <small>{version.sections[key].provenance}</small>
-          </div>
-          <p className={styles.sectionText}>{version.sections[key].text}</p>
-          <div className="row">
-            {version.sections[key].citationIndexes.map((index, position) => (
-              <button
-                key={`${index}:${position}`}
-                className="button ghost"
-                onClick={() => onSource(index)}
-              >
-                Source {index + 1}
-              </button>
-            ))}
-          </div>
-        </section>
-      ))}
+      <BriefSectionsView sections={version.sections} onSource={onSource} />
       {!version.citations.length && (
         <p className="muted">
           No citations were saved with this version. This does not establish an

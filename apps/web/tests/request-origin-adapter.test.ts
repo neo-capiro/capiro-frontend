@@ -18,7 +18,7 @@ import { readRequestOrigin } from "../src/shared/request-origin";
 import { readConfig } from "../src/shared/portfolio/config/config";
 import { proxyRequest } from "../src/shared/portfolio/api/proxy";
 
-const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+const publicOrigin = "https://app.capiro.ai";
 type StandaloneMetaContext = {
   fetchHostname: string;
   port: number;
@@ -58,10 +58,10 @@ function adaptedRequest(origin: string | null = publicOrigin, hostile = false) {
     method: "POST",
     url: "/api/capiro/synthetic.create",
     headers: {
-      host: hostile ? "hostile.example" : "portfolio-preview.app.capiro.ai",
+      host: hostile ? "hostile.example" : "app.capiro.ai",
       "x-forwarded-host": hostile
         ? "hostile.example"
-        : "portfolio-preview.app.capiro.ai",
+        : "app.capiro.ai",
       "x-forwarded-proto": "https",
       "x-forwarded-port": "443",
       "content-type": "application/json",
@@ -320,9 +320,9 @@ it("carries a synthetic local HTTP proxy request through Next server metadata, a
             path: "/api/capiro/synthetic.create",
             method: "POST",
             headers: {
-              Host: "portfolio-preview.app.capiro.ai",
+              Host: "app.capiro.ai",
               Origin: publicOrigin,
-              "X-Forwarded-Host": "portfolio-preview.app.capiro.ai",
+              "X-Forwarded-Host": "app.capiro.ai",
               "X-Forwarded-Proto": "https",
               "X-Forwarded-Port": "443",
               "Content-Type": "application/json",

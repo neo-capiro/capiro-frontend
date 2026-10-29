@@ -56,7 +56,15 @@ export function BillingSummaryPanel({ enabled = true }: { enabled?: boolean }) {
                 Purchased profile slots
                 <span>{summary.usedSlots} active profiles</span>
               </dt>
-              <dd>{summary.slots}</dd>
+              <dd>
+                {summary.slots}
+                {summary.slots < summary.usedSlots && (
+                  <span className={styles.warning}>
+                    {" "}
+                    · {summary.usedSlots - summary.slots} over limit
+                  </span>
+                )}
+              </dd>
             </div>
             <div>
               <dt>
@@ -72,7 +80,16 @@ export function BillingSummaryPanel({ enabled = true }: { enabled?: boolean }) {
               <dt>
                 AI allowance<span>Current billing period</span>
               </dt>
-              <dd>{usd(summary.llmAllowanceUsd)}</dd>
+              <dd>
+                {usd(summary.llmAllowanceUsd)}
+                {summary.llmUsedUsd > summary.llmAllowanceUsd && (
+                  <span className={styles.warning}>
+                    {" "}
+                    · {usd(summary.llmUsedUsd - summary.llmAllowanceUsd)} over
+                    allowance
+                  </span>
+                )}
+              </dd>
             </div>
             <div>
               <dt>

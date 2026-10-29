@@ -75,18 +75,6 @@ export function ObjectiveList({
             </button>
           ))}
         </div>
-        <select
-          aria-label="Objective status"
-          value={filter}
-          onChange={(event) => onFilter(event.target.value)}
-        >
-          <option value="">All statuses</option>
-          {Object.entries(statusLabels).map(([value, label]) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
       </div>
       {visible.map((objective) => (
         <ObjectiveRow

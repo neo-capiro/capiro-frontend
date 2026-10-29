@@ -28,7 +28,7 @@ for (const status of [403, 503]) {
         .getByText("Active matched opportunities")
         .locator("..")
         .locator("strong"),
-    ).toHaveText("—");
+    ).toHaveText("Unavailable");
     await expect(page.getByRole("link", { name: "Open PE →" })).toBeVisible();
     await page.unroute("**/core/intelligence/opportunities/v2/search?*");
     await matched.getByRole("button", { name: "Retry", exact: true }).click();
@@ -65,7 +65,7 @@ for (const status of [403, 503]) {
         .getByText("Programs shown")
         .locator("..")
         .locator("strong"),
-    ).toHaveText("—");
+    ).toHaveText("Unavailable");
     await expect(
       page.getByRole("link", { name: "Test opportunity", exact: true }),
     ).toBeVisible();

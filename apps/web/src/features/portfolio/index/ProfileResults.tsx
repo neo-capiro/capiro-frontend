@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { useId } from "react";
 import { ArrowUpRight } from "lucide-react";
@@ -7,12 +6,12 @@ import {
   clientLocation,
   clientSectorLabel,
   initials,
-  organizationInitials,
   memberName,
   safeWebsite,
   type Client,
   type Member,
 } from "./contracts";
+import { ClientMonogram } from "../client-profile/public";
 import styles from "./portfolio.module.css";
 export function ProfileResults({
   rows,
@@ -109,6 +108,7 @@ export function ProfileCard({
               href={`/portfolio/${client.id}`}
               aria-label={`Open ${client.name}`}
               aria-describedby={descriptionId}
+              title={client.name}
             >
               {client.name}
             </Link>
@@ -143,11 +143,7 @@ function ProfileLogo({ client }: { client: Client }) {
   const src = safeWebsite(client.logoUrl);
   return (
     <span className={styles.profileLogo} aria-hidden="true">
-      {src ? (
-        <img src={src} alt="" width={40} height={40} />
-      ) : (
-        organizationInitials(client.name)
-      )}
+      <ClientMonogram name={client.name} logoUrl={src} size={40} />
     </span>
   );
 }

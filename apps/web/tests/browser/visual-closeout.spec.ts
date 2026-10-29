@@ -134,12 +134,14 @@ test("Portfolio Customize retains unavailable guards and keyboard-accessible fil
     path: info.outputPath("index-unavailable-after.png"),
   });
   await header.getByRole("button", { name: "Customize", exact: true }).click();
+  // A failed saved-order read keeps the accessible roster visible, so the
+  // reorder controls are present but refused: no move, no drag, no save.
   await expect(
-    page.getByRole("button", { name: /Drag .* to rearrange/ }),
-  ).toHaveCount(0);
+    page.getByRole("button", { name: /Drag .* to rearrange/ }).first(),
+  ).toBeDisabled();
   await expect(
-    page.getByRole("button", { name: /^Move .* (earlier|later)$/ }),
-  ).toHaveCount(0);
+    page.getByRole("button", { name: /^Move .* (earlier|later)$/ }).first(),
+  ).toBeDisabled();
   await expect(
     page.getByRole("button", { name: "Save order", exact: true }),
   ).toHaveCount(0);
@@ -237,7 +239,7 @@ test("Bill Tracker retains table/board/filter controls inside its compact result
     exact: true,
   });
   await expect(
-    results.getByRole("heading", { name: "Tracked bills", exact: true }),
+    results.getByRole("heading", { name: "Bill results", exact: true }),
   ).toBeVisible();
   await expect(results.getByRole("table")).toBeVisible();
   await results.getByLabel("Filter loaded bills").fill("synthetic");

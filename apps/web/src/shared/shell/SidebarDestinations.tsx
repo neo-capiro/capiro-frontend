@@ -13,6 +13,7 @@ import {
   type MeriCapabilityId,
 } from "../meri-resources/capabilities";
 import { DesignIcon } from "./DesignIcon";
+import { UnavailableControlReason } from "./UnavailableControlReason";
 import styles from "./shell.module.css";
 
 /** Workspace section a page belongs to; marks its sidebar destination as current. */
@@ -149,39 +150,46 @@ export function SidebarDestinations({
       {destinations.map((item) => {
         const href = destinationHref(item, fixture, capabilities);
         return (
-          <Button
+          <UnavailableControlReason
             key={item.label}
-            type="button"
-            variant="ghost"
-            className={`${styles.navButton} ${isCurrent(item, href) ? styles.currentDestination : ""}`}
-            aria-current={isCurrent(item, href) ? "page" : undefined}
-            disabled={!href}
-            onClick={
-              href
-                ? () =>
-                    router.push(
-                      scopedHref(
-                        href,
-                        selected.state === "authorized-client"
-                          ? selected.client.id
-                          : undefined,
-                      ),
-                    )
-                : undefined
-            }
-            title={
-              href
-                ? fixture
-                  ? "Open disconnected synthetic fixture"
-                  : item.label === "Files"
-                    ? "Open document files"
-                    : `Open ${item.label.toLowerCase()}`
-                : unavailableDestinationTitle(item, capabilities)
+            label={destinationLabel(item.label, pendingApprovals)}
+            reason={
+              href ? undefined : unavailableDestinationTitle(item, capabilities)
             }
           >
-            {<DesignIcon name={item.icon} assetSet={assetSet} />}
-            {destinationLabel(item.label, pendingApprovals)}
-          </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              className={`${styles.navButton} ${isCurrent(item, href) ? styles.currentDestination : ""}`}
+              aria-current={isCurrent(item, href) ? "page" : undefined}
+              disabled={!href}
+              onClick={
+                href
+                  ? () =>
+                      router.push(
+                        scopedHref(
+                          href,
+                          selected.state === "authorized-client"
+                            ? selected.client.id
+                            : undefined,
+                        ),
+                      )
+                  : undefined
+              }
+              title={
+                href
+                  ? fixture
+                    ? "Open disconnected synthetic fixture"
+                    : item.label === "Files"
+                      ? "Open document files"
+                      : `Open ${item.label.toLowerCase()}`
+                  : unavailableDestinationTitle(item, capabilities)
+              }
+            >
+              {<DesignIcon name={item.icon} assetSet={assetSet} />}
+              {destinationLabel(item.label, pendingApprovals)}
+            </Button>
+          </UnavailableControlReason>
         );
       })}
     </nav>

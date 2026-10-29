@@ -1,12 +1,10 @@
 "use client";
-/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowUpRight, NotebookPen, Plus, Users } from "lucide-react";
 import {
   useClient,
-  organizationInitials,
   clientLocation,
   clientSectorLabel,
   safeWebsite,
@@ -17,6 +15,7 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { FacilitiesCard } from "./FacilitiesCard";
 import { ClientDetails, GovernmentSummary } from "./ClientDetails";
+import { ClientMonogram } from "./ClientMonogram";
 import {
   DeadlineAndRequests,
   EngagementHealth,
@@ -27,11 +26,13 @@ import { NotesDialog } from "./NotesDialog";
 import { QuickLog } from "./QuickLog";
 import { FocusTags } from "./tags/public";
 import { useTeam, useActivity } from "./queries";
+import { useActivityMetrics } from "./useActivityMetrics";
 import styles from "./overview.module.css";
 export function ClientOverview({ clientId }: { clientId: string }) {
   const client = useClient(clientId);
   const team = useTeam(clientId);
   const activity = useActivity(clientId);
+  const metrics = useActivityMetrics(clientId);
   const currentActivity =
     activity.isSuccess && !activity.error ? activity.data : undefined;
   const params = useSearchParams();
@@ -79,11 +80,11 @@ export function ClientOverview({ clientId }: { clientId: string }) {
             </div>
             <div className={styles.identity}>
               <span className="monogram">
-                {value.logoUrl ? (
-                  <img src={value.logoUrl} width={52} height={52} alt="" />
-                ) : (
-                  organizationInitials(value.name)
-                )}
+                <ClientMonogram
+                  name={value.name}
+                  logoUrl={value.logoUrl}
+                  size={52}
+                />
               </span>
               <div>
                 <div className="row">
@@ -130,7 +131,7 @@ export function ClientOverview({ clientId }: { clientId: string }) {
               </button>
             </div>
           </section>
-          <EngagementPulse records={currentActivity} />
+          <EngagementPulse records={currentActivity} metrics={metrics} />
           <ObjectiveSummary clientId={clientId} />
         </div>
         <div className={styles.column}>
@@ -139,7 +140,7 @@ export function ClientOverview({ clientId }: { clientId: string }) {
             <EngagementHealth />
           </div>
           <FacilitiesCard clientId={clientId} clientName={value.name} />
-          <DeadlineAndRequests />
+          <DeadlineAndRequests metrics={metrics} />
         </div>
       </div>
       <ActivityTimeline clientId={clientId} />
@@ -173,6 +174,7 @@ export function ClientOverview({ clientId }: { clientId: string }) {
       <NotesDialog
         key={showNotes ? "open" : "closed"}
         clientId={clientId}
+        clientName={value.name}
         open={showNotes || params.has("notes")}
         onOpenChange={(open) => {
           setShowNotes(open);

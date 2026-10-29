@@ -27,6 +27,97 @@ const request = (operation = "query", init: RequestInit = {}, suffix = "") =>
     },
   });
 
+it("routine management bootstrap forwards only the exact public path with the native identity token", async () => {
+  const native = vi.fn(async () => "native-management"),
+    fetcher = vi.fn<typeof fetch>(async (path, init) => {
+      expect(path).toBe("https://meri.example.test/api/routines/session");
+      expect(init?.headers).toMatchObject({
+        Authorization: "Bearer native-management",
+      });
+      expect(JSON.parse(String(init?.body))).toEqual({ clientId: null });
+      return Response.json({ receipt: "synthetic" });
+    });
+  expect(
+    (
+      await proxyActionRequest(
+        request("routine-session", {
+          body: JSON.stringify({ clientId: null }),
+        }),
+        "routine-session",
+        config,
+        native,
+        fetcher,
+      )
+    ).status,
+  ).toBe(200);
+  expect(native).toHaveBeenCalledOnce();
+  expect(fetcher).toHaveBeenCalledOnce();
+});
+
+it.each([
+  { clientId: null, conversationId: "forged" },
+  { clientId: null, runId: "forged" },
+  { clientId: null, versions: {} },
+  { clientId: null, policyRevision: "forged" },
+])(
+  "management proxy rejects extra selectors before forwarding %j",
+  async (body) => {
+    const fetcher = vi.fn<typeof fetch>();
+    expect(
+      (
+        await proxyActionRequest(
+          request("routine-session", { body: JSON.stringify(body) }),
+          "routine-session",
+          config,
+          async () => "native",
+          fetcher,
+        )
+      ).status,
+    ).toBe(502);
+    expect(fetcher).not.toHaveBeenCalled();
+  },
+);
+
+it("a management credential is forwarded only for admitted routine operations, never ordinary action execution", async () => {
+  const credential = `routine_session_${"m".repeat(43)}`,
+    fetcher = vi.fn<typeof fetch>(async (_path, init) => {
+      expect(init?.headers).toMatchObject({
+        Authorization: `Bearer ${credential}`,
+      });
+      return Response.json({});
+    });
+  const managementRequest = (route: string) => {
+    const input = request(route);
+    input.headers.set("X-Meri-Action-Session", credential);
+    return input;
+  };
+  expect(
+    (
+      await proxyActionRequest(
+        managementRequest("routine-list"),
+        "routine-list",
+        config,
+        async () => "native",
+        fetcher,
+      )
+    ).status,
+  ).toBe(200);
+  expect(fetcher).toHaveBeenCalledOnce();
+  for (const route of ["query", "draft", "prepare", "execute"])
+    expect(
+      (
+        await proxyActionRequest(
+          managementRequest(route),
+          route,
+          config,
+          async () => "native",
+          fetcher,
+        )
+      ).status,
+    ).toBe(401);
+  expect(fetcher).toHaveBeenCalledOnce();
+});
+
 it("rejects duplicate opaque session headers without sending anything to Meri", async () => {
   const input = request("query");
   input.headers.append("X-Meri-Action-Session", actionSession);
@@ -446,7 +537,7 @@ describe("Meri proxy request lifetime", () => {
 
 describe("standalone bind address behind the ALB", () => {
   // Next builds request.url from HOSTNAME/PORT (https://0.0.0.0:5188), never the public host.
-  const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+  const publicOrigin = "https://app.capiro.ai";
   const configured = readActionConfig({
     ...env,
     CAPIRO_REQUEST_ORIGIN: publicOrigin,
@@ -458,7 +549,7 @@ describe("standalone bind address behind the ALB", () => {
       headers: {
         Origin: publicOrigin,
         "Content-Type": "application/json",
-        Host: "portfolio-preview.app.capiro.ai",
+        Host: "app.capiro.ai",
         "X-Forwarded-Proto": "https",
         ...headers,
       },

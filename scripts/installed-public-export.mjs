@@ -81,13 +81,21 @@ export function checkInstalledPublicExport(name, publicName) {
   const metadata = JSON.parse(
     readFileSync(join(directory, `${publicName}.metadata.json`), "utf8"),
   );
+  const contractVersion =
+    publicName === "document-access-application" ? "0.2.0" : "0.1.0";
   if (
     metadata.schemaId !== schema.$id ||
-    metadata.schemaId !== `urn:meri:${publicName}:0.1.0` ||
+    metadata.schemaId !== `urn:meri:${publicName}:${contractVersion}` ||
+    metadata.contractVersion !== contractVersion ||
     !/^\/\/ Generated self-contained browser (?:receiving boundary|receiver)\./.test(
       readFileSync(entry, "utf8"),
     )
   )
     throw Error("Installed canonical receiving boundary identity drift");
-  return { publicExport, packageVersion: packageInfo.version, records };
+  return {
+    publicExport,
+    packageVersion: packageInfo.version,
+    contractVersion,
+    records,
+  };
 }

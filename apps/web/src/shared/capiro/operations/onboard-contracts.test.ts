@@ -6,7 +6,6 @@ import {
 import { onboardFunnelOperations } from "./onboard-funnel";
 import { onboardSetupOperations } from "./onboard-setup";
 import { publicOnboardOperations } from "./onboard-public";
-import { memoryReviewReceiptSchema } from "./onboard-core-schemas";
 
 const session = {
   sessionId: "session-1",
@@ -111,21 +110,6 @@ describe("native Onboard receiving contracts", () => {
         body: { from: "waiting", to: "done" },
       }).success,
     ).toBe(true);
-  });
-  it("keeps memory submission pending and rejects the obsolete active-save receipt", () => {
-    expect(
-      memoryReviewReceiptSchema.parse({
-        status: "pending_review",
-        candidateId: "candidate-1",
-        activeItemUnchanged: true,
-      }).activeItemUnchanged,
-    ).toBe(true);
-    expect(
-      memoryReviewReceiptSchema.safeParse({
-        ok: true,
-        updatedAt: "2026-10-13T00:00:00.000Z",
-      }).success,
-    ).toBe(false);
   });
   it.each([
     "https://evil.test/o/oauth2/v2/auth",

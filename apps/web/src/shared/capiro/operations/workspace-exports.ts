@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { savedWorkspaceVersion } from "./workspace-documents";
 import { binaryDownloadSchema, defineOperation } from "../contracts";
 import { documentParams, workspaceId } from "./workspace-schemas";
 
@@ -32,7 +33,33 @@ const exportReceipt = z.object({
   error: z.string().nullable(),
   createdAt: z.string(),
 });
+export const savedSnapshotExport = savedWorkspaceVersion
+  .extend({
+    schemaVersion: z.literal(1),
+    tenantId: workspaceId,
+  })
+  .strict()
+  .refine(
+    (value) => value.snapshot !== undefined,
+    "Saved snapshot content is required.",
+  );
+export type SavedSnapshotExport = z.infer<typeof savedSnapshotExport>;
 export const workspaceExportOperations = {
+  "workspace.draft.savedSnapshot": defineOperation({
+    service: "workspace",
+    method: "GET",
+    path: "/drafts/:draftId/export/snapshot/:versionId",
+    request: z
+      .object({
+        params: z
+          .object({ draftId: workspaceId, versionId: workspaceId })
+          .strict(),
+      })
+      .strict(),
+    response: savedSnapshotExport,
+    source:
+      "capiro-backend@86e38a1303db1f2881506d62643f8af6b4815c57 apps/workspace/src/export/{saved-snapshot-export.service,export.controller}.ts; VersionsService.getSaved",
+  }),
   "workspace.hillday.export": defineOperation({
     service: "workspace",
     method: "POST",

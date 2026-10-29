@@ -55,16 +55,20 @@ export function ScopeChoice({
       />
       {matches.length ? (
         <>
-          <ScopeOptions
-            options={matches}
-            choiceId={choiceId}
-            onChoose={setChoiceId}
-          />
-          <DataScope items={choice?.dataScope ?? []} />
-          <div className={ui.row}>
+          <div className={`${ui.row} ${styles.scopeActions}`}>
             {cancel}
             {apply(choice)}
           </div>
+          <p className={ui.muted}>
+            Choose a scope, then use it to apply the change.
+          </p>
+          <ScopeOptions
+            options={matches}
+            choiceId={choiceId}
+            appliedId={appliedId}
+            onChoose={setChoiceId}
+          />
+          <DataScope items={choice?.dataScope ?? []} />
         </>
       ) : (
         <>
@@ -97,32 +101,46 @@ export function ScopeChoice({
 function ScopeOptions({
   options,
   choiceId,
+  appliedId,
   onChoose,
 }: {
   options: readonly ScopeOption[];
   choiceId: string | undefined;
+  appliedId: string | undefined;
   onChoose: (id: string) => void;
 }) {
   return (
     <ul className={styles.rowList} aria-label="Permitted scopes">
       {options.map((option) => {
         const chosen = option.id === choiceId;
+        const label =
+          option.id === appliedId
+            ? "Current scope"
+            : chosen
+              ? "Ready to apply"
+              : "Choose";
         return (
           <DetailRow
             key={option.id}
             as="li"
             icon={<Users />}
             title={option.name}
-            detail={chosen ? `Selected · ${option.detail}` : option.detail}
+            detail={
+              option.id === appliedId
+                ? `Current scope · ${option.detail}`
+                : chosen
+                  ? `Not applied · ${option.detail}`
+                  : option.detail
+            }
           >
             <button
               type="button"
               className={chosen ? ui.primary : ui.outline}
               aria-pressed={chosen}
-              aria-label={`${chosen ? "Selected" : "Choose"} ${option.name}`}
+              aria-label={`${label} ${option.name}`}
               onClick={() => onChoose(option.id)}
             >
-              {chosen ? "Selected" : "Choose"}
+              {label}
             </button>
           </DetailRow>
         );

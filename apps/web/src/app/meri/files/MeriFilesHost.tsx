@@ -8,7 +8,12 @@ import {
 } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@capiro/ui/button";
+import ui from "../../../features/meri/ui/meri-ui.module.css";
+import { MeriPageHeading } from "../../../features/meri/ui/MeriPageHeading";
 import { MeriFilesWorkflow } from "../../../features/meri/files/MeriFilesWorkflow";
+import { DocumentLibrary } from "../../../features/meri/files/DocumentLibrary";
+import { OfficeEditing } from "../../../features/meri/office/OfficeEditing";
+import { LegacyReportLibrary } from "../../../features/meri/files/LegacyReportLibrary";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { scopedHref } from "../../../shared/session/client-route";
 import { useMeriCapabilities } from "../../../shared/meri-resources/CapabilityContext";
@@ -25,12 +30,69 @@ import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { firstChatCoreOperationKey } from "../../../shared/capiro/operations/meri-first-chat";
 import { resolveFirstChatConversation } from "../../../shared/meri-conversations/first-chat-bootstrap";
 import { DocumentWorkflow } from "../../../shared/meri-documents/workflow-adapter";
-import { documentTransport } from "../../../shared/meri-documents/workflow-transport";
+import {
+  documentTransport,
+  federalTransport,
+} from "../../../shared/meri-documents/workflow-transport";
+import { FederalWorkbenchAccess } from "../../../shared/meri-documents/federal-workbench";
+import { createDocumentLibraryAccess } from "../../../shared/meri-documents/library-access";
 import { documentQueryJournal } from "../../../shared/meri-documents/query-journal";
 import { documentSessionContext } from "../../../shared/meri-documents/session-context";
 
 type Operation = "create_word" | "create_excel";
 export function MeriFilesHost({
+  enabled,
+  readEnabled = enabled,
+  officeEnabled = false,
+  operation,
+}: {
+  enabled: boolean;
+  readEnabled?: boolean;
+  officeEnabled?: boolean;
+  operation: Operation;
+}) {
+  const selected = useSelectedClient();
+  const identity = useIdentity();
+  const account =
+    identity.data?.tenant?.id && !identity.error && !identity.isFetching
+      ? { tenantId: identity.data.tenant.id, actorId: identity.data.user.id }
+      : null;
+  const clientId =
+    selected.state === "authorized-client" ? selected.requestedId : undefined;
+  const available =
+    selected.state === "no-selection" || selected.state === "authorized-client";
+  return (
+    <>
+      {account && available && (
+        <LegacyReportLibrary
+          key={JSON.stringify([account.tenantId, account.actorId, clientId])}
+          {...(clientId ? { clientId } : {})}
+        />
+      )}
+      {readEnabled &&
+        (account && available ? (
+          <OfficeEditing
+            key={JSON.stringify([account.tenantId, account.actorId, clientId])}
+            enabled={officeEnabled}
+            account={account}
+          >
+            <DocumentLibrary
+              account={account}
+              {...(clientId ? { clientId } : {})}
+            />
+          </OfficeEditing>
+        ) : (
+          <p role="status">
+            Current account and client access must be verified before loading
+            saved files.
+          </p>
+        ))}
+      <DocumentCreationHost enabled={enabled} operation={operation} />
+    </>
+  );
+}
+
+function DocumentCreationHost({
   enabled,
   operation,
 }: {
@@ -130,6 +192,22 @@ function ConnectedFiles({
           new DocumentWorkflow({
             session,
             operation,
+            ...(operation === "create_word"
+              ? {
+                  federal: new FederalWorkbenchAccess({
+                    session,
+                    library: createDocumentLibraryAccess({
+                      credential: session.credential,
+                      context: session.context,
+                      lifetime: signal,
+                      onAccessLost: lifetime.onAccessLost,
+                    }),
+                    transport: federalTransport(session.credential, signal),
+                    journal: documentQueryJournal(queryClient, session.context),
+                    ...lifetime,
+                  }),
+                }
+              : {}),
             transport: documentTransport(session.credential, signal),
             journal: documentQueryJournal(queryClient, session.context),
             ...lifetime,
@@ -174,14 +252,13 @@ function ConnectedFiles({
       </section>
     );
   return (
-    <section aria-label="Document connection">
-      <h1>Files</h1>
-      <p>Client: {clientName}.</p>
-      <p>
+    <section className={ui.page} aria-label="Document connection">
+      <MeriPageHeading title="Files" description={`Client: ${clientName}.`} />
+      <p className={ui.muted}>
         Document creation uses a saved request from this tab’s current client
         chat. Connecting checks that context; it does not start a request.
       </p>
-      <p role="status">
+      <p className={ui.muted} role="status">
         {state.status === "connecting"
           ? "Checking the current document context…"
           : state.status === "expired"
@@ -190,24 +267,27 @@ function ConnectedFiles({
               ? "The current document context could not be verified."
               : "Connect to check the current document context. No file is created or revised automatically."}
       </p>
-      <Button
-        type="button"
-        disabled={state.status === "connecting"}
-        onClick={() => void host.connect()}
-      >
-        Connect document service
-      </Button>
-      {capabilities.newConversation.status === "on" && (
-        <p>
-          <Link
-            href={scopedHref("/meri", clientId)}
-            prefetch={false}
-            className="underline"
-          >
-            Open client chat
-          </Link>
-        </p>
-      )}
+      <div className={ui.row}>
+        <Button
+          type="button"
+          className={ui.outline}
+          disabled={state.status === "connecting"}
+          onClick={() => void host.connect()}
+        >
+          Connect document service
+        </Button>
+        {capabilities.newConversation.status === "on" && (
+          <p>
+            <Link
+              href={scopedHref("/meri", clientId)}
+              prefetch={false}
+              className="underline"
+            >
+              Open client chat
+            </Link>
+          </p>
+        )}
+      </div>
     </section>
   );
 }

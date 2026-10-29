@@ -13,6 +13,10 @@ import { capiroOperations } from "../../shared/capiro/registry";
 import { useSettingsAction } from "./useSettingsAction";
 import { assertTeamWriteAllowed } from "./team-permissions";
 import {
+  isMemoryDraftWrite,
+  prepareMemoryDraftWrite,
+} from "./memory/drafts/recovery";
+import {
   clearSettingsWrite,
   persistSettingsWrite,
   restoreSettingsWrite,
@@ -78,6 +82,8 @@ export function useSettingsMutation(section: string) {
         let accepted = false;
         try {
           if (
+            operation.startsWith("settings.memory.") ||
+            operation === "settings.siteWorkflows.save" ||
             operation === "me.update" ||
             operation === "me.emailSignature.update" ||
             operation === "settings.branding.update" ||
@@ -112,6 +118,7 @@ export function useSettingsMutation(section: string) {
               role: invitation.role,
             };
           }
+          await prepareMemoryDraftWrite(raw, write, options?.signal);
           await persistSettingsWrite(
             window.sessionStorage,
             storageKey,
@@ -179,7 +186,7 @@ export function useSettingsMutation(section: string) {
     ),
     () => undefined,
   );
-  const reconcile = () =>
+  const reconcile = (after?: (write: SettingsWrite) => void) =>
     action.run(
       async (signal) => {
         const write = cache.getQueryData<SettingsWrite>(journalKey);
@@ -187,12 +194,15 @@ export function useSettingsMutation(section: string) {
           throw new Error(uncertainSettingsWrite);
         signal.throwIfAborted();
         clear(write);
-        return write.operation;
+        return write;
       },
-      (operation) =>
-        operation === "settings.support.create"
-          ? "Report saved for HQ review."
-          : "The recorded target now has the requested state. Review it before making another change.",
+      (write) =>
+        isMemoryDraftWrite(write.operation)
+          ? "The original operation is confirmed. Reload the current draft before making another change."
+          : write.operation === "settings.support.create"
+            ? "Report saved for HQ review."
+            : "The recorded target now has the requested state. Review it before making another change.",
+      typeof after === "function" ? after : undefined,
     );
   return { api, action, pending, reconcile, locked: action.busy || !!pending };
 }
