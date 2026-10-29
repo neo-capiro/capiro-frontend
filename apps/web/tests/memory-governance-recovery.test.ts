@@ -30,6 +30,38 @@ function api(value: unknown) {
     ),
   };
 }
+function readbackAs(userId: string, tenantId: string, value: unknown) {
+  return {
+    request: vi.fn(async (operation: string) =>
+      operation === "me.read" ? { user: { id: userId }, tenant: { id: tenantId } } : value,
+    ),
+  };
+}
+function confirmation(overrides: Record<string, unknown> = {}) {
+  return {
+    id: requestId,
+    memoryItemId: id,
+    fromStatus: null,
+    toStatus: "conflicted",
+    reason: "Memory confirmed from the Governance Center.",
+    occurredAt: "2026-10-28T12:00:00.000Z",
+    actorUserId: account.user.id,
+    ...overrides,
+  };
+}
+function confirmedConflicted(overrides: Record<string, unknown> = {}) {
+  return {
+    enabled: true,
+    item: {
+      id,
+      version: "mv1:new",
+      governedStatus: "conflicted",
+      secondApprovedByUserId: null,
+      transitions: [confirmation()],
+      ...overrides,
+    },
+  };
+}
 it("refuses a governance action without an expected version before dispatch", () => {
   expect(() =>
     operations["settings.memory.governance.markStale"].request.parse({
@@ -141,4 +173,88 @@ it("review readback binds candidate, request and deciding actor", async () => {
       new AbortController().signal,
     ),
   ).toBe(false);
+});
+it("a lost response for a confirmed conflicted item is recovered from its recorded confirmation", async () => {
+  const port = api(confirmedConflicted());
+  expect(
+    await reconcileMemoryGovernance(
+      port as never,
+      write("confirm"),
+      new AbortController().signal,
+    ),
+  ).toBe(true);
+  expect(port.request.mock.calls.map((call) => call[0])).toEqual([
+    "me.read",
+    "settings.memory.governance.item",
+  ]);
+});
+it("a conflicted readback that does not prove this confirmation stays unknown", async () => {
+  const reads = ["me.read", "settings.memory.governance.item"];
+  const cases: Array<[unknown, string, string, boolean]> = [
+    [confirmedConflicted({ version: "mv1:old" }), account.user.id, account.tenant.id, false],
+    [confirmedConflicted(), "someone-else", account.tenant.id, false],
+    [confirmedConflicted(), account.user.id, "another-tenant", false],
+    [confirmedConflicted({ id: requestId }), account.user.id, account.tenant.id, false],
+    [{ enabled: false, item: confirmedConflicted().item }, account.user.id, account.tenant.id, false],
+    [{ enabled: true, item: null }, account.user.id, account.tenant.id, false],
+    [
+      confirmedConflicted({
+        governedStatus: "revoked",
+        transitions: [confirmation({ toStatus: "revoked" })],
+      }),
+      account.user.id,
+      account.tenant.id,
+      false,
+    ],
+    [
+      confirmedConflicted({
+        governedStatus: "stale",
+        transitions: [confirmation({ toStatus: "stale" })],
+      }),
+      account.user.id,
+      account.tenant.id,
+      false,
+    ],
+    [
+      confirmedConflicted({ transitions: [confirmation({ actorUserId: "someone-else" })] }),
+      account.user.id,
+      account.tenant.id,
+      false,
+    ],
+    [
+      confirmedConflicted({ transitions: [confirmation({ fromStatus: "active" })] }),
+      account.user.id,
+      account.tenant.id,
+      false,
+    ],
+    [
+      confirmedConflicted({
+        transitions: [confirmation({ actorUserId: "someone-else" }), confirmation()],
+      }),
+      account.user.id,
+      account.tenant.id,
+      false,
+    ],
+    [confirmedConflicted({ transitions: [] }), account.user.id, account.tenant.id, false],
+    [confirmedConflicted({ transitions: undefined }), account.user.id, account.tenant.id, false],
+    [
+      confirmedConflicted({ secondApprovedByUserId: account.user.id }),
+      account.user.id,
+      account.tenant.id,
+      false,
+    ],
+  ];
+  for (const [value, userId, tenantId, expected] of cases) {
+    const port = readbackAs(userId, tenantId, value);
+    expect(
+      await reconcileMemoryGovernance(
+        port as never,
+        write("confirm"),
+        new AbortController().signal,
+      ),
+    ).toBe(expected);
+    expect(
+      port.request.mock.calls.every((call) => reads.includes(call[0])),
+    ).toBe(true);
+  }
 });

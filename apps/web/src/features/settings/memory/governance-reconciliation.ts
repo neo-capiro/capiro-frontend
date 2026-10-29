@@ -48,9 +48,26 @@ export async function reconcileMemoryGovernance(
     return false;
   if (write.operation.endsWith(".secondApprove"))
     return item.secondApprovedByUserId === account.user.id;
+  if (write.operation.endsWith(".confirm")) {
+    if (item.governedStatus !== "conflicted")
+      return item.governedStatus === "active";
+    // Core keeps a confirmed item's status (only stale becomes active) and records
+    // the confirmation as the item's newest transition, so a conflicted item that
+    // was confirmed looks unchanged. Second approval records the same status for
+    // this actor and its timestamp is not part of this read, so that case stays
+    // unknown rather than being accepted as a confirmation.
+    if (item.secondApprovedByUserId === account.user.id) return false;
+    const last = item.transitions?.[0];
+    return (
+      !!last &&
+      last.memoryItemId === item.id &&
+      last.actorUserId === account.user.id &&
+      last.fromStatus === null &&
+      last.toStatus === item.governedStatus
+    );
+  }
   const expected: Record<string, string> = {
     approve: "active",
-    confirm: "active",
     markStale: "stale",
     revoke: "revoked",
   };
