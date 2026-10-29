@@ -5,6 +5,7 @@ import {
   ordinarySaveConflictCode,
   type OrdinarySaveConflictCode,
   type PublicationConflictCode,
+  type GenerationConflictCode,
 } from "./workspace-ordinary-save-errors";
 import { objectiveAssociationFailure } from "./objective-association-errors";
 import type { OperationalFailure } from "./operations/objective-operational";
@@ -26,7 +27,8 @@ export class CapiroApiError extends Error {
   readonly code?:
     | WorkspaceBriefConflictCode
     | OrdinarySaveConflictCode
-    | PublicationConflictCode;
+    | PublicationConflictCode
+    | GenerationConflictCode;
   /**
    * The upstream machine code from a refusal body (`error.code`), when present.
    * Distinguishes conditions a retry cannot fix - a held or unconfigured backend -
@@ -41,7 +43,8 @@ export class CapiroApiError extends Error {
     code?:
       | WorkspaceBriefConflictCode
       | OrdinarySaveConflictCode
-      | PublicationConflictCode,
+      | PublicationConflictCode
+      | GenerationConflictCode,
     associationFailure?: OperationalFailure,
     newsletterSaveRefusal?: NewsletterSaveRefusal,
     upstreamCode?: string,

@@ -70,7 +70,7 @@ export function VersionHistory({
         >
           <p className={presentation.qualifier}>
             {renderSelected
-              ? "Select a saved version to inspect its content and publication options."
+              ? "Select a saved version to inspect its content, generation and publication options."
               : "Read-only saved versions. Opening or comparing never changes the document."}
           </p>
           {versions.length ? (

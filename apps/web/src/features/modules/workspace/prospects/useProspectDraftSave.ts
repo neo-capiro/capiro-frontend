@@ -221,6 +221,20 @@ export function useProspectDraftSave(
         );
     });
   return {
+    loadSaved: () =>
+      attempt(async () => {
+        if (record)
+          throw new Error(
+            "Recover retained edits before loading another saved version.",
+          );
+        await journal.verify();
+        const latest = await read(journal.signal());
+        journal.guard();
+        baseline.current = latest.stateHash;
+        setCurrent(latest);
+        setReadback(latest.draft);
+        onSaved();
+      }),
     retained,
     pending,
     error,
