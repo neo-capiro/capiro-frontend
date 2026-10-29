@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import fs from "node:fs";
 import http from "node:http";
 import { createRequire } from "node:module";
+import os from "node:os";
+import path from "node:path";
 import test from "node:test";
+import util from "node:util";
 import {
   appBrowserHost,
   appBrowserHostPattern,
@@ -17,6 +22,16 @@ const { matchHas, prepareDestination } = require(
 );
 const { formatUrl } = require("next/dist/shared/lib/router/utils/format-url");
 const { checkCustomRoutes } = require("next/dist/lib/load-custom-routes");
+// The framework file this qualification exercises: a task-owned copy of the pinned package
+// carrying the corrected bytes, or the resolved package when it already carries them.
+const proxyRequestModule = process.env.NEXT_PROXY_PATCHED_PACKAGE
+  ? path.join(
+      process.env.NEXT_PROXY_PATCHED_PACKAGE,
+      "dist/server/lib/router-utils/proxy-request.js",
+    )
+  : "next/dist/server/lib/router-utils/proxy-request";
+const { proxyRequest } = require(proxyRequestModule);
+const patchScript = path.resolve(import.meta.dirname, "../../../scripts/patch-next-proxy-error-log.cjs");
 
 const rewrites = appOriginRewrites();
 const token = "opaque_token_abc123";
@@ -180,7 +195,6 @@ test("only the enumerated paths are forwarded", () => {
 test("Next's external-rewrite proxy keeps the raw signed body, query and headers", async () => {
   // Loopback-only: Next's own proxyRequest, the function a matched external rewrite
   // uses, against a local listener that records exactly what arrived.
-  const { proxyRequest } = require("next/dist/server/lib/router-utils/proxy-request");
   const raw = '{"type":"invoice.paid","data":{"id":"evt_synthetic"}}';
   const received = [];
   const target = http.createServer((req, res) => {
@@ -250,6 +264,157 @@ test("Next's external-rewrite proxy keeps the raw signed body, query and headers
   } finally {
     front.close();
     target.close();
+  }
+});
+
+test("an upstream transport failure leaks no target path, query, fragment or capability token", async () => {
+  assert.ok(
+    process.env.NEXT_PROXY_PATCHED_PACKAGE,
+    "set NEXT_PROXY_PATCHED_PACKAGE to a task-owned package copy carrying the corrected proxy file",
+  );
+  // Values that exist only in this synthetic request.
+  const sentinels = {
+    code: "SENTINEL-CODE-9f3a",
+    state: "SENTINEL-STATE-4c11",
+    validationToken: "SENTINEL-VALIDATION-77bd",
+    capability: "SENTINEL-CAPABILITY-2ab6",
+    fragment: "SENTINEL-FRAGMENT-51ee",
+  };
+  // A port that was bound and released, so the upstream refuses the connection.
+  const probe = http.createServer();
+  await new Promise((resolve) => probe.listen(0, "127.0.0.1", resolve));
+  const upstreamPort = probe.address().port;
+  await new Promise((resolve) => probe.close(resolve));
+
+  const records = [];
+  const rejections = [];
+  const originalConsoleError = console.error;
+  console.error = (...args) =>
+    records.push(args.map((value) => util.inspect(value, { depth: 6 })).join(" "));
+  const front = http.createServer((req, res) => {
+    proxyRequest(
+      req,
+      res,
+      {
+        protocol: "http:",
+        hostname: "127.0.0.1",
+        port: String(upstreamPort),
+        pathname: `/api/engagement/newsletter-public/${sentinels.capability}/unsubscribe`,
+        query: {
+          code: sentinels.code,
+          state: sentinels.state,
+          validationToken: sentinels.validationToken,
+        },
+        hash: `#${sentinels.fragment}`,
+      },
+      null,
+      null,
+      5000,
+    ).catch((error) => {
+      // router-server's outer catch logs the rejected error a second time.
+      rejections.push(error);
+      console.error(error);
+    });
+  });
+  await new Promise((resolve) => front.listen(0, "127.0.0.1", resolve));
+  let status;
+  let body;
+  try {
+    const response = await new Promise((resolve, reject) => {
+      const request = http.request(
+        {
+          hostname: "127.0.0.1",
+          port: front.address().port,
+          path: `/api/engagement/newsletter-public/${sentinels.capability}/unsubscribe?code=${sentinels.code}`,
+          method: "POST",
+          headers: { Host: appBrowserHost, "Content-Length": 0 },
+        },
+        (res) => {
+          const chunks = [];
+          res.on("data", (chunk) => chunks.push(chunk));
+          res.on("end", () =>
+            resolve({
+              status: res.statusCode,
+              body: Buffer.concat(chunks).toString("utf8"),
+            }),
+          );
+        },
+      );
+      request.on("error", reject);
+      request.end();
+    });
+    status = response.status;
+    body = response.body;
+    await new Promise((resolve) => setImmediate(resolve));
+  } finally {
+    console.error = originalConsoleError;
+    front.close();
+  }
+
+  // The failure outcome is unchanged: the framework's 500 body plus one rejection.
+  assert.equal(status, 500);
+  assert.equal(body, "Internal Server Error");
+  assert.equal(rejections.length, 1);
+
+  // Both records — the proxy sink and the downstream router rejection — are sanitized.
+  assert.ok(records.length >= 2, `expected both failure records, saw ${records.length}`);
+  const logged = records.join("\n");
+  for (const [name, value] of Object.entries(sentinels))
+    assert.ok(!logged.includes(value), `the ${name} sentinel reached a log record`);
+  assert.ok(
+    !logged.includes("/api/engagement/newsletter-public"),
+    "the target path reached a log record",
+  );
+  assert.ok(
+    logged.includes("Failed to proxy http://127.0.0.1:"),
+    "the fixed upstream origin label is missing",
+  );
+  assert.ok(logged.includes("ProxyUpstreamError"), "the bounded error class is missing");
+  assert.match(logged, /ECONNREFUSED|PROXY_UPSTREAM_FAILURE/, "the bounded error code is missing");
+
+  // The propagated error keeps no raw upstream object, cause, message or stack.
+  const [error] = rejections;
+  assert.equal(error.name, "ProxyUpstreamError");
+  assert.equal(error.message, "Upstream proxy request failed");
+  assert.match(error.code, /^[A-Z][A-Z0-9_]{2,31}$/);
+  assert.equal(error.cause, undefined);
+  assert.ok(!util.inspect(error, { depth: 6 }).includes("127.0.0.1:"), "origin leaked into the error");
+  assert.ok(!String(error.stack).includes("127.0.0.1:"), "origin leaked into the stack");
+});
+
+test("the deterministic correction refuses unexpected framework bytes", () => {
+  assert.ok(
+    process.env.NEXT_PROXY_PATCHED_PACKAGE,
+    "set NEXT_PROXY_PATCHED_PACKAGE to a task-owned package copy carrying the corrected proxy file",
+  );
+  const relative = "dist/server/lib/router-utils/proxy-request.js";
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "next-proxy-patch-"));
+  try {
+    fs.mkdirSync(path.join(dir, path.dirname(relative)), { recursive: true });
+    fs.writeFileSync(
+      path.join(dir, "package.json"),
+      JSON.stringify({ name: "next", version: "16.4.1" }),
+    );
+    const file = path.join(dir, relative);
+    const run = () => spawnSync(process.execPath, [patchScript, "--package", dir], { encoding: "utf8" });
+
+    // A different framework build is refused and left byte-identical.
+    const unexpected = '"use strict";\n// unexpected framework build\n';
+    fs.writeFileSync(file, unexpected);
+    const refused = run();
+    assert.equal(refused.status, 1);
+    assert.match(refused.stderr, /refusing to edit an unexpected file/);
+    assert.equal(fs.readFileSync(file, "utf8"), unexpected);
+
+    // The expected corrected bytes are recognised and left untouched (idempotent step).
+    fs.copyFileSync(path.join(process.env.NEXT_PROXY_PATCHED_PACKAGE, relative), file);
+    const before = fs.readFileSync(file);
+    const again = run();
+    assert.equal(again.status, 0);
+    assert.match(again.stdout, /already corrected/);
+    assert.deepEqual(fs.readFileSync(file), before);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
   }
 });
 
