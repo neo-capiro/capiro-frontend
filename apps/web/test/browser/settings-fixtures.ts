@@ -128,6 +128,21 @@ export const settingsFixtures = {
     personnelQuarantine: { count: 0 },
   },
   "settings.analyst.reconciliation.list": emptyPage,
+  "settings.analyst.links.list": (raw: unknown) => {
+    const input = raw as {
+      params: { kind: string };
+      query: { page: number; limit: number };
+    };
+    return {
+      schemaVersion: 1,
+      kind: input.params.kind,
+      ...emptyPage,
+      page: input.query.page,
+      limit: input.query.limit,
+      counts: {},
+      observedAt: "2026-10-29T12:00:00.000Z",
+    };
+  },
   "settings.analyst.programMatches.list": emptyPage,
   "settings.analyst.personnelMerge.list": { ...emptyPage, limit: 10 },
   "settings.analyst.personCandidates.list": emptyPage,

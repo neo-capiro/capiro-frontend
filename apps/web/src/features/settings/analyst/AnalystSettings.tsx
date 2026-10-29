@@ -4,12 +4,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { Badge, StatusPanel } from "../../../shared/module-ui";
-import {
-  SettingsButton,
-  SettingsCard,
-  SettingsNotice,
-  SettingsTabs,
-} from "../components";
+import { SettingsButton, SettingsCard, SettingsTabs } from "../components";
 import styles from "../styles";
 import { AliasManager } from "./AliasManager";
 import { AnalystAuditLog, QuarantineQueue } from "./AuditAndQuarantine";
@@ -19,6 +14,7 @@ import {
 } from "./PersonReviewQueues";
 import { ProgramMatchQueue } from "./ProgramMatchQueue";
 import { ReconciliationQueue } from "./ReconciliationQueue";
+import { AnalystLinkQueue } from "./AnalystLinkQueue";
 
 const panels: Record<string, () => ReactNode> = {
   reconciliation: () => <ReconciliationQueue />,
@@ -28,22 +24,6 @@ const panels: Record<string, () => ReactNode> = {
   merges: () => <PersonnelMergeQueue />,
   quarantine: () => <QuarantineQueue />,
   audit: () => <AnalystAuditLog />,
-  provisions: () => (
-    <SettingsCard title="Provision → PE links">
-      <SettingsNotice title="Provision review unavailable">
-        The existing backend does not expose a verified provision-link review
-        queue for this screen.
-      </SettingsNotice>
-    </SettingsCard>
-  ),
-  sam: () => (
-    <SettingsCard title="SAM.gov matches">
-      <SettingsNotice title="SAM review unavailable">
-        The existing backend does not expose a verified SAM match review queue
-        for this screen.
-      </SettingsNotice>
-    </SettingsCard>
-  ),
 };
 
 export function AnalystSettings() {
@@ -124,7 +104,14 @@ export function AnalystSettings() {
         value={tab}
         onChange={setTab}
       />
-      {panels[tab]?.()}
+      {tab === "provisions" || tab === "sam" ? (
+        <AnalystLinkQueue
+          kind={tab === "provisions" ? "provision" : "sam"}
+          refreshCounts={counts.reload}
+        />
+      ) : (
+        panels[tab]?.()
+      )}
     </div>
   );
 }

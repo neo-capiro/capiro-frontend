@@ -179,7 +179,8 @@ function retireRecovery(
           | "OBJECTIVE_VERSION_CONFLICT"
           | "FILE_BATCH_MOVE_REFUSED"
           | "TASK_EXECUTION_NOT_EXECUTED"
-          | "FILE_ACCESS_REFUSED";
+          | "FILE_ACCESS_REFUSED"
+          | "ANALYST_LINK_REVIEW_REFUSED";
       },
   assert: () => void,
   beforeRetire?: (
@@ -217,6 +218,35 @@ export function acknowledgeRecovery(
   assert: () => void,
 ) {
   return retireRecovery(scope, requestId, { state: "acknowledged" }, assert);
+}
+
+/** Caller binds this immutable refusal receipt to the original reviewed command. */
+export function retireAnalystLinkReviewRefusal(
+  scope: string,
+  requestId: string,
+  receipt: {
+    schemaVersion: number;
+    requestId: string;
+    status: string;
+    refusal: string | null;
+  },
+  assert: () => void,
+) {
+  if (
+    receipt.schemaVersion !== 1 ||
+    receipt.requestId !== requestId ||
+    receipt.status !== "refused" ||
+    !["REVIEW_SOURCE_STALE", "REVIEW_TARGET_UNAVAILABLE"].includes(
+      receipt.refusal ?? "",
+    )
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "ANALYST_LINK_REVIEW_REFUSED" },
+    assert,
+  );
 }
 
 /** Feature owner validates the full immutable receipt and rereads it under current authority and the command lock. */

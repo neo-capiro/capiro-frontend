@@ -1,4 +1,5 @@
 import { analystOperations } from "./settings-admin/analyst";
+import { analystLinksOperations } from "./settings-admin/analyst-links";
 import { broadcastOperations } from "./settings-admin/broadcasts";
 import { hqOperations } from "./settings-admin/hq";
 import { impersonationOperations } from "./settings-admin/impersonation";
@@ -13,5 +14,6 @@ export const settingsAdminOperations = {
   ...profileOperations,
   ...broadcastOperations,
   ...analystOperations,
+  ...analystLinksOperations,
   ...mappingOperations,
 } as const;
