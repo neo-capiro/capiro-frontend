@@ -180,7 +180,7 @@ export function PortfolioIndex({
         {identity.data && !permitted && !identity.error && (
           <p className="muted">Your role does not allow creating profiles.</p>
         )}
-        <PortfolioPulse clients={records} fiscalYear={fiscalYear} />
+        <PortfolioPulse fiscalYear={fiscalYear} />
         {state.unsupportedSort && (
           <p className="status" role="status">
             This sort is unavailable. Showing most recently added profiles.{" "}

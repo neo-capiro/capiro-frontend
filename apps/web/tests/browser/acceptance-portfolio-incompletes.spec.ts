@@ -31,15 +31,15 @@ for (const width of [1440, 390]) {
       const eyebrow = pulse.getByText(/^Portfolio pulse · FY\d{2}$/);
       if (width === 390) await expect(eyebrow).toBeHidden();
       else await expect(eyebrow).toBeVisible();
-      const labels = pulse.locator(
-        "p:visible, small:visible, span.eyebrow:visible",
-      );
-      await expect(labels).toHaveCount(width === 390 ? 6 : 7);
+      const labels = pulse
+        .getByTestId("portfolio-metric-panel")
+        .locator("p:visible, small:visible, span.eyebrow:visible");
+      await expect(labels).toHaveCount(width === 390 ? 12 : 13);
       for (let i = 0; i < (await labels.count()); i++)
         await expectRenderedContrast(labels.nth(i), info, `pulse-label-${i}`);
       await expectRenderedContrast(
         pulse
-          .getByText("Clients", { exact: true })
+          .getByText("Active clients", { exact: true })
           .locator("..")
           .locator("strong"),
         info,
