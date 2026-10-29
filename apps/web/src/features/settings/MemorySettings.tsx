@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { MemoryGovernanceCenter } from "./memory/MemoryGovernanceCenter";
 import { MemoryFiles } from "./memory/MemoryFiles";
 import { SettingsCard, SettingsNotice } from "./components";
@@ -13,12 +14,9 @@ export function MemorySettings({
   reviewEnabled: boolean;
   readOnlyPreview?: boolean;
 }) {
+  const [memoryRevision, setMemoryRevision] = useState(0);
   return (
     <div className={styles.stack} data-design-target="411:67920">
-      <SettingsNotice title="New memory writes from Settings are unavailable">
-        Retention and offboarding rules for personal, client and firm owners
-        must be approved before Settings can create proposals or corrections.
-      </SettingsNotice>
       <MemoryReviewCard enabled={reviewEnabled} />
       <SettingsCard title="Review notifications">
         <p className={styles.description}>
@@ -28,8 +26,15 @@ export function MemorySettings({
         </p>
         <Link href="/meri/updates">Open review notifications</Link>
       </SettingsCard>
-      <MemoryGovernanceCenter readOnly={readOnlyPreview} />
-      <MemoryFiles />
+      <MemoryGovernanceCenter
+        readOnly={readOnlyPreview}
+        revision={memoryRevision}
+      />
+      <MemoryFiles
+        readOnly={readOnlyPreview}
+        reviewEnabled={reviewEnabled}
+        onSubmitted={() => setMemoryRevision((value) => value + 1)}
+      />
     </div>
   );
 }

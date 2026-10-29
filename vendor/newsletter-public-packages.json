@@ -292,6 +292,24 @@
       "distributionPath": "vendor/capiro-shared-0.0.0-c8e583c1-0fba422087a4.tgz",
       "regularEntryCount": 368,
       "qualification": "Focused shared types and Core contract/ordinary-role PostgreSQL tests; no application/image build or live qualification."
+    },
+    {
+      "file": "capiro-shared-0.0.0-fbdcba3b-d0ac8893de0b.tgz",
+      "name": "@capiro/shared",
+      "version": "0.0.0",
+      "repository": "https://github.com/neo-capiro/capiro-backend",
+      "sourceCommit": "fbdcba3b981d1bba1c2055a8020f726aabce82ac",
+      "sourceTree": "458963358e8ae12b8f5bf1cbd22ca08caf40fe96",
+      "sha256": "d0ac8893de0b80874c4d12eaf758dc3773db7b74d750c097f430ff2ccf390f4a",
+      "bytes": 513292,
+      "integrity": "sha512-cIbrStEmaS2c1IcFhy4KHkQL26ombiEXEiUzwxmSA3aj9qDAGSUG0L/pDhQWg6zoj7lrd/NpJ9JP6xflsQZo7Q==",
+      "browserExports": [
+        "@capiro/shared/settings-memory-drafts"
+      ],
+      "status": "source-merged-settings-draft-consumer",
+      "distributionPath": "vendor/capiro-shared-0.0.0-fbdcba3b-d0ac8893de0b.tgz",
+      "regularEntryCount": 289,
+      "qualification": "Public shared package compilation only; Core232 contract and ordinary-role PostgreSQL checks. No application/image build or deployment."
     }
   ],
   "activeFile": "capiro-shared-0.0.0-588c00e1-ea851e52ea29.tgz"

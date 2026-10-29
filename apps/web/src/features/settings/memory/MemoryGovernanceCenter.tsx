@@ -23,7 +23,13 @@ const tabs = [
   "Transition history",
   "Projection health",
 ];
-export function MemoryGovernanceCenter({ readOnly }: { readOnly: boolean }) {
+export function MemoryGovernanceCenter({
+  readOnly,
+  revision = 0,
+}: {
+  readOnly: boolean;
+  revision?: number;
+}) {
   const [tab, setTab] = useState("Overview");
   return (
     <SettingsCard title="Memory Governance Center">
@@ -33,7 +39,7 @@ export function MemoryGovernanceCenter({ readOnly }: { readOnly: boolean }) {
         value={tab}
         onChange={setTab}
       />
-      <div key={tab}>
+      <div key={`${tab}:${revision}`}>
         {tab === "Overview" ? (
           <Overview />
         ) : tab === "Pending review" ? (

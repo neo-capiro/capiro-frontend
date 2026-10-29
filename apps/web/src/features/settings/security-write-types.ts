@@ -8,6 +8,7 @@ export type SettingsWrite = {
   expectedInvitationHash?: string;
   expectedAccount?: { userId: string; tenantId: string };
   requestHash?: string;
+  domainRequestHash?: string;
   resultHash?: string;
   inputFields?: string[];
   receiptId?: string;

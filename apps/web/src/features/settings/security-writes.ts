@@ -1,6 +1,7 @@
 import { CapiroApiError } from "../../shared/capiro/http";
 import { governanceReceiptMatches } from "./memory/governance-reconciliation";
 import { workflowReceiptMatches } from "./site-workflows/recovery";
+import { memoryDraftReceiptMatches } from "./memory/drafts/recovery";
 
 type Row = Record<string, unknown>;
 const row = (value: unknown): Row =>
@@ -27,6 +28,10 @@ export function assertSettingsReceipt(write: SettingsWrite, value: unknown) {
   const { params = {}, body = {} } = write.input;
   let confirmed = false;
   switch (write.operation) {
+    case "settings.memory.drafts.save":
+    case "settings.memory.drafts.submit":
+      confirmed = memoryDraftReceiptMatches(write, value);
+      break;
     case "settings.siteWorkflows.save":
       confirmed = workflowReceiptMatches(write, receipt);
       break;
