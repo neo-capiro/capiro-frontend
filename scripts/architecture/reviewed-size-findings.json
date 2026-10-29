@@ -7194,10 +7194,10 @@
     "file": "apps/web/src/shared/meri-uploads/upload-controller.ts",
     "kind": "function",
     "symbol": "createUploadController",
-    "fingerprint": "e12f3e234667b56d093ae0a981e8677a24b665f55f9bce3dec3a534b46d96243",
-    "reason": "The composer-facing upload state machine for one controller, port and conversation: retained local ledger, admitted declarations, one original write per attempt, status-only recovery and the ordered selection handed to the turn. Transport is delegated to the uploads wire and all custody authority stays server-side; no second write, deletion claim or cross-account publication exists.",
-    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "8191d6f6593565d12a0bbd846e7925ab0aba62e33a83f0b89d26a025028c85e1",
+    "reason": "One conversation's composer attachment state machine and retained selection. The existing wire still owns protocol admission/transport and the ledger owns receipts. The optional onStarted callback exposes only the controller-generated request ID before dispatch. One cancellable attempt now spans declaration and original storage, fixing two demonstrated notification-boundary races; storeOriginal names that cohesive procedure without another writer or retry path. Author assessment and remaining acceptance: docs/selected-tab-20261029/IMPLEMENTATION.md.",
+    "reviewedBy": "Codex implementation assessment; no independent review performed (user hold)",
+    "reviewedOn": "2026-10-29"
   },
   {
     "file": "apps/web/src/shared/meri-uploads/upload-wire.ts",

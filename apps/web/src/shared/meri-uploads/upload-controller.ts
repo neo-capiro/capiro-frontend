@@ -101,7 +101,8 @@ export function createUploadController(options: {
   const listeners = new Set<() => void>();
   let version = 0;
   let disposed = false;
-  const current = () => !disposed && !lifetime.signal.aborted && options.isCurrent();
+  const current = () =>
+    !disposed && !lifetime.signal.aborted && options.isCurrent();
   const changed = () => {
     version++;
     options.onChange?.();
@@ -147,16 +148,24 @@ export function createUploadController(options: {
     attempts.set(requestId, controller);
     return {
       signal: AbortSignal.any([lifetime.signal, controller.signal]),
-      done: () => attempts.delete(requestId),
+      done: () => {
+        if (attempts.get(requestId) === controller) attempts.delete(requestId);
+      },
     };
   }
 
-  async function add(files: readonly File[]) {
+  async function add(
+    files: readonly File[],
+    onStarted?: (requestId: string) => void,
+  ) {
     const room = MAX_COMPOSER_UPLOADS - (items.size + selectedCount());
     if (room < 1) return;
     for (const file of files.slice(0, room)) {
       if (!current()) return;
       const requestId = crypto.randomUUID();
+      // A local handoff can correlate this exact owner-generated attempt before
+      // dispatch. Throwing here refuses admission without creating a row/write.
+      onStarted?.(requestId);
       const item: UploadItem = {
         requestId,
         uploadId: null,
@@ -166,49 +175,54 @@ export function createUploadController(options: {
         sha256: "",
         state: "declaring",
       };
-      update(requestId, item);
+      // One cancellable attempt spans declaration and original storage. Register
+      // it before publishing either stage, so a subscriber can pause immediately.
       const run = attempt(requestId);
-      let declared;
+      update(requestId, item);
       try {
-        declared = await options.wire.declare(requestId, file, run.signal);
+        await storeOriginal(item, file, run.signal);
       } finally {
         run.done();
       }
-      if (!current()) return;
-      if (!declared.ok) {
-        update(requestId, {
-          ...item,
-          state: declared.refusal.uncertain ? "unknown" : "refused",
-          refusal: declared.refusal,
-        });
-        continue;
-      }
-      const retained = retain(requestId, file, declared.value);
-      // The declaration reply is the only source of the allocated id and of the original it expects.
-      update(requestId, {
-        ...withReceipt(item, declared.value.receipt),
-        state: "uploading",
-      });
-      const write = attempt(requestId);
-      let written;
-      try {
-        written = await options.wire.write(retained, write.signal);
-      } finally {
-        write.done();
-      }
-      if (!current()) return;
-      const previous = items.get(requestId) ?? item;
-      if (!written.ok) {
-        update(requestId, {
-          ...previous,
-          state: written.refusal.uncertain ? "unknown" : "refused",
-          refusal: written.refusal,
-        });
-        continue;
-      }
-      retained.receipt = written.value;
-      update(requestId, withReceipt(previous, written.value));
     }
+  }
+
+  /** The existing wire admits both stages under the same cancellation signal. */
+  async function storeOriginal(
+    item: UploadItem,
+    file: File,
+    signal: AbortSignal,
+  ) {
+    const { requestId } = item;
+    const declared = await options.wire.declare(requestId, file, signal);
+    if (!current()) return;
+    if (!declared.ok) {
+      update(requestId, {
+        ...item,
+        state: declared.refusal.uncertain ? "unknown" : "refused",
+        refusal: declared.refusal,
+      });
+      return;
+    }
+    const retained = retain(requestId, file, declared.value);
+    // Only this admitted declaration supplies the id and expected original.
+    update(requestId, {
+      ...withReceipt(item, declared.value.receipt),
+      state: "uploading",
+    });
+    const written = await options.wire.write(retained, signal);
+    if (!current()) return;
+    const previous = items.get(requestId) ?? item;
+    if (!written.ok) {
+      update(requestId, {
+        ...previous,
+        state: written.refusal.uncertain ? "unknown" : "refused",
+        refusal: written.refusal,
+      });
+      return;
+    }
+    retained.receipt = written.value;
+    update(requestId, withReceipt(previous, written.value));
   }
 
   /** Keep the admitted declaration and the one admitted original request for this attempt. */

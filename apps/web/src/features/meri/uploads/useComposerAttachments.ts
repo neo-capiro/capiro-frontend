@@ -22,6 +22,9 @@ export function useComposerAttachments(
     uploads?.version ?? noVersion,
   );
   return {
+    ...(port
+      ? { selectedTab: { access: port.selectedTab, context: port.context } }
+      : {}),
     available: uploads !== null,
     unavailable,
     items: uploads?.items() ?? [],

@@ -3,12 +3,18 @@ import type {
   UploadItem,
   UploadSendArgument,
 } from "../../../shared/meri-uploads/upload-controller";
+import type { SelectedTabAccess } from "../../../shared/meri-selected-tab/access";
+import type { ConversationContext } from "../../../shared/meri-conversations/session";
 
 /**
  * What the composer may show and ask for. It carries no credential, no URL and no object key, and
  * it grants no file, extraction or send authority: the service re-resolves custody at send time.
  */
 export type ComposerAttachments = Readonly<{
+  selectedTab?: Readonly<{
+    access: SelectedTabAccess;
+    context: ConversationContext;
+  }>;
   /** False while no conversation session has bound an upload access; Attach stays unavailable. */
   available: boolean;
   /** Existing composer copy explaining why attachments are unavailable. */
