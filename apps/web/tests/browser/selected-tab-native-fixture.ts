@@ -92,7 +92,13 @@ export function installTabPortFixture() {
       return port;
     },
   };
-  Object.assign(Reflect.get(window, "chrome"), { runtime });
+  const browserChrome = Reflect.get(window, "chrome");
+  if (browserChrome) Object.assign(browserChrome, { runtime });
+  else
+    Object.defineProperty(window, "chrome", {
+      value: { runtime },
+      configurable: true,
+    });
   return {
     sent,
     connection: () => connection,
