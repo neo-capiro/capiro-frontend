@@ -5,6 +5,7 @@ import type {
 } from "../../../../shared/capiro/operations/research-share-schemas";
 import { ActionButton, Badge, DataTable } from "../../../../shared/module-ui";
 import { SourceEvidence, contributionSources } from "./SourceEvidence";
+import { billSubjectSummary } from "./subject-facts";
 import styles from "./share.module.css";
 
 /**
@@ -380,7 +381,9 @@ function Subjects({ dashboard }: { dashboard: ResearchShareDashboard }) {
     );
   return (
     <ul className={styles.list}>
-      {rows.map((subject) => (
+      {rows.map((subject) => {
+        const frozenSummary = billSubjectSummary(subject.facts);
+        return (
         <li key={subject.id} className={styles.listRow}>
           <span>
             {subject.label ?? subject.targetId}
@@ -388,6 +391,9 @@ function Subjects({ dashboard }: { dashboard: ResearchShareDashboard }) {
               {" "}
               · {subject.targetKind.replaceAll("_", " ")}
             </span>
+            {frozenSummary && (
+              <span className={styles.muted}>{" "}· {frozenSummary}</span>
+            )}
           </span>
           <Badge
             tone={subject.disposition === "included" ? "success" : "neutral"}
@@ -395,7 +401,8 @@ function Subjects({ dashboard }: { dashboard: ResearchShareDashboard }) {
             {subject.disposition.replaceAll("_", " ")}
           </Badge>
         </li>
-      ))}
+        );
+      })}
     </ul>
   );
 }
