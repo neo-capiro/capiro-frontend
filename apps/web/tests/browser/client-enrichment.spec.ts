@@ -381,13 +381,19 @@ test("a lost start response survives reload and recovers the same request", asyn
   expect(state.posts[1]).toEqual(state.posts[0]);
   expect(state.starts.size).toBe(1);
 });
-test("run again opens saved choices and creates a new run only after submission", async ({ page }) => {
+test("run again opens saved choices and creates a new run only after submission", async ({
+  page,
+}) => {
   const { state } = await installEnrichment(page);
   const priorId = state.run!.id;
   const drawer = await openReview(page);
   await drawer.getByRole("button", { name: "Run again", exact: true }).click();
-  await expect(drawer.getByRole("checkbox", { name: "Public web", exact: true })).toBeChecked();
-  await expect(drawer.getByRole("checkbox", { name: "LDA", exact: true })).toBeChecked();
+  await expect(
+    drawer.getByRole("checkbox", { name: "Public web", exact: true }),
+  ).toBeChecked();
+  await expect(
+    drawer.getByRole("checkbox", { name: "LDA", exact: true }),
+  ).toBeChecked();
   expect(state.posts).toHaveLength(0);
   await drawer.getByRole("button", { name: "Start selected research" }).click();
   await expect(drawer).toContainText("Research is still running");
@@ -395,15 +401,23 @@ test("run again opens saved choices and creates a new run only after submission"
   expect(state.posts[0]?.body.requestId).not.toBe(priorId);
 });
 
-test("closing during research preflight prevents the start POST", async ({ page }) => {
+test("closing during research preflight prevents the start POST", async ({
+  page,
+}) => {
   const { state } = await installEnrichment(page);
   state.run = null;
   const drawer = await openReview(page);
-  await drawer.getByRole("checkbox", { name: "Public web", exact: true }).check();
-  let release = () => {}, entered = false;
-  const gate = new Promise<void>(resolve => { release = resolve; });
-  await page.route("**/fill-with-meri/setup", async route => {
-    entered = true; await gate;
+  await drawer
+    .getByRole("checkbox", { name: "Public web", exact: true })
+    .check();
+  let release = () => {},
+    entered = false;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/fill-with-meri/setup", async (route) => {
+    entered = true;
+    await gate;
     await route.fallback().catch(() => {});
   });
   await drawer.getByRole("button", { name: "Start selected research" }).click();
@@ -411,6 +425,91 @@ test("closing during research preflight prevents the start POST", async ({ page 
   await drawer.getByRole("button", { name: "Close review" }).click();
   release();
   await expect(drawer).toBeHidden();
+  expect(state.posts).toHaveLength(0);
+});
+
+test("a selected failed task queues an exact retry and refreshes current progress", async ({
+  page,
+}) => {
+  const { state } = await installEnrichment(page);
+  state.run!.status = "partial";
+  Object.assign(state.run!.tasks![0]!, {
+    status: "failed",
+    attempt: 3,
+    maxAttempts: 3,
+  });
+  const drawer = await openReview(page);
+  await drawer.getByRole("button", { name: "Retry task", exact: true }).click();
+  await expect(drawer).toContainText(
+    "Retry queued. The task ledger shows its current progress.",
+  );
+  expect(state.posts).toHaveLength(1);
+  expect(state.posts[0]?.body).toEqual({
+    requestId: expect.any(String),
+    expectedAttempt: 3,
+    expectedTaskType: "public_web",
+  });
+  expect(state.run!.tasks![0]!.status).toBe("queued");
+  await expect(
+    drawer.getByRole("button", { name: "Retry task", exact: true }),
+  ).toHaveCount(0);
+});
+
+test("lost retry recovery does not restart a later failed attempt", async ({
+  page,
+}) => {
+  const { state } = await installEnrichment(page);
+  state.run!.status = "partial";
+  state.dropRetryOnce = true;
+  Object.assign(state.run!.tasks![0]!, {
+    status: "failed",
+    attempt: 3,
+    maxAttempts: 3,
+  });
+  let drawer = await openReview(page);
+  await drawer.getByRole("button", { name: "Retry task", exact: true }).click();
+  await expect(
+    drawer.getByRole("button", { name: "Recover task retry" }),
+  ).toBeEnabled();
+  Object.assign(state.run!.tasks![0]!, {
+    status: "failed",
+    attempt: 4,
+    maxAttempts: 6,
+  });
+  state.run!.status = "partial";
+  await page.reload();
+  drawer = await openReview(page);
+  await expect(
+    drawer.getByRole("button", { name: "Retry task", exact: true }),
+  ).toBeDisabled();
+  await drawer.getByRole("button", { name: "Recover task retry" }).click();
+  await expect(drawer).toContainText(
+    "Retry queued. The task ledger shows its current progress.",
+  );
+  await expect(drawer).toContainText("Attempt 4 of 6");
+  expect(state.run!.tasks![0]!.status).toBe("failed");
+  expect(state.posts).toHaveLength(2);
+  expect(state.posts[1]).toEqual(state.posts[0]);
+  expect(state.retries.size).toBe(1);
+});
+
+test("changed task preflight refuses without a retry POST", async ({
+  page,
+}) => {
+  const { state } = await installEnrichment(page);
+  state.run!.status = "partial";
+  Object.assign(state.run!.tasks![0]!, {
+    status: "failed",
+    attempt: 3,
+    maxAttempts: 3,
+  });
+  const drawer = await openReview(page);
+  await expect(drawer).toContainText("Attempt 3 of 3");
+  state.run!.tasks![0]!.attempt = 4;
+  await drawer.getByRole("button", { name: "Retry task", exact: true }).click();
+  await expect(drawer).toContainText(
+    "The task changed. Refresh its saved status before retrying.",
+  );
   expect(state.posts).toHaveLength(0);
 });
 

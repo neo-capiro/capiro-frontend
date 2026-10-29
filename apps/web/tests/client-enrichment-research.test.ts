@@ -91,6 +91,7 @@ it("a lost response retains the request and recovery repeats only the original U
     "exact saved run",
   );
   const saved = (await journal().load())!;
+  if (!("input" in saved.command)) throw new Error("Expected a saved research start");
   await sendResearch(
     api,
     clientId,

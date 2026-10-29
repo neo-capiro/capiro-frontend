@@ -11,11 +11,28 @@ import {
   type ResearchCommand,
 } from "./research-contracts";
 import type { ReviewActor } from "./actions";
+import {
+  retryCommandSchema,
+  retryResultSchema,
+  matchesRetryResult,
+  type RetryCommand,
+  type RetryResult,
+} from "./retry-contracts";
 
-const schema = z.strictObject({
-  command: researchCommandSchema,
-  confirmed: z.literal(true).optional(),
-});
+const commandSchema = z.union([researchCommandSchema, retryCommandSchema]);
+const schema = z
+  .strictObject({
+    command: commandSchema,
+    confirmed: z.literal(true).optional(),
+    retry: retryResultSchema.optional(),
+  })
+  .refine((value) =>
+    "input" in value.command
+      ? value.retry === undefined
+      : value.confirmed
+        ? Boolean(value.retry && matchesRetryResult(value.command, value.retry))
+        : value.retry === undefined,
+  );
 export type SavedResearch = z.infer<typeof schema>;
 export const researchRecoveryContract = {
   schema,
@@ -23,6 +40,8 @@ export const researchRecoveryContract = {
   validateUpdate(before: SavedResearch, after: SavedResearch) {
     if (
       JSON.stringify(before.command) !== JSON.stringify(after.command) ||
+      (before.retry !== undefined &&
+        JSON.stringify(before.retry) !== JSON.stringify(after.retry)) ||
       (before.confirmed && !after.confirmed)
     )
       throw new Error("The original research request cannot change.");
@@ -44,7 +63,8 @@ export function researchRecovery(
     contract = researchRecoveryContract;
   return {
     load: () => readRecovery(scope, contract, guard),
-    async reserve(command: ResearchCommand) {
+    async reserve(command: ResearchCommand | RetryCommand) {
+      command = commandSchema.parse(command);
       const saved = await reserveRecovery(
         scope,
         command.requestId,
@@ -63,6 +83,14 @@ export function researchRecovery(
         scope,
         command.requestId,
         { command, confirmed: true },
+        contract,
+        () => {},
+      ),
+    receivedRetry: (command: RetryCommand, retry: RetryResult) =>
+      updateRecovery(
+        scope,
+        command.requestId,
+        { command, retry, confirmed: true },
         contract,
         () => {},
       ),

@@ -1,4 +1,5 @@
 import type { Page } from "@playwright/test";
+import type { RetryResult } from "../../src/features/portfolio/client-profile/enrichment/retry-contracts";
 import { clientId, installFixtures, json } from "./fixtures";
 import {
   runSchema,
@@ -135,6 +136,8 @@ export async function installEnrichment(page: Page) {
     receipts: new Map<string, ApplicationResult>(),
     starts: new Map<string, FillRun>(),
     dropStartOnce: false,
+    retries: new Map<string, RetryResult>(),
+    dropRetryOnce: false,
   };
   await page.route("**/api/backend/core/me", (route) =>
     json(route, {
@@ -249,6 +252,37 @@ export async function installEnrichment(page: Page) {
         return json(route, state.run);
       }
       if (!state.run) return json(route, { message: "Run unavailable" }, 404);
+      if (path.endsWith("/retry")) {
+        const requestId = String(body.requestId);
+        const saved = state.retries.get(requestId);
+        if (saved) return json(route, { ...saved, replayed: true });
+        const taskId = path.split("/")[3]!;
+        const task = state.run.tasks?.find((value) => value.id === taskId);
+        const queued =
+          state.run.status !== "cancelled" &&
+          task?.status === "failed" &&
+          task.attempt === body.expectedAttempt &&
+          task.taskType === body.expectedTaskType;
+        const result: RetryResult = {
+          requestId,
+          runId: state.run.id,
+          taskId,
+          expectedAttempt: Number(body.expectedAttempt),
+          expectedTaskType: String(body.expectedTaskType),
+          status: queued ? "queued" : "refused",
+          reason: queued ? null : "The task changed.",
+        };
+        if (queued) {
+          task!.status = "queued";
+          state.run.status = "running";
+        }
+        state.retries.set(requestId, result);
+        if (state.dropRetryOnce) {
+          state.dropRetryOnce = false;
+          return route.abort("failed");
+        }
+        return json(route, { ...result, replayed: false });
+      }
       if (path.endsWith("/apply") || path.endsWith("/assign-matter")) {
         const requestId = String(body.requestId);
         const saved = state.receipts.get(requestId);
