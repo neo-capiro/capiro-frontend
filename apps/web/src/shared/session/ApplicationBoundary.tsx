@@ -13,6 +13,7 @@ import { SessionContext } from "./SessionContext";
 import { SelectedClientProvider } from "./SelectedClient";
 import { routeClientId } from "./client-route";
 import { isOnboardPath, isPublicOnboardPath } from "./onboard-route";
+import { ImpersonationBoundary } from "../impersonation/ImpersonationBoundary";
 
 const noSignedInSession = () => {};
 
@@ -39,14 +40,18 @@ function SessionData({
   children,
   authenticatedContent,
   clientId,
+  identity,
   onSessionExpired,
 }: {
   children: ReactNode;
   authenticatedContent?: ReactNode;
   clientId?: string;
+  identity: string;
   onSessionExpired: () => void;
 }) {
   const [expired, setExpired] = useState(false);
+  const [actingScope, setActingScope] = useState<string | null>(null);
+  const onScope = useCallback((id: string | null) => setActingScope(id), []);
   const expire = useCallback(() => {
     onSessionExpired();
     setExpired(true);
@@ -65,12 +70,17 @@ function SessionData({
     );
   return (
     <SessionContext.Provider value="signed-in">
-      <DataProvider key={clientId ?? "no-selection"} onSessionExpired={expire}>
+      <DataProvider
+        key={JSON.stringify([clientId, actingScope])}
+        onSessionExpired={expire}
+      >
         <CapiroDataProvider onSessionExpired={expire}>
-          <SelectedClientProvider requestedId={clientId}>
-            {authenticatedContent}
-            {children}
-          </SelectedClientProvider>
+          <ImpersonationBoundary identity={identity} onScope={onScope}>
+            <SelectedClientProvider requestedId={clientId}>
+              {authenticatedContent}
+              {children}
+            </SelectedClientProvider>
+          </ImpersonationBoundary>
         </CapiroDataProvider>
       </DataProvider>
     </SessionContext.Provider>
@@ -129,6 +139,7 @@ function CurrentSession({
     <SessionData
       key={JSON.stringify([userId, sessionId, orgId])}
       clientId={clientId}
+      identity={JSON.stringify([userId, sessionId, orgId])}
       onSessionExpired={tabSession.expire}
       authenticatedContent={authenticatedContent}
     >

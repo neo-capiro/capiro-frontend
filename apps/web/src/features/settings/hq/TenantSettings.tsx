@@ -9,7 +9,6 @@ import {
   Badge,
   DataTable,
   StatusPanel,
-  TextArea,
   TextInput,
 } from "../../../shared/module-ui";
 import {
@@ -23,6 +22,7 @@ import styles from "../styles";
 import { useSettingsMutation } from "../useSettingsMutation";
 import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import { CreateTenant, TenantDetails } from "./TenantDialogs";
+import { ImpersonationDialog } from "./ImpersonationDialog";
 
 type Tenant = z.infer<typeof tenantListSchema>;
 
@@ -214,40 +214,13 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
           </SettingsNotice>
         )}
       </SettingsDialog>
-      <SettingsDialog
-        busy={action.busy}
-        open={!!selected && mode === "impersonate"}
-        onClose={() => setSelected(undefined)}
-        title={`Impersonate ${selected?.slug ?? "tenant"}`}
-        description="The reason is recorded in the audit log alongside your user ID."
-        footer={
-          <>
-            <SettingsButton
-              disabled={locked}
-              onClick={() => setSelected(undefined)}
-            >
-              Cancel
-            </SettingsButton>
-            <SettingsButton primary disabled>
-              Start impersonation
-            </SettingsButton>
-          </>
-        }
-      >
-        <SettingField label="Reason">
-          <TextArea
-            placeholder="Investigating ticket #1234, invitation flow"
-            minLength={10}
-            maxLength={500}
-            disabled
-          />
-        </SettingField>
-        <SettingsNotice title="Impersonation unavailable">
-          The new frontend does not yet bind an audited impersonation scope to
-          subsequent requests. Starting a session is unavailable until that
-          trusted connection is implemented.
-        </SettingsNotice>
-      </SettingsDialog>
+      {selected && mode === "impersonate" && (
+        <ImpersonationDialog
+          key={selected.id}
+          selected={selected}
+          onClose={() => setSelected(undefined)}
+        />
+      )}
       {selected && mode === "detail" && (
         <TenantDetails
           tenantId={selected.id}

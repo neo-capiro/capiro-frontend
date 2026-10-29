@@ -22,6 +22,8 @@ export function coreSessionAuthentication(
   path: string,
 ): "clerk-session" | undefined {
   if (service !== "core") return undefined;
+  if (/^\/capiro-admin\/impersonate(?:\/(?:end|[0-9a-f-]{36})(?:\/workspace)?)?$/.test(path))
+    return "clerk-session";
   // Saved layouts require Core's current-session proof on every configured target.
   if (path === "/me/portfolio-layout" && (method === "GET" || method === "PUT"))
     return "clerk-session";
