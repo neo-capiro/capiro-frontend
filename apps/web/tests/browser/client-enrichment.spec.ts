@@ -294,24 +294,126 @@ test("running review polls and cancellation is explicit and scoped", async ({
   );
   expect(state.posts[0]?.path).toMatch(/\/cancel$/);
 });
-test("empty/setup blocks unsafe new research and task retry", async ({
+test("empty setup requires explicit source selection before starting research", async ({
   page,
 }) => {
   const { state, unexpected } = await installEnrichment(page);
   state.run = null;
   const drawer = await openReview(page);
-  await expect(drawer).toContainText(
-    "current service can save website, identity mappings and facility districts before approval",
-  );
+  await expect(drawer).toContainText("Research saves provisional findings");
   await expect(
-    drawer.getByRole("button", { name: "Start research unavailable" }),
+    drawer.getByRole("button", { name: "Start selected research" }),
   ).toBeDisabled();
+  await drawer
+    .getByRole("checkbox", { name: "Public web", exact: true })
+    .check();
   await expect(
-    drawer.getByRole("button", { name: "Run again" }),
-  ).toBeDisabled();
+    drawer.getByRole("button", { name: "Start selected research" }),
+  ).toBeEnabled();
   expect(state.posts).toHaveLength(0);
   expect(unexpected).toEqual([]);
 });
+
+test("starting research submits only the selected sources, offered identities and ready documents", async ({
+  page,
+}) => {
+  const { state, unexpected } = await installEnrichment(page);
+  state.run = null;
+  const drawer = await openReview(page);
+  await drawer
+    .getByLabel("Research website", { exact: true })
+    .fill("https://research.example/");
+  await drawer
+    .getByRole("checkbox", { name: "Public web", exact: true })
+    .check();
+  await drawer.getByRole("checkbox", { name: "LDA", exact: true }).check();
+  await drawer
+    .getByRole("checkbox", { name: "Synthetic suggested identity" })
+    .check();
+  await expect(
+    drawer.getByRole("checkbox", { name: "Synthetic imported identity" }),
+  ).toBeChecked();
+  await drawer
+    .getByRole("checkbox", { name: "Program overview.txt · Ready" })
+    .check();
+  await drawer.getByRole("button", { name: "Start selected research" }).click();
+  await expect(drawer).toContainText("Research is still running");
+  expect(state.posts).toHaveLength(1);
+  expect(state.posts[0]?.body).toEqual({
+    requestId: expect.any(String),
+    sources: ["public_web", "lda"],
+    website: "https://research.example/",
+    ldaClientIds: [73],
+    attachmentIds: ["60000000-0000-4000-8000-000000000002"],
+  });
+  await expect(
+    drawer.getByRole("button", { name: "Run again" }),
+  ).toBeDisabled();
+  expect(unexpected).toEqual([]);
+});
+
+test("a lost start response survives reload and recovers the same request", async ({
+  page,
+}) => {
+  const { state } = await installEnrichment(page);
+  state.run = null;
+  state.dropStartOnce = true;
+  let drawer = await openReview(page);
+  await drawer
+    .getByRole("checkbox", { name: "Public web", exact: true })
+    .check();
+  await drawer.getByRole("button", { name: "Start selected research" }).click();
+  await expect(
+    drawer.getByRole("button", { name: "Recover research request" }),
+  ).toBeEnabled();
+  await page.reload();
+  drawer = await openReview(page);
+  await expect(
+    drawer.getByRole("button", { name: "Run again" }),
+  ).toBeDisabled();
+  await drawer
+    .getByRole("button", { name: "Recover research request" })
+    .click();
+  await expect(
+    drawer.getByRole("button", { name: "Recover research request" }),
+  ).toHaveCount(0);
+  expect(state.posts).toHaveLength(2);
+  expect(state.posts[1]).toEqual(state.posts[0]);
+  expect(state.starts.size).toBe(1);
+});
+test("run again opens saved choices and creates a new run only after submission", async ({ page }) => {
+  const { state } = await installEnrichment(page);
+  const priorId = state.run!.id;
+  const drawer = await openReview(page);
+  await drawer.getByRole("button", { name: "Run again", exact: true }).click();
+  await expect(drawer.getByRole("checkbox", { name: "Public web", exact: true })).toBeChecked();
+  await expect(drawer.getByRole("checkbox", { name: "LDA", exact: true })).toBeChecked();
+  expect(state.posts).toHaveLength(0);
+  await drawer.getByRole("button", { name: "Start selected research" }).click();
+  await expect(drawer).toContainText("Research is still running");
+  expect(state.posts).toHaveLength(1);
+  expect(state.posts[0]?.body.requestId).not.toBe(priorId);
+});
+
+test("closing during research preflight prevents the start POST", async ({ page }) => {
+  const { state } = await installEnrichment(page);
+  state.run = null;
+  const drawer = await openReview(page);
+  await drawer.getByRole("checkbox", { name: "Public web", exact: true }).check();
+  let release = () => {}, entered = false;
+  const gate = new Promise<void>(resolve => { release = resolve; });
+  await page.route("**/fill-with-meri/setup", async route => {
+    entered = true; await gate;
+    await route.fallback().catch(() => {});
+  });
+  await drawer.getByRole("button", { name: "Start selected research" }).click();
+  await expect.poll(() => entered).toBe(true);
+  await drawer.getByRole("button", { name: "Close review" }).click();
+  release();
+  await expect(drawer).toBeHidden();
+  expect(state.posts).toHaveLength(0);
+});
+
 test("wrong-client response hides review; unavailable read can retry", async ({
   page,
 }) => {

@@ -133,6 +133,8 @@ export async function installEnrichment(page: Page) {
     latestGets: 0,
     role: "user_admin",
     receipts: new Map<string, ApplicationResult>(),
+    starts: new Map<string, FillRun>(),
+    dropStartOnce: false,
   };
   await page.route("**/api/backend/core/me", (route) =>
     json(route, {
@@ -183,7 +185,14 @@ export async function installEnrichment(page: Page) {
                 origin: "imported",
               },
             ],
-            suggestedIdentities: [],
+            suggestedIdentities: [
+              {
+                id: 73,
+                name: "Synthetic suggested identity",
+                selected: false,
+                origin: "suggested",
+              },
+            ],
             taskPreview: ["Public web", "LDA"],
           });
         if (state.mode === "load-fail")
@@ -211,6 +220,34 @@ export async function installEnrichment(page: Page) {
       }
       const body = route.request().postDataJSON() as Record<string, unknown>;
       state.posts.push({ path, body });
+      if (path === "runs") {
+        const id = String(body.requestId);
+        const previous = state.starts.get(id);
+        if (previous) return json(route, previous);
+        state.run = runSchema.parse({
+          ...syntheticRun(),
+          id,
+          status: "running",
+          stage: "research",
+          completedAt: null,
+          requestedSources: body.sources,
+          attachmentIds: body.attachmentIds,
+          selectedLdaIds: [12, ...(body.ldaClientIds as number[])],
+          setup: {
+            website: body.website,
+            sources: body.sources,
+            attachmentIds: body.attachmentIds,
+          },
+          tasks: [],
+          findings: [],
+        });
+        state.starts.set(id, structuredClone(state.run));
+        if (state.dropStartOnce) {
+          state.dropStartOnce = false;
+          return route.abort("failed");
+        }
+        return json(route, state.run);
+      }
       if (!state.run) return json(route, { message: "Run unavailable" }, 404);
       if (path.endsWith("/apply") || path.endsWith("/assign-matter")) {
         const requestId = String(body.requestId);
