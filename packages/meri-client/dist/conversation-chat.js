@@ -1,10 +1,12 @@
 import { Chat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
-import { validateUIEvent } from '@capiro/meri-contracts/browser';
-import { receiveNativeBillTextSourceEvent, BILL_TEXT_SOURCE_EVENT, receiveNativeHearingSourceEvent, HEARING_SOURCE_EVENT } from '@capiro/meri-contracts/conversation-sources';
 import { conversationApplicationMetadata as protocol, receiveConversationRequest, receiveConversationResponse, ConversationResponseError, } from '@capiro/meri-contracts/conversation-application';
 import { MeriGuardedTransport } from './guarded-transport.js';
 import { ConversationUnavailable } from './conversation-network.js';
+function hasEventId(value) {
+    return value !== null && typeof value === 'object' && 'eventId' in value
+        && typeof value.eventId === 'string';
+}
 /** Only the pinned producer's content-free lifecycle frames may bypass event admission. */
 function checkConversationFrame(chunk) {
     if (chunk.type === 'data-meri-event') {
@@ -88,12 +90,10 @@ export function conversationChat(network, observation, current) {
                 checkConversationFrame(chunk);
             };
         },
+        // Check frame identity before the canonical receiver consumes its single-use cursor.
+        // onEvent admits every event kind before the transport forwards it to the SDK.
         validateEvent: value => {
-            if (value !== null && typeof value === 'object' && 'type' in value && value.type === BILL_TEXT_SOURCE_EVENT)
-                return receiveNativeBillTextSourceEvent(new TextEncoder().encode(JSON.stringify(value)));
-            if (value !== null && typeof value === 'object' && 'type' in value && value.type === HEARING_SOURCE_EVENT)
-                return receiveNativeHearingSourceEvent(new TextEncoder().encode(JSON.stringify(value)));
-            if (!validateUIEvent(value))
+            if (!hasEventId(value))
                 throw new ConversationUnavailable('invalid-event');
             return value;
         },

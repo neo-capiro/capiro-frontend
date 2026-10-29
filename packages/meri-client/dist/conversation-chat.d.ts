@@ -6,7 +6,7 @@ import type { ConversationNetwork } from './conversation-network.js';
 import type { ConversationObservation } from './conversation-observation.js';
 export interface ConversationChat {
     readonly chat: Chat<MeriUIMessage>;
-    readonly transport: MeriGuardedTransport<ConversationEvent>;
+    readonly transport: MeriGuardedTransport<Pick<ConversationEvent, 'eventId'>>;
 }
 /** The existing guard and external SDK Chat, with a separate public0.1.3 admission mode. */
 export declare function conversationChat(network: ConversationNetwork, observation: ConversationObservation, current: () => boolean): ConversationChat;
