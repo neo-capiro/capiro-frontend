@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
-import { researchReceipt } from "./research-schemas";
+import { researchReceipt, researchMember } from "./research-schemas";
 
 const source =
   "capiro-backend@fba7ed5d1 packages/shared/src/research-portfolios.ts; research-portfolios.controller.ts; research-portfolio-rules.ts";
@@ -141,13 +141,8 @@ export const researchRuleOperations = {
               .array(
                 z
                   .object({
-                    targetKind: z.enum([
-                      "program",
-                      "program_element",
-                      "project",
-                      "budget_line",
-                      "award",
-                    ]),
+                    // Same member-kind set as everywhere else; a rule may propose a bill.
+                    targetKind: researchMember.shape.targetKind,
                     targetId: z.string(),
                     label: z.string().nullable().optional(),
                     facts: z.record(z.string(), z.unknown()),

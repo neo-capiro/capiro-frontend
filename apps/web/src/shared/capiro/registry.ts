@@ -31,6 +31,7 @@ import { defenseProductCoverageOperations } from "./operations/defense-product-c
 import { defenseEvidenceOperations } from "./operations/defense-evidence";
 import { federalEvidenceOperations } from "./operations/federal-evidence";
 import { researchMemberDiscoveryOperations } from "./operations/research-member-discovery";
+import { researchBillOperations } from "./operations/research-bills";
 import { defenseChangesOperations } from "./operations/defense-changes";
 import { settingsOperations } from "./operations/settings";
 import { settingsAdminOperations } from "./operations/settings-admin";
@@ -91,6 +92,7 @@ export const capiroOperations = {
   ...defenseEvidenceOperations,
   ...federalEvidenceOperations,
   ...researchMemberDiscoveryOperations,
+  ...researchBillOperations,
   ...defenseChangesOperations,
   ...onboardFunnelOperations,
   ...onboardSetupOperations,
