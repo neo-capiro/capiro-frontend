@@ -18,17 +18,6 @@ RUN NODE_OPTIONS=--max-old-space-size=4096 CIRCLE_NODE_TOTAL=2 npm run build
 # Fail the image build if the corrected framework file is not in the packaged standalone output.
 RUN node scripts/patch-next-proxy-error-log.cjs --verify-standalone apps/web/.next/standalone
 
-# Export-only stage for the backend's 8080 artifact consumer
-# (apps/web/Dockerfile in capiro-backend). It carries the three trees the
-# standalone-artifact manifest indexes, so
-#   docker buildx build --target standalone-artifact --output type=local,dest=<dir> .
-# produces <dir>/{standalone,public,static}. Declared before `runtime` so the
-# default image target of this Dockerfile is unchanged.
-FROM scratch AS standalone-artifact
-COPY --from=build /app/apps/web/.next/standalone /standalone
-COPY --from=build /app/apps/web/public /public
-COPY --from=build /app/apps/web/.next/static /static
-
 FROM base AS runtime
 RUN rm -rf /usr/local/lib/node_modules/npm /opt/yarn-v1.22.22 \
     && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/yarn /usr/local/bin/yarnpkg
