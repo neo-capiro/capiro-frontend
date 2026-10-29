@@ -1,4 +1,80 @@
 import { test, expect } from "@playwright/test";
+test("imports a cited exact bill version with original delivery recovery across remount", async ({
+  page,
+}) => {
+  await page.goto("/federal-review/index.html?official=1&unknown=1");
+  async function choose() {
+    await page
+      .getByRole("button", { name: "Browse cited bill versions" })
+      .click();
+    await expect(
+      page.getByText(/No cited bill versions on this page/),
+    ).toBeVisible();
+    await page
+      .getByRole("button", { name: "More cited bill versions" })
+      .click();
+  }
+  await choose();
+  await page.getByRole("button", { name: "Import this bill version" }).click();
+  await expect(
+    page.getByRole("button", { name: "Recover selected source import" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Browse source files and saved reviews" }),
+  ).toBeDisabled();
+  await page.getByRole("button", { name: "Remount workbench" }).click();
+  await choose();
+  await page
+    .getByRole("button", {
+      name: "Recover original source import",
+      exact: true,
+    })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "119-hr-1", exact: true }),
+  ).toBeVisible();
+  await page.getByLabel("Exact text to find", { exact: true }).fill("$20");
+  await page.getByLabel("New text", { exact: true }).fill("$25");
+  await page
+    .getByRole("button", { name: "Prepare amendment for review" })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Review this revision" }),
+  ).toBeVisible();
+  const deliveries = await page.evaluate(() =>
+    window.federalCalls
+      .filter((x) => x.route === "federal-import")
+      .map((x) => x.body.deliveryId),
+  );
+  expect(deliveries).toHaveLength(2);
+  expect(deliveries[0]).toBe(deliveries[1]);
+});
+test("stale source clears confirmation and keeps the original uncertain export recoverable", async ({
+  page,
+}) => {
+  await page.goto("/federal-review/index.html?stale=1");
+  await prepare(page);
+  await page.getByRole("checkbox").check();
+  await page
+    .getByRole("button", { name: "Export operative", exact: true })
+    .click();
+  await expect(page.getByRole("alert")).toContainText("source has changed");
+  await expect(page.getByRole("checkbox")).not.toBeChecked();
+  await expect(page.getByLabel("New text", { exact: true })).toBeDisabled();
+  await page
+    .getByRole("button", { name: "Recover original operation", exact: true })
+    .click();
+  await expect(
+    page.getByRole("button", { name: "Get verified file" }),
+  ).toBeVisible();
+  const deliveries = await page.evaluate(() =>
+    window.federalCalls
+      .filter((x) => x.route === "federal-publish")
+      .map((x) => x.body.deliveryId),
+  );
+  expect(deliveries).toHaveLength(2);
+  expect(deliveries[0]).toBe(deliveries[1]);
+});
 async function prepare(page: import("@playwright/test").Page) {
   await page
     .getByRole("button", { name: "Browse source files and saved reviews" })

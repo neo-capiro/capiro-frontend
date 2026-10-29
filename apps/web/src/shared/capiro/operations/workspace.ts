@@ -9,6 +9,7 @@ import { workspaceHillDayOperations } from "./workspace-hillday";
 import { workspaceProspectOperations } from "./workspace-prospects";
 import { workspaceProspectSaveOperations } from "./workspace-prospect-save";
 import { workspaceProspectPublicationOperations } from "./workspace-prospect-publication";
+import { workspaceProspectGenerationOperations } from "./workspace-prospect-generation";
 import { newsletterStagingOperations } from "./workspace-newsletter-staging";
 import { workspaceObjectiveOperations } from "./objective-work-destinations";
 import { richNewsletterOperations } from "./rich-newsletter";
@@ -26,6 +27,7 @@ import { workspaceNotificationOperations } from "./workspace-notifications";
 import { richNewsletterReviewOperations } from "./rich-newsletter-review";
 import { richNewsletterCollaborationOperations } from "./rich-newsletter-collaboration";
 export const workspaceOperations = {
+  ...workspaceProspectGenerationOperations,
   ...workspaceProspectPublicationOperations,
   ...richNewsletterCollaborationOperations,
   ...richNewsletterBrandOperations,

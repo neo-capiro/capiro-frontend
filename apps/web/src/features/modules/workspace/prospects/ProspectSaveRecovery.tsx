@@ -13,7 +13,10 @@ export function ProspectSaveRecovery({
 }) {
   return (
     <>
-      <p>Immutable prospect origin: {draft.prospectId}. Manual edits only.</p>
+      <p>
+        Prospect document: {draft.prospectId}. Use History to generate from a
+        saved version or publish it.
+      </p>
       {draft.documents.some((document) => document.sourceBriefVersion) && (
         <p>
           Use the copied-document editor to save this draft and preserve its

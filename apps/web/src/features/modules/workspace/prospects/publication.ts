@@ -1,4 +1,3 @@
-import type { SavedVersion } from "@/shared/capiro/operations/workspace-documents";
 import {
   prospectPublicationBody,
   prospectPublicationResponse,
@@ -10,6 +9,7 @@ import {
   workspaceSnapshotHash,
 } from "@/shared/capiro/workspace-snapshot";
 import type { ProspectDraftScope } from "./manual-draft";
+export { prospectSavedSourceEligible as publicationSourceEligible } from "./saved-source";
 
 export const publicationRecoveryContract = {
   schema: prospectPublicationBody,
@@ -44,22 +44,6 @@ export function bindPublicationState(
       "Publication state belongs to a different prospect or document.",
     );
   return state;
-}
-export function publicationSourceEligible(
-  version: SavedVersion,
-  stateHash?: string,
-) {
-  const snapshot = version.snapshot;
-  const atomic = snapshot?.atomicSave as
-    | { operation?: string; stateHash?: string }
-    | undefined;
-  return Boolean(
-    snapshot &&
-    !snapshot.prospectPublication &&
-    atomic?.operation === "save_prospect_draft" &&
-    stateHash &&
-    atomic.stateHash === stateHash,
-  );
 }
 export async function bindPublication(
   value: unknown,
