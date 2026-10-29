@@ -36,16 +36,16 @@ const meriEnabled = {
 
 test('preview proposes held Meri defaults while unavailable services stay disabled', () => {
   const p = renderPreviewConfiguration(bindings);
-  assert.equal(p.environment.CORE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/api');
-  assert.equal(p.environment.WORKSPACE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/workspace-api');
-  assert.equal(p.environment.INTELLIGENCE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/intel-api');
+  assert.equal(p.environment.CORE_API_BASE_URL, 'https://app.capiro.ai/api');
+  assert.equal(p.environment.WORKSPACE_API_BASE_URL, 'https://app.capiro.ai/workspace-api');
+  assert.equal(p.environment.INTELLIGENCE_API_BASE_URL, 'https://app.capiro.ai/intel-api');
   for (const name of ['STRATEGY_API_BASE_URL', 'ONBOARD_API_BASE_URL', 'MERI_API_BASE_URL', 'MERI_DOCUMENT_OPERATION']) assert.equal(p.environment[name], '');
   assert.equal(p.environment.MERI_ACTION_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_TASK_COMMAND_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_INTENT_APPROVALS_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_CONVERSATION_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_DOCUMENT_WORKFLOW_ENABLED, 'false');
-  assert.equal(p.environment.CAPIRO_REQUEST_ORIGIN, 'https://portfolio-preview.app.capiro.ai');
+  assert.equal(p.environment.CAPIRO_REQUEST_ORIGIN, 'https://app.capiro.ai');
   assert.equal(p.environment.CAPIRO_PREVIEW_READ_ONLY, 'true');
   for (const name of ['CAPIRO_PREVIEW_READ_BACKEND_SOURCE', 'CAPIRO_PREVIEW_READ_API_BASE_URL',
     'CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE', 'CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL',
@@ -88,7 +88,7 @@ test('ordinary authenticated mode switches every service target together and ena
   assert.equal(p.environment.MERI_USER_PREFERENCES_ENABLED, 'true');
   assert.equal(p.environment.MERI_FIRST_CHAT_BOOTSTRAP_ENABLED, 'true');
   assert.equal(p.environment.MERI_CONVERSATION_WORKFLOW_ENABLED, 'true');
-  assert.equal(p.environment.CAPIRO_REQUEST_ORIGIN, 'https://portfolio-preview.app.capiro.ai');
+  assert.equal(p.environment.CAPIRO_REQUEST_ORIGIN, 'https://app.capiro.ai');
   assert.equal(p.expectedCoreDeployment, null); // Old preview metadata is not a new deployment assertion.
   assert.deepEqual(p.secretReferences, renderPreviewConfiguration(bindings).secretReferences);
   validatePreviewParameters(p.parameters, input);
@@ -203,8 +203,8 @@ test('Meri opt-in requires an explicit canonical HTTPS root origin', () => {
   for (const meriApiBaseUrl of [null, 1, 'http://meri.example.test', 'https://meri.example.test/',
     'https://meri.example.test/path', 'https://user@meri.example.test', 'https://meri.example.test?x=1',
     'https://meri.example.test#part', 'https://meri..example.test', 'https://MERI.example.test',
-    'https://127.0.0.1', 'https://portfolio-preview.app.capiro.ai', 'https://first-chat-preview.app-dev.capiro.ai',
-    'https://core-roster-preview.capiro.ai']) {
+    'https://127.0.0.1', 'https://app.capiro.ai', 'https://portfolio-preview.app.capiro.ai',
+    'https://first-chat-preview.app-dev.capiro.ai', 'https://core-roster-preview.capiro.ai']) {
     assert.throws(() => renderPreviewConfiguration({ ...bindings, meriApiBaseUrl }), /PREVIEW_MERI_ORIGIN_INVALID/);
   }
   for (const meriConversationWorkflowEnabled of [null, 1, 'true']) {
@@ -250,7 +250,7 @@ test('Core read and first chat remain held until all exact bindings are supplied
   const active = { ...bindings, ...meriEnabled, previewReadEnabled: true,
     firstChatBootstrapEnabled: true };
   const p = renderPreviewConfiguration(active);
-  assert.equal(p.environment.CORE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/api');
+  assert.equal(p.environment.CORE_API_BASE_URL, 'https://app.capiro.ai/api');
   assert.equal(p.environment.CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL, coreApi);
   assert.equal(p.environment.CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE, coreBootstrapSource);
   assert.equal(Object.hasOwn(p.environment, 'MERI_FIRST_CHAT_CLIENT_ID'), false);
@@ -343,7 +343,7 @@ test('qualified Core roster adds a separate pair without switching first-chat re
     'https://user@core-roster-preview.capiro.ai/api', 'https://core-roster-preview.capiro.ai:443/api',
     'https://core-roster-preview.capiro.ai:8443/api', 'https://CORE-ROSTER-PREVIEW.capiro.ai/api',
     'https://127.0.0.1/api', 'https://localhost/api',
-    'https://portfolio-preview.app.capiro.ai/api', 'https://os.capiro.ai/api', coreApi,
+    'https://portfolio-preview.app.capiro.ai/api', 'https://app.capiro.ai/api', 'https://os.capiro.ai/api', coreApi,
   ]) assert.throws(() => renderPreviewConfiguration({ ...qualified,
     qualifiedCoreClientRosterApiBaseUrl: target }), /PREVIEW_CORE_ROSTER_ORIGIN_INVALID/);
   assert.throws(() => renderPreviewConfiguration({ ...qualified, ...meriEnabled,
@@ -550,7 +550,7 @@ test('preview CLI is import-safe, ignores hostile ambient values and never echoe
     writeFileSync(input, JSON.stringify(bindings));
     const good = run([script, '--bindings', input]);
     assert.equal(good.status, 0, good.stderr);
-    assert.equal(JSON.parse(good.stdout).environment.CORE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/api');
+    assert.equal(JSON.parse(good.stdout).environment.CORE_API_BASE_URL, 'https://app.capiro.ai/api');
     assert.doesNotMatch(good.stdout, /do_not_echo|os\.capiro\.ai/);
     const aliasGood = run([alias, '--bindings', input]);
     assert.equal(aliasGood.status, 0); assert.equal(aliasGood.stdout, good.stdout);

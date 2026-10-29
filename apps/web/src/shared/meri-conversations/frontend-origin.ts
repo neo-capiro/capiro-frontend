@@ -1,8 +1,7 @@
 import { publicRequestOrigin, readRequestOrigin } from "../request-origin";
 
 /** Preview browser authority is fixed by the reviewed Portfolio deployment source. */
-export const portfolioPreviewFrontendOrigin =
-  "https://portfolio-preview.app.capiro.ai";
+export const portfolioPreviewFrontendOrigin = "https://app.capiro.ai";
 
 /** Never derive the Meri listener's Origin from browser or forwarded headers. */
 export function readConversationFrontendOrigin(

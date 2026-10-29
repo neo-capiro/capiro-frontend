@@ -1,6 +1,6 @@
 import { readFileSync, statSync } from 'node:fs';
 
-const origin = 'https://portfolio-preview.app.capiro.ai';
+const origin = 'https://app.capiro.ai';
 const corePreviewApi = 'https://first-chat-preview.app-dev.capiro.ai/api';
 const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
 // Reviewed roster source only. The template keeps this pair undeployable until
