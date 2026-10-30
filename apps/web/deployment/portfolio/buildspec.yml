@@ -56,13 +56,17 @@ phases:
             --build-arg RELEASE_SHA="$SOURCE_SHA" \
             --build-arg IMAGE_REPO="neo-capiro/capiro-frontend" \
             -f apps/web/Dockerfile -t "$IMAGE_URI" .
+          stage=image-id
+          IMAGE_ID="$(docker image inspect "$IMAGE_URI" --format '{{.Id}}')"
+          [[ "$IMAGE_ID" =~ ^sha256:[0-9a-f]{64}$ ]]
+          printf '%s\n' "$IMAGE_ID" > "$CODEBUILD_SRC_DIR/evidence/frontend-image/image-id.txt"
           stage=image-identity
-          test "$(docker image inspect --format '{{.Os}}/{{.Architecture}}' "$IMAGE_URI")" = linux/arm64
-          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "$IMAGE_URI")" = "$SOURCE_SHA"
-          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.version" }}' "$IMAGE_URI")" = "$SOURCE_SHA"
-          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.source" }}' "$IMAGE_URI")" = "https://github.com/neo-capiro/capiro-frontend"
-          test "$(docker image inspect --format '{{ index .Config.Labels "com.capiro.image.repo" }}' "$IMAGE_URI")" = "neo-capiro/capiro-frontend"
-          bash apps/web/deployment/portfolio/smoke.sh "$IMAGE_URI"
+          test "$(docker image inspect --format '{{.Os}}/{{.Architecture}}' "$IMAGE_ID")" = linux/arm64
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "$IMAGE_ID")" = "$SOURCE_SHA"
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.version" }}' "$IMAGE_ID")" = "$SOURCE_SHA"
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.source" }}' "$IMAGE_ID")" = "https://github.com/neo-capiro/capiro-frontend"
+          test "$(docker image inspect --format '{{ index .Config.Labels "com.capiro.image.repo" }}' "$IMAGE_ID")" = "neo-capiro/capiro-frontend"
+          bash apps/web/deployment/portfolio/smoke.sh "$IMAGE_ID"
         ) 2>&1 | tee "$CODEBUILD_SRC_DIR/evidence/frontend-image/build-smoke.log"
         printf '0\n' > "$CODEBUILD_SRC_DIR/evidence/frontend-image/build-smoke-exit.txt"
   post_build:
@@ -76,6 +80,10 @@ phases:
         SOURCE_SHA="${EXPECTED_SHA:?}"
         REPOSITORY=capiro/portfolio-preview
         IMAGE_URI="$REPOSITORY_URI:$SOURCE_SHA"
+        IMAGE_ID="$(cat "$CODEBUILD_SRC_DIR/evidence/frontend-image/image-id.txt")"
+        [[ "$IMAGE_ID" =~ ^sha256:[0-9a-f]{64}$ ]]
+        stage=tag-identity-before-push
+        test "$(docker image inspect "$IMAGE_URI" --format '{{.Id}}')" = "$IMAGE_ID"
         stage=ecr-login
         aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "${REPOSITORY_URI%%/*}"
         stage=docker-push
@@ -84,10 +92,12 @@ phases:
         DIGEST="$(aws ecr describe-images --repository-name "$REPOSITORY" --image-ids "imageTag=$SOURCE_SHA" --query 'imageDetails[0].imageDigest' --output text)"
         [[ "$DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]]
         stage=local-image-identity
-        IMAGE_ID="$(docker image inspect "$IMAGE_URI" --format '{{.Id}}')"
         [[ "$IMAGE_ID" =~ ^sha256:[0-9a-f]{64}$ ]]
-        test "$(docker image inspect "$IMAGE_ID" --format '{{.Id}}')" = "$IMAGE_ID"
         stage=repo-digest-join
         docker image inspect "$IMAGE_ID" --format '{{range .RepoDigests}}{{println .}}{{end}}' | grep -Fx "$REPOSITORY_URI@$DIGEST"
-        printf 'commit=%s\nsourceVersion=%s\ndigest=%s\nimageId=%s\n' "$SOURCE_SHA" "$EXPECTED_S3_VERSION" "$DIGEST" "$IMAGE_ID" | tee "$CODEBUILD_SRC_DIR/evidence/frontend-image/image.json"
-        docker image inspect --format '{"Id":{{json .Id}},"RepoDigests":{{json .RepoDigests}}}' "$IMAGE_URI" | tee "$CODEBUILD_SRC_DIR/evidence/frontend-image/local-image-identity.json"
+        stage=compatible-image-json
+        IMAGE_JSON="$(aws ecr describe-images --repository-name "$REPOSITORY" --image-ids "imageTag=$SOURCE_SHA" --query 'imageDetails[0].{imageDigest:imageDigest,imageTags:imageTags,imageScanStatus:imageScanStatus}' --output json)"
+        printf '%s\n' "$IMAGE_JSON" | tee "$CODEBUILD_SRC_DIR/evidence/frontend-image/image.json"
+        printf '{"imageId":"%s","imageDigest":"%s","imageTags":["%s"],"source":"%s","sourceVersion":"%s"}\n' \
+          "$IMAGE_ID" "$DIGEST" "$SOURCE_SHA" "$SOURCE_SHA" "$EXPECTED_S3_VERSION" \
+          | tee "$CODEBUILD_SRC_DIR/evidence/frontend-image/image-provenance.json"
