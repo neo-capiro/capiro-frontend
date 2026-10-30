@@ -13,25 +13,25 @@ import { categoryLabel } from "./contracts";
  * stay closed behind an explicit Retry instead of re-sending a change nobody can describe.
  */
 export function ProspectWatch({ prospectId }: { prospectId: string }) {
+  // Keyed by prospect: retained rows, the pending outcome and any in-flight recovery belong to exactly one
+  // prospect's lifetime, so a late completion from a previous prospect cannot touch this one's state.
+  return <ProspectWatchForProspect key={prospectId} prospectId={prospectId} />;
+}
+
+function ProspectWatchForProspect({ prospectId }: { prospectId: string }) {
   const watch = useProspectWatch(prospectId);
   const alerts = useProspectAlerts(prospectId);
   const [outcome, setOutcome] = useState<Outcome>();
   const [recovering, setRecovering] = useState(false);
   const actions = useWatchActions(prospectId, setOutcome);
 
-  // A different prospect is a different inbox: previous pages and outcome text must not carry over.
-  useEffect(() => {
-    setOutcome(undefined);
-    setRecovering(false);
-  }, [prospectId]);
-
   // Keep the rows the user is reviewing: a failed re-read must not blank the list that the recovery
   // lock is protecting. The set is still Core's own pages, never synthesised.
-  const [lastPages, setLastPages] = useState<AlertsPage[]>([]);
+  const [retained, setRetained] = useState<{ prospectId: string; pages: AlertsPage[] }>();
   useEffect(() => {
-    if (alerts.data?.pages) setLastPages(alerts.data.pages);
-  }, [alerts.data]);
-  const pages = alerts.data?.pages ?? lastPages;
+    if (alerts.data?.pages) setRetained({ prospectId, pages: alerts.data.pages });
+  }, [alerts.data, prospectId]);
+  const pages = alerts.data?.pages ?? (retained?.prospectId === prospectId ? retained.pages : []);
   const items = pages.flatMap((page) => page.items);
   const unread = pages[0]?.unreadCount ?? 0;
 

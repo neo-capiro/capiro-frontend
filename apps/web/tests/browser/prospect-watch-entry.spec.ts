@@ -225,3 +225,118 @@ test("a successful retry releases the lock and shows the re-read state", async (
   await expect(row.getByRole("button", { name: "Mark read" })).toBeDisabled();
   await expect(row.getByRole("button", { name: "Dismiss" })).toBeEnabled();
 });
+
+test("rows and recovery belong to one prospect: P1 pages never appear under P2", async ({ page }) => {
+  let mode: "p1" | "p2-alerts-fail" = "p1";
+  const seen = await router(page, async (call, route) => {
+    const url = new URL(call.url);
+    if (mode === "p1") {
+      if (!isAlerts(call)) return send(route, watchBody());
+      if (url.searchParams.get("cursor") === CURSOR)
+        return send(route, { items: [alert("alert-older", "Older award")], nextCursor: null, unreadCount: 2 });
+      return send(route, { items: [alert("alert-one", "New award recorded")], nextCursor: CURSOR, unreadCount: 2 });
+    }
+    // P2: watch reads fine, the alert page fails.
+    if (isAlerts(call)) return send(route, { message: "unavailable" }, 503);
+    return send(route, watchBody("paused"));
+  });
+
+  await open(page);
+  await page.getByRole("button", { name: "Load older alerts" }).click();
+  await expect(page.getByText("Older award")).toBeVisible();
+
+  mode = "p2-alerts-fail";
+  await page.evaluate((id) => window.__prospectWatch!.setProspect(id), P2);
+  await expect(page.getByText("Status: paused")).toBeVisible();
+  await expect(page.getByRole("alert").filter({ hasText: "Alerts are unavailable right now." })).toBeVisible();
+  // No P1 row, no P1-backed action.
+  await expect(page.getByText("Older award")).toHaveCount(0);
+  await expect(page.getByText("New award recorded")).toHaveCount(0);
+  await expect(page.getByRole("list", { name: "Prospect alerts" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Mark read" })).toHaveCount(0);
+  expect(seen.some((call) => call.method !== "GET")).toBe(false);
+});
+
+test("a late P1 recovery cannot set or clear P2's outcome or lock", async ({ page }) => {
+  let broken = false;
+  let holdP1 = false;
+  let releaseP1!: () => void;
+  const p1Gate = new Promise<void>((resolve) => {
+    releaseP1 = resolve;
+  });
+  await router(page, async (call, route) => {
+    const url = new URL(call.url);
+    if (url.pathname.includes(P2)) {
+      return isAlerts(call)
+        ? send(route, { items: [alert("p2-alert", "P2 award", P2)], nextCursor: null, unreadCount: 0 })
+        : send(route, watchBody());
+    }
+    if (call.method === "PATCH") {
+      broken = true;
+      return route.abort("failed");
+    }
+    if (broken) {
+      if (holdP1) await p1Gate;
+      return send(route, { message: "unavailable" }, 503);
+    }
+    return isAlerts(call)
+      ? send(route, { items: [alert("alert-one", "New award recorded")], nextCursor: null, unreadCount: 1 })
+      : send(route, watchBody());
+  });
+
+  await open(page);
+  await page.getByRole("button", { name: "Pause watch" }).click();
+  await expect(page.getByRole("alert", { name: "Watch change outcome" })).toContainText("could not be re-read");
+  holdP1 = true;
+  await page.getByRole("button", { name: "Retry" }).click();
+
+  await page.evaluate((id) => window.__prospectWatch!.setProspect(id), P2);
+  await expect(page.getByText("P2 award")).toBeVisible();
+  releaseP1();
+  // P1's failed recovery lands after P2 is mounted: P2 must keep its own clean state.
+  await page.waitForTimeout(300);
+  await expect(page.getByRole("alert", { name: "Watch change outcome" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Pause watch" })).toBeEnabled();
+  await expect(page.getByText("P2 award")).toBeVisible();
+});
+
+test("recovery only succeeds when the displayed inbox was actually refreshed", async ({ page }) => {
+  let phase: "initial" | "post-write" | "healthy" = "initial";
+  await router(page, async (call, route) => {
+    const url = new URL(call.url);
+    if (call.method === "POST") {
+      phase = "post-write";
+      return send(route, { readAt: "2026-10-30T02:00:00.000Z" });
+    }
+    if (!isAlerts(call)) return send(route, watchBody());
+    if (url.searchParams.get("cursor") === CURSOR)
+      return send(route, { items: [alert("alert-older", "Older award")], nextCursor: null, unreadCount: 2 });
+    if (phase === "post-write") return send(route, { message: "unavailable" }, 503);
+    return send(route, {
+      items: [alert("alert-one", "New award recorded", P1, phase === "healthy" ? "2026-10-30T02:00:00.000Z" : null)],
+      nextCursor: CURSOR,
+      unreadCount: phase === "healthy" ? 0 : 2,
+    });
+  });
+
+  await open(page);
+  await page.getByRole("button", { name: "Load older alerts" }).click();
+  await expect(page.getByText("Older award")).toBeVisible();
+
+  const first = page.getByRole("list", { name: "Prospect alerts" }).getByRole("listitem").first();
+  await first.getByRole("button", { name: "Mark read" }).click();
+  // The acknowledgement arrived, but the displayed inbox refresh failed: no unlock, no invented receipt.
+  await expect(page.getByRole("alert", { name: "Watch change outcome" })).toContainText("accepted");
+  await expect(page.getByRole("button", { name: "End watch" })).toBeDisabled();
+  await expect(page.getByText("Older award")).toBeVisible();
+
+  phase = "healthy";
+  await page.getByRole("button", { name: "Retry" }).click();
+  await expect(page.getByRole("alert", { name: "Watch change outcome" })).toHaveCount(0);
+  // The verified re-read restarts the inbox at Core's first page: the older page is gone by design.
+  await expect(page.getByText("Older award")).toHaveCount(0);
+  const row = page.getByRole("list", { name: "Prospect alerts" }).getByRole("listitem").first();
+  await expect(row).toContainText("read 2026-10-30T02:00:00.000Z");
+  await expect(row.getByRole("button", { name: "Dismiss" })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "Pause watch" })).toBeEnabled();
+});

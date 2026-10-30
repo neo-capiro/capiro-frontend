@@ -119,19 +119,6 @@ export const watchQueryOptions = (api: ApiClient, prospectId: string) => ({
   queryFn: ({ signal }: { signal?: AbortSignal }) => readWatch(api, prospectId, signal),
 });
 
-/** One alert page; the cursor is part of the page identity, so pages cannot be reused across prospects. */
-export const alertsQueryOptions = (
-  api: ApiClient,
-  prospectId: string,
-  cursor: string | null,
-) => ({
-  queryKey: [...alertsKey(prospectId), cursor ?? "first"] as const,
-  retry: false as const,
-  staleTime: 0,
-  queryFn: ({ signal }: { signal?: AbortSignal }) =>
-    readAlerts(api, prospectId, cursor, signal),
-});
-
 /** The paged inbox as react-query infinite options — one definition for the hook and the tests. */
 export const alertsInfiniteOptions = (api: ApiClient, prospectId: string) => ({
   queryKey: alertsKey(prospectId),
@@ -201,15 +188,19 @@ export async function runWatchAction(
   return { kind: "unconfirmed", acknowledged, readback: readbackValue };
 }
 
-/** Re-read watch and the first alert page into the cache; null when either read fails. */
+/**
+ * Re-read the watch and deliberately replace the DISPLAYED infinite inbox with a verified first page.
+ *
+ * `fetchInfiniteQuery` on the inbox key writes the {pages, pageParams} shape the mounted observer renders,
+ * and it rejects when that request fails — unlike `invalidateQueries`, which swallows per-query refetch
+ * errors. A read-back therefore succeeds only when the rows the user is looking at were actually refreshed
+ * for this prospect. Loaded older pages are intentionally discarded: after a change the inbox restarts at
+ * Core's first page rather than mixing pages fetched before and after it.
+ */
 async function readback(api: ApiClient, cache: QueryClient, prospectId: string) {
   try {
-    const [watch, alerts] = await Promise.all([
-      cache.fetchQuery(watchQueryOptions(api, prospectId)),
-      cache.fetchQuery(alertsQueryOptions(api, prospectId, null)),
-    ]);
-    await cache.invalidateQueries({ queryKey: alertsKey(prospectId) });
-    void alerts;
+    const watch = await cache.fetchQuery(watchQueryOptions(api, prospectId));
+    await cache.fetchInfiniteQuery({ ...alertsInfiniteOptions(api, prospectId), pages: 1 });
     return watch;
   } catch {
     return null;
