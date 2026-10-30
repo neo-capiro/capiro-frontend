@@ -82,10 +82,10 @@ test("unavailable client never blocks account Settings or escapes in mode links"
   const modes = page.getByRole("navigation", { name: "Product modes" });
   await expect(
     modes.getByRole("link", { name: "Meri", exact: true }),
-  ).toHaveAttribute("href", "/meri");
+  ).toHaveAttribute("href", "/meri?scope=general");
   await expect(
     modes.getByRole("link", { name: "Portfolio", exact: true }),
-  ).toHaveAttribute("href", "/");
+  ).toHaveAttribute("href", "/portfolio");
   await expect(
     page.getByRole("link", { name: "All modules", exact: true }),
   ).toHaveAttribute("href", "/modules");
@@ -107,7 +107,7 @@ test("Settings client replacement hides former scope until the replacement is ve
   await expect.poll(() => Boolean(release)).toBe(true);
   await expect(
     modes.getByRole("link", { name: "Meri", exact: true }),
-  ).toHaveAttribute("href", "/meri");
+  ).toHaveAttribute("href", "/meri?scope=general");
   await expect(
     page.getByRole("heading", { name: "Personal", exact: true }),
   ).toBeVisible();

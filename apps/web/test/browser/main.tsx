@@ -188,6 +188,7 @@ function RoutedApp() {
   if (path === "/meri")
     return (
       <ProductShell
+        chatLayout
         conversationEnabled={
           sessionStorage.getItem("meri-conversation-enabled") === "true"
         }

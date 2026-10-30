@@ -63,7 +63,7 @@ export function ModuleHeader({
       actions={
         readOnlyPreview ? undefined : (
           <nav className={styles.globalActions} aria-label="Workspace actions">
-            <Link href="/?log=1" aria-label="Quick log">
+            <Link href="/portfolio?log=1" aria-label="Quick log">
               <ModuleAsset name="quickLog" />
             </Link>
             <ScopedLink href="/calendar" aria-label="Master calendar">

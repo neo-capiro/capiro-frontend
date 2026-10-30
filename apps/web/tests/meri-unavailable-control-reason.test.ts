@@ -8,6 +8,7 @@ import { SessionContext } from "../src/shared/session/SessionContext";
 import { MeriCapabilitiesProvider } from "../src/shared/meri-resources/CapabilityContext";
 import { heldMeriCapabilities } from "../src/shared/meri-resources/capabilities";
 import { MeriHome } from "../src/features/meri/MeriHome";
+import { Sidebar } from "../src/shared/shell/Sidebar";
 
 vi.mock("next/navigation", () => ({
   usePathname: () => "/meri",
@@ -124,23 +125,24 @@ it("the signed-out new-conversation action stays native-disabled beside an enabl
   expect(openTag(explanation!)).not.toMatch(/\sdisabled(?:=|\s|>)/);
 });
 
-it("the real home shows the existing unavailable reason as associated visible text, with no replacement navigation", () => {
+it("the real sidebar shows the existing unavailable reason beside its disabled destination", () => {
   const html = renderToStaticMarkup(
     createElement(
       MeriCapabilitiesProvider,
       { value: heldMeriCapabilities },
-      createElement(MeriHome, { memoryReviewEnabled: true }),
+      createElement(MeriHome),
     ),
   );
-  const memory = buttons(html).find((button) =>
-    button.endsWith("Review personal memory</button>"),
-  );
-  expect(memory).toMatch(/\sdisabled=""/);
-  const describedBy = memory?.match(/aria-describedby="([^"]+)"/)?.[1];
-  expect(describedBy).toBeDefined();
-  expect(html).toContain(
-    `<small id="${describedBy}">${heldMeriCapabilities.memory.reason}</small>`,
-  );
+  // The landing itself offers no replacement navigation for a held destination.
   expect(html).not.toContain('href="/meri/memory"');
-  expect(html).toContain('href="/meri/files"');
+  expect(html).not.toContain('href="/meri/files"');
+  // The shell's destination carries the disabled control and the canonical reason verbatim.
+  const sidebar = createElement(
+    MeriCapabilitiesProvider,
+    { value: heldMeriCapabilities },
+    createElement(Sidebar, { section: "memory" }),
+  );
+  const shell = renderToStaticMarkup(sidebar);
+  expect(shell).toContain(heldMeriCapabilities.memory.reason);
+  expect(shell).toContain("Memory unavailable.");
 });

@@ -20,6 +20,7 @@ export function ProductShell({
   fixture = false,
   conversationEnabled = false,
   firstChatBootstrapEnabled = false,
+  chatLayout = false,
   section,
   pendingApprovals,
 }: {
@@ -33,6 +34,11 @@ export function ProductShell({
   fixture?: boolean;
   conversationEnabled?: boolean;
   firstChatBootstrapEnabled?: boolean;
+  /**
+   * Chat-first routes fill the visible viewport instead of the fixed design frame, and drop the
+   * repeated workspace notice: the conversation is the page.
+   */
+  chatLayout?: boolean;
   /** Marks the matching sidebar destination as current. */
   section?: MeriSection | undefined;
   /** Fixture sample count shown on the Approvals destination. */
@@ -41,7 +47,10 @@ export function ProductShell({
   return (
     <>
       <MeriSidebarVisibility>
-        <div className={styles.target} data-design-target={designTarget}>
+        <div
+          className={`${styles.target} ${chatLayout ? styles.chatTarget : ""}`}
+          data-design-target={designTarget}
+        >
           <Header assetSet={assetSet} fixture={fixture} />
           <MeriMobileNavigation
             assetSet={assetSet}
@@ -51,7 +60,7 @@ export function ProductShell({
             section={section}
             pendingApprovals={pendingApprovals}
           />
-          <MeriSidebarWorkspace>
+          <MeriSidebarWorkspace chat={chatLayout}>
             <Sidebar
               assetSet={assetSet}
               fixture={fixture}
@@ -59,8 +68,12 @@ export function ProductShell({
               firstChatBootstrapEnabled={firstChatBootstrapEnabled}
               section={section}
               pendingApprovals={pendingApprovals}
+              chat={chatLayout}
             />
-            <main id="main-content" className={styles.main}>
+            <main
+              id="main-content"
+              className={`${styles.main} ${chatLayout ? styles.chatMain : ""}`}
+            >
               {actionWorkflow || documentWorkflow || routineWorkflow ? (
                 <MeriCapabilityRouteGuard>{children}</MeriCapabilityRouteGuard>
               ) : (
@@ -74,27 +87,29 @@ export function ProductShell({
           </MeriSidebarWorkspace>
         </div>
       </MeriSidebarVisibility>
-      <footer className={styles.fixtureNotice}>
-        <div role="note">
-          {fixture ? (
-            <>
-              <strong>Disconnected synthetic fixture.</strong> Jordan, Anduril,
-              recent titles, answer, citations and approval counts are samples.
-              Drafts stay in this page only.
-            </>
-          ) : (
-            <>
-              {documentWorkflow
-                ? "Document files require a verified document connection. Generated files remain drafts; native Office rendering is unverified."
-                : actionWorkflow
-                  ? "Recommendation actions require a verified action connection."
-                  : routineWorkflow
-                    ? "Routine changes require a verified connection and explicit review before approval."
-                    : "Conversation operations require a verified runtime connection. Client and account details come from the connected Capiro services."}
-            </>
-          )}
-        </div>
-      </footer>
+      {(!chatLayout || fixture) && (
+        <footer className={styles.fixtureNotice}>
+          <div role="note">
+            {fixture ? (
+              <>
+                <strong>Disconnected synthetic fixture.</strong> Jordan,
+                Anduril, recent titles, answer, citations and approval counts
+                are samples. Drafts stay in this page only.
+              </>
+            ) : (
+              <>
+                {documentWorkflow
+                  ? "Document files require a verified document connection. Generated files remain drafts; native Office rendering is unverified."
+                  : actionWorkflow
+                    ? "Recommendation actions require a verified action connection."
+                    : routineWorkflow
+                      ? "Routine changes require a verified connection and explicit review before approval."
+                      : "Conversation operations require a verified runtime connection. Client and account details come from the connected Capiro services."}
+              </>
+            )}
+          </div>
+        </footer>
+      )}
     </>
   );
 }

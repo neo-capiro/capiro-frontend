@@ -43,23 +43,18 @@ export function ConversationArtifacts({
   artifacts: readonly Listed[];
   access: ArtifactAccess;
 }) {
+  // Nothing published or prepared: the conversation stays quiet; Library is the file entry point.
+  if (artifacts.length === 0) return null;
   return (
     <section className={styles.files} aria-labelledby="conversation-files">
       <h2 id="conversation-files">Files in this conversation</h2>
-      {artifacts.length === 0 ? (
-        <p className={styles.muted}>
-          No published files or prepared drafts are available in the records
-          shown here.
-        </p>
-      ) : (
-        <ul className={styles.fileList}>
-          {artifacts.map((artifact) => (
-            <li key={artifact.versionId}>
-              <ConversationArtifact artifact={artifact} access={access} />
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul className={styles.fileList}>
+        {artifacts.map((artifact) => (
+          <li key={artifact.versionId}>
+            <ConversationArtifact artifact={artifact} access={access} />
+          </li>
+        ))}
+      </ul>
       <p className={styles.muted}>
         {unavailableResources.workspaceFiles.summary}
       </p>

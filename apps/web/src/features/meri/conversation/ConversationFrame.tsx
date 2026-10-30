@@ -27,18 +27,27 @@ export function ConversationFrame({
   historyStatus?: ReactNode;
 }) {
   return (
-    <section className={styles.frame} aria-labelledby="meri-conversation">
+    <section
+      className={styles.frame}
+      aria-labelledby="meri-conversation"
+      aria-describedby="meri-conversation-scope"
+    >
       <div className={styles.heading}>
         <h2 id="meri-conversation">Conversation</h2>
-        <p className={styles.muted}>{scope}</p>
+        {/* The verified scope is announced for the region; the composer owns its visible control. */}
+        <span id="meri-conversation-scope" className="sr-only">
+          {scope}
+        </span>
       </div>
-      {historyStatus ?? (
-        <p className={styles.muted}>
-          {unavailableResources.conversationHistory.summary}
-        </p>
-      )}
+      <div className={styles.frameStatus}>
+        {historyStatus ?? (
+          <p className={styles.muted}>
+            {unavailableResources.conversationHistory.summary}
+          </p>
+        )}
+      </div>
       {children}
-      {composer}
+      <div className={styles.composerDock}>{composer}</div>
     </section>
   );
 }

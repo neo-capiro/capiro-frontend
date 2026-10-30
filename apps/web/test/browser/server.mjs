@@ -25,6 +25,12 @@ const configuration = {
   root: local("."),
   publicDir: path.join(app, "public"),
   esbuild: { jsx: "automatic" },
+  // The fixture has no Next build step, so Next's public env substitution is reproduced for the
+  // exact key a production component reads. Synthetic unconfigured value; no other env access.
+  define: {
+    "process.env.NEXT_PUBLIC_MERI_SELECTED_TAB_EXTENSION_ID":
+      JSON.stringify(""),
+  },
   resolve: {
     alias: [
       { find: "@", replacement: path.join(app, "src") },

@@ -9,6 +9,7 @@ export default function MeriPage() {
   const intents = readIntentsConfig(process.env);
   return (
     <ProductShell
+      chatLayout
       conversationEnabled={config.enabled}
       firstChatBootstrapEnabled={config.firstChatBootstrapEnabled}
     >
@@ -16,9 +17,6 @@ export default function MeriPage() {
         <MeriHome
           conversationEnabled={config.enabled}
           intentApprovalsEnabled={intents.enabled}
-          memoryReviewEnabled={
-            process.env.MERI_MEMORY_OWNER_REVIEW_ENABLED === "true"
-          }
           firstChatBootstrapEnabled={config.firstChatBootstrapEnabled}
         />
       </RequireSession>

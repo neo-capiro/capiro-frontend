@@ -261,6 +261,9 @@ it("available conversation access preserves catalog failure recovery and shows m
         scope: "General",
         channel: createConversationComposer(),
         gate: { status: "on", available: ALL_TYPED_SKILL_IDS },
+        // The model control is one of the optional Tools-panel settings.
+        toolsOpen: true,
+        onToggleTools: () => undefined,
       }),
     );
   const failed = render();

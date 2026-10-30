@@ -159,6 +159,9 @@ export async function setupConversation(
   const unexpected = await installFixtures(page);
   page.on("pageerror", (error) => unexpected.push(error.message));
   await page.route("**/api/backend/core/me", (r) => json(r, testIdentity));
+  // The Capiro operation gateway reads identity through this boundary too; without an answer it
+  // falls back to the Vite SPA shell, which the client correctly rejects as an unexpected response.
+  await page.route("**/api/capiro/me.read*", (r) => json(r, testIdentity));
   await page.route(`**/api/backend/core/clients/${clientId}`, (r) =>
     json(r, { ...client, name: "Verified conversation client" }),
   );

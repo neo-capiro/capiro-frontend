@@ -1,26 +1,114 @@
 /* Live conversation pieces layered on the Figma 01.02 cited-answer layout. */
+.chat {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  min-width: 0;
+}
 .frame {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
   min-width: 0;
+  min-height: 0;
+  height: 100%;
+  padding: 16px 24px 0;
 }
 .heading {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 8px;
+  min-height: 20px;
 }
+/* The frame keeps an accessible name; the transcript is the page's content, not this label. */
 .heading h2 {
-  font-size: 22px;
-  line-height: 1.3;
-  letter-spacing: -0.4px;
-  font-weight: 600;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.frameScope {
+  min-width: 0;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+/* The empty-conversation identity sits in the transcript area, above the docked composer. */
+.hero {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 24px;
+  min-height: 0;
+}
+/* The reserved strip keeps the panel from covering the transcript or the composer. */
+.chat[data-tools="open"] .frame {
+  padding-right: 352px;
+}
+/* Status and files keep their own bounded area so the composer is never covered. */
+.frame > .status,
+.frame > .files {
+  flex: 0 1 auto;
+  overflow-y: auto;
+}
+.frame > .status {
+  max-height: 32%;
+}
+.frame > .files {
+  max-height: 40%;
+}
+.historyIssue {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.historyDetails summary {
+  font-size: 12px;
+  cursor: pointer;
+}
+.frameStatus:empty {
+  display: none;
+}
+.frameStatus {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.frameStatus p {
+  font-size: inherit;
+}
+.composerDock {
+  flex: 0 0 auto;
+  padding: 4px 0 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}
+.composerDock > * {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
 }
 .log {
   position: relative;
-  max-height: min(62vh, 720px);
+  flex: 1;
+  max-height: none;
   min-height: 120px;
   overflow: hidden;
   display: flex;
@@ -29,9 +117,12 @@
 .log > div {
   overflow-y: auto;
   overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
 }
 .turns {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 28px;
   padding: 4px 2px 40px;
@@ -164,8 +255,24 @@
 .pending {
   opacity: 0.8;
 }
+@media (max-width: 900px) {
+  /* The phone and tablet stack the tools sheet under the conversation instead of beside it. */
+  .chat {
+    flex-direction: column;
+  }
+  .chat[data-tools="open"] .frame {
+    padding-right: 12px;
+  }
+}
 @media (max-width: 680px) {
   .log {
     max-height: none;
+  }
+  .frame {
+    padding: 12px 12px 0;
+    gap: 8px;
+  }
+  .composerDock {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
   }
 }
