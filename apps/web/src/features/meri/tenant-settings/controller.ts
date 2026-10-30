@@ -5,7 +5,13 @@ import {
   TenantSettingsFailure,
   type ModelLimits,
   type TenantDocument,
+  type TenantSave,
 } from "./client";
+import {
+  browserSaveRequest,
+  sameSettingsValue,
+  type BrowserChoice,
+} from "./browser-editor";
 
 type Status =
   | "loading"
@@ -97,6 +103,32 @@ export class TenantSettingsController {
     }
   }
   async save(model: ModelLimits) {
+    return this.saveSettings(
+      (document) => saveRequest(document, model),
+      (saved) =>
+        saved.model?.monthlyCapMicroUsd === model.monthlyCapMicroUsd &&
+        saved.model?.maxBudgetMicroUsd === model.maxBudgetMicroUsd &&
+        saved.model?.maxTurns === model.maxTurns,
+    );
+  }
+  async saveBrowser(choices: BrowserChoice[]) {
+    return this.saveSettings(
+      (document) => browserSaveRequest(document, choices),
+      (saved, body, prior) =>
+        sameSettingsValue(saved.browserPolicy, body.settings.browserPolicy) &&
+        sameSettingsValue(saved.model, prior.model),
+      "Browser settings",
+    );
+  }
+  private async saveSettings(
+    makeRequest: (document: TenantDocument) => TenantSave,
+    confirmed: (
+      saved: TenantDocument,
+      body: TenantSave,
+      prior: TenantDocument,
+    ) => boolean,
+    subject = "Workspace limits",
+  ) {
     if (
       !this.active ||
       this.request ||
@@ -105,14 +137,19 @@ export class TenantSettingsController {
     )
       return;
     const document = this.view.document;
-    const body = saveRequest(document, model);
+    let body: TenantSave;
+    try {
+      body = makeRequest(document);
+    } catch (error) {
+      this.failedSave(error, document);
+      return;
+    }
     const request = new AbortController();
     this.request = request;
     this.publish({
       status: "saving",
       document,
-      message:
-        "Saving workspace limits. Wait for confirmation before leaving this page.",
+      message: `Saving ${subject.toLowerCase()}. Wait for confirmation before leaving this page.`,
     });
     try {
       const saved = await this.send("save", body, request.signal);
@@ -120,18 +157,19 @@ export class TenantSettingsController {
       if (
         saved.revision !== document.revision + 1 ||
         saved.defaultTimezone !== document.defaultTimezone ||
-        JSON.stringify(saved.capabilityPolicy) !==
-          JSON.stringify(document.capabilityPolicy) ||
-        saved.model?.monthlyCapMicroUsd !== model.monthlyCapMicroUsd ||
-        saved.model?.maxBudgetMicroUsd !== model.maxBudgetMicroUsd ||
-        saved.model?.maxTurns !== model.maxTurns
+        !sameSettingsValue(saved.capabilityPolicy, document.capabilityPolicy) ||
+        !confirmed(saved, body, document)
       )
         throw new Error("Unconfirmed settings response");
       this.publish({
         status: "saved",
-        document: saved,
-        message:
-          "Workspace limits saved. Reload current limits before making another change.",
+        document: {
+          ...saved,
+          ...(document.browserPlatform
+            ? { browserPlatform: document.browserPlatform }
+            : {}),
+        },
+        message: `${subject} saved. Reload current limits before making another change.`,
       });
     } catch (error) {
       if (!this.active || request.signal.aborted) return;

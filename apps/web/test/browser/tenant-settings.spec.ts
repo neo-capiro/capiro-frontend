@@ -10,6 +10,29 @@ test.beforeEach(async ({ page }) => {
 });
 const saveButton = (page: Page) =>
   page.getByRole("button", { name: "Save workspace limits", exact: true });
+// Synthetic platform facts; browser UI/control transport only, no native host.
+const browserPolicy = {
+  enabled: true,
+  allowedOrigins: ["https://records.example", "https://notices.example"],
+  tools: ["browser_snapshot"],
+  timeouts: { actionMs: 5000, navigationMs: 30000 },
+  downloads: { enabled: false, formats: [], maxBytes: 1, maxFiles: 1 },
+};
+const browserDocument = {
+  ...captured.read,
+  browserPolicy: { browser: { tools: ["browser_snapshot"] } },
+  browserStatus: "resolved",
+  browserPlatform: {
+    maximum: browserPolicy,
+    defaults: browserPolicy,
+    roleCeilings: {
+      standard_user: {
+        ...browserPolicy,
+        allowedOrigins: ["https://records.example"],
+      },
+    },
+  },
+};
 async function open(page: Page, enabled = true) {
   await operationFixtures(page, {
     ...settingsFixtures,
@@ -33,6 +56,88 @@ async function enterLimits(page: Page) {
     .fill("0.25");
   await page.getByLabel("Maximum turns per query", { exact: true }).fill("5");
 }
+
+test("browser admin chooses approved websites, preserves other policy fields and reloads after save", async ({
+  page,
+}) => {
+  let saved = browserDocument;
+  const writes: {
+    expectedRevision: number;
+    settings: Record<string, unknown>;
+  }[] = [];
+  await page.route(endpoint, (route) => {
+    if (route.request().url().endsWith("/read"))
+      return route.fulfill({ json: saved });
+    const body = route.request().postDataJSON();
+    writes.push(body);
+    saved = { ...saved, ...body.settings, revision: saved.revision + 1 };
+    const { browserPlatform: omitted, ...response } = saved;
+    void omitted;
+    return route.fulfill({ json: response });
+  });
+  await open(page);
+  const form = page.getByRole("form", { name: "Workspace browser access" });
+  await expect(form).toBeVisible();
+  await form
+    .getByRole("group", { name: "Workspace", exact: true })
+    .getByLabel("https://notices.example", { exact: true })
+    .uncheck();
+  await form.getByRole("button", { name: "Save browser settings" }).click();
+  await expect(
+    page.getByText(
+      "Browser settings saved. Reload current limits before making another change.",
+    ),
+  ).toBeVisible();
+  expect(writes).toHaveLength(1);
+  expect(writes[0]!.expectedRevision).toBe(captured.read.revision);
+  expect(writes[0]!.settings.model).toBeUndefined();
+  expect(writes[0]!.settings.browserPolicy).toMatchObject({
+    browser: {
+      tools: ["browser_snapshot"],
+      allowedOrigins: ["https://records.example"],
+    },
+  });
+  await expect(
+    form.getByRole("button", { name: "Save browser settings" }),
+  ).toBeDisabled();
+  await page.getByRole("button", { name: "Reload current limits" }).click();
+  await expect(
+    form.getByRole("button", { name: "Save browser settings" }),
+  ).toBeEnabled();
+  await expect(
+    form
+      .getByRole("group", { name: "Workspace", exact: true })
+      .getByLabel("https://notices.example", { exact: true }),
+  ).not.toBeChecked();
+});
+
+test("browser admin conflict blocks repeat writes until reloaded", async ({
+  page,
+}) => {
+  let writes = 0;
+  await page.route(endpoint, (route) =>
+    route.request().url().endsWith("/read")
+      ? route.fulfill({ json: browserDocument })
+      : (writes++,
+        route.fulfill({
+          status: 409,
+          json: { error: { code: "SETTINGS_REVISION_CONFLICT" } },
+        })),
+  );
+  await open(page);
+  const button = page.getByRole("button", {
+    name: "Save browser settings",
+    exact: true,
+  });
+  await button.click();
+  await expect(
+    page.getByText(
+      "Workspace settings changed elsewhere. Reload current limits and review them before saving again.",
+    ),
+  ).toBeVisible();
+  await expect(button).toBeDisabled();
+  expect(writes).toBe(1);
+});
 
 test("disabled tenant slot remains inactive and never reads or writes", async ({
   page,
