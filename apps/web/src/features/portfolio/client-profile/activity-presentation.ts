@@ -41,3 +41,11 @@ export function activityKindPresentation(kind: string) {
     (Object.hasOwn(known, kind) ? known[kind] : undefined) ?? { glyph: "·" }
   );
 }
+
+// Title Case: capitalize first letter of each word
+export function activityKindDisplay(kind: string) {
+  return kind
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}

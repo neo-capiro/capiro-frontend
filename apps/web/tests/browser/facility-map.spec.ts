@@ -79,6 +79,14 @@ async function mapFixtures(page: Page) {
             rationale: "Synthetic evidence",
             evidenceCount: 1,
           },
+          {
+            component: "contracts",
+            label: "Contract place of performance",
+            credit: 10,
+            weight: 10,
+            rationale: "Source-authoritative evidence — full weight.",
+            evidenceCount: 0,
+          },
         ],
         districts: [{ districtKey: "CA-01", score: null }],
         generatedAt: "2026-10-11T00:00:00Z",
@@ -158,13 +166,29 @@ test("real coordinate pins, keyboard district selection, pan/zoom and source-bac
     exact: true,
   });
   await expect(map).toContainText("Insufficient evidence");
+  await expect(
+    map.getByText("Client-wide component breakdown", { exact: true }),
+  ).toBeVisible();
+  // A component with no evidence records must never display credit.
+  await expect(
+    map.getByText("No evidence found for this component."),
+  ).toBeVisible();
+  await expect(map).not.toContainText("10 / 10");
   const district = map.getByRole("button", {
     name: "District CA-01",
     exact: true,
   });
   await district.focus();
   await page.keyboard.press("Enter");
-  await expect(map.getByLabel("Selected district")).toHaveValue("CA-01");
+  await expect(
+    map.getByLabel("Facility and performance districts"),
+  ).toHaveValue("CA-01");
+  // A district with no client evidence must not sit above the client-wide
+  // component list, which would read as if those components were this
+  // district's.
+  await expect(
+    map.getByText("Client-wide component breakdown", { exact: true }),
+  ).toHaveCount(0);
   await map.getByRole("button", { name: "Zoom in", exact: true }).click();
   await expect(map.locator("svg > g")).toHaveAttribute(
     "transform",

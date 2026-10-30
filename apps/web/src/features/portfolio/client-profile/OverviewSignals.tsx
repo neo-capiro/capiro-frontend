@@ -22,7 +22,6 @@ export function EngagementPulse({
       </header>
       <div className={styles.pulseGrid}>
         {[
-          ["Recorded activities", metrics.data?.counts.recordedActivities],
           ["Open requests", metrics.data?.counts.openRequests],
           ["Overdue requests", metrics.data?.counts.overdueRequests],
         ].map(([label, count]) => (
@@ -35,9 +34,9 @@ export function EngagementPulse({
       <div className={styles.pulseTrend}>
         <ActivityMetricStatus metrics={metrics} />
         <small>
-          Activity counts cover saved CRM entries. Open requests are unsettled
-          requests over all time; overdue requests have a saved due time before
-          the count time. Meetings, mail and Planner work are excluded.
+          Open requests are unsettled requests over all time; overdue requests
+          have a saved due time before the count time. Meetings, mail and
+          Planner work are excluded.
         </small>
       </div>
       <div className={styles.pulseLatest}>

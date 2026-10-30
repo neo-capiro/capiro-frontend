@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { Facility } from "./contracts";
@@ -24,6 +24,14 @@ export function FacilityMapDialog({
 }) {
   const [district, setDistrict] = useState("");
   const nexus = useFacilityNexus(clientId, open);
+  const districtSelectorId = useId();
+  const selection = district
+    ? (nexus.data?.districts.find((row) => row.districtKey === district) ??
+      null)
+    : null;
+  // A district with no evidence must never sit above the client-wide component
+  // list: that reads as if those components were scored for this district.
+  const showBreakdown = !district || Boolean(selection && selection.score !== null);
   return (
     <Dialog
       open={open}
@@ -60,56 +68,60 @@ export function FacilityMapDialog({
             This score describes the client&apos;s footprint. Per-district
             scores describe separate evidence.
           </p>
-          <label>
-            Selected district
-            <select
-              value={district}
-              onChange={(event) => setDistrict(event.target.value)}
-            >
-              <option value="">Choose a client district</option>
-              {district &&
-                !nexus.data.districts.some(
-                  (row) => row.districtKey === district,
-                ) && (
-                  <option value={district}>
-                    {district} · No client evidence
-                  </option>
-                )}
-              {nexus.data.districts.map((row) => (
-                <option key={row.districtKey} value={row.districtKey}>
-                  {row.districtKey}
-                </option>
-              ))}
-            </select>
+          <label htmlFor={districtSelectorId}>
+            Facility and performance districts
           </label>
+          <select
+            id={districtSelectorId}
+            value={district}
+            onChange={(event) => setDistrict(event.target.value)}
+          >
+            <option value="">All districts</option>
+            {district &&
+              !nexus.data.districts.some((row) => row.districtKey === district) && (
+                <option value={district}>{district} · No client evidence</option>
+              )}
+            {nexus.data.districts.map((row) => (
+              <option key={row.districtKey} value={row.districtKey}>
+                {row.districtKey}
+              </option>
+            ))}
+          </select>
           {district && (
             <div className={styles.districtSelection}>
               District {district} ·{" "}
-              {(() => {
-                const row = nexus.data.districts.find(
-                  (value) => value.districtKey === district,
-                );
-                return row
-                  ? row.score === null
-                    ? "Insufficient evidence to score"
-                    : `Score ${row.score}/100`
-                  : "No client nexus evidence returned for this district";
-              })()}
+              {selection
+                ? selection.score === null
+                  ? "Insufficient evidence to score"
+                  : `Score ${selection.score}/100`
+                : "No client nexus evidence returned for this district"}
             </div>
           )}
-          <dl className={styles.facts}>
-            {nexus.data.breakdown.map((row) => (
-              <div key={row.component}>
-                <dt>{row.label}</dt>
-                <dd>
-                  {row.credit} / {row.weight} · {row.evidenceCount} evidence
-                  records
-                  <br />
-                  {row.rationale}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          {showBreakdown && (
+            <>
+              <small className={styles.source}>
+                Client-wide component breakdown
+              </small>
+              <dl className={styles.facts}>
+                {nexus.data.breakdown.map((row) => {
+                  const scored = row.evidenceCount > 0;
+                  return (
+                    <div key={row.component}>
+                      <dt>{row.label}</dt>
+                      <dd>
+                        {scored ? row.credit : 0} / {row.weight} ·{" "}
+                        {row.evidenceCount} evidence records
+                        <br />
+                        {scored
+                          ? row.rationale
+                          : "No evidence found for this component."}
+                      </dd>
+                    </div>
+                  );
+                })}
+              </dl>
+            </>
+          )}
           {nexus.data.warnings.map((warning, index) => (
             <p className={styles.source} key={`${warning.code}-${index}`}>
               {warning.message}

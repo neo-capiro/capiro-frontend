@@ -132,7 +132,8 @@ export function ProspectCard({
             </Link>
           </h2>
           <small id={descriptionId}>
-            {description || "Prospect details unavailable"}
+            {description ||
+              `${stageText(prospect.stage)} · no service hypothesis saved`}
           </small>
         </div>
       </div>

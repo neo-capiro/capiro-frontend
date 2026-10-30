@@ -12,6 +12,23 @@ import {
   profileMembers,
 } from "../profile-current-state-fixtures";
 
+test("profile notes cannot be saved until the draft differs from the saved record", async ({
+  page,
+}) => {
+  const { state, unexpected } = await installProfileCurrentState(page);
+  await page.goto("/profile-current-state.html");
+  await expect(page.getByLabel("Notes", { exact: true })).toHaveValue(
+    "Saved profile notes",
+  );
+  await expect(page.getByRole("button", { name: "Save notes" })).toBeDisabled();
+  await page.getByLabel("Notes", { exact: true }).fill("Saved profile notes");
+  await expect(page.getByRole("button", { name: "Save notes" })).toBeDisabled();
+  await page.getByLabel("Notes", { exact: true }).fill("Saved profile notes!");
+  await expect(page.getByRole("button", { name: "Save notes" })).toBeEnabled();
+  expect(state.writes).toEqual([]);
+  expect(unexpected).toEqual([]);
+});
+
 test("profile notes conceal a failed saved-client read and prevent replacement", async ({
   page,
 }) => {

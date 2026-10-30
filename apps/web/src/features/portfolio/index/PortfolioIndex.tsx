@@ -382,7 +382,6 @@ export function PortfolioIndex({
         <CreateProfileDialog
           open={creating}
           onOpenChange={setCreating}
-          destinations={destinations}
         />
         {state.type === "PROSPECT" &&
           params.get("pipeline") === "1" &&

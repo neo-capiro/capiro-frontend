@@ -54,7 +54,7 @@ export const clientViews = [
     suffix: "/bills",
     icon: 8,
     description: "Tracked bills, stages, and latest updates",
-    shortcut: null,
+    shortcut: "b",
   },
   {
     label: "Opportunities",

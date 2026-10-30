@@ -776,13 +776,13 @@ test("committee loading is on demand, identity-correlated and limited to current
   });
   await expect(
     committee.getByRole("button", {
-      name: "Load committee snapshot",
+      name: `Load committee snapshot · ${member.fullName}`,
       exact: true,
     }),
   ).toBeVisible();
   expect(control.reads.committee.reads).toBe(0);
   await committee
-    .getByRole("button", { name: "Load committee snapshot", exact: true })
+    .getByRole("button", { name: `Load committee snapshot · ${member.fullName}`, exact: true })
     .click();
   await expect.poll(() => control.reads.committee.waiting).toBe(1);
   control.reads.committee.release();
@@ -790,7 +790,10 @@ test("committee loading is on demand, identity-correlated and limited to current
   await expect(committee).not.toContainText("Current synthetic committee");
   control.reads.committee.hold(committees());
   await committee
-    .getByRole("button", { name: "Reload committee snapshot", exact: true })
+    .getByRole("button", {
+      name: `Reload committee snapshot · ${member.fullName}`,
+      exact: true,
+    })
     .click();
   await expect.poll(() => control.reads.committee.waiting).toBe(1);
   control.reads.committee.release();

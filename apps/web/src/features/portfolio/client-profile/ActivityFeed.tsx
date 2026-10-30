@@ -8,6 +8,7 @@ import type { Activity } from "./contracts";
 import { ActivityActions } from "./ActivityActions";
 import {
   activityDayLabel,
+  activityKindDisplay,
   activityKindPresentation,
   groupActivityDays,
 } from "./activity-presentation";
@@ -96,7 +97,14 @@ function ActivityRow({
             kind.glyph
           )}
         </span>
-        <div className={styles.activityContent}>
+        <div
+          className={styles.activityContent}
+          title={
+            item.origin !== "recorded"
+              ? "Open the original record to change this activity"
+              : undefined
+          }
+        >
           <div className={styles.activityHeading}>
             <strong>{item.title}</strong>
             {!expanded && (
@@ -111,7 +119,7 @@ function ActivityRow({
             )}
           </div>
           {!expanded && (
-            <small className={styles.activityKind}>{item.kind}</small>
+            <small className={styles.activityKind}>{activityKindDisplay(item.kind)}</small>
           )}
           {item.body && <p className={styles.body}>{item.body}</p>}
           {(item.direction || item.counterparty) && (
@@ -141,7 +149,7 @@ function ActivityRow({
           )}
           {expanded && (
             <div className={styles.expandedMeta}>
-              <small className={styles.activityKind}>{item.kind}</small>
+              <small className={styles.activityKind}>{activityKindDisplay(item.kind)}</small>
               {occurred}
               {item.pinned && <small>★ Pinned</small>}
             </div>

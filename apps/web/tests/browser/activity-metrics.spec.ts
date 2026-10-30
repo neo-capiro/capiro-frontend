@@ -32,7 +32,9 @@ test("full server counts and definitions are independent of a failed timeline pa
     json(route, activityMetricsFixture()),
   );
   await page.goto(`/portfolio/${clientId}`);
-  await expect(pulse(page).getByText("612", { exact: true })).toBeVisible();
+  // The pulse shows open and overdue requests only. A recorded-activity count
+  // here contradicted the timeline, so it is not a pulse tile.
+  await expect(pulse(page).getByText("612", { exact: true })).toHaveCount(0);
   await expect(pulse(page).getByText("8", { exact: true })).toBeVisible();
   await expect(pulse(page).getByText("3", { exact: true })).toBeVisible();
   await expect(pulse(page)).toContainText("last 30 days · UTC");
@@ -68,12 +70,12 @@ test("unavailable counts do not become zero; explicit retry reads real zeros", a
   await expect(
     pulse(page).getByText("Counts unavailable.", { exact: false }),
   ).toBeVisible();
-  await expect(pulse(page).getByText("—", { exact: true })).toHaveCount(3);
+  await expect(pulse(page).getByText("—", { exact: true })).toHaveCount(2);
   unavailable = false;
   await pulse(page).getByRole("button", { name: "Retry counts" }).click();
   await expect(
     pulse(page).locator("strong").filter({ hasText: /^0$/ }),
-  ).toHaveCount(4);
+  ).toHaveCount(3);
   expect(unexpected).toEqual([]);
 });
 test("stale counts are labelled and refresh uses a new observation", async ({
@@ -103,7 +105,7 @@ test("a foreign aggregate is unavailable while the permitted profile stays visib
   );
   await page.goto(`/portfolio/${clientId}`);
   await expect(pulse(page)).toContainText("Counts unavailable.");
-  await expect(pulse(page).getByText("612", { exact: true })).toHaveCount(0);
+  await expect(pulse(page).getByText("—", { exact: true })).toHaveCount(2);
   await expect(
     page.getByRole("region", { name: "Client identity" }),
   ).toBeVisible();
@@ -121,11 +123,11 @@ test("access loss on refresh hides previously visible counts", async ({
       : json(route, activityMetricsFixture(Date.now() - 180000)),
   );
   await page.goto(`/portfolio/${clientId}`);
-  await expect(pulse(page).getByText("612", { exact: true })).toBeVisible();
+  await expect(pulse(page).getByText("8", { exact: true })).toBeVisible();
   revoked = true;
   await pulse(page).getByRole("button", { name: "Refresh counts" }).click();
   await expect(pulse(page)).toContainText("Counts unavailable.");
-  await expect(pulse(page).getByText("612", { exact: true })).toHaveCount(0);
+  await expect(pulse(page).getByText("8", { exact: true })).toHaveCount(0);
   expect(unexpected).toEqual([]);
 });
 
@@ -138,7 +140,7 @@ test("count definitions and controls remain usable on a narrow screen", async ({
     json(route, activityMetricsFixture()),
   );
   await page.goto(`/portfolio/${clientId}`);
-  await expect(pulse(page).getByText("612", { exact: true })).toBeVisible();
+  await expect(pulse(page).getByText("8", { exact: true })).toBeVisible();
   const box = await pulse(page).boundingBox();
   expect(box).not.toBeNull();
   expect(box!.x).toBeGreaterThanOrEqual(0);
