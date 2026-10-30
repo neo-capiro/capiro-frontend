@@ -94,6 +94,7 @@ const turn: TurnView = {
   runState: mode === "streaming" ? "running" : "completed",
   omittedPrefix: false,
   incompleteHistory: mode === "incomplete",
+  browserReceipts: [],
   throughSequence: 7,
   messages: [
     {

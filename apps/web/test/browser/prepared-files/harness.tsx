@@ -185,6 +185,7 @@ const published: TurnView = {
   runState: "completed",
   prompt: null,
   omittedPrefix: false,
+  browserReceipts: [],
   reasonCode: null,
   messages: [],
   tools: [],

@@ -16,6 +16,7 @@ const turn = {
   tools: [],
   sources: [],
   nativeSources: [],
+  browserReceipts: [],
   approvals: [
     {
       proposalId: "40000000-0000-4000-8000-000000000001",

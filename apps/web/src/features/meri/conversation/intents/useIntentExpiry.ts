@@ -2,6 +2,33 @@
 import { useEffect, useState } from "react";
 import type { ListState } from "./useIntentList";
 
+type Item = Extract<ListState, { status: "ready" }>["items"][number];
+
+/** The one deadline this item's approval control depends on; null when it has none or is already decided. */
+function deadlineOf(item: Item): number | null {
+  if (item.state !== "prepared" || "withheld" in item) return null;
+  if (item.kind === "browser_action")
+    return item.phase === "awaiting_approval" ? item.proposal.expiresAtMs : null;
+  if (item.kind === "proposal" && item.phase === "awaiting_approval")
+    return Date.parse(item.proposal.expiresAt);
+  if (item.kind === "research_share" && item.proposalStatus === "proposed")
+    return Date.parse(item.proposal.expiresAt);
+  if (item.kind === "research_action" && item.result !== "unavailable" &&
+    item.result.proposalStatus === "proposed")
+    return Date.parse(item.proposal.expiresAt);
+  if (
+    (item.kind === "legiwatch_action" ||
+      item.kind === "client_record_action" ||
+      item.kind === "watch_action" ||
+      item.kind === "bizdev_action" ||
+      item.kind === "legislative_document_action") &&
+    item.result !== "unavailable" &&
+    item.result.status === "proposed"
+  )
+    return Date.parse(item.proposal.expiresAt);
+  return null;
+}
+
 /** Refresh local expiry at the next proposal deadline or tab return, without IO. */
 export function useIntentExpiry(
   list: ListState,
@@ -11,25 +38,10 @@ export function useIntentExpiry(
   const [, refreshClock] = useState(0);
   useEffect(() => {
     if (list.status !== "ready") return;
-    const deadlines = list.items.flatMap((item) =>
-      item.state === "prepared" &&
-      !("withheld" in item) &&
-      ((item.kind === "proposal" && item.phase === "awaiting_approval") ||
-        (item.kind === "research_share" &&
-          item.proposalStatus === "proposed") ||
-        (item.kind === "research_action" &&
-          item.result !== "unavailable" &&
-          item.result.proposalStatus === "proposed") ||
-        ((item.kind === "legiwatch_action" ||
-          item.kind === "client_record_action" ||
-          item.kind === "watch_action" ||
-          item.kind === "bizdev_action" ||
-          item.kind === "legislative_document_action") &&
-          item.result !== "unavailable" &&
-          item.result.status === "proposed"))
-        ? [Date.parse(item.proposal.expiresAt)]
-        : [],
-    );
+    const deadlines = list.items.flatMap((item) => {
+      const deadline = deadlineOf(item);
+      return deadline === null ? [] : [deadline];
+    });
     let timer: ReturnType<typeof setTimeout> | undefined;
     const schedule = () => {
       clearTimeout(timer);

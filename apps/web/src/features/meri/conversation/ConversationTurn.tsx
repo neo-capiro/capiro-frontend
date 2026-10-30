@@ -102,6 +102,13 @@ export function ConversationTurn({
               ))}
             </ul>
           )}
+          {turn.browserReceipts.length > 0 && (
+            <ul className={styles.tools} aria-label="Browser activity">
+              {turn.browserReceipts.map((event) => (
+                <li key={event.eventId}>{browserReceiptText(event)}</li>
+              ))}
+            </ul>
+          )}
           {(turn.sources.length > 0 || turn.nativeSources.length === 0) && (
             <TurnSources
               sources={turn.sources}
@@ -116,6 +123,19 @@ export function ConversationTurn({
       <TurnNotices turn={turn} />
     </article>
   );
+}
+
+/** What the browser itself reported. A receipt is an observation; it never states that an effect succeeded
+ * beyond the receipt's own outcome field, and it links to nothing it cannot prove. */
+function browserReceiptText(event: TurnView["browserReceipts"][number]) {
+  const data = event.data;
+  if (data.kind === "browser.action")
+    return `${data.action} on ${data.urlHost} · ${
+      data.outcome === "ok" ? "browser reported ok" : "browser reported an error"
+    }`;
+  return `Browser download from ${data.urlHost} · ${data.mimeType}${
+    data.bytes === null ? "" : ` · ${data.bytes} bytes`
+  }`;
 }
 
 /** Approval requests, run errors and the service reason code published for the run. */

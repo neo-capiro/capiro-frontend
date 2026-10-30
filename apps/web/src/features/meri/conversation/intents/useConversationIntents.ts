@@ -23,6 +23,7 @@ import {
   clientRecordSettled,
 } from "./client-record-view";
 import { isWatchProposal, watchSettled } from "./watch-view";
+import { browserDecideRequest, isBrowserProposal } from "./browser-view";
 import { isBizdevProposal, bizdevSettled } from "./bizdev-view";
 import { isLegiwatchProposal, legiwatchSettled } from "./legiwatch-view";
 import { isMailSendProposal, mailOutcomeSettled } from "./mail-view";
@@ -147,6 +148,7 @@ export function useConversationIntents(
             item.kind !== "research_action" &&
             item.kind !== "legiwatch_action" &&
             item.kind !== "client_record_action" &&
+            item.kind !== "browser_action" &&
             item.kind !== "watch_action" &&
             item.kind !== "bizdev_action" &&
             item.kind !== "legislative_document_action") ||
@@ -187,6 +189,11 @@ export function useConversationIntents(
               "failed_terminal",
               "blocked",
             ].includes(item.proposalStatus)) ||
+          (item.kind === "browser_action" &&
+            ((item.decision !== null && item.decision !== "unavailable") ||
+              (item.execution !== null &&
+                item.execution !== "unavailable" &&
+                item.execution.state === "completed"))) ||
           (item.kind === "proposal" && settledOwnerOutcome(item))
         )
           await journal.observed(item.proposal, item.deliveryId);
@@ -256,13 +263,17 @@ export function useConversationIntents(
         prior = attempts[id];
       // A throttled tab may still hold a control from before the deadline.
       // Keep saved decision reconciliation separate from a new decision.
-      if (!prior && Date.parse(proposal.expiresAt) <= now()) return;
+      const windowEndsAt = isBrowserProposal(proposal)
+        ? proposal.expiresAtMs
+        : Date.parse(proposal.expiresAt);
+      if (!prior && windowEndsAt <= now()) return;
       if (prior?.state === "pending" || (prior && prior.decision !== decision))
         return;
       // Reconcile uncertain domain actions by reading their owner; never resend them.
       if (
         prior &&
-        (isWatchProposal(proposal) ||
+        (isBrowserProposal(proposal) ||
+          isWatchProposal(proposal) ||
           isBizdevProposal(proposal) ||
           isLegiwatchProposal(proposal) ||
           isClientRecordProposal(proposal) ||
@@ -278,13 +289,18 @@ export function useConversationIntents(
         await refresh();
         return;
       }
-      const request: IntentsDecideRequest = {
-        conversationId,
-        deliveryId: row.deliveryId,
-        proposalId: id,
-        commandSha256: proposal.commandSha256,
-        decision,
-      };
+      // A browser decision binds the SUBJECT digest and its delivery domain; every other intent keeps its
+      // command digest exactly as before.
+      const request: IntentsDecideRequest = isBrowserProposal(proposal)
+        ? (browserDecideRequest(row, conversationId, decision) as IntentsDecideRequest)
+        : {
+            conversationId,
+            deliveryId: row.deliveryId,
+            proposalId: id,
+            commandSha256: (proposal as Exclude<typeof proposal, { kind: "browser_action" }>)
+              .commandSha256,
+            decision,
+          };
       pending.current.set(id, access);
       setRecovery((previous) => ({
         ...previous,
@@ -353,7 +369,8 @@ export function useConversationIntents(
         current.current.access === access
       )
         onDecisionSettled?.(
-          isWatchProposal(proposal) ||
+          isBrowserProposal(proposal) ||
+            isWatchProposal(proposal) ||
             isBizdevProposal(proposal) ||
             isResearchShareProposal(proposal) ||
             isResearchActionProposal(proposal) ||
