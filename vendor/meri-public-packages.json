@@ -343,7 +343,7 @@
    "regularEntryCount": 69,
    "status": "superseded-by capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz; historical archive retained",
    "purpose": "Replacement archive after Meri280 (feedback JSONB fix) and the skills-catalog/provenance refresh merged to meri-greenfield main: regenerated conversation-application (feedback contracts for FE225) and the conversation-sources hearing exports (FE222) in one package.",
-   "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614\u00e2\u20ac\u00a6/5a1cf815\u00e2\u20ac\u00a6). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
+   "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614â€¦/5a1cf815â€¦). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
   },
   {
    "file": "capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz",
@@ -922,6 +922,34 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "Browser-only session renewal, admitted viewer frames and canonical takeover resume; retained outreach exports."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.40-50028ae1-9d1d92524aec.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.40",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "50028ae13dc69116d10598e7b34e2bc75cc62a4e",
+   "sourceTree": "ad32b839f7fa3eb79b47c715ddc1191217842421",
+   "bytes": 1797433,
+   "sha256": "9d1d92524aec742e125dde74b96fe86746653fcdbe57091c25c1c8cdbb306e81",
+   "integrity": "sha512-nUmtre0LiEur6lP3nuo6aeakTxS5mjldM2cRSxoyljGdpbyeJIHOqsoAzRVNiqqNS6nNK9kWNVCR8DCr1vLyXQ==",
+   "regularEntryCount": 90,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Public browser approval decisions and additive live/history browser receipt contracts; actual consumer qualification follows."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.26-50028ae1-c940828fa190.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.26",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "50028ae13dc69116d10598e7b34e2bc75cc62a4e",
+   "sourceTree": "ad32b839f7fa3eb79b47c715ddc1191217842421",
+   "bytes": 3826,
+   "sha256": "c940828fa19095b6f80bd46abc3b97a3a541e3749a6655413f21915213b21f02",
+   "integrity": "sha512-zO2ggRELw3+k0o6fQuBQ9PGH+V0cDfqk7H6GAOwMU/Ss5u70sDw05w/3ntLOo+ocWfdQGVkn5V3mv7NQk2HORg==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Public browser approval decisions and additive live/history browser receipt contracts; actual consumer qualification follows."
   }
  ]
 }
