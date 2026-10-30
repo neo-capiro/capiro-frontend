@@ -19,6 +19,7 @@ import type { useConversationSession } from "./useConversationSession";
 import { ModelSelectionPicker } from "../model-selection/ModelSelectionPicker";
 import modelStyles from "../model-selection/model-selection.module.css";
 import { SkillSelectionPicker } from "./SkillSelectionPicker";
+import { useQuickActionCatalog } from "./useQuickActionCatalog";
 import { SiteWorkflowPicker } from "./SiteWorkflowPicker";
 import { WorkSelectionPicker } from "../work/WorkSelectionPicker";
 import { ProcedureSelectionPicker } from "./ProcedureSelectionPicker";
@@ -69,6 +70,10 @@ export function SessionComposer({
   // A clarifying question is durable run state: it is re-derived from this conversation's own events on every render,
   // survives a refresh, and is answered with one lifecycle control.
   const question = useRunQuestion(current?.port ?? null);
+  // Core owns the QuickActions rollout; this only decides which skills a NEW selection may offer.
+  const quickActions = useQuickActionCatalog(
+    session.ready?.port.context.tenantId ?? null,
+  );
   return (
     <>
       {question.pending !== null && (
@@ -130,6 +135,7 @@ export function SessionComposer({
             selection={session.skillSelection}
             clientId={session.ready?.port.context.selectedClientId ?? null}
             disabled={modelDisabled}
+            gate={quickActions.gate}
             onChange={session.setSkillSelection}
           />
           {current && (

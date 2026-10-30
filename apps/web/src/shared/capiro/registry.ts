@@ -11,6 +11,7 @@ import { completedReportOperations } from "./operations/meri-completed-reports";
 import { meriFirmSkillOperations } from "./operations/meri-firm-skills";
 import { meriProcedureOperations } from "./operations/meri-procedures";
 import { meriConnectorOperations } from "./operations/meri-connectors";
+import { meriQuickActionOperations } from "./operations/meri-quick-actions";
 import { calendarOperations } from "./operations/calendar";
 import { directoryOperations } from "./operations/directory";
 import { directoryObjectiveOperations } from "./operations/directory-objective-destination";
@@ -70,6 +71,7 @@ export const capiroOperations = {
   ...meriFirmSkillOperations,
   ...meriProcedureOperations,
   ...meriConnectorOperations,
+  ...meriQuickActionOperations,
   ...settingsOperations,
   ...plannerOperations,
   ...engagementOperations,

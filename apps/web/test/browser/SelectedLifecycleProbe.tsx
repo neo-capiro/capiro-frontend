@@ -7,6 +7,7 @@ import { useRunLifecycle } from "../../src/features/meri/conversation/lifecycle/
 import { RunLifecycleControls } from "../../src/features/meri/conversation/lifecycle/RunLifecycleControls";
 import { turnFromObservation } from "../../src/features/meri/conversation/conversation-view";
 import { SkillSelectionPicker } from "../../src/features/meri/conversation/SkillSelectionPicker";
+import { ALL_TYPED_SKILL_IDS } from "../../src/features/meri/conversation/quick-action-gate";
 import { useConversationLocalState } from "../../src/features/meri/conversation/useConversationLocalState";
 import { ClientHandoffDraft } from "../../src/features/meri/conversation/ClientHandoffDraft";
 import { clientHandoff } from "../../src/shared/meri-conversations/client-handoff";
@@ -75,6 +76,7 @@ function MountedRun() {
         selection={local.skillSelection ?? {}}
         onChange={local.setSkillSelection}
         disabled={snapshot.status !== "ready"}
+        gate={{ status: "on", available: ALL_TYPED_SKILL_IDS }}
       />
       <output aria-label="Applied selection">
         {JSON.stringify(local.skillSelection)}

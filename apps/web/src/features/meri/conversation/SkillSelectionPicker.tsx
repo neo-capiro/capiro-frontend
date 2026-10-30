@@ -9,6 +9,11 @@ import {
   receiveSkillSelection,
   type ConversationSkillSelection,
 } from "../../../shared/meri-conversations/query-journal";
+import {
+  gateMessage,
+  newSelectionAllowed,
+  type QuickActionGate,
+} from "./quick-action-gate";
 import styles from "../model-selection/model-selection.module.css";
 
 type Window = NonNullable<ConversationSubmitRequest["windowRequest"]>;
@@ -60,14 +65,20 @@ export function SkillSelectionPicker({
   selection,
   clientId,
   disabled,
+  gate,
   onChange,
 }: {
   selection: ConversationSkillSelection;
   clientId: string | null;
   disabled: boolean;
+  gate: QuickActionGate;
   onChange: (value: ConversationSkillSelection) => void;
 }) {
-  const choices = skillsForScope(clientId);
+  // Core's rollout only removes skills from NEW selection; an already applied skill is never cleared.
+  const choices = skillsForScope(clientId).filter((skill) =>
+    newSelectionAllowed(gate, skill.skillId),
+  );
+  const notice = gateMessage(gate);
   const saved = selection.windowRequest;
   const [skillId, setSkillId] = useState(selection.skill?.skillId ?? "");
   const selected = choices.find((item) => item.skillId === skillId);
@@ -102,6 +113,10 @@ export function SkillSelectionPicker({
   const [error, setError] = useState<string>();
   const apply = () => {
     if (disabled) return;
+    if (skillId && !newSelectionAllowed(gate, skillId)) {
+      setError(notice ?? "This skill is unavailable right now.");
+      return;
+    }
     if (!skillId) {
       // Clearing the skill keeps an additive work definition; other selected inputs clear as before.
       onChange(
@@ -169,6 +184,7 @@ export function SkillSelectionPicker({
         Choose a skill and time window, then review your message before Send.
         Access is checked when Meri starts.
       </p>
+      {notice && <p className={styles.help}>{notice}</p>}
       <label className={styles.field}>
         Skill
         <select
@@ -190,7 +206,9 @@ export function SkillSelectionPicker({
               (item) => item.skillId === selection.skill?.skillId,
             ) && (
               <option value={selection.skill.skillId} disabled>
-                Saved skill unavailable for this scope
+                {newSelectionAllowed(gate, selection.skill.skillId)
+                  ? "Saved skill unavailable for this scope"
+                  : "Saved skill · not offered for new messages"}
               </option>
             )}
           {choices.map((skill) => (
