@@ -58,6 +58,16 @@ export const outreachCampaignState = z
     templateId: text(384).nullable(),
     templateVersionId: z.uuid().nullable().optional(),
     mainIdea: text(8000),
+    decisions: z
+      .object({
+        goal: text(2000),
+        objective: text(4000),
+        topic: text(500),
+        whyNow: text(2000),
+        campaignAngle: text(4000),
+      })
+      .strict()
+      .optional(),
     tone: z.enum(["professional", "friendly", "formal", "concise"]),
     length: z.enum(["short", "standard", "long"]),
     recipients: z.array(outreachRecipient).max(500),
@@ -106,15 +116,47 @@ export const outreachCampaignState = z
     lastStep: z.number().int().min(1).max(7),
   })
   .strict();
+const deliverySummary = z.object({
+  id: z.uuid(),
+  status: z.string(),
+  totals: z.record(z.string(), z.number()),
+  createdAt: z.string(),
+  finishedAt: z.string().nullable(),
+});
 export const outreachCampaign = z.object({
   id: z.uuid(),
   revision: z.number().int().nonnegative(),
   updatedAt: z.string(),
   status: z.string(),
   state: outreachCampaignState,
+  category: z.enum(["drafts", "sent", "attention"]).optional(),
+  recordedSendStatus: z.string().nullable().optional(),
+  recipientCount: z.number().int().nonnegative().optional(),
+  sentAt: z.string().nullable().optional(),
+  client: z.object({ id: z.uuid(), name: z.string() }).nullable().optional(),
+  delivery: deliverySummary.nullable().optional(),
 });
 export type OutreachCampaignState = z.infer<typeof outreachCampaignState>;
 export type OutreachCampaign = z.infer<typeof outreachCampaign>;
+export const outreachCampaignSummary = outreachCampaign.extend({
+  category: z.enum(["drafts", "sent", "attention"]),
+  recordedSendStatus: z.string().nullable(),
+  client: z.object({ id: z.uuid(), name: z.string() }).nullable(),
+  type: z.string(),
+  hasWorkflow: z.boolean(),
+  recipientCount: z.number().int().nonnegative(),
+  createdAt: z.string(),
+  sentAt: z.string().nullable(),
+  draftReadiness: z
+    .object({ total: z.number().int(), ready: z.number().int() })
+    .nullable(),
+  delivery: deliverySummary.nullable(),
+});
+export const outreachCampaignPage = z.object({
+  items: z.array(outreachCampaignSummary),
+  nextCursor: z.string().nullable(),
+});
+export type OutreachCampaignSummary = z.infer<typeof outreachCampaignSummary>;
 export type OutreachRecipient = z.infer<typeof outreachRecipient>;
 export type OutreachMember = z.infer<typeof outreachMember>;
 export type OutreachContextItem = z.infer<typeof outreachContextItem>;

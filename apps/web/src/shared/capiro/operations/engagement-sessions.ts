@@ -100,6 +100,7 @@ export const engagementSessionOperations = {
         targetCount: z.number().int().nonnegative(),
         recordStatus: text,
         sentAt: text,
+        hasWorkflow: z.boolean().optional(),
       }),
     ),
     source,

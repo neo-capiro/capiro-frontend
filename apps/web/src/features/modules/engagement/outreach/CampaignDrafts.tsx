@@ -39,10 +39,10 @@ export function CampaignDrafts({ owner }: { owner: Owner }) {
       ["done", "held", "failed", "canceled"].includes(item.status),
     );
   return (
-    <div className={styles.stack}>
+    <div className={styles.grid}>
       <Panel
-        title={pending ? "Generating your outreach" : "Generate & review"}
-        description="Each recipient gets a separate working context. Review every saved message before sending."
+        title={pending ? "Generating your outreach" : "Generate and review"}
+        description="Generate a saved message for each recipient, then review the result."
       >
         <div className={styles.fields}>
           {pending ? (
@@ -104,7 +104,11 @@ export function CampaignDrafts({ owner }: { owner: Owner }) {
               )}
             </>
           ) : (
-            <div className={styles.actions}>
+            <div className={styles.fields}>
+              <p className={styles.hint}>
+                {units.length} {units.length === 1 ? "message" : "messages"} ·
+                one active recipient at a time
+              </p>
               <ActionButton
                 primary
                 disabled={
@@ -119,11 +123,21 @@ export function CampaignDrafts({ owner }: { owner: Owner }) {
               >
                 Generate drafts
               </ActionButton>
-              <span className={styles.hint}>
-                {units.length} {units.length === 1 ? "message" : "messages"} ·
-                one active recipient at a time
-              </span>
             </div>
+          )}
+          {!pending && (
+            <Panel title="Generation progress">
+              <div className={styles.fields}>
+                <p className={styles.hint}>
+                  {owner.drafts.filter((row) => !!row.current).length} of{" "}
+                  {units.length} saved
+                </p>
+                <p className={styles.hint}>
+                  Every saved draft remains available when you leave this
+                  screen.
+                </p>
+              </div>
+            </Panel>
           )}
         </div>
       </Panel>
@@ -244,8 +258,10 @@ function DraftEditor({
   return (
     <div className={styles.fields}>
       <div className={styles.actions}>
-        <Badge>Version {current.version}</Badge>
-        <Badge>{current.sendable ? "Ready to send" : "Needs attention"}</Badge>
+        <span className={styles.version}>Version {current.version}</span>
+        <span className={styles.draftReadiness}>
+          {current.sendable ? "Ready to send" : "Needs attention"}
+        </span>
         {current.model && <span className={styles.hint}>{current.model}</span>}
       </div>
       {editing ? (
@@ -316,7 +332,7 @@ function DraftEditor({
       <Field label="What would you like to improve?" htmlFor="draft-improve">
         <TextArea
           id="draft-improve"
-          rows={2}
+          rows={1}
           value={instruction}
           maxLength={2000}
           disabled={disabled}

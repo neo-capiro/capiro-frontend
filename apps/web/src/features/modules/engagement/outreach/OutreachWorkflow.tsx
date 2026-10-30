@@ -21,12 +21,14 @@ export function OutreachWorkflow({
   id,
   clientId,
   onExit,
+  initialStep,
 }: {
   id?: string;
   clientId: string;
   onExit: () => void;
+  initialStep?: number;
 }) {
-  const owner = useOutreachCampaign(id, clientId);
+  const owner = useOutreachCampaign(id, clientId, initialStep);
   const clients = useCapiroQuery("clients.list", {});
   const templates = useCapiroQuery("engagement.campaign.templates", {});
   const step = owner.state.lastStep as OutreachStep;
@@ -40,7 +42,8 @@ export function OutreachWorkflow({
       ? "Name your campaign."
       : step === 3
         ? recipientProblem(owner.state)
-        : step === 4 && !owner.state.mainIdea.trim()
+        : step === 4 &&
+            !(owner.state.mainIdea.trim() || owner.state.decisions?.goal.trim())
           ? "Add the main idea."
           : step === 6 && (owner.pending || !owner.drafts.length)
             ? "Finish generation and review the saved drafts."
@@ -53,7 +56,7 @@ export function OutreachWorkflow({
   if (id && !owner.saved)
     return (
       <StatusPanel
-        error={owner.error ?? "Campaign unavailable"}
+        error={owner.failure ?? "Campaign unavailable"}
         onRetry={owner.refresh}
       />
     );
@@ -100,6 +103,7 @@ export function OutreachWorkflow({
           update={owner.update}
           disabled={disabled}
           clients={clients.data ?? []}
+          fixedClient={!!clientId}
         />
       )}
       {step === 2 && (

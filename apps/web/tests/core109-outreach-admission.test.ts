@@ -34,9 +34,23 @@ const state = vi.hoisted(() => ({
 }));
 vi.mock("../src/shared/capiro/queries", () => ({
   useCapiroQuery: (key: string) =>
-    key === "engagement.outreach"
-      ? { ...state, reload: () => {} }
-      : { data: state.sessions, loading: false, reload: () => {} },
+    key === "engagement.outreach.records"
+      ? {
+          ...state,
+          data: {
+            items: state.data?.map((row) => ({ ...row, hasWorkflow: false })),
+            nextCursor: null,
+          },
+          reload: () => {},
+        }
+      : {
+          data:
+            key === "engagement.campaigns"
+              ? { items: [], nextCursor: null }
+              : state.sessions,
+          loading: false,
+          reload: () => {},
+        },
   useCapiroMutation: () => ({ pending: false, run: vi.fn() }),
 }));
 const clientId = "10000000-0000-4000-8000-000000000001";
@@ -67,7 +81,10 @@ describe("CORE-109 current Outreach destination admission", () => {
     state.data = [
       {
         ...record,
-        client: { id: "20000000-0000-4000-8000-000000000002", name: "Other client" },
+        client: {
+          id: "20000000-0000-4000-8000-000000000002",
+          name: "Other client",
+        },
       },
     ];
     const html = render();
