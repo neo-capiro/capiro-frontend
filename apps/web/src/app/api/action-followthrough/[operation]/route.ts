@@ -20,7 +20,8 @@ export async function POST(
   return proxyActionRequest(
     request,
     operation,
-    operation === "objective-start" ||
+    operation === "browser-session" ||
+      operation === "objective-start" ||
       operation === "routine-session" ||
       routineRoute(operation)
       ? {
@@ -35,6 +36,7 @@ export async function POST(
       const session = await auth();
       return session.userId
         ? operation === "session" ||
+          operation === "browser-session" ||
           operation === "objective-start" ||
           operation === "routine-session"
           ? meriIdentityToken(session.sessionId, () => session.getToken())

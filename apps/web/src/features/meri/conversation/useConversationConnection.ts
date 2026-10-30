@@ -249,6 +249,7 @@ export function useConversationConnection(
     ...renewal,
     conversationId:
       bound.last()?.context.conversationId ?? opening.hints.conversationId,
+    runId: bound.last()?.context.runId ?? opening.hints.runId,
     pending: opening.pending,
     retry: () => retry(state.status),
     reopen,

@@ -25,6 +25,7 @@ import { ProcedureSelectionPicker } from "./ProcedureSelectionPicker";
 import { ClientHandoffDraft } from "./ClientHandoffDraft";
 import { FeedbackContext } from "./feedback/FeedbackContext";
 import { useComposerAttachments } from "../uploads/useComposerAttachments";
+import { ConnectedBrowserViewer } from "../browser/ConnectedBrowserViewer";
 
 type Session = ReturnType<typeof useConversationSession>;
 
@@ -280,6 +281,24 @@ export function ConversationView({
         ) : (
           <ConnectionPending session={session} />
         )}
+        {!session.history.denied &&
+          !session.latestTarget &&
+          session.selectedId &&
+          session.connection.runId && (
+            <ConnectedBrowserViewer
+              key={JSON.stringify([
+                session.account,
+                session.clientId,
+                session.selectedId,
+                session.connection.runId,
+              ])}
+              account={session.account}
+              clientId={session.clientId}
+              conversationId={session.selectedId}
+              runId={session.connection.runId}
+              onTarget={session.openBrowserTarget}
+            />
+          )}
       </ConversationFrame>
     </FeedbackContext.Provider>
   );

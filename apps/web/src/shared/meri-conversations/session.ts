@@ -30,18 +30,24 @@ export async function bootstrapConversationSession(
   lifetime: AbortSignal,
   fetcher: typeof fetch = fetch,
   now = Date.now,
+  purpose: "conversation" | "browser" = "conversation",
 ) {
   const captured = conversationSessionHints.parse(hints);
+  if (purpose === "browser" && (!captured.conversationId || !captured.runId))
+    throw new Error("Browser access requires an existing exact run");
   return withActionDeadline([lifetime], async (signal) => {
-    const response = await fetcher("/api/action-followthrough/session", {
-      method: "POST",
-      body: JSON.stringify(captured),
-      headers: { "Content-Type": "application/json" },
-      credentials: "same-origin",
-      cache: "no-store",
-      redirect: "error",
-      signal,
-    });
+    const response = await fetcher(
+      `/api/action-followthrough/${purpose === "browser" ? "browser-session" : "session"}`,
+      {
+        method: "POST",
+        body: JSON.stringify(captured),
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        cache: "no-store",
+        redirect: "error",
+        signal,
+      },
+    );
     const text = await boundedJsonText(response, signal, 4096);
     if (response.status !== 200)
       throw new ActionSessionUnavailable(response.status);
@@ -60,6 +66,11 @@ export async function bootstrapConversationSession(
       encode(JSON.stringify(expected)),
       now(),
     );
+    if (
+      purpose === "browser" &&
+      (result.initialRunRebind || result.context.runId !== captured.runId)
+    )
+      throw new Error("Browser session cannot rebind a run");
     signal.throwIfAborted();
     return result;
   });

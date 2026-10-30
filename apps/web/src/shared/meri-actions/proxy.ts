@@ -23,6 +23,7 @@ import {
 
 const routes = new Set([
   "session",
+  "browser-session",
   "query",
   "draft",
   "prepare",
@@ -57,6 +58,7 @@ export async function proxyActionRequest(
 ) {
   const routine = routineRoute(route);
   const managementSession = route === "routine-session";
+  const browserSession = route === "browser-session";
   if (!routes.has(route) && !routine) return unavailable(404);
   if (request.method !== "POST") return unavailable(405);
   const url = new URL(request.url);
@@ -76,7 +78,10 @@ export async function proxyActionRequest(
       signal.throwIfAborted();
       if (!nativeToken) return unavailable(401);
       const credential =
-        route === "session" || route === "objective-start" || managementSession
+        route === "session" ||
+        browserSession ||
+        route === "objective-start" ||
+        managementSession
           ? nativeToken
           : (receivedActionSession(request) ??
             (routine ? receivedRoutineManagementSession(request) : null));
@@ -88,12 +93,16 @@ export async function proxyActionRequest(
           ? routinesMetadata.limits.requestBytes
           : route === "objective-start"
             ? objectiveGenerationStartMetadata.requestBytes
-            : route === "session" || managementSession
+            : route === "session" || browserSession || managementSession
               ? 4096
               : 16 * 1024 * 1024,
       );
       if (route === "session")
         actionSessionHints.or(conversationSessionHints).parse(JSON.parse(body));
+      if (browserSession) {
+        const hints = conversationSessionHints.parse(JSON.parse(body));
+        if (!hints.conversationId || !hints.runId) return unavailable(400);
+      }
       if (routine) await receiveRequest(routine, body);
       if (managementSession) receiveRoutineManagementSessionRequest(body);
       const objective =
@@ -123,7 +132,7 @@ export async function proxyActionRequest(
           ? routinesMetadata.limits.responseBytes
           : objective
             ? objectiveGenerationStartMetadata.responseBytes
-            : route === "session" || managementSession
+            : route === "session" || browserSession || managementSession
               ? 4096
               : 16 * 1024 * 1024,
       );
