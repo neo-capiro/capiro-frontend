@@ -32,6 +32,7 @@ import {
 } from "@/shared/meri-conversations/tab-journal";
 import type { LiveComposer } from "@/features/meri/MeriComposer";
 import "@/app/globals.css";
+import { ALL_TYPED_SKILL_IDS } from "@/features/meri/conversation/quick-action-gate";
 
 const scenario =
   new URLSearchParams(location.search).get("scenario") ?? "current";
@@ -216,6 +217,7 @@ function Harness() {
         channel={channel}
         session={session}
         scope="Synthetic client"
+        gate={{ status: "on", available: ALL_TYPED_SKILL_IDS }}
       />
       <button
         type="button"

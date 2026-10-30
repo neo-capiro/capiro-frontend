@@ -107,3 +107,28 @@ export function gateMessage(gate: QuickActionGate): string | undefined {
     return "Quick actions are turned off for this workspace.";
   return undefined;
 }
+
+/**
+ * Refusal for a NEW first submission or next turn that would carry a gated skill while the current
+ * rollout read is loading, unavailable, off or does not list that id.
+ *
+ * This is deliberately the same decision as `newSelectionAllowed`: an applied-but-never-submitted
+ * draft is not an unknown external effect, so it gets no recovery exemption. An already submitted
+ * request keeps its exact bytes on its own retention/readback path — this refusal is evaluated only
+ * when a new intent is about to be recorded or dispatched.
+ */
+export function newIntentRefusal(
+  gate: QuickActionGate,
+  selection:
+    | { skill?: { skillId?: string; [key: string]: unknown } | undefined }
+    | null
+    | undefined,
+): string | undefined {
+  const skillId = selection?.skill?.skillId;
+  if (!skillId) return undefined;
+  if (newSelectionAllowed(gate, skillId)) return undefined;
+  return (
+    gateMessage(gate) ??
+    "This quick action is not available for a new message right now."
+  );
+}

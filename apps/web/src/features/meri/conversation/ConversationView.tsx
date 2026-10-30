@@ -20,6 +20,7 @@ import { ModelSelectionPicker } from "../model-selection/ModelSelectionPicker";
 import modelStyles from "../model-selection/model-selection.module.css";
 import { SkillSelectionPicker } from "./SkillSelectionPicker";
 import { useQuickActionCatalog } from "./useQuickActionCatalog";
+import { newIntentRefusal, type QuickActionGate } from "./quick-action-gate";
 import { SiteWorkflowPicker } from "./SiteWorkflowPicker";
 import { WorkSelectionPicker } from "../work/WorkSelectionPicker";
 import { ProcedureSelectionPicker } from "./ProcedureSelectionPicker";
@@ -35,10 +36,12 @@ export function SessionComposer({
   session,
   scope,
   channel,
+  gate,
 }: {
   session: Session;
   scope: string;
   channel: ConversationComposerChannel;
+  gate: QuickActionGate;
 }) {
   const published = useSyncExternalStore(
     channel.subscribe,
@@ -70,10 +73,7 @@ export function SessionComposer({
   // A clarifying question is durable run state: it is re-derived from this conversation's own events on every render,
   // survives a refresh, and is answered with one lifecycle control.
   const question = useRunQuestion(current?.port ?? null);
-  // Core owns the QuickActions rollout; this only decides which skills a NEW selection may offer.
-  const quickActions = useQuickActionCatalog(
-    session.ready?.port.context.tenantId ?? null,
-  );
+
   return (
     <>
       {question.pending !== null && (
@@ -135,7 +135,7 @@ export function SessionComposer({
             selection={session.skillSelection}
             clientId={session.ready?.port.context.selectedClientId ?? null}
             disabled={modelDisabled}
-            gate={quickActions.gate}
+            gate={gate}
             onChange={session.setSkillSelection}
           />
           {current && (
@@ -245,6 +245,17 @@ export function ConversationView({
     (!session.accessLost && !session.latestTarget && session.connection.renewing
       ? retained
       : undefined);
+  // Core owns the QuickActions rollout. One read per mounted conversation decides both which skills
+  // a NEW selection may offer and whether a NEW first submission or next turn may be dispatched:
+  // an applied-but-never-submitted draft is refused while the current catalog is closed, and the
+  // selection itself is left intact for correction or retry.
+  const quickActions = useQuickActionCatalog(
+    session.ready?.port.context.tenantId ?? null,
+  );
+  const newIntentBlocked = newIntentRefusal(
+    quickActions.gate,
+    session.skillSelection,
+  );
   return (
     <FeedbackContext.Provider value={displayed?.port ?? null}>
       <ConversationFrame
@@ -255,7 +266,12 @@ export function ConversationView({
           )
         }
         composer={
-          <SessionComposer session={session} scope={scope} channel={composer} />
+          <SessionComposer
+            session={session}
+            scope={scope}
+            channel={composer}
+            gate={quickActions.gate}
+          />
         }
       >
         {displayed ? (
@@ -272,6 +288,7 @@ export function ConversationView({
             storageError={session.storageError}
             modelSelection={session.modelSelection}
             skillSelection={session.skillSelection}
+            newIntentBlocked={newIntentBlocked}
             modelBlocked={session.modelBlocked}
             textareaRef={session.textarea}
             onNextTurn={session.startNext}

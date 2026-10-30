@@ -11,6 +11,7 @@ import {
 import { createConversationComposer } from "../src/features/meri/conversation/conversation-composer";
 
 import { ConversationHostController } from "../src/shared/meri-conversations/host-controller";
+import { ALL_TYPED_SKILL_IDS } from "../src/features/meri/conversation/quick-action-gate";
 
 const context = {
   tenantId: "m1-tenant",
@@ -259,6 +260,7 @@ it("available conversation access preserves catalog failure recovery and shows m
         session,
         scope: "General",
         channel: createConversationComposer(),
+        gate: { status: "on", available: ALL_TYPED_SKILL_IDS },
       }),
     );
   const failed = render();
