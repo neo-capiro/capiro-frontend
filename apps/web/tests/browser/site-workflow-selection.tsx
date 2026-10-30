@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { SkillSelectionPicker } from "@/features/meri/conversation/SkillSelectionPicker";
+import { ALL_TYPED_SKILL_IDS } from "@/features/meri/conversation/quick-action-gate";
 import { SelectedRequestReceipt } from "@/features/meri/conversation/SelectedRequestReceipt";
 import { createInitialDraftOwner } from "@/shared/meri-conversations/initial-draft";
 import { syncMeriTabIdentity } from "@/shared/meri-conversations/tab-journal";
@@ -34,6 +35,7 @@ function Harness() {
         selection={selection}
         clientId={null}
         disabled={false}
+        gate={{ status: "on", available: ALL_TYPED_SKILL_IDS }}
         onChange={(value) => {
           owner.selectSkill(value);
           setSelection(owner.selection()!);

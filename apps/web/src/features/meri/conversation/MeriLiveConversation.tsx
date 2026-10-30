@@ -70,12 +70,13 @@ function LiveTurn({
 }
 
 /** Local composer availability; only the SDK/server may admit an original input or next turn. */
-function composerAvailability(
+export function composerAvailability(
   run: ReturnType<typeof useLiveRun>,
   turn: TurnView | null,
   earlier: readonly TurnView[],
   initialPrompt: string | undefined,
   initialBlocked: string | undefined,
+  newIntentBlocked: string | undefined,
   nextTurnBlocked: string | undefined,
   nextTurnVerified: boolean,
   pendingDraft: boolean,
@@ -93,6 +94,7 @@ function composerAvailability(
         "Recover the original message identity before sending.")
       : undefined;
   const sendBlocked =
+    newIntentBlocked ??
     firstBlocked ??
     (isTerminal(turn?.runState) ? nextTurnBlocked : undefined) ??
     (busy
@@ -275,6 +277,7 @@ export function MeriLiveConversation({
   modelSelection,
   modelBlocked,
   skillSelection,
+  newIntentBlocked,
   onLifecycleTarget,
 }: {
   port: MeriConversationPort;
@@ -291,6 +294,8 @@ export function MeriLiveConversation({
   /** Current exact-run history is re-verified and permits a client-side next-turn attempt. */
   nextTurnVerified?: boolean | undefined;
   initialBlocked?: string | undefined;
+  /** A new first submission or next turn would carry a skill the current rollout does not admit. */
+  newIntentBlocked?: string | undefined;
   composer: ConversationComposerChannel;
   promptKey?: string | undefined;
   onSettled: () => void;
@@ -339,14 +344,38 @@ export function MeriLiveConversation({
     earlier,
     initialPrompt,
     initialBlocked,
+    newIntentBlocked,
     nextTurnBlocked,
     nextTurnVerified,
     initialDraft.hasPending(port.context),
   );
   const retentionError =
     storageError ?? initialDraft.error() ?? run.storageError;
+  // The rollout refusal closes Send but must never lock the selection controls, otherwise an applied
+  // unsent quick action could not be cleared or switched. Recompute the same availability without it
+  // (no string comparison): whatever still blocks is a genuine run/storage/access/pending lock.
+  const selectionLocked =
+    retentionError ??
+    lifecycle.blocked ??
+    modelBlocked ??
+    (newIntentBlocked
+      ? composerAvailability(
+          run,
+          turn,
+          earlier,
+          initialPrompt,
+          initialBlocked,
+          undefined,
+          nextTurnBlocked,
+          nextTurnVerified,
+          initialDraft.hasPending(port.context),
+        ).sendBlocked
+      : availability.sendBlocked);
   const send = () => {
     if (retentionError || modelBlocked || lifecycle.blocked) return;
+    // A new intent carrying a skill the current rollout does not admit is refused here, before the
+    // first request or next-turn reservation is recorded. The selection itself is left intact.
+    if (newIntentBlocked) return;
     const prompt = draft.trim();
     if (availability.initial) {
       void run.submitInitial(
@@ -378,6 +407,7 @@ export function MeriLiveConversation({
         intent.submit?.state !== "observed" && intent.submit
           ? intent.submit.modelSelection
           : modelSelection,
+      selectionLocked,
       stopBlocked:
         retentionError ?? lifecycle.blocked ?? availability.stopBlocked,
       scope,

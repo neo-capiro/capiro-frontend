@@ -25,6 +25,7 @@ import {
 import type { LiveComposer } from "@/features/meri/MeriComposer";
 import { CapiroDataProvider } from "@/shared/capiro/CapiroBoundary";
 import "@/app/globals.css";
+import { ALL_TYPED_SKILL_IDS } from "@/features/meri/conversation/quick-action-gate";
 
 /**
  * The composer now mounts the native procedure control, which reads through the product's own Capiro
@@ -125,6 +126,7 @@ function Harness() {
         channel={channel}
         session={session}
         scope="Synthetic client"
+        gate={{ status: "on", available: ALL_TYPED_SKILL_IDS }}
       />
       {handoverError ? <p role="alert">{handoverError}</p> : null}
       <output aria-label="Applied work">

@@ -7,6 +7,7 @@ import {
   useLiveComposer,
 } from "../src/features/meri/conversation/conversation-composer";
 import type { MeriConversationPort } from "../src/shared/meri-conversations/host-controller";
+import { ALL_TYPED_SKILL_IDS } from "../src/features/meri/conversation/quick-action-gate";
 
 const harness = vi.hoisted(() => ({
   submit: undefined as
@@ -86,6 +87,7 @@ function render(
       channel,
       session: value,
       scope: "Synthetic client",
+      gate: { status: "on", available: ALL_TYPED_SKILL_IDS },
     }),
   );
 }
