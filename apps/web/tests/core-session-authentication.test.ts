@@ -34,6 +34,7 @@ afterEach(() => {
 it.each([
   ["GET", "me"],
   ["GET", "clients"],
+  ["GET", "clients/metrics"],
   ["GET", `clients/${id}`],
   ["GET", `clients/${id}/account-owners`],
   ["GET", "client-account-owners"],
@@ -108,6 +109,66 @@ it.each([
   ).toBe("Bearer synthetic-session");
 });
 
+// Product chain: usePortfolioMetrics -> api.request("core", "clients/metrics")
+// -> /api/backend/core/clients/metrics -> proxyRequest -> this selector. This
+// read has no registered /api/capiro gateway operation, so the shared selector
+// is proven through the backend proxy and the registration tables above stay
+// unchanged rather than gaining a contract invented for the test.
+it("forwards the current-session credential to the exact native Core metrics target", async () => {
+  const response = await backend.GET(
+    new Request(`${origin}/api/backend/core/clients/metrics`, {
+      headers: { Origin: origin },
+    }),
+    {
+      params: Promise.resolve({ service: "core", path: ["clients", "metrics"] }),
+    },
+  );
+  expect(response.status).toBe(200);
+  expect(getToken).toHaveBeenCalledExactlyOnceWith();
+  expect(String(fetcher.mock.calls[0]![0])).toBe(`${base}/clients/metrics`);
+  expect(
+    new Headers(fetcher.mock.calls[0]![1]?.headers).get("authorization"),
+  ).toBe("Bearer synthetic-session");
+});
+
+it("makes no upstream metrics fetch without a current session", async () => {
+  clerk.auth.mockResolvedValueOnce({ userId: null, getToken });
+  const response = await backend.GET(
+    new Request(`${origin}/api/backend/core/clients/metrics`, {
+      headers: { Origin: origin },
+    }),
+    {
+      params: Promise.resolve({ service: "core", path: ["clients", "metrics"] }),
+    },
+  );
+  expect(response.status).toBe(401);
+  expect(getToken).not.toHaveBeenCalled();
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+it("keeps an upstream metrics denial a denial without a scope or tenant fallback", async () => {
+  fetcher.mockImplementationOnce(async () =>
+    Response.json(
+      { message: "Synthetic current-scope refusal" },
+      { status: 403 },
+    ),
+  );
+  const response = await backend.GET(
+    new Request(`${origin}/api/backend/core/clients/metrics`, {
+      headers: { Origin: origin },
+    }),
+    {
+      params: Promise.resolve({ service: "core", path: ["clients", "metrics"] }),
+    },
+  );
+  expect(response.status).toBe(403);
+  expect(getToken).toHaveBeenCalledExactlyOnceWith();
+  expect(fetcher).toHaveBeenCalledTimes(1);
+  expect(
+    new Headers(fetcher.mock.calls[0]![1]?.headers).get("authorization"),
+  ).toBe("Bearer synthetic-session");
+});
+
 it("keeps ordinary local/other-host, other service, malformed and non-native handlers unchanged", () => {
   for (const [service, target, method, path] of [
     ["core", "http://127.0.0.1:5208/api", "GET", "/me"],
@@ -116,10 +177,27 @@ it("keeps ordinary local/other-host, other service, malformed and non-native han
     ["core", base, "GET", "/clients/not-a-uuid"],
     ["core", base, "PUT", `/clients/${id}/people`],
     ["core", base, "DELETE", `/clients/${id}/account-owners`],
+    // The metrics read is admitted only as that exact current-session GET/HEAD.
+    ["core", "http://127.0.0.1:5208/api", "GET", "/clients/metrics"],
+    ["core", "https://core.example.test/api", "GET", "/clients/metrics"],
+    ["strategy", base, "GET", "/clients/metrics"],
+    ["core", base, "POST", "/clients/metrics"],
+    ["core", base, "PUT", "/clients/metrics"],
+    ["core", base, "DELETE", "/clients/metrics"],
+    ["core", base, "GET", "/clients/metrics/"],
+    ["core", base, "GET", "/clients/Metrics"],
+    ["core", base, "GET", "/clients/metrics/account-owners"],
+    ["core", base, "GET", "/clients/metrics-extra"],
+    ["core", base, "GET", "/clients/metrics?limit=1"],
+    ["core", base, "GET", "/clients/metr%69cs"],
   ])
     expect(
       coreSessionAuthentication(service!, target!, method!, path!),
     ).toBeUndefined();
+  for (const method of ["GET", "HEAD"])
+    expect(
+      coreSessionAuthentication("core", base, method, "/clients/metrics"),
+    ).toBe("clerk-session");
   expect(
     coreSessionAuthentication("core", base, "GET", "/memory/owner/items"),
   ).toBe("clerk-session");

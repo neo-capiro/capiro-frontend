@@ -4,7 +4,7 @@ const clientId =
 const reportId =
   "[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
 const nativeReads = new RegExp(
-  `^/(?:me|clients(?:/${clientId}(?:/account-owners)?)?|client-account-owners(?:/options)?|billing/state|memory/(?:candidates/mine(?:/[^/?]+/status)?|owner/items)|clio/completed-reports(?:/${reportId})?)$`,
+  `^/(?:me|clients(?:/(?:metrics|${clientId}(?:/account-owners)?))?|client-account-owners(?:/options)?|billing/state|memory/(?:candidates/mine(?:/[^/?]+/status)?|owner/items)|clio/completed-reports(?:/${reportId})?)$`,
 );
 const nativeClientWrite = new RegExp(
   `^/clients/${clientId}(?:/account-owners)?$`,
