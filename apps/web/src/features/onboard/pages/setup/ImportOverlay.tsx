@@ -1,4 +1,5 @@
 import { ImportOutcome } from "../../ui/ImportOutcome";
+import { ImportJobStatusPanel } from "../../ui/ImportJobStatusPanel";
 import { Btn, Modal } from "../../ui/primitives";
 import {
   useImportWorkflow,
@@ -13,8 +14,22 @@ export function ImportOverlay(
 ) {
   const { cap, imported, plan, billingAdmin, onClose } = props;
   const workflow = useImportWorkflow(props);
-  const { importer, registrant, candidatesQuery, stage, refreshCurrent } =
-    workflow;
+  const {
+    importer,
+    registrant,
+    candidatesQuery,
+    stage,
+    refreshCurrent,
+    job,
+    jobs,
+    population,
+    nextCursor,
+    panelState,
+    refreshJobs,
+    loadOlderJobs,
+    selectJob,
+    error: workflowError,
+  } = workflow;
   if (
     !registrant.isSuccess ||
     registrant.error ||
@@ -23,6 +38,17 @@ export function ImportOverlay(
     return (
       <Modal title="Import clients" onClose={onClose}>
         <ImportOutcome evidence={importer.evidence} />
+        <ImportJobStatusPanel
+          state={panelState}
+          job={job}
+          jobs={jobs}
+          population={population}
+          nextCursor={nextCursor}
+          onLoadMore={loadOlderJobs}
+          onRefresh={() => void refreshJobs()}
+          onSelectJob={selectJob}
+          errorMessage={workflowError}
+        />
         <p role="status">
           Current firm/import data is unavailable or loading. Retry before
           selecting clients.

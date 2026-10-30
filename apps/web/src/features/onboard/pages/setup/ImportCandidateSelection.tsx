@@ -1,6 +1,7 @@
 import { ImportCandidateRow } from "./ImportCandidateRow";
 import { AttemptStatus, PendingFields } from "../../ui/AttemptStatus";
 import { ImportOutcome } from "../../ui/ImportOutcome";
+import { ImportJobStatusPanel } from "../../ui/ImportJobStatusPanel";
 import { Btn, Icon, Modal, Spinner } from "../../ui/primitives";
 import { ErrorText } from "../funnel/shared";
 import type { ImportWorkflow } from "./useImportWorkflow";
@@ -24,6 +25,14 @@ type Props = Pick<
   | "toggle"
   | "doImport"
   | "refreshCurrent"
+  | "job"
+  | "jobs"
+  | "population"
+  | "nextCursor"
+  | "panelState"
+  | "refreshJobs"
+  | "loadOlderJobs"
+  | "selectJob"
 > & {
   cap: number;
   imported: number;
@@ -49,6 +58,14 @@ export function ImportCandidateSelection({
   toggle,
   doImport,
   refreshCurrent,
+  job,
+  jobs,
+  population,
+  nextCursor,
+  panelState,
+  refreshJobs,
+  loadOlderJobs,
+  selectJob,
   cap,
   imported,
   plan,
@@ -62,6 +79,17 @@ export function ImportCandidateSelection({
         check={() => void refreshCurrent()}
       />
       <ImportOutcome evidence={importer.evidence} />
+      <ImportJobStatusPanel
+        state={panelState}
+        job={job}
+        jobs={jobs}
+        population={population}
+        nextCursor={nextCursor}
+        onLoadMore={loadOlderJobs}
+        onRefresh={() => void refreshJobs()}
+        onSelectJob={selectJob}
+        errorMessage={error}
+      />
       <PendingFields disabled={importer.locked}>
         <div
           style={{
