@@ -13,7 +13,7 @@ type Button = ReactElement<{
   children: unknown;
   role: string;
 }>;
-it("keeps all sixteen Research tabs in keyboard order with opt-in wrapping", () => {
+it("keeps all Research tabs in keyboard order with opt-in wrapping", () => {
   const onChange = vi.fn();
   const tree = Tabs({
     items: researchPortfolioTabs,
@@ -22,11 +22,12 @@ it("keeps all sixteen Research tabs in keyboard order with opt-in wrapping", () 
     wrap: true,
   });
   const buttons = tree.props.children as Button[];
-  expect(buttons).toHaveLength(16);
+  // Bills (requirement 14c) is the seventeenth tab and the last in keyboard order.
+  expect(buttons).toHaveLength(17);
   const focus = vi.fn();
   buttons.at(-1)!.props.ref({ focus });
   buttons[0]!.props.onKeyDown({ key: "End", preventDefault: vi.fn() });
-  expect(onChange).toHaveBeenLastCalledWith("comparisons");
+  expect(onChange).toHaveBeenLastCalledWith("bills");
   expect(focus).toHaveBeenCalledOnce();
   expect(tree.props.className).toContain("wrappedTabs");
   expect(

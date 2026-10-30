@@ -133,6 +133,8 @@ export const researchShareDashboard = z.object({
         targetId: z.string(),
         label: z.string().nullable(),
         disposition: z.string(),
+        /** Frozen legislative facts for bill subjects; null for pre-capture members. */
+        facts: z.record(z.string(), z.unknown()).nullable().optional(),
       }),
     ),
     sources: z.array(

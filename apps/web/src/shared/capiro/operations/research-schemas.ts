@@ -22,6 +22,10 @@ export const researchMember = z.object({
     "project",
     "budget_line",
     "award",
+    // Bills are canonical portfolio subjects: identity is the legislative
+    // (congress|state+session) + type + number pair the server returned.
+    "federal_bill",
+    "state_bill",
   ]),
   targetId: z.string(),
   label: z.string().nullable(),
@@ -36,6 +40,13 @@ export const researchMember = z.object({
   unresolvedInput: z.record(z.string(), z.unknown()).nullable().optional(),
   resolvedAt: z.string().nullable().optional(),
   reason: z.string().nullable(),
+  /**
+   * Canonical source facts captured when the member was added. Bill members carry the
+   * legislative facts here (jurisdiction, session, status, latest action, source
+   * revision), so a snapshot freezes the state it was taken from rather than
+   * re-reading live data. Absent on members stored before fact capture.
+   */
+  facts: z.record(z.string(), z.unknown()).nullable().optional(),
   revision: z.number().int(),
   updatedAt: z.string(),
 });
@@ -43,8 +54,11 @@ export const researchEvent = z.object({
   id: z.string(),
   eventKind: z.string(),
   aggregateRevision: z.number(),
-  actorUserId: z.string(),
+  /** null when a source ingestion owner (actorKind "system") recorded the event. */
+  actorUserId: z.string().nullable(),
+  actorKind: z.enum(["user", "system"]).optional(),
   occurredAt: z.string(),
+  payload: z.record(z.string(), z.unknown()).optional(),
 });
 export const researchClient = z.object({
   id: z.string(),
@@ -127,6 +141,9 @@ export const researchAnalytics = z.object({
         "missing",
         "unavailable",
         "withheld",
+        // A tracked bill carries legislative status, not funding: distinct from a
+        // funding reader that failed ("unavailable") and from a zero.
+        "not_applicable",
       ]),
       sourceDisposition: z
         .enum(["observed", "missing", "partial", "unavailable", "withheld"])
@@ -147,6 +164,8 @@ export const researchAnalytics = z.object({
     excludedContributions: z.number(),
     overlapContributions: z.number(),
     unavailableMembers: z.number(),
+    /** Included subjects with no funding basis (bills). Never zero, never unavailable. */
+    notApplicableMembers: z.number(),
   }),
   limitations: z.array(z.string()),
   observedAt: z.string(),

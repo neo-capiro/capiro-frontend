@@ -28,6 +28,7 @@ import { ResearchWatchConversion } from "./ResearchWatchConversion";
 import { ResearchTour } from "./ResearchTour";
 import { ResearchDrafts } from "./ResearchDrafts";
 import { ResearchComparisons } from "./comparison/ResearchComparisons";
+import { ResearchBills } from "./ResearchBills";
 import {
   readResearchPortfolioView,
   researchPortfolioTabs,
@@ -168,6 +169,9 @@ export function ResearchPortfolioDetail({
           {view === "subscriptions" && <ResearchSubscriptions id={id} />}{" "}
           {view === "subscriptions" && (
             <ResearchWatchConversion key={p.id} portfolio={p} />
+          )}
+          {view === "bills" && (
+            <ResearchBills key={p.revision} portfolio={p} onReload={query.reload} />
           )}
           {view === "sharing" && <ResearchSharing portfolio={p} />}
         </div>

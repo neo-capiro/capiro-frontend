@@ -88,6 +88,8 @@ export function ResearchContributions({
               "missing",
               "unavailable",
               "withheld",
+              // Tracked bills: tracked legislative subjects, not a funding gap or zero.
+              "not_applicable",
             ].map((value) => (
               <option key={value}>{value}</option>
             ))}
