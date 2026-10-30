@@ -7,6 +7,12 @@ import {
 } from "./legislative-document-view";
 import { savedNoteRow } from "./note-view";
 import {
+  type BrowserItem,
+  browserFields,
+  browserRow,
+  isBrowserProposal,
+} from "./browser-view";
+import {
   isNativeMemoryOutcome,
   isMemoryProposal,
   memoryProposalFields,
@@ -98,6 +104,7 @@ const day = (iso: string) => iso.slice(0, 10);
 export function proposalFields(
   proposal: IntentsProposal,
 ): readonly IntentField[] {
+  if (isBrowserProposal(proposal)) return browserFields(proposal);
   if (isWatchProposal(proposal)) return watchFields(proposal);
   if (isBizdevProposal(proposal)) return bizdevFields(proposal);
   if (isResearchShareProposal(proposal)) return researchShareFields(proposal);
@@ -434,6 +441,8 @@ export function intentRow(
     return closed(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
+  if (item.kind === "browser_action")
+    return browserRow(item as BrowserItem, now, viewer);
   if (item.kind === "watch_action") return watchRow(item, now, viewer);
   if (item.kind === "bizdev_action") return bizdevRow(item, now, viewer);
   if (item.kind === "legiwatch_action") return legiwatchRow(item, now, viewer);

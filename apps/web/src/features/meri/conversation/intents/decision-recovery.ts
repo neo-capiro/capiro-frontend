@@ -1,4 +1,5 @@
 import { isWatchProposal } from "./watch-view";
+import { isBrowserProposal } from "./browser-view";
 import { isBizdevProposal } from "./bizdev-view";
 import { isLegislativeDocumentProposal } from "./legislative-document-view";
 import { isClientRecordProposal } from "./client-record-view";
@@ -78,11 +79,31 @@ export function intentDecisionRecovery(
       isLegiwatchProposal(proposal) ||
       isClientRecordProposal(proposal) ||
       isLegislativeDocumentProposal(proposal);
+    if (isBrowserProposal(proposal)) {
+      // A browser decision is bound to the retained subject, its own binding and the intended approver.
+      if (
+        proposal.proposalId !== proposalId ||
+        !("subjectSha256" in request) ||
+        request.subjectSha256 !== proposal.subjectSha256 ||
+        request.deliveryId !== deliveryId ||
+        proposal.binding.tenantId !== actor.tenantId ||
+        proposal.binding.actorId !== actor.actorId ||
+        proposal.binding.conversationId !== actor.conversationId ||
+        proposal.requiredApprover.tenantId !== actor.tenantId ||
+        proposal.requiredApprover.actorId !== actor.actorId
+      )
+        throw new Error(
+          "The current proposal does not match this saved decision.",
+        );
+      return;
+    }
     const binding = sharing ? proposal.binding : proposal.command.binding;
     const approver = sharing ? proposal.binding : proposal.requiredApprover;
+    const digestMatches =
+      "commandSha256" in request && request.commandSha256 === proposal.commandSha256;
     if (
       proposal.proposalId !== proposalId ||
-      request.commandSha256 !== proposal.commandSha256 ||
+      !digestMatches ||
       request.deliveryId !== deliveryId ||
       binding.tenantId !== actor.tenantId ||
       binding.conversationId !== actor.conversationId ||

@@ -32,6 +32,17 @@ const nativeSourceTypes = [
 const isNativeSource = (event: ConversationEvent): event is NativeSourceEvent =>
   (nativeSourceTypes as readonly string[]).includes(event.type);
 
+/**
+ * Browser receipts are admitted with the conversation events, but they are not legacy UI events: they fold
+ * separately and only their own outcome field ever states what the browser did.
+ */
+export type BrowserReceipt = Extract<
+  ConversationEvent,
+  { type: "browser.receipt" }
+>;
+const isBrowserReceipt = (event: ConversationEvent): event is BrowserReceipt =>
+  event.type === "browser.receipt";
+
 type RunState = ConversationObservationSnapshot["runState"];
 
 /** One request/run in the conversation, folded from service-admitted events only. */
@@ -47,6 +58,7 @@ export type TurnView = Readonly<
     /** UI key derived from admitted conversation + logical request identity; never prompt text. */
     promptKey?: string;
     nativeSources: readonly NativeSourceEvent[];
+    browserReceipts: readonly BrowserReceipt[];
   } & Pick<
     WorkspaceView,
     | "reasonCode"
@@ -101,7 +113,7 @@ export function turnFromEvents(
   // Every public native source event is kept out of the legacy UI fold, not just bill and hearing:
   // an unfamiliar native source must never be folded as if it were a legacy UI event.
   const legacy = events.filter(
-    (event): event is UIEvent => !isNativeSource(event),
+    (event): event is UIEvent => !isNativeSource(event) && !isBrowserReceipt(event),
   );
   const view = first ? buildWorkspaceView(legacy, first.binding) : undefined;
   return Object.freeze({
@@ -118,6 +130,16 @@ export function turnFromEvents(
       (event): event is NativeSourceEvent =>
         isNativeSource(event) && event.binding.runId === binding.runId,
     ),
+    browserReceipts: [
+      ...new Map(
+        events
+          .filter(
+            (event): event is BrowserReceipt =>
+              isBrowserReceipt(event) && event.binding.runId === binding.runId,
+          )
+          .map((event) => [event.eventId, event] as const),
+      ).values(),
+    ],
     approvals: view?.approvals ?? [],
     artifacts: view?.artifacts ?? [],
     errors: view?.errors ?? [],

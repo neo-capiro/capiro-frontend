@@ -22,6 +22,7 @@ import { isLegiwatchProposal } from "./legiwatch-view";
 import { isResearchShareProposal } from "./research-share-view";
 import { isResearchActionProposal } from "./research-action-view";
 import { isWatchProposal } from "./watch-view";
+import { isBrowserProposal } from "./browser-view";
 import { isBizdevProposal } from "./bizdev-view";
 import { isMailSendProposal } from "./mail-view";
 import { isMemoryProposal } from "./memory-view";
@@ -61,6 +62,8 @@ function FieldList({
 function uncertainOutcome(row: IntentRow): string | null {
   const p = row.proposal;
   if (!p) return null;
+  if (isBrowserProposal(p))
+    return "The recorded decision is not confirmed. Reload to check the same browser proposal; nothing is resent and the action is not run again.";
   if (isMemoryProposal(p))
     return "The memory submission outcome is not confirmed. Check the original request; this proposal will not be submitted again.";
   if (isWatchProposal(p))
