@@ -20,6 +20,14 @@ export function RunLifecycleControls({
   const checkpoint = lifecycle.checkpoint;
   const held = disabled || lifecycle.busy || !lifecycle.available;
   const mutable = !held && !lifecycle.command && turn?.runState === "running";
+  // Nothing to pause, resume, inspect or retry: keep the transcript free of empty recovery chrome.
+  const relevant =
+    !!lifecycle.error ||
+    !!lifecycle.command ||
+    !!checkpoint ||
+    turn?.runState === "running" ||
+    turn?.runState === "paused";
+  if (!relevant) return null;
   return (
     <details>
       <summary>Pause and recovery</summary>

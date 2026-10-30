@@ -8,9 +8,10 @@ import {
   PromptInputFooter,
   PromptInputTools,
   PromptInputButton,
+  PromptInputHeader,
 } from "@capiro/ui/prompt-input";
 import { Button } from "@capiro/ui/button";
-import { X } from "lucide-react";
+import { SlidersHorizontal, X } from "lucide-react";
 import { DesignIcon } from "../../shared/shell/DesignIcon";
 import { MeriAttachmentPicker } from "./uploads/MeriAttachmentPicker";
 import { SelectedTabSharing } from "./selected-tab/SelectedTabSharing";
@@ -43,6 +44,13 @@ export type LiveComposer = Readonly<{
   modelSelection?: ConversationSubmitRequest["modelSelection"];
 }>;
 
+/** One selected context the next message carries; removal restores the unselected state. */
+export type ComposerChip = Readonly<{
+  key: string;
+  label: string;
+  onRemove?: (() => void) | undefined;
+}>;
+
 export function MeriComposer({
   draft,
   onDraft,
@@ -50,7 +58,9 @@ export function MeriComposer({
   assetSet = "home",
   running = false,
   live,
-  modelControl,
+  tools,
+  scopeControl,
+  chips = [],
   attachments,
 }: {
   draft: string;
@@ -60,7 +70,15 @@ export function MeriComposer({
   /** A run is in progress: the submit slot shows Stop instead of Send. */
   running?: boolean;
   live?: LiveComposer;
-  modelControl?: React.ReactNode;
+  /** Optional per-message settings toggle; absent when the surface offers none. */
+  tools?: {
+    open: boolean;
+    onToggle: () => void;
+  };
+  /** The one authorized client/scope control for this surface. */
+  scopeControl?: React.ReactNode;
+  /** Selected skill, window, work or model choices carried by the next message. */
+  chips?: readonly ComposerChip[];
   /** The current conversation's attachment slot; absent until a session binds upload access. */
   attachments?: ComposerAttachments;
 }) {
@@ -85,6 +103,30 @@ export function MeriComposer({
           if (canSend) live.onSend();
         }}
       >
+        {chips.length > 0 && (
+          <PromptInputHeader className={styles.chips}>
+            {chips.map((chip) => (
+              <span key={chip.key} className={styles.chip}>
+                <span className={styles.chipLabel}>{chip.label}</span>
+                {chip.onRemove && (
+                  <button
+                    type="button"
+                    className={styles.chipRemove}
+                    aria-label={`Remove ${chip.label}`}
+                    disabled={!!live?.selectionLocked}
+                    title={
+                      live?.selectionLocked ??
+                      `Remove ${chip.label} from your next message`
+                    }
+                    onClick={chip.onRemove}
+                  >
+                    <X aria-hidden />
+                  </button>
+                )}
+              </span>
+            ))}
+          </PromptInputHeader>
+        )}
         <PromptInputBody>
           <PromptInputTextarea
             ref={textareaRef}
@@ -119,7 +161,8 @@ export function MeriComposer({
           <ComposerTools
             live={live}
             assetSet={assetSet}
-            modelControl={modelControl}
+            tools={tools}
+            scopeControl={scopeControl}
             attachments={attachments}
           />
           <ComposerAction
@@ -147,16 +190,23 @@ export function MeriComposer({
   );
 }
 
-/** Attach delegates to the upload slot when a session bound one; otherwise it stays unavailable. */
+/** Attach, optional settings and the single scope control; nothing here sends. */
 function ComposerTools({
   live,
   assetSet,
-  modelControl,
+  tools,
+  scopeControl,
   attachments,
 }: {
   live: LiveComposer | undefined;
   assetSet: AssetSet;
-  modelControl?: React.ReactNode;
+  tools:
+    | {
+        open: boolean;
+        onToggle: () => void;
+      }
+    | undefined;
+  scopeControl?: React.ReactNode;
   attachments?: ComposerAttachments;
 }) {
   return (
@@ -183,22 +233,35 @@ function ComposerTools({
           Attach
         </PromptInputButton>
       )}
-      <PromptInputButton
-        className={styles.toolButton}
-        disabled
-        title={
-          live
-            ? "Client scope comes from your Portfolio selection"
-            : "Anduril is a synthetic sample, not an authorized scope"
-        }
-      >
-        <DesignIcon name="chevron" assetSet={assetSet} />
-        {live ? live.scope : "Anduril"}
-      </PromptInputButton>
+      {tools && (
+        <button
+          id="meri-tools-button"
+          type="button"
+          className={styles.toolButton}
+          aria-expanded={tools.open}
+          aria-controls="meri-tools-panel"
+          aria-label="Tools"
+          title="Skills, website, work, procedure and model settings"
+          onClick={tools.onToggle}
+        >
+          <SlidersHorizontal aria-hidden className={styles.toolIcon} />
+          Tools
+        </button>
+      )}
+      {scopeControl ??
+        (live && (
+          <PromptInputButton
+            className={styles.toolButton}
+            disabled
+            title="Client scope comes from your Portfolio selection"
+          >
+            <DesignIcon name="chevron" assetSet={assetSet} />
+            {live.scope}
+          </PromptInputButton>
+        ))}
       {attachments?.selectedTab && live && (
         <SelectedTabSharing {...attachments.selectedTab} scope={live.scope} />
       )}
-      {live ? modelControl : null}
     </PromptInputTools>
   );
 }

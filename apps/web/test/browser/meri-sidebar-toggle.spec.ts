@@ -1,4 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
+import { json } from "../../tests/browser/fixtures";
+import { testIdentity } from "./fixtures";
 import { openFixtureScreen } from "./meri-fixture-screen-helpers";
 
 async function expectDesktopSidebarToggle(page: Page) {
@@ -50,6 +52,11 @@ test("Figma Home fixture keeps the brand toggle and desktop sidebar geometry", a
 test("ordinary Meri route uses the same functional desktop sidebar", async ({
   page,
 }) => {
+  // The ordinary route resolves the same signed-in identity the shell renders.
+  await page.route("**/api/backend/core/me", (route) => json(route, testIdentity));
+  await page.route("**/api/capiro/me.read*", (route) =>
+    json(route, testIdentity),
+  );
   await page.goto("/meri");
   await expectDesktopSidebarToggle(page);
 });

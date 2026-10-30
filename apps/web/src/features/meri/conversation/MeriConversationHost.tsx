@@ -23,10 +23,13 @@ export function MeriConversationHost({
   enabled,
   account,
   firstChatBootstrapEnabled = false,
+  scopeControl,
 }: {
   enabled: boolean;
   account?: ConversationAccount;
   firstChatBootstrapEnabled?: boolean;
+  /** The one authorized client/scope control, hosted inside the composer footer. */
+  scopeControl?: React.ReactNode;
 }) {
   const selected = useSelectedClient();
   const params = useSearchParams();
@@ -75,6 +78,7 @@ export function MeriConversationHost({
           account={account}
           clientId={null}
           scope="General"
+          scopeControl={scopeControl}
         />
       ) : (
         <section role="status">
@@ -89,6 +93,7 @@ export function MeriConversationHost({
         clientId={null}
         scope="General"
         conversationId={selector.conversationId}
+        scopeControl={scopeControl}
       />
     );
   }
@@ -121,6 +126,7 @@ export function MeriConversationHost({
         account={account}
         clientId={selected.client.id}
         scope={selected.client.name}
+        scopeControl={scopeControl}
       />
     );
   return (
@@ -137,6 +143,7 @@ export function MeriConversationHost({
       conversationId={
         selector.state === "selected" ? selector.conversationId : undefined
       }
+      scopeControl={scopeControl}
     />
   );
 }
@@ -163,10 +170,12 @@ function CoreResolvedConversation({
   account,
   clientId,
   scope,
+  scopeControl,
 }: {
   account: ConversationAccount;
   clientId: string | null;
   scope: string;
+  scopeControl?: React.ReactNode;
 }) {
   const api = useCapiro();
   const [attempt, setAttempt] = useState(0);
@@ -246,6 +255,7 @@ function CoreResolvedConversation({
       clientId={clientId}
       scope={scope}
       conversationId={resolution.conversationId}
+      scopeControl={scopeControl}
     />
   );
 }
@@ -271,12 +281,20 @@ function ConnectedConversation({
   clientId,
   scope,
   conversationId,
+  scopeControl,
 }: {
   account: ConversationAccount;
   clientId: string | null;
   scope: string;
   conversationId?: string | undefined;
+  scopeControl?: React.ReactNode;
 }) {
   const session = useConversationSession(account, clientId, conversationId);
-  return <ConversationView session={session} scope={scope} />;
+  return (
+    <ConversationView
+      session={session}
+      scope={scope}
+      scopeControl={scopeControl}
+    />
+  );
 }

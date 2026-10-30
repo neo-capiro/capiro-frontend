@@ -29,11 +29,18 @@ export function useMeriSidebarVisibility() {
 }
 
 /** Keeping this boundary small lets ProductShell continue to render server children. */
-export function MeriSidebarWorkspace({ children }: { children: ReactNode }) {
+export function MeriSidebarWorkspace({
+  children,
+  chat = false,
+}: {
+  children: ReactNode;
+  /** Chat-first canvas: the workspace fills the visible viewport instead of the design frame. */
+  chat?: boolean;
+}) {
   const { expanded } = useMeriSidebarVisibility();
   return (
     <div
-      className={`${styles.workspace} ${expanded ? "" : styles.sidebarCollapsed}`}
+      className={`${styles.workspace} ${chat ? styles.chatWorkspace : ""} ${expanded ? "" : styles.sidebarCollapsed}`}
     >
       {children}
     </div>

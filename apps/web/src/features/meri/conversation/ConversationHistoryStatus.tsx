@@ -75,45 +75,50 @@ function TurnRecoveryStatus({ session }: { session: Session }) {
   );
 }
 
-/** Every partial, unavailable or uncertain saved-history state remains explicit. */
+/**
+ * History restores itself: a healthy conversation shows one quiet line, with the manual
+ * re-read behind a details disclosure. A partial, unavailable or failed read stays explicit,
+ * and a failed read is never presented as an empty chat.
+ */
 export function ConversationHistoryStatus({ session }: { session: Session }) {
   const { history } = session;
   const loading = history.query.isPending || history.query.isRefetching;
+  const recovered = !loading && history.selected && !history.unavailable;
+  // A healthy conversation restores itself; the manual re-read and diagnostics stay behind a
+  // disclosure and disappear entirely when there is nothing to report.
+  const diagnostics = !!history.tail.error || !!session.latestTarget;
   return (
-    <section aria-label="Saved conversation history" className={styles.muted}>
+    <section aria-label="Saved conversation history">
       {session.storageError && <p role="alert">{session.storageError}</p>}
       {!history.selected ? (
         <p>A verified conversation is required to read saved history.</p>
       ) : loading ? (
         <p role="status">Loading saved conversation history.</p>
       ) : history.unavailable ? (
+        <div role="status" className={styles.historyIssue}>
+          <p>
+            Saved conversation history unavailable. No sample transcript was
+            substituted.
+          </p>
+          <Button
+            type="button"
+            variant="outline"
+            className={ui.outline}
+            disabled={history.query.isFetching}
+            onClick={history.refresh}
+          >
+            Reload saved history
+          </Button>
+        </div>
+      ) : history.empty ? null : ( // A conversation that has not started is not a failure and needs no warning.
         <p role="status">
-          Saved conversation history unavailable. No sample transcript was
-          substituted.
-        </p>
-      ) : history.empty ? (
-        <p>
-          No saved turns were returned by the last history check. Any message
-          shown below has its own delivery status.
-        </p>
-      ) : (
-        <p>
           {history.query.hasNextPage
             ? "Part of the saved conversation is shown."
             : "Saved conversation history loaded."}
         </p>
       )}
-      <div className={styles.statusRow}>
-        <Button
-          type="button"
-          variant="outline"
-          className={ui.outline}
-          disabled={!history.selected || history.query.isFetching}
-          onClick={history.refresh}
-        >
-          Reload saved history
-        </Button>
-        {!history.unavailable && history.query.hasNextPage && (
+      {recovered && history.query.hasNextPage && (
+        <>
           <Button
             type="button"
             variant="outline"
@@ -123,17 +128,7 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
           >
             Load more saved turns
           </Button>
-        )}
-      </div>
-      {session.latestTarget && (
-        <Button
-          type="button"
-          variant="outline"
-          className={ui.outline}
-          onClick={session.openLatest}
-        >
-          Open latest accepted turn
-        </Button>
+        </>
       )}
       {history.tail.error && !history.unavailable && (
         <p role="status">
@@ -142,6 +137,32 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
         </p>
       )}
       <TurnRecoveryStatus session={session} />
+      {diagnostics && (
+        <details className={styles.historyDetails}>
+          <summary>History details</summary>
+          <div className={styles.statusRow}>
+            <Button
+              type="button"
+              variant="outline"
+              className={ui.outline}
+              disabled={!history.selected || history.query.isFetching}
+              onClick={history.refresh}
+            >
+              Reload saved history
+            </Button>
+            {session.latestTarget && (
+              <Button
+                type="button"
+                variant="outline"
+                className={ui.outline}
+                onClick={session.openLatest}
+              >
+                Open latest accepted turn
+              </Button>
+            )}
+          </div>
+        </details>
+      )}
     </section>
   );
 }

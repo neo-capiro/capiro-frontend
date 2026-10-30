@@ -1,6 +1,40 @@
 .target {
   min-height: 1040px;
 }
+/*
+ * Chat-first Meri canvas: the conversation owns the viewport instead of the fixed 1040/975px
+ * design frame, so the transcript scrolls inside the page and the composer stays reachable.
+ */
+.target.chatTarget {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.workspace.chatWorkspace {
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+.main.chatMain {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.sidebar.chatSidebar {
+  min-height: 0;
+  gap: 8px;
+  border-right: 1px solid var(--border);
+}
+.libraryLabel {
+  padding: 0 14px;
+  font-size: 11px;
+  line-height: 14.3px;
+  font-weight: 500;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
 .header {
   border-bottom-width: 2px;
 }
@@ -404,6 +438,22 @@
 @media (prefers-reduced-motion: reduce) {
   .menuToggle svg {
     transition: none;
+  }
+}
+@media (max-width: 680px) {
+  /* The phone canvas fills the visible viewport; the transcript scrolls, the composer stays docked. */
+  .target.chatTarget {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+  }
+  .workspace.chatWorkspace {
+    flex: 1;
+    min-height: 0;
+  }
+  .main.chatMain {
+    flex: 1;
+    min-height: 0;
   }
 }
 @media (max-width: 680px) and (prefers-color-scheme: dark) {

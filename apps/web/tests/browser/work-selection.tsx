@@ -123,6 +123,8 @@ function Harness() {
     <main style={{ padding: 24 }}>
       <h1>Synthetic Start Work / Delegate composer</h1>
       <SessionComposer
+        toolsOpen
+        onToggleTools={() => undefined}
         channel={channel}
         session={session}
         scope="Synthetic client"

@@ -129,11 +129,14 @@ export function SidebarDestinations({
   fixture,
   section,
   pendingApprovals,
+  exclude,
 }: {
   assetSet: "home" | "cited-answer";
   fixture: boolean;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
+  /** Destinations reachable elsewhere in this composition (chat history, secondary Tools links). */
+  exclude?: readonly MeriSection[] | undefined;
 }) {
   const pathname = usePathname();
   const capabilities = useMeriCapabilities();
@@ -147,51 +150,55 @@ export function SidebarDestinations({
         : href === pathname;
   return (
     <nav className={styles.destinations} aria-label="Meri workspace">
-      {destinations.map((item) => {
-        const href = destinationHref(item, fixture, capabilities);
-        return (
-          <UnavailableControlReason
-            key={item.label}
-            label={destinationLabel(item.label, pendingApprovals)}
-            reason={
-              href ? undefined : unavailableDestinationTitle(item, capabilities)
-            }
-          >
-            <Button
-              type="button"
-              variant="ghost"
-              className={`${styles.navButton} ${isCurrent(item, href) ? styles.currentDestination : ""}`}
-              aria-current={isCurrent(item, href) ? "page" : undefined}
-              disabled={!href}
-              onClick={
+      {destinations
+        .filter((item) => !exclude?.includes(item.section))
+        .map((item) => {
+          const href = destinationHref(item, fixture, capabilities);
+          return (
+            <UnavailableControlReason
+              key={item.label}
+              label={destinationLabel(item.label, pendingApprovals)}
+              reason={
                 href
-                  ? () =>
-                      router.push(
-                        scopedHref(
-                          href,
-                          selected.state === "authorized-client"
-                            ? selected.client.id
-                            : undefined,
-                        ),
-                      )
-                  : undefined
-              }
-              title={
-                href
-                  ? fixture
-                    ? "Open disconnected synthetic fixture"
-                    : item.label === "Files"
-                      ? "Open document files"
-                      : `Open ${item.label.toLowerCase()}`
+                  ? undefined
                   : unavailableDestinationTitle(item, capabilities)
               }
             >
-              {<DesignIcon name={item.icon} assetSet={assetSet} />}
-              {destinationLabel(item.label, pendingApprovals)}
-            </Button>
-          </UnavailableControlReason>
-        );
-      })}
+              <Button
+                type="button"
+                variant="ghost"
+                className={`${styles.navButton} ${isCurrent(item, href) ? styles.currentDestination : ""}`}
+                aria-current={isCurrent(item, href) ? "page" : undefined}
+                disabled={!href}
+                onClick={
+                  href
+                    ? () =>
+                        router.push(
+                          scopedHref(
+                            href,
+                            selected.state === "authorized-client"
+                              ? selected.client.id
+                              : undefined,
+                          ),
+                        )
+                    : undefined
+                }
+                title={
+                  href
+                    ? fixture
+                      ? "Open disconnected synthetic fixture"
+                      : item.label === "Files"
+                        ? "Open document files"
+                        : `Open ${item.label.toLowerCase()}`
+                    : unavailableDestinationTitle(item, capabilities)
+                }
+              >
+                {<DesignIcon name={item.icon} assetSet={assetSet} />}
+                {destinationLabel(item.label, pendingApprovals)}
+              </Button>
+            </UnavailableControlReason>
+          );
+        })}
     </nav>
   );
 }

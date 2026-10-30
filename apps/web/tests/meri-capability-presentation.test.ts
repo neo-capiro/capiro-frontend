@@ -132,7 +132,6 @@ it("home controls and workspace links follow server capability holds even when r
           conversationEnabled: true,
           firstChatBootstrapEnabled: true,
           intentApprovalsEnabled: true,
-          memoryReviewEnabled: true,
         }),
       ),
     );
@@ -140,16 +139,15 @@ it("home controls and workspace links follow server capability holds even when r
     expect(html).toContain(`data-conversation="${conversation}"`);
     expect(html).toContain(`data-bootstrap="${conversation}"`);
     expect(html).toContain(`data-approvals="${env === allCapabilitiesEnv}"`);
+    // The landing no longer duplicates workspace links. Those real destinations are secondary
+    // Tools navigation now, covered in test/browser/meri-chat-first.spec.ts.
     for (const href of [
       "/meri/files",
       "/meri/actions",
       "/meri/task-updates",
       "/meri/memory",
-    ]) {
-      if (env === allCapabilitiesEnv || href !== "/meri/memory")
-        expect(html).toContain(`href="${href}"`);
-      else expect(html).not.toContain(`href="${href}"`);
-    }
+    ])
+      expect(html).not.toContain(`href="${href}"`);
     expect(html).not.toContain('href="/kit');
   }
 });

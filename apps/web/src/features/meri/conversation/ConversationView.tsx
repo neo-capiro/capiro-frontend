@@ -1,13 +1,9 @@
 "use client";
+import { useCallback, useState } from "react";
 import { DocumentRevisionDraft } from "./DocumentRevisionDraft";
-import { useState, useSyncExternalStore } from "react";
-import { MeriComposer } from "../MeriComposer";
+import { MeriComposer, type ComposerChip } from "../MeriComposer";
 import { QuestionCard } from "./QuestionCard";
-import { useRunQuestion } from "./useRunQuestion";
-import {
-  ConnectionPending,
-  pendingConversationComposer,
-} from "./ConnectionPending";
+import { ConnectionPending } from "./ConnectionPending";
 import { ConversationFrame } from "./ConversationFrame";
 import { ConversationHistoryStatus } from "./ConversationHistoryStatus";
 import { MeriLiveConversation } from "./MeriLiveConversation";
@@ -16,221 +12,131 @@ import {
   type ConversationComposerChannel,
 } from "./conversation-composer";
 import type { useConversationSession } from "./useConversationSession";
-import { ModelSelectionPicker } from "../model-selection/ModelSelectionPicker";
-import modelStyles from "../model-selection/model-selection.module.css";
-import { SkillSelectionPicker } from "./SkillSelectionPicker";
+import { useComposerControls } from "./session-composer-controls";
+import { selectionLabel } from "../model-selection/model-selection";
 import { useQuickActionCatalog } from "./useQuickActionCatalog";
 import { newIntentRefusal, type QuickActionGate } from "./quick-action-gate";
-import { SiteWorkflowPicker } from "./SiteWorkflowPicker";
-import { WorkSelectionPicker } from "../work/WorkSelectionPicker";
-import { ProcedureSelectionPicker } from "./ProcedureSelectionPicker";
 import { ClientHandoffDraft } from "./ClientHandoffDraft";
 import { FeedbackContext } from "./feedback/FeedbackContext";
-import { useComposerAttachments } from "../uploads/useComposerAttachments";
-import { ConnectedBrowserViewer } from "../browser/ConnectedBrowserViewer";
+import { SessionTools } from "./SessionTools";
+import { composerChips } from "./composer-chips";
+import styles from "./live.module.css";
 
 type Session = ReturnType<typeof useConversationSession>;
 
-/** Only this sibling subscribes: publishing controls never rerenders their run owner. */
+/** Only this sibling subscribes: publishing controls never rerender their run owner. */
 export function SessionComposer({
   session,
   scope,
   channel,
   gate,
+  toolsOpen = false,
+  onToggleTools,
+  scopeControl,
 }: {
   session: Session;
   scope: string;
   channel: ConversationComposerChannel;
   gate: QuickActionGate;
+  /** Optional per-message settings panel; closed by default. */
+  toolsOpen?: boolean;
+  onToggleTools?: (() => void) | undefined;
+  scopeControl?: React.ReactNode;
 }) {
-  const published = useSyncExternalStore(
-    channel.subscribe,
-    channel.read,
-    channel.read,
-  );
-  const current =
-    !session.accessLost &&
-    !session.latestTarget &&
-    session.ready?.port === published?.port
-      ? published
-      : null;
-  const modelDocument = session.modelCatalog?.document;
-  // The skill picker follows the genuine lock set only: a QuickActions refusal closes Send but must
-  // leave an unsent selection editable so the user can clear it or switch to an allowed skill.
-  const selectionDisabled =
-    !current ||
-    current.running ||
-    !!current.controls.selectionLocked ||
-    !!current.controls.draftBlocked ||
-    !!session.continuation.busy;
-  const modelDisabled =
-    !current ||
-    current.running ||
-    (!!current.controls.sendBlocked &&
-      current.controls.sendBlocked !== session.modelBlocked) ||
-    !!current.controls.draftBlocked ||
-    !!session.continuation.busy;
-  const selection =
-    current?.controls.modelSelection ?? session.modelSelection ?? null;
-  const live = current?.controls ?? pendingConversationComposer(session, scope);
-  // The attachment slot follows the displayed conversation; a replaced port discards its results.
-  const attachments = useComposerAttachments(
-    current?.port ?? null,
-    live.attachUnavailable,
-  );
-  // A clarifying question is durable run state: it is re-derived from this conversation's own events on every render,
-  // survives a refresh, and is answered with one lifecycle control.
-  const question = useRunQuestion(current?.port ?? null);
-
+  const controls = useComposerControls(session, scope, channel);
+  const {
+    current,
+    live,
+    attachments,
+    question,
+    modelDocument,
+    modelSelection,
+  } = controls;
+  const model = modelSelection ?? session.modelSelection ?? null;
+  const catalog = modelDocument?.modelCatalog;
+  const modelChip: readonly ComposerChip[] =
+    model && catalog
+      ? [
+          {
+            key: "model",
+            label: `Model · ${selectionLabel(catalog, model)}`,
+            onRemove: controls.modelDisabled
+              ? undefined
+              : () => session.setModelSelection(undefined),
+          },
+        ]
+      : [];
   return (
     <>
       {question.pending !== null && (
         <QuestionCard
           question={question.pending}
-          state={
-            current === null ? "unavailable" : question.state
-          }
+          state={current === null ? "unavailable" : question.state}
           error={question.error}
           onSubmit={question.submit}
           onCheckAgain={question.retryable ? question.reconcile : undefined}
         />
       )}
-    <MeriComposer
-      draft={session.accessLost ? "" : session.draft}
-      onDraft={session.setDraft}
-      textareaRef={session.textarea}
-      assetSet="cited-answer"
-      running={current?.running ?? false}
-      live={live}
-      attachments={attachments}
-      modelControl={
-        <>
-          {session.ready && (
-            <ClientHandoffDraft
-              key={JSON.stringify(session.ready.port.context)}
-              context={session.ready.port.context}
-              draft={session.draft}
-              onDraft={(text) => {
-                session.setDraft(text);
-                if (
-                  session.initialDraft.error() ||
-                  session.initialDraft.draft() !== text
-                )
-                  throw Error("Draft could not be saved");
-              }}
-              disabled={modelDisabled}
-            />
-          )}
-          {session.ready && (
-            <DocumentRevisionDraft
-              key={JSON.stringify(session.ready.port.context)}
-              context={session.ready.port.context}
-              selection={session.skillSelection}
-              disabled={modelDisabled}
-              onChange={(selection) => {
-                session.setSkillSelection(selection);
-                if (
-                  session.initialDraft.error() ||
-                  JSON.stringify(session.initialDraft.selection()) !==
-                    JSON.stringify(selection)
-                )
-                  throw Error("Selection could not be retained");
-              }}
-            />
-          )}
-          <SkillSelectionPicker
-            key={JSON.stringify(session.skillSelection)}
-            selection={session.skillSelection}
-            clientId={session.ready?.port.context.selectedClientId ?? null}
-            disabled={selectionDisabled}
-            gate={gate}
-            onChange={session.setSkillSelection}
-          />
-          {current && (
-            <SiteWorkflowPicker
-              key={`website:${JSON.stringify(current.port.context)}`}
-              conversationId={current.port.context.conversationId}
-              selection={session.skillSelection}
-              disabled={modelDisabled}
-              onChange={session.setSkillSelection}
-            />
-          )}
-          {/* Start Work / Delegate is additive: it never withdraws another selected input. */}
-          <WorkSelectionPicker
-            key={JSON.stringify(session.skillSelection.work ?? null)}
-            selection={session.skillSelection}
-            disabled={modelDisabled}
-            onChange={session.setSkillSelection}
-          />
-          {/*
-            The native procedure control lists what Core currently offers this account and tenant, and
-            retires a choice the catalog no longer lists. Listing is not execution: the canonical
-            receiver still decides what a draft may carry, and Core re-resolves the exact procedure,
-            version, digest and client access when the message is actually sent.
-          */}
-          {session.ready && (
-            <ProcedureSelectionPicker
-              key={`procedure:${JSON.stringify(session.ready.port.context)}`}
-              tenantId={session.ready.port.context.tenantId}
-              lifetime={JSON.stringify(session.ready.port.context)}
-              selection={session.skillSelection}
-              disabled={modelDisabled}
-              onChange={session.setSkillSelection}
-            />
-          )}
-          {!session.accessLost && session.modelCatalog && (
-            <div className={modelStyles.slot}>
-              {modelDocument ? (
-                <ModelSelectionPicker
-                  catalog={modelDocument.modelCatalog}
-                  label="Model for next message"
-                  prefix="Model"
-                  compact
-                  value={selection}
-                  disabled={modelDisabled}
-                  onChange={(value) =>
-                    session.setModelSelection(value ?? undefined)
-                  }
-                  defaultLabel={
-                    session.acceptedRequest || session.earlier.length
-                      ? "Continue current model"
-                      : "Use personal default"
-                  }
-                  defaultShortLabel={
-                    session.acceptedRequest || session.earlier.length
-                      ? "Current"
-                      : "Default"
-                  }
-                  defaultDescription="The server chooses your personal default for the first message and inherits the admitted model for later messages."
-                />
-              ) : (
-                <span className={modelStyles.recovery} role="status">
-                  {session.modelCatalog.loading
-                    ? "Loading model choices…"
-                    : "Model choices unavailable."}
-                </span>
-              )}
-              {!modelDocument && !session.modelCatalog.loading && (
-                <div className={modelStyles.recovery}>
-                  <button type="button" onClick={session.modelCatalog.refresh}>
-                    Reload models
-                  </button>
-                  {selection && (
-                    <button
-                      type="button"
-                      disabled={modelDisabled}
-                      onClick={() => session.setModelSelection(undefined)}
-                    >
-                      Use default
-                    </button>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-        </>
-      }
-    />
+      {/* These two only synchronise an admitted handoff/revision selection into the draft owner. */}
+      {session.ready && (
+        <ClientHandoffDraft
+          key={JSON.stringify(session.ready.port.context)}
+          context={session.ready.port.context}
+          draft={session.draft}
+          onDraft={(text) => {
+            session.setDraft(text);
+            if (
+              session.initialDraft.error() ||
+              session.initialDraft.draft() !== text
+            )
+              throw Error("Draft could not be saved");
+          }}
+          disabled={controls.modelDisabled}
+        />
+      )}
+      {session.ready && (
+        <DocumentRevisionDraft
+          key={JSON.stringify(session.ready.port.context)}
+          context={session.ready.port.context}
+          selection={session.skillSelection}
+          disabled={controls.modelDisabled}
+          onChange={(selection) => {
+            session.setSkillSelection(selection);
+            if (
+              session.initialDraft.error() ||
+              JSON.stringify(session.initialDraft.selection()) !==
+                JSON.stringify(selection)
+            )
+              throw Error("Selection could not be retained");
+          }}
+        />
+      )}
+      <MeriComposer
+        draft={session.accessLost ? "" : session.draft}
+        onDraft={session.setDraft}
+        textareaRef={session.textarea}
+        assetSet="cited-answer"
+        running={current?.running ?? false}
+        live={live}
+        attachments={attachments}
+        chips={[
+          ...composerChips(session.skillSelection, session.setSkillSelection),
+          ...modelChip,
+        ]}
+        scopeControl={scopeControl}
+        tools={
+          onToggleTools
+            ? { open: toolsOpen, onToggle: onToggleTools }
+            : undefined
+        }
+      />
+      <SessionTools
+        open={toolsOpen}
+        session={session}
+        controls={controls}
+        gate={gate}
+        onClose={onToggleTools ?? (() => undefined)}
+      />
     </>
   );
 }
@@ -239,9 +145,11 @@ export function SessionComposer({
 export function ConversationView({
   session,
   scope,
+  scopeControl,
 }: {
   session: Session;
   scope: string;
+  scopeControl?: React.ReactNode;
 }) {
   const [composer] = useState(createConversationComposer);
   const ready =
@@ -253,6 +161,9 @@ export function ConversationView({
     (!session.accessLost && !session.latestTarget && session.connection.renewing
       ? retained
       : undefined);
+  // Optional per-message settings stay a non-modal column on desktop and a sheet on a phone.
+  const [toolsOpen, setToolsOpen] = useState(false);
+  const toggleTools = useCallback(() => setToolsOpen((open) => !open), []);
   // Core owns the QuickActions rollout. One read per mounted conversation decides both which skills
   // a NEW selection may offer and whether a NEW first submission or next turn may be dispatched:
   // an applied-but-never-submitted draft is refused while the current catalog is closed, and the
@@ -266,71 +177,61 @@ export function ConversationView({
   );
   return (
     <FeedbackContext.Provider value={displayed?.port ?? null}>
-      <ConversationFrame
-        scope={scope}
-        historyStatus={
-          session.accessLost ? null : (
-            <ConversationHistoryStatus session={session} />
-          )
-        }
-        composer={
-          <SessionComposer
-            session={session}
-            scope={scope}
-            channel={composer}
-            gate={quickActions.gate}
-          />
-        }
-      >
-        {displayed ? (
-          <MeriLiveConversation
-            key={displayed.lifetimeKey}
-            port={displayed.port}
-            composer={composer}
-            initialPrompt={session.connection.pending}
-            earlier={session.earlier}
-            scope={scope}
-            draft={session.draft}
-            onDraft={session.setDraft}
-            initialDraft={session.initialDraft}
-            storageError={session.storageError}
-            modelSelection={session.modelSelection}
-            skillSelection={session.skillSelection}
-            newIntentBlocked={newIntentBlocked}
-            modelBlocked={session.modelBlocked}
-            textareaRef={session.textarea}
-            onNextTurn={session.startNext}
-            onLifecycleTarget={session.openLifecycleTarget}
-            nextTurnBlocked={session.nextBlocked}
-            nextTurnVerified={!!session.source && !session.nextBlocked}
-            initialBlocked={session.initialBlocked}
-            promptKey={session.logicalKey}
-            savedCurrent={session.savedCurrent}
-            acceptedRequest={session.acceptedRequest}
-            onSettled={session.refresh}
-          />
-        ) : (
-          <ConnectionPending session={session} />
-        )}
-        {!session.history.denied &&
-          !session.latestTarget &&
-          session.selectedId &&
-          session.connection.runId && (
-            <ConnectedBrowserViewer
-              key={JSON.stringify([
-                session.account,
-                session.clientId,
-                session.selectedId,
-                session.connection.runId,
-              ])}
-              account={session.account}
-              clientId={session.clientId}
-              conversationId={session.selectedId}
-              runId={session.connection.runId}
-              onTarget={session.openBrowserTarget}
+      <div className={styles.chat} data-tools={toolsOpen ? "open" : undefined}>
+        <ConversationFrame
+          scope={scope}
+          historyStatus={
+            session.accessLost || (!session.selectedId && !displayed) ? null : (
+              <ConversationHistoryStatus session={session} />
+            )
+          }
+          composer={
+            <SessionComposer
+              session={session}
+              scope={scope}
+              channel={composer}
+              gate={quickActions.gate}
+              toolsOpen={toolsOpen}
+              onToggleTools={toggleTools}
+              scopeControl={scopeControl}
             />
+          }
+        >
+          {displayed ? (
+            <MeriLiveConversation
+              key={displayed.lifetimeKey}
+              port={displayed.port}
+              composer={composer}
+              initialPrompt={session.connection.pending}
+              earlier={session.earlier}
+              scope={scope}
+              draft={session.draft}
+              onDraft={session.setDraft}
+              initialDraft={session.initialDraft}
+              storageError={session.storageError}
+              modelSelection={session.modelSelection}
+              skillSelection={session.skillSelection}
+              newIntentBlocked={newIntentBlocked}
+              modelBlocked={session.modelBlocked}
+              textareaRef={session.textarea}
+              onNextTurn={session.startNext}
+              onLifecycleTarget={session.openLifecycleTarget}
+              onBrowserTarget={session.openBrowserTarget}
+              browserAllowed={toolsOpen}
+              historyUnavailable={session.history.unavailable}
+              nextTurnBlocked={session.nextBlocked}
+              nextTurnVerified={!!session.source && !session.nextBlocked}
+              initialBlocked={session.initialBlocked}
+              promptKey={session.logicalKey}
+              savedCurrent={session.savedCurrent}
+              acceptedRequest={session.acceptedRequest}
+              onSettled={session.refresh}
+            />
+          ) : (
+            <ConnectionPending session={session} />
           )}
-      </ConversationFrame>
+        </ConversationFrame>
+      </div>
     </FeedbackContext.Provider>
   );
 }

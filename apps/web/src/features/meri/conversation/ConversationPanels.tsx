@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import { ConversationArtifacts } from "./ConversationArtifacts";
 import { conversationArtifacts, type TurnView } from "./conversation-view";
@@ -17,11 +18,14 @@ export function ConversationPanels({
   turn,
   earlier,
   onDecisionSettled,
+  browser,
 }: {
   port: MeriConversationPort;
   turn: TurnView | null;
   earlier: readonly TurnView[];
   onDecisionSettled?: ((runId: string) => void) | undefined;
+  /** Browser controls, mounted only for a browser task or an opened Tools panel. */
+  browser?: ReactNode;
 }) {
   const approvals = useIntentApprovalsEnabled();
   const published = conversationArtifacts(turn ? [...earlier, turn] : earlier);
@@ -51,6 +55,7 @@ export function ConversationPanels({
       ) : (
         files([])
       )}
+      {browser}
     </>
   );
 }
