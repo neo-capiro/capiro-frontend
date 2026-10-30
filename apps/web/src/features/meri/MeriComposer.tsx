@@ -28,6 +28,12 @@ export type LiveComposer = Readonly<{
   sendBlocked?: string | undefined;
   /** Exact conversation selection is required before a durable draft can be entered. */
   draftBlocked?: string | undefined;
+  /**
+   * Why the selection controls are locked right now. This is the genuine lock set only
+   * (run/storage/access/lifecycle/pending-or-unknown request), NOT the QuickActions rollout
+   * refusal: a user must always be able to clear or change an unsent selection.
+   */
+  selectionLocked?: string | undefined;
   /** Why Stop is unavailable right now. */
   stopBlocked?: string | undefined;
   /** Verified client scope shown on the scope chip. */

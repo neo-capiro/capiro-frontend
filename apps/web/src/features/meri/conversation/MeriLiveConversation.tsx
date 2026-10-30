@@ -351,6 +351,26 @@ export function MeriLiveConversation({
   );
   const retentionError =
     storageError ?? initialDraft.error() ?? run.storageError;
+  // The rollout refusal closes Send but must never lock the selection controls, otherwise an applied
+  // unsent quick action could not be cleared or switched. Recompute the same availability without it
+  // (no string comparison): whatever still blocks is a genuine run/storage/access/pending lock.
+  const selectionLocked =
+    retentionError ??
+    lifecycle.blocked ??
+    modelBlocked ??
+    (newIntentBlocked
+      ? composerAvailability(
+          run,
+          turn,
+          earlier,
+          initialPrompt,
+          initialBlocked,
+          undefined,
+          nextTurnBlocked,
+          nextTurnVerified,
+          initialDraft.hasPending(port.context),
+        ).sendBlocked
+      : availability.sendBlocked);
   const send = () => {
     if (retentionError || modelBlocked || lifecycle.blocked) return;
     // A new intent carrying a skill the current rollout does not admit is refused here, before the
@@ -387,6 +407,7 @@ export function MeriLiveConversation({
         intent.submit?.state !== "observed" && intent.submit
           ? intent.submit.modelSelection
           : modelSelection,
+      selectionLocked,
       stopBlocked:
         retentionError ?? lifecycle.blocked ?? availability.stopBlocked,
       scope,

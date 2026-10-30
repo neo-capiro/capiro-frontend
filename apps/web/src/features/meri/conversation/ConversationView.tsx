@@ -55,6 +55,14 @@ export function SessionComposer({
       ? published
       : null;
   const modelDocument = session.modelCatalog?.document;
+  // The skill picker follows the genuine lock set only: a QuickActions refusal closes Send but must
+  // leave an unsent selection editable so the user can clear it or switch to an allowed skill.
+  const selectionDisabled =
+    !current ||
+    current.running ||
+    !!current.controls.selectionLocked ||
+    !!current.controls.draftBlocked ||
+    !!session.continuation.busy;
   const modelDisabled =
     !current ||
     current.running ||
@@ -134,7 +142,7 @@ export function SessionComposer({
             key={JSON.stringify(session.skillSelection)}
             selection={session.skillSelection}
             clientId={session.ready?.port.context.selectedClientId ?? null}
-            disabled={modelDisabled}
+            disabled={selectionDisabled}
             gate={gate}
             onChange={session.setSkillSelection}
           />
