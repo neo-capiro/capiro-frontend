@@ -18,8 +18,13 @@ import type { OutreachRecord } from "../src/shared/capiro/operations/engagement"
  *
  * What remains at this component's own boundary is list-scope admission: a row
  * returned for a client outside the requested scope must not be shown at all.
- * These cases keep the same refusals, error propagation and pending-read
- * behaviour, and additionally assert that an admitted row is actually visible.
+ * These cases keep the same wrong-client refusals, unscoped behaviour and
+ * admission, and they stop there: with no campaign selected the workflow never
+ * mounts, so this file cannot express a selected-campaign pending or failed read.
+ * Those live in `test/browser/outreach-canonical.spec.ts`, which drives the real
+ * URL selection through the mounted component: pending, 404/403/503, and a
+ * campaign bound to another client or no client all keep the editor closed, while
+ * a matching campaign opens it. Product code did not change for either.
  */
 const state = vi.hoisted(() => ({
   data: undefined as OutreachRecord[] | undefined,
@@ -94,26 +99,5 @@ describe("CORE-109 current Outreach destination admission", () => {
     expect(html).not.toContain("Unable to load this view");
     expect(html).toContain(record.title);
     expect(html).not.toContain(MISMATCH);
-  });
-  for (const message of [
-    "Outreach record not found",
-    "Forbidden",
-    "Service unavailable",
-  ]) {
-    it(`does not replace a failed exact destination with a blank draft: ${message}`, () => {
-      state.error = new Error(message);
-      const html = render();
-      expect(html).toContain(message);
-      // A failed read never opens an editable destination. The list may keep
-      // showing already-permitted rows (the query retains data by design); what
-      // it must never do is mount a campaign surface off the failed read.
-      expect(html).not.toContain("Campaign name");
-    });
-  }
-  it("withholds stale supplied data while the current exact read is pending", () => {
-    state.loading = true;
-    const html = render();
-    expect(html).toContain("Loading");
-    expect(html).not.toContain("Campaign name");
   });
 });

@@ -3,6 +3,8 @@ import {
   setupOutreach,
   recordId,
   otherRecordId,
+  otherClientId,
+  clientId,
   record,
 } from "./core109-outreach-fixtures";
 import { newCampaign } from "../../src/features/modules/engagement/outreach/campaign-model";
@@ -174,3 +176,89 @@ test("lost create acknowledgement retains exact key across reload and never crea
   expect(queries.every((value) => value === key)).toBe(true);
   expect(writes).toBe(1);
 });
+
+// Selected-campaign admission at the mounted UI boundary. These are the cases the
+// unit-level list render cannot express: with a campaign in the URL the workflow is
+// mounted, and a pending or failed read must not degrade into an editable blank or
+// stale campaign.
+const selectedCampaign = (state: Record<string, unknown>) => ({
+  ...campaign,
+  state: { ...campaign.state, clientId, ...state },
+});
+async function selectedFixtures(
+  page: Parameters<typeof setupOutreach>[0],
+  respond: (route: Route) => void,
+) {
+  const observed = await setupOutreach(page);
+  await page.route("**/api/capiro/engagement.campaign.templates?*", (route) =>
+    route.fulfill({ json: [] }),
+  );
+  await page.route("**/api/capiro/engagement.campaign.drafts?*", (route) =>
+    route.fulfill({ json: [] }),
+  );
+  await page.route("**/api/capiro/engagement.campaign?*", respond);
+  return observed;
+}
+const selectedUrl = (query: string) =>
+  `/modules/engagement?clientId=${clientId}&session=${recordId}${query}`;
+
+test("a matching selected campaign opens the editor with zero writes", async ({
+  page,
+}) => {
+  const observed = await selectedFixtures(page, (route) =>
+    route.fulfill({ json: selectedCampaign({}) }),
+  );
+  await page.goto(selectedUrl(""));
+  await expect(
+    page.getByLabel("Campaign name", { exact: true }),
+  ).toHaveValue("Historical campaign");
+  expect(observed.writes).toEqual([]);
+});
+
+test("a still-loading selected campaign never exposes an editable campaign", async ({
+  page,
+}) => {
+  const observed = await selectedFixtures(page, () => {
+    /* never fulfilled: the read stays pending */
+  });
+  await page.goto(selectedUrl(""));
+  // Two independent pending surfaces can be on screen (the screen's client-scope
+  // read and the workflow's own read); either way the editor must be absent.
+  await expect(page.getByRole("status").first()).toBeVisible();
+  await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(0);
+  expect(observed.writes).toEqual([]);
+});
+
+for (const status of [404, 403, 503])
+  test(`a selected campaign that fails with ${status} never becomes an editable campaign`, async ({
+    page,
+  }) => {
+    const observed = await selectedFixtures(page, (route) =>
+      route.fulfill({ status, json: { error: { code: "UNAVAILABLE" } } }),
+    );
+    await page.goto(selectedUrl(""));
+    await expect(page.getByRole("alert")).toBeVisible();
+    await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(0);
+    await expect(
+      page.getByText("Historical campaign", { exact: true }),
+    ).toHaveCount(0);
+    expect(observed.writes).toEqual([]);
+  });
+
+for (const [label, client] of [
+  ["another client", otherClientId],
+  ["no client", null],
+] as const)
+  test(`a selected campaign bound to ${label} is refused before it can be edited`, async ({
+    page,
+  }) => {
+    const observed = await selectedFixtures(page, (route) =>
+      route.fulfill({ json: selectedCampaign({ clientId: client }) }),
+    );
+    await page.goto(selectedUrl(""));
+    await expect(page.getByRole("alert")).toContainText(
+      "does not match the selected client",
+    );
+    await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(0);
+    expect(observed.writes).toEqual([]);
+  });
