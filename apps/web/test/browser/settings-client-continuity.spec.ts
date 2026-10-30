@@ -107,7 +107,7 @@ test("Settings client replacement hides former scope until the replacement is ve
   await expect.poll(() => Boolean(release)).toBe(true);
   await expect(
     modes.getByRole("link", { name: "Meri", exact: true }),
-  ).toHaveAttribute("href", "/meri");
+  ).toHaveAttribute("href", "/meri?scope=general");
   await expect(
     page.getByRole("heading", { name: "Personal", exact: true }),
   ).toBeVisible();
