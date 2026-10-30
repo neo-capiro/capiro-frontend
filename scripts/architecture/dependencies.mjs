@@ -65,6 +65,9 @@ function approvedOnboardMemoryEditorImport(from, to, entry) {
 }
 const newsletterDeliveryOwner = `${appSource}features/modules/engagement/newsletter-delivery/`;
 const newsletterRelationshipImports = new Map([
+  [`${appSource}features/modules/engagement/outreach/useOutreachCampaign.ts`, new Set(['sendingMailboxesSchema', 'SendingMailbox'])],
+  [`${appSource}features/modules/engagement/outreach/CampaignSend.tsx`, new Set(['sendingMailboxesSchema'])],
+  [`${appSource}features/modules/engagement/outreach/CampaignRecipients.tsx`, new Set(['personSchema'])],
   [`${newsletterDeliveryOwner}delivery-api.ts`, new Set(['sendingMailboxesSchema', 'SendingMailbox'])],
   [`${newsletterDeliveryOwner}DestinationPicker.tsx`, new Set(['personSchema'])],
   ...['NewsletterDestinations.tsx', 'NewsletterPrepared.tsx', 'useNewsletterDelivery.ts'].map(file =>
@@ -131,6 +134,7 @@ export const publicExports = new Set([
   '@capiro/meri-contracts/intents-application',
   '@capiro/meri-contracts/routines-application',
   '@capiro/meri-contracts/objective-generation',
+  '@capiro/meri-contracts/outreach-generation',
   '@capiro/meri-contracts/task-command-application',
   '@capiro/meri-contracts/user-preferences-application',
   '@capiro/meri-client/conversation',
@@ -144,6 +148,10 @@ export const publicExports = new Set([
 ]);
 
 export const serverAdapters = new Map([
+  [`${appSource}app/api/outreach-generation/start/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
+    `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-conversations/outreach-start.ts`,
+  ])],
   [`${appSource}app/api/meri/notifications/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-notifications/memory-proxy.server.ts`,
   ])],

@@ -119,31 +119,6 @@ function OrdinaryEngagementScreen() {
 
   return (
     <div className={styles.screen}>
-      <PageHeader
-        title="Engagement"
-        description="Your draft and sent campaigns. Open one to continue, or start a new campaign."
-        actions={
-          <select
-            className={styles.select}
-            value={clientId}
-            aria-label="Engagement client scope"
-            disabled={clientQuery.loading || Boolean(clientQuery.error)}
-            onChange={(event) => setClientId(event.target.value)}
-          >
-            <option value="">All permitted clients</option>
-            {clientId && !clients.some((client) => client.id === clientId) && (
-              <option value={clientId}>
-                Selected client (name unavailable)
-              </option>
-            )}
-            {clients.map((client) => (
-              <option key={client.id} value={client.id}>
-                {client.name}
-              </option>
-            ))}
-          </select>
-        }
-      />
       {clientQuery.loading && <p role="status">Loading client scopes.</p>}
       {clientQuery.error && (
         <div>
@@ -164,6 +139,34 @@ function OrdinaryEngagementScreen() {
       <OutreachView
         key={JSON.stringify([clientId, draft, session, initialCreate])}
         clientId={clientId}
+        listHeader={
+          <PageHeader
+            title="Engagement"
+            description="Your draft and sent campaigns. Open one to continue, or start a new campaign."
+            actions={
+              <select
+                className={styles.select}
+                value={clientId}
+                aria-label="Engagement client scope"
+                disabled={clientQuery.loading || Boolean(clientQuery.error)}
+                onChange={(event) => setClientId(event.target.value)}
+              >
+                <option value="">All permitted clients</option>
+                {clientId &&
+                  !clients.some((client) => client.id === clientId) && (
+                    <option value={clientId}>
+                      Selected client (name unavailable)
+                    </option>
+                  )}
+                {clients.map((client) => (
+                  <option key={client.id} value={client.id}>
+                    {client.name}
+                  </option>
+                ))}
+              </select>
+            }
+          />
+        }
         initialCreate={initialCreate}
         directoryContext={
           !!directoryContactId &&
