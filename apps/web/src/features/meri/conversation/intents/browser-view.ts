@@ -95,16 +95,17 @@ export function browserRow(item: BrowserItem, now: number, viewer: Viewer): Inte
       result,
     };
   }
-  if (item.decision && item.decision !== "unavailable") {
-    const rejected = item.decision.decision === "rejected";
+  // A recorded rejection stays a rejection; an unused approval that passed its window is expired, and an
+  // approved item whose result is missing is simply not confirmed — never "did not run".
+  const recorded =
+    item.decision && item.decision !== "unavailable" ? item.decision : null;
+  if (recorded?.decision === "rejected") {
     return {
       ...base,
       proposal,
-      status: rejected ? "Rejected" : "Approved · awaiting execution",
+      status: "Rejected",
       tone: "neutral",
-      detail: rejected
-        ? "You rejected this browser action. Nothing will run."
-        : "Your approval is recorded. The action has not run and its outcome is not confirmed.",
+      detail: "You rejected this browser action. No browser outcome is confirmed.",
       fields,
       result,
     };
@@ -115,7 +116,22 @@ export function browserRow(item: BrowserItem, now: number, viewer: Viewer): Inte
       proposal,
       status: "Expired",
       tone: "neutral",
-      detail: "This browser action passed its approval window and cannot be approved now.",
+      detail:
+        recorded?.decision === "approved"
+          ? "Your approval was recorded, but the approval window passed before a browser outcome was confirmed."
+          : "This browser action passed its approval window and cannot be approved now.",
+      fields,
+      result,
+    };
+  }
+  if (recorded?.decision === "approved") {
+    return {
+      ...base,
+      proposal,
+      status: "Approved · awaiting execution",
+      tone: "neutral",
+      detail:
+        "Your approval is recorded. The browser outcome is not confirmed yet and may still be unknown.",
       fields,
       result,
     };

@@ -136,6 +136,12 @@ export function intentDecisionRecovery(
       return withRecoveryCommandLock(scope, guard, async () => {
         const input = await capture(request);
         matches(input, proposal, input.deliveryId);
+        // A browser decision is written at most once. An already saved decision is read back through the
+        // owner, never re-posted: reload and Check stay status-only for the SAME proposal.
+        if (isBrowserProposal(proposal) && (await load()))
+          throw new Error(
+            "This browser decision is already saved. Reload or check its status; it is not sent again.",
+          );
         const stored = await reserveRecovery(
           scope,
           proposalId,

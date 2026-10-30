@@ -83,6 +83,8 @@ describe("browser action rows", () => {
     expect(row.tone).toBe("neutral");
     expect(row.decision).toBe("closed");
     expect(row.result.map((f) => `${f.label}:${f.value}`)).toContain("Your decision:Approved");
+    expect(row.detail).not.toContain("has not run");
+    expect(row.detail).toContain("not confirmed");
   });
 
   it("treats only a completed observation as execution evidence", () => {
@@ -103,6 +105,53 @@ describe("browser action rows", () => {
     );
     expect(failed.status).toBe("Failed");
     expect(failed.tone).toBe("danger");
+  });
+
+  it("lets expiry win over a recorded approval that never produced an observation", () => {
+    const approved = {
+      proposalId: proposal.proposalId,
+      subjectSha256: proposal.subjectSha256,
+      decision: "approved" as const,
+      decidedAt: new Date(NOW).toISOString(),
+      approver: { tenantId: "tenant", actorId: "actor" },
+      policyRevision: "p1",
+    };
+    const row = browserRow(
+      item({ decision: approved, phase: "expired" }) as never,
+      NOW + 601_000,
+      viewer,
+    );
+    expect(row.status).toBe("Expired");
+    expect(row.tone).toBe("neutral");
+    expect(row.detail).toContain("approval window passed");
+    expect(row.detail).not.toContain("has not run");
+    const stillOpen = browserRow(item({ decision: approved, phase: "approved" }) as never, NOW, viewer);
+    expect(stillOpen.status).toBe("Approved · awaiting execution");
+  });
+
+  it("keeps a recorded rejection and an actual observation as history past the window", () => {
+    const rejected = browserRow(
+      item({
+        decision: {
+          proposalId: proposal.proposalId,
+          subjectSha256: proposal.subjectSha256,
+          decision: "rejected",
+          decidedAt: new Date(NOW).toISOString(),
+          approver: { tenantId: "tenant", actorId: "actor" },
+          policyRevision: "p1",
+        },
+        phase: "expired",
+      }) as never,
+      NOW + 601_000,
+      viewer,
+    );
+    expect(rejected.status).toBe("Rejected");
+    const observed = browserRow(
+      item({ execution: { state: "completed", outcome: "error", reference: null }, phase: "expired" }) as never,
+      NOW + 601_000,
+      viewer,
+    );
+    expect(observed.status).toBe("Failed");
   });
 
   it("distinguishes expired, unavailable and foreign-viewer states without an approve control", () => {

@@ -148,6 +148,7 @@ export function useConversationIntents(
             item.kind !== "research_action" &&
             item.kind !== "legiwatch_action" &&
             item.kind !== "client_record_action" &&
+            item.kind !== "browser_action" &&
             item.kind !== "watch_action" &&
             item.kind !== "bizdev_action" &&
             item.kind !== "legislative_document_action") ||
@@ -188,6 +189,11 @@ export function useConversationIntents(
               "failed_terminal",
               "blocked",
             ].includes(item.proposalStatus)) ||
+          (item.kind === "browser_action" &&
+            ((item.decision !== null && item.decision !== "unavailable") ||
+              (item.execution !== null &&
+                item.execution !== "unavailable" &&
+                item.execution.state === "completed"))) ||
           (item.kind === "proposal" && settledOwnerOutcome(item))
         )
           await journal.observed(item.proposal, item.deliveryId);
