@@ -1,60 +1,87 @@
 "use client";
-import { refusalOf, useProspectAlerts, useProspectWatch, useWatchActions } from "./api";
-import { categoryLabel, type AlertsPage, type WatchAlert, type WatchResponse } from "./contracts";
+import { useEffect, useState } from "react";
+import { refusalOf, useProspectAlerts, useProspectWatch, useWatchActions, type Outcome } from "./api";
+import type { AlertsPage, WatchAlert, WatchResponse } from "./contracts";
+import { categoryLabel } from "./contracts";
 
 /**
  * Prospect watch and alert review — the user entry for the existing Core owner.
  *
- * The connected component only resolves current server state; `WatchView` is the rendered surface, so
- * the visible controls and their disabled states can be exercised without a browser. Nothing shown is
- * local inference: the watch row, its per-source health, the alert page and its unread count are the
- * values Core returned, and every action is an explicit button that re-reads through the same queries.
+ * Server state only: the watch row, its per-source health, and every alert page Core returned. Mutations are
+ * reconciled (see `runWatchAction`), so a lost acknowledgement never masquerades as a refusal: the outcome
+ * banner reports what the re-read established, and when even that re-read failed the state-changing controls
+ * stay closed behind an explicit Retry instead of re-sending a change nobody can describe.
  */
 export function ProspectWatch({ prospectId }: { prospectId: string }) {
   const watch = useProspectWatch(prospectId);
   const alerts = useProspectAlerts(prospectId);
-  const actions = useWatchActions(prospectId);
-  const busy =
-    actions.activate.isPending ||
-    actions.update.isPending ||
-    actions.readAlert.isPending ||
-    actions.dismissAlert.isPending;
+  const [outcome, setOutcome] = useState<Outcome>();
+  const actions = useWatchActions(prospectId, setOutcome);
+
+  // A different prospect is a different inbox: previous pages and outcome text must not carry over.
+  useEffect(() => {
+    setOutcome(undefined);
+  }, [prospectId]);
+
+  const pages = alerts.data?.pages ?? [];
+  const items = pages.flatMap((page) => page.items);
+  const unread = pages[0]?.unreadCount ?? 0;
+
   return (
     <WatchView
       refusal={refusalOf(watch.error)}
       pending={watch.isPending}
       failed={watch.isError}
       record={watch.data}
-      alerts={alerts}
-      actionError={
-        actions.activate.error ??
-        actions.update.error ??
-        actions.readAlert.error ??
-        actions.dismissAlert.error
-      }
-      busy={busy}
+      items={items}
+      unread={unread}
+      alertsPending={alerts.isPending}
+      alertsFailed={alerts.isError}
+      hasNext={!!alerts.hasNextPage}
+      loadingNext={alerts.isFetchingNextPage}
+      outcome={outcome}
+      busy={actions.isPending}
       onRetry={() => void watch.refetch()}
-      onStart={() => actions.activate.mutate({})}
-      onStatus={(status) => actions.update.mutate({ status })}
-      onRead={(alertId) => actions.readAlert.mutate(alertId)}
-      onDismiss={(alertId) => actions.dismissAlert.mutate(alertId)}
+      onRetryReadback={() => {
+        setOutcome(undefined);
+        void actions.retryReadback();
+      }}
+      onLoadMore={() => void alerts.fetchNextPage()}
+      onStart={() => {
+        setOutcome(undefined);
+        actions.reset();
+        actions.run({ type: "start" });
+      }}
+      onStatus={(status) => {
+        setOutcome(undefined);
+        actions.reset();
+        actions.run({ type: "status", status });
+      }}
+      onRead={(alertId) => {
+        setOutcome(undefined);
+        actions.reset();
+        actions.run({ type: "read", alertId });
+      }}
+      onDismiss={(alertId) => {
+        setOutcome(undefined);
+        actions.reset();
+        actions.run({ type: "dismiss", alertId });
+      }}
     />
   );
 }
 
-type AlertsQuery = {
-  isPending: boolean;
-  isError: boolean;
-  error: unknown;
-  data: AlertsPage | undefined;
-};
-
-const failureText = (error: unknown, fallback: string) => {
-  const status = refusalOf(error);
-  if (status === 403)
-    return "You can only review alerts delivered to you on this prospect.";
-  if (status === 404) return "Business Development watch is not enabled for this workspace.";
-  return error ? fallback : undefined;
+const outcomeText = (outcome: Outcome | undefined) => {
+  if (!outcome) return undefined;
+  if (outcome.kind === "refused")
+    return outcome.status === 403
+      ? "That alert is not delivered to you, so it cannot be changed here."
+      : "Watch is unavailable for this prospect. The feature may be off for this workspace, or the prospect may not be available to you.";
+  if (outcome.kind === "unconfirmed")
+    return outcome.readback
+      ? "The last change was not acknowledged. The current state was re-read and is shown above."
+      : "The last change was not acknowledged and the current state could not be re-read.";
+  return undefined;
 };
 
 export function WatchView({
@@ -62,10 +89,17 @@ export function WatchView({
   pending,
   failed,
   record,
-  alerts,
-  actionError,
+  items,
+  unread,
+  alertsPending,
+  alertsFailed,
+  hasNext,
+  loadingNext,
+  outcome,
   busy,
   onRetry,
+  onRetryReadback,
+  onLoadMore,
   onStart,
   onStatus,
   onRead,
@@ -75,10 +109,17 @@ export function WatchView({
   pending: boolean;
   failed: boolean;
   record: WatchResponse | undefined;
-  alerts: AlertsQuery;
-  actionError: unknown;
+  items: WatchAlert[];
+  unread: number;
+  alertsPending: boolean;
+  alertsFailed: boolean;
+  hasNext: boolean;
+  loadingNext: boolean;
+  outcome: Outcome | undefined;
   busy: boolean;
   onRetry: () => void;
+  onRetryReadback: () => void;
+  onLoadMore: () => void;
   onStart: () => void;
   onStatus: (status: "active" | "paused" | "ended") => void;
   onRead: (alertId: string) => void;
@@ -88,7 +129,7 @@ export function WatchView({
     return (
       <section aria-label="Prospect watch">
         <h2>Watch</h2>
-        <p>Business Development watch is not enabled for this workspace.</p>
+        <p>Watch is unavailable for this prospect.</p>
       </section>
     );
   if (refusal === 403)
@@ -117,9 +158,9 @@ export function WatchView({
     );
 
   const current = record.watch;
-  const page = alerts.data;
-  const actionFailure =
-    failureText(actionError, "The watch request was refused.") ?? undefined;
+  const unresolved = outcome?.kind === "unconfirmed" && !outcome.readback;
+  const message = outcomeText(outcome);
+  const locked = busy || unresolved;
 
   return (
     <section aria-label="Prospect watch">
@@ -128,9 +169,9 @@ export function WatchView({
         <>
           <p>
             Watch this prospect for material award, opportunity, lobbying and entity changes. Alerts
-            appear here and in the notification center.
+            appear here for review.
           </p>
-          <button type="button" disabled={busy} onClick={onStart}>
+          <button type="button" disabled={locked} onClick={onStart}>
             Start watch
           </button>
         </>
@@ -161,41 +202,52 @@ export function WatchView({
           </ul>
           <div>
             {current.status === "active" ? (
-              <button type="button" disabled={busy} onClick={() => onStatus("paused")}>
+              <button type="button" disabled={locked} onClick={() => onStatus("paused")}>
                 Pause watch
               </button>
             ) : (
-              <button type="button" disabled={busy} onClick={() => onStatus("active")}>
+              <button type="button" disabled={locked} onClick={() => onStatus("active")}>
                 Resume watch
               </button>
             )}
             {current.status !== "ended" && (
-              <button type="button" disabled={busy} onClick={() => onStatus("ended")}>
+              <button type="button" disabled={locked} onClick={() => onStatus("ended")}>
                 End watch
               </button>
             )}
           </div>
         </>
       )}
-      {actionFailure && <p role="alert">{actionFailure}</p>}
+
+      {message && (
+        <p role={unresolved ? "alert" : "status"}>
+          {message}
+          {unresolved && (
+            <>
+              {" "}
+              <button type="button" onClick={onRetryReadback}>
+                Retry
+              </button>
+            </>
+          )}
+        </p>
+      )}
 
       {current && (
         <div>
           <h3>Alerts</h3>
-          {alerts.isPending && <p>Loading alerts…</p>}
-          {alerts.isError && (
-            <p role="alert">{failureText(alerts.error, "Alerts are unavailable right now.")}</p>
-          )}
-          {page && (
+          {alertsPending && <p>Loading alerts…</p>}
+          {alertsFailed && <p role="alert">Alerts are unavailable right now.</p>}
+          {!alertsPending && !alertsFailed && (
             <>
               <p>
-                {page.unreadCount} unread · {page.items.length} shown
+                {unread} unread · {items.length} shown
               </p>
-              {page.items.length === 0 ? (
+              {items.length === 0 ? (
                 <p>No alerts yet. The next completed check will record changes here.</p>
               ) : (
                 <ul aria-label="Prospect alerts">
-                  {page.items.map((alert) => (
+                  {items.map((alert) => (
                     <AlertRow
                       key={alert.id}
                       alert={alert}
@@ -206,11 +258,10 @@ export function WatchView({
                   ))}
                 </ul>
               )}
-              {page.nextCursor && (
-                <p>
-                  More alerts are available in the notification center; this prospect list shows the
-                  newest page.
-                </p>
+              {hasNext && (
+                <button type="button" disabled={loadingNext} onClick={onLoadMore}>
+                  {loadingNext ? "Loading older alerts…" : "Load older alerts"}
+                </button>
               )}
             </>
           )}
