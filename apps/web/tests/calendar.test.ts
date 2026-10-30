@@ -59,12 +59,21 @@ describe("verified preparation contract", () => {
     for (const incorrect of [
       { ...attributed, meetingId: "another-meeting" },
       { ...attributed, clientId: "another-client" },
-      { ...attributed, clientId: null },
     ]) {
       expect(
         meetingSchema.safeParse({ ...meeting, preps: [incorrect] }).success,
       ).toBe(false);
     }
+    // B0: a prep written before the client stamp existed carries `clientId: null`
+    // on a client-scoped meeting. That is unknown provenance, not another client;
+    // treating it as a violation failed the WHOLE meeting payload and the drawer
+    // showed "Meeting unavailable" with notes, debriefs, edit and join unreachable.
+    expect(
+      meetingSchema.safeParse({
+        ...meeting,
+        preps: [{ ...attributed, clientId: null }],
+      }).success,
+    ).toBe(true);
     expect(
       meetingSchema.safeParse({
         ...meeting,
