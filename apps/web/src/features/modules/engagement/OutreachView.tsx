@@ -1,36 +1,46 @@
 "use client";
 import { useState, type ReactNode } from "react";
-import type { OutreachRecord } from "../../../shared/capiro/operations/engagement";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
-import {
-  ActionButton,
-  Badge,
-  DataTable,
-  Field,
-  StatusPanel,
-  TextInput,
-} from "../../../shared/module-ui";
+import { ActionButton, StatusPanel } from "../../../shared/module-ui";
 import { NewsletterDestination } from "./NewsletterDestination";
 import { newsletterRecordKind } from "./newsletter-route";
 import { OutreachWorkflow } from "./outreach/OutreachWorkflow";
-import styles from "./engagement.module.css";
+import { OutreachList } from "./outreach/OutreachList";
+import { OutreachDraft } from "./outreach/OutreachDraft";
+import { CampaignOverview } from "./outreach/CampaignOverview";
+import type { CampaignCategory } from "./outreach/outreach-list-model";
 
-function navigateDraft(id: string | null) {
+type Selection = {
+  id: string;
+  kind: "draft" | "campaign";
+  overview: boolean;
+  step?: number;
+} | null;
+function navigate(selection: Selection) {
   const url = new URL(window.location.href);
   for (const key of [
     "draft",
     "session",
     "create",
+    "detail",
+    "step",
     "campaignRequest",
     "generationRequest",
     "sendRequest",
+    "outreachSave",
   ])
     url.searchParams.delete(key);
-  if (id === "new") url.searchParams.set("create", "draft");
-  else if (id) url.searchParams.set("draft", id);
+  if (selection?.id === "new") url.searchParams.set("create", selection.kind);
+  else if (selection)
+    url.searchParams.set(
+      selection.kind === "draft" ? "draft" : "session",
+      selection.id,
+    );
+  if (selection?.overview) url.searchParams.set("detail", "overview");
+  if (selection?.step) url.searchParams.set("step", String(selection.step));
   window.history.replaceState(window.history.state, "", url);
 }
-/** One workflow serves new records, historic drafts and V3 campaign links. */
+/** Selected records are classified before mounting any editor. Core owns all writes. */
 export function OutreachView({
   clientId,
   initialDraft,
@@ -38,6 +48,10 @@ export function OutreachView({
   initialCreate = false,
   directoryContext = false,
   listHeader,
+  overview = false,
+  initialStep,
+  campaignCreate = false,
+  draftSavePending = false,
 }: {
   clientId: string;
   initialDraft?: string;
@@ -45,258 +59,128 @@ export function OutreachView({
   initialCreate?: boolean;
   directoryContext?: boolean;
   listHeader?: ReactNode;
+  overview?: boolean;
+  initialStep?: number;
+  campaignCreate?: boolean;
+  draftSavePending?: boolean;
 }) {
-  const [selected, setSelected] = useState<string | null>(
-    initialDraft ?? initialSession ?? (initialCreate ? "new" : null),
-  );
-  const [newsletter, setNewsletter] = useState<OutreachRecord | null>(null);
-  const [search, setSearch] = useState(""),
-    [showDeleted, setShowDeleted] = useState(false);
-  const [from, setFrom] = useState(""),
-    [to, setTo] = useState("");
-  const invalid = !!from && !!to && from > to;
-  const query = useCapiroQuery(
-    "engagement.outreach",
-    {
-      query: {
-        ...(clientId ? { clientId } : {}),
-        ...(from ? { from: new Date(from + "T00:00:00Z").toISOString() } : {}),
-        ...(to
+  const [selection, setSelection] = useState<Selection>(() =>
+    initialDraft
+      ? { id: initialDraft, kind: "draft", overview, step: initialStep }
+      : initialSession
+        ? { id: initialSession, kind: "campaign", overview, step: initialStep }
+        : initialCreate
           ? {
-              to: new Date(
-                Date.parse(to + "T00:00:00Z") + 86400000,
-              ).toISOString(),
+              id: "new",
+              kind: campaignCreate ? "campaign" : "draft",
+              overview: !campaignCreate,
             }
-          : {}),
-        deleted: showDeleted ? "true" : "false",
-        limit: 500,
-      },
-    },
-    { enabled: !selected && !invalid },
+          : null,
   );
-  const sessions = useCapiroQuery(
-    "engagement.sessions",
-    { query: { limit: 100 } },
-    { enabled: !selected && !clientId && !showDeleted },
-  );
-  const deepRecord = useCapiroQuery(
+  const [category, setCategory] = useState<CampaignCategory>("drafts");
+  const selectedRecord = useCapiroQuery(
     "engagement.outreach.record",
-    { params: { id: initialDraft ?? "" } },
-    { enabled: !!initialDraft },
+    { params: { id: selection?.id ?? "" } },
+    { enabled: selection?.kind === "draft" && selection.id !== "new" },
   );
-  const back = () => {
-    setSelected(null);
-    setNewsletter(null);
-    navigateDraft(null);
-    query.reload();
-    sessions.reload();
+  const open = (next: Selection) => {
+    setSelection(next);
+    navigate(next);
   };
-  const open = (id: string) => {
-    setSelected(id);
-    navigateDraft(id);
+  const back = (nextCategory?: CampaignCategory) => {
+    if (nextCategory) setCategory(nextCategory);
+    open(null);
   };
-  if (
-    selected === initialDraft &&
-    deepRecord.data &&
-    deepRecord.data.id.toLowerCase() === initialDraft?.toLowerCase() &&
-    (!clientId ||
-      deepRecord.data.client?.id.toLowerCase() === clientId.toLowerCase()) &&
-    newsletterRecordKind(deepRecord.data) !== "ordinary"
-  )
+  if (selection?.kind === "draft" && selection.id !== "new") {
+    const row = selectedRecord.data;
+    const mismatch =
+      row &&
+      (row.id.toLowerCase() !== selection.id.toLowerCase() ||
+        (clientId && row.client?.id.toLowerCase() !== clientId.toLowerCase()));
+    if (selectedRecord.loading || selectedRecord.error || !row || mismatch)
+      return (
+        <>
+          <ActionButton onClick={() => back()}>← All outreach</ActionButton>
+          <StatusPanel
+            loading={selectedRecord.loading}
+            error={
+              mismatch
+                ? "The returned outreach does not match this client scope."
+                : (selectedRecord.error ??
+                  (!selectedRecord.loading
+                    ? "Outreach record unavailable."
+                    : undefined))
+            }
+            onRetry={selectedRecord.reload}
+          />
+        </>
+      );
+    const kind = newsletterRecordKind(row);
+    if (kind !== "ordinary")
+      return (
+        <NewsletterDestination
+          destination={
+            kind === "candidate"
+              ? { kind: "record", id: row.id }
+              : { kind: "invalid" }
+          }
+          onBack={() => back()}
+        />
+      );
+    if (selection.overview)
+      return (
+        <OutreachDraft
+          key={row.id}
+          record={row}
+          initialPending={draftSavePending}
+          clientId={clientId}
+          onExit={() => back()}
+          onContinue={(id) => open({ id, kind: "campaign", overview: true })}
+        />
+      );
+  }
+  if (selection?.id === "new" && selection.kind === "draft")
     return (
-      <NewsletterDestination
-        destination={
-          newsletterRecordKind(deepRecord.data) === "candidate"
-            ? { kind: "record", id: deepRecord.data.id }
-            : { kind: "invalid" }
-        }
-        onBack={back}
+      <OutreachDraft
+        clientId={clientId}
+        initialPending={draftSavePending}
+        onExit={() => back()}
+        onContinue={(id) => open({ id, kind: "campaign", overview: true })}
       />
     );
-  if (newsletter)
+  if (selection?.overview)
     return (
-      <NewsletterDestination
-        destination={
-          newsletterRecordKind(newsletter) === "candidate"
-            ? { kind: "record", id: newsletter.id }
-            : { kind: "invalid" }
-        }
-        onBack={back}
-      />
-    );
-  if (selected)
-    return (
-      <OutreachWorkflow
-        key={selected}
-        id={selected === "new" ? undefined : selected}
+      <CampaignOverview
+        key={selection.id}
+        id={selection.id}
         clientId={clientId}
         onExit={back}
+        onContinue={(step) => open({ ...selection, overview: false, step })}
       />
     );
-  const mismatch = query.data?.some(
-    (row) =>
-      clientId && row.client?.id.toLowerCase() !== clientId.toLowerCase(),
-  );
-  const records = !mismatch
-    ? (query.data ?? []).filter((row) =>
-        row.title.toLowerCase().includes(search.toLowerCase()),
-      )
-    : [];
-  const existing = new Set(records.map((row) => row.id));
-  const campaigns = (sessions.data ?? []).filter(
-    (row) =>
-      !existing.has(row.id) &&
-      (row.title ?? row.topic ?? "")
-        .toLowerCase()
-        .includes(search.toLowerCase()),
-  );
+  if (selection)
+    return (
+      <OutreachWorkflow
+        key={selection.id}
+        id={selection.id === "new" ? undefined : selection.id}
+        clientId={clientId}
+        initialStep={selection.step}
+        onExit={() => back()}
+      />
+    );
   return (
-    <div className={styles.stack}>
-      {listHeader}
-      <div className={styles.tools}>
-        <TextInput
-          type="search"
-          aria-label="Search outreach"
-          placeholder="Search outreach…"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
-        <ActionButton
-          primary
-          className={styles.end}
-          onClick={() => open("new")}
-        >
-          + New outreach
-        </ActionButton>
-      </div>
+    <>
       {directoryContext && (
         <p>Choose a current directory recipient in the Recipients step.</p>
       )}
-      <div className={styles.tools}>
-        <Field label="From" htmlFor="outreach-from">
-          <TextInput
-            id="outreach-from"
-            type="date"
-            value={from}
-            onChange={(event) => setFrom(event.target.value)}
-          />
-        </Field>
-        <Field label="To" htmlFor="outreach-to">
-          <TextInput
-            id="outreach-to"
-            type="date"
-            value={to}
-            onChange={(event) => setTo(event.target.value)}
-          />
-        </Field>
-        <label>
-          <input
-            type="checkbox"
-            checked={showDeleted}
-            onChange={(event) => setShowDeleted(event.target.checked)}
-          />{" "}
-          Show deleted
-        </label>
-      </div>
-      <StatusPanel
-        loading={query.loading}
-        error={
-          invalid
-            ? "The end date must be on or after the start date."
-            : mismatch
-              ? "The returned outreach does not match this client scope."
-              : query.error
-        }
-        onRetry={query.reload}
+      <OutreachList
+        clientId={clientId}
+        scopeControl={listHeader}
+        initialCategory={category}
+        onCreate={() => open({ id: "new", kind: "draft", overview: true })}
+        onCampaign={(id) => open({ id, kind: "campaign", overview: true })}
+        onRecord={(row) => open({ id: row.id, kind: "draft", overview: true })}
       />
-      <DataTable
-        rows={records}
-        rowKey={(row) => row.id}
-        caption={showDeleted ? "Deleted outreach" : "Outreach records"}
-        columns={[
-          {
-            key: "title",
-            label: "Campaign",
-            render: (row) =>
-              showDeleted ? (
-                <span>{row.title}</span>
-              ) : (
-                <button
-                  className={styles.name}
-                  onClick={() =>
-                    newsletterRecordKind(row) === "ordinary"
-                      ? open(row.id)
-                      : setNewsletter(row)
-                  }
-                >
-                  {row.title}
-                </button>
-              ),
-          },
-          {
-            key: "client",
-            label: "Client",
-            render: (row) => row.client?.name ?? "My firm",
-          },
-          {
-            key: "status",
-            label: "Status",
-            render: (row) => <Badge>{row.status}</Badge>,
-          },
-          {
-            key: "subject",
-            label: "Subject",
-            render: (row) => row.subject ?? "—",
-          },
-        ]}
-      />
-      {!clientId && !showDeleted && (
-        <>
-          <StatusPanel
-            loading={sessions.loading}
-            error={sessions.error}
-            onRetry={sessions.reload}
-          />
-          {!!campaigns.length && (
-            <DataTable
-              rows={campaigns}
-              rowKey={(row) => row.id}
-              caption="Outreach campaigns"
-              columns={[
-                {
-                  key: "title",
-                  label: "Campaign",
-                  render: (row) => (
-                    <button
-                      className={styles.name}
-                      onClick={() => open(row.id)}
-                    >
-                      {row.title ?? row.topic ?? "Outreach campaign"}
-                    </button>
-                  ),
-                },
-                {
-                  key: "status",
-                  label: "Status",
-                  render: (row) => (
-                    <Badge>{row.recordStatus ?? row.status}</Badge>
-                  ),
-                },
-              ]}
-            />
-          )}
-        </>
-      )}
-      {clientId && (
-        <p className={styles.note}>
-          Campaign sessions are available under All permitted clients.
-          Client-linked records remain shown here.
-        </p>
-      )}
-      <p className={styles.note}>
-        Drafts are saved for later. Review the messages and destinations before
-        sending.
-      </p>
-    </div>
+    </>
   );
 }

@@ -17,15 +17,17 @@ test("Engagement opens directly to Outreach with no obsolete sections or meeting
   const observed = await setupOutreach(page);
   await page.goto("/modules/engagement");
   await expect(
-    page.getByRole("heading", { name: "Engagement", exact: true }),
+    page.getByRole("heading", { name: "Outreach", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("table", { name: "Outreach records" }),
+    page.getByRole("heading", { name: "Saved outreach records" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "+ New outreach" }),
+    page.getByRole("button", { name: "+ New outreach" }).first(),
   ).toBeVisible();
-  await expect(page.getByRole("tab")).toHaveCount(0);
+  await expect(
+    page.getByRole("tablist", { name: "Campaign categories" }),
+  ).toBeVisible();
   for (const name of ["New meeting", "Open reports", "Reports"]) {
     await expect(page.getByRole("button", { name, exact: true })).toHaveCount(
       0,
@@ -44,16 +46,18 @@ test("legacy non-meeting view hints still show Outreach, and client selection ke
   const observed = await setupOutreach(page);
   await page.goto(`/modules/engagement?view=reports&clientId=${clientId}`);
   await expect(
-    page.getByRole("table", { name: "Outreach records" }),
+    page.getByRole("heading", { name: "Saved outreach records" }),
   ).toBeVisible();
-  await expect(page.getByRole("tab")).toHaveCount(0);
+  await expect(
+    page.getByRole("tablist", { name: "Campaign categories" }),
+  ).toBeVisible();
   const scope = page.getByRole("combobox", { name: "Engagement client scope" });
   await expect(scope).toHaveValue(clientId);
   await scope.selectOption(otherClientId);
   await expect(page).toHaveURL(`/modules/engagement?clientId=${otherClientId}`);
   await expect(scope).toHaveValue(otherClientId);
   await expect(
-    page.getByRole("table", { name: "Outreach records" }),
+    page.getByRole("heading", { name: "Saved outreach records" }),
   ).toBeVisible();
   assertNoEffects(observed);
 });
@@ -78,7 +82,7 @@ test("newsletter and Objective destination hints keep their dedicated route guar
     ),
   ).toBeVisible();
   await expect(
-    page.getByRole("table", { name: "Outreach records" }),
+    page.getByRole("heading", { name: "Saved outreach records" }),
   ).toHaveCount(0);
   await page.goto(
     `/modules/engagement?clientId=${clientId}&objectiveId=90000000-0000-4000-8000-000000000009&objectiveVersion=7`,
@@ -87,7 +91,7 @@ test("newsletter and Objective destination hints keep their dedicated route guar
     page.getByRole("heading", { name: "Objective destination unavailable" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("table", { name: "Outreach records" }),
+    page.getByRole("heading", { name: "Saved outreach records" }),
   ).toHaveCount(0);
   assertNoEffects(observed);
 });
@@ -142,11 +146,11 @@ test("Outreach date filters send UTC start and exclusive end for the chosen incl
 }) => {
   const observed = await setupOutreach(page);
   const inputs: unknown[] = [];
-  await page.route("**/api/capiro/engagement.outreach?*", (route) => {
+  await page.route("**/api/capiro/engagement.outreach.records?*", (route) => {
     inputs.push(
       JSON.parse(new URL(route.request().url()).searchParams.get("input")!),
     );
-    return route.fulfill({ json: [] });
+    return route.fulfill({ json: { items: [], nextCursor: null } });
   });
   await page.goto("/modules/engagement");
   await page.getByLabel("To", { exact: true }).fill("2026-10-12");
@@ -159,7 +163,7 @@ test("Outreach date filters send UTC start and exclusive end for the chosen incl
           query?.from === "2026-10-10T00:00:00.000Z" &&
           query.to === "2026-10-13T00:00:00.000Z" &&
           query.deleted === "false" &&
-          query.limit === 500
+          query.limit === 100
         );
       }),
     )
@@ -172,14 +176,18 @@ test("an inverted Outreach date window hides rows without issuing a read for tha
 }) => {
   const observed = await setupOutreach(page);
   const inputs: { query: { from?: string; to?: string } }[] = [];
-  await page.route("**/api/capiro/engagement.outreach?*", (route) => {
+  await page.route("**/api/capiro/engagement.outreach.records?*", (route) => {
     inputs.push(
       JSON.parse(new URL(route.request().url()).searchParams.get("input")!),
     );
-    return route.fulfill({ json: [record] });
+    return route.fulfill({
+      json: { items: [{ ...record, hasWorkflow: false }], nextCursor: null },
+    });
   });
   await page.goto("/modules/engagement");
-  await expect(page.getByRole("button", { name: record.title })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: `Open draft: ${record.title}` }),
+  ).toBeVisible();
   await page.getByLabel("From", { exact: true }).fill("2026-10-09");
   await page.getByLabel("To", { exact: true }).fill("2026-10-10");
   await expect
@@ -196,7 +204,9 @@ test("an inverted Outreach date window hides rows without issuing a read for tha
   await expect(page.getByRole("alert")).toContainText(
     "The end date must be on or after the start date.",
   );
-  await expect(page.getByRole("button", { name: record.title })).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: `Open draft: ${record.title}` }),
+  ).toHaveCount(0);
   await page.waitForLoadState("networkidle");
   expect(inputs).toHaveLength(beforeInvalid);
   assertNoEffects(observed);
@@ -212,27 +222,37 @@ test("Show deleted requests deleted-only rows and never opens a deleted draft", 
     status: "deleted",
   };
   const inputs: { query: { deleted?: string } }[] = [];
-  await page.route("**/api/capiro/engagement.outreach?*", (route) => {
+  await page.route("**/api/capiro/engagement.outreach.records?*", (route) => {
     const input = JSON.parse(
       new URL(route.request().url()).searchParams.get("input")!,
     );
     inputs.push(input);
     return route.fulfill({
-      json: input.query.deleted === "true" ? [deleted] : [record],
+      json: {
+        items: [
+          {
+            ...(input.query.deleted === "true" ? deleted : record),
+            hasWorkflow: false,
+          },
+        ],
+        nextCursor: null,
+      },
     });
   });
   await page.goto("/modules/engagement");
-  await expect(page.getByRole("button", { name: record.title })).toBeVisible();
-  await page.getByRole("checkbox", { name: "Show deleted" }).check();
+  await expect(
+    page.getByRole("button", { name: `Open draft: ${record.title}` }),
+  ).toBeVisible();
+  await page.getByRole("checkbox", { name: "Deleted only" }).check();
   await expect.poll(() => inputs.at(-1)?.query.deleted).toBe("true");
   await expect(
-    page.getByRole("table", { name: "Deleted outreach" }),
+    page.getByRole("heading", { name: "Deleted outreach" }),
   ).toBeVisible();
-  await expect(page.getByText(deleted.title, { exact: true })).toBeVisible();
+  await expect(page.getByText(deleted.title, { exact: false })).toBeVisible();
   await expect(page.getByRole("button", { name: deleted.title })).toHaveCount(
     0,
   );
-  await page.getByText(deleted.title, { exact: true }).click();
+  await page.getByText(deleted.title, { exact: false }).click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   expect(observed.reads).toEqual([]);
   assertNoEffects(observed);
@@ -249,6 +269,7 @@ test("client scope does not fetch or show owner-only campaign sessions", async (
       json: [
         {
           ...session.session,
+          title: "Synthetic owner campaign",
           topic: "Synthetic owner campaign",
           goal: "Synthetic goal",
           targetCount: 1,

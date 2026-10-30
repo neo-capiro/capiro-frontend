@@ -157,7 +157,7 @@ test("lost create acknowledgement retains exact key across reload and never crea
     );
     return route.fulfill({ json: [] });
   });
-  await page.goto("/modules/engagement?create=draft");
+  await page.goto("/modules/engagement?create=campaign");
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page
     .getByLabel("Campaign name", { exact: true })
@@ -209,9 +209,9 @@ test("a matching selected campaign opens the editor with zero writes", async ({
     route.fulfill({ json: selectedCampaign({}) }),
   );
   await page.goto(selectedUrl(""));
-  await expect(
-    page.getByLabel("Campaign name", { exact: true }),
-  ).toHaveValue("Historical campaign");
+  await expect(page.getByLabel("Campaign name", { exact: true })).toHaveValue(
+    "Historical campaign",
+  );
   expect(observed.writes).toEqual([]);
 });
 
@@ -225,7 +225,9 @@ test("a still-loading selected campaign never exposes an editable campaign", asy
   // Two independent pending surfaces can be on screen (the screen's client-scope
   // read and the workflow's own read); either way the editor must be absent.
   await expect(page.getByRole("status").first()).toBeVisible();
-  await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(0);
+  await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(
+    0,
+  );
   expect(observed.writes).toEqual([]);
 });
 
@@ -238,7 +240,9 @@ for (const status of [404, 403, 503])
     );
     await page.goto(selectedUrl(""));
     await expect(page.getByRole("alert")).toBeVisible();
-    await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(0);
+    await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(
+      0,
+    );
     await expect(
       page.getByText("Historical campaign", { exact: true }),
     ).toHaveCount(0);
@@ -259,6 +263,8 @@ for (const [label, client] of [
     await expect(page.getByRole("alert")).toContainText(
       "does not match the selected client",
     );
-    await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(0);
+    await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(
+      0,
+    );
     expect(observed.writes).toEqual([]);
   });

@@ -23,7 +23,7 @@ export function EngagementScreen() {
   const hasOutreachIntent =
     params.has("draft") ||
     params.has("session") ||
-    params.get("create") === "draft";
+    ["draft", "campaign"].includes(params.get("create") ?? "");
   if (
     !params.has("objectiveId") &&
     !params.has("objectiveVersion") &&
@@ -93,7 +93,9 @@ function OrdinaryEngagementScreen() {
   const requestedClient = params.get("clientId");
   const draft = params.get("draft");
   const session = params.get("session");
-  const initialCreate = params.get("create") === "draft";
+  const initialCreate = ["draft", "campaign"].includes(
+    params.get("create") ?? "",
+  );
   const directoryContactId = params.get("directoryContactId");
   const objectiveDestination =
     params.has("objectiveId") || params.has("objectiveVersion");
@@ -139,35 +141,38 @@ function OrdinaryEngagementScreen() {
       <OutreachView
         key={JSON.stringify([clientId, draft, session, initialCreate])}
         clientId={clientId}
+        overview={params.get("detail") === "overview"}
+        draftSavePending={params.get("outreachSave") === "pending"}
+        initialStep={
+          /^[1-7]$/.test(params.get("step") ?? "")
+            ? Number(params.get("step"))
+            : undefined
+        }
         listHeader={
-          <PageHeader
-            title="Engagement"
-            description="Your draft and sent campaigns. Open one to continue, or start a new campaign."
-            actions={
-              <select
-                className={styles.select}
-                value={clientId}
-                aria-label="Engagement client scope"
-                disabled={clientQuery.loading || Boolean(clientQuery.error)}
-                onChange={(event) => setClientId(event.target.value)}
-              >
-                <option value="">All permitted clients</option>
-                {clientId &&
-                  !clients.some((client) => client.id === clientId) && (
-                    <option value={clientId}>
-                      Selected client (name unavailable)
-                    </option>
-                  )}
-                {clients.map((client) => (
-                  <option key={client.id} value={client.id}>
-                    {client.name}
-                  </option>
-                ))}
-              </select>
-            }
-          />
+          <select
+            className={styles.select}
+            value={clientId}
+            aria-label="Engagement client scope"
+            disabled={clientQuery.loading || Boolean(clientQuery.error)}
+            onChange={(event) => setClientId(event.target.value)}
+          >
+            <option value="">All permitted clients</option>
+            {clientId && !clients.some((client) => client.id === clientId) && (
+              <option value={clientId}>
+                Selected client (name unavailable)
+              </option>
+            )}
+            {clients.map((client) => (
+              <option key={client.id} value={client.id}>
+                {client.name}
+              </option>
+            ))}
+          </select>
         }
         initialCreate={initialCreate}
+        campaignCreate={
+          params.get("create") === "campaign" || params.has("campaignRequest")
+        }
         directoryContext={
           !!directoryContactId &&
           directoryContactId.length <= 300 &&

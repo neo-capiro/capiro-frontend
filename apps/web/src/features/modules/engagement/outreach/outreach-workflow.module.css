@@ -17,6 +17,115 @@
 }
 .workflow button {
   border-radius: 10px;
+  font-weight: 500;
+}
+.backLink {
+  align-self: flex-start;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.workflow > [role="tablist"] {
+  padding: 0;
+  gap: 8px;
+  flex-wrap: wrap;
+  overflow: visible;
+}
+.workflow > [role="tablist"] button {
+  height: 36px;
+  padding: 0 14px;
+  border: 0;
+  color: var(--foreground);
+}
+.workflow > [role="tablist"] button[aria-selected="true"] {
+  background: linear-gradient(175deg, #242424, #0a0a0a);
+  color: white;
+  box-shadow: 0 1px 2px #0c0a0924;
+}
+.workflow button:disabled {
+  opacity: 0.4;
+}
+.step section {
+  box-shadow: none;
+}
+.step section > header {
+  margin-bottom: 16px;
+}
+.step section > header > div {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.step section > header p {
+  margin: 0;
+  line-height: 1.45;
+}
+.workflow div:has(> label) {
+  gap: 6px;
+}
+.workflow [role="combobox"] {
+  min-height: 47px;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+.actions button[aria-pressed="false"] {
+  border-color: transparent;
+  box-shadow: none;
+  background: transparent;
+}
+.confirmation[data-slot="dialog-content"] {
+  width: min(600px, calc(100vw - 32px));
+  max-width: none;
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+:global([data-slot="dialog-overlay"]):has(+ .confirmation) {
+  background: rgb(0 0 0 / 32%);
+}
+.confirmation > header,
+.confirmation > footer,
+.confirmation > [data-slot="modal-body"] {
+  padding: 0;
+  border: 0;
+}
+.confirmation > header h2 {
+  font-size: 18px;
+  line-height: 1.45;
+}
+.confirmation > header > button {
+  display: none;
+}
+.confirmation > footer {
+  justify-content: flex-start;
+  gap: 12px;
+}
+.confirmationField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.confirmationField p {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--muted-foreground);
+}
+.confirmationField > div {
+  padding: 12px;
+  min-height: 47px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 21px;
+  overflow-wrap: anywhere;
+}
+.confirmation button {
+  border-radius: 10px;
+  font-weight: 500;
 }
 .workflow section > header h2 {
   font-size: 18px;
@@ -25,16 +134,23 @@
 .workflow label {
   font-size: 12px;
   line-height: 18px;
+  color: var(--muted-foreground);
 }
 .workflow input,
 .workflow textarea {
   font-size: 14px;
   padding: 12px;
+  min-height: 47px;
+  line-height: 21px;
+}
+.workflow textarea[id="outreach-main-idea"] {
+  min-height: 130px;
 }
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
+  align-items: start;
 }
 .fields {
   display: flex;
@@ -55,7 +171,7 @@
 .stepCount {
   margin-right: auto;
   color: var(--muted-foreground);
-  font-size: 12px;
+  font-size: 13px;
 }
 .hint {
   color: var(--muted-foreground);
@@ -131,12 +247,24 @@
 .message {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 24px;
   font-size: 14px;
-  line-height: 1.65;
+  line-height: 1.45;
+}
+.version {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: linear-gradient(175deg, #242424, #0a0a0a);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+.draftReadiness {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--foreground);
 }
 .subject {
   font-size: 18px;

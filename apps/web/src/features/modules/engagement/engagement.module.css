@@ -4,77 +4,23 @@
   gap: 24px;
   min-width: 0;
 }
-.screen th {
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 0.3px;
-}
-.tools {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.tools input[type="search"] {
-  width: 240px;
-}
-.end {
-  margin-left: auto;
-}
 .select {
   background: var(--card);
   border: 1px solid var(--input);
-  border-radius: 8px;
+  border-radius: 10px;
   min-height: 36px;
-  padding: 7px 10px;
+  padding: 7px 14px;
   color: var(--foreground);
   font: inherit;
-  font-size: 13px;
+  font-size: 14px;
 }
 .stack {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-.muted {
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--muted-foreground);
-}
-.note {
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--muted-foreground);
-}
-.body {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.name {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-.error {
-  font-size: 13px;
-  color: #7a2e2e;
-}
-.footer {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
 @media (max-width: 600px) {
   .screen {
     gap: 18px;
-  }
-  .tools input[type="search"] {
-    width: 100%;
   }
 }

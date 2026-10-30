@@ -188,8 +188,21 @@
 .strategiesMain {
   padding: 28px 40px 64px;
 }
+.engagementMain {
+  padding: 32px;
+}
 .engagementMain .breadcrumb {
-  margin-bottom: 12px;
+  min-height: 36px;
+  margin-bottom: 24px;
+  gap: 8px;
+}
+.engagementMain .breadcrumb a {
+  width: 95px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+  padding-inline: 14px;
+  color: var(--foreground);
+  font-size: 14px;
 }
 .hubMain {
   padding-inline: 32px;

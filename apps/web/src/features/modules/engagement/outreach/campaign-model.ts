@@ -180,7 +180,7 @@ export function campaignProblem(state: OutreachCampaignState) {
   if (!state.title.trim()) return "Name your campaign.";
   return (
     recipientProblem(state) ??
-    (!state.mainIdea.trim()
+    (!(state.mainIdea.trim() || state.decisions?.goal.trim())
       ? "Add the main idea for this campaign."
       : undefined)
   );
