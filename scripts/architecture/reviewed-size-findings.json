@@ -2409,10 +2409,10 @@
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "function",
     "symbol": "OutreachView",
-    "fingerprint": "99dcedc00a9e26ae1b5e523ec7946e63e900effff5325f98d2c73f9495494868",
-    "reason": "The 176-line route view keeps existing draft and campaign session owners while adding bounded date/deleted filters and client scope. V3 records remain visible but cannot open the classic draft editor. No writer or transport authority is added. Independent review and limits: docs/engagement-outreach-only-20261017/STRUCTURE-REVIEW.md#engagement.",
-    "reviewedBy": "Codex independent Engagement source review",
-    "reviewedOn": "2026-10-17"
+    "fingerprint": "02fdb32ae73f02f8928c9de31ae51bd48aefbcc659b64b8fc9ee5a3ba745edc9",
+    "reason": "This is the single Outreach list/detail route selector. It classifies fetched native records before mounting an ordinary editor, checks returned identity/client scope, and delegates newsletters, campaign decisions, ordinary drafts and the existing wizard to their owners. Keeping route replacement and editor admission together avoids mounting an ordinary writer before classification finishes.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
   },
   {
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
@@ -2706,10 +2706,10 @@
     "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
     "kind": "function",
     "symbol": "OrdinaryEngagementScreen",
-    "fingerprint": "e1531f03eaa796c6b2c16eb744c626e320133d81b5bed23ab2a42c4e2993a356",
-    "reason": "The 88-line screen composes only Outreach and current client selection. Legacy meeting/library hints are validated and linked into Portfolio, while draft/session/create hints retain Outreach precedence; it performs no meeting detail read or campaign write. Independent review: docs/engagement-outreach-only-20261017/STRUCTURE-REVIEW.md#engagement.",
-    "reviewedBy": "Codex independent Engagement source review",
-    "reviewedOn": "2026-10-17"
+    "fingerprint": "ebd5f95b48f7771e1f5088ad0b228130175598ee9ada4fe8e5f220079bec02d5",
+    "reason": "This component owns one Engagement route and client selector. Existing objective/newsletter destinations retain their owners, while the Outreach destination receives the selected client, detail mode and recovery marker. Query scoping and key-based remounting remain together so a changed client cannot reuse another campaign view; the JSX introduces no second persistence or authorization owner.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
   },
   {
     "file": "apps/web/test/browser/main.tsx",
@@ -7393,5 +7393,122 @@
     "reason": "Author structural assessment in docs/federal-workbench.md: The former publish-only transaction is replaced by one import/export delivery method using the existing shared journal, immutable input fingerprint, original delivery ID and definite/uncertain response classification. Busy reservation covers hashing; source selection and review content never enter another ledger. Independent review remains held.",
     "reviewedBy": "Codex implementation author (independent review held)",
     "reviewedOn": "2026-10-29"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/CampaignDrafts.tsx",
+    "kind": "function",
+    "symbol": "CampaignDrafts",
+    "fingerprint": "c72bd967b562641098aab06ddb0bdf0a5c5037456a8f847ae966a63db4535c4a",
+    "reason": "The existing generation-review panel owns selection of a single recipient unit, job progress and its retained draft preview. The change adds layout/progress presentation while preserving the canonical hook, immutable version receiver and pending-result controls. Cohesive selection and artifact matching prevent a preview from showing another recipient draft.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/CampaignDrafts.tsx",
+    "kind": "function",
+    "symbol": "DraftEditor",
+    "fingerprint": "0f54ebcfdb9e05e297e1ba9810ef93a683e9e97af2770e2513d6276928308ba5",
+    "reason": "This is one immutable-draft editor with local subject/body/revision instruction state. Save, cancel and regeneration remain callbacks to the existing campaign owner; the changed version/status presentation does not alter sendability or persistence. Keeping the local edit buffer and its controls together avoids losing unsaved edits across presentation fragments.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/CampaignOverview.tsx",
+    "kind": "function",
+    "symbol": "CampaignDecisions",
+    "fingerprint": "ae651dd29b4d79090eb6d05a10a565b5bee9143da97600c30c7fb3a96b9e627d",
+    "reason": "The form edits the five bounded saved decisions plus the existing tone field through the canonical campaign hook. Its displayed readiness and continuation gate use the same selected campaign state; saved/dirty/pending controls stay adjacent to their fields. Reusable field mapping avoids repeated handlers, and generation remains in the existing wizard.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/CampaignOverview.tsx",
+    "kind": "function",
+    "symbol": "CampaignRecord",
+    "fingerprint": "18cf4d3c96d3db6561df201460dcbfd628a8660d52a5011b6918d9a8c135e74a",
+    "reason": "This read-only panel verifies the selected campaign identity before displaying recorded outcomes. Canonical sent details come from the existing non-test send intent and sent delivery snapshots, while legacy records use their historical saved record. The fallback decision, identity checks and presentation stay in one component to avoid labeling an authored draft as the sent version. It adds no retry or delivery mutation.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/CampaignSend.tsx",
+    "kind": "function",
+    "symbol": "CampaignSend",
+    "fingerprint": "2f00f61530686eb0e0bb00f66e6d974c002d73ec1063c7861c2b36771ce43530",
+    "reason": "This existing send-review component binds the current saved versions, recipient envelopes and selected sending mailbox to one explicit confirmation. The scoped modal presentation retains the existing owner preflight, version/envelope checks, test-send selection and uncertain-outcome read controls. It does not become a delivery owner or infer sending from local UI state.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/outreach-overview.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "c63f0c6dfc68969491099e300adbe4150180b9b8b97bf03418f42ba2b7a14729",
+    "reason": "This stylesheet scopes the Outreach list, draft form and overview visual primitives, including responsive table/form layouts and keyboard focus states. It shares the same card, status, field and action styles across those adjacent views, uses existing design tokens, and contains no application state or behavior. Splitting the cohesive visual primitives would duplicate selectors without isolating a domain owner.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/OutreachDraft.tsx",
+    "kind": "function",
+    "symbol": "OutreachDraft",
+    "fingerprint": "3a6af8817eba2524c59947f4b397b221fd6f983291e777421a98299d58b47cdb",
+    "reason": "This is one ordinary draft form using the existing create/update operations. Its input state, immediate duplicate-action fence, pending URL marker and save-response identity checks belong to the same mutation lifecycle. Unknown outcomes remain read-only across reload, and opening a campaign is an explicit transition after a confirmed save; no mail-send authority is added.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "758882be609b02956255159d188aa0e772315a1e057e6f325cdf12606c831408",
+    "reason": "The module contains one paginated Outreach list and its small campaign-row renderer. Server-filtered canonical campaigns, ordinary records and legacy sessions share visible filters while retaining independent cursors. The extracted list model owns label projection; this file does not implement sending, generation or backend access policy.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
+    "kind": "function",
+    "symbol": "OutreachList",
+    "fingerprint": "3e0281004d02f4ab1429583be69a6474ec53f1d9ca74d45992c535ba01e237f1",
+    "reason": "The component coordinates the three existing list sources under one selected client/search/date view. It preserves native pagination, labels loaded counts, excludes imported legacy sessions using the server workflow marker, and retains deleted records. Filter resets, page controls and displayed results share one view lifetime; splitting them into stateful owners would risk mismatched cursors and counts.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflow.tsx",
+    "kind": "function",
+    "symbol": "OutreachWorkflow",
+    "fingerprint": "c858afe4fa5fa8b1dabd36da33e9b7e46da18908ca450ab65fd4d02dfdc91beb",
+    "reason": "This is the single seven-step wizard composition over useOutreachCampaign. It chooses existing step components, preserves read-only and pending gates, and passes the fixed client into recipient setup. Initial-step support and goal-aware validation are presentation changes within the same workflow; splitting the orchestrator would duplicate navigation and editability decisions.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/useOutreachCampaign.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "ea9bcf7e355f6bd730c981543c40ac0a096d149d9ae5c4f8f675ce46bd8e49af",
+    "reason": "The module contains one canonical campaign lifecycle hook, composing typed API adapters and existing recipient/recovery helpers. The same saved revision, abort lifetime and pending request identity govern create/save/generate/review/send actions. Keeping this mutable coordinator together avoids competing workflow owners; the change adds initial-step navigation, selected-client enforcement and error propagation without a second backend authority.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/useOutreachCampaign.ts",
+    "kind": "function",
+    "symbol": "useOutreachCampaign",
+    "fingerprint": "19f7fd9055c764c8f2f723503d4d28289c8da2a0af89bc1527959830c4328eb4",
+    "reason": "This hook is the existing single mutable coordinator for a saved campaign revision. Reads, explicit saves, generation recovery and reviewed send requests share an abort lifetime and active/pending fences; typed adapters own transport and Core owns authorization. The added initial-step and fixed-client checks fit that lifecycle, and separating stateful action owners would weaken stale-result and concurrent-action coordination.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/useOutreachCampaign.ts",
+    "kind": "function",
+    "symbol": "useOutreachCampaign > <anonymous> #3",
+    "fingerprint": "5f3a001cf8bd61b921a4f273da14c81b5b6453226bcca7ce0d1e0c4e05f4a402",
+    "reason": "This effect hydrates one selected campaign and its saved drafts, then reconciles persisted generation/send request markers under the same abort signal. It validates the selected client before adopting state and preserves recovery navigation on reload. The sequential admission steps intentionally share one effect lifetime so superseded responses cannot populate the replacement view.",
+    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-30"
   }
 ]
