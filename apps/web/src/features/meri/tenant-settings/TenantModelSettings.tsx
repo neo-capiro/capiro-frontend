@@ -3,6 +3,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { FormField } from "../ui/FormField";
 import { TenantSettingsController } from "./controller";
+import { TenantBrowserSettings } from "./TenantBrowserSettings";
 import {
   microToUsd,
   modelDraft,
@@ -50,6 +51,16 @@ function OwnedSettings() {
           editable={view.status === "ready"}
           save={(model) => {
             void controller.save(model);
+          }}
+        />
+      ) : null}
+      {view.document ? (
+        <TenantBrowserSettings
+          key={`browser-${view.document.revision}`}
+          document={view.document}
+          editable={view.status === "ready"}
+          save={(choices) => {
+            void controller.saveBrowser(choices);
           }}
         />
       ) : null}

@@ -5,8 +5,8 @@ import {
 } from "../../../shared/meri-actions/bounded-json";
 
 // Projection of control/settings/service.mjs readTenant/saveTenant and documents.mjs.
-// No tenant-settings contract is exported by meri-contracts 0.1.14. Keep the
-// capability policy opaque: only its canonical owner validates or changes it.
+// No tenant-settings contract is exported by meri-contracts 0.1.39. Policies
+// remain opaque; the editor projects fields and the canonical owner validates.
 const positive = z.number().int().min(1).max(Number.MAX_SAFE_INTEGER);
 const modelSchema = z.object({
   monthlyCapMicroUsd: positive.nullable(),
@@ -20,6 +20,9 @@ const responseSchema = z.object({
   effectiveCapabilities: z.unknown(),
   capabilityPolicy: z.record(z.string(), z.unknown()).optional(),
   model: modelSchema.optional(),
+  browserPolicy: z.record(z.string(), z.unknown()).optional(),
+  browserPlatform: z.record(z.string(), z.unknown()).optional(),
+  browserStatus: z.string().optional(),
 });
 export type TenantDocument = z.infer<typeof responseSchema>;
 export type ModelLimits = Omit<
@@ -31,7 +34,8 @@ export type TenantSave = {
   settings: {
     defaultTimezone: string;
     capabilityPolicy: Record<string, unknown>;
-    model: ModelLimits;
+    model?: ModelLimits;
+    browserPolicy?: Record<string, unknown>;
   };
 };
 export class TenantSettingsFailure extends Error {
@@ -133,7 +137,7 @@ export async function tenantSettingsRequest(
             throw new TenantSettingsFailure("conflict");
           if (
             [400, 422].includes(response.status) &&
-            /^(SETTINGS_(REQUEST|DOCUMENT|FIELD|MODEL)_INVALID|CAPABILITY_[A-Z_]+)$/.test(
+            /^(SETTINGS_(REQUEST|DOCUMENT|FIELD|MODEL)_INVALID|CAPABILITY_[A-Z_]+|BROWSER_[A-Z_]+)$/.test(
               code,
             )
           )
