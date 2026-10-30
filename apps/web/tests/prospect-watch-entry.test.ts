@@ -226,7 +226,7 @@ it("keeps an unresolvable outcome behind a usable retry instead of claiming a re
   }));
   const client = new QueryClient();
   const outcome = await runWatchAction(api, client, PROSPECT, { type: "status", status: "paused" });
-  expect(outcome).toEqual({ kind: "unconfirmed", readback: null });
+  expect(outcome).toEqual({ kind: "unconfirmed", acknowledged: false, readback: null });
 });
 
 it("reports a real refusal as a refusal and changes nothing", async () => {
@@ -250,6 +250,7 @@ const baseView = {
   alertsFailed: false,
   hasNext: false,
   loadingNext: false,
+  recovering: false,
   outcome: undefined as Parameters<typeof WatchView>[0]["outcome"],
   busy: false,
   onRetry: () => {},
@@ -290,7 +291,7 @@ it("shows the reconciled outcome, and blocks changes behind Retry when unresolve
     record: watchBody({ status: "ended" }),
     items: [],
     unread: 0,
-    outcome: { kind: "unconfirmed", readback: watchBody({ status: "ended" }) },
+    outcome: { kind: "unconfirmed", acknowledged: true, readback: watchBody({ status: "ended" }) },
   });
   expect(reconciled).toContain("Status: ended");
   expect(reconciled).toContain("The current state was re-read");
@@ -301,7 +302,7 @@ it("shows the reconciled outcome, and blocks changes behind Retry when unresolve
     record: watchBody(),
     items: [],
     unread: 0,
-    outcome: { kind: "unconfirmed", readback: null },
+    outcome: { kind: "unconfirmed", acknowledged: false, readback: null },
   });
   expect(unresolved).toContain("could not be re-read");
   expect(unresolved).toMatch(/<button[^>]*disabled=""[^>]*>Pause watch<\/button>/);

@@ -43,9 +43,9 @@ export const refusalOf = (error: unknown) =>
     : null;
 
 export type Outcome =
-  | { kind: "committed"; readback: WatchResponse | AlertsPage }
+  | { kind: "committed"; readback: WatchResponse }
   | { kind: "refused"; status: 403 | 404 }
-  | { kind: "unconfirmed"; readback: WatchResponse | AlertsPage | null };
+  | { kind: "unconfirmed"; acknowledged: boolean; readback: WatchResponse | null };
 
 /* ------------------------------------------------------------------ transports */
 
@@ -165,13 +165,15 @@ const perform = (api: ApiClient, prospectId: string, action: WatchAction) => {
 /**
  * Run one watch action and reconcile the outcome against current server state.
  *
- * `committed`  — the response arrived and the re-read confirms it.
- * `refused`    — Core answered 403/404: a definitive refusal, nothing changed.
- * `unconfirmed`— the response was lost or unreadable. The re-read decides: if it succeeds the cache now
- *                holds the committed state (`readback` set, displayed as fact); if the re-read also fails
- *                the caller must offer Retry instead of re-sending blindly.
+ * `committed`   — the response arrived and the bounded re-read (watch + first alert page) confirms the state.
+ * `refused`     — Core answered 403/404: a definitive refusal, nothing changed.
+ * `unconfirmed` — either the response was lost (`acknowledged: false`) or it arrived but the state could not
+ *                 be re-read (`acknowledged: true`). `readback` is set only when the re-read succeeded, and
+ *                 only then is the cache authoritative. Otherwise the caller keeps its recovery lock and
+ *                 offers Retry, which re-reads and never re-sends.
  *
- * Only one bounded re-read per action; no journal, no exactly-once claim.
+ * Never throws: an unexpected failure becomes an unconfirmed outcome so no receipt is silently lost. One
+ * bounded re-read per action; no journal, no exactly-once claim.
  */
 export async function runWatchAction(
   api: ApiClient,
@@ -179,16 +181,24 @@ export async function runWatchAction(
   prospectId: string,
   action: WatchAction,
 ): Promise<Outcome> {
+  let acknowledged = false;
   try {
     await perform(api, prospectId, action);
+    acknowledged = true;
   } catch (error) {
     const status = refusalOf(error);
     if (status) return { kind: "refused", status };
-    // Unknown transport/server/parse outcome: re-read before saying anything about the change.
-    return { kind: "unconfirmed", readback: await readback(api, cache, prospectId) };
   }
-  const readbackValue = await readback(api, cache, prospectId);
-  return { kind: "committed", readback: readbackValue ?? (await readWatch(api, prospectId)) };
+  // Re-read once — for an unknown write this is the only way to learn the state, and for an acknowledged
+  // write it is what makes the displayed alert receipts real rather than assumed.
+  let readbackValue: WatchResponse | null;
+  try {
+    readbackValue = await readback(api, cache, prospectId);
+  } catch {
+    readbackValue = null;
+  }
+  if (acknowledged && readbackValue) return { kind: "committed", readback: readbackValue };
+  return { kind: "unconfirmed", acknowledged, readback: readbackValue };
 }
 
 /** Re-read watch and the first alert page into the cache; null when either read fails. */
@@ -224,6 +234,7 @@ export function useWatchActions(prospectId: string, onOutcome: (outcome: Outcome
   const cache = useQueryClient();
   const mutation = useMutation({
     mutationFn: (action: WatchAction) => runWatchAction(api, cache, prospectId, action),
+    onError: () => onOutcome({ kind: "unconfirmed", acknowledged: false, readback: null }),
     onSuccess: async (outcome) => {
       onOutcome(outcome);
       // A refused action changes nothing; every other outcome has already been re-read.
@@ -231,10 +242,19 @@ export function useWatchActions(prospectId: string, onOutcome: (outcome: Outcome
         await cache.invalidateQueries({ queryKey: alertsKey(prospectId) });
     },
   });
+  /** Recovery re-read. Returns null when it failed, so the caller keeps its lock and the outcome text. */
   const retryReadback = async () => {
-    const value = await readback(api, cache, prospectId);
-    onOutcome({ kind: "unconfirmed", readback: value });
-    return value !== null;
+    try {
+      return await readback(api, cache, prospectId);
+    } catch {
+      return null;
+    }
   };
-  return { run: mutation.mutate, reset: mutation.reset, isPending: mutation.isPending, retryReadback };
+  return {
+    run: mutation.mutate,
+    reset: mutation.reset,
+    isPending: mutation.isPending,
+    error: mutation.error,
+    retryReadback,
+  };
 }

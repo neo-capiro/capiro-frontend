@@ -16,14 +16,22 @@ export function ProspectWatch({ prospectId }: { prospectId: string }) {
   const watch = useProspectWatch(prospectId);
   const alerts = useProspectAlerts(prospectId);
   const [outcome, setOutcome] = useState<Outcome>();
+  const [recovering, setRecovering] = useState(false);
   const actions = useWatchActions(prospectId, setOutcome);
 
   // A different prospect is a different inbox: previous pages and outcome text must not carry over.
   useEffect(() => {
     setOutcome(undefined);
+    setRecovering(false);
   }, [prospectId]);
 
-  const pages = alerts.data?.pages ?? [];
+  // Keep the rows the user is reviewing: a failed re-read must not blank the list that the recovery
+  // lock is protecting. The set is still Core's own pages, never synthesised.
+  const [lastPages, setLastPages] = useState<AlertsPage[]>([]);
+  useEffect(() => {
+    if (alerts.data?.pages) setLastPages(alerts.data.pages);
+  }, [alerts.data]);
+  const pages = alerts.data?.pages ?? lastPages;
   const items = pages.flatMap((page) => page.items);
   const unread = pages[0]?.unreadCount ?? 0;
 
@@ -40,11 +48,19 @@ export function ProspectWatch({ prospectId }: { prospectId: string }) {
       hasNext={!!alerts.hasNextPage}
       loadingNext={alerts.isFetchingNextPage}
       outcome={outcome}
+      recovering={recovering}
       busy={actions.isPending}
       onRetry={() => void watch.refetch()}
       onRetryReadback={() => {
-        setOutcome(undefined);
-        void actions.retryReadback();
+        // Deliberately keep the outcome and the lock: the unresolved state ends only when a required
+        // read-back actually succeeds. A failed recovery leaves the same state on screen with Retry again.
+        setRecovering(true);
+        void actions
+          .retryReadback()
+          .then((value) => {
+            if (value) setOutcome(undefined);
+          })
+          .finally(() => setRecovering(false));
       }}
       onLoadMore={() => void alerts.fetchNextPage()}
       onStart={() => {
@@ -79,8 +95,12 @@ const outcomeText = (outcome: Outcome | undefined) => {
       : "Watch is unavailable for this prospect. The feature may be off for this workspace, or the prospect may not be available to you.";
   if (outcome.kind === "unconfirmed")
     return outcome.readback
-      ? "The last change was not acknowledged. The current state was re-read and is shown above."
-      : "The last change was not acknowledged and the current state could not be re-read.";
+      ? outcome.acknowledged
+        ? "The change was accepted, but its result could not be read back. The current state was re-read and is shown above."
+        : "The last change was not acknowledged. The current state was re-read and is shown above."
+      : outcome.acknowledged
+        ? "The change was accepted, but the current watch and alert state could not be re-read."
+        : "The last change was not acknowledged and the current state could not be re-read.";
   return undefined;
 };
 
@@ -96,6 +116,7 @@ export function WatchView({
   hasNext,
   loadingNext,
   outcome,
+  recovering,
   busy,
   onRetry,
   onRetryReadback,
@@ -116,6 +137,7 @@ export function WatchView({
   hasNext: boolean;
   loadingNext: boolean;
   outcome: Outcome | undefined;
+  recovering: boolean;
   busy: boolean;
   onRetry: () => void;
   onRetryReadback: () => void;
@@ -146,7 +168,7 @@ export function WatchView({
         <p>Loading watch…</p>
       </section>
     );
-  if (failed || !record)
+  if (!record)
     return (
       <section aria-label="Prospect watch">
         <h2>Watch</h2>
@@ -158,13 +180,18 @@ export function WatchView({
     );
 
   const current = record.watch;
+  // Unresolved = the write's effect is not established. It stays true through the recovery request, so no
+  // control can change state while a read-back is in flight.
   const unresolved = outcome?.kind === "unconfirmed" && !outcome.readback;
   const message = outcomeText(outcome);
-  const locked = busy || unresolved;
+  const locked = busy || recovering || unresolved;
 
   return (
     <section aria-label="Prospect watch">
       <h2>Watch</h2>
+      {failed && (
+        <p role="alert">The last successful watch read is shown; the newest read failed.</p>
+      )}
       {!current ? (
         <>
           <p>
@@ -220,13 +247,13 @@ export function WatchView({
       )}
 
       {message && (
-        <p role={unresolved ? "alert" : "status"}>
+        <p aria-label="Watch change outcome" role={unresolved ? "alert" : "status"}>
           {message}
           {unresolved && (
             <>
               {" "}
-              <button type="button" onClick={onRetryReadback}>
-                Retry
+              <button type="button" disabled={recovering} onClick={onRetryReadback}>
+                {recovering ? "Checking current state…" : "Retry"}
               </button>
             </>
           )}
@@ -238,27 +265,27 @@ export function WatchView({
           <h3>Alerts</h3>
           {alertsPending && <p>Loading alerts…</p>}
           {alertsFailed && <p role="alert">Alerts are unavailable right now.</p>}
-          {!alertsPending && !alertsFailed && (
+          {!alertsPending && (
             <>
               <p>
                 {unread} unread · {items.length} shown
               </p>
               {items.length === 0 ? (
-                <p>No alerts yet. The next completed check will record changes here.</p>
+                alertsFailed ? null : <p>No alerts yet. The next completed check will record changes here.</p>
               ) : (
                 <ul aria-label="Prospect alerts">
                   {items.map((alert) => (
                     <AlertRow
                       key={alert.id}
                       alert={alert}
-                      busy={busy}
+                      busy={locked}
                       onRead={() => onRead(alert.id)}
                       onDismiss={() => onDismiss(alert.id)}
                     />
                   ))}
                 </ul>
               )}
-              {hasNext && (
+              {hasNext && !alertsFailed && (
                 <button type="button" disabled={loadingNext} onClick={onLoadMore}>
                   {loadingNext ? "Loading older alerts…" : "Load older alerts"}
                 </button>
