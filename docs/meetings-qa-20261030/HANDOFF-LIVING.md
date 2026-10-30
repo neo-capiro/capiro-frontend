@@ -285,7 +285,7 @@ change; **ACCEPTED** = a recorded decision, not work; **OPEN** = still to do, wi
 | H1 | CLOSED | The drawer treated any background refetch (`!isFetching`) as "details unavailable". The 5 s prep-job poll caused exactly that, so a completed prep looked lost. `current` now depends on success + no error only, so a refetch keeps the last good answer on screen. | `MeetingDetail.tsx` |
 | H2 | CLOSED (server) | `GET /engagement/meeting-preps/:prepId` now exists with the same tenant scoping, ownership wall and saved-artifact access as the update path, and returns the update path's projection. The client keeps reading prep bodies from the authorised meeting detail, so no client change was needed. | `engagement-prep-read.spec.ts` |
 | H3 | CLOSED | `QueryState` renders `error` before `pending`, so a failed read can no longer sit on "Loading…" with no message and no retry. | `QueryState.tsx` |
-| M1 | OPEN | Stable proxied logo URL: needs a server route that streams the object through Core plus a client-side swap. No AWS-side change was made. | — |
+| M1 | OPEN | Stable proxied logo URL. Checked: the existing `/api/backend/{service}/{path}` proxy cannot carry it — `proxy.ts` forces `Content-Type: application/json` and `Accept: application/json` on the upstream call and on the response, so an image cannot ride that route without changing the proxy for every caller. The fix is either a dedicated authenticated Next image route or a rewrite rule plus a Core streaming `GET clients/:id/logo`, and it needs a deployed build to verify. No AWS-side change was made. | `shared/portfolio/api/proxy.ts`, `clients.service.ts:1955-1975` |
 | M2 / D7 | VERIFIED | Already correct on `main`: the filter converts with the browser zone (`instantDay(item.occurredAt, zone)`), the ranges are computed in that zone and the dialog names it ("Dates use {zone}. Both selected days are included."). Nothing to change. | `ActivityTimeline.tsx:33`, `activity-filters.ts`, `ActivityDateFilter.tsx:46` |
 | M3 | ACCEPTED | D6: leave lifecycle status alone. | decision |
 | M4 | ACCEPTED | D6: leave lifecycle status alone. | decision |
@@ -297,7 +297,44 @@ change; **ACCEPTED** = a recorded decision, not work; **OPEN** = still to do, wi
 | D5 | OPEN | Artifact bodies out of list responses is a shared-contract change (Core projection + every collection consumer). Deliberately not bundled into this pass. | — |
 | WP6 (D3) | OPEN — gated | Krisp removal is mechanical, but its own guard rail blocks it: Meri notetaker coverage must be proven against the sweep's read-only discovery for both fixture tenants first, and that is live-tenant work. Removing the path before that check would silently drop capture. | §3 WP6 guard rail |
 
+**Pull requests:** client `neo-capiro/capiro-frontend#360`, server `neo-capiro/capiro-backend#311` (both open, not merged).
+
 Nothing above changes a decision. D4 residual risk, D6 and the "do not do" list are untouched.
+
+### WP0 — evidence gathered 2026-10-30 (read-only; nothing changed in AWS)
+
+This was measured, not inferred, because everything else in this workstream depends on it. Caller: `aws sts
+get-caller-identity` → account 967807252336, user `jump-cli`.
+
+**Web — task definition `capiro-dev-web:149`, one PRIMARY deployment, `COMPLETED` at 2026-10-29T23:54Z**
+
+- image `capiro/dev/web@sha256:4fb4adaa…`, env `GIT_SHA` = `RELEASE_SHA` = `7c606a85…`
+- that commit **does not exist** in `neo-capiro/capiro-frontend` (422), `neo-capiro/capiov2` (404) or
+  `neo-capiro/dev` (422)
+- ECR `capiro/dev/web`: tag `7c606a85…` was pushed 2026-10-08T17:56Z; `:latest` still points at
+  `sha256:5c85d1c7…` from 2026-09-27, i.e. **not** the running digest
+- the only CodeBuild project that pushes to `capiro/dev/web` is **`capiro-build-web-dev`**: its source is
+  `https://github.com/neo-capiro/capiov2.git` — not the repo of record — it builds `apps/web/Dockerfile`
+  (node:20.16.0 + nginx), and it tags **only `:latest`**
+- no workflow in `capiro-frontend` references `capiro/dev/web` at all
+
+**Core — task definition `capiro-dev-api:653`**
+
+- image `capiro/dev/api@sha256:52ecfbb8…`
+- env carries **two different SHAs**: `GIT_SHA` = `1e99f092…`, `RELEASE_SHA` = `51f0cbae…`
+- neither resolves in `neo-capiro/capiro-backend` (422) or `capiov2` (404)
+
+**What this means**
+
+1. Neither running service can be traced to a commit in the repos of record. D8 is not a documentation fix: the
+   build path from those repos to those tasks does not exist.
+2. `capiro-build-web-dev` is exactly the project WP0 describes — it names `capiro/dev/web` while building a
+   different repository — and its output is not even what runs.
+3. Anything measured on app.capiro.ai has been measured against artifacts of unknown provenance. PR #360 and
+   PR #311 cannot be confirmed as deployed until a real build path exists, which is why WP0 is still first.
+4. WP0's remaining work is a release-infrastructure change and needs your explicit call: build
+   `capiro-frontend@<sha>` → `capiro/dev/web:<sha>`, point a task definition at that immutable tag, retire
+   `capiro-build-web-dev`; then the same for Core, which additionally has to stop emitting two SHAs per task.
 
 ### Verification for this pass
 
