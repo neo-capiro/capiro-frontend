@@ -157,10 +157,10 @@ export function useConversationSession(
       skillSelection,
     );
   };
-  const openLifecycleTarget = (target: LifecycleTarget) => {
+  const openLifecycleTarget = (target: LifecycleTarget, browser = false) => {
     if (
-      !ready ||
-      accessLost ||
+      (!browser && (!ready || accessLost)) ||
+      history.denied ||
       local.storageError ||
       connection.storageError ||
       target.tenantId !== account.tenantId ||
@@ -176,11 +176,12 @@ export function useConversationSession(
       target.conversationId,
       storage,
     ).record({ ...target, selectedClientId: clientId });
-    if (target.conversationId === ready.port.context.conversationId)
-      reopen({ target });
+    if (target.conversationId === selectedId) reopen({ target });
     else router.push(conversationHref(clientId, target.conversationId));
   };
   return {
+    account,
+    clientId,
     connection,
     selectedId,
     accessLost,
@@ -204,6 +205,8 @@ export function useConversationSession(
     ...view,
     startNext,
     openLifecycleTarget,
+    openBrowserTarget: (target: LifecycleTarget) =>
+      openLifecycleTarget(target, true),
     refresh: history.refresh,
     openLatest: () => {
       if (view.latestTarget) connection.reopen({ target: view.latestTarget });
