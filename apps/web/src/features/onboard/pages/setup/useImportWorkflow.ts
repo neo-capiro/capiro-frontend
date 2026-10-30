@@ -2,6 +2,20 @@ import { useNavigate } from "../../navigation";
 import { useLocalOnboardRecord } from "../../lib/use-local-record";
 import { useOnboardAttempt } from "../../lib/use-onboard-attempt";
 import { useClientImport } from "../../lib/use-client-import";
+import {
+  classifyImportJobFailure,
+  flattenImportJobPages,
+  importJobPageNextCursor,
+  refreshImportJobReads,
+  useImportAccountScope,
+  useImportJobByRequest,
+  useImportJobDetail,
+  useImportJobHistory,
+} from "../../lib/use-import-job-reads";
+import {
+  deriveImportJobPanelState,
+  newestImportJob,
+} from "../../lib/import-job-status";
 import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { errorMessage } from "../funnel/shared";
@@ -24,9 +38,82 @@ export function useImportWorkflow({
   const api = useCapiroApi();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const importer = useClientImport(api);
+  const account = useImportAccountScope();
+  const importer = useClientImport(api, account.scope);
   const manual = useOnboardAttempt(api, "manual-client-create");
   const firm = useOnboardAttempt(api, "select-registrant");
+
+  // Durable job reads: one accumulated history query (all pages, deduped,
+  // explicit exhaustion) plus a request-identity readback and the selected job.
+  // Reading position is keyed to the account so an account switch cannot show
+  // or re-open the previous account's job.
+  const [selection, setSelection] = React.useState<{
+    scopeKey: string;
+    jobId: string | null;
+  }>({ scopeKey: account.scopeKey, jobId: null });
+  if (selection.scopeKey !== account.scopeKey)
+    setSelection({ scopeKey: account.scopeKey, jobId: null });
+  const selectedJobId =
+    selection.scopeKey === account.scopeKey ? selection.jobId : null;
+  const history = useImportJobHistory(api, account.scopeKey, account.ready);
+  const retainedLookup = useImportJobByRequest(
+    api,
+    account.scopeKey,
+    importer.retained?.requestId ?? null,
+  );
+  const jobs = React.useMemo(
+    () => flattenImportJobPages(history.data?.pages),
+    [history.data],
+  );
+  const newest = retainedLookup.data?.jobs[0] ?? newestImportJob(jobs);
+  const activeJobId =
+    selectedJobId ?? importer.lastJob?.id ?? newest?.id ?? null;
+  const jobDetail = useImportJobDetail(api, account.scopeKey, activeJobId);
+  const failureSource =
+    history.error ?? retainedLookup.error ?? jobDetail.error ?? null;
+  const failure = failureSource
+    ? classifyImportJobFailure(failureSource)
+    : null;
+  // A refused/errored read withholds every prior job shape from this view.
+  const visible = failure === null;
+  const job = visible
+    ? (jobDetail.data ??
+      retainedLookup.data?.jobs[0] ??
+      jobs.find((entry) => entry.id === activeJobId) ??
+      null)
+    : null;
+  const panelState = deriveImportJobPanelState({
+    ready: account.ready,
+    loading:
+      history.isLoading ||
+      retainedLookup.isLoading ||
+      (!!activeJobId && jobDetail.isLoading && !jobDetail.data),
+    failure,
+    totalJobs: history.data?.pages[0]?.population.total ?? 0,
+  });
+  const population = visible ? history.data?.pages[0]?.population : undefined;
+  // Exhaustion is the FINAL page's cursor, never page 1's stale cursor.
+  const nextCursor = history.hasNextPage
+    ? importJobPageNextCursor(history.data?.pages)
+    : null;
+
+  const refreshJobs = async () => {
+    // Never refetch a disabled read: refetch() bypasses `enabled` and would
+    // send a null requestId or jobId through the gateway.
+    await refreshImportJobReads({
+      history,
+      request: retainedLookup,
+      detail: jobDetail,
+      requestId: importer.retained?.requestId,
+      jobId: activeJobId,
+    });
+  };
+  const loadOlderJobs = () => {
+    if (history.hasNextPage && !history.isFetchingNextPage)
+      void history.fetchNextPage();
+  };
+  const selectJob = (jobId: string) =>
+    setSelection({ scopeKey: account.scopeKey, jobId });
 
   const registrant = useQuery({
     queryKey: REGISTRANT_KEY,
@@ -163,7 +250,9 @@ export function useImportWorkflow({
     setError(null);
     const guard = importer.guard();
     try {
-      const result = await guard.wait(() => importer.run(sel));
+      // importer.run installs the submitted account and owns its own guard;
+      // wrapping it in guard.wait() would refuse BEFORE the first dispatch.
+      const result = await importer.run(sel);
       await guard.wait(() => onImported(result.created));
       await guard.wait(() =>
         queryClient.invalidateQueries({ queryKey: CANDIDATES_KEY }),
@@ -255,6 +344,15 @@ export function useImportWorkflow({
     capHit,
     toggle,
     doImport,
+    account,
+    jobs,
+    job,
+    population,
+    nextCursor,
+    panelState,
+    refreshJobs,
+    loadOlderJobs,
+    selectJob,
   };
 }
 export type ImportWorkflow = ReturnType<typeof useImportWorkflow>;

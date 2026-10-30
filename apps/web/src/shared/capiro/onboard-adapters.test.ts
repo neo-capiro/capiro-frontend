@@ -14,6 +14,41 @@ import {
 const id = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
 const token = "a".repeat(64);
 const base = "https://api.example.test/prefix/";
+const requestId = "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb";
+const jobId = "cccccccc-cccc-4ccc-8ccc-cccccccccccc";
+
+/** Durable job summary Core derives from the exact normalized selection. */
+function jobFor(
+  payload: {
+    created: number;
+    items: Array<{ id: string; name: string; ldaClientId: number }>;
+    skipped: Array<{ ldaClientId: number; reason: string }>;
+  },
+  ids: number[],
+) {
+  const total = new Set(ids.filter((value) => value > 0)).size;
+  const created = payload.items.length;
+  const rejected = payload.skipped.length;
+  const processed = created + rejected;
+  const counts = {
+    total,
+    processed,
+    successful: created,
+    rejected,
+    outstanding: total - processed,
+    created,
+    alreadyPresent: 0,
+  };
+  const status =
+    counts.outstanding === 0
+      ? rejected === total
+        ? "failed"
+        : rejected > 0
+          ? "partially_completed"
+          : "completed"
+      : "running";
+  return { id: jobId, requestId, status, stale: false, counts };
+}
 function consumer(payload: unknown, status = 200) {
   const fetcher = vi
     .fn<typeof fetch>()
@@ -76,22 +111,33 @@ describe("Onboard native request and receipt correlation", () => {
       body: { name: " Submitted " },
     });
   });
-  it("accepts native per-chunk normalization and explicit skips, including unmatched nonpositive ids", async () => {
+  it("accepts Core's normalized per-chunk receipt bound to the retained request identity", async () => {
     const payload = {
       created: 1,
       items: [{ id, name: "Created", ldaClientId: 11 }],
-      skipped: [
-        { ldaClientId: 22, reason: "Already imported" },
-        { ldaClientId: 0, reason: "Not a candidate" },
-        { ldaClientId: -1, reason: "Not a candidate" },
-      ],
+      skipped: [{ ldaClientId: 22, reason: "Already imported" }],
     };
-    const { core, fetcher } = consumer(payload);
-    expect(await core.importClientChunk([11, 11, 22, 0, -1])).toEqual(payload);
+    const full = { ...payload, job: jobFor(payload, [11, 11, 22]) };
+    const { core, fetcher } = consumer(full);
+    expect(await core.importClientChunk([11, 11, 22], requestId)).toEqual(full);
     expect(JSON.parse(String(fetcher.mock.calls[0]![1]!.body))).toEqual({
-      body: { ldaClientIds: [11, 11, 22, 0, -1] },
+      body: { ldaClientIds: [11, 11, 22], requestId },
     });
     expect(fetcher).toHaveBeenCalledOnce();
+  });
+  it("does not require non-positive submitted ids in Core's normalized response", async () => {
+    const payload = {
+      created: 1,
+      items: [{ id, name: "Created", ldaClientId: 11 }],
+      skipped: [],
+    };
+    const { core } = consumer({
+      ...payload,
+      job: jobFor(payload, [11, 0, -1]),
+    });
+    expect((await core.importClientChunk([11, 0, -1], requestId)).created).toBe(
+      1,
+    );
   });
   it.each([
     {
@@ -117,39 +163,66 @@ describe("Onboard native request and receipt correlation", () => {
   ])(
     "refuses incomplete/mismatched import receipts without replay",
     async (payload) => {
-      const { core, fetcher } = consumer(payload);
-      await expect(core.importClientChunk([11, 22])).rejects.toMatchObject({
+      const { core, fetcher } = consumer({
+        ...payload,
+        job: jobFor(payload, [11, 22]),
+      });
+      await expect(
+        core.importClientChunk([11, 22], requestId),
+      ).rejects.toMatchObject({
         status: 502,
       });
       expect(fetcher).toHaveBeenCalledOnce();
     },
   );
-  it("captures the requested chunk before asynchronous receiving", async () => {
-    const ids = [11];
-    const { core } = consumer({
+  it("refuses a receipt whose durable job names a different request identity", async () => {
+    const payload = {
       created: 0,
       items: [],
       skipped: [{ ldaClientId: 11, reason: "Skipped" }],
+    };
+    const job = jobFor(payload, [11]);
+    const { core, fetcher } = consumer({
+      ...payload,
+      job: { ...job, requestId: "dddddddd-dddd-4ddd-8ddd-dddddddddddd" },
     });
-    const pending = core.importClientChunk(ids);
+    await expect(core.importClientChunk([11], requestId)).rejects.toMatchObject(
+      { status: 502 },
+    );
+    expect(fetcher).toHaveBeenCalledOnce();
+  });
+  it("captures the requested chunk before asynchronous receiving", async () => {
+    const ids = [11];
+    const payload = {
+      created: 0,
+      items: [],
+      skipped: [{ ldaClientId: 11, reason: "Skipped" }],
+    };
+    const { core } = consumer({ ...payload, job: jobFor(payload, ids) });
+    const pending = core.importClientChunk(ids, requestId);
     ids[0] = 22;
     expect((await pending).skipped[0]!.ldaClientId).toBe(11);
   });
   it("leaves a second chunk's already-imported outcome valid", async () => {
-    const { core } = consumer({
+    const payload = {
       created: 0,
       items: [],
       skipped: [{ ldaClientId: 11, reason: "Already imported" }],
-    });
-    expect((await core.importClientChunk([11])).created).toBe(0);
+    };
+    const { core } = consumer({ ...payload, job: jobFor(payload, [11]) });
+    expect((await core.importClientChunk([11], requestId)).created).toBe(0);
   });
   it("refuses a created import item without its native identifier", async () => {
+    const payload = {
+      created: 1,
+      items: [{ id: "", name: "Unknown", ldaClientId: 11 }],
+      skipped: [],
+    };
     await expect(
       consumer({
-        created: 1,
-        items: [{ id: "", name: "Unknown", ldaClientId: 11 }],
-        skipped: [],
-      }).core.importClientChunk([11]),
+        ...payload,
+        job: jobFor(payload, [11]),
+      }).core.importClientChunk([11], requestId),
     ).rejects.toMatchObject({ status: 502 });
   });
   it.each([0, 101])(
@@ -157,7 +230,10 @@ describe("Onboard native request and receipt correlation", () => {
     async (size) => {
       const { core, fetcher } = consumer({});
       await expect(
-        core.importClientChunk(Array.from({ length: size }, (_, i) => i)),
+        core.importClientChunk(
+          Array.from({ length: size }, (_, i) => i),
+          requestId,
+        ),
       ).rejects.toMatchObject({ status: 400 });
       expect(fetcher).not.toHaveBeenCalled();
     },

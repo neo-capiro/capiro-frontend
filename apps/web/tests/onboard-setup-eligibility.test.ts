@@ -89,7 +89,10 @@ describe("current setup eligibility owns each open overlay", () => {
       importMode: "managed",
     });
     held.resolve(receipt);
-    await expect(pending).rejects.toMatchObject({ name: "AbortError" });
+    await expect(pending).rejects.toMatchObject({
+      name: "InterruptedImport",
+      cause: { name: "AbortError" },
+    });
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(refresh).not.toHaveBeenCalled();
     expect(f.attempt.read()?.phase).toBe("unknown");
