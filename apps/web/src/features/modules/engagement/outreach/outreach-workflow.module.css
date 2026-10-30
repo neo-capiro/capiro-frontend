@@ -1,0 +1,150 @@
+.workflow,
+.step,
+.stack {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 24px;
+}
+.workflow > header h1 {
+  font-size: 30px;
+  line-height: 1.45;
+  letter-spacing: -0.3px;
+}
+.workflow > header p {
+  font-size: 14px;
+  margin-top: 4px;
+}
+.workflow button {
+  border-radius: 10px;
+}
+.workflow section > header h2 {
+  font-size: 18px;
+  line-height: 1.45;
+}
+.workflow label {
+  font-size: 12px;
+  line-height: 18px;
+}
+.workflow input,
+.workflow textarea {
+  font-size: 14px;
+  padding: 12px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.actions,
+.footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer {
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.stepCount {
+  margin-right: auto;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.hint {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.error {
+  color: var(--destructive, #7a2e2e);
+  font-size: 13px;
+  line-height: 1.5;
+}
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .workflow > header {
+    flex-direction: column;
+  }
+  .workflow > header h1 {
+    font-size: 24px;
+  }
+  .footer {
+    gap: 12px;
+  }
+}
+.selected {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--muted, #f5f5f4);
+}
+.choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.choice > div {
+  min-width: 0;
+}
+.choice p {
+  margin: 4px 0 0;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.choice button,
+.fields > button {
+  flex-shrink: 0;
+  align-self: flex-start;
+  width: auto;
+}
+.previewText {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 180px;
+  overflow: auto;
+  font-size: 14px;
+}
+.envelope {
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+.envelope p {
+  margin: 4px 0;
+  overflow-wrap: anywhere;
+}
+.message {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.subject {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  .choice {
+    align-items: flex-start;
+  }
+}

@@ -25,8 +25,11 @@ vi.mock("../src/shared/capiro/queries", () => ({
   },
 }));
 vi.mock("../src/features/modules/engagement/OutreachView", () => ({
-  OutreachView: ({ clientId }: { clientId: string }) =>
-    createElement("section", { "data-outreach-client": clientId }),
+  // The client-scope select moved into OutreachView's `listHeader`, so the
+  // test double has to render that prop or the scope control disappears from
+  // the markup this suite asserts on.
+  OutreachView: ({ clientId, listHeader }: { clientId: string; listHeader?: unknown }) =>
+    createElement("section", { "data-outreach-client": clientId }, listHeader as never),
 }));
 
 const clientId = "30000000-0000-4000-8000-000000000001";

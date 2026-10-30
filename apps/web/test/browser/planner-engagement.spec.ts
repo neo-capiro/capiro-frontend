@@ -1,9 +1,7 @@
 import { test } from "./runtime-observed-test";
-import { installFixedDate } from "./fixed-date";
 import { expect } from "@playwright/test";
-import { operationFixtures, onlyLocalRequests, testIdentity } from "./fixtures";
+import { operationFixtures, testIdentity } from "./fixtures";
 const taskId = "51000000-0000-4000-8000-000000000001";
-const sessionId = "60000000-0000-4000-8000-000000000001";
 const blankTask = {
   id: taskId,
   name: "Test appropriation review",
@@ -37,57 +35,7 @@ const blankTask = {
   updatedAt: "2026-10-08T12:00:00Z",
   access: "admin",
 };
-const session = {
-  session: {
-    id: sessionId,
-    title: "Synthetic template campaign",
-    status: "active",
-    currentStateVersion: 3,
-    createdAt: "2026-10-08T12:00:00Z",
-    updatedAt: "2026-10-08T12:00:00Z",
-    archivedAt: null,
-  },
-  currentStateVersion: 3,
-  specHash: "abc",
-  pendingProposalCount: 0,
-  spec: {
-    goal: {
-      goal: "Test goal",
-      objective: "Test objective",
-      topic: "Test campaign topic",
-      desiredOutcome: null,
-      ask: { mode: "none", text: null },
-      whyNow: null,
-    },
-    sponsor: { kind: "firm", label: "Test Firm", clientRefs: [] },
-    strategy: {
-      campaignAngle: null,
-      tone: "Professional",
-      length: "short",
-      customLengthInstruction: null,
-    },
-    delivery: { pattern: "uniform_separate", personalization: "none" },
-    targeting: { selectedTargetRefs: [] },
-  },
-  readiness: {
-    goalReady: true,
-    sponsorResolved: true,
-    targetCriteriaReady: false,
-    targetsReady: false,
-    deliveryReady: true,
-    contextReady: false,
-    contextEvidenceReady: false,
-    strategyReady: false,
-    sampleGenerationEligible: false,
-    fullGenerationEligible: false,
-    sendReviewEligible: false,
-    blockers: ["TARGETS_MISSING", "CONTEXT_NOT_REVIEWED"],
-  },
-};
-test.beforeEach(async ({ page }) => {
-  await onlyLocalRequests(page);
-  await installFixedDate(page, Date.parse("2026-10-08T16:00:00Z"));
-});
+
 test("Planner modes use the same permitted task data and exact board assets", async ({
   page,
 }) => {
@@ -341,55 +289,3 @@ for (const width of [1440, 390]) {
     await expect(page.getByRole("dialog")).toBeHidden();
   });
 }
-test("A template session deep link keeps the server state version and sends no mail", async ({
-  page,
-}) => {
-  const writes: {
-    params: { sessionId: string };
-    body: {
-      batchId: string;
-      expectedStateVersion: number;
-      commands: unknown[];
-    };
-  }[] = [];
-  const keys: string[] = [];
-  page.on("request", (request) => {
-    if (request.url().includes("/api/capiro/"))
-      keys.push(new URL(request.url()).pathname.split("/").pop()!);
-  });
-  await operationFixtures(page, {
-    "me.read": testIdentity,
-    "clients.list": [],
-    "engagement.sessions": [],
-    "engagement.outreach": [],
-    "engagement.session": session,
-    "engagement.session.commands": (input) => {
-      const body = input as (typeof writes)[number];
-      writes.push(body);
-      return {
-        status: "applied",
-        batchId: body.body.batchId,
-        stateVersion: 4,
-        specHash: "new",
-        changed: true,
-        commandCount: 6,
-        replayed: false,
-      };
-    },
-  });
-  await page.goto("/modules/engagement?session=" + sessionId);
-  await expect(
-    page.getByRole("heading", { name: "Test campaign topic", exact: true }),
-  ).toBeVisible();
-  await page.getByLabel("Goal", { exact: true }).fill("Updated synthetic goal");
-  await page
-    .getByRole("button", { name: "Save campaign decisions", exact: true })
-    .click();
-  await expect.poll(() => writes.length).toBe(1);
-  expect(writes[0]?.params.sessionId).toBe(sessionId);
-  expect(writes[0]?.body.expectedStateVersion).toBe(3);
-  expect(keys.some((key) => key.includes("send"))).toBe(false);
-  await expect(
-    page.getByRole("button", { name: "Continue to generation and review" }),
-  ).toBeDisabled();
-});

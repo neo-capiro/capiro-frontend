@@ -75,53 +75,7 @@ const detail = z.object({
   }),
   pendingProposalCount: z.number().int().nonnegative(),
 });
-const bounded = (max: number) => z.string().max(max).nullable();
-const command = (type: string, payload: z.ZodType) =>
-  z
-    .object({ type: z.literal(type), schemaVersion: z.literal(1), payload })
-    .strict();
-const commands = z.union([
-  command("SET_GOAL", z.object({ value: bounded(2000) }).strict()),
-  command("SET_OBJECTIVE", z.object({ value: bounded(4000) }).strict()),
-  command("SET_TOPIC", z.object({ value: bounded(500) }).strict()),
-  command("SET_DESIRED_OUTCOME", z.object({ value: bounded(2000) }).strict()),
-  command("SET_WHY_NOW", z.object({ value: bounded(2000) }).strict()),
-  command("SET_CAMPAIGN_ANGLE", z.object({ value: bounded(4000) }).strict()),
-  command("SET_TONE", z.object({ value: bounded(120) }).strict()),
-  command(
-    "SET_SPONSOR_SCOPE",
-    z
-      .object({
-        kind: z.enum([
-          "undecided",
-          "firm",
-          "client",
-          "multi_client",
-          "coalition",
-          "internal_team",
-          "none",
-        ]),
-        label: bounded(240),
-        clientRefs: z.array(z.object({ clientId: id }).strict()).max(50),
-      })
-      .strict(),
-  ),
-]);
 export const engagementSessionOperations = {
-  "engagement.session.create": defineOperation({
-    service: "core",
-    method: "POST",
-    path: "/engagement/outreach-v3/sessions",
-    request: z
-      .object({
-        body: z
-          .object({ title: z.string().trim().min(1).max(240).optional() })
-          .strict(),
-      })
-      .strict(),
-    response: detail,
-    source,
-  }),
   "engagement.sessions": defineOperation({
     service: "core",
     method: "GET",
@@ -156,33 +110,6 @@ export const engagementSessionOperations = {
     path: "/engagement/outreach-v3/sessions/:sessionId",
     request: z.object({ params }).strict(),
     response: detail,
-    source,
-  }),
-  "engagement.session.commands": defineOperation({
-    service: "core",
-    method: "POST",
-    path: "/engagement/outreach-v3/sessions/:sessionId/commands",
-    request: z
-      .object({
-        params,
-        body: z
-          .object({
-            batchId: id,
-            expectedStateVersion: z.number().int().positive(),
-            commands: z.array(commands).min(1).max(20),
-          })
-          .strict(),
-      })
-      .strict(),
-    response: z.object({
-      status: z.enum(["applied", "no_change"]),
-      batchId: id,
-      stateVersion: z.number().int().positive(),
-      specHash: z.string(),
-      changed: z.boolean(),
-      commandCount: z.number().int(),
-      replayed: z.boolean(),
-    }),
     source,
   }),
 };

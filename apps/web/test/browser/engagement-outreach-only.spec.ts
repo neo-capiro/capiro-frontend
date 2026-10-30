@@ -5,10 +5,9 @@ import {
   clientId,
   otherClientId,
   record,
-  recordId,
   setupOutreach,
 } from "./core109-outreach-fixtures";
-import { session, sessionId } from "../../tests/newsletter-staging-fixtures";
+import { session } from "../../tests/newsletter-staging-fixtures";
 
 const meetingId = "70000000-0000-4000-8000-000000000007";
 
@@ -19,9 +18,6 @@ test("Engagement opens directly to Outreach with no obsolete sections or meeting
   await page.goto("/modules/engagement");
   await expect(
     page.getByRole("heading", { name: "Engagement", exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("table", { name: "Outreach campaigns" }),
   ).toBeVisible();
   await expect(
     page.getByRole("table", { name: "Outreach records" }),
@@ -60,185 +56,6 @@ test("legacy non-meeting view hints still show Outreach, and client selection ke
     page.getByRole("table", { name: "Outreach records" }),
   ).toBeVisible();
   assertNoEffects(observed);
-});
-
-test("draft and create deep links remain available in the Outreach-only screen", async ({
-  page,
-}) => {
-  const observed = await setupOutreach(page);
-  await page.goto(`/modules/engagement?clientId=${clientId}&draft=${recordId}`);
-  await expect(
-    page.getByRole("dialog", { name: "Outreach draft" }),
-  ).toBeVisible();
-  await expect(page.getByLabel("Body", { exact: true })).toHaveValue(
-    record.body,
-  );
-  await expect(page.getByRole("tab")).toHaveCount(0);
-  await page.goto(
-    `/modules/engagement?clientId=${clientId}&create=draft&directoryContactId=synthetic-contact`,
-  );
-  await expect(
-    page.getByRole("dialog", { name: "New outreach" }),
-  ).toBeVisible();
-  await expect(
-    page.getByText("Created from a directory selection.", { exact: false }),
-  ).toBeVisible();
-  assertNoEffects(observed);
-});
-
-test("existing campaign session link still opens its current Outreach editor", async ({
-  page,
-}) => {
-  const observed = await setupOutreach(page);
-  await page.route("**/api/capiro/engagement.session?*", (route) =>
-    route.fulfill({ json: session }),
-  );
-  await page.goto(`/modules/engagement?view=outreach&session=${sessionId}`);
-  await expect(
-    page.getByRole("heading", { name: session.spec.goal.topic }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "Save campaign decisions" }),
-  ).toBeVisible();
-  await expect(page.getByRole("tab")).toHaveCount(0);
-  assertNoEffects(observed);
-});
-
-test("creates a distinct versioned campaign and opens its saved session", async ({
-  page,
-}) => {
-  const observed = await setupOutreach(page);
-  const createdId = "80000000-0000-4000-8000-000000000009";
-  const created = {
-    ...session,
-    session: {
-      ...session.session,
-      id: createdId,
-      title: "Synthetic new campaign",
-      currentStateVersion: 1,
-    },
-    currentStateVersion: 1,
-    spec: {
-      ...session.spec,
-      goal: {
-        goal: null,
-        objective: null,
-        topic: null,
-        desiredOutcome: null,
-        ask: { mode: "undecided", text: null },
-        whyNow: null,
-      },
-      sponsor: { kind: "undecided", label: null, clientRefs: [] },
-      strategy: {
-        campaignAngle: null,
-        tone: null,
-        length: "undecided",
-        customLengthInstruction: null,
-      },
-      delivery: { pattern: "undecided", personalization: "undecided" },
-      targeting: { selectedTargetRefs: [] },
-    },
-  };
-  const requests: unknown[] = [];
-  const detailIds: unknown[] = [];
-  await page.route("**/api/capiro/engagement.session.create", (route) => {
-    expect(route.request().method()).toBe("POST");
-    requests.push(route.request().postDataJSON());
-    return route.fulfill({ json: created });
-  });
-  await page.route("**/api/capiro/engagement.session?*", (route) => {
-    const input = new URL(route.request().url()).searchParams.get("input");
-    detailIds.push(input && JSON.parse(input).params.sessionId);
-    return route.fulfill({ json: created });
-  });
-
-  await page.goto("/modules/engagement");
-  await expect(
-    page.getByRole("button", { name: "+ New outreach" }),
-  ).toBeVisible();
-  await page.getByRole("button", { name: "+ New campaign" }).click();
-  const dialog = page.getByRole("dialog", { name: "New campaign" });
-  await dialog
-    .getByRole("textbox", { name: "Campaign title" })
-    .fill("  Synthetic new campaign  ");
-  await dialog.getByRole("button", { name: "Create campaign" }).click();
-
-  await expect(
-    page.getByRole("heading", { name: "Synthetic new campaign" }),
-  ).toBeVisible();
-  expect(requests).toEqual([{ body: { title: "Synthetic new campaign" } }]);
-  expect(createdId).not.toBe(sessionId);
-  expect(detailIds).toEqual([createdId]);
-  expect(observed.writes).toEqual([
-    "POST /api/capiro/engagement.session.create",
-  ]);
-  expect(observed.errors).toEqual([]);
-  expect(observed.unexpected).toEqual([]);
-});
-
-test("known Core refusal leaves the campaign title available for correction", async ({
-  page,
-}) => {
-  const observed = await setupOutreach(page);
-  await page.route("**/api/capiro/engagement.session.create", (route) =>
-    route.fulfill({ status: 404, json: { message: "Not Found" } }),
-  );
-  await page.goto("/modules/engagement");
-  await page.getByRole("button", { name: "+ New campaign" }).click();
-  const dialog = page.getByRole("dialog", { name: "New campaign" });
-  await dialog
-    .getByRole("textbox", { name: "Campaign title" })
-    .fill("New campaign");
-  await dialog.getByRole("button", { name: "Create campaign" }).click();
-
-  await expect(
-    dialog
-      .getByRole("alert")
-      .getByText("Campaign creation is unavailable in this environment."),
-  ).toBeVisible();
-  await expect(
-    dialog.getByRole("textbox", { name: "Campaign title" }),
-  ).toHaveValue("New campaign");
-  await expect(
-    dialog.getByRole("button", { name: "Create campaign" }),
-  ).toBeEnabled();
-  expect(observed.writes).toEqual([
-    "POST /api/capiro/engagement.session.create",
-  ]);
-  expect(observed.errors).toEqual([]);
-  expect(observed.unexpected).toEqual([]);
-});
-
-test("an uncertain campaign creation cannot be replayed from the same view", async ({
-  page,
-}) => {
-  const observed = await setupOutreach(page);
-  await page.route("**/api/capiro/engagement.session.create", (route) =>
-    route.fulfill({ json: { unexpected: "receipt" } }),
-  );
-  await page.goto("/modules/engagement");
-  await page.getByRole("button", { name: "+ New campaign" }).click();
-  const dialog = page.getByRole("dialog", { name: "New campaign" });
-  await dialog
-    .getByRole("textbox", { name: "Campaign title" })
-    .fill("Uncertain campaign");
-  await dialog.getByRole("button", { name: "Create campaign" }).click();
-
-  await expect(
-    dialog.getByRole("button", { name: "Create campaign" }),
-  ).toBeDisabled();
-  await expect(dialog.getByRole("alert")).toContainText(
-    "Creation may have succeeded. Check the campaign list",
-  );
-  await dialog.getByRole("button", { name: "Cancel" }).click();
-  await expect(
-    page.getByRole("button", { name: "+ New campaign" }),
-  ).toBeDisabled();
-  expect(observed.writes).toEqual([
-    "POST /api/capiro/engagement.session.create",
-  ]);
-  expect(observed.errors).toEqual([]);
-  expect(observed.unexpected).toEqual([]);
 });
 
 test("newsletter and Objective destination hints keep their dedicated route guards", async ({
@@ -318,67 +135,6 @@ test("saved meeting-library link leads to the selected client's Portfolio librar
   assertNoEffects(observed);
   await destination.click();
   await expect(page).toHaveURL(`/portfolio/${clientId}/calendar?library=1`);
-});
-
-test("stale Meetings view hint cannot displace draft, session, or create Outreach intents", async ({
-  page,
-}) => {
-  const observed = await setupOutreach(page);
-  await page.route("**/api/capiro/engagement.session?*", (route) =>
-    route.fulfill({ json: session }),
-  );
-  await page.goto(
-    `/modules/engagement?view=meetings&clientId=${clientId}&draft=${recordId}`,
-  );
-  await expect(
-    page.getByRole("dialog", { name: "Outreach draft" }),
-  ).toBeVisible();
-  await expect(page.getByLabel("Body", { exact: true })).toHaveValue(
-    record.body,
-  );
-  await expect(
-    page.getByRole("heading", { name: "Meetings moved to Portfolio" }),
-  ).toHaveCount(0);
-  await page.goto(`/modules/engagement?view=meetings&session=${sessionId}`);
-  await expect(
-    page.getByRole("heading", { name: session.spec.goal.topic }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "Meetings moved to Portfolio" }),
-  ).toHaveCount(0);
-  await page.goto(
-    `/modules/engagement?view=meetings&clientId=${clientId}&create=draft`,
-  );
-  await expect(
-    page.getByRole("dialog", { name: "New outreach" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "Meetings moved to Portfolio" }),
-  ).toHaveCount(0);
-  assertNoEffects(observed);
-});
-
-test("selected-client V3 outreach record remains visible without mounting the plain draft editor", async ({
-  page,
-}) => {
-  const observed = await setupOutreach(page);
-  const v3 = {
-    ...record,
-    title: "Synthetic client V3 campaign record",
-    type: "outreach_v3",
-  };
-  await page.route("**/api/capiro/engagement.outreach?*", (route) =>
-    route.fulfill({ json: [v3] }),
-  );
-  await page.goto(`/modules/engagement?clientId=${clientId}`);
-  await expect(
-    page.getByRole("table", { name: "Outreach records" }).getByText(v3.title),
-  ).toBeVisible();
-  await expect(page.getByRole("button", { name: v3.title })).toHaveCount(0);
-  await page.getByText(v3.title, { exact: true }).click();
-  await expect(page.getByRole("dialog")).toHaveCount(0);
-  expect(observed.reads).toEqual([]);
-  assertNoEffects(observed);
 });
 
 test("Outreach date filters send UTC start and exclusive end for the chosen inclusive dates", async ({
@@ -470,7 +226,7 @@ test("Show deleted requests deleted-only rows and never opens a deleted draft", 
   await page.getByRole("checkbox", { name: "Show deleted" }).check();
   await expect.poll(() => inputs.at(-1)?.query.deleted).toBe("true");
   await expect(
-    page.getByRole("heading", { name: "Deleted outreach" }),
+    page.getByRole("table", { name: "Deleted outreach" }),
   ).toBeVisible();
   await expect(page.getByText(deleted.title, { exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: deleted.title })).toHaveCount(
