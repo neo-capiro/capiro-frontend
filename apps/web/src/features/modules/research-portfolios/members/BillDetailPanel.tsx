@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useCapiroMutation, useCapiroQuery } from "../../../../shared/capiro/queries";
+import { CapiroApiError } from "../../../../shared/capiro/http";
 import type { ResearchDetail } from "../../../../shared/capiro/operations/research-schemas";
 import type { ResearchBillMatch } from "../../../../shared/capiro/operations/research-bills";
 import {
@@ -8,6 +9,21 @@ import {
   DataTable,
   StatusPanel,
 } from "../../../../shared/module-ui";
+
+/**
+ * A 4xx refusal (other than a request timeout) is a definite answer: the server
+ * rejected the request, so nothing was written. Anything else — 5xx, network
+ * failure, abort, lost acknowledgement — is an unknown outcome and must never be
+ * described as "not added".
+ */
+function knownRejection(error: Error): boolean {
+  return (
+    error instanceof CapiroApiError &&
+    error.status >= 400 &&
+    error.status < 500 &&
+    error.status !== 408
+  );
+}
 
 /**
  * One bill, as the source reports it (requirement 14c). Fields the source family does
@@ -158,17 +174,39 @@ export function BillDetailPanel({
           )}
           <p role="status">{detail.data.coverage.note}</p>
           {editable && (
-            <ActionButton
-              primary
-              disabled={add.pending || alreadyMember || added === bill.targetId}
-              onClick={addBill}
-            >
-              {alreadyMember
-                ? "Already in this portfolio"
-                : added === bill.targetId
-                  ? "Added"
-                  : "Add to portfolio"}
-            </ActionButton>
+            <>
+              {/* A refused or failed add must never look like a success: the
+                  button only reads "Added" after a resolved success, and the
+                  failure is rendered here from the same mutation state the rest
+                  of the module uses. */}
+              <StatusPanel error={add.error} />
+              {add.error && (
+                <p>
+                  {/* A definite refusal proves nothing was written. A transport
+                      failure or lost acknowledgement does not: the mutation may
+                      have committed, so say the outcome is unknown and let the
+                      reload resolve it. */}
+                  {knownRejection(add.error)
+                    ? "The bill was not added."
+                    : "The outcome is uncertain — the request may not have reached Capiro, or the reply may have been lost. Check the portfolio before retrying."}{" "}
+                  <ActionButton disabled={add.pending} onClick={onReload}>
+                    Reload portfolio
+                  </ActionButton>{" "}
+                  and retry with the current revision.
+                </p>
+              )}
+              <ActionButton
+                primary
+                disabled={add.pending || alreadyMember || added === bill.targetId}
+                onClick={addBill}
+              >
+                {alreadyMember
+                  ? "Already in this portfolio"
+                  : added === bill.targetId
+                    ? "Added"
+                    : "Add to portfolio"}
+              </ActionButton>
+            </>
           )}
         </>
       )}
