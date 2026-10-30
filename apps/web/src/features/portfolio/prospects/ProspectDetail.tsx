@@ -18,6 +18,7 @@ import { ProspectEditor } from "./ProspectEditor";
 import { NextStepEditor } from "./NextStepEditor";
 import { ProspectHistory } from "./ProspectHistory";
 import { ProspectNotes } from "./ProspectNotes";
+import { ProspectWatch } from "./watch/ProspectWatch";
 import { ProspectStageProgress } from "./ProspectStageProgress";
 import { StageEditor } from "./StageEditor";
 import { useProspectVisibility } from "./mutations";
@@ -211,6 +212,7 @@ export function ProspectDetail({
                 </section>
                 <ProspectContacts prospectId={id} />
                 <ProspectNotes id={id} />
+                <ProspectWatch prospectId={id} />
                 <button className="button" onClick={() => setArchive(true)}>
                   {record.status === "dismissed"
                     ? "Restore prospect"
