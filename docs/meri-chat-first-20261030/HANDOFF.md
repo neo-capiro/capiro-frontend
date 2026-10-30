@@ -62,8 +62,8 @@ the transcript area with the author directly under the quotation.
 **Harness** — one narrow Vite `define` for
 `process.env.NEXT_PUBLIC_MERI_SELECTED_TAB_EXTENSION_ID` (synthetic empty value; without it ready
 attachments threw `process is not defined` and the composer never settled), and the same signed-in
-identity answered at `/api/capiro/me.read`. Product code, auth, browser internals and pins are
-untouched.
+identity answered at `/api/capiro/me.read`. Production environment handling, authorization checks,
+browser internals and package pins are untouched by these harness corrections.
 
 ## Checks actually run (native exits, this machine)
 
@@ -74,7 +74,7 @@ Tooling: **Node v24.22.1**, **npm 11.19.1** (readback in this session). The repo
 | --- | --- | --- | --- |
 | Typecheck | `npx tsc --noEmit` (apps/web) | 0 | clean |
 | Format, exact touched files | `npx prettier --check <19 changed paths>` | 0 | "All matched files use Prettier code style!" |
-| Lint, exact touched files | `npx eslint <same 19 paths>` | 0 | 0 errors |
+| Lint, exact touched files | `npx eslint <same 19 paths>` | 0 | 0 errors, 4 warnings |
 | Lint, broad touched trees | `npx eslint src/features/meri src/shared/shell …` | 1 | 6 inherited errors in `QuestionCard.tsx`, `useRunQuestion.ts`, `useQuickActionCatalog.ts`, `TimezonePreview.tsx` (untouched, present on the base) |
 | Route unit | `npx vitest run tests/settings-client-route.test.ts` | 0 | 3 passed |
 | General browser | `CAPIRO_BROWSER_TEST_DEV=1 … test/browser/meri-general.spec.ts` | 0 | 8 passed |
@@ -87,7 +87,7 @@ one genuine failure — a wrong test timestamp in the spring case
 correcting the offset to `-04:00`, the two required cases
 (`the default General scope lands on the same quiet hero with its own picker`,
 `daily quote clock (America/New_York) … spring's 23-hour midnight`) were re-run alone: native exit
-0, 2 passed. The other ten chat-first cases passed in `cf13` and were not re-run just to produce a
+0, 2 passed. The other eleven chat-first cases passed in `cf13` and were not re-run just to produce a
 new aggregate.
 
 Reused, unchanged evidence: history 7/7, approvals 34/34, unit suites 68/68.
@@ -108,12 +108,18 @@ cases so the fake clock cannot expire the fixture receipt.
 - `tests/production/verify-standalone.mjs` needs a production build, so it was **not** executed
   locally; its `/` status entry and Portfolio href expectation are updated for the next ordinary
   release run.
-- `test/browser/meri-current-header-assets.spec.ts` (1 failure) and
-  `test/browser/settings-client-continuity.spec.ts` (3 failures) remain **unqualified**: the
+- `test/browser/meri-current-header-assets.spec.ts` (2 failures) and
+  `test/browser/settings-client-continuity.spec.ts` (3 failures) failed before the changed navigation
+  assertions. The
   Settings failures surface `Unconfigured test operation: settings.hq.impersonation.active` from
   that spec's fixture map, and the header spec opens the legacy `/meri/fixture/home` screen. A base
   comparison was attempted but **did not run** (the stash step exited 1 before any log existed), so
-  these five are not claimed as base-reproduced and no fixture/auth/platform repair was made.
+  that author attempt does not establish a baseline. A separate Codex review subsequently ran two
+  representatives on untouched `c4c713e8`: the Home header failure reproduced because the API mock
+  returned 501 for Vite source-module paths containing `/api/`, and verified-client Settings
+  reproduced because the impersonation operation was unconfigured (500). Native exit 1, two failed.
+  The other three are still individually **unqualified**; none of these five is claimed as passing.
+  No fixture/auth/platform repair was made for these failures.
 - `test/browser/meri-sidebar-toggle.spec.ts`: the ordinary-route case passes; the legacy Figma Home
   fixture case fails and was reproduced on the untouched base earlier.
 - Broad unit baseline: 41 current vs 49 base failures recorded earlier; untouched owners were not
