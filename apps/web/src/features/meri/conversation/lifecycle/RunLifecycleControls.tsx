@@ -24,6 +24,8 @@ export function RunLifecycleControls({
   const relevant =
     !!lifecycle.error ||
     !!lifecycle.command ||
+    // A finished run keeps its verified checkpoint inspection/fork entry.
+    !!checkpointId ||
     !!checkpoint ||
     turn?.runState === "running" ||
     turn?.runState === "paused";

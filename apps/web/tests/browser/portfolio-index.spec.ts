@@ -138,7 +138,7 @@ test("wordmark and workspace modes stay in the canonical shared application", as
     page
       .getByRole("navigation", { name: "Workspace" })
       .getByRole("link", { name: "Meri", exact: true }),
-  ).toHaveAttribute("href", "/meri");
+  ).toHaveAttribute("href", "/meri?scope=general");
   await expect(
     page
       .getByRole("navigation", { name: "Workspace" })

@@ -150,7 +150,7 @@ export function MeriComposer({
             }}
             aria-label={live ? "Meri message" : "Message draft"}
             aria-describedby={helpId}
-            placeholder="Ask Meri to research, analyze, or create something…"
+            placeholder="Ask Meri anything…"
             {...(live ? { maxLength: 8000 } : {})}
           />
         </PromptInputBody>

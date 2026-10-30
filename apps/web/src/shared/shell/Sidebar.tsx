@@ -124,9 +124,10 @@ export function Sidebar({
         fixture={fixture}
         section={section}
         pendingApprovals={pendingApprovals}
-        // On the chat-first canvas recent chats are the chat navigation and Runs is reachable from
-        // the Tools panel; other workspaces keep their existing Library destinations.
-        exclude={chat ? ["conversations", "runs"] : undefined}
+        // On the chat-first canvas recent chats are the chat navigation, Runs is reachable from the
+        // Tools panel, and workspace-wide Approvals has no ordinary route (SDK decisions stay
+        // inline in the conversation). Other pages keep their existing destinations.
+        exclude={chat ? ["conversations", "runs", "approvals"] : undefined}
       />
       <SidebarPreferences fixture={fixture} section={section} />
     </aside>

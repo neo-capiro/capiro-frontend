@@ -239,18 +239,18 @@ for (const malformed of [false, true])
     await expect(
       page.getByText("Saved conversation history loaded.", { exact: true }),
     ).toBeVisible();
+    // A healthy conversation shows no permanent manual reload; the revocation is discovered by
+    // the next real read of this exact conversation, which reopening the route performs.
     await expect(
       page.getByRole("button", { name: "Reload saved history", exact: true }),
-    ).toBeEnabled();
+    ).toHaveCount(0);
     await page.route("**/api/conversations/transcript", (route) =>
       malformed
         ? route.fulfill({ status: 403, body: "not JSON" })
         : reply(route, { error: { code: "MEMBERSHIP_REVOKED" } }, 403),
     );
 
-    await page
-      .getByRole("button", { name: "Reload saved history", exact: true })
-      .click();
+    await page.reload();
 
     await expect(
       page.getByText("Initial synthetic answer", { exact: true }),

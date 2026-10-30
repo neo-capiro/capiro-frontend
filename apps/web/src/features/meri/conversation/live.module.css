@@ -117,9 +117,12 @@
 .log > div {
   overflow-y: auto;
   overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
 }
 .turns {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 28px;
   padding: 4px 2px 40px;

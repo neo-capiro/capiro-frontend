@@ -16,14 +16,21 @@ export function routeClientId(
   return undefined;
 }
 export const productModes = [
-  { id: "meri", label: "Meri", href: "/meri" },
-  { id: "portfolio", label: "Portfolio", href: "/" },
+  // The unscoped Meri entry is the General workspace; a client scope always wins when present.
+  { id: "meri", label: "Meri", href: "/meri?scope=general" },
+  { id: "portfolio", label: "Portfolio", href: "/portfolio" },
   { id: "modules", label: "Modules", href: "/modules" },
 ] as const;
 export type ProductMode = (typeof productModes)[number]["id"];
 export function productHref(mode: ProductMode, clientId?: string) {
   if (mode === "portfolio")
-    return clientId ? `/portfolio/${encodeURIComponent(clientId)}` : "/";
+    return clientId
+      ? `/portfolio/${encodeURIComponent(clientId)}`
+      : "/portfolio";
+  if (mode === "meri")
+    return clientId
+      ? `/meri?clientId=${encodeURIComponent(clientId)}`
+      : "/meri?scope=general";
   return `/${mode}${clientId ? `?clientId=${encodeURIComponent(clientId)}` : ""}`;
 }
 

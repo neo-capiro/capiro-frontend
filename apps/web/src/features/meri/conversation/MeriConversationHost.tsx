@@ -52,6 +52,7 @@ export function MeriConversationHost({
           The governed conversation connection is not enabled. Conversations and
           their files cannot be loaded.
         </p>
+        {scopeControl}
       </section>
     );
   if (selector.state === "invalid" || invalidScope)
@@ -61,6 +62,7 @@ export function MeriConversationHost({
         <p>
           The conversation link is invalid. No other conversation was opened.
         </p>
+        {scopeControl}
       </section>
     );
   if (account && general) {
@@ -84,6 +86,7 @@ export function MeriConversationHost({
         <section role="status">
           <h2>General chat is unavailable</h2>
           <p>The current conversation could not be confirmed.</p>
+          {scopeControl}
         </section>
       );
     return (
@@ -110,10 +113,12 @@ export function MeriConversationHost({
                 ? "Verifying the selected client before opening a conversation."
                 : "The selected client is unavailable. Choose General or another permitted client above."}
         </p>
+        {scopeControl}
       </section>
     );
   // Core rechecks current client authority on bootstrap and session issuance.
-  if (selected.client.status === "archived") return <ArchivedClientNotice />;
+  if (selected.client.status === "archived")
+    return <ArchivedClientNotice scopeControl={scopeControl} />;
   if (firstChatBootstrapEnabled && selector.state === "current")
     return (
       <CoreResolvedConversation
@@ -148,7 +153,11 @@ export function MeriConversationHost({
   );
 }
 
-function ArchivedClientNotice() {
+function ArchivedClientNotice({
+  scopeControl,
+}: {
+  scopeControl?: React.ReactNode;
+}) {
   return (
     <section role="alert">
       <h2>Conversations unavailable for this client</h2>
@@ -156,6 +165,7 @@ function ArchivedClientNotice() {
         This client is archived. Restore it or select an active client in
         Portfolio to start a conversation.
       </p>
+      {scopeControl}
     </section>
   );
 }
@@ -231,6 +241,7 @@ function CoreResolvedConversation({
       <section role="status">
         <h2>Preparing conversation</h2>
         <p>Confirming the current conversation.</p>
+        {scopeControl}
       </section>
     );
   if (resolution.state === "error")
@@ -246,6 +257,7 @@ function CoreResolvedConversation({
             New Chat
           </Button>
         )}
+        {scopeControl}
       </section>
     );
   return (
