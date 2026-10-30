@@ -19,6 +19,13 @@ RUN NODE_OPTIONS=--max-old-space-size=4096 CIRCLE_NODE_TOTAL=2 npm run build
 RUN node scripts/patch-next-proxy-error-log.cjs --verify-standalone apps/web/.next/standalone
 
 FROM base AS runtime
+ARG GIT_SHA
+ARG RELEASE_SHA
+ARG IMAGE_REPO="neo-capiro/capiro-frontend"
+LABEL org.opencontainers.image.source="https://github.com/neo-capiro/capiro-frontend" \
+      org.opencontainers.image.revision="$GIT_SHA" \
+      org.opencontainers.image.version="$RELEASE_SHA" \
+      com.capiro.image.repo="$IMAGE_REPO"
 RUN rm -rf /usr/local/lib/node_modules/npm /opt/yarn-v1.22.22 \
     && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/yarn /usr/local/bin/yarnpkg
 ENV NODE_ENV=production PORT=5188 HOSTNAME=0.0.0.0

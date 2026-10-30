@@ -6,31 +6,88 @@ phases:
     commands:
       - |
         set -euo pipefail
+        stage=initialize
+        trap 'printf "BLOCK: FE362 build stage %s failed\n" "$stage" >&2' ERR
         mkdir -p evidence/frontend-image
-        [[ "${EXPECTED_SHA:-}" =~ ^[0-9a-f]{40}$ ]]
-        test "$(cat source-commit.txt)" = "$EXPECTED_SHA"
-        test -n "${EXPECTED_S3_VERSION:-}"
-        test "$CODEBUILD_SOURCE_VERSION" = "$EXPECTED_S3_VERSION"
+        stage=source-identity
+        SOURCE_SHA="${EXPECTED_SHA:?}"
+        ARCHIVE_SHA256="${EXPECTED_ARCHIVE_SHA256:?}"
+        SOURCE_BUCKET="capiro-portfolio-preview-source-967807252336-us-east-1"
+        SOURCE_KEY="inputs/portfolio-source.zip"
+        SOURCE_VERSION="${EXPECTED_S3_VERSION:?}"
+        [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
+        [[ "$ARCHIVE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+        test "$SOURCE_BUCKET" = capiro-portfolio-preview-source-967807252336-us-east-1
+        test "$(cat source-commit.txt)" = "$SOURCE_SHA"
+        test "$CODEBUILD_SOURCE_VERSION" = "$SOURCE_VERSION"
+        test -z "${CODEBUILD_RESOLVED_SOURCE_VERSION:-}"
+        stage=architecture
         test "$(uname -m)" = aarch64
         case "$(docker info --format '{{.Architecture}}')" in aarch64|arm64) ;; *) exit 1 ;; esac
-        printf 'commit=%s\nsourceVersion=%s\n' "$EXPECTED_SHA" "$CODEBUILD_SOURCE_VERSION" | tee evidence/frontend-image/source.txt
+        stage=repository-mutability
+        REPOSITORY=capiro/portfolio-preview
+        test "$(aws ecr describe-repositories --repository-names "$REPOSITORY" --query 'repositories[0].imageTagMutability' --output text)" = IMMUTABLE
+        stage=existing-image-tag
+        existing="$(aws ecr describe-images --repository-name "$REPOSITORY" --filter tagStatus=TAGGED --query "imageDetails[?contains(imageTags, '$SOURCE_SHA')].imageDigest" --output text)"
+        test -z "$existing"
+        stage=pinned-source
+        command -v unzip >/dev/null
+        mkdir -p "$CODEBUILD_SRC_DIR/verified"
+        observed_version="$(aws s3api get-object --bucket "$SOURCE_BUCKET" --key "$SOURCE_KEY" --version-id "$SOURCE_VERSION" "$CODEBUILD_SRC_DIR/pinned-source.zip" --query VersionId --output text)"
+        test "$observed_version" = "$SOURCE_VERSION"
+        printf '%s  %s\n' "$ARCHIVE_SHA256" "$CODEBUILD_SRC_DIR/pinned-source.zip" | sha256sum -c -
+        unzip -q "$CODEBUILD_SRC_DIR/pinned-source.zip" -d "$CODEBUILD_SRC_DIR/verified"
+        cd "$CODEBUILD_SRC_DIR/verified"
+        test "$(cat source-commit.txt)" = "$SOURCE_SHA"
+        printf 'commit=%s\nsourceVersion=%s\narchiveSha256=%s\n' "$SOURCE_SHA" "$SOURCE_VERSION" "$ARCHIVE_SHA256" | tee "$CODEBUILD_SRC_DIR/evidence/frontend-image/source.txt"
   build:
     commands:
       - |
         set -euo pipefail
+        stage=build
+        trap 'printf "BLOCK: FE362 build stage %s failed\n" "$stage" >&2' ERR
+        cd "$CODEBUILD_SRC_DIR/verified"
+        SOURCE_SHA="${EXPECTED_SHA:?}"
+        IMAGE_URI="$REPOSITORY_URI:$SOURCE_SHA"
         (
           set -euo pipefail
-          docker build --pull --platform linux/arm64 -f apps/web/Dockerfile -t "$REPOSITORY_URI:$EXPECTED_SHA" .
-          test "$(docker image inspect --format '{{.Os}}/{{.Architecture}}' "$REPOSITORY_URI:$EXPECTED_SHA")" = linux/arm64
-          bash apps/web/deployment/portfolio/smoke.sh "$REPOSITORY_URI:$EXPECTED_SHA"
-        ) 2>&1 | tee evidence/frontend-image/build-smoke.log
-        printf '0\n' > evidence/frontend-image/build-smoke-exit.txt
+          docker build --pull --platform linux/arm64 \
+            --build-arg GIT_SHA="$SOURCE_SHA" \
+            --build-arg RELEASE_SHA="$SOURCE_SHA" \
+            --build-arg IMAGE_REPO="neo-capiro/capiro-frontend" \
+            -f apps/web/Dockerfile -t "$IMAGE_URI" .
+          stage=image-identity
+          test "$(docker image inspect --format '{{.Os}}/{{.Architecture}}' "$IMAGE_URI")" = linux/arm64
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "$IMAGE_URI")" = "$SOURCE_SHA"
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.version" }}' "$IMAGE_URI")" = "$SOURCE_SHA"
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.source" }}' "$IMAGE_URI")" = "https://github.com/neo-capiro/capiro-frontend"
+          test "$(docker image inspect --format '{{ index .Config.Labels "com.capiro.image.repo" }}' "$IMAGE_URI")" = "neo-capiro/capiro-frontend"
+          bash apps/web/deployment/portfolio/smoke.sh "$IMAGE_URI"
+        ) 2>&1 | tee "$CODEBUILD_SRC_DIR/evidence/frontend-image/build-smoke.log"
+        printf '0\n' > "$CODEBUILD_SRC_DIR/evidence/frontend-image/build-smoke-exit.txt"
   post_build:
     commands:
       - |
         set -euo pipefail
+        stage=post-build
+        trap 'printf "BLOCK: FE362 post_build stage %s failed\n" "$stage" >&2' ERR
         test "${CODEBUILD_BUILD_SUCCEEDING:-0}" = 1
-        test "$(cat evidence/frontend-image/build-smoke-exit.txt)" = 0
+        test "$(cat "$CODEBUILD_SRC_DIR/evidence/frontend-image/build-smoke-exit.txt")" = 0
+        SOURCE_SHA="${EXPECTED_SHA:?}"
+        REPOSITORY=capiro/portfolio-preview
+        IMAGE_URI="$REPOSITORY_URI:$SOURCE_SHA"
+        stage=ecr-login
         aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "${REPOSITORY_URI%%/*}"
-        docker push "$REPOSITORY_URI:$EXPECTED_SHA"
-        aws ecr describe-images --repository-name capiro/portfolio-preview --image-ids "imageTag=$EXPECTED_SHA" --query 'imageDetails[0].{imageDigest:imageDigest,imageTags:imageTags,imageScanStatus:imageScanStatus}' --output json | tee evidence/frontend-image/image.json
+        stage=docker-push
+        docker push "$IMAGE_URI"
+        stage=registry-digest
+        DIGEST="$(aws ecr describe-images --repository-name "$REPOSITORY" --image-ids "imageTag=$SOURCE_SHA" --query 'imageDetails[0].imageDigest' --output text)"
+        [[ "$DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]]
+        stage=local-image-identity
+        IMAGE_ID="$(docker image inspect "$IMAGE_URI" --format '{{.Id}}')"
+        [[ "$IMAGE_ID" =~ ^sha256:[0-9a-f]{64}$ ]]
+        test "$(docker image inspect "$IMAGE_ID" --format '{{.Id}}')" = "$IMAGE_ID"
+        stage=repo-digest-join
+        docker image inspect "$IMAGE_ID" --format '{{range .RepoDigests}}{{println .}}{{end}}' | grep -Fx "$REPOSITORY_URI@$DIGEST"
+        printf 'commit=%s\nsourceVersion=%s\ndigest=%s\nimageId=%s\n' "$SOURCE_SHA" "$EXPECTED_S3_VERSION" "$DIGEST" "$IMAGE_ID" | tee "$CODEBUILD_SRC_DIR/evidence/frontend-image/image.json"
+        docker image inspect --format '{"Id":{{json .Id}},"RepoDigests":{{json .RepoDigests}}}' "$IMAGE_URI" | tee "$CODEBUILD_SRC_DIR/evidence/frontend-image/local-image-identity.json"
