@@ -23,7 +23,14 @@ import {
   importJobCountsLine,
   importJobTaskStatus,
 } from "../src/features/onboard/lib/import-job-status";
-import { classifyImportJobFailure } from "../src/features/onboard/lib/use-import-job-reads";
+import {
+  classifyImportJobFailure,
+  flattenImportJobPages,
+  importJobHistoryOptions,
+  importJobPageNextCursor,
+  refreshImportJobReads,
+} from "../src/features/onboard/lib/use-import-job-reads";
+import { ClientImportTaskView } from "../src/features/onboard/pages/setup/ClientImportTaskView";
 import { createOnboardAttempt } from "../src/features/onboard/lib/attempt-journal";
 import { ImportJobStatusPanel } from "../src/features/onboard/ui/ImportJobStatusPanel";
 import { CapiroApiError } from "../src/shared/capiro/http";
@@ -587,5 +594,162 @@ describe("onboard account-switch response fencing", () => {
     expect(attempt.read()?.phase).toBe("unknown");
     expect(attempt.read()?.phase).not.toBe("confirmed");
     cleanup();
+  });
+});
+
+describe("paged job reads and mounted task visibility", () => {
+  const page = (jobs: ImportJob[], nextCursor: string | null) => ({
+    jobs,
+    population: {
+      total: 4,
+      queued: 0,
+      running: 1,
+      completed: 3,
+      failed: 0,
+      partiallyCompleted: 0,
+    },
+    nextCursor,
+  });
+
+  it("accumulates every page, dedupes, and ends on the final explicit null", async () => {
+    const jobs = [1, 2, 3].map((n) =>
+      syntheticJob({ id: `job-${n}`, requestId: `req-${n}` }),
+    );
+    const cursors: Array<string | undefined> = [];
+    const api = {
+      getImportJobs: vi.fn(async ({ cursor }: { cursor?: string }) => {
+        cursors.push(cursor);
+        if (!cursor) return page([jobs[0]!], "cursor-2");
+        if (cursor === "cursor-2") return page([jobs[1]!], "cursor-3");
+        return page([jobs[2]!], null);
+      }),
+    } as never;
+    const options = importJobHistoryOptions(api, "scope-paged");
+    let cursor: string | undefined = options.initialPageParam;
+    const pages = [];
+    for (;;) {
+      const data = await options.queryFn({ pageParam: cursor });
+      pages.push(data);
+      const next = options.getNextPageParam(data);
+      if (next === undefined) break;
+      cursor = next;
+    }
+    expect(cursors).toEqual([undefined, "cursor-2", "cursor-3"]);
+    expect(flattenImportJobPages(pages).map((job) => job.id)).toEqual([
+      "job-1",
+      "job-2",
+      "job-3",
+    ]);
+    expect(pages.at(-1)!.nextCursor).toBeNull();
+    expect(importJobPageNextCursor(pages)).toBeNull();
+    // A middle-page job is selectable from the accumulated list.
+    expect(flattenImportJobPages(pages)[1]!.id).toBe("job-2");
+  });
+
+  it("refetches only admitted identities (no null request/detail reads)", async () => {
+    const history = { refetch: vi.fn(async () => undefined) };
+    const request = { refetch: vi.fn(async () => undefined) };
+    const detail = { refetch: vi.fn(async () => undefined) };
+    await refreshImportJobReads({ history, request, detail });
+    expect(history.refetch).toHaveBeenCalledTimes(1);
+    expect(request.refetch).not.toHaveBeenCalled();
+    expect(detail.refetch).not.toHaveBeenCalled();
+
+    await refreshImportJobReads({
+      history,
+      request,
+      detail,
+      requestId: "req-1",
+      jobId: "job-1",
+    });
+    expect(history.refetch).toHaveBeenCalledTimes(2);
+    expect(request.refetch).toHaveBeenCalledTimes(1);
+    expect(detail.refetch).toHaveBeenCalledTimes(1);
+  });
+
+  it("withholds every prior job field after the read becomes unavailable", () => {
+    const setup = {
+      tasks: { import: "active" },
+      cap: 10,
+      imported: 2,
+      importMode: "self",
+      plan: "trial",
+    } as never;
+    const ready = renderToStaticMarkup(
+      createElement(ClientImportTaskView, {
+        state: setup,
+        latest: {
+          panelState: "ready",
+          job: syntheticJob(),
+          failure: null,
+          refresh: () => undefined,
+        },
+        onOpen: () => undefined,
+        onOpenHistory: () => undefined,
+      }),
+    );
+    expect(ready).toContain(requestId);
+    expect(ready).toContain("target LDA registrant 7");
+    expect(ready).toContain("1 of 2");
+    expect(ready).toContain("1 created");
+
+    const refused = renderToStaticMarkup(
+      createElement(ClientImportTaskView, {
+        state: setup,
+        latest: {
+          panelState: "unavailable",
+          job: null,
+          failure: "unavailable",
+          refresh: () => undefined,
+        },
+        onOpen: () => undefined,
+        onOpenHistory: () => undefined,
+      }),
+    );
+    expect(refused).not.toContain("Synthetic Alpha");
+    expect(refused).not.toContain(requestId);
+    expect(refused).not.toContain("1 of 2");
+    expect(refused).toContain("may already be recorded or still unconfirmed");
+    expect(refused).not.toContain("Nothing was submitted");
+  });
+
+  it("gives managed users read-only history with request identity and target", () => {
+    const managed = {
+      tasks: { import: "active" },
+      cap: 10,
+      imported: 2,
+      importMode: "managed",
+      plan: "paid",
+    } as never;
+    const markup = renderToStaticMarkup(
+      createElement(ImportJobStatusPanel, {
+        state: "ready",
+        job: syntheticJob(),
+        jobs: [syntheticJob()],
+        nextCursor: null,
+        onLoadMore: () => undefined,
+        onRefresh: () => undefined,
+        onSelectJob: () => undefined,
+        managed: true,
+      }),
+    );
+    expect(markup).toContain(requestId);
+    expect(markup).toContain("target LDA registrant 7");
+    expect(markup).not.toMatch(/retry|cancel/i);
+    const task = renderToStaticMarkup(
+      createElement(ClientImportTaskView, {
+        state: managed,
+        latest: {
+          panelState: "ready",
+          job: syntheticJob(),
+          failure: null,
+          refresh: () => undefined,
+        },
+        onOpen: () => undefined,
+        onOpenHistory: () => undefined,
+      }),
+    );
+    expect(task).toContain("View import status");
+    expect(task).not.toMatch(/retry|cancel/i);
   });
 });

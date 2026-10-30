@@ -89,9 +89,9 @@ export function ImportJobStatusPanel({
       <section aria-label="Import job status" role="status" style={box}>
         <b style={heading}>Import status unavailable</b>
         <p style={body}>
-          This account or session cannot read the import status right now. If
-          your access changed, ask a Super Admin to restore it. Nothing was
-          submitted.
+          This account or session cannot read import status right now. An
+          earlier request may already be recorded or still unconfirmed; this
+          view cannot verify it. No import is submitted by reading status.
         </p>
       </section>
     );
@@ -174,6 +174,11 @@ export function ImportJobStatusPanel({
       </div>
       <p style={{ ...body, marginTop: 8 }} aria-label="Import item counts">
         {importJobCountsLine(job.counts)}
+      </p>
+      <p style={{ ...body, marginTop: 4 }} aria-label="Import request identity">
+        Request <code style={code}>{job.requestId}</code> · target LDA
+        registrant {job.ldaRegistrantId} · {job.requestedIds.length} selected id
+        {job.requestedIds.length === 1 ? "" : "s"}
       </p>
 
       {attention && (
@@ -312,6 +317,12 @@ const progressTrack = {
   border: "1px solid var(--border-1)",
   borderRadius: 99,
   overflow: "hidden",
+} as const;
+const code = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 11.5,
+  letterSpacing: 0,
+  overflowWrap: "anywhere",
 } as const;
 const jobButton = {
   display: "inline-flex",

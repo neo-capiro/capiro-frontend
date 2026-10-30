@@ -29,7 +29,10 @@ export function ImportOverlay(
     loadOlderJobs,
     selectJob,
     error: workflowError,
+    account,
   } = workflow;
+  // Local recovery evidence is withheld whenever the authoritative read refuses.
+  const recoveryVisible = account.ready && panelState !== "unavailable";
   if (
     !registrant.isSuccess ||
     registrant.error ||
@@ -37,7 +40,7 @@ export function ImportOverlay(
   )
     return (
       <Modal title="Import clients" onClose={onClose}>
-        <ImportOutcome evidence={importer.evidence} />
+        {recoveryVisible && <ImportOutcome evidence={importer.evidence} />}
         <ImportJobStatusPanel
           state={panelState}
           job={job}
@@ -68,6 +71,7 @@ export function ImportOverlay(
       plan={plan}
       billingAdmin={billingAdmin}
       onClose={onClose}
+      recoveryVisible={recoveryVisible}
     />
   );
 }

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ConfirmedInputRefusal } from "./attempt-journal";
 import { useOnboardAttempt } from "./use-onboard-attempt";
 import { useLocalOnboardRecord } from "./use-local-record";
 import {
@@ -9,6 +10,7 @@ import {
 } from "./import-client-selection";
 import {
   clearImportRequest,
+  ImportIdentityUnavailableError,
   readImportRequest,
   retainImportRequest,
   type ImportRequestScope,
@@ -92,20 +94,30 @@ export function useClientImport(
     });
   const retained =
     retainedState.scopeKey === scopeKey ? retainedState.request : null;
-  const [lastJob, setLastJob] = useState<ImportChunkJobSummary | null>(null);
+  const [lastJobState, setLastJobState] = useState<{
+    scopeKey: string;
+    job: ImportChunkJobSummary | null;
+  }>({ scopeKey, job: null });
+  if (lastJobState.scopeKey !== scopeKey)
+    setLastJobState({ scopeKey, job: null });
+  const lastJob = lastJobState.scopeKey === scopeKey ? lastJobState.job : null;
 
-  const run = (selected: number[]) =>
-    attempt.run(
+  const run = (selected: number[]) => {
+    const activeScope = liveScope.current;
+    if (!activeScope)
+      return Promise.reject(new Error("A current account is required."));
+    // The shared attempt owner asserts current identity BEFORE invoking the
+    // perform callback, so the submitted scope must be installed first. It is
+    // replaced by a later run on the current account and never by a switch.
+    submittedScope.current = activeScope;
+    return attempt.run(
       `Import ${selected.length} reviewed client IDs`,
       async (guard) => {
-        const activeScope = liveScope.current;
-        if (!activeScope) throw new Error("A current account is required.");
-        submittedScope.current = activeScope;
         const requested = [...selected];
         let receipt = empty();
         let offset = 0;
         const jobs: ImportChunkJobSummary[] = [];
-        setLastJob(null);
+        setLastJobState({ scopeKey, job: null });
         save(emptyEvidence(requested));
         try {
           const result = await importClientSelection(
@@ -123,7 +135,7 @@ export function useClientImport(
               };
               offset += ids.length;
               jobs.push(next.job);
-              setLastJob(next.job);
+              setLastJobState({ scopeKey, job: next.job });
               save({
                 requested,
                 receipt,
@@ -138,7 +150,7 @@ export function useClientImport(
               // Identity is issued and retained before dispatch so a lost answer
               // can only ever be reconciled, never resent.
               retainRequest: (request) => {
-                if (!guard.current()) return;
+                guard.assertCurrent();
                 retainImportRequest(activeScope, request);
                 setRetainedState({ scopeKey, request });
                 save({
@@ -173,6 +185,11 @@ export function useClientImport(
           });
           return result;
         } catch (error) {
+          if (error instanceof ImportIdentityUnavailableError) {
+            // Nothing left the browser. Report a recoverable, definite refusal
+            // (the attempt journal must not mark this as an unknown effect).
+            throw new ConfirmedInputRefusal(error.message);
+          }
           if (guard.current() && error instanceof InterruptedImport) {
             save({
               requested,
@@ -195,6 +212,7 @@ export function useClientImport(
         }
       },
     );
+  };
 
   const dismissRetained = useCallback(() => {
     if (!scope) return;

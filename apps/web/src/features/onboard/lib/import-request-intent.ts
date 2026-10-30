@@ -14,6 +14,16 @@ export const IMPORT_REQUEST_TTL_MS = 24 * 60 * 60 * 1000;
 
 export type ImportRequestScope = { orgId: string | null; userId: string };
 
+/** Raised BEFORE transport when the pre-dispatch identity cannot be retained. */
+export class ImportIdentityUnavailableError extends Error {
+  constructor() {
+    super(
+      "This browser could not retain the import request identity, so nothing was submitted. Enable session storage and try again.",
+    );
+    this.name = "ImportIdentityUnavailableError";
+  }
+}
+
 type StorageLike = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 type StorageReader = () => StorageLike;
 
@@ -59,8 +69,9 @@ export function retainImportRequest(
       }),
     );
   } catch {
-    // Storage unavailable: the in-view attempt guard still limits duplicate
-    // submissions; reload reconciliation simply has no retained identity.
+    // Dispatch must not proceed: a request whose identity was not retained can
+    // neither be reconciled on reload nor distinguished from an unknown effect.
+    throw new ImportIdentityUnavailableError();
   }
 }
 

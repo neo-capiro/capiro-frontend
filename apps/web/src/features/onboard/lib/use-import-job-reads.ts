@@ -1,7 +1,11 @@
 import { useAuth } from "@clerk/nextjs";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import type { CapiroApi } from "./capiro-api";
 import type { ImportRequestScope } from "./import-request-intent";
+import type {
+  ImportJob,
+  ImportJobPage,
+} from "@/shared/capiro/onboard-contracts";
 import { CapiroApiError } from "@/shared/capiro/http";
 import {
   deriveImportJobPanelState,
@@ -20,6 +24,33 @@ export function importJobsRequestKey(scopeKey: string, requestId: string) {
 }
 export function importJobDetailKey(scopeKey: string, jobId: string) {
   return [...importJobsRoot, scopeKey, "job", jobId] as const;
+}
+export function importJobsHistoryKey(scopeKey: string) {
+  return [...importJobsRoot, scopeKey, "history"] as const;
+}
+
+/** Accumulated pages in server order, deduped by id without reordering. */
+export function flattenImportJobPages(
+  pages: readonly ImportJobPage[] | undefined,
+): ImportJob[] {
+  const seen = new Set<string>();
+  const jobs: ImportJob[] = [];
+  for (const page of pages ?? []) {
+    for (const job of page.jobs) {
+      if (seen.has(job.id)) continue;
+      seen.add(job.id);
+      jobs.push(job);
+    }
+  }
+  return jobs;
+}
+
+/** Explicit exhaustion: a null final cursor ends paging even after prior pages. */
+export function importJobPageNextCursor(
+  pages: readonly ImportJobPage[] | undefined,
+): string | null {
+  const last = pages?.at(-1);
+  return last?.nextCursor ?? null;
 }
 
 /** Revoked membership, hidden job and expired session are all "not available". */
@@ -52,7 +83,6 @@ export function useImportAccountScope(): {
 export function useLatestImportJob(api: CapiroApi) {
   const { scopeKey, ready } = useImportAccountScope();
   const page = useImportJobPage(api, scopeKey, ready);
-  const newest = newestImportJob(page.data?.jobs ?? []);
   const failure = page.error ? classifyImportJobFailure(page.error) : null;
   const panelState = deriveImportJobPanelState({
     ready,
@@ -60,15 +90,56 @@ export function useLatestImportJob(api: CapiroApi) {
     failure,
     totalJobs: page.data?.population.total ?? 0,
   });
+  // A refused/errored read must not surface any previously cached job content.
+  const visible = ready && failure === null;
   return {
     scopeKey,
     ready,
-    job: newest,
-    population: page.data?.population,
+    job: visible ? newestImportJob(page.data?.jobs ?? []) : null,
+    population: visible ? page.data?.population : undefined,
     panelState,
     failure,
     refresh: () => page.refetch(),
   };
+}
+
+/** Shared infinite-query options: one page contract, explicit final null. */
+export function importJobHistoryOptions(api: CapiroApi, scopeKey: string) {
+  return {
+    queryKey: importJobsHistoryKey(scopeKey),
+    queryFn: ({ pageParam }: { pageParam: string | undefined }) =>
+      api.getImportJobs({ limit: 20, cursor: pageParam ?? undefined }),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (last: ImportJobPage) => last.nextCursor ?? undefined,
+  };
+}
+
+/** Refetch only reads bound to an admitted identity (refetch ignores enabled). */
+export async function refreshImportJobReads(input: {
+  history: { refetch: () => Promise<unknown> };
+  request?: { refetch: () => Promise<unknown> } | null;
+  detail?: { refetch: () => Promise<unknown> } | null;
+  requestId?: string | null;
+  jobId?: string | null;
+}): Promise<void> {
+  const reads: Promise<unknown>[] = [input.history.refetch()];
+  if (input.requestId) reads.push(input.request!.refetch());
+  if (input.jobId) reads.push(input.detail!.refetch());
+  await Promise.all(reads);
+}
+
+/** Accumulated read-only history: pages, dedupe, explicit exhaustion, reset by scope. */
+export function useImportJobHistory(
+  api: CapiroApi,
+  scopeKey: string,
+  enabled: boolean,
+) {
+  return useInfiniteQuery({
+    ...importJobHistoryOptions(api, scopeKey),
+    enabled,
+    retry: false,
+    staleTime: 5_000,
+  });
 }
 
 export function useImportJobPage(

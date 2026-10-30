@@ -4,10 +4,13 @@ import { useOnboardAttempt } from "../../lib/use-onboard-attempt";
 import { useClientImport } from "../../lib/use-client-import";
 import {
   classifyImportJobFailure,
+  flattenImportJobPages,
+  importJobPageNextCursor,
+  refreshImportJobReads,
   useImportAccountScope,
   useImportJobByRequest,
   useImportJobDetail,
-  useImportJobPage,
+  useImportJobHistory,
 } from "../../lib/use-import-job-reads";
 import {
   deriveImportJobPanelState,
@@ -40,8 +43,8 @@ export function useImportWorkflow({
   const manual = useOnboardAttempt(api, "manual-client-create");
   const firm = useOnboardAttempt(api, "select-registrant");
 
-  // Durable job reads: account-scoped keys, a retained request identity (reload
-  // reconciliation) and one explicit selected job. Reads never submit.
+  // Durable job reads: one accumulated history query (all pages, deduped,
+  // explicit exhaustion) plus a request-identity readback and the selected job.
   // Reading position is keyed to the account so an account switch cannot show
   // or re-open the previous account's job.
   const [selection, setSelection] = React.useState<{
@@ -50,54 +53,34 @@ export function useImportWorkflow({
   }>({ scopeKey: account.scopeKey, jobId: null });
   if (selection.scopeKey !== account.scopeKey)
     setSelection({ scopeKey: account.scopeKey, jobId: null });
-  const [paging, setPaging] = React.useState<{
-    scopeKey: string;
-    cursor: string | null;
-  }>({ scopeKey: account.scopeKey, cursor: null });
-  if (paging.scopeKey !== account.scopeKey)
-    setPaging({ scopeKey: account.scopeKey, cursor: null });
   const selectedJobId =
     selection.scopeKey === account.scopeKey ? selection.jobId : null;
-  const olderCursor =
-    paging.scopeKey === account.scopeKey ? paging.cursor : null;
-  const history = useImportJobPage(api, account.scopeKey, account.ready);
-  const older = useImportJobPage(
-    api,
-    account.scopeKey,
-    account.ready && !!olderCursor,
-    olderCursor ?? undefined,
-  );
+  const history = useImportJobHistory(api, account.scopeKey, account.ready);
   const retainedLookup = useImportJobByRequest(
     api,
     account.scopeKey,
     importer.retained?.requestId ?? null,
   );
-  const jobs = React.useMemo(() => {
-    const seen = new Set<string>();
-    const merged = [...(history.data?.jobs ?? []), ...(older.data?.jobs ?? [])];
-    return merged.filter((job) => {
-      if (seen.has(job.id)) return false;
-      seen.add(job.id);
-      return true;
-    });
-  }, [history.data, older.data]);
+  const jobs = React.useMemo(
+    () => flattenImportJobPages(history.data?.pages),
+    [history.data],
+  );
   const newest = retainedLookup.data?.jobs[0] ?? newestImportJob(jobs);
   const activeJobId =
     selectedJobId ?? importer.lastJob?.id ?? newest?.id ?? null;
   const jobDetail = useImportJobDetail(api, account.scopeKey, activeJobId);
-  const job =
-    jobDetail.data ??
-    retainedLookup.data?.jobs[0] ??
-    jobs.find((entry) => entry.id === activeJobId) ??
-    null;
   const failureSource =
-    history.error ??
-    older.error ??
-    retainedLookup.error ??
-    jobDetail.error ??
-    null;
+    history.error ?? retainedLookup.error ?? jobDetail.error ?? null;
   const failure = failureSource
     ? classifyImportJobFailure(failureSource)
+    : null;
+  // A refused/errored read withholds every prior job shape from this view.
+  const visible = failure === null;
+  const job = visible
+    ? (jobDetail.data ??
+      retainedLookup.data?.jobs[0] ??
+      jobs.find((entry) => entry.id === activeJobId) ??
+      null)
     : null;
   const panelState = deriveImportJobPanelState({
     ready: account.ready,
@@ -106,22 +89,28 @@ export function useImportWorkflow({
       retainedLookup.isLoading ||
       (!!activeJobId && jobDetail.isLoading && !jobDetail.data),
     failure,
-    totalJobs: history.data?.population.total ?? 0,
+    totalJobs: history.data?.pages[0]?.population.total ?? 0,
   });
-  const population = history.data?.population ?? older.data?.population;
-  const nextCursor = older.data?.nextCursor ?? history.data?.nextCursor ?? null;
+  const population = visible ? history.data?.pages[0]?.population : undefined;
+  // Exhaustion is the FINAL page's cursor, never page 1's stale cursor.
+  const nextCursor = history.hasNextPage
+    ? importJobPageNextCursor(history.data?.pages)
+    : null;
 
   const refreshJobs = async () => {
-    await Promise.all([
-      history.refetch(),
-      retainedLookup.refetch(),
-      jobDetail.refetch(),
-      olderCursor ? older.refetch() : Promise.resolve(),
-    ]);
+    // Never refetch a disabled read: refetch() bypasses `enabled` and would
+    // send a null requestId or jobId through the gateway.
+    await refreshImportJobReads({
+      history,
+      request: retainedLookup,
+      detail: jobDetail,
+      requestId: importer.retained?.requestId,
+      jobId: activeJobId,
+    });
   };
   const loadOlderJobs = () => {
-    if (nextCursor)
-      setPaging({ scopeKey: account.scopeKey, cursor: nextCursor });
+    if (history.hasNextPage && !history.isFetchingNextPage)
+      void history.fetchNextPage();
   };
   const selectJob = (jobId: string) =>
     setSelection({ scopeKey: account.scopeKey, jobId });
@@ -261,7 +250,9 @@ export function useImportWorkflow({
     setError(null);
     const guard = importer.guard();
     try {
-      const result = await guard.wait(() => importer.run(sel));
+      // importer.run installs the submitted account and owns its own guard;
+      // wrapping it in guard.wait() would refuse BEFORE the first dispatch.
+      const result = await importer.run(sel);
       await guard.wait(() => onImported(result.created));
       await guard.wait(() =>
         queryClient.invalidateQueries({ queryKey: CANDIDATES_KEY }),

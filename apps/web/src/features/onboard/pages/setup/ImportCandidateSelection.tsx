@@ -39,6 +39,7 @@ type Props = Pick<
   plan: "trial" | "paid";
   billingAdmin: boolean;
   onClose: () => void;
+  recoveryVisible: boolean;
 };
 export function ImportCandidateSelection({
   navigate,
@@ -71,6 +72,7 @@ export function ImportCandidateSelection({
   plan,
   billingAdmin,
   onClose,
+  recoveryVisible,
 }: Props) {
   return (
     <Modal title="Import your clients" onClose={onClose} width={720}>
@@ -78,7 +80,7 @@ export function ImportCandidateSelection({
         record={importer.record}
         check={() => void refreshCurrent()}
       />
-      <ImportOutcome evidence={importer.evidence} />
+      {recoveryVisible && <ImportOutcome evidence={importer.evidence} />}
       <ImportJobStatusPanel
         state={panelState}
         job={job}
