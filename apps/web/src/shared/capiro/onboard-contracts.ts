@@ -33,4 +33,20 @@ export type ImportCandidatesResult = z.infer<
 export type ImportResult = z.infer<typeof Core.importChunkResultSchema> & {
   capMessage: string | null;
 };
+export type ImportJobStatus = z.infer<typeof Core.importJobStatusSchema>;
+export type ImportItemOutcome = z.infer<typeof Core.importItemOutcomeSchema>;
+export type ImportItemCode = z.infer<typeof Core.importItemCodeSchema>;
+export type ImportJobCounts = z.infer<typeof Core.importJobCountsSchema>;
+export type ImportChunkJobSummary = z.infer<
+  typeof Core.importChunkJobSummarySchema
+>;
+export type ImportJobItem = z.infer<typeof Core.importJobItemSchema>;
+export type ImportJobPopulation = z.infer<
+  typeof Core.importJobPopulationSchema
+>;
+export type ImportJob = z.infer<typeof Core.importJobViewSchema>;
+export type ImportJobPage = z.infer<typeof Core.importJobPageSchema>;
+export type ImportJobStatusView = z.infer<
+  typeof Core.importJobStatusViewSchema
+>;
 export type TeamInviteRole = z.infer<typeof editableTeamRoleSchema>;

@@ -58,20 +58,32 @@ describe("preserved onboarding local lifecycle", () => {
     expect(result).toEqual({ ...first, capMessage: "Profile limit reached" });
     expect(chunk).toHaveBeenCalledTimes(2);
   });
-  it("propagates authority cancellation before any subsequent chunk", async () => {
+  it("reports a sent-but-unconfirmed first chunk as unknown, never as unattempted", async () => {
     const error = new DOMException("Scope replaced", "AbortError");
     const chunk = vi.fn().mockRejectedValue(error);
-    await expect(
-      importClientSelection(
-        Array.from({ length: 201 }, (_, i) => i),
-        chunk,
-      ),
-    ).rejects.toBe(error);
+    const failure = await importClientSelection(
+      Array.from({ length: 201 }, (_, i) => i),
+      chunk,
+    ).catch((caught) => caught);
+    expect(failure).toMatchObject({
+      name: "InterruptedImport",
+      unknownIds: Array.from({ length: 100 }, (_, i) => i),
+      unattemptedIds: Array.from({ length: 101 }, (_, i) => i + 100),
+      cause: error,
+    });
     expect(chunk).toHaveBeenCalledTimes(1);
   });
-  it("propagates service failure without pretending a partial run completed", async () => {
+  it("does not pretend a failed first chunk completed or was never sent", async () => {
     const error = new CapiroApiError(503, "Unavailable");
     const chunk = vi.fn().mockRejectedValue(error);
-    await expect(importClientSelection([1, 2], chunk)).rejects.toBe(error);
+    const failure = await importClientSelection([1, 2], chunk).catch(
+      (caught) => caught,
+    );
+    expect(failure).toMatchObject({
+      name: "InterruptedImport",
+      unknownIds: [1, 2],
+      unattemptedIds: [],
+      cause: error,
+    });
   });
 });

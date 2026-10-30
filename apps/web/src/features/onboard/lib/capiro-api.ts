@@ -9,6 +9,16 @@ export type {
   ImportCandidate,
   ImportCandidatesResult,
   ImportResult,
+  ImportChunkJobSummary,
+  ImportJob,
+  ImportJobCounts,
+  ImportJobPage,
+  ImportJobPopulation,
+  ImportJobStatus,
+  ImportJobStatusView,
+  ImportJobItem,
+  ImportItemCode,
+  ImportItemOutcome,
   TeamInviteRole,
 } from "@/shared/capiro/onboard-contracts";
 export function useCapiroApi() {
