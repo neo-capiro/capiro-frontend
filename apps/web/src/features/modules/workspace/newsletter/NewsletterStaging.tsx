@@ -25,7 +25,6 @@ export function NewsletterStaging({
   onClose,
   disabled = false,
   title: newsletterTitle,
-  clientName,
 }: {
   draftId?: string;
   saved: boolean;
@@ -33,7 +32,6 @@ export function NewsletterStaging({
   onClose: () => void;
   disabled?: boolean;
   title?: string;
-  clientName?: string;
 }) {
   const me = useCapiroQuery("me.read", {}, { enabled: Boolean(draftId) });
   if (!draftId || !me.data)
@@ -79,7 +77,6 @@ export function NewsletterStaging({
       onClose={onClose}
       disabled={disabled}
       title={newsletterTitle}
-      clientName={clientName}
     />
   );
 }
@@ -109,7 +106,6 @@ function StagingSelection({
   saved: boolean;
   disabled: boolean;
   title?: string;
-  clientName?: string;
 }) {
   const flow = useNewsletterStaging(actor, draftId);
   const [selectedVersion, setVersion] = useState("");

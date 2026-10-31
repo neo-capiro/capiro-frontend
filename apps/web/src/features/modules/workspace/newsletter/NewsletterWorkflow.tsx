@@ -538,10 +538,6 @@ function NewsletterEditor({
         draftId={draft?.id}
         saved={saved}
         title={title}
-        clientName={
-          (clients.data?.items ?? []).find((client) => client.id === clientId)
-            ?.name ?? ""
-        }
         open={step === "stage"}
         onClose={() => setStep("builder")}
         disabled={pending || Boolean(saveOwner?.frozen)}
