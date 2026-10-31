@@ -1,6 +1,6 @@
 import { build, createServer, preview } from "vite";
 import { fileURLToPath } from "node:url";
-import { readdirSync } from "node:fs";
+import { readdirSync, realpathSync } from "node:fs";
 import path from "node:path";
 
 const app = fileURLToPath(new URL("../../", import.meta.url));
@@ -54,7 +54,9 @@ const configuration = {
     port,
     strictPort: true,
     hmr: false,
-    fs: { allow: [workspace] },
+    fs: {
+      allow: [workspace, realpathSync(path.join(workspace, "node_modules"))],
+    },
   },
 };
 // Opt-in test-only path (CAPIRO_BROWSER_TEST_DEV=1) for the strict-effects case:

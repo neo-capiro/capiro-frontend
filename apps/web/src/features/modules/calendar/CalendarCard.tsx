@@ -70,18 +70,21 @@ function CalendarEvents({ model }: { model: CalendarModel }) {
             ))}
         </>
       ) : (
-        <StatusPanel
-          loading={meetings.loading}
-          error={meetings.error}
-          onRetry={meetings.reload}
-        >
+        <>
+          <StatusPanel
+            loading={meetings.loading}
+            error={meetings.error}
+            onRetry={meetings.reload}
+          />
           <CalendarGrid
             meetings={sources.has("Meetings") ? loaded : []}
+            hearings={filtered.filter((item) => item.source === "Hearings")}
+            onHearing={model.openHearing}
             date={date}
             view={view}
             onMeeting={setSelected}
           />
-        </StatusPanel>
+        </>
       )}
       {extras.loading && (
         <p className={styles.warnings} role="status">
@@ -131,7 +134,13 @@ export function CalendarCard({ model }: { model: CalendarModel }) {
         onDatePicker={setDatePicker}
       />
       <CalendarFilters
-        mixed={view === "agenda" && !clientId}
+        availableSources={
+          clientId
+            ? ["Meetings"]
+            : view === "agenda"
+              ? agendaSources
+              : ["Meetings", "Hearings"]
+        }
         selected={sources}
         items={allItems}
         loading={meetings.loading || extras.loading}
@@ -143,7 +152,7 @@ export function CalendarCard({ model }: { model: CalendarModel }) {
               ]
             : extras.warnings
         }
-        scopeTitle={`${clientName} · ${clientId ? "Client-associated" : "All client profiles"} · Your accessible meetings`}
+        scopeTitle={`${clientName} · ${clientId ? "Client-associated · Your accessible meetings" : "All client profiles · Your accessible meetings and public hearings"}`}
         onToggle={toggle}
       />
       <CalendarEvents model={model} />

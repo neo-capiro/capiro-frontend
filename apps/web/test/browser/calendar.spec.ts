@@ -4,6 +4,10 @@ import { expect } from "@playwright/test";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 
 const clientId = "30000000-0000-4000-8000-000000000001";
+const hearingSources = {
+  "legiwatch.calendar": { rows: [], total: 0, page: 1, pageSize: 200 },
+  "legiwatch.calendarCoverage": { rows: [], asOf: "2026-10-08T16:00:00Z" },
+};
 const meetings = [
   {
     id: "40000000-0000-4000-8000-000000000001",
@@ -21,6 +25,9 @@ const meetings = [
 ];
 test.beforeEach(async ({ page }) => {
   await onlyLocalRequests(page);
+  await page.route("**/api/backend/core/me", (route) =>
+    route.fulfill({ json: testIdentity }),
+  );
   // Scope changes now use the same current-client verification as URL entry.
   await page.route(`**/api/backend/core/clients/${clientId}`, (route) =>
     route.fulfill({
@@ -44,7 +51,15 @@ test("month and week retain client scope and query end-exclusive Eastern ranges"
   page,
 }) => {
   const ranges: Record<string, string>[] = [];
+  const scopeReads: string[] = [];
+  page.on("request", (request) => {
+    const path = new URL(request.url()).pathname;
+    if (path === "/api/backend/core/me") scopeReads.push("identity");
+    if (path === `/api/backend/core/clients/${clientId}`)
+      scopeReads.push("client");
+  });
   await operationFixtures(page, {
+    ...hearingSources,
     "me.read": testIdentity,
     "clients.list": [
       {
@@ -68,10 +83,10 @@ test("month and week retain client scope and query end-exclusive Eastern ranges"
   ).toBeVisible();
   await page.getByLabel("Calendar client scope").selectOption(clientId);
   await page.getByRole("button", { name: "Week", exact: true }).click();
-  await expect(page.getByLabel("week meeting calendar")).toBeVisible();
+  await expect(page.getByLabel("week calendar")).toBeVisible();
   await expect(
     page
-      .getByLabel("week meeting calendar")
+      .getByLabel("week calendar")
       .getByText("Test strategy review", { exact: false }),
   ).toBeVisible();
   await expect
@@ -84,7 +99,7 @@ test("month and week retain client scope and query end-exclusive Eastern ranges"
   await expect
     .poll(() =>
       page
-        .getByLabel("week meeting calendar")
+        .getByLabel("week calendar")
         .locator(".sx__view-container")
         .evaluate((element) => getComputedStyle(element).filter),
     )
@@ -94,6 +109,35 @@ test("month and week retain client scope and query end-exclusive Eastern ranges"
     fullPage: true,
     animations: "disabled",
   });
+  expect(scopeReads).toEqual(["identity", "client"]);
+  await page.getByLabel("Calendar client scope").selectOption("");
+  await expect(
+    page.getByRole("heading", { name: "Master calendar" }),
+  ).toBeVisible();
+  await page.getByLabel("Calendar client scope").selectOption(clientId);
+  await expect(
+    page.getByRole("heading", { name: "Test Aerospace calendar" }),
+  ).toBeVisible();
+  expect(scopeReads).toEqual(["identity", "client", "identity", "client"]);
+});
+
+test("selected client stays unavailable when the canonical identity has no admitted actor", async ({
+  page,
+}) => {
+  let clientReads = 0;
+  page.on("request", (request) => {
+    if (request.url().endsWith(`/api/backend/core/clients/${clientId}`))
+      clientReads += 1;
+  });
+  await page.route("**/api/backend/core/me", (route) =>
+    route.fulfill({ json: { ...testIdentity, role: null } }),
+  );
+  await operationFixtures(page, { "me.read": testIdentity });
+  await page.goto(`/modules/calendar?clientId=${clientId}`);
+  await expect(
+    page.getByRole("heading", { name: "Selected client unavailable" }),
+  ).toBeVisible();
+  expect(clientReads).toBe(0);
 });
 test("client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow", async ({
   page,
@@ -104,6 +148,7 @@ test("client agenda is meetings-only and the meeting opens the shared prep/notes
       keys.push(new URL(request.url()).pathname.split("/").pop()!);
   });
   await operationFixtures(page, {
+    ...hearingSources,
     "me.read": testIdentity,
     "clients.list": [
       {
@@ -120,6 +165,10 @@ test("client agenda is meetings-only and the meeting opens the shared prep/notes
   });
   await page.goto("/modules/calendar");
   await page.getByLabel("Calendar client scope").selectOption(clientId);
+  await expect(
+    page.getByRole("heading", { name: "Test Aerospace calendar" }),
+  ).toBeVisible();
+  keys.length = 0;
   await page.getByRole("button", { name: "Agenda", exact: true }).click();
   await expect(page.getByRole("table")).toContainText("Test strategy review");
   expect(keys).not.toContain("legiwatch.calendar");
@@ -140,6 +189,7 @@ test("fixed Date retains native formatting and advancing browser timers", async 
   page,
 }) => {
   await operationFixtures(page, {
+    ...hearingSources,
     "me.read": testIdentity,
     "clients.list": [],
     "engagement.meetings": [],

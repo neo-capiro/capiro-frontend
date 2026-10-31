@@ -4,6 +4,7 @@ import { createContext, useContext, type ReactNode } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "../portfolio/api/provider";
 import { useCurrentActor } from "../portfolio/auth/current-actor";
+import { useIdentity } from "../portfolio/auth/identity";
 import { clientReadQueryOptions } from "../portfolio/api/client-read";
 import { clientSchema, type Client } from "./client-contract";
 
@@ -25,6 +26,9 @@ export function SelectedClientProvider({
   const cache = useQueryClient();
   const actor = useCurrentActor();
   const valid = clientSchema.shape.id.safeParse(requestedId).success;
+  // Module routes can mount without a Portfolio identity consumer, and changing
+  // client disposes the cache. Start the same canonical identity read here.
+  const identity = useIdentity({ enabled: Boolean(requestedId && valid) });
   // The ONE canonical read: same key, same receipt checks (requested id, tenant, current
   // actor before and after the request). This provider no longer keeps a weaker producer on
   // the shared key.
@@ -39,11 +43,15 @@ export function SelectedClientProvider({
   });
   const value: SelectedClient = !requestedId
     ? { state: "no-selection" }
-    : !valid || query.error
+    : !valid || identity.error || query.error
       ? { state: "unavailable", requestedId }
-      : query.isPending || query.isFetching
+      : identity.isPending || identity.isFetching
         ? { state: "loading", requestedId }
-        : { state: "authorized-client", requestedId, client: query.data };
+        : !actor
+          ? { state: "unavailable", requestedId }
+          : query.isPending || query.isFetching
+            ? { state: "loading", requestedId }
+            : { state: "authorized-client", requestedId, client: query.data };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }
 export function SelectedClientGate({ children }: { children: ReactNode }) {

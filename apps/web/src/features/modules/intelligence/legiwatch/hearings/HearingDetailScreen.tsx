@@ -37,16 +37,21 @@ const tabs = [
 export function HearingDetailScreen({ hearingId }: { hearingId: string }) {
   const router = useRouter();
   const route = useLegiWatchRoute(),
-    [tab, setTab] = useState("overview"),
     [followOpen, setFollowOpen] = useState(false),
     [attendanceOpen, setAttendanceOpen] = useState(false),
     [work, setWork] = useState<string | null>(null),
     [error, setError] = useState("");
+  const tab = route.search.get("hearingTab") ?? "overview";
+  const setTab = (value: string) => route.navigate({ hearingTab: value });
   const detail = useCapiroQuery("legiwatch.hearing", {
     params: { id: hearingId },
     query: { clientId: route.clientId || undefined },
   });
   const exportCalendar = useCapiroMutation("legiwatch.calendarExport");
+  const room = useCapiroQuery("legiwatch.room", { params: { id: hearingId } });
+  const sourceUrl =
+    room.data?.event.officialPlaybackUrl ??
+    detail.data?.hearing.officialPageUrl;
   const review = useCapiroMutation("legiwatch.publicReview.open");
   async function openReview() {
     try {
@@ -175,7 +180,7 @@ export function HearingDetailScreen({ hearingId }: { hearingId: string }) {
                   <p className={styles.description}>
                     {detail.data.attendanceState.message}
                   </p>
-                  <SourceLink href={detail.data.hearing.officialPageUrl}>
+                  <SourceLink href={sourceUrl}>
                     Open official Watch / Replay
                   </SourceLink>
                   <ActionButton onClick={() => setAttendanceOpen(true)}>
@@ -219,6 +224,29 @@ export function HearingDetailScreen({ hearingId }: { hearingId: string }) {
             <TranscriptPanel hearingId={hearingId} />
           ) : tab === "live" ? (
             <>
+              <section className={styles.card}>
+                <h2>Watch the official hearing</h2>
+                <SourceLink href={sourceUrl}>
+                  Open official live / replay tab
+                </SourceLink>
+                <p>
+                  Play the public stream in its official tab. To record its
+                  audio, open browser attendance and share that tab with audio.
+                </p>
+                {room.data?.event.officialPlaybackKind ===
+                  "official_listing_page" && (
+                  <p>
+                    The publisher provides a listing. Select this hearing’s
+                    stream there.
+                  </p>
+                )}
+                {room.error && (
+                  <p role="status">
+                    The current player link could not be checked. The official
+                    hearing page remains available.
+                  </p>
+                )}
+              </section>
               <section className={styles.card}>
                 <h2>Capture status</h2>
                 <Badge>
@@ -287,7 +315,7 @@ export function HearingDetailScreen({ hearingId }: { hearingId: string }) {
             open={attendanceOpen}
             onClose={() => setAttendanceOpen(false)}
             onSaved={detail.reload}
-            sourceUrl={detail.data.hearing.officialPageUrl}
+            sourceUrl={sourceUrl}
           />
           <HearingWorkDialog
             hearingId={hearingId}

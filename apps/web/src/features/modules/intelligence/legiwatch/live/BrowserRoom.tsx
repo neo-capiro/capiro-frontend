@@ -50,6 +50,7 @@ function ConnectedBrowserRoom({
   const route = useLegiWatchRoute(),
     capture = useBrowserCapture(session.id, session.recordingPolicy, reload);
   const [consent, setConsent] = useState(false),
+    [transcriptOnly, setTranscriptOnly] = useState(false),
     [attestation, setAttestation] = useState(""),
     [attendance, setAttendance] = useState(false),
     [offset, setOffset] = useState(0);
@@ -168,6 +169,11 @@ function ConnectedBrowserRoom({
           )}
         </section>
         <div className={styles.list}>
+          <RetainedAudioPanel
+            sessionId={session.id}
+            capturing={capture.active}
+            onPolicyChanged={reload}
+          />
           <section className={styles.card}>
             <Badge>
               {capture.active ? "Browser tab capture" : "Not connected"}
@@ -181,9 +187,31 @@ function ConnectedBrowserRoom({
                 ready.
               </li>
             </ol>
+            {session.recordingPolicy === "transcript_only" ? (
+              <label className={styles.check}>
+                <input
+                  type="checkbox"
+                  checked={transcriptOnly}
+                  disabled={capture.active}
+                  onChange={(event) => setTranscriptOnly(event.target.checked)}
+                />
+                Continue with transcript only. Audio will not be saved for
+                replay.
+              </label>
+            ) : (
+              <p>
+                Audio and transcript will be retained according to the available
+                recording policy.
+              </p>
+            )}
             <ActionButton
               primary
-              disabled={capture.active || !consentReady}
+              disabled={
+                capture.active ||
+                !consentReady ||
+                (session.recordingPolicy === "transcript_only" &&
+                  !transcriptOnly)
+              }
               onClick={() => void capture.connect()}
             >
               {capture.active
@@ -198,7 +226,9 @@ function ConnectedBrowserRoom({
             </ActionButton>
             <p className={styles.description}>
               This browser tab and device must remain awake. A saved room has
-              not started recording.
+              not started recording. Leaving this room stops capture and
+              finishes the current save; closing the browser can interrupt the
+              final save.
             </p>
           </section>
           {capture.active && (
@@ -238,11 +268,6 @@ function ConnectedBrowserRoom({
         independently from this browser session. Sharing a tab creates browser
         capture only.
       </div>
-      <RetainedAudioPanel
-        sessionId={session.id}
-        capturing={capture.active}
-        onPolicyChanged={reload}
-      />
       <section className={styles.card}>
         <div className={styles.row}>
           <h2>Saved transcript</h2>
@@ -343,6 +368,7 @@ function ConnectedBrowserRoom({
       {session.hearingId && (
         <AttendanceDialog
           hearingId={session.hearingId}
+          sourceUrl={session.sourceUrl}
           open={attendance}
           onClose={() => setAttendance(false)}
           onSaved={reload}

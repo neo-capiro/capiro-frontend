@@ -25,6 +25,7 @@ export type AgendaItem = {
   meeting?: EngagementMeeting;
   href?: string;
   effectiveDate?: EffectiveDateRecord;
+  hearing?: CalendarHearing;
 };
 export function meetingItems(meetings: EngagementMeeting[]): AgendaItem[] {
   return meetings.map((meeting) => ({
@@ -49,7 +50,8 @@ export function hearingItems(hearings: CalendarHearing[]): AgendaItem[] {
       : (hearing.time ?? "Time not confirmed"),
     sortTime: hearing.startsAt ? eventClock(hearing.startsAt) : undefined,
     context: `${hearing.committeeName} · ${hearing.startsAt ? "Eastern time" : hearing.timezone}`,
-    href: `/modules/intelligence?view=legiwatch&hearing=${encodeURIComponent(hearing.id)}`,
+    href: `/modules/intelligence?view=legiwatch&hearingId=${encodeURIComponent(hearing.id)}`,
+    hearing,
   }));
 }
 export function plannerItems(tasks: PlannerTask[]): AgendaItem[] {
