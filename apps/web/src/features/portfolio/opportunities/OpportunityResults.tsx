@@ -14,6 +14,7 @@ export function OpportunityResults({
   clientId: string;
   base?: string;
 }) {
+  const unscoredCount = data.profileGaps?.actualUnscoredCount;
   return (
     <>
       {!data.catalogComplete && (
@@ -35,6 +36,12 @@ export function OpportunityResults({
           ))}
         </ul>
       </details>
+      {unscoredCount != null && unscoredCount > 0 && (
+        <p className="status">
+          {unscoredCount.toLocaleString()} available results have no relevance
+          score for this client.
+        </p>
+      )}
       {data.profileGaps?.items.map((gap) => (
         <p className="status" key={`${gap.tag}-${gap.title}`}>
           <strong>{gap.title}</strong>
@@ -77,14 +84,15 @@ export function OpportunityResults({
             <small>{opportunityDate(item.deadline)}</small>
             <span className="muted">
               {item.decoration?.workflow.available
-                ? (item.decoration.workflow.status ?? "Match")
+                ? (item.decoration.workflow.status ??
+                  "No saved workflow status")
                 : "Workflow unavailable"}
             </span>
           </div>
         </article>
       ))}
       {data.opportunities.length === 0 && (
-        <p className="empty">No matching opportunities on this page.</p>
+        <p className="empty">No opportunities on this page.</p>
       )}
     </>
   );

@@ -39,7 +39,7 @@ test("matched opportunity and program paging, partial health, search and exact d
   await expect(
     page.getByText("Some catalogs are incomplete", { exact: false }),
   ).toBeVisible();
-  const results = page.getByRole("region", { name: "Matched opportunities" });
+  const results = page.getByRole("region", { name: "Available opportunities" });
   await expect(
     results.getByRole("link", { name: "Test opportunity", exact: true }),
   ).toHaveAttribute(
@@ -55,7 +55,9 @@ test("matched opportunity and program paging, partial health, search and exact d
     page.getByRole("link", { name: "Second opportunity" }),
   ).toBeVisible();
   expect(new URL(page.url()).searchParams.get("page")).toBe("2");
-  await page.getByLabel("Search matched opportunities").fill("sensor & safety");
+  await page
+    .getByLabel("Search available opportunities")
+    .fill("sensor & safety");
   await page.getByRole("button", { name: "Search", exact: true }).click();
   await expect(
     page.getByRole("link", { name: "Test opportunity", exact: true }),
@@ -77,7 +79,7 @@ test("opportunity read failures can retry without hiding an independent program 
     ),
   );
   await page.goto(`/portfolio/${clientId}/opportunities`);
-  const results = page.getByRole("region", { name: "Matched opportunities" });
+  const results = page.getByRole("region", { name: "Available opportunities" });
   await expect(results.getByRole("alert")).toContainText(
     "Test catalogs unavailable",
   );
