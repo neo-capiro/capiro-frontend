@@ -300,9 +300,12 @@ export function libraryCards(
         category: CATEGORY_LABELS[entry.category],
         verified: entry.verified,
         connected,
-        scope: entry.defaultScope === "tenant" ? "Firm-wide" : "Personal",
+        scope:
+          (stored?.scope ?? entry.defaultScope) === "tenant"
+            ? "Firm-wide"
+            : "Personal",
         action: connected
-          ? authType === "oauth"
+          ? authType === "oauth" && stored?.canManage !== false
             ? "authorize"
             : "manage"
           : "connect",

@@ -105,6 +105,13 @@ export function createConnectorClient(api: ConnectorApi): ConnectorClient {
         return createFailure(error);
       }
       if (!added.oauthRequired) return { kind: "saved", connector: added };
+      if (signal?.aborted)
+        return {
+          kind: "authorization_pending",
+          connector: added,
+          reason:
+            "Setup was interrupted. Refresh the connection list and authorize this stored connection.",
+        };
       try {
         const started = await api.request(
           "meri.connectors.oauthStart",

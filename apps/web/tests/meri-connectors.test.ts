@@ -253,6 +253,21 @@ describe("stored connectors", () => {
 });
 
 describe("library cards", () => {
+  it("uses the stored scope and never offers a member authorization on an admin-managed connection", () => {
+    const row = storedRow({
+      scope: "tenant",
+      canManage: false,
+      isOwner: false,
+    });
+    const [card] = libraryCards([oauthEntry({ defaultScope: "user" })], [row]);
+    expect(card).toMatchObject({
+      scope: "Firm-wide",
+      action: "manage",
+      connectorId: row.id,
+    });
+    expect(cardCommand(card!, true)).toEqual({ kind: "none" });
+  });
+
   it("orders by category and puts a connected entry first inside its category", () => {
     const cards = libraryCards([
       oauthEntry({ id: "notion", name: "Notion", connected: false }),
