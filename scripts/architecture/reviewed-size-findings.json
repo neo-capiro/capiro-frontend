@@ -7461,19 +7461,19 @@
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "758882be609b02956255159d188aa0e772315a1e057e6f325cdf12606c831408",
-    "reason": "The module contains one paginated Outreach list and its small campaign-row renderer. Server-filtered canonical campaigns, ordinary records and legacy sessions share visible filters while retaining independent cursors. The extracted list model owns label projection; this file does not implement sending, generation or backend access policy.",
-    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-10-30"
+    "fingerprint": "3e6393a862f5c0695ca6532ef4f48400f65c7c3c2a9852895d73de3175db981d",
+    "reason": "Independent exact-source structure review at a71b496ec955ec8fd2109fbe77665dae75a0ecb7 (475 nonblank). The module still owns one paginated Outreach list and its small campaign-row renderer; the existing list model owns label/category projection and the shared query layer owns transport. This correction adds local ancillary-session availability, partial-result presentation and row deduplication within that same read-only list. It introduces no sending, generation or backend authorization responsibility, so the size increase does not justify a split.",
+    "reviewedBy": "Codex /root/portfolio_merged_review/debrief314_correction_job_review (independent GPT-6 Astra Ultra design review)",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "function",
     "symbol": "OutreachList",
-    "fingerprint": "3e0281004d02f4ab1429583be69a6474ec53f1d9ca74d45992c535ba01e237f1",
-    "reason": "The component coordinates the three existing list sources under one selected client/search/date view. It preserves native pagination, labels loaded counts, excludes imported legacy sessions using the server workflow marker, and retains deleted records. Filter resets, page controls and displayed results share one view lifetime; splitting them into stateful owners would risk mismatched cursors and counts.",
-    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-10-30"
+    "fingerprint": "b173734e6ae836b7a75915b06f377c630c4e98dc35bfc4d0c43e01aa38faf182",
+    "reason": "Independent exact-source structure review at a71b496ec955ec8fd2109fbe77665dae75a0ecb7 (382 nonblank). The component coordinates the three existing read sources, selected filters, independent cursors and visible rows for one list lifetime. Separating ancillary-session loading/error presentation from the canonical reads, guarding session-row inclusion and deduplicating the loaded session page are local list-composition decisions. The added notice and retry control use that existing query owner; splitting stateful subcomponents solely to reduce line count would not remove a separate responsibility.",
+    "reviewedBy": "Codex /root/portfolio_merged_review/debrief314_correction_job_review (independent GPT-6 Astra Ultra design review)",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflow.tsx",
