@@ -21,6 +21,7 @@ import {
   debriefFailureMessage,
   debriefJobActive,
   debriefRequestKey,
+  debriefSaveBody,
   pollDebriefJob,
   readLatestDebriefJob,
   retryDebriefJob,
@@ -37,7 +38,11 @@ type ReviewedDebriefSource = {
 };
 type DebriefGenerationProps = {
   meeting: Meeting;
-  onDraft: (body: string) => void;
+  /**
+   * D2: the composed body plus the audited context summary of the draft it came
+   * from, so the save command can persist what the model was given.
+   */
+  onDraft: (body: string, generatedFrom?: unknown) => void;
 };
 
 export function DebriefGeneration(props: DebriefGenerationProps) {
@@ -117,7 +122,7 @@ function SessionDebriefGeneration({
       setSource(undefined);
       setJob(undefined);
       setJobError(undefined);
-      onDraft(debriefBody(draft));
+      onDraft(debriefBody(draft), debriefSaveBody(draft).generatedFrom);
     },
     [onDraft],
   );
