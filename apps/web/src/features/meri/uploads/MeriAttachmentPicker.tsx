@@ -17,6 +17,8 @@ const size = (bytes: number) =>
 
 /** Presentation of the state this page observed; it never claims a scan or extraction result. */
 function describe(item: UploadItem) {
+  if (item.refusal?.recoveryCleanupFailed)
+    return `${item.refusal.code}: recovery reference could not be cleared`;
   if (item.state === "refused" || item.state === "unknown")
     return `${item.refusal?.code ?? "UNKNOWN_OUTCOME"}${item.refusal?.uncertain ? " — outcome unverified" : ""}`;
   if (item.state === "declaring") return "DECLARING";
@@ -157,7 +159,9 @@ export function MeriAttachmentPicker({
               }}
             >
               <span>{item.filename}</span>
-              <span>{size(item.bytes)}</span>
+              <span>
+                {item.bytes > 0 ? size(item.bytes) : "Awaiting status"}
+              </span>
               <span role="status">{describe(item)}</span>
               {slot.selectedTab &&
                 item.receipt?.originalBytesAvailable &&
@@ -185,7 +189,7 @@ export function MeriAttachmentPicker({
                   Cancel
                 </button>
               ) : null}
-              {item.state === "unknown" && item.uploadId ? (
+              {item.state === "unknown" || item.state === "removing" ? (
                 <button
                   type="button"
                   onClick={() => slot.onCheck(item.requestId)}
@@ -194,7 +198,8 @@ export function MeriAttachmentPicker({
                   Check status
                 </button>
               ) : null}
-              {item.state !== "removed" && item.state !== "removing" ? (
+              {item.state !== "removed" &&
+              (item.uploadId || item.state === "refused") ? (
                 <button
                   type="button"
                   onClick={() => slot.onRemove(item.requestId)}
