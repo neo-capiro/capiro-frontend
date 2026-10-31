@@ -2,24 +2,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { useApi } from "@/shared/portfolio/api/provider";
-import { clientSchema, ownersSchema, memberSchema } from "./contracts";
+import { ownersSchema, memberSchema } from "./contracts";
 export { useClients, clientsKey } from "@/shared/portfolio/api/clients";
-export const clientKey = (id: string) => ["portfolio", "client", id] as const;
+// The client-detail read lives in ONE neutral module so the catalogue and the profile
+// panels share a cache entry (and an actor scope) instead of issuing the same GET twice.
+export { clientKey, clientReadKey, useClientRead } from "../clients/public";
+import { useClientRead } from "../clients/public";
 export function useClient(id: string) {
-  const api = useApi();
-  return useQuery({
-    queryKey: clientKey(id),
-    queryFn: ({ signal }) =>
-      api.request(
-        "core",
-        `clients/${encodeURIComponent(id)}`,
-        clientSchema.refine(
-          (client) => client.id === id,
-          "Client association mismatch",
-        ),
-        { signal },
-      ),
-  });
+  return useClientRead(id);
 }
 export function useAccountOwners(options?: { enabled?: boolean }) {
   const api = useApi();
