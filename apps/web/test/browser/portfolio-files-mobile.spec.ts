@@ -63,7 +63,12 @@ test("Mobile Files preserves readable name width, long-name wrapping and keyboar
         .evaluateAll((images) =>
           images
             .filter((image) => image.getBoundingClientRect().width > 0)
-            .every((image) => image.complete && image.naturalWidth > 0),
+            .every(
+              (image) =>
+                image instanceof HTMLImageElement &&
+                image.complete &&
+                image.naturalWidth > 0,
+            ),
         ),
     )
     .toBe(true);
@@ -130,19 +135,27 @@ test("Desktop Files keeps its existing name sizing", async ({ page }, info) => {
         .evaluateAll((images) =>
           images
             .filter((image) => image.getBoundingClientRect().width > 0)
-            .every((image) => image.complete && image.naturalWidth > 0),
+            .every(
+              (image) =>
+                image instanceof HTMLImageElement &&
+                image.complete &&
+                image.naturalWidth > 0,
+            ),
         ),
     )
     .toBe(true);
-  await page
-    .locator("img")
-    .evaluateAll(async (images) =>
-      Promise.all(
-        images
-          .filter((image) => image.getBoundingClientRect().width > 0)
-          .map((image) => image.decode()),
-      ),
-    );
+  await page.locator("img").evaluateAll(async (images) =>
+    Promise.all(
+      images
+        .filter((image) => image.getBoundingClientRect().width > 0)
+        .map((image) => {
+          if (!(image instanceof HTMLImageElement)) {
+            throw new Error("Expected an HTML image before capture");
+          }
+          return image.decode();
+        }),
+    ),
+  );
   await page.evaluate(() => document.fonts.ready);
   await page.screenshot({ path: info.outputPath("files-desktop-1440.png") });
 });
