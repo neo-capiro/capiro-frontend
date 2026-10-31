@@ -40,7 +40,7 @@ For every future owner response: observation timestamp, exact definition/version
 3. Keep health, win rate and stage weights unimplemented. A future health score needs named inputs and weights; win rate needs eligible won/lost cohort and time basis; weighted pipeline needs explicit saved-stage weights and currency rules. Saved prospect stages can be counted by their existing owner but there is no Prospect card in this hub.
 4. Government funding amounts retain their stated US federal fiscal year and source basis. Do not sum funding opportunity values here or call relevance/association client money awarded. No fiscal-year amount is claimed by this record-count slice.
 
-The Text-to-SQL owner (`01a19189`) was asked to identify any already-approved exact Engagement/Planner aggregates. Future structured aggregates must use existing scoped owners/engine. This frontend adds no query generator, SQL execution surface, central aggregate service or alternative authority.
+The Text-to-SQL owner (`01a19189`) inspected its 14 private projections and confirmed that no approved full-population Engagement/Planner aggregate is established there. Its `client_engagement_tasks` excludes General tasks, research-portfolio actions and PlannerTask; `client_action_items` is ActionRecommendation, not PlannerTask. This does not claim no separate endpoint exists elsewhere. Future structured aggregates must use existing scoped domain owners/engine. This frontend adds no query generator, SQL execution surface, central aggregate service or alternative authority.
 
 ## Acceptance still required
 
