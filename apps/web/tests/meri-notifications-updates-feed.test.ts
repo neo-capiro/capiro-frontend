@@ -95,7 +95,15 @@ function harness(options: { hold?: boolean } = {}) {
   const runsClient = {
     async list() {
       calls.runs += 1;
-      return { runs: [run] };
+      return {
+        runs: [run],
+        nextCursor: null,
+        coverage: {
+          kind: "current-authorized-durable-runs" as const,
+          complete: true,
+          snapshot: false as const,
+        },
+      };
     },
   };
   return {
@@ -317,7 +325,15 @@ describe("updates pagination admission", () => {
       },
       runsClient: {
         async list() {
-          return { runs: [run] };
+          return {
+            runs: [run],
+            nextCursor: null,
+            coverage: {
+              kind: "current-authorized-durable-runs" as const,
+              complete: true,
+              snapshot: false as const,
+            },
+          };
         },
       },
       isCurrent: () => true,

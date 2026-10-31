@@ -647,7 +647,7 @@ describe("joined updates projection", () => {
     expect(notice?.title).toBe("Run waiting for approval");
     expect(notice?.detail).toContain("does not establish that you can approve");
     expect(notice?.read).toBeNull();
-    expect(enabled.runCoverage).toBe("recent-page");
+    expect(enabled.runCoverage).toBe("paged-observation");
     const disabled = projectUpdates({
       ...input,
       preferences: applyNotificationPreference(

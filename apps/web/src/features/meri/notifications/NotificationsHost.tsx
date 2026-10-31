@@ -119,14 +119,16 @@ function OwnedUpdates({
     selected.state === "authorized-client" ? selected.client.id : null;
   // One feed per account lifetime; the scope is a primitive, so an ordinary
   // re-render never recreates the feed and never re-reads.
-  const { snapshot, loadMore, refresh, release } = useUpdatesFeed({
-    ownerKey: `${owner.tenantId}:${owner.actorId}`,
-    clientId,
-    notificationsClient,
-    runsClient,
-    isCurrent,
-    onAccessLost,
-  });
+  const { snapshot, loadMore, loadMoreRuns, refresh, release } = useUpdatesFeed(
+    {
+      ownerKey: `${owner.tenantId}:${owner.actorId}`,
+      clientId,
+      notificationsClient,
+      runsClient,
+      isCurrent,
+      onAccessLost,
+    },
+  );
   const view = useSyncExternalStore(
     controller.subscribe,
     controller.snapshot,
@@ -219,21 +221,22 @@ function OwnedUpdates({
   const count = projection.notices.length;
   return (
     <section aria-label="Meri updates" className={styles.panel}>
-      {/* The owner scan is bounded, so this count is a recent observation of a
-          limited set and never a complete unread total. */}
+      {/* Core counts all currently visible unread notices for this recipient.
+          The count and displayed feed are separate observations. */}
       <p role="status">
         {notificationActions.unread.loading
           ? "Checking unread memory reviews."
           : notificationActions.unread.error
             ? "Unread memory-review count is unavailable."
             : notificationActions.unread.data?.enabled
-              ? `Recent check found ${notificationActions.unread.data.count} unread memory-review ${notificationActions.unread.data.count === 1 ? "notification" : "notifications"}. Older unread notifications may not be included.`
+              ? `${notificationActions.unread.data.count} unread memory-review ${notificationActions.unread.data.count === 1 ? "notification" : "notifications"} across your currently accessible reviews.`
               : "Memory-review notifications are not enabled."}
       </p>
       {notificationActions.error && (
         <p role="alert">
-          The read acknowledgement could not be confirmed. Unread status is
-          preserved; refresh to check the current result.
+          The read acknowledgement could not be confirmed. Unread status is not
+          changed locally; refresh to check the current result before another
+          acknowledgement.
         </p>
       )}
       <p role="status" aria-live="polite">
@@ -286,6 +289,18 @@ function OwnedUpdates({
           this list.
         </p>
       ) : null}
+      {snapshot.runs.state === "observed" ? (
+        <p role="note">
+          {snapshot.runNextCursor
+            ? "More runs are available. Load more run updates to check their notices."
+            : snapshot.runCoverage?.complete
+              ? "The run source reports no more currently accessible runs. Run states can change between reads."
+              : "Run coverage is incomplete. Refresh updates to check the source again."}
+          {
+            " Run updates show observed states, not a complete delivery history."
+          }
+        </p>
+      ) : null}
       <ul className={styles.rows} aria-label="Observed updates">
         {projection.notices.map((notice) => (
           <NoticeRow
@@ -301,11 +316,16 @@ function OwnedUpdates({
         ))}
       </ul>
       {snapshot.moreError ? <p role="alert">{snapshot.moreError}</p> : null}
+      {snapshot.runMoreError ? (
+        <p role="alert">{snapshot.runMoreError}</p>
+      ) : null}
       {notificationActions.unread.data?.enabled ? (
         <p className={styles.meta}>
-          {notificationActions.unread.data.count === 0
-            ? "The recent check found no unread memory-review notifications in the set it observed. The check covers a limited recent set, so other unread notifications may remain; acknowledge one with its own Mark read action."
-            : "When selected, Mark recent memory reviews read checks and acknowledges a limited recent set. Other unread notifications may remain and are acknowledged with their own Mark read action."}
+          Mark all memory reviews read acknowledges every currently accessible
+          unread memory-review notice addressed to you, including notices
+          outside this page or selected client and notices hidden by your
+          preferences. The count and list are read separately; refresh to check
+          changes.
         </p>
       ) : null}
       <div className={styles.actions}>
@@ -319,7 +339,7 @@ function OwnedUpdates({
           }
           onClick={() => void notificationActions.markRead(null)}
         >
-          Mark recent memory reviews read
+          Mark all memory reviews read
         </button>
         {projection.nextCursor ? (
           <button
@@ -328,6 +348,16 @@ function OwnedUpdates({
             onClick={() => void loadMore()}
           >
             Load more updates
+          </button>
+        ) : null}
+        {snapshot.runNextCursor ? (
+          <button
+            type="button"
+            className={ui.outline}
+            disabled={snapshot.refreshing || snapshot.runMorePending}
+            onClick={() => void loadMoreRuns()}
+          >
+            Load more run updates
           </button>
         ) : null}
         <button
