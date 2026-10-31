@@ -3,7 +3,7 @@ import { queryString, type ApiClient } from "@/shared/portfolio/api/http";
 import { plannerTaskOperations } from "@/shared/capiro/operations/planner-tasks";
 import { strategiesPlanOperations } from "@/shared/capiro/operations/strategies-plan";
 import { engagementSessionOperations } from "@/shared/capiro/operations/engagement-sessions";
-import { meetingSchema } from "../../calendar/public";
+import { meetingListSchema, meetingSchema } from "../../calendar/public";
 import {
   associationKinds,
   associationSourceSchema,
@@ -108,8 +108,9 @@ export async function loadAssociationChoices(
     throw new Error("Choose a meeting range of at most 93 days.");
   const rows = await api.request(
     "core",
+    // The calendar list returns prep metadata only (D5); this is a list read.
     `engagement/meetings?${queryString({ clientId, from, to })}`,
-    z.array(meetingSchema),
+    z.array(meetingListSchema),
     { signal },
   );
   return choices(

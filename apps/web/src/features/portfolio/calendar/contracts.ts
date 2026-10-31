@@ -1,7 +1,11 @@
 import { z } from "zod";
 import type { EffectiveDateRecord } from "@/shared/federal-register/effective-dates";
 import { validDay } from "@/shared/portfolio/date/civil";
-import { preparationSchema } from "./preparation/schema";
+import {
+  preparationListSchema,
+  preparationSchema,
+  type Preparation,
+} from "./preparation/schema";
 import {
   artifactActorSchema,
   artifactMetadataSchema,
@@ -10,8 +14,8 @@ const lifecycleArtifactSchema = artifactMetadataSchema
   .pick({ id: true, meetingId: true, clientId: true, status: true })
   .partial({ meetingId: true, clientId: true, status: true });
 export { prepItemSchema } from "./preparation/schema";
-export const meetingSchema = z
-  .object({
+const meetingShape = (preps: z.ZodType<Preparation[]>) =>
+  z.object({
     id: z.string(),
     subject: z.string(),
     updatedAt: z.iso.datetime().optional(),
@@ -33,54 +37,61 @@ export const meetingSchema = z
         role: z.string().nullable(),
       }),
     ),
-    preps: z.array(preparationSchema),
+    preps,
     notes: z.array(lifecycleArtifactSchema).optional(),
     debriefs: z.array(lifecycleArtifactSchema).optional(),
-  })
-  .superRefine((meeting, ctx) => {
-    for (const kind of ["notes", "debriefs"] as const) {
-      meeting[kind]?.forEach((artifact, index) => {
-        if (
-          (artifact.meetingId !== undefined &&
-            artifact.meetingId !== meeting.id) ||
-          (artifact.clientId !== undefined &&
-            artifact.clientId !== (meeting.client?.id ?? null))
-        ) {
-          ctx.addIssue({
-            code: "custom",
-            path: [kind, index],
-            message: "Artifact belongs to another meeting or client",
-          });
-        }
-      });
-    }
-    meeting.preps.forEach((prep, index) => {
-      // `null`/absent attribution is UNKNOWN provenance, not another record: preps
-      // written before the client stamp existed carry `clientId: null` while the
-      // enclosing meeting is client-scoped, and that one row used to fail the whole
-      // payload — the drawer showed "Meeting unavailable" and notes, debriefs, edit
-      // and join were unreachable (B0). A prep that names a different meeting or
-      // client is still a contract violation; parseMeeting() degrades that one prep
-      // instead of blanking the meeting.
-      if (prep.meetingId != null && prep.meetingId !== meeting.id) {
-        ctx.addIssue({
-          code: "custom",
-          path: ["preps", index, "meetingId"],
-          message: "Preparation belongs to another meeting",
-        });
-      }
+  });
+
+const meetingProvenance = (
+  meeting: z.infer<ReturnType<typeof meetingShape>>,
+  ctx: z.RefinementCtx,
+) => {
+  for (const kind of ["notes", "debriefs"] as const) {
+    meeting[kind]?.forEach((artifact, index) => {
       if (
-        prep.clientId != null &&
-        prep.clientId !== (meeting.client?.id ?? null)
+        (artifact.meetingId !== undefined &&
+          artifact.meetingId !== meeting.id) ||
+        (artifact.clientId !== undefined &&
+          artifact.clientId !== (meeting.client?.id ?? null))
       ) {
         ctx.addIssue({
           code: "custom",
-          path: ["preps", index, "clientId"],
-          message: "Preparation belongs to another client",
+          path: [kind, index],
+          message: "Artifact belongs to another meeting or client",
         });
       }
     });
+  }
+  meeting.preps.forEach((prep, index) => {
+    // `null`/absent attribution is UNKNOWN provenance, not another record: preps
+    // written before the client stamp existed carry `clientId: null` while the
+    // enclosing meeting is client-scoped, and that one row used to fail the whole
+    // payload — the drawer showed "Meeting unavailable" and notes, debriefs, edit
+    // and join were unreachable (B0). A prep that names a different meeting or
+    // client is still a contract violation; parseMeeting() degrades that one prep
+    // instead of blanking the meeting.
+    if (prep.meetingId != null && prep.meetingId !== meeting.id) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["preps", index, "meetingId"],
+        message: "Preparation belongs to another meeting",
+      });
+    }
+    if (
+      prep.clientId != null &&
+      prep.clientId !== (meeting.client?.id ?? null)
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["preps", index, "clientId"],
+        message: "Preparation belongs to another client",
+      });
+    }
   });
+};
+export const meetingSchema = meetingShape(
+  z.array(preparationSchema),
+).superRefine(meetingProvenance);
 /**
  * Read a meeting payload without letting one unusable prep hide the meeting.
  *
@@ -119,6 +130,14 @@ export function parseMeeting(payload: unknown): {
   );
 }
 export type Meeting = z.infer<typeof meetingSchema>;
+/**
+ * The calendar LIST contract (D5). Identical to `meetingSchema` except that prep rows are
+ * the metadata projection Core returns for a list; only `fetchMeetings` parses with this.
+ * Detail reads keep `meetingSchema`, where a prep body is required.
+ */
+export const meetingListSchema = meetingShape(
+  z.array(preparationListSchema),
+).superRefine(meetingProvenance);
 export const hearingSchema = z.object({
   id: z.string(),
   canonicalEventId: z.string().nullish(),

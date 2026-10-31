@@ -5,7 +5,7 @@ import { queryString } from "@/shared/portfolio/api/http";
 import {
   hearingPageSchema,
   taskPageSchema,
-  meetingSchema,
+  meetingListSchema,
   type CalendarFeed,
   type CalendarItem,
 } from "./contracts";
@@ -22,7 +22,7 @@ export async function fetchMeetings(
   const rows = await api.request(
     "core",
     `engagement/meetings?${queryString({ from, to, clientId })}`,
-    z.array(meetingSchema),
+    z.array(meetingListSchema),
     { signal },
   );
   return {
