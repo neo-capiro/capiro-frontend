@@ -77,34 +77,80 @@
 }
 .table td {
   font-size: 12px;
+  height: 72px;
+  padding-block: 11px;
+  vertical-align: middle;
 }
 .table small {
   display: block;
-  font-size: 10px;
+  font-size: 12px;
+  line-height: 1.4;
   margin-top: 4px;
+}
+.status {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.status[data-status="Text searchable"] {
+  background: var(--accent-subtle, #f5f5f4);
+  color: #3d6b4f;
+  white-space: nowrap;
+}
+.status[data-status="Text partial"],
+.status[data-status="No readable text"] {
+  background: var(--warning-subtle, #f3eee2);
+  color: var(--warning-text, #6c5226);
+  white-space: nowrap;
+}
+@media (prefers-color-scheme: dark) {
+  .status[data-status="Text searchable"] {
+    background: var(--muted);
+    color: var(--success);
+  }
+  .status[data-status="Text partial"],
+  .status[data-status="No readable text"] {
+    background: var(--muted);
+    color: var(--warning-text, #d6b274);
+  }
 }
 .table .scanDisclosure {
   white-space: normal;
   overflow-wrap: anywhere;
   line-height: 1.5;
 }
+.fileName + small {
+  padding-left: 54px;
+}
 .fileName {
-  display: flex;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   border: 0;
   background: none;
   padding: 0;
   text-align: left;
   font-size: 13px;
+  overflow-wrap: anywhere;
 }
 .extension {
-  display: inline-block;
-  padding: 3px 5px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  min-height: 28px;
+  padding: 4px;
   border: 1px solid var(--border);
   background: var(--muted);
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 500;
   border-radius: 5px;
 }
 .menu {
@@ -317,5 +363,20 @@
   .folderGrid {
     grid-template-columns: 1fr;
     padding: 14px;
+  }
+}
+@media (max-width: 680px) {
+  .fileName {
+    min-width: 214px;
+  }
+}
+@media (min-width: 681px) {
+  .pageActions :global(.button) {
+    min-height: 30px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
   }
 }
