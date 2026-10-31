@@ -2,7 +2,12 @@ import "./command-recovery-platform";
 import { expect, it, vi } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
 import { objective as fixtureObjective } from "./browser/fixtures";
-import { db, installPlatform, barrier } from "./command-recovery-platform";
+import {
+  db,
+  local,
+  installPlatform,
+  barrier,
+} from "./command-recovery-platform";
 import { decryptJournal } from "../src/shared/session/recovery/journal-crypto";
 import { createCapiroApi } from "../src/shared/capiro/http";
 import { capiroOperations } from "../src/shared/capiro/registry";
@@ -215,6 +220,27 @@ function setup() {
     );
   return { cache, current, control, writes, fetcher, starts, session };
 }
+
+it.each(["hydrate", "refresh"] as const)(
+  "%s cannot erase a known intake when recovery storage disappears",
+  async (read) => {
+    const s = setup(),
+      session = s.session();
+    await session.hydrate();
+    s.control.lostReply = true;
+    await session.submit("appropriations");
+    const original = structuredClone(session.snapshot().retained);
+    expect(s.writes).toHaveLength(1);
+    db.records.clear();
+    local.clear();
+    await session[read]();
+    expect(session.snapshot().retained).toEqual(original);
+    expect(session.snapshot().error).toBeTruthy();
+    await session.submit("appropriations");
+    expect(s.writes).toHaveLength(1);
+    expect(s.starts).not.toHaveBeenCalled();
+  },
+);
 
 it("accepts a current ready source even when an ordinary GET says outcome unconfirmed", () => {
   expect(requireInitialStrategyIntakeSource(source, objective, client)).toEqual(

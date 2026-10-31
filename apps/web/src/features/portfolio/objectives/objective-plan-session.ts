@@ -146,6 +146,10 @@ export class ObjectivePlanSession {
         this.assert(signal);
         const saved = await this.recovery.load();
         this.assert(signal);
+        // Missing recovery storage cannot settle the request this view knows.
+        // Keep its identity instead of issuing another materialization UUID.
+        if (this.state.request && !saved)
+          throw new Error("Saved plan request is inconsistent.");
         const retained =
           saved ??
           (await this.recovery.reserve(

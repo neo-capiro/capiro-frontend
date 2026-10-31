@@ -1,9 +1,34 @@
 import "./command-recovery-platform";
 import { it, expect } from "vitest";
-import { installPlatform, barrier } from "./command-recovery-platform";
+import {
+  installPlatform,
+  barrier,
+  db,
+  local,
+} from "./command-recovery-platform";
 import { planSetup } from "./objective-plan-test-setup";
 import { planHref } from "../src/shared/capiro/operations/strategy-materialization";
 installPlatform();
+
+it.each([false, true])(
+  "missing recovery storage cannot replace a known plan request (lost reply: %s)",
+  async (lostReply) => {
+    const s = planSetup(),
+      session = s.session();
+    await session.refresh();
+    s.control.lostPlan = lostReply;
+    await session.execute();
+    const original = structuredClone(session.snapshot().request);
+    db.records.clear();
+    local.clear();
+    await session.execute();
+    expect(s.plans).toHaveLength(1);
+    expect(session.snapshot().request).toEqual(original);
+    expect(session.snapshot().verified).toBe(false);
+    expect(session.snapshot().uncertain).toBe(true);
+    expect(session.snapshot().error).toBeTruthy();
+  },
+);
 
 it.each([false, true])(
   "pins known project output IDs through an unavailable observation: %s",
