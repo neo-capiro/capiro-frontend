@@ -21,6 +21,7 @@ type QueryState = {
 const state = vi.hoisted(() => ({
   byKey: {} as Record<string, QueryState>,
   calls: [] as { key: string; input: unknown; options: { enabled?: boolean } }[],
+  capability: "unknown" as "enabled" | "disabled" | "unknown",
 }));
 
 vi.mock("../src/shared/capiro/queries", () => ({
@@ -32,6 +33,11 @@ vi.mock("../src/shared/capiro/queries", () => ({
     state.calls.push({ key, input, options });
     return state.byKey[key] ?? { loading: false, reload: () => undefined };
   },
+}));
+
+vi.mock("../src/shared/capiro/capabilities", () => ({
+  useCapiroCapabilities: () => ({ campaignSessions: state.capability }),
+  CapiroCapabilitiesProvider: ({ children }: { children: unknown }) => children,
 }));
 
 const { OutreachList } = await import(
@@ -76,9 +82,11 @@ const session = (over: Record<string, unknown> = {}) => ({
 function render(
   byKey: Record<string, QueryState>,
   props: Record<string, unknown> = {},
+  capability: "enabled" | "disabled" | "unknown" = "unknown",
 ) {
   state.byKey = byKey;
   state.calls = [];
+  state.capability = capability;
   return renderToStaticMarkup(
     createElement(OutreachList, {
       clientId: "",
@@ -89,6 +97,9 @@ function render(
     }),
   );
 }
+
+const sessionsCall = () =>
+  state.calls.filter((call) => call.key === "engagement.sessions");
 
 const ok = (data: unknown): QueryState => ({
   data,
@@ -228,5 +239,118 @@ describe("Outreach list sessions isolation", () => {
     });
     expect(markup).toContain("Records read failed");
     expect(markup).not.toContain("Canonical campaign");
+  });
+});
+
+describe("Outreach list campaign-session capability admission", () => {
+  const healthy = () => ({
+    "engagement.outreach.records": ok({ items: [record()] }),
+    "engagement.campaigns": ok({ items: [campaign()] }),
+  });
+
+  it("issues no sessions query and states the surface is not available when disabled", () => {
+    // Stale session data is present on purpose: a disabled cohort must not render it either.
+    const markup = render(
+      {
+        ...healthy(),
+        "engagement.sessions": ok([session({ title: "Stale session row" })]),
+      },
+      {},
+      "disabled",
+    );
+    const calls = sessionsCall();
+    expect(calls.length).toBeGreaterThan(0);
+    expect(calls.every((call) => call.options.enabled === false)).toBe(true);
+    expect(markup).toContain("Campaign sessions are not available");
+    expect(markup).toContain("Saved outreach record");
+    expect(markup).toContain("Canonical campaign");
+    // No retry control exists in this state, so no interaction can dispatch the request.
+    expect(markup).not.toContain("Retry campaign sessions");
+    expect(markup).not.toContain("Campaign sessions are unavailable");
+    expect(markup).not.toContain("Stale session row");
+  });
+
+  it("keeps the request disabled across rerenders in the disabled cohort", () => {
+    render({ ...healthy(), "engagement.sessions": ok([]) }, {}, "disabled");
+    expect(sessionsCall().every((call) => call.options.enabled === false)).toBe(
+      true,
+    );
+    // A rerender with different props (different client scope) must not flip it on.
+    render(
+      { ...healthy(), "engagement.sessions": ok([]) },
+      { clientId: "cl-1" },
+      "disabled",
+    );
+    expect(sessionsCall().every((call) => call.options.enabled === false)).toBe(
+      true,
+    );
+  });
+
+  it("issues the intended query and renders session rows when enabled", () => {
+    const markup = render(
+      {
+        ...healthy(),
+        "engagement.sessions": ok([
+          session({ id: "s-2", title: "Enabled session campaign" }),
+          session({ id: "s-2", title: "Enabled session campaign" }),
+        ]),
+      },
+      {},
+      "enabled",
+    );
+    expect(sessionsCall().every((call) => call.options.enabled === true)).toBe(
+      true,
+    );
+    expect(occurrences(markup, "Enabled session campaign")).toBe(1);
+    expect(markup).not.toContain("Campaign sessions are not available");
+    expect(markup).not.toContain("Campaign sessions are unavailable");
+  });
+
+  it("keeps enabled-service failure honest and retryable", () => {
+    const markup = render(
+      {
+        ...healthy(),
+        "engagement.sessions": failure(new Error("upstream unavailable")),
+      },
+      {},
+      "enabled",
+    );
+    expect(sessionsCall().every((call) => call.options.enabled === true)).toBe(
+      true,
+    );
+    expect(markup).toContain("Campaign sessions are unavailable");
+    expect(markup).toContain("Counts and results are partial");
+    expect(markup).toContain("Retry campaign sessions");
+    expect(markup).toContain("Canonical campaign");
+    // The ancillary failure stays non-fatal.
+    expect(markup).not.toContain("This view is unavailable");
+  });
+
+  it("keeps the documented unknown fallback (request issued, honest partial state)", () => {
+    const markup = render(
+      {
+        ...healthy(),
+        "engagement.sessions": failure(new Error("Not found")),
+      },
+      {},
+      "unknown",
+    );
+    expect(sessionsCall().every((call) => call.options.enabled === true)).toBe(
+      true,
+    );
+    expect(markup).toContain("Campaign sessions are unavailable");
+    expect(markup).toContain("Retry campaign sessions");
+    expect(markup).toContain("Canonical campaign");
+  });
+
+  it("keeps the selected-client gate even when the cohort is enabled", () => {
+    render(
+      { ...healthy(), "engagement.sessions": ok([session()]) },
+      { clientId: "cl-1" },
+      "enabled",
+    );
+    expect(sessionsCall().every((call) => call.options.enabled === false)).toBe(
+      true,
+    );
   });
 });

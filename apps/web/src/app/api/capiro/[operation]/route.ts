@@ -55,10 +55,26 @@ async function handle(request: Request, context: Context) {
     );
   const config = readCapiroConfig(process.env);
   if (previewWriteTarget) config.services = { core: previewWriteTarget.href };
+  // The campaign-session operations are owned by the separate engagement application. When the
+  // cohort states that surface is available, this narrow override points those two operations at
+  // that service; every other operation keeps its declared service. An "enabled" selection without
+  // a configured engagement base URL has already resolved to "disabled", so an enabled state can
+  // never be sent to the main Core application.
+  const campaignSessionOperation =
+    operation === "engagement.sessions" || operation === "engagement.session";
+  const selectedOperations =
+    config.engagementSessions === "enabled" &&
+    campaignSessionOperation &&
+    Object.hasOwn(operations, operation)
+      ? {
+          ...operations,
+          [operation]: { ...operations[operation]!, service: "engagement" as const },
+        }
+      : operations;
   return handleCapiroRequest(
     request,
     operation,
-    operations,
+    selectedOperations,
     config,
     async (authentication) => {
       const session = await auth();

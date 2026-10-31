@@ -11,6 +11,7 @@ it("accepts designated public/secret key pairs and never serializes secret/servi
   expect(publicCapiroConfig(read)).toEqual({
     publishableKey: "pk_test_YQ==",
     configured: true,
+    capabilities: { campaignSessions: "unknown" },
   });
   expect(JSON.stringify(publicCapiroConfig(read))).not.toContain("private");
 });
