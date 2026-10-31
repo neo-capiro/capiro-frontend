@@ -1,4 +1,5 @@
 import type { ProgramPage } from "./contracts";
+import { ProgramCandidateCoverage } from "./ProgramCandidateCoverage";
 import styles from "./opportunities.module.css";
 export function RelevantPrograms({
   data,
@@ -9,6 +10,7 @@ export function RelevantPrograms({
 }) {
   return (
     <>
+      <ProgramCandidateCoverage data={data} />
       {data.data.map((program) => (
         <article className={styles.item} key={program.peCode}>
           <div className="row">
