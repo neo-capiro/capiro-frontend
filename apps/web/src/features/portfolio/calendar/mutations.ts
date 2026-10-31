@@ -1,7 +1,7 @@
 "use client";
 import { useQueryClient } from "@tanstack/react-query";
 import { ApiError } from "@/shared/portfolio/api/http";
-import type { Meeting } from "./contracts";
+import type { Meeting, parseMeeting } from "./contracts";
 import { meetingInputSchema, type MeetingInput } from "./meeting-save";
 import { useMeetingCommand } from "./commands/useMeetingCommand";
 
@@ -44,7 +44,7 @@ export function useSaveMeeting(
         async (_signal, guard) => {
           guard();
           if (!meeting) return;
-          const saved = cache.getQueryState<Meeting>([
+          const saved = cache.getQueryState<ReturnType<typeof parseMeeting>>([
             "meeting",
             meeting.id,
             readClientId ?? null,
@@ -54,9 +54,9 @@ export function useSaveMeeting(
             saved.fetchStatus !== "idle" ||
             saved.isInvalidated ||
             saved.error ||
-            saved.data?.id !== meeting.id ||
-            (saved.data.client?.id ?? null) !== originalClientId ||
-            saved.data.updatedAt !== meeting.updatedAt
+            saved.data?.meeting?.id !== meeting.id ||
+            (saved.data.meeting.client?.id ?? null) !== originalClientId ||
+            saved.data.meeting.updatedAt !== meeting.updatedAt
           )
             throw new ApiError(
               409,
