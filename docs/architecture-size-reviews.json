@@ -3728,11 +3728,11 @@
   },
   {
     "path": "apps/web/src/shared/capiro/legiwatch-retirement.test.ts",
-    "sha256": "492f6e0543505a1218125eaa6b38a47b54db4e54f45dfd0a595e7e9f59266a46",
-    "reviewer": "Codex independent LegiWatch simplification review",
+    "sha256": "0533967776a7c7bf6c3521638d97181b3cf038ab3ba881d13c2a8ab479ecf64e",
+    "reviewer": "Codex independent LegiWatch compatibility and integration review",
     "reviewedAt": "2026-10-31",
     "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
-    "rationale": "The retired-surfaces describe callback groups independent boundary cases: pre-dispatch 404s, retained delivery/rule paths, selection-only draft review, research-only sources/configuration and removal of report workflows. Assertions are behavioral and no production responsibility is introduced.",
+    "rationale": "The describe callback groups one operation-retirement contract suite: removed operations fail before authentication/dispatch, retained delivery and rule owners remain available, and research-only briefing/workflow inputs remain bounded. The correction narrows removed-report assertions to definition mutations/generation while permitting the explicit transitional read-only picker and retained delivery names. Individual tests keep their own assertions; no runtime product responsibility or blanket directory exemption is introduced.",
     "functions": [
       {
         "name": "<anonymous>",
