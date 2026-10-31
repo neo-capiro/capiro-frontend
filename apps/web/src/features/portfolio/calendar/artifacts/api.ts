@@ -7,6 +7,8 @@ import type {
   ArtifactMeeting,
 } from "./contracts";
 
+type CommandArtifact = NonNullable<MeetingChange["artifact"]>;
+
 export function artifactCommand(
   meeting: ArtifactMeeting,
   kind: ArtifactKind,
@@ -29,6 +31,18 @@ export function artifactCommand(
           revision: change.revision ?? null,
           body: change.action === "save" ? change.body : null,
           confidential: change.action === "save" ? change.confidential : null,
+          // The audited context is only meaningful on a debrief create, where Core
+          // persists it as generated_from_jsonb. Other artifact types must not
+          // carry the key at all, so it is omitted rather than nulled.
+          ...(type === "debrief" &&
+          change.action === "save" &&
+          !change.id &&
+          change.generatedFrom !== undefined
+            ? {
+                generatedFrom:
+                  change.generatedFrom as CommandArtifact["generatedFrom"],
+              }
+            : {}),
         },
     artifacts: sharing
       ? [{ type, id: change.id!, revision: change.revision ?? "" }]

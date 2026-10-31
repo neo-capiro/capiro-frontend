@@ -29,6 +29,11 @@ export function useArtifactMutation(
           revision: artifact.revision ?? undefined,
           body: artifact.body,
           confidential: artifact.confidential!,
+          // A retained debrief draft keeps its audited context across recovery.
+          ...(artifact.generatedFrom !== null &&
+          artifact.generatedFrom !== undefined
+            ? { generatedFrom: artifact.generatedFrom }
+            : {}),
         }
       : undefined;
   const mutate = (value: ArtifactChange) => {

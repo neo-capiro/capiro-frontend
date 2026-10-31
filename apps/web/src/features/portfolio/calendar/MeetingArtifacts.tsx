@@ -111,6 +111,8 @@ function ArtifactEditor({
         confidential: boolean;
         generated?: boolean;
         reviewedBody?: string;
+        /** D2: audited context summary of the draft this body came from. */
+        generatedFrom?: unknown;
       }
     | undefined
   >(() =>
@@ -219,8 +221,13 @@ function ArtifactEditor({
       {kind === "debriefs" && !mutation.isPending && !mutation.uncertain && (
         <DebriefGeneration
           meeting={meeting}
-          onDraft={(body) =>
-            setEditing({ body, confidential: false, generated: true })
+          onDraft={(body, generatedFrom) =>
+            setEditing({
+              body,
+              confidential: false,
+              generated: true,
+              generatedFrom,
+            })
           }
         />
       )}
@@ -393,6 +400,13 @@ function ArtifactEditor({
               revision: editing?.revision,
               body: String(form.get("body")).trim(),
               confidential: form.get("confidential") === "on",
+              // D2: only a new debrief carries the audited context, and only when
+              // the draft actually had one.
+              ...(kind === "debriefs" &&
+              !editing?.id &&
+              editing?.generatedFrom !== undefined
+                ? { generatedFrom: editing.generatedFrom }
+                : {}),
             });
           }}
         >
