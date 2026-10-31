@@ -156,9 +156,9 @@
     "file": "apps/web/src/features/portfolio/calendar/preparation/PreparationEditor.tsx",
     "kind": "function",
     "symbol": "PreparationEditor",
-    "fingerprint": "a56f5883a05e6dabbf407bbbe5377a48e1aa4849fd82654a25e6be1cc9ec3420",
-    "reason": "Exact-head structure review of the corrected bytes at frontend e4a4a4d9a41b8349c91ab0732aa72994d1522e59 (209 nonblank body lines): one preparation draft still owns its local field values, editability decision, validation, discard confirmation, one save intent and the newly explicit unresolved-write outcome with its single authorized readback. The readback settles that same save intent (compare the attempted body's fields against the stored projection, then the existing two-key invalidation/close or an explicit re-save); extracting it would move draft/body state across a boundary for no cohesion gain. Transport (api.ts), editing helpers (editing.ts) and presentation primitives (Dialog/TextareaField/QueryState) remain separate owners. No size-driven split is warranted.",
-    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; bytes verified, not copied from the prior fingerprint)",
+    "fingerprint": "6f71ecf1d6b8b189aea1e018aa9d0879e79228a12ac45401754839f5d8c36a88",
+    "reason": "Exact-head structure review at frontend adabcc73be7fe7c0005bd700a93bc227d4e919f3 (210 nonblank), replacing the a56f5883 record whose bytes this correction changed. Still one draft lifecycle: fields, editability decision, validation, discard confirmation, one save intent, the explicit unresolved-write outcome and its single readback. The correction moved the readback verdict into an exported pure function beside the existing submitPrepEdit seam and shares one normalizer with the save; that reduces responsibility inside the component rather than adding any. No split warranted.",
+    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes, not copied)",
     "reviewedOn": "2026-10-31"
   },
   {
