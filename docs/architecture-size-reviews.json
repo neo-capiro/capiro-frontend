@@ -1,22 +1,5 @@
 [
   {
-    "path": "apps/web/src/features/modules/directory/CommitteeDirectory.tsx",
-    "sha256": "5da4cd0115f4c02dee8276005a2edf92397e8baee5e34eb60fe9ca00c4546e6b",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "CommitteeDirectory.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "CommitteeDirectory",
-        "nonblankLines": 146
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/directory/CommitteeDirectory.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
     "sha256": "0b6c1df6ea8e36914b43ae2c6c75c0e39ec4598acab9925ff73061ef4b41364e",
     "reviewer": "Codex shared frontend integration review",
@@ -65,23 +48,6 @@
     ],
     "signals": [
       "apps/web/src/features/modules/directory/PersonnelDirectory.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/directory/StateDirectory.tsx",
-    "sha256": "fab57cd6cf4f5b7b72d30eec6a567f508e3f83bfbedb4a701d7521d66edd6784",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "StateDirectory.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "StateDirectory",
-        "nonblankLines": 205
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/directory/StateDirectory.tsx: function over80 nonblank lines requires review"
     ]
   },
   {
@@ -243,159 +209,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/LegiWatchScreen.tsx",
-    "sha256": "5e95b9732eedb9a4b74a230d86d635281e6a5a02f5239a57bc1250395e6bc5b7",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "LegiWatchScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "LegiWatchScreen",
-        "nonblankLines": 82
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/LegiWatchScreen.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeFollowDialog.tsx",
-    "sha256": "16c7e3d3bcdf3139a9f4eeb758788452d6f6f79e89ba4d0ea4690893b45a2a5a",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "The form owns one committee-follow preference transaction. Guarded initialization replaces the effect only when the loaded source changes; typed operations still own the write contract.",
-    "functions": [
-      {
-        "name": "CommitteeFollowDialog",
-        "nonblankLines": 122
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeFollowDialog.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeRoom.tsx",
-    "sha256": "fa2346dbb1a5cfe18335992d4891194d615dd5f476e4113b32ffcec215cc0aaa",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "This is one committee-room projection composer; the only integration change is equivalent JSX apostrophe escaping.",
-    "functions": [
-      {
-        "name": "CommitteeRoom",
-        "nonblankLines": 181
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeRoom.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteesScreen.tsx",
-    "sha256": "23ac0ceece261d41b41bb161c710a6fc02b758343b3cb6648b62b09b1b24f353",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "CommitteesScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "CommitteesScreen",
-        "nonblankLines": 127
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteesScreen.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/StateCommitteeRoom.tsx",
-    "sha256": "73d72e8f12ba0488c54c84d0d90c0c19ad24cd2603a8e912786df1ccb3f29433",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "StateCommitteeRoom.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "StateCommitteeRoom",
-        "nonblankLines": 202
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/committees/StateCommitteeRoom.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetCompare.tsx",
-    "sha256": "0722712e14e502b559b4dd9b358d675e37870576cc9af1461749c63116986500",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "BudgetCompare.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "BudgetCompare",
-        "nonblankLines": 81
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetCompare.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetScreen.tsx",
-    "sha256": "c6d1afc5d5e78c251257f9afb03eefb4f20832a0d165213141917f49cf2917ee",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "BudgetScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "BudgetWorkspace",
-        "nonblankLines": 127
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetScreen.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/NewsMonitorEditor.tsx",
-    "sha256": "6a98d2291a7e5057110ddb5faeab1e10360715245eb2beb89a4f5a25368621cc",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "NewsMonitorEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "NewsMonitorEditor",
-        "nonblankLines": 83
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/evidence/NewsMonitorEditor.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/PersonnelEvidence.tsx",
-    "sha256": "25add04b9dbd3a4f14e1d365c9f7e0671c9ba05f8d6c1c3ce798969e8799dfee",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "PersonnelEvidence.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "PersonnelEvidence",
-        "nonblankLines": 127
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/evidence/PersonnelEvidence.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/ArchiveScreen.tsx",
     "sha256": "ba5d7e7e54568c92c6beb22dd591e411cc3c0130e5b8c80116b365a6d566da97",
     "reviewer": "Codex implementation review",
@@ -448,15 +261,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingDetailScreen.tsx",
-    "sha256": "ce9d824d6393d0c6afd30e3912b906eccf628d101c39914e99a3912f39a3fc83",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "HearingDetailScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "b06045f4f04f5076168c6257dd159853d1899f2ef38b23935771145ef4e2ca1a",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "HearingDetailScreen retains its hearing-tab composition and delegates transcript, intelligence, attendance, follow and work interactions to existing components. The changed committee button uses the public Directory destination and preserves the client hint.",
     "functions": [
       {
         "name": "HearingDetailScreen",
-        "nonblankLines": 263
+        "nonblankLines": 265
       }
     ],
     "signals": [
@@ -551,91 +364,6 @@
     ],
     "signals": [
       "apps/web/src/features/modules/intelligence/legiwatch/hearings/TranscriptPanel.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportReview.tsx",
-    "sha256": "d6b0fd81e53183feceee20fd059f4a3ac61f094d9f7ccc630f5503907cb4c1a1",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ImportReview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "ImportReview",
-        "nonblankLines": 183
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportReview.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportUpload.tsx",
-    "sha256": "9afd8f05758cca83dd46f83a12a602166b5cbf4d4973d6089d4134235a5f6515",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ImportUpload.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "ImportUpload",
-        "nonblankLines": 86
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportUpload.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/KeywordPromotion.tsx",
-    "sha256": "c9e5733d5518b0602923cf79fdd9541c7e82016d1808a73d894068802682c77a",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "KeywordPromotion.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "KeywordPromotion",
-        "nonblankLines": 121
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/imports/KeywordPromotion.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/LegalImportDecision.tsx",
-    "sha256": "20d55fed82d7da3c9ed6356571d8360091933426e8dc88c5507e3f20e4025dd7",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "LegalImportDecision.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "LegalImportDecision",
-        "nonblankLines": 215
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/imports/LegalImportDecision.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ResearchImports.tsx",
-    "sha256": "cfbeedfe403c7ce9be14448b9d5af248dc6ebbe031bf9d37891d8a0cfef86909",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ResearchImports.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "StatutePromotion",
-        "nonblankLines": 102
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/imports/ResearchImports.tsx: function over80 nonblank lines requires review"
     ]
   },
   {
@@ -870,50 +598,16 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionActivation.tsx",
-    "sha256": "1966e733f7936268d012bca5cb6420653647139b912218fe4f0c069137e28650",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "SubscriptionActivation.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "SubscriptionActivation",
-        "nonblankLines": 106
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionActivation.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionEditor.tsx",
-    "sha256": "3ba55abd30d9f8dc547607573356b1a3a651072a5416e624b703326afb8516e5",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "SubscriptionEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "SubscriptionEditor",
-        "nonblankLines": 153
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionEditor.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowActionView.tsx",
-    "sha256": "5d66f5df4223ebf463600056002a6a5906efa884ba98593360e3d9ae0f38da31",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "WorkflowActionView.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "9dbed40e9dbc07aba931eafd91a3759389db1a637b9a832a6a1529e0ff3f8309",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "WorkflowActionView presents one saved internal action and its explicit execute/pause controls. Deleting report-run display reduces its responsibility; request execution and current authority remain in the fixed operation/backend boundary.",
     "functions": [
       {
         "name": "WorkflowActionView",
-        "nonblankLines": 113
+        "nonblankLines": 105
       }
     ],
     "signals": [
@@ -922,15 +616,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowEditor.tsx",
-    "sha256": "5e86e1d7484ebb4df8a1ef0c18dbdbb79be41dff5b8d2a7fb644f59d5b6c141a",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "WorkflowEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "65edb8e4fee1a3f1ffc35d43ebd15cecabd2d99a03963b674355bc72c99d4d83",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "WorkflowEditor owns one paused workflow draft with folder, jurisdiction and session fields. The report template and report chooser are deleted; saved activation remains its separate WorkflowActivation component and version-bound operation.",
     "functions": [
       {
         "name": "WorkflowEditor",
-        "nonblankLines": 162
+        "nonblankLines": 119
       }
     ],
     "signals": [
@@ -939,15 +633,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowPreview.tsx",
-    "sha256": "cc61f8270b5a9f1efb81d4750776177879f75b3c65de069ab60a32689c479ded",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "WorkflowPreview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "4c032f42bebc99eb507b21856de673fd3a944c992eea62a82281568cc4d94d61",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "WorkflowPreview owns one reviewed one-time follow-up input and enqueue interaction. The removed report reference branch leaves retained hearing, bill and legal references; input hash and retry request key stay local to this single review.",
     "functions": [
       {
         "name": "WorkflowPreview",
-        "nonblankLines": 148
+        "nonblankLines": 144
       }
     ],
     "signals": [
@@ -956,11 +650,11 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingCitations.tsx",
-    "sha256": "40210fa26a724213900acd09338f27f2fa664ede39e33aaf57b669fac3cfe128",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "BriefingCitations.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "e4757c956d807e8d52b8e8f3f1e7e9b535e9a448d6a308558dc4a9780c1331d2",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "CitationSource owns exact passage selection for one retained research source, including section and revision checks. The only diff is the canonical source-helper import move; source retrieval and draft composition remain separate owners.",
     "functions": [
       {
         "name": "CitationSource",
@@ -973,15 +667,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingComposer.tsx",
-    "sha256": "0767932c785fb9ccfad5ccf83e438cd5e1c0515f37c9479c7c246ff16402993c",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "BriefingComposer.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "da12c78a052eca8b8d479bb6d11bcffcaf4575855cf3b9b53da73d140077339e",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "BriefingComposer owns one cited research briefing draft with local fields and a stable retry key. Citation selection and saved-edition review remain separate components; retired news templates are removed instead of preserved as hidden options.",
     "functions": [
       {
         "name": "BriefingComposer",
-        "nonblankLines": 180
+        "nonblankLines": 178
       }
     ],
     "signals": [
@@ -990,15 +684,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingReview.tsx",
-    "sha256": "21adb7557ffb9cc52ce92ae22b48e309ad8eb51228d66a0a8cdbd835acbab373",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "BriefingReview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "f4d9bd5422b2f03300a8097053160319a28f99db4123f396b25b73db4eabb6d9",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "BriefingReview owns preview and approval of one saved edited briefing for an explicit audience. Removing report-library selection eliminates unrelated report querying; frozen edition/history presentation is delegated to DeliveryRunView.",
     "functions": [
       {
         "name": "BriefingReview",
-        "nonblankLines": 133
+        "nonblankLines": 101
       }
     ],
     "signals": [
@@ -1007,11 +701,11 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingsScreen.tsx",
-    "sha256": "a6a0229ed915bc43c808691d58347cdc6c537a4452fa006824fdca76d825dcce",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "BriefingsScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "d1be45ae65adaa23d6bafddac7b2eee74f145007706f13dbc478d2b0394fef50",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "BriefingHistory owns folder-scoped prepared-edition selection and cursor navigation. The helper import and source guidance change leave lookup, Workspace links and the separate BriefingReview boundary intact.",
     "functions": [
       {
         "name": "BriefingHistory",
@@ -1023,33 +717,16 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/DigestScreen.tsx",
-    "sha256": "b5d7ef26aac3168928e5b73406dcbc9873dbb323bd6824f9bd8306becafa9312",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "DigestScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "DigestContent",
-        "nonblankLines": 90
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/more/DigestScreen.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialActivation.tsx",
-    "sha256": "823c9ef9e410e3812c495aab781f323ef553bc090255f9ee0d44669ef85bcd59",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "EditorialActivation.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "8458692e7001950a2aca7b0abd2c2faf8b7c8f9793deee13f61c3845f8450eaf",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "EditorialActivation owns saved schedule confirmation, activation/pause and occurrence inspection. The current policy-version guard requires re-saving historical configurations; editable fields stay in EditorialEditor and persistence remains backend-owned.",
     "functions": [
       {
         "name": "EditorialActivation",
-        "nonblankLines": 94
+        "nonblankLines": 101
       }
     ],
     "signals": [
@@ -1058,36 +735,19 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialEditor.tsx",
-    "sha256": "9741eef1d5d2dca63532286a5dde42a0c3f641cde36384db472eb9f145d3ecbe",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "EditorialEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "a2578f99eaeac4408cf373552c1e1b36fd37ca2fd08cd720cc62fa92ee72258c",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "EditorialEditor owns a single paused research briefing configuration. Schedule fields, source acknowledgments, recipient selection, draft state and saved activation have deliberate separate owners; retired report and news-monitor selection is deleted.",
     "functions": [
       {
         "name": "EditorialEditor",
-        "nonblankLines": 142
+        "nonblankLines": 113
       }
     ],
     "signals": [
       "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialEditor.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialSourceFields.tsx",
-    "sha256": "327c566cf3b85d162e9f1a4050501eada3bac2df14257ce46125c2a803d7d990",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "EditorialSourceFields.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "EditorialSourceFields",
-        "nonblankLines": 128
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialSourceFields.tsx: function over80 nonblank lines requires review"
     ]
   },
   {
@@ -1143,11 +803,11 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationDelivery.tsx",
-    "sha256": "20a10d8ebb627ef3868db7b75e1b21824be8b0ebaf78c4f4e34b9eb06a6580eb",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "PublicationDelivery.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "dd85838def0471d1c0834404c51fde93494f01ebb2dc00110ffe3dc814318966",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "PublicationDelivery retains one exact hearing-publication audience/channel review and queue interaction. The changed recipient operation/schema preserves existing email/SMS/in-app behavior; consent management remains a separate component and backend gates remain authoritative.",
     "functions": [
       {
         "name": "PublicationDelivery",
@@ -1194,11 +854,11 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/SmsConsentPanel.tsx",
-    "sha256": "316698be29cc979e59f295a9f0ec2fc2c555bbc0d6f1a8129ebde0520ece4a7c",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "SmsConsentPanel.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "9b67f7cdb672e3b42bdb4818d01c39f5c7cffc48ec0fc75c12b5cb938e2a85ed",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "SmsConsentPanel retains the request-code, receipt confirmation and revocation interaction for one client consent record. Only its shared recipient directory operation changes; it does not gain delivery dispatch or permission ownership.",
     "functions": [
       {
         "name": "SmsConsentPanel",
@@ -1210,119 +870,12 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/RecipientPicker.tsx",
-    "sha256": "35bcc2d95810a5582abdcfdeba44b1af0783c2048498a2e41b16cadbb7f66b37",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "RecipientPicker.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "RecipientPicker",
-        "nonblankLines": 135
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/reports/RecipientPicker.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportCompose.tsx",
-    "sha256": "657634c10a87ab10b2c0cc753e1568a69d31413190dcc0a44f5768b98a314312",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ReportCompose.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "ReportCompose",
-        "nonblankLines": 153
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportCompose.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportEditor.tsx",
-    "sha256": "28bb24e98c4bc19d0f81f8067e0e3b3d4b9253b75a66d2cd4720e08d72ba3682",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ReportEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "ReportEditor",
-        "nonblankLines": 316
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportEditor.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRecipients.tsx",
-    "sha256": "0c5b22b0c20092ba2a7ae502b24169ec7a943b932f3da314435a32b5d8b10b14",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ReportRecipients.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "ContactEditor",
-        "nonblankLines": 96
-      },
-      {
-        "name": "ListEditor",
-        "nonblankLines": 95
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRecipients.tsx: function over80 nonblank lines requires review",
-      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRecipients.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRunView.tsx",
-    "sha256": "b6519ccf12fd734d8f9a0c78be0af107b8f8184abc6a611325f1f9f86dbb6a37",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ReportRunView.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "ReportRunView",
-        "nonblankLines": 142
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRunView.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportsScreen.tsx",
-    "sha256": "b9ca44ba224267e2b9e2035f0809e9b535caa912d43e4e9590132f034281f5e5",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ReportsScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "ReportsScreen",
-        "nonblankLines": 94
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportsScreen.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/research/FloridaLaw.tsx",
-    "sha256": "3c8f66940a0ece80ea9ce54a95fb2d639c90f59899830615c21bb87a054e5473",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "FloridaLaw.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "00e3d6654c8224bb1b375409443bc6632af7f832a96d1f2b652d344a88fcf2c7",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "LegalReferences owns one Florida legal-source lookup and its coverage-aware result presentation. The source-scope import moves only; membership mutation stays in ReferenceMembership and source-date workflows in LegalDeadlines.",
     "functions": [
       {
         "name": "LegalReferences",
@@ -1335,11 +888,11 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/research/LegalDeadlines.tsx",
-    "sha256": "e04603c8688ddc951a365091fd3e20234d96872f68d547618e35b8aa1f2e8b17",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "LegalDeadlines.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "f36107b9ac575f4bb39cf5e0fdf8a1db0d31b7894ea66f3a69ff34facc34cd80",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "LegalDeadlines owns retained source notices and date filtering, with selected draft preparation delegated to DeadlineDraft. Only the source-scope type import moves; it neither calculates legal deadlines nor takes on source ingestion.",
     "functions": [
       {
         "name": "LegalDeadlines",
@@ -1352,11 +905,11 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchDraft.tsx",
-    "sha256": "a4863244eb1fdedaa3768a4163387bdc85d08b6afebab7b1333f1e478575b23b",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ResearchDraft.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "110c7a787ad9fc7a78e95080e609c2331b85c3ef7417430eddb19d31adb86268",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "ResearchDraft owns cited research draft fields, exact citation mapping and one retry request key. The source helper import moves only; citation inspection, receipt display and later edition approval remain separate components.",
     "functions": [
       {
         "name": "ResearchDraft",
@@ -1368,29 +921,12 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchReportReview.tsx",
-    "sha256": "9b2b1dcf5fa02e2fc4a6f58bdbcbda8728b05b3d5729a06e63592c3548ccbaa1",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ResearchReportReview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
-    "functions": [
-      {
-        "name": "ResearchReportReview",
-        "nonblankLines": 83
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchReportReview.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchSearch.tsx",
-    "sha256": "7c4d7b5191244f3436feafb82d16e0fb55c63f46413bc3df02ec5badb5354681",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ResearchSearch.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "220e5b69addfc077f914dc8ef96ee0cdd450adda9e884216d13ee0652ce31b04",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "ResearchSearchForm owns submitted query/filter fields; ResearchResults owns the resulting cursor page and local source selection. The source helpers move and obsolete reload prop disappears; exact text, draft and comparison dialogs retain separate owners.",
     "functions": [
       {
         "name": "ResearchSearchForm",
@@ -1398,21 +934,20 @@
       },
       {
         "name": "ResearchResults",
-        "nonblankLines": 113
+        "nonblankLines": 109
       }
     ],
     "signals": [
-      "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchSearch.tsx: function over80 nonblank lines requires review",
       "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchSearch.tsx: function over80 nonblank lines requires review"
     ]
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchVersions.tsx",
-    "sha256": "c471118b8907573757d8681896b87f52fa1364864efee78990c586480793c292",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "ResearchVersions.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "b1684010de8e1733bdfbf19e1467948646ce7d598922f845118789577433d3b4",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "ResearchVersions owns one exact two-revision comparison and its selected inputs, pending/error state and returned differences. The source-scope import moves only; revision comparison and authority remain backend operations.",
     "functions": [
       {
         "name": "ResearchVersions",
@@ -1425,15 +960,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/updates/UpdatesScreen.tsx",
-    "sha256": "30cf7efe26b3b156ecdb731b92918f43ba57801a6627f0cd55dfe02d9a22a4d0",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "UpdatesScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "sha256": "9ab1d810fe59b91b3fa3ce61c9bf69bb210ffcf42da5901896eca7bae0124a94",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "UpdatesScreen owns paginated notification presentation and read state. Its committee destination changes through the public Directory link builder; hearing links, inbox mutations and client/session authority retain their existing owners.",
     "functions": [
       {
         "name": "UpdatesScreen",
-        "nonblankLines": 131
+        "nonblankLines": 134
       }
     ],
     "signals": [
@@ -3156,15 +2691,15 @@
   },
   {
     "path": "apps/web/src/shared/capiro/legiwatch-review.test.ts",
-    "sha256": "4ff486c7feb67fc1fe9aa6b53fc3974be0731707f847926497c62a1bc309f343",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#tests",
-    "rationale": "legiwatch-review.test.ts groups independent observable boundary assertions with synthetic fixtures. The long suite callback is test organization, with no added runtime responsibility or omitted assertions.",
+    "sha256": "58c84311fcbacfa19807209cebee43aa1c463fae9b358311a8ff33463dd775d6",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "The reviewed-source describe callback retains independent retained-search, exact-revision, nullable-coverage, workflow approval, recipient and privacy-projection assertions. Only retired feature cases are deleted; its size groups one contract boundary rather than production orchestration.",
     "functions": [
       {
-        "name": "callback at line 22",
-        "nonblankLines": 207
+        "name": "<anonymous>",
+        "nonblankLines": 197
       }
     ],
     "signals": [
@@ -3190,14 +2725,14 @@
   },
   {
     "path": "apps/web/src/shared/capiro/operations/legiwatch-contracts.test.ts",
-    "sha256": "03b40b73a68bdd8ab376bce133ed35f8b8311c63fe8e0b4e08ceee08afb06258",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#tests",
-    "rationale": "legiwatch-contracts.test.ts groups independent observable boundary assertions with synthetic fixtures. The long suite callback is test organization, with no added runtime responsibility or omitted assertions.",
+    "sha256": "8d0277afc3e4ee7e994b69cbabd25bdafc86326d9efa40ceb1c34971788196b3",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "The contract describe callback retains hearing ticket/attendance, nullable evidence and approval-hash boundaries. The send assertion now names the retained delivery operation, and the folder-bulk assertion still proves assignment does not activate alerts.",
     "functions": [
       {
-        "name": "callback at line 5",
+        "name": "<anonymous>",
         "nonblankLines": 96
       }
     ],
@@ -4087,6 +3622,142 @@
     ],
     "signals": [
       "apps/web/src/shared/capiro/operations/objective-governed-strategy-intake.test.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/directory/committees/CommitteeFollowDialog.tsx",
+    "sha256": "97e2d9cec64976ffc5d278e4092aa3235656bedbda8b5c3cb4b62f9a69987ba7",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "CommitteeFollowDialog owns one follow draft and its save/remove interaction after the Directory move. Client choices and notifications remain fields of that same draft; fixed operations and backend checks own persistence and authority.",
+    "functions": [
+      {
+        "name": "CommitteeFollowDialog",
+        "nonblankLines": 122
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/directory/committees/CommitteeFollowDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/directory/committees/CommitteeRoom.tsx",
+    "sha256": "279e9cd6aee34aa027386e2ea7134754b8eded9774ff14149f8053bb8b58c888",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "CommitteeRoom owns federal committee detail tabs and composes the separate follow dialog. Its local proceedings renderer is reused by overview and proceedings, while navigation delegates to committee-route and data access stays in fixed queries.",
+    "functions": [
+      {
+        "name": "CommitteeRoom",
+        "nonblankLines": 177
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/directory/committees/CommitteeRoom.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/directory/committees/CommitteesScreen.tsx",
+    "sha256": "09bd00e7e41511b5e2983f0f94c07170b167538f6391d423f274b7896e81347c",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "CommitteesScreen selects the federal or Florida catalog/room and renders one searchable committee list. URL state is delegated to committee-route; no legislator-page aggregation, staff detail or authorization logic is mixed into this owner.",
+    "functions": [
+      {
+        "name": "CommitteesScreen",
+        "nonblankLines": 133
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/directory/committees/CommitteesScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/directory/committees/StateCommitteeRoom.tsx",
+    "sha256": "0431cf063ed55ed41e57e274dda96894bca38ace0ab51fb499083d992e1e0950",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "StateCommitteeRoom owns the exact Florida committee detail and its roster, coverage, proceeding, referral and update tabs. Referral pagination reuses DirectoryPagination; follow editing and URL state remain separate owners.",
+    "functions": [
+      {
+        "name": "StateCommitteeRoom",
+        "nonblankLines": 200
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/directory/committees/StateCommitteeRoom.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/delivery/DeliveryCompose.tsx",
+    "sha256": "93f0ce54f341503f871e570bfc0e0d61273e35ed426a483f452913100dcedfd7",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "DeliveryCompose owns one frozen-edition composition review and explicit send approval. It delegates recipient selection and transport, invalidates approval when inputs change, and retains the backend approval hash without restoring report-library configuration.",
+    "functions": [
+      {
+        "name": "DeliveryCompose",
+        "nonblankLines": 153
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/delivery/DeliveryCompose.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/delivery/DeliveryRunView.tsx",
+    "sha256": "e8b08100092f72c7fa6a807aae4251696152e9a9ea1a777cbb97365aae978f0d",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "DeliveryRunView presents one immutable retained edition, exports and delivery history; it delegates composition to DeliveryCompose. Moving this owner preserves research and briefing delivery without a report-definition list or report scheduling surface.",
+    "functions": [
+      {
+        "name": "DeliveryRunView",
+        "nonblankLines": 142
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/delivery/DeliveryRunView.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/delivery/RecipientPicker.tsx",
+    "sha256": "391359a7e629ea004405e2f745513abf9d4157d3c37459b872c9a77959f61f9b",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "RecipientPicker owns local contact/list/manual recipient selection for retained delivery consumers. It reuses the canonical recipient schema and fixed directory read; approval and sending stay with each composition owner.",
+    "functions": [
+      {
+        "name": "RecipientPicker",
+        "nonblankLines": 135
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/delivery/RecipientPicker.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/legiwatch-retirement.test.ts",
+    "sha256": "492f6e0543505a1218125eaa6b38a47b54db4e54f45dfd0a595e7e9f59266a46",
+    "reviewer": "Codex independent LegiWatch simplification review",
+    "reviewedAt": "2026-10-31",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
+    "rationale": "The retired-surfaces describe callback groups independent boundary cases: pre-dispatch 404s, retained delivery/rule paths, selection-only draft review, research-only sources/configuration and removal of report workflows. Assertions are behavioral and no production responsibility is introduced.",
+    "functions": [
+      {
+        "name": "<anonymous>",
+        "nonblankLines": 139
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/capiro/legiwatch-retirement.test.ts: function over80 nonblank lines requires review"
     ]
   }
 ]

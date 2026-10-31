@@ -5260,10 +5260,10 @@
     "symbol": "CommitteeDirectory",
     "line": 14,
     "nonblank": 149,
-    "fingerprint": "26c6d1f463b83753d74c52fe3b16dfeac41f3724256c398af3f7fe50c2e30cdd",
-    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
-    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "f89361ff24a3421164966b94064db1e8f8718220ccea7320c22e2b866b3dd765",
+    "reason": "CommitteeDirectory retains the independent staff-contact list, filters, selected committee and staff query. The change only clarifies staff labels; it does not acquire committee-room state or authorization. Exact source review of 3f0952566fc2cef29f3cf9347a1c74a27ccdef0a; see docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031.",
+    "reviewedBy": "Codex independent LegiWatch simplification review",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
@@ -5279,11 +5279,11 @@
     "kind": "function",
     "symbol": "StateDirectory",
     "line": 13,
-    "nonblank": 206,
-    "fingerprint": "726365d1118f6e2b1143050cbdc80bec2234f591c58e2c6d4a0ca9ab9278ede2",
-    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
-    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
-    "reviewedOn": "2026-10-26"
+    "nonblank": 136,
+    "fingerprint": "3ed45d5284ad24ad55be479a7e726b44a77949d7f51f25dfcfdb3bfd056ce7cd",
+    "reason": "StateDirectory now owns only the paginated legislator lookup and its state/chamber filters. Deleting the page-derived committee grouping removes a second presentation responsibility; transport and pagination retain their existing owners. Exact source review of 3f0952566fc2cef29f3cf9347a1c74a27ccdef0a; see docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031.",
+    "reviewedBy": "Codex independent LegiWatch simplification review",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/workspace/templates/TemplateCard.tsx",
