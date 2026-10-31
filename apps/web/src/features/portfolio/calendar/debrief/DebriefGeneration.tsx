@@ -1,5 +1,11 @@
 "use client";
-import { useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { ApiError } from "@/shared/portfolio/api/http";
@@ -9,7 +15,19 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { Meeting } from "../contracts";
 import { MeetingTranscriptUpload } from "../library/public";
 import { usePreparationCapabilities, useDispatchGuard } from "../access/public";
-import { debriefBody, generateDebrief } from "./api";
+import {
+  cancelDebriefJob,
+  debriefBody,
+  debriefFailureMessage,
+  debriefJobActive,
+  debriefRequestKey,
+  pollDebriefJob,
+  readLatestDebriefJob,
+  retryDebriefJob,
+  startDebriefGeneration,
+  type DebriefDraft,
+  type DebriefJob,
+} from "./api";
 import { ManualDebriefSource } from "./ManualDebriefSource";
 import { VoiceMemoSource } from "./voice/VoiceMemoSource";
 import { SavedMeetingNotesSource } from "../review/public";
@@ -50,7 +68,14 @@ function SessionDebriefGeneration({
   const [voice, setVoice] = useState(false);
   const [savedNotes, setSavedNotes] = useState(false);
   const [source, setSource] = useState<ReviewedDebriefSource>();
+  // D1: an accepted job survives navigation; its stage is shown instead of the form.
+  const [job, setJob] = useState<DebriefJob>();
+  const [jobError, setJobError] = useState<string>();
+  const [cancelling, setCancelling] = useState(false);
+  const [retrying, setRetrying] = useState(false);
   const busy = useRef(false);
+  // One key per attempt, kept across retries so a network blip cannot double-generate.
+  const requestKey = useRef<string | undefined>(undefined);
   const lifetime = useRef<AbortController | undefined>(undefined);
   useLayoutEffect(() => {
     const controller = new AbortController();
@@ -70,6 +95,16 @@ function SessionDebriefGeneration({
     !capabilities.error &&
     capabilities.data?.runtime?.externalActionsEnabled === true,
   );
+  const acceptDraft = useCallback(
+    (draft: DebriefDraft) => {
+      requestKey.current = undefined;
+      setSource(undefined);
+      setJob(undefined);
+      setJobError(undefined);
+      onDraft(debriefBody(draft));
+    },
+    [onDraft],
+  );
   const mutation = useMutation({
     retry: false,
     mutationFn: async (reviewed: ReviewedDebriefSource) => {
@@ -80,22 +115,36 @@ function SessionDebriefGeneration({
           "Debrief generation is unavailable for this session.",
         );
       guard();
-      const draft = await generateDebrief(
+      const key = requestKey.current ?? debriefRequestKey();
+      requestKey.current = key;
+      const result = await startDebriefGeneration(
         api,
         meeting.id,
-        reviewed.text,
+        { sourceText: reviewed.text, method: reviewed.method, requestKey: key },
         scope.signal,
-        reviewed.method,
       );
       if (scope.signal.aborted)
         throw new ApiError(409, "This meeting session is no longer active.");
       guard();
-      return { draft, scope };
+      return { result, scope };
     },
-    onSuccess: ({ draft, scope }) => {
+    onSuccess: ({ result, scope }) => {
       if (scope.signal.aborted || lifetime.current !== scope) return;
-      setSource(undefined);
-      onDraft(debriefBody(draft));
+      setJobError(undefined);
+      if (result.kind === "draft") {
+        acceptDraft(result.draft);
+        return;
+      }
+      setJob(result.job);
+    },
+    onError: (error) => {
+      // The key is bound to the source it was accepted with; a new attempt after a
+      // conflict or a failed send must not reuse it.
+      if (
+        error instanceof ApiError &&
+        (error.status === 409 || error.status >= 500)
+      )
+        requestKey.current = undefined;
     },
     onSettled: () => {
       busy.current = false;
@@ -105,14 +154,123 @@ function SessionDebriefGeneration({
     if (busy.current || !allowed) return false;
     busy.current = true;
     setSource(reviewed);
+    setJobError(undefined);
     mutation.mutate(reviewed);
     return true;
   }
+  // Poll an accepted job to a terminal state; a cancelled/failed job is an outcome.
+  const pollingId = job && debriefJobActive(job) ? job.jobId : undefined;
+  // The loop owns the read sequence; it must not restart on every stage update.
+  const latestJob = useRef<DebriefJob | undefined>(job);
+  useEffect(() => {
+    latestJob.current = job;
+  }, [job]);
+  useEffect(() => {
+    const accepted = latestJob.current;
+    if (!pollingId || !accepted) return;
+    const controller = new AbortController();
+    let live = true;
+    void pollDebriefJob(api, meeting.id, accepted, {
+      signal: controller.signal,
+      onStage: (next) => {
+        if (live) setJob(next);
+      },
+    })
+      .then((final) => {
+        if (!live) return;
+        setJob(final);
+        if (final.status === "completed" && final.draft)
+          acceptDraft(final.draft);
+      })
+      .catch((error: unknown) => {
+        if (!live) return;
+        setJobError(
+          error instanceof ApiError
+            ? error.message
+            : "The service could not be reached. The job is saved — reload this meeting to check it.",
+        );
+      });
+    return () => {
+      live = false;
+      controller.abort();
+    };
+  }, [api, meeting.id, pollingId, acceptDraft]);
+  // Resume after navigation or reload: never present an empty form over a live job.
+  useEffect(() => {
+    if (!allowed) return;
+    const scope = lifetime.current;
+    let live = true;
+    void readLatestDebriefJob(api, meeting.id, scope?.signal)
+      .then((latest) => {
+        if (!live || !latest) return;
+        if (debriefJobActive(latest)) setJob(latest);
+        else if (latest.status === "completed" && latest.draft) setJob(latest);
+      })
+      .catch(() => {});
+    return () => {
+      live = false;
+    };
+  }, [allowed, api, meeting.id]);
+  async function cancel() {
+    if (!job || cancelling) return;
+    setCancelling(true);
+    setJobError(undefined);
+    try {
+      const next = await cancelDebriefJob(api, meeting.id, job.jobId);
+      if (next?.status === "cancelled") {
+        requestKey.current = undefined;
+        setJob(undefined);
+        setSource(undefined);
+      } else {
+        setJob(next ?? undefined);
+      }
+    } catch (error) {
+      setJobError(
+        error instanceof ApiError
+          ? error.message
+          : "The cancel request could not be confirmed. Reload to check this job.",
+      );
+    } finally {
+      setCancelling(false);
+    }
+  }
+  async function retry() {
+    if (!job || retrying) return;
+    setRetrying(true);
+    setJobError(undefined);
+    try {
+      const outcome = await retryDebriefJob(api, meeting.id, job);
+      if (outcome.kind === "resumed") {
+        setJob(outcome.job);
+        return;
+      }
+      // The server will not resume this job. Do not start a second generation here:
+      // return to the source form and let the reviewer decide.
+      requestKey.current = undefined;
+      setJob(undefined);
+      setJobError(
+        `${debriefFailureMessage(job.errorCode)} Start a new run from the same source.`,
+      );
+    } catch (error) {
+      setJobError(
+        error instanceof ApiError
+          ? error.message
+          : "The retry request could not be confirmed. Reload to check this job.",
+      );
+    } finally {
+      setRetrying(false);
+    }
+  }
+  const readyDraft =
+    job?.status === "completed" && job.draft ? job.draft : undefined;
+  const failedJob = job?.status === "failed" ? job : undefined;
+  const conflict =
+    mutation.error instanceof ApiError && mutation.error.status === 409;
   return (
     <>
       <button
         className="button"
-        disabled={!allowed || mutation.isPending}
+        disabled={!allowed || mutation.isPending || Boolean(job)}
         onClick={() => setSavedNotes(true)}
       >
         Use saved meeting notes
@@ -125,14 +283,14 @@ function SessionDebriefGeneration({
       />
       <button
         className="button"
-        disabled={!allowed || mutation.isPending}
+        disabled={!allowed || mutation.isPending || Boolean(job)}
         onClick={() => setUploading(true)}
       >
         Transcript and attachments
       </button>
       <button
         className="button"
-        disabled={!allowed || mutation.isPending}
+        disabled={!allowed || mutation.isPending || Boolean(job)}
         onClick={() => setManual(true)}
       >
         Type Notes Manually
@@ -145,7 +303,7 @@ function SessionDebriefGeneration({
       />
       <button
         className="button"
-        disabled={!allowed || mutation.isPending}
+        disabled={!allowed || mutation.isPending || Boolean(job)}
         onClick={() => setVoice(true)}
       >
         Record Voice Memo
@@ -176,18 +334,93 @@ function SessionDebriefGeneration({
         onExtracted={(reviewed) => generate({ ...reviewed, method: "upload" })}
       />
       <Dialog
-        open={Boolean(source)}
+        open={Boolean(source) || Boolean(job)}
         onOpenChange={(open) => {
-          if (!open && !mutation.isPending) setSource(undefined);
+          if (!open && !mutation.isPending && !pollingId && !cancelling)
+            setSource(undefined);
         }}
-        title="Generate meeting debrief"
+        title={
+          readyDraft
+            ? "Generated debrief draft"
+            : failedJob
+              ? "Debrief generation did not finish"
+              : "Generate meeting debrief"
+        }
       >
-        <p>
-          Generating a draft from the reviewed source. Review and save it before
-          approval or sharing.
-        </p>
-        <QueryState pending={mutation.isPending} error={mutation.error} />
-        {mutation.error && (
+        {pollingId && (
+          <>
+            <p role="status" className="muted">
+              Progress is saved. You can leave this page and come back.
+              {` Current stage: ${job?.stage.replaceAll("_", " ")}.`}
+            </p>
+            <footer className="row">
+              <button
+                className="button"
+                disabled={cancelling}
+                onClick={() => void cancel()}
+              >
+                Cancel generation
+              </button>
+            </footer>
+          </>
+        )}
+        {readyDraft && (
+          <>
+            <p>
+              Review the draft before saving it. Generating again from the same
+              source does not create a second job.
+            </p>
+            <footer className="row">
+              <button
+                className="button"
+                disabled={!allowed}
+                onClick={() => acceptDraft(readyDraft)}
+              >
+                Use this draft
+              </button>
+            </footer>
+          </>
+        )}
+        {failedJob && (
+          <>
+            <p>{debriefFailureMessage(failedJob.errorCode)}</p>
+            <footer className="row">
+              <button
+                className="button"
+                disabled={!allowed || retrying}
+                onClick={() => void retry()}
+              >
+                Try to continue this job
+              </button>
+              <button
+                className="button"
+                onClick={() => {
+                  setJob(undefined);
+                  setJobError(undefined);
+                }}
+              >
+                Back
+              </button>
+            </footer>
+          </>
+        )}
+        {!job && (
+          <>
+            <p>
+              Generating a draft from the reviewed source. Review and save it
+              before approval or sharing.
+            </p>
+            <QueryState pending={mutation.isPending} error={mutation.error} />
+          </>
+        )}
+        {jobError && <p role="alert">{jobError}</p>}
+        {conflict && (
+          <p>
+            This request was already used for a different source. Start a new
+            request to generate from the source shown here.
+          </p>
+        )}
+        {mutation.error && !conflict && !job && (
           <>
             <p>
               Your reviewed source is retained. A failed response may follow a
