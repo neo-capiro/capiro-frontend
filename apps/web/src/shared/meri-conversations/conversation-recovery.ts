@@ -1,4 +1,5 @@
 import type { QueryClient } from "@tanstack/react-query";
+import { retirableConversationRequestId } from "./query-journal";
 import {
   clearMeriConversationScope,
   type TabScope,
@@ -41,7 +42,7 @@ export function clearMeriConversationRecovery(
   storage?: TabStorage,
 ) {
   try {
-    clearMeriConversationScope(scope, storage);
+    clearMeriConversationScope(scope, storage, retirableConversationRequestId);
   } finally {
     // Removing the owned query objects also fences late writers, including memory-only owners.
     cache.removeQueries({

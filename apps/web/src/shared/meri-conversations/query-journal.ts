@@ -5,6 +5,7 @@ import {
 } from "./research-context";
 import type { ConversationContext } from "./session";
 import type { QueryClient } from "@tanstack/react-query";
+import type { MeriConversationSnapshot } from "@capiro/meri-client/conversation";
 import {
   receiveConversationRequest,
   type ConversationStoredRequest,
@@ -15,6 +16,7 @@ import { z } from "zod";
 import {
   tabRecord,
   TabJournalUnavailable,
+  TabJournalRetired,
   type TabStorage,
 } from "./tab-journal";
 export type ConversationIntent = Readonly<{
@@ -285,6 +287,18 @@ function receiveIntent(value: unknown): ConversationIntent {
   };
 }
 
+/** Completed input history does not settle an unresolved cancellation. */
+export function retirableConversationRequestId(value: unknown) {
+  const intent = receiveIntent(value);
+  if (
+    !intent.submit ||
+    intent.cancel === "pending" ||
+    intent.cancel === "unknown"
+  )
+    throw new TabJournalUnavailable();
+  return intent.submit.requestId;
+}
+
 /** Nonsecret command uncertainty follows this exact observed context in same-tab recovery. */
 export function conversationIntentJournal(
   client: QueryClient,
@@ -302,6 +316,7 @@ export function conversationIntentJournal(
   client.setQueryDefaults(key, { gcTime: Infinity });
   let persistence: ReturnType<typeof tabRecord<ConversationIntent>> | undefined;
   let recoveryBlocked = false;
+  let retiredRequestId: string | undefined;
   let recovered: ConversationIntent = {};
   try {
     persistence = tabRecord(
@@ -313,8 +328,9 @@ export function conversationIntentJournal(
     );
     recovered = persistence.read() ?? {};
     if (recovered.cancel) recovered = { ...recovered, cancel: "unknown" };
-  } catch {
+  } catch (error) {
     recoveryBlocked = true;
+    if (error instanceof TabJournalRetired) retiredRequestId = error.requestId;
   }
   client.setQueryData<ConversationIntent>(
     key,
@@ -329,7 +345,56 @@ export function conversationIntentJournal(
     cache.find({ queryKey: key, exact: true }) === owned;
   return {
     current,
-    recoveryBlocked,
+    get recoveryBlocked() {
+      return recoveryBlocked;
+    },
+    /** Only this freshly authorized port's admitted, completed history can resolve retirement.
+     * It does not restore the old draft, assume non-delivery, or dispatch a command. */
+    acknowledgeCompletedRetirement(port: {
+      context: ConversationContext;
+      getSnapshot: () => MeriConversationSnapshot;
+    }) {
+      if (
+        !retiredRequestId ||
+        !persistence?.current() ||
+        cache.find({ queryKey: key, exact: true }) !== owned
+      )
+        return false;
+      const next = port.context;
+      if (
+        next.tenantId !== context.tenantId ||
+        next.actorId !== context.actorId ||
+        next.selectedClientId !== context.selectedClientId ||
+        next.conversationId !== context.conversationId ||
+        next.runId !== context.runId
+      )
+        return false;
+      const snapshot = port.getSnapshot();
+      if (
+        snapshot.status !== "ready" ||
+        snapshot.observation?.runState !== "completed" ||
+        !snapshot.acceptedRequest ||
+        snapshot.acceptedRequest.requestId !== retiredRequestId ||
+        snapshot.submit === "pending" ||
+        snapshot.submit === "unknown" ||
+        snapshot.cancel === "pending" ||
+        snapshot.cancel === "unknown"
+      )
+        return false;
+      const submit = {
+        ...storedSubmission(snapshot.acceptedRequest),
+        state: "observed" as const,
+      };
+      // A fresh record write keeps the same generation fence and storage verification as every command.
+      persistence.write({ submit });
+      client.setQueryData(
+        key,
+        Object.freeze({ submit: snapshotSubmit(submit) }),
+      );
+      retiredRequestId = undefined;
+      recoveryBlocked = false;
+      return true;
+    },
     read(): ConversationIntent {
       if (!current()) return {};
       const value = client.getQueryData<ConversationIntent>(key) ?? {};

@@ -6373,10 +6373,10 @@
     "file": "apps/web/src/features/meri/conversation/useRunCommands.ts",
     "kind": "function",
     "symbol": "useRunCommands",
-    "fingerprint": "6740a6eb0a01ea23309362d94d4e39ff4c2bc4a5d1d3497c771a3f16f8afc536",
-    "reason": "Hook owning command-dispatch state for the active run. One concern for the run-commands owner; no unrelated concern folded in.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "0f3148a62807b996268ffa12df443a4d67f289e89883e289a7fd559e36301e0b",
+    "reason": "This hook already sequences session-bound explicit commands, transcript reads and observation. The two added lines complete that same history lifecycle by notifying its journal after readback, behind alive and command-gate fences. Persistence, canonical receiving and authorization remain in their existing owners. Extracting this two-line completion would obscure the history-before-ack ordering without separating a new responsibility. No second scheduler, retry loop or admission logic is added.",
+    "reviewedBy": "Codex independent Meri FE65 journal source/design review; MERI-FE65-JOURNAL-CORRECTION-INDEPENDENT-REVIEW-20261031.txt SHA256 cf2e2d7c7965683f1ac5fd6a908d3beeb445b383861db4833a050639dbb6bf03",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/meri/conversations/ConversationHistoryList.tsx",
@@ -7286,10 +7286,10 @@
     "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "32aea34909f4972028f8cb824dc06c0892a0f9eb99cd1192e9b04d7dc98a009f",
-    "reason": "Author structural assessment for source-only A3 continuation: the existing selected-input and journal owner admits siteWorkflow through the published conversation receiver, snapshots it independently, and preserves the exact selector through stored submission and retry. The nine-line extension follows the existing procedure member without creating a schema copy, second store, authority or execution owner. Splitting only for size would separate immutable selection from its existing recovery identity. No independent review is claimed; see docs/site-workflow-selection-20261029.md.",
-    "reviewedBy": "Codex implementation author; structural assessment only, independent review explicitly excluded",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "7a3885343ebaf6d14ddbc37ac2fcd217987857f388fd783ffd561f5fcffc8b20",
+    "reason": "Existing responsibilities are exact request/selection representation and context-bound recovery ownership. New code extends the same request lifetime with validated retirement-ID extraction and completed-history reconciliation. It reuses receiveIntent/storedSubmission and tabRecord; it neither adds transport nor interprets domain authorization. The SDK snapshot import is type-only and there is no reversed feature dependency or cycle. Selection transformations remain unchanged. A generic recovery service or duplicated canonical validator would weaken this boundary; no unrelated domain or provider/storage backend was added.",
+    "reviewedBy": "Codex independent Meri FE65 journal source/design review; MERI-FE65-JOURNAL-CORRECTION-INDEPENDENT-REVIEW-20261031.txt SHA256 cf2e2d7c7965683f1ac5fd6a908d3beeb445b383861db4833a050639dbb6bf03",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/shared/meri-routines/workflow.ts",
@@ -7574,6 +7574,15 @@
     "fingerprint": "1738595f3b5615727224dcb1fa6c7183957d002577bb54fe73e79da6c1f28e42",
     "reason": "One template selection interaction filters the existing preset catalog. Shared Tabs own keyboard behavior; library tabs link to canonical Workspace/Templates surfaces without duplicate reads or truncated listings. It creates no persistence or authorization mechanism. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
     "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
+    "kind": "function",
+    "symbol": "conversationIntentJournal",
+    "fingerprint": "8d3e755849a4e99f768e4822a165ba3a1999d37b73e5f57a7ac6495cf2d382fe",
+    "reason": "Construction, current/read/write and acknowledgement share one captured persistence generation, owned cache entry and retired request identity. Keeping reconciliation in that owner prevents a second object from independently clearing the block or losing these fences. The method's ordered guards, canonical conversion, verified persistence, cache update and final unblock form one synchronous state transition; there is no new async lifetime or command side effect. Predicate extraction solely to lower line count would not improve ownership. This exact extension is cohesive and proportionate.",
+    "reviewedBy": "Codex independent Meri FE65 journal source/design review; MERI-FE65-JOURNAL-CORRECTION-INDEPENDENT-REVIEW-20261031.txt SHA256 cf2e2d7c7965683f1ac5fd6a908d3beeb445b383861db4833a050639dbb6bf03",
     "reviewedOn": "2026-10-31"
   }
 ]
