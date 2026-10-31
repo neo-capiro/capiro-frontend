@@ -152,6 +152,10 @@ export const serverAdapters = new Map([
     '@clerk/nextjs/server', `${appSource}shared/portfolio/config/config.ts`,
     `${appSource}shared/portfolio/api/client-logo.ts`,
   ])],
+  [`${appSource}app/api/firm-logo/route.ts`, new Set([
+    '@clerk/nextjs/server', `${appSource}shared/portfolio/config/config.ts`,
+    `${appSource}shared/portfolio/api/firm-logo.ts`,
+  ])],
   [`${appSource}app/api/outreach-generation/start/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
     `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-conversations/outreach-start.ts`,

@@ -158,6 +158,19 @@ describe("configured logo load failures", () => {
     branding.logoUrl = undefined;
     expect(text(render(BrandingSettings))).toContain("No logo");
   });
+  it("renders the app's own firm-logo path unchanged", () => {
+    // The consumer sweep for the M1 firm half: once Core reports the app path instead of a
+    // presigned URL, the settings surface must use it verbatim. A website normalizer would turn
+    // "/api/firm-logo" into something else — the mistake the client-logo consumers had.
+    branding.logoUrl = "/api/firm-logo";
+    const image = elements(render(BrandingSettings)).find(
+      (node) => node.type === "img",
+    )!;
+    expect(image.props.src).toBe("/api/firm-logo");
+    expect(image.props.alt).toBe("Organization logo");
+    expect(image.props.onError).toBeTypeOf("function");
+    expect(text(render(BrandingSettings))).not.toContain("Logo unavailable");
+  });
   it("keeps logo upload locked while an existing branding mutation is unresolved", () => {
     branding.locked = true;
     const controls = elements(render(BrandingSettings));
