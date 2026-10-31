@@ -13,7 +13,7 @@ import { useMeriSidebarVisibility } from "./MeriSidebarVisibility";
 import styles from "./shell.module.css";
 
 const actions = [
-  { label: "Quick log", icon: "quick-log", href: "/?log=1" },
+  { label: "Quick log", icon: "quick-log", href: "/portfolio?log=1" },
   { label: "Master calendar", icon: "calendar", href: "/calendar" },
   { label: "Search", icon: "search", href: "/modules/intelligence" },
   { label: "Updates", icon: "updates", href: "/meri/updates" },

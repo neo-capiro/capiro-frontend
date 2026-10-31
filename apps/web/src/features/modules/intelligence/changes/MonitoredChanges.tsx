@@ -19,7 +19,7 @@ export function MonitoredChanges() {
           Choose a client in the shared client selector to see its defense
           watches. General has no client watch feed.
         </p>
-        <Link href="/">Open Portfolio</Link>
+        <Link href="/portfolio">Open Portfolio</Link>
       </Panel>
     );
   if (selected.state === "loading") return <StatusPanel loading />;

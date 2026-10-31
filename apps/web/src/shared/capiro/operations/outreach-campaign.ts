@@ -21,10 +21,22 @@ export const outreachCampaignOperations = {
     path: "/engagement/outreach/campaigns",
     request: z
       .object({
-        query: z.object({ clientId: z.uuid().optional() }).strict().optional(),
+        query: z
+          .object({
+            clientId: z.uuid().optional(),
+            view: z.enum(["drafts", "sent", "attention"]).optional(),
+            q: z.string().max(240).optional(),
+            limit: z.number().int().min(1).max(100).optional(),
+            cursor: z.string().optional(),
+            from: z.iso.datetime().optional(),
+            to: z.iso.datetime().optional(),
+            deleted: z.enum(["true", "false"]).optional(),
+          })
+          .strict()
+          .optional(),
       })
       .strict(),
-    response: z.array(s.outreachCampaign),
+    response: s.outreachCampaignPage,
     source,
   }),
   "engagement.campaign.request": defineOperation({

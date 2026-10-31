@@ -26,4 +26,12 @@ describe("Settings client navigation hints", () => {
     );
     expect(productHref("portfolio", "client-a")).toBe("/portfolio/client-a");
   });
+  it("defaults the unscoped entry to Meri with General and Portfolio to its own route", () => {
+    expect(productHref("meri")).toBe("/meri?scope=general");
+    expect(productHref("portfolio")).toBe("/portfolio");
+    expect(productHref("modules")).toBe("/modules");
+    // An explicit or verified client scope still wins over the General default.
+    expect(productHref("meri", "client-a")).toBe("/meri?clientId=client-a");
+    expect(productHref("portfolio", "client-a")).toBe("/portfolio/client-a");
+  });
 });

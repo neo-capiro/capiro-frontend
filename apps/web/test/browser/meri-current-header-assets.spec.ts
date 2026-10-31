@@ -37,7 +37,7 @@ for (const screen of ["home", "cited-answer"] as const) {
     }
     await expect(
       header.getByRole("link", { name: "Quick log", exact: true }),
-    ).toHaveAttribute("href", "/?log=1");
+    ).toHaveAttribute("href", "/portfolio?log=1");
     await expect(
       header.getByRole("link", { name: "Master calendar", exact: true }),
     ).toHaveAttribute("href", "/calendar");
@@ -49,7 +49,7 @@ for (const screen of ["home", "cited-answer"] as const) {
     ).toHaveAttribute("aria-current", "page");
     await expect(
       header.getByRole("link", { name: "Portfolio", exact: true }),
-    ).toHaveAttribute("href", "/");
+    ).toHaveAttribute("href", "/portfolio");
     await expect(
       header.getByRole("link", { name: "Modules", exact: true }),
     ).toHaveAttribute("href", "/modules");

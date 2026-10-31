@@ -24,6 +24,7 @@ export function Sidebar({
   firstChatBootstrapEnabled = false,
   section,
   pendingApprovals,
+  chat = false,
 }: {
   assetSet?: "home" | "cited-answer";
   fixture?: boolean;
@@ -31,6 +32,8 @@ export function Sidebar({
   firstChatBootstrapEnabled?: boolean;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
+  /** Chat-first canvas: the sidebar tracks the viewport and its recents scroll on their own. */
+  chat?: boolean;
 }) {
   const capabilities = useMeriCapabilities();
   const pathname = usePathname();
@@ -52,7 +55,7 @@ export function Sidebar({
   return (
     <aside
       id="meri-sidebar"
-      className={styles.sidebar}
+      className={`${styles.sidebar} ${chat ? styles.chatSidebar : ""}`}
       aria-label="Meri navigation"
     >
       {fixture ? (
@@ -105,17 +108,26 @@ export function Sidebar({
         </Button>
       )}
       <div className={styles.divider} />
-      <SidebarDestinations
-        assetSet={assetSet}
-        fixture={fixture}
-        section={section}
-        pendingApprovals={pendingApprovals}
-      />
+      {/* Real recent conversations sit before the destinations, as in the chat-first layout. */}
       <SidebarRecents
         fixture={fixture}
         enabled={
           conversationEnabled && capabilities.conversations.status === "on"
         }
+      />
+      <div className={styles.divider} />
+      <h2 className={styles.libraryLabel} id="meri-library-label">
+        Library
+      </h2>
+      <SidebarDestinations
+        assetSet={assetSet}
+        fixture={fixture}
+        section={section}
+        pendingApprovals={pendingApprovals}
+        // On the chat-first canvas recent chats are the chat navigation, Runs is reachable from the
+        // Tools panel, and workspace-wide Approvals has no ordinary route (SDK decisions stay
+        // inline in the conversation). Other pages keep their existing destinations.
+        exclude={chat ? ["conversations", "runs", "approvals"] : undefined}
       />
       <SidebarPreferences fixture={fixture} section={section} />
     </aside>
@@ -151,7 +163,6 @@ function SidebarPreferences({
           "Preferences"
         )}
       </Button>
-      <p>Capiro · Your authorized workspace</p>
     </div>
   );
 }

@@ -1,0 +1,95 @@
+/* Non-modal tools column (desktop) and dismissible bottom sheet (phone). */
+.panel {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  width: 320px;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 0 8px 24px #0c0a0914;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.panel[hidden] {
+  display: none;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.heading h2 {
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.07px;
+}
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+}
+.close:hover {
+  background: var(--muted);
+}
+.close:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+.note {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+@media (max-width: 900px) {
+  /* The sheet takes its own row instead of overlaying: the transcript shrinks, nothing is covered. */
+  .panel {
+    position: static;
+    width: auto;
+    max-height: 50dvh;
+    border-radius: 16px 16px 0 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    box-shadow: 0 -8px 24px #0c0a0914;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}
+
+.workspaces {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+}
+.workspacesTitle {
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.workspaces a {
+  color: inherit;
+  text-decoration: none;
+}
+.workspaces a:hover {
+  text-decoration: underline;
+}

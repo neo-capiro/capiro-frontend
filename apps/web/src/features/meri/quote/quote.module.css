@@ -1,0 +1,89 @@
+.daily {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  /* Reserved hero height keeps hydration and the orb from moving the composer. */
+  min-height: 316px;
+  justify-content: center;
+  width: min(520px, 100%);
+  text-align: center;
+}
+.quote {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  margin: 0;
+}
+.text {
+  /* The longest quotation wraps to at most four lines; no vertical gap belongs here. */
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: -0.2px;
+  color: var(--foreground);
+  text-wrap: pretty;
+}
+.author {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.quote:has(.text:empty) {
+  min-height: 2.8em;
+}
+.author::before {
+  content: "— ";
+}
+.author:empty::before {
+  content: "";
+}
+.source {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+  max-width: 100%;
+}
+.source summary {
+  cursor: pointer;
+  color: var(--muted-foreground);
+}
+.source p {
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+}
+.source a {
+  color: inherit;
+  text-decoration: underline;
+}
+.orbHeading {
+  display: grid;
+  place-items: center;
+  width: 160px;
+  height: 160px;
+  margin: 4px 0 0;
+}
+.orb {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  user-select: none;
+}
+@media (max-width: 680px) {
+  .daily {
+    gap: 8px;
+    min-height: 280px;
+  }
+  .text {
+    font-size: 17px;
+  }
+  .orbHeading,
+  .orb {
+    width: 144px;
+    height: 144px;
+  }
+}

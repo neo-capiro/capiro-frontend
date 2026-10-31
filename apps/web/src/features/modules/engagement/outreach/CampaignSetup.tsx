@@ -22,8 +22,10 @@ export function CampaignDirection({
   update,
   disabled,
   clients,
+  fixedClient = false,
 }: Props & {
   clients: readonly { id: string; name: string }[];
+  fixedClient?: boolean;
 }) {
   return (
     <Panel
@@ -60,7 +62,7 @@ export function CampaignDirection({
         >
           <SelectInput
             id="outreach-client"
-            disabled={disabled}
+            disabled={disabled || fixedClient}
             value={state.clientId ?? ""}
             onValueChange={(value) => update({ clientId: value || null })}
             options={[

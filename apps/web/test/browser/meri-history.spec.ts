@@ -388,9 +388,12 @@ test("synthetic membership revocation removes saved output and closes the prior 
   await expect(page.getByText("First answer", { exact: true })).toBeVisible();
   await composer(page).fill("Private draft before membership denial");
   native.denied = true;
-  await page
-    .getByRole("button", { name: "Reload saved history", exact: true })
-    .click();
+  // A healthy conversation shows no permanent reload control; the revocation is discovered by the
+  // next real read of this exact conversation, which is what reopening the route performs.
+  await expect(
+    page.getByRole("button", { name: "Reload saved history", exact: true }),
+  ).toHaveCount(0);
+  await page.reload();
   await expect(
     page.getByRole("heading", {
       name: "Conversation access unavailable",
@@ -409,6 +412,15 @@ test("synthetic membership revocation removes saved output and closes the prior 
   await expect(page.getByText("First answer", { exact: true })).toHaveCount(0);
   await expect(composer(page)).toHaveValue("");
   await expect(sendButton(page)).toBeDisabled();
-  expect(f.hints).toHaveLength(1);
+  // Reopening re-verifies the session before the read is denied, so the exact conversation may be
+  // opened twice; no other conversation is ever issued and no saved output survives the denial.
+  expect(f.hints.length).toBeGreaterThanOrEqual(1);
+  expect(
+    new Set(
+      f.hints.map(
+        (hint) => (hint as { conversationId: string }).conversationId,
+      ),
+    ),
+  ).toEqual(new Set([binding.conversationId]));
   expect(f.unexpected).toEqual([]);
 });

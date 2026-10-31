@@ -31,7 +31,11 @@ import {
 } from "../../../portfolio/relationships/public";
 import { runOutreachUnits } from "./generation-runner";
 
-export function useOutreachCampaign(id: string | undefined, clientId: string) {
+export function useOutreachCampaign(
+  id: string | undefined,
+  clientId: string,
+  initialStep?: number,
+) {
   const api = useCapiro();
   const owner = useMemo(() => createCampaignApi(api), [api]);
   const [saved, setSaved] = useState<OutreachCampaign | null>(null);
@@ -51,7 +55,8 @@ export function useOutreachCampaign(id: string | undefined, clientId: string) {
     Boolean(id || readReceipt("campaignRequest")),
   );
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string>();
+  const [failure, setError] = useState<Error | string>();
+  const error = typeof failure === "string" ? failure : failure?.message;
   const active = useRef(false);
   const lifetime = useRef(new AbortController());
   useEffect(() => {
@@ -72,16 +77,18 @@ export function useOutreachCampaign(id: string | undefined, clientId: string) {
             record.state.clientId?.toLowerCase() !== clientId.toLowerCase()
           )
             throw new Error("The campaign does not match the selected client.");
-          setSaved(record);
           setState(
             recoveredCampaignStep(
-              record.state,
+              initialStep && initialStep >= 1 && initialStep <= 7
+                ? { ...record.state, lastStep: initialStep }
+                : record.state,
               !!readReceipt("generationRequest"),
               !!readReceipt("sendRequest"),
             ),
           );
           const loadedDrafts = await owner.drafts(record.id, abort.signal);
           abort.signal.throwIfAborted();
+          setSaved(record);
           setDrafts(loadedDrafts);
           const generationKey = readReceipt("generationRequest");
           if (generationKey) {
@@ -127,16 +134,14 @@ export function useOutreachCampaign(id: string | undefined, clientId: string) {
         }
       } catch (caught) {
         if (!abort.signal.aborted)
-          setError(
-            caught instanceof Error ? caught.message : "Campaign unavailable.",
-          );
+          setError(caught instanceof Error ? caught : "Campaign unavailable.");
       } finally {
         if (!abort.signal.aborted) setLoading(false);
       }
     };
     void load();
     return () => abort.abort();
-  }, [api, owner, id, clientId]);
+  }, [api, owner, id, clientId, initialStep]);
   const readOnly = !!saved && saved.status !== "draft";
   const requireEditable = () => {
     if (readOnly)
@@ -156,7 +161,7 @@ export function useOutreachCampaign(id: string | undefined, clientId: string) {
       if (!lifetime.current.signal.aborted)
         setError(
           caught instanceof Error
-            ? caught.message
+            ? caught
             : "The outcome could not be confirmed. Check status before trying again.",
         );
     } finally {
@@ -166,6 +171,8 @@ export function useOutreachCampaign(id: string | undefined, clientId: string) {
   };
   const persist = async (signal: AbortSignal) => {
     requireEditable();
+    if (clientId && state.clientId?.toLowerCase() !== clientId.toLowerCase())
+      throw new Error("The campaign does not match the selected client.");
     if (!outreachCampaignState.safeParse(state).success)
       throw new Error(
         "Check the campaign name and captured fields before saving.",
@@ -184,15 +191,21 @@ export function useOutreachCampaign(id: string | undefined, clientId: string) {
   };
   const refresh = () =>
     action(async (signal) => {
-      const record = saved
-        ? await owner.read(saved.id, signal)
-        : readReceipt("campaignRequest")
-          ? await owner.recover(readReceipt("campaignRequest")!, signal)
-          : null;
+      const record =
+        saved || id
+          ? await owner.read(saved?.id ?? id!, signal)
+          : readReceipt("campaignRequest")
+            ? await owner.recover(readReceipt("campaignRequest")!, signal)
+            : null;
       if (!record)
         throw new Error(
           "No result is available for this request yet. It has not been sent again.",
         );
+      if (
+        clientId &&
+        record.state.clientId?.toLowerCase() !== clientId.toLowerCase()
+      )
+        throw new Error("The campaign does not match the selected client.");
       signal.throwIfAborted();
       setSaved(record);
       // Explicit reload adopts the server's current state; never declares an uncertain mutation failed.
@@ -389,6 +402,7 @@ export function useOutreachCampaign(id: string | undefined, clientId: string) {
     loading,
     busy,
     error,
+    failure,
     dirty,
     readOnly,
     navigate: (step: number) => {
@@ -397,7 +411,11 @@ export function useOutreachCampaign(id: string | undefined, clientId: string) {
     },
     update: (patch: Partial<OutreachCampaignState>) => {
       if (!active.current && !pending && !readOnly)
-        setState((value) => ({ ...value, ...patch }));
+        setState((value) => ({
+          ...value,
+          ...patch,
+          ...(clientId ? { clientId } : {}),
+        }));
     },
     save: () =>
       action(async (signal) => {
@@ -445,7 +463,7 @@ export function useOutreachCampaign(id: string | undefined, clientId: string) {
         if (!lifetime.current.signal.aborted)
           setError(
             caught instanceof Error
-              ? caught.message
+              ? caught
               : "Cancellation could not be confirmed. Check status.",
           );
       }

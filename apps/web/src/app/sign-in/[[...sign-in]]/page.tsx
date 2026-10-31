@@ -12,7 +12,11 @@ export default function SignInPage() {
       }}
     >
       {config.authConfigured && config.publishableKey ? (
-        <SignIn routing="path" path="/sign-in" fallbackRedirectUrl="/" />
+        <SignIn
+          routing="path"
+          path="/sign-in"
+          fallbackRedirectUrl="/meri?scope=general"
+        />
       ) : (
         <section>
           <h1>Sign-in setup required</h1>

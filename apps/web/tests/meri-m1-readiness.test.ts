@@ -418,10 +418,11 @@ it("empty saved history does not dismiss an uncertain current turn or trigger re
   const session = historySession(false);
   session.history.empty = true;
   const html = renderHistory(session);
-  expect(html).toContain(
+  // A not-started conversation is calm: no empty-history warning replaces the turn state.
+  expect(html).not.toContain(
     "No saved turns were returned by the last history check",
   );
-  expect(html).toContain("shown below has its own delivery status");
+  expect(html).not.toContain("shown below has its own delivery status");
   expect(html).toContain("A turn may already be in flight");
   expect(html).not.toContain("No saved turns yet.");
   expect(session.continuation.retry).not.toHaveBeenCalled();

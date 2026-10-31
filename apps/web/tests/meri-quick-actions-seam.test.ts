@@ -19,7 +19,10 @@ import { ALL_TYPED_SKILL_IDS } from "../src/features/meri/conversation/quick-act
  */
 
 vi.mock("../src/shared/capiro/CapiroBoundary", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("../src/shared/capiro/CapiroBoundary")>();
+  const actual =
+    await importOriginal<
+      typeof import("../src/shared/capiro/CapiroBoundary")
+    >();
   return {
     ...actual,
     useCapiro: () => ({
@@ -32,7 +35,9 @@ vi.mock("../src/shared/capiro/CapiroBoundary", async (importOriginal) => {
 
 const harness = vi.hoisted(() => ({
   submit: undefined as
-    | ComponentProps<typeof import("@capiro/ui/prompt-input").PromptInput>["onSubmit"]
+    | ComponentProps<
+        typeof import("@capiro/ui/prompt-input").PromptInput
+      >["onSubmit"]
     | undefined,
 }));
 vi.mock("@capiro/ui/prompt-input", async (original) => {
@@ -90,13 +95,16 @@ function session(bound: MeriConversationPort): Session {
 
 type Gate = ComponentProps<typeof SessionComposer>["gate"];
 const ROLLOUT = "Quick actions are turned off for this workspace.";
-const LOCK = "Delivery of your last request is uncertain. Retry it before sending another.";
+const LOCK =
+  "Delivery of your last request is uncertain. Retry it before sending another.";
 const applied = {
   skill: { skillId: "quick_skill.commitments_audit", skillVersion: "1.0.0" },
   windowRequest: { basis: "unbounded" as const },
 };
 const skillSelect = (html: string) =>
-  html.match(/<select[^>]*>[\s\S]*?No selected skill[\s\S]*?<\/select>/i)?.[0] ?? "";
+  html.match(
+    /<select[^>]*>[\s\S]*?No selected skill[\s\S]*?<\/select>/i,
+  )?.[0] ?? "";
 const sendButton = (html: string) =>
   html.match(/<button[^>]*aria-label="Send message"[^>]*>/i)?.[0] ?? "";
 
@@ -117,6 +125,8 @@ function compose(gate: Gate, controls: Partial<LiveControls>) {
       session: value,
       scope: "Synthetic client",
       gate,
+      toolsOpen: true,
+      onToggleTools: () => undefined,
     }),
   );
 }
@@ -132,14 +142,23 @@ it("rollout refusal closes Send but leaves the unsent selection editable", () =>
 });
 
 it("a genuine pending/unknown lock still disables the selection control", () => {
-  const html = compose({ status: "off" }, { sendBlocked: LOCK, selectionLocked: LOCK });
+  const html = compose(
+    { status: "off" },
+    { sendBlocked: LOCK, selectionLocked: LOCK },
+  );
   expect(skillSelect(html)).toMatch(/^<select[^>]*\sdisabled/i);
   expect(html).toContain(LOCK);
 });
 
 it("an allowed subset offers the allowed skill so the user can switch", () => {
   const html = compose(
-    { status: "on", available: new Set(["quick_skill.bill_watch", "quick_skill.cited_report"]) },
+    {
+      status: "on",
+      available: new Set([
+        "quick_skill.bill_watch",
+        "quick_skill.cited_report",
+      ]),
+    },
     { sendBlocked: ROLLOUT },
   );
   const select = skillSelect(html);

@@ -224,8 +224,8 @@ export function CampaignSend({
             account.
           </p>
           <p>
-            {versions.length} messages · {owner.state.attachmentIds.length}{" "}
-            attachments
+            {versions.length} {versions.length === 1 ? "message" : "messages"} ·{" "}
+            {owner.state.attachmentIds.length} attachments
           </p>
           {owner.dirty && (
             <p role="status">
@@ -257,6 +257,7 @@ export function CampaignSend({
         {confirm && (
           <Modal
             open
+            className={styles.confirmation}
             onOpenChange={setConfirm}
             title="Send this outreach?"
             footer={
@@ -275,30 +276,54 @@ export function CampaignSend({
                     if (selected) owner.sendDrafts(false, selected);
                   }}
                 >
-                  Send {versions.length} messages
+                  Send {versions.length}{" "}
+                  {versions.length === 1 ? "message" : "messages"}
                 </ActionButton>
               </>
             }
           >
             <div className={styles.fields}>
-              <p>From {selected?.accountEmail}</p>
-              <p>
+              <p className={styles.hint}>
                 This sends the reviewed saved copies to the destinations below.
                 Messages already accepted by the provider cannot be recalled
                 here.
               </p>
+              <ConfirmationField
+                label="From"
+                value={selected?.accountEmail ?? ""}
+              />
               {versions.map(({ unit }) => (
-                <div key={unit.key}>
-                  <strong>{unit.name}</strong>
-                  <p>To: {unit.to.map((row) => row.email).join(", ")}</p>
-                  {!!unit.cc.length && <p>Cc: {unit.cc.join(", ")}</p>}
-                  {!!unit.bcc.length && <p>Bcc: {unit.bcc.join(", ")}</p>}
+                <div className={styles.fields} key={unit.key}>
+                  <ConfirmationField
+                    label={`${unit.name} · To`}
+                    value={unit.to.map((row) => row.email).join(", ")}
+                  />
+                  {!!unit.cc.length && (
+                    <ConfirmationField
+                      label={`${unit.name} · Cc`}
+                      value={unit.cc.join(", ")}
+                    />
+                  )}
+                  {!!unit.bcc.length && (
+                    <ConfirmationField
+                      label={`${unit.name} · Bcc`}
+                      value={unit.bcc.join(", ")}
+                    />
+                  )}
                 </div>
               ))}
             </div>
           </Modal>
         )}
       </Panel>
+    </div>
+  );
+}
+function ConfirmationField({ label, value }: { label: string; value: string }) {
+  return (
+    <div className={styles.confirmationField}>
+      <p>{label}</p>
+      <div>{value}</div>
     </div>
   );
 }

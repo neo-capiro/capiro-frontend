@@ -13,7 +13,9 @@ export const moduleRouteFixtures = {
   "clients.list": [],
   "engagement.meetings": [],
   "engagement.sessions": [],
+  "engagement.campaigns": { items: [], nextCursor: null },
   "engagement.outreach": [],
+  "engagement.outreach.records": { items: [], nextCursor: null },
   "planner.bootstrap": {
     me: { id: "test-user", name: "Test User" },
     people: [],

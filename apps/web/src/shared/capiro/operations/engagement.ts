@@ -100,16 +100,17 @@ export const outreachRecord = z
     body: z.string().nullable(),
     client: client.optional(),
     metadata: newsletterRoutingMetadata.nullable().optional(),
+    hasWorkflow: z.boolean().optional(),
     createdAt: z.string().optional(),
     recipients: z
       .array(
         z.object({
-          id: z.string().max(240).optional(),
+          id: z.string().max(384).optional(),
           clientId: id.optional(),
-          name: z.string().max(160).optional(),
-          email: z.string().email().optional(),
+          name: z.string().max(240).optional(),
+          email: z.string().max(320).optional(),
           office: z.string().max(240).optional(),
-          title: z.string().max(160).optional(),
+          title: z.string().max(240).optional(),
           direction: z.enum(["on-behalf", "to-clients"]).optional(),
         }),
       )
@@ -171,6 +172,30 @@ export const engagementOperations = {
     response: z.array(outreachRecord),
     source,
   }),
+  "engagement.outreach.records": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/engagement/outreach/records",
+    request: z
+      .object({
+        query: scopeQuery
+          .extend({
+            q: z.string().max(240).optional(),
+            limit: z.number().int().min(1).max(100).optional(),
+            cursor: z.string().optional(),
+            deleted: z.enum(["true", "false"]).optional(),
+          })
+          .strict()
+          .optional(),
+      })
+      .strict(),
+    response: z.object({
+      items: z.array(outreachRecord.extend({ hasWorkflow: z.boolean() })),
+      nextCursor: z.string().nullable(),
+    }),
+    source:
+      "Core OutreachCampaignController.listRecords / EngagementService.listOutreachRecordPage",
+  }),
   "engagement.outreach.record": defineOperation({
     service: "core",
     method: "GET",
@@ -204,6 +229,27 @@ export const engagementOperations = {
       .strict(),
     response: outreachRecord,
     source,
+  }),
+  "engagement.outreach.update": defineOperation({
+    service: "core",
+    method: "PATCH",
+    path: "/engagement/outreach/:id",
+    request: z
+      .object({
+        params,
+        body: z
+          .object({
+            title: z.string().trim().min(1).max(240),
+            clientId: id.nullable(),
+            subject: z.string().max(300).nullable(),
+            body: z.string().max(40000).nullable(),
+          })
+          .strict(),
+      })
+      .strict(),
+    response: outreachRecord,
+    source:
+      "Core EngagementController.updateOutreachRecord and EngagementService.updateOutreachRecord",
   }),
   "engagement.notes": defineOperation({
     service: "core",

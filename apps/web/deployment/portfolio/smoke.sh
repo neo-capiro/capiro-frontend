@@ -46,8 +46,9 @@ probe() {
   ! grep -qi '^x-powered-by:' "$scratch/headers"
 }
 
-probe / 200
-grep -q 'Portfolio setup required' "$scratch/body"
+probe / 307
+root_location=$(sed -n 's/^[Ll]ocation: //p' "$scratch/headers" | tr -d '\r')
+[[ "$root_location" == /meri\?scope=general || "$root_location" == "$base/meri?scope=general" ]]
 probe /portfolio 200
 grep -q 'Portfolio setup required' "$scratch/body"
 probe /meri 200

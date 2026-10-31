@@ -24,7 +24,7 @@ for (const [path, status, text] of [
   ["/meri/files", 200, "Connection setup required"],
   ["/sign-in", 200, "Sign-in setup required"],
   ["/api/backend/core/clients", 503, ""],
-  ["/", 200, "Portfolio setup required"],
+  ["/", 307, ""],
   ["/modules", 200, "Connection setup required"],
   ["/settings", 307, ""],
   ["/settings?clientId=10000000-0000-4000-8000-000000000001", 307, ""],
@@ -132,7 +132,7 @@ try {
       const portfolioLink = page
         .getByRole("navigation", { name: "Product modes" })
         .getByRole("link", { name: "Portfolio", exact: true });
-      assert.equal(await portfolioLink.getAttribute("href"), "/");
+      assert.equal(await portfolioLink.getAttribute("href"), "/portfolio");
       await portfolioLink.click();
       await page
         .getByRole("heading", { name: "Portfolio setup required" })

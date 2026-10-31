@@ -56,7 +56,7 @@ export function SelectedClientGate({ children }: { children: ReactNode }) {
           This client could not be verified for your current session. Return to
           Portfolio to choose a permitted client.
         </p>
-        <Link href="/">Open Portfolio</Link>
+        <Link href="/portfolio">Open Portfolio</Link>
       </section>
     );
   return children;

@@ -53,12 +53,14 @@ export function OutreachWorkflowFrame({
             ? "Your draft is saved. Review before sending."
             : "Unsaved changes"
         }
-        actions={
-          <ActionButton disabled={busy} onClick={onExit}>
-            ← All outreach
-          </ActionButton>
-        }
       />
+      <ActionButton
+        className={styles.backLink}
+        disabled={busy}
+        onClick={onExit}
+      >
+        ← All outreach
+      </ActionButton>
       <Tabs
         label="Outreach steps"
         value={String(step)}

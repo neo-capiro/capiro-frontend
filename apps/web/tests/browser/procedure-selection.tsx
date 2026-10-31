@@ -214,6 +214,8 @@ function Harness() {
     <main style={{ padding: 24 }}>
       <h1>Synthetic native procedure composer</h1>
       <SessionComposer
+        toolsOpen
+        onToggleTools={() => undefined}
         channel={channel}
         session={session}
         scope="Synthetic client"

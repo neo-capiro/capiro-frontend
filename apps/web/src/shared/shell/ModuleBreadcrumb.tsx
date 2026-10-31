@@ -15,6 +15,14 @@ export function ModuleBreadcrumb({ active }: { active: ModuleSlug }) {
   const params = useSearchParams();
   if (active === "intelligence" && params.get("view") === "legiwatch")
     return null;
+  if (active === "engagement")
+    return (
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <ScopedLink href="/modules">← Modules</ScopedLink>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Outreach</span>
+      </nav>
+    );
   // Directory uses the screen's resolved view, including its default. Other
   // modules retain their catalog labels for the trailing breadcrumb.
   const view = params.get("view");

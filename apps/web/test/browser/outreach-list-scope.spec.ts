@@ -24,9 +24,14 @@ for (const width of [1440, 390]) {
     if (width === 390) await page.emulateMedia({ colorScheme: "dark" });
     let held: Route | undefined;
     let reads = 0;
-    await page.route("**/api/capiro/engagement.outreach?*", (route) => {
+    await page.route("**/api/capiro/engagement.outreach.records?*", (route) => {
       if (++reads === 1)
-        return route.fulfill({ json: [{ ...record, client: null }] });
+        return route.fulfill({
+          json: {
+            items: [{ ...record, client: null, hasWorkflow: false }],
+            nextCursor: null,
+          },
+        });
       held = route;
     });
     await page.goto(`/modules/engagement?view=outreach&clientId=${clientId}`);
@@ -44,15 +49,23 @@ for (const width of [1440, 390]) {
     await page.keyboard.press("Enter");
     await expect.poll(() => Boolean(held)).toBe(true);
     await expect(
-      page.getByRole("button", { name: record.title, exact: true }),
+      page.getByRole("button", {
+        name: `Open draft: ${record.title}`,
+        exact: true,
+      }),
     ).toHaveCount(0);
     await expect(page.getByRole("dialog")).toHaveCount(0);
     assertNoEffects(observed);
     const settled = requestCompletion(page, held!.request());
-    await held!.fulfill({ json: [record] });
+    await held!.fulfill({
+      json: { items: [{ ...record, hasWorkflow: false }], nextCursor: null },
+    });
     await settled;
     await expect(
-      page.getByRole("button", { name: record.title, exact: true }),
+      page.getByRole("button", {
+        name: `Open draft: ${record.title}`,
+        exact: true,
+      }),
     ).toBeVisible();
     expect(reads).toBe(2);
     assertNoEffects(observed);
@@ -70,27 +83,31 @@ for (const association of [
     const observed = await setupOutreach(page);
     let mismatch = true;
     const inputs: unknown[] = [];
-    await page.route("**/api/capiro/engagement.outreach?*", (route) => {
+    await page.route("**/api/capiro/engagement.outreach.records?*", (route) => {
       inputs.push(
         JSON.parse(new URL(route.request().url()).searchParams.get("input")!),
       );
       return route.fulfill({
-        json: mismatch
-          ? [
-              record,
-              {
-                ...record,
-                id: otherRecordId,
-                title: "Synthetic unverified client record",
-                client:
-                  association === "other-client"
-                    ? { id: otherClientId, name: "Other client" }
-                    : association === "null-client"
-                      ? null
-                      : undefined,
-              },
-            ]
-          : [record],
+        json: {
+          items: (mismatch
+            ? [
+                record,
+                {
+                  ...record,
+                  id: otherRecordId,
+                  title: "Synthetic unverified client record",
+                  client:
+                    association === "other-client"
+                      ? { id: otherClientId, name: "Other client" }
+                      : association === "null-client"
+                        ? null
+                        : undefined,
+                },
+              ]
+            : [record]
+          ).map((row) => ({ ...row, hasWorkflow: false })),
+          nextCursor: null,
+        },
       });
     });
     await page.goto(`/modules/engagement?view=outreach&clientId=${clientId}`);
@@ -98,7 +115,10 @@ for (const association of [
       "The returned outreach does not match this client scope.",
     );
     await expect(
-      page.getByRole("button", { name: record.title, exact: true }),
+      page.getByRole("button", {
+        name: `Open draft: ${record.title}`,
+        exact: true,
+      }),
     ).toHaveCount(0);
     await expect(
       page.getByRole("button", {
@@ -110,7 +130,9 @@ for (const association of [
     assertNoEffects(observed);
     mismatch = false;
     await page.getByRole("button", { name: "Try again", exact: true }).click();
-    await page.getByRole("button", { name: record.title, exact: true }).click();
+    await page
+      .getByRole("button", { name: `Open draft: ${record.title}`, exact: true })
+      .click();
     await expect(page.getByLabel("Body", { exact: true })).toHaveValue(
       record.body,
     );
@@ -118,10 +140,8 @@ for (const association of [
       Array(2).fill({
         query: {
           clientId,
-          from: "2025-10-08T00:00:00.000Z",
-          to: "2026-10-09T00:00:00.000Z",
           deleted: "false",
-          limit: 500,
+          limit: 100,
         },
       }),
     );
@@ -145,16 +165,33 @@ test("all permitted clients Outreach retains matching, other-client and unassign
     title: "Synthetic other-client record",
     client: { id: otherClientId, name: "Other client" },
   };
-  await page.route("**/api/capiro/engagement.outreach?*", (route) =>
-    route.fulfill({ json: [record, unassigned, other] }),
+  await page.route("**/api/capiro/engagement.outreach.records?*", (route) =>
+    route.fulfill({
+      json: {
+        items: [record, unassigned, other].map((row) => ({
+          ...row,
+          hasWorkflow: false,
+        })),
+        nextCursor: null,
+      },
+    }),
   );
   await page.goto("/modules/engagement?view=outreach");
+  await page.route("**/api/capiro/engagement.outreach.record?*", (route) =>
+    route.fulfill({ json: unassigned }),
+  );
   for (const row of [record, unassigned, other])
     await expect(
-      page.getByRole("button", { name: row.title, exact: true }),
+      page.getByRole("button", {
+        name: `Open draft: ${row.title}`,
+        exact: true,
+      }),
     ).toBeVisible();
   await page
-    .getByRole("button", { name: unassigned.title, exact: true })
+    .getByRole("button", {
+      name: `Open draft: ${unassigned.title}`,
+      exact: true,
+    })
     .click();
   await expect(page.getByLabel("Body", { exact: true })).toHaveValue(
     record.body,

@@ -23,10 +23,13 @@ export function MeriConversationHost({
   enabled,
   account,
   firstChatBootstrapEnabled = false,
+  scopeControl,
 }: {
   enabled: boolean;
   account?: ConversationAccount;
   firstChatBootstrapEnabled?: boolean;
+  /** The one authorized client/scope control, hosted inside the composer footer. */
+  scopeControl?: React.ReactNode;
 }) {
   const selected = useSelectedClient();
   const params = useSearchParams();
@@ -49,6 +52,7 @@ export function MeriConversationHost({
           The governed conversation connection is not enabled. Conversations and
           their files cannot be loaded.
         </p>
+        {scopeControl}
       </section>
     );
   if (selector.state === "invalid" || invalidScope)
@@ -58,6 +62,7 @@ export function MeriConversationHost({
         <p>
           The conversation link is invalid. No other conversation was opened.
         </p>
+        {scopeControl}
       </section>
     );
   if (account && general) {
@@ -75,11 +80,13 @@ export function MeriConversationHost({
           account={account}
           clientId={null}
           scope="General"
+          scopeControl={scopeControl}
         />
       ) : (
         <section role="status">
           <h2>General chat is unavailable</h2>
           <p>The current conversation could not be confirmed.</p>
+          {scopeControl}
         </section>
       );
     return (
@@ -89,6 +96,7 @@ export function MeriConversationHost({
         clientId={null}
         scope="General"
         conversationId={selector.conversationId}
+        scopeControl={scopeControl}
       />
     );
   }
@@ -105,10 +113,12 @@ export function MeriConversationHost({
                 ? "Verifying the selected client before opening a conversation."
                 : "The selected client is unavailable. Choose General or another permitted client above."}
         </p>
+        {scopeControl}
       </section>
     );
   // Core rechecks current client authority on bootstrap and session issuance.
-  if (selected.client.status === "archived") return <ArchivedClientNotice />;
+  if (selected.client.status === "archived")
+    return <ArchivedClientNotice scopeControl={scopeControl} />;
   if (firstChatBootstrapEnabled && selector.state === "current")
     return (
       <CoreResolvedConversation
@@ -121,6 +131,7 @@ export function MeriConversationHost({
         account={account}
         clientId={selected.client.id}
         scope={selected.client.name}
+        scopeControl={scopeControl}
       />
     );
   return (
@@ -137,11 +148,16 @@ export function MeriConversationHost({
       conversationId={
         selector.state === "selected" ? selector.conversationId : undefined
       }
+      scopeControl={scopeControl}
     />
   );
 }
 
-function ArchivedClientNotice() {
+function ArchivedClientNotice({
+  scopeControl,
+}: {
+  scopeControl?: React.ReactNode;
+}) {
   return (
     <section role="alert">
       <h2>Conversations unavailable for this client</h2>
@@ -149,6 +165,7 @@ function ArchivedClientNotice() {
         This client is archived. Restore it or select an active client in
         Portfolio to start a conversation.
       </p>
+      {scopeControl}
     </section>
   );
 }
@@ -163,10 +180,12 @@ function CoreResolvedConversation({
   account,
   clientId,
   scope,
+  scopeControl,
 }: {
   account: ConversationAccount;
   clientId: string | null;
   scope: string;
+  scopeControl?: React.ReactNode;
 }) {
   const api = useCapiro();
   const [attempt, setAttempt] = useState(0);
@@ -222,6 +241,7 @@ function CoreResolvedConversation({
       <section role="status">
         <h2>Preparing conversation</h2>
         <p>Confirming the current conversation.</p>
+        {scopeControl}
       </section>
     );
   if (resolution.state === "error")
@@ -237,6 +257,7 @@ function CoreResolvedConversation({
             New Chat
           </Button>
         )}
+        {scopeControl}
       </section>
     );
   return (
@@ -246,6 +267,7 @@ function CoreResolvedConversation({
       clientId={clientId}
       scope={scope}
       conversationId={resolution.conversationId}
+      scopeControl={scopeControl}
     />
   );
 }
@@ -271,12 +293,20 @@ function ConnectedConversation({
   clientId,
   scope,
   conversationId,
+  scopeControl,
 }: {
   account: ConversationAccount;
   clientId: string | null;
   scope: string;
   conversationId?: string | undefined;
+  scopeControl?: React.ReactNode;
 }) {
   const session = useConversationSession(account, clientId, conversationId);
-  return <ConversationView session={session} scope={scope} />;
+  return (
+    <ConversationView
+      session={session}
+      scope={scope}
+      scopeControl={scopeControl}
+    />
+  );
 }

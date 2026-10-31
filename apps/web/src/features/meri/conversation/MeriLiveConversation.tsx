@@ -32,6 +32,8 @@ import {
 } from "./lifecycle/useRunLifecycle";
 import { RunLifecycleControls } from "./lifecycle/RunLifecycleControls";
 import { SelectedRequestReceipt } from "./SelectedRequestReceipt";
+import { ConnectedBrowserViewer } from "../browser/ConnectedBrowserViewer";
+import { DailyQuote } from "../quote/DailyQuote";
 
 /** The current admitted segment, or the exact immutable request whose ACK is still pending. */
 function LiveTurn({
@@ -279,6 +281,9 @@ export function MeriLiveConversation({
   skillSelection,
   newIntentBlocked,
   onLifecycleTarget,
+  onBrowserTarget,
+  browserAllowed = false,
+  historyUnavailable = false,
 }: {
   port: MeriConversationPort;
   initialPrompt: string | undefined;
@@ -306,6 +311,12 @@ export function MeriLiveConversation({
   modelBlocked?: string | undefined;
   skillSelection?: ConversationSkillSelection;
   onLifecycleTarget: (target: LifecycleTarget) => void;
+  /** Opens a browser resume/observation target from this run; lifecycle routing is the default. */
+  onBrowserTarget?: ((target: LifecycleTarget) => void) | undefined;
+  /** The tools panel was opened: browser controls become available for this run. */
+  browserAllowed?: boolean;
+  /** The saved-history read failed: an empty-looking hero must not stand in for that failure. */
+  historyUnavailable?: boolean;
 }) {
   const run = useLiveRun(
     port,
@@ -336,6 +347,14 @@ export function MeriLiveConversation({
   const turn = currentTurnView(observed, savedCurrent);
   const finished = isTerminal(turn?.runState);
   const active = !!turn && !finished;
+  // Browser controls appear for an actual browser task or when the user opens Tools, and once
+  // mounted they stay mounted: toggling the panel never disposes or recreates a live session.
+  const [browserMounted, setBrowserMounted] = useState(false);
+  if (
+    !browserMounted &&
+    (browserAllowed || (turn?.browserReceipts.length ?? 0) > 0)
+  )
+    setBrowserMounted(true);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
   useSettledRefresh(finished, onSettled);
   const availability = composerAvailability(
@@ -414,10 +433,29 @@ export function MeriLiveConversation({
       attachUnavailable: unavailableTitle("attachments"),
     },
   });
+  // The landing identity belongs to this owner's own admitted state: no saved turn, no captured or
+  // unresolved request, no current turn. Nothing here re-reads the URL or observes the DOM.
+  const emptyConversation =
+    !turn &&
+    !intent.submit &&
+    !earlier.length &&
+    !savedCurrent &&
+    !acceptedRequest &&
+    !initialPrompt &&
+    !historyUnavailable;
   return (
     <ConversationBody
       earlier={earlier}
-      current={<LiveTurn turn={turn} intent={intent} earlier={earlier} />}
+      current={
+        <>
+          {emptyConversation && (
+            <div className={styles.hero}>
+              <DailyQuote />
+            </div>
+          )}
+          <LiveTurn turn={turn} intent={intent} earlier={earlier} />
+        </>
+      }
       status={
         <>
           <SelectedRequestReceipt
@@ -459,6 +497,21 @@ export function MeriLiveConversation({
           onDecisionSettled={(runId) => {
             if (runId === port.context.runId) run.refreshAfterDecision();
           }}
+          browser={
+            browserMounted ? (
+              <ConnectedBrowserViewer
+                key={port.context.runId}
+                account={{
+                  tenantId: port.context.tenantId,
+                  actorId: port.context.actorId,
+                }}
+                clientId={port.context.selectedClientId}
+                conversationId={port.context.conversationId}
+                runId={port.context.runId}
+                onTarget={onBrowserTarget ?? onLifecycleTarget}
+              />
+            ) : undefined
+          }
         />
       }
     />
