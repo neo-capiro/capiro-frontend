@@ -52,9 +52,9 @@ export function TargetRecommendations({
                 .filter(Boolean)
                 .join(" · ")}
             </p>
-            <small>
-              {row.billCount} tracked bills · score {row.score.toFixed(2)} ·{" "}
-              {row.tags.join(", ")}
+            <small title="Related bills come from the saved recommendation snapshot and may include automatic matches and manually tracked bills.">
+              {row.billCount} related {row.billCount === 1 ? "bill" : "bills"} ·
+              score {row.score.toFixed(2)} · {row.tags.join(", ")}
             </small>
           </div>
           {targets.some((target) => target.memberId === row.memberId) ? (
@@ -81,7 +81,9 @@ export function TargetRecommendations({
         <p className="empty">No office recommendations are available yet.</p>
       )}
       {records?.computedAt && (
-        <small>Computed {new Date(records.computedAt).toLocaleString()}</small>
+        <small>
+          Snapshot computed {new Date(records.computedAt).toLocaleString()}
+        </small>
       )}
     </section>
   );
