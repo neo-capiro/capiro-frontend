@@ -51,7 +51,7 @@ export function WorkPage({
     Boolean(summaries.error) || isRetryingWorkFailure(summaries);
   const retryingDetailFailure = queries.some(isRetryingWorkFailure);
   return (
-    <div className="page stack">
+    <div className={`page stack ${styles.page}`}>
       <header className="row between">
         <h1>Client work</h1>
         <div className={styles.actions}>
