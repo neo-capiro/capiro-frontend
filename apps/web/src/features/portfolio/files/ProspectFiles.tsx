@@ -7,7 +7,6 @@ import { useIdentity } from "@/shared/portfolio/auth/identity";
 import {
   assertClientWriter,
   currentClientWriter,
-  type ClientWriter,
 } from "@/shared/portfolio/auth/client-writer";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
@@ -19,6 +18,11 @@ import {
 } from "./prospect-files";
 import { useProspectUpload } from "./useProspectUpload";
 import { ProspectFileCopy } from "./upload-copy/ProspectFileCopy";
+import {
+  assertFileReader,
+  useFileReader,
+  type FileReader,
+} from "./file-reader";
 
 export function ProspectFiles({
   prospectId,
@@ -33,9 +37,10 @@ export function ProspectFiles({
 }) {
   useIdentity();
   const cache = useQueryClient();
-  const actor = currentClientWriter(cache);
+  const actor = useFileReader();
   const valid =
     actor &&
+    currentClientWriter(cache) &&
     z.uuid().safeParse(actor.tenantId).success &&
     z.uuid().safeParse(actor.userId).success;
   return (
@@ -44,7 +49,7 @@ export function ProspectFiles({
       <p>Files retain this prospect as their origin after conversion.</p>
       {available && valid ? (
         <ProspectFileSession
-          key={`${actor.tenantId}:${actor.userId}:${prospectId}`}
+          key={`${actor.tenantId}:${actor.userId}:${prospectId}:${actor.revision}`}
           prospectId={prospectId}
           actor={actor}
           active={active}
@@ -81,21 +86,29 @@ function ProspectFileSession({
   clientId,
 }: {
   prospectId: string;
-  actor: ClientWriter;
+  actor: FileReader;
   active: boolean;
   clientId?: string | null;
 }) {
   const api = useApi();
   const cache = useQueryClient();
-  const queryKey = ["prospect-files", actor.tenantId, actor.userId, prospectId];
+  const queryKey = [
+    "prospect-files",
+    actor.tenantId,
+    actor.userId,
+    prospectId,
+    actor.revision,
+  ];
+  const assert = () => {
+    assertFileReader(cache, actor);
+    assertClientWriter(cache, actor);
+  };
   const query = useQuery({
     queryKey,
     retry: false,
     refetchOnMount: "always",
     queryFn: ({ signal }) =>
-      readProspectFiles(api, prospectId, actor, signal, () =>
-        assertClientWriter(cache, actor),
-      ),
+      readProspectFiles(api, prospectId, actor, signal, assert),
   });
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<File>();
@@ -136,7 +149,7 @@ function ProspectFileSession({
         actor,
         removing.id,
         controller.signal,
-        () => assertClientWriter(cache, actor),
+        assert,
       );
       if (!alive.current) return;
       setRemoving(null);

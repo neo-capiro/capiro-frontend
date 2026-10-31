@@ -65,7 +65,7 @@ export function OpportunitiesPage({
         {[
           [
             result?.counts.active ?? "Unavailable",
-            "Active matched opportunities",
+            "Available active opportunities",
           ],
           [workflows?.pursuing ?? "Unavailable", "Pursuing · this page"],
           [workflows?.saved ?? "Unavailable", "Saved · this page"],
@@ -84,7 +84,7 @@ export function OpportunitiesPage({
         ))}
       </section>
       <div className={styles.columns}>
-        <section className="card stack" aria-label="Matched opportunities">
+        <section className="card stack" aria-label="Available opportunities">
           <header className="row between">
             <h2>Opportunities</h2>
             {base && result && (
@@ -104,10 +104,10 @@ export function OpportunitiesPage({
             <input
               key={query}
               name="query"
-              aria-label="Search matched opportunities"
+              aria-label="Search available opportunities"
               defaultValue={query}
               maxLength={512}
-              placeholder="Search matched opportunities"
+              placeholder="Search available opportunities"
             />
             <button className="button">Search</button>
           </form>

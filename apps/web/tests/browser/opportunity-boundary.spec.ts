@@ -7,7 +7,9 @@ for (const status of [403, 503]) {
   }) => {
     const unexpected = await installFixtures(page);
     await page.goto(`/portfolio/${clientId}/opportunities`);
-    const matched = page.getByRole("region", { name: "Matched opportunities" });
+    const matched = page.getByRole("region", {
+      name: "Available opportunities",
+    });
     await expect(
       matched.getByRole("link", { name: "Test opportunity", exact: true }),
     ).toBeVisible();
@@ -25,7 +27,7 @@ for (const status of [403, 503]) {
     await expect(
       page
         .getByRole("region", { name: "Opportunity summary" })
-        .getByText("Active matched opportunities")
+        .getByText("Available active opportunities")
         .locator("..")
         .locator("strong"),
     ).toHaveText("Unavailable");

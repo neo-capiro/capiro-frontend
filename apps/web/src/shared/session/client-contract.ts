@@ -4,6 +4,7 @@ import { z } from "zod";
 export const clientSchema = z.object({
   id: z.string().uuid(),
   name: z.string(),
+  createdAt: z.iso.datetime({ offset: true }).optional(),
   website: z.string().nullable().optional(),
   description: z.string().nullable().optional(),
   productDescription: z.string().nullable().optional(),
