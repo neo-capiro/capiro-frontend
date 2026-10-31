@@ -7470,18 +7470,18 @@
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "3e6393a862f5c0695ca6532ef4f48400f65c7c3c2a9852895d73de3175db981d",
-    "reason": "Independent exact-source structure review at a71b496ec955ec8fd2109fbe77665dae75a0ecb7 (475 nonblank). The module still owns one paginated Outreach list and its small campaign-row renderer; the existing list model owns label/category projection and the shared query layer owns transport. This correction adds local ancillary-session availability, partial-result presentation and row deduplication within that same read-only list. It introduces no sending, generation or backend authorization responsibility, so the size increase does not justify a split.",
-    "reviewedBy": "Codex /root/portfolio_merged_review/debrief314_correction_job_review (independent GPT-6 Astra Ultra design review)",
+    "fingerprint": "a7adaa3bf4a8fc967561a698b96c02ff17ab6e29bffc2cc95185d6a23c786bb8",
+    "reason": "Independent exact-source review at e4e15ef9332bda929a64d327fb039eb22b115342 (498 nonblank). This remains one paginated Outreach list with its row renderer. The server-owned capability only controls ancillary query admission and truthful unavailable presentation; the list model owns admission, shared query effects own cancellation and transport, and the capability module owns deployment interpretation. Actual Chromium callbacks verified disabled search, paging, rerender and canonical retry issue zero session requests; enabled rows, dedup, pagination and fallback remain. No send or authorization responsibility was added, so further fragmentation is not warranted.",
+    "reviewedBy": "Codex /root/lanes_source_finish_high (independent high-reasoning review of original02751a source)",
     "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "function",
     "symbol": "OutreachList",
-    "fingerprint": "b173734e6ae836b7a75915b06f377c630c4e98dc35bfc4d0c43e01aa38faf182",
-    "reason": "Independent exact-source structure review at a71b496ec955ec8fd2109fbe77665dae75a0ecb7 (382 nonblank). The component coordinates the three existing read sources, selected filters, independent cursors and visible rows for one list lifetime. Separating ancillary-session loading/error presentation from the canonical reads, guarding session-row inclusion and deduplicating the loaded session page are local list-composition decisions. The added notice and retry control use that existing query owner; splitting stateful subcomponents solely to reduce line count would not remove a separate responsibility.",
-    "reviewedBy": "Codex /root/portfolio_merged_review/debrief314_correction_job_review (independent GPT-6 Astra Ultra design review)",
+    "fingerprint": "570cc5cf47d624355957423761281daecb4be520578b4c6b4c25de33e803ca71",
+    "reason": "Independent exact-source review at e4e15ef9332bda929a64d327fb039eb22b115342 (403 nonblank). The component still coordinates three reads, filters, cursors and visible rows for one list lifetime. Capability-aware admission and the unavailable notice belong to that same composition; they do not add a service lifecycle or duplicate configuration parsing. Actual query effects and callback tests cover enabled/unknown/disabled transitions, retry, pagination and unchanged client/deleted/date gates. Splitting this state solely for line count would obscure rather than simplify its shared filter lifetime.",
+    "reviewedBy": "Codex /root/lanes_source_finish_high (independent high-reasoning review of original02751a source)",
     "reviewedOn": "2026-10-31"
   },
   {

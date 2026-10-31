@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { previewBackendRejection } from "../../../../shared/preview/backend-policy.server";
 import { proxyPreviewRead } from "../../../../shared/preview/read-proxy.server";
 import { readCapiroConfig } from "../../../../shared/capiro/config";
+import { sessionReadRegistry } from "../../../../shared/capiro/engagement-sessions-availability";
 import {
   handleCapiroRequest,
   handlePublicPlannerFormRequest,
@@ -55,26 +56,10 @@ async function handle(request: Request, context: Context) {
     );
   const config = readCapiroConfig(process.env);
   if (previewWriteTarget) config.services = { core: previewWriteTarget.href };
-  // The campaign-session operations are owned by the separate engagement application. When the
-  // cohort states that surface is available, this narrow override points those two operations at
-  // that service; every other operation keeps its declared service. An "enabled" selection without
-  // a configured engagement base URL has already resolved to "disabled", so an enabled state can
-  // never be sent to the main Core application.
-  const campaignSessionOperation =
-    operation === "engagement.sessions" || operation === "engagement.session";
-  const selectedOperations =
-    config.engagementSessions === "enabled" &&
-    campaignSessionOperation &&
-    Object.hasOwn(operations, operation)
-      ? {
-          ...operations,
-          [operation]: { ...operations[operation]!, service: "engagement" as const },
-        }
-      : operations;
   return handleCapiroRequest(
     request,
     operation,
-    selectedOperations,
+    sessionReadRegistry(operations, operation, config.engagementSessions),
     config,
     async (authentication) => {
       const session = await auth();

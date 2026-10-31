@@ -1,3 +1,5 @@
+import type { OperationRegistry } from "./contracts";
+
 /**
  * Cohort availability contract for the ancillary Outreach "campaign sessions" read.
  *
@@ -58,4 +60,21 @@ export function resolveEngagementSessionsAvailability(
     `${ENGAGEMENT_SESSIONS_AVAILABILITY_VARIABLE} must be "enabled" or "disabled"; the ancillary session reads stay disabled.`,
   );
   return "disabled";
+}
+
+/** Route only explicitly enabled campaign-session reads to their owning application. */
+export function sessionReadRegistry(
+  operations: OperationRegistry,
+  operation: string,
+  availability: EngagementSessionsAvailability | undefined,
+): OperationRegistry {
+  return availability === "enabled" &&
+    (operation === "engagement.sessions" ||
+      operation === "engagement.session") &&
+    Object.hasOwn(operations, operation)
+    ? {
+        ...operations,
+        [operation]: { ...operations[operation]!, service: "engagement" },
+      }
+    : operations;
 }
