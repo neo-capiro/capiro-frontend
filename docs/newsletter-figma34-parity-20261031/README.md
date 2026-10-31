@@ -75,7 +75,7 @@ dead affordance or delete a capability the product already has.
 - `workspace-newsletter-atomic-save.spec.ts` (10), `newsletter-staging.spec.ts`
   (23) pass on the final bytes.
 
-## Finish-pass responsibility review (pending independent acceptance)
+## Finish-pass responsibility review (accepted 31 October 2026)
 
 <a id="responsibility-review"></a>
 
@@ -95,12 +95,33 @@ surfaces without duplicated or truncated lists or preset-only filters.
 owners and adds presentation only. These cohesive responsibilities require
 exact size-review records, not splitting solely to evade thresholds.
 
-The existing handoff's nine staging entries expand to eleven files (eight
-source/spec files plus the three files in this documentation directory).
-The required size-review metadata exception is proposed separately and is not
-applied or counted as approved until independent review and Root disposition.
+Independent Codex `/root/lane5_review` accepted exact source
+`8fe393504bf51fb5910c0ae730625aeba6ea8e62` and all seven responsibility
+fingerprints on 31 October 2026. The final metadata records name that reviewer
+and date. The retained `NEWSLETTER-FINAL-SOURCE-REVIEW-20261031.txt` in the
+delivery orchestrator's outputs contains the exact disposition.
+
+The original nine staging entries expand to eleven files (eight source/spec
+files and three docs). The user explicitly approved one additional metadata
+file, `scripts/architecture/reviewed-size-findings.json`, limited to these seven
+records. Final scope is exactly twelve files; the six unrelated dirty Meri
+screenshots are excluded and preserved byte-for-byte.
 
 The finish pass preserves the existing subject/preheader review rows and guarded
 Workspace exit. The new Modules breadcrumb is a static label, so it cannot bypass
 unsaved-edit confirmation or the editor's disabled state. Canonical library links
 are another explicit visual behavior difference from an inline library preview.
+
+Final parity cases pass 5/5, staging and atomic-save cases pass 33/33, and
+TypeScript plus touched ESLint/Prettier pass. The broader focused run has 47
+passes and five rich failures reproduced on untouched `b9eb11fa`. Thirteen
+delivery/receiving failures reproduce on integration base `6d1465cf`. The same
+base reproduces full lint (14 errors, 93 warnings), format (114 paths) and
+`test:capiro` (843 passes, 15 failures in seven suites). Architecture retains
+140 unrelated blocking findings and 11 errors, with no touched blocker after
+the seven accepted records. These are baseline comparisons, not green gates.
+
+Cloud shipment belongs to the existing Release owner through the established
+pipeline, behind Meri on a shared builder. Deployment and authenticated
+acceptance remain pending at this source handoff; local captures do not prove
+production behavior. See `HANDOFF.md` for the bounded acceptance allocation.
