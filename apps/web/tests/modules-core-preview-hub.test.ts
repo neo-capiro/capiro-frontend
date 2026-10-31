@@ -14,8 +14,10 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(),
 }));
 vi.mock("../src/shared/capiro/queries", () => ({
-  useCapiroQuery: (_key: string, _input: unknown, options: unknown) => {
+  useCapiroQuery: (key: string, _input: unknown, options: unknown) => {
     state.capiroOptions.push(options);
+    if (key === "intelligence.funding.search")
+      return { loading: true, reload: vi.fn() };
     return {
       data: state.capiroData,
       error: state.capiroError,
@@ -69,7 +71,7 @@ it("keeps a failed fixed roster unavailable with an explicit retry", () => {
 it("keeps the ordinary Modules hub on its existing Capiro operation", () => {
   const html = renderToStaticMarkup(createElement(ModuleHub));
 
-  expect(state.capiroOptions).toEqual([undefined]);
+  expect(state.capiroOptions).toEqual([undefined, { enabled: true }]);
   expect(html).toContain("Everything in Capiro");
   expect(html).toContain("Run the work");
   expect(html).toContain('href="/modules/engagement"');
