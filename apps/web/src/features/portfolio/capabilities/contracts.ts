@@ -28,9 +28,19 @@ export const capabilityInputSchema = capabilitySchema
   });
 export type CapabilityInput = z.infer<typeof capabilityInputSchema>;
 export const fitSchema = z.object({
-  status: z.enum(["ready", "empty", "profile_too_thin", "stale"]),
+  status: z.enum([
+    "ready",
+    "empty",
+    "profile_too_thin",
+    "stale",
+    "partial",
+    "unavailable",
+  ]),
   computedAt: z.string().nullable(),
   emptyReason: z.string().optional(),
+  sources: z
+    .object({ pe: z.boolean(), bill: z.boolean(), fo: z.boolean() })
+    .optional(),
   matches: z.array(
     z.object({
       id: z.string(),
