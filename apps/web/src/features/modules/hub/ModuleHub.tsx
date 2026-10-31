@@ -13,6 +13,7 @@ import {
   type ModuleDescriptor,
 } from "../../../shared/shell/module-catalog";
 import { ModuleAsset } from "../../../shared/shell/ModuleAsset";
+import { HubCardMetrics } from "./HubCardMetrics";
 import styles from "./hub.module.css";
 
 function ModuleCard({
@@ -49,6 +50,7 @@ function ModuleCard({
             </Link>
           ))}
         </div>
+        <HubCardMetrics module={module.slug} clientId={clientId} />
       </div>
       <div className={styles.cardBottom}>
         <div className={styles.profile}>
@@ -100,47 +102,11 @@ export function ModuleHub({
       className={styles.hub}
       data-design-target={previewCoreReadOnly ? undefined : "1064:191436"}
     >
-      <PageHeader
-        title={
-          previewCoreReadOnly ? (
-            "Modules client scope"
-          ) : (
-            <>
-              Everything in Capiro
-              <span className={styles.desktopTitle}>
-                , across the whole firm
-              </span>
-            </>
-          )
-        }
-        eyebrow={previewCoreReadOnly ? "Read-only preview" : "Modules"}
-        titleAccessory={
-          previewCoreReadOnly ? undefined : <ModuleHubInformation />
-        }
-        actions={
-          previewCoreReadOnly ? undefined : (
-            <label className={styles.scope}>
-              Scope
-              <select
-                aria-label="Client profile scope"
-                value={clientId}
-                disabled={clientsLoading || Boolean(clientsError)}
-                onChange={(event) => setClientId(event.target.value)}
-              >
-                <option value="">
-                  {profiles.length
-                    ? `All ${profiles.length} available profile${profiles.length === 1 ? "" : "s"}`
-                    : "All available profiles"}
-                </option>
-                {profiles.map((client) => (
-                  <option key={client.id} value={client.id}>
-                    {client.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )
-        }
+      <HubHeader
+        previewCoreReadOnly={previewCoreReadOnly}
+        clientId={clientId}
+        setClientId={setClientId}
+        clients={clients}
       />
       {previewCoreReadOnly && clientsLoading && (
         <p role="status">Loading available client profiles…</p>
@@ -160,25 +126,7 @@ export function ModuleHub({
           <p role="status">No available client profiles were returned.</p>
         )}
       {previewCoreReadOnly ? (
-        <section
-          className={styles.relationship}
-          aria-label="Preview availability"
-        >
-          <div>
-            <h2>Available client profiles</h2>
-            <p>
-              Client selection, module records, and actions are unavailable in
-              this preview.
-            </p>
-            {profiles.length > 0 && (
-              <ul aria-label="Available client profiles">
-                {profiles.map((client) => (
-                  <li key={client.id}>{client.name}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </section>
+        <PreviewProfiles profiles={profiles} />
       ) : (
         <>
           <ModulesRelationship />
@@ -198,6 +146,97 @@ export function ModuleHub({
         </>
       )}
     </div>
+  );
+}
+
+function PreviewProfiles({
+  profiles,
+}: {
+  profiles: { id: string; name: string }[];
+}) {
+  return (
+    <section className={styles.relationship} aria-label="Preview availability">
+      <div>
+        <h2>Available client profiles</h2>
+        <p>
+          Client selection, module records, and actions are unavailable in this
+          preview.
+        </p>
+        {profiles.length > 0 && (
+          <ul aria-label="Available client profiles">
+            {profiles.map((client) => (
+              <li key={client.id}>{client.name}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function HubHeader({
+  previewCoreReadOnly,
+  clientId,
+  setClientId,
+  clients,
+}: {
+  previewCoreReadOnly: boolean;
+  clientId: string;
+  setClientId: (id: string) => void;
+  clients: {
+    data?: { id: string; name: string }[];
+    error?: Error;
+    loading: boolean;
+  };
+}) {
+  const profiles = clients.error ? [] : (clients.data ?? []);
+  return (
+    <PageHeader
+      title={
+        previewCoreReadOnly ? (
+          "Modules client scope"
+        ) : (
+          <>
+            Everything in Capiro
+            <span className={styles.desktopTitle}>, across the whole firm</span>
+          </>
+        )
+      }
+      eyebrow={previewCoreReadOnly ? "Read-only preview" : "Modules"}
+      titleAccessory={
+        previewCoreReadOnly ? undefined : <ModuleHubInformation />
+      }
+      actions={
+        previewCoreReadOnly ? undefined : (
+          <label className={styles.scope}>
+            Scope
+            <select
+              aria-label="Client profile scope"
+              value={clientId}
+              disabled={clients.loading || Boolean(clients.error)}
+              onChange={(event) => setClientId(event.target.value)}
+            >
+              <option value="">
+                {profiles.length
+                  ? `All ${profiles.length} available profile${profiles.length === 1 ? "" : "s"}`
+                  : "All available profiles"}
+              </option>
+              {clientId &&
+                !profiles.some((client) => client.id === clientId) && (
+                  <option value={clientId}>
+                    Selected client (name unavailable)
+                  </option>
+                )}
+              {profiles.map((client) => (
+                <option key={client.id} value={client.id}>
+                  {client.name}
+                </option>
+              ))}
+            </select>
+          </label>
+        )
+      }
+    />
   );
 }
 
