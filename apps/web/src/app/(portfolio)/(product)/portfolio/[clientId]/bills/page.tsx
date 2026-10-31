@@ -12,6 +12,7 @@ export default async function Page({
       clientId={clientId}
       backend={config.trackerBackend}
       destinations={config.destinations}
+      metricsVersion={config.trackerMetricsVersion}
     />
   );
 }

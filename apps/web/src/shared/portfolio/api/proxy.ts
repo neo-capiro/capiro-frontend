@@ -86,6 +86,43 @@ export async function proxyRequest(
     config.recordedActivityVersion !== 1
   )
     return jsonError(503, "Recorded activity is unavailable.");
+  const trackerMetricRead =
+    request.method === "GET" &&
+    ((selected === "core" &&
+      path.length === 5 &&
+      path[0] === "intelligence" &&
+      path[1] === "clients" &&
+      path[3] === "tracker" &&
+      path[4] === "material-changes") ||
+      (selected === "intelligence" &&
+        path.length === 4 &&
+        path[0] === "clients" &&
+        path[2] === "tracker" &&
+        path[3] === "material-changes"));
+  const trackerCoverageRead =
+    selected === "core" &&
+    request.method === "GET" &&
+    path.length === 5 &&
+    path[0] === "legiwatch" &&
+    path[1] === "live-hearings" &&
+    path[2] === "clients" &&
+    path[4] === "coverage";
+  if (trackerMetricRead || trackerCoverageRead) {
+    if (config.trackerMetricsVersion !== 1 || !config.trackerBackend)
+      return jsonError(503, "Bill Tracker metrics are unavailable.");
+    const query = new URL(request.url).searchParams;
+    if (
+      trackerMetricRead &&
+      (selected !== config.trackerBackend || query.size !== 0)
+    )
+      return jsonError(400, "Invalid Tracker metric owner or query.");
+    if (
+      trackerCoverageRead &&
+      (query.size !== 1 ||
+        query.get("trackerBackend") !== config.trackerBackend)
+    )
+      return jsonError(400, "Invalid Tracker coverage owner or query.");
+  }
   if (selected === "workspace" && path[0] === "templates") {
     // Portfolio reads the existing tenant-visible library and a single preview.
     // Template authoring and other catalog operations remain in Workspace.
