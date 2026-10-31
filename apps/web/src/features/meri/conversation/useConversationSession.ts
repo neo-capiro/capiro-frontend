@@ -1,4 +1,5 @@
 "use client";
+import type { ResearchSelection } from "../../../shared/meri-conversations/research-context";
 import { useCallback, useEffect, useRef } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -29,6 +30,7 @@ function useTurnOpening(
   clientId: string | null,
   reopen: ReturnType<typeof useConversationConnection>["reopen"],
   bindNext: ReturnType<typeof useConversationLocalState>["bindNext"],
+  research?: ResearchSelection,
 ) {
   return useCallback(
     (target: ConversationTurnTarget) => {
@@ -36,6 +38,9 @@ function useTurnOpening(
         {
           ...account,
           selectedClientId: clientId,
+          ...(research
+            ? { scopeKind: research.scopeKind, scope: research.scope }
+            : {}),
           conversationId: target.conversationId,
           runId: target.runId,
         },
@@ -53,7 +58,7 @@ function useTurnOpening(
         pending: target.pending,
       });
     },
-    [reopen, bindNext, account, clientId],
+    [reopen, bindNext, account, clientId, research],
   );
 }
 
@@ -63,6 +68,7 @@ function useSelectedHistory(
   clientId: string | null,
   conversationId: string | undefined,
   connection: ReturnType<typeof useConversationConnection>,
+  research?: ResearchSelection,
 ) {
   const boundReady =
     connection.state.status === "ready" ? connection.state : undefined;
@@ -75,6 +81,7 @@ function useSelectedHistory(
     clientId,
     selectedId,
     !connection.accessLost,
+    ...(research ? ([research] as const) : ([] as const)),
   );
   const accessLost = connection.accessLost || history.denied;
   const ready = accessLost ? undefined : boundReady;
@@ -90,6 +97,7 @@ export function useConversationSession(
   account: ConversationAccount,
   clientId: string | null,
   conversationId?: string,
+  research?: ResearchSelection,
 ) {
   const cache = useQueryClient();
   const router = useRouter();
@@ -98,9 +106,10 @@ export function useConversationSession(
     clientId,
     undefined,
     conversationId,
+    research,
   );
   const { boundReady, selectedId, history, accessLost, ready } =
-    useSelectedHistory(account, clientId, conversationId, connection);
+    useSelectedHistory(account, clientId, conversationId, connection, research);
   const { reopen } = connection;
   const modelCatalog = useModelCatalog(account, !accessLost);
   const local = useConversationLocalState(
@@ -118,7 +127,13 @@ export function useConversationSession(
     ? undefined
     : "Selected model is unavailable. Reload model choices or use the default.";
   const textarea = useRef<HTMLTextAreaElement>(null);
-  const openTarget = useTurnOpening(account, clientId, reopen, bindNext);
+  const openTarget = useTurnOpening(
+    account,
+    clientId,
+    reopen,
+    bindNext,
+    research,
+  );
   const continuation = useConversationTurn(
     account,
     clientId,
@@ -164,7 +179,8 @@ export function useConversationSession(
       local.storageError ||
       connection.storageError ||
       target.tenantId !== account.tenantId ||
-      target.actorId !== account.actorId
+      target.actorId !== account.actorId ||
+      (research && target.conversationId !== research.conversationId)
     )
       throw Error("Conversation target unavailable");
     const storage = requireMeriTabStorage();
@@ -175,9 +191,24 @@ export function useConversationSession(
       clientId,
       target.conversationId,
       storage,
-    ).record({ ...target, selectedClientId: clientId });
+      research,
+    ).record({
+      ...target,
+      selectedClientId: clientId,
+      ...(research
+        ? { scopeKind: research.scopeKind, scope: research.scope }
+        : {}),
+    });
     if (target.conversationId === selectedId) reopen({ target });
-    else router.push(conversationHref(clientId, target.conversationId));
+    else
+      router.push(
+        conversationHref(
+          research
+            ? { scopeKind: research.scopeKind, clientId: null }
+            : clientId,
+          target.conversationId,
+        ),
+      );
   };
   return {
     account,

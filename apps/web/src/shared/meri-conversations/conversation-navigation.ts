@@ -1,8 +1,24 @@
 /** Navigation hints only: the selected conversation is admitted again by Core and Meri. */
 export function conversationHref(
-  clientId: string | null,
+  subject:
+    | string
+    | null
+    | {
+        scopeKind: "client" | "general" | "research_portfolio";
+        clientId: string | null;
+      },
   conversationId: string,
 ) {
+  if (
+    subject &&
+    typeof subject === "object" &&
+    subject.scopeKind === "research_portfolio"
+  )
+    return `/meri?${new URLSearchParams({ scope: "research_portfolio", conversationId })}`;
+  const clientId =
+    typeof subject === "object" && subject !== null
+      ? subject.clientId
+      : subject;
   return `/meri?${new URLSearchParams(clientId === null ? { scope: "general", conversationId } : { clientId, conversationId })}`;
 }
 

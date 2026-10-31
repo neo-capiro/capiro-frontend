@@ -1,3 +1,4 @@
+import type { ResearchSelection } from "../../../shared/meri-conversations/research-context";
 import type { QueryClient } from "@tanstack/react-query";
 import { conversationSelectionOwner } from "../../../shared/meri-conversations/query-journal";
 import { clearMeriConversationRecovery } from "../../../shared/meri-conversations/conversation-recovery";
@@ -13,6 +14,7 @@ export function renewConversationSelection(
   scope: TabScope,
   routeConversationId: string | undefined,
   storage: TabStorage | undefined = requireMeriTabStorage(),
+  research?: ResearchSelection,
 ) {
   clearMeriConversationRecovery(cache, scope, storage);
   return conversationSelectionOwner(
@@ -21,5 +23,6 @@ export function renewConversationSelection(
     scope.clientId,
     routeConversationId,
     storage,
+    research,
   );
 }

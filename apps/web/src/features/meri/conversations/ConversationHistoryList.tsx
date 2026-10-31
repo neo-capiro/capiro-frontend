@@ -64,9 +64,11 @@ export function historyRows(
     id: summary.conversationId,
     title: summary.title,
     client:
-      summary.clientId === null
-        ? GENERAL_CLIENT_FILTER
-        : clientName(summary.clientId),
+      summary.scopeKind === "research_portfolio"
+        ? `Research � ${summary.scope.researchPortfolioName}`
+        : summary.clientId === null
+          ? GENERAL_CLIENT_FILTER
+          : clientName(summary.clientId),
     status: STATUS_LABEL[summary.status],
     updated: updatedLabel(summary.updatedAt, now),
     summary,
@@ -80,12 +82,7 @@ const columns: readonly DataColumn<HistoryRow>[] = [
     width: 43,
     render: (row) =>
       row.summary.status === "active" ? (
-        <Link
-          href={conversationHref(
-            row.summary.clientId,
-            row.summary.conversationId,
-          )}
-        >
+        <Link href={conversationHref(row.summary, row.summary.conversationId)}>
           {row.title}
         </Link>
       ) : (

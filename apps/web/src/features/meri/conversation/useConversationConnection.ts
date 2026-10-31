@@ -1,4 +1,5 @@
 "use client";
+import type { ResearchSelection } from "../../../shared/meri-conversations/research-context";
 import {
   useCallback,
   useEffect,
@@ -128,9 +129,15 @@ function useConversationOpening(
     (options: Reopening = {}) => {
       if (!selection || storageError) return;
       const target = options.target ?? exactTarget(bound.last()?.context);
+      if (
+        target &&
+        "scopeKind" in selection.hints &&
+        target.conversationId !== selection.hints.conversationId
+      )
+        throw Error("Research conversation target unavailable");
       const hints = target
         ? {
-            clientId,
+            ...selection.hints,
             conversationId: target.conversationId,
             runId: target.runId,
           }
@@ -142,7 +149,7 @@ function useConversationOpening(
         ...(options.pending ? { pending: options.pending } : {}),
       });
     },
-    [clientId, create, selection, bound, storageError],
+    [create, selection, bound, storageError],
   );
 
   return {
@@ -164,7 +171,7 @@ function useConversationOpening(
         });
       const hints = target
         ? {
-            clientId,
+            ...opening.hints,
             conversationId: target.conversationId,
             runId: target.runId,
           }
@@ -183,11 +190,13 @@ export function useConversationConnection(
   clientId: string | null,
   now: () => number = Date.now,
   conversationId?: string,
+  research?: ResearchSelection,
 ) {
   const { selection, storageError, record, clear } = useConversationSelection(
     account,
     clientId,
     conversationId,
+    research,
   );
   const [bound] = useState(boundContext);
   const { opening, reopen, retry } = useConversationOpening(

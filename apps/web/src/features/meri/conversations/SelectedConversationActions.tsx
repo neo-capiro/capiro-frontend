@@ -73,7 +73,7 @@ export function SelectedConversationActions({
         {row.status === "active" ? (
           <Link
             className={ui.primary}
-            href={conversationHref(row.clientId, row.conversationId)}
+            href={conversationHref(row, row.conversationId)}
           >
             Open conversation
           </Link>

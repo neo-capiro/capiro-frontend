@@ -23,7 +23,8 @@ function matchesRecovery(
   if (kind === "meri-conversation-turn")
     return key.length === 5 && fifth === scope.conversationId;
   if (kind !== "meri-conversation-selection") return false;
-  if (key.length === 5) return fifth === scope.conversationId;
+  if (key.length === 5 || (key.length === 7 && sixth === "research_portfolio"))
+    return fifth === scope.conversationId;
   return (
     key.length === 4 &&
     data !== null &&

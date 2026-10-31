@@ -1,3 +1,4 @@
+import type { ResearchSelection } from "./research-context";
 import type { ConversationAccount } from "./host-controller";
 import type {
   ConversationListPage,
@@ -12,12 +13,19 @@ export function conversationInClient(
   conversation: Conversation,
   account: ConversationAccount,
   clientId: string | null,
+  research?: ResearchSelection,
 ) {
   if (
     conversation.owner.tenantId !== account.tenantId ||
     conversation.owner.actorId !== account.actorId
   )
     throw new Error("Conversation account mismatch");
+  if (
+    research &&
+    (clientId !== null ||
+      conversation.conversationId !== research.conversationId)
+  )
+    return false;
   const clients = conversation.scopes.filter(
     (scope) => scope.kind === "client",
   );
@@ -77,6 +85,7 @@ export function transcriptPages(
   pages: readonly ConversationTranscriptPage[],
   account: ConversationAccount,
   clientId: string | null,
+  research?: ResearchSelection,
 ) {
   const turns = new Map<string, SavedTurn>(),
     eventIds = new Set<string>();
@@ -85,7 +94,7 @@ export function transcriptPages(
   const first = pages[0];
   for (const page of pages) {
     if (
-      !conversationInClient(page.conversation, account, clientId) ||
+      !conversationInClient(page.conversation, account, clientId, research) ||
       identity(page.conversation) !== identity(first!.conversation)
     )
       throw new Error("Conversation scope changed");
