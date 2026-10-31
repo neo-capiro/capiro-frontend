@@ -194,7 +194,12 @@ function createUploadServer(
     }
     if ((route === "status" || route === "remove") && body) {
       const id = receiveUploadRequest(route, body);
-      const attempt = attempts.get(id.uploadId);
+      const attempt =
+        "uploadId" in id
+          ? attempts.get(id.uploadId)
+          : [...attempts.values()].find(
+              (attempt) => attempt.requestId === id.requestId,
+            );
       if (!attempt)
         return errors(
           "UPLOAD_NOT_FOUND",
@@ -474,7 +479,8 @@ describe("uploads consumer", () => {
     });
     const { controller } = controllerFor(server);
     await controller.add([file()]);
-    expect(controller.items()[0]?.state).toBe("refused");
+    expect(controller.items()[0]?.state).toBe("unknown");
+    expect(controller.items()[0]?.refusal?.uncertain).toBe(true);
     expect(controller.items()[0]?.refusal?.code).toBe("UPLOAD_CORRELATION");
     expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(
       0,

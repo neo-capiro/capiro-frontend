@@ -1,7 +1,27 @@
 import { createHash } from "node:crypto";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+beforeEach(() => {
+  const values = new Map<string, string>();
+  vi.stubGlobal("window", {
+    localStorage: {
+      get length() {
+        return values.size;
+      },
+      key: (i: number) => [...values.keys()][i] ?? null,
+      getItem: (key: string) => values.get(key) ?? null,
+      setItem: (key: string, value: string) => {
+        values.set(key, value);
+      },
+      removeItem: (key: string) => {
+        values.delete(key);
+      },
+    },
+  });
+});
+afterEach(() => vi.unstubAllGlobals());
 import { receiveConversationInputRequest } from "@capiro/meri-contracts/conversation-input";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import {
@@ -220,7 +240,12 @@ function createJoinServer(
         url.endsWith("status") ? "status" : "remove",
         body,
       );
-      const attempt = attempts.get(id.uploadId);
+      const attempt =
+        "uploadId" in id
+          ? attempts.get(id.uploadId)
+          : [...attempts.values()].find(
+              (value) => value.requestId === id.requestId,
+            );
       if (!attempt) return failed("UPLOAD_NOT_FOUND", "READ_UNAVAILABLE");
       return respond(attempt.receipt);
     }
@@ -351,10 +376,12 @@ describe("the session's own attachment access", () => {
     await first.port.uploads.check(item.requestId);
     expect(server.writes()).toHaveLength(1);
 
-    // A renewed or remounted session starts with no attempts at all: nothing can replay for it.
+    // A remounted session restores only the locator; status and send eligibility remain unknown.
     first.detach();
     const second = await connectedPort(server);
-    expect(second.port.uploads.items()).toEqual([]);
+    expect(second.port.uploads.items()).toMatchObject([
+      { requestId: item.requestId, state: "unknown", uploadId: null },
+    ]);
     expect(second.port.uploads.sendArgument()).toEqual([]);
     const record = memoryIntent();
     await expect(
@@ -364,6 +391,12 @@ describe("the session's own attachment access", () => {
       server.admit.at(-1)!.body!,
     );
     expect(dispatched.uploads).toBeUndefined();
+    await second.port.uploads.check(item.requestId);
+    expect(second.port.uploads.items()[0]).toMatchObject({
+      requestId: item.requestId,
+      state: "unknown",
+      uploadId: item.uploadId,
+    });
     expect(server.writes()).toHaveLength(1);
     second.detach();
   });
@@ -399,6 +432,12 @@ describe("the session's own attachment access", () => {
       sha256: "c".repeat(64),
     };
     const access = createUploadAccess({
+      context: {
+        tenantId: "synthetic",
+        actorId: "synthetic-actor",
+        selectedClientId: null,
+        conversationId: "11111111-1111-4111-8111-111111111111",
+      },
       credential,
       lifetime: lifetime.signal,
       isCurrent: () => true,

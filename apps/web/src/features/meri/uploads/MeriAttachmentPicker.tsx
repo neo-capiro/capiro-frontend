@@ -16,6 +16,8 @@ const size = (bytes: number) =>
 
 /** Presentation of the state this page observed; it never claims a scan or extraction result. */
 function describe(item: UploadItem) {
+  if (item.refusal?.recoveryCleanupFailed)
+    return `${item.refusal.code}: recovery reference could not be cleared`;
   if (item.state === "refused" || item.state === "unknown")
     return `${item.refusal?.code ?? "UNKNOWN_OUTCOME"}${item.refusal?.uncertain ? " — outcome unverified" : ""}`;
   if (item.state === "declaring") return "DECLARING";
@@ -37,7 +39,13 @@ function describe(item: UploadItem) {
     unavailable: `EXTRACTION_UNAVAILABLE${receipt.extraction.limitations.length ? `:${receipt.extraction.limitations.join("+")}` : ""}`,
     blocked: `EXTRACTION_BLOCKED${receipt.extraction.limitations.length ? `:${receipt.extraction.limitations.join("+")}` : ""}`,
   }[receipt.extraction.status];
-  return [scan, extraction, receipt.originalBytesAvailable ? "ORIGINAL_AVAILABLE" : "ORIGINAL_UNAVAILABLE"].join(" · ");
+  return [
+    scan,
+    extraction,
+    receipt.originalBytesAvailable
+      ? "ORIGINAL_AVAILABLE"
+      : "ORIGINAL_UNAVAILABLE",
+  ].join(" · ");
 }
 
 /** The composer's one attachment control: pick, show what the service said, check status, remove. */
@@ -100,7 +108,12 @@ export function MeriAttachmentPicker({
           {slot.incoming.map((source) => (
             <li
               key={source.uploadId}
-              style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}
+              style={{
+                display: "flex",
+                gap: 8,
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}
             >
               <span>{`file in this conversation: ${source.uploadId.slice(0, 8)}`}</span>
               <span role="status">IN_CONVERSATION</span>
@@ -137,10 +150,17 @@ export function MeriAttachmentPicker({
           {slot.items.map((item) => (
             <li
               key={item.requestId}
-              style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}
+              style={{
+                display: "flex",
+                gap: 8,
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}
             >
               <span>{item.filename}</span>
-              <span>{size(item.bytes)}</span>
+              <span>
+                {item.bytes > 0 ? size(item.bytes) : "Awaiting status"}
+              </span>
               <span role="status">{describe(item)}</span>
               {item.state === "declaring" || item.state === "uploading" ? (
                 <button
@@ -151,7 +171,7 @@ export function MeriAttachmentPicker({
                   Cancel
                 </button>
               ) : null}
-              {item.state === "unknown" && item.uploadId ? (
+              {item.state === "unknown" || item.state === "removing" ? (
                 <button
                   type="button"
                   onClick={() => slot.onCheck(item.requestId)}
@@ -160,7 +180,8 @@ export function MeriAttachmentPicker({
                   Check status
                 </button>
               ) : null}
-              {item.state !== "removed" && item.state !== "removing" ? (
+              {item.state !== "removed" &&
+              (item.uploadId || item.state === "refused") ? (
                 <button
                   type="button"
                   onClick={() => slot.onRemove(item.requestId)}
