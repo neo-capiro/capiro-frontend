@@ -51,6 +51,7 @@ export async function proxyOwnerHistory(
     cursor = url.searchParams.get("cursor");
   if (
     !/^(?:[1-9]|[1-9][0-9]|100)$/.test(limit) ||
+    (kind === "evidence" && cursor !== null) ||
     (cursor !== null &&
       (cursor.length > 512 || !/^[A-Za-z0-9_-]+$/.test(cursor)))
   )

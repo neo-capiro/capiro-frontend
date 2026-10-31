@@ -21,6 +21,23 @@ const page = {
   nextCursor: null,
 };
 describe("owner history proxy", () => {
+  it("refuses evidence cursors before token lookup or dispatch", async () => {
+    const token = vi.fn();
+    const fetcher = vi.fn();
+    const response = await proxyOwnerHistory(
+      new Request(
+        `${origin}/api/memory/owner/items/${ref.id}/evidence?cursor=history_cursor`,
+      ),
+      ref,
+      "evidence",
+      env,
+      token,
+      fetcher,
+    );
+    expect(response.status).toBe(400);
+    expect(token).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
+  });
   it("uses a fixed route and server token without forwarding browser credentials", async () => {
     const fetcher = vi.fn(async () => Response.json(page));
     const result = await proxyOwnerHistory(
