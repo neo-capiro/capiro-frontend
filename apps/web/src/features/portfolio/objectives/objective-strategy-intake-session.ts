@@ -184,6 +184,10 @@ export class ObjectiveStrategyIntakeSession {
       this.assert(signal);
       const retained = await this.recovery.load();
       this.assert(signal);
+      if (this.state.retained && !retained)
+        throw new Error(
+          "The saved intake is inconsistent. No request was sent.",
+        );
       this.update({ retained, ready: true });
       const savedObjective = await this.recovery.authorize(signal);
       if (retained?.accepted) await this.readJob(retained, signal);
@@ -304,6 +308,10 @@ export class ObjectiveStrategyIntakeSession {
       await this.recovery.authorize(signal);
       const retained = await this.recovery.load();
       this.assert(signal);
+      if (this.state.retained && !retained)
+        throw new Error(
+          "The saved intake is inconsistent. No request was sent.",
+        );
       this.update({ retained, ready: true, newSourceVerified: false });
       const current = await this.readCurrent(signal);
       if (retained?.accepted) await this.readJob(retained, signal);
