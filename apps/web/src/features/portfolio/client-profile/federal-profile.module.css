@@ -148,3 +148,8 @@
     grid-template-columns: 1fr;
   }
 }
+@media (prefers-color-scheme: dark) {
+  .entryHeading img {
+    filter: invert(0.9);
+  }
+}

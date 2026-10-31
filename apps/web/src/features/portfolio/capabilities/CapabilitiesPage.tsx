@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
@@ -41,7 +42,7 @@ export function CapabilitiesPage({
             i
           </span>
         </div>
-        <div className="row">
+        <div className={`row ${styles.pageActions}`}>
           <button
             className="button"
             disabled={!records || query.isFetching}
@@ -86,7 +87,12 @@ export function CapabilitiesPage({
                     disabled={query.isFetching}
                     onClick={() => open(cap.id)}
                   >
-                    <span className="monogram">▦</span>
+                    <span className="monogram">
+                      <img
+                        src="/design/portfolio-34/capability-layers.svg"
+                        alt=""
+                      />
+                    </span>
                     <strong className={styles.name}>{cap.name}</strong>
                     <p className="muted">{cap.description}</p>
                     <div className={`row ${styles.metadata}`}>

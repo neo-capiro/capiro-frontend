@@ -5,7 +5,16 @@ import { usePathname, useSearchParams } from "next/navigation";
 import styles from "./shell.module.css";
 import { clientViews } from "./client-views";
 
-const asset = (index: number) => `/design/471-93465-imgIcon${index || ""}.svg`;
+const asset = (index: number, active: boolean) => {
+  const icon = index === 0 || index === 3 ? (active ? 0 : 3) : index;
+  const variant =
+    active && [1, 4, 5, 6, 8, 9].includes(icon)
+      ? "-active"
+      : icon === 7 && !active
+        ? "-muted"
+        : "";
+  return `/design/portfolio-34/nav-${icon}${variant}.svg`;
+};
 
 export function PortfolioNavigation({
   client,
@@ -45,7 +54,10 @@ export function PortfolioNavigation({
           label: "Prospects",
           href: "/portfolio?type=PROSPECT",
           icon: 2,
-          active: portfolioIndex && type === "PROSPECT",
+          active:
+            (portfolioIndex && type === "PROSPECT") ||
+            path === "/portfolio/prospects" ||
+            path.startsWith("/portfolio/prospects/"),
         },
       ];
   return (
@@ -60,7 +72,7 @@ export function PortfolioNavigation({
             title={item.label}
             aria-current={item.active ? "page" : undefined}
           >
-            <img src={asset(item.icon)} alt="" />
+            <img src={asset(item.icon, item.active)} alt="" />
             <span>{item.label}</span>
           </Link>
         ))}
@@ -77,13 +89,22 @@ export function PortfolioNavigation({
                 key={suffix}
                 href={`/portfolio/${client.id}${suffix}`}
                 title={label}
+                aria-label={label}
+                data-selection={suffix === "/bills" ? "neutral" : undefined}
                 aria-current={
                   path === `/portfolio/${client.id}${suffix}`
                     ? "page"
                     : undefined
                 }
               >
-                <img src={asset(icon)} alt="" />
+                <img
+                  src={asset(
+                    icon,
+                    suffix !== "/bills" &&
+                      path === `/portfolio/${client.id}${suffix}`,
+                  )}
+                  alt=""
+                />
                 <span>{label}</span>
               </Link>
             ))}
