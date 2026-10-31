@@ -57,10 +57,19 @@
     "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
     "kind": "function",
     "symbol": "SessionDebriefGeneration",
-    "fingerprint": "b27d9e47f73291d464a5ffda6ae1eaeaae7a3362a403ad21210b108cb51e1a9b",
-    "reason": "This component coordinates one reviewed source-to-debrief draft operation. Each source input has a dedicated dialog and remote generation belongs to the generation adapter. Local source retention, busy/error state and lifetime checks describe the same attempt; saved-artifact writes are outside it. Splitting those states without another responsibility would obscure attempt ownership.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
+    "fingerprint": "71e284bf054c5262c19820e5afa6b323767db6541242c682179d1dd815b78c86",
+    "reason": "This component coordinates one reviewed source-to-debrief draft operation. Each source input has a dedicated dialog and remote generation belongs to the generation adapter. Local source retention, busy/error state and lifetime checks describe the same attempt; saved-artifact writes are outside it. Splitting those states without another responsibility would obscure attempt ownership. Re-reviewed at frontend 4aa2038e (518 nonblank) after releasing the settled terminal attempt key; fingerprint recomputed from these bytes, unchanged responsibility (one reviewed source-to-draft attempt).",
+    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at this head)",
     "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0815b3f3d61c116c0cc555f20d8b085c4f857cd61777b7f397048ec076d26825",
+    "reason": "Exact-head structure review at frontend 4aa2038e (572 nonblank): one identity-keyed entry point, one session component and the small presentation pieces for source selection, recovery notice, progress, terminal-without-draft dismissal and failure inside the same dialog. Everything reusable (schemas, job client, polling helper, failure mapping, request-key minting) lives in debrief/api.ts and the controls are plain buttons on the existing Dialog. The module grew with the D1 job lifecycle and its corrections and gained no second transport or state owner; splitting the dialog body out would be a mechanical extraction, not a correction, and is not required to accept this behaviour.",
+    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at this head)",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/debrief/voice/source.ts",
