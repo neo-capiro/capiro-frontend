@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ApiError } from "@/shared/portfolio/api/http";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
+import { ProgramCandidateCoverage } from "../opportunities/public";
 import {
   profileActorKey,
   useProfileActor,
@@ -63,6 +64,7 @@ function ProgramReasons({ paths }: { paths: ProgramAssociation["paths"] }) {
 function ProgramRows({ value }: { value: ClientProgramPage }) {
   return (
     <>
+      <ProgramCandidateCoverage data={value} />
       <p className="muted">
         Page {value.page}: {value.data.length} returned associations of{" "}
         {value.total} matching candidates in this bounded search.
