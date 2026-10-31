@@ -216,6 +216,19 @@ export function createUploadController(options: {
     }
   }
 
+  /** Retire only a local attempt known never to have crossed the dispatch boundary. */
+  function retireUndispatched(
+    requestId: string,
+    refusal: UploadRefusal,
+  ): UploadRefusal {
+    try {
+      options.recovery?.release(requestId);
+      return refusal;
+    } catch {
+      return { ...refusal, recoveryCleanupFailed: true };
+    }
+  }
+
   /** The existing wire admits both stages under the same cancellation signal. */
   async function storeOriginal(
     item: UploadItem,
@@ -227,32 +240,41 @@ export function createUploadController(options: {
       if (recoveryUnavailable) throw Error("UPLOAD_RECOVERY_UNAVAILABLE");
       options.recovery?.retain(requestId);
     } catch {
-      update(requestId, {
-        ...item,
-        state: "refused",
-        refusal: { code: "UPLOAD_RECOVERY_UNAVAILABLE" },
+      const refusal = retireUndispatched(requestId, {
+        code: "UPLOAD_RECOVERY_UNAVAILABLE",
+        neverDispatched: true,
       });
+      if (current()) update(requestId, { ...item, state: "refused", refusal });
       return;
     }
-    if (!current()) return;
-    if (signal.aborted) {
+    if (!current() || signal.aborted) {
+      const refusal = retireUndispatched(requestId, {
+        code: "CANCELLED",
+        neverDispatched: true,
+      });
+      if (!current()) return;
       update(requestId, {
         ...item,
         state: "refused",
-        refusal: { code: "CANCELLED" },
+        refusal,
       });
       return;
     }
     const declared = await options.wire.declare(requestId, file, signal);
-    if (!current()) return;
     if (!declared.ok) {
+      // Cleanup remains safe after disposal: this scoped locator never authorized any effect.
+      const refusal = declared.refusal.neverDispatched
+        ? retireUndispatched(requestId, declared.refusal)
+        : declared.refusal;
+      if (!current()) return;
       update(requestId, {
         ...item,
-        state: declared.refusal.uncertain ? "unknown" : "refused",
-        refusal: declared.refusal,
+        state: refusal.uncertain ? "unknown" : "refused",
+        refusal,
       });
       return;
     }
+    if (!current()) return;
     const retained = retain(requestId, declared.value);
     // Only this admitted declaration supplies the id and expected original.
     update(requestId, {

@@ -32,6 +32,10 @@ export type UploadRefusal = Readonly<{
    * re-dispatch itself off this flag; only a status read may re-resolve the attempt.
    */
   uncertain?: true;
+  /** Local declaration transport evidence only; never inferred from a server outcome. */
+  neverDispatched?: true;
+  /** A proven local refusal remains visible if its recovery locator could not be removed. */
+  recoveryCleanupFailed?: true;
 }>;
 export type UploadReply<T> =
   | { ok: true; value: T }
@@ -202,15 +206,29 @@ export function createUploadWire(
   ): Promise<UploadReply<T>> => {
     active++;
     let dispatched = false;
+    const observed = (reply: UploadReply<T>): UploadReply<T> =>
+      route === "initiate" && !dispatched && !reply.ok
+        ? {
+            ok: false,
+            refusal: Object.freeze({
+              ...reply.refusal,
+              outcome: "NOT_DISPATCHED",
+              uncertain: undefined,
+              neverDispatched: true,
+            }),
+          }
+        : reply;
     try {
-      return await withActionDeadline([caller, lifetime], (signal) =>
-        run(signal, () => {
-          dispatched = true;
-        }),
+      return observed(
+        await withActionDeadline([caller, lifetime], (signal) =>
+          run(signal, () => {
+            dispatched = true;
+          }),
+        ),
       );
     } catch (error) {
       const refusal = failureOf(error, route, dispatched);
-      return refuse(refusal.code, refusal);
+      return observed(refuse(refusal.code, refusal));
     } finally {
       active--;
     }
