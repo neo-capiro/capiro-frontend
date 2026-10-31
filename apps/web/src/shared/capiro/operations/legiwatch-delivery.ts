@@ -57,7 +57,13 @@ export const legiwatchDeliveryOperations = {
           .strict(),
       })
       .strict(),
-    response: z.object({ id: z.string(), state: z.literal("queued") }),
+    // An existing intent returns its original durable delivery, not a new send.
+    response: z
+      .object({
+        id: z.string().min(1).max(200).regex(/^\S+$/),
+        state: z.enum(["queued", "already_queued"]),
+      })
+      .strict(),
     source,
   }),
   "legiwatch.delivery.history": defineOperation({
