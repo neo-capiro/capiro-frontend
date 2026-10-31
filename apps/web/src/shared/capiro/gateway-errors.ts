@@ -1,5 +1,9 @@
 import type { OperationDefinition, OperationInput } from "./contracts";
 import {
+  isWorkspaceMetric,
+  workspaceMetricRefusal,
+} from "./workspace-metric-errors";
+import {
   isRichNewsletterSave,
   richNewsletterSaveRefusal,
 } from "./rich-newsletter-errors";
@@ -54,6 +58,28 @@ export async function serviceErrorResponse(
   publicCapability: boolean,
   input: OperationInput = {},
 ): Promise<Response> {
+  if (
+    !publicCapability &&
+    response.status === 503 &&
+    isWorkspaceMetric(operation)
+  ) {
+    try {
+      const payload = await readBoundedJson(response.body, 4096, signal);
+      signal.throwIfAborted();
+      const refusal = workspaceMetricRefusal(payload);
+      if (refusal)
+        return Response.json(refusal, {
+          status: 503,
+          headers: {
+            "Cache-Control": "no-store",
+            "Referrer-Policy": "no-referrer",
+          },
+        });
+    } catch (error) {
+      if (signal.aborted) throw error;
+    }
+    return jsonError(503, "The service is unavailable. Please retry.");
+  }
   if (
     !publicCapability &&
     response.status === 409 &&

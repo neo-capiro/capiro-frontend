@@ -8,6 +8,7 @@ import { plannerTimeOperations } from "./planner-time";
 import { plannerObjectiveOperations } from "./objective-work-destinations";
 import { strategyMaterializationOperations } from "./strategy-materialization";
 export const plannerOperations = {
+  ...plannerMetricOperations,
   ...strategyMaterializationOperations,
   ...plannerObjectiveOperations,
   ...plannerTaskOperations,
@@ -18,3 +19,4 @@ export const plannerOperations = {
   ...plannerAttachmentOperations,
   ...plannerBudgetOperations,
 } as const;
+import { plannerMetricOperations } from "./planner-metrics";
