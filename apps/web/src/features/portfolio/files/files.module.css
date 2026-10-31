@@ -365,6 +365,11 @@
     padding: 14px;
   }
 }
+@media (max-width: 680px) {
+  .fileName {
+    min-width: 214px;
+  }
+}
 @media (min-width: 681px) {
   .pageActions :global(.button) {
     min-height: 30px;
