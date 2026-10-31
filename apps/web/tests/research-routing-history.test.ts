@@ -96,7 +96,7 @@ it("renders Research history labels and links without inferring General from nul
     },
   };
   const rows = historyRows([research], () => "client");
-  expect(rows[0]?.client).toBe("Research � Original Research");
+  expect(rows[0]?.client).toBe("Research · Original Research");
   const html = render(research);
   expect(html).toContain(
     `href="/meri?scope=research_portfolio&amp;conversationId=${row.conversationId}"`,
