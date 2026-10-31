@@ -1020,7 +1020,7 @@
     "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-scope.ts",
     "kind": "function",
     "symbol": "useChannelScope",
-    "fingerprint": "8e0abef9cd178a81d4ec7370632bdf5a323d5dd6e1ea5c472f395b64f0af7135",
+    "fingerprint": "c227da91c0dbdab2944310be0527277cc90e05dadf57ecb396871e5d03e19fb1",
     "reason": "Owns only the current alert-action view lifetime: capture of existing actor/client/preferences/draft inputs, synchronous interruption subscription, post-await assertion, and disposal. It deliberately owns no request body, provider dispatch, response interpretation, retry, or presentation state.",
     "reviewedOn": "2026-10-12",
     "reviewedBy": "portfolio_calendar_relationships"
@@ -1101,7 +1101,7 @@
     "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-queries.ts",
     "kind": "function",
     "symbol": "useWatchlistView",
-    "fingerprint": "1f5ddbaca49dc4f6b7a767969d36fe8e66f82a77c1df90fda99dc679dbab9534",
+    "fingerprint": "8ee4c77b88083e8cb23eec22b9199094949b4478a9c6dd7ed4fba9ca229c8662",
     "reason": "The hook combines current client, targeting, taxonomy and jurisdiction reads for one watchlist editor. All Intel reads now depend on a current Core client source. Reader validation, cancellation and explicit refresh remain together; the Core-404 browser negative control requires zero Intel calls.",
     "reviewedBy": "Codex shared frontend integration review",
     "reviewedOn": "2026-10-12"

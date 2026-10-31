@@ -31,6 +31,7 @@ export function watchPreferenceInputs(
     if (
       root !== "identity" &&
       root !== "client-profile" &&
+      root !== "portfolio" &&
       root !== "bill-alert-preferences"
     )
       return;

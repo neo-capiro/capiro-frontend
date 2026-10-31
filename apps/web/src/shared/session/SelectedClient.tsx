@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
 import { createContext, useContext, type ReactNode } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "../portfolio/api/provider";
+import { useCurrentActor } from "../portfolio/auth/current-actor";
+import { clientReadQueryOptions } from "../portfolio/api/client-read";
 import { clientSchema, type Client } from "./client-contract";
 
 export type SelectedClient =
@@ -20,20 +22,20 @@ export function SelectedClientProvider({
   children: ReactNode;
 }) {
   const api = useApi();
+  const cache = useQueryClient();
+  const actor = useCurrentActor();
   const valid = clientSchema.shape.id.safeParse(requestedId).success;
+  // The ONE canonical read: same key, same receipt checks (requested id, tenant, current
+  // actor before and after the request). This provider no longer keeps a weaker producer on
+  // the shared key.
+  const options = clientReadQueryOptions(api, cache, requestedId ?? "", actor);
+  // ...but the canonical producer enables on the actor ALONE, so the provider's own
+  // selection condition has to stay in front of it: with no requested id, or an id that is
+  // not a client id, nothing is read at all. Both are part of this provider's contract and
+  // are mounted on General routes, so the guard cannot live only in the value branch below.
   const query = useQuery({
-    queryKey: ["portfolio", "client", requestedId],
-    enabled: Boolean(requestedId && valid),
-    queryFn: ({ signal }) =>
-      api.request(
-        "core",
-        `clients/${encodeURIComponent(requestedId!)}`,
-        clientSchema.refine(
-          (client) => client.id === requestedId,
-          "Client association mismatch",
-        ),
-        { signal },
-      ),
+    ...options,
+    enabled: Boolean(options.enabled && requestedId && valid),
   });
   const value: SelectedClient = !requestedId
     ? { state: "no-selection" }

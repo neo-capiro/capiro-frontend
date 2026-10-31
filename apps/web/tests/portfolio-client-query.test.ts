@@ -16,11 +16,30 @@ const observed = vi.hoisted(() => ({
   api: undefined as ApiClient | undefined,
   query: undefined as Query | undefined,
 }));
+export const ACTOR = {
+  tenantId: "33333333-3333-4333-8333-333333333333",
+  userId: "44444444-4444-4444-8444-444444444444",
+  role: "standard_user",
+};
 vi.mock("@tanstack/react-query", () => ({
   useQuery: (query: Query) => {
     observed.query = query;
     return {};
   },
+  // The shared client read resolves its cache and actor through these.
+  useQueryClient: () => ({}),
+}));
+vi.mock("@/shared/portfolio/auth/current-actor", () => ({
+  useCurrentActor: () => ACTOR,
+  currentActorKey: (
+    actor?: { tenantId: string; userId: string; role?: string } | null,
+  ) =>
+    actor
+      ? JSON.stringify([actor.tenantId, actor.userId, actor.role])
+      : "unavailable",
+  assertCurrentActor: () => undefined,
+  // The read path uses its transient-tolerant counterpart.
+  assertCurrentReadActor: () => undefined,
 }));
 vi.mock("../src/shared/portfolio/api/provider", () => ({
   useApi: () => observed.api,
@@ -65,7 +84,13 @@ describe("Portfolio client query response admission", () => {
     expect(calls).toEqual([
       { path: `/api/backend/core/clients/${client.id}`, method: "GET" },
     ]);
-    expect(key).toEqual(["portfolio", "client", client.id]);
+    // One actor-scoped key: the catalogue and the profile panels share this entry.
+    expect(key).toEqual([
+      "portfolio",
+      "client",
+      client.id,
+      JSON.stringify([ACTOR.tenantId, ACTOR.userId, ACTOR.role]),
+    ]);
   });
   it("rejects another structurally valid client before returning it to the cache", async () => {
     const foreign = clientSchema.parse({
