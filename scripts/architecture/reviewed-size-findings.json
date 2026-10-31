@@ -7510,5 +7510,14 @@
     "reason": "This effect hydrates one selected campaign and its saved drafts, then reconciles persisted generation/send request markers under the same abort signal. It validates the selected client before adopting state and preserves recovery navigation on reload. The sequential admission steps intentionally share one effect lifetime so superseded responses cannot populate the replacement view.",
     "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
     "reviewedOn": "2026-10-30"
+  },
+  {
+    "file": "apps/web/src/shared/impersonation/useImpersonationSession.ts",
+    "kind": "function",
+    "symbol": "useImpersonationSession",
+    "fingerprint": "3192102d95b6c2a4e5b8076ea10684e07f1f9ee5cfdfbac5978551c8941508c8",
+    "reason": "Independent review of the support-session hook: its read/throttle, invalidation, presentation state and confirmed exit form one lifecycle. The small cached-read closure now shares the hook's API/request lifetime, eliminating prior cross-owner reuse. No unrelated domain or authority responsibility was added; extracting only for line count would separate lifetime-bound state from its owner.",
+    "reviewedBy": "Codex independent reviewer /root/portfolio_merged_review (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-31"
   }
 ]
