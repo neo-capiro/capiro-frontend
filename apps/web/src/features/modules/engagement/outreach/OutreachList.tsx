@@ -74,6 +74,7 @@ export function OutreachList({
     },
     { enabled: !invalid && !deleted },
   );
+  const sessionsEnabled = !clientId && !deleted && !invalid;
   const sessions = useCapiroQuery(
     "engagement.sessions",
     {
@@ -83,7 +84,7 @@ export function OutreachList({
         ...(search.trim() ? { search: search.trim().slice(0, 160) } : {}),
       },
     },
-    { enabled: !clientId && !deleted && !invalid },
+    { enabled: sessionsEnabled },
   );
   const mismatch = records.data?.items.some(
     (row) =>
@@ -99,21 +100,33 @@ export function OutreachList({
         .map(canonicalListRow)
     : [];
   const nativeIds = new Set(nativeRows.map((row) => row.id.toLowerCase()));
-  const sessionRows: CampaignListRow[] = (sessions.data ?? [])
-    .filter((row) => !row.hasWorkflow && !nativeIds.has(row.id.toLowerCase()))
-    .map((row) => ({
-      id: row.id,
-      title:
-        row.topic && (!row.title || row.title === "New outreach campaign")
-          ? row.topic
-          : (row.title ?? row.topic ?? "Outreach campaign"),
-      goal: row.goal,
-      workflow: row.status,
-      targets: row.targetCount,
-      recordedSend: row.recordStatus,
-      category: recordedCategory(row.recordStatus),
-      sentAt: row.sentAt,
-    }));
+  // Sessions are ancillary and only loaded for the unscoped, undeleted view. When they are
+  // unavailable the canonical rows below are still authoritative for what they contain.
+  const seenSessionIds = new Set<string>();
+  const sessionRows: CampaignListRow[] = !sessionsEnabled
+    ? []
+    : (sessions.data ?? [])
+        .filter((row) => {
+          const id = row.id.toLowerCase();
+          if (row.hasWorkflow || nativeIds.has(id) || seenSessionIds.has(id)) {
+            return false;
+          }
+          seenSessionIds.add(id);
+          return true;
+        })
+        .map((row) => ({
+          id: row.id,
+          title:
+            row.topic && (!row.title || row.title === "New outreach campaign")
+              ? row.topic
+              : (row.title ?? row.topic ?? "Outreach campaign"),
+          goal: row.goal,
+          workflow: row.status,
+          targets: row.targetCount,
+          recordedSend: row.recordStatus,
+          category: recordedCategory(row.recordStatus),
+          sentAt: row.sentAt,
+        }));
   const allCampaigns = [...nativeRows, ...sessionRows];
   const visibleRecords = !mismatch
     ? (records.data?.items ?? []).filter(
@@ -124,12 +137,17 @@ export function OutreachList({
             !nativeIds.has(row.id.toLowerCase())),
       )
     : [];
-  const loading = records.loading || campaigns.loading || sessions.loading;
-  const error = invalid
+  const canonicalLoading = records.loading || campaigns.loading;
+  const canonicalError = invalid
     ? "The end date must be on or after the start date."
     : mismatch || campaignMismatch
       ? "The returned outreach does not match this client scope."
-      : (records.error ?? campaigns.error ?? sessions.error);
+      : (records.error ?? campaigns.error);
+  // The ancillary sessions read reports separately so its failure cannot hide healthy canonical
+  // records and campaigns. It never becomes a fatal list error.
+  const sessionsLoading = sessionsEnabled && sessions.loading;
+  const sessionsFailure = sessionsEnabled ? sessions.error : undefined;
+  const sessionsUnavailable = sessionsLoading || !!sessionsFailure;
   const more =
     !!campaigns.data?.nextCursor || (sessions.data?.length ?? 0) === 100;
   const reload = () => {
@@ -223,9 +241,30 @@ export function OutreachList({
           Deleted only
         </label>
       </div>
-      <StatusPanel loading={loading} error={error} onRetry={reload} />
-      {!loading && !error && (
+      <StatusPanel
+        loading={canonicalLoading}
+        error={canonicalError}
+        onRetry={reload}
+      />
+      {!canonicalLoading && !canonicalError && (
         <>
+          {sessionsUnavailable && (
+            <div className={styles.card} role="status" aria-live="polite">
+              <h2>
+                Campaign sessions are {sessionsLoading ? "loading" : "unavailable"}
+              </h2>
+              <p className={styles.hint}>
+                Saved outreach records and canonical campaigns shown here are
+                current, but session-only campaigns may be missing. Counts and
+                results are partial until campaign sessions load.
+              </p>
+              {sessionsFailure && (
+                <ActionButton onClick={() => sessions.reload()}>
+                  Retry campaign sessions
+                </ActionButton>
+              )}
+            </div>
+          )}
           {!deleted && (
             <section
               className={styles.card}
@@ -236,7 +275,8 @@ export function OutreachList({
                 rows={allCampaigns.filter((row) => row.category === category)}
                 onOpen={onCampaign}
               />
-              {!allCampaigns.some((row) => row.category === category) && (
+              {!sessionsUnavailable &&
+                !allCampaigns.some((row) => row.category === category) && (
                 <div className={styles.empty}>
                   <h3>
                     {search
