@@ -57,7 +57,7 @@ export function ClientOverview({ clientId }: { clientId: string }) {
   return (
     <div className={`page ${styles.overviewPage}`}>
       <div className={styles.layout}>
-        <div className={styles.column}>
+        <div className={`${styles.tile} ${styles.leftTile}`}>
           <section
             className={`card stack ${styles.profileCard}`}
             aria-label="Client identity"
@@ -131,16 +131,24 @@ export function ClientOverview({ clientId }: { clientId: string }) {
               </button>
             </div>
           </section>
-          <EngagementPulse records={currentActivity} metrics={metrics} />
-          <ObjectiveSummary clientId={clientId} />
         </div>
-        <div className={styles.column}>
+        <div className={`${styles.tile} ${styles.rightTile}`}>
           <div className={styles.rightTop}>
             <GovernmentSummary key={value.id} client={value} />
             <EngagementHealth />
           </div>
+        </div>
+        <div className={`${styles.tile} ${styles.rightTile}`}>
           <FacilitiesCard clientId={clientId} clientName={value.name} />
+        </div>
+        <div className={`${styles.tile} ${styles.leftTile}`}>
+          <EngagementPulse records={currentActivity} metrics={metrics} />
+        </div>
+        <div className={`${styles.tile} ${styles.rightTile}`}>
           <DeadlineAndRequests metrics={metrics} />
+        </div>
+        <div className={`${styles.tile} ${styles.leftTile}`}>
+          <ObjectiveSummary clientId={clientId} />
         </div>
       </div>
       <ActivityTimeline clientId={clientId} />

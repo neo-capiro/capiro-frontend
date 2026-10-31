@@ -42,7 +42,7 @@ export function CapabilitiesPage({
             i
           </span>
         </div>
-        <div className="row">
+        <div className={`row ${styles.pageActions}`}>
           <button
             className="button"
             disabled={!records || query.isFetching}
