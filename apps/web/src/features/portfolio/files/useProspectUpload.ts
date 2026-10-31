@@ -3,10 +3,7 @@ import { useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { ApiError } from "@/shared/portfolio/api/http";
 import { useApi } from "@/shared/portfolio/api/provider";
-import {
-  assertClientWriter,
-  type ClientWriter,
-} from "@/shared/portfolio/auth/client-writer";
+import { assertClientWriter } from "@/shared/portfolio/auth/client-writer";
 import { verifyCoreWriter } from "@/shared/portfolio/auth/verify-writer";
 import { useRetainedIntent } from "@/shared/session/recovery/useRetainedIntent";
 import {
@@ -26,10 +23,11 @@ import {
   uploadRecoveryContract,
 } from "./prospect-upload-recovery";
 import { readProspectFiles } from "./prospect-files";
+import { assertFileReader, type FileReader } from "./file-reader";
 
 export function useProspectUpload(
   prospectId: string,
-  actor: ClientWriter,
+  actor: FileReader,
   onSaved: () => void,
 ) {
   const cache = useQueryClient();
@@ -46,11 +44,13 @@ export function useProspectUpload(
     async (signal, assert) => {
       const guard = () => {
         assert();
+        assertFileReader(cache, actor);
         assertClientWriter(cache, actor);
       };
       await verifyCoreWriter(api, actor, signal, guard);
       await readProspectFiles(api, prospectId, actor, signal, guard);
     },
+    String(actor.revision),
   );
   const [busy, setBusy] = useState(false);
   const [stage, setStage] = useState("");
@@ -65,6 +65,7 @@ export function useProspectUpload(
     let verified = false;
     const guard = () => {
       retained.guard();
+      assertFileReader(cache, actor);
       assertClientWriter(cache, actor);
     };
     try {
@@ -76,7 +77,7 @@ export function useProspectUpload(
       if ((!original || !original.bytesStarted) && file)
         prepared = await prepareProspectUpload(
           prospectId,
-          actor,
+          { tenantId: actor.tenantId, userId: actor.userId },
           file,
           original?.requestId ?? crypto.randomUUID(),
           guard,

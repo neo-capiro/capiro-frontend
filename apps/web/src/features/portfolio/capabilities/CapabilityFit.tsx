@@ -2,7 +2,8 @@
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useCapabilityFit } from "./queries";
 import { useRefreshFit } from "./mutations";
-import { fitLink } from "./contracts";
+import { fitLink, type fitSchema } from "./contracts";
+import type { z } from "zod";
 import styles from "./capabilities.module.css";
 
 type FitQuery = ReturnType<typeof useCapabilityFit>;
@@ -59,7 +60,9 @@ function CompactFit({
                   : ""}
                 {result.computedAt
                   ? `Computed ${new Date(result.computedAt).toLocaleString()}`
-                  : "Not computed yet"}
+                  : result.status === "unavailable"
+                    ? "Compute time unavailable"
+                    : "Not computed yet"}
               </small>
               {result.matches.map((match) => (
                 <article key={match.id}>
@@ -72,8 +75,8 @@ function CompactFit({
                   )}
                 </article>
               ))}
-              {result.matches.length === 0 && (
-                <p>{result.emptyReason ?? "No matches available."}</p>
+              {result.matches.length === 0 && !result.emptyReason && (
+                <p>No matches available.</p>
               )}
             </div>
           )}
@@ -96,9 +99,11 @@ function CompactFit({
                   </span>
                 );
               })
-            : (result?.emptyReason ??
-              (result ? "No matches available." : "Fit details unavailable."))}
+            : result
+              ? "No matches available."
+              : "Fit details unavailable."}
         </p>
+        {result && <FitCoverage result={result} />}
         <QueryState
           pending={query.isPending}
           error={query.error ?? refresh.error}
@@ -156,8 +161,11 @@ function FullFit({
               : ""}
             {result.computedAt
               ? `Computed ${new Date(result.computedAt).toLocaleString()}`
-              : "Not computed yet"}
+              : result.status === "unavailable"
+                ? "Compute time unavailable"
+                : "Not computed yet"}
           </small>
+          <FitCoverage result={result} />
           {result.matches.map((match) => (
             <article key={match.id} className="stack">
               <div className="row">
@@ -170,11 +178,56 @@ function FullFit({
               )}
             </article>
           ))}
-          {result.matches.length === 0 && (
-            <p>{result.emptyReason ?? "No matches available."}</p>
+          {result.matches.length === 0 && !result.emptyReason && (
+            <p>No matches available.</p>
           )}
         </>
       )}
     </section>
+  );
+}
+
+function FitCoverage({ result }: { result: z.infer<typeof fitSchema> }) {
+  const labels = {
+    ready: "Fit results available",
+    empty: "No fit results",
+    profile_too_thin: "More profile detail needed",
+    stale: "Saved results may be outdated",
+    partial: "Partial coverage",
+    unavailable: "Fit unavailable",
+  };
+  return (
+    <div className="stack" aria-label="Fit coverage">
+      <p className="muted">{labels[result.status]}</p>
+      {result.emptyReason && <p className="status">{result.emptyReason}</p>}
+      {result.sources ? (
+        <>
+          <ul className="muted">
+            {(
+              [
+                ["Program elements", result.sources.pe],
+                ["Bills", result.sources.bill],
+                ["Funding opportunities", result.sources.fo],
+              ] as const
+            ).map(([label, contributed]) => (
+              <li key={label}>
+                {label}: {contributed ? "contributed" : "not confirmed"}
+              </li>
+            ))}
+          </ul>
+          <small>
+            Source contributions do not establish full catalog coverage.
+          </small>
+        </>
+      ) : (
+        <small>Source contributions unknown</small>
+      )}
+      {(result.status === "partial" || result.status === "unavailable") && (
+        <small>
+          Incomplete refreshes do not replace saved results. Reloading reads the
+          last saved result, if any.
+        </small>
+      )}
+    </div>
   );
 }

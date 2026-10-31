@@ -65,7 +65,9 @@ function useSaveFixture() {
 it("accepts the actual parseMeeting envelope and preserves assignment and CAS", async () => {
   await expect(useSaveFixture()).resolves.toBeUndefined();
   expect(observed.guard).toHaveBeenCalledOnce();
-  expect(observed.save.mock.calls[0][0]).toMatchObject({
+  const call = observed.save.mock.calls[0];
+  if (!call) throw new Error("Expected the update command to be captured");
+  expect(call[0]).toMatchObject({
     operation: "update",
     meetingId: payload.id,
     expectedClientId: payload.client.id,
@@ -124,9 +126,13 @@ it("preserves the actor guard and blocked recovery behavior", async () => {
 it("keeps creation independent of a detail cache while retaining the guard", async () => {
   observed.cache!.clear();
   useSaveMeeting(undefined, vi.fn(), payload.client.id).mutate(input);
-  await expect(observed.save.mock.results[0].value).resolves.toBeUndefined();
+  const result = observed.save.mock.results[0];
+  const call = observed.save.mock.calls[0];
+  if (!result || !call)
+    throw new Error("Expected the create command and result to be captured");
+  await expect(result.value).resolves.toBeUndefined();
   expect(observed.guard).toHaveBeenCalledOnce();
-  expect(observed.save.mock.calls[0][0]).toMatchObject({
+  expect(call[0]).toMatchObject({
     operation: "create",
     meetingId: null,
     expectedRevision: null,
