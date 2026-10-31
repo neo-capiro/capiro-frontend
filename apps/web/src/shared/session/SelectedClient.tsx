@@ -28,9 +28,15 @@ export function SelectedClientProvider({
   // The ONE canonical read: same key, same receipt checks (requested id, tenant, current
   // actor before and after the request). This provider no longer keeps a weaker producer on
   // the shared key.
-  const query = useQuery(
-    clientReadQueryOptions(api, cache, requestedId ?? "", actor),
-  );
+  const options = clientReadQueryOptions(api, cache, requestedId ?? "", actor);
+  // ...but the canonical producer enables on the actor ALONE, so the provider's own
+  // selection condition has to stay in front of it: with no requested id, or an id that is
+  // not a client id, nothing is read at all. Both are part of this provider's contract and
+  // are mounted on General routes, so the guard cannot live only in the value branch below.
+  const query = useQuery({
+    ...options,
+    enabled: Boolean(options.enabled && requestedId && valid),
+  });
   const value: SelectedClient = !requestedId
     ? { state: "no-selection" }
     : !valid || query.error
