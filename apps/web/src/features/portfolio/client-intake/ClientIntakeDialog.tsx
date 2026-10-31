@@ -3,11 +3,7 @@ import { useEffect, useRef, useState, type ComponentProps } from "react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
-import {
-  initials,
-  safeWebsite,
-  type Client,
-} from "@/features/portfolio/index/public";
+import { initials, type Client } from "@/features/portfolio/index/public";
 import {
   clientToIntake,
   stepFields,
@@ -161,7 +157,8 @@ function IntakeSession({
     }
   }
   const stepProps = { values, set, errors };
-  const logoUrl = safeWebsite(client?.logoUrl);
+  // M1: app-relative logo path from Core; not a website, so no URL resolution.
+  const logoUrl = client?.logoUrl ?? undefined;
   return (
     <Dialog
       open={open}
@@ -226,7 +223,7 @@ function IntakeSession({
           <div className={styles.logo}>
             <span className={styles.initials}>
               {logoUrl && failedLogoUrl !== logoUrl ? (
-                // Signed, service-provided branding URL; no optimizer proxy or inline SVG.
+                // Session-authenticated app logo route; no optimizer proxy or inline SVG.
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   className={styles.logoImage}
