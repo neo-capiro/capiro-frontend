@@ -38,6 +38,8 @@ vi.mock("@/shared/portfolio/auth/current-actor", () => ({
       ? JSON.stringify([actor.tenantId, actor.userId, actor.role])
       : "unavailable",
   assertCurrentActor: () => undefined,
+  // The read path uses its transient-tolerant counterpart.
+  assertCurrentReadActor: () => undefined,
 }));
 vi.mock("../src/shared/portfolio/api/provider", () => ({
   useApi: () => observed.api,

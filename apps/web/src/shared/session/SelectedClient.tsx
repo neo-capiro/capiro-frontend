@@ -1,12 +1,10 @@
 "use client";
 import Link from "next/link";
 import { createContext, useContext, type ReactNode } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "../portfolio/api/provider";
-import {
-  currentActorKey,
-  useCurrentActor,
-} from "../portfolio/auth/current-actor";
+import { useCurrentActor } from "../portfolio/auth/current-actor";
+import { clientReadQueryOptions } from "../portfolio/api/client-read";
 import { clientSchema, type Client } from "./client-contract";
 
 export type SelectedClient =
@@ -24,26 +22,15 @@ export function SelectedClientProvider({
   children: ReactNode;
 }) {
   const api = useApi();
+  const cache = useQueryClient();
   const actor = useCurrentActor();
   const valid = clientSchema.shape.id.safeParse(requestedId).success;
-  // The SAME actor-scoped entry the pages read ([portfolio, client, id, actorKey]), so this
-  // gate shares their cache record instead of keeping a second actor-less one. The shape is
-  // pinned against clients/client-read.ts by tests/portfolio371-complete.test.ts, because the
-  // foundations layer may not import a feature module to reuse its builder.
-  const query = useQuery({
-    queryKey: ["portfolio", "client", requestedId, currentActorKey(actor)],
-    enabled: Boolean(requestedId && valid && actor),
-    queryFn: ({ signal }) =>
-      api.request(
-        "core",
-        `clients/${encodeURIComponent(requestedId!)}`,
-        clientSchema.refine(
-          (client) => client.id === requestedId,
-          "Client association mismatch",
-        ),
-        { signal },
-      ),
-  });
+  // The ONE canonical read: same key, same receipt checks (requested id, tenant, current
+  // actor before and after the request). This provider no longer keeps a weaker producer on
+  // the shared key.
+  const query = useQuery(
+    clientReadQueryOptions(api, cache, requestedId ?? "", actor),
+  );
   const value: SelectedClient = !requestedId
     ? { state: "no-selection" }
     : !valid || query.error
