@@ -43,6 +43,8 @@ export async function firmLogoResponse(
       method: request.method,
       headers: { Authorization: `Bearer ${token}`, Accept: "image/*" },
       cache: "no-store",
+      redirect: "error",
+      signal: AbortSignal.any([request.signal, AbortSignal.timeout(15_000)]),
     });
   } catch {
     return noStore(502);
@@ -56,19 +58,21 @@ export async function firmLogoResponse(
     // Errors are never cached and never expose the upstream body.
     return noStore(502);
   }
-  // Core has already restricted this to the logo whitelist; re-assert it so a
-  // misbehaving upstream cannot turn this route into a scriptable document.
+  // MIME validation is separate from the sandbox policy that makes SVG documents inert.
   const contentType = upstream.headers.get("Content-Type") ?? "";
   if (!/^image\/(png|jpeg|svg\+xml|webp)$/i.test(contentType)) {
     void upstream.body?.cancel().catch(() => {});
     return noStore(502);
   }
-  return new Response(upstream.body, {
+  if (request.method === "HEAD") await upstream.body?.cancel().catch(() => {});
+  return new Response(request.method === "HEAD" ? null : upstream.body, {
     status: 200,
     headers: {
       "Content-Type": contentType,
       "X-Content-Type-Options": "nosniff",
-      "Cache-Control": "private, max-age=300",
+      "Cache-Control": "no-store",
+      "Content-Security-Policy":
+        "sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'",
     },
   });
 }

@@ -18,23 +18,30 @@ const request = (method = "GET") =>
   new Request("https://app.example.test/api/firm-logo", { method });
 
 const image = (contentType = "image/png") =>
-  vi.fn(async (_input: RequestInfo | URL, _init?: RequestInit) =>
-    new Response(png, { status: 200, headers: { "Content-Type": contentType } }),
+  vi.fn(
+    async (_input: RequestInfo | URL, _init?: RequestInit) =>
+      new Response(png, {
+        status: 200,
+        headers: { "Content-Type": contentType },
+      }),
   );
 
 describe("firm logo route — M1 stable, session-authenticated bytes", () => {
-  it("fetches Core with the session token and returns the image bytes as private cacheable", async () => {
+  it("fetches Core with the session token and returns non-cacheable image bytes", async () => {
     const fetcher = image();
 
     const response = await firmLogoResponse(
-      request(),
+      new Request("https://app.example.test/api/firm-logo?scope=other&version=old"),
       config,
       async () => "session-token",
       fetcher,
     );
 
     expect(fetcher).toHaveBeenCalledTimes(1);
-    const [url, init] = fetcher.mock.calls[0]! as unknown as [string, RequestInit];
+    const [url, init] = fetcher.mock.calls[0]! as unknown as [
+      string,
+      RequestInit,
+    ];
     expect(url).toBe("https://core.example.test/tenant-admin/branding/logo");
     expect(init.headers).toEqual({
       Authorization: "Bearer session-token",
@@ -44,7 +51,9 @@ describe("firm logo route — M1 stable, session-authenticated bytes", () => {
     expect(response.status).toBe(200);
     expect(response.headers.get("Content-Type")).toBe("image/png");
     expect(response.headers.get("X-Content-Type-Options")).toBe("nosniff");
-    expect(response.headers.get("Cache-Control")).toBe("private, max-age=300");
+    expect(response.headers.get("Cache-Control")).toBe("no-store");
+    expect(init.redirect).toBe("error");
+    expect(init.signal).toBeInstanceOf(AbortSignal);
     expect(new Uint8Array(await response.arrayBuffer())).toEqual(png);
   });
 
@@ -61,6 +70,8 @@ describe("firm logo route — M1 stable, session-authenticated bytes", () => {
     expect(response.status).toBe(200);
     expect(fetcher).toHaveBeenCalledTimes(1);
     expect((fetcher.mock.calls[0]![1] as RequestInit).method).toBe("HEAD");
+    expect(response.body).toBeNull();
+    expect(await response.text()).toBe("");
   });
 
   it("returns 401 with no body and never calls Core without a session", async () => {
@@ -125,13 +136,17 @@ describe("firm logo route — M1 stable, session-authenticated bytes", () => {
   it("passes a 404 through and turns any other upstream failure into an uncached 502", async () => {
     const missing = vi.fn(async () => new Response(null, { status: 404 }));
     expect(
-      (
-        await firmLogoResponse(request(), config, async () => "t", missing)
-      ).status,
+      (await firmLogoResponse(request(), config, async () => "t", missing))
+        .status,
     ).toBe(404);
 
     const failed = vi.fn(async () => new Response("boom", { status: 500 }));
-    const failure = await firmLogoResponse(request(), config, async () => "t", failed);
+    const failure = await firmLogoResponse(
+      request(),
+      config,
+      async () => "t",
+      failed,
+    );
     expect(failure.status).toBe(502);
     expect(await failure.text()).toBe("");
     expect(failure.headers.get("Cache-Control")).toBe("no-store");
@@ -163,5 +178,57 @@ describe("firm logo route — M1 stable, session-authenticated bytes", () => {
 
     expect(response.status).toBe(502);
     expect(response.headers.get("Content-Type")).toBeNull();
+  });
+
+  it("discards an unexpected HEAD body and applies the SVG sandbox on the frontend leg", async () => {
+    const cancel = vi.fn();
+    const fetcher = vi.fn(
+      async () =>
+        new Response(new ReadableStream({ cancel }), {
+          headers: { "Content-Type": "image/svg+xml" },
+        }),
+    );
+    const response = await firmLogoResponse(
+      request("HEAD"),
+      config,
+      async () => "token",
+      fetcher,
+    );
+    expect(response.body).toBeNull();
+    expect(cancel).toHaveBeenCalledTimes(1);
+    expect(response.headers.get("Cache-Control")).toBe("no-store");
+    expect(response.headers.get("Content-Security-Policy")).toBe(
+      "sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'",
+    );
+  });
+
+  it("preserves allowed SVG bytes under the inert document policy", async () => {
+    const svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><rect width="8" height="8"/></svg>';
+    const response = await firmLogoResponse(
+      request(),
+      config,
+      async () => "token",
+      async () =>
+        new Response(svg, { headers: { "Content-Type": "image/svg+xml" } }),
+    );
+    expect(await response.text()).toBe(svg);
+    expect(response.headers.get("Content-Security-Policy")).toContain(
+      "sandbox;",
+    );
+  });
+
+  it("propagates caller cancellation to the fixed upstream request", async () => {
+    const controller = new AbortController();
+    const fetcher = image();
+    await firmLogoResponse(
+      new Request(request(), { signal: controller.signal }),
+      config,
+      async () => "token",
+      fetcher,
+    );
+    const signal = fetcher.mock.calls[0]![1]!.signal!;
+    controller.abort();
+    expect(signal.aborted).toBe(true);
   });
 });
