@@ -87,27 +87,28 @@ export async function proxyRequest(
     config.recordedActivityVersion !== 1
   )
     return jsonError(503, "Recorded activity is unavailable.");
+  // Match backend-equivalent static spellings without changing roots or IDs.
   const trackerMetricRead =
     request.method === "GET" &&
     ((selected === "core" &&
       path.length === 5 &&
       path[0] === "intelligence" &&
-      path[1] === "clients" &&
-      path[3] === "tracker" &&
-      path[4] === "material-changes") ||
+      path[1]?.toLowerCase() === "clients" &&
+      path[3]?.toLowerCase() === "tracker" &&
+      path[4]?.toLowerCase() === "material-changes") ||
       (selected === "intelligence" &&
         path.length === 4 &&
         path[0] === "clients" &&
-        path[2] === "tracker" &&
-        path[3] === "material-changes"));
+        path[2]?.toLowerCase() === "tracker" &&
+        path[3]?.toLowerCase() === "material-changes"));
   const trackerCoverageRead =
     selected === "core" &&
     request.method === "GET" &&
     path.length === 5 &&
     path[0] === "legiwatch" &&
-    path[1] === "live-hearings" &&
-    path[2] === "clients" &&
-    path[4] === "coverage";
+    path[1]?.toLowerCase() === "live-hearings" &&
+    path[2]?.toLowerCase() === "clients" &&
+    path[4]?.toLowerCase() === "coverage";
   if (trackerMetricRead || trackerCoverageRead) {
     if (config.trackerMetricsVersion !== 1 || !config.trackerBackend)
       return jsonError(503, "Bill Tracker metrics are unavailable.");
