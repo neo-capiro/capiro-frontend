@@ -12,16 +12,19 @@ export function OfficeEditor({
   account,
   version,
   onClose,
+  sessionRunId,
 }: {
   account: { tenantId: string; actorId: string };
   version: LibraryVersion;
   onClose(): void;
+  sessionRunId?: string;
 }) {
   const [closing, setClosing] = useState(false);
   const { host, state, connection, container } = useOfficeEditor(
     account,
     version,
     onClose,
+    sessionRunId,
   );
   const close = () => {
     if (state.frame || state.busy) setClosing(true);
