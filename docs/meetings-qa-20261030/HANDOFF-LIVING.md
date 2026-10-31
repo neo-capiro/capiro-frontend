@@ -369,9 +369,12 @@ deployment, not route acceptance, not feature completion.
   `assertMeetingClient`, and refuses a returned row that no longer belongs to the admitted parent/client.
 - **Legacy prep edit.** A `clientId: null` prep opened in the editor under a client-scoped meeting sent the enclosing
   client id; Core preserves the stored null stamp, so the write committed and the receipt check raised 502 with a
-  retry affordance. Such a row is now read-only until the backend establishes its binding, the editor refuses to
-  build a body for it, and the failed-save label says “Check saved prep” instead of inviting a resend. Known-client
-  editing, the wrong-non-null refusal and uncertain-write reconciliation are unchanged.
+  retry affordance. Such a row is now read-only until the backend establishes its binding, and the editor refuses to
+  build a body for it. After a save whose receipt did not validate, the outcome stays explicitly unresolved: the
+  primary action reads the stored preparation back (`GET meeting-preps/:id`, under the same meeting/client identity)
+  and never re-sends the PATCH, field edits keep the draft without clearing the uncertainty, and a read that fails,
+  is refused, or returns another identity does not count as reconciled. Known-client editing, the
+  changed-sections-only body and the wrong-non-null refusal are unchanged.
 - **Route manifest.** `GET /api/engagement/meeting-preps/:id` is in the regenerated manifest with every newer main
   route preserved.
 - **Provenance wording.** The `web149`/`Core653` section above is now explicitly a dated historical measurement.
