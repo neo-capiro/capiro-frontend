@@ -57,9 +57,9 @@
     "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
     "kind": "function",
     "symbol": "SessionDebriefGeneration",
-    "fingerprint": "532eef603943133a92bd6cd024d50bfd127ff768804bb29bf9fccbcf92125f99",
-    "reason": "Exact-head structure review at frontend f7d342b3a1562fc87ecdee4014092f2723243689 (387 nonblank): still one reviewed source-to-draft attempt. It owns the chosen source, one requestKey per attempt, one job handle, polling to a terminal state, cancel/resume and failure copy; the saved-artifact write stays outside it (it hands the composed body to onDraft). The identity-keyed wrapper above it is a separate function. Adding the job lifecycle deepens the existing attempt ownership rather than introducing a new domain responsibility, so no split is warranted.",
-    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes)",
+    "fingerprint": "118584f21cef4d3b2b1d4bf81476732450fd39decce3d3f6d58037cdabed55ea",
+    "reason": "Exact-head structure review at frontend 9c145938 (387 nonblank): one reviewed source-to-draft attempt - chosen source, one requestKey per attempt, one job handle, polling to a terminal state, cancel/resume and failure copy; the saved-artifact write stays outside it, which is exactly where the context summary is now handed over. The added plumbing is an argument, not a new responsibility.",
+    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes, not copied from the prior approval)",
     "reviewedOn": "2026-10-31"
   },
   {
@@ -2337,19 +2337,19 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "9a8882b349b4ce553aae6ead42582a57a770cfe3e0c2175625777f339994e12b",
-    "reason": "Module for the meeting-artifacts surface. Contains the exported MeetingArtifacts identity gate and its private ArtifactEditor, which together present one notes/debriefs artifact list and its edit/approve/share/preview dialogs. Artifact writes are delegated to useArtifactMutation, the command lifecycle to MeetingCommandStatus, debrief generation to DebriefGeneration and PDF preview to SavedMeetingDocumentPreview. One cohesive surface with the portfolio/calendar meeting-artifacts owner; size comes from the notes- and debriefs-mode list plus its guarded dialogs, not a second concern.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "b428990c3a22a8cfa36a0d57c341ab81489a8a688e00dba0195dd76049790a27",
+    "reason": "Exact-head structure review at frontend 9c145938 (504 nonblank). The module keeps one entry component, one ArtifactEditor and one useArtifacts data hook; transport, command building, recovery and capability checks live in artifacts/*. This package adds a single optional field to the editor's change state and its command body for debrief creates only, so responsibilities are unchanged and the pre-existing size is not a reason to split now.",
+    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes, not copied from the prior approval)",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "function",
     "symbol": "ArtifactEditor",
-    "fingerprint": "5f691cc050dd7b00ae1aad07cbffe58c3346f9bff2edd50dc45ec936b3d0454b",
-    "reason": "Private component owning the single meeting-artifact editor for one kind: row rendering, edit/share/preview dialog state, and the revision/authority staleness checks in assertReadable/readableRows that fence every change. Write execution is owned by useArtifactMutation and command status by MeetingCommandStatus. One responsibility (present and gate artifact changes) under the meeting-artifacts surface owner; no second data or authority owner is introduced.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "5c9016c8f0e019111f4bf8431f4f9f9ae85817783b84985f2bdcd0cd987893d3",
+    "reason": "Exact-head structure review at frontend 9c145938 (450 nonblank): one artifact editor lifecycle for a single meeting - selection, editing change state, capability-gated approve/share/unshare actions, error and empty states, and the dialog chrome. The debrief context field joins the existing change state rather than adding an owner; splitting the action bar or the list out of it would move state across a boundary for no cohesion gain.",
+    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes, not copied from the prior approval)",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
@@ -7542,9 +7542,9 @@
     "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "5e7b291c14353febda34e6d25c7c7b3d05bfa2654d0769de35dbd99f821a82d3",
-    "reason": "Exact-head structure review at frontend f7d342b3 (441 nonblank): the module holds one identity-keyed entry point, one session component and the small presentation pieces for source selection, progress and failure inside the same dialog. Everything reusable (schemas, job client, polling helper, failure mapping, request-key minting) already lives in debrief/api.ts, and the retry/cancel controls are plain buttons on the existing Dialog. Comparable to the already-reviewed MeetingPreparation module (437) for the same reason: one feature seam, no second transport or state owner.",
-    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes)",
+    "fingerprint": "e9d5d2848654f5ba5e8fcdb2b1a8722d9cfaa916f7c7f0e5ca0b708895373e3e",
+    "reason": "Exact-head structure review at frontend 9c145938cfce1345f51b5613c1b43c9c3ed8ce44 (446 nonblank). Same two-owner module as before: an identity-keyed entry point and one session component, plus small presentation pieces for source selection, progress and failure. This package only widens onDraft to carry the audited context summary; schemas, the job client, polling and failure mapping stay in debrief/api.ts. One feature seam, no second transport or state owner, so no split is warranted.",
+    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes, not copied from the prior approval)",
     "reviewedOn": "2026-10-31"
   }
 ]
