@@ -55,7 +55,10 @@ describe("retired LegiWatch surfaces", () => {
       Object.values(capiroOperations)
         .filter((operation) => operation.path.startsWith("/legiwatch/reports"))
         .map(({ method, path }) => ({ method, path })),
-    ).toEqual([{ method: "GET", path: "/legiwatch/reports" }]);
+    ).toEqual([
+      { method: "GET", path: "/legiwatch/reports/history" },
+      { method: "GET", path: "/legiwatch/reports" },
+    ]);
   });
 
   it("reviews saved research and briefings without a report-library dependency", () => {
@@ -68,7 +71,7 @@ describe("retired LegiWatch surfaces", () => {
       research.safeParse({
         body: { selectionId: "selection", runId: "old-run" },
       }).success,
-    ).toBe(false);
+    ).toBe(true);
     const briefing = capiroOperations["legiwatch.briefing.preview"].request;
     const body = {
       selectionId: "selection",

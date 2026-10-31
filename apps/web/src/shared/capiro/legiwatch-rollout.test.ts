@@ -1,4 +1,5 @@
 import { expect, it, vi } from "vitest";
+import { z } from "zod";
 import { handleCapiroRequest } from "./gateway";
 import { capiroOperations as operations } from "./registry";
 
@@ -191,4 +192,108 @@ it("old editorial family metadata survives gateway projection for cached clients
     categoryNamespace: null,
     categories: [],
   });
+});
+
+// Exact cached wire shapes from bc6000fc, operations/legiwatch-report-schemas.ts
+// reportRunSchema and operations/legiwatch-research-work.ts review/preview.
+// Kept as test-only shapes so qualification does not depend on Git fetch depth.
+const cachedRunSchema = z.object({
+  id: z.string(),
+  reportId: z.string(),
+  definitionVersion: z.number(),
+  audience: z.string(),
+  cutoff: z.string(),
+  contentHash: z.string(),
+  complete: z.boolean(),
+  generatedAt: z.string(),
+});
+const cachedReview = z
+  .object({
+    selectionId: z.string().min(1).max(180),
+    runId: z.string().min(1).max(180),
+  })
+  .strict();
+const cachedPreview = z.object({
+  approvalHash: z.string(),
+  rendered: z.object({ text: z.string(), html: z.string() }),
+  deliveryState: z.literal("internal_review_only"),
+});
+
+it("cached ResearchReportReview can list, preview and approve its selected frozen base through the gateway", async () => {
+  const metadata = {
+    id: "base-run",
+    reportId: "report",
+    definitionVersion: 2,
+    audience: "internal",
+    cutoff: "2026-10-01",
+    contentHash: "base-hash",
+    complete: true,
+    generatedAt: "2026-10-02T00:00:00Z",
+  };
+  const history = await dispatch("legiwatch.report.history", {}, [metadata]);
+  expect(history.response.status).toBe(200);
+  expect(z.array(cachedRunSchema).parse(await history.response.json())).toEqual(
+    [metadata],
+  );
+  const body = cachedReview.parse({
+    selectionId: "selection",
+    runId: metadata.id,
+  });
+  const payload = {
+    approvalHash: "a".repeat(64),
+    rendered: {
+      text: "Frozen base\n\nREVIEWED CAPIRO RESEARCH\n\nEdited research",
+      html: "<body>Frozen base<section>Edited research</section></body>",
+    },
+    deliveryState: "internal_review_only",
+  };
+  const preview = await dispatch(
+    "legiwatch.research.report.preview",
+    { body },
+    payload,
+  );
+  expect(preview.response.status).toBe(200);
+  const accepted = cachedPreview.parse(await preview.response.json());
+  expect(accepted.rendered.text).toContain("Frozen base");
+  expect(JSON.parse(String(preview.fetcher.mock.calls[0]?.[1]?.body))).toEqual(
+    body,
+  );
+  const approvalBody = { ...body, approvalHash: accepted.approvalHash };
+  const approval = await dispatch(
+    "legiwatch.research.report.approve",
+    { body: approvalBody },
+    {
+      runId: "reviewed-run",
+      replayed: false,
+      deliveryState: "internal_review_only",
+    },
+  );
+  expect(approval.response.status).toBe(200);
+  expect(JSON.parse(String(approval.fetcher.mock.calls[0]?.[1]?.body))).toEqual(
+    approvalBody,
+  );
+});
+
+it("cached history filters stay bounded typed reads and standalone research remains valid", () => {
+  expect(
+    operations["legiwatch.report.history"].request.safeParse({
+      query: { reportId: "report", before: "2026-10-03T00:00:00Z" },
+    }).success,
+  ).toBe(true);
+  expect(
+    operations["legiwatch.report.history"].request.safeParse({
+      query: { tenantId: "forged" },
+    }).success,
+  ).toBe(false);
+  expect(
+    operations["legiwatch.research.report.preview"].request.safeParse({
+      body: { selectionId: "selection" },
+    }).success,
+  ).toBe(true);
+  for (const runId of [null, "", { id: "base" }])
+    expect(
+      operations["legiwatch.research.report.preview"].request.safeParse({
+        body: { selectionId: "selection", runId },
+      }).success,
+    ).toBe(false);
 });

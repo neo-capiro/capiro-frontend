@@ -12,6 +12,36 @@ export const legiwatchRolloutOperations = {
   "legiwatch.report.compose": delivery["legiwatch.delivery.compose"],
   "legiwatch.report.send": delivery["legiwatch.delivery.send"],
   "legiwatch.report.deliveries": delivery["legiwatch.delivery.history"],
+  "legiwatch.report.history": defineOperation({
+    service: "intelligence",
+    method: "GET",
+    path: "/legiwatch/reports/history",
+    request: z
+      .object({
+        query: z
+          .object({
+            reportId: z.string().optional(),
+            before: z.iso.datetime().optional(),
+          })
+          .strict()
+          .optional(),
+      })
+      .strict(),
+    response: z.array(
+      z.object({
+        id: z.string(),
+        reportId: z.string(),
+        definitionVersion: z.number(),
+        audience: z.string(),
+        cutoff: z.string(),
+        contentHash: z.string(),
+        complete: z.boolean(),
+        generatedAt: z.string(),
+      }),
+    ),
+    source:
+      "apps/intel-api/src/tracker/research/research-report.service.ts (temporary frozen research base picker)",
+  }),
   "legiwatch.reports": defineOperation({
     service: "intelligence",
     method: "GET",
