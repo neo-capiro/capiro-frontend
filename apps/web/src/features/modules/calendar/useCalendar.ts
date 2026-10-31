@@ -53,7 +53,8 @@ export function useCalendar() {
   const filtered = allItems.filter(
     (item) =>
       sources.has(item.source) &&
-      (!search ||
+      (view !== "agenda" ||
+        !search ||
         `${item.title} ${item.context}`
           .toLowerCase()
           .includes(search.toLowerCase())),

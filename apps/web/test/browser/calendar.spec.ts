@@ -1,6 +1,6 @@
 import { test } from "./runtime-observed-test";
 import { installFixedDate } from "./fixed-date";
-import { expect } from "@playwright/test";
+import { expect, type Route } from "@playwright/test";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 
 const clientId = "30000000-0000-4000-8000-000000000001";
@@ -138,6 +138,62 @@ test("selected client stays unavailable when the canonical identity has no admit
     page.getByRole("heading", { name: "Selected client unavailable" }),
   ).toBeVisible();
   expect(clientReads).toBe(0);
+});
+
+test("same-actor background revalidation preserves the mounted calendar and its filters", async ({
+  page,
+}) => {
+  let identityReads = 0;
+  let pendingIdentity: Route | undefined;
+  await page.route("**/api/backend/core/me", (route) => {
+    identityReads += 1;
+    if (identityReads > 1) {
+      pendingIdentity = route;
+      return;
+    }
+    return route.fulfill({ json: testIdentity });
+  });
+  await operationFixtures(page, {
+    "me.read": testIdentity,
+    "clients.list": [],
+    "engagement.meetings": meetings,
+  });
+  await page.goto(`/modules/calendar?clientId=${clientId}`);
+  const heading = page.getByRole("heading", {
+    name: "Test Aerospace calendar",
+  });
+  await expect(heading).toBeVisible();
+  const mountedHeading = await heading.elementHandle();
+  const filter = page.getByRole("button", { name: /^Meetings/ });
+  await filter.click();
+  await expect(filter).toHaveAttribute("aria-pressed", "false");
+  await page.clock.install({ time: new Date("2026-10-08T16:00:00Z") });
+  await page.clock.setSystemTime(new Date("2026-10-08T16:00:31Z"));
+  await page.evaluate(() => {
+    dispatchEvent(new Event("offline"));
+    dispatchEvent(new Event("online"));
+  });
+  await expect.poll(() => Boolean(pendingIdentity)).toBe(true);
+  await expect(heading).toBeVisible();
+  expect(await mountedHeading!.evaluate((element) => element.isConnected)).toBe(
+    true,
+  );
+  await expect(filter).toHaveAttribute("aria-pressed", "false");
+  await pendingIdentity!.fulfill({ json: testIdentity });
+  pendingIdentity = undefined;
+  await expect(filter).toHaveAttribute("aria-pressed", "false");
+
+  // A subsequent revoked actor still removes the admitted client immediately.
+  await page.clock.setSystemTime(new Date("2026-10-08T16:01:02Z"));
+  await page.evaluate(() => {
+    dispatchEvent(new Event("offline"));
+    dispatchEvent(new Event("online"));
+  });
+  await expect.poll(() => Boolean(pendingIdentity)).toBe(true);
+  await pendingIdentity!.fulfill({ json: { ...testIdentity, role: null } });
+  await expect(
+    page.getByRole("heading", { name: "Selected client unavailable" }),
+  ).toBeVisible();
 });
 test("client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow", async ({
   page,

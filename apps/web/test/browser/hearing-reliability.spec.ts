@@ -8,6 +8,10 @@ import {
   hearingFixtures,
 } from "./hearing-fixtures";
 import { installFixedDate } from "./fixed-date";
+import { moduleRouteFixtures } from "./module-route-fixtures";
+import { effectivePage } from "../../tests/effective-date-fixtures";
+import { commentPage } from "../../tests/comment-calendar-fixtures";
+import { fundingPage } from "../../tests/funding-calendar-fixtures";
 
 test.beforeEach(async ({ page }) => {
   await onlyLocalRequests(page);
@@ -45,6 +49,58 @@ test("an empty schedule still shows incomplete source coverage", async ({
       "Some Florida calendar sources are incomplete or could not be checked.",
     ),
   ).toBeVisible();
+});
+
+test("Agenda search does not hide hearings when returning to month or week", async ({
+  page,
+}) => {
+  await operationFixtures(page, {
+    ...moduleRouteFixtures,
+    ...hearingFixtures,
+    "calendar.effectiveDates": (input) => {
+      const query = (
+        input as { query: { dateFrom: string; dateTo: string; page: number } }
+      ).query;
+      return effectivePage(query.dateFrom, query.dateTo, query.page);
+    },
+    "calendar.commentDeadlineCalendar": (input) => {
+      const query = (
+        input as { query: { dateFrom: string; dateTo: string; page: number } }
+      ).query;
+      return commentPage([], query.dateFrom, query.dateTo, query.page);
+    },
+    "intelligence.funding.search": fundingPage([]),
+  });
+  await page.goto("/modules/calendar?date=2026-10-07");
+  await expect(page.getByLabel("month calendar")).toContainText(
+    federalHearing.title,
+  );
+  await page.getByRole("button", { name: "Agenda", exact: true }).click();
+  await expect(page.getByRole("table")).toContainText(federalHearing.title);
+  await page
+    .getByLabel("Search calendar events")
+    .fill("No synthetic event has this title");
+  await expect(page.getByRole("table")).not.toContainText(federalHearing.title);
+  for (const view of ["Month", "Week"]) {
+    await page.getByRole("button", { name: view, exact: true }).click();
+    await expect(page.getByLabel("Search calendar events")).toHaveCount(0);
+    await expect(
+      page.getByLabel(`${view.toLowerCase()} calendar`),
+    ).toContainText(federalHearing.title);
+  }
+  await page.getByRole("button", { name: /^Hearings/ }).click();
+  await expect(page.getByLabel("week calendar")).not.toContainText(
+    federalHearing.title,
+  );
+  await page.getByRole("button", { name: /^Hearings/ }).click();
+  await expect(page.getByLabel("week calendar")).toContainText(
+    federalHearing.title,
+  );
+  await page.getByRole("button", { name: "Agenda", exact: true }).click();
+  await expect(page.getByLabel("Search calendar events")).toHaveValue(
+    "No synthetic event has this title",
+  );
+  await expect(page.getByRole("table")).not.toContainText(federalHearing.title);
 });
 
 test("master month and week include later-page federal and Florida hearings and open detail", async ({
