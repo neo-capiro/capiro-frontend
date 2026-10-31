@@ -7286,9 +7286,9 @@
     "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "7a3885343ebaf6d14ddbc37ac2fcd217987857f388fd783ffd561f5fcffc8b20",
-    "reason": "Existing responsibilities are exact request/selection representation and context-bound recovery ownership. New code extends the same request lifetime with validated retirement-ID extraction and completed-history reconciliation. It reuses receiveIntent/storedSubmission and tabRecord; it neither adds transport nor interprets domain authorization. The SDK snapshot import is type-only and there is no reversed feature dependency or cycle. Selection transformations remain unchanged. A generic recovery service or duplicated canonical validator would weaken this boundary; no unrelated domain or provider/storage backend was added.",
-    "reviewedBy": "Codex independent Meri FE65 journal source/design review; MERI-FE65-JOURNAL-CORRECTION-INDEPENDENT-REVIEW-20261031.txt SHA256 cf2e2d7c7965683f1ac5fd6a908d3beeb445b383861db4833a050639dbb6bf03",
+    "fingerprint": "e369768359f333debfbe56357139618d3bab8608619221745dbb3d83f1b522a1",
+    "reason": "The combined module owns exact request/selection representation and context-bound same-tab recovery. Research adds canonical capture snapshot/equality and capture-specific selection fencing; retirement retains the exact original-request/completed-history owner. Separate cache/persistence generations remain in their existing owners, with recovery clearing as their explicit composition point. Canonical capture/request receiving and physical storage remain delegated to research-context, public contracts and tab-journal. No transport, admission policy, scheduler, feature dependency, provider or new persistence backend is introduced. The pure capture helper does not reverse dependencies or create a cycle. Splitting only to reduce the line count would move the same boundary without separating a new responsibility. This exact 505-line combined module is cohesive and proportionate.",
+    "reviewedBy": "Codex independent Research composition source/design review; RESEARCH-PR420-PA007-COMPOSITION-INDEPENDENT-REVIEW-20261031.txt SHA256 5f576304292a4919286765164c3199fe1f2a01b552672fea577cc6237391ea45",
     "reviewedOn": "2026-10-31"
   },
   {
