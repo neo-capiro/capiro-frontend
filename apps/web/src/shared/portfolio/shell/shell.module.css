@@ -116,6 +116,11 @@
   color: var(--portfolio-selection-foreground);
   background: var(--portfolio-selection);
 }
+.sidebar nav [aria-current="page"][data-selection="neutral"] {
+  color: var(--muted-foreground);
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
 .sidebar nav a:hover {
   background: var(--accent);
   text-decoration: none;

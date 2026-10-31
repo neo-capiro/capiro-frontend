@@ -131,7 +131,7 @@ export function FilesPage({
     <div className="page stack">
       <header className="row between">
         <h1>Client files</h1>
-        <div className="row">
+        <div className={`row ${styles.pageActions}`}>
           <button
             className="button"
             disabled={chosen.length !== 1}

@@ -7,7 +7,12 @@ import { clientViews } from "./client-views";
 
 const asset = (index: number, active: boolean) => {
   const icon = index === 0 || index === 3 ? (active ? 0 : 3) : index;
-  const variant = icon === 7 && !active ? "-muted" : "";
+  const variant =
+    active && [1, 4, 5, 6, 8, 9].includes(icon)
+      ? "-active"
+      : icon === 7 && !active
+        ? "-muted"
+        : "";
   return `/design/portfolio-34/nav-${icon}${variant}.svg`;
 };
 
@@ -49,7 +54,10 @@ export function PortfolioNavigation({
           label: "Prospects",
           href: "/portfolio?type=PROSPECT",
           icon: 2,
-          active: portfolioIndex && type === "PROSPECT",
+          active:
+            (portfolioIndex && type === "PROSPECT") ||
+            path === "/portfolio/prospects" ||
+            path.startsWith("/portfolio/prospects/"),
         },
       ];
   return (
@@ -82,6 +90,7 @@ export function PortfolioNavigation({
                 href={`/portfolio/${client.id}${suffix}`}
                 title={label}
                 aria-label={label}
+                data-selection={suffix === "/bills" ? "neutral" : undefined}
                 aria-current={
                   path === `/portfolio/${client.id}${suffix}`
                     ? "page"
@@ -89,7 +98,11 @@ export function PortfolioNavigation({
                 }
               >
                 <img
-                  src={asset(icon, path === `/portfolio/${client.id}${suffix}`)}
+                  src={asset(
+                    icon,
+                    suffix !== "/bills" &&
+                      path === `/portfolio/${client.id}${suffix}`,
+                  )}
                   alt=""
                 />
                 <span>{label}</span>

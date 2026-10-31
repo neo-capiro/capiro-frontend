@@ -97,7 +97,9 @@ export function FileTable({
               <td>{new Date(file.createdAt).toLocaleDateString()}</td>
               <td>{file.uploadedByName ?? "Unknown"}</td>
               <td>
-                <span className="chip">{fileStatus(file)}</span>
+                <span className={styles.status} data-status={fileStatus(file)}>
+                  {fileStatus(file)}
+                </span>
               </td>
               <td>
                 <DropdownMenu.Root>
