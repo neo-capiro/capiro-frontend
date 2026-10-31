@@ -1,4 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { CapabilityForm } from "../src/features/portfolio/capabilities/CapabilityForm";
 import { ApiError, createApiClient } from "../src/shared/portfolio/api/http";
 import { capabilityInputSchema } from "../src/features/portfolio/capabilities/contracts";
 import {
@@ -38,7 +41,10 @@ describe("capability transport and receipt boundaries", () => {
       signal: scope.signal,
       credentials: "same-origin",
     });
-    expect(JSON.parse(String(options?.body))).toEqual(body);
+    expect(JSON.parse(String(options?.body))).toEqual({
+      ...body,
+      peNumber: null,
+    });
     expect(fetcher).toHaveBeenCalledTimes(1);
   });
 
@@ -59,7 +65,10 @@ describe("capability transport and receipt boundaries", () => {
       `/api/backend/core/clients/${clientId}/capabilities/${capabilityId}`,
     );
     expect(fetcher.mock.calls[0]?.[1]?.method).toBe("PATCH");
-    expect(JSON.parse(String(fetcher.mock.calls[0]?.[1]?.body))).toEqual(body);
+    expect(JSON.parse(String(fetcher.mock.calls[0]?.[1]?.body))).toEqual({
+      ...body,
+      peNumber: null,
+    });
   });
 
   for (const id of [
@@ -134,6 +143,69 @@ describe("capability transport and receipt boundaries", () => {
     });
     expect(fetcher.mock.calls[0]?.[1]?.body).toBeUndefined();
   });
+});
+
+describe("authoritative PE editor array replaces the legacy scalar", () => {
+  const legacy = { ...capability, peNumber: "0601234A", peNumbers: [] };
+  it("loads a legacy-only PE into the actual editor before an unrelated edit", () => {
+    const html = renderToStaticMarkup(
+      createElement(CapabilityForm, {
+        capability: legacy,
+        disabled: false,
+        saving: false,
+        pending: false,
+        onSave: vi.fn(),
+        onRemove: vi.fn(),
+        onCancel: vi.fn(),
+      }),
+    );
+    expect(html).toContain("Remove 0601234A");
+  });
+  it.each([
+    ["remove legacy", []],
+    ["replace legacy", ["0605678A"]],
+    ["unchanged legacy on unrelated edit", ["0601234A"]],
+  ])(
+    "serializes %s without leaving a hidden legacy match",
+    async (_label, peNumbers) => {
+      const fetcher = vi
+        .fn<typeof fetch>()
+        .mockImplementation(async (_url, options) => {
+          const patch = JSON.parse(String(options?.body));
+          return Response.json({ ...legacy, ...patch });
+        });
+      const result = await saveCapability(
+        createApiClient(fetcher),
+        clientId,
+        capabilityId,
+        { ...body, notes: "Unrelated note edit", peNumbers },
+        execution(),
+      );
+      expect(result.peNumber).toBeNull();
+      expect(result.peNumbers).toEqual(peNumbers);
+      expect(
+        JSON.parse(String(fetcher.mock.calls[0]?.[1]?.body)),
+      ).toMatchObject({ peNumber: null, peNumbers });
+    },
+  );
+  it.each([undefined, null])(
+    "rejects omitted/partial PE input (%s) without clearing anything",
+    async (peNumbers) => {
+      const partial = { ...body, peNumbers };
+      if (peNumbers === undefined) delete partial.peNumbers;
+      const fetcher = vi.fn<typeof fetch>();
+      await expect(
+        saveCapability(
+          createApiClient(fetcher),
+          clientId,
+          capabilityId,
+          partial as unknown as typeof body,
+          execution(),
+        ),
+      ).rejects.toThrow();
+      expect(fetcher).not.toHaveBeenCalled();
+    },
+  );
 });
 
 const operations = [
