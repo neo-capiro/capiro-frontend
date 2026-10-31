@@ -7176,10 +7176,10 @@
     "file": "apps/web/src/features/meri/uploads/MeriAttachmentPicker.tsx",
     "kind": "function",
     "symbol": "MeriAttachmentPicker",
-    "fingerprint": "0d55f271bd138a7bad27fb2c3247e9e20fc281d8dc8a476ace60917d123545eb",
-    "reason": "Presentation for the composer attachment rows. It renders only controller-owned canonical values (format, bytes, scan and extraction state) and forwards pick, check, remove and cancel to the uploads port; it owns no custody, digest, scan or deletion authority and issues no request of its own.",
-    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "8295d27d6cbf65aacbeef00cc83685ab8185133095ace8807673a0223b32e707",
+    "reason": "Independent HIGH source review of FE396 b9df486327980a2c7b21086b87527c531d0fa8d1. One attachment-selection presentation composes canonical upload/recovery rows and delegated controls. OfficeUploadButton owns entry presentation; original-import owns session/import lifecycle; transport owns receiving; canonical artifact owners perform publication. The picker contains no credential, byte, authorization or publication owner. Existing request-only recovery checks, status labels and Awaiting status presentation remain intact. The 159-line body is cohesive rendering; no further extraction is warranted by this delta. Acceptance is exact fingerprint only; unrelated size and dependency findings remain open.",
+    "reviewedBy": "Independent HIGH reviewer 01a192e6-833c-7c21-b246-93d1b4b5163d",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/shared/meri-conversations/host-controller.ts",

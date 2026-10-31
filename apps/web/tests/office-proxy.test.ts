@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { proxyOfficeRequest } from "../src/shared/meri-office/proxy";
 import { readOfficeConfig } from "../src/shared/meri-office/config";
+import { accessInspection } from "./meri-document-access-fixtures";
 import {
   officeCredential,
   officeIds,
@@ -31,6 +32,35 @@ function request(route = "read", init: RequestInit = {}, suffix = "") {
   });
 }
 describe("Office same-origin forwarding", () => {
+  it("forwards exact-original import through the same fixed authenticated route and public receiver", async () => {
+    const document = accessInspection("docx");
+    const selection = {
+      uploadId: officeIds.draftId,
+      sha256: document.version.object.sha256,
+    };
+    const body = {
+      schema: "meri.office-application/1",
+      ...selection,
+      operation: "import",
+    };
+    const upstream = vi.fn(async () =>
+      Response.json({ schema: body.schema, ...selection, document }),
+    );
+    const response = await proxyOfficeRequest(
+      request("import", { body: JSON.stringify(body) }),
+      "import",
+      config,
+      async () => "synthetic-native",
+      upstream,
+    );
+    expect(response.status).toBe(200);
+    const call = vi.mocked(upstream as typeof fetch).mock.calls[0]!;
+    expect(call[0]).toBe("https://meri.example.test/api/meri/office/import");
+    expect(await new Response(call[1]!.body).json()).toEqual(body);
+    expect((await response.json()).document.version.object.sha256).toBe(
+      selection.sha256,
+    );
+  });
   it("is opt-in and does not enable Office through the conversation flag alone", () => {
     expect(readOfficeConfig({}).enabled).toBe(false);
     const env = {
