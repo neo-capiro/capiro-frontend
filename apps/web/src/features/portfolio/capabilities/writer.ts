@@ -23,6 +23,10 @@ export async function saveCapability(
   execution: CapabilityExecution,
 ) {
   execution.guard();
+  // This editor submits a complete PE array, seeded from the legacy scalar when
+  // necessary. Validate that full snapshot before retiring the old scalar;
+  // omitted/partial input must never clear an association.
+  const input = capabilityInputSchema.parse(body);
   // The existing receipt has no client echo. An edit does have an exact record
   // target; accepting another ID would incorrectly acknowledge this draft.
   const receipt = await api.request(
@@ -33,7 +37,7 @@ export async function saveCapability(
       : capabilitySchema,
     {
       method: capabilityId ? "PATCH" : "POST",
-      body: capabilityInputSchema.parse(body),
+      body: { ...input, peNumber: null },
       signal: execution.signal,
     },
   );
