@@ -35,7 +35,8 @@ export function MeetingDetail({
 }) {
   const query = useMeeting(id, clientId);
   const identity = useIdentity();
-  const meeting = query.data;
+  const meeting = query.data?.meeting;
+  const unusablePreps = query.data?.unusablePreps ?? 0;
   const inScope = !clientId || meeting?.client?.id === clientId;
   const refresh = () =>
     void (identity.error ? identity.refetch() : query.refetch());
@@ -55,16 +56,18 @@ export function MeetingDetail({
         <MeetingWorkspace
           key={`${meeting.id}:${identity.data?.tenant?.id}:${identity.data?.user.id}:${meeting.client?.id}`}
           meeting={meeting}
+          unusablePreps={unusablePreps}
           zone={zone}
           clientId={clientId}
           onClose={onClose}
           onRefresh={refresh}
           current={
+            // A background refetch (the 5 s prep-job poll, a save, a tab return)
+            // keeps the last good answer on screen. Only a failed or unknown
+            // caller state makes the details unavailable (H1).
             query.isSuccess &&
-            !query.isFetching &&
             !query.error &&
             identity.isSuccess &&
-            !identity.isFetching &&
             !identity.error
           }
           inline={inline}
@@ -112,6 +115,7 @@ export function MeetingDetail({
 /** One mounted meeting owns the initial entry tab; refreshes do not change a chosen tab. */
 function MeetingWorkspace({
   meeting,
+  unusablePreps,
   zone,
   clientId,
   onClose,
@@ -120,6 +124,7 @@ function MeetingWorkspace({
   onRefresh,
 }: {
   meeting: Meeting;
+  unusablePreps: number;
   zone: CalendarZone;
   clientId?: string;
   onClose: () => void;
@@ -207,7 +212,10 @@ function MeetingWorkspace({
           )}
           {tab === "preparation" && (
             <>
-              <MeetingPreparation meeting={meeting} />
+              <MeetingPreparation
+                meeting={meeting}
+                unusablePreps={unusablePreps}
+              />
               <MeetingAttachmentApprovals meeting={meeting} />
             </>
           )}

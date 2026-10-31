@@ -131,6 +131,31 @@ export async function savePreparation(
     clientId,
   );
 }
+/**
+ * Read the stored preparation through the documented detail read, under the same
+ * meeting/client identity the save path checks. This is the readback used to settle
+ * a save whose receipt did not validate; it never writes.
+ */
+export async function readPreparation(
+  api: ApiClient,
+  meetingId: string,
+  prepId: string,
+  clientId?: string | null,
+) {
+  return checkPreparation(
+    await api.request(
+      "core",
+      `engagement/meeting-preps/${encodeURIComponent(prepId)}`,
+      preparationSchema.extend({
+        meetingId: z.string(),
+        clientId: z.string().nullable(),
+      }),
+    ),
+    meetingId,
+    prepId,
+    clientId,
+  );
+}
 export async function readBoards(
   api: ApiClient,
   meetingId: string,

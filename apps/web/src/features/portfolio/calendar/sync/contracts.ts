@@ -12,7 +12,9 @@ export const calendarConnectionSchema = z.object({
   accountEmail: z.string().nullable(),
   displayName: z.string().nullable(),
   status: z.enum(["connected", "error", "needs_configuration", "disabled"]),
-  createdByUserId: z.string().nullable(),
+  // The API filters these to the caller's own connections, but it does not always
+  // echo the owner back. Absent means "not stated", not "someone else's" (B3).
+  createdByUserId: z.string().nullable().optional(),
   lastSyncAt: z.string().nullable(),
 });
 export const calendarConnectionsSchema = z.array(calendarConnectionSchema);

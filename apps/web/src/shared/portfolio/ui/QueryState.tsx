@@ -10,7 +10,10 @@ export function QueryState({
   error?: Error | null;
   retry?: () => void;
 }) {
-  if (pending)
+  // A failed read must never be hidden behind an endless pending state: a query
+  // that errored can also be re-fetching, and showing "Loading…" then strands the
+  // surface with no error and no retry (H3).
+  if (!error && pending)
     return (
       <div className="status" role="status">
         Loading…

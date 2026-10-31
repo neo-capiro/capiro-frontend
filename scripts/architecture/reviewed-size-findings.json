@@ -156,10 +156,10 @@
     "file": "apps/web/src/features/portfolio/calendar/preparation/PreparationEditor.tsx",
     "kind": "function",
     "symbol": "PreparationEditor",
-    "fingerprint": "a37fb2f697eb70f936b333c820f1fcc940f5513d21e951a0563820b09e5bd4e0",
-    "reason": "This component owns local edited fields, dirty/discard status and save intent for one preparation document. editValues and editedBody preserve the canonical evidence-bearing schema, while the parent mutation owns persistence. The editing and discard controls have the same draft lifetime and should remain easy to inspect together.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "6f71ecf1d6b8b189aea1e018aa9d0879e79228a12ac45401754839f5d8c36a88",
+    "reason": "Exact-head structure review at frontend adabcc73be7fe7c0005bd700a93bc227d4e919f3 (210 nonblank), replacing the a56f5883 record whose bytes this correction changed. Still one draft lifecycle: fields, editability decision, validation, discard confirmation, one save intent, the explicit unresolved-write outcome and its single readback. The correction moved the readback verdict into an exported pure function beside the existing submitPrepEdit seam and shares one normalizer with the save; that reduces responsibility inside the component rather than adding any. No split warranted.",
+    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes, not copied)",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/preparation/PreparationSettings.tsx",
@@ -3329,10 +3329,10 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
     "kind": "function",
     "symbol": "MeetingWorkspace",
-    "fingerprint": "997e4d9113ddb09b9e7ae75f6da8103063d0a9ddd22efab3ba89332dc8d9d4f1",
-    "reason": "One meeting workspace owns tab selection and its edit, assignment and sharing dialogs. Passing the existing read freshness and retry action into its editor preserves that single workspace lifecycle; feature-specific panels remain delegated.",
-    "reviewedBy": "Codex independent pr_overlap_audit",
-    "reviewedOn": "2026-10-19"
+    "fingerprint": "4af28a9b2ac04474667548560594686e1c2f7c2278913e0529f8a67159bc8643",
+    "reason": "At frontend 73333456b6ec336c5cdfc2ebe94db1101039ed7a this workspace owns one meeting's selected tab and edit, assignment and sharing dialog lifetime. Passing the unusable-prep count to the existing preparation panel preserves that responsibility; feature panels and persistence remain delegated. No size-driven extraction is warranted.",
+    "reviewedBy": "Codex independent portfolio_merged_review (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx",
@@ -7518,6 +7518,24 @@
     "fingerprint": "3192102d95b6c2a4e5b8076ea10684e07f1f9ee5cfdfbac5978551c8941508c8",
     "reason": "Independent review of the support-session hook: its read/throttle, invalidation, presentation state and confirmed exit form one lifecycle. The small cached-read closure now shares the hook's API/request lifetime, eliminating prior cross-owner reuse. No unrelated domain or authority responsibility was added; extracting only for line count would separate lifetime-bound state from its owner.",
     "reviewedBy": "Codex independent reviewer /root/portfolio_merged_review (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "928f2fa547852e615684ddc482428dc8b2fa0567757b832cc00c2e785eee9e44",
+    "reason": "At frontend 73333456b6ec336c5cdfc2ebe94db1101039ed7a the identity wrapper and scoped preparation coordinator share one meeting/preparation lifetime. The new legacy-read-only and unusable-prep presentation belongs at that selection boundary. Job transport, editing helpers, content, document actions and subordinate dialogs retain their existing owners; the module adds no independent domain responsibility.",
+    "reviewedBy": "Codex independent portfolio_merged_review (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx",
+    "kind": "function",
+    "symbol": "ScopedPreparation",
+    "fingerprint": "91688fbe3822266857e3b336b9c988b3ca4dc0732de96a7647612818a5880195",
+    "reason": "At frontend 73333456b6ec336c5cdfc2ebe94db1101039ed7a this function coordinates one scoped preparation's displayed record, generation progress and child-dialog state. Its admission, busy-state and legacy-read-only decisions need the same meeting/job identity; effects remain in existing hooks and APIs and presentation remains delegated to child components. Keeping the current coordinator is cohesive despite the long conditional JSX.",
+    "reviewedBy": "Codex independent portfolio_merged_review (GPT-6 Astra Ultra)",
     "reviewedOn": "2026-10-31"
   }
 ]

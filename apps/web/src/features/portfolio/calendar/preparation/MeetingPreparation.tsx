@@ -14,6 +14,7 @@ import {
   useChangePreparationJob,
 } from "./hooks";
 import { PreparationEditor } from "./PreparationEditor";
+import { prepEditability } from "./editing";
 import { PreparationSettings } from "./PreparationSettings";
 import { PreparationProgress } from "./PreparationProgress";
 import { PreparationContent, PreparationSources } from "./PreparationContent";
@@ -28,8 +29,11 @@ export type PreparationMeeting = Pick<
 };
 export function MeetingPreparation({
   meeting,
+  unusablePreps = 0,
 }: {
   meeting: PreparationMeeting;
+  /** Preps the meeting read had to drop because they name another meeting/client. */
+  unusablePreps?: number;
 }) {
   const identity = useIdentity();
   const allowed =
@@ -41,6 +45,7 @@ export function MeetingPreparation({
     <ScopedPreparation
       key={`${identity.data?.user.id}:${identity.data?.tenant?.id}:${meeting.id}:${meeting.client?.id}`}
       meeting={meeting}
+      unusablePreps={unusablePreps}
       allowed={allowed}
       identityPending={identity.isPending}
       identityError={identity.error}
@@ -50,12 +55,14 @@ export function MeetingPreparation({
 }
 function ScopedPreparation({
   meeting,
+  unusablePreps = 0,
   allowed,
   identityPending,
   identityError,
   retryIdentity,
 }: {
   meeting: PreparationMeeting;
+  unusablePreps?: number;
   allowed: boolean;
   identityPending: boolean;
   identityError: Error | null;
@@ -80,7 +87,20 @@ function ScopedPreparation({
   const [settings, setSettings] = useState(false);
   const [sources, setSources] = useState(false);
   const [progressOpen, setProgressOpen] = useState(false);
-  const prep = meeting.preps[0];
+  // Only a prep whose meeting/client can be proven is shown. Legacy rows may carry
+  // `clientId: null` (written before preps were client-stamped) — that is unknown
+  // provenance and is accepted; a prep naming a different client is not shown (B0).
+  const prep = meeting.preps.find(
+    (item) =>
+      (item.meetingId == null || item.meetingId === meeting.id) &&
+      (item.clientId == null || item.clientId === (meeting.client?.id ?? null)),
+  );
+  const unusablePrep = !prep && (meeting.preps.length > 0 || unusablePreps > 0);
+  // Known provenance is required to write: the update path preserves the stored
+  // client stamp, so an unbound legacy row can only be read here (review finding 2).
+  const editability = prep
+    ? prepEditability(prep, meeting.client?.id ?? null)
+    : undefined;
   const institutional =
     prep?.generatedFrom?.schemaVersion ===
     "research_portfolio_institutional_v1";
@@ -172,7 +192,7 @@ function ScopedPreparation({
             {prep ? "Regenerate" : "Generate with Meri"}
           </button>
         )}
-        {allowed && !institutional && prep && (
+        {allowed && !institutional && prep && editability === "editable" && (
           <button
             className="button"
             disabled={busy}
@@ -180,6 +200,12 @@ function ScopedPreparation({
           >
             Edit prep
           </button>
+        )}
+        {prep && editability === "unbound-legacy" && (
+          <p role="note">
+            This preparation was saved before it was bound to a client, so it is
+            read-only here. Generate a new preparation to edit its content.
+          </p>
         )}
         {allowed && !institutional && (
           <button
@@ -326,6 +352,13 @@ function ScopedPreparation({
             </p>
           )}
         </div>
+      )}
+      {unusablePrep && (
+        <p role="status">
+          A stored preparation for this meeting belongs to another meeting or
+          client, so it is not shown here. Generate a new preparation to
+          continue.
+        </p>
       )}
       {prep ? (
         <>

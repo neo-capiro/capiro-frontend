@@ -320,9 +320,11 @@ describe("durable calendar imports", () => {
   });
   it("owned connection list rejects a different creator", async () => {
     const f = fixture();
+    // B3: the guard now fires on a STATED different owner and uses one accurate
+    // message instead of the schema's generic "unexpected response".
     await expect(
       fetchOwnedCalendarConnections(f.api, "other-user"),
-    ).rejects.toThrow("outside the current caller");
+    ).rejects.toThrow(/did not match your account/i);
   });
   it("validates explicit bounds, Google range prohibition, and cumulative page counts", () => {
     expect(syncRangeSchema.safeParse(range).success).toBe(true);
