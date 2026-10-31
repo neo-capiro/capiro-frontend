@@ -1,5 +1,4 @@
 "use client";
-import { CommitteesScreen } from "./committees/CommitteesScreen";
 import { LegiWatchHeader, LegiWatchTabs } from "./components";
 import { HearingDetailScreen } from "./hearings/HearingDetailScreen";
 import { HearingsScreen } from "./hearings/HearingsScreen";
@@ -13,7 +12,6 @@ import { useLegiWatchRoute } from "./use-legiwatch-route";
 
 const tabs = [
   { id: "hearings", label: "Hearings" },
-  { id: "committees", label: "Committees" },
   { id: "updates", label: "Updates" },
   { id: "more", label: "More" },
 ] as const;
@@ -32,7 +30,6 @@ export function LegiWatchScreen() {
             route.navigate({
               lw: value,
               hearingId: null,
-              committeeId: null,
               sessionId: null,
               publicationSessionId: null,
               lwMore: null,
@@ -49,14 +46,12 @@ export function LegiWatchScreen() {
     ? "Browser hearing room"
     : route.hearingId
       ? "Hearing detail"
-      : route.section === "committees"
-        ? "Committees"
-        : route.section === "updates"
-          ? "Updates"
-          : route.section === "more"
-            ? (moreCatalog.find((item) => item.id === route.moreView)?.title ??
-              "More LegiWatch")
-            : "Hearings";
+      : route.section === "updates"
+        ? "Updates"
+        : route.section === "more"
+          ? (moreCatalog.find((item) => item.id === route.moreView)?.title ??
+            "More LegiWatch")
+          : "Hearings";
   return (
     <div className={styles.screen} data-figma-node="411:123078">
       <LegiWatchHeader
@@ -76,7 +71,6 @@ export function LegiWatchScreen() {
           route.navigate({
             lw: value,
             hearingId: null,
-            committeeId: null,
             sessionId: null,
             publicationSessionId: null,
             lwMore: null,
@@ -89,8 +83,6 @@ export function LegiWatchScreen() {
         <HearingDetailScreen hearingId={route.hearingId} />
       ) : route.section === "hearings" ? (
         <HearingsScreen />
-      ) : route.section === "committees" ? (
-        <CommitteesScreen />
       ) : route.section === "updates" ? (
         <UpdatesScreen />
       ) : (

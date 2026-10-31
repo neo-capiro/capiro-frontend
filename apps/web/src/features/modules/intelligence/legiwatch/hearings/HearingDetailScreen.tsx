@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { committeeDirectoryHref } from "../../../directory/public";
 import {
   useCapiroMutation,
   useCapiroQuery,
@@ -33,6 +35,7 @@ const tabs = [
   { id: "sources", label: "Sources & Documents" },
 ];
 export function HearingDetailScreen({ hearingId }: { hearingId: string }) {
+  const router = useRouter();
   const route = useLegiWatchRoute(),
     [tab, setTab] = useState("overview"),
     [followOpen, setFollowOpen] = useState(false),
@@ -84,11 +87,12 @@ export function HearingDetailScreen({ hearingId }: { hearingId: string }) {
             <ActionButton
               disabled={!detail.data.hearing.committeeSystemCode}
               onClick={() =>
-                route.navigate({
-                  lw: "committees",
-                  hearingId: null,
-                  committeeId: detail.data?.hearing.committeeSystemCode ?? null,
-                })
+                router.push(
+                  committeeDirectoryHref(
+                    detail.data!.hearing.committeeSystemCode!,
+                    route.clientId,
+                  ),
+                )
               }
             >
               Open committee

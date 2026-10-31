@@ -1,25 +1,25 @@
 "use client";
 import { useState } from "react";
-import { useCapiroQuery } from "../../../../../shared/capiro/queries";
+import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import {
   ActionButton,
   Badge,
   DataTable,
   StatusPanel,
-} from "../../../../../shared/module-ui";
+  Tabs,
+} from "../../../../shared/module-ui";
 import {
   hearingDate,
-  LegiWatchTabs,
-  PageControls,
+  displayTime,
   SourceLink,
-} from "../components";
-import { displayTime } from "../hearings/calendar-dates";
-import styles from "../legiwatch.module.css";
-import { useLegiWatchRoute } from "../use-legiwatch-route";
+} from "../../intelligence/legiwatch/public";
+import { DirectoryPagination } from "../DirectoryPagination";
+import styles from "./committees.module.css";
+import { useCommitteeRoute } from "./committee-route";
 import { CommitteeFollowDialog } from "./CommitteeFollowDialog";
 
 export function StateCommitteeRoom({ id }: { id: string }) {
-  const route = useLegiWatchRoute(),
+  const route = useCommitteeRoute(),
     [tab, setTab] = useState("overview"),
     [page, setPage] = useState(1),
     [follow, setFollow] = useState(false);
@@ -35,14 +35,14 @@ export function StateCommitteeRoom({ id }: { id: string }) {
       onRetry={query.reload}
     >
       {row && (
-        <>
+        <section className={styles.screen} aria-label="Committee details">
           <h2 className={styles.roomTitle}>{row.body.name}</h2>
           <p className={styles.description}>
             Florida · {row.body.chamber} ·{" "}
             {row.body.legislativeSession ?? "Session not supplied"}
           </p>
           <div className={styles.actions}>
-            <ActionButton onClick={() => route.navigate({ committeeId: null })}>
+            <ActionButton onClick={() => route.openDirectory()}>
               Committee directory
             </ActionButton>
             <ActionButton primary onClick={() => setFollow(true)}>
@@ -50,7 +50,7 @@ export function StateCommitteeRoom({ id }: { id: string }) {
             </ActionButton>
             <SourceLink href={row.body.sourceUrl}>Official site</SourceLink>
           </div>
-          <LegiWatchTabs
+          <Tabs
             value={tab}
             items={[
               { id: "overview", label: "Overview" },
@@ -114,9 +114,7 @@ export function StateCommitteeRoom({ id }: { id: string }) {
                       {hearingDate(event.date, event.startsAt)} ·{" "}
                       {displayTime(event.startsAt, event.time)}
                     </p>
-                    <ActionButton
-                      onClick={() => route.navigate({ hearingId: event.id })}
-                    >
+                    <ActionButton onClick={() => route.openHearing(event.id)}>
                       Open hearing
                     </ActionButton>
                   </article>
@@ -183,11 +181,11 @@ export function StateCommitteeRoom({ id }: { id: string }) {
                   },
                 ]}
               />
-              <PageControls
+              <DirectoryPagination
                 page={row.referredBills.page}
                 pageSize={row.referredBills.pageSize}
                 total={row.referredBills.total}
-                onChange={setPage}
+                onPage={setPage}
               />
             </>
           )}
@@ -215,7 +213,7 @@ export function StateCommitteeRoom({ id }: { id: string }) {
             onClose={() => setFollow(false)}
             onSaved={query.reload}
           />
-        </>
+        </section>
       )}
     </StatusPanel>
   );

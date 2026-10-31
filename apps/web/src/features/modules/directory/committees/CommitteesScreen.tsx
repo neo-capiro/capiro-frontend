@@ -1,22 +1,23 @@
 "use client";
 import { useDeferredValue, useState } from "react";
-import { useCapiroQuery } from "../../../../../shared/capiro/queries";
+import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import {
   ActionButton,
   Badge,
   Field,
   StatusPanel,
+  Tabs,
   TextInput,
-} from "../../../../../shared/module-ui";
-import { LegiWatchTabs, SourceLink } from "../components";
-import styles from "../legiwatch.module.css";
-import { useLegiWatchRoute } from "../use-legiwatch-route";
+} from "../../../../shared/module-ui";
+import { SourceLink } from "../../intelligence/legiwatch/public";
+import styles from "./committees.module.css";
+import { useCommitteeRoute } from "./committee-route";
 import { CommitteeRoom } from "./CommitteeRoom";
 import { StateCommitteeRoom } from "./StateCommitteeRoom";
 
 export function CommitteesScreen() {
-  const route = useLegiWatchRoute();
-  const [jurisdiction, setJurisdiction] = useState("US");
+  const route = useCommitteeRoute();
+  const jurisdiction = route.jurisdiction;
   const [search, setSearch] = useState("");
   const term = useDeferredValue(search).toLowerCase();
   const federal = useCapiroQuery(
@@ -31,25 +32,33 @@ export function CommitteesScreen() {
   );
   if (route.committeeId)
     return route.committeeId.startsWith("state:FL:") ? (
-      <StateCommitteeRoom id={route.committeeId.slice("state:FL:".length)} />
+      <StateCommitteeRoom
+        key={route.committeeId}
+        id={route.committeeId.slice("state:FL:".length)}
+      />
     ) : (
-      <CommitteeRoom id={route.committeeId} />
+      <CommitteeRoom key={route.committeeId} id={route.committeeId} />
     );
   const query = jurisdiction === "US" ? federal : florida;
   return (
-    <>
-      <LegiWatchTabs
+    <section className={styles.screen} aria-label="Committee directory">
+      <Tabs
         value={jurisdiction}
         items={[
           { id: "US", label: "Federal" },
-          { id: "FL", label: "Florida" },
+          { id: "FL", label: "State" },
         ]}
-        onChange={setJurisdiction}
+        onChange={route.openDirectory}
         label="Committee jurisdiction"
       />
-      <Field label="Search committees" htmlFor="lw-committee-search">
+      {jurisdiction === "FL" && (
+        <p className={styles.description}>
+          State committee rooms currently cover Florida.
+        </p>
+      )}
+      <Field label="Search committees" htmlFor="directory-committee-search">
         <TextInput
-          id="lw-committee-search"
+          id="directory-committee-search"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Search the complete committee directory"
@@ -89,9 +98,7 @@ export function CommitteesScreen() {
                         </p>
                       </div>
                       <ActionButton
-                        onClick={() =>
-                          route.navigate({ committeeId: row.systemCode })
-                        }
+                        onClick={() => route.openCommittee(row.systemCode)}
                       >
                         Open committee
                       </ActionButton>
@@ -118,7 +125,7 @@ export function CommitteesScreen() {
                       </div>
                       <ActionButton
                         onClick={() =>
-                          route.navigate({ committeeId: `state:FL:${row.id}` })
+                          route.openCommittee(`state:FL:${row.id}`)
                         }
                       >
                         Open committee
@@ -138,6 +145,6 @@ export function CommitteesScreen() {
           {new Date(federal.data.asOf).toLocaleString()}
         </p>
       )}
-    </>
+    </section>
   );
 }

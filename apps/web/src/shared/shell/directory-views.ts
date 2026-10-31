@@ -4,7 +4,7 @@ export const directoryViews = [
   { id: "committee-staff", label: "Committee Staff" },
   { id: "department-of-war", label: "Department of War" },
   { id: "state-legislators", label: "State Legislators" },
-  { id: "state-committees", label: "State Committees" },
+  { id: "committees", label: "Committees" },
 ] as const;
 
 export function resolveDirectoryView(requested: string | null) {

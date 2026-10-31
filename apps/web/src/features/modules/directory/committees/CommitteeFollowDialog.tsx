@@ -1,17 +1,13 @@
 "use client";
 import { useState } from "react";
 import type { z } from "zod";
-import { committeeFollowBodySchema } from "../../../../../shared/capiro/operations/legiwatch-committees";
+import { committeeFollowBodySchema } from "../../../../shared/capiro/operations/legiwatch-committees";
 import {
   useCapiroMutation,
   useCapiroQuery,
-} from "../../../../../shared/capiro/queries";
-import {
-  ActionButton,
-  Modal,
-  StatusPanel,
-} from "../../../../../shared/module-ui";
-import styles from "../legiwatch.module.css";
+} from "../../../../shared/capiro/queries";
+import { ActionButton, Modal, StatusPanel } from "../../../../shared/module-ui";
+import styles from "./committees.module.css";
 
 const flags = [
   { key: "notifyOnNewHearing", label: "New hearings" },

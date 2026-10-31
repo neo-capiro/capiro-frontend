@@ -1,20 +1,24 @@
 "use client";
 import { useState } from "react";
-import { useCapiroQuery } from "../../../../../shared/capiro/queries";
+import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import {
   ActionButton,
   Badge,
   DataTable,
   StatusPanel,
-} from "../../../../../shared/module-ui";
-import { hearingDate, LegiWatchTabs, SourceLink } from "../components";
-import { displayTime } from "../hearings/calendar-dates";
-import styles from "../legiwatch.module.css";
-import { useLegiWatchRoute } from "../use-legiwatch-route";
+  Tabs,
+} from "../../../../shared/module-ui";
+import {
+  hearingDate,
+  displayTime,
+  SourceLink,
+} from "../../intelligence/legiwatch/public";
+import styles from "./committees.module.css";
+import { useCommitteeRoute } from "./committee-route";
 import { CommitteeFollowDialog } from "./CommitteeFollowDialog";
 
 export function CommitteeRoom({ id }: { id: string }) {
-  const route = useLegiWatchRoute(),
+  const route = useCommitteeRoute(),
     query = useCapiroQuery("legiwatch.committee", { params: { id } });
   const [tab, setTab] = useState("overview"),
     [follow, setFollow] = useState(false);
@@ -31,9 +35,7 @@ export function CommitteeRoom({ id }: { id: string }) {
                 {hearingDate(event.date, event.startsAt)} ·{" "}
                 {displayTime(event.startsAt, event.time)} · {event.visibility}
               </p>
-              <ActionButton
-                onClick={() => route.navigate({ hearingId: event.id })}
-              >
+              <ActionButton onClick={() => route.openHearing(event.id)}>
                 Open hearing
               </ActionButton>
             </article>
@@ -55,10 +57,10 @@ export function CommitteeRoom({ id }: { id: string }) {
       onRetry={query.reload}
     >
       {row && (
-        <>
+        <section className={styles.screen} aria-label="Committee details">
           <h2 className={styles.roomTitle}>{row.name}</h2>
           <div className={styles.actions}>
-            <ActionButton onClick={() => route.navigate({ committeeId: null })}>
+            <ActionButton onClick={() => route.openDirectory()}>
               Committee directory
             </ActionButton>
             <ActionButton primary onClick={() => setFollow(true)}>
@@ -66,7 +68,7 @@ export function CommitteeRoom({ id }: { id: string }) {
             </ActionButton>
             <SourceLink href={row.officialUrl}>Official site</SourceLink>
           </div>
-          <LegiWatchTabs
+          <Tabs
             value={tab}
             items={[
               { id: "overview", label: "Overview" },
@@ -116,9 +118,7 @@ export function CommitteeRoom({ id }: { id: string }) {
                   {row.subcommittees.map((body) => (
                     <ActionButton
                       key={body.systemCode}
-                      onClick={() =>
-                        route.navigate({ committeeId: body.systemCode })
-                      }
+                      onClick={() => route.openCommittee(body.systemCode)}
                     >
                       {body.name}
                     </ActionButton>
@@ -189,7 +189,7 @@ export function CommitteeRoom({ id }: { id: string }) {
             onClose={() => setFollow(false)}
             onSaved={query.reload}
           />
-        </>
+        </section>
       )}
     </StatusPanel>
   );
