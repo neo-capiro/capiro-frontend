@@ -45,3 +45,33 @@ The Text-to-SQL owner (`01a19189`) inspected its 14 private projections and conf
 ## Acceptance still required
 
 Independent review must check the actual source and selected contract. Release must bind the serving FE/Core tuple, configured source availability and permissions. Then exercise a known complete count beyond page size, real zero, selected/unselected client, inaccessible/invalid client, access withdrawal, source partial/stale/unavailable, refresh/reload and preview behavior. No live SQL, data seeding, provider effects, browser action, product build or deployment was performed by this source session.
+# Directory aggregate continuation
+
+Root selected the six remaining metric meanings in
+`B9-METRIC-DEFINITION-DECISION-20261031.txt`. The Directory consumer uses the
+actual additive Core `GET /directory/metrics` contract, registered as
+`directory.metrics`. It reads the complete unfiltered contact count under the
+existing Directory role guard. This is global catalog scope, independent of the
+Hub's client selector; staff associations and organizations are not added.
+
+The producer reports `metric: directory_contacts`, `definitionVersion: 1`,
+`scope: global_catalog`, safe-integer `count`, `complete: true`, `capped: false`,
+and `observedAt`. `snapshot` contains the exact `sourceId`, `loadedAt`,
+`checkedAt`, nullable/unknown `publisherObservedAt`, and selection state:
+`current`, `previous_fallback`, `stale_cache`, or `unknown`. Here `current` means
+the latest pointer was selected successfully; it does not establish publisher
+recency. No source timestamp is inferred from the path, cache TTL, or browser
+response time. The UI always discloses unknown publisher freshness and identifies
+fallback/stale/unconfirmed snapshots. It uses the producer's stale-cache state,
+without inventing an ingestion SLA.
+
+The canonical mapper's unconditional QA contact injection was removed by the
+Directory producer change, so an empty real snapshot can return complete zero.
+The old synthetic profile remains an explicitly injected test fixture only.
+Malformed snapshot populations fail rather than reporting zero.
+
+This consumer requires the compatible Core producer before rollout. Existing
+funding behavior remains independent; either source's failure withholds only its
+own value. Preview mode continues to read only the fixed client roster. Other
+cards await their owners' actual accepted producer contracts; no placeholder
+operations were registered for them.

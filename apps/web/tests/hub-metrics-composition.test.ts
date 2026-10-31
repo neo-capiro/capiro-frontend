@@ -8,6 +8,7 @@ const state = vi.hoisted(() => ({
   reads: [] as { key: string; input: unknown; enabled?: boolean }[],
   clientsError: undefined as Error | undefined,
   fundingError: undefined as Error | undefined,
+  directoryError: undefined as Error | undefined,
 }));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
@@ -26,6 +27,28 @@ vi.mock("../src/shared/capiro/queries", () => ({
         loading: false,
         error: state.clientsError,
         reload: vi.fn(),
+      };
+    if (key === "directory.metrics")
+      return {
+        loading: false,
+        error: state.directoryError,
+        reload: vi.fn(),
+        data: {
+          metric: "directory_contacts",
+          definitionVersion: 1,
+          scope: "global_catalog",
+          count: 501,
+          complete: true,
+          capped: false,
+          observedAt: "2026-10-31T12:00:00.000Z",
+          snapshot: {
+            sourceId: "synthetic/catalog",
+            state: "previous_fallback",
+            loadedAt: "2026-10-31T11:00:00.000Z",
+            checkedAt: "2026-10-31T11:00:00.000Z",
+            publisherObservedAt: null,
+          },
+        },
       };
     if (key !== "intelligence.funding.search")
       throw Error(`Unexpected owner read: ${key}`);
@@ -60,16 +83,20 @@ beforeEach(() => {
   state.reads = [];
   state.clientsError = undefined;
   state.fundingError = undefined;
+  state.directoryError = undefined;
 });
 const render = () => renderToStaticMarkup(createElement(ModuleHub));
+const fundingRead = () =>
+  state.reads.find((r) => r.key === "intelligence.funding.search");
 
-it("mounts exactly one domain aggregate read alongside the roster, not one per card", () => {
+it("mounts independent supported domain aggregates alongside the roster", () => {
   const html = render();
-  expect(state.reads.map((r) => r.key)).toEqual([
+  expect(state.reads.map((r) => r.key).sort()).toEqual([
     "clients.list",
+    "directory.metrics",
     "intelligence.funding.search",
   ]);
-  expect(state.reads[1]).toMatchObject({
+  expect(fundingRead()).toMatchObject({
     input: { query: { lifecycle: "active", pageSize: 1, mode: "all" } },
     enabled: true,
   });
@@ -86,7 +113,7 @@ it("keeps selected scope visible when omitted by the roster and queries that exa
   expect(html).toContain(
     `<option value="${clientId}" selected="">Selected client (name unavailable)</option>`,
   );
-  expect(state.reads[1]).toMatchObject({
+  expect(fundingRead()).toMatchObject({
     input: { query: { mode: "matched", clientId } },
   });
   expect(html).toContain("Matched to this client");
@@ -95,7 +122,7 @@ it("keeps selected scope visible when omitted by the roster and queries that exa
 it("never falls back to all-client totals for a malformed client hint", () => {
   state.params = "clientId=invalid";
   const html = render();
-  expect(state.reads[1]).toMatchObject({ input: {}, enabled: false });
+  expect(fundingRead()).toMatchObject({ input: {}, enabled: false });
   expect(html).not.toContain("1,201");
   expect(html).toContain("Select a valid client scope");
 });
@@ -117,4 +144,38 @@ it("discards a refused funding result without erasing other module navigation", 
   expect(html).not.toContain("1,201");
   expect(html).not.toContain("private forbidden detail");
   expect(html).toContain('href="/modules/workspace"');
+  expect(html).toContain("501");
+});
+
+it("keeps the global Directory count across selected-client changes and discloses fallback freshness", () => {
+  for (const clientId of [
+    "",
+    "10000000-0000-4000-8000-000000000001",
+    "invalid",
+  ]) {
+    state.params = `clientId=${clientId}`;
+    const html = render();
+    expect(html).toContain("501");
+    expect(html).toContain("Global catalog");
+    expect(html).toContain("Unaffected by client selection");
+    expect(html).toContain("Previous snapshot fallback");
+    expect(html).toContain("Publisher freshness unknown");
+  }
+  expect(
+    state.reads
+      .filter((r) => r.key === "directory.metrics")
+      .every((r) => JSON.stringify(r.input) === "{}"),
+  ).toBe(true);
+});
+
+it("a Directory failure withholds its old count without invalidating funding", () => {
+  state.directoryError = Object.assign(Error("private source detail"), {
+    status: 403,
+  });
+  const html = render();
+  expect(html).not.toContain("501");
+  expect(html).not.toContain("Previous snapshot fallback");
+  expect(html).not.toContain("private source detail");
+  expect(html).toContain("1,201");
+  expect(html).toContain("Access denied");
 });
