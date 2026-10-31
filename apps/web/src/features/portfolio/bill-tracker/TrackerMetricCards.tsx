@@ -23,7 +23,7 @@ function CoverageDetails({ value }: { value: WatchCoverage }) {
         {value.overall.coveredConcepts} of {value.overall.totalConcepts}{" "}
         monitoring concepts covered.{" "}
         {config.complete
-          ? "The saved configuration is represented by this model."
+          ? "Percentage covers monitoring topics and their mapped source families."
           : "Saved criteria are not fully represented; a complete percentage is unavailable."}
       </p>
       <p>
