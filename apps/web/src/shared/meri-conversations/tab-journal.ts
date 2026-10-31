@@ -26,6 +26,32 @@ export class TabJournalUnavailable extends Error {
     this.name = "TabJournalUnavailable";
   }
 }
+/** Intentional retirement is still blocked until fresh server history resolves it. */
+export class TabJournalRetired extends TabJournalUnavailable {
+  constructor(readonly requestId: string) {
+    super();
+  }
+}
+
+function retiredRecord(value: unknown, scope: string, key: string) {
+  return (
+    value !== null &&
+    typeof value === "object" &&
+    Object.keys(value).sort().join() ===
+      "key,requestId,retired,scope,version" &&
+    "requestId" in value &&
+    typeof value.requestId === "string" &&
+    value.requestId.length > 0 &&
+    "version" in value &&
+    value.version === 1 &&
+    "scope" in value &&
+    value.scope === scope &&
+    "key" in value &&
+    value.key === key &&
+    "retired" in value &&
+    value.retired === true
+  );
+}
 export const tabScopeKey = (scope: TabScope) =>
   JSON.stringify([
     scope.tenantId,
@@ -161,6 +187,8 @@ export function tabRecord<T>(
   const decode = (raw: string): T => {
     if (byteLength(raw) > maxBytes) throw new TabJournalUnavailable();
     const value = JSON.parse(raw);
+    if (kind === "request" && retiredRecord(value, scopeKey, key))
+      throw new TabJournalRetired(value.requestId);
     if (
       !value ||
       Object.keys(value).sort().join() !== "key,scope,value,version" ||
@@ -178,7 +206,8 @@ export function tabRecord<T>(
         assertCurrent();
         const raw = storage?.getItem(key);
         return raw == null ? undefined : decode(raw);
-      } catch {
+      } catch (error) {
+        if (error instanceof TabJournalRetired) throw error;
         throw new TabJournalUnavailable();
       }
     },
@@ -255,6 +284,7 @@ export function syncMeriTabIdentity(
 export function clearMeriConversationScope(
   scope: TabScope,
   storage = browserTabStorage(),
+  receiveRequest?: (value: unknown) => string,
 ) {
   if (!storage) return;
   const expected = tabScopeKey(scope);
@@ -276,12 +306,43 @@ export function clearMeriConversationScope(
     if (parts[0] !== expected) continue;
     if (parts[1] === "request" || parts[1] === "feedback") {
       // Erase private bytes without inventing a disposition for a possibly delivered request.
-      // The existing decoder refuses null on every read; identity replacement still removes it.
-      storage.setItem(key, "null");
-      if (storage.getItem(key) !== "null") throw new TabJournalUnavailable();
+      // Only a validated request gets an explicit retirement marker. Corruption and feedback
+      // uncertainty remain closed; a completed conversation cannot settle a feedback operation.
+      const raw =
+        parts[1] === "request"
+          ? retireRequest(storage.getItem(key), expected, key, receiveRequest)
+          : "null";
+      storage.setItem(key, raw);
+      if (storage.getItem(key) !== raw) throw new TabJournalUnavailable();
     } else {
       storage.removeItem(key);
     }
+  }
+}
+
+function retireRequest(
+  raw: string | null,
+  scope: string,
+  key: string,
+  receive?: (value: unknown) => string,
+) {
+  try {
+    if (raw === null || byteLength(raw) > maxBytes) return "null";
+    const value = JSON.parse(raw);
+    if (retiredRecord(value, scope, key)) return raw;
+    if (
+      !receive ||
+      !value ||
+      Object.keys(value).sort().join() !== "key,scope,value,version" ||
+      value.version !== 1 ||
+      value.scope !== scope ||
+      value.key !== key
+    )
+      return "null";
+    const requestId = receive(value.value);
+    return JSON.stringify({ version: 1, scope, key, requestId, retired: true });
+  } catch {
+    return "null";
   }
 }
 
