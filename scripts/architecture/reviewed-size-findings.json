@@ -156,9 +156,9 @@
     "file": "apps/web/src/features/portfolio/calendar/preparation/PreparationEditor.tsx",
     "kind": "function",
     "symbol": "PreparationEditor",
-    "fingerprint": "b85d1cbd317d6c6254ed4aecc97ec7a3b3e69f09ac51272ef94aec3c429191f8",
-    "reason": "Structure-only review at frontend 73333456b6ec336c5cdfc2ebe94db1101039ed7a: one preparation draft owns its local fields, editability, validation, save intent and discard state; editing helpers and API transport remain separate. The independently reported Check saved prep error-action defect still requires correction, but is not a reason to split this lifecycle. This exact fingerprint must be reassessed after that correction and does not approve its runtime behavior.",
-    "reviewedBy": "Codex independent portfolio_merged_review (GPT-6 Astra Ultra)",
+    "fingerprint": "a56f5883a05e6dabbf407bbbe5377a48e1aa4849fd82654a25e6be1cc9ec3420",
+    "reason": "Exact-head structure review of the corrected bytes at frontend e4a4a4d9a41b8349c91ab0732aa72994d1522e59 (209 nonblank body lines): one preparation draft still owns its local field values, editability decision, validation, discard confirmation, one save intent and the newly explicit unresolved-write outcome with its single authorized readback. The readback settles that same save intent (compare the attempted body's fields against the stored projection, then the existing two-key invalidation/close or an explicit re-save); extracting it would move draft/body state across a boundary for no cohesion gain. Transport (api.ts), editing helpers (editing.ts) and presentation primitives (Dialog/TextareaField/QueryState) remain separate owners. No size-driven split is warranted.",
+    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; bytes verified, not copied from the prior fingerprint)",
     "reviewedOn": "2026-10-31"
   },
   {
