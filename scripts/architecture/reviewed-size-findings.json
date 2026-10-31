@@ -6031,10 +6031,10 @@
     "file": "apps/web/src/features/settings/BrandingSettings.tsx",
     "kind": "function",
     "symbol": "BrandingSettings",
-    "fingerprint": "35909a1a4e60ce566d942911651020048158a9468a4596e9616c06028f0be1f3",
-    "reason": "Owns the Branding settings screen: current branding read, save receipt/superseded status and the organization-sync retry notice. Form-level state is delegated to BrandingForm, so no operation is duplicated across the two.",
-    "reviewedBy": "Hermes Agent architecture lane 1",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "72ab738af06bdcec98e394f4bec4c07e02064df523a2367a98dff0d24d8595d3",
+    "reason": "One current-organization branding composition coordinates the canonical query, mutation and sync owners. The added display URL uses the authorized branding receipt tenant and logo timestamp only to invalidate decoded image identity; the byte proxy retains current-session authority. Form remount and error recovery share that branding lifetime. No storage, upload protocol, authorization or alternate cache owner is added; splitting this cohesive composition solely for size would scatter its existing state.",
+    "reviewedBy": "Independent Codex /root/newsletter_finish_high, firm-logo correction review 2026-10-31",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/settings/RegisterAccount.tsx",
