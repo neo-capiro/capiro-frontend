@@ -6880,7 +6880,7 @@
     "kind": "function",
     "symbol": "CalendarEvents",
     "fingerprint": "b0a7449fd7c855ab0124a4002d7863df1db584e1ab58ef3ee8f52d0339ddc82c",
-    "reason": "CalendarEvents owns the agenda/grid viewport, source status and filtering presentation. Public hearing rows remain visible independently of meeting read errors. Feed paging, date normalization and meeting editors retain separate owners. This accepts the function responsibility and size; the independently reproduced hidden Agenda search behavior remains a functional review finding.",
+    "reason": "CalendarEvents owns the agenda/grid viewport, source status and filtering presentation. Public hearing rows remain visible independently of meeting read errors. Feed paging, date normalization and meeting editors retain separate owners. Source selection and Agenda-only text filtering are supplied by the screen model; the independently reproduced hidden-search finding is resolved by the reviewed useCalendar correction without changing this viewport body.",
     "reviewedBy": "Codex independent hearing calendar and capture source review",
     "reviewedOn": "2026-10-31",
     "line": 14,

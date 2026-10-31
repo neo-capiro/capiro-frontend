@@ -2901,15 +2901,15 @@
   },
   {
     "path": "apps/web/src/features/modules/calendar/useCalendar.ts",
-    "sha256": "102bd71f115cadb10e7cd19086ef3b9a87afeed01c5aa7932670a2ba6a734b91",
+    "sha256": "fd1e958e667833a2081886b9a4507f49272f397fb0813137cbed55de2f25a949",
     "reviewer": "Codex independent hearing calendar and capture source review",
     "reviewedAt": "2026-10-31",
     "evidence": "docs/followup-20261012/STRUCTURE-REVIEW.md#modules-presentation",
-    "rationale": "useCalendar remains the screen model for validated URL selection, the service-verified client hint, local filters and existing fixed-operation queries. Hearing feed paging and coverage are delegated to the shared loader through useAgendaSources; grid rendering and meeting workflows remain separate. The Calendar search visibility defect is a functional finding rather than a reason to split this model.",
+    "rationale": "useCalendar remains the screen model for validated URL selection, the service-verified client hint, local filters and existing fixed-operation queries. Source selection applies to all views; text search applies only to Agenda where its controls are visible, and its value survives view changes. Hearing paging and coverage remain in the shared loader through useAgendaSources. The corrected mounted Month/Week/Agenda transitions and same-actor client revalidation preserve their existing owners.",
     "functions": [
       {
         "name": "useCalendar",
-        "nonblankLines": 97
+        "nonblankLines": 98
       }
     ],
     "signals": [
