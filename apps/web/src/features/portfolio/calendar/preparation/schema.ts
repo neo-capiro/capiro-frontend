@@ -86,6 +86,9 @@ export const preparationSchema = z.object({
   meetingId: z.string().optional(),
   clientId: z.string().nullable().optional(),
   status: z.string(),
+  // Strict: this schema also validates the editor's PATCH receipt and the readback GET,
+  // where a missing body means the stored content is unknown, not empty. Defaulting it
+  // away would turn an unavailable receipt into an apparently complete saved record.
   summary: z.string().nullable(),
   agenda: z.array(prepItemSchema),
   talkingPoints: z.array(prepItemSchema),
@@ -110,6 +113,19 @@ export const preparationSchema = z.object({
   generatedFrom: generatedFrom.nullish(),
 });
 export type Preparation = z.infer<typeof preparationSchema>;
+/**
+ * D5: calendar LIST rows carry prep metadata only — identity, status and timestamps — with
+ * the body behind the authorised detail read. Only the calendar list parser uses this
+ * schema; detail reads, the editor's save body and the readback receipt stay strict, so an
+ * omitted body can never look like stored or deliberately deleted content.
+ */
+export const preparationListSchema = preparationSchema.extend({
+  summary: z.string().nullable().optional().default(null),
+  agenda: z.array(prepItemSchema).optional().default([]),
+  talkingPoints: z.array(prepItemSchema).optional().default([]),
+  risks: z.array(prepItemSchema).optional().default([]),
+  followUps: z.array(prepItemSchema).optional().default([]),
+});
 export const prepJobSchema = z.object({
   jobId: z.string(),
   meetingId: z.string(),
