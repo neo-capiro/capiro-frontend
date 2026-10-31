@@ -69,7 +69,11 @@ export function createUploadAttemptReferences(
         throw Error("UPLOAD_RECOVERY_UNAVAILABLE");
     },
     release(requestId: string) {
-      storage().removeItem(key(requestId));
+      const store = storage(),
+        name = key(requestId);
+      store.removeItem(name);
+      if (store.getItem(name) !== null)
+        throw Error("UPLOAD_RECOVERY_UNAVAILABLE");
     },
   });
 }

@@ -16,6 +16,8 @@ const size = (bytes: number) =>
 
 /** Presentation of the state this page observed; it never claims a scan or extraction result. */
 function describe(item: UploadItem) {
+  if (item.refusal?.recoveryCleanupFailed)
+    return `${item.refusal.code}: recovery reference could not be cleared`;
   if (item.state === "refused" || item.state === "unknown")
     return `${item.refusal?.code ?? "UNKNOWN_OUTCOME"}${item.refusal?.uncertain ? " — outcome unverified" : ""}`;
   if (item.state === "declaring") return "DECLARING";
