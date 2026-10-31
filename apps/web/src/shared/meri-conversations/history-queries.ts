@@ -1,4 +1,5 @@
 "use client";
+import type { ResearchSelection } from "./research-context";
 import { useEffect } from "react";
 import {
   useInfiniteQuery,
@@ -64,12 +65,14 @@ const transcriptKey = (
   account: ConversationAccount,
   clientId: string | null,
   conversationId?: string,
+  research?: ResearchSelection,
 ) => [
   "meri-conversation-transcript",
   account.tenantId,
   account.actorId,
   clientId,
   conversationId,
+  ...(research ? [research.scopeKind, research.scope] : []),
 ];
 
 async function scopedTranscript(
@@ -78,12 +81,16 @@ async function scopedTranscript(
   conversationId: string | undefined,
   after: number | undefined,
   signal: AbortSignal,
+  research?: ResearchSelection,
 ) {
   const page = await readConversationTranscript(
     { conversationId, after, limit: protocol.limits.pageItems },
     signal,
   );
-  if (!conversationInClient(page.conversation, account, clientId))
+  if (
+    page.conversation.conversationId !== conversationId ||
+    !conversationInClient(page.conversation, account, clientId, research)
+  )
     throw new Error("Conversation client mismatch");
   return page;
 }
@@ -117,16 +124,24 @@ function useLatestTranscript(
   conversationId: string | undefined,
   after: number | undefined,
   enabled: boolean,
+  research?: ResearchSelection,
 ) {
   return useQuery({
     queryKey: [
-      ...transcriptKey(account, clientId, conversationId),
+      ...transcriptKey(account, clientId, conversationId, research),
       "latest",
       after,
     ],
     enabled: enabled && after !== undefined,
     queryFn: ({ signal }) =>
-      scopedTranscript(account, clientId, conversationId, after, signal),
+      scopedTranscript(
+        account,
+        clientId,
+        conversationId,
+        after,
+        signal,
+        research,
+      ),
     retry: false,
     staleTime: 0,
   });
@@ -183,6 +198,7 @@ export function useConversationHistory(
   clientId: string | null,
   conversationId?: string,
   enabled = true,
+  research?: ResearchSelection,
 ) {
   const cache = useQueryClient();
   const { tenantId, actorId } = account;
@@ -191,11 +207,18 @@ export function useConversationHistory(
       clearConversationReads(cache, { tenantId, actorId }, clientId);
   }, [cache, tenantId, actorId, clientId, enabled]);
   const query = useInfiniteQuery({
-    queryKey: transcriptKey(account, clientId, conversationId),
+    queryKey: transcriptKey(account, clientId, conversationId, research),
     enabled: enabled && !!conversationId,
     initialPageParam: protocol.defaults.after as number,
     queryFn: ({ pageParam: after, signal }) =>
-      scopedTranscript(account, clientId, conversationId, after, signal),
+      scopedTranscript(
+        account,
+        clientId,
+        conversationId,
+        after,
+        signal,
+        research,
+      ),
     getNextPageParam: (page) => (page.hasMore ? page.nextSequence : undefined),
     retry: false,
     staleTime: 0,
@@ -205,7 +228,7 @@ export function useConversationHistory(
     invalid = false;
   if (enabled && query.data && !query.error && !query.isRefetching) {
     try {
-      saved = transcriptPages(query.data.pages, account, clientId);
+      saved = transcriptPages(query.data.pages, account, clientId, research);
     } catch {
       invalid = true;
     }
@@ -217,6 +240,7 @@ export function useConversationHistory(
     conversationId,
     latestBase,
     enabled,
+    research,
   );
   const current =
     saved && !tail.error && !tail.isFetching ? tail.data : undefined;
