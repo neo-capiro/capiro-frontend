@@ -73,3 +73,86 @@ describe("recorded activity producer-first server gate", () => {
     expect(fetcher).toHaveBeenCalledOnce();
   });
 });
+
+describe("backend-equivalent recorded activity route spellings", () => {
+  const variants = [
+    ["intelligence", "Clients", "client", "health-score"],
+    ["intelligence", "clients", "client", "Health-Score"],
+    ["intelligence", "CLIENTS", "client", "HEALTH-SCORE"],
+  ];
+  it.each(variants)(
+    "refuses reviewer case %s/%s/%s/%s before credentials while off",
+    async (...path) => {
+      const token = vi.fn(async () => "synthetic"),
+        fetcher = vi.fn(async () => Response.json({ legacy: true }));
+      const result = await proxyRequest(
+        new Request(
+          `https://app.example.test/api/backend/core/${path.join("/")}`,
+        ),
+        "core",
+        path,
+        readConfig(env),
+        token,
+        fetcher,
+      );
+      expect({
+        status: result.status,
+        tokenCalls: token.mock.calls.length,
+        upstreamCalls: fetcher.mock.calls.length,
+      }).toEqual({ status: 503, tokenCalls: 0, upstreamCalls: 0 });
+    },
+  );
+  it("preserves the exact client identity and normal gate-on transport", async () => {
+    const path = ["intelligence", "Clients", "MiXeD-Client", "HEALTH-SCORE"];
+    const token = vi.fn(async () => "synthetic"),
+      fetcher = vi.fn<typeof fetch>(async () => Response.json({ ok: true }));
+    const result = await proxyRequest(
+      new Request("https://app.example.test/read"),
+      "core",
+      path,
+      readConfig({ ...env, CAPIRO_RECORDED_ACTIVITY_VERSION: "1" }),
+      token,
+      fetcher,
+    );
+    expect(result.status).toBe(200);
+    expect(token).toHaveBeenCalledOnce();
+    expect(fetcher.mock.calls[0]?.[0]).toEqual(
+      new URL(
+        "https://core.example.test/api/intelligence/Clients/MiXeD-Client/HEALTH-SCORE",
+      ),
+    );
+  });
+  it("does not broaden permitted roots or gate unrelated reads", async () => {
+    const token = vi.fn(async () => "synthetic"),
+      fetcher = vi.fn(async () => Response.json({ ok: true }));
+    const config = readConfig(env),
+      request = new Request("https://app.example.test/read");
+    expect(
+      (
+        await proxyRequest(
+          request,
+          "core",
+          ["Intelligence", "clients", "client", "health-score"],
+          config,
+          token,
+          fetcher,
+        )
+      ).status,
+    ).toBe(400);
+    expect(token).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
+    expect(
+      (
+        await proxyRequest(
+          request,
+          "core",
+          ["intelligence", "Clients", "MiXeD-Client", "recommendations"],
+          config,
+          token,
+          fetcher,
+        )
+      ).status,
+    ).toBe(200);
+    expect(fetcher).toHaveBeenCalledOnce();
+  });
+});

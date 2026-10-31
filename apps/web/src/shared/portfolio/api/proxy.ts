@@ -76,13 +76,14 @@ export async function proxyRequest(
   }
   // This URL also exists on legacy Core. Reject before credentials or upstream
   // reads until Release qualifies the versioned, actor-scoped producer.
+  // Static segments match the backend's case-insensitive router; IDs stay exact.
   if (
     selected === "core" &&
     request.method === "GET" &&
     path.length === 4 &&
     path[0] === "intelligence" &&
-    path[1] === "clients" &&
-    path[3] === "health-score" &&
+    path[1]?.toLowerCase() === "clients" &&
+    path[3]?.toLowerCase() === "health-score" &&
     config.recordedActivityVersion !== 1
   )
     return jsonError(503, "Recorded activity is unavailable.");
