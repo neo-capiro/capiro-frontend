@@ -91,9 +91,12 @@ export function usePersonalPreferences(
       cache.getQueryCache().subscribe(
         notifyManager.batchCalls((event) => {
           if (
-            ["identity", "client-profile", "bill-alert-preferences"].includes(
-              String(event.query.queryKey[0]),
-            )
+            [
+              "identity",
+              "client-profile",
+              "portfolio",
+              "bill-alert-preferences",
+            ].includes(String(event.query.queryKey[0]))
           )
             notify();
         }),

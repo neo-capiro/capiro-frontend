@@ -3,6 +3,10 @@ import Link from "next/link";
 import { createContext, useContext, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useApi } from "../portfolio/api/provider";
+import {
+  currentActorKey,
+  useCurrentActor,
+} from "../portfolio/auth/current-actor";
 import { clientSchema, type Client } from "./client-contract";
 
 export type SelectedClient =
@@ -20,10 +24,15 @@ export function SelectedClientProvider({
   children: ReactNode;
 }) {
   const api = useApi();
+  const actor = useCurrentActor();
   const valid = clientSchema.shape.id.safeParse(requestedId).success;
+  // The SAME actor-scoped entry the pages read ([portfolio, client, id, actorKey]), so this
+  // gate shares their cache record instead of keeping a second actor-less one. The shape is
+  // pinned against clients/client-read.ts by tests/portfolio371-complete.test.ts, because the
+  // foundations layer may not import a feature module to reuse its builder.
   const query = useQuery({
-    queryKey: ["portfolio", "client", requestedId],
-    enabled: Boolean(requestedId && valid),
+    queryKey: ["portfolio", "client", requestedId, currentActorKey(actor)],
+    enabled: Boolean(requestedId && valid && actor),
     queryFn: ({ signal }) =>
       api.request(
         "core",

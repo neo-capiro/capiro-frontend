@@ -10,6 +10,8 @@ import {
   clientKey,
   type Client,
 } from "@/features/portfolio/index/public";
+import { publishClientReceipt } from "@/features/portfolio/clients/public";
+import { useCurrentActor } from "@/shared/portfolio/auth/current-actor";
 import type { IntakeForm } from "./form";
 import {
   archiveClient,
@@ -25,6 +27,7 @@ export function useSaveIntake(
 ) {
   const api = useApi();
   const cache = useQueryClient();
+  const actor = useCurrentActor();
   return useMutation({
     retry: false,
     mutationFn: async ({
@@ -55,7 +58,12 @@ export function useSaveIntake(
       return saved;
     },
     onSuccess: (saved) => {
-      cache.setQueryData(clientKey(saved.id), saved);
+      // `clientKey` is the PREFIX, not the entry a reader uses: the displayed detail lives
+      // under the actor-scoped key. Publishing into the prefix array alone left the visible
+      // row stale after a successful edit, so the receipt goes into the entry the current
+      // actor actually reads — and when the actor is unknown the prefix is invalidated
+      // instead of writing a receipt no scoped reader can see.
+      publishClientReceipt(cache, saved.id, saved, actor);
     },
     // A committed write can lose its receipt. Refresh read models without replay.
     onSettled: async (_saved, error) => {
@@ -74,6 +82,7 @@ export function useSaveIntake(
 export function useUploadLogo(capture: () => IntakeWriteScope) {
   const api = useApi();
   const cache = useQueryClient();
+  const actor = useCurrentActor();
   return useMutation({
     retry: false,
     mutationFn: ({
@@ -94,7 +103,7 @@ export function useUploadLogo(capture: () => IntakeWriteScope) {
       );
     },
     onSuccess: (saved) => {
-      cache.setQueryData(clientKey(saved.id), saved);
+      publishClientReceipt(cache, saved.id, saved, actor);
     },
     onSettled: async (_saved, _error, variables) => {
       await Promise.all([

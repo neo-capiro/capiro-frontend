@@ -57,6 +57,7 @@ export function useChannelScope(view: ChannelView) {
       if (
         root !== "identity" &&
         root !== "client-profile" &&
+        root !== "portfolio" &&
         root !== "bill-alert-preferences"
       )
         return;

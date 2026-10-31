@@ -34,6 +34,7 @@ export function useWatchlistView(clientId: string, backend: TrackerBackend) {
           [
             "identity",
             "client-profile",
+            "portfolio",
             "bill-watchlist",
             "tracker-issue-areas",
             "watchlist-jurisdictions",

@@ -111,6 +111,11 @@ export function useSubmissionView(clientId: string) {
           if (
             key[0] === "identity" ||
             (key[0] === "client-submissions" && key[1] === clientId) ||
+            // The client detail now lives under the shared ["portfolio","client",id,actor]
+            // key; the legacy profile namespace is kept for any remaining reader.
+            (key[0] === "portfolio" &&
+              key[1] === "client" &&
+              key[2] === clientId) ||
             (key[0] === "client-profile" &&
               key[1] === clientId &&
               key[2] === "saved-client")
