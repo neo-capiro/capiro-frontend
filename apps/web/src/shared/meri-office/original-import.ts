@@ -146,11 +146,16 @@ class OfficeOriginalImport {
       );
       if (!this.current()) return;
       if ("error" in response.value) {
+        const notDispatched =
+          operation === "import" &&
+          response.value.error.outcome === "NOT_DISPATCHED";
+        if (notDispatched) this.recovery.markNotDispatched();
         this.publish({
           ...this.snapshot,
-          attempted: true,
-          message:
-            response.value.error.code === "IMPORT_UNRESOLVED"
+          attempted: this.recovery.attempted(),
+          message: notDispatched
+            ? "The original was not imported. Try opening it again when Office is available."
+            : response.value.error.code === "IMPORT_UNRESOLVED"
               ? "The original import is still unconfirmed. Check again to recover it."
               : "The original could not be opened. Check again to recover any completed import.",
         });

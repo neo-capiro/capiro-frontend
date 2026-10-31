@@ -37,6 +37,9 @@ export function officeOriginalSelection(
       if (!isCurrent()) throw new Error("Office context changed");
       client.setQueryData(key, { attempted: true });
     },
+    markNotDispatched: () => {
+      if (isCurrent()) client.setQueryData(key, { attempted: false });
+    },
     subscribe: (lost: () => void) =>
       cache.subscribe(() => {
         if (!isCurrent()) lost();

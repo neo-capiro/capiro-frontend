@@ -76,6 +76,50 @@ function fixture(format: "docx" | "xlsx" | "pptx" = "docx") {
 }
 
 describe("retained Office original entry", () => {
+  it("an explicit initial NOT_DISPATCHED permits another user-requested import", async () => {
+    const f = fixture();
+    f.setEffect(async () =>
+      Response.json(
+        {
+          schema: "meri.office-application/1",
+          error: { code: "UNAVAILABLE", outcome: "NOT_DISPATCHED" },
+        },
+        { status: 503 },
+      ),
+    );
+    await f.host.open();
+    expect(f.host.getSnapshot().attempted).toBe(false);
+    await f.host.open();
+    expect(
+      f.calls
+        .filter((c) => c.url.endsWith("/import"))
+        .map((c) => c.body.operation),
+    ).toEqual(["import", "import"]);
+  });
+  it("a NOT_DISPATCHED recovery response cannot erase an earlier unknown attempt", async () => {
+    const f = fixture();
+    f.setEffect(async () => {
+      throw Error("lost");
+    });
+    await f.host.open();
+    f.setEffect(async () =>
+      Response.json(
+        {
+          schema: "meri.office-application/1",
+          error: { code: "UNAVAILABLE", outcome: "NOT_DISPATCHED" },
+        },
+        { status: 503 },
+      ),
+    );
+    await f.host.open();
+    await f.host.open();
+    expect(f.host.getSnapshot().attempted).toBe(true);
+    expect(
+      f.calls
+        .filter((c) => c.url.endsWith("/import"))
+        .map((c) => c.body.operation),
+    ).toEqual(["import", "recover", "recover"]);
+  });
   it.each(["docx", "xlsx", "pptx"] as const)(
     "imports %s using its selector and returns the exact immutable version",
     async (format) => {
