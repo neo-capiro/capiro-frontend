@@ -148,6 +148,10 @@ export const publicExports = new Set([
 ]);
 
 export const serverAdapters = new Map([
+  [`${appSource}app/api/client-logo/[clientId]/route.ts`, new Set([
+    '@clerk/nextjs/server', `${appSource}shared/portfolio/config/config.ts`,
+    `${appSource}shared/portfolio/api/client-logo.ts`,
+  ])],
   [`${appSource}app/api/outreach-generation/start/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
     `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-conversations/outreach-start.ts`,
