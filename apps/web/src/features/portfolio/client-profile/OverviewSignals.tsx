@@ -62,21 +62,6 @@ export function EngagementPulse({
   );
 }
 
-export function EngagementHealth() {
-  return (
-    <section className={`card ${styles.health}`} aria-label="Engagement health">
-      <div className="row between">
-        <small>Engagement health</small>
-        <a href="#activity-timeline" aria-label="Open activity timeline">
-          ↗
-        </a>
-      </div>
-      <strong>—</strong>
-      <small>Health score unavailable</small>
-    </section>
-  );
-}
-
 export function DeadlineAndRequests({
   metrics,
 }: {

@@ -16,11 +16,8 @@ import { ActivityTimeline } from "./ActivityTimeline";
 import { FacilitiesCard } from "./FacilitiesCard";
 import { ClientDetails, GovernmentSummary } from "./ClientDetails";
 import { ClientMonogram } from "./ClientMonogram";
-import {
-  DeadlineAndRequests,
-  EngagementHealth,
-  EngagementPulse,
-} from "./OverviewSignals";
+import { DeadlineAndRequests, EngagementPulse } from "./OverviewSignals";
+import { RecordedActivity } from "./RecordedActivity";
 import { TeamDialog } from "./TeamDialog";
 import { NotesDialog } from "./NotesDialog";
 import { QuickLog } from "./QuickLog";
@@ -28,7 +25,13 @@ import { FocusTags } from "./tags/public";
 import { useTeam, useActivity } from "./queries";
 import { useActivityMetrics } from "./useActivityMetrics";
 import styles from "./overview.module.css";
-export function ClientOverview({ clientId }: { clientId: string }) {
+export function ClientOverview({
+  clientId,
+  recordedActivityVersion,
+}: {
+  clientId: string;
+  recordedActivityVersion?: 1;
+}) {
   const client = useClient(clientId);
   const team = useTeam(clientId);
   const activity = useActivity(clientId);
@@ -135,7 +138,10 @@ export function ClientOverview({ clientId }: { clientId: string }) {
         <div className={`${styles.tile} ${styles.rightTile}`}>
           <div className={styles.rightTop}>
             <GovernmentSummary key={value.id} client={value} />
-            <EngagementHealth />
+            <RecordedActivity
+              clientId={clientId}
+              version={recordedActivityVersion}
+            />
           </div>
         </div>
         <div className={`${styles.tile} ${styles.rightTile}`}>

@@ -21,6 +21,7 @@ export type RuntimeConfig = {
   authConfigured: boolean;
   publishableKey?: string;
   trackerBackend?: TrackerBackend;
+  recordedActivityVersion?: 1;
   issues: string[];
   requestOrigin?: string | null;
 };
@@ -103,6 +104,8 @@ export function readConfig(
     issues.push("CORE_API_BASE_URL is required for Portfolio.");
   return {
     services,
+    recordedActivityVersion:
+      env.CAPIRO_RECORDED_ACTIVITY_VERSION === "1" ? 1 : undefined,
     trackerBackend:
       trackerBackend === "core" || trackerBackend === "intelligence"
         ? trackerBackend

@@ -74,6 +74,18 @@ export async function proxyRequest(
   ) {
     return jsonError(400, "Invalid service path.");
   }
+  // This URL also exists on legacy Core. Reject before credentials or upstream
+  // reads until Release qualifies the versioned, actor-scoped producer.
+  if (
+    selected === "core" &&
+    request.method === "GET" &&
+    path.length === 4 &&
+    path[0] === "intelligence" &&
+    path[1] === "clients" &&
+    path[3] === "health-score" &&
+    config.recordedActivityVersion !== 1
+  )
+    return jsonError(503, "Recorded activity is unavailable.");
   if (selected === "workspace" && path[0] === "templates") {
     // Portfolio reads the existing tenant-visible library and a single preview.
     // Template authoring and other catalog operations remain in Workspace.
