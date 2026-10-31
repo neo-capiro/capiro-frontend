@@ -17,18 +17,11 @@ export function useEvidenceSelection() {
     ]);
     setExact(null);
   };
-  const reset = () => {
-    setExact(null);
-    setRefs([]);
-    setBasketOpen(false);
-    setBriefingOpen(false);
-  };
   return {
     exact,
     setExact,
     refs,
     select,
-    reset,
     basketOpen,
     setBasketOpen,
     briefingOpen,
