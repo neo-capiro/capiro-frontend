@@ -1,3 +1,4 @@
+import type { UploadAttemptReferences } from "./upload-attempt-storage";
 import {
   receiveUploadRequest,
   type AdmittedUploadReceipt,
@@ -84,6 +85,7 @@ const stateOf = (receipt: UploadReceipt): UploadItemState =>
  */
 export function createUploadController(options: {
   wire: UploadWire;
+  recovery?: UploadAttemptReferences;
   /** False once this controller's conversation, account or client is no longer on screen. */
   isCurrent: () => boolean;
   /**
@@ -101,6 +103,26 @@ export function createUploadController(options: {
   const listeners = new Set<() => void>();
   let version = 0;
   let disposed = false;
+  let recoveryUnavailable = false;
+  try {
+    if (options.isCurrent())
+      for (const requestId of options.recovery?.list() ?? []) {
+        items.set(
+          requestId,
+          Object.freeze({
+            requestId,
+            uploadId: null,
+            filename: "Upload awaiting status",
+            mimeType: "",
+            bytes: 0,
+            sha256: "",
+            state: "unknown",
+          }),
+        );
+      }
+  } catch {
+    recoveryUnavailable = true;
+  }
   const current = () =>
     !disposed && !lifetime.signal.aborted && options.isCurrent();
   const changed = () => {
@@ -109,6 +131,13 @@ export function createUploadController(options: {
     for (const listener of listeners) listener();
   };
   const update = (requestId: string, next: UploadItem) => {
+    if (next.state === "removed") {
+      try {
+        options.recovery?.release(requestId);
+      } catch {
+        /* Check can resolve the retained locator again. */
+      }
+    }
     items.set(requestId, Object.freeze(next));
     changed();
   };
@@ -194,6 +223,26 @@ export function createUploadController(options: {
     signal: AbortSignal,
   ) {
     const { requestId } = item;
+    try {
+      if (recoveryUnavailable) throw Error("UPLOAD_RECOVERY_UNAVAILABLE");
+      options.recovery?.retain(requestId);
+    } catch {
+      update(requestId, {
+        ...item,
+        state: "refused",
+        refusal: { code: "UPLOAD_RECOVERY_UNAVAILABLE" },
+      });
+      return;
+    }
+    if (!current()) return;
+    if (signal.aborted) {
+      update(requestId, {
+        ...item,
+        state: "refused",
+        refusal: { code: "CANCELLED" },
+      });
+      return;
+    }
     const declared = await options.wire.declare(requestId, file, signal);
     if (!current()) return;
     if (!declared.ok) {
@@ -204,7 +253,7 @@ export function createUploadController(options: {
       });
       return;
     }
-    const retained = retain(requestId, file, declared.value);
+    const retained = retain(requestId, declared.value);
     // Only this admitted declaration supplies the id and expected original.
     update(requestId, {
       ...withReceipt(item, declared.value.receipt),
@@ -228,7 +277,6 @@ export function createUploadController(options: {
   /** Keep the admitted declaration and the one admitted original request for this attempt. */
   function retain(
     requestId: string,
-    file: File,
     declared: UploadDeclaration,
   ): RetainedUpload {
     // The original request is bounded to the id the service just allocated; admitted here once.
@@ -255,29 +303,53 @@ export function createUploadController(options: {
   async function check(requestId: string) {
     const item = items.get(requestId);
     const retained = ledger.byRequestId(requestId);
-    if (!current() || !item?.uploadId || !retained) return;
+    if (!current() || !item || attempts.has(requestId)) return;
     const run = attempt(requestId);
     let reply;
     try {
-      reply = await options.wire.status(item.uploadId, run.signal);
+      reply = item.uploadId
+        ? await options.wire.status(item.uploadId, run.signal)
+        : await options.wire.statusByRequest(requestId, run.signal);
     } finally {
       run.done();
     }
     if (!current()) return;
     const previous = items.get(requestId) ?? item;
     if (!reply.ok) {
-      update(requestId, { ...previous, refusal: reply.refusal });
+      update(requestId, {
+        ...previous,
+        ...(reply.refusal.uncertain ? { state: "unknown" as const } : {}),
+        refusal: reply.refusal,
+      });
       return;
     }
-    retained.receipt = reply.value;
+    if (
+      previous.uploadId &&
+      (previous.uploadId !== reply.value.uploadId ||
+        previous.sha256 !== reply.value.original.sha256)
+    ) {
+      update(requestId, {
+        ...previous,
+        state: "unknown",
+        refusal: { code: "UPLOAD_CORRELATION", uncertain: true },
+      });
+      return;
+    }
+    if (retained) retained.receipt = reply.value;
     update(requestId, withReceipt(previous, reply.value));
   }
 
   async function remove(requestId: string) {
     const item = items.get(requestId);
-    if (!current() || !item) return;
+    if (!current() || !item || attempts.has(requestId)) return;
     if (!item.uploadId) {
-      // Nothing was ever allocated for this file; dropping the local row disposes of it.
+      // A missing initiate reply does not prove that no record was allocated.
+      if (item.state !== "refused" || item.refusal?.uncertain) return;
+      try {
+        options.recovery?.release(requestId);
+      } catch {
+        return;
+      }
       items.delete(requestId);
       changed();
       return;
@@ -292,10 +364,26 @@ export function createUploadController(options: {
     if (!current()) return;
     const previous = items.get(requestId) ?? item;
     if (!reply.ok) {
-      update(requestId, { ...previous, refusal: reply.refusal });
+      update(requestId, {
+        ...previous,
+        ...(reply.refusal.uncertain ? { state: "unknown" as const } : {}),
+        refusal: reply.refusal,
+      });
       return;
     }
     const retained = ledger.byRequestId(requestId);
+    if (
+      previous.uploadId &&
+      (previous.uploadId !== reply.value.uploadId ||
+        previous.sha256 !== reply.value.original.sha256)
+    ) {
+      update(requestId, {
+        ...previous,
+        state: "unknown",
+        refusal: { code: "UPLOAD_CORRELATION", uncertain: true },
+      });
+      return;
+    }
     if (retained) retained.receipt = reply.value;
     update(requestId, withReceipt(previous, reply.value));
   }
@@ -338,7 +426,19 @@ export function createUploadController(options: {
       return;
     }
     const item = items.get(requestId);
-    if (!item || item.uploadId) return;
+    if (
+      !current() ||
+      !item ||
+      item.uploadId ||
+      item.state !== "refused" ||
+      item.refusal?.uncertain
+    )
+      return;
+    try {
+      options.recovery?.release(requestId);
+    } catch {
+      return;
+    }
     items.delete(requestId);
     changed();
   }

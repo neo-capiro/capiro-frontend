@@ -341,6 +341,12 @@ const accessOf = (
     ...wireStandIn,
     lifetime,
     access: createUploadAccess({
+      context: {
+        tenantId: "synthetic",
+        actorId: "synthetic-actor",
+        selectedClientId: null,
+        conversationId: "11111111-1111-4111-8111-111111111111",
+      },
       credential,
       lifetime: lifetime.signal,
       isCurrent,
