@@ -16,6 +16,7 @@ import {
 } from "./staging-model";
 import { useNewsletterStaging } from "./useNewsletterStaging";
 import styles from "./newsletter-staging.module.css";
+import parity from "./newsletter-figma.module.css";
 
 export function NewsletterStaging({
   draftId,
@@ -23,12 +24,16 @@ export function NewsletterStaging({
   open,
   onClose,
   disabled = false,
+  title: newsletterTitle,
+  clientName,
 }: {
   draftId?: string;
   saved: boolean;
   open: boolean;
   onClose: () => void;
   disabled?: boolean;
+  title?: string;
+  clientName?: string;
 }) {
   const me = useCapiroQuery("me.read", {}, { enabled: Boolean(draftId) });
   if (!draftId || !me.data)
@@ -73,6 +78,8 @@ export function NewsletterStaging({
       open={open}
       onClose={onClose}
       disabled={disabled}
+      title={newsletterTitle}
+      clientName={clientName}
     />
   );
 }
@@ -93,6 +100,7 @@ function StagingSelection({
   open,
   onClose,
   disabled,
+  title: newsletterTitle,
 }: {
   open: boolean;
   onClose: () => void;
@@ -100,6 +108,8 @@ function StagingSelection({
   draftId: string;
   saved: boolean;
   disabled: boolean;
+  title?: string;
+  clientName?: string;
 }) {
   const flow = useNewsletterStaging(actor, draftId);
   const [selectedVersion, setVersion] = useState("");
@@ -251,8 +261,7 @@ function StagingSelection({
     confirmed: "Saved version staged",
   }[state];
   const description = {
-    review:
-      "Review a saved version before adding it to an existing Outreach session.",
+    review: newsletterTitle || "Newsletter",
     refresh:
       "Staging stays unavailable until the current review can be verified.",
     original: "Staging was not confirmed. The original request is preserved.",
@@ -327,6 +336,21 @@ function StagingSelection({
         </>
       }
     >
+      {state === "review" && (
+        <section className={parity.panel}>
+          <h3 className={parity.stagePanelTitle}>
+            Prepare this version for delivery
+          </h3>
+          <p className={parity.stagePanelText}>
+            Save this version and stage it in Engagement Outreach. There you can
+            choose destinations, review the preview, and send from your
+            connected mailbox.
+          </p>
+          <p className={parity.stagePanelText}>
+            Further edits in Workspace can be staged as a new version.
+          </p>
+        </section>
+      )}
       {state === "review" && (
         <>
           <div className={styles.fields}>

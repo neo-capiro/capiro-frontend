@@ -7,6 +7,9 @@ export const newsletterPresets = [
     title: "The week in policy.",
     description: "Policy updates and timely perspectives",
     tag: "Editorial",
+    purpose: "Recurring update",
+    style: "Editorial",
+    industry: "All industries",
   },
   {
     id: "column",
@@ -14,6 +17,9 @@ export const newsletterPresets = [
     title: "A clearer perspective.",
     description: "A focused update with a clear call to action",
     tag: "Basic layout",
+    purpose: "Client update",
+    style: "Simple",
+    industry: "All industries",
   },
   {
     id: "blank",
@@ -21,6 +27,9 @@ export const newsletterPresets = [
     title: "Your story starts here.",
     description: "Build your own layout using newsletter blocks",
     tag: "Blank canvas",
+    purpose: "Custom",
+    style: "Blank",
+    industry: "All industries",
   },
 ] as const;
 export function createNewsletter(
