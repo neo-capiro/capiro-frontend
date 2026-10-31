@@ -11,7 +11,7 @@ import { LegiWatchTabs } from "../components";
 import {
   EvidenceScopePicker,
   useEvidenceScope,
-} from "../evidence/EvidenceScope";
+} from "../sources/EvidenceScope";
 import styles from "../legiwatch.module.css";
 import { BriefingReview } from "./BriefingReview";
 import { EditorialSchedules } from "./EditorialSchedules";
@@ -55,9 +55,9 @@ function BriefingHistory() {
         }}
       />
       <p className={styles.banner}>
-        Choose exact retained evidence in News, Research or Florida Budget, then
-        include it in a client briefing. Draft preparation, edition approval and
-        delivery are separate steps.
+        Choose exact retained evidence in Research, then include it in a client
+        briefing. Draft preparation, edition approval and delivery are separate
+        steps.
       </p>
       {selectionId ? (
         <>

@@ -11,7 +11,6 @@ import {
   StatusPanel,
 } from "../../../../../shared/module-ui";
 import styles from "../legiwatch.module.css";
-import { ReportRunView } from "../reports/ReportRunView";
 import { useLegiWatchRoute } from "../use-legiwatch-route";
 export function WorkflowActionView({
   id,
@@ -23,8 +22,7 @@ export function WorkflowActionView({
   const query = useCapiroQuery("legiwatch.workflow.action", { params: { id } }),
     execute = useCapiroMutation("legiwatch.workflow.execute"),
     pause = useCapiroMutation("legiwatch.workflow.pause");
-  const [report, setReport] = useState<string>(),
-    [confirmed, setConfirmed] = useState(false),
+  const [confirmed, setConfirmed] = useState(false),
     route = useLegiWatchRoute();
   const pending = execute.pending || pause.pending,
     row = query.data;
@@ -37,8 +35,6 @@ export function WorkflowActionView({
       query.reload();
     }
   };
-  if (report)
-    return <ReportRunView runId={report} onBack={() => setReport(undefined)} />;
   return (
     <div className={styles.form}>
       <ActionButton onClick={onBack}>Back to workflows</ActionButton>
@@ -65,11 +61,6 @@ export function WorkflowActionView({
                 >
                   Open private Workspace draft
                 </a>
-              )}
-              {row.steps.reportRunId && (
-                <ActionButton onClick={() => setReport(row.steps.reportRunId)}>
-                  Open frozen report
-                </ActionButton>
               )}
               {row.input.eventId && (
                 <ActionButton

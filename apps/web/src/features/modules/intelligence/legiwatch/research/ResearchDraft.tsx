@@ -11,7 +11,7 @@ import {
   TextArea,
   TextInput,
 } from "../../../../../shared/module-ui";
-import type { EvidenceRef, EvidenceScope } from "../evidence/EvidenceActions";
+import type { EvidenceRef, EvidenceScope } from "../sources/EvidenceActions";
 import styles from "../legiwatch.module.css";
 import {
   BriefingCitations,

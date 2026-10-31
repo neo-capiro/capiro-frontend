@@ -30,7 +30,7 @@ export function EvidenceBasket({
       }
     >
       <p className={styles.description}>
-        Selecting evidence does not save a report or send a briefing. Review the
+        Selecting evidence does not save a draft or send a briefing. Review the
         exact retained revisions before preparing a draft.
       </p>
       {refs.length ? (

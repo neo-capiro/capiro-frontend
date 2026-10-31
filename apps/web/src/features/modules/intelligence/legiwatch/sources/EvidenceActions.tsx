@@ -1,24 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import {
-  useCapiroMutation,
-  useCapiroQuery,
-} from "../../../../../shared/capiro/queries";
+import { useCapiroQuery } from "../../../../../shared/capiro/queries";
 import {
   ActionButton,
   Badge,
-  Field,
   Modal,
   StatusPanel,
-  TextArea,
 } from "../../../../../shared/module-ui";
 import { SourceLink } from "../components";
 import styles from "../legiwatch.module.css";
 
 export type EvidenceKind = "news" | "budget" | "personnel" | "research";
 export type EvidenceRef = {
-  kind: EvidenceKind;
+  kind: "research";
   id: string;
   revision: string;
   locator: string;
@@ -80,11 +74,11 @@ export function ExactEvidence({
             <p className={styles.briefText}>
               {source.data.text || "No retained source text is available."}
             </p>
-            {onSelect && (
+            {onSelect && kind === "research" && (
               <ActionButton
                 onClick={() =>
                   onSelect({
-                    kind,
+                    kind: "research",
                     id: source.data!.id,
                     revision: source.data!.revision,
                     locator: "retained-source",
@@ -97,87 +91,6 @@ export function ExactEvidence({
           </div>
         )}
       </StatusPanel>
-    </Modal>
-  );
-}
-export function TrackEvidence({
-  kind,
-  id,
-  version,
-  saved,
-  scope,
-  onClose,
-  onSaved,
-}: {
-  kind: Exclude<EvidenceKind, "research">;
-  id: string;
-  version: number;
-  saved: boolean;
-  scope: EvidenceScope;
-  onClose: () => void;
-  onSaved: () => void;
-}) {
-  const [notes, setNotes] = useState("");
-  const mutation = useCapiroMutation("legiwatch.evidence.track");
-  const save = async () => {
-    if (!scope.folderId) return;
-    try {
-      await mutation.run({
-        body: {
-          ...scope,
-          folderId: scope.folderId,
-          kind,
-          sourceId: id,
-          expectedVersion: version,
-          removed: saved,
-          notes,
-        },
-      });
-      onSaved();
-      onClose();
-    } catch {
-      /* Keep the reviewed draft open. */
-    }
-  };
-  return (
-    <Modal
-      open
-      onOpenChange={(open) => {
-        if (!open && !mutation.pending) onClose();
-      }}
-      title={saved ? "Remove saved evidence" : "Save to permitted folder"}
-      footer={
-        <ActionButton
-          primary
-          disabled={!scope.folderId || mutation.pending}
-          onClick={() => void save()}
-        >
-          {mutation.pending
-            ? "Saving…"
-            : saved
-              ? "Remove from folder"
-              : "Save evidence"}
-        </ActionButton>
-      }
-    >
-      <p className={styles.description}>
-        This updates the selected folder only. It does not activate monitoring
-        or send a briefing.
-      </p>
-      <Field label="Notes" htmlFor="evidence-notes">
-        <TextArea
-          id="evidence-notes"
-          value={notes}
-          disabled={mutation.pending}
-          maxLength={5000}
-          onChange={(event) => setNotes(event.target.value)}
-        />
-      </Field>
-      {mutation.error && (
-        <p role="alert" className={styles.error}>
-          {mutation.error.message}
-        </p>
-      )}
     </Modal>
   );
 }

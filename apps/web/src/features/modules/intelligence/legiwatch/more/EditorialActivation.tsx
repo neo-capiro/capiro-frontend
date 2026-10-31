@@ -40,6 +40,12 @@ export function EditorialActivation({
   return (
     <section className={styles.form}>
       <h3>Saved configuration review</h3>
+      {row.config.policyVersion !== 2 && (
+        <p className={styles.banner}>
+          Review the research source scope and save this configuration before
+          activating its schedule.
+        </p>
+      )}
       <p>
         Version {row.version} ·{" "}
         {row.config.sendEnabled
@@ -67,6 +73,7 @@ export function EditorialActivation({
           primary
           disabled={
             !confirmed ||
+            row.config.policyVersion !== 2 ||
             !row.config.prepareEnabled ||
             !row.config.dictionaryScopeAccepted ||
             mutation.pending ||

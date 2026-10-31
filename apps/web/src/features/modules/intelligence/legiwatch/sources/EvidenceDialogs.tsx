@@ -1,21 +1,15 @@
 "use client";
 import { BriefingComposer } from "../more/BriefingComposer";
-import {
-  ExactEvidence,
-  TrackEvidence,
-  type EvidenceScope,
-} from "./EvidenceActions";
+import { ExactEvidence, type EvidenceScope } from "./EvidenceActions";
 import { EvidenceBasket } from "./EvidenceBasket";
 import type { useEvidenceSelection } from "./use-evidence-selection";
 
 export function EvidenceDialogs({
   selection,
   scope,
-  reload,
 }: {
   selection: ReturnType<typeof useEvidenceSelection>;
   scope: EvidenceScope;
-  reload: () => void;
 }) {
   return (
     <>
@@ -25,14 +19,6 @@ export function EvidenceDialogs({
           scope={scope}
           onClose={() => selection.setExact(null)}
           onSelect={selection.select}
-        />
-      )}
-      {selection.tracking && (
-        <TrackEvidence
-          {...selection.tracking}
-          scope={scope}
-          onClose={() => selection.setTracking(null)}
-          onSaved={reload}
         />
       )}
       {selection.basketOpen && (

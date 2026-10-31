@@ -8,21 +8,21 @@ import {
 } from "../../../../../shared/module-ui";
 import { downloadText, LegiWatchTabs } from "../components";
 import styles from "../legiwatch.module.css";
-import { ReportCompose } from "./ReportCompose";
+import { DeliveryCompose } from "./DeliveryCompose";
 
-export function ReportRunView({
+export function DeliveryRunView({
   runId,
   onBack,
 }: {
   runId: string;
   onBack: () => void;
 }) {
-  const query = useCapiroQuery("legiwatch.report.run", {
+  const query = useCapiroQuery("legiwatch.delivery.run", {
       params: { id: runId },
     }),
     [tab, setTab] = useState("report");
   const deliveries = useCapiroQuery(
-    "legiwatch.report.deliveries",
+    "legiwatch.delivery.history",
     { params: { id: runId } },
     { enabled: tab === "delivery" },
   );
@@ -30,7 +30,7 @@ export function ReportRunView({
   return (
     <>
       <div className={styles.actions}>
-        <ActionButton onClick={onBack}>Reports</ActionButton>
+        <ActionButton onClick={onBack}>Back to review</ActionButton>
         {row && (
           <>
             <Badge tone={row.complete ? "success" : "warning"}>
@@ -42,7 +42,7 @@ export function ReportRunView({
               onClick={() =>
                 downloadText(
                   row.rendered.text,
-                  `report-${row.id}.txt`,
+                  `edition-${row.id}.txt`,
                   "text/plain;charset=utf-8",
                 )
               }
@@ -53,7 +53,7 @@ export function ReportRunView({
               onClick={() =>
                 downloadText(
                   row.rendered.html,
-                  `report-${row.id}.html`,
+                  `edition-${row.id}.html`,
                   "text/html;charset=utf-8",
                 )
               }
@@ -66,12 +66,12 @@ export function ReportRunView({
       <LegiWatchTabs
         value={tab}
         items={[
-          { id: "report", label: "Frozen report" },
+          { id: "report", label: "Frozen edition" },
           { id: "compose", label: "Delivery review" },
           { id: "delivery", label: "Delivery history" },
         ]}
         onChange={setTab}
-        label="Frozen report run"
+        label="Frozen edition run"
       />
       <StatusPanel
         loading={query.loading}
@@ -93,7 +93,7 @@ export function ReportRunView({
               </section>
             )}
             {tab === "compose" && (
-              <ReportCompose
+              <DeliveryCompose
                 run={row}
                 onQueued={() => {
                   setTab("delivery");

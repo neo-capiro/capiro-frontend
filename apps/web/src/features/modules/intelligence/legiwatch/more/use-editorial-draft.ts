@@ -14,10 +14,8 @@ export function useEditorialDraft(row: EditorialRow) {
     ...(saved.clientId ? { clientId: saved.clientId } : {}),
     ...(saved.sessionKey ? { sessionKey: saved.sessionKey } : {}),
     template: saved.template ?? "daily_legislative_brief",
-    reportId: saved.reportId ?? "",
     subject: saved.subject ?? row.source.family.displayName,
-    monitorIds: saved.monitorIds ?? [],
-    includedKinds: saved.includedKinds ?? ["news"],
+    includedKinds: ["research"],
     schedule: saved.schedule ?? {
       timezone: "America/New_York",
       hour: 8,
@@ -26,16 +24,6 @@ export function useEditorialDraft(row: EditorialRow) {
       noChange: "draft",
       sourceGap: "hold",
       mode: "prepare",
-    },
-    categoryMapping: saved.categoryMapping ?? {
-      namespace: row.source.family.categoryNamespace,
-      version: 1,
-      entries: Object.fromEntries(
-        row.source.family.categories.map((id) => [
-          id,
-          { decision: "pending" as const, reason: "Pending review" },
-        ]),
-      ),
     },
     recipientSelection: [],
     prepareEnabled: saved.prepareEnabled ?? false,

@@ -12,12 +12,12 @@ import {
   statuteRule,
 } from "./legiwatch-monitor-schemas";
 const source =
-  "apps/intel-api/src/tracker/reports/record-rule.service.ts; reports/report.controller.ts; calendar/agenda-rule.controller.ts; agenda-rule.service.ts; research/statute-monitor.service.ts; research/research.controller.ts; folders/folder-tracker.controller.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace";
+  "apps/intel-api/src/tracker/delivery/record-rule.service.ts; delivery/delivery.controller.ts; calendar/agenda-rule.controller.ts; agenda-rule.service.ts; research/statute-monitor.service.ts; research/research.controller.ts; folders/folder-tracker.controller.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace";
 const empty = z.object({}).strict(),
   params = z.object({ params: monitorParams }).strict();
 /** Agenda rules inherit RecordRuleService; these four public operations share that exact contract. */
 function recordOperations(
-  path: "/legiwatch/reports/rules" | "/legiwatch/agenda-rules",
+  path: "/legiwatch/monitoring/rules" | "/legiwatch/agenda-rules",
 ) {
   return {
     list: defineOperation({
@@ -63,7 +63,7 @@ function recordOperations(
     }),
   };
 }
-const record = recordOperations("/legiwatch/reports/rules"),
+const record = recordOperations("/legiwatch/monitoring/rules"),
   agenda = recordOperations("/legiwatch/agenda-rules");
 export const legiwatchMonitoringOperations = {
   "legiwatch.folder.members": defineOperation({

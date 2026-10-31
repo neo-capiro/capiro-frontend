@@ -1,7 +1,7 @@
 "use client";
 import { useId, useState } from "react";
 import type { z } from "zod";
-import { recipientSelectionSchema } from "../../../../../shared/capiro/operations/legiwatch-report-schemas";
+import { recipientSelectionSchema } from "../../../../../shared/capiro/operations/legiwatch-delivery-schemas";
 import { useCapiroQuery } from "../../../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -18,7 +18,7 @@ export function RecipientPicker({
   value: RecipientSelection;
   onChange: (value: RecipientSelection) => void;
 }) {
-  const directory = useCapiroQuery("legiwatch.report.recipients", {});
+  const directory = useCapiroQuery("legiwatch.delivery.recipients", {});
   const [manual, setManual] = useState(""),
     [role, setRole] = useState<"to" | "bcc">("to");
   const id = useId();

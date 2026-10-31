@@ -11,7 +11,7 @@ import {
   TextArea,
 } from "../../../../../shared/module-ui";
 import { SelectField } from "../components";
-import type { EvidenceRef, EvidenceScope } from "../evidence/EvidenceActions";
+import type { EvidenceRef, EvidenceScope } from "../sources/EvidenceActions";
 import styles from "../legiwatch.module.css";
 
 export type BriefingCitation = z.infer<typeof briefingCitation>;

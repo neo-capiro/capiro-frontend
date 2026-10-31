@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
 const source =
-  "apps/api/src/live-hearings/legiwatch-wave3.controller.ts; legiwatch-analytics.service.ts; legiwatch-digest.service.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace";
+  "apps/api/src/live-hearings/legiwatch-wave3.controller.ts; legiwatch-analytics.service.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace";
 const scope = z.object({ clientId: z.uuid().optional() }).strict();
 const range = scope
   .extend({
@@ -13,59 +13,6 @@ const range = scope
 const ranged = z.object({ query: range }).strict(),
   base = "/legiwatch/live-hearings";
 const dates = { from: z.string(), to: z.string() };
-export const digestRun = z.object({
-  id: z.string(),
-  generatedAt: z.string(),
-  scopeLabel: z.string(),
-  clientsInScope: z.number(),
-  headline: z.string(),
-  whatChanged: z.array(
-    z.object({
-      id: z.string(),
-      title: z.string(),
-      band: z.string(),
-      sourceLabel: z.string(),
-      clientName: z.string().nullable(),
-      ageHours: z.number(),
-    }),
-  ),
-  decisionsRequired: z.array(
-    z.object({
-      id: z.string(),
-      title: z.string(),
-      recommendedAction: z.string().nullable(),
-    }),
-  ),
-  upcomingHearings: z.array(
-    z.object({
-      id: z.string(),
-      title: z.string(),
-      date: z.string(),
-      committeeName: z.string().nullable(),
-    }),
-  ),
-  billMovement: z.array(
-    z.object({
-      id: z.string(),
-      display: z.string(),
-      status: z.string().nullable(),
-      statusAt: z.string().nullable(),
-    }),
-  ),
-  clientImplications: z.array(
-    z.object({
-      clientId: z.string(),
-      clientName: z.string(),
-      band: z.string(),
-    }),
-  ),
-  recommendedActions: z.array(z.string()),
-  provenance: z.object({
-    sourceFamilies: z.array(z.string()),
-    officialRecordCount: z.number(),
-    captureCount: z.number(),
-  }),
-});
 export const legiwatchAnalyticsOperations = {
   "legiwatch.analytics.summary": defineOperation({
     service: "core",
@@ -175,49 +122,6 @@ export const legiwatchAnalyticsOperations = {
         }),
       ),
     }),
-    source,
-  }),
-  "legiwatch.digest.history": defineOperation({
-    service: "core",
-    method: "GET",
-    path: `${base}/digest/history`,
-    request: z
-      .object({
-        query: scope
-          .extend({ limit: z.number().int().min(1).max(100).optional() })
-          .strict(),
-      })
-      .strict(),
-    response: z.object({
-      rows: z.array(
-        z.object({
-          id: z.string(),
-          generatedAt: z.string(),
-          itemCount: z.number(),
-          decisionCount: z.number(),
-          sourceFamilies: z.array(z.string()),
-        }),
-      ),
-    }),
-    source,
-  }),
-  "legiwatch.digest.run": defineOperation({
-    service: "core",
-    method: "GET",
-    path: `${base}/digest/:id`,
-    request: z
-      .object({ params: z.object({ id: z.string().min(1).max(180) }).strict() })
-      .strict(),
-    response: digestRun,
-    source,
-  }),
-  "legiwatch.digest.generate": defineOperation({
-    service: "core",
-    method: "POST",
-    path: `${base}/digest/generate`,
-    request: z.object({ query: scope }).strict(),
-    response: digestRun,
-    timeoutMs: 180000,
     source,
   }),
 } as const;

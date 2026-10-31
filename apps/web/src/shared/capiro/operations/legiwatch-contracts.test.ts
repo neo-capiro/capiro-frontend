@@ -79,7 +79,7 @@ describe("verified LegiWatch contract boundaries", () => {
   });
   it("rejects a delivery without the reviewed composition approval hash", () => {
     expect(
-      legiwatchOperations["legiwatch.report.send"].request.safeParse({
+      legiwatchOperations["legiwatch.delivery.send"].request.safeParse({
         params: { id: "run-1" },
         body: {
           subject: "Update",

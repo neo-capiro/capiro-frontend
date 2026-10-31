@@ -12,7 +12,6 @@ export const workflowTemplates = [
   "hearing_preparation",
   "added_bill_review",
   "published_review",
-  "report_review",
 ] as const;
 const template = z.enum(workflowTemplates);
 const config = z
@@ -20,17 +19,11 @@ const config = z
     folderIds: z.array(monitorId).min(1).max(20),
     jurisdiction: z.string().regex(/^[A-Z]{2}$/),
     sessionKey: z.string().min(1).max(60),
-    reportId: monitorId.optional(),
   })
   .strict();
 const definition = z
   .object({ name: z.string().trim().min(1).max(200), template, config })
-  .strict()
-  .refine(
-    (body) =>
-      body.template !== "report_review" || Boolean(body.config.reportId),
-    "Choose a report for report review.",
-  );
+  .strict();
 export const workflow = z.object({
   id: z.string(),
   name: z.string(),
@@ -59,10 +52,8 @@ const frozenInput = z.object({
   sessionKey: z.string(),
   eventId: z.string().nullable().optional(),
   billId: z.string().nullable().optional(),
-  reportId: z.string().nullable().optional(),
   selectionId: z.string().nullable().optional(),
   eventRevision: z.number().nullable().optional(),
-  reportVersion: z.number().nullable().optional(),
   contextHash: z.string().optional(),
   workflowVersion: z.number().optional(),
 });
@@ -79,7 +70,6 @@ export const workflowAction = z.object({
     draftId: z.string().optional(),
     contextItemId: z.string().optional(),
     recordRunId: z.string().optional(),
-    reportRunId: z.string().optional(),
   }),
 });
 const folderRequest = z

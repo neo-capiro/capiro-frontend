@@ -3,8 +3,8 @@ import { useState } from "react";
 import type { z } from "zod";
 import {
   compositionBodySchema,
-  type FrozenReportRun,
-} from "../../../../../shared/capiro/operations/legiwatch-report-schemas";
+  type FrozenDeliveryRun,
+} from "../../../../../shared/capiro/operations/legiwatch-delivery-schemas";
 import {
   useCapiroMutation,
   useCapiroQuery,
@@ -20,16 +20,16 @@ import styles from "../legiwatch.module.css";
 import { RecipientPicker } from "./RecipientPicker";
 
 type Body = z.infer<typeof compositionBodySchema>;
-export function ReportCompose({
+export function DeliveryCompose({
   run,
   onQueued,
 }: {
-  run: FrozenReportRun;
+  run: FrozenDeliveryRun;
   onQueued: () => void;
 }) {
-  const directory = useCapiroQuery("legiwatch.report.recipients", {}),
-    preview = useCapiroMutation("legiwatch.report.compose"),
-    send = useCapiroMutation("legiwatch.report.send");
+  const directory = useCapiroQuery("legiwatch.delivery.recipients", {}),
+    preview = useCapiroMutation("legiwatch.delivery.compose"),
+    send = useCapiroMutation("legiwatch.delivery.send");
   const [body, setBody] = useState<Body>({
       subject: `Legislative update · ${run.cutoff}`,
       introduction: "",

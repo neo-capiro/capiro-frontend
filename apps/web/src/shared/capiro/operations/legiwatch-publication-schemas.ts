@@ -2,7 +2,7 @@ import { z } from "zod";
 import {
   recipientSchema,
   recipientSelectionSchema,
-} from "./legiwatch-report-schemas";
+} from "./legiwatch-delivery-schemas";
 export const publicationKindSchema = z.enum(["live_update", "hearing_recap"]);
 export const publicationEvidenceSchema = z.object({
   segmentId: z.string(),
