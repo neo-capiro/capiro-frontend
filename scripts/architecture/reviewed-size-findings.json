@@ -57,18 +57,18 @@
     "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
     "kind": "function",
     "symbol": "SessionDebriefGeneration",
-    "fingerprint": "71e284bf054c5262c19820e5afa6b323767db6541242c682179d1dd815b78c86",
-    "reason": "This component coordinates one reviewed source-to-debrief draft operation. Each source input has a dedicated dialog and remote generation belongs to the generation adapter. Local source retention, busy/error state and lifetime checks describe the same attempt; saved-artifact writes are outside it. Splitting those states without another responsibility would obscure attempt ownership. Re-reviewed at frontend 4aa2038e (518 nonblank) after releasing the settled terminal attempt key; fingerprint recomputed from these bytes, unchanged responsibility (one reviewed source-to-draft attempt).",
-    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at this head)",
+    "fingerprint": "a4e498bbfdb0db9257d15ded00083df48674e980cf705e1a139b61a5e3fa8a2e",
+    "reason": "This component coordinates one reviewed source-to-debrief draft operation. Each source input has a dedicated dialog and remote generation belongs to the generation adapter. Local source retention, busy/error state and lifetime checks describe the same attempt; saved-artifact writes are outside it. Splitting those states without another responsibility would obscure attempt ownership. Re-reviewed at frontend 3e579674 (518 nonblank) with the D2 context-save threading on the corrected job client; fingerprint recomputed from these bytes.",
+    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at the corrected parent, D2 delta inspected)",
     "reviewedOn": "2026-10-11"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "0815b3f3d61c116c0cc555f20d8b085c4f857cd61777b7f397048ec076d26825",
-    "reason": "Exact-head structure review at frontend 4aa2038e (572 nonblank): one identity-keyed entry point, one session component and the small presentation pieces for source selection, recovery notice, progress, terminal-without-draft dismissal and failure inside the same dialog. Everything reusable (schemas, job client, polling helper, failure mapping, request-key minting) lives in debrief/api.ts and the controls are plain buttons on the existing Dialog. The module grew with the D1 job lifecycle and its corrections and gained no second transport or state owner; splitting the dialog body out would be a mechanical extraction, not a correction, and is not required to accept this behaviour.",
-    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at this head)",
+    "fingerprint": "9fe26215a167f240e4a2a12edb7d226a44afef611f117f1d6712b793eb51b598",
+    "reason": "Exact-head structure review at frontend 4aa2038e (572 nonblank): one identity-keyed entry point, one session component and the small presentation pieces for source selection, recovery notice, progress, terminal-without-draft dismissal and failure inside the same dialog. Everything reusable (schemas, job client, polling helper, failure mapping, request-key minting) lives in debrief/api.ts and the controls are plain buttons on the existing Dialog. The module grew with the D1 job lifecycle and its corrections and gained no second transport or state owner; splitting the dialog body out would be a mechanical extraction, not a correction, and is not required to accept this behaviour. Re-reviewed at frontend 3e579674 (577 nonblank) with the D2 context-save threading on the corrected job client; fingerprint recomputed from these bytes.",
+    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at the corrected parent, D2 delta inspected)",
     "reviewedOn": "2026-10-31"
   },
   {
@@ -2346,18 +2346,18 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "9a8882b349b4ce553aae6ead42582a57a770cfe3e0c2175625777f339994e12b",
-    "reason": "Module for the meeting-artifacts surface. Contains the exported MeetingArtifacts identity gate and its private ArtifactEditor, which together present one notes/debriefs artifact list and its edit/approve/share/preview dialogs. Artifact writes are delegated to useArtifactMutation, the command lifecycle to MeetingCommandStatus, debrief generation to DebriefGeneration and PDF preview to SavedMeetingDocumentPreview. One cohesive surface with the portfolio/calendar meeting-artifacts owner; size comes from the notes- and debriefs-mode list plus its guarded dialogs, not a second concern.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
+    "fingerprint": "b428990c3a22a8cfa36a0d57c341ab81489a8a688e00dba0195dd76049790a27",
+    "reason": "Module for the meeting-artifacts surface. Contains the exported MeetingArtifacts identity gate and its private ArtifactEditor, which together present one notes/debriefs artifact list and its edit/approve/share/preview dialogs. Artifact writes are delegated to useArtifactMutation, the command lifecycle to MeetingCommandStatus, debrief generation to DebriefGeneration and PDF preview to SavedMeetingDocumentPreview. One cohesive surface with the portfolio/calendar meeting-artifacts owner; size comes from the notes- and debriefs-mode list plus its guarded dialogs, not a second concern. Re-reviewed at frontend 3e579674 (504 nonblank) with the D2 context-save threading on the corrected job client; fingerprint recomputed from these bytes.",
+    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at the corrected parent, D2 delta inspected)",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "function",
     "symbol": "ArtifactEditor",
-    "fingerprint": "5f691cc050dd7b00ae1aad07cbffe58c3346f9bff2edd50dc45ec936b3d0454b",
-    "reason": "Private component owning the single meeting-artifact editor for one kind: row rendering, edit/share/preview dialog state, and the revision/authority staleness checks in assertReadable/readableRows that fence every change. Write execution is owned by useArtifactMutation and command status by MeetingCommandStatus. One responsibility (present and gate artifact changes) under the meeting-artifacts surface owner; no second data or authority owner is introduced.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
+    "fingerprint": "5c9016c8f0e019111f4bf8431f4f9f9ae85817783b84985f2bdcd0cd987893d3",
+    "reason": "Private component owning the single meeting-artifact editor for one kind: row rendering, edit/share/preview dialog state, and the revision/authority staleness checks in assertReadable/readableRows that fence every change. Write execution is owned by useArtifactMutation and command status by MeetingCommandStatus. One responsibility (present and gate artifact changes) under the meeting-artifacts surface owner; no second data or authority owner is introduced. Re-reviewed at frontend 3e579674 (450 nonblank) with the D2 context-save threading on the corrected job client; fingerprint recomputed from these bytes.",
+    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at the corrected parent, D2 delta inspected)",
     "reviewedOn": "2026-10-27"
   },
   {
