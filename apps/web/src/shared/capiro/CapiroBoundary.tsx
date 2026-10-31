@@ -11,6 +11,10 @@ import {
 import { RequireSession } from "../session/SessionContext";
 import { SelectedClientGate } from "../session/SelectedClient";
 import type { CapiroPublicConfig } from "./config";
+import {
+  CapiroCapabilitiesProvider,
+  UNKNOWN_CAPABILITIES,
+} from "./capabilities";
 import { createCapiroApi, type CapiroApi } from "./http";
 import { capiroOperations } from "./registry";
 import type { OperationRegistry } from "./contracts";
@@ -77,13 +81,17 @@ export function CapiroBoundary({
       </section>
     );
   return (
-    <RequireSession>
-      {clientScopeRequired ? (
-        <SelectedClientGate>{children}</SelectedClientGate>
-      ) : (
-        children
-      )}
-    </RequireSession>
+    <CapiroCapabilitiesProvider
+      capabilities={config.capabilities ?? UNKNOWN_CAPABILITIES}
+    >
+      <RequireSession>
+        {clientScopeRequired ? (
+          <SelectedClientGate>{children}</SelectedClientGate>
+        ) : (
+          children
+        )}
+      </RequireSession>
+    </CapiroCapabilitiesProvider>
   );
 }
 

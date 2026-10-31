@@ -1256,10 +1256,10 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
     "kind": "function",
     "symbol": "StagingSelection",
-    "fingerprint": "13418862425340f1aa45cfdfe8e3ee5ca5f7f9449929bce319bbe9dc671634ba",
-    "reason": "One four-state review interaction delegates transactions, journal, current authorization and receipt verification to the existing staging owners. Splitting this cohesive modal solely for line count would scatter the same view state. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
-    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "0c97c921767a7c6effbc7664dedc5ecd5f5ad1c29a49c9f78fbf3cd4a77b8dcc",
+    "reason": "The existing four-state staging modal keeps transaction, journal, authorization and immutable receipt verification in its existing owners. This change only adds the introductory delivery panel and scoped presentation. Splitting this coherent view solely for its size would scatter the retained lifecycle. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
+    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
@@ -4028,19 +4028,19 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "f9c9806c8a370ac9980e5d2b06b875f261a17141fc7877e1464afe5a8e00aa5a",
-    "reason": "The existing Basic workflow adds inert content preview and explicit conversion handoff while retaining its current save, scope, history and recovery owners.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "1f0c87922f3e52761e86c285786618c723c710b3232ca20f29b7c0934ec927a4",
+    "reason": "One basic-newsletter presentation composes the existing editor, save/recovery, conversion, comment and staging owners. New layout and shared keyboard tabs do not change persistence or authority. The review query is owned once and supplied to Comments so displayed counts and rows refresh together. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
+    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
     "kind": "function",
     "symbol": "NewsletterEditor",
-    "fingerprint": "9f2671399af3746adb5a5664f00ac423b6d6750b234c1817f934fc4aaaf66250",
-    "reason": "The existing editor owns the source snapshot and deliberate conversion action, retaining unsaved changes and current identity checks across the local handoff.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "fe111da6fab1945fadeb048eb207eb85f54e04af41cc2bdd42414885484cee5b",
+    "reason": "One basic-newsletter presentation composes the existing editor, save/recovery, conversion, comment and staging owners. New layout and shared keyboard tabs do not change persistence or authority. The review query is owned once and supplied to Comments so displayed counts and rows refresh together. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
+    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
@@ -4136,10 +4136,10 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "6ee25a3ee11079be3d516232ef735986ae93022c1c81656944d16c918c859bca",
-    "reason": "One four-state review interaction delegates transactions, journal, current authorization and receipt verification to the existing staging owners. Splitting this cohesive modal solely for line count would scatter the same view state. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
-    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "ae9c47df5ea95eab0e0358b7061286cd383343a3fb4e90bff16de14c75405c54",
+    "reason": "The existing four-state staging modal keeps transaction, journal, authorization and immutable receipt verification in its existing owners. This change only adds the introductory delivery panel and scoped presentation. Splitting this coherent view solely for its size would scatter the retained lifecycle. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
+    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
@@ -7470,18 +7470,18 @@
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "3e6393a862f5c0695ca6532ef4f48400f65c7c3c2a9852895d73de3175db981d",
-    "reason": "Independent exact-source structure review at a71b496ec955ec8fd2109fbe77665dae75a0ecb7 (475 nonblank). The module still owns one paginated Outreach list and its small campaign-row renderer; the existing list model owns label/category projection and the shared query layer owns transport. This correction adds local ancillary-session availability, partial-result presentation and row deduplication within that same read-only list. It introduces no sending, generation or backend authorization responsibility, so the size increase does not justify a split.",
-    "reviewedBy": "Codex /root/portfolio_merged_review/debrief314_correction_job_review (independent GPT-6 Astra Ultra design review)",
+    "fingerprint": "a7adaa3bf4a8fc967561a698b96c02ff17ab6e29bffc2cc95185d6a23c786bb8",
+    "reason": "Independent exact-source review at e4e15ef9332bda929a64d327fb039eb22b115342 (498 nonblank). This remains one paginated Outreach list with its row renderer. The server-owned capability only controls ancillary query admission and truthful unavailable presentation; the list model owns admission, shared query effects own cancellation and transport, and the capability module owns deployment interpretation. Actual Chromium callbacks verified disabled search, paging, rerender and canonical retry issue zero session requests; enabled rows, dedup, pagination and fallback remain. No send or authorization responsibility was added, so further fragmentation is not warranted.",
+    "reviewedBy": "Codex /root/lanes_source_finish_high (independent high-reasoning review of original02751a source)",
     "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "function",
     "symbol": "OutreachList",
-    "fingerprint": "b173734e6ae836b7a75915b06f377c630c4e98dc35bfc4d0c43e01aa38faf182",
-    "reason": "Independent exact-source structure review at a71b496ec955ec8fd2109fbe77665dae75a0ecb7 (382 nonblank). The component coordinates the three existing read sources, selected filters, independent cursors and visible rows for one list lifetime. Separating ancillary-session loading/error presentation from the canonical reads, guarding session-row inclusion and deduplicating the loaded session page are local list-composition decisions. The added notice and retry control use that existing query owner; splitting stateful subcomponents solely to reduce line count would not remove a separate responsibility.",
-    "reviewedBy": "Codex /root/portfolio_merged_review/debrief314_correction_job_review (independent GPT-6 Astra Ultra design review)",
+    "fingerprint": "570cc5cf47d624355957423761281daecb4be520578b4c6b4c25de33e803ca71",
+    "reason": "Independent exact-source review at e4e15ef9332bda929a64d327fb039eb22b115342 (403 nonblank). The component still coordinates three reads, filters, cursors and visible rows for one list lifetime. Capability-aware admission and the unavailable notice belong to that same composition; they do not add a service lifecycle or duplicate configuration parsing. Actual query effects and callback tests cover enabled/unknown/disabled transitions, retry, pagination and unchanged client/deleted/date gates. Splitting this state solely for line count would obscure rather than simplify its shared filter lifetime.",
+    "reviewedBy": "Codex /root/lanes_source_finish_high (independent high-reasoning review of original02751a source)",
     "reviewedOn": "2026-10-31"
   },
   {
@@ -7545,6 +7545,33 @@
     "fingerprint": "91688fbe3822266857e3b336b9c988b3ca4dc0732de96a7647612818a5880195",
     "reason": "At frontend 73333456b6ec336c5cdfc2ebe94db1101039ed7a this function coordinates one scoped preparation's displayed record, generation progress and child-dialog state. Its admission, busy-state and legacy-read-only decisions need the same meeting/job identity; effects remain in existing hooks and APIs and presentation remains delegated to child components. Keeping the current coordinator is cohesive despite the long conditional JSX.",
     "reviewedBy": "Codex independent portfolio_merged_review (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/newsletter-figma.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "2e28e59ba8e5861c476763167584c8b94b327e5146c8ff3b8e93551d1fd26f8b",
+    "reason": "One feature-scoped visual contract owns template, builder, review and stage geometry. It composes existing shared controls without changing shell/global tokens. Unused new selectors were removed; splitting by line count would obscure this four-frame contract. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
+    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterComments.tsx",
+    "kind": "function",
+    "symbol": "NewsletterComments",
+    "fingerprint": "131892c4f766ed936bfd4969408fe7a675b8b3f72bf27f81505372b04a71d41e",
+    "reason": "One comment interaction renders open/resolved rows and delegates reads and mutations to the existing fixed operation boundary. When composed by the workflow it uses the parent query, so counts and rows share reload ownership; standalone use keeps its original query. No alternate persistence or authority is introduced. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
+    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterTemplates.tsx",
+    "kind": "function",
+    "symbol": "SelectTemplate",
+    "fingerprint": "1738595f3b5615727224dcb1fa6c7183957d002577bb54fe73e79da6c1f28e42",
+    "reason": "One template selection interaction filters the existing preset catalog. Shared Tabs own keyboard behavior; library tabs link to canonical Workspace/Templates surfaces without duplicate reads or truncated listings. It creates no persistence or authorization mechanism. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
+    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
     "reviewedOn": "2026-10-31"
   }
 ]

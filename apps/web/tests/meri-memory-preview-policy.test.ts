@@ -13,6 +13,86 @@ const request = (method: string, path: string) =>
   new Request(`${origin}${path}`, { method });
 
 describe("held personal memory preview routes", () => {
+  it("admits bounded history/evidence reads without widening the owner-list contract", () => {
+    for (const leaf of ["versions", "evidence"]) {
+      for (const query of ["", "?limit=1", "?limit=25", "?limit=100"]) {
+        expect(
+          previewMemoryOwnerRoute(
+            request("GET", `/api/memory/owner/items/${id}/${leaf}${query}`),
+          ),
+        ).toBe(true);
+      }
+      for (const query of [
+        "?limit=0",
+        "?limit=101",
+        "?limit=01",
+        "?limit=1e1",
+        "?limit=25&limit=25",
+        "?tenant=foreign",
+        "?cursor=",
+        "?cursor=a&cursor=b",
+        "#fragment",
+      ]) {
+        expect(
+          previewMemoryOwnerRoute(
+            request("GET", `/api/memory/owner/items/${id}/${leaf}${query}`),
+          ),
+        ).toBe(false);
+      }
+      for (const method of ["HEAD", "POST", "PUT", "DELETE"]) {
+        expect(
+          previewMemoryOwnerRoute(
+            request(method, `/api/memory/owner/items/${id}/${leaf}`),
+          ),
+        ).toBe(false);
+      }
+      for (const path of [
+        `${id}/${leaf}/extra`,
+        `${id}/${leaf}/`,
+        `clio:${id}/${leaf}`,
+        `not-a-uuid/${leaf}`,
+        `${id.replace(/^1/, "A")}/${leaf}`,
+        `${id}%2fextra/${leaf}`,
+      ]) {
+        expect(
+          previewMemoryOwnerRoute(
+            request("GET", `/api/memory/owner/items/${path}`),
+          ),
+        ).toBe(false);
+      }
+    }
+    expect(
+      previewMemoryOwnerRoute(
+        request(
+          "GET",
+          `/api/memory/owner/items/${id}/versions?cursor=${"a".repeat(512)}`,
+        ),
+      ),
+    ).toBe(true);
+    for (const cursor of ["a".repeat(513), "a%2Bb", "%00"]) {
+      expect(
+        previewMemoryOwnerRoute(
+          request(
+            "GET",
+            `/api/memory/owner/items/${id}/versions?cursor=${cursor}`,
+          ),
+        ),
+      ).toBe(false);
+    }
+    expect(
+      previewMemoryOwnerRoute(
+        request(
+          "GET",
+          `/api/memory/owner/items/${id}/evidence?cursor=valid_base64url`,
+        ),
+      ),
+    ).toBe(false);
+    expect(
+      previewMemoryOwnerRoute(
+        request("GET", "/api/memory/owner/items?limit=100"),
+      ),
+    ).toBe(false);
+  });
   it("allocates Clerk proxy coverage for the memory owner family", () => {
     expect(proxyConfig.matcher).toContain("/api/memory/owner/:path*");
   });
@@ -63,6 +143,8 @@ describe("held personal memory preview routes", () => {
     };
     for (const candidate of [
       request("GET", "/api/memory/owner/candidates?limit=50"),
+      request("GET", `/api/memory/owner/items/${id}/versions?limit=25`),
+      request("GET", `/api/memory/owner/items/${id}/evidence?limit=25`),
       request("POST", `/api/memory/owner/candidates/${id}/decision`),
       request("POST", `/api/memory/owner/items/${id}/corrections`),
     ]) {

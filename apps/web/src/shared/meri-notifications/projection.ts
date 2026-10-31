@@ -186,8 +186,8 @@ export type UpdatesProjection = Readonly<{
   memoryNotifications: FeedObservation | "not-enabled";
   runOutcomes: FeedObservation;
   preferences: "verified" | "unverified";
-  /** The run source is one recent permitted page, not complete delivery history. */
-  runCoverage: "recent-page";
+  /** Explicitly loaded authorized pages, never a delivery-history snapshot. */
+  runCoverage: "paged-observation";
 }>;
 
 export function projectUpdates(input: {
@@ -307,6 +307,6 @@ export function projectUpdates(input: {
           : "observed",
     runOutcomes: runsUnavailable ? "unavailable" : "observed",
     preferences: verified ? "verified" : "unverified",
-    runCoverage: "recent-page",
+    runCoverage: "paged-observation",
   });
 }
