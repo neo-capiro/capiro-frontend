@@ -283,6 +283,7 @@ export function PortfolioIndex({
                         <ProspectResults
                           coreRows={rows}
                           rows={visibleProspects}
+                          sort={state.sort}
                           view={state.view}
                           owners={prospectiveOwnerById}
                           coreOwners={owners.error ? undefined : owners.data}
@@ -379,10 +380,7 @@ export function PortfolioIndex({
           </section>
         </div>
         {records && <GlobalQuickLog clients={records} />}
-        <CreateProfileDialog
-          open={creating}
-          onOpenChange={setCreating}
-        />
+        <CreateProfileDialog open={creating} onOpenChange={setCreating} />
         {state.type === "PROSPECT" &&
           params.get("pipeline") === "1" &&
           prospectData && (
