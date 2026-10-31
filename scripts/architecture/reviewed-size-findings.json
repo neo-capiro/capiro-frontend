@@ -57,9 +57,9 @@
     "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
     "kind": "function",
     "symbol": "SessionDebriefGeneration",
-    "fingerprint": "532eef603943133a92bd6cd024d50bfd127ff768804bb29bf9fccbcf92125f99",
-    "reason": "Exact-head structure review at frontend f7d342b3a1562fc87ecdee4014092f2723243689 (387 nonblank): still one reviewed source-to-draft attempt. It owns the chosen source, one requestKey per attempt, one job handle, polling to a terminal state, cancel/resume and failure copy; the saved-artifact write stays outside it (it hands the composed body to onDraft). The identity-keyed wrapper above it is a separate function. Adding the job lifecycle deepens the existing attempt ownership rather than introducing a new domain responsibility, so no split is warranted.",
-    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes)",
+    "fingerprint": "b797fe887a46216fc4b99fc781c68beb4ad752e18b338af68d70a40450365a99",
+    "reason": "Exact-head structure review at frontend c145eab1 (513 nonblank after the lifecycle corrections): still one reviewed source-to-draft attempt. It owns the chosen source, the request key bound to that source, one job handle, an explicit mount-recovery admission state, polling to a terminal state, per-actor/per-meeting lifetime, cancel/retry and failure copy; the saved-artifact write stays outside it (it hands the composed body to onDraft). The four corrections are lifecycle transitions of that same attempt - uncertain-outcome key retention, recovery admission, terminal-without-draft dismissal and completion re-admission - not new domains. The growth is explanatory comments plus four small branches; transport, schemas, polling and failure mapping remain in debrief/api.ts. Splitting the dialog rendering from the attempt state would be a mechanical extraction, not a correction, and is not required to accept this behaviour.",
+    "reviewedBy": "Hermes Lane 1 agent (user-assigned AGENT-01-MEETINGS-PORTFOLIO; exact-head fingerprint from these bytes; reviewer component witness 8/8 at this head)",
     "reviewedOn": "2026-10-31"
   },
   {
@@ -7542,9 +7542,9 @@
     "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "5e7b291c14353febda34e6d25c7c7b3d05bfa2654d0769de35dbd99f821a82d3",
-    "reason": "Exact-head structure review at frontend f7d342b3 (441 nonblank): the module holds one identity-keyed entry point, one session component and the small presentation pieces for source selection, progress and failure inside the same dialog. Everything reusable (schemas, job client, polling helper, failure mapping, request-key minting) already lives in debrief/api.ts, and the retry/cancel controls are plain buttons on the existing Dialog. Comparable to the already-reviewed MeetingPreparation module (437) for the same reason: one feature seam, no second transport or state owner.",
-    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes)",
+    "fingerprint": "8a9ea657bfe60ecf91a3f79a3a446d6045988bb3c414053b005585c870eb954b",
+    "reason": "Exact-head structure review at frontend c145eab1 (567 nonblank): one identity-keyed entry point, one session component and the small presentation pieces for source selection, recovery, progress, terminal-without-draft dismissal and failure inside the same dialog. Everything reusable (schemas, job client, polling helper, failure mapping, request-key minting) still lives in debrief/api.ts and the controls are plain buttons on the existing Dialog. The module grew with the four returned lifecycle corrections and their comments and gained no second transport or state owner. Accepting this behaviour does not depend on splitting it; extracting the dialog body would be mechanical follow-up if the module grows again.",
+    "reviewedBy": "Hermes Lane 1 agent (user-assigned AGENT-01-MEETINGS-PORTFOLIO; exact-head fingerprint from these bytes)",
     "reviewedOn": "2026-10-31"
   }
 ]
