@@ -15,6 +15,29 @@ const decision = new RegExp(
   `^/api/memory/owner/candidates/${uuid}/(?:decision|version-decision)$`,
 );
 const correction = new RegExp(`^/api/memory/owner/items/${uuid}/corrections$`);
+const ownerItemUuid =
+  "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
+const ownerRead = new RegExp(
+  `^/api/memory/owner/items/${ownerItemUuid}/(versions|evidence)$`,
+);
+
+function ownerReadPage(query: URLSearchParams, kind: string): boolean {
+  if (
+    [...query.keys()].some((key) => key !== "limit" && key !== "cursor") ||
+    query.getAll("limit").length > 1 ||
+    query.getAll("cursor").length > 1
+  )
+    return false;
+  const limit = query.get("limit");
+  if (limit !== null && !/^(?:[1-9]|[1-9][0-9]|100)$/.test(limit)) return false;
+  const cursor = query.get("cursor");
+  return (
+    cursor === null ||
+    (kind === "versions" &&
+      cursor.length <= 512 &&
+      /^[A-Za-z0-9_-]+$/.test(cursor))
+  );
+}
 
 function candidatePage(query: URLSearchParams): boolean {
   if ([...query.keys()].some((key) => key !== "limit" && key !== "cursor"))
@@ -56,6 +79,8 @@ export function previewMemoryOwnerRoute(request: Request): boolean {
   const url = new URL(request.url);
   if (url.hash) return false;
   if (request.method === "GET") {
+    const read = ownerRead.exec(url.pathname);
+    if (read) return ownerReadPage(url.searchParams, read[1]!);
     if (url.pathname === "/api/memory/owner/candidates")
       return candidatePage(url.searchParams);
     if (url.pathname === "/api/memory/owner/items")

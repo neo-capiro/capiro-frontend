@@ -394,6 +394,7 @@ describe("Core-owned personal memory review proxy", () => {
     const fetcher = vi.fn<typeof fetch>(async () =>
       Response.json({
         schemaVersion: 1,
+        ownerReadsVersion: 1,
         items: page.items.map((entry) => ({ ...entry, internalOnly: true })),
         nextCursor: page.nextCursor,
         internalOnly: true,
@@ -410,12 +411,20 @@ describe("Core-owned personal memory review proxy", () => {
     expect(response.headers.get("cache-control")).toBe("private, no-store");
     const wire = await response.json();
     expect(receiveOwnerCorrectionPage(wire)).toEqual({
-      items: page.items,
+      ownerReadsVersion: 1,
+      items: page.items.map((entry) => ({
+        ...entry,
+        reference: { kind: "item", id: entry.id },
+      })),
       nextCursor: page.nextCursor,
     });
     expect(wire).toEqual({
       schemaVersion: 1,
-      items: page.items,
+      ownerReadsVersion: 1,
+      items: page.items.map((entry) => ({
+        ...entry,
+        reference: { kind: "item", id: entry.id },
+      })),
       nextCursor: page.nextCursor,
     });
     expect(fetcher).toHaveBeenCalledTimes(1);
@@ -427,7 +436,12 @@ describe("Core-owned personal memory review proxy", () => {
   it("pages only caller-owned canonical personal items from Core", async () => {
     const nextCursor = "opaque_page_2";
     const fetcher = vi.fn<typeof fetch>(async () =>
-      Response.json({ schemaVersion: 1, items: [item], nextCursor }),
+      Response.json({
+        schemaVersion: 1,
+        ownerReadsVersion: 1,
+        items: [item],
+        nextCursor,
+      }),
     );
     const response = await proxyOwnerMemoryReview(
       itemsRequest(),
@@ -439,7 +453,8 @@ describe("Core-owned personal memory review proxy", () => {
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({
       schemaVersion: 1,
-      items: [item],
+      ownerReadsVersion: 1,
+      items: [{ ...item, reference: { kind: "item", id: item.id } }],
       nextCursor,
     });
     expect(fetcher.mock.calls[0]![0]).toBe(
@@ -462,15 +477,22 @@ describe("Core-owned personal memory review proxy", () => {
     for (const page of [
       {
         schemaVersion: 1,
+        ownerReadsVersion: 1,
         items: [{ ...item, scope: "firm_shared" }],
         nextCursor: null,
       },
       {
         schemaVersion: 1,
+        ownerReadsVersion: 1,
         items: [{ ...item, updatedAt: "2026-10-18T12:34:56.123Z" }],
         nextCursor: null,
       },
-      { schemaVersion: 1, items: [], nextCursor: "not-exhausted" },
+      {
+        schemaVersion: 1,
+        ownerReadsVersion: 1,
+        items: [],
+        nextCursor: "not-exhausted",
+      },
       { schemaVersion: 2, items: [], nextCursor: null },
     ]) {
       const response = await proxyOwnerMemoryReview(
