@@ -27,6 +27,7 @@ import { workspaceNotificationOperations } from "./workspace-notifications";
 import { richNewsletterReviewOperations } from "./rich-newsletter-review";
 import { richNewsletterCollaborationOperations } from "./rich-newsletter-collaboration";
 export const workspaceOperations = {
+  ...workspaceMetricOperations,
   ...workspaceProspectGenerationOperations,
   ...workspaceProspectPublicationOperations,
   ...richNewsletterCollaborationOperations,
@@ -56,3 +57,4 @@ export const workspaceOperations = {
   ...workspaceProspectSaveOperations,
   ...newsletterStagingOperations,
 } as const;
+import { workspaceMetricOperations } from "./workspace-metrics";

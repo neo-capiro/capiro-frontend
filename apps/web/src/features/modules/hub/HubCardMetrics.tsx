@@ -4,6 +4,8 @@ import type { ModuleSlug } from "../../../shared/shell/module-catalog";
 import { HubMetric } from "./HubMetric";
 import { useHubFundingMetric } from "./useHubFundingMetric";
 import { useHubDirectoryMetric } from "./useHubDirectoryMetric";
+import { useHubOwnedMetrics } from "./useHubOwnedMetrics";
+import { ownedMetrics, type OwnedMetricModule } from "./hub-owned-metrics";
 
 export function HubCardMetrics({
   module,
@@ -14,6 +16,8 @@ export function HubCardMetrics({
 }) {
   if (module === "intelligence") return <FundingMetric clientId={clientId} />;
   if (module === "directory") return <DirectoryMetric />;
+  if (module === "planner" || module === "strategies" || module === "workspace")
+    return <OwnedMetric module={module} clientId={clientId} />;
   return (
     <HubMetric
       label="Activity metrics"
@@ -22,6 +26,35 @@ export function HubCardMetrics({
         reason: "Module totals are not yet available.",
       }}
     />
+  );
+}
+
+function OwnedMetric({
+  module,
+  clientId,
+}: {
+  module: OwnedMetricModule;
+  clientId: string;
+}) {
+  const metric = useHubOwnedMetrics(module, clientId);
+  const definition = ownedMetrics[module];
+  return (
+    <section aria-label={`${definition.label} metrics`}>
+      <HubMetric label={definition.label} state={metric.state} />
+      <p>
+        {clientId ? "Selected client" : "All accessible work"}
+        {" · "}
+        {definition.basis}
+      </p>
+      {metric.notice && <small>{metric.notice}</small>}
+      <button
+        type="button"
+        onClick={metric.refresh}
+        disabled={!metric.canRefresh || metric.state.status === "loading"}
+      >
+        Refresh {definition.label.toLowerCase()}
+      </button>
+    </section>
   );
 }
 
