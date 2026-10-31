@@ -65,7 +65,7 @@ export function historyRows(
     title: summary.title,
     client:
       summary.scopeKind === "research_portfolio"
-        ? `Research � ${summary.scope.researchPortfolioName}`
+        ? `Research · ${summary.scope.researchPortfolioName}`
         : summary.clientId === null
           ? GENERAL_CLIENT_FILTER
           : clientName(summary.clientId),
