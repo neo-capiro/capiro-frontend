@@ -978,6 +978,34 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "Reviewed upload request recovery and legislative ancestor correction, preserving native450, SQL449 and Office448 source; ui-stream peer-only successor."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.42-d8357230-79aff3bffff9.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.42",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "d8357230e4b5f9be82080b065f964369079ec7af",
+   "sourceTree": "076929da9fab00d5cae22841eea2f96121dd1a92",
+   "bytes": 1857979,
+   "sha256": "79aff3bffff9599281c07d769a6a38065677b2f3b51a293140ce1113b8774332",
+   "integrity": "sha512-8CX14JHA9kVsptdUa5JVAb3bLRb97Xqh5DVJj5VwRfoN5un0L28Iq9cr7F6u07PRCb0k23Ib0m/PWPKUQuLhyA==",
+   "regularEntryCount": 119,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Accepted Office original import and recovery, preserving all unaffected public members; ui-stream peer-only successor."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.28-d8357230-e7caf5249383.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.28",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "d8357230e4b5f9be82080b065f964369079ec7af",
+   "sourceTree": "076929da9fab00d5cae22841eea2f96121dd1a92",
+   "bytes": 3843,
+   "sha256": "e7caf524938352123da4415f7c2718d1281dbda038b3b7fd15bbe843a81197b4",
+   "integrity": "sha512-pDvkRh9N0HMZBFo85FGlMsnh0DWRDEulLZqnFcpxw0MmLwvXP8siR5kP454jcMIC8o+wfJVvbvBenMQd0V6rKw==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Accepted Office original import and recovery, preserving all unaffected public members; ui-stream peer-only successor."
   }
  ]
 }
