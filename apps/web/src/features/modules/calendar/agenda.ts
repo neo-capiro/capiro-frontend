@@ -100,7 +100,9 @@ export function commentDeadlineItems(
 }
 export function fundingDeadlineItems(records: FundingRecord[]): AgendaItem[] {
   return records.flatMap((record) =>
-    record.deadline && /^\d{4}-\d{2}-\d{2}/.test(record.deadline)
+    record.source !== "agency_forecast" &&
+    record.deadline &&
+    /^\d{4}-\d{2}-\d{2}/.test(record.deadline)
       ? [
           {
             key: `funding:${record.source}:${record.sourceRecordId}`,
