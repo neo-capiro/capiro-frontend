@@ -17,11 +17,15 @@ describe("available client view navigation", () => {
       w: "/work",
       k: "/capabilities",
       q: "/opportunities",
+      b: "/bills",
       f: "/files",
     });
     expect(new Set(clientViews.map((view) => view.suffix)).size).toBe(9);
     expect(
       clientViews.find((view) => view.suffix === "/bills")?.shortcut,
-    ).toBeNull();
+    ).toBe("b");
+    expect(
+      clientViews.filter((view) => view.shortcut).map((view) => view.shortcut),
+    ).toHaveLength(new Set(clientViews.map((view) => view.shortcut)).size);
   });
 });

@@ -37,22 +37,6 @@ export function PortfolioHeaderActions({
           >
             <img src={asset("imgIcon4.svg")} alt="" />
           </Link>
-          <Link
-            className="button ghost iconButton"
-            href="/portfolio?search=1"
-            aria-label="Search clients by name"
-            title="Search clients by name"
-          >
-            <img src={asset("imgIcon5.svg")} alt="" />
-          </Link>
-          <button
-            className="button ghost iconButton"
-            disabled
-            aria-label="Updates unavailable"
-            title="Updates contract has not been connected"
-          >
-            <img src={asset("imgIcon6.svg")} alt="" />
-          </button>
         </>
       )}
       <div className={styles.avatar}>{profileControl ?? <UserButton />}</div>

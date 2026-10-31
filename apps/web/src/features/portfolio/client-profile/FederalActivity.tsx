@@ -23,7 +23,7 @@ export function ClientAwardFacts({
   return (
     <dl className={styles.metrics}>
       <div>
-        <dt>Contract obligations</dt>
+        <dt>Prime awards</dt>
         <dd>{federalMoney(value?.contractObligations)}</dd>
       </div>
       <div>
@@ -92,8 +92,8 @@ export function FederalActivity({
           <>
             <ClientAwardFacts value={data.awarded} />
             <p className="muted">
-              Returned client Nexus evidence; no reporting-period completeness
-              is asserted.
+              Federal contract awards (DoD prime only). Returned client Nexus
+              evidence; no reporting-period completeness is asserted.
             </p>
             {data.linkage && (
               <p className="muted">

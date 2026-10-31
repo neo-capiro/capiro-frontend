@@ -25,12 +25,13 @@ function GovernmentProfile({
 }) {
   const [section, setSection] = useState<"identity" | "federal">("identity");
   const id = useId();
+  const nameWithoutTrailingPeriod = client.name.replace(/\.+$/, "");
   return (
     <Dialog
       open={open}
       onOpenChange={onOpenChange}
       title="Government & federal profile"
-      description={`Saved identity and separately sourced federal context for ${client.name}.`}
+      description={`Saved identity and separately sourced federal context for ${nameWithoutTrailingPeriod}.`}
       className={styles.dialog}
       textClose
     >

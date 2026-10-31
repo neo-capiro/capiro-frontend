@@ -115,7 +115,9 @@ function CurrentMemberCommittees({
             } else setRequested(true);
           }}
         >
-          {requested ? "Reload committee snapshot" : "Load committee snapshot"}
+          {requested
+            ? `Reload committee snapshot · ${member.fullName}`
+            : `Load committee snapshot · ${member.fullName}`}
         </button>
       )}
       {active && (

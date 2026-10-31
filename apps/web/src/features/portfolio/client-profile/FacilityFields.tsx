@@ -32,7 +32,7 @@ export function FacilityFields({ facility }: { facility?: Facility }) {
           />
         </label>
         <SelectField
-          label="State / territory"
+          label="State / Territory"
           name="state"
           autoComplete="address-level1"
           defaultValue={facility?.state ?? ""}

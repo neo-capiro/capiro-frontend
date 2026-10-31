@@ -111,9 +111,11 @@ export function OwnerCards({
                 </select>
                 {value && (
                   <small>
-                    {person
-                      ? roles[value] || "Team member"
-                      : "Unavailable member"}
+                    {!person
+                      ? "Unavailable member"
+                      : index === 0
+                        ? "Primary owner"
+                        : roles[value] || "Owner"}
                   </small>
                 )}
               </div>

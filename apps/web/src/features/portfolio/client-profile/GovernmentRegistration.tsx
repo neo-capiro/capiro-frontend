@@ -14,6 +14,44 @@ const labels = (
 ) =>
   values.map((value) => options.find(([key]) => key === value)?.[1] ?? value);
 
+/**
+ * A missing registrant name is not the same as no LDA data. The saved record
+ * carries filing signals (firm count, reported spend, latest filing year);
+ * claiming "Not provided" while those exist is a false absence claim.
+ */
+function ldaRegistrantValue(client: Client, name: string | null | undefined) {
+  if (name?.trim()) return name;
+  const raw = client.intakeData?.ldaSignals;
+  if (!raw || typeof raw !== "object") return "";
+  const signals = raw as {
+    lobbyingFirms?: unknown;
+    totalSpend?: unknown;
+    latestFilingYear?: unknown;
+  };
+  const firms =
+    typeof signals.lobbyingFirms === "number" ? signals.lobbyingFirms : null;
+  const spend =
+    typeof signals.totalSpend === "number" ? signals.totalSpend : null;
+  const year =
+    typeof signals.latestFilingYear === "number"
+      ? signals.latestFilingYear
+      : null;
+  if (firms === null && spend === null) return "";
+  return [
+    firms === null ? null : `${firms} registered ${firms === 1 ? "firm" : "firms"}`,
+    spend === null
+      ? null
+      : `${new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        }).format(spend)} reported spend`,
+    year === null ? null : `latest filing ${year}`,
+  ]
+    .filter((part): part is string => Boolean(part))
+    .join(" · ");
+}
+
 /** Saved profile presentation only; no registration lookup or verification. */
 export function GovernmentRegistration({ client }: { client: Client }) {
   const values = clientToIntake(client);
@@ -32,7 +70,7 @@ export function GovernmentRegistration({ client }: { client: Client }) {
           />
           <ProfileFacts
             rows={[
-              ["LDA registrant", values.ldaRegistrantName],
+              ["LDA registrant", ldaRegistrantValue(client, values.ldaRegistrantName)],
               ["EIN", values.ein],
               ["NAICS", values.naicsCodes],
               ["PSC", values.pscCodes],

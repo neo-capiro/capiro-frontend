@@ -111,9 +111,12 @@ export function FacilityMap({
           </div>
           {facilities.length > projected.markers.length && (
             <p className={styles.source}>
-              {facilities.length - projected.markers.length} locations have no
-              usable coordinate or fall outside this U.S. projection. Open them
-              from the location list.
+              {facilities.length - projected.markers.length}{" "}
+              {facilities.length - projected.markers.length === 1
+                ? "location has"
+                : "locations have"}{" "}
+              no usable coordinate or fall outside this U.S. projection. Open
+              them from the location list.
             </p>
           )}
           <p className={styles.source}>

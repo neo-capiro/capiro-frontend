@@ -44,6 +44,7 @@ export function useProfileNotesEditor(
     editable &&
     Boolean(client.source) &&
     draft !== undefined &&
+    draft !== saved &&
     !changed &&
     !pending &&
     !unknown;
