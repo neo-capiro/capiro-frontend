@@ -7,7 +7,6 @@ import {
   clientSectorLabel,
   initials,
   memberName,
-  safeWebsite,
   type Client,
   type Member,
 } from "./contracts";
@@ -140,7 +139,10 @@ export function ProfileCard({
   );
 }
 function ProfileLogo({ client }: { client: Client }) {
-  const src = safeWebsite(client.logoUrl);
+  // M1: Core returns the app-relative logo path (/api/client-logo/<id>). It is an
+  // address on this origin, not a website, so it must not be forced through the
+  // website sanitiser (which would rewrite it into https:///api/... and break).
+  const src = client.logoUrl ?? undefined;
   return (
     <span className={styles.profileLogo} aria-hidden="true">
       <ClientMonogram name={client.name} logoUrl={src} size={40} />

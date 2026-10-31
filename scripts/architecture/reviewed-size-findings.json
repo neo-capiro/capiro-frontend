@@ -228,10 +228,10 @@
     "file": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
     "kind": "function",
     "symbol": "IntakeSession",
-    "fingerprint": "e83ab41ed59dd466371366fd620ee99299dbc6418b6a7e3755226bd27b29ffbd",
-    "reason": "reviewed-accept â€” failed-logo URL tracking",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "304c03dbb084f602a302cfc83415670f49770369ff012eaca893bae94d295e8a",
+    "reason": "Exact-head structure review at frontend 4830ae34f6677fee3a609f8a3578f37c2f751ec0 (317 nonblank), replacing the 2026-10-27 record whose fingerprint e83ab41e no longer describes these bytes. The module keeps a thin entry component and one IntakeSession that owns a single client-intake draft: fields, validation, step, submit and its outcome, with transport/schemas in the existing intake api and contracts. The M1 change here only stops routing the stored logo path through the website normalizer (the prior failed-logo-URL tracking concern is unchanged: a logo failure still degrades to the monogram). One draft lifecycle, no second domain responsibility: no split warranted.",
+    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes, not copied from the prior approval)",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/portfolio/client-intake/form.ts",

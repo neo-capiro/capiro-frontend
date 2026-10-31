@@ -41,6 +41,9 @@ export const config = {
     "/calendar/:path*",
     "/meri/:path*",
     "/api/backend/:path*",
+    // The client-logo route calls Clerk auth(); without this entry the proxy never runs
+    // and the handler answers 401 for a signed-in session (PR #369 return).
+    "/api/client-logo/:path*",
     "/modules/:path*",
     // The bill detail receiver is an authenticated product route; Clerk must see it
     // so the page renders under the existing SessionBoundary.
