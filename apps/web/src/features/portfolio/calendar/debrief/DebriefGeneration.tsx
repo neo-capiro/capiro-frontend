@@ -327,6 +327,17 @@ function SessionDebriefGeneration({
     job && (job.status === "cancelled" || (job.status === "completed" && !job.draft))
       ? job
       : undefined;
+  // Explicitly leaving a KNOWN TERMINAL attempt is the user starting afresh, so the idempotency
+  // key bound to that settled attempt is released with it: the same source/method gets a new key
+  // and therefore a new job. Uncertain outcomes (transport/5xx/malformed) and active jobs keep
+  // their key — only a settled terminal receipt that the user dismisses releases it.
+  function dismissSettledAttempt() {
+    requestKey.current = undefined;
+    requestKeySource.current = undefined;
+    setJob(undefined);
+    setSource(undefined);
+    setJobError(undefined);
+  }
   const conflict =
     mutation.error instanceof ApiError && mutation.error.status === 409;
   return (
@@ -435,12 +446,13 @@ function SessionDebriefGeneration({
         open={Boolean(source) || Boolean(job)}
         onOpenChange={(open) => {
           if (open || mutation.isPending || pollingId || cancelling) return;
-          setSource(undefined);
-          // A terminal receipt without a draft is dismissed here rather than trapping the form.
+          // A terminal receipt without a draft is dismissed here rather than trapping the form,
+          // and that dismissal also releases its settled attempt key.
           if (emptyTerminal) {
-            setJob(undefined);
-            setJobError(undefined);
+            dismissSettledAttempt();
+            return;
           }
+          setSource(undefined);
         }}
         title={
           readyDraft
@@ -517,14 +529,7 @@ function SessionDebriefGeneration({
                 : "The service finished this generation without returning a draft. The job is recorded; start a new run from the same source if you still need a draft."}
             </p>
             <footer className="row">
-              <button
-                className="button"
-                onClick={() => {
-                  setJob(undefined);
-                  setSource(undefined);
-                  setJobError(undefined);
-                }}
-              >
+              <button className="button" onClick={dismissSettledAttempt}>
                 Close
               </button>
             </footer>
