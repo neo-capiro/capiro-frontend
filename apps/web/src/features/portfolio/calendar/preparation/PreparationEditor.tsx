@@ -6,7 +6,7 @@ import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { Preparation } from "./schema";
-import { savePreparation, type EditPreparation } from "./api";
+import { savePreparation, readPreparation, type EditPreparation } from "./api";
 import {
   editedBody,
   editValues,
@@ -64,6 +64,13 @@ export function PreparationEditor({
   const [values, setValues] = useState(() => editValues(prep));
   const [validation, setValidation] = useState<string>();
   const [discard, setDiscard] = useState(false);
+  // A save whose receipt never validated may still have committed. Until the stored
+  // record is READ back, the outcome is unresolved: no implicit write is allowed and
+  // typing must not turn this back into an ordinary save.
+  const [outcome, setOutcome] = useState<{
+    body: EditPreparation;
+    values: Record<PrepField, string>;
+  }>();
   const structuredEmailEvidence = prep.emailEvidence.some(
     (item) => typeof item !== "string",
   );
@@ -84,9 +91,45 @@ export function PreparationEditor({
       ]);
       onClose();
     },
+    // The receipt is what failed, not necessarily the write. Hold the outcome open
+    // and keep the draft; only a read can settle what was actually stored.
+    onError: (_error: Error, body: EditPreparation) =>
+      setOutcome({ body, values: { ...values } }),
+  });
+  /**
+   * The "check" action: an authorized read of the existing prep under this same
+   * meeting/client identity. It never writes. Only a read that returns a valid
+   * receipt settles the uncertainty.
+   */
+  const check = useMutation({
+    retry: false,
+    mutationFn: () => readPreparation(api, meetingId, prep.id, clientId),
+    onSuccess: async (stored) => {
+      const target = outcome;
+      if (!target) return;
+      const storedValues = editValues(stored);
+      const applied = (Object.keys(target.body) as PrepField[]).every(
+        (field) => storedValues[field] === target.values[field],
+      );
+      setOutcome(undefined);
+      if (applied) {
+        await Promise.all([
+          cache.invalidateQueries({ queryKey: ["meeting", meetingId] }),
+          cache.invalidateQueries({ queryKey: ["calendar", "meetings"] }),
+        ]);
+        onClose();
+        return;
+      }
+      // Read established the outcome: the change was not stored. The draft is
+      // intact, so an explicit save is allowed again.
+      save.reset();
+      setValidation(
+        "The saved preparation does not contain your changes. Your draft is unchanged, so you can save again.",
+      );
+    },
   });
   function close() {
-    if (save.isPending) return;
+    if (save.isPending || check.isPending) return;
     if (dirty) setDiscard(true);
     else onClose();
   }
@@ -104,7 +147,7 @@ export function PreparationEditor({
         className={styles.form}
         onSubmit={(event) => {
           event.preventDefault();
-          if (save.isPending) return;
+          if (save.isPending || check.isPending || outcome) return;
           setValidation(undefined);
           submitPrepEdit({
             prep,
@@ -125,12 +168,14 @@ export function PreparationEditor({
             disabled={
               !writable ||
               save.isPending ||
+              check.isPending ||
               (field === "emailEvidence" && structuredEmailEvidence)
             }
             onChange={(event) => {
+              // The draft stays editable, but nothing here clears an unresolved
+              // write: only the readback action can settle it.
               setValues((prior) => ({ ...prior, [field]: event.target.value }));
               setValidation(undefined);
-              save.reset();
             }}
           />
         ))}
@@ -164,6 +209,14 @@ export function PreparationEditor({
         )}
         {validation && <p role="alert">{validation}</p>}
         <QueryState error={save.error} />
+        {outcome && (
+          <p role="alert">
+            This save did not come back with a confirmed receipt, so the change
+            may or may not have been stored. Your draft is kept. Use “Check
+            saved prep” to read what was stored before writing again.
+          </p>
+        )}
+        {check.error && <QueryState error={check.error} />}
         {discard && (
           <div className="status" role="alert">
             <p>Discard your unsaved preparation changes?</p>
@@ -190,16 +243,25 @@ export function PreparationEditor({
           >
             Cancel
           </button>
-          <button
-            className="button primary"
-            disabled={!writable || !dirty || save.isPending}
-          >
-            {save.isPending
-              ? "Saving…"
-              : save.isError
-                ? "Check saved prep"
-                : "Save prep"}
-          </button>
+          {outcome ? (
+            <button
+              className="button primary"
+              type="button"
+              disabled={check.isPending}
+              onClick={() => check.mutate()}
+            >
+              {check.isPending ? "Checking…" : "Check saved prep"}
+            </button>
+          ) : (
+            <button
+              className="button primary"
+              disabled={
+                !writable || !dirty || save.isPending || check.isPending
+              }
+            >
+              {save.isPending ? "Saving…" : "Save prep"}
+            </button>
+          )}
         </footer>
       </form>
     </Dialog>

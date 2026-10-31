@@ -13,7 +13,10 @@ import {
   prepEditability,
 } from "../src/features/portfolio/calendar/preparation/editing";
 import { submitPrepEdit } from "../src/features/portfolio/calendar/preparation/PreparationEditor";
-import { savePreparation } from "../src/features/portfolio/calendar/preparation/api";
+import {
+  readPreparation,
+  savePreparation,
+} from "../src/features/portfolio/calendar/preparation/api";
 import { ApiError, createApiClient } from "../src/shared/portfolio/api/http";
 
 const CLIENT = "5c1f0d6a-1b0e-4a4a-9f3a-2b0c9d8e7f61";
@@ -178,5 +181,47 @@ describe("savePreparation — the committed save and its receipt", () => {
     await expect(
       savePreparation(api, "meeting-1", legacy.id, { summary: "x" }, CLIENT),
     ).rejects.toThrow(/refresh to check the saved content/i);
+  });
+});
+
+describe("readPreparation — the readback used to settle an uncertain save", () => {
+  it("reads the stored prep by id under the same meeting and client identity", async () => {
+    const prep = storedPrep({ clientId: CLIENT, summary: "Stored summary" });
+    const calls: Array<{ method?: string; url: string; body?: unknown }> = [];
+    const api = apiReturning(() => Response.json(prep), calls);
+    const stored = await readPreparation(api, "meeting-1", prep.id, CLIENT);
+    expect(stored.summary).toBe("Stored summary");
+    expect(calls).toHaveLength(1);
+    expect(calls[0]?.method).toBe("GET");
+    expect(calls[0]?.url).toBe(
+      `/api/backend/core/engagement/meeting-preps/${prep.id}`,
+    );
+    // A readback never writes.
+    expect(calls[0]?.body).toBeUndefined();
+  });
+
+  it("refuses a readback that returns another client identity", async () => {
+    const prep = storedPrep({ clientId: OTHER, summary: "Stored summary" });
+    const api = apiReturning(() => Response.json(prep));
+    await expect(
+      readPreparation(api, "meeting-1", prep.id, CLIENT),
+    ).rejects.toBeInstanceOf(ApiError);
+  });
+
+  it("refuses a readback that returns an unbound legacy row for a bound meeting", async () => {
+    const prep = storedPrep({ clientId: null, summary: "Stored summary" });
+    const api = apiReturning(() => Response.json(prep));
+    await expect(
+      readPreparation(api, "meeting-1", prep.id, CLIENT),
+    ).rejects.toBeInstanceOf(ApiError);
+  });
+
+  it("surfaces a denied readback as an error, never as a reconciled outcome", async () => {
+    const api = apiReturning(() =>
+      Response.json({ message: "Forbidden" }, { status: 403 }),
+    );
+    await expect(
+      readPreparation(api, "meeting-1", "prep-legacy-1", CLIENT),
+    ).rejects.toMatchObject({ status: 403 });
   });
 });
