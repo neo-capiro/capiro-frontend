@@ -10,7 +10,7 @@ import {
 import { SourceLink } from "../components";
 import styles from "../legiwatch.module.css";
 
-export type EvidenceKind = "news" | "budget" | "personnel" | "research";
+export type EvidenceKind = "research";
 export type EvidenceRef = {
   kind: "research";
   id: string;
@@ -74,7 +74,7 @@ export function ExactEvidence({
             <p className={styles.briefText}>
               {source.data.text || "No retained source text is available."}
             </p>
-            {onSelect && kind === "research" && (
+            {onSelect && (
               <ActionButton
                 onClick={() =>
                   onSelect({
