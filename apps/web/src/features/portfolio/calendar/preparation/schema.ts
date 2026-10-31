@@ -86,11 +86,15 @@ export const preparationSchema = z.object({
   meetingId: z.string().optional(),
   clientId: z.string().nullable().optional(),
   status: z.string(),
-  summary: z.string().nullable(),
-  agenda: z.array(prepItemSchema),
-  talkingPoints: z.array(prepItemSchema),
-  risks: z.array(prepItemSchema),
-  followUps: z.array(prepItemSchema),
+  // D5: calendar LIST rows carry prep metadata only (id/status/timestamps); the body
+  // arrives from the authorised detail read. The body fields are therefore optional
+  // here — required when present, empty when a list row omits them — so one schema
+  // still serves both reads.
+  summary: z.string().nullable().optional().default(null),
+  agenda: z.array(prepItemSchema).optional().default([]),
+  talkingPoints: z.array(prepItemSchema).optional().default([]),
+  risks: z.array(prepItemSchema).optional().default([]),
+  followUps: z.array(prepItemSchema).optional().default([]),
   emailEvidence: z
     .array(
       z.union([
