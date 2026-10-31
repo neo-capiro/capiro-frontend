@@ -50,11 +50,15 @@ export const briefingDraftBody = evidenceScope
 const reviewBody = z
   .object({
     selectionId: evidenceId,
+    // Transitional cached briefing clients still select a folder definition.
+    reportId: evidenceId.optional(),
     audience: z.enum(["internal", "external"]),
     acceptSourceGaps: z.boolean(),
   })
   .strict();
 const preview = z.object({
+  reportId: z.string().optional(),
+  definitionVersion: z.number().int().optional(),
   audience: z.string(),
   rendered: z.object({ html: z.string(), text: z.string() }),
   approvalHash: z.string(),

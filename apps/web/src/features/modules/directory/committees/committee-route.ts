@@ -12,6 +12,21 @@ export function committeeDirectoryHref(id: string, clientId?: string | null) {
   return `/modules/directory?${query}`;
 }
 
+/** Retained committee bookmarks moved from LegiWatch to Directory. */
+export function movedCommitteeDirectoryHref(
+  search: Pick<URLSearchParams, "get">,
+) {
+  const id = search.get("committeeId");
+  if (id) return committeeDirectoryHref(id, search.get("clientId"));
+  const query = new URLSearchParams({
+    view: "committees",
+    jurisdiction: search.get("jurisdiction") === "FL" ? "FL" : "US",
+  });
+  const clientId = search.get("clientId");
+  if (clientId) query.set("clientId", clientId);
+  return `/modules/directory?${query}`;
+}
+
 export function useCommitteeRoute() {
   const search = useSearchParams();
   const router = useRouter();
@@ -20,7 +35,8 @@ export function useCommitteeRoute() {
     ? committeeId.startsWith("state:FL:")
       ? "FL"
       : "US"
-    : search.get("jurisdiction") === "FL"
+    : search.get("view") === "state-committees" ||
+        search.get("jurisdiction") === "FL"
       ? "FL"
       : "US";
   const clientId = search.get("clientId");

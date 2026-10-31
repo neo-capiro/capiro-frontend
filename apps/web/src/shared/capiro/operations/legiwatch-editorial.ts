@@ -42,6 +42,30 @@ export const editorialConfig = evidenceScope
     acceptAvailableFields: z.boolean(),
   })
   .strict();
+// The backend validates ownership/folder/version, then discards these old
+// picker fields. The included source family remains strictly research-only.
+const rolloutConfig = editorialConfig
+  .extend({
+    reportId: monitorId,
+    reportVersion: monitorVersion.optional(),
+    monitorIds: z.array(monitorId).max(0),
+    categoryMapping: z
+      .object({
+        namespace: z.string().nullable(),
+        version: z.literal(1),
+        entries: z.record(
+          z.string().max(80),
+          z
+            .object({
+              decision: z.enum(["included", "excluded", "pending"]),
+              reason: z.string().min(1).max(2000),
+            })
+            .strict(),
+        ),
+      })
+      .strict(),
+  })
+  .strict();
 export const editorialRow = z.object({
   id: z.string(),
   source_key: z.string(),
@@ -50,6 +74,8 @@ export const editorialRow = z.object({
   source: z.object({
     family: z.object({
       displayName: z.string(),
+      categoryNamespace: z.string().nullable().default(null),
+      categories: z.array(z.string()).default([]),
     }),
   }),
   config: editorialConfig
@@ -94,7 +120,10 @@ export const legiwatchEditorialOperations = {
       .object({
         params: monitorParams,
         body: z
-          .object({ expectedVersion: monitorVersion, config: editorialConfig })
+          .object({
+            expectedVersion: monitorVersion,
+            config: z.union([editorialConfig, rolloutConfig]),
+          })
           .strict(),
       })
       .strict(),

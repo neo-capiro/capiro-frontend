@@ -71,6 +71,9 @@ it("derives the selected tab from restored and changed URLs", () => {
   route.search = "view=committee-staff";
   renderToStaticMarkup(createElement(DirectoryScreen));
   expect(route.selected).toBe("committee-staff");
+  route.search = "view=state-committees&clientId=client-hint";
+  renderToStaticMarkup(createElement(DirectoryScreen));
+  expect(route.selected).toBe("committees");
   route.search = "view=unknown";
   renderToStaticMarkup(createElement(DirectoryScreen));
   expect(route.selected).toBe("congressional-staff");

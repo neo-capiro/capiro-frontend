@@ -1,2 +1,5 @@
 /** Directory destinations for other modules. */
-export { committeeDirectoryHref } from "./committees/committee-route";
+export {
+  committeeDirectoryHref,
+  movedCommitteeDirectoryHref,
+} from "./committees/committee-route";

@@ -19,6 +19,7 @@ export function LegiWatchScreen() {
   const route = useLegiWatchRoute();
   const more = moreCatalog.find((item) => item.id === route.moreView);
   const publicationSessionId = route.search.get("publicationSessionId");
+  if (route.movedCommitteeHref) return null;
   if (publicationSessionId)
     return (
       <div className={styles.screen}>

@@ -10,9 +10,9 @@ describe("retired LegiWatch surfaces", () => {
     "legiwatch.import.apply",
     "legiwatch.research.imports",
     "legiwatch.research.import.decide",
-    "legiwatch.reports",
+    "legiwatch.report.create",
+    "legiwatch.report.update",
     "legiwatch.report.generate",
-    "legiwatch.report.send",
     "legiwatch.subscriptions",
     "legiwatch.subscription.activation",
     "legiwatch.subscription.run",
@@ -52,10 +52,10 @@ describe("retired LegiWatch surfaces", () => {
       "/legiwatch/monitoring/rules",
     );
     expect(
-      Object.values(capiroOperations).some((operation) =>
-        operation.path.startsWith("/legiwatch/reports"),
-      ),
-    ).toBe(false);
+      Object.values(capiroOperations)
+        .filter((operation) => operation.path.startsWith("/legiwatch/reports"))
+        .map(({ method, path }) => ({ method, path })),
+    ).toEqual([{ method: "GET", path: "/legiwatch/reports" }]);
   });
 
   it("reviews saved research and briefings without a report-library dependency", () => {
@@ -78,7 +78,7 @@ describe("retired LegiWatch surfaces", () => {
     expect(briefing.safeParse({ body }).success).toBe(true);
     expect(
       briefing.safeParse({ body: { ...body, reportId: "old-report" } }).success,
-    ).toBe(false);
+    ).toBe(true);
   });
 
   it("accepts only research in new briefing source selections", () => {
