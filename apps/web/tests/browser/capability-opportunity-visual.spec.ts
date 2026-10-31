@@ -88,7 +88,9 @@ for (const screen of [
     });
 
     await page.goto(`/portfolio/${clientId}/opportunities`);
-    const matched = page.getByRole("region", { name: "Matched opportunities" });
+    const matched = page.getByRole("region", {
+      name: "Available opportunities",
+    });
     await expect(
       matched.getByRole("link", { name: "Test opportunity", exact: true }),
     ).toBeVisible();
