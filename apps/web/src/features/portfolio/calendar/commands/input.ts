@@ -45,6 +45,27 @@ export const commandSchema = z
         revision: instant.nullable(),
         body: z.string().trim().min(1).max(20000).nullable(),
         confidential: z.boolean().nullable(),
+        // D2 audited context: optional, and only on a debrief create.
+        generatedFrom: z
+          .object({
+            version: z.string().trim().min(1).max(64),
+            boundTokens: z.number().int().nonnegative(),
+            totalTokens: z.number().int().nonnegative(),
+            sourceTruncated: z.boolean(),
+            sections: z
+              .array(
+                z
+                  .object({
+                    name: z.string().trim().min(1).max(64),
+                    tokens: z.number().int().nonnegative(),
+                    state: z.enum(["kept", "shortened", "dropped"]),
+                  })
+                  .strict(),
+              )
+              .max(20),
+          })
+          .strict()
+          .optional(),
       })
       .strict()
       .nullable(),
@@ -118,6 +139,12 @@ export const commandSchema = z
         approve
           ? value.artifact.body !== null || value.artifact.confidential !== null
           : value.artifact.body === null || value.artifact.confidential === null
+      )
+        issue();
+      // D2 audited context is only accepted where Core persists it.
+      if (
+        value.artifact.generatedFrom !== undefined &&
+        value.operation !== "debrief-create"
       )
         issue();
     }

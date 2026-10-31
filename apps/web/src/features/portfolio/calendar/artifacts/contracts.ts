@@ -8,6 +8,8 @@ export type ArtifactChange =
       revision?: string;
       body: string;
       confidential: boolean;
+      /** D2: the audited context summary of the debrief this body came from. */
+      generatedFrom?: unknown;
     }
   | { action: "approve" | "share" | "unshare"; id: string; revision?: string };
 export type ArtifactActor = { userId: string; tenantId: string };
