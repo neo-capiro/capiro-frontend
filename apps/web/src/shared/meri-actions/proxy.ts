@@ -1,7 +1,7 @@
 import { sameRequestOrigin } from "../request-origin";
 import { boundedJsonText, withActionDeadline } from "./bounded-json";
 import { actionSessionHints } from "./session-bootstrap";
-import { conversationSessionHints } from "../meri-conversations/session";
+import { conversationSessionSelector } from "../meri-conversations/session";
 import { receivedActionSession } from "./session-header";
 import type { readActionConfig } from "./config";
 import {
@@ -98,9 +98,11 @@ export async function proxyActionRequest(
               : 16 * 1024 * 1024,
       );
       if (route === "session")
-        actionSessionHints.or(conversationSessionHints).parse(JSON.parse(body));
+        actionSessionHints
+          .or(conversationSessionSelector)
+          .parse(JSON.parse(body));
       if (browserSession) {
-        const hints = conversationSessionHints.parse(JSON.parse(body));
+        const hints = conversationSessionSelector.parse(JSON.parse(body));
         if (!hints.conversationId || !hints.runId) return unavailable(400);
       }
       if (routine) await receiveRequest(routine, body);
