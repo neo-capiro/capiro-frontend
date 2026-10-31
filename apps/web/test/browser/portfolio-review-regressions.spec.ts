@@ -76,11 +76,23 @@ for (const width of [1440, 1024, 390]) {
       }),
     );
     if (width === 1440) {
-      expect(boxes[1].y).toBe(boxes[0].y);
-      expect(boxes[2].y).toBeCloseTo(boxes[1].y + boxes[1].height + 16);
-      expect(boxes[3].y).toBeCloseTo(boxes[0].y + boxes[0].height + 16);
-      expect(boxes[4].y).toBeCloseTo(boxes[2].y + boxes[2].height + 16);
-      expect(boxes[5].y).toBeCloseTo(boxes[3].y + boxes[3].height + 16);
+      expect(boxes).toHaveLength(tileLabels.length);
+      const [identity, profile, district, pulse, deadline, objectives] = boxes;
+      if (
+        !identity ||
+        !profile ||
+        !district ||
+        !pulse ||
+        !deadline ||
+        !objectives
+      ) {
+        throw new Error("Expected all six overview card boxes");
+      }
+      expect(profile.y).toBe(identity.y);
+      expect(district.y).toBeCloseTo(profile.y + profile.height + 16);
+      expect(pulse.y).toBeCloseTo(identity.y + identity.height + 16);
+      expect(deadline.y).toBeCloseTo(district.y + district.height + 16);
+      expect(objectives.y).toBeCloseTo(pulse.y + pulse.height + 16);
     } else {
       expect(boxes.map((box) => box.y)).toEqual(
         boxes.map((box) => box.y).sort((a, b) => a - b),
