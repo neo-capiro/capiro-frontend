@@ -9,10 +9,15 @@
 import { describe, expect, it } from "vitest";
 import type { Preparation } from "../src/features/portfolio/calendar/preparation/schema";
 import {
+  editedBody,
   editValues,
+  normalizedEditBody,
   prepEditability,
 } from "../src/features/portfolio/calendar/preparation/editing";
-import { submitPrepEdit } from "../src/features/portfolio/calendar/preparation/PreparationEditor";
+import {
+  prepReadbackDecision,
+  submitPrepEdit,
+} from "../src/features/portfolio/calendar/preparation/PreparationEditor";
 import {
   readPreparation,
   savePreparation,
@@ -223,5 +228,115 @@ describe("readPreparation — the readback used to settle an uncertain save", ()
     await expect(
       readPreparation(api, "meeting-1", "prep-legacy-1", CLIENT),
     ).rejects.toMatchObject({ status: 403 });
+  });
+});
+
+// The readback must settle the uncertain save without destroying work typed after it,
+// and it must compare the body that was actually sent rather than raw draft text.
+describe("prepReadbackDecision — the readback settles the save, it does not overwrite the draft", () => {
+  const prep = storedPrep({ clientId: CLIENT });
+
+  it("confirms the attempt and closes only while the draft still is that attempt", () => {
+    const attempted = { ...editValues(prep), summary: "Changed" };
+    const body = editedBody(prep, attempted);
+    const stored = storedPrep({ clientId: CLIENT, summary: "Changed" });
+
+    expect(
+      prepReadbackDecision({
+        attempt: { body, values: attempted },
+        stored,
+        draft: attempted,
+      }),
+    ).toEqual({ kind: "confirmed" });
+  });
+
+  it("keeps the editor open with a newer draft when the earlier attempt is stored", () => {
+    // uncertain save -> the reviewer types more -> Check finds the earlier attempt stored
+    const attempted = { ...editValues(prep), summary: "Changed" };
+    const body = editedBody(prep, attempted);
+    const newer = { ...attempted, summary: "Later draft never submitted" };
+    const stored = storedPrep({ clientId: CLIENT, summary: "Changed" });
+
+    const decision = prepReadbackDecision({
+      attempt: { body, values: attempted },
+      stored,
+      draft: newer,
+    });
+
+    expect(decision.kind).toBe("confirmed-newer-draft");
+    if (decision.kind !== "confirmed-newer-draft")
+      throw new Error("expected a newer draft");
+    // The message states the current stored content and the unsaved newer draft.
+    expect(decision.message).toMatch(/earlier change is stored/i);
+    expect(decision.message).toMatch(/edited this draft since then/i);
+    expect(decision.message).toMatch(/save them, or discard them/i);
+    // The newer draft is never replaced by the server value.
+    expect(newer.summary).toBe("Later draft never submitted");
+    expect(decision).not.toHaveProperty("close");
+  });
+
+  it("reports a trimmed summary as the attempt's content, not as missing", () => {
+    const attempted = { ...editValues(prep), summary: "  Changed  " };
+    const body = editedBody(prep, attempted);
+    // What the save actually sends is the normalized payload.
+    expect(body).toEqual({ summary: "Changed" });
+    const stored = storedPrep({ clientId: CLIENT, summary: "Changed" });
+
+    expect(
+      prepReadbackDecision({
+        attempt: { body, values: attempted },
+        stored,
+        draft: attempted,
+      }),
+    ).toEqual({ kind: "confirmed" });
+  });
+
+  it("reports a trimmed multiline list as the attempt's content, not as missing", () => {
+    const attempted = { ...editValues(prep), agenda: "  Item A  \n\nItem B\n" };
+    const body = editedBody(prep, attempted);
+    expect(body).toEqual({ agenda: ["Item A", "Item B"] });
+    const stored = storedPrep({
+      clientId: CLIENT,
+      agenda: ["Item A", "Item B"],
+    });
+
+    expect(
+      prepReadbackDecision({
+        attempt: { body, values: attempted },
+        stored,
+        draft: attempted,
+      }),
+    ).toEqual({ kind: "confirmed" });
+  });
+
+  it("retains the draft and asks for an explicit save when the stored content differs", () => {
+    const attempted = { ...editValues(prep), summary: "Changed" };
+    const body = editedBody(prep, attempted);
+    const stored = storedPrep({ clientId: CLIENT, summary: "Something else" });
+
+    const decision = prepReadbackDecision({
+      attempt: { body, values: attempted },
+      stored,
+      draft: attempted,
+    });
+
+    expect(decision.kind).toBe("not-stored");
+    if (decision.kind !== "not-stored")
+      throw new Error("expected an unconfirmed readback");
+    expect(decision.message).toMatch(/differs from the change you attempted/i);
+    // No claim about what happened historically to the first write.
+    expect(decision.message).not.toMatch(
+      /never happened|did not happen|was not stored/i,
+    );
+  });
+
+  it("normalizes the draft the same way the save does", () => {
+    const values = {
+      ...editValues(prep),
+      summary: "  Changed  ",
+      agenda: "  Item A  \n\nItem B\n",
+    };
+    expect(normalizedEditBody(values).summary).toBe("Changed");
+    expect(normalizedEditBody(values).agenda).toEqual(["Item A", "Item B"]);
   });
 });

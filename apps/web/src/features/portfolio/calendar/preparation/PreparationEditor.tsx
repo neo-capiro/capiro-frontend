@@ -10,6 +10,7 @@ import { savePreparation, readPreparation, type EditPreparation } from "./api";
 import {
   editedBody,
   editValues,
+  normalizedEditBody,
   prepEditability,
   prepFields,
   type PrepField,
@@ -45,6 +46,50 @@ export function submitPrepEdit({
       error instanceof Error ? error.message : "Check the preparation fields.",
     );
   }
+}
+/**
+ * What a successful readback establishes about the uncertain save.
+ *
+ * The comparison is between the stored projection and the body that was actually
+ * submitted (both normalized the way the save normalizes), never raw draft text.
+ * Confirming the earlier attempt must not destroy work typed after it: the editor
+ * only closes when the draft being discarded is exactly the attempt.
+ */
+export type PrepReadbackDecision =
+  | { kind: "confirmed" }
+  | { kind: "confirmed-newer-draft"; message: string }
+  | { kind: "not-stored"; message: string };
+
+export function prepReadbackDecision({
+  attempt,
+  stored,
+  draft,
+}: {
+  attempt: { body: EditPreparation; values: Record<PrepField, string> };
+  stored: Preparation;
+  draft: Record<PrepField, string>;
+}): PrepReadbackDecision {
+  const storedBody = normalizedEditBody(editValues(stored));
+  const applied = (Object.keys(attempt.body) as PrepField[]).every(
+    (field) =>
+      JSON.stringify(storedBody[field] ?? null) ===
+      JSON.stringify(attempt.body[field] ?? null),
+  );
+  if (!applied)
+    return {
+      kind: "not-stored",
+      // Describes the current stored content against the attempt; it does not claim
+      // to know what happened to the first write.
+      message:
+        "The saved preparation differs from the change you attempted. Your draft is unchanged, so you can save it again.",
+    };
+  if (JSON.stringify(draft) === JSON.stringify(attempt.values))
+    return { kind: "confirmed" };
+  return {
+    kind: "confirmed-newer-draft",
+    message:
+      "Your earlier change is stored. You have edited this draft since then, so it stays open with those newer changes unsaved — save them, or discard them.",
+  };
 }
 export function PreparationEditor({
   meetingId,
@@ -107,12 +152,15 @@ export function PreparationEditor({
     onSuccess: async (stored) => {
       const target = outcome;
       if (!target) return;
-      const storedValues = editValues(stored);
-      const applied = (Object.keys(target.body) as PrepField[]).every(
-        (field) => storedValues[field] === target.values[field],
-      );
+      // Fields are disabled while the check runs, so this is still the draft the
+      // reviewer had when they pressed Check.
+      const decision = prepReadbackDecision({
+        attempt: target,
+        stored,
+        draft: values,
+      });
       setOutcome(undefined);
-      if (applied) {
+      if (decision.kind === "confirmed") {
         await Promise.all([
           cache.invalidateQueries({ queryKey: ["meeting", meetingId] }),
           cache.invalidateQueries({ queryKey: ["calendar", "meetings"] }),
@@ -120,12 +168,10 @@ export function PreparationEditor({
         onClose();
         return;
       }
-      // Read established the outcome: the change was not stored. The draft is
-      // intact, so an explicit save is allowed again.
+      // The read settled the uncertainty without resolving the draft: the editor
+      // stays open, the reviewer's values are untouched, and a save is explicit.
       save.reset();
-      setValidation(
-        "The saved preparation does not contain your changes. Your draft is unchanged, so you can save again.",
-      );
+      setValidation(decision.message);
     },
   });
   function close() {

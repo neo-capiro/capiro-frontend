@@ -373,7 +373,14 @@ deployment, not route acceptance, not feature completion.
   build a body for it. After a save whose receipt did not validate, the outcome stays explicitly unresolved: the
   primary action reads the stored preparation back (`GET meeting-preps/:id`, under the same meeting/client identity)
   and never re-sends the PATCH, field edits keep the draft without clearing the uncertainty, and a read that fails,
-  is refused, or returns another identity does not count as reconciled. Known-client editing, the
+  is refused, or returns another identity does not count as reconciled. Two later corrections tighten exactly this
+  readback (same source bundle, 2026-10-31): the comparison uses the body that was actually submitted — summary
+  trimmed, list lines trimmed and blank-filtered, the same normalization the save applies — never the raw draft
+  text, so a stored trimmed value is reported as the attempt's own content instead of as missing; and confirming the
+  earlier attempt never discards later work. The editor closes only when the draft being discarded is still exactly
+  that attempt. If the reviewer typed on after the uncertain save, the editor stays open, their newer values are
+  kept untouched (server values never overwrite them), the uncertainty is cleared, and the next step is explicit:
+  save the newer changes, or discard them. Known-client editing, the
   changed-sections-only body and the wrong-non-null refusal are unchanged.
 - **Route manifest.** `GET /api/engagement/meeting-preps/:id` is in the regenerated manifest with every newer main
   route preserved.

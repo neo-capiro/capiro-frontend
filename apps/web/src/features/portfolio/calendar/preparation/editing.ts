@@ -43,12 +43,39 @@ export function editValues(prep: Preparation): Record<PrepField, string> {
     emailEvidence: prep.emailEvidence.map(emailEvidenceText).join("\n"),
   };
 }
+function listLines(value: string): string[] {
+  return value
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+}
+/**
+ * The exact payload a draft represents, normalized the way the save sends it:
+ * summary trimmed (or null), list fields trimmed and blank-filtered.
+ *
+ * Shared by the save and by the readback comparison, so "what we sent" and what the
+ * server stored are compared in the same shape instead of raw draft text against a
+ * normalized body.
+ */
+export function normalizedEditBody(
+  values: Record<PrepField, string>,
+): Required<EditPreparation> {
+  return {
+    summary: values.summary.trim() || null,
+    agenda: listLines(values.agenda),
+    talkingPoints: listLines(values.talkingPoints),
+    risks: listLines(values.risks),
+    followUps: listLines(values.followUps),
+    emailEvidence: listLines(values.emailEvidence),
+  };
+}
 // Only changed sections are sent: untouched evidence-linked items retain their shape.
 export function editedBody(
   prep: Preparation,
   values: Record<PrepField, string>,
 ): EditPreparation {
   const prior = editValues(prep);
+  const normalized = normalizedEditBody(values);
   const body: EditPreparation = {};
   for (const key of Object.keys(prepFields) as PrepField[]) {
     if (values[key] === prior[key]) continue;
@@ -59,16 +86,9 @@ export function editedBody(
       throw new Error(
         "Structured email evidence retains its source attribution and cannot be edited here.",
       );
-    if (key === "summary") body.summary = values.summary.trim() || null;
-    else {
-      const lines = values[key]
-        .split(/\r?\n/)
-        .map((line) => line.trim())
-        .filter(Boolean);
-      if (lines.length > 80)
-        throw new Error(`${prepFields[key]} must contain at most 80 items.`);
-      body[key] = lines;
-    }
+    if (key !== "summary" && normalized[key].length > 80)
+      throw new Error(`${prepFields[key]} must contain at most 80 items.`);
+    Object.assign(body, { [key]: normalized[key] });
   }
   return body;
 }
