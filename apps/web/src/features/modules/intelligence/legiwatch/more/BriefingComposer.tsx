@@ -10,15 +10,12 @@ import {
   TextInput,
 } from "../../../../../shared/module-ui";
 import { SelectField } from "../components";
-import type { EvidenceRef, EvidenceScope } from "../evidence/EvidenceActions";
+import type { EvidenceRef, EvidenceScope } from "../sources/EvidenceActions";
 import styles from "../legiwatch.module.css";
 import { BriefingCitations, type BriefingCitation } from "./BriefingCitations";
 import { BriefingReview } from "./BriefingReview";
 
-type Template =
-  | "research_update"
-  | "daily_legislative_brief"
-  | "morning_news_brief";
+type Template = "research_update" | "daily_legislative_brief";
 export function BriefingComposer({
   evidenceRefs,
   folderId,
@@ -90,8 +87,7 @@ export function BriefingComposer({
             onChange={(value) => {
               if (
                 value === "research_update" ||
-                value === "daily_legislative_brief" ||
-                value === "morning_news_brief"
+                value === "daily_legislative_brief"
               ) {
                 change();
                 setTemplate(value);
@@ -102,7 +98,6 @@ export function BriefingComposer({
             <option value="daily_legislative_brief">
               Daily Legislative Brief
             </option>
-            <option value="morning_news_brief">Morning News Brief</option>
           </SelectField>
           <Field label="Title" htmlFor="briefing-title">
             <TextInput

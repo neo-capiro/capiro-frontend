@@ -13,9 +13,14 @@ type SourceState = {
   rangeId?: string;
 };
 
-export function useAgendaSources(range: CalendarRange, enabled: boolean) {
+export function useAgendaSources(
+  range: CalendarRange,
+  enabled: boolean,
+  hearingsOnly = false,
+) {
   const api = useCapiro();
-  const rangeId = `${range.firstDay}:${range.lastDay}`;
+  const { from, to, firstDay, lastDay } = range;
+  const rangeId = `${firstDay}:${lastDay}:${hearingsOnly}`;
   const [state, setState] = useState<SourceState>({
     items: [],
     loading: enabled,
@@ -37,12 +42,17 @@ export function useAgendaSources(range: CalendarRange, enabled: boolean) {
   useEffect(() => {
     if (!enabled) return;
     const controller = new AbortController();
-    loadAgendaSources(api, range, controller.signal).then((loaded) => {
+    loadAgendaSources(
+      api,
+      { from, to, firstDay, lastDay },
+      controller.signal,
+      hearingsOnly,
+    ).then((loaded) => {
       if (!controller.signal.aborted)
         setState({ ...loaded, loading: false, rangeId });
     });
     return () => controller.abort();
-  }, [api, rangeId, range.firstDay, range.lastDay, enabled]);
+  }, [api, rangeId, from, to, firstDay, lastDay, enabled, hearingsOnly]);
   return enabled && state.rangeId === rangeId
     ? state
     : { items: [], loading: enabled, warnings: [] };

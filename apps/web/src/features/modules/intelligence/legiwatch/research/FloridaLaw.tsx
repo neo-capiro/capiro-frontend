@@ -12,7 +12,7 @@ import {
   TextInput,
 } from "../../../../../shared/module-ui";
 import { SelectField, SourceLink } from "../components";
-import type { EvidenceScope } from "../evidence/EvidenceActions";
+import type { EvidenceScope } from "../sources/EvidenceActions";
 import styles from "../legiwatch.module.css";
 import { LegalDeadlines } from "./LegalDeadlines";
 

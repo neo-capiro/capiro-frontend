@@ -4,7 +4,7 @@ import { evidenceId, evidenceScope } from "./legiwatch-evidence-schemas";
 
 export const briefingRef = z
   .object({
-    kind: z.enum(["news", "budget", "personnel", "research"]),
+    kind: z.literal("research"),
     id: evidenceId,
     revision: z.string().min(1).max(200),
     locator: z.string().min(1).max(2000),
@@ -25,11 +25,7 @@ export const briefingCitation = briefingRef
 export const briefingDraftBody = evidenceScope
   .extend({
     requestKey: z.string().min(8).max(180),
-    template: z.enum([
-      "research_update",
-      "daily_legislative_brief",
-      "morning_news_brief",
-    ]),
+    template: z.enum(["research_update", "daily_legislative_brief"]),
     cutoff: z.iso.datetime(),
     timezone: z
       .string()
@@ -54,14 +50,11 @@ export const briefingDraftBody = evidenceScope
 const reviewBody = z
   .object({
     selectionId: evidenceId,
-    reportId: evidenceId,
     audience: z.enum(["internal", "external"]),
     acceptSourceGaps: z.boolean(),
   })
   .strict();
 const preview = z.object({
-  reportId: z.string(),
-  definitionVersion: z.number().int(),
   audience: z.string(),
   rendered: z.object({ html: z.string(), text: z.string() }),
   approvalHash: z.string(),

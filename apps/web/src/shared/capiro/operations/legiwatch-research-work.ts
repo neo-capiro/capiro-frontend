@@ -19,7 +19,7 @@ const citation = z
     (value) =>
       value.end > value.start && value.quote.length === value.end - value.start,
   );
-const review = z.object({ selectionId: id, runId: id }).strict();
+const review = z.object({ selectionId: id }).strict();
 export const legiwatchResearchWorkOperations = {
   "legiwatch.research.draft": defineOperation({
     service: "intelligence",

@@ -47,13 +47,14 @@ export function useCalendar() {
       ...(clientId ? { clientId } : {}),
     },
   });
-  const extras = useAgendaSources(range, view === "agenda" && !clientId);
+  const extras = useAgendaSources(range, !clientId, view !== "agenda");
   const loaded = meetings.data ?? [];
   const allItems = uniqueAgenda([...meetingItems(loaded), ...extras.items]);
   const filtered = allItems.filter(
     (item) =>
       sources.has(item.source) &&
-      (!search ||
+      (view !== "agenda" ||
+        !search ||
         `${item.title} ${item.context}`
           .toLowerCase()
           .includes(search.toLowerCase())),
@@ -67,7 +68,7 @@ export function useCalendar() {
     !clientOptions.some((client) => client.id === clientId)
       ? [...clientOptions, scope.client]
       : clientOptions;
-  const count = view === "agenda" ? allItems.length : loaded.length;
+  const count = filtered.length;
   const changeScope = (value: string) => {
     const next = new URLSearchParams(params.toString());
     if (value) next.set("clientId", value);
@@ -109,6 +110,7 @@ export function useCalendar() {
     count,
     changeScope,
     toggle,
+    openHearing: (href: string) => router.push(href),
   };
 }
 export type CalendarModel = ReturnType<typeof useCalendar>;

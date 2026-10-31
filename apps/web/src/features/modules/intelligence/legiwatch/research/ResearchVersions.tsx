@@ -10,7 +10,7 @@ import {
   StatusPanel,
 } from "../../../../../shared/module-ui";
 import { SelectField, SourceLink } from "../components";
-import type { EvidenceScope } from "../evidence/EvidenceActions";
+import type { EvidenceScope } from "../sources/EvidenceActions";
 import styles from "../legiwatch.module.css";
 
 export function ResearchVersions({

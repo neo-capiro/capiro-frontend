@@ -5,18 +5,76 @@ import { legiwatchFixtures, folder } from "./legiwatch-fixtures";
 const route = (view: string) =>
   `/modules/intelligence?view=legiwatch&lw=more&lwMore=${view}`;
 const views = [
-  ["news", "News evidence"],
-  ["budget", "Florida Budget"],
   ["research", "Research evidence"],
   ["monitoring", "Monitoring"],
   ["briefings", "Client briefings"],
-  ["reports", "Reports"],
   ["trends", "Trends"],
-  ["digest", "Legacy digest"],
-  ["imports", "Import review"],
-  ["research-imports", "Research import review"],
   ["settings", "LegiWatch settings"],
 ];
+
+test("More shows retained destinations and no removed surfaces", async ({
+  page,
+}) => {
+  await onlyLocalRequests(page);
+  await operationFixtures(page, legiwatchFixtures);
+  await page.goto("/modules/intelligence?view=legiwatch&lw=more");
+  for (const [, title] of views)
+    await expect(
+      page.getByRole("button", { name: new RegExp(`^${title}`) }),
+    ).toBeVisible();
+  for (const title of [
+    "Import review",
+    "Research import review",
+    "Reports",
+    "News evidence",
+    "Florida Budget",
+    "Legacy digest",
+  ])
+    await expect(
+      page.getByRole("button", { name: new RegExp(`^${title}`) }),
+    ).toHaveCount(0);
+});
+
+test("retained briefing schedules do not point to removed source imports", async ({
+  page,
+}) => {
+  await onlyLocalRequests(page);
+  await operationFixtures(page, legiwatchFixtures);
+  await page.goto(route("briefings"));
+  await page
+    .getByRole("button", { name: "Scheduled briefings", exact: true })
+    .click();
+  await expect(
+    page.getByText("No saved briefing schedules are available."),
+  ).toBeVisible();
+  await expect(page.getByRole("main")).not.toContainText("News");
+  await expect(page.getByRole("main")).not.toContainText("Florida Budget");
+});
+
+for (const retired of [
+  "imports",
+  "research-imports",
+  "reports",
+  "news",
+  "budget",
+  "digest",
+])
+  test(`old ${retired} links cannot mount a removed form`, async ({ page }) => {
+    const calls: string[] = [];
+    page.on("request", (request) => {
+      if (request.url().includes("/api/capiro/legiwatch."))
+        calls.push(request.url());
+    });
+    await onlyLocalRequests(page);
+    await operationFixtures(page, legiwatchFixtures);
+    await page.goto(route(retired));
+    await expect(
+      page.getByText("This LegiWatch view could not be found."),
+    ).toBeVisible();
+    await expect(page.getByRole("main").locator("form")).toHaveCount(0);
+    expect(calls).toEqual([]);
+  });
+
 for (const [view, title] of views)
   test(`LegiWatch ${title} renders a real connected view`, async ({ page }) => {
     const failures: string[] = [];
@@ -137,6 +195,9 @@ test("workflow changes invalidate a reviewed preview and enqueue only its exact 
     "legiwatch.workflow.action": action,
   });
   await page.goto(route("monitoring"));
+  await expect(
+    page.getByRole("button", { name: "Daily subscriptions", exact: true }),
+  ).toHaveCount(0);
   await page
     .getByRole("button", { name: "Internal workflows", exact: true })
     .click();

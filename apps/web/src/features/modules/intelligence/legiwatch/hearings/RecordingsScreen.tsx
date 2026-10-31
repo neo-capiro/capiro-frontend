@@ -14,6 +14,10 @@ export function RecordingsScreen() {
   const route = useLegiWatchRoute(),
     [page, setPage] = useState(1),
     [type, setType] = useState("server");
+  const [cursors, setCursors] = useState<Array<string | undefined>>([
+    undefined,
+  ]);
+  const [browserPage, setBrowserPage] = useState(0);
   const server = useCapiroQuery(
     "legiwatch.recordings",
     { query: { page, pageSize: 25 } },
@@ -21,7 +25,7 @@ export function RecordingsScreen() {
   );
   const browser = useCapiroQuery(
     "legiwatch.session.list",
-    { query: { limit: 100 } },
+    { query: { limit: 25, cursor: cursors[browserPage] } },
     { enabled: type === "browser" },
   );
   return (
@@ -115,12 +119,32 @@ export function RecordingsScreen() {
               </article>
             ))}
           </div>
-          {browser.data?.hasMore && (
-            <p className={styles.description}>
-              Showing the latest {browser.data.items.length} sessions. Earlier
-              sessions remain in your archive.
-            </p>
-          )}
+          <div className={styles.actions}>
+            <ActionButton
+              disabled={browserPage === 0}
+              onClick={() => setBrowserPage((value) => value - 1)}
+            >
+              Newer sessions
+            </ActionButton>
+            <ActionButton
+              disabled={
+                !browser.data?.hasMore ||
+                !browser.data.nextCursor ||
+                browser.loading
+              }
+              onClick={() => {
+                const next = browser.data?.nextCursor;
+                if (!next) return;
+                setCursors((values) => [
+                  ...values.slice(0, browserPage + 1),
+                  next,
+                ]);
+                setBrowserPage((value) => value + 1);
+              }}
+            >
+              Older sessions
+            </ActionButton>
+          </div>
         </StatusPanel>
       )}
     </div>

@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { committeeDirectoryHref } from "../../../directory/public";
 import {
   useCapiroMutation,
   useCapiroQuery,
@@ -14,6 +16,7 @@ import styles from "../legiwatch.module.css";
 import { useLegiWatchRoute } from "../use-legiwatch-route";
 
 export function UpdatesScreen() {
+  const router = useRouter();
   const route = useLegiWatchRoute(),
     [page, setPage] = useState(1),
     [unreadOnly, setUnreadOnly] = useState(false);
@@ -95,10 +98,12 @@ export function UpdatesScreen() {
                 ) : notification.committeeSystemCode ? (
                   <ActionButton
                     onClick={() =>
-                      route.navigate({
-                        lw: "committees",
-                        committeeId: notification.committeeSystemCode,
-                      })
+                      router.push(
+                        committeeDirectoryHref(
+                          notification.committeeSystemCode!,
+                          route.clientId,
+                        ),
+                      )
                     }
                   >
                     Open committee

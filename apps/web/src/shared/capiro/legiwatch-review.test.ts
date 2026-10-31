@@ -1,9 +1,5 @@
 import { describe, expect, it } from "vitest";
 import {
-  capturedImportJson,
-  importPreviewBody,
-} from "./operations/legiwatch-imports";
-import {
   keywordBody,
   keywordScan,
 } from "./operations/legiwatch-keyword-schemas";
@@ -12,7 +8,6 @@ import {
   scheduleTime,
   staffRecipient,
 } from "./operations/legiwatch-monitor-schemas";
-import { legalImportDecision } from "./operations/legiwatch-research-imports";
 import { workflowAction } from "./operations/legiwatch-workflows";
 import { capiroOperations as operations } from "./registry";
 
@@ -172,22 +167,12 @@ describe("reviewed source and authority boundaries", () => {
     ]);
     expect(staffRecipient.safeParse(recipient).success).toBe(false);
   });
-  it("uses source-supported timezone names and never allows forced sending in run-now", () => {
+  it("uses source-supported timezone names", () => {
     expect(scheduleTime.timezone.safeParse("America/New_York").success).toBe(
       true,
     );
     expect(scheduleTime.timezone.safeParse("UTC").success).toBe(true);
     expect(scheduleTime.timezone.safeParse("EST").success).toBe(false);
-    const run = operations["legiwatch.subscription.run"];
-    expect(
-      run.request.safeParse({
-        params: { id: "sub" },
-        body: { requestKey: key, mode: "send" },
-      }).success,
-    ).toBe(false);
-    expect(run.response.safeParse({ id: "run", mode: "send" }).success).toBe(
-      false,
-    );
   });
   it("does not accept captured keyword ownership as editable configuration", () => {
     const config = {
@@ -224,67 +209,5 @@ describe("reviewed source and authority boundaries", () => {
     expect(scan.counts.incomplete).toBe(100);
     expect(scan.input).toEqual({ mode: "preview" });
     expect(scan).not.toHaveProperty("lease_token");
-  });
-});
-describe("captured imports", () => {
-  it("rejects unsafe/deep capture data and mismatched workspace manifests", () => {
-    expect(
-      capturedImportJson.safeParse(JSON.parse('{"__proto__":{"admin":true}}'))
-        .success,
-    ).toBe(false);
-    let deep: Record<string, unknown> = {};
-    for (let index = 0; index < 14; index++) deep = { next: deep };
-    expect(capturedImportJson.safeParse(deep).success).toBe(false);
-    const body = {
-      targetTenantId: tenantId,
-      sourceAccount: "synthetic:account",
-      captureId: "capture",
-      sourceHash: "a".repeat(64),
-      mappingManifest: {
-        tenantId,
-        sourceAccount: "synthetic:account",
-        sourceTimezone: "America/New_York",
-      },
-      items: [
-        {
-          kind: "statute",
-          sourceId: "source",
-          payload: { citation: "100.01" },
-        },
-      ],
-    };
-    expect(importPreviewBody.safeParse(body).success).toBe(true);
-    expect(
-      importPreviewBody.safeParse({
-        ...body,
-        mappingManifest: { ...body.mappingManifest, tenantId: key },
-      }).success,
-    ).toBe(false);
-  });
-  it("requires reviewed source qualification for imported statutes but retains unresolved decisions", () => {
-    const base = {
-      stagedId: "captured",
-      expectedVersion: 2,
-      sourceHash: "a".repeat(64),
-      status: "unresolved",
-      reason: "Edition is not established",
-      requestKey: key,
-    };
-    expect(legalImportDecision.safeParse(base).success).toBe(true);
-    expect(
-      legalImportDecision.safeParse({ ...base, status: "imported" }).success,
-    ).toBe(false);
-    expect(
-      legalImportDecision.safeParse({
-        ...base,
-        status: "imported",
-        folderId: "folder",
-        edition: "2026",
-        referenceId: "reference",
-        revisionId: "revision",
-        expectedMembershipVersion: 0,
-        resolutionBasis: "Reviewed official 2026 source edition.",
-      }).success,
-    ).toBe(true);
   });
 });

@@ -5,7 +5,7 @@ import type {
   PublicationAudience,
   PublicationVersion,
 } from "../../../../../shared/capiro/operations/legiwatch-publication-schemas";
-import { recipientSelectionSchema } from "../../../../../shared/capiro/operations/legiwatch-report-schemas";
+import { recipientSelectionSchema } from "../../../../../shared/capiro/operations/legiwatch-delivery-schemas";
 import {
   useCapiroMutation,
   useCapiroQuery,
@@ -37,7 +37,7 @@ export function PublicationDelivery({
     [previewInput, setPreviewInput] = useState<string>(),
     [consentOpen, setConsentOpen] = useState(false);
   const directory = useCapiroQuery(
-      "legiwatch.report.recipients",
+      "legiwatch.delivery.recipients",
       {},
       { enabled: channel === "email" },
     ),

@@ -62,11 +62,9 @@ export function WorkflowPreview({
   const reference =
     input.template === "added_bill_review"
       ? "billId"
-      : input.template === "report_review"
-        ? "reportId"
-        : input.template.startsWith("legal_")
-          ? "selectionId"
-          : "eventId";
+      : input.template.startsWith("legal_")
+        ? "selectionId"
+        : "eventId";
   return (
     <Modal
       open
@@ -116,11 +114,9 @@ export function WorkflowPreview({
             label={
               reference === "billId"
                 ? "Tracked bill reference"
-                : reference === "reportId"
-                  ? "Saved report reference"
-                  : reference === "selectionId"
-                    ? "Saved research selection reference"
-                    : "Hearing reference"
+                : reference === "selectionId"
+                  ? "Saved research selection reference"
+                  : "Hearing reference"
             }
             htmlFor="workflow-reference"
           >

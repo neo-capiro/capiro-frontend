@@ -6,6 +6,7 @@ import {
   directoryViews,
   resolveDirectoryView,
 } from "../../../shared/shell/directory-views";
+import { CommitteesScreen } from "./committees/CommitteesScreen";
 import { CommitteeDirectory } from "./CommitteeDirectory";
 import { CongressionalContacts } from "./CongressionalContacts";
 import { PersonnelDirectory } from "./PersonnelDirectory";
@@ -26,6 +27,8 @@ export function DirectoryScreen() {
     next.set("view", nextView);
     next.delete("personnelId");
     next.delete("personnelPreviewId");
+    next.delete("committeeId");
+    next.delete("jurisdiction");
     router.push(`${pathname}?${next}`, { scroll: false });
   };
   const showDirectoryNavigation =
@@ -59,7 +62,7 @@ export function DirectoryScreen() {
         <PersonnelDirectory onDetailChange={setPersonnelDetailOpen} />
       )}
       {view === "state-legislators" && <StateDirectory />}
-      {view === "state-committees" && <StateDirectory committees />}
+      {view === "committees" && <CommitteesScreen />}
     </>
   );
 }

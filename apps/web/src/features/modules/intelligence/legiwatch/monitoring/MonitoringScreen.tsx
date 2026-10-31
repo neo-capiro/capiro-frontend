@@ -6,9 +6,8 @@ import { InternalWorkflows } from "./InternalWorkflows";
 import { KeywordRules } from "./KeywordRules";
 import { RecordRules } from "./RecordRules";
 import { StatuteMonitors } from "./StatuteMonitors";
-import { SubscriptionsScreen } from "./SubscriptionsScreen";
 export function MonitoringScreen() {
-  const [view, setView] = useState("subscriptions");
+  const [view, setView] = useState("keywords");
   return (
     <div className={styles.form}>
       <LegiWatchTabs
@@ -18,7 +17,6 @@ export function MonitoringScreen() {
         items={[
           { id: "keywords", label: "Keyword rules" },
           { id: "workflows", label: "Internal workflows" },
-          { id: "subscriptions", label: "Daily subscriptions" },
           { id: "record", label: "Bill record rules" },
           { id: "agenda", label: "Agenda rules" },
           { id: "statute", label: "Statute monitors" },
@@ -28,8 +26,6 @@ export function MonitoringScreen() {
         <KeywordRules />
       ) : view === "workflows" ? (
         <InternalWorkflows />
-      ) : view === "subscriptions" ? (
-        <SubscriptionsScreen />
       ) : view === "statute" ? (
         <StatuteMonitors />
       ) : (

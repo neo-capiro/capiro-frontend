@@ -11,7 +11,7 @@ import {
   TextInput,
 } from "../../../../../shared/module-ui";
 import { SourceLink } from "../components";
-import type { EvidenceScope } from "../evidence/EvidenceActions";
+import type { EvidenceScope } from "../sources/EvidenceActions";
 import styles from "../legiwatch.module.css";
 import { DeadlineDraft } from "./DeadlineDraft";
 

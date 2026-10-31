@@ -5260,10 +5260,10 @@
     "symbol": "CommitteeDirectory",
     "line": 14,
     "nonblank": 149,
-    "fingerprint": "26c6d1f463b83753d74c52fe3b16dfeac41f3724256c398af3f7fe50c2e30cdd",
-    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
-    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "f89361ff24a3421164966b94064db1e8f8718220ccea7320c22e2b866b3dd765",
+    "reason": "CommitteeDirectory retains the independent staff-contact list, filters, selected committee and staff query. The change only clarifies staff labels; it does not acquire committee-room state or authorization. Exact source review of 3f0952566fc2cef29f3cf9347a1c74a27ccdef0a; see docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031.",
+    "reviewedBy": "Codex independent LegiWatch simplification review",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
@@ -5279,11 +5279,11 @@
     "kind": "function",
     "symbol": "StateDirectory",
     "line": 13,
-    "nonblank": 206,
-    "fingerprint": "726365d1118f6e2b1143050cbdc80bec2234f591c58e2c6d4a0ca9ab9278ede2",
-    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
-    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
-    "reviewedOn": "2026-10-26"
+    "nonblank": 136,
+    "fingerprint": "3ed45d5284ad24ad55be479a7e726b44a77949d7f51f25dfcfdb3bfd056ce7cd",
+    "reason": "StateDirectory now owns only the paginated legislator lookup and its state/chamber filters. Deleting the page-derived committee grouping removes a second presentation responsibility; transport and pagination retain their existing owners. Exact source review of 3f0952566fc2cef29f3cf9347a1c74a27ccdef0a; see docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031.",
+    "reviewedBy": "Codex independent LegiWatch simplification review",
+    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/workspace/templates/TemplateCard.tsx",
@@ -6879,10 +6879,12 @@
     "file": "apps/web/src/features/modules/calendar/CalendarCard.tsx",
     "kind": "function",
     "symbol": "CalendarEvents",
-    "fingerprint": "99d2ca51f7a66e6aa7222c917a646be2e081fd018346a25cb0073e38c45f938c",
-    "reason": "Responsibility/cohesion: the body is a single cohesive presentational responsibility â€” the\nevents viewport for the active view, with an agenda branch (search, clear filters, status\npanel, agenda table, empty/error messaging) and a grid branch (status panel + grid), plus the\nextras loading/warning notices. It fetches nothing, normalizes nothing, owns no state and\npersists nothing; every input comes from CalendarModel and rendering is delegated to\nAgendaTable, CalendarGrid, StatusPanel, TextInput and ActionButton. No cross-owner logic, no\nduplicated authority, and no boundary or cycle involvement (errors[] empty). Concrete\nresidual: it takes the whole CalendarModel and reads 11 fields, and the two branches could\nlater be split into presentational sub-components â€” optional hardening, out of scope here and\nnot justified by any correctness risk. I give no blanket count pass and claim no exception:\nthe >80 threshold is a size/maintainability signal, and the concrete reasons above are why\nthis exact body is acceptable. Disposition: ACCEPT the exact body as cohesive\nsingle-responsibility presentation; the blocking state is a review-record invalidation\nartifact of the enclosing-file edit, not a new or changed architectural defect. I do not bind\nthe registry; root owns the matching final-byte binding.",
-    "reviewedBy": "Hermes Agent source review 20261027_193444_620b36",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "b0a7449fd7c855ab0124a4002d7863df1db584e1ab58ef3ee8f52d0339ddc82c",
+    "reason": "CalendarEvents owns the agenda/grid viewport, source status and filtering presentation. Public hearing rows remain visible independently of meeting read errors. Feed paging, date normalization and meeting editors retain separate owners. This accepts the function responsibility and size; the independently reproduced hidden Agenda search behavior remains a functional review finding.",
+    "reviewedBy": "Codex independent hearing calendar and capture source review",
+    "reviewedOn": "2026-10-31",
+    "line": 14,
+    "nonblank": 90
   },
   {
     "file": "apps/web/src/shared/shell/shell.module.css",

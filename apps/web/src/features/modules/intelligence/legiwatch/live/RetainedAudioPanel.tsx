@@ -56,7 +56,7 @@ export function RetainedAudioPanel({
   return (
     <section className={styles.card}>
       <div className={styles.row}>
-        <h2>Retained audio coverage</h2>
+        <h2>Recording and saved audio</h2>
         <ActionButton onClick={manifest.reload}>Refresh coverage</ActionButton>
       </div>
       <StatusPanel

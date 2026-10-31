@@ -11,28 +11,19 @@ import {
 import {
   recipientSchema,
   recipientSelectionSchema,
-} from "./legiwatch-report-schemas";
+} from "./legiwatch-delivery-schemas";
 const source =
   "apps/intel-api/src/tracker/editorial/editorial.controller.ts; editorial.service.ts; packages/shared/src/legiwatch-phase8.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace";
 export const editorialConfig = evidenceScope
   .extend({
     folderId: monitorId,
-    template: z.enum([
-      "research_update",
-      "daily_legislative_brief",
-      "morning_news_brief",
-    ]),
-    reportId: monitorId,
+    template: z.enum(["research_update", "daily_legislative_brief"]),
     subject: z
       .string()
       .min(1)
       .max(200)
       .refine((value) => !/[\r\n]/.test(value)),
-    monitorIds: z.array(monitorId).max(38),
-    includedKinds: z
-      .array(z.enum(["news", "budget", "personnel", "research"]))
-      .min(1)
-      .max(4),
+    includedKinds: z.array(z.literal("research")).length(1),
     schedule: z
       .object({
         timezone: scheduleTime.timezone,
@@ -42,21 +33,6 @@ export const editorialConfig = evidenceScope
         noChange: z.enum(["draft", "skip"]),
         sourceGap: z.enum(["hold", "draft"]),
         mode: z.enum(["prepare", "send"]),
-      })
-      .strict(),
-    categoryMapping: z
-      .object({
-        namespace: z.string().nullable(),
-        version: z.literal(1),
-        entries: z.record(
-          z.string().max(80),
-          z
-            .object({
-              decision: z.enum(["included", "excluded", "pending"]),
-              reason: z.string().min(1).max(2000),
-            })
-            .strict(),
-        ),
       })
       .strict(),
     recipientSelection: z.array(recipientSelectionSchema).max(500),
@@ -74,8 +50,6 @@ export const editorialRow = z.object({
   source: z.object({
     family: z.object({
       displayName: z.string(),
-      categoryNamespace: z.string().nullable(),
-      categories: z.array(z.string()),
     }),
   }),
   config: editorialConfig
@@ -85,7 +59,7 @@ export const editorialRow = z.object({
     .extend({
       folderId: z.string().nullable().optional(),
       clientId: z.string().nullable().optional(),
-      reportVersion: z.number().optional(),
+      policyVersion: z.number().int().optional(),
       recipients: z.array(recipientSchema).optional(),
     }),
   approvalHash: z.string().optional(),
