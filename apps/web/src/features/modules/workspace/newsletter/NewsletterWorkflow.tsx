@@ -9,14 +9,15 @@ import type {
 } from "../../../../shared/capiro/operations/workspace-documents";
 import {
   ActionButton,
-  Badge,
   Field,
   Modal,
-  Panel,
   SelectInput,
+  Tabs,
   TextInput,
 } from "../../../../shared/module-ui";
+import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import styles from "../workspace.module.css";
+import parity from "./newsletter-figma.module.css";
 import { NewsletterComments } from "./NewsletterComments";
 import { NewsletterPaper } from "./NewsletterPaper";
 import { SelectTemplate } from "./NewsletterTemplates";
@@ -54,11 +55,35 @@ function BuilderTools({
     "code",
   ];
   return (
-    <aside className={styles.newsletterTools}>
-      <strong>Add content</strong>
-      {kinds.map((kind) => (
+    <aside className={parity.blockRail}>
+      <p className={parity.blockRailTitle}>Add content</p>
+      <p className={parity.blockLabel}>Blocks</p>
+      <div className={parity.blockList}>
+        {kinds.map((kind) => (
+          <button
+            key={kind}
+            disabled={body.blocks.length >= 100}
+            onClick={() =>
+              onChange({
+                ...body,
+                blocks: [
+                  ...body.blocks,
+                  {
+                    id: crypto.randomUUID(),
+                    kind,
+                    text: ["divider", "spacer"].includes(kind)
+                      ? ""
+                      : `New ${kind}`,
+                    href: undefined,
+                  },
+                ],
+              })
+            }
+          >
+            {kind[0]!.toUpperCase() + kind.slice(1)}
+          </button>
+        ))}
         <button
-          key={kind}
           disabled={body.blocks.length >= 100}
           onClick={() =>
             onChange({
@@ -67,42 +92,26 @@ function BuilderTools({
                 ...body.blocks,
                 {
                   id: crypto.randomUUID(),
-                  kind,
-                  text: ["divider", "spacer"].includes(kind)
-                    ? ""
-                    : `New ${kind}`,
-                  href: undefined,
+                  kind: "paragraph",
+                  text: `Issue date: ${new Date().toISOString().slice(0, 10)}`,
                 },
               ],
             })
           }
         >
-          {kind[0]!.toUpperCase() + kind.slice(1)}
+          Issue date
         </button>
-      ))}
-      <p className={styles.footnote}>
-        Images and links are reviewed before use.
-      </p>
-      <button
-        disabled={body.blocks.length >= 100}
-        onClick={() =>
-          onChange({
-            ...body,
-            blocks: [
-              ...body.blocks,
-              {
-                id: crypto.randomUUID(),
-                kind: "paragraph",
-                text: `Issue date: ${new Date().toISOString().slice(0, 10)}`,
-              },
-            ],
-          })
-        }
-      >
-        Issue date
-      </button>
+      </div>
     </aside>
   );
+}
+
+function stepDate() {
+  return new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  }).format(new Date());
 }
 
 export function NewsletterWorkflow(props: NewsletterEditorProps) {
@@ -158,6 +167,12 @@ function NewsletterEditor({
     saveOwner,
     onAtomicBound,
   });
+  const [commentView, setCommentView] = useState("open");
+  const commentRead = useCapiroQuery(
+    "workspace.comments",
+    { params: { documentId: documentId ?? "" } },
+    { enabled: step === "review" && Boolean(documentId) },
+  );
   if (conversion)
     return (
       <RichNewsletterEditor
@@ -165,6 +180,24 @@ function NewsletterEditor({
         onClose={() => setConversion(undefined)}
       />
     );
+  const leave = () =>
+    saved || step === "template" ? onClose() : setConfirmClose(true);
+  const saveState = pending
+    ? "Saving…"
+    : saved
+      ? "Changes saved"
+      : "Unsaved changes";
+  const crumbs = [
+    "Modules",
+    "Workspace",
+    "Workflows",
+    "Newsletter",
+    step === "template"
+      ? "Templates"
+      : step === "review"
+        ? "Newsletter · Review & delivery"
+        : "Builder",
+  ];
   return (
     <>
       {saveOwner && (
@@ -176,63 +209,93 @@ function NewsletterEditor({
       )}
       <fieldset
         disabled={pending || saveOwner?.frozen}
-        style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}
-        className={styles.screen}
+        style={{ border: 0, padding: 0, minWidth: 0 }}
+        className={parity.page}
         data-design-node={
           step === "template"
-            ? "976:190063"
-            : step === "builder" || step === "stage"
-              ? "976:190222"
-              : step === "review"
-                ? "976:190381"
-                : "976:190540"
+            ? "1064:260850"
+            : step === "review"
+              ? "1064:261027"
+              : step === "stage"
+                ? "1064:261084"
+                : "1064:260936"
         }
       >
-        <nav className={styles.breadcrumb}>
-          <button
-            className={styles.link}
-            onClick={() =>
-              saved || step === "template" ? onClose() : setConfirmClose(true)
-            }
-          >
-            Workspace
-          </button>
-          <span>/ {step === "template" ? "Create a newsletter" : title}</span>
-        </nav>
-        <header className={styles.heading}>
-          <div>
-            <h1>
-              {step === "template"
-                ? "Create a newsletter"
-                : step === "review"
-                  ? "Newsletter preview & review"
-                  : title}
-            </h1>
-            <p>
-              {step === "template"
-                ? "Select a starting point. Customize every section in the builder."
-                : "Newsletter builder"}
-            </p>
-          </div>
-          {step !== "template" && (
-            <div className={styles.actions}>
-              {step === "builder" || step === "stage" ? (
-                <>
-                  <ActionButton
-                    disabled={pending || (saveOwner && !saveOwner.canSave)}
-                    onClick={() => save(true)}
-                  >
-                    Save and exit
-                  </ActionButton>
-                  <ActionButton onClick={() => setStep("review")}>
-                    Preview & review
-                  </ActionButton>
-                </>
+        <nav className={parity.breadcrumb} aria-label="Breadcrumb">
+          {crumbs.map((crumb, index) => (
+            <span
+              key={crumb}
+              style={{ display: "inline-flex", gap: 6, alignItems: "center" }}
+            >
+              {index > 0 && <span aria-hidden>/</span>}
+              {crumb === "Workspace" ? (
+                <button className={parity.breadcrumbLink} onClick={leave}>
+                  Workspace
+                </button>
               ) : (
-                <ActionButton onClick={() => setStep("builder")}>
-                  Edit newsletter
-                </ActionButton>
+                <span>{crumb}</span>
               )}
+            </span>
+          ))}
+        </nav>
+        <header className={parity.heading}>
+          <h1>
+            {step === "template"
+              ? "Select a template"
+              : step === "review"
+                ? "Newsletter review"
+                : title}
+          </h1>
+          <p>
+            {step === "template"
+              ? "Create a client briefing that is ready to share."
+              : step === "review"
+                ? title
+                : `${stepDate()} · ${saveState}`}
+          </p>
+        </header>
+        <div className={parity.actionsBar}>
+          <span className={parity.trailing} />
+          {step === "template" ? (
+            <>
+              <ActionButton onClick={onClose}>Back to Workspace</ActionButton>
+              <ActionButton primary onClick={() => select("blank")}>
+                Start from scratch
+              </ActionButton>
+            </>
+          ) : step === "review" ? (
+            <>
+              <ActionButton onClick={leave}>Workspace</ActionButton>
+              <ActionButton onClick={() => setMobile(true)}>
+                Mobile review
+              </ActionButton>
+              <ActionButton
+                disabled={draft?.clientAssociation === "held"}
+                onClick={() => setStep("stage")}
+              >
+                Stage in Outreach
+              </ActionButton>
+              <ActionButton primary onClick={() => setStep("builder")}>
+                Edit newsletter
+              </ActionButton>
+            </>
+          ) : (
+            <>
+              <ActionButton onClick={() => setStep("review")}>
+                Preview
+              </ActionButton>
+              <ActionButton
+                disabled={pending || (saveOwner && !saveOwner.canSave)}
+                onClick={() => save()}
+              >
+                Save draft
+              </ActionButton>
+              <ActionButton
+                disabled={pending || (saveOwner && !saveOwner.canSave)}
+                onClick={() => save(true)}
+              >
+                Save and exit
+              </ActionButton>
               <ActionButton
                 primary
                 disabled={draft?.clientAssociation === "held"}
@@ -240,9 +303,9 @@ function NewsletterEditor({
               >
                 Stage in Outreach
               </ActionButton>
-            </div>
+            </>
           )}
-        </header>
+        </div>
         {draft && (
           <DraftClientAssociation
             draft={draft}
@@ -259,80 +322,68 @@ function NewsletterEditor({
           <SelectTemplate onSelect={select} />
         ) : (
           <>
-            <div className={styles.actions}>
-              <Badge tone={saved ? "success" : "warning"}>
-                {pending
-                  ? "Saving…"
-                  : saved
-                    ? "All changes saved"
-                    : "Unsaved changes"}
-              </Badge>
-              {step !== "stage" && (
-                <>
-                  <ActionButton
-                    disabled={pending || (saveOwner && !saveOwner.canSave)}
-                    onClick={() => save()}
-                  >
-                    Save draft
-                  </ActionButton>
-                  <ActionButton
-                    onClick={() => setMobile(false)}
-                    aria-pressed={!mobile}
-                  >
-                    Desktop
-                  </ActionButton>
-                  <ActionButton
-                    onClick={() => setMobile(true)}
-                    aria-pressed={mobile}
-                  >
-                    Mobile
-                  </ActionButton>
-                </>
-              )}
-            </div>
             {(step === "builder" || step === "stage") && (
-              <>
-                <div className={styles.grid}>
-                  <Field label="Subject" htmlFor="newsletter-subject">
-                    <TextInput
-                      id="newsletter-subject"
-                      value={body.subject}
-                      maxLength={400}
-                      onChange={(event) =>
-                        edit({ ...body, subject: event.target.value })
-                      }
+              <div className={parity.builderGrid}>
+                <BuilderTools body={body} onChange={edit} />
+                <div className={parity.canvasViewport}>
+                  <div className={parity.canvasControls}>
+                    <div className={parity.tabs}>
+                      <Tabs
+                        items={[
+                          { id: "desktop", label: "Desktop" },
+                          { id: "mobile", label: "Mobile" },
+                        ]}
+                        value={mobile ? "mobile" : "desktop"}
+                        onChange={(value) => setMobile(value === "mobile")}
+                        label="Preview width"
+                        wrap
+                      />
+                    </div>
+                    <ActionButton disabled={!history.length} onClick={undo}>
+                      Undo
+                    </ActionButton>
+                    <ActionButton disabled={!future.length} onClick={redo}>
+                      Redo
+                    </ActionButton>
+                  </div>
+                  <div className={parity.emailCanvas}>
+                    <NewsletterPaper
+                      body={body}
+                      mobile={mobile}
+                      editable
+                      onChange={edit}
                     />
-                  </Field>
-                  <Field label="Preview text" htmlFor="newsletter-preview-text">
-                    <TextInput
-                      id="newsletter-preview-text"
-                      value={body.preview}
-                      maxLength={500}
-                      onChange={(event) =>
-                        edit({ ...body, preview: event.target.value })
-                      }
-                    />
-                  </Field>
+                  </div>
                 </div>
-                <div className={styles.actions}>
-                  <ActionButton disabled={!history.length} onClick={undo}>
-                    Undo
-                  </ActionButton>
-                  <ActionButton disabled={!future.length} onClick={redo}>
-                    Redo
-                  </ActionButton>
-                </div>
-                <div className={styles.newsletterGrid}>
-                  <BuilderTools body={body} onChange={edit} />
-                  <NewsletterPaper
-                    body={body}
-                    mobile={mobile}
-                    editable
-                    onChange={edit}
-                  />
-                  <aside className={styles.info}>
-                    <h3>Newsletter settings</h3>
-                    <div className={styles.form}>
+                <aside className={parity.inspector}>
+                  <div className={parity.panel}>
+                    <h3 className={parity.inspectorTitle}>
+                      Newsletter settings
+                    </h3>
+                    <div className={parity.fields}>
+                      <Field label="Subject" htmlFor="newsletter-subject">
+                        <TextInput
+                          id="newsletter-subject"
+                          value={body.subject}
+                          maxLength={400}
+                          onChange={(event) =>
+                            edit({ ...body, subject: event.target.value })
+                          }
+                        />
+                      </Field>
+                      <Field
+                        label="Preview text"
+                        htmlFor="newsletter-preview-text"
+                      >
+                        <TextInput
+                          id="newsletter-preview-text"
+                          value={body.preview}
+                          maxLength={500}
+                          onChange={(event) =>
+                            edit({ ...body, preview: event.target.value })
+                          }
+                        />
+                      </Field>
                       <Field label="Document name" htmlFor="newsletter-title">
                         <TextInput
                           id="newsletter-title"
@@ -385,6 +436,8 @@ function NewsletterEditor({
                           }
                         />
                       </Field>
+                    </div>
+                    <div className={parity.railActions}>
                       <ActionButton onClick={() => setStep("template")}>
                         Change template
                       </ActionButton>
@@ -400,20 +453,64 @@ function NewsletterEditor({
                         onReview={setConversion}
                       />
                     </div>
-                  </aside>
-                </div>
-              </>
+                    <p className={parity.panelHint}>
+                      Recipients and sender are selected in Outreach.
+                    </p>
+                  </div>
+                </aside>
+              </div>
             )}
             {step === "review" && (
-              <div className={styles.sponsorLayout}>
-                <Panel>
-                  <p>SUBJECT {body.subject || "Not set"}</p>
-                  <p className={styles.footnote}>
-                    PREVIEW {body.preview || "Not set"}
-                  </p>
-                  <NewsletterPaper body={body} mobile={mobile} />
-                </Panel>
-                <NewsletterComments documentId={documentId} />
+              <div className={parity.tabs}>
+                <Tabs
+                  items={[
+                    {
+                      id: "open",
+                      label: `Open · ${(commentRead.data ?? []).filter((comment) => !comment.resolved).length}`,
+                    },
+                    {
+                      id: "resolved",
+                      label: `Resolved · ${(commentRead.data ?? []).filter((comment) => comment.resolved).length}`,
+                    },
+                  ]}
+                  value={commentView}
+                  onChange={setCommentView}
+                  label="Comment status"
+                  wrap
+                />
+              </div>
+            )}
+            {step === "review" && (
+              <div className={parity.reviewGrid}>
+                <div className={parity.previewColumn}>
+                  <div className={parity.canvasControls}>
+                    <div className={parity.tabs}>
+                      <Tabs
+                        items={[
+                          { id: "desktop", label: "Desktop" },
+                          { id: "mobile", label: "Mobile" },
+                        ]}
+                        value={mobile ? "mobile" : "desktop"}
+                        onChange={(value) => setMobile(value === "mobile")}
+                        label="Preview width"
+                        wrap
+                      />
+                    </div>
+                  </div>
+                  <div className={parity.emailCanvas}>
+                    <p>SUBJECT {body.subject || "Not set"}</p>
+                    <p className={parity.footnote}>
+                      PREVIEW {body.preview || "Not set"}
+                    </p>
+                    <NewsletterPaper body={body} mobile={mobile} />
+                  </div>
+                </div>
+                <NewsletterComments
+                  documentId={documentId}
+                  view={commentView}
+                  onViewChange={setCommentView}
+                  query={commentRead}
+                />
               </div>
             )}
           </>
@@ -440,6 +537,7 @@ function NewsletterEditor({
       <NewsletterStaging
         draftId={draft?.id}
         saved={saved}
+        title={title}
         open={step === "stage"}
         onClose={() => setStep("builder")}
         disabled={pending || Boolean(saveOwner?.frozen)}

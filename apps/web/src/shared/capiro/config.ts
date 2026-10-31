@@ -1,5 +1,9 @@
 import { serviceNames, type CapiroService } from "./contracts";
 import { readRequestOrigin } from "../request-origin";
+import {
+  resolveEngagementSessionsAvailability,
+  type EngagementSessionsAvailability,
+} from "./engagement-sessions-availability";
 
 export type CapiroConfig = {
   services: Partial<Record<CapiroService, string>>;
@@ -7,6 +11,8 @@ export type CapiroConfig = {
   publishableKey?: string;
   issues: string[];
   requestOrigin?: string | null;
+  /** Cohort capability: whether the ancillary campaign-session surface is reachable. */
+  engagementSessions?: EngagementSessionsAvailability;
 };
 
 const serviceVariables: Record<CapiroService, string> = {
@@ -15,6 +21,7 @@ const serviceVariables: Record<CapiroService, string> = {
   workspace: "WORKSPACE_API_BASE_URL",
   intelligence: "INTELLIGENCE_API_BASE_URL",
   onboard: "ONBOARD_API_BASE_URL",
+  engagement: "ENGAGEMENT_API_BASE_URL",
 };
 
 function readServiceUrl(
@@ -76,16 +83,27 @@ export function readCapiroConfig(
     publishableKey: authConfigured ? publishableKey : undefined,
     issues,
     requestOrigin,
+    engagementSessions: resolveEngagementSessionsAvailability(
+      env,
+      services.engagement,
+      issues,
+    ),
   };
 }
 
+export type CapiroCapabilities = {
+  /** Campaign-session availability as resolved on the server; never inferred client-side. */
+  campaignSessions: EngagementSessionsAvailability;
+};
 export type CapiroPublicConfig = {
   publishableKey?: string;
   configured: boolean;
+  capabilities?: CapiroCapabilities;
 };
 export function publicCapiroConfig(config: CapiroConfig): CapiroPublicConfig {
   return {
     publishableKey: config.publishableKey,
     configured: config.authConfigured && Boolean(config.services.core),
+    capabilities: { campaignSessions: config.engagementSessions ?? "unknown" },
   };
 }

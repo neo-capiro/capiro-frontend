@@ -233,6 +233,7 @@ export const serverAdapters = new Map([
   [`${appSource}app/api/capiro/[operation]/route.ts`, new Set([
     previewPolicy, previewReadProxy,
     '@clerk/nextjs/server', `${appSource}shared/capiro/config.ts`, `${appSource}shared/capiro/gateway.ts`, `${previewOwner}first-chat-gateway.server.ts`,
+    `${appSource}shared/capiro/engagement-sessions-availability.ts`,
   ])],
   [`${appSource}app/api/backend/[service]/[...path]/route.ts`, new Set([
     previewPolicy, previewReadProxy,

@@ -6,6 +6,8 @@ export const serviceNames = [
   "workspace",
   "intelligence",
   "onboard",
+  /** The separate engagement application that owns the outreach-v3 state surface. */
+  "engagement",
 ] as const;
 export type CapiroService = (typeof serviceNames)[number];
 export type CapiroMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
