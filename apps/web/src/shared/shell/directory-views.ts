@@ -8,6 +8,7 @@ export const directoryViews = [
 ] as const;
 
 export function resolveDirectoryView(requested: string | null) {
+  if (requested === "state-committees") requested = "committees";
   return (
     directoryViews.find((view) => view.id === requested) ?? directoryViews[0]
   );

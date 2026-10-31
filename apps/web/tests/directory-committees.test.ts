@@ -182,6 +182,16 @@ it("restores State selection and clearly limits its room coverage to Florida", (
   );
 });
 
+it("restores the former state-committees destination as the Florida catalog", () => {
+  state.search = "view=state-committees&clientId=client-hint";
+  expect(render()).toContain("Synthetic Florida committee");
+  state.actions.get("Open committee")!();
+  expect(state.push).toHaveBeenCalledWith(
+    committeeDirectoryHref("state:FL:fl-one", "client-hint"),
+    { scroll: false },
+  );
+});
+
 it.each([
   ["committee-one", "US", "Synthetic federal committee"],
   ["state:FL:fl-one", "FL", "Synthetic Florida committee"],
