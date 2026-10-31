@@ -16,6 +16,16 @@ Parameters:
     Type: String
     Description: Exact ECR image URI including sha256 digest
     AllowedPattern: "^[0-9]{12}\\.dkr\\.ecr\\.us-east-1\\.amazonaws\\.com/capiro/portfolio-preview@sha256:[0-9a-f]{64}$"
+  GitSha:
+    Type: String
+    Description: Exact accepted frontend Git commit for task identity; bind only after final source acceptance
+    Default: ""
+    AllowedPattern: "^$|^[0-9a-f]{40}$"
+  ReleaseSha:
+    Type: String
+    Description: Exact accepted frontend release commit; must equal GitSha
+    Default: ""
+    AllowedPattern: "^$|^[0-9a-f]{40}$"
   CertificateArn:
     Type: String
     Description: ISSUED ACM certificate covering app.capiro.ai; reuse after the current owner reads it back, never re-issue here
@@ -325,6 +335,12 @@ Rules:
         AssertDescription: Held Meri route must not carry an image digest
       - Assert: !Equals [!Ref CapiroPreviewMeriContractPackageVersion, ""]
         AssertDescription: Held Meri route must not carry a consumer version
+  TaskIdentityRequiresExactCommit:
+    Assertions:
+      - Assert: !Not [!Equals [!Ref GitSha, ""]]
+        AssertDescription: Task identity requires an accepted final frontend commit
+      - Assert: !Equals [!Ref GitSha, !Ref ReleaseSha]
+        AssertDescription: GIT_SHA and RELEASE_SHA must identify the same commit
 
 Resources:
   PreviewVpc:
@@ -547,6 +563,12 @@ Resources:
             - Name: CLERK_SECRET_KEY
               ValueFrom: !Ref ClerkSecretKeySecretArn
           Environment:
+            - Name: GIT_SHA
+              Value: !Ref GitSha
+            - Name: RELEASE_SHA
+              Value: !Ref ReleaseSha
+            - Name: IMAGE_REPO
+              Value: neo-capiro/capiro-frontend
             - Name: CORE_API_BASE_URL
               Value: !Ref CoreApiBaseUrl
             - Name: STRATEGY_API_BASE_URL
