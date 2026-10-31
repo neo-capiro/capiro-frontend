@@ -10,7 +10,8 @@
  * The shared registry spread and the Settings slot stay with the central composition; until the
  * leaf operations join `capiroOperations`, the scoped client below is the only way to call them.
  */
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { connectorRecoveryStore } from "../../../../shared/meri-connectors/recovery-store";
 import { useIdentity } from "../../../../shared/portfolio/auth/identity";
 import { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
 import {
@@ -55,18 +56,45 @@ export function ConnectorLibraryHost({ chrome }: { chrome: SettingsChrome }) {
         are unavailable.
       </p>
     );
-  if (!tenantId || identity.isFetching)
+  if (!tenantId || !userId || identity.isFetching)
     return <p role="status">Verifying the current Core account…</p>;
-  return <Connected key={`${tenantId}/${userId}`} chrome={chrome} />;
+  return (
+    <Connected
+      key={`${tenantId}/${userId}`}
+      tenantId={tenantId}
+      actorId={userId}
+      chrome={chrome}
+    />
+  );
 }
 
-function Connected({ chrome }: { chrome: SettingsChrome }) {
+function Connected({
+  chrome,
+  tenantId,
+  actorId,
+}: {
+  chrome: SettingsChrome;
+  tenantId: string;
+  actorId: string;
+}) {
   const api = useCapiro();
   const client = useMemo(
     () => createConnectorClient(api as unknown as ConnectorApi),
     [api],
   );
-  // Mounted-flow recovery for catalog adds this view cannot yet reconcile.
+  const recoveryStore = useMemo(
+    () =>
+      connectorRecoveryStore(tenantId, actorId, () => window.sessionStorage),
+    [tenantId, actorId],
+  );
+  const creating = useRef(false);
+  const lifetime = useRef<AbortController | null>(null);
+  useEffect(() => {
+    const controller = new AbortController();
+    lifetime.current = controller;
+    return () => controller.abort();
+  }, []);
+  // Row details stay in memory; unresolved catalog IDs survive navigation/reload in this tab.
   const [recovery, setRecovery] = useState(noCreateRecovery);
   // The existing current-read hook owns the request lifetime: it aborts a superseded read and never
   // renders a value from a previous account or generation.
@@ -74,6 +102,13 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
     "connected-services",
     useCallback(
       async (signal: AbortSignal) => {
+        try {
+          const unresolvedCatalogIds = recoveryStore.read();
+          if (!signal.aborted)
+            setRecovery((previous) => ({ ...previous, unresolvedCatalogIds }));
+        } catch {
+          /* Inventory remains readable; begin() refuses creates without recovery storage. */
+        }
         const [library, servers] = await Promise.all([
           client.library(signal),
           client.servers(signal),
@@ -81,13 +116,21 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
         // A read that actually completed is the only authority that retires recovery state: it
         // drops unresolved entries whose row it now lists and known rows it can see itself. A
         // failed, aborted or in-flight read never reaches here, so ids are kept across those.
-        if (!signal.aborted)
+        if (!signal.aborted) {
+          try {
+            recoveryStore.reconcile(
+              servers.flatMap((row) => (row.catalogId ? [row.catalogId] : [])),
+            );
+          } catch {
+            /* A failed storage update keeps the persisted create unresolved. */
+          }
           setRecovery((previous) =>
             reduceRecovery(previous, { type: "read", servers }),
           );
+        }
         return { library, servers };
       },
-      [client],
+      [client, recoveryStore],
     ),
   );
   const library: ConnectorLibrary | undefined = read.value?.library;
@@ -130,6 +173,7 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
         return;
       }
       if (result.kind === "refused") {
+        recoveryStore.refused(entry.id);
         setFailure(result.reason);
         return;
       }
@@ -156,7 +200,7 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
       setSettled((value) => value + 1);
       read.reload();
     },
-    [read],
+    [read, recoveryStore],
   );
 
   const entryFor = (cardId: string): McpCatalogEntry | undefined =>
@@ -164,12 +208,33 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
 
   const onConnect = (cardId: string, draft: ConnectDraft) => {
     const entry = entryFor(cardId);
-    if (!entry) return;
+    const operation = lifetime.current;
+    if (
+      !entry ||
+      !operation ||
+      operation.signal.aborted ||
+      creating.current ||
+      readState !== "ready"
+    )
+      return;
+    try {
+      recoveryStore.begin(cardId);
+    } catch (error) {
+      setFailure(
+        error instanceof Error
+          ? error.message
+          : "Connection recovery is unavailable.",
+      );
+      return;
+    }
+    creating.current = true;
     setBusyId(cardId);
     setFailure(undefined);
     void client
-      .connect(entry, draft)
-      .then((result) => settle(result, entry))
+      .connect(entry, draft, operation.signal)
+      .then((result) => {
+        if (!operation.signal.aborted) settle(result, entry);
+      })
       .catch((error: unknown) =>
         setFailure(
           error instanceof Error && error.message
@@ -177,15 +242,21 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
             : "The connection request failed.",
         ),
       )
-      .finally(() => setBusyId(undefined));
+      .finally(() => {
+        creating.current = false;
+        setBusyId(undefined);
+      });
   };
 
   const onReauthorize = (connectorId: string) => {
+    const operation = lifetime.current;
+    if (!operation || operation.signal.aborted) return;
     setBusyId(connectorId);
     setFailure(undefined);
     void client
-      .reauthorize(connectorId)
+      .reauthorize(connectorId, operation.signal)
       .then((started) => {
+        if (operation.signal.aborted) return;
         if (started.authUrl) {
           window.location.assign(started.authUrl);
           return;
@@ -196,8 +267,9 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
             : "No authorization page was returned",
           detail: started.alreadyConnected
             ? "Core reports a current authorization for this connection."
-            : "Try again, or disconnect and connect the service afresh.",
+            : "Refresh the connection list and retry authorization on this connection.",
         });
+        read.reload();
       })
       .catch((error: unknown) =>
         setFailure(
@@ -210,11 +282,14 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
   };
 
   const onDisconnect = (row: ConnectedServiceRow) => {
+    const operation = lifetime.current;
+    if (!operation || operation.signal.aborted) return;
     setBusyId(row.id);
     setFailure(undefined);
     void client
-      .disconnect({ id: row.id, authType: row.authType })
+      .disconnect({ id: row.id, authType: row.authType }, operation.signal)
       .then((result) => {
+        if (operation.signal.aborted) return;
         // An acknowledged end of the connection also retires the remembered row, so a later empty
         // read cannot resurrect it from this view's own state.
         setRecovery((previous) =>
@@ -247,11 +322,14 @@ function Connected({ chrome }: { chrome: SettingsChrome }) {
   };
 
   const onRefresh = () => {
+    const operation = lifetime.current;
+    if (!operation || operation.signal.aborted) return;
     setBusyId("refresh");
     setFailure(undefined);
     void client
-      .refresh()
+      .refresh(operation.signal)
       .then((refreshed) => {
+        if (operation.signal.aborted) return;
         setOutcome({
           title: "Tool lists refreshed",
           detail: `${refreshed.tools.length} tool${refreshed.tools.length === 1 ? "" : "s"} are registered for this account.`,
