@@ -32,6 +32,10 @@ export type UploadRefusal = Readonly<{
    * re-dispatch itself off this flag; only a status read may re-resolve the attempt.
    */
   uncertain?: true;
+  /** Local declaration transport evidence only; never inferred from a server outcome. */
+  neverDispatched?: true;
+  /** A proven local refusal remains visible if its recovery locator could not be removed. */
+  recoveryCleanupFailed?: true;
 }>;
 export type UploadReply<T> =
   | { ok: true; value: T }
@@ -54,8 +58,22 @@ const refuse = (
   refusal: Object.freeze({ code, ...extra }),
 });
 /** Codes the contract reserves for a command that provably never reached the service. */
-const notDispatched = (code: string) => uploadNotDispatchedErrors.includes(code);
-const failureOf = (error: unknown, route: UploadRoute): UploadRefusal => {
+const notDispatched = (code: string) =>
+  uploadNotDispatchedErrors.includes(code);
+const failureOf = (
+  error: unknown,
+  route: UploadRoute,
+  dispatched = false,
+): UploadRefusal => {
+  if (dispatched && (route === "initiate" || route === "remove"))
+    return Object.freeze({
+      code:
+        error instanceof UploadResponseError
+          ? error.code
+          : "UPLOAD_UNAVAILABLE",
+      outcome: "UNKNOWN",
+      uncertain: true,
+    });
   if (error instanceof UploadResponseError)
     return Object.freeze({
       code: error.code,
@@ -103,6 +121,10 @@ export interface UploadWire {
     uploadId: string,
     caller: AbortSignal,
   ): Promise<UploadReply<AdmittedUploadReceipt>>;
+  statusByRequest(
+    requestId: string,
+    caller: AbortSignal,
+  ): Promise<UploadReply<AdmittedUploadReceipt>>;
   remove(
     uploadId: string,
     caller: AbortSignal,
@@ -124,56 +146,89 @@ export function createUploadWire(
     request: AdmittedUploadRequest<R>,
     bytes: Uint8Array<ArrayBuffer>,
     signal: AbortSignal,
+    dispatched: () => void = () => undefined,
   ): Promise<UploadReply<AdmittedUploadReceipt>> {
     if (!current)
       return refuse("UPLOAD_UNAVAILABLE", {
         outcome: "UNKNOWN",
         uncertain: true,
       });
-    const response = await fetcher(uploadRequestPath(route, request), {
-      method: "POST",
-      body: bytes,
-      headers: {
-        "Content-Type": "application/json",
-        [actionSessionHeader]: current,
-      },
-      credentials: "same-origin",
-      cache: "no-store",
-      redirect: "error",
-      signal,
-    });
-    const received = await boundedJsonBytes(
-      response,
-      signal,
-      uploadApplicationMetadata.responseBytes,
-    );
-    const admitted = receiveUploadResponse(
-      route,
-      response.status,
-      received,
-      request,
-    );
-    return "error" in admitted
-      ? refuse(admitted.error.code, {
-          outcome: admitted.error.outcome,
-          status: response.status,
-          accessDenied: response.status === 401 || response.status === 403,
-        })
-      : { ok: true, value: admitted };
+    signal.throwIfAborted();
+    try {
+      dispatched();
+      const response = await fetcher(uploadRequestPath(route, request), {
+        method: "POST",
+        body: bytes,
+        headers: {
+          "Content-Type": "application/json",
+          [actionSessionHeader]: current,
+        },
+        credentials: "same-origin",
+        cache: "no-store",
+        redirect: "error",
+        signal,
+      });
+      const received = await boundedJsonBytes(
+        response,
+        signal,
+        uploadApplicationMetadata.responseBytes,
+      );
+      const admitted = receiveUploadResponse(
+        route,
+        response.status,
+        received,
+        request,
+      );
+      return "error" in admitted
+        ? refuse(admitted.error.code, {
+            outcome: admitted.error.outcome,
+            ...(admitted.error.outcome === "UNKNOWN"
+              ? { uncertain: true as const }
+              : {}),
+            status: response.status,
+            accessDenied: response.status === 401 || response.status === 403,
+          })
+        : { ok: true, value: admitted };
+    } catch (error) {
+      const refusal = failureOf(error, route, true);
+      return refuse(refusal.code, refusal);
+    }
   }
 
   /** The deadline covers issuing, sending and receiving, not just the response headers. */
   const bounded = async <T>(
     caller: AbortSignal,
     route: UploadRoute,
-    run: (signal: AbortSignal) => Promise<UploadReply<T>>,
+    run: (
+      signal: AbortSignal,
+      dispatched: () => void,
+    ) => Promise<UploadReply<T>>,
   ): Promise<UploadReply<T>> => {
     active++;
+    let dispatched = false;
+    const observed = (reply: UploadReply<T>): UploadReply<T> =>
+      route === "initiate" && !dispatched && !reply.ok
+        ? {
+            ok: false,
+            refusal: Object.freeze({
+              ...reply.refusal,
+              outcome: "NOT_DISPATCHED",
+              uncertain: undefined,
+              neverDispatched: true,
+            }),
+          }
+        : reply;
     try {
-      return await withActionDeadline([caller, lifetime], run);
+      return observed(
+        await withActionDeadline([caller, lifetime], (signal) =>
+          run(signal, () => {
+            dispatched = true;
+          }),
+        ),
+      );
     } catch (error) {
-      const refusal = failureOf(error, route);
-      return refuse(refusal.code, refusal);
+      const refusal = failureOf(error, route, dispatched);
+      return observed(refuse(refusal.code, refusal));
     } finally {
       active--;
     }
@@ -184,16 +239,22 @@ export function createUploadWire(
     uploadId: string,
     caller: AbortSignal,
   ): Promise<UploadReply<AdmittedUploadReceipt>> =>
-    bounded(caller, route, async (signal) => {
+    bounded(caller, route, async (signal, dispatched) => {
       // The same bounded bytes are admitted and dispatched; a repeat read re-sends them verbatim.
       const bytes = new TextEncoder().encode(JSON.stringify({ uploadId }));
-      return post(route, receiveUploadRequest(route, bytes), bytes, signal);
+      return post(
+        route,
+        receiveUploadRequest(route, bytes),
+        bytes,
+        signal,
+        dispatched,
+      );
     });
 
   return {
     pending: () => active > 0,
     declare: (requestId, file, caller) =>
-      bounded(caller, "initiate", async (signal) => {
+      bounded(caller, "initiate", async (signal, dispatched) => {
         // The declaration digest is computed locally; the receiver re-verifies these exact bytes.
         if (!Number.isSafeInteger(file.size) || file.size < 1)
           return refuse("INVALID_UPLOAD_DECLARATION");
@@ -218,11 +279,23 @@ export function createUploadWire(
           }),
         );
         const admitted = receiveUploadRequest("initiate", bytes);
-        const reply = await post("initiate", admitted, bytes, signal);
+        const reply = await post(
+          "initiate",
+          admitted,
+          bytes,
+          signal,
+          dispatched,
+        );
         return reply.ok
           ? {
               ok: true as const,
-              value: { admitted, bytes, sha256, original: body, receipt: reply.value },
+              value: {
+                admitted,
+                bytes,
+                sha256,
+                original: body,
+                receipt: reply.value,
+              },
             }
           : reply;
       }),
@@ -273,6 +346,9 @@ export function createUploadWire(
         return "error" in admitted
           ? refuse(admitted.error.code, {
               outcome: admitted.error.outcome,
+              ...(admitted.error.outcome === "UNKNOWN"
+                ? { uncertain: true as const }
+                : {}),
               status: response.status,
               // A canonical reply that reports an unknown write outcome is the contract's uncertain
               // case, not a refusal: only a status read may re-resolve it.
@@ -283,6 +359,16 @@ export function createUploadWire(
           : { ok: true, value: admitted };
       }),
     status: (uploadId, caller) => byId("status", uploadId, caller),
+    statusByRequest: (requestId, caller) =>
+      bounded(caller, "status", async (signal) => {
+        const bytes = new TextEncoder().encode(JSON.stringify({ requestId }));
+        return post(
+          "status",
+          receiveUploadRequest("status", bytes),
+          bytes,
+          signal,
+        );
+      }),
     remove: (uploadId, caller) => byId("remove", uploadId, caller),
   };
 }
