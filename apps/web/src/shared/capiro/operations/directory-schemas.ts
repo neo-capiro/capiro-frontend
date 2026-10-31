@@ -1,6 +1,22 @@
 import { z } from "zod";
 
 const text = z.string().nullish();
+export const directoryMetrics = z.object({
+  metric: z.literal("directory_contacts"),
+  definitionVersion: z.literal(1),
+  scope: z.literal("global_catalog"),
+  count: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
+  complete: z.literal(true),
+  capped: z.literal(false),
+  observedAt: z.iso.datetime(),
+  snapshot: z.object({
+    sourceId: z.string().min(1),
+    state: z.enum(["current", "previous_fallback", "stale_cache", "unknown"]),
+    loadedAt: z.iso.datetime(),
+    checkedAt: z.iso.datetime(),
+    publisherObservedAt: z.null(),
+  }),
+});
 export const directoryId = z.string().min(1).max(300);
 export const directoryPaging = z
   .object({

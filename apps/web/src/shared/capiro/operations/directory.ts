@@ -22,6 +22,14 @@ const read = <
   });
 const contactParams = z.object({ contactId: s.directoryId }).strict();
 export const directoryOperations = {
+  "directory.metrics": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/directory/metrics",
+    request: z.object({}).strict(),
+    response: s.directoryMetrics,
+    source: "Core DirectoryService.getMetrics / DirectoryController.metrics",
+  }),
   "directory.news": defineOperation({
     service: "core",
     method: "GET",
