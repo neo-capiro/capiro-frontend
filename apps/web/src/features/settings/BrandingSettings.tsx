@@ -188,6 +188,15 @@ export function BrandingSettings() {
   const sync = useSettingsAction(api);
   const uploadAction = useSettingsAction(api);
   const [receipt, setReceipt] = useState<BrandingSyncReceipt>();
+  // A browser can reuse a decoded image within this document even with no-store.
+  // These verified response fields distinguish its display identity, never its authority.
+  const logoUrl =
+    query.data?.logoUrl === "/api/firm-logo"
+      ? `/api/firm-logo?${new URLSearchParams({
+          scope: query.data.id,
+          version: query.data.logoUploadedAt ?? "",
+        })}`
+      : query.data?.logoUrl;
   const status =
     receipt && query.data && receipt.name !== query.data.name
       ? "superseded"
@@ -201,9 +210,9 @@ export function BrandingSettings() {
       >
         {query.data ? (
           <BrandingForm
-            key={`${query.data.name}:${query.data.logoUploadedAt}`}
+            key={`${query.data.id}:${query.data.name}:${query.data.logoUploadedAt}`}
             initialName={query.data.name}
-            logoUrl={query.data.logoUrl}
+            logoUrl={logoUrl}
             reload={query.reload}
             mutation={mutation}
             onSaved={setReceipt}

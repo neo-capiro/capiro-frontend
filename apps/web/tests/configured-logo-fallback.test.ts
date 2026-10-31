@@ -12,6 +12,8 @@ import { BrandingSettings } from "../src/features/settings/BrandingSettings";
 const hooks = vi.hoisted(() => ({ values: [] as unknown[], index: 0 }));
 const branding = vi.hoisted(() => ({
   logoUrl: undefined as string | undefined,
+  id: "synthetic-tenant",
+  logoUploadedAt: "2026-10-31T10:00:00Z",
   locked: false,
 }));
 vi.mock("react", async (original) => ({
@@ -34,7 +36,12 @@ vi.mock("lucide-react", () => ({ ArrowUpRight: "svg" }));
 vi.mock("@/shared/capiro/CapiroBoundary", () => ({ useCapiro: () => ({}) }));
 vi.mock("@/shared/capiro/queries", () => ({
   useCapiroQuery: () => ({
-    data: { name: "Synthetic organization", logoUrl: branding.logoUrl },
+    data: {
+      name: "Synthetic organization",
+      logoUrl: branding.logoUrl,
+      id: branding.id,
+      logoUploadedAt: branding.logoUploadedAt,
+    },
     loading: false,
     reload: vi.fn(),
   }),
@@ -114,6 +121,8 @@ const client = clientSchema.parse({
 beforeEach(() => {
   hooks.values = [];
   branding.logoUrl = undefined;
+  branding.id = "synthetic-tenant";
+  branding.logoUploadedAt = "2026-10-31T10:00:00Z";
   branding.locked = false;
 });
 describe("configured logo load failures", () => {
@@ -157,6 +166,34 @@ describe("configured logo load failures", () => {
     ).toBe(nextLogo);
     branding.logoUrl = undefined;
     expect(text(render(BrandingSettings))).toContain("No logo");
+  });
+  it("keeps the app's own firm-logo path with a scope and version display key", () => {
+    // The consumer sweep for the M1 firm half: once Core reports the app path instead of a
+    // presigned URL, the settings surface must keep its path. A website normalizer would turn
+    // "/api/firm-logo" into something else — the mistake the client-logo consumers had.
+    branding.logoUrl = "/api/firm-logo";
+    const image = elements(render(BrandingSettings)).find(
+      (node) => node.type === "img",
+    )!;
+    const src = new URL(image.props.src as string, "https://app.example.test");
+    expect(src.pathname).toBe("/api/firm-logo");
+    expect(src.searchParams.get("scope")).toBe(branding.id);
+    expect(src.searchParams.get("version")).toBe(branding.logoUploadedAt);
+    expect(image.props.alt).toBe("Organization logo");
+    expect(image.props.onError).toBeTypeOf("function");
+    expect(text(render(BrandingSettings))).not.toContain("Logo unavailable");
+  });
+  it("changes the display URL after a logo replacement or tenant switch", () => {
+    branding.logoUrl = "/api/firm-logo";
+    const source = () =>
+      elements(render(BrandingSettings)).find((node) => node.type === "img")!
+        .props.src;
+    const initial = source();
+    branding.logoUploadedAt = "2026-10-31T10:01:00Z";
+    const replaced = source();
+    expect(replaced).not.toBe(initial);
+    branding.id = "another-synthetic-tenant";
+    expect(source()).not.toBe(replaced);
   });
   it("keeps logo upload locked while an existing branding mutation is unresolved", () => {
     branding.locked = true;
