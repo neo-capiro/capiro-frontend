@@ -121,10 +121,10 @@ BLOCKER = ships broken · HIGH = user-visible failure in normal use · MED = def
 | M3 | MED | C2 reads `active` after confirmed cancellation; `sectorTag: null`; `totalContracts: 15964.02` | client record | **D6: leave** | — |
 | M4 | MED | V6 meetings (Apr–Aug 2026) still `status: scheduled` | `probe/v6-meetings.json` | **D6: leave** | — |
 | M5 | MED | Synthetic QA clients offered in the client-assignment picker | assignment dialog listing | default | WP5 |
-| M6 | MED | Duplicate/needless fetches: `/clients/{id}` twice (two cache keys); metrics refetched on every search keystroke; Notes blocks the editor on refetch; Share artifacts issues 8 requests to open | run logs | — | WP4 |
+| M6 | MED | Duplicate/needless fetches: `/clients/{id}` twice (two cache keys); metrics refetched on every search keystroke; Notes blocks the editor on refetch; Share artifacts issues 8 requests to open | run logs | one shared client read; metrics/notes refetch cured; share fan-out BLOCKED on evidence | WP4 |
 | C1 | LOW | "V6 Advisors’s calendar" (blind possessive) | live UI | — | WP7 |
 | C2 | LOW | Activity kind menu uses lowercase `email/meeting/document` beside "All activity" | live UI | — | WP7 |
-| C3 | LOW | Aborted `/me` and `/debriefs` requests logged on navigation | run logs | — | WP7 |
+| C3 | LOW | Aborted `/me` and `/debriefs` requests logged on navigation | run logs | ACCEPTED LIMITATION — correct unmount cancellation | WP7 |
 
 ---
 
@@ -294,10 +294,11 @@ change; **ACCEPTED** = a recorded decision, not work; **OPEN** = still to do, wi
 | M3 | ACCEPTED | D6: leave lifecycle status alone. | decision |
 | M4 | ACCEPTED | D6: leave lifecycle status alone. | decision |
 | M5 | OPEN | Moving synthetic clients to a QA tenant is a data change in the shared dev tenant; it needs an explicit write scope and a forward migration, and §5 forbids deleting QA clients. | — |
-| M6 | OPEN | Duplicate `/clients/{id}` reads (two cache keys), metrics refetch on search keystroke and the share-artifacts fan-out are React Query cache-key work across `features/portfolio/**`; it is the largest frontend item left and was not started. | — |
+| M6 | PARTIAL | One `/clients/{id}` read: the catalogue hook and the profile panels now resolve ONE actor-scoped key and options in `features/portfolio/clients/client-read.ts`, so a profile mount issues one GET (two actors still get two entries). Metrics no longer refetch on search typing (60s stale window, interval and Refresh preserved; measured 11 -> 1 for one mount + ten keystrokes). The Notes panel renders the drawer's cached client instead of forcing a mount refetch. Share-artifacts fan-out is **BLOCKED**: see the next row. | `tests/portfolio-fetch-noise.test.ts` |
+| M6 (share) | BLOCKED | The only run whose findings capture the share-artifacts dialog (`runs/calendar-sweep-c2`, step `share-artifacts`) has **no `log.json`** — findings and screenshots only — and none of the 14 per-request logs contains a share interaction (`meeting-commands` POST, artifacts read) beyond `GET engagement/capabilities`. A fresh capture must record `requests[]` (method, url, t) across the Share-artifacts click and dialog open, with the run's step label, before any request can be removed. | `runs/calendar-sweep-c2/`, 14 logged runs |
 | C1 | VERIFIED | Blind possessive ("V6 Advisors's calendar") is not reproducible on `main` — the calendar header composes the client name with no possessive suffix. | grep of `main` @ 817fa529 |
 | C2 | CLOSED | The kind menu listed raw transport values (`email`, `meeting`, `document`) beside "All activity"; it now maps to sentence-case labels. | `ActivityFilters.tsx` |
-| C3 | OPEN | Aborted `/me` and `/debriefs` requests on navigation are request-lifecycle noise in the drawer teardown, not a wrong result. Not started. | — |
+| C3 | ACCEPTED LIMITATION | Aborted `/me` and `/debriefs` on navigation are React Query's unmount cancellation of a disposable request — the correct teardown behaviour, not a wrong result. Suppressing it would either let the auth read and the command preflight outlive their component or hide a genuine cancel, so no code change is made. A real failure still surfaces: `QueryState` renders an error rather than pending (`src/shared/portfolio/ui/QueryState.tsx:14`, the `!error && pending` guard), and `tests/meri-client-selector.test.ts:163-164` asserts a failed read renders the error with a Retry action instead of a loading state. | `QueryState.tsx`, `meri-client-selector.test.ts` |
 | D5 | OPEN | Artifact bodies out of list responses is a shared-contract change (Core projection + every collection consumer). Deliberately not bundled into this pass. | — |
 | WP6 (D3) | OPEN — gated | Krisp removal is mechanical, but its own guard rail blocks it: Meri notetaker coverage must be proven against the sweep's read-only discovery for both fixture tenants first, and that is live-tenant work. Removing the path before that check would silently drop capture. | §3 WP6 guard rail |
 
@@ -386,5 +387,5 @@ deployment, not route acceptance, not feature completion.
   route preserved.
 - **Provenance wording.** The `web149`/`Core653` section above is now explicitly a dated historical measurement.
 
-Remaining open: B1/B2 (WP2), M1, M5, M6, C3, D5, WP6 — unchanged by these corrections.
+Remaining open: B1/B2 (WP2), M1, M5, M6-share-only (BLOCKED on evidence), D5, WP6. C3 is an accepted limitation; the rest of M6 is closed.
 
