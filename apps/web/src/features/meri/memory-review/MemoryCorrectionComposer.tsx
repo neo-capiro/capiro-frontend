@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { ChevronDown, ListFilter } from "lucide-react";
+import { MemoryHistoryEvidence } from "./MemoryHistoryEvidence";
 import { MeriPageHeading } from "../ui/MeriPageHeading";
 import { FormField } from "../ui/FormField";
 import { Notice } from "../ui/Notice";
@@ -134,14 +135,7 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
               <button type="button" className={ui.primary} aria-current="page">
                 <ListFilter aria-hidden /> Current memory
               </button>
-              <button
-                type="button"
-                className={ui.outline}
-                disabled
-                title="Memory history is not connected for personal memory yet."
-              >
-                <ListFilter aria-hidden /> History
-              </button>
+              <span>Open History on a memory below.</span>
             </nav>
           </div>
           {holdStatus === "unavailable" ? (
@@ -199,29 +193,42 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
                 aria-label="Current personal memories"
               >
                 {results.map((item) => (
-                  <MemoryCard
-                    key={item.id}
-                    unavailable={EVIDENCE_UNAVAILABLE}
-                    item={{
-                      id: item.id,
-                      title: memoryPresentation(item).title,
-                      meta: item.clientId
-                        ? "Personal · client memory"
-                        : "Personal · firm-wide",
-                      fact: memoryPresentation(item).fact,
-                      status: { label: "Current", tone: "neutral" },
-                      terms: [],
-                      evidence: { label: "View evidence" },
-                      correction: {
-                        selected: selectedId === item.id,
-                        disabled: !!workingId,
-                        onSelect: () => {
-                          setSelectedId(item.id);
-                          setDraft(item.value);
+                  <Fragment key={item.id}>
+                    <MemoryCard
+                      unavailable={EVIDENCE_UNAVAILABLE}
+                      item={{
+                        id: item.id,
+                        title: memoryPresentation(item).title,
+                        meta: item.clientId
+                          ? "Personal · client memory"
+                          : "Personal · firm-wide",
+                        fact: memoryPresentation(item).fact,
+                        status: { label: "Current", tone: "neutral" },
+                        terms: [],
+                        evidence: {
+                          label: "History and evidence",
+                          ...(item.reference
+                            ? { href: `#memory-details-${item.id}` }
+                            : {}),
                         },
-                      },
-                    }}
-                  />
+                        correction: {
+                          selected: selectedId === item.id,
+                          disabled: !!workingId,
+                          onSelect: () => {
+                            setSelectedId(item.id);
+                            setDraft(item.value);
+                          },
+                        },
+                      }}
+                    />
+                    {item.reference ? (
+                      <MemoryHistoryEvidence
+                        reference={item.reference}
+                        clientId={item.clientId}
+                        revision={item.updatedAt}
+                      />
+                    ) : null}
+                  </Fragment>
                 ))}
               </div>
             </>
