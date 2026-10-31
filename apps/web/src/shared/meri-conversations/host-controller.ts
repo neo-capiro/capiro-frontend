@@ -27,7 +27,9 @@ export class ConversationHostController extends SessionLifetimeController<
     onBound?: (context: ConversationContext) => void;
     retryDelaysMs?: readonly number[];
   }) {
-    const hints = conversationSessionHints.parse(options.hints);
+    const hints = structuredClone(
+      conversationSessionHints.parse(options.hints),
+    );
     const account = Object.freeze({ ...options.account });
     const { fetcher, now, origin, onBound, retryDelaysMs } = options;
     super({
@@ -68,6 +70,11 @@ export class ConversationHostController extends SessionLifetimeController<
           hints.clientId = session.context.selectedClientId;
           hints.conversationId = session.context.conversationId;
           hints.runId = session.context.runId;
+          if ("scopeKind" in hints) {
+            if (!("scopeKind" in session.context))
+              throw new Error("Research session lost its captured scope");
+            hints.scope = session.context.scope;
+          }
         } catch (cause) {
           port.dispose();
           throw cause;
