@@ -98,6 +98,7 @@ export const searchResponseSchema = z.object({
   ),
   profileGaps: z
     .object({
+      actualUnscoredCount: count.nullable().optional(),
       items: z.array(
         z.object({
           title: z.string(),
