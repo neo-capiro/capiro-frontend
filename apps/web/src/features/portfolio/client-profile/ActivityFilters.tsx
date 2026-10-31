@@ -9,6 +9,20 @@ import { ActivityDateFilter } from "./ActivityDateFilter";
 import styles from "./activity-filters.module.css";
 
 const asset = (slot: string) => `/design/411-60532-${slot}.svg`;
+// The menu lists the kinds the feed actually returned, which are lowercase
+// transport values ("email", "meeting", "document"). Showing them raw next to the
+// sentence-case "All activity" reads like a debug menu (C2).
+const kindLabels: Record<string, string> = {
+  email: "Email",
+  meeting: "Meeting",
+  document: "Document",
+  note: "Note",
+  call: "Call",
+  task: "Task",
+};
+const kindLabel = (kind: string) =>
+  kindLabels[kind] ??
+  (kind ? `${kind[0]?.toUpperCase()}${kind.slice(1)}` : "All activity");
 export function ActivityFilters({
   value,
   onChange,
@@ -38,7 +52,7 @@ export function ActivityFilters({
           aria-label="Activity type"
         >
           <img src={asset("filter")} alt="" />
-          {value.kind || "All activity"}
+          {kindLabel(value.kind)}
           <img src={asset("chevron")} alt="" />
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
@@ -49,7 +63,7 @@ export function ActivityFilters({
             >
               {["", ...kinds].map((kind) => (
                 <DropdownMenu.RadioItem key={kind} value={kind}>
-                  {kind || "All activity"}
+                  {kindLabel(kind)}
                 </DropdownMenu.RadioItem>
               ))}
             </DropdownMenu.RadioGroup>

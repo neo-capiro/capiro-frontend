@@ -7,9 +7,45 @@ import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { Preparation } from "./schema";
 import { savePreparation, type EditPreparation } from "./api";
-import { editedBody, editValues, prepFields, type PrepField } from "./editing";
+import {
+  editedBody,
+  editValues,
+  prepEditability,
+  prepFields,
+  type PrepField,
+} from "./editing";
 import styles from "./preparation.module.css";
 
+/**
+ * The editor's submit decision, exported so the binding guard is testable without a
+ * DOM: only a prep whose client provenance matches the enclosing meeting may be
+ * written, and only a changed body is sent.
+ */
+export function submitPrepEdit({
+  prep,
+  values,
+  clientId,
+  canWrite,
+  save,
+  onInvalid,
+}: {
+  prep: Preparation;
+  values: Record<PrepField, string>;
+  clientId: string | null;
+  canWrite: boolean;
+  save: (body: EditPreparation) => void;
+  onInvalid?: (message: string) => void;
+}): void {
+  if (!canWrite || prepEditability(prep, clientId) !== "editable") return;
+  try {
+    const body = editedBody(prep, values);
+    if (Object.keys(body).length) save(body);
+  } catch (error) {
+    onInvalid?.(
+      error instanceof Error ? error.message : "Check the preparation fields.",
+    );
+  }
+}
 export function PreparationEditor({
   meetingId,
   clientId,
@@ -31,6 +67,11 @@ export function PreparationEditor({
   const structuredEmailEvidence = prep.emailEvidence.some(
     (item) => typeof item !== "string",
   );
+  // A prep whose client provenance is unknown cannot be written through this
+  // editor: the update path preserves the stored stamp, so the receipt check would
+  // report a committed write as invalid. Read-only until the backend binds the row.
+  const editability = prepEditability(prep, clientId);
+  const writable = canWrite && editability === "editable";
   const dirty = JSON.stringify(values) !== JSON.stringify(editValues(prep));
   const save = useMutation({
     retry: false,
@@ -63,18 +104,16 @@ export function PreparationEditor({
         className={styles.form}
         onSubmit={(event) => {
           event.preventDefault();
-          if (!canWrite || save.isPending) return;
+          if (save.isPending) return;
           setValidation(undefined);
-          try {
-            const body = editedBody(prep, values);
-            if (Object.keys(body).length) save.mutate(body);
-          } catch (error) {
-            setValidation(
-              error instanceof Error
-                ? error.message
-                : "Check the preparation fields.",
-            );
-          }
+          submitPrepEdit({
+            prep,
+            values,
+            clientId,
+            canWrite: writable,
+            save: save.mutate,
+            onInvalid: setValidation,
+          });
         }}
       >
         {(Object.keys(prepFields) as PrepField[]).map((field) => (
@@ -84,7 +123,7 @@ export function PreparationEditor({
             value={values[field]}
             rows={Math.max(1, Math.min(8, values[field].split(/\r?\n/).length))}
             disabled={
-              !canWrite ||
+              !writable ||
               save.isPending ||
               (field === "emailEvidence" && structuredEmailEvidence)
             }
@@ -102,6 +141,19 @@ export function PreparationEditor({
         {!canWrite && (
           <p role="note">
             Preparation changes are unavailable. Your draft is preserved.
+          </p>
+        )}
+        {editability === "unbound-legacy" && (
+          <p role="note">
+            This preparation was saved before it was bound to a client, so it is
+            read-only here. Ask an administrator to rebind it, or generate a new
+            preparation to edit its content.
+          </p>
+        )}
+        {editability === "other-client" && (
+          <p role="note">
+            This preparation belongs to a different client and cannot be edited
+            from this meeting.
           </p>
         )}
         {structuredEmailEvidence && (
@@ -140,12 +192,12 @@ export function PreparationEditor({
           </button>
           <button
             className="button primary"
-            disabled={!canWrite || !dirty || save.isPending}
+            disabled={!writable || !dirty || save.isPending}
           >
             {save.isPending
               ? "Saving…"
               : save.isError
-                ? "Retry save prep"
+                ? "Check saved prep"
                 : "Save prep"}
           </button>
         </footer>

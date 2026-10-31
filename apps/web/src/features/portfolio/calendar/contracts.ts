@@ -55,7 +55,14 @@ export const meetingSchema = z
       });
     }
     meeting.preps.forEach((prep, index) => {
-      if (prep.meetingId !== undefined && prep.meetingId !== meeting.id) {
+      // `null`/absent attribution is UNKNOWN provenance, not another record: preps
+      // written before the client stamp existed carry `clientId: null` while the
+      // enclosing meeting is client-scoped, and that one row used to fail the whole
+      // payload — the drawer showed "Meeting unavailable" and notes, debriefs, edit
+      // and join were unreachable (B0). A prep that names a different meeting or
+      // client is still a contract violation; parseMeeting() degrades that one prep
+      // instead of blanking the meeting.
+      if (prep.meetingId != null && prep.meetingId !== meeting.id) {
         ctx.addIssue({
           code: "custom",
           path: ["preps", index, "meetingId"],
@@ -63,7 +70,7 @@ export const meetingSchema = z
         });
       }
       if (
-        prep.clientId !== undefined &&
+        prep.clientId != null &&
         prep.clientId !== (meeting.client?.id ?? null)
       ) {
         ctx.addIssue({
@@ -74,6 +81,43 @@ export const meetingSchema = z
       }
     });
   });
+/**
+ * Read a meeting payload without letting one unusable prep hide the meeting.
+ *
+ * The strict contract stays the gate: a prep naming another meeting or client is
+ * still invalid. But the drawer must not be all-or-nothing (B0), so on a failure
+ * that the preps explain, the meeting is re-read with only the preps it can prove
+ * and the count of dropped preps is returned so the Preparation panel can say so.
+ * Any other contract failure is still a failure.
+ */
+export function parseMeeting(payload: unknown): {
+  meeting: Meeting;
+  unusablePreps: number;
+} {
+  const parsed = meetingSchema.safeParse(payload);
+  if (parsed.success) return { meeting: parsed.data, unusablePreps: 0 };
+  const source = payload as { preps?: unknown } | null;
+  const preps = Array.isArray(source?.preps) ? source.preps : [];
+  const meetingId = (source as { id?: unknown } | null)?.id;
+  const clientId =
+    (source as { client?: { id?: unknown } | null } | null)?.client?.id ?? null;
+  const usable = preps.filter((prep) => {
+    const row = prep as { meetingId?: unknown; clientId?: unknown };
+    return (
+      (row.meetingId == null || row.meetingId === meetingId) &&
+      (row.clientId == null || row.clientId === clientId)
+    );
+  });
+  const retried = meetingSchema.safeParse({ ...(source ?? {}), preps: usable });
+  if (retried.success && preps.length !== usable.length)
+    return {
+      meeting: retried.data,
+      unusablePreps: preps.length - usable.length,
+    };
+  throw new Error(
+    "The service returned an unexpected response. Please retry or contact support.",
+  );
+}
 export type Meeting = z.infer<typeof meetingSchema>;
 export const hearingSchema = z.object({
   id: z.string(),

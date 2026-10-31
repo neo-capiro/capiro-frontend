@@ -1,4 +1,5 @@
 "use client";
+import { z } from "zod";
 import { useQuery } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { fetchEffectiveDates } from "./effective-feed";
@@ -9,7 +10,7 @@ import {
   fetchPlanner,
   fetchUpcomingDeadlines,
 } from "./feeds";
-import { meetingSchema, meetingArtifactListSchema } from "./contracts";
+import { meetingArtifactListSchema, parseMeeting } from "./contracts";
 export function useCalendarFeeds(
   range: { from: string; to: string; startDay: string; endDay: string },
   zone: string,
@@ -66,15 +67,22 @@ export function useMeeting(id: string | null, clientId?: string) {
   return useQuery({
     queryKey: ["meeting", id, clientId ?? null],
     enabled: Boolean(id),
-    queryFn: ({ signal }) =>
-      api.request(
+    queryFn: async ({ signal }) => {
+      const payload = await api.request(
         "core",
         `engagement/meetings/${encodeURIComponent(id ?? "")}${clientId ? `?clientId=${encodeURIComponent(clientId)}` : ""}`,
-        meetingSchema.refine((meeting) => meeting.id === id, {
-          message: "Meeting response does not match the requested meeting",
-        }),
+        z.unknown(),
         { signal },
-      ),
+      );
+      // A prep that fails its meeting/client binding degrades to the Preparation
+      // panel; it does not blank the drawer (B0).
+      const read = parseMeeting(payload);
+      if (read.meeting.id !== id)
+        throw new Error(
+          "Meeting response does not match the requested meeting",
+        );
+      return read;
+    },
   });
 }
 export function useMeetingNotes(

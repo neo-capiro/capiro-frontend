@@ -15,6 +15,24 @@ export function itemText(item: Preparation["agenda"][number]) {
   if ("text" in item) return item.text;
   return `${item.title}${item.description ? ` — ${item.description}` : ""}${item.dueDate ? ` (Due ${item.dueDate})` : ""}`;
 }
+export type PrepEditability = "editable" | "unbound-legacy" | "other-client";
+/**
+ * Whether the editor may write this stored prep.
+ *
+ * A prep saved before the client stamp existed carries `clientId: null` while its
+ * meeting is client-scoped. The update path preserves the stored stamp, so the
+ * mutation receipt can never match the enclosing client: the write commits and the
+ * reader reports it invalid (review finding 2). Until the backend establishes the
+ * binding, that row is explicitly read-only rather than silently re-stamped here.
+ */
+export function prepEditability(
+  prep: Pick<Preparation, "clientId">,
+  meetingClientId: string | null,
+): PrepEditability {
+  if (prep.clientId === meetingClientId) return "editable";
+  if (prep.clientId == null) return "unbound-legacy";
+  return "other-client";
+}
 export function editValues(prep: Preparation): Record<PrepField, string> {
   return {
     summary: prep.summary ?? "",

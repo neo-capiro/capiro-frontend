@@ -15,10 +15,19 @@ export async function fetchOwnedCalendarConnections(
     calendarConnectionsSchema,
     { signal },
   );
-  if (!userId || connections.some((item) => item.createdByUserId !== userId))
+  // Absent ownership is not evidence of an outside caller: `engagement/integrations`
+  // already filters to the caller's own connections. Only a stated different owner
+  // is a contract violation. Kept as one message so the dialog never shows the
+  // schema's generic "unexpected response" for this case (B3).
+  if (
+    !userId ||
+    connections.some(
+      (item) => item.createdByUserId != null && item.createdByUserId !== userId,
+    )
+  )
     throw new ApiError(
       502,
-      "The service returned an account outside the current caller's scope.",
+      "The calendar connections returned did not match your account. Refresh and try again.",
     );
   return connections;
 }
