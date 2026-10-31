@@ -1,14 +1,29 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { ProspectResults } from "../src/features/portfolio/index/ProspectResults";
 import {
   clientSchema,
   type Client,
 } from "../src/features/portfolio/index/contracts";
 import { projectPortfolioCatalog } from "../src/features/portfolio/index/catalog-projection";
-import { readPortfolioState } from "../src/features/portfolio/index/filter";
+import {
+  readPortfolioState,
+  sortProspectProfiles,
+} from "../src/features/portfolio/index/filter";
 import {
   prospectSchema,
   type Prospect,
 } from "../src/features/portfolio/prospects/contracts";
+
+vi.mock("next/link", () => ({
+  default: ({ children, ...props }: { children: React.ReactNode }) =>
+    createElement("a", props, children),
+}));
+vi.mock("../src/features/portfolio/index/ProfileResults", () => ({
+  ProfileCard: ({ client }: { client: Client }) =>
+    createElement("div", null, client.name),
+}));
 
 const ids = {
   client: "10000000-0000-4000-8000-000000000001",
@@ -69,6 +84,121 @@ const project = (
   });
 
 describe("Portfolio Core and Business Development catalog projection", () => {
+  it.each(["cards", "list"] as const)(
+    "renders mixed %s in the chosen order while retaining record destinations",
+    (view) => {
+      const html = renderToStaticMarkup(
+        createElement(ProspectResults, {
+          coreRows: [
+            { ...core(ids.coreOnly, "PROSPECT"), name: "Middle core" },
+          ],
+          rows: [
+            { ...bd(ids.linkedBd, null), displayName: "Zulu prospect" },
+            { ...bd(ids.standaloneBd, null), displayName: "Alpha prospect" },
+          ],
+          view,
+          sort: "name",
+          owners: {},
+        }),
+      );
+      expect(html.indexOf("Alpha prospect")).toBeLessThan(
+        html.indexOf("Middle core"),
+      );
+      expect(html.indexOf("Middle core")).toBeLessThan(
+        html.indexOf("Zulu prospect"),
+      );
+      expect(html).toContain(`/portfolio/prospects/${ids.linkedBd}`);
+      expect(html).toContain(`/portfolio/prospects/${ids.standaloneBd}`);
+      if (view === "list") expect(html).toContain(`/portfolio/${ids.coreOnly}`);
+    },
+  );
+  it("applies name sorting to the BD section of All without changing deduplication or counts", () => {
+    const prospects = prospectRecords.map((record, index) => ({
+      ...record,
+      displayName: ["Zulu", "Converted", "Alpha"][index]!,
+    }));
+    const result = projectPortfolioCatalog({
+      records,
+      prospectRecords: prospects,
+      prospectVisibleCount: prospects.length,
+      state: readPortfolioState(new URLSearchParams("sort=name")),
+      owners: {},
+    });
+    expect(result.visibleProspects.map((row) => row.id)).toEqual([
+      ids.standaloneBd,
+      ids.linkedBd,
+    ]);
+    expect(result.allCount).toBe(4);
+    expect(result.prospectCount).toBe(4);
+    expect(prospects.map((row) => row.displayName)).toEqual([
+      "Zulu",
+      "Converted",
+      "Alpha",
+    ]);
+  });
+
+  it("sorts a combined Core and BD prospect view with numeric names and stable identity ties", () => {
+    const coreRows = [{ ...core(ids.coreOnly, "PROSPECT"), name: "Alpha 2" }];
+    const bdRows = [
+      { ...bd(ids.standaloneBd, null), displayName: "Alpha 10" },
+      { ...bd(ids.linkedBd, null), displayName: "alpha 2" },
+    ];
+    expect(
+      sortProspectProfiles(coreRows, bdRows, "name").map(
+        (row) => row.record.id,
+      ),
+    ).toEqual([ids.coreOnly, ids.linkedBd, ids.standaloneBd]);
+    expect(
+      sortProspectProfiles(coreRows, [...bdRows].reverse(), "name").map(
+        (row) => row.record.id,
+      ),
+    ).toEqual([ids.coreOnly, ids.linkedBd, ids.standaloneBd]);
+    expect(bdRows[0]?.id).toBe(ids.standaloneBd);
+  });
+
+  it("uses actual creation dates for Recently added across both sources, not last updates", () => {
+    const coreRows = [
+      { ...core(ids.coreOnly, "PROSPECT"), createdAt: "2026-10-02T00:00:00Z" },
+    ];
+    const bdRows = [
+      {
+        ...bd(ids.linkedBd, null),
+        createdAt: "2026-10-01T00:00:00Z",
+        updatedAt: "2026-10-31T00:00:00Z",
+      },
+      { ...bd(ids.standaloneBd, null), createdAt: "2026-10-03T00:00:00+00:00" },
+    ];
+    expect(
+      sortProspectProfiles(coreRows, bdRows, "recent").map(
+        (row) => row.record.id,
+      ),
+    ).toEqual([ids.standaloneBd, ids.coreOnly, ids.linkedBd]);
+    expect(
+      sortProspectProfiles(coreRows, bdRows, "saved").map(
+        (row) => row.record.id,
+      ),
+    ).toEqual([ids.coreOnly, ids.linkedBd, ids.standaloneBd]);
+  });
+
+  it("keeps absent dates valid and deterministically after known dates without manufacturing timestamps", () => {
+    const unknown = core(ids.coreOnly, "PROSPECT");
+    const invalid = { ...bd(ids.linkedBd, null), createdAt: "" };
+    const dated = bd(ids.standaloneBd, null);
+    expect(
+      sortProspectProfiles([unknown], [invalid, dated], "recent").map(
+        (row) => row.record.id,
+      ),
+    ).toEqual([ids.standaloneBd, ids.coreOnly, ids.linkedBd]);
+    expect(unknown).not.toHaveProperty("createdAt");
+    expect(invalid.createdAt).toBe("");
+    expect(
+      clientSchema.parse({ ...unknown, createdAt: dated.createdAt }).createdAt,
+    ).toBe(dated.createdAt);
+    expect(
+      clientSchema.safeParse({ ...unknown, createdAt: "invalid" }).success,
+    ).toBe(false);
+  });
+
   it("shows each linked prospect once in All and preserves the converted client's Core card", () => {
     const all = project("");
     expect(all.rows.map((record) => record.id)).toEqual([

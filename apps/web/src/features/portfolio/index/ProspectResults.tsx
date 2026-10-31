@@ -10,6 +10,7 @@ import {
   type Member,
 } from "./contracts";
 import { ProfileCard } from "./ProfileResults";
+import { sortProspectProfiles, type PortfolioIndexState } from "./filter";
 import styles from "./portfolio.module.css";
 
 export function ProspectResults({
@@ -19,6 +20,7 @@ export function ProspectResults({
   owners,
   coreOwners,
   showAdd = false,
+  sort = "saved",
 }: {
   coreRows?: readonly Client[];
   rows: readonly Prospect[];
@@ -26,23 +28,26 @@ export function ProspectResults({
   owners: Record<string, Member>;
   coreOwners?: Record<string, { accountOwner: Member | null }>;
   showAdd?: boolean;
+  sort?: PortfolioIndexState["sort"];
 }) {
+  const ordered = sortProspectProfiles(coreRows, rows, sort);
   return view === "cards" ? (
     <div className={styles.cards}>
-      {coreRows.map((client) => (
-        <ProfileCard
-          key={client.id}
-          client={client}
-          ownership={coreOwners?.[client.id]}
-        />
-      ))}
-      {rows.map((prospect) => (
-        <ProspectCard
-          key={prospect.id}
-          prospect={prospect}
-          owner={owners[prospect.ownerUserId ?? ""]}
-        />
-      ))}
+      {ordered.map((row) =>
+        row.kind === "core" ? (
+          <ProfileCard
+            key={`core:${row.record.id}`}
+            client={row.record}
+            ownership={coreOwners?.[row.record.id]}
+          />
+        ) : (
+          <ProspectCard
+            key={`prospect:${row.record.id}`}
+            prospect={row.record}
+            owner={owners[row.record.ownerUserId ?? ""]}
+          />
+        ),
+      )}
       {showAdd && (
         <Link
           className={`${styles.addCard} ${styles.prospectAddCard}`}
@@ -64,36 +69,42 @@ export function ProspectResults({
           </tr>
         </thead>
         <tbody>
-          {coreRows.map((client) => (
-            <tr key={client.id}>
-              <td>
-                <Link href={`/portfolio/${client.id}`}>{client.name}</Link>
-              </td>
-              <td>Core prospect</td>
-              <td>{clientLocation(client) || "—"}</td>
-              <td>
-                {coreOwners?.[client.id]
-                  ? memberName(coreOwners[client.id]?.accountOwner)
-                  : "—"}
-              </td>
-            </tr>
-          ))}
-          {rows.map((prospect) => (
-            <tr key={prospect.id}>
-              <td>
-                <Link href={`/portfolio/prospects/${prospect.id}`}>
-                  {prospect.displayName}
-                </Link>
-              </td>
-              <td>{stageText(prospect.stage)}</td>
-              <td>{prospect.geography || "—"}</td>
-              <td>
-                {owners[prospect.ownerUserId ?? ""]
-                  ? memberName(owners[prospect.ownerUserId ?? ""])
-                  : "—"}
-              </td>
-            </tr>
-          ))}
+          {ordered.map((row) => {
+            if (row.kind === "core") {
+              const client = row.record;
+              return (
+                <tr key={`core:${client.id}`}>
+                  <td>
+                    <Link href={`/portfolio/${client.id}`}>{client.name}</Link>
+                  </td>
+                  <td>Core prospect</td>
+                  <td>{clientLocation(client) || "—"}</td>
+                  <td>
+                    {coreOwners?.[client.id]
+                      ? memberName(coreOwners[client.id]?.accountOwner)
+                      : "—"}
+                  </td>
+                </tr>
+              );
+            }
+            const prospect = row.record;
+            return (
+              <tr key={`prospect:${prospect.id}`}>
+                <td>
+                  <Link href={`/portfolio/prospects/${prospect.id}`}>
+                    {prospect.displayName}
+                  </Link>
+                </td>
+                <td>{stageText(prospect.stage)}</td>
+                <td>{prospect.geography || "—"}</td>
+                <td>
+                  {owners[prospect.ownerUserId ?? ""]
+                    ? memberName(owners[prospect.ownerUserId ?? ""])
+                    : "—"}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

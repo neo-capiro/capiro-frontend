@@ -74,6 +74,52 @@ export function sortClients(
       )
     : clients;
 }
+
+export type ProspectProfile =
+  | { kind: "core"; record: Client }
+  | { kind: "prospect"; record: Prospect };
+
+/** Saved order remains source-owned; the existing explicit sort spans both sources. */
+export function sortProspectProfiles(
+  coreRows: readonly Client[],
+  prospects: readonly Prospect[],
+  sort: PortfolioIndexState["sort"],
+): ProspectProfile[] {
+  const rows: ProspectProfile[] = [
+    ...coreRows.map((record) => ({ kind: "core" as const, record })),
+    ...prospects.map((record) => ({ kind: "prospect" as const, record })),
+  ];
+  if (sort === "saved") return rows;
+  const name = (row: ProspectProfile) =>
+    row.kind === "core" ? row.record.name : row.record.displayName;
+  const created = (row: ProspectProfile) => {
+    const value = row.record.createdAt ? Date.parse(row.record.createdAt) : NaN;
+    return Number.isFinite(value) ? value : -Infinity;
+  };
+  return rows.sort((a, b) => {
+    const order =
+      sort === "name"
+        ? name(a).localeCompare(name(b), undefined, {
+            sensitivity: "base",
+            numeric: true,
+          })
+        : created(b) - created(a);
+    return (
+      order ||
+      a.record.id.localeCompare(b.record.id) ||
+      a.kind.localeCompare(b.kind)
+    );
+  });
+}
+
+export function sortProspects(
+  prospects: readonly Prospect[],
+  sort: PortfolioIndexState["sort"],
+): Prospect[] {
+  return sortProspectProfiles([], prospects, sort).flatMap((row) =>
+    row.kind === "prospect" ? [row.record] : [],
+  );
+}
 export function filterClients(
   clients: Client[],
   filter: PortfolioFilter,

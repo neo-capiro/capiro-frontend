@@ -87,6 +87,7 @@ export function PortfolioProfiles({
       {prospects.length > 0 && (
         <ProspectResults
           rows={prospects}
+          sort={state.sort}
           view={state.view}
           owners={prospectOwners}
         />

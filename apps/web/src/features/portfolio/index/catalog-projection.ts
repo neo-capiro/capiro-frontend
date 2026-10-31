@@ -8,6 +8,7 @@ import {
   filterClients,
   filterProspects,
   sortClients,
+  sortProspects,
   type PortfolioIndexState,
 } from "./filter";
 
@@ -59,9 +60,12 @@ export function projectPortfolioCatalog({
   );
   const visibleProspects =
     prospectRecords && state.type !== "CLIENT"
-      ? filterProspects(
-          state.type === "PROSPECT" ? prospectRecords : allBd,
-          state,
+      ? sortProspects(
+          filterProspects(
+            state.type === "PROSPECT" ? prospectRecords : allBd,
+            state,
+          ),
+          state.sort,
         )
       : [];
   const prospectsCapped =
