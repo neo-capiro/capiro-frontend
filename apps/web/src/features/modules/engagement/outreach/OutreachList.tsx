@@ -1,6 +1,7 @@
 "use client";
 import { useState, type ReactNode } from "react";
 import { useCapiroQuery } from "../../../../shared/capiro/queries";
+import { useCapiroCapabilities } from "../../../../shared/capiro/capabilities";
 import type { OutreachRecord } from "../../../../shared/capiro/operations/engagement";
 import {
   ActionButton,
@@ -11,6 +12,7 @@ import {
 } from "../../../../shared/module-ui";
 import {
   canonicalListRow,
+  campaignSessionsQueryEnabled,
   categoryLabels,
   dateWindow,
   readableStatus,
@@ -74,7 +76,16 @@ export function OutreachList({
     },
     { enabled: !invalid && !deleted },
   );
-  const sessionsEnabled = !clientId && !deleted && !invalid;
+  // Campaign sessions belong to a separate engagement application. The cohort states whether that
+  // surface is reachable; this list never infers it from a 404, a URL or a route declaration.
+  const campaignSessions = useCapiroCapabilities().campaignSessions;
+  const sessionsSupported = campaignSessions !== "disabled";
+  const sessionsEnabled = campaignSessionsQueryEnabled({
+    capability: campaignSessions,
+    clientId,
+    deleted,
+    invalid,
+  });
   const sessions = useCapiroQuery(
     "engagement.sessions",
     {
@@ -248,7 +259,18 @@ export function OutreachList({
       />
       {!canonicalLoading && !canonicalError && (
         <>
-          {sessionsUnavailable && (
+          {!sessionsSupported && (
+            <div className={styles.card} role="status">
+              <h2>Campaign sessions are not available</h2>
+              <p className={styles.hint}>
+                This workspace is not configured for campaign sessions, so no
+                session-only campaigns are shown here. Saved outreach records
+                and canonical campaigns are complete for your filters; counts
+                and results below exclude session-only campaigns.
+              </p>
+            </div>
+          )}
+          {sessionsSupported && sessionsUnavailable && (
             <div className={styles.card} role="status" aria-live="polite">
               <h2>
                 Campaign sessions are {sessionsLoading ? "loading" : "unavailable"}
@@ -275,7 +297,8 @@ export function OutreachList({
                 rows={allCampaigns.filter((row) => row.category === category)}
                 onOpen={onCampaign}
               />
-              {!sessionsUnavailable &&
+              {sessionsSupported &&
+                !sessionsUnavailable &&
                 !allCampaigns.some((row) => row.category === category) && (
                 <div className={styles.empty}>
                   <h3>
@@ -387,7 +410,7 @@ export function OutreachList({
               filters apply to saved records and campaigns. Global campaign
               sessions are listed separately.
             </p>
-            {clientId && (
+            {clientId && sessionsSupported && (
               <p className={styles.hint}>
                 Campaign sessions are available under All permitted clients.
                 Client-linked records remain shown here.

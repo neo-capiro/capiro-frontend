@@ -59,3 +59,24 @@ export function dateWindow(from: string, to: string) {
       : {}),
   };
 }
+
+/**
+ * Single admission rule for the ancillary campaign-session query.
+ *
+ * A cohort that explicitly states the surface is disabled must never dispatch the request, while a
+ * client-scoped, deleted-only or invalid-date view keeps its existing behaviour of not asking for
+ * global sessions. Search and pagination never participate: they cannot turn a disabled request on.
+ */
+export function campaignSessionsQueryEnabled({
+  capability,
+  clientId,
+  deleted,
+  invalid,
+}: {
+  capability: "enabled" | "disabled" | "unknown";
+  clientId: string;
+  deleted: boolean;
+  invalid: boolean;
+}): boolean {
+  return capability !== "disabled" && !clientId && !deleted && !invalid;
+}

@@ -70,6 +70,7 @@ export function useUpdatesFeed(input: {
   return {
     snapshot,
     loadMore: feed.loadMore,
+    loadMoreRuns: feed.loadMoreRuns,
     refresh: feed.read,
     release: feed.lose,
     scope: feed.scope,

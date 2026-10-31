@@ -1,8 +1,10 @@
+import type { OwnerMemoryRef } from "./owner-history";
 /**
  * Display projection of Core's personal, controlling-item picker. Core owns
  * the wire contract; this narrow decoder holds the feature closed on drift.
  */
 export type OwnerCorrectionItem = Readonly<{
+  reference?: OwnerMemoryRef;
   id: string;
   title: string;
   value: string;
@@ -15,6 +17,7 @@ export type OwnerCorrectionItem = Readonly<{
 }>;
 
 export type OwnerCorrectionPage = Readonly<{
+  ownerReadsVersion?: 1;
   items: OwnerCorrectionItem[];
   nextCursor: string | null;
 }>;
@@ -94,6 +97,9 @@ export function receiveOwnerCorrectionPage(
     ids.add(item.id);
     return {
       id: item.id,
+      ...(page.ownerReadsVersion === 1
+        ? { reference: { kind: "item", id: item.id } }
+        : {}),
       title: item.title,
       value: item.value,
       scope: "user_private" as const,
@@ -104,7 +110,11 @@ export function receiveOwnerCorrectionPage(
   });
   if (items.length === 0 && page.nextCursor !== null)
     throw new Error("Empty memory item page cannot continue");
-  return { items, nextCursor: page.nextCursor };
+  return {
+    items,
+    nextCursor: page.nextCursor,
+    ...(page.ownerReadsVersion === 1 ? { ownerReadsVersion: 1 as const } : {}),
+  };
 }
 
 export function receiveCorrectionReceipt(value: unknown): string {

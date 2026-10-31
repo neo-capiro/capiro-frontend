@@ -1,4 +1,7 @@
-import type { RunIndexSummary } from "@capiro/meri-contracts/conversation-history";
+import type {
+  RunIndexSummary,
+  RunIndexListResponse,
+} from "@capiro/meri-contracts/conversation-history";
 import {
   receiveMemoryNotificationPage,
   type MemoryNotificationPage,
@@ -12,7 +15,7 @@ import {
  * visible while the newly selected scope is being verified — they are released
  * only when the account lifetime ends (dispose/access loss), never merely because
  * a client selection changed. It is deliberately not a store or a second
- * scheduler: it holds one recent page per owner plus the local read state.
+ * scheduler: it holds explicitly requested owner pages plus the local read state.
  */
 export type UpdatesScope = Readonly<
   { kind: "client"; clientId: string } | { kind: "general" }
@@ -47,6 +50,10 @@ export type UpdatesFeedSnapshot = Readonly<{
   /** False when the last read for the current scope could not be verified. */
   scopeVerified: boolean;
   moreError: string;
+  runNextCursor: string | null;
+  runCoverage: RunIndexListResponse["coverage"] | null;
+  runMorePending: boolean;
+  runMoreError: string;
   /** Number of reads this feed has dispatched; used by tests and diagnostics. */
   reads: number;
 }>;
@@ -63,11 +70,15 @@ type RunsClient = Readonly<{
     input: Readonly<{
       scope: UpdatesScope;
       status: "all";
-      cursor: null;
+      cursor: string | null;
       limit: number;
     }>,
     signal: AbortSignal,
-  ): Promise<{ runs: readonly RunIndexSummary[] }>;
+  ): Promise<{
+    runs: readonly RunIndexSummary[];
+    nextCursor: string | null;
+    coverage: RunIndexListResponse["coverage"];
+  }>;
 }>;
 
 const empty = (): UpdatesFeedSnapshot => ({
@@ -76,6 +87,10 @@ const empty = (): UpdatesFeedSnapshot => ({
   refreshing: false,
   scopeVerified: false,
   moreError: "",
+  runNextCursor: null,
+  runCoverage: null,
+  runMorePending: false,
+  runMoreError: "",
   reads: 0,
 });
 
@@ -96,6 +111,7 @@ export function createUpdatesFeed(input: {
   let retired = false;
   let scope = input.scope;
   let reads = 0;
+  const runCursors = new Set<string>();
   const listeners = new Set<() => void>();
 
   const publish = (next: UpdatesFeedSnapshot) => {
@@ -110,12 +126,13 @@ export function createUpdatesFeed(input: {
     input.isCurrent();
 
   async function dispatch(nextScope: UpdatesScope) {
-    if (disposed) return;
+    if (disposed || !input.isCurrent()) return;
     const forGeneration = ++generation;
     controller?.abort();
     const current = new AbortController();
     controller = current;
     pending = false;
+    runCursors.clear();
     scope = nextScope;
     reads += 1;
     publish({
@@ -124,6 +141,8 @@ export function createUpdatesFeed(input: {
       refreshing: true,
       scopeVerified: false,
       moreError: "",
+      runMorePending: false,
+      runMoreError: "",
       reads,
     });
     const [notifications, runs] = await Promise.allSettled([
@@ -154,6 +173,10 @@ export function createUpdatesFeed(input: {
       refreshing: false,
       scopeVerified: notificationsValue !== null && runValue !== null,
       moreError: "",
+      runNextCursor: runs.status === "fulfilled" ? runs.value.nextCursor : null,
+      runCoverage: runs.status === "fulfilled" ? runs.value.coverage : null,
+      runMorePending: false,
+      runMoreError: "",
       reads,
     });
   }
@@ -182,6 +205,62 @@ export function createUpdatesFeed(input: {
           });
       });
     },
+    /** One explicit page from the same public run reader and captured scope. */
+    async loadMoreRuns() {
+      const base = value.runs;
+      const cursor = value.runNextCursor;
+      if (
+        disposed ||
+        !input.isCurrent() ||
+        value.refreshing ||
+        value.runMorePending ||
+        base.state !== "observed" ||
+        !cursor ||
+        !controller
+      )
+        return;
+      const forGeneration = generation;
+      const signal = controller.signal;
+      publish({ ...value, runMorePending: true, runMoreError: "" });
+      try {
+        const next = await input.runsClient.list(
+          { scope, status: "all", cursor, limit: 20 },
+          signal,
+        );
+        if (!canPublish(forGeneration, signal) || value.runs !== base) return;
+        if (
+          next.nextCursor !== null &&
+          (next.nextCursor === cursor || runCursors.has(next.nextCursor))
+        )
+          throw new Error("Run cursor did not advance");
+        const seen = new Set(
+          base.value.map((run) => `${run.conversationId}:${run.runId}`),
+        );
+        if (
+          next.runs.some((run) =>
+            seen.has(`${run.conversationId}:${run.runId}`),
+          )
+        )
+          throw new Error("Run page repeated an observed run");
+        runCursors.add(cursor);
+        publish({
+          ...value,
+          runs: { state: "observed", value: [...base.value, ...next.runs] },
+          runNextCursor: next.nextCursor,
+          runCoverage: next.coverage,
+          runMorePending: false,
+          runMoreError: "",
+        });
+      } catch {
+        if (canPublish(forGeneration, signal))
+          publish({
+            ...value,
+            runMorePending: false,
+            runMoreError:
+              "The next run updates could not be verified. Refresh updates to check current access and run states.",
+          });
+      }
+    },
     /**
      * Validates the next window before committing it. A malformed or
      * non-advancing page keeps the previous authorized page and reports a local
@@ -191,6 +270,8 @@ export function createUpdatesFeed(input: {
       const page = value.notifications;
       if (
         disposed ||
+        !input.isCurrent() ||
+        value.refreshing ||
         pending ||
         page.state !== "observed" ||
         !page.value.nextCursor ||

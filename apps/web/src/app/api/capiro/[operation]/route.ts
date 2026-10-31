@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { previewBackendRejection } from "../../../../shared/preview/backend-policy.server";
 import { proxyPreviewRead } from "../../../../shared/preview/read-proxy.server";
 import { readCapiroConfig } from "../../../../shared/capiro/config";
+import { sessionReadRegistry } from "../../../../shared/capiro/engagement-sessions-availability";
 import {
   handleCapiroRequest,
   handlePublicPlannerFormRequest,
@@ -58,7 +59,7 @@ async function handle(request: Request, context: Context) {
   return handleCapiroRequest(
     request,
     operation,
-    operations,
+    sessionReadRegistry(operations, operation, config.engagementSessions),
     config,
     async (authentication) => {
       const session = await auth();
