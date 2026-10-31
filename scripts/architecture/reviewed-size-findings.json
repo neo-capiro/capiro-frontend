@@ -6879,10 +6879,12 @@
     "file": "apps/web/src/features/modules/calendar/CalendarCard.tsx",
     "kind": "function",
     "symbol": "CalendarEvents",
-    "fingerprint": "99d2ca51f7a66e6aa7222c917a646be2e081fd018346a25cb0073e38c45f938c",
-    "reason": "Responsibility/cohesion: the body is a single cohesive presentational responsibility â€” the\nevents viewport for the active view, with an agenda branch (search, clear filters, status\npanel, agenda table, empty/error messaging) and a grid branch (status panel + grid), plus the\nextras loading/warning notices. It fetches nothing, normalizes nothing, owns no state and\npersists nothing; every input comes from CalendarModel and rendering is delegated to\nAgendaTable, CalendarGrid, StatusPanel, TextInput and ActionButton. No cross-owner logic, no\nduplicated authority, and no boundary or cycle involvement (errors[] empty). Concrete\nresidual: it takes the whole CalendarModel and reads 11 fields, and the two branches could\nlater be split into presentational sub-components â€” optional hardening, out of scope here and\nnot justified by any correctness risk. I give no blanket count pass and claim no exception:\nthe >80 threshold is a size/maintainability signal, and the concrete reasons above are why\nthis exact body is acceptable. Disposition: ACCEPT the exact body as cohesive\nsingle-responsibility presentation; the blocking state is a review-record invalidation\nartifact of the enclosing-file edit, not a new or changed architectural defect. I do not bind\nthe registry; root owns the matching final-byte binding.",
-    "reviewedBy": "Hermes Agent source review 20261027_193444_620b36",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "b0a7449fd7c855ab0124a4002d7863df1db584e1ab58ef3ee8f52d0339ddc82c",
+    "reason": "CalendarEvents owns the agenda/grid viewport, source status and filtering presentation. Public hearing rows remain visible independently of meeting read errors. Feed paging, date normalization and meeting editors retain separate owners. This accepts the function responsibility and size; the independently reproduced hidden Agenda search behavior remains a functional review finding.",
+    "reviewedBy": "Codex independent hearing calendar and capture source review",
+    "reviewedOn": "2026-10-31",
+    "line": 14,
+    "nonblank": 90
   },
   {
     "file": "apps/web/src/shared/shell/shell.module.css",
