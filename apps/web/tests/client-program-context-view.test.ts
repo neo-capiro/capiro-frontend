@@ -162,4 +162,81 @@ describe("program associations presentation", () => {
     expect(html).toContain("(truncated)");
     expect(html).not.toContain("x".repeat(400));
   });
+  it.each([null, undefined])(
+    "renders absent coverage as unknown (%s)",
+    (candidateCoverage) => {
+      state.data = { ...page(), candidateCoverage };
+      expect(render()).toContain("Discovery coverage is unknown");
+    },
+  );
+  it("preserves incomplete coverage and subset totals on a later empty page", () => {
+    state.data = {
+      ...page(),
+      page: 3,
+      total: 21,
+      data: [],
+      candidateCoverage: {
+        complete: false,
+        evaluated: 400,
+        limit: 400,
+        discoveredAtLeast: 600,
+        truncatedPaths: [],
+        omittedPaths: [],
+        totalScope: "evaluated_candidates",
+      },
+    };
+    const html = render();
+    const text = html.replace(/<[^>]*>/g, "").replace(/\s+/g, " ");
+    expect(text).toContain("Discovery incomplete");
+    expect(text).toContain("21 matching results within the evaluated subset");
+    expect(text).toContain("Page 3: 0 returned associations of 21");
+    expect(text).toContain("Try the previous page");
+    expect(html).toMatch(/<button[^>]*disabled=""[^>]*>Next page<\/button>/);
+  });
+  it("shows bounded completeness for an empty score-filtered result", () => {
+    state.data = {
+      ...page(),
+      total: 0,
+      data: [],
+      candidateCoverage: {
+        complete: true,
+        evaluated: 12,
+        limit: 400,
+        discoveredAtLeast: 12,
+        truncatedPaths: [],
+        omittedPaths: [],
+        totalScope: "complete",
+      },
+    };
+    const text = render()
+      .replace(/<[^>]*>/g, "")
+      .replace(/\s+/g, " ");
+    expect(text).toContain("Discovery complete for the configured paths");
+    expect(text).toContain("12 candidates evaluated");
+    expect(text).toContain(
+      "0 matching results across the discovered candidates",
+    );
+    expect(text).toContain("No program associations were returned");
+  });
+  it.each(["error", "disabled"])(
+    "hides cached completeness when %s",
+    (reason) => {
+      state.data = {
+        ...page(),
+        candidateCoverage: {
+          complete: true,
+          evaluated: 1,
+          limit: 400,
+          discoveredAtLeast: 1,
+          truncatedPaths: [],
+          omittedPaths: [],
+          totalScope: "complete",
+        },
+      };
+      if (reason === "error")
+        state.error = new ApiError(500, "Synthetic failure");
+      else state.enabled = false;
+      expect(render()).not.toContain("Discovery complete");
+    },
+  );
 });

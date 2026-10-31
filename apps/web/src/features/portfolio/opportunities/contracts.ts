@@ -127,7 +127,37 @@ export function clientSearchSchema(clientId: string, page: number) {
     "Opportunity scope mismatch",
   );
 }
+const discoveryPath = z.enum([
+  "capability_pe_direct",
+  "capability_keyword",
+  "prior_award",
+  "facility_district",
+  "ecosystem",
+]);
+// Core351: coverage describes discovery before the score threshold and paging.
+const candidateCoverageSchema = z
+  .object({
+    complete: z.boolean(),
+    evaluated: count.max(400),
+    limit: z.literal(400),
+    discoveredAtLeast: count,
+    truncatedPaths: z.array(discoveryPath).max(5),
+    omittedPaths: z.array(discoveryPath).max(5),
+    totalScope: z.enum(["complete", "evaluated_candidates"]),
+  })
+  .refine(
+    (value) =>
+      value.discoveredAtLeast >= value.evaluated &&
+      (value.complete
+        ? value.totalScope === "complete" &&
+          value.discoveredAtLeast === value.evaluated &&
+          value.truncatedPaths.length === 0 &&
+          value.omittedPaths.length === 0
+        : value.totalScope === "evaluated_candidates"),
+    "Inconsistent candidate discovery coverage",
+  );
 export const programResponseSchema = z.object({
+  candidateCoverage: candidateCoverageSchema.nullable().optional(),
   data: z.array(
     z.object({
       peCode: z.string(),
