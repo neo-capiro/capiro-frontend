@@ -3728,15 +3728,15 @@
   },
   {
     "path": "apps/web/src/shared/capiro/legiwatch-retirement.test.ts",
-    "sha256": "0533967776a7c7bf6c3521638d97181b3cf038ab3ba881d13c2a8ab479ecf64e",
+    "sha256": "742adbd0022235bd229e92171c9e613db08615546da22992db418fb877608e28",
     "reviewer": "Codex independent LegiWatch compatibility and integration review",
     "reviewedAt": "2026-10-31",
     "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch-simplification-20261031",
-    "rationale": "The describe callback groups one operation-retirement contract suite: removed operations fail before authentication/dispatch, retained delivery and rule owners remain available, and research-only briefing/workflow inputs remain bounded. The correction narrows removed-report assertions to definition mutations/generation while permitting the explicit transitional read-only picker and retained delivery names. Individual tests keep their own assertions; no runtime product responsibility or blanket directory exemption is introduced.",
+    "rationale": "The describe callback groups one operation-retirement contract suite: removed operations fail before authentication/dispatch, retained delivery and rule owners remain available, and research-only briefing/workflow inputs remain bounded. Transitional read-only definition/frozen-base pickers and optional cached Research runId are explicit exceptions to retirement assertions; definition mutations, generation and subscriptions stay removed. Individual tests retain separate assertions. The companion rollout suite validates exact cached bc6000fc wire shapes; no product responsibility or blanket directory exemption is added.",
     "functions": [
       {
         "name": "<anonymous>",
-        "nonblankLines": 139
+        "nonblankLines": 142
       }
     ],
     "signals": [
