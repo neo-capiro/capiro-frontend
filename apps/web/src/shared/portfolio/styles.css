@@ -16,6 +16,12 @@
 }
 :where(body:has([data-portfolio-root])) {
   --font-newsreader: "Newsreader";
+  --background: #f6f7f7;
+  --muted: #f7f8f8;
+  --muted-foreground: #636a6a;
+  --border: #e2e6e6;
+  --portfolio-selection: #e6eeef;
+  --portfolio-selection-foreground: #3f6670;
   --border-strong: #d6d3d1;
   --accent: #f0efed;
   --danger: #7a2e2e;
@@ -40,6 +46,8 @@
     --destructive-subtle: #322626;
     --destructive-text: #e79b9b;
     --success: #9dbea4;
+    --portfolio-selection: #25383c;
+    --portfolio-selection-foreground: #b4d3db;
     color-scheme: dark;
   }
 }
