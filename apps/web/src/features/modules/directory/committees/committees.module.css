@@ -1,0 +1,74 @@
+.screen,
+.list,
+.form,
+.card,
+.listItem {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.screen {
+  margin-top: 24px;
+  gap: 20px;
+}
+.roomTitle {
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+.description {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.actions,
+.meta,
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.row {
+  justify-content: space-between;
+}
+.row > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.meta {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.card,
+.listItem {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  padding: 20px;
+}
+.room {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 1fr);
+  gap: 20px;
+}
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.check input {
+  margin-top: 2px;
+}
+.error {
+  color: var(--destructive);
+  font-size: 13px;
+}
+@media (max-width: 720px) {
+  .room {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

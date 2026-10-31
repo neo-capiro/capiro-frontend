@@ -1,7 +1,7 @@
 "use client";
 import { useCapiroQuery } from "../../../../../shared/capiro/queries";
 import { Badge, Panel, StatusPanel } from "../../../../../shared/module-ui";
-import type { EvidenceScope } from "../evidence/EvidenceActions";
+import type { EvidenceScope } from "../sources/EvidenceActions";
 import styles from "../legiwatch.module.css";
 export function ResearchCoverage({ scope }: { scope: EvidenceScope }) {
   const query = useCapiroQuery("legiwatch.research.coverage", {

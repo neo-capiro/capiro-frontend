@@ -1,7 +1,7 @@
 "use client";
 
 import { ActionButton, TextInput } from "../../../shared/module-ui";
-import { agendaSources, type AgendaItem, type AgendaSource } from "./agenda";
+import { type AgendaItem, type AgendaSource } from "./agenda";
 import { ModuleBreadcrumb } from "../../../shared/shell/ModuleBreadcrumb";
 import styles from "./calendar.module.css";
 import {
@@ -144,10 +144,7 @@ export function CalendarToolbar({
           {calendarTitle(date, view)}
         </button>
         <p className={styles.counts}>
-          {loading
-            ? "Loading events"
-            : `${count} ${view === "agenda" ? "items" : "meetings"} in view`}{" "}
-          · Eastern time
+          {loading ? "Loading events" : `${count} items in view`} · Eastern time
         </p>
         <div className={styles.views} aria-label="Calendar view">
           {(["month", "week", "agenda"] as const).map((item) => (
@@ -180,7 +177,7 @@ export function CalendarToolbar({
 }
 
 export function CalendarFilters({
-  mixed,
+  availableSources,
   selected,
   items,
   loading,
@@ -188,7 +185,7 @@ export function CalendarFilters({
   scopeTitle,
   onToggle,
 }: {
-  mixed: boolean;
+  availableSources: readonly AgendaSource[];
   selected: Set<AgendaSource>;
   items: AgendaItem[];
   loading: boolean;
@@ -198,7 +195,7 @@ export function CalendarFilters({
 }) {
   return (
     <div className={styles.filters}>
-      {(mixed ? agendaSources : (["Meetings"] as const)).map((source) => {
+      {availableSources.map((source) => {
         const unavailable = warnings.some((warning) =>
           warning.startsWith(`${source} unavailable:`),
         );

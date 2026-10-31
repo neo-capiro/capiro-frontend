@@ -1,6 +1,7 @@
 "use client";
 import { useDeferredValue, useState } from "react";
 import type { CalendarHearing } from "../../../../../shared/capiro/operations/legiwatch-calendar-schemas";
+import { hearingCoverageText } from "../../../../../shared/capiro/operations/legiwatch-calendar-feed";
 import {
   useCapiroMutation,
   useCapiroQuery,
@@ -15,7 +16,6 @@ import {
 } from "../../../../../shared/module-ui";
 import {
   LegiWatchTabs,
-  PageControls,
   SelectField,
   downloadText,
   hearingDate,
@@ -31,6 +31,7 @@ import {
 } from "./calendar-dates";
 import { HearingCalendar } from "./HearingCalendar";
 import { RecordingsScreen } from "./RecordingsScreen";
+import { useHearingCalendar } from "./use-hearing-calendar";
 
 export function HearingsScreen() {
   const route = useLegiWatchRoute(),
@@ -41,7 +42,6 @@ export function HearingsScreen() {
   const [committee, setCommittee] = useState(""),
     [from, setFrom] = useState(() => weekStart(officialToday()));
   const [layout, setLayout] = useState("week"),
-    [page, setPage] = useState(1),
     [filtersOpen, setFiltersOpen] = useState(false),
     [dateOpen, setDateOpen] = useState(false);
   const [status, setStatus] = useState<
@@ -54,28 +54,32 @@ export function HearingsScreen() {
     to: layout === "day" ? from : shiftDate(from, 6),
     jurisdiction,
     q: search || undefined,
-    committee: committee || undefined,
+    committee: committee.startsWith("US:") ? committee.slice(3) : undefined,
+    stateCommitteeId: committee.startsWith("FL:")
+      ? committee.slice(3)
+      : undefined,
     eventStatus: status,
     following: following || undefined,
-    page,
-    pageSize: 200,
+    sort: "asc" as const,
   };
-  const calendar = useCapiroQuery(
-    "legiwatch.calendar",
-    { query },
-    { enabled: list === "schedule" },
-  );
+  const calendar = useHearingCalendar(query, list === "schedule");
   const committees = useCapiroQuery(
     "legiwatch.committees",
     {},
-    { enabled: list === "schedule" },
+    { enabled: list === "schedule" && jurisdiction !== "FL" },
+  );
+  const stateCommittees = useCapiroQuery(
+    "legiwatch.stateCommittees",
+    {},
+    {
+      enabled: list === "schedule" && jurisdiction !== "US",
+    },
   );
   const exportCalendar = useCapiroMutation("legiwatch.calendarExportBulk");
   const open = (id: string) =>
-    route.navigate({ hearingId: id, lw: "hearings" });
+    route.navigate({ hearingId: id, hearingTab: null, lw: "hearings" });
   const changeWeek = (days: number) => {
     setFrom(shiftDate(from, days));
-    setPage(1);
   };
   const download = async () => {
     setExportError("");
@@ -118,7 +122,6 @@ export function HearingsScreen() {
                 value={q}
                 onChange={(event) => {
                   setQ(event.target.value);
-                  setPage(1);
                 }}
               />
             </Field>
@@ -128,7 +131,7 @@ export function HearingsScreen() {
               value={jurisdiction}
               onChange={(value) => {
                 setJurisdiction(value as "ALL" | "US" | "FL");
-                setPage(1);
+                setCommittee("");
               }}
             >
               <option value="ALL">All · Federal + Florida</option>
@@ -141,13 +144,18 @@ export function HearingsScreen() {
               value={committee}
               onChange={(value) => {
                 setCommittee(value);
-                setPage(1);
               }}
             >
               <option value="">All committees</option>
               {committees.data?.rows.map((row) => (
-                <option value={row.systemCode} key={row.systemCode}>
+                <option value={`US:${row.systemCode}`} key={row.systemCode}>
                   {row.name}
+                </option>
+              ))}
+              {stateCommittees.data?.map((row) => (
+                <option value={`FL:${row.id}`} key={row.id}>
+                  Florida · {row.chamber} · {row.name}
+                  {row.legislativeSession ? ` · ${row.legislativeSession}` : ""}
                 </option>
               ))}
             </SelectField>
@@ -155,8 +163,11 @@ export function HearingsScreen() {
           <div className={styles.toolbar}>
             <ActionButton
               onClick={() => {
-                setFrom(weekStart(officialToday()));
-                setPage(1);
+                setFrom(
+                  layout === "day"
+                    ? officialToday()
+                    : weekStart(officialToday()),
+                );
               }}
             >
               Today
@@ -188,10 +199,17 @@ export function HearingsScreen() {
             <ActionButton disabled={exportCalendar.pending} onClick={download}>
               {exportCalendar.pending ? "Exporting…" : "Export calendar"}
             </ActionButton>
-            <ActionButton onClick={() => changeWeek(-7)}>
-              Previous week
+            <ActionButton
+              onClick={() => changeWeek(layout === "day" ? -1 : -7)}
+            >
+              Previous {layout === "day" ? "day" : "week"}
             </ActionButton>
-            <ActionButton onClick={() => changeWeek(7)}>Next week</ActionButton>
+            <ActionButton onClick={() => changeWeek(layout === "day" ? 1 : 7)}>
+              Next {layout === "day" ? "day" : "week"}
+            </ActionButton>
+            <ActionButton onClick={calendar.reload}>
+              Refresh schedule
+            </ActionButton>
           </div>
           <div className={styles.legend}>
             <span className={styles.federal}>Federal</span>
@@ -202,6 +220,9 @@ export function HearingsScreen() {
             <p role="alert" className={styles.error}>
               {exportError}
             </p>
+          )}
+          {(committees.error || stateCommittees.error) && (
+            <p role="status">Some committee filters could not be loaded.</p>
           )}
           <StatusPanel
             loading={calendar.loading}
@@ -225,15 +246,29 @@ export function HearingsScreen() {
                   />
                 )}
                 <HearingAgenda rows={calendar.data.rows} onOpen={open} />
-                <PageControls
-                  page={page}
-                  total={calendar.data.total}
-                  pageSize={200}
-                  onChange={setPage}
-                />
+                <p>
+                  {calendar.data.rows.length} hearings loaded in this range.
+                </p>
               </>
             )}
           </StatusPanel>
+          {calendar.data && (
+            <>
+              {calendar.data.warnings.map((warning) => (
+                <p role="status" key={warning}>
+                  {warning}
+                </p>
+              ))}
+              {jurisdiction !== "US" && (
+                <details>
+                  <summary>Florida official calendar source coverage</summary>
+                  {hearingCoverageText(calendar.data.coverage).map((line) => (
+                    <p key={line}>{line}</p>
+                  ))}
+                </details>
+              )}
+            </>
+          )}
         </>
       )}
       <Modal
@@ -245,7 +280,6 @@ export function HearingsScreen() {
             primary
             onClick={() => {
               setDateOpen(false);
-              setPage(1);
             }}
           >
             Apply date
@@ -257,7 +291,9 @@ export function HearingsScreen() {
             id="calendar-from"
             type="date"
             value={from}
-            onChange={(event) => setFrom(event.target.value)}
+            onChange={(event) => {
+              if (event.target.value) setFrom(event.target.value);
+            }}
           />
         </Field>
       </Modal>
@@ -269,7 +305,6 @@ export function HearingsScreen() {
           <ActionButton
             primary
             onClick={() => {
-              setPage(1);
               setFiltersOpen(false);
             }}
           >

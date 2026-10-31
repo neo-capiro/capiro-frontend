@@ -1,7 +1,10 @@
 import type { CapiroApi } from "../../../shared/capiro/http";
 import { loadEffectiveDatePages } from "../../../shared/federal-register/effective-dates";
 import { loadCommentDeadlinePages } from "../../../shared/federal-register/comment-deadlines";
-import type { CalendarHearing } from "../../../shared/capiro/operations/legiwatch-calendar-schemas";
+import {
+  hearingCoverageText,
+  loadHearingCalendar,
+} from "../../../shared/capiro/operations/legiwatch-calendar-feed";
 import type { PlannerTask } from "../../../shared/capiro/operations/planner-schemas";
 import type { capiroOperations } from "../../../shared/capiro/registry";
 import {
@@ -51,30 +54,21 @@ export async function loadHearings(
   range: CalendarRange,
   signal: AbortSignal,
 ): Promise<SourceResult> {
-  const items: CalendarHearing[] = [];
-  for (let page = 1; page <= 100; page += 1) {
-    const result = await api.request(
-      "legiwatch.calendar",
-      {
-        query: {
-          from: range.firstDay,
-          to: range.lastDay,
-          jurisdiction: "ALL",
-          page,
-          pageSize: 200,
-          sort: "asc",
-        },
-      },
-      { signal: signal },
-    );
-    items.push(...result.rows);
-    if (page * result.pageSize >= result.total || !result.rows.length)
-      return { items: hearingItems(items), warning: undefined };
-  }
+  const result = await loadHearingCalendar(
+    (query) => api.request("legiwatch.calendar", { query }, { signal }),
+    (query) => api.request("legiwatch.calendarCoverage", { query }, { signal }),
+    {
+      from: range.firstDay,
+      to: range.lastDay,
+      jurisdiction: "ALL",
+      sort: "asc",
+    },
+  );
   return {
-    items: hearingItems(items),
+    items: hearingItems(result.rows),
     warning:
-      "The hearing feed has more pages than this view can load. Its agenda is incomplete.",
+      [...result.warnings, ...hearingCoverageText(result.coverage)].join(" ") ||
+      undefined,
   };
 }
 export async function loadCommentDeadlines(
@@ -143,6 +137,7 @@ export async function loadAgendaSources(
   api: SourceApi,
   range: CalendarRange,
   signal: AbortSignal,
+  hearingsOnly = false,
 ) {
   const sources = [
     {
@@ -176,8 +171,11 @@ export async function loadAgendaSources(
     },
     { name: "Funding deadlines", load: () => loadFunding(api, range, signal) },
   ];
+  const selectedSources = hearingsOnly
+    ? sources.filter((source) => source.name === "Hearings")
+    : sources;
   const results = await Promise.allSettled(
-    sources.map((source) => source.load()),
+    selectedSources.map((source) => source.load()),
   );
   const warnings: string[] = [];
   const items: AgendaItem[] = [];
@@ -187,7 +185,7 @@ export async function loadAgendaSources(
       if (result.value.warning) warnings.push(result.value.warning);
     } else
       warnings.push(
-        `${sources[index]!.name} unavailable: ${result.reason instanceof Error ? result.reason.message : "The source could not be loaded."}`,
+        `${selectedSources[index]!.name} unavailable: ${result.reason instanceof Error ? result.reason.message : "The source could not be loaded."}`,
       );
   });
   return {

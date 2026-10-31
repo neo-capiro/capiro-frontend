@@ -11,28 +11,19 @@ import {
 import {
   recipientSchema,
   recipientSelectionSchema,
-} from "./legiwatch-report-schemas";
+} from "./legiwatch-delivery-schemas";
 const source =
   "apps/intel-api/src/tracker/editorial/editorial.controller.ts; editorial.service.ts; packages/shared/src/legiwatch-phase8.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace";
 export const editorialConfig = evidenceScope
   .extend({
     folderId: monitorId,
-    template: z.enum([
-      "research_update",
-      "daily_legislative_brief",
-      "morning_news_brief",
-    ]),
-    reportId: monitorId,
+    template: z.enum(["research_update", "daily_legislative_brief"]),
     subject: z
       .string()
       .min(1)
       .max(200)
       .refine((value) => !/[\r\n]/.test(value)),
-    monitorIds: z.array(monitorId).max(38),
-    includedKinds: z
-      .array(z.enum(["news", "budget", "personnel", "research"]))
-      .min(1)
-      .max(4),
+    includedKinds: z.array(z.literal("research")).length(1),
     schedule: z
       .object({
         timezone: scheduleTime.timezone,
@@ -44,6 +35,20 @@ export const editorialConfig = evidenceScope
         mode: z.enum(["prepare", "send"]),
       })
       .strict(),
+    recipientSelection: z.array(recipientSelectionSchema).max(500),
+    prepareEnabled: z.boolean(),
+    sendEnabled: z.boolean(),
+    dictionaryScopeAccepted: z.boolean(),
+    acceptAvailableFields: z.boolean(),
+  })
+  .strict();
+// The backend validates ownership/folder/version, then discards these old
+// picker fields. The included source family remains strictly research-only.
+const rolloutConfig = editorialConfig
+  .extend({
+    reportId: monitorId,
+    reportVersion: monitorVersion.optional(),
+    monitorIds: z.array(monitorId).max(0),
     categoryMapping: z
       .object({
         namespace: z.string().nullable(),
@@ -59,11 +64,6 @@ export const editorialConfig = evidenceScope
         ),
       })
       .strict(),
-    recipientSelection: z.array(recipientSelectionSchema).max(500),
-    prepareEnabled: z.boolean(),
-    sendEnabled: z.boolean(),
-    dictionaryScopeAccepted: z.boolean(),
-    acceptAvailableFields: z.boolean(),
   })
   .strict();
 export const editorialRow = z.object({
@@ -74,8 +74,8 @@ export const editorialRow = z.object({
   source: z.object({
     family: z.object({
       displayName: z.string(),
-      categoryNamespace: z.string().nullable(),
-      categories: z.array(z.string()),
+      categoryNamespace: z.string().nullable().default(null),
+      categories: z.array(z.string()).default([]),
     }),
   }),
   config: editorialConfig
@@ -85,7 +85,7 @@ export const editorialRow = z.object({
     .extend({
       folderId: z.string().nullable().optional(),
       clientId: z.string().nullable().optional(),
-      reportVersion: z.number().optional(),
+      policyVersion: z.number().int().optional(),
       recipients: z.array(recipientSchema).optional(),
     }),
   approvalHash: z.string().optional(),
@@ -120,7 +120,10 @@ export const legiwatchEditorialOperations = {
       .object({
         params: monitorParams,
         body: z
-          .object({ expectedVersion: monitorVersion, config: editorialConfig })
+          .object({
+            expectedVersion: monitorVersion,
+            config: z.union([editorialConfig, rolloutConfig]),
+          })
           .strict(),
       })
       .strict(),

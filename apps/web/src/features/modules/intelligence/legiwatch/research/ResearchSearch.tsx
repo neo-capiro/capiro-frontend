@@ -12,10 +12,10 @@ import {
   TextInput,
 } from "../../../../../shared/module-ui";
 import { SelectField, SourceLink } from "../components";
-import type { EvidenceScope } from "../evidence/EvidenceActions";
-import { EvidenceBasketActions } from "../evidence/EvidenceBasket";
-import { EvidenceDialogs } from "../evidence/EvidenceDialogs";
-import { useEvidenceSelection } from "../evidence/use-evidence-selection";
+import type { EvidenceScope } from "../sources/EvidenceActions";
+import { EvidenceBasketActions } from "../sources/EvidenceBasket";
+import { EvidenceDialogs } from "../sources/EvidenceDialogs";
+import { useEvidenceSelection } from "../sources/use-evidence-selection";
 import styles from "../legiwatch.module.css";
 import { ResearchDraft } from "./ResearchDraft";
 import { ResearchVersions } from "./ResearchVersions";
@@ -228,11 +228,7 @@ function ResearchResults({ input }: { input: SearchInput }) {
           onClose={() => setDraftOpen(false)}
         />
       )}
-      <EvidenceDialogs
-        selection={selection}
-        scope={scope}
-        reload={query.reload}
-      />
+      <EvidenceDialogs selection={selection} scope={scope} />
       {billId && (
         <ResearchVersions
           scope={scope}

@@ -32,6 +32,9 @@ vi.mock("../../../shared/module-ui", () => ({
   },
 }));
 // The route test observes only the selection boundary, not child queries.
+vi.mock("./committees/CommitteesScreen", () => ({
+  CommitteesScreen: () => null,
+}));
 vi.mock("./CommitteeDirectory", () => ({
   CommitteeDirectory: () => createElement("section"),
 }));
@@ -68,6 +71,9 @@ it("derives the selected tab from restored and changed URLs", () => {
   route.search = "view=committee-staff";
   renderToStaticMarkup(createElement(DirectoryScreen));
   expect(route.selected).toBe("committee-staff");
+  route.search = "view=state-committees&clientId=client-hint";
+  renderToStaticMarkup(createElement(DirectoryScreen));
+  expect(route.selected).toBe("committees");
   route.search = "view=unknown";
   renderToStaticMarkup(createElement(DirectoryScreen));
   expect(route.selected).toBe("congressional-staff");
@@ -92,4 +98,15 @@ it("keeps navigation available for malformed or duplicate detail IDs", () => {
     route.onView?.("committee-staff");
     expect(route.pushed.at(-1)).toBe("/modules/directory?view=committee-staff");
   }
+});
+
+it("clears committee selection when switching to the separate staff directory", () => {
+  route.search =
+    "view=committees&jurisdiction=FL&committeeId=state%3AFL%3Acommittee-one&clientId=client-hint";
+  renderToStaticMarkup(createElement(DirectoryScreen));
+  expect(route.selected).toBe("committees");
+  route.onView?.("committee-staff");
+  expect(route.pushed.at(-1)).toBe(
+    "/modules/directory?view=committee-staff&clientId=client-hint",
+  );
 });

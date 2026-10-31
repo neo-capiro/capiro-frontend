@@ -14,7 +14,9 @@ export const identitySchema = z.object({
   role: z.string().nullable().optional(),
   billingAdmin: z.boolean().optional(),
 });
-export function useIdentity(options: { refetchOnMount?: false } = {}) {
+export function useIdentity(
+  options: { refetchOnMount?: false; enabled?: boolean } = {},
+) {
   const api = useApi();
   return useQuery({
     queryKey: ["identity"],

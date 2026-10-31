@@ -5,15 +5,11 @@ import {
   workflowTemplates,
   type workflow,
 } from "../../../../../shared/capiro/operations/legiwatch-workflows";
-import {
-  useCapiroMutation,
-  useCapiroQuery,
-} from "../../../../../shared/capiro/queries";
+import { useCapiroMutation } from "../../../../../shared/capiro/queries";
 import {
   ActionButton,
   Field,
   Modal,
-  StatusPanel,
   TextInput,
 } from "../../../../../shared/module-ui";
 import { SelectField } from "../components";
@@ -41,11 +37,6 @@ export function WorkflowEditor({
     [changed, setChanged] = useState(!row);
   const create = useCapiroMutation("legiwatch.workflow.create"),
     update = useCapiroMutation("legiwatch.workflow.save");
-  const reports = useCapiroQuery(
-    "legiwatch.reports",
-    {},
-    { enabled: template === "report_review" },
-  );
   const pending = create.pending || update.pending;
   const save = async () => {
     const body = {
@@ -55,7 +46,6 @@ export function WorkflowEditor({
         folderIds: config.folderIds,
         jurisdiction: config.jurisdiction,
         sessionKey: config.sessionKey,
-        ...(template === "report_review" ? { reportId: config.reportId } : {}),
       },
     };
     try {
@@ -139,46 +129,9 @@ export function WorkflowEditor({
               }
             />
           </Field>
-          {template === "report_review" && (
-            <StatusPanel
-              loading={reports.loading}
-              error={reports.error}
-              onRetry={reports.reload}
-            >
-              <SelectField
-                id="workflow-report"
-                label="Report"
-                value={config.reportId ?? ""}
-                onChange={(reportId) =>
-                  setConfig((current) => ({ ...current, reportId }))
-                }
-              >
-                <option value="">Choose a report</option>
-                {reports.data
-                  ?.filter(
-                    (report) =>
-                      !report.archived &&
-                      report.canEdit &&
-                      report.folderIds.every((id) =>
-                        config.folderIds.includes(id),
-                      ),
-                  )
-                  .map((report) => (
-                    <option key={report.id} value={report.id}>
-                      {report.name}
-                    </option>
-                  ))}
-              </SelectField>
-            </StatusPanel>
-          )}
           <ActionButton
             primary
-            disabled={
-              !changed ||
-              !name.trim() ||
-              !config.folderIds.length ||
-              (template === "report_review" && !config.reportId)
-            }
+            disabled={!changed || !name.trim() || !config.folderIds.length}
             onClick={() => void save()}
           >
             Save paused workflow

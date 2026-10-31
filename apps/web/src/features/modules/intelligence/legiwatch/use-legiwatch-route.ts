@@ -1,7 +1,9 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { movedCommitteeDirectoryHref } from "../../directory/public";
 
-export type LegiWatchView = "hearings" | "committees" | "updates" | "more";
+export type LegiWatchView = "hearings" | "updates" | "more";
 export function useLegiWatchRoute() {
   const search = useSearchParams(),
     router = useRouter(),
@@ -9,23 +11,28 @@ export function useLegiWatchRoute() {
   const navigate = (patch: Record<string, string | null>) => {
     const next = new URLSearchParams(search.toString());
     next.set("view", "legiwatch");
-    for (const [key, value] of Object.entries(patch))
-      value ? next.set(key, value) : next.delete(key);
+    for (const [key, value] of Object.entries(patch)) {
+      if (value) next.set(key, value);
+      else next.delete(key);
+    }
     router.push(`${pathname}?${next}`, { scroll: false });
   };
   const active = search.get("lw") ?? "hearings";
-  const section: LegiWatchView = [
-    "hearings",
-    "committees",
-    "updates",
-    "more",
-  ].includes(active)
+  const movedCommitteeHref =
+    active === "committees" ? movedCommitteeDirectoryHref(search) : null;
+  useEffect(() => {
+    if (movedCommitteeHref)
+      router.replace(movedCommitteeHref, { scroll: false });
+  }, [movedCommitteeHref, router]);
+  const section: LegiWatchView = ["hearings", "updates", "more"].includes(
+    active,
+  )
     ? (active as LegiWatchView)
     : "hearings";
   return {
+    movedCommitteeHref,
     section,
     hearingId: search.get("hearingId"),
-    committeeId: search.get("committeeId"),
     sessionId: search.get("sessionId"),
     clientId: search.get("clientId") ?? "",
     moreView: search.get("lwMore"),

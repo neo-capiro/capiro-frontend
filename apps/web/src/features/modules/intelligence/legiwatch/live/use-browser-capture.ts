@@ -44,6 +44,7 @@ export function useBrowserCapture(
   const api = useCapiro(),
     resources = useRef<CaptureResources>({ startedAt: 0, graceful: false }),
     generation = useRef(0),
+    mounted = useRef(true),
     onEndedRef = useRef(onEnded);
   useLayoutEffect(() => {
     onEndedRef.current = onEnded;
@@ -84,13 +85,6 @@ export function useBrowserCapture(
     setError(undefined);
     setBytesSent(0);
   }
-  useEffect(() => {
-    return () => {
-      generation.current += 1;
-      release();
-    };
-  }, [api, sessionId, release]);
-
   async function connect() {
     if (!["idle", "ended", "interrupted"].includes(phase)) return;
     const currentGeneration = ++generation.current;
@@ -111,10 +105,18 @@ export function useBrowserCapture(
         throw new Error(
           "This browser cannot record the required WebM/Opus audio format.",
         );
-      const stream = await navigator.mediaDevices.getDisplayMedia({
-        video: true,
+      const options: DisplayMediaStreamOptions & {
+        systemAudio: "exclude";
+        monitorTypeSurfaces: "exclude";
+        surfaceSwitching: "exclude";
+      } = {
+        video: { displaySurface: "browser" },
         audio: true,
-      });
+        systemAudio: "exclude",
+        monitorTypeSurfaces: "exclude",
+        surfaceSwitching: "exclude",
+      };
+      const stream = await navigator.mediaDevices.getDisplayMedia(options);
       if (currentGeneration !== generation.current) {
         stream.getTracks().forEach((track) => track.stop());
         return;
@@ -123,10 +125,7 @@ export function useBrowserCapture(
       const displaySurface = stream
         .getVideoTracks()[0]
         ?.getSettings().displaySurface;
-      if (
-        audioTracks.length === 0 ||
-        (displaySurface && displaySurface !== "browser")
-      ) {
+      if (audioTracks.length === 0 || displaySurface !== "browser") {
         stream.getTracks().forEach((track) => track.stop());
         throw new Error(
           "Choose the official source browser tab and enable Share tab audio. Screen sharing without tab audio cannot be transcribed.",
@@ -303,7 +302,7 @@ export function useBrowserCapture(
           setPhase("ended");
           generation.current += 1;
           release();
-          onEndedRef.current();
+          if (mounted.current) onEndedRef.current();
         }
       };
     } catch (failure) {
@@ -316,7 +315,7 @@ export function useBrowserCapture(
     }
   }
 
-  async function stop() {
+  const stop = useCallback(async () => {
     const current = resources.current,
       currentGeneration = generation.current;
     const ownsCapture = () =>
@@ -324,6 +323,12 @@ export function useBrowserCapture(
     if (!current.recorder || current.recorder.state !== "recording") return;
     current.graceful = true;
     setPhase("stopping");
+    current.timeout = setTimeout(() => {
+      if (ownsCapture())
+        interrupt(
+          "Final audio was not confirmed in time. Reload the session and check retained coverage.",
+        );
+    }, 20000);
     try {
       await new Promise<void>((resolve) => {
         current.recorder!.addEventListener("stop", () => resolve(), {
@@ -331,6 +336,7 @@ export function useBrowserCapture(
         });
         current.recorder!.stop();
       });
+      current.stream?.getTracks().forEach((track) => track.stop());
       await current.transport?.drain();
       if (!ownsCapture()) return;
       if (current.socket?.readyState !== WebSocket.OPEN)
@@ -345,13 +351,6 @@ export function useBrowserCapture(
             : {}),
         }),
       );
-      current.stream?.getTracks().forEach((track) => track.stop());
-      current.timeout = setTimeout(() => {
-        if (ownsCapture())
-          interrupt(
-            "Audio was sent but the final session status was not confirmed. Reload the session and retained coverage.",
-          );
-      }, 20000);
     } catch (failure) {
       if (ownsCapture())
         interrupt(
@@ -360,7 +359,21 @@ export function useBrowserCapture(
             : "Could not confirm the final saved audio.",
         );
     }
-  }
+  }, [interrupt]);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      // Client navigation does not unload the document. Keep the existing
+      // socket alive long enough to drain the final recorder blob and receive
+      // the terminal acknowledgement; stop() retains its bounded timeout.
+      if (resources.current.recorder?.state === "recording") void stop();
+      else if (!resources.current.graceful) {
+        generation.current += 1;
+        release();
+      }
+    };
+  }, [api, sessionId, release, stop]);
   return {
     phase,
     error,

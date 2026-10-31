@@ -5,7 +5,7 @@ import { LegiWatchTabs } from "../components";
 import {
   EvidenceScopePicker,
   useEvidenceScope,
-} from "../evidence/EvidenceScope";
+} from "../sources/EvidenceScope";
 import styles from "../legiwatch.module.css";
 import { FloridaLaw } from "./FloridaLaw";
 import { ResearchCoverage } from "./ResearchCoverage";

@@ -75,14 +75,14 @@ export function CommitteeDirectory() {
           <Panel
             title={
               committees.data
-                ? `${committees.data.total} committees`
+                ? `${committees.data.total} committees with staff contacts`
                 : "Committee Staff"
             }
           >
             <DataTable
               rows={committees.data?.committees || []}
               rowKey={(r) => r.id}
-              caption="Committee directory"
+              caption="Committee staff directory"
               columns={[
                 {
                   key: "name",

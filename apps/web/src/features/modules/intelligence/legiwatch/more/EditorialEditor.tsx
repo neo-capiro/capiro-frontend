@@ -1,8 +1,5 @@
 "use client";
-import {
-  useCapiroMutation,
-  useCapiroQuery,
-} from "../../../../../shared/capiro/queries";
+import { useCapiroMutation } from "../../../../../shared/capiro/queries";
 import {
   ActionButton,
   Field,
@@ -13,9 +10,9 @@ import { SelectField } from "../components";
 import {
   EvidenceScopePicker,
   useEvidenceScope,
-} from "../evidence/EvidenceScope";
+} from "../sources/EvidenceScope";
 import styles from "../legiwatch.module.css";
-import { RecipientPicker } from "../reports/RecipientPicker";
+import { RecipientPicker } from "../delivery/RecipientPicker";
 import { EditorialActivation } from "./EditorialActivation";
 import { EditorialScheduleFields } from "./EditorialScheduleFields";
 import { EditorialSourceFields } from "./EditorialSourceFields";
@@ -32,8 +29,7 @@ export function EditorialEditor({
   const state = useEditorialDraft(row),
     { config, patch } = state,
     scope = useEvidenceScope(config.folderId);
-  const reports = useCapiroQuery("legiwatch.reports", {}),
-    save = useCapiroMutation("legiwatch.editorial.configure");
+  const save = useCapiroMutation("legiwatch.editorial.configure");
   const submit = async () => {
     try {
       await save.run({
@@ -64,8 +60,6 @@ export function EditorialEditor({
                 folderId,
                 clientId: folder?.clientId ?? undefined,
                 sessionKey: folder?.defaultSession,
-                reportId: "",
-                monitorIds: [],
                 dictionaryScopeAccepted: false,
               });
             }}
@@ -77,7 +71,7 @@ export function EditorialEditor({
             onChange={(value) =>
               patch({
                 template:
-                  value === "research_update" || value === "morning_news_brief"
+                  value === "research_update"
                     ? value
                     : "daily_legislative_brief",
               })
@@ -87,29 +81,7 @@ export function EditorialEditor({
               Daily Legislative Brief
             </option>
             <option value="research_update">Research Update</option>
-            <option value="morning_news_brief">Morning News Brief</option>
           </SelectField>
-          <SelectField
-            id="editorial-report"
-            label="Matching report definition"
-            value={config.reportId}
-            onChange={(reportId) => patch({ reportId })}
-          >
-            <option value="">Choose a report for this folder</option>
-            {reports.data
-              ?.filter(
-                (report) =>
-                  report.folderIds.length === 1 &&
-                  report.folderIds[0] === config.folderId &&
-                  !report.archived,
-              )
-              .map((report) => (
-                <option key={report.id} value={report.id}>
-                  {report.name} · Version {report.version}
-                </option>
-              ))}
-          </SelectField>
-          {reports.error && <p role="alert">{reports.error.message}</p>}
           <Field label="Subject" htmlFor="editorial-subject">
             <TextInput
               id="editorial-subject"
@@ -119,7 +91,7 @@ export function EditorialEditor({
             />
           </Field>
           <EditorialScheduleFields config={config} patch={patch} />
-          <EditorialSourceFields row={row} config={config} patch={patch} />
+          <EditorialSourceFields config={config} patch={patch} />
           <label className={styles.check}>
             <input
               type="checkbox"
@@ -154,11 +126,7 @@ export function EditorialEditor({
           )}
           <ActionButton
             primary
-            disabled={
-              !scope.selected?.canEdit ||
-              !config.reportId ||
-              !config.subject.trim()
-            }
+            disabled={!scope.selected?.canEdit || !config.subject.trim()}
             onClick={() => void submit()}
           >
             Save paused briefing configuration

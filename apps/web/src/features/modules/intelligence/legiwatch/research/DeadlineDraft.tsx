@@ -9,7 +9,7 @@ import {
   Modal,
   TextArea,
 } from "../../../../../shared/module-ui";
-import type { EvidenceScope } from "../evidence/EvidenceActions";
+import type { EvidenceScope } from "../sources/EvidenceActions";
 import styles from "../legiwatch.module.css";
 import { ResearchDraftReceipt } from "./ResearchDraft";
 export function DeadlineDraft({

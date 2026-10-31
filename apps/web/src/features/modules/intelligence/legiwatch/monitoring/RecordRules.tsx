@@ -32,8 +32,8 @@ export function RecordRules({ family }: { family: RecordFamily }) {
       >
         {query.data?.length === 0 && (
           <p>
-            No {family === "agenda" ? "agenda" : "bill record"} rules have been
-            promoted from the import review.
+            No saved {family === "agenda" ? "agenda" : "bill record"} rules are
+            available.
           </p>
         )}
         {query.data?.map((rule) => (

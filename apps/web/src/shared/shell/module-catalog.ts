@@ -96,7 +96,7 @@ export const moduleCatalog: readonly ModuleDescriptor[] = [
     description: "Members, staff, committees and Department of War officials.",
     chips: [
       { label: "Congress", view: "congressional-staff" },
-      { label: "Committees", view: "committee-staff" },
+      { label: "Committees", view: "committees" },
       { label: "DoW", view: "department-of-war" },
       { label: "States", view: "state-legislators" },
     ],

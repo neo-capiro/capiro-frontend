@@ -26,7 +26,7 @@ export function SmsConsentPanel({
   const query = useCapiroQuery("legiwatch.sms.settings", {
       params: { clientId },
     }),
-    directory = useCapiroQuery("legiwatch.report.recipients", {});
+    directory = useCapiroQuery("legiwatch.delivery.recipients", {});
   const start = useCapiroMutation("legiwatch.sms.start"),
     confirm = useCapiroMutation("legiwatch.sms.confirm"),
     revoke = useCapiroMutation("legiwatch.sms.revoke");

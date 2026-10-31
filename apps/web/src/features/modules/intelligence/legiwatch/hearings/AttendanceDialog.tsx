@@ -68,9 +68,12 @@ export function AttendanceDialog({
         return;
       }
       if (plan.mode === "ATTACH_CANONICAL") {
-        setError(
-          `A shared ${plan.captureStatus.toLowerCase()} capture already exists. Open the live transcript to attach.`,
-        );
+        onClose();
+        route.navigate({
+          hearingId: plan.hearingId,
+          hearingTab: "live",
+          sessionId: null,
+        });
         return;
       }
       if (plan.sourceType !== "hearing" && plan.sourceType !== "markup")

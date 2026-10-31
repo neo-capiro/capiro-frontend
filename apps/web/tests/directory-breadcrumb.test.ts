@@ -53,6 +53,12 @@ vi.mock("../src/shared/module-ui", () => ({
 vi.mock("../src/features/modules/directory/CongressionalContacts", () => ({
   CongressionalContacts: () => null,
 }));
+vi.mock(
+  "../src/features/modules/directory/committees/CommitteesScreen",
+  () => ({
+    CommitteesScreen: () => null,
+  }),
+);
 vi.mock("../src/features/modules/directory/CommitteeDirectory", () => ({
   CommitteeDirectory: () => null,
 }));
@@ -91,7 +97,7 @@ it.each([
   ["committee-staff", "Committee Staff"],
   ["department-of-war", "Department of War"],
   ["state-legislators", "State Legislators"],
-  ["state-committees", "State Committees"],
+  ["committees", "Committees"],
 ])(
   "matches the rendered view for %s without changing hub shortcuts",
   (view, label) => {
@@ -121,6 +127,13 @@ it("preserves the selected client when switching modules", () => {
   );
   route.switchModule!("unsupported");
   expect(route.push).toHaveBeenCalledTimes(1);
+});
+
+it("opens the committee catalog from the Directory hub shortcut", () => {
+  const chip = moduleCatalog
+    .find((module) => module.slug === "directory")
+    ?.chips.find((item) => item.label === "Committees");
+  expect(chip?.view).toBe("committees");
 });
 
 it("preserves other modules' catalog and hidden-breadcrumb behavior", () => {

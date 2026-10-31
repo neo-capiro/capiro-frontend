@@ -22,10 +22,7 @@ export function EditorialSchedules() {
         onRetry={query.reload}
       >
         {query.data?.configurations.length === 0 && (
-          <p>
-            No briefing configurations have been staged. Review a source capture
-            in News monitors & import.
-          </p>
+          <p>No saved briefing schedules are available.</p>
         )}
         {query.data?.configurations.map((item) => (
           <Panel

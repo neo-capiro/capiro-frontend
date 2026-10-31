@@ -19,7 +19,8 @@ const citation = z
     (value) =>
       value.end > value.start && value.quote.length === value.end - value.start,
   );
-const review = z.object({ selectionId: id, runId: id }).strict();
+// Cached research clients still bind an existing frozen internal base.
+const review = z.object({ selectionId: id, runId: id.optional() }).strict();
 export const legiwatchResearchWorkOperations = {
   "legiwatch.research.draft": defineOperation({
     service: "intelligence",

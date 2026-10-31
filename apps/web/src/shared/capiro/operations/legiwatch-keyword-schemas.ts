@@ -4,7 +4,7 @@ import {
   monitorVersion,
   staffRecipient,
 } from "./legiwatch-monitor-schemas";
-import { folderBillSchema } from "./legiwatch-report-schemas";
+import { folderBillSchema } from "./legiwatch-folder-schemas";
 export const keywordScope = z
   .object({
     jurisdiction: z.string().regex(/^[A-Z]{2}$/),
