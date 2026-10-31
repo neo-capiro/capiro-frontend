@@ -3,6 +3,7 @@
 import type { ModuleSlug } from "../../../shared/shell/module-catalog";
 import { HubMetric } from "./HubMetric";
 import { useHubFundingMetric } from "./useHubFundingMetric";
+import { useHubDirectoryMetric } from "./useHubDirectoryMetric";
 
 export function HubCardMetrics({
   module,
@@ -12,6 +13,7 @@ export function HubCardMetrics({
   clientId: string;
 }) {
   if (module === "intelligence") return <FundingMetric clientId={clientId} />;
+  if (module === "directory") return <DirectoryMetric />;
   return (
     <HubMetric
       label="Activity metrics"
@@ -20,6 +22,24 @@ export function HubCardMetrics({
         reason: "Module totals are not yet available.",
       }}
     />
+  );
+}
+
+function DirectoryMetric() {
+  const metric = useHubDirectoryMetric();
+  return (
+    <section aria-label="Directory contact metrics">
+      <HubMetric label="Directory contacts" state={metric.state} />
+      <p>Global catalog · All dates · Unaffected by client selection.</p>
+      {metric.notice && <small>{metric.notice}</small>}
+      <button
+        type="button"
+        onClick={metric.refresh}
+        disabled={metric.state.status === "loading"}
+      >
+        Refresh Directory metrics
+      </button>
+    </section>
   );
 }
 
