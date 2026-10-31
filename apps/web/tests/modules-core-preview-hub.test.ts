@@ -16,7 +16,15 @@ vi.mock("next/navigation", () => ({
 vi.mock("../src/shared/capiro/queries", () => ({
   useCapiroQuery: (key: string, _input: unknown, options: unknown) => {
     state.capiroOptions.push(options);
-    if (key === "intelligence.funding.search" || key === "directory.metrics")
+    if (
+      [
+        "intelligence.funding.search",
+        "directory.metrics",
+        "planner.metrics.overdue",
+        "strategies.metrics.active",
+        "workspace.metrics.savedWork",
+      ].includes(key)
+    )
       return { loading: true, reload: vi.fn() };
     return {
       data: state.capiroData,
@@ -73,8 +81,8 @@ it("keeps the ordinary Modules hub on its existing Capiro operation", () => {
 
   expect(
     state.capiroOptions.filter((options) => options !== undefined),
-  ).toEqual([{ enabled: true }]);
-  expect(state.capiroOptions).toHaveLength(3);
+  ).toEqual(Array.from({ length: 4 }, () => ({ enabled: true })));
+  expect(state.capiroOptions).toHaveLength(6);
   expect(html).toContain("Everything in Capiro");
   expect(html).toContain("Run the work");
   expect(html).toContain('href="/modules/engagement"');

@@ -8,6 +8,7 @@ import { strategiesWatchOperations } from "./strategies-watch";
 import { strategyObjectiveOperations } from "./objective-work-destinations";
 import { objectiveGenerationOperations } from "./objective-generation";
 export const strategiesOperations = {
+  ...strategyMetricOperations,
   ...objectiveGenerationOperations,
   ...strategyObjectiveOperations,
   ...strategiesPlanOperations,
@@ -18,3 +19,4 @@ export const strategiesOperations = {
   ...strategiesAgentOperations,
   ...strategiesWatchOperations,
 } as const;
+import { strategyMetricOperations } from "./strategy-metrics";

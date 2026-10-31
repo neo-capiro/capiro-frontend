@@ -22,14 +22,14 @@ Refresh is manual and every minute while mounted. The existing `useCapiroQuery` 
 
 These rows are review proposals, not implemented APIs or approved new formulas. Each remains visibly unavailable until its existing owner returns the full eligible population with observation, scope and completeness. UI lists, first pages and roster sizes are never substitute sources.
 
-| Card | Owner and proposed smallest useful metric | Scope, status, window and units | Concrete remaining dependency |
-| --- | --- | --- | --- |
-| Engagement | Core Engagement/Outreach: saved outreach records in trailing 30 days | Current tenant/actor's visible records; selected client filters exact canonical association. Count each canonical saved outreach ID once. Proposed window inclusive `[observedAt-30d, observedAt]` UTC. Unit records, no denominator. | Owner must select the saved event timestamp and included statuses (drafts versus sent) and publish its complete aggregate. B2 CRM `recordedActivities` explicitly excludes outreach/mail/meetings, so it is **not** reused as Engagement activity. |
-| Planner | Existing Strategy/Planner task owner: unfinished overdue tasks | Full readable task population in current workspace and optional exact client; saved due date before observed UTC date; exclude completed/deleted/archived per actual canonical status contract. Unit tasks, no denominator. | Owner must map actual terminal/archived states and date-only versus instant due semantics, return count/coverage/time/scope. Objective-only planner projections do not establish a module-wide total. |
-| Workspace | Workspace document owner: active saved documents | Full readable tenant/actor/client population; canonical document IDs once, not versions or attachments. All dates; unit documents. | Owner must define active for drafts/published/archived/deleted and provide a full-population aggregate. Do not count a library page, Hill Day packets and templates together. |
-| Strategies | Strategy library owner: active saved strategies | Current authorized tenant/workspace/client; distinct canonical strategy IDs, all dates; unit strategies. | Owner must settle retained/archived/draft status mapping and expose a scoped aggregate; Objective counts and generated-run counts are not strategy totals. |
-| Directory | Directory people/organizations owner | Current readable population; proposed separate person and organization counts, all dates, units people/organizations. No automatic client filter over a global directory. | Review whether global catalog counts or explicit saved client relationships belong on this card, then use the chosen owner's complete aggregates. Never combine persons and organizations into a fabricated activity score. |
-| Research Portfolios | Research Portfolio owner: active portfolios | Current actor's readable owned/shared portfolios, deduplicated by canonical portfolio ID; all dates; unit portfolios. Client filtering only through an explicit stored association. | Confirm active/archive/delete statuses and client-association semantics and publish aggregate. Saved client bill watches are a different population and cannot become Research Portfolio counts. |
+| Card                | Owner and proposed smallest useful metric                            | Scope, status, window and units                                                                                                                                                                                                       | Concrete remaining dependency                                                                                                                                                                                                                      |
+| ------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Engagement          | Core Engagement/Outreach: saved outreach records in trailing 30 days | Current tenant/actor's visible records; selected client filters exact canonical association. Count each canonical saved outreach ID once. Proposed window inclusive `[observedAt-30d, observedAt]` UTC. Unit records, no denominator. | Owner must select the saved event timestamp and included statuses (drafts versus sent) and publish its complete aggregate. B2 CRM `recordedActivities` explicitly excludes outreach/mail/meetings, so it is **not** reused as Engagement activity. |
+| Planner             | Existing Strategy/Planner task owner: unfinished overdue tasks       | Full readable task population in current workspace and optional exact client; saved due date before observed UTC date; exclude completed/deleted/archived per actual canonical status contract. Unit tasks, no denominator.           | Owner must map actual terminal/archived states and date-only versus instant due semantics, return count/coverage/time/scope. Objective-only planner projections do not establish a module-wide total.                                              |
+| Workspace           | Workspace document owner: active saved documents                     | Full readable tenant/actor/client population; canonical document IDs once, not versions or attachments. All dates; unit documents.                                                                                                    | Owner must define active for drafts/published/archived/deleted and provide a full-population aggregate. Do not count a library page, Hill Day packets and templates together.                                                                      |
+| Strategies          | Strategy library owner: active saved strategies                      | Current authorized tenant/workspace/client; distinct canonical strategy IDs, all dates; unit strategies.                                                                                                                              | Owner must settle retained/archived/draft status mapping and expose a scoped aggregate; Objective counts and generated-run counts are not strategy totals.                                                                                         |
+| Directory           | Directory people/organizations owner                                 | Current readable population; proposed separate person and organization counts, all dates, units people/organizations. No automatic client filter over a global directory.                                                             | Review whether global catalog counts or explicit saved client relationships belong on this card, then use the chosen owner's complete aggregates. Never combine persons and organizations into a fabricated activity score.                        |
+| Research Portfolios | Research Portfolio owner: active portfolios                          | Current actor's readable owned/shared portfolios, deduplicated by canonical portfolio ID; all dates; unit portfolios. Client filtering only through an explicit stored association.                                                   | Confirm active/archive/delete statuses and client-association semantics and publish aggregate. Saved client bill watches are a different population and cannot become Research Portfolio counts.                                                   |
 
 For every future owner response: observation timestamp, exact definition/version, current authorized client scope, full-population coverage and per-source availability are required. Complete zero, denied, unavailable, partial and stale must remain distinct. Hidden/unauthorized rows must never enter a numerator or denominator; current access withdrawal must clear cached observations. Full counts must be computed before pagination, with association fan-out deduplicated by canonical identity. Source failures remain independent.
 
@@ -45,6 +45,7 @@ The Text-to-SQL owner (`01a19189`) inspected its 14 private projections and conf
 ## Acceptance still required
 
 Independent review must check the actual source and selected contract. Release must bind the serving FE/Core tuple, configured source availability and permissions. Then exercise a known complete count beyond page size, real zero, selected/unselected client, inaccessible/invalid client, access withdrawal, source partial/stale/unavailable, refresh/reload and preview behavior. No live SQL, data seeding, provider effects, browser action, product build or deployment was performed by this source session.
+
 # Directory aggregate continuation
 
 Root selected the six remaining metric meanings in
@@ -75,3 +76,58 @@ funding behavior remains independent; either source's failure withholds only its
 own value. Preview mode continues to read only the fixed client roster. Other
 cards await their owners' actual accepted producer contracts; no placeholder
 operations were registered for them.
+
+## Planner, Strategy and Workspace continuation
+
+Core343 (accepted `ef2b93874113478706d5f1130a278fd6d8a481f5`) and Core344
+(accepted `600ed8c3de029e768d84a44a83eacf821cd00a85`) are merged into Core main
+`cb92d596ce52f20161db05633265ccdcf0f905ae`. Their source contracts now support:
+
+| Card      | Fixed operation / owner                                                     | Population                                                                                                                                                                                                                |
+| --------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Planner   | `planner.metrics.overdue`, strategy service `/planner/metrics/overdue`      | Distinct readable unfinished overdue tasks, including eligible General work when unselected. Timed deadlines are strictly before producer `asOf`; date-only deadlines precede the local `asOf` day, default timezone UTC. |
+| Strategy  | `strategies.metrics.active`, strategy service `/strategies/metrics/active`  | Actor-readable unarchived strategies; no inferred status or run/node count.                                                                                                                                               |
+| Workspace | `workspace.metrics.savedWork`, workspace service `/drafts/saved-work-count` | Readable draft and complete parents, one work product per packet; unselected includes General/null-client work.                                                                                                           |
+
+Each operation accepts only an optional exact UUID `clientId`. Omission requests
+the owner's actor population. Invalid selection disables the read instead of
+falling back. The existing authenticated fixed-operation transport supplies
+service prefixes and authority. The shared Planner/Strategy receiving schema
+matches their single producer contract; Workspace retains its distinct DTO.
+No browser-side population calculation or authorization decision is introduced.
+
+Display requires the expected metric/version, exact returned scope, valid ordered
+producer timestamps, safe nonnegative integer count, `complete:true` and
+`capped:false`. Complete zero remains visible. Planner also requires the exact
+deadline semantics. Planner/Strategy `state:incomplete` requires null count,
+`complete:false`, `capped:false` and a known producer reason; the UI withholds its
+number. Invalid, failed or denied responses clear both prior value and detail.
+
+Workspace returns incomplete as HTTP503 rather than a successful DTO. The sole
+gateway extension is private GET `/drafts/saved-work-count` on service `workspace`
+with status503: read at most4096 bytes, preserve only the exact top-level native
+`WORKSPACE_SAVED_WORK_INCOMPLETE` code in a fixed sanitized error envelope, and
+discard native messages, counts and extra fields. Existing browser transport
+exposes that safe code; the card shows incomplete with no number. Unknown,
+malformed, oversized, wrong-service/method/path/public responses remain generic
+unavailable. Cancellation is propagated and refused streams are cancelled. This
+shared gateway boundary requires independent review. No other error semantics,
+authentication, headers or routes are changed.
+
+Each card has an independent query and refresh action. Existing query lifetime
+fencing clears results on selected-client or authenticated API identity change
+and aborts replaced requests. Refresh runs every60seconds; a separate local
+clock marks an observation older than2minutes as stale. This is UI observation
+age, not a publisher freshness SLA. Original `observedAt` plus `asOf` or
+`observationStartedAt` are retained; browser completion time never replaces them.
+Preview remains fixed-roster-only. Classic Outreach and Research metrics remain
+unavailable pending their producer's corrected, accepted contract.
+
+Focused checks cover scope/identity/version/clock rejection, full count and zero,
+coherent incomplete branches, independent failures, cancellation and the actual
+Workspace gateway-to-browser-error-to-card path, including bounded parsing.
+Full web typecheck, touched-file lint and architecture comparison accompany the
+source handback. Source tests are not live acceptance: compatible owner services
+must be deployed before these consumers, followed by actual actor/client,
+revocation, zero, unavailable, reload and refresh checks. B9 is not Done from
+these source changes.

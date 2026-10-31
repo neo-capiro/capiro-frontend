@@ -9,6 +9,7 @@ const state = vi.hoisted(() => ({
   clientsError: undefined as Error | undefined,
   fundingError: undefined as Error | undefined,
   directoryError: undefined as Error | undefined,
+  ownedError: undefined as Error | undefined,
 }));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
@@ -50,6 +51,47 @@ vi.mock("../src/shared/capiro/queries", () => ({
           },
         },
       };
+    const ownerMetric = {
+      "planner.metrics.overdue": ["planner.overdue_unfinished", 7],
+      "strategies.metrics.active": ["strategy.active", 19],
+      "workspace.metrics.savedWork": ["workspace.saved-work-products", 31],
+    }[key];
+    if (ownerMetric) {
+      const workspace = key === "workspace.metrics.savedWork";
+      const clientId = (input as { query?: { clientId?: string } }).query
+        ?.clientId;
+      const observedAt = new Date().toISOString();
+      return {
+        loading: false,
+        reload: vi.fn(),
+        error: key === "planner.metrics.overdue" ? state.ownedError : undefined,
+        data: {
+          metric: ownerMetric[0],
+          count: ownerMetric[1],
+          version: 1,
+          complete: true,
+          capped: false,
+          observedAt,
+          scope: clientId
+            ? { kind: "client", clientId }
+            : workspace
+              ? { kind: "actor", clientId: null }
+              : { kind: "actor" },
+          ...(workspace
+            ? { observationStartedAt: observedAt }
+            : { asOf: observedAt, state: "complete" }),
+          ...(key === "planner.metrics.overdue"
+            ? {
+                deadline: {
+                  timed: "strictly_before_asOf",
+                  dateOnly: "before_local_asOf_day",
+                  defaultTimeZone: "UTC",
+                },
+              }
+            : {}),
+        },
+      };
+    }
     if (key !== "intelligence.funding.search")
       throw Error(`Unexpected owner read: ${key}`);
     return {
@@ -84,6 +126,7 @@ beforeEach(() => {
   state.clientsError = undefined;
   state.fundingError = undefined;
   state.directoryError = undefined;
+  state.ownedError = undefined;
 });
 const render = () => renderToStaticMarkup(createElement(ModuleHub));
 const fundingRead = () =>
@@ -95,6 +138,9 @@ it("mounts independent supported domain aggregates alongside the roster", () => 
     "clients.list",
     "directory.metrics",
     "intelligence.funding.search",
+    "planner.metrics.overdue",
+    "strategies.metrics.active",
+    "workspace.metrics.savedWork",
   ]);
   expect(fundingRead()).toMatchObject({
     input: { query: { lifecycle: "active", pageSize: 1, mode: "all" } },
@@ -178,4 +224,52 @@ it("a Directory failure withholds its old count without invalidating funding", (
   expect(html).not.toContain("private source detail");
   expect(html).toContain("1,201");
   expect(html).toContain("Access denied");
+});
+
+it("scopes all owned metric reads exactly and isolates an individual failure", () => {
+  const clientId = "10000000-0000-4000-8000-000000000001";
+  state.params = `clientId=${clientId}`;
+  state.ownedError = Object.assign(Error("private owner failure"), {
+    status: 403,
+  });
+  const html = render();
+  const reads = state.reads.filter((r) =>
+    [
+      "planner.metrics.overdue",
+      "strategies.metrics.active",
+      "workspace.metrics.savedWork",
+    ].includes(r.key),
+  );
+  expect(reads).toHaveLength(3);
+  expect(
+    reads.every(
+      (r) =>
+        JSON.stringify(r.input) === JSON.stringify({ query: { clientId } }) &&
+        r.enabled,
+    ),
+  ).toBe(true);
+  expect(html).not.toContain("<strong>7</strong>");
+  expect(html).not.toContain("private owner failure");
+  expect(html).toContain("<strong>19</strong>");
+  expect(html).toContain("<strong>31</strong>");
+  expect(html).toContain("501");
+  expect(html).toContain("1,201");
+});
+
+it("disables every scoped metric on a malformed selection without hiding the global Directory", () => {
+  state.params = "clientId=bad";
+  const html = render();
+  for (const key of [
+    "planner.metrics.overdue",
+    "strategies.metrics.active",
+    "workspace.metrics.savedWork",
+  ])
+    expect(state.reads.find((r) => r.key === key)).toMatchObject({
+      enabled: false,
+      input: {},
+    });
+  expect(html).not.toContain("<strong>7</strong>");
+  expect(html).not.toContain("<strong>19</strong>");
+  expect(html).not.toContain("<strong>31</strong>");
+  expect(html).toContain("501");
 });
