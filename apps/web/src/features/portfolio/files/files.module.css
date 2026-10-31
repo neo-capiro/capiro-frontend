@@ -77,6 +77,9 @@
 }
 .table td {
   font-size: 12px;
+  height: 72px;
+  padding-block: 11px;
+  vertical-align: middle;
 }
 .table small {
   display: block;
@@ -88,19 +91,27 @@
   overflow-wrap: anywhere;
   line-height: 1.5;
 }
+.fileName + small {
+  padding-left: 54px;
+}
 .fileName {
-  display: flex;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   border: 0;
   background: none;
   padding: 0;
   text-align: left;
   font-size: 13px;
+  overflow-wrap: anywhere;
 }
 .extension {
-  display: inline-block;
-  padding: 3px 5px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  min-height: 28px;
+  padding: 4px;
   border: 1px solid var(--border);
   background: var(--muted);
   text-transform: uppercase;

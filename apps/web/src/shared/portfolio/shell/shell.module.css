@@ -1,6 +1,11 @@
+.shell {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 .header {
-  position: sticky;
-  top: 0;
+  flex-shrink: 0;
   z-index: 20;
 }
 .brand {
@@ -67,20 +72,21 @@
 }
 .body {
   display: flex;
-  min-height: calc(100dvh - 65px);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 .sidebar {
   width: 232px;
   flex-shrink: 0;
   padding: 16px;
-  background: var(--card);
+  background: var(--muted);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  position: sticky;
-  top: 65px;
-  height: calc(100dvh - 65px);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .sidebar nav {
   display: grid;
@@ -98,18 +104,17 @@
   align-items: center;
   gap: 8px;
   padding: 9px 12px;
-  min-height: 36px;
+  min-height: 40px;
   border-radius: 10px;
   color: var(--muted-foreground);
 }
 .sidebar nav a {
-  height: 36px;
+  height: 40px;
   padding: 0 12px;
 }
 .sidebar nav [aria-current="page"] {
-  color: var(--foreground);
-  background: var(--card);
-  box-shadow: inset 0 0 0 1px var(--border);
+  color: var(--portfolio-selection-foreground);
+  background: var(--portfolio-selection);
 }
 .sidebar nav a:hover {
   background: var(--accent);
@@ -135,22 +140,45 @@
 }
 .main {
   min-width: 0;
+  min-height: 0;
   flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
 }
-@media (min-width: 1001px) {
-  .bodyCollapsed .sidebar {
+@media (min-width: 681px) {
+  .collapsed .sidebar {
+    width: 72px;
+  }
+  .collapsed .brand {
+    width: 36px;
+  }
+  .collapsed .brand > a,
+  .collapsed .sidebar nav span,
+  .collapsed .sidebar > p,
+  .collapsed .bottom span {
     display: none;
+  }
+  .collapsed .sidebar nav a,
+  .collapsed .bottom a {
+    justify-content: center;
+    padding-inline: 0;
   }
 }
 button.mobileToggle {
   display: none;
 }
+@media (min-width: 681px) and (max-width: 1100px) {
+  .sidebar > p {
+    display: none;
+  }
+}
 .avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
 }
 @media (prefers-color-scheme: dark) {
@@ -161,29 +189,6 @@ button.mobileToggle {
   .actions img,
   .sidebar img {
     filter: invert(0.9);
-  }
-}
-@media (max-width: 1000px) and (min-width: 681px) {
-  .sidebarToggle {
-    display: none;
-  }
-  .brand {
-    width: 77px;
-  }
-  .sidebar {
-    width: 72px;
-    padding: 24px 12px;
-  }
-  .sidebar nav a {
-    padding: 0;
-    justify-content: center;
-  }
-  .sidebar nav span,
-  .sidebar > p,
-  .sidebar > .back,
-  .bottom span,
-  .bottom a {
-    display: none;
   }
 }
 @media (max-width: 680px) {

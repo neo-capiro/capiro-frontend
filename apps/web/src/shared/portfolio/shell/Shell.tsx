@@ -2,7 +2,7 @@
 /* Figma supplies the static line icons. */
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { Menu, PanelLeft } from "lucide-react";
 import { HeaderFrame } from "@/shared/shell/HeaderFrame";
 import { ScopedLink } from "@/shared/shell/ScopedLink";
@@ -27,9 +27,18 @@ export function Shell({
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopExpanded, setDesktopExpanded] = useState(true);
+  const mobileToggle = useRef<HTMLButtonElement>(null);
   const base = client ? `/portfolio/${client.id}` : "/portfolio";
   return (
-    <>
+    <div
+      className={`${styles.shell} ${desktopExpanded ? "" : styles.collapsed}`}
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && mobileOpen) {
+          setMobileOpen(false);
+          mobileToggle.current?.focus();
+        }
+      }}
+    >
       <a href="#main" className="skip">
         Skip to content
       </a>
@@ -38,6 +47,8 @@ export function Shell({
         mobileModeRow
         leading={
           <button
+            ref={mobileToggle}
+            type="button"
             className={`button ghost iconButton ${styles.mobileToggle}`}
             aria-label="Toggle navigation"
             aria-controls="portfolio-navigation"
@@ -78,9 +89,7 @@ export function Shell({
           />
         }
       />
-      <div
-        className={`${styles.body} ${desktopExpanded ? "" : styles.bodyCollapsed}`}
-      >
+      <div className={styles.body}>
         <aside
           id="portfolio-navigation"
           className={`${styles.sidebar} ${mobileOpen ? styles.open : ""}`}
@@ -93,17 +102,21 @@ export function Shell({
           />
           {!readOnlyPreview && (
             <div className={styles.bottom}>
-              <ScopedLink href="/settings/personal">
-                <img src="/design/471-93465-imgIcon10.svg" alt="" />
-                Settings
+              <ScopedLink
+                href="/settings/personal"
+                aria-label="Settings"
+                title="Settings"
+              >
+                <img src="/design/portfolio-34/settings.svg" alt="" />
+                <span>Settings</span>
               </ScopedLink>
             </div>
           )}
         </aside>
-        <main id="main" className={styles.main}>
+        <main id="main" className={styles.main} tabIndex={-1}>
           {children}
         </main>
       </div>
-    </>
+    </div>
   );
 }
