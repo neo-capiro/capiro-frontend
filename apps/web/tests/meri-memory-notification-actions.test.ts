@@ -15,7 +15,7 @@ const reviewRequestId = "dddddddd-dddd-4ddd-8ddd-dddddddddddd";
 const candidateId = "cccccccc-cccc-4ccc-8ccc-cccccccccccc";
 
 /**
- * Rendered-host regression for the bounded unread observation.
+ * Rendered-host regression for the full recipient unread observation.
  *
  * Only the host's outer collaborators are substituted: the current-account read,
  * the two owner acknowledgement reads, the existing updates feed, the saved
@@ -24,7 +24,7 @@ const candidateId = "cccccccc-cccc-4ccc-8ccc-cccccccccccc";
  *
  * jsdom and @testing-library are not resolvable here, so the host is mounted with
  * `renderToStaticMarkup` and effects do not run. These are controlled owner replies,
- * not a live or database check: no Core, network or 1,001-row scan is involved.
+ * not a live or database check: no Core, network or database scan is involved.
  */
 const observed = vi.hoisted(() => ({
   identity: {
@@ -125,6 +125,14 @@ function observedFeed(items: Record<string, unknown>[]): UpdatesFeedSnapshot {
     refreshing: false,
     scopeVerified: true,
     moreError: "",
+    runNextCursor: null,
+    runCoverage: {
+      kind: "current-authorized-durable-runs",
+      complete: true,
+      snapshot: false,
+    },
+    runMorePending: false,
+    runMoreError: "",
     reads: 1,
   };
 }
@@ -145,15 +153,14 @@ function renderHost() {
   );
 }
 
-/** Claims a bounded observation of a limited scan can never support. */
+/** Claims separate current observations cannot support. */
 const claimPatterns = [
-  /mark all/i,
   /all read/i,
   /caught up/i,
   /nothing unread/i,
   // The count and the feed are separate reads, and bulk re-scans on selection.
   /before that check/i,
-  /acknowledges only/i,
+  /limited recent set/i,
 ];
 
 beforeEach(() => {
@@ -239,52 +246,58 @@ describe("canonical memory notification acknowledgements", () => {
   });
 });
 
-describe("bounded unread observation in the notifications host", () => {
-  it("presents the owner count as a limited recent observation, never a total", () => {
-    observed.unread.data = { enabled: true, count: 1000 };
+describe("full recipient unread observation in the notifications host", () => {
+  it("describes the complete recipient count and bulk effect, including hidden notices", () => {
+    observed.unread.data = { enabled: true, count: 1001 };
     const markup = renderHost();
     expect(markup).toContain(
-      "Recent check found 1000 unread memory-review notifications.",
+      "1001 unread memory-review notifications across your currently accessible reviews.",
     );
-    expect(markup).toContain("Older unread notifications may not be included.");
-    expect(markup).toContain("Mark recent memory reviews read");
-    // Bulk is described as a fresh bounded check on selection, not a known snapshot.
-    expect(markup).toContain("checks and acknowledges a limited recent set");
+    expect(markup).toContain("including notices outside this page");
+    expect(markup).toContain(
+      "or selected client and notices hidden by your preferences",
+    );
     for (const claim of claimPatterns) expect(markup).not.toMatch(claim);
-    // Observed unread rows stay actionable through the bounded action.
     expect(
-      controlAttributes(markup, "Mark recent memory reviews read").has(
-        "disabled",
-      ),
+      controlAttributes(markup, "Mark all memory reviews read").has("disabled"),
     ).toBe(false);
   });
 
-  it("keeps a visible unread row and its own action when the bounded count is zero", () => {
+  it("keeps a visible unread row actionable when a separate count observation is zero", () => {
     observed.unread.data = { enabled: true, count: 0 };
     observed.snapshot = observedFeed([unreadNotice()]);
     const markup = renderHost();
     expect(markup).toContain(
-      "Recent check found 0 unread memory-review notifications.",
+      "0 unread memory-review notifications across your currently accessible reviews.",
     );
-    expect(markup).toContain("Older unread notifications may not be included.");
-    // The filtered-prefix row is neither suppressed nor stripped of its owner link.
     expect(markup).toContain("Memory review assignment");
     expect(markup).toContain(`href="/meri/memory/review/${reviewRequestId}"`);
     expect(markup).toContain("not read");
-    // A zero observation is scoped to the recent set, not an empty population, and
-    // it states no temporal relation between the separate count and feed reads.
     expect(markup).toContain(
-      "The check covers a limited recent set, so other unread notifications may remain",
+      "list are read separately; refresh to check changes.",
     );
     for (const claim of claimPatterns) expect(markup).not.toMatch(claim);
-    // The per-row acknowledgement is never gated on the sampled count.
     expect(controlAttributes(markup, "Mark read").has("disabled")).toBe(false);
-    // The zero step on the bulk control is presentation-only; the row stays actionable.
     expect(
-      controlAttributes(markup, "Mark recent memory reviews read").has(
-        "disabled",
-      ),
+      controlAttributes(markup, "Mark all memory reviews read").has("disabled"),
     ).toBe(true);
+  });
+
+  it("exposes run paging even when no optional notice is shown in the first page", () => {
+    observed.snapshot = {
+      ...observedFeed([]),
+      runNextCursor: "next-run-page",
+      runCoverage: {
+        kind: "current-authorized-durable-runs",
+        complete: false,
+        snapshot: false,
+      },
+    };
+    const markup = renderHost();
+    expect(markup).toContain("More runs are available.");
+    expect(
+      controlAttributes(markup, "Load more run updates").has("disabled"),
+    ).toBe(false);
   });
 
   it("disables both acknowledgements while an owner write is pending", () => {
@@ -294,9 +307,7 @@ describe("bounded unread observation in the notifications host", () => {
     const markup = renderHost();
     expect(controlAttributes(markup, "Mark read").has("disabled")).toBe(true);
     expect(
-      controlAttributes(markup, "Mark recent memory reviews read").has(
-        "disabled",
-      ),
+      controlAttributes(markup, "Mark all memory reviews read").has("disabled"),
     ).toBe(true);
   });
 
@@ -307,9 +318,7 @@ describe("bounded unread observation in the notifications host", () => {
     expect(markup).toContain("Memory-review notifications are not enabled.");
     expect(controlAttributes(markup, "Mark read").has("disabled")).toBe(true);
     expect(
-      controlAttributes(markup, "Mark recent memory reviews read").has(
-        "disabled",
-      ),
+      controlAttributes(markup, "Mark all memory reviews read").has("disabled"),
     ).toBe(true);
   });
 });
