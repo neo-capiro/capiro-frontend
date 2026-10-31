@@ -76,6 +76,15 @@ function SessionDebriefGeneration({
   const busy = useRef(false);
   // One key per attempt, kept across retries so a network blip cannot double-generate.
   const requestKey = useRef<string | undefined>(undefined);
+  // ...and bound to the exact source it was minted for: an edited source is a distinct
+  // attempt and must not silently reuse it.
+  const requestKeySource = useRef<ReviewedDebriefSource | undefined>(undefined);
+  // Mount recovery is an admission state, not an optimisation: until the saved job state is
+  // actually read, this component does not know whether a generation is already running.
+  const [recovery, setRecovery] = useState<"checking" | "resolved" | "failed">(
+    "checking",
+  );
+  const [recoveryAttempt, setRecoveryAttempt] = useState(0);
   const lifetime = useRef<AbortController | undefined>(undefined);
   useLayoutEffect(() => {
     const controller = new AbortController();
@@ -95,9 +104,16 @@ function SessionDebriefGeneration({
     !capabilities.error &&
     capabilities.data?.runtime?.externalActionsEnabled === true,
   );
+  // The guard and the admission flag are read at the moment an asynchronous result lands, not
+  // captured at the start of it: a permission change during a poll must be honoured.
+  const guardRef = useRef(guard);
+  guardRef.current = guard;
+  const allowedRef = useRef(allowed);
+  allowedRef.current = allowed;
   const acceptDraft = useCallback(
     (draft: DebriefDraft) => {
       requestKey.current = undefined;
+      requestKeySource.current = undefined;
       setSource(undefined);
       setJob(undefined);
       setJobError(undefined);
@@ -115,8 +131,16 @@ function SessionDebriefGeneration({
           "Debrief generation is unavailable for this session.",
         );
       guard();
-      const key = requestKey.current ?? debriefRequestKey();
+      // The key belongs to this attempt of THIS source. A response that never arrived (a
+      // transport failure, a 5xx or a malformed success) may still have followed an accepted
+      // write, so the retry reconciles the same attempt instead of minting a second job.
+      const sameSource =
+        requestKeySource.current?.text === reviewed.text &&
+        requestKeySource.current?.method === reviewed.method;
+      const key =
+        requestKey.current && sameSource ? requestKey.current : debriefRequestKey();
       requestKey.current = key;
+      requestKeySource.current = reviewed;
       const result = await startDebriefGeneration(
         api,
         meeting.id,
@@ -138,20 +162,21 @@ function SessionDebriefGeneration({
       setJob(result.job);
     },
     onError: (error) => {
-      // The key is bound to the source it was accepted with; a new attempt after a
-      // conflict or a failed send must not reuse it.
-      if (
-        error instanceof ApiError &&
-        (error.status === 409 || error.status >= 500)
-      )
+      // Only a SETTLED rejection releases the key (a conflict means it was already used for a
+      // different source). An uncertain outcome keeps it, because the write may have landed.
+      if (error instanceof ApiError && error.status < 500) {
         requestKey.current = undefined;
+        requestKeySource.current = undefined;
+      }
     },
     onSettled: () => {
       busy.current = false;
     },
   });
   function generate(reviewed: ReviewedDebriefSource) {
-    if (busy.current || !allowed) return false;
+    // Fenced on the recovery state: while the saved job is unknown, a second generation is
+    // exactly what must not happen.
+    if (busy.current || !allowed || recovery !== "resolved") return false;
     busy.current = true;
     setSource(reviewed);
     setJobError(undefined);
@@ -179,8 +204,23 @@ function SessionDebriefGeneration({
       .then((final) => {
         if (!live) return;
         setJob(final);
-        if (final.status === "completed" && final.draft)
-          acceptDraft(final.draft);
+        if (final.status !== "completed" || !final.draft) return;
+        // The completion crossed an asynchronous boundary (polling, a permission change, a
+        // parent re-render), so the CURRENT session is re-admitted through the existing
+        // dispatch guard before any content is handed to the parent.
+        let admitted = allowedRef.current;
+        if (admitted) {
+          try {
+            guardRef.current();
+          } catch {
+            admitted = false;
+          }
+        }
+        if (admitted) acceptDraft(final.draft);
+        else
+          setJobError(
+            "Your permissions changed while this debrief was generating. The draft is saved with this meeting; reopen it once your access is restored.",
+          );
       })
       .catch((error: unknown) => {
         if (!live) return;
@@ -195,22 +235,39 @@ function SessionDebriefGeneration({
       controller.abort();
     };
   }, [api, meeting.id, pollingId, acceptDraft]);
-  // Resume after navigation or reload: never present an empty form over a live job.
+  // Resume after navigation or reload: never present an empty form over a live job, and never
+  // admit a new generation until the saved state has actually been read. A failed read is an
+  // unknown outcome, not "no job", so generation stays fenced until the lookup settles.
   useEffect(() => {
-    if (!allowed) return;
+    if (!allowed) {
+      setRecovery("resolved");
+      return;
+    }
     const scope = lifetime.current;
     let live = true;
+    setRecovery("checking");
     void readLatestDebriefJob(api, meeting.id, scope?.signal)
       .then((latest) => {
-        if (!live || !latest) return;
-        if (debriefJobActive(latest)) setJob(latest);
-        else if (latest.status === "completed" && latest.draft) setJob(latest);
+        if (!live) return;
+        if (latest) {
+          if (debriefJobActive(latest)) setJob(latest);
+          else if (latest.status === "completed" && latest.draft) setJob(latest);
+        }
+        setRecovery("resolved");
       })
-      .catch(() => {});
+      .catch((error: unknown) => {
+        if (!live) return;
+        setRecovery("failed");
+        setJobError(
+          error instanceof ApiError
+            ? error.message
+            : "The saved generation state could not be read, so a new generation is held. Check again before generating.",
+        );
+      });
     return () => {
       live = false;
     };
-  }, [allowed, api, meeting.id]);
+  }, [allowed, api, meeting.id, recoveryAttempt]);
   async function cancel() {
     if (!job || cancelling) return;
     setCancelling(true);
@@ -264,13 +321,24 @@ function SessionDebriefGeneration({
   const readyDraft =
     job?.status === "completed" && job.draft ? job.draft : undefined;
   const failedJob = job?.status === "failed" ? job : undefined;
+  // A terminal receipt with no draft (cancelled, or completed without one) is an outcome, not a
+  // form: it must be dismissable without another POST.
+  const emptyTerminal =
+    job && (job.status === "cancelled" || (job.status === "completed" && !job.draft))
+      ? job
+      : undefined;
   const conflict =
     mutation.error instanceof ApiError && mutation.error.status === 409;
   return (
     <>
       <button
         className="button"
-        disabled={!allowed || mutation.isPending || Boolean(job)}
+        disabled={
+          !allowed ||
+          mutation.isPending ||
+          Boolean(job) ||
+          recovery !== "resolved"
+        }
         onClick={() => setSavedNotes(true)}
       >
         Use saved meeting notes
@@ -283,14 +351,24 @@ function SessionDebriefGeneration({
       />
       <button
         className="button"
-        disabled={!allowed || mutation.isPending || Boolean(job)}
+        disabled={
+          !allowed ||
+          mutation.isPending ||
+          Boolean(job) ||
+          recovery !== "resolved"
+        }
         onClick={() => setUploading(true)}
       >
         Transcript and attachments
       </button>
       <button
         className="button"
-        disabled={!allowed || mutation.isPending || Boolean(job)}
+        disabled={
+          !allowed ||
+          mutation.isPending ||
+          Boolean(job) ||
+          recovery !== "resolved"
+        }
         onClick={() => setManual(true)}
       >
         Type Notes Manually
@@ -303,7 +381,12 @@ function SessionDebriefGeneration({
       />
       <button
         className="button"
-        disabled={!allowed || mutation.isPending || Boolean(job)}
+        disabled={
+          !allowed ||
+          mutation.isPending ||
+          Boolean(job) ||
+          recovery !== "resolved"
+        }
         onClick={() => setVoice(true)}
       >
         Record Voice Memo
@@ -320,6 +403,21 @@ function SessionDebriefGeneration({
           void (identity.error ? identity.refetch() : capabilities.refetch())
         }
       />
+      {recovery === "failed" && (
+        <p role="alert">
+          The saved generation state could not be read, so a new generation is
+          held.{" "}
+          <button
+            className="button"
+            onClick={() => {
+              setJobError(undefined);
+              setRecoveryAttempt((attempt) => attempt + 1);
+            }}
+          >
+            Check again
+          </button>
+        </p>
+      )}
       {capabilities.isSuccess &&
         !capabilities.data.runtime?.externalActionsEnabled && (
           <small className="muted">
@@ -336,15 +434,22 @@ function SessionDebriefGeneration({
       <Dialog
         open={Boolean(source) || Boolean(job)}
         onOpenChange={(open) => {
-          if (!open && !mutation.isPending && !pollingId && !cancelling)
-            setSource(undefined);
+          if (open || mutation.isPending || pollingId || cancelling) return;
+          setSource(undefined);
+          // A terminal receipt without a draft is dismissed here rather than trapping the form.
+          if (emptyTerminal) {
+            setJob(undefined);
+            setJobError(undefined);
+          }
         }}
         title={
           readyDraft
             ? "Generated debrief draft"
             : failedJob
               ? "Debrief generation did not finish"
-              : "Generate meeting debrief"
+              : emptyTerminal
+                ? "No draft was produced"
+                : "Generate meeting debrief"
         }
       >
         {pollingId && (
@@ -400,6 +505,27 @@ function SessionDebriefGeneration({
                 }}
               >
                 Back
+              </button>
+            </footer>
+          </>
+        )}
+        {emptyTerminal && (
+          <>
+            <p>
+              {emptyTerminal.status === "cancelled"
+                ? "This generation was cancelled, so no draft was produced."
+                : "The service finished this generation without returning a draft. The job is recorded; start a new run from the same source if you still need a draft."}
+            </p>
+            <footer className="row">
+              <button
+                className="button"
+                onClick={() => {
+                  setJob(undefined);
+                  setSource(undefined);
+                  setJobError(undefined);
+                }}
+              >
+                Close
               </button>
             </footer>
           </>
