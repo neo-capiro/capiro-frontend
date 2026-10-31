@@ -31,7 +31,9 @@ describe("firm logo route — M1 stable, session-authenticated bytes", () => {
     const fetcher = image();
 
     const response = await firmLogoResponse(
-      new Request("https://app.example.test/api/firm-logo?scope=other&version=old"),
+      new Request(
+        "https://app.example.test/api/firm-logo?scope=other&version=old",
+      ),
       config,
       async () => "session-token",
       fetcher,
