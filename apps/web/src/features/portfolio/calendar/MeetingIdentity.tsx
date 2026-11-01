@@ -181,6 +181,7 @@ export function MeetingIdentity({
         <button className="button" onClick={onEdit}>
           Edit meeting
         </button>
+        <MeetingAttendance meeting={meeting} zone={zone} compact />
         <button className="button" onClick={onShare}>
           Share artifacts
         </button>
