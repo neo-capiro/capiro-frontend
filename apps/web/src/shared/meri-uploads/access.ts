@@ -1,4 +1,8 @@
 import {
+  createUploadAttemptReferences,
+  type UploadAttemptScope,
+} from "./upload-attempt-storage";
+import {
   createUploadController,
   type EstablishedUpload,
   type UploadController,
@@ -40,6 +44,9 @@ export type MeriUploadAccess = Readonly<{
 export function createUploadAccess(options: {
   /** The current conversation session credential; it never leaves this module. */
   credential: string;
+  context: Omit<UploadAttemptScope, "clientId"> & {
+    selectedClientId: string | null;
+  };
   /** The session lifetime; the access stops dispatching the moment it is revoked or renewed. */
   lifetime: AbortSignal;
   /** False once this session's conversation, account or client is no longer current. */
@@ -55,6 +62,12 @@ export function createUploadAccess(options: {
       options.fetcher,
     ),
     isCurrent: options.isCurrent,
+    recovery: createUploadAttemptReferences({
+      tenantId: options.context.tenantId,
+      actorId: options.context.actorId,
+      clientId: options.context.selectedClientId,
+      conversationId: options.context.conversationId,
+    }),
     ...(options.established ? { established: options.established } : {}),
   });
   const current = createUploadCurrentRead(

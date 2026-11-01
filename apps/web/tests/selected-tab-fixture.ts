@@ -1,5 +1,6 @@
 import { createHash, randomUUID } from "node:crypto";
-import { vi } from "vitest";
+import { afterEach, vi } from "vitest";
+afterEach(() => vi.unstubAllGlobals());
 import {
   createSelectedTabShare,
   SELECTED_TAB_SCHEMA as schema,
@@ -27,6 +28,22 @@ function event<T>() {
   };
 }
 export async function selectedTabFixture(options: { lostAck?: boolean } = {}) {
+  const saved = new Map<string, string>();
+  vi.stubGlobal("window", {
+    localStorage: {
+      get length() {
+        return saved.size;
+      },
+      key: (i: number) => [...saved.keys()][i] ?? null,
+      getItem: (key: string) => saved.get(key) ?? null,
+      setItem: (key: string, value: string) => {
+        saved.set(key, value);
+      },
+      removeItem: (key: string) => {
+        saved.delete(key);
+      },
+    },
+  });
   let now = Date.now(),
     current = true;
   const lifetime = new AbortController(),
@@ -99,11 +116,16 @@ export async function selectedTabFixture(options: { lostAck?: boolean } = {}) {
     }
     if (route === "/api/uploads/status") {
       const q = receiveUploadRequest("status", init!.body as Uint8Array);
-      return Response.json(receipts.get(q.uploadId));
+      return Response.json(
+        "uploadId" in q
+          ? receipts.get(q.uploadId)
+          : [...receipts.values()].find((r) => r.requestId === q.requestId),
+      );
     }
     throw Error("Unexpected request");
   };
   const uploads = createUploadAccess({
+    context,
     credential: `action_session_${"F".repeat(43)}`,
     lifetime: lifetime.signal,
     isCurrent: () => current,

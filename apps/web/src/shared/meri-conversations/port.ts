@@ -33,6 +33,7 @@ export function createConversationPort(
   });
   // Established attachments reuse the conversation's exact admitted references.
   const uploads = createUploadAccess({
+    context: session.context,
     credential: session.credential,
     lifetime: signal,
     isCurrent: lifetime.isCurrent,
