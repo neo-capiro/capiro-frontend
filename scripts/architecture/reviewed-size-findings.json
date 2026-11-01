@@ -7618,5 +7618,23 @@
     "reason": "One receipt-bound saved Strategy read view owns selection validation, loading/error suppression and presentation of the same immutable snapshot, graph and separate current-node observations. The fixed GET and strict receiver own transport and contract validation; Core owns authorization and immutable job/version admission; Planner owns consent and materialization. No mutation, request identity allocation, generation loop, grouping decision or authority is added here. The 105 nonblank-line JSX-heavy body is one cohesive view; splitting solely for size would scatter the exact-snapshot/error boundary. Independently reviewed at fdc7cb68afcabaea04b49c2f5a33ca3300bed2a2 with 47 focused frontend tests passing, including mismatched selections and loading/error suppression.",
     "reviewedBy": "Independent Codex /root/paired_saved_review",
     "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/questions/ObjectiveQuestionsPanel.tsx",
+    "kind": "function",
+    "symbol": "CurrentQuestions",
+    "fingerprint": "e181c84b7511c8396dc57abfe01304f89a1853dcc50a7be9ab966be1f07224d6",
+    "reason": "One Objective-scoped collection composes filtering/pagination, its create form and the existing journal-backed command outcome/recovery controls. QuestionCard owns individual question and history presentation, QuestionSession owns durable request identity/recovery, fixed operations own wire validation, and Core owns state/authority. Keeping this JSX view together preserves the one pending-command fence across the collection. It introduces no second command or permission owner. Independent source review includes denied/stale/foreign loading suppression and original-attempt recovery tests.",
+    "reviewedBy": "Independent Codex area10 parent; not Questions author",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/questions/QuestionCard.tsx",
+    "kind": "function",
+    "symbol": "QuestionCard",
+    "fingerprint": "f7f0f86bad6a654678fdb86029719fdd76507ce71b88ba6031f72b9400e5f273",
+    "reason": "One question card renders its saved answer/source status, its answer/close/reopen affordances and a separately implemented history view. Command execution remains in QuestionSession and Core; this JSX-heavy form does not own network/persistence/authorization. Its current/stale rendering and disabled close behavior were independently checked.",
+    "reviewedBy": "Independent Codex area10 parent; not Questions author",
+    "reviewedOn": "2026-11-01"
   }
 ]
