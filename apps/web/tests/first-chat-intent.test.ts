@@ -45,7 +45,7 @@ it("persists one first-chat request identity before retrying after a lost respon
   ).toEqual(first);
 });
 
-it("reuses a confirmed intent until explicit New Chat, then persists a different request", () => {
+it("never replays a confirmed intent: the next opening of the scope is a new request", () => {
   const storage = memoryStorage();
   reserveFirstChatIntent(scope, storage, () => requestA);
   const confirmed = confirmFirstChatIntent(
@@ -60,12 +60,20 @@ it("reuses a confirmed intent until explicit New Chat, then persists a different
     requestId: requestA,
     conversationId: conversationA,
   });
-  expect(reserveFirstChatIntent(scope, storage, () => requestB)).toEqual(
-    confirmed,
-  );
   expect(
     confirmFirstChatIntent(scope, requestA, conversationA, storage),
   ).toEqual(confirmed);
+  expect(reserveFirstChatIntent(scope, storage, () => requestB)).toMatchObject({
+    state: "pending",
+    requestId: requestB,
+  });
+  expect(readFirstChatIntent(scope, storage)?.requestId).toBe(requestB);
+});
+
+it("explicit New Chat after a confirmed intent also persists a different request", () => {
+  const storage = memoryStorage();
+  reserveFirstChatIntent(scope, storage, () => requestA);
+  confirmFirstChatIntent(scope, requestA, conversationA, storage);
   expect(beginNewChatIntent(scope, storage, () => requestB)).toMatchObject({
     state: "pending",
     requestId: requestB,

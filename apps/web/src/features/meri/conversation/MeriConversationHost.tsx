@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@capiro/ui/button";
-import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import {
   firstChatCoreOperationKey,
@@ -9,11 +9,8 @@ import {
 } from "../../../shared/capiro/operations/meri-first-chat";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
-import {
-  canBeginNewChatAfterConflict,
-  resolveFirstChatConversation,
-} from "../../../shared/meri-conversations/first-chat-bootstrap";
-import { useBeginNewChat } from "../../../shared/meri-conversations/stored-conversation-recovery";
+import { resolveFirstChatConversation } from "../../../shared/meri-conversations/first-chat-bootstrap";
+import { conversationHref } from "../../../shared/meri-conversations/conversation-navigation";
 import { conversationSelection } from "../../../shared/meri-conversations/selection";
 import { newChatIntentEvent } from "../../../shared/meri-conversations/first-chat-intent";
 import { useConversationSession } from "./useConversationSession";
@@ -100,7 +97,6 @@ export function MeriConversationHost({
           key={key}
           account={account}
           clientId={null}
-          scope="General"
           scopeControl={scopeControl}
         />
       ) : (
@@ -164,7 +160,6 @@ export function MeriConversationHost({
         ])}
         account={account}
         clientId={selected.client.id}
-        scope={selected.client.name}
         scopeControl={scopeControl}
       />
     );
@@ -207,32 +202,33 @@ function ArchivedClientNotice({
 type CoreResolution =
   | { state: "pending" }
   | { state: "ready"; conversationId: string }
-  | { state: "error"; canBeginNew: boolean };
+  | { state: "error" };
 
-/** The Core receipt is verified before mounting a component that can issue a Meri session. */
+/**
+ * A scope opened without a conversation id is a new conversation. Core's receipt is verified,
+ * then its id goes into the address so a reload or a shared link reopens this conversation and
+ * only an explicit New conversation starts another; the host mounts the session from that link.
+ */
 function CoreResolvedConversation({
   account,
   clientId,
-  scope,
   scopeControl,
 }: {
   account: ConversationAccount;
   clientId: string | null;
-  scope: string;
   scopeControl?: React.ReactNode;
 }) {
   const api = useCapiro();
+  const router = useRouter();
   const [attempt, setAttempt] = useState(0);
   const [resolution, setResolution] = useState<CoreResolution>({
     state: "pending",
   });
   const { tenantId, actorId } = account;
-  const currentScope =
-    clientId === null
-      ? { tenantId, actorId, clientId, scopeKind: "general" as const }
-      : { tenantId, actorId, clientId };
-  const { restart, refuse } = useResolutionControls(setResolution, setAttempt);
-  const beginNew = useBeginNewChat(currentScope, restart, refuse);
+  useEffect(() => {
+    if (resolution.state === "ready")
+      router.replace(conversationHref(clientId, resolution.conversationId));
+  }, [router, clientId, resolution]);
   useEffect(() => {
     const controller = new AbortController();
     void Promise.resolve()
@@ -254,71 +250,37 @@ function CoreResolvedConversation({
         if (!controller.signal.aborted)
           setResolution({ state: "ready", conversationId });
       })
-      .catch((error: unknown) => {
-        if (!controller.signal.aborted)
-          setResolution({
-            state: "error",
-            canBeginNew: canBeginNewChatAfterConflict(
-              error,
-              clientId === null
-                ? { tenantId, actorId, clientId, scopeKind: "general" }
-                : { tenantId, actorId, clientId },
-              () => window.sessionStorage,
-            ),
-          });
+      .catch(() => {
+        if (!controller.signal.aborted) setResolution({ state: "error" });
       });
     return () => controller.abort();
   }, [api, tenantId, actorId, clientId, attempt]);
 
-  if (resolution.state === "pending")
-    return (
-      <section role="status">
-        <h2>Preparing conversation</h2>
-        <p>Confirming the current conversation.</p>
-        {scopeControl}
-      </section>
-    );
   if (resolution.state === "error")
     return (
       <section role="alert">
         <h2>Conversation connection unavailable</h2>
         <p>The current conversation could not be confirmed.</p>
-        <Button type="button" variant="outline" onClick={restart}>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => {
+            setResolution({ state: "pending" });
+            setAttempt((value) => value + 1);
+          }}
+        >
           Retry conversation
         </Button>
-        {resolution.canBeginNew && (
-          <Button type="button" onClick={beginNew}>
-            New Chat
-          </Button>
-        )}
         {scopeControl}
       </section>
     );
   return (
-    <ConnectedConversation
-      key={resolution.conversationId}
-      account={account}
-      clientId={clientId}
-      scope={scope}
-      conversationId={resolution.conversationId}
-      scopeControl={scopeControl}
-    />
+    <section role="status">
+      <h2>Preparing conversation</h2>
+      <p>Confirming the current conversation.</p>
+      {scopeControl}
+    </section>
   );
-}
-
-function useResolutionControls(
-  setResolution: (value: CoreResolution) => void,
-  setAttempt: (update: (value: number) => number) => void,
-) {
-  const restart = useCallback(() => {
-    setResolution({ state: "pending" });
-    setAttempt((value) => value + 1);
-  }, [setResolution, setAttempt]);
-  const refuse = useCallback(
-    () => setResolution({ state: "error", canBeginNew: false }),
-    [setResolution],
-  );
-  return { restart, refuse };
 }
 
 /** One selected conversation; session changes preserve its draft and immutable recovery journal. */

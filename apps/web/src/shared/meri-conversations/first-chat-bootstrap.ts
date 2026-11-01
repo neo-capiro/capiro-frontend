@@ -9,30 +9,17 @@ import {
 } from "../capiro/operations/meri-first-chat";
 import {
   confirmFirstChatIntent,
-  readFirstChatIntent,
   reserveFirstChatIntent,
   type FirstChatScope,
   firstChatScope,
 } from "./first-chat-intent";
-import { CapiroApiError } from "../capiro/http";
 
 type IntentStorage = Pick<Storage, "getItem" | "setItem">;
 
-/** A resolved request may be rotated by the user after Core refuses its replay. */
-export function canBeginNewChatAfterConflict(
-  error: unknown,
-  scope: FirstChatScope,
-  storage: () => IntentStorage,
-): boolean {
-  if (!(error instanceof CapiroApiError) || error.status !== 409) return false;
-  try {
-    return readFirstChatIntent(scope, storage())?.state === "confirmed";
-  } catch {
-    return false;
-  }
-}
-
-/** Unmounted resolver: a Core replay must verify even a browser-stored confirmed intent. */
+/**
+ * Unmounted resolver: one new conversation per opening of a scope. Only a request whose outcome is
+ * still unknown is replayed, so a lost response never creates a second conversation.
+ */
 export async function resolveFirstChatConversation({
   scope,
   storage,

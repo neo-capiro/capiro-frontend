@@ -111,14 +111,18 @@ function freshId(issueId: () => string) {
   }
 }
 
-/** Persist and read back the same key before the first Core POST or any retry. */
+/**
+ * Persist and read back the same key before the first Core POST or any retry of it. A confirmed
+ * intent belongs to the conversation it opened, which its own link now names; opening the scope
+ * again is a new conversation with its own request.
+ */
 export function reserveFirstChatIntent(
   scope: FirstChatScope,
   storage: IntentStorage,
   issueId: () => string = () => crypto.randomUUID(),
 ): FirstChatIntent {
   const existing = readFirstChatIntent(scope, storage);
-  if (existing) return existing;
+  if (existing?.state === "pending") return existing;
   return persist(scope, storage, {
     version: 1,
     scope: scopeSchema.parse(scope),

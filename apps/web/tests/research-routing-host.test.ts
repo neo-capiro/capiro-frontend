@@ -18,6 +18,7 @@ const mocks = vi.hoisted(() => ({
 }));
 vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(mocks.search),
+  useRouter: () => ({ replace: vi.fn() }),
 }));
 vi.mock("../src/shared/session/SelectedClient", () => ({
   useSelectedClient: () => ({
