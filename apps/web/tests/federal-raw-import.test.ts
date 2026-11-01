@@ -7,17 +7,21 @@ import {
 } from "../src/shared/meri-documents/attempt-journal";
 import type { DocumentLibraryAccess } from "../src/shared/meri-documents/library-access";
 import fixture from "./fixtures/federal-raw-source.json";
+import schemaFixture from "./fixtures/federal-schema-source.json";
 const representation = "retained-raw-utf8/1" as const;
 const encode = (value: unknown) =>
   new TextEncoder().encode(JSON.stringify(value));
-function setup() {
+function setup(
+  scenario = fixture,
+  mutate?: (value: typeof fixture.imported) => void,
+) {
   let attempt: DocumentAttempt = idleDocumentAttempt,
     fail = false,
     unavailable = false,
     tamper = false;
   const requests: Array<Record<string, unknown>> = [];
-  const version = fixture.imported.publication.version;
-  const { publication: unused, ...envelope } = fixture.imported;
+  const version = scenario.imported.publication.version;
+  const { publication: unused, ...envelope } = scenario.imported;
   void unused;
   const library = {
     dispose() {},
@@ -50,8 +54,9 @@ function setup() {
           { error: { code: "DRAFT_SOURCE_STALE", outcome: "NOT_DISPATCHED" } },
           { status: 409 },
         );
-      const result = structuredClone(fixture.imported);
+      const result = structuredClone(scenario.imported);
       if (tamper) result.capture.byteLength++;
+      mutate?.(result);
       return Response.json(result);
     },
   );
@@ -89,7 +94,7 @@ function setup() {
     },
   };
 }
-it("negotiates verified raw capture through the actual1.5 receiver and reopens its exact retained envelope", async () => {
+it("negotiates verified raw capture through the canonical receiver and reopens its exact retained envelope", async () => {
   const x = setup();
   const imported = await x.port.importSource(
     fixture.input.selection,
@@ -107,6 +112,53 @@ it("negotiates verified raw capture through the actual1.5 receiver and reopens i
   expect(reopened.source).toEqual(imported.source);
   expect(reopened.sha256).toBe(imported.sha256);
   expect(x.attempt().status).toBe("idle");
+  x.port.dispose();
+});
+it("admits pinned schema validation and reopens the exact parser2 source and receipt", async () => {
+  const x = setup(schemaFixture);
+  const imported = await x.port.importSource(
+    schemaFixture.input.selection,
+    x.signal,
+    representation,
+    "uslm-2.1.0",
+  );
+  expect(x.requests[0]).toMatchObject({
+    selection: schemaFixture.input.selection,
+    representation,
+    validationProfile: "uslm-2.1.0",
+  });
+  expect(imported.source).toEqual(schemaFixture.imported.source);
+  expect(imported.capture).toEqual(schemaFixture.imported.capture);
+  const reopened = await x.port.source(imported.versionId, x.signal);
+  expect(reopened.source).toEqual(imported.source);
+  expect(reopened.sha256).toBe(imported.sha256);
+  expect(x.attempt().status).toBe("idle");
+  x.port.dispose();
+});
+it.each([
+  { schemaSha256: "0".repeat(64) },
+  { sourceSha256: "0".repeat(64) },
+  { bytes: 1 },
+  { valid: false },
+])("withholds a schema receipt with altered %j", async (alteration) => {
+  const x = setup(schemaFixture, (result) => {
+    Object.assign(result.source, {
+      validation: {
+        ...schemaFixture.imported.source.validation,
+        ...alteration,
+      },
+    });
+  });
+  await expect(
+    x.port.importSource(
+      schemaFixture.input.selection,
+      x.signal,
+      representation,
+      "uslm-2.1.0",
+    ),
+  ).rejects.toThrow();
+  expect(x.attempt().status).toBe("unresolved");
+  expect(x.requests).toHaveLength(1);
   x.port.dispose();
 });
 it("keeps requested representation and delivery identity on unknown recovery", async () => {
@@ -145,5 +197,51 @@ it("withholds a corrupted capture and preserves its unresolved operation", async
   ).rejects.toThrow();
   expect(x.attempt().status).toBe("unresolved");
   expect(x.requests).toHaveLength(1);
+  x.port.dispose();
+});
+it("refuses a validation profile without raw capture before dispatch", async () => {
+  const x = setup();
+  await expect(
+    x.port.importSource(
+      fixture.input.selection,
+      x.signal,
+      undefined,
+      "uslm-2.1.0",
+    ),
+  ).rejects.toThrow();
+  expect(x.requests).toHaveLength(0);
+  expect(x.attempt().status).toBe("idle");
+  x.port.dispose();
+});
+it("includes the schema profile in delivery identity and rejects a raw-only response", async () => {
+  const x = setup();
+  x.setFail(true);
+  await expect(
+    x.port.importSource(
+      fixture.input.selection,
+      x.signal,
+      representation,
+      "uslm-2.1.0",
+    ),
+  ).rejects.toThrow();
+  expect(x.requests[0]).toMatchObject({
+    representation,
+    validationProfile: "uslm-2.1.0",
+  });
+  await expect(
+    x.port.importSource(fixture.input.selection, x.signal, representation),
+  ).rejects.toThrow("original");
+  expect(x.requests).toHaveLength(1);
+  x.setFail(false);
+  await expect(
+    x.port.importSource(
+      fixture.input.selection,
+      x.signal,
+      representation,
+      "uslm-2.1.0",
+    ),
+  ).rejects.toThrow();
+  expect(x.requests[1]).toEqual(x.requests[0]);
+  expect(x.attempt().status).toBe("unresolved");
   x.port.dispose();
 });

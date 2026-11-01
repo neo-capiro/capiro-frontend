@@ -6,6 +6,7 @@ import type {
   FederalSourceView,
 } from "../src/shared/meri-documents/federal-workbench";
 import fixture from "./fixtures/federal-raw-source.json";
+import schemaFixture from "./fixtures/federal-schema-source.json";
 const hooks = vi.hoisted(() => ({
   cursor: 0,
   slots: [] as unknown[],
@@ -29,9 +30,9 @@ type Props = {
   children?: ReactNode;
   disabled?: boolean;
   type?: string;
-  checked?: boolean;
+  value?: string;
   onClick?: () => void;
-  onChange?: (event: { target: { checked: boolean } }) => void;
+  onChange?: (event: { target: { value: string } }) => void;
 };
 let nodes: ReactElement<Props>[],
   unresolved: boolean,
@@ -41,6 +42,7 @@ const imported = vi.fn(),
   pending = vi.fn(),
   importSource = vi.fn();
 const signal = new AbortController().signal;
+let selection = fixture.input.selection;
 const source = {
   versionId: fixture.imported.publication.version.versionId,
   sha256: fixture.imported.publication.version.object.sha256,
@@ -73,7 +75,7 @@ function render() {
           sources: [
             {
               eventId: "synthetic-citation",
-              selection: fixture.input.selection,
+              selection,
             },
           ],
           nextAfter: null,
@@ -108,10 +110,11 @@ async function flush() {
 }
 const button = (text: string) =>
   nodes.find((node) => node.props.onClick && label(node) === text)!;
-const checkbox = () =>
-  nodes.find(
-    (node) => node.type === "input" && node.props.type === "checkbox",
-  )!;
+const mode = () => nodes.find((node) => node.type === "select")!;
+async function chooseMode(value: string) {
+  mode().props.onChange!({ target: { value } });
+  await flush();
+}
 async function click(text: string) {
   expect(button(text).props.disabled).not.toBe(true);
   button(text).props.onClick!();
@@ -119,6 +122,7 @@ async function click(text: string) {
 }
 beforeEach(() => {
   hooks.slots = [];
+  selection = fixture.input.selection;
   unresolved = false;
   running = false;
   errors = [];
@@ -134,14 +138,15 @@ it("keeps ordinary retained import as default and forwards the explicit raw choi
     fixture.input.selection,
     signal,
     undefined,
+    undefined,
   );
-  checkbox().props.onChange!({ target: { checked: true } });
-  await flush();
+  await chooseMode("raw");
   await click("Import this bill version");
   expect(importSource).toHaveBeenLastCalledWith(
     fixture.input.selection,
     signal,
     "retained-raw-utf8/1",
+    undefined,
   );
   expect(imported).toHaveBeenLastCalledWith(source);
   expect(
@@ -157,42 +162,88 @@ it("keeps ordinary retained import as default and forwards the explicit raw choi
         label(node).includes(fixture.imported.capture.sha256),
     ),
   ).toBe(true);
-});
-it("holds the chosen representation while the original import is unresolved", async () => {
-  await click("Browse cited bill versions");
-  checkbox().props.onChange!({ target: { checked: true } });
-  await flush();
-  importSource.mockImplementationOnce(async () => {
-    unresolved = true;
-    throw Error("Synthetic unknown outcome");
-  });
-  await click("Import this bill version");
-  expect(checkbox().props.disabled).toBe(true);
-  expect(imported).not.toHaveBeenCalled();
-  expect(pending).toHaveBeenLastCalledWith(true);
-  importSource.mockImplementationOnce(async () => {
-    unresolved = false;
-    return source;
-  });
-  await click("Recover selected source import");
-  expect(importSource.mock.calls.map((call) => call[2])).toEqual([
-    "retained-raw-utf8/1",
-    "retained-raw-utf8/1",
-  ]);
-  expect(pending).toHaveBeenLastCalledWith(false);
-  expect(errors).toHaveLength(1);
-});
-it("reports a definite refusal without automatically trying extracted text", async () => {
-  await click("Browse cited bill versions");
-  checkbox().props.onChange!({ target: { checked: true } });
-  await flush();
-  importSource.mockRejectedValueOnce(
-    Error("Synthetic raw capture unavailable"),
+  expect(nodes.some((node) => label(node).includes("Passed pinned USLM"))).toBe(
+    false,
   );
-  await click("Import this bill version");
-  expect(importSource).toHaveBeenCalledTimes(1);
-  expect(imported).not.toHaveBeenCalled();
-  expect(pending).toHaveBeenLastCalledWith(false);
-  expect(checkbox().props.disabled).toBe(false);
-  expect(errors).toHaveLength(1);
 });
+it("requests pinned USLM validation and displays the exact admitted source receipt", async () => {
+  selection = schemaFixture.input.selection;
+  const schemaSource = {
+    versionId: schemaFixture.imported.publication.version.versionId,
+    sha256: schemaFixture.imported.publication.version.object.sha256,
+    source: schemaFixture.imported.source,
+    capture: schemaFixture.imported.capture,
+  } as FederalSourceView;
+  importSource.mockResolvedValueOnce(schemaSource);
+  await click("Browse cited bill versions");
+  await chooseMode("uslm");
+  await click("Import this bill version");
+  expect(importSource).toHaveBeenLastCalledWith(
+    selection,
+    signal,
+    "retained-raw-utf8/1",
+    "uslm-2.1.0",
+  );
+  expect(imported).toHaveBeenLastCalledWith(schemaSource);
+  const paragraphs = nodes
+    .filter((node) => node.type === "p")
+    .map(label)
+    .join("\n");
+  expect(paragraphs).toContain("Passed pinned USLM 2.1 syntax validation");
+  for (const value of [
+    schemaFixture.imported.source.validation.profile,
+    schemaFixture.imported.source.validation.schemaSha256,
+    schemaFixture.imported.source.validation.sourceSha256,
+    String(schemaFixture.imported.source.validation.bytes),
+    selection.revisionId,
+  ])
+    expect(paragraphs).toContain(value);
+  expect(paragraphs).toMatch(/syntax, not legal correctness/);
+  expect(errors).toEqual([]);
+});
+it.each(["raw", "uslm"])(
+  "holds the %s mode while the original import is unresolved",
+  async (selected) => {
+    await click("Browse cited bill versions");
+    await chooseMode(selected);
+    importSource.mockImplementationOnce(async () => {
+      unresolved = true;
+      throw Error("Synthetic unknown outcome");
+    });
+    await click("Import this bill version");
+    expect(mode().props.disabled).toBe(true);
+    expect(imported).not.toHaveBeenCalled();
+    expect(pending).toHaveBeenLastCalledWith(true);
+    importSource.mockImplementationOnce(async () => {
+      unresolved = false;
+      return source;
+    });
+    await click("Recover selected source import");
+    expect(importSource.mock.calls.map((call) => call[2])).toEqual([
+      "retained-raw-utf8/1",
+      "retained-raw-utf8/1",
+    ]);
+    expect(importSource.mock.calls.map((call) => call[3])).toEqual([
+      selected === "uslm" ? "uslm-2.1.0" : undefined,
+      selected === "uslm" ? "uslm-2.1.0" : undefined,
+    ]);
+    expect(pending).toHaveBeenLastCalledWith(false);
+    expect(errors).toHaveLength(1);
+  },
+);
+it.each(["raw", "uslm"])(
+  "reports a definite %s refusal without automatically weakening checks",
+  async (selected) => {
+    await click("Browse cited bill versions");
+    await chooseMode(selected);
+    importSource.mockRejectedValueOnce(
+      Error("Synthetic raw capture unavailable"),
+    );
+    await click("Import this bill version");
+    expect(importSource).toHaveBeenCalledTimes(1);
+    expect(imported).not.toHaveBeenCalled();
+    expect(pending).toHaveBeenLastCalledWith(false);
+    expect(mode().props.disabled).toBe(false);
+    expect(errors).toHaveLength(1);
+  },
+);

@@ -29,14 +29,16 @@ export function FederalSourceImporter({
     sources: readonly FederalSourceChoice[];
     nextAfter: number | null;
   } | null>(null);
-  const [raw, setRaw] = useState(false);
+  const [mode, setMode] = useState("legacy");
   const [captured, setCaptured] = useState<{
     choice: FederalSourceChoice;
     capture: NonNullable<FederalSourceView["capture"]>;
+    source: FederalSourceView["source"];
   } | null>(null);
   const [pending, setPending] = useState<{
     choice: FederalSourceChoice;
     representation: FederalImportRequest["representation"];
+    validationProfile: FederalImportRequest["validationProfile"];
   } | null>(null);
   async function browse(after = 0) {
     const value = await port.sources(after, signal());
@@ -45,19 +47,25 @@ export function FederalSourceImporter({
   async function importSource(
     choice: FederalSourceChoice,
     representation: FederalImportRequest["representation"],
+    validationProfile: FederalImportRequest["validationProfile"],
   ) {
     const choosingRecovery = port.unresolved() && pending === null;
     setCaptured(null);
-    setPending({ choice, representation });
+    setPending({ choice, representation, validationProfile });
     onPending(true);
     try {
       const source = await port.importSource(
         choice.selection,
         signal(),
         representation,
+        validationProfile,
       );
       onImported(source);
-      setCaptured(source.capture ? { choice, capture: source.capture } : null);
+      setCaptured(
+        source.capture
+          ? { choice, capture: source.capture, source: source.source }
+          : null,
+      );
       setPending(null);
       onPending(false);
     } catch (error) {
@@ -76,19 +84,24 @@ export function FederalSourceImporter({
         current official source and saves its exact text for amendment review.
       </p>
       <label>
-        <input
-          type="checkbox"
-          checked={raw}
+        Source import checks{" "}
+        <select
+          value={mode}
           disabled={disabled || pending !== null}
-          onChange={(event) => setRaw(event.target.checked)}
-        />{" "}
-        Require verified captured UTF-8 bytes
+          onChange={(event) => setMode(event.target.value)}
+        >
+          <option value="legacy">Retained source text</option>
+          <option value="raw">Verified captured UTF-8 bytes</option>
+          <option value="uslm">Pinned USLM 2.1 schema validation</option>
+        </select>
       </label>
       <p>
-        This option requires recorded capture evidence and may refuse historical
-        sources without it. It does not fall back to extracted text or establish
-        XML schema validity, legal currency or enactment. When recovering an
-        earlier import, select the same option and bill version.
+        Verified capture requires recorded evidence and may refuse historical
+        sources without it. Pinned USLM 2.1 also requires the captured XML to
+        pass that schema. Schema validation checks syntax, not legal
+        correctness, currency or enactment. Raw capture alone does not establish
+        schema validity. Neither mode silently falls back to weaker checks. When
+        recovering an earlier import, select the same mode and bill version.
       </p>
       <Button
         disabled={disabled || pending !== null}
@@ -121,7 +134,8 @@ export function FederalSourceImporter({
                       void run(() =>
                         importSource(
                           choice,
-                          raw ? "retained-raw-utf8/1" : undefined,
+                          mode === "legacy" ? undefined : "retained-raw-utf8/1",
+                          mode === "uslm" ? "uslm-2.1.0" : undefined,
                         ),
                       )
                     }
@@ -148,7 +162,13 @@ export function FederalSourceImporter({
         <Button
           disabled={disabled}
           onClick={() =>
-            void run(() => importSource(pending.choice, pending.representation))
+            void run(() =>
+              importSource(
+                pending.choice,
+                pending.representation,
+                pending.validationProfile,
+              ),
+            )
           }
         >
           Recover selected source import
@@ -167,6 +187,20 @@ export function FederalSourceImporter({
             {captured.capture.format.toUpperCase()}
           </p>
           <p>Captured body SHA-256: {captured.capture.sha256}</p>
+          {"validation" in captured.source && (
+            <>
+              <p>
+                Passed pinned USLM 2.1 syntax validation ·{" "}
+                {captured.source.validation.bytes} bytes
+              </p>
+              <p>Validation profile: {captured.source.validation.profile}</p>
+              <p>Schema SHA-256: {captured.source.validation.schemaSha256}</p>
+              <p>
+                Validated source SHA-256:{" "}
+                {captured.source.validation.sourceSha256}
+              </p>
+            </>
+          )}
         </details>
       )}
     </section>
