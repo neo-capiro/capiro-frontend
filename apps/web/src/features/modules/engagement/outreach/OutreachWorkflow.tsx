@@ -112,6 +112,7 @@ export function OutreachWorkflow({
           update={owner.update}
           disabled={disabled}
           templates={templates.data ?? []}
+          onTemplatesReload={templates.reload}
         />
       )}
       {step === 3 && (
