@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { ConversationReads } from "../../../../shared/meri-conversations/current-reads";
 import type { MeriUploadAccess } from "../../../../shared/meri-uploads/access";
-import type { TurnView } from "../conversation-view";
+import { isTerminal, type TurnView } from "../conversation-view";
 import { SourceCard } from "../../ui/SourceCard";
 import { BillSourceView } from "./BillSourceView";
 import { savedTime } from "./SourceReadState";
@@ -45,6 +45,32 @@ function savedSource(event: TurnView["nativeSources"][number]) {
           ? "Saved complete bill text"
           : "Saved partial bill text",
       };
+}
+
+/** A tool result is only ever a recorded reference; its outcome is never inferred. */
+function toolActivity(tool: TurnView["tools"][number], turn: TurnView) {
+  return tool.resultReference
+    ? "Result recorded · outcome unavailable"
+    : turn.omittedPrefix || turn.incompleteHistory
+      ? "Result not in loaded updates"
+      : isTerminal(turn.runState)
+        ? "No result recorded"
+        : "Awaiting result";
+}
+
+/** What the browser itself reported. A receipt is an observation; it never states that an effect succeeded
+ * beyond the receipt's own outcome field, and it links to nothing it cannot prove. */
+function browserReceiptText(event: TurnView["browserReceipts"][number]) {
+  const data = event.data;
+  if (data.kind === "browser.action")
+    return `${data.action} on ${data.urlHost} · ${
+      data.outcome === "ok"
+        ? "browser reported ok"
+        : "browser reported an error"
+    }`;
+  return `Browser download from ${data.urlHost} · ${data.mimeType}${
+    data.bytes === null ? "" : ` · ${data.bytes} bytes`
+  }`;
 }
 
 function SelectedRead({
@@ -97,17 +123,20 @@ function RunEvidence({
   reads,
   uploads,
   label,
+  named,
 }: {
   turn: TurnView;
   reads: ConversationReads;
   uploads: MeriUploadAccess;
   label: string;
+  /** More than one run has something to show, so each keeps its own heading. */
+  named: boolean;
 }) {
   const [selection, setSelection] = useState<string>();
   const trigger = useRef<HTMLButtonElement | null>(null);
   return (
     <section className={styles.run} aria-label={`${label} sources and usage`}>
-      <h2>{label}</h2>
+      {named && <h2>{label}</h2>}
       {turn.nativeSources.length > 0 && (
         <>
           <h3>
@@ -151,16 +180,36 @@ function RunEvidence({
           </ul>
         </>
       )}
-      <button
-        type="button"
-        className={ui.outline}
-        onClick={(event) => {
-          trigger.current = event.currentTarget;
-          setSelection("usage");
-        }}
-      >
-        View recorded usage
-      </button>
+      {turn.tools.length > 0 && (
+        <ul className={styles.tools} aria-label="Tool activity">
+          {turn.tools.map((tool) => (
+            <li key={tool.requestId}>
+              {tool.name ?? "Tool"}
+              {" · "}
+              {toolActivity(tool, turn)}
+            </li>
+          ))}
+        </ul>
+      )}
+      {turn.browserReceipts.length > 0 && (
+        <ul className={styles.tools} aria-label="Browser activity">
+          {turn.browserReceipts.map((event) => (
+            <li key={event.eventId}>{browserReceiptText(event)}</li>
+          ))}
+        </ul>
+      )}
+      {turn.usageIds.length > 0 && (
+        <button
+          type="button"
+          className={ui.outline}
+          onClick={(event) => {
+            trigger.current = event.currentTarget;
+            setSelection("usage");
+          }}
+        >
+          View recorded usage
+        </button>
+      )}
       {selection && (
         <SelectedRead
           key={selection}
@@ -178,41 +227,54 @@ function RunEvidence({
   );
 }
 
-/** Native sources and accounting reads stay separate from legacy references and UI tool activity. */
+/** A run earns a place in the details only when it saved a source, ran a tool or recorded usage. */
+const hasEvidence = (turn: TurnView) =>
+  turn.nativeSources.length > 0 ||
+  turn.tools.length > 0 ||
+  turn.browserReceipts.length > 0 ||
+  turn.usageIds.length > 0;
+
+/**
+ * Native sources, tool and browser activity and accounting reads for every turn shown, behind one
+ * closed disclosure. They are audit material, not chat content: the transcript never grows a
+ * heading for a run that has nothing to show, and legacy references stay with their answer.
+ */
 export function ConversationEvidence({
   reads,
   uploads,
   turn,
   earlier,
+  children,
 }: {
   reads: ConversationReads;
   uploads: MeriUploadAccess;
   turn: TurnView | null;
   earlier: readonly TurnView[];
+  /** Further per-conversation details that belong behind the same disclosure. */
+  children?: ReactNode;
 }) {
+  const runs = [
+    ...earlier.map((saved, index) => ({
+      turn: saved,
+      label: `Earlier run ${index + 1}`,
+    })),
+    ...(turn ? [{ turn, label: "Current run" }] : []),
+  ].filter((run) => hasEvidence(run.turn));
+  if (runs.length === 0 && !children) return null;
   return (
-    <section
-      className={styles.evidence}
-      aria-label="Sources and recorded usage"
-    >
-      {earlier.map((saved, index) => (
+    <details className={styles.evidence}>
+      <summary>Sources &amp; usage</summary>
+      {runs.map((run) => (
         <RunEvidence
-          key={saved.runId}
-          turn={saved}
+          key={run.turn.runId}
+          turn={run.turn}
           reads={reads}
           uploads={uploads}
-          label={`Earlier run ${index + 1}`}
+          label={run.label}
+          named={runs.length > 1}
         />
       ))}
-      {turn && (
-        <RunEvidence
-          key={turn.runId}
-          turn={turn}
-          reads={reads}
-          uploads={uploads}
-          label="Current run"
-        />
-      )}
-    </section>
+      {children}
+    </details>
   );
 }

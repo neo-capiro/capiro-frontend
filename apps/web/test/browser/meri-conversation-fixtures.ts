@@ -1,4 +1,4 @@
-import type { Page, Route } from "@playwright/test";
+import { expect, type Page, type Route } from "@playwright/test";
 import type { ConversationSubmittedResponse } from "@capiro/meri-contracts/conversation-application";
 import {
   installFixtures,
@@ -199,6 +199,15 @@ export async function connect(page: Page) {
 }
 export const reply = (route: Route, payload: unknown, status = 200) =>
   json(route, payload, status);
+/** The closed "Sources & usage" details under the transcript; every audit read starts from here. */
+export async function openEvidence(page: Page) {
+  const summary = page.getByText("Sources & usage", { exact: true });
+  await expect(summary).toBeVisible();
+  const open = await summary.evaluate(
+    (element) => (element.parentElement as HTMLDetailsElement).open,
+  );
+  if (!open) await summary.click();
+}
 export const composer = (page: Page) =>
   page.getByLabel("Meri message", { exact: true });
 export const sendButton = (page: Page) =>

@@ -82,10 +82,8 @@ test("M1 approved preview whole flow: two turns, reload, Stop and client isolati
     timeout: 180_000,
   });
   await expect(
-    page
-      .getByRole("article", { name: "Current turn", exact: true })
-      .getByText("Completed", { exact: true }),
-  ).toBeVisible({ timeout: 60_000 });
+    page.getByRole("article", { name: "Current turn", exact: true }),
+  ).toHaveAttribute("data-run-state", "completed", { timeout: 60_000 });
   const submittedBeforeReload = [...submittedIds];
   expect(new Set(submittedBeforeReload).size).toBe(1);
   await page.reload();
@@ -106,10 +104,10 @@ test("M1 approved preview whole flow: two turns, reload, Stop and client isolati
   await stopButton(page).click();
   expect((await stopResponse).ok()).toBe(true);
   await expect(
-    page
-      .getByRole("article", { name: "Current turn", exact: true })
-      .getByText(/^(Cancelled|Stopped|Completed)$/),
-  ).toBeVisible({ timeout: 90_000 });
+    page.getByRole("article", { name: "Current turn", exact: true }),
+  ).toHaveAttribute("data-run-state", /^(cancelled|completed)$/, {
+    timeout: 90_000,
+  });
   expect(new Set(submittedIds).size).toBe(2);
   await page
     .locator('details:has(nav[aria-label="Choose Meri client"]) summary')

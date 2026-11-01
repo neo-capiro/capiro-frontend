@@ -106,23 +106,11 @@ for (const viewport of [
           })
           .getByText("Saved conversation history loaded.", { exact: true }),
       ).toBeVisible();
-      await expect(
-        stop.getByRole("heading", { name: "Stopped", exact: true }),
-      ).toBeVisible();
-      await expect(stop.getByText("Complete", { exact: true })).toBeVisible();
-      await expect(stop.getByRole("status")).toHaveText(
-        "Stopped. Completed steps remain recorded.",
-      );
-      await expect(
-        ready.getByRole("heading", { name: "Ready", exact: true }),
-      ).toBeVisible();
-      await expect(ready.getByText("Complete", { exact: true })).toBeVisible();
-      await expect(
-        ready.getByText("You can send your next message.", { exact: true }),
-      ).toBeVisible();
-      await ready
-        .getByRole("button", { name: "Write next message", exact: true })
-        .click();
+      // The cancelled turn carries its own state; nothing announces readiness.
+      await expect(stop).toHaveCount(0);
+      await expect(ready).toHaveCount(0);
+      await expect(current).toHaveAttribute("data-run-state", "cancelled");
+      await composer(page).focus();
       await expect(composer(page)).toBeFocused();
       expect(flow.calls.reservations).toEqual([]);
       expect(flow.calls.successors).toEqual([]);
@@ -149,16 +137,9 @@ for (const viewport of [
           .getByRole("article", { name: "Earlier turn 1" })
           .getByText(firstAnswer, { exact: true }),
       ).toBeVisible();
-      await page
-        .locator("summary")
-        .filter({ hasText: "Pause and recovery" })
-        .click();
-      await expect(
-        page.getByText(
-          "Pause and checkpoint recovery are not available for this conversation yet.",
-          { exact: true },
-        ),
-      ).toBeVisible();
+      // Finished turns carry no pause, steer or recovery block at all.
+      await expect(page.getByText("Pause and recovery")).toHaveCount(0);
+      await expect(page.getByText("Pause or steer this run")).toHaveCount(0);
       await expect(
         page.getByRole("button", {
           name: /^(Pause|Steer|Resume from checkpoint|Retry from checkpoint|Fork conversation)$/,

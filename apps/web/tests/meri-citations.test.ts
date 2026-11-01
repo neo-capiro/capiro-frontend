@@ -4,7 +4,10 @@ import { describe, expect, it } from "vitest";
 import type { UIEvent } from "@capiro/meri-contracts";
 import { validateUIEvent } from "@capiro/meri-contracts/browser";
 import { ConversationTurn } from "../src/features/meri/conversation/ConversationTurn";
+import { ConversationEvidence } from "../src/features/meri/conversation/evidence/ConversationEvidence";
 import { savedTurns } from "../src/features/meri/conversation/saved-turns";
+import type { ConversationReads } from "../src/shared/meri-conversations/current-reads";
+import type { MeriUploadAccess } from "../src/shared/meri-uploads/access";
 import {
   turnFromEvents,
   type TurnView,
@@ -24,6 +27,16 @@ const render = (patch: Partial<TurnView> = {}) =>
       turn: { ...savedTurn(), ...patch },
       label: "Saved turn",
       showPrompt: false,
+    }),
+  );
+/** The closed details under the transcript; nothing is read until a person opens a page. */
+const renderEvidence = (patch: Partial<TurnView> = {}) =>
+  renderToStaticMarkup(
+    createElement(ConversationEvidence, {
+      reads: {} as ConversationReads,
+      uploads: {} as MeriUploadAccess,
+      turn: { ...savedTurn(), ...patch },
+      earlier: [],
     }),
   );
 
@@ -74,19 +87,16 @@ describe("saved citation reference presentation", () => {
     expect(dated).not.toContain("Up to date");
   });
 
-  it("distinguishes missing references in a complete view from a partial loaded view", () => {
-    expect(render({ sources: [] })).toContain(
-      "No source references were provided.",
-    );
+  it("an answer without references carries no caption, while a partial view keeps its caveat", () => {
+    const plain = render({ sources: [] });
+    expect(plain).not.toContain("No source references");
+    expect(plain).not.toContain("Saved references");
     for (const patch of [
       { omittedPrefix: true },
       { incompleteHistory: true },
     ]) {
-      expect(render({ sources: [], ...patch })).toContain(
-        "No source references in the loaded updates.",
-      );
       expect(render({ sources: [], ...patch })).not.toContain(
-        "No source references were provided.",
+        "No source references",
       );
       expect(render(patch)).toContain(
         "Some saved reference details are unavailable. This does not mean the answer had no sources.",
@@ -94,7 +104,7 @@ describe("saved citation reference presentation", () => {
     }
   });
 
-  it("never turns model text or source metadata into a URL, HTML, excerpt, or execution", () => {
+  it("renders answer Markdown as structure, never as executable markup or an unsafe link", () => {
     const text =
       "[citation](javascript:alert(1)) <script>alert(2)</script> https://untrusted.invalid/source";
     const html = render({
@@ -107,11 +117,32 @@ describe("saved citation reference presentation", () => {
         },
       ],
     });
-    expect(html).toContain("&lt;script&gt;alert(2)&lt;/script&gt;");
     expect(html).not.toContain("untrusted.invalid/metadata");
     expect(html).not.toContain("&lt;img src=x");
-    expect(html).toContain("[citation](javascript:alert(1))");
-    expect(html).not.toMatch(/<a\b|<script\b|<img src=x|<iframe\b/);
+    expect(html).toContain("&lt;script&gt;alert(2)&lt;/script&gt;");
+    expect(html).not.toMatch(/<script\b|<img src=x|<iframe\b|javascript:/);
+    // The unsafe scheme stays inert text; only an https link may become an anchor, and never a
+    // same-tab or referrer-leaking one.
+    expect(html).toContain("citation");
+    for (const anchor of html.match(/<a\b[^>]*>/g) ?? []) {
+      expect(anchor).toMatch(/href="https:\/\/untrusted\.invalid\/source"/);
+      expect(anchor).toContain('rel="noopener noreferrer"');
+      expect(anchor).toContain('target="_blank"');
+    }
+    const structured = render({
+      messages: [
+        {
+          messageId: "synthetic-markdown",
+          text: "## Summary\n\n- first **point**\n- second\n\n| a | b |\n| - | - |\n| 1 | 2 |",
+        },
+      ],
+    });
+    expect(structured).toContain("<h2");
+    expect(structured).toContain("<li");
+    expect(structured).toContain("<strong>point</strong>");
+    expect(structured).toContain("<table");
+    expect(structured).not.toContain("## Summary");
+    expect(structured).not.toContain("**point**");
   });
 
   it("does not retain a source when its parent supplies a cleared current view", () => {
@@ -119,8 +150,8 @@ describe("saved citation reference presentation", () => {
     const cleared = render({ sources: [], messages: [], tools: [] });
     expect(cleared).not.toContain(source.sourceVersionId);
     expect(cleared).not.toContain(source.sourceId);
-    expect(cleared).not.toContain("Saved references ·");
-    expect(cleared).toContain("No source references were provided.");
+    expect(cleared).not.toContain("Saved references \u00b7");
+    expect(cleared).not.toContain("No source references");
   });
 });
 
@@ -158,23 +189,31 @@ describe("tool-result truthfulness", () => {
     const partial = restore(events.slice(0, firstStart + 1));
     expect(partial.incompleteHistory).toBe(true);
     expect(partial.runState).toBe("completed");
-    const partialHtml = render(partial);
-    expect(partialHtml).toContain(
+    expect(render(partial)).toContain(
       "More saved updates for this run have not been loaded.",
     );
+    // The answer itself never lists tool activity; the closed details under the transcript does.
+    expect(render(partial)).not.toContain("Tool activity");
+    const partialHtml = renderEvidence(partial);
     expect(partialHtml).not.toContain("No result recorded");
     expect(partialHtml).toContain("Result not in loaded updates");
     const full = restore(events);
     expect(full.incompleteHistory).toBe(false);
-    expect(render(full)).toContain("Result recorded · outcome unavailable");
-    expect(render(full)).not.toContain("Result not in loaded updates");
+    expect(renderEvidence(full)).toContain(
+      "Result recorded \u00b7 outcome unavailable",
+    );
+    expect(renderEvidence(full)).not.toContain("Result not in loaded updates");
     expect(
-      render({ ...partial, incompleteHistory: false, omittedPrefix: true }),
+      renderEvidence({
+        ...partial,
+        incompleteHistory: false,
+        omittedPrefix: true,
+      }),
     ).toContain("Result not in loaded updates");
   });
 
   it("does not present a recorded result as success when a run error follows", () => {
-    const html = render({
+    const failed: Partial<TurnView> = {
       runState: "failed",
       errors: [
         {
@@ -190,11 +229,14 @@ describe("tool-result truthfulness", () => {
           resultReference: "synthetic-result",
         },
       ],
-    });
-    expect(html).toContain("Result recorded · outcome unavailable");
+    };
+    const html = render(failed);
     expect(html).toContain("Run error");
-    expect(html).not.toContain("Done");
-    expect(html).not.toContain("In progress");
+    expect(html).toContain('data-tone="danger">Failed</span>');
+    const evidence = renderEvidence(failed);
+    expect(evidence).toContain("Result recorded \u00b7 outcome unavailable");
+    expect(evidence).not.toContain("Done");
+    expect(evidence).not.toContain("In progress");
   });
 
   it("does not leave an unfinished tool running after its run ends", () => {
@@ -202,10 +244,12 @@ describe("tool-result truthfulness", () => {
       { requestId: "synthetic-request", name: null, resultReference: null },
     ];
     for (const runState of ["completed", "failed", "cancelled"] as const) {
-      const html = render({ tools, runState });
+      const html = renderEvidence({ tools, runState });
       expect(html).toContain("No result recorded");
       expect(html).not.toContain("Awaiting result");
     }
-    expect(render({ tools, runState: "running" })).toContain("Awaiting result");
+    expect(renderEvidence({ tools, runState: "running" })).toContain(
+      "Awaiting result",
+    );
   });
 });

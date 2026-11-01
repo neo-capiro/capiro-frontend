@@ -116,7 +116,7 @@ function visit(node: ReactNode): void {
   tree.push(el);
   if (
     typeof el.type === "function" &&
-    ["Body", "IntentCard", "DecisionControls", "FieldList"].includes(
+    ["Body", "Rows", "IntentCard", "DecisionControls", "FieldList"].includes(
       el.type.name,
     )
   ) {

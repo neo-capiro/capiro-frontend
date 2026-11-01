@@ -4,40 +4,93 @@ import type { useRunLifecycle } from "./useRunLifecycle";
 import type { TurnView } from "../conversation-view";
 import styles from "../live.module.css";
 
-/** Each click is explicit; checkpoint inspection grants no authority to resume or fork. */
+type Lifecycle = ReturnType<typeof useRunLifecycle>;
+
+function LifecycleError({ lifecycle }: { lifecycle: Lifecycle }) {
+  return lifecycle.error ? (
+    <p role="alert" className={styles.muted}>
+      {lifecycle.error}
+    </p>
+  ) : null;
+}
+
+/** A verified checkpoint grants no authority on its own: continuing or forking is a separate click. */
+function VerifiedCheckpoint({
+  lifecycle,
+  held,
+  resumable,
+}: {
+  lifecycle: Lifecycle;
+  held: boolean;
+  resumable: boolean;
+}) {
+  const checkpoint = lifecycle.checkpoint;
+  if (!checkpoint) return null;
+  return (
+    <div className={styles.statusRow}>
+      <p role="status">
+        Checkpoint verified for this run. Meri will recheck access when
+        continuing.
+      </p>
+      {resumable && (
+        <Button
+          type="button"
+          variant="outline"
+          disabled={held}
+          onClick={() =>
+            lifecycle.send({
+              intent: "resume",
+              checkpointId: checkpoint.checkpointId,
+              checkpointSha256: checkpoint.checkpointSha256,
+            })
+          }
+        >
+          Resume
+        </Button>
+      )}
+      <Button
+        type="button"
+        variant="outline"
+        disabled={held}
+        onClick={() =>
+          lifecycle.send({
+            intent: "fork",
+            checkpointId: checkpoint.checkpointId,
+            checkpointSha256: checkpoint.checkpointSha256,
+          })
+        }
+      >
+        Fork into new chat
+      </Button>
+    </div>
+  );
+}
+
+/**
+ * Controls for a run that is still going or paused, plus recovery of a pending control. A
+ * finished turn renders nothing here; its checkpoint lives in the conversation details.
+ */
 export function RunLifecycleControls({
   lifecycle,
   turn,
   disabled,
 }: {
-  lifecycle: ReturnType<typeof useRunLifecycle>;
+  lifecycle: Lifecycle;
   turn: TurnView | null;
   disabled: boolean;
 }) {
   const [text, setText] = useState("");
   const checkpointId =
-    lifecycle.receipt?.checkpointId ?? turn?.checkpointIds?.at(-1);
-  const checkpoint = lifecycle.checkpoint;
+    lifecycle.receipt?.checkpointId ?? turn?.checkpointIds.at(-1);
   const held = disabled || lifecycle.busy || !lifecycle.available;
-  const mutable = !held && !lifecycle.command && turn?.runState === "running";
-  // Nothing to pause, resume, inspect or retry: keep the transcript free of empty recovery chrome.
-  const relevant =
-    !!lifecycle.error ||
-    !!lifecycle.command ||
-    // A finished run keeps its verified checkpoint inspection/fork entry.
-    !!checkpointId ||
-    !!checkpoint ||
-    turn?.runState === "running" ||
-    turn?.runState === "paused";
-  if (!relevant) return null;
-  return (
-    <details>
-      <summary>Pause and recovery</summary>
-      {lifecycle.error && (
-        <p role="alert" className={styles.muted}>
-          {lifecycle.error}
-        </p>
-      )}
+  const running = turn?.runState === "running";
+  const paused = turn?.runState === "paused";
+  const mutable = !held && !lifecycle.command && running;
+  if (!lifecycle.command && !lifecycle.error && !running && !paused)
+    return null;
+  const content = (
+    <>
+      <LifecycleError lifecycle={lifecycle} />
       {lifecycle.command ? (
         <div className={styles.statusRow}>
           <p role="status">
@@ -56,7 +109,7 @@ export function RunLifecycleControls({
         </div>
       ) : (
         <>
-          {turn?.runState === "running" && (
+          {running && (
             <>
               <Button
                 type="button"
@@ -96,50 +149,58 @@ export function RunLifecycleControls({
               Inspect latest checkpoint
             </Button>
           ) : (
-            <p className={styles.muted}>
-              No verified checkpoint is available yet.
-            </p>
-          )}
-          {checkpoint && (
-            <div className={styles.statusRow}>
-              <p role="status">
-                Checkpoint verified for this run. Meri will recheck access when
-                continuing.
+            paused && (
+              <p className={styles.muted}>
+                No verified checkpoint is available yet.
               </p>
-              {turn?.runState === "paused" && (
-                <Button
-                  type="button"
-                  variant="outline"
-                  disabled={held}
-                  onClick={() =>
-                    lifecycle.send({
-                      intent: "resume",
-                      checkpointId: checkpoint.checkpointId,
-                      checkpointSha256: checkpoint.checkpointSha256,
-                    })
-                  }
-                >
-                  Resume
-                </Button>
-              )}
-              <Button
-                type="button"
-                variant="outline"
-                disabled={held}
-                onClick={() =>
-                  lifecycle.send({
-                    intent: "fork",
-                    checkpointId: checkpoint.checkpointId,
-                    checkpointSha256: checkpoint.checkpointSha256,
-                  })
-                }
-              >
-                Fork into new chat
-              </Button>
-            </div>
+            )
           )}
+          <VerifiedCheckpoint
+            lifecycle={lifecycle}
+            held={held}
+            resumable={paused}
+          />
         </>
       )}
+    </>
+  );
+  // A healthy running run keeps its controls folded; a pause, an error or a pending control stays open.
+  return running && !lifecycle.command && !lifecycle.error ? (
+    <details className={styles.runControls}>
+      <summary>Pause or steer this run</summary>
+      {content}
     </details>
+  ) : (
+    <section className={styles.runControls} aria-label="Run controls">
+      {content}
+    </section>
+  );
+}
+
+/** A finished run's verified checkpoint: inspect it, then fork from it. Shown inside the details only. */
+export function CheckpointActions({
+  lifecycle,
+  checkpointId,
+  disabled,
+}: {
+  lifecycle: Lifecycle;
+  checkpointId: string;
+  disabled: boolean;
+}) {
+  if (lifecycle.command) return null;
+  const held = disabled || lifecycle.busy || !lifecycle.available;
+  return (
+    <section className={styles.runControls} aria-label="Checkpoint">
+      <LifecycleError lifecycle={lifecycle} />
+      <Button
+        type="button"
+        variant="outline"
+        disabled={held}
+        onClick={() => void lifecycle.inspect(checkpointId)}
+      >
+        Inspect latest checkpoint
+      </Button>
+      <VerifiedCheckpoint lifecycle={lifecycle} held={held} resumable={false} />
+    </section>
   );
 }

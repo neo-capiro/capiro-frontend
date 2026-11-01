@@ -72,20 +72,15 @@ test("M1 synthetic Ready can be refused: 409 saves the immutable turn and only a
   await page.clock.install();
   const flow = await installReadinessFlow(page);
   await page.goto(selectedUrl);
+  // A verified finished turn announces nothing: the composer is open and takes the cursor.
   const ready = page.getByRole("region", {
     name: "Next message status",
     exact: true,
   });
   await expect(
-    ready.getByRole("heading", { name: "Ready", exact: true }),
-  ).toBeVisible();
-  await expect(ready.getByText("Complete", { exact: true })).toBeVisible();
-  await expect(
-    ready.getByText("You can send your next message.", { exact: true }),
-  ).toBeVisible();
-  await ready
-    .getByRole("button", { name: "Write next message", exact: true })
-    .click();
+    page.getByRole("article", { name: "Current turn" }),
+  ).toHaveAttribute("data-run-state", "completed");
+  await expect(ready).toHaveCount(0);
   await expect(composer(page)).toBeFocused();
   expect(flow.reservations).toEqual([]);
   expect(flow.admissions).toEqual([]);

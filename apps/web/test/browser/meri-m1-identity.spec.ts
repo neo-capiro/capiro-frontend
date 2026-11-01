@@ -75,7 +75,9 @@ test("M1 fixture: two automatic renewals retain exact run, accepted cursor and z
       page.getByText("Verified prefix and accepted suffix", { exact: true }),
     ).toBeVisible();
   }
-  await expect(page.getByText("Completed", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("article", { name: "Current turn" }),
+  ).toHaveAttribute("data-run-state", "completed");
   expect(fixture.hints).toEqual([{ clientId }, exact, exact]);
   expect(cursors[0]).toBe("1");
   expect(cursors.slice(1)).not.toHaveLength(0);

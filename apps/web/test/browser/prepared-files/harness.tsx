@@ -193,6 +193,7 @@ const published: TurnView = {
   approvals: [],
   errors: [],
   checkpointIds: [],
+  usageIds: [],
   nativeSources: [],
   artifacts: [{ artifactId: ids.artifact, versionId: ids.version }],
 };

@@ -6,6 +6,7 @@ import {
   clientId,
   context,
   eventOf,
+  openEvidence,
   setupConversation,
 } from "./meri-conversation-fixtures";
 import { installInitialInput } from "./meri-initial-input-fixtures";
@@ -296,15 +297,16 @@ test("a completed run keeps its verified checkpoint inspection entry", async ({
   await expect(
     page.getByText("Saved conversation history loaded."),
   ).toBeVisible();
-  const recovery = page.getByText("Pause and recovery", { exact: true });
-  await expect(recovery).toBeVisible();
-  await recovery.click();
-  await expect(
-    page.getByRole("button", {
-      name: "Inspect latest checkpoint",
-      exact: true,
-    }),
-  ).toBeVisible();
+  // A finished turn shows no recovery block; its checkpoint waits behind the closed details.
+  await expect(page.getByText("Pause and recovery")).toHaveCount(0);
+  await expect(page.getByText("Pause or steer this run")).toHaveCount(0);
+  const inspect = page.getByRole("button", {
+    name: "Inspect latest checkpoint",
+    exact: true,
+  });
+  await expect(inspect).toBeHidden();
+  await openEvidence(page);
+  await expect(inspect).toBeVisible();
   // Opening a finished conversation issues no lifecycle, pause, resume or fork write.
   expect(controlWrites).toEqual([]);
 });
@@ -398,6 +400,28 @@ test("existing conversation keeps its transcript and never shows the empty-chat 
   await expect(
     page.getByText("Saved conversation history loaded."),
   ).toBeVisible();
+  // A finished exchange is the prompt and the answer: no readiness card, status pill, recovery
+  // block, per-run usage headings or empty approvals panel.
+  await expect(
+    page.getByRole("article", { name: "Current turn" }),
+  ).toHaveAttribute("data-run-state", "completed");
+  for (const noise of [
+    "Ready",
+    "Complete",
+    "Completed",
+    "You can send your next message.",
+    "Write next message",
+    "Pause and recovery",
+    "Pause or steer this run",
+    "Earlier run 1",
+    "Current run",
+    "View recorded usage",
+    "Sources & usage",
+    "Actions for your approval",
+    "Meri has not prepared any actions for your approval in this conversation.",
+    "No source references were provided.",
+  ])
+    await expect(page.getByText(noise, { exact: true })).toHaveCount(0);
   await page.screenshot({ path: shot("desktop-existing-conversation.png") });
 });
 

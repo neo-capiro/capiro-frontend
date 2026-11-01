@@ -1,26 +1,25 @@
 import { Button } from "@capiro/ui/button";
 import { useEffect, useState } from "react";
 import type { useLiveRun } from "./useLiveRun";
-import { isTerminal, type TurnView } from "./conversation-view";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import ui from "../ui/meri-ui.module.css";
 import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import styles from "./live.module.css";
 import { matchesStoredRequest } from "./run-commands";
 
-/** Connection, delivery and stop feedback for the current run; never a run outcome by itself. */
+/**
+ * Connection, delivery and stop feedback for the current run; never a run outcome by itself. A
+ * finished turn shows nothing here beyond a real error or an unresolved request.
+ */
 export function RunStatus({
   run,
   active,
   acceptedRequest,
-  savedCurrent,
 }: {
   run: ReturnType<typeof useLiveRun>;
   /** The run has not reached a terminal status. */
   active: boolean;
   acceptedRequest?: ConversationStoredRequest | undefined;
-  /** The current run projected from admitted saved history, never the live stream. */
-  savedCurrent?: TurnView | undefined;
 }) {
   const { snapshot, intent, busy } = run;
   const uncertain = intent.submit?.state === "unknown";
@@ -93,7 +92,7 @@ export function RunStatus({
           </Button>
         </div>
       )}
-      <StopStatus run={run} savedCurrent={savedCurrent} />
+      <StopStatus run={run} active={active} />
       {active && (
         <p className={styles.muted}>
           Leaving this page stops watching and does not cancel the run. Use Stop
@@ -104,10 +103,15 @@ export function RunStatus({
   );
 }
 
-/** Receipt state is evidence of the outcome at Stop; it never proves physical cleanup. */
+/**
+ * Receipt state is evidence of the outcome at Stop; it never proves physical cleanup. A Stop that
+ * arrived after the run had already finished keeps saying so, because the person asked for
+ * something that did not happen. Cancelling feedback retires once the run settles; the turn's own
+ * Cancelled state is the outcome.
+ */
 function stopFeedback(
   run: ReturnType<typeof useLiveRun>,
-  savedCurrent: TurnView | undefined,
+  active: boolean,
 ): {
   title: string;
   tone: StatusTone;
@@ -130,15 +134,7 @@ function stopFeedback(
       status: "Attention",
       message: "The run had already failed when the stop request arrived.",
     };
-  if (savedCurrent?.runState === "cancelled")
-    return {
-      title: "Stopped",
-      tone: "success",
-      status: "Complete",
-      message: "Stopped. Completed steps remain recorded.",
-    };
-  if (isTerminal(savedCurrent?.runState)) return null;
-  if (receipt === "cancelled")
+  if (receipt === "cancelled" && active)
     return {
       title: "Cancelling",
       tone: "warning",
@@ -166,17 +162,14 @@ function stopFeedback(
 /** Figma 450:88742/450:88754, qualified by the evidence the current public contract supplies. */
 function StopStatus({
   run,
-  savedCurrent,
+  active,
 }: {
   run: ReturnType<typeof useLiveRun>;
-  savedCurrent: TurnView | undefined;
+  active: boolean;
 }) {
-  const feedback = stopFeedback(run, savedCurrent);
+  const feedback = stopFeedback(run, active);
   if (!feedback) return null;
-  const retry =
-    run.intent.cancel === "unknown" &&
-    !run.snapshot.cancelReceipt &&
-    !isTerminal(savedCurrent?.runState);
+  const retry = run.intent.cancel === "unknown" && !run.snapshot.cancelReceipt;
   return (
     <section className={styles.stopCard} aria-label="Stop status">
       <h3>{feedback.title}</h3>
