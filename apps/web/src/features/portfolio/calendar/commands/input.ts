@@ -8,6 +8,26 @@ const instant = z
   .string()
   .datetime({ offset: true })
   .transform((value) => new Date(value).toISOString());
+export const debriefContextSummarySchema = z
+  .object({
+    version: z.string().trim().min(1).max(64),
+    boundTokens: z.number().int().nonnegative(),
+    totalTokens: z.number().int().nonnegative(),
+    sourceTruncated: z.boolean(),
+    sections: z
+      .array(
+        z
+          .object({
+            name: z.string().trim().min(1).max(64),
+            tokens: z.number().int().nonnegative(),
+            state: z.enum(["kept", "shortened", "dropped"]),
+          })
+          .strict(),
+      )
+      .max(20),
+  })
+  .strict();
+
 export const commandSchema = z
   .object({
     schemaVersion: z.literal(1),
@@ -46,26 +66,7 @@ export const commandSchema = z
         body: z.string().trim().min(1).max(20000).nullable(),
         confidential: z.boolean().nullable(),
         // D2 audited context: optional, and only on a debrief create.
-        generatedFrom: z
-          .object({
-            version: z.string().trim().min(1).max(64),
-            boundTokens: z.number().int().nonnegative(),
-            totalTokens: z.number().int().nonnegative(),
-            sourceTruncated: z.boolean(),
-            sections: z
-              .array(
-                z
-                  .object({
-                    name: z.string().trim().min(1).max(64),
-                    tokens: z.number().int().nonnegative(),
-                    state: z.enum(["kept", "shortened", "dropped"]),
-                  })
-                  .strict(),
-              )
-              .max(20),
-          })
-          .strict()
-          .optional(),
+        generatedFrom: debriefContextSummarySchema.optional(),
       })
       .strict()
       .nullable(),
