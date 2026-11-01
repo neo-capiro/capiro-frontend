@@ -1,7 +1,7 @@
 import {
   plannerConsentFor,
   requirePlannerConsentReceipt,
-  requirePlannerConsentSelection,
+  plannerConsentAvailability,
   type RetainedPlannerConsent,
   type PlannerConsentRequest,
 } from "@/shared/capiro/operations/objective-planner-consent";
@@ -14,6 +14,7 @@ export interface PlannerConsentRecovery {
   load(): Promise<RetainedPlannerConsent | null>;
   reserve(value: RetainedPlannerConsent): Promise<RetainedPlannerConsent>;
   save(value: RetainedPlannerConsent): Promise<void>;
+  acknowledge(value: RetainedPlannerConsent): Promise<void>;
   lock<T>(action: () => Promise<T>): Promise<T>;
 }
 export interface PlannerConsentPorts {
@@ -33,6 +34,8 @@ export type PlannerConsentState = {
   retained?: RetainedPlannerConsent;
   error?: string;
   revision: number;
+  canRetry?: boolean;
+  canCancel?: boolean;
 };
 /** Owns one explicit consent command. The existing native worker owns application. */
 export class ObjectivePlannerConsentSession {
@@ -68,7 +71,13 @@ export class ObjectivePlannerConsentSession {
     if (this.active) return;
     const controller = new AbortController();
     this.active = controller;
-    this.update({ busy: true, ready: false, error: undefined });
+    this.update({
+      busy: true,
+      ready: false,
+      error: undefined,
+      canRetry: false,
+      canCancel: false,
+    });
     try {
       await this.recovery.lock(() => action(controller.signal));
     } catch {
@@ -109,7 +118,6 @@ export class ObjectivePlannerConsentSession {
     this.update({
       retained: next,
       ready: true,
-      revision: this.state.revision + 1,
     });
   }
   private async observe(retained: RetainedPlannerConsent, signal: AbortSignal) {
@@ -128,17 +136,25 @@ export class ObjectivePlannerConsentSession {
       throw new Error("Original Planner command is unavailable.");
     await this.accept(read.commandReceipt, retained, signal);
   }
+  private async current(signal: AbortSignal) {
+    const saved = await this.ports.saved(signal);
+    this.assert(signal);
+    const origin = await this.ports.generation(undefined, signal);
+    this.assert(signal);
+    const available = plannerConsentAvailability(origin, saved, this.selection);
+    this.update({
+      ready: true,
+      canRetry: available.canRetry,
+      canCancel: available.canCancel,
+      revision: this.state.revision + 1,
+    });
+    return { saved, origin };
+  }
   refresh = () =>
     this.run(async (signal) => {
       const retained = await this.load(signal);
-      if (retained) return this.observe(retained, signal);
-      const saved = await this.ports.saved(signal);
-      this.assert(signal);
-      const origin = await this.ports.generation(undefined, signal);
-      this.assert(signal);
-      // Validate eligibility without reserving a command or allocating a random ID.
-      requirePlannerConsentSelection(origin, saved, this.selection);
-      this.update({ ready: true });
+      if (retained) await this.observe(retained, signal);
+      await this.current(signal);
     });
   execute = () =>
     this.run(async (signal) => {
@@ -158,5 +174,34 @@ export class ObjectivePlannerConsentSession {
       // Explicit retry keeps the persisted input/UUID. The Core command owner first recovers its original receipt.
       const receipt = await this.ports.command(retained.request, signal);
       await this.accept(receipt, retained, signal);
+      await this.current(signal);
+    });
+  /** An explicit successor requires an original receipt, then fresh source/control/operation observations. */
+  change = (command: "retry" | "cancel") =>
+    this.run(async (signal) => {
+      const previous = await this.load(signal);
+      if (previous) await this.observe(previous, signal);
+      const { saved, origin } = await this.current(signal);
+      const next = plannerConsentFor(
+        origin,
+        saved,
+        this.selection,
+        crypto.randomUUID(),
+        command,
+      );
+      if (previous) {
+        const confirmed = this.state.retained;
+        if (!confirmed?.receipt)
+          throw new Error("Original Planner command is unconfirmed.");
+        await this.recovery.acknowledge(confirmed);
+        this.assert(signal);
+        this.update({ retained: undefined });
+      }
+      const retained = await this.recovery.reserve(next);
+      this.assert(signal);
+      this.update({ retained });
+      const receipt = await this.ports.command(retained.request, signal);
+      await this.accept(receipt, retained, signal);
+      await this.current(signal);
     });
 }

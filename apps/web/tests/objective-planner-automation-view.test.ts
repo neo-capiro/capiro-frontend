@@ -2,6 +2,16 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, expect, it, vi } from "vitest";
 import { ObjectivePlannerAutomation } from "../src/features/portfolio/objectives/ObjectivePlannerAutomation";
+vi.mock(
+  "../src/features/portfolio/objectives/ObjectiveLegacyPlanBoundary",
+  () => ({
+    ObjectiveLegacyPlanBoundary: ({
+      children,
+    }: {
+      children: import("react").ReactNode;
+    }) => children,
+  }),
+);
 const state = vi.hoisted(() => ({
   actor: true,
   client: "00000000-0000-4000-8000-000000000002",
