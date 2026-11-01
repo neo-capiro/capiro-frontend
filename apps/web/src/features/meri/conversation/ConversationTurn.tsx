@@ -1,6 +1,5 @@
 import { Message, MessageContent } from "@capiro/ui/message";
 import { MarkdownContent } from "../../../shared/markdown/MarkdownContent";
-import { unavailableResources } from "../../../shared/meri-resources/unavailable";
 import { DesignIcon } from "../../../shared/shell/DesignIcon";
 import { UserMessage } from "../screens/conversation/UserMessage";
 import { TurnSources } from "../screens/sources/TurnSources";
@@ -134,8 +133,9 @@ function TurnNotices({ turn }: { turn: TurnView }) {
           ) : (
             <p>
               Meri is waiting for an approval that expires{" "}
-              {time(approval.expiresAt)}. Decisions cannot be made here yet.{" "}
-              {unavailableResources.approvals.missing}
+              {time(approval.expiresAt)}. Decisions are made under “Actions for
+              your approval” once conversation approvals are enabled for this
+              workspace; nothing happens until you approve it there.
             </p>
           )}
         </Notice>

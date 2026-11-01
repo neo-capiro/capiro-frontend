@@ -32,6 +32,7 @@ const pageHrefs: Record<PreferencePageId, string | undefined> = {
   connections: fixtureHref("connector-accounts"),
   // No Figma 3.4 frame exists for this page yet, so the fixture gallery has no route for it.
   "connected-services": undefined,
+  "data-access": fixtureHref("data-coverage"),
   usage: fixtureHref("usage-limits"),
   skills: fixtureHref("skills-templates"),
   updates: fixtureHref("notifications-account"),

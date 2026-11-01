@@ -1034,6 +1034,34 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "Reviewed coherent Research retrieval0.5 and legislative1.7 plus Office XML/Word source; actual package/consumer qualification recorded separately."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.45-4626c050-dbea118a345e.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.45",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "4626c050517052bea4588a7753f6d1d64fbdf183",
+   "sourceTree": "5dbff65ff33ea41040f7d45ce88e429779c98def",
+   "bytes": 2178278,
+   "sha256": "dbea118a345e4419d3121912bae60811d30ff0863ebc3d352a80a753b77c909a",
+   "integrity": "sha512-WnbGSaZ2qETGyZhAr16uWhv8BT8DeJPbcCpj2z61zvouvpu1kjBpYR/jpFzcYt9OQNkNy2dxGlAVxL0jHv3iHA==",
+   "regularEntryCount": 123,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "I4 discoverability: intents-application inbox route and the new data-access-application receiver (neo-capiro/meri-greenfield#504); actual package/consumer qualification recorded separately."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.31-040f5209-2ac04d3f07c7.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.31",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "040f5209f6f097d1927cc5077208921d9e973747",
+   "sourceTree": "22dce42cb0adec43dc9cdc40134b9c5841aa0bad",
+   "bytes": 3843,
+   "sha256": "2ac04d3f07c7129259225627ab5ba43fba520ddb41d25b6c7a9625927ec27b07",
+   "integrity": "sha512-66QmwhrAUXELLLqQ2c7k3KAmRpbEy9i0m0qDKg5vit+y3aNJEhM4DsvGaJtpLWCgWaUwP4yycqktv94ZLJrnOw==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Lockstep peer admission of @capiro/meri-contracts 0.1.45 (neo-capiro/meri-greenfield#504); no stream behaviour change."
   }
  ]
 }

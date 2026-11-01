@@ -11,7 +11,6 @@ type CapabilityDefinition = Readonly<{
   sourcePin: string;
   runtimeOwner: string;
   requiredReceipt: string;
-  unavailableReason?: string;
   /** Existing connection-status destinations remain reachable while operations are off. */
   navigationWhenUnconfigured?: true;
 }>;
@@ -118,15 +117,13 @@ export const meriCapabilityTable = {
   },
   approvals: {
     label: "Approvals",
-    ordinaryRoute: null,
-    deploymentFlag: null,
-    publicContract:
-      "intents-application/0.1.0 exists; no workspace-wide approval inbox",
-    sourcePin: "5ee2fd6e979dff1c2b111bd964c91aadab8357a5",
+    ordinaryRoute: "/meri/approvals",
+    deploymentFlag: "MERI_CONVERSATION_WORKFLOW_ENABLED",
+    publicContract: "intents-application/0.1.0 (inbox route)",
+    sourcePin: contractSource,
     runtimeOwner: "Meri intent owner",
-    requiredReceipt: "Current authorized approval inbox (not published)",
-    unavailableReason:
-      "The approval center is not available. Enabled proposal decisions are reviewed within their conversation.",
+    requiredReceipt:
+      "Current authorized actor-wide proposal page read with the conversation list's visibility; decisions stay in the conversation",
   },
   routines: {
     label: "Routines",
@@ -141,20 +138,20 @@ export const meriCapabilityTable = {
   },
   dataAccess: {
     label: "Data access",
-    ordinaryRoute: null,
-    deploymentFlag: null,
-    publicContract: "No accepted browser source-coverage index",
+    ordinaryRoute: "/settings/preferences?page=data-access",
+    deploymentFlag: "MERI_CONVERSATION_WORKFLOW_ENABLED",
+    publicContract: "data-access-application/0.1.0",
     sourcePin: runtimeSource,
-    runtimeOwner: "Meri gateway and source owners",
-    requiredReceipt: "Current source coverage and access receipt",
-    unavailableReason:
-      "A source coverage and data access page is not available yet.",
+    runtimeOwner:
+      "Meri data-access reader over the read registry, installation and capability policy",
+    requiredReceipt:
+      "Current read-family coverage for the admitted member and selected client; every read still applies its own gates",
   },
 } as const satisfies Record<string, CapabilityDefinition>;
 
 export type MeriCapabilityId = keyof typeof meriCapabilityTable;
 export type MeriCapabilityState = Readonly<{
-  status: "on" | "off" | "unavailable";
+  status: "on" | "off";
   reason: string;
   /** Page access is presentation only, never permission to call a service. */
   navigation: "on" | "off";
@@ -173,20 +170,18 @@ export function resolveMeriCapabilities(
       Object.entries(meriCapabilityTable).map(([id, definition]) => {
         const key = id as MeriCapabilityId;
         const operation: Omit<MeriCapabilityState, "navigation"> =
-          "unavailableReason" in definition
-            ? { status: "unavailable", reason: definition.unavailableReason }
-            : served[key] === true
-              ? {
-                  status: "on",
-                  reason:
-                    "Enabled for this workspace; current access is checked on each request.",
-                }
-              : {
-                  status: "off",
-                  reason:
-                    held[key] ??
-                    "Not enabled or not configured for this workspace.",
-                };
+          served[key] === true
+            ? {
+                status: "on",
+                reason:
+                  "Enabled for this workspace; current access is checked on each request.",
+              }
+            : {
+                status: "off",
+                reason:
+                  held[key] ??
+                  "Not enabled or not configured for this workspace.",
+              };
         const state: MeriCapabilityState = {
           ...operation,
           navigation:

@@ -49,14 +49,6 @@ export const unavailableResources = Object.freeze({
       "A public run-list consumer. conversation-lifecycle/0.1.0 already exports control and checkpoint inspection; activation and safe recovery remain separately qualified.",
     owner: `${conversations}/lifecycle`,
   },
-  approvals: {
-    label: "Approvals",
-    summary:
-      "The approval center is not available yet. Enabled proposal decisions are reviewed within their conversation.",
-    missing:
-      "A workspace-wide approval inbox. Versioned conversation intent list and decision consumers already exist behind their deployment gate.",
-    owner: "neo-capiro/meri-greenfield apps/control (approval owner)",
-  },
   memory: {
     label: "Memory",
     summary:
@@ -71,13 +63,6 @@ export const unavailableResources = Object.freeze({
     missing:
       "Current access and serving configuration for the public routines prepare, approve, list and reconciliation routes.",
     owner: "neo-capiro/meri-greenfield apps/control/schedules",
-  },
-  dataAccess: {
-    label: "Data access",
-    summary: "Source coverage and data access are not available yet.",
-    missing:
-      "A source coverage route. Retrieval contracts exist but have no bound handlers.",
-    owner: "neo-capiro/meri-greenfield gateway and source adapters",
   },
   preferences: {
     label: "Meri preferences",
