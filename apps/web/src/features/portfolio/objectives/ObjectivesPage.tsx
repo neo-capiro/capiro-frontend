@@ -98,6 +98,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
         key={clientId}
         clientId={clientId}
         onClose={() => navigate()}
+        onSaved={(objective) => navigate("objective", objective.id)}
       />
     );
   return (

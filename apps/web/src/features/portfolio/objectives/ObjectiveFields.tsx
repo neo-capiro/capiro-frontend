@@ -1,5 +1,6 @@
 "use client";
 import { useId } from "react";
+import { StrategyIntakeFields } from "@/shared/strategy-intake/StrategyIntakeFields";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import {
   askTypes,
@@ -135,6 +136,16 @@ function ObjectiveAskType({
 
 /** Controlled field presentation shared by the full-page creator and edit drawer. */
 export function ObjectiveFields(props: Props) {
+  if (props.fields.strategyIntake)
+    return (
+      <StrategyIntakeFields
+        value={props.fields.strategyIntake}
+        disabled={props.disabled}
+        onChange={(strategyIntake) =>
+          props.onChange({ ...props.fields, strategyIntake })
+        }
+      />
+    );
   return (
     <fieldset
       className={`stack ${styles.fields} ${props.presentation === "page" ? styles.pageFields : ""}`}

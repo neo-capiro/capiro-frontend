@@ -38,7 +38,7 @@ export function ObjectiveEditor({
         if (!session.mutation.isPending) onOpenChange(value);
       }}
       title="Edit objective"
-      description="Define the outcome and the government action that would make a meaningful win."
+      description="Review your saved answers before generating a Strategy."
       drawer
     >
       <form
@@ -52,7 +52,7 @@ export function ObjectiveEditor({
           <span className="chip">
             {session.record ? statusLabels[session.record.status] : "Draft"}
           </span>
-          <small>Four required fields before review or ready.</small>
+          <small>Complete the required fields before review or ready.</small>
         </div>
         <ObjectiveFields
           fields={session.fields}

@@ -11,35 +11,44 @@ export function ObjectiveReadiness({ fields }: { fields: ObjectiveFields }) {
   const titleId = useId();
   const descriptionId = useId();
   const readiness = objectiveReadiness(fields);
+  const items = fields.strategyIntake
+    ? ([
+        ["type", "Objective type"],
+        ["goal", "Goal statement"],
+        ["ownerUserId", "Owner"],
+      ] as const)
+    : readinessFields;
+  const checklist = readiness.checklist as Record<string, boolean>;
   return (
     <section className={styles.readiness} aria-labelledby={titleId}>
       <header className={styles.readinessHeader}>
         <h3 id={titleId}>Readiness</h3>
         <span
           className={styles.readinessInfo}
-          title="Complete these four fields before requesting review or confirming ready."
+          title="Complete the required fields before requesting review or confirming ready."
           aria-hidden="true"
         >
           i
         </span>
       </header>
       <p id={descriptionId} className="srOnly" role="status" aria-live="polite">
-        {readiness.completedFields} of 4 required fields complete.
+        {readiness.completedFields} of {readiness.requiredFields} required
+        fields complete.
         {readiness.isReady
           ? " Ready for review or confirmation."
           : " Drafts can be saved at any time."}
       </p>
       <ul className={styles.readinessList} aria-describedby={descriptionId}>
-        {readinessFields.map(([key, label]) => (
+        {items.map(([key, label]) => (
           <li key={key}>
             <span
-              className={`${styles.readinessMark} ${readiness.checklist[key] ? styles.readinessComplete : ""}`}
+              className={`${styles.readinessMark} ${checklist[key] ? styles.readinessComplete : ""}`}
               aria-hidden="true"
             >
-              {readiness.checklist[key] ? "✓" : ""}
+              {checklist[key] ? "✓" : ""}
             </span>
             <span>{label}</span>
-            <small>{readiness.checklist[key] ? "Done" : "Needed"}</small>
+            <small>{checklist[key] ? "Done" : "Needed"}</small>
           </li>
         ))}
       </ul>

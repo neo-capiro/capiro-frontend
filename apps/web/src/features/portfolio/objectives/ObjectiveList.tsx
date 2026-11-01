@@ -1,4 +1,5 @@
 "use client";
+import { objectiveTitle } from "./contracts";
 
 import { ArrowUpRight, Pencil, Trash2 } from "lucide-react";
 import { statusLabels, type Objective } from "./contracts";
@@ -15,10 +16,10 @@ export function ObjectiveStats({ records }: { records: Objective[] }) {
   const stats = [
     ["Objectives", records.length],
     // These operational totals are not present in the objective list response.
-    ["Active", "—"],
-    ["Strategy ready", "—"],
-    ["Decisions waiting", "—"],
-    ["Next cycle", "—"],
+    ["Active", "â€”"],
+    ["Strategy ready", "â€”"],
+    ["Decisions waiting", "â€”"],
+    ["Next cycle", "â€”"],
   ] as const;
   return (
     <dl className={styles.stats} aria-label="Objective summary">
@@ -128,7 +129,7 @@ function ObjectiveRow({
     <article className={styles.objectiveRow}>
       <div className={styles.objectiveTop}>
         <button className={styles.titleButton} disabled={busy} onClick={onEdit}>
-          {objective.outcome || "Untitled objective"}
+          {objectiveTitle(objective)}
         </button>
         <span className={styles.objectiveStatus} data-status={objective.status}>
           {statusLabels[objective.status]}
@@ -138,23 +139,34 @@ function ObjectiveRow({
           aria-label={ownerName ?? "Owner unavailable"}
           title={ownerName ?? "Owner unavailable"}
         >
-          {ownerName ?? "—"}
+          {ownerName ?? "â€”"}
         </small>
       </div>
       <div className={styles.objectiveFacts}>
         <span>
-          <strong>Government problem</strong>
-          {objective.governmentProblem || "Not defined"}
+          <strong>
+            {objective.strategyIntake
+              ? "Context for Meri"
+              : "Government problem"}
+          </strong>
+          {(objective.strategyIntake?.meriContext ??
+            objective.governmentProblem) ||
+            "Not provided"}
         </span>
         <span>
-          <strong>Minimum win</strong>
-          {objective.minimumWin || "Not defined"}
+          <strong>
+            {objective.strategyIntake ? "Target outcome date" : "Minimum win"}
+          </strong>
+          {(objective.strategyIntake
+            ? objective.strategyIntake.targetDate
+            : objective.minimumWin) || "Not provided"}
         </span>
       </div>
       <div className={styles.objectiveFoot}>
         <p>
           <strong>Readiness</strong>
-          {objective.readiness.completedFields}/4 required fields
+          {objective.readiness.completedFields}/
+          {objective.readiness.requiredFields} required fields
         </p>
         <div className={styles.objectiveActions}>
           <button
@@ -178,7 +190,7 @@ function ObjectiveRow({
           <button
             type="button"
             disabled={busy}
-            aria-label={`Delete ${objective.outcome || "untitled objective"}`}
+            aria-label={`Delete ${objectiveTitle(objective)}`}
             title="Delete objective"
             onClick={onDelete}
           >

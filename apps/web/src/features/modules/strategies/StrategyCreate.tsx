@@ -1,26 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { parseStrategyIntake } from "@capiro/shared/strategy-intake";
+import type { StrategyDetail } from "@/shared/capiro/operations/strategies-schemas";
+import { useCapiroMutation, useCapiroQuery } from "@/shared/capiro/queries";
+import { ActionButton, Field, Modal, SelectInput } from "@/shared/module-ui";
 import {
-  strategyTypes,
-  type StrategyDetail,
-} from "../../../shared/capiro/operations/strategies-schemas";
-import {
-  useCapiroMutation,
-  useCapiroQuery,
-} from "../../../shared/capiro/queries";
-import {
-  ActionButton,
-  Field,
-  Modal,
-  Panel,
-  SelectInput,
-  TextArea,
-  TextInput,
-  UnavailableAction,
-} from "../../../shared/module-ui";
-import styles from "./strategies.module.css";
-import { objectiveLabels } from "./strategy-model";
+  ObjectiveFields,
+  useObjectiveEditorSession,
+  ObjectiveEditorActions,
+  ObjectiveEditorFeedback,
+  ObjectiveReadyConfirmation,
+} from "@/features/portfolio/objectives/strategy-intake-public";
 
 export function StrategyCreate({
   initialClientId = "",
@@ -32,211 +25,184 @@ export function StrategyCreate({
   onCreated: (strategy: StrategyDetail) => void;
 }) {
   const clients = useCapiroQuery("clients.list", {});
-  const people = useCapiroQuery("planner.bootstrap", {});
   const [clientId, setClientId] = useState(initialClientId);
-  const [type, setType] =
-    useState<(typeof strategyTypes)[number]>("appropriations");
-  const [owner, setOwner] = useState("");
-  const [targetDate, setTargetDate] = useState("");
-  const [goal, setGoal] = useState("");
-  const [context, setContext] = useState("");
-  const [title, setTitle] = useState("");
   const [discard, setDiscard] = useState(false);
-  const create = useCapiroMutation("strategies.create");
-  const permittedClients = (clients.data ?? []).filter(
+  const permitted = (clients.data ?? []).filter(
     (client) => client.status !== "archived",
   );
-  const currentClient =
+  const current =
     !clients.loading &&
     !clients.error &&
-    permittedClients.some((client) => client.id === clientId);
-  async function save() {
-    if (!currentClient) return;
-    try {
-      const result = await create.run({
-        body: {
-          clientId,
-          type,
-          ownerUserId: owner || undefined,
-          targetDate: targetDate || undefined,
-          goal,
-          meriContext: context,
-          title: title || undefined,
-        },
-      });
-      onCreated(result);
-    } catch {
-      /* Required fields and server validation remain reviewable. */
-    }
-  }
-  const errors = clients.error ?? people.error;
+    permitted.some((client) => client.id === clientId);
   return (
     <>
       <Modal
         open
         onOpenChange={(open) => {
-          if (!open && !create.pending) setDiscard(true);
+          if (!open) setDiscard(true);
         }}
         title="New strategy"
-        description="Start with a clear client goal."
-        footer={
-          <>
-            <ActionButton
-              disabled={create.pending}
-              onClick={() => setDiscard(true)}
-            >
-              Cancel
-            </ActionButton>
-            <ActionButton
-              primary
-              disabled={create.pending || !currentClient || !goal.trim()}
-              onClick={save}
-            >
-              {create.pending ? "Creating…" : "Create strategy"}
-            </ActionButton>
-          </>
-        }
+        description="Start with the same saved answers used in Objectives."
       >
-        <div className={styles.form}>
-          <Panel title="Strategy details">
-            <div className={styles.grid}>
-              <Field label="Client *" htmlFor="strategy-new-client">
-                <SelectInput
-                  id="strategy-new-client"
-                  value={clientId}
-                  onValueChange={setClientId}
-                  options={[
-                    { value: "", label: "Choose client" },
-                    ...(clientId &&
-                    !permittedClients.some((client) => client.id === clientId)
-                      ? [
-                          {
-                            value: clientId,
-                            label: clients.loading
-                              ? "Checking selected client"
-                              : "Selected client unavailable",
-                          },
-                        ]
-                      : []),
-                    ...permittedClients.map((client) => ({
-                      value: client.id,
-                      label: client.name,
-                    })),
-                  ]}
-                />
-              </Field>
-              <Field label="Objective type *" htmlFor="strategy-new-type">
-                <SelectInput
-                  id="strategy-new-type"
-                  value={type}
-                  onValueChange={(value) => setType(value as typeof type)}
-                  options={strategyTypes.map((value) => ({
-                    value,
-                    label: objectiveLabels[value],
-                  }))}
-                />
-              </Field>
-              <Field
-                label="Owner"
-                htmlFor="strategy-new-owner"
-                description="Defaults to your signed-in account."
-              >
-                <SelectInput
-                  id="strategy-new-owner"
-                  value={owner}
-                  onValueChange={setOwner}
-                  options={[
-                    { value: "", label: "Me" },
-                    ...(people.data?.people ?? []).map((person) => ({
-                      value: person.id,
-                      label: person.name,
-                    })),
-                  ]}
-                />
-              </Field>
-              <Field label="Target outcome date" htmlFor="strategy-new-target">
-                <TextInput
-                  id="strategy-new-target"
-                  type="date"
-                  value={targetDate}
-                  onChange={(event) => setTargetDate(event.target.value)}
-                />
-              </Field>
-            </div>
-            <Field label="Title (optional)" htmlFor="strategy-new-title">
-              <TextInput
-                id="strategy-new-title"
-                maxLength={200}
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
-              />
-            </Field>
-          </Panel>
-          <Panel title="Goal and context">
-            <div className={styles.form}>
-              <Field
-                label="Goal statement *"
-                htmlFor="strategy-new-goal"
-                description="Required · Up to 4,000 characters"
-              >
-                <TextArea
-                  id="strategy-new-goal"
-                  value={goal}
-                  maxLength={4000}
-                  onChange={(event) => setGoal(event.target.value)}
-                />
-              </Field>
-              <Field
-                label="Context for Meri"
-                htmlFor="strategy-new-context"
-                description="Optional · Up to 8,000 characters"
-              >
-                <TextArea
-                  id="strategy-new-context"
-                  value={context}
-                  maxLength={8000}
-                  onChange={(event) => setContext(event.target.value)}
-                />
-              </Field>
-            </div>
-          </Panel>
-          <Panel title="Starting point">
-            <label className={styles.check}>
-              <input type="radio" checked readOnly />
-              Create an empty timeline
-            </label>
-            <p className={styles.muted}>Build the working plan yourself.</p>
-            <UnavailableAction reason="The new Meri strategy-drafting contract is not connected yet.">
-              Draft with Meri
-            </UnavailableAction>
-          </Panel>
-          {(create.error || errors) && (
-            <p role="alert" className={styles.error}>
-              {(create.error ?? errors)?.message}
-            </p>
-          )}
-        </div>
+        <Field label="Client · Required" htmlFor="strategy-intake-client">
+          <SelectInput
+            id="strategy-intake-client"
+            value={clientId}
+            onValueChange={setClientId}
+            options={[
+              { value: "", label: "Choose client" },
+              ...permitted.map((client) => ({
+                value: client.id,
+                label: client.name,
+              })),
+            ]}
+          />
+        </Field>
+        {clients.error && (
+          <p role="alert">
+            Clients could not be loaded.{" "}
+            <button onClick={clients.reload}>Retry clients</button>
+          </p>
+        )}
+        {current && (
+          <StrategySetup
+            key={clientId}
+            clientId={clientId}
+            onCreated={onCreated}
+          />
+        )}
+        <ActionButton onClick={() => setDiscard(true)}>Cancel</ActionButton>
       </Modal>
       <Modal
         open={discard}
         onOpenChange={setDiscard}
-        title="Discard strategy setup?"
-        description="Unsaved fields will be lost."
+        title="Leave strategy setup?"
+        description="Saved Objectives remain available. Unsaved fields will be lost."
         footer={
           <>
             <ActionButton onClick={() => setDiscard(false)}>
               Keep editing
             </ActionButton>
-            <ActionButton primary onClick={onClose}>
-              Discard setup
-            </ActionButton>
+            <ActionButton onClick={onClose}>Leave setup</ActionButton>
           </>
         }
       >
         <p>
-          No strategy is created until the service acknowledges your submission.
+          A save already sent may still complete. Reopen Objectives to recover
+          saved answers.
         </p>
       </Modal>
+    </>
+  );
+}
+
+function StrategySetup({
+  clientId,
+  onCreated,
+}: {
+  clientId: string;
+  onCreated: (strategy: StrategyDetail) => void;
+}) {
+  const router = useRouter();
+  const [mode, setMode] = useState<"meri" | "empty">("meri");
+  const [error, setError] = useState("");
+  const create = useCapiroMutation("strategies.create");
+  const session = useObjectiveEditorSession({
+    clientId,
+    onSaved: (objective) => {
+      router.push(
+        `/portfolio/${clientId}/objectives?objective=${objective.id}`,
+      );
+    },
+  });
+  const busy = session.mutation.isPending || create.pending;
+  async function createEmpty() {
+    try {
+      const intake = parseStrategyIntake(session.fields.strategyIntake, {
+        requireComplete: true,
+      });
+      const result = await create.run({
+        body: {
+          clientId,
+          type: intake.type,
+          goal: intake.goal,
+          meriContext: intake.meriContext,
+          ownerUserId: intake.ownerUserId,
+          targetDate: intake.targetDate ?? undefined,
+        },
+      });
+      onCreated(result);
+    } catch (failure) {
+      setError(
+        failure instanceof Error
+          ? failure.message
+          : "Strategy could not be created.",
+      );
+    }
+  }
+  return (
+    <>
+      <form
+        className="stack"
+        onSubmit={(event) => {
+          event.preventDefault();
+          if (mode === "meri") session.submit("save");
+          else void createEmpty();
+        }}
+      >
+        <ObjectiveFields
+          fields={session.fields}
+          onChange={session.setFields}
+          disabled={busy}
+          presentation="dialog"
+        />
+        <fieldset disabled={busy}>
+          <legend>Starting point</legend>
+          <label>
+            <input
+              type="radio"
+              name="strategy-start"
+              checked={mode === "meri"}
+              onChange={() => setMode("meri")}
+            />{" "}
+            Fill with Meri
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="strategy-start"
+              checked={mode === "empty"}
+              onChange={() => setMode("empty")}
+            />{" "}
+            Empty timeline
+          </label>
+        </fieldset>
+        {mode === "meri" ? (
+          <>
+            <p>
+              Save these answers as an Objective, then review and start
+              generation. Prepare Planner remains a separate action.
+            </p>
+            <ObjectiveEditorFeedback session={session} />
+            <ObjectiveEditorActions session={session} />
+          </>
+        ) : (
+          <ActionButton
+            primary
+            disabled={busy}
+            onClick={() => void createEmpty()}
+          >
+            Create empty timeline
+          </ActionButton>
+        )}
+        {(error || create.error) && (
+          <p role="alert">{error || create.error?.message}</p>
+        )}
+        <Link href={`/portfolio/${clientId}/objectives`}>
+          Resume a saved Objective
+        </Link>
+      </form>
+      <ObjectiveReadyConfirmation session={session} />
     </>
   );
 }
