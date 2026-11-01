@@ -69,6 +69,13 @@ type Page =
   | { status: "denied" };
 type ReadyPage = Extract<Page, { status: "ready" }>;
 
+/** Empty pages are followed by themselves at most this many times before the person is asked to continue. */
+const AUTO_PAGES = 20;
+const sameCursor = (a: Cursor | null, b: Cursor) =>
+  a !== null &&
+  a.conversationId === b.conversationId &&
+  a.deliveryId === b.deliveryId;
+
 /** Pending counts add up across the pages shown; `complete` is the last page's answer. */
 const merge = (
   current: Page,
@@ -105,10 +112,12 @@ function Connected({
     setPage(next);
   };
   const [cursor, setCursor] = useState<Cursor | null>(null);
+  const autoPages = useRef(0);
   const alive = useRef(true);
   // One read per cursor: the first page on mount, an older page when the person asks for it, and the
   // next page by itself while nothing has been found yet (a page can be empty when a conversation was
-  // deleted), so an empty state is only ever shown once the inbox's end was reached.
+  // deleted). The empty state is only ever shown once the inbox's end was reached; a repeated cursor or
+  // too many empty pages stop the automatic reads and leave the person a retry.
   useEffect(() => {
     alive.current = true;
     const controller = new AbortController();
@@ -124,9 +133,20 @@ function Connected({
       .then((answer) => {
         if (!alive.current || controller.signal.aborted) return;
         const merged = merge(shown.current, answer, cursor !== null);
+        if (merged.rows.length > 0 || answer.next === null) {
+          update(merged);
+          return;
+        }
+        if (
+          sameCursor(cursor, answer.next) ||
+          autoPages.current >= AUTO_PAGES
+        ) {
+          update({ ...merged, loadMoreFailed: true });
+          return;
+        }
         update(merged);
-        if (merged.rows.length === 0 && answer.next !== null)
-          setCursor(answer.next);
+        autoPages.current += 1;
+        setCursor(answer.next);
       })
       .catch((error: unknown) => {
         if (!alive.current || controller.signal.aborted) return;
@@ -180,8 +200,7 @@ function Connected({
         Reload to try again; nothing was decided.
       </p>
     );
-  const waiting = page.rows.length === 0 && page.next !== null;
-  if (waiting && !page.loadMoreFailed)
+  if (page.rows.length === 0 && page.next !== null && !page.loadMoreFailed)
     return <p role="status">Reading your proposals…</p>;
   return (
     <ApprovalInbox
@@ -194,9 +213,16 @@ function Connected({
       }}
       onLoadMore={() => {
         if (!page.next) return;
+        autoPages.current = 0;
         update({ ...page, loadingMore: true, loadMoreFailed: false });
-        // The same cursor again after a failure, or the next one.
-        setCursor(page.loadMoreFailed && cursor ? { ...cursor } : page.next);
+        // After a failure the same cursor is read again; otherwise the next one.
+        setCursor(
+          page.loadMoreFailed && cursor
+            ? { ...cursor }
+            : page.loadMoreFailed
+              ? { ...page.next }
+              : page.next,
+        );
       }}
     />
   );

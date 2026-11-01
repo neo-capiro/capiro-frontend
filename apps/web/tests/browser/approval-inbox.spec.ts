@@ -89,13 +89,14 @@ test("an empty page with a cursor is never shown as empty: the inbox keeps readi
 }) => {
   await installFixtures(page);
   const cursor = cursorTo(inboxPage.rows[2]!);
+  const later = cursorTo(inboxPage.rows[1]!);
   const emptyWithMore = {
     rows: [],
     next: cursor,
     pending: { count: 0, complete: false },
   };
   const calls = await serveMeri(page, {
-    inbox: [emptyWithMore, emptyWithMore, inboxPage],
+    inbox: [{ ...emptyWithMore, next: later }, emptyWithMore, inboxPage],
   });
   await page.goto("/approval-inbox.html");
   await expect(page.locator("tbody tr")).toHaveCount(3);
@@ -104,7 +105,7 @@ test("an empty page with a cursor is never shown as empty: the inbox keeps readi
   ).toHaveCount(0);
   expect(inboxCalls(calls)).toEqual([
     { limit: 50 },
-    { limit: 50, after: cursor },
+    { limit: 50, after: later },
     { limit: 50, after: cursor },
   ]);
   await page.unroute("**/api/conversations/**");
@@ -118,6 +119,51 @@ test("an empty page with a cursor is never shown as empty: the inbox keeps readi
   await expect(page.getByRole("status")).toContainText(
     "No proposals have been prepared for you yet.",
   );
+});
+
+test("a failed or repeating automatic page never ends in the empty copy: the person gets the retry state", async ({
+  page,
+}) => {
+  await installFixtures(page);
+  const cursor = cursorTo(inboxPage.rows[2]!);
+  const emptyWithMore = {
+    rows: [],
+    next: cursor,
+    pending: { count: 0, complete: false },
+  };
+  const calls = await serveMeri(page, {
+    inbox: [emptyWithMore, 503, inboxPage],
+  });
+  await page.goto("/approval-inbox.html");
+  await expect(page.getByRole("status")).toContainText(
+    "Your proposals could not all be read yet.",
+  );
+  await expect(
+    page.getByText("No proposals have been prepared for you yet."),
+  ).toHaveCount(0);
+  await page
+    .getByRole("button", { name: "Retry loading older proposals" })
+    .click();
+  await expect(page.locator("tbody tr")).toHaveCount(3);
+  expect(inboxCalls(calls)).toEqual([
+    { limit: 50 },
+    { limit: 50, after: cursor },
+    { limit: 50, after: cursor },
+  ]);
+  // A cursor the server keeps repeating stops the automatic reads after one follow-up.
+  await page.unroute("**/api/conversations/**");
+  const repeated = await serveMeri(page, { inbox: [emptyWithMore] });
+  await page.reload();
+  await expect(page.getByRole("status")).toContainText(
+    "Your proposals could not all be read yet.",
+  );
+  await expect(
+    page.getByRole("button", { name: "Retry loading older proposals" }),
+  ).toBeVisible();
+  expect(inboxCalls(repeated)).toEqual([
+    { limit: 50 },
+    { limit: 50, after: cursor },
+  ]);
 });
 
 test("a failed read of older proposals keeps the rows already shown and offers a retry", async ({

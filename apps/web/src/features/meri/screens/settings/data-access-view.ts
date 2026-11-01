@@ -9,7 +9,6 @@ export type DataAccessFamilyRow = {
   id: string;
   family: string;
   covers: string;
-  freshness: string;
   state: { label: string; tone: StatusTone };
 };
 
@@ -64,47 +63,75 @@ export function familyState(
   return stateLabels[family.state];
 }
 
-/** Result-field names the guidance cites, said in words. */
-const fieldWords: Readonly<Record<string, string>> = {
-  asOf: "as-of time",
-  asOfDate: "as-of date",
-  sourceAsOf: "source as-of time",
-  sourceVersion: "source version",
-  generatedAt: "generation time",
-  observedAt: "observation time",
-  knownAt: "known-at time",
-  createdAt: "creation time",
-  updatedAt: "update time",
-  recordedAt: "recorded time",
-  checkedAt: "checked time",
-  nextCursor: "a next-page cursor",
-  nextPage: "a next-page marker",
-  hasMore: "a more-results flag",
-  rowLimitReached: "a row-limit flag",
-  byteTruncated: "a size-limit flag",
-  revisionId: "revision identifier",
-  versionId: "version identifier",
-  observationId: "observation identifier",
+/** Plain names for the sources; a source without one is named from its identifier in words. */
+export const familyLabels: Readonly<Record<string, string>> = {
+  "acquisition-personnel": "Acquisition personnel",
+  "action-items-complete": "Action items",
+  "bill-text": "Bill text",
+  "business-development": "Business development",
+  "buyer-workspace": "Buyer workspace",
+  "capiro-data": "Capiro data (SQL)",
+  "certification-status": "Certification status",
+  "client-documents": "Client documents",
+  "client-knowledge-attachments": "Client attachments",
+  "client-knowledge-memory": "Client memory",
+  "client-knowledge-monday": "Client Monday boards",
+  "client-knowledge-profile": "Client profiles",
+  "client-knowledge-search": "Client knowledge search",
+  "client-registry": "Client registry",
+  "connected-apps": "Connected apps",
+  "data-search": "Data search",
+  "dataset-metadata": "Dataset descriptions",
+  disclosures: "Lobbying disclosures",
+  "district-nexus": "District nexus",
+  "entity-candidates": "Entity matches",
+  "facility-representation": "Facility representation",
+  "federal-draft-source": "Federal drafting sources",
+  "federal-legislation": "Federal legislation",
+  "federal-market": "Federal market",
+  "florida-budget": "Florida budget",
+  "funding-analysis": "Funding analysis",
+  "funding-opportunities": "Funding opportunities",
+  "graph-paths": "Relationship paths",
+  "intelligence-summary": "Intelligence summaries",
+  "legislative-comparisons": "Legislative comparisons",
+  "legislative-directory": "Legislative directory",
+  "legiwatch-relevance": "LegiWatch relevance",
+  "legiwatch-review": "LegiWatch review",
+  mail: "Mail",
+  "meeting-source": "Meetings",
+  "memory-proposals": "Memory proposals",
+  "operational-reads": "Operational records",
+  "outreach-query": "Outreach",
+  "pe-references": "Program element references",
+  "program-elements": "Program elements",
+  "public-data": "Public data",
+  "public-domain-hearings": "Hearings",
+  "public-domain-query": "Public datasets",
+  "public-reports": "Public reports",
+  "public-web": "Public web",
+  "regulatory-dockets": "Regulatory dockets",
+  "research-legal-candidates": "Legal research candidates",
+  "research-legal-legislation": "Legal and legislative research",
+  "research-legal-news": "Legal news",
+  "research-portfolio": "Research portfolios",
+  "research-portfolio-evidence": "Research portfolio evidence",
+  "research-portfolio-sharing": "Research portfolio sharing",
+  "research-portfolio-workflow": "Research portfolio workflow",
+  "rule-status": "Rule status",
+  "sam-opportunities": "SAM.gov opportunities",
+  "saved-records": "Saved records",
+  "state-legislation": "State legislation",
+  "state-status-votes": "State status and votes",
+  "stored-intelligence": "Stored intelligence",
+  "strategy-saved-records": "Strategy and Planner records",
+  "teams-channels": "Teams channels",
+  "tenant-contacts": "Contacts",
+  "tracked-bills": "Tracked bills",
+  "watch-state": "Watch state",
 };
-/** Turns a camelCase field name into words when it is not in the table. */
-const words = (token: string) =>
-  fieldWords[token] ??
-  token
-    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-    .replace(/[_/]/g, " ")
-    .toLowerCase();
-/** The guidance sentence with field names spoken as words, never raw identifiers. */
-export function freshnessSentence(text: string | null) {
-  if (text === null)
-    return "No freshness or version information is published for this source.";
-  const spoken = text
-    .replace(/\b[a-z]+(?:[A-Z][a-z0-9]*)+\b/g, (token) => words(token))
-    .replace(/\s+/g, " ")
-    .trim();
-  return /[.!?]$/.test(spoken) ? spoken : `${spoken}.`;
-}
-
 const title = (id: string) =>
+  familyLabels[id] ??
   id.replaceAll("-", " ").replace(/^./, (c) => c.toUpperCase());
 const isSql = (family: DataAccessFamily) =>
   family.family.startsWith("capiro-data");
@@ -124,23 +151,20 @@ export function familyRows(
     .filter(isSql)
     .sort((a, b) => rank[b.state] - rank[a.state]);
   const rows = [
-    ...(sql[0]
-      ? [{ ...sql[0], family: "capiro-data", label: "Capiro data (SQL)" }]
-      : []),
-    ...installed
-      .filter((family) => !isSql(family))
-      .map((family) => ({ ...family, label: title(family.family) })),
-  ].sort((a, b) => a.label.localeCompare(b.label));
+    ...(sql[0] ? [{ ...sql[0], family: "capiro-data" }] : []),
+    ...installed.filter((family) => !isSql(family)),
+  ]
+    .map((family) => ({ ...family, label: title(family.family) }))
+    .sort((a, b) => a.label.localeCompare(b.label));
   return rows.map((family) => ({
     id: family.family,
     family: family.label,
     covers: family.covers ?? "No description is published for this source yet.",
-    freshness: freshnessSentence(family.freshness),
     state: familyState(family, connections),
   }));
 }
 
-/** Relation names as plain labels. */
+/** Data table names as plain labels. */
 export const relationLabel = (name: string) =>
   name.replaceAll("_", " ").replace(/^./, (c) => c.toUpperCase());
 

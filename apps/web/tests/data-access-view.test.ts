@@ -4,7 +4,6 @@ import {
   availableCount,
   familyRows,
   familyState,
-  freshnessSentence,
   hasMailbox,
   relationRow,
   type ConnectionsRead,
@@ -16,7 +15,6 @@ const family = (over: Partial<DataAccessFamily> = {}): DataAccessFamily => ({
   freshness: "Rows with generatedAt, sourceAsOf and sourceVersion when known.",
   structured: true,
   clientScope: "optional",
-  operations: ["describe_capiro_data", "query_capiro_data"],
   state: "available",
   requires: null,
   ...over,
@@ -66,7 +64,7 @@ it("states are shown as Meri gave them; a mailbox-only source waits for the memb
   expect(hasMailbox([])).toBe(false);
 });
 
-it("rows hide uninstalled sources, collapse the SQL versions into one Capiro data row with the best state, and never show raw ids", () => {
+it("rows hide uninstalled sources, collapse the SQL versions into one Capiro data row with the best state, and use plain names", () => {
   const rows = familyRows(
     [
       family({ family: "capiro-data", state: "policy_off" }),
@@ -75,22 +73,24 @@ it("rows hide uninstalled sources, collapse the SQL versions into one Capiro dat
       family({ family: "federal-legislation", state: "not_installed" }),
       family({ family: "mail", requires: "mailbox", structured: false }),
       family({ family: "public-reports", covers: null, freshness: null }),
+      family({ family: "pe-references" }),
+      family({ family: "operational-reads" }),
     ],
     connected,
   );
   expect(rows.map((row) => [row.family, row.state.label])).toEqual([
     ["Capiro data (SQL)", "Available"],
     ["Mail", "Available"],
+    ["Operational records", "Available"],
+    ["Program element references", "Available"],
     ["Public reports", "Available"],
   ]);
+  expect(rows.some((row) => "freshness" in row)).toBe(false);
   expect(rows.map((row) => row.family).join()).not.toMatch(/capiro-data|v\d/);
-  expect(rows[2]!.covers).toBe(
+  expect(rows[4]!.covers).toBe(
     "No description is published for this source yet.",
   );
-  expect(rows[2]!.freshness).toBe(
-    "No freshness or version information is published for this source.",
-  );
-  expect(availableCount(rows)).toBe(3);
+  expect(availableCount(rows)).toBe(5);
   expect(
     availableCount(
       familyRows(
@@ -99,32 +99,6 @@ it("rows hide uninstalled sources, collapse the SQL versions into one Capiro dat
       ),
     ),
   ).toBe(1);
-});
-
-it("freshness is a sentence in words, never a raw result-field name", () => {
-  expect(
-    freshnessSentence(
-      "Rows with generatedAt, sourceAsOf and sourceVersion when known",
-    ),
-  ).toBe(
-    "Rows with generation time, source as-of time and source version when known.",
-  );
-  expect(
-    freshnessSentence(
-      "Message candidates with asOf and record/snapshot versions; coverage and hasMore declare an incomplete page.",
-    ),
-  ).toBe(
-    "Message candidates with as-of time and record/snapshot versions; coverage and a more-results flag declare an incomplete page.",
-  );
-  expect(freshnessSentence("Paths carry observedAt and knownAt")).toBe(
-    "Paths carry observation time and known-at time.",
-  );
-  expect(freshnessSentence("Pages end with nextCursor and byteTruncated")).toBe(
-    "Pages end with a next-page cursor and a size-limit flag.",
-  );
-  expect(freshnessSentence("Each row has a revisionId")).not.toMatch(
-    /[a-z][A-Z]/,
-  );
 });
 
 it("data tables are plain labels with Meri's state", () => {

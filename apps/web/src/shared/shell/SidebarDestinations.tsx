@@ -109,11 +109,8 @@ export const preferencesHref = (
     ? "/meri/fixture/personal-preferences"
     : meriCapabilityHref("preferences", capabilities);
 
-/** A destination label; Approvals carries the pending count when one is supplied ("50+" when the page was not the whole inbox). */
-export const destinationLabel = (
-  label: string,
-  pendingApprovals?: number | string,
-) =>
+/** A destination label; Approvals carries the open count when one is supplied. */
+export const destinationLabel = (label: string, pendingApprovals?: number) =>
   label === "Approvals" && pendingApprovals !== undefined
     ? `Approvals · ${pendingApprovals}`
     : label;

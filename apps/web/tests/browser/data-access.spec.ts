@@ -12,13 +12,14 @@ test("General shows installed sources only, one Capiro data row, plain labels, a
   await expect(sources).toBeVisible();
   const rows = sources.locator("tbody tr");
   await expect(rows).toHaveCount(4);
-  await expect(rows.nth(0)).toContainText("Action items complete");
+  await expect(rows.nth(0)).toContainText("Action items");
   await expect(rows.nth(0)).toContainText("Needs a selected client");
   await expect(rows.nth(1)).toContainText("Capiro data (SQL)");
   await expect(rows.nth(1)).toContainText("Available");
-  await expect(rows.nth(1)).toContainText(
-    "Records carry as-of time and a source version.",
-  );
+  await expect(sources.locator("thead")).not.toContainText("Freshness");
+  await expect(
+    page.getByRole("table", { name: "Public data tables" }).locator("thead"),
+  ).toContainText("Data");
   await expect(rows.nth(2)).toContainText("Mail");
   await expect(rows.nth(2)).toContainText("Connector not connected");
   await expect(rows.nth(3)).toContainText("Public reports");
@@ -31,6 +32,8 @@ test("General shows installed sources only, one Capiro data row, plain labels, a
     "capiro-data",
     "v5",
     "asOf",
+    "sourceVersion",
+    "Freshness",
     "Not installed",
     "registry",
     "policy resolution",

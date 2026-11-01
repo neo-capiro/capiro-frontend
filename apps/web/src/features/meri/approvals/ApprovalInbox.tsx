@@ -68,7 +68,9 @@ export function ApprovalInbox({
     <section aria-label="Approval inbox">
       <p role="status" className={ui.muted}>
         {page.rows.length === 0
-          ? "No proposals have been prepared for you yet."
+          ? page.loadMoreFailed
+            ? "Your proposals could not all be read yet."
+            : "No proposals have been prepared for you yet."
           : `${pending} Open a conversation to review and decide; nothing is approved from this list.`}
       </p>
       {page.rows.length > 0 ? (

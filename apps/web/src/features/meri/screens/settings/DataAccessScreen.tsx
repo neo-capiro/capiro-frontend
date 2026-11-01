@@ -44,15 +44,9 @@ const familyColumns: readonly DataColumn<DataAccessFamilyRow>[] = [
       <StatusPill tone={row.state.tone}>{row.state.label}</StatusPill>
     ),
   },
-  {
-    key: "freshness",
-    label: "Freshness",
-    width: 320,
-    render: (row) => row.freshness,
-  },
 ];
 const relationColumns: readonly DataColumn<DataAccessRelationRow>[] = [
-  { key: "name", label: "Table", width: 300, render: (row) => row.name },
+  { key: "name", label: "Data", width: 300, render: (row) => row.name },
   {
     key: "state",
     label: "State",
