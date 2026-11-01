@@ -62,12 +62,19 @@ export function PersonnelDirectory({
       scroll: false,
     });
   };
+  // A seeded `personnelQ` only initialises the search box. Any filter edit
+  // drops it, so a reload cannot re-apply a query the person has moved on from.
   const updateFilters = (
     updates: Record<string, string>,
     history: "push" | "replace" = "push",
   ) =>
     updateParams(
-      { ...updates, personnelId: "", personnelPreviewId: "" },
+      {
+        ...updates,
+        personnelQ: "",
+        personnelId: "",
+        personnelPreviewId: "",
+      },
       history,
     );
   useEffect(() => {
@@ -138,7 +145,8 @@ export function PersonnelDirectory({
             maxLength={500}
             onChange={(e) => {
               setQ(e.target.value.slice(0, 500));
-              if (page !== 1) updateFilters({ personnelPage: "" }, "replace");
+              if (page !== 1 || params.has("personnelQ"))
+                updateFilters({ personnelPage: "" }, "replace");
             }}
           />
           <SelectInput

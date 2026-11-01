@@ -24,7 +24,9 @@ export function DirectoryPagination({
 }) {
   const count =
     shown ??
-    (total ? Math.max(0, Math.min(pageSize, total - (page - 1) * pageSize)) : 0);
+    (total
+      ? Math.max(0, Math.min(pageSize, total - (page - 1) * pageSize))
+      : 0);
   const start = count ? (page - 1) * pageSize + 1 : 0;
   const end = count ? start + count - 1 : 0;
   const more = hasMore ?? page * pageSize < total;

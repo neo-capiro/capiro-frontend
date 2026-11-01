@@ -182,10 +182,7 @@ export function CongressionalContacts({
                         >
                           {expanded.has(c.id) ? "−" : "+"}
                         </button>
-                        <MemberPhoto
-                          name={c.fullName}
-                          photoUrl={c.photoUrl}
-                        />
+                        <MemberPhoto name={c.fullName} photoUrl={c.photoUrl} />
                         <button
                           className={`${styles.link} ${styles.personLabel}`}
                           onClick={() => setSelected(c)}

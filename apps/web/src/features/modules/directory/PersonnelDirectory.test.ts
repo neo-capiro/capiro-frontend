@@ -9,6 +9,8 @@ const route = vi.hoisted(() => ({
   replaced: [] as string[],
   inputValue: "",
   inputChange: null as ((event: { target: { value: string } }) => void) | null,
+  selects: new Map<string, (value: string) => void>(),
+  clearAll: null as (() => void) | null,
   page: 0,
   pageChange: null as ((page: number) => void) | null,
   rowClick: null as (() => void) | null,
@@ -20,6 +22,29 @@ const route = vi.hoisted(() => ({
   listLoading: false,
   query: null as Record<string, unknown> | null,
 }));
+
+// "Clear all" is a plain <button>, not a module-ui component, and static markup
+// carries no handlers: capture its onClick as the element is created.
+function captureClearAll<T extends (...args: never[]) => unknown>(create: T) {
+  return ((type: unknown, props: unknown, ...rest: never[]) => {
+    const p = props as { children?: unknown; onClick?: () => void } | null;
+    if (type === "button" && p?.children === "Clear all")
+      route.clearAll = p.onClick ?? null;
+    return create(...([type, props, ...rest] as never[]));
+  }) as unknown as T;
+}
+vi.mock("react/jsx-runtime", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react/jsx-runtime")>();
+  return {
+    ...actual,
+    jsx: captureClearAll(actual.jsx),
+    jsxs: captureClearAll(actual.jsxs),
+  };
+});
+vi.mock("react/jsx-dev-runtime", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react/jsx-dev-runtime")>();
+  return { ...actual, jsxDEV: captureClearAll(actual.jsxDEV) };
+});
 
 vi.mock("next/navigation", () => ({
   usePathname: () => "/modules/directory",
@@ -102,6 +127,22 @@ vi.mock("../../../shared/module-ui", () => ({
   },
   Panel: ({ children }: { children: ReactNode }) =>
     createElement("section", null, children),
+  SelectInput: ({
+    "aria-label": label,
+    value,
+    onValueChange,
+  }: {
+    "aria-label": string;
+    value: string;
+    onValueChange: (value: string) => void;
+  }) => {
+    route.selects.set(label, onValueChange);
+    return createElement("select", {
+      "aria-label": label,
+      value,
+      readOnly: true,
+    });
+  },
   StatusPanel: ({ children }: { children: ReactNode }) =>
     createElement("div", null, children),
   TextInput: ({
@@ -165,6 +206,8 @@ beforeEach(() => {
   route.pushed = [];
   route.replaced = [];
   route.query = null;
+  route.selects.clear();
+  route.clearAll = null;
   route.rowClick = null;
   route.previewOpen = null;
   route.detailBack = null;
@@ -194,6 +237,7 @@ it("restores bounded Personnel filters and preserves other URL hints on edits", 
   route.pageChange?.(3);
   expect(route.pushed[0]).toContain("clientId=client-1");
   expect(route.pushed[0]).toContain("personnelPage=3");
+  expect(route.pushed[0]).not.toContain("personnelQ");
 
   route.search =
     "view=department-of-war&personnelQ=" +
@@ -206,6 +250,51 @@ it("restores bounded Personnel filters and preserves other URL hints on edits", 
     pe_aligned: undefined,
     page: 1,
   });
+});
+
+it("drops a seeded personnelQ from the URL on Clear all", () => {
+  render();
+  expect(route.clearAll).toBeTypeOf("function");
+  route.clearAll?.();
+  expect(route.pushed).toEqual([
+    "/modules/directory?view=department-of-war&clientId=client-1",
+  ]);
+  route.search = route.pushed[0]!.split("?")[1]!;
+  render();
+  expect(route.inputValue).toBe("");
+  expect(route.query).toMatchObject({
+    q: "",
+    service: undefined,
+    pe_aligned: undefined,
+    page: 1,
+  });
+});
+
+it("does not re-propagate a seeded personnelQ on a filter edit", () => {
+  render();
+  route.selects.get("Service")?.("Navy");
+  expect(route.pushed.at(-1)).toBe(
+    "/modules/directory?view=department-of-war&clientId=client-1&personnelService=Navy&personnelAligned=aligned",
+  );
+  route.selects.get("PE alignment")?.("unaligned");
+  expect(route.pushed.at(-1)).toContain("personnelAligned=unaligned");
+  expect(route.pushed.at(-1)).not.toContain("personnelQ");
+
+  // Typing on page 1 still has to retire the seeded query, or a reload would
+  // search for text the person has already replaced.
+  route.search = "view=department-of-war&personnelQ=policy";
+  render();
+  route.inputChange?.({ target: { value: "space" } });
+  expect(route.replaced.at(-1)).toBe(
+    "/modules/directory?view=department-of-war",
+  );
+
+  // Without a seeded query, typing on page 1 touches nothing in the URL.
+  route.search = "view=department-of-war&personnelService=Army";
+  route.replaced = [];
+  render();
+  route.inputChange?.({ target: { value: "space" } });
+  expect(route.replaced).toEqual([]);
 });
 
 it("selects a current row before opening its profile and restores both URL states", () => {
