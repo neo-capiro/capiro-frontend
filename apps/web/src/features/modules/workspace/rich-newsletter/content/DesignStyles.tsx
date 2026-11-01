@@ -8,6 +8,7 @@ import type {
 import { Choice, Entry, NumberEntry, Toggle } from "./Fields";
 import { StyleFields } from "./StyleFields";
 import styles from "./content.module.css";
+import workspace from "../workspace.module.css";
 
 export function SectionSettings({
   section,
@@ -81,10 +82,8 @@ export function DesignStyles({
   return (
     <section className={styles.panel} aria-label="Email styles">
       <h2>Email styles</h2>
-      <Choice
-        label="Style category"
-        value={category}
-        values={[
+      <div className={workspace.styleTabs} aria-label="Style category">
+        {[
           "background",
           "text",
           "link",
@@ -92,9 +91,16 @@ export function DesignStyles({
           "divider",
           "image",
           "logo",
-        ]}
-        change={setCategory}
-      />
+        ].map((name) => (
+          <button
+            key={name}
+            aria-pressed={category === name}
+            onClick={() => setCategory(name)}
+          >
+            {name.charAt(0).toUpperCase() + name.slice(1)}
+          </button>
+        ))}
+      </div>
       {category === "background" ? (
         <>
           <Entry

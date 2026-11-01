@@ -97,7 +97,10 @@ describe("available opportunities are not mislabeled as proven matches", () => {
     return renderToStaticMarkup(
       createElement(OpportunitiesPage, {
         clientId,
-        destinations: { existingApp: "https://example.test" },
+        destinations: {
+          existingApp: "https://example.test",
+          externalApp: "https://example.test",
+        },
       }),
     );
   }
@@ -128,7 +131,7 @@ describe("available opportunities are not mislabeled as proven matches", () => {
     );
     expect(html).toContain("No saved workflow status");
     expect(html).toContain("Page 1");
-    expect(html).toContain("11886");
+    expect(html).toContain("11,886");
     expect(html).toContain("clientId=" + clientId);
   });
   it.each([null, undefined, 0])(

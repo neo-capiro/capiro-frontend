@@ -2,6 +2,7 @@
 import { useState } from "react";
 import type { Destinations } from "@/shared/portfolio/config/config";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
+import { plural } from "@/shared/portfolio/ui/plural";
 import { useClient } from "@/features/portfolio/index/public";
 import { useFiles } from "./queries";
 import { filterFiles, type Attachment } from "./contracts";
@@ -312,7 +313,7 @@ export function FilesPage({
                       <strong>{folder || "Unfiled"}</strong>
                     </>
                   )}
-                  <small>{rows.length} files</small>
+                  <small>{plural(rows.length, "file")}</small>
                 </div>
                 <button
                   className="button"

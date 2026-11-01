@@ -143,7 +143,7 @@ export function GovernmentRelationships({
           key={target.memberId}
           clientId={clientId}
           target={target}
-          base={destinations.existingApp}
+          base={destinations.externalApp}
           onClose={() => open(null)}
         />
       )}

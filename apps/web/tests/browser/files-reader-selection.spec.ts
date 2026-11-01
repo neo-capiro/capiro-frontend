@@ -106,7 +106,7 @@ for (const action of [
     });
     await checkbox.check();
     await expect(
-      page.getByText("1 files · 1 selected", { exact: true }),
+      page.getByText("1 file · 1 selected", { exact: true }),
     ).toBeVisible();
     if (action === "upload")
       await page.getByRole("button", { name: "Upload", exact: true }).click();
@@ -154,7 +154,7 @@ for (const action of [
     await expect(checkbox).not.toBeChecked();
     await expect(dialog).toHaveCount(0);
     await expect(
-      page.getByText("1 files · 0 selected", { exact: true }),
+      page.getByText("1 file · 0 selected", { exact: true }),
     ).toBeVisible();
     await settleDocumentRequests(page);
     expect(unexpected).toEqual([]);

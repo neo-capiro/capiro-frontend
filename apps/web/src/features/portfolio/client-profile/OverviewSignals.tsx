@@ -1,6 +1,7 @@
 import type { Activity } from "./contracts";
 import type { ActivityMetricsView } from "./useActivityMetrics";
 import { ActivityMetricStatus } from "./ActivityMetricStatus";
+import { formatDay } from "@/shared/portfolio/ui/formatDay";
 import styles from "./overview.module.css";
 
 /** The activity feed is a history list, not a touch, reply, or deadline summary. */
@@ -51,7 +52,7 @@ export function EngagementPulse({
           <div className={styles.latestItem} key={activity.id}>
             <small>{activity.kind}</small>
             <span>{activity.title}</span>
-            <small>{new Date(activity.occurredAt).toLocaleDateString()}</small>
+            <small>{formatDay(activity.occurredAt)}</small>
           </div>
         ))}
         {records?.length === 0 && (

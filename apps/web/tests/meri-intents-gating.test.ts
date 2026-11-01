@@ -129,7 +129,9 @@ describe("conversation approvals stay dark unless the deployment enables them", 
         enabled,
         createElement(ConversationTurn, { turn, label: "Current turn" }),
       );
-      expect(html).toContain("Decisions cannot be made here yet.");
+      expect(html).toContain(
+        "once conversation approvals are enabled for this workspace",
+      );
       expect(html).not.toContain("Actions for your approval");
     }
     const html = under(
@@ -137,6 +139,8 @@ describe("conversation approvals stay dark unless the deployment enables them", 
       createElement(ConversationTurn, { turn, label: "Current turn" }),
     );
     expect(html).toContain("Review and decide it under");
-    expect(html).not.toContain("Decisions cannot be made here yet.");
+    expect(html).not.toContain(
+      "once conversation approvals are enabled for this workspace",
+    );
   });
 });

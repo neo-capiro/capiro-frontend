@@ -15,6 +15,7 @@ export function CommitteeDirectory() {
   const [q, setQ] = useState("");
   const [chamber, setChamber] = useState("");
   const [page, setPage] = useState(1);
+  const [staffPage, setStaffPage] = useState(1);
   const [selected, setSelected] = useState<DirectoryCommittee>();
   const committees = useCapiroQuery("directory.committees", {
     query: { q, chamber: chamber || undefined, page, pageSize: 25 },
@@ -23,7 +24,7 @@ export function CommitteeDirectory() {
     "directory.committee.staff",
     {
       params: { committeeId: selected?.id || "" },
-      query: { page: 1, pageSize: 100 },
+      query: { page: staffPage, pageSize: 100 },
     },
     { enabled: !!selected },
   );
@@ -90,7 +91,10 @@ export function CommitteeDirectory() {
                   render: (r) => (
                     <button
                       className={styles.link}
-                      onClick={() => setSelected(r)}
+                      onClick={() => {
+                        setSelected(r);
+                        setStaffPage(1);
+                      }}
                     >
                       <strong>{r.name}</strong>
                       <div className={styles.muted}>
@@ -153,6 +157,16 @@ export function CommitteeDirectory() {
                   </div>
                 ))}
               </StatusPanel>
+              {!!staff.data?.total && (
+                <DirectoryPagination
+                  page={staffPage}
+                  total={staff.data.total}
+                  pageSize={100}
+                  shown={staff.data.staff.length}
+                  hasMore={staffPage * 100 < staff.data.total}
+                  onPage={setStaffPage}
+                />
+              )}
             </Panel>
           )}
         </div>

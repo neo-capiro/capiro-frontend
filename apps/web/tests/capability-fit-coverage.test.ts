@@ -46,7 +46,7 @@ function render(raw: unknown, compact: boolean) {
     createElement(CapabilityFit, {
       clientId,
       compact,
-      existingApp: "https://example.test",
+      externalApp: "https://example.test",
     }),
   );
 }

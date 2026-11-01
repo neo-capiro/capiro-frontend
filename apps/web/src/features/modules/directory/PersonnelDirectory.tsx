@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   Badge,
@@ -31,8 +31,11 @@ export function PersonnelDirectory({
   const params = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
-  const requestedQ = params.get("personnelQ") ?? "";
-  const q = requestedQ.length <= 500 ? requestedQ : "";
+  // Searched text stays in local state: writing it into the address bar both
+  // churns history on every keystroke and exposes the query to edge rules that
+  // answer SQL/HTML-shaped input with a bare 403 page. A link may still seed it.
+  const initialQ = params.get("personnelQ") ?? "";
+  const [q, setQ] = useState(initialQ.length <= 500 ? initialQ : "");
   const requestedService = params.get("personnelService") ?? "";
   const service = services.includes(requestedService) ? requestedService : "";
   const requestedAligned = params.get("personnelAligned");
@@ -59,12 +62,19 @@ export function PersonnelDirectory({
       scroll: false,
     });
   };
+  // A seeded `personnelQ` only initialises the search box. Any filter edit
+  // drops it, so a reload cannot re-apply a query the person has moved on from.
   const updateFilters = (
     updates: Record<string, string>,
     history: "push" | "replace" = "push",
   ) =>
     updateParams(
-      { ...updates, personnelId: "", personnelPreviewId: "" },
+      {
+        ...updates,
+        personnelQ: "",
+        personnelId: "",
+        personnelPreviewId: "",
+      },
       history,
     );
   useEffect(() => {
@@ -110,6 +120,19 @@ export function PersonnelDirectory({
     if (!query.loading || requestedId === null)
       onDetailChange?.(selectedId !== null);
   }, [onDetailChange, query.loading, requestedId, selectedId]);
+  // The list endpoint clamps `total` to the page size when a query is active, so
+  // a full page is the only evidence that more matches exist.
+  const personnelRows = query.data?.data ?? [];
+  const pageHasMore = personnelRows.length === 25;
+  const pageEnd = (page - 1) * 25 + personnelRows.length;
+  const totalKnown = (query.data?.total ?? 0) > pageEnd;
+  const personnelTitle = !query.data
+    ? "Department of War"
+    : totalKnown
+      ? `${query.data.total.toLocaleString()} personnel`
+      : pageHasMore
+        ? `Showing ${(page - 1) * 25 + 1}–${pageEnd} personnel`
+        : `${pageEnd.toLocaleString()} personnel`;
   return (
     <>
       {selectedId && <PersonnelProfile id={selectedId} onBack={closeDetail} />}
@@ -121,13 +144,9 @@ export function PersonnelDirectory({
             value={q}
             maxLength={500}
             onChange={(e) => {
-              updateFilters(
-                {
-                  personnelQ: e.target.value.slice(0, 500),
-                  personnelPage: "",
-                },
-                "replace",
-              );
+              setQ(e.target.value.slice(0, 500));
+              if (page !== 1 || params.has("personnelQ"))
+                updateFilters({ personnelPage: "" }, "replace");
             }}
           />
           <SelectInput
@@ -164,8 +183,8 @@ export function PersonnelDirectory({
             type="button"
             className={styles.clearAll}
             onClick={() => {
+              setQ("");
               updateFilters({
-                personnelQ: "",
                 personnelService: "",
                 personnelAligned: "",
                 personnelPage: "",
@@ -181,15 +200,9 @@ export function PersonnelDirectory({
           onRetry={query.reload}
         >
           <div className={styles.personnelSplit}>
-            <Panel
-              title={
-                query.data
-                  ? `${query.data.total} personnel`
-                  : "Department of War"
-              }
-            >
+            <Panel title={personnelTitle}>
               <DataTable
-                rows={query.data?.data || []}
+                rows={personnelRows}
                 rowKey={(r) => r.id}
                 caption="Defense personnel directory"
                 selectedRowKey={selectedPerson?.id}
@@ -277,6 +290,8 @@ export function PersonnelDirectory({
                 page={page}
                 total={query.data?.total || 0}
                 pageSize={25}
+                shown={personnelRows.length}
+                hasMore={pageHasMore}
                 onPage={(nextPage) =>
                   updateFilters({
                     personnelPage:

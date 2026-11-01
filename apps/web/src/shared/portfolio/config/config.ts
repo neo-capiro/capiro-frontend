@@ -14,6 +14,13 @@ export type Destinations = {
   modules?: string;
   workspace?: string;
   existingApp?: string;
+  /**
+   * A separate application that serves `/program-elements` and
+   * `/intelligence/opportunities`. Set only when `existingApp` is genuinely a
+   * different destination; when it points at this app's own root those routes
+   * do not exist here and linking to them produces a 404.
+   */
+  externalApp?: string;
 };
 export type RuntimeConfig = {
   services: Partial<Record<Service, string>>;
@@ -87,11 +94,26 @@ export function readConfig(
     if (value) destinations[key] = value;
   }
   const publicKey = env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-  destinations.existingApp = validatedUrl(
+  const existingApp = validatedUrl(
     env.CAPIRO_EXISTING_APP_URL,
     "CAPIRO_EXISTING_APP_URL",
     issues,
   );
+  destinations.existingApp = existingApp;
+  const sameAppRoot = (() => {
+    if (!existingApp || !requestOrigin) return false;
+    try {
+      const app = new URL(existingApp);
+      const here = new URL(requestOrigin);
+      return (
+        app.origin === here.origin &&
+        (app.pathname === "" || app.pathname === "/")
+      );
+    } catch {
+      return false;
+    }
+  })();
+  if (existingApp && !sameAppRoot) destinations.externalApp = existingApp;
   const secret = env.CLERK_SECRET_KEY;
   const authConfigured = Boolean(
     publicKey?.match(/^pk_(test|live)_[A-Za-z0-9+/=]+$/) &&

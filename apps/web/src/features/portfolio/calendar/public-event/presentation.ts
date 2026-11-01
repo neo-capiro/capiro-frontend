@@ -74,11 +74,12 @@ export function attendanceLabel(
   };
   return labels[state];
 }
+// `/legiwatch/hearings` lives only in the separate existing application.
 export function publicEventHref(
-  existingApp: string | undefined,
+  externalApp: string | undefined,
   eventId: string,
 ) {
-  return existingApp
-    ? `${existingApp.replace(/\/+$/, "")}/legiwatch/hearings/${encodeURIComponent(eventId)}`
+  return externalApp
+    ? `${externalApp.replace(/\/+$/, "")}/legiwatch/hearings/${encodeURIComponent(eventId)}`
     : undefined;
 }
