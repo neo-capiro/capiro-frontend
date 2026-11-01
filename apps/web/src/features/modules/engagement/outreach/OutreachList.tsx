@@ -22,6 +22,11 @@ import {
   type CampaignListRow,
 } from "./outreach-list-model";
 import styles from "./outreach-overview.module.css";
+import { OutreachAudienceFilter } from "./OutreachAudienceFilter";
+import {
+  audienceSelection,
+  type OutreachAudience,
+} from "./outreach-audience-model";
 
 export function OutreachList({
   clientId,
@@ -46,8 +51,15 @@ export function OutreachList({
   const [cursor, setCursor] = useState<string>();
   const [recordCursor, setRecordCursor] = useState<string>();
   const [sessionOffset, setSessionOffset] = useState(0);
+  const [audience, setAudience] = useState<OutreachAudience>("all");
+  const capabilities = useCapiroCapabilities();
+  const selection = audienceSelection(
+    audience,
+    capabilities.outreachAudienceVersion,
+  );
   const invalid = !!from && !!to && from > to;
   const scope = {
+    ...selection.query,
     ...(clientId ? { clientId } : {}),
     ...dateWindow(from, to),
     deleted: deleted ? ("true" as const) : ("false" as const),
@@ -62,7 +74,7 @@ export function OutreachList({
         ...(recordCursor ? { cursor: recordCursor } : {}),
       },
     },
-    { enabled: !invalid },
+    { enabled: !invalid && !selection.blocked },
   );
   const campaigns = useCapiroQuery(
     "engagement.campaigns",
@@ -74,18 +86,20 @@ export function OutreachList({
         ...(cursor ? { cursor } : {}),
       },
     },
-    { enabled: !invalid && !deleted },
+    { enabled: !invalid && !deleted && !selection.blocked },
   );
   // Campaign sessions belong to a separate engagement application. The cohort states whether that
   // surface is reachable; this list never infers it from a 404, a URL or a route declaration.
-  const campaignSessions = useCapiroCapabilities().campaignSessions;
+  const campaignSessions = capabilities.campaignSessions;
   const sessionsSupported = campaignSessions !== "disabled";
-  const sessionsEnabled = campaignSessionsQueryEnabled({
-    capability: campaignSessions,
-    clientId,
-    deleted,
-    invalid,
-  });
+  const sessionsEnabled =
+    selection.sessionsInScope &&
+    campaignSessionsQueryEnabled({
+      capability: campaignSessions,
+      clientId,
+      deleted,
+      invalid,
+    });
   const sessions = useCapiroQuery(
     "engagement.sessions",
     {
@@ -149,24 +163,28 @@ export function OutreachList({
       )
     : [];
   const canonicalLoading = records.loading || campaigns.loading;
-  const canonicalError = invalid
-    ? "The end date must be on or after the start date."
-    : mismatch || campaignMismatch
-      ? "The returned outreach does not match this client scope."
-      : (records.error ?? campaigns.error);
+  const canonicalError = selection.blocked
+    ? "Audience filtering requires the current Core update. Select All audiences."
+    : invalid
+      ? "The end date must be on or after the start date."
+      : mismatch || campaignMismatch
+        ? "The returned outreach does not match this client scope."
+        : (records.error ?? campaigns.error);
   // The ancillary sessions read reports separately so its failure cannot hide healthy canonical
   // records and campaigns. It never becomes a fatal list error.
   const sessionsLoading = sessionsEnabled && sessions.loading;
   const sessionsFailure = sessionsEnabled ? sessions.error : undefined;
   const sessionsUnavailable = sessionsLoading || !!sessionsFailure;
   const more =
-    !!campaigns.data?.nextCursor || (sessions.data?.length ?? 0) === 100;
+    !!campaigns.data?.nextCursor ||
+    (sessionsEnabled && (sessions.data?.length ?? 0) === 100);
   const reload = () => {
     records.reload();
     campaigns.reload();
     sessions.reload();
   };
   const clear = () => {
+    setAudience("all");
     setSearch("");
     setFrom("");
     setTo("");
@@ -186,6 +204,20 @@ export function OutreachList({
           </ActionButton>
         }
       />
+      <OutreachAudienceFilter
+        value={audience}
+        supported={capabilities.outreachAudienceVersion === 1}
+        onChange={(value) => {
+          setAudience(value);
+          setCursor(undefined);
+          setRecordCursor(undefined);
+          setSessionOffset(0);
+        }}
+      />
+      <p className={styles.hint}>
+        Audience applies to saved outreach records and canonical campaigns.
+        Counts show this loaded page, not population totals.
+      </p>
       <Tabs
         label="Campaign categories"
         value={category}
@@ -259,21 +291,41 @@ export function OutreachList({
       />
       {!canonicalLoading && !canonicalError && (
         <>
+          {!selection.sessionsInScope && (
+            <div className={styles.card} role="status">
+              <h2>Campaign sessions are outside this audience filter</h2>
+              <p className={styles.hint}>
+                The separate session source does not support audience filtering.
+                Results and counts exclude session-only campaigns.
+              </p>
+              <ActionButton
+                onClick={() => {
+                  setAudience("all");
+                  setCursor(undefined);
+                  setRecordCursor(undefined);
+                  setSessionOffset(0);
+                }}
+              >
+                Show All audiences
+              </ActionButton>
+            </div>
+          )}
           {!sessionsSupported && (
             <div className={styles.card} role="status">
               <h2>Campaign sessions are not available</h2>
               <p className={styles.hint}>
                 This workspace is not configured for campaign sessions, so no
                 session-only campaigns are shown here. Saved outreach records
-                and canonical campaigns are complete for your filters; counts
-                and results below exclude session-only campaigns.
+                and canonical campaigns are filtered at their source; counts and
+                results below exclude session-only campaigns.
               </p>
             </div>
           )}
           {sessionsSupported && sessionsUnavailable && (
             <div className={styles.card} role="status" aria-live="polite">
               <h2>
-                Campaign sessions are {sessionsLoading ? "loading" : "unavailable"}
+                Campaign sessions are{" "}
+                {sessionsLoading ? "loading" : "unavailable"}
               </h2>
               <p className={styles.hint}>
                 Saved outreach records and canonical campaigns shown here are
@@ -300,24 +352,26 @@ export function OutreachList({
               {sessionsSupported &&
                 !sessionsUnavailable &&
                 !allCampaigns.some((row) => row.category === category) && (
-                <div className={styles.empty}>
-                  <h3>
-                    {search
-                      ? "No matching campaigns"
-                      : `No ${categoryLabels[category].toLowerCase()} yet`}
-                  </h3>
-                  <p>
-                    {search
-                      ? "Try another search or clear your filters."
-                      : "Start a new outreach draft to plan your next campaign."}
-                  </p>
-                  <ActionButton
-                    onClick={search || from || to ? clear : onCreate}
-                  >
-                    {search || from || to ? "Clear filters" : "+ New outreach"}
-                  </ActionButton>
-                </div>
-              )}
+                  <div className={styles.empty}>
+                    <h3>
+                      {search
+                        ? "No matching campaigns"
+                        : `No ${categoryLabels[category].toLowerCase()} yet`}
+                    </h3>
+                    <p>
+                      {search
+                        ? "Try another search or clear your filters."
+                        : "Start a new outreach draft to plan your next campaign."}
+                    </p>
+                    <ActionButton
+                      onClick={search || from || to ? clear : onCreate}
+                    >
+                      {search || from || to
+                        ? "Clear filters"
+                        : "+ New outreach"}
+                    </ActionButton>
+                  </div>
+                )}
               <p className={styles.hint}>
                 Campaign workflow state is separate from recorded sending. A
                 saved or completed campaign does not prove mail was sent.
@@ -343,7 +397,7 @@ export function OutreachList({
                       Next campaigns
                     </ActionButton>
                   )}
-                  {(sessions.data?.length ?? 0) === 100 && (
+                  {sessionsEnabled && (sessions.data?.length ?? 0) === 100 && (
                     <ActionButton
                       onClick={() => setSessionOffset((value) => value + 100)}
                     >
