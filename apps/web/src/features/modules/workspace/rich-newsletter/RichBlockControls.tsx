@@ -230,13 +230,17 @@ export function RichBlockControls({
           <ActionButton className={ui.button} onClick={remove}>
             Remove block
           </ActionButton>
-          <BlockProviderTools
-            documentId={documentId}
-            block={block}
-            update={update}
-          />
         </>
       )}
+      {/* A view-only tab change must not replace pending/unknown proposal owners.
+          BlockProviderTools retains its genuine API/document/block scope keys. */}
+      <div hidden={tab !== "Content"}>
+        <BlockProviderTools
+          documentId={documentId}
+          block={block}
+          update={update}
+        />
+      </div>
     </section>
   );
 }
