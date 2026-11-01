@@ -84,7 +84,9 @@ async function setup(page: Page, paused = false) {
   );
   await page.goto("/");
   await expect(page.getByText("Port: ready", { exact: true })).toBeVisible();
-  await page.getByText("Pause and recovery", { exact: true }).click();
+  // A running run folds its controls away; a paused run keeps them in view.
+  if (!paused)
+    await page.getByText("Pause or steer this run", { exact: true }).click();
 }
 function receipt(body: Record<string, unknown>, state = "APPLIED") {
   return {
@@ -120,7 +122,7 @@ test("lost steer response and reopening retain exact control without automatic r
   ).toBeVisible();
   await page.getByRole("button", { name: "Reopen source session" }).click();
   await expect(page.getByText("Port: ready", { exact: true })).toBeVisible();
-  await page.getByText("Pause and recovery", { exact: true }).click();
+  // The retained control is recovery, so it stays in plain view after reopening.
   expect(commands).toHaveLength(1);
   await page.getByRole("button", { name: "Retry same control" }).click();
   await expect(
@@ -149,7 +151,7 @@ test("a pending receipt permits only exact retry and session replacement retires
   ).toHaveCount(0);
   await page.getByRole("button", { name: "Replace signed-in session" }).click();
   await expect(page.getByText("Port: ready", { exact: true })).toBeVisible();
-  await page.getByText("Pause and recovery", { exact: true }).click();
+  await page.getByText("Pause or steer this run", { exact: true }).click();
   await expect(
     page.getByRole("button", { name: "Retry same control" }),
   ).toHaveCount(0);

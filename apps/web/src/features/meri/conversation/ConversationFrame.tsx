@@ -4,7 +4,6 @@ import {
   ConversationContent,
   ConversationScrollButton,
 } from "@capiro/ui/conversation";
-import { unavailableResources } from "../../../shared/meri-resources/unavailable";
 import { ConversationTurn } from "./ConversationTurn";
 import type { TurnView } from "./conversation-view";
 import { shouldShowPrompt } from "./prompt-identity";
@@ -24,6 +23,7 @@ export function ConversationFrame({
   scope: string;
   children: ReactNode;
   composer: ReactNode;
+  /** Saved-history state for a mounted conversation; nothing is announced when there is none. */
   historyStatus?: ReactNode;
 }) {
   return (
@@ -39,13 +39,7 @@ export function ConversationFrame({
           {scope}
         </span>
       </div>
-      <div className={styles.frameStatus}>
-        {historyStatus ?? (
-          <p className={styles.muted}>
-            {unavailableResources.conversationHistory.summary}
-          </p>
-        )}
-      </div>
+      <div className={styles.frameStatus}>{historyStatus}</div>
       {children}
       <div className={styles.composerDock}>{composer}</div>
     </section>

@@ -70,7 +70,9 @@ test("real React gives each recovery a fresh grace period and removes feedback a
   await expect(page.getByText(delayed, { exact: true })).toBeVisible();
 
   await sse(fixture.attempts[3]!, [status(3, "completed")]);
-  await expect(page.getByText("Completed", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("article", { name: "Current turn" }),
+  ).toHaveAttribute("data-run-state", "completed");
   await page.clock.runFor(5_000);
   await expect(page.getByText(delayed, { exact: true })).toHaveCount(0);
   await expect(page.getByText(waiting, { exact: true })).toHaveCount(0);

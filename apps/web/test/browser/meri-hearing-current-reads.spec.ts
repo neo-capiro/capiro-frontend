@@ -6,6 +6,7 @@ import {
   clientId,
   event,
   history,
+  openEvidence,
   reply,
   setupConversation,
   sse,
@@ -39,6 +40,7 @@ test("native hearing event reaches the existing SDK conversation viewer", async 
   await page.goto(
     `/meri?clientId=${clientId}&conversationId=${binding.conversationId}`,
   );
+  await openEvidence(page);
   await page.getByRole("button", { name: "Open saved page" }).click();
   const viewer = page.getByRole("region", {
     name: "Hearing record viewer",
@@ -92,6 +94,7 @@ for (const width of [1440, 390])
     await page.goto(
       `/meri?clientId=${clientId}&conversationId=${binding.conversationId}`,
     );
+    await openEvidence(page);
     const open = page.getByRole("button", { name: "Open saved page" });
     await open.click();
     const viewer = page.getByRole("region", {
@@ -164,6 +167,7 @@ test("hearing fragment remains partial and a late reply cannot restore a closed 
   await page.goto(
     `/meri?clientId=${clientId}&conversationId=${binding.conversationId}`,
   );
+  await openEvidence(page);
   await page.getByRole("button", { name: "Open saved page" }).click();
   await expect.poll(() => dispatched).toBe(true);
   await page.getByRole("button", { name: "Close hearing record" }).click();

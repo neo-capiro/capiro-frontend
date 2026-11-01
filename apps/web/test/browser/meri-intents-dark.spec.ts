@@ -52,6 +52,9 @@ test("with approvals not enabled, a live conversation shows no approvals panel a
   await expect(
     page.getByRole("heading", { name: "Actions for your approval" }),
   ).toHaveCount(0);
+  await expect(page.getByText("Meri has not prepared any actions")).toHaveCount(
+    0,
+  );
   expect(intents).toEqual([]);
   expect(fixture.unexpected).toEqual([]);
 });

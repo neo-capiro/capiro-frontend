@@ -6,6 +6,39 @@ import { ConversationTurn } from "../src/features/meri/conversation/Conversation
 import { IntentApprovalsEnabled } from "../src/features/meri/conversation/intents/approvals-enabled";
 import type { TurnView } from "../src/features/meri/conversation/conversation-view";
 
+// One prepared proposal: the panel is dark unless the deployment enables approvals, and when it is
+// enabled it shows exactly what Meri prepared, never an empty announcement.
+vi.mock(
+  "../src/features/meri/conversation/intents/useConversationIntents",
+  () => ({
+    useConversationIntents: () => ({
+      oneTimeResults: [],
+      dismissOneTime: vi.fn(),
+      list: { status: "ready", items: [], next: null, loadingMore: false },
+      rows: [
+        {
+          deliveryId: "dlv_synthetic-delivery-0001",
+          title: "Synthetic prepared action",
+          status: "Awaiting your decision",
+          tone: "warning",
+          detail: "Synthetic detail",
+          fields: [],
+          result: [],
+          decision: "approvable",
+          proposal: null,
+        },
+      ],
+      attempts: {},
+      refresh: vi.fn(),
+      retry: vi.fn(),
+      loadMore: vi.fn(),
+      decide: vi.fn(),
+      decisionsReady: true,
+      recoveryError: undefined,
+    }),
+  }),
+);
+
 const turn = {
   runId: "30000000-0000-4000-8000-000000000001",
   prompt: "Prepare the follow-up",
@@ -25,6 +58,8 @@ const turn = {
   ],
   artifacts: [],
   errors: [],
+  checkpointIds: [],
+  usageIds: [],
 } as unknown as TurnView;
 
 function access() {
@@ -85,6 +120,7 @@ describe("conversation approvals stay dark unless the deployment enables them", 
       }),
     );
     expect(html).toContain("Actions for your approval");
+    expect(html).toContain("Synthetic prepared action");
   });
 
   it("keeps the approval notice's not-available copy unless approvals are enabled", () => {

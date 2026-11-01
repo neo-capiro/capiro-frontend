@@ -7,6 +7,7 @@ import {
   clientId,
   event,
   history,
+  openEvidence,
   reply,
   setupConversation,
   status,
@@ -82,6 +83,7 @@ async function openHearing(
   await page.goto(
     `/meri?clientId=${clientId}&conversationId=${binding.conversationId}`,
   );
+  await openEvidence(page);
   await page.getByRole("button", { name: "Open saved page" }).click();
   await page.getByRole("button", { name: "Check recording coverage" }).click();
 }

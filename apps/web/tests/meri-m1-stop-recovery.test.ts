@@ -29,23 +29,11 @@ const request = {
 };
 afterEach(() => vi.useRealTimers());
 
-it("Stop receipt shows Cancelling while only saved cancelled history reports Stopped", () => {
-  const render = (
-    state: string,
-    cancel: string,
-    receipt: boolean,
-    saved = false,
-  ) =>
+it("Stop feedback follows the receipt while the run is live and retires once the run settles", () => {
+  const render = (state: string, cancel: string, receipt: boolean) =>
     renderToStaticMarkup(
       createElement(RunStatus, {
         active: state === "running",
-        ...(saved
-          ? {
-              savedCurrent: { runState: "cancelled" } as NonNullable<
-                ComponentProps<typeof RunStatus>["savedCurrent"]
-              >,
-            }
-          : {}),
         run: {
           snapshot: {
             observation: { runState: state },
@@ -58,23 +46,20 @@ it("Stop receipt shows Cancelling while only saved cancelled history reports Sto
         } as unknown as ComponentProps<typeof RunStatus>["run"],
       }),
     );
-  expect(render("running", "pending", false)).toContain(
-    "Stopping: requesting a cancellation fence.",
-  );
+  const requesting = render("running", "pending", false);
+  expect(requesting).toContain("<h3>Requesting stop</h3>");
+  expect(requesting).toContain("Requesting stop…");
   const fenced = render("running", "observed", true);
   expect(fenced).toContain("<h3>Cancelling</h3>");
   expect(fenced).toContain(
     "Meri is finishing the current safe step before stopping.",
   );
   expect(fenced.match(/<button[^>]*disabled=""/g) ?? []).toHaveLength(0);
-  expect(fenced).toContain("Pause and checkpoint recovery are not available");
   expect(fenced).not.toContain("<h3>Stopped</h3>");
-  expect(render("cancelled", "observed", true)).not.toContain(
-    "<h3>Stopped</h3>",
-  );
-  expect(render("cancelled", "observed", true, true)).toContain(
-    "Stopped. Completed steps remain recorded.",
-  );
+  // A cancelled run carries its own state; no card restates it.
+  const settled = render("cancelled", "observed", true);
+  expect(settled).not.toContain('aria-label="Stop status"');
+  expect(settled).not.toContain("Stopped. Completed steps remain recorded.");
 });
 
 it("cleanup refusal retains the captured draft and same request until an explicit retry", async () => {

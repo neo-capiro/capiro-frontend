@@ -109,6 +109,7 @@ const turn: TurnView = {
   artifacts: [{ artifactId: feedbackId(6), versionId: feedbackId(7) }],
   errors: [],
   checkpointIds: [],
+  usageIds: [],
   reasonCode: null,
 };
 createRoot(document.getElementById("root")!).render(

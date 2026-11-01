@@ -12,6 +12,7 @@ import {
   type Attempt,
   type Choice,
   type IntentScope,
+  type ListState,
 } from "./useConversationIntents";
 import styles from "./intents.module.css";
 import ui from "../../ui/meri-ui.module.css";
@@ -266,7 +267,7 @@ function IntentCard({
   );
 }
 
-function Body({
+function Rows({
   list,
   rows,
   attempts,
@@ -278,12 +279,8 @@ function Body({
   recoveryError,
   access,
 }: ReturnType<typeof useConversationIntents> & { access: IntentsAccess }) {
-  if (list.status === "disabled")
-    return (
-      <p className={styles.muted}>
-        Approval decisions are not enabled for this deployment yet.
-      </p>
-    );
+  // Approval decisions that are not enabled never mount this panel; the branch only narrows the list.
+  if (list.status === "disabled") return null;
   if (list.status === "loading")
     return <p className={styles.muted}>Reading the actions Meri prepared…</p>;
   if (list.status === "unavailable")
@@ -305,13 +302,7 @@ function Body({
         </div>
       </div>
     );
-  if (rows.length === 0)
-    return (
-      <p className={styles.muted}>
-        Meri has not prepared any actions for your approval in this
-        conversation.
-      </p>
-    );
+  if (rows.length === 0) return null;
   return (
     <>
       <ul className={styles.list}>
@@ -368,8 +359,58 @@ function Body({
 }
 
 /**
+ * The panel itself. It exists only while there is a proposal, a one-time result or a failed read to
+ * show; a conversation without prepared actions announces nothing. A refresh of a list that had
+ * proposals keeps the panel mounted rather than blinking it away.
+ */
+function Body({
+  retained,
+  ...state
+}: ReturnType<typeof useConversationIntents> & {
+  access: IntentsAccess;
+  /** The last settled list for this scope, kept while the current read is in flight. */
+  retained: ListState;
+}) {
+  const shown =
+    state.list.status === "unavailable" ||
+    state.rows.length > 0 ||
+    state.oneTimeResults.length > 0 ||
+    (state.list.status === "loading" &&
+      retained.status === "ready" &&
+      retained.items.length > 0);
+  if (!shown) return null;
+  return (
+    <section className={styles.panel} aria-labelledby="conversation-actions">
+      <div className={styles.panelHeader}>
+        <h2 id="conversation-actions">Actions for your approval</h2>
+        {state.list.status === "ready" && (
+          <Button
+            type="button"
+            variant="outline"
+            className={ui.outline}
+            onClick={() => void state.refresh()}
+          >
+            Refresh
+          </Button>
+        )}
+      </div>
+      <Rows {...state} />
+      {state.oneTimeResults.map((result) => (
+        <ResearchShareResult
+          key={`${result.proposalId}:${result.commandSha256}`}
+          sharePath={result.sharePath}
+          onDismiss={() => state.dismissOneTime(result.proposalId)}
+        />
+      ))}
+    </section>
+  );
+}
+
+/**
  * The conversation's prepared actions. Everything shown is read from Meri's durable intent list; a
- * decision is recorded only by Meri's decision owner, and nothing here approves on its own.
+ * decision is recorded only by Meri's decision owner, and nothing here approves on its own. The
+ * panel exists only while there is a proposal, a one-time result or a failed read to show; a
+ * conversation without prepared actions announces nothing.
  */
 export function ConversationIntents({
   access,
@@ -409,29 +450,7 @@ export function ConversationIntents({
       : state.list;
   return (
     <>
-      <section className={styles.panel} aria-labelledby="conversation-actions">
-        <div className={styles.panelHeader}>
-          <h2 id="conversation-actions">Actions for your approval</h2>
-          {state.list.status === "ready" && (
-            <Button
-              type="button"
-              variant="outline"
-              className={ui.outline}
-              onClick={() => void state.refresh()}
-            >
-              Refresh
-            </Button>
-          )}
-        </div>
-        <Body {...state} access={access} />
-        {state.oneTimeResults.map((result) => (
-          <ResearchShareResult
-            key={`${result.proposalId}:${result.commandSha256}`}
-            sharePath={result.sharePath}
-            onDismiss={() => state.dismissOneTime(result.proposalId)}
-          />
-        ))}
-      </section>
+      <Body {...state} access={access} retained={displayed} />
       {children?.(displayed.status === "ready" ? displayed.items : [])}
     </>
   );

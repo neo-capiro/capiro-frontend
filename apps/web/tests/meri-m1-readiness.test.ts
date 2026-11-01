@@ -2,7 +2,10 @@ import { createElement, type ComponentProps, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, expect, it, vi } from "vitest";
 import { createConversationComposer } from "../src/features/meri/conversation/conversation-composer";
-import { MeriLiveConversation } from "../src/features/meri/conversation/MeriLiveConversation";
+import {
+  composerAvailability,
+  MeriLiveConversation,
+} from "../src/features/meri/conversation/MeriLiveConversation";
 import { ConversationHistoryStatus } from "../src/features/meri/conversation/ConversationHistoryStatus";
 import { createInitialDraftOwner } from "../src/features/meri/conversation/initial-draft";
 import { turnFromEvents } from "../src/features/meri/conversation/conversation-view";
@@ -138,20 +141,30 @@ const renderLive = (props: LiveProps) =>
   renderToStaticMarkup(createElement(MeriLiveConversation, props));
 const button = (label: string) =>
   harness.buttons.find((item) => item.children === label);
+/** The finished run admits a client-side next turn and the composer is not held: nothing else is announced. */
+const quietlyReady = (props: LiveProps) =>
+  composerAvailability(
+    harness.run!,
+    props.savedCurrent ?? null,
+    props.earlier,
+    props.initialPrompt,
+    props.initialBlocked,
+    props.newIntentBlocked,
+    props.nextTurnBlocked,
+    !!props.nextTurnVerified,
+    props.initialDraft.hasPending(context),
+  ).readyForNext && harness.composer?.sendBlocked === undefined;
 
-it("verified terminal history offers Ready and focuses the composer without dispatching, including an observed historical submit", () => {
+it("verified terminal history opens the composer quietly, with no readiness card and no dispatch, including an observed historical submit", () => {
   const props = liveProps();
   harness.run!.intent = { submit: { ...request, state: "observed" } };
   const html = renderLive(props);
-  expect(html).toContain('aria-label="Next message status"');
-  expect(html).toContain("<h3>Ready</h3>");
-  expect(html).toMatch(/data-tone="success">Complete<\/span>/);
-  expect(html).toContain("You can send your next message.");
-  const write = button("Write next message");
-  expect(write).toBeDefined();
-  expect(write?.disabled).not.toBe(true);
-  write!.onClick();
-  expect(props.textareaRef.current!.focus).toHaveBeenCalledOnce();
+  expect(quietlyReady(props)).toBe(true);
+  expect(html).not.toContain("Next message status");
+  expect(html).not.toContain("Ready");
+  expect(html).not.toContain("Complete</span>");
+  expect(html).not.toContain("You can send your next message.");
+  expect(button("Write next message")).toBeUndefined();
   expect(props.onNextTurn).not.toHaveBeenCalled();
   expect(harness.run!.submitInitial).not.toHaveBeenCalled();
   expect(harness.run!.submit).not.toHaveBeenCalled();
@@ -177,7 +190,6 @@ it.each(["loading", "unavailable"] as const)(
       "Message accepted. Reload the transcript to check its current status.",
     );
     expect(html).not.toContain("Sending to Meri.");
-    expect(html).not.toContain('aria-label="Next message status"');
     expect(button("Retry same request")).toBeUndefined();
     expect(harness.composer?.sendBlocked).toBe(
       "Reload the transcript to verify the current run.",
@@ -335,13 +347,14 @@ const readinessBlockers: Array<[string, (props: LiveProps) => void]> = [
   ],
 ];
 
-it("Ready stays absent until verification, terminal state and all write uncertainty are resolved", () => {
+it("the composer stays held or unready until verification, terminal state and all write uncertainty are resolved", () => {
   for (const [reason, configure] of readinessBlockers) {
     resetRun();
     const props = liveProps();
     configure(props);
     const html = renderLive(props);
-    expect(html, reason).not.toContain('aria-label="Next message status"');
+    expect(quietlyReady(props), reason).toBe(false);
+    expect(html, reason).not.toContain("Next message status");
     expect(button("Write next message"), reason).toBeUndefined();
   }
 });

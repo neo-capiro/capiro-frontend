@@ -64,7 +64,8 @@ test("connects the exact account/client, loads the admitted transcript and resum
       exact: true,
     }),
   ).toBeVisible();
-  await expect(turn.getByText("Completed", { exact: true })).toBeVisible();
+  await expect(turn).toHaveAttribute("data-run-state", "completed");
+  await expect(turn.getByText("Completed", { exact: true })).toHaveCount(0);
   // connect() waits only for the heading; the automatic session request is settled once the transcript renders.
   expect(fixture.hints).toEqual([{ clientId }]);
   expect(calls).toEqual(["history", "reconnect"]);
@@ -188,7 +189,9 @@ test("streaming resumes from the accepted cursor after a stream ends early", asy
     page.getByText("Part one and part two", { exact: true }),
   ).toBeVisible();
   expect(cursors).toEqual(["1", "2"]);
-  await expect(page.getByText("Completed", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("article", { name: "Current turn" }),
+  ).toHaveAttribute("data-run-state", "completed");
   expect(f.unexpected).toEqual([]);
 });
 
@@ -324,24 +327,15 @@ test("Stop requests durable cancellation and the run status, not the receipt, en
   cancelled = true;
   await expect(current.getByText("Cancelled", { exact: true })).toBeVisible();
   await reverified;
+  // The cancelled turn carries its own state: the stop card retires and nothing announces readiness.
+  await expect(stop).toHaveCount(0);
   await expect(
-    stop.getByRole("heading", { name: "Stopped", exact: true }),
-  ).toBeVisible();
-  await expect(stop.getByText("Complete", { exact: true })).toBeVisible();
-  await expect(stop.getByRole("status")).toHaveText(
-    "Stopped. Completed steps remain recorded.",
-  );
-  const ready = page.getByRole("region", {
-    name: "Next message status",
-    exact: true,
-  });
+    page.getByText("Stopped. Completed steps remain recorded."),
+  ).toHaveCount(0);
   await expect(
-    ready.getByRole("heading", { name: "Ready", exact: true }),
-  ).toBeVisible();
-  await expect(ready.getByText("Complete", { exact: true })).toBeVisible();
-  await expect(
-    ready.getByText("You can send your next message.", { exact: true }),
-  ).toBeVisible();
+    page.getByRole("region", { name: "Next message status", exact: true }),
+  ).toHaveCount(0);
+  await expect(current).toHaveAttribute("data-run-state", "cancelled");
   expect(cancels).toEqual([{}]);
   await expect(composer(page)).toHaveValue("Draft while running");
   await expect(sendButton(page)).toBeEnabled();
@@ -377,7 +371,9 @@ test("a completed cancel receipt never pretends the run was cancelled", async ({
       { exact: true },
     ),
   ).toBeVisible();
-  await expect(page.getByText("Completed", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("article", { name: "Current turn" }),
+  ).toHaveAttribute("data-run-state", "completed");
   await expect(page.getByText("Cancelled", { exact: true })).toHaveCount(0);
   await expect(
     stop.getByText(/Stop fence recorded|acknowledges cancellation|cleanup/),
@@ -583,10 +579,8 @@ test("navigation keeps the uncertain request and rebinds the exact observed run 
     .getByRole("button", { name: "Retry same request", exact: true })
     .click();
   await expect(
-    page
-      .getByRole("article", { name: "Current turn" })
-      .getByText("Completed", { exact: true }),
-  ).toBeVisible();
+    page.getByRole("article", { name: "Current turn" }),
+  ).toHaveAttribute("data-run-state", "completed");
   await expect.poll(() => requests.length).toBe(2);
   expect(requests[1]).toEqual(requests[0]);
   expect(f.unexpected).toEqual([]);

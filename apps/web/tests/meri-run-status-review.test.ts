@@ -2,10 +2,6 @@ import { createElement, type ComponentProps } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { expect, it, vi } from "vitest";
 import { RunStatus } from "../src/features/meri/conversation/RunStatus";
-import {
-  turnFromEvents,
-  type TurnView,
-} from "../src/features/meri/conversation/conversation-view";
 import { RunLifecycleControls } from "../src/features/meri/conversation/lifecycle/RunLifecycleControls";
 
 function renderStop(
@@ -13,7 +9,6 @@ function renderStop(
   cancel: string,
   receipt?: string,
   busy = false,
-  historyState?: TurnView["runState"],
 ) {
   const run = {
     snapshot: {
@@ -28,19 +23,7 @@ function renderStop(
     cancel: vi.fn(),
   } as unknown as ComponentProps<typeof RunStatus>["run"];
   return renderToStaticMarkup(
-    createElement(RunStatus, {
-      run,
-      active: state === "running",
-      savedCurrent: historyState
-        ? turnFromEvents(
-            [],
-            { runId: "synthetic-current-run" },
-            null,
-            historyState,
-            false,
-          )
-        : undefined,
-    }),
+    createElement(RunStatus, { run, active: state === "running" }),
   );
 }
 
@@ -93,54 +76,34 @@ it("cancelling distinguishes an outstanding request from a fence and an uncertai
   expect(unknown).not.toContain("finishing the current safe step");
 });
 
-it("only saved history establishes Stopped; a receipt or stream terminal state alone does not", () => {
+it("a settled run retires its stop feedback; the turn's own state is the outcome", () => {
   for (const receipt of [undefined, "cancelled"]) {
-    const html = renderStop("running", "observed", receipt, false, "cancelled");
-    expect(html).toContain("<h3>Stopped</h3>");
-    expect(html).toContain('data-tone="success">Complete</span>');
-    expect(html).toContain("Stopped. Completed steps remain recorded.");
-    expect(html).not.toContain("Meri must confirm cleanup");
-    expect(html).not.toContain("finishing the current safe step");
-    expect(html).not.toContain("Stop fence recorded");
-    expect(html).not.toContain("<h3>Cancelling</h3>");
-    expect(html).not.toContain("Open receipts");
-    expect(html.match(/aria-label="Stop status"/g)).toHaveLength(1);
-    expect(html.match(/<button/g)).toHaveLength(1);
-  }
-  for (const [state, receipt] of [
-    ["running", "cancelled"],
-    ["cancelled", "cancelled"],
-    ["cancelled", undefined],
-  ] as const) {
-    const html = renderStop(state, "observed", receipt);
+    const html = renderStop("cancelled", "observed", receipt);
+    expect(html).not.toContain('aria-label="Stop status"');
     expect(html).not.toContain("<h3>Stopped</h3>");
-    expect(html).not.toContain("Stopped. Completed steps remain recorded.");
-    if (receipt) expect(html).toContain("<h3>Cancelling</h3>");
+    expect(html).not.toContain("<h3>Cancelling</h3>");
+    expect(html).not.toContain("Complete</span>");
+    expect(html).not.toContain("<button");
   }
+  const live = renderStop("running", "observed", "cancelled");
+  expect(live).toContain("<h3>Cancelling</h3>");
+  expect(live.match(/aria-label="Stop status"/g)).toHaveLength(1);
 });
 
-it("a saved completed or failed run cannot be presented as cancellation in progress", () => {
-  for (const historyState of ["completed", "failed"] as const) {
-    const html = renderStop(
-      "running",
-      "observed",
-      "cancelled",
-      false,
-      historyState,
-    );
-    expect(html).not.toContain("<h3>Cancelling</h3>");
-    expect(html).not.toContain("finishing the current safe step");
-    expect(html).not.toContain("<h3>Stopped</h3>");
-    const prior = renderStop(
-      "running",
-      "observed",
-      historyState,
-      false,
-      historyState,
-    );
-    expect(prior).toContain(
-      `The run had already ${historyState} when the stop request arrived.`,
-    );
+it("a Stop that arrived after the run finished keeps saying so, and is never presented as cancellation", () => {
+  for (const state of ["completed", "failed"] as const) {
+    const cancelled = renderStop(state, "observed", "cancelled");
+    expect(cancelled).not.toContain("<h3>Cancelling</h3>");
+    expect(cancelled).not.toContain("finishing the current safe step");
+    expect(cancelled).not.toContain('aria-label="Stop status"');
+    // The receipt survives the run settling: the person asked for something that did not happen.
+    for (const live of ["running", state]) {
+      const prior = renderStop(live, "observed", state);
+      expect(prior).toContain(
+        `The run had already ${state} when the stop request arrived.`,
+      );
+      expect(prior).not.toContain("<h3>Cancelling</h3>");
+    }
   }
 });
 

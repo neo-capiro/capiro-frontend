@@ -13,6 +13,33 @@
 }
 .evidence {
   width: 100%;
+  gap: 0;
+}
+/* One quiet disclosure for the whole conversation; audit material stays closed until asked for. */
+.evidence > summary {
+  cursor: pointer;
+  align-self: flex-start;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.evidence[open] > summary {
+  margin-bottom: 8px;
+}
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  font-size: 12px;
+}
+.tools li {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted-foreground);
 }
 .run {
   padding-top: 16px;
