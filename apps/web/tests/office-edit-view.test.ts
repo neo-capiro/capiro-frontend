@@ -7,6 +7,7 @@ import {
 import {
   officeEditExplanation,
   officeEditSettled,
+  type OfficeEditListItem,
 } from "../src/features/meri/conversation/intents/office-edit-view";
 import { intentDecisionSettled } from "../src/features/meri/conversation/intents/research-share-view";
 import {
@@ -144,16 +145,7 @@ describe("office proposal card", () => {
       decision: "closed",
       status: "Status unavailable",
     });
-    const withheld:
-      | Extract<typeof item, { kind: "office_edit" }>
-      | {
-          deliveryId: string;
-          createdAt: string;
-          operation: { id: "propose_office_edit"; version: "0.2.0" };
-          state: "prepared";
-          kind: "office_edit";
-          withheld: true;
-        } = {
+    const withheld: OfficeEditListItem = {
       deliveryId: item.deliveryId,
       createdAt: item.createdAt,
       operation: item.operation,

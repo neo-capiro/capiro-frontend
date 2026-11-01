@@ -80,7 +80,9 @@ describe("reopening an applied version", () => {
     const html = renderToStaticMarkup(
       createElement(
         OfficeEditing,
-        { enabled: true, account: viewer },
+        { enabled: true, account: viewer } as ComponentProps<
+          typeof OfficeEditing
+        >,
         createElement(OfficeOpenVersionButton, { version: target }),
       ),
     );
@@ -90,7 +92,9 @@ describe("reopening an applied version", () => {
       renderToStaticMarkup(
         createElement(
           OfficeEditing,
-          { enabled: true, account: viewer },
+          { enabled: true, account: viewer } as ComponentProps<
+            typeof OfficeEditing
+          >,
           createElement(OfficeOpenVersionButton, {
             version: { ...target, mimeType: "text/plain" },
           }),
