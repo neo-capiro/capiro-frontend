@@ -12,6 +12,7 @@ import {
   OperationalWorkSections,
 } from "./OperationalSections";
 import styles from "./operational.module.css";
+import { ObjectiveSavedGenerationCard } from "./ObjectiveSavedGenerationCard";
 const ObjectiveAssociationDialog = lazy(() =>
   import("./ObjectiveAssociationDialog").then((module) => ({
     default: module.ObjectiveAssociationDialog,
@@ -134,8 +135,8 @@ function LinkedWork({
       </OperationalPanel>
       <OperationalEngagementSection {...panels} />
       <p className={styles.caption}>
-        Requested, Strategy-applied and Planner-applied versions are
-        unavailable. Opening this page does not start or continue generation.
+        Linked work and saved generation are separate observations. Opening
+        this page does not start or continue generation.
       </p>
     </>
   );
@@ -211,6 +212,7 @@ export function ObjectiveOperationalPage({
         onManage={() => setManageLinks(true)}
         trigger={trigger}
       />
+      <ObjectiveSavedGenerationCard objective={objective} />
       <SuccessCriteria objective={objective} />
       {manageLinks && (
         <Suspense fallback={<p role="status">Loading link editor…</p>}>
