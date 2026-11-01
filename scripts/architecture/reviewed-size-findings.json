@@ -1876,26 +1876,6 @@
     "reviewedOn": "2026-10-14"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
-    "kind": "function",
-    "symbol": "RichBlockControls",
-    "line": 24,
-    "nonblank": 173,
-    "fingerprint": "095f9854594b366b3237349c02ea1158ae1b0ee1c84681c6179faca4910e2a28",
-    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: One current block-control host adds only the existing provider child and optional current saved-document identity. Current manual content/structure/style and existing update/remove owners remain exact after reversing those additions. The shared request/proposal hook retains lifetime responsibility; this host does not implement a second writer. See W3-FE217-COMPOSITION-REVIEW.md.",
-    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
-    "kind": "function",
-    "symbol": "RichNewsletterEditor",
-    "fingerprint": "019e968a5aea130e973dba642c0828f3d9b31578369134dc6a599df017f0d57d",
-    "reason": "One rich-editor composition host; the added AI preset child receives current unfenced saved identity, local design and a draft/revision proposal signature, then returns a structure action to the existing local history owner. Provider transport, proposal lifetime, presets, rendering and durable writes stay in separate existing or cohesive child modules. The size remains a visible composition signal, not a second workflow owner.",
-    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
-    "reviewedOn": "2026-11-01"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
     "kind": "function",
     "symbol": "createRichDocumentController",
@@ -4107,15 +4087,6 @@
     "reviewedOn": "2026-10-31"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
-    "kind": "function",
-    "symbol": "SavedRichPreview",
-    "fingerprint": "b3990c5ca4ebc6b7b181a6a812211f615708b27e27c53660f053bf7ed65294cd",
-    "reason": "SavedRichPreview presents one immutable saved preview and its revision metadata. Link inventory and checkbox presentation are separate local modules; no URL is fetched or opened. Existing sanitization, inert iframe sandbox and saved revision selection remain unchanged. No provider or durable write responsibility enters the preview.",
-    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
-    "reviewedOn": "2026-11-01"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx",
     "kind": "file",
     "symbol": "<module>",
@@ -4721,15 +4692,6 @@
     "reviewedOn": "2026-10-26"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "2c05e28333f1b4ddb6e4cc32ea5bcde8618118ef3a6cc8448cac1bf176b1306c",
-    "reason": "One rich-editor composition host; the added AI preset child receives current unfenced saved identity, local design and a draft/revision proposal signature, then returns a structure action to the existing local history owner. Provider transport, proposal lifetime, presets, rendering and durable writes stay in separate existing or cohesive child modules. The size remains a visible composition signal, not a second workflow owner.",
-    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
-    "reviewedOn": "2026-11-01"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/AccountInvitation.tsx",
     "kind": "function",
     "symbol": "AccountInvitation",
@@ -4897,15 +4859,6 @@
     "symbol": "BlockPlacement",
     "fingerprint": "07a68f18a6f7525f5bbbddcabc82ff507df5e623a97370a46da75c8f99e71c16",
     "reason": "One block-placement inspector binds current section/column choices and delegates changes to the guarded structural transform.",
-    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/DesignStyles.tsx",
-    "kind": "function",
-    "symbol": "DesignStyles",
-    "fingerprint": "c34c492eb9b038d7a60e2dfcc46daca47f0d39852474cb39905e5fc0a0885b87",
-    "reason": "One email-style inspector selects canonical desktop/mobile slots without replacing Brand Kit or document persistence. Numeric typing defect is separately required below; it is not a responsibility split issue.",
     "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
@@ -7833,6 +7786,87 @@
     "fingerprint": "56997f05e64347a42f4e7c1a98da763c20c7ecb89704984f8284ffd2f5fb3849",
     "reason": "Independent design review at c746e399: this controlled component owns the five shared intake questions and their labels, limits and owner choices. Values and constants come from the public shared contract; updates return a complete draft to the enclosing editor. The existing query owner supplies current Clerk-ID choices and explicit retry, while Core remains responsible for active membership and native-owner resolution. The component has no persistence or generation side effects. The repeated label/control markup is one form responsibility and does not warrant artificial splitting. Exact fingerprint only.",
     "reviewedBy": "Codex independent reviewer /root/sdk_flow_map",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
+    "kind": "function",
+    "symbol": "RichBlockControls",
+    "fingerprint": "f8cca1173161669cebe43737c724a8658df1407b829ce8ff6d200f13afc8cb2f",
+    "reason": "One selected-block inspector. Content/Styles tabs organize the existing block-specific fields and provider controls without introducing another block model or mutation path.",
+    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "d9f26a0607b2b3531df1f577db11c9a4a3bb86fa9aa0fbd4cf433051bd051efe",
+    "reason": "Single Newsletter workspace composition around the existing controller. Owns local view/selection state and composes the header, tool rail, inspector, canvas and preview. Persistence, CAS, retained requests, authorization, provider proposals and libraries remain in their existing owners. The source-reference layout needs these views to share the same local selection and document lifecycle; no second save owner or agent loop was introduced.",
+    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+    "kind": "function",
+    "symbol": "RichNewsletterEditor",
+    "fingerprint": "6b7d479b98c95f6dec9806f4b725caabf3785ffaccc59a4041c4b205efc9bb21",
+    "reason": "Single Newsletter workspace composition around the existing controller. Owns local view/selection state and composes the header, tool rail, inspector, canvas and preview. Persistence, CAS, retained requests, authorization, provider proposals and libraries remain in their existing owners. The source-reference layout needs these views to share the same local selection and document lifecycle; no second save owner or agent loop was introduced.",
+    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/DesignStyles.tsx",
+    "kind": "function",
+    "symbol": "DesignStyles",
+    "fingerprint": "872a419f29d6c258158ca616e357e82df84a70a6b05ab2907659142608799676",
+    "reason": "One email design inspector. Category buttons replace the select field; canonical design values and mutation callback are unchanged.",
+    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/WorkspacePalette.tsx",
+    "kind": "function",
+    "symbol": "WorkspacePalette",
+    "fingerprint": "642cc27a2966e5da38509055e85acbdd94c77e5982d56255cbb621c864ad9242",
+    "reason": "Single bounded Newsletter presentation responsibility; domain and authority owners remain unchanged.",
+    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/WorkspacePreview.tsx",
+    "kind": "function",
+    "symbol": "WorkspacePreview",
+    "fingerprint": "6238af53bd7a2e484eaf0912b45a587642919dbda9b39d67195ca6b1ded4b69e",
+    "reason": "One local/saved preview dialog with device modes and email information. Saved HTML identity remains explicit and immutable; actual provider checks delegate to HtmlCheckTool and staging only opens existing reviewed lifecycle controls.",
+    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/WorkspaceSections.tsx",
+    "kind": "function",
+    "symbol": "WorkspaceSections",
+    "fingerprint": "2fee5e1adc06b863c7dd30605d02ab470c80962fd2996a1cf7beaa68c1fe6372",
+    "reason": "One section-management panel, with Manage/Pre-built/Saved views delegating all edits to the existing structure reducer and all persistence to the existing library owner.",
+    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/canvas-document.ts",
+    "kind": "function",
+    "symbol": "bindBlock",
+    "fingerprint": "79bfa2ea031e8c0dcafd118bca8e6c9282fdc6a39bf18d5c0fb47a451f30cbc6",
+    "reason": "Parent-owned local interaction binding for the canonical, sanitized email document. Functions bind selection, keyboard navigation, block actions and nested drop destinations. No API or provider dispatch lives here. Rendering and request policy remain in the existing canonical renderer/sanitizer and script-disabled iframe.",
+    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/workspace.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "10d1d8b2a48612e28570ef99cf99eed4a2bff7f446b40fba21378feebd1435b9",
+    "reason": "Scoped internal Newsletter workspace styles derived from the pinned OS reference. This module intentionally groups the related rail/sidebar/canvas/preview geometry and responsive rules; no global shell or token mutation.",
+    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
     "reviewedOn": "2026-11-01"
   }
 ]
