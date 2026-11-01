@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Tooltip as TooltipPrimitive } from "radix-ui";
 import { Tooltip, TooltipTrigger } from "@capiro/ui/tooltip";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { PageHeader } from "../../../shared/module-ui";
 import {
@@ -14,6 +14,8 @@ import {
 } from "../../../shared/shell/module-catalog";
 import { ModuleAsset } from "../../../shared/shell/ModuleAsset";
 import { HubCardMetrics } from "./HubCardMetrics";
+import { ProcurementReadPanel } from "../intelligence/research/ProcurementPanel";
+import { useProcurementSelection } from "../intelligence/research/useProcurementSelection";
 import styles from "./hub.module.css";
 
 function ModuleCard({
@@ -76,14 +78,11 @@ export function ModuleHub({
   const clients = useCapiroQuery("clients.list", {
     query: { includeArchived: false },
   });
-  const router = useRouter();
+  const procurement = useProcurementSelection();
   const params = useSearchParams();
   const clientId = params.get("clientId") ?? "";
   const setClientId = (id: string) => {
-    const next = new URLSearchParams(params);
-    if (id) next.set("clientId", id);
-    else next.delete("clientId");
-    router.push(`/modules?${next}`);
+    procurement.update({ clientId: id || null });
   };
   const profiles = clients.error ? [] : (clients.data ?? []);
   const clientsLoading = clients.loading;
@@ -103,6 +102,7 @@ export function ModuleHub({
       data-design-target={previewCoreReadOnly ? undefined : "1064:191436"}
     >
       <HubHeader
+        scopePending={procurement.pending}
         previewCoreReadOnly={previewCoreReadOnly}
         clientId={clientId}
         setClientId={setClientId}
@@ -143,6 +143,7 @@ export function ModuleHub({
             clientId={clientId}
             landscape
           />
+          <ProcurementReadPanel mode="hub" selection={procurement} />
         </>
       )}
     </div>
@@ -175,11 +176,13 @@ function PreviewProfiles({
 }
 
 function HubHeader({
+  scopePending,
   previewCoreReadOnly,
   clientId,
   setClientId,
   clients,
 }: {
+  scopePending: boolean;
   previewCoreReadOnly: boolean;
   clientId: string;
   setClientId: (id: string) => void;
@@ -213,7 +216,9 @@ function HubHeader({
             <select
               aria-label="Client profile scope"
               value={clientId}
-              disabled={clients.loading || Boolean(clients.error)}
+              disabled={
+                scopePending || clients.loading || Boolean(clients.error)
+              }
               onChange={(event) => setClientId(event.target.value)}
             >
               <option value="">

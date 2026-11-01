@@ -12,6 +12,7 @@ const state = vi.hoisted(() => ({
   ownedError: undefined as Error | undefined,
 }));
 vi.mock("next/navigation", () => ({
+  usePathname: () => "/modules",
   useRouter: () => ({ push: vi.fn() }),
   useSearchParams: () => new URLSearchParams(state.params),
 }));
@@ -22,6 +23,11 @@ vi.mock("../src/shared/capiro/queries", () => ({
     options?: { enabled: boolean },
   ) => {
     state.reads.push({ key, input, enabled: options?.enabled });
+    if (key === "procurement.hubSummary") {
+      // No award cohort is selected by these seven-card fixtures.
+      expect(options?.enabled).toBe(false);
+      return { loading: false, reload: vi.fn() };
+    }
     if (key === "clients.list")
       return {
         data: [],
@@ -180,6 +186,7 @@ it("mounts independent supported domain aggregates alongside the roster", () => 
     "engagement.metrics.personalClassicOutreach30d",
     "intelligence.funding.search",
     "planner.metrics.overdue",
+    "procurement.hubSummary",
     "researchPortfolios.metrics.active",
     "strategies.metrics.active",
     "workspace.metrics.savedWork",

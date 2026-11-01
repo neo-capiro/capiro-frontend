@@ -93,6 +93,17 @@ function approvedNewsletterProjectionTypeImport(file, entry) {
     && entry.names.length === 1 && entry.names[0] === 'workspaceSavedOutreachRevisionWithinTx';
 }
 
+function approvedProcurementTypeImport(file, entry) {
+  const readers = new Map([
+    [`${appSource}shared/capiro/operations/procurement-money-flow.ts`, new Set(['ProcurementFlowGroup', 'ProcurementHubSummary', 'ProcurementMeasure', 'ProcurementMoneyFlow', 'ProcurementScopeRequest'])],
+    [`${appSource}features/modules/intelligence/research/procurement-selection.ts`, new Set(['ProcurementMoneyFlow', 'ProcurementScopeRequest'])],
+    [`${appSource}features/modules/intelligence/research/ProcurementResult.tsx`, new Set(['ProcurementMoneyFlow', 'ProcurementHubSummary'])],
+  ]);
+  const allowed = readers.get(file);
+  return entry.specifier === '@capiro/shared' && entry.kind === 'other'
+    && allowed && entry.names.length > 0 && entry.names.every(name => allowed.has(name));
+}
+
 function approvedPricingImport(file, module, entry) {
   return file === pricingOwner && entry.specifier === '@capiro/shared'
     && entry.kind === 'named' && entry.names.length === 2
@@ -297,7 +308,7 @@ export function inspectDependencies(file, module, files, approvedExports = publi
     const { specifier } = entry;
     if (specifier === null) { errors.push(`${file}: computed import forbidden`); continue; }
     if (/meri-greenfield|capirov2|apps\/api|^https?:|^node:/.test(specifier)) errors.push(`${file}: restricted runtime/repository import ${specifier}`);
-    if (specifier === '@capiro/shared' ? !(approvedPricingImport(file, module, entry) || approvedSnapshotImport(file, entry) || approvedNewsletterProjectionTypeImport(file, entry)) : specifier.startsWith('@capiro/') && !approvedExports.has(specifier)) errors.push(`${file}: non-public package import ${specifier}`);
+    if (specifier === '@capiro/shared' ? !(approvedPricingImport(file, module, entry) || approvedSnapshotImport(file, entry) || approvedNewsletterProjectionTypeImport(file, entry) || approvedProcurementTypeImport(file, entry)) : specifier.startsWith('@capiro/') && !approvedExports.has(specifier)) errors.push(`${file}: non-public package import ${specifier}`);
     const { local, resolved } = resolveImport(file, specifier, files);
     if (serverAdapters.has(file) && !serverAdapters.get(file).has(resolved ?? specifier)) errors.push(`${file}: server adapter dependency is not allocated: ${specifier}`);
     if (!local) continue;

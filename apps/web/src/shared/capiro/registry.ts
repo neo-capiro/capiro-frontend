@@ -32,6 +32,7 @@ import { researchWorkflowOperations } from "./operations/research-workflow";
 import { researchDraftOperations } from "./operations/research-drafts";
 import { researchComparisonOperations } from "./operations/research-comparisons";
 import { defenseResearchOperations } from "./operations/defense-research";
+import { procurementOperations } from "./operations/procurement-money-flow";
 import { defenseProductCoverageOperations } from "./operations/defense-product-coverage";
 import { defenseEvidenceOperations } from "./operations/defense-evidence";
 import { federalEvidenceOperations } from "./operations/federal-evidence";
@@ -98,6 +99,7 @@ export const capiroOperations = {
   ...researchDraftOperations,
   ...researchComparisonOperations,
   ...defenseResearchOperations,
+  ...procurementOperations,
   ...defenseProductCoverageOperations,
   ...defenseEvidenceOperations,
   ...federalEvidenceOperations,
