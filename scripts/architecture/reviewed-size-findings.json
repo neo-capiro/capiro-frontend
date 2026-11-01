@@ -6837,10 +6837,10 @@
     "file": "apps/web/src/shared/shell/shell.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "ef9812ff1b83b9f28faa1f012442c0676ef373ae16b633e4e7874fdc30a16762",
-    "reason": "Ground truth: head 419/ef9812ffâ€¦; base 385 with no signal â€” this commit's +34 nonblank (helper group, Info button, focus-visible outline, tooltip reason width/wrapping, plus the mobile row sizing interaction) crossed the 400 threshold, so this is a newly introduced file-level signal, not an inherited exemption. Cohesion: the module is the single presentation owner for the Meri shell chrome (header/brand, sidebar toggle, mode/action buttons, sidebar nav, recents, preferences, main, mobile menu) and holds only declarative rules â€” no logic, no state, no responsibility overlap with home.module.css/files.module.css, and several already-shared breakpoint @media blocks re-target the same selectors, so splitting into sidebar/mobile/tooltip modules would fragment co-located overrides for no behaviour gain. The added rules are the correct home for the new disabled-control presentation. Accepted as a bounded single presentational surface; the rationale root binds must cover the whole 419-line body with the caveat that a future unrelated concern added to this file should be extracted rather than appended.",
-    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "3561c2808fb1086e356d2a747d4779e8fd7faf5aef2ed5048e75fb570cd424f5",
+    "reason": "This existing shell stylesheet owns Meri navigation/header geometry and responsive presentation. The delta adjusts recent-history density, selected/hover states and the header divider within the existing scoped selectors. It preserves sidebar resize/scroll containment and tablet/phone rules from the prior accepted change. Splitting only to reduce line count would fragment the same theme/layout responsibility.",
+    "reviewedBy": "Codex independent FE reviewer (non-author)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
@@ -7473,10 +7473,10 @@
     "file": "apps/web/src/shared/impersonation/useImpersonationSession.ts",
     "kind": "function",
     "symbol": "useImpersonationSession",
-    "fingerprint": "3192102d95b6c2a4e5b8076ea10684e07f1f9ee5cfdfbac5978551c8941508c8",
-    "reason": "Independent review of the support-session hook: its read/throttle, invalidation, presentation state and confirmed exit form one lifecycle. The small cached-read closure now shares the hook's API/request lifetime, eliminating prior cross-owner reuse. No unrelated domain or authority responsibility was added; extracting only for line count would separate lifetime-bound state from its owner.",
-    "reviewedBy": "Codex independent reviewer /root/portfolio_merged_review (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "c2a23e8e6a078992ae3cce89c4d9d04c9b4931cb5f96867b17fb5b01fcce58b7",
+    "reason": "This hook owns one authenticated support-session observation lifetime: scope-local read throttling, explicit invalidation, fresh focus verification, polling, stale-response rejection and exit reconciliation. The change splits only the focus trigger from explicit invalidation, retaining the existing authority response and cleanup owner. It introduces no global cache or parallel transport. Keeping the coordinated read/cache/effect lifetime together prevents scope and stale-result state from being scattered across independent hooks.",
+    "reviewedBy": "Codex independent FE reviewer (non-author)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx",
@@ -7728,6 +7728,15 @@
     "fingerprint": "20eff0efd73cd7ed6ae4d3d1bfd6202f0cd0fb3d105b8c36f94c7c702e23f64e",
     "reason": "one ordered derivation maintains raw intermediates/dependencies/removal invariants and invokes the canonical decoder/edit owner; splitting that loop is not required for this bounded additive mode.",
     "reviewedBy": "raw_source (independent FE consumer reviewer)",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/meri/home.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "a94b9f6caf31cd40813f543bc619d2fc8634b792c30a9bd68efbbcac5da8212b",
+    "reason": "This existing Meri home/composer stylesheet retains one feature presentation owner. The delta adds an enclosing focus indicator, reduced-motion handling and footer width correction using existing tokens and local composer selectors; it introduces no new state, authority, layout framework or global style exemption. Existing responsive/theme rules remain cohesive with the composer they style.",
+    "reviewedBy": "Codex independent FE reviewer (non-author)",
     "reviewedOn": "2026-11-01"
   }
 ]
