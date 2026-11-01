@@ -72,7 +72,12 @@ export function ConversationBody({
         initial="instant"
         resize="instant"
       >
-        <ConversationContent className={styles.turns}>
+        <ConversationContent
+          className={styles.turns}
+          tabIndex={0}
+          role="region"
+          aria-label="Conversation transcript"
+        >
           {earlier.map((turn, index) => (
             <ConversationTurn
               key={turn.runId}
