@@ -8,11 +8,11 @@ import { useObjectiveOperational } from "./query";
 import {
   OperationalDecisionSection,
   OperationalEngagementSection,
-  OperationalPanel,
   OperationalWorkSections,
 } from "./OperationalSections";
 import styles from "./operational.module.css";
 import { ObjectiveSavedGenerationCard } from "./ObjectiveSavedGenerationCard";
+import { ObjectiveQuestionsPanel } from "../questions/ObjectiveQuestionsPanel";
 const ObjectiveAssociationDialog = lazy(() =>
   import("./ObjectiveAssociationDialog").then((module) => ({
     default: module.ObjectiveAssociationDialog,
@@ -41,7 +41,6 @@ function Overview({
         : "Unavailable",
     ],
     ["Decisions waiting", read?.sections.decisions.total ?? "Unavailable"],
-    ["Open intelligence questions", "Unavailable"],
     [
       "Next engagement",
       firstMeeting
@@ -123,16 +122,6 @@ function LinkedWork({
       </div>
       <OperationalDecisionSection {...panels} />
       <OperationalWorkSections {...panels} />
-      <OperationalPanel
-        title="Open intelligence questions"
-        coverage={read.sections.questions.coverage}
-        hasItems={false}
-        empty=""
-      >
-        <p className={styles.caption}>
-          Question status is unavailable for this view.
-        </p>
-      </OperationalPanel>
       <OperationalEngagementSection {...panels} />
       <p className={styles.caption}>
         Linked work and saved generation are separate observations. Opening
@@ -213,6 +202,11 @@ export function ObjectiveOperationalPage({
         trigger={trigger}
       />
       <ObjectiveSavedGenerationCard objective={objective} />
+      <ObjectiveQuestionsPanel
+        objective={objective}
+        canEdit={Boolean(canEdit) && !query.loading}
+        onReloadObjective={onReloadObjective}
+      />
       <SuccessCriteria objective={objective} />
       {manageLinks && (
         <Suspense fallback={<p role="status">Loading link editor…</p>}>
