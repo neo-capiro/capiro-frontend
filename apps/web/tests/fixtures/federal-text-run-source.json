@@ -1,0 +1,1676 @@
+{
+  "note": "Synthetic Core/SQL/object/validator ports with canonical mounted Meri1.7 routes and generated receiver. Validator port replays the exact previously observed real pinned-schema receipt for the unchanged3112byte officialUSGPO sample from schema1.6 fixture. This tests parser3 projection/wire/byte publication, not a fresh actual child or qualified target runtime.",
+  "input": {
+    "selection": {
+      "billId": "119-hr-1",
+      "versionCode": "enr",
+      "revisionId": "11111111-1111-4111-8111-111111111111",
+      "versionHash": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1",
+      "textHash": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1"
+    },
+    "deliveryId": "2dad2b8a-4b65-474d-b8b4-22d2686e91e5",
+    "representation": "retained-raw-utf8/1",
+    "validationProfile": "uslm-2.1.0",
+    "sourceProfile": "uslm-text-runs/1"
+  },
+  "imported": {
+    "schema": "meri.federal-source.v2",
+    "representation": "retained-raw-utf8/1",
+    "capture": {
+      "version": "federal-source-capture/1",
+      "representation": "response-body",
+      "format": "xml",
+      "mediaType": "application/xml; charset=UTF-8",
+      "encoding": "utf-8",
+      "byteLength": 3112,
+      "sha256": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1",
+      "utf8RoundTrip": true
+    },
+    "selection": {
+      "billId": "119-hr-1",
+      "versionCode": "enr",
+      "revisionId": "11111111-1111-4111-8111-111111111111",
+      "versionHash": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1",
+      "textHash": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1"
+    },
+    "source": {
+      "documentId": "119-hr-1",
+      "publisher": "govinfo",
+      "sourceVersion": "enr/11111111-1111-4111-8111-111111111111",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/xml/BILLS-119hr1enr.xml",
+      "publishedAt": "2026-01-01",
+      "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><?xml-stylesheet type=\"text/css\" href=\"uslm.css\"?>\n<resolution xmlns=\"http://schemas.gpo.gov/xml/uslm\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:html=\"http://www.w3.org/1999/xhtml\" xmlns:slc=\"http://xml.senate.gov\" xmlns:uslm=\"http://schemas.gpo.gov/xml/uslm\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://schemas.gpo.gov/xml/uslm uslm-2.1.0.xsd\" xml:lang=\"en\" id=\"H154712A4A85D48A8A6EF9078D3848A92\">\n<!--Disclaimer: Legislative measures that include compacts or other non-standard data structures will require additional modeling and may contain inconsistencies in the converted USLM XML.-->\n<meta>\n<dc:title>114 HRES 99 EH: </dc:title>\n<dc:type>House Simple Resolution</dc:type>\n<docNumber>99</docNumber>\n<citableAs>114 HRES 99 EH</citableAs>\n<citableAs>114hres99eh</citableAs>\n<citableAs>114 H. Res. 99 EH</citableAs>\n<docStage>Engrossed in House</docStage>\n<currentChamber>HOUSE</currentChamber>\n<dc:creator>United States House of Representatives</dc:creator>\n<processedBy>GPO XPub Bill to USLM Generator, version 0.5 + manual changes</processedBy>\n<processedDate>2024-09-09</processedDate>\n<dc:publisher>United States Government Publishing Office</dc:publisher>\n<dc:format>text/xml</dc:format>\n<dc:language>EN</dc:language>\n<dc:rights>Pursuant to Title 17 Section 105 of the United States Code, this file is not subject to copyright protection and is in the public domain.</dc:rights>\n<congress>114</congress>\n<session>1</session>\n<publicPrivate>public</publicPrivate></meta>\n<preface>\n<slugLine>•HRES 99 EH</slugLine>\n<distributionCode display=\"no\">IV</distributionCode>\n<congress value=\"114\" display=\"no\">114th CONGRESS</congress>\n<session value=\"1\" display=\"no\">1st Session</session>\n<dc:type>H. Res. </dc:type>\n<docNumber>99</docNumber>\n<currentChamber value=\"HOUSE\">In the House of Representatives, U. S.,</currentChamber>\n<action><date date=\"2015-02-10\">February 10, 2015.</date></action></preface>\n<main styleType=\"multiple-resolved-clause\" id=\"H799C079A8D71495BA685095ED8501D6F\">\n    <resolvingClause><i>Resolved, </i></resolvingClause> <section id=\"HE4CAF9520F654C99838F6B0FC30297BB\" class=\"inline\"><content class=\"inline\">That the House has heard with profound sorrow of the death of the Honorable Alan Nunnelee, a Representative from the State of Mississippi.</content></section> \n    <resolvingClause class=\"inline\"><i>Resolved, </i></resolvingClause><section id=\"H846F3DBF7AF7445DAE271C4A3308B846\"><content class=\"inline\">That the Clerk communicate these resolutions to the Senate and transmit a copy thereof to the family of the deceased.</content></section> \n    <resolvingClause class=\"inline\"><i>Resolved, </i></resolvingClause><section id=\"HD0A37150A1794FD195E1D44F8EE4109A\"><content class=\"inline\">That when the House adjourns today, it adjourn as a further mark of respect to the memory of the deceased.</content></section> </main>\n    <signatures><signature><notation type=\"attestation\">Attest: </notation><name display=\"no\">KAREN L. HAAS,</name><role>Clerk.</role></signature></signatures></resolution>",
+      "sha256": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1",
+      "parserVersion": "federal-uslm-xml/3",
+      "coverage": {
+        "complete": true,
+        "limitations": [
+          "Exact USLM XML text validated against the pinned USLM 2.1.0 schema; scopes use declared element identifiers or IDs. Numbering, cross-references, arithmetic, enactment and substantive law remain unresolved.",
+          "Captured response-body UTF-8 bytes and exact SHA-256 verified; compressed HTTP transport frames are not retained.",
+          "Current at read only. Enactment and legal currency are unresolved; an enrolled bill is not proof of enactment.",
+          "Canonical federal source metadata: {\"billId\":\"119-hr-1\",\"collection\":\"BILLS\",\"evidenceParserVersion\":\"federal-legislative-exact-code-v1+federal-source-capture/1\",\"fetchedAt\":\"2026-01-03T00:00:00.000Z\",\"lineageKey\":\"bill:119-hr-1\",\"packageId\":\"BILLS-119hr1enr\",\"provider\":\"govinfo\",\"publishedAt\":\"2026-01-01T00:00:00.000Z\",\"revisionId\":\"11111111-1111-4111-8111-111111111111\",\"sourceKey\":\"fixture-bill\",\"sourceLocator\":\"https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/xml/BILLS-119hr1enr.xml\",\"sourceModifiedAt\":\"2026-01-02T00:00:00.000Z\",\"textHash\":\"65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1\",\"versionCode\":\"enr\",\"versionHash\":\"65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1\"}",
+          "Captured response-body receipt: {\"byteLength\":3112,\"encoding\":\"utf-8\",\"format\":\"xml\",\"mediaType\":\"application/xml; charset=UTF-8\",\"representation\":\"response-body\",\"sha256\":\"65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1\",\"utf8RoundTrip\":true,\"version\":\"federal-source-capture/1\"}"
+        ]
+      },
+      "scopes": [
+        {
+          "id": "document",
+          "label": "resolution H154712A4A85D48A8A6EF9078D3848A92",
+          "start": 89,
+          "end": 3110,
+          "sha256": "a8f9c212f8aaa664afe688fd150356c4fcd5fe71a4401c679ad2168fa2a6f269",
+          "ancestorPath": []
+        },
+        {
+          "id": "run:1",
+          "label": "text run 1",
+          "start": 481,
+          "end": 482,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:2",
+          "label": "text run 2",
+          "start": 673,
+          "end": 674,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:3",
+          "label": "text run 3",
+          "start": 680,
+          "end": 681,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:4",
+          "label": "text run 4",
+          "start": 691,
+          "end": 707,
+          "sha256": "7ea0ff19c0bae0a740252a6cc86e5f821f5df58b099b1cdbdc229565d85320c9",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "114 HRES 99 EH: ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 16,
+                "decodedStart": 0,
+                "decodedEnd": 16
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:5",
+          "label": "text run 5",
+          "start": 718,
+          "end": 719,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:6",
+          "label": "text run 6",
+          "start": 728,
+          "end": 751,
+          "sha256": "a08d6e73de32e2dc1ef07a5637c30386bb396617441c00429c8e988be6793529",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "House Simple Resolution",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 23,
+                "decodedStart": 0,
+                "decodedEnd": 23
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:7",
+          "label": "text run 7",
+          "start": 761,
+          "end": 762,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:8",
+          "label": "text run 8",
+          "start": 773,
+          "end": 775,
+          "sha256": "8c1f1046219ddd216a023f792356ddf127fce372a72ec9b4cdac989ee5b0b455",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "99",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 2,
+                "decodedStart": 0,
+                "decodedEnd": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:9",
+          "label": "text run 9",
+          "start": 787,
+          "end": 788,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:10",
+          "label": "text run 10",
+          "start": 799,
+          "end": 813,
+          "sha256": "839abc8d6b11fcdba867696c7e9bf90ac7b5921cda84217ffffa2885672cd184",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "114 HRES 99 EH",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 14,
+                "decodedStart": 0,
+                "decodedEnd": 14
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:11",
+          "label": "text run 11",
+          "start": 825,
+          "end": 826,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:12",
+          "label": "text run 12",
+          "start": 837,
+          "end": 848,
+          "sha256": "4347494718cea64d14bfe9832d9f1faaf9e293c74dd44fcdba89c929e365c2e8",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "114hres99eh",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 11,
+                "decodedStart": 0,
+                "decodedEnd": 11
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:13",
+          "label": "text run 13",
+          "start": 860,
+          "end": 861,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:14",
+          "label": "text run 14",
+          "start": 872,
+          "end": 889,
+          "sha256": "52392b0746becb1d1ce753e28399964d984fd72cbbb116fa59921a070529a825",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "114 H. Res. 99 EH",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 17,
+                "decodedStart": 0,
+                "decodedEnd": 17
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:15",
+          "label": "text run 15",
+          "start": 901,
+          "end": 902,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:16",
+          "label": "text run 16",
+          "start": 912,
+          "end": 930,
+          "sha256": "a4f88585da373768a847c20deb6719db1c0b68f405ef3d59bc201b38b1019edc",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "Engrossed in House",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 18,
+                "decodedStart": 0,
+                "decodedEnd": 18
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:17",
+          "label": "text run 17",
+          "start": 941,
+          "end": 942,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:18",
+          "label": "text run 18",
+          "start": 958,
+          "end": 963,
+          "sha256": "3e83712a5c41abe11cf75a9ff41a66059e3bf823421bbc6d7bd3797e83786ed8",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "HOUSE",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 5,
+                "decodedStart": 0,
+                "decodedEnd": 5
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:19",
+          "label": "text run 19",
+          "start": 980,
+          "end": 981,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:20",
+          "label": "text run 20",
+          "start": 993,
+          "end": 1031,
+          "sha256": "22eb72a02d5e18de967c69bbe5d0b888bef1d00add7d8f27a21435b59a679294",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "United States House of Representatives",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 38,
+                "decodedStart": 0,
+                "decodedEnd": 38
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:21",
+          "label": "text run 21",
+          "start": 1044,
+          "end": 1045,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:22",
+          "label": "text run 22",
+          "start": 1058,
+          "end": 1119,
+          "sha256": "6a870324ded45dcf3e4b986220967aa09ef1a78be10ca051f1e72a871b200716",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "GPO XPub Bill to USLM Generator, version 0.5 + manual changes",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 61,
+                "decodedStart": 0,
+                "decodedEnd": 61
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:23",
+          "label": "text run 23",
+          "start": 1133,
+          "end": 1134,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:24",
+          "label": "text run 24",
+          "start": 1149,
+          "end": 1159,
+          "sha256": "c1e9c1c135c34aa0eace8cbc57559af9a250f4fb93882b4bb9bf59c8dd73dfea",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "2024-09-09",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 10,
+                "decodedStart": 0,
+                "decodedEnd": 10
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:25",
+          "label": "text run 25",
+          "start": 1175,
+          "end": 1176,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:26",
+          "label": "text run 26",
+          "start": 1190,
+          "end": 1232,
+          "sha256": "da76d04c17c84ab203422bcba18cbfef55556b1e2e9b36e623f1131f50ba72fd",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "United States Government Publishing Office",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 42,
+                "decodedStart": 0,
+                "decodedEnd": 42
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:27",
+          "label": "text run 27",
+          "start": 1247,
+          "end": 1248,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:28",
+          "label": "text run 28",
+          "start": 1259,
+          "end": 1267,
+          "sha256": "1042ea9a46d9c298e6393ec90452aa01159ade256be7fd8324dbb99e0e5b4c6b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "text/xml",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 8,
+                "decodedStart": 0,
+                "decodedEnd": 8
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:29",
+          "label": "text run 29",
+          "start": 1279,
+          "end": 1280,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:30",
+          "label": "text run 30",
+          "start": 1293,
+          "end": 1295,
+          "sha256": "69374b09b1681162ba2d6bba92d6a167ea5ca5921eb172eb173e999e3be5d8ba",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "EN",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 2,
+                "decodedStart": 0,
+                "decodedEnd": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:31",
+          "label": "text run 31",
+          "start": 1309,
+          "end": 1310,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:32",
+          "label": "text run 32",
+          "start": 1321,
+          "end": 1458,
+          "sha256": "a4e10006e583b3f53b81591e2fa676505d438f99542e4f888d365e5ed5f3cdb3",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "Pursuant to Title 17 Section 105 of the United States Code, this file is not subject to copyright protection and is in the public domain.",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 137,
+                "decodedStart": 0,
+                "decodedEnd": 137
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:33",
+          "label": "text run 33",
+          "start": 1470,
+          "end": 1471,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:34",
+          "label": "text run 34",
+          "start": 1481,
+          "end": 1484,
+          "sha256": "9f1f9dce319c4700ef28ec8c53bd3cc8e6abe64c68385479ab89215806a5bdd6",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "114",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 3,
+                "decodedStart": 0,
+                "decodedEnd": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:35",
+          "label": "text run 35",
+          "start": 1495,
+          "end": 1496,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:36",
+          "label": "text run 36",
+          "start": 1505,
+          "end": 1506,
+          "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "1",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:37",
+          "label": "text run 37",
+          "start": 1516,
+          "end": 1517,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:38",
+          "label": "text run 38",
+          "start": 1532,
+          "end": 1538,
+          "sha256": "efa1f375d76194fa51a3556a97e641e61685f914d446979da50a551a4333ffd7",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "public",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 6,
+                "decodedStart": 0,
+                "decodedEnd": 6
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:39",
+          "label": "text run 39",
+          "start": 1561,
+          "end": 1562,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:40",
+          "label": "text run 40",
+          "start": 1571,
+          "end": 1572,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:41",
+          "label": "text run 41",
+          "start": 1582,
+          "end": 1593,
+          "sha256": "fa16f63512bdaa399d75996ebff7ad1a45388b3dfbd34313bf4638342677a104",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "•HRES 99 EH",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 11,
+                "decodedStart": 0,
+                "decodedEnd": 11
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:42",
+          "label": "text run 42",
+          "start": 1604,
+          "end": 1605,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:43",
+          "label": "text run 43",
+          "start": 1636,
+          "end": 1638,
+          "sha256": "2c65a48513a36d846e69232a88c404b4d44b99d846cd1fc598b08e95c0a75b9a",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "IV",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 2,
+                "decodedStart": 0,
+                "decodedEnd": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:44",
+          "label": "text run 44",
+          "start": 1657,
+          "end": 1658,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:45",
+          "label": "text run 45",
+          "start": 1693,
+          "end": 1707,
+          "sha256": "7230327a7c7bc7119764200b00e50e6248765b7fc874ecfcc51e521d8ff15d6c",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "114th CONGRESS",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 14,
+                "decodedStart": 0,
+                "decodedEnd": 14
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:46",
+          "label": "text run 46",
+          "start": 1718,
+          "end": 1719,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:47",
+          "label": "text run 47",
+          "start": 1751,
+          "end": 1762,
+          "sha256": "bab6f83e3368e2c46dcbc80bb22a1b980c778b3477766e0e864cfa9371cae1f2",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "1st Session",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 11,
+                "decodedStart": 0,
+                "decodedEnd": 11
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:48",
+          "label": "text run 48",
+          "start": 1772,
+          "end": 1773,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:49",
+          "label": "text run 49",
+          "start": 1782,
+          "end": 1790,
+          "sha256": "5812d15b116683411e2620e6df8ea43713dd9f336a73d476ec7390a272ad97e5",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "H. Res. ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 8,
+                "decodedStart": 0,
+                "decodedEnd": 8
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:50",
+          "label": "text run 50",
+          "start": 1800,
+          "end": 1801,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:51",
+          "label": "text run 51",
+          "start": 1812,
+          "end": 1814,
+          "sha256": "8c1f1046219ddd216a023f792356ddf127fce372a72ec9b4cdac989ee5b0b455",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "99",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 2,
+                "decodedStart": 0,
+                "decodedEnd": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:52",
+          "label": "text run 52",
+          "start": 1826,
+          "end": 1827,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:53",
+          "label": "text run 53",
+          "start": 1857,
+          "end": 1896,
+          "sha256": "f840fa066d6f5e96dc2ae73a0be8e2c710dd7c673489dd63e4a3138fee23c393",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "In the House of Representatives, U. S.,",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 39,
+                "decodedStart": 0,
+                "decodedEnd": 39
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:54",
+          "label": "text run 54",
+          "start": 1913,
+          "end": 1914,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:55",
+          "label": "text run 55",
+          "start": 1946,
+          "end": 1964,
+          "sha256": "b7ab32682ffa9bc4cbee8c041a50bd88f1c9fe80ff2795f0349d48a2bbf2450e",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "February 10, 2015.",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 18,
+                "decodedStart": 0,
+                "decodedEnd": 18
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:56",
+          "label": "text run 56",
+          "start": 1990,
+          "end": 1991,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "xml:H799C079A8D71495BA685095ED8501D6F",
+          "label": "main H799C079A8D71495BA685095ED8501D6F",
+          "start": 1991,
+          "end": 2937,
+          "sha256": "c5cbf82a41a4d5ed9f24cba103a4e8ad20a72db30ee06eade9abee56d59956b1",
+          "ancestorPath": ["document"]
+        },
+        {
+          "id": "run:57",
+          "label": "text run 57",
+          "start": 2073,
+          "end": 2078,
+          "sha256": "4dc501d66cd78903b81b1a53459d0432939728c537bbe9ffab55ab81521cb352",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n    ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 5,
+                "decodedStart": 0,
+                "decodedEnd": 5
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:58",
+          "label": "text run 58",
+          "start": 2098,
+          "end": 2108,
+          "sha256": "6997606c3916b5e04a461ed45a1a13f968e6f88c981c09a5300896b4302a7afd",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "Resolved, ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 10,
+                "decodedStart": 0,
+                "decodedEnd": 10
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:59",
+          "label": "text run 59",
+          "start": 2130,
+          "end": 2131,
+          "sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"],
+          "textRun": {
+            "kind": "text",
+            "decoded": " ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "xml:HE4CAF9520F654C99838F6B0FC30297BB",
+          "label": "section HE4CAF9520F654C99838F6B0FC30297BB",
+          "start": 2131,
+          "end": 2376,
+          "sha256": "7f31d7b9cdd118e3f499289b380ad43d7fc64def882d870f7fca3cfd81f68c6c",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"]
+        },
+        {
+          "id": "run:60",
+          "label": "text run 60",
+          "start": 2218,
+          "end": 2356,
+          "sha256": "a19988fd99ed56b318b0500cb34b00d2214ab6fc72772938a3628151a58d1635",
+          "ancestorPath": [
+            "document",
+            "xml:H799C079A8D71495BA685095ED8501D6F",
+            "xml:HE4CAF9520F654C99838F6B0FC30297BB"
+          ],
+          "textRun": {
+            "kind": "text",
+            "decoded": "That the House has heard with profound sorrow of the death of the Honorable Alan Nunnelee, a Representative from the State of Mississippi.",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 138,
+                "decodedStart": 0,
+                "decodedEnd": 138
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:61",
+          "label": "text run 61",
+          "start": 2376,
+          "end": 2382,
+          "sha256": "350ce51472d5af9e6050dbe406d48021768b929b6607913e0712fac4738bccd9",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"],
+          "textRun": {
+            "kind": "text",
+            "decoded": " \n    ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 6,
+                "decodedStart": 0,
+                "decodedEnd": 6
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:62",
+          "label": "text run 62",
+          "start": 2417,
+          "end": 2427,
+          "sha256": "6997606c3916b5e04a461ed45a1a13f968e6f88c981c09a5300896b4302a7afd",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "Resolved, ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 10,
+                "decodedStart": 0,
+                "decodedEnd": 10
+              }
+            ]
+          }
+        },
+        {
+          "id": "xml:H846F3DBF7AF7445DAE271C4A3308B846",
+          "label": "section H846F3DBF7AF7445DAE271C4A3308B846",
+          "start": 2449,
+          "end": 2658,
+          "sha256": "dc0e1fe457b262718cd08bd60c11af106a5883118bba15838322b652d861628e",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"]
+        },
+        {
+          "id": "run:63",
+          "label": "text run 63",
+          "start": 2521,
+          "end": 2638,
+          "sha256": "6ceed18416900daaeae208431a9428d9016cc3aa5d7907295dcbda0ec7ddd4e7",
+          "ancestorPath": [
+            "document",
+            "xml:H799C079A8D71495BA685095ED8501D6F",
+            "xml:H846F3DBF7AF7445DAE271C4A3308B846"
+          ],
+          "textRun": {
+            "kind": "text",
+            "decoded": "That the Clerk communicate these resolutions to the Senate and transmit a copy thereof to the family of the deceased.",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 117,
+                "decodedStart": 0,
+                "decodedEnd": 117
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:64",
+          "label": "text run 64",
+          "start": 2658,
+          "end": 2664,
+          "sha256": "350ce51472d5af9e6050dbe406d48021768b929b6607913e0712fac4738bccd9",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"],
+          "textRun": {
+            "kind": "text",
+            "decoded": " \n    ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 6,
+                "decodedStart": 0,
+                "decodedEnd": 6
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:65",
+          "label": "text run 65",
+          "start": 2699,
+          "end": 2709,
+          "sha256": "6997606c3916b5e04a461ed45a1a13f968e6f88c981c09a5300896b4302a7afd",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "Resolved, ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 10,
+                "decodedStart": 0,
+                "decodedEnd": 10
+              }
+            ]
+          }
+        },
+        {
+          "id": "xml:HD0A37150A1794FD195E1D44F8EE4109A",
+          "label": "section HD0A37150A1794FD195E1D44F8EE4109A",
+          "start": 2731,
+          "end": 2929,
+          "sha256": "ea1930cdeda400fc16ac7a9f748a6978508f9afdbfc655ff243caea326e2814f",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"]
+        },
+        {
+          "id": "run:66",
+          "label": "text run 66",
+          "start": 2803,
+          "end": 2909,
+          "sha256": "d29ba773b675069c968c0abb8b8bcb1d693355f674bf4d49e6e3a7a1181fd103",
+          "ancestorPath": [
+            "document",
+            "xml:H799C079A8D71495BA685095ED8501D6F",
+            "xml:HD0A37150A1794FD195E1D44F8EE4109A"
+          ],
+          "textRun": {
+            "kind": "text",
+            "decoded": "That when the House adjourns today, it adjourn as a further mark of respect to the memory of the deceased.",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 106,
+                "decodedStart": 0,
+                "decodedEnd": 106
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:67",
+          "label": "text run 67",
+          "start": 2929,
+          "end": 2930,
+          "sha256": "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"],
+          "textRun": {
+            "kind": "text",
+            "decoded": " ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 1,
+                "decodedStart": 0,
+                "decodedEnd": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:68",
+          "label": "text run 68",
+          "start": 2937,
+          "end": 2942,
+          "sha256": "4dc501d66cd78903b81b1a53459d0432939728c537bbe9ffab55ab81521cb352",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "\n    ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 5,
+                "decodedStart": 0,
+                "decodedEnd": 5
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:69",
+          "label": "text run 69",
+          "start": 2994,
+          "end": 3002,
+          "sha256": "8159f18b902c34bc8e00a7babcd925f6d305911b6932afac6842172a501415be",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "Attest: ",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 8,
+                "decodedStart": 0,
+                "decodedEnd": 8
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:70",
+          "label": "text run 70",
+          "start": 3032,
+          "end": 3046,
+          "sha256": "3a2223281f958e107ba42ef63a52476f748a86cc046595317cbde1ba7dee71c4",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "KAREN L. HAAS,",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 14,
+                "decodedStart": 0,
+                "decodedEnd": 14
+              }
+            ]
+          }
+        },
+        {
+          "id": "run:71",
+          "label": "text run 71",
+          "start": 3059,
+          "end": 3065,
+          "sha256": "498e0d33dc23d2a14caf7353da5f2f7acea4eb183d289c4fde12b48089106b06",
+          "ancestorPath": ["document"],
+          "textRun": {
+            "kind": "text",
+            "decoded": "Clerk.",
+            "spans": [
+              {
+                "kind": "literal",
+                "rawStart": 0,
+                "rawEnd": 6,
+                "decodedStart": 0,
+                "decodedEnd": 6
+              }
+            ]
+          }
+        }
+      ],
+      "validation": {
+        "profile": "uslm-2.1.0",
+        "schemaSha256": "c68c058345f99689144c183c99d47552f3d56aa365ff1380127a9180fe18ce44",
+        "sourceSha256": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1",
+        "bytes": 3112,
+        "valid": true
+      }
+    },
+    "publication": {
+      "version": {
+        "contractVersion": "0.2.0",
+        "artifactId": "f93a3e70-721d-4e9f-88a3-4c78fa47f80c",
+        "versionId": "db6e99e6-c39a-41e7-8922-19f1ccab4e30",
+        "parentVersionId": null,
+        "binding": {
+          "tenantId": "33333333-3333-4333-8333-000000000100",
+          "actorId": "33333333-3333-4333-8333-000000000101",
+          "conversationId": "33333333-3333-4333-8333-000000000102",
+          "runId": "33333333-3333-4333-8333-000000000103",
+          "attemptId": "33333333-3333-4333-8333-000000000104",
+          "workerId": "33333333-3333-4333-8333-000000000105",
+          "writerFence": 1
+        },
+        "object": {
+          "objectId": "aea986f5-05f7-4dfa-878a-48a56c6907f8",
+          "versionId": "SYNTHETIC_aea986f5-05f7-4dfa-878a-48a56c6907f8",
+          "sha256": "425828565a9d75d4cea9464a5a43c83f3f8eea55f420b2315861a871bad8812f",
+          "bytes": 29405,
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ]
+        },
+        "filename": "Federal source _821649721f92e7de772b822774636a706342d9bbebd61940688ba9fc6610999c__ 119-hr-1.txt",
+        "mimeType": "text/plain; charset=utf-8",
+        "scopes": [
+          {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "kind": "client",
+            "resourceId": "33333333-3333-4333-8333-000000000106",
+            "policyRevision": "policy1"
+          }
+        ],
+        "evidence": [],
+        "generationStatus": "draft",
+        "previewStatus": "pending",
+        "createdAt": "2026-11-01T05:03:34.723Z"
+      },
+      "inspection": {
+        "sha256": "425828565a9d75d4cea9464a5a43c83f3f8eea55f420b2315861a871bad8812f",
+        "bytes": 29405,
+        "format": "txt",
+        "nativeOpened": false,
+        "rendered": false,
+        "recalculated": false,
+        "members": [],
+        "details": {
+          "encoding": "UTF-8",
+          "whitespace": "unchanged"
+        }
+      },
+      "execution": {
+        "kind": "native-document",
+        "invocationId": "sdk:c41b43fc37ca208895d609e172ba9e3c004185b18dba0af850921dc5fb47f33d",
+        "requestSha256": "ce8e231c288a6c0fa503813b62e617f568d12350e08f12ae87e4efa7e99efa33",
+        "authorizationReceiptId": "5091544b-d9f9-4a79-81cb-00634fe52a37",
+        "objectCommitted": true,
+        "versionCommitted": true,
+        "nativeQualified": false
+      }
+    }
+  }
+}

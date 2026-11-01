@@ -39,6 +39,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     [review, setReview] = useState<AdmittedFederalReview | null>(null);
   const [scopeId, setScopeId] = useState(""),
     [kind, setKind] = useState<"replace" | "insert" | "delete">("replace");
+  const [textMode, setTextMode] = useState<"decoded-xml" | undefined>();
   const [drafts, setDrafts] = useState<readonly AuthoredInput[]>([]),
     [authoring, setAuthoring] = useState<Authoring | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -128,6 +129,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     setBase(undefined);
     setSource(selected);
     setScopeId(selected.source.scopes[0]?.id ?? "");
+    setTextMode(undefined);
     setDrafts([]);
     setAuthoring(null);
     setEditingId(null);
@@ -160,6 +162,9 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
       derived.refusal ? { ...derived, operations: [...operations] } : derived,
     );
     const operation = operations[0];
+    setTextMode(
+      operation.kind === "remove_source_text" ? undefined : operation.textMode,
+    );
     setScopeId(
       operation.kind === "remove_source_text"
         ? (value.prepared.draft.source.scopes[0]?.id ?? "")
@@ -192,6 +197,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
       kind,
       scopeId,
       expectedText: expected,
+      ...(textMode ? { textMode } : {}),
       ...(kind === "delete" ? {} : { text }),
       ...(kind === "insert" ? { position } : {}),
     };
@@ -247,6 +253,9 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     setExpected("");
     setText("");
     setProblem("");
+    setTextMode(
+      scope && "textRun" in scope && scope.textRun ? "decoded-xml" : undefined,
+    );
   }
   function editAmendment(operation: AuthoredInput) {
     if (operation.kind === "remove_source_text") return;
@@ -256,6 +265,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     setExpected(operation.expectedText);
     setText(operation.text ?? "");
     setPosition(operation.position ?? "after");
+    setTextMode(operation.textMode);
   }
   async function prepare() {
     if (!source || editingId || !drafts.length) return;
@@ -349,6 +359,11 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     });
   }
   const scope = source?.source.scopes.find((item) => item.id === scopeId);
+  const textRun =
+    source?.source.parserVersion === "federal-uslm-xml/3"
+      ? source.source.scopes.find((item) => item.id === scopeId)?.textRun
+      : undefined;
+  const currentScope = authoring?.scopes.find((item) => item.id === scopeId);
   return (
     <section className={styles.panel} aria-labelledby={id}>
       <h2 id={id}>Federal amendment review</h2>
@@ -495,22 +510,74 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
               <label className={styles.field}>
                 Source section
                 <select
+                  aria-label="Source section"
                   disabled={removalPlanned && !editingId}
                   value={scopeId}
                   onChange={(event) => {
                     if (!editingId) changed();
                     setScopeId(event.target.value);
+                    const selected = source.source.scopes.find(
+                      (item) => item.id === event.target.value,
+                    );
+                    setTextMode(
+                      selected && "textRun" in selected && selected.textRun
+                        ? "decoded-xml"
+                        : undefined,
+                    );
                   }}
                 >
                   {source.source.scopes.map((item) => (
                     <option key={item.id} value={item.id}>
                       {item.label}
+                      {"textRun" in item && item.textRun ? " · text run" : ""}
                     </option>
                   ))}
                 </select>
               </label>
+              {textRun && (
+                <label className={styles.field}>
+                  Text run editing
+                  <select
+                    aria-label="Text run editing"
+                    value={textMode ?? "raw"}
+                    disabled={removalPlanned && !editingId}
+                    onChange={(event) => {
+                      if (!editingId) changed();
+                      setTextMode(
+                        event.target.value === "decoded-xml"
+                          ? "decoded-xml"
+                          : undefined,
+                      );
+                    }}
+                  >
+                    <option value="decoded-xml">Decoded text</option>
+                    <option value="raw">Exact XML</option>
+                  </select>
+                </label>
+              )}
               {scope && (
-                <pre>{source.source.text.slice(scope.start, scope.end)}</pre>
+                <>
+                  <p>
+                    {textMode === "decoded-xml"
+                      ? "Current decoded text run"
+                      : "Current exact source section"}{" "}
+                    after authored amendments:
+                  </p>
+                  {textMode === "decoded-xml" &&
+                  currentScope?.decoded === null ? (
+                    <p>
+                      This run cannot be displayed as decoded text after its raw
+                      XML amendment.
+                    </p>
+                  ) : (
+                    <pre>
+                      {textMode === "decoded-xml"
+                        ? (currentScope?.decoded ?? textRun?.decoded)
+                        : (currentScope?.current ??
+                          source.source.text.slice(scope.start, scope.end))}
+                    </pre>
+                  )}
+                </>
               )}
               <label className={styles.field}>
                 Amendment

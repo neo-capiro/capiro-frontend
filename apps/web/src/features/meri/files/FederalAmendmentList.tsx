@@ -31,7 +31,7 @@ export function FederalAmendmentList({
               {operation.id}:{" "}
               {operation.kind === "remove_source_text"
                 ? "proposed removal of all selected source text"
-                : `${operation.kind} in ${operation.scopeId}`}
+                : `${operation.kind} in ${operation.scopeId}${operation.textMode === "decoded-xml" ? " · decoded text" : ""}`}
             </span>{" "}
             {operation.kind !== "remove_source_text" && (
               <Button

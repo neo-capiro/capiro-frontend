@@ -64,6 +64,7 @@ export interface FederalWorkbenchPort {
     signal: AbortSignal,
     representation?: FederalImportRequest["representation"],
     validationProfile?: FederalImportRequest["validationProfile"],
+    sourceProfile?: FederalImportRequest["sourceProfile"],
   ): Promise<FederalSourceView>;
   source(versionId: string, signal: AbortSignal): Promise<FederalSourceView>;
   prepare(
@@ -161,6 +162,7 @@ export class FederalWorkbenchAccess implements FederalWorkbenchPort {
     caller: AbortSignal,
     representation?: FederalImportRequest["representation"],
     validationProfile?: FederalImportRequest["validationProfile"],
+    sourceProfile?: FederalImportRequest["sourceProfile"],
   ) {
     const { billId, versionCode, revisionId, versionHash, textHash } =
       selection;
@@ -170,6 +172,7 @@ export class FederalWorkbenchAccess implements FederalWorkbenchPort {
         selection: { billId, versionCode, revisionId, versionHash, textHash },
         ...(representation === undefined ? {} : { representation }),
         ...(validationProfile === undefined ? {} : { validationProfile }),
+        ...(sourceProfile === undefined ? {} : { sourceProfile }),
       },
       caller,
     );

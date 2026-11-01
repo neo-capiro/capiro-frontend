@@ -139,6 +139,7 @@ it("keeps ordinary retained import as default and forwards the explicit raw choi
     signal,
     undefined,
     undefined,
+    undefined,
   );
   await chooseMode("raw");
   await click("Import this bill version");
@@ -146,6 +147,7 @@ it("keeps ordinary retained import as default and forwards the explicit raw choi
     fixture.input.selection,
     signal,
     "retained-raw-utf8/1",
+    undefined,
     undefined,
   );
   expect(imported).toHaveBeenLastCalledWith(source);
@@ -183,6 +185,7 @@ it("requests pinned USLM validation and displays the exact admitted source recei
     signal,
     "retained-raw-utf8/1",
     "uslm-2.1.0",
+    undefined,
   );
   expect(imported).toHaveBeenLastCalledWith(schemaSource);
   const paragraphs = nodes
@@ -201,7 +204,7 @@ it("requests pinned USLM validation and displays the exact admitted source recei
   expect(paragraphs).toMatch(/syntax, not legal correctness/);
   expect(errors).toEqual([]);
 });
-it.each(["raw", "uslm"])(
+it.each(["raw", "uslm", "runs"])(
   "holds the %s mode while the original import is unresolved",
   async (selected) => {
     await click("Browse cited bill versions");
@@ -224,14 +227,18 @@ it.each(["raw", "uslm"])(
       "retained-raw-utf8/1",
     ]);
     expect(importSource.mock.calls.map((call) => call[3])).toEqual([
-      selected === "uslm" ? "uslm-2.1.0" : undefined,
-      selected === "uslm" ? "uslm-2.1.0" : undefined,
+      selected !== "raw" ? "uslm-2.1.0" : undefined,
+      selected !== "raw" ? "uslm-2.1.0" : undefined,
+    ]);
+    expect(importSource.mock.calls.map((call) => call[4])).toEqual([
+      selected === "runs" ? "uslm-text-runs/1" : undefined,
+      selected === "runs" ? "uslm-text-runs/1" : undefined,
     ]);
     expect(pending).toHaveBeenLastCalledWith(false);
     expect(errors).toHaveLength(1);
   },
 );
-it.each(["raw", "uslm"])(
+it.each(["raw", "uslm", "runs"])(
   "reports a definite %s refusal without automatically weakening checks",
   async (selected) => {
     await click("Browse cited bill versions");

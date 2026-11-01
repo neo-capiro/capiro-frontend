@@ -1,6 +1,8 @@
-import type {
-  FederalCompilerSource,
-  FederalDraftOperationEcfa206F,
+import {
+  applyDecodedXmlEdit,
+  decodeXmlTextRun,
+  type FederalCompilerSource,
+  type FederalDraftOperationEcfa206F,
 } from "@capiro/meri-contracts/federal-workbench";
 import { federalTextHash } from "./federal-workbench";
 
@@ -12,6 +14,7 @@ type TextAmendmentInput = Readonly<{
   expectedText: string;
   text?: string;
   position?: "before" | "after";
+  textMode?: "decoded-xml";
 }>;
 export type AuthoredInput =
   | TextAmendmentInput
@@ -21,6 +24,7 @@ export type AuthoredScope = Readonly<{
   id: string;
   label: string;
   current: string;
+  decoded?: string | null;
   changedBy: readonly string[];
   invalidated: boolean;
 }>;
@@ -50,9 +54,19 @@ type ScopeState = {
   end: number;
   ancestors: readonly string[];
   current: string;
+  runKind?: "text" | "cdata";
   changedBy: string[];
   invalidated: boolean;
 };
+
+function decodedCurrent(scope: ScopeState) {
+  if (!scope.runKind) return undefined;
+  try {
+    return decodeXmlTextRun(scope.current, scope.runKind).decoded;
+  } catch {
+    return null;
+  }
+}
 
 /** Text outside every declared scope cannot be amended, so it also has to be
  * empty before a set of amendments can remove the complete source. */
@@ -93,9 +107,15 @@ function refusalFor(
   )
     return INTERLEAVED;
   if (!input.expectedText.length) return BLANK;
-  const at = target.current.indexOf(input.expectedText);
+  const current =
+    input.textMode === "decoded-xml" ? decodedCurrent(target) : target.current;
+  if (current === undefined)
+    return "Decoded editing requires a declared XML text run.";
+  if (current === null)
+    return "This text run no longer maps to decoded text. Remove the raw XML amendment before editing decoded text here.";
+  const at = current.indexOf(input.expectedText);
   if (at < 0) return MISSING;
-  if (target.current.indexOf(input.expectedText, at + 1) >= 0) return AMBIGUOUS;
+  if (current.indexOf(input.expectedText, at + 1) >= 0) return AMBIGUOUS;
   if (input.kind === "replace" && input.text === input.expectedText)
     return UNCHANGED;
   return null;
@@ -147,6 +167,11 @@ export async function authoredOperations(
     end: scope.end,
     ancestors: "ancestorPath" in scope ? scope.ancestorPath : [],
     current: source.text.slice(scope.start, scope.end),
+    ...(source.parserVersion === "federal-uslm-xml/3" &&
+    "textRun" in scope &&
+    scope.textRun
+      ? { runKind: scope.textRun.kind }
+      : {}),
     changedBy: [],
     invalidated: false,
   }));
@@ -158,6 +183,7 @@ export async function authoredOperations(
         id: scope.id,
         label: scope.label,
         current: scope.current,
+        ...(scope.runKind ? { decoded: decodedCurrent(scope) } : {}),
         changedBy: Object.freeze([...scope.changedBy]),
         invalidated: scope.invalidated,
       })),
@@ -192,7 +218,22 @@ export async function authoredOperations(
     if (!target) return answer(UNKNOWN);
     const refusal = refusalFor(scopes, target, input);
     if (refusal) return answer(refusal);
-    const next = splice(input, target.current);
+    let next: string;
+    try {
+      next =
+        input.textMode === "decoded-xml" && target.runKind
+          ? applyDecodedXmlEdit(target.current, target.runKind, {
+              ...input,
+              ...(input.kind === "insert"
+                ? { position: input.position ?? "after" }
+                : {}),
+            }).text
+          : splice(input, target.current);
+    } catch {
+      return answer(
+        "The decoded edit cannot be mapped to this exact XML text run. Check the text and character boundaries.",
+      );
+    }
     const emptied =
       gaps &&
       scopes.every(
@@ -206,6 +247,7 @@ export async function authoredOperations(
       expectedScopeSha256: await federalTextHash(target.current),
       expectedText: input.expectedText,
       expectedTextSha256: await federalTextHash(input.expectedText),
+      ...(input.textMode === undefined ? {} : { textMode: input.textMode }),
       dependsOn: [...target.changedBy],
       ...(input.kind === "delete" ? {} : { text: input.text ?? "" }),
       ...(input.kind === "insert"
@@ -235,6 +277,9 @@ export function authoredFrom(
           kind: operation.kind,
           scopeId: operation.scopeId,
           expectedText: operation.expectedText,
+          ...(operation.textMode === undefined
+            ? {}
+            : { textMode: operation.textMode }),
           ...(operation.text === undefined ? {} : { text: operation.text }),
           ...(operation.position === undefined
             ? {}

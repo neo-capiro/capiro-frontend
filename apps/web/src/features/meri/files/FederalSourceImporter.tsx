@@ -39,6 +39,7 @@ export function FederalSourceImporter({
     choice: FederalSourceChoice;
     representation: FederalImportRequest["representation"];
     validationProfile: FederalImportRequest["validationProfile"];
+    sourceProfile: FederalImportRequest["sourceProfile"];
   } | null>(null);
   async function browse(after = 0) {
     const value = await port.sources(after, signal());
@@ -48,10 +49,11 @@ export function FederalSourceImporter({
     choice: FederalSourceChoice,
     representation: FederalImportRequest["representation"],
     validationProfile: FederalImportRequest["validationProfile"],
+    sourceProfile: FederalImportRequest["sourceProfile"],
   ) {
     const choosingRecovery = port.unresolved() && pending === null;
     setCaptured(null);
-    setPending({ choice, representation, validationProfile });
+    setPending({ choice, representation, validationProfile, sourceProfile });
     onPending(true);
     try {
       const source = await port.importSource(
@@ -59,6 +61,7 @@ export function FederalSourceImporter({
         signal(),
         representation,
         validationProfile,
+        sourceProfile,
       );
       onImported(source);
       setCaptured(
@@ -93,6 +96,9 @@ export function FederalSourceImporter({
           <option value="legacy">Retained source text</option>
           <option value="raw">Verified captured UTF-8 bytes</option>
           <option value="uslm">Pinned USLM 2.1 schema validation</option>
+          <option value="runs">
+            Pinned USLM 2.1 with decoded text editing
+          </option>
         </select>
       </label>
       <p>
@@ -102,6 +108,11 @@ export function FederalSourceImporter({
         correctness, currency or enactment. Raw capture alone does not establish
         schema validity. Neither mode silently falls back to weaker checks. When
         recovering an earlier import, select the same mode and bill version.
+      </p>
+      <p>
+        Decoded text editing exposes individual XML text runs as readable text,
+        including decoded character references. Exact XML sections remain
+        available. It does not combine text across inline elements.
       </p>
       <Button
         disabled={disabled || pending !== null}
@@ -135,7 +146,10 @@ export function FederalSourceImporter({
                         importSource(
                           choice,
                           mode === "legacy" ? undefined : "retained-raw-utf8/1",
-                          mode === "uslm" ? "uslm-2.1.0" : undefined,
+                          mode === "uslm" || mode === "runs"
+                            ? "uslm-2.1.0"
+                            : undefined,
+                          mode === "runs" ? "uslm-text-runs/1" : undefined,
                         ),
                       )
                     }
@@ -167,6 +181,7 @@ export function FederalSourceImporter({
                 pending.choice,
                 pending.representation,
                 pending.validationProfile,
+                pending.sourceProfile,
               ),
             )
           }

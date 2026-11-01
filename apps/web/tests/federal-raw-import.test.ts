@@ -8,6 +8,7 @@ import {
 import type { DocumentLibraryAccess } from "../src/shared/meri-documents/library-access";
 import fixture from "./fixtures/federal-raw-source.json";
 import schemaFixture from "./fixtures/federal-schema-source.json";
+import runFixture from "./fixtures/federal-text-run-source.json";
 const representation = "retained-raw-utf8/1" as const;
 const encode = (value: unknown) =>
   new TextEncoder().encode(JSON.stringify(value));
@@ -133,6 +134,90 @@ it("admits pinned schema validation and reopens the exact parser2 source and rec
   expect(reopened.source).toEqual(imported.source);
   expect(reopened.sha256).toBe(imported.sha256);
   expect(x.attempt().status).toBe("idle");
+  x.port.dispose();
+});
+it("negotiates decoded text runs explicitly and reopens the exact parser3 source", async () => {
+  const x = setup(runFixture);
+  const imported = await x.port.importSource(
+    runFixture.input.selection,
+    x.signal,
+    representation,
+    "uslm-2.1.0",
+    "uslm-text-runs/1",
+  );
+  expect(x.requests[0]).toMatchObject({
+    sourceProfile: "uslm-text-runs/1",
+    validationProfile: "uslm-2.1.0",
+    representation,
+  });
+  expect(imported.source).toEqual(runFixture.imported.source);
+  expect((await x.port.source(imported.versionId, x.signal)).source).toEqual(
+    imported.source,
+  );
+  expect(x.attempt().status).toBe("idle");
+  x.port.dispose();
+});
+it("requires raw capture and pinned validation before requesting decoded runs", async () => {
+  const x = setup(runFixture);
+  for (const capture of [undefined, representation]) {
+    await expect(
+      x.port.importSource(
+        runFixture.input.selection,
+        x.signal,
+        capture,
+        undefined,
+        "uslm-text-runs/1",
+      ),
+    ).rejects.toThrow();
+  }
+  expect(x.requests).toHaveLength(0);
+  expect(x.attempt().status).toBe("idle");
+  x.port.dispose();
+});
+it("preserves the source profile and original delivery identity during recovery", async () => {
+  const x = setup(runFixture);
+  x.setFail(true);
+  await expect(
+    x.port.importSource(
+      runFixture.input.selection,
+      x.signal,
+      representation,
+      "uslm-2.1.0",
+      "uslm-text-runs/1",
+    ),
+  ).rejects.toThrow();
+  await expect(
+    x.port.importSource(
+      runFixture.input.selection,
+      x.signal,
+      representation,
+      "uslm-2.1.0",
+    ),
+  ).rejects.toThrow("original");
+  expect(x.requests).toHaveLength(1);
+  x.setFail(false);
+  await x.port.importSource(
+    runFixture.input.selection,
+    x.signal,
+    representation,
+    "uslm-2.1.0",
+    "uslm-text-runs/1",
+  );
+  expect(x.requests[1]).toEqual(x.requests[0]);
+  expect(x.attempt().status).toBe("idle");
+  x.port.dispose();
+});
+it("does not silently upgrade the schema-only mode to decoded run scopes", async () => {
+  const x = setup(runFixture);
+  await expect(
+    x.port.importSource(
+      runFixture.input.selection,
+      x.signal,
+      representation,
+      "uslm-2.1.0",
+    ),
+  ).rejects.toThrow();
+  expect(x.attempt().status).toBe("unresolved");
   x.port.dispose();
 });
 it.each([

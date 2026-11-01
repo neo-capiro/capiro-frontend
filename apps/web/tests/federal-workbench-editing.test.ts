@@ -3,6 +3,7 @@ import type { ComponentProps, ReactElement, ReactNode } from "react";
 import type {
   AdmittedFederalReview,
   FederalSelection,
+  FederalCompilerSource,
 } from "@capiro/meri-contracts/federal-workbench";
 import { FederalWorkbench } from "../src/features/meri/files/FederalWorkbench";
 import { FederalAmendmentList } from "../src/features/meri/files/FederalAmendmentList";
@@ -13,6 +14,7 @@ import {
 } from "../src/shared/meri-documents/federal-authoring";
 import type { FederalWorkbenchPort } from "../src/shared/meri-documents/federal-workbench";
 import fixture from "./fixtures/federal-workbench.json";
+import runFixture from "./fixtures/federal-text-run-source.json";
 
 // Exercise actual component callbacks and authoring, with synthetic port results.
 // Receiver/compiler admission remains covered by the existing federal suites.
@@ -130,7 +132,7 @@ async function add(expected: string, text: string) {
 async function chooseScope(value: string) {
   nodes.find(
     (node) =>
-      node.type === "select" && node.props.value?.startsWith("section-"),
+      node.type === "select" && node.props["aria-label"] === "Source section",
   )!.props.onChange!({ target: { value, checked: false } });
   await flush();
 }
@@ -218,6 +220,94 @@ beforeEach(async () => {
   await click("Browse source files and saved reviews");
 });
 afterEach(() => hooks.cleanups.forEach((cleanup) => cleanup()));
+
+it("defaults newly selected runs to decoded editing and shows the canonical current text", async () => {
+  const source = runFixture.imported.source as FederalCompilerSource;
+  const run = runFixture.imported.source.scopes.find((scope) =>
+    scope.textRun?.decoded.includes("profound sorrow"),
+  )!;
+  port = {
+    ...port,
+    source: async () => ({
+      source,
+      versionId: "synthetic-run-source",
+      sha256: runFixture.imported.publication.version.object.sha256,
+    }),
+  };
+  render();
+  await click("Open source");
+  expect(
+    nodes.some((node) => node.props["aria-label"] === "Text run editing"),
+  ).toBe(false);
+  await chooseScope(run.id);
+  expect(
+    nodes.find((node) => node.props["aria-label"] === "Text run editing")?.props
+      .value,
+  ).toBe("decoded-xml");
+  await add("profound sorrow", "A & <B> 😀");
+  expect(list().operations[0]).toMatchObject({
+    textMode: "decoded-xml",
+    expectedText: "profound sorrow",
+    text: "A & <B> 😀",
+  });
+  expect(
+    nodes.some(
+      (node) => node.type === "pre" && label(node).includes("A & <B> 😀"),
+    ),
+  ).toBe(true);
+  expect(
+    nodes.some(
+      (node) => node.type === "pre" && label(node).includes("A &amp;"),
+    ),
+  ).toBe(false);
+  await chooseScope("document");
+  expect(
+    nodes.some((node) => node.props["aria-label"] === "Text run editing"),
+  ).toBe(false);
+});
+
+it("loads and edits an existing raw run operation without silently setting decoded mode", async () => {
+  const source = runFixture.imported.source as FederalCompilerSource;
+  const run = runFixture.imported.source.scopes.find((scope) =>
+    scope.textRun?.decoded.includes("profound sorrow"),
+  )!;
+  const value = await authoredOperations(source, [
+    {
+      id: "raw-retained",
+      scopeId: run.id,
+      kind: "replace",
+      expectedText: "profound sorrow",
+      text: "old raw &amp; text",
+    },
+  ]);
+  saved = {
+    ...saved,
+    selection: { ...saved.selection, operations: value.operations },
+    prepared: {
+      ...saved.prepared,
+      draft: { ...saved.prepared.draft, source, operations: value.operations },
+    },
+  } as unknown as AdmittedFederalReview;
+  await click("Open saved review");
+  expect(
+    nodes.find((node) => node.props["aria-label"] === "Text run editing")?.props
+      .value,
+  ).toBe("raw");
+  expect(list().operations[0]).not.toHaveProperty("textMode");
+  list().onEdit(list().drafts[0]!);
+  await flush();
+  expect(
+    nodes.find((node) => node.props["aria-label"] === "Text run editing")?.props
+      .value,
+  ).toBe("raw");
+  await field("New text", "updated raw &amp; text");
+  await click("Update amendment");
+  expect(list().operations[0]).not.toHaveProperty("textMode");
+  expect(list().operations[0]).toMatchObject({
+    text: "updated raw &amp; text",
+  });
+  expect(button("Export consolidated")).toBeUndefined();
+});
 
 it("clears confirmed outputs and stale hashes when removing a prerequisite refuses", async () => {
   await loadChain();
