@@ -12,6 +12,7 @@ const permittedRoots: Record<Service, readonly string[]> = {
     "tenant-members",
     "legiwatch",
     "federal-register",
+    "government-forecasts",
     "funding-opportunities",
     "business-development",
     "intelligence",
@@ -73,6 +74,12 @@ export async function proxyRequest(
     )
   ) {
     return jsonError(400, "Invalid service path.");
+  }
+  if (selected === "core" && path[0] === "government-forecasts") {
+    if (path.length !== 1 && !(path.length === 3 && path[2] === "history"))
+      return jsonError(400, "Invalid forecast read path.");
+    if (request.method !== "GET")
+      return jsonError(405, "Forecast source access is read-only.");
   }
   // This URL also exists on legacy Core. Reject before credentials or upstream
   // reads until Release qualifies the versioned, actor-scoped producer.
