@@ -3309,10 +3309,13 @@
     "file": "apps/web/src/features/portfolio/calendar/CalendarPageControls.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "e095de9c0944f09c160b9b0957412e5579c00f3070fd41fc81d7e55900be024c",
-    "reason": "This file owns calendar header and local period/view/filter control presentation. The change adds one public client-switcher composition and reuses existing assets; data reads, update state, synchronization and meeting commands stay in their established owners. Existing subordinate controls remain cohesive calendar controls and unchanged. No new domain or IO responsibility was introduced.",
-    "reviewedBy": "Codex independent PR236 reviewer",
-    "reviewedOn": "2026-10-26"
+    "line": 1,
+    "nonblank": 433,
+    "fingerprint": "bb9f649998c7dc18162e88af9dfefdf5fb145ced830069c206e13b6584681216",
+    "disposition": "APPROVE_EXACT_RESPONSIBILITY",
+    "reason": "CalendarPageControls module groups header, period, view, scope and filter controls consuming the same CalendarPageState interface. Feed fetching/filtering remain in the state owner and calendar models. The change is neutral navigation copy in the existing source line, not a new state/lifecycle responsibility; no size-driven split required.",
+    "reviewedBy": "Independent reviewer /root/legislative_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
@@ -7419,18 +7422,24 @@
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "9476e345c884274ced419937a1e5668140d8a941c5499d7006f80e4047f6b7b7",
-    "reason": "This module composes one Outreach list and its campaign-row presentation. Transport/cancellation, canonical normalization, capability resolution, audience admission and selector presentation already have separate owners. The extension keeps one coherent view of canonical records/campaigns and explicitly excluded ancillary sessions; it adds no durable state, authorization, sender or provider responsibility. The scoped presentation/disclosure additions do not justify duplicating query or filter ownership merely to meet a size threshold.",
-    "reviewedBy": "Codex independent Outreach audience reviewer portfolio_figma_ui_high (HIGH)",
+    "line": 1,
+    "nonblank": 562,
+    "fingerprint": "f9dfab6f5142c8dd91100b02a4b382ef663b01d803504d3785c94632f8d2e4a4",
+    "disposition": "APPROVE_EXACT_RESPONSIBILITY",
+    "reason": "OutreachList module owns one outreach-list presentation and local view interaction, with a local row renderer. Query transport, audience policy and category normalization remain in existing separate owners. The corrected hint adds no domain, authority, mutation or parallel data owner; splitting for line count would separate this view from its loading/error/pagination explanation.",
+    "reviewedBy": "Independent reviewer /root/legislative_review",
     "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "function",
     "symbol": "OutreachList",
-    "fingerprint": "1df4a3a16c8def65b989c69ff7681f7dde05dc382bbd794400a0ba6e92389ff2",
-    "reason": "This is the existing single list composition and local filter/pagination lifetime. The additional audience state must reset both canonical cursors and the ancillary offset together, suppress unsupported queries and keep loaded counts/exclusion copy consistent. Small audience presentation and pure admission logic are extracted. The function delegates network lifetime and backend classification; it does not accumulate another effect or domain owner. Keeping these related view transitions together is cohesive. This disposition does not approve future unrelated additions.",
-    "reviewedBy": "Codex independent Outreach audience reviewer portfolio_figma_ui_high (HIGH)",
+    "line": 31,
+    "nonblank": 462,
+    "fingerprint": "a16ea73e92b351726dd5f4f012f7299ee434980b4ff89d2e44d39867b73bbda7",
+    "disposition": "APPROVE_EXACT_RESPONSIBILITY",
+    "reason": "OutreachList function composes the independent campaign, record and ancillary-session query states into one filterable/paged view. This exact change only explains their existing count semantics; no count, query, policy or mutation logic changes. Keeping the hint adjacent to the tabs preserves one presentation responsibility; no extraction is required for this bounded delta.",
+    "reviewedBy": "Independent reviewer /root/legislative_review",
     "reviewedOn": "2026-11-01"
   },
   {
@@ -7773,6 +7782,30 @@
     "fingerprint": "ad9569f535dcdc7ea8a759a7180dec1e24c3357797c97a0573ca7a297f39b2f9",
     "reason": "One bounded paged procurement table owns its columns and pager; exact decimal formatting remains delegated and no monetary aggregation occurs here.",
     "reviewedBy": "Independent source_review agent, procurement source review",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/tests/outreach-list-sessions.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 426,
+    "fingerprint": "752f07483faff2b9764a9c4c443b4070754c01d095fd1cf320833dc14b2872dd",
+    "disposition": "APPROVE_EXACT_RESPONSIBILITY",
+    "reason": "Outreach list test module owns the shared synthetic query/capability fixtures and rendered behavior for one list, including ancillary failures and category/page semantics. New cases extend that same observable contract and reuse existing fixtures; no unrelated integration or product responsibility is added.",
+    "reviewedBy": "Independent reviewer /root/legislative_review",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/tests/outreach-list-sessions.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #6",
+    "line": 371,
+    "nonblank": 86,
+    "fingerprint": "5a64411ffe288d33f951ce007ed79319f9d1209725434c2cc238845c7e5f3815",
+    "disposition": "APPROVE_EXACT_RESPONSIBILITY",
+    "reason": "The 86-line legacy-count describe callback groups five cohesive rendered cases: single/plural/no-legacy, independently paginated records and a matching session ID. It is declarative regression coverage for one hint/count boundary, not product control flow. Keeping these cases together is justified; the exact fingerprint is approved without a blanket test exemption.",
+    "reviewedBy": "Independent reviewer /root/legislative_review",
     "reviewedOn": "2026-11-01"
   }
 ]
