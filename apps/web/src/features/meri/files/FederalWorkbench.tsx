@@ -7,14 +7,21 @@ import type {
   FederalPublication,
 } from "@capiro/meri-contracts/federal-workbench";
 import {
-  federalTextHash,
   FederalSourceStaleError,
   type FederalSourceView,
   type FederalWorkbenchPort,
 } from "../../../shared/meri-documents/federal-workbench";
+import {
+  authoredFrom,
+  authoredOperations,
+  type AuthoredInput,
+  type AuthoredOperation,
+  type Authoring,
+} from "../../../shared/meri-documents/federal-authoring";
 import type { LibraryVersion } from "../../../shared/meri-documents/library-access";
 import { DocumentDownloadUrl } from "./download-url";
 import styles from "./files.module.css";
+import { FederalAmendmentList } from "./FederalAmendmentList";
 import { FederalSourceImporter } from "./FederalSourceImporter";
 
 /** Exact text amendment review. Source claims, coverage and unresolved legal
@@ -32,6 +39,9 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     [review, setReview] = useState<AdmittedFederalReview | null>(null);
   const [scopeId, setScopeId] = useState(""),
     [kind, setKind] = useState<"replace" | "insert" | "delete">("replace");
+  const [drafts, setDrafts] = useState<readonly AuthoredInput[]>([]),
+    [authoring, setAuthoring] = useState<Authoring | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [expected, setExpected] = useState(""),
     [text, setText] = useState(""),
     [position, setPosition] = useState<"before" | "after">("after");
@@ -115,10 +125,13 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     setBase(undefined);
     setSource(selected);
     setScopeId(selected.source.scopes[0]?.id ?? "");
+    setDrafts([]);
+    setAuthoring(null);
+    setEditingId(null);
     setExpected("");
     setText("");
   }
-  function applyReview(value: AdmittedFederalReview) {
+  async function applyReview(value: AdmittedFederalReview) {
     setBase(value);
     setReview(value);
     setConfirmed(false);
@@ -130,7 +143,77 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
       sha256: value.selection.expectedArtifactSha256,
       source: value.prepared.draft.source,
     });
-    const operation = value.selection.operations[0];
+    const operations = value.selection.operations;
+    const loaded = authoredFrom(operations);
+    setDrafts(loaded);
+    setEditingId(null);
+    // A saved review's own operations are already compiler-confirmed: show them
+    // verbatim when this editor cannot re-derive nested intermediate text locally.
+    const derived = await authoredOperations(
+      value.prepared.draft.source,
+      loaded,
+    );
+    setAuthoring(
+      derived.refusal ? { ...derived, operations: [...operations] } : derived,
+    );
+    const operation = operations[0];
+    setScopeId(operation.scopeId);
+    setKind(operation.kind);
+    setExpected(operation.expectedText);
+    setText(operation.text ?? "");
+    setPosition(operation.position ?? "after");
+  }
+  /** Each added amendment is derived against the exact current section text, so
+   * the user sees the intermediate hash and dependencies before the compiler. */
+  async function addAmendment() {
+    if (!source) return;
+    let amendmentId = editingId ?? `amendment-${crypto.randomUUID()}`;
+    while (!editingId && drafts.some((draft) => draft.id === amendmentId))
+      amendmentId = `amendment-${crypto.randomUUID()}`;
+    const added: AuthoredInput = {
+      id: amendmentId,
+      kind,
+      scopeId,
+      expectedText: expected,
+      ...(kind === "delete" ? {} : { text }),
+      ...(kind === "insert" ? { position } : {}),
+    };
+    const next = editingId
+      ? drafts.map((draft) => (draft.id === editingId ? added : draft))
+      : [...drafts, added];
+    if (JSON.stringify(next) !== JSON.stringify(drafts)) {
+      const value = await authoredOperations(source.source, next);
+      if (value.refusal) {
+        setProblem(value.refusal);
+        return;
+      }
+      changed();
+      setDrafts(next);
+      setAuthoring(value);
+    }
+    cancelEdit();
+  }
+  async function removeAmendment(operation: AuthoredInput) {
+    const next = drafts.filter((draft) => draft.id !== operation.id);
+    changed();
+    setDrafts(next);
+    setAuthoring(null);
+    if (editingId === operation.id) cancelEdit();
+    // Removing an amendment always takes effect, even when the remaining set can
+    // only be hashed by the compiler. Never retain the removed set's review or hashes.
+    if (!source) return;
+    const value = await authoredOperations(source.source, next);
+    setAuthoring(value);
+    setProblem(value.refusal ?? "");
+  }
+  function cancelEdit() {
+    setEditingId(null);
+    setExpected("");
+    setText("");
+    setProblem("");
+  }
+  function editAmendment(operation: AuthoredInput) {
+    setEditingId(operation.id);
     setScopeId(operation.scopeId);
     setKind(operation.kind);
     setExpected(operation.expectedText);
@@ -138,35 +221,29 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     setPosition(operation.position ?? "after");
   }
   async function prepare() {
-    if (!source) return;
-    const scope = source.source.scopes.find((scope) => scope.id === scopeId);
-    if (!scope) throw new Error("Choose an exact source section.");
-    const operation = {
-      id: "amendment-1",
-      scopeId,
-      kind,
-      expectedScopeSha256: scope.sha256,
-      expectedText: expected,
-      expectedTextSha256: await federalTextHash(expected),
-      dependsOn: [],
-      ...(kind === "delete" ? {} : { text }),
-      ...(kind === "insert" ? { position } : {}),
-    };
-    const value = await port.prepare(
+    if (!source || editingId || !drafts.length) return;
+    const value = await authoredOperations(source.source, drafts);
+    if (value.refusal) throw new Error(value.refusal);
+    setAuthoring(value);
+    const prepared = await port.prepare(
       {
         versionId: source.versionId,
         expectedArtifactSha256: source.sha256,
-        operations: [operation],
+        operations: [...value.operations] as [
+          AuthoredOperation,
+          ...AuthoredOperation[],
+        ],
       },
       lifetime.current.signal,
       base,
     );
-    setReview(value);
+    setReview(prepared);
     setConfirmed(false);
   }
   async function publish(output: FederalPublication["output"]) {
     if (
       !review ||
+      editingId ||
       (output !== "draft" &&
         !confirmed &&
         !(port.unresolved() && pendingOutput === output))
@@ -189,7 +266,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
         value.publication.version.object.sha256,
         lifetime.current.signal,
       );
-      applyReview(saved);
+      await applyReview(saved);
       setPublication(value);
     }
   }
@@ -235,13 +312,12 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     });
   }
   const scope = source?.source.scopes.find((item) => item.id === scopeId);
-  const multiple = Boolean(base && base.selection.operations.length > 1);
   return (
     <section className={styles.panel} aria-labelledby={id}>
       <h2 id={id}>Federal amendment review</h2>
       <p>
         Import an official bill version or open a retained source or saved
-        review, prepare an exact text amendment, then review the three outputs
+        review, add ordered exact text amendments, then review the three outputs
         before exporting.
       </p>
       <p className={styles.muted}>
@@ -348,13 +424,22 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
               Source hash: {source.source.sha256}
             </p>
           </details>
-          {multiple && (
-            <p>
-              This saved review contains several ordered amendments. Its exact
-              outputs can be reviewed and exported; this editor prepares one
-              amendment at a time.
-            </p>
-          )}
+          <p>
+            {authoring?.operations.length
+              ? "These ordered amendments are checked against the exact current section text before the compiler answers."
+              : "Add one or more ordered exact amendments, then prepare them together for review."}
+          </p>
+          <FederalAmendmentList
+            drafts={drafts}
+            operations={authoring?.operations ?? []}
+            disabled={locked}
+            onEdit={(operation) => editAmendment(operation)}
+            onRemove={(operation) =>
+              void run(async () => {
+                await removeAmendment(operation);
+              })
+            }
+          />
           <form
             className={styles.form}
             onSubmit={(event) => {
@@ -362,13 +447,13 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
               if (!locked) void run(prepare);
             }}
           >
-            <fieldset disabled={locked || multiple}>
+            <fieldset disabled={locked}>
               <label className={styles.field}>
                 Source section
                 <select
                   value={scopeId}
                   onChange={(event) => {
-                    changed();
+                    if (!editingId) changed();
                     setScopeId(event.target.value);
                   }}
                 >
@@ -387,7 +472,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                 <select
                   value={kind}
                   onChange={(event) => {
-                    changed();
+                    if (!editingId) changed();
                     setKind(event.target.value as typeof kind);
                   }}
                 >
@@ -402,7 +487,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                   aria-label="Exact text to find"
                   value={expected}
                   onChange={(event) => {
-                    changed();
+                    if (!editingId) changed();
                     setExpected(event.target.value);
                   }}
                 />
@@ -413,7 +498,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                   <select
                     value={position}
                     onChange={(event) => {
-                      changed();
+                      if (!editingId) changed();
                       setPosition(event.target.value as typeof position);
                     }}
                   >
@@ -429,17 +514,33 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                     aria-label="New text"
                     value={text}
                     onChange={(event) => {
-                      changed();
+                      if (!editingId) changed();
                       setText(event.target.value);
                     }}
                   />
                 </label>
               )}
               <Button
-                type="submit"
+                type="button"
                 disabled={!expected || (kind !== "delete" && !text)}
+                onClick={() => void run(addAmendment)}
               >
-                Prepare amendment for review
+                {editingId ? "Update amendment" : "Add amendment to review"}
+              </Button>
+              {editingId && (
+                <Button type="button" onClick={cancelEdit}>
+                  Cancel edit
+                </Button>
+              )}
+              <Button
+                type="submit"
+                disabled={
+                  Boolean(editingId) ||
+                  !drafts.length ||
+                  Boolean(authoring?.refusal)
+                }
+              >
+                Prepare these amendments for review
               </Button>
             </fieldset>
           </form>
@@ -474,21 +575,25 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
             <input
               type="checkbox"
               checked={confirmed}
-              disabled={locked}
+              disabled={locked || Boolean(editingId)}
               onChange={(event) => setConfirmed(event.target.checked)}
             />{" "}
             I have reviewed this exact revision and want to export the selected
             text.
           </label>
           <div>
-            <Button disabled={locked} value="draft" onClick={handlePublish}>
+            <Button
+              disabled={locked || Boolean(editingId)}
+              value="draft"
+              onClick={handlePublish}
+            >
               Save review revision
             </Button>
             {(["operative", "consolidated", "redline"] as const).map(
               (output) => (
                 <Button
                   key={output}
-                  disabled={locked || !confirmed}
+                  disabled={locked || Boolean(editingId) || !confirmed}
                   value={output}
                   onClick={handlePublish}
                 >

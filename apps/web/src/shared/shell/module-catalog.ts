@@ -3,7 +3,6 @@ import type { ModuleAssetName } from "./ModuleAsset";
 export type ModuleSlug =
   | "engagement"
   | "planner"
-  | "calendar"
   | "workspace"
   | "strategies"
   | "directory"
@@ -47,14 +46,6 @@ export const moduleCatalog: readonly ModuleDescriptor[] = [
     ],
     profile: "Planner, one client",
     tone: "teal",
-  },
-  {
-    slug: "calendar",
-    label: "Calendar",
-    icon: "calendarNav",
-    description: "Meetings and deadlines across your authorized workspace.",
-    chips: [],
-    profile: "Calendar, one client",
   },
   {
     slug: "workspace",

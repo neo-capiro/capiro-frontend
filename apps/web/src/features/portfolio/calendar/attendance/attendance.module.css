@@ -56,10 +56,13 @@
   }
 }
 .compact {
-  display: inline-flex;
+  display: inline-grid;
+  gap: 8px;
+  max-width: 100%;
 }
 .compact > :global(.row) {
-  gap: 0;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 .compact > :global(.row) > :global(.button) {
   background: var(--dark-gradient);

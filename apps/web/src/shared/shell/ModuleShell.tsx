@@ -46,14 +46,13 @@ export function ModuleShell({
                  the narrower `.hubMain` variant is for the hub/landscape grid pages. */
               settings
                 ? styles.settingsMain
-                : `${styles.main} ${active === "calendar" ? styles.calendarMain : ""} ${active === "engagement" ? styles.engagementMain : ""} ${active === "strategies" ? styles.strategiesMain : ""} ${["hub", "intelligence", "research-portfolios"].includes(active) ? styles.hubMain : ""}`
+                : `${styles.main} ${active === "engagement" ? styles.engagementMain : ""} ${active === "strategies" ? styles.strategiesMain : ""} ${["hub", "intelligence", "research-portfolios"].includes(active) ? styles.hubMain : ""}`
             }
             id="main-content"
           >
-            {!settings &&
-              active !== "hub" &&
-              active !== "calendar" &&
-              active !== "strategies" && <ModuleBreadcrumb active={active} />}
+            {!settings && active !== "hub" && active !== "strategies" && (
+              <ModuleBreadcrumb active={active} />
+            )}
             {children}
           </main>
         </ModuleSidebarWorkspace>
