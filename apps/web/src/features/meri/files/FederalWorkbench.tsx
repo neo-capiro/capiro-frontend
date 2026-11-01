@@ -339,7 +339,10 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
       output === "draft" ||
       output === "operative" ||
       output === "consolidated" ||
-      output === "redline"
+      output === "redline" ||
+      output === "docx" ||
+      output === "xml" ||
+      output === "pdf"
     ) {
       void run(() => publish(output));
     }
@@ -364,6 +367,28 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
       ? source.source.scopes.find((item) => item.id === scopeId)?.textRun
       : undefined;
   const currentScope = authoring?.scopes.find((item) => item.id === scopeId);
+  const reviewedDraft = review?.prepared.draft;
+  const removed =
+    reviewedDraft &&
+    "resultKind" in reviewedDraft &&
+    reviewedDraft.resultKind === "source-text-removed";
+  const schemaQualified =
+    reviewedDraft?.parserVersion === "federal-uslm-xml/2" ||
+    reviewedDraft?.parserVersion === "federal-uslm-xml/3";
+  const structured = reviewedDraft?.parserVersion === "federal-uslm-xml/3";
+  const projection = reviewedDraft?.structuralProjection;
+  const exportOutputs: FederalPublication["output"][] = [
+    "operative",
+    "consolidated",
+    "redline",
+    ...(schemaQualified && !removed ? ["xml" as const] : []),
+    ...(!structured || projection?.status === "supported"
+      ? ["docx" as const]
+      : []),
+    ...(structured && projection?.status === "supported"
+      ? ["pdf" as const]
+      : []),
+  ];
   return (
     <section className={styles.panel} aria-labelledby={id}>
       <h2 id={id}>Federal amendment review</h2>
@@ -714,6 +739,33 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
           <p className={styles.identifier}>
             Reviewed revision: {review.prepared.revisionSha256}
           </p>
+          {schemaQualified && (
+            <p>
+              {removed
+                ? "Consolidated XML is unavailable for proposed whole-source removal; consolidated TXT remains exactly zero bytes."
+                : "Consolidated XML preserves the exact consolidated UTF-8 XML text."}
+            </p>
+          )}
+          {structured && projection?.status !== "supported" && (
+            <p>
+              Word and PDF dossiers are unavailable for this revision:{" "}
+              {projection?.status === "unsupported" &&
+              projection.code === "DRAFT_OUTPUT_LIMIT"
+                ? "the document exceeds the supported export limits."
+                : "its XML includes structures outside the supported document subset."}{" "}
+              Text review and TXT{!removed ? "/XML" : ""} export remain
+              available.
+            </p>
+          )}
+          {structured && projection?.status === "supported" && (
+            <p>
+              Word and PDF dossiers show separate original and revised views,
+              with deletions struck through and insertions underlined. These are
+              not Word tracked changes. PDF export also requires a qualified
+              server renderer and may be refused when that renderer is
+              unavailable.
+            </p>
+          )}
           <label>
             <input
               type="checkbox"
@@ -732,18 +784,22 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
             >
               Save review revision
             </Button>
-            {(["operative", "consolidated", "redline"] as const).map(
-              (output) => (
-                <Button
-                  key={output}
-                  disabled={locked || Boolean(editingId) || !confirmed}
-                  value={output}
-                  onClick={handlePublish}
-                >
-                  Export {output}
-                </Button>
-              ),
-            )}
+            {exportOutputs.map((output) => (
+              <Button
+                key={output}
+                disabled={locked || Boolean(editingId) || !confirmed}
+                value={output}
+                onClick={handlePublish}
+              >
+                {output === "xml"
+                  ? "Export consolidated XML"
+                  : output === "docx"
+                    ? "Export Word dossier"
+                    : output === "pdf"
+                      ? "Export PDF dossier"
+                      : `Export ${output}`}
+              </Button>
+            ))}
             {port.unresolved() && pendingOutput && (
               <Button
                 disabled={busy}
@@ -755,18 +811,16 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
             )}
             {port.unresolved() &&
               !pendingOutput &&
-              (["draft", "operative", "consolidated", "redline"] as const).map(
-                (output) => (
-                  <Button
-                    key={"recover-" + output}
-                    disabled={busy || (output !== "draft" && !confirmed)}
-                    value={output}
-                    onClick={handlePublish}
-                  >
-                    Recover original {output}
-                  </Button>
-                ),
-              )}
+              (["draft", ...exportOutputs] as const).map((output) => (
+                <Button
+                  key={"recover-" + output}
+                  disabled={busy || (output !== "draft" && !confirmed)}
+                  value={output}
+                  onClick={handlePublish}
+                >
+                  Recover original {output}
+                </Button>
+              ))}
           </div>
         </>
       )}

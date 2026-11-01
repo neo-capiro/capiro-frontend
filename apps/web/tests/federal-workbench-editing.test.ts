@@ -1,9 +1,11 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
-import type {
-  AdmittedFederalReview,
-  FederalSelection,
-  FederalCompilerSource,
+import {
+  receiveFederalRequest,
+  receiveFederalResponse,
+  type AdmittedFederalReview,
+  type FederalSelection,
+  type FederalCompilerSource,
 } from "@capiro/meri-contracts/federal-workbench";
 import { FederalWorkbench } from "../src/features/meri/files/FederalWorkbench";
 import { FederalAmendmentList } from "../src/features/meri/files/FederalAmendmentList";
@@ -15,6 +17,8 @@ import {
 import type { FederalWorkbenchPort } from "../src/shared/meri-documents/federal-workbench";
 import fixture from "./fixtures/federal-workbench.json";
 import runFixture from "./fixtures/federal-text-run-source.json";
+import exportFixture from "./fixtures/federal-structural-exports.json";
+import schemaFixture from "./fixtures/federal-schema-source.json";
 
 // Exercise actual component callbacks and authoring, with synthetic port results.
 // Receiver/compiler admission remains covered by the existing federal suites.
@@ -94,12 +98,14 @@ function render() {
     if (cleanup) hooks.cleanups.push(cleanup);
   });
 }
-async function flush() {
+async function flush(recovering = false) {
   await vi.waitFor(
     () => {
       if (hooks.dirty) render();
       expect(
-        button("Browse source files and saved reviews")!.props.disabled,
+        recovering
+          ? button("Recover original operation")?.props.disabled
+          : button("Browse source files and saved reviews")!.props.disabled,
       ).toBe(false);
     },
     { interval: 1 },
@@ -111,12 +117,12 @@ const button = (text: string) =>
 const list = () =>
   nodes.find((node) => node.type === FederalAmendmentList)!
     .props as ComponentProps<typeof FederalAmendmentList>;
-async function click(text: string) {
+async function click(text: string, recovering = false) {
   const node = button(text)!;
   expect(node, text).toBeDefined();
   expect(node.props.disabled, text).not.toBe(true);
   node.props.onClick!({ currentTarget: { value: node.props.value } });
-  await flush();
+  await flush(recovering);
 }
 async function field(text: string, value: string) {
   nodes.find((node) => node.props["aria-label"] === text)!.props.onChange!({
@@ -220,6 +226,159 @@ beforeEach(async () => {
   await click("Browse source files and saved reviews");
 });
 afterEach(() => hooks.cleanups.forEach((cleanup) => cleanup()));
+
+async function structuralReview(
+  kind: "supported" | "unsupported" = "supported",
+) {
+  const specimen = exportFixture[kind].prepared;
+  const bytes = (value: unknown) =>
+    new TextEncoder().encode(JSON.stringify(value));
+  const request = receiveFederalRequest(
+    "federal-prepare",
+    bytes(specimen.input),
+  );
+  const review = await receiveFederalResponse(
+    "federal-prepare",
+    specimen.status,
+    bytes(specimen.result),
+    request,
+  );
+  if ("error" in review) throw Error("Expected admitted structural review");
+  return review;
+}
+
+it("offers qualified XML and supported Word/PDF choices with explicit comparison and renderer limits", async () => {
+  saved = await structuralReview();
+  await click("Open saved review");
+  for (const name of [
+    "Export consolidated XML",
+    "Export Word dossier",
+    "Export PDF dossier",
+  ])
+    expect(button(name)?.props.disabled).toBe(true);
+  expect(
+    nodes.some(
+      (node) =>
+        node.type === "p" && label(node).includes("not Word tracked changes"),
+    ),
+  ).toBe(true);
+  expect(
+    nodes.some(
+      (node) => node.type === "p" && label(node).includes("qualified server"),
+    ),
+  ).toBe(true);
+  await confirm();
+  await click("Export consolidated XML");
+  expect(publish.mock.lastCall![1]).toBe("xml");
+  await click("Export Word dossier");
+  expect(publish.mock.lastCall![1]).toBe("docx");
+  publish.mockRejectedValueOnce(
+    Error("The file operation was not dispatched."),
+  );
+  await click("Export PDF dossier");
+  expect(publish.mock.lastCall![1]).toBe("pdf");
+  expect(
+    nodes.some(
+      (node) =>
+        node.props.role === "alert" && label(node).includes("not dispatched"),
+    ),
+  ).toBe(true);
+});
+
+it("keeps TXT/XML available and explains the unsupported structural subset", async () => {
+  saved = await structuralReview("unsupported");
+  await click("Open saved review");
+  expect(button("Export Word dossier")).toBeUndefined();
+  expect(button("Export PDF dossier")).toBeUndefined();
+  expect(
+    nodes.some(
+      (node) =>
+        node.type === "p" &&
+        label(node).includes("outside the supported document subset"),
+    ),
+  ).toBe(true);
+  await confirm();
+  expect(button("Export consolidated")?.props.disabled).toBe(false);
+  expect(button("Export consolidated XML")?.props.disabled).toBe(false);
+});
+
+it("preserves old-profile Word and schema2 XML while excluding XML for typed removal", async () => {
+  await click("Open saved review");
+  expect(button("Export Word dossier")).toBeDefined();
+  expect(button("Export consolidated XML")).toBeUndefined();
+  expect(button("Export PDF dossier")).toBeUndefined();
+  saved = {
+    ...saved,
+    prepared: {
+      ...saved.prepared,
+      draft: {
+        ...saved.prepared.draft,
+        parserVersion: "federal-uslm-xml/2",
+        source: schemaFixture.imported.source,
+      },
+    },
+  } as unknown as AdmittedFederalReview;
+  await click("Open saved review");
+  expect(button("Export consolidated XML")).toBeDefined();
+  expect(button("Export PDF dossier")).toBeUndefined();
+  saved = {
+    ...saved,
+    prepared: {
+      ...saved.prepared,
+      draft: {
+        ...saved.prepared.draft,
+        resultKind: "source-text-removed",
+        outputs: { ...saved.prepared.draft.outputs, consolidated: "" },
+      },
+    },
+  } as unknown as AdmittedFederalReview;
+  await click("Open saved review");
+  expect(button("Export consolidated XML")).toBeUndefined();
+  expect(button("Export consolidated")).toBeDefined();
+  expect(
+    nodes.some(
+      (node) =>
+        node.type === "p" &&
+        label(node).includes("TXT remains exactly zero bytes"),
+    ),
+  ).toBe(true);
+});
+
+it("recovers the original XML choice after an uncertain outcome", async () => {
+  let uncertain = false;
+  port = { ...port, unresolved: () => uncertain };
+  saved = await structuralReview();
+  await click("Open saved review");
+  await confirm();
+  publish.mockImplementationOnce(async () => {
+    uncertain = true;
+    throw Error("Synthetic unknown XML outcome");
+  });
+  await click("Export consolidated XML", true);
+  expect(button("Export Word dossier")?.props.disabled).toBe(true);
+  publish.mockImplementationOnce(async () => {
+    uncertain = false;
+    return { publication: { version: { filename: "synthetic.xml" } } };
+  });
+  await click("Recover original operation");
+  expect(publish.mock.calls.map((call) => call[1])).toEqual(["xml", "xml"]);
+});
+
+it("offers eligible new-format recovery after remount without claiming a PDF success", async () => {
+  saved = await structuralReview();
+  await click("Open saved review");
+  port = { ...port, unresolved: () => true };
+  render();
+  for (const output of ["xml", "docx", "pdf"])
+    expect(button(`Recover original ${output}`)).toBeDefined();
+  await confirm();
+  publish.mockRejectedValueOnce(
+    Error("The file operation was not dispatched."),
+  );
+  await click("Recover original pdf");
+  expect(publish.mock.lastCall![1]).toBe("pdf");
+  expect(button("Get verified file")).toBeUndefined();
+});
 
 it("defaults newly selected runs to decoded editing and shows the canonical current text", async () => {
   const source = runFixture.imported.source as FederalCompilerSource;
