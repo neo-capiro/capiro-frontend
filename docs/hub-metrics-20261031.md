@@ -18,9 +18,9 @@ The request selects `lifecycle=active`, page 1 and page size 1. Only `total` is 
 
 Refresh is manual and every minute while mounted. The existing `useCapiroQuery` clears replaced reads, aborts prior work and fences results by input and application API lifetime. The clock label updates every ten seconds. Loading/replacement and failed refresh hide previous values. HTTP 401/403 means denied; 404 and transport/schema failures mean unavailable without exposing raw errors. One source/card failure cannot clear other module navigation or independent observations. Preview's roster-only branch never mounts metrics.
 
-## Remaining cards: exact owner and decision boundary
+## Historical remaining-card proposals (superseded)
 
-These rows are review proposals, not implemented APIs or approved new formulas. Each remains visibly unavailable until its existing owner returns the full eligible population with observation, scope and completeness. UI lists, first pages and roster sizes are never substitute sources.
+The table and decision list below preserve the initial proposal history. They are **not current metric definitions or outstanding business decisions**. Root's later `B9-METRIC-DEFINITION-DECISION-20261031.txt` selected the definitions recorded in the Directory, Planner/Strategy/Workspace, and Engagement/Research continuation sections below. Those sections supersede this table, including its proposed inclusive outreach window, UTC-date Planner rule, Workspace document unit and Directory population. Current implementations require their canonical complete populations; UI lists, first pages and roster sizes are never substitute sources.
 
 | Card                | Owner and proposed smallest useful metric                            | Scope, status, window and units                                                                                                                                                                                                       | Concrete remaining dependency                                                                                                                                                                                                                      |
 | ------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -33,7 +33,7 @@ These rows are review proposals, not implemented APIs or approved new formulas. 
 
 For every future owner response: observation timestamp, exact definition/version, current authorized client scope, full-population coverage and per-source availability are required. Complete zero, denied, unavailable, partial and stale must remain distinct. Hidden/unauthorized rows must never enter a numerator or denominator; current access withdrawal must clear cached observations. Full counts must be computed before pagination, with association fan-out deduplicated by canonical identity. Source failures remain independent.
 
-## Narrow decisions for review
+## Historical narrow decisions (resolved by later definitions)
 
 1. Approve the exact event/status selection for Engagement and the due/status mapping for Planner; reuse B2 only after those populations are proven identical.
 2. Confirm Workspace/Strategy active statuses and Directory/Research Portfolio scope before adding totals. Existing active-record wording alone does not define those enums or relationships.
@@ -131,3 +131,61 @@ source handback. Source tests are not live acceptance: compatible owner services
 must be deployed before these consumers, followed by actual actor/client,
 revocation, zero, unavailable, reload and refresh checks. B9 is not Done from
 these source changes.
+
+# Engagement and Research Portfolio aggregate continuation
+
+The two remaining Hub consumers receive the actual Core346 candidate contract,
+`a4700d89efa0ef2d0e540e4e959577702b762340`, from
+`classic-outreach-metrics.ts` and `research-portfolio-metrics.ts`. That producer
+still requires independent composition review and rollout; this receiving change
+does not establish a serving producer or enable a deployment gate. Absent or
+invalid responses remain unavailable, never zero. Existing mounted reads are
+unchanged; source-reference documentation is not an activation control.
+
+Both read `status` rather than Planner's `state`. `complete` carries a safe
+nonnegative integer `count`, `complete: true`, `capped: false`. `incomplete`
+carries `count: null`, `complete: false`, `capped: true`; the count is withheld
+and no partial value is displayed. The consumer validates metric identity,
+version 1, the exact returned scope, ISO timestamps and branch coherence, and it
+never derives a population, window, dedup or authorization decision.
+
+Engagement reads `engagement.metrics.personalClassicOutreach30d` from
+`GET /engagement/outreach-metrics` on the existing engagement service prefix.
+The producer returns `scope.kind: personal_classic` when unfiltered, or
+`scope: {kind: client, clientId}` for the exact selected client. It owns current
+actor/tenant authority, the exclusion of internal record types and the eligible
+General records. `window` is the producer's fixed 30 x 24-hour UTC `[start,end)`
+window with `basis: created_or_sent`; one canonical saved outreach ID counts once
+even when both dates fall inside it. The consumer rejects a non-30-day span, a
+different bound label, a sent-only basis, or an end later than `observedAt`.
+Core fixes the window at admission and observes after the work, so these times
+need not be equal. The card says "30-day window", preserves the exact dates and
+count, and marks an old window stale even when `observedAt` is recent. Both
+observation age and window-end age use the existing two-minute UI age threshold;
+this is not an ingestion SLA or a browser-recomputed population. The producer's
+maximum 100-candidate authority universe surfaces as an incomplete observation,
+never as the first 100 records. Not sent-message volume, tenant totals or G03
+recorded activity.
+
+Research Portfolio reads `researchPortfolios.metrics.active` from
+`GET /research-portfolios/metrics` on the existing Core service prefix. Scope is
+`scope.kind: granted` for the current same-tenant viewer/editor/owner grant
+unfiltered (including unlinked
+General portfolios) or an exact client with a current client wall plus a saved
+exact link. Duplicate grants and client links do not multiply the count, and
+watches, actions, members and outputs are not portfolio identities. There is no
+window field. The producer's 4096-row authority observation bound surfaces as
+`capped: true` incomplete with a withheld count; 4097 detects the overflow. A
+canonical absent Classic membership yields 404 and a Research denial yields 403;
+neither may be retried as General scope.
+
+Neither unfiltered scope is normalized to Planner/Strategy's `actor` scope.
+Cross-domain and actor substitutions fail closed; the existing five cards retain
+their original scope contracts. These source changes do not restore Modules
+Calendar; final integration must preserve its newer deletion on main.
+
+Refresh stays manual plus every minute while mounted, the freshness clock is ten
+seconds, and 401/403 deny, while 404 and transport or schema failures are
+unavailable without exposing raw errors. Invalid selected clients suppress the
+request entirely, replaced reads abort, and late responses cannot replace a
+newer scope. Preview stays roster-only with no metric reads.

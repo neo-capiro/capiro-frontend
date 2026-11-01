@@ -51,6 +51,46 @@ vi.mock("../src/shared/capiro/queries", () => ({
           },
         },
       };
+    const aggregateMetric =
+      key === "engagement.metrics.personalClassicOutreach30d"
+        ? {
+            metric: "personal_classic_outreach_30d",
+            window: {
+              start: "2026-10-01T12:00:00.000Z",
+              end: "2026-10-31T12:00:00.000Z",
+              bounds: "[start,end)",
+              basis: "created_or_sent",
+            },
+          }
+        : key === "researchPortfolios.metrics.active"
+          ? { metric: "active_research_portfolios" }
+          : undefined;
+    if (aggregateMetric) {
+      const clientId = (input as { query?: { clientId?: string } }).query
+        ?.clientId;
+      return {
+        loading: false,
+        reload: vi.fn(),
+        data: {
+          ...aggregateMetric,
+          version: 1,
+          status: "complete",
+          count:
+            aggregateMetric.metric === "active_research_portfolios" ? 47 : 23,
+          complete: true,
+          capped: false,
+          observedAt: new Date().toISOString(),
+          scope: clientId
+            ? { kind: "client", clientId }
+            : {
+                kind:
+                  aggregateMetric.metric === "active_research_portfolios"
+                    ? "granted"
+                    : "personal_classic",
+              },
+        },
+      };
+    }
     const ownerMetric = {
       "planner.metrics.overdue": ["planner.overdue_unfinished", 7],
       "strategies.metrics.active": ["strategy.active", 19],
@@ -137,8 +177,10 @@ it("mounts independent supported domain aggregates alongside the roster", () => 
   expect(state.reads.map((r) => r.key).sort()).toEqual([
     "clients.list",
     "directory.metrics",
+    "engagement.metrics.personalClassicOutreach30d",
     "intelligence.funding.search",
     "planner.metrics.overdue",
+    "researchPortfolios.metrics.active",
     "strategies.metrics.active",
     "workspace.metrics.savedWork",
   ]);
@@ -150,6 +192,9 @@ it("mounts independent supported domain aggregates alongside the roster", () => 
   expect(html).toContain("Enabled funding catalogs");
   expect(html).toContain("Source records, not awarded dollars");
   expect(html).toContain('href="/modules/planner"');
+  expect(html).toContain("<strong>23</strong>");
+  expect(html).toContain("<strong>47</strong>");
+  expect(html).not.toContain("last 30 days");
 });
 
 it("keeps selected scope visible when omitted by the roster and queries that exact client", () => {
@@ -238,9 +283,11 @@ it("scopes all owned metric reads exactly and isolates an individual failure", (
       "planner.metrics.overdue",
       "strategies.metrics.active",
       "workspace.metrics.savedWork",
+      "engagement.metrics.personalClassicOutreach30d",
+      "researchPortfolios.metrics.active",
     ].includes(r.key),
   );
-  expect(reads).toHaveLength(3);
+  expect(reads).toHaveLength(5);
   expect(
     reads.every(
       (r) =>
@@ -252,6 +299,8 @@ it("scopes all owned metric reads exactly and isolates an individual failure", (
   expect(html).not.toContain("private owner failure");
   expect(html).toContain("<strong>19</strong>");
   expect(html).toContain("<strong>31</strong>");
+  expect(html).toContain("<strong>23</strong>");
+  expect(html).toContain("<strong>47</strong>");
   expect(html).toContain("501");
   expect(html).toContain("1,201");
 });
@@ -263,6 +312,8 @@ it("disables every scoped metric on a malformed selection without hiding the glo
     "planner.metrics.overdue",
     "strategies.metrics.active",
     "workspace.metrics.savedWork",
+    "engagement.metrics.personalClassicOutreach30d",
+    "researchPortfolios.metrics.active",
   ])
     expect(state.reads.find((r) => r.key === key)).toMatchObject({
       enabled: false,
@@ -271,5 +322,7 @@ it("disables every scoped metric on a malformed selection without hiding the glo
   expect(html).not.toContain("<strong>7</strong>");
   expect(html).not.toContain("<strong>19</strong>");
   expect(html).not.toContain("<strong>31</strong>");
+  expect(html).not.toContain("<strong>23</strong>");
+  expect(html).not.toContain("<strong>47</strong>");
   expect(html).toContain("501");
 });
