@@ -33,9 +33,12 @@ vi.mock("react", async (importOriginal) => {
       if (
         !previous ||
         !deps.every((value, i) => Object.is(value, previous.deps?.[i]))
-      )
-        mock.frame[index] = { value: factory(), deps };
-      return mock.frame[index].value;
+      ) {
+        const next = { value: factory(), deps };
+        mock.frame[index] = next;
+        return next.value;
+      }
+      return previous.value;
     },
     useSyncExternalStore: (
       ...args: Parameters<typeof actual.useSyncExternalStore>
@@ -159,7 +162,9 @@ it("retains the original session through same-source refresh and storage loss", 
     )(element.props);
   };
   expect(render()).toBe(props.children);
-  mock.instances[0].state = {
+  const original = mock.instances[0];
+  if (!original) throw new Error("Expected the original Planner session");
+  original.state = {
     ...mock.state,
     uncertain: true,
     request: {
