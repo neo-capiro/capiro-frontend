@@ -74,6 +74,8 @@ export function useRunCommands(
     let observable = false;
     return perform(async () => {
       observable = await loadHistory();
+      if (observable && alive.current)
+        journal.acknowledgeCompletedRetirement(port);
     }).then((done) => thenObserve(done && observable));
   };
   const send = (operation: () => Promise<unknown>) =>
