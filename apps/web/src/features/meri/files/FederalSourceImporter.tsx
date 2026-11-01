@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@capiro/ui/button";
+import type { FederalImportRequest } from "@capiro/meri-contracts/federal-workbench";
 import type { FederalSourceChoice } from "../../../shared/meri-documents/federal-sources";
 import type {
   FederalSourceView,
@@ -28,18 +29,35 @@ export function FederalSourceImporter({
     sources: readonly FederalSourceChoice[];
     nextAfter: number | null;
   } | null>(null);
-  const [pending, setPending] = useState<FederalSourceChoice | null>(null);
+  const [raw, setRaw] = useState(false);
+  const [captured, setCaptured] = useState<{
+    choice: FederalSourceChoice;
+    capture: NonNullable<FederalSourceView["capture"]>;
+  } | null>(null);
+  const [pending, setPending] = useState<{
+    choice: FederalSourceChoice;
+    representation: FederalImportRequest["representation"];
+  } | null>(null);
   async function browse(after = 0) {
     const value = await port.sources(after, signal());
     setPage(value);
   }
-  async function importSource(choice: FederalSourceChoice) {
+  async function importSource(
+    choice: FederalSourceChoice,
+    representation: FederalImportRequest["representation"],
+  ) {
     const choosingRecovery = port.unresolved() && pending === null;
-    setPending(choice);
+    setCaptured(null);
+    setPending({ choice, representation });
     onPending(true);
     try {
-      const source = await port.importSource(choice.selection, signal());
+      const source = await port.importSource(
+        choice.selection,
+        signal(),
+        representation,
+      );
       onImported(source);
+      setCaptured(source.capture ? { choice, capture: source.capture } : null);
       setPending(null);
       onPending(false);
     } catch (error) {
@@ -56,6 +74,21 @@ export function FederalSourceImporter({
       <p>
         Choose a bill version cited in this conversation. Import checks the
         current official source and saves its exact text for amendment review.
+      </p>
+      <label>
+        <input
+          type="checkbox"
+          checked={raw}
+          disabled={disabled || pending !== null}
+          onChange={(event) => setRaw(event.target.checked)}
+        />{" "}
+        Require verified captured UTF-8 bytes
+      </label>
+      <p>
+        This option requires recorded capture evidence and may refuse historical
+        sources without it. It does not fall back to extracted text or establish
+        XML schema validity, legal currency or enactment. When recovering an
+        earlier import, select the same option and bill version.
       </p>
       <Button
         disabled={disabled || pending !== null}
@@ -84,7 +117,14 @@ export function FederalSourceImporter({
                   </details>
                   <Button
                     disabled={disabled || pending !== null}
-                    onClick={() => void run(() => importSource(choice))}
+                    onClick={() =>
+                      void run(() =>
+                        importSource(
+                          choice,
+                          raw ? "retained-raw-utf8/1" : undefined,
+                        ),
+                      )
+                    }
                   >
                     {port.unresolved()
                       ? "Recover original source import"
@@ -107,10 +147,27 @@ export function FederalSourceImporter({
       {pending && port.unresolved() && (
         <Button
           disabled={disabled}
-          onClick={() => void run(() => importSource(pending))}
+          onClick={() =>
+            void run(() => importSource(pending.choice, pending.representation))
+          }
         >
           Recover selected source import
         </Button>
+      )}
+      {captured && (
+        <details>
+          <summary>Verified source capture</summary>
+          <p>
+            {captured.choice.selection.billId} · Version{" "}
+            {captured.choice.selection.versionCode} · Revision{" "}
+            {captured.choice.selection.revisionId}
+          </p>
+          <p>
+            {captured.capture.byteLength} UTF-8 bytes ·{" "}
+            {captured.capture.format.toUpperCase()}
+          </p>
+          <p>Captured body SHA-256: {captured.capture.sha256}</p>
+        </details>
       )}
     </section>
   );

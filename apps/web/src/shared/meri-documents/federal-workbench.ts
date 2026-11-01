@@ -21,6 +21,12 @@ export type FederalSourceView = Readonly<{
   versionId: string;
   sha256: string;
   source: Readonly<FederalCompilerSource>;
+  capture?: Readonly<
+    Extract<
+      FederalImportResult,
+      { schema: "meri.federal-source.v2" }
+    >["capture"]
+  >;
 }>;
 type Output = FederalPublication["output"];
 const encode = (value: unknown) =>
@@ -56,6 +62,7 @@ export interface FederalWorkbenchPort {
   importSource(
     selection: FederalNativeSelection,
     signal: AbortSignal,
+    representation?: FederalImportRequest["representation"],
   ): Promise<FederalSourceView>;
   source(versionId: string, signal: AbortSignal): Promise<FederalSourceView>;
   prepare(
@@ -148,13 +155,18 @@ export class FederalWorkbenchAccess implements FederalWorkbenchPort {
       throw error;
     }
   }
-  async importSource(selection: FederalNativeSelection, caller: AbortSignal) {
+  async importSource(
+    selection: FederalNativeSelection,
+    caller: AbortSignal,
+    representation?: FederalImportRequest["representation"],
+  ) {
     const { billId, versionCode, revisionId, versionHash, textHash } =
       selection;
     const value = await this.write(
       "federal-import",
       {
         selection: { billId, versionCode, revisionId, versionHash, textHash },
+        ...(representation === undefined ? {} : { representation }),
       },
       caller,
     );
@@ -162,6 +174,7 @@ export class FederalWorkbenchAccess implements FederalWorkbenchPort {
       versionId: value.publication.version.versionId,
       sha256: value.publication.version.object.sha256,
       source: value.source,
+      ...("capture" in value ? { capture: value.capture } : {}),
     };
   }
   async source(versionId: string, caller: AbortSignal) {
