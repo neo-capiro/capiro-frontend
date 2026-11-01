@@ -39,10 +39,10 @@
     "file": "apps/web/src/features/portfolio/calendar/attendance/MeetingAttendance.tsx",
     "kind": "function",
     "symbol": "AttendancePanel",
-    "fingerprint": "dc5359340c7d4f4bc59ae857e09e41cae9129aa3555fb6e7612b668a0498e198",
-    "reason": "One attendance session presents its visible send, remove and reconcile outcome. The guarded session query, consented send dialog and removal API are dedicated owners; the compact panel adds no independent lifecycle.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "c12c36a8ea9eaada9f1c0c921e78a2aed5ed597d967881366dff1c516e9145ef",
+    "reason": "Single meeting attendance session interaction owner. Status, readiness, uncertain-result blocking, send-dialog opening, cancellation and refresh share one scoped session state; API/access/query/consent responsibilities remain delegated. Compact presentation exposes existing states without a second owner or automatic dispatch. Keeping this state together preserves uncertainty across section changes.",
+    "reviewedBy": "Codex independent meeting reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/attendance/SendMeriDialog.tsx",
@@ -1307,22 +1307,13 @@
     "reviewedOn": "2026-10-14"
   },
   {
-    "file": "apps/web/src/features/modules/calendar/calendar.module.css",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "34cab455d626ec584301c7fd0e83cc14f412b8ccd2116d12c1e9d7aaa17d2e20",
-    "reason": "Calendar-specific authored geometry, source filters, agenda and responsive rules remain a single presentation stylesheet. The new compact header/disclosure owns no data or routing policy; ModuleBreadcrumb remains the navigation owner. No other module geometry changes. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
     "kind": "function",
     "symbol": "ConfiguredTracker",
-    "fingerprint": "f3ad354e9af10face3b9b49c378deb28607ead4b96ade92ae73174bfeb653fd5",
-    "reason": "Owns only Bill Tracker screen composition and local table/board/search/selection state. This delta nests the existing QueryState, BillResults and pagination in a results frame; currentBoard and the governed queries retain data/transport ownership. No request, receipt or paging algorithm moved into the view. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "6d635669a0e8266c04add46d92fe850ad5170c86b27992233a9b778685d3805e",
+    "reason": "Exact-body cohesion review, 2026-11-01: composes the single Bill Tracker screen and owns URL table/board/filter state, dialog visibility and current reader-scoped selection. useBillBoard/currentBoard retain data and paging projection; TrackerMetricCards/useTrackerMetrics retain metric receiving, reader lifetime and rendering; named dialogs/drawer retain workflows and mutations. This addition passes client/backend/version/board readiness to the metric owner without moving count/coverage calculation, API calls or authority into the view. Its 151 nonblank body lines are predominantly screen composition; splitting markup solely to meet 80 lines would not separate a newly mixed responsibility. ACCEPT only this fingerprint.",
+    "reviewedBy": "Codex independent frontend closure reviewer",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
@@ -1454,10 +1445,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
     "kind": "function",
     "symbol": "ClientOverview",
-    "fingerprint": "45c4182ffdd2be672fc0507748efc65034baf69be3f8810446b1be01b4f6abbe",
-    "reason": "reviewed-accept",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "0c1f4dd4621905a9c6eef262d573e18b671af97fb4f85d13ff44e600655aacac",
+    "reason": "Exact-body cohesion review, 2026-11-01: composes the single client overview from existing public feature entries and local cards/dialogs. It owns presentation values and local team/notes/quick-log visibility plus URL cleanup, while existing hooks and named child owners retain reads and workflows. RecordedActivity receives only clientId/version and owns its contract/query/status rendering; no activity calculation, new transport, mutation or backend authorization is embedded here. Its 183 nonblank body lines are predominantly overview layout and explicit child wiring. Existing separation is cohesive; no size-only extraction is warranted. ACCEPT only this fingerprint.",
+    "reviewedBy": "Codex independent frontend closure reviewer",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
@@ -2418,10 +2409,10 @@
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "function",
     "symbol": "OutreachView",
-    "fingerprint": "02fdb32ae73f02f8928c9de31ae51bd48aefbcc659b64b8fc9ee5a3ba745edc9",
-    "reason": "This is the single Outreach list/detail route selector. It classifies fetched native records before mounting an ordinary editor, checks returned identity/client scope, and delegates newsletters, campaign decisions, ordinary drafts and the existing wizard to their owners. Keeping route replacement and editor admission together avoids mounting an ordinary writer before classification finishes.",
-    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-10-30"
+    "fingerprint": "1fb0b3bc23ba58d41dd0cc8b3a0419fb14ba9d62cfd804141bb5cb3ecccfd30e",
+    "reason": "existing canonical selection/receiving dispatcher; the one-line callback correction does not add a domain, persistence owner or competing lifecycle. Preserving the receiving/Newsletter ordering together is easier to audit than a threshold-only extraction.",
+    "reviewedBy": "Codex independent HIGH Outreach source/design review; OUTREACH-WIZARD-PARITY-INDEPENDENT-REVIEW-20261101.txt SHA256 54fd827e25b96532590e051bf961d5601cfd389293477d36c8ca8f068461a5af",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
@@ -2499,10 +2490,10 @@
     "file": "apps/web/src/shared/portfolio/api/proxy.ts",
     "kind": "function",
     "symbol": "proxyRequest",
-    "fingerprint": "ad4452bb2bf3455a4f10c42b85f8e95ff87329b9307384c666071c5b07a63629",
-    "reason": "7. proxy.ts:33 function proxyRequest â€” 164 nonblank, fp ad4452bb2bf3455a4f10c42b85f8e95ff87329b9307384c666071c5b07a63629 (base d0ecf54dâ€¦), changed. The single canonical frontend proxy boundary (service/path validation, origin and session authentication, forwarding, error masking). Delta is one call inserted into the existing message chain; the route/status/body predicate was placed in its own cohesive 35-line module (no size signal) instead of adding another inline branch here â€” correct placement and no duplication of the existing command-refusal owner. ACCEPT.",
-    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "3d6fcd87f69a07c05c0d0f40ab995e55a1ca71e3ef995516e2151db1d98687e5",
+    "reason": "Exact-body cohesion review, 2026-11-01: remains the single canonical Portfolio request boundary, with ordered service/path and endpoint admission, release-version/selected-owner/query checks before credentials, existing origin/session checks, one bounded upstream forward and masked no-store response handling. New health/material/coverage checks are narrow static route/configuration admission within that lifecycle; metric algorithms, data authorization, DTO receiving and persistence stay with existing owners. Existing refusal and session-authentication helpers are reused. At 215 nonblank body lines the conditional growth warrants explicit review, but no independent domain workflow or second proxy is introduced; precredential order stays directly auditable. ACCEPT only this fingerprint, not unreviewed future route-family growth or other architecture findings.",
+    "reviewedBy": "Codex independent frontend closure reviewer",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
@@ -3338,19 +3329,19 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
     "kind": "function",
     "symbol": "MeetingWorkspace",
-    "fingerprint": "4af28a9b2ac04474667548560594686e1c2f7c2278913e0529f8a67159bc8643",
-    "reason": "At frontend 73333456b6ec336c5cdfc2ebe94db1101039ed7a this workspace owns one meeting's selected tab and edit, assignment and sharing dialog lifetime. Passing the unusable-prep count to the existing preparation panel preserves that responsibility; feature panels and persistence remain delegated. No size-driven extraction is warranted.",
-    "reviewedBy": "Codex independent portfolio_merged_review (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "b0934f26c5271b6709a04f925e6b2ea9d518d605473f7325e213503f95e67e14",
+    "reason": "Single meeting workspace composition for section selection and edit/assignment/sharing visibility. Child components retain domain and persistence responsibilities. Removing the tab-specific attendance duplicate preserves one header attendance owner across tabs while retaining chosen-tab and local-draft behavior.",
+    "reviewedBy": "Codex independent meeting reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx",
     "kind": "function",
     "symbol": "MeetingIdentity",
-    "fingerprint": "7cbd4fdb3979a91abd1ad25554f0572dd76ec5fcd5f23ffd5b8467cc0ce8dba9",
-    "reason": "The same meeting identity and actions are rendered for inline and drawer layouts, deriving stage, time, materials and safe join link from the selected meeting. Transport and command authority remain outside this renderer.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "82d00f0db4e21c1ee516bab639406b5f6473bd6d2efd8d0cad356d9891ac568f",
+    "reason": "Single identity/action header with mutually exclusive inline and drawer presentations of the same meeting. Formatting and accessible markup account for its size; callbacks and the canonical attendance component retain action ownership. Both branches render one attendance instance and add no transport, consent or persistence owner.",
+    "reviewedBy": "Codex independent meeting reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingWorkspacePage.tsx",
@@ -3477,24 +3468,6 @@
     "reason": "Hook composing the screen lifetime of a conversation controller into React state, with its private useTurnOpening/useSelectedHistory helpers. One concern - session lifetime - for the meri conversation owner.",
     "reviewedBy": "Hermes Agent architecture lane 3",
     "reviewedOn": "2026-10-27"
-  },
-  {
-    "file": "apps/web/src/shared/meetings/MeetingArtifacts.tsx",
-    "kind": "function",
-    "symbol": "useArtifacts",
-    "fingerprint": "b5a074c2717bbbd256088f6bd59ac392a3e782126d74aa185fffbf52645ffbef",
-    "reason": "One meeting-material editing/approval lifecycle. Notes and debrief preserve separate registered operations and canonical transport/authority. The synchronous reservation and parent notification protect the same draft operation. Independent source review found no additional responsibility; focused fixture coverage proves create success/failure, duplicate submission and Escape, not update/approval/disposal or live policy.",
-    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
-    "reviewedOn": "2026-10-19"
-  },
-  {
-    "file": "apps/web/src/shared/meetings/MeetingDetail.tsx",
-    "kind": "function",
-    "symbol": "MeetingDetail",
-    "fingerprint": "dc1aeb8c9614cf4cbc44fe46fde9cb9b544cee8b27618ff18121790ded9420cb",
-    "reason": "One current meeting workspace presentation: detail association, material tab, header and modal/inline dismissal. Pending state and its synchronous ref protect the same active operation across local exits; separate header and materials owners remain. Independently reviewed without introducing a writer or authority policy.",
-    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
-    "reviewedOn": "2026-10-19"
   },
   {
     "file": "apps/web/src/features/modules/engagement/CampaignSession.tsx",
@@ -6876,17 +6849,6 @@
     "reviewedOn": "2026-10-27"
   },
   {
-    "file": "apps/web/src/features/modules/calendar/CalendarCard.tsx",
-    "kind": "function",
-    "symbol": "CalendarEvents",
-    "fingerprint": "b0a7449fd7c855ab0124a4002d7863df1db584e1ab58ef3ee8f52d0339ddc82c",
-    "reason": "CalendarEvents owns the agenda/grid viewport, source status and filtering presentation. Public hearing rows remain visible independently of meeting read errors. Feed paging, date normalization and meeting editors retain separate owners. Source selection and Agenda-only text filtering are supplied by the screen model; the independently reproduced hidden-search finding is resolved by the reviewed useCalendar correction without changing this viewport body.",
-    "reviewedBy": "Codex independent hearing calendar and capture source review",
-    "reviewedOn": "2026-10-31",
-    "line": 14,
-    "nonblank": 90
-  },
-  {
     "file": "apps/web/src/shared/shell/shell.module.css",
     "kind": "file",
     "symbol": "<module>",
@@ -7575,5 +7537,32 @@
     "reason": "One template selection interaction filters the existing preset catalog. Shared Tabs own keyboard behavior; library tabs link to canonical Workspace/Templates surfaces without duplicate reads or truncated listings. It creates no persistence or authorization mechanism. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
     "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
     "reviewedOn": "2026-10-31"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflowFrame.tsx",
+    "kind": "function",
+    "symbol": "OutreachWorkflowFrame",
+    "fingerprint": "43bf95d27e8f72bfb6fabd92a102d504e1d4e321411e172bbe7ef8f2f3c89c0e",
+    "reason": "one stateless presentation frame composing navigation, content and footer from caller-owned props. No business/data/provider logic; shared gate predicates remain visible together. Splitting the90-line JSX solely to reduce count would scatter this single layout responsibility.",
+    "reviewedBy": "Codex independent HIGH Outreach source/design review; OUTREACH-WIZARD-PARITY-INDEPENDENT-REVIEW-20261101.txt SHA256 54fd827e25b96532590e051bf961d5601cfd389293477d36c8ca8f068461a5af",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/CampaignSetup.tsx",
+    "kind": "function",
+    "symbol": "CampaignSetup",
+    "fingerprint": "1d41bd7e8e929493e62e3ae6a00b0f1fb8fa808ad1671c84894bb553471f3f0b",
+    "reason": "cohesive controlled campaign setup fields/template selection. Native radios expand JSX without duplicating state or introducing network writes. Any later template create/preview lifecycle should receive its own explicit design/ownership review rather than grow this acceptance indefinitely.",
+    "reviewedBy": "Codex independent HIGH Outreach source/design review; OUTREACH-WIZARD-PARITY-INDEPENDENT-REVIEW-20261101.txt SHA256 54fd827e25b96532590e051bf961d5601cfd389293477d36c8ca8f068461a5af",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/outreach-workflow.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "f47de449aa4e643f87f4ff452a409fb30bb4c61188934ce56fa6e3fe03539889",
+    "reason": "scoped stylesheet for the existing workflow surface, using app tokens and local responsive geometry; no global shell/theme selectors or unrelated domain introduced. Keep exact scoped owner; do not use this acceptance to absorb additional feature styles.",
+    "reviewedBy": "Codex independent HIGH Outreach source/design review; OUTREACH-WIZARD-PARITY-INDEPENDENT-REVIEW-20261101.txt SHA256 54fd827e25b96532590e051bf961d5601cfd389293477d36c8ca8f068461a5af",
+    "reviewedOn": "2026-11-01"
   }
 ]

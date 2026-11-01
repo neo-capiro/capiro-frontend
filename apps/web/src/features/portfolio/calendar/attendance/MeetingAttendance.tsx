@@ -103,10 +103,9 @@ function AttendancePanel({
       {!compact && <h3>Meri attendance</h3>}
       <QueryState
         pending={
-          !compact &&
-          (access.identity.isPending || (access.readAllowed && query.isPending))
+          access.identity.isPending || (access.readAllowed && query.isPending)
         }
-        error={compact ? null : error}
+        error={error}
         retry={() =>
           void (access.identity.error
             ? access.identity.refetch()
@@ -117,57 +116,58 @@ function AttendancePanel({
       />
       {access.readAllowed && !query.error && query.isSuccess && (
         <>
-          {!compact && <p role="status">{sessionLabel(query.data)}</p>}
+          <p role="status">{sessionLabel(query.data)}</p>
           {query.data?.error && <p role="alert">{query.data.error}</p>}
-          <div className="row">
-            <button
-              className="button"
-              disabled={
-                !ready ||
-                needsReconcile ||
-                progressing(query.data) ||
-                ["cancelled", "canceled", "deleted"].includes(
-                  meeting.status.trim().toLowerCase(),
-                )
-              }
-              onClick={() => setSending(true)}
-            >
-              {compact ? "Send Meri" : "Send Meri to take notes"}
-            </button>
-            {!compact && removable(query.data) && (
-              <button
-                className="button"
-                disabled={!ready || mutation.isPending}
-                onClick={() => {
-                  mutation.reset();
-                  setRemoving(true);
-                }}
-              >
-                Cancel Meri attendance
-              </button>
-            )}
-            {!compact && (
-              <button
-                className="button ghost"
-                disabled={query.isFetching || mutation.isPending}
-                onClick={() => void refresh()}
-              >
-                Refresh Meri status
-              </button>
-            )}
-          </div>
         </>
       )}
-      {!compact &&
-        !access.readAllowed &&
+      <div className="row">
+        <button
+          className="button"
+          disabled={
+            !ready ||
+            needsReconcile ||
+            progressing(query.data) ||
+            ["cancelled", "canceled", "deleted"].includes(
+              meeting.status.trim().toLowerCase(),
+            )
+          }
+          onClick={() => setSending(true)}
+        >
+          {compact ? "Send Meri" : "Send Meri to take notes"}
+        </button>
+        {access.readAllowed &&
+          !query.error &&
+          query.isSuccess &&
+          removable(query.data) && (
+            <button
+              className="button"
+              disabled={!ready || mutation.isPending}
+              onClick={() => {
+                mutation.reset();
+                setRemoving(true);
+              }}
+            >
+              Cancel Meri attendance
+            </button>
+          )}
+        {access.readAllowed && (
+          <button
+            className="button ghost"
+            disabled={query.isFetching || mutation.isPending}
+            onClick={() => void refresh()}
+          >
+            Refresh Meri status
+          </button>
+        )}
+      </div>
+      {!access.readAllowed &&
         access.identity.isSuccess &&
         !access.identity.isFetching && (
           <p role="alert">
             Your current role or session cannot access meeting attendance.
           </p>
         )}
-      {!compact &&
-        access.readAllowed &&
+      {access.readAllowed &&
         !access.capabilities.isPending &&
         !access.allowed &&
         !error && (

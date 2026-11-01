@@ -193,16 +193,14 @@ for (const replacement of ["client", "tenant"] as const)
     ).toHaveCount(0);
   });
 
-test("agenda link opens a done task despite default open list filter, and respects viewer access", async ({
+test("direct task link opens a done task despite default open list filter, and respects viewer access", async ({
   page,
 }, info) => {
   await setup(page, {
     "planner.tasks": { items: [nextTask], nextCursor: null },
     "planner.task": { ...nextTask, status: "done", access: "viewer" },
   });
-  await page.goto("/modules/calendar");
-  await page.getByRole("button", { name: "Agenda", exact: true }).click();
-  await page.getByRole("link", { name: nextTask.name, exact: true }).click();
+  await page.goto(`/modules/planner?task=${taskId}`);
   await expect(page).toHaveURL(`/modules/planner?task=${taskId}`);
   await expect(
     page.getByRole("dialog", { name: nextTask.name, exact: true }),

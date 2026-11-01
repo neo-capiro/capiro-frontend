@@ -1,13 +1,6 @@
 import { installFixedDate } from "./fixed-date";
 import type { Page } from "@playwright/test";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
-import { commentPage } from "../../tests/comment-calendar-fixtures";
-import { commentDeadlineQuery } from "../../src/shared/federal-register/comment-deadlines";
-
-export function emptyCommentCalendar(input: unknown) {
-  const query = commentDeadlineQuery.parse((input as { query: unknown }).query);
-  return commentPage([], query.dateFrom, query.dateTo, query.page ?? 1);
-}
 export const clientId = "30000000-0000-4000-8000-000000000001";
 export const otherClientId = "30000000-0000-4000-8000-000000000002";
 export const taskId = "51000000-0000-4000-8000-000000000001";
@@ -62,19 +55,6 @@ export const bootstrap = {
   people: [{ id: "test-user", name: "Test User" }],
   projects: [],
 };
-export const meeting = {
-  id: "40000000-0000-4000-8000-000000000001",
-  subject: "Current meeting",
-  startsAt: "2026-10-07T14:00:00Z",
-  endsAt: "2026-10-07T15:00:00Z",
-  status: "scheduled",
-  location: null,
-  description: null,
-  client: { id: clientId, name: client.name },
-  preps: [],
-  notes: [],
-  debriefs: [],
-};
 export async function setup(
   page: Page,
   overrides: Parameters<typeof operationFixtures>[1] = {},
@@ -84,10 +64,6 @@ export async function setup(
   await operationFixtures(page, {
     "me.read": testIdentity,
     "clients.list": [client, otherClient],
-    "engagement.meetings": [],
-    "engagement.meeting": meeting,
-    "engagement.notes": [],
-    "engagement.debriefs": [],
     "planner.bootstrap": bootstrap,
     "planner.tasks": (input: unknown) => ({
       items: (input as { query?: { parentId?: string } }).query?.parentId
@@ -98,9 +74,6 @@ export async function setup(
     "planner.task": nextTask,
     "planner.task.events": [],
     "planner.task.attachments": [],
-    "legiwatch.calendar": { rows: [], total: 0, page: 1, pageSize: 200 },
-    "calendar.commentDeadlines": [],
-    "calendar.commentDeadlineCalendar": emptyCommentCalendar,
     ...overrides,
   });
   await page.route("**/api/backend/core/clients/*", (route) =>

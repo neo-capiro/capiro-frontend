@@ -105,9 +105,9 @@ for (const width of [1440, 390])
     ] as const) {
       await page.goto(`/modules/engagement?session=${recordId}&step=${step}`);
       await expect(
-        page.getByRole("tablist", { name: "Outreach steps" }),
+        page.getByRole("navigation", { name: "Outreach steps" }),
       ).toBeVisible();
-      await expect(page.getByRole("tab", { selected: true })).toHaveCount(1);
+      await expect(page.locator('[aria-current="step"]')).toHaveCount(1);
       if (step === 7)
         await expect(
           page.getByRole("button", { name: "Review send", exact: true }),

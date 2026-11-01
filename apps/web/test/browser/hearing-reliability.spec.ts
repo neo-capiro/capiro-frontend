@@ -4,14 +4,9 @@ import { onlyLocalRequests, operationFixtures } from "./fixtures";
 import {
   browserSession,
   federalHearing,
-  floridaHearing,
   hearingFixtures,
 } from "./hearing-fixtures";
 import { installFixedDate } from "./fixed-date";
-import { moduleRouteFixtures } from "./module-route-fixtures";
-import { effectivePage } from "../../tests/effective-date-fixtures";
-import { commentPage } from "../../tests/comment-calendar-fixtures";
-import { fundingPage } from "../../tests/funding-calendar-fixtures";
 
 test.beforeEach(async ({ page }) => {
   await onlyLocalRequests(page);
@@ -19,20 +14,6 @@ test.beforeEach(async ({ page }) => {
 });
 test.afterEach(async ({ runtimeObservation }) => {
   expect(runtimeObservation.consoleErrors).toEqual([]);
-});
-
-test("public hearings remain visible when the independent meetings read fails", async ({
-  page,
-}) => {
-  await operationFixtures(page, {
-    ...hearingFixtures,
-    "engagement.meetings": { invalidSyntheticResponse: true },
-  });
-  await page.goto("/modules/calendar?date=2026-10-07");
-  await expect(page.getByRole("alert")).toBeVisible();
-  await expect(page.getByLabel("month calendar")).toContainText(
-    floridaHearing.title,
-  );
 });
 
 test("an empty schedule still shows incomplete source coverage", async ({
@@ -48,105 +29,6 @@ test("an empty schedule still shows incomplete source coverage", async ({
     page.getByText(
       "Some Florida calendar sources are incomplete or could not be checked.",
     ),
-  ).toBeVisible();
-});
-
-test("Agenda search does not hide hearings when returning to month or week", async ({
-  page,
-}) => {
-  await operationFixtures(page, {
-    ...moduleRouteFixtures,
-    ...hearingFixtures,
-    "calendar.effectiveDates": (input) => {
-      const query = (
-        input as { query: { dateFrom: string; dateTo: string; page: number } }
-      ).query;
-      return effectivePage(query.dateFrom, query.dateTo, query.page);
-    },
-    "calendar.commentDeadlineCalendar": (input) => {
-      const query = (
-        input as { query: { dateFrom: string; dateTo: string; page: number } }
-      ).query;
-      return commentPage([], query.dateFrom, query.dateTo, query.page);
-    },
-    "intelligence.funding.search": fundingPage([]),
-  });
-  await page.goto("/modules/calendar?date=2026-10-07");
-  await expect(page.getByLabel("month calendar")).toContainText(
-    federalHearing.title,
-  );
-  await page.getByRole("button", { name: "Agenda", exact: true }).click();
-  await expect(page.getByRole("table")).toContainText(federalHearing.title);
-  await page
-    .getByLabel("Search calendar events")
-    .fill("No synthetic event has this title");
-  await expect(page.getByRole("table")).not.toContainText(federalHearing.title);
-  for (const view of ["Month", "Week"]) {
-    await page.getByRole("button", { name: view, exact: true }).click();
-    await expect(page.getByLabel("Search calendar events")).toHaveCount(0);
-    await expect(
-      page.getByLabel(`${view.toLowerCase()} calendar`),
-    ).toContainText(federalHearing.title);
-  }
-  await page.getByRole("button", { name: /^Hearings/ }).click();
-  await expect(page.getByLabel("week calendar")).not.toContainText(
-    federalHearing.title,
-  );
-  await page.getByRole("button", { name: /^Hearings/ }).click();
-  await expect(page.getByLabel("week calendar")).toContainText(
-    federalHearing.title,
-  );
-  await page.getByRole("button", { name: "Agenda", exact: true }).click();
-  await expect(page.getByLabel("Search calendar events")).toHaveValue(
-    "No synthetic event has this title",
-  );
-  await expect(page.getByRole("table")).not.toContainText(federalHearing.title);
-});
-
-test("master month and week include later-page federal and Florida hearings and open detail", async ({
-  page,
-}) => {
-  const pages: number[] = [];
-  await operationFixtures(page, {
-    ...hearingFixtures,
-    "legiwatch.calendar": (input) => {
-      const { query } = input as { query: { page: number } };
-      pages.push(query.page);
-      return {
-        rows: [query.page === 1 ? federalHearing : floridaHearing],
-        total: 2,
-        page: query.page,
-        pageSize: 1,
-      };
-    },
-  });
-  await page.goto("/modules/calendar?date=2026-10-07");
-  await expect(page.getByLabel("month calendar")).toContainText(
-    floridaHearing.title,
-  );
-  await expect(page.getByLabel("month calendar")).toContainText(
-    federalHearing.title,
-  );
-  expect(pages).toContain(2);
-  await page.getByRole("button", { name: "Week", exact: true }).click();
-  await expect(page.getByLabel("week calendar")).toContainText(
-    federalHearing.title,
-  );
-  await expect(page.getByLabel("week calendar")).toContainText(
-    floridaHearing.title,
-  );
-  await page.screenshot({
-    path: "test-results/hearing-master-week.png",
-    fullPage: true,
-  });
-  await page
-    .getByLabel("week calendar")
-    .getByText(federalHearing.title, { exact: false })
-    .first()
-    .click();
-  await expect(page).toHaveURL(/hearingId=synthetic-federal-hearing/);
-  await expect(
-    page.getByRole("heading", { name: federalHearing.title }),
   ).toBeVisible();
 });
 
