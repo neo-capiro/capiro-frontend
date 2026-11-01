@@ -1,0 +1,45 @@
+{
+  "schema": "capiro-strategy-intake-public-package/1",
+  "status": "COMPOSED_PUBLIC_MODULE_NOT_PRODUCT_BUILD_OR_DEPLOYMENT",
+  "base": {
+    "file": "capiro-shared-0.0.0-procurement-f326ba79-d07e75bf10bf.tgz",
+    "sha256": "d07e75bf10bfeaa93a451942b65f1d64035ebaf33d9e3ed6e237bd0ab1e0afec",
+    "bytes": 513999,
+    "integrity": "sha512-jed4Bv+REKZRtPOjL8OzUqjtoKLoEEMVW71Qs+uY3QzfJ2iAYwKZloc7t+3u37QiIMtfjJy7fnFKkxCY69JOTA==",
+    "members": 292
+  },
+  "source": {
+    "repository": "neo-capiro/capiro-backend",
+    "commit": "20d1482b90a700de87484cd6dce1d5ef5df99d51",
+    "path": "packages/shared/src/strategy-intake.ts",
+    "gitBlob": "1d56c1f196accb879cc28efa11f27db9bd42f280",
+    "sha256": "30a71647590c31deb321d4bab09a313a90c97f0f07be8fcb22e10c0aed78cf7b",
+    "bytes": 8196
+  },
+  "generator": {
+    "typescriptVersion": "5.9.3",
+    "typescriptSha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675",
+    "nodeVersion": "v24.22.1",
+    "method": "Strict TypeScript createProgram with declarations; no source aliases in consumers"
+  },
+  "artifact": {
+    "file": "capiro-shared-0.0.0-intake-20d1482b-caf21b735806.tgz",
+    "sha256": "caf21b735806b4b4f1128b28cabd9ca3c0b6f9e52d78ffde9ccb51129dbefa82",
+    "bytes": 517338,
+    "integrity": "sha512-MCxPuMFtFWE/NzDFmF4hoyvdWbli5JyC1BeuxAyNr1lSiRjICHvvwT/Xoy7ZMARFtZT6XfZngpQh66fybGHXRA==",
+    "members": 295
+  },
+  "composition": {
+    "preservedMembers": 291,
+    "modified": [
+      "package/package.json"
+    ],
+    "added": [
+      "package/src/strategy-intake.ts",
+      "package/dist/strategy-intake.js",
+      "package/dist/strategy-intake.d.ts"
+    ],
+    "publicExport": "@capiro/shared/strategy-intake",
+    "qualification": "Existing procurement and every other source/runtime/declaration/map entry are byte-identical. Only the reviewed browser-safe subpath and its manifest export/typesVersions are added; this is not a full distribution of the producer commit."
+  }
+}
