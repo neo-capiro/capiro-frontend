@@ -12,6 +12,12 @@ function inspectionRows(
   switch (inspection.format) {
     case "txt":
       return [];
+    case "xml":
+      return [
+        ["XML structure", "Well-formed"],
+        ["Encoding", inspection.details.encoding],
+        ["Whitespace", inspection.details.whitespace],
+      ];
     case "docx":
       return [
         ["Paragraphs", inspection.details.paragraphs],

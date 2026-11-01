@@ -22,7 +22,7 @@ export type DocumentVersionView = Readonly<{
     bytes: number;
     sha256: string;
     createdAt: string;
-    format: "docx" | "txt" | "xlsx";
+    format: DocumentInspection["format"];
   }>;
   inspection: DocumentInspection;
 }>;
