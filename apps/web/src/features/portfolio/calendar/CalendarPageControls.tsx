@@ -253,7 +253,8 @@ export function ClientCalendarToolbar({ state }: { state: CalendarPageState }) {
             Meetings&nbsp; {count}
           </button>
           <span>
-            Only meetings associated with {name} appear in this calendar.
+            Only meetings associated with {name} appear in this calendar. Use
+            Meeting Library to review this client’s meetings across dates.
           </span>
         </div>
       )}

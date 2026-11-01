@@ -33,10 +33,46 @@ export function memoryTitle(key: string) {
   return words ? words[0]!.toUpperCase() + words.slice(1) : key;
 }
 
+/** One leading sentence of stored text, refused when the value is only a JSON payload. */
+function firstSentence(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed || /^[[{]/.test(trimmed)) return "";
+  const end = trimmed.search(/[.!?](\s|$)/);
+  const sentence = end >= 0 ? trimmed.slice(0, end + 1) : trimmed;
+  return sentence.length > 90
+    ? `${sentence.slice(0, 87).trimEnd()}…`
+    : sentence;
+}
+
+/**
+ * Preserve readable display and stored titles, including equal titles. Machine-shaped identifiers
+ * fall back to the readable projection instead of showing a machine key as a heading.
+ * Slugged keys keep their slug (`user:<uuid>:monday-client-board-mapping`); unslugged keys use the
+ * record's own first sentence, never invented content.
+ */
+export function memoryDisplayTitle(
+  item: Pick<OwnerCorrectionItem, "title" | "displayTitle" | "value">,
+) {
+  const machine = (s: string) =>
+    /^(?:user|meri|system|agent|learning-signal):/i.test(s) || UUID.test(s);
+  const sent = item.displayTitle?.trim();
+  if (sent && !machine(sent)) return sent;
+  const title = item.title.trim();
+  if (title && !machine(title)) return title;
+  const last = item.title.split(":").filter(Boolean).at(-1) ?? "";
+  if (item.title.includes(":") && last && !UUID.test(last))
+    return memoryTitle(item.title);
+  const sentence = firstSentence(item.value);
+  if (sentence) return sentence;
+  const slug = memoryTitle(item.title);
+  const namespace = /^(?:user|meri|system|agent|learning-signal)$/i;
+  return slug !== item.title && !namespace.test(slug) ? slug : "Memory record";
+}
+
 /** Display the canonical limitation without changing the original correction value. */
 export function memoryPresentation(item: OwnerCorrectionItem) {
   return {
-    title: item.displayTitle ?? memoryTitle(item.title),
+    title: memoryDisplayTitle(item),
     fact:
       item.contentStatus && item.contentStatus !== "available"
         ? item.contentLimitation!

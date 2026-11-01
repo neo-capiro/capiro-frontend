@@ -125,6 +125,11 @@ export function OutreachList({
         .map(canonicalListRow)
     : [];
   const nativeIds = new Set(nativeRows.map((row) => row.id.toLowerCase()));
+  // Explain this campaigns page without inferring membership in the independent records or
+  // sessions pages. A workflow-less campaign may still have a matching loaded session below.
+  const legacyCampaigns = campaignMismatch
+    ? 0
+    : (campaigns.data?.items ?? []).filter((row) => !row.hasWorkflow).length;
   // Sessions are ancillary and only loaded for the unscoped, undeleted view. When they are
   // unavailable the canonical rows below are still authoritative for what they contain.
   const seenSessionIds = new Set<string>();
@@ -216,7 +221,12 @@ export function OutreachList({
       />
       <p className={styles.hint}>
         Audience applies to saved outreach records and canonical campaigns.
-        Counts show this loaded page, not population totals.
+        Counts show this loaded page, not population totals.{" "}
+        {legacyCampaigns > 0
+          ? `${legacyCampaigns} ${legacyCampaigns === 1 ? "campaign" : "campaigns"} on the loaded campaigns page ${
+              legacyCampaigns === 1 ? "has" : "have"
+            } no workflow. Campaign categories count loaded workflow campaigns and eligible campaign sessions. Saved outreach records loads separately; check that section for other recorded outreach.`
+          : ""}
       </p>
       <Tabs
         label="Campaign categories"
