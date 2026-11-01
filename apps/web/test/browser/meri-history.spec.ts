@@ -139,9 +139,13 @@ test("synthetic saved transcript preserves resumed output, shows each logical pr
   await page
     .getByRole("button", { name: "Load more saved turns", exact: true })
     .click();
+  // Once every page is loaded the partial-view notice is gone and nothing replaces it.
+  await expect(
+    page.getByText("Part of the saved conversation is shown."),
+  ).toHaveCount(0);
   await expect(
     page.getByText("Saved conversation history loaded."),
-  ).toBeVisible();
+  ).toHaveCount(0);
   await expect(
     page.getByRole("article").filter({ hasText: /You:\s*First question/ }),
   ).toHaveCount(2);

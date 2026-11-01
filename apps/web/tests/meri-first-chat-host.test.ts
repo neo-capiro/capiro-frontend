@@ -37,6 +37,9 @@ vi.mock("../src/features/meri/conversation/useConversationSession", () => ({
 vi.mock("../src/features/meri/conversation/ConversationView", () => ({
   ConversationView: () => "Meri session pending",
 }));
+vi.mock("../src/features/meri/conversation/DefaultScopeOpening", () => ({
+  DefaultScopeOpening: () => "Default scope opening",
+}));
 
 const account = {
   tenantId: "11111111-1111-4111-8111-111111111111",
@@ -98,7 +101,7 @@ it.each([
   expect(mocks.session).not.toHaveBeenCalled();
 });
 
-it.each(["unavailable", "loading", "no-selection"])(
+it.each(["unavailable", "loading"])(
   "holds %s selection before Core or a session",
   (state) => {
     mocks.selectedState = state;
@@ -132,7 +135,7 @@ it("explicit General does not inherit the selected client", () => {
   );
 });
 
-it("an authenticated unscoped entry asks for General or a client without claiming account failure", () => {
+it("an authenticated unscoped entry opens the saved default scope before Core or a session", () => {
   mocks.selectedState = "no-selection";
   const html = renderToStaticMarkup(
     createElement(MeriConversationHost, {
@@ -141,8 +144,24 @@ it("an authenticated unscoped entry asks for General or a client without claimin
       firstChatBootstrapEnabled: true,
     }),
   );
-  expect(html).toContain("Choose General or a permitted client above");
+  expect(html).toContain("Default scope opening");
   expect(html).not.toContain("account could not be verified");
+  expect(mocks.coreRequest).not.toHaveBeenCalled();
+  expect(mocks.session).not.toHaveBeenCalled();
+});
+
+it("an unscoped link that names a conversation asks for a scope instead of being redirected", () => {
+  mocks.selectedState = "no-selection";
+  mocks.search = "conversationId=55555555-5555-4555-8555-555555555555";
+  const html = renderToStaticMarkup(
+    createElement(MeriConversationHost, {
+      enabled: true,
+      account,
+      firstChatBootstrapEnabled: true,
+    }),
+  );
+  expect(html).toContain("Choose General or a permitted client above");
+  expect(html).not.toContain("Default scope opening");
   expect(mocks.coreRequest).not.toHaveBeenCalled();
   expect(mocks.session).not.toHaveBeenCalled();
 });

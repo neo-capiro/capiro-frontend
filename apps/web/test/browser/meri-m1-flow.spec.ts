@@ -98,14 +98,6 @@ for (const viewport of [
         current.getByText("Cancelled", { exact: true }),
       ).toBeVisible();
       await reverified;
-      await expect(
-        page
-          .getByRole("region", {
-            name: "Saved conversation history",
-            exact: true,
-          })
-          .getByText("Saved conversation history loaded.", { exact: true }),
-      ).toBeVisible();
       // The cancelled turn carries its own state; nothing announces readiness.
       await expect(stop).toHaveCount(0);
       await expect(ready).toHaveCount(0);

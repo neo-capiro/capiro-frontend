@@ -76,7 +76,7 @@ function TurnRecoveryStatus({ session }: { session: Session }) {
 }
 
 /**
- * History restores itself: a healthy conversation shows one quiet line, with the manual
+ * History restores itself: a healthy conversation shows nothing, with the manual
  * re-read behind a details disclosure. A partial, unavailable or failed read stays explicit,
  * and a failed read is never presented as an empty chat.
  */
@@ -110,13 +110,10 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
             Reload saved history
           </Button>
         </div>
-      ) : history.empty ? null : ( // A conversation that has not started is not a failure and needs no warning.
-        <p role="status">
-          {history.query.hasNextPage
-            ? "Part of the saved conversation is shown."
-            : "Saved conversation history loaded."}
-        </p>
-      )}
+      ) : history.query.hasNextPage ? (
+        // Only a partial view is worth saying; a fully restored history is just the transcript.
+        <p role="status">Part of the saved conversation is shown.</p>
+      ) : null}
       {recovered && history.query.hasNextPage && (
         <>
           <Button

@@ -62,6 +62,7 @@ export class SessionLifetimeController<
   private renewal: ReturnType<typeof setTimeout> | undefined;
   private port: P | undefined;
   private expirationReason: ExpirationReason | undefined;
+  private issuanceStatus: number | undefined;
   private now: () => number;
   constructor(private readonly options: Options<P, R>) {
     this.now = options.now ?? Date.now;
@@ -69,6 +70,11 @@ export class SessionLifetimeController<
   getSnapshot = () => this.snapshot;
   /** Local lifetime evidence only; a timer ending a session is not a membership refusal. */
   getExpirationReason = () => this.expirationReason;
+  /**
+   * HTTP status of the last failed issuance, kept so a caller can tell an authority that refused
+   * (403) from one that did not answer (401 after the bounded retries, see `transientIssuance`).
+   */
+  getIssuanceStatus = () => this.issuanceStatus;
   subscribe = (listener: () => void) => {
     this.listeners.add(listener);
     return () => {
@@ -140,6 +146,7 @@ export class SessionLifetimeController<
       return;
     this.clear();
     this.expirationReason = undefined;
+    this.issuanceStatus = undefined;
     const lifetime = new AbortController();
     this.lifetime = lifetime;
     this.publish({ status: "connecting" });
@@ -187,11 +194,11 @@ export class SessionLifetimeController<
       });
     } catch (error) {
       if (!current()) return;
-      if (
-        error instanceof ActionSessionUnavailable &&
-        [401, 403].includes(error.status)
-      )
-        this.expirationReason = "access-lost";
+      if (error instanceof ActionSessionUnavailable) {
+        this.issuanceStatus = error.status;
+        if ([401, 403].includes(error.status))
+          this.expirationReason = "access-lost";
+      }
       this.clear();
       this.publish({ status: "unavailable" });
     }

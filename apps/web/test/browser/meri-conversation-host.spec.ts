@@ -835,3 +835,67 @@ test("ordinary sidebar destinations explain held consumers and failed current re
   ).toBeDisabled();
   expect(f.unexpected).toEqual([]);
 });
+
+test("a post-run access check that is not answered keeps the transcript and offers Check access again", async ({
+  page,
+}) => {
+  test.setTimeout(60_000);
+  const f = await setupConversation(page);
+  let attempts = 0,
+    answering = false;
+  await page.route("**/api/action-followthrough/session", (r) => {
+    attempts++;
+    if (attempts > 1 && !answering)
+      return reply(r, { error: { code: "SESSION_REFUSED" } }, 401);
+    return reply(r, {
+      credential: `action_session_${String(attempts).repeat(43)}`,
+      expiresAtMs: Date.now() + (attempts === 1 ? 12_000 : 120_000),
+      context,
+    });
+  });
+  await page.route("**/api/conversations/history", (r) =>
+    reply(
+      r,
+      history([event(1, "Completed answer"), status(2, "completed")], {
+        state: "completed",
+        prompt: "The question",
+      }),
+    ),
+  );
+  await connect(page);
+  await expect(
+    page.getByText("Completed answer", { exact: true }),
+  ).toBeVisible();
+  const check = page.getByRole("button", {
+    name: "Check access again",
+    exact: true,
+  });
+  // Renewal reissues the session; Core never answers (401 through the bounded retries).
+  await expect(check).toBeVisible({ timeout: 30_000 });
+  await expect(
+    page.getByText("Completed answer", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("The question")).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Conversation access unavailable" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByText("Everything above is unchanged", { exact: false }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", {
+      name: "Send message",
+      exact: true,
+      includeHidden: true,
+    }),
+  ).toBeDisabled();
+  // Once Core answers, the notice goes and the same transcript continues.
+  answering = true;
+  await check.click();
+  await expect(check).toHaveCount(0);
+  await expect(
+    page.getByText("Completed answer", { exact: true }),
+  ).toBeVisible();
+  await expect(composer(page)).toBeEnabled();
+  expect(f.unexpected).toEqual([]);
+});
