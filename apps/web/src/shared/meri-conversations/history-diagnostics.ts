@@ -1,5 +1,3 @@
-import { randomBytes } from "node:crypto";
-
 // Optional transport diagnostic only, not a product DTO, request ID or authority.
 // Control admits this exact grammar; the proxy never forwards a browser value.
 export const historyTraceHeader = "x-meri-history-trace";
@@ -18,7 +16,11 @@ const outcomes: readonly string[] = ["response", "failure"];
 export function createHistoryTransportDiagnostics({
   write = (line: string) => console.warn(line),
   now = () => performance.now(),
-  newTrace = () => `h1_${randomBytes(16).toString("hex")}`,
+  newTrace = () =>
+    `h1_${Array.from(
+      globalThis.crypto.getRandomValues(new Uint8Array(16)),
+      (byte) => byte.toString(16).padStart(2, "0"),
+    ).join("")}`,
 } = {}) {
   let windowStart = -Infinity,
     count = 0;

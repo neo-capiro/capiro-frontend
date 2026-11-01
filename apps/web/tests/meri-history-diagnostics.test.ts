@@ -226,6 +226,67 @@ it("generates fresh opaque correlation rather than business identifiers", () => 
   expect(b).not.toBe(a);
 });
 
+it("uses all 16 Web Crypto bytes with fixed-width lowercase hex", () => {
+  const getRandomValues = vi.fn((bytes: Uint8Array) => {
+    expect(bytes).toBeInstanceOf(Uint8Array);
+    expect(bytes.byteLength).toBe(16);
+    bytes.set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 16, 127, 128, 255]);
+    return bytes;
+  });
+  vi.stubGlobal("crypto", { getRandomValues });
+  try {
+    expect(createHistoryTransportDiagnostics()()?.trace).toBe(
+      "h1_000102030405060708090a0f107f80ff",
+    );
+    expect(getRandomValues).toHaveBeenCalledTimes(1);
+  } finally {
+    vi.unstubAllGlobals();
+  }
+});
+
+for (const crypto of [
+  undefined,
+  {
+    getRandomValues() {
+      throw Error("unavailable");
+    },
+  },
+])
+  it("omits diagnostics without a weak fallback when Web Crypto is unavailable", async () => {
+    const lines: string[] = [];
+    vi.stubGlobal("crypto", crypto);
+    try {
+      const begin = createHistoryTransportDiagnostics({
+        write: (line) => {
+          lines.push(line);
+        },
+      });
+      expect(begin()).toBeUndefined();
+      const fetcher = vi.fn(
+        async (_url: RequestInfo | URL, init?: RequestInit) => {
+          expect(new Headers(init?.headers).has(historyTraceHeader)).toBe(
+            false,
+          );
+          return Response.json({ ok: true });
+        },
+      );
+      const result = await proxyConversationRequest(
+        request(),
+        "history",
+        config,
+        async () => "native",
+        fetcher,
+        begin,
+      );
+      expect(result.status).toBe(200);
+      expect(await result.json()).toEqual({ ok: true });
+      expect(fetcher).toHaveBeenCalledTimes(1);
+      expect(lines).toEqual([]);
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
 it("identifies a configuration 502 before dispatch without adding response headers", async () => {
   const h = harness(),
     fetcher = vi.fn();
