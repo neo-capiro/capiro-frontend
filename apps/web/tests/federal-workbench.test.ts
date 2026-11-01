@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import fixture from "./fixtures/federal-workbench.json";
 import official from "./fixtures/federal-official-source.json";
+import multi from "./fixtures/federal-workbench-multi.json";
 import { FederalSourceStaleError } from "../src/shared/meri-documents/federal-workbench";
 import { FederalWorkbenchAccess } from "../src/shared/meri-documents/federal-workbench";
 import { federalTransport } from "../src/shared/meri-documents/workflow-transport";
@@ -9,7 +10,14 @@ import {
   idleDocumentAttempt,
   type DocumentAttempt,
 } from "../src/shared/meri-documents/attempt-journal";
-import { receiveFederalRequest } from "@capiro/meri-contracts/federal-workbench";
+import {
+  receiveFederalRequest,
+  type FederalCompilerSource,
+} from "@capiro/meri-contracts/federal-workbench";
+import {
+  authoredOperations,
+  type AuthoredOperation,
+} from "../src/shared/meri-documents/federal-authoring";
 const encode = (value: unknown) =>
   new TextEncoder().encode(JSON.stringify(value));
 const { selection } = receiveFederalRequest(
@@ -22,6 +30,8 @@ function setup() {
     lost = 0,
     fail = false,
     tamper = false,
+    prepareAs: unknown = null,
+    loadAs: unknown = null,
     foreign = false,
     stale: "NOT_DISPATCHED" | "UNKNOWN" | "RESULT_NOT_RELEASED" | null = null;
   const requests: { route: string; body: Record<string, unknown> }[] = [],
@@ -79,6 +89,10 @@ function setup() {
                 body.output as keyof typeof fixture.publications
               ],
     );
+    if (route === "federal-prepare" && prepareAs)
+      Object.assign(result as object, structuredClone(prepareAs));
+    if (route === "federal-load" && loadAs)
+      Object.assign(result as object, structuredClone(loadAs));
     if (route === "federal-publish") {
       const publication = result as typeof fixture.publications.draft;
       if (body.baseVersionId)
@@ -116,6 +130,12 @@ function setup() {
     lost: () => lost,
     setFail: (v: boolean) => {
       fail = v;
+    },
+    setPrepare: (v: unknown) => {
+      prepareAs = v;
+    },
+    setLoad: (v: unknown) => {
+      loadAs = v;
     },
     setStale: (v: typeof stale) => {
       stale = v;
@@ -289,5 +309,51 @@ describe("federal review session", () => {
       x.port.prepare(selection, new AbortController().signal),
     ).rejects.toThrow();
     expect(x.requests).toHaveLength(0);
+  });
+  it("admits an ordered multi-operation review emitted by the canonical compiler", async () => {
+    const x = setup(),
+      signal = new AbortController().signal,
+      authoring = await authoredOperations(
+        fixture.source as unknown as FederalCompilerSource,
+        [
+          {
+            id: "amendment-1",
+            scopeId: "section-1",
+            kind: "replace",
+            expectedText: "$100",
+            text: "$150",
+          },
+          {
+            id: "amendment-2",
+            scopeId: "section-2",
+            kind: "replace",
+            expectedText: "$100",
+            text: "$250",
+          },
+        ],
+      );
+    expect(authoring.refusal).toBeNull();
+    expect(authoring.operations).toEqual(multi.request.selection.operations);
+    x.setPrepare(multi.review);
+    const review = await x.port.prepare(
+      {
+        versionId: multi.request.selection.versionId,
+        expectedArtifactSha256: multi.request.selection.expectedArtifactSha256,
+        operations: multi.request.selection.operations as unknown as [
+          AuthoredOperation,
+          ...AuthoredOperation[],
+        ],
+      },
+      signal,
+    );
+    expect(review.prepared.draft.outputs.consolidated).toBe(
+      "Synthetic Federal Act\nSEC. 1. Payment is $150.\nSEC. 2. Payment is $250.\nEnd.\n",
+    );
+    expect(review.prepared.revisionSha256).toBe(
+      multi.review.prepared.revisionSha256,
+    );
+    expect(
+      (x.requests[0]!.body.selection as { operations: unknown[] }).operations,
+    ).toHaveLength(2);
   });
 });

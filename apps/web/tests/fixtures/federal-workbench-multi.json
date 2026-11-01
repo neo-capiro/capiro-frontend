@@ -1,0 +1,227 @@
+{
+  "note": "Synthetic canonical compiler multi-operation review; emitted by the actual meri federal-drafting compiler. No official source or production qualification.",
+  "request": {
+    "selection": {
+      "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+      "expectedArtifactSha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+      "operations": [
+        {
+          "id": "amendment-1",
+          "kind": "replace",
+          "scopeId": "section-1",
+          "expectedScopeSha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7",
+          "expectedText": "$100",
+          "expectedTextSha256": "797c7d463af6ea7fa7f88d50602cea0531e3e0da8cb59be3b0983bb98958cce8",
+          "dependsOn": [],
+          "text": "$150"
+        },
+        {
+          "id": "amendment-2",
+          "kind": "replace",
+          "scopeId": "section-2",
+          "expectedScopeSha256": "131e18f3f84ce44ac99fb3c73862344ba996f89ad5468f8ca3417f158f7e3e01",
+          "expectedText": "$100",
+          "expectedTextSha256": "797c7d463af6ea7fa7f88d50602cea0531e3e0da8cb59be3b0983bb98958cce8",
+          "dependsOn": [],
+          "text": "$250"
+        }
+      ]
+    }
+  },
+  "review": {
+    "schema": "meri.federal-review.v1",
+    "selection": {
+      "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+      "expectedArtifactSha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+      "operations": [
+        {
+          "id": "amendment-1",
+          "kind": "replace",
+          "scopeId": "section-1",
+          "expectedScopeSha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7",
+          "expectedText": "$100",
+          "expectedTextSha256": "797c7d463af6ea7fa7f88d50602cea0531e3e0da8cb59be3b0983bb98958cce8",
+          "dependsOn": [],
+          "text": "$150"
+        },
+        {
+          "id": "amendment-2",
+          "kind": "replace",
+          "scopeId": "section-2",
+          "expectedScopeSha256": "131e18f3f84ce44ac99fb3c73862344ba996f89ad5468f8ca3417f158f7e3e01",
+          "expectedText": "$100",
+          "expectedTextSha256": "797c7d463af6ea7fa7f88d50602cea0531e3e0da8cb59be3b0983bb98958cce8",
+          "dependsOn": [],
+          "text": "$250"
+        }
+      ]
+    },
+    "prepared": {
+      "sourceArtifact": {
+        "versionId": "db78792b-5556-4d7d-8157-8812862f9956",
+        "sha256": "cd3b54258d8c76bf76c4d0c62a6cb9d373b31aa8422e4d94dffc51176964913a",
+        "specSha256": "1df590f32f633cd5e5277b1293dcb7b0100140ce05e506b6dbe8d7646ce35a8b"
+      },
+      "draft": {
+        "parserVersion": "federal-plain-text/1",
+        "source": {
+          "documentId": "Synthetic Act",
+          "publisher": "Synthetic federal publisher",
+          "sourceVersion": "introduced-1",
+          "sourceUrl": "https://legislation.example/act/introduced-1",
+          "publishedAt": "2026-10-28",
+          "parserVersion": "federal-plain-text/1",
+          "text": "Synthetic Federal Act\nSEC. 1. Payment is $100.\nSEC. 2. Payment is $100.\nEnd.\n",
+          "sha256": "e7945cfb0242e9471d9971dc5d81e3fd42c8315bbf7fab3d570e338f80509834",
+          "coverage": {
+            "complete": false,
+            "limitations": [
+              "Synthetic plain-text test source; no official source verification."
+            ]
+          },
+          "scopes": [
+            {
+              "id": "section-1",
+              "label": "section 1",
+              "start": 22,
+              "end": 47,
+              "sha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7"
+            },
+            {
+              "id": "section-2",
+              "label": "section 2",
+              "start": 47,
+              "end": 72,
+              "sha256": "131e18f3f84ce44ac99fb3c73862344ba996f89ad5468f8ca3417f158f7e3e01"
+            }
+          ]
+        },
+        "operations": [
+          {
+            "id": "amendment-1",
+            "kind": "replace",
+            "scopeId": "section-1",
+            "expectedScopeSha256": "2ea3518d8e16efc33f5a97ed73e80f4e30d307a859a47495068af0cb60271ca7",
+            "expectedText": "$100",
+            "expectedTextSha256": "797c7d463af6ea7fa7f88d50602cea0531e3e0da8cb59be3b0983bb98958cce8",
+            "dependsOn": [],
+            "text": "$150"
+          },
+          {
+            "id": "amendment-2",
+            "kind": "replace",
+            "scopeId": "section-2",
+            "expectedScopeSha256": "131e18f3f84ce44ac99fb3c73862344ba996f89ad5468f8ca3417f158f7e3e01",
+            "expectedText": "$100",
+            "expectedTextSha256": "797c7d463af6ea7fa7f88d50602cea0531e3e0da8cb59be3b0983bb98958cce8",
+            "dependsOn": [],
+            "text": "$250"
+          }
+        ],
+        "outputs": {
+          "operative": "Source: Synthetic Act; Synthetic federal publisher; version introduced-1; published 2026-10-28; https://legislation.example/act/introduced-1; SHA-256 e7945cfb0242e9471d9971dc5d81e3fd42c8315bbf7fab3d570e338f80509834\nOperations apply in the stated order.\n\namendment-1. In section 1, strike \"$100\" and insert \"$150\".\n\namendment-2. In section 2, strike \"$100\" and insert \"$250\".\n",
+          "consolidated": "Synthetic Federal Act\nSEC. 1. Payment is $150.\nSEC. 2. Payment is $250.\nEnd.\n",
+          "redline": "Source: Synthetic Act; Synthetic federal publisher; version introduced-1; published 2026-10-28; https://legislation.example/act/introduced-1; SHA-256 e7945cfb0242e9471d9971dc5d81e3fd42c8315bbf7fab3d570e338f80509834\nExact legal text comparison; each line is a JSON text segment.\n{\"kind\":\"unchanged\",\"text\":\"Synthetic Federal Act\\n\"}\n{\"kind\":\"unchanged\",\"text\":\"SEC. 1. Payment is $1\"}\n{\"kind\":\"delete\",\"text\":\"0\"}\n{\"kind\":\"insert\",\"text\":\"5\"}\n{\"kind\":\"unchanged\",\"text\":\"0.\\n\"}\n{\"kind\":\"unchanged\",\"text\":\"SEC. 2. Payment is $\"}\n{\"kind\":\"delete\",\"text\":\"10\"}\n{\"kind\":\"insert\",\"text\":\"25\"}\n{\"kind\":\"unchanged\",\"text\":\"0.\\n\"}\n{\"kind\":\"unchanged\",\"text\":\"End.\\n\"}\n",
+          "segments": [
+            {
+              "kind": "unchanged",
+              "text": "Synthetic Federal Act\n"
+            },
+            {
+              "kind": "unchanged",
+              "text": "SEC. 1. Payment is $1"
+            },
+            {
+              "kind": "delete",
+              "text": "0"
+            },
+            {
+              "kind": "insert",
+              "text": "5"
+            },
+            {
+              "kind": "unchanged",
+              "text": "0.\n"
+            },
+            {
+              "kind": "unchanged",
+              "text": "SEC. 2. Payment is $"
+            },
+            {
+              "kind": "delete",
+              "text": "10"
+            },
+            {
+              "kind": "insert",
+              "text": "25"
+            },
+            {
+              "kind": "unchanged",
+              "text": "0.\n"
+            },
+            {
+              "kind": "unchanged",
+              "text": "End.\n"
+            }
+          ]
+        },
+        "findings": [
+          {
+            "category": "source-integrity",
+            "status": "passed",
+            "location": "Synthetic Act",
+            "severity": "info"
+          },
+          {
+            "category": "exact-target",
+            "status": "passed",
+            "location": "section-1",
+            "operationId": "amendment-1",
+            "severity": "info"
+          },
+          {
+            "category": "exact-target",
+            "status": "passed",
+            "location": "section-2",
+            "operationId": "amendment-2",
+            "severity": "info"
+          },
+          {
+            "category": "numbering",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          },
+          {
+            "category": "cross-references",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          },
+          {
+            "category": "arithmetic",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          },
+          {
+            "category": "substantive-law",
+            "status": "unresolved",
+            "location": "Synthetic Act",
+            "severity": "review-required"
+          }
+        ],
+        "outputHashes": {
+          "operative": "87d44a559108a63c0025975df1b78c04bf3ff70442ce9a7e69dee357d0c78bca",
+          "consolidated": "92e0a9cb1a58acc4f9a971cd4372bf0d23ca731f2ecf018071f751790a45765d",
+          "redline": "e8a0fa2077f7c4b74d80de447e4dd1843aff580ceb79aef84021173532daf407"
+        },
+        "revisionSha256": "319dbd0ba4da8c8d7beea4f408d052a039e483f0f11d70894d593597414825aa",
+        "approval": "unapproved"
+      },
+      "revisionSha256": "c00211a6688a9b761ab602a15be094027984a37ee52b466beef7e858a6d0707d",
+      "approval": "unapproved"
+    },
+    "savedDraft": null
+  }
+}

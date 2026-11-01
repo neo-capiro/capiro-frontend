@@ -7373,19 +7373,19 @@
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "75fb27410e985327136c7555918870079cfa26bd32508df4bba5dd5567f53b73",
-    "reason": "Author structural assessment in docs/federal-workbench.md: One exact-text review presentation lifetime coordinates confirmation invalidation, selected source/revision and uncertain export recovery. Import selection has its own component; the parent prevents competing writes and clears confirmation on stale-source refusal while preserving the original recoverable export. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "253e4c2469082cc0a50f4b3cfdabba421113b3bae68c2a13ce04c6e72698e7ba",
+    "reason": "Author structural assessment in docs/federal-workbench.md#multi-operation-authoring: the exact-text review presentation lifetime now also derives each authored amendment's exact current-section hash, text hash and dependency closure before the canonical compiler answers, lets the author edit or remove an amendment so dependants are recomputed instead of silently retained, and keeps a saved review's own compiler-confirmed operations visible when this editor cannot re-derive nested intermediate text. Derivation, refusals and hash display live in federal-authoring.ts and FederalAmendmentList.tsx; this component selects, orders and submits them. Independent review remains held.",
+    "reviewedBy": "Hermes implementation author (independent review held)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "function",
     "symbol": "FederalWorkbench",
-    "fingerprint": "c270fd457cd3b5fd9bb5b9599b8a63a9ad5c5927c0483b4b291fc1e950c1375a",
-    "reason": "Author structural assessment in docs/federal-workbench.md: One exact-text review presentation lifetime coordinates confirmation invalidation, selected source/revision and uncertain export recovery. Import selection has its own component; the parent prevents competing writes and clears confirmation on stale-source refusal while preserving the original recoverable export. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "ebe1eed721fbeae8930d26fdae2d3e79661713a5f25ae1056b8eeb4782d66b56",
+    "reason": "Author structural assessment in docs/federal-workbench.md#multi-operation-authoring: the exact-text review presentation lifetime now also derives each authored amendment's exact current-section hash, text hash and dependency closure before the canonical compiler answers, lets the author edit or remove an amendment so dependants are recomputed instead of silently retained, and keeps a saved review's own compiler-confirmed operations visible when this editor cannot re-derive nested intermediate text. Derivation, refusals and hash display live in federal-authoring.ts and FederalAmendmentList.tsx; this component selects, orders and submits them. Independent review remains held.",
+    "reviewedBy": "Hermes implementation author (independent review held)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/files/FederalSourceImporter.tsx",
