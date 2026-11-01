@@ -225,7 +225,6 @@ export function ConversationView({
               onNextTurn={session.startNext}
               onLifecycleTarget={session.openLifecycleTarget}
               onBrowserTarget={session.openBrowserTarget}
-              browserAllowed={toolsOpen}
               historyUnavailable={session.history.unavailable}
               nextTurnBlocked={session.nextBlocked}
               nextTurnVerified={!!session.source && !session.nextBlocked}

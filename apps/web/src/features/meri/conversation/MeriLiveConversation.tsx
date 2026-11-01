@@ -274,7 +274,6 @@ export function MeriLiveConversation({
   newIntentBlocked,
   onLifecycleTarget,
   onBrowserTarget,
-  browserAllowed = false,
   historyUnavailable = false,
 }: {
   port: MeriConversationPort;
@@ -305,8 +304,6 @@ export function MeriLiveConversation({
   onLifecycleTarget: (target: LifecycleTarget) => void;
   /** Opens a browser resume/observation target from this run; lifecycle routing is the default. */
   onBrowserTarget?: ((target: LifecycleTarget) => void) | undefined;
-  /** The tools panel was opened: browser controls become available for this run. */
-  browserAllowed?: boolean;
   /** The saved-history read failed: an empty-looking hero must not stand in for that failure. */
   historyUnavailable?: boolean;
 }) {
@@ -339,12 +336,12 @@ export function MeriLiveConversation({
   const turn = currentTurnView(observed, savedCurrent);
   const finished = isTerminal(turn?.runState);
   const active = !!turn && !finished;
-  // Browser controls appear for an actual browser task or when the user opens Tools, and once
-  // mounted they stay mounted: toggling the panel never disposes or recreates a live session.
+  // Browser controls belong to a run that used the browser (an admitted receipt) or to a website
+  // task about to be sent; once mounted they stay mounted so a live session is never recreated.
   const [browserMounted, setBrowserMounted] = useState(false);
   if (
     !browserMounted &&
-    (browserAllowed || (turn?.browserReceipts.length ?? 0) > 0)
+    ((turn?.browserReceipts.length ?? 0) > 0 || !!skillSelection?.siteWorkflow)
   )
     setBrowserMounted(true);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);

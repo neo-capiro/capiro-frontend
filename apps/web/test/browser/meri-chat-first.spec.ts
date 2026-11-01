@@ -1,6 +1,7 @@
 import { mkdirSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { expect, test, type Page } from "@playwright/test";
+import type { UIEvent } from "@capiro/meri-contracts";
 import { CONVERSATION_SKILLS } from "@capiro/meri-contracts/conversation-application";
 import {
   clientId,
@@ -9,6 +10,7 @@ import {
   eventOf,
   openEvidence,
   setupConversation,
+  status,
 } from "./meri-conversation-fixtures";
 import { installInitialInput } from "./meri-initial-input-fixtures";
 import {
@@ -615,4 +617,46 @@ test("a bare /meri that names a conversation is never redirected away from it", 
   expect(new URL(page.url()).searchParams.get("conversationId")).toBe(
     conversationId,
   );
+});
+
+/** One admitted browser receipt for the saved run: the run itself used the browser. */
+const browserReceipt = eventOf(2, "browser.receipt", {
+  schema: "meri-browser-receipt/1",
+  kind: "browser.action",
+  binding,
+  sessionId: "c0000000-0000-4000-8000-00000000000c",
+  toolUseId: null,
+  action: "browser_click",
+  urlHost: "app.capiro.example",
+  atMs: 1_700_000_000_002,
+  reference: null,
+  outcome: "ok",
+});
+
+test("browser controls follow a run that used the browser, not the Tools panel", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1040 });
+  await setupConversation(page);
+  const { native } = await installHistory(page);
+  await installCurrentRun(page, native);
+  await page.goto(selectedUrl);
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Tools", exact: true }).click();
+  await expect(page.getByRole("dialog", { name: "Tools" })).toBeVisible();
+  await expect(page.getByText("Browser control")).toHaveCount(0);
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog", { name: "Tools" })).toHaveCount(0);
+  // The same saved run with an admitted browser receipt mounts the panel under the answer.
+  native.turns = [turn(undefined, undefined, undefined, 0, 3)];
+  native.events = [
+    initialEvents[0]!,
+    { sequence: 2, event: browserReceipt as UIEvent },
+    { sequence: 3, event: status(3, "completed") as UIEvent },
+  ];
+  await page.reload();
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("Browser control", { exact: true }),
+  ).toBeVisible();
 });

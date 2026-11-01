@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@capiro/ui/button";
 import type { useRunLifecycle } from "./useRunLifecycle";
 import type { TurnView } from "../conversation-view";
+import ui from "../../ui/meri-ui.module.css";
 import styles from "../live.module.css";
 
 type Lifecycle = ReturnType<typeof useRunLifecycle>;
@@ -36,6 +37,7 @@ function VerifiedCheckpoint({
         <Button
           type="button"
           variant="outline"
+          className={ui.outline}
           disabled={held}
           onClick={() =>
             lifecycle.send({
@@ -51,6 +53,7 @@ function VerifiedCheckpoint({
       <Button
         type="button"
         variant="outline"
+        className={ui.outline}
         disabled={held}
         onClick={() =>
           lifecycle.send({
@@ -101,6 +104,7 @@ export function RunLifecycleControls({
           <Button
             type="button"
             variant="outline"
+            className={ui.outline}
             disabled={held}
             onClick={lifecycle.retry}
           >
@@ -114,6 +118,7 @@ export function RunLifecycleControls({
               <Button
                 type="button"
                 variant="outline"
+                className={ui.outline}
                 disabled={!mutable}
                 onClick={() => lifecycle.send({ intent: "pause" })}
               >
@@ -130,6 +135,7 @@ export function RunLifecycleControls({
               <Button
                 type="button"
                 variant="outline"
+                className={ui.outline}
                 disabled={!mutable || !text.trim()}
                 onClick={() =>
                   lifecycle.send({ intent: "steer", text: text.trim() })
@@ -143,6 +149,7 @@ export function RunLifecycleControls({
             <Button
               type="button"
               variant="outline"
+              className={ui.outline}
               disabled={held}
               onClick={() => void lifecycle.inspect(checkpointId)}
             >
@@ -177,7 +184,7 @@ export function RunLifecycleControls({
   );
 }
 
-/** A finished run's verified checkpoint: inspect it, then fork from it. Shown inside the details only. */
+/** A finished run's verified checkpoint: a quiet link to inspect it, then fork from it. Details only. */
 export function CheckpointActions({
   lifecycle,
   checkpointId,
@@ -192,14 +199,14 @@ export function CheckpointActions({
   return (
     <section className={styles.runControls} aria-label="Checkpoint">
       <LifecycleError lifecycle={lifecycle} />
-      <Button
+      <button
         type="button"
-        variant="outline"
+        className={styles.textLink}
         disabled={held}
         onClick={() => void lifecycle.inspect(checkpointId)}
       >
         Inspect latest checkpoint
-      </Button>
+      </button>
       <VerifiedCheckpoint lifecycle={lifecycle} held={held} resumable={false} />
     </section>
   );
