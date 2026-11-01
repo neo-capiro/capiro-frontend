@@ -75,8 +75,9 @@ function CurrentQuestions({
     <section className="card stack" aria-label="Objective questions">
       <h2>Objective questions</h2>
       <p>
-        Evidence currently covers the exact saved Objective context and an editor’s evidence note.
-        External intelligence and document sources are not verified here.
+        Answers retain the saved Objective context and an editor’s evidence note. You can also cite
+        client document versions or retained news observations; changed evidence requires review
+        again.
       </p>
       {data && (
         <p>

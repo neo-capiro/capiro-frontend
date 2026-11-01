@@ -4,6 +4,8 @@ import { useCapiroQuery } from "@/shared/capiro/queries";
 import type { Question } from "@/shared/capiro/operations/objective-questions";
 import type { Objective } from "../contracts";
 import type { QuestionSession } from "./question-session";
+import { QuestionAnswerForm } from "./QuestionAnswerForm";
+import { QuestionEvidence } from "./QuestionEvidence";
 
 function QuestionHistory({ objective, question }: { objective: Objective; question: Question }) {
   const [before, setBefore] = useState<number>();
@@ -33,6 +35,7 @@ function QuestionHistory({ objective, question }: { objective: Objective; questi
             {new Date(row.committedAt).toLocaleString()}
           </p>
           <p>Actor {row.actorUserId}</p>
+          <QuestionEvidence question={row.question} objective={objective} />
           {row.question.answer && <p>{row.question.answer}</p>}
           {row.question.evidenceNote && <p>Evidence note: {row.question.evidenceNote}</p>}
           <p>
@@ -66,8 +69,6 @@ export function QuestionCard({
   objective: Objective;
   session: QuestionSession;
 }) {
-  const [answer, setAnswer] = useState("");
-  const [note, setNote] = useState("");
   const [history, setHistory] = useState(false);
   const common = {
     questionId: question.id,
@@ -85,9 +86,10 @@ export function QuestionCard({
         <p role="status">
           {question.status === "open"
             ? "The Objective has changed. Review its current context before saving an answer."
-            : "The Objective has changed. Reopen this answer and review the current context before closing it."}
+            : "The Objective or cited evidence has changed. Reopen this answer and review current sources before closing it."}
         </p>
       )}
+      <QuestionEvidence question={question} objective={objective} />
       {question.answer && <p>{question.answer}</p>}
       {question.evidenceNote && (
         <p>
@@ -95,41 +97,13 @@ export function QuestionCard({
         </p>
       )}
       {question.status === "open" && (
-        <form
-          className="stack"
-          onSubmit={(event) => {
-            event.preventDefault();
-            void session.execute({ ...common, action: "answer", answer, evidenceNote: note });
-          }}
-        >
-          <label>
-            Answer
-            <textarea
-              value={answer}
-              maxLength={8000}
-              required
-              disabled={disabled}
-              onChange={(event) => setAnswer(event.target.value)}
-            />
-          </label>
-          <label>
-            Evidence note about this Objective’s saved context
-            <textarea
-              value={note}
-              maxLength={4000}
-              required
-              disabled={disabled}
-              onChange={(event) => setNote(event.target.value)}
-            />
-          </label>
-          <button
-            className="button"
-            type="submit"
-            disabled={disabled || !answer.trim() || !note.trim()}
-          >
-            Save answer against Objective v{objective.version}
-          </button>
-        </form>
+        <QuestionAnswerForm
+          key={`${question.id}:${question.version}:${objective.version}`}
+          question={question}
+          objective={objective}
+          session={session}
+          disabled={disabled}
+        />
       )}
       {question.status === "answered" && (
         <button

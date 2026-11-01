@@ -4,6 +4,7 @@ import {
   questionCommandSchema,
   questionReceiptSchema,
   requireQuestionReceipt,
+  questionCommandPayloadDigest,
   type questionOperations,
   type QuestionCommand,
   type QuestionReceipt,
@@ -110,7 +111,13 @@ export class QuestionSession {
     if (!retained && this.state.retained)
       throw Error("Original Question recovery is missing. No new command will be sent.");
     if (retained?.receipt)
-      requireQuestionReceipt(retained.receipt, retained.command, this.actor.userId);
+      requireQuestionReceipt(
+        retained.receipt,
+        retained.command,
+        this.actor.userId,
+        await questionCommandPayloadDigest(retained.command),
+      );
+    this.assert(signal);
     this.update({ ready: true, retained: retained ?? undefined });
     return retained;
   }
@@ -120,7 +127,12 @@ export class QuestionSession {
     });
   private async install(value: QuestionReceipt, retained: Retained, signal: AbortSignal) {
     this.assert(signal);
-    const receipt = requireQuestionReceipt(value, retained.command, this.actor.userId);
+    const receipt = requireQuestionReceipt(
+      value,
+      retained.command,
+      this.actor.userId,
+      await questionCommandPayloadDigest(retained.command),
+    );
     const saved = { command: retained.command, receipt };
     await updateRecovery(this.scope, retained.command.requestId, saved, contract, this.guard);
     this.assert(signal);
@@ -201,7 +213,12 @@ export class QuestionSession {
       );
       this.assert(signal);
       if (retained.receipt) {
-        requireQuestionReceipt(retained.receipt, retained.command, this.actor.userId);
+        requireQuestionReceipt(
+          retained.receipt,
+          retained.command,
+          this.actor.userId,
+          await questionCommandPayloadDigest(retained.command),
+        );
         await acknowledgeRecovery(this.scope, retained.command.requestId, this.guard);
       } else
         await retireObjectiveQuestionRefusalRecovery(

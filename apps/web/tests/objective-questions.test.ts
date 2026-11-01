@@ -4,6 +4,8 @@ import { installPlatform, db, local } from "./command-recovery-platform";
 import { QuestionSession } from "../src/features/portfolio/objectives/questions/question-session";
 import {
   questionCommandSchema,
+  questionCommandPayloadDigest,
+  questionSchema,
   questionOperations,
   requireQuestionReceipt,
   type QuestionCommand,
@@ -241,8 +243,185 @@ it("receipt validation refuses wrong actor, status and source version", () => {
   ).toThrow();
 });
 
-it.each(["create", "reopen", "close"] as const)("binds %s receipt to its original Objective version", (action) => {
-  const command = questionCommandSchema.parse(action === "create" ? { ...draft, requestId: id(8) } : { requestId: id(8), questionId: id(5), expectedVersion: 2, expectedObjectiveVersion: 7, action });
-  const row = { requestId: id(8), actorUserId: id(2), action, committedAt: "2026-11-01T00:00:00Z", question: { id: id(5), version: command.expectedVersion + 1, title: draft.title, status: action === "close" ? "closed" : "open", answer: action === "close" ? "Answer" : null, evidenceNote: action === "close" ? "Context" : null, sourceObjectiveVersion: 8, sourceRevisionId: id(6), evidenceKind: "objective_context", stale: false } };
-  expect(() => requireQuestionReceipt(row, command, id(2))).toThrow();
+it.each(["create", "reopen", "close"] as const)(
+  "binds %s receipt to its original Objective version",
+  (action) => {
+    const command = questionCommandSchema.parse(
+      action === "create"
+        ? { ...draft, requestId: id(8) }
+        : {
+            requestId: id(8),
+            questionId: id(5),
+            expectedVersion: 2,
+            expectedObjectiveVersion: 7,
+            action,
+          },
+    );
+    const row = {
+      requestId: id(8),
+      actorUserId: id(2),
+      action,
+      committedAt: "2026-11-01T00:00:00Z",
+      question: {
+        id: id(5),
+        version: command.expectedVersion + 1,
+        title: draft.title,
+        status: action === "close" ? "closed" : "open",
+        answer: action === "close" ? "Answer" : null,
+        evidenceNote: action === "close" ? "Context" : null,
+        sourceObjectiveVersion: 8,
+        sourceRevisionId: id(6),
+        evidenceKind: "objective_context",
+        stale: false,
+      },
+    };
+    expect(() => requireQuestionReceipt(row, command, id(2))).toThrow();
+  },
+);
+
+const evidenceHash = "a".repeat(64);
+const evidenceSelector = {
+  kind: "news" as const,
+  articleId: "synthetic-article",
+  observationId: evidenceHash,
+  expectedDigest: evidenceHash,
+};
+const citedCommand = {
+  requestId: id(70),
+  questionId: id(5),
+  expectedVersion: 1,
+  expectedObjectiveVersion: 7,
+  action: "answer" as const,
+  answer: "Synthetic answer",
+  evidenceNote: "Synthetic evidence note",
+  evidenceRefs: [evidenceSelector],
+};
+it("optional evidence never materializes a field in an old normalized command", () => {
+  const old = { ...citedCommand };
+  delete (old as any).evidenceRefs;
+  expect(Object.hasOwn(questionCommandSchema.parse(old), "evidenceRefs")).toBe(false);
+});
+it("citation selectors reject duplicates, unbounded refs and injected source content", () => {
+  expect(() =>
+    questionCommandSchema.parse({
+      ...citedCommand,
+      evidenceRefs: [evidenceSelector, evidenceSelector],
+    }),
+  ).toThrow();
+  expect(() =>
+    questionCommandSchema.parse({ ...citedCommand, evidenceRefs: Array(9).fill(evidenceSelector) }),
+  ).toThrow();
+  expect(() =>
+    questionCommandSchema.parse({
+      ...citedCommand,
+      evidenceRefs: [{ ...evidenceSelector, title: "injected" }],
+    }),
+  ).toThrow();
+});
+it("redacted receipt requires exact original payload digest, actor and resulting version", async () => {
+  const payloadDigest = await questionCommandPayloadDigest(citedCommand);
+  const receipt = {
+    requestId: citedCommand.requestId,
+    actorUserId: actor.userId,
+    action: "answer",
+    committedAt: "2026-11-01T00:00:00Z",
+    payloadDigest,
+    question: {
+      id: id(5),
+      version: 2,
+      title: "Synthetic question",
+      status: "answered",
+      answer: null,
+      evidenceNote: null,
+      sourceObjectiveVersion: 7,
+      sourceRevisionId: id(6),
+      evidenceKind: "cited_sources",
+      evidenceState: "unavailable",
+      evidenceRefs: [],
+      stale: true,
+    },
+  };
+  expect(
+    requireQuestionReceipt(receipt, citedCommand, actor.userId, payloadDigest).question.status,
+  ).toBe("answered");
+  expect(() => requireQuestionReceipt(receipt, citedCommand, actor.userId)).toThrow();
+  expect(() =>
+    requireQuestionReceipt(receipt, citedCommand, actor.userId, "b".repeat(64)),
+  ).toThrow();
+  expect(() =>
+    requireQuestionReceipt(
+      { ...receipt, requestId: id(90) },
+      citedCommand,
+      actor.userId,
+      payloadDigest,
+    ),
+  ).toThrow();
+  expect(() => questionSchema.parse({ ...receipt.question, answer: "source leak" })).toThrow();
+  expect(await questionCommandPayloadDigest({ ...citedCommand, answer: "substitution" })).not.toBe(
+    payloadDigest,
+  );
+});
+it("redacted committed answer recovers and acknowledges without replaying or exposing stored text", async () => {
+  const payloadDigest = await questionCommandPayloadDigest(citedCommand);
+  let posts = 0;
+  const receipt = {
+    requestId: citedCommand.requestId,
+    actorUserId: actor.userId,
+    action: "answer",
+    committedAt: "2026-11-01T00:00:00Z",
+    payloadDigest,
+    question: {
+      id: id(5),
+      version: 2,
+      title: "Synthetic",
+      status: "answered",
+      answer: null,
+      evidenceNote: null,
+      sourceObjectiveVersion: 7,
+      sourceRevisionId: id(6),
+      evidenceKind: "cited_sources",
+      evidenceState: "unavailable",
+      evidenceRefs: [],
+      stale: true,
+    },
+  };
+  const api = {
+    request: async (key: string, input: any) => {
+      if (key === "objectives.questions.command") {
+        posts++;
+        Object.assign(citedCommand, { requestId: input.body.requestId });
+        throw Error("Lost reply");
+      }
+      if (key === "objectives.questions.receipt")
+        return {
+          ...receipt,
+          requestId: citedCommand.requestId,
+          payloadDigest: await questionCommandPayloadDigest(citedCommand),
+        };
+      if (key === "objectives.questions.list")
+        return {
+          ...target,
+          objectiveVersion: 7,
+          items: [],
+          total: 0,
+          openCount: 0,
+          nextCursor: null,
+        };
+      throw Error("Unexpected request");
+    },
+  };
+  const session = new QuestionSession(api as any, actor, target, () => {});
+  await session.hydrate();
+  const { requestId: _requestId, ...draftAnswer } = citedCommand;
+  await session.execute(draftAnswer);
+  await session.recover();
+  expect(session.snapshot().retained?.receipt?.question.answer).toBeNull();
+  await session.acknowledge();
+  expect(session.snapshot().retained).toBeUndefined();
+  expect(posts).toBe(1);
+});
+it("browser digest matches Core normalized original evidence command", async () => {
+  expect(await questionCommandPayloadDigest({ ...citedCommand, requestId: id(70) })).toBe(
+    "0e9dfd1768bcf1df554acc71ca13a3a80ee15c73bb00da517ac46818a9772a29",
+  );
 });
