@@ -4,7 +4,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@capiro/ui/button";
 import { useSelectedClient } from "../session/SelectedClient";
 import { scopedHref } from "../session/client-route";
-import { type UnavailableResourceId } from "../meri-resources/unavailable";
 import { useMeriCapabilities } from "../meri-resources/CapabilityContext";
 import {
   heldMeriCapabilities,
@@ -12,6 +11,7 @@ import {
   type MeriCapabilities,
   type MeriCapabilityId,
 } from "../meri-resources/capabilities";
+import { useApprovalInboxCount } from "../meri-intents/useApprovalInboxCount";
 import { DesignIcon } from "./DesignIcon";
 import { UnavailableControlReason } from "./UnavailableControlReason";
 import styles from "./shell.module.css";
@@ -49,7 +49,6 @@ export const destinations = [
     section: "runs",
     capability: "runs",
     fixture: "background-runs",
-    unavailable: "runs",
   },
   {
     label: "Approvals",
@@ -57,7 +56,6 @@ export const destinations = [
     section: "approvals",
     capability: "approvals",
     fixture: "approval-center",
-    unavailable: "approvals",
   },
   {
     label: "Memory",
@@ -65,7 +63,6 @@ export const destinations = [
     section: "memory",
     capability: "memory",
     fixture: "memory-recall",
-    unavailable: "memory",
   },
   {
     label: "Routines",
@@ -73,7 +70,6 @@ export const destinations = [
     section: "routines",
     capability: "routines",
     fixture: "routines",
-    unavailable: "routines",
   },
   {
     label: "Data access",
@@ -81,7 +77,6 @@ export const destinations = [
     section: "data-access",
     capability: "dataAccess",
     fixture: "data-coverage",
-    unavailable: "dataAccess",
   },
 ] as const satisfies readonly {
   label: string;
@@ -89,15 +84,12 @@ export const destinations = [
   section: MeriSection;
   capability: MeriCapabilityId;
   fixture?: string;
-  /** Ordinary routes: the missing service that keeps this destination disabled. */
-  unavailable?: UnavailableResourceId;
 }[];
-/** Tooltip for a destination with no ordinary route. */
+/** Tooltip for a destination whose capability is not enabled in this deployment. */
 export const unavailableDestinationTitle = (
   item: (typeof destinations)[number],
   capabilities: MeriCapabilities = heldMeriCapabilities,
-) =>
-  `${capabilities[item.capability].status === "unavailable" ? "Not available yet" : "Not enabled"}: ${capabilities[item.capability].reason}`;
+) => `Not enabled: ${capabilities[item.capability].reason}`;
 /** Fixture mode links a destination to its synthetic Figma screen when one exists. */
 export const destinationHref = (
   item: (typeof destinations)[number],
@@ -117,7 +109,7 @@ export const preferencesHref = (
     ? "/meri/fixture/personal-preferences"
     : meriCapabilityHref("preferences", capabilities);
 
-/** A destination label; Approvals carries the pending count when one is supplied. */
+/** A destination label; Approvals carries the open count when one is supplied. */
 export const destinationLabel = (label: string, pendingApprovals?: number) =>
   label === "Approvals" && pendingApprovals !== undefined
     ? `Approvals · ${pendingApprovals}`
@@ -134,6 +126,7 @@ export function SidebarDestinations({
   assetSet: "home" | "cited-answer";
   fixture: boolean;
   section?: MeriSection | undefined;
+  /** Fixture pages supply a sample count; live pages read it from the inbox. */
   pendingApprovals?: number | undefined;
   /** Destinations reachable elsewhere in this composition (chat history, secondary Tools links). */
   exclude?: readonly MeriSection[] | undefined;
@@ -142,6 +135,12 @@ export function SidebarDestinations({
   const capabilities = useMeriCapabilities();
   const selected = useSelectedClient();
   const router = useRouter();
+  const livePending = useApprovalInboxCount(
+    !fixture &&
+      pendingApprovals === undefined &&
+      capabilities.approvals.status === "on",
+  );
+  const pending = pendingApprovals ?? livePending;
   const isCurrent = (item: (typeof destinations)[number], href?: string) =>
     section
       ? item.section === section
@@ -157,7 +156,7 @@ export function SidebarDestinations({
           return (
             <UnavailableControlReason
               key={item.label}
-              label={destinationLabel(item.label, pendingApprovals)}
+              label={destinationLabel(item.label, pending)}
               reason={
                 href
                   ? undefined
@@ -194,7 +193,7 @@ export function SidebarDestinations({
                 }
               >
                 {<DesignIcon name={item.icon} assetSet={assetSet} />}
-                {destinationLabel(item.label, pendingApprovals)}
+                {destinationLabel(item.label, pending)}
               </Button>
             </UnavailableControlReason>
           );

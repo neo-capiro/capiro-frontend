@@ -71,6 +71,7 @@ export const config = {
     "/api/documents/:path*",
     "/api/task-commands/:path*",
     "/api/settings/:path*",
+    "/api/data-access/:path*",
     "/api/memory/owner/:path*",
     "/api/uploads/:path*",
     "/api/meri/notifications",

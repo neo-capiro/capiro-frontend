@@ -36,6 +36,7 @@ test("every API handler applies preview admission before any route work", () => 
       "app/api/capiro/[operation]/route.ts",
       "app/api/conversations/[...path]/route.ts",
       "app/api/conversations/intents/[operation]/route.ts",
+      "app/api/data-access/read/route.ts",
       "app/api/documents/[operation]/route.ts",
       "app/api/documents/links/[action]/route.ts",
       "app/api/memory/owner/candidates/[id]/decision/route.ts",

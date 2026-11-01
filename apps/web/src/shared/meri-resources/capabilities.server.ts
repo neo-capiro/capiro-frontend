@@ -68,6 +68,16 @@ export function readMeriCapabilities(env: Environment) {
         conversation.enabled,
         "/api/conversations/runs/list",
       ),
+      approvals: permitted(
+        "approvals",
+        conversation.enabled,
+        "/api/conversations/intents/inbox",
+      ),
+      dataAccess: permitted(
+        "dataAccess",
+        conversation.enabled,
+        "/api/data-access/read",
+      ),
       routines: permitted(
         "routines",
         conversation.enabled,

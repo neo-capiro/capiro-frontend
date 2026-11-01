@@ -99,12 +99,19 @@ export function StatusPanel({
   error,
   empty,
   onRetry,
+  unavailableHint,
   children,
 }: {
   loading?: boolean;
   error?: Error | string | null;
   empty?: string;
   onRetry?: () => void;
+  /**
+   * Caller-supplied explanation for a non-retryable status. Use it when the
+   * status describes the action (e.g. a refused search input) rather than the
+   * viewer's access to the surface.
+   */
+  unavailableHint?: string;
   children?: ReactNode;
 }) {
   if (loading)
@@ -124,7 +131,7 @@ export function StatusPanel({
         >
           <h2>This view is unavailable</h2>
           <p>{message}</p>
-          <p>{unavailableReason(classification.status)}</p>
+          <p>{unavailableHint ?? unavailableReason(classification.status)}</p>
         </div>
       );
     return (

@@ -1,30 +1,42 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import DOMPurify from "dompurify";
 import {
   renderNewsletterDesign,
   newsletterPlainText,
 } from "@capiro/shared/newsletter-render";
 import type { RichDraft } from "./draft";
-import type { NewsletterPreview } from "@capiro/shared/newsletter";
-import { ActionButton, PageHeader } from "../../../../shared/module-ui";
 import { newsletterPreviewLinks } from "./content/preview-links";
 import { PreviewLinks } from "./PreviewLinks";
 import styles from "./rich-newsletter.module.css";
 
 /** Canonical rendering plus inert display isolation; never a sendable artifact. */
-function renderDraft(draft: RichDraft) {
+export function renderDraft(draft: RichDraft, selectionSafe = false) {
   if (!DOMPurify.isSupported) return "";
   return renderNewsletterDesign(draft.design, draft.config, {
     editor: true,
     liveMergeTags: false,
     sanitizeHtml: (html) =>
-      DOMPurify.sanitize(html, { USE_PROFILES: { html: true } }),
+      DOMPurify.sanitize(html, {
+        USE_PROFILES: { html: true },
+        // Only the canonical renderer may supply editor selection identities.
+        ...(selectionSafe
+          ? {
+              FORBID_ATTR: [
+                "id",
+                "name",
+                "class",
+                "data-nl-block",
+                "data-nl-section",
+              ],
+            }
+          : {}),
+      }),
   });
 }
 
 /** Saved owner HTML is untrusted and uses the same inert display as local HTML. */
-function sanitizePreviewDocument(rendered: string) {
+export function sanitizePreviewDocument(rendered: string) {
   if (!DOMPurify.isSupported) return "";
   const sanitized = DOMPurify.sanitize(rendered, {
     WHOLE_DOCUMENT: true,
@@ -64,102 +76,6 @@ function sanitizePreviewDocument(rendered: string) {
   sizing.textContent = "body{overflow-wrap:anywhere}img{max-width:100%}";
   preview.head.append(sizing);
   return `<!doctype html>${preview.documentElement.outerHTML}`;
-}
-
-export function SavedRichPreview({
-  preview,
-  name,
-  onClose,
-}: {
-  preview: NewsletterPreview;
-  name?: string;
-  onClose: () => void;
-}) {
-  const [mobile, setMobile] = useState(false);
-  const [plainText, setPlainText] = useState(false);
-  const links = useMemo(
-    () => newsletterPreviewLinks(preview.html),
-    [preview.html],
-  );
-  return (
-    <section className={styles.savedView} aria-label="Saved newsletter preview">
-      <PageHeader
-        title={mobile ? "Preview newsletter · Mobile" : "Preview newsletter"}
-        description={name || `Saved revision ${preview.revision}`}
-        actions={
-          <ActionButton autoFocus onClick={onClose}>
-            Back to editor
-          </ActionButton>
-        }
-      />
-      <div className={styles.savedModes} aria-label="Saved preview width">
-        <ActionButton aria-pressed={!mobile} onClick={() => setMobile(false)}>
-          Desktop
-        </ActionButton>
-        <ActionButton aria-pressed={mobile} onClick={() => setMobile(true)}>
-          Mobile
-        </ActionButton>
-      </div>
-      <div className={styles.savedLayout}>
-        <div
-          className={`${styles.savedCanvas} ${mobile ? styles.savedMobile : ""}`}
-        >
-          {plainText ? (
-            <pre
-              className={styles.savedPlainText}
-              aria-label="Saved newsletter plain text"
-            >
-              {preview.plainText}
-            </pre>
-          ) : (
-            <SavedNewsletterHtml
-              html={preview.html}
-              title="Saved newsletter preview"
-            />
-          )}
-        </div>
-        <aside
-          className={styles.savedInspector}
-          aria-label="Saved preview information"
-        >
-          <h2>Saved preview</h2>
-          <p className={styles.savedRevision}>
-            Saved revision {preview.revision}
-          </p>
-          <p>
-            This preview shows the requested saved revision and excludes unsaved
-            local edits.
-          </p>
-          <p className={styles.savedCaption}>
-            External images and live links are disabled. Email clients may
-            render differently.
-          </p>
-          <ActionButton
-            aria-pressed={plainText}
-            onClick={() => setPlainText((value) => !value)}
-          >
-            Saved plain text
-          </ActionButton>
-          <PreviewLinks
-            key={`${preview.documentId}:${preview.revision}`}
-            links={links}
-          />
-          {preview.checks.length > 0 && (
-            <ul
-              className={styles.savedChecks}
-              aria-label="Saved preview checks"
-            >
-              {preview.checks.map((check, index) => (
-                <li key={`${check.id}:${index}`}>
-                  {check.severity}: {check.label} — {check.detail}
-                </li>
-              ))}
-            </ul>
-          )}
-        </aside>
-      </div>
-    </section>
-  );
 }
 
 /** Saved HTML uses the same sanitization, image policy and inert context. */

@@ -104,7 +104,7 @@ export class ConversationReadUnavailable extends Error {
   }
 }
 
-export async function readCurrentNative<T extends { schemaVersion: string }>(
+export async function readCurrentNative<T extends object>(
   operation: CurrentReadOperation<T | { error: { code: string } }>,
   input: unknown,
   signal: AbortSignal,

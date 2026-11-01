@@ -72,7 +72,9 @@ it("the reviewed desktop and open mobile menus expose the current Runs route wit
   expect(desktop).toContain('aria-current="page"');
   expect(html).toContain(`href="/meri/runs?clientId=${local.clientId}"`);
   expect(html).not.toContain('aria-label="Runs unavailable.');
-  expect(html).toContain('aria-label="Approvals unavailable.');
+  // Approvals has its own route now and follows the same conversation gate as Runs.
+  expect(html).not.toContain('aria-label="Approvals unavailable.');
+  expect(html).toContain(`href="/meri/approvals?clientId=${local.clientId}"`);
   expect(html).not.toContain("/meri/fixture/background-runs");
 });
 

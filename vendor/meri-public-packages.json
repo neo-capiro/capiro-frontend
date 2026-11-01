@@ -1036,6 +1036,34 @@
    "purpose": "Reviewed coherent Research retrieval0.5 and legislative1.7 plus Office XML/Word source; actual package/consumer qualification recorded separately."
   },
   {
+   "file": "capiro-meri-contracts-0.1.48-9881c948-75df47751443.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.48",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "9881c948702d23279fa000dc09257e892f404c77",
+   "sourceTree": "f4c9bcb0912b8db36a7b061c55cfc458ee6fa2be",
+   "bytes": 2182917,
+   "sha256": "75df477514434f964b21ba8626fdd512e23b97cd8f7f8ff671a156d121b050fd",
+   "integrity": "sha512-oiO5/O9S3g5xzHM8+5jE/ylxMi/BJXNnSh4lhHltZ+XEzfLXYGUABASd4JDCAhrRwqwPevQmpigKnxyAJz59iQ==",
+   "regularEntryCount": 123,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "I4 discoverability: intents-application inbox and inbox-count routes, unmounted-family codes, and the data-access-application receiver without operation names (neo-capiro/meri-greenfield#504 at 0.1.48 after #503 took 0.1.47); actual package/consumer qualification recorded separately."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.32-9881c948-13fb2f848129.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.32",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "9881c948702d23279fa000dc09257e892f404c77",
+   "sourceTree": "f4c9bcb0912b8db36a7b061c55cfc458ee6fa2be",
+   "bytes": 3850,
+   "sha256": "13fb2f84812961818b93b7fd3639d908eecf40424865d7133576a6cdae9c94e1",
+   "integrity": "sha512-Tf1TNS3IrOs2NwVvtIUOTIYLHkSieqsFXb8fXTdBXOAYdhpWjkx+8fGwsno+XNRwTnKpdU/h1DeRY7kjC5FKQw==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "ui-stream 0.1.32 admits @capiro/meri-contracts 0.1.45–0.1.48 as peers (neo-capiro/meri-greenfield#504); no stream behaviour change."
+  },
+  {
    "file": "capiro-meri-contracts-0.1.49-d4d81cce-396ed0311b91.tgz",
    "name": "@capiro/meri-contracts",
    "version": "0.1.49",
