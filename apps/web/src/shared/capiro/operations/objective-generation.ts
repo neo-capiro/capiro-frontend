@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { objectiveSavedGenerationOperation } from "./objective-saved-generation";
 import { defineOperation } from "../contracts";
 import { objectiveSavedReviewOperation } from "./objective-saved-review";
 import { objectiveResourceId as id } from "./objective-destination-binding";
@@ -242,6 +243,7 @@ export function requireGeneratedStrategy(
 }
 
 export const objectiveGenerationOperations = {
+  "strategies.objectiveSavedGeneration": objectiveSavedGenerationOperation,
   "strategies.objectiveSavedReview": objectiveSavedReviewOperation,
   "strategies.objectiveDraftJob": defineOperation({
     service: "strategy",
