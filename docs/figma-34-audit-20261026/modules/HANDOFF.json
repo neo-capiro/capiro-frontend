@@ -1,0 +1,514 @@
+{
+  "task": "Modules 3.4 audit additions from NEO-DESIGN-REQUESTS and MOD-D01 through MOD-D07",
+  "completedAt": "2026-10-26",
+  "fileKey": "zGvvF6V6hh7yweoplCdpdE",
+  "pageId": "1064:140864",
+  "sectionId": "3183:112321",
+  "indexId": "3191:124148",
+  "reviewUrl": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE/Capiro-3.4-Modules?node-id=3191-124148",
+  "scope": {
+    "newScreens": 74,
+    "newFieldMasters": 4,
+    "newReviewIndex": 1,
+    "applicationCodeChanges": false
+  },
+  "gaps": [
+    {
+      "id": "MOD-D01",
+      "status": "Completed requested mockup states",
+      "existingPreserved": [
+        "1174:277401",
+        "3042:104580",
+        "3042:104851"
+      ],
+      "newScreens": [
+        "3183:112686",
+        "3191:122153",
+        "3193:123493",
+        "3191:122280"
+      ],
+      "notes": "Blank canvas retains no blocks. First edit saves to a saved draft. Staging entry uses the saved revision, review checkbox gates enabled staging, and original receipt is a separate confirmed screen. Existing populated example remains clearly separate."
+    },
+    {
+      "id": "MOD-D02",
+      "status": "Completed requested mockup states",
+      "existingUpdated": [
+        "1064:254667"
+      ],
+      "newScreens": [
+        "3183:112322"
+      ],
+      "notes": "Existing skeleton loading preserved. Error distinct from empty with keyboard-visible Retry. List sort/refresh wait for read; independent creation is conditional on verified authoring access."
+    },
+    {
+      "id": "MOD-D03",
+      "status": "Completed requested mockup states",
+      "existingUpdated": [
+        "1064:237950",
+        "1064:237974"
+      ],
+      "existingPreserved": [
+        "1064:237924"
+      ],
+      "newScreens": [
+        "3183:112532"
+      ],
+      "notes": "Denied, expired, not-found and read-error do not claim Live or refreshed just now."
+    },
+    {
+      "id": "MOD-D04",
+      "status": "Completed requested mockup states; live adoption remains held",
+      "canonicalUpdated": "1064:192802",
+      "newScreens": [
+        {
+          "key": "MOD-D04 · Plan · List · 1440",
+          "id": "3187:121618",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · List · 1024",
+          "id": "3187:121785",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Detail · 1440",
+          "id": "3187:121952",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Detail · 1024",
+          "id": "3187:122134",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Empty selected client · 1440",
+          "id": "3187:122316",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Empty selected client · 1024",
+          "id": "3187:122452",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · New plan · 1440",
+          "id": "3187:122588",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · New plan · 1024",
+          "id": "3187:122743",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Add wave · 1440",
+          "id": "3187:122898",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Add wave · 1024",
+          "id": "3187:123068",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Edit wave · 1440",
+          "id": "3187:123238",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Edit wave · 1024",
+          "id": "3187:123408",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Review deadline · 1440",
+          "id": "3187:123578",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Review deadline · 1024",
+          "id": "3187:123761",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Version conflict · 1440",
+          "id": "3187:123944",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Version conflict · 1024",
+          "id": "3187:124142",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Reference unavailable · 1440",
+          "id": "3187:124340",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Reference unavailable · 1024",
+          "id": "3187:124525",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Creation unconfirmed · 1440",
+          "id": "3187:124710",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Creation unconfirmed · 1024",
+          "id": "3187:124889",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Update unconfirmed · 1440",
+          "id": "3187:125068",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Update unconfirmed · 1024",
+          "id": "3187:125259",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Service unavailable · 1440",
+          "id": "3187:125450",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Service unavailable · 1024",
+          "id": "3187:125594",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · New plan entered · 1440",
+          "id": "3187:125738",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · New plan entered · 1024",
+          "id": "3187:125887",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Wave validation · 1440",
+          "id": "3187:126036",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Wave validation · 1024",
+          "id": "3187:126209",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Plan created · 1440",
+          "id": "3191:122463",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Plan created · 1024",
+          "id": "3191:122624",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Wave saved · 1440",
+          "id": "3191:122784",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Wave saved · 1024",
+          "id": "3191:122944",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D04 · Plan · Review recorded · 1440",
+          "id": "3191:123104",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D04 · Plan · Review recorded · 1024",
+          "id": "3191:123264",
+          "width": 1024
+        }
+      ],
+      "notes": "1440 and1024 list,detail,emptyselectedclient,newplan,enteredtitle,add/editwave,validation,reviewdeadline,versionconflict,unavailableoffice,uncertaincreation,uncertainupdate,serviceunavailable,confirmedfirstsave,wavesave,review. Manual dates and explicit timezone/exclusive end; no discovery/ranking/execution. New creation original request retained only in mounted view per source."
+    },
+    {
+      "id": "MOD-D05",
+      "status": "Completed requested mockup states",
+      "entry": "1064:242312",
+      "newScreens": [
+        {
+          "key": "MOD-D05 · Research · New",
+          "id": "3187:148674",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · Entered",
+          "id": "3187:148839",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · Validation",
+          "id": "3187:148997",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · Edit",
+          "id": "3187:149155",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · Saved",
+          "id": "3187:149314",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · Cancel",
+          "id": "3187:149473",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · Loading",
+          "id": "3187:149616",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · Empty",
+          "id": "3187:149749",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · No matches",
+          "id": "3187:149885",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · Detail unavailable",
+          "id": "3187:150021",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · Creation unconfirmed",
+          "id": "3187:150157",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D05 · Research · Archived",
+          "id": "3187:150318",
+          "width": 1440
+        }
+      ],
+      "notes": "Create/edit modal matches current Name(required240),Purpose(optional4000),Mode(manual/rules/hybrid). Client links and grants are separate. Owner can edit archived metadata. Validation/cancel/confirmed save and original create replay are shown."
+    },
+    {
+      "id": "MOD-D06",
+      "status": "Completed requested mockup states",
+      "newScreens": [
+        {
+          "key": "MOD-D06 · Calendar · New meeting · 1440",
+          "id": "3187:150480",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D06 · Calendar · New meeting · 1024",
+          "id": "3187:150656",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D06 · Calendar · Entered · 1440",
+          "id": "3187:150832",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D06 · Calendar · Entered · 1024",
+          "id": "3187:151002",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D06 · Calendar · Validation · 1440",
+          "id": "3187:151172",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D06 · Calendar · Validation · 1024",
+          "id": "3187:151342",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D06 · Calendar · Creating · 1440",
+          "id": "3187:151512",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D06 · Calendar · Creating · 1024",
+          "id": "3187:151691",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D06 · Calendar · Success · 1440",
+          "id": "3187:151870",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D06 · Calendar · Success · 1024",
+          "id": "3187:152019",
+          "width": 1024
+        },
+        {
+          "key": "MOD-D06 · Calendar · Dismissal · 1440",
+          "id": "3187:152168",
+          "width": 1440
+        },
+        {
+          "key": "MOD-D06 · Calendar · Dismissal · 1024",
+          "id": "3187:152311",
+          "width": 1024
+        }
+      ],
+      "notes": "Current CalendarHeader and CalendarScreen explicitly use shared CreateMeeting.12existingcalendarentrybuttons wired toNewmeeting, genericNeweventlabelsremoved.1440/1024 empty,entered,validation,pending,success,dismissal. Subject/location/description/start/end only; no generic event type introduced."
+    },
+    {
+      "id": "MOD-D07",
+      "status": "Completed requested prototype motion presentation",
+      "newScreens": [
+        {
+          "family": "Task drawer",
+          "state": "Closed",
+          "id": "3187:158193",
+          "scrim": "3187:158457",
+          "panel": "3187:158458"
+        },
+        {
+          "family": "Task drawer",
+          "state": "Open",
+          "id": "3187:158863",
+          "scrim": "3187:159127",
+          "panel": "3187:159128"
+        },
+        {
+          "family": "Task drawer",
+          "state": "Reduced motion closed",
+          "id": "3187:159533",
+          "scrim": "3187:159797",
+          "panel": "3187:159798"
+        },
+        {
+          "family": "Task drawer",
+          "state": "Reduced motion open",
+          "id": "3187:160203",
+          "scrim": "3187:160467",
+          "panel": "3187:160468"
+        },
+        {
+          "family": "Task drawer",
+          "state": "Close during entry",
+          "id": "3187:160873",
+          "scrim": "3187:161137",
+          "panel": "3187:161138"
+        },
+        {
+          "family": "Terms dialog",
+          "state": "Closed",
+          "id": "3187:161558",
+          "scrim": "3187:161662",
+          "panel": "3187:161663"
+        },
+        {
+          "family": "Terms dialog",
+          "state": "Open",
+          "id": "3187:162025",
+          "scrim": "3187:162129",
+          "panel": "3187:162130"
+        },
+        {
+          "family": "Terms dialog",
+          "state": "Reduced motion closed",
+          "id": "3187:162492",
+          "scrim": "3187:162596",
+          "panel": "3187:162597"
+        },
+        {
+          "family": "Terms dialog",
+          "state": "Reduced motion open",
+          "id": "3187:162959",
+          "scrim": "3187:163063",
+          "panel": "3187:163064"
+        },
+        {
+          "family": "Terms dialog",
+          "state": "Close during entry",
+          "id": "3187:163426",
+          "scrim": "3187:163530",
+          "panel": "3187:163531"
+        }
+      ],
+      "canonicalTracksCleared": [
+        "1064:198348",
+        "1064:198349",
+        "1064:253288",
+        "1064:253289"
+      ],
+      "notes": "Looping manual tracks removed from actual Task andTerms surfaces. Dedicated flows use one native transition per click: drawer220msopen/easeout,160msclose/easein; terms180/140ms. Reducedmotion immediate endpoints. Interruptedentry example closes from current visual midpoint. Terms backdrop/Escape do not authorize dismissal; existing acceptance action remains required. Figma prototype is not application code."
+    }
+  ],
+  "sourceContracts": [
+    {
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/main/docs/figma-34-audit-20261016/NEO-DESIGN-REQUESTS.md"
+    },
+    {
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/main/docs/figma-34-audit-20261016/modules/DESIGN-GAPS.json"
+    },
+    {
+      "url": "https://github.com/neo-capiro/capiro-frontend/pull/56",
+      "commit": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "backendPin": "016e79b585c14f20d13669e13c987c01e3dd29dd",
+      "limit": "All nine Plan operations remain held503 under read-only preview. Design is not proof of live API adoption or recommendation allocation."
+    },
+    {
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/main/apps/web/src/features/modules/research-portfolios/ResearchCreate.tsx",
+      "blob": "30918897b802e751902b5e6c1e22643785f6f32b"
+    },
+    {
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/main/apps/web/src/features/modules/research-portfolios/ResearchSettings.tsx",
+      "blob": "da02e0387392dd5b8a109801364c7d71b2193515"
+    },
+    {
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/main/apps/web/src/shared/meetings/CreateMeeting.tsx",
+      "blob": "c9d9ab4162930e5ff5bbe0d1bf06b76614689477"
+    },
+    {
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/main/apps/web/src/features/modules/calendar/CalendarControls.tsx",
+      "blob": "fc65bcd4ef2d10b0b657123d05359f1176cbab49"
+    }
+  ],
+  "qa": {
+    "structural": "Checked 74 frames including the index before adding the final reviewed newsletter state: no horizontal overflow, unexpected fonts, missing destinations, or large image fills. Targeted navigation and consent changes were then visually checked.",
+    "newFinalScreenCount": 74,
+    "indexExcludedFromScreenCount": true,
+    "fonts": [
+      "Geist",
+      "Geist Mono",
+      "Newsreader in existing newsletter editorial content"
+    ],
+    "nativeEditable": true,
+    "onlyRaster": "Existing 77 by 26 pixel Capiro wordmark",
+    "screenshotsReviewed": [
+      "3187:123068",
+      "3187:148997",
+      "3187:151342",
+      "3191:122153",
+      "3183:112322",
+      "3193:123493"
+    ],
+    "motionValidation": "Readback confirmed that old manual animation tracks were empty and native prototype reactions were present. Endpoint transitions were inspected without a video export.",
+    "sidebar": "Reused existing toggle 3074:110535 and existing Boolean VariableID:3074:110396; active feature styling corrected."
+  },
+  "limits": [
+    "Design examples are illustrative; no business data or live verification is claimed.",
+    "Plan live API adoption, recommendations, ranking, office picker, and execution remain dependencies for the backend and product owners.",
+    "Keyboard focus trapping, focus order, and permission checks are visual and interaction specifications for implementation, not executable web accessibility tests.",
+    "Phone layouts are not included.",
+    "No application code changes, backend changes, merges, or deployments."
+  ]
+}
