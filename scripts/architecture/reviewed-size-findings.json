@@ -7138,10 +7138,10 @@
     "file": "apps/web/src/features/meri/uploads/MeriAttachmentPicker.tsx",
     "kind": "function",
     "symbol": "MeriAttachmentPicker",
-    "fingerprint": "0d55f271bd138a7bad27fb2c3247e9e20fc281d8dc8a476ace60917d123545eb",
-    "reason": "Presentation for the composer attachment rows. It renders only controller-owned canonical values (format, bytes, scan and extraction state) and forwards pick, check, remove and cancel to the uploads port; it owns no custody, digest, scan or deletion authority and issues no request of its own.",
-    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "5ce0d75b995e54a12a38c87f4ec4455a3ef05ae2956658a2ca3622d4e01fcbdb",
+    "reason": "Independent exact-source responsibility review of the later Office cohort. This remains the composer attachment presentation: it renders canonical upload observations and forwards existing pick/check/remove/cancel actions. The new clean/stored original-file entry delegates import, session, unknown-outcome recovery and editor lifecycle to OfficeUploadButton and its dedicated owners; it adds no byte transport, authorization, persistence, retry loop or publication authority. Keep this single row-to-action rendering together; unrelated existing picker behavior is preserved. Re-review on fingerprint or responsibility change.",
+    "reviewedBy": "Codex independent Office cohort reviewer /root/office_cohort_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/shared/meri-conversations/host-controller.ts",

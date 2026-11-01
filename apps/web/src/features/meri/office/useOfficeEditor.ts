@@ -10,6 +10,7 @@ export function useOfficeEditor(
   account: { tenantId: string; actorId: string },
   version: LibraryVersion,
   onClose: () => void,
+  sessionRunId?: string,
 ) {
   const queries = useQueryClient(),
     container = useRef<HTMLDivElement>(null);
@@ -43,6 +44,7 @@ export function useOfficeEditor(
       recovery,
       frame,
       onDiscarded: onClose,
+      sessionRunId,
     });
     return host;
   });

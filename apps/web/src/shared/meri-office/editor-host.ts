@@ -1,5 +1,6 @@
 import { SessionLifetimeController } from "../meri-actions/opaque-session-controller";
 import { bootstrapLibrarySession } from "../meri-documents/library-session";
+import { bootstrapConversationSession } from "../meri-conversations/session";
 import { OfficeEditorController, type OfficeFrame } from "./editor-controller";
 import { createOfficeBrowserPort } from "./file-access";
 import type { officeDraftSelection } from "./draft-selection";
@@ -11,6 +12,8 @@ export function createOfficeEditorHost(options: {
   origin: { conversationId: string; clientId: string | null };
   recovery: ReturnType<typeof officeDraftSelection>;
   frame: OfficeFrame;
+  /** A freshly imported original can be edited before a submitted chat turn. */
+  sessionRunId?: string;
   onDiscarded?: () => void;
 }) {
   const editor = new OfficeEditorController({
@@ -23,11 +26,17 @@ export function createOfficeEditorHost(options: {
   });
   const session = new SessionLifetimeController({
     issue: (signal) =>
-      bootstrapLibrarySession({
-        account: options.account,
-        ...options.origin,
-        signal,
-      }),
+      options.sessionRunId
+        ? bootstrapConversationSession(
+            { ...options.origin, runId: options.sessionRunId },
+            options.account,
+            signal,
+          )
+        : bootstrapLibrarySession({
+            account: options.account,
+            ...options.origin,
+            signal,
+          }),
     createPort: ({ session: receipt, signal, isCurrent, onAccessLost }) =>
       createOfficeBrowserPort({
         credential: receipt.credential,

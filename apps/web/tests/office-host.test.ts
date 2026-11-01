@@ -9,6 +9,10 @@ import {
   officeWireSnapshot,
 } from "./office-wire-fixture";
 const bootstrap = vi.hoisted(() => vi.fn());
+const conversationBootstrap = vi.hoisted(() => vi.fn());
+vi.mock("../src/shared/meri-conversations/session", () => ({
+  bootstrapConversationSession: conversationBootstrap,
+}));
 vi.mock("../src/shared/meri-documents/library-session", () => ({
   bootstrapLibrarySession: bootstrap,
 }));
@@ -18,8 +22,9 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.useRealTimers();
   bootstrap.mockReset();
+  conversationBootstrap.mockReset();
 });
-async function fixture() {
+async function fixture(sessionRunId?: string) {
   vi.useFakeTimers();
   vi.setSystemTime(Date.parse("2026-10-29T00:00:00Z"));
   const queries = new QueryClient(),
@@ -35,6 +40,7 @@ async function fixture() {
     expiresAtMs: Date.now() + 120_000,
     context: { ...account, ...origin },
   }));
+  conversationBootstrap.mockImplementation(bootstrap.getMockImplementation()!);
   const frame = {
     launch: vi.fn<(launch: OfficeLaunch) => void>(),
     renew: vi.fn<(launch: OfficeLaunch) => void>(),
@@ -82,7 +88,13 @@ async function fixture() {
     return Response.json(snapshot);
   });
   vi.stubGlobal("fetch", fetcher);
-  const host = createOfficeEditorHost({ account, origin, recovery, frame });
+  const host = createOfficeEditorHost({
+    account,
+    origin,
+    recovery,
+    frame,
+    sessionRunId,
+  });
   const detach = host.attach();
   cleanup.push(detach, () => queries.clear());
   await vi.waitFor(() =>
@@ -94,6 +106,16 @@ async function fixture() {
   return { host, frame, fetcher, queries, detach };
 }
 describe("Office native session composition", () => {
+  it("a newly imported original uses current native access before any submitted transcript exists", async () => {
+    const runId = officeIds.draftId;
+    await fixture(runId);
+    expect(bootstrap).not.toHaveBeenCalled();
+    expect(conversationBootstrap).toHaveBeenCalledWith(
+      { conversationId: officeIds.conversationId, clientId: null, runId },
+      { tenantId: officeIds.editorId, actorId: officeIds.versionId },
+      expect.any(AbortSignal),
+    );
+  });
   it("the existing owner renews early without replacing a loaded frame", async () => {
     const f = await fixture();
     const firstTtl = f.frame.launch.mock.calls[0]![0].expiresAtMs;

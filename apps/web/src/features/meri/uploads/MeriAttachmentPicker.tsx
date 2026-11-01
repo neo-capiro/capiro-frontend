@@ -6,6 +6,7 @@ import type { UploadItem } from "../../../shared/meri-uploads/upload-controller"
 import { DesignIcon } from "../../../shared/shell/DesignIcon";
 import styles from "../home.module.css";
 import type { ComposerAttachments } from "./attachment-slot";
+import { OfficeUploadButton } from "../office/OfficeUploadButton";
 
 /** Only the canonical MIME values are offered; the receiver still decides admission. */
 const accepted = Object.values(UPLOAD_MIME).join(",");
@@ -142,6 +143,23 @@ export function MeriAttachmentPicker({
               <span>{item.filename}</span>
               <span>{size(item.bytes)}</span>
               <span role="status">{describe(item)}</span>
+              {slot.selectedTab &&
+                item.receipt?.originalBytesAvailable &&
+                item.receipt.scanStatus === "clean" &&
+                item.receipt.storageStatus === "stored" &&
+                item.state !== "removed" &&
+                item.state !== "removing" &&
+                /\.(docx|xlsx|pptx)$/iu.test(item.filename) && (
+                  <OfficeUploadButton
+                    key={`${JSON.stringify(slot.selectedTab.context)}:${item.receipt.uploadId}:${item.receipt.sha256}`}
+                    context={slot.selectedTab.context}
+                    filename={item.filename}
+                    selection={{
+                      uploadId: item.receipt.uploadId,
+                      sha256: item.receipt.sha256,
+                    }}
+                  />
+                )}
               {item.state === "declaring" || item.state === "uploading" ? (
                 <button
                   type="button"
