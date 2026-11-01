@@ -6,6 +6,7 @@ export const preferencePages = [
   { id: "personal", label: "Personal defaults" },
   { id: "connections", label: "Connections" },
   { id: "connected-services", label: "Connected services" },
+  { id: "data-access", label: "Data access" },
   { id: "usage", label: "Usage and limits" },
   { id: "skills", label: "Skills and templates" },
   { id: "updates", label: "Workspace updates" },

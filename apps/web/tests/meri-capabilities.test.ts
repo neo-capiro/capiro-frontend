@@ -43,13 +43,21 @@ it("inventory distinguishes implemented ordinary routes from missing workspace c
     "/meri/memory",
     "/settings/preferences",
     "/meri/runs",
+    "/meri/approvals",
     "/meri/routines",
+    "/settings/preferences?page=data-access",
   ]);
-  for (const id of ["approvals", "dataAccess"] as const) {
-    expect(state[id].status, id).toBe("unavailable");
-    expect(meriCapabilityHref(id, state), id).toBeUndefined();
-    expect(meriCapabilityTable[id].deploymentFlag).toBeNull();
+  // Every capability has an ordinary route and a deployment gate; none is explained away as missing.
+  for (const [id, entry] of Object.entries(meriCapabilityTable)) {
+    expect(entry.ordinaryRoute, id).not.toBeNull();
+    expect(entry.deploymentFlag, id).not.toBeNull();
   }
+  for (const id of ["approvals", "dataAccess"] as const)
+    expect(heldMeriCapabilities[id]).toEqual({
+      status: "off",
+      reason: "Not enabled or not configured for this workspace.",
+      navigation: "off",
+    });
   expect(meriCapabilityTable.runs.publicContract).toContain("run-index/1.0.0");
   expect(JSON.stringify(meriCapabilityTable)).not.toContain("/kit");
   expect(Object.isFrozen(state)).toBe(true);
@@ -235,9 +243,6 @@ it("unavailable copy preserves source reception and does not claim personal pref
   );
   expect(unavailableResources.conversationHistory.missing).toContain(
     "published conversation transcript",
-  );
-  expect(unavailableResources.approvals.missing).toContain(
-    "conversation intent list and decision consumers already exist",
   );
   expect(unavailableResources.memory.missing).toContain(
     "personal owner-memory review route already exists",

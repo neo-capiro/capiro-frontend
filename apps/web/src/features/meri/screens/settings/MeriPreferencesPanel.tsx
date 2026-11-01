@@ -5,6 +5,7 @@ import { UserPreferencesHost } from "../../user-preferences/UserPreferencesHost"
 import { TenantModelSettings } from "../../tenant-settings/TenantModelSettings";
 import { ConnectorAccountsHost } from "./ConnectorAccountsHost";
 import { ConnectorLibraryHost } from "./ConnectorLibraryHost";
+import { DataAccessHost } from "./DataAccessHost";
 import { HelpShortcutsScreen } from "./HelpShortcutsScreen";
 import { NotificationsAccountScreen } from "./NotificationsAccountScreen";
 import { PersonalPreferencesScreen } from "./PersonalPreferencesScreen";
@@ -86,6 +87,8 @@ export function MeriPreferencesPanel({
       );
     case "connected-services":
       return <ConnectorLibraryHost chrome={chrome} />;
+    case "data-access":
+      return <DataAccessHost chrome={chrome} />;
     case "usage":
       if (usageEnabled)
         return (

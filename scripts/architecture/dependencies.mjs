@@ -162,6 +162,7 @@ export const publicExports = new Set([
   '@capiro/meri-client/task-commands',
   '@capiro/meri-client/intents',
   '@capiro/meri-client/document-access',
+  '@capiro/meri-contracts/data-access-application', '@capiro/meri-client/data-access',
   '@capiro/meri-contracts/document-application', '@capiro/meri-contracts/document-application/schema',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
   '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
@@ -215,6 +216,12 @@ export const serverAdapters = new Map([
   [`${appSource}app/api/conversations/intents/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-intents/config.ts`, `${appSource}shared/meri-intents/proxy.ts`,
+    // The actor-wide inbox is a current native-auth read over the same adapter path as Runs.
+    `${appSource}shared/meri-conversations/config.ts`, `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-intents/inbox.ts`,
+  ])],
+  [`${appSource}app/api/data-access/read/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
+    `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-data-access/read.ts`,
   ])],
   [`${appSource}app/api/settings/user/[operation]/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-user-preferences/config.ts`, `${appSource}shared/meri-user-preferences/proxy.ts`,

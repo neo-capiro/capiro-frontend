@@ -12,9 +12,6 @@ it("unavailable copy preserves source reception and does not claim personal pref
   expect(unavailableResources.conversationHistory.missing).toContain(
     "published conversation transcript",
   );
-  expect(unavailableResources.approvals.missing).toContain(
-    "conversation intent list and decision consumers already exist",
-  );
   expect(unavailableResources.memory.missing).toContain(
     "personal owner-memory review route already exists",
   );
