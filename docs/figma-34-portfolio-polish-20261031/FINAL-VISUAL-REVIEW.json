@@ -1,0 +1,293 @@
+{
+  "date": "2026-10-31",
+  "fileKey": "mpXWnySldUFzdVna8i69Ki",
+  "mode": "Figma visual QA with authorized targeted tablet map geometry repairs",
+  "status": "All nine requested final visual samples pass",
+  "screens": [
+    {
+      "id": "1064:169534",
+      "result": "pass",
+      "notes": "All six capability status/program labels visible; header hierarchy improved and footer references Overview/Government & federal profile.",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=1064-169534"
+    },
+    {
+      "id": "1064:167100",
+      "result": "pass",
+      "notes": "File badges and title columns aligned, six rows have consistent heights. Heading repair readback confirms Geist SemiBold 28px with 34px line height.",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=1064-167100"
+    },
+    {
+      "id": "1064:179393",
+      "result": "pass",
+      "notes": "Prospect heading and cards clear, without visible accidental clipping or overlap.",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=1064-179393"
+    },
+    {
+      "id": "1064:186414",
+      "result": "pass",
+      "notes": "Modal heading no longer clipped; fields, tabs and footer visible.",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=1064-186414"
+    },
+    {
+      "id": "3155:84315",
+      "result": "pass",
+      "notes": "Collapsed landing has a readable 72px navigation rail, clear active item and available top actions.",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3155-84315"
+    },
+    {
+      "id": "3155:84840",
+      "result": "pass",
+      "notes": "Overview pulse fits the complete Latest activity actor; enclosing grid grows to 854px and leaves a 20px gap before Timeline. Final resolved screenshot inspected.",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3155-84840"
+    },
+    {
+      "id": "3155:85637",
+      "result": "pass",
+      "notes": "Collapsed Prospect layout reflows cleanly without visible accidental clipping or overlap.",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3155-85637"
+    },
+    {
+      "id": "1064:181662",
+      "result": "pass",
+      "notes": "Tablet Overview with collapsed sidebar: 904px map has readable 200px location rail and 244px popover; all district labels and fact values visible.",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=1064-181662"
+    },
+    {
+      "id": "3158:90118",
+      "result": "pass",
+      "notes": "Tablet Overview with expanded sidebar: 744px map fits the same rail and popover without label collisions. Popover remains left of selected Ohio marker and within card bounds.",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3158-90118"
+    }
+  ],
+  "findings": [
+    {
+      "priority": 1,
+      "nodes": [
+        "1064:159035",
+        "3155:84983",
+        "1064:159034",
+        "3155:84982",
+        "1064:158916",
+        "3155:84862"
+      ],
+      "issue": "Latest activity actor clipped and enclosing grid did not accommodate enlarged pulse.",
+      "fix": "Parent agent made pulse 442px minimum/HUG and grid 854px; final screenshot shows complete actor and 20px Timeline gap.",
+      "state": "resolved and visually verified"
+    },
+    {
+      "priority": 3,
+      "nodes": [
+        "1064:167134"
+      ],
+      "issue": "Files heading tier differed from other tab headings.",
+      "fix": "Parent agent set Geist SemiBold 28px with 34px line height.",
+      "state": "resolved; property readback verified"
+    },
+    {
+      "priority": 1,
+      "nodes": [
+        "1064:181728",
+        "1064:181772",
+        "3158:90187",
+        "3158:90231"
+      ],
+      "issue": "Tablet proportional compression clipped district labels and Committee fact value.",
+      "fix": "Reviewer widened rails to 200px and popovers to 244px, made nested rows fill available width and positioned popovers 10px left of selected marker.",
+      "state": "resolved and visually verified"
+    }
+  ],
+  "mutations": {
+    "scope": "Only map rail/popover geometry inside frames 1064:181662 and 3158:90118",
+    "mutatedNodeIds": [
+      "1064:181728",
+      "1064:181729",
+      "1064:181731",
+      "1064:181732",
+      "1064:181736",
+      "1064:181738",
+      "1064:181739",
+      "1064:181743",
+      "1064:181745",
+      "1064:181746",
+      "1064:181750",
+      "1064:181752",
+      "1064:181753",
+      "1064:181757",
+      "1064:181759",
+      "1064:181760",
+      "1064:181772",
+      "1064:181773",
+      "1064:181774",
+      "1064:181775",
+      "1064:181776",
+      "1064:181777",
+      "1064:181778",
+      "1064:181781",
+      "1064:181784",
+      "1064:181787",
+      "1064:181790",
+      "3158:90187",
+      "3158:90188",
+      "3158:90190",
+      "3158:90191",
+      "3158:90195",
+      "3158:90197",
+      "3158:90198",
+      "3158:90202",
+      "3158:90204",
+      "3158:90205",
+      "3158:90209",
+      "3158:90211",
+      "3158:90212",
+      "3158:90216",
+      "3158:90218",
+      "3158:90219",
+      "3158:90231",
+      "3158:90232",
+      "3158:90233",
+      "3158:90234",
+      "3158:90235",
+      "3158:90236",
+      "3158:90237",
+      "3158:90240",
+      "3158:90243",
+      "3158:90246",
+      "3158:90249"
+    ],
+    "geometry": [
+      {
+        "frame": "1064:181662",
+        "map": "1064:181722",
+        "mapWidth": 904,
+        "rail": {
+          "id": "1064:181728",
+          "x": 13.1796875,
+          "width": 200
+        },
+        "popover": {
+          "id": "1064:181772",
+          "x": 367.546875,
+          "width": 244,
+          "right": 611.546875
+        },
+        "rows": [
+          {
+            "id": "1064:181729",
+            "width": 200
+          },
+          {
+            "id": "1064:181736",
+            "width": 200
+          },
+          {
+            "id": "1064:181743",
+            "width": 200
+          },
+          {
+            "id": "1064:181750",
+            "width": 200
+          },
+          {
+            "id": "1064:181757",
+            "width": 200
+          }
+        ],
+        "factRows": [
+          {
+            "id": "1064:181778",
+            "width": 214,
+            "childRight": 214
+          },
+          {
+            "id": "1064:181781",
+            "width": 214,
+            "childRight": 214
+          },
+          {
+            "id": "1064:181784",
+            "width": 214,
+            "childRight": 214
+          },
+          {
+            "id": "1064:181787",
+            "width": 214,
+            "childRight": 214
+          }
+        ]
+      },
+      {
+        "frame": "3158:90118",
+        "map": "3158:90178",
+        "mapWidth": 744,
+        "rail": {
+          "id": "3158:90187",
+          "x": 10.846999168395996,
+          "width": 200
+        },
+        "popover": {
+          "id": "3158:90231",
+          "x": 257.53857421875,
+          "width": 244,
+          "right": 501.53857421875
+        },
+        "rows": [
+          {
+            "id": "3158:90188",
+            "width": 200
+          },
+          {
+            "id": "3158:90195",
+            "width": 200
+          },
+          {
+            "id": "3158:90202",
+            "width": 200
+          },
+          {
+            "id": "3158:90209",
+            "width": 200
+          },
+          {
+            "id": "3158:90216",
+            "width": 200
+          }
+        ],
+        "factRows": [
+          {
+            "id": "3158:90237",
+            "width": 214,
+            "childRight": 214
+          },
+          {
+            "id": "3158:90240",
+            "width": 214,
+            "childRight": 214
+          },
+          {
+            "id": "3158:90243",
+            "width": 214,
+            "childRight": 214
+          },
+          {
+            "id": "3158:90246",
+            "width": 214,
+            "childRight": 214
+          }
+        ]
+      }
+    ],
+    "preserved": "Existing fonts, tokens, fills, content, map vectors, markers and prototype links"
+  },
+  "interactionEvidence": "Readback confirmed nested desktop sidebar toggle ON_CLICK conditional SET_VARIABLE actions switch 72/232px widths and false/true label visibility. Screenshots confirm both rail states. No browser/prototype input simulation.",
+  "localScreenshotFiles": [
+    "final-review-3155-84840-resolved.png",
+    "final-review-1064-181662-map-fixed.png",
+    "final-review-3158-90118-map-fixed.png"
+  ],
+  "limitations": [
+    "No application deployment or live app visual QA performed",
+    "Final visual QA covers nine requested samples, not every frame",
+    "Parent agent owns broader structural and tablet toggle validation",
+    "Below-fold clipping by the scroll viewport is intentional and distinct from clipping inside cards"
+  ]
+}
