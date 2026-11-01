@@ -65,7 +65,11 @@ export function Header({
               variant="ghost"
               className={styles.action}
             >
-              <ScopedLink href={action.href} aria-label={action.label}>
+              <ScopedLink
+                href={action.href}
+                aria-label={action.label}
+                title={action.label}
+              >
                 <DesignIcon name={action.icon} assetSet="header-34-20261016" />
               </ScopedLink>
             </Button>
@@ -74,7 +78,11 @@ export function Header({
             <FixtureHeaderActions assetSet={assetSet} />
           ) : (
             <Button asChild variant="ghost" className={styles.action}>
-              <Link href="/settings/personal" aria-label="Account settings">
+              <Link
+                href="/settings/personal"
+                aria-label="Account settings"
+                title="Account settings"
+              >
                 <DesignIcon name="profile" assetSet={assetSet} />
               </Link>
             </Button>

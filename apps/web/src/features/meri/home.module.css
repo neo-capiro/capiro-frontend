@@ -248,6 +248,28 @@
   flex-direction: column;
   gap: 12px;
   background: var(--card);
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--foreground) 5%, transparent);
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+.composer :global([data-slot="input-group"]):focus-within {
+  border-color: var(--muted-foreground);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+/* The surrounding composer carries focus without boxing in the text itself. */
+.composer :global([data-slot="input-group"]):has(.textarea:focus-visible) {
+  outline: 2px solid var(--muted-foreground);
+  outline-offset: 2px;
+}
+.composer .textarea:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .composer :global([data-slot="input-group"]) {
+    transition: none;
+  }
 }
 .composer :global([data-slot="input-group"] > div:first-child) {
   display: contents;
@@ -275,7 +297,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  width: calc(100% + 8px);
+  width: 100%;
   padding: 0;
   gap: 8px;
 }
