@@ -72,13 +72,15 @@ function CompactFit({
                   )}
                 </article>
               ))}
-              {result.matches.length === 0 && !result.emptyReason && (
-                <p>No matches available.</p>
-              )}
+              {result.matches.length === 0 &&
+                result.computedAt &&
+                !result.emptyReason && <p>No matches available.</p>}
             </div>
           )}
         </details>
-        {(preview.length > 0 || !result || !result.emptyReason) && (
+        {(preview.length > 0 ||
+          !result ||
+          (result.computedAt && !result.emptyReason)) && (
           <p className={styles.fitPreview}>
             {result?.status === "stale" && "Profile changed; refresh. "}
             {preview.length > 0
@@ -98,7 +100,9 @@ function CompactFit({
                   );
                 })
               : result
-                ? "No matches available."
+                ? result.computedAt
+                  ? "No matches available."
+                  : "Not computed yet."
                 : "Fit details unavailable."}
           </p>
         )}
@@ -177,9 +181,9 @@ function FullFit({
               )}
             </article>
           ))}
-          {result.matches.length === 0 && !result.emptyReason && (
-            <p>No matches available.</p>
-          )}
+          {result.matches.length === 0 &&
+            result.computedAt &&
+            !result.emptyReason && <p>No matches available.</p>}
         </>
       )}
     </section>

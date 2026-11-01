@@ -27,6 +27,10 @@ export function OpportunitiesPage({
   const opportunities = useMatchedOpportunities(clientId, page, query);
   const programs = useRelevantPrograms(clientId, programPage);
   const base = destinations.existingApp;
+  // `/program-elements` and `/intelligence/opportunities` live in the separate
+  // existing application. When the configured "existing app" is this app's own
+  // root, those routes 404 here, so only use the external base when one exists.
+  const externalBase = destinations.externalApp ?? base;
   function set(values: Record<string, string>) {
     const next = new URLSearchParams(params);
     for (const [key, value] of Object.entries(values)) {
@@ -91,8 +95,10 @@ export function OpportunitiesPage({
         <section className="card stack" aria-label="Available opportunities">
           <header className="row between">
             <h2>Opportunities</h2>
-            {base && result && (
-              <a href={opportunityLink(base, clientId)}>Open recommendations</a>
+            {externalBase && result && (
+              <a href={opportunityLink(externalBase, clientId)}>
+                Open recommendations
+              </a>
             )}
           </header>
           <form
@@ -125,7 +131,7 @@ export function OpportunitiesPage({
               <OpportunityResults
                 data={result}
                 clientId={clientId}
-                base={base}
+                base={externalBase}
               />
               <PageControls
                 page={page}
@@ -140,8 +146,8 @@ export function OpportunitiesPage({
         <section className="card stack" aria-label="Relevant budget programs">
           <header className="row between">
             <h2>Relevant budget programs</h2>
-            {base && programResult && (
-              <a href={`${base}/program-elements`}>Open budget</a>
+            {externalBase && programResult && (
+              <a href={`${externalBase}/program-elements`}>Open budget</a>
             )}
           </header>
           <QueryState
@@ -151,7 +157,7 @@ export function OpportunitiesPage({
           />
           {programResult && (
             <>
-              <RelevantPrograms data={programResult} base={base} />
+              <RelevantPrograms data={programResult} base={externalBase} />
               <PageControls
                 page={programPage}
                 rows={programResult.data.length}

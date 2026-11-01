@@ -90,6 +90,15 @@ export function TrackerMetricCards({
     version,
     boardReady,
   );
+  const hasMetrics = Boolean(view.material || view.coverage);
+  const metricsPending = view.materialPending || view.coveragePending;
+  if (boardReady && !metricsPending && !hasMetrics)
+    return (
+      <p className="status" role="status">
+        Tracker metrics are unavailable on this host. The metrics service is not
+        configured for this environment.
+      </p>
+    );
   return (
     <>
       <div role="group" aria-label="Material changes">
