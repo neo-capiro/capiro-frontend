@@ -7353,8 +7353,8 @@
     "file": "apps/web/src/features/meri/files/FederalSourceImporter.tsx",
     "kind": "function",
     "symbol": "FederalSourceImporter",
-    "fingerprint": "5ee1886a4ada0959225a4de867a3e859a61a077bc67f9cd75191cb843a90ec47",
-    "reason": "One retained-source import interaction coordinates selected source, explicit representation, immutable pending attempt, cancellation/recovery and result display. Canonical receiving and the port own trust and transport. Extracting the pending interaction would split its attempt and representation across state owners. Independently reviewed at 671daddd8b6257f8f3bc732b1aa39ea615a3d7a5 with exact Meri contract 1.5; focused import and recovery checks pass.",
+    "fingerprint": "3eb62eeeca2fe33fb4a2cb76f856c12f61a1c1bc40c81935eed5ba8b1c2fd4c2",
+    "reason": "One selected-source import interaction owns mode, immutable pending recovery identity, capture and syntax-receipt display for the same attempt. Canonical receiver and port retain trust and transport; the component gains no validation authority or second domain. Splitting this state would obscure the exact mode/profile recovered with the original delivery. Independently reviewed at 7780adeb44d76c65ca5d99fa20e5599e2cadfbc0 against exact generated Meri1.6; eight focused suites and types pass. Source admission does not qualify the runtime or deployment.",
     "reviewedBy": "Codex independent contract_review",
     "reviewedOn": "2026-11-01"
   },
