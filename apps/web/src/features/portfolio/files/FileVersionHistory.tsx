@@ -14,9 +14,11 @@ import type { FileHistoryPage, FileHistoryRequest } from "./history-contract";
 export function FileVersionHistory({
   clientId,
   attachmentId,
+  citedVersion,
 }: {
   clientId: string;
   attachmentId: string;
+  citedVersion?: { attachmentId: string; contentHash: string };
 }) {
   const api = useApi();
   const cache = useQueryClient();
@@ -46,6 +48,7 @@ export function FileVersionHistory({
         selected,
         kind,
         execution,
+        selected.id === citedVersion?.attachmentId ? citedVersion.contentHash : undefined,
       );
     },
   );
@@ -98,6 +101,7 @@ export function FileVersionHistory({
         access again. Issued links expire after five minutes.
       </p>
       <button
+        type="button"
         className="button"
         disabled={
           !scope.canRead || visible?.pending || Boolean(navigation.pendingId)
@@ -125,6 +129,9 @@ export function FileVersionHistory({
             {page.versions.map((item) => (
               <li key={item.attachmentId}>
                 <strong>{item.fileName}</strong>{" "}
+                {item.attachmentId === citedVersion?.attachmentId && (
+                  <strong>{item.contentHash === citedVersion.contentHash ? "Cited version · " : "Cited bytes changed · "}</strong>
+                )}
                 {item.isCurrent
                   ? "Current version"
                   : item.isOriginal
@@ -192,12 +199,12 @@ export function FileVersionHistory({
             ))}
           </ol>
           {page.hasMore && (
-            <button className="button" onClick={() => void load(true)}>
+            <button className="button" type="button" onClick={() => void load(true)}>
               Next versions
             </button>
           )}
           {page.offset > 0 && (
-            <button className="button" onClick={() => void load()}>
+            <button className="button" type="button" onClick={() => void load()}>
               First versions
             </button>
           )}

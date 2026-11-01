@@ -1,5 +1,10 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
+import {
+  questionEvidenceOperations,
+  questionEvidenceSelectionsSchema,
+  questionEvidenceSnapshotSchema,
+} from "./objective-question-evidence";
 
 const id = z.uuid();
 const version = z.number().int().min(1).max(2147483647);
@@ -25,6 +30,7 @@ export const questionCommandSchema = z.discriminatedUnion("action", [
       expectedVersion: version,
       answer: z.string().trim().min(1).max(8000),
       evidenceNote: z.string().trim().min(1).max(4000),
+      evidenceRefs: questionEvidenceSelectionsSchema.optional(),
     })
     .strict(),
   z.object({ ...common, action: z.literal("close"), expectedVersion: version }).strict(),
@@ -40,14 +46,22 @@ export const questionSchema = z
     evidenceNote: z.string().min(1).max(4000).nullable(),
     sourceObjectiveVersion: version,
     sourceRevisionId: id,
-    evidenceKind: z.literal("objective_context"),
+    evidenceKind: z.enum(["objective_context", "cited_sources"]),
+    evidenceRefs: z.array(questionEvidenceSnapshotSchema).max(8).optional(),
+    evidenceState: z.enum(["current", "stale", "unavailable"]).optional(),
     stale: z.boolean(),
   })
   .strict()
   .refine((row) =>
-    row.status === "open"
-      ? row.answer === null && row.evidenceNote === null
-      : row.answer !== null && row.evidenceNote !== null,
+    row.evidenceState === "unavailable"
+      ? row.evidenceKind === "cited_sources" &&
+        row.stale &&
+        row.answer === null &&
+        row.evidenceNote === null &&
+        row.evidenceRefs?.length === 0
+      : row.status === "open"
+        ? row.answer === null && row.evidenceNote === null
+        : row.answer !== null && row.evidenceNote !== null,
   );
 export const questionReceiptSchema = z
   .object({
@@ -55,6 +69,10 @@ export const questionReceiptSchema = z
     actorUserId: id,
     action: z.enum(["create", "answer", "close", "reopen"]),
     committedAt: z.iso.datetime(),
+    payloadDigest: z
+      .string()
+      .regex(/^[a-f0-9]{64}$/)
+      .optional(),
     question: questionSchema,
   })
   .strict();
@@ -70,9 +88,10 @@ export const questionListSchema = z
   })
   .strict();
 const source =
-  "Core ObjectiveQuestionsController / ObjectiveQuestionsService, objective-context evidence v1";
+  "Core ObjectiveQuestionsController / ObjectiveQuestionsService, Objective context and canonical source citations";
 const path = "/clients/:clientId/objectives/:objectiveId/questions";
 export const questionOperations = {
+  ...questionEvidenceOperations,
   "objectives.questions.list": defineOperation({
     service: "core",
     method: "GET",
@@ -126,10 +145,55 @@ export const questionOperations = {
 export type Question = z.infer<typeof questionSchema>;
 export type QuestionCommand = z.infer<typeof questionCommandSchema>;
 export type QuestionReceipt = z.infer<typeof questionReceiptSchema>;
+/** Match Core's normalized command property order, preserving absence of evidenceRefs. */
+export async function questionCommandPayloadDigest(input: QuestionCommand): Promise<string> {
+  const command = questionCommandSchema.parse(input);
+  const common = {
+    requestId: command.requestId.toLowerCase(),
+    questionId: command.questionId.toLowerCase(),
+    expectedVersion: command.expectedVersion,
+    expectedObjectiveVersion: command.expectedObjectiveVersion,
+  };
+  const normalized =
+    command.action === "create"
+      ? { ...common, action: command.action, title: command.title }
+      : command.action === "answer"
+        ? {
+            ...common,
+            action: command.action,
+            answer: command.answer,
+            evidenceNote: command.evidenceNote,
+            ...(command.evidenceRefs !== undefined
+              ? {
+                  evidenceRefs: command.evidenceRefs.map((ref) =>
+                    ref.kind === "document"
+                      ? {
+                          kind: ref.kind,
+                          attachmentId: ref.attachmentId.toLowerCase(),
+                          expectedDigest: ref.expectedDigest,
+                        }
+                      : {
+                          kind: ref.kind,
+                          articleId: ref.articleId,
+                          observationId: ref.observationId,
+                          expectedDigest: ref.expectedDigest,
+                        },
+                  ),
+                }
+              : {}),
+          }
+        : { ...common, action: command.action };
+  const hash = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(JSON.stringify(normalized)),
+  );
+  return Array.from(new Uint8Array(hash), (value) => value.toString(16).padStart(2, "0")).join("");
+}
 export function requireQuestionReceipt(
   value: unknown,
   command: QuestionCommand,
   actorUserId: string,
+  expectedPayloadDigest?: string,
 ): QuestionReceipt {
   const receipt = questionReceiptSchema.parse(value);
   if (
@@ -141,15 +205,29 @@ export function requireQuestionReceipt(
     receipt.question.sourceObjectiveVersion !== command.expectedObjectiveVersion
   )
     throw Error("The Question receipt does not match the original command.");
+  if (receipt.payloadDigest && receipt.payloadDigest !== expectedPayloadDigest)
+    throw Error("The Question receipt does not match the original payload.");
+  const redacted = receipt.question.evidenceState === "unavailable";
+  if (redacted && !receipt.payloadDigest)
+    throw Error("The redacted Question receipt has no original payload proof.");
   if (command.action === "create" && receipt.question.title !== command.title)
     throw Error("Question title mismatch.");
   if (
     command.action === "answer" &&
+    !redacted &&
     (receipt.question.answer !== command.answer ||
       receipt.question.evidenceNote !== command.evidenceNote ||
       receipt.question.sourceObjectiveVersion !== command.expectedObjectiveVersion)
   )
     throw Error("Question answer mismatch.");
+  if (
+    command.action === "answer" &&
+    !redacted &&
+    command.evidenceRefs !== undefined &&
+    JSON.stringify(receipt.question.evidenceRefs?.map((row) => row.selector) ?? []) !==
+      JSON.stringify(command.evidenceRefs)
+  )
+    throw Error("Question evidence mismatch.");
   if (
     receipt.question.status !==
     ({ create: "open", answer: "answered", close: "closed", reopen: "open" } as const)[

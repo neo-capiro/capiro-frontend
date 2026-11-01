@@ -57,6 +57,7 @@ export async function currentFileHistoryDestination(
   selected: Pick<Attachment, "id" | "source">,
   kind: FileNavigation,
   execution: FileExecution,
+  expectedContentHash?: string,
 ) {
   const result = await readFileHistory(
     api,
@@ -75,6 +76,8 @@ export async function currentFileHistoryDestination(
       404,
       "This version is no longer in the selected history page.",
     );
+  if (expectedContentHash !== undefined && item.contentHash !== expectedContentHash)
+    throw new ApiError(409, "The cited file bytes changed. Review the current source again.");
   if (!item.usable)
     throw new ApiError(
       409,

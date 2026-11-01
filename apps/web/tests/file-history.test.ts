@@ -423,3 +423,36 @@ describe("current native attachment history", () => {
     },
   );
 });
+
+it("cited original navigation pins original UUID and content hash, never the current head", async () => {
+  const { cache, execution } = fixture();
+  const api = createApiClient(async () => {
+    const value = page();
+    value.versions[0]!.downloadUrl = "https://synthetic.invalid/exact-original";
+    return Response.json(value);
+  });
+  const selected = { id: id(1), source: "upload" };
+  const result = await currentFileHistoryDestination(
+    api,
+    cache,
+    clientId,
+    first,
+    selected,
+    "download",
+    execution,
+    "a".repeat(64),
+  );
+  expect(result.url).toBe("https://synthetic.invalid/exact-original");
+  await expect(
+    currentFileHistoryDestination(
+      api,
+      cache,
+      clientId,
+      first,
+      selected,
+      "download",
+      execution,
+      "b".repeat(64),
+    ),
+  ).rejects.toThrow("cited file bytes changed");
+});

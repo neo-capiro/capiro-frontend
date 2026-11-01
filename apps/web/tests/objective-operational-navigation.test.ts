@@ -27,6 +27,13 @@ vi.mock("../src/shared/session/SelectedClient", () => ({
   }),
 }));
 vi.mock("../src/shared/capiro/queries", () => ({
+  useCapiroMutation: () => ({
+    pending: false,
+    run: vi.fn(() => {
+      throw new Error("Navigation must not start a Strategy watch mutation.");
+    }),
+    reset: vi.fn(),
+  }),
   useCapiroQuery: (
     key: string,
     input: unknown,

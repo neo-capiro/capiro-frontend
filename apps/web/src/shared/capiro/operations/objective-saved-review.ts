@@ -139,3 +139,71 @@ export const objectiveSavedReviewOperation = defineOperation({
   source:
     "Core StrategyService.objectiveSavedReview; receipt-bound immutable sp_version projection",
 });
+
+const citation = z.discriminatedUnion("state", [
+  z
+    .object({ index: z.number().int().min(0), state: z.literal("unavailable") })
+    .strict(),
+  z
+    .object({
+      index: z.number().int().min(0),
+      state: z.literal("changed"),
+      version: z.string().regex(/^[a-f0-9]{64}$/),
+    })
+    .strict(),
+  z
+    .object({
+      index: z.number().int().min(0),
+      state: z.literal("available"),
+      kind: z.enum(["context_fact", "governed_memory", "reference_calendar"]),
+      title: z.string().max(24000),
+      text: z.string().max(24000),
+      textComplete: z.boolean(),
+      locator: z.string().max(24000),
+      version: z.string().regex(/^[a-f0-9]{64}$/),
+      asOfMs: z.number().int().nonnegative(),
+    })
+    .strict(),
+]);
+export const objectiveSavedCitations = z
+  .object({
+    source,
+    nodes: z.array(
+      z
+        .object({ sourceNodeId: id, citations: z.array(citation).max(64) })
+        .strict(),
+    ),
+  })
+  .strict();
+export function requireSavedObjectiveCitations(
+  raw: unknown,
+  saved: z.infer<typeof objectiveSavedReview>,
+) {
+  const result = objectiveSavedCitations.parse(raw);
+  if (
+    Object.keys(saved.source).some(
+      (key) =>
+        result.source[key as keyof typeof result.source] !==
+        saved.source[key as keyof typeof saved.source],
+    ) ||
+    result.nodes.length !== saved.snapshot.nodes.length ||
+    new Set(result.nodes.map((n) => n.sourceNodeId)).size !==
+      result.nodes.length ||
+    result.nodes.some(
+      (n) =>
+        !saved.snapshot.nodes.some((s) => s.id === n.sourceNodeId) ||
+        n.citations.some((c, index) => c.index !== index),
+    )
+  )
+    throw new Error("Saved source selection changed.");
+  return result;
+}
+export const objectiveSavedCitationsOperation = defineOperation({
+  service: "strategy",
+  method: "GET",
+  path: "/strategies/:id/objective-saved-citations",
+  request: objectiveSavedReviewOperation.request,
+  response: objectiveSavedCitations,
+  source:
+    "Core original Strategy publication plus current authorized Objective source evidence",
+});
