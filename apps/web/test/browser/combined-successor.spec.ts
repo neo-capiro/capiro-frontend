@@ -324,10 +324,8 @@ test("unknown Meri input remains visible and scoped across all three bound desti
     .getByRole("button", { name: "Retry same request", exact: true })
     .click();
   await expect(
-    page
-      .getByRole("article", { name: "Current turn" })
-      .getByText("Completed", { exact: true }),
-  ).toBeVisible();
+    page.getByRole("article", { name: "Current turn" }),
+  ).toHaveAttribute("data-run-state", "completed");
   await expect.poll(() => requests).toEqual([requests[0], requests[0]]);
   exactQueries(f.queries);
   // Native list/transcript POSTs are reads and may run concurrently. Keep the strict command order.

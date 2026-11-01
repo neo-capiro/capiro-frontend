@@ -1,4 +1,5 @@
 import { Message, MessageContent } from "@capiro/ui/message";
+import { MarkdownContent } from "../../../shared/markdown/MarkdownContent";
 import { unavailableResources } from "../../../shared/meri-resources/unavailable";
 import { DesignIcon } from "../../../shared/shell/DesignIcon";
 import { UserMessage } from "../screens/conversation/UserMessage";
@@ -12,16 +13,20 @@ import answer from "../cited-answer.module.css";
 import styles from "./live.module.css";
 import { TurnFeedback } from "./feedback/TurnFeedback";
 
-const tones: Readonly<Record<TurnView["runState"], StatusTone>> = {
-  queued: "neutral",
-  starting: "neutral",
-  running: "neutral",
+/** Only a state that needs the person's attention earns a pill; a finished answer is its own signal. */
+const attentionTones: Readonly<
+  Partial<Record<TurnView["runState"], StatusTone>>
+> = {
   "waiting-for-approval": "warning",
   paused: "warning",
-  completed: "success",
   failed: "danger",
   cancelled: "warning",
 };
+const activeStates: ReadonlySet<TurnView["runState"]> = new Set([
+  "queued",
+  "starting",
+  "running",
+]);
 const time = (value: string) => {
   const date = new Date(value);
   return Number.isNaN(date.valueOf()) ? value : date.toLocaleString();
@@ -39,17 +44,21 @@ export function ConversationTurn({
   /** Resumed segments retain their output/status while their logical prompt is shown once. */
   showPrompt?: boolean;
 }) {
-  const working = turn.messages.length === 0 && turn.errors.length === 0;
+  const tone = attentionTones[turn.runState];
+  const silent =
+    isTerminal(turn.runState) &&
+    turn.messages.length === 0 &&
+    turn.errors.length === 0 &&
+    !turn.incompleteHistory;
   return (
-    <article className={styles.turn} aria-label={label}>
-      {showPrompt &&
-        (turn.prompt !== null ? (
-          <UserMessage>{turn.prompt}</UserMessage>
-        ) : (
-          <p className={styles.muted}>
-            The request text for this run was not returned by the service.
-          </p>
-        ))}
+    <article
+      className={styles.turn}
+      aria-label={label}
+      data-run-state={turn.runState}
+    >
+      {showPrompt && turn.prompt !== null && (
+        <UserMessage>{turn.prompt}</UserMessage>
+      )}
       <Message from="assistant" className={styles.message}>
         <MessageContent className={answer.answer}>
           <div className={styles.answerHeading}>
@@ -57,9 +66,17 @@ export function ConversationTurn({
               <DesignIcon name="assistant-sparkle" assetSet="cited-answer" />
               Meri
             </span>
-            <StatusPill tone={tones[turn.runState]}>
-              {runStateLabels[turn.runState]}
-            </StatusPill>
+            {tone ? (
+              <StatusPill tone={tone}>
+                {runStateLabels[turn.runState]}
+              </StatusPill>
+            ) : (
+              activeStates.has(turn.runState) && (
+                <span role="status" className={styles.working}>
+                  Meri is working…
+                </span>
+              )
+            )}
           </div>
           {turn.omittedPrefix && (
             <p className={styles.muted}>
@@ -72,44 +89,16 @@ export function ConversationTurn({
             </p>
           )}
           {turn.messages.map((message) => (
-            <p key={message.messageId} className={styles.text}>
-              {message.text}
-            </p>
+            <MarkdownContent key={message.messageId} source={message.text} />
           ))}
-          {working && !turn.incompleteHistory && (
+          {silent && (
             <p className={styles.muted}>
               {turn.runState === "completed"
                 ? "This run finished without a text answer."
-                : turn.runState === "failed" || turn.runState === "cancelled"
-                  ? "No answer was published for this run."
-                  : "Meri is working on this request."}
+                : "No answer was published for this run."}
             </p>
           )}
-          {turn.tools.length > 0 && (
-            <ul className={styles.tools} aria-label="Tool activity">
-              {turn.tools.map((tool) => (
-                <li key={tool.requestId}>
-                  {tool.name ?? "Tool"}
-                  {" · "}
-                  {tool.resultReference
-                    ? "Result recorded · outcome unavailable"
-                    : turn.omittedPrefix || turn.incompleteHistory
-                      ? "Result not in loaded updates"
-                      : isTerminal(turn.runState)
-                        ? "No result recorded"
-                        : "Awaiting result"}
-                </li>
-              ))}
-            </ul>
-          )}
-          {turn.browserReceipts.length > 0 && (
-            <ul className={styles.tools} aria-label="Browser activity">
-              {turn.browserReceipts.map((event) => (
-                <li key={event.eventId}>{browserReceiptText(event)}</li>
-              ))}
-            </ul>
-          )}
-          {(turn.sources.length > 0 || turn.nativeSources.length === 0) && (
+          {turn.sources.length > 0 && (
             <TurnSources
               sources={turn.sources}
               historyIncomplete={
@@ -125,20 +114,7 @@ export function ConversationTurn({
   );
 }
 
-/** What the browser itself reported. A receipt is an observation; it never states that an effect succeeded
- * beyond the receipt's own outcome field, and it links to nothing it cannot prove. */
-function browserReceiptText(event: TurnView["browserReceipts"][number]) {
-  const data = event.data;
-  if (data.kind === "browser.action")
-    return `${data.action} on ${data.urlHost} · ${
-      data.outcome === "ok" ? "browser reported ok" : "browser reported an error"
-    }`;
-  return `Browser download from ${data.urlHost} · ${data.mimeType}${
-    data.bytes === null ? "" : ` · ${data.bytes} bytes`
-  }`;
-}
-
-/** Approval requests, run errors and the service reason code published for the run. */
+/** Approval requests, run errors and the service reason code for a failed run. */
 function TurnNotices({ turn }: { turn: TurnView }) {
   const approvals = useIntentApprovalsEnabled();
   return (
@@ -172,7 +148,7 @@ function TurnNotices({ turn }: { turn: TurnView }) {
           </p>
         </Notice>
       ))}
-      {turn.reasonCode && turn.runState !== "completed" && (
+      {turn.reasonCode && turn.runState === "failed" && (
         <p className={styles.muted}>Service reason: {turn.reasonCode}</p>
       )}
     </>

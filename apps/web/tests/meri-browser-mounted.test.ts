@@ -17,7 +17,8 @@ import {
 import { installPlatform, db } from "./command-recovery-platform";
 
 vi.mock("../src/shared/session/recovery/journal-db", () => ({
-  readJournalRecord: async (scope: string) => structuredClone(db.records.get(scope)),
+  readJournalRecord: async (scope: string) =>
+    structuredClone(db.records.get(scope)),
   writeJournalRecord: async (scope: string, value: unknown) => {
     db.records.set(scope, structuredClone(value));
   },
@@ -102,7 +103,8 @@ const conversationId = browserConversationId;
 let state: State, tree: Element[], render: () => void;
 let events: EventTarget & { visibilityState: string };
 function text(value: ReactNode): string {
-  if (value === null || typeof value === "boolean" || value === undefined) return "";
+  if (value === null || typeof value === "boolean" || value === undefined)
+    return "";
   if (Array.isArray(value)) return value.map(text).join("");
   if (typeof value === "object" && "props" in value)
     return text((value as Element).props.children);
@@ -118,7 +120,9 @@ function visit(node: ReactNode): void {
   tree.push(el);
   if (
     typeof el.type === "function" &&
-    ["Body", "IntentCard", "DecisionControls", "FieldList"].includes(el.type.name)
+    ["Body", "Rows", "IntentCard", "DecisionControls", "FieldList"].includes(
+      el.type.name,
+    )
   ) {
     if (el.type.name === "Body") state = el.props as unknown as State;
     visit((el.type as (props: unknown) => ReactNode)(el.props));
@@ -215,7 +219,9 @@ async function mount(initial = browserFixture()) {
       scope = next;
       access = makeAccess();
       hooks.dirty = true;
-      await flush(() => state.decisionsReady || state.list.status === "unavailable");
+      await flush(
+        () => state.decisionsReady || state.list.status === "unavailable",
+      );
     },
   };
 }
@@ -241,11 +247,15 @@ it("records exactly one browser decision and shows awaiting execution, never suc
   await flush();
   button("Confirm approval").props.onClick!();
   await flush(
-    () => state.rows[0]?.status === "Approved · awaiting execution" && state.decisionsReady,
+    () =>
+      state.rows[0]?.status === "Approved · awaiting execution" &&
+      state.decisionsReady,
   );
-  expect(f.model.requests.filter((r) => r.route.endsWith("/decide")).map((r) => r.body)).toEqual([
-    browserDecision(f.model.item),
-  ]);
+  expect(
+    f.model.requests
+      .filter((r) => r.route.endsWith("/decide"))
+      .map((r) => r.body),
+  ).toEqual([browserDecision(f.model.item)]);
   expect(state.rows[0]?.status).toBe("Approved · awaiting execution");
   expect(state.rows[0]?.tone).toBe("neutral");
   expect(await journal(f.model.item).load()).toBeNull();
@@ -271,7 +281,9 @@ it("lost browser acknowledgement survives remount and Check without a second dec
   // A captured old callback cannot post again either: the saved decision is read, not resent.
   await state.decide(state.rows[0]!, "approved");
   await flush(() => state.decisionsReady);
-  expect(f.model.requests.filter((r) => r.route.endsWith("/decide"))).toHaveLength(1);
+  expect(
+    f.model.requests.filter((r) => r.route.endsWith("/decide")),
+  ).toHaveLength(1);
   expect(
     f.model.requests.filter((r) => /\/(consume|result)$/u.test(r.route)),
   ).toHaveLength(0);
@@ -281,19 +293,27 @@ it("lost browser acknowledgement survives remount and Check without a second dec
   await flush(() => Object.keys(state.attempts).length === 0);
   expect(state.rows[0]?.status).toBe("Approved · awaiting execution");
   expect(await journal(item).load()).toBeNull();
-  expect(f.model.requests.filter((r) => r.route.endsWith("/decide"))).toHaveLength(1);
+  expect(
+    f.model.requests.filter((r) => r.route.endsWith("/decide")),
+  ).toHaveLength(1);
 });
 
 it("an unavailable decision read stays uncertain instead of offering a fresh choice", async () => {
   const item = browserFixture(),
-    f = await mount({ ...item, decision: "unavailable", phase: "unknown_decision" } as BrowserItem);
+    f = await mount({
+      ...item,
+      decision: "unavailable",
+      phase: "unknown_decision",
+    } as BrowserItem);
   expect(state.rows[0]?.status).toBe("Decision unavailable");
   expect(control("Approve…")).toBeUndefined();
   const calls = f.model.requests.length;
   await state.refresh();
   await flush();
   expect(f.model.requests.length).toBeGreaterThan(calls);
-  expect(f.model.requests.filter((r) => r.route.endsWith("/decide"))).toHaveLength(0);
+  expect(
+    f.model.requests.filter((r) => r.route.endsWith("/decide")),
+  ).toHaveLength(0);
 });
 
 it("the shared expiry clock closes a browser approval at expiresAtMs and on tab return without IO", async () => {
@@ -325,5 +345,7 @@ it("a later actual observation replaces awaiting execution with the browser's ow
   f.model.item = browserExecuted(f.model.item, "error");
   await f.renew();
   expect(state.rows[0]?.status).toBe("Failed");
-  expect(f.model.requests.filter((r) => r.route.endsWith("/decide"))).toHaveLength(0);
+  expect(
+    f.model.requests.filter((r) => r.route.endsWith("/decide")),
+  ).toHaveLength(0);
 });

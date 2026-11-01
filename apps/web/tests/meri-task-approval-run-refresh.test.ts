@@ -238,10 +238,8 @@ function mountedTree(port: MeriConversationPort) {
       ComponentProps<typeof ConversationIntents>
     >;
     const intents = ConversationIntents(intent.props);
-    const section = intents.props.children[0] as ReactElement<{
-      children: ReactElement<Decisions>[];
-    }>;
-    decisions = section.props.children[1]!.props;
+    // The panel body receives the whole intents state as its props.
+    decisions = (intents.props.children[0] as ReactElement<Decisions>).props;
   };
 }
 async function mount(

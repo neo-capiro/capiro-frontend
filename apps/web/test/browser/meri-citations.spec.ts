@@ -6,6 +6,7 @@ import { tabTo, expectFocusEvidence } from "../accessibility-interaction";
 import {
   event,
   eventOf,
+  openEvidence,
   scopes,
   setupConversation,
   status,
@@ -32,6 +33,10 @@ const source = {
 };
 const answer =
   "[source](javascript:alert(1)) <script>alert(2)</script> https://untrusted.invalid/source";
+// Markdown renders the unsafe scheme as inert text and the raw tag as escaped text; only the https
+// URL becomes a link, and that link may never leak the referrer or keep the tab.
+const renderedAnswer =
+  "source <script>alert(2)</script> https://untrusted.invalid/source";
 const limitation =
   "Saved references do not confirm current access. No live links or excerpts are available.";
 const incomplete =
@@ -262,20 +267,25 @@ test("mobile references and failed tool results stay truthful and hostile answer
 }, info) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const { fixture } = await savedSources(page);
-  await expect(page.getByText(answer, { exact: true })).toBeVisible();
+  await expect(page.getByText(renderedAnswer, { exact: true })).toBeVisible();
   await expect(page.getByText(limitation, { exact: true })).toBeVisible();
   await capture(page, info, "saved-references-mobile-collapsed");
   await disclosure(page).click();
   await expectNeutralReferences(page);
-  await expect(page.getByRole("list", { name: "Tool activity" })).toContainText(
-    "Result recorded · outcome unavailable",
-  );
+  // Tool activity is audit material: it lives behind the closed details, not in the answer.
+  const activity = page.getByRole("list", { name: "Tool activity" });
+  await expect(activity).toBeHidden();
+  await openEvidence(page);
+  await expect(activity).toContainText("Result recorded · outcome unavailable");
+  await expect(activity).not.toContainText("Done");
+  await expect(page.locator('a[href^="javascript:"]')).toHaveCount(0);
   await expect(
-    page.getByRole("list", { name: "Tool activity" }),
-  ).not.toContainText("Done");
-  await expect(
-    page.locator('a[href*="untrusted.invalid"], a[href^="javascript:"]'),
+    page.getByRole("article", { name: "Current turn" }).locator("script"),
   ).toHaveCount(0);
+  const link = page.locator('a[href="https://untrusted.invalid/source"]');
+  await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  await expect(link).toHaveAttribute("target", "_blank");
+  await expect(link).toHaveAttribute("referrerpolicy", "no-referrer");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth > innerWidth,
@@ -305,7 +315,7 @@ test("existing conversation access denial removes expanded saved references", as
   ).toBeVisible();
   await expect(references(page)).toHaveCount(0);
   await expect(disclosure(page)).toHaveCount(0);
-  await expect(page.getByText(answer, { exact: true })).toHaveCount(0);
+  await expect(page.getByText(renderedAnswer, { exact: true })).toHaveCount(0);
   expect(fixture.unexpected).toEqual([]);
 });
 

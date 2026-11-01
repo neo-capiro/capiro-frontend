@@ -69,6 +69,7 @@ export type TurnView = Readonly<
     | "artifacts"
     | "errors"
     | "checkpointIds"
+    | "usageIds"
   >
 >;
 
@@ -113,7 +114,8 @@ export function turnFromEvents(
   // Every public native source event is kept out of the legacy UI fold, not just bill and hearing:
   // an unfamiliar native source must never be folded as if it were a legacy UI event.
   const legacy = events.filter(
-    (event): event is UIEvent => !isNativeSource(event) && !isBrowserReceipt(event),
+    (event): event is UIEvent =>
+      !isNativeSource(event) && !isBrowserReceipt(event),
   );
   const view = first ? buildWorkspaceView(legacy, first.binding) : undefined;
   return Object.freeze({
@@ -144,6 +146,7 @@ export function turnFromEvents(
     artifacts: view?.artifacts ?? [],
     errors: view?.errors ?? [],
     checkpointIds: view?.checkpointIds ?? [],
+    usageIds: view?.usageIds ?? [],
   });
 }
 

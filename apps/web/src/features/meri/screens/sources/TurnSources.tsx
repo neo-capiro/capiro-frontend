@@ -22,15 +22,8 @@ export function TurnSources({
   sources: readonly SourceEvidence[];
   historyIncomplete: boolean;
 }) {
-  if (sources.length === 0)
-    return (
-      <p className={styles.sourceAvailability}>
-        {historyIncomplete
-          ? "No source references in the loaded updates."
-          : "No source references were provided."}
-      </p>
-    );
-
+  // An answer without references is simply an answer; the absence needs no caption.
+  if (sources.length === 0) return null;
   return (
     <Sources className={styles.savedSources}>
       <SourcesTrigger

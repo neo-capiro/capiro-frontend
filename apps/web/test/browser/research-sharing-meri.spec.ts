@@ -217,9 +217,10 @@ test("a late Meri approval response cannot reveal an address in another conversa
     .getByRole("button", { name: "Switch synthetic conversation" })
     .click();
   fixture.release();
+  // The other conversation has nothing prepared, so no approvals panel is shown at all.
   await expect(
-    page.getByText("Meri has not prepared any actions", { exact: false }),
-  ).toBeVisible();
+    page.getByRole("heading", { name: "Actions for your approval" }),
+  ).toHaveCount(0);
   await expect(
     page.getByRole("region", { name: "Published client link" }),
   ).toHaveCount(0);

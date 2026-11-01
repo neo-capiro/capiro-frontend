@@ -12,12 +12,19 @@ import {
   binding,
   clientId,
   event,
+  eventOf,
   history,
+  openEvidence,
   reply,
   setupConversation,
   status,
   sse,
 } from "./meri-conversation-fixtures";
+/** Usage is offered only once the run announced a usage record. */
+const usageRecorded = (sequence: number) =>
+  eventOf(sequence, "usage.recorded", {
+    usageId: "b0000000-0000-4000-8000-00000000000b",
+  });
 const require = createRequire(import.meta.url);
 
 test("live native source event reaches the existing conversation viewer", async ({
@@ -44,6 +51,7 @@ test("live native source event reaches the existing conversation viewer", async 
   await page.goto(
     `/meri?clientId=${clientId}&conversationId=${binding.conversationId}`,
   );
+  await openEvidence(page);
   await page
     .getByRole("button", { name: "Open saved page" })
     .click({ timeout: 8000 });
@@ -72,7 +80,8 @@ async function openSavedRun(page: Page) {
         [
           event(1, "Synthetic answer with a saved native bill page."),
           nativeSource(),
-          status(3, "completed"),
+          usageRecorded(3),
+          status(4, "completed"),
         ],
         { state: "completed" },
       ),
@@ -87,6 +96,11 @@ async function openSavedRun(page: Page) {
   await page.goto(
     `/meri?clientId=${clientId}&conversationId=${binding.conversationId}`,
   );
+  // Audit material is closed until asked for; nothing about it sits in the answer.
+  await expect(
+    page.getByRole("button", { name: "Open saved page" }),
+  ).toBeHidden();
+  await openEvidence(page);
   await expect(
     page.getByRole("button", { name: "Open saved page" }),
   ).toBeVisible();
@@ -227,6 +241,7 @@ for (const width of [1440, 390])
       fullPage: true,
     });
     await page.reload();
+    await openEvidence(page);
     await page.getByRole("button", { name: "View recorded usage" }).click();
     await expect(
       page.getByText("Recorded SDK estimate: $0.1 USD", { exact: true }),
@@ -247,8 +262,13 @@ for (const width of [1440, 390])
     );
     await page.reload();
     await expect(
-      page.getByText("No source references were provided.", { exact: true }),
+      page.getByText("Synthetic answer without sources.", { exact: true }),
     ).toBeVisible();
+    // A run that saved nothing and recorded nothing has no details at all.
+    await expect(
+      page.getByText("No source references were provided.", { exact: true }),
+    ).toHaveCount(0);
+    await expect(page.getByText("Sources & usage")).toHaveCount(0);
     await expect(
       page.getByRole("button", { name: "Open saved page" }),
     ).toHaveCount(0);

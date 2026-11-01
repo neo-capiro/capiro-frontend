@@ -10,8 +10,9 @@ import type { IntentsItem } from "@capiro/meri-client/intents";
 import { conversationFiles } from "./intents/prepared-files";
 
 /**
- * The session-bound panels below the turns: actions prepared for approval (only when the deployment
- * enables approvals), then published files and authorized prepared drafts.
+ * The session-bound panels below the turns: the closed sources/usage details, actions prepared for
+ * approval (only when the deployment enables approvals and Meri prepared one), then published files
+ * and authorized prepared drafts.
  */
 export function ConversationPanels({
   port,
@@ -19,6 +20,7 @@ export function ConversationPanels({
   earlier,
   onDecisionSettled,
   browser,
+  details,
 }: {
   port: MeriConversationPort;
   turn: TurnView | null;
@@ -26,6 +28,8 @@ export function ConversationPanels({
   onDecisionSettled?: ((runId: string) => void) | undefined;
   /** Browser controls, mounted only for a browser task or an opened Tools panel. */
   browser?: ReactNode;
+  /** Extra audit material for the same details disclosure, e.g. a finished run's checkpoint. */
+  details?: ReactNode;
 }) {
   const approvals = useIntentApprovalsEnabled();
   const published = conversationArtifacts(turn ? [...earlier, turn] : earlier);
@@ -42,7 +46,9 @@ export function ConversationPanels({
         uploads={port.uploads}
         turn={turn}
         earlier={earlier}
-      />
+      >
+        {details}
+      </ConversationEvidence>
       {approvals ? (
         <ConversationIntents
           access={port.intents}

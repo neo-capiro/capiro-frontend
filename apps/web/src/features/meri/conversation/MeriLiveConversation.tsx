@@ -4,9 +4,6 @@ import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { UserMessage } from "../screens/conversation/UserMessage";
-import { Button } from "@capiro/ui/button";
-import { StatusPill } from "../ui/StatusPill";
-import ui from "../ui/meri-ui.module.css";
 import { ConversationPanels } from "./ConversationPanels";
 import { ConversationBody } from "./ConversationFrame";
 import {
@@ -30,7 +27,10 @@ import {
   useRunLifecycle,
   type LifecycleTarget,
 } from "./lifecycle/useRunLifecycle";
-import { RunLifecycleControls } from "./lifecycle/RunLifecycleControls";
+import {
+  CheckpointActions,
+  RunLifecycleControls,
+} from "./lifecycle/RunLifecycleControls";
 import { SelectedRequestReceipt } from "./SelectedRequestReceipt";
 import { ConnectedBrowserViewer } from "../browser/ConnectedBrowserViewer";
 import { DailyQuote } from "../quote/DailyQuote";
@@ -210,17 +210,11 @@ function CurrentRunStatus({
   retentionError,
   active,
   acceptedRequest,
-  savedCurrent,
-  readyForNext,
-  onCompose,
 }: {
   run: ReturnType<typeof useLiveRun>;
   retentionError: string | undefined;
   active: boolean;
   acceptedRequest: ConversationStoredRequest | undefined;
-  savedCurrent: TurnView | undefined;
-  readyForNext: boolean;
-  onCompose: () => void;
 }) {
   return (
     <>
@@ -233,27 +227,25 @@ function CurrentRunStatus({
         run={{ ...run, busy: run.busy || !!retentionError }}
         active={active}
         acceptedRequest={acceptedRequest}
-        savedCurrent={savedCurrent}
       />
-      {readyForNext && (
-        <section className={styles.stopCard} aria-label="Next message status">
-          <h3>Ready</h3>
-          <StatusPill tone="success">Complete</StatusPill>
-          <p role="status" className={styles.muted}>
-            You can send your next message.
-          </p>
-          <Button
-            type="button"
-            variant="outline"
-            className={ui.outline}
-            onClick={onCompose}
-          >
-            Write next message
-          </Button>
-        </section>
-      )}
     </>
   );
+}
+
+/**
+ * A finished run needs no announcement: the composer is already open. If nothing else holds focus,
+ * the cursor returns to it so the next message can be typed at once.
+ */
+function useComposerReturn(
+  ready: boolean,
+  textareaRef: RefObject<HTMLTextAreaElement | null>,
+) {
+  useEffect(() => {
+    if (!ready) return;
+    const focused = document.activeElement;
+    if (focused && focused !== document.body) return;
+    textareaRef.current?.focus({ preventScroll: true });
+  }, [ready, textareaRef]);
 }
 
 /** The session-bound run, with every turn already shown in this page above it. */
@@ -370,6 +362,18 @@ export function MeriLiveConversation({
   );
   const retentionError =
     storageError ?? initialDraft.error() ?? run.storageError;
+  useComposerReturn(
+    availability.readyForNext && !retentionError && !lifecycle.blocked,
+    textareaRef,
+  );
+  const controlsHeld =
+    run.busy ||
+    !!retentionError ||
+    snapshot.status !== "ready" ||
+    intent.submit?.state === "unknown" ||
+    intent.cancel === "unknown";
+  const checkpointId =
+    lifecycle.receipt?.checkpointId ?? turn?.checkpointIds.at(-1);
   // The rollout refusal closes Send but must never lock the selection controls, otherwise an applied
   // unsent quick action could not be cleared or switched. Recompute the same availability without it
   // (no string comparison): whatever still blocks is a genuine run/storage/access/pending lock.
@@ -470,22 +474,11 @@ export function MeriLiveConversation({
             retentionError={retentionError}
             active={active}
             acceptedRequest={acceptedRequest}
-            savedCurrent={savedCurrent}
-            readyForNext={
-              availability.readyForNext && !retentionError && !lifecycle.blocked
-            }
-            onCompose={() => textareaRef.current?.focus()}
           />
           <RunLifecycleControls
             lifecycle={lifecycle}
             turn={turn}
-            disabled={
-              run.busy ||
-              !!retentionError ||
-              snapshot.status !== "ready" ||
-              intent.submit?.state === "unknown" ||
-              intent.cancel === "unknown"
-            }
+            disabled={controlsHeld}
           />
         </>
       }
@@ -497,6 +490,15 @@ export function MeriLiveConversation({
           onDecisionSettled={(runId) => {
             if (runId === port.context.runId) run.refreshAfterDecision();
           }}
+          details={
+            finished && checkpointId ? (
+              <CheckpointActions
+                lifecycle={lifecycle}
+                checkpointId={checkpointId}
+                disabled={controlsHeld}
+              />
+            ) : undefined
+          }
           browser={
             browserMounted ? (
               <ConnectedBrowserViewer
