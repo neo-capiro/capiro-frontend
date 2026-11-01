@@ -73,7 +73,11 @@ export function ObjectiveReadyConfirmation({ session }: Props) {
         if (!mutation.isPending) setConfirming(value);
       }}
       title="Confirm objective ready"
-      description="Outcome, government problem, ask type and minimum win are complete."
+      description={
+        session.fields.strategyIntake
+          ? "Objective type, goal statement and owner are complete."
+          : "Outcome, government problem, ask type and minimum win are complete."
+      }
     >
       <p>
         This confirms the objective is ready. Editing it later reopens the

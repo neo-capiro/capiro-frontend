@@ -10,7 +10,7 @@ import {
   memberName,
 } from "@/features/portfolio/index/public";
 import { useObjectives } from "./queries";
-import { type Objective } from "./contracts";
+import { objectiveTitle, type Objective } from "./contracts";
 import { ObjectiveEditor } from "./ObjectiveEditor";
 import { ObjectiveList, ObjectiveStats } from "./ObjectiveList";
 import { NewObjectivePage } from "./NewObjectivePage";
@@ -98,6 +98,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
         key={clientId}
         clientId={clientId}
         onClose={() => navigate()}
+        onSaved={(objective) => navigate("objective", objective.id)}
       />
     );
   return (
@@ -172,7 +173,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
         title="Delete objective"
         description="The objective will be removed from current objectives; its audit history is retained."
       >
-        <p>{deleting?.outcome || "Untitled objective"}</p>
+        <p>{deleting ? objectiveTitle(deleting) : "Untitled objective"}</p>
         <QueryState error={remove.error} />
         <div className="formActions">
           <button

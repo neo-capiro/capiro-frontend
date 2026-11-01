@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import {
-  emptyFields,
   objectiveFieldsSchema,
   objectiveSchema,
   objectiveReadiness,
+  sameObjectiveFields,
   type Objective,
   type ObjectiveFields,
 } from "./contracts";
@@ -18,9 +18,7 @@ export interface ObjectiveExecution {
   guard: () => void;
   signal?: AbortSignal;
 }
-const fieldKeys = Object.keys(emptyFields) as (keyof ObjectiveFields)[];
-const sameFields = (left: ObjectiveFields, right: ObjectiveFields) =>
-  fieldKeys.every((key) => left[key] === right[key]);
+const sameFields = sameObjectiveFields;
 function assertClient(record: Objective, clientId: string) {
   if (record.clientId !== clientId)
     throw new ApiError(
@@ -50,7 +48,9 @@ export async function saveObjective(
   if (action !== "save" && !objectiveReadiness(parsed).isReady)
     throw new ApiError(
       400,
-      "Complete outcome, government problem, ask type and minimum win.",
+      parsed.strategyIntake
+        ? "Complete objective type, goal statement and owner."
+        : "Complete outcome, government problem, ask type and minimum win.",
     );
   const { record, requestId } = input;
   if (record) assertClient(record, clientId);
@@ -77,7 +77,9 @@ export async function saveObjective(
       sameFields(saved, parsed) &&
       (!record ||
         (saved.id === record.id &&
-          saved.ownerUserId === record.ownerUserId &&
+          (parsed.strategyIntake
+            ? Boolean(saved.ownerUserId || !parsed.strategyIntake.ownerUserId)
+            : saved.ownerUserId === record.ownerUserId) &&
           saved.version === record.version + (changed ? 1 : 0) &&
           (!changed || saved.status === "draft"))),
   );

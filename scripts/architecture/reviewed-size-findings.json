@@ -461,10 +461,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
     "kind": "function",
     "symbol": "ObjectiveEditor",
-    "fingerprint": "8503152b240eb022644d847a3b36ea51d7f6959a762c3758c5a6961a387f5a89",
-    "reason": "Dialog orchestrating the objective editing session: it composes the field, readiness and action controls and mounts the outreach, strategy-intake, governed-planner and work-destination sub-surfaces keyed by record id/version. Session state, mutation and validation are delegated to useObjectiveEditorSession. One responsibility (the objective editor shell) for the objectives owner.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "a433496a336af5ef1be65bef29b2df6610400e8bd8220c511998309600eade26",
+    "reason": "Independent design review at c746e399: this function composes one existing Objective editor lifetime. It delegates save/ready behavior to useObjectiveEditorSession and each governed downstream operation to its existing component; each operation receives the same saved revision and unsaved/pending disable state. The new shared intake changes field presentation while preserving the current guarded mutation owner and separate generation consent. The function does not implement any of the downstream workflows. Exact fingerprint only.",
+    "reviewedBy": "Codex independent reviewer /root/sdk_flow_map",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx",
@@ -755,10 +755,10 @@
     "file": "apps/web/src/features/portfolio/objectives/NewObjectivePage.tsx",
     "kind": "function",
     "symbol": "ObjectiveIntake",
-    "fingerprint": "1c90fcc45d3bd0484ebe51973e30d4617ce2a6f5640d8f64d0a5cf6c0bea8d38",
-    "reason": "ObjectiveIntake composes the one full-page draft presentation: back navigation, heading, fixed current-client identity, controlled form, explicit footer actions and the readiness rail. Its 82-line body is primarily that Figma hierarchy. Draft state and validation belong to useObjectiveEditorSession; fields belong to ObjectiveFields; feedback, actions and confirmation have shared presentation owners; mutation and receipt validation remain in the existing mutation/writer modules. Keeping the single form and its pending exit/action gates together avoids splitting one draft's submit lifecycle across layout fragments. No service transport, inferred context, autosave or independent persistence is added here.",
-    "reviewedBy": "Codex portfolio_objectives; Codex integration coordinator (independent confirmation)",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "cc381c5dbe81bb6c33931c589aa877330726f4b5243361af33dd5bc211ed8575",
+    "reason": "Independent design review at c746e399: this 82-line function presents one new Objective intake page for an already resolved client. Shared editor session owns persistence, shared fields own answers, and existing readiness/actions/feedback components own their displays. The function owns headings, layout, back/save affordances and the saved-record callback. Splitting that page composition solely at the threshold would fragment a single presentation without separating an independent responsibility. Exact fingerprint only.",
+    "reviewedBy": "Codex independent reviewer /root/sdk_flow_map",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx",
@@ -3438,10 +3438,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
     "kind": "function",
     "symbol": "ObjectivesPage",
-    "fingerprint": "96bff1a875a9b252a4cde3464fa8aa1f4be7ca4569ed816f70079d52a648c5ac",
-    "reason": "One client Objective page arbitrates list, create, operational and selected-editor URL states, plus a bounded delete confirmation. List, stats, editor, operational view and mutation hooks remain separate; no second Objective command implementation is introduced.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "155e7047d04c95132a02bf851e0b111e25b099f87ed07be833cae7a6824cb331",
+    "reason": "Independent design review at c746e399: this existing collection-page composition owns URL-based selection and modal visibility for one client Objective collection. Queries, editor persistence, deletion execution, operational work and list rendering remain delegated to their established owners. New intake changes only the post-save selection and correct goal display in deletion confirmation; it does not add another write/recovery controller. Keeping the mutually exclusive collection/create/operational branches together preserves one navigation owner. Exact fingerprint only; unrelated inherited architecture findings are not approved.",
+    "reviewedBy": "Codex independent reviewer /root/sdk_flow_map",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
@@ -6165,10 +6165,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveStrategyIntake.tsx",
     "kind": "function",
     "symbol": "ReadyStrategyIntake",
-    "fingerprint": "228caaeacaa823829fd87ab0e9e9eb9b3d869dcf3e3c9df2e3a9f79506a031f2",
-    "reason": "Private component rendering the Strategy-intake request control for a ready objective: strategy-type selection, the retained/started/recover states, and the bounded generation-job polling loop. It composes ObjectiveStrategyIntakeSession (view lifecycle only) and ObjectiveGenerationOutcome. One responsibility for the objectives strategy-intake owner; command identity stays in the session/recovery.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "ea42c8aaf9a9e196673ac715eaef01b12f603e8f98cfe660d0bdfb04207370c7",
+    "reason": "Independent design review at c746e399: this function presents and observes one existing durable Strategy intake session for a fixed actor/client/Objective revision. The session and recovery modules retain request IDs, consent, generation ownership and exact retries; this view only binds lifecycle subscription, bounded observation polling and user controls. Shared intake seeds and displays the persisted type while retained requests continue to override type for exact recovery. Keeping effect cleanup and display of this same session together is cohesive. No additional model loop or authorization owner is introduced. Exact fingerprint only.",
+    "reviewedBy": "Codex independent reviewer /root/sdk_flow_map",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
@@ -7689,9 +7689,9 @@
     "file": "apps/web/src/features/portfolio/objectives/operational/ObjectiveOperationalPage.tsx",
     "kind": "function",
     "symbol": "ObjectiveOperationalPage",
-    "fingerprint": "efa76f75e47fa1bf91538b9424cf8d33e059a88e8d96ed4852620e8542c8b75d",
-    "reason": "One Objective-scoped operational container composes independently owned linked-work, saved-generation and Questions views. Both added children receive the same current Objective; Questions retains current edit/loading hints and reload callback, while saved-generation discovery and Planner consent keep their own canonical read/action owners. Existing navigation, criteria, query errors and association dialog callbacks are preserved byte-for-byte. No mutation or alternate authority logic is added to this container. Exact conflict composition was checked independently against both accepted source deltas.",
-    "reviewedBy": "Independent Codex objective_questions agent; not root conflict-composition author",
+    "fingerprint": "8e24ea86ea397872c48d4c44d18f93ad8d444d0783e925a1fdf875525f165038",
+    "reason": "Independent design review at c746e399: this function composes one operational read view for the supplied Objective. The existing query owns read state and paging, and dedicated components own linked work, saved generation, questions, association editing and criteria. Local state only controls the association dialog and return focus; the title now displays the saved intake goal. The function remains a presentation and action-availability composition, not a new workflow controller. Exact fingerprint only.",
+    "reviewedBy": "Codex independent reviewer /root/sdk_flow_map",
     "reviewedOn": "2026-11-01"
   },
   {
@@ -7806,6 +7806,33 @@
     "disposition": "APPROVE_EXACT_RESPONSIBILITY",
     "reason": "The 86-line legacy-count describe callback groups five cohesive rendered cases: single/plural/no-legacy, independently paginated records and a matching session ID. It is declarative regression coverage for one hint/count boundary, not product control flow. Keeping these cases together is justified; the exact fingerprint is approved without a blanket test exemption.",
     "reviewedBy": "Independent reviewer /root/legislative_review",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/StrategyCreate.tsx",
+    "kind": "function",
+    "symbol": "StrategyCreate",
+    "fingerprint": "01aef42d65c38f6f4edc7b0f594b615593da95f24c145f654fcaad25f7af8c98",
+    "reason": "Independent design review at c746e399: one modal owns client selection and the explicit discard/leave decision. The current client keeps the same keyed StrategySetup until confirmation; pending state disables client replacement. Client fetching and scope invalidation use the existing query owner, and all editing/persistence remains in StrategySetup and Objective owners. The second modal is part of the same abandonment decision, not a separate business workflow. Keeping this state and its two render branches together makes loss-of-input behavior visible. Exact fingerprint only; no general size waiver.",
+    "reviewedBy": "Codex independent reviewer /root/sdk_flow_map",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/StrategyCreate.tsx",
+    "kind": "function",
+    "symbol": "StrategySetup",
+    "fingerprint": "c111016c93bee92f905084532af71f1c06143f73654f85bc5ae453e2613ff3e3",
+    "reason": "Independent design review at c746e399: one selected-client setup composes the shared controlled intake, existing Objective save/review/ready session, and explicit empty-timeline alternative. It delegates durable Objective writes and identity/cancellation guards; empty creation uses the existing single-mutation owner. The form has one submit path and reports pending state to the enclosing client-selection owner. Its length is mainly the two mutually exclusive presentations of this one setup operation. No new persistence, authorization or generation owner is introduced. Exact fingerprint only.",
+    "reviewedBy": "Codex independent reviewer /root/sdk_flow_map",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/shared/strategy-intake/StrategyIntakeFields.tsx",
+    "kind": "function",
+    "symbol": "StrategyIntakeFields",
+    "fingerprint": "56997f05e64347a42f4e7c1a98da763c20c7ecb89704984f8284ffd2f5fb3849",
+    "reason": "Independent design review at c746e399: this controlled component owns the five shared intake questions and their labels, limits and owner choices. Values and constants come from the public shared contract; updates return a complete draft to the enclosing editor. The existing query owner supplies current Clerk-ID choices and explicit retry, while Core remains responsible for active membership and native-owner resolution. The component has no persistence or generation side effects. The repeated label/control markup is one form responsibility and does not warrant artificial splitting. Exact fingerprint only.",
+    "reviewedBy": "Codex independent reviewer /root/sdk_flow_map",
     "reviewedOn": "2026-11-01"
   }
 ]

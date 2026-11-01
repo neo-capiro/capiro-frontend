@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { strategyIntakeSchema } from "./strategy-intake";
 
 export const askTypes = {
   funding: "Funding",
@@ -27,4 +28,5 @@ export const objectiveFieldsSchema = z.object({
     .nullable(),
   minimumWin: z.string().trim().max(2000),
   limits: z.string().trim().max(4000),
+  strategyIntake: strategyIntakeSchema.optional(),
 });

@@ -1,4 +1,5 @@
 "use client";
+import { objectiveTitle } from "../contracts";
 import { lazy, Suspense, useRef, useState } from "react";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import Image from "next/image";
@@ -66,6 +67,32 @@ function Overview({
 }
 
 function SuccessCriteria({ objective }: { objective: Objective }) {
+  if (objective.strategyIntake)
+    return (
+      <section className={styles.panel} aria-label="Saved Strategy intake">
+        <header className={styles.panelHead}>
+          <h2>Saved Strategy intake</h2>
+        </header>
+        <dl className={styles.criteria}>
+          <div>
+            <dt>Goal statement</dt>
+            <dd>{objective.strategyIntake.goal || "Not provided"}</dd>
+          </div>
+          <div>
+            <dt>Objective type</dt>
+            <dd>{objective.strategyIntake.type || "Not selected"}</dd>
+          </div>
+          <div>
+            <dt>Target outcome date</dt>
+            <dd>{objective.strategyIntake.targetDate || "Not provided"}</dd>
+          </div>
+          <div>
+            <dt>Context for Meri</dt>
+            <dd>{objective.strategyIntake.meriContext || "Not provided"}</dd>
+          </div>
+        </dl>
+      </section>
+    );
   return (
     <section className={styles.panel} aria-label="Success criteria and limits">
       <header className={styles.panelHead}>
@@ -74,7 +101,7 @@ function SuccessCriteria({ objective }: { objective: Objective }) {
       <dl className={styles.criteria}>
         <div>
           <dt>Outcome</dt>
-          <dd>{objective.outcome || "Not defined"}</dd>
+          <dd>{objectiveTitle(objective)}</dd>
         </div>
         <div>
           <dt>Minimum win</dt>
@@ -124,8 +151,8 @@ function LinkedWork({
       <OperationalWorkSections {...panels} />
       <OperationalEngagementSection {...panels} />
       <p className={styles.caption}>
-        Linked work and saved generation are separate observations. Opening
-        this page does not start or continue generation.
+        Linked work and saved generation are separate observations. Opening this
+        page does not start or continue generation.
       </p>
     </>
   );
@@ -168,7 +195,7 @@ export function ObjectiveOperationalPage({
       </button>
       <header className={styles.heading}>
         <div>
-          <h1>{objective.outcome || "Untitled objective"}</h1>
+          <h1>{objectiveTitle(objective)}</h1>
           <p className={styles.caption}>
             {statusLabels[objective.status]} · Current Objective v
             {objective.version}
