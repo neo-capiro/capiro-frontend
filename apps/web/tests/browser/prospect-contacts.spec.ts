@@ -96,7 +96,7 @@ test("create validates, preserves failed draft and retries with the same request
     path: "work/prospect-contacts/create-drawer-desktop.png",
   });
   await drawer
-    .getByRole("button", { name: "Save contact", exact: true })
+    .getByRole("button", { name: "Retry original save", exact: true })
     .click();
   await expect(drawer).not.toBeVisible();
   await expect(card.getByRole("button", { name: /Priya Nair/ })).toBeVisible();
@@ -281,7 +281,21 @@ test("read-only lifecycle and lower role prevent edits; phone dark drawer stays 
   await expect(card.getByText(/Archived or converted prospect/)).toBeVisible();
   await expect(
     card.getByRole("button", { name: "+ Add", exact: true }),
-  ).toBeDisabled();
+  ).toHaveCount(0);
+  await card
+    .getByRole("button", { name: "Recover contact creation", exact: true })
+    .click();
+  const recovery = page.getByRole("dialog", { name: "Add prospect contact" });
+  await expect(
+    recovery.getByText("No saved contact creation needs recovery."),
+  ).toBeVisible();
+  await expect(
+    recovery.getByRole("button", { name: "Save contact", exact: true }),
+  ).toHaveCount(0);
+  await expect(recovery.getByLabel("Name *", { exact: true })).toBeDisabled();
+  await recovery
+    .getByRole("button", { name: "Close contact", exact: true })
+    .click();
   role = "client_portal_user";
   readOnly = false;
   await page.reload();

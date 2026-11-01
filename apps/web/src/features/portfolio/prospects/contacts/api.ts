@@ -49,6 +49,7 @@ export function saveContact(
   input: ContactInput,
   requestId: string,
   initial?: ProspectContact,
+  signal?: AbortSignal,
 ) {
   const receipt = contactSchema.refine(
     (row) =>
@@ -63,6 +64,7 @@ export function saveContact(
     receipt,
     {
       method: initial ? "PATCH" : "POST",
+      signal,
       body: {
         ...contactBody(input),
         ...(initial ? { expectedVersion: initial.version } : { requestId }),

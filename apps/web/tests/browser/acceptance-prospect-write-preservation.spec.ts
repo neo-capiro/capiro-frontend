@@ -115,7 +115,7 @@ test("pending contact creation survives denied current read and retains the same
   );
   expect(bodies).toHaveLength(1);
   await editor
-    .getByRole("button", { name: "Save contact", exact: true })
+    .getByRole("button", { name: "Retry original save", exact: true })
     .click();
   await expect(editor).toHaveCount(0);
   await expect(

@@ -45,10 +45,10 @@ export function ProspectContacts({ prospectId }: { prospectId: string }) {
         <h2>Contacts</h2>
         <button
           className={`button ${styles.add}`}
-          disabled={!editable}
+          disabled={!roleAllowed || !available}
           onClick={(event) => open(event.currentTarget)}
         >
-          + Add
+          {current?.readOnly ? "Recover contact creation" : "+ Add"}
         </button>
       </header>
       <div className={styles.states}>
