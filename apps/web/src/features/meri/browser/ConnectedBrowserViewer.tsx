@@ -10,6 +10,8 @@ import { BrowserViewerHost } from "../../../shared/meri-browser/host-controller"
 import type { BrowserResumeTarget } from "../../../shared/meri-browser/resume";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
 import { BrowserViewer } from "./BrowserViewer";
+import ui from "../ui/meri-ui.module.css";
+import styles from "../conversation/live.module.css";
 
 /** Keyed by the native account and exact selected run; independent of the chat stream's credential. */
 export function ConnectedBrowserViewer(props: {
@@ -54,7 +56,7 @@ export function ConnectedBrowserViewer(props: {
   if (state.status === "ready")
     return <BrowserViewer controller={state.port} />;
   return (
-    <details>
+    <details className={styles.runControls}>
       <summary>Browser control</summary>
       <p role="status">
         {state.status === "connecting"
@@ -63,7 +65,7 @@ export function ConnectedBrowserViewer(props: {
       </p>
       <Button
         type="button"
-        variant="outline"
+        className={ui.outline}
         disabled={state.status === "connecting"}
         onClick={() => void host.connect()}
       >

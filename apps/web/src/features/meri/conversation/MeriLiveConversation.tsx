@@ -274,7 +274,6 @@ export function MeriLiveConversation({
   newIntentBlocked,
   onLifecycleTarget,
   onBrowserTarget,
-  browserAllowed = false,
   historyUnavailable = false,
 }: {
   port: MeriConversationPort;
@@ -305,8 +304,6 @@ export function MeriLiveConversation({
   onLifecycleTarget: (target: LifecycleTarget) => void;
   /** Opens a browser resume/observation target from this run; lifecycle routing is the default. */
   onBrowserTarget?: ((target: LifecycleTarget) => void) | undefined;
-  /** The tools panel was opened: browser controls become available for this run. */
-  browserAllowed?: boolean;
   /** The saved-history read failed: an empty-looking hero must not stand in for that failure. */
   historyUnavailable?: boolean;
 }) {
@@ -339,14 +336,16 @@ export function MeriLiveConversation({
   const turn = currentTurnView(observed, savedCurrent);
   const finished = isTerminal(turn?.runState);
   const active = !!turn && !finished;
-  // Browser controls appear for an actual browser task or when the user opens Tools, and once
-  // mounted they stay mounted: toggling the panel never disposes or recreates a live session.
-  const [browserMounted, setBrowserMounted] = useState(false);
+  // Browser controls belong to a run that used the browser: an admitted receipt, or this run's
+  // applied request naming a website task. The composer's pending selection is not a run. Once
+  // mounted for a run they stay mounted for that run, so a live session is never recreated.
+  const applied = snapshot.acceptedRequest ?? acceptedRequest;
+  const [browserRunId, setBrowserRunId] = useState<string>();
   if (
-    !browserMounted &&
-    (browserAllowed || (turn?.browserReceipts.length ?? 0) > 0)
+    browserRunId !== port.context.runId &&
+    ((turn?.browserReceipts.length ?? 0) > 0 || !!applied?.siteWorkflow)
   )
-    setBrowserMounted(true);
+    setBrowserRunId(port.context.runId);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
   useSettledRefresh(finished, onSettled);
   const availability = composerAvailability(
@@ -462,10 +461,7 @@ export function MeriLiveConversation({
       }
       status={
         <>
-          <SelectedRequestReceipt
-            request={snapshot.acceptedRequest ?? acceptedRequest}
-            scope={scope}
-          />
+          <SelectedRequestReceipt request={applied} scope={scope} />
           <CurrentRunStatus
             run={{
               ...run,
@@ -500,7 +496,7 @@ export function MeriLiveConversation({
             ) : undefined
           }
           browser={
-            browserMounted ? (
+            browserRunId === port.context.runId ? (
               <ConnectedBrowserViewer
                 key={port.context.runId}
                 account={{

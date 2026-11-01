@@ -74,6 +74,22 @@ describe("a finished answer reads like a chat", () => {
     expect(html).not.toContain("No source references");
   });
 
+  it("renders a table and a code block at their full height, never inside a capped box", () => {
+    const html = render(
+      turn("completed", {
+        messages: [
+          {
+            messageId: "synthetic-table",
+            text: "| A | B |\n| --- | --- |\n| 1 | 2 |\n\n```ts\nconst x = 1;\n```\n\nAfter.",
+          },
+        ],
+      }),
+    );
+    expect(html).toContain("<table");
+    expect(html).toContain("<pre");
+    expect(html).not.toContain("max-height");
+  });
+
   it("keeps a pill only for states that need attention and a quiet indicator while running", () => {
     expect(render(turn("failed"))).toContain(
       'data-tone="danger">Failed</span>',
@@ -204,7 +220,10 @@ describe("run controls appear only while there is something to control or recove
         disabled: false,
       }),
     );
-    expect(html).toContain("Inspect latest checkpoint");
+    // The inspection entry is a quiet text link inside the details, not the shared button.
+    expect(html).toMatch(
+      /<button type="button" class="[^"]*textLink[^"]*"[^>]*>Inspect latest checkpoint<\/button>/,
+    );
     expect(html).toContain("Fork into new chat");
     expect(html).not.toContain(">Resume</button>");
   });
