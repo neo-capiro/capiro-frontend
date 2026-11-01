@@ -7353,19 +7353,19 @@
     "file": "apps/web/src/features/meri/files/FederalSourceImporter.tsx",
     "kind": "function",
     "symbol": "FederalSourceImporter",
-    "fingerprint": "956f66a0caba50582fc86d0dcf527d5a8e85f592320e382aa8dec4ec9eec28da",
-    "reason": "Author structural assessment in docs/federal-workbench.md: Citation page selection and pending-import presentation form one mounted lifetime. Existing history, public contracts, delivery journal and Core authority remain their owners; the component reports pending selection to the parent review lifetime. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "5ee1886a4ada0959225a4de867a3e859a61a077bc67f9cd75191cb843a90ec47",
+    "reason": "One retained-source import interaction coordinates selected source, explicit representation, immutable pending attempt, cancellation/recovery and result display. Canonical receiving and the port own trust and transport. Extracting the pending interaction would split its attempt and representation across state owners. Independently reviewed at 671daddd8b6257f8f3bc732b1aa39ea615a3d7a5 with exact Meri contract 1.5; focused import and recovery checks pass.",
+    "reviewedBy": "Codex independent contract_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/shared/meri-documents/federal-workbench.ts",
     "kind": "function",
     "symbol": "deliver",
     "fingerprint": "25f43484405d6f0162481afad3c9549e5fec39b8923a01a4603834c6bb456faa",
-    "reason": "Author structural assessment in docs/federal-workbench.md: The former publish-only transaction is replaced by one import/export delivery method using the existing shared journal, immutable input fingerprint, original delivery ID and definite/uncertain response classification. Busy reservation covers hashing; source selection and review content never enter another ledger. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "reason": "One delivery state machine owns canonical request validation, complete input fingerprint, attempt ID, uncertain-result recovery, lifetime/currentness checks and journal settlement. Independent source review and raw-mode recovery checks at 671daddd8b6257f8f3bc732b1aa39ea615a3d7a5 cover representation as part of the existing delivery identity. Splitting this owner would obscure its single attempt and settlement order; this exact function fingerprint is unchanged.",
+    "reviewedBy": "Codex independent contract_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/CampaignDrafts.tsx",
