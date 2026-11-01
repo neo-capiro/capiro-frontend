@@ -1,0 +1,2903 @@
+{
+  "fileKey": "IXJzJUkXcUTkySHir5JNea",
+  "date": "2026-11-01",
+  "scope": "320 unique coverage references; includes retained, new and explicitly qualified legacy states. Not 320 newly created screens.",
+  "reviewIndex": {
+    "nodeId": "3244:78203",
+    "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3244-78203"
+  },
+  "frames": [
+    {
+      "nodeId": "3219:58547",
+      "title": "17.01 · Connecting to Meri",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-58547",
+      "groups": [
+        "01"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:58759",
+      "title": "17.02 · Access check pending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-58759",
+      "groups": [
+        "01"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:58968",
+      "title": "17.03 · Access removed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-58968",
+      "groups": [
+        "01"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:59173",
+      "title": "17.04 · First message · Sending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-59173",
+      "groups": [
+        "01"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:59380",
+      "title": "17.05 · First message · Accepted",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-59380",
+      "groups": [
+        "01"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:59582",
+      "title": "17.06 · First message · Delivery uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-59582",
+      "groups": [
+        "01",
+        "02"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:59791",
+      "title": "17.07 · First message · Checking original",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-59791",
+      "groups": [
+        "01"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:59998",
+      "title": "17.08 · Recovery · Retry unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-59998",
+      "groups": [
+        "01",
+        "02"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:60206",
+      "title": "17.09 · History · Loading older messages",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-60206",
+      "groups": [
+        "01"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:60417",
+      "title": "17.10 · History · Older messages unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-60417",
+      "groups": [
+        "01"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:65294",
+      "title": "17.33 · Conversation · Account changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-65294",
+      "groups": [
+        "01"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:65499",
+      "title": "17.34 · Answer · Long response and table",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-65499",
+      "groups": [
+        "01"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:144075",
+      "title": "01.01 · Home · Chat-first",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144075",
+      "groups": [
+        "01"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:144239",
+      "title": "01.02 · Conversation · Chat-first",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144239",
+      "groups": [
+        "01"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:144332",
+      "title": "01.03 · Choose client and data scope",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144332",
+      "groups": [
+        "01"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:144425",
+      "title": "01.04 · Conversation history",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144425",
+      "groups": [
+        "01"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:143196",
+      "title": "Meri · Conversation · Phone 390 · Chat-first",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-143196",
+      "groups": [
+        "01"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:148697",
+      "title": "Home · Dark appearance preview · Local only",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148697",
+      "groups": [
+        "01"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "1064:148902",
+      "title": "10.04 · Mobile home",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-148902",
+      "groups": [
+        "01"
+      ],
+      "evidence": "updated_or_new_responsive_state"
+    },
+    {
+      "nodeId": "1064:148941",
+      "title": "10.05 · Mobile conversation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-148941",
+      "groups": [
+        "01"
+      ],
+      "evidence": "updated_or_new_responsive_state"
+    },
+    {
+      "nodeId": "1064:149061",
+      "title": "10.08 · Mobile navigation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-149061",
+      "groups": [
+        "01"
+      ],
+      "evidence": "updated_or_new_responsive_state"
+    },
+    {
+      "nodeId": "1064:148772",
+      "title": "10.02 · Tablet conversation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-148772",
+      "groups": [
+        "01"
+      ],
+      "evidence": "updated_or_new_responsive_state"
+    },
+    {
+      "nodeId": "3237:77050",
+      "title": "17.34 · Conversation · Sidebar collapsed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3237-77050",
+      "groups": [
+        "01"
+      ],
+      "evidence": "updated_or_new_responsive_state"
+    },
+    {
+      "nodeId": "3237:77473",
+      "title": "17.31 · First message · Delivery uncertain · Phone 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3237-77473",
+      "groups": [
+        "01"
+      ],
+      "evidence": "updated_or_new_responsive_state"
+    },
+    {
+      "nodeId": "3219:60630",
+      "title": "17.11 · Answer · Sources and usage",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-60630",
+      "groups": [
+        "02"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:60847",
+      "title": "17.12 · Answer · Usage unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-60847",
+      "groups": [
+        "02"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:61060",
+      "title": "17.13 · Answer · Partial source access",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-61060",
+      "groups": [
+        "02"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:61277",
+      "title": "17.14 · Answer · Feedback saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-61277",
+      "groups": [
+        "02"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:61480",
+      "title": "17.15 · Answer · Feedback not saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-61480",
+      "groups": [
+        "02"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:75327",
+      "title": "17.51 · Recorded usage",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-75327",
+      "groups": [
+        "02",
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:75531",
+      "title": "17.52 · Some usage is not available",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-75531",
+      "groups": [
+        "02",
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:75741",
+      "title": "17.53 · Usage may be out of date",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-75741",
+      "groups": [
+        "02",
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:146948",
+      "title": "05.03 · Freshness, partial and historical results",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146948",
+      "groups": [
+        "02"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3237:77616",
+      "title": "17.32 · Answer · Sources and usage · Phone 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3237-77616",
+      "groups": [
+        "02"
+      ],
+      "evidence": "updated_or_new_responsive_state"
+    },
+    {
+      "nodeId": "3219:62762",
+      "title": "17.21 · Tools · Selection changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-62762",
+      "groups": [
+        "03",
+        "06"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:62986",
+      "title": "17.22 · Message · Limit refusal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-62986",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:63194",
+      "title": "17.23 · Message · Capacity unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-63194",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:65075",
+      "title": "17.32 · Tools · Model catalog unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-65075",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3022:29587",
+      "title": "09.01 · Personal defaults · Current contract",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-29587",
+      "groups": [
+        "03"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3022:30398",
+      "title": "09.03 · Usage and limits · Unknown accounting",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-30398",
+      "groups": [
+        "03"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3218:49212",
+      "title": "19.17 · Personal defaults · Model catalog unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3218-49212",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3218:49454",
+      "title": "19.18 · Personal defaults · Revision conflict",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3218-49454",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3218:49665",
+      "title": "19.19 · Personal defaults · Unknown or withheld save",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3218-49665",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3218:49884",
+      "title": "19.20 · Workspace model limits · Administrator",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3218-49884",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:68277",
+      "title": "19.26 · Personal defaults · Save accepted awaiting readback",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-68277",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:68477",
+      "title": "19.27 · Personal defaults · Access changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-68477",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:68676",
+      "title": "19.28 · Workspace model limits · Save uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-68676",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:68878",
+      "title": "19.29 · Workspace model limits · Administrator required",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-68878",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:69077",
+      "title": "19.30 · Usage · Complete zero accounting",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-69077",
+      "groups": [
+        "03"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:61689",
+      "title": "17.16 · Question · Answer required",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-61689",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:61918",
+      "title": "17.17 · Question · Submitting answer",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-61918",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:62124",
+      "title": "17.18 · Question · Canceled",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-62124",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3224:68756",
+      "title": "17.35 · Question · Client leadership selected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-68756",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3224:68946",
+      "title": "17.37 · Question · Internal account team selected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-68946",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3224:69136",
+      "title": "17.38 · Question · Submitting Internal account team",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-69136",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3224:69311",
+      "title": "17.39 · Question · Meeting participants selected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-69311",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3224:69501",
+      "title": "17.40 · Question · Submitting Meeting participants",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-69501",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3224:69676",
+      "title": "17.41 · Question · Custom answer entered",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-69676",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3224:69866",
+      "title": "17.42 · Question · Submitting Board and leadership team",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-69866",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:147397",
+      "title": "06.01 · Conversation · Proposed action review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147397",
+      "groups": [
+        "04"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3032:30415",
+      "title": "10.20 · Phone · Contextual action review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-30415",
+      "groups": [
+        "04"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3032:31529",
+      "title": "10.25 · Tablet · Contextual action review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-31529",
+      "groups": [
+        "04"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "1064:149028",
+      "title": "10.07 · Phone · Exact task review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149028",
+      "groups": [
+        "04"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3219:53115",
+      "title": "06.09 · Governed action · Submitting exact decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-53115",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:53311",
+      "title": "06.10 · Governed action · Unknown outcome",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-53311",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:147820",
+      "title": "06.06 · Governed action · Recorded execution",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147820",
+      "groups": [
+        "04"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3219:53716",
+      "title": "06.11 · Governed action · Stale or expired proposal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-53716",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:53918",
+      "title": "06.12 · Governed action · Authority lost",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-53918",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:54108",
+      "title": "06.13 · Governed save note · Direct receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-54108",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:54469",
+      "title": "06.14 · Governed action · Exact proposal acknowledged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-54469",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3163:42177",
+      "title": "01.02A · Conversation · Approval required",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3163-42177",
+      "groups": [
+        "04"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3243:78175",
+      "title": "Phone · Governed action · Exact proposal acknowledged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78175",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:78307",
+      "title": "Tablet · Governed action · Exact proposal acknowledged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78307",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3246:78899",
+      "title": "Phone · Governed action · Submitting exact decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78899",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3246:79022",
+      "title": "Tablet · Governed action · Submitting exact decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-79022",
+      "groups": [
+        "04"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3237:77767",
+      "title": "17.33 · SDK question · Phone 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3237-77767",
+      "groups": [
+        "04"
+      ],
+      "evidence": "updated_or_new_responsive_state"
+    },
+    {
+      "nodeId": "3229:73641",
+      "title": "17.43 · Working on your brief",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-73641",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:73850",
+      "title": "17.44 · Stopping the current work",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-73850",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:74053",
+      "title": "17.45 · Stop is not confirmed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-74053",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:74258",
+      "title": "17.46 · Work stopped",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-74258",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:75950",
+      "title": "17.54 · Checking original stop request",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-75950",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3032:30166",
+      "title": "10.19 · Phone · Routines management",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-30166",
+      "groups": [
+        "05"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3032:31859",
+      "title": "10.26 · Tablet · Routines management",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-31859",
+      "groups": [
+        "05"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "1064:148241",
+      "title": "08.01 · Routines · Current management",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148241",
+      "groups": [
+        "05"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "1064:148440",
+      "title": "08.03 · Routine · Read consent detail",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148440",
+      "groups": [
+        "05"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3219:55030",
+      "title": "08.05 · Routine · Review exact consent renewal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-55030",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:55222",
+      "title": "08.06 · Routine · Renewal recorded without resume",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-55222",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:55397",
+      "title": "08.07 · Routine · Unknown exact approval",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-55397",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:148534",
+      "title": "08.04 · Routine · Bounded recent activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148534",
+      "groups": [
+        "05"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3219:55769",
+      "title": "08.08 · Routine · Current authority unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-55769",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:55935",
+      "title": "08.09 · Routine · Consent not observable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-55935",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3024:31809",
+      "title": "08.04C · Routine · Cancellation acknowledged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3024-31809",
+      "groups": [
+        "05"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3219:56281",
+      "title": "08.10 · Routine · Original identity unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-56281",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:144923",
+      "title": "02.05 · Steer and stop a run",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144923",
+      "groups": [
+        "05"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:144982",
+      "title": "02.06 · Checkpoint and verified restore",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144982",
+      "groups": [
+        "05"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:145144",
+      "title": "02.08 · Interrupted run and fork",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145144",
+      "groups": [
+        "05"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3243:77701",
+      "title": "Phone · Routine · Read consent detail",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77701",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:77808",
+      "title": "Tablet · Routine · Read consent detail",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77808",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:77933",
+      "title": "Phone · Routine · Bounded recent activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77933",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:78045",
+      "title": "Tablet · Routine · Bounded recent activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78045",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3246:78640",
+      "title": "Phone · Routine · Review exact consent renewal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78640",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3246:78761",
+      "title": "Tablet · Routine · Review exact consent renewal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78761",
+      "groups": [
+        "05"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3219:62326",
+      "title": "17.19 · Tools · Catalog loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-62326",
+      "groups": [
+        "06"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:62543",
+      "title": "17.20 · Tools · Catalog unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-62543",
+      "groups": [
+        "06"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:74463",
+      "title": "17.47 · No tools are available for this selection",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-74463",
+      "groups": [
+        "06"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:74673",
+      "title": "17.48 · Applied to your draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-74673",
+      "groups": [
+        "06"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:74895",
+      "title": "17.49 · Review your selection",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-74895",
+      "groups": [
+        "06"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:75117",
+      "title": "17.50 · Selection cleared",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-75117",
+      "groups": [
+        "06"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3230:73693",
+      "title": "Tools available · Conversation side column",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3230-73693",
+      "groups": [
+        "06"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3022:30883",
+      "title": "09.04 · Skills and templates · Source-qualified",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-30883",
+      "groups": [
+        "06"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3163:41975",
+      "title": "01.01T · Home · Tools open",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3163-41975",
+      "groups": [
+        "06"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3163:42365",
+      "title": "01.01MT · Tools sheet · Phone 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3163-42365",
+      "groups": [
+        "06"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3180:43587",
+      "title": "A3.01 · Choose a website task",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-43587",
+      "groups": [
+        "06"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3180:43763",
+      "title": "A3.02 · Configure a website workflow",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-43763",
+      "groups": [
+        "06"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3180:43948",
+      "title": "A3.03 · Review this website action",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-43948",
+      "groups": [
+        "06"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3180:44130",
+      "title": "A3.04 · Website workflow stopped",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44130",
+      "groups": [
+        "06"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3022:30009",
+      "title": "09.02 · Connections · Provider accounts",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-30009",
+      "groups": [
+        "07"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3213:47223",
+      "title": "19.01 · Connected services · Directory",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3213-47223",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3214:46753",
+      "title": "19.02 · Connected services · Service details",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3214-46753",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3214:47004",
+      "title": "19.03 · Connected services · OAuth setup",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3214-47004",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3214:47238",
+      "title": "19.04 · Connected services · Authorization pending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3214-47238",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3214:47459",
+      "title": "19.05 · Connected services · Required API key fields",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3214-47459",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3214:47685",
+      "title": "19.06 · Connected services · Creation uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3214-47685",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3215:47585",
+      "title": "19.07 · Connected services · No tools available",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3215-47585",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3215:47816",
+      "title": "19.08 · Connected services · Discovery unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3215-47816",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3215:48037",
+      "title": "19.09 · Connected services · Authorization revoked",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3215-48037",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3215:48254",
+      "title": "19.10 · Connected services · Firm managed access",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3215-48254",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3215:48477",
+      "title": "19.11 · Connected services · Search and categories",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3215-48477",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3217:48424",
+      "title": "19.12 · Connected services · Loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3217-48424",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3217:48620",
+      "title": "19.13 · Connected services · Empty",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3217-48620",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3217:48820",
+      "title": "19.14 · Connected services · No matches",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3217-48820",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3217:49032",
+      "title": "19.15 · Connected services · Unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3217-49032",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3217:49234",
+      "title": "19.16 · Connected services · Access denied",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3217-49234",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:50034",
+      "title": "19.22 · Connected services · Manual OAuth requirements",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-50034",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:50261",
+      "title": "19.23 · Connected services · OAuth unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-50261",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:50467",
+      "title": "19.24 · Connected services · Mobile 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-50467",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:50519",
+      "title": "19.25 · Connected services · Tablet 1024",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-50519",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3227:70967",
+      "title": "19.31 · Connected services · API key removed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3227-70967",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3227:71184",
+      "title": "19.32 · Connected services · Allowed tool list",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3227-71184",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3227:71419",
+      "title": "19.33 · Connected services · Tool or resource access denied",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3227-71419",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3227:71640",
+      "title": "19.34 · Connected services · Saved API key connection",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3227-71640",
+      "groups": [
+        "07"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:64451",
+      "title": "17.29 · Selected tab · Capture uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-64451",
+      "groups": [
+        "08"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:64659",
+      "title": "17.30 · Browser · Origin unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-64659",
+      "groups": [
+        "08"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:64867",
+      "title": "17.31 · Browser · Session access removed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-64867",
+      "groups": [
+        "08"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:76660",
+      "title": "23.01 · The selected tab could not be verified",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-76660",
+      "groups": [
+        "08"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:76872",
+      "title": "23.02 · Capture a fresh copy of this page",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-76872",
+      "groups": [
+        "08"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:77084",
+      "title": "23.03 · Tab sharing is paused",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-77084",
+      "groups": [
+        "08"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3177:42928",
+      "title": "A2.01 · Take control of the browser",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-42928",
+      "groups": [
+        "08"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3177:43098",
+      "title": "A2.02 · You control the browser",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-43098",
+      "groups": [
+        "08"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3177:43269",
+      "title": "A2.03 · Review before Meri continues",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-43269",
+      "groups": [
+        "08"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3177:43447",
+      "title": "A2.04 · Browser connection interrupted",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-43447",
+      "groups": [
+        "08"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3177:43622",
+      "title": "A2.05 · Download confirmation recovered",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-43622",
+      "groups": [
+        "08"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3180:44302",
+      "title": "A4.01 · Share a tab with Meri",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44302",
+      "groups": [
+        "08"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3180:44331",
+      "title": "A4.02 · Review the captured text",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44331",
+      "groups": [
+        "08"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3180:44363",
+      "title": "A4.03 · Selected tab added to the conversation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44363",
+      "groups": [
+        "08"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3180:44541",
+      "title": "A4.04 · Tab sharing has stopped",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44541",
+      "groups": [
+        "08"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3180:44710",
+      "title": "A4.05 · Shared tab",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44710",
+      "groups": [
+        "08"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:63402",
+      "title": "17.24 · Attachments · Processing",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-63402",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:63610",
+      "title": "17.25 · Attachments · Partial extraction",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-63610",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:63824",
+      "title": "17.26 · Attachments · File not accepted",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-63824",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:64035",
+      "title": "17.27 · Attachments · Confirmation uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-64035",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:64243",
+      "title": "17.28 · Attachments · Removed from draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-64243",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:57976",
+      "title": "Original file ready",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57976",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:66614",
+      "title": "Some source content is unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-66614",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:66781",
+      "title": "This upload is not ready to attach",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-66781",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:77296",
+      "title": "23.04 · This file is too large to attach",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-77296",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:77508",
+      "title": "23.05 · This file cannot be used as a source",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-77508",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:77723",
+      "title": "23.06 · Some extracted text needs review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-77723",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:77941",
+      "title": "23.07 · Upload canceled before it started",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-77941",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:78156",
+      "title": "23.08 · This attachment is no longer accessible",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-78156",
+      "groups": [
+        "09"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:146204",
+      "title": "04.01 · Upload and attachment menu",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146204",
+      "groups": [
+        "09"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:146271",
+      "title": "04.02 · Attach an authorized Capiro file",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146271",
+      "groups": [
+        "09"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:152220",
+      "title": "12.16 · Exact file extraction coverage",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152220",
+      "groups": [
+        "09"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:57774",
+      "title": "Files",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57774",
+      "groups": [
+        "10"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:67051",
+      "title": "Meeting brief.docx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-67051",
+      "groups": [
+        "10"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:66957",
+      "title": "Analysis output needs review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-66957",
+      "groups": [
+        "10"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:67119",
+      "title": "Download verification unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-67119",
+      "groups": [
+        "10"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:68873",
+      "title": "Computation status is not confirmed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-68873",
+      "groups": [
+        "10"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:145886",
+      "title": "03.07 · Code and execution activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145886",
+      "groups": [
+        "10"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:145939",
+      "title": "03.08 · Analysis outputs",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145939",
+      "groups": [
+        "10"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:151469",
+      "title": "12.06 · Code & reproducible analysis",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-151469",
+      "groups": [
+        "10"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:72316",
+      "title": "Creating the briefing document",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72316",
+      "groups": [
+        "11"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:72472",
+      "title": "The document could not be completed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72472",
+      "groups": [
+        "11"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:72638",
+      "title": "A newer document version is available",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72638",
+      "groups": [
+        "11"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:72814",
+      "title": "Client filing is not yet confirmed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72814",
+      "groups": [
+        "11"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:72990",
+      "title": "Meeting brief.docx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72990",
+      "groups": [
+        "11",
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:67295",
+      "title": "Version 3 is published",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-67295",
+      "groups": [
+        "11",
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:67472",
+      "title": "Document filed to the client",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-67472",
+      "groups": [
+        "11"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:146038",
+      "title": "03.09 · Versions and comparison",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146038",
+      "groups": [
+        "11"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:146126",
+      "title": "03.10 · Revise an artifact",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146126",
+      "groups": [
+        "11"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:146428",
+      "title": "04.04 · File artifact to client",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146428",
+      "groups": [
+        "11"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:58178",
+      "title": "Opening private editor",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-58178",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:58340",
+      "title": "Meeting brief.docx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-58340",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:65732",
+      "title": "Saving your private draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-65732",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:65933",
+      "title": "Private draft saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-65933",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:66134",
+      "title": "Review saved revision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-66134",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:66341",
+      "title": "Publication confirmation delayed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-66341",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:66517",
+      "title": "This draft has an active editor",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-66517",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:66699",
+      "title": "The editor session expired",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-66699",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:66875",
+      "title": "Reconnect to your private draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-66875",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:73928",
+      "title": "Files",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-73928",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:74124",
+      "title": "Private draft saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-74124",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:67648",
+      "title": "Save changes before closing?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-67648",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:67824",
+      "title": "Discard this private draft?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-67824",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:68000",
+      "title": "Publishing saved revision 3",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-68000",
+      "groups": [
+        "12"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3224:72156",
+      "title": "Client update.pptx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-72156",
+      "groups": [
+        "12",
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3224:72335",
+      "title": "Presentation draft saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-72335",
+      "groups": [
+        "12",
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3224:72514",
+      "title": "Review the saved presentation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-72514",
+      "groups": [
+        "12",
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3182:45642",
+      "title": "A7.01 · Meeting brief.docx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-45642",
+      "groups": [
+        "12"
+      ],
+      "evidence": "updated_existing_office"
+    },
+    {
+      "nodeId": "3182:45855",
+      "title": "A7.02 · Checking whether your draft was saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-45855",
+      "groups": [
+        "12"
+      ],
+      "evidence": "updated_existing_office"
+    },
+    {
+      "nodeId": "3182:46025",
+      "title": "A7.03 · Publish the saved draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-46025",
+      "groups": [
+        "12"
+      ],
+      "evidence": "updated_existing_office"
+    },
+    {
+      "nodeId": "3182:46207",
+      "title": "A7.04 · Version 3 is published",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-46207",
+      "groups": [
+        "12"
+      ],
+      "evidence": "updated_existing_office"
+    },
+    {
+      "nodeId": "3182:46386",
+      "title": "A7.05 · Document access ended",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-46386",
+      "groups": [
+        "12"
+      ],
+      "evidence": "updated_existing_office"
+    },
+    {
+      "nodeId": "3182:46555",
+      "title": "A7.06 · Review a document compatibility issue",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-46555",
+      "groups": [
+        "12",
+        "13"
+      ],
+      "evidence": "updated_existing_office"
+    },
+    {
+      "nodeId": "3219:72139",
+      "title": "Meeting brief.pdf",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72139",
+      "groups": [
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:73167",
+      "title": "Funding analysis.xlsx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-73167",
+      "groups": [
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:73405",
+      "title": "Client update.pptx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-73405",
+      "groups": [
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:73590",
+      "title": "Document preview is unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-73590",
+      "groups": [
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:73752",
+      "title": "PDF export could not be confirmed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-73752",
+      "groups": [
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:68171",
+      "title": "Spreadsheet draft saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-68171",
+      "groups": [
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:68403",
+      "title": "Review the saved workbook",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-68403",
+      "groups": [
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3222:68635",
+      "title": "Workbook version 5 published",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-68635",
+      "groups": [
+        "13"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:147042",
+      "title": "05.04 · Personal memory · Current approved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147042",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3225:71023",
+      "title": "10.35 · Tablet · Current personal memory",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3225-71023",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:147204",
+      "title": "05.06 · Personal memory · Correction draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147204",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3019:28977",
+      "title": "05.11 · Personal memory · Pending correction",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-28977",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "1064:147483",
+      "title": "06.02 · Personal memory · Owner decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147483",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3019:23613",
+      "title": "05.08A · Personal memory · Approved successor",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-23613",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3019:29174",
+      "title": "05.12 · Personal memory · Reject correction",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-29174",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3219:51433",
+      "title": "05.23 · Personal memory · Rejected receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-51433",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3019:30750",
+      "title": "05.20 · Personal memory · Revision conflict",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-30750",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3019:30356",
+      "title": "05.18 · Personal memory · Decision outcome uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-30356",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3019:23371",
+      "title": "05.04B · Personal memory · Retained history page",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-23371",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3219:52117",
+      "title": "05.24 · Personal memory · History page loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-52117",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:52281",
+      "title": "05.25 · Personal memory · History page unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-52281",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:147112",
+      "title": "05.05 · Personal memory · Source evidence",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147112",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3219:52618",
+      "title": "05.26 · Personal memory · Evidence unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-52618",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:147272",
+      "title": "05.07 · Personal memory · Current access changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147272",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3219:52951",
+      "title": "05.27 · Personal memory · No retained evidence / purge not asserted",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-52951",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:54298",
+      "title": "06.02D · Personal memory · Confirm owner approval",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-54298",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3220:65986",
+      "title": "05.32 · Personal memory · Loading current records",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3220-65986",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3220:66136",
+      "title": "05.33 · Personal memory · Complete empty",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3220-66136",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3220:66286",
+      "title": "05.34 · Personal memory · Read failed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3220-66286",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3220:66436",
+      "title": "05.35 · Personal memory · Search no matches",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3220-66436",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3032:30630",
+      "title": "10.21 · Phone · Current personal memory",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-30630",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3022:31622",
+      "title": "09.06 · Privacy and retention · Installed memory policy",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-31622",
+      "groups": [
+        "14"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3218:50112",
+      "title": "19.21 · Privacy · Retention policy and restrictions",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3218-50112",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3243:76662",
+      "title": "Phone · Personal memory · Loading current records",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-76662",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:76740",
+      "title": "Tablet · Personal memory · Loading current records",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-76740",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:76836",
+      "title": "Phone · Personal memory · Retained history page",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-76836",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:76940",
+      "title": "Tablet · Personal memory · Retained history page",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-76940",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:77061",
+      "title": "Phone · Personal memory · Source evidence",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77061",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:77157",
+      "title": "Tablet · Personal memory · Source evidence",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77157",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:77271",
+      "title": "Phone · Personal memory · Correction draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77271",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:77370",
+      "title": "Tablet · Personal memory · Correction draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77370",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:77487",
+      "title": "Phone · Personal memory · Owner decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77487",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:77585",
+      "title": "Tablet · Personal memory · Owner decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77585",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:78458",
+      "title": "Phone · Personal memory · History page loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78458",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:78550",
+      "title": "Tablet · Personal memory · History page loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78550",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:78660",
+      "title": "Phone · Personal memory · Pending correction",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78660",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:78759",
+      "title": "Tablet · Personal memory · Pending correction",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78759",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:78876",
+      "title": "Phone · Personal memory · Confirm owner approval",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78876",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:78975",
+      "title": "Tablet · Personal memory · Confirm owner approval",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78975",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:79092",
+      "title": "Phone · Personal memory · Confirm correction rejection",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-79092",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3243:79194",
+      "title": "Tablet · Personal memory · Confirm correction rejection",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-79194",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3246:78230",
+      "title": "Phone · Personal memory · Approved successor",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78230",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3246:78325",
+      "title": "Tablet · Personal memory · Approved successor",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78325",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3246:78438",
+      "title": "Phone · Personal memory · Rejected receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78438",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3246:78530",
+      "title": "Tablet · Personal memory · Rejected receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78530",
+      "groups": [
+        "14"
+      ],
+      "evidence": "new_native_responsive_state"
+    },
+    {
+      "nodeId": "3022:32579",
+      "title": "22.01 · Updates panel · Current unread notices",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32579",
+      "groups": [
+        "15"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3229:71790",
+      "title": "22.02 · Updates panel · Read acknowledged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-71790",
+      "groups": [
+        "15"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:71838",
+      "title": "22.03 · Updates panel · Partial page / total unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-71838",
+      "groups": [
+        "15"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:71904",
+      "title": "22.04 · Updates panel · Read acknowledgment pending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-71904",
+      "groups": [
+        "15"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:71958",
+      "title": "22.05 · Updates panel · Acknowledgment uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-71958",
+      "groups": [
+        "15"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3229:72018",
+      "title": "22.06 · Updates panel · Recovery read failed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-72018",
+      "groups": [
+        "15"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3022:31261",
+      "title": "09.05 · Workspace updates · Preferences",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-31261",
+      "groups": [
+        "15"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "1064:146715",
+      "title": "05.01 · Cited answer · Bounded source result",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146715",
+      "groups": [
+        "16"
+      ],
+      "evidence": "updated_in_place"
+    },
+    {
+      "nodeId": "3219:56645",
+      "title": "05.28 · Source reader · Saved passage",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-56645",
+      "groups": [
+        "16"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:56829",
+      "title": "05.29 · Source reader · Current source changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-56829",
+      "groups": [
+        "16"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:57013",
+      "title": "05.30 · Search · Denied scope is not empty",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57013",
+      "groups": [
+        "16"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:57200",
+      "title": "05.31 · Structured result · Bounded / unavailable values",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57200",
+      "groups": [
+        "16"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:78371",
+      "title": "23.09 · Which period should I use?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-78371",
+      "groups": [
+        "16"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:78586",
+      "title": "23.10 · No matching meetings were found",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-78586",
+      "groups": [
+        "16"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:78807",
+      "title": "23.11 · This search could not complete",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-78807",
+      "groups": [
+        "16"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:79022",
+      "title": "23.12 · Your revised request is ready",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-79022",
+      "groups": [
+        "16"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3234:79231",
+      "title": "23.13 · Searching recorded meetings…",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-79231",
+      "groups": [
+        "16"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:57386",
+      "title": "21.01 · Research · Scoped conversation entry",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57386",
+      "groups": [
+        "17"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:57584",
+      "title": "21.02 · Research · Receiver or access unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57584",
+      "groups": [
+        "17"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:152370",
+      "title": "12.20 · Company research & capture roadmap",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152370",
+      "groups": [
+        "17"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:69631",
+      "title": "21.03 · Procurement · Evidence-backed result",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-69631",
+      "groups": [
+        "18"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:69829",
+      "title": "21.04 · Procurement · Producer unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-69829",
+      "groups": [
+        "18"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3181:45398",
+      "title": "A6.01 · Explore the evidence graph",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-45398",
+      "groups": [
+        "18"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3181:45593",
+      "title": "A6.02 · Compare relevant buyers",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-45593",
+      "groups": [
+        "18"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3181:45775",
+      "title": "A6.03 · Review funding paths and next steps",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-45775",
+      "groups": [
+        "18"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:70016",
+      "title": "21.05 · Legislative draft · Result and review handoff",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70016",
+      "groups": [
+        "19"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:70215",
+      "title": "21.06 · Legislative draft · Source mismatch / stale review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70215",
+      "groups": [
+        "19"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3181:44472",
+      "title": "A5.01 · Draft against an exact source",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-44472",
+      "groups": [
+        "19"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3181:44670",
+      "title": "A5.02 · Compare the exact text change",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-44670",
+      "groups": [
+        "19"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3181:44862",
+      "title": "A5.03 · Resolve drafting findings",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-44862",
+      "groups": [
+        "19"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3181:45035",
+      "title": "A5.04 · The source changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-45035",
+      "groups": [
+        "19"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3181:45207",
+      "title": "A5.05 · Review this draft revision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-45207",
+      "groups": [
+        "19"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:70408",
+      "title": "21.07 · Meeting · Notes and partial media result",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70408",
+      "groups": [
+        "20"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:70607",
+      "title": "21.08 · Meeting · Association repair needed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70607",
+      "groups": [
+        "20"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3086:39853",
+      "title": "14.17 · Meeting context · loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-39853",
+      "groups": [
+        "20"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3086:40039",
+      "title": "14.18 · Meeting context · available",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-40039",
+      "groups": [
+        "20"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3086:40237",
+      "title": "14.19 · Meeting context · no accessible meeting",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-40237",
+      "groups": [
+        "20"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3086:40436",
+      "title": "14.20 · Meeting context · access removed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-40436",
+      "groups": [
+        "20"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3086:40635",
+      "title": "14.21 · Meeting context · read error",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-40635",
+      "groups": [
+        "20"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:70794",
+      "title": "21.09 · Outreach · Immutable draft handoff",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70794",
+      "groups": [
+        "21"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:70992",
+      "title": "21.10 · Outreach · Delivery unknown / source gated",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70992",
+      "groups": [
+        "21"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:151858",
+      "title": "12.10 · Relationship & mail history",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-151858",
+      "groups": [
+        "21"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:71181",
+      "title": "21.11 · Strategy · Separate Planner consent",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-71181",
+      "groups": [
+        "22"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:71377",
+      "title": "21.12 · Planner · Continuation gated",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-71377",
+      "groups": [
+        "22"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:147566",
+      "title": "06.03 · Draft a client task",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147566",
+      "groups": [
+        "22"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:147638",
+      "title": "06.04 · Review exact task action",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147638",
+      "groups": [
+        "22"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:71564",
+      "title": "21.13 · Forecast and Hub · Snapshot result",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-71564",
+      "groups": [
+        "23"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "1064:151930",
+      "title": "12.11 · Client & portfolio changes",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-151930",
+      "groups": [
+        "23"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "1064:152468",
+      "title": "12.21 · Portfolio overlap matrix",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152468",
+      "groups": [
+        "23"
+      ],
+      "evidence": "existing_reference_not_semantically_recertified"
+    },
+    {
+      "nodeId": "3219:71754",
+      "title": "21.14 · Newsletter · Workspace handoff",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-71754",
+      "groups": [
+        "24"
+      ],
+      "evidence": "new_native_state"
+    },
+    {
+      "nodeId": "3219:71950",
+      "title": "21.15 · Newsletter / CRM · Provider unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-71950",
+      "groups": [
+        "24"
+      ],
+      "evidence": "new_native_state"
+    }
+  ]
+}
