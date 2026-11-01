@@ -1,23 +1,30 @@
-import type {
-  FederalCompilerSource,
-  FederalDraftOperationEcfa206F,
+import {
+  applyDecodedXmlEdit,
+  decodeXmlTextRun,
+  type FederalCompilerSource,
+  type FederalDraftOperationEcfa206F,
 } from "@capiro/meri-contracts/federal-workbench";
 import { federalTextHash } from "./federal-workbench";
 
 /** One amendment the user is authoring, before its exact hashes are derived. */
-export type AuthoredInput = Readonly<{
+type TextAmendmentInput = Readonly<{
   id: string;
   kind: "replace" | "insert" | "delete";
   scopeId: string;
   expectedText: string;
   text?: string;
   position?: "before" | "after";
+  textMode?: "decoded-xml";
 }>;
+export type AuthoredInput =
+  | TextAmendmentInput
+  | Readonly<{ id: string; kind: "remove_source_text" }>;
 export type AuthoredOperation = FederalDraftOperationEcfa206F;
 export type AuthoredScope = Readonly<{
   id: string;
   label: string;
   current: string;
+  decoded?: string | null;
   changedBy: readonly string[];
   invalidated: boolean;
 }>;
@@ -37,7 +44,7 @@ const AMBIGUOUS =
   "The exact text appears more than once in the selected section.";
 const UNCHANGED = "The replacement is identical to the exact text to find.";
 const EMPTY =
-  "Removing the complete source is not supported: the retained export contract has no typed empty result.";
+  "Use the explicit whole-source removal action to propose an empty consolidated result.";
 const BLANK = "Enter the exact text to find.";
 
 type ScopeState = {
@@ -47,9 +54,19 @@ type ScopeState = {
   end: number;
   ancestors: readonly string[];
   current: string;
+  runKind?: "text" | "cdata";
   changedBy: string[];
   invalidated: boolean;
 };
+
+function decodedCurrent(scope: ScopeState) {
+  if (!scope.runKind) return undefined;
+  try {
+    return decodeXmlTextRun(scope.current, scope.runKind).decoded;
+  } catch {
+    return null;
+  }
+}
 
 /** Text outside every declared scope cannot be amended, so it also has to be
  * empty before a set of amendments can remove the complete source. */
@@ -70,7 +87,7 @@ function gapFree(source: Readonly<FederalCompilerSource>) {
 function refusalFor(
   scopes: readonly ScopeState[],
   target: ScopeState,
-  input: AuthoredInput,
+  input: TextAmendmentInput,
 ) {
   if (
     target.invalidated ||
@@ -90,15 +107,21 @@ function refusalFor(
   )
     return INTERLEAVED;
   if (!input.expectedText.length) return BLANK;
-  const at = target.current.indexOf(input.expectedText);
+  const current =
+    input.textMode === "decoded-xml" ? decodedCurrent(target) : target.current;
+  if (current === undefined)
+    return "Decoded editing requires a declared XML text run.";
+  if (current === null)
+    return "This text run no longer maps to decoded text. Remove the raw XML amendment before editing decoded text here.";
+  const at = current.indexOf(input.expectedText);
   if (at < 0) return MISSING;
-  if (target.current.indexOf(input.expectedText, at + 1) >= 0) return AMBIGUOUS;
+  if (current.indexOf(input.expectedText, at + 1) >= 0) return AMBIGUOUS;
   if (input.kind === "replace" && input.text === input.expectedText)
     return UNCHANGED;
   return null;
 }
 
-function splice(input: AuthoredInput, current: string) {
+function splice(input: TextAmendmentInput, current: string) {
   const at = current.indexOf(input.expectedText);
   const start =
     input.kind === "insert" && input.position === "after"
@@ -107,6 +130,23 @@ function splice(input: AuthoredInput, current: string) {
   const end = input.kind === "insert" ? start : at + input.expectedText.length;
   const replacement = input.kind === "delete" ? "" : (input.text ?? "");
   return current.slice(0, start) + replacement + current.slice(end);
+}
+
+/** Only locally admitted, disjoint changed scopes participate. Ancestor/child
+ * interleaving has already refused; gaps and unedited bytes remain verbatim. */
+function currentSourceText(
+  source: Readonly<FederalCompilerSource>,
+  scopes: readonly ScopeState[],
+) {
+  let cursor = 0,
+    text = "";
+  for (const scope of scopes
+    .filter((item) => item.changedBy.length)
+    .sort((a, b) => a.start - b.start)) {
+    text += source.text.slice(cursor, scope.start) + scope.current;
+    cursor = scope.end;
+  }
+  return text + source.text.slice(cursor);
 }
 
 /** Derives the exact current-scope hash, exact-text hash and dependency closure
@@ -127,6 +167,11 @@ export async function authoredOperations(
     end: scope.end,
     ancestors: "ancestorPath" in scope ? scope.ancestorPath : [],
     current: source.text.slice(scope.start, scope.end),
+    ...(source.parserVersion === "federal-uslm-xml/3" &&
+    "textRun" in scope &&
+    scope.textRun
+      ? { runKind: scope.textRun.kind }
+      : {}),
     changedBy: [],
     invalidated: false,
   }));
@@ -138,6 +183,7 @@ export async function authoredOperations(
         id: scope.id,
         label: scope.label,
         current: scope.current,
+        ...(scope.runKind ? { decoded: decodedCurrent(scope) } : {}),
         changedBy: Object.freeze([...scope.changedBy]),
         invalidated: scope.invalidated,
       })),
@@ -148,11 +194,46 @@ export async function authoredOperations(
   if (new Set(inputs.map((input) => input.id)).size !== inputs.length)
     return answer("Each amendment must have a unique identity.");
   for (const input of inputs) {
+    if (input.kind === "remove_source_text") {
+      if (input !== inputs.at(-1))
+        return answer(
+          "Whole-source removal must be the final amendment. Remove it before adding another amendment.",
+        );
+      if (!source.coverage.complete)
+        return answer(
+          "Whole-source removal requires complete source coverage.",
+        );
+      operations.push({
+        id: input.id,
+        kind: input.kind,
+        expectedSourceSha256: source.sha256,
+        expectedTextSha256: await federalTextHash(
+          currentSourceText(source, scopes),
+        ),
+        dependsOn: operations.map((operation) => operation.id),
+      });
+      return answer(null);
+    }
     const target = scopes.find((scope) => scope.id === input.scopeId);
     if (!target) return answer(UNKNOWN);
     const refusal = refusalFor(scopes, target, input);
     if (refusal) return answer(refusal);
-    const next = splice(input, target.current);
+    let next: string;
+    try {
+      next =
+        input.textMode === "decoded-xml" && target.runKind
+          ? applyDecodedXmlEdit(target.current, target.runKind, {
+              ...input,
+              ...(input.kind === "insert"
+                ? { position: input.position ?? "after" }
+                : {}),
+            }).text
+          : splice(input, target.current);
+    } catch {
+      return answer(
+        "The decoded edit cannot be mapped to this exact XML text run. Check the text and character boundaries.",
+      );
+    }
     const emptied =
       gaps &&
       scopes.every(
@@ -166,6 +247,7 @@ export async function authoredOperations(
       expectedScopeSha256: await federalTextHash(target.current),
       expectedText: input.expectedText,
       expectedTextSha256: await federalTextHash(input.expectedText),
+      ...(input.textMode === undefined ? {} : { textMode: input.textMode }),
       dependsOn: [...target.changedBy],
       ...(input.kind === "delete" ? {} : { text: input.text ?? "" }),
       ...(input.kind === "insert"
@@ -184,14 +266,24 @@ export async function authoredOperations(
 export function authoredFrom(
   operations: readonly AuthoredOperation[],
 ): readonly AuthoredInput[] {
-  return operations.map((operation) => ({
-    id: operation.id,
-    kind: operation.kind,
-    scopeId: operation.scopeId,
-    expectedText: operation.expectedText,
-    ...(operation.text === undefined ? {} : { text: operation.text }),
-    ...(operation.position === undefined
-      ? {}
-      : { position: operation.position }),
-  }));
+  return operations.map((operation) =>
+    operation.kind === "remove_source_text"
+      ? {
+          id: operation.id,
+          kind: operation.kind,
+        }
+      : {
+          id: operation.id,
+          kind: operation.kind,
+          scopeId: operation.scopeId,
+          expectedText: operation.expectedText,
+          ...(operation.textMode === undefined
+            ? {}
+            : { textMode: operation.textMode }),
+          ...(operation.text === undefined ? {} : { text: operation.text }),
+          ...(operation.position === undefined
+            ? {}
+            : { position: operation.position }),
+        },
+  );
 }

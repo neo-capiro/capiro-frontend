@@ -101,7 +101,11 @@ function setup() {
         publication.publication.version.binding.actorId =
           "00000000-0000-4000-8000-000000000999";
     }
-    return Response.json(result);
+    // Current Meri473 responses carry explicit approval state. Retained review
+    // content/hashes remain unchanged; this is the outer response only.
+    return Response.json(
+      route === "federal-import" ? result : { ...result, approval: null },
+    );
   }) as typeof fetch;
   const port = new FederalWorkbenchAccess({
     library,

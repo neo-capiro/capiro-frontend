@@ -55,6 +55,11 @@ const replace = (
   expectedText: string,
   text: string,
 ): AuthoredInput => ({ id, scopeId, kind: "replace", expectedText, text });
+function textOperation(operation: AuthoredOperation | undefined) {
+  if (!operation || operation.kind === "remove_source_text")
+    throw Error("Expected text amendment");
+  return operation;
+}
 
 describe("federal amendment authoring", () => {
   it("refuses duplicate operation identities before deriving dependencies", async () => {
@@ -81,10 +86,12 @@ describe("federal amendment authoring", () => {
     ]);
     expect(authoring.refusal).toBeNull();
     const [first, second] = authoring.operations;
-    expect(first?.expectedScopeSha256).toBe(value.scopes[0]?.sha256);
+    expect(textOperation(first).expectedScopeSha256).toBe(
+      value.scopes[0]?.sha256,
+    );
     expect(first?.expectedTextSha256).toBe(await sha("$100"));
     expect(first?.dependsOn).toEqual([]);
-    expect(second?.expectedScopeSha256).toBe(
+    expect(textOperation(second).expectedScopeSha256).toBe(
       await sha("SEC. 1. Payment is $150."),
     );
     expect(second?.dependsOn).toEqual(["amendment-1"]);
@@ -99,7 +106,9 @@ describe("federal amendment authoring", () => {
     ]);
     expect(authoring.refusal).toBeNull();
     expect(
-      authoring.operations.map((operation) => operation.expectedScopeSha256),
+      authoring.operations.map(
+        (operation) => textOperation(operation).expectedScopeSha256,
+      ),
     ).toEqual(value.scopes.map((scope) => scope.sha256));
     expect(
       authoring.operations.map((operation) => operation.dependsOn),
@@ -120,7 +129,7 @@ describe("federal amendment authoring", () => {
         position: "after",
       },
     ]);
-    expect(authoring.operations[0]?.position).toBe("after");
+    expect(textOperation(authoring.operations[0]).position).toBe("after");
     expect(authoring.operations[0]?.dependsOn).toEqual([]);
     expect(authoring.scopes[0]?.current).toBe(
       "SEC. 1. Payment is $100 Payable.",
@@ -194,7 +203,7 @@ describe("federal amendment authoring", () => {
         expectedText: "SEC. 1. Payment is $100.",
       },
     ]);
-    expect(removal.refusal).toContain("no typed empty result");
+    expect(removal.refusal).toContain("explicit whole-source removal");
     const partial = await authoredOperations(value, [
       { id: "amendment-1", scopeId: id, kind: "delete", expectedText: "$100." },
     ]);
@@ -211,5 +220,99 @@ describe("federal amendment authoring", () => {
     const authoring = await authoredOperations(value, inputs);
     expect(authoring.refusal).toBeNull();
     expect(authoring.operations).toEqual(operations);
+  });
+
+  it("binds explicit removal to the full original and intermediate text, preserving gaps and Unicode", async () => {
+    const value = await source(
+      "Header\r\nFirst: café.\r\nSecond: 🏛.\r\nEnd.",
+      ["First: café.", "Second: 🏛."],
+    );
+    const first = value.scopes[0]!.id,
+      second = value.scopes[1]!.id;
+    const result = await authoredOperations(value, [
+      replace("a", first, "café", "thé"),
+      replace("b", second, "🏛", "law"),
+      { id: "remove", kind: "remove_source_text" },
+    ]);
+    expect(result.refusal).toBeNull();
+    expect(result.operations.at(-1)).toEqual({
+      id: "remove",
+      kind: "remove_source_text",
+      expectedSourceSha256: value.sha256,
+      expectedTextSha256: await sha(
+        "Header\r\nFirst: thé.\r\nSecond: law.\r\nEnd.",
+      ),
+      dependsOn: ["a", "b"],
+    });
+    expect(authoredFrom(result.operations).at(-1)).toEqual({
+      id: "remove",
+      kind: "remove_source_text",
+    });
+  });
+
+  it("derives the whole intermediate hash after repeated edits to a nested child", async () => {
+    const value = await source("ABC", ["ABC"], true);
+    const nested = {
+      ...value,
+      scopes: [
+        { ...value.scopes[0]!, ancestorPath: [] },
+        {
+          id: "child",
+          label: "Synthetic child",
+          start: 1,
+          end: 2,
+          sha256: await sha("B"),
+          ancestorPath: [value.scopes[0]!.id],
+        },
+      ],
+    } as FederalCompilerSource;
+    const result = await authoredOperations(nested, [
+      replace("a", "child", "B", "BB"),
+      replace("b", "child", "BB", "BBB"),
+      { id: "remove", kind: "remove_source_text" },
+    ]);
+    expect(result.refusal).toBeNull();
+    expect(result.operations.at(-1)?.expectedTextSha256).toBe(
+      await sha("ABBBC"),
+    );
+    expect(result.operations.at(-1)?.dependsOn).toEqual(["a", "b"]);
+  });
+
+  it("requires a terminal explicit operation and complete source coverage", async () => {
+    const value = await source("ABC", ["ABC"]);
+    const removal: AuthoredInput = { id: "remove", kind: "remove_source_text" };
+    expect(
+      (
+        await authoredOperations(value, [
+          removal,
+          replace("after", "abc", "A", "Z"),
+        ])
+      ).refusal,
+    ).toContain("final amendment");
+    expect(
+      (
+        await authoredOperations(value, [
+          removal,
+          { id: "again", kind: "remove_source_text" },
+        ])
+      ).refusal,
+    ).toContain("final amendment");
+    const partial = {
+      ...value,
+      coverage: { ...value.coverage, complete: false },
+    } as unknown as FederalCompilerSource;
+    expect((await authoredOperations(partial, [removal])).refusal).toContain(
+      "complete source coverage",
+    );
+    const result = await authoredOperations(value, [removal]);
+    expect(result.refusal).toBeNull();
+    expect(result.operations).toEqual([
+      {
+        ...removal,
+        expectedSourceSha256: value.sha256,
+        expectedTextSha256: value.sha256,
+        dependsOn: [],
+      },
+    ]);
   });
 });

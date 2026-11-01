@@ -1,3 +1,4 @@
+import { meriResearchConversationOperations } from "./operations/meri-research-conversation";
 import type { OperationRegistry } from "./contracts";
 import { memoryRetentionPolicyOperations } from "./operations/memory-retention-policy";
 import { targetContextOperations } from "./operations/target-context";
@@ -59,6 +60,7 @@ import {
 
 // Reviewed feature groups are composed here. This registry is the gateway allowlist.
 export const capiroOperations = {
+  ...meriResearchConversationOperations,
   ...memoryRetentionPolicyOperations,
   ...targetContextOperations,
   ...siteWorkflowOperations,

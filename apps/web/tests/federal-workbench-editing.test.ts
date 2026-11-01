@@ -1,17 +1,24 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
-import type {
-  AdmittedFederalReview,
-  FederalSelection,
+import {
+  receiveFederalRequest,
+  receiveFederalResponse,
+  type AdmittedFederalReview,
+  type FederalSelection,
+  type FederalCompilerSource,
 } from "@capiro/meri-contracts/federal-workbench";
 import { FederalWorkbench } from "../src/features/meri/files/FederalWorkbench";
 import { FederalAmendmentList } from "../src/features/meri/files/FederalAmendmentList";
 import {
   authoredOperations,
   type AuthoredInput,
+  type AuthoredOperation,
 } from "../src/shared/meri-documents/federal-authoring";
 import type { FederalWorkbenchPort } from "../src/shared/meri-documents/federal-workbench";
 import fixture from "./fixtures/federal-workbench.json";
+import runFixture from "./fixtures/federal-text-run-source.json";
+import exportFixture from "./fixtures/federal-structural-exports.json";
+import schemaFixture from "./fixtures/federal-schema-source.json";
 
 // Exercise actual component callbacks and authoring, with synthetic port results.
 // Receiver/compiler admission remains covered by the existing federal suites.
@@ -91,12 +98,14 @@ function render() {
     if (cleanup) hooks.cleanups.push(cleanup);
   });
 }
-async function flush() {
+async function flush(recovering = false) {
   await vi.waitFor(
     () => {
       if (hooks.dirty) render();
       expect(
-        button("Browse source files and saved reviews")!.props.disabled,
+        recovering
+          ? button("Recover original operation")?.props.disabled
+          : button("Browse source files and saved reviews")!.props.disabled,
       ).toBe(false);
     },
     { interval: 1 },
@@ -108,12 +117,12 @@ const button = (text: string) =>
 const list = () =>
   nodes.find((node) => node.type === FederalAmendmentList)!
     .props as ComponentProps<typeof FederalAmendmentList>;
-async function click(text: string) {
+async function click(text: string, recovering = false) {
   const node = button(text)!;
   expect(node, text).toBeDefined();
   expect(node.props.disabled, text).not.toBe(true);
   node.props.onClick!({ currentTarget: { value: node.props.value } });
-  await flush();
+  await flush(recovering);
 }
 async function field(text: string, value: string) {
   nodes.find((node) => node.props["aria-label"] === text)!.props.onChange!({
@@ -129,7 +138,7 @@ async function add(expected: string, text: string) {
 async function chooseScope(value: string) {
   nodes.find(
     (node) =>
-      node.type === "select" && node.props.value?.startsWith("section-"),
+      node.type === "select" && node.props["aria-label"] === "Source section",
   )!.props.onChange!({ target: { value, checked: false } });
   await flush();
 }
@@ -150,6 +159,13 @@ const input = (
   expectedText: string,
   text: string,
 ): AuthoredInput => ({ id, scopeId, kind: "replace", expectedText, text });
+function textAmendment<T extends AuthoredInput | AuthoredOperation>(
+  operation: T,
+) {
+  if (operation.kind === "remove_source_text")
+    throw Error("Expected text amendment");
+  return operation as Exclude<T, { kind: "remove_source_text" }>;
+}
 async function loadChain() {
   const value = await authoredOperations(saved.prepared.draft.source, [
     input("retained-first", "section-1", "$100", "$150"),
@@ -211,6 +227,247 @@ beforeEach(async () => {
 });
 afterEach(() => hooks.cleanups.forEach((cleanup) => cleanup()));
 
+async function structuralReview(
+  kind: "supported" | "unsupported" = "supported",
+) {
+  const specimen = exportFixture[kind].prepared;
+  const bytes = (value: unknown) =>
+    new TextEncoder().encode(JSON.stringify(value));
+  const request = receiveFederalRequest(
+    "federal-prepare",
+    bytes(specimen.input),
+  );
+  const review = await receiveFederalResponse(
+    "federal-prepare",
+    specimen.status,
+    bytes(specimen.result),
+    request,
+  );
+  if ("error" in review) throw Error("Expected admitted structural review");
+  return review;
+}
+
+it("offers qualified XML and supported Word/PDF choices with explicit comparison and renderer limits", async () => {
+  saved = await structuralReview();
+  await click("Open saved review");
+  for (const name of [
+    "Export consolidated XML",
+    "Export Word dossier",
+    "Export PDF dossier",
+  ])
+    expect(button(name)?.props.disabled).toBe(true);
+  expect(
+    nodes.some(
+      (node) =>
+        node.type === "p" && label(node).includes("not Word tracked changes"),
+    ),
+  ).toBe(true);
+  expect(
+    nodes.some(
+      (node) => node.type === "p" && label(node).includes("qualified server"),
+    ),
+  ).toBe(true);
+  await confirm();
+  await click("Export consolidated XML");
+  expect(publish.mock.lastCall![1]).toBe("xml");
+  await click("Export Word dossier");
+  expect(publish.mock.lastCall![1]).toBe("docx");
+  publish.mockRejectedValueOnce(
+    Error("The file operation was not dispatched."),
+  );
+  await click("Export PDF dossier");
+  expect(publish.mock.lastCall![1]).toBe("pdf");
+  expect(
+    nodes.some(
+      (node) =>
+        node.props.role === "alert" && label(node).includes("not dispatched"),
+    ),
+  ).toBe(true);
+});
+
+it("keeps TXT/XML available and explains the unsupported structural subset", async () => {
+  saved = await structuralReview("unsupported");
+  await click("Open saved review");
+  expect(button("Export Word dossier")).toBeUndefined();
+  expect(button("Export PDF dossier")).toBeUndefined();
+  expect(
+    nodes.some(
+      (node) =>
+        node.type === "p" &&
+        label(node).includes("outside the supported document subset"),
+    ),
+  ).toBe(true);
+  await confirm();
+  expect(button("Export consolidated")?.props.disabled).toBe(false);
+  expect(button("Export consolidated XML")?.props.disabled).toBe(false);
+});
+
+it("preserves old-profile Word and schema2 XML while excluding XML for typed removal", async () => {
+  await click("Open saved review");
+  expect(button("Export Word dossier")).toBeDefined();
+  expect(button("Export consolidated XML")).toBeUndefined();
+  expect(button("Export PDF dossier")).toBeUndefined();
+  saved = {
+    ...saved,
+    prepared: {
+      ...saved.prepared,
+      draft: {
+        ...saved.prepared.draft,
+        parserVersion: "federal-uslm-xml/2",
+        source: schemaFixture.imported.source,
+      },
+    },
+  } as unknown as AdmittedFederalReview;
+  await click("Open saved review");
+  expect(button("Export consolidated XML")).toBeDefined();
+  expect(button("Export PDF dossier")).toBeUndefined();
+  saved = {
+    ...saved,
+    prepared: {
+      ...saved.prepared,
+      draft: {
+        ...saved.prepared.draft,
+        resultKind: "source-text-removed",
+        outputs: { ...saved.prepared.draft.outputs, consolidated: "" },
+      },
+    },
+  } as unknown as AdmittedFederalReview;
+  await click("Open saved review");
+  expect(button("Export consolidated XML")).toBeUndefined();
+  expect(button("Export consolidated")).toBeDefined();
+  expect(
+    nodes.some(
+      (node) =>
+        node.type === "p" &&
+        label(node).includes("TXT remains exactly zero bytes"),
+    ),
+  ).toBe(true);
+});
+
+it("recovers the original XML choice after an uncertain outcome", async () => {
+  let uncertain = false;
+  port = { ...port, unresolved: () => uncertain };
+  saved = await structuralReview();
+  await click("Open saved review");
+  await confirm();
+  publish.mockImplementationOnce(async () => {
+    uncertain = true;
+    throw Error("Synthetic unknown XML outcome");
+  });
+  await click("Export consolidated XML", true);
+  expect(button("Export Word dossier")?.props.disabled).toBe(true);
+  publish.mockImplementationOnce(async () => {
+    uncertain = false;
+    return { publication: { version: { filename: "synthetic.xml" } } };
+  });
+  await click("Recover original operation");
+  expect(publish.mock.calls.map((call) => call[1])).toEqual(["xml", "xml"]);
+});
+
+it("offers eligible new-format recovery after remount without claiming a PDF success", async () => {
+  saved = await structuralReview();
+  await click("Open saved review");
+  port = { ...port, unresolved: () => true };
+  render();
+  for (const output of ["xml", "docx", "pdf"])
+    expect(button(`Recover original ${output}`)).toBeDefined();
+  await confirm();
+  publish.mockRejectedValueOnce(
+    Error("The file operation was not dispatched."),
+  );
+  await click("Recover original pdf");
+  expect(publish.mock.lastCall![1]).toBe("pdf");
+  expect(button("Get verified file")).toBeUndefined();
+});
+
+it("defaults newly selected runs to decoded editing and shows the canonical current text", async () => {
+  const source = runFixture.imported.source as FederalCompilerSource;
+  const run = runFixture.imported.source.scopes.find((scope) =>
+    scope.textRun?.decoded.includes("profound sorrow"),
+  )!;
+  port = {
+    ...port,
+    source: async () => ({
+      source,
+      versionId: "synthetic-run-source",
+      sha256: runFixture.imported.publication.version.object.sha256,
+    }),
+  };
+  render();
+  await click("Open source");
+  expect(
+    nodes.some((node) => node.props["aria-label"] === "Text run editing"),
+  ).toBe(false);
+  await chooseScope(run.id);
+  expect(
+    nodes.find((node) => node.props["aria-label"] === "Text run editing")?.props
+      .value,
+  ).toBe("decoded-xml");
+  await add("profound sorrow", "A & <B> 😀");
+  expect(list().operations[0]).toMatchObject({
+    textMode: "decoded-xml",
+    expectedText: "profound sorrow",
+    text: "A & <B> 😀",
+  });
+  expect(
+    nodes.some(
+      (node) => node.type === "pre" && label(node).includes("A & <B> 😀"),
+    ),
+  ).toBe(true);
+  expect(
+    nodes.some(
+      (node) => node.type === "pre" && label(node).includes("A &amp;"),
+    ),
+  ).toBe(false);
+  await chooseScope("document");
+  expect(
+    nodes.some((node) => node.props["aria-label"] === "Text run editing"),
+  ).toBe(false);
+});
+
+it("loads and edits an existing raw run operation without silently setting decoded mode", async () => {
+  const source = runFixture.imported.source as FederalCompilerSource;
+  const run = runFixture.imported.source.scopes.find((scope) =>
+    scope.textRun?.decoded.includes("profound sorrow"),
+  )!;
+  const value = await authoredOperations(source, [
+    {
+      id: "raw-retained",
+      scopeId: run.id,
+      kind: "replace",
+      expectedText: "profound sorrow",
+      text: "old raw &amp; text",
+    },
+  ]);
+  saved = {
+    ...saved,
+    selection: { ...saved.selection, operations: value.operations },
+    prepared: {
+      ...saved.prepared,
+      draft: { ...saved.prepared.draft, source, operations: value.operations },
+    },
+  } as unknown as AdmittedFederalReview;
+  await click("Open saved review");
+  expect(
+    nodes.find((node) => node.props["aria-label"] === "Text run editing")?.props
+      .value,
+  ).toBe("raw");
+  expect(list().operations[0]).not.toHaveProperty("textMode");
+  list().onEdit(list().drafts[0]!);
+  await flush();
+  expect(
+    nodes.find((node) => node.props["aria-label"] === "Text run editing")?.props
+      .value,
+  ).toBe("raw");
+  await field("New text", "updated raw &amp; text");
+  await click("Update amendment");
+  expect(list().operations[0]).not.toHaveProperty("textMode");
+  expect(list().operations[0]).toMatchObject({
+    text: "updated raw &amp; text",
+  });
+  expect(button("Export consolidated")).toBeUndefined();
+});
+
 it("clears confirmed outputs and stale hashes when removing a prerequisite refuses", async () => {
   await loadChain();
   await confirm();
@@ -271,7 +528,7 @@ it("replaces an earlier loaded amendment in place and recomputes its dependent t
   await field("New text", "$175");
   await click("Update amendment");
   expect(list().operations).toEqual(previous);
-  expect(list().drafts[0]!.text).toBe("$150");
+  expect(textAmendment(list().drafts[0]!).text).toBe("$150");
   expect(button("Export consolidated")!.props.disabled).toBe(true);
   await field("New text", "$150 payable");
   await click("Update amendment");
@@ -280,8 +537,8 @@ it("replaces an earlier loaded amendment in place and recomputes its dependent t
     "retained-second",
   ]);
   expect(list().operations[1]!.dependsOn).toEqual(["retained-first"]);
-  expect(list().operations[1]!.expectedScopeSha256).not.toBe(
-    previous[1]!.expectedScopeSha256,
+  expect(textAmendment(list().operations[1]!).expectedScopeSha256).not.toBe(
+    textAmendment(previous[1]!).expectedScopeSha256,
   );
   await prepareReview();
   expect(prepare.mock.lastCall![2]).toBe(saved);
@@ -301,7 +558,7 @@ it.each(["Cancel edit", "Update amendment"])(
     await flush();
     if (action === "Cancel edit") await field("New text", "$999");
     await click(action);
-    expect(list().drafts[0]!.text).toBe("$150");
+    expect(textAmendment(list().drafts[0]!).text).toBe("$150");
     await click("Export consolidated");
     expect(publish.mock.lastCall![0]).toBe(saved);
     expect(prepare).not.toHaveBeenCalled();
@@ -319,7 +576,7 @@ it("keeps independent sibling hashes unchanged when an earlier amendment is edit
   await field("New text", "$175");
   await click("Update amendment");
   expect(list().operations[1]).toEqual(sibling);
-  expect(list().operations[0]!.text).toBe("$175");
+  expect(textAmendment(list().operations[0]!).text).toBe("$175");
 });
 
 it("preserves exact imported operations for an untouched nested review and refuses stale hashes after removal", async () => {
@@ -366,4 +623,219 @@ it("preserves exact imported operations for an untouched nested review and refus
   expect(list().drafts).toHaveLength(1);
   expect(list().operations).toEqual([]);
   expect(button("Export consolidated")).toBeUndefined();
+});
+
+function completeRemovalSource() {
+  const source = {
+    ...saved.prepared.draft.source,
+    coverage: { ...saved.prepared.draft.source.coverage, complete: true },
+  };
+  saved = {
+    ...saved,
+    prepared: { ...saved.prepared, draft: { ...saved.prepared.draft, source } },
+  } as AdmittedFederalReview;
+  port = {
+    ...port,
+    source: async () => ({
+      source,
+      versionId: saved.selection.versionId,
+      sha256: saved.selection.expectedArtifactSha256,
+    }),
+  };
+  render();
+}
+
+it("authors explicit terminal removal, displays empty review, and clears it when removed", async () => {
+  completeRemovalSource();
+  await click("Open source");
+  await add("$100", "$150");
+  await click("Propose whole-source removal");
+  const operations = list().operations;
+  expect(operations.at(-1)?.kind).toBe("remove_source_text");
+  expect(operations.at(-1)?.dependsOn).toEqual([operations[0]!.id]);
+  expect(button("Propose whole-source removal")!.props.disabled).toBe(true);
+  expect(button("Add amendment to review")!.props.disabled).toBe(true);
+  prepare.mockImplementation(async (selection: FederalSelection) => ({
+    ...saved,
+    selection,
+    prepared: {
+      ...saved.prepared,
+      draft: {
+        ...saved.prepared.draft,
+        resultKind: "source-text-removed",
+        operations: selection.operations,
+        outputs: { ...saved.prepared.draft.outputs, consolidated: "" },
+      },
+    },
+  }));
+  await prepareReview();
+  expect(
+    nodes.some(
+      (node) => node.type === "p" && label(node).includes("exactly zero bytes"),
+    ),
+  ).toBe(true);
+  await confirm();
+  await click("Export consolidated");
+  expect(publish.mock.lastCall![0].prepared.draft.outputs.consolidated).toBe(
+    "",
+  );
+  list().onRemove(list().drafts.at(-1)!);
+  await flush();
+  expect(button("Export consolidated")).toBeUndefined();
+  expect(button("Get verified file")).toBeUndefined();
+  expect(button("Propose whole-source removal")!.props.disabled).toBe(false);
+  await add("$150", "$250");
+  expect(list().drafts.map((entry) => entry.kind)).toEqual([
+    "replace",
+    "replace",
+  ]);
+});
+
+it("recomputes terminal removal when an earlier amendment is edited and preserves cancel", async () => {
+  completeRemovalSource();
+  await click("Open source");
+  await add("$100", "$150");
+  await click("Propose whole-source removal");
+  const before = list().operations.at(-1)!;
+  list().onEdit(list().drafts[0]!);
+  await flush();
+  await field("New text", "$175");
+  await click("Cancel edit");
+  expect(list().operations.at(-1)).toEqual(before);
+  list().onEdit(list().drafts[0]!);
+  await flush();
+  await field("New text", "$200");
+  await click("Update amendment");
+  const after = list().operations.at(-1)!;
+  expect(after.id).toBe(before.id);
+  expect(after.expectedTextSha256).not.toBe(before.expectedTextSha256);
+  expect(after.dependsOn).toEqual(before.dependsOn);
+});
+
+it("loads a removal-only review without treating it as an editable text amendment", async () => {
+  completeRemovalSource();
+  const derived = await authoredOperations(saved.prepared.draft.source, [
+    { id: "removal", kind: "remove_source_text" },
+  ]);
+  saved = {
+    ...saved,
+    selection: {
+      ...saved.selection,
+      operations: [...derived.operations] as FederalSelection["operations"],
+    },
+    prepared: {
+      ...saved.prepared,
+      draft: {
+        ...saved.prepared.draft,
+        resultKind: "source-text-removed",
+        operations: [...derived.operations],
+        outputs: { ...saved.prepared.draft.outputs, consolidated: "" },
+      },
+    },
+  } as AdmittedFederalReview;
+  await click("Open saved review");
+  expect(list().drafts).toEqual([
+    { id: "removal", kind: "remove_source_text" },
+  ]);
+  expect(list().operations).toEqual(saved.selection.operations);
+  list().onEdit(list().drafts[0]!);
+  await flush();
+  expect(button("Update amendment")).toBeUndefined();
+  expect(button("Propose whole-source removal")!.props.disabled).toBe(true);
+  expect(
+    nodes.some(
+      (node) => node.type === "p" && label(node).includes("exactly zero bytes"),
+    ),
+  ).toBe(true);
+  await confirm();
+  await click("Export consolidated");
+  expect(publish.mock.lastCall![0]).toBe(saved);
+  expect(prepare).not.toHaveBeenCalled();
+});
+
+it("keeps removal unavailable for a partially covered source", async () => {
+  await click("Open source");
+  expect(fixture.source.coverage.complete).toBe(false);
+  expect(button("Propose whole-source removal")!.props.disabled).toBe(true);
+});
+
+it("saves and reloads removal semantics, retains history access, and downloads a zero-byte export", async () => {
+  completeRemovalSource();
+  saved = {
+    ...saved,
+    savedDraft: fixture.savedReview.savedDraft,
+  } as unknown as AdmittedFederalReview;
+  const derived = await authoredOperations(saved.prepared.draft.source, [
+    { id: "removal", kind: "remove_source_text" },
+  ]);
+  saved = {
+    ...saved,
+    selection: {
+      ...saved.selection,
+      operations: [...derived.operations] as FederalSelection["operations"],
+    },
+    prepared: {
+      ...saved.prepared,
+      draft: {
+        ...saved.prepared.draft,
+        resultKind: "source-text-removed",
+        operations: derived.operations,
+        outputs: { ...saved.prepared.draft.outputs, consolidated: "" },
+      },
+    },
+  } as AdmittedFederalReview;
+  const download = vi.fn(async () => ({
+    ok: true as const,
+    value: {
+      bytes: new Uint8Array(0),
+      mimeType: "text/plain",
+      filename: "synthetic-empty.txt",
+    },
+  }));
+  const history = vi.fn(async () => ({
+    ok: true as const,
+    value: { versions: [], nextCursor: null },
+  }));
+  port = {
+    ...port,
+    library: { ...port.library, download, history },
+  } as unknown as FederalWorkbenchPort;
+  publish.mockImplementation(async (_review, output) => ({
+    output,
+    publication: {
+      version: {
+        versionId: "synthetic-version",
+        filename: "synthetic-empty.txt",
+        object: { sha256: "synthetic" },
+      },
+    },
+  }));
+  render();
+  await click("Open saved review");
+  await click("Save review revision");
+  expect(list().drafts).toEqual([
+    { id: "removal", kind: "remove_source_text" },
+  ]);
+  expect(
+    nodes.some(
+      (node) => node.type === "p" && label(node).includes("exactly zero bytes"),
+    ),
+  ).toBe(true);
+  await click("Show revision history");
+  expect(history).toHaveBeenCalledTimes(1);
+  await confirm();
+  await click("Export consolidated");
+  await click("Get verified file");
+  expect(download).toHaveBeenCalledWith(
+    "synthetic-version",
+    expect.any(AbortSignal),
+  );
+  expect(
+    nodes.some(
+      (node) => node.type === "a" && label(node) === "Save synthetic-empty.txt",
+    ),
+  ).toBe(true);
+  expect(publish.mock.lastCall![0].prepared.draft.outputs.consolidated).toBe(
+    "",
+  );
 });
