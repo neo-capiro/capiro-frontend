@@ -143,7 +143,7 @@ test("One header attendance panel remains visible across meeting tabs without di
   const sections = page
     .getByRole("dialog", { name: meeting.subject, exact: true })
     .getByRole("navigation", { name: "Meeting sections" });
-  for (const name of ["Meeting Notes", "Debrief", "Info", "Prep"]) {
+  for (const name of ["Notes", "Debriefs", "Information", "Preparation"]) {
     await sections.getByRole("button", { name, exact: true }).click();
     await expect(panel).toHaveCount(1);
     await expect(

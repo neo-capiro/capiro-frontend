@@ -1307,15 +1307,6 @@
     "reviewedOn": "2026-10-14"
   },
   {
-    "file": "apps/web/src/features/modules/calendar/calendar.module.css",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "34cab455d626ec584301c7fd0e83cc14f412b8ccd2116d12c1e9d7aaa17d2e20",
-    "reason": "Calendar-specific authored geometry, source filters, agenda and responsive rules remain a single presentation stylesheet. The new compact header/disclosure owns no data or routing policy; ModuleBreadcrumb remains the navigation owner. No other module geometry changes. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
     "kind": "function",
     "symbol": "ConfiguredTracker",
@@ -3477,24 +3468,6 @@
     "reason": "Hook composing the screen lifetime of a conversation controller into React state, with its private useTurnOpening/useSelectedHistory helpers. One concern - session lifetime - for the meri conversation owner.",
     "reviewedBy": "Hermes Agent architecture lane 3",
     "reviewedOn": "2026-10-27"
-  },
-  {
-    "file": "apps/web/src/shared/meetings/MeetingArtifacts.tsx",
-    "kind": "function",
-    "symbol": "useArtifacts",
-    "fingerprint": "b5a074c2717bbbd256088f6bd59ac392a3e782126d74aa185fffbf52645ffbef",
-    "reason": "One meeting-material editing/approval lifecycle. Notes and debrief preserve separate registered operations and canonical transport/authority. The synchronous reservation and parent notification protect the same draft operation. Independent source review found no additional responsibility; focused fixture coverage proves create success/failure, duplicate submission and Escape, not update/approval/disposal or live policy.",
-    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
-    "reviewedOn": "2026-10-19"
-  },
-  {
-    "file": "apps/web/src/shared/meetings/MeetingDetail.tsx",
-    "kind": "function",
-    "symbol": "MeetingDetail",
-    "fingerprint": "dc1aeb8c9614cf4cbc44fe46fde9cb9b544cee8b27618ff18121790ded9420cb",
-    "reason": "One current meeting workspace presentation: detail association, material tab, header and modal/inline dismissal. Pending state and its synchronous ref protect the same active operation across local exits; separate header and materials owners remain. Independently reviewed without introducing a writer or authority policy.",
-    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
-    "reviewedOn": "2026-10-19"
   },
   {
     "file": "apps/web/src/features/modules/engagement/CampaignSession.tsx",
@@ -6873,15 +6846,6 @@
     "fingerprint": "8c1ebf36f6668b174470ab56994ff730fc9f1c4707da02820f422176f844bdb5",
     "reason": "8c1ebf36f6668b174470ab56994ff730fc9f1c4707da02820f422176f844bdb5 RunLedger fn, l4, 91 nb ACCEPTABLE / IMPROVED â€” responsibility for source naming and outcome projection moved OUT of RunLedger into SourceOutcome (single owner of the label map, previously duplicated inline). No state added.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
-    "reviewedOn": "2026-10-27"
-  },
-  {
-    "file": "apps/web/src/features/modules/calendar/CalendarCard.tsx",
-    "kind": "function",
-    "symbol": "CalendarEvents",
-    "fingerprint": "99d2ca51f7a66e6aa7222c917a646be2e081fd018346a25cb0073e38c45f938c",
-    "reason": "Responsibility/cohesion: the body is a single cohesive presentational responsibility â€” the\nevents viewport for the active view, with an agenda branch (search, clear filters, status\npanel, agenda table, empty/error messaging) and a grid branch (status panel + grid), plus the\nextras loading/warning notices. It fetches nothing, normalizes nothing, owns no state and\npersists nothing; every input comes from CalendarModel and rendering is delegated to\nAgendaTable, CalendarGrid, StatusPanel, TextInput and ActionButton. No cross-owner logic, no\nduplicated authority, and no boundary or cycle involvement (errors[] empty). Concrete\nresidual: it takes the whole CalendarModel and reads 11 fields, and the two branches could\nlater be split into presentational sub-components â€” optional hardening, out of scope here and\nnot justified by any correctness risk. I give no blanket count pass and claim no exception:\nthe >80 threshold is a size/maintainability signal, and the concrete reasons above are why\nthis exact body is acceptable. Disposition: ACCEPT the exact body as cohesive\nsingle-responsibility presentation; the blocking state is a review-record invalidation\nartifact of the enclosing-file edit, not a new or changed architectural defect. I do not bind\nthe registry; root owns the matching final-byte binding.",
-    "reviewedBy": "Hermes Agent source review 20261027_193444_620b36",
     "reviewedOn": "2026-10-27"
   },
   {
