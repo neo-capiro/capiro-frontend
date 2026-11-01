@@ -7,7 +7,6 @@ import {
   Badge,
   Field,
   Panel,
-  SelectInput,
   TextArea,
   TextInput,
   StatusPanel,
@@ -19,6 +18,7 @@ import {
   savedEnvelope,
   historicalMessage,
 } from "./campaign-model";
+import { CampaignGenerationBrief } from "./CampaignGenerationBrief";
 import styles from "./outreach-workflow.module.css";
 type Owner = ReturnType<typeof useOutreachCampaign>;
 export function CampaignDrafts({ owner }: { owner: Owner }) {
@@ -39,163 +39,200 @@ export function CampaignDrafts({ owner }: { owner: Owner }) {
       ["done", "held", "failed", "canceled"].includes(item.status),
     );
   return (
-    <div className={styles.grid}>
-      <Panel
-        title={pending ? "Generating your outreach" : "Generate and review"}
-        description="Generate a saved message for each recipient, then review the result."
-      >
-        <div className={styles.fields}>
-          {pending ? (
-            <>
-              <div role="status">
-                {owner.job
-                  ? `${owner.job.items.filter((row) => row.status === "done").length} of ${owner.job.items.length} drafts completed`
-                  : "Checking the generation request…"}
-              </div>
-              {owner.job?.items.map((row) => (
-                <div className={styles.choice} key={row.id}>
-                  <span>
-                    {units.find((unit) => unit.key === row.recipientKey)
-                      ?.name ?? "Recipient"}
-                  </span>
-                  <Badge>
-                    {row.status.replace("sdk_", "").replaceAll("_", " ")}
-                  </Badge>
+    <div className={styles.stack}>
+      <CampaignGenerationBrief
+        state={owner.state}
+        disabled={owner.busy || owner.readOnly || !!owner.pending}
+        onStep={owner.navigate}
+      />
+      <div className={styles.reviewGrid}>
+        <Panel
+          title={pending ? "Generating your outreach" : "Generate and review"}
+          description="Generate a saved message for each recipient, then review the result."
+        >
+          <div className={styles.fields}>
+            {pending ? (
+              <>
+                <div role="status">
+                  {owner.job
+                    ? `${owner.job.items.filter((row) => row.status === "done").length} of ${owner.job.items.length} drafts completed`
+                    : "Checking the generation request…"}
                 </div>
-              ))}
-              <div className={styles.actions}>
-                <ActionButton disabled={owner.busy} onClick={owner.refresh}>
-                  Check status
-                </ActionButton>
+                {owner.job?.items.map((row) => (
+                  <div className={styles.choice} key={row.id}>
+                    <span>
+                      {units.find((unit) => unit.key === row.recipientKey)
+                        ?.name ?? "Recipient"}
+                    </span>
+                    <Badge>
+                      {row.status.replace("sdk_", "").replaceAll("_", " ")}
+                    </Badge>
+                  </div>
+                ))}
+                <div className={styles.actions}>
+                  <ActionButton disabled={owner.busy} onClick={owner.refresh}>
+                    Check status
+                  </ActionButton>
+                  <ActionButton
+                    disabled={
+                      owner.busy ||
+                      owner.readOnly ||
+                      !owner.receipt ||
+                      !owner.job?.items.some(
+                        (item) => item.status === "sdk_pending",
+                      )
+                    }
+                    onClick={owner.continueGeneration}
+                  >
+                    Continue remaining drafts
+                  </ActionButton>
+                  <ActionButton
+                    disabled={!owner.receipt || settled}
+                    onClick={owner.cancelGeneration}
+                  >
+                    Cancel generation
+                  </ActionButton>
+                  {settled && (
+                    <ActionButton
+                      primary
+                      disabled={owner.busy}
+                      onClick={owner.finishGeneration}
+                    >
+                      Review drafts
+                    </ActionButton>
+                  )}
+                </div>
+                {owner.job?.items.some((item) => item.status === "unknown") && (
+                  <p role="status">
+                    A result is not confirmed. Check the saved drafts; this
+                    request will not be repeated automatically.
+                  </p>
+                )}
+              </>
+            ) : (
+              <div className={styles.fields}>
+                <p className={styles.hint}>
+                  {units.length} {units.length === 1 ? "message" : "messages"} ·
+                  one active recipient at a time
+                </p>
                 <ActionButton
+                  primary
                   disabled={
                     owner.busy ||
                     owner.readOnly ||
-                    !owner.receipt ||
-                    !owner.job?.items.some(
-                      (item) => item.status === "sdk_pending",
+                    !!owner.pending ||
+                    !!campaignProblem(owner.state)
+                  }
+                  onClick={() =>
+                    owner.generate(
+                      units.map((unit) => unit.key),
+                      "generate",
                     )
                   }
-                  onClick={owner.continueGeneration}
                 >
-                  Continue remaining drafts
+                  Generate drafts
                 </ActionButton>
-                <ActionButton
-                  disabled={!owner.receipt || settled}
-                  onClick={owner.cancelGeneration}
-                >
-                  Cancel generation
-                </ActionButton>
-                {settled && (
-                  <ActionButton
-                    primary
-                    disabled={owner.busy}
-                    onClick={owner.finishGeneration}
-                  >
-                    Review drafts
-                  </ActionButton>
-                )}
-              </div>
-              {owner.job?.items.some((item) => item.status === "unknown") && (
-                <p role="status">
-                  A result is not confirmed. Check the saved drafts; this
-                  request will not be repeated automatically.
-                </p>
-              )}
-            </>
-          ) : (
-            <div className={styles.fields}>
-              <p className={styles.hint}>
-                {units.length} {units.length === 1 ? "message" : "messages"} ·
-                one active recipient at a time
-              </p>
-              <ActionButton
-                primary
-                disabled={
-                  owner.busy || owner.readOnly || !!campaignProblem(owner.state)
-                }
-                onClick={() =>
-                  owner.generate(
-                    units.map((unit) => unit.key),
-                    "generate",
-                  )
-                }
-              >
-                Generate drafts
-              </ActionButton>
-            </div>
-          )}
-          {!pending && (
-            <Panel title="Generation progress">
-              <div className={styles.fields}>
-                <p className={styles.hint}>
-                  {owner.drafts.filter((row) => !!row.current).length} of{" "}
-                  {units.length} saved
-                </p>
-                <p className={styles.hint}>
-                  Every saved draft remains available when you leave this
-                  screen.
-                </p>
-              </div>
-            </Panel>
-          )}
-        </div>
-      </Panel>
-      {!!units.length && (
-        <Panel
-          title="Saved draft"
-          description="These are the saved versions used for delivery."
-        >
-          <div className={styles.fields}>
-            <Field label="Preview for" htmlFor="draft-recipient">
-              <SelectInput
-                id="draft-recipient"
-                value={selected?.key ?? ""}
-                options={units.map((unit) => ({
-                  value: unit.key,
-                  label: unit.name,
-                }))}
-                onValueChange={setKey}
-              />
-            </Field>
-            {envelope && (
-              <div className={styles.envelope}>
-                <p>
-                  <strong>To</strong>{" "}
-                  {envelope.to.map((row) => row.email).join(", ")}
-                </p>
-                {!!envelope.cc.length && (
-                  <p>
-                    <strong>Cc</strong> {envelope.cc.join(", ")}
-                  </p>
-                )}
-                {!!envelope.bcc.length && (
-                  <p>
-                    <strong>Bcc</strong> {envelope.bcc.join(", ")}
-                  </p>
-                )}
               </div>
             )}
-            {current && artifact ? (
-              <DraftEditor
-                key={current.id}
-                artifact={artifact}
-                disabled={owner.busy || owner.readOnly || !!owner.pending}
-                onSave={(subject, body) =>
-                  owner.editDraft(artifact, subject, body)
-                }
-                onGenerate={(mode, instruction) =>
-                  selected && owner.generate([selected.key], mode, instruction)
-                }
-              />
-            ) : (
-              <p className={styles.hint}>
-                No saved draft for this recipient yet.
-              </p>
+            {!!units.length && (
+              <div>
+                <h3>Review by recipient</h3>
+                <p className={styles.hint}>
+                  {
+                    units.filter((unit) =>
+                      owner.drafts.some(
+                        (row) => row.generationKey === unit.key && row.current,
+                      ),
+                    ).length
+                  }{" "}
+                  of {units.length} saved. Select a recipient to preview their
+                  message.
+                </p>
+                <ul
+                  className={styles.draftRecipients}
+                  aria-label="Draft recipients"
+                >
+                  {units.map((unit) => {
+                    const draft = owner.drafts.find(
+                      (row) => row.generationKey === unit.key,
+                    )?.current;
+                    return (
+                      <li key={unit.key}>
+                        <ActionButton
+                          aria-pressed={selected?.key === unit.key}
+                          onClick={() => setKey(unit.key)}
+                        >
+                          <span>
+                            <strong>{unit.name || "Recipient"}</strong>
+                            <span>
+                              {unit.to.map((row) => row.email).join(", ")}
+                            </span>
+                          </span>
+                          <Badge>
+                            {draft
+                              ? draft.sendable
+                                ? "Saved"
+                                : "Needs attention"
+                              : "No draft"}
+                          </Badge>
+                        </ActionButton>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             )}
           </div>
         </Panel>
-      )}
+        {!!units.length && (
+          <Panel
+            title={
+              selected?.name ? `Draft for ${selected.name}` : "Saved draft"
+            }
+            description="These are the saved versions used for delivery."
+          >
+            <div className={styles.fields}>
+              {envelope && (
+                <div className={styles.envelope}>
+                  <p>
+                    <strong>To</strong>{" "}
+                    {envelope.to.map((row) => row.email).join(", ")}
+                  </p>
+                  {!!envelope.cc.length && (
+                    <p>
+                      <strong>Cc</strong> {envelope.cc.join(", ")}
+                    </p>
+                  )}
+                  {!!envelope.bcc.length && (
+                    <p>
+                      <strong>Bcc</strong> {envelope.bcc.join(", ")}
+                    </p>
+                  )}
+                </div>
+              )}
+              {current && artifact ? (
+                <DraftEditor
+                  key={current.id}
+                  artifact={artifact}
+                  disabled={owner.busy || owner.readOnly || !!owner.pending}
+                  onSave={(subject, body) =>
+                    owner.editDraft(artifact, subject, body)
+                  }
+                  onGenerate={(mode, instruction) =>
+                    selected &&
+                    owner.generate([selected.key], mode, instruction)
+                  }
+                />
+              ) : (
+                <p className={styles.hint}>
+                  No saved draft for this recipient yet. Generate drafts, then
+                  select this recipient to review the saved message.
+                </p>
+              )}
+            </div>
+          </Panel>
+        )}
+      </div>
       {owner.saved && !owner.drafts.length && (
         <HistoricalMessage
           id={owner.saved.id}

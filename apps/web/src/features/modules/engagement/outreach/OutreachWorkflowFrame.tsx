@@ -5,13 +5,46 @@ import { ActionButton, PageHeader } from "../../../../shared/module-ui";
 import styles from "./outreach-workflow.module.css";
 
 export const outreachSteps = [
-  { id: "1", label: "Direction" },
-  { id: "2", label: "Campaign setup" },
-  { id: "3", label: "Recipients" },
-  { id: "4", label: "Context plan" },
-  { id: "5", label: "Context builder" },
-  { id: "6", label: "Generate & review" },
-  { id: "7", label: "Send" },
+  {
+    id: "1",
+    label: "Direction",
+    description: "Choose who you represent and who you want to reach.",
+  },
+  {
+    id: "2",
+    label: "Campaign setup",
+    description: "Name your campaign and choose a template, tone and length.",
+  },
+  {
+    id: "3",
+    label: "Recipients",
+    description:
+      "Add individuals, a list for separate messages, or a group for one shared message.",
+  },
+  {
+    id: "4",
+    label: "Context plan",
+    description:
+      "Explain the purpose of your outreach and what you want recipients to do.",
+  },
+  {
+    id: "5",
+    label: "Context builder",
+    description:
+      "Choose supporting sources and notes, then decide which recipients they apply to.",
+  },
+  {
+    id: "6",
+    label: "Generate & review",
+    description:
+      "Generate drafts from your campaign context, then review each saved message.",
+  },
+  {
+    id: "7",
+    label: "Send",
+    description:
+      "Confirm your sending mailbox, recipients and saved messages before delivery.",
+  },
 ] as const;
 
 export type OutreachStep = 1 | 2 | 3 | 4 | 5 | 6 | 7;
@@ -44,14 +77,19 @@ export function OutreachWorkflowFrame({
   onSave: () => void;
   children: ReactNode;
 }) {
+  const stage =
+    outreachSteps.find((item) => Number(item.id) === step) ?? outreachSteps[0];
+  const nextStage = outreachSteps.find((item) => Number(item.id) === step + 1);
   return (
     <section className={styles.workflow} aria-label="Outreach campaign">
       <PageHeader
         title={title || "New outreach"}
         description={
-          saved
-            ? "Your draft is saved. Review before sending."
-            : "Unsaved changes"
+          readOnly
+            ? "View saved messages and delivery status."
+            : saved
+              ? "Your draft is saved. Review before sending."
+              : "Unsaved changes"
         }
       />
       <ActionButton
@@ -63,6 +101,7 @@ export function OutreachWorkflowFrame({
       </ActionButton>
       <div className={styles.workspace}>
         <nav className={styles.stepRail} aria-label="Outreach steps">
+          <p className={styles.railTitle}>Create your outreach</p>
           <ol>
             {outreachSteps.map((item, index) => (
               <li key={item.id}>
@@ -86,6 +125,13 @@ export function OutreachWorkflowFrame({
           </ol>
         </nav>
         <div className={styles.workPane}>
+          <header className={styles.stageHeader}>
+            <p className={styles.eyebrow}>
+              Step {step} of {outreachSteps.length}
+            </p>
+            <h2>{stage.label}</h2>
+            <p>{stage.description}</p>
+          </header>
           {error && (
             <p className={styles.error} role="alert">
               {error}
@@ -116,14 +162,14 @@ export function OutreachWorkflowFrame({
             >
               Save draft
             </ActionButton>
-            {step < 7 && (
+            {nextStage && (
               <ActionButton
                 primary
                 disabled={busy || fenced || Boolean(nextDisabled)}
                 title={nextDisabled}
                 onClick={() => onStep((step + 1) as OutreachStep)}
               >
-                Continue
+                Continue to {nextStage.label.toLowerCase()}
               </ActionButton>
             )}
           </footer>
