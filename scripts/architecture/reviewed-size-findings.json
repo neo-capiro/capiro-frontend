@@ -7335,19 +7335,19 @@
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "75fb27410e985327136c7555918870079cfa26bd32508df4bba5dd5567f53b73",
-    "reason": "Author structural assessment in docs/federal-workbench.md: One exact-text review presentation lifetime coordinates confirmation invalidation, selected source/revision and uncertain export recovery. Import selection has its own component; the parent prevents competing writes and clears confirmation on stale-source refusal while preserving the original recoverable export. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "fd1f03db2ff84f1f7d0bf043b0e9018f0d153af4bc4c559d3cb872c204f2edbb",
+    "reason": "Independent review of b8ed730d: one source/amendment/review presentation lifetime owns transactional edits, confirmation invalidation, publication and pending-delivery controls. Derivation, row presentation, source import and authority/persistence remain separate owners. Removal clears stale review and hashes before derivation; in-place edits retain identity/order and commit only a valid sequence. Actual callback and compiler-fixture checks cover refused removal, dependency recomputation, unique IDs and nested no-op/cancel preservation. See FE436-CORRECTION-INDEPENDENT-REVIEW-20261101.txt.",
+    "reviewedBy": "Codex independent /root/legislative_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "function",
     "symbol": "FederalWorkbench",
-    "fingerprint": "c270fd457cd3b5fd9bb5b9599b8a63a9ad5c5927c0483b4b291fc1e950c1375a",
-    "reason": "Author structural assessment in docs/federal-workbench.md: One exact-text review presentation lifetime coordinates confirmation invalidation, selected source/revision and uncertain export recovery. Import selection has its own component; the parent prevents competing writes and clears confirmation on stale-source refusal while preserving the original recoverable export. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "58290e27a02643b54cdcdef46b434b7ebd0de080aa1a985745b9ddd2429b634c",
+    "reason": "Independent review of b8ed730d: the component coordinates one source/amendment/review state lifetime. Transactional edit, remove, prepare and publish transitions share review invalidation and pending-delivery constraints; derivation and backend authority remain delegated. The corrected removal and in-place edit paths preserve exact reviewed intent, while cancel/no-op edits preserve untouched saved reviews. Focused callbacks and an independent compiler-valid nested fixture verify those invariants. See FE436-CORRECTION-INDEPENDENT-REVIEW-20261101.txt.",
+    "reviewedBy": "Codex independent /root/legislative_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/files/FederalSourceImporter.tsx",
