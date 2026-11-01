@@ -182,6 +182,40 @@
   cursor: default;
   opacity: 0.5;
 }
+.templateCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.templateCard .templateChoice {
+  flex: 1;
+  border: 0;
+  border-radius: 0;
+}
+.templateCard > button {
+  align-self: flex-start;
+  margin: 0 20px 16px;
+}
+.createTemplate {
+  min-height: 120px;
+  height: auto;
+  white-space: normal;
+  border-style: dashed;
+}
+.templateDialog[data-slot="dialog-content"] {
+  width: min(680px, calc(100vw - 32px));
+  max-width: none;
+}
+.templateText {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 260px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.6;
+}
 @media (max-width: 1000px) {
   .workspace {
     grid-template-columns: 190px minmax(0, 1fr);
