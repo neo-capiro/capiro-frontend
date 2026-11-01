@@ -13,11 +13,13 @@ export function AIColumnPresets({
   design,
   proposalScope,
   change,
+  expanded = false,
 }: {
   documentId?: string;
   design: NewsletterDesign;
   proposalScope: string;
   change: (action: StructureAction) => void;
+  expanded?: boolean;
 }) {
   const [sourceBlock] = useState(() =>
     createNewsletterBlock("paragraph", { text: "" }),
@@ -32,9 +34,14 @@ export function AIColumnPresets({
         : "The columns cannot be inserted here.";
     }
   }, [design]);
+  const Container = expanded ? "div" : "details";
   return (
-    <details>
-      <summary>AI-generated columns</summary>
+    <Container>
+      {expanded ? (
+        <h3>AI-generated columns</h3>
+      ) : (
+        <summary>AI-generated columns</summary>
+      )}
       {insertionError ? (
         <p role="status">{insertionError}</p>
       ) : documentId ? (
@@ -49,8 +56,16 @@ export function AIColumnPresets({
           }}
         />
       ) : (
-        <p>Save and verify the newsletter before generating columns.</p>
+        <>
+          {expanded &&
+            AI_COLUMN_PRESETS.map((preset) => (
+              <button key={preset.label} disabled>
+                {preset.label}
+              </button>
+            ))}
+          <p>Save and verify the newsletter before generating columns.</p>
+        </>
       )}
-    </details>
+    </Container>
   );
 }
