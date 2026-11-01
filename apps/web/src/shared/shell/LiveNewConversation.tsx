@@ -74,7 +74,7 @@ function VerifiedNewConversation(props: Props) {
     (params.has("scope") &&
       (!general || params.getAll("scope").length !== 1)) ||
     params.getAll("clientId").length > 1;
-  const { start, error } = useNewConversationNavigation(props.onNavigate);
+  const start = useNewConversationNavigation(props.onNavigate);
   const current =
     identity.isSuccess && !identity.isFetching && !identity.error
       ? identity.data
@@ -138,7 +138,6 @@ function VerifiedNewConversation(props: Props) {
           onClick={explicitStart}
         />
       )}
-      {error && <p role="alert">{error}</p>}
     </>
   );
 }

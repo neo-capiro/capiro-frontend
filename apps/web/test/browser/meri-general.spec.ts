@@ -115,6 +115,87 @@ test("synthetic General creates only an explicit v2 scope, submits once, and res
   expect(f.unexpected).toEqual([]);
 });
 
+test("a bare General link carries the confirmed id, reopens the empty conversation, and starts a new one after its first message", async ({
+  page,
+}) => {
+  const f = await general(page);
+  const request = (index: number) =>
+    (f.bootstrap[index] as { requestId: string }).requestId;
+
+  await page.goto("/meri?scope=general");
+  await expect(page).toHaveURL(
+    new RegExp(`scope=general&conversationId=${binding.conversationId}`),
+  );
+  expect(f.bootstrap).toHaveLength(1);
+
+  // Opening the scope again before any message reopens the same request and conversation.
+  await page.goto("/meri?scope=general");
+  await expect(page).toHaveURL(
+    new RegExp(`conversationId=${binding.conversationId}`),
+  );
+  expect(f.bootstrap).toHaveLength(2);
+  expect(request(1)).toBe(request(0));
+
+  await composer(page).fill("General synthetic request");
+  await expect(sendButton(page)).toBeEnabled();
+  await sendButton(page).click();
+  await expect(
+    page.getByText("Initial synthetic answer", { exact: true }),
+  ).toBeVisible();
+
+  // After the first message the bare link is a new conversation with its own request.
+  await page.goto("/meri?scope=general");
+  await expect.poll(() => f.bootstrap.length).toBe(3);
+  expect(request(2)).not.toBe(request(0));
+  expect(f.unexpected).toEqual([]);
+});
+
+test("a request whose delivery is uncertain stays in the transcript with its retry and is never merged into the next message", async ({
+  page,
+}) => {
+  const f = await general(page);
+  let dropFirst = true;
+  await page.route("**/api/conversations/submit", (route) => {
+    if (!dropFirst) return route.fallback();
+    dropFirst = false;
+    return route.abort();
+  });
+
+  await page.goto("/meri?scope=general");
+  await composer(page).fill("First request");
+  await expect(sendButton(page)).toBeEnabled();
+  await sendButton(page).click();
+  await expect(
+    page.getByText("Delivery is uncertain", { exact: false }),
+  ).toBeVisible();
+  // The attempt is shown once, in the transcript; the box is free for the next message.
+  await expect(page.getByText(/First request/)).toBeVisible();
+  await expect(composer(page)).toHaveValue("");
+  await expect(
+    page.getByText("Your last request is still unconfirmed", { exact: false }),
+  ).toBeVisible();
+  await expect(sendButton(page)).toBeDisabled();
+
+  await composer(page).fill("Second request");
+  await expect(composer(page)).toHaveValue("Second request");
+
+  await page.reload();
+  await expect(page.getByText(/First request/)).toBeVisible();
+  await expect(composer(page)).toHaveValue("Second request");
+  // The journal resolves the attempt through whichever control the current read offers.
+  await page
+    .getByRole("button", {
+      name: /Retry same request|Continue accepted request/,
+    })
+    .click();
+  await expect(
+    page.getByText("Initial synthetic answer", { exact: true }),
+  ).toBeVisible();
+  await expect(composer(page)).toHaveValue("Second request");
+  await expect(page.getByText("Enter to send", { exact: false })).toBeVisible();
+  expect(f.unexpected).toEqual([]);
+});
+
 test("synthetic General keeps Stop explicit and never cancels on page teardown", async ({
   page,
 }) => {

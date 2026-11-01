@@ -3,6 +3,10 @@ import { SettingsScreen } from "../../../features/settings";
 import { MeriPreferencesPanel } from "../../../features/meri/screens/settings/MeriPreferencesPanel";
 import { SupportRequestForm } from "../../../features/settings/SupportRequestForm";
 import { readConversationConfig } from "../../../shared/meri-conversations/config";
+import {
+  buildIdentityLine,
+  readBuildIdentity,
+} from "../../../shared/build/build-identity.server";
 
 export default async function SettingsPage({
   params,
@@ -21,6 +25,7 @@ export default async function SettingsPage({
         memoryReviewEnabled={
           process.env.MERI_MEMORY_OWNER_REVIEW_ENABLED === "true"
         }
+        build={buildIdentityLine(readBuildIdentity(process.env)) ?? undefined}
         meriPreferences={
           <MeriPreferencesPanel
             procedureGovernanceEnabled={!readOnlyPreview}

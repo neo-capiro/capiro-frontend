@@ -13,8 +13,28 @@
 .connectionsTable table {
   min-width: 640px;
 }
+.connectionName {
+  font-weight: 500;
+}
+/* The problem sentence takes its own line under the row's actions; the stored text stays folded. */
 .connectionStatus {
-  white-space: nowrap;
+  flex: 1 1 100%;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+.connectionDetail {
+  margin-top: 4px;
+  font-size: 12px;
+}
+.connectionDetail summary {
+  width: fit-content;
+  cursor: pointer;
+}
+.connectionDetail code {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  overflow-wrap: anywhere;
 }
 .page {
   display: flex;

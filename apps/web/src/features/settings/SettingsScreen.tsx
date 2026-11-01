@@ -106,11 +106,14 @@ export function SettingsScreen({
   meriPreferences,
   memoryReviewEnabled = false,
   readOnlyPreview = false,
+  build,
 }: {
   section?: string;
   meriPreferences: ReactNode;
   memoryReviewEnabled?: boolean;
   readOnlyPreview?: boolean;
+  /** The serving tuple line the route read from its environment; testers record it from here. */
+  build?: string;
 }) {
   const query = useCapiroQuery("me.read", {});
   const identity = query.data;
@@ -174,6 +177,7 @@ export function SettingsScreen({
                 The requested Settings section is unavailable.
               </SettingsNotice>
             )}
+            {build && <footer className={styles.build}>Build · {build}</footer>}
           </div>
         </div>
       )}

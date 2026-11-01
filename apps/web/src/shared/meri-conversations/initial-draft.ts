@@ -23,7 +23,13 @@ const draftState = z.strictObject({
   draft: z.string(),
   revision: z.number().int().nonnegative().safe(),
   pending: capture
-    .extend({ run: z.string(), request: z.string(), continuation: z.boolean() })
+    .extend({
+      run: z.string(),
+      request: z.string(),
+      continuation: z.boolean(),
+      /** The person typed since the capture; the box shows their text, not the capture. */
+      edited: z.boolean().optional(),
+    })
     .nullable(),
   reserved: capture.extend({ request: z.string() }).nullable(),
   selection: z.unknown().transform(receiveSkillSelection).optional(),
@@ -129,6 +135,9 @@ class DraftOwner {
       ...this.state,
       draft: value,
       revision: this.state.revision + 1,
+      pending: this.state.pending
+        ? { ...this.state.pending, edited: true }
+        : null,
     };
     try {
       this.save(next);
@@ -220,6 +229,15 @@ class DraftOwner {
   }
   hasPending = (context: ConversationContext) =>
     this.state.pending?.run === runKey(context);
+  /**
+   * The text a still-unacknowledged attempt captured, while the person has not typed since: the
+   * transcript shows it with its retry, so the box must not. Once they type, the box is theirs,
+   * even if they retype the same words.
+   */
+  pendingDraft = (context: ConversationContext) =>
+    this.state.pending?.run === runKey(context) && !this.state.pending.edited
+      ? this.state.pending.draft
+      : null;
   acknowledge(
     context: ConversationContext,
     submit: ConversationIntent["submit"],
@@ -239,9 +257,15 @@ class DraftOwner {
     if (submissionIdentity(request) !== pending.request) return false;
     const clear =
       pending.revision === this.state.revision && draft === pending.draft;
+    // The admitted request now carries the selection, so the chip leaves the composer with the
+    // text; a selection changed since the send is a choice for the next message and stays.
+    const sent =
+      submissionIdentity(skillSelectionFields(request)) ===
+      submissionIdentity(skillSelectionFields(this.state.selection ?? {}));
     this.save({
       ...this.state,
       draft: clear ? "" : this.state.draft,
+      ...(sent ? { selection: {} } : {}),
       pending: null,
     });
     return clear;

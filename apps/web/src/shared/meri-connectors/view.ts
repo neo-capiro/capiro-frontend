@@ -66,6 +66,40 @@ export function statusLabel(status: ConnectorRow["connectionStatus"]): string {
   return CONNECTOR_STATUS_LABELS[status];
 }
 
+export type ConnectionProblem = {
+  /** What the person can do about it. */
+  summary: string;
+  /** Core's stored text, carried only for an administrator; it can name env vars and operator steps. */
+  technical?: string;
+};
+
+// Core's stored texts, as emitted by apps/api/src/meri: `meri-mcp-transport.ts` refuses a stdio
+// command with "MCP stdio command is not allowlisted (set CLIO_MCP_STDIO_ALLOWED_COMMANDS —
+// operator action)"; `meri-mcp.service.ts` stores "The app could not be reached. Please try
+// again.", "The app could not finish connecting. Please try again." and "Tool discovery failed.";
+// `meri-managed-mcp.service.ts` raises the same "could not be reached" text.
+const operatorAction = "MCP stdio command is not allowlisted";
+const unreachable: ReadonlySet<string> = new Set([
+  "The app could not be reached. Please try again.",
+  "The app could not finish connecting. Please try again.",
+  "Tool discovery failed.",
+]);
+
+/** The row says what the person can do; the stored text reaches administrators only. */
+export function connectionProblem(
+  lastError: string | null,
+  service: string,
+  admin = false,
+): ConnectionProblem | undefined {
+  if (!lastError) return undefined;
+  const summary = lastError.startsWith(operatorAction)
+    ? "This connector isn't available yet. An administrator needs to enable it."
+    : unreachable.has(lastError)
+      ? `Couldn't reach ${service}; try again later.`
+      : `Capiro could not connect to ${service}.`;
+  return admin ? { summary, technical: lastError } : { summary };
+}
+
 export type ConnectedServiceRow = {
   id: string;
   service: string;
@@ -74,7 +108,7 @@ export type ConnectedServiceRow = {
   access: string;
   tools: string;
   lastSync: string;
-  detail: string | undefined;
+  problem: ConnectionProblem | undefined;
   canManage: boolean;
   canAuthorize: boolean;
   /** `oauth` rows are ended by revoking authorization; `token`/`none` rows by removal. */
@@ -113,7 +147,11 @@ export function stamp(value: string | null | undefined): string | undefined {
  * only for an OAuth row this caller may manage — a firm-wide connector is authorized once by an
  * admin, not re-authorized per member.
  */
-export function connectedServiceRow(row: ConnectorRow): ConnectedServiceRow {
+export function connectedServiceRow(
+  row: ConnectorRow,
+  name = row.name,
+  admin = false,
+): ConnectedServiceRow {
   const scope =
     row.scope === "tenant" ? "Firm-wide (admin-managed)" : "Personal to you";
   const access =
@@ -124,23 +162,32 @@ export function connectedServiceRow(row: ConnectorRow): ConnectedServiceRow {
       : "You own";
   return {
     id: row.id,
-    service: row.catalogId ?? row.name,
+    service: name,
     scope,
     status: statusLabel(row.connectionStatus),
     access,
     tools: `${row.toolAllowlist.length} allowed tool${row.toolAllowlist.length === 1 ? "" : "s"}`,
     lastSync: stamp(row.lastSyncAt) ?? "None recorded",
-    detail: row.lastError ?? undefined,
+    problem: connectionProblem(row.lastError, name, admin),
     canManage: row.canManage,
     canAuthorize: row.canManage && row.authType === "oauth",
     authType: row.authType,
   };
 }
 
+/** Rows carry the library's display name when their catalog entry is known. */
 export function connectedServiceRows(
   rows: readonly ConnectorRow[],
+  connectors: readonly LibraryConnector[] = [],
+  admin = false,
 ): ConnectedServiceRow[] {
-  return rows.map(connectedServiceRow);
+  return rows.map((row) =>
+    connectedServiceRow(
+      row,
+      connectors.find((entry) => entry.id === row.catalogId)?.name ?? row.name,
+      admin,
+    ),
+  );
 }
 
 /** The inputs the connect step must collect before it can be sent. */

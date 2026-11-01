@@ -235,7 +235,7 @@ export function storedSubmission(
  * Pure identity over a draft or an admitted request: it reads no field, constructs nothing and
  * grants nothing. A canonical request is assignable to the draft shape it is compared against.
  */
-export const submissionIdentity = (input: ConversationDraftRequest) =>
+export const submissionIdentity = (input: object) =>
   JSON.stringify(input, (_, value) =>
     value && typeof value === "object" && !Array.isArray(value)
       ? Object.fromEntries(
