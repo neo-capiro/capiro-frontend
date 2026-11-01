@@ -125,9 +125,8 @@ export function OutreachList({
         .map(canonicalListRow)
     : [];
   const nativeIds = new Set(nativeRows.map((row) => row.id.toLowerCase()));
-  // Campaigns created before campaign workflows existed are returned by the campaigns read with
-  // hasWorkflow:false and are listed under saved outreach records, so the category tabs correctly
-  // show 0 for them. Say that on the page instead of leaving the zero unexplained.
+  // Explain this campaigns page without inferring membership in the independent records or
+  // sessions pages. A workflow-less campaign may still have a matching loaded session below.
   const legacyCampaigns = campaignMismatch
     ? 0
     : (campaigns.data?.items ?? []).filter((row) => !row.hasWorkflow).length;
@@ -224,9 +223,9 @@ export function OutreachList({
         Audience applies to saved outreach records and canonical campaigns.
         Counts show this loaded page, not population totals.{" "}
         {legacyCampaigns > 0
-          ? `${legacyCampaigns} ${legacyCampaigns === 1 ? "campaign" : "campaigns"} in this view ${
-              legacyCampaigns === 1 ? "predates" : "predate"
-            } campaign workflows, so ${legacyCampaigns === 1 ? "it is" : "they are"} listed under Saved outreach records and not counted in the campaign categories.`
+          ? `${legacyCampaigns} ${legacyCampaigns === 1 ? "campaign" : "campaigns"} on the loaded campaigns page ${
+              legacyCampaigns === 1 ? "has" : "have"
+            } no workflow. Campaign categories count loaded workflow campaigns and eligible campaign sessions. Saved outreach records loads separately; check that section for other recorded outreach.`
           : ""}
       </p>
       <Tabs

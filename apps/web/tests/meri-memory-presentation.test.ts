@@ -189,6 +189,33 @@ it("rejects a machine-shaped displayTitle and keeps the readable slug", () => {
   expect(memoryPresentation(item).title).toBe("Communication preference");
 });
 
+it.each(["echoed", "legacy", "machine display"])(
+  "preserves a readable stored title with %s presentation",
+  (presentation) => {
+    const source = {
+      ...original,
+      title: "Preferred briefing format",
+      value: "Use a one-page summary.",
+    };
+    const item = decode({
+      ...source,
+      ...(presentation === "legacy"
+        ? {}
+        : {
+            displayTitle:
+              presentation === "echoed" ? source.title : `meri:${id(9)}`,
+            contentStatus: "available",
+            contentLimitation: null,
+          }),
+    });
+    expect(memoryPresentation(item)).toEqual({
+      title: source.title,
+      fact: source.value,
+    });
+    expect(item).toMatchObject(source);
+  },
+);
+
 it("falls back to a stable label when nothing readable exists", () => {
   const item = decode({
     id: id(3),

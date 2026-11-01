@@ -253,10 +253,8 @@ export function ClientCalendarToolbar({ state }: { state: CalendarPageState }) {
             Meetings&nbsp; {count}
           </button>
           <span>
-            Only meetings associated with {name} appear in this calendar.
-            {count === 0
-              ? " No meetings fall in this view — Meeting Library lists every meeting for this client, including those outside the visible range."
-              : ""}
+            Only meetings associated with {name} appear in this calendar. Use
+            Meeting Library to review this client’s meetings across dates.
           </span>
         </div>
       )}

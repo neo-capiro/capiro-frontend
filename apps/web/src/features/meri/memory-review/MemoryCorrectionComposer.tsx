@@ -45,8 +45,8 @@ function firstSentence(value: string) {
 }
 
 /**
- * Core's `displayTitle` is a display title; when it repeats the stored key verbatim it is only an
- * identifier, so fall back to the readable projection instead of showing a machine key as a heading.
+ * Preserve readable display and stored titles, including equal titles. Machine-shaped identifiers
+ * fall back to the readable projection instead of showing a machine key as a heading.
  * Slugged keys keep their slug (`user:<uuid>:monday-client-board-mapping`); unslugged keys use the
  * record's own first sentence, never invented content.
  */
@@ -56,7 +56,9 @@ export function memoryDisplayTitle(
   const machine = (s: string) =>
     /^(?:user|meri|system|agent|learning-signal):/i.test(s) || UUID.test(s);
   const sent = item.displayTitle?.trim();
-  if (sent && sent !== item.title && !machine(sent)) return sent;
+  if (sent && !machine(sent)) return sent;
+  const title = item.title.trim();
+  if (title && !machine(title)) return title;
   const last = item.title.split(":").filter(Boolean).at(-1) ?? "";
   if (item.title.includes(":") && last && !UUID.test(last))
     return memoryTitle(item.title);
