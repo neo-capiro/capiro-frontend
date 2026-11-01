@@ -76,7 +76,9 @@ it("renders currently verified exact saved evidence without issuing a mutation",
 });
 it("labels a bounded source excerpt explicitly", () => {
   const value = data();
-  value.nodes[0].citations[0].textComplete = false;
+  const citation = value.nodes[0]?.citations[0];
+  if (!citation) throw new Error("Expected the source citation fixture");
+  citation.textComplete = false;
   hooks.query.mockReturnValue({
     data: value,
     loading: false,
@@ -92,7 +94,11 @@ it.each(["loading", "error", "foreign-source", "foreign-node"])(
     const value = data();
     if (state === "foreign-source")
       value.source = { ...source, objectiveRevisionId: id(99) };
-    if (state === "foreign-node") value.nodes[0].sourceNodeId = id(99);
+    if (state === "foreign-node") {
+      const node = value.nodes[0];
+      if (!node) throw new Error("Expected the saved step fixture");
+      node.sourceNodeId = id(99);
+    }
     hooks.query.mockReturnValue({
       data: value,
       loading: state === "loading",
