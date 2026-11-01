@@ -16,7 +16,7 @@
     "matrixRows": 41,
     "groupsWithActualFrames": 24,
     "rowsWithActualFrames": 41,
-    "uniqueReferencedFrames": 320,
+    "uniqueReferencedFrames": 318,
     "uncoveredMeriMockupRequirements": 0,
     "liveAcceptancePassClaims": 0,
     "settingsViews": 41,
@@ -27,7 +27,10 @@
     "knownUnwiredResponsiveControls": 0,
     "closedOriginalResponsiveControls": 17,
     "additionalResponsiveDetailFrames": 32,
-    "knownUnwiredResponsiveControlsScope": "Seventeen identified Governance controls plus the separately verified shared/custom Workspace entries; not a claim that every static prototype control is actionable."
+    "knownUnwiredResponsiveControlsScope": "Current retained responsive counterparts, plus read-back of all 375 main-page prototype destinations and 21 component-page destinations. Historical repair count was 17 before one duplicate source was deleted.",
+    "deletedObsoleteOrDuplicateScreens": 91,
+    "cleanupRetainedPageFrameRoots": 526,
+    "currentRepairedResponsiveControls": 16
   },
   "interpretation": [
     "Frame mapping is design coverage, not backend integration completion.",
@@ -141,7 +144,6 @@
         "1064:147397",
         "3032:30415",
         "3032:31529",
-        "1064:149028",
         "3219:53115",
         "3219:53311",
         "1064:147820",
@@ -515,7 +517,6 @@
         "1064:147112",
         "3219:52618",
         "1064:147272",
-        "3219:52951",
         "3219:54298",
         "3220:65986",
         "3220:66136",
@@ -572,7 +573,6 @@
         "1064:147112",
         "3219:52618",
         "1064:147272",
-        "3219:52951",
         "3219:54298",
         "3220:65986",
         "3220:66136",
@@ -629,7 +629,6 @@
         "1064:147112",
         "3219:52618",
         "1064:147272",
-        "3219:52951",
         "3219:54298",
         "3220:65986",
         "3220:66136",
@@ -686,7 +685,6 @@
         "1064:147112",
         "3219:52618",
         "1064:147272",
-        "3219:52951",
         "3219:54298",
         "3220:65986",
         "3220:66136",
@@ -1120,7 +1118,6 @@
         "1064:147397",
         "3032:30415",
         "3032:31529",
-        "1064:149028",
         "3219:53115",
         "3219:53311",
         "1064:147820",
@@ -1329,7 +1326,6 @@
   ],
   "evidenceFiles": [
     "FRAME-REGISTER.json",
-    "ARCHIVE-REGISTER.json",
     "source/SOURCE-RECONCILIATION.md",
     "VALIDATION.md",
     "qa/RECOVERY-QA.json",
@@ -1340,10 +1336,16 @@
     "qa/CUSTOM-MOBILE-NAV-QA.json",
     "qa/FINAL-TWO-SURFACE-VISUAL-QA.json",
     "qa/FINAL-ROOT-QA.json",
-    "qa/FINAL-MAIN-DELTA.json"
+    "qa/FINAL-MAIN-DELTA.json",
+    "REMOVED-SCREENS.json",
+    "SCREEN-INVENTORY.json",
+    "CLEANUP.md",
+    "qa/CLEANUP-QA.json",
+    "qa/CLEANUP-RECEIPT.json",
+    "qa/COMPONENT-CLEANUP-QA.json"
   ],
   "prototypeLimitations": {
-    "governance": "The previous 17 responsive references are closed with matching-size destinations. Source/live qualifications are unchanged.",
+    "governance": "Sixteen of the original repaired responsive source controls remain; the seventeenth belonged to an exact duplicate phone review removed in cleanup. Its retained counterpart is 3032:30415. Source/runtime qualifications are unchanged.",
     "knownUnwiredResponsiveControls": [],
     "closedOriginalResponsiveControls": [
       {
@@ -1425,11 +1427,6 @@
         "nodeId": "3225:71177",
         "sourceId": "3225:71023",
         "destinationId": "3243:77585"
-      },
-      {
-        "nodeId": "3225:71272",
-        "sourceId": "1064:149028",
-        "destinationId": "3243:78175"
       }
     ],
     "source": "qa/GOVERNANCE-RESPONSIVE-ROUTES.json",
@@ -2121,14 +2118,6 @@
           "receipt": "governance-receipt-1…11.json"
         },
         {
-          "nodeId": "1064:149028",
-          "title": "10.07 · Phone · Exact task review",
-          "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149028",
-          "key": "phone-task-review",
-          "evidence": "updated_in_place",
-          "receipt": "governance-receipt-1…11.json"
-        },
-        {
           "nodeId": "3219:53115",
           "title": "06.09 · Governed action · Submitting exact decision",
           "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-53115",
@@ -2415,21 +2404,21 @@
         },
         {
           "nodeId": "1064:144923",
-          "title": "02.05 · Steer and stop a run",
+          "title": "Conversation · Pause, steer and stop",
           "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144923",
           "evidence": "existing_reference_not_semantically_recertified",
           "receipt": "FIGMA-INVENTORY.json; parent global shell pass"
         },
         {
           "nodeId": "1064:144982",
-          "title": "02.06 · Checkpoint and verified restore",
+          "title": "Conversation · Verified checkpoint and resume",
           "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144982",
           "evidence": "existing_reference_not_semantically_recertified",
           "receipt": "FIGMA-INVENTORY.json; parent global shell pass"
         },
         {
           "nodeId": "1064:145144",
-          "title": "02.08 · Interrupted run and fork",
+          "title": "Conversation · Interruption and fork",
           "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145144",
           "evidence": "existing_reference_not_semantically_recertified",
           "receipt": "FIGMA-INVENTORY.json; parent global shell pass"
@@ -4011,14 +4000,6 @@
           "receipt": "governance-receipt-1…11.json"
         },
         {
-          "nodeId": "3219:52951",
-          "title": "05.27 · Personal memory · No retained evidence / purge not asserted",
-          "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-52951",
-          "key": "memory-purged",
-          "evidence": "new_native_state",
-          "receipt": "governance-receipt-1…11.json"
-        },
-        {
           "nodeId": "3219:54298",
           "title": "06.02D · Personal memory · Confirm owner approval",
           "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-54298",
@@ -5097,5 +5078,18 @@
     "sourceBaseline": "580f4478eaa732c084858b4e764443e79b9782c9",
     "evidence": "qa/FINAL-MAIN-DELTA.json",
     "result": "Only Meri product delta is readable memory-title fallback; documented in source reconciliation."
+  },
+  "cleanup": {
+    "status": "saved-and-verified",
+    "removedScreens": 91,
+    "emptySectionsRemoved": 7,
+    "rewiredControls": 24,
+    "mainPrototypeDestinationsChecked": 375,
+    "componentDestinationsChecked": 21,
+    "missingDestinations": 0,
+    "removedIdsAreNotTargets": true,
+    "removalRegister": "REMOVED-SCREENS.json",
+    "fullRetainedInventory": "SCREEN-INVENTORY.json",
+    "validation": "qa/CLEANUP-QA.json"
   }
 }

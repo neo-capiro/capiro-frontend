@@ -1,10 +1,11 @@
 {
   "fileKey": "IXJzJUkXcUTkySHir5JNea",
   "date": "2026-11-01",
-  "scope": "320 unique coverage references; includes retained, new and explicitly qualified legacy states. Not 320 newly created screens.",
+  "scope": "318 retained coverage references after cleanup. Supporting screens and overlays are inventoried separately in SCREEN-INVENTORY.json. Removed IDs must not be implemented.",
   "reviewIndex": {
     "nodeId": "3244:78203",
-    "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3244-78203"
+    "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3244-78203",
+    "nodeName": "START HERE · Meri 3.4 · Current screens"
   },
   "frames": [
     {
@@ -572,15 +573,6 @@
       "evidence": "updated_in_place"
     },
     {
-      "nodeId": "1064:149028",
-      "title": "10.07 · Phone · Exact task review",
-      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149028",
-      "groups": [
-        "04"
-      ],
-      "evidence": "updated_in_place"
-    },
-    {
       "nodeId": "3219:53115",
       "title": "06.09 · Governed action · Submitting exact decision",
       "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-53115",
@@ -852,7 +844,7 @@
     },
     {
       "nodeId": "1064:144923",
-      "title": "02.05 · Steer and stop a run",
+      "title": "Conversation · Pause, steer and stop",
       "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144923",
       "groups": [
         "05"
@@ -861,7 +853,7 @@
     },
     {
       "nodeId": "1064:144982",
-      "title": "02.06 · Checkpoint and verified restore",
+      "title": "Conversation · Verified checkpoint and resume",
       "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144982",
       "groups": [
         "05"
@@ -870,7 +862,7 @@
     },
     {
       "nodeId": "1064:145144",
-      "title": "02.08 · Interrupted run and fork",
+      "title": "Conversation · Interruption and fork",
       "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145144",
       "groups": [
         "05"
@@ -2160,15 +2152,6 @@
         "14"
       ],
       "evidence": "updated_in_place"
-    },
-    {
-      "nodeId": "3219:52951",
-      "title": "05.27 · Personal memory · No retained evidence / purge not asserted",
-      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-52951",
-      "groups": [
-        "14"
-      ],
-      "evidence": "new_native_state"
     },
     {
       "nodeId": "3219:54298",

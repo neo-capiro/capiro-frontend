@@ -50,3 +50,7 @@ No app code, deployment, provider operations or customer data changed. No browse
 Main advanced six commits during the design pass to [e05d950a6a50cd3f2b344ac84ef3b9233c3448ca](https://github.com/neo-capiro/capiro-frontend/commit/e05d950a6a50cd3f2b344ac84ef3b9233c3448ca). The eight-file comparison contains one Meri product component change: `MemoryCorrectionComposer.tsx`, plus its tests. The other product changes are Portfolio/Modules presentation, outside this Meri pass.
 
 The new memory title projection preserves readable display/stored titles. Machine-shaped titles use a readable slug or the record's own first sentence, capped at 90 characters; JSON-only/empty content falls back to “Memory record”. Do not expose raw keys or invent content. The saved mockups already use readable memory headings; this fallback governs populated implementation data. No other Meri shell, typography, route or workflow change appears in this delta. See [comparison evidence](../qa/FINAL-MAIN-DELTA.json).
+
+## Physical cleanup
+
+The later user-requested cleanup removes unsupported preview-only Plate draft/comments, former global approval inboxes, obsolete comparison/review boards and proven duplicate states. Current source-backed contextual lifecycle and browser controls remain. See [the source verdict](../cleanup/LEGACY-EDITING-AND-CONTROLS-VERDICT.md) and [removal ledger](../REMOVED-SCREENS.json). These supersede earlier references to retaining archive frames.

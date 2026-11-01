@@ -18,9 +18,9 @@ This validates editable Figma design states and prototype examples. It does not 
 | Mobile navigation | Shared mobile header has a Workspace entry. Custom MCP phone control 3219:50470 was separately wired and read back to 1064:149061. [Custom-header QA](qa/CUSTOM-MOBILE-NAV-QA.json). An already-open menu needs no self-navigation. |
 | Attachment/browser/search recovery | 13 additional states passed frame, typography and contained-scroll checks; three screenshots inspected. [Recovery QA](qa/RECOVERY-QA.json). |
 | Visual review | Representative home, conversation, SDK question, Tools, usage, source/recovery, Office, preferences/MCP, memory, action review, routines, Updates, mobile/tablet and dark-preview screens inspected. Final review-index screenshot inspected. |
-| Archives | 44 superseded entry roots moved to a clearly named reference section, without deleting their IDs. [Archive register](ARCHIVE-REGISTER.json). |
+| Cleanup | 91 obsolete/duplicate roots and seven empty sections deleted. 24 surviving controls rewired; 375 main-page and 21 component-page destinations resolve. [Cleanup report](CLEANUP.md). |
 
-The numbers above describe separate, sometimes overlapping passes. They must not be summed into a total number of screens changed. The authoritative coverage total is 320 unique referenced frames across 24 groups / 41 areas.
+The numbers above describe separate, sometimes overlapping passes. They must not be summed into a total number of screens changed. The post-cleanup coverage total is 318 retained references across 24 groups / 41 areas; the two removed coverage entries had retained equivalents.
 
 ## Prototype interpretation
 
@@ -39,3 +39,9 @@ Screenshots and raw mutation scripts remain local working evidence. This handoff
 ## Final source freshness check
 
 The PR creation showed main had advanced during the pass. The final [eight-file comparison](qa/FINAL-MAIN-DELTA.json) through `e05d950a6a50cd3f2b344ac84ef3b9233c3448ca` was inspected. The only Meri product component change is readable memory-title fallback; the prior and new files were read. Existing readable headings remain consistent, and the fallback rule is documented in source reconciliation. Portfolio/Modules changes in that delta are outside this Meri task. This check does not assert deployment of that commit.
+
+## Cleanup supersedes historical node references
+
+The initial validation snapshots describe the earlier polish pass. The user subsequently requested physical deletion of unused designs. [CLEANUP-QA.json](qa/CLEANUP-QA.json) verifies all 91 retired roots are absent, no empty sections remain, and all 375 unique prototype destinations on the main page resolve. The Components page has 21 resolving destinations and required no mutation. The review index and current-home flow are the only two prototype entry points.
+
+The removed duplicate phone review and ambiguous evidence example do not remove coverage: current counterparts remain. Six fixture-only editing buttons were hidden and disconnected; current Files/Office entry controls remain. No application code changed.

@@ -2,9 +2,9 @@
 
 [Open Meri 3.4](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea).
 
-All 24 groups and all 41 matrix areas are mapped to actual Figma frame IDs in COVERAGE-REGISTER.json. The register references 320 unique frames, including new states, updated existing views and explicitly qualified legacy references.
+All 24 groups and all 41 matrix areas are mapped to actual Figma frame IDs in COVERAGE-REGISTER.json. The register references 318 unique frames, including current states, updated views and qualified contextual controls. The subsequent cleanup deleted 91 obsolete or duplicate roots; see [cleanup](CLEANUP.md).
 
-The exact final desktop recovery gaps identified during this pass are drawn. The 17 previously unwired phone/tablet controls are now closed with 32 matching-size detail states. Eight responsive chat views and the shared mobile header also have final QA receipts. This does not certify backend integrations, provider activation, live acceptance or native artifact fidelity. Existing lifecycle/browser references remain source-conditional. Groups 17–24 cover Meri results, review and handoff; complete owner-module applications are outside this file's audit.
+The exact final desktop recovery gaps identified during this pass are drawn. The previously unwired phone/tablet paths received matching-size detail states. Cleanup retained 16 repaired source controls and removed one exact duplicate source screen; its current counterpart remains wired. Eight responsive chat views and the shared mobile header also have final QA receipts. This does not certify backend integrations, provider activation, live acceptance or native artifact fidelity. Existing lifecycle/browser references remain source-conditional. Groups 17–24 cover Meri results, review and handoff; complete owner-module applications are outside this file's audit.
 
 ## Updated screen families
 
@@ -21,7 +21,7 @@ The exact final desktop recovery gaps identified during this pass are drawn. The
 | 01 | Chat home, scope and history | M01, M41 | 24 |
 | 02 | Answer detail, sources, usage and feedback | M02, M41 | 12 |
 | 03 | Model selection and preferences | M03, M41 | 18 |
-| 04 | Questions, approvals and action receipts | M04, M37 | 27 |
+| 04 | Questions, approvals and action receipts | M04, M37 | 26 |
 | 05 | Runs, background work, delegation and routines | M09, M38 | 26 |
 | 06 | Skills, procedures and website-workflow selection | M10, M14 | 15 |
 | 07 | Connected services / MCP directory | M11, M12 | 25 |
@@ -31,7 +31,7 @@ The exact final desktop recovery gaps identified during this pass are drawn. The
 | 11 | Document generation, revision and Workspace filing | M23, M25, M26 | 10 |
 | 12 | Embedded Office editor and publication | M27, M28 | 24 |
 | 13 | Office fidelity, charts and PDF | M24, M29 | 13 |
-| 14 | Personal/client/firm memory and learning | M18, M19, M20, M21 | 47 |
+| 14 | Personal/client/firm memory and learning | M18, M19, M20, M21 | 46 |
 | 15 | Updates and notifications | M22 | 7 |
 | 16 | Search, SQL answers and source readers | M05, M25, M30, M32 | 10 |
 | 17 | Research portfolio and Classic | M31 | 3 |
