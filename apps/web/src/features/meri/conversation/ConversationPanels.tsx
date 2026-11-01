@@ -26,7 +26,7 @@ export function ConversationPanels({
   turn: TurnView | null;
   earlier: readonly TurnView[];
   onDecisionSettled?: ((runId: string) => void) | undefined;
-  /** Browser controls, mounted only for a browser task or an opened Tools panel. */
+  /** Browser controls, mounted only for a run that used the browser or a selected website task. */
   browser?: ReactNode;
   /** Extra audit material for the same details disclosure, e.g. a finished run's checkpoint. */
   details?: ReactNode;

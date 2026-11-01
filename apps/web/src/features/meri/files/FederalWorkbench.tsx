@@ -401,7 +401,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
         Official imports are checked against the current source before
         preparation and export. Other source publisher details are retained
         claims. Legal currency, enactment, numbering and substantive law still
-        require review. Exports are plain text.
+        require review. Available export formats are shown after review.
       </p>
       {problem && <p role="alert">{problem}</p>}
       {port.unresolved() && (

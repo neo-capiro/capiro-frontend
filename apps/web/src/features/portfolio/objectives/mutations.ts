@@ -70,7 +70,7 @@ export function useSaveObjective(
   clientId: string,
   input: SaveObjective,
   onPersisted: (record: Objective) => void,
-  onSaved: () => void,
+  onSaved: (record: Objective) => void,
   open = true,
 ) {
   const api = useApi();
@@ -92,7 +92,7 @@ export function useSaveObjective(
           );
           await invalidate();
           execution.guard();
-          onSaved();
+          onSaved(saved);
           return saved;
         } catch (error) {
           // Do not refill a new actor's cache after an old request settles.

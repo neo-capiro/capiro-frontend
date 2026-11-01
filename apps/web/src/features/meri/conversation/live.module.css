@@ -202,6 +202,21 @@
   gap: 4px;
   width: min(480px, 100%);
 }
+/* A finished run's checkpoint is audit material behind the details: a quiet link, not a call to action. */
+.textLink {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.textLink:disabled {
+  opacity: 0.5;
+}
 .status {
   display: flex;
   flex-direction: column;

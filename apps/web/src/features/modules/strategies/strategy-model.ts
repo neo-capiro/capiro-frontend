@@ -1,14 +1,6 @@
 import type { StrategySummary } from "../../../shared/capiro/operations/strategies-schemas";
 
-export const objectiveLabels = {
-  appropriations: "Appropriations ask",
-  authorization: "Authorization",
-  regulatory: "Regulatory / policy",
-  coalition: "Coalition / positioning",
-  procurement: "Contract / procurement",
-  earmark: "Grant / earmark",
-  amendment: "Amendment",
-} as const;
+export { STRATEGY_INTAKE_TYPE_LABELS as objectiveLabels } from "@capiro/shared/strategy-intake";
 export function fiscalYear(date: Date) {
   return date.getUTCFullYear() + (date.getUTCMonth() >= 9 ? 1 : 0);
 }

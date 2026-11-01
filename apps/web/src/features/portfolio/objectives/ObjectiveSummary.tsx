@@ -1,4 +1,5 @@
 "use client";
+import { objectiveTitle } from "./contracts";
 import Link from "next/link";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useObjectives } from "./queries";
@@ -29,7 +30,7 @@ export function ObjectiveSummary({ clientId }: { clientId: string }) {
             key={objective.id}
             href={`/portfolio/${clientId}/objectives?objective=${objective.id}`}
           >
-            <strong>{objective.outcome || "Untitled objective"}</strong>
+            <strong>{objectiveTitle(objective)}</strong>
             <small>{statusLabels[objective.status]}</small>
           </Link>
         ))}

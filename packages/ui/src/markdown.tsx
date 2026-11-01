@@ -97,6 +97,11 @@ export function MarkdownContent({
         remarkRehypeOptions={{ allowDangerousHtml: false }}
         allowedElements={elements}
         controls={false}
+        // Streamdown caps tables and code blocks with an inline max-height and relies on its own
+        // Tailwind overflow utilities to scroll them. This app ships no Tailwind, so the capped box
+        // painted its overflow under the next paragraph; blocks take their full height instead.
+        tableMaxHeight="none"
+        codeBlockMaxHeight="none"
         plugins={{}}
         components={components}
         urlTransform={(value) => safeMarkdownLink(value) ?? ""}

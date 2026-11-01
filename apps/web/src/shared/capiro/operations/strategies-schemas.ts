@@ -1,18 +1,11 @@
 import { z } from "zod";
+import { STRATEGY_INTAKE_TYPES as strategyTypes } from "@capiro/shared/strategy-intake";
+export { strategyTypes };
 
 export const strategyId = z.uuid();
 export const strategyDate = z.iso.date();
 export const emptyStrategyRequest = z.object({}).strict();
 export const strategyParams = z.object({ id: strategyId }).strict();
-export const strategyTypes = [
-  "appropriations",
-  "authorization",
-  "regulatory",
-  "coalition",
-  "procurement",
-  "earmark",
-  "amendment",
-] as const;
 export const nodeKinds = [
   "action",
   "decision",

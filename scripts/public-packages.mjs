@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { checkUserPreferencesPublic } from './user-preferences-public.mjs';
 import { checkDocumentAccessInput } from './document-access-public-input.mjs';
+import { checkStrategyIntakePackage } from './strategy-intake-public-package.mjs';
 
 const ordinaryRecord = value => value !== null && typeof value === 'object'
   && [Object.prototype, null].includes(Object.getPrototypeOf(value));
@@ -67,7 +68,7 @@ function main(argv) {
   const consumers = ['apps/web', 'packages/meri-client', 'packages/qualification-transport']
     .map(name => JSON.parse(readFileSync(new URL(`../${name}/package.json`, import.meta.url), 'utf8')));
   const active = verifyActiveMeriPackages(records, consumers);
-  console.log(JSON.stringify({ schema: 'capiro-public-package-inputs/1', records, active, userPreferences: checkUserPreferencesPublic(), documentAccess: checkDocumentAccessInput() }, null, 2));
+  console.log(JSON.stringify({ schema: 'capiro-public-package-inputs/1', records, active, userPreferences: checkUserPreferencesPublic(), documentAccess: checkDocumentAccessInput(), strategyIntake: checkStrategyIntakePackage() }, null, 2));
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
