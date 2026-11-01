@@ -56,15 +56,22 @@ export function useImpersonationSession(onScope: (id: string | null) => void) {
       setSession(undefined);
       refresh();
     };
+    // Focus is a freshness check, not evidence of a scope change. Keep the
+    // mounted page and its unsent work while checking, just as polling does.
+    // Refusal still clears it below; explicit scope events contain it immediately.
+    const verifyOnFocus = () => {
+      clearRead();
+      refresh();
+    };
     channel.onmessage = invalidate;
     window.addEventListener(impersonationEvent, invalidate);
-    window.addEventListener("focus", invalidate);
+    window.addEventListener("focus", verifyOnFocus);
     const timer = setInterval(refresh, 5000);
     return () => {
       channel.close();
       clearInterval(timer);
       window.removeEventListener(impersonationEvent, invalidate);
-      window.removeEventListener("focus", invalidate);
+      window.removeEventListener("focus", verifyOnFocus);
     };
   }, [clearRead, refresh]);
   useEffect(() => {

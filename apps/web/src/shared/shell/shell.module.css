@@ -48,6 +48,24 @@
 }
 .chatSidebar .recents {
   padding-top: 8px;
+  gap: 4px;
+}
+.chatSidebar .recents h2 {
+  padding: 4px 10px 8px;
+}
+.chatSidebar .recents .navButton {
+  font-size: 13px;
+  font-weight: 400;
+}
+.chatSidebar .recents a[aria-current="page"] {
+  font-weight: 500;
+  background: color-mix(in srgb, var(--foreground) 7%, var(--background));
+}
+.chatSidebar .destinations {
+  gap: 4px;
+}
+.chatSidebar .recents .navButton:hover {
+  background: color-mix(in srgb, var(--foreground) 4%, var(--background));
 }
 .chatSidebar .preferences {
   margin-top: auto;
@@ -63,7 +81,7 @@
   color: var(--muted-foreground);
 }
 .header {
-  border-bottom-width: 2px;
+  border-bottom-width: 1px;
 }
 .designIcon {
   filter: var(--meri-icon-filter, none);
