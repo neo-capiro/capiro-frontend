@@ -45,6 +45,10 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  /* Long emails and office strings must wrap inside the column at 1280px rather
+     than being cut at the panel edge. */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 .split {
   display: grid;

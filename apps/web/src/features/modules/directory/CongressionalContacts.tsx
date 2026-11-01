@@ -54,6 +54,21 @@ export function CongressionalContacts({
       !favoritesOnly ||
       favorites.data?.some((f) => f.directoryContactId === c.id),
   );
+  const filtering = Object.values(filters).some(Boolean);
+  // A rejected search (the API refuses SQL/HTML-shaped input with 403) is not an
+  // access problem; say what happened and how to recover.
+  const searchRefused =
+    filtering &&
+    (query.error as { status?: number } | undefined)?.status === 403;
+  const title = data
+    ? favoritesOnly
+      ? `${rows.length.toLocaleString()} favorite${rows.length === 1 ? "" : "s"} on this page`
+      : filtering
+        ? `${data.total.toLocaleString()} matching offices · ${data.totals.staff.toLocaleString()} staff across the directory`
+        : `${data.total.toLocaleString()} offices · ${data.totals.staff.toLocaleString()} staff across the directory`
+    : "Congressional Staff";
+  const pageHasMore = favoritesOnly ? false : page * 25 < (data?.total || 0);
+
   function filter(key: keyof typeof filters, value: string) {
     setFilters({ ...filters, [key]: value });
     setPage(1);
@@ -117,16 +132,18 @@ export function CongressionalContacts({
         loading={query.loading}
         error={query.error}
         onRetry={query.reload}
+        unavailableHint={
+          searchRefused
+            ? "That search could not be completed. Remove special characters such as < > or quotation marks and try again."
+            : undefined
+        }
       >
         <div className={selected ? styles.split : styles.single}>
           <Panel
-            title={
-              data
-                ? `${data.total.toLocaleString()} ${Object.values(filters).some(Boolean) ? "matching " : ""}offices · ${data.totals.staff.toLocaleString()} staff across the directory`
-                : "Congressional Staff"
-            }
+            title={title}
             actions={
               <ActionButton
+                disabled={rows.length === 0}
                 onClick={() =>
                   setExpanded(
                     expanded.size ? new Set() : new Set(rows.map((r) => r.id)),
@@ -242,8 +259,9 @@ export function CongressionalContacts({
             />
             <DirectoryPagination
               page={page}
-              total={data?.total || 0}
+              total={favoritesOnly ? rows.length : data?.total || 0}
               pageSize={25}
+              hasMore={pageHasMore}
               onPage={setPage}
             />
             {favoritesOnly && (

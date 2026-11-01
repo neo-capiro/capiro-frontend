@@ -186,9 +186,11 @@ it("restores bounded Personnel filters and preserves other URL hints on edits", 
   expect(route.page).toBe(2);
 
   route.inputChange?.({ target: { value: "space" } });
+  // Typed text stays local: it must never enter the address bar.
   expect(route.replaced[0]).toBe(
-    "/modules/directory?view=department-of-war&clientId=client-1&personnelQ=space&personnelService=Army&personnelAligned=aligned",
+    "/modules/directory?view=department-of-war&clientId=client-1&personnelService=Army&personnelAligned=aligned",
   );
+  expect(route.replaced[0]).not.toContain("personnelQ");
   route.pageChange?.(3);
   expect(route.pushed[0]).toContain("clientId=client-1");
   expect(route.pushed[0]).toContain("personnelPage=3");
