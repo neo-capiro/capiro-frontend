@@ -205,14 +205,18 @@ for (const mode of ["withheld", "unavailable"])
     page,
   }) => {
     await page.goto(`/prepared-files/index.html?mode=${mode}`);
-    await expect(
-      page.getByText(
-        mode === "withheld"
-          ? "You no longer have access to the client this draft belongs to."
-          : "Prepared actions could not be read right now.",
-        { exact: false },
-      ),
-    ).toBeVisible();
+    if (mode === "withheld")
+      await expect(
+        page.getByText(
+          "You no longer have access to the client this draft belongs to.",
+          { exact: false },
+        ),
+      ).toBeVisible();
+    // A list that could not be read shows no approvals panel at all while nothing is loaded.
+    else
+      await expect(
+        page.getByRole("heading", { name: "Actions for your approval" }),
+      ).toHaveCount(0);
     await expect(
       page.getByRole("button", { name: "Download", exact: true }),
     ).toHaveCount(0);

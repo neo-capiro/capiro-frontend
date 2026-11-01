@@ -1,12 +1,21 @@
 import { conversationApplicationMetadata as protocol } from "@capiro/meri-contracts/conversation-application";
 export class ConversationUnavailable extends Error {
     code;
-    constructor(code) {
+    status;
+    /** `status` is the HTTP answer that carried a closed error code, when one did. */
+    constructor(code, status) {
         super(code);
         this.code = code;
+        this.status = status;
         this.name = "ConversationUnavailable";
     }
 }
+/**
+ * The shared edge answered a request route with 403 before Meri saw it (its WAF rules refuse some
+ * message text). Nothing was admitted and the session's membership did not change, so the request
+ * is reported as refused and the same request may be retried; it is never a revocation.
+ */
+export const EDGE_REFUSED = "request-refused-at-edge";
 const STREAM_BYTES = 8 * 1024 * 1024;
 const REQUEST_MS = 30_000;
 /**
@@ -191,7 +200,7 @@ export class ConversationNetwork {
         };
         return { signal, done };
     }
-    async dispatch(path, init, signal, onDispatch) {
+    async dispatch(path, init, signal, onDispatch, forbidden = "revoke") {
         this.check();
         signal.throwIfAborted();
         const headers = new Headers(init.headers);
@@ -211,6 +220,8 @@ export class ConversationNetwork {
         try {
             this.check();
             signal.throwIfAborted();
+            if (response.status === 403 && forbidden === "refuse")
+                throw new ConversationUnavailable(EDGE_REFUSED);
             if (response.status === 401 || response.status === 403)
                 this.revoke();
             this.check();
@@ -224,7 +235,9 @@ export class ConversationNetwork {
             throw error;
         }
     }
-    async json(path, body, onDispatch, budget) {
+    async json(path, body, onDispatch, budget, 
+    /** Request routes the edge may refuse outright; a 403 there is not a membership change. */
+    forbidden = "revoke") {
         if (body.byteLength >
             Math.min(protocol.limits.requestBytes, budget?.requestBytes ?? protocol.limits.requestBytes)) {
             throw new ConversationUnavailable("request-byte-limit");
@@ -235,10 +248,10 @@ export class ConversationNetwork {
                 method: "POST",
                 body: new TextDecoder("utf-8", { fatal: true }).decode(body),
                 headers: { "content-type": "application/json" },
-            }, lease.signal, onDispatch);
+            }, lease.signal, onDispatch, forbidden);
             if (!/^application\/json(?:;\s*charset=utf-8)?$/i.test(response.headers.get("content-type") ?? "")) {
                 discard(response);
-                throw new ConversationUnavailable("invalid-json-media");
+                throw new ConversationUnavailable("invalid-json-media", response.status);
             }
             const limit = Math.min(protocol.limits.responseBytes, budget?.responseBytes ?? protocol.limits.responseBytes);
             const bounded = boundedBody(response, lease.signal, this.check, limit, () => { });

@@ -3,6 +3,10 @@ import { turnFromEvents, isTerminal, type TurnView } from "./conversation-view";
 import { logicalPromptKey } from "./prompt-identity";
 import type { ConversationTranscriptPage } from "../../../shared/meri-conversations/history-client";
 import type { TurnIntent } from "../../../shared/meri-conversations/turn-journal";
+import {
+  controlFailureMessage,
+  type ControlFailure,
+} from "./control-reachability";
 
 function savedTurn(
   turn: ConversationTranscriptPage["turns"][number],
@@ -45,6 +49,7 @@ export function sessionHistoryState(
   localTurns: readonly TurnView[],
   retained: TurnIntent | undefined,
   busy: boolean,
+  failure?: ControlFailure,
 ) {
   const metadata = history.current;
   const latestAccepted = metadata?.turns.find(
@@ -93,13 +98,17 @@ export function sessionHistoryState(
         )
       : []),
   ].filter((turn) => !!latestTarget || turn.runId !== runId);
+  // Only control's own report of a reservation holds the hard lock. A check that control never
+  // answered (or that the edge refused) keeps the retained request for a plain retry instead.
   const nextBlocked = busy
     ? "Meri is recovering the next turn."
-    : recoveryNeeded || unknownReservation
-      ? "A turn may already be in flight. Recover its status before sending."
-      : !source
-        ? "Verify the current conversation history before starting another turn."
-        : undefined;
+    : recoveryNeeded && !unknownReservation && failure
+      ? controlFailureMessage(failure)
+      : recoveryNeeded || unknownReservation
+        ? "A turn may already be in flight. Recover its status before sending."
+        : !source
+          ? "Verify the current conversation history before starting another turn."
+          : undefined;
   const initialBlocked =
     busy ||
     retained ||

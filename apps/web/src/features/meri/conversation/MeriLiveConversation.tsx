@@ -35,16 +35,21 @@ import {
 import { SelectedRequestReceipt } from "./SelectedRequestReceipt";
 import { ConnectedBrowserViewer } from "../browser/ConnectedBrowserViewer";
 import { DailyQuote } from "../quote/DailyQuote";
+import { inputRefusedMessage } from "./control-reachability";
+import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 
 /** The current admitted segment, or the exact immutable request whose ACK is still pending. */
 function LiveTurn({
   turn,
   intent,
   earlier,
+  refused = false,
 }: {
   turn: TurnView | null;
   intent: ReturnType<typeof useLiveRun>["intent"];
   earlier: readonly TurnView[];
+  /** The edge refused the retained message before Capiro saw it; it was not sent. */
+  refused?: boolean;
 }) {
   if (turn)
     return (
@@ -63,7 +68,9 @@ function LiveTurn({
       <UserMessage>{intent.submit.prompt}</UserMessage>
       <p className={styles.muted}>
         {intent.submit.state === "unknown"
-          ? "Delivery is uncertain. Retry sends exactly the same request; nothing is duplicated."
+          ? refused
+            ? inputRefusedMessage
+            : "Delivery is uncertain. Retry sends exactly the same request; nothing is duplicated."
           : intent.submit.state === "observed"
             ? "Message accepted. Reload the transcript to check its current status."
             : "Sending to Meri."}
@@ -85,6 +92,7 @@ export function composerAvailability(
   pendingDraft: boolean,
 ) {
   const { intent, busy } = run;
+  const refused = run.failure === "refused";
   const initial =
     !turn &&
     !intent.submit &&
@@ -103,7 +111,9 @@ export function composerAvailability(
     (busy
       ? "Meri is still handling your last command."
       : intent.submit?.state === "unknown"
-        ? "Delivery of your last request is uncertain. Retry it before sending another."
+        ? refused
+          ? inputRefusedMessage
+          : "Delivery of your last request is uncertain. Retry it before sending another."
         : intent.submit && !turn
           ? intent.submit.state === "observed"
             ? "Reload the transcript to verify the current run."
@@ -205,7 +215,11 @@ function useExternalRunRefresh(
   }, [port, refreshRunStatus, busy, observing, cancelIntent, lifecycleBlocked]);
 }
 
-/** Storage uncertainty disables mutation controls while the transcript remains readable. */
+/**
+ * Storage uncertainty disables mutation controls while the transcript remains readable. A
+ * transcript read that control did not answer is read again on a backed-off schedule owned here,
+ * so the schedule outlives the notice that comes and goes with each attempt.
+ */
 function CurrentRunStatus({
   run,
   retentionError,
@@ -217,6 +231,14 @@ function CurrentRunStatus({
   active: boolean;
   acceptedRequest: ConversationStoredRequest | undefined;
 }) {
+  const reconnect = useReconnectSchedule(
+    run.transcript === "unavailable" && run.failure === "unreachable"
+      ? "failing"
+      : run.transcript === "loading" || run.busy
+        ? "busy"
+        : "ok",
+    run.history,
+  );
   return (
     <>
       {retentionError && (
@@ -228,6 +250,7 @@ function CurrentRunStatus({
         run={{ ...run, busy: run.busy || !!retentionError }}
         active={active}
         acceptedRequest={acceptedRequest}
+        onRetry={reconnect.reset}
       />
     </>
   );
@@ -443,9 +466,10 @@ export function MeriLiveConversation({
         lifecycle.blocked ??
         availability.sendBlocked ??
         modelBlocked,
-      // A retained request is the person's to resolve; the key hint says so until it is.
+      // A retained request is the person's to resolve; the key hint says so until it is. An
+      // edge-refused message already says so in the transcript, once.
       notice:
-        intent.submit?.state === "unknown"
+        intent.submit?.state === "unknown" && run.failure !== "refused"
           ? "Your last request is still unconfirmed. Retry it above before sending another."
           : undefined,
       modelSelection:
@@ -479,7 +503,12 @@ export function MeriLiveConversation({
               <DailyQuote />
             </div>
           )}
-          <LiveTurn turn={turn} intent={intent} earlier={earlier} />
+          <LiveTurn
+            turn={turn}
+            intent={intent}
+            earlier={earlier}
+            refused={run.failure === "refused"}
+          />
         </>
       }
       status={

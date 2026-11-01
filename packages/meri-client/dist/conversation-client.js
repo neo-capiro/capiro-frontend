@@ -1,12 +1,27 @@
 import { conversationApplicationMetadata as protocol, receiveConversationRequest, receiveConversationResponse, } from "@capiro/meri-contracts/conversation-application";
 import { conversationInputMetadata, conversationInputView, receiveConversationInputRequest, receiveConversationInputResponse, } from "@capiro/meri-contracts/conversation-input";
 import { conversationInitialInputMetadata, receiveConversationInitialInputRequest, receiveConversationInitialInputResponse, receiveAllocatedConversationInputResponse, } from "@capiro/meri-contracts/conversation-initial-input";
-import { ConversationNetwork, ConversationUnavailable, } from "./conversation-network.js";
+import { ConversationNetwork, ConversationUnavailable, EDGE_REFUSED, } from "./conversation-network.js";
 import { ConversationObservation } from "./conversation-observation.js";
 import { conversationChat } from "./conversation-chat.js";
 import { stableStringify } from "./json-identity.js";
 import { conversationLifecycleMetadata, receiveConversationLifecycleRequest, receiveConversationLifecycleResponse, } from "@capiro/meri-contracts/conversation-lifecycle";
-export { ConversationUnavailable };
+export { ConversationUnavailable, EDGE_REFUSED };
+/**
+ * An error answer the contract does not admit (a gateway page, an unexpected status/code pair)
+ * keeps only its status, so a caller can still tell control not answering from a refusal. A 200
+ * that fails admission stays the contract's own error.
+ */
+async function admitted(status, receive) {
+    try {
+        return await receive();
+    }
+    catch (cause) {
+        if (status === 200)
+            throw cause;
+        throw new ConversationUnavailable("invalid-error-response", status);
+    }
+}
 const EMPTY = Object.freeze({
     status: "idle",
     observation: null,
@@ -173,12 +188,12 @@ class ConversationConnection {
         const response = await this.network.json(protocol.routes[route].path, bytes(request), onDispatch);
         const correlation = current ??
             (this.inputReceipt && conversationInputView(this.inputReceipt));
-        const value = await receiveConversationResponse(route, response.status, response.bytes, request, correlation);
+        const value = await admitted(response.status, () => receiveConversationResponse(route, response.status, response.bytes, request, correlation));
         this.network.check();
         if (this.disposed || this.view !== current)
             throw new ConversationUnavailable("superseded-response");
         if ("error" in value)
-            throw new ConversationUnavailable(value.error.code);
+            throw new ConversationUnavailable(value.error.code, response.status);
         return value;
     }
     retain(input, receive) {
@@ -218,8 +233,8 @@ class ConversationConnection {
     }
     async allocateRetained(onDispatch) {
         const intent = this.initialIntent, previous = this.allocation, current = this.view;
-        const response = await this.network.json(conversationInitialInputMetadata.routes.allocate.path, bytes(intent), onDispatch, conversationInitialInputMetadata.limits);
-        const value = await receiveConversationInitialInputResponse(response.status, response.bytes, intent, this.inputContext());
+        const response = await this.network.json(conversationInitialInputMetadata.routes.allocate.path, bytes(intent), onDispatch, conversationInitialInputMetadata.limits, "refuse");
+        const value = await admitted(response.status, () => receiveConversationInitialInputResponse(response.status, response.bytes, intent, this.inputContext()));
         this.network.check();
         if (this.disposed ||
             this.initialIntent !== intent ||
@@ -228,7 +243,7 @@ class ConversationConnection {
             throw new ConversationUnavailable("superseded-allocation-receipt");
         }
         if ("error" in value)
-            throw new ConversationUnavailable(value.error.code);
+            throw new ConversationUnavailable(value.error.code, response.status);
         if (previous &&
             stableStringify(previous.allocation) !== stableStringify(value.allocation)) {
             throw new ConversationUnavailable("INITIAL_INPUT_RECEIPT_DRIFT");
@@ -240,10 +255,10 @@ class ConversationConnection {
         const initial = this.initialIntent, allocation = this.allocation;
         if (initial && !allocation)
             throw new ConversationUnavailable("no-initial-input-allocation");
-        const response = await this.network.json(conversationInputMetadata.routes.admit.path, bytes(intent), onDispatch);
-        const value = initial
-            ? await receiveAllocatedConversationInputResponse(response.status, response.bytes, initial, this.inputContext(), allocation)
-            : await receiveConversationInputResponse(response.status, response.bytes, intent, this.inputContext(), current ?? previous);
+        const response = await this.network.json(conversationInputMetadata.routes.admit.path, bytes(intent), onDispatch, undefined, "refuse");
+        const value = await admitted(response.status, () => initial
+            ? receiveAllocatedConversationInputResponse(response.status, response.bytes, initial, this.inputContext(), allocation)
+            : receiveConversationInputResponse(response.status, response.bytes, intent, this.inputContext(), current ?? previous));
         this.network.check();
         if (this.disposed ||
             this.view !== current ||
@@ -251,7 +266,7 @@ class ConversationConnection {
             this.allocation !== allocation)
             throw new ConversationUnavailable("superseded-input-receipt");
         if ("error" in value)
-            throw new ConversationUnavailable(value.error.code);
+            throw new ConversationUnavailable(value.error.code, response.status);
         this.inputReceipt = value;
         this.publish({ acceptedRequest: requestSnapshot(value.request) });
     }

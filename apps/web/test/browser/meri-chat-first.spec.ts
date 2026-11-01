@@ -390,15 +390,20 @@ test("reopening a populated current conversation without a query keeps the hero 
 test("a failed history read stays explicit with its retry, and is not an empty chat", async ({
   page,
 }) => {
-  // setupConversation alone answers the native reads with an explicit 503.
+  // setupConversation alone answers the native reads with an explicit 503: control did not answer,
+  // so the read says so once, offers one Retry and re-reads on its own; it is never an empty chat.
   await setupConversation(page);
   await page.goto(`/meri?clientId=${clientId}`);
   await shellReady(page);
   await expect(
-    page.getByText("Saved conversation history unavailable"),
+    page
+      .getByText(
+        "Capiro is not reachable right now. Your conversation is safe; we'll reconnect automatically.",
+      )
+      .first(),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Reload saved history", exact: true }),
+    page.getByRole("button", { name: "Retry", exact: true }).first(),
   ).toBeVisible();
   await expect(page.getByRole("blockquote")).toHaveCount(0);
 });

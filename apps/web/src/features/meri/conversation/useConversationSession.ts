@@ -149,6 +149,7 @@ export function useConversationSession(
     local.turns,
     accessLost ? undefined : continuation.intent,
     continuation.busy,
+    continuation.failure,
   );
   const skillSelection =
     local.skillSelection ??

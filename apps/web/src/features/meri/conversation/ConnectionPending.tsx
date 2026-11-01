@@ -1,3 +1,4 @@
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Button } from "@capiro/ui/button";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import { UserMessage } from "../screens/conversation/UserMessage";
@@ -6,6 +7,9 @@ import { ConversationBody } from "./ConversationFrame";
 import type { useConversationSession } from "./useConversationSession";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./live.module.css";
+import { controlUnreachableMessage } from "./control-reachability";
+import { createAccessRecheck } from "./access-recheck";
+import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 
 type Session = ReturnType<typeof useConversationSession>;
 
@@ -27,10 +31,35 @@ export function pendingConversationComposer(
         status === "connecting" ||
         (status === "ready" && !session.latestTarget)
           ? "Connecting to Meri."
-          : "Reconnect to Meri before sending.")),
+          : session.connection.unreachable
+            ? controlUnreachableMessage
+            : "Reconnect to Meri before sending.")),
     scope,
     attachUnavailable: unavailableTitle("attachments"),
   };
+}
+
+/**
+ * The first access loss of an episode rechecks itself once after a short delay; the manual check
+ * stays for a loss that persists. The latest session is read at fire time, never captured.
+ */
+function useAccessRecheck(session: Session) {
+  const [recheck] = useState(() => createAccessRecheck());
+  const { accessLost } = session;
+  const { retry } = session.connection;
+  const { refresh } = session.history;
+  useEffect(() => {
+    recheck.observe(accessLost, () => {
+      retry();
+      refresh();
+    });
+  }, [recheck, accessLost, retry, refresh]);
+  useEffect(() => () => recheck.dispose(), [recheck]);
+  return useSyncExternalStore(
+    recheck.subscribe,
+    recheck.pending,
+    recheck.pending,
+  );
 }
 
 /** Connection recovery presents the same exact-run retry while private content stays hidden. */
@@ -43,6 +72,17 @@ function ConnectionStatus({
 }) {
   const { connection } = session;
   const status = connection.state.status;
+  const unreachable = !session.accessLost && !!connection.unreachable;
+  // Issuance that control did not answer is retried on a backed-off schedule with the same exact
+  // selectors; a refusal is never retried on its own.
+  const reconnect = useReconnectSchedule(
+    unreachable
+      ? "failing"
+      : status === "connecting" || status === "idle"
+        ? "busy"
+        : "ok",
+    connection.retry,
+  );
   return (
     <section role="status" className={styles.status}>
       <h2>
@@ -56,14 +96,18 @@ function ConnectionStatus({
               ? "Conversation session expired"
               : waiting
                 ? "Connecting to Meri."
-                : "Conversation connection unavailable"}
+                : unreachable
+                  ? "Capiro is not reachable right now."
+                  : "Conversation connection unavailable"}
       </h2>
       <p className={styles.muted}>
         {session.accessLost
           ? "The service could not verify your access to this conversation. It must recheck your account, client and exact conversation before reopening it."
-          : status === "unavailable"
-            ? "The service could not verify this conversation. No sample transcript was substituted."
-            : "The service rechecks your account, client and exact conversation before issuing a short-lived connection."}
+          : unreachable
+            ? "Your conversation is safe; we'll reconnect automatically."
+            : status === "unavailable"
+              ? "The service could not verify this conversation. No sample transcript was substituted."
+              : "The service rechecks your account, client and exact conversation before issuing a short-lived connection."}
       </p>
       {!waiting && (session.accessLost || !session.latestTarget) && (
         <Button
@@ -71,6 +115,7 @@ function ConnectionStatus({
           variant="outline"
           className={ui.outline}
           onClick={() => {
+            reconnect.reset();
             connection.retry();
             session.history.refresh();
           }}
@@ -79,7 +124,9 @@ function ConnectionStatus({
             ? "Check access again"
             : status === "expired"
               ? "Reconnect"
-              : "Try again"}
+              : unreachable
+                ? "Retry"
+                : "Try again"}
         </Button>
       )}
     </section>
@@ -115,8 +162,9 @@ export function UnverifiedAccessNotice({ session }: { session: Session }) {
 /** Saved reading is hidden after access loss until the exact session is reauthorized. */
 export function ConnectionPending({ session }: { session: Session }) {
   const { connection, earlier } = session;
+  const rechecking = useAccessRecheck(session);
   const status = connection.state.status,
-    waiting = status === "idle" || status === "connecting";
+    waiting = status === "idle" || status === "connecting" || rechecking;
   const pending =
     !session.accessLost &&
     connection.pending &&

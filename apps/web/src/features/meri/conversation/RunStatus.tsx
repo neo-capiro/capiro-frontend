@@ -6,6 +6,7 @@ import ui from "../ui/meri-ui.module.css";
 import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import styles from "./live.module.css";
 import { matchesStoredRequest } from "./run-commands";
+import { controlReconnectingMessage } from "./control-reachability";
 
 /**
  * Connection, delivery and stop feedback for the current run; never a run outcome by itself. A
@@ -15,15 +16,20 @@ export function RunStatus({
   run,
   active,
   acceptedRequest,
+  onRetry,
 }: {
   run: ReturnType<typeof useLiveRun>;
   /** The run has not reached a terminal status. */
   active: boolean;
   acceptedRequest?: ConversationStoredRequest | undefined;
+  /** An explicit Retry restarts the owner's automatic re-read schedule. */
+  onRetry?: (() => void) | undefined;
 }) {
   const { snapshot, intent, busy } = run;
   const uncertain = intent.submit?.state === "unknown";
+  const unreachable = run.failure === "unreachable";
   const refreshable =
+    !unreachable &&
     snapshot.status !== "disposed" &&
     (snapshot.observation?.runState === "paused" ||
       snapshot.observation?.runState === "waiting-for-approval" ||
@@ -38,23 +44,24 @@ export function RunStatus({
       (uncertain && matchesStoredRequest(intent.submit, acceptedRequest)));
   return (
     <>
-      {run.error && (
+      {run.error && !run.failure && (
         <p role="alert" className={styles.muted}>
           Conversation operation unavailable: {run.error}. No sample response
           was substituted.
         </p>
       )}
-      {run.transcript === "loading" && (
+      {unreachable && <UnreachableNotice run={run} onRetry={onRetry} />}
+      {run.transcript === "loading" && !unreachable && (
         <p role="status" className={styles.muted}>
           Loading this conversation…
         </p>
       )}
-      {run.transcript === "unavailable" && !uncertain && (
+      {run.transcript === "unavailable" && !uncertain && !unreachable && (
         <p className={styles.muted}>
           The current transcript could not be loaded.
         </p>
       )}
-      {uncertain && !canContinue && (
+      {uncertain && !canContinue && !unreachable && (
         <div className={styles.statusRow}>
           <Button
             type="button"
@@ -100,6 +107,41 @@ export function RunStatus({
         </p>
       )}
     </>
+  );
+}
+
+/**
+ * Control did not answer the last read: one plain notice and one Retry; the owner re-reads on its
+ * backed-off schedule. Nothing here resends; an unconfirmed request stays the person's own retry,
+ * behind the same single button.
+ */
+function UnreachableNotice({
+  run,
+  onRetry,
+}: {
+  run: ReturnType<typeof useLiveRun>;
+  onRetry: (() => void) | undefined;
+}) {
+  const { intent, busy } = run;
+  const uncertain = intent.submit?.state === "unknown";
+  return (
+    <div role="status" className={styles.statusRow}>
+      <p className={styles.muted}>{controlReconnectingMessage}</p>
+      <Button
+        type="button"
+        variant="outline"
+        className={ui.outline}
+        disabled={busy}
+        onClick={() => {
+          onRetry?.();
+          void (uncertain
+            ? run.submit(intent.submit!.prompt, true)
+            : run.history());
+        }}
+      >
+        Retry
+      </Button>
+    </div>
   );
 }
 
