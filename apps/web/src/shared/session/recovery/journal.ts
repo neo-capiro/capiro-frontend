@@ -176,6 +176,7 @@ function retireRecovery(
           | "OBJECTIVE_GENERATION_FAILED"
           | "OBJECTIVE_CONTEXT_INCOMPLETE"
           | "OBJECTIVE_ASSOCIATION_REJECTED"
+          | "OBJECTIVE_QUESTION_REFUSED"
           | "OBJECTIVE_VERSION_CONFLICT"
           | "FILE_BATCH_MOVE_REFUSED"
           | "TASK_EXECUTION_NOT_EXECUTED"
@@ -218,6 +219,31 @@ export function acknowledgeRecovery(
   assert: () => void,
 ) {
   return retireRecovery(scope, requestId, { state: "acknowledged" }, assert);
+}
+
+/** Only after the Question owner refused this original request under its lock,
+ * and the caller refreshed current source access. Missing/failed reads stay pending. */
+export function retireObjectiveQuestionRefusalRecovery(
+  scope: string,
+  requestId: string,
+  assert: () => void,
+) {
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "OBJECTIVE_QUESTION_REFUSED" },
+    assert,
+    (record) => {
+      const value = z
+        .object({
+          command: z.object({ requestId: z.uuid() }).passthrough(),
+          refusal: z.literal("OBJECTIVE_QUESTION_REFUSED"),
+        })
+        .strict()
+        .parse(record.data);
+      if (value.command.requestId !== requestId) throw new RecoveryStorageError();
+    },
+  );
 }
 
 /** Caller binds this immutable refusal receipt to the original reviewed command. */

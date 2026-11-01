@@ -8,10 +8,11 @@ import { useObjectiveOperational } from "./query";
 import {
   OperationalDecisionSection,
   OperationalEngagementSection,
-  OperationalPanel,
   OperationalWorkSections,
 } from "./OperationalSections";
 import styles from "./operational.module.css";
+import { ObjectiveSavedGenerationCard } from "./ObjectiveSavedGenerationCard";
+import { ObjectiveQuestionsPanel } from "../questions/ObjectiveQuestionsPanel";
 const ObjectiveAssociationDialog = lazy(() =>
   import("./ObjectiveAssociationDialog").then((module) => ({
     default: module.ObjectiveAssociationDialog,
@@ -40,7 +41,6 @@ function Overview({
         : "Unavailable",
     ],
     ["Decisions waiting", read?.sections.decisions.total ?? "Unavailable"],
-    ["Open intelligence questions", "Unavailable"],
     [
       "Next engagement",
       firstMeeting
@@ -122,20 +122,10 @@ function LinkedWork({
       </div>
       <OperationalDecisionSection {...panels} />
       <OperationalWorkSections {...panels} />
-      <OperationalPanel
-        title="Open intelligence questions"
-        coverage={read.sections.questions.coverage}
-        hasItems={false}
-        empty=""
-      >
-        <p className={styles.caption}>
-          Question status is unavailable for this view.
-        </p>
-      </OperationalPanel>
       <OperationalEngagementSection {...panels} />
       <p className={styles.caption}>
-        Requested, Strategy-applied and Planner-applied versions are
-        unavailable. Opening this page does not start or continue generation.
+        Linked work and saved generation are separate observations. Opening
+        this page does not start or continue generation.
       </p>
     </>
   );
@@ -210,6 +200,12 @@ export function ObjectiveOperationalPage({
         query={query}
         onManage={() => setManageLinks(true)}
         trigger={trigger}
+      />
+      <ObjectiveSavedGenerationCard objective={objective} />
+      <ObjectiveQuestionsPanel
+        objective={objective}
+        canEdit={Boolean(canEdit) && !query.loading}
+        onReloadObjective={onReloadObjective}
       />
       <SuccessCriteria objective={objective} />
       {manageLinks && (
