@@ -80,6 +80,8 @@ describe("one shared Strategy intake", () => {
     expect(objective).toContain('maxLength="8000"');
     expect(objective).not.toContain("Minimum win");
     expect(objective).not.toContain("Government problem");
+    expect(objective).toContain("Goal statement · Required");
+    expect(strategy).toContain("Context for Meri · Optional");
   });
   it("round-trips full answers and accepts optional empty context/date without fabricated legacy answers", () => {
     expect(objectiveSchema.parse(record()).strategyIntake).toEqual(intake);

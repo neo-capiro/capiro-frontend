@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { parseStrategyIntake } from "@capiro/shared/strategy-intake";
@@ -27,6 +27,8 @@ export function StrategyCreate({
   const clients = useCapiroQuery("clients.list", {});
   const [clientId, setClientId] = useState(initialClientId);
   const [discard, setDiscard] = useState(false);
+  const [nextClient, setNextClient] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
   const permitted = (clients.data ?? []).filter(
     (client) => client.status !== "archived",
   );
@@ -48,7 +50,11 @@ export function StrategyCreate({
           <SelectInput
             id="strategy-intake-client"
             value={clientId}
-            onValueChange={setClientId}
+            disabled={busy || clients.loading}
+            onValueChange={(next) => {
+              if (!clientId) setClientId(next);
+              else if (next !== clientId) setNextClient(next);
+            }}
             options={[
               { value: "", label: "Choose client" },
               ...permitted.map((client) => ({
@@ -69,21 +75,45 @@ export function StrategyCreate({
             key={clientId}
             clientId={clientId}
             onCreated={onCreated}
+            onBusy={setBusy}
           />
         )}
         <ActionButton onClick={() => setDiscard(true)}>Cancel</ActionButton>
       </Modal>
       <Modal
-        open={discard}
-        onOpenChange={setDiscard}
-        title="Leave strategy setup?"
+        open={discard || nextClient !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setDiscard(false);
+            setNextClient(null);
+          }
+        }}
+        title={nextClient !== null ? "Change client?" : "Leave strategy setup?"}
         description="Saved Objectives remain available. Unsaved fields will be lost."
         footer={
           <>
-            <ActionButton onClick={() => setDiscard(false)}>
+            <ActionButton
+              onClick={() => {
+                setDiscard(false);
+                setNextClient(null);
+              }}
+            >
               Keep editing
             </ActionButton>
-            <ActionButton onClick={onClose}>Leave setup</ActionButton>
+            <ActionButton
+              disabled={nextClient !== null && busy}
+              onClick={() => {
+                if (nextClient !== null) {
+                  setClientId(nextClient);
+                  setNextClient(null);
+                  setBusy(false);
+                } else onClose();
+              }}
+            >
+              {nextClient !== null
+                ? "Discard and change client"
+                : "Leave setup"}
+            </ActionButton>
           </>
         }
       >
@@ -99,9 +129,11 @@ export function StrategyCreate({
 function StrategySetup({
   clientId,
   onCreated,
+  onBusy,
 }: {
   clientId: string;
   onCreated: (strategy: StrategyDetail) => void;
+  onBusy: (busy: boolean) => void;
 }) {
   const router = useRouter();
   const [mode, setMode] = useState<"meri" | "empty">("meri");
@@ -116,6 +148,10 @@ function StrategySetup({
     },
   });
   const busy = session.mutation.isPending || create.pending;
+  useEffect(() => {
+    onBusy(busy);
+    return () => onBusy(false);
+  }, [busy, onBusy]);
   async function createEmpty() {
     try {
       const intake = parseStrategyIntake(session.fields.strategyIntake, {
@@ -187,11 +223,7 @@ function StrategySetup({
             <ObjectiveEditorActions session={session} />
           </>
         ) : (
-          <ActionButton
-            primary
-            disabled={busy}
-            onClick={() => void createEmpty()}
-          >
+          <ActionButton primary disabled={busy} type="submit">
             Create empty timeline
           </ActionButton>
         )}

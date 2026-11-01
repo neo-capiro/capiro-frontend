@@ -28,7 +28,7 @@ export function StrategyIntakeFields({
   return (
     <fieldset className="stack" disabled={disabled}>
       <legend className="srOnly">Strategy intake</legend>
-      <label htmlFor={`${id}-type`}>{fields.type.label} Â· Required</label>
+      <label htmlFor={`${id}-type`}>{fields.type.label} · Required</label>
       <select
         id={`${id}-type`}
         className="input"
@@ -47,7 +47,7 @@ export function StrategyIntakeFields({
           </option>
         ))}
       </select>
-      <label htmlFor={`${id}-goal`}>{fields.goal.label} Â· Required</label>
+      <label htmlFor={`${id}-goal`}>{fields.goal.label} · Required</label>
       <textarea
         id={`${id}-goal`}
         className="input"
@@ -58,7 +58,7 @@ export function StrategyIntakeFields({
         onChange={(event) => update("goal", event.target.value)}
       />
       <label htmlFor={`${id}-owner`}>
-        {fields.ownerUserId.label} Â· Required
+        {fields.ownerUserId.label} · Required
       </label>
       <select
         id={`${id}-owner`}
@@ -73,7 +73,7 @@ export function StrategyIntakeFields({
             (person) => person.id === value.ownerUserId,
           ) && (
             <option value={value.ownerUserId}>
-              Saved owner Â· availability checked when saving
+              Saved owner · availability checked when saving
             </option>
           )}
         {(people.data?.people ?? []).map((person) => (
@@ -90,9 +90,7 @@ export function StrategyIntakeFields({
           </button>
         </p>
       )}
-      <label htmlFor={`${id}-date`}>
-        {fields.targetDate.label} Â· Optional
-      </label>
+      <label htmlFor={`${id}-date`}>{fields.targetDate.label} · Optional</label>
       <input
         id={`${id}-date`}
         className="input"
@@ -101,7 +99,7 @@ export function StrategyIntakeFields({
         onChange={(event) => update("targetDate", event.target.value || null)}
       />
       <label htmlFor={`${id}-context`}>
-        {fields.meriContext.label} Â· Optional
+        {fields.meriContext.label} · Optional
       </label>
       <textarea
         id={`${id}-context`}

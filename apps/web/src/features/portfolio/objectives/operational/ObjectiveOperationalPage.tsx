@@ -197,7 +197,7 @@ export function ObjectiveOperationalPage({
         <div>
           <h1>{objectiveTitle(objective)}</h1>
           <p className={styles.caption}>
-            {statusLabels[objective.status]} Â· Current Objective v
+            {statusLabels[objective.status]} · Current Objective v
             {objective.version}
           </p>
         </div>
@@ -236,7 +236,7 @@ export function ObjectiveOperationalPage({
       />
       <SuccessCriteria objective={objective} />
       {manageLinks && (
-        <Suspense fallback={<p role="status">Loading link editorâ€¦</p>}>
+        <Suspense fallback={<p role="status">Loading link editor…</p>}>
           <ObjectiveAssociationDialog
             key={`${objective.clientId}:${objective.id}`}
             objective={objective}

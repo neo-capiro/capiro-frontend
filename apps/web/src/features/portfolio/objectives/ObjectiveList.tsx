@@ -16,10 +16,10 @@ export function ObjectiveStats({ records }: { records: Objective[] }) {
   const stats = [
     ["Objectives", records.length],
     // These operational totals are not present in the objective list response.
-    ["Active", "â€”"],
-    ["Strategy ready", "â€”"],
-    ["Decisions waiting", "â€”"],
-    ["Next cycle", "â€”"],
+    ["Active", "—"],
+    ["Strategy ready", "—"],
+    ["Decisions waiting", "—"],
+    ["Next cycle", "—"],
   ] as const;
   return (
     <dl className={styles.stats} aria-label="Objective summary">
@@ -139,7 +139,7 @@ function ObjectiveRow({
           aria-label={ownerName ?? "Owner unavailable"}
           title={ownerName ?? "Owner unavailable"}
         >
-          {ownerName ?? "â€”"}
+          {ownerName ?? "—"}
         </small>
       </div>
       <div className={styles.objectiveFacts}>
