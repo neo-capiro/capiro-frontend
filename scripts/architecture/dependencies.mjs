@@ -257,6 +257,9 @@ export const serverAdapters = new Map([
     '@clerk/nextjs/server', `${appSource}shared/portfolio/config/config.ts`, `${appSource}shared/portfolio/api/proxy.ts`,
   ])],
   [`${appSource}app/healthz/route.ts`, new Set()],
+  [`${appSource}app/api/build/route.ts`, new Set([
+    previewPolicy, `${appSource}shared/build/build-identity.server.ts`,
+  ])],
   [`${appSource}app/favicon.ico/route.ts`, new Set([
     `${appSource}shared/response-headers.ts`,
   ])],
