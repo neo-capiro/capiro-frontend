@@ -39,10 +39,10 @@
     "file": "apps/web/src/features/portfolio/calendar/attendance/MeetingAttendance.tsx",
     "kind": "function",
     "symbol": "AttendancePanel",
-    "fingerprint": "dc5359340c7d4f4bc59ae857e09e41cae9129aa3555fb6e7612b668a0498e198",
-    "reason": "One attendance session presents its visible send, remove and reconcile outcome. The guarded session query, consented send dialog and removal API are dedicated owners; the compact panel adds no independent lifecycle.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "c12c36a8ea9eaada9f1c0c921e78a2aed5ed597d967881366dff1c516e9145ef",
+    "reason": "Single meeting attendance session interaction owner. Status, readiness, uncertain-result blocking, send-dialog opening, cancellation and refresh share one scoped session state; API/access/query/consent responsibilities remain delegated. Compact presentation exposes existing states without a second owner or automatic dispatch. Keeping this state together preserves uncertainty across section changes.",
+    "reviewedBy": "Codex independent meeting reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/attendance/SendMeriDialog.tsx",
@@ -3329,19 +3329,19 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
     "kind": "function",
     "symbol": "MeetingWorkspace",
-    "fingerprint": "4af28a9b2ac04474667548560594686e1c2f7c2278913e0529f8a67159bc8643",
-    "reason": "At frontend 73333456b6ec336c5cdfc2ebe94db1101039ed7a this workspace owns one meeting's selected tab and edit, assignment and sharing dialog lifetime. Passing the unusable-prep count to the existing preparation panel preserves that responsibility; feature panels and persistence remain delegated. No size-driven extraction is warranted.",
-    "reviewedBy": "Codex independent portfolio_merged_review (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "b0934f26c5271b6709a04f925e6b2ea9d518d605473f7325e213503f95e67e14",
+    "reason": "Single meeting workspace composition for section selection and edit/assignment/sharing visibility. Child components retain domain and persistence responsibilities. Removing the tab-specific attendance duplicate preserves one header attendance owner across tabs while retaining chosen-tab and local-draft behavior.",
+    "reviewedBy": "Codex independent meeting reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx",
     "kind": "function",
     "symbol": "MeetingIdentity",
-    "fingerprint": "7cbd4fdb3979a91abd1ad25554f0572dd76ec5fcd5f23ffd5b8467cc0ce8dba9",
-    "reason": "The same meeting identity and actions are rendered for inline and drawer layouts, deriving stage, time, materials and safe join link from the selected meeting. Transport and command authority remain outside this renderer.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "82d00f0db4e21c1ee516bab639406b5f6473bd6d2efd8d0cad356d9891ac568f",
+    "reason": "Single identity/action header with mutually exclusive inline and drawer presentations of the same meeting. Formatting and accessible markup account for its size; callbacks and the canonical attendance component retain action ownership. Both branches render one attendance instance and add no transport, consent or persistence owner.",
+    "reviewedBy": "Codex independent meeting reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingWorkspacePage.tsx",
