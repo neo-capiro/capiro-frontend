@@ -335,7 +335,7 @@ describe("forecast authenticated proxy boundary", () => {
     ["government-forecasts", "synthetic-id", "history"],
   ])("forwards the authorized read %j", async (...args) => {
     const path = args as string[];
-      const fetcher = vi.fn<typeof fetch>(async () => Response.json(page));
+    const fetcher = vi.fn<typeof fetch>(async () => Response.json(page));
     const response = await proxyRequest(
       new Request(
         "https://app.example.test/api/backend/core/government-forecasts",
