@@ -1,4 +1,5 @@
 "use client";
+import type { ResearchSelection } from "../../../shared/meri-conversations/research-context";
 import { useCallback, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ConversationContext } from "../../../shared/meri-conversations/session";
@@ -15,6 +16,7 @@ export function useConversationSelection(
   account: ConversationAccount,
   clientId: string | null,
   conversationId?: string,
+  research?: ResearchSelection,
 ) {
   const cache = useQueryClient();
   const [selection, setSelection] = useState(() => {
@@ -25,6 +27,7 @@ export function useConversationSelection(
         clientId,
         conversationId,
         requireMeriTabStorage(),
+        research,
       );
     } catch {
       return undefined;
@@ -54,13 +57,15 @@ export function useConversationSelection(
             cache,
             { ...account, clientId, conversationId: exactConversation },
             conversationId,
+            undefined,
+            research,
           ),
         );
       } catch {
         setStorageError(new TabJournalUnavailable().message);
       }
     },
-    [account, clientId, conversationId, cache],
+    [account, clientId, conversationId, cache, research],
   );
   return { selection, storageError, record, clear };
 }

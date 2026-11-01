@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { useSearchParams } from "next/navigation";
+import { researchRoute } from "../meri-conversations/research-context";
 import { useIdentity } from "../portfolio/auth/identity";
 import { SessionContext } from "../session/SessionContext";
 import { useSelectedClient } from "../session/SelectedClient";
@@ -67,6 +68,7 @@ function VerifiedNewConversation(props: Props) {
   const identity = useIdentity();
   const selected = useSelectedClient();
   const params = useSearchParams();
+  const research = researchRoute(params);
   const general = params.get("scope") === "general" && !params.has("clientId");
   const invalidScope =
     (params.has("scope") &&
@@ -79,15 +81,17 @@ function VerifiedNewConversation(props: Props) {
       : undefined;
   const client =
     selected.state === "authorized-client" ? selected.client : null;
-  const unavailable = invalidScope
-    ? "The conversation scope is invalid."
-    : !general && !client
-      ? "Choose General or a visible client to start a conversation."
-      : !general && client?.status === "archived"
-        ? "This client is archived."
-        : !current?.tenant?.id || !current.user.id
-          ? "A verified account is required to start a conversation."
-          : undefined;
+  const unavailable = research
+    ? "Open or start the Research conversation in the Research panel."
+    : invalidScope
+      ? "The conversation scope is invalid."
+      : !general && !client
+        ? "Choose General or a visible client to start a conversation."
+        : !general && client?.status === "archived"
+          ? "This client is archived."
+          : !current?.tenant?.id || !current.user.id
+            ? "A verified account is required to start a conversation."
+            : undefined;
   const explicitStart = () => {
     if (unavailable || (!general && !client) || !current?.tenant?.id) return;
     start(
@@ -110,6 +114,7 @@ function VerifiedNewConversation(props: Props) {
       {current?.tenant?.id &&
       current.user.id &&
       selected.state === "no-selection" &&
+      !research &&
       !params.has("scope") &&
       !params.has("clientId") ? (
         <DefaultConversationStart

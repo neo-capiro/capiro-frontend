@@ -34,6 +34,8 @@ function SavedChatContent({
     account,
     row.clientId,
     row.conversationId,
+    true,
+    row.scopeKind === "research_portfolio" ? row : undefined,
   );
   const turns =
     history.unavailable ||
