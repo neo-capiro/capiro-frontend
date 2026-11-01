@@ -1036,18 +1036,18 @@
    "purpose": "Reviewed coherent Research retrieval0.5 and legislative1.7 plus Office XML/Word source; actual package/consumer qualification recorded separately."
   },
   {
-   "file": "capiro-meri-contracts-0.1.45-630c58f3-74c9935d5a3b.tgz",
+   "file": "capiro-meri-contracts-0.1.46-4cddea3c-862bcf7659b8.tgz",
    "name": "@capiro/meri-contracts",
-   "version": "0.1.45",
+   "version": "0.1.46",
    "repository": "https://github.com/neo-capiro/meri-greenfield",
-   "sourceCommit": "630c58f30757f9172b05e9d6166f08682b1c6dbb",
-   "sourceTree": "69e4804b0c8d499f19aa029741067749ab59cbe7",
+   "sourceCommit": "4cddea3cb07c8f79d86c19773e44892d8b390729",
+   "sourceTree": "1204f5af672bb012d18950edc7d8f48afe28b637",
    "bytes": 2173856,
-   "sha256": "74c9935d5a3b7cf2ee3c168e334f76a21ce676c7227059d1379d69ec47cc8ce4",
-   "integrity": "sha512-i3DRqui6qUabJeacMxB1zSqwSPOpif6gxKZBraIXMgsmS9mdIL0H4ANLbvECom73i37AwR1V+dtjF5f75OikAA==",
+   "sha256": "862bcf7659b8c0c87b53c9422f6bc20bf830b584353165267840b2bbb3a596b8",
+   "integrity": "sha512-LnXEGkW4O2Z8iZAy0npIn4W52olW2pe73i12yEXu759WviWyxulJXAwJcc+CuTe7XVpRsBSk1k1AtUdZzN2kMw==",
    "regularEntryCount": 119,
    "status": "source-committed-consumer-pinned",
-   "purpose": "Same-document Office bridge: intents-application office_edit item and office_edit_decided answer for the propose_office_edit governed intent; actual package/consumer qualification recorded separately."
+   "purpose": "Same-document Office bridge (propose_office_edit, office_edit intents item and office_edit_decided answer), numbered after the discoverability cohort's 0.1.45; actual package/consumer qualification recorded separately."
   }
  ]
 }
