@@ -177,11 +177,7 @@ export function SettingsScreen({
                 The requested Settings section is unavailable.
               </SettingsNotice>
             )}
-            {build && (
-              <footer className={styles.build}>
-                <a href="/api/build">Build</a> · {build}
-              </footer>
-            )}
+            {build && <footer className={styles.build}>Build · {build}</footer>}
           </div>
         </div>
       )}

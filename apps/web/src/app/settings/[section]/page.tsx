@@ -25,7 +25,7 @@ export default async function SettingsPage({
         memoryReviewEnabled={
           process.env.MERI_MEMORY_OWNER_REVIEW_ENABLED === "true"
         }
-        build={buildIdentityLine(readBuildIdentity(process.env))}
+        build={buildIdentityLine(readBuildIdentity(process.env)) ?? undefined}
         meriPreferences={
           <MeriPreferencesPanel
             procedureGovernanceEnabled={!readOnlyPreview}
