@@ -433,8 +433,12 @@
     padding: 16px;
     align-items: center;
   }
+  /* The chat sidebar's own label sizing is more specific than this rail rule; name it too,
+     or the label keeps its size inside the 40px tile and wraps one character per line. */
   .navButton,
-  .newConversation {
+  .newConversation,
+  .chatSidebar > .navButton,
+  .chatSidebar .newConversation {
     width: 40px;
     padding: 0;
     gap: 0;
