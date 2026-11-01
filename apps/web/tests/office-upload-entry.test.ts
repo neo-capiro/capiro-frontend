@@ -17,7 +17,6 @@ function render(
     lifetime = new AbortController();
   const uploads = createUploadAccess({
     credential: session.credential,
-    context: session.context,
     lifetime: lifetime.signal,
     isCurrent: () => true,
   });
