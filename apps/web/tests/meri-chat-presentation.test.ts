@@ -113,17 +113,21 @@ describe("a finished answer reads like a chat", () => {
   it("explains a failed run in plain words, keeps an unknown code small, and says nothing for other states", () => {
     const known = render(turn("failed", { reasonCode: "EXECUTION_FAILED" }));
     expect(known).toContain(
-      "finish this request. Try sending it again; if you applied a skill, try without it.</p>",
+      "Meri could not finish this answer. Send it again, or rephrase.</p>",
     );
     expect(known).not.toContain("EXECUTION_FAILED");
     expect(known).not.toContain("Service reason");
+    for (const code of ["HOLD_CHECKPOINT_FAILED", "ATTEMPT_LOST"])
+      expect(render(turn("failed", { reasonCode: code }))).toContain(
+        "Meri lost this answer before it finished. Send it again.</p>",
+      );
     const reason = { reasonCode: "SYNTHETIC_REASON" };
     const unknown = render(turn("failed", reason));
     expect(unknown).toContain(
-      "finish this request. Try sending it again.<small> SYNTHETIC_REASON</small></p>",
+      "Meri could not finish this answer. Send it again.<small> SYNTHETIC_REASON</small></p>",
     );
     for (const state of ["completed", "cancelled", "running"] as const)
-      expect(render(turn(state, reason))).not.toContain("couldn't finish");
+      expect(render(turn(state, reason))).not.toContain("could not finish");
     const silent = render(turn("completed", { prompt: null }));
     expect(silent).not.toContain("was not returned");
     expect(silent).toContain("Synthetic answer.");
