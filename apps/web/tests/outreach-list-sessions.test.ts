@@ -20,7 +20,11 @@ type QueryState = {
 
 const state = vi.hoisted(() => ({
   byKey: {} as Record<string, QueryState>,
-  calls: [] as { key: string; input: unknown; options: { enabled?: boolean } }[],
+  calls: [] as {
+    key: string;
+    input: unknown;
+    options: { enabled?: boolean };
+  }[],
   capability: "unknown" as "enabled" | "disabled" | "unknown",
 }));
 
@@ -40,9 +44,8 @@ vi.mock("../src/shared/capiro/capabilities", () => ({
   CapiroCapabilitiesProvider: ({ children }: { children: unknown }) => children,
 }));
 
-const { OutreachList } = await import(
-  "../src/features/modules/engagement/outreach/OutreachList"
-);
+const { OutreachList } =
+  await import("../src/features/modules/engagement/outreach/OutreachList");
 
 const campaign = (over: Record<string, unknown> = {}) => ({
   id: "c-1",
@@ -52,7 +55,11 @@ const campaign = (over: Record<string, unknown> = {}) => ({
   recordedSendStatus: null,
   category: "drafts",
   sentAt: null,
-  state: { title: "Canonical campaign", clientId: "cl-1", decisions: { goal: "Goal" } },
+  state: {
+    title: "Canonical campaign",
+    clientId: "cl-1",
+    decisions: { goal: "Goal" },
+  },
   ...over,
 });
 
@@ -352,5 +359,57 @@ describe("Outreach list campaign-session capability admission", () => {
     expect(sessionsCall().every((call) => call.options.enabled === false)).toBe(
       true,
     );
+  });
+});
+
+/**
+ * Campaigns created before campaign workflows existed come back from the campaigns read with
+ * `hasWorkflow: false` and are listed under saved outreach records. The category tabs therefore
+ * read 0 while the page lists drafts, which looked like "no data" in the field. The page must
+ * explain the zero instead of leaving it unexplained, and must not change what is counted.
+ */
+describe("Outreach list legacy campaign counts", () => {
+  it("explains a zero category when campaigns predate campaign workflows", () => {
+    const markup = render({
+      "engagement.outreach.records": ok({ items: [record()] }),
+      "engagement.campaigns": ok({
+        items: [campaign({ id: "c-legacy", hasWorkflow: false })],
+      }),
+      "engagement.sessions": ok([]),
+    });
+    expect(markup).toContain("Saved outreach record");
+    // Counting is unchanged: a workflow-less campaign is not counted in the tabs.
+    expect(markup).toContain("Campaign drafts · 0");
+    expect(markup).toContain(
+      "1 campaign in this view predates campaign workflows",
+    );
+    expect(markup).toContain("listed under Saved outreach records");
+  });
+
+  it("pluralises the explanation for several legacy campaigns", () => {
+    const markup = render({
+      "engagement.outreach.records": ok({ items: [] }),
+      "engagement.campaigns": ok({
+        items: [
+          campaign({ id: "c-legacy-1", hasWorkflow: false }),
+          campaign({ id: "c-legacy-2", hasWorkflow: false }),
+        ],
+      }),
+      "engagement.sessions": ok([]),
+    });
+    expect(markup).toContain(
+      "2 campaigns in this view predate campaign workflows",
+    );
+    expect(markup).toContain("they are listed under Saved outreach records");
+  });
+
+  it("keeps the plain hint when every campaign has a workflow", () => {
+    const markup = render({
+      "engagement.outreach.records": ok({ items: [] }),
+      "engagement.campaigns": ok({ items: [campaign()] }),
+      "engagement.sessions": ok([]),
+    });
+    expect(markup).toContain("Campaign drafts · 1");
+    expect(markup).not.toContain("predate campaign workflows");
   });
 });
