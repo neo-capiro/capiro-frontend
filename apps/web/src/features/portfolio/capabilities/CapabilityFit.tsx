@@ -41,9 +41,6 @@ function CompactFit({
   const preview = result?.matches.slice(0, 3) ?? [];
   return (
     <section className={styles.fitStrip} aria-label="Capability fit">
-      <span className={styles.fitIcon} aria-hidden="true">
-        !
-      </span>
       <div className={styles.fitCopy}>
         <p>Where capabilities create fit</p>
         <details className={styles.fitDetails}>
@@ -81,28 +78,30 @@ function CompactFit({
             </div>
           )}
         </details>
-        <p className={styles.fitPreview}>
-          {result?.status === "stale" && "Profile changed; refresh. "}
-          {preview.length > 0
-            ? preview.map((match, index) => {
-                const href = fitLink(match.href, existingApp);
-                return (
-                  <span key={match.id}>
-                    {index > 0 && " · "}
-                    {index === 0 && href ? (
-                      <a href={href} aria-label="Open target">
-                        {match.target}
-                      </a>
-                    ) : (
-                      match.target
-                    )}
-                  </span>
-                );
-              })
-            : result
-              ? "No matches available."
-              : "Fit details unavailable."}
-        </p>
+        {(preview.length > 0 || !result || !result.emptyReason) && (
+          <p className={styles.fitPreview}>
+            {result?.status === "stale" && "Profile changed; refresh. "}
+            {preview.length > 0
+              ? preview.map((match, index) => {
+                  const href = fitLink(match.href, existingApp);
+                  return (
+                    <span key={match.id}>
+                      {index > 0 && " · "}
+                      {index === 0 && href ? (
+                        <a href={href} aria-label="Open target">
+                          {match.target}
+                        </a>
+                      ) : (
+                        match.target
+                      )}
+                    </span>
+                  );
+                })
+              : result
+                ? "No matches available."
+                : "Fit details unavailable."}
+          </p>
+        )}
         {result && <FitCoverage result={result} />}
         <QueryState
           pending={query.isPending}
@@ -198,7 +197,9 @@ function FitCoverage({ result }: { result: z.infer<typeof fitSchema> }) {
   };
   return (
     <div className="stack" aria-label="Fit coverage">
-      <p className="muted">{labels[result.status]}</p>
+      {!(result.status === "empty" && result.emptyReason) && (
+        <p className="muted">{labels[result.status]}</p>
+      )}
       {result.emptyReason && <p className="status">{result.emptyReason}</p>}
       {result.sources ? (
         <>

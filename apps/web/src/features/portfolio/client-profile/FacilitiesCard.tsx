@@ -3,6 +3,7 @@
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { useState } from "react";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
+import { plural } from "@/shared/portfolio/ui/plural";
 import { useFacilities } from "./queries";
 import { FacilitiesManager } from "./FacilitiesManager";
 import { FacilityDetailDialog } from "./FacilityDetailDialog";
@@ -64,8 +65,9 @@ function CurrentFacilitiesCard({
           <h2>District nexus</h2>
           {query.data && (
             <p>
-              {facilities.length} locations · {stateCount} states ·{" "}
-              {districtCount} districts
+              {plural(facilities.length, "location")} ·{" "}
+              {plural(stateCount, "state")} ·{" "}
+              {plural(districtCount, "district")}
             </p>
           )}
         </div>

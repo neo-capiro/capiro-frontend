@@ -78,7 +78,11 @@ export function OpportunitiesPage({
           ],
         ].map(([value, label]) => (
           <div key={label}>
-            <strong>{value}</strong>
+            <strong>
+              {typeof value === "number"
+                ? value.toLocaleString("en-US")
+                : value}
+            </strong>
             <span className="eyebrow">{label}</span>
           </div>
         ))}
@@ -184,7 +188,8 @@ function PageControls({
   return (
     <div className="row between">
       <small>
-        Page {page} · {rows} shown · {total ?? "Unknown"} total
+        Page {page} · {rows.toLocaleString("en-US")} shown ·{" "}
+        {total == null ? "Unknown" : total.toLocaleString("en-US")} total
       </small>
       <div className="row">
         <button

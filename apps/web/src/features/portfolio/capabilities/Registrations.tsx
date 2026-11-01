@@ -201,7 +201,7 @@ export function Registrations({
           ) : (
             <div className="stack">
               <p className="muted">
-                SAM.gov: {intakeValue("samStatus") ?? "Not supplied"}
+                SAM.gov {intakeValue("samStatus") ?? "Not supplied"}
                 {intakeValue("samExpirationDate") &&
                   ` · Expires ${intakeValue("samExpirationDate")}`}
               </p>

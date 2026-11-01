@@ -128,7 +128,7 @@ describe("available opportunities are not mislabeled as proven matches", () => {
     );
     expect(html).toContain("No saved workflow status");
     expect(html).toContain("Page 1");
-    expect(html).toContain("11886");
+    expect(html).toContain("11,886");
     expect(html).toContain("clientId=" + clientId);
   });
   it.each([null, undefined, 0])(
