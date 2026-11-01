@@ -3981,10 +3981,10 @@
     "file": "apps/web/src/shared/session/recovery/journal.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "7a8decee42db3caf21ddd1d4a672bda3ed16ec5cf177823b1cd35ef72c94b5ad",
-    "reason": "The canonical encrypted recovery journal adds one guarded named newsletter refusal retirement and its disposition union member. The guard decodes the existing immutable record and invokes the public exact request/document/base-revision refusal receiver before the unchanged retirement path erases sensitive payload and verifies the positive tombstone. Existing reservation, encryption, storage locks, current-record verification and acknowledgement remain byte-preserved. A small domain retirement guard belongs with the existing named retirement family; no parallel journal is introduced.",
-    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "d86027945f653644b813c155e273ae9921b1aafdd17e0ac3b99241137fabefa5",
+    "reason": "The existing encrypted recovery journal remains the sole durable attempt owner. This change adds one narrowly typed Objective Question refusal code and a retirement wrapper that validates the original command request ID plus exact refusal marker before delegating to the existing locked retireRecovery path. It does not create new storage or command execution. The independently reviewed Question session requires a definitive original-request refusal and fresh current source read before explicit acknowledgment; unknown or failed reads stay pending. Existing journal regression tests and new Question recovery tests cover this integration.",
+    "reviewedBy": "Independent Codex area10 parent; not Question journal change author",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
@@ -7644,6 +7644,15 @@
     "fingerprint": "f7f0f86bad6a654678fdb86029719fdd76507ce71b88ba6031f72b9400e5f273",
     "reason": "One question card renders its saved answer/source status, its answer/close/reopen affordances and a separately implemented history view. Command execution remains in QuestionSession and Core; this JSX-heavy form does not own network/persistence/authorization. Its current/stale rendering and disabled close behavior were independently checked.",
     "reviewedBy": "Independent Codex area10 parent; not Questions author",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/operational/ObjectiveOperationalPage.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveOperationalPage",
+    "fingerprint": "efa76f75e47fa1bf91538b9424cf8d33e059a88e8d96ed4852620e8542c8b75d",
+    "reason": "One Objective-scoped operational container composes independently owned linked-work, saved-generation and Questions views. Both added children receive the same current Objective; Questions retains current edit/loading hints and reload callback, while saved-generation discovery and Planner consent keep their own canonical read/action owners. Existing navigation, criteria, query errors and association dialog callbacks are preserved byte-for-byte. No mutation or alternate authority logic is added to this container. Exact conflict composition was checked independently against both accepted source deltas.",
+    "reviewedBy": "Independent Codex objective_questions agent; not root conflict-composition author",
     "reviewedOn": "2026-11-01"
   }
 ]
