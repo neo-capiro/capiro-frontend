@@ -4,6 +4,16 @@
   gap: 12px;
   min-width: 0;
 }
+.dropTarget {
+  min-height: 24px;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  padding: 4px;
+}
+.dropTarget > span {
+  color: var(--muted-foreground);
+  font-size: 11px;
+}
 .panel {
   composes: panel from "../library/sections.module.css";
   padding: 16px;

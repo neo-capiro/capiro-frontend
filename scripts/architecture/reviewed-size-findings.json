@@ -1879,10 +1879,10 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
     "kind": "function",
     "symbol": "WorkspaceScreen",
-    "fingerprint": "067bd385990271ef4c03b88bfd57c33e662dfa10bed5dec17d9c6c76991e625f",
-    "reason": "The existing Workspace route dispatcher adds one early exact-task destination and delegates the current read and presentation to EngagementTaskDetail. It does not embed task authorization or another task execution pipeline. Existing document/share/template destinations remain unchanged.",
-    "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "db874d47834f35abda3528c4ff4b3f097759a7e1e2bb4febffa24967162a9f5d",
+    "reason": "One Workspace route and entry dispatcher; changed Newsletter destinations retain the selected client on the supported gallery path and expose explicit gallery navigation. Persistence, recovery, document authorization and editor state stay in existing owners. No new domain or lifecycle responsibility is embedded here.",
+    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
@@ -1908,12 +1908,10 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "line": 44,
-    "nonblank": 393,
-    "fingerprint": "4122ccaa252ab0cd03a954bf2e9a4b6eb920c87aca13e86babad7ede1a7289f5",
-    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: The existing editor function composes one provider-child identity with its existing current/unfenced history and revision/block key. Existing state and handlers remain exact; request/proposal and block editing responsibilities stay with their current children/owners. The affected explicit-adoption and stale-result browser checks pass. See W3-FE217-COMPOSITION-REVIEW.md.",
-    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "019e968a5aea130e973dba642c0828f3d9b31578369134dc6a599df017f0d57d",
+    "reason": "One rich-editor composition host; the added AI preset child receives current unfenced saved identity, local design and a draft/revision proposal signature, then returns a structure action to the existing local history owner. Provider transport, proposal lifetime, presets, rendering and durable writes stay in separate existing or cohesive child modules. The size remains a visible composition signal, not a second workflow owner.",
+    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
@@ -4145,10 +4143,10 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
     "kind": "function",
     "symbol": "SavedRichPreview",
-    "fingerprint": "d0070cbc6c7fb5c15d734ac3c6ff8275fadf2ed85c60174b93bc2e4137fd943e",
-    "reason": "One cohesive inert saved-preview view owns width/plain-text controls and the information panel. The existing sanitizer/rendering and empty sandbox/no-referrer/CSP remain unchanged. Exact independent disposition: W3-FE187-SOURCE-RESPONSIBILITY-REVIEW.md and its final correction addendum.",
-    "reviewedBy": "Independent Root Codex, FE187 406d354aeb3b2a6de339573cdb560dab53b8603b",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "b3990c5ca4ebc6b7b181a6a812211f615708b27e27c53660f053bf7ed65294cd",
+    "reason": "SavedRichPreview presents one immutable saved preview and its revision metadata. Link inventory and checkbox presentation are separate local modules; no URL is fetched or opened. Existing sanitization, inert iframe sandbox and saved revision selection remain unchanged. No provider or durable write responsibility enters the preview.",
+    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx",
@@ -4759,12 +4757,10 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "line": 1,
-    "nonblank": 496,
-    "fingerprint": "fb46349c600648deebcdefc0d11f04ed113250b2d83d68f0d2029cf60b596b3b",
-    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: The existing editor module adds only one current, unfenced saved-document identity prop to the existing revision/block-keyed child. Removing that prop restores the accepted current-base module exactly, preserving library, conversion, brand/survey, manual controls, history, recovery and Undo owners. No new module responsibility is introduced. See W3-FE217-COMPOSITION-REVIEW.md.",
-    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "2c05e28333f1b4ddb6e4cc32ea5bcde8618118ef3a6cc8448cac1bf176b1306c",
+    "reason": "One rich-editor composition host; the added AI preset child receives current unfenced saved identity, local design and a draft/revision proposal signature, then returns a structure action to the existing local history owner. Provider transport, proposal lifetime, presets, rendering and durable writes stay in separate existing or cohesive child modules. The size remains a visible composition signal, not a second workflow owner.",
+    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/AccountInvitation.tsx",
@@ -4923,10 +4919,10 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichStructure.tsx",
     "kind": "function",
     "symbol": "RichStructure",
-    "fingerprint": "8beeccf29f0b854a731eaf22b3bc129305a756d47c4af5f6137a9e57b0454ba1",
-    "reason": "One recursive structure navigation surface invokes typed section/block actions and retains the existing saved-section callbacks.",
-    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "f40cabb38743866ef444432c232bb2b71470d5d68637d7cd8a13f98a0a8f15a5",
+    "reason": "One content-tree presentation; prebuilt insertion and drag targets dispatch typed local structure actions. Existing accessible buttons remain. Nested destination identity, payload admission, preset factories and structural invariants live in separate cohesive modules; this view does not authorize, persist or call providers.",
+    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/BlockPlacement.tsx",
@@ -5238,10 +5234,10 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/WritingTool.tsx",
     "kind": "function",
     "symbol": "WritingTool",
-    "fingerprint": "86aab7d0224e4bccff465026b63d15b30db71b118ea2f98ee464b25f0fb54f14",
-    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One writing dialog keeps explicit source/instructions, pending or unknown state and plain-text proposal adoption together. The common proposal hook and existing editor/Undo owner perform lifetime and mutation work; this view does not add automatic fetching, markup execution or saving. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
-    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "43cfde92406a53acfba0cbad0dfe468d933d689512b89a63a631d1af81f56211",
+    "reason": "One existing provider proposal dialog; optional preset labels and usage copy reuse its capability gate, explicit Generate, captured source signature, unknown-result lock and explicit Use text. The caller supplies a current draft signature and local insertion callback. No parallel transport, provider loop, automatic save or retry is introduced.",
+    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/LinkPreviewTool.tsx",
@@ -7575,5 +7571,14 @@
     "reason": "One template selection interaction filters the existing preset catalog. Shared Tabs own keyboard behavior; library tabs link to canonical Workspace/Templates surfaces without duplicate reads or truncated listings. It creates no persistence or authorization mechanism. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
     "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
     "reviewedOn": "2026-10-31"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/structure.ts",
+    "kind": "function",
+    "symbol": "changeStructure",
+    "fingerprint": "433feae9e5f76e9e200e618c70ec915a87b344ad1f9cebdbff64b73da5ce1fbc",
+    "reason": "One pure local structure reducer; insertSection and insertBlock admit canonical cloned content with fresh identities, and beforeId selects a position in the existing validated container. All operations use one clone and the same size/depth/cycle/source preservation checks, leaving input unchanged on refusal. Persistence and UI remain outside this module.",
+    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
+    "reviewedOn": "2026-11-01"
   }
 ]

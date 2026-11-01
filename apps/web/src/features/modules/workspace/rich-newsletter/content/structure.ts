@@ -13,9 +13,12 @@ export type BlockContainer = {
   sectionId: string;
   blockId?: string;
   column?: number;
+  beforeId?: string;
 };
 export type StructureAction =
   | { type: "addSection" }
+  | { type: "insertSection"; section: NewsletterSection }
+  | { type: "insertBlock"; block: NewsletterBlock; target: BlockContainer }
   | {
       type: "section";
       id: string;
@@ -72,6 +75,19 @@ function reorder<T>(items: T[], index: number, direction: "up" | "down") {
   if (target >= 0 && target < items.length)
     [items[index], items[target]] = [items[target]!, items[index]!];
 }
+function insertBlock(
+  blocks: NewsletterBlock[],
+  block: NewsletterBlock,
+  target: BlockContainer,
+) {
+  const index =
+    target.beforeId === undefined
+      ? blocks.length
+      : blocks.findIndex((item) => item.id === target.beforeId);
+  if (index < 0)
+    throw new Error("The insertion position is no longer available.");
+  blocks.splice(index, 0, block);
+}
 function checkStructure(design: NewsletterDesign) {
   let count = 0;
   const walk = (blocks: NewsletterBlock[], depth: number, limit: number) => {
@@ -126,6 +142,18 @@ export function changeStructure(
   let selectedId: string | undefined;
   if (action.type === "addSection") {
     next.sections.push(createNewsletterSection("Untitled section"));
+  } else if (action.type === "insertSection") {
+    const section = {
+      ...structuredClone(action.section),
+      id: createNewsletterSection("").id,
+      blocks: cloneNewsletterBlocks(action.section.blocks),
+    };
+    next.sections.push(section);
+    selectedId = section.blocks[0]?.id;
+  } else if (action.type === "insertBlock") {
+    const block = cloneNewsletterBlocks([action.block])[0]!;
+    insertBlock(container(next, action.target).blocks, block, action.target);
+    selectedId = block.id;
   } else if (action.type === "section") {
     const index = next.sections.findIndex(
       (section) => section.id === action.id,
@@ -157,7 +185,7 @@ export function changeStructure(
     // This slice offers manual thumbnails, never an unfulfilled auto-fetch state.
     if (block.kind === "video")
       block.video = { ...block.video, thumbnail: "custom", sourceUrl: "" };
-    container(next, action.target).blocks.push(block);
+    insertBlock(container(next, action.target).blocks, block, action.target);
     selectedId = block.id;
   } else if (action.type === "columns") {
     const block = findNewsletterBlock(next, action.id);
@@ -191,7 +219,7 @@ export function changeStructure(
       if (destination.section !== source.section)
         inheritSources(destination.section, source.section);
       source.blocks.splice(source.index, 1);
-      destination.blocks.push(block);
+      insertBlock(destination.blocks, block, action.target);
     } else if (action.action === "duplicate") {
       const copy = cloneNewsletterBlocks([block])[0]!;
       source.blocks.splice(source.index + 1, 0, copy);

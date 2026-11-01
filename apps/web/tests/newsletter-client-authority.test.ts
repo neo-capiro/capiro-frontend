@@ -202,6 +202,17 @@ beforeEach(() => {
 });
 
 describe("newsletter client authority", () => {
+  it("creates a General gallery draft without adopting a listed client", async () => {
+    h.run["workspace.draft.create"].mockResolvedValue({
+      ...record,
+      clientId: null,
+    });
+    await render({ initialClientId: "", onClose: vi.fn() }).save();
+    expect(h.run["workspace.draft.create"]).toHaveBeenCalledWith({
+      body: expect.objectContaining({ clientId: null }),
+    });
+    expect(h.run["workspace.draft.snapshot"]).toHaveBeenCalledOnce();
+  });
   it("creates with the selected UUID despite duplicate names", async () => {
     const props = { initialClientId: A, onClose: vi.fn() };
     await render(props).save();

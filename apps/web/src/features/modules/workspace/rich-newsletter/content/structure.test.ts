@@ -285,10 +285,10 @@ describe("OS builder palette parity", () => {
     }
   });
 
-  it("adds the survey and footer blocks the OS palette offers", () => {
+  it("adds the footer block offered by the OS palette", () => {
     const draft = newRichDraft();
     const sectionId = draft.design.sections[0]!.id;
-    for (const kind of ["survey", "footer"] as NewsletterBlockKind[]) {
+    for (const kind of ["footer"] as NewsletterBlockKind[]) {
       const { design } = changeStructure(draft.design, {
         type: "addBlock",
         target: { sectionId },

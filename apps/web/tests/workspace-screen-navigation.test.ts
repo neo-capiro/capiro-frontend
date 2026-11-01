@@ -16,6 +16,7 @@ const h = vi.hoisted(() => ({
   copy: vi.fn(),
   library: vi.fn(),
   buttons: vi.fn(),
+  menuItems: vi.fn(),
   create: vi.fn(),
   update: vi.fn(),
   meetings: vi.fn(),
@@ -135,24 +136,39 @@ vi.mock("../src/features/modules/workspace/templates/TemplateStudio", () => ({
 vi.mock("../src/features/modules/workspace/WorkspaceShares", () => ({
   WorkspaceShares: () => null,
 }));
-vi.mock("../src/features/modules/workspace/WorkspaceLibrary", () => ({
-  WorkflowCards: () => null,
-  DocumentsLibrary: (props: unknown) => {
-    h.library(props);
-    return null;
-  },
-}));
+vi.mock(
+  "../src/features/modules/workspace/WorkspaceLibrary",
+  async (original) => ({
+    ...(await original<
+      typeof import("../src/features/modules/workspace/WorkspaceLibrary")
+    >()),
+    DocumentsLibrary: (props: unknown) => {
+      h.library(props);
+      return null;
+    },
+  }),
+);
 vi.mock("../src/shared/module-ui", () => ({
   ActionButton: (props: { children: ReactNode }) => {
     h.buttons(props);
     return createElement("button", null, props.children);
   },
-  Modal: () => null,
+  Modal: ({ open, children }: { open: boolean; children: ReactNode }) =>
+    open ? children : null,
   Field: ({ children }: { children: ReactNode }) =>
     createElement("div", null, children),
   StatusPanel: ({ children }: { children: ReactNode }) =>
     createElement("div", null, children),
   TextInput: () => null,
+}));
+vi.mock("@capiro/ui/dropdown-menu", () => ({
+  DropdownMenu: ({ children }: { children: ReactNode }) => children,
+  DropdownMenuTrigger: ({ children }: { children: ReactNode }) => children,
+  DropdownMenuContent: ({ children }: { children: ReactNode }) => children,
+  DropdownMenuItem: (props: { children: ReactNode; onSelect: () => void }) => {
+    h.menuItems(props);
+    return createElement("button", null, props.children);
+  },
 }));
 const render = (query = "") => {
   h.index = 0;
@@ -324,23 +340,67 @@ it("retains exact prospect navigation and the brief-copy owner", () => {
 
 it("makes explicit template and rich-library entry actions durable", () => {
   render(`clientId=${otherId}`);
-  h.buttons.mock.calls
+  h.menuItems.mock.calls
     .find(([props]) => props.children === "Meri files")![0]
-    .onClick();
+    .onSelect();
   expect(h.push).toHaveBeenLastCalledWith(`/meri/files?clientId=${otherId}`);
-  h.buttons.mock.calls
+  h.menuItems.mock.calls
     .find(([props]) => props.children === "Template Studio")![0]
-    .onClick();
+    .onSelect();
   expect(h.push).toHaveBeenLastCalledWith(
     `/modules/workspace?clientId=${otherId}&view=templates`,
   );
-  h.buttons.mock.calls
+  h.menuItems.mock.calls
     .find(([props]) => props.children === "Rich newsletter preview")![0]
-    .onClick();
+    .onSelect();
   expect(h.push).toHaveBeenLastCalledWith(
     `/modules/workspace?clientId=${otherId}&view=rich-newsletter`,
   );
 });
+
+it.each([undefined, otherId])(
+  "keeps both normal newsletter entries and the gallery reachable in scope %s",
+  (clientId) => {
+    const query = clientId ? `clientId=${clientId}` : "";
+    const destination = clientId ? "newsletter" : "rich-newsletter";
+    const openLastDestination = () => {
+      const url = new URL(
+        h.push.mock.lastCall![0],
+        "https://synthetic.invalid",
+      );
+      expect(url.searchParams.get("clientId")).toBe(clientId ?? null);
+      return url;
+    };
+    render(query);
+    // Exercise the real WorkflowCards, not a route callback mock.
+    h.buttons.mock.calls
+      .find(([props]) => props.children === "Start")![0]
+      .onClick();
+    expect(openLastDestination().searchParams.get("view")).toBe(destination);
+    h.buttons.mock.calls
+      .find(([props]) => props.children === "Template gallery")![0]
+      .onClick();
+    const gallery = openLastDestination();
+    expect(gallery.searchParams.get("view")).toBe("newsletter");
+    render(gallery.searchParams.toString());
+    expect(h.newsletter.mock.lastCall![0].initialClientId).toBe(clientId);
+    render(query);
+    h.buttons.mock.calls
+      .find(([props]) => props.children === "+ New document")![0]
+      .onClick();
+    render(query);
+    h.buttons.mock.calls
+      .find(([props]) => props.children === "Newsletter")![0]
+      .onClick();
+    expect(openLastDestination().searchParams.get("view")).toBe(destination);
+    h.buttons.mock.calls
+      .find(([props]) => props.children === "Newsletter template gallery")![0]
+      .onClick();
+    expect(openLastDestination().searchParams.get("view")).toBe("newsletter");
+    expect(h.create).not.toHaveBeenCalled();
+    expect(h.update).not.toHaveBeenCalled();
+  },
+);
 
 it.each([
   "draftId=invalid",
