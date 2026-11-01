@@ -113,7 +113,7 @@ export function ProfileCard({
             </Link>
           </h2>
           <small id={descriptionId}>
-            {sector ?? "Sector not supplied"}
+            {sector ?? "Sector not specified"}
             {location && ` · ${location}`}
           </small>
         </div>

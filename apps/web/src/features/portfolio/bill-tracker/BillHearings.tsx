@@ -14,12 +14,12 @@ export function BillHearings({
   clientId,
   billId,
   backend,
-  existingApp,
+  externalApp,
 }: {
   clientId: string;
   billId: string;
   backend: TrackerBackend;
-  existingApp?: string;
+  externalApp?: string;
 }) {
   const query = useBillHearings(clientId, billId, backend);
   return (
@@ -42,7 +42,7 @@ export function BillHearings({
                 <HearingRow
                   key={hearing.sessionId}
                   hearing={hearing}
-                  existingApp={existingApp}
+                  externalApp={externalApp}
                 />
               ))
             ))}
@@ -53,12 +53,12 @@ export function BillHearings({
 }
 function HearingRow({
   hearing,
-  existingApp,
+  externalApp,
 }: {
   hearing: BillHearing;
-  existingApp?: string;
+  externalApp?: string;
 }) {
-  const href = hearingHref(existingApp, hearing.hearingId);
+  const href = hearingHref(externalApp, hearing.hearingId);
   const date = billDate(hearing.occurredAt);
   return (
     <article className={styles.hearing}>

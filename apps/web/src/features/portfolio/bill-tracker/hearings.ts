@@ -86,19 +86,21 @@ export function mentionTime(milliseconds: number): string {
   return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
 }
 
+// `/legiwatch` routes live only in the separate existing application, so these
+// take `destinations.externalApp` and stay hidden when there is none.
 export function hearingHref(
-  existingApp: string | undefined,
+  externalApp: string | undefined,
   hearingId: string | null | undefined,
 ): string | undefined {
-  return existingApp && hearingId
-    ? `${existingApp.replace(/\/+$/, "")}/legiwatch/hearings/${encodeURIComponent(hearingId)}`
+  return externalApp && hearingId
+    ? `${externalApp.replace(/\/+$/, "")}/legiwatch/hearings/${encodeURIComponent(hearingId)}`
     : undefined;
 }
 export function fullBoardHref(
-  existingApp: string | undefined,
+  externalApp: string | undefined,
   clientId: string,
 ): string | undefined {
-  return existingApp
-    ? `${existingApp.replace(/\/+$/, "")}/legiwatch?tab=bills&client=${encodeURIComponent(clientId)}`
+  return externalApp
+    ? `${externalApp.replace(/\/+$/, "")}/legiwatch?tab=bills&client=${encodeURIComponent(clientId)}`
     : undefined;
 }

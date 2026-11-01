@@ -21,12 +21,12 @@ const state = vi.hoisted(() => ({
 vi.mock("../src/features/portfolio/bill-tracker/useTrackerMetrics", () => ({
   useTrackerMetrics: () => state,
 }));
-const render = () =>
+const render = ({ version }: { version?: 1 } = { version: 1 }) =>
   renderToStaticMarkup(
     createElement(TrackerMetricCards, {
       clientId: metricClient,
       backend: "intelligence",
-      version: 1,
+      version,
       boardScope: "synthetic",
       boardReady: true,
     }),
@@ -118,5 +118,42 @@ describe("existing Bill card metric presentation", () => {
     expect(html).toContain("Loading");
     expect(html).not.toContain("0%");
     expect(html).not.toContain("<strong>0</strong>");
+  });
+});
+describe("metric availability", () => {
+  const unavailableLine = "Tracker metrics aren";
+  const materialGroup = 'aria-label="Material changes"';
+  const coverageGroup = 'aria-label="Watchlist coverage"';
+  it("shows loading cards while the reads are in flight", () => {
+    state.materialPending = state.coveragePending = true;
+    const html = render();
+    expect(html).toContain(materialGroup);
+    expect(html).toContain("Loading");
+    expect(html).not.toContain(unavailableLine);
+  });
+  it("shows the cards when metrics are present", () => {
+    state.material = materialFixture();
+    state.coverage = coveredFixture();
+    const html = render();
+    expect(html).toContain(materialGroup);
+    expect(html).toContain(coverageGroup);
+    expect(html).toContain("100%");
+    expect(html).not.toContain(unavailableLine);
+  });
+  it("replaces the cards with one status line when no metrics version is set", () => {
+    const html = render({});
+    expect(html).toContain(unavailableLine);
+    expect(html).toContain("available right now.");
+    expect(html).toContain('role="status"');
+    expect(html).not.toContain(materialGroup);
+    expect(html).not.toContain(coverageGroup);
+    expect(html).not.toContain("—");
+  });
+  it("keeps the per-metric unavailable cards when the version is set and both reads failed", () => {
+    const html = render();
+    expect(html).toContain(materialGroup);
+    expect(html).toContain(coverageGroup);
+    expect(html.split("Unavailable").length - 1).toBe(2);
+    expect(html).not.toContain(unavailableLine);
   });
 });

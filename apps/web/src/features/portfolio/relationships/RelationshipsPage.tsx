@@ -151,8 +151,9 @@ function OrganizationRelationships({ clientId }: { clientId: string }) {
             <div className={styles.review}>
               <img src="/design/411-50673-imgIconTriangleAlert.svg" alt="" />
               <span>
-                {review.length} contacts need title or placement review. Verify
-                roles before changing placement.
+                {review.length}{" "}
+                {review.length === 1 ? "title needs" : "titles need"} review.
+                Verify roles before changing placement.
               </span>
               <button
                 className="button"
