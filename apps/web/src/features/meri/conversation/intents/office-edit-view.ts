@@ -45,9 +45,19 @@ const kindLabels = {
   insert_after: "Insert after",
   delete: "Remove",
 } as const;
-const shortId = (id: string) => id.slice(0, 8);
 
-/** The exact document identity and every operation with its before/after, as the person must see it before applying. */
+/** The unit Meri addressed, in words: a paragraph number, a cell on its sheet, or a shape on its slide. */
+export function officeUnitLabel(unit: string): string {
+  const paragraph = /^p:(\d+)$/.exec(unit);
+  if (paragraph) return `paragraph ${paragraph[1]}`;
+  const cell = /^(.+)!([A-Z]+\d+)$/.exec(unit);
+  if (cell) return `cell ${cell[2]} on sheet ${cell[1]}`;
+  const shape = /^slide:(\d+)\/shape:(.+)$/.exec(unit);
+  if (shape) return `slide ${shape[1]}, shape ${shape[2]}`;
+  return unit;
+}
+
+/** The document and every operation with its before/after, as the person must see it before applying. */
 export function officeEditFields(
   proposal: OfficeEditProposal,
 ): readonly IntentField[] {
@@ -55,13 +65,11 @@ export function officeEditFields(
   return [
     { label: "Document", value: document.filename },
     { label: "Kind", value: formatLabels[document.format] },
-    { label: "Version read by Meri", value: document.versionId },
-    { label: "Version hash", value: document.objectSha256 },
     { label: "Summary", value: proposal.summary },
     ...proposal.operations.flatMap((operation, index) => [
       {
         label: `Change ${index + 1}`,
-        value: `${kindLabels[operation.kind]} · ${operation.unit}`,
+        value: `${kindLabels[operation.kind]} · ${officeUnitLabel(operation.unit)}`,
       },
       {
         label: `Change ${index + 1} before`,
@@ -72,26 +80,20 @@ export function officeEditFields(
         value: operation.after ?? "(removed)",
       },
     ]),
-    { label: "Result hash", value: proposal.result.sha256 },
     { label: "Expires", value: proposal.expiresAt },
-    { label: "Command hash", value: proposal.commandSha256 },
   ];
 }
 
-/** Plain words for why a proposal was not applied; the code stays visible so support can read it. */
+/** Plain words for why a proposal was not applied. */
 export function officeEditExplanation(
   status: OfficeEditResult["proposalStatus"],
-  code: string | null,
 ): string {
-  const suffix = code ? ` (${code})` : "";
-  if (code === "OFFICE_EDIT_DRAFT_ACTIVE")
-    return `Someone has a private draft open on this version. Release or publish that draft, then ask Meri again from the latest version.${suffix}`;
   if (status === "conflict")
-    return `The document changed since Meri read it: a newer version was saved. Nothing was changed; ask Meri again from the latest version.${suffix}`;
+    return "The document changed since Meri read it: a newer version was saved. Nothing was changed; ask Meri again from the latest version.";
   if (status === "expired")
-    return `This proposal expired before it was applied. Nothing was changed; ask Meri again from the latest version.${suffix}`;
+    return "This proposal expired before it was applied. Nothing was changed; ask Meri again from the latest version.";
   if (status === "refused")
-    return `This proposal no longer matches the document Meri read, so it was not applied. Nothing was changed; ask Meri again from the latest version.${suffix}`;
+    return "This proposal no longer matches the document Meri read, so it was not applied. Nothing was changed; ask Meri again from the latest version.";
   if (status === "rejected")
     return "You rejected this proposal. Nothing was changed.";
   if (status === "unknown")
@@ -114,7 +116,7 @@ function officeVersion(
     mimeType: mimeTypes[proposal.document.format],
     binding: proposal.binding,
     scopes: proposal.scopes,
-    note: `Version ${shortId(result.version.versionId)}, saved from Meri's edit of ${shortId(proposal.document.versionId)}`,
+    note: `New version of ${result.version.filename}, saved from Meri's edit`,
   };
 }
 
@@ -165,10 +167,8 @@ export function officeEditRow(
       detail:
         "A new version of the same document was saved from Meri's edit. Your manual content outside the changed units is unchanged.",
       result: [
-        { label: "New version", value: result.version!.versionId },
+        { label: "Saved as", value: result.version!.filename },
         { label: "Saved from", value: "Meri's edit, applied by you" },
-        { label: "Parent version", value: result.version!.parentVersionId },
-        { label: "Version hash", value: result.version!.sha256 },
       ],
       officeVersion: officeVersion(proposal, result),
     };
@@ -191,7 +191,7 @@ export function officeEditRow(
           : status === "unknown"
             ? "warning"
             : "danger",
-      detail: officeEditExplanation(status, result.code),
+      detail: officeEditExplanation(status),
     };
   const expired = Date.parse(proposal.expiresAt) <= now;
   if (expired)
@@ -199,7 +199,7 @@ export function officeEditRow(
       ...row,
       status: "Expired",
       tone: "neutral",
-      detail: officeEditExplanation("expired", null),
+      detail: officeEditExplanation("expired"),
     };
   const approver = proposal.requiredApprover;
   if (
@@ -218,7 +218,7 @@ export function officeEditRow(
     status: "Awaiting your decision",
     tone: "warning",
     detail:
-      "Apply publishes a new version of this document with exactly these changes; everything else you wrote stays as it is. Publish any saved private draft first, or this will be refused.",
+      "Apply publishes a new version of this document with exactly these changes; everything else you wrote stays as it is. If a newer version is published first, Apply changes nothing and you can ask Meri again from that version.",
     decision: "approvable",
   };
 }

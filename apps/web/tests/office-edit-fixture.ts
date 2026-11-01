@@ -72,7 +72,7 @@ export function officeEditFixture(
     document: officeDocument,
     summary: "Mark the heading final and add a closing line in the table.",
     operations: officeOperations,
-    result: { sha256: "b".repeat(64), bytes: 4321 },
+    result: { partsSha256: "b".repeat(64), parts: 7 },
     createdAt: new Date(now - 1000).toISOString(),
     expiresAt: new Date(now + expiresInMs).toISOString(),
     requiredApprover: { ...viewer },

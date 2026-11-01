@@ -22,7 +22,7 @@ const target = {
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   binding: { conversationId },
   scopes: [{ kind: "private-user", resourceId: viewer.actorId }],
-  note: "Version 00000000, saved from Meri's edit",
+  note: "New version of Quarterly report.docx, saved from Meri's edit",
 };
 const inspect = async () => ({
   artifactId: "a",

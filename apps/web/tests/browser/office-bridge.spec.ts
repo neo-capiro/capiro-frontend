@@ -42,7 +42,6 @@ test("Ask Meri entry, proposal review, Apply and reopen of the published version
   await expect(card).toContainText("Applied");
   await expect(card).toContainText("Saved from");
   await expect(card).toContainText("Meri's edit, applied by you");
-  await expect(card).toContainText("00000000-0000-4000-8000-00000000000c");
   const operations = page.getByLabel("Service operations");
   await expect(operations).toContainText("decide:approved");
   expect(
@@ -58,7 +57,7 @@ test("Ask Meri entry, proposal review, Apply and reopen of the published version
   const dialog = page.getByRole("dialog");
   await expect(dialog).toContainText("Quarterly report.docx");
   await expect(dialog).toContainText(
-    "Version 00000000, saved from Meri's edit of 00000000",
+    "New version of Quarterly report.docx, saved from Meri's edit",
   );
   await expect(dialog).toContainText(
     "Save keeps a private draft. Release the editor, then Publish to create a new file version.",
