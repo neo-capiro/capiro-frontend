@@ -19,10 +19,13 @@ export function ConversationFrame({
   children,
   composer,
   historyStatus,
+  notice,
 }: {
   scope: string;
   children: ReactNode;
   composer: ReactNode;
+  /** A problem with the connection itself, shown beside the composer while the transcript stays. */
+  notice?: ReactNode;
   /** Saved-history state for a mounted conversation; nothing is announced when there is none. */
   historyStatus?: ReactNode;
 }) {
@@ -41,7 +44,10 @@ export function ConversationFrame({
       </div>
       <div className={styles.frameStatus}>{historyStatus}</div>
       {children}
-      <div className={styles.composerDock}>{composer}</div>
+      <div className={styles.composerDock}>
+        {notice}
+        {composer}
+      </div>
     </section>
   );
 }

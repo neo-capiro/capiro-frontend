@@ -18,6 +18,7 @@ import { conversationSelection } from "../../../shared/meri-conversations/select
 import { newChatIntentEvent } from "../../../shared/meri-conversations/first-chat-intent";
 import { useConversationSession } from "./useConversationSession";
 import { ConversationView } from "./ConversationView";
+import { DefaultScopeOpening } from "./DefaultScopeOpening";
 
 export function MeriConversationHost({
   enabled,
@@ -100,6 +101,19 @@ export function MeriConversationHost({
       />
     );
   }
+  // A link that names a conversation without a scope must never be redirected away from it.
+  if (
+    account &&
+    selected.state === "no-selection" &&
+    selector.state === "current"
+  )
+    return (
+      <DefaultScopeOpening
+        key={`${account.tenantId}:${account.actorId}`}
+        account={account}
+        scopeControl={scopeControl}
+      />
+    );
   if (!account || selected.state !== "authorized-client")
     return (
       <section role="status">

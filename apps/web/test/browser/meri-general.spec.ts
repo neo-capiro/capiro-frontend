@@ -80,7 +80,7 @@ test("synthetic General creates only an explicit v2 scope, submits once, and res
 
   await expect(
     page.getByText("Saved conversation history loaded.", { exact: true }),
-  ).toBeVisible();
+  ).toHaveCount(0);
 
   expect(new Set(f.bootstrap.map((value) => JSON.stringify(value))).size).toBe(
     1,
@@ -238,7 +238,7 @@ for (const malformed of [false, true])
 
     await expect(
       page.getByText("Saved conversation history loaded.", { exact: true }),
-    ).toBeVisible();
+    ).toHaveCount(0);
     // A healthy conversation shows no permanent manual reload; the revocation is discovered by
     // the next real read of this exact conversation, which reopening the route performs.
     await expect(
