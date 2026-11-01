@@ -198,13 +198,13 @@ function setup() {
     blockReceiptRead: () => {
       refuseReceiptRead = true;
     },
-    settle: (outcome: "failed" | "cancelled" | "applied") => {
+    settle: (outcome: "failed" | "cancelled" | "applied", expire = true) => {
       origin.reconciliation = "accounted";
       origin.accounting = {
         outcome,
         sourceRevision: { id: id(8), version: 2 },
       };
-      if (origin.consent) {
+      if (origin.consent && expire) {
         origin.consent.expired = true;
         origin.observedAt = "2026-11-01T00:11:00.000Z";
       }
@@ -338,6 +338,35 @@ it.each(["failed", "cancelled"] as const)(
     expect(f.posts).toBe(2);
     expect(f.allocations).toBe(2);
     expect(f.retained!.request.body.requestId).not.toBe(original);
+  },
+);
+it.each(["failed", "cancelled"] as const)(
+  "authoritative %s permits explicit reconsent before expiry",
+  async (outcome) => {
+    const f = setup(),
+      flow = f.session();
+    await flow.execute();
+    f.settle(outcome, false);
+    await flow.refresh();
+    expect(flow.snapshot().canRetry).toBe(true);
+    expect(flow.snapshot().canCancel).toBe(false);
+    await flow.change("retry");
+    expect(f.posts).toBe(2);
+  },
+);
+it.each(["failed", "cancelled", "applied"] as const)(
+  "prior-source %s accounting does not supersede an active current consent",
+  async (outcome) => {
+    const f = setup(),
+      flow = f.session();
+    await flow.execute();
+    f.settle(outcome, false);
+    f.origin.accounting!.sourceRevision = { id: id(80), version: 1 };
+    await flow.refresh();
+    expect(flow.snapshot().canRetry).toBe(false);
+    expect(flow.snapshot().canCancel).toBe(true);
+    await flow.change("retry");
+    expect(f.posts).toBe(1);
   },
 );
 it("unconfirmed original receipt prevents cancellation/reconsent replacement", async () => {
