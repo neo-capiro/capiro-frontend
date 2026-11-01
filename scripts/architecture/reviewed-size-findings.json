@@ -7653,9 +7653,9 @@
     "file": "apps/web/src/features/modules/objective-destinations/ObjectiveGeneratedStrategy.tsx",
     "kind": "function",
     "symbol": "ObjectiveGeneratedStrategy",
-    "fingerprint": "5802a50b9944608aa68473115f74f1abff6ae740fa14fe5c10a0be239ff234f7",
-    "reason": "One receipt-bound saved Strategy read view owns selection validation, loading/error suppression and presentation of the same immutable snapshot, graph and separate current-node observations. The fixed GET and strict receiver own transport and contract validation; Core owns authorization and immutable job/version admission; Planner owns consent and materialization. No mutation, request identity allocation, generation loop, grouping decision or authority is added here. The 105 nonblank-line JSX-heavy body is one cohesive view; splitting solely for size would scatter the exact-snapshot/error boundary. Independently reviewed at fdc7cb68afcabaea04b49c2f5a33ca3300bed2a2 with 47 focused frontend tests passing, including mismatched selections and loading/error suppression.",
-    "reviewedBy": "Independent Codex /root/paired_saved_review",
+    "fingerprint": "4d6600dd13b95a665a486bafc94a9215321493b5231604b9741de22c508ec6d8",
+    "reason": "The 111-line existing saved Strategy view gains one Saved sources panel mounting the dedicated ObjectiveSavedCitations component keyed by immutable snapshot digest. That child owns current-source read state and display, with its citation row extracted. The receiving view still only composes saved-review and Planner navigation; source viewing never creates work. Independently rerun 22 frontend tests pass.",
+    "reviewedBy": "Independent Codex /root/objective_questions; not saved-generation/citation author",
     "reviewedOn": "2026-11-01"
   },
   {
