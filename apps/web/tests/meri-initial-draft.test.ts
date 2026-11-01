@@ -20,6 +20,25 @@ const submit = (
 });
 
 describe("conversation-owned initial draft consumption", () => {
+  it("exposes the captured text of a pending attempt for its own run only, until it is acknowledged", () => {
+    const owner = createInitialDraftOwner();
+    expect(owner.pendingDraft(context)).toBeNull();
+    owner.begin(
+      context,
+      { requestId: submit("pending").requestId, prompt: "First question" },
+      "First question",
+    );
+    expect(owner.pendingDraft(context)).toBe("First question");
+    expect(owner.pendingDraft({ ...context, runId: "other-run" })).toBeNull();
+    // Typing a new message never merges into the capture; the capture stays for its retry.
+    owner.edit("Second question");
+    expect(owner.draft()).toBe("Second question");
+    expect(owner.pendingDraft(context)).toBe("First question");
+    owner.acknowledge(context, submit("observed"), "Second question");
+    expect(owner.pendingDraft(context)).toBeNull();
+    expect(owner.draft()).toBe("Second question");
+  });
+
   it("an admitted request takes its skill off the composer; a selection changed since stays", () => {
     const skillOf = (index: number) => ({
       skillId: CONVERSATION_SKILLS[index]!.skillId,

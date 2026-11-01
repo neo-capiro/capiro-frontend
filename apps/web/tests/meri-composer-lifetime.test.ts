@@ -87,6 +87,7 @@ function session(current?: MeriConversationPort): Session {
     draft: "Typed during connection",
     setDraft: vi.fn(),
     textarea: { current: null },
+    initialDraft: { pendingDraft: () => null },
     skillSelection: {},
     setSkillSelection: vi.fn(),
     continuation: {
@@ -168,6 +169,35 @@ it("names the reason Enter is refused, in the person's words, and none once send
   );
   expect(sendBlockedReason(live, false, "   ")).toBe("Type a message to send.");
   expect(sendBlockedReason(live, false, "Typed")).toBeUndefined();
+  expect(
+    sendBlockedReason(
+      { ...live, notice: "Retry it above.", sendBlocked: "Uncertain." },
+      false,
+      "Typed",
+    ),
+  ).toBe("Retry it above.");
+});
+
+it("a retained request shows its notice in place of the key hint, visibly, while Send stays closed", () => {
+  const channel = createConversationComposer();
+  const current = port();
+  channel.publish({
+    port: current,
+    controls: {
+      ...controls(),
+      sendBlocked: "Delivery of your last request is uncertain.",
+      notice:
+        "Your last request is still unconfirmed. Retry it above before sending another.",
+    },
+    running: false,
+  });
+  const html = render(channel, session(current));
+  expect(sendButton(html)).toMatch(/\sdisabled(?:=|\s|>)/i);
+  expect(html).toContain(
+    "Your last request is still unconfirmed. Retry it above before sending another.",
+  );
+  expect(html).not.toContain("Enter to send");
+  expect(enter()).toHaveBeenCalledOnce();
 });
 
 it("only the exact current port's committed controls allow an explicit send, never rendering alone", () => {

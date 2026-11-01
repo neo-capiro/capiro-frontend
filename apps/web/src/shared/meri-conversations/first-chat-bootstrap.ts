@@ -9,24 +9,21 @@ import {
 } from "../capiro/operations/meri-first-chat";
 import {
   confirmFirstChatIntent,
+  markFirstChatIntentUsed,
   reserveFirstChatIntent,
   type FirstChatScope,
   firstChatScope,
 } from "./first-chat-intent";
+import { CapiroApiError } from "../capiro/http";
 
 type IntentStorage = Pick<Storage, "getItem" | "setItem">;
 
 /**
- * Unmounted resolver: one new conversation per opening of a scope. Only a request whose outcome is
- * still unknown is replayed, so a lost response never creates a second conversation.
+ * Unmounted resolver. An unknown-outcome request is replayed, an empty confirmed conversation is
+ * reopened through Core (which rechecks access and refuses a changed record with 409, after which
+ * the scope gets a new request), and anything else is a new conversation.
  */
-export async function resolveFirstChatConversation({
-  scope,
-  storage,
-  signal,
-  createOrReuse,
-  issueId,
-}: {
+export async function resolveFirstChatConversation(options: {
   scope: FirstChatScope;
   storage: IntentStorage;
   signal: AbortSignal;
@@ -36,9 +33,34 @@ export async function resolveFirstChatConversation({
   ) => Promise<unknown>;
   issueId?: () => string;
 }): Promise<{ conversationId: string; clientId: string | null }> {
+  const { scope, storage, signal, issueId } = options;
   signal.throwIfAborted();
   const current = firstChatScope.parse(scope);
   const intent = reserveFirstChatIntent(current, storage, issueId);
+  if (intent.state === "confirmed")
+    try {
+      return await openFirstChat(current, intent, options);
+    } catch (error) {
+      if (!(error instanceof CapiroApiError) || error.status !== 409)
+        throw error;
+      markFirstChatIntentUsed(current, intent.conversationId, storage);
+      return resolveFirstChatConversation(options);
+    }
+  return openFirstChat(current, intent, options);
+}
+
+async function openFirstChat(
+  current: FirstChatScope,
+  intent: { requestId: string },
+  {
+    storage,
+    signal,
+    createOrReuse,
+  }: Pick<
+    Parameters<typeof resolveFirstChatConversation>[0],
+    "storage" | "signal" | "createOrReuse"
+  >,
+): Promise<{ conversationId: string; clientId: string | null }> {
   if (current.clientId === null) {
     const body = firstChatV2Request.parse({
       schemaVersion: 2,

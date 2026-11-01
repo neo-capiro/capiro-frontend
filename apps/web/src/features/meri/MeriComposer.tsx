@@ -27,6 +27,8 @@ export type LiveComposer = Readonly<{
   onStop?: () => void;
   /** Why Send is unavailable right now; the draft stays editable either way. */
   sendBlocked?: string | undefined;
+  /** A block the person must act on (a retained request to retry); shown in place of the key hint. */
+  notice?: string | undefined;
   /** Exact conversation selection is required before a durable draft can be entered. */
   draftBlocked?: string | undefined;
   /**
@@ -62,6 +64,7 @@ export function sendBlockedReason(
     return `A run is in progress. ${live.stopBlocked ?? "Use Stop to request cancellation; your draft stays editable."}`;
   return (
     live.draftBlocked ??
+    live.notice ??
     live.sendBlocked ??
     (draft.trim() ? undefined : "Type a message to send.")
   );
@@ -106,11 +109,15 @@ export function MeriComposer({
     !live.draftBlocked &&
     !!draft.trim();
   const blockedReason = sendBlockedReason(live, running, draft);
-  // The reason Enter was refused stays visible while that same reason still applies; a send that
-  // becomes possible, or a different block, clears it without an effect.
+  // Only a refused Enter shows the block reason; the next input change, a send, or a change of the
+  // block reason clears it, so it never reappears without another refused Enter. During a run the
+  // reason stays screen-reader-only as before.
   const [refused, setRefused] = useState<string | null>(null);
-  const refusal =
-    refused !== null && refused === blockedReason ? refused : null;
+  const [seenReason, setSeenReason] = useState(blockedReason);
+  if (seenReason !== blockedReason) {
+    setSeenReason(blockedReason);
+    setRefused(null);
+  }
   return (
     <section
       className={styles.composerFrame}
@@ -122,6 +129,7 @@ export function MeriComposer({
         globalDrop={false}
         onSubmit={(_message, event) => {
           event.preventDefault();
+          setRefused(null);
           if (canSend) live.onSend();
         }}
       >
@@ -156,6 +164,7 @@ export function MeriComposer({
             value={draft}
             readOnly={!!live?.draftBlocked}
             onChange={(event) => {
+              setRefused(null);
               if (!live?.draftBlocked) onDraft(event.currentTarget.value);
             }}
             onKeyDown={(event) => {
@@ -170,7 +179,7 @@ export function MeriComposer({
                 event.nativeEvent.keyCode !== 229
               ) {
                 event.preventDefault();
-                setRefused(blockedReason ?? null);
+                if (!running) setRefused(blockedReason ?? null);
               }
             }}
             aria-label={live ? "Meri message" : "Message draft"}
@@ -199,15 +208,18 @@ export function MeriComposer({
           />
         </PromptInputFooter>
         <p className={styles.keyboardHint} id={helpId}>
-          {refusal ? (
-            <span role="status">{refusal}</span>
+          {refused ? (
+            <span role="status">{refused}</span>
           ) : (
             <>
               {live?.draftBlocked ??
+                live?.notice ??
                 "Enter to send · Shift + Enter for a new line"}
-              {blockedReason && blockedReason !== live?.draftBlocked && (
-                <span className="sr-only">. {blockedReason}</span>
-              )}
+              {blockedReason &&
+                blockedReason !== live?.draftBlocked &&
+                blockedReason !== live?.notice && (
+                  <span className="sr-only">. {blockedReason}</span>
+                )}
             </>
           )}
         </p>

@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
 import {
   Children,
   isValidElement,
@@ -6,10 +6,6 @@ import {
   type ReactNode,
 } from "react";
 import { LiveNewConversation } from "../src/shared/shell/LiveNewConversation";
-import {
-  readFirstChatIntent,
-  type FirstChatScope,
-} from "../src/shared/meri-conversations/first-chat-intent";
 
 const mocks = vi.hoisted(() => ({
   session: "signed-in",
@@ -19,12 +15,10 @@ const mocks = vi.hoisted(() => ({
   status: "active",
   fetching: false,
   push: vi.fn(),
-  error: vi.fn(),
 }));
 vi.mock("react", async (importOriginal) => ({
   ...(await importOriginal<typeof import("react")>()),
   useContext: () => mocks.session,
-  useState: () => [null, mocks.error],
   useId: () => "synthetic-availability-reason",
 }));
 vi.mock("next/navigation", () => ({
@@ -56,25 +50,8 @@ vi.mock("../src/shared/shell/DefaultConversationStart", () => ({
     children: (value: { disabled: boolean; title: string }) => ReactNode;
   }) => children({ disabled: false, title: "Use your saved default client" }),
 }));
-const account = {
-  tenantId: "11111111-1111-4111-8111-111111111111",
-  actorId: "22222222-2222-4222-8222-222222222222",
-};
-const entries = new Map<string, string>();
-const storage = {
-  getItem: (key: string) => entries.get(key) ?? null,
-  setItem: (key: string, value: string) => {
-    entries.set(key, value);
-  },
-};
-const dispatchEvent = vi.fn();
-beforeEach(() =>
-  vi.stubGlobal("window", { sessionStorage: storage, dispatchEvent }),
-);
 afterEach(() => {
-  vi.unstubAllGlobals();
   vi.clearAllMocks();
-  entries.clear();
   mocks.session = "signed-in";
   mocks.search = "";
   mocks.clientId = "33333333-3333-4333-8333-333333333333";
@@ -118,45 +95,30 @@ function button() {
 it.each([
   "33333333-3333-4333-8333-333333333333",
   "66666666-6666-4666-8666-666666666666",
-])("starts an intent for the actual authorized client %s", (clientId) => {
-  mocks.clientId = clientId;
-  mocks.search = `clientId=${clientId}`;
-  const b = button();
-  expect(b.disabled).toBe(false);
-  b.onClick!();
-  expect(readFirstChatIntent({ ...account, clientId }, storage)).toMatchObject({
-    state: "pending",
-    scope: { ...account, clientId },
-  });
-  expect(mocks.push).toHaveBeenCalledExactlyOnceWith(
-    `/meri?clientId=${clientId}`,
-  );
-});
+])(
+  "opens the actual authorized client %s without a conversation id",
+  (clientId) => {
+    mocks.clientId = clientId;
+    mocks.search = `clientId=${clientId}`;
+    const b = button();
+    expect(b.disabled).toBe(false);
+    b.onClick!();
+    expect(mocks.push).toHaveBeenCalledExactlyOnceWith(
+      `/meri?clientId=${clientId}`,
+    );
+  },
+);
 it("explicit General records null and never inherits the selected client", () => {
   mocks.search = "scope=general";
   mocks.status = "archived";
   const b = button();
   expect(b.disabled).toBe(false);
   b.onClick!();
-  const scope: FirstChatScope = {
-    ...account,
-    scopeKind: "general",
-    clientId: null,
-  };
-  expect(readFirstChatIntent(scope, storage)).toMatchObject({
-    state: "pending",
-    scope,
-  });
-  expect(
-    readFirstChatIntent({ ...account, clientId: mocks.clientId }, storage),
-  ).toBeNull();
   expect(mocks.push).toHaveBeenCalledExactlyOnceWith("/meri?scope=general");
+  // A second click is the same navigation; the host reopens or starts the conversation.
   b.onClick!();
-  expect(mocks.push).toHaveBeenCalledOnce();
-  expect(dispatchEvent).toHaveBeenCalledOnce();
-  expect(mocks.error).toHaveBeenLastCalledWith(
-    expect.stringContaining("unknown outcome"),
-  );
+  expect(mocks.push).toHaveBeenCalledTimes(2);
+  expect(mocks.push).toHaveBeenLastCalledWith("/meri?scope=general");
 });
 it.each([
   "scope=general&clientId=33333333-3333-4333-8333-333333333333",
@@ -168,7 +130,7 @@ it.each([
   const b = button();
   expect(b.disabled).toBe(true);
   b.onClick?.();
-  expect(entries.size).toBe(0);
+  expect(mocks.push).not.toHaveBeenCalled();
   expect(mocks.push).not.toHaveBeenCalled();
 });
 it.each(["loading", "unavailable"])("refuses %s client selection", (state) => {
@@ -176,7 +138,7 @@ it.each(["loading", "unavailable"])("refuses %s client selection", (state) => {
   const b = button();
   expect(b.disabled).toBe(true);
   b.onClick?.();
-  expect(entries.size).toBe(0);
+  expect(mocks.push).not.toHaveBeenCalled();
 });
 it("offers the saved-default path only when no scope is selected", () => {
   mocks.state = "no-selection";
@@ -184,7 +146,7 @@ it("offers the saved-default path only when no scope is selected", () => {
     disabled: false,
     title: "Use your saved default client",
   });
-  expect(entries.size).toBe(0);
+  expect(mocks.push).not.toHaveBeenCalled();
   mocks.search = "clientId=unavailable";
   expect(button().disabled).toBe(true);
 });
@@ -196,6 +158,6 @@ it("holds archived clients, refreshing accounts and signed-out sessions", () => 
     const b = button();
     expect(b.disabled).toBe(true);
     b.onClick?.();
-    expect(entries.size).toBe(0);
+    expect(mocks.push).not.toHaveBeenCalled();
   }
 });

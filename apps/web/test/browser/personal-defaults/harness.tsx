@@ -7,17 +7,14 @@ import { currentPreferencesFixture } from "../../../tests/meri-user-preferences-
 import "../../../src/app/globals.css";
 const first = currentPreferencesFixture.read.owner;
 function Start({ owner }: { owner: typeof first }) {
-  const { start, error } = useNewConversationNavigation();
+  const start = useNewConversationNavigation();
   return (
-    <>
-      <DefaultConversationStart
-        owner={owner}
-        start={(clientId) => start({ ...owner, clientId })}
-      >
-        {(control) => <button {...control}>New conversation</button>}
-      </DefaultConversationStart>
-      {error && <p role="alert">{error}</p>}
-    </>
+    <DefaultConversationStart
+      owner={owner}
+      start={(clientId) => start({ ...owner, clientId })}
+    >
+      {(control) => <button {...control}>New conversation</button>}
+    </DefaultConversationStart>
   );
 }
 function Harness() {

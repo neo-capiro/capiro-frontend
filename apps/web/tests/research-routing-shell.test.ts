@@ -6,10 +6,6 @@ import {
   type ReactNode,
 } from "react";
 import { LiveNewConversation } from "../src/shared/shell/LiveNewConversation";
-import {
-  readFirstChatIntent,
-  type FirstChatScope,
-} from "../src/shared/meri-conversations/first-chat-intent";
 
 const mocks = vi.hoisted(() => ({
   session: "signed-in",
@@ -56,10 +52,6 @@ vi.mock("../src/shared/shell/DefaultConversationStart", () => ({
     children: (value: { disabled: boolean; title: string }) => ReactNode;
   }) => children({ disabled: false, title: "Use your saved default client" }),
 }));
-const account = {
-  tenantId: "11111111-1111-4111-8111-111111111111",
-  actorId: "22222222-2222-4222-8222-222222222222",
-};
 const entries = new Map<string, string>();
 const storage = {
   getItem: (key: string) => entries.get(key) ?? null,
@@ -118,20 +110,19 @@ function button() {
 it.each([
   "33333333-3333-4333-8333-333333333333",
   "66666666-6666-4666-8666-666666666666",
-])("starts an intent for the actual authorized client %s", (clientId) => {
-  mocks.clientId = clientId;
-  mocks.search = `clientId=${clientId}`;
-  const b = button();
-  expect(b.disabled).toBe(false);
-  b.onClick!();
-  expect(readFirstChatIntent({ ...account, clientId }, storage)).toMatchObject({
-    state: "pending",
-    scope: { ...account, clientId },
-  });
-  expect(mocks.push).toHaveBeenCalledExactlyOnceWith(
-    `/meri?clientId=${clientId}`,
-  );
-});
+])(
+  "opens the actual authorized client %s without a conversation id",
+  (clientId) => {
+    mocks.clientId = clientId;
+    mocks.search = `clientId=${clientId}`;
+    const b = button();
+    expect(b.disabled).toBe(false);
+    b.onClick!();
+    expect(mocks.push).toHaveBeenCalledExactlyOnceWith(
+      `/meri?clientId=${clientId}`,
+    );
+  },
+);
 it.each([
   "researchPortfolioId=44444444-4444-4444-8444-444444444444",
   "scope=research_portfolio&conversationId=55555555-5555-4555-8555-555555555555",

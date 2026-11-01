@@ -220,6 +220,11 @@ class DraftOwner {
   }
   hasPending = (context: ConversationContext) =>
     this.state.pending?.run === runKey(context);
+  /** The text a still-unacknowledged attempt captured; the transcript shows it, the box must not. */
+  pendingDraft = (context: ConversationContext) =>
+    this.state.pending?.run === runKey(context)
+      ? this.state.pending.draft
+      : null;
   acknowledge(
     context: ConversationContext,
     submit: ConversationIntent["submit"],

@@ -12,7 +12,6 @@ import type { ConversationAccount } from "../../../shared/meri-conversations/hos
 import { resolveFirstChatConversation } from "../../../shared/meri-conversations/first-chat-bootstrap";
 import { conversationHref } from "../../../shared/meri-conversations/conversation-navigation";
 import { conversationSelection } from "../../../shared/meri-conversations/selection";
-import { newChatIntentEvent } from "../../../shared/meri-conversations/first-chat-intent";
 import { useConversationSession } from "./useConversationSession";
 import { researchRoute } from "../../../shared/meri-conversations/research-context";
 import { ResearchConversationHost } from "./ResearchConversationHost";
@@ -41,13 +40,6 @@ export function MeriConversationHost({
     (!research &&
       params.has("scope") &&
       (!general || params.getAll("scope").length !== 1));
-  const [newChatEpoch, setNewChatEpoch] = useState(0);
-  useEffect(() => {
-    if (selector.state !== "current") return;
-    const restart = () => setNewChatEpoch((epoch) => epoch + 1);
-    window.addEventListener(newChatIntentEvent, restart);
-    return () => window.removeEventListener(newChatIntentEvent, restart);
-  }, [selector.state]);
   if (!enabled)
     return (
       <section aria-labelledby="conversation-availability">
@@ -89,7 +81,6 @@ export function MeriConversationHost({
       account.actorId,
       null,
       selector,
-      newChatEpoch,
     ]);
     if (selector.state === "current")
       return firstChatBootstrapEnabled ? (
@@ -156,7 +147,6 @@ export function MeriConversationHost({
           account.tenantId,
           account.actorId,
           selected.client.id,
-          newChatEpoch,
         ])}
         account={account}
         clientId={selected.client.id}
@@ -203,11 +193,14 @@ type CoreResolution =
   | { state: "pending" }
   | { state: "ready"; conversationId: string }
   | { state: "error" };
+/** A soft navigation to the confirmed link normally unmounts this within a frame or two. */
+const replaceGraceMs = 5_000;
 
 /**
- * A scope opened without a conversation id is a new conversation. Core's receipt is verified,
- * then its id goes into the address so a reload or a shared link reopens this conversation and
- * only an explicit New conversation starts another; the host mounts the session from that link.
+ * A scope opened without a conversation id reopens its still-empty conversation or starts a new
+ * one. Core's receipt is verified, then its id goes into the address so a reload or a shared link
+ * reopens this conversation; the host mounts the session from that link. A replace that does not
+ * take effect leaves this mounted, which is reported as the ordinary failure with its retry.
  */
 function CoreResolvedConversation({
   account,
@@ -226,8 +219,13 @@ function CoreResolvedConversation({
   });
   const { tenantId, actorId } = account;
   useEffect(() => {
-    if (resolution.state === "ready")
-      router.replace(conversationHref(clientId, resolution.conversationId));
+    if (resolution.state !== "ready") return;
+    router.replace(conversationHref(clientId, resolution.conversationId));
+    const stalled = setTimeout(
+      () => setResolution({ state: "error" }),
+      replaceGraceMs,
+    );
+    return () => clearTimeout(stalled);
   }, [router, clientId, resolution]);
   useEffect(() => {
     const controller = new AbortController();

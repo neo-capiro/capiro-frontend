@@ -54,6 +54,11 @@ export function SessionComposer({
   } = controls;
   const model = modelSelection ?? session.modelSelection ?? null;
   const catalog = modelDocument?.modelCatalog;
+  // A captured attempt's text is already in the transcript with its retry; the box never repeats
+  // it, so a new message replaces it instead of being appended to it.
+  const captured = session.ready
+    ? session.initialDraft.pendingDraft(session.ready.port.context)
+    : null;
   const modelChip: readonly ComposerChip[] =
     model && catalog
       ? [
@@ -112,7 +117,9 @@ export function SessionComposer({
         />
       )}
       <MeriComposer
-        draft={session.accessLost ? "" : session.draft}
+        draft={
+          session.accessLost || captured === session.draft ? "" : session.draft
+        }
         onDraft={session.setDraft}
         textareaRef={session.textarea}
         assetSet="cited-answer"

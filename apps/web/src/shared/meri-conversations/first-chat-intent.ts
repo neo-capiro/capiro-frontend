@@ -29,11 +29,11 @@ const intentSchema = z.discriminatedUnion("state", [
     ...identity,
     state: z.literal("confirmed"),
     conversationId: uuid,
+    /** The conversation received its first message; the next opening of the scope is a new one. */
+    used: z.boolean().optional(),
   }),
 ]);
 export type FirstChatIntent = z.infer<typeof intentSchema>;
-/** Local presentation signal after an explicit, durably recorded New Chat intent. */
-export const newChatIntentEvent = "meri:new-chat-intent";
 type IntentStorage = Pick<Storage, "getItem" | "setItem">;
 const prefix = "capiro-meri-first-chat-intent-v1:";
 
@@ -41,15 +41,6 @@ export class FirstChatIntentStorageError extends Error {
   constructor() {
     super("Conversation request identity could not be safely recovered.");
     this.name = "FirstChatIntentStorageError";
-  }
-}
-
-export class FirstChatIntentPendingError extends Error {
-  constructor() {
-    super(
-      "The previous conversation request has an unknown outcome. Retry it before starting another conversation.",
-    );
-    this.name = "FirstChatIntentPendingError";
   }
 }
 
@@ -112,9 +103,10 @@ function freshId(issueId: () => string) {
 }
 
 /**
- * Persist and read back the same key before the first Core POST or any retry of it. A confirmed
- * intent belongs to the conversation it opened, which its own link now names; opening the scope
- * again is a new conversation with its own request.
+ * The one request identity for opening a scope: a request whose outcome is unknown is replayed,
+ * a confirmed conversation that has not received a message yet is reopened (reload, a second
+ * visit, New conversation while it is still empty), and anything else is a new request. Persist
+ * and read back before the Core POST.
  */
 export function reserveFirstChatIntent(
   scope: FirstChatScope,
@@ -122,7 +114,8 @@ export function reserveFirstChatIntent(
   issueId: () => string = () => crypto.randomUUID(),
 ): FirstChatIntent {
   const existing = readFirstChatIntent(scope, storage);
-  if (existing?.state === "pending") return existing;
+  if (existing && (existing.state === "pending" || !existing.used))
+    return existing;
   return persist(scope, storage, {
     version: 1,
     scope: scopeSchema.parse(scope),
@@ -153,21 +146,24 @@ export function confirmFirstChatIntent(
   });
 }
 
-/** Call only for an explicit New Chat action after the prior intent was resolved. */
-export function beginNewChatIntent(
+/**
+ * The conversation received its first message (or Core refused to reopen it): the scope's next
+ * opening starts a new one. Storage trouble here costs at most one extra conversation later.
+ */
+export function markFirstChatIntentUsed(
   scope: FirstChatScope,
+  conversationId: string,
   storage: IntentStorage,
-  issueId: () => string = () => crypto.randomUUID(),
-): FirstChatIntent {
-  const previous = readFirstChatIntent(scope, storage);
-  if (previous?.state === "pending") throw new FirstChatIntentPendingError();
-  const requestId = freshId(issueId);
-  if (requestId === previous?.requestId)
-    throw new FirstChatIntentStorageError();
-  return persist(scope, storage, {
-    version: 1,
-    scope: scopeSchema.parse(scope),
-    requestId,
-    state: "pending",
-  });
+) {
+  try {
+    const existing = readFirstChatIntent(scope, storage);
+    if (
+      existing?.state === "confirmed" &&
+      existing.conversationId === conversationId &&
+      !existing.used
+    )
+      persist(scope, storage, { ...existing, used: true });
+  } catch {
+    // Not a recovery hint worth blocking a send over.
+  }
 }

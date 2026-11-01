@@ -23,6 +23,7 @@ import { shouldShowPrompt } from "./prompt-identity";
 import type { InitialDraftOwner } from "./initial-draft";
 import styles from "./live.module.css";
 import type { ConversationSkillSelection } from "../../../shared/meri-conversations/query-journal";
+import { markFirstChatIntentUsed } from "../../../shared/meri-conversations/first-chat-intent";
 import {
   useRunLifecycle,
   type LifecycleTarget,
@@ -400,6 +401,23 @@ export function MeriLiveConversation({
     if (newIntentBlocked) return;
     const prompt = draft.trim();
     if (availability.initial) {
+      // The scope's next opening starts a new conversation once this one has a message.
+      markFirstChatIntentUsed(
+        port.context.selectedClientId === null
+          ? {
+              tenantId: port.context.tenantId,
+              actorId: port.context.actorId,
+              scopeKind: "general",
+              clientId: null,
+            }
+          : {
+              tenantId: port.context.tenantId,
+              actorId: port.context.actorId,
+              clientId: port.context.selectedClientId,
+            },
+        port.context.conversationId,
+        window.sessionStorage,
+      );
       void run.submitInitial(
         prompt,
         (request) => initialDraft.begin(port.context, request, draft),
@@ -425,6 +443,11 @@ export function MeriLiveConversation({
         lifecycle.blocked ??
         availability.sendBlocked ??
         modelBlocked,
+      // A retained request is the person's to resolve; the key hint says so until it is.
+      notice:
+        intent.submit?.state === "unknown"
+          ? "Your last request is still unconfirmed. Retry it above before sending another."
+          : undefined,
       modelSelection:
         intent.submit?.state !== "observed" && intent.submit
           ? intent.submit.modelSelection
