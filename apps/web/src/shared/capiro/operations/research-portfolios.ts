@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
 import * as s from "./research-schemas";
+import { researchPortfolioMetricOperations } from "./research-portfolio-metrics";
 const source =
   "apps/api/src/research-portfolios/research-portfolios.controller.ts; packages/shared/src/research-portfolios.ts @ 4be13b0";
 const params = z.object({ id: z.uuid() }).strict(),
@@ -32,6 +33,7 @@ const write = <B extends z.ZodType, R extends z.ZodType>(
     source,
   });
 export const researchPortfolioOperations = {
+  ...researchPortfolioMetricOperations,
   "research.list": defineOperation({
     service: "core",
     method: "GET",

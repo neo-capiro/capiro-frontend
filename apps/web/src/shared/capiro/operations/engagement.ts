@@ -5,6 +5,7 @@ import { engagementSessionOperations } from "./engagement-sessions";
 import { engagementTaskOperations } from "./engagement-tasks";
 import { objectiveDestinationOperations } from "./engagement-objective-destination";
 import { newsletterRoutingMetadata } from "./newsletter-routing";
+import { engagementMetricOperations } from "./engagement-metrics";
 const source =
   "capirov2@4be13b0 apps/api/src/engagement/engagement.controller.ts and engagement.service.ts";
 const id = z.uuid();
@@ -125,6 +126,7 @@ const scopeQuery = z
   })
   .strict();
 export const engagementOperations = {
+  ...engagementMetricOperations,
   ...engagementTaskOperations,
   ...engagementArtifactOperations,
   ...engagementSessionOperations,
