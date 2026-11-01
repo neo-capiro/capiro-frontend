@@ -2337,19 +2337,19 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "b428990c3a22a8cfa36a0d57c341ab81489a8a688e00dba0195dd76049790a27",
-    "reason": "Module for the meeting-artifacts surface. Contains the exported MeetingArtifacts identity gate and its private ArtifactEditor, which together present one notes/debriefs artifact list and its edit/approve/share/preview dialogs. Artifact writes are delegated to useArtifactMutation, the command lifecycle to MeetingCommandStatus, debrief generation to DebriefGeneration and PDF preview to SavedMeetingDocumentPreview. One cohesive surface with the portfolio/calendar meeting-artifacts owner; size comes from the notes- and debriefs-mode list plus its guarded dialogs, not a second concern. Re-reviewed at frontend 3e579674 (504 nonblank) with the D2 context-save threading on the corrected job client; fingerprint recomputed from these bytes.",
-    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at the corrected parent, D2 delta inspected)",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "d20818dbcd18b3374883370f2b7fe21d2e7ac1a065ee3c649e15aa6699d9ef2f",
+    "reason": "This existing module retains one actor-bound saved meeting-artifact editor and command recovery owner. The added mount delegates saved generation-context querying and rendering to SavedDebriefContext and passes only the currently readable artifact identity/revision. It does not add provider, persistence, sharing, or authorization logic to the editor; splitting the existing editor in this narrow readback fix would create unrelated lifecycle changes.",
+    "reviewedBy": "Codex independent /root/lifecycle_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "function",
     "symbol": "ArtifactEditor",
-    "fingerprint": "5c9016c8f0e019111f4bf8431f4f9f9ae85817783b84985f2bdcd0cd987893d3",
-    "reason": "Private component owning the single meeting-artifact editor for one kind: row rendering, edit/share/preview dialog state, and the revision/authority staleness checks in assertReadable/readableRows that fence every change. Write execution is owned by useArtifactMutation and command status by MeetingCommandStatus. One responsibility (present and gate artifact changes) under the meeting-artifacts surface owner; no second data or authority owner is introduced. Re-reviewed at frontend 3e579674 (450 nonblank) with the D2 context-save threading on the corrected job client; fingerprint recomputed from these bytes.",
-    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at the corrected parent, D2 delta inspected)",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "8fefc84b2aeae4fb0a18cc4090de063f1cc9954d559fdf172cb15b0b4095f69a",
+    "reason": "This function owns one saved-artifact read/edit/approve/share lifecycle under the existing actor and current-list gates. The thirteen added JSX lines mount an isolated read-only disclosure only for an unrestricted debrief, keyed by its saved revision and carrying the same actor/client binding. The disclosure owns its own lazy read and rendering, so the editor gains no second persistence or effect workflow.",
+    "reviewedBy": "Codex independent /root/lifecycle_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
@@ -6094,10 +6094,10 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "function",
     "symbol": "ArtifactEditor > <anonymous> #10",
-    "fingerprint": "7a27d29e190304decceb32e121b861890686d22437f3f79ffb893c102736961d",
-    "reason": "An inline callback defined inside ArtifactEditor (one of its map/render/event closures, #10 in source order), performing one bounded step of the artifact-editor flow against the editor's own state. It shares ArtifactEditor's owner and lifetime and introduces no independent responsibility or owner boundary.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "fe9320b226d0e8d6ab3f504af78a91fdf139d753b6e7fe3a1b08ab26739d9a0b",
+    "reason": "This callback renders one existing saved-artifact card and its related actions. The new child mount exposes the provenance of that same card only inside its readable branch, with the displayed revision and existing permission/current-list predicates. All context transport and display details stay in the dedicated child; this is one cohesive per-artifact presentation responsibility.",
+    "reviewedBy": "Codex independent /root/lifecycle_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/commands/useMeetingCommand.ts",
@@ -7434,19 +7434,19 @@
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "a7adaa3bf4a8fc967561a698b96c02ff17ab6e29bffc2cc95185d6a23c786bb8",
-    "reason": "Independent exact-source review at e4e15ef9332bda929a64d327fb039eb22b115342 (498 nonblank). This remains one paginated Outreach list with its row renderer. The server-owned capability only controls ancillary query admission and truthful unavailable presentation; the list model owns admission, shared query effects own cancellation and transport, and the capability module owns deployment interpretation. Actual Chromium callbacks verified disabled search, paging, rerender and canonical retry issue zero session requests; enabled rows, dedup, pagination and fallback remain. No send or authorization responsibility was added, so further fragmentation is not warranted.",
-    "reviewedBy": "Codex /root/lanes_source_finish_high (independent high-reasoning review of original02751a source)",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "9476e345c884274ced419937a1e5668140d8a941c5499d7006f80e4047f6b7b7",
+    "reason": "This module composes one Outreach list and its campaign-row presentation. Transport/cancellation, canonical normalization, capability resolution, audience admission and selector presentation already have separate owners. The extension keeps one coherent view of canonical records/campaigns and explicitly excluded ancillary sessions; it adds no durable state, authorization, sender or provider responsibility. The scoped presentation/disclosure additions do not justify duplicating query or filter ownership merely to meet a size threshold.",
+    "reviewedBy": "Codex independent Outreach audience reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "function",
     "symbol": "OutreachList",
-    "fingerprint": "570cc5cf47d624355957423761281daecb4be520578b4c6b4c25de33e803ca71",
-    "reason": "Independent exact-source review at e4e15ef9332bda929a64d327fb039eb22b115342 (403 nonblank). The component still coordinates three reads, filters, cursors and visible rows for one list lifetime. Capability-aware admission and the unavailable notice belong to that same composition; they do not add a service lifecycle or duplicate configuration parsing. Actual query effects and callback tests cover enabled/unknown/disabled transitions, retry, pagination and unchanged client/deleted/date gates. Splitting this state solely for line count would obscure rather than simplify its shared filter lifetime.",
-    "reviewedBy": "Codex /root/lanes_source_finish_high (independent high-reasoning review of original02751a source)",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "1df4a3a16c8def65b989c69ff7681f7dde05dc382bbd794400a0ba6e92389ff2",
+    "reason": "This is the existing single list composition and local filter/pagination lifetime. The additional audience state must reset both canonical cursors and the ancillary offset together, suppress unsupported queries and keep loaded counts/exclusion copy consistent. Small audience presentation and pure admission logic are extracted. The function delegates network lifetime and backend classification; it does not accumulate another effect or domain owner. Keeping these related view transitions together is cohesive. This disposition does not approve future unrelated additions.",
+    "reviewedBy": "Codex independent Outreach audience reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflow.tsx",
@@ -7608,6 +7608,15 @@
     "fingerprint": "7526621fdcfe3d13a1bf05a505d8c0928f83c8c6734f09dc4260dc6e38f2fdfc",
     "reason": "Independent exact-source design review: this function owns one same-origin conversation transport lifecycle: request/configuration admission, existing token/session prerequisite, bounded request forwarding, response adaptation and abort/listener cleanup. Body validation, response decoding/stream bounds, origin policy and closed diagnostic validation/rate limiting remain in cohesive existing or dedicated helpers. The history observer records stages and terminal status only; it adds no domain authorization, persistence, retry loop or new route family. Keeping the try/finally and deadline ownership together makes cancellation and response cleanup reviewable. Splitting the 91-line orchestration solely to cross the threshold would distribute shared lifecycle state without removing an unrelated responsibility. The exact diagnostic pre/postimages and serving-base composition were independently verified, with unchanged authority and response semantics and focused behavioral evidence. Re-review on fingerprint or responsibility change.",
     "reviewedBy": "Independent reviewer 01a192fb-188f-7dc3-ba6d-46f1e10a3ac4",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/debrief/SavedDebriefContext.tsx",
+    "kind": "function",
+    "symbol": "SavedDebriefContext",
+    "fingerprint": "6971597d1d36b8aa2dcf9523ca47703dd8707b83d0a1753105696b7eb59cd959",
+    "reason": "This component owns one user-opened, read-only disclosure for one saved debrief revision. Its actor/client/artifact/revision query key, loading/error/currentness gates, absence message and compact section summary are one presentation lifecycle. The saved-context adapter owns schema/transport and Core remains authoritative. Splitting this 82-line function solely for length would disperse a single simple disclosure without improving responsibility ownership.",
+    "reviewedBy": "Codex independent /root/lifecycle_review",
     "reviewedOn": "2026-11-01"
   },
   {
