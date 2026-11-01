@@ -32,7 +32,9 @@ function documentTone(status: string) {
 export function WorkflowCards({
   onStart,
 }: {
-  onStart: (view: "hillday" | "newsletter" | "templates") => void;
+  onStart: (
+    view: "hillday" | "newsletter" | "rich-newsletter" | "templates",
+  ) => void;
 }) {
   return (
     <div>
@@ -51,7 +53,7 @@ export function WorkflowCards({
           </p>
           <footer>
             <p>Template → Edit → Review</p>
-            <ActionButton onClick={() => onStart("newsletter")}>
+            <ActionButton onClick={() => onStart("rich-newsletter")}>
               Start
             </ActionButton>
           </footer>

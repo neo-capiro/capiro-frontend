@@ -1,12 +1,13 @@
 "use client";
 import {
   NEWSLETTER_BLOCK_LABELS,
+  NEWSLETTER_COLUMN_RATIOS,
   type NewsletterBlock,
   type NewsletterDesign,
   type NewsletterBlockKind,
 } from "@capiro/shared/newsletter";
 import { ActionButton } from "../../../../shared/module-ui";
-import type { BlockContainer, StructureAction } from "./content/structure";
+import { type BlockContainer, type StructureAction } from "./content/structure";
 import styles from "./content/content.module.css";
 import ui from "./library/sections.module.css";
 
@@ -18,13 +19,14 @@ const available: NewsletterBlockKind[] = [
   "button",
   "divider",
   "spacer",
-  "columns",
   "social",
   "video",
   "apps",
   "product",
   "product-rec",
+  "survey",
   "code",
+  "footer",
 ];
 function AddBlock({
   target,
@@ -46,6 +48,20 @@ function AddBlock({
             onClick={() => change({ type: "addBlock", target, kind })}
           >
             {NEWSLETTER_BLOCK_LABELS[kind]}
+          </ActionButton>
+        ))}
+      </div>
+      <h3>Columns</h3>
+      <div className={ui.actions} aria-label={`Column layouts for ${label}`}>
+        {NEWSLETTER_COLUMN_RATIOS.map((ratio) => (
+          <ActionButton
+            className={ui.button}
+            key={ratio}
+            onClick={() =>
+              change({ type: "addBlock", target, kind: "columns", ratio })
+            }
+          >
+            {`Columns ${ratio}`}
           </ActionButton>
         ))}
       </div>

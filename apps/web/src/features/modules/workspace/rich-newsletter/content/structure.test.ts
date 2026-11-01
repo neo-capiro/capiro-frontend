@@ -261,3 +261,40 @@ describe("local rich structure uses the existing design and history boundary", (
     expect(video.video?.thumbnail).toBe("custom");
   });
 });
+
+describe("OS builder palette parity", () => {
+  it("creates a columns block with the chosen ratio and its column count", () => {
+    const draft = newRichDraft();
+    const sectionId = draft.design.sections[0]!.id;
+    for (const [ratio, count] of [
+      ["1", 1],
+      ["3", 3],
+      ["1:3", 2],
+      ["3:1", 2],
+    ] as const) {
+      const { design } = changeStructure(draft.design, {
+        type: "addBlock",
+        target: { sectionId },
+        kind: "columns",
+        ratio,
+      });
+      const block = design.sections[0]!.blocks.at(-1)!;
+      expect(block.kind).toBe("columns");
+      expect(block.ratio).toBe(ratio);
+      expect(block.columns).toHaveLength(count);
+    }
+  });
+
+  it("adds the survey and footer blocks the OS palette offers", () => {
+    const draft = newRichDraft();
+    const sectionId = draft.design.sections[0]!.id;
+    for (const kind of ["survey", "footer"] as NewsletterBlockKind[]) {
+      const { design } = changeStructure(draft.design, {
+        type: "addBlock",
+        target: { sectionId },
+        kind,
+      });
+      expect(design.sections[0]!.blocks.at(-1)!.kind).toBe(kind);
+    }
+  });
+});

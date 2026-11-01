@@ -295,7 +295,7 @@ export function WorkspaceScreen() {
           <ActionButton
             onClick={() => {
               setNewDocument(false);
-              navigate("newsletter");
+              navigate("rich-newsletter");
             }}
           >
             Newsletter

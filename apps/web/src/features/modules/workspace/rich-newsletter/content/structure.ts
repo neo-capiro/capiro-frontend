@@ -21,10 +21,20 @@ export type StructureAction =
       id: string;
       action: "duplicate" | "delete" | "up" | "down";
     }
-  | { type: "addBlock"; target: BlockContainer; kind: NewsletterBlockKind }
+  | {
+      type: "addBlock";
+      target: BlockContainer;
+      kind: NewsletterBlockKind;
+      ratio?: NewsletterBlock["ratio"];
+    }
   | { type: "block"; id: string; action: "duplicate" | "up" | "down" }
   | { type: "moveBlock"; id: string; target: BlockContainer }
   | { type: "columns"; id: string; count: number };
+
+/** The OS ratio labels map to the number of rendered columns. */
+export function columnCount(ratio: NewsletterBlock["ratio"]) {
+  return ratio.includes(":") ? 2 : Number(ratio);
+}
 
 function locate(design: NewsletterDesign, id: string) {
   const search = (
@@ -132,7 +142,18 @@ export function changeStructure(
       });
     } else reorder(next.sections, index, action.action);
   } else if (action.type === "addBlock") {
-    const block = createNewsletterBlock(action.kind);
+    const block = createNewsletterBlock(
+      action.kind,
+      action.kind === "columns" && action.ratio
+        ? {
+            ratio: action.ratio,
+            columns: Array.from(
+              { length: columnCount(action.ratio) },
+              () => [],
+            ),
+          }
+        : {},
+    );
     // This slice offers manual thumbnails, never an unfulfilled auto-fetch state.
     if (block.kind === "video")
       block.video = { ...block.video, thumbnail: "custom", sourceUrl: "" };
