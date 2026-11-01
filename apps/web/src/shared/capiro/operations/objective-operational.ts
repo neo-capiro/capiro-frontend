@@ -1,3 +1,4 @@
+import { questionOperations } from "./objective-questions";
 import { z } from "zod";
 import contract from "./objective-operational.contract.json" with { type: "json" };
 import { defineOperation } from "../contracts";
@@ -209,6 +210,7 @@ const readInput = z
   })
   .strict();
 export const objectiveOperationalOperations = {
+  ...questionOperations,
   "objectives.operational.read": defineOperation({
     service: "core",
     method: "GET",
