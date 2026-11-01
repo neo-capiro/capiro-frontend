@@ -47,7 +47,6 @@ export function BrowserViewer({
       )}
       <Button
         type="button"
-        variant="outline"
         className={ui.outline}
         disabled={busy || state.status === "expired"}
         onClick={() => void controller.refresh()}
@@ -71,7 +70,6 @@ export function BrowserViewer({
         <>
           <Button
             type="button"
-            variant="outline"
             className={ui.outline}
             disabled={busy}
             onClick={() => void controller.release()}

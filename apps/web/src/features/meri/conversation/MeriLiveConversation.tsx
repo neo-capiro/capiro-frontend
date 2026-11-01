@@ -336,14 +336,16 @@ export function MeriLiveConversation({
   const turn = currentTurnView(observed, savedCurrent);
   const finished = isTerminal(turn?.runState);
   const active = !!turn && !finished;
-  // Browser controls belong to a run that used the browser (an admitted receipt) or to a website
-  // task about to be sent; once mounted they stay mounted so a live session is never recreated.
-  const [browserMounted, setBrowserMounted] = useState(false);
+  // Browser controls belong to a run that used the browser: an admitted receipt, or this run's
+  // applied request naming a website task. The composer's pending selection is not a run. Once
+  // mounted for a run they stay mounted for that run, so a live session is never recreated.
+  const applied = snapshot.acceptedRequest ?? acceptedRequest;
+  const [browserRunId, setBrowserRunId] = useState<string>();
   if (
-    !browserMounted &&
-    ((turn?.browserReceipts.length ?? 0) > 0 || !!skillSelection?.siteWorkflow)
+    browserRunId !== port.context.runId &&
+    ((turn?.browserReceipts.length ?? 0) > 0 || !!applied?.siteWorkflow)
   )
-    setBrowserMounted(true);
+    setBrowserRunId(port.context.runId);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
   useSettledRefresh(finished, onSettled);
   const availability = composerAvailability(
@@ -459,10 +461,7 @@ export function MeriLiveConversation({
       }
       status={
         <>
-          <SelectedRequestReceipt
-            request={snapshot.acceptedRequest ?? acceptedRequest}
-            scope={scope}
-          />
+          <SelectedRequestReceipt request={applied} scope={scope} />
           <CurrentRunStatus
             run={{
               ...run,
@@ -497,7 +496,7 @@ export function MeriLiveConversation({
             ) : undefined
           }
           browser={
-            browserMounted ? (
+            browserRunId === port.context.runId ? (
               <ConnectedBrowserViewer
                 key={port.context.runId}
                 account={{

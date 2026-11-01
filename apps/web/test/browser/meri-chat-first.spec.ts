@@ -2,6 +2,7 @@ import { mkdirSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { expect, test, type Page } from "@playwright/test";
 import type { UIEvent } from "@capiro/meri-contracts";
+import { newWorkflow } from "../../src/features/settings/site-workflows/form";
 import { CONVERSATION_SKILLS } from "@capiro/meri-contracts/conversation-application";
 import {
   clientId,
@@ -632,6 +633,15 @@ const browserReceipt = eventOf(2, "browser.receipt", {
   reference: null,
   outcome: "ok",
 });
+/** One configured website task: the exact pin an applied request carries. */
+const websiteTask = {
+  siteId: "synthetic-site",
+  workflowId: "synthetic-task",
+  version: 1,
+  manifestSha256: "1".repeat(64),
+};
+const browserControl = (page: Page) =>
+  page.getByText("Browser control", { exact: true });
 
 test("browser controls follow a run that used the browser, not the Tools panel", async ({
   page,
@@ -644,10 +654,11 @@ test("browser controls follow a run that used the browser, not the Tools panel",
   await expect(page.getByText("First answer", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Tools", exact: true }).click();
   await expect(page.getByRole("dialog", { name: "Tools" })).toBeVisible();
-  await expect(page.getByText("Browser control")).toHaveCount(0);
+  // Absence alone proves little: a panel that never mounted would pass it too. The reload below
+  // is the real assertion, that the panel exists and follows the run's own browser use.
+  await expect(browserControl(page)).toHaveCount(0);
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog", { name: "Tools" })).toHaveCount(0);
-  // The same saved run with an admitted browser receipt mounts the panel under the answer.
   native.turns = [turn(undefined, undefined, undefined, 0, 3)];
   native.events = [
     initialEvents[0]!,
@@ -656,7 +667,57 @@ test("browser controls follow a run that used the browser, not the Tools panel",
   ];
   await page.reload();
   await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await expect(browserControl(page)).toBeVisible();
+});
+
+test("a website task mounts browser controls once applied to the run, not while pending in the composer", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1040 });
+  await setupConversation(page);
+  await page.route("**/api/capiro/meri.siteWorkflows.catalog", (route) =>
+    json(route, {
+      workflows: [
+        {
+          manifest: {
+            ...newWorkflow(),
+            siteId: websiteTask.siteId,
+            workflowId: websiteTask.workflowId,
+            version: websiteTask.version,
+            taskSummary: "Read synthetic records",
+            origins: ["https://records.example.com"],
+            signInUrl: "https://records.example.com/login",
+            signedInProbe: { kind: "selector", value: "[data-account]" },
+            tosReviewRef: "synthetic-terms",
+            qualificationEvidenceRef: "synthetic-qualification",
+          },
+          enabled: true,
+          manifestSha256: websiteTask.manifestSha256,
+        },
+      ],
+    }),
+  );
+  const { native } = await installHistory(page);
+  await installCurrentRun(page, native);
+  await page.goto(selectedUrl);
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  // Choosing a website task for the next message is a composer selection; no run used a browser.
+  await page.getByRole("button", { name: "Tools", exact: true }).click();
+  await page.getByText("Website · No task", { exact: true }).click();
+  await page
+    .getByRole("combobox", { name: "Website task", exact: true })
+    .selectOption({ label: "synthetic-site · synthetic-task · version 1" });
+  await page.keyboard.press("Escape");
   await expect(
-    page.getByText("Browser control", { exact: true }),
+    page.getByText("Website · synthetic-task", { exact: true }),
   ).toBeVisible();
+  await expect(browserControl(page)).toHaveCount(0);
+  // The same conversation whose selected run was sent with that website task mounts the panel.
+  const applied = turn();
+  native.turns = [
+    { ...applied, request: { ...applied.request, siteWorkflow: websiteTask } },
+  ];
+  await page.reload();
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await expect(browserControl(page)).toBeVisible();
 });

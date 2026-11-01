@@ -65,7 +65,6 @@ export function ConnectedBrowserViewer(props: {
       </p>
       <Button
         type="button"
-        variant="outline"
         className={ui.outline}
         disabled={state.status === "connecting"}
         onClick={() => void host.connect()}

@@ -36,7 +36,6 @@ function VerifiedCheckpoint({
       {resumable && (
         <Button
           type="button"
-          variant="outline"
           className={ui.outline}
           disabled={held}
           onClick={() =>
@@ -52,7 +51,6 @@ function VerifiedCheckpoint({
       )}
       <Button
         type="button"
-        variant="outline"
         className={ui.outline}
         disabled={held}
         onClick={() =>
@@ -103,7 +101,6 @@ export function RunLifecycleControls({
           </p>
           <Button
             type="button"
-            variant="outline"
             className={ui.outline}
             disabled={held}
             onClick={lifecycle.retry}
@@ -117,7 +114,6 @@ export function RunLifecycleControls({
             <>
               <Button
                 type="button"
-                variant="outline"
                 className={ui.outline}
                 disabled={!mutable}
                 onClick={() => lifecycle.send({ intent: "pause" })}
@@ -134,7 +130,6 @@ export function RunLifecycleControls({
               </label>
               <Button
                 type="button"
-                variant="outline"
                 className={ui.outline}
                 disabled={!mutable || !text.trim()}
                 onClick={() =>
@@ -148,7 +143,6 @@ export function RunLifecycleControls({
           {checkpointId ? (
             <Button
               type="button"
-              variant="outline"
               className={ui.outline}
               disabled={held}
               onClick={() => void lifecycle.inspect(checkpointId)}
