@@ -6,25 +6,53 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { ApiError } from "@/shared/portfolio/api/http";
 import { contactInput, contactValues, type ProspectContact } from "./contracts";
 import { useContactMutation, useLatestContact } from "./queries";
+import { useContactCreate, type ContactCreation } from "./useContactCreate";
 import styles from "./contacts.module.css";
 
-export function ContactEditor({
-  prospectId,
-  contact,
-  available = true,
-  readOnly,
-  onClose,
-  returnFocus,
-}: {
+type EditorProps = {
   prospectId: string;
   contact?: ProspectContact;
   available?: boolean;
   readOnly: boolean;
   onClose: () => void;
   returnFocus: () => void;
-}) {
+};
+
+export function ContactEditor(props: EditorProps) {
+  return props.contact ? (
+    <ContactForm {...props} />
+  ) : (
+    <CreateContactEditor {...props} />
+  );
+}
+
+function CreateContactEditor(props: EditorProps) {
+  const creation = useContactCreate(props.prospectId);
+  return <ContactForm {...props} creation={creation} />;
+}
+
+function ContactForm({
+  prospectId,
+  contact,
+  available = true,
+  readOnly,
+  onClose,
+  returnFocus,
+  creation,
+}: EditorProps & { creation?: ContactCreation }) {
   const [initial, setInitial] = useState(contact);
-  const [values, setValues] = useState(() => contactValues(contact));
+  const [draftValues, setValues] = useState(() => contactValues(contact));
+  const retainedCreate =
+    creation?.attempt && !creation.attempt.editable ? creation.attempt : null;
+  const [loadedAttempt, setLoadedAttempt] = useState<string>();
+  const attemptKey = creation?.attempt
+    ? JSON.stringify(creation.attempt)
+    : undefined;
+  if (attemptKey && attemptKey !== loadedAttempt) {
+    setLoadedAttempt(attemptKey);
+    setValues(creation!.attempt!.values);
+  }
+  const values = retainedCreate?.values ?? draftValues;
   const [validation, setValidation] = useState("");
   const [invalidField, setInvalidField] = useState<string>();
   const validationId = useId();
@@ -34,23 +62,11 @@ export function ContactEditor({
   const formRef = useRef<HTMLFormElement>(null);
   const review = useLatestContact(prospectId);
   const mutation = useContactMutation(prospectId, onClose);
-  const [retainedCreate, setRetainedCreate] =
-    useState<
-      Extract<NonNullable<typeof mutation.variables>, { kind: "save" }>
-    >();
-  if (
-    !retainedCreate &&
-    mutation.isError &&
-    mutation.variables?.kind === "save" &&
-    !mutation.variables.contact &&
-    (!(mutation.error instanceof ApiError) || mutation.error.status >= 500)
-  ) {
-    // A refused later retry cannot resolve an earlier unknown creation.
-    setRetainedCreate(structuredClone(mutation.variables));
-  }
   const conflict =
     mutation.error instanceof ApiError && mutation.error.status === 409;
-  const pending = mutation.isPending || review.isPending;
+  const pending =
+    mutation.isPending || review.isPending || Boolean(creation?.pending);
+  const blocked = Boolean(creation && !creation.ready);
   const availability = useRef(0);
   if ((!available || readOnly) && latest) setLatest(undefined);
   useLayoutEffect(() => {
@@ -60,10 +76,10 @@ export function ContactEditor({
     // A read failure may conceal an already dispatched write. Keep its owner
     // and request identity until its outcome can be reviewed; discard only
     // an editor that has never submitted a mutation.
-    if (!available && mutation.isIdle) onClose();
-  }, [available, mutation.isIdle, onClose]);
+    if (!available && mutation.isIdle && !creation) onClose();
+  }, [available, mutation.isIdle, onClose, creation]);
   if (!available)
-    return mutation.isPending || mutation.isError ? (
+    return creation || mutation.isPending || mutation.isError ? (
       <p role="status">
         Your contact change is retained. Restore current access to review its
         outcome before continuing.
@@ -89,10 +105,19 @@ export function ContactEditor({
         noValidate
         onSubmit={(event) => {
           event.preventDefault();
-          if (!available || readOnly || pending || (conflict && initial))
+          if (
+            !available ||
+            (readOnly && !retainedCreate) ||
+            pending ||
+            blocked ||
+            (conflict && initial)
+          )
             return;
           if (retainedCreate) {
-            mutation.mutate(retainedCreate);
+            void creation!
+              .retry()
+              .then(onClose)
+              .catch(() => undefined);
             return;
           }
           const result = contactInput.safeParse(values);
@@ -111,6 +136,13 @@ export function ContactEditor({
           }
           setValidation("");
           setInvalidField(undefined);
+          if (creation) {
+            void creation
+              .save(result.data)
+              .then(onClose)
+              .catch(() => undefined);
+            return;
+          }
           mutation.mutate({
             kind: "save",
             values: result.data,
@@ -212,16 +244,43 @@ export function ContactEditor({
           {readOnly && (
             <p role="status">Contacts are read-only for this prospect.</p>
           )}
+          {readOnly && creation?.ready && !retainedCreate && (
+            <p role="status">No saved contact creation needs recovery.</p>
+          )}
+          {creation?.attempt?.editable && !readOnly && (
+            <p role="status">
+              The contact creation was refused. You can correct its details and
+              save again.
+            </p>
+          )}
           {validation && (
             <p id={validationId} className="error" role="alert">
               {validation}
             </p>
           )}
-          <QueryState error={mutation.error} />
+          <QueryState error={creation?.error ?? mutation.error} />
+          {creation && !creation.ready && (
+            <p role="status">
+              {creation.loading
+                ? "Checking saved contact creation…"
+                : "Saved contact recovery is unavailable."}
+              {!creation.loading && (
+                <button
+                  type="button"
+                  className="button"
+                  onClick={creation.reload}
+                >
+                  Check recovery again
+                </button>
+              )}
+            </p>
+          )}
           {retainedCreate && (
             <p role="status">
-              This creation may have completed. Its submitted details are
-              locked. Save contact retries the same request.
+              This creation may have completed. Its submitted details are locked
+              and retained when this view closes. Retry original save uses the
+              same request and may create the contact if the first attempt did
+              not complete.
             </p>
           )}
           {conflict && initial && (
@@ -331,12 +390,16 @@ export function ContactEditor({
           >
             {readOnly ? "Close contact" : "Cancel"}
           </button>
-          {!readOnly && (
+          {(!readOnly || retainedCreate) && (
             <button
               className="button primary"
-              disabled={pending || (conflict && Boolean(initial))}
+              disabled={pending || blocked || (conflict && Boolean(initial))}
             >
-              {pending ? "Saving…" : "Save contact"}
+              {pending
+                ? "Saving…"
+                : retainedCreate
+                  ? "Retry original save"
+                  : "Save contact"}
             </button>
           )}
         </footer>
