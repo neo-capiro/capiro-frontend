@@ -66,6 +66,34 @@ export function statusLabel(status: ConnectorRow["connectionStatus"]): string {
   return CONNECTOR_STATUS_LABELS[status];
 }
 
+export type ConnectionProblem = {
+  /** What the person can do about it. */
+  summary: string;
+  /** Core's stored text, kept behind a disclosure for whoever administers the connector. */
+  technical: string;
+};
+
+/**
+ * Core stores the provider's or the operator's text verbatim (an env-var instruction, a transport
+ * exception). The row says what the person can do; the stored text stays available as detail.
+ */
+export function connectionProblem(
+  lastError: string | null,
+  service: string,
+): ConnectionProblem | undefined {
+  if (!lastError) return undefined;
+  const summary = /allowlist|operator action|not configured|not enabled/i.test(
+    lastError,
+  )
+    ? "This connector isn't available yet. An administrator needs to enable it."
+    : /could not be reached|could not finish connecting|discovery failed|timed out|unavailable/i.test(
+          lastError,
+        )
+      ? `Couldn't reach ${service}; try again later.`
+      : `${service} reported a problem; try again or reconnect it.`;
+  return { summary, technical: lastError };
+}
+
 export type ConnectedServiceRow = {
   id: string;
   service: string;
@@ -74,7 +102,7 @@ export type ConnectedServiceRow = {
   access: string;
   tools: string;
   lastSync: string;
-  detail: string | undefined;
+  problem: ConnectionProblem | undefined;
   canManage: boolean;
   canAuthorize: boolean;
   /** `oauth` rows are ended by revoking authorization; `token`/`none` rows by removal. */
@@ -113,7 +141,10 @@ export function stamp(value: string | null | undefined): string | undefined {
  * only for an OAuth row this caller may manage — a firm-wide connector is authorized once by an
  * admin, not re-authorized per member.
  */
-export function connectedServiceRow(row: ConnectorRow): ConnectedServiceRow {
+export function connectedServiceRow(
+  row: ConnectorRow,
+  name = row.name,
+): ConnectedServiceRow {
   const scope =
     row.scope === "tenant" ? "Firm-wide (admin-managed)" : "Personal to you";
   const access =
@@ -124,23 +155,30 @@ export function connectedServiceRow(row: ConnectorRow): ConnectedServiceRow {
       : "You own";
   return {
     id: row.id,
-    service: row.catalogId ?? row.name,
+    service: name,
     scope,
     status: statusLabel(row.connectionStatus),
     access,
     tools: `${row.toolAllowlist.length} allowed tool${row.toolAllowlist.length === 1 ? "" : "s"}`,
     lastSync: stamp(row.lastSyncAt) ?? "None recorded",
-    detail: row.lastError ?? undefined,
+    problem: connectionProblem(row.lastError, name),
     canManage: row.canManage,
     canAuthorize: row.canManage && row.authType === "oauth",
     authType: row.authType,
   };
 }
 
+/** Rows carry the library's display name when their catalog entry is known. */
 export function connectedServiceRows(
   rows: readonly ConnectorRow[],
+  connectors: readonly LibraryConnector[] = [],
 ): ConnectedServiceRow[] {
-  return rows.map(connectedServiceRow);
+  return rows.map((row) =>
+    connectedServiceRow(
+      row,
+      connectors.find((entry) => entry.id === row.catalogId)?.name ?? row.name,
+    ),
+  );
 }
 
 /** The inputs the connect step must collect before it can be sent. */

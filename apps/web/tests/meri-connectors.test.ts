@@ -239,16 +239,38 @@ describe("stored connectors", () => {
     ).toBe(false);
   });
 
-  it("surfaces Core's stored lastError without inventing health", () => {
-    expect(connectedServiceRow(storedRow()).detail).toBeUndefined();
-    expect(
+  it("turns Core's stored lastError into what the person can do and keeps the text as detail", () => {
+    expect(connectedServiceRow(storedRow()).problem).toBeUndefined();
+    const failed = (lastError: string) =>
       connectedServiceRow(
-        storedRow({
-          connectionStatus: "error",
-          lastError: "Tool discovery failed.",
-        }),
-      ).detail,
-    ).toBe("Tool discovery failed.");
+        storedRow({ connectionStatus: "error", lastError }),
+        "Clio",
+      ).problem;
+    const operator =
+      "MCP stdio command is not allowlisted (set CLIO_MCP_STDIO_ALLOWED_COMMANDS — operator action)";
+    expect(failed(operator)).toEqual({
+      summary:
+        "This connector isn't available yet. An administrator needs to enable it.",
+      technical: operator,
+    });
+    for (const unreachable of [
+      "The app could not be reached. Please try again.",
+      "Tool discovery failed.",
+    ])
+      expect(failed(unreachable)?.summary).toBe(
+        "Couldn't reach Clio; try again later.",
+      );
+    expect(failed("HTTP 500")).toEqual({
+      summary: "Clio reported a problem; try again or reconnect it.",
+      technical: "HTTP 500",
+    });
+  });
+
+  it("names the row by its library entry, falling back to the stored name", () => {
+    expect(connectedServiceRow(storedRow(), "Notion").service).toBe("Notion");
+    expect(connectedServiceRow(storedRow({ name: "notion-mcp" })).service).toBe(
+      "notion-mcp",
+    );
   });
 });
 

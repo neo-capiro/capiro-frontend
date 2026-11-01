@@ -372,7 +372,7 @@ function Connected({
           title: "Connected",
           description:
             "Stored authorizations Core reports for this account. A stored row is not a health claim; Meri still checks the connection on every call.",
-          rows: connectedServiceRows(rows),
+          rows: connectedServiceRows(rows, library?.connectors ?? []),
         },
         openCardId,
         busyId,
