@@ -62,8 +62,107 @@
   white-space: nowrap;
   text-align: left;
 }
+/* The cascader ships only prototype utility classes, which this app does not install: the popup
+   needs its own surface, stacking order and row layout or it paints transparently over the
+   Tools panel. The rules mirror the objectives association picker. */
 .popup {
   width: min(360px, calc(100vw - 32px));
+  position: relative;
+  z-index: 120;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 13px;
+  box-shadow: 0 12px 36px #0c0a0929;
+}
+.popup [data-slot="cascader-panel"] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.popup [data-slot="cascader-list-bounds"] {
+  max-height: 280px;
+  overflow-y: auto;
+}
+.popup [data-slot="cascader-nav"],
+.popup [data-slot="cascader-input-row"],
+.popup [data-slot="cascader-breadcrumb"] {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.popup input {
+  width: 100%;
+  padding: 8px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+.popup [data-slot="cascader-back"],
+.popup [data-slot="cascader-breadcrumb-item"] {
+  padding: 6px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+.popup [data-slot="cascader-item"] {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 28px 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.popup [data-slot="cascader-item"][data-disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+.popup [data-slot="cascader-item-indicator"] {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+}
+.popup [data-slot="cascader-item-trailing"] {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted-foreground);
+}
+.popup [data-highlighted],
+.popup [data-selected] {
+  background: var(--muted);
+}
+.popup svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.popup [data-slot="cascader-status"],
+.popup [data-slot="cascader-item-details"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+/* "No matching models" belongs to the empty search state only. */
+.popup [data-slot="cascader-empty"] {
+  display: none;
+  padding: 8px;
+  color: var(--muted-foreground);
+}
+.popup[data-empty] [data-slot="cascader-empty"] {
+  display: block;
 }
 .help {
   color: var(--muted-foreground);
