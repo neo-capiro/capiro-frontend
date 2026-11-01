@@ -1,6 +1,7 @@
 import { watchSettled } from "./watch-view";
 import { bizdevSettled } from "./bizdev-view";
 import { legislativeDocumentSettled } from "./legislative-document-view";
+import { officeEditSettled } from "./office-edit-view";
 import { clientRecordSettled } from "./client-record-view";
 import { legiwatchSettled } from "./legiwatch-view";
 import { researchActionSettled } from "./research-action-view";
@@ -19,6 +20,8 @@ export function isResearchShareProposal(
 }
 
 export function intentDecisionSettled(response: IntentsDecideResponse) {
+  if (response.status === "office_edit_decided")
+    return officeEditSettled(response.result.proposalStatus);
   if (response.status === "watch_decided")
     return watchSettled(response.result.status);
   if (response.status === "bizdev_decided")

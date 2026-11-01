@@ -10,9 +10,12 @@ import { conversationHref } from "../../../shared/meri-conversations/conversatio
 export function DocumentRevisionLink({
   port,
   versionId,
+  office = false,
 }: {
   port: DocumentLibraryAccess;
   versionId: string;
+  /** An Office version: Meri reads it as the selected document and proposes bounded edits to apply. */
+  office?: boolean;
 }) {
   const [busy, setBusy] = useState(false),
     [ready, setReady] = useState(false),
@@ -54,8 +57,17 @@ export function DocumentRevisionLink({
   return (
     <div>
       <Button variant="outline" disabled={busy} onClick={() => void select()}>
-        Select version for revision
+        {office
+          ? "Ask Meri about this document"
+          : "Select version for revision"}
       </Button>
+      {office && (
+        <p>
+          Meri reads exactly this saved version and proposes changes you apply
+          yourself; Save keeps a private draft, Publish makes the file version
+          Meri can read.
+        </p>
+      )}
       {ready && (
         <p>
           <Link
@@ -65,7 +77,9 @@ export function DocumentRevisionLink({
               port.context.conversationId,
             )}
           >
-            Review revision in the original conversation
+            {office
+              ? "Continue with Meri in the original conversation"
+              : "Review revision in the original conversation"}
           </Link>
         </p>
       )}

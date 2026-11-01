@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import type { LibraryVersion } from "../../../shared/meri-documents/library-access";
+import type { OfficeDocument } from "@capiro/meri-contracts/office-application";
 import { officeDraftSelection } from "../../../shared/meri-office/draft-selection";
 import { createOfficeEditorHost } from "../../../shared/meri-office/editor-host";
 import { OfficeFrameHost } from "../../../shared/meri-office/frame-host";
+import type { OfficeTarget } from "./OfficeEditing";
 
 /** Connect the mounted view to the existing account cache and session lifetime. */
 export function useOfficeEditor(
   account: { tenantId: string; actorId: string },
-  version: LibraryVersion,
+  version: OfficeTarget,
   onClose: () => void,
+  onPublished?: ((document: OfficeDocument) => void) | undefined,
   sessionRunId?: string,
 ) {
   const queries = useQueryClient(),
@@ -44,9 +46,11 @@ export function useOfficeEditor(
       recovery,
       frame,
       onDiscarded: onClose,
+      // Captured once with the host: a publication callback is stable for the editor's lifetime.
+      onPublished: (document) => onPublished?.(document),
       sessionRunId,
     });
-    return host;
+    return { ...host, origin };
   });
   useEffect(() => host.attach(), [host]);
   const state = useSyncExternalStore(
@@ -59,5 +63,5 @@ export function useOfficeEditor(
     host.session.getSnapshot,
     host.session.getSnapshot,
   );
-  return { host, state, connection, container };
+  return { host, state, connection, container, origin: host.origin };
 }

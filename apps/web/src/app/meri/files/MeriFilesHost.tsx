@@ -61,6 +61,8 @@ export function MeriFilesHost({
     selected.state === "authorized-client" ? selected.requestedId : undefined;
   const available =
     selected.state === "no-selection" || selected.state === "authorized-client";
+  // A publication from the editor remounts the library below it, so version history shows the new head.
+  const [libraryKey, setLibraryKey] = useState(0);
   return (
     <>
       {account && available && (
@@ -75,8 +77,10 @@ export function MeriFilesHost({
             key={JSON.stringify([account.tenantId, account.actorId, clientId])}
             enabled={officeEnabled}
             account={account}
+            onPublished={() => setLibraryKey((key) => key + 1)}
           >
             <DocumentLibrary
+              key={libraryKey}
               account={account}
               {...(clientId ? { clientId } : {})}
             />
