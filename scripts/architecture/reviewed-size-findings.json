@@ -7434,19 +7434,19 @@
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "a7adaa3bf4a8fc967561a698b96c02ff17ab6e29bffc2cc95185d6a23c786bb8",
-    "reason": "Independent exact-source review at e4e15ef9332bda929a64d327fb039eb22b115342 (498 nonblank). This remains one paginated Outreach list with its row renderer. The server-owned capability only controls ancillary query admission and truthful unavailable presentation; the list model owns admission, shared query effects own cancellation and transport, and the capability module owns deployment interpretation. Actual Chromium callbacks verified disabled search, paging, rerender and canonical retry issue zero session requests; enabled rows, dedup, pagination and fallback remain. No send or authorization responsibility was added, so further fragmentation is not warranted.",
-    "reviewedBy": "Codex /root/lanes_source_finish_high (independent high-reasoning review of original02751a source)",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "9476e345c884274ced419937a1e5668140d8a941c5499d7006f80e4047f6b7b7",
+    "reason": "This module composes one Outreach list and its campaign-row presentation. Transport/cancellation, canonical normalization, capability resolution, audience admission and selector presentation already have separate owners. The extension keeps one coherent view of canonical records/campaigns and explicitly excluded ancillary sessions; it adds no durable state, authorization, sender or provider responsibility. The scoped presentation/disclosure additions do not justify duplicating query or filter ownership merely to meet a size threshold.",
+    "reviewedBy": "Codex independent Outreach audience reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "function",
     "symbol": "OutreachList",
-    "fingerprint": "570cc5cf47d624355957423761281daecb4be520578b4c6b4c25de33e803ca71",
-    "reason": "Independent exact-source review at e4e15ef9332bda929a64d327fb039eb22b115342 (403 nonblank). The component still coordinates three reads, filters, cursors and visible rows for one list lifetime. Capability-aware admission and the unavailable notice belong to that same composition; they do not add a service lifecycle or duplicate configuration parsing. Actual query effects and callback tests cover enabled/unknown/disabled transitions, retry, pagination and unchanged client/deleted/date gates. Splitting this state solely for line count would obscure rather than simplify its shared filter lifetime.",
-    "reviewedBy": "Codex /root/lanes_source_finish_high (independent high-reasoning review of original02751a source)",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "1df4a3a16c8def65b989c69ff7681f7dde05dc382bbd794400a0ba6e92389ff2",
+    "reason": "This is the existing single list composition and local filter/pagination lifetime. The additional audience state must reset both canonical cursors and the ancillary offset together, suppress unsupported queries and keep loaded counts/exclusion copy consistent. Small audience presentation and pure admission logic are extracted. The function delegates network lifetime and backend classification; it does not accumulate another effect or domain owner. Keeping these related view transitions together is cohesive. This disposition does not approve future unrelated additions.",
+    "reviewedBy": "Codex independent Outreach audience reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflow.tsx",
