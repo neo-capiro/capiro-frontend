@@ -503,24 +503,6 @@
     "reviewedOn": "2026-10-25"
   },
   {
-    "file": "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx",
-    "kind": "function",
-    "symbol": "ContactEditor",
-    "fingerprint": "47bc6b1414324862a4d8d9cc6466c05faf4ff6f453fd130418c2322ac4db9a4b",
-    "reason": "One prospect contact editor owns its initial record/draft, field validation, existing-contact removal and CAS recovery. The narrow new latch captures canonical submitted creation variables after an unknown outcome and owns the same form's frozen fields and explicit exact retry; it cannot be cleared by a later refusal. Availability concealment retains this same dispatched editor. The hooks/API still own transport and receipt validation; no DTO copy, cross-feature cache service, durable journal or second workflow is introduced. The large body primarily renders the fields and recovery controls, so this exact owner remains cohesive. The revised same-component conditional reset clears only an unavailable reviewed record or selection, terminates after that reset, and leaves submitted writer state and existing generation fencing intact.",
-    "reviewedBy": "Codex modules_settings_review independent",
-    "reviewedOn": "2026-10-13"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx",
-    "kind": "function",
-    "symbol": "ProspectContacts",
-    "fingerprint": "8d9662a1022435633467481eb346a4cbad166a3bbf327d416b6201636e2552af",
-    "reason": "One prospect contacts section owns current-read/role presentation, its contact list and one selected editor snapshot. ContactEditor owns draft/recovery and the canonical query hook owns retrieval. Snapshot-specific close and availability props are small ownership seams that prevent stale presentation from clearing a newer editor; no independent service or generic cache framework is introduced.",
-    "reviewedBy": "Codex modules_settings_review independent",
-    "reviewedOn": "2026-10-13"
-  },
-  {
     "file": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
     "kind": "function",
     "symbol": "ClientLinkDialog",
@@ -7608,6 +7590,51 @@
     "fingerprint": "7526621fdcfe3d13a1bf05a505d8c0928f83c8c6734f09dc4260dc6e38f2fdfc",
     "reason": "Independent exact-source design review: this function owns one same-origin conversation transport lifecycle: request/configuration admission, existing token/session prerequisite, bounded request forwarding, response adaptation and abort/listener cleanup. Body validation, response decoding/stream bounds, origin policy and closed diagnostic validation/rate limiting remain in cohesive existing or dedicated helpers. The history observer records stages and terminal status only; it adds no domain authorization, persistence, retry loop or new route family. Keeping the try/finally and deadline ownership together makes cancellation and response cleanup reviewable. Splitting the 91-line orchestration solely to cross the threshold would distribute shared lifecycle state without removing an unrelated responsibility. The exact diagnostic pre/postimages and serving-base composition were independently verified, with unchanged authority and response semantics and focused behavioral evidence. Re-review on fingerprint or responsibility change.",
     "reviewedBy": "Independent reviewer 01a192fb-188f-7dc3-ba6d-46f1e10a3ac4",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "65bb0cec4134e803de3d5f5367a31a4a1eb40911971f78f574241ac702be2bf6",
+    "reason": "One prospect-contact editor module composes existing-contact editing with a creation-only recovery hook and the shared form. The file exceeds the threshold primarily through related field markup and existing CAS/removal presentation. Durable storage, authorization verification, HTTP receipt validation and serialized command execution stay in their existing canonical owners or the focused create-command/useContactCreate modules; no independent feature or generic framework is accumulated here.",
+    "reviewedBy": "Codex portfolio_source_audit independent",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx",
+    "kind": "function",
+    "symbol": "ContactForm",
+    "fingerprint": "5783043cff60eee937ae90dd00a1b3a8283b81fc94f4e0f0e33652084d27595e",
+    "reason": "One contact form owns its field draft, validation, removal/CAS presentation and exact creation-recovery controls. Its creation state is supplied by the focused hook; persistent commands and transport are not implemented in the form. The create-only wrapper avoids initializing recovery for ordinary edit/remove. The body is mostly cohesive markup. Keeping field state, current availability and associated controls together is clearer than splitting solely to satisfy the line threshold.",
+    "reviewedBy": "Codex portfolio_source_audit independent",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx",
+    "kind": "function",
+    "symbol": "ProspectContacts",
+    "fingerprint": "b4eb087e4cafd87a1db46855835cdf84eb155966034c8ecec671db74ba83e93c",
+    "reason": "One prospect contact section owns current-read/role presentation, list selection and editor return focus. The narrow recovery entry allows a currently authorized reader/writer to reopen an original creation on an archived or converted prospect while ContactForm continues to refuse new writes. Retrieval, durable attempt state and native mutation semantics remain delegated to their existing cohesive owners.",
+    "reviewedBy": "Codex portfolio_source_audit independent",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contacts/create-command.ts",
+    "kind": "function",
+    "symbol": "runContactCreate",
+    "fingerprint": "45b11090f106985e475abd1a9c9d30da639e117b69d6ffd79c6e5fa8a102fee7",
+    "reason": "This function owns one feature-specific prospect-contact creation command and its serialized recovery transition. It reuses canonical encrypted journal storage and locking, preserves actor/tenant/prospect scope, freezes the full input before dispatch, distinguishes a first definite refusal from prior unknown execution, rejects stale editable snapshots, and settles only a matching native receipt. Keeping this ordered transaction-like sequence in one domain function avoids hiding safety-critical ordering across artificial helpers.",
+    "reviewedBy": "Codex portfolio_source_audit independent",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contacts/create-command.ts",
+    "kind": "function",
+    "symbol": "runContactCreate > <anonymous>",
+    "fingerprint": "e86afa0a3ea06f83ea479da5ec76961a77d84c5d66bf88228d31f29d58635942",
+    "reason": "The single execution-lock callback is the atomic read/prepare/dispatch/settlement sequence for the same prospect-contact creation. Original and corrected inputs are persisted before POST; stale or unknown attempts cannot become new commands; storage and authority failures retain ownership. It introduces no independent responsibility and should remain visibly within the one canonical command lock.",
+    "reviewedBy": "Codex portfolio_source_audit independent",
     "reviewedOn": "2026-11-01"
   }
 ]
