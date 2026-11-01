@@ -7,6 +7,7 @@ import {
 import { Panel } from "../../../shared/module-ui";
 import { ObjectiveDestinationFrame } from "./ObjectiveDestinationFrame";
 import styles from "./objective-destinations.module.css";
+import { ObjectiveSavedCitations } from "./ObjectiveSavedCitations";
 
 export function ObjectiveGeneratedStrategy({
   query,
@@ -94,6 +95,12 @@ export function ObjectiveGeneratedStrategy({
                 );
               })}
             </ol>
+          </Panel>
+          <Panel title="Saved sources">
+            <ObjectiveSavedCitations
+              key={saved.source.snapshotDigest}
+              saved={saved}
+            />
           </Panel>
           <Panel title="Planner preparation">
             <p>

@@ -5,6 +5,8 @@ import {
   objectiveSavedReview,
   objectiveSavedReviewOperation,
   requireSavedStrategyReview,
+  requireSavedObjectiveCitations,
+  objectiveSavedCitationsOperation,
 } from "../src/shared/capiro/operations/objective-saved-review";
 import { ObjectiveGeneratedStrategy } from "../src/features/modules/objective-destinations/ObjectiveGeneratedStrategy";
 import { capiroOperations } from "../src/shared/capiro/registry";
@@ -95,6 +97,58 @@ beforeEach(() => {
     reload: hooks.reload,
   });
 });
+it("saved citation reads bind all original source identities and refuse substituted nodes", () => {
+  const saved = objectiveSavedReview.parse(fixture());
+  const value = {
+    source: saved.source,
+    nodes: saved.snapshot.nodes.map((n) => ({
+      sourceNodeId: n.id,
+      citations: [],
+    })),
+  };
+  expect(requireSavedObjectiveCitations(value, saved)).toEqual(value);
+  expect(capiroOperations["strategies.objectiveSavedCitations"]).toBe(
+    objectiveSavedCitationsOperation,
+  );
+  expect(() =>
+    requireSavedObjectiveCitations(
+      { ...value, source: { ...value.source, snapshotDigest: "2".repeat(64) } },
+      saved,
+    ),
+  ).toThrow();
+  expect(() =>
+    requireSavedObjectiveCitations(
+      {
+        ...value,
+        nodes: [{ sourceNodeId: id(99), citations: [] }, value.nodes[1]],
+      },
+      saved,
+    ),
+  ).toThrow();
+  expect(() =>
+    requireSavedObjectiveCitations(
+      {
+        ...value,
+        nodes: [
+          {
+            sourceNodeId: id(9),
+            citations: [{ index: 0, state: "unavailable", text: "restricted" }],
+          },
+          value.nodes[1],
+        ],
+      },
+      saved,
+    ),
+  ).toThrow();
+});
+it("source review is opt-in and saved Strategy rendering starts no source request", () => {
+  renderToStaticMarkup(createElement(ObjectiveGeneratedStrategy, selected));
+  expect(hooks.query).toHaveBeenCalledWith(
+    "strategies.objectiveSavedCitations",
+    expect.anything(),
+    { enabled: false },
+  );
+});
 it("registers a fixed read and rejects caller authority, private payloads and missing version selectors", () => {
   expect(capiroOperations["strategies.objectiveSavedReview"]).toBe(
     objectiveSavedReviewOperation,
@@ -178,17 +232,14 @@ it("renders exact operative fields and explicit archive state using only the sav
   ])
     expect(html).toContain(text);
   expect(html).not.toContain("Current authorized Strategy content");
-  expect(hooks.query).toHaveBeenCalledExactlyOnceWith(
-    "strategies.objectiveSavedReview",
-    {
-      params: { id: id(5) },
-      query: {
-        ...selected.query,
-        generationJobId: id(4),
-        strategyVersionId: id(6),
-      },
+  expect(hooks.query).toHaveBeenCalledWith("strategies.objectiveSavedReview", {
+    params: { id: id(5) },
+    query: {
+      ...selected.query,
+      generationJobId: id(4),
+      strategyVersionId: id(6),
     },
-  );
+  });
   expect(hooks.reload).not.toHaveBeenCalled();
 });
 it.each(["loading", "error", "wrong-job"])(
