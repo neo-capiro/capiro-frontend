@@ -255,7 +255,9 @@ export function WorkspaceScreen() {
           </button>
         ))}
       </div>
-      {view !== "shares" && <WorkflowCards onStart={navigate} />}
+      {view !== "shares" && (
+        <WorkflowCards clientId={clientId} onStart={navigate} />
+      )}
       {view === "documents" && (
         <DocumentsLibrary clientId={clientId} onOpen={openDocument} />
       )}
@@ -295,10 +297,18 @@ export function WorkspaceScreen() {
           <ActionButton
             onClick={() => {
               setNewDocument(false);
-              navigate("newsletter");
+              navigate(clientId ? "newsletter" : "rich-newsletter");
             }}
           >
             Newsletter
+          </ActionButton>
+          <ActionButton
+            onClick={() => {
+              setNewDocument(false);
+              navigate("newsletter");
+            }}
+          >
+            Newsletter template gallery
           </ActionButton>
           <ActionButton
             onClick={() => {

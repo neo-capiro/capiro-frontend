@@ -27,10 +27,16 @@ export function WritingTool({
   documentId,
   block,
   update,
+  presets,
+  proposalScope,
+  usageDescription = "Use text replaces this block’s text and formatting. You can Undo the change before saving.",
 }: {
   documentId: string;
   block: NewsletterBlock;
   update: (change: Partial<NewsletterBlock>) => void;
+  presets?: readonly { label: string; prompt: string }[];
+  proposalScope?: string;
+  usageDescription?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [source, setSource] = useState(block.text);
@@ -51,6 +57,7 @@ export function WritingTool({
       block.html,
       source,
       prompt,
+      proposalScope,
     ]),
   );
   const capability = capabilities.data?.ai;
@@ -66,7 +73,22 @@ export function WritingTool({
   };
   return (
     <>
-      <ActionButton onClick={() => setOpen(true)}>Write with AI</ActionButton>
+      {presets ? (
+        presets.map((preset) => (
+          <ActionButton
+            key={preset.label}
+            disabled={proposal.blocked}
+            onClick={() => {
+              setPrompt(preset.prompt);
+              setOpen(true);
+            }}
+          >
+            {preset.label}
+          </ActionButton>
+        ))
+      ) : (
+        <ActionButton onClick={() => setOpen(true)}>Write with AI</ActionButton>
+      )}
       <ProviderDialog
         open={open}
         close={close}
@@ -127,10 +149,7 @@ export function WritingTool({
                     readOnly
                   />
                 </Field>
-                <p>
-                  Use text replaces this block’s text and formatting. You can
-                  Undo the change before saving.
-                </p>
+                <p>{usageDescription}</p>
                 <ActionButton onClick={proposal.discard}>
                   Edit instructions
                 </ActionButton>

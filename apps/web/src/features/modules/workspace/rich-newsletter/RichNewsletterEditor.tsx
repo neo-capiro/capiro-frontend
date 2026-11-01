@@ -28,6 +28,7 @@ import { SavedSections } from "./library/SavedSections";
 import { SavedTemplates } from "./library/SavedTemplates";
 import { LibraryDialog, LibraryNotice } from "./library/LibraryDialog";
 import { changeStructure, type StructureAction } from "./content/structure";
+import { AIColumnPresets } from "./providers/AIColumnPresets";
 import { DesignStyles, SectionSettings } from "./content/DesignStyles";
 import contentStyles from "./content/content.module.css";
 import { useBrandKit } from "./brand/use-brand-kit";
@@ -260,6 +261,20 @@ export function RichNewsletterEditor({
               className={styles.draftEditor}
             >
               <div className={styles.toolbar}>
+                <AIColumnPresets
+                  key={`ai-columns:${ownerEpoch}`}
+                  documentId={
+                    history.current && !history.fence
+                      ? history.saved?.id
+                      : undefined
+                  }
+                  design={draft.design}
+                  proposalScope={JSON.stringify([
+                    history.editorRevision,
+                    draft,
+                  ])}
+                  change={structure}
+                />
                 <ActionButton onClick={brand.enter}>Brand Kit</ActionButton>
                 <ActionButton disabled={!history.saved} onClick={surveys.enter}>
                   Survey drafts
