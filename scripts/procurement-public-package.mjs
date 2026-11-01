@@ -85,9 +85,15 @@ export function verifyProcurementPackage({ baseBytes, archiveBytes, manifest, we
   return { status: 'VERIFIED_SOURCE_PACKAGE_COMPOSITION_ONLY', preservedMembers: base.size - changes.size, changedMembers: changes.size, addedMembers: additions.size, sourceCommit: manifest.source.commit, artifact: manifest.artifact.file };
 }
 
-function main(args) {
+async function main(args) {
   need(args.length === 0, 'no CLI arguments supported');
   const root = fileURLToPath(new URL('../', import.meta.url));
+  const active = JSON.parse(readFileSync(path.join(root, 'apps/web/package.json'))).dependencies['@capiro/shared'];
+  if (active.startsWith('file:../../vendor/capiro-shared-0.0.0-intake-')) {
+    const { checkStrategyIntakePackage } = await import('./strategy-intake-public-package.mjs');
+    console.log(JSON.stringify(checkStrategyIntakePackage()));
+    return;
+  }
   const manifest = JSON.parse(readFileSync(path.join(root, 'vendor/procurement-public-package.json')));
   const require = createRequire(path.join(root, 'package.json'));
   need(hash(readFileSync(require.resolve('typescript'))) === manifest.generator.typescriptSha256, 'TypeScript generator bytes');
@@ -104,5 +110,5 @@ function main(args) {
   console.log(JSON.stringify(result));
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  try { main(process.argv.slice(2)); } catch (error) { console.error(error.message); process.exitCode = 1; }
+  main(process.argv.slice(2)).catch(error => { console.error(error.message); process.exitCode = 1; });
 }

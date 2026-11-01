@@ -3,6 +3,8 @@ import { useEffect, useSyncExternalStore } from "react";
 import { Button } from "@capiro/ui/button";
 import type { BrowserViewerController } from "../../../shared/meri-browser/viewer-controller";
 import { ViewerSurface } from "./ViewerSurface";
+import ui from "../ui/meri-ui.module.css";
+import styles from "../conversation/live.module.css";
 
 export function BrowserViewer({
   controller,
@@ -19,6 +21,7 @@ export function BrowserViewer({
     current = state.current;
   return (
     <details
+      className={styles.runControls}
       onToggle={(event) => controller.setVisible(event.currentTarget.open)}
     >
       <summary>Browser control</summary>
@@ -44,7 +47,7 @@ export function BrowserViewer({
       )}
       <Button
         type="button"
-        variant="outline"
+        className={ui.outline}
         disabled={busy || state.status === "expired"}
         onClick={() => void controller.refresh()}
       >
@@ -54,6 +57,7 @@ export function BrowserViewer({
         state.status === "recovery") && (
         <Button
           type="button"
+          className={ui.primary}
           disabled={busy}
           onClick={() => void controller.takeControl()}
         >
@@ -66,7 +70,7 @@ export function BrowserViewer({
         <>
           <Button
             type="button"
-            variant="outline"
+            className={ui.outline}
             disabled={busy}
             onClick={() => void controller.release()}
           >
@@ -99,6 +103,7 @@ export function BrowserViewer({
           state.status === "recovery") && (
           <Button
             type="button"
+            className={ui.primary}
             disabled={busy || state.status === "expired"}
             onClick={() => void controller.resume()}
           >

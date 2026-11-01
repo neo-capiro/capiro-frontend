@@ -83,7 +83,9 @@ function ReadyStrategyIntake({
   const core = useApi();
   const cache = useQueryClient();
   const selectId = useId();
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedType, setSelectedType] = useState(
+    objective.strategyIntake?.type ?? "",
+  );
   const session = useMemo(() => {
     const selectedObjective = {
       clientId: objective.clientId,
@@ -175,21 +177,31 @@ function ReadyStrategyIntake({
           intake.
         </p>
       )}
-      <label htmlFor={selectId}>Strategy type</label>
-      <select
-        id={selectId}
-        className="input"
-        value={type}
-        disabled={disabled || state.busy || Boolean(retained)}
-        onChange={(event) => setSelectedType(event.target.value)}
-      >
-        <option value="">Choose a Strategy type</option>
-        {strategyTypes.map((value) => (
-          <option key={value} value={value}>
-            {value[0]!.toUpperCase() + value.slice(1)}
-          </option>
-        ))}
-      </select>
+      {!objective.strategyIntake && (
+        <>
+          <label htmlFor={selectId}>Strategy type</label>
+          <select
+            id={selectId}
+            className="input"
+            value={type}
+            disabled={disabled || state.busy || Boolean(retained)}
+            onChange={(event) => setSelectedType(event.target.value)}
+          >
+            <option value="">Choose a Strategy type</option>
+            {strategyTypes.map((value) => (
+              <option key={value} value={value}>
+                {value[0]!.toUpperCase() + value.slice(1)}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
+      {objective.strategyIntake && (
+        <p>
+          Strategy type: {objective.strategyIntake.type}. Your saved answers and
+          current client context will be used.
+        </p>
+      )}
       {retained?.accepted ? (
         <p role="status">
           {retained.started

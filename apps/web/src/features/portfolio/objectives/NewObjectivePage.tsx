@@ -17,10 +17,15 @@ import {
 import { useObjectiveEditorSession } from "./useObjectiveEditorSession";
 import styles from "./objective-intake.module.css";
 import readinessStyles from "./objectives.module.css";
+import type { Objective } from "./contracts";
 
-type Props = { clientId: string; onClose: () => void };
+type Props = {
+  clientId: string;
+  onClose: () => void;
+  onSaved?: (objective: Objective) => void;
+};
 
-export function NewObjectivePage({ clientId, onClose }: Props) {
+export function NewObjectivePage({ clientId, onClose, onSaved }: Props) {
   const query = useClient(clientId);
   if (
     query.isPending ||
@@ -44,22 +49,29 @@ export function NewObjectivePage({ clientId, onClose }: Props) {
     );
   }
   return (
-    <ObjectiveIntake key={clientId} client={query.data} onClose={onClose} />
+    <ObjectiveIntake
+      key={clientId}
+      client={query.data}
+      onClose={onClose}
+      onSaved={onSaved}
+    />
   );
 }
 
 function ObjectiveIntake({
   client,
   onClose,
+  onSaved,
 }: {
   client: Client;
   onClose: () => void;
+  onSaved?: (objective: Objective) => void;
 }) {
   const heading = useId();
   const cardHeading = useId();
   const session = useObjectiveEditorSession({
     clientId: client.id,
-    onSaved: onClose,
+    onSaved: onSaved ?? onClose,
   });
   return (
     <section className={`page ${styles.page}`} aria-labelledby={heading}>

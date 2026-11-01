@@ -330,3 +330,48 @@ test("observation labels display each admitted UTC timestamp independently of br
   await expect(references(page)).not.toContainText("Source updated");
   expect(fixture.unexpected).toEqual([]);
 });
+
+/** A Markdown table taller than Streamdown's default 300px table cap, followed by prose. */
+const tableAnswer = [
+  "| Item | Status | Next step |",
+  "| --- | --- | --- |",
+  ...Array.from(
+    { length: 12 },
+    (_, index) => `| Row ${index + 1} | Open | Review row ${index + 1} |`,
+  ),
+  "",
+  "Paragraph after the table.",
+].join("\n");
+
+test("a long table keeps its layout height so the next paragraph starts below it", async ({
+  page,
+}) => {
+  const fixture = await setupConversation(page);
+  const entries = [event(1, tableAnswer), status(2, "completed")];
+  const { native } = await installHistory(page, {
+    turns: [
+      turn(undefined, undefined, "Synthetic table question", 0, entries.length),
+    ],
+    events: entries.map((item) => ({
+      sequence: item.sequence,
+      event: item as UIEvent,
+    })),
+  });
+  await installCurrentRun(page, native);
+  await page.goto(selectedUrl);
+  const paragraph = page.getByText("Paragraph after the table.", {
+    exact: true,
+  });
+  await expect(paragraph).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
+  const table = page
+    .getByRole("article", { name: "Current turn" })
+    .locator("table");
+  await expect(table.locator("tbody tr")).toHaveCount(12);
+  const tableBox = (await table.boundingBox())!;
+  const paragraphBox = (await paragraph.boundingBox())!;
+  expect(tableBox.height).toBeGreaterThan(300);
+  // The paragraph flows after the table instead of being drawn over its last rows.
+  expect(paragraphBox.y).toBeGreaterThanOrEqual(tableBox.y + tableBox.height);
+  expect(fixture.unexpected).toEqual([]);
+});

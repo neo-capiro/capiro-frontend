@@ -1,5 +1,28 @@
 # Public backend package inputs
 
+## Active web Strategy intake distribution
+
+The web workspace now pins `capiro-shared-0.0.0-intake-20d1482b-caf21b735806.tgz`.
+`strategy-intake-public-package.json` records its exact bytes and composition from
+the prior procurement artifact. The standalone browser-safe `strategy-intake.ts`
+is copied exactly from Core commit `20d1482b90a700de87484cd6dce1d5ef5df99d51`
+and strictly compiled with TypeScript 5.9.3, including declarations. Its public
+`@capiro/shared/strategy-intake` export and `typesVersions` match that producer.
+All 291 other predecessor entries remain byte-identical; the package manifest
+adds only this subpath, and three source/runtime/declaration files are added.
+This composed artifact is not a full distribution of the Core commit.
+
+The existing procurement verifier remains authoritative for the historical
+predecessor. The active check verifies that chain, the new emission, every
+installed entry, and the web manifest plus nested lock binding. Root/newsletter
+Shared pins retain their existing separate distribution. Run
+`node scripts/strategy-intake-public-package.mjs` after installation and
+`node --test scripts/strategy-intake-public-package.test.mjs scripts/procurement-public-package.test.mjs`.
+The active verifier also runs through `npm run check:packages` and the previous
+procurement CLI. Packed CJS/ESM imports, NodeNext/Bundler declarations and the
+Objective consumer tests qualify this source binding. Product builds, browser,
+provider, database and deployed acceptance remain separate gates.
+
 These immutable npm artifacts come from deliberate public exports in the separate Meri backend. `meri-public-packages.json` binds producing commits, regular-entry counts, exact bytes and SHA256. They contain no credentials or private source data. Do not point a frontend dependency at a backend checkout, copy an editable schema/DTO or fetch an unpinned replacement from a private registry.
 
 The0.1.0 distributions passed distinct independent source and packed-consumer review and are accepted for this offline migration. [Owner acceptance](../docs/coordination/CODEX-FRONTEND-MIGRATION-ACCEPTANCE.md) records the scope and review bindings. Updating them requires a reviewed producing commit, actual pack/entry/consumer verification and explicit metadata/lock updates. Wire contracts remain backend-owned. Existing0.1.0 schema bytes are unchanged; this work adds public distribution and trusted stream packaging, not new wire fields.
