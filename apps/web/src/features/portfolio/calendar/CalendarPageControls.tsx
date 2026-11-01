@@ -430,14 +430,6 @@ export function AgendaFilters({ state }: { state: CalendarPageState }) {
           {kind.slice(1)}
         </button>
       ))}
-      {mixed && (
-        <span
-          className="chip"
-          title="Forecast dates do not have a published source contract"
-        >
-          Government forecasts unavailable
-        </span>
-      )}
       <button
         className="button ghost"
         onClick={() => {

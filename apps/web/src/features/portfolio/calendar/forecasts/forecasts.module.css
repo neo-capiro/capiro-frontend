@@ -1,0 +1,97 @@
+.panel {
+  border: 1px solid var(--line, #d8dde5);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  background: var(--surface, #fff);
+  color: var(--text, #182234);
+}
+.panel h2 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+.panel p {
+  margin: 8px 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.filters,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin: 16px 0;
+}
+.filters label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.875rem;
+}
+.filters input[type="date"] {
+  border: 1px solid var(--line, #d8dde5);
+  padding: 6px;
+  border-radius: 6px;
+  background: inherit;
+  color: inherit;
+}
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  display: grid;
+  gap: 16px;
+}
+.entry {
+  border-top: 1px solid var(--line, #d8dde5);
+  padding-top: 16px;
+}
+.entry h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+.period {
+  font-weight: 600;
+}
+.facts {
+  display: grid;
+  grid-template-columns: minmax(100px, 160px) minmax(0, 1fr);
+  gap: 6px 12px;
+  font-size: 0.8rem;
+}
+.facts dt {
+  font-weight: 600;
+}
+.facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.history {
+  border-inline-start: 3px solid var(--line, #d8dde5);
+  padding-inline-start: 16px;
+  margin-top: 16px;
+}
+.revision {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line, #d8dde5);
+}
+.revision h5 {
+  font-size: 0.9rem;
+  margin: 8px 0;
+}
+.warning {
+  color: var(--text-warning, #795208);
+}
+@media (max-width: 600px) {
+  .facts {
+    grid-template-columns: 1fr;
+  }
+  .facts dd {
+    margin-bottom: 6px;
+  }
+  .panel {
+    padding: 12px;
+  }
+}
