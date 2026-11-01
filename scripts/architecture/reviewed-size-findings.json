@@ -7152,19 +7152,19 @@
     "file": "apps/web/src/shared/meri-uploads/upload-controller.ts",
     "kind": "function",
     "symbol": "createUploadController",
-    "fingerprint": "8191d6f6593565d12a0bbd846e7925ab0aba62e33a83f0b89d26a025028c85e1",
-    "reason": "One conversation's composer attachment state machine and retained selection. The existing wire still owns protocol admission/transport and the ledger owns receipts. The optional onStarted callback exposes only the controller-generated request ID before dispatch. One cancellable attempt now spans declaration and original storage, fixing two demonstrated notification-boundary races; storeOriginal names that cohesive procedure without another writer or retry path. Author assessment and remaining acceptance: docs/selected-tab-20261029/IMPLEMENTATION.md.",
-    "reviewedBy": "Codex implementation assessment; no independent review performed (user hold)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "c770934953c5a6cf4d7c1b89b9e2105bc28dd027ccbc197cd89e08a8f2e7946c",
+    "reason": "Independent exact-source responsibility review of the 414-line controller body, reusing accepted393/395 design evidence. This is one conversation attachment state machine: its nested operations share the same currentness predicate, attempt cancellation map, receipt ledger, selected-source set and observer lifetime. Startup restores only scoped request locators; explicit Check resolves current service custody without redispatching unknown writes. Add, cancel, remove and local pre-dispatch cleanup keep that same attempt identity and never manufacture authority. Storage mechanics, transport deadlines and canonical receivers are already delegated to separate owners. Splitting these related transitions solely for line count would distribute their shared lifetime without removing an unrelated responsibility. Full body reviewed; exact fingerprint only, with re-review on change.",
+    "reviewedBy": "Codex independent Office cohort reviewer /root/office_cohort_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/shared/meri-uploads/upload-wire.ts",
     "kind": "function",
     "symbol": "createUploadWire",
-    "fingerprint": "727033615062f63f2260ab6d5cbfb64be03ffce7ea56ad660ea397026bc02027",
-    "reason": "One transport concern for the uploads wire: canonical request admission, one attempted command per operation, bounded bytes and deadlines, and response admission through the canonical public receivers. It holds no UI state and no custody or deletion authority.",
-    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "83b643412356f58ff62fd2a34c2c9f9ea962f766fee01dad95e3d10b89d4fbb6",
+    "reason": "Independent exact-source responsibility review of the 233-line wire factory, reusing accepted393/395 source evidence. Its closures own one session credential lifetime, active-operation count, bounded request dispatch and response admission for the existing upload routes. Canonical public receivers validate request, original bytes and responses; the wire introduces no UI state, durable locator ownership or custody decision. The accepted F1 neverDispatched observation is derived only from the local fetch boundary and cannot be supplied by a server response. Known and unknown operation outcomes remain explicit, with no retry loop. The common deadline and credential cleanup belong together; full factory reviewed and no unrelated responsibility found. Exact fingerprint only; re-review on change.",
+    "reviewedBy": "Codex independent Office cohort reviewer /root/office_cohort_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/shared/meri-uploads/proxy.ts",
@@ -7703,6 +7703,15 @@
     "fingerprint": "3acd87aa27df0b0da7dd864816eca938e7a25bd6208cd2cc0c21dd61211aef34",
     "reason": "One 84-line adapter binds the existing encrypted recovery journal to one actor/tenant/Objective-version consent scope. It centralizes immutable request/origin/receipt validation, current-source guard, shared command lock and explicit acknowledgement only after rereading the exact original receipt. No new ledger or storage mechanism is introduced. Keeping reserve/save/acknowledge together makes replacement and unknown-outcome refusal auditable. Independently reviewed final44cb0c9c alongside the actual journal owner and58 focused lifecycle/recovery checks.",
     "reviewedBy": "Independent Codex /root/operational_links; not Automation author",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/shared/meri-uploads/upload-controller.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "7c39c9bb62f08edacd084b3edfbaf925aaa6f24a1d58190d47ccb9756bfc6d99",
+    "reason": "Independent exact-source responsibility review of the 502-line accepted upload-recovery module. This file defines the composer attachment observations and the single controller that owns their attempt lifetime, retained receipt selection, currentness fencing and explicit recovery transitions. Durable locator storage remains in upload-attempt-storage; canonical transport and public admission remain in upload-wire/facade; the service retains custody and authorization. The accepted F1 cleanup only retires a scoped locator when local dispatch evidence proves no effect was attempted, while uncertain operations remain status-only reconciliation. No additional lifecycle owner or unrelated responsibility was added. Full module read and unchanged393/395 independent design evidence support retaining this boundary. Exact fingerprint only; re-review on source or responsibility change.",
+    "reviewedBy": "Codex independent Office cohort reviewer /root/office_cohort_review",
     "reviewedOn": "2026-11-01"
   }
 ]
