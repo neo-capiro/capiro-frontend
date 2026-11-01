@@ -195,6 +195,24 @@ test("the default General scope lands on the same quiet hero with its own picker
   await page.screenshot({ path: shot("desktop-general.png") });
 });
 
+test("a 1046px window collapses the chat rail's New conversation to its icon tile", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1046, height: 1001 });
+  await healthy(page);
+  await page.goto(`/meri?clientId=${clientId}`);
+  await shellReady(page);
+  const control = page
+    .getByRole("complementary", { name: "Meri navigation" })
+    .getByRole("button", { name: "New conversation", exact: true });
+  await expect(control).toBeVisible();
+  const box = (await control.boundingBox())!;
+  // The label stays the accessible name but takes no space: a 40px tile, never a column of letters.
+  expect(box.width).toBeLessThanOrEqual(48);
+  expect(box.height).toBeLessThanOrEqual(48);
+  await expect(control).toHaveCSS("font-size", "0px");
+});
+
 test("desktop tools: keyboard open, workspace links, skill chip and Escape focus", async ({
   page,
 }) => {

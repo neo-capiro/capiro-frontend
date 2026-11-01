@@ -2,6 +2,7 @@ import { afterEach, expect, it, vi } from "vitest";
 import { createElement, type ComponentProps } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { SessionComposer } from "../src/features/meri/conversation/ConversationView";
+import { sendBlockedReason } from "../src/features/meri/MeriComposer";
 import {
   createConversationComposer,
   useLiveComposer,
@@ -15,6 +16,11 @@ const harness = vi.hoisted(() => ({
         typeof import("@capiro/ui/prompt-input").PromptInput
       >["onSubmit"]
     | undefined,
+  keyDown: undefined as
+    | ComponentProps<
+        typeof import("@capiro/ui/prompt-input").PromptInputTextarea
+      >["onKeyDown"]
+    | undefined,
   effects: [] as Array<() => void | (() => void)>,
 }));
 vi.mock("@capiro/ui/prompt-input", async (original) => {
@@ -24,6 +30,12 @@ vi.mock("@capiro/ui/prompt-input", async (original) => {
     PromptInput: (props: ComponentProps<typeof actual.PromptInput>) => {
       harness.submit = props.onSubmit;
       return createElement(actual.PromptInput, props);
+    },
+    PromptInputTextarea: (
+      props: ComponentProps<typeof actual.PromptInputTextarea>,
+    ) => {
+      harness.keyDown = props.onKeyDown;
+      return createElement(actual.PromptInputTextarea, props);
     },
   };
 });
@@ -35,8 +47,19 @@ vi.mock("react", async (original) => ({
 }));
 afterEach(() => {
   harness.submit = undefined;
+  harness.keyDown = undefined;
   harness.effects = [];
 });
+const enter = () => {
+  const preventDefault = vi.fn();
+  harness.keyDown!({
+    key: "Enter",
+    shiftKey: false,
+    nativeEvent: { isComposing: false, keyCode: 13 },
+    preventDefault,
+  } as never);
+  return preventDefault;
+};
 
 type Session = ComponentProps<typeof SessionComposer>["session"];
 const context = {
@@ -64,6 +87,7 @@ function session(current?: MeriConversationPort): Session {
     draft: "Typed during connection",
     setDraft: vi.fn(),
     textarea: { current: null },
+    initialDraft: { pendingDraft: () => null },
     skillSelection: {},
     setSkillSelection: vi.fn(),
     continuation: {
@@ -115,8 +139,65 @@ it("connecting and unpublished ready views preserve the draft and refuse even an
     expect(html).toContain("Connecting to Meri.");
     explicitSend();
     expect(value.setDraft).not.toHaveBeenCalled();
+    // Enter never reaches the form (whose reset would drop the draft) while sending is blocked.
+    expect(enter()).toHaveBeenCalledOnce();
   }
   expect(channel.read()).toBeNull();
+});
+
+it("names the reason Enter is refused, in the person's words, and none once sending is possible", () => {
+  const live = { ...controls(), sendBlocked: undefined };
+  expect(sendBlockedReason(undefined, false, "Typed")).toContain(
+    "disconnected fixture",
+  );
+  expect(
+    sendBlockedReason(
+      { ...live, sendBlocked: "Connecting to Meri." },
+      false,
+      "Typed",
+    ),
+  ).toBe("Connecting to Meri.");
+  expect(
+    sendBlockedReason(
+      { ...live, draftBlocked: "Choose a conversation first." },
+      false,
+      "Typed",
+    ),
+  ).toBe("Choose a conversation first.");
+  expect(sendBlockedReason(live, true, "Typed")).toBe(
+    "A run is in progress. Use Stop to request cancellation; your draft stays editable.",
+  );
+  expect(sendBlockedReason(live, false, "   ")).toBe("Type a message to send.");
+  expect(sendBlockedReason(live, false, "Typed")).toBeUndefined();
+  expect(
+    sendBlockedReason(
+      { ...live, notice: "Retry it above.", sendBlocked: "Uncertain." },
+      false,
+      "Typed",
+    ),
+  ).toBe("Retry it above.");
+});
+
+it("a retained request shows its notice in place of the key hint, visibly, while Send stays closed", () => {
+  const channel = createConversationComposer();
+  const current = port();
+  channel.publish({
+    port: current,
+    controls: {
+      ...controls(),
+      sendBlocked: "Delivery of your last request is uncertain.",
+      notice:
+        "Your last request is still unconfirmed. Retry it above before sending another.",
+    },
+    running: false,
+  });
+  const html = render(channel, session(current));
+  expect(sendButton(html)).toMatch(/\sdisabled(?:=|\s|>)/i);
+  expect(html).toContain(
+    "Your last request is still unconfirmed. Retry it above before sending another.",
+  );
+  expect(html).not.toContain("Enter to send");
+  expect(enter()).toHaveBeenCalledOnce();
 });
 
 it("only the exact current port's committed controls allow an explicit send, never rendering alone", () => {
@@ -128,6 +209,8 @@ it("only the exact current port's committed controls allow an explicit send, nev
   expect(sendButton(html)).not.toMatch(/\sdisabled(?:=|\s|>)/i);
   expect(html).toContain("Typed during connection</textarea>");
   expect(handlers.onSend).not.toHaveBeenCalled();
+  // With sending possible, Enter is left to the form, which submits it.
+  expect(enter()).not.toHaveBeenCalled();
   explicitSend();
   expect(handlers.onSend).toHaveBeenCalledOnce();
   expect(handlers.onStop).not.toHaveBeenCalled();

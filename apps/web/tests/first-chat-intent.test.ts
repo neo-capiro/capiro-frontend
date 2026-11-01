@@ -1,9 +1,8 @@
 import { expect, it } from "vitest";
 import {
-  beginNewChatIntent,
   confirmFirstChatIntent,
-  FirstChatIntentPendingError,
   FirstChatIntentStorageError,
+  markFirstChatIntentUsed,
   readFirstChatIntent,
   reserveFirstChatIntent,
   type FirstChatScope,
@@ -45,7 +44,7 @@ it("persists one first-chat request identity before retrying after a lost respon
   ).toEqual(first);
 });
 
-it("reuses a confirmed intent until explicit New Chat, then persists a different request", () => {
+it("reopens a confirmed conversation until it is used, then the next opening is a new request", () => {
   const storage = memoryStorage();
   reserveFirstChatIntent(scope, storage, () => requestA);
   const confirmed = confirmFirstChatIntent(
@@ -60,26 +59,56 @@ it("reuses a confirmed intent until explicit New Chat, then persists a different
     requestId: requestA,
     conversationId: conversationA,
   });
-  expect(reserveFirstChatIntent(scope, storage, () => requestB)).toEqual(
-    confirmed,
-  );
   expect(
     confirmFirstChatIntent(scope, requestA, conversationA, storage),
   ).toEqual(confirmed);
-  expect(beginNewChatIntent(scope, storage, () => requestB)).toMatchObject({
+  // Reload, a second visit or New conversation while it is still empty: the same conversation.
+  expect(reserveFirstChatIntent(scope, storage, () => requestB)).toEqual(
+    confirmed,
+  );
+  markFirstChatIntentUsed(
+    scope,
+    "dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+    storage,
+  );
+  expect(reserveFirstChatIntent(scope, storage, () => requestB)).toEqual(
+    confirmed,
+  );
+  markFirstChatIntentUsed(scope, conversationA, storage);
+  expect(readFirstChatIntent(scope, storage)).toEqual({
+    ...confirmed,
+    used: true,
+  });
+  expect(reserveFirstChatIntent(scope, storage, () => requestB)).toMatchObject({
     state: "pending",
     requestId: requestB,
   });
   expect(readFirstChatIntent(scope, storage)?.requestId).toBe(requestB);
 });
 
+it("marking a pending or absent intent used changes nothing and never throws", () => {
+  const storage = memoryStorage();
+  markFirstChatIntentUsed(scope, conversationA, storage);
+  expect(storage.entries.size).toBe(0);
+  reserveFirstChatIntent(scope, storage, () => requestA);
+  markFirstChatIntentUsed(scope, conversationA, storage);
+  expect(readFirstChatIntent(scope, storage)?.state).toBe("pending");
+  markFirstChatIntentUsed(scope, conversationA, {
+    getItem: () => {
+      throw new Error("storage denied");
+    },
+    setItem: () => undefined,
+  });
+});
+
 it("holds an unresolved request instead of silently rotating its identity", () => {
   const storage = memoryStorage();
   reserveFirstChatIntent(scope, storage, () => requestA);
 
-  expect(() => beginNewChatIntent(scope, storage, () => requestB)).toThrow(
-    FirstChatIntentPendingError,
-  );
+  expect(reserveFirstChatIntent(scope, storage, () => requestB)).toMatchObject({
+    state: "pending",
+    requestId: requestA,
+  });
   expect(readFirstChatIntent(scope, storage)?.requestId).toBe(requestA);
 });
 

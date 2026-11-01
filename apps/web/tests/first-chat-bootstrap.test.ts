@@ -1,9 +1,9 @@
 import { expect, it, vi } from "vitest";
+import { resolveFirstChatConversation } from "../src/shared/meri-conversations/first-chat-bootstrap";
 import {
-  canBeginNewChatAfterConflict,
-  resolveFirstChatConversation,
-} from "../src/shared/meri-conversations/first-chat-bootstrap";
-import { readFirstChatIntent } from "../src/shared/meri-conversations/first-chat-intent";
+  markFirstChatIntentUsed,
+  readFirstChatIntent,
+} from "../src/shared/meri-conversations/first-chat-intent";
 import { CapiroApiError } from "../src/shared/capiro/http";
 
 const scope = {
@@ -99,7 +99,81 @@ it("leaves a lost response pending and replays the same ID on retry", async () =
   expect(replay.mock.calls[0]![0]).toMatchObject({ requestId });
 });
 
-it("rechecks a stored confirmation with Core and refuses a changed conversation", async () => {
+it("reopens an empty confirmed conversation through Core, and starts a new one once it is used or Core refuses it", async () => {
+  const storage = memoryStorage();
+  const open = (
+    createOrReuse: (body: unknown) => Promise<unknown>,
+    issueId: () => string,
+  ) =>
+    resolveFirstChatConversation({
+      scope,
+      storage,
+      signal: new AbortController().signal,
+      createOrReuse,
+      issueId,
+    });
+  await open(
+    async () => receipt,
+    () => requestId,
+  );
+
+  // Reload or a second visit before any message: the same request replays to the same conversation.
+  const replay = vi.fn(async (body: unknown) => {
+    expect(body).toMatchObject({ requestId });
+    return receipt;
+  });
+  expect(
+    await open(replay, () => {
+      throw new Error("A reopen cannot mint a new UUID");
+    }),
+  ).toEqual({
+    conversationId,
+    clientId: scope.clientId,
+  });
+  expect(replay).toHaveBeenCalledOnce();
+
+  // After its first message the scope opens a new conversation.
+  markFirstChatIntentUsed(scope, conversationId, storage);
+  const nextRequest = "88888888-8888-4888-8888-888888888888";
+  const nextConversation = "66666666-6666-4666-8666-666666666666";
+  const create = vi.fn(async (body: unknown) => {
+    expect(body).toMatchObject({ requestId: nextRequest });
+    return {
+      ...receipt,
+      requestId: nextRequest,
+      conversationId: nextConversation,
+    };
+  });
+  expect(await open(create, () => nextRequest)).toEqual({
+    conversationId: nextConversation,
+    clientId: scope.clientId,
+  });
+  expect(create).toHaveBeenCalledOnce();
+  expect(readFirstChatIntent(scope, storage)).toMatchObject({
+    state: "confirmed",
+    requestId: nextRequest,
+    conversationId: nextConversation,
+  });
+
+  // Core refusing the reopen (409) supersedes the stored conversation with a new request.
+  const thirdRequest = "99999999-9999-4999-8999-999999999999";
+  const refusedThenCreated = vi.fn(async (body: { requestId: string }) => {
+    if (body.requestId === nextRequest)
+      throw new CapiroApiError(409, "The record changed.");
+    return { ...receipt, requestId: thirdRequest, conversationId };
+  });
+  expect(await open(refusedThenCreated as never, () => thirdRequest)).toEqual({
+    conversationId,
+    clientId: scope.clientId,
+  });
+  expect(refusedThenCreated).toHaveBeenCalledTimes(2);
+  expect(readFirstChatIntent(scope, storage)).toMatchObject({
+    state: "confirmed",
+    requestId: thirdRequest,
+  });
+});
+
+it("a deleted empty conversation (404 on reopen) is replaced by a fresh request", async () => {
   const storage = memoryStorage();
   await resolveFirstChatConversation({
     scope,
@@ -108,21 +182,71 @@ it("rechecks a stored confirmation with Core and refuses a changed conversation"
     createOrReuse: async () => receipt,
     issueId: () => requestId,
   });
+  const nextRequest = "88888888-8888-4888-8888-888888888888";
+  const nextConversation = "66666666-6666-4666-8666-666666666666";
+  const gone = vi.fn(async (body: { requestId: string }) => {
+    if (body.requestId === requestId)
+      throw new CapiroApiError(404, "Conversation not found.");
+    return {
+      ...receipt,
+      requestId: nextRequest,
+      conversationId: nextConversation,
+    };
+  });
+  expect(
+    await resolveFirstChatConversation({
+      scope,
+      storage,
+      signal: new AbortController().signal,
+      createOrReuse: gone as never,
+      issueId: () => nextRequest,
+    }),
+  ).toEqual({ conversationId: nextConversation, clientId: scope.clientId });
+  expect(gone).toHaveBeenCalledTimes(2);
+  expect(readFirstChatIntent(scope, storage)).toMatchObject({
+    state: "confirmed",
+    requestId: nextRequest,
+    conversationId: nextConversation,
+  });
+});
 
+it("a refused reopen is retried exactly once, and a storage that cannot record the fresh request stops it there", async () => {
+  const entries = new Map<string, string>();
+  let writable = true;
+  const storage = {
+    getItem: (key: string) => entries.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      if (!writable) throw new Error("storage denied");
+      entries.set(key, value);
+    },
+  };
+  await resolveFirstChatConversation({
+    scope,
+    storage,
+    signal: new AbortController().signal,
+    createOrReuse: async () => receipt,
+    issueId: () => requestId,
+  });
+  writable = false;
+  const refuse = vi.fn(async () => {
+    throw new CapiroApiError(409, "The record changed.");
+  });
   await expect(
     resolveFirstChatConversation({
       scope,
       storage,
       signal: new AbortController().signal,
-      createOrReuse: async () => ({
-        ...receipt,
-        conversationId: "66666666-6666-4666-8666-666666666666",
-      }),
+      createOrReuse: refuse,
+      issueId: () => "88888888-8888-4888-8888-888888888888",
     }),
-  ).rejects.toThrow();
+  ).rejects.toThrow(
+    "Conversation request identity could not be safely recovered.",
+  );
+  // One reopen, never a loop back to the same confirmed record.
+  expect(refuse).toHaveBeenCalledOnce();
   expect(readFirstChatIntent(scope, storage)).toMatchObject({
     state: "confirmed",
-    conversationId,
+    requestId,
   });
 });
 
@@ -154,56 +278,6 @@ it("holds a foreign receipt or invalid native account before Meri can connect", 
   expect(createOrReuse).not.toHaveBeenCalled();
 });
 
-it("offers explicit New Chat only after a confirmed Core 409", async () => {
-  const storage = memoryStorage();
-  const conflict = new CapiroApiError(409, "The record changed.");
-  expect(canBeginNewChatAfterConflict(conflict, scope, () => storage)).toBe(
-    false,
-  );
-  const pending = resolveFirstChatConversation({
-    scope,
-    storage,
-    signal: new AbortController().signal,
-    createOrReuse: async () => {
-      throw conflict;
-    },
-    issueId: () => requestId,
-  });
-  await expect(pending).rejects.toBe(conflict);
-  expect(canBeginNewChatAfterConflict(conflict, scope, () => storage)).toBe(
-    false,
-  );
-  await resolveFirstChatConversation({
-    scope,
-    storage,
-    signal: new AbortController().signal,
-    createOrReuse: async () => receipt,
-  });
-  expect(canBeginNewChatAfterConflict(conflict, scope, () => storage)).toBe(
-    true,
-  );
-  expect(
-    canBeginNewChatAfterConflict(
-      new CapiroApiError(503, "Unavailable"),
-      scope,
-      () => storage,
-    ),
-  ).toBe(false);
-  expect(
-    canBeginNewChatAfterConflict(conflict, scope, () => ({
-      getItem: () => {
-        throw new Error("storage denied");
-      },
-      setItem: () => undefined,
-    })),
-  ).toBe(false);
-  expect(
-    canBeginNewChatAfterConflict(conflict, scope, () => {
-      throw new Error("sessionStorage getter denied");
-    }),
-  ).toBe(false);
-});
-
 for (const clientId of [
   scope.clientId,
   "66666666-6666-4666-8666-666666666666",
@@ -230,7 +304,7 @@ for (const clientId of [
     },
   );
   it.each([401, 403])(
-    `rechecks revoked client ${clientId} on stored replay: %s`,
+    `a revoked client ${clientId} is refused on reopen and once more on the fresh request: %s`,
     async (status) => {
       const current = { ...scope, clientId };
       const storage = memoryStorage();
@@ -242,7 +316,8 @@ for (const clientId of [
         createOrReuse: async () => ({ ...receipt, ...current }),
       });
       const denied = new CapiroApiError(status, "Access denied.");
-      const replay = vi.fn(async () => {
+      const nextRequest = "88888888-8888-4888-8888-888888888888";
+      const replay = vi.fn(async (_body: unknown) => {
         throw denied;
       });
       await expect(
@@ -251,14 +326,16 @@ for (const clientId of [
           storage,
           signal: new AbortController().signal,
           createOrReuse: replay,
+          issueId: () => nextRequest,
         }),
       ).rejects.toBe(denied);
-      expect(replay).toHaveBeenCalledExactlyOnceWith(
+      expect(replay.mock.calls.map(([body]) => body)).toEqual([
         { schemaVersion: 1, requestId, clientId },
-        expect.any(AbortSignal),
-      );
+        { schemaVersion: 1, requestId: nextRequest, clientId },
+      ]);
       expect(readFirstChatIntent(current, storage)).toMatchObject({
-        conversationId,
+        state: "pending",
+        requestId: nextRequest,
       });
     },
   );

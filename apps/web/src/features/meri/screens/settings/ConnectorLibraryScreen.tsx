@@ -202,6 +202,7 @@ export function ConnectorLibraryScreen({
           {view.state === "ready"
             ? view.connected.rows.map((row) => (
                 <div key={row.id} className={ui.row}>
+                  <span className={styles.connectionName}>{row.service}</span>
                   {row.authType === "oauth" ? (
                     <button
                       type="button"
@@ -224,9 +225,15 @@ export function ConnectorLibraryScreen({
                       ? "Revoke authorization"
                       : "Remove connection"}
                   </button>
-                  {row.detail ? (
+                  {row.problem ? (
                     <span className={styles.connectionStatus}>
-                      {row.detail}
+                      {row.problem.summary}
+                      {row.problem.technical && (
+                        <details className={styles.connectionDetail}>
+                          <summary>Details</summary>
+                          <code>{row.problem.technical}</code>
+                        </details>
+                      )}
                     </span>
                   ) : null}
                 </div>

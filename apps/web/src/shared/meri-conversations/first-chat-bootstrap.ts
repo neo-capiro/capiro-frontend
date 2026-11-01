@@ -9,8 +9,8 @@ import {
 } from "../capiro/operations/meri-first-chat";
 import {
   confirmFirstChatIntent,
-  readFirstChatIntent,
   reserveFirstChatIntent,
+  supersedeFirstChatIntent,
   type FirstChatScope,
   firstChatScope,
 } from "./first-chat-intent";
@@ -18,28 +18,12 @@ import { CapiroApiError } from "../capiro/http";
 
 type IntentStorage = Pick<Storage, "getItem" | "setItem">;
 
-/** A resolved request may be rotated by the user after Core refuses its replay. */
-export function canBeginNewChatAfterConflict(
-  error: unknown,
-  scope: FirstChatScope,
-  storage: () => IntentStorage,
-): boolean {
-  if (!(error instanceof CapiroApiError) || error.status !== 409) return false;
-  try {
-    return readFirstChatIntent(scope, storage())?.state === "confirmed";
-  } catch {
-    return false;
-  }
-}
-
-/** Unmounted resolver: a Core replay must verify even a browser-stored confirmed intent. */
-export async function resolveFirstChatConversation({
-  scope,
-  storage,
-  signal,
-  createOrReuse,
-  issueId,
-}: {
+/**
+ * Unmounted resolver. An unknown-outcome request is replayed, an empty confirmed conversation is
+ * reopened through Core (which rechecks access and refuses a changed record with 409, after which
+ * the scope gets a new request), and anything else is a new conversation.
+ */
+export async function resolveFirstChatConversation(options: {
   scope: FirstChatScope;
   storage: IntentStorage;
   signal: AbortSignal;
@@ -49,9 +33,43 @@ export async function resolveFirstChatConversation({
   ) => Promise<unknown>;
   issueId?: () => string;
 }): Promise<{ conversationId: string; clientId: string | null }> {
+  const { scope, storage, signal, issueId } = options;
   signal.throwIfAborted();
   const current = firstChatScope.parse(scope);
   const intent = reserveFirstChatIntent(current, storage, issueId);
+  if (intent.state === "confirmed")
+    try {
+      return await openFirstChat(current, intent, options);
+    } catch (error) {
+      // Core refused to reopen the stored conversation (changed, deleted, no longer permitted):
+      // the stored record is replaced by one fresh request, which is tried exactly once.
+      if (
+        !(error instanceof CapiroApiError) ||
+        error.status < 400 ||
+        error.status >= 500
+      )
+        throw error;
+      return openFirstChat(
+        current,
+        supersedeFirstChatIntent(current, storage, issueId),
+        options,
+      );
+    }
+  return openFirstChat(current, intent, options);
+}
+
+async function openFirstChat(
+  current: FirstChatScope,
+  intent: { requestId: string },
+  {
+    storage,
+    signal,
+    createOrReuse,
+  }: Pick<
+    Parameters<typeof resolveFirstChatConversation>[0],
+    "storage" | "signal" | "createOrReuse"
+  >,
+): Promise<{ conversationId: string; clientId: string | null }> {
   if (current.clientId === null) {
     const body = firstChatV2Request.parse({
       schemaVersion: 2,

@@ -8,6 +8,7 @@ import { Notice } from "../ui/Notice";
 import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import { runStateLabels } from "../workspace/workspace-view";
 import { isTerminal, type TurnView } from "./conversation-view";
+import { describeRunFailure } from "./run-failure";
 import { useIntentApprovalsEnabled } from "./intents/approvals-enabled";
 import answer from "../cited-answer.module.css";
 import styles from "./live.module.css";
@@ -114,9 +115,11 @@ export function ConversationTurn({
   );
 }
 
-/** Approval requests, run errors and the service reason code for a failed run. */
+/** Approval requests, run errors and why a failed run stopped. */
 function TurnNotices({ turn }: { turn: TurnView }) {
   const approvals = useIntentApprovalsEnabled();
+  const failure =
+    turn.runState === "failed" ? describeRunFailure(turn.reasonCode) : null;
   return (
     <>
       {turn.approvals.map((approval) => (
@@ -148,8 +151,11 @@ function TurnNotices({ turn }: { turn: TurnView }) {
           </p>
         </Notice>
       ))}
-      {turn.reasonCode && turn.runState === "failed" && (
-        <p className={styles.muted}>Service reason: {turn.reasonCode}</p>
+      {failure && (
+        <p className={styles.muted}>
+          {failure.message}
+          {failure.code && <small> {failure.code}</small>}
+        </p>
       )}
     </>
   );
