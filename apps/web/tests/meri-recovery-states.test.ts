@@ -12,6 +12,7 @@ import {
 } from "../src/features/meri/conversation/control-reachability";
 import { sessionHistoryState } from "../src/features/meri/conversation/saved-turns";
 import {
+  ACCESS_RECHECK_COOLDOWN_MS,
   ACCESS_RECHECK_MS,
   createAccessRecheck,
 } from "../src/features/meri/conversation/access-recheck";
@@ -213,20 +214,28 @@ it("access loss rechecks itself exactly once per episode and then waits for the 
   expect(run).not.toHaveBeenCalled();
   expect(newer).toHaveBeenCalledOnce();
   expect(recheck.pending()).toBe(false);
-  vi.advanceTimersByTime(60_000);
   recheck.observe(true, newer);
   expect(newer).toHaveBeenCalledOnce();
   expect(recheck.pending()).toBe(false);
-  // Regained access ends the episode; the next loss gets its own single automatic recheck.
+  // The recheck reissues a session: access looks regained for a moment, then the same refusal
+  // returns. Inside the cooldown that flapping schedules nothing; the person's button remains.
+  recheck.observe(false, newer);
+  recheck.observe(true, newer);
+  expect(recheck.pending()).toBe(false);
+  vi.advanceTimersByTime(ACCESS_RECHECK_COOLDOWN_MS);
+  expect(newer).toHaveBeenCalledOnce();
+  // After the cooldown a new loss gets its own single automatic recheck.
   recheck.observe(false, newer);
   recheck.observe(true, newer);
   expect(recheck.pending()).toBe(true);
   vi.advanceTimersByTime(ACCESS_RECHECK_MS);
   expect(newer).toHaveBeenCalledTimes(2);
-  expect(pending).toEqual([true, false, false, true, false]);
+  expect(pending).toEqual([true, false, true, false]);
   // Leaving the screen cancels a scheduled recheck without firing it.
+  vi.advanceTimersByTime(ACCESS_RECHECK_COOLDOWN_MS);
   recheck.observe(false, newer);
   recheck.observe(true, newer);
+  expect(recheck.pending()).toBe(true);
   recheck.dispose();
   vi.advanceTimersByTime(60_000);
   expect(newer).toHaveBeenCalledTimes(2);
@@ -305,8 +314,9 @@ it("a read that control did not answer is one plain notice with one Retry: no co
     createElement(RunStatus, { run: uncertain, active: false }),
   );
   expect(text(retained)).toContain(controlReconnectingMessage);
-  expect(retained).not.toContain("Retry same request");
-  expect(buttons.map((button) => button.children)).toEqual(["Retry"]);
+  expect(buttons.map((button) => button.children)).toEqual([
+    "Retry same request",
+  ]);
   buttons[0]!.onClick();
   expect(uncertain.submit).toHaveBeenCalledExactlyOnceWith("Unconfirmed", true);
   expect(uncertain.history).toHaveBeenCalledOnce();

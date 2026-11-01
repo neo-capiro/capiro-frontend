@@ -1,6 +1,12 @@
 "use client";
 import type { ResearchSelection } from "../../../shared/meri-conversations/research-context";
-import { useCallback, useEffect, useRef } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
@@ -23,6 +29,32 @@ import {
 import { requireMeriTabStorage } from "../../../shared/meri-conversations/tab-journal";
 import { conversationHref } from "../../../shared/meri-conversations/conversation-navigation";
 import type { LifecycleTarget } from "./lifecycle/useRunLifecycle";
+import { createAccessRecheck } from "./access-recheck";
+
+/**
+ * The first access loss of an episode rechecks itself once after a short delay; the manual check
+ * stays for a loss that persists. Owned here, by the screen, so the schedule and its cooldown
+ * outlive the access-loss presentation that comes and goes with each reissued session.
+ */
+function useAccessRecheck(
+  accessLost: boolean,
+  retry: () => void,
+  refresh: () => void,
+) {
+  const [recheck] = useState(() => createAccessRecheck());
+  useEffect(() => {
+    recheck.observe(accessLost, () => {
+      retry();
+      refresh();
+    });
+  }, [recheck, accessLost, retry, refresh]);
+  useEffect(() => () => recheck.dispose(), [recheck]);
+  return useSyncExternalStore(
+    recheck.subscribe,
+    recheck.pending,
+    recheck.pending,
+  );
+}
 
 /** Bind the captured input to the reserved target before opening its exact authorized session. */
 function useTurnOpening(
@@ -111,6 +143,11 @@ export function useConversationSession(
   const { boundReady, selectedId, history, accessLost, ready } =
     useSelectedHistory(account, clientId, conversationId, connection, research);
   const { reopen } = connection;
+  const accessRechecking = useAccessRecheck(
+    accessLost,
+    connection.retry,
+    history.refresh,
+  );
   const modelCatalog = useModelCatalog(account, !accessLost);
   const local = useConversationLocalState(
     boundReady?.port.context,
@@ -217,6 +254,8 @@ export function useConversationSession(
     connection,
     selectedId,
     accessLost,
+    /** An automatic access recheck is pending; the status says "checking" rather than "unavailable". */
+    accessRechecking,
     ready,
     history,
     continuation,

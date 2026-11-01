@@ -1,4 +1,3 @@
-import { useEffect, useState, useSyncExternalStore } from "react";
 import { Button } from "@capiro/ui/button";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import { UserMessage } from "../screens/conversation/UserMessage";
@@ -8,7 +7,6 @@ import type { useConversationSession } from "./useConversationSession";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./live.module.css";
 import { controlUnreachableMessage } from "./control-reachability";
-import { createAccessRecheck } from "./access-recheck";
 import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 
 type Session = ReturnType<typeof useConversationSession>;
@@ -37,29 +35,6 @@ export function pendingConversationComposer(
     scope,
     attachUnavailable: unavailableTitle("attachments"),
   };
-}
-
-/**
- * The first access loss of an episode rechecks itself once after a short delay; the manual check
- * stays for a loss that persists. The latest session is read at fire time, never captured.
- */
-function useAccessRecheck(session: Session) {
-  const [recheck] = useState(() => createAccessRecheck());
-  const { accessLost } = session;
-  const { retry } = session.connection;
-  const { refresh } = session.history;
-  useEffect(() => {
-    recheck.observe(accessLost, () => {
-      retry();
-      refresh();
-    });
-  }, [recheck, accessLost, retry, refresh]);
-  useEffect(() => () => recheck.dispose(), [recheck]);
-  return useSyncExternalStore(
-    recheck.subscribe,
-    recheck.pending,
-    recheck.pending,
-  );
 }
 
 /** Connection recovery presents the same exact-run retry while private content stays hidden. */
@@ -162,9 +137,9 @@ export function UnverifiedAccessNotice({ session }: { session: Session }) {
 /** Saved reading is hidden after access loss until the exact session is reauthorized. */
 export function ConnectionPending({ session }: { session: Session }) {
   const { connection, earlier } = session;
-  const rechecking = useAccessRecheck(session);
   const status = connection.state.status,
-    waiting = status === "idle" || status === "connecting" || rechecking;
+    waiting =
+      status === "idle" || status === "connecting" || session.accessRechecking;
   const pending =
     !session.accessLost &&
     connection.pending &&

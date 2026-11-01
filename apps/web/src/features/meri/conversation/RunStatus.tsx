@@ -139,7 +139,7 @@ function UnreachableNotice({
             : run.history());
         }}
       >
-        Retry
+        {uncertain ? "Retry same request" : "Retry"}
       </Button>
     </div>
   );
