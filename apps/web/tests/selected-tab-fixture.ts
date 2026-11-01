@@ -99,7 +99,11 @@ export async function selectedTabFixture(options: { lostAck?: boolean } = {}) {
     }
     if (route === "/api/uploads/status") {
       const q = receiveUploadRequest("status", init!.body as Uint8Array);
-      return Response.json(receipts.get(q.uploadId));
+      return Response.json(
+        "uploadId" in q
+          ? receipts.get(q.uploadId)
+          : [...receipts.values()].find((r) => r.requestId === q.requestId),
+      );
     }
     throw Error("Unexpected request");
   };

@@ -220,7 +220,12 @@ function createJoinServer(
         url.endsWith("status") ? "status" : "remove",
         body,
       );
-      const attempt = attempts.get(id.uploadId);
+      const attempt =
+        "uploadId" in id
+          ? attempts.get(id.uploadId)
+          : [...attempts.values()].find(
+              (value) => value.requestId === id.requestId,
+            );
       if (!attempt) return failed("UPLOAD_NOT_FOUND", "READ_UNAVAILABLE");
       return respond(attempt.receipt);
     }

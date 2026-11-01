@@ -194,7 +194,12 @@ function createUploadServer(
     }
     if ((route === "status" || route === "remove") && body) {
       const id = receiveUploadRequest(route, body);
-      const attempt = attempts.get(id.uploadId);
+      const attempt =
+        "uploadId" in id
+          ? attempts.get(id.uploadId)
+          : [...attempts.values()].find(
+              (attempt) => attempt.requestId === id.requestId,
+            );
       if (!attempt)
         return errors(
           "UPLOAD_NOT_FOUND",
