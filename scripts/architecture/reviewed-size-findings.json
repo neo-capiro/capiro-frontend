@@ -7323,7 +7323,7 @@
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "6e88a5c4d9c2f0550b1a83eb8732034f7a1fbe21d18de8e7f13b26c06428d1d9",
+    "fingerprint": "9097488e8486c07c6311aea6be3dc42b5cf1347b11790efa2ce6d9ce4d3c1c87",
     "reason": "the changes extend one existing review/confirmation/recovery state lifecycle. New controls derive from admitted source/revision fields and share existing publication handling; scope is understandable and focused tests cover changed transitions. No new authority mechanism or second compiler is hidden in the component. Approval is for this fingerprint, not unbounded future growth.",
     "reviewedBy": "raw_source (independent FE consumer reviewer)",
     "reviewedOn": "2026-11-01"
@@ -7332,7 +7332,7 @@
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "function",
     "symbol": "FederalWorkbench",
-    "fingerprint": "4b50eb33cbc706cd6b4d9fda717fd31e069b362d411ece4f6942db567bd95d02",
+    "fingerprint": "90d9695fb7cb4307656296354e4dfed4e938eac66bbbe1f8f59d9fad5d228d9e",
     "reason": "the changes extend one existing review/confirmation/recovery state lifecycle. New controls derive from admitted source/revision fields and share existing publication handling; scope is understandable and focused tests cover changed transitions. No new authority mechanism or second compiler is hidden in the component. Approval is for this fingerprint, not unbounded future growth.",
     "reviewedBy": "raw_source (independent FE consumer reviewer)",
     "reviewedOn": "2026-11-01"
