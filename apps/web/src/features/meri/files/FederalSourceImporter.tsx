@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@capiro/ui/button";
+import type { FederalImportRequest } from "@capiro/meri-contracts/federal-workbench";
 import type { FederalSourceChoice } from "../../../shared/meri-documents/federal-sources";
 import type {
   FederalSourceView,
@@ -28,18 +29,46 @@ export function FederalSourceImporter({
     sources: readonly FederalSourceChoice[];
     nextAfter: number | null;
   } | null>(null);
-  const [pending, setPending] = useState<FederalSourceChoice | null>(null);
+  const [mode, setMode] = useState("legacy");
+  const [captured, setCaptured] = useState<{
+    choice: FederalSourceChoice;
+    capture: NonNullable<FederalSourceView["capture"]>;
+    source: FederalSourceView["source"];
+  } | null>(null);
+  const [pending, setPending] = useState<{
+    choice: FederalSourceChoice;
+    representation: FederalImportRequest["representation"];
+    validationProfile: FederalImportRequest["validationProfile"];
+    sourceProfile: FederalImportRequest["sourceProfile"];
+  } | null>(null);
   async function browse(after = 0) {
     const value = await port.sources(after, signal());
     setPage(value);
   }
-  async function importSource(choice: FederalSourceChoice) {
+  async function importSource(
+    choice: FederalSourceChoice,
+    representation: FederalImportRequest["representation"],
+    validationProfile: FederalImportRequest["validationProfile"],
+    sourceProfile: FederalImportRequest["sourceProfile"],
+  ) {
     const choosingRecovery = port.unresolved() && pending === null;
-    setPending(choice);
+    setCaptured(null);
+    setPending({ choice, representation, validationProfile, sourceProfile });
     onPending(true);
     try {
-      const source = await port.importSource(choice.selection, signal());
+      const source = await port.importSource(
+        choice.selection,
+        signal(),
+        representation,
+        validationProfile,
+        sourceProfile,
+      );
       onImported(source);
+      setCaptured(
+        source.capture
+          ? { choice, capture: source.capture, source: source.source }
+          : null,
+      );
       setPending(null);
       onPending(false);
     } catch (error) {
@@ -56,6 +85,34 @@ export function FederalSourceImporter({
       <p>
         Choose a bill version cited in this conversation. Import checks the
         current official source and saves its exact text for amendment review.
+      </p>
+      <label>
+        Source import checks{" "}
+        <select
+          value={mode}
+          disabled={disabled || pending !== null}
+          onChange={(event) => setMode(event.target.value)}
+        >
+          <option value="legacy">Retained source text</option>
+          <option value="raw">Verified captured UTF-8 bytes</option>
+          <option value="uslm">Pinned USLM 2.1 schema validation</option>
+          <option value="runs">
+            Pinned USLM 2.1 with decoded text editing
+          </option>
+        </select>
+      </label>
+      <p>
+        Verified capture requires recorded evidence and may refuse historical
+        sources without it. Pinned USLM 2.1 also requires the captured XML to
+        pass that schema. Schema validation checks syntax, not legal
+        correctness, currency or enactment. Raw capture alone does not establish
+        schema validity. Neither mode silently falls back to weaker checks. When
+        recovering an earlier import, select the same mode and bill version.
+      </p>
+      <p>
+        Decoded text editing exposes individual XML text runs as readable text,
+        including decoded character references. Exact XML sections remain
+        available. It does not combine text across inline elements.
       </p>
       <Button
         disabled={disabled || pending !== null}
@@ -84,7 +141,18 @@ export function FederalSourceImporter({
                   </details>
                   <Button
                     disabled={disabled || pending !== null}
-                    onClick={() => void run(() => importSource(choice))}
+                    onClick={() =>
+                      void run(() =>
+                        importSource(
+                          choice,
+                          mode === "legacy" ? undefined : "retained-raw-utf8/1",
+                          mode === "uslm" || mode === "runs"
+                            ? "uslm-2.1.0"
+                            : undefined,
+                          mode === "runs" ? "uslm-text-runs/1" : undefined,
+                        ),
+                      )
+                    }
                   >
                     {port.unresolved()
                       ? "Recover original source import"
@@ -107,10 +175,48 @@ export function FederalSourceImporter({
       {pending && port.unresolved() && (
         <Button
           disabled={disabled}
-          onClick={() => void run(() => importSource(pending))}
+          onClick={() =>
+            void run(() =>
+              importSource(
+                pending.choice,
+                pending.representation,
+                pending.validationProfile,
+                pending.sourceProfile,
+              ),
+            )
+          }
         >
           Recover selected source import
         </Button>
+      )}
+      {captured && (
+        <details>
+          <summary>Verified source capture</summary>
+          <p>
+            {captured.choice.selection.billId} · Version{" "}
+            {captured.choice.selection.versionCode} · Revision{" "}
+            {captured.choice.selection.revisionId}
+          </p>
+          <p>
+            {captured.capture.byteLength} UTF-8 bytes ·{" "}
+            {captured.capture.format.toUpperCase()}
+          </p>
+          <p>Captured body SHA-256: {captured.capture.sha256}</p>
+          {"validation" in captured.source && (
+            <>
+              <p>
+                Passed pinned USLM 2.1 syntax validation ·{" "}
+                {captured.source.validation.bytes} bytes
+              </p>
+              <p>Validation profile: {captured.source.validation.profile}</p>
+              <p>Schema SHA-256: {captured.source.validation.schemaSha256}</p>
+              <p>
+                Validated source SHA-256:{" "}
+                {captured.source.validation.sourceSha256}
+              </p>
+            </>
+          )}
+        </details>
       )}
     </section>
   );

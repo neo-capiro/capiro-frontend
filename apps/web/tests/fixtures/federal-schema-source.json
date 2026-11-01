@@ -1,0 +1,172 @@
+{
+  "note": "Synthetic custody fixture generated from Meri1.6 mounted document application using actual pinned offline Python/lxml validation of the unmodified USGPO public-domain USLM2.1 sample. Selection metadata/SQL/object storage are synthetic; no live source or DB qualification.",
+  "input": {
+    "selection": {
+      "billId": "119-hr-1",
+      "versionCode": "enr",
+      "revisionId": "11111111-1111-4111-8111-111111111111",
+      "versionHash": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1",
+      "textHash": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1"
+    },
+    "deliveryId": "3eb59448-27d7-43d7-8bab-82ffb1563da2",
+    "representation": "retained-raw-utf8/1",
+    "validationProfile": "uslm-2.1.0"
+  },
+  "imported": {
+    "schema": "meri.federal-source.v2",
+    "representation": "retained-raw-utf8/1",
+    "capture": {
+      "version": "federal-source-capture/1",
+      "representation": "response-body",
+      "format": "xml",
+      "mediaType": "application/xml; charset=UTF-8",
+      "encoding": "utf-8",
+      "byteLength": 3112,
+      "sha256": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1",
+      "utf8RoundTrip": true
+    },
+    "selection": {
+      "billId": "119-hr-1",
+      "versionCode": "enr",
+      "revisionId": "11111111-1111-4111-8111-111111111111",
+      "versionHash": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1",
+      "textHash": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1"
+    },
+    "source": {
+      "documentId": "119-hr-1",
+      "publisher": "govinfo",
+      "sourceVersion": "enr/11111111-1111-4111-8111-111111111111",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/xml/BILLS-119hr1enr.xml",
+      "publishedAt": "2026-01-01",
+      "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><?xml-stylesheet type=\"text/css\" href=\"uslm.css\"?>\n<resolution xmlns=\"http://schemas.gpo.gov/xml/uslm\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:html=\"http://www.w3.org/1999/xhtml\" xmlns:slc=\"http://xml.senate.gov\" xmlns:uslm=\"http://schemas.gpo.gov/xml/uslm\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://schemas.gpo.gov/xml/uslm uslm-2.1.0.xsd\" xml:lang=\"en\" id=\"H154712A4A85D48A8A6EF9078D3848A92\">\n<!--Disclaimer: Legislative measures that include compacts or other non-standard data structures will require additional modeling and may contain inconsistencies in the converted USLM XML.-->\n<meta>\n<dc:title>114 HRES 99 EH: </dc:title>\n<dc:type>House Simple Resolution</dc:type>\n<docNumber>99</docNumber>\n<citableAs>114 HRES 99 EH</citableAs>\n<citableAs>114hres99eh</citableAs>\n<citableAs>114 H. Res. 99 EH</citableAs>\n<docStage>Engrossed in House</docStage>\n<currentChamber>HOUSE</currentChamber>\n<dc:creator>United States House of Representatives</dc:creator>\n<processedBy>GPO XPub Bill to USLM Generator, version 0.5 + manual changes</processedBy>\n<processedDate>2024-09-09</processedDate>\n<dc:publisher>United States Government Publishing Office</dc:publisher>\n<dc:format>text/xml</dc:format>\n<dc:language>EN</dc:language>\n<dc:rights>Pursuant to Title 17 Section 105 of the United States Code, this file is not subject to copyright protection and is in the public domain.</dc:rights>\n<congress>114</congress>\n<session>1</session>\n<publicPrivate>public</publicPrivate></meta>\n<preface>\n<slugLine>•HRES 99 EH</slugLine>\n<distributionCode display=\"no\">IV</distributionCode>\n<congress value=\"114\" display=\"no\">114th CONGRESS</congress>\n<session value=\"1\" display=\"no\">1st Session</session>\n<dc:type>H. Res. </dc:type>\n<docNumber>99</docNumber>\n<currentChamber value=\"HOUSE\">In the House of Representatives, U. S.,</currentChamber>\n<action><date date=\"2015-02-10\">February 10, 2015.</date></action></preface>\n<main styleType=\"multiple-resolved-clause\" id=\"H799C079A8D71495BA685095ED8501D6F\">\n    <resolvingClause><i>Resolved, </i></resolvingClause> <section id=\"HE4CAF9520F654C99838F6B0FC30297BB\" class=\"inline\"><content class=\"inline\">That the House has heard with profound sorrow of the death of the Honorable Alan Nunnelee, a Representative from the State of Mississippi.</content></section> \n    <resolvingClause class=\"inline\"><i>Resolved, </i></resolvingClause><section id=\"H846F3DBF7AF7445DAE271C4A3308B846\"><content class=\"inline\">That the Clerk communicate these resolutions to the Senate and transmit a copy thereof to the family of the deceased.</content></section> \n    <resolvingClause class=\"inline\"><i>Resolved, </i></resolvingClause><section id=\"HD0A37150A1794FD195E1D44F8EE4109A\"><content class=\"inline\">That when the House adjourns today, it adjourn as a further mark of respect to the memory of the deceased.</content></section> </main>\n    <signatures><signature><notation type=\"attestation\">Attest: </notation><name display=\"no\">KAREN L. HAAS,</name><role>Clerk.</role></signature></signatures></resolution>",
+      "sha256": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1",
+      "parserVersion": "federal-uslm-xml/2",
+      "coverage": {
+        "complete": true,
+        "limitations": [
+          "Exact USLM XML text validated against the pinned USLM 2.1.0 schema; scopes use declared element identifiers or IDs. Numbering, cross-references, arithmetic, enactment and substantive law remain unresolved.",
+          "Captured response-body UTF-8 bytes and exact SHA-256 verified; compressed HTTP transport frames are not retained.",
+          "Current at read only. Enactment and legal currency are unresolved; an enrolled bill is not proof of enactment.",
+          "Canonical federal source metadata: {\"billId\":\"119-hr-1\",\"collection\":\"BILLS\",\"evidenceParserVersion\":\"federal-legislative-exact-code-v1+federal-source-capture/1\",\"fetchedAt\":\"2026-01-03T00:00:00.000Z\",\"lineageKey\":\"bill:119-hr-1\",\"packageId\":\"BILLS-119hr1enr\",\"provider\":\"govinfo\",\"publishedAt\":\"2026-01-01T00:00:00.000Z\",\"revisionId\":\"11111111-1111-4111-8111-111111111111\",\"sourceKey\":\"fixture-bill\",\"sourceLocator\":\"https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/xml/BILLS-119hr1enr.xml\",\"sourceModifiedAt\":\"2026-01-02T00:00:00.000Z\",\"textHash\":\"65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1\",\"versionCode\":\"enr\",\"versionHash\":\"65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1\"}",
+          "Captured response-body receipt: {\"byteLength\":3112,\"encoding\":\"utf-8\",\"format\":\"xml\",\"mediaType\":\"application/xml; charset=UTF-8\",\"representation\":\"response-body\",\"sha256\":\"65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1\",\"utf8RoundTrip\":true,\"version\":\"federal-source-capture/1\"}"
+        ]
+      },
+      "scopes": [
+        {
+          "id": "document",
+          "label": "resolution H154712A4A85D48A8A6EF9078D3848A92",
+          "start": 89,
+          "end": 3110,
+          "sha256": "a8f9c212f8aaa664afe688fd150356c4fcd5fe71a4401c679ad2168fa2a6f269",
+          "ancestorPath": []
+        },
+        {
+          "id": "xml:H799C079A8D71495BA685095ED8501D6F",
+          "label": "main H799C079A8D71495BA685095ED8501D6F",
+          "start": 1991,
+          "end": 2937,
+          "sha256": "c5cbf82a41a4d5ed9f24cba103a4e8ad20a72db30ee06eade9abee56d59956b1",
+          "ancestorPath": ["document"]
+        },
+        {
+          "id": "xml:HE4CAF9520F654C99838F6B0FC30297BB",
+          "label": "section HE4CAF9520F654C99838F6B0FC30297BB",
+          "start": 2131,
+          "end": 2376,
+          "sha256": "7f31d7b9cdd118e3f499289b380ad43d7fc64def882d870f7fca3cfd81f68c6c",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"]
+        },
+        {
+          "id": "xml:H846F3DBF7AF7445DAE271C4A3308B846",
+          "label": "section H846F3DBF7AF7445DAE271C4A3308B846",
+          "start": 2449,
+          "end": 2658,
+          "sha256": "dc0e1fe457b262718cd08bd60c11af106a5883118bba15838322b652d861628e",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"]
+        },
+        {
+          "id": "xml:HD0A37150A1794FD195E1D44F8EE4109A",
+          "label": "section HD0A37150A1794FD195E1D44F8EE4109A",
+          "start": 2731,
+          "end": 2929,
+          "sha256": "ea1930cdeda400fc16ac7a9f748a6978508f9afdbfc655ff243caea326e2814f",
+          "ancestorPath": ["document", "xml:H799C079A8D71495BA685095ED8501D6F"]
+        }
+      ],
+      "validation": {
+        "profile": "uslm-2.1.0",
+        "schemaSha256": "c68c058345f99689144c183c99d47552f3d56aa365ff1380127a9180fe18ce44",
+        "sourceSha256": "65d38cfd185dc6976eb85abd7bfebdef0f873d2edb313e857449b37baa4a0dc1",
+        "bytes": 3112,
+        "valid": true
+      }
+    },
+    "publication": {
+      "version": {
+        "contractVersion": "0.2.0",
+        "artifactId": "82a35aaa-d30b-491e-8fa1-627c15f36cdf",
+        "versionId": "f3b9fd04-a673-4c88-88da-afca03e6731e",
+        "parentVersionId": null,
+        "binding": {
+          "tenantId": "33333333-3333-4333-8333-000000000100",
+          "actorId": "33333333-3333-4333-8333-000000000101",
+          "conversationId": "33333333-3333-4333-8333-000000000102",
+          "runId": "33333333-3333-4333-8333-000000000103",
+          "attemptId": "33333333-3333-4333-8333-000000000104",
+          "workerId": "33333333-3333-4333-8333-000000000105",
+          "writerFence": 1
+        },
+        "object": {
+          "objectId": "1306af3c-9be9-46f1-8952-b5d3f4576b3c",
+          "versionId": "SYNTHETIC_1306af3c-9be9-46f1-8952-b5d3f4576b3c",
+          "sha256": "f8a9a9a08b6203397b28c39bb216a4bd085a2f6a77c4d68248b8fb40e3fe109f",
+          "bytes": 7230,
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ]
+        },
+        "filename": "Federal source _5f1e401470019d03b58ba47836700a6cfcd3baae23a833c851f6ce655c519b67__ 119-hr-1.txt",
+        "mimeType": "text/plain; charset=utf-8",
+        "scopes": [
+          {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "kind": "client",
+            "resourceId": "33333333-3333-4333-8333-000000000106",
+            "policyRevision": "policy1"
+          }
+        ],
+        "evidence": [],
+        "generationStatus": "draft",
+        "previewStatus": "pending",
+        "createdAt": "2026-11-01T04:53:21.227Z"
+      },
+      "inspection": {
+        "sha256": "f8a9a9a08b6203397b28c39bb216a4bd085a2f6a77c4d68248b8fb40e3fe109f",
+        "bytes": 7230,
+        "format": "txt",
+        "nativeOpened": false,
+        "rendered": false,
+        "recalculated": false,
+        "members": [],
+        "details": {
+          "encoding": "UTF-8",
+          "whitespace": "unchanged"
+        }
+      },
+      "execution": {
+        "kind": "native-document",
+        "invocationId": "sdk:76e52d5b8f24e505f2a053619c3526235791b8eb2839551ac1c7eda0ccf0ba49",
+        "requestSha256": "62f051f41eeab2e87bf55b560721540459ac4a5aae9f659ec97e0dc5f5c86a35",
+        "authorizationReceiptId": "034ba377-b68c-4122-8233-b98767b5766c",
+        "objectCommitted": true,
+        "versionCommitted": true,
+        "nativeQualified": false
+      }
+    }
+  }
+}

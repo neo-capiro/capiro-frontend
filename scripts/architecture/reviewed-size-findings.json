@@ -2146,10 +2146,10 @@
     "file": "apps/web/src/shared/shell/Sidebar.tsx",
     "kind": "function",
     "symbol": "Sidebar",
-    "fingerprint": "4c5c4e513a9d02fd2462df0d68c9221e353d1bb8af4c16938ef18bb0deba1d97",
-    "reason": "The app shell sidebar navigation. Single responsibility - render shell navigation and its preference entry - for the shell owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "50c5df15f44294268937e44a3cd8b188e330a42bb98ae4551316e95c4d5117f7",
+    "reason": "Existing shell navigation chooses account history for explicit Research intent and delegates session creation to the existing owner. The change adds no state engine or new source lookup.",
+    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/files/DocumentEditor.tsx",
@@ -3181,19 +3181,19 @@
     "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
     "kind": "function",
     "symbol": "MeriConversationHost",
-    "fingerprint": "2adaafe1798fc2ba7bff8348b2c1923d404fbb5aac36770b8fbda976ec602424",
-    "reason": "3. MeriConversationHost.tsx / function MeriConversationHost / line 22 / nonblank 113 / fingerprint 2adaafe1798fc2ba7bff8348b2c1923d404fbb5aac36770b8fbda976ec602424 / changed. Responsibility: mount arbitration over enabled / invalid-scope / general / identity / selection / archived / bootstrap, each branch thin. The added copy branch lengthens a conditional chain (IMPLEMENTATION-STANDARDS Â§8 signal), but it selects mount targets and messages, not providers/tools, and each arm is a short return. ACCEPT WITH NOTE: extract the arbitration when another state is added.",
-    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "79a252bcd468f74fd4ac1f2dedcc95e56a1815271496f8be9b1a257ae98d993a",
+    "reason": "One existing scope-dispatch owner now selects explicit Research before default/client/General, preserving current default behavior and denial ordering; no second authority or session owner.",
+    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
     "kind": "function",
     "symbol": "CoreResolvedConversation",
-    "fingerprint": "5434dc180235c9a7fbd4cf2e7144145403e7052d3fab965db8614f3ea6584102",
-    "reason": "One cancellable Core bootstrap attempt and its pending/ready/error presentation. It delegates durable request identity, receipt/principal validation and conflict recovery to resolveFirstChatConversation, first-chat-intent and useBeginNewChat. The effect cleanup prevents obsolete completion from mounting a session; retry and New Chat update this same attempt. Splitting its effect from its render state would distribute one lifecycle without reducing responsibility.",
-    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
-    "reviewedOn": "2026-10-24"
+    "fingerprint": "035266c0fcc0aaf11b971ff0ab7908c358afc0b99f045c0ab7f4faa0690070f0",
+    "reason": "Existing canonical bootstrap receipt and component lifetime remain one operation; the source union preserves current receipt-first mounting and retry semantics without another issuer.",
+    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useConversationConnection.ts",
@@ -3453,10 +3453,10 @@
     "file": "apps/web/src/features/meri/conversation/useConversationSession.ts",
     "kind": "function",
     "symbol": "useConversationSession",
-    "fingerprint": "6cdd65962f7c9c08fa76e009d3ecb2253b28f0cbd470e13b76183f9940014f07",
-    "reason": "Hook composing the screen lifetime of a conversation controller into React state, with its private useTurnOpening/useSelectedHistory helpers. One concern - session lifetime - for the meri conversation owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "46eb007ea969c661b3934b6c6d004763293bd8d0ad32d88b6e5f0ed524546c3d",
+    "reason": "Composes existing history, session, next-turn and local-state owners; Research only adds immutable capture correlation and refuses cross-conversation targets. Splitting by line count would scatter the shared lifetime and currentness checks.",
+    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/CampaignSession.tsx",
@@ -6351,10 +6351,10 @@
     "file": "apps/web/src/features/meri/conversations/SelectedConversationActions.tsx",
     "kind": "function",
     "symbol": "SelectedConversationActions",
-    "fingerprint": "e99b3dcb46b29ac95a755cfcc1dfe15966254d1536a5e1b4743bf1a7552fbe8b",
-    "reason": "Action affordances for the selected conversation row. Owns only the per-row action menu and its handlers for the conversations owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "dd5ff777f91542eeba68fe732f8aadb2ec3aab562c4e5e7b842b54e957183613",
+    "reason": "Existing selected-row management surface delegates all mutations to its canonical management owner; Research navigation is explicit and lifecycle canManage remains unchanged.",
+    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/conversations/useManagedChange.ts",
@@ -6405,12 +6405,10 @@
     "file": "apps/web/src/shared/meri-actions/proxy.ts",
     "kind": "function",
     "symbol": "proxyActionRequest",
-    "line": 51,
-    "nonblank": 87,
-    "fingerprint": "856c979eed5f459a59286a5c1428f69d6ae9cfc39116c49c4f62d81e196600f7",
-    "reason": "One fixed same-origin bounded transport adapter: exact route/method/origin/header admission, canonical request validation, existing native/session credential selection, bounded forwarding and response relay. The MR04 change uses the canonical routines receiver resolution point and route table for the two renewal routes; it does not add authority, custody, a retry policy or another transport owner. Deadline, byte limits, credential isolation and the uncertain catch outcome are preserved. The widened TypeScript route-name cast does not replace runtime receiving; final physical-package typing remains an explicit integration check. Accepted as the existing single proxy responsibility.",
-    "reviewedBy": "Codex bounded exact-body validation, reusing independent Hermes consent-consumer review beb06061feee5ea7bbf0d732e53aac90848e902c2c08898abf65a5687272e89d section 5",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "216a7ea364fd53c039c535a2634916dcd97e36ef0a02bb73d3cdcac63d1eaf4c",
+    "reason": "A fixed same-origin adapter validates canonical public request selectors and forwards once within the existing deadline; it creates no authority or alternate transport. Research selector support stays inside the established boundary.",
+    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/shared/meri-actions/task-recovery.ts",
@@ -7235,10 +7233,10 @@
     "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "7a3885343ebaf6d14ddbc37ac2fcd217987857f388fd783ffd561f5fcffc8b20",
-    "reason": "Existing responsibilities are exact request/selection representation and context-bound recovery ownership. New code extends the same request lifetime with validated retirement-ID extraction and completed-history reconciliation. It reuses receiveIntent/storedSubmission and tabRecord; it neither adds transport nor interprets domain authorization. The SDK snapshot import is type-only and there is no reversed feature dependency or cycle. Selection transformations remain unchanged. A generic recovery service or duplicated canonical validator would weaken this boundary; no unrelated domain or provider/storage backend was added.",
-    "reviewedBy": "Codex independent Meri FE65 journal source/design review; MERI-FE65-JOURNAL-CORRECTION-INDEPENDENT-REVIEW-20261031.txt SHA256 cf2e2d7c7965683f1ac5fd6a908d3beeb445b383861db4833a050639dbb6bf03",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "e369768359f333debfbe56357139618d3bab8608619221745dbb3d83f1b522a1",
+    "reason": "Exact previously accepted505-line Research/retirement journal e3697683; one persistence/cache ownership boundary preserves both original function families. No product body change from acceptedf2f525e6.",
+    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/shared/meri-routines/workflow.ts",
@@ -7322,37 +7320,37 @@
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "fd1f03db2ff84f1f7d0bf043b0e9018f0d153af4bc4c559d3cb872c204f2edbb",
-    "reason": "Independent review of b8ed730d: one source/amendment/review presentation lifetime owns transactional edits, confirmation invalidation, publication and pending-delivery controls. Derivation, row presentation, source import and authority/persistence remain separate owners. Removal clears stale review and hashes before derivation; in-place edits retain identity/order and commit only a valid sequence. Actual callback and compiler-fixture checks cover refused removal, dependency recomputation, unique IDs and nested no-op/cancel preservation. See FE436-CORRECTION-INDEPENDENT-REVIEW-20261101.txt.",
-    "reviewedBy": "Codex independent /root/legislative_review",
+    "fingerprint": "6e88a5c4d9c2f0550b1a83eb8732034f7a1fbe21d18de8e7f13b26c06428d1d9",
+    "reason": "the changes extend one existing review/confirmation/recovery state lifecycle. New controls derive from admitted source/revision fields and share existing publication handling; scope is understandable and focused tests cover changed transitions. No new authority mechanism or second compiler is hidden in the component. Approval is for this fingerprint, not unbounded future growth.",
+    "reviewedBy": "raw_source (independent FE consumer reviewer)",
     "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "function",
     "symbol": "FederalWorkbench",
-    "fingerprint": "58290e27a02643b54cdcdef46b434b7ebd0de080aa1a985745b9ddd2429b634c",
-    "reason": "Independent review of b8ed730d: the component coordinates one source/amendment/review state lifetime. Transactional edit, remove, prepare and publish transitions share review invalidation and pending-delivery constraints; derivation and backend authority remain delegated. The corrected removal and in-place edit paths preserve exact reviewed intent, while cancel/no-op edits preserve untouched saved reviews. Focused callbacks and an independent compiler-valid nested fixture verify those invariants. See FE436-CORRECTION-INDEPENDENT-REVIEW-20261101.txt.",
-    "reviewedBy": "Codex independent /root/legislative_review",
+    "fingerprint": "4b50eb33cbc706cd6b4d9fda717fd31e069b362d411ece4f6942db567bd95d02",
+    "reason": "the changes extend one existing review/confirmation/recovery state lifecycle. New controls derive from admitted source/revision fields and share existing publication handling; scope is understandable and focused tests cover changed transitions. No new authority mechanism or second compiler is hidden in the component. Approval is for this fingerprint, not unbounded future growth.",
+    "reviewedBy": "raw_source (independent FE consumer reviewer)",
     "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/files/FederalSourceImporter.tsx",
     "kind": "function",
     "symbol": "FederalSourceImporter",
-    "fingerprint": "956f66a0caba50582fc86d0dcf527d5a8e85f592320e382aa8dec4ec9eec28da",
-    "reason": "Author structural assessment in docs/federal-workbench.md: Citation page selection and pending-import presentation form one mounted lifetime. Existing history, public contracts, delivery journal and Core authority remain their owners; the component reports pending selection to the parent review lifetime. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "afaaf9070a4e27d5942e27bf0b814697e04db14d5b3ee8e0a762d3280c93ac45",
+    "reason": "one cohesive source choice/pending recovery component; additive fourth-mode field stays with its existing import lifecycle and displayed qualification evidence.",
+    "reviewedBy": "raw_source (independent FE consumer reviewer)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/shared/meri-documents/federal-workbench.ts",
     "kind": "function",
     "symbol": "deliver",
     "fingerprint": "25f43484405d6f0162481afad3c9549e5fec39b8923a01a4603834c6bb456faa",
-    "reason": "Author structural assessment in docs/federal-workbench.md: The former publish-only transaction is replaced by one import/export delivery method using the existing shared journal, immutable input fingerprint, original delivery ID and definite/uncertain response classification. Busy reservation covers hashing; source selection and review content never enter another ledger. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "reason": "One delivery state machine owns canonical request validation, complete input fingerprint, attempt ID, uncertain-result recovery, lifetime/currentness checks and journal settlement. Independent source review and raw-mode recovery checks at 671daddd8b6257f8f3bc732b1aa39ea615a3d7a5 cover representation as part of the existing delivery identity. Splitting this owner would obscure its single attempt and settlement order; this exact function fingerprint is unchanged.",
+    "reviewedBy": "Codex independent contract_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/CampaignDrafts.tsx",
@@ -7712,6 +7710,24 @@
     "fingerprint": "7c39c9bb62f08edacd084b3edfbaf925aaa6f24a1d58190d47ccb9756bfc6d99",
     "reason": "Independent exact-source responsibility review of the 502-line accepted upload-recovery module. This file defines the composer attachment observations and the single controller that owns their attempt lifetime, retained receipt selection, currentness fencing and explicit recovery transitions. Durable locator storage remains in upload-attempt-storage; canonical transport and public admission remain in upload-wire/facade; the service retains custody and authorization. The accepted F1 cleanup only retires a scoped locator when local dispatch evidence proves no effect was attempted, while uncertain operations remain status-only reconciliation. No additional lifecycle owner or unrelated responsibility was added. Full module read and unchanged393/395 independent design evidence support retaining this boundary. Exact fingerprint only; re-review on source or responsibility change.",
     "reviewedBy": "Codex independent Office cohort reviewer /root/office_cohort_review",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
+    "kind": "function",
+    "symbol": "conversationSelectionOwner",
+    "fingerprint": "cc7bb25e0733817a2f534b7bc0d16871c9e7cd707ef94f9d09ef3a31134a3aa5",
+    "reason": "One captured selector owns its persistence generation and exact cache entry. Research-specific key and capture validation belong with record/clear/reopen fencing; no duplicate state owner or authority lookup is added.",
+    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/shared/meri-documents/federal-authoring.ts",
+    "kind": "function",
+    "symbol": "authoredOperations",
+    "fingerprint": "20eff0efd73cd7ed6ae4d3d1bfd6202f0cd0fb3d105b8c36f94c7c702e23f64e",
+    "reason": "one ordered derivation maintains raw intermediates/dependencies/removal invariants and invokes the canonical decoder/edit owner; splitting that loop is not required for this bounded additive mode.",
+    "reviewedBy": "raw_source (independent FE consumer reviewer)",
     "reviewedOn": "2026-11-01"
   }
 ]

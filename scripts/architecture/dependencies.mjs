@@ -178,6 +178,12 @@ export const serverAdapters = new Map([
   [`${appSource}app/api/memory/owner/items/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', memoryOwnerProxy,
   ])],
+  [`${appSource}app/api/memory/owner/items/[id]/evidence/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}features/meri/memory-review/owner-history-proxy.server.ts`,
+  ])],
+  [`${appSource}app/api/memory/owner/items/[id]/versions/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}features/meri/memory-review/owner-history-proxy.server.ts`,
+  ])],
   [`${appSource}app/api/memory/owner/items/[id]/corrections/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', memoryOwnerProxy,
   ])],

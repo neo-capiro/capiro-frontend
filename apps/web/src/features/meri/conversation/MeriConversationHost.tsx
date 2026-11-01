@@ -17,6 +17,8 @@ import { useBeginNewChat } from "../../../shared/meri-conversations/stored-conve
 import { conversationSelection } from "../../../shared/meri-conversations/selection";
 import { newChatIntentEvent } from "../../../shared/meri-conversations/first-chat-intent";
 import { useConversationSession } from "./useConversationSession";
+import { researchRoute } from "../../../shared/meri-conversations/research-context";
+import { ResearchConversationHost } from "./ResearchConversationHost";
 import { ConversationView } from "./ConversationView";
 import { DefaultScopeOpening } from "./DefaultScopeOpening";
 
@@ -35,9 +37,13 @@ export function MeriConversationHost({
   const selected = useSelectedClient();
   const params = useSearchParams();
   const selector = conversationSelection(params);
+  const research = researchRoute(params);
   const general = params.get("scope") === "general" && !params.has("clientId");
   const invalidScope =
-    params.has("scope") && (!general || params.getAll("scope").length !== 1);
+    research?.state === "invalid" ||
+    (!research &&
+      params.has("scope") &&
+      (!general || params.getAll("scope").length !== 1));
   const [newChatEpoch, setNewChatEpoch] = useState(0);
   useEffect(() => {
     if (selector.state !== "current") return;
@@ -65,6 +71,20 @@ export function MeriConversationHost({
         </p>
         {scopeControl}
       </section>
+    );
+  if (research?.state === "research")
+    return account ? (
+      <ResearchConversationHost
+        key={JSON.stringify([account, research])}
+        account={account}
+        conversationId={research.conversationId}
+        portfolioId={research.portfolioId}
+        canCreate={firstChatBootstrapEnabled}
+      />
+    ) : (
+      <p role="status">
+        Verify your account before opening this Research conversation.
+      </p>
     );
   if (account && general) {
     const key = JSON.stringify([

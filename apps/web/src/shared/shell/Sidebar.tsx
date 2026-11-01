@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@capiro/ui/button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useSelectedClient } from "../session/SelectedClient";
+import { researchRoute } from "../meri-conversations/research-context";
 import { conversationSearchHref } from "../meri-conversations/conversation-navigation";
 import { unavailableTitle } from "../meri-resources/unavailable";
 import { useMeriCapabilities } from "../meri-resources/CapabilityContext";
@@ -40,10 +41,11 @@ export function Sidebar({
   const router = useRouter();
   const selected = useSelectedClient();
   const params = useSearchParams();
-  const searchClient =
-    params.getAll("scope").length === 1 &&
-    params.get("scope") === "general" &&
-    !params.has("clientId")
+  const searchClient = researchRoute(params)
+    ? undefined
+    : params.getAll("scope").length === 1 &&
+        params.get("scope") === "general" &&
+        !params.has("clientId")
       ? null
       : selected.state === "authorized-client"
         ? selected.client.id

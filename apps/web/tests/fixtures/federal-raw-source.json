@@ -1,0 +1,140 @@
+{
+  "note": "Synthetic fixture generated from current Meri1.5 mounted document application and canonical artifact owners; no live database/provider or legal text.",
+  "input": {
+    "selection": {
+      "billId": "119-hr-1",
+      "versionCode": "enr",
+      "revisionId": "11111111-1111-4111-8111-111111111111",
+      "versionHash": "8f45a3579629906ffbddf66fe7cd1fd7a8efd8479b8019c44e3425c90d450e6a",
+      "textHash": "8f45a3579629906ffbddf66fe7cd1fd7a8efd8479b8019c44e3425c90d450e6a"
+    },
+    "deliveryId": "f8ee63b1-0224-4869-8045-1fe737216673",
+    "representation": "retained-raw-utf8/1"
+  },
+  "imported": {
+    "schema": "meri.federal-source.v2",
+    "representation": "retained-raw-utf8/1",
+    "capture": {
+      "version": "federal-source-capture/1",
+      "representation": "response-body",
+      "format": "xml",
+      "mediaType": "application/xml; charset=UTF-8",
+      "encoding": "utf-8",
+      "byteLength": 199,
+      "sha256": "8f45a3579629906ffbddf66fe7cd1fd7a8efd8479b8019c44e3425c90d450e6a",
+      "utf8RoundTrip": true
+    },
+    "selection": {
+      "billId": "119-hr-1",
+      "versionCode": "enr",
+      "revisionId": "11111111-1111-4111-8111-111111111111",
+      "versionHash": "8f45a3579629906ffbddf66fe7cd1fd7a8efd8479b8019c44e3425c90d450e6a",
+      "textHash": "8f45a3579629906ffbddf66fe7cd1fd7a8efd8479b8019c44e3425c90d450e6a"
+    },
+    "source": {
+      "documentId": "119-hr-1",
+      "publisher": "govinfo",
+      "sourceVersion": "enr/11111111-1111-4111-8111-111111111111",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/xml/BILLS-119hr1enr.xml",
+      "publishedAt": "2026-01-01",
+      "text": "﻿<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<bill xmlns=\"http://xml.house.gov/schemas/uslm/1.0\"><section identifier=\"/synthetic/s1\"><content>Synthetic € 😀 &amp; text.</content></section></bill>\r\n",
+      "sha256": "8f45a3579629906ffbddf66fe7cd1fd7a8efd8479b8019c44e3425c90d450e6a",
+      "parserVersion": "federal-uslm-xml/1",
+      "coverage": {
+        "complete": true,
+        "limitations": [
+          "Raw USLM XML text; scopes are the declared element identifiers and edits apply to exact markup spans. Well-formedness and the declared namespace are checked; USLM schema validity, numbering, cross-references, arithmetic and substantive law require review.",
+          "Captured response-body UTF-8 bytes and exact SHA-256 verified; compressed HTTP transport frames are not retained.",
+          "Current at read only. Enactment and legal currency are unresolved; an enrolled bill is not proof of enactment.",
+          "Canonical federal source metadata: {\"billId\":\"119-hr-1\",\"collection\":\"BILLS\",\"evidenceParserVersion\":\"federal-legislative-exact-code-v1+federal-source-capture/1\",\"fetchedAt\":\"2026-01-03T00:00:00.000Z\",\"lineageKey\":\"bill:119-hr-1\",\"packageId\":\"BILLS-119hr1enr\",\"provider\":\"govinfo\",\"publishedAt\":\"2026-01-01T00:00:00.000Z\",\"revisionId\":\"11111111-1111-4111-8111-111111111111\",\"sourceKey\":\"fixture-bill\",\"sourceLocator\":\"https://www.govinfo.gov/content/pkg/BILLS-119hr1enr/xml/BILLS-119hr1enr.xml\",\"sourceModifiedAt\":\"2026-01-02T00:00:00.000Z\",\"textHash\":\"8f45a3579629906ffbddf66fe7cd1fd7a8efd8479b8019c44e3425c90d450e6a\",\"versionCode\":\"enr\",\"versionHash\":\"8f45a3579629906ffbddf66fe7cd1fd7a8efd8479b8019c44e3425c90d450e6a\"}",
+          "Captured response-body receipt: {\"byteLength\":199,\"encoding\":\"utf-8\",\"format\":\"xml\",\"mediaType\":\"application/xml; charset=UTF-8\",\"representation\":\"response-body\",\"sha256\":\"8f45a3579629906ffbddf66fe7cd1fd7a8efd8479b8019c44e3425c90d450e6a\",\"utf8RoundTrip\":true,\"version\":\"federal-source-capture/1\"}"
+        ]
+      },
+      "scopes": [
+        {
+          "id": "document",
+          "label": "bill",
+          "start": 41,
+          "end": 191,
+          "sha256": "617f12c04b4e7d310b987a5ae593ef1cda7ca58dd36dd44b6dc7acb3bebebd29",
+          "ancestorPath": []
+        },
+        {
+          "id": "synthetic:s1",
+          "label": "section /synthetic/s1",
+          "start": 93,
+          "end": 184,
+          "sha256": "22ec2ca6b08cb315f29c21c83e6783c30d9f31a256b05c22f5902495cc7e6809",
+          "ancestorPath": ["document"]
+        }
+      ]
+    },
+    "publication": {
+      "version": {
+        "contractVersion": "0.2.0",
+        "artifactId": "bc5d625c-b457-4c47-89f5-886f698ba91b",
+        "versionId": "31a8db9e-58b5-467a-838f-16f9e86289f8",
+        "parentVersionId": null,
+        "binding": {
+          "tenantId": "33333333-3333-4333-8333-000000000100",
+          "actorId": "33333333-3333-4333-8333-000000000101",
+          "conversationId": "33333333-3333-4333-8333-000000000102",
+          "runId": "33333333-3333-4333-8333-000000000103",
+          "attemptId": "33333333-3333-4333-8333-000000000104",
+          "workerId": "33333333-3333-4333-8333-000000000105",
+          "writerFence": 1
+        },
+        "object": {
+          "objectId": "ce5839a8-555c-4c8a-85bc-5f7df42529c8",
+          "versionId": "SYNTHETIC_ce5839a8-555c-4c8a-85bc-5f7df42529c8",
+          "sha256": "6a45503a1ccbc6ea375451744215dae9d05b7b964a0b11cafabf28a840785e80",
+          "bytes": 3161,
+          "scopes": [
+            {
+              "tenantId": "33333333-3333-4333-8333-000000000100",
+              "kind": "client",
+              "resourceId": "33333333-3333-4333-8333-000000000106",
+              "policyRevision": "policy1"
+            }
+          ]
+        },
+        "filename": "Federal source _552d024283bdb317e12431aa1864c8987d0258bbf37885a93b4190e31f6e9467__ 119-hr-1.txt",
+        "mimeType": "text/plain; charset=utf-8",
+        "scopes": [
+          {
+            "tenantId": "33333333-3333-4333-8333-000000000100",
+            "kind": "client",
+            "resourceId": "33333333-3333-4333-8333-000000000106",
+            "policyRevision": "policy1"
+          }
+        ],
+        "evidence": [],
+        "generationStatus": "draft",
+        "previewStatus": "pending",
+        "createdAt": "2026-10-13T18:00:00.000Z"
+      },
+      "inspection": {
+        "sha256": "6a45503a1ccbc6ea375451744215dae9d05b7b964a0b11cafabf28a840785e80",
+        "bytes": 3161,
+        "format": "txt",
+        "nativeOpened": false,
+        "rendered": false,
+        "recalculated": false,
+        "members": [],
+        "details": {
+          "encoding": "UTF-8",
+          "whitespace": "unchanged"
+        }
+      },
+      "execution": {
+        "kind": "native-document",
+        "invocationId": "sdk:c90c7997340e653062e22226826a40e5c900d4bc79379638b038574a71fe0ae8",
+        "requestSha256": "5ba3a2ff00615d89790069800347ed60937dc7727cf0486df05fbc0ae2255dae",
+        "authorizationReceiptId": "76ac4d8a-dacc-42c0-b534-a54382e587d5",
+        "objectCommitted": true,
+        "versionCommitted": true,
+        "nativeQualified": false
+      }
+    }
+  }
+}

@@ -1,3 +1,8 @@
+import {
+  researchSelection,
+  sameResearchCapture,
+  type ResearchSelection,
+} from "./research-context";
 import type { ConversationContext } from "./session";
 import type { QueryClient } from "@tanstack/react-query";
 import type { MeriConversationSnapshot } from "@capiro/meri-client/conversation";
@@ -427,13 +432,23 @@ export function conversationSelectionOwner(
   clientId: string | null,
   conversationId?: string,
   storage?: TabStorage,
+  research?: ResearchSelection,
 ) {
+  const captured = research
+    ? researchSelection(account, research.conversationId, research.scope)
+    : undefined;
+  if (
+    captured &&
+    (clientId !== null || conversationId !== captured.conversationId)
+  )
+    throw new TabJournalUnavailable();
   const key = [
     "meri-conversation-selection",
     account.tenantId,
     account.actorId,
     clientId,
     ...(conversationId ? [conversationId] : []),
+    ...(captured ? [captured.scopeKind, captured.scope] : []),
   ];
   client.setQueryDefaults(key, { gcTime: Infinity });
   const persistence = tabRecord(
@@ -447,7 +462,7 @@ export function conversationSelectionOwner(
         throw new TabJournalUnavailable();
       return selected;
     },
-    "",
+    captured ? `research:${JSON.stringify(captured.scope)}` : "",
     storage ?? null,
   );
   const recovered = persistence.read();
@@ -465,8 +480,18 @@ export function conversationSelectionOwner(
   const remembered =
     client.getQueryData<{ conversationId?: string; runId?: string }>(key) ?? {};
   return {
-    hints: { ...remembered, clientId },
+    hints: captured
+      ? { ...remembered, clientId: null, ...captured }
+      : { ...remembered, clientId },
     record(context: ConversationContext) {
+      if (
+        captured
+          ? !("scopeKind" in context) ||
+            context.scopeKind !== "research_portfolio" ||
+            !sameResearchCapture(captured.scope, context.scope)
+          : "scopeKind" in context && context.scopeKind === "research_portfolio"
+      )
+        throw new TabJournalUnavailable();
       if (
         context.tenantId !== account.tenantId ||
         context.actorId !== account.actorId ||
