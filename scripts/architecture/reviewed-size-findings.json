@@ -6166,10 +6166,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveGovernedPlanner.tsx",
     "kind": "function",
     "symbol": "GovernedPlannerOutputs",
-    "fingerprint": "484f6dd0645d9c6bf6980649c29301cc6fd7ddd03356b616283f0332f2ff4336",
-    "reason": "Private component rendering the current governed Planner output/project for a verified generation: it reads the outputs through the governed-output request, and reverifies project access before navigating. Verification and request shaping are delegated to objective-governed-planner-read and the shared governed-output selectors. One responsibility under the objectives governed-planner surface owner.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "592bc672bb7dd8bac336b8935cf0ce1cc05d79917fb40f887d830d90f3eca9f6",
+    "reason": "Existing 113-line current Planner output view retains exact source-scoped read, safe unavailable/pending states and fresh Core/Planner authorization before navigation. This change only narrows its prop type to the already existing GovernedPlannerObjective contract so the new saved-source action can reuse it. Runtime behavior and permission owners are unchanged; review inspected actual read and reverify calls. No new action or authority is inferred from its output receipt.",
+    "reviewedBy": "Independent Codex /root/operational_links; not Automation author",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveStrategyIntake.tsx",
@@ -7653,6 +7653,24 @@
     "fingerprint": "efa76f75e47fa1bf91538b9424cf8d33e059a88e8d96ed4852620e8542c8b75d",
     "reason": "One Objective-scoped operational container composes independently owned linked-work, saved-generation and Questions views. Both added children receive the same current Objective; Questions retains current edit/loading hints and reload callback, while saved-generation discovery and Planner consent keep their own canonical read/action owners. Existing navigation, criteria, query errors and association dialog callbacks are preserved byte-for-byte. No mutation or alternate authority logic is added to this container. Exact conflict composition was checked independently against both accepted source deltas.",
     "reviewedBy": "Independent Codex objective_questions agent; not root conflict-composition author",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectivePlannerAutomation.tsx",
+    "kind": "function",
+    "symbol": "PlannerAutomation",
+    "fingerprint": "65275b0089168e69741c7a834cde3fc616e9d8764a6fcb4f57cf1c94ecdc5daa",
+    "reason": "One action-specific React composition binds fixed read/consent operations to the existing canonical Planner consent session and renders its consent, cancel, recovery and result controls. The session owns original request identity and successor rules; the journal owns persistence; Core and the canonical continuation worker own authority and effects. The 151-line JSX-heavy function has no alternate materializer, model loop, provider or persistence implementation. Keeping one session boundary ties loading/error/consent controls together. Independently reviewed exact 44cb0c9c source with58 focused tests; native/browser acceptance remains separate.",
+    "reviewedBy": "Independent Codex /root/operational_links; not Automation author",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/objective-planner-consent-recovery.ts",
+    "kind": "function",
+    "symbol": "createPlannerConsentRecovery",
+    "fingerprint": "3acd87aa27df0b0da7dd864816eca938e7a25bd6208cd2cc0c21dd61211aef34",
+    "reason": "One 84-line adapter binds the existing encrypted recovery journal to one actor/tenant/Objective-version consent scope. It centralizes immutable request/origin/receipt validation, current-source guard, shared command lock and explicit acknowledgement only after rereading the exact original receipt. No new ledger or storage mechanism is introduced. Keeping reserve/save/acknowledge together makes replacement and unknown-outcome refusal auditable. Independently reviewed final44cb0c9c alongside the actual journal owner and58 focused lifecycle/recovery checks.",
+    "reviewedBy": "Independent Codex /root/operational_links; not Automation author",
     "reviewedOn": "2026-11-01"
   }
 ]
