@@ -133,8 +133,8 @@ function TurnNotices({ turn }: { turn: TurnView }) {
           ) : (
             <p>
               Meri is waiting for an approval that expires{" "}
-              {time(approval.expiresAt)}. Decisions are made under “Actions for
-              your approval” once conversation approvals are enabled for this
+              {time(approval.expiresAt)}. Decisions are made inside this
+              conversation once conversation approvals are enabled for this
               workspace; nothing happens until you approve it there.
             </p>
           )}
