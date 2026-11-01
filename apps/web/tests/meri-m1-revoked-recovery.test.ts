@@ -186,6 +186,12 @@ it.each([false, true])(
     clearMeriConversationRecovery(cache, scope, storage);
     expect(old.current()).toBe(false);
     expect(() => old.write({ submit: request })).toThrow();
+    const retired = storage.getItem(key);
+    if (corrupt) expect(retired).toBe("null");
+    else {
+      expect(JSON.parse(retired!)).toMatchObject({ retired: true, key });
+      expect(retired).not.toContain(request.prompt);
+    }
     for (let n = 0; n < 2; n++) {
       syncMeriTabIdentity("synthetic-session", storage);
       const fresh = conversationIntentJournal(
@@ -198,7 +204,7 @@ it.each([false, true])(
       expect(fresh.read()).toEqual({});
       expect(fresh.read()).toEqual({});
       expect(() => fresh.write({ submit: request })).toThrow();
-      expect(storage.getItem(key)).toBe("null");
+      expect(storage.getItem(key)).toBe(retired);
       clearMeriConversationRecovery(cache, scope, storage);
     }
     const nextRun = conversationIntentJournal(
@@ -210,7 +216,7 @@ it.each([false, true])(
     expect(nextRun.current()).toBe(true);
     expect(nextRun.read()).toEqual({});
     expect(nextRun.write({ submit: request })).toBe(true);
-    expect(storage.getItem(key)).toBe("null");
+    expect(storage.getItem(key)).toBe(retired);
     syncMeriTabIdentity("synthetic-other-session", storage);
     expect(storage.getItem(key)).toBeNull();
     const replacement = conversationIntentJournal(
