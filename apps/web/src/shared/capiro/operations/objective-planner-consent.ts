@@ -16,7 +16,7 @@ export const plannerConsentRequest = z.strictObject({
   body: z.strictObject({
     schemaVersion: z.literal(1),
     requestId: id,
-    command: z.literal("retry"),
+    command: z.enum(["retry", "cancel"]),
     workAction: z.literal("objective.plan.prepare"),
     expectedObjectiveVersion: version,
     expectedControlVersion: z.number().int().min(0).max(2147483647),
@@ -76,7 +76,7 @@ export function requirePlannerConsentOrigin(
     throw new Error("Planner consent does not match the current Objective.");
   return origin;
 }
-export function requirePlannerConsentSelection(
+export function plannerConsentAvailability(
   raw: unknown,
   savedRaw: unknown,
   selection: SavedStrategySelection,
@@ -85,18 +85,6 @@ export function requirePlannerConsentSelection(
   const origin = governedObjectiveGenerationObservation.parse(raw);
   if (
     origin.objective.revision.id !== saved.source.objectiveRevisionId ||
-    origin.reconciliation === "outcome_unconfirmed" ||
-    (origin.accounting?.outcome === "applied" &&
-      origin.accounting.sourceRevision.id ===
-        saved.source.objectiveRevisionId) ||
-    (origin.consent &&
-      !origin.consent.expired &&
-      origin.control.cancelledAt === null)
-  )
-    throw new Error(
-      "Refresh the existing Planner operation before requesting new consent.",
-    );
-  if (
     origin.clientId !== selection.query.clientId ||
     origin.objective.id !== selection.query.objectiveId ||
     origin.objective.revision.version !== selection.query.objectiveVersion ||
@@ -105,15 +93,54 @@ export function requirePlannerConsentSelection(
     origin.commandReceipt !== null
   )
     throw new Error("The Planner source is no longer current.");
-  return origin;
+  return {
+    origin,
+    canRetry:
+      origin.reconciliation !== "outcome_unconfirmed" &&
+      !(
+        origin.accounting?.outcome === "applied" &&
+        origin.accounting.sourceRevision.id === saved.source.objectiveRevisionId
+      ) &&
+      !(
+        origin.consent &&
+        !origin.consent.expired &&
+        origin.control.cancelledAt === null
+      ),
+    canCancel:
+      origin.control.currentAuthorizationRequestId !== null &&
+      origin.control.cancelledAt === null &&
+      !(
+        origin.accounting?.outcome === "applied" &&
+        origin.accounting.sourceRevision.id === saved.source.objectiveRevisionId
+      ),
+  };
+}
+export function requirePlannerConsentSelection(
+  raw: unknown,
+  savedRaw: unknown,
+  selection: SavedStrategySelection,
+  command: "retry" | "cancel" = "retry",
+) {
+  const available = plannerConsentAvailability(raw, savedRaw, selection);
+  if (!(command === "retry" ? available.canRetry : available.canCancel))
+    throw new Error(
+      "Refresh the existing Planner operation before changing consent.",
+    );
+  return available.origin;
 }
 export function plannerConsentFor(
   raw: unknown,
   savedRaw: unknown,
   selection: SavedStrategySelection,
   requestId: string,
+  command: "retry" | "cancel" = "retry",
 ) {
-  const origin = requirePlannerConsentSelection(raw, savedRaw, selection);
+  const origin = requirePlannerConsentSelection(
+    raw,
+    savedRaw,
+    selection,
+    command,
+  );
   const request = plannerConsentRequest.parse({
     params: {
       clientId: selection.query.clientId,
@@ -122,7 +149,7 @@ export function plannerConsentFor(
     body: {
       schemaVersion: 1,
       requestId,
-      command: "retry",
+      command,
       workAction: "objective.plan.prepare",
       expectedObjectiveVersion: selection.query.objectiveVersion,
       expectedControlVersion: origin.control.version,
@@ -147,9 +174,11 @@ export function requirePlannerConsentReceipt(
     r.requestId !== c.requestId ||
     r.clientId !== request.params.clientId ||
     r.objectiveId !== request.params.objectiveId ||
-    r.command !== "retry" ||
+    r.command !== c.command ||
     r.workAction !== c.workAction ||
-    r.outcome !== "reconsent_recorded" ||
+    (c.command === "retry"
+      ? r.outcome !== "reconsent_recorded"
+      : r.outcome === "reconsent_recorded") ||
     r.commandRevision.id !== origin.objective.revision.id ||
     r.commandRevision.version !== c.expectedObjectiveVersion ||
     r.sourceRevision.id !== origin.requestedSource.revision.id ||

@@ -2,6 +2,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import type { ApiClient } from "@/shared/portfolio/api/http";
 import type { ClientWriter } from "@/shared/portfolio/auth/client-writer";
 import {
+  acknowledgeRecovery,
   readRecovery,
   reserveRecovery,
   updateRecovery,
@@ -84,6 +85,23 @@ export function createPlannerConsentRecovery(
         contract,
         authority.guard,
       ),
+    acknowledge: async (value) => {
+      if (!value.receipt)
+        throw new Error("Original Planner consent is unconfirmed.");
+      const current = check(
+        await readRecovery(scope, contract, authority.guard),
+      );
+      if (
+        !current?.receipt ||
+        JSON.stringify(current) !== JSON.stringify(value)
+      )
+        throw new Error("Original Planner consent changed.");
+      await acknowledgeRecovery(
+        scope,
+        value.request.body.requestId,
+        authority.guard,
+      );
+    },
     lock: (action) => withRecoveryCommandLock(scope, authority.guard, action),
   };
 }

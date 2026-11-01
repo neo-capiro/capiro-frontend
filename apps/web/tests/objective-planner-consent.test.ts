@@ -1,4 +1,5 @@
 import { expect, it } from "vitest";
+import type { GovernedObjectiveGenerationObservation } from "../src/shared/capiro/operations/objective-governed-generation";
 import {
   ObjectivePlannerConsentSession,
   type PlannerConsentRecovery,
@@ -15,7 +16,7 @@ const selection = {
   ids: { strategyId: id(5), strategyVersionId: id(6), generatedJobId: id(4) },
 };
 function setup() {
-  const origin = {
+  const origin: GovernedObjectiveGenerationObservation = {
     schemaVersion: 1,
     clientId: id(2),
     objective: {
@@ -77,6 +78,8 @@ function setup() {
   };
   let retained: RetainedPlannerConsent | null = null;
   let receipt: ReturnType<typeof requirePlannerConsentReceipt> | undefined;
+  const receipts = new Map<string, NonNullable<typeof receipt>>();
+  let refuseReceiptRead = false;
   let lostReply = false,
     denied = false,
     posts = 0,
@@ -97,6 +100,11 @@ function setup() {
     save: async (v) => {
       retained = structuredClone(v);
     },
+    acknowledge: async (value) => {
+      expect(value.receipt).toBeTruthy();
+      expect(retained).toEqual(value);
+      retained = null;
+    },
     lock: async (action) => action(),
   };
   const session = () =>
@@ -104,35 +112,60 @@ function setup() {
       {
         saved: async () => saved,
         generation: async (requestId) => {
-          if (requestId && !receipt) throw Error("unavailable");
-          return requestId ? { ...origin, commandReceipt: receipt } : origin;
+          if (requestId && (refuseReceiptRead || !receipts.has(requestId)))
+            throw Error("unavailable");
+          return structuredClone(
+            requestId
+              ? { ...origin, commandReceipt: receipts.get(requestId) }
+              : origin,
+          );
         },
         command: async (request) => {
           posts++;
-          receipt ??= {
+          const command = request.body.command;
+          receipt = receipts.get(request.body.requestId) ?? {
             schemaVersion: 1,
             receiptId: id(20),
             requestId: request.body.requestId,
             payloadDigest: "1".repeat(64),
             clientId: id(2),
             objectiveId: id(3),
-            command: "retry",
+            command,
             workAction: "objective.plan.prepare",
             commandRevision: { id: id(8), version: 2 },
             sourceRevision: { id: id(8), version: 2 },
             rootIntentId: id(21),
-            controlVersionBefore: 0,
-            controlVersionAfter: 1,
-            targetAuthorizationRequestId: null,
-            authorizationRequestId: id(22),
-            consent: {
-              id: id(22),
-              confirmedAt: "2026-11-01T00:00:01.000Z",
-              expiresAt: "2026-11-01T00:10:00.000Z",
-            },
-            outcome: "reconsent_recorded",
+            controlVersionBefore: request.body.expectedControlVersion,
+            controlVersionAfter: request.body.expectedControlVersion + 1,
+            targetAuthorizationRequestId:
+              request.body.targetAuthorizationRequestId,
+            authorizationRequestId:
+              command === "retry"
+                ? id(22 + posts)
+                : request.body.targetAuthorizationRequestId,
+            consent:
+              command === "cancel"
+                ? null
+                : {
+                    id: id(22 + posts),
+                    confirmedAt: "2026-11-01T00:00:01.000Z",
+                    expiresAt: "2026-11-01T00:10:00.000Z",
+                  },
+            outcome:
+              command === "cancel"
+                ? "cancellation_recorded"
+                : "reconsent_recorded",
             committedAt: "2026-11-01T00:00:01.000Z",
           };
+          receipts.set(receipt.requestId, receipt);
+          origin.control = {
+            version: receipt.controlVersionAfter,
+            currentAuthorizationRequestId: receipt.authorizationRequestId,
+            cancelledAt: command === "cancel" ? receipt.committedAt : null,
+          };
+          if (receipt.consent)
+            origin.consent = { ...receipt.consent, expired: false };
+          origin.observedAt = "2026-11-01T00:00:02.000Z";
           if (lostReply) throw Error("reply lost");
           return receipt;
         },
@@ -161,6 +194,20 @@ function setup() {
     },
     erase: () => {
       retained = null;
+    },
+    blockReceiptRead: () => {
+      refuseReceiptRead = true;
+    },
+    settle: (outcome: "failed" | "cancelled" | "applied") => {
+      origin.reconciliation = "accounted";
+      origin.accounting = {
+        outcome,
+        sourceRevision: { id: id(8), version: 2 },
+      };
+      if (origin.consent) {
+        origin.consent.expired = true;
+        origin.observedAt = "2026-11-01T00:11:00.000Z";
+      }
     },
   };
 }
@@ -264,4 +311,54 @@ it("rejects a receipt for another original command", async () => {
       v.origin,
     ),
   ).toThrow();
+});
+it("cancel uses a separate explicit original command and never implies undo", async () => {
+  const f = setup(),
+    flow = f.session();
+  await flow.execute();
+  const first = f.retained!.request.body.requestId;
+  expect(flow.snapshot().canCancel).toBe(true);
+  await flow.change("cancel");
+  expect(f.posts).toBe(2);
+  expect(f.retained!.request.body.requestId).not.toBe(first);
+  expect(f.retained!.receipt?.outcome).toBe("cancellation_recorded");
+  expect(flow.snapshot().canCancel).toBe(false);
+});
+it.each(["failed", "cancelled"] as const)(
+  "explicit new consent can follow settled %s without replacing an unknown original",
+  async (outcome) => {
+    const f = setup(),
+      flow = f.session();
+    await flow.execute();
+    const original = f.retained!.request.body.requestId;
+    f.settle(outcome);
+    await flow.refresh();
+    expect(flow.snapshot().canRetry).toBe(true);
+    await flow.change("retry");
+    expect(f.posts).toBe(2);
+    expect(f.allocations).toBe(2);
+    expect(f.retained!.request.body.requestId).not.toBe(original);
+  },
+);
+it("unconfirmed original receipt prevents cancellation/reconsent replacement", async () => {
+  const f = setup(),
+    flow = f.session();
+  f.loseReply();
+  await flow.execute();
+  const original = f.retained;
+  f.blockReceiptRead();
+  await flow.change("cancel");
+  expect(f.posts).toBe(1);
+  expect(f.retained).toEqual(original);
+});
+it("applied same-source work cannot be reconsented or cancelled as an undo", async () => {
+  const f = setup(),
+    flow = f.session();
+  await flow.execute();
+  f.settle("applied");
+  await flow.refresh();
+  expect(flow.snapshot().canRetry).toBe(false);
+  expect(flow.snapshot().canCancel).toBe(false);
+  await flow.change("retry");
+  expect(f.posts).toBe(1);
 });

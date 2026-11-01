@@ -14,6 +14,7 @@ import { requireSavedGenerationDiscovery } from "@/shared/capiro/operations/obje
 import { createPlannerConsentRecovery } from "./objective-planner-consent-recovery";
 import { ObjectivePlannerConsentSession } from "./objective-planner-consent-session";
 import { ObjectiveGovernedPlanner } from "./ObjectiveGovernedPlanner";
+import { ObjectiveLegacyPlanBoundary } from "./ObjectiveLegacyPlanBoundary";
 
 export function ObjectivePlannerAutomation({
   selection,
@@ -45,11 +46,13 @@ export function ObjectivePlannerAutomation({
       <p>Verify your current client and session to prepare Planner work.</p>
     );
   return (
-    <PlannerAutomation
-      key={JSON.stringify([actor.tenantId, actor.userId, selection])}
-      selection={stableSelection}
-      actor={actor}
-    />
+    <ObjectiveLegacyPlanBoundary selection={stableSelection} actor={actor}>
+      <PlannerAutomation
+        key={JSON.stringify([actor.tenantId, actor.userId, selection])}
+        selection={stableSelection}
+        actor={actor}
+      />
+    </ObjectiveLegacyPlanBoundary>
   );
 }
 function PlannerAutomation({
@@ -151,14 +154,15 @@ function PlannerAutomation({
       {state.error && <p role="alert">{state.error}</p>}
       {!state.error && !state.busy && state.retained?.receipt ? (
         <p role="status">
-          Planner consent recorded. This receipt is not proof that the plan has
-          been applied. Closing this page does not cancel authorized work.
+          {state.retained.request.body.command === "cancel"
+            ? "Cancellation recorded. This does not undo applied Planner work."
+            : "Planner consent recorded. This receipt is not proof that the plan has been applied. Closing this page does not cancel authorized work."}
         </p>
       ) : (
         <button
           type="button"
           className="button primary"
-          disabled={state.busy || (!state.ready && !state.retained)}
+          disabled={state.busy || (!state.retained && !state.canRetry)}
           onClick={() => void session.execute()}
         >
           {state.retained
@@ -174,6 +178,27 @@ function PlannerAutomation({
       >
         Refresh consent and result
       </button>
+      {state.retained?.receipt &&
+        state.canRetry &&
+        !state.busy &&
+        !state.error && (
+          <button
+            type="button"
+            className="button"
+            onClick={() => void session.change("retry")}
+          >
+            Authorize a new Planner consent
+          </button>
+        )}
+      {state.canCancel && !state.busy && !state.error && (
+        <button
+          type="button"
+          className="button"
+          onClick={() => void session.change("cancel")}
+        >
+          Cancel pending Planner work
+        </button>
+      )}
       <ObjectiveGovernedPlanner
         key={state.revision}
         objective={{
