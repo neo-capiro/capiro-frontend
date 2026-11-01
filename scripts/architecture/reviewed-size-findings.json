@@ -7609,5 +7609,14 @@
     "reason": "Independent exact-source design review: this function owns one same-origin conversation transport lifecycle: request/configuration admission, existing token/session prerequisite, bounded request forwarding, response adaptation and abort/listener cleanup. Body validation, response decoding/stream bounds, origin policy and closed diagnostic validation/rate limiting remain in cohesive existing or dedicated helpers. The history observer records stages and terminal status only; it adds no domain authorization, persistence, retry loop or new route family. Keeping the try/finally and deadline ownership together makes cancellation and response cleanup reviewable. Splitting the 91-line orchestration solely to cross the threshold would distribute shared lifecycle state without removing an unrelated responsibility. The exact diagnostic pre/postimages and serving-base composition were independently verified, with unchanged authority and response semantics and focused behavioral evidence. Re-review on fingerprint or responsibility change.",
     "reviewedBy": "Independent reviewer 01a192fb-188f-7dc3-ba6d-46f1e10a3ac4",
     "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/objective-destinations/ObjectiveGeneratedStrategy.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveGeneratedStrategy",
+    "fingerprint": "5802a50b9944608aa68473115f74f1abff6ae740fa14fe5c10a0be239ff234f7",
+    "reason": "One receipt-bound saved Strategy read view owns selection validation, loading/error suppression and presentation of the same immutable snapshot, graph and separate current-node observations. The fixed GET and strict receiver own transport and contract validation; Core owns authorization and immutable job/version admission; Planner owns consent and materialization. No mutation, request identity allocation, generation loop, grouping decision or authority is added here. The 105 nonblank-line JSX-heavy body is one cohesive view; splitting solely for size would scatter the exact-snapshot/error boundary. Independently reviewed at fdc7cb68afcabaea04b49c2f5a33ca3300bed2a2 with 47 focused frontend tests passing, including mismatched selections and loading/error suppression.",
+    "reviewedBy": "Independent Codex /root/paired_saved_review",
+    "reviewedOn": "2026-11-01"
   }
 ]
