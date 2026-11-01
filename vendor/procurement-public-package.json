@@ -1,0 +1,61 @@
+{
+  "schema": "capiro-procurement-public-package/1",
+  "status": "COMPOSED_PUBLIC_TYPE_ARTIFACT_NOT_PRODUCT_BUILD_OR_DEPLOYMENT",
+  "base": {
+    "file": "capiro-shared-0.0.0-fbdcba3b-d0ac8893de0b.tgz",
+    "sourceCommit": "fbdcba3b981d1bba1c2055a8020f726aabce82ac",
+    "sha256": "d0ac8893de0b80874c4d12eaf758dc3773db7b74d750c097f430ff2ccf390f4a",
+    "bytes": 513292,
+    "members": 289
+  },
+  "source": {
+    "repository": "neo-capiro/capiro-backend",
+    "commit": "f326ba7926606a6c5810c7608b627637bdf3092d",
+    "path": "packages/shared/src/defense-procurement.ts",
+    "gitBlob": "23a3c3d5aa03c0f14db215a6b32e6626c017d826",
+    "sha256": "2a361b736aef8ba3168a610cdac2fe20a728b050efab29e8bdd516b975f1aee3",
+    "bytes": 1976
+  },
+  "generator": {
+    "typescriptVersion": "5.9.3",
+    "typescriptSha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675",
+    "nodeVersion": "v24.22.1",
+    "compilerOptions": {
+      "target": 9,
+      "module": 1,
+      "declaration": true,
+      "declarationMap": false,
+      "sourceMap": false,
+      "newLine": 1
+    },
+    "api": [
+      "transpileModule",
+      "transpileDeclaration"
+    ],
+    "archive": "deterministic USTAR regular members, gzip level9; header metadata normalized; no npm install, package scripts or product build"
+  },
+  "artifact": {
+    "file": "capiro-shared-0.0.0-procurement-f326ba79-d07e75bf10bf.tgz",
+    "sha256": "d07e75bf10bfeaa93a451942b65f1d64035ebaf33d9e3ed6e237bd0ab1e0afec",
+    "bytes": 513999,
+    "integrity": "sha512-jed4Bv+REKZRtPOjL8OzUqjtoKLoEEMVW71Qs+uY3QzfJ2iAYwKZloc7t+3u37QiIMtfjJy7fnFKkxCY69JOTA==",
+    "members": 292
+  },
+  "composition": {
+    "preservedMembers": 287,
+    "modified": [
+      "package/dist/index.d.ts",
+      "package/dist/index.js"
+    ],
+    "added": [
+      "package/src/defense-procurement.ts",
+      "package/dist/defense-procurement.d.ts",
+      "package/dist/defense-procurement.js"
+    ],
+    "rootExport": "@capiro/shared",
+    "sourceIndex": "Base contains no src/index.ts; none invented or imported. Root dist exports appended.",
+    "sourceMaps": "Original maps preserved byte-for-byte; added export lines have no added mapping. New module emitted with maps disabled.",
+    "packageJson": "Original package.json preserved, no dependency/export-map change."
+  },
+  "qualification": "Source/byte composition only. Normal image/type/browser/deployed acceptance is separate."
+}

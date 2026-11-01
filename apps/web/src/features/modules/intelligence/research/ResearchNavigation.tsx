@@ -22,11 +22,13 @@ export function useResearchLocation() {
   };
 }
 export function ResearchPages({
+  disabled = false,
   page,
   total,
   limit,
   onPage,
 }: {
+  disabled?: boolean;
   page: number;
   total: number;
   limit: number;
@@ -34,7 +36,10 @@ export function ResearchPages({
 }) {
   return (
     <nav aria-label="Result pages">
-      <ActionButton disabled={page <= 1} onClick={() => onPage(page - 1)}>
+      <ActionButton
+        disabled={disabled || page <= 1}
+        onClick={() => onPage(page - 1)}
+      >
         Previous
       </ActionButton>
       <span>
@@ -42,7 +47,7 @@ export function ResearchPages({
         Page {page} · {total} matching records{" "}
       </span>
       <ActionButton
-        disabled={page * limit >= total}
+        disabled={disabled || page * limit >= total}
         onClick={() => onPage(page + 1)}
       >
         Next

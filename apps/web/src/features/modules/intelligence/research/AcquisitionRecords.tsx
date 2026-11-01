@@ -11,8 +11,14 @@ import {
 import styles from "../intelligence.module.css";
 import { ResearchPages, useResearchLocation } from "./ResearchNavigation";
 import { SourceLink } from "./ResearchEvidence";
+import { ProcurementSelection } from "./ProcurementSelection";
+import { ProcurementReadPanel } from "./ProcurementPanel";
+import { useProcurementSelection } from "./useProcurementSelection";
+import { selectableAward } from "./procurement-selection";
 export function AcquisitionRecords() {
-  const { params, update, page } = useResearchLocation();
+  const { params, page } = useResearchLocation();
+  const selection = useProcurementSelection();
+  const update = selection.update;
   const q = params.get("researchQuery") || "",
     id = params.get("researchId") || "";
   const query = useCapiroQuery("defenseResearch.acquisitions", {
@@ -35,15 +41,19 @@ export function AcquisitionRecords() {
         }}
       >
         <TextInput
+          disabled={selection.pending}
           name="q"
           aria-label="Search acquisitions"
           defaultValue={q}
           maxLength={200}
           placeholder="Source record or title…"
         />
-        <ActionButton type="submit">Search acquisitions</ActionButton>
+        <ActionButton type="submit" disabled={selection.pending}>
+          Search acquisitions
+        </ActionButton>
         <ActionButton onClick={query.reload}>Refresh acquisitions</ActionButton>
       </form>
+      <ProcurementSelection selection={selection} />
       <StatusPanel
         loading={query.loading}
         error={query.error}
@@ -56,10 +66,32 @@ export function AcquisitionRecords() {
             caption="Acquisition records"
             columns={[
               {
+                key: "select",
+                label: "Money Flow",
+                render: (row) =>
+                  selectableAward(row.identityKey) ? (
+                    <input
+                      type="checkbox"
+                      aria-label={`Select award ${row.title || row.sourceRecordId} (${row.identityKey})`}
+                      checked={selection.keys.includes(row.identityKey)}
+                      disabled={
+                        selection.pending ||
+                        Boolean(selection.error) ||
+                        (selection.keys.length >= 25 &&
+                          !selection.keys.includes(row.identityKey))
+                      }
+                      onChange={() => selection.toggle(row.identityKey)}
+                    />
+                  ) : (
+                    <span>Not an award</span>
+                  ),
+              },
+              {
                 key: "name",
                 label: "Record",
                 render: (row) => (
                   <button
+                    disabled={selection.pending}
                     className={styles.link}
                     onClick={() => update({ researchId: row.identityKey })}
                   >
@@ -88,6 +120,7 @@ export function AcquisitionRecords() {
           />
           {query.data && (
             <ResearchPages
+              disabled={selection.pending}
               page={query.data.page}
               total={query.data.total}
               limit={query.data.limit}
@@ -98,8 +131,10 @@ export function AcquisitionRecords() {
           )}
         </Panel>
       </StatusPanel>
+      <ProcurementReadPanel selection={selection} />
       {id && (
         <AcquisitionDetail
+          pending={selection.pending}
           identityKey={id}
           onClose={() => update({ researchId: null })}
         />
@@ -108,9 +143,11 @@ export function AcquisitionRecords() {
   );
 }
 function AcquisitionDetail({
+  pending,
   identityKey,
   onClose,
 }: {
+  pending: boolean;
   identityKey: string;
   onClose: () => void;
 }) {
@@ -127,7 +164,9 @@ function AcquisitionDetail({
         <Panel
           title={query.data.title || query.data.sourceRecordId}
           actions={
-            <ActionButton onClick={onClose}>Close acquisition</ActionButton>
+            <ActionButton onClick={onClose} disabled={pending}>
+              Close acquisition
+            </ActionButton>
           }
         >
           <div className={styles.content}>

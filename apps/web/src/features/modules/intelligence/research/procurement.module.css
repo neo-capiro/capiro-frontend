@@ -1,0 +1,90 @@
+.selection,
+.content {
+  padding: 18px 20px;
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.selection p,
+.content p {
+  margin: 0;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.selected {
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+.selected li {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+.selected code {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.measures {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+}
+.measures dt {
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.measures dd {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.evidence {
+  display: grid;
+  gap: 8px;
+}
+.evidence details {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border, #e7e5e4);
+}
+.evidence dl {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 8px;
+}
+.evidence dd {
+  margin: 0;
+}
+.coverage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.subtext {
+  font-size: 12px;
+  display: block;
+  font-weight: 400;
+  margin-top: 4px;
+}
+@media (max-width: 650px) {
+  .measures {
+    grid-template-columns: 1fr;
+  }
+  .evidence dl {
+    grid-template-columns: 1fr;
+  }
+  .selected li {
+    align-items: flex-start;
+  }
+}

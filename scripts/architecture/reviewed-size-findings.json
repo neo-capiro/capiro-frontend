@@ -6477,19 +6477,19 @@
     "file": "apps/web/src/features/modules/intelligence/research/AcquisitionRecords.tsx",
     "kind": "function",
     "symbol": "AcquisitionRecords",
-    "fingerprint": "404f5d1a235b3af2556a0f35dd9967c1f4587468f1fbb149298078fbf6b28f50",
-    "reason": "reviewed-accept (function size, 119 nonblank) â€” a single list surface over the fixed intelligence defense acquisition reader: URL-owned query/page, typed summary columns and links to the detail route. Presentation-only expansion over an unchanged operation contract.",
-    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "5e0f54b35837efee222100f6cfa387d1285e4f16d3cff7b978b59932806676ca",
+    "reason": "Existing acquisition list composition coordinates one URL-navigation and selection owner; query, validation and financial result responsibilities remain delegated.",
+    "reviewedBy": "Independent source_review agent, procurement source review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/intelligence/research/AcquisitionRecords.tsx",
     "kind": "function",
     "symbol": "AcquisitionDetail",
-    "fingerprint": "8ef202c3f4d0d11de5eb63436558271ee9fdd194a7fe12bb8ab02c3f2b4199ab",
-    "reason": "reviewed-accept (function size, 86 nonblank) â€” one detail panel rendering the acquisition record plus its revisions, child/amendment identities and associations from the frozen detail DTO; missing revisions/associations render as explicit 'None recorded' text rather than zero counts, and no numeric value is substituted for an absent one.",
-    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "c7786db1d88d057f7d0b1d8e8b551cc9e7ee8817e360bf660e8dc3970b282ec3",
+    "reason": "One existing acquisition detail view composes source, revisions and associations; the only new detail behavior disables close during pending navigation.",
+    "reviewedBy": "Independent source_review agent, procurement source review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/intelligence/research/ContextRecords.tsx",
@@ -7746,6 +7746,33 @@
     "fingerprint": "a94b9f6caf31cd40813f543bc619d2fc8634b792c30a9bd68efbbcac5da8212b",
     "reason": "This existing Meri home/composer stylesheet retains one feature presentation owner. The delta adds an enclosing focus indicator, reduced-motion handling and footer width correction using existing tokens and local composer selectors; it introduces no new state, authority, layout framework or global style exemption. Existing responsive/theme rules remain cohesive with the composer they style.",
     "reviewedBy": "Codex independent FE reviewer (non-author)",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/research/ProcurementPanel.tsx",
+    "kind": "function",
+    "symbol": "ProcurementReadPanel",
+    "fingerprint": "bcc1b8fbdd952ca29ae82c0ad23d680893ca94862057ccaeef1c16e7c8b7ea7c",
+    "reason": "One scoped request lifecycle and response-admission view composes loading, refusal and result states; transport, selection and result internals have separate owners.",
+    "reviewedBy": "Independent source_review agent, procurement source review",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/research/ProcurementResult.tsx",
+    "kind": "function",
+    "symbol": "ProcurementResult",
+    "fingerprint": "bdafd8deec01c8d91fed6230a506132cefb91ebc4bb38f781162c0600289977f",
+    "reason": "Single selected-cohort summary, unavailable state and coverage presentation delegates group tables and source provenance to cohesive components.",
+    "reviewedBy": "Independent source_review agent, procurement source review",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/research/ProcurementResult.tsx",
+    "kind": "function",
+    "symbol": "ProcurementGroups",
+    "fingerprint": "ad9569f535dcdc7ea8a759a7180dec1e24c3357797c97a0573ca7a297f39b2f9",
+    "reason": "One bounded paged procurement table owns its columns and pager; exact decimal formatting remains delegated and no monetary aggregation occurs here.",
+    "reviewedBy": "Independent source_review agent, procurement source review",
     "reviewedOn": "2026-11-01"
   }
 ]
