@@ -18,6 +18,7 @@ import {
   CalendarPageDialogs,
 } from "./CalendarPagePanels";
 import clientStyles from "./calendar-client.module.css";
+import { ForecastWindows } from "./forecasts/ForecastWindows";
 
 export function CalendarPage({
   clientId,
@@ -91,6 +92,13 @@ export function CalendarPage({
             </>
           )}
         </>
+      )}
+      {!workspace && (
+        <ForecastWindows
+          key={`${state.range.startDay}:${state.range.endDay}`}
+          from={state.range.startDay}
+          to={state.range.endDay}
+        />
       )}
       {!workspace && detail}
       <CalendarPageDialogs state={state} destinations={destinations} />
