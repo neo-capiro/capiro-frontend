@@ -1,6 +1,6 @@
 # Meri 3.4 — current UI and state coverage
 
-Updated 1 November 2026 against frontend commit [580f4478eaa732c084858b4e764443e79b9782c9](https://github.com/neo-capiro/capiro-frontend/commit/580f4478eaa732c084858b4e764443e79b9782c9) and the two user-supplied November 1 inventories. Current main matched that source when inspected. This is a Figma and documentation handoff; no application code or deployment changed.
+Updated 1 November 2026 against frontend commit [580f4478eaa732c084858b4e764443e79b9782c9](https://github.com/neo-capiro/capiro-frontend/commit/580f4478eaa732c084858b4e764443e79b9782c9) and the two user-supplied November 1 inventories. Current main matched that source at the initial inspection. A final comparison through `e05d950a6a50cd3f2b344ac84ef3b9233c3448ca` checked the subsequent Meri change: readable memory-title fallback. Existing readable titles remain valid; machine identifiers must not become visible headings. This is a Figma and documentation handoff; no application code or deployment changed.
 
 ## Start here
 

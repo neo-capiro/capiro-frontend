@@ -1339,7 +1339,8 @@
     "qa/RESPONSIVE-CHAT-VERIFIED.json",
     "qa/CUSTOM-MOBILE-NAV-QA.json",
     "qa/FINAL-TWO-SURFACE-VISUAL-QA.json",
-    "qa/FINAL-ROOT-QA.json"
+    "qa/FINAL-ROOT-QA.json",
+    "qa/FINAL-MAIN-DELTA.json"
   ],
   "prototypeLimitations": {
     "governance": "The previous 17 responsive references are closed with matching-size destinations. Source/live qualifications are unchanged.",
@@ -5090,5 +5091,11 @@
       "liveAcceptance": "Not certified by Figma or this audit"
     }
   ],
-  "localEvidenceNote": "Per-frame receipt fields record local mutation provenance. They are not repository links. The portable frame register and QA snapshots below contain the handoff evidence."
+  "localEvidenceNote": "Per-frame receipt fields record local mutation provenance. They are not repository links. The portable frame register and QA snapshots below contain the handoff evidence.",
+  "finalMainCheck": {
+    "commit": "e05d950a6a50cd3f2b344ac84ef3b9233c3448ca",
+    "sourceBaseline": "580f4478eaa732c084858b4e764443e79b9782c9",
+    "evidence": "qa/FINAL-MAIN-DELTA.json",
+    "result": "Only Meri product delta is readable memory-title fallback; documented in source reconciliation."
+  }
 }

@@ -35,3 +35,7 @@ No application formatting, lint, type, unit, build or end-to-end tests were run 
 Design source presence does not establish feature-gate activation or accepted live behavior. Models, provider/tool catalog examples and illustrative SDK usage must be replaced by authorized server data. SDK estimates are not invoices or enforced budgets. The dark home is a local appearance preview, not a claim of global theme implementation.
 
 Screenshots and raw mutation scripts remain local working evidence. This handoff includes portable frame IDs, source pins, coverage, representative QA snapshots and explicit qualifications; it omits short-lived asset URLs and execution scripts.
+
+## Final source freshness check
+
+The PR creation showed main had advanced during the pass. The final [eight-file comparison](qa/FINAL-MAIN-DELTA.json) through `e05d950a6a50cd3f2b344ac84ef3b9233c3448ca` was inspected. The only Meri product component change is readable memory-title fallback; the prior and new files were read. Existing readable headings remain consistent, and the fallback rule is documented in source reconciliation. Portfolio/Modules changes in that delta are outside this Meri task. This check does not assert deployment of that commit.

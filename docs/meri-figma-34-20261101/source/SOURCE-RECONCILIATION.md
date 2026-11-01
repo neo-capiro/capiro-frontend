@@ -45,3 +45,8 @@ Canonical @capiro/ui exports include AI Elements conversation/message/prompt-inp
 The attachments cover 41 acceptance areas in 24 groups. They are coverage requirements, not a promise of 41 separate screens or active providers. Their capability-launcher recommendation is optional and must not restore the noisy Runs/approval/sidebar experience the user removed. Keep supported secondary functions discoverable in contextual workflows.
 
 No app code, deployment, provider operations or customer data changed. No browser/OAuth/model run/build/test was performed. The audit independently verifies matching current source, not deployed image or gate values. Historical fixtures are design evidence, not live route evidence.
+## Final main delta check
+
+Main advanced six commits during the design pass to [e05d950a6a50cd3f2b344ac84ef3b9233c3448ca](https://github.com/neo-capiro/capiro-frontend/commit/e05d950a6a50cd3f2b344ac84ef3b9233c3448ca). The eight-file comparison contains one Meri product component change: `MemoryCorrectionComposer.tsx`, plus its tests. The other product changes are Portfolio/Modules presentation, outside this Meri pass.
+
+The new memory title projection preserves readable display/stored titles. Machine-shaped titles use a readable slug or the record's own first sentence, capped at 90 characters; JSON-only/empty content falls back to “Memory record”. Do not expose raw keys or invent content. The saved mockups already use readable memory headings; this fallback governs populated implementation data. No other Meri shell, typography, route or workflow change appears in this delta. See [comparison evidence](../qa/FINAL-MAIN-DELTA.json).
