@@ -97,7 +97,10 @@ describe("available opportunities are not mislabeled as proven matches", () => {
     return renderToStaticMarkup(
       createElement(OpportunitiesPage, {
         clientId,
-        destinations: { existingApp: "https://example.test" },
+        destinations: {
+          existingApp: "https://example.test",
+          externalApp: "https://example.test",
+        },
       }),
     );
   }

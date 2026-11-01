@@ -64,14 +64,16 @@ export const maturity = (trl: number | null) =>
       : trl >= 4
         ? "Prototype"
         : "Research";
+// Fit targets such as `/program-elements/...` are served only by the separate
+// existing application, so the link needs `destinations.externalApp`.
 export function fitLink(
   href: string | undefined | null,
-  existingApp: string | undefined,
+  externalApp: string | undefined,
 ) {
-  return existingApp &&
+  return externalApp &&
     href?.startsWith("/") &&
     !href.startsWith("//") &&
     !href.includes("\\")
-    ? `${existingApp}${href}`
+    ? `${externalApp}${href}`
     : undefined;
 }

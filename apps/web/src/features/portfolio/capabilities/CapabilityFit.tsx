@@ -11,31 +11,31 @@ type FitRefresh = ReturnType<typeof useRefreshFit>;
 
 export function CapabilityFit({
   clientId,
-  existingApp,
+  externalApp,
   compact = false,
 }: {
   clientId: string;
-  existingApp?: string;
+  externalApp?: string;
   compact?: boolean;
 }) {
   const query = useCapabilityFit(clientId);
   const result = query.isSuccess && !query.error ? query.data : undefined;
   const refresh = useRefreshFit(clientId, Boolean(result));
   return compact ? (
-    <CompactFit query={query} refresh={refresh} existingApp={existingApp} />
+    <CompactFit query={query} refresh={refresh} externalApp={externalApp} />
   ) : (
-    <FullFit query={query} refresh={refresh} existingApp={existingApp} />
+    <FullFit query={query} refresh={refresh} externalApp={externalApp} />
   );
 }
 
 function CompactFit({
   query,
   refresh,
-  existingApp,
+  externalApp,
 }: {
   query: FitQuery;
   refresh: FitRefresh;
-  existingApp?: string;
+  externalApp?: string;
 }) {
   const result = query.isSuccess && !query.error ? query.data : undefined;
   const preview = result?.matches.slice(0, 3) ?? [];
@@ -67,8 +67,8 @@ function CompactFit({
                     {match.target} · Fit {match.fit}/100
                   </strong>
                   <p>{match.why}</p>
-                  {fitLink(match.href, existingApp) && (
-                    <a href={fitLink(match.href, existingApp)}>Open target ↗</a>
+                  {fitLink(match.href, externalApp) && (
+                    <a href={fitLink(match.href, externalApp)}>Open target ↗</a>
                   )}
                 </article>
               ))}
@@ -85,7 +85,7 @@ function CompactFit({
             {result?.status === "stale" && "Profile changed; refresh. "}
             {preview.length > 0
               ? preview.map((match, index) => {
-                  const href = fitLink(match.href, existingApp);
+                  const href = fitLink(match.href, externalApp);
                   return (
                     <span key={match.id}>
                       {index > 0 && " · "}
@@ -127,11 +127,11 @@ function CompactFit({
 function FullFit({
   query,
   refresh,
-  existingApp,
+  externalApp,
 }: {
   query: FitQuery;
   refresh: FitRefresh;
-  existingApp?: string;
+  externalApp?: string;
 }) {
   const result = query.isSuccess && !query.error ? query.data : undefined;
   return (
@@ -176,8 +176,8 @@ function FullFit({
                 <span className="chip">Fit {match.fit}/100</span>
               </div>
               <p className="muted">{match.why}</p>
-              {fitLink(match.href, existingApp) && (
-                <a href={fitLink(match.href, existingApp)}>Open target ↗</a>
+              {fitLink(match.href, externalApp) && (
+                <a href={fitLink(match.href, externalApp)}>Open target ↗</a>
               )}
             </article>
           ))}

@@ -31,7 +31,8 @@ export function BillDrawer({
   const untrack = useTrackBill(clientId, backend, onClose);
   const trackedDate = billDate(bill.trackedAt);
   const actionDate = billDate(bill.latestActionDate);
-  const board = fullBoardHref(destinations.existingApp, clientId);
+  const board = fullBoardHref(destinations.externalApp, clientId);
+  // `/bills/[billId]` is served by this app, so Bill 360 keeps the existing app.
   const detail = destinations.existingApp
     ? `${destinations.existingApp}/bills/${encodeURIComponent(bill.billId)}?clientId=${encodeURIComponent(clientId)}`
     : undefined;
@@ -102,7 +103,7 @@ export function BillDrawer({
           clientId={clientId}
           billId={bill.billId}
           backend={backend}
-          existingApp={destinations.existingApp}
+          externalApp={destinations.externalApp}
         />
         <footer className={styles.footer}>
           {trackedDate ? (

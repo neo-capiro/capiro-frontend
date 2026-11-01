@@ -124,7 +124,7 @@ export function CapabilitiesPage({
         )}
         <CapabilityFit
           clientId={clientId}
-          existingApp={destinations.existingApp}
+          externalApp={destinations.externalApp}
           compact
         />
         <details className={styles.performance}>

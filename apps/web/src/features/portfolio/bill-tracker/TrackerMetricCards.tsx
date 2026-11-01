@@ -90,13 +90,13 @@ export function TrackerMetricCards({
     version,
     boardReady,
   );
-  const hasMetrics = Boolean(view.material || view.coverage);
-  const metricsPending = view.materialPending || view.coveragePending;
-  if (boardReady && !metricsPending && !hasMetrics)
+  // Without a metrics version the reads are never issued, so two "—" cards
+  // would be decoration. With a version set, a failed read keeps the cards and
+  // their per-metric Unavailable state.
+  if (version !== 1)
     return (
       <p className="status" role="status">
-        Tracker metrics are unavailable on this host. The metrics service is not
-        configured for this environment.
+        Tracker metrics aren&apos;t available right now.
       </p>
     );
   return (

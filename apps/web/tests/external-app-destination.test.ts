@@ -51,4 +51,19 @@ describe("formatDay", () => {
     expect(formatDay("")).toBe("—");
     expect(formatDay("not-a-date")).toBe("—");
   });
+  it("keeps a day-only date on its calendar day in a US zone", () => {
+    const previous = process.env.TZ;
+    process.env.TZ = "America/New_York";
+    try {
+      // Midnight UTC on 1 Nov is still 31 Oct in New York; the day must not move.
+      expect(new Date("2026-11-01").getDate()).toBe(31);
+      expect(formatDay("2026-11-01")).toBe("Nov 1, 2026");
+      expect(formatDay(new Date("2026-11-01"))).toBe("Oct 31, 2026");
+      // A timestamp still renders in the local zone because its time is the point.
+      expect(formatDay("2026-11-01T03:00:00.000Z")).toBe("Oct 31, 2026");
+    } finally {
+      if (previous === undefined) delete process.env.TZ;
+      else process.env.TZ = previous;
+    }
+  });
 });

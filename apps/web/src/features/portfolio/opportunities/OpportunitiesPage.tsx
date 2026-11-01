@@ -29,8 +29,8 @@ export function OpportunitiesPage({
   const base = destinations.existingApp;
   // `/program-elements` and `/intelligence/opportunities` live in the separate
   // existing application. When the configured "existing app" is this app's own
-  // root, those routes 404 here, so only use the external base when one exists.
-  const externalBase = destinations.externalApp ?? base;
+  // root, those routes 404 here, so the links render only with an external base.
+  const externalBase = destinations.externalApp;
   function set(values: Record<string, string>) {
     const next = new URLSearchParams(params);
     for (const [key, value] of Object.entries(values)) {
