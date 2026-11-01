@@ -41,6 +41,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     [kind, setKind] = useState<"replace" | "insert" | "delete">("replace");
   const [drafts, setDrafts] = useState<readonly AuthoredInput[]>([]),
     [authoring, setAuthoring] = useState<Authoring | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [expected, setExpected] = useState(""),
     [text, setText] = useState(""),
     [position, setPosition] = useState<"before" | "after">("after");
@@ -126,6 +127,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     setScopeId(selected.source.scopes[0]?.id ?? "");
     setDrafts([]);
     setAuthoring(null);
+    setEditingId(null);
     setExpected("");
     setText("");
   }
@@ -144,6 +146,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     const operations = value.selection.operations;
     const loaded = authoredFrom(operations);
     setDrafts(loaded);
+    setEditingId(null);
     // A saved review's own operations are already compiler-confirmed: show them
     // verbatim when this editor cannot re-derive nested intermediate text locally.
     const derived = await authoredOperations(
@@ -162,71 +165,63 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
   }
   /** Each added amendment is derived against the exact current section text, so
    * the user sees the intermediate hash and dependencies before the compiler. */
-  async function rebuild(next: readonly AuthoredInput[]) {
-    if (!source) return false;
-    const value = await authoredOperations(source.source, next);
-    if (value.refusal) {
-      setProblem(value.refusal);
-      return false;
-    }
-    setDrafts(next);
-    setAuthoring(value);
-    return true;
-  }
   async function addAmendment() {
     if (!source) return;
+    let amendmentId = editingId ?? `amendment-${crypto.randomUUID()}`;
+    while (!editingId && drafts.some((draft) => draft.id === amendmentId))
+      amendmentId = `amendment-${crypto.randomUUID()}`;
     const added: AuthoredInput = {
-      id: `amendment-${drafts.length + 1}`,
+      id: amendmentId,
       kind,
       scopeId,
       expectedText: expected,
       ...(kind === "delete" ? {} : { text }),
       ...(kind === "insert" ? { position } : {}),
     };
-    if (await rebuild([...drafts, added])) {
-      setExpected("");
-      setText("");
+    const next = editingId
+      ? drafts.map((draft) => (draft.id === editingId ? added : draft))
+      : [...drafts, added];
+    if (JSON.stringify(next) !== JSON.stringify(drafts)) {
+      const value = await authoredOperations(source.source, next);
+      if (value.refusal) {
+        setProblem(value.refusal);
+        return;
+      }
+      changed();
+      setDrafts(next);
+      setAuthoring(value);
     }
+    cancelEdit();
   }
-  async function removeAmendment(operation: AuthoredOperation) {
+  async function removeAmendment(operation: AuthoredInput) {
     const next = drafts.filter((draft) => draft.id !== operation.id);
+    changed();
     setDrafts(next);
+    setAuthoring(null);
+    if (editingId === operation.id) cancelEdit();
     // Removing an amendment always takes effect, even when the remaining set can
-    // only be hashed by the compiler; the local refusal then explains why.
-    setAuthoring((previous) =>
-      previous
-        ? {
-            ...previous,
-            operations: previous.operations.filter(
-              (entry) => entry.id !== operation.id,
-            ),
-            refusal: null,
-          }
-        : previous,
-    );
+    // only be hashed by the compiler. Never retain the removed set's review or hashes.
     if (!source) return;
     const value = await authoredOperations(source.source, next);
-    if (value.refusal) {
-      setProblem(value.refusal);
-      return;
-    }
     setAuthoring(value);
-    changed();
+    setProblem(value.refusal ?? "");
+  }
+  function cancelEdit() {
+    setEditingId(null);
+    setExpected("");
+    setText("");
     setProblem("");
   }
-  function editAmendment(operation: AuthoredOperation) {
-    changed();
+  function editAmendment(operation: AuthoredInput) {
+    setEditingId(operation.id);
     setScopeId(operation.scopeId);
     setKind(operation.kind);
     setExpected(operation.expectedText);
     setText(operation.text ?? "");
     setPosition(operation.position ?? "after");
-    void run(async () => {
-      await removeAmendment(operation);
-    });
   }
   async function prepare() {
-    if (!source) return;
+    if (!source || editingId || !drafts.length) return;
     const value = await authoredOperations(source.source, drafts);
     if (value.refusal) throw new Error(value.refusal);
     setAuthoring(value);
@@ -248,6 +243,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
   async function publish(output: FederalPublication["output"]) {
     if (
       !review ||
+      editingId ||
       (output !== "draft" &&
         !confirmed &&
         !(port.unresolved() && pendingOutput === output))
@@ -434,6 +430,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
               : "Add one or more ordered exact amendments, then prepare them together for review."}
           </p>
           <FederalAmendmentList
+            drafts={drafts}
             operations={authoring?.operations ?? []}
             disabled={locked}
             onEdit={(operation) => editAmendment(operation)}
@@ -456,7 +453,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                 <select
                   value={scopeId}
                   onChange={(event) => {
-                    changed();
+                    if (!editingId) changed();
                     setScopeId(event.target.value);
                   }}
                 >
@@ -475,7 +472,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                 <select
                   value={kind}
                   onChange={(event) => {
-                    changed();
+                    if (!editingId) changed();
                     setKind(event.target.value as typeof kind);
                   }}
                 >
@@ -490,7 +487,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                   aria-label="Exact text to find"
                   value={expected}
                   onChange={(event) => {
-                    changed();
+                    if (!editingId) changed();
                     setExpected(event.target.value);
                   }}
                 />
@@ -501,7 +498,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                   <select
                     value={position}
                     onChange={(event) => {
-                      changed();
+                      if (!editingId) changed();
                       setPosition(event.target.value as typeof position);
                     }}
                   >
@@ -517,7 +514,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                     aria-label="New text"
                     value={text}
                     onChange={(event) => {
-                      changed();
+                      if (!editingId) changed();
                       setText(event.target.value);
                     }}
                   />
@@ -528,9 +525,21 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                 disabled={!expected || (kind !== "delete" && !text)}
                 onClick={() => void run(addAmendment)}
               >
-                Add amendment to review
+                {editingId ? "Update amendment" : "Add amendment to review"}
               </Button>
-              <Button type="submit" disabled={!authoring?.operations.length}>
+              {editingId && (
+                <Button type="button" onClick={cancelEdit}>
+                  Cancel edit
+                </Button>
+              )}
+              <Button
+                type="submit"
+                disabled={
+                  Boolean(editingId) ||
+                  !drafts.length ||
+                  Boolean(authoring?.refusal)
+                }
+              >
                 Prepare these amendments for review
               </Button>
             </fieldset>
@@ -566,21 +575,25 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
             <input
               type="checkbox"
               checked={confirmed}
-              disabled={locked}
+              disabled={locked || Boolean(editingId)}
               onChange={(event) => setConfirmed(event.target.checked)}
             />{" "}
             I have reviewed this exact revision and want to export the selected
             text.
           </label>
           <div>
-            <Button disabled={locked} value="draft" onClick={handlePublish}>
+            <Button
+              disabled={locked || Boolean(editingId)}
+              value="draft"
+              onClick={handlePublish}
+            >
               Save review revision
             </Button>
             {(["operative", "consolidated", "redline"] as const).map(
               (output) => (
                 <Button
                   key={output}
-                  disabled={locked || !confirmed}
+                  disabled={locked || Boolean(editingId) || !confirmed}
                   value={output}
                   onClick={handlePublish}
                 >

@@ -57,6 +57,15 @@ const replace = (
 ): AuthoredInput => ({ id, scopeId, kind: "replace", expectedText, text });
 
 describe("federal amendment authoring", () => {
+  it("refuses duplicate operation identities before deriving dependencies", async () => {
+    const value = fixture.source as unknown as FederalCompilerSource;
+    const result = await authoredOperations(value, [
+      replace("same", "section-1", "$100", "$150"),
+      replace("same", "section-1", "$150", "$250"),
+    ]);
+    expect(result.refusal).toContain("unique identity");
+    expect(result.operations).toEqual([]);
+  });
   it("hashes the exact current section and chains a later amendment on the same section", async () => {
     const value = await source("SEC. 1. Payment is $100.\nEnd.\n", [
       "SEC. 1. Payment is $100.",

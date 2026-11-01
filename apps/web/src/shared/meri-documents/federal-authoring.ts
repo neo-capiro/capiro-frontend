@@ -145,6 +145,8 @@ export async function authoredOperations(
     refusal,
   });
   const gaps = gapFree(source);
+  if (new Set(inputs.map((input) => input.id)).size !== inputs.length)
+    return answer("Each amendment must have a unique identity.");
   for (const input of inputs) {
     const target = scopes.find((scope) => scope.id === input.scopeId);
     if (!target) return answer(UNKNOWN);
