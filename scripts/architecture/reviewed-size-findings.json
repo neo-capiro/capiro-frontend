@@ -2337,19 +2337,19 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "b428990c3a22a8cfa36a0d57c341ab81489a8a688e00dba0195dd76049790a27",
-    "reason": "Module for the meeting-artifacts surface. Contains the exported MeetingArtifacts identity gate and its private ArtifactEditor, which together present one notes/debriefs artifact list and its edit/approve/share/preview dialogs. Artifact writes are delegated to useArtifactMutation, the command lifecycle to MeetingCommandStatus, debrief generation to DebriefGeneration and PDF preview to SavedMeetingDocumentPreview. One cohesive surface with the portfolio/calendar meeting-artifacts owner; size comes from the notes- and debriefs-mode list plus its guarded dialogs, not a second concern. Re-reviewed at frontend 3e579674 (504 nonblank) with the D2 context-save threading on the corrected job client; fingerprint recomputed from these bytes.",
-    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at the corrected parent, D2 delta inspected)",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "d20818dbcd18b3374883370f2b7fe21d2e7ac1a065ee3c649e15aa6699d9ef2f",
+    "reason": "This existing module retains one actor-bound saved meeting-artifact editor and command recovery owner. The added mount delegates saved generation-context querying and rendering to SavedDebriefContext and passes only the currently readable artifact identity/revision. It does not add provider, persistence, sharing, or authorization logic to the editor; splitting the existing editor in this narrow readback fix would create unrelated lifecycle changes.",
+    "reviewedBy": "Codex independent /root/lifecycle_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "function",
     "symbol": "ArtifactEditor",
-    "fingerprint": "5c9016c8f0e019111f4bf8431f4f9f9ae85817783b84985f2bdcd0cd987893d3",
-    "reason": "Private component owning the single meeting-artifact editor for one kind: row rendering, edit/share/preview dialog state, and the revision/authority staleness checks in assertReadable/readableRows that fence every change. Write execution is owned by useArtifactMutation and command status by MeetingCommandStatus. One responsibility (present and gate artifact changes) under the meeting-artifacts surface owner; no second data or authority owner is introduced. Re-reviewed at frontend 3e579674 (450 nonblank) with the D2 context-save threading on the corrected job client; fingerprint recomputed from these bytes.",
-    "reviewedBy": "Hermes Lane 1 coordinator 20261031_102911_142be1 (exact-head fingerprint from these bytes; reviewer component witness 10/10 at the corrected parent, D2 delta inspected)",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "8fefc84b2aeae4fb0a18cc4090de063f1cc9954d559fdf172cb15b0b4095f69a",
+    "reason": "This function owns one saved-artifact read/edit/approve/share lifecycle under the existing actor and current-list gates. The thirteen added JSX lines mount an isolated read-only disclosure only for an unrestricted debrief, keyed by its saved revision and carrying the same actor/client binding. The disclosure owns its own lazy read and rendering, so the editor gains no second persistence or effect workflow.",
+    "reviewedBy": "Codex independent /root/lifecycle_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
@@ -6094,10 +6094,10 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "function",
     "symbol": "ArtifactEditor > <anonymous> #10",
-    "fingerprint": "7a27d29e190304decceb32e121b861890686d22437f3f79ffb893c102736961d",
-    "reason": "An inline callback defined inside ArtifactEditor (one of its map/render/event closures, #10 in source order), performing one bounded step of the artifact-editor flow against the editor's own state. It shares ArtifactEditor's owner and lifetime and introduces no independent responsibility or owner boundary.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "fe9320b226d0e8d6ab3f504af78a91fdf139d753b6e7fe3a1b08ab26739d9a0b",
+    "reason": "This callback renders one existing saved-artifact card and its related actions. The new child mount exposes the provenance of that same card only inside its readable branch, with the displayed revision and existing permission/current-list predicates. All context transport and display details stay in the dedicated child; this is one cohesive per-artifact presentation responsibility.",
+    "reviewedBy": "Codex independent /root/lifecycle_review",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/commands/useMeetingCommand.ts",
@@ -7608,6 +7608,15 @@
     "fingerprint": "7526621fdcfe3d13a1bf05a505d8c0928f83c8c6734f09dc4260dc6e38f2fdfc",
     "reason": "Independent exact-source design review: this function owns one same-origin conversation transport lifecycle: request/configuration admission, existing token/session prerequisite, bounded request forwarding, response adaptation and abort/listener cleanup. Body validation, response decoding/stream bounds, origin policy and closed diagnostic validation/rate limiting remain in cohesive existing or dedicated helpers. The history observer records stages and terminal status only; it adds no domain authorization, persistence, retry loop or new route family. Keeping the try/finally and deadline ownership together makes cancellation and response cleanup reviewable. Splitting the 91-line orchestration solely to cross the threshold would distribute shared lifecycle state without removing an unrelated responsibility. The exact diagnostic pre/postimages and serving-base composition were independently verified, with unchanged authority and response semantics and focused behavioral evidence. Re-review on fingerprint or responsibility change.",
     "reviewedBy": "Independent reviewer 01a192fb-188f-7dc3-ba6d-46f1e10a3ac4",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/debrief/SavedDebriefContext.tsx",
+    "kind": "function",
+    "symbol": "SavedDebriefContext",
+    "fingerprint": "6971597d1d36b8aa2dcf9523ca47703dd8707b83d0a1753105696b7eb59cd959",
+    "reason": "This component owns one user-opened, read-only disclosure for one saved debrief revision. Its actor/client/artifact/revision query key, loading/error/currentness gates, absence message and compact section summary are one presentation lifecycle. The saved-context adapter owns schema/transport and Core remains authoritative. Splitting this 82-line function solely for length would disperse a single simple disclosure without improving responsibility ownership.",
+    "reviewedBy": "Codex independent /root/lifecycle_review",
     "reviewedOn": "2026-11-01"
   }
 ]
