@@ -80,7 +80,14 @@ vi.mock("../src/shared/capiro/queries", () => ({
           complete: true,
           capped: false,
           observedAt: new Date().toISOString(),
-          scope: clientId ? { kind: "client", clientId } : { kind: "actor" },
+          scope: clientId
+            ? { kind: "client", clientId }
+            : {
+                kind:
+                  aggregateMetric.metric === "active_research_portfolios"
+                    ? "granted"
+                    : "personal_classic",
+              },
         },
       };
     }
@@ -185,6 +192,9 @@ it("mounts independent supported domain aggregates alongside the roster", () => 
   expect(html).toContain("Enabled funding catalogs");
   expect(html).toContain("Source records, not awarded dollars");
   expect(html).toContain('href="/modules/planner"');
+  expect(html).toContain("<strong>23</strong>");
+  expect(html).toContain("<strong>47</strong>");
+  expect(html).not.toContain("last 30 days");
 });
 
 it("keeps selected scope visible when omitted by the roster and queries that exact client", () => {

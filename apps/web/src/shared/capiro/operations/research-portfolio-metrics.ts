@@ -1,13 +1,14 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
 import {
+  aggregateClientId,
   aggregateRequest,
   domainAggregateStatus,
   statusAggregateFields,
 } from "./domain-aggregate-schemas";
 
 /**
- * Receiving contract for the proposed Research Portfolio aggregate: distinct
+ * Receiving contract from Core346 a4700d89 (awaiting independent review): distinct
  * active portfolios under a current same-tenant viewer/editor/owner grant.
  * Grant and client-link multiplicity never multiply the count, and the
  * producer's 4096-row authority bound surfaces as a capped incomplete
@@ -17,6 +18,12 @@ export const researchPortfolioMetrics = z.intersection(
   z.object({
     ...statusAggregateFields,
     metric: z.literal("active_research_portfolios"),
+    scope: z.discriminatedUnion("kind", [
+      z.object({ kind: z.literal("granted") }).strict(),
+      z
+        .object({ kind: z.literal("client"), clientId: aggregateClientId })
+        .strict(),
+    ]),
   }),
   domainAggregateStatus,
 );
@@ -29,6 +36,6 @@ export const researchPortfolioMetricOperations = {
     request: aggregateRequest,
     response: researchPortfolioMetrics,
     source:
-      "B9-REMAINING-AGGREGATE-CONTRACTS-20261031 proposal - producer unsealed",
+      "Core346 a4700d89 research-portfolio-metrics.ts - producer review and rollout pending",
   }),
 } as const;

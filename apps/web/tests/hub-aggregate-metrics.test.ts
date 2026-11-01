@@ -35,7 +35,9 @@ function fixture(module: AggregateMetricModule, clientId = "") {
     complete: true,
     capped: false,
     observedAt,
-    scope: clientId ? { kind: "client", clientId } : { kind: "actor" },
+    scope: clientId
+      ? { kind: "client", clientId }
+      : { kind: module === "engagement" ? "personal_classic" : "granted" },
     ...(module === "engagement" ? { window } : {}),
   };
 }
@@ -106,6 +108,12 @@ it.each(modules)(
       { status: "incomplete", count: 1201 },
       { observedAt: "bad" },
       { scope: { kind: "client", clientId: other } },
+      { scope: { kind: "actor" } },
+      {
+        scope: {
+          kind: module === "engagement" ? "granted" : "personal_classic",
+        },
+      },
       { scope: { kind: "actor", clientId: null } },
     ])
       expect(
@@ -198,27 +206,33 @@ it("keeps the Engagement window and basis as producer facts, never recomputed he
       ).state.status,
     ).toBe("unavailable");
   }
-  // A producer window that is old relative to its own observation is displayed
-  // as reported: the consumer applies no second window calculation.
+  // Regression: a fresh observation cannot make a September count current in
+  // late October. Preserve the reported population, but label it stale.
   const shifted = {
     start: "2026-09-01T00:00:00.000Z",
     end: "2026-10-01T00:00:00.000Z",
   };
-  expect(
-    aggregateMetricObservation(
-      "engagement",
-      {
-        loading: false,
-        data: {
-          ...fixture("engagement"),
-          count: 3,
-          window: { ...window, ...shifted },
-        },
+  const historical = aggregateMetricObservation(
+    "engagement",
+    {
+      loading: false,
+      data: {
+        ...fixture("engagement"),
+        count: 3,
+        window: { ...window, ...shifted },
       },
-      "",
-      at,
-    ).state,
-  ).toMatchObject({ status: "available", value: 3 });
+    },
+    "",
+    at,
+  );
+  expect(historical.state).toEqual({
+    status: "available",
+    value: 3,
+    observedAt,
+    stale: true,
+  });
+  expect(historical.notice).toContain(`${shifted.start} - ${shifted.end}`);
+  expect(aggregateMetrics.engagement.label).not.toContain("last 30 days");
   const research = aggregateMetricObservation(
     "research-portfolios",
     { loading: false, data: fixture("research-portfolios") },
@@ -227,6 +241,51 @@ it("keeps the Engagement window and basis as producer facts, never recomputed he
   );
   expect(research.state.status).toBe("available");
   expect(research.notice).not.toMatch(/Window/);
+});
+
+it("rejects future and reversed Engagement windows while allowing producer work after window admission", () => {
+  for (const invalidWindow of [
+    { ...window, start: window.end, end: window.start },
+    {
+      ...window,
+      start: "2026-11-01T12:00:00.000Z",
+      end: "2026-12-01T12:00:00.000Z",
+    },
+    {
+      ...window,
+      start: "2026-10-01T12:00:00.001Z",
+      end: "2026-10-31T12:00:00.001Z",
+    },
+  ]) {
+    const result = aggregateMetricObservation(
+      "engagement",
+      {
+        loading: false,
+        data: { ...fixture("engagement"), window: invalidWindow },
+      },
+      "",
+      at,
+    );
+    expect(result.state.status).toBe("unavailable");
+    expect(result).not.toHaveProperty("notice");
+  }
+  const completedAt = new Date(at + 10_000).toISOString();
+  const result = aggregateMetricObservation(
+    "engagement",
+    {
+      loading: false,
+      data: { ...fixture("engagement"), count: 0, observedAt: completedAt },
+    },
+    "",
+    at + 10_000,
+  );
+  expect(result.state).toEqual({
+    status: "available",
+    value: 0,
+    observedAt: completedAt,
+    stale: false,
+  });
+  expect(result.notice).toContain(`${window.start} - ${window.end}`);
 });
 
 it.each(modules)(

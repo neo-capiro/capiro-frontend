@@ -31,7 +31,6 @@ export const domainAggregateFields = {
 /** Envelope for producers that publish an observation without an asOf cutoff. */
 export const statusAggregateFields = {
   version: z.literal(1),
-  scope: domainAggregateScope,
   observedAt: z.iso.datetime(),
 };
 /** `status` branch, not Planner's `state`: a capped incomplete withholds the count. */

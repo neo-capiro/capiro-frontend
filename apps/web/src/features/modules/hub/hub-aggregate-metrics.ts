@@ -10,7 +10,8 @@ import { hubOwnedRequest } from "./hub-owned-metrics";
 export const aggregateMetrics = {
   engagement: {
     key: "engagement.metrics.personalClassicOutreach30d",
-    label: "Personal Classic outreach records · last 30 days",
+    label: "Personal Classic outreach records · 30-day window",
+    unfilteredScope: "personal_classic",
     schema: engagementMetrics,
     basis:
       "Created or sent in the producer's fixed 30-day UTC window · One record counted once",
@@ -18,6 +19,7 @@ export const aggregateMetrics = {
   "research-portfolios": {
     key: "researchPortfolios.metrics.active",
     label: "Active research portfolios",
+    unfilteredScope: "granted",
     schema: researchPortfolioMetrics,
     basis: "Granted active portfolios · All dates",
   },
@@ -52,7 +54,7 @@ export function aggregateMetricObservation(
   const matches = clientId
     ? data.scope.kind === "client" &&
       data.scope.clientId === request.query.clientId
-    : data.scope.kind === "actor";
+    : data.scope.kind === aggregateMetrics[module].unfilteredScope;
   if (!matches || !Number.isFinite(now))
     return unavailable("The observation does not match this scope.");
   if (data.status !== "complete" || data.count === null)
@@ -67,7 +69,9 @@ export function aggregateMetricObservation(
       status: "available",
       value: data.count,
       observedAt: data.observedAt,
-      stale: Math.abs(now - Date.parse(data.observedAt)) > 120_000,
+      stale:
+        Math.abs(now - Date.parse(data.observedAt)) > 120_000 ||
+        ("window" in data && now - Date.parse(data.window.end) > 120_000),
     },
     notice:
       "window" in data
