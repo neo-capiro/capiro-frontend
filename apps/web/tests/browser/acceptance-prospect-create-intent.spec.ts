@@ -125,7 +125,7 @@ test("unknown prospect creation cannot bind edited input to the original request
   await page.keyboard.insertText("Changed after an unknown creation");
   expect(control.bodies).toHaveLength(1);
   await control.editor
-    .getByRole("button", { name: "Save contact", exact: true })
+    .getByRole("button", { name: "Retry original save", exact: true })
     .click();
   await expect(control.editor).toHaveCount(0);
   expect(control.bodies).toHaveLength(2);
@@ -134,6 +134,35 @@ test("unknown prospect creation cannot bind edited input to the original request
   await expect(
     control.card.getByRole("button", { name: new RegExp(originalName) }),
   ).toBeVisible();
+  control.assertOnlyTwoExplicitCreates();
+});
+
+test("unknown contact creation survives close and reload with its original request", async ({
+  page,
+  baseURL,
+}) => {
+  const control = await creationScenario(page, baseURL, 503);
+  await control.editor
+    .getByRole("button", { name: "Cancel", exact: true })
+    .click();
+  await expect(control.editor).toHaveCount(0);
+  await page.reload();
+  await control.card
+    .getByRole("button", { name: "+ Add", exact: true })
+    .click();
+  await expect(
+    control.editor.getByLabel("Name *", { exact: true }),
+  ).toHaveValue(originalName);
+  await expect(
+    control.editor.getByLabel("Name *", { exact: true }),
+  ).toBeDisabled();
+  expect(control.bodies).toHaveLength(1);
+  await control.editor
+    .getByRole("button", { name: "Retry original save", exact: true })
+    .click();
+  await expect(control.editor).toHaveCount(0);
+  expect(control.bodies).toHaveLength(2);
+  expect(control.bodies[1]).toEqual(control.bodies[0]);
   control.assertOnlyTwoExplicitCreates();
 });
 
