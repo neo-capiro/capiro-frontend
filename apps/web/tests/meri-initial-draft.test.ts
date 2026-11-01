@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { CONVERSATION_SKILLS } from "@capiro/meri-contracts/conversation-application";
 import { createInitialDraftOwner } from "../src/features/meri/conversation/initial-draft";
 
 const context = {
@@ -19,6 +20,40 @@ const submit = (
 });
 
 describe("conversation-owned initial draft consumption", () => {
+  it("an admitted request takes its skill off the composer; a selection changed since stays", () => {
+    const skillOf = (index: number) => ({
+      skillId: CONVERSATION_SKILLS[index]!.skillId,
+      skillVersion: CONVERSATION_SKILLS[index]!.version,
+    });
+    const request = {
+      requestId: submit("pending").requestId,
+      prompt: "First question",
+      skill: skillOf(0),
+    };
+    const sent = createInitialDraftOwner();
+    sent.selectSkill({ skill: skillOf(0) });
+    sent.begin(context, request, "First question");
+    expect(
+      sent.acknowledge(
+        context,
+        { ...request, state: "observed" },
+        "First question",
+      ),
+    ).toBe(true);
+    expect(sent.selection()).toEqual({});
+
+    const changed = createInitialDraftOwner();
+    changed.selectSkill({ skill: skillOf(0) });
+    changed.begin(context, request, "First question");
+    changed.selectSkill({ skill: skillOf(1) });
+    changed.acknowledge(
+      context,
+      { ...request, state: "observed" },
+      "First question",
+    );
+    expect(changed.selection()).toEqual({ skill: skillOf(1) });
+  });
+
   it("retains the sent draft through uncertainty and consumes it once after a replacement session observes the exact submit", () => {
     const owner = createInitialDraftOwner();
     owner.begin(

@@ -239,9 +239,15 @@ class DraftOwner {
     if (submissionIdentity(request) !== pending.request) return false;
     const clear =
       pending.revision === this.state.revision && draft === pending.draft;
+    // The admitted request now carries the selection, so the chip leaves the composer with the
+    // text; a selection changed since the send is a choice for the next message and stays.
+    const sent =
+      submissionIdentity(skillSelectionFields(request)) ===
+      submissionIdentity(skillSelectionFields(this.state.selection ?? {}));
     this.save({
       ...this.state,
       draft: clear ? "" : this.state.draft,
+      ...(sent ? { selection: {} } : {}),
       pending: null,
     });
     return clear;

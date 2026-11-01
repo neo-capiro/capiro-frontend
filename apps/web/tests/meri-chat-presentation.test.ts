@@ -94,13 +94,20 @@ describe("a finished answer reads like a chat", () => {
     }
   });
 
-  it("reports a service reason only for a failed run and a missing prompt silently", () => {
+  it("explains a failed run in plain words, keeps an unknown code small, and says nothing for other states", () => {
+    const known = render(turn("failed", { reasonCode: "EXECUTION_FAILED" }));
+    expect(known).toContain(
+      "finish this request. Try sending it again; if you applied a skill, try without it.</p>",
+    );
+    expect(known).not.toContain("EXECUTION_FAILED");
+    expect(known).not.toContain("Service reason");
     const reason = { reasonCode: "SYNTHETIC_REASON" };
-    expect(render(turn("failed", reason))).toContain(
-      "Service reason: SYNTHETIC_REASON",
+    const unknown = render(turn("failed", reason));
+    expect(unknown).toContain(
+      "finish this request. Try sending it again.<small> SYNTHETIC_REASON</small></p>",
     );
     for (const state of ["completed", "cancelled", "running"] as const)
-      expect(render(turn(state, reason))).not.toContain("Service reason");
+      expect(render(turn(state, reason))).not.toContain("couldn't finish");
     const silent = render(turn("completed", { prompt: null }));
     expect(silent).not.toContain("was not returned");
     expect(silent).toContain("Synthetic answer.");
