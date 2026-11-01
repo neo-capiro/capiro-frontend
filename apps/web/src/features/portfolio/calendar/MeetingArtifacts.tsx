@@ -12,7 +12,7 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useMeetingNotes } from "./queries";
 import { type Meeting, type noteSchema } from "./contracts";
 import type { z } from "zod";
-import { DebriefGeneration } from "./debrief/public";
+import { DebriefGeneration, SavedDebriefContext } from "./debrief/public";
 import { SavedMeetingDocumentPreview } from "./documents/public";
 export function MeetingArtifacts({
   meeting,
@@ -257,6 +257,19 @@ function ArtifactEditor({
               <p style={{ whiteSpace: "pre-wrap" }}>
                 {item.body ?? "No content."}
               </p>
+              {kind === "debriefs" && (
+                <SavedDebriefContext
+                  key={`${item.id}:${item.revision ?? item.updatedAt}`}
+                  binding={{
+                    id: item.id,
+                    meetingId: meeting.id,
+                    clientId: meeting.client?.id ?? null,
+                    revision: item.revision ?? item.updatedAt,
+                  }}
+                  actor={actor}
+                  allowed={allowed && current}
+                />
+              )}
               <div className="row">
                 {kind === "debriefs" && (
                   <button
