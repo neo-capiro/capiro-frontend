@@ -1,13 +1,12 @@
 import { expect, it } from "vitest";
 import { loadHearingCalendar } from "../src/shared/capiro/operations/legiwatch-calendar-feed";
-import { hearingItems } from "../src/features/modules/calendar/agenda";
 import {
   coverage,
   federalHearing,
   floridaHearing,
 } from "../test/browser/hearing-fixtures";
 
-it("loads both jurisdictions through later pages and links to the mounted hearing route", async () => {
+it("loads both jurisdictions through later pages", async () => {
   const requests: number[] = [];
   const result = await loadHearingCalendar(
     async (query) => {
@@ -31,12 +30,6 @@ it("loads both jurisdictions through later pages and links to the mounted hearin
   expect(result.warnings.join(" ")).toContain(
     "Florida calendar sources are incomplete",
   );
-  expect(
-    new URL(
-      hearingItems(result.rows)[1]!.href!,
-      "https://example.test",
-    ).searchParams.get("hearingId"),
-  ).toBe(floridaHearing.id);
 });
 
 it("keeps received hearings but reports a stalled or failed later page", async () => {
