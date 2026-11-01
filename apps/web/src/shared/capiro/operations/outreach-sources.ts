@@ -1,6 +1,11 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
 import { contextAttachment } from "./strategies-imports";
+import {
+  classicOutreachTemplate,
+  createClassicTemplateInput,
+  createdClassicTemplate,
+} from "./outreach-template-catalog";
 const source =
   "Core EngagementService existing source, template, audience, attachment and mail read owners";
 const id = z.uuid();
@@ -43,14 +48,15 @@ export const outreachSourceOperations = {
     method: "GET",
     path: "/engagement/outreach/ai-templates",
     request: z.object({}).strict(),
-    response: z.array(
-      z.object({
-        id: z.string(),
-        name: z.string(),
-        description: z.string().nullable().optional(),
-        source: z.string(),
-      }),
-    ),
+    response: z.array(classicOutreachTemplate),
+    source,
+  }),
+  "engagement.campaign.template.create": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/engagement/outreach/ai-templates",
+    request: z.object({ body: createClassicTemplateInput }).strict(),
+    response: createdClassicTemplate,
     source,
   }),
   "engagement.campaign.library": defineOperation({

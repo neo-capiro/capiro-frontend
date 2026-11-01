@@ -7452,10 +7452,10 @@
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflow.tsx",
     "kind": "function",
     "symbol": "OutreachWorkflow",
-    "fingerprint": "c858afe4fa5fa8b1dabd36da33e9b7e46da18908ca450ab65fd4d02dfdc91beb",
-    "reason": "This is the single seven-step wizard composition over useOutreachCampaign. It chooses existing step components, preserves read-only and pending gates, and passes the fixed client into recipient setup. Initial-step support and goal-aware validation are presentation changes within the same workflow; splitting the orchestrator would duplicate navigation and editability decisions.",
-    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-10-30"
+    "fingerprint": "55d64b1bfd2f86435c83e4acac73b7472d59845e34c8ec6c6130d7d63b51372a",
+    "reason": "Existing seven-stage composer changes by one callback prop. It passes its existing query reload and introduces no parallel query or campaign lifecycle.",
+    "reviewedBy": "Codex independent HIGH Classic Outreach template review; OUTREACH-CLASSIC-TEMPLATES-INDEPENDENT-REVIEW-20261101.txt SHA256 070b24be8d35dcd2da9b611c3615092c6d59c099c8ac0c1bab90525f3ad3115e",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/useOutreachCampaign.ts",
@@ -7560,9 +7560,36 @@
     "file": "apps/web/src/features/modules/engagement/outreach/outreach-workflow.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "f47de449aa4e643f87f4ff452a409fb30bb4c61188934ce56fa6e3fe03539889",
-    "reason": "scoped stylesheet for the existing workflow surface, using app tokens and local responsive geometry; no global shell/theme selectors or unrelated domain introduced. Keep exact scoped owner; do not use this acceptance to absorb additional feature styles.",
-    "reviewedBy": "Codex independent HIGH Outreach source/design review; OUTREACH-WIZARD-PARITY-INDEPENDENT-REVIEW-20261101.txt SHA256 54fd827e25b96532590e051bf961d5601cfd389293477d36c8ca8f068461a5af",
+    "fingerprint": "6d324a26f71c18df17dfd60677e2e2c3f6ad8ae3e64aed492ed328f4bea7bc8e",
+    "reason": "Thirty-four scoped template-card/dialog/text lines join the existing workflow stylesheet; no shell/global tokens or unrelated surface styles change. This supersedes only the earlier fingerprint for this touched stylesheet.",
+    "reviewedBy": "Codex independent HIGH Classic Outreach template review; OUTREACH-CLASSIC-TEMPLATES-INDEPENDENT-REVIEW-20261101.txt SHA256 070b24be8d35dcd2da9b611c3615092c6d59c099c8ac0c1bab90525f3ad3115e",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/CampaignTemplates.tsx",
+    "kind": "function",
+    "symbol": "CampaignTemplates",
+    "fingerprint": "d04c7714a7c9d770b1a61d289bf5737bc72d3be2fc430cb4e20dd5c03976fe20",
+    "reason": "One controlled gallery and dialog choice; inert preview content is separated, and effect state belongs to the dedicated owner. Keeping the radio selection and matching modal state together avoids competing selection owners.",
+    "reviewedBy": "Codex independent HIGH Classic Outreach template review; OUTREACH-CLASSIC-TEMPLATES-INDEPENDENT-REVIEW-20261101.txt SHA256 070b24be8d35dcd2da9b611c3615092c6d59c099c8ac0c1bab90525f3ad3115e",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/TemplateCreateDialog.tsx",
+    "kind": "function",
+    "symbol": "TemplateCreateDialog",
+    "fingerprint": "2eff4f240ae5c97222267cbaca3a1be7ab66bd2f779d144f77d442a9fb4152dd",
+    "reason": "One five-field form with explicit phase-dependent actions. Most length is accessible field markup; persistence and transport are already separate. It does not own campaign generation or send behavior.",
+    "reviewedBy": "Codex independent HIGH Classic Outreach template review; OUTREACH-CLASSIC-TEMPLATES-INDEPENDENT-REVIEW-20261101.txt SHA256 070b24be8d35dcd2da9b611c3615092c6d59c099c8ac0c1bab90525f3ad3115e",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/template-creation.ts",
+    "kind": "function",
+    "symbol": "createTemplateCreationOwner",
+    "fingerprint": "ff80f3306e73dc80abdaa1861582160f59d03bc9df34901858fa581d2cda5f6f",
+    "reason": "One bounded command state machine owns journal-before-dispatch, returned-ID readback, failure classification and abort. Its shared active/state/controller closure maintains one uncertainty owner across these phases; splitting that ownership would increase correctness risk without introducing a separate responsibility.",
+    "reviewedBy": "Codex independent HIGH Classic Outreach template review; OUTREACH-CLASSIC-TEMPLATES-INDEPENDENT-REVIEW-20261101.txt SHA256 070b24be8d35dcd2da9b611c3615092c6d59c099c8ac0c1bab90525f3ad3115e",
     "reviewedOn": "2026-11-01"
   }
 ]
