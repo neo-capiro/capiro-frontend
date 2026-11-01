@@ -8,18 +8,19 @@ import {
 import type { RichDraft } from "./draft";
 import type { NewsletterPreview } from "@capiro/shared/newsletter";
 import { ActionButton, PageHeader } from "../../../../shared/module-ui";
+import { newsletterPreviewLinks } from "./content/preview-links";
+import { PreviewLinks } from "./PreviewLinks";
 import styles from "./rich-newsletter.module.css";
 
 /** Canonical rendering plus inert display isolation; never a sendable artifact. */
-function previewDocument(draft: RichDraft) {
+function renderDraft(draft: RichDraft) {
   if (!DOMPurify.isSupported) return "";
-  const rendered = renderNewsletterDesign(draft.design, draft.config, {
+  return renderNewsletterDesign(draft.design, draft.config, {
     editor: true,
     liveMergeTags: false,
     sanitizeHtml: (html) =>
       DOMPurify.sanitize(html, { USE_PROFILES: { html: true } }),
   });
-  return sanitizePreviewDocument(rendered);
 }
 
 /** Saved owner HTML is untrusted and uses the same inert display as local HTML. */
@@ -76,6 +77,10 @@ export function SavedRichPreview({
 }) {
   const [mobile, setMobile] = useState(false);
   const [plainText, setPlainText] = useState(false);
+  const links = useMemo(
+    () => newsletterPreviewLinks(preview.html),
+    [preview.html],
+  );
   return (
     <section className={styles.savedView} aria-label="Saved newsletter preview">
       <PageHeader
@@ -135,6 +140,10 @@ export function SavedRichPreview({
           >
             Saved plain text
           </ActionButton>
+          <PreviewLinks
+            key={`${preview.documentId}:${preview.revision}`}
+            links={links}
+          />
           {preview.checks.length > 0 && (
             <ul
               className={styles.savedChecks}
@@ -184,7 +193,9 @@ export function RichPreview({
   plainText: boolean;
   savedReview?: boolean;
 }) {
-  const document = useMemo(() => previewDocument(draft), [draft]);
+  const rendered = useMemo(() => renderDraft(draft), [draft]);
+  const document = useMemo(() => sanitizePreviewDocument(rendered), [rendered]);
+  const links = useMemo(() => newsletterPreviewLinks(rendered), [rendered]);
   const text = useMemo(
     () =>
       newsletterPlainText(draft.design, draft.config, { liveMergeTags: false }),
@@ -196,6 +207,7 @@ export function RichPreview({
         {savedReview ? "Reviewed saved content" : "Local preview"} · external
         images and links are disabled. Email clients may render differently.
       </p>
+      <PreviewLinks links={links} />
       {plainText ? (
         <pre className={styles.plainText} aria-label="Newsletter plain text">
           {text}

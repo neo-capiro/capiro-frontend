@@ -1,14 +1,18 @@
 "use client";
 import {
   NEWSLETTER_BLOCK_LABELS,
+  NEWSLETTER_COLUMN_RATIOS,
   type NewsletterBlock,
   type NewsletterDesign,
   type NewsletterBlockKind,
 } from "@capiro/shared/newsletter";
 import { ActionButton } from "../../../../shared/module-ui";
-import type { BlockContainer, StructureAction } from "./content/structure";
+import { type BlockContainer, type StructureAction } from "./content/structure";
+import { StructureDropTarget } from "./content/StructureDropTarget";
+import { startBlockDrag } from "./content/structure-drag";
 import styles from "./content/content.module.css";
 import ui from "./library/sections.module.css";
+import { PrebuiltSections } from "./content/PrebuiltSections";
 
 const available: NewsletterBlockKind[] = [
   "heading",
@@ -18,13 +22,13 @@ const available: NewsletterBlockKind[] = [
   "button",
   "divider",
   "spacer",
-  "columns",
   "social",
   "video",
   "apps",
   "product",
   "product-rec",
   "code",
+  "footer",
 ];
 function AddBlock({
   target,
@@ -36,31 +40,65 @@ function AddBlock({
   change: (action: StructureAction) => void;
 }) {
   return (
-    <details>
-      <summary>Add block to {label}</summary>
-      <div className={ui.actions}>
-        {available.map((kind) => (
-          <ActionButton
-            className={ui.button}
-            key={kind}
-            onClick={() => change({ type: "addBlock", target, kind })}
-          >
-            {NEWSLETTER_BLOCK_LABELS[kind]}
-          </ActionButton>
-        ))}
-      </div>
-    </details>
+    <StructureDropTarget
+      target={target}
+      label={`Drop block at end of ${label}`}
+      change={change}
+    >
+      <details>
+        <summary>Add block to {label}</summary>
+        <div className={ui.actions}>
+          {available.map((kind) => (
+            <ActionButton
+              className={ui.button}
+              key={kind}
+              draggable
+              onDragStart={(event) =>
+                startBlockDrag(event.dataTransfer, { type: "add", kind })
+              }
+              onClick={() => change({ type: "addBlock", target, kind })}
+            >
+              {NEWSLETTER_BLOCK_LABELS[kind]}
+            </ActionButton>
+          ))}
+        </div>
+        <h3>Columns</h3>
+        <div className={ui.actions} aria-label={`Column layouts for ${label}`}>
+          {NEWSLETTER_COLUMN_RATIOS.map((ratio) => (
+            <ActionButton
+              className={ui.button}
+              key={ratio}
+              draggable
+              onDragStart={(event) =>
+                startBlockDrag(event.dataTransfer, {
+                  type: "add",
+                  kind: "columns",
+                  ratio,
+                })
+              }
+              onClick={() =>
+                change({ type: "addBlock", target, kind: "columns", ratio })
+              }
+            >
+              {`Columns ${ratio}`}
+            </ActionButton>
+          ))}
+        </div>
+      </details>
+    </StructureDropTarget>
   );
 }
 function BlockList({
   blocks,
   sectionId,
+  target,
   selectedId,
   select,
   change,
 }: {
   blocks: NewsletterBlock[];
   sectionId: string;
+  target: BlockContainer;
   selectedId: string | null;
   select: (id: string) => void;
   change: (action: StructureAction) => void;
@@ -69,14 +107,27 @@ function BlockList({
     <ul className={styles.tree}>
       {blocks.map((block) => (
         <li key={block.id}>
-          <ActionButton
-            className={ui.button}
-            aria-pressed={block.id === selectedId}
-            onClick={() => select(block.id)}
+          <StructureDropTarget
+            target={{ ...target, beforeId: block.id }}
+            label={`Drop before ${NEWSLETTER_BLOCK_LABELS[block.kind]}`}
+            change={change}
           >
-            {NEWSLETTER_BLOCK_LABELS[block.kind]}
-            {block.text ? ` · ${block.text.slice(0, 32)}` : ""}
-          </ActionButton>
+            <ActionButton
+              className={ui.button}
+              aria-pressed={block.id === selectedId}
+              draggable
+              onDragStart={(event) =>
+                startBlockDrag(event.dataTransfer, {
+                  type: "move",
+                  id: block.id,
+                })
+              }
+              onClick={() => select(block.id)}
+            >
+              {NEWSLETTER_BLOCK_LABELS[block.kind]}
+              {block.text ? ` · ${block.text.slice(0, 32)}` : ""}
+            </ActionButton>
+          </StructureDropTarget>
           {block.columns.map((column, index) => (
             <div
               key={index}
@@ -87,6 +138,7 @@ function BlockList({
               <BlockList
                 blocks={column}
                 sectionId={sectionId}
+                target={{ sectionId, blockId: block.id, column: index }}
                 selectedId={selectedId}
                 select={select}
                 change={change}
@@ -125,6 +177,10 @@ export function RichStructure({
   return (
     <nav className={styles.panel} aria-label="Newsletter structure">
       <h2>Content</h2>
+      <PrebuiltSections
+        change={change}
+        disabled={design.sections.length >= 50}
+      />
       <ActionButton
         className={ui.button}
         onClick={(event) => browse(event.currentTarget)}
@@ -196,6 +252,7 @@ export function RichStructure({
           <BlockList
             blocks={section.blocks}
             sectionId={section.id}
+            target={{ sectionId: section.id }}
             selectedId={selectedId}
             select={select}
             change={change}
@@ -217,7 +274,8 @@ export function RichStructure({
       </ActionButton>
       <p>
         All edits are local and can be undone. Saved-section actions use current
-        server content. Hosted survey authoring is separate.
+        server content. Existing saved surveys are retained; new survey
+        insertion is not available here.
       </p>
     </nav>
   );
