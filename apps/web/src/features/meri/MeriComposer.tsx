@@ -1,5 +1,5 @@
 "use client";
-import { useId } from "react";
+import { useId, useState } from "react";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 import {
   PromptInput,
@@ -51,6 +51,22 @@ export type ComposerChip = Readonly<{
   onRemove?: (() => void) | undefined;
 }>;
 
+/** Why Enter cannot send right now, in the words the person should see; undefined when it can. */
+export function sendBlockedReason(
+  live: LiveComposer | undefined,
+  running: boolean,
+  draft: string,
+) {
+  if (!live) return "Sending is unavailable in this disconnected fixture.";
+  if (running)
+    return `A run is in progress. ${live.stopBlocked ?? "Use Stop to request cancellation; your draft stays editable."}`;
+  return (
+    live.draftBlocked ??
+    live.sendBlocked ??
+    (draft.trim() ? undefined : "Type a message to send.")
+  );
+}
+
 export function MeriComposer({
   draft,
   onDraft,
@@ -89,6 +105,12 @@ export function MeriComposer({
     !live.sendBlocked &&
     !live.draftBlocked &&
     !!draft.trim();
+  const blockedReason = sendBlockedReason(live, running, draft);
+  // The reason Enter was refused stays visible while that same reason still applies; a send that
+  // becomes possible, or a different block, clears it without an effect.
+  const [refused, setRefused] = useState<string | null>(null);
+  const refusal =
+    refused !== null && refused === blockedReason ? refused : null;
   return (
     <section
       className={styles.composerFrame}
@@ -138,6 +160,7 @@ export function MeriComposer({
             }}
             onKeyDown={(event) => {
               // A blocked send must not reach the form: its reset would clear the kept draft.
+              // The person sees why instead of a key press that silently does nothing.
               if (
                 live &&
                 !canSend &&
@@ -145,8 +168,10 @@ export function MeriComposer({
                 !event.shiftKey &&
                 !event.nativeEvent.isComposing &&
                 event.nativeEvent.keyCode !== 229
-              )
+              ) {
                 event.preventDefault();
+                setRefused(blockedReason ?? null);
+              }
             }}
             aria-label={live ? "Meri message" : "Message draft"}
             aria-describedby={helpId}
@@ -174,16 +199,17 @@ export function MeriComposer({
           />
         </PromptInputFooter>
         <p className={styles.keyboardHint} id={helpId}>
-          {live?.draftBlocked ?? "Enter to send · Shift + Enter for a new line"}
-          <span className="sr-only">
-            {!live
-              ? ". Sending is currently unavailable in this disconnected synthetic fixture."
-              : running
-                ? `. A run is in progress. ${live.stopBlocked ?? "Use Stop to request cancellation; your draft stays editable."}`
-                : live.sendBlocked
-                  ? `. ${live.sendBlocked}`
-                  : ""}
-          </span>
+          {refusal ? (
+            <span role="status">{refusal}</span>
+          ) : (
+            <>
+              {live?.draftBlocked ??
+                "Enter to send · Shift + Enter for a new line"}
+              {blockedReason && blockedReason !== live?.draftBlocked && (
+                <span className="sr-only">. {blockedReason}</span>
+              )}
+            </>
+          )}
         </p>
       </PromptInput>
     </section>
