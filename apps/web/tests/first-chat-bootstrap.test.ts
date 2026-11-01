@@ -173,6 +173,83 @@ it("reopens an empty confirmed conversation through Core, and starts a new one o
   });
 });
 
+it("a deleted empty conversation (404 on reopen) is replaced by a fresh request", async () => {
+  const storage = memoryStorage();
+  await resolveFirstChatConversation({
+    scope,
+    storage,
+    signal: new AbortController().signal,
+    createOrReuse: async () => receipt,
+    issueId: () => requestId,
+  });
+  const nextRequest = "88888888-8888-4888-8888-888888888888";
+  const nextConversation = "66666666-6666-4666-8666-666666666666";
+  const gone = vi.fn(async (body: { requestId: string }) => {
+    if (body.requestId === requestId)
+      throw new CapiroApiError(404, "Conversation not found.");
+    return {
+      ...receipt,
+      requestId: nextRequest,
+      conversationId: nextConversation,
+    };
+  });
+  expect(
+    await resolveFirstChatConversation({
+      scope,
+      storage,
+      signal: new AbortController().signal,
+      createOrReuse: gone as never,
+      issueId: () => nextRequest,
+    }),
+  ).toEqual({ conversationId: nextConversation, clientId: scope.clientId });
+  expect(gone).toHaveBeenCalledTimes(2);
+  expect(readFirstChatIntent(scope, storage)).toMatchObject({
+    state: "confirmed",
+    requestId: nextRequest,
+    conversationId: nextConversation,
+  });
+});
+
+it("a refused reopen is retried exactly once, and a storage that cannot record the fresh request stops it there", async () => {
+  const entries = new Map<string, string>();
+  let writable = true;
+  const storage = {
+    getItem: (key: string) => entries.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      if (!writable) throw new Error("storage denied");
+      entries.set(key, value);
+    },
+  };
+  await resolveFirstChatConversation({
+    scope,
+    storage,
+    signal: new AbortController().signal,
+    createOrReuse: async () => receipt,
+    issueId: () => requestId,
+  });
+  writable = false;
+  const refuse = vi.fn(async () => {
+    throw new CapiroApiError(409, "The record changed.");
+  });
+  await expect(
+    resolveFirstChatConversation({
+      scope,
+      storage,
+      signal: new AbortController().signal,
+      createOrReuse: refuse,
+      issueId: () => "88888888-8888-4888-8888-888888888888",
+    }),
+  ).rejects.toThrow(
+    "Conversation request identity could not be safely recovered.",
+  );
+  // One reopen, never a loop back to the same confirmed record.
+  expect(refuse).toHaveBeenCalledOnce();
+  expect(readFirstChatIntent(scope, storage)).toMatchObject({
+    state: "confirmed",
+    requestId,
+  });
+});
+
 it("holds a foreign receipt or invalid native account before Meri can connect", async () => {
   const storage = memoryStorage();
   await expect(
@@ -227,7 +304,7 @@ for (const clientId of [
     },
   );
   it.each([401, 403])(
-    `a revoked client ${clientId} is refused on reopen and keeps the last confirmation: %s`,
+    `a revoked client ${clientId} is refused on reopen and once more on the fresh request: %s`,
     async (status) => {
       const current = { ...scope, clientId };
       const storage = memoryStorage();
@@ -239,7 +316,8 @@ for (const clientId of [
         createOrReuse: async () => ({ ...receipt, ...current }),
       });
       const denied = new CapiroApiError(status, "Access denied.");
-      const replay = vi.fn(async () => {
+      const nextRequest = "88888888-8888-4888-8888-888888888888";
+      const replay = vi.fn(async (_body: unknown) => {
         throw denied;
       });
       await expect(
@@ -248,15 +326,16 @@ for (const clientId of [
           storage,
           signal: new AbortController().signal,
           createOrReuse: replay,
+          issueId: () => nextRequest,
         }),
       ).rejects.toBe(denied);
-      expect(replay).toHaveBeenCalledExactlyOnceWith(
+      expect(replay.mock.calls.map(([body]) => body)).toEqual([
         { schemaVersion: 1, requestId, clientId },
-        expect.any(AbortSignal),
-      );
+        { schemaVersion: 1, requestId: nextRequest, clientId },
+      ]);
       expect(readFirstChatIntent(current, storage)).toMatchObject({
-        state: "confirmed",
-        conversationId,
+        state: "pending",
+        requestId: nextRequest,
       });
     },
   );

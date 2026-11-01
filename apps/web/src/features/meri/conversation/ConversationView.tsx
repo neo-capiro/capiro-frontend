@@ -117,9 +117,7 @@ export function SessionComposer({
         />
       )}
       <MeriComposer
-        draft={
-          session.accessLost || captured === session.draft ? "" : session.draft
-        }
+        draft={session.accessLost || captured !== null ? "" : session.draft}
         onDraft={session.setDraft}
         textareaRef={session.textarea}
         assetSet="cited-answer"

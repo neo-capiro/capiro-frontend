@@ -124,6 +124,23 @@ export function reserveFirstChatIntent(
   });
 }
 
+/**
+ * Replace whatever the scope stores with one fresh pending request: Core refused to reopen the
+ * stored conversation, so it is never selected again. Storage trouble surfaces as the usual error.
+ */
+export function supersedeFirstChatIntent(
+  scope: FirstChatScope,
+  storage: IntentStorage,
+  issueId: () => string = () => crypto.randomUUID(),
+): FirstChatIntent {
+  return persist(scope, storage, {
+    version: 1,
+    scope: scopeSchema.parse(scope),
+    requestId: freshId(issueId),
+    state: "pending",
+  });
+}
+
 /** A timeout leaves the pending record intact. Only a verified receipt confirms it. */
 export function confirmFirstChatIntent(
   scope: FirstChatScope,

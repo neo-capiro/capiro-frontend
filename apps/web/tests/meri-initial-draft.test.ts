@@ -30,12 +30,17 @@ describe("conversation-owned initial draft consumption", () => {
     );
     expect(owner.pendingDraft(context)).toBe("First question");
     expect(owner.pendingDraft({ ...context, runId: "other-run" })).toBeNull();
-    // Typing a new message never merges into the capture; the capture stays for its retry.
-    owner.edit("Second question");
-    expect(owner.draft()).toBe("Second question");
-    expect(owner.pendingDraft(context)).toBe("First question");
-    owner.acknowledge(context, submit("observed"), "Second question");
+    // Typing never merges into the capture, and once typed the box is the person's: even the
+    // same words retyped stay visible instead of being masked at the last character.
+    owner.edit("First questio");
     expect(owner.pendingDraft(context)).toBeNull();
+    owner.edit("First question");
+    expect(owner.draft()).toBe("First question");
+    expect(owner.pendingDraft(context)).toBeNull();
+    owner.edit("Second question");
+    expect(owner.hasPending(context)).toBe(true);
+    owner.acknowledge(context, submit("observed"), "Second question");
+    expect(owner.hasPending(context)).toBe(false);
     expect(owner.draft()).toBe("Second question");
   });
 

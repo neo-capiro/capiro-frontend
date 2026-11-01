@@ -9,8 +9,8 @@ import {
 } from "../capiro/operations/meri-first-chat";
 import {
   confirmFirstChatIntent,
-  markFirstChatIntentUsed,
   reserveFirstChatIntent,
+  supersedeFirstChatIntent,
   type FirstChatScope,
   firstChatScope,
 } from "./first-chat-intent";
@@ -41,10 +41,19 @@ export async function resolveFirstChatConversation(options: {
     try {
       return await openFirstChat(current, intent, options);
     } catch (error) {
-      if (!(error instanceof CapiroApiError) || error.status !== 409)
+      // Core refused to reopen the stored conversation (changed, deleted, no longer permitted):
+      // the stored record is replaced by one fresh request, which is tried exactly once.
+      if (
+        !(error instanceof CapiroApiError) ||
+        error.status < 400 ||
+        error.status >= 500
+      )
         throw error;
-      markFirstChatIntentUsed(current, intent.conversationId, storage);
-      return resolveFirstChatConversation(options);
+      return openFirstChat(
+        current,
+        supersedeFirstChatIntent(current, storage, issueId),
+        options,
+      );
     }
   return openFirstChat(current, intent, options);
 }

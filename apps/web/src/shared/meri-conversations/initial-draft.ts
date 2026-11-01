@@ -23,7 +23,13 @@ const draftState = z.strictObject({
   draft: z.string(),
   revision: z.number().int().nonnegative().safe(),
   pending: capture
-    .extend({ run: z.string(), request: z.string(), continuation: z.boolean() })
+    .extend({
+      run: z.string(),
+      request: z.string(),
+      continuation: z.boolean(),
+      /** The person typed since the capture; the box shows their text, not the capture. */
+      edited: z.boolean().optional(),
+    })
     .nullable(),
   reserved: capture.extend({ request: z.string() }).nullable(),
   selection: z.unknown().transform(receiveSkillSelection).optional(),
@@ -129,6 +135,9 @@ class DraftOwner {
       ...this.state,
       draft: value,
       revision: this.state.revision + 1,
+      pending: this.state.pending
+        ? { ...this.state.pending, edited: true }
+        : null,
     };
     try {
       this.save(next);
@@ -220,9 +229,13 @@ class DraftOwner {
   }
   hasPending = (context: ConversationContext) =>
     this.state.pending?.run === runKey(context);
-  /** The text a still-unacknowledged attempt captured; the transcript shows it, the box must not. */
+  /**
+   * The text a still-unacknowledged attempt captured, while the person has not typed since: the
+   * transcript shows it with its retry, so the box must not. Once they type, the box is theirs,
+   * even if they retype the same words.
+   */
   pendingDraft = (context: ConversationContext) =>
-    this.state.pending?.run === runKey(context)
+    this.state.pending?.run === runKey(context) && !this.state.pending.edited
       ? this.state.pending.draft
       : null;
   acknowledge(
