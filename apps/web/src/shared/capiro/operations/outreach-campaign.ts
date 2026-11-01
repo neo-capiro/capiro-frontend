@@ -24,6 +24,7 @@ export const outreachCampaignOperations = {
         query: z
           .object({
             clientId: z.uuid().optional(),
+            direction: z.enum(["on-behalf", "to-clients"]).optional(),
             view: z.enum(["drafts", "sent", "attention"]).optional(),
             q: z.string().max(240).optional(),
             limit: z.number().int().min(1).max(100).optional(),

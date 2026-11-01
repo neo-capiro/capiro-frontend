@@ -318,7 +318,7 @@
     "kind": "function",
     "symbol": "FindingReview",
     "fingerprint": "9d78cde94f4f86573a0c98b7584d7b451fd9fa9b322985a8038c18da6db64c5d",
-    "reason": "9d78cde94f4f86573a0c98b7584d7b451fd9fa9b322985a8038c18da6db64c5d FindingReview fn, l137, 152 nb ACCEPTABLE â€” one finding-review card; new gate is a derived boolean, no new state/effect or coupling.",
+    "reason": "9d78cde94f4f86573a0c98b7584d7b451fd9fa9b322985a8038c18da6db64c5d FindingReview fn, l137, 152 nb ACCEPTABLE \u00e2\u20ac\u201d one finding-review card; new gate is a derived boolean, no new state/effect or coupling.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -422,7 +422,7 @@
     "kind": "function",
     "symbol": "FocusTagSession",
     "fingerprint": "c88ba0cd670ca981066ca675c297b864251d3c495325e2eef98ef146443343f5",
-    "reason": "reviewed-accept â€” placeholder only",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d placeholder only",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -442,7 +442,7 @@
     "kind": "function",
     "symbol": "FileTable",
     "fingerprint": "0f33c8972da83f6a94bb260ea161a1cb1a7bb26834600d87e4fed0b5b08dd6c7",
-    "reason": "Exact-body ground truth (canonical scanner, my run): head 124/0f33c897â€¦; base 120/e2040cc4â€¦; recorded transfer baseline (commit 02c02d95) 109/2a4413a0â€¦. One cohesive responsibility: render one file row â€” selection checkbox state, name/source/disclosure cell, folder/date/owner, status chip, and the canonical four-action dropdown â€” driven only by props (files, selected, onSelect, onAction) plus contracts.fileStatus; the sole mutable DOM write is input.indeterminate, which is intrinsic to select-all. Coupling is prop-only and one-directional; the change is a 4-line relocation of an existing disclosure string, and the Status cell becomes chip-only by design. Bounded responsibility is acceptable: the count is dominated by JSX markup, and extracting the dropdown would not reduce real coupling. Reason the delta must still be reviewed: the transfer-baseline fingerprint no longer matches, so status changed-since-review is expected, not a new cohesion defect.",
+    "reason": "Exact-body ground truth (canonical scanner, my run): head 124/0f33c897\u00e2\u20ac\u00a6; base 120/e2040cc4\u00e2\u20ac\u00a6; recorded transfer baseline (commit 02c02d95) 109/2a4413a0\u00e2\u20ac\u00a6. One cohesive responsibility: render one file row \u00e2\u20ac\u201d selection checkbox state, name/source/disclosure cell, folder/date/owner, status chip, and the canonical four-action dropdown \u00e2\u20ac\u201d driven only by props (files, selected, onSelect, onAction) plus contracts.fileStatus; the sole mutable DOM write is input.indeterminate, which is intrinsic to select-all. Coupling is prop-only and one-directional; the change is a 4-line relocation of an existing disclosure string, and the Status cell becomes chip-only by design. Bounded responsibility is acceptable: the count is dominated by JSX markup, and extracting the dropdown would not reduce real coupling. Reason the delta must still be reviewed: the transfer-baseline fingerprint no longer matches, so status changed-since-review is expected, not a new cohesion defect.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -630,7 +630,7 @@
     "kind": "function",
     "symbol": "ContactMail",
     "fingerprint": "d6bcd81c051904f4094202b8438cfda71ba1dee0291e845f895ab46197c928e5",
-    "reason": "2. ContactMail.tsx:12 function ContactMail â€” 232 nonblank, fp d6bcd81c051904f4094202b8438cfda71ba1dee0291e845f895ab46197c928e5 (base a953d7b2â€¦), changed. Owner of the contact message-history drawer, the selected thread body and compose; the change adds two classNames and a small dedicated style module rather than growing an existing shared sheet. ACCEPT.",
+    "reason": "2. ContactMail.tsx:12 function ContactMail \u00e2\u20ac\u201d 232 nonblank, fp d6bcd81c051904f4094202b8438cfda71ba1dee0291e845f895ab46197c928e5 (base a953d7b2\u00e2\u20ac\u00a6), changed. Owner of the contact message-history drawer, the selected thread body and compose; the change adds two classNames and a small dedicated style module rather than growing an existing shared sheet. ACCEPT.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -747,7 +747,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved targetÃ¢â‚¬â„¢s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u201e\u00a2s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -891,7 +891,7 @@
     "kind": "function",
     "symbol": "UploadFiles",
     "fingerprint": "b7a27ab808a892cd98a7726849f897a3ad94713c571e8847c8631ab9bc2642be",
-    "reason": "One upload queue retains each jobÃ¢â‚¬â„¢s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful uploadÃ¢â‚¬â„¢s resulting state and adds no storage writer.",
+    "reason": "One upload queue retains each job\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u201e\u00a2s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u201e\u00a2s resulting state and adds no storage writer.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
@@ -2365,7 +2365,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hookÃ¢â‚¬â„¢s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u201e\u00a2s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2851,7 +2851,7 @@
     "kind": "function",
     "symbol": "DocumentsLibrary",
     "fingerprint": "6405938b92a6a3cbc24212f2eed3ab8c27c4b93c37099166b10388b2f560d45c",
-    "reason": "  Verdict ACCEPTABLE (the one signal requiring independent review/binding). This is a single documents-library\n  surface: a filter bar (ownership pills, search, client filter, type and status selects), a StatusPanel, a\n  6-column DataTable and a paging footer. It owns no transport, cursor semantics, tenant scope or authorization\n  â€” query state is owned by useLibraryQuery (filters + opaque cursor, reset-before-receiver-change), typed\n  transport by useCapiroQuery(\"workspace.documents\"), and the client picker by LibraryClientFilter. The added\n  status label Map is module-scope display policy. The 163 nonblank lines are render-heavy JSX for one cohesive\n  responsibility, not multiple concerns fused. Threshold alone is not a failure; no concrete extraction is\n  required or requested. (Non-blocking observation, no source change requested: the filter bar is the most\n  separable sub-block and would be the natural candidate if this body later grows.)",
+    "reason": "  Verdict ACCEPTABLE (the one signal requiring independent review/binding). This is a single documents-library\n  surface: a filter bar (ownership pills, search, client filter, type and status selects), a StatusPanel, a\n  6-column DataTable and a paging footer. It owns no transport, cursor semantics, tenant scope or authorization\n  \u00e2\u20ac\u201d query state is owned by useLibraryQuery (filters + opaque cursor, reset-before-receiver-change), typed\n  transport by useCapiroQuery(\"workspace.documents\"), and the client picker by LibraryClientFilter. The added\n  status label Map is module-scope display policy. The 163 nonblank lines are render-heavy JSX for one cohesive\n  responsibility, not multiple concerns fused. Threshold alone is not a failure; no concrete extraction is\n  required or requested. (Non-blocking observation, no source change requested: the filter bar is the most\n  separable sub-block and would be the natural candidate if this body later grows.)",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -3130,7 +3130,7 @@
     "kind": "function",
     "symbol": "IntegrationSettings",
     "fingerprint": "c769de7c96b62a59c8ac637f17377df6a15f8a25e45f70d01be7826611c299a3",
-    "reason": "5. IntegrationSettings.tsx:55 function IntegrationSettings â€” 531 nonblank, fp c769de7c96b62a59c8ac637f17377df6a15f8a25e45f70d01be7826611c299a3 (base 57789cefâ€¦), changed. Large container; the delta is two lines of truthful copy that do not add a responsibility, dependency or state. ACCEPT WITH NOTE (same bound as 4); no extraction is required by this change.",
+    "reason": "5. IntegrationSettings.tsx:55 function IntegrationSettings \u00e2\u20ac\u201d 531 nonblank, fp c769de7c96b62a59c8ac637f17377df6a15f8a25e45f70d01be7826611c299a3 (base 57789cef\u00e2\u20ac\u00a6), changed. Large container; the delta is two lines of truthful copy that do not add a responsibility, dependency or state. ACCEPT WITH NOTE (same bound as 4); no extraction is required by this change.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -3193,7 +3193,7 @@
     "kind": "function",
     "symbol": "MeriConversationHost",
     "fingerprint": "2adaafe1798fc2ba7bff8348b2c1923d404fbb5aac36770b8fbda976ec602424",
-    "reason": "3. MeriConversationHost.tsx / function MeriConversationHost / line 22 / nonblank 113 / fingerprint 2adaafe1798fc2ba7bff8348b2c1923d404fbb5aac36770b8fbda976ec602424 / changed. Responsibility: mount arbitration over enabled / invalid-scope / general / identity / selection / archived / bootstrap, each branch thin. The added copy branch lengthens a conditional chain (IMPLEMENTATION-STANDARDS Â§8 signal), but it selects mount targets and messages, not providers/tools, and each arm is a short return. ACCEPT WITH NOTE: extract the arbitration when another state is added.",
+    "reason": "3. MeriConversationHost.tsx / function MeriConversationHost / line 22 / nonblank 113 / fingerprint 2adaafe1798fc2ba7bff8348b2c1923d404fbb5aac36770b8fbda976ec602424 / changed. Responsibility: mount arbitration over enabled / invalid-scope / general / identity / selection / archived / bootstrap, each branch thin. The added copy branch lengthens a conditional chain (IMPLEMENTATION-STANDARDS \u00c2\u00a78 signal), but it selects mount targets and messages, not providers/tools, and each arm is a short return. ACCEPT WITH NOTE: extract the arbitration when another state is added.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -3366,7 +3366,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "8068cf99a5d601daeb3378d4383918decfd33982a9391165cd5c3b7662d9d18e",
-    "reason": "reviewed-accept for source; visual effect NOT verified here (min-height/overflow visible â†’ combined visual run)",
+    "reason": "reviewed-accept for source; visual effect NOT verified here (min-height/overflow visible \u00e2\u2020\u2019 combined visual run)",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -3402,7 +3402,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "16a3ed0e347f7a5a7d20b43c5db90a26320c4bcf81854812536fdf7df8262da2",
-    "reason": "4. IntegrationSettings.tsx:1 <module> â€” 581 nonblank, fp 16a3ed0e347f7a5a7d20b43c5db90a26320c4bcf81854812536fdf7df8262da2 (base 5cd78d6bâ€¦), changed. File-level signal already over the 400 threshold before this change; the delta is copy inside an existing provider render callback. ACCEPT WITH NOTE: the file is well past the threshold and any future addition should extract provider blocks rather than extend it.",
+    "reason": "4. IntegrationSettings.tsx:1 <module> \u00e2\u20ac\u201d 581 nonblank, fp 16a3ed0e347f7a5a7d20b43c5db90a26320c4bcf81854812536fdf7df8262da2 (base 5cd78d6b\u00e2\u20ac\u00a6), changed. File-level signal already over the 400 threshold before this change; the delta is copy inside an existing provider render callback. ACCEPT WITH NOTE: the file is well past the threshold and any future addition should extract provider blocks rather than extend it.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -3420,7 +3420,7 @@
     "kind": "function",
     "symbol": "TeamSettings",
     "fingerprint": "4de41891f35570ba32380c6900ab16df65aadee44f0eee316230cd28fb482438",
-    "reason": "4de41891f35570ba32380c6900ab16df65aadee44f0eee316230cd28fb482438 TeamSettings fn, l31, 393 nb ACCEPTABLE for this delta â€” a large settings screen whose size predates the change; this commit adds ~15 presentational lines (tooltip). No new state/effect. Non-blocking: extract the member/billing cell if it grows.",
+    "reason": "4de41891f35570ba32380c6900ab16df65aadee44f0eee316230cd28fb482438 TeamSettings fn, l31, 393 nb ACCEPTABLE for this delta \u00e2\u20ac\u201d a large settings screen whose size predates the change; this commit adds ~15 presentational lines (tooltip). No new state/effect. Non-blocking: extract the member/billing cell if it grows.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -5506,7 +5506,7 @@
     "kind": "function",
     "symbol": "NativeMailReply",
     "fingerprint": "8d1b157a548ae17637d306f48670b2e5637f38471c1971c904a184897b5f1460",
-    "reason": "reviewed-accept (function size, 201 nonblank) â€” the composer now guards the recipient explicitly: the reply/reply-all controls require a real recipient before opening and the open-state effect bails out when the reply has no usable address, with an added regression test covering an empty to list. This is the requested UI robustness guard; Core already rejects an unsupported empty To, so no server crash is claimed or relied on.",
+    "reason": "reviewed-accept (function size, 201 nonblank) \u00e2\u20ac\u201d the composer now guards the recipient explicitly: the reply/reply-all controls require a real recipient before opening and the open-state effect bails out when the reply has no usable address, with an added regression test covering an empty to list. This is the requested UI robustness guard; Core already rejects an unsupported empty To, so no server crash is claimed or relied on.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -5515,7 +5515,7 @@
     "kind": "function",
     "symbol": "DecisionControls",
     "fingerprint": "66fb493c28e0e13de099ec29d0f2230a4a561594067a7702f8e7782bd548c7cf",
-    "reason": "reviewed-accept â€” refactor to one uncertainOutcome table; no authority change",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d refactor to one uncertainOutcome table; no authority change",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -5524,7 +5524,7 @@
     "kind": "function",
     "symbol": "intentDecisionRecovery",
     "fingerprint": "06a6a2a7b1c751faf289ac7cbbd33466028411580987d237733f826cdb985d88",
-    "reason": "reviewed-accept â€” adds research_action to the read-only recovery set",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d adds research_action to the read-only recovery set",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -5533,7 +5533,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "1008ca06e7faef749095109fd3f214f463fc7791cc3d8b5629942b61a3ed0302",
-    "reason": "reviewed-accept â€” file was already >400 nonblank (509â†’536); the added unit is filingLinks, one pure projection of the retained filing outcome beside the existing filing receipt projection. Single proposalâ†’row registry retained; no new domain or authority owner.",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d file was already >400 nonblank (509\u00e2\u2020\u2019536); the added unit is filingLinks, one pure projection of the retained filing outcome beside the existing filing receipt projection. Single proposal\u00e2\u2020\u2019row registry retained; no new domain or authority owner.",
     "reviewedBy": "Hermes Agent source review 20261027_154620_698336",
     "reviewedOn": "2026-10-27"
   },
@@ -5542,7 +5542,7 @@
     "kind": "function",
     "symbol": "intentRow",
     "fingerprint": "e6b74bb9372b3818bb9c505358f498ad75fb087d05f560479f92458da986de06",
-    "reason": "reviewed-accept â€” adds saved-file links to the existing native proposal row; the helper owns the filing completion projection (native-artifact-file). No new authority or domain owner.",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d adds saved-file links to the existing native proposal row; the helper owns the filing completion projection (native-artifact-file). No new authority or domain owner.",
     "reviewedBy": "Hermes Agent source review 20261027_154620_698336",
     "reviewedOn": "2026-10-27"
   },
@@ -5551,7 +5551,7 @@
     "kind": "function",
     "symbol": "useConversationIntents",
     "fingerprint": "953790a9678aa5073a5b51c9491267b03d7ab4d71ed1d2d6d4c441f2a35f68ab",
-    "reason": "reviewed-accept â€” terminal-status awareness only",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d terminal-status awareness only",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -5578,7 +5578,7 @@
     "kind": "function",
     "symbol": "ResearchSettings",
     "fingerprint": "578bf0ee226feddb9aabb0f54b37690af6f851b0c3ef6d45ba0b3e2f7a03b716",
-    "reason": "reviewed-accept â€” canManage vs editable split; grants stay visible",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d canManage vs editable split; grants stay visible",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -5659,7 +5659,7 @@
     "kind": "function",
     "symbol": "ShareLinks",
     "fingerprint": "098465269a8b1e000345aa73796e5c61ae5161623180c80c796733ac16e57d58",
-    "reason": "reviewed-accept â€” SH5 verified, degrades safely 2026-10-29 sharing keyboard-scroll correction: the two sharing tables now pass the opt-in scrollRegion prop, so an overflowing wrapper becomes a keyboard-reachable scroll region named from its caption and gets the ordinary focus outline; a table that fits adds no tab stop. No handler, state, query, copy, column or contract changed.",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d SH5 verified, degrades safely 2026-10-29 sharing keyboard-scroll correction: the two sharing tables now pass the opt-in scrollRegion prop, so an overflowing wrapper becomes a keyboard-reachable scroll region named from its caption and gets the ordinary focus outline; a table that fits adds no tab stop. No handler, state, query, copy, column or contract changed.",
     "reviewedBy": "Hermes Agent sharing keyboard-scroll correction review 20261029",
     "reviewedOn": "2026-10-29"
   },
@@ -5668,7 +5668,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "99332c10e118ace7c054ccd2f7d707f0e341964cee7ac1952c7bb0bbcd494564",
-    "reason": "One module stylesheet covering the dashboard grid, widget content, designer and\n    recipient page of a single visual surface family. It is pure presentation with no logic or\n    state; the recipient-vs-canvas distinction is expressed by the .recipientGrid container query\n    and the .canvas clip rules documented in Â§2.",
+    "reason": "One module stylesheet covering the dashboard grid, widget content, designer and\n    recipient page of a single visual surface family. It is pure presentation with no logic or\n    state; the recipient-vs-canvas distinction is expressed by the .recipientGrid container query\n    and the .canvas clip rules documented in \u00c2\u00a72.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -5776,7 +5776,7 @@
     "kind": "function",
     "symbol": "IncomingMailFiles",
     "fingerprint": "b7a05a5406f83c03a5df6e0a767084bd9ec49e7893920c22d0b0b3d47825a22e",
-    "reason": "3. IncomingMailFiles.tsx:21 function IncomingMailFiles â€” 271 nonblank, fp b7a05a5406f83c03a5df6e0a767084bd9ec49e7893920c22d0b0b3d47825a22e (base 325bc7d2â€¦), changed. Owner of the selected-message files panel: mount lifetime guard, manifest/handoff/import/receipt/stored states, and now the alert presentation. Delta is one className on the existing alert; no new state, effect or dependency. ACCEPT.",
+    "reason": "3. IncomingMailFiles.tsx:21 function IncomingMailFiles \u00e2\u20ac\u201d 271 nonblank, fp b7a05a5406f83c03a5df6e0a767084bd9ec49e7893920c22d0b0b3d47825a22e (base 325bc7d2\u00e2\u20ac\u00a6), changed. Owner of the selected-message files panel: mount lifetime guard, manifest/handoff/import/receipt/stored states, and now the alert presentation. Delta is one className on the existing alert; no new state, effect or dependency. ACCEPT.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -5915,7 +5915,7 @@
     "kind": "function",
     "symbol": "MoveFiles",
     "fingerprint": "afdae17ddc449025f18b70e3583a636e5811c89c420279b820e81afe54e78120",
-    "reason": "Ground truth: head 134/afdae17dâ€¦; base 130/560cdc14â€¦; no transfer-baseline record (hence \"new\"). One cohesive responsibility: the batch-move dialog â€” authoritative count from the held command before local selection, title/description copy, the start try/catch and its revision precondition message, the pending/refusal/unconfirmed status copy, the check/retry/retire controls and the primary submit gate keyed to move.canStart plus count bounds. All authority stays in useBatchMove/batchMoveCommand (untouched); no new state or effect path was added, so extraction candidates (held-command control block, file list) would re-thread the same context without reducing responsibility. Bounded responsibility acceptable. Note: this body is a preserved donor byte snapshot; any future edit is a new change, not a donor carry-over.",
+    "reason": "Ground truth: head 134/afdae17d\u00e2\u20ac\u00a6; base 130/560cdc14\u00e2\u20ac\u00a6; no transfer-baseline record (hence \"new\"). One cohesive responsibility: the batch-move dialog \u00e2\u20ac\u201d authoritative count from the held command before local selection, title/description copy, the start try/catch and its revision precondition message, the pending/refusal/unconfirmed status copy, the check/retry/retire controls and the primary submit gate keyed to move.canStart plus count bounds. All authority stays in useBatchMove/batchMoveCommand (untouched); no new state or effect path was added, so extraction candidates (held-command control block, file list) would re-thread the same context without reducing responsibility. Bounded responsibility acceptable. Note: this body is a preserved donor byte snapshot; any future edit is a new change, not a donor carry-over.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -6230,7 +6230,7 @@
     "kind": "function",
     "symbol": "IntegrationSettings > <anonymous> #3",
     "fingerprint": "0ac0ea06ba31378a56e38b1b527b45102bfe5cbdda70871af16d8f20a0f1ca91",
-    "reason": "6. IntegrationSettings.tsx:190 anon #3 â€” 257 nonblank, fp 0ac0ea06ba31378a56e38b1b527b45102bfe5cbdda70871af16d8f20a0f1ca91 (base 653a6d73â€¦), changed. The per-provider render callback (status, saved rows, missing-configuration explanation, guarded connect/reconnect notices). Bounded to one provider's block; the change is the conditional saved-records sentence. ACCEPT WITH NOTE.",
+    "reason": "6. IntegrationSettings.tsx:190 anon #3 \u00e2\u20ac\u201d 257 nonblank, fp 0ac0ea06ba31378a56e38b1b527b45102bfe5cbdda70871af16d8f20a0f1ca91 (base 653a6d73\u00e2\u20ac\u00a6), changed. The per-provider render callback (status, saved rows, missing-configuration explanation, guarded connect/reconnect notices). Bounded to one provider's block; the change is the conditional saved-records sentence. ACCEPT WITH NOTE.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -6248,7 +6248,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "bc3423591e5b8bd365faf801ddf63a665e83288f47a70f8e2e27cc0853a55c38",
-    "reason": "bc3423591e5b8bd365faf801ddf63a665e83288f47a70f8e2e27cc0853a55c38 TeamSettings file, 426 nb ACCEPTABLE â€” module holds schema types, a query hook and the component; single settings responsibility.",
+    "reason": "bc3423591e5b8bd365faf801ddf63a665e83288f47a70f8e2e27cc0853a55c38 TeamSettings file, 426 nb ACCEPTABLE \u00e2\u20ac\u201d module holds schema types, a query hook and the component; single settings responsibility.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -6457,7 +6457,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "0a53f2b49d2ac97ec531577080f9d20c099f7b5494e73294f637bec5ea2b7edb",
-    "reason": "reviewed-accept (file size, 406 nonblank) â€” module scope is limited to the dataset registry, filter-state helpers that write through to the URL, the page-size/export-size constants and the route component; helpers are pure and already unit-covered by intelligence-location/explorer-export tests, so no further cohesive unit can be carved out without fragmenting the URL-owned state machine.",
+    "reason": "reviewed-accept (file size, 406 nonblank) \u00e2\u20ac\u201d module scope is limited to the dataset registry, filter-state helpers that write through to the URL, the page-size/export-size constants and the route component; helpers are pure and already unit-covered by intelligence-location/explorer-export tests, so no further cohesive unit can be carved out without fragmenting the URL-owned state machine.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6466,7 +6466,7 @@
     "kind": "function",
     "symbol": "DataExplorer",
     "fingerprint": "b319017b2498b5ba5a2751dcee87f0c07602bc673dbce562f8306836499ba9ae",
-    "reason": "reviewed-accept (function size, 353 nonblank) â€” one route component for /modules/intelligence; it owns the URL-derived dataset/filter/page/record state through useIntelligenceLocation and renders the fixed typed Explorer queries, faceted filter controls, list and selected-record panel. Growth is declarative query/results markup plus location wiring, not hidden branching; extracting the JSX would separate the URL contract from the single surface that must honour it while leaving every decision in place.",
+    "reason": "reviewed-accept (function size, 353 nonblank) \u00e2\u20ac\u201d one route component for /modules/intelligence; it owns the URL-derived dataset/filter/page/record state through useIntelligenceLocation and renders the fixed typed Explorer queries, faceted filter controls, list and selected-record panel. Growth is declarative query/results markup plus location wiring, not hidden branching; extracting the JSX would separate the URL contract from the single surface that must honour it while leaving every decision in place.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6475,7 +6475,7 @@
     "kind": "function",
     "symbol": "DefenseBudget",
     "fingerprint": "065db1d936c3e0298678b0b4a527b7f48e8f2add037378e6bf7c95991be4e255",
-    "reason": "reviewed-accept (function size, 133 nonblank) â€” the component now derives its filters, page and search text from useIntelligenceLocation so reload and Back/Forward restore the same view; the body is the existing filter/list/detail markup plus the fixed intelligence.defense queries. No authority, mutation or aggregation logic is introduced by the URL wiring.",
+    "reason": "reviewed-accept (function size, 133 nonblank) \u00e2\u20ac\u201d the component now derives its filters, page and search text from useIntelligenceLocation so reload and Back/Forward restore the same view; the body is the existing filter/list/detail markup plus the fixed intelligence.defense queries. No authority, mutation or aggregation logic is introduced by the URL wiring.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6484,7 +6484,7 @@
     "kind": "function",
     "symbol": "ProgramElementProfile",
     "fingerprint": "2be620da57586cb13d90f8f8c8907b38efd04f8137f5c01524bc25a60ad373a4",
-    "reason": "reviewed-accept (function size, 97 nonblank) â€” the growth is the URL-owned Program Element identity and its existing five tabs (peTab/dossier) plus the mounted dossier/context/office/acquisition/funding readers; tab selection is read from and written to the location, so a split would duplicate that contract across components without removing a decision.",
+    "reason": "reviewed-accept (function size, 97 nonblank) \u00e2\u20ac\u201d the growth is the URL-owned Program Element identity and its existing five tabs (peTab/dossier) plus the mounted dossier/context/office/acquisition/funding readers; tab selection is read from and written to the location, so a split would duplicate that contract across components without removing a decision.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6493,7 +6493,7 @@
     "kind": "function",
     "symbol": "AcquisitionRecords",
     "fingerprint": "404f5d1a235b3af2556a0f35dd9967c1f4587468f1fbb149298078fbf6b28f50",
-    "reason": "reviewed-accept (function size, 119 nonblank) â€” a single list surface over the fixed intelligence defense acquisition reader: URL-owned query/page, typed summary columns and links to the detail route. Presentation-only expansion over an unchanged operation contract.",
+    "reason": "reviewed-accept (function size, 119 nonblank) \u00e2\u20ac\u201d a single list surface over the fixed intelligence defense acquisition reader: URL-owned query/page, typed summary columns and links to the detail route. Presentation-only expansion over an unchanged operation contract.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6502,7 +6502,7 @@
     "kind": "function",
     "symbol": "AcquisitionDetail",
     "fingerprint": "8ef202c3f4d0d11de5eb63436558271ee9fdd194a7fe12bb8ab02c3f2b4199ab",
-    "reason": "reviewed-accept (function size, 86 nonblank) â€” one detail panel rendering the acquisition record plus its revisions, child/amendment identities and associations from the frozen detail DTO; missing revisions/associations render as explicit 'None recorded' text rather than zero counts, and no numeric value is substituted for an absent one.",
+    "reason": "reviewed-accept (function size, 86 nonblank) \u00e2\u20ac\u201d one detail panel rendering the acquisition record plus its revisions, child/amendment identities and associations from the frozen detail DTO; missing revisions/associations render as explicit 'None recorded' text rather than zero counts, and no numeric value is substituted for an absent one.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6511,7 +6511,7 @@
     "kind": "function",
     "symbol": "ContextRecords",
     "fingerprint": "a6ef6a79b3664388a2d2615a32a139f79c829c5314855661aa54e50504d36403",
-    "reason": "reviewed-accept (function size, 147 nonblank) â€” list/detail pair over defenseResearch.context and .context.detail with URL-owned selection; revisions, sections and coverageReason are rendered with availability/provenance rather than as zeroed values. No new operation or state model.",
+    "reason": "reviewed-accept (function size, 147 nonblank) \u00e2\u20ac\u201d list/detail pair over defenseResearch.context and .context.detail with URL-owned selection; revisions, sections and coverageReason are rendered with availability/provenance rather than as zeroed values. No new operation or state model.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6520,7 +6520,7 @@
     "kind": "function",
     "symbol": "DossierDetail",
     "fingerprint": "73011372c1cd58ae1554970d8ff597e5006b6c39ef8355af8369342a161a5151",
-    "reason": "reviewed-accept (function size, 235 nonblank) â€” the dossier panel renders the four fixed DTO sections (identity, fields, funding matrix, coverage). Size comes from per-section table markup; funding cells use 'Not available' plus the disposition badge and Core's stated reason so a missing observation is never displayed as zero, and the component holds no client-side authority or recomputation.",
+    "reason": "reviewed-accept (function size, 235 nonblank) \u00e2\u20ac\u201d the dossier panel renders the four fixed DTO sections (identity, fields, funding matrix, coverage). Size comes from per-section table markup; funding cells use 'Not available' plus the disposition badge and Core's stated reason so a missing observation is never displayed as zero, and the component holds no client-side authority or recomputation.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6529,7 +6529,7 @@
     "kind": "function",
     "symbol": "OfficeRecords",
     "fingerprint": "3ddb330c2611d3033fd44e8a47dbe9d5464adbf416495a7b977a9df1325bf18c",
-    "reason": "reviewed-accept (function size, 151 nonblank) â€” list/detail over defenseResearch.offices/.office with URL-owned query, page and selected office; mission/responsibilities/scope are projected from the wider Core office DTO (unknown fields deliberately stripped) and the panel renders availability/evidence rather than inferring values.",
+    "reason": "reviewed-accept (function size, 151 nonblank) \u00e2\u20ac\u201d list/detail over defenseResearch.offices/.office with URL-owned query, page and selected office; mission/responsibilities/scope are projected from the wider Core office DTO (unknown fields deliberately stripped) and the panel renders availability/evidence rather than inferring values.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6538,7 +6538,7 @@
     "kind": "function",
     "symbol": "ImportWorksheet",
     "fingerprint": "6fc771e0641857825589341fcf0f03e7fda0ac6c7e39fb21e1c905e99e2a7ca1",
-    "reason": "reviewed-accept (function size, 196 nonblank) â€” the import worksheet now retains one exact captured action request together with its operationKey and reuses both only while the semantic params/body are byte-identical (identity excludes the key), clearing on success and distinguishing refused from uncertain outcomes; this is the bounded same-key recovery requested for the P3 retry guard and introduces no automatic retry or new pipeline.",
+    "reason": "reviewed-accept (function size, 196 nonblank) \u00e2\u20ac\u201d the import worksheet now retains one exact captured action request together with its operationKey and reuses both only while the semantic params/body are byte-identical (identity excludes the key), clearing on success and distinguishing refused from uncertain outcomes; this is the bounded same-key recovery requested for the P3 retry guard and introduces no automatic retry or new pipeline.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6547,7 +6547,7 @@
     "kind": "function",
     "symbol": "ResearchContributions",
     "fingerprint": "e7592981cb717dc3990c393b8a19f0076728230416e0f2c9122d35f7f7676813",
-    "reason": "reviewed-accept (function size, 178 nonblank) â€” read-only contribution ledger over the extended research.analytics reader: member/target/disposition/totals filters, per-contribution basis, value, disposition, overlap link and evidence. It renders totals and contribution counts exactly as returned and states that it does not recalculate them, so a missing basis value is shown as absent rather than zero.",
+    "reason": "reviewed-accept (function size, 178 nonblank) \u00e2\u20ac\u201d read-only contribution ledger over the extended research.analytics reader: member/target/disposition/totals filters, per-contribution basis, value, disposition, overlap link and evidence. It renders totals and contribution counts exactly as returned and states that it does not recalculate them, so a missing basis value is shown as absent rather than zero.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6556,7 +6556,7 @@
     "kind": "function",
     "symbol": "ComparisonCapture",
     "fingerprint": "950051cc71a61f28357ad67efb400ee5c8f422fa6fdff590da89b338d299598b",
-    "reason": "reviewed-accept (function size, 199 nonblank) â€” capture form that serialises the save body from the live preview projection (not from editable strings), refuses context subjects without a single exact revision plus native-section evidence, validates the selection subset and basis/metric shape before POST, and retains the exact body plus idempotencyKey so an uncertain save is retried identically while a refused (2xx/4xx) outcome clears it.",
+    "reason": "reviewed-accept (function size, 199 nonblank) \u00e2\u20ac\u201d capture form that serialises the save body from the live preview projection (not from editable strings), refuses context subjects without a single exact revision plus native-section evidence, validates the selection subset and basis/metric shape before POST, and retains the exact body plus idempotencyKey so an uncertain save is retried identically while a refused (2xx/4xx) outcome clears it.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6565,7 +6565,7 @@
     "kind": "function",
     "symbol": "ComparisonEditor",
     "fingerprint": "60cb84d8f1c6c82ee7ae6ce9f80e94221932880d3d15e2c58c35e8b1fced08eb",
-    "reason": "reviewed-accept (function size, 184 nonblank) â€” subject chooser for the fixed research.comparisons.preview reader; it only renders capture controls when the preview token matches the current typed inputs, excludes member kinds Core cannot compare, refuses ids containing the delimiter, and mirrors Core's 2-5 subject and basis/metric constraints locally so the form cannot submit a shape Core would reject.",
+    "reason": "reviewed-accept (function size, 184 nonblank) \u00e2\u20ac\u201d subject chooser for the fixed research.comparisons.preview reader; it only renders capture controls when the preview token matches the current typed inputs, excludes member kinds Core cannot compare, refuses ids containing the delimiter, and mirrors Core's 2-5 subject and basis/metric constraints locally so the form cannot submit a shape Core would reject.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6574,7 +6574,7 @@
     "kind": "function",
     "symbol": "ComparisonProjection",
     "fingerprint": "b5b6dd98db242c1a67435cefa993c7c3f12ffc1676fdab5bbc161e4f0ed51f3f",
-    "reason": "reviewed-accept (function size, 100 nonblank) â€” presentational table of subjects x metrics from the frozen comparison projection; cells show the value or 'Unavailable' with the disposition badge and Core's reason, the caption states that missing values are not zero, and alignments render their state/reason. No client-side arithmetic or authority.",
+    "reason": "reviewed-accept (function size, 100 nonblank) \u00e2\u20ac\u201d presentational table of subjects x metrics from the frozen comparison projection; cells show the value or 'Unavailable' with the disposition badge and Core's reason, the caption states that missing values are not zero, and alignments render their state/reason. No client-side arithmetic or authority.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6583,7 +6583,7 @@
     "kind": "function",
     "symbol": "ResearchComparisons",
     "fingerprint": "eee4902ea8789e61f06a775f8b727ab4784993050202d021f8693f7b6894c22a",
-    "reason": "reviewed-accept (function size, 153 nonblank) â€” saved-comparison browser that reads list/read/version through the fixed gateway, refuses a selection that is not a subset of the named capture, hides comparisons belonging to another portfolio, and preserves unrelated URL params while forcing the portfolio/view scope. The 50-item list limit and version-by-id semantics are disclosed rather than inferred from a number.",
+    "reason": "reviewed-accept (function size, 153 nonblank) \u00e2\u20ac\u201d saved-comparison browser that reads list/read/version through the fixed gateway, refuses a selection that is not a subset of the named capture, hides comparisons belonging to another portfolio, and preserves unrelated URL params while forcing the portfolio/view scope. The 50-item list limit and version-by-id semantics are disclosed rather than inferred from a number.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6592,7 +6592,7 @@
     "kind": "function",
     "symbol": "SavedComparisonView",
     "fingerprint": "de4e5c5f5873c786949304041a6c4c289c3e2c10deb7fc036bfb3612a3818c6e",
-    "reason": "reviewed-accept (function size, 190 nonblank) â€” immutable-version viewer plus the add-selection/archive/restore actions. Actions are gated on lifecycle/myRole only as hints, every write sends expectedRevision (and expectedPortfolioRevision plus idempotencyKey for add) with the exact selection, and an uncertain failure retains one exact Attempt that is retried verbatim while a definitive 4xx clears it and reports the refusal.",
+    "reason": "reviewed-accept (function size, 190 nonblank) \u00e2\u20ac\u201d immutable-version viewer plus the add-selection/archive/restore actions. Actions are gated on lifecycle/myRole only as hints, every write sends expectedRevision (and expectedPortfolioRevision plus idempotencyKey for add) with the exact selection, and an uncertain failure retains one exact Attempt that is retried verbatim while a definitive 4xx clears it and reports the refusal.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6601,7 +6601,7 @@
     "kind": "function",
     "symbol": "ScopedResearchCreate",
     "fingerprint": "2566172b98c33b62fecc9954260bfcb70052d41c9572cbc53f446d8e2055d46b",
-    "reason": "reviewed-accept â€” three-step wizard on the existing typed create-intent owner; unknown result keeps the keyed body",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d three-step wizard on the existing typed create-intent owner; unknown result keeps the keyed body",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6610,7 +6610,7 @@
     "kind": "function",
     "symbol": "ResearchOverview",
     "fingerprint": "c5c0b1a02168230756628cff7c1eaa18cdda7cd34105d46829defd6725a514c7",
-    "reason": "reviewed-accept â€” explicit fit refresh, role/lifecycle guarded",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d explicit fit refresh, role/lifecycle guarded",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6619,7 +6619,7 @@
     "kind": "function",
     "symbol": "ResearchSnapshots",
     "fingerprint": "5f7230b4395b44fdd7037dcf8c5d618835bbc91c3dd0fe005f946a7ad07efd3d",
-    "reason": "reviewed-accept â€” create gated active+non-viewer",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d create gated active+non-viewer",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6628,7 +6628,7 @@
     "kind": "function",
     "symbol": "<anonymous>",
     "fingerprint": "cf70f4356b131f6f9b7e3cc0f601c8c921f49cdf75e0f08b4f2426ad2e845754",
-    "reason": "reviewed-accept â€” recovery regression test",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d recovery regression test",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6637,7 +6637,7 @@
     "kind": "function",
     "symbol": "ResearchBookmarks",
     "fingerprint": "eb8a96f589f7b8e42f494aac4abcd6a5c1c8ec5bf3eb418c30e0beceb798f9ea",
-    "reason": "reviewed-accept â€” key retained across failure",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d key retained across failure",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6655,7 +6655,7 @@
     "kind": "function",
     "symbol": "ResearchImports",
     "fingerprint": "6113eeb9ce9334c74753e372dbd3e7a0ca8c0ac1a9a6c717dd9aa1db3e3a7d07",
-    "reason": "reviewed-accept â€” key retained; conditional on P1",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d key retained; conditional on P1",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6664,7 +6664,7 @@
     "kind": "function",
     "symbol": "ResearchOutputs",
     "fingerprint": "c6fa745177e777c79c5a684bb45d979cc61451c11652cd797955a39a088e3a6b",
-    "reason": "reviewed-accept â€” same-request retry retained",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d same-request retry retained",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6673,7 +6673,7 @@
     "kind": "function",
     "symbol": "OutputReceipt",
     "fingerprint": "a3ed3189b1bd4caae14e5502028e7d25bc1a60368b39899a7cfed26d4d20f72e",
-    "reason": "reviewed-accept â€” artifact-id identity verified",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d artifact-id identity verified",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6682,7 +6682,7 @@
     "kind": "function",
     "symbol": "ResearchReviewTools",
     "fingerprint": "4def25aa836b2ba3f357f39f7df1bd80f9778357ba4810812975c942286e2ebc",
-    "reason": "reviewed-accept â€” note key retained",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d note key retained",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6691,7 +6691,7 @@
     "kind": "function",
     "symbol": "ResearchRuleEditor",
     "fingerprint": "6218d90bd29046bd6dec913ce031523a289982eb8b9c54b079e3ea66f2ffa643",
-    "reason": "reviewed-accept â€” depth/clause limits match Core",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d depth/clause limits match Core",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6709,7 +6709,7 @@
     "kind": "function",
     "symbol": "ResearchWatchConversion",
     "fingerprint": "befa5effba3dec57833487f9cfc735c2c27dfac070d225c263ff9949a94e11ad",
-    "reason": "reviewed-accept â€” preview hash/revision bound, no auto-enable",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d preview hash/revision bound, no auto-enable",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6718,7 +6718,7 @@
     "kind": "function",
     "symbol": "BudgetChanges",
     "fingerprint": "3430a0bebb8b65ba650f6f011fcbb432ff00ac2042b4216a95d1912376aeb372",
-    "reason": "reviewed-accept (function size, 158 nonblank) â€” one Changes/Budget tab: URL-owned filters (changesBudgetPe/changesFy/changesScore/changesBudgetPage), the two mutually exclusive fixed delta reads (attention vs per-PE), the per-row peCode cross-check that withholds mismatched rows, and the fixed table plus paging. Growth is declarative rendering plus location wiring; no authority, mutation or aggregation is added, and splitting would separate the URL contract from its single owner.",
+    "reason": "reviewed-accept (function size, 158 nonblank) \u00e2\u20ac\u201d one Changes/Budget tab: URL-owned filters (changesBudgetPe/changesFy/changesScore/changesBudgetPage), the two mutually exclusive fixed delta reads (attention vs per-PE), the per-row peCode cross-check that withholds mismatched rows, and the fixed table plus paging. Growth is declarative rendering plus location wiring; no authority, mutation or aggregation is added, and splitting would separate the URL contract from its single owner.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6727,7 +6727,7 @@
     "kind": "function",
     "symbol": "ClientWatchList",
     "fingerprint": "258473a5e4b0d6d01ebc325e0bba067e58ed4ae0fa0df52b952afc1d91aa0ca7",
-    "reason": "reviewed-accept (function size, 98 nonblank) â€” the selected-client watch surface: one fixed watches read, a client identity cross-check on every watch and event, the newest subscription-event state derivation, the disclosed first-100 display for an unpaginated owner, and the retained-event panel for the URL-selected watch. One reader, one presentation decision.",
+    "reason": "reviewed-accept (function size, 98 nonblank) \u00e2\u20ac\u201d the selected-client watch surface: one fixed watches read, a client identity cross-check on every watch and event, the newest subscription-event state derivation, the disclosed first-100 display for an unpaginated owner, and the retained-event panel for the URL-selected watch. One reader, one presentation decision.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6736,7 +6736,7 @@
     "kind": "function",
     "symbol": "PortfolioActions",
     "fingerprint": "f9a49b54bc64cd39a69ef42bc07d1a99db7a30c089800c03b287f8c8619fe9fb",
-    "reason": "reviewed-accept (function size, 98 nonblank) â€” the Actions tab: authorized portfolio list with cursor paging (research.list), one detail read admitted only when the returned id equals the routed id, and the native review queue mounted through the reviews-public presentation boundary. It adds no authority; Core still re-checks grant, lifecycle and revision.",
+    "reason": "reviewed-accept (function size, 98 nonblank) \u00e2\u20ac\u201d the Actions tab: authorized portfolio list with cursor paging (research.list), one detail read admitted only when the returned id equals the routed id, and the native review queue mounted through the reviews-public presentation boundary. It adds no authority; Core still re-checks grant, lifecycle and revision.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6745,7 +6745,7 @@
     "kind": "function",
     "symbol": "ResearchBulkReviews",
     "fingerprint": "64afe94982748b03c1b3a19e03158a637af49953f473c42e9fea4a4067560164",
-    "reason": "reviewed-accept (function size, 340 nonblank) â€” one bounded bulk-decision form and its recovery state machine over the fixed research.reviews.bulk owner: revision-bound per-row selection (â‰¤50), one decision and reason, explicit per-row evidence, a pre-send 1 MB bound matching the declared operation limit, exact parsed-request and key retention across an unknown outcome, receipt identity validation (portfolioId plus exactly one outcome per selected review), and the per-row outcome table. The draft, the retained request/key and the receipt are one machine; extracting the retention logic would separate the byte-identical request from the state that must reproduce it.",
+    "reason": "reviewed-accept (function size, 340 nonblank) \u00e2\u20ac\u201d one bounded bulk-decision form and its recovery state machine over the fixed research.reviews.bulk owner: revision-bound per-row selection (\u00e2\u2030\u00a450), one decision and reason, explicit per-row evidence, a pre-send 1 MB bound matching the declared operation limit, exact parsed-request and key retention across an unknown outcome, receipt identity validation (portfolioId plus exactly one outcome per selected review), and the per-row outcome table. The draft, the retained request/key and the receipt are one machine; extracting the retention logic would separate the byte-identical request from the state that must reproduce it.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6763,7 +6763,7 @@
     "kind": "function",
     "symbol": "ResearchMembers",
     "fingerprint": "eccbb7f0df26799d3d375ecc33f74507d134d38a167ae7005c4eee7b1dccaf4a",
-    "reason": "reviewed-accept (function size, 208 nonblank) â€” the native membership tab: bounded selection (â‰¤100), explicit include/exclude decisions, unresolved rows routed to Resolve instead of Include, the decision receipt table keyed by member identity, and the two mounted member dialogs. One table plus one decision owner; the dialogs already own their own request/retention logic.",
+    "reason": "reviewed-accept (function size, 208 nonblank) \u00e2\u20ac\u201d the native membership tab: bounded selection (\u00e2\u2030\u00a4100), explicit include/exclude decisions, unresolved rows routed to Resolve instead of Include, the decision receipt table keyed by member identity, and the two mounted member dialogs. One table plus one decision owner; the dialogs already own their own request/retention logic.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6772,7 +6772,7 @@
     "kind": "function",
     "symbol": "ResearchReviews",
     "fingerprint": "cf8c4f5cadc81bd4371695881d181b100767209c41a627903953d8a6833c211f",
-    "reason": "reviewed-accept (function size, 276 nonblank, replaces the 253-nonblank record) â€” the review owner: URL-owned lane, the lane queue read with per-row portfolio identity verification, the single-decision modal bound to the captured review revision, and the mounted bulk-decision surface. It remains the single place where review decisions are released, so the lane state, queue verification and both decision paths belong together.",
+    "reason": "reviewed-accept (function size, 276 nonblank, replaces the 253-nonblank record) \u00e2\u20ac\u201d the review owner: URL-owned lane, the lane queue read with per-row portfolio identity verification, the single-decision modal bound to the captured review revision, and the mounted bulk-decision surface. It remains the single place where review decisions are released, so the lane state, queue verification and both decision paths belong together.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6781,7 +6781,7 @@
     "kind": "function",
     "symbol": "MemberDecision",
     "fingerprint": "172c68c1346982fbfeaa24069f2775687d90715dc20cd64f1706f6acf00050d1",
-    "reason": "reviewed-accept (function size, 106 nonblank) â€” the explicit multi-member include/exclude modal: one reason applied to every selected member, the captured exact request and key retained across an unknown outcome with manual same-request retry only, a refused 4xx clearing retention, and the atomic-batch disclosure. One mutation with one recovery rule.",
+    "reason": "reviewed-accept (function size, 106 nonblank) \u00e2\u20ac\u201d the explicit multi-member include/exclude modal: one reason applied to every selected member, the captured exact request and key retained across an unknown outcome with manual same-request retry only, a refused 4xx clearing retention, and the atomic-batch disclosure. One mutation with one recovery rule.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6790,7 +6790,7 @@
     "kind": "function",
     "symbol": "MemberDiscovery",
     "fingerprint": "15c952eadca724f49d7beb1967f38a59cae77ce1cb3bedc6af95f1a0137fec77",
-    "reason": "reviewed-accept (function size, 281 nonblank) â€” the add/resolve modal: canonical typed discovery (search restricted to the four domain families with UUID gating except PE codes, awards through the existing 20-row paged reader), already-existing members disabled, same-request retention for unknown outcomes, and the resolve path reusing the same captured body. Both entry modes share one request owner; splitting add from resolve would duplicate that retention logic.",
+    "reason": "reviewed-accept (function size, 281 nonblank) \u00e2\u20ac\u201d the add/resolve modal: canonical typed discovery (search restricted to the four domain families with UUID gating except PE codes, awards through the existing 20-row paged reader), already-existing members disabled, same-request retention for unknown outcomes, and the resolve path reusing the same captured body. Both entry modes share one request owner; splitting add from resolve would duplicate that retention logic.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6799,7 +6799,7 @@
     "kind": "function",
     "symbol": "CongressionalChanges",
     "fingerprint": "a163132241b9eefa65da60b3e39c6867ab695a8adc33cdace39eb2f849326ca1",
-    "reason": "reviewed-accept (function size, 107 nonblank, replaces the 105-nonblank record) â€” one Changes/Congressional tab: the required PE input (trimmed, max 16) that also resets the retained evidence cursor, one fixed bill-actions read with its disclosed 200-action / 40-bill / 60-per-bill bound, the action table, and the existing ProgramBills plus the new PE-scoped Federal evidence revisions panel composed under the same validated PE. The added lines are one URL-state reset and one composition; no authority, mutation, occurrence association or fiscal-year filter is invented, and splitting would separate the PE/URL contract from its single owner.",
+    "reason": "reviewed-accept (function size, 107 nonblank, replaces the 105-nonblank record) \u00e2\u20ac\u201d one Changes/Congressional tab: the required PE input (trimmed, max 16) that also resets the retained evidence cursor, one fixed bill-actions read with its disclosed 200-action / 40-bill / 60-per-bill bound, the action table, and the existing ProgramBills plus the new PE-scoped Federal evidence revisions panel composed under the same validated PE. The added lines are one URL-state reset and one composition; no authority, mutation, occurrence association or fiscal-year filter is invented, and splitting would separate the PE/URL contract from its single owner.",
     "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
     "reviewedOn": "2026-10-27"
   },
@@ -6808,7 +6808,7 @@
     "kind": "function",
     "symbol": "FederalEvidenceTimeline",
     "fingerprint": "0b94b713d1f526b11082e292c8e9c8a24c2b73bf860664e02f0972e120a5d417",
-    "reason": "reviewed-accept (function size, 125 nonblank, new) â€” one fixed GET /federal-evidence/timeline reader: strict bounded request (PE from the existing Congressional context, limit 25, cursor, optional ISO knowledge time), URL-owned cursor and knowledge time with reset on PE or time change, non-submit Refresh/Latest controls, historical-evidence disclosure, and the per-event Before/After composition whose sides are independently admitted from their own event revision and content hash. It holds no authority and creates no event-to-occurrence association; request construction, gating and presentation are one read contract that would fragment if split.",
+    "reason": "reviewed-accept (function size, 125 nonblank, new) \u00e2\u20ac\u201d one fixed GET /federal-evidence/timeline reader: strict bounded request (PE from the existing Congressional context, limit 25, cursor, optional ISO knowledge time), URL-owned cursor and knowledge time with reset on PE or time change, non-submit Refresh/Latest controls, historical-evidence disclosure, and the per-event Before/After composition whose sides are independently admitted from their own event revision and content hash. It holds no authority and creates no event-to-occurrence association; request construction, gating and presentation are one read contract that would fragment if split.",
     "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
     "reviewedOn": "2026-10-27"
   },
@@ -6817,7 +6817,7 @@
     "kind": "function",
     "symbol": "ResearchCoverage",
     "fingerprint": "e7714751449668907bf072b3861ecaf01327a3adedc7d93a21c6bb84fc038cb9",
-    "reason": "reviewed-accept (function size, 189 nonblank, replaces the 188-nonblank record from df77d9701e1d60740fa1cae23a8b5b7f0f8bdd9e) â€” the coverage owner: URL-owned filters and fiscal year, one fixed product-coverage read, the denominator-known disclosure, the cohort table with its separate denominator / counts / status columns, the new read-only Recorded source outcomes column, and the Clear filters control now carrying an explicit type=\"button\" so clearing cannot be re-submitted with stale filter values (the untyped button previously defaulted to submit inside the filter form). Growth is one declarative column plus one button type; counts, publication status, denominator knowledge, tenant filter ownership and the no-ingestion refresh disclosure are unchanged, and the rows/columns/filter contract belongs to this single view.",
+    "reason": "reviewed-accept (function size, 189 nonblank, replaces the 188-nonblank record from df77d9701e1d60740fa1cae23a8b5b7f0f8bdd9e) \u00e2\u20ac\u201d the coverage owner: URL-owned filters and fiscal year, one fixed product-coverage read, the denominator-known disclosure, the cohort table with its separate denominator / counts / status columns, the new read-only Recorded source outcomes column, and the Clear filters control now carrying an explicit type=\"button\" so clearing cannot be re-submitted with stale filter values (the untyped button previously defaulted to submit inside the filter form). Growth is one declarative column plus one button type; counts, publication status, denominator knowledge, tenant filter ownership and the no-ingestion refresh disclosure are unchanged, and the rows/columns/filter contract belongs to this single view.",
     "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
     "reviewedOn": "2026-10-27"
   },
@@ -6826,7 +6826,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "a982a37ae1d4e454604d59fae3283fa23c1ef8a63e308d9b2c744de3c644a174",
-    "reason": "reviewed-accept â€” composed 421-nonblank module (411 at the Wave4 base plus the 10-line saved-filing receipt link block in IntentCard). IntentCard is byte-identical to the reviewed c462f484 card (2baf8e7câ€¦), Body and DecisionControls are byte-identical to the reviewed 2146faae bodies (9cc9ac3bâ€¦, 66fb493câ€¦), and the only other delta vs the reviewed MF19 tree is the already-reviewed Wave4 unavailable-panel/Refresh ui.outline styling. Content stays in one bounded prepared-action domain â€” classification predicates, DecisionControls, IntentCard, Body, container â€” with no new domain, effect, lifecycle owner, authority owner, dependency direction or shared-file write surface; a split is not required.",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d composed 421-nonblank module (411 at the Wave4 base plus the 10-line saved-filing receipt link block in IntentCard). IntentCard is byte-identical to the reviewed c462f484 card (2baf8e7c\u00e2\u20ac\u00a6), Body and DecisionControls are byte-identical to the reviewed 2146faae bodies (9cc9ac3b\u00e2\u20ac\u00a6, 66fb493c\u00e2\u20ac\u00a6), and the only other delta vs the reviewed MF19 tree is the already-reviewed Wave4 unavailable-panel/Refresh ui.outline styling. Content stays in one bounded prepared-action domain \u00e2\u20ac\u201d classification predicates, DecisionControls, IntentCard, Body, container \u00e2\u20ac\u201d with no new domain, effect, lifecycle owner, authority owner, dependency direction or shared-file write surface; a split is not required.",
     "reviewedBy": "Hermes Agent source review 20261027_205545_91530e",
     "reviewedOn": "2026-10-27"
   },
@@ -6844,7 +6844,7 @@
     "kind": "function",
     "symbol": "RunLedger",
     "fingerprint": "8c1ebf36f6668b174470ab56994ff730fc9f1c4707da02820f422176f844bdb5",
-    "reason": "8c1ebf36f6668b174470ab56994ff730fc9f1c4707da02820f422176f844bdb5 RunLedger fn, l4, 91 nb ACCEPTABLE / IMPROVED â€” responsibility for source naming and outcome projection moved OUT of RunLedger into SourceOutcome (single owner of the label map, previously duplicated inline). No state added.",
+    "reason": "8c1ebf36f6668b174470ab56994ff730fc9f1c4707da02820f422176f844bdb5 RunLedger fn, l4, 91 nb ACCEPTABLE / IMPROVED \u00e2\u20ac\u201d responsibility for source naming and outcome projection moved OUT of RunLedger into SourceOutcome (single owner of the label map, previously duplicated inline). No state added.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -6853,7 +6853,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "ef9812ff1b83b9f28faa1f012442c0676ef373ae16b633e4e7874fdc30a16762",
-    "reason": "Ground truth: head 419/ef9812ffâ€¦; base 385 with no signal â€” this commit's +34 nonblank (helper group, Info button, focus-visible outline, tooltip reason width/wrapping, plus the mobile row sizing interaction) crossed the 400 threshold, so this is a newly introduced file-level signal, not an inherited exemption. Cohesion: the module is the single presentation owner for the Meri shell chrome (header/brand, sidebar toggle, mode/action buttons, sidebar nav, recents, preferences, main, mobile menu) and holds only declarative rules â€” no logic, no state, no responsibility overlap with home.module.css/files.module.css, and several already-shared breakpoint @media blocks re-target the same selectors, so splitting into sidebar/mobile/tooltip modules would fragment co-located overrides for no behaviour gain. The added rules are the correct home for the new disabled-control presentation. Accepted as a bounded single presentational surface; the rationale root binds must cover the whole 419-line body with the caveat that a future unrelated concern added to this file should be extracted rather than appended.",
+    "reason": "Ground truth: head 419/ef9812ff\u00e2\u20ac\u00a6; base 385 with no signal \u00e2\u20ac\u201d this commit's +34 nonblank (helper group, Info button, focus-visible outline, tooltip reason width/wrapping, plus the mobile row sizing interaction) crossed the 400 threshold, so this is a newly introduced file-level signal, not an inherited exemption. Cohesion: the module is the single presentation owner for the Meri shell chrome (header/brand, sidebar toggle, mode/action buttons, sidebar nav, recents, preferences, main, mobile menu) and holds only declarative rules \u00e2\u20ac\u201d no logic, no state, no responsibility overlap with home.module.css/files.module.css, and several already-shared breakpoint @media blocks re-target the same selectors, so splitting into sidebar/mobile/tooltip modules would fragment co-located overrides for no behaviour gain. The added rules are the correct home for the new disabled-control presentation. Accepted as a bounded single presentational surface; the rationale root binds must cover the whole 419-line body with the caveat that a future unrelated concern added to this file should be extracted rather than appended.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -7434,19 +7434,19 @@
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "a7adaa3bf4a8fc967561a698b96c02ff17ab6e29bffc2cc95185d6a23c786bb8",
-    "reason": "Independent exact-source review at e4e15ef9332bda929a64d327fb039eb22b115342 (498 nonblank). This remains one paginated Outreach list with its row renderer. The server-owned capability only controls ancillary query admission and truthful unavailable presentation; the list model owns admission, shared query effects own cancellation and transport, and the capability module owns deployment interpretation. Actual Chromium callbacks verified disabled search, paging, rerender and canonical retry issue zero session requests; enabled rows, dedup, pagination and fallback remain. No send or authorization responsibility was added, so further fragmentation is not warranted.",
-    "reviewedBy": "Codex /root/lanes_source_finish_high (independent high-reasoning review of original02751a source)",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "9476e345c884274ced419937a1e5668140d8a941c5499d7006f80e4047f6b7b7",
+    "reason": "This module composes one Outreach list and its campaign-row presentation. Transport/cancellation, canonical normalization, capability resolution, audience admission and selector presentation already have separate owners. The extension keeps one coherent view of canonical records/campaigns and explicitly excluded ancillary sessions; it adds no durable state, authorization, sender or provider responsibility. The scoped presentation/disclosure additions do not justify duplicating query or filter ownership merely to meet a size threshold.",
+    "reviewedBy": "Codex independent Outreach audience reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "function",
     "symbol": "OutreachList",
-    "fingerprint": "570cc5cf47d624355957423761281daecb4be520578b4c6b4c25de33e803ca71",
-    "reason": "Independent exact-source review at e4e15ef9332bda929a64d327fb039eb22b115342 (403 nonblank). The component still coordinates three reads, filters, cursors and visible rows for one list lifetime. Capability-aware admission and the unavailable notice belong to that same composition; they do not add a service lifecycle or duplicate configuration parsing. Actual query effects and callback tests cover enabled/unknown/disabled transitions, retry, pagination and unchanged client/deleted/date gates. Splitting this state solely for line count would obscure rather than simplify its shared filter lifetime.",
-    "reviewedBy": "Codex /root/lanes_source_finish_high (independent high-reasoning review of original02751a source)",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "1df4a3a16c8def65b989c69ff7681f7dde05dc382bbd794400a0ba6e92389ff2",
+    "reason": "This is the existing single list composition and local filter/pagination lifetime. The additional audience state must reset both canonical cursors and the ancillary offset together, suppress unsupported queries and keep loaded counts/exclusion copy consistent. Small audience presentation and pure admission logic are extracted. The function delegates network lifetime and backend classification; it does not accumulate another effect or domain owner. Keeping these related view transitions together is cohesive. This disposition does not approve future unrelated additions.",
+    "reviewedBy": "Codex independent Outreach audience reviewer portfolio_figma_ui_high (HIGH)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflow.tsx",
