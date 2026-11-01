@@ -1,11 +1,21 @@
-import { serviceNames, type CapiroService } from "./contracts";
+import {
+  serviceNames,
+  type CapiroService,
+  type OperationRegistry,
+} from "./contracts";
 import { readRequestOrigin } from "../request-origin";
 import {
+  resolveOutreachAudienceVersion,
+  outreachAudienceRegistry,
+} from "./outreach-audience-availability";
+import {
   resolveEngagementSessionsAvailability,
+  sessionReadRegistry,
   type EngagementSessionsAvailability,
 } from "./engagement-sessions-availability";
 
 export type CapiroConfig = {
+  outreachAudienceVersion?: 1;
   services: Partial<Record<CapiroService, string>>;
   authConfigured: boolean;
   publishableKey?: string;
@@ -78,6 +88,7 @@ export function readCapiroConfig(
     authConfigured = false;
   }
   return {
+    outreachAudienceVersion: resolveOutreachAudienceVersion(env, issues),
     services,
     authConfigured,
     publishableKey: authConfigured ? publishableKey : undefined,
@@ -92,6 +103,7 @@ export function readCapiroConfig(
 }
 
 export type CapiroCapabilities = {
+  outreachAudienceVersion?: 1;
   /** Campaign-session availability as resolved on the server; never inferred client-side. */
   campaignSessions: EngagementSessionsAvailability;
 };
@@ -104,6 +116,24 @@ export function publicCapiroConfig(config: CapiroConfig): CapiroPublicConfig {
   return {
     publishableKey: config.publishableKey,
     configured: config.authConfigured && Boolean(config.services.core),
-    capabilities: { campaignSessions: config.engagementSessions ?? "unknown" },
+    capabilities: {
+      campaignSessions: config.engagementSessions ?? "unknown",
+      ...(config.outreachAudienceVersion === 1
+        ? { outreachAudienceVersion: 1 as const }
+        : {}),
+    },
   };
+}
+
+/** Apply the server's cohort read capabilities at the existing canonical gateway boundary. */
+export function configuredReadRegistry(
+  operations: OperationRegistry,
+  operation: string,
+  config: CapiroConfig,
+): OperationRegistry {
+  return outreachAudienceRegistry(
+    sessionReadRegistry(operations, operation, config.engagementSessions),
+    operation,
+    config.outreachAudienceVersion,
+  );
 }

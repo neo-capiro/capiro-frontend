@@ -181,6 +181,7 @@ export const engagementOperations = {
         query: scopeQuery
           .extend({
             q: z.string().max(240).optional(),
+            direction: z.enum(["on-behalf", "to-clients"]).optional(),
             limit: z.number().int().min(1).max(100).optional(),
             cursor: z.string().optional(),
             deleted: z.enum(["true", "false"]).optional(),
