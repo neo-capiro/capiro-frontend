@@ -5,7 +5,7 @@ import type {
 import { federalTextHash } from "./federal-workbench";
 
 /** One amendment the user is authoring, before its exact hashes are derived. */
-export type AuthoredInput = Readonly<{
+type TextAmendmentInput = Readonly<{
   id: string;
   kind: "replace" | "insert" | "delete";
   scopeId: string;
@@ -13,6 +13,9 @@ export type AuthoredInput = Readonly<{
   text?: string;
   position?: "before" | "after";
 }>;
+export type AuthoredInput =
+  | TextAmendmentInput
+  | Readonly<{ id: string; kind: "remove_source_text" }>;
 export type AuthoredOperation = FederalDraftOperationEcfa206F;
 export type AuthoredScope = Readonly<{
   id: string;
@@ -37,7 +40,7 @@ const AMBIGUOUS =
   "The exact text appears more than once in the selected section.";
 const UNCHANGED = "The replacement is identical to the exact text to find.";
 const EMPTY =
-  "Removing the complete source is not supported: the retained export contract has no typed empty result.";
+  "Use the explicit whole-source removal action to propose an empty consolidated result.";
 const BLANK = "Enter the exact text to find.";
 
 type ScopeState = {
@@ -70,7 +73,7 @@ function gapFree(source: Readonly<FederalCompilerSource>) {
 function refusalFor(
   scopes: readonly ScopeState[],
   target: ScopeState,
-  input: AuthoredInput,
+  input: TextAmendmentInput,
 ) {
   if (
     target.invalidated ||
@@ -98,7 +101,7 @@ function refusalFor(
   return null;
 }
 
-function splice(input: AuthoredInput, current: string) {
+function splice(input: TextAmendmentInput, current: string) {
   const at = current.indexOf(input.expectedText);
   const start =
     input.kind === "insert" && input.position === "after"
@@ -107,6 +110,23 @@ function splice(input: AuthoredInput, current: string) {
   const end = input.kind === "insert" ? start : at + input.expectedText.length;
   const replacement = input.kind === "delete" ? "" : (input.text ?? "");
   return current.slice(0, start) + replacement + current.slice(end);
+}
+
+/** Only locally admitted, disjoint changed scopes participate. Ancestor/child
+ * interleaving has already refused; gaps and unedited bytes remain verbatim. */
+function currentSourceText(
+  source: Readonly<FederalCompilerSource>,
+  scopes: readonly ScopeState[],
+) {
+  let cursor = 0,
+    text = "";
+  for (const scope of scopes
+    .filter((item) => item.changedBy.length)
+    .sort((a, b) => a.start - b.start)) {
+    text += source.text.slice(cursor, scope.start) + scope.current;
+    cursor = scope.end;
+  }
+  return text + source.text.slice(cursor);
 }
 
 /** Derives the exact current-scope hash, exact-text hash and dependency closure
@@ -148,6 +168,26 @@ export async function authoredOperations(
   if (new Set(inputs.map((input) => input.id)).size !== inputs.length)
     return answer("Each amendment must have a unique identity.");
   for (const input of inputs) {
+    if (input.kind === "remove_source_text") {
+      if (input !== inputs.at(-1))
+        return answer(
+          "Whole-source removal must be the final amendment. Remove it before adding another amendment.",
+        );
+      if (!source.coverage.complete)
+        return answer(
+          "Whole-source removal requires complete source coverage.",
+        );
+      operations.push({
+        id: input.id,
+        kind: input.kind,
+        expectedSourceSha256: source.sha256,
+        expectedTextSha256: await federalTextHash(
+          currentSourceText(source, scopes),
+        ),
+        dependsOn: operations.map((operation) => operation.id),
+      });
+      return answer(null);
+    }
     const target = scopes.find((scope) => scope.id === input.scopeId);
     if (!target) return answer(UNKNOWN);
     const refusal = refusalFor(scopes, target, input);
@@ -184,14 +224,21 @@ export async function authoredOperations(
 export function authoredFrom(
   operations: readonly AuthoredOperation[],
 ): readonly AuthoredInput[] {
-  return operations.map((operation) => ({
-    id: operation.id,
-    kind: operation.kind,
-    scopeId: operation.scopeId,
-    expectedText: operation.expectedText,
-    ...(operation.text === undefined ? {} : { text: operation.text }),
-    ...(operation.position === undefined
-      ? {}
-      : { position: operation.position }),
-  }));
+  return operations.map((operation) =>
+    operation.kind === "remove_source_text"
+      ? {
+          id: operation.id,
+          kind: operation.kind,
+        }
+      : {
+          id: operation.id,
+          kind: operation.kind,
+          scopeId: operation.scopeId,
+          expectedText: operation.expectedText,
+          ...(operation.text === undefined ? {} : { text: operation.text }),
+          ...(operation.position === undefined
+            ? {}
+            : { position: operation.position }),
+        },
+  );
 }

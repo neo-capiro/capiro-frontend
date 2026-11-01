@@ -28,15 +28,20 @@ export function FederalAmendmentList({
         return (
           <li key={operation.id}>
             <span>
-              {operation.id}: {operation.kind} in {operation.scopeId}
+              {operation.id}:{" "}
+              {operation.kind === "remove_source_text"
+                ? "proposed removal of all selected source text"
+                : `${operation.kind} in ${operation.scopeId}`}
             </span>{" "}
-            <Button
-              disabled={disabled}
-              onClick={() => onEdit(operation)}
-              type="button"
-            >
-              Edit
-            </Button>{" "}
+            {operation.kind !== "remove_source_text" && (
+              <Button
+                disabled={disabled}
+                onClick={() => onEdit(operation)}
+                type="button"
+              >
+                Edit
+              </Button>
+            )}{" "}
             <Button
               disabled={disabled}
               onClick={() => onRemove(operation)}
@@ -47,10 +52,15 @@ export function FederalAmendmentList({
             {derived ? (
               <>
                 <p className={styles.identifier}>
-                  Section hash: {derived.expectedScopeSha256}
+                  {derived.kind === "remove_source_text"
+                    ? `Original source hash: ${derived.expectedSourceSha256}`
+                    : `Section hash: ${derived.expectedScopeSha256}`}
                 </p>
                 <p className={styles.identifier}>
-                  Text hash: {derived.expectedTextSha256}
+                  {derived.kind === "remove_source_text"
+                    ? "Current full-source text hash"
+                    : "Text hash"}
+                  : {derived.expectedTextSha256}
                 </p>
                 <p className={styles.identifier}>
                   Depends on:{" "}

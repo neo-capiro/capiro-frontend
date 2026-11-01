@@ -9,6 +9,7 @@ import { FederalAmendmentList } from "../src/features/meri/files/FederalAmendmen
 import {
   authoredOperations,
   type AuthoredInput,
+  type AuthoredOperation,
 } from "../src/shared/meri-documents/federal-authoring";
 import type { FederalWorkbenchPort } from "../src/shared/meri-documents/federal-workbench";
 import fixture from "./fixtures/federal-workbench.json";
@@ -150,6 +151,13 @@ const input = (
   expectedText: string,
   text: string,
 ): AuthoredInput => ({ id, scopeId, kind: "replace", expectedText, text });
+function textAmendment<T extends AuthoredInput | AuthoredOperation>(
+  operation: T,
+) {
+  if (operation.kind === "remove_source_text")
+    throw Error("Expected text amendment");
+  return operation as Exclude<T, { kind: "remove_source_text" }>;
+}
 async function loadChain() {
   const value = await authoredOperations(saved.prepared.draft.source, [
     input("retained-first", "section-1", "$100", "$150"),
@@ -271,7 +279,7 @@ it("replaces an earlier loaded amendment in place and recomputes its dependent t
   await field("New text", "$175");
   await click("Update amendment");
   expect(list().operations).toEqual(previous);
-  expect(list().drafts[0]!.text).toBe("$150");
+  expect(textAmendment(list().drafts[0]!).text).toBe("$150");
   expect(button("Export consolidated")!.props.disabled).toBe(true);
   await field("New text", "$150 payable");
   await click("Update amendment");
@@ -280,8 +288,8 @@ it("replaces an earlier loaded amendment in place and recomputes its dependent t
     "retained-second",
   ]);
   expect(list().operations[1]!.dependsOn).toEqual(["retained-first"]);
-  expect(list().operations[1]!.expectedScopeSha256).not.toBe(
-    previous[1]!.expectedScopeSha256,
+  expect(textAmendment(list().operations[1]!).expectedScopeSha256).not.toBe(
+    textAmendment(previous[1]!).expectedScopeSha256,
   );
   await prepareReview();
   expect(prepare.mock.lastCall![2]).toBe(saved);
@@ -301,7 +309,7 @@ it.each(["Cancel edit", "Update amendment"])(
     await flush();
     if (action === "Cancel edit") await field("New text", "$999");
     await click(action);
-    expect(list().drafts[0]!.text).toBe("$150");
+    expect(textAmendment(list().drafts[0]!).text).toBe("$150");
     await click("Export consolidated");
     expect(publish.mock.lastCall![0]).toBe(saved);
     expect(prepare).not.toHaveBeenCalled();
@@ -319,7 +327,7 @@ it("keeps independent sibling hashes unchanged when an earlier amendment is edit
   await field("New text", "$175");
   await click("Update amendment");
   expect(list().operations[1]).toEqual(sibling);
-  expect(list().operations[0]!.text).toBe("$175");
+  expect(textAmendment(list().operations[0]!).text).toBe("$175");
 });
 
 it("preserves exact imported operations for an untouched nested review and refuses stale hashes after removal", async () => {
@@ -366,4 +374,219 @@ it("preserves exact imported operations for an untouched nested review and refus
   expect(list().drafts).toHaveLength(1);
   expect(list().operations).toEqual([]);
   expect(button("Export consolidated")).toBeUndefined();
+});
+
+function completeRemovalSource() {
+  const source = {
+    ...saved.prepared.draft.source,
+    coverage: { ...saved.prepared.draft.source.coverage, complete: true },
+  };
+  saved = {
+    ...saved,
+    prepared: { ...saved.prepared, draft: { ...saved.prepared.draft, source } },
+  } as AdmittedFederalReview;
+  port = {
+    ...port,
+    source: async () => ({
+      source,
+      versionId: saved.selection.versionId,
+      sha256: saved.selection.expectedArtifactSha256,
+    }),
+  };
+  render();
+}
+
+it("authors explicit terminal removal, displays empty review, and clears it when removed", async () => {
+  completeRemovalSource();
+  await click("Open source");
+  await add("$100", "$150");
+  await click("Propose whole-source removal");
+  const operations = list().operations;
+  expect(operations.at(-1)?.kind).toBe("remove_source_text");
+  expect(operations.at(-1)?.dependsOn).toEqual([operations[0]!.id]);
+  expect(button("Propose whole-source removal")!.props.disabled).toBe(true);
+  expect(button("Add amendment to review")!.props.disabled).toBe(true);
+  prepare.mockImplementation(async (selection: FederalSelection) => ({
+    ...saved,
+    selection,
+    prepared: {
+      ...saved.prepared,
+      draft: {
+        ...saved.prepared.draft,
+        resultKind: "source-text-removed",
+        operations: selection.operations,
+        outputs: { ...saved.prepared.draft.outputs, consolidated: "" },
+      },
+    },
+  }));
+  await prepareReview();
+  expect(
+    nodes.some(
+      (node) => node.type === "p" && label(node).includes("exactly zero bytes"),
+    ),
+  ).toBe(true);
+  await confirm();
+  await click("Export consolidated");
+  expect(publish.mock.lastCall![0].prepared.draft.outputs.consolidated).toBe(
+    "",
+  );
+  list().onRemove(list().drafts.at(-1)!);
+  await flush();
+  expect(button("Export consolidated")).toBeUndefined();
+  expect(button("Get verified file")).toBeUndefined();
+  expect(button("Propose whole-source removal")!.props.disabled).toBe(false);
+  await add("$150", "$250");
+  expect(list().drafts.map((entry) => entry.kind)).toEqual([
+    "replace",
+    "replace",
+  ]);
+});
+
+it("recomputes terminal removal when an earlier amendment is edited and preserves cancel", async () => {
+  completeRemovalSource();
+  await click("Open source");
+  await add("$100", "$150");
+  await click("Propose whole-source removal");
+  const before = list().operations.at(-1)!;
+  list().onEdit(list().drafts[0]!);
+  await flush();
+  await field("New text", "$175");
+  await click("Cancel edit");
+  expect(list().operations.at(-1)).toEqual(before);
+  list().onEdit(list().drafts[0]!);
+  await flush();
+  await field("New text", "$200");
+  await click("Update amendment");
+  const after = list().operations.at(-1)!;
+  expect(after.id).toBe(before.id);
+  expect(after.expectedTextSha256).not.toBe(before.expectedTextSha256);
+  expect(after.dependsOn).toEqual(before.dependsOn);
+});
+
+it("loads a removal-only review without treating it as an editable text amendment", async () => {
+  completeRemovalSource();
+  const derived = await authoredOperations(saved.prepared.draft.source, [
+    { id: "removal", kind: "remove_source_text" },
+  ]);
+  saved = {
+    ...saved,
+    selection: {
+      ...saved.selection,
+      operations: [...derived.operations] as FederalSelection["operations"],
+    },
+    prepared: {
+      ...saved.prepared,
+      draft: {
+        ...saved.prepared.draft,
+        resultKind: "source-text-removed",
+        operations: [...derived.operations],
+        outputs: { ...saved.prepared.draft.outputs, consolidated: "" },
+      },
+    },
+  } as AdmittedFederalReview;
+  await click("Open saved review");
+  expect(list().drafts).toEqual([
+    { id: "removal", kind: "remove_source_text" },
+  ]);
+  expect(list().operations).toEqual(saved.selection.operations);
+  list().onEdit(list().drafts[0]!);
+  await flush();
+  expect(button("Update amendment")).toBeUndefined();
+  expect(button("Propose whole-source removal")!.props.disabled).toBe(true);
+  expect(
+    nodes.some(
+      (node) => node.type === "p" && label(node).includes("exactly zero bytes"),
+    ),
+  ).toBe(true);
+  await confirm();
+  await click("Export consolidated");
+  expect(publish.mock.lastCall![0]).toBe(saved);
+  expect(prepare).not.toHaveBeenCalled();
+});
+
+it("keeps removal unavailable for a partially covered source", async () => {
+  await click("Open source");
+  expect(fixture.source.coverage.complete).toBe(false);
+  expect(button("Propose whole-source removal")!.props.disabled).toBe(true);
+});
+
+it("saves and reloads removal semantics, retains history access, and downloads a zero-byte export", async () => {
+  completeRemovalSource();
+  saved = {
+    ...saved,
+    savedDraft: fixture.savedReview.savedDraft,
+  } as unknown as AdmittedFederalReview;
+  const derived = await authoredOperations(saved.prepared.draft.source, [
+    { id: "removal", kind: "remove_source_text" },
+  ]);
+  saved = {
+    ...saved,
+    selection: {
+      ...saved.selection,
+      operations: [...derived.operations] as FederalSelection["operations"],
+    },
+    prepared: {
+      ...saved.prepared,
+      draft: {
+        ...saved.prepared.draft,
+        resultKind: "source-text-removed",
+        operations: derived.operations,
+        outputs: { ...saved.prepared.draft.outputs, consolidated: "" },
+      },
+    },
+  } as AdmittedFederalReview;
+  const download = vi.fn(async () => ({
+    ok: true as const,
+    value: {
+      bytes: new Uint8Array(0),
+      mimeType: "text/plain",
+      filename: "synthetic-empty.txt",
+    },
+  }));
+  const history = vi.fn(async () => ({
+    ok: true as const,
+    value: { versions: [], nextCursor: null },
+  }));
+  port = {
+    ...port,
+    library: { ...port.library, download, history },
+  } as unknown as FederalWorkbenchPort;
+  publish.mockImplementation(async (_review, output) => ({
+    output,
+    publication: {
+      version: {
+        versionId: "synthetic-version",
+        filename: "synthetic-empty.txt",
+        object: { sha256: "synthetic" },
+      },
+    },
+  }));
+  render();
+  await click("Open saved review");
+  await click("Save review revision");
+  expect(list().drafts).toEqual([
+    { id: "removal", kind: "remove_source_text" },
+  ]);
+  expect(
+    nodes.some(
+      (node) => node.type === "p" && label(node).includes("exactly zero bytes"),
+    ),
+  ).toBe(true);
+  await click("Show revision history");
+  expect(history).toHaveBeenCalledTimes(1);
+  await confirm();
+  await click("Export consolidated");
+  await click("Get verified file");
+  expect(download).toHaveBeenCalledWith(
+    "synthetic-version",
+    expect.any(AbortSignal),
+  );
+  expect(
+    nodes.some(
+      (node) => node.type === "a" && label(node) === "Save synthetic-empty.txt",
+    ),
+  ).toBe(true);
+  expect(publish.mock.lastCall![0].prepared.draft.outputs.consolidated).toBe(
+    "",
+  );
 });

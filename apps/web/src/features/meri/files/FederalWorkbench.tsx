@@ -70,6 +70,9 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
   }, [urls]);
   const locked =
     busy || (port.unresolved() && (pendingOutput !== null || pendingImport));
+  const removalPlanned = drafts.some(
+    (draft) => draft.kind === "remove_source_text",
+  );
   function changed() {
     setReview(null);
     setConfirmed(false);
@@ -157,16 +160,30 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
       derived.refusal ? { ...derived, operations: [...operations] } : derived,
     );
     const operation = operations[0];
-    setScopeId(operation.scopeId);
-    setKind(operation.kind);
-    setExpected(operation.expectedText);
-    setText(operation.text ?? "");
-    setPosition(operation.position ?? "after");
+    setScopeId(
+      operation.kind === "remove_source_text"
+        ? (value.prepared.draft.source.scopes[0]?.id ?? "")
+        : operation.scopeId,
+    );
+    setKind(
+      operation.kind === "remove_source_text" ? "replace" : operation.kind,
+    );
+    setExpected(
+      operation.kind === "remove_source_text" ? "" : operation.expectedText,
+    );
+    setText(
+      operation.kind === "remove_source_text" ? "" : (operation.text ?? ""),
+    );
+    setPosition(
+      operation.kind === "remove_source_text"
+        ? "after"
+        : (operation.position ?? "after"),
+    );
   }
   /** Each added amendment is derived against the exact current section text, so
    * the user sees the intermediate hash and dependencies before the compiler. */
   async function addAmendment() {
-    if (!source) return;
+    if (!source || (removalPlanned && !editingId)) return;
     let amendmentId = editingId ?? `amendment-${crypto.randomUUID()}`;
     while (!editingId && drafts.some((draft) => draft.id === amendmentId))
       amendmentId = `amendment-${crypto.randomUUID()}`;
@@ -193,6 +210,25 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     }
     cancelEdit();
   }
+  async function removeSourceText() {
+    if (!source || editingId || removalPlanned || drafts.length >= 64) return;
+    let amendmentId = `amendment-${crypto.randomUUID()}`;
+    while (drafts.some((draft) => draft.id === amendmentId))
+      amendmentId = `amendment-${crypto.randomUUID()}`;
+    const next: readonly AuthoredInput[] = [
+      ...drafts,
+      { id: amendmentId, kind: "remove_source_text" },
+    ];
+    const value = await authoredOperations(source.source, next);
+    if (value.refusal) {
+      setProblem(value.refusal);
+      return;
+    }
+    changed();
+    setDrafts(next);
+    setAuthoring(value);
+    cancelEdit();
+  }
   async function removeAmendment(operation: AuthoredInput) {
     const next = drafts.filter((draft) => draft.id !== operation.id);
     changed();
@@ -213,6 +249,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
     setProblem("");
   }
   function editAmendment(operation: AuthoredInput) {
+    if (operation.kind === "remove_source_text") return;
     setEditingId(operation.id);
     setScopeId(operation.scopeId);
     setKind(operation.kind);
@@ -440,6 +477,13 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
               })
             }
           />
+          {removalPlanned && (
+            <p>
+              Proposed whole-source removal is the final amendment. The
+              consolidated TXT will contain zero bytes. Remove that amendment to
+              add more text amendments. This does not establish enactment.
+            </p>
+          )}
           <form
             className={styles.form}
             onSubmit={(event) => {
@@ -451,6 +495,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
               <label className={styles.field}>
                 Source section
                 <select
+                  disabled={removalPlanned && !editingId}
                   value={scopeId}
                   onChange={(event) => {
                     if (!editingId) changed();
@@ -470,6 +515,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
               <label className={styles.field}>
                 Amendment
                 <select
+                  disabled={removalPlanned && !editingId}
                   value={kind}
                   onChange={(event) => {
                     if (!editingId) changed();
@@ -484,6 +530,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
               <label className={styles.field}>
                 Exact text to find
                 <Textarea
+                  disabled={removalPlanned && !editingId}
                   aria-label="Exact text to find"
                   value={expected}
                   onChange={(event) => {
@@ -496,6 +543,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                 <label className={styles.field}>
                   Insert position
                   <select
+                    disabled={removalPlanned && !editingId}
                     value={position}
                     onChange={(event) => {
                       if (!editingId) changed();
@@ -511,6 +559,7 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                 <label className={styles.field}>
                   New text
                   <Textarea
+                    disabled={removalPlanned && !editingId}
                     aria-label="New text"
                     value={text}
                     onChange={(event) => {
@@ -522,7 +571,11 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
               )}
               <Button
                 type="button"
-                disabled={!expected || (kind !== "delete" && !text)}
+                disabled={
+                  (removalPlanned && !editingId) ||
+                  !expected ||
+                  (kind !== "delete" && !text)
+                }
                 onClick={() => void run(addAmendment)}
               >
                 {editingId ? "Update amendment" : "Add amendment to review"}
@@ -532,6 +585,19 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                   Cancel edit
                 </Button>
               )}
+              <Button
+                type="button"
+                disabled={
+                  locked ||
+                  Boolean(editingId) ||
+                  removalPlanned ||
+                  drafts.length >= 64 ||
+                  !source.source.coverage.complete
+                }
+                onClick={() => void run(removeSourceText)}
+              >
+                Propose whole-source removal
+              </Button>
               <Button
                 type="submit"
                 disabled={
@@ -558,7 +624,17 @@ export function FederalWorkbench({ port }: { port: FederalWorkbenchPort }) {
                     ? "Consolidated text"
                     : "Legal redline"}
               </summary>
-              <pre>{review.prepared.draft.outputs[output]}</pre>
+              {output === "consolidated" &&
+              "resultKind" in review.prepared.draft &&
+              review.prepared.draft.resultKind === "source-text-removed" ? (
+                <p>
+                  The proposed consolidated source is empty. Its TXT export
+                  contains exactly zero bytes; the original source remains in
+                  retained history. This does not establish enactment.
+                </p>
+              ) : (
+                <pre>{review.prepared.draft.outputs[output]}</pre>
+              )}
             </details>
           ))}
           <ul>
