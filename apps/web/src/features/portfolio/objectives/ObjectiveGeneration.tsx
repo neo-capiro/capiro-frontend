@@ -1,21 +1,15 @@
 "use client";
-import { useLayoutEffect, useMemo, useSyncExternalStore } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-import { useApi } from "@/shared/portfolio/api/provider";
 import type { ClientWriter } from "@/shared/portfolio/auth/client-writer";
 import {
   objectiveGenerationHref,
   type ObjectiveGenerationJob,
 } from "@/shared/capiro/operations/objective-generation";
-import { ObjectivePlanSession } from "./objective-plan-session";
-import { createPlanRecovery } from "./objective-plan-recovery";
-import { ObjectivePlanOutcome } from "./ObjectivePlanOutcome";
+import { ObjectivePlannerAutomation } from "./ObjectivePlannerAutomation";
 
 /** Renders only the current validated job selected by the governed intake owner. */
 export function ObjectiveGenerationOutcome({
   job,
-  actor,
 }: {
   job: ObjectiveGenerationJob;
   actor: ClientWriter;
@@ -57,51 +51,22 @@ export function ObjectiveGenerationOutcome({
           >
             Open generated Strategy receipt
           </Link>
-          <PreparedPlan key={job.jobId} job={job} actor={actor} />
+          <ObjectivePlannerAutomation
+            selection={{
+              query: {
+                clientId: receipt.source.clientId,
+                objectiveId: receipt.source.objectiveId,
+                objectiveVersion: receipt.source.objectiveVersion,
+              },
+              ids: {
+                generatedJobId: job.jobId,
+                strategyId: receipt.result!.strategyId,
+                strategyVersionId: receipt.result!.strategyVersionId,
+              },
+            }}
+          />
         </>
       )}
     </div>
-  );
-}
-function PreparedPlan({
-  job,
-  actor,
-}: {
-  job: ObjectiveGenerationJob;
-  actor: ClientWriter;
-}) {
-  const api = useApi(),
-    cache = useQueryClient();
-  const session = useMemo(
-    () =>
-      new ObjectivePlanSession(
-        api,
-        job,
-        createPlanRecovery(api, cache, actor, job),
-      ),
-    [api, cache, actor, job],
-  );
-  const state = useSyncExternalStore(
-    session.subscribe,
-    session.snapshot,
-    session.snapshot,
-  );
-  useLayoutEffect(() => {
-    let current = true;
-    queueMicrotask(() => {
-      if (current) void session.refresh();
-    });
-    return () => {
-      current = false;
-      session.suspend();
-    };
-  }, [session]);
-  return (
-    <ObjectivePlanOutcome
-      state={state}
-      locked={state.busy}
-      onContinue={() => void session.execute()}
-      onRefresh={() => void session.refresh()}
-    />
   );
 }
