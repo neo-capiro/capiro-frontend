@@ -11,16 +11,19 @@ import { BillResults } from "./BillResults";
 import { BillDrawer } from "./BillDrawer";
 import { TrackBillDialog } from "./TrackBillDialog";
 import { WatchlistDialog } from "./WatchlistDialog";
+import { TrackerMetricCards } from "./TrackerMetricCards";
 import { currentBoard } from "./current-data";
 import styles from "./bills.module.css";
 export function BillTrackerPage({
   clientId,
   backend,
   destinations,
+  metricsVersion,
 }: {
   clientId: string;
   backend?: TrackerBackend;
   destinations: Destinations;
+  metricsVersion?: 1;
 }) {
   if (!backend)
     return (
@@ -37,6 +40,7 @@ export function BillTrackerPage({
       clientId={clientId}
       backend={backend}
       destinations={destinations}
+      metricsVersion={metricsVersion}
     />
   );
 }
@@ -44,10 +48,12 @@ function ConfiguredTracker({
   clientId,
   backend,
   destinations,
+  metricsVersion,
 }: {
   clientId: string;
   backend: TrackerBackend;
   destinations: Destinations;
+  metricsVersion?: 1;
 }) {
   const board = useBillBoard(clientId, backend);
   const params = useSearchParams();
@@ -94,26 +100,13 @@ function ConfiguredTracker({
             <strong>{pages[0]?.total ?? "—"}</strong>
             <small>Tracked bills</small>
           </div>
-          {[
-            [
-              "Material changes",
-              "No tracked-bill change read is available yet.",
-            ],
-            [
-              "Watchlist coverage",
-              "No watchlist coverage read is available yet.",
-            ],
-          ].map(([label, reason]) => (
-            <div
-              key={label}
-              role="group"
-              title={reason}
-              aria-label={`${label}: ${reason}`}
-            >
-              <strong aria-hidden="true">—</strong>
-              <small>{label}</small>
-            </div>
-          ))}
+          <TrackerMetricCards
+            clientId={clientId}
+            backend={backend}
+            version={metricsVersion}
+            boardScope={board.scope}
+            boardReady={board.isSuccess && !board.error && !board.isFetching}
+          />
         </div>
         <section className={styles.results} aria-label="Tracked bill results">
           <header className={styles.resultsHeader}>

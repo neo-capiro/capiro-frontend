@@ -57,7 +57,7 @@ async function setup(page: Page) {
     return json(route, path.endsWith(meetingId) ? meeting : [meeting]);
   });
   // Upcoming meetings enter Preparation, whose scoped attachment read is
-  // independent of the attendance controls exercised after choosing Information.
+  // independent of the attendance controls in the persistent meeting header.
   await page.route(
     `**/core/engagement/attachments?meetingId=${meetingId}`,
     (route) => {
@@ -104,27 +104,20 @@ async function setup(page: Page) {
   );
   return { state, unexpected };
 }
-// The header has a compact entry; status assertions target the full panel.
+// One header panel owns attendance across every meeting tab.
 const attendancePanel = (page: Page) =>
-  page.getByRole("region", { name: "Meri meeting attendance" }).filter({
-    has: page.getByRole("heading", { name: "Meri attendance", exact: true }),
-  });
+  page.getByRole("region", { name: "Meri meeting attendance" });
 async function openMeeting(page: Page) {
   await page.goto(
     `/portfolio/${clientId}/calendar?view=agenda&date=2099-10-15&zone=UTC&meeting=${meetingId}`,
   );
-  await page
-    .getByRole("dialog", { name: meeting.subject, exact: true })
-    .getByRole("navigation", { name: "Meeting sections" })
-    .getByRole("button", { name: "Information", exact: true })
-    .click();
   const panel = attendancePanel(page);
   await expect(panel).toBeVisible();
   return panel;
 }
 async function openSend(page: Page) {
   const panel = await openMeeting(page);
-  await panel.getByRole("button", { name: "Send Meri to take notes" }).click();
+  await panel.getByRole("button", { name: "Send Meri", exact: true }).click();
   return page.getByRole("dialog", {
     name: "Send Meri to take notes",
     exact: true,
@@ -142,6 +135,26 @@ async function openPreferences(page: Page) {
     .click();
   return page.getByRole("dialog", { name: "Automatic Meri attendance" });
 }
+test("One header attendance panel remains visible across meeting tabs without dispatch", async ({
+  page,
+}) => {
+  const { state, unexpected } = await setup(page);
+  const panel = await openMeeting(page);
+  const sections = page
+    .getByRole("dialog", { name: meeting.subject, exact: true })
+    .getByRole("navigation", { name: "Meeting sections" });
+  for (const name of ["Notes", "Debriefs", "Information", "Preparation"]) {
+    await sections.getByRole("button", { name, exact: true }).click();
+    await expect(panel).toHaveCount(1);
+    await expect(
+      panel.getByRole("button", { name: "Send Meri", exact: true }),
+    ).toBeVisible();
+  }
+  expect(state.sends).toEqual([]);
+  expect(state.removals).toBe(0);
+  expect(unexpected).toEqual([]);
+});
+
 test("Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance", async ({
   page,
 }) => {
@@ -360,7 +373,7 @@ test("Runtime disabled keeps real session status visible and forbids external ac
   const panel = await openMeeting(page);
   await expect(panel.getByRole("status")).toContainText("Recording");
   await expect(
-    panel.getByRole("button", { name: "Send Meri to take notes" }),
+    panel.getByRole("button", { name: "Send Meri", exact: true }),
   ).toBeDisabled();
   await expect(
     panel.getByRole("button", { name: "Cancel Meri attendance" }),
@@ -369,7 +382,7 @@ test("Runtime disabled keeps real session status visible and forbids external ac
   expect(state.removals).toBe(0);
   expect(unexpected).toEqual([]);
 });
-test("Read-only role does not fetch private attendance or expose dispatch controls", async ({
+test("Read-only role does not fetch private attendance or enable dispatch controls", async ({
   page,
 }) => {
   const { state, unexpected } = await setup(page);
@@ -393,8 +406,8 @@ test("Read-only role does not fetch private attendance or expose dispatch contro
     "current role or session cannot access",
   );
   await expect(
-    panel.getByRole("button", { name: "Send Meri to take notes" }),
-  ).toHaveCount(0);
+    panel.getByRole("button", { name: "Send Meri", exact: true }),
+  ).toBeDisabled();
   expect(reads).toBe(0);
   expect(state.sends).toEqual([]);
   expect(unexpected).toEqual([]);
@@ -416,8 +429,8 @@ test("Meeting privacy errors and session expiry never expose a successful-lookin
   const panel = await openMeeting(page);
   await expect(panel.getByRole("alert")).toContainText("Meeting not found");
   await expect(
-    panel.getByRole("button", { name: "Send Meri to take notes" }),
-  ).toHaveCount(0);
+    panel.getByRole("button", { name: "Send Meri", exact: true }),
+  ).toBeDisabled();
   status = 401;
   await panel.getByRole("button", { name: "Retry", exact: true }).click();
   await expect(
@@ -519,7 +532,7 @@ test("Mobile dark Send Meri dialog fits the viewport and retains accessible cons
     path: "work/screens/attendance-workspace-mobile-dark.png",
     fullPage: true,
   });
-  await panel.getByRole("button", { name: "Send Meri to take notes" }).click();
+  await panel.getByRole("button", { name: "Send Meri", exact: true }).click();
   const dialog = page.getByRole("dialog", {
     name: "Send Meri to take notes",
     exact: true,

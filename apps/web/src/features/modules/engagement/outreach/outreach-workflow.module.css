@@ -25,22 +25,170 @@
   border: 0 !important;
   box-shadow: none !important;
 }
-.workflow > [role="tablist"] {
+.workspace {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  overflow: hidden;
+}
+.stepRail {
+  padding: 24px 16px;
+  background: var(--muted);
+  border-right: 1px solid var(--border);
+}
+.stepRail ol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
   padding: 0;
-  gap: 8px;
-  flex-wrap: wrap;
-  overflow: visible;
 }
-.workflow > [role="tablist"] button {
-  height: 36px;
-  padding: 0 14px;
+.stepRail button {
+  width: 100%;
+  min-height: 48px;
+  height: auto;
+  justify-content: flex-start;
+  text-align: left;
+  white-space: normal;
+  gap: 10px;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+.stepRail button[aria-current="step"] {
+  background: var(--background);
+  border-color: var(--border);
+  font-weight: 600;
+}
+.stepNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+.stepRail button[aria-current="step"] .stepNumber {
+  border-color: currentColor;
+}
+.workPane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 24px;
+  padding: 32px;
+}
+.workPane > .step {
+  flex: 1;
+}
+.progress {
+  flex: 1;
+  min-width: 60px;
+  height: 4px;
+  accent-color: var(--foreground);
+}
+.directionIntro {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  padding-bottom: 16px;
+}
+.directionIntro h2 {
+  font-size: 30px;
+  line-height: 1.25;
+  margin: 24px 0;
+}
+.directionIntro p {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+.eyebrow {
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.audienceGuide {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.audienceGuide li {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+.audienceGuide strong {
+  display: block;
+  margin-bottom: 4px;
+}
+.audienceGuide span {
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+.templateGallery {
   border: 0;
-  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  min-width: 0;
 }
-.workflow > [role="tablist"] button[aria-selected="true"] {
-  background: linear-gradient(175deg, #242424, #0a0a0a);
-  color: white;
-  box-shadow: 0 1px 2px #0c0a0924;
+.templateGallery legend {
+  font-size: 18px;
+  font-weight: 600;
+}
+.templateChoices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.workflow .templateChoice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--foreground);
+  cursor: pointer;
+}
+.templateChoice:has(input:checked) {
+  border-color: var(--foreground);
+  background: var(--muted);
+}
+.workflow .templateChoice input {
+  min-height: auto;
+  height: 16px;
+  width: 16px;
+  padding: 0;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+  accent-color: var(--foreground);
+}
+.templateChoice strong,
+.templateChoice span > span {
+  display: block;
+}
+.templateChoice span > span {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+.templateGallery:disabled .templateChoice {
+  cursor: default;
+  opacity: 0.5;
+}
+@media (max-width: 1000px) {
+  .workspace {
+    grid-template-columns: 190px minmax(0, 1fr);
+  }
+  .directionIntro {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 .workflow button:disabled {
   opacity: 0.4;
@@ -184,6 +332,28 @@
   line-height: 1.5;
 }
 @media (max-width: 700px) {
+  .workspace,
+  .templateChoices {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stepRail {
+    padding: 12px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .stepRail ol {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .stepRail li {
+    flex: 0 0 165px;
+  }
+  .workPane {
+    padding: 20px;
+  }
+  .directionIntro h2 {
+    font-size: 26px;
+  }
   .grid {
     grid-template-columns: minmax(0, 1fr);
   }

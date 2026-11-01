@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { ActionButton, PageHeader, Tabs } from "../../../../shared/module-ui";
+import { ActionButton, PageHeader } from "../../../../shared/module-ui";
 import styles from "./outreach-workflow.module.css";
 
 export const outreachSteps = [
@@ -61,55 +61,75 @@ export function OutreachWorkflowFrame({
       >
         ← All outreach
       </ActionButton>
-      <Tabs
-        label="Outreach steps"
-        value={String(step)}
-        items={outreachSteps.map((item, index) => ({
-          ...item,
-          disabled:
-            busy ||
-            fenced ||
-            (!readOnly && index + 1 > step + 1) ||
-            (index + 1 > step && Boolean(nextDisabled)),
-        }))}
-        onChange={(value) => onStep(Number(value) as OutreachStep)}
-      />
-      {error && (
-        <p className={styles.error} role="alert">
-          {error}
-        </p>
-      )}
-      <div className={styles.step} aria-busy={busy}>
-        {children}
+      <div className={styles.workspace}>
+        <nav className={styles.stepRail} aria-label="Outreach steps">
+          <ol>
+            {outreachSteps.map((item, index) => (
+              <li key={item.id}>
+                <ActionButton
+                  aria-current={index + 1 === step ? "step" : undefined}
+                  disabled={
+                    busy ||
+                    fenced ||
+                    (!readOnly && index + 1 > step + 1) ||
+                    (index + 1 > step && Boolean(nextDisabled))
+                  }
+                  onClick={() => onStep(Number(item.id) as OutreachStep)}
+                >
+                  <span className={styles.stepNumber} aria-hidden="true">
+                    {item.id}
+                  </span>
+                  {item.label}
+                </ActionButton>
+              </li>
+            ))}
+          </ol>
+        </nav>
+        <div className={styles.workPane}>
+          {error && (
+            <p className={styles.error} role="alert">
+              {error}
+            </p>
+          )}
+          <div className={styles.step} aria-busy={busy}>
+            {children}
+          </div>
+          <footer className={styles.footer}>
+            <ActionButton
+              disabled={busy || fenced || step === 1}
+              onClick={() => onStep((step - 1) as OutreachStep)}
+            >
+              Back
+            </ActionButton>
+            <span className={styles.stepCount}>
+              Step {step} of {outreachSteps.length}
+            </span>
+            <progress
+              className={styles.progress}
+              aria-label="Campaign progress"
+              value={step}
+              max={outreachSteps.length}
+            />
+            <ActionButton
+              disabled={busy || fenced || readOnly || saved}
+              onClick={onSave}
+            >
+              Save draft
+            </ActionButton>
+            {step < 7 && (
+              <ActionButton
+                primary
+                disabled={busy || fenced || Boolean(nextDisabled)}
+                title={nextDisabled}
+                onClick={() => onStep((step + 1) as OutreachStep)}
+              >
+                Continue
+              </ActionButton>
+            )}
+          </footer>
+          {nextDisabled && <p className={styles.hint}>{nextDisabled}</p>}
+        </div>
       </div>
-      <footer className={styles.footer}>
-        <ActionButton
-          disabled={busy || fenced || step === 1}
-          onClick={() => onStep((step - 1) as OutreachStep)}
-        >
-          Back
-        </ActionButton>
-        <span className={styles.stepCount}>
-          Step {step} of {outreachSteps.length}
-        </span>
-        <ActionButton
-          disabled={busy || fenced || readOnly || saved}
-          onClick={onSave}
-        >
-          Save draft
-        </ActionButton>
-        {step < 7 && (
-          <ActionButton
-            primary
-            disabled={busy || fenced || Boolean(nextDisabled)}
-            title={nextDisabled}
-            onClick={() => onStep((step + 1) as OutreachStep)}
-          >
-            Continue
-          </ActionButton>
-        )}
-      </footer>
-      {nextDisabled && <p className={styles.hint}>{nextDisabled}</p>}
     </section>
   );
 }

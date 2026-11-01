@@ -10,7 +10,6 @@ const assets = {
   updates: ["imgIcon6.svg", 16],
   engagement: ["imgIcon7.svg", 16],
   planner: ["imgIcon8.svg", 16],
-  calendarNav: ["imgIcon9.svg", 16],
   workspace: ["imgIcon10.svg", 16],
   strategies: ["imgIcon11.svg", 16],
   directory: ["imgIcon12.svg", 16],

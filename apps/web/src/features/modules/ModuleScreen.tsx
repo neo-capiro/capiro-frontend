@@ -1,5 +1,4 @@
 import type { ModuleSlug } from "../../shared/shell/module-catalog";
-import { CalendarScreen } from "./calendar/CalendarScreen";
 import { DirectoryScreen } from "./directory/DirectoryScreen";
 import { ObjectiveDirectoryDestination } from "./directory/ObjectiveDirectoryDestination";
 import { EngagementScreen } from "./engagement/EngagementScreen";
@@ -13,8 +12,6 @@ import { ObjectiveDestinationRoute } from "./objective-destinations/ObjectiveDes
 /** Public composition boundary; each module owns its screens and state. */
 export function ModuleScreen({ module }: { module: ModuleSlug }) {
   switch (module) {
-    case "calendar":
-      return <CalendarScreen />;
     case "directory":
       return (
         <ObjectiveDirectoryDestination>
