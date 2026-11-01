@@ -13,6 +13,7 @@ import {
   nativeBinary,
   accessFormats,
   accessInspection,
+  xmlDocumentBytes,
 } from "./meri-document-access-fixtures";
 import {
   documentBytes,
@@ -101,7 +102,7 @@ describe("B2 artifact inspection and signed-link download", () => {
         value: {
           filename: receipt.version.filename,
           mimeType: receipt.version.mimeType,
-          bytes: documentBytes,
+          bytes: format === "xml" ? xmlDocumentBytes : documentBytes,
         },
       });
       expect(fetcher.mock.calls.map(([url]) => url)).toEqual([
@@ -303,6 +304,7 @@ describe("truthful structural inspection display", () => {
   it.each([
     ["docx", "Paragraphs"],
     ["txt", "UTF-8 text"],
+    ["xml", "Well-formed"],
     ["xlsx", "recalculation in Excel"],
     ["pptx", "Visual inspection"],
     ["pdf", "Render inspection"],
@@ -321,6 +323,11 @@ describe("truthful structural inspection display", () => {
       );
       expect(html).toContain("No rendered preview");
       if (format !== "txt") expect(html).not.toContain("UTF-8 text");
+      if (format === "xml") {
+        expect(html).toContain("UTF-8");
+        expect(html).toContain("unchanged");
+        expect(html).not.toMatch(/schema|XSD/i);
+      }
       if (format === "pptx" || format === "pdf")
         expect(html).toContain("Pending");
     },

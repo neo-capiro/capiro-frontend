@@ -12,8 +12,40 @@ type GeneratedInspection = Exclude<
 /** Synthetic structural receipts only; these bytes do not qualify native files. */
 export const accessFormats = documentAccessMetadata.formats;
 export type AccessFormat = (typeof accessFormats)[number];
+export const xmlDocumentBytes = new TextEncoder().encode(
+  '\ufeff<?xml version="1.0" encoding="UTF-8"?>\r\n<document>\u03b1 &amp; \u03b2</document>\r\n',
+);
 export function accessInspection(format: AccessFormat): GeneratedInspection {
   const base = created("txt");
+  if (format === "xml") {
+    const object = {
+      ...base.version.object,
+      bytes: xmlDocumentBytes.length,
+      sha256:
+        "4ce758d3e9c7e1998bff6b0d9ecd7e9b7248967f27982ab390bd7eda015b7371",
+    };
+    return {
+      version: {
+        ...base.version,
+        filename: "Synthetic.xml",
+        mimeType: documentAccessMetadata.mimeTypes.xml,
+        object,
+      },
+      inspection: {
+        ...base.inspection,
+        bytes: object.bytes,
+        sha256: object.sha256,
+        format,
+        members: [],
+        details: {
+          encoding: "UTF-8",
+          whitespace: "unchanged",
+          wellFormed: true,
+        },
+        currentBytesVerified: true,
+      },
+    };
+  }
   const details = {
     txt: { encoding: "UTF-8", whitespace: "unchanged" },
     docx: { paragraphs: 1, tables: 0, pictures: 0 },
@@ -46,7 +78,9 @@ export function accessInspection(format: AccessFormat): GeneratedInspection {
 }
 export function accessBinary(
   receipt: GeneratedInspection,
-  bytes: Uint8Array<ArrayBuffer> = documentBytes,
+  bytes: Uint8Array<ArrayBuffer> = receipt.inspection.format === "xml"
+    ? xmlDocumentBytes
+    : documentBytes,
 ) {
   return new Response(bytes, {
     headers: {

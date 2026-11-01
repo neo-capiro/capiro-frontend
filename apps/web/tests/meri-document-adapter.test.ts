@@ -1,4 +1,9 @@
-import { nativeInspection } from "./meri-document-access-fixtures";
+import {
+  accessBinary,
+  accessInspection,
+  nativeInspection,
+  xmlDocumentBytes,
+} from "./meri-document-access-fixtures";
 import { describe, expect, it, vi } from "vitest";
 import {
   receiveDocumentRequest,
@@ -21,6 +26,36 @@ import {
 } from "./meri-document-fixtures";
 
 describe("document receiving and immutable views", () => {
+  it("preserves XML inspection metadata and exact UTF-8 download bytes", async () => {
+    const f = fixture();
+    const port = f.workflow();
+    const receipt = accessInspection("xml");
+    f.responses.push(jsonResponse(receipt));
+    const reply = await port.inspectVersion(ids.version, signal());
+    expect(reply.ok).toBe(true);
+    if (!reply.ok) return;
+    expect(reply.value.metadata).toMatchObject({
+      format: "xml",
+      filename: "Synthetic.xml",
+      mimeType: "application/xml; charset=utf-8",
+      bytes: xmlDocumentBytes.length,
+      sha256: receipt.version.object.sha256,
+    });
+    expect(reply.value.inspection).toMatchObject({
+      format: "xml",
+      details: { encoding: "UTF-8", whitespace: "unchanged", wellFormed: true },
+      nativeOpened: false,
+      rendered: false,
+      recalculated: false,
+    });
+    expect(Object.isFrozen(reply.value.metadata)).toBe(true);
+    expect(JSON.stringify(reply.value)).not.toContain("credential");
+    f.responses.push(accessBinary(receipt));
+    expect(await port.download(reply.value.handle, signal())).toMatchObject({
+      ok: true,
+      value: { bytes: xmlDocumentBytes },
+    });
+  });
   it.each([
     ["txt", textContent],
     ["docx", wordContent],
