@@ -7335,18 +7335,18 @@
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "fd1f03db2ff84f1f7d0bf043b0e9018f0d153af4bc4c559d3cb872c204f2edbb",
-    "reason": "Independent review of b8ed730d: one source/amendment/review presentation lifetime owns transactional edits, confirmation invalidation, publication and pending-delivery controls. Derivation, row presentation, source import and authority/persistence remain separate owners. Removal clears stale review and hashes before derivation; in-place edits retain identity/order and commit only a valid sequence. Actual callback and compiler-fixture checks cover refused removal, dependency recomputation, unique IDs and nested no-op/cancel preservation. See FE436-CORRECTION-INDEPENDENT-REVIEW-20261101.txt.",
-    "reviewedBy": "Codex independent /root/legislative_review",
+    "fingerprint": "b4fa0a7acf0f52cde9813270b78adc8bbc5472b9c9d39ad7512f2ffd154b159c",
+    "reason": "Independent b256af5d review: one source/amendment/review presentation lifetime adds explicit terminal whole-source removal, loaded empty-result display and existing confirmation/publication/download invalidation. Hash derivation, row presentation, source import and authority/persistence remain delegated. Pinned contract1.4 focused54 tests and an independent actual-compiler probe cover exact hashes, edit/cancel, terminal removal, reload and zero-byte download. See LEGISLATIVE-TYPED-EMPTY-FE-INDEPENDENT-REVIEW-20261101.txt.",
+    "reviewedBy": "Codex independent /root/contract_review",
     "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/meri/files/FederalWorkbench.tsx",
     "kind": "function",
     "symbol": "FederalWorkbench",
-    "fingerprint": "58290e27a02643b54cdcdef46b434b7ebd0de080aa1a985745b9ddd2429b634c",
-    "reason": "Independent review of b8ed730d: the component coordinates one source/amendment/review state lifetime. Transactional edit, remove, prepare and publish transitions share review invalidation and pending-delivery constraints; derivation and backend authority remain delegated. The corrected removal and in-place edit paths preserve exact reviewed intent, while cancel/no-op edits preserve untouched saved reviews. Focused callbacks and an independent compiler-valid nested fixture verify those invariants. See FE436-CORRECTION-INDEPENDENT-REVIEW-20261101.txt.",
-    "reviewedBy": "Codex independent /root/legislative_review",
+    "fingerprint": "d1f9e837f8b0d2ee366d7f9adba71c9ff68e17f6c6dc5befc321a1eaddeac689",
+    "reason": "Independent b256af5d review: the component retains one source/amendment/review state lifetime. The new removal action shares transactional edit, review invalidation, pending-effect lock and export state; it adds no compiler or persistence owner. Controlled callbacks verify terminal removal, earlier-edit recomputation, cancel preservation, loaded review, history access and zero-byte download. Exact paired derivation is independently accepted by the Meri compiler. See LEGISLATIVE-TYPED-EMPTY-FE-INDEPENDENT-REVIEW-20261101.txt.",
+    "reviewedBy": "Codex independent /root/contract_review",
     "reviewedOn": "2026-11-01"
   },
   {
