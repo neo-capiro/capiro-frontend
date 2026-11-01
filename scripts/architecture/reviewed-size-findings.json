@@ -7356,10 +7356,10 @@
     "file": "apps/web/src/features/modules/engagement/outreach/CampaignDrafts.tsx",
     "kind": "function",
     "symbol": "CampaignDrafts",
-    "fingerprint": "c72bd967b562641098aab06ddb0bdf0a5c5037456a8f847ae966a63db4535c4a",
-    "reason": "The existing generation-review panel owns selection of a single recipient unit, job progress and its retained draft preview. The change adds layout/progress presentation while preserving the canonical hook, immutable version receiver and pending-result controls. Cohesive selection and artifact matching prevent a preview from showing another recipient draft.",
-    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-10-30"
+    "fingerprint": "050c4a9a81057f78e11d1ff3920ba772533ead0477bc9520509328d40998b83c",
+    "reason": "One recipient-review surface composes the existing campaign owner and immutable saved-draft editor. The local selected key controls preview only; generation, refresh, cancellation, editing and recovery remain owner callbacks. Pending/read-only fences, saved envelope/version binding and historical-message rendering are retained. The extracted brief owns captured-input presentation; further splitting the cohesive status/recipient/preview JSX would scatter the same owner state without removing a separate responsibility.",
+    "reviewedBy": "Codex independent FE reviewer (non-author)",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/CampaignDrafts.tsx",
@@ -7527,9 +7527,9 @@
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflowFrame.tsx",
     "kind": "function",
     "symbol": "OutreachWorkflowFrame",
-    "fingerprint": "43bf95d27e8f72bfb6fabd92a102d504e1d4e321411e172bbe7ef8f2f3c89c0e",
-    "reason": "one stateless presentation frame composing navigation, content and footer from caller-owned props. No business/data/provider logic; shared gate predicates remain visible together. Splitting the90-line JSX solely to reduce count would scatter this single layout responsibility.",
-    "reviewedBy": "Codex independent HIGH Outreach source/design review; OUTREACH-WIZARD-PARITY-INDEPENDENT-REVIEW-20261101.txt SHA256 54fd827e25b96532590e051bf961d5601cfd389293477d36c8ca8f068461a5af",
+    "fingerprint": "40bed35e41671ed05e2815a67feaea3ab2ef68eeb35ff750004bdd0e8d5c1409",
+    "reason": "The existing seven-step frame owns navigation presentation, progress and footer controls. Step descriptions and destination labels are data in the same module; busy/fenced/nextDisabled and read-only save behavior remain intact. It invokes supplied callbacks and introduces no campaign lifecycle or service ownership. Its cohesive accessible layout does not warrant fragmentation for the 103-line size signal.",
+    "reviewedBy": "Codex independent FE reviewer (non-author)",
     "reviewedOn": "2026-11-01"
   },
   {
@@ -7545,9 +7545,9 @@
     "file": "apps/web/src/features/modules/engagement/outreach/outreach-workflow.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "6d324a26f71c18df17dfd60677e2e2c3f6ad8ae3e64aed492ed328f4bea7bc8e",
-    "reason": "Thirty-four scoped template-card/dialog/text lines join the existing workflow stylesheet; no shell/global tokens or unrelated surface styles change. This supersedes only the earlier fingerprint for this touched stylesheet.",
-    "reviewedBy": "Codex independent HIGH Classic Outreach template review; OUTREACH-CLASSIC-TEMPLATES-INDEPENDENT-REVIEW-20261101.txt SHA256 070b24be8d35dcd2da9b611c3615092c6d59c099c8ac0c1bab90525f3ad3115e",
+    "fingerprint": "f34823239c86097278fe5fe7cb09f2bf2fbc355420926d24d177c0dfe98aaa03",
+    "reason": "This feature-local CSS module styles the existing Outreach wizard and its new generation brief/recipient review layout. New selectors are scoped to named local classes, reuse existing tokens, preserve the horizontal mobile rail and collapse review/brief columns at the existing breakpoint. Recipient/purpose overflow is bounded. No global shell styles, service behavior or unrelated feature ownership is introduced.",
+    "reviewedBy": "Codex independent FE reviewer (non-author)",
     "reviewedOn": "2026-11-01"
   },
   {
@@ -7728,6 +7728,15 @@
     "fingerprint": "20eff0efd73cd7ed6ae4d3d1bfd6202f0cd0fb3d105b8c36f94c7c702e23f64e",
     "reason": "one ordered derivation maintains raw intermediates/dependencies/removal invariants and invokes the canonical decoder/edit owner; splitting that loop is not required for this bounded additive mode.",
     "reviewedBy": "raw_source (independent FE consumer reviewer)",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/CampaignGenerationBrief.tsx",
+    "kind": "function",
+    "symbol": "CampaignGenerationBrief",
+    "fingerprint": "38b8d7622c9b68b26a57419421284b97e2eca98b7e6285cc487ec3629840987b",
+    "reason": "A read-only presentation of the captured purpose, carried plan and source/sample counts, with repair links to existing wizard steps. It derives readiness from canonical campaignProblem/recipientProblem and receives a navigation callback; it neither resolves sources nor generates, persists or authorizes work. The 83-line function keeps one small semantic panel together.",
+    "reviewedBy": "Codex independent FE reviewer (non-author)",
     "reviewedOn": "2026-11-01"
   }
 ]
