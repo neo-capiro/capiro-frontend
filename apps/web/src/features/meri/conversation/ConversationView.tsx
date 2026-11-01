@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { DocumentRevisionDraft } from "./DocumentRevisionDraft";
 import { MeriComposer, type ComposerChip } from "../MeriComposer";
 import { QuestionCard } from "./QuestionCard";
-import { ConnectionPending } from "./ConnectionPending";
+import { ConnectionPending, UnverifiedAccessNotice } from "./ConnectionPending";
 import { ConversationFrame } from "./ConversationFrame";
 import { ConversationHistoryStatus } from "./ConversationHistoryStatus";
 import { MeriLiveConversation } from "./MeriLiveConversation";
@@ -156,9 +156,12 @@ export function ConversationView({
     !session.accessLost && !session.latestTarget ? session.ready : undefined;
   const [retained, setRetained] = useState(ready);
   if (ready && retained !== ready) setRetained(ready);
+  // The admitted display outlives a credential reload and an access check that was not answered; a
+  // refusal (accessLost) still hides it. The retained port is disposed and can issue no request.
+  const { renewing, unverified } = session.connection;
   const displayed =
     ready ??
-    (!session.accessLost && !session.latestTarget && session.connection.renewing
+    (!session.accessLost && !session.latestTarget && (renewing || unverified)
       ? retained
       : undefined);
   // Optional per-message settings stay a non-modal column on desktop and a sheet on a phone.
@@ -184,6 +187,11 @@ export function ConversationView({
             session.accessLost || (!session.selectedId && !displayed) ? null : (
               <ConversationHistoryStatus session={session} />
             )
+          }
+          notice={
+            unverified && displayed ? (
+              <UnverifiedAccessNotice session={session} />
+            ) : null
           }
           composer={
             <SessionComposer

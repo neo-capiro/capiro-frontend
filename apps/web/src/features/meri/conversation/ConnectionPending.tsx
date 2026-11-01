@@ -86,6 +86,32 @@ function ConnectionStatus({
   );
 }
 
+/**
+ * The access check was not answered, so nothing is known to be refused: the transcript stays on screen
+ * and only sending waits for a fresh check. A real refusal replaces the view instead (ConnectionStatus).
+ */
+export function UnverifiedAccessNotice({ session }: { session: Session }) {
+  return (
+    <section role="status" className={styles.accessNotice}>
+      <p className={styles.muted}>
+        Meri could not confirm your access to this conversation just now.
+        Everything above is unchanged; sending resumes once access is checked.
+      </p>
+      <Button
+        type="button"
+        variant="outline"
+        className={ui.outline}
+        onClick={() => {
+          session.connection.retry();
+          session.history.refresh();
+        }}
+      >
+        Check access again
+      </Button>
+    </section>
+  );
+}
+
 /** Saved reading is hidden after access loss until the exact session is reauthorized. */
 export function ConnectionPending({ session }: { session: Session }) {
   const { connection, earlier } = session;

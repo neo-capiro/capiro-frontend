@@ -5,6 +5,7 @@ import { CONVERSATION_SKILLS } from "@capiro/meri-contracts/conversation-applica
 import {
   clientId,
   context,
+  conversationId,
   eventOf,
   openEvidence,
   setupConversation,
@@ -20,6 +21,7 @@ import {
 import { reply, runFor } from "./meri-conversation-fixtures";
 import { binding } from "./meri-conversation-fixtures";
 import { json } from "../../tests/browser/fixtures";
+import { testIdentity } from "./fixtures";
 /** The shipped catalog, read directly so the expectation does not share the app's module graph. */
 const stoicQuotes = JSON.parse(
   readFileSync(
@@ -294,9 +296,6 @@ test("a completed run keeps its verified checkpoint inspection entry", async ({
   });
   await page.goto(selectedUrl);
   await expect(page.getByText("First answer", { exact: true })).toBeVisible();
-  await expect(
-    page.getByText("Saved conversation history loaded."),
-  ).toBeVisible();
   // A finished turn shows no recovery block; its checkpoint waits behind the closed details.
   await expect(page.getByText("Pause and recovery")).toHaveCount(0);
   await expect(page.getByText("Pause or steer this run")).toHaveCount(0);
@@ -397,9 +396,6 @@ test("existing conversation keeps its transcript and never shows the empty-chat 
   await expect(
     page.locator('img[src="/design/home/meri-orb.png"]'),
   ).toHaveCount(0);
-  await expect(
-    page.getByText("Saved conversation history loaded."),
-  ).toBeVisible();
   // A finished exchange is the prompt and the answer: no readiness card, status pill, recovery
   // block, per-run usage headings or empty approvals panel.
   await expect(
@@ -420,6 +416,7 @@ test("existing conversation keeps its transcript and never shows the empty-chat 
     "Actions for your approval",
     "Meri has not prepared any actions for your approval in this conversation.",
     "No source references were provided.",
+    "Saved conversation history loaded.",
   ])
     await expect(page.getByText(noise, { exact: true })).toHaveCount(0);
   await page.screenshot({ path: shot("desktop-existing-conversation.png") });
@@ -570,4 +567,52 @@ test.describe("daily quote clock (America/New_York)", () => {
       quoteOn(2026, 11, 4).text,
     );
   });
+});
+
+test("a bare /meri opens the saved default client, and General when none is saved", async ({
+  page,
+}) => {
+  await setupConversation(page);
+  await installInitialInput(page);
+  const preferences = (defaultClientId: string | null) => ({
+    ...currentPreferencesFixture.read,
+    owner: { tenantId: testIdentity.tenant.id, actorId: testIdentity.user.id },
+    preferences: {
+      ...currentPreferencesFixture.read.preferences,
+      defaultClientId,
+    },
+  });
+  await page.route("**/api/settings/user/read*", (route) =>
+    json(route, preferences(clientId)),
+  );
+  await page.goto("/meri");
+  await expect(page).toHaveURL(new RegExp(`/meri\\?clientId=${clientId}$`));
+  await shellReady(page);
+  await expect(
+    page.getByText("Choose General or a permitted client above", {
+      exact: false,
+    }),
+  ).toHaveCount(0);
+
+  await page.route("**/api/settings/user/read*", (route) =>
+    json(route, preferences(null)),
+  );
+  await page.goto("/meri");
+  await expect(page).toHaveURL(/\/meri\?scope=general$/);
+});
+
+test("a bare /meri that names a conversation is never redirected away from it", async ({
+  page,
+}) => {
+  await setupConversation(page);
+  await page.route("**/api/settings/user/read*", (route) =>
+    json(route, currentPreferencesFixture.read),
+  );
+  await page.goto(`/meri?conversationId=${conversationId}`);
+  await expect(
+    page.getByRole("heading", { name: "Conversation connection unavailable" }),
+  ).toBeVisible();
+  expect(new URL(page.url()).searchParams.get("conversationId")).toBe(
+    conversationId,
+  );
 });

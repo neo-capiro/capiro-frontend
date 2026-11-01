@@ -150,6 +150,9 @@ it("a denied bootstrap exhausts only its bounded issuance retries and records lo
       await connect;
       expect(host.getSnapshot().status).toBe("unavailable");
       expect(host.getExpirationReason()).toBe("access-lost");
+      // The status stays readable so the view can tell an unanswered check (401 after its retries)
+      // from a definitive refusal (403).
+      expect(host.getIssuanceStatus()).toBe(status);
       expect(fetcher).toHaveBeenCalledTimes(status === 401 ? 3 : 1);
       await vi.advanceTimersByTimeAsync(300_000);
       expect(fetcher).toHaveBeenCalledTimes(status === 401 ? 3 : 1);

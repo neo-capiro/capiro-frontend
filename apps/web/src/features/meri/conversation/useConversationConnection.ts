@@ -58,9 +58,13 @@ function useSessionRenewal({
   bound: ReturnType<typeof boundContext>;
   reopen: (options?: Reopening) => void;
 }) {
-  // Keep private data hidden through explicit retry until a fresh receipt is validated.
+  // Keep private data hidden through explicit retry until a fresh receipt is validated. A 401 that
+  // persisted through the bounded retries is an authority that did not answer, not a refusal: what this
+  // tab already holds stays readable, and only an explicit 403 or a port-level denial hides it.
   const [denied, setDenied] = useState(false);
-  const revoked = host.getExpirationReason() === "access-lost";
+  const unverified =
+    status === "unavailable" && host.getIssuanceStatus() === 401;
+  const revoked = host.getExpirationReason() === "access-lost" && !unverified;
   if (revoked && !denied) setDenied(true);
   else if (status === "ready" && denied) setDenied(false);
   const accessLost = revoked || (denied && status !== "ready");
@@ -79,6 +83,7 @@ function useSessionRenewal({
 
   return {
     accessLost,
+    unverified,
     revoke: useCallback(() => {
       const last = bound.last();
       if (last) renewed.current = JSON.stringify(last.context) + last.at;
