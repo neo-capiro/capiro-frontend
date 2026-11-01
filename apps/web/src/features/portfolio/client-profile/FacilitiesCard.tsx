@@ -116,8 +116,10 @@ function CurrentFacilitiesCard({
                     </small>
                   </span>
                   <small>
+                    {/* Absent data uses the intake convention ("Not provided"); "Unavailable" is
+                        reserved for a panel that cannot supply the value at all. */}
                     {facility.employeeCount === null
-                      ? "Staff not reported"
+                      ? "Not provided"
                       : `${facility.employeeCount.toLocaleString()} staff`}
                   </small>
                   {facility.geocodeStatus &&

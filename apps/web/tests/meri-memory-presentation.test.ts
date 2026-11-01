@@ -143,3 +143,65 @@ it("renders the Figma 05.04 card with a live correction control and an explained
     /<button[^>]*aria-pressed="true"[^>]*>.*Propose a correction<\/button>/,
   );
 });
+
+/**
+ * Core currently sends `displayTitle` equal to the stored key, so headings rendered the raw
+ * identifier (`user:<uuid>:monday-client-board-mapping`) even though the key carries a readable
+ * slug and the record carries readable text. A key echoed as its own title is an identifier, not a
+ * display title: fall back to the readable projection, never to invented content.
+ */
+it("never shows a machine key as the memory heading", () => {
+  const echoed = decode({
+    ...original,
+    displayTitle: original.title,
+    contentStatus: "available",
+    contentLimitation: null,
+  });
+  expect(memoryPresentation(echoed).title).toBe("Communication preference");
+  expect(memoryPresentation(echoed).title).not.toContain(id(7));
+});
+
+it("titles an unslugged identifier from the record's own first sentence", () => {
+  const value =
+    "For the synthetic W3-ACCEPT-20261026-B fixture, label acceptance notes Synthetic fixture.";
+  const item = decode({
+    id: id(2),
+    title: `meri:${id(9)}`,
+    value,
+    scope: "user_private",
+    clientId: null,
+    updatedAt: "2026-10-26T15:38:22.305279Z",
+    displayTitle: `meri:${id(9)}`,
+    contentStatus: "available",
+    contentLimitation: null,
+  });
+  expect(memoryPresentation(item).title).toBe(value);
+  expect(memoryPresentation(item).title).not.toContain("meri:");
+});
+
+it("rejects a machine-shaped displayTitle and keeps the readable slug", () => {
+  const item = decode({
+    ...original,
+    displayTitle: `meri:${id(9)}`,
+    contentStatus: "available",
+    contentLimitation: null,
+  });
+  expect(memoryPresentation(item).title).toBe("Communication preference");
+});
+
+it("falls back to a stable label when nothing readable exists", () => {
+  const item = decode({
+    id: id(3),
+    title: `meri:${id(9)}`,
+    value: '{"feedbackKind":"negative","runId":"synthetic-run"}',
+    scope: "user_private",
+    clientId: null,
+    updatedAt: "2026-10-26T15:38:22.305279Z",
+    displayTitle: `meri:${id(9)}`,
+    contentStatus: "available",
+    contentLimitation: null,
+  });
+  // A JSON payload is not a heading and the namespace prefix is not a title.
+  expect(memoryPresentation(item).title).toBe("Memory record");
+  expect(memoryPresentation(item).title).not.toContain("feedbackKind");
+});
