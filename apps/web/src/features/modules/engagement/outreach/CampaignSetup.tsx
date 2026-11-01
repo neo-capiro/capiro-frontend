@@ -1,6 +1,8 @@
 "use client";
 
 import type { OutreachCampaignState } from "../../../../shared/capiro/operations/outreach-campaign-schemas";
+import type { ClassicOutreachTemplate } from "../../../../shared/capiro/operations/outreach-template-catalog";
+import { CampaignTemplates } from "./CampaignTemplates";
 import {
   ActionButton,
   Field,
@@ -110,13 +112,10 @@ export function CampaignSetup({
   update,
   disabled,
   templates,
+  onTemplatesReload = () => undefined,
 }: Props & {
-  templates: readonly {
-    id: string;
-    name: string;
-    description?: string | null;
-    versionId?: string | null;
-  }[];
+  templates: readonly ClassicOutreachTemplate[];
+  onTemplatesReload?: () => void;
 }) {
   return (
     <Panel
@@ -134,44 +133,13 @@ export function CampaignSetup({
             onChange={(event) => update({ title: event.target.value })}
           />
         </Field>
-        <fieldset className={styles.templateGallery} disabled={disabled}>
-          <legend>Choose a starting point</legend>
-          <p className={styles.hint}>
-            Choose an available template or start from your own campaign
-            context.
-          </p>
-          <div className={styles.templateChoices}>
-            {[
-              {
-                id: "",
-                name: "Start from scratch",
-                description: "Use your own campaign context.",
-              },
-              ...templates,
-            ].map((template) => (
-              <label key={template.id} className={styles.templateChoice}>
-                <input
-                  type="radio"
-                  name="outreach-template"
-                  value={template.id}
-                  checked={(state.templateId ?? "") === template.id}
-                  onChange={() =>
-                    update({
-                      templateId: template.id || null,
-                      templateVersionId:
-                        templates.find((item) => item.id === template.id)
-                          ?.versionId ?? null,
-                    })
-                  }
-                />
-                <span>
-                  <strong>{template.name}</strong>
-                  {template.description && <span>{template.description}</span>}
-                </span>
-              </label>
-            ))}
-          </div>
-        </fieldset>
+        <CampaignTemplates
+          templates={templates}
+          selectedId={state.templateId}
+          disabled={disabled}
+          onReload={onTemplatesReload}
+          onSelect={(id) => update({ templateId: id, templateVersionId: null })}
+        />
         <div className={styles.grid}>
           <Field label="Tone" htmlFor="outreach-tone">
             <SelectInput

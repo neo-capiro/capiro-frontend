@@ -12,6 +12,11 @@ import {
   CampaignSetup,
 } from "../src/features/modules/engagement/outreach/CampaignSetup";
 import { newCampaign } from "../src/features/modules/engagement/outreach/campaign-model";
+import { CampaignTemplates } from "../src/features/modules/engagement/outreach/CampaignTemplates";
+const boundary = vi.hoisted(() => ({ api: { request: vi.fn() } }));
+vi.mock("../src/shared/capiro/CapiroBoundary", () => ({
+  useCapiro: () => boundary.api,
+}));
 
 function elements(node: ReactNode): ReactElement<Record<string, unknown>>[] {
   if (Array.isArray(node)) return node.flatMap(elements);
@@ -162,7 +167,7 @@ describe("Direction and template gallery preserve existing input contracts", () 
     expect(client?.props.disabled).toBe(true);
     expect(client?.props.value).toBe("synthetic-client");
   });
-  it("offers scratch when no templates are returned, without pretending to create or preview templates", () => {
+  it("offers scratch and the wired custom editor when no templates are returned", () => {
     const markup = renderToStaticMarkup(
       createElement(CampaignSetup, {
         state: newCampaign(),
@@ -172,11 +177,10 @@ describe("Direction and template gallery preserve existing input contracts", () 
       }),
     );
     expect(markup).toContain("Start from scratch");
-    expect(markup).not.toContain("Create custom template");
-    expect(markup).not.toContain("Preview template");
+    expect(markup).toContain("Create custom template");
     expect(markup.match(/type="radio"/g)).toHaveLength(1);
   });
-  it("uses actual template IDs/version bindings and clears both when returning to scratch", () => {
+  it("passes selection to the existing owner and clears obsolete version hints for the versionless Classic catalog", () => {
     const update = vi.fn();
     const tree = CampaignSetup({
       state: {
@@ -191,22 +195,26 @@ describe("Direction and template gallery preserve existing input contracts", () 
           id: "template-a",
           name: "Synthetic template",
           description: "Synthetic description",
-          versionId: "version-a",
+          source: "user",
+          category: "general",
+          prompt: "Synthetic prompt",
+          samplePreview: null,
+          tone: "professional",
+          usageCount: 0,
         },
       ],
     });
-    const radios = elements(tree).filter(
-      (element) => element.type === "input" && element.props.type === "radio",
+    const gallery = elements(tree).find(
+      (element) => element.type === CampaignTemplates,
     );
-    expect(radios.map((radio) => radio.props.checked)).toEqual([false, true]);
-    for (const radio of [...radios].reverse()) {
-      const action = radio.props.onChange;
-      if (typeof action !== "function")
-        throw new Error("Missing template selection");
-      action();
-    }
+    expect(gallery?.props.selectedId).toBe("template-a");
+    const action = gallery?.props.onSelect;
+    if (typeof action !== "function")
+      throw new Error("Missing template selection");
+    action("template-a");
+    action(null);
     expect(update.mock.calls).toEqual([
-      [{ templateId: "template-a", templateVersionId: "version-a" }],
+      [{ templateId: "template-a", templateVersionId: null }],
       [{ templateId: null, templateVersionId: null }],
     ]);
   });
@@ -218,8 +226,8 @@ describe("Direction and template gallery preserve existing input contracts", () 
       templates: [],
     });
     expect(
-      elements(tree).find((element) => element.type === "fieldset")?.props
-        .disabled,
+      elements(tree).find((element) => element.type === CampaignTemplates)
+        ?.props.disabled,
     ).toBe(true);
     expect(
       elements(tree).find((element) => element.props.id === "outreach-name")
