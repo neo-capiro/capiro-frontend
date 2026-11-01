@@ -2,9 +2,15 @@ import { test, expect } from "@playwright/test";
 import { installFixtures, clientId } from "./fixtures";
 import {
   conversationId,
+  cursorTo,
   inboxPage,
   serveMeri,
 } from "./discoverability-fixtures";
+
+const inboxCalls = (calls: { path: string; body: unknown }[]) =>
+  calls
+    .filter((call) => call.path === "/api/conversations/intents/inbox")
+    .map((call) => call.body);
 
 test("the inbox lists the actor's proposals newest first with the state Meri read and links each to its conversation", async ({
   page,
@@ -44,11 +50,7 @@ test("the inbox lists the actor's proposals newest first with the state Meri rea
     page.getByRole("link", { name: "Workspace updates" }),
   ).toHaveAttribute("href", "/meri/updates");
   await expect(page.getByRole("button")).toHaveCount(0);
-  expect(
-    calls
-      .filter((call) => call.path === "/api/conversations/intents/inbox")
-      .map((call) => call.body),
-  ).toEqual([{ limit: 50 }]);
+  expect(inboxCalls(calls)).toEqual([{ limit: 50 }]);
 });
 
 test("a page that is not the whole inbox offers older proposals and reads them by the server's cursor", async ({
@@ -56,31 +58,99 @@ test("a page that is not the whole inbox offers older proposals and reads them b
 }) => {
   await installFixtures(page);
   const first = {
-    ...inboxPage,
-    rows: [inboxPage.rows[0]],
-    next: {
-      conversationId,
-      deliveryId: inboxPage.rows[0]!.deliveryId as string,
-    },
+    rows: [inboxPage.rows[0]!],
+    next: cursorTo(inboxPage.rows[0]!),
     pending: { count: 1, complete: false },
   };
-  const calls = await serveMeri(page, { inbox: first });
+  const rest = {
+    rows: inboxPage.rows.slice(1),
+    next: null,
+    pending: { count: 0, complete: true },
+  };
+  const calls = await serveMeri(page, { inbox: [first, rest] });
   await page.goto("/approval-inbox.html");
   await expect(page.getByRole("status")).toContainText(
-    "1 awaiting your decision on this page; older proposals follow below.",
+    "1 awaiting your decision so far; older proposals follow below.",
   );
-  await page.unroute("**/api/conversations/**");
-  await serveMeri(page, {
-    inbox: {
-      ...inboxPage,
-      rows: inboxPage.rows.slice(1),
-      pending: { count: 0, complete: true },
-    },
-  });
   await page.getByRole("button", { name: "Load older proposals" }).click();
   await expect(page.locator("tbody tr")).toHaveCount(3);
+  await expect(page.getByRole("status")).toContainText(
+    "1 awaiting your decision. Open a conversation",
+  );
   await expect(page.getByRole("button")).toHaveCount(0);
-  expect(calls[0]?.body).toEqual({ limit: 50 });
+  expect(inboxCalls(calls)).toEqual([
+    { limit: 50 },
+    { limit: 50, after: first.next },
+  ]);
+});
+
+test("an empty page with a cursor is never shown as empty: the inbox keeps reading until a proposal is found or the end is reached", async ({
+  page,
+}) => {
+  await installFixtures(page);
+  const cursor = cursorTo(inboxPage.rows[2]!);
+  const emptyWithMore = {
+    rows: [],
+    next: cursor,
+    pending: { count: 0, complete: false },
+  };
+  const calls = await serveMeri(page, {
+    inbox: [emptyWithMore, emptyWithMore, inboxPage],
+  });
+  await page.goto("/approval-inbox.html");
+  await expect(page.locator("tbody tr")).toHaveCount(3);
+  await expect(
+    page.getByText("No proposals have been prepared for you yet."),
+  ).toHaveCount(0);
+  expect(inboxCalls(calls)).toEqual([
+    { limit: 50 },
+    { limit: 50, after: cursor },
+    { limit: 50, after: cursor },
+  ]);
+  await page.unroute("**/api/conversations/**");
+  await serveMeri(page, {
+    inbox: [
+      emptyWithMore,
+      { rows: [], next: null, pending: { count: 0, complete: true } },
+    ],
+  });
+  await page.reload();
+  await expect(page.getByRole("status")).toContainText(
+    "No proposals have been prepared for you yet.",
+  );
+});
+
+test("a failed read of older proposals keeps the rows already shown and offers a retry", async ({
+  page,
+}) => {
+  await installFixtures(page);
+  const first = {
+    rows: [inboxPage.rows[0]!],
+    next: cursorTo(inboxPage.rows[0]!),
+    pending: { count: 1, complete: false },
+  };
+  const rest = {
+    rows: inboxPage.rows.slice(1),
+    next: null,
+    pending: { count: 0, complete: true },
+  };
+  const calls = await serveMeri(page, { inbox: [first, 503, rest] });
+  await page.goto("/approval-inbox.html");
+  await page.getByRole("button", { name: "Load older proposals" }).click();
+  await expect(page.getByRole("alert")).toContainText(
+    "Older proposals could not be read right now; the ones above are unchanged.",
+  );
+  await expect(page.locator("tbody tr")).toHaveCount(1);
+  await page
+    .getByRole("button", { name: "Retry loading older proposals" })
+    .click();
+  await expect(page.locator("tbody tr")).toHaveCount(3);
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  expect(inboxCalls(calls)).toEqual([
+    { limit: 50 },
+    { limit: 50, after: first.next },
+    { limit: 50, after: first.next },
+  ]);
 });
 
 test("an answer the contract refuses or a refused membership never renders a guessed inbox", async ({
@@ -88,7 +158,7 @@ test("an answer the contract refuses or a refused membership never renders a gue
 }) => {
   await installFixtures(page);
   await serveMeri(page, {
-    inbox: { ...inboxPage, pending: { count: 3, complete: true } },
+    inbox: [{ ...inboxPage, pending: { count: 3, complete: true } }],
   });
   await page.goto("/approval-inbox.html");
   await expect(page.getByRole("alert")).toContainText(
@@ -96,10 +166,7 @@ test("an answer the contract refuses or a refused membership never renders a gue
   );
   await expect(page.getByRole("table")).toHaveCount(0);
   await page.unroute("**/api/conversations/**");
-  await serveMeri(page, {
-    inbox: { error: { code: "MEMBERSHIP_REVOKED" } },
-    inboxStatus: 403,
-  });
+  await serveMeri(page, { inbox: [403] });
   await page.reload();
   await expect(page.getByRole("alert")).toContainText(
     "Approval access was denied.",

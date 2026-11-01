@@ -11,6 +11,8 @@ export type InboxPageView = {
   pending: { count: number; complete: boolean };
   hasMore: boolean;
   loadingMore: boolean;
+  /** The last request for older proposals failed; the rows already shown stay. */
+  loadMoreFailed: boolean;
 };
 
 const columns: readonly DataColumn<InboxRowView>[] = [
@@ -61,7 +63,7 @@ export function ApprovalInbox({
 }) {
   const pending = page.pending.complete
     ? `${page.pending.count} awaiting your decision.`
-    : `${page.pending.count} awaiting your decision on this page; older proposals follow below.`;
+    : `${page.pending.count} awaiting your decision so far; older proposals follow below.`;
   return (
     <section aria-label="Approval inbox">
       <p role="status" className={ui.muted}>
@@ -76,6 +78,12 @@ export function ApprovalInbox({
           rows={page.rows}
         />
       ) : null}
+      {page.loadMoreFailed ? (
+        <p role="alert" className={ui.muted}>
+          Older proposals could not be read right now; the ones above are
+          unchanged.
+        </p>
+      ) : null}
       {page.hasMore ? (
         <div className={ui.row}>
           <Button
@@ -86,7 +94,9 @@ export function ApprovalInbox({
           >
             {page.loadingMore
               ? "Loading older proposals…"
-              : "Load older proposals"}
+              : page.loadMoreFailed
+                ? "Retry loading older proposals"
+                : "Load older proposals"}
           </Button>
         </div>
       ) : null}

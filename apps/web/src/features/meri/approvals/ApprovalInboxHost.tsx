@@ -26,9 +26,9 @@ export function ApprovalInboxHost({ enabled }: { enabled: boolean }) {
   if (!enabled || capabilities.approvals.status !== "on")
     unavailable = "Approvals are not enabled for this workspace.";
   else if (identity.error)
-    unavailable = "Current account access could not be verified.";
+    unavailable = "Your account access could not be verified.";
   else if (!current?.tenant?.id || identity.isFetching)
-    unavailable = "Verifying current account access…";
+    unavailable = "Verifying your account access…";
   return (
     <div className={`${ui.page} ${phone.page}`}>
       <MeriPageHeading
@@ -62,9 +62,33 @@ type Page =
       pending: IntentsInboxResponse["pending"];
       /** The clock the phases were read against; expiry is judged once per read, not per render. */
       readAt: number;
+      loadingMore: boolean;
+      loadMoreFailed: boolean;
     }
   | { status: "unavailable"; code: string }
   | { status: "denied" };
+type ReadyPage = Extract<Page, { status: "ready" }>;
+
+/** Pending counts add up across the pages shown; `complete` is the last page's answer. */
+const merge = (
+  current: Page,
+  answer: IntentsInboxResponse,
+  appending: boolean,
+): ReadyPage => {
+  const previous = appending && current.status === "ready" ? current : null;
+  return {
+    status: "ready",
+    rows: previous ? [...previous.rows, ...answer.rows] : answer.rows,
+    next: answer.next,
+    pending: {
+      count: (previous?.pending.count ?? 0) + answer.pending.count,
+      complete: answer.pending.complete,
+    },
+    readAt: Date.now(),
+    loadingMore: false,
+    loadMoreFailed: false,
+  };
+};
 
 function Connected({
   tenantId,
@@ -74,10 +98,17 @@ function Connected({
   actorId: string;
 }) {
   const [page, setPage] = useState<Page>({ status: "loading" });
+  // The page as last set, readable inside the read's continuation without waiting for a render.
+  const shown = useRef<Page>(page);
+  const update = (next: Page) => {
+    shown.current = next;
+    setPage(next);
+  };
   const [cursor, setCursor] = useState<Cursor | null>(null);
-  const [loadingMore, setLoadingMore] = useState(false);
   const alive = useRef(true);
-  // One read per cursor: the first page on mount, an older page when the person asks for it.
+  // One read per cursor: the first page on mount, an older page when the person asks for it, and the
+  // next page by itself while nothing has been found yet (a page can be empty when a conversation was
+  // deleted), so an empty state is only ever shown once the inbox's end was reached.
   useEffect(() => {
     alive.current = true;
     const controller = new AbortController();
@@ -87,33 +118,30 @@ function Connected({
       () => alive.current,
       () => {
         alive.current = false;
-        setPage({ status: "denied" });
+        update({ status: "denied" });
       },
     )
       .then((answer) => {
         if (!alive.current || controller.signal.aborted) return;
-        setLoadingMore(false);
-        setPage((current) => ({
-          status: "ready",
-          rows:
-            cursor && current.status === "ready"
-              ? [...current.rows, ...answer.rows]
-              : answer.rows,
-          next: answer.next,
-          pending: answer.pending,
-          readAt: Date.now(),
-        }));
+        const merged = merge(shown.current, answer, cursor !== null);
+        update(merged);
+        if (merged.rows.length === 0 && answer.next !== null)
+          setCursor(answer.next);
       })
       .catch((error: unknown) => {
         if (!alive.current || controller.signal.aborted) return;
-        setLoadingMore(false);
-        setPage({
-          status: "unavailable",
-          code:
-            error instanceof ConversationReadUnavailable
-              ? error.code
-              : "UNAVAILABLE",
-        });
+        const current = shown.current;
+        update(
+          cursor !== null && current.status === "ready"
+            ? { ...current, loadingMore: false, loadMoreFailed: true }
+            : {
+                status: "unavailable",
+                code:
+                  error instanceof ConversationReadUnavailable
+                    ? error.code
+                    : "UNAVAILABLE",
+              },
+        );
       });
     return () => {
       alive.current = false;
@@ -147,24 +175,28 @@ function Connected({
     return (
       <p role="alert">
         {page.code === "INTENTS_UNAVAILABLE"
-          ? "Conversation approvals are not composed for this workspace yet."
+          ? "Approvals are not available in this workspace yet."
           : "Your proposals could not be read right now."}{" "}
         Reload to try again; nothing was decided.
       </p>
     );
+  const waiting = page.rows.length === 0 && page.next !== null;
+  if (waiting && !page.loadMoreFailed)
+    return <p role="status">Reading your proposals…</p>;
   return (
     <ApprovalInbox
       page={{
         rows,
         pending: page.pending,
         hasMore: page.next !== null,
-        loadingMore,
+        loadingMore: page.loadingMore,
+        loadMoreFailed: page.loadMoreFailed,
       }}
       onLoadMore={() => {
-        if (page.next) {
-          setLoadingMore(true);
-          setCursor(page.next);
-        }
+        if (!page.next) return;
+        update({ ...page, loadingMore: true, loadMoreFailed: false });
+        // The same cursor again after a failure, or the next one.
+        setCursor(page.loadMoreFailed && cursor ? { ...cursor } : page.next);
       }}
     />
   );

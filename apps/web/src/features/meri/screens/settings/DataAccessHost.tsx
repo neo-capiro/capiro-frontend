@@ -8,12 +8,13 @@ import { useCurrentRead } from "../../conversation/evidence/useCurrentRead";
 import { SettingsCallout } from "./SettingsCallout";
 import { SettingsLayout } from "./SettingsLayout";
 import { DataAccessScreen, dataAccessHeading } from "./DataAccessScreen";
+import type { ConnectionsRead } from "./data-access-view";
 import type { SettingsChrome, SettingsNotice } from "./settings-view";
 
 const notice: SettingsNotice = {
   title: "Data access",
   detail:
-    "Read-only. Meri composes this from the read registry, the installed read operations and your resolved capability policy for the selected client; it reads no source and changes no policy.",
+    "Read-only. This shows what Meri can read for the selected client right now and why a source is not readable; nothing here changes a setting or connects a provider.",
 };
 
 /** Owns the read lifetime and the account/client key; Meri owns scope, policy and every later read's authority. */
@@ -35,8 +36,8 @@ export function DataAccessHost({ chrome }: { chrome: SettingsChrome }) {
   if (!current?.tenant?.id || identity.isFetching)
     return status(
       identity.error
-        ? "The current Core account could not be verified, so data access is unavailable."
-        : "Verifying the current Core account…",
+        ? "Your account could not be verified, so data access is unavailable right now."
+        : "Verifying your account…",
       identity.error ? "warning" : undefined,
     );
   if (selected.state === "loading")
@@ -85,7 +86,12 @@ function Connected({
     [clientId],
   );
   const page = useCurrentRead(`data-access:${clientId ?? "general"}`, read);
-  const connections = useCapiroQuery("settings.integrations.list", {});
+  const query = useCapiroQuery("settings.integrations.list", {});
+  const connections: ConnectionsRead = query.error
+    ? { status: "unavailable" }
+    : query.data
+      ? { status: "ready", connections: query.data }
+      : { status: "loading" };
   const callout = (detail: string, tone?: SettingsNotice["tone"]) => (
     <SettingsLayout
       chrome={chrome}
@@ -102,7 +108,7 @@ function Connected({
       page.error === "ACCESS_DENIED" || page.error === "MEMBERSHIP_CHANGED"
         ? "Your current access could not be confirmed. Reload settings to check again."
         : page.error === "DATA_ACCESS_UNAVAILABLE"
-          ? "The data-access view is not composed for this workspace yet."
+          ? "Data access is not available in this workspace yet."
           : "Data access could not be read right now. Reload settings to try again.",
       "warning",
     );
@@ -111,7 +117,7 @@ function Connected({
       chrome={chrome}
       page={page.value}
       clientName={clientName}
-      connections={connections.data}
+      connections={connections}
     />
   );
 }

@@ -20,8 +20,13 @@ const inboxRow = (
   phase: "awaiting_approval",
   ...over,
 });
+export type InboxPage = {
+  rows: Record<string, unknown>[];
+  next: { conversationId: string; deliveryId: string } | null;
+  pending: { count: number; complete: boolean };
+};
 /** Three rows: a live task proposal for the test client, a completed general watch change, a withheld one. */
-export const inboxPage = {
+export const inboxPage: InboxPage = {
   rows: [
     inboxRow(2),
     inboxRow(1, {
@@ -42,6 +47,10 @@ export const inboxPage = {
   next: null,
   pending: { count: 1, complete: true },
 };
+export const cursorTo = (row: Record<string, unknown>) => ({
+  conversationId: row.conversationId as string,
+  deliveryId: row.deliveryId as string,
+});
 
 const family = (
   name: string,
@@ -49,8 +58,8 @@ const family = (
   over: Record<string, unknown> = {},
 ) => ({
   family: name,
-  covers: `Synthetic coverage for ${name}.`,
-  freshness: "asOf",
+  covers: "Synthetic coverage for this source.",
+  freshness: "Records carry asOf and a sourceVersion",
   structured: false,
   clientScope: "optional",
   operations: [`read_${name.replaceAll("-", "_")}`],
@@ -67,10 +76,9 @@ export const dataAccessPage = (requestedClientId: string | null) => ({
     family(
       "action-items-complete",
       requestedClientId ? "available" : "client_required",
-      {
-        clientScope: "required",
-      },
+      { clientScope: "required" },
     ),
+    family("capiro-data", "policy_off", { structured: true }),
     family("capiro-data-v5", "available", {
       structured: true,
       operations: ["describe_capiro_data", "query_capiro_data"],
@@ -99,41 +107,59 @@ const json = (value: unknown, status = 200) => ({
 export async function serveMeri(
   page: Page,
   options: {
-    inbox?: unknown;
-    inboxStatus?: number;
-    mailboxConnected?: boolean;
+    /** Inbox answers in request order; the last one repeats. A number is an HTTP status answered with a content-free error. */
+    inbox?: (InboxPage | number)[];
+    /** `none`: no provider connection; `mailbox`: a Microsoft 365 connection (any status); `error`: Core refuses the read. */
+    connections?: "none" | "mailbox" | "error";
     dataAccess?: (clientId: string | null) => unknown;
   } = {},
 ) {
   const calls: { path: string; body: unknown }[] = [];
+  const inboxAnswers = options.inbox ?? [inboxPage];
   // Core operations go through the same-origin Capiro gateway: `/api/capiro/<operation>`.
   await page.route("**/api/capiro/settings.integrations.list*", (route) =>
-    route.fulfill(
-      json(
-        options.mailboxConnected
-          ? [
-              {
-                id: "40000000-0000-4000-8000-000000000001",
-                provider: "microsoft_365",
-                status: "connected",
-                accountEmail: "test@example.test",
-                displayName: null,
-                scopes: [],
-                lastSyncAt: null,
-                lastError: null,
-              },
-            ]
-          : [],
-      ),
-    ),
+    options.connections === "error"
+      ? route.fulfill(json({ message: "Connections unavailable" }, 503))
+      : route.fulfill(
+          json(
+            options.connections === "mailbox"
+              ? [
+                  {
+                    id: "40000000-0000-4000-8000-000000000001",
+                    provider: "microsoft_365",
+                    status: "error",
+                    accountEmail: "test@example.test",
+                    displayName: null,
+                    scopes: [],
+                    lastSyncAt: null,
+                    lastError: "Synthetic provider error",
+                  },
+                ]
+              : [],
+          ),
+        ),
   );
   await page.route("**/api/conversations/**", (route) => {
     const url = new URL(route.request().url());
     if (url.pathname === "/api/conversations/intents/inbox") {
       const body = route.request().postDataJSON() as unknown;
+      const index = calls.filter((call) => call.path === url.pathname).length;
       calls.push({ path: url.pathname, body });
+      const answer = inboxAnswers[Math.min(index, inboxAnswers.length - 1)]!;
       return route.fulfill(
-        json(options.inbox ?? inboxPage, options.inboxStatus ?? 200),
+        typeof answer === "number"
+          ? json(
+              {
+                error: {
+                  code:
+                    answer === 403
+                      ? "MEMBERSHIP_REVOKED"
+                      : "INTENT_JOURNAL_UNAVAILABLE",
+                },
+              },
+              answer,
+            )
+          : json(answer),
       );
     }
     return route.fulfill(

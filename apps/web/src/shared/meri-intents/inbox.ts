@@ -2,6 +2,7 @@ import {
   intentsMetadata,
   receiveIntentsRequest,
   receiveIntentsResponse,
+  type IntentsInboxCountResponse,
   type IntentsInboxRequest,
   type IntentsInboxResponse,
 } from "@capiro/meri-client/intents";
@@ -29,7 +30,26 @@ export const inboxReadOperation: CurrentReadOperation<
   },
 };
 
-/** One page of the inbox; the sidebar badge and the Approvals page read through the same operation. */
+/** The badge's one count read: prepared proposals still inside their window, before any decision is read. */
+export const inboxCountReadOperation: CurrentReadOperation<
+  IntentsInboxCountResponse | { error: { code: string } }
+> = {
+  path: intentsMetadata.routes.inboxCount.path,
+  requestBytes: intentsMetadata.limits.requestBytes,
+  responseBytes: intentsMetadata.limits.responseBytes,
+  async admit(bytes) {
+    const request = await receiveIntentsRequest(
+      "inboxCount",
+      text.decode(bytes),
+    );
+    return (status, body) =>
+      receiveIntentsResponse("inboxCount", status, text.decode(body), {
+        request,
+      });
+  },
+};
+
+/** One page of the inbox. */
 export function readApprovalInbox(
   request: IntentsInboxRequest,
   signal: AbortSignal,
@@ -40,6 +60,22 @@ export function readApprovalInbox(
   return readCurrentNative<IntentsInboxResponse>(
     inboxReadOperation,
     request,
+    signal,
+    fetcher,
+    isCurrent,
+    onAccessLost,
+  );
+}
+
+export function readApprovalInboxCount(
+  signal: AbortSignal,
+  isCurrent: () => boolean,
+  onAccessLost: () => void,
+  fetcher: typeof fetch = fetch,
+) {
+  return readCurrentNative<IntentsInboxCountResponse>(
+    inboxCountReadOperation,
+    {},
     signal,
     fetcher,
     isCurrent,

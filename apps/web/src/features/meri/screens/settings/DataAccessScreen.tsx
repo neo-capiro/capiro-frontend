@@ -10,9 +10,9 @@ import { SettingsLayout } from "./SettingsLayout";
 import type { SettingsChrome, SettingsHeading } from "./settings-view";
 import {
   availableCount,
-  familyRow,
+  familyRows,
   relationRow,
-  type ConnectionSummary,
+  type ConnectionsRead,
   type DataAccessFamilyRow,
   type DataAccessRelationRow,
 } from "./data-access-view";
@@ -46,13 +46,13 @@ const familyColumns: readonly DataColumn<DataAccessFamilyRow>[] = [
   },
   {
     key: "freshness",
-    label: "Freshness and version fields",
+    label: "Freshness",
     width: 320,
     render: (row) => row.freshness,
   },
 ];
 const relationColumns: readonly DataColumn<DataAccessRelationRow>[] = [
-  { key: "name", label: "Relation", width: 300, render: (row) => row.name },
+  { key: "name", label: "Table", width: 300, render: (row) => row.name },
   {
     key: "state",
     label: "State",
@@ -62,8 +62,9 @@ const relationColumns: readonly DataColumn<DataAccessRelationRow>[] = [
     ),
   },
 ];
+const checked = (iso: string) => `${iso.slice(0, 16).replace("T", " ")} UTC`;
 
-/** Preferences → Data access: a read-only view over Meri's answer; nothing here changes policy or connects a provider. */
+/** Preferences → Data access: a read-only view of Meri's answer; nothing here changes a setting or connects a provider. */
 export function DataAccessScreen({
   chrome,
   page,
@@ -73,57 +74,54 @@ export function DataAccessScreen({
   chrome: SettingsChrome;
   page: DataAccessResponse;
   clientName: string;
-  connections: readonly ConnectionSummary[] | undefined;
+  connections: ConnectionsRead;
 }) {
-  const families = page.families.map((family) =>
-    familyRow(family, connections),
-  );
+  const families = familyRows(page.families, connections);
   const publicRelations = page.relations
     .filter((relation) => relation.source === "public")
     .map(relationRow);
   const clientRelations = page.relations
     .filter((relation) => relation.source === "client_records")
     .map(relationRow);
-  const available = availableCount(page.families, connections);
   return (
     <SettingsLayout
       chrome={chrome}
       heading={dataAccessHeading}
       primary={
         <SettingsCard
-          title="Read families"
+          title="Sources"
           description={
             page.generalReads
-              ? `${available} of ${page.families.length} sources are readable for ${clientName}, checked ${page.checkedAt.slice(0, 16).replace("T", " ")} UTC. Every read still applies its own current-authority checks.`
-              : `General reads are off by policy for your role in this workspace, checked ${page.checkedAt.slice(0, 16).replace("T", " ")} UTC.`
+              ? `${availableCount(families)} of ${families.length} sources are readable for ${clientName}, checked ${checked(page.checkedAt)}. Every read still checks your current access.`
+              : `Reading sources is turned off for your role in this workspace, checked ${checked(page.checkedAt)}.`
           }
         >
           <DataTable
-            caption={`Read families for ${clientName}`}
+            caption={`Sources for ${clientName}`}
             columns={familyColumns}
             rows={families}
           />
           <p className={surfaces.caption}>
-            A last-successful-read time is not retained for these reads; the
-            conversation that made a read keeps its own receipt.
+            Meri does not keep a record of its last successful read per source;
+            each conversation shows the reads it made.
           </p>
         </SettingsCard>
       }
       supporting={
         <>
           <SettingsCard
-            title="SQL relations"
-            description="The relations the describe path publishes for text-to-SQL. Client records need a selected client."
+            title="Data tables"
+            description="The tables Meri can query directly. Client records need a selected client."
           >
             <h3 className={surfaces.sectionTitle}>Public</h3>
             <DataTable
-              caption="Public SQL relations"
+              caption="Public data tables"
               columns={relationColumns}
               rows={publicRelations}
             />
             <h3 className={surfaces.sectionTitle}>Client records</h3>
             <DataTable
-              caption="Client record SQL relations"
+              caption="Client record data tables"
               columns={relationColumns}
               rows={clientRelations}
             />
