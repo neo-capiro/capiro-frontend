@@ -71,10 +71,8 @@ type ReadyPage = Extract<Page, { status: "ready" }>;
 
 /** Empty pages are followed by themselves at most this many times before the person is asked to continue. */
 const AUTO_PAGES = 20;
-const sameCursor = (a: Cursor | null, b: Cursor) =>
-  a !== null &&
-  a.conversationId === b.conversationId &&
-  a.deliveryId === b.deliveryId;
+const cursorKey = (cursor: Cursor) =>
+  `${cursor.conversationId}/${cursor.deliveryId}`;
 
 /** Pending counts add up across the pages shown; `complete` is the last page's answer. */
 const merge = (
@@ -113,6 +111,9 @@ function Connected({
   };
   const [cursor, setCursor] = useState<Cursor | null>(null);
   const autoPages = useRef(0);
+  // Cursors already read since the person last asked for a page; a cursor the server hands back again
+  // (however long the cycle) ends the automatic reads.
+  const seen = useRef(new Set<string>());
   const alive = useRef(true);
   // One read per cursor: the first page on mount, an older page when the person asks for it, and the
   // next page by itself while nothing has been found yet (a page can be empty when a conversation was
@@ -120,6 +121,7 @@ function Connected({
   // too many empty pages stop the automatic reads and leave the person a retry.
   useEffect(() => {
     alive.current = true;
+    if (cursor) seen.current.add(cursorKey(cursor));
     const controller = new AbortController();
     void readApprovalInbox(
       { limit: 50, ...(cursor ? { after: cursor } : {}) },
@@ -138,7 +140,7 @@ function Connected({
           return;
         }
         if (
-          sameCursor(cursor, answer.next) ||
+          seen.current.has(cursorKey(answer.next)) ||
           autoPages.current >= AUTO_PAGES
         ) {
           update({ ...merged, loadMoreFailed: true });
@@ -214,6 +216,7 @@ function Connected({
       onLoadMore={() => {
         if (!page.next) return;
         autoPages.current = 0;
+        seen.current.clear();
         update({ ...page, loadingMore: true, loadMoreFailed: false });
         // After a failure the same cursor is read again; otherwise the next one.
         setCursor(

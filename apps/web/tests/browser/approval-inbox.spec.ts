@@ -166,6 +166,30 @@ test("a failed or repeating automatic page never ends in the empty copy: the per
   ]);
 });
 
+test("automatic paging stops after 20 empty pages even when every cursor is new, and leaves the retry state", async ({
+  page,
+}) => {
+  await installFixtures(page);
+  const pages = Array.from({ length: 25 }, (_, n) => ({
+    rows: [],
+    next: {
+      conversationId,
+      deliveryId: `sdk:${String(100 + n).padStart(64, "0")}`,
+    },
+    pending: { count: 0, complete: false },
+  }));
+  const calls = await serveMeri(page, { inbox: pages });
+  await page.goto("/approval-inbox.html");
+  await expect(page.getByRole("status")).toContainText(
+    "Your proposals could not all be read yet.",
+  );
+  await expect(
+    page.getByRole("button", { name: "Retry loading older proposals" }),
+  ).toBeVisible();
+  expect(inboxCalls(calls)).toHaveLength(21);
+  expect(inboxCalls(calls)[20]).toEqual({ limit: 50, after: pages[19]!.next });
+});
+
 test("a failed read of older proposals keeps the rows already shown and offers a retry", async ({
   page,
 }) => {
