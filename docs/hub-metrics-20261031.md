@@ -18,9 +18,9 @@ The request selects `lifecycle=active`, page 1 and page size 1. Only `total` is 
 
 Refresh is manual and every minute while mounted. The existing `useCapiroQuery` clears replaced reads, aborts prior work and fences results by input and application API lifetime. The clock label updates every ten seconds. Loading/replacement and failed refresh hide previous values. HTTP 401/403 means denied; 404 and transport/schema failures mean unavailable without exposing raw errors. One source/card failure cannot clear other module navigation or independent observations. Preview's roster-only branch never mounts metrics.
 
-## Remaining cards: exact owner and decision boundary
+## Historical remaining-card proposals (superseded)
 
-These rows are review proposals, not implemented APIs or approved new formulas. Each remains visibly unavailable until its existing owner returns the full eligible population with observation, scope and completeness. UI lists, first pages and roster sizes are never substitute sources.
+The table and decision list below preserve the initial proposal history. They are **not current metric definitions or outstanding business decisions**. Root's later `B9-METRIC-DEFINITION-DECISION-20261031.txt` selected the definitions recorded in the Directory, Planner/Strategy/Workspace, and Engagement/Research continuation sections below. Those sections supersede this table, including its proposed inclusive outreach window, UTC-date Planner rule, Workspace document unit and Directory population. Current implementations require their canonical complete populations; UI lists, first pages and roster sizes are never substitute sources.
 
 | Card                | Owner and proposed smallest useful metric                            | Scope, status, window and units                                                                                                                                                                                                       | Concrete remaining dependency                                                                                                                                                                                                                      |
 | ------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -33,7 +33,7 @@ These rows are review proposals, not implemented APIs or approved new formulas. 
 
 For every future owner response: observation timestamp, exact definition/version, current authorized client scope, full-population coverage and per-source availability are required. Complete zero, denied, unavailable, partial and stale must remain distinct. Hidden/unauthorized rows must never enter a numerator or denominator; current access withdrawal must clear cached observations. Full counts must be computed before pagination, with association fan-out deduplicated by canonical identity. Source failures remain independent.
 
-## Narrow decisions for review
+## Historical narrow decisions (resolved by later definitions)
 
 1. Approve the exact event/status selection for Engagement and the due/status mapping for Planner; reuse B2 only after those populations are proven identical.
 2. Confirm Workspace/Strategy active statuses and Directory/Research Portfolio scope before adding totals. Existing active-record wording alone does not define those enums or relationships.
