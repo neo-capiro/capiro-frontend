@@ -31,7 +31,7 @@ export function PublicEventDetail({
       : undefined;
   const when = detail ? eventWhen(detail.hearing) : undefined;
   const href = detail
-    ? publicEventHref(destinations.existingApp, detail.hearing.id)
+    ? publicEventHref(destinations.externalApp, detail.hearing.id)
     : undefined;
   const relevant = detail?.clients?.filter((client) =>
     ["HIGH", "MEDIUM", "LOW"].includes(client.band),

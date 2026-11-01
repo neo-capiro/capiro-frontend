@@ -90,6 +90,15 @@ export function TrackerMetricCards({
     version,
     boardReady,
   );
+  // Without a metrics version the reads are never issued, so two "—" cards
+  // would be decoration. With a version set, a failed read keeps the cards and
+  // their per-metric Unavailable state.
+  if (version !== 1)
+    return (
+      <p className="status" role="status">
+        Tracker metrics aren&apos;t available right now.
+      </p>
+    );
   return (
     <>
       <div role="group" aria-label="Material changes">

@@ -125,7 +125,7 @@ test("partial visible selection is mixed and select-all changes only the visible
   await expect(visibleSelection(page)).toBeChecked();
   await visibleSelection(page).uncheck();
   await expect(
-    page.getByText("1 files · 2 selected · 2 outside this view", {
+    page.getByText("1 file · 2 selected · 2 outside this view", {
       exact: true,
     }),
   ).toBeVisible();

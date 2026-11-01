@@ -75,7 +75,7 @@ export function WorkspaceDocuments({
       {complete && (
         <WorkspaceDocumentTable
           rows={rows}
-          destination={destinations.existingApp}
+          destination={destinations.externalApp}
           members={members}
         />
       )}

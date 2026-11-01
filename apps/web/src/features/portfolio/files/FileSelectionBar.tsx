@@ -1,4 +1,5 @@
 "use client";
+import { plural } from "@/shared/portfolio/ui/plural";
 import styles from "./files.module.css";
 
 export function FileSelectionBar({
@@ -18,7 +19,7 @@ export function FileSelectionBar({
     <>
       <div className={styles.selectionBar}>
         <span aria-live="polite" aria-atomic="true">
-          {visibleCount} files · {selectedCount} selected
+          {plural(visibleCount, "file")} · {selectedCount} selected
           {hiddenSelectedCount > 0 &&
             ` · ${hiddenSelectedCount} outside this view`}
         </span>

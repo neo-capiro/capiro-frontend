@@ -20,7 +20,7 @@ for (const width of [1440, 390]) {
     const descriptions = [
       "Aerospace · Austin, TX",
       "Energy",
-      "Sector not supplied",
+      "Sector not specified",
     ];
     const ids: string[] = [];
     for (const [index, client] of metadataClients.entries()) {

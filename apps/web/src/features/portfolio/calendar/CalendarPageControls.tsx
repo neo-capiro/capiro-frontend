@@ -226,6 +226,9 @@ export function ClientCalendarToolbar({ state }: { state: CalendarPageState }) {
                   {zoneLabels[value]}
                 </option>
               ))}
+              {!zones.includes(zone as (typeof zones)[number]) && (
+                <option value={zone}>{zone}</option>
+              )}
             </select>
           </span>
           <ClientViewPicker state={state} />
