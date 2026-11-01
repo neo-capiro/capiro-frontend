@@ -2,6 +2,7 @@ import { z } from "zod";
 import { objectiveSavedGenerationOperation } from "./objective-saved-generation";
 import { defineOperation } from "../contracts";
 import { objectiveSavedReviewOperation } from "./objective-saved-review";
+import { objectivePlannerConsentOperation } from "./objective-planner-consent";
 import { objectiveResourceId as id } from "./objective-destination-binding";
 import type { ObjectiveDestinationQuery } from "./objective-destination-binding";
 import { strategyTypes } from "./strategies-schemas";
@@ -244,6 +245,7 @@ export function requireGeneratedStrategy(
 
 export const objectiveGenerationOperations = {
   "strategies.objectiveSavedGeneration": objectiveSavedGenerationOperation,
+  "objectives.plannerConsent": objectivePlannerConsentOperation,
   "strategies.objectiveSavedReview": objectiveSavedReviewOperation,
   "strategies.objectiveDraftJob": defineOperation({
     service: "strategy",

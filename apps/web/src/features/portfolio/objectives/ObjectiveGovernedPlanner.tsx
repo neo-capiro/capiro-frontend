@@ -7,20 +7,20 @@ import { useCapiroQuery } from "@/shared/capiro/queries";
 import { governedObjectiveGenerationReadRequest } from "@/shared/capiro/operations/objective-governed-generation";
 import { selectCurrentGovernedObjectiveOutputs } from "@/shared/capiro/operations/objective-governed-outputs";
 import { useSelectedClient } from "@/shared/session/SelectedClient";
-import type { Objective } from "./contracts";
 import {
   currentGovernedPlannerRequest,
   receiveCurrentGovernedPlannerRead,
   requireCurrentGovernedPlannerGeneration,
   reverifyCurrentGovernedPlannerProject,
   type GovernedPlannerClient,
+  type GovernedPlannerObjective,
 } from "./objective-governed-planner-read";
 
 export function ObjectiveGovernedPlanner({
   objective,
   disabled,
 }: {
-  objective: Objective;
+  objective: GovernedPlannerObjective;
   disabled: boolean;
 }) {
   const selected = useSelectedClient();
@@ -96,7 +96,7 @@ function GovernedPlannerOutputs({
   generation,
   refreshGeneration,
 }: {
-  objective: Objective;
+  objective: GovernedPlannerObjective;
   client: GovernedPlannerClient;
   generation: ReturnType<typeof requireCurrentGovernedPlannerGeneration>;
   refreshGeneration: () => void;
