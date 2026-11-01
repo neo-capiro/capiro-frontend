@@ -159,7 +159,11 @@ export class ObjectivePlannerConsentSession {
   execute = () =>
     this.run(async (signal) => {
       let retained = await this.load(signal);
-      if (retained?.receipt) return this.observe(retained, signal);
+      if (retained?.receipt) {
+        await this.observe(retained, signal);
+        await this.current(signal);
+        return;
+      }
       if (!retained) {
         const saved = await this.ports.saved(signal);
         this.assert(signal);

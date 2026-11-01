@@ -104,14 +104,22 @@ export function plannerConsentAvailability(
       !(
         origin.consent &&
         !origin.consent.expired &&
-        origin.control.cancelledAt === null
+        origin.control.cancelledAt === null &&
+        !(
+          origin.reconciliation === "accounted" &&
+          origin.accounting?.sourceRevision.id ===
+            saved.source.objectiveRevisionId &&
+          (origin.accounting.outcome === "failed" ||
+            origin.accounting.outcome === "cancelled")
+        )
       ),
     canCancel:
       origin.control.currentAuthorizationRequestId !== null &&
       origin.control.cancelledAt === null &&
       !(
-        origin.accounting?.outcome === "applied" &&
-        origin.accounting.sourceRevision.id === saved.source.objectiveRevisionId
+        origin.reconciliation === "accounted" &&
+        origin.accounting?.sourceRevision.id ===
+          saved.source.objectiveRevisionId
       ),
   };
 }

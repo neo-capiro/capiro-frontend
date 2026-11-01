@@ -3,6 +3,7 @@ import {
   useLayoutEffect,
   useMemo,
   useSyncExternalStore,
+  useRef,
   type ReactNode,
 } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -27,6 +28,10 @@ export function ObjectiveLegacyPlanBoundary({
   actor: ClientWriter;
   children: ReactNode;
 }) {
+  const sourceKey = JSON.stringify([actor.tenantId, actor.userId, selection]);
+  const verified = useRef<{ key: string; job: ObjectiveGenerationJob } | null>(
+    null,
+  );
   const read = useCapiroQuery("strategies.objectiveDraftJob", {
     params: { jobId: selection.ids.generatedJobId },
   });
@@ -34,21 +39,36 @@ export function ObjectiveLegacyPlanBoundary({
   if (!read.loading && !read.error && read.data) {
     try {
       job = requireGeneratedStrategy(read.data, selection);
+      verified.current = { key: sourceKey, job };
     } catch {
       /* No substituted original journal. */
     }
   }
-  if (!job)
-    return (
-      <p role="status">
-        Verifying the saved Strategy and original Planner recovery.
+  const unavailable = read.loading ? (
+    <p role="status">
+      Verifying the saved Strategy and original Planner recovery.
+    </p>
+  ) : (
+    <section className="card stack">
+      <p role="alert">
+        The saved Strategy could not be verified. Original Planner recovery and
+        new consent remain unavailable.
       </p>
-    );
+      <button type="button" className="button" onClick={read.reload}>
+        Retry saved Strategy read
+      </button>
+    </section>
+  );
+  const original =
+    job ??
+    (verified.current?.key === sourceKey ? verified.current.job : undefined);
+  if (!original) return unavailable;
   return (
     <OriginalPlan
-      key={JSON.stringify([actor.tenantId, actor.userId, selection])}
-      job={job}
+      key={sourceKey}
+      job={original}
       actor={actor}
+      blocked={!job ? unavailable : undefined}
     >
       {children}
     </OriginalPlan>
@@ -58,21 +78,26 @@ function OriginalPlan({
   job,
   actor,
   children,
+  blocked,
 }: {
   job: ObjectiveGenerationJob;
   actor: ClientWriter;
   children: ReactNode;
+  blocked?: ReactNode;
 }) {
   const api = useApi(),
     cache = useQueryClient();
+  // The keyed parent owns exact job/source identity. A fresh read of that same
+  // immutable identity must not forget a request remembered by this mounted view.
+  const originalJob = useRef(job).current;
   const session = useMemo(
     () =>
       new ObjectivePlanSession(
         api,
-        job,
-        createPlanRecovery(api, cache, actor, job),
+        originalJob,
+        createPlanRecovery(api, cache, actor, originalJob),
       ),
-    [api, cache, actor.tenantId, actor.userId, job],
+    [api, cache, actor.tenantId, actor.userId, originalJob],
   );
   const state = useSyncExternalStore(
     session.subscribe,
@@ -89,6 +114,7 @@ function OriginalPlan({
       session.suspend();
     };
   }, [session]);
+  if (blocked) return blocked;
   if (state.request)
     return (
       <section
