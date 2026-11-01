@@ -12,6 +12,10 @@ import {
 } from "./input";
 import { boundedConversationStream } from "./stream";
 import { trustedConversationFrontendOrigin } from "./frontend-origin";
+import {
+  beginHistoryTransportDiagnostic,
+  historyTraceHeader,
+} from "./history-diagnostics";
 
 const responseHeaders = [
   "content-type",
@@ -151,32 +155,41 @@ export async function proxyConversationRequest(
   config: ConversationProxyConfig,
   getNativeToken: () => Promise<string | null>,
   fetcher: typeof fetch = fetch,
+  beginHistoryDiagnostic = beginHistoryTransportDiagnostic,
 ) {
   const route = conversationRoute(path);
   if (!route) return unavailable(404);
+  const diagnostic = route === "history" ? beginHistoryDiagnostic() : undefined;
+  const localResponse = (status: number) => {
+    diagnostic?.finish(status, "response");
+    return unavailable(status);
+  };
   if (request.method !== (route === "reconnect" ? "GET" : "POST"))
-    return unavailable(405);
+    return localResponse(405);
   if (!validConversationRequest(request, path, route, config.requestOrigin))
-    return unavailable(400);
+    return localResponse(400);
+  diagnostic?.stage("configuration");
   const origin = configuredOrigin(config);
   const frontendOrigin = trustedConversationFrontendOrigin(
     request,
     config.frontendOrigin,
     config.requestOrigin,
   );
-  if (!origin || !frontendOrigin) return unavailable(502);
+  if (!origin || !frontendOrigin) return localResponse(502);
+  diagnostic?.stage("session");
   const transport = new AbortController();
   const abort = () => transport.abort();
   request.signal.addEventListener("abort", abort, { once: true });
   if (request.signal.aborted) abort();
   try {
-    return await withActionDeadline(
+    const result = await withActionDeadline(
       [request.signal, transport.signal],
       async (signal) => {
         const token = await getNativeToken();
         signal.throwIfAborted();
         const session = receivedActionSession(request);
         if (!token || !session) return unavailable(401);
+        diagnostic?.stage("request");
         let body: Uint8Array<ArrayBuffer> | undefined;
         if (route !== "reconnect") {
           try {
@@ -194,7 +207,9 @@ export async function proxyConversationRequest(
           frontendOrigin,
           Boolean(body),
         );
+        if (diagnostic) headers.set(historyTraceHeader, diagnostic.trace);
         signal.throwIfAborted();
+        diagnostic?.stage("fetch");
         const response = await fetcher(`${origin}/api/conversations/${path}`, {
           method: request.method,
           ...(body ? { body } : {}),
@@ -204,6 +219,8 @@ export async function proxyConversationRequest(
           cache: "no-store",
           signal,
         });
+        diagnostic?.stage("receive");
+        diagnostic?.received(response.status);
         try {
           return await receivedConversation(
             response,
@@ -219,9 +236,12 @@ export async function proxyConversationRequest(
       },
       route === "inputAllocate" ? initial.limits.maxRequestMs : undefined,
     );
+    diagnostic?.finish(result.status, "response");
+    return result;
   } catch {
     transport.abort();
     // A dispatched write may have reached Meri; no outcome or automatic retry is invented.
+    diagnostic?.finish(502, "failure");
     return unavailable(502);
   } finally {
     request.signal.removeEventListener("abort", abort);
