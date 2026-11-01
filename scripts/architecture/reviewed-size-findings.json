@@ -3970,10 +3970,10 @@
     "file": "apps/web/src/shared/session/recovery/journal.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "7a8decee42db3caf21ddd1d4a672bda3ed16ec5cf177823b1cd35ef72c94b5ad",
-    "reason": "The canonical encrypted recovery journal adds one guarded named newsletter refusal retirement and its disposition union member. The guard decodes the existing immutable record and invokes the public exact request/document/base-revision refusal receiver before the unchanged retirement path erases sensitive payload and verifies the positive tombstone. Existing reservation, encryption, storage locks, current-record verification and acknowledgement remain byte-preserved. A small domain retirement guard belongs with the existing named retirement family; no parallel journal is introduced.",
-    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "d86027945f653644b813c155e273ae9921b1aafdd17e0ac3b99241137fabefa5",
+    "reason": "The existing encrypted recovery journal remains the sole durable attempt owner. This change adds one narrowly typed Objective Question refusal code and a retirement wrapper that validates the original command request ID plus exact refusal marker before delegating to the existing locked retireRecovery path. It does not create new storage or command execution. The independently reviewed Question session requires a definitive original-request refusal and fresh current source read before explicit acknowledgment; unknown or failed reads stay pending. Existing journal regression tests and new Question recovery tests cover this integration.",
+    "reviewedBy": "Independent Codex area10 parent; not Question journal change author",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
@@ -6153,10 +6153,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveGovernedPlanner.tsx",
     "kind": "function",
     "symbol": "GovernedPlannerOutputs",
-    "fingerprint": "484f6dd0645d9c6bf6980649c29301cc6fd7ddd03356b616283f0332f2ff4336",
-    "reason": "Private component rendering the current governed Planner output/project for a verified generation: it reads the outputs through the governed-output request, and reverifies project access before navigating. Verification and request shaping are delegated to objective-governed-planner-read and the shared governed-output selectors. One responsibility under the objectives governed-planner surface owner.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "592bc672bb7dd8bac336b8935cf0ce1cc05d79917fb40f887d830d90f3eca9f6",
+    "reason": "Existing 113-line current Planner output view retains exact source-scoped read, safe unavailable/pending states and fresh Core/Planner authorization before navigation. This change only narrows its prop type to the already existing GovernedPlannerObjective contract so the new saved-source action can reuse it. Runtime behavior and permission owners are unchanged; review inspected actual read and reverify calls. No new action or authority is inferred from its output receipt.",
+    "reviewedBy": "Independent Codex /root/operational_links; not Automation author",
+    "reviewedOn": "2026-11-01"
   },
   {
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveStrategyIntake.tsx",
@@ -7649,6 +7649,60 @@
     "fingerprint": "433feae9e5f76e9e200e618c70ec915a87b344ad1f9cebdbff64b73da5ce1fbc",
     "reason": "One pure local structure reducer; insertSection and insertBlock admit canonical cloned content with fresh identities, and beforeId selects a position in the existing validated container. All operations use one clone and the same size/depth/cycle/source preservation checks, leaving input unchanged on refusal. Persistence and UI remain outside this module.",
     "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/objective-destinations/ObjectiveGeneratedStrategy.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveGeneratedStrategy",
+    "fingerprint": "5802a50b9944608aa68473115f74f1abff6ae740fa14fe5c10a0be239ff234f7",
+    "reason": "One receipt-bound saved Strategy read view owns selection validation, loading/error suppression and presentation of the same immutable snapshot, graph and separate current-node observations. The fixed GET and strict receiver own transport and contract validation; Core owns authorization and immutable job/version admission; Planner owns consent and materialization. No mutation, request identity allocation, generation loop, grouping decision or authority is added here. The 105 nonblank-line JSX-heavy body is one cohesive view; splitting solely for size would scatter the exact-snapshot/error boundary. Independently reviewed at fdc7cb68afcabaea04b49c2f5a33ca3300bed2a2 with 47 focused frontend tests passing, including mismatched selections and loading/error suppression.",
+    "reviewedBy": "Independent Codex /root/paired_saved_review",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/questions/ObjectiveQuestionsPanel.tsx",
+    "kind": "function",
+    "symbol": "CurrentQuestions",
+    "fingerprint": "e181c84b7511c8396dc57abfe01304f89a1853dcc50a7be9ab966be1f07224d6",
+    "reason": "One Objective-scoped collection composes filtering/pagination, its create form and the existing journal-backed command outcome/recovery controls. QuestionCard owns individual question and history presentation, QuestionSession owns durable request identity/recovery, fixed operations own wire validation, and Core owns state/authority. Keeping this JSX view together preserves the one pending-command fence across the collection. It introduces no second command or permission owner. Independent source review includes denied/stale/foreign loading suppression and original-attempt recovery tests.",
+    "reviewedBy": "Independent Codex area10 parent; not Questions author",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/questions/QuestionCard.tsx",
+    "kind": "function",
+    "symbol": "QuestionCard",
+    "fingerprint": "f7f0f86bad6a654678fdb86029719fdd76507ce71b88ba6031f72b9400e5f273",
+    "reason": "One question card renders its saved answer/source status, its answer/close/reopen affordances and a separately implemented history view. Command execution remains in QuestionSession and Core; this JSX-heavy form does not own network/persistence/authorization. Its current/stale rendering and disabled close behavior were independently checked.",
+    "reviewedBy": "Independent Codex area10 parent; not Questions author",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/operational/ObjectiveOperationalPage.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveOperationalPage",
+    "fingerprint": "efa76f75e47fa1bf91538b9424cf8d33e059a88e8d96ed4852620e8542c8b75d",
+    "reason": "One Objective-scoped operational container composes independently owned linked-work, saved-generation and Questions views. Both added children receive the same current Objective; Questions retains current edit/loading hints and reload callback, while saved-generation discovery and Planner consent keep their own canonical read/action owners. Existing navigation, criteria, query errors and association dialog callbacks are preserved byte-for-byte. No mutation or alternate authority logic is added to this container. Exact conflict composition was checked independently against both accepted source deltas.",
+    "reviewedBy": "Independent Codex objective_questions agent; not root conflict-composition author",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectivePlannerAutomation.tsx",
+    "kind": "function",
+    "symbol": "PlannerAutomation",
+    "fingerprint": "65275b0089168e69741c7a834cde3fc616e9d8764a6fcb4f57cf1c94ecdc5daa",
+    "reason": "One action-specific React composition binds fixed read/consent operations to the existing canonical Planner consent session and renders its consent, cancel, recovery and result controls. The session owns original request identity and successor rules; the journal owns persistence; Core and the canonical continuation worker own authority and effects. The 151-line JSX-heavy function has no alternate materializer, model loop, provider or persistence implementation. Keeping one session boundary ties loading/error/consent controls together. Independently reviewed exact 44cb0c9c source with58 focused tests; native/browser acceptance remains separate.",
+    "reviewedBy": "Independent Codex /root/operational_links; not Automation author",
+    "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/objective-planner-consent-recovery.ts",
+    "kind": "function",
+    "symbol": "createPlannerConsentRecovery",
+    "fingerprint": "3acd87aa27df0b0da7dd864816eca938e7a25bd6208cd2cc0c21dd61211aef34",
+    "reason": "One 84-line adapter binds the existing encrypted recovery journal to one actor/tenant/Objective-version consent scope. It centralizes immutable request/origin/receipt validation, current-source guard, shared command lock and explicit acknowledgement only after rereading the exact original receipt. No new ledger or storage mechanism is introduced. Keeping reserve/save/acknowledge together makes replacement and unknown-outcome refusal auditable. Independently reviewed final44cb0c9c alongside the actual journal owner and58 focused lifecycle/recovery checks.",
+    "reviewedBy": "Independent Codex /root/operational_links; not Automation author",
     "reviewedOn": "2026-11-01"
   }
 ]
