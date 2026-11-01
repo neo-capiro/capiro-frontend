@@ -12,7 +12,10 @@
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { connectorRecoveryStore } from "../../../../shared/meri-connectors/recovery-store";
-import { useIdentity } from "../../../../shared/portfolio/auth/identity";
+import {
+  canAdminister,
+  useIdentity,
+} from "../../../../shared/portfolio/auth/identity";
 import { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
 import {
   createConnectorClient,
@@ -63,6 +66,7 @@ export function ConnectorLibraryHost({ chrome }: { chrome: SettingsChrome }) {
       key={`${tenantId}/${userId}`}
       tenantId={tenantId}
       actorId={userId}
+      admin={canAdminister(current?.role)}
       chrome={chrome}
     />
   );
@@ -72,10 +76,13 @@ function Connected({
   chrome,
   tenantId,
   actorId,
+  admin,
 }: {
   chrome: SettingsChrome;
   tenantId: string;
   actorId: string;
+  /** Only an administrator sees Core's stored error text under a connected row. */
+  admin: boolean;
 }) {
   const api = useCapiro();
   const client = useMemo(
@@ -372,7 +379,7 @@ function Connected({
           title: "Connected",
           description:
             "Stored authorizations Core reports for this account. A stored row is not a health claim; Meri still checks the connection on every call.",
-          rows: connectedServiceRows(rows, library?.connectors ?? []),
+          rows: connectedServiceRows(rows, library?.connectors ?? [], admin),
         },
         openCardId,
         busyId,

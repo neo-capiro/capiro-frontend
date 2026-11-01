@@ -228,10 +228,12 @@ export function ConnectorLibraryScreen({
                   {row.problem ? (
                     <span className={styles.connectionStatus}>
                       {row.problem.summary}
-                      <details className={styles.connectionDetail}>
-                        <summary>Details</summary>
-                        <code>{row.problem.technical}</code>
-                      </details>
+                      {row.problem.technical && (
+                        <details className={styles.connectionDetail}>
+                          <summary>Details</summary>
+                          <code>{row.problem.technical}</code>
+                        </details>
+                      )}
                     </span>
                   ) : null}
                 </div>

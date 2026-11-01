@@ -239,29 +239,38 @@ describe("stored connectors", () => {
     ).toBe(false);
   });
 
-  it("turns Core's stored lastError into what the person can do and keeps the text as detail", () => {
+  it("turns Core's stored lastError into what the person can do; the text reaches admins only", () => {
     expect(connectedServiceRow(storedRow()).problem).toBeUndefined();
-    const failed = (lastError: string) =>
+    const failed = (lastError: string, admin = false) =>
       connectedServiceRow(
         storedRow({ connectionStatus: "error", lastError }),
         "Clio",
+        admin,
       ).problem;
     const operator =
       "MCP stdio command is not allowlisted (set CLIO_MCP_STDIO_ALLOWED_COMMANDS — operator action)";
     expect(failed(operator)).toEqual({
       summary:
         "This connector isn't available yet. An administrator needs to enable it.",
+    });
+    expect(failed(operator, true)).toEqual({
+      summary:
+        "This connector isn't available yet. An administrator needs to enable it.",
       technical: operator,
     });
     for (const unreachable of [
       "The app could not be reached. Please try again.",
+      "The app could not finish connecting. Please try again.",
       "Tool discovery failed.",
     ])
-      expect(failed(unreachable)?.summary).toBe(
-        "Couldn't reach Clio; try again later.",
-      );
+      expect(failed(unreachable)).toEqual({
+        summary: "Couldn't reach Clio; try again later.",
+      });
     expect(failed("HTTP 500")).toEqual({
-      summary: "Clio reported a problem; try again or reconnect it.",
+      summary: "Capiro could not connect to Clio.",
+    });
+    expect(failed("HTTP 500", true)).toEqual({
+      summary: "Capiro could not connect to Clio.",
       technical: "HTTP 500",
     });
   });

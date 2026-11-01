@@ -69,29 +69,35 @@ export function statusLabel(status: ConnectorRow["connectionStatus"]): string {
 export type ConnectionProblem = {
   /** What the person can do about it. */
   summary: string;
-  /** Core's stored text, kept behind a disclosure for whoever administers the connector. */
-  technical: string;
+  /** Core's stored text, carried only for an administrator; it can name env vars and operator steps. */
+  technical?: string;
 };
 
-/**
- * Core stores the provider's or the operator's text verbatim (an env-var instruction, a transport
- * exception). The row says what the person can do; the stored text stays available as detail.
- */
+// Core's stored texts, as emitted by apps/api/src/meri: `meri-mcp-transport.ts` refuses a stdio
+// command with "MCP stdio command is not allowlisted (set CLIO_MCP_STDIO_ALLOWED_COMMANDS —
+// operator action)"; `meri-mcp.service.ts` stores "The app could not be reached. Please try
+// again.", "The app could not finish connecting. Please try again." and "Tool discovery failed.";
+// `meri-managed-mcp.service.ts` raises the same "could not be reached" text.
+const operatorAction = "MCP stdio command is not allowlisted";
+const unreachable: ReadonlySet<string> = new Set([
+  "The app could not be reached. Please try again.",
+  "The app could not finish connecting. Please try again.",
+  "Tool discovery failed.",
+]);
+
+/** The row says what the person can do; the stored text reaches administrators only. */
 export function connectionProblem(
   lastError: string | null,
   service: string,
+  admin = false,
 ): ConnectionProblem | undefined {
   if (!lastError) return undefined;
-  const summary = /allowlist|operator action|not configured|not enabled/i.test(
-    lastError,
-  )
+  const summary = lastError.startsWith(operatorAction)
     ? "This connector isn't available yet. An administrator needs to enable it."
-    : /could not be reached|could not finish connecting|discovery failed|timed out|unavailable/i.test(
-          lastError,
-        )
+    : unreachable.has(lastError)
       ? `Couldn't reach ${service}; try again later.`
-      : `${service} reported a problem; try again or reconnect it.`;
-  return { summary, technical: lastError };
+      : `Capiro could not connect to ${service}.`;
+  return admin ? { summary, technical: lastError } : { summary };
 }
 
 export type ConnectedServiceRow = {
@@ -144,6 +150,7 @@ export function stamp(value: string | null | undefined): string | undefined {
 export function connectedServiceRow(
   row: ConnectorRow,
   name = row.name,
+  admin = false,
 ): ConnectedServiceRow {
   const scope =
     row.scope === "tenant" ? "Firm-wide (admin-managed)" : "Personal to you";
@@ -161,7 +168,7 @@ export function connectedServiceRow(
     access,
     tools: `${row.toolAllowlist.length} allowed tool${row.toolAllowlist.length === 1 ? "" : "s"}`,
     lastSync: stamp(row.lastSyncAt) ?? "None recorded",
-    problem: connectionProblem(row.lastError, name),
+    problem: connectionProblem(row.lastError, name, admin),
     canManage: row.canManage,
     canAuthorize: row.canManage && row.authType === "oauth",
     authType: row.authType,
@@ -172,11 +179,13 @@ export function connectedServiceRow(
 export function connectedServiceRows(
   rows: readonly ConnectorRow[],
   connectors: readonly LibraryConnector[] = [],
+  admin = false,
 ): ConnectedServiceRow[] {
   return rows.map((row) =>
     connectedServiceRow(
       row,
       connectors.find((entry) => entry.id === row.catalogId)?.name ?? row.name,
+      admin,
     ),
   );
 }

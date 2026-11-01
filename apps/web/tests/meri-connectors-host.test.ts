@@ -58,6 +58,7 @@ vi.mock("../src/shared/portfolio/auth/identity", () => ({
   useIdentity: () => ({
     data: { user: { id: state.actor }, tenant: { id: "tenant" } },
   }),
+  canAdminister: () => false,
 }));
 vi.mock("../src/shared/capiro/CapiroBoundary", () => {
   const api = { request: state.request };
