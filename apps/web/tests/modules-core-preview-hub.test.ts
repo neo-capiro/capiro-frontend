@@ -81,8 +81,8 @@ it("keeps the ordinary Modules hub on its existing Capiro operation", () => {
 
   expect(
     state.capiroOptions.filter((options) => options !== undefined),
-  ).toEqual(Array.from({ length: 4 }, () => ({ enabled: true })));
-  expect(state.capiroOptions).toHaveLength(6);
+  ).toEqual(Array.from({ length: 6 }, () => ({ enabled: true })));
+  expect(state.capiroOptions).toHaveLength(8);
   expect(html).toContain("Everything in Capiro");
   expect(html).toContain("Run the work");
   expect(html).toContain('href="/modules/engagement"');

@@ -6,6 +6,11 @@ import { useHubFundingMetric } from "./useHubFundingMetric";
 import { useHubDirectoryMetric } from "./useHubDirectoryMetric";
 import { useHubOwnedMetrics } from "./useHubOwnedMetrics";
 import { ownedMetrics, type OwnedMetricModule } from "./hub-owned-metrics";
+import { useHubAggregateMetric } from "./useHubAggregateMetric";
+import {
+  aggregateMetrics,
+  type AggregateMetricModule,
+} from "./hub-aggregate-metrics";
 
 export function HubCardMetrics({
   module,
@@ -18,6 +23,8 @@ export function HubCardMetrics({
   if (module === "directory") return <DirectoryMetric />;
   if (module === "planner" || module === "strategies" || module === "workspace")
     return <OwnedMetric module={module} clientId={clientId} />;
+  if (module === "engagement" || module === "research-portfolios")
+    return <AggregateMetric module={module} clientId={clientId} />;
   return (
     <HubMetric
       label="Activity metrics"
@@ -38,6 +45,35 @@ function OwnedMetric({
 }) {
   const metric = useHubOwnedMetrics(module, clientId);
   const definition = ownedMetrics[module];
+  return (
+    <section aria-label={`${definition.label} metrics`}>
+      <HubMetric label={definition.label} state={metric.state} />
+      <p>
+        {clientId ? "Selected client" : "All accessible work"}
+        {" · "}
+        {definition.basis}
+      </p>
+      {metric.notice && <small>{metric.notice}</small>}
+      <button
+        type="button"
+        onClick={metric.refresh}
+        disabled={!metric.canRefresh || metric.state.status === "loading"}
+      >
+        Refresh {definition.label.toLowerCase()}
+      </button>
+    </section>
+  );
+}
+
+function AggregateMetric({
+  module,
+  clientId,
+}: {
+  module: AggregateMetricModule;
+  clientId: string;
+}) {
+  const metric = useHubAggregateMetric(module, clientId);
+  const definition = aggregateMetrics[module];
   return (
     <section aria-label={`${definition.label} metrics`}>
       <HubMetric label={definition.label} state={metric.state} />

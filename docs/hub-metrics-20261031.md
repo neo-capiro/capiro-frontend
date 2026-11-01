@@ -131,3 +131,46 @@ source handback. Source tests are not live acceptance: compatible owner services
 must be deployed before these consumers, followed by actual actor/client,
 revocation, zero, unavailable, reload and refresh checks. B9 is not Done from
 these source changes.
+
+# Engagement and Research Portfolio aggregate continuation
+
+The two remaining Hub consumers are implemented as receiving contracts only; no
+producer is merged, sealed or serving for either metric yet, so the cards show
+honest unavailability until their owners publish the aggregate.
+
+Both read `status` rather than Planner's `state`. `complete` carries a safe
+nonnegative integer `count`, `complete: true`, `capped: false`. `incomplete`
+carries `count: null`, `complete: false`, `capped: true`; the count is withheld
+and no partial value is displayed. The consumer validates metric identity,
+version 1, the exact returned scope, ISO timestamps and branch coherence, and it
+never derives a population, window, dedup or authorization decision.
+
+Engagement reads `engagement.metrics.personalClassicOutreach30d` from
+`GET /engagement/outreach-metrics` on the existing engagement service prefix.
+The producer owns the personal Classic unfiltered or exact-client scope, current
+actor/tenant authority, the exclusion of internal record types and the eligible
+General records. `window` is the producer's fixed 30 x 24-hour UTC `[start,end)`
+window with `basis: created_or_sent`; one canonical saved outreach ID counts once
+even when both dates fall inside it. The consumer rejects a non-30-day span, a
+different bound label or a sent-only basis, and it displays a producer window as
+reported even when that window is old relative to `observedAt`. The producer's
+maximum 100-candidate authority universe surfaces as an incomplete observation,
+never as the first 100 records. Not sent-message volume, tenant totals or G03
+recorded activity.
+
+Research Portfolio reads `researchPortfolios.metrics.active` from
+`GET /research-portfolios/metrics` on the existing Core service prefix. Scope is
+the current same-tenant viewer/editor/owner grant unfiltered (including unlinked
+General portfolios) or an exact client with a current client wall plus a saved
+exact link. Duplicate grants and client links do not multiply the count, and
+watches, actions, members and outputs are not portfolio identities. There is no
+window field. The producer's 4096-row authority observation bound surfaces as
+`capped: true` incomplete with a withheld count; 4097 detects the overflow. A
+canonical absent Classic membership yields 404 and a Research denial yields 403;
+neither may be retried as General scope.
+
+Refresh stays manual plus every minute while mounted, the freshness clock is ten
+seconds, and 401/403 deny, while 404 and transport or schema failures are
+unavailable without exposing raw errors. Invalid selected clients suppress the
+request entirely, replaced reads abort, and late responses cannot replace a
+newer scope. Preview stays roster-only with no metric reads.
