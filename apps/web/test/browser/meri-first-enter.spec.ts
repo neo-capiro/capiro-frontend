@@ -10,12 +10,14 @@ import {
   reply,
   runFor,
   setupConversation,
+  stopButton,
 } from "./meri-conversation-fixtures";
 import { installInitialInput } from "./meri-initial-input-fixtures";
 import {
   installCurrentRun,
   installHistory,
   installReservation,
+  reserved,
   selectedUrl,
 } from "./meri-history-fixtures";
 
@@ -161,4 +163,39 @@ test("a message waits on the conversation check only for a bounded time, then th
   await page.clock.fastForward(1_000);
   expect(reservations).toBe(0);
   await expect(composer(page)).toHaveValue("Second message");
+});
+
+test("a message queued during a run longer than the check wait is still sent once when the run finishes", async ({
+  page,
+}) => {
+  test.setTimeout(60_000);
+  await setupConversation(page, undefined, [context, contextFor(nextBinding)]);
+  let running = true;
+  const native = await installInitialInput(page, () => running);
+  let reservations = 0;
+  await page.route("**/api/conversations/next-turn", (route) => {
+    reservations += 1;
+    return reply(route, { ...reserved, replayed: false });
+  });
+  // The queued message's own admission after the reservation is outside this fixture's single allocation.
+  await page.route("**/api/conversations/input/admit", (route) =>
+    reservations > 0 ? route.abort() : route.fallback(),
+  );
+  await page.goto(`/meri?clientId=${clientId}`);
+  await composer(page).fill("First message");
+  await composer(page).press("Enter");
+  await expect(stopButton(page)).toBeEnabled();
+  expect(native.calls.submit).toHaveLength(1);
+  await composer(page).fill("Second message");
+  await composer(page).press("Enter");
+  await expect(page.getByText(/Queued: sends when Meri finishes/)).toBeVisible();
+
+  // The run takes ten seconds, longer than the conversation-check wait; it must not use up that wait.
+  await page.waitForTimeout(10_000);
+  await expect(page.getByText(/Queued: sends when Meri finishes/)).toBeVisible();
+  expect(reservations).toBe(0);
+  running = false;
+  await expect.poll(() => reservations, { timeout: 20_000 }).toBe(1);
+  await page.waitForTimeout(1_000);
+  expect(reservations).toBe(1);
 });

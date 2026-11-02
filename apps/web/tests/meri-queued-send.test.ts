@@ -24,15 +24,20 @@ it("a queued message is sent once when the run finishes and the queue clears fir
   expect(step(sent.state, false, true, false).send).toBe(false);
 });
 
-it("Stop keeps the draft and says so; the notice clears when a new message is on its way", () => {
+it("Stop keeps the draft and says so while the stopped run ends; the notice clears on the next send", () => {
   const stopped = stopQueue(queueMessage());
   expect(stopped).toEqual({
     queued: false,
     released: { reason: STOPPED_NOTICE, block: false },
   });
-  // The run ends and nothing blocks: the notice stays until the person sends again.
-  expect(step(stopped, false, true, false)).toEqual({ state: stopped, send: false });
-  expect(step(stopped, true, false, false).state).toEqual(idle);
+  // Right after Stop the run is still active (waiting): the notice stays.
+  expect(step(stopped, true, false, false)).toEqual({ state: stopped, send: false });
+  // The run ends: still shown, now marked as having outlived it.
+  const ended = step(stopped, false, true, false).state;
+  expect(ended.released?.reason).toBe(STOPPED_NOTICE);
+  expect(step(ended, false, true, false).state).toBe(ended);
+  // The person sends again: a run is waiting once more, and the notice clears.
+  expect(step(ended, true, false, false).state).toEqual(idle);
   expect(stopQueue(idle)).toBe(idle);
 });
 

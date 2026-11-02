@@ -1,8 +1,11 @@
 "use client";
 import { useEffect, useEffectEvent, useState } from "react";
 
-/** Why the queue let go of the message; `block` reasons last only while that block does. */
-type Released = Readonly<{ reason: string; block: boolean }>;
+/**
+ * Why the queue let go of the message. `block` reasons last only while that block does. The Stop notice
+ * lasts until the next send: it outlives the stopping run (`idle` marks that nothing was waiting since).
+ */
+type Released = Readonly<{ reason: string; block: boolean; idle?: boolean }>;
 export type QueueState = Readonly<{ queued: boolean; released?: Released }>;
 export const STOPPED_NOTICE = "Stopped; your message is kept.";
 
@@ -25,9 +28,17 @@ export function nextQueueState(
       send: false,
     };
   if (state.queued && input.ready) return { state: { queued: false }, send: true };
-  // A reason clears once its block has, or once a new message is on its way.
-  if (state.released && (input.waiting || (state.released.block && input.release === false)))
+  // A block's reason clears once its block has. A new message on its way clears any reason, but the Stop
+  // notice only after the stopped run let go (nothing waiting), not while that run is still ending.
+  const released = state.released;
+  if (released?.block && (input.release === false || input.waiting))
     return { state: { queued: state.queued }, send: false };
+  if (released && !released.block) {
+    if (input.waiting && released.idle)
+      return { state: { queued: state.queued }, send: false };
+    if (!input.waiting && !released.idle)
+      return { state: { ...state, released: { ...released, idle: true } }, send: false };
+  }
   return { state, send: false };
 }
 

@@ -486,7 +486,9 @@ export function MeriLiveConversation({
   // emptied box releases it, keeping the text and showing why.
   // The latest-run check of a fresh or reloaded thread counts too: a first Enter waits for it (X15).
   // A message waits on the conversation check only for a bounded time; then the check's own refusal shows.
-  const checking = useBoundedCheck(nextTurnChecking);
+  // The check counts only once no run is active: a run in flight has no terminal source yet, and its own
+  // length must not use up the wait.
+  const checking = useBoundedCheck(nextTurnChecking && !active);
   const waiting =
     active ||
     checking ||
