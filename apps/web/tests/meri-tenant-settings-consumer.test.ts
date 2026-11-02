@@ -47,8 +47,15 @@ describe("canonical tenant settings consumer", () => {
       .mockResolvedValueOnce(json(captured.save));
     const { controller } = await start(fetcher);
     expect(controller.snapshot().status).toBe("ready");
-    await controller.save(model);
-    expect(controller.snapshot().status).toBe("saved");
+    await expect(controller.save(model)).resolves.toBe(true);
+    // A confirmed save leaves the editor usable at the saved revision; no reload is required.
+    expect(controller.snapshot()).toMatchObject({
+      status: "ready",
+      document: { revision: captured.save.revision, model },
+    });
+    expect(controller.snapshot().message).toContain(
+      `revision ${captured.save.revision}`,
+    );
     expect(fetcher).toHaveBeenCalledTimes(2);
     expect(fetcher.mock.calls[0]).toMatchObject([
       "/api/settings/tenant/read",
@@ -67,8 +74,39 @@ describe("canonical tenant settings consumer", () => {
     expect(saveRequest(captured.read, model).settings.capabilityPolicy).toEqual(
       captured.read.capabilityPolicy,
     );
+    // The next edit is compared against the revision just saved, not the one first read.
+    const next = { ...model, maxTurns: 500 };
+    fetcher.mockResolvedValueOnce(
+      json({
+        ...captured.save,
+        revision: captured.save.revision + 1,
+        model: next,
+      }),
+    );
+    await expect(controller.save(next)).resolves.toBe(true);
+    expect(fetcher).toHaveBeenCalledTimes(3);
+    expect(JSON.parse(String(fetcher.mock.calls[2]![1]!.body))).toMatchObject({
+      expectedRevision: captured.save.revision,
+      settings: { model: next },
+    });
+    expect(controller.snapshot()).toMatchObject({
+      status: "ready",
+      document: { revision: captured.save.revision + 1, model: next },
+    });
+  });
+  it("refuses a save made against a revision someone else already replaced", async () => {
+    const fetcher = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(json(captured.read))
+      .mockResolvedValueOnce(json(captured.save))
+      .mockResolvedValueOnce(failure("SETTINGS_REVISION_CONFLICT", 409));
+    const { controller } = await start(fetcher);
     await controller.save(model);
-    expect(fetcher).toHaveBeenCalledTimes(2);
+    await expect(controller.save(model)).resolves.toBe(false);
+    expect(
+      JSON.parse(String(fetcher.mock.calls[2]![1]!.body)).expectedRevision,
+    ).toBe(captured.save.revision);
+    expect(controller.snapshot().status).toBe("conflict");
   });
   it("distinguishes absent monthly policy from unavailable reads without editable fallback", async () => {
     const fetcher = vi
@@ -178,8 +216,8 @@ describe("canonical tenant settings consumer", () => {
     close();
     expect(request.signal?.aborted).toBe(true);
     pending.resolve(json(captured.save));
-    await save;
-    expect(controller.snapshot().status).not.toBe("saved");
+    await expect(save).resolves.toBe(false);
+    expect(controller.snapshot().status).not.toBe("ready");
     expect(controller.snapshot().document).toBeUndefined();
   });
   it("ignores a superseded read even when an adapter disregards abort", async () => {
@@ -200,7 +238,10 @@ describe("canonical tenant settings consumer", () => {
   });
   it("rejects unsafe or rounded monetary input and round-trips exact microUSD", () => {
     expect(modelDraft("1", "0.25", "5")).toEqual(model);
-    expect(modelDraft("1", "0.25", "1000")).toEqual({ ...model, maxTurns: 1000 });
+    expect(modelDraft("1", "0.25", "1000")).toEqual({
+      ...model,
+      maxTurns: 1000,
+    });
     for (const turns of ["0", "1001", "1.5", "NaN", "1e1"])
       expect(modelDraft("1", "0.25", turns)).toBeNull();
     for (const value of [

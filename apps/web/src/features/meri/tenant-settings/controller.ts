@@ -17,7 +17,6 @@ type Status =
   | "loading"
   | "ready"
   | "saving"
-  | "saved"
   | "conflict"
   | "unknown"
   | "denied"
@@ -102,6 +101,7 @@ export class TenantSettingsController {
       if (this.request === request) this.request = null;
     }
   }
+  /** Resolves true only when the owner confirmed the save; the view is then editable at the saved revision. */
   async save(model: ModelLimits) {
     return this.saveSettings(
       (document) => saveRequest(document, model),
@@ -128,21 +128,21 @@ export class TenantSettingsController {
       prior: TenantDocument,
     ) => boolean,
     subject = "Workspace limits",
-  ) {
+  ): Promise<boolean> {
     if (
       !this.active ||
       this.request ||
       this.view.status !== "ready" ||
       !this.view.document
     )
-      return;
+      return false;
     const document = this.view.document;
     let body: TenantSave;
     try {
       body = makeRequest(document);
     } catch (error) {
       this.failedSave(error, document);
-      return;
+      return false;
     }
     const request = new AbortController();
     this.request = request;
@@ -153,7 +153,7 @@ export class TenantSettingsController {
     });
     try {
       const saved = await this.send("save", body, request.signal);
-      if (!this.active || request.signal.aborted) return;
+      if (!this.active || request.signal.aborted) return false;
       if (
         saved.revision !== document.revision + 1 ||
         saved.defaultTimezone !== document.defaultTimezone ||
@@ -161,19 +161,24 @@ export class TenantSettingsController {
         !confirmed(saved, body, document)
       )
         throw new Error("Unconfirmed settings response");
+      // The confirmed response is the owner's complete record at the new revision, so the editor
+      // continues from it: the next save sends that revision and the owner's compare-and-set
+      // refuses it if anything else changed the settings in between.
       this.publish({
-        status: "saved",
+        status: "ready",
         document: {
           ...saved,
           ...(document.browserPlatform
             ? { browserPlatform: document.browserPlatform }
             : {}),
         },
-        message: `${subject} saved. Reload current limits before making another change.`,
+        message: `${subject} saved as revision ${saved.revision}. New runs are admitted against these limits.`,
       });
+      return true;
     } catch (error) {
-      if (!this.active || request.signal.aborted) return;
+      if (!this.active || request.signal.aborted) return false;
       this.failedSave(error, document);
+      return false;
     } finally {
       if (this.request === request) this.request = null;
     }

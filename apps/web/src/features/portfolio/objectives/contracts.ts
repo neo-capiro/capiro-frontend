@@ -123,3 +123,14 @@ export function sameObjectiveFields(
       JSON.stringify(right.strategyIntake ?? null)
   );
 }
+
+/** Status line beside the saved status chip. It reads the saved record, whose
+ * readiness the server supplies; the checklist below covers unsaved edits. */
+export function objectiveSavedStatusNote(record?: Objective) {
+  if (record?.status === "ready") return "Confirmed ready.";
+  if (record?.status === "in_review")
+    return "Review requested. Confirm ready when approved.";
+  if (record?.readiness.isReady)
+    return "Required fields saved. Request review or confirm ready.";
+  return "Complete the required fields before review or ready.";
+}

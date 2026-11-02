@@ -93,12 +93,11 @@ describe("browser settings on the canonical tenant route", () => {
         }),
       );
       await controller.saveBrowser(choices);
-      expect(controller.snapshot().status).toBe("saved");
+      expect(controller.snapshot()).toMatchObject({
+        status: "ready",
+        document: { revision: document.revision + 1 },
+      });
       expect(JSON.parse(String(fetcher.mock.calls[1]![1]!.body))).toEqual(body);
-      await controller.saveBrowser(choices);
-      expect(fetcher).toHaveBeenCalledTimes(2);
-      fetcher.mockResolvedValueOnce(Response.json(document));
-      await controller.load();
       fetcher.mockResolvedValueOnce(
         Response.json(
           { error: { code: "SETTINGS_REVISION_CONFLICT" } },
@@ -106,8 +105,15 @@ describe("browser settings on the canonical tenant route", () => {
         ),
       );
       await controller.saveBrowser(choices);
+      expect(
+        JSON.parse(String(fetcher.mock.calls[2]![1]!.body)).expectedRevision,
+      ).toBe(document.revision + 1);
       expect(controller.snapshot().status).toBe("conflict");
       await controller.saveBrowser(choices);
+      expect(fetcher).toHaveBeenCalledTimes(3);
+      fetcher.mockResolvedValueOnce(Response.json(document));
+      await controller.load();
+      expect(controller.snapshot().status).toBe("ready");
       expect(fetcher).toHaveBeenCalledTimes(4);
     } finally {
       close();

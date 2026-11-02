@@ -57,17 +57,20 @@ async function enterLimits(page: Page) {
   await page.getByLabel("Maximum turns per query", { exact: true }).fill("5");
 }
 
-test("browser admin chooses approved websites, preserves other policy fields and reloads after save", async ({
+test("browser admin chooses approved websites, preserves other policy fields and keeps editing at the saved revision", async ({
   page,
 }) => {
-  let saved = browserDocument;
+  let saved = browserDocument,
+    reads = 0;
   const writes: {
     expectedRevision: number;
     settings: Record<string, unknown>;
   }[] = [];
   await page.route(endpoint, (route) => {
-    if (route.request().url().endsWith("/read"))
+    if (route.request().url().endsWith("/read")) {
+      reads++;
       return route.fulfill({ json: saved });
+    }
     const body = route.request().postDataJSON();
     writes.push(body);
     saved = { ...saved, ...body.settings, revision: saved.revision + 1 };
@@ -85,7 +88,7 @@ test("browser admin chooses approved websites, preserves other policy fields and
   await form.getByRole("button", { name: "Save browser settings" }).click();
   await expect(
     page.getByText(
-      "Browser settings saved. Reload current limits before making another change.",
+      `Browser settings saved as revision ${captured.read.revision + 1}. New runs are admitted against these limits.`,
     ),
   ).toBeVisible();
   expect(writes).toHaveLength(1);
@@ -97,18 +100,25 @@ test("browser admin chooses approved websites, preserves other policy fields and
       allowedOrigins: ["https://records.example"],
     },
   });
-  await expect(
-    form.getByRole("button", { name: "Save browser settings" }),
-  ).toBeDisabled();
-  await page.getByRole("button", { name: "Reload current limits" }).click();
+  // No manual reload: the form stays editable at the saved revision and keeps the saved choice.
+  const notices = form
+    .getByRole("group", { name: "Workspace", exact: true })
+    .getByLabel("https://notices.example", { exact: true });
   await expect(
     form.getByRole("button", { name: "Save browser settings" }),
   ).toBeEnabled();
+  await expect(notices).toBeEnabled();
+  await expect(notices).not.toBeChecked();
+  await notices.check();
+  await form.getByRole("button", { name: "Save browser settings" }).click();
   await expect(
-    form
-      .getByRole("group", { name: "Workspace", exact: true })
-      .getByLabel("https://notices.example", { exact: true }),
-  ).not.toBeChecked();
+    page.getByText(
+      `Browser settings saved as revision ${captured.read.revision + 2}. New runs are admitted against these limits.`,
+    ),
+  ).toBeVisible();
+  expect(writes).toHaveLength(2);
+  expect(writes[1]!.expectedRevision).toBe(captured.read.revision + 1);
+  expect(reads).toBe(1);
 });
 
 test("browser admin conflict blocks repeat writes until reloaded", async ({
@@ -158,7 +168,7 @@ test("disabled tenant slot remains inactive and never reads or writes", async ({
   expect(requests).toBe(0);
 });
 
-test("mounted admin reads existing values, saves complete preserved document once and explicitly reads back", async ({
+test("mounted admin reads existing values, saves complete preserved document once and edits again at the saved revision", async ({
   page,
 }) => {
   let reads = 0;
@@ -172,8 +182,15 @@ test("mounted admin reads existing values, saves complete preserved document onc
         json: reads === 1 ? captured.read : captured.readback,
       });
     }
-    writes.push(route.request().postDataJSON());
-    return route.fulfill({ json: captured.save });
+    const body = route.request().postDataJSON();
+    writes.push(body);
+    return route.fulfill({
+      json: {
+        ...captured.save,
+        revision: body.expectedRevision + 1,
+        model: body.settings.model,
+      },
+    });
   });
   await open(page);
   await expect(
@@ -187,18 +204,29 @@ test("mounted admin reads existing values, saves complete preserved document onc
   await page.keyboard.press("Enter");
   await expect(
     page.getByText(
-      "Workspace limits saved. Reload current limits before making another change.",
+      "Workspace limits saved as revision 8. New runs are admitted against these limits.",
     ),
   ).toBeVisible();
   expect(writes).toEqual([captured.request]);
-  await expect(saveButton(page)).toBeDisabled();
-  await page
-    .getByRole("button", { name: "Reload current limits", exact: true })
-    .click();
+  // The editor continues from the confirmed revision without a manual reload.
   await expect(page.getByText(/Saved revision 8\./)).toBeVisible();
   await expect(saveButton(page)).toBeEnabled();
-  expect(writes).toHaveLength(1);
-  expect(reads).toBe(2);
+  const turns = page.getByLabel("Maximum turns per query", { exact: true });
+  await expect(turns).toBeEnabled();
+  await expect(turns).toHaveValue("5");
+  await turns.fill("500");
+  await saveButton(page).click();
+  await expect(
+    page.getByText(
+      "Workspace limits saved as revision 9. New runs are admitted against these limits.",
+    ),
+  ).toBeVisible();
+  expect(writes).toHaveLength(2);
+  expect(writes[1]).toMatchObject({
+    expectedRevision: 8,
+    settings: { model: { ...captured.request.settings.model, maxTurns: 500 } },
+  });
+  expect(reads).toBe(1);
   expect(errors).toEqual([]);
   await mkdir("test-results/tenant-settings", { recursive: true });
   await page.screenshot({

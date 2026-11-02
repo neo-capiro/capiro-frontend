@@ -852,7 +852,7 @@ test("ordinary sidebar destinations explain held consumers and failed current re
   expect(f.unexpected).toEqual([]);
 });
 
-test("a post-run access check that is not answered keeps the transcript and offers Check access again", async ({
+test("a post-run access check that is not answered (503) keeps the transcript and offers Retry now", async ({
   page,
 }) => {
   test.setTimeout(60_000);
@@ -862,7 +862,11 @@ test("a post-run access check that is not answered keeps the transcript and offe
   await page.route("**/api/action-followthrough/session", (r) => {
     attempts++;
     if (attempts > 1 && !answering)
-      return reply(r, { error: { code: "SESSION_REFUSED" } }, 401);
+      return reply(
+        r,
+        { error: { code: "SESSION_AUTHORITY_UNAVAILABLE" } },
+        503,
+      );
     return reply(r, {
       credential: `action_session_${String(attempts).repeat(43)}`,
       expiresAtMs: Date.now() + (attempts === 1 ? 12_000 : 120_000),
@@ -883,10 +887,10 @@ test("a post-run access check that is not answered keeps the transcript and offe
     page.getByText("Completed answer", { exact: true }),
   ).toBeVisible();
   const check = page.getByRole("button", {
-    name: "Check access again",
+    name: "Retry now",
     exact: true,
   });
-  // Renewal reissues the session; Core never answers (401 through the bounded retries).
+  // Renewal reissues the session; Core never answers (control's 503 through the bounded retries).
   await expect(check).toBeVisible({ timeout: 30_000 });
   await expect(
     page.getByText("Completed answer", { exact: true }),

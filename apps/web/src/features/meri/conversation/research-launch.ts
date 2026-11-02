@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CapiroApiError } from "../../../shared/capiro/http";
 import { researchConversationRow } from "../../../shared/capiro/operations/meri-research-conversation";
 import { researchSelection } from "../../../shared/meri-conversations/research-context";
 import {
@@ -44,6 +45,20 @@ export function receiveResearchConversation(
   return selected;
 }
 
+/**
+ * A 4xx answer (other than a cancelled request) means the gateway or Core refused before
+ * writing, so no conversation exists. 5xx, transport and malformed replies stay uncertain:
+ * Core may have committed the row before its response failed.
+ */
+export function definiteCreateRefusal(error: unknown): error is CapiroApiError {
+  return (
+    error instanceof CapiroApiError &&
+    error.status >= 400 &&
+    error.status < 500 &&
+    error.status !== 408
+  );
+}
+
 /** Existing create has no replay receipt. Persist uncertainty BEFORE dispatch and never replay it. */
 export function researchLaunchOwner(
   account: { tenantId: string; actorId: string },
@@ -69,7 +84,13 @@ export function researchLaunchOwner(
       signal.throwIfAborted();
       if (journal.read()) throw Error("Research creation already attempted");
       journal.write({ state: "unknown" });
-      const raw = await send();
+      let raw: unknown;
+      try {
+        raw = await send();
+      } catch (error) {
+        if (definiteCreateRefusal(error)) journal.clear();
+        throw error;
+      }
       signal.throwIfAborted();
       const selected = receiveResearchConversation(raw, account, {
         portfolioId,

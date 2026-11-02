@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { canonicalListRow } from "../src/features/modules/engagement/outreach/outreach-list-model";
 
 /**
  * Focused regression for the Outreach list's ancillary "campaign sessions" read.
@@ -363,64 +364,77 @@ describe("Outreach list campaign-session capability admission", () => {
 });
 
 /**
- * Campaigns created before campaign workflows existed come back from the campaigns read with
- * `hasWorkflow: false`. Campaign, record and session pages are independent: the hint must explain
- * which rows feed the tabs without promising that a legacy campaign appears in the records page
- * or excluding a matching session from the existing category counts.
+ * Core's campaigns read returns campaign-type outreach records that have not entered the campaign
+ * workflow with `hasWorkflow: false` and a Core-computed category. They are campaigns: the tabs
+ * must count them and the campaign list must show them, once, opening their record editor.
+ * Previously the tabs read 0 while the same rows were listed as "Open draft" records.
  */
-describe("Outreach list legacy campaign counts", () => {
-  it("explains a zero category when campaigns predate campaign workflows", () => {
+describe("Outreach list workflow-less campaigns", () => {
+  it("counts and lists a workflow-less campaign once, under its Core category", () => {
     const markup = render({
-      "engagement.outreach.records": ok({ items: [record()] }),
-      "engagement.campaigns": ok({
-        items: [campaign({ id: "c-legacy", hasWorkflow: false })],
+      "engagement.outreach.records": ok({
+        items: [record({ id: "c-draft", title: "Workflow-less draft" })],
       }),
-      "engagement.sessions": ok([]),
-    });
-    expect(markup).toContain("Saved outreach record");
-    // This workflow-less campaign has no corresponding loaded session.
-    expect(markup).toContain("Campaign drafts · 0");
-    expect(markup).toContain(
-      "1 campaign on the loaded campaigns page has no workflow",
-    );
-    expect(markup).toContain(
-      "Campaign categories count loaded workflow campaigns",
-    );
-    expect(markup).toContain("eligible campaign sessions");
-    expect(markup).toContain("Saved outreach records loads separately");
-    expect(markup).not.toContain("listed under Saved outreach records");
-  });
-
-  it("pluralises the explanation for several legacy campaigns", () => {
-    const markup = render({
-      "engagement.outreach.records": ok({ items: [] }),
       "engagement.campaigns": ok({
         items: [
-          campaign({ id: "c-legacy-1", hasWorkflow: false }),
-          campaign({ id: "c-legacy-2", hasWorkflow: false }),
+          campaign({
+            id: "c-draft",
+            hasWorkflow: false,
+            revision: 0,
+            state: { title: "Workflow-less draft", clientId: "cl-1" },
+          }),
         ],
       }),
       "engagement.sessions": ok([]),
     });
-    expect(markup).toContain(
-      "2 campaigns on the loaded campaigns page have no workflow",
-    );
+    expect(markup).toContain("Campaign drafts · 1");
+    expect(occurrences(markup, "Workflow-less draft")).toBe(1);
+    expect(markup).toContain("Workflow not started");
+    expect(markup).toContain("Open draft");
     expect(markup).toContain("No outreach records yet");
-    expect(markup).not.toContain("they are listed");
-    expect(markup).not.toContain("not counted in the campaign categories");
+    expect(markup).not.toContain("no workflow");
   });
 
-  it("keeps the plain hint when every campaign has a workflow", () => {
+  it("splits several workflow-less campaigns by the category Core returned", () => {
     const markup = render({
       "engagement.outreach.records": ok({ items: [] }),
-      "engagement.campaigns": ok({ items: [campaign()] }),
+      "engagement.campaigns": ok({
+        items: [
+          campaign({ id: "c-1", hasWorkflow: false }),
+          campaign({ id: "c-2", hasWorkflow: false }),
+          campaign({
+            id: "c-3",
+            hasWorkflow: false,
+            status: "sent",
+            category: "sent",
+            recordedSendStatus: "sent",
+          }),
+          campaign({
+            id: "c-4",
+            hasWorkflow: false,
+            status: "failed",
+            category: "attention",
+            recordedSendStatus: "failed",
+          }),
+        ],
+      }),
       "engagement.sessions": ok([]),
     });
-    expect(markup).toContain("Campaign drafts · 1");
-    expect(markup).not.toContain("on the loaded campaigns page");
+    expect(markup).toContain("Campaign drafts · 2");
+    expect(markup).toContain("Sent campaigns · 1");
+    expect(markup).toContain("Needs attention · 1");
   });
 
-  it("does not promise a legacy campaign on a separately paginated records page", () => {
+  it("routes a workflow-less campaign to its record editor and a workflow campaign to the campaign", () => {
+    const rows = [
+      canonicalListRow(campaign({ id: "w", hasWorkflow: true }) as never),
+      canonicalListRow(campaign({ id: "r", hasWorkflow: false }) as never),
+    ];
+    expect(rows.map((row) => row.opens)).toEqual(["campaign", "record"]);
+    expect(rows.map((row) => row.workflow)).toEqual(["active", "not started"]);
+  });
+
+  it("keeps independent record pagination: an unloaded campaign page cannot hide records", () => {
     const markup = render({
       "engagement.outreach.records": ok({
         items: [record({ id: "other-record" })],
@@ -432,14 +446,13 @@ describe("Outreach list legacy campaign counts", () => {
       }),
       "engagement.sessions": ok([]),
     });
-    expect(markup).toContain("Campaign drafts · 0+");
+    expect(markup).toContain("Campaign drafts · 1+");
+    expect(markup).toContain("Saved outreach record");
     expect(markup).toContain("Next outreach records");
     expect(markup).toContain("Next campaigns");
-    expect(markup).toContain("Saved outreach records loads separately");
-    expect(markup).not.toContain("listed under Saved outreach records");
   });
 
-  it("keeps a matching session counted without claiming its ID is excluded", () => {
+  it("counts a campaign once when a loaded session carries the same ID", () => {
     const markup = render(
       {
         "engagement.outreach.records": ok({ items: [] }),
@@ -452,9 +465,7 @@ describe("Outreach list legacy campaign counts", () => {
       "enabled",
     );
     expect(markup).toContain("Campaign drafts · 1");
-    expect(markup).toContain("Session campaign");
-    expect(markup).toContain("eligible campaign sessions");
-    expect(markup).toContain("No outreach records yet");
-    expect(markup).not.toContain("not counted in the campaign categories");
+    expect(markup).toContain("Canonical campaign");
+    expect(markup).not.toContain("Session campaign");
   });
 });

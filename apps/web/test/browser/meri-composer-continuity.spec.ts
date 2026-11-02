@@ -29,7 +29,11 @@ test("synthetic desktop typing survives the native connection transition without
   await composer(page).fill("Original ");
   await expect(composer(page)).toHaveValue("Original ");
   await expect(composer(page)).toBeFocused();
-  await expect(sendButton(page)).toBeDisabled();
+  // While connecting, Send only queues the message for the session (nothing is dispatched until it exists).
+  await expect(sendButton(page)).toHaveAttribute(
+    "title",
+    "Connecting to Meri.",
+  );
   expect(native.calls).toEqual({
     allocate: [],
     admit: [],

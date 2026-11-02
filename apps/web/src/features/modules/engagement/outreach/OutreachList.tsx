@@ -2,7 +2,6 @@
 import { useState, type ReactNode } from "react";
 import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import { useCapiroCapabilities } from "../../../../shared/capiro/capabilities";
-import type { OutreachRecord } from "../../../../shared/capiro/operations/engagement";
 import {
   ActionButton,
   PageHeader,
@@ -40,7 +39,7 @@ export function OutreachList({
   scopeControl?: ReactNode;
   onCreate: () => void;
   onCampaign: (id: string) => void;
-  onRecord: (record: OutreachRecord) => void;
+  onRecord: (id: string) => void;
   initialCategory?: CampaignCategory;
 }) {
   const [category, setCategory] = useState(initialCategory);
@@ -119,17 +118,12 @@ export function OutreachList({
     (row) =>
       clientId && row.state.clientId?.toLowerCase() !== clientId.toLowerCase(),
   );
+  // Core's campaigns read is the canonical list and category source. Campaign-type records that
+  // have not entered the workflow are campaigns too: Core categorises them and adopts them on save.
   const nativeRows = !campaignMismatch
-    ? (campaigns.data?.items ?? [])
-        .filter((row) => row.hasWorkflow)
-        .map(canonicalListRow)
+    ? (campaigns.data?.items ?? []).map(canonicalListRow)
     : [];
   const nativeIds = new Set(nativeRows.map((row) => row.id.toLowerCase()));
-  // Explain this campaigns page without inferring membership in the independent records or
-  // sessions pages. A workflow-less campaign may still have a matching loaded session below.
-  const legacyCampaigns = campaignMismatch
-    ? 0
-    : (campaigns.data?.items ?? []).filter((row) => !row.hasWorkflow).length;
   // Sessions are ancillary and only loaded for the unscoped, undeleted view. When they are
   // unavailable the canonical rows below are still authoritative for what they contain.
   const seenSessionIds = new Set<string>();
@@ -156,6 +150,7 @@ export function OutreachList({
           recordedSend: row.recordStatus,
           category: recordedCategory(row.recordStatus),
           sentAt: row.sentAt,
+          opens: "campaign" as const,
         }));
   const allCampaigns = [...nativeRows, ...sessionRows];
   const visibleRecords = !mismatch
@@ -221,12 +216,7 @@ export function OutreachList({
       />
       <p className={styles.hint}>
         Audience applies to saved outreach records and canonical campaigns.
-        Counts show this loaded page, not population totals.{" "}
-        {legacyCampaigns > 0
-          ? `${legacyCampaigns} ${legacyCampaigns === 1 ? "campaign" : "campaigns"} on the loaded campaigns page ${
-              legacyCampaigns === 1 ? "has" : "have"
-            } no workflow. Campaign categories count loaded workflow campaigns and eligible campaign sessions. Saved outreach records loads separately; check that section for other recorded outreach.`
-          : ""}
+        Counts show this loaded page, not population totals.
       </p>
       <Tabs
         label="Campaign categories"
@@ -357,7 +347,9 @@ export function OutreachList({
               <h2 id="campaign-list-heading">{categoryLabels[category]}</h2>
               <CampaignRows
                 rows={allCampaigns.filter((row) => row.category === category)}
-                onOpen={onCampaign}
+                onOpen={(row) =>
+                  row.opens === "record" ? onRecord(row.id) : onCampaign(row.id)
+                }
               />
               {sessionsSupported &&
                 !sessionsUnavailable &&
@@ -441,7 +433,7 @@ export function OutreachList({
                   </p>
                   {!deleted && (
                     <ActionButton
-                      onClick={() => onRecord(record)}
+                      onClick={() => onRecord(record.id)}
                       aria-label={`Open ${record.status === "draft" ? "draft" : "record"}: ${record.title}`}
                     >
                       Open {record.status === "draft" ? "draft" : "record"}
@@ -509,7 +501,7 @@ function CampaignRows({
   onOpen,
 }: {
   rows: CampaignListRow[];
-  onOpen: (id: string) => void;
+  onOpen: (row: CampaignListRow) => void;
 }) {
   if (!rows.length) return null;
   return (
@@ -528,7 +520,7 @@ function CampaignRows({
           <tr key={row.id}>
             <td>
               <div className={styles.identity}>
-                <button className={styles.name} onClick={() => onOpen(row.id)}>
+                <button className={styles.name} onClick={() => onOpen(row)}>
                   {row.title}
                 </button>
                 <span className={styles.subtitle}>
@@ -547,9 +539,11 @@ function CampaignRows({
               </span>
             </td>
             <td>
-              <ActionButton onClick={() => onOpen(row.id)}>
+              <ActionButton onClick={() => onOpen(row)}>
                 {row.category === "drafts"
-                  ? "Open campaign"
+                  ? row.opens === "record"
+                    ? "Open draft"
+                    : "Open campaign"
                   : row.category === "sent"
                     ? "View sent record"
                     : "Review status"}
