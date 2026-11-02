@@ -24,6 +24,8 @@ const state = vi.hoisted(() => ({
   issuance: undefined as number | undefined,
   hints: [] as Hints[],
   bind: true,
+  /** The connection's clock: each binding is recorded at it. */
+  clock: 0,
 }));
 vi.mock("react", async (original) => {
   const memo = (make: () => unknown, deps: unknown[]) => {
@@ -123,7 +125,7 @@ function render() {
   connection = useConversationConnection(
     account,
     clientId,
-    () => 0,
+    () => state.clock,
     conversationId,
   );
   hooks.pending.splice(0).forEach((run) => run());
@@ -159,6 +161,7 @@ beforeEach(() => {
   state.reason = "expiry";
   state.issuance = undefined;
   state.bind = true;
+  state.clock = 0;
   const data = new Map<string, string>();
   const storage = {
     get length() {
@@ -260,4 +263,95 @@ it("a first open that control did not answer has nothing to keep: it stays the r
   expect(connection.accessLost).toBe(false);
   expect(connection.reconnecting).toBe(false);
   expect(state.hints).toHaveLength(1);
+});
+
+/** The held conversation's session ends for `reason` and the connection reacts; a renewal's new host starts connecting. */
+function ended(reason: string) {
+  state.clock += 1_000;
+  state.status = "expired";
+  state.reason = reason;
+  const hosts = state.hints.length;
+  render();
+  if (state.hints.length > hosts) {
+    state.status = "connecting";
+    state.reason = undefined;
+  }
+  render();
+}
+/** The renewal's new host is issued its session. */
+function renewedReady() {
+  state.status = "ready";
+  render();
+  render();
+}
+
+it("a stream credential control no longer holds (SESSION_REFUSED) is renewed once for the same exact binding", () => {
+  render();
+  render();
+  const hosts = state.hints.length;
+  ended("refused");
+  expect(state.hints).toHaveLength(hosts + 1);
+  expect(state.hints.at(-1)).toMatchObject({ conversationId, runId: id(5) });
+  expect(connection.accessLost).toBe(false);
+  expect(connection.renewing).toBe(true);
+  renewedReady();
+  expect(connection.state.status).toBe("ready");
+  expect(connection.accessLost).toBe(false);
+});
+
+it("the renewed credential refused again before an ordinary renewal is access lost, never another renewal", () => {
+  render();
+  render();
+  ended("refused");
+  renewedReady();
+  const hosts = state.hints.length;
+  ended("refused");
+  render();
+  expect(state.hints).toHaveLength(hosts);
+  expect(state.reason).toBe("access-lost");
+  expect(connection.accessLost).toBe(true);
+});
+
+it("an ordinary renewal in between lets a later refusal renew again", () => {
+  render();
+  render();
+  ended("refused");
+  renewedReady();
+  ended("renewal");
+  renewedReady();
+  const hosts = state.hints.length;
+  ended("refused");
+  expect(state.hints).toHaveLength(hosts + 1);
+  expect(connection.accessLost).toBe(false);
+});
+
+it("a refused credential whose renewal issuance control refuses (401 SESSION_REFUSED) hides the conversation", () => {
+  // Control's stream owner answers every definitive recheck failure (changed identity or member fact, removed
+  // client) as SESSION_REFUSED, and its issuance refuses definitively with 401: a revoked member is not kept.
+  render();
+  render();
+  ended("refused");
+  renewalFails(401);
+  expect(connection.accessLost).toBe(true);
+  expect(connection.unverified).toBe(false);
+});
+
+it("a refused credential whose renewal issuance found the authority unavailable (503) is unverified, not revoked", () => {
+  render();
+  render();
+  ended("refused");
+  renewalFails(503);
+  expect(connection.accessLost).toBe(false);
+  expect(connection.unverified).toBe(true);
+});
+
+it("an ordinary renewal answered 401 keeps its existing unverified handling", () => {
+  render();
+  render();
+  ended("refused");
+  renewedReady();
+  ended("renewal");
+  renewalFails(401);
+  expect(connection.accessLost).toBe(false);
+  expect(connection.unverified).toBe(true);
 });

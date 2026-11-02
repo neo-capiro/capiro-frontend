@@ -67,11 +67,23 @@ function useSessionRenewal({
   // proxy answers 5xx for an unreachable control. For a conversation this tab already holds, what it holds
   // stays readable while the renewal is asked again on the reconnect schedule; a first open has nothing to
   // keep and stays the reconnect panel. Only an explicit 403 or a port-level denial hides the conversation.
+  // The binding whose credential control refused and this tab renewed once; an ordinary renewal clears it.
+  // The ref decides in the effect; the state lets this render read the same fact.
+  const refusedOnce = useRef<string | null>(null);
+  const [refusedBinding, setRefusedBinding] = useState<string | null>(null);
+  // A renewal asked because control refused the held credential is a recheck of that refusal. Control's
+  // stream owner refuses every definitive recheck failure (changed identity or member fact, removed client)
+  // as SESSION_REFUSED, and its issuance answers a definitive refusal 401: here that is access lost, never
+  // an unanswered renewal. An authority that did not answer (503, or the proxy's 5xx) stays unverified.
+  const last = bound.last();
+  const refusalRenewal =
+    last !== null && refusedBinding === JSON.stringify(last.context);
   const [denied, setDenied] = useState(false);
   const issuance = host.getIssuanceStatus();
   const unverified =
     status === "unavailable" &&
-    (issuance === 401 || (transientStatus(issuance) && bound.last() !== null));
+    ((issuance === 401 && !refusalRenewal) ||
+      (transientStatus(issuance) && last !== null));
   const revoked = host.getExpirationReason() === "access-lost" && !unverified;
   if (revoked && !denied) setDenied(true);
   else if (status === "ready" && denied) setDenied(false);
@@ -82,11 +94,21 @@ function useSessionRenewal({
     const last = bound.last();
     if (status !== "expired" || !last) return;
     const reason = host.getExpirationReason();
-    if (reason !== "renewal" && reason !== "expiry") return;
+    if (reason !== "renewal" && reason !== "expiry" && reason !== "refused")
+      return;
     const key = JSON.stringify(last.context) + last.at;
     if (renewed.current === key) return;
     renewed.current = key;
-    reopen({ renewal: reason === "renewal" });
+    const binding = JSON.stringify(last.context);
+    if (reason === "refused") {
+      // Control no longer held the credential (SESSION_REFUSED on the event stream): renew it once for the same
+      // exact binding; issuance rechecks identity and membership and its own 403 still hides the conversation. The
+      // renewed credential refused again before an ordinary renewal is access lost, never another renewal.
+      if (refusedOnce.current === binding) return host.revoke();
+      refusedOnce.current = binding;
+    } else refusedOnce.current = null;
+    setRefusedBinding(refusedOnce.current);
+    reopen({ renewal: reason !== "expiry" });
   }, [status, reopen, bound, host]);
 
   return {
@@ -276,7 +298,8 @@ export function useConversationConnection(
     renewing:
       !storageError &&
       ((state.status === "expired" &&
-        host.getExpirationReason() === "renewal") ||
+        (host.getExpirationReason() === "renewal" ||
+          host.getExpirationReason() === "refused")) ||
         (!!opening.renewal &&
           (state.status === "idle" || state.status === "connecting"))),
     storageError,

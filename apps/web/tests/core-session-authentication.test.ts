@@ -261,3 +261,160 @@ it("keeps unsigned native requests and cross-origin client writes refused", asyn
   ).toBe(403);
   expect(fetcher).not.toHaveBeenCalled();
 });
+
+// Core binds its application-authority session (Clerk `sid`) on these handlers;
+// the capiro template token has no `sid`, so Core answered 401 and the HQ site
+// workflow settings showed "Your session expired". Every configured target.
+it.each([
+  ["settings.siteWorkflows.list", "GET", undefined, "/clio/site-workflows"],
+  [
+    "settings.siteWorkflows.receipt",
+    "POST",
+    { body: { requestId: id } },
+    "/clio/site-workflows/requests/read",
+  ],
+  [
+    "meri.siteWorkflows.catalog",
+    "POST",
+    { body: { conversationId: id } },
+    "/clio/site-workflows/catalog",
+  ],
+] as const)(
+  "registered %s sends the current Clerk session to Core",
+  async (operation, method, input, path) => {
+    for (const target of [base, "http://127.0.0.1:5208/api"]) {
+      vi.stubEnv("CORE_API_BASE_URL", target);
+      getToken.mockClear();
+      fetcher.mockClear();
+      fetcher.mockImplementationOnce(async () =>
+        Response.json(
+          { message: "Synthetic current-scope refusal" },
+          { status: 403 },
+        ),
+      );
+      const response = await gateway[method](
+        new Request(`${origin}/api/capiro/${operation}`, {
+          method,
+          ...(input
+            ? {
+                headers: { Origin: origin, "Content-Type": "application/json" },
+                body: JSON.stringify(input),
+              }
+            : {}),
+        }),
+        { params: Promise.resolve({ operation }) },
+      );
+      expect(response.status).toBe(403);
+      expect(getToken).toHaveBeenCalledExactlyOnceWith();
+      expect(String(fetcher.mock.calls[0]![0])).toBe(`${target}${path}`);
+      expect(
+        new Headers(fetcher.mock.calls[0]![1]?.headers).get("authorization"),
+      ).toBe("Bearer synthetic-session");
+    }
+  },
+);
+
+const generation = `/clients/${id}/objectives/${id}/generation`;
+
+// Governed Objective generation resolves ObjectiveWorkService.proof through
+// Core's application authority; a template token ended as NOT_AVAILABLE.
+it("sends the current Clerk session with a governed Objective generation command", async () => {
+  for (const target of [base, "http://127.0.0.1:5208/api"]) {
+    vi.stubEnv("CORE_API_BASE_URL", target);
+    getToken.mockClear();
+    fetcher.mockClear();
+    fetcher.mockImplementationOnce(async () =>
+      Response.json(
+        { message: "Synthetic current-scope refusal" },
+        { status: 403 },
+      ),
+    );
+    const operation = "objectives.plannerConsent";
+    const response = await gateway.POST(
+      new Request(`${origin}/api/capiro/${operation}`, {
+        method: "POST",
+        headers: { Origin: origin, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          params: { clientId: id, objectiveId: id },
+          body: {
+            schemaVersion: 1,
+            requestId: id,
+            command: "retry",
+            workAction: "objective.plan.prepare",
+            expectedObjectiveVersion: 1,
+            expectedControlVersion: 0,
+            expectedCanonicalBindingVersion: 1,
+            targetAuthorizationRequestId: null,
+          },
+        }),
+      }),
+      { params: Promise.resolve({ operation }) },
+    );
+    expect(response.status).toBe(403);
+    expect(getToken).toHaveBeenCalledExactlyOnceWith();
+    expect(String(fetcher.mock.calls[0]![0])).toBe(
+      `${target}${generation}/commands`,
+    );
+    expect(fetcher.mock.calls[0]![1]?.method).toBe("POST");
+    expect(
+      new Headers(fetcher.mock.calls[0]![1]?.headers).get("authorization"),
+    ).toBe("Bearer synthetic-session");
+  }
+});
+
+it("selects the current session for every application-authority route", () => {
+  for (const target of [base, "http://127.0.0.1:5208/api"]) {
+    for (const [method, path] of [
+      ["GET", "/clio/site-workflows"],
+      ["POST", "/clio/site-workflows"],
+      ["POST", "/clio/site-workflows/requests/read"],
+      ["POST", "/clio/site-workflows/catalog"],
+      ["GET", "/capiro-admin/analyst-links/provision"],
+      ["GET", "/capiro-admin/analyst-links/sam"],
+      ["GET", `/capiro-admin/analyst-links/sam/${id}`],
+      ["GET", `/capiro-admin/analyst-links/receipts/${id}`],
+      ["POST", `/capiro-admin/analyst-links/provision/${id}/decision`],
+      ["GET", `/capiro-admin/analyst-links/receipts/${id.toUpperCase()}`],
+      ["GET", `${generation}`],
+      ["GET", `${generation}/outputs`],
+      ["POST", `${generation}/commands`],
+      ["POST", `${generation}/strategy-commands`],
+      ["GET", `/clients/${id.toUpperCase()}/objectives/${id}/generation`],
+    ])
+      expect(coreSessionAuthentication("core", target, method!, path!)).toBe(
+        "clerk-session",
+      );
+    for (const [service, method, path] of [
+      // Runtime reads authenticate the service identity plus the ordinary user.
+      ["core", "POST", "/clio/site-workflows/runtime/list"],
+      ["core", "POST", "/clio/site-workflows/runtime/read"],
+      ["core", "PUT", "/clio/site-workflows"],
+      ["core", "DELETE", "/clio/site-workflows"],
+      ["core", "GET", "/clio/site-workflows/"],
+      ["core", "GET", "/clio/site-workflows/catalog"],
+      ["core", "POST", "/clio/site-workflows/requests"],
+      ["core", "GET", "/capiro-admin/analyst-links/other"],
+      ["core", "GET", "/capiro-admin/analyst-links/receipts"],
+      ["core", "GET", "/capiro-admin/analyst-links/sam/not-a-uuid"],
+      ["core", "POST", "/capiro-admin/analyst-links/sam"],
+      ["core", "GET", `/capiro-admin/analyst-links/sam/${id}/decision`],
+      ["core", "GET", "/capiro-admin/broadcasts"],
+      // confirm-pair has no registered frontend operation.
+      ["core", "POST", `${generation}/confirm-pair`],
+      ["core", "POST", `${generation}`],
+      ["core", "GET", `${generation}/commands`],
+      ["core", "PUT", `${generation}/commands`],
+      ["core", "POST", `${generation}/outputs`],
+      ["core", "GET", `${generation}/`],
+      ["core", "GET", `/clients/${id}/objectives/not-a-uuid/generation`],
+      ["core", "GET", `/clients/${id}/objectives/${id}`],
+      ["core", "GET", `/Clients/${id}/objectives/${id}/generation`],
+      ["strategy", "POST", `${generation}/commands`],
+      ["strategy", "GET", "/clio/site-workflows"],
+      ["workspace", "POST", "/clio/site-workflows"],
+    ])
+      expect(
+        coreSessionAuthentication(service!, target, method!, path!),
+      ).toBeUndefined();
+  }
+});

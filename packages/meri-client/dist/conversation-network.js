@@ -52,23 +52,24 @@ export class ConversationUnavailable extends Error {
  */
 export const EDGE_REFUSED = "request-refused-at-edge";
 const JSON_MEDIA = /^application\/json(?:;\s*charset=utf-8)?$/i;
-/** True when the bytes are control's error envelope: `{ "error": { "code": "…" } }`. */
-function errorEnvelope(bytes) {
+/** Control's error envelope code, `{ "error": { "code": "…" } }`, or undefined for any other bytes. */
+function envelopeCode(bytes) {
     try {
         const value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
         const error = value !== null && typeof value === "object" && "error" in value
             ? value.error
             : undefined;
-        return (error !== null &&
-            typeof error === "object" &&
-            "code" in error &&
-            typeof error.code === "string" &&
-            error.code.length > 0);
+        const code = error !== null && typeof error === "object" && "code" in error
+            ? error.code
+            : undefined;
+        return typeof code === "string" && code.length > 0 ? code : undefined;
     }
     catch {
-        return false;
+        return undefined;
     }
 }
+/** True when the bytes are control's error envelope: `{ "error": { "code": "…" } }`. */
+const errorEnvelope = (bytes) => envelopeCode(bytes) !== undefined;
 const STREAM_BYTES = 8 * 1024 * 1024;
 const REQUEST_MS = 30_000;
 /**
@@ -77,6 +78,12 @@ const REQUEST_MS = 30_000;
  * this timer, ends a healthy window; it only catches a stream that neither server ended.
  */
 const OBSERVATION_MS = 70_000;
+/**
+ * An event-stream (re)connect this close to the credential's expiry asks the session owner to renew first: control
+ * refuses a credential it no longer holds (SESSION_REFUSED) before any recheck, and the browser's clock is not
+ * control's. Never more than a quarter of the issued lifetime, so a fresh session is never "near expiry".
+ */
+export const RECONNECT_RENEW_LEAD_MS = 10_000;
 const discard = (response) => {
     void response.body?.cancel().catch(() => { });
 };
@@ -165,6 +172,7 @@ export class ConversationNetwork {
     stream;
     revoked = false;
     options;
+    renewLeadMs;
     origin;
     credentialHeader;
     constructor(options, onDispose) {
@@ -174,6 +182,9 @@ export class ConversationNetwork {
             signal: options.signal,
             isCurrent: options.isCurrent,
             onAccessLost: options.onAccessLost,
+            ...(options.requestRenewal
+                ? { requestRenewal: options.requestRenewal }
+                : {}),
             ...(options.fetchImpl ? { fetchImpl: options.fetchImpl } : {}),
         };
         this.now = options.now ?? Date.now;
@@ -192,6 +203,7 @@ export class ConversationNetwork {
             this.credential = "";
             throw new ConversationUnavailable("expired-session");
         }
+        this.renewLeadMs = Math.min(RECONNECT_RENEW_LEAD_MS, Math.floor((options.expiresAtMs - this.now()) / 4));
         this.expiration = setTimeout(() => this.revoke(), Math.min(options.expiresAtMs - this.now(), 2_147_483_647));
         options.signal.addEventListener("abort", this.dispose, { once: true });
         if (options.signal.aborted)
@@ -216,6 +228,22 @@ export class ConversationNetwork {
         this.dispose();
         if (current && !this.options.signal.aborted && this.options.isCurrent())
             this.options.onAccessLost();
+    }
+    /**
+     * Asks the session owner for its early renewal (see `ConversationLifetime.requestRenewal`). True when it ended this
+     * session for a fresh one; this connection is then disposed and must not dispatch.
+     */
+    renew(reason) {
+        if (this.revoked ||
+            this.owner.signal.aborted ||
+            this.options.signal.aborted ||
+            !this.options.isCurrent() ||
+            !this.options.requestRenewal)
+            return false;
+        if (!this.options.requestRenewal(reason))
+            return false;
+        this.dispose();
+        return true;
     }
     dispose = () => {
         if (this.owner.signal.aborted)
@@ -253,7 +281,9 @@ export class ConversationNetwork {
         };
         return { signal, done };
     }
-    async dispatch(path, init, signal, onDispatch, forbidden = "revoke") {
+    async dispatch(path, init, signal, onDispatch, 
+    /** "refuse": an edge-filtered input route; "renew": an event stream (both decide a 403 by its body). */
+    forbidden = "revoke") {
         this.check();
         signal.throwIfAborted();
         const headers = new Headers(init.headers);
@@ -275,7 +305,7 @@ export class ConversationNetwork {
             signal.throwIfAborted();
             // A 403 on an edge-filtered input route is decided by its body in `json`.
             if (response.status === 401 ||
-                (response.status === 403 && forbidden !== "refuse"))
+                (response.status === 403 && forbidden === "revoke"))
                 this.revoke();
             this.check();
             signal.throwIfAborted();
@@ -333,9 +363,35 @@ export class ConversationNetwork {
         }
     }
     async observe(path, init) {
+        this.check();
+        if (this.options.expiresAtMs - this.now() <= this.renewLeadMs &&
+            this.renew("near-expiry"))
+            throw new ConversationUnavailable("session-renewing");
         const lease = this.lease(true, init.signal);
         try {
-            const response = await this.dispatch(path, init, lease.signal);
+            // A stream 403 is decided below by its code: only SESSION_REFUSED may renew instead of revoking.
+            const response = await this.dispatch(path, init, lease.signal, undefined, "renew");
+            if (response.status === 403) {
+                let refused = false;
+                try {
+                    refused =
+                        JSON_MEDIA.test(response.headers.get("content-type") ?? "") &&
+                            envelopeCode(new Uint8Array(await new Response(boundedBody(response, lease.signal, this.check, protocol.limits.responseBytes, () => { })).arrayBuffer())) === "SESSION_REFUSED";
+                }
+                catch {
+                    // An unreadable refusal is still a refusal of this session.
+                }
+                if (!refused)
+                    discard(response);
+                // Control no longer holds this credential (expired early, or issued by a control that has since restarted):
+                // the owner renews it for the same exact binding, and the issuance rechecks identity and membership. Every
+                // other 403, and a refusal with no owner renewal, still revokes.
+                if (refused && this.renew("refused"))
+                    throw new ConversationUnavailable("SESSION_REFUSED", 403);
+                this.revoke();
+                this.check();
+                throw new ConversationUnavailable("current-context-unavailable", 403);
+            }
             if (response.status === 204 && init.method === "GET") {
                 lease.done();
                 return response;

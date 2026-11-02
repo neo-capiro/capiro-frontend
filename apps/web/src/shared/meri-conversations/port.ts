@@ -12,6 +12,8 @@ type Lifetime = {
   signal: AbortSignal;
   isCurrent: () => boolean;
   onAccessLost: () => void;
+  /** The owner's early renewal; the conversation's event stream asks for it (see `ConversationLifetime`). */
+  requestRenewal?: (reason: "near-expiry" | "refused") => boolean;
   now: () => number;
 };
 
