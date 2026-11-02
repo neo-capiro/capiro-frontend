@@ -121,6 +121,9 @@
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: -0.15px;
+  /* Card titles are client names, which run long ("ZZ-S16H Synthetic B …"). At
+     the narrower card width the text was cut mid-word; wrap instead of clip. */
+  overflow-wrap: anywhere;
 }
 .cardIdentity small {
   font-size: 12px;

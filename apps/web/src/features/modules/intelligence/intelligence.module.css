@@ -170,6 +170,24 @@
   display: inline-block;
   width: 180px;
 }
+/* Read-only status chip in the page header. It carries its detail in the native
+   tooltip (title), so it is text rather than a button: an inert control that
+   looks pressable is worse than a label. Visual weight matches the outline
+   ActionButton beside the scope select. */
+.infoChip {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border-strong, #d6d3d1);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #57534e;
+  white-space: nowrap;
+  cursor: default;
+}
 .legend {
   display: flex;
   flex-wrap: wrap;

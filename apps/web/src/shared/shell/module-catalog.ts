@@ -56,7 +56,6 @@ export const moduleCatalog: readonly ModuleDescriptor[] = [
     description: "Hill Day packets, drafts and proposal templates.",
     chips: [
       { label: "Hill Day", view: "hillday" },
-      { label: "Drafts", view: "drafts" },
       { label: "Template Studio", view: "templates" },
     ],
     profile: "Workspace, one client",

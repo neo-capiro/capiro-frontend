@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { ActionButton } from "./controls";
+import { errorText } from "../error-text";
 import styles from "./module-ui.module.css";
 
 export function PageHeader({
@@ -121,7 +122,7 @@ export function StatusPanel({
       </div>
     );
   if (error) {
-    const message = typeof error === "string" ? error : error.message;
+    const message = errorText(error);
     const classification = refusal(error);
     if (classification && !classification.retryable)
       return (

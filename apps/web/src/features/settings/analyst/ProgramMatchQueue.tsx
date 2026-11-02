@@ -219,8 +219,74 @@ export function ProgramMatchQueue() {
         onClose={() => setEvidence(undefined)}
         title="Program match evidence"
       >
-        <pre className={styles.pre}>{JSON.stringify(evidence, null, 2)}</pre>
+        <EvidenceList evidence={evidence} />
       </SettingsDialog>
     </div>
   );
+}
+
+/**
+ * The service returns the match evidence as a list of scored signals. It was
+ * rendered as raw JSON, which is unreadable in a dialog; show one row per
+ * signal instead and keep the raw document only as a fallback for a shape this
+ * does not recognise.
+ */
+function EvidenceList({ evidence }: { evidence: unknown }) {
+  if (evidence === undefined) return null;
+  const rows = evidenceRows(evidence);
+  if (rows === null)
+    return (
+      <pre className={styles.pre}>{JSON.stringify(evidence, null, 2)}</pre>
+    );
+  if (!rows.length)
+    return (
+      <p className={styles.empty}>
+        No scoring signals were recorded for this match.
+      </p>
+    );
+  return (
+    <dl className={styles.facts}>
+      {rows.map((row, index) => (
+        <div key={`${row.label}:${index}`}>
+          <dt>{row.label}</dt>
+          <dd>{row.value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function evidenceRows(
+  evidence: unknown,
+): { label: string; value: string }[] | null {
+  if (Array.isArray(evidence)) {
+    const rows: { label: string; value: string }[] = [];
+    for (const entry of evidence) {
+      if (!entry || typeof entry !== "object" || Array.isArray(entry))
+        return null;
+      const record = entry as Record<string, unknown>;
+      const kind = typeof record.kind === "string" ? record.kind : "signal";
+      const detail = Object.entries(record)
+        .filter(([key]) => key !== "kind")
+        .map(([, value]) => scalar(value))
+        .filter((value) => value.length > 0)
+        .join(" · ");
+      rows.push({ label: kind, value: detail || "—" });
+    }
+    return rows;
+  }
+  if (evidence && typeof evidence === "object") {
+    return Object.entries(evidence as Record<string, unknown>).map(
+      ([label, value]) => ({ label, value: scalar(value) }),
+    );
+  }
+  return null;
+}
+
+function scalar(value: unknown): string {
+  if (value === null || value === undefined) return "—";
+  if (typeof value === "string") return value;
+  if (typeof value === "number" || typeof value === "boolean")
+    return String(value);
+  return JSON.stringify(value);
 }

@@ -4,7 +4,6 @@ import { useMemo, useState, type ReactNode } from "react";
 import type { DistrictSummary } from "../../../shared/capiro/operations/intelligence-defense";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
-  ActionButton,
   DataTable,
   PageHeader,
   Panel,
@@ -210,8 +209,8 @@ export function DistrictNexus({ tabs }: { tabs?: ReactNode }) {
                 }}
               />
             </span>
-            <ActionButton
-              aria-label={`Freshness · ${freshness.length} sources`}
+            <span
+              className={styles.infoChip}
               title={freshness
                 .map(
                   (entry) =>
@@ -220,13 +219,13 @@ export function DistrictNexus({ tabs }: { tabs?: ReactNode }) {
                 .join("\n")}
             >
               Freshness
-            </ActionButton>
-            <ActionButton
-              aria-label={`Data quality · ${warnings.length}`}
+            </span>
+            <span
+              className={styles.infoChip}
               title={warnings.map((entry) => entry.message).join("\n")}
             >
               Data quality · {warnings.length}
-            </ActionButton>
+            </span>
           </>
         }
       />

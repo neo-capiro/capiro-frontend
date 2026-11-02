@@ -281,6 +281,9 @@
 }
 .table td {
   max-width: 450px;
+  /* A record value can be an unbroken URL or address; without this it overflows
+     the cell and is clipped at the card edge with no ellipsis. */
+  overflow-wrap: anywhere;
 }
 .tableSelectedRow {
   background: var(--muted);

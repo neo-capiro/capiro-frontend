@@ -202,7 +202,19 @@ function SignatureEditor({
                 api.request(
                   "me.emailSignature.update",
                   {
-                    body: { html, enabled },
+                    // The shared edge WAF answers 403 (never reaching the app) for
+                    // any request body that contains a literal `data:image/…;base64,`
+                    // data URI. The signature is the one surface that carries an
+                    // inline logo, so send the same HTML base64-encoded; the API
+                    // decodes htmlBase64 before sanitizing and storing it.
+                    body: {
+                      htmlBase64: btoa(
+                        Array.from(new TextEncoder().encode(html), (byte) =>
+                          String.fromCharCode(byte),
+                        ).join(""),
+                      ),
+                      enabled,
+                    },
                   },
                   { signal },
                 ),

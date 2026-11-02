@@ -76,8 +76,12 @@ function RecentLinks({
     account,
     clientId,
   );
-  // Only the first read announces loading; a re-read keeps the last list on screen.
-  const loading = query.isPending;
+  // Only announce loading while the read is actually in flight. A query can be
+  // `isPending` without fetching (disabled, or cancelled mid-session), and that
+  // parked state left the sidebar on "Loading recent conversations." forever
+  // with no error and no list.
+  const loading = query.isPending && query.isFetching;
+  const unverifiable = unavailable || (query.isPending && !query.isFetching);
   const summaries = useRecentConversationTitles(account);
   const selectedConversationId = useSearchParams().get("conversationId");
   // The row whose rename control takes focus back once its editor closes. Held here because the
@@ -87,7 +91,7 @@ function RecentLinks({
     <>
       {loading ? (
         <p role="status">Loading recent conversations.</p>
-      ) : unavailable ? (
+      ) : unverifiable ? (
         <p
           role="status"
           title="The conversation list could not be verified for the current account and client."
