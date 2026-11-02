@@ -103,13 +103,16 @@ export function sessionHistoryState(
   ].filter((turn) => !!latestTarget || turn.runId !== runId);
   // Only control's own report of a reservation holds the hard lock. A check that control never
   // answered (or that the edge refused) keeps the retained request for a plain retry instead.
+  // The latest-run read has not answered yet: a transient check, not something the person resolves.
+  const nextChecking =
+    !busy && !recoveryNeeded && !unknownReservation && !source;
   const nextBlocked = busy
     ? "Checking your last message…"
     : recoveryNeeded && !unknownReservation && failure
       ? controlFailureMessage(failure)
       : recoveryNeeded || unknownReservation
         ? "Your last message may still be in progress. Check again before sending."
-        : !source
+        : nextChecking
           ? "Capiro is checking this conversation before you can send again."
           : undefined;
   const initialBlocked =
@@ -137,6 +140,7 @@ export function sessionHistoryState(
     recoveryNeeded,
     unknownReservation,
     nextBlocked,
+    nextChecking,
     initialBlocked,
   };
 }

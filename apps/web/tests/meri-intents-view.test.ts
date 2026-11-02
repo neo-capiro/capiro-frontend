@@ -14,6 +14,7 @@ import {
   intentRows,
   refusalMessage,
 } from "../src/features/meri/conversation/intents/intent-view";
+import { expiresLabel } from "../src/features/meri/conversation/intents/intent-view-types";
 
 const wire = (name: string) =>
   JSON.parse(
@@ -44,9 +45,10 @@ it("an awaiting task.create proposal is decidable and shows the exact retained c
   expect(fields).toMatchObject({
     Action: "Create a task",
     "Task title": "Task",
-    "Command hash": proposal.commandSha256,
-    Expires: proposal.expiresAt,
+    Expires: expiresLabel(proposal.expiresAt),
   });
+  expect(fields["Command hash"]).toBeUndefined();
+  expect(fields.Scope).toBeUndefined();
 });
 
 it("filing completion preserves every file's partial, failed and indexing observations", async () => {
@@ -336,7 +338,8 @@ it.each([false, true])(
       proposal: null,
       fields: [],
     });
-    expect(row.result).toHaveLength(withheld ? 0 : 2);
+    // The receipt is described in words; candidate identifier and command hash stay internal.
+    expect(row.result).toHaveLength(0);
     if (!withheld)
       expect(row.detail).toContain(
         "does not confirm a saved or published memory",

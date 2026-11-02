@@ -1,5 +1,6 @@
 import type { IntentsItem, IntentsProposal } from "@capiro/meri-client/intents";
 import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 
 type ClientRecordProposal = Extract<
   IntentsProposal,
@@ -148,7 +149,7 @@ export function clientRecordFields(
           },
         ]
       : []),
-    { label: "Expires", value: proposal.expiresAt },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   ];
 }
 export function clientRecordRow(

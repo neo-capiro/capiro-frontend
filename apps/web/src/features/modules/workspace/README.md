@@ -7,3 +7,14 @@ Library and Hill Day wire contracts are derived from the existing workspace cont
 Reuse: public adopted dialog/input/textarea/select/menu components, shared Module UI controls, the authenticated fixed-operation Capiro gateway and cancellation-aware queries/mutations. Dependencies flow feature → shared UI/transport → verified service definitions. No legacy Meri endpoint substitutes for greenfield Meri.
 
 Verification covers real contract response projections, rejected scope/payload fields, form interactions, accessibility, response/error states, file size guards, TypeScript and build. Live calls, paid generation and delivery are unrun. Unsupported backend capabilities render an explicit unavailable state while retaining their designed view and local composition controls.
+
+## Office documents (`office/`)
+
+Word, Excel and PowerPoint documents are Meri artifact versions (immutable, `artifactId`/`parentVersionId` lineage, a
+private draft in Core office-drafts); the Workspace is where they are listed and opened. `OfficeDocumentScreen` hosts
+Collabora's full notebookbar workbench in the page (`ui_defaults`, `closebutton`, `revisionhistory` on the
+service-composed launch URL) and takes over CODE's Save and close through `Disable_Default_UIAction`: Save runs the
+confirmed private Save, Save As publishes the next revision, close releases the editor, the revision-history item
+opens `OfficeRevisionHistory`. The route is `workspaceHref({ kind: "office", versionId, conversationId, clientId? })`;
+`OfficeDocuments` lists the artifact library filtered to Office formats. Off (`MERI_OFFICE_WORKFLOW_ENABLED`), nothing
+Office renders here or links here.

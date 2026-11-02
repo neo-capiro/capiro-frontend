@@ -30,7 +30,6 @@ const text = (row: ReturnType<typeof intentRow>) =>
     row.detail,
     ...row.fields.map((f) => `${f.label} ${f.value}`),
     ...row.result.map((f) => `${f.label} ${f.value}`),
-    row.officeVersion?.note ?? "",
   ].join("\n");
 
 describe("office proposal card", () => {
@@ -125,7 +124,6 @@ describe("office proposal card", () => {
       mimeType:
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       binding: { conversationId },
-      note: "New version of Quarterly report.docx, saved from Meri's edit",
     });
   });
   it("conflicts and refusals are explained in plain words", () => {

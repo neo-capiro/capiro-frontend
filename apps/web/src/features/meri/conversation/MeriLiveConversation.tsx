@@ -1,6 +1,7 @@
 "use client";
 import {
   useEffect,
+  useEffectEvent,
   useRef,
   useState,
   type ReactNode,
@@ -195,6 +196,49 @@ function useSettledRefresh(finished: boolean, onSettled: () => void) {
   }, [finished, onSettled]);
 }
 
+/**
+ * The composer's one queued message. `waiting`: a run is in flight for the last message (never a history
+ * read). `ready`: a new message may be sent now. `release`: why the queue must be dropped (a block other
+ * than the run, a terminal block once the run ended, or an emptied box); the text stays an ordinary draft
+ * and the reason is shown. The queue clears before its one send.
+ */
+export function useQueuedSend(
+  waiting: boolean,
+  ready: boolean,
+  release: string | false,
+  send: () => void,
+) {
+  const [queued, setQueued] = useState(false);
+  const [released, setReleased] = useState<string>();
+  if (queued && release !== false) {
+    setQueued(false);
+    setReleased(release || undefined);
+  }
+  if (released && waiting) setReleased(undefined);
+  // Ready: the queue clears during render and the one send happens after that render commits.
+  const [sends, setSends] = useState(0);
+  if (queued && ready && release === false) {
+    setQueued(false);
+    setSends(sends + 1);
+  }
+  const sendQueued = useEffectEvent(send);
+  useEffect(() => {
+    if (sends > 0) sendQueued();
+  }, [sends]);
+  return {
+    onQueue:
+      waiting && release === false && !queued
+        ? () => {
+            setReleased(undefined);
+            setQueued(true);
+          }
+        : undefined,
+    queued: queued ? { onCancel: () => setQueued(false) } : undefined,
+    released,
+    cancel: () => setQueued(false),
+  };
+}
+
 /** Tab return reads current status; paired focus/visibility events never start a polling loop. */
 function useExternalRunRefresh(
   port: MeriConversationPort,
@@ -310,6 +354,7 @@ export function MeriLiveConversation({
   textareaRef,
   onNextTurn,
   nextTurnBlocked,
+  nextTurnChecking = false,
   nextTurnVerified = false,
   initialBlocked,
   composer,
@@ -337,6 +382,8 @@ export function MeriLiveConversation({
   /** The run finished: send `prompt` as the conversation's next run. */
   onNextTurn: (prompt: string, finished: TurnView) => void;
   nextTurnBlocked?: string | undefined;
+  /** The latest-run check is still in flight: a message typed now waits for it instead of being refused. */
+  nextTurnChecking?: boolean | undefined;
   /** Current exact-run history is re-verified and permits a client-side next-turn attempt. */
   nextTurnVerified?: boolean | undefined;
   initialBlocked?: string | undefined;
@@ -481,12 +528,49 @@ export function MeriLiveConversation({
     )
       onNextTurn(prompt, turn);
   };
+  // One pending message: while a run is in flight for the last message and nothing else blocks, the draft
+  // waits in the box as the queued message and is sent once the run finishes. A block other than the run,
+  // a block that remains once the run ended (for example a refused skill or a next-turn refusal) or an
+  // emptied box releases it, keeping the text and showing why.
+  // The latest-run check of a fresh or reloaded thread counts too: a first Enter waits for it (X15).
+  const waiting =
+    active ||
+    nextTurnChecking ||
+    (!!intent.submit && intent.submit.state !== "unknown" && !turn);
+  const blocking =
+    retentionError ??
+    lifecycle.blocked ??
+    modelBlocked ??
+    newIntentBlocked ??
+    (intent.submit?.state === "unknown" || availability.resend
+      ? (availability.sendBlocked ?? "")
+      : !waiting && !run.busy
+        ? availability.sendBlocked
+        : undefined);
+  const queue = useQueuedSend(
+    waiting,
+    blocking === undefined &&
+      (availability.readyForNext ||
+        (availability.initial && !availability.sendBlocked)),
+    // Only text typed since the last capture may be queued: a captured attempt is already in the
+    // transcript and its box is shown empty, so queueing it would send the same message twice.
+    blocking ??
+      (initialDraft.pendingDraft(port.context) === null && draft.trim()
+        ? false
+        : ""),
+    send,
+  );
   useLiveComposer(composer, {
     port,
     running: active,
     controls: {
       onSend: send,
-      onStop: () => void run.cancel(),
+      onQueue: queue.onQueue,
+      queued: queue.queued,
+      onStop: () => {
+        queue.cancel();
+        void run.cancel();
+      },
       sendBlocked:
         retentionError ??
         lifecycle.blocked ??
@@ -495,9 +579,10 @@ export function MeriLiveConversation({
       // A retained request is the person's to resolve; the key hint says so until it is. An
       // edge-refused message already says so in the transcript, once.
       notice:
-        intent.submit?.state === "unknown" && run.failure !== "refused"
+        queue.released ??
+        (        intent.submit?.state === "unknown" && run.failure !== "refused"
           ? "Your last request is still unconfirmed. Retry it above before sending another."
-          : undefined,
+          : undefined),
       modelSelection:
         intent.submit?.state !== "observed" && intent.submit
           ? intent.submit.modelSelection

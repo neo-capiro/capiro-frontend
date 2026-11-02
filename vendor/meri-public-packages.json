@@ -1090,6 +1090,34 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "ui-stream 0.1.33 admits @capiro/meri-contracts 0.1.49 as a peer (neo-capiro/meri-greenfield#500); no stream behaviour change."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.50-14b7c65d-4e83dd96d9b2.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.50",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "14b7c65d35eb86dd5fbc70bd708af158c208d9fa",
+   "sourceTree": "1319bf758560f8a6b2b3cffdc79de4bb4e8a9eb9",
+   "bytes": 2201601,
+   "sha256": "4e83dd96d9b2088b99e00d1177756eeb6a955dbee4f86034903f58b1325d9c95",
+   "integrity": "sha512-qt+lhtaAU6UOU2nlWrCrDaWYxJKKcd+c2T7lOU4tvAzsTo266qQyfcD/zkmBs5zTF2rGih0rLo2yc37D3oaYOA==",
+   "regularEntryCount": 123,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Usage overview /2 admits policy.maxTurns up to the 1000-turn platform ceiling (MAX_RUN_TURNS, neo-capiro/meri-greenfield#533) instead of the former literal 100, so a tenant above 100 turns still receives its Usage page; run-limits.mjs joins the usage generator provenance. No other wire change; actual package/consumer qualification recorded separately."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.34-14b7c65d-52a0daf02549.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.34",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "14b7c65d35eb86dd5fbc70bd708af158c208d9fa",
+   "sourceTree": "1319bf758560f8a6b2b3cffdc79de4bb4e8a9eb9",
+   "bytes": 3855,
+   "sha256": "52a0daf02549d54aafa262f57703a990c09259ece680f6ac7393ceb825b4afcd",
+   "integrity": "sha512-j77DpVWug48y+I3RW7yPosGKnGGT/Az1AjsbbQmyfW0pwDpvTv7EaDm1p6aCT0NMcwUSet4NK+dhuWc8fPpSdg==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "ui-stream 0.1.34 admits @capiro/meri-contracts 0.1.50 as a peer (neo-capiro/meri-greenfield#533); no stream behaviour change."
   }
  ]
 }

@@ -27,6 +27,9 @@ import { RichNewsletterEditor } from "./rich-newsletter/RichNewsletterEditor";
 import { NewsletterReviewEntry } from "./rich-newsletter/review/NewsletterReviewEntry";
 import { BriefCopyRoute } from "./brief-copy/BriefCopyRoute";
 import { EngagementTaskDetail } from "./EngagementTaskDetail";
+import { OfficeDocumentScreen } from "./office/OfficeDocumentScreen";
+import { OfficeDocuments } from "./office/OfficeDocuments";
+import { useIdentity } from "../../../shared/portfolio/auth/identity";
 import {
   readWorkspaceRoute,
   workspaceHref,
@@ -40,11 +43,21 @@ const tabs: { id: WorkspaceView; label: string }[] = [
   { id: "shares", label: "Client shares" },
 ];
 
-export function WorkspaceScreen() {
+export function WorkspaceScreen({
+  officeEnabled = false,
+}: {
+  /** Server-decided (readOfficeConfig): Office documents list and open here only when true. */
+  officeEnabled?: boolean;
+}) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const route = readWorkspaceRoute(searchParams);
   const [newDocument, setNewDocument] = useState(false);
+  const identity = useIdentity();
+  const account =
+    identity.data?.tenant?.id && !identity.error
+      ? { tenantId: identity.data.tenant.id, actorId: identity.data.user.id }
+      : null;
   if (route.kind === "invalid")
     return (
       <section role="alert">
@@ -65,6 +78,39 @@ export function WorkspaceScreen() {
   const navigate = (view: WorkspaceView) =>
     router.push(workspaceHref({ kind: "view", view, clientId }));
   const back = () => navigate("documents");
+  if (route.kind === "office") {
+    if (!officeEnabled)
+      return (
+        <section role="alert">
+          <h1>Office documents unavailable</h1>
+          <p>Office editing is not enabled for this deployment.</p>
+        </section>
+      );
+    if (!account) return <p role="status">Verifying the current account…</p>;
+    return (
+      <OfficeDocumentScreen
+        key={`${route.versionId}:${clientId ?? "general"}`}
+        account={account}
+        target={{
+          versionId: route.versionId,
+          conversationId: route.conversationId,
+          clientId: clientId ?? null,
+          runId: route.runId,
+        }}
+        onClose={back}
+        onOpenVersion={(versionId) =>
+          router.replace(
+            workspaceHref({
+              kind: "office",
+              versionId,
+              conversationId: route.conversationId,
+              clientId,
+            }),
+          )
+        }
+      />
+    );
+  }
   if (route.kind === "newsletter-review")
     return (
       <NewsletterReviewEntry
@@ -259,7 +305,16 @@ export function WorkspaceScreen() {
         <WorkflowCards clientId={clientId} onStart={navigate} />
       )}
       {view === "documents" && (
-        <DocumentsLibrary clientId={clientId} onOpen={openDocument} />
+        <>
+          <DocumentsLibrary clientId={clientId} onOpen={openDocument} />
+          {officeEnabled && account && (
+            <OfficeDocuments
+              key={`office:${clientId ?? "general"}`}
+              account={account}
+              clientId={clientId}
+            />
+          )}
+        </>
       )}
       {view === "workflows" && (
         <div className={styles.info}>

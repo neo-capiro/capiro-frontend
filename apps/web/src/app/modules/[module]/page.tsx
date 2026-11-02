@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { ModuleScreen } from "../../../features/modules/ModuleScreen";
 import { ConnectedModule } from "../../../shared/shell/ConnectedModule";
 import { moduleCatalog } from "../../../shared/shell/module-catalog";
+import { readOfficeConfig } from "../../../shared/meri-office/config";
 
 export default async function ModulePage({
   params,
@@ -15,7 +16,10 @@ export default async function ModulePage({
   if (!descriptor) notFound();
   return (
     <ConnectedModule active={descriptor.slug}>
-      <ModuleScreen module={descriptor.slug} />
+      <ModuleScreen
+        module={descriptor.slug}
+        officeEnabled={readOfficeConfig(process.env).enabled}
+      />
     </ConnectedModule>
   );
 }

@@ -6,7 +6,10 @@ import { ConversationBody } from "./ConversationFrame";
 import type { useConversationSession } from "./useConversationSession";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./live.module.css";
-import { controlUnreachableMessage } from "./control-reachability";
+import {
+  controlUnreachableMessage,
+  reconnectState,
+} from "./control-reachability";
 import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 
 type Session = ReturnType<typeof useConversationSession>;
@@ -51,11 +54,7 @@ function ConnectionStatus({
   // Issuance that control did not answer is retried on a backed-off schedule with the same exact
   // selectors; a refusal is never retried on its own.
   const reconnect = useReconnectSchedule(
-    unreachable
-      ? "failing"
-      : status === "connecting" || status === "idle"
-        ? "busy"
-        : "ok",
+    reconnectState(unreachable, status),
     connection.retry,
   );
   return (
@@ -110,25 +109,32 @@ function ConnectionStatus({
 
 /**
  * The access check was not answered, so nothing is known to be refused: the transcript stays on screen
- * and only sending waits for a fresh check. A real refusal replaces the view instead (ConnectionStatus).
+ * and only sending waits for a fresh check. A renewal that control did not answer (5xx) is asked again on
+ * the backed-off reconnect schedule as well; an unanswered access check (401) keeps the manual check only.
+ * A real refusal replaces the view instead (ConnectionStatus).
  */
 export function UnverifiedAccessNotice({ session }: { session: Session }) {
+  const { connection } = session;
+  // The automatic schedule is the connection's own (useConversationConnection); this is presentation.
+  const unreachable = !!connection.unreachable;
   return (
     <section role="status" className={styles.accessNotice}>
       <p className={styles.muted}>
-        Meri could not confirm your access to this conversation just now.
-        Everything above is unchanged; sending resumes once access is checked.
+        {unreachable
+          ? "Capiro is not reachable right now. Everything above is unchanged; we'll reconnect automatically and sending resumes once the connection is back."
+          : "Meri could not confirm your access to this conversation just now. Everything above is unchanged; sending resumes once access is checked."}
       </p>
       <Button
         type="button"
         variant="outline"
         className={ui.outline}
         onClick={() => {
-          session.connection.retry();
+          connection.resetReconnect();
+          connection.retry();
           session.history.refresh();
         }}
       >
-        Check access again
+        {unreachable ? "Retry now" : "Check access again"}
       </Button>
     </section>
   );

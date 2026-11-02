@@ -147,16 +147,90 @@ export function pendingManagementScopes(
 const byteLength = (value: string) =>
   new TextEncoder().encode(value).byteLength;
 
-/** Never evict unresolved identities to make room for a new request. */
+/** The record envelope: `at` (write time) is absent on records written before it existed. */
+const envelopeShape = (value: object) =>
+  ["key,scope,value,version", "at,key,scope,value,version"].includes(
+    Object.keys(value).sort().join(),
+  ) &&
+  (!("at" in value) || Number.isSafeInteger(value.at));
+
+/**
+ * A record's write time (0 when absent, so such records count as oldest), scope, kind and whether it is
+ * settled: it holds nothing the server does not already have. Settled means a request the server
+ * observed with no cancellation outstanding, or a draft with no text, capture, reservation or selection.
+ * Every run leaves one request record, so without making room a long-lived tab reached the record
+ * budget and refused every later message.
+ */
+function recordFacts(name: string, raw: string | null) {
+  try {
+    const [scope, kind] = JSON.parse(name.slice(prefix.length)) as unknown[];
+    const envelope: unknown = raw === null ? undefined : JSON.parse(raw);
+    if (!envelope || typeof envelope !== "object" || !envelopeShape(envelope))
+      return null;
+    const at = "at" in envelope ? Number(envelope.at) : 0;
+    const value: unknown = "value" in envelope ? envelope.value : undefined;
+    if (!value || typeof value !== "object") return null;
+    const settled =
+      kind === "request"
+        ? "submit" in value &&
+          !!value.submit &&
+          typeof value.submit === "object" &&
+          "state" in value.submit &&
+          value.submit.state === "observed" &&
+          (!("cancel" in value) || value.cancel === "observed")
+        : kind === "draft" &&
+          "draft" in value &&
+          value.draft === "" &&
+          "pending" in value &&
+          value.pending === null &&
+          "reserved" in value &&
+          value.reserved === null &&
+          (!("selection" in value) ||
+            value.selection === undefined ||
+            (!!value.selection &&
+              typeof value.selection === "object" &&
+              Object.keys(value.selection).length === 0));
+    return { name, scope, kind, at, settled };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Never evict unresolved identities to make room for a new request. Settled records make room, oldest
+ * first, except each conversation's newest request record: the current run's, which guards the first
+ * message while its history is unavailable.
+ */
 function checkBudget(storage: TabStorage, key: string, raw: string) {
-  let count = 1,
-    bytes = byteLength(raw);
+  const names: string[] = [];
+  const facts: NonNullable<ReturnType<typeof recordFacts>>[] = [];
   for (let index = 0; index < storage.length; index++) {
-    const found = storage.key(index);
-    if (found?.startsWith(prefix) && found !== key) {
-      count++;
-      bytes += byteLength(storage.getItem(found) ?? "");
-    }
+    const name = storage.key(index);
+    if (!name?.startsWith(prefix) || name === key) continue;
+    names.push(name);
+    const found = recordFacts(name, storage.getItem(name));
+    if (found) facts.push(found);
+  }
+  const newestRequest = new Map<unknown, (typeof facts)[number]>();
+  for (const fact of facts)
+    if (
+      fact.kind === "request" &&
+      (newestRequest.get(fact.scope)?.at ?? -1) <= fact.at
+    )
+      newestRequest.set(fact.scope, fact);
+  const evictable = facts
+    .filter((fact) => fact.settled && newestRequest.get(fact.scope) !== fact)
+    .sort((left, right) => left.at - right.at);
+  let count = names.length + 1;
+  let bytes = names.reduce(
+    (total, name) => total + byteLength(storage.getItem(name) ?? ""),
+    byteLength(raw),
+  );
+  for (const fact of evictable) {
+    if (count <= maxRecords && bytes <= maxTotalBytes) break;
+    bytes -= byteLength(storage.getItem(fact.name) ?? "");
+    count--;
+    storage.removeItem(fact.name);
   }
   if (count > maxRecords || bytes > maxTotalBytes)
     throw new TabJournalUnavailable();
@@ -191,7 +265,7 @@ export function tabRecord<T>(
       throw new TabJournalRetired(value.requestId);
     if (
       !value ||
-      Object.keys(value).sort().join() !== "key,scope,value,version" ||
+      !envelopeShape(value) ||
       value.version !== 1 ||
       value.scope !== scopeKey ||
       value.key !== key
@@ -219,6 +293,7 @@ export function tabRecord<T>(
           version: 1,
           scope: scopeKey,
           key,
+          at: Date.now(),
           value: receive(value),
         });
         decode(raw);
@@ -333,7 +408,7 @@ function retireRequest(
     if (
       !receive ||
       !value ||
-      Object.keys(value).sort().join() !== "key,scope,value,version" ||
+      !envelopeShape(value) ||
       value.version !== 1 ||
       value.scope !== scope ||
       value.key !== key

@@ -4,8 +4,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { IntentsDecideRequest } from "@capiro/meri-client/intents";
 import { ConversationIntents } from "../../src/features/meri/conversation/intents/ConversationIntents";
 import { IntentApprovalsEnabled } from "../../src/features/meri/conversation/intents/approvals-enabled";
-import { OfficeEditing } from "../../src/features/meri/office/OfficeEditing";
-import { DocumentRevisionLink } from "../../src/features/meri/files/DocumentRevisionLink";
+import { OfficeWorkspaceLinks } from "../../src/features/meri/office/OfficeWorkspaceLink";
+import { OfficeAskMeri } from "../../src/features/meri/office/OfficeAskMeri";
 import { syncMeriTabIdentity } from "../../src/shared/meri-conversations/tab-journal";
 import type { IntentsAccess } from "../../src/shared/meri-intents/access";
 import type { DocumentLibraryAccess } from "../../src/shared/meri-documents/library-access";
@@ -107,17 +107,29 @@ function Harness() {
     <QueryClientProvider client={client}>
       <main style={{ padding: 24 }}>
         <h1>Same-document Office bridge</h1>
-        <section aria-label="Files">
-          <DocumentRevisionLink
-            port={library}
-            versionId={officeDocument.versionId}
-            office
+        <section aria-label="Workspace document">
+          <OfficeAskMeri
+            context={context}
+            inspect={async (signal) => {
+              const reply = await library.inspect(
+                officeDocument.versionId,
+                signal,
+              );
+              if (!reply.ok || reply.value.kind !== "generated")
+                throw new Error("Source unavailable");
+              return {
+                artifactId: reply.value.artifactId,
+                versionId: reply.value.versionId,
+                objectSha256: reply.value.objectSha256,
+                filename: reply.value.filename,
+              };
+            }}
           />
         </section>
         <IntentApprovalsEnabled.Provider value>
-          <OfficeEditing enabled account={viewer}>
+          <OfficeWorkspaceLinks enabled>
             <ConversationIntents access={access} scope={context} />
-          </OfficeEditing>
+          </OfficeWorkspaceLinks>
         </IntentApprovalsEnabled.Provider>
         <output aria-label="Service operations">{events.join(",")}</output>
         <output aria-label="Proposal status">{status}</output>
