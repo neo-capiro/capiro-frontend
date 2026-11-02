@@ -10,6 +10,16 @@ const nativeClientWrite = new RegExp(
   `^/clients/${clientId}(?:/account-owners)?$`,
 );
 const nativeClientDelete = new RegExp(`^/clients/${clientId}$`);
+// Core handlers that bind its application-authority session (Clerk `sid`). The
+// capiro template token carries no `sid`, so Core answers 401 to it on every
+// deployment, not only the preview target.
+const uuid = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
+const authorityReads = new RegExp(
+  `^/(?:clio/site-workflows|capiro-admin/analyst-links/(?:(?:provision|sam)(?:/${uuid})?|receipts/${uuid}))$`,
+);
+const authorityWrites = new RegExp(
+  `^/(?:clio/site-workflows(?:/catalog|/requests/read)?|capiro-admin/analyst-links/(?:provision|sam)/${uuid}/decision)$`,
+);
 
 /** Match the existing Core native-session handlers on their configured origin.
  * This chooses a credential only; Core still validates route, membership and scope.
@@ -26,6 +36,11 @@ export function coreSessionAuthentication(
     return "clerk-session";
   // Saved layouts require Core's current-session proof on every configured target.
   if (path === "/me/portfolio-layout" && (method === "GET" || method === "PUT"))
+    return "clerk-session";
+  if (
+    (method === "GET" && authorityReads.test(path)) ||
+    (method === "POST" && authorityWrites.test(path))
+  )
     return "clerk-session";
   if (base !== nativeCoreBase) return undefined;
   const native =
