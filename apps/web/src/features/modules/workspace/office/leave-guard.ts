@@ -3,9 +3,10 @@
  * edits. The guard runs the same close (save, release, publish) first and then owns the destination: a
  * capture-phase click guard on same-origin links, and a history trap for Back. The trap is one duplicate of the
  * current entry, carrying the router's own state for the same URL so the router sees a no-op; it is pushed once when
- * edits first appear and stepped back off when they are saved or the screen leaves, so an unmodified editor, a Save
- * or a renewal never changes the history. A close that is not confirmed keeps the person on the page with the
- * recovery notice; nothing navigates away from unsaved work. */
+ * edits first appear and stepped back off when they are saved, so an unmodified editor, a Save or a renewal never
+ * changes the history. Disposal only removes the listeners: an unmount that is not a navigation (a remount after an
+ * identity error) must not move the person through history. A close that is not confirmed keeps the person on the
+ * page with the recovery notice; nothing navigates away from unsaved work. */
 export type LeaveGuardView = {
   document: Pick<Document, "addEventListener" | "removeEventListener">;
   addEventListener: Window["addEventListener"];
@@ -108,7 +109,7 @@ export function installLeaveGuard({
         true,
       );
       view.removeEventListener("popstate", onPopState);
-      if (armed && !leaving && !pending) release();
+      armed = false;
     },
   };
 }

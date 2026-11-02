@@ -14,34 +14,48 @@ const h = vi.hoisted(() => ({
   head: null as { latest: boolean; headVersionId: string } | null,
   state: null as unknown,
   open: vi.fn(),
+  push: vi.fn(),
+  replace: vi.fn(),
+  /** The handlers the screen hands the workbench, captured for the guard's navigation. */
+  handlers: null as null | { navigate(href: string): void },
 }));
-vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn() }) }));
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: h.push, replace: h.replace }),
+}));
 vi.mock("../src/features/modules/workspace/office/useOfficeWorkbench", () => ({
-  useOfficeWorkbench: () => ({
-    host: {
-      editor: {
-        open: h.open,
-        close: vi.fn(),
-        publish: vi.fn(),
-        publishRevision: vi.fn(),
-        recover: vi.fn(),
-        discard: vi.fn(),
-        ownsEditor: () => true,
-      },
-      session: { connect: vi.fn() },
-      navigate: vi.fn(),
-    },
-    state: h.state,
-    connection: {
-      status: "ready",
-      port: { request: vi.fn(), history: vi.fn(), download: vi.fn() },
-      lifetimeKey: "k",
-    },
-    container: { current: null },
-    head: h.head,
-    history: { open: false, setOpen: vi.fn() },
-  }),
+  useOfficeWorkbench: (
+    _account: unknown,
+    _target: unknown,
+    handlers: { navigate(href: string): void },
+  ) => {
+    h.handlers = handlers;
+    return workbench();
+  },
 }));
+const workbench = () => ({
+  host: {
+    editor: {
+      open: h.open,
+      close: vi.fn(),
+      publish: vi.fn(),
+      publishRevision: vi.fn(),
+      recover: vi.fn(),
+      discard: vi.fn(),
+      ownsEditor: () => true,
+    },
+    session: { connect: vi.fn() },
+    navigate: vi.fn(),
+  },
+  state: h.state,
+  connection: {
+    status: "ready",
+    port: { request: vi.fn(), history: vi.fn(), download: vi.fn() },
+    lifetimeKey: "k",
+  },
+  container: { current: null },
+  head: h.head,
+  history: { open: false, setOpen: vi.fn() },
+});
 const editorState = (patch: Partial<OfficeEditorState>): OfficeEditorState => ({
   connected: true,
   busy: null,
@@ -85,6 +99,14 @@ describe("Office document screen", () => {
     expect(html).not.toContain("Publish revision");
     expect(html).not.toContain("Open editor");
     expect(html).toContain(">Close<");
+  });
+  it("the guard's navigation replaces the trapped entry rather than pushing past it", () => {
+    h.head = { latest: true, headVersionId: target.versionId };
+    h.state = editorState({});
+    screen();
+    h.handlers!.navigate("/leave-target");
+    expect(h.replace).toHaveBeenCalledWith("/leave-target");
+    expect(h.push).not.toHaveBeenCalled();
   });
   it("the head opens for editing with Publish revision and Close editor; no editor action is offered until the head is known", () => {
     h.head = { latest: true, headVersionId: target.versionId };
