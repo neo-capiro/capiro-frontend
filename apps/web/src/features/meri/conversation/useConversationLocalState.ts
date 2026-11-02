@@ -34,6 +34,16 @@ function draftOwner(scope: TabScope | undefined, accessLost: boolean) {
     return owner;
   }
 }
+/** Whether a conversation context belongs to the draft owner's tab scope (an unscoped owner takes any). */
+export const contextInScope = (
+  context: ConversationContext,
+  scope: TabScope | undefined,
+) =>
+  !scope ||
+  (context.tenantId === scope.tenantId &&
+    context.actorId === scope.actorId &&
+    context.selectedClientId === scope.clientId &&
+    context.conversationId === scope.conversationId);
 /** Draft persistence owns text and revision; React subscribes only to this mounted view's changes. */
 function useDraftState(
   context: ConversationContext | undefined,
@@ -67,14 +77,16 @@ function useDraftState(
   }, [owner, scope]);
   useEffect(() => {
     if (accessLost) owner.reset();
-    else if (context) {
+    // A context of another scope (a client switch or a port still bound to the previous route) is
+    // not a storage failure: this owner is replaced with the scope, so it must not lock itself.
+    else if (context && contextInScope(context, scope)) {
       try {
         owner.select(context);
       } catch {
         owner.fail();
       }
     }
-  }, [context, accessLost, owner]);
+  }, [context, accessLost, owner, scope]);
   const edit = useCallback(
     (value: string) => {
       if (accessLost) return;

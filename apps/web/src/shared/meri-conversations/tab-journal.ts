@@ -147,19 +147,63 @@ export function pendingManagementScopes(
 const byteLength = (value: string) =>
   new TextEncoder().encode(value).byteLength;
 
-/** Never evict unresolved identities to make room for a new request. */
-function checkBudget(storage: TabStorage, key: string, raw: string) {
-  let count = 1,
-    bytes = byteLength(raw);
-  for (let index = 0; index < storage.length; index++) {
-    const found = storage.key(index);
-    if (found?.startsWith(prefix) && found !== key) {
-      count++;
-      bytes += byteLength(storage.getItem(found) ?? "");
-    }
+/**
+ * Settled records hold nothing the server does not already have: a request the server observed (no
+ * cancellation outstanding) and an empty draft with no capture. Every run leaves one request record,
+ * so without making room a long-lived tab reached the record budget and refused every later message.
+ */
+function settledRecord(found: string, raw: string | null) {
+  try {
+    const kind: unknown = JSON.parse(found.slice(prefix.length))[1];
+    const value: unknown = raw === null ? undefined : JSON.parse(raw).value;
+    if (!value || typeof value !== "object") return false;
+    if (kind === "request")
+      return (
+        "submit" in value &&
+        !!value.submit &&
+        typeof value.submit === "object" &&
+        "state" in value.submit &&
+        value.submit.state === "observed" &&
+        (!("cancel" in value) || value.cancel === "observed")
+      );
+    return (
+      kind === "draft" &&
+      "draft" in value &&
+      value.draft === "" &&
+      "pending" in value &&
+      value.pending === null &&
+      "reserved" in value &&
+      value.reserved === null
+    );
+  } catch {
+    return false;
   }
-  if (count > maxRecords || bytes > maxTotalBytes)
-    throw new TabJournalUnavailable();
+}
+
+/** Never evict unresolved identities to make room for a new request; settled records make room first. */
+function checkBudget(storage: TabStorage, key: string, raw: string) {
+  const others = () => {
+    const found: string[] = [];
+    for (let index = 0; index < storage.length; index++) {
+      const name = storage.key(index);
+      if (name?.startsWith(prefix) && name !== key) found.push(name);
+    }
+    return found;
+  };
+  const over = (names: string[]) =>
+    names.length + 1 > maxRecords ||
+    names.reduce(
+      (total, name) => total + byteLength(storage.getItem(name) ?? ""),
+      byteLength(raw),
+    ) > maxTotalBytes;
+  let names = others();
+  for (const name of names) {
+    if (!over(names)) break;
+    if (!settledRecord(name, storage.getItem(name))) continue;
+    storage.removeItem(name);
+    names = names.filter((other) => other !== name);
+  }
+  if (over(names)) throw new TabJournalUnavailable();
 }
 
 /** Fixed record families, bounded bytes and exact scope/run; payloads have strict caller receivers. */
