@@ -219,20 +219,27 @@ export function MeriComposer({
           />
         </PromptInputFooter>
         <p className={styles.keyboardHint} id={helpId}>
-          {live?.queued ? (
-            <span role="status">
-              Queued: sends when Meri finishes.{" "}
-              <button
-                type="button"
-                className={styles.queuedCancel}
-                onClick={live.queued.onCancel}
-              >
-                Cancel
-              </button>
-            </span>
-          ) : refused ? (
-            <span role="status">{refused}</span>
-          ) : (
+          {/* Mounted once so a queued notice or a refused Enter is announced when it appears. */}
+          <span role="status">
+            {live?.queued ? (
+              <>
+                Queued: sends when Meri finishes.{" "}
+                <button
+                  type="button"
+                  className={styles.queuedCancel}
+                  onClick={() => {
+                    live.queued?.onCancel();
+                    textareaRef.current?.focus();
+                  }}
+                >
+                  Cancel
+                </button>
+              </>
+            ) : (
+              refused
+            )}
+          </span>
+          {!live?.queued && !refused && (
             <>
               {live?.draftBlocked ??
                 live?.notice ??

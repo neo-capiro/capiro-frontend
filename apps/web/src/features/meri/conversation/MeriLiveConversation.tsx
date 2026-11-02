@@ -1,6 +1,7 @@
 "use client";
 import {
   useEffect,
+  useEffectEvent,
   useRef,
   useState,
   type ReactNode,
@@ -196,27 +197,45 @@ function useSettledRefresh(finished: boolean, onSettled: () => void) {
 }
 
 /**
- * The composer's one queued message. `waiting`: Meri is still busy with the last message. `ready`: a new
- * message may be sent now. `released`: something other than the run blocks (or the box is empty), so the
- * queue is dropped and the text stays an ordinary draft. Nothing is sent twice: the queue clears first.
+ * The composer's one queued message. `waiting`: a run is in flight for the last message (never a history
+ * read). `ready`: a new message may be sent now. `release`: why the queue must be dropped (a block other
+ * than the run, a terminal block once the run ended, or an emptied box); the text stays an ordinary draft
+ * and the reason is shown. The queue clears before its one send.
  */
 export function useQueuedSend(
   waiting: boolean,
   ready: boolean,
-  released: boolean,
+  release: string | false,
   send: () => void,
 ) {
   const [queued, setQueued] = useState(false);
-  if (queued && released) setQueued(false);
-  useEffect(() => {
-    if (!queued || !ready || released) return;
+  const [released, setReleased] = useState<string>();
+  if (queued && release !== false) {
     setQueued(false);
-    send();
-  }, [queued, ready, released, send]);
+    setReleased(release || undefined);
+  }
+  if (released && waiting) setReleased(undefined);
+  // Ready: the queue clears during render and the one send happens after that render commits.
+  const [sends, setSends] = useState(0);
+  if (queued && ready && release === false) {
+    setQueued(false);
+    setSends(sends + 1);
+  }
+  const sendQueued = useEffectEvent(send);
+  useEffect(() => {
+    if (sends > 0) sendQueued();
+  }, [sends]);
   return {
     onQueue:
-      waiting && !released && !queued ? () => setQueued(true) : undefined,
+      waiting && release === false && !queued
+        ? () => {
+            setReleased(undefined);
+            setQueued(true);
+          }
+        : undefined,
     queued: queued ? { onCancel: () => setQueued(false) } : undefined,
+    released,
+    cancel: () => setQueued(false),
   };
 }
 
@@ -501,17 +520,33 @@ export function MeriLiveConversation({
     )
       onNextTurn(prompt, turn);
   };
-  // One pending message: while Meri is busy with the last one and nothing else blocks, the draft waits
-  // in the box as the queued message and is sent once the run finishes; a genuine block releases it.
-  const genuineBlock =
-    !!(retentionError ?? lifecycle.blocked ?? modelBlocked ?? newIntentBlocked) ||
-    intent.submit?.state === "unknown";
+  // One pending message: while a run is in flight for the last message and nothing else blocks, the draft
+  // waits in the box as the queued message and is sent once the run finishes. A block other than the run,
+  // a block that remains once the run ended (for example a refused skill or a next-turn refusal) or an
+  // emptied box releases it, keeping the text and showing why.
+  const waiting =
+    active || (!!intent.submit && intent.submit.state !== "unknown" && !turn);
+  const blocking =
+    retentionError ??
+    lifecycle.blocked ??
+    modelBlocked ??
+    newIntentBlocked ??
+    (intent.submit?.state === "unknown" || availability.resend
+      ? (availability.sendBlocked ?? "")
+      : !waiting && !run.busy
+        ? availability.sendBlocked
+        : undefined);
   const queue = useQueuedSend(
-    active || run.busy || (!!intent.submit && !turn),
-    !genuineBlock &&
+    waiting,
+    blocking === undefined &&
       (availability.readyForNext ||
         (availability.initial && !availability.sendBlocked)),
-    genuineBlock || !draft.trim(),
+    // Only text typed since the last capture may be queued: a captured attempt is already in the
+    // transcript and its box is shown empty, so queueing it would send the same message twice.
+    blocking ??
+      (initialDraft.pendingDraft(port.context) === null && draft.trim()
+        ? false
+        : ""),
     send,
   );
   useLiveComposer(composer, {
@@ -521,7 +556,10 @@ export function MeriLiveConversation({
       onSend: send,
       onQueue: queue.onQueue,
       queued: queue.queued,
-      onStop: () => void run.cancel(),
+      onStop: () => {
+        queue.cancel();
+        void run.cancel();
+      },
       sendBlocked:
         retentionError ??
         lifecycle.blocked ??
@@ -530,9 +568,10 @@ export function MeriLiveConversation({
       // A retained request is the person's to resolve; the key hint says so until it is. An
       // edge-refused message already says so in the transcript, once.
       notice:
-        intent.submit?.state === "unknown" && run.failure !== "refused"
+        queue.released ??
+        (        intent.submit?.state === "unknown" && run.failure !== "refused"
           ? "Your last request is still unconfirmed. Retry it above before sending another."
-          : undefined,
+          : undefined),
       modelSelection:
         intent.submit?.state !== "observed" && intent.submit
           ? intent.submit.modelSelection

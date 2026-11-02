@@ -79,7 +79,7 @@ it("a new run's request is recorded in a full tab, mid-run, without the recovery
   expect(keys(storage)).toHaveLength(128);
   // The oldest settled record made room; every conversation's current-run request stays.
   expect(has(storage, 0, 0)).toBe(false);
-  for (const [conversation, run] of [[0, 124], [1, 125], [2, 126], [3, 127]])
+  for (const [conversation, run] of [[0, 124], [1, 125], [2, 126], [3, 127]] as const)
     expect(has(storage, conversation, run)).toBe(true);
 });
 
