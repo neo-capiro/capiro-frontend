@@ -1,6 +1,9 @@
 import { expect, it } from "vitest";
 import { receiveIntentsResponse } from "@capiro/meri-client/intents";
 import { intentRow } from "../src/features/meri/conversation/intents/intent-view";
+import { INTENT_OPERATION_LABELS } from "../src/features/meri/conversation/intents/intent-labels";
+import { proposalLabel } from "../src/features/meri/approvals/inbox-view";
+import type { IntentsInboxRow } from "@capiro/meri-client/intents";
 
 /**
  * A journal row that never reached a proposal (preparing, failed, uncertain) carries only its
@@ -35,9 +38,9 @@ it("names an uncertain preparation by the request's own label and says what Meri
   expect(row.title).toBe("Research Portfolio management action");
   expect(row.status).toBe("Result uncertain");
   expect(row.decision).toBe("closed");
-  expect(row.detail).toContain("did not get a confirmed answer");
-  expect(row.detail).toContain("Nothing was approved or executed.");
-  expect(row.detail).toContain("will not send this request again");
+  expect(row.detail).toBe(
+    "Meri sent this request but could not confirm the outcome. Nothing was approved or executed. Check Approvals; if nothing is there, ask again.",
+  );
 });
 
 it("names a failed preparation and explains the closed code in plain words, keeping the code visible", async () => {
@@ -52,7 +55,7 @@ it("names a failed preparation and explains the closed code in plain words, keep
   expect(refused.status).toBe("Not prepared");
   expect(refused.tone).toBe("danger");
   expect(refused.detail).toBe(
-    "The owner that prepares this kind of request refused it. Nothing was approved or executed. (REFUSED)",
+    "The service that prepares this kind of request refused it. Nothing was approved or executed.",
   );
   const unavailable = await rowOf({
     deliveryId: delivery(3),
@@ -63,7 +66,7 @@ it("names a failed preparation and explains the closed code in plain words, keep
   });
   expect(unavailable.title).toBe("Change a watch");
   expect(unavailable.detail).toBe(
-    "The owner that prepares this kind of request could not be reached. Nothing was approved or executed. (UNAVAILABLE)",
+    "The service that prepares this kind of request could not be reached. Nothing was approved or executed.",
   );
   const other = await rowOf({
     deliveryId: delivery(4),
@@ -74,11 +77,11 @@ it("names a failed preparation and explains the closed code in plain words, keep
   });
   expect(other.title).toBe("Research Portfolio snapshot");
   expect(other.detail).toBe(
-    "Preparation failed before anything was prepared. Nothing was approved or executed. (UNKNOWN)",
+    "Preparation failed before anything was prepared (UNKNOWN). Nothing was approved or executed.",
   );
 });
 
-it("titles every catalog intent with words, never an identifier with underscores or a leading capital id", async () => {
+it("titles every catalog intent with the one shared label, in the conversation card and the Approvals inbox alike", async () => {
   const ids = [
     "save_note",
     "watch_action",
@@ -116,12 +119,21 @@ it("titles every catalog intent with words, never an identifier with underscores
     "save_chat_attachments",
   ];
   for (const [index, id] of ids.entries()) {
+    expect(INTENT_OPERATION_LABELS[id], id).toBeDefined();
+    expect(
+      proposalLabel({
+        operation: { id, version: "0.2.0" },
+        kind: "proposal",
+      } as IntentsInboxRow),
+      id,
+    ).toBe(INTENT_OPERATION_LABELS[id]);
     const row = await rowOf({
       deliveryId: delivery(10 + index),
       createdAt: "2026-11-02T02:50:00.000Z",
       operation: { id, version: "0.2.0" },
       state: "pending",
     });
+    expect(row.title, id).toBe(INTENT_OPERATION_LABELS[id]);
     expect(row.title, id).not.toContain("_");
     expect(row.title, id).not.toBe(id.charAt(0).toUpperCase() + id.slice(1));
     expect(row.status, id).toBe("Preparing");
