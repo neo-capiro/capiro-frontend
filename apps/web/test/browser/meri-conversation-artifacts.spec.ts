@@ -1,4 +1,4 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect, type Page, type Route } from "@playwright/test";
 import { ids, inspected } from "../../tests/meri-document-public-fixtures";
 import {
   accessFormats,
@@ -17,8 +17,22 @@ import {
 
 const token = `${"c".repeat(40)}.${"m".repeat(43)}`;
 const fileBytes = "Synthetic document";
+const lineage = "Original,";
 
-async function withArtifact(page: Page) {
+/**
+ * A published file in the transcript. The card reads the file's details as soon as it is shown (one
+ * `inspect`), so it names the file, its kind, size and version without a click; `inspect` answers what
+ * the test supplies, or refuses when nothing is supplied.
+ */
+async function withArtifact(
+  page: Page,
+  inspect: (route: Route) => Promise<void> = (r) =>
+    reply(
+      r,
+      { error: { code: "DOCUMENT_REFUSED", outcome: "READ_UNAVAILABLE" } },
+      502,
+    ),
+) {
   const f = await setupConversation(page);
   await page.route("**/api/conversations/history", (r) =>
     reply(
@@ -46,32 +60,28 @@ async function withArtifact(page: Page) {
         body: request.postDataJSON(),
       });
   });
+  await page.route("**/api/documents/inspect", inspect);
   await connect(page);
-  const card = page.getByRole("group", { name: /^File version / });
-  await expect(card).toBeVisible();
-  return { f, seen, card };
+  await expect(
+    page.getByRole("heading", { name: "Files in this conversation" }),
+  ).toBeVisible();
+  return { f, seen };
 }
 
-for (const format of accessFormats)
-  test(`conversation ${format} files inspect and download through a signed link`, async ({
-    page,
-  }, info) => {
-    const { f, seen, card } = await withArtifact(page);
-    const receipt = accessInspection(format);
-    const filename = receipt.version.filename;
-    await page.route("**/api/documents/inspect", (r) => reply(r, receipt));
-    await page.route("**/api/documents/links/issue", (r) =>
+const links = (page: Page, mimeType: string, filename: string) =>
+  Promise.all([
+    page.route("**/api/documents/links/issue", (r) =>
       reply(r, {
         versionId: ids.version,
         token,
         expiresAtMs: Date.now() + 60_000,
       }),
-    );
-    await page.route("**/api/documents/links/redeem", (r) =>
+    ),
+    page.route("**/api/documents/links/redeem", (r) =>
       r.fulfill({
         status: 200,
         headers: {
-          "content-type": receipt.version.mimeType,
+          "content-type": mimeType,
           "content-disposition": `attachment; filename="${filename}"`,
           "content-length": String(fileBytes.length),
           "cache-control": "no-store",
@@ -80,9 +90,29 @@ for (const format of accessFormats)
         },
         body: fileBytes,
       }),
-    );
-    await card.getByRole("button", { name: "Preview", exact: true }).click();
+    ),
+  ]);
+
+for (const format of accessFormats)
+  test(`a published ${format} file is named with its size and version at once, shows its details and downloads through a signed link`, async ({
+    page,
+  }, info) => {
+    const receipt = accessInspection(format);
+    const filename = receipt.version.filename;
+    const { f, seen } = await withArtifact(page, (r) => reply(r, receipt));
     const file = page.getByRole("group", { name: filename });
+    await expect(file).toBeVisible();
+    // The details line names the kind, the size and the version's creation with no click (M26/M23: a card, not a bare id).
+    await expect(
+      file.getByText(`${receipt.version.object.bytes} B · ${lineage}`, {
+        exact: false,
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("group", { name: "Generated file" }),
+    ).toHaveCount(0);
+    await links(page, receipt.version.mimeType, filename);
+    await file.getByRole("button", { name: "Details", exact: true }).click();
     await expect(file.getByText("Generation: draft")).toBeVisible();
     await expect(file.getByText("Preview: pending")).toBeVisible();
     await expect(
@@ -106,6 +136,10 @@ for (const format of accessFormats)
       await expect(
         file.getByText("Archive rows", { exact: true }),
       ).toBeVisible();
+    await file
+      .getByRole("button", { name: "Hide details", exact: true })
+      .click();
+    await expect(file.getByText("Generation: draft")).toHaveCount(0);
     const download = page.waitForEvent("download");
     await file.getByRole("button", { name: "Download", exact: true }).click();
     const saved = await download;
@@ -118,6 +152,7 @@ for (const format of accessFormats)
         `Downloaded ${filename}; its bytes matched the inspected version.`,
       ),
     ).toBeVisible();
+    // One read when the card mounted, then the download's own verification, link issue and redeem.
     expect(seen.map((item) => item.path)).toEqual([
       "/api/documents/inspect",
       "/api/documents/inspect",
@@ -137,13 +172,13 @@ for (const format of accessFormats)
 test("a closed download-link refusal is reported and nothing is downloaded", async ({
   page,
 }) => {
-  const { f, seen, card } = await withArtifact(page);
-  await page.route("**/api/documents/inspect", (r) => reply(r, inspected()));
+  const { f, seen } = await withArtifact(page, (r) => reply(r, inspected()));
   await page.route("**/api/documents/links/issue", (r) =>
     reply(r, { error: { code: "DOWNLOADS_UNAVAILABLE" } }, 503),
   );
   let downloads = 0;
   page.on("download", () => downloads++);
+  const card = page.getByRole("group", { name: "Synthetic.txt" });
   await card.getByRole("button", { name: "Download", exact: true }).click();
   await expect(
     card.getByText(
@@ -152,62 +187,58 @@ test("a closed download-link refusal is reported and nothing is downloaded", asy
   ).toBeVisible();
   expect(seen.map((item) => item.path)).toEqual([
     "/api/documents/inspect",
+    "/api/documents/inspect",
     "/api/documents/links/issue",
   ]);
   expect(downloads).toBe(0);
   expect(f.unexpected).toEqual([]);
 });
 
-test("a refused inspection leaves the file without invented details", async ({
+test("a refused inspection leaves the file without invented details, and the person can read them again", async ({
   page,
 }) => {
-  const { f, card } = await withArtifact(page);
-  await page.route("**/api/documents/inspect", (r) =>
-    reply(
-      r,
-      { error: { code: "DOCUMENT_REFUSED", outcome: "READ_UNAVAILABLE" } },
-      502,
-    ),
+  let refuse = true;
+  const { f, seen } = await withArtifact(page, (r) =>
+    refuse
+      ? reply(
+          r,
+          { error: { code: "DOCUMENT_REFUSED", outcome: "READ_UNAVAILABLE" } },
+          502,
+        )
+      : reply(r, inspected()),
   );
-  await card.getByRole("button", { name: "Preview", exact: true }).click();
+  const card = page.getByRole("group", { name: "Generated file" });
+  await expect(card).toBeVisible();
   await expect(
     card.getByText(
-      "Preview unavailable (DOCUMENT_REFUSED). Nothing was substituted.",
+      "File details unavailable (DOCUMENT_REFUSED). Nothing was substituted.",
     ),
   ).toBeVisible();
   await expect(page.getByText("Synthetic.txt")).toHaveCount(0);
   await expect(card.getByText(/Generation:/)).toHaveCount(0);
+  refuse = false;
+  await card
+    .getByRole("button", { name: "Read details again", exact: true })
+    .click();
+  const file = page.getByRole("group", { name: "Synthetic.txt" });
+  await expect(file).toBeVisible();
+  await expect(file.getByText(lineage, { exact: false })).toBeVisible();
+  expect(seen.map((item) => item.path)).toEqual([
+    "/api/documents/inspect",
+    "/api/documents/inspect",
+  ]);
   expect(f.unexpected).toEqual([]);
 });
 
 test("native workspace files show truthful path/bytes and download without generated claims", async ({
   page,
 }, info) => {
-  const { f, card, seen } = await withArtifact(page),
-    receipt = nativeInspection();
-  await page.route("**/api/documents/inspect", (r) => reply(r, receipt));
-  await page.route("**/api/documents/links/issue", (r) =>
-    reply(r, {
-      versionId: ids.version,
-      token,
-      expiresAtMs: Date.now() + 60000,
-    }),
-  );
-  await page.route("**/api/documents/links/redeem", (r) =>
-    r.fulfill({
-      status: 200,
-      headers: {
-        "content-type": "application/octet-stream",
-        "content-disposition": 'attachment; filename="report.csv"',
-        "content-length": String(fileBytes.length),
-        "cache-control": "no-store",
-        "x-content-type-options": "nosniff",
-      },
-      body: fileBytes,
-    }),
-  );
-  await card.getByRole("button", { name: "Preview", exact: true }).click();
+  const receipt = nativeInspection();
+  const { f, seen } = await withArtifact(page, (r) => reply(r, receipt));
+  await links(page, "application/octet-stream", "report.csv");
   const file = page.getByRole("group", { name: "report.csv" });
+  await expect(file).toBeVisible();
+  await file.getByRole("button", { name: "Details", exact: true }).click();
   await expect(
     file.getByText("exports/report.csv", { exact: true }),
   ).toBeVisible();
@@ -216,6 +247,9 @@ test("native workspace files show truthful path/bytes and download without gener
     file.getByText(
       /Generation:|Preview: pending|Visual inspection|Native opening/,
     ),
+  ).toHaveCount(0);
+  await expect(
+    file.getByRole("link", { name: "Open in Workspace" }),
   ).toHaveCount(0);
   const pending = page.waitForEvent("download");
   await file.getByRole("button", { name: "Download", exact: true }).click();
@@ -257,7 +291,6 @@ for (const kind of ["native", "generated"] as const)
             revoke(value);
           };
         });
-        const { f, card } = await withArtifact(page);
         const receipt =
           kind === "native" ? nativeInspection() : accessInspection("txt");
         const filename = kind === "native" ? "report.csv" : "Synthetic.txt";
@@ -268,7 +301,7 @@ for (const kind of ["native", "generated"] as const)
         let denied = false,
           downloads = 0;
         page.on("download", () => downloads++);
-        await page.route("**/api/documents/inspect", (route) =>
+        const { f } = await withArtifact(page, (route) =>
           denied && deniedAt === "inspect"
             ? reply(
                 route,
@@ -303,11 +336,16 @@ for (const kind of ["native", "generated"] as const)
                 body: fileBytes,
               }),
         );
-        await card
-          .getByRole("button", { name: "Preview", exact: true })
-          .click();
         const file = page.getByRole("group", { name: filename });
         await expect(file).toBeVisible();
+        await file
+          .getByRole("button", { name: "Details", exact: true })
+          .click();
+        await expect(
+          file.getByText(
+            kind === "native" ? "Stored bytes verified" : "Generation: draft",
+          ),
+        ).toBeVisible();
         const saved = page.waitForEvent("download");
         await file
           .getByRole("button", { name: "Download", exact: true })
@@ -320,20 +358,21 @@ for (const kind of ["native", "generated"] as const)
         );
         expect(downloadUrl).toMatch(/^blob:/);
         denied = true;
+        // Every download verifies the version first, so a denied inspection is met on the download path too.
         await file
-          .getByRole("button", {
-            name: deniedAt === "inspect" ? "Preview" : "Download",
-            exact: true,
-          })
+          .getByRole("button", { name: "Download", exact: true })
           .click();
         await expect(
           page.getByText(
-            /(?:Preview|Download) unavailable \(.+\). Nothing was substituted\./,
+            /Download unavailable \(.+\). Nothing was substituted\./,
           ),
         ).toBeVisible();
         await expect
           .soft(page.getByRole("group", { name: filename }))
           .toHaveCount(0);
+        await expect
+          .soft(page.getByRole("group", { name: "Generated file" }))
+          .toBeVisible();
         await expect
           .soft(
             page.getByText(

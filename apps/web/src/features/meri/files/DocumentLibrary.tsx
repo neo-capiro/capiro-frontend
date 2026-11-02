@@ -1,10 +1,12 @@
 "use client";
 import {
+  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
   useState,
   useSyncExternalStore,
+  type ReactNode,
 } from "react";
 import { NativeResultFiles } from "./NativeResultFiles";
 import { LibrarySelectedVersion } from "./LibrarySelectedVersion";
@@ -24,6 +26,14 @@ import {
 } from "../../../shared/meri-documents/library-access";
 import { SessionLifetimeController } from "../../../shared/meri-actions/opaque-session-controller";
 import { DocumentLibraryController } from "./document-library-state";
+import {
+  LIBRARY_RECONNECT_ATTEMPTS,
+  immediateRenewal,
+  libraryConnectionPhase,
+  libraryReconnectState,
+  type LibraryConnectionPhase,
+} from "./library-connection";
+import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 import { isOfficeTarget } from "../office/OfficeWorkspaceLink";
 import styles from "./files.module.css";
 
@@ -41,12 +51,15 @@ export function DocumentLibrary({
   account,
   clientId,
   officeOpen,
+  autoOpen = false,
 }: {
   account: Account;
   clientId?: string;
   /** The Workspace's Office documents: only Word, Excel and PowerPoint versions, each opened by this action.
    * Absent (the Files library), those versions are not listed here at all. */
   officeOpen?: ((version: LibraryVersion) => void) | undefined;
+  /** Load the saved conversations at once and open the newest one, so the files list without a click. */
+  autoOpen?: boolean;
 }) {
   const [rows, setRows] = useState<ConversationListPage["conversations"]>([]);
   const [before, setBefore] =
@@ -101,6 +114,24 @@ export function DocumentLibrary({
       if (!current.signal.aborted) setBusy(false);
     }
   }
+  // The Workspace lists the person's Office documents without a conversation choice first: the newest saved
+  // conversation (in this client, or any) opens the library in its owner or client scope.
+  const opened = useRef(false);
+  useEffect(() => {
+    if (!autoOpen || opened.current) return;
+    opened.current = true;
+    void load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one discovery read when the library mounts
+  }, [autoOpen]);
+  const first = rows[0];
+  const shownOrigin: Origin | null =
+    origin ??
+    (autoOpen && first
+      ? {
+          conversationId: first.conversationId,
+          clientId: libraryOriginClient(first, account),
+        }
+      : null);
   return (
     <section className={styles.files} aria-label="Saved file library">
       <h2>Saved files and version history</h2>
@@ -124,7 +155,7 @@ export function DocumentLibrary({
           <label className={styles.field}>
             <span>Saved conversation</span>
             <select
-              value={origin?.conversationId ?? ""}
+              value={shownOrigin?.conversationId ?? ""}
               onChange={(event) => {
                 const row = rows.find(
                   (item) => item.conversationId === event.target.value,
@@ -158,11 +189,11 @@ export function DocumentLibrary({
             : "No matching conversation on this page. Continue loading to check later pages."}
         </p>
       )}
-      {origin && (
+      {shownOrigin && (
         <LibraryConnection
-          key={JSON.stringify(origin)}
+          key={JSON.stringify(shownOrigin)}
           account={account}
-          origin={origin}
+          origin={shownOrigin}
           officeOpen={officeOpen}
         />
       )}
@@ -206,50 +237,122 @@ function LibraryConnection({
     host.getSnapshot,
     host.getSnapshot,
   );
-  if (state.status === "ready")
-    return (
-      <>
-        <NativeResultFiles
-          key={`results:${state.lifetimeKey}`}
-          port={state.port}
-        />
-        <LibraryPages
-          key={state.lifetimeKey}
-          port={state.port}
-          account={account}
-          officeOpen={officeOpen}
-          {...(anchor ? { anchor } : {})}
-        />
-      </>
-    );
+  // The last ready port stays mounted through the session's own renewal (Meri ends each file-access session
+  // before its cap and issues the next) and through an issuance the control did not answer; see
+  // `libraryConnectionPhase`. Only a refusal clears it.
+  const [shown, setShown] = useState<{
+    port: DocumentLibraryAccess;
+    lifetimeKey: string;
+  } | null>(null);
+  if (state.status === "ready" && shown?.port !== state.port)
+    setShown({ port: state.port, lifetimeKey: state.lifetimeKey });
+  const phase = libraryConnectionPhase(
+    state.status,
+    host.getExpirationReason(),
+    host.getIssuanceStatus(),
+    shown !== null,
+  );
+  if (phase === "lost" && shown !== null) setShown(null);
+  const reason = host.getExpirationReason();
+  // The planned early end reconnects at once. A hard-cap expiry (a session that could not renew in time) and an
+  // unanswered issuance go through the shared reconnect schedule, whose ladder (2 s doubling to 30 s) bounds the
+  // attempts, so a short-lived receipt can never drive a request storm.
+  useEffect(() => {
+    if (immediateRenewal(phase, state.status, reason)) void host.connect();
+  }, [phase, state.status, reason, host]);
+  const connect = useCallback(() => void host.connect(), [host]);
+  const schedule = useReconnectSchedule(
+    libraryReconnectState(phase, state.status, reason),
+    connect,
+    LIBRARY_RECONNECT_ATTEMPTS,
+  );
+  const label = anchor
+    ? "Version history connection"
+    : "File library connection";
+  const askAgain =
+    phase === "lost" || state.status === "unavailable" || schedule.stopped;
+  const notice =
+    schedule.stopped && phase !== "lost" && phase !== "ready"
+      ? "File access could not be checked for several minutes. Automatic checks have stopped."
+      : phase === "renewing"
+        ? "Renewing file access…"
+        : phase === "retrying"
+          ? "File access could not be checked just now; checking again."
+          : phase === "connecting"
+            ? state.status === "unavailable"
+              ? "File access could not be checked just now; checking again."
+              : "Checking current file access…"
+            : phase === "lost"
+              ? "Current file access is unavailable. Previously loaded details have been cleared."
+              : null;
   return (
-    <section
-      className={styles.panel}
-      aria-label={
-        anchor ? "Version history connection" : "File library connection"
-      }
-    >
-      <p role="status">
-        {state.status === "idle" || state.status === "connecting"
-          ? "Checking current file access…"
-          : "Current file access is unavailable. Previously loaded details have been cleared."}
-      </p>
-      {state.status !== "idle" && state.status !== "connecting" && (
-        <Button variant="outline" onClick={() => void host.connect()}>
-          Check access again
-        </Button>
+    <>
+      {notice && (
+        <section className={styles.panel} aria-label={label}>
+          <p role="status">{notice}</p>
+          {askAgain && (
+            <Button
+              variant="outline"
+              onClick={() => {
+                schedule.reset();
+                void host.connect();
+              }}
+            >
+              Check access again
+            </Button>
+          )}
+        </section>
       )}
-    </section>
+      {shown && (
+        <>
+          <LibraryActions phase={phase}>
+            <NativeResultFiles
+              key={`results:${shown.lifetimeKey}`}
+              port={shown.port}
+            />
+          </LibraryActions>
+          <LibraryPages
+            key={shown.lifetimeKey}
+            port={shown.port}
+            phase={phase}
+            account={account}
+            officeOpen={officeOpen}
+            {...(anchor ? { anchor } : {})}
+          />
+        </>
+      )}
+    </>
+  );
+}
+
+/**
+ * The shown files act on the displayed session's port. While that session is renewed or asked again it is
+ * closed, so every control inside stays disabled until a current port is mounted; a click would otherwise
+ * send on the closed session and the page would clear its list.
+ */
+export function LibraryActions({
+  phase,
+  children,
+}: {
+  phase: LibraryConnectionPhase;
+  children?: ReactNode;
+}) {
+  return (
+    <fieldset disabled={phase !== "ready"} className={styles.actions}>
+      {children}
+    </fieldset>
   );
 }
 
 function LibraryPages({
   port,
+  phase,
   account,
   anchor,
   officeOpen,
 }: {
   port: DocumentLibraryAccess;
+  phase: LibraryConnectionPhase;
   account: Account;
   anchor?: LibraryVersion;
   officeOpen?: ((version: LibraryVersion) => void) | undefined;
@@ -260,34 +363,36 @@ function LibraryPages({
   const [selected, setSelected] = useState<LibraryVersion | null>(null);
   return (
     <>
-      {!anchor && (
-        <label className={styles.field}>
-          <span>Files to show</span>
-          <select
-            value={scope}
-            onChange={(event) => {
-              setSelected(null);
-              setScope(event.target.value as LibraryScope);
-            }}
-          >
-            <option value="conversation">This conversation</option>
-            <option
-              value="client"
-              disabled={port.context.selectedClientId === null}
+      <LibraryActions phase={phase}>
+        {!anchor && (
+          <label className={styles.field}>
+            <span>Files to show</span>
+            <select
+              value={scope}
+              onChange={(event) => {
+                setSelected(null);
+                setScope(event.target.value as LibraryScope);
+              }}
             >
-              This client
-            </option>
-            <option value="owner">My files</option>
-          </select>
-        </label>
-      )}
-      <LibraryPage
-        key={anchor?.versionId ?? scope}
-        port={port}
-        query={anchor ? { anchor } : { scope }}
-        officeOpen={officeOpen}
-        onHistory={setSelected}
-      />
+              <option value="conversation">This conversation</option>
+              <option
+                value="client"
+                disabled={port.context.selectedClientId === null}
+              >
+                This client
+              </option>
+              <option value="owner">My files</option>
+            </select>
+          </label>
+        )}
+        <LibraryPage
+          key={anchor?.versionId ?? scope}
+          port={port}
+          query={anchor ? { anchor } : { scope }}
+          officeOpen={officeOpen}
+          onHistory={setSelected}
+        />
+      </LibraryActions>
       {!anchor && selected && (
         <LibraryConnection
           key={selected.versionId}
@@ -322,6 +427,8 @@ function LibraryPage({
     () => new DocumentLibraryController(port, query),
   );
   useLayoutEffect(() => controller.attach(), [controller]);
+  // A renewed session's port replaces the disposed one for the same context; the loaded page stays.
+  useEffect(() => controller.bind(port), [controller, port]);
   useEffect(() => {
     void controller.loadMore();
   }, [controller]);

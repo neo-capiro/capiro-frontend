@@ -12,7 +12,11 @@ export type ActionSessionHints = z.infer<typeof actionSessionHints>;
 
 /** The issuance answered without a session; its HTTP status is kept so a caller can tell a transient answer apart. */
 export class ActionSessionUnavailable extends Error {
-  constructor(readonly status: number) {
+  constructor(
+    readonly status: number,
+    /** A definitive refusal the session owner must not ask again, even for a status it otherwise retries. */
+    readonly refused = false,
+  ) {
     super("Action session unavailable");
   }
 }

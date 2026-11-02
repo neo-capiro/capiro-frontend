@@ -37,11 +37,12 @@ const RENEW_RECHECK_MS = 1_000;
  * Issuance answers that can clear on their own: control answers 503 SESSION_AUTHORITY_UNAVAILABLE when an authority
  * owner (Core identity, membership or current context) did not answer, older controls answered 401 SESSION_REFUSED
  * for that same case, and the same-origin proxy reports an unreachable control as 5xx. A real refusal is asked
- * again only a bounded number of times and still ends unavailable; a receipt, context or account mismatch is never
- * retried.
+ * again only a bounded number of times and still ends unavailable; a receipt, context or account mismatch, and an
+ * answer its issuer marks refused, are never retried.
  */
 const transientIssuance = (error: unknown) =>
   error instanceof ActionSessionUnavailable &&
+  !error.refused &&
   (error.status === 401 ||
     error.status === 408 ||
     error.status === 429 ||

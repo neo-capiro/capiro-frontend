@@ -17,13 +17,17 @@ export const reconnectDelayMs = (
 /**
  * Backed-off automatic retries of one read while it keeps failing because control did not answer.
  * Each failing observation schedules at most one next attempt; success ends the episode and resets
- * the ladder, and an explicit Retry starts it over. The schedule never decides what to run.
+ * the ladder, and an explicit Retry starts it over. The schedule never decides what to run. With
+ * `maxAttempts`, a failure after that many automatic attempts schedules nothing more: the schedule is
+ * `stopped` until success or an explicit Retry, so a steady failure cannot poll for the life of the page.
  */
 export function createReconnectSchedule(
   baseMs = RECONNECT_BASE_MS,
   maxMs = RECONNECT_MAX_MS,
+  maxAttempts = Infinity,
 ) {
   let attempts = 0;
+  let stopped = false;
   let timer: ReturnType<typeof setTimeout> | undefined;
   let run: () => void = () => undefined;
   const listeners = new Set<() => void>();
@@ -44,16 +48,24 @@ export function createReconnectSchedule(
     /** True while an automatic attempt is scheduled. */
     pending: () => timer !== undefined,
     attempts: () => attempts,
+    /** True once the automatic attempts are spent; only success or an explicit Retry clears it. */
+    stopped: () => stopped,
     observe(state: ReconnectState, next: () => void) {
       run = next;
       if (state === "ok") {
         if (timer === undefined && attempts === 0) return;
         cancel();
         attempts = 0;
+        stopped = false;
         notify();
         return;
       }
-      if (state === "busy" || timer !== undefined) return;
+      if (state === "busy" || timer !== undefined || stopped) return;
+      if (attempts >= maxAttempts) {
+        stopped = true;
+        notify();
+        return;
+      }
       const delay = reconnectDelayMs(attempts++, baseMs, maxMs);
       timer = setTimeout(() => {
         timer = undefined;
@@ -66,17 +78,25 @@ export function createReconnectSchedule(
     reset() {
       cancel();
       attempts = 0;
+      stopped = false;
       notify();
     },
     dispose() {
       cancel();
       attempts = 0;
+      stopped = false;
     },
   };
 }
 
-export function useReconnectSchedule(state: ReconnectState, run: () => void) {
-  const [schedule] = useState(() => createReconnectSchedule());
+export function useReconnectSchedule(
+  state: ReconnectState,
+  run: () => void,
+  maxAttempts = Infinity,
+) {
+  const [schedule] = useState(() =>
+    createReconnectSchedule(RECONNECT_BASE_MS, RECONNECT_MAX_MS, maxAttempts),
+  );
   useEffect(() => {
     schedule.observe(state, run);
   }, [schedule, state, run]);
@@ -86,5 +106,10 @@ export function useReconnectSchedule(state: ReconnectState, run: () => void) {
     schedule.pending,
     schedule.pending,
   );
-  return { pending, reset: schedule.reset };
+  const stopped = useSyncExternalStore(
+    schedule.subscribe,
+    schedule.stopped,
+    schedule.stopped,
+  );
+  return { pending, stopped, reset: schedule.reset };
 }

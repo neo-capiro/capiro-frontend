@@ -35,11 +35,27 @@ export class DocumentLibraryController {
   private request: AbortController | null = null;
   private active = true;
   private headVersionId: string | null = null;
+  private port: DocumentLibraryAccess;
   constructor(
-    private readonly port: DocumentLibraryAccess,
+    port: DocumentLibraryAccess,
     private readonly query: Query,
     private readonly urls = new DocumentDownloadUrl(),
-  ) {}
+  ) {
+    this.port = port;
+  }
+  /**
+   * A renewed session hands the page a new port for the same context; the loaded versions stay and the next
+   * read uses it. A request still in flight on the old port is cut (its port is disposed by the renewal).
+   */
+  bind = (port: DocumentLibraryAccess) => {
+    if (port === this.port) return;
+    if (JSON.stringify(port.context) !== JSON.stringify(this.port.context))
+      throw new Error("Library context changed");
+    this.port = port;
+    this.request?.abort();
+    this.request = null;
+    if (this.state.busy) this.publish({ busy: false });
+  };
   getSnapshot = () => this.state;
   subscribe = (listener: () => void) => {
     this.listeners.add(listener);

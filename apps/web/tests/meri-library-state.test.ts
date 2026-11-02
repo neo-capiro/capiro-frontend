@@ -208,3 +208,76 @@ it("release denial removes prior metadata and downloads; reload starts with a ne
   expect(vi.mocked(p.list).mock.lastCall?.[0].cursor).toBeNull();
   c.attach()();
 });
+
+it("binds a renewed port for the same context without clearing the loaded page, and refuses another context", async () => {
+  const first = port();
+  const controller = new DocumentLibraryController(first, { scope: "owner" });
+  const detach = controller.attach();
+  await controller.loadMore();
+  expect(controller.getSnapshot().versions).toHaveLength(1);
+  const renewed = port();
+  controller.bind(renewed);
+  expect(controller.getSnapshot().versions).toHaveLength(1);
+  expect(controller.getSnapshot().problem).toBeNull();
+  controller.select(controller.getSnapshot().versions[0]!);
+  await controller.download();
+  expect(renewed.download).toHaveBeenCalledTimes(1);
+  expect(first.download).not.toHaveBeenCalled();
+  // Binding the same port again is a no-op; a port for another conversation is never accepted.
+  controller.bind(renewed);
+  expect(() =>
+    controller.bind({
+      ...port(),
+      context: { ...session.context, tenantId: "another-tenant" },
+    }),
+  ).toThrow("Library context changed");
+  detach();
+});
+
+it("keeps at most one history request in flight per library; a renewal's port swap aborts it without re-issuing, and the next read is explicit", async () => {
+  const first = port();
+  let release: (() => void) | null = null;
+  const signals: AbortSignal[] = [];
+  vi.mocked(first.history).mockImplementation(
+    (_request, signal) =>
+      new Promise((resolve) => {
+        signals.push(signal);
+        release = () =>
+          resolve(
+            good({
+              artifactId: ids.artifact,
+              anchorVersionId: ids.version,
+              headVersionId: ids.version,
+              versions: [original()],
+              nextCursor: null,
+            }),
+          );
+      }),
+  );
+  const controller = new DocumentLibraryController(first, {
+    anchor: original(),
+  });
+  const detach = controller.attach();
+  const reads = [
+    controller.loadMore(),
+    controller.loadMore(),
+    controller.loadMore(),
+  ];
+  expect(first.history).toHaveBeenCalledTimes(1);
+  expect(controller.getSnapshot().busy).toBe(true);
+  // The session renewed while the read was in flight: the old port's request is cut, nothing is re-issued on its own.
+  const renewed = port();
+  controller.bind(renewed);
+  expect(signals[0]!.aborted).toBe(true);
+  expect(controller.getSnapshot().busy).toBe(false);
+  release!();
+  await Promise.all(reads);
+  expect(renewed.history).not.toHaveBeenCalled();
+  expect(controller.getSnapshot().versions).toEqual([]);
+  expect(controller.getSnapshot().problem).toBeNull();
+  // The next read goes to the renewed port, once.
+  await controller.loadMore();
+  expect(renewed.history).toHaveBeenCalledTimes(1);
+  expect(controller.getSnapshot().versions).toHaveLength(1);
+  detach();
+});

@@ -13,10 +13,13 @@ import { ObjectiveDestinationRoute } from "./objective-destinations/ObjectiveDes
 export function ModuleScreen({
   module,
   officeEnabled = false,
+  documentOperation = null,
 }: {
   module: ModuleSlug;
   /** Server-decided (readOfficeConfig); only the Workspace reads it. */
   officeEnabled?: boolean;
+  /** Server-decided (readDocumentConfig); the Files editor's document family, only the Workspace reads it. */
+  documentOperation?: "create_word" | "create_excel" | null;
 }) {
   switch (module) {
     case "directory":
@@ -46,7 +49,10 @@ export function ModuleScreen({
     case "workspace":
       return (
         <ObjectiveDestinationRoute kind="workspace_saved_revision">
-          <WorkspaceScreen officeEnabled={officeEnabled} />
+          <WorkspaceScreen
+            officeEnabled={officeEnabled}
+            documentOperation={documentOperation}
+          />
         </ObjectiveDestinationRoute>
       );
   }
