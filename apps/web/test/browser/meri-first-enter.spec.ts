@@ -123,3 +123,42 @@ test("first Enter in a reloaded thread sends once the latest-run check completes
   ).toBeVisible();
   await expect(composer(page)).toHaveValue("");
 });
+
+test("a message waits on the conversation check only for a bounded time, then the check's refusal shows and nothing is sent", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await setupConversation(page, undefined, [context, contextFor(nextBinding)]);
+  const { native } = await installHistory(page);
+  await installCurrentRun(page, native);
+  await installReservation(page, native);
+  let reservations = 0;
+  page.on("request", (request) => {
+    if (request.url().endsWith("/api/conversations/next-turn"))
+      reservations += 1;
+  });
+  // The latest-run read never answers within the wait.
+  const release = await holdFirst(page, "**/api/conversations/transcript");
+
+  await page.goto(selectedUrl);
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await composer(page).fill("Second message");
+  await composer(page).press("Enter");
+  await expect(page.getByText(/Queued: sends when Meri finishes/)).toBeVisible();
+
+  await page.clock.fastForward(9_000);
+  await expect(page.getByText(/Queued: sends when Meri finishes/)).toHaveCount(0);
+  await expect(
+    page.getByText(
+      "Capiro is checking this conversation before you can send again.",
+    ),
+  ).toBeVisible();
+  await expect(composer(page)).toHaveValue("Second message");
+  expect(reservations).toBe(0);
+
+  // The released message is the person's again: a late check does not send it on its own.
+  release();
+  await page.clock.fastForward(1_000);
+  expect(reservations).toBe(0);
+  await expect(composer(page)).toHaveValue("Second message");
+});

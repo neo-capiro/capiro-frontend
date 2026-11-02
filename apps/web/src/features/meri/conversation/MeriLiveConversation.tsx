@@ -1,7 +1,6 @@
 "use client";
 import {
   useEffect,
-  useEffectEvent,
   useRef,
   useState,
   type ReactNode,
@@ -42,6 +41,7 @@ import { SelectedRequestReceipt } from "./SelectedRequestReceipt";
 import { ConnectedBrowserViewer } from "../browser/ConnectedBrowserViewer";
 import { DailyQuote } from "../quote/DailyQuote";
 import { inputRefusedMessage } from "./control-reachability";
+import { useBoundedCheck, useQueuedSend } from "./queued-send";
 import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 
 /** The current admitted segment, or the exact immutable request whose ACK is still pending. */
@@ -194,49 +194,6 @@ function useSettledRefresh(finished: boolean, onSettled: () => void) {
       onSettled();
     }
   }, [finished, onSettled]);
-}
-
-/**
- * The composer's one queued message. `waiting`: a run is in flight for the last message (never a history
- * read). `ready`: a new message may be sent now. `release`: why the queue must be dropped (a block other
- * than the run, a terminal block once the run ended, or an emptied box); the text stays an ordinary draft
- * and the reason is shown. The queue clears before its one send.
- */
-export function useQueuedSend(
-  waiting: boolean,
-  ready: boolean,
-  release: string | false,
-  send: () => void,
-) {
-  const [queued, setQueued] = useState(false);
-  const [released, setReleased] = useState<string>();
-  if (queued && release !== false) {
-    setQueued(false);
-    setReleased(release || undefined);
-  }
-  if (released && waiting) setReleased(undefined);
-  // Ready: the queue clears during render and the one send happens after that render commits.
-  const [sends, setSends] = useState(0);
-  if (queued && ready && release === false) {
-    setQueued(false);
-    setSends(sends + 1);
-  }
-  const sendQueued = useEffectEvent(send);
-  useEffect(() => {
-    if (sends > 0) sendQueued();
-  }, [sends]);
-  return {
-    onQueue:
-      waiting && release === false && !queued
-        ? () => {
-            setReleased(undefined);
-            setQueued(true);
-          }
-        : undefined,
-    queued: queued ? { onCancel: () => setQueued(false) } : undefined,
-    released,
-    cancel: () => setQueued(false),
-  };
 }
 
 /** Tab return reads current status; paired focus/visibility events never start a polling loop. */
@@ -528,9 +485,11 @@ export function MeriLiveConversation({
   // a block that remains once the run ended (for example a refused skill or a next-turn refusal) or an
   // emptied box releases it, keeping the text and showing why.
   // The latest-run check of a fresh or reloaded thread counts too: a first Enter waits for it (X15).
+  // A message waits on the conversation check only for a bounded time; then the check's own refusal shows.
+  const checking = useBoundedCheck(nextTurnChecking);
   const waiting =
     active ||
-    nextTurnChecking ||
+    checking ||
     (!!intent.submit && intent.submit.state !== "unknown" && !turn);
   const blocking =
     retentionError ??
@@ -563,7 +522,7 @@ export function MeriLiveConversation({
       onQueue: queue.onQueue,
       queued: queue.queued,
       onStop: () => {
-        queue.cancel();
+        queue.stop();
         void run.cancel();
       },
       sendBlocked:
