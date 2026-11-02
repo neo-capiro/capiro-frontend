@@ -108,12 +108,24 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
   const unreachableSaved =
     history.unavailable &&
     controlFailure(history.query.error) === "unreachable";
+  // A continuation control did not answer continues from the page that failed, never from the
+  // first page again; a continuation control refused waits for the person.
+  const unreachableMore =
+    history.moreFailed && controlFailure(history.query.error) === "unreachable";
   const unreachableLatest =
-    !unreachableSaved && controlFailure(history.tail.error) === "unreachable";
-  const unreachable = unreachableSaved || unreachableLatest;
+    !unreachableSaved &&
+    !unreachableMore &&
+    controlFailure(history.tail.error) === "unreachable";
+  const unreachable = unreachableSaved || unreachableMore || unreachableLatest;
   const { refetch: refetchLatest } = history.tail;
+  const { fetchNextPage } = history.query;
+  const retryUnreachable = unreachableSaved
+    ? history.refresh
+    : unreachableMore
+      ? () => void fetchNextPage()
+      : () => void refetchLatest();
   const reconnect = useReconnectSchedule(
-    unreachableSaved
+    unreachableSaved || unreachableMore
       ? history.query.isFetching
         ? "busy"
         : "failing"
@@ -122,7 +134,7 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
           ? "busy"
           : "failing"
         : "ok",
-    unreachableSaved ? history.refresh : () => void refetchLatest(),
+    retryUnreachable,
   );
   const recovered = !loading && history.selected && !history.unavailable;
   // A healthy conversation restores itself; the manual re-read and diagnostics stay behind a
@@ -145,7 +157,7 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
             disabled={history.query.isFetching}
             onClick={() => {
               reconnect.reset();
-              history.refresh();
+              retryUnreachable();
             }}
           >
             Retry
@@ -168,7 +180,7 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
           </Button>
         </div>
       ) : history.moreFailed ? (
-        // The pages after the ones shown could not be read; the rest waits for a manual retry.
+        // Control refused the pages after the ones shown; the rest waits for a manual retry.
         <div role="status" className={styles.historyIssue}>
           <p>Part of the saved conversation is shown.</p>
           {recovered && (
