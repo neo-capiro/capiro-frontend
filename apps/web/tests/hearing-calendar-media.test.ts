@@ -59,6 +59,9 @@ it("rejects local network media destinations before metadata requests", () => {
     "localhost",
     "printer.local",
     "video.internal",
+    "localhost.",
+    "printer.local.",
+    "video.home.arpa.",
   ])
     expect(officialMedia(`https://${host}/hearing.mp4`).kind).toBe(
       "unavailable",

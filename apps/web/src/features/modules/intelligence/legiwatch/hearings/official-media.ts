@@ -12,13 +12,13 @@ export function officialMedia(source?: string | null): OfficialMedia {
   if (!source) return { kind: "unavailable" };
   try {
     const url = new URL(source);
-    const host = url.hostname.toLowerCase();
+    const host = url.hostname.toLowerCase().replace(/\.$/, "");
     // Reject clearly nonpublic destinations before requesting media metadata.
     if (
       !host.includes(".") ||
       host.includes(":") ||
       /^[\d.]+$/.test(host) ||
-      /(^|\.)(localhost|local|internal|test|invalid)$/.test(host)
+      /(^|\.)(localhost|local|internal|lan|home|home\.arpa|test|invalid)$/.test(host)
     )
       return { kind: "unavailable" };
     if (url.protocol !== "https:" || url.username || url.password || url.port)
