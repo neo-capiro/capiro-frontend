@@ -4,7 +4,7 @@ import {
   accessInspection,
   accessBinary,
 } from "./meri-document-access-fixtures";
-import { documentBytes } from "./meri-document-public-fixtures";
+import { documentBytes, session } from "./meri-document-public-fixtures";
 import { officeCredential } from "./office-wire-fixture";
 function fixture(format: "docx" | "xlsx" | "pptx") {
   const receipt = accessInspection(format);
@@ -42,6 +42,7 @@ function fixture(format: "docx" | "xlsx" | "pptx") {
   });
   const port = createOfficeBrowserPort({
     credential: officeCredential,
+    context: session.context,
     lifetime: lifetime.signal,
     isCurrent: () => current,
     onAccessLost: lost,

@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
 
-/** Entry → proposal → apply → reopen over the scripted owners: the Files entry carries the exact version
+/** Entry → proposal → apply → open over the scripted owners: the Workspace entry carries the exact version
  * (id and hash) into the conversation handoff; Meri's proposal shows each change with before/after; Apply
- * sends one approved decision, the card reports the version saved from Meri's edit and reopens it in the
- * editor with its provenance note; a repeated Apply is never sent. Not Collabora, Core or Meri acceptance. */
-test("Ask Meri entry, proposal review, Apply and reopen of the published version", async ({
+ * sends one approved decision, the card reports the version saved from Meri's edit and links it to the
+ * Workspace office route; a repeated Apply is never sent. Not Collabora, Core or Meri acceptance. */
+test("Ask Meri entry, proposal review, Apply and the Workspace link to the published version", async ({
   page,
 }) => {
   await page.goto("/office-bridge.html", { timeout: 120_000 });
@@ -51,16 +51,11 @@ test("Ask Meri entry, proposal review, Apply and reopen of the published version
     card.getByRole("button", { name: "Approve…", exact: true }),
   ).toHaveCount(0);
 
-  await card
-    .getByRole("button", { name: "Open the new version in the editor" })
-    .click();
-  const dialog = page.getByRole("dialog");
-  await expect(dialog).toContainText("Quarterly report.docx");
-  await expect(dialog).toContainText(
-    "New version of Quarterly report.docx, saved from Meri's edit",
-  );
-  await expect(dialog).toContainText(
-    "Save keeps a private draft. Release the editor, then Publish to create a new file version.",
+  await expect(
+    card.getByRole("link", { name: "Open in Workspace" }),
+  ).toHaveAttribute(
+    "href",
+    "/modules/workspace?officeVersionId=00000000-0000-4000-8000-00000000000c&officeConversationId=00000000-0000-4000-8000-000000000001",
   );
 });
 
@@ -79,6 +74,6 @@ test("Reject records the person's choice and the proposal is never applied", asy
   await expect(card).toContainText("Rejected");
   await expect(card).toContainText("Nothing was changed");
   await expect(
-    card.getByRole("button", { name: "Open the new version in the editor" }),
+    card.getByRole("link", { name: "Open in Workspace" }),
   ).toHaveCount(0);
 });

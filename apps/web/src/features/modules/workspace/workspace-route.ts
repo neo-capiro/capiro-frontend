@@ -28,7 +28,14 @@ type Destination =
   | { kind: "view"; view: WorkspaceView }
   | { kind: "draft"; draftId: string; prospectId?: string }
   | { kind: "hillday"; hilldayId: string; phase?: HillDayPhase }
-  | { kind: "prospect"; prospectId: string };
+  | { kind: "prospect"; prospectId: string }
+  /** An Office document (a Meri artifact version) opened in the Workspace editor; runId only for a freshly imported original. */
+  | {
+      kind: "office";
+      versionId: string;
+      conversationId: string;
+      runId?: string;
+    };
 export type WorkspaceRoute =
   | (Destination & Scope)
   | { kind: "brief-copy" }
@@ -43,6 +50,9 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
     "hilldayId",
     "newsletterId",
     "taskId",
+    "officeVersionId",
+    "officeConversationId",
+    "officeRunId",
   ];
   if (
     [
@@ -66,6 +76,29 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
   const hilldayId = query.get("hilldayId") ?? undefined;
   const newsletterId = query.get("newsletterId") ?? undefined;
   const taskId = query.get("taskId") ?? undefined;
+  const officeVersionId = query.get("officeVersionId") ?? undefined;
+  const officeConversationId = query.get("officeConversationId") ?? undefined;
+  const officeRunId = query.get("officeRunId") ?? undefined;
+  if (officeVersionId || officeConversationId || officeRunId)
+    return officeVersionId &&
+      officeConversationId &&
+      view === "documents" &&
+      !taskId &&
+      !draftId &&
+      !prospectId &&
+      !hilldayId &&
+      !newsletterId &&
+      !query.has("briefSource") &&
+      !query.has("copyDocumentId") &&
+      !query.has("hilldayPhase")
+      ? {
+          kind: "office",
+          versionId: officeVersionId,
+          conversationId: officeConversationId,
+          runId: officeRunId,
+          clientId,
+        }
+      : { kind: "invalid" };
   if (taskId)
     return view === "documents" &&
       !draftId &&
@@ -125,6 +158,11 @@ export function workspaceHref(destination: Destination & Scope) {
     query.set("view", "hillday");
     query.set("hilldayId", destination.hilldayId);
     if (destination.phase) query.set("hilldayPhase", destination.phase);
+  }
+  if (destination.kind === "office") {
+    query.set("officeVersionId", destination.versionId);
+    query.set("officeConversationId", destination.conversationId);
+    if (destination.runId) query.set("officeRunId", destination.runId);
   }
   if (destination.kind === "newsletter-review") {
     query.set("view", "rich-newsletter");

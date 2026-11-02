@@ -78,7 +78,7 @@ it("rows link to the conversation that decides and name the client only from the
     { now },
   );
   expect(general.client).toBe("General");
-  expect(general.proposal).toBe("Watch change");
+  expect(general.proposal).toBe("Change a watch");
   expect(general.conversation.href).toBe(
     `/meri?scope=general&conversationId=${conversationId}`,
   );

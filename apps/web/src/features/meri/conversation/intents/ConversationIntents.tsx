@@ -32,7 +32,7 @@ import { isBizdevProposal } from "./bizdev-view";
 import { isMailSendProposal } from "./mail-view";
 import { isMemoryProposal } from "./memory-view";
 import { isOfficeEditProposal } from "./office-edit-view";
-import { OfficeOpenVersionButton } from "../../office/OfficeEditing";
+import { OfficeWorkspaceLink } from "../../office/OfficeWorkspaceLink";
 import { ResearchShareReview } from "./ResearchShareReview";
 import { ResearchShareResult } from "./ResearchShareResult";
 
@@ -240,7 +240,10 @@ function IntentCard({
         </Button>
       )}
       {row.officeVersion && (
-        <OfficeOpenVersionButton version={row.officeVersion} />
+        <OfficeWorkspaceLink
+          version={row.officeVersion}
+          label="Open in Workspace"
+        />
       )}
       {row.task && (
         <Button variant="outline" asChild>
