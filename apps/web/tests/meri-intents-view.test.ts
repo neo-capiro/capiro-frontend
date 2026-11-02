@@ -186,7 +186,7 @@ it("journal states and withheld items carry no content and no decision", () => {
   expect(rows.map((r) => r.status)).toEqual([
     "Preparing",
     "Result uncertain",
-    "Failed",
+    "Not prepared",
     "Withheld",
     "Draft ready",
     "Prepared",
@@ -198,7 +198,9 @@ it("journal states and withheld items carry no content and no decision", () => {
       proposal: null,
       fields: [],
     });
-  expect(rows[2]?.detail).toContain("REFUSED");
+  expect(rows[2]?.detail).toBe(
+    "The service that prepares this kind of request refused it. Nothing was approved or executed.",
+  );
 });
 
 it("awaiting rows come first, then the rest newest first", () => {
