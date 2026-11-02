@@ -7,6 +7,7 @@ import type {
   IntentsMailSendResult,
 } from "@capiro/meri-client/intents";
 import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 
 const modeLabels: Readonly<Record<string, string>> = {
   send: "Send a new message",
@@ -111,7 +112,7 @@ export function mailFields(
               .join(", "),
           },
         ]),
-    { label: "Expires", value: proposal.expiresAt },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   ];
 }
 

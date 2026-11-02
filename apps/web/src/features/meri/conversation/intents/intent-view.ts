@@ -65,6 +65,7 @@ import type {
   IntentRow,
   Viewer,
 } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 export type {
   IntentTone,
   IntentDecision,
@@ -140,13 +141,8 @@ export function proposalFields(
       fields.push({ label: humanize(key), value: plainValue(value) });
   }
   fields.push(
-    {
-      label: "Scope",
-      value: command.scopes.map((s) => `${s.kind} ${s.resourceId}`).join("; "),
-    },
     { label: "Attachments", value: String(command.attachments.length) },
-    { label: "Expires", value: proposal.expiresAt },
-    { label: "Command hash", value: proposal.commandSha256 },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   );
   if (command.action === "artifact.file")
     command.attachments.forEach((file, index) => {
@@ -483,15 +479,7 @@ export function intentRow(
           : "Submission was accepted for memory review. This receipt does not confirm a saved or published memory.",
       }),
       title: "Memory review",
-      result: withheld
-        ? []
-        : [
-            {
-              label: "Candidate reference",
-              value: item.review.result.candidateId,
-            },
-            { label: "Command hash", value: item.review.result.commandSha256 },
-          ],
+      result: [],
     };
   }
   if ("withheld" in item) return closed(plainLooks.withheldProposal);

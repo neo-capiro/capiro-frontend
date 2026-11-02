@@ -179,7 +179,7 @@ it("shows exact send details before approval and never a raw provider identifier
     Bcc: "None",
     Subject: "Test subject",
     Message: "Test body",
-    Expires: "2026-10-27T01:00:00Z",
+    Expires: "27 Oct 2026, 01:00 UTC",
   });
   for (const internal of ["Scope", "Command hash", "Original message", "Original thread"])
     expect(fields[internal]).toBeUndefined();
@@ -257,7 +257,7 @@ it("shows reply and forward modes with their attachments, never the original's i
   expect(JSON.stringify(fieldsOf(forwardProposal))).not.toContain("body-sha-1");
 });
 
-it("offers a decision only to the current approver and never sends during preview", () => {
+it("offers a decision only to the current approver and sends nothing before approval", () => {
   const row = mailRow(mailItem(), now, viewer);
   expect(row).toMatchObject({
     title: "Email for your approval",

@@ -4,6 +4,7 @@ import type {
   IntentsResearchActionProposal,
 } from "@capiro/meri-client/intents";
 import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 
 type ResearchActionItem = Extract<IntentsItem, { kind: "research_action" }>;
 type Decided = Exclude<
@@ -97,18 +98,7 @@ export function researchActionFields(
     fields.push({ label: humanize(key), value: plain(value) });
   }
   fields.push(
-    {
-      label: "Scope",
-      value: proposal.scopes
-        .map((s) =>
-          s.kind === "private-user"
-            ? "Private to the current actor"
-            : `${s.kind} ${s.resourceId}`,
-        )
-        .join("; "),
-    },
-    { label: "Expires", value: proposal.expiresAt },
-    { label: "Command hash", value: proposal.commandSha256 },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   );
   return fields;
 }
