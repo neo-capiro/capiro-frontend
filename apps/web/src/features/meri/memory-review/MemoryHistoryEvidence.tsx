@@ -120,7 +120,7 @@ function OwnerDetails({
       aria-label="Memory history and evidence"
       className={styles.history}
     >
-      <h2 className={styles.heading}>History for {label}</h2>
+      <h3 className={styles.heading}>History for {label}</h3>
       <div className={ui.row}>
         <button
           type="button"
@@ -154,11 +154,11 @@ function OwnerDetails({
       ) : null}
       {state === "unavailable" ? (
         <div role="status" className={styles.unavailable}>
-          <h3>
+          <h4>
             {kind === "evidence"
               ? "Evidence unavailable"
               : "History unavailable"}
-          </h3>
+          </h4>
           <p className={ui.muted}>
             This memory read is unavailable or access has changed.
           </p>
@@ -199,7 +199,7 @@ function OwnerDetails({
           ) : null}
           {page.entries.map((entry) => (
             <article key={entry.id} className={styles.version}>
-              <h3>{historyVersionTitle(entry)}</h3>
+              <h4>{historyVersionTitle(entry)}</h4>
               <p className={ui.muted}>
                 {entry.status === "current" ? "Current" : "Superseded"} ·{" "}
                 <time dateTime={entry.createdAt}>

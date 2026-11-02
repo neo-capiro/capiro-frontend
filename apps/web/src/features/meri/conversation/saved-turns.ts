@@ -42,6 +42,23 @@ export function savedTurns(
   return history.turns.map((turn) => savedTurn(turn, history.events));
 }
 
+/**
+ * A run this view watched reach a terminal state needs the saved history read again. A reopened run
+ * that the saved read already reports terminal does not: re-reading it hides every admitted page
+ * until all of them are read again, so a reloaded long conversation showed one turn meanwhile. A saved copy
+ * whose events stop short of its last sequence is still read again once.
+ */
+export const settledRefreshDue = (
+  turn: Pick<TurnView, "runId" | "runState"> | null | undefined,
+  saved: Pick<TurnView, "runId" | "runState" | "incompleteHistory"> | undefined,
+) =>
+  isTerminal(turn?.runState) &&
+  !(
+    saved?.runId === turn?.runId &&
+    isTerminal(saved?.runState) &&
+    !saved?.incompleteHistory
+  );
+
 /** Reading history constrains UI actions; trusted session/admission owners still decide every write. */
 export function sessionHistoryState(
   history: {

@@ -27,8 +27,8 @@
   background: var(--card);
   overflow-wrap: anywhere;
 }
-.version h3,
-.unavailable h3 {
+.version h4,
+.unavailable h4 {
   font-size: 17px;
   font-weight: 600;
 }

@@ -25,6 +25,7 @@ import {
   type TurnView,
 } from "./conversation-view";
 import { useLiveRun } from "./useLiveRun";
+import { settledRefreshDue } from "./saved-turns";
 import { shouldShowPrompt } from "./prompt-identity";
 import type { InitialDraftOwner } from "./initial-draft";
 import styles from "./live.module.css";
@@ -185,7 +186,7 @@ function useRefusalRelease(
   }, [released, initialDraft, port.context]);
 }
 
-/** Refresh saved history once this mounted run reaches a terminal state. */
+/** Refresh saved history once this mounted run reaches a terminal state the saved read does not show yet. */
 function useSettledRefresh(finished: boolean, onSettled: () => void) {
   const announced = useRef(false);
   useEffect(() => {
@@ -407,7 +408,7 @@ export function MeriLiveConversation({
     setBrowserRunId(port.context.runId);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
   useRefusalRelease(initialDraft, port, run);
-  useSettledRefresh(finished, onSettled);
+  useSettledRefresh(settledRefreshDue(turn, savedCurrent), onSettled);
   const availability = composerAvailability(
     run,
     turn,

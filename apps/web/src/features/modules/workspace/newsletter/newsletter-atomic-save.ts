@@ -20,17 +20,34 @@ export type NewsletterSave = ReturnType<
 export function newsletterInput(
   draft: WorkspaceDraftDocument,
 ): NewsletterInput {
-  const documents = draft.documents.filter(
-    (document) => !document.sourceBriefVersion && document.body.newsletter,
+  const primary = draft.documents.filter(
+    (document) => !document.sourceBriefVersion,
   );
-  if (draft.product !== "Newsletter" || documents.length !== 1)
+  const documents = primary.filter((document) => document.body.newsletter);
+  // The retired editor created the draft before writing its first newsletter
+  // body, so an interrupted first save left Core's untouched `{ blocks: [] }`
+  // primary tab. Open it as an empty newsletter; nothing is stored until a save.
+  const unwritten =
+    documents.length === 0 &&
+    primary.length === 1 &&
+    Object.keys(primary[0]!.body).every((key) => key === "blocks") &&
+    !primary[0]!.body.blocks?.length;
+  if (draft.product !== "Newsletter" || (documents.length !== 1 && !unwritten))
     throw new Error(
       "This saved draft does not have one supported primary newsletter document. Its stored content has not been changed.",
     );
   return {
     title: draft.docTitle,
-    documentId: documents[0]!.id,
-    body: newsletterBody.parse(documents[0]!.body.newsletter),
+    documentId: unwritten ? primary[0]!.id : documents[0]!.id,
+    body: unwritten
+      ? {
+          subject: "",
+          preview: "",
+          firmName: "",
+          mailingAddress: "",
+          blocks: [],
+        }
+      : newsletterBody.parse(documents[0]!.body.newsletter),
   };
 }
 
