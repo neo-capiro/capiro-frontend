@@ -65,6 +65,35 @@ describe("Workspace native document navigation", () => {
     ).toEqual({ kind: "view", view });
   });
 
+  it("opens an Office document in the Workspace by its version and conversation, in the selected client scope", () => {
+    const href = workspaceHref({
+      kind: "office",
+      versionId: draft.id,
+      conversationId: otherId,
+      clientId: prospectId,
+    });
+    expect(href).toBe(
+      `/modules/workspace?clientId=${prospectId}&officeVersionId=${draft.id}&officeConversationId=${otherId}`,
+    );
+    expect(read(href.split("?")[1]!)).toEqual({
+      kind: "office",
+      versionId: draft.id,
+      conversationId: otherId,
+      runId: undefined,
+      clientId: prospectId,
+    });
+    const imported = workspaceHref({
+      kind: "office",
+      versionId: draft.id,
+      conversationId: otherId,
+      runId: prospectId,
+    });
+    expect(read(imported.split("?")[1]!)).toMatchObject({
+      kind: "office",
+      runId: prospectId,
+    });
+  });
+
   it("leaves exact brief-copy parsing with its existing owner", () => {
     expect(read(`prospectId=${prospectId}&briefSource=encoded`)).toEqual({
       kind: "brief-copy",
@@ -98,6 +127,12 @@ describe("Workspace native document navigation", () => {
     `view=rich-newsletter&briefSource=encoded`,
     `view=hillday&hilldayId=${draft.id}&copyDocumentId=${otherId}`,
     `prospectId=${prospectId}&briefSource=a&briefSource=b`,
+    `officeVersionId=${draft.id}`,
+    `officeConversationId=${otherId}`,
+    `officeVersionId=${draft.id}&officeConversationId=not-an-id`,
+    `officeVersionId=${draft.id}&officeConversationId=${otherId}&draftId=${draft.id}`,
+    `view=hillday&officeVersionId=${draft.id}&officeConversationId=${otherId}`,
+    `officeRunId=${prospectId}`,
   ])("refuses malformed or conflicting route %s", (query) => {
     expect(read(query)).toEqual({ kind: "invalid" });
   });

@@ -179,12 +179,10 @@ it("shows exact send details before approval and never a raw provider identifier
     Bcc: "None",
     Subject: "Test subject",
     Message: "Test body",
-    Scope: "mailbox mailbox-1",
-    Expires: "2026-10-27T01:00:00Z",
-    "Command hash": "command-sha-1",
+    Expires: "27 Oct 2026, 01:00 UTC",
   });
-  expect(fields["Original message"]).toBeUndefined();
-  expect(fields["Original thread"]).toBeUndefined();
+  for (const internal of ["Scope", "Command hash", "Original message", "Original thread"])
+    expect(fields[internal]).toBeUndefined();
   expect(fields.Attachments).toBeUndefined();
   const rendered = JSON.stringify(fields);
   expect(rendered).not.toContain("connection-1");
@@ -200,7 +198,7 @@ it("shows exact send details before approval and never a raw provider identifier
   expect(fieldsOf(longProposal).Message).toBe(longBody);
 });
 
-it("shows the original message revision and attachment proof for reply and forward modes", () => {
+it("shows reply and forward modes with their attachments, never the original's internal identifiers", () => {
   const replyProposal: Canonical_MailSendApprovalProposalC6Ab2C41 = {
     ...baseProposal,
     command: {
@@ -231,12 +229,11 @@ it("shows the original message revision and attachment proof for reply and forwa
   expect(fields).toMatchObject({
     Mode: "Reply to everyone on the original message",
     Cc: "colleague@example.com",
-    "Original thread": "thread-1",
-    "Original message": "message-1",
-    "Original revision": "2026-10-26T23:00:00Z",
     Attachments: "evidence.pdf (1234 bytes)",
   });
-  expect(fields["Original body hash"]).toBeUndefined();
+  const rendered = JSON.stringify(fields);
+  for (const internal of ["thread-1", "message-1", "attachment-1", "file-sha-1"])
+    expect(rendered).not.toContain(internal);
 
   const forwardProposal: Canonical_MailSendApprovalProposalC6Ab2C41 = {
     ...replyProposal,
@@ -256,11 +253,11 @@ it("shows the original message revision and attachment proof for reply and forwa
   };
   expect(fieldsOf(forwardProposal)).toMatchObject({
     Mode: "Forward the original message",
-    "Original body hash": "body-sha-1",
   });
+  expect(JSON.stringify(fieldsOf(forwardProposal))).not.toContain("body-sha-1");
 });
 
-it("offers a decision only to the current approver and never sends during preview", () => {
+it("offers a decision only to the current approver and sends nothing before approval", () => {
   const row = mailRow(mailItem(), now, viewer);
   expect(row).toMatchObject({
     title: "Email for your approval",
@@ -268,8 +265,7 @@ it("offers a decision only to the current approver and never sends during previe
     status: "Awaiting your decision",
     tone: "neutral",
   });
-  expect(row?.detail).toContain("Nothing happens unless you approve");
-  expect(row?.detail).toContain("Sending does not happen during preview");
+  expect(row?.detail).toBe("Nothing is sent unless you approve this exact message.");
   expect(row?.result).toEqual([]);
 
   const foreign = mailRow(mailItem(), now, {

@@ -27,10 +27,7 @@ it("actual public receiver admits a prepared Research Portfolio action and the r
   expect(row.title).toBe("Create a Research Portfolio snapshot");
   expect(row.fields).toContainEqual({ label: "Name", value: "Q1 review 界" });
   expect(row.fields).toContainEqual({ label: "Expected Revision", value: "3" });
-  expect(row.fields).toContainEqual({
-    label: "Scope",
-    value: "Private to the current actor",
-  });
+  expect(row.fields.some((f) => ["Scope", "Command hash"].includes(f.label))).toBe(false);
   expect(JSON.stringify(row.fields)).not.toContain("meri-rp-");
   expect(row.fields.some((f) => f.label === "Conversation Id")).toBe(false);
 });
@@ -58,9 +55,7 @@ it("management actions list their parameters without the derived idempotency key
     label: "Prepared for",
     value: "Synthetic client",
   });
-  expect(saved.fields.find((f) => f.label === "Scope")?.value).toContain(
-    "client ",
-  );
+  expect(saved.fields.some((f) => f.label === "Scope")).toBe(false);
 });
 
 it("a succeeded result shows Core's bounded receipt and settles; uncertain and foreign states never approve", async () => {

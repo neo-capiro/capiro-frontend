@@ -30,9 +30,10 @@ test("memory submission and withheld history render without task approval or aut
   await expect(
     page.getByText(/This receipt does not confirm a saved or published memory/),
   ).toBeVisible();
+  // The receipt is described in words; its candidate identifier stays internal.
   await expect(
     page.getByText("Candidate reference", { exact: true }),
-  ).toHaveCount(1);
+  ).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: /Approve|Reject|Check result/ }),
   ).toHaveCount(0);

@@ -1,5 +1,6 @@
 import type { IntentsItem, IntentsProposal } from "@capiro/meri-client/intents";
 import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 
 type LegislativeDocumentProposal = Extract<
   IntentsProposal,
@@ -77,7 +78,7 @@ export function legislativeDocumentFields(
       },
       { label: `Citation ${i + 1} quote`, value: citation.quote },
     ]),
-    { label: "Expires", value: proposal.expiresAt },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   ];
 }
 

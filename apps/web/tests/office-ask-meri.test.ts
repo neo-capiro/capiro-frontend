@@ -1,12 +1,13 @@
-import { createElement, type ComponentProps } from "react";
+import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { OfficeAskMeri } from "../src/features/meri/office/OfficeAskMeri";
 import {
-  OfficeEditing,
-  OfficeOpenVersionButton,
+  OfficeWorkspaceLink,
+  OfficeWorkspaceLinks,
   isOfficeTarget,
-} from "../src/features/meri/office/OfficeEditing";
+  officeWorkspaceHref,
+} from "../src/features/meri/office/OfficeWorkspaceLink";
 import { conversationId, viewer } from "./office-edit-fixture";
 
 const context = {
@@ -22,7 +23,6 @@ const target = {
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   binding: { conversationId },
   scopes: [{ kind: "private-user", resourceId: viewer.actorId }],
-  note: "New version of Quarterly report.docx, saved from Meri's edit",
 };
 const inspect = async () => ({
   artifactId: "a",
@@ -47,59 +47,47 @@ describe("Ask Meri entry", () => {
         context,
         inspect,
         blocked:
-          "Publish your saved private draft first; Meri reads file versions, not private drafts.",
+          "Publish the saved draft first; Meri reads revisions, not private drafts.",
       }),
     );
     expect(html).not.toContain("Ask Meri about this document");
-    expect(html).toContain("Publish your saved private draft first");
+    expect(html).toContain("Publish the saved draft first");
   });
 });
 
-describe("reopening an applied version", () => {
-  it("shows nothing when Office editing is not enabled or no account is verified", () => {
-    expect(
-      renderToStaticMarkup(
-        createElement(OfficeOpenVersionButton, { version: target }),
-      ),
-    ).toBe("");
-    for (const props of [
-      { enabled: false, account: viewer },
-      { enabled: true, account: null },
-    ])
-      expect(
-        renderToStaticMarkup(
-          createElement(
-            OfficeEditing,
-            props as ComponentProps<typeof OfficeEditing>,
-            createElement(OfficeOpenVersionButton, { version: target }),
-          ),
-        ),
-      ).toBe("");
-  });
-  it("offers the editor for an Office version only, inside an enabled editing host", () => {
-    const html = renderToStaticMarkup(
+describe("opening an Office version in the Workspace", () => {
+  const link = (version: typeof target, enabled: boolean) =>
+    renderToStaticMarkup(
       createElement(
-        OfficeEditing,
-        { enabled: true, account: viewer } as ComponentProps<
-          typeof OfficeEditing
-        >,
-        createElement(OfficeOpenVersionButton, { version: target }),
+        OfficeWorkspaceLinks,
+        { enabled },
+        createElement(OfficeWorkspaceLink, { version }),
       ),
     );
-    expect(html).toContain("Open the new version in the editor");
-    expect(isOfficeTarget({ ...target, mimeType: "text/plain" })).toBe(false);
+  it("shows nothing when Office editing is not enabled for the deployment", () => {
     expect(
       renderToStaticMarkup(
-        createElement(
-          OfficeEditing,
-          { enabled: true, account: viewer } as ComponentProps<
-            typeof OfficeEditing
-          >,
-          createElement(OfficeOpenVersionButton, {
-            version: { ...target, mimeType: "text/plain" },
-          }),
-        ),
+        createElement(OfficeWorkspaceLink, { version: target }),
       ),
     ).toBe("");
+    expect(link(target, false)).toBe("");
+  });
+  it("links an Office version, and only an Office version, to the Workspace office route in its scope", () => {
+    const html = link(target, true);
+    expect(html).toContain("Open in Workspace");
+    expect(html).toContain(
+      `href="/modules/workspace?officeVersionId=${target.versionId}&amp;officeConversationId=${conversationId}"`,
+    );
+    expect(isOfficeTarget({ ...target, mimeType: "text/plain" })).toBe(false);
+    expect(link({ ...target, mimeType: "text/plain" }, true)).toBe("");
+    const clientId = "00000000-0000-4000-8000-0000000000c1";
+    expect(
+      officeWorkspaceHref({
+        ...target,
+        scopes: [{ kind: "client", resourceId: clientId }],
+      }),
+    ).toBe(
+      `/modules/workspace?clientId=${clientId}&officeVersionId=${target.versionId}&officeConversationId=${conversationId}`,
+    );
   });
 });

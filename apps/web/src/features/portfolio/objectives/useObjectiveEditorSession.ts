@@ -12,15 +12,19 @@ import {
   type ObjectiveFields,
 } from "./contracts";
 import type { ObjectiveAction } from "./writer";
+import type { ObjectiveIntakeSeed } from "./intake-seed";
 
 export function useObjectiveEditorSession({
   clientId,
   objective,
+  seed,
   open = true,
   onSaved,
 }: {
   clientId: string;
   objective?: Objective;
+  /** Strategy-intake answers a new objective starts from (Meri's intake link); a saved objective keeps its own. */
+  seed?: ObjectiveIntakeSeed;
   open?: boolean;
   onSaved: (record: Objective) => void;
 }) {
@@ -29,9 +33,10 @@ export function useObjectiveEditorSession({
   const [fields, setFields] = useState<ObjectiveFields>(
     objective ?? {
       ...emptyFields,
-      strategyIntake: emptyStrategyIntake(
-        identity.data?.user.clerkUserId ?? null,
-      ),
+      strategyIntake: {
+        ...emptyStrategyIntake(identity.data?.user.clerkUserId ?? null),
+        ...seed,
+      },
     },
   );
   const [requestId] = useState(() => crypto.randomUUID());

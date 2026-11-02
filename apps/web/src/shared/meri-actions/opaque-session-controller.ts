@@ -34,10 +34,11 @@ export const RENEW_LEAD_MS = 45_000;
 const RENEW_RECHECK_MS = 1_000;
 
 /**
- * Issuance answers that can clear on their own: Meri reports an authority owner that did not answer (for example
- * Core's Clerk session read timing out under first-load load) as 401 SESSION_REFUSED, and the same-origin proxy
- * reports an unreachable Meri as 5xx. A real refusal is asked again only a bounded number of times and still
- * ends unavailable; a receipt, context or account mismatch is never retried.
+ * Issuance answers that can clear on their own: control answers 503 SESSION_AUTHORITY_UNAVAILABLE when an authority
+ * owner (Core identity, membership or current context) did not answer, older controls answered 401 SESSION_REFUSED
+ * for that same case, and the same-origin proxy reports an unreachable control as 5xx. A real refusal is asked
+ * again only a bounded number of times and still ends unavailable; a receipt, context or account mismatch is never
+ * retried.
  */
 const transientIssuance = (error: unknown) =>
   error instanceof ActionSessionUnavailable &&
@@ -72,7 +73,8 @@ export class SessionLifetimeController<
   getExpirationReason = () => this.expirationReason;
   /**
    * HTTP status of the last failed issuance, kept so a caller can tell an authority that refused
-   * (403) from one that did not answer (401 after the bounded retries, see `transientIssuance`).
+   * (403) from one that did not answer (503, 5xx from the proxy, or 401 from an older control, after
+   * the bounded retries, see `transientIssuance`).
    */
   getIssuanceStatus = () => this.issuanceStatus;
   subscribe = (listener: () => void) => {

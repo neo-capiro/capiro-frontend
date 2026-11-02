@@ -1,7 +1,8 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn() }) }));
 import { MeriAttachmentPicker } from "../src/features/meri/uploads/MeriAttachmentPicker";
 import type { ComposerAttachments } from "../src/features/meri/uploads/attachment-slot";
 import type { UploadItem } from "../src/shared/meri-uploads/upload-controller";
@@ -83,27 +84,27 @@ function render(
 describe("upload row Office entry", () => {
   it("offers the clean original even when text extraction is unavailable", () => {
     const html = render();
-    expect(html).toContain("Open in editor");
+    expect(html).toContain("Open in Workspace");
     expect(html).toContain("EXTRACTION_UNAVAILABLE");
   });
   it.each(["docx", "xlsx", "pptx"])(
     "offers %s retained originals",
     (format) => {
       expect(render({ filename: "Original." + format })).toContain(
-        "Open in editor",
+        "Open in Workspace",
       );
     },
   );
   it("does not offer removed, infected, unavailable or non-Office originals", () => {
-    expect(render({ state: "removed" })).not.toContain("Open in editor");
+    expect(render({ state: "removed" })).not.toContain("Open in Workspace");
     expect(render({}, { scanStatus: "infected" })).not.toContain(
-      "Open in editor",
+      "Open in Workspace",
     );
     expect(render({}, { originalBytesAvailable: false })).not.toContain(
-      "Open in editor",
+      "Open in Workspace",
     );
     expect(render({ filename: "Original.pdf" })).not.toContain(
-      "Open in editor",
+      "Open in Workspace",
     );
   });
 });

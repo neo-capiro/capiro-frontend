@@ -14,6 +14,7 @@ import { objectiveTitle, type Objective } from "./contracts";
 import { ObjectiveEditor } from "./ObjectiveEditor";
 import { ObjectiveList, ObjectiveStats } from "./ObjectiveList";
 import { NewObjectivePage } from "./NewObjectivePage";
+import { objectiveIntakeSeed, withoutIntakeSeed } from "./intake-seed";
 import { ObjectiveOperationalPage } from "./operational/ObjectiveOperationalPage";
 import styles from "./objectives.module.css";
 export function ObjectivesPage({ clientId }: { clientId: string }) {
@@ -32,10 +33,12 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
   const selected = records?.find((o) => o.id === params.get("objective"));
   const operational = records?.find((o) => o.id === params.get("operational"));
   const creating = params.has("new");
+  // Meri's "Start the objective intake" link carries a goal and context beside `new`.
+  const seed = creating ? objectiveIntakeSeed(params) : undefined;
   const search = params.toString();
   useEffect(() => {
     if (!query.error) return;
-    const next = new URLSearchParams(search);
+    const next = withoutIntakeSeed(new URLSearchParams(search));
     if (!next.has("objective") && !next.has("new") && !next.has("operational"))
       return;
     next.delete("objective");
@@ -54,7 +57,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
     ? new Map(members.data.map((member) => [member.id, memberName(member)]))
     : undefined;
   function navigate(key?: string, value?: string) {
-    const next = new URLSearchParams(params);
+    const next = withoutIntakeSeed(params);
     next.delete("objective");
     next.delete("new");
     next.delete("operational");
@@ -97,6 +100,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
       <NewObjectivePage
         key={clientId}
         clientId={clientId}
+        seed={seed}
         onClose={() => navigate()}
         onSaved={(objective) => navigate("objective", objective.id)}
       />

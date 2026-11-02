@@ -17,6 +17,7 @@ export function createOfficeEditorHost(options: {
   sessionRunId?: string;
   onDiscarded?: () => void;
   onPublished?: (document: OfficeDocument) => void;
+  onClosed?: () => void;
 }) {
   const editor = new OfficeEditorController({
     selection: options.recovery.selection,
@@ -26,6 +27,7 @@ export function createOfficeEditorHost(options: {
       options.onDiscarded?.();
     },
     ...(options.onPublished ? { onPublished: options.onPublished } : {}),
+    ...(options.onClosed ? { onClosed: options.onClosed } : {}),
   });
   const session = new SessionLifetimeController({
     issue: (signal) =>
@@ -43,6 +45,7 @@ export function createOfficeEditorHost(options: {
     createPort: ({ session: receipt, signal, isCurrent, onAccessLost }) =>
       createOfficeBrowserPort({
         credential: receipt.credential,
+        context: receipt.context,
         lifetime: signal,
         isCurrent: () => isCurrent() && options.recovery.isCurrent(),
         onAccessLost,

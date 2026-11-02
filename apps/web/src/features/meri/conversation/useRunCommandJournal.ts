@@ -61,10 +61,11 @@ export function useRunCommandJournal(
       setIntent(value);
     },
   };
+  // Only a lasting condition blocks the tab: the record could not be recovered or its storage was
+  // replaced. A failed save leaves the intent it could not write; an uncertain send stays blocked by
+  // that intent, and anything else may be sent again instead of locking every later message.
   const storageError =
-    journal.recoveryBlocked ||
-    !journal.current() ||
-    gate.error === new TabJournalUnavailable().message
+    journal.recoveryBlocked || !journal.current()
       ? new TabJournalUnavailable().message
       : undefined;
   return {
