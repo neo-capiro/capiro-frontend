@@ -128,3 +128,72 @@ test("synthetic: an unknown Core bootstrap outcome keeps its request ID through 
   await expect.poll(() => requests.length).toBe(2);
   expect(new Set(requests).size).toBe(1);
 });
+
+test("synthetic: New conversation from the conversation list or after a General visit reopens the still-empty client conversation", async ({
+  page,
+}) => {
+  const generalConversation = "30000000-0000-4000-8000-000000000016";
+  const fixture = await setupConversation(page, undefined, [
+    contextFor(),
+    {
+      ...contextFor(),
+      selectedClientId: null,
+      conversationId: generalConversation,
+    },
+    {
+      ...contextFor(),
+      selectedClientId: null,
+      conversationId: generalConversation,
+    },
+    contextFor(),
+  ]);
+  await enableFirstChat(page);
+  const requests = await bootstrap(page, [first, second]);
+  const generalRequests: string[] = [];
+  await page.route("**/api/capiro/meri.conversation.bootstrap.v2", (route) => {
+    const { body } = route.request().postDataJSON() as {
+      body: { requestId: string };
+    };
+    generalRequests.push(body.requestId);
+    return reply(route, {
+      ...body,
+      tenantId: testIdentity.tenant.id,
+      actorId: testIdentity.user.id,
+      conversationId: generalConversation,
+    });
+  });
+
+  await page.goto(`/meri?clientId=${clientId}`);
+  await expect(page).toHaveURL(new RegExp(`conversationId=${first}$`));
+  await expect.poll(() => fixture.hints.length).toBe(1);
+
+  // From a Meri page of the scope that names no conversation.
+  await page.goto(`/meri/conversations?clientId=${clientId}`);
+  await newConversation(page).click();
+  await expect(page).toHaveURL(
+    new RegExp(`/meri\\?clientId=${clientId}&conversationId=${first}$`),
+  );
+  expect(requests).toHaveLength(2);
+  expect(new Set(requests).size).toBe(1);
+
+  // Another scope keeps its own record; the client one is untouched by the visit.
+  await page.goto("/meri?scope=general");
+  await expect(page).toHaveURL(
+    new RegExp(`scope=general&conversationId=${generalConversation}$`),
+  );
+  await newConversation(page).click();
+  await expect.poll(() => generalRequests.length).toBe(2);
+  expect(new Set(generalRequests).size).toBe(1);
+  await expect(page).toHaveURL(
+    new RegExp(`scope=general&conversationId=${generalConversation}$`),
+  );
+
+  await page.goto(`/meri/conversations?clientId=${clientId}`);
+  await newConversation(page).click();
+  await expect(page).toHaveURL(
+    new RegExp(`/meri\\?clientId=${clientId}&conversationId=${first}$`),
+  );
+  expect(requests).toHaveLength(3);
+  expect(new Set(requests).size).toBe(1);
+  expect(fixture.unexpected).toEqual([]);
+});

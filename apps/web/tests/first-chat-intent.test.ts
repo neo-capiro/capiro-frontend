@@ -207,7 +207,7 @@ it("does not confirm a mismatched request or replace a confirmed conversation", 
   });
 });
 
-it("New conversation reopens only the still-empty conversation the person is in", () => {
+it("New conversation reopens the still-empty conversation unless the person is in another one of the scope", () => {
   const storage = memoryStorage();
   expect(prepareNewConversation(scope, null, storage, () => requestB)).toBe(
     "new",
@@ -233,12 +233,16 @@ it("New conversation reopens only the still-empty conversation the person is in"
   expect(
     prepareNewConversation(scope, conversationA, storage, () => requestB),
   ).toBe("reopen");
+  // From another page or scope (no conversation of this scope in the address) as well.
+  expect(prepareNewConversation(scope, null, storage, () => requestB)).toBe(
+    "reopen",
+  );
   expect(readFirstChatIntent(scope, storage)).toEqual(confirmed);
   expect(reserveFirstChatIntent(scope, storage, () => requestB)).toEqual(
     confirmed,
   );
 
-  // From any other conversation the empty one is left behind for a new request.
+  // From a different conversation of the scope the empty one is left behind for a new request.
   expect(
     prepareNewConversation(
       scope,

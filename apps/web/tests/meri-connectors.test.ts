@@ -303,12 +303,19 @@ describe("stored connectors", () => {
     expect(title("meriv3-airtable")).toBe("Airtable");
     expect(title("meriv3-google-drive")).toBe("Google Drive");
     expect(title("meriv3-github")).toBe("GitHub");
-    expect(title("hubspot_crm")).toBe("HubSpot CRM");
-    expect(title("notion", null)).toBe("Notion");
+    expect(title("hubspot_crm", null)).toBe("HubSpot CRM");
+    expect(title("notion")).toBe("Notion");
+    expect(title("meriv3-")).toBe("meriv3-");
+    // A stored name that reads as one is kept, whatever the catalog id says.
+    expect(title("Salesforce", "meriv3-salesforce")).toBe("Salesforce");
     expect(title("My Notion workspace", "meriv3-notion")).toBe(
       "My Notion workspace",
     );
-    expect(title("meriv3-")).toBe("meriv3-");
+    expect(title("acme-crm", null)).toBe("Acme CRM");
+    expect(
+      title("connector 11111111-1111-4111-8111-111111111111", "meriv3-slack"),
+    ).toBe("Slack");
+    expect(title("meriv3-slack", "meriv3-slack-mcp")).toBe("Slack MCP");
   });
 });
 

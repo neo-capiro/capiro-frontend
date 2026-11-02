@@ -176,10 +176,11 @@ export function confirmFirstChatIntent(
 }
 
 /**
- * New conversation. The scope's still-empty confirmed conversation is reopened only while the
- * person is in it; any other confirmed record is superseded so the opening is a new request. A
- * pending record (an outcome still unknown) is kept for the resolver to replay, never rotated.
- * Storage trouble here costs at most one reopened empty conversation.
+ * New conversation. The scope's still-empty confirmed conversation is reopened unless the person
+ * is in a different conversation of the same scope (`currentConversationId`, null from any other
+ * page or scope); then, as for a used one, the record is superseded so the opening is a new
+ * request. A pending record (an outcome still unknown) is kept for the resolver to replay, never
+ * rotated. Storage trouble here costs at most one reopened empty conversation.
  */
 export function prepareNewConversation(
   scope: FirstChatScope,
@@ -190,7 +191,11 @@ export function prepareNewConversation(
   try {
     const existing = readFirstChatIntent(scope, storage);
     if (!existing || existing.state === "pending") return "new";
-    if (!existing.used && existing.conversationId === currentConversationId)
+    if (
+      !existing.used &&
+      (currentConversationId === null ||
+        existing.conversationId === currentConversationId)
+    )
       return "reopen";
     supersedeFirstChatIntent(scope, storage, issueId);
   } catch {
