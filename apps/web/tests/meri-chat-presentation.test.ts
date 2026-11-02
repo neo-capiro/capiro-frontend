@@ -18,6 +18,7 @@ import type { MeriUploadAccess } from "../src/shared/meri-uploads/access";
 import { ModelCatalogContext } from "../src/features/meri/model-selection/ModelCatalogContext";
 import { runModelLabel } from "../src/features/meri/model-selection/model-selection";
 import { modelCatalog } from "./meri-user-preferences-fixtures";
+import { savedTurns } from "../src/features/meri/conversation/saved-turns";
 
 const binding = { runId: "30000000-0000-4000-8000-000000000001" };
 const turn = (
@@ -343,10 +344,28 @@ describe("a finished answer names the model that produced it", () => {
     ).not.toContain("Synthetic model");
   });
 
-  it("carries the admitted request's selection into a saved turn", () => {
-    expect(runModelLabel(modelCatalog, selection)).toBe(
-      "Synthetic model · High",
-    );
-    expect(runModelLabel(modelCatalog, undefined)).toBeUndefined();
+  it("carries the admitted request's selection into a saved turn and labels it", () => {
+    // Only the already-admitted fields consumed by the saved-turn fold.
+    const saved = (request: Record<string, unknown>) =>
+      savedTurns({
+        latest: {},
+        turns: [
+          {
+            run: { binding, state: "completed" },
+            request: { prompt: "Synthetic saved question", ...request },
+            promptLineage: { logicalRequestId: "synthetic-request" },
+            lastSequence: 0,
+          },
+        ],
+        events: [],
+      } as unknown as NonNullable<Parameters<typeof savedTurns>[0]>)[0]!;
+    const withModel = saved({ modelSelection: selection });
+    expect(withModel.modelSelection).toEqual(selection);
+    expect(
+      labelled({ ...withModel, messages: turn("completed").messages }),
+    ).toContain("Synthetic model · High");
+    const without = saved({});
+    expect("modelSelection" in without).toBe(false);
+    expect(runModelLabel(modelCatalog, without.modelSelection)).toBeUndefined();
   });
 });

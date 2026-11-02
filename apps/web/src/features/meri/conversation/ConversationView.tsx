@@ -188,7 +188,7 @@ export function ConversationView({
   return (
     <FeedbackContext.Provider value={displayed?.port ?? null}>
       <ModelCatalogContext.Provider
-        value={session.modelCatalog.document?.modelCatalog}
+        value={session.modelCatalog?.document?.modelCatalog}
       >
         <div
           className={styles.chat}
