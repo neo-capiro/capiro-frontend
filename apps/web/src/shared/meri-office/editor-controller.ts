@@ -60,19 +60,20 @@ const reasons: Partial<Record<OfficeError["code"], string>> = {
   TOO_LARGE: "The document is too large for the editor.",
   PUBLISH_UNRESOLVED: "The publication could not be resolved.",
 };
-/** The plain reason for a failed action. A refusal the service never received changed nothing, so it asks for a
- * retry, not a recovery; any other failure may have taken effect and needs the saved draft read again. */
-function failureNotice(refusal: Refused | null) {
+/** The plain reason for a failed action. Only an action none of whose requests reached the service changed nothing,
+ * so it asks for a retry; once an earlier step succeeded, the stored draft moved on and needs recovering first. */
+function failureNotice(refusal: Refused | null, untouched: boolean) {
   if (refusal?.code === "CONFLICT")
     return "The draft or editor changed. Recover its current state before continuing.";
   if (!refusal)
     return "The operation was not confirmed. Recover the saved draft before continuing.";
-  const untouched = refusal.outcome === "NOT_DISPATCHED";
   const reason =
     reasons[refusal.code] ??
-    (untouched
-      ? "The request did not reach the document service."
-      : "The document service did not confirm the result.");
+    (refusal.outcome !== "NOT_DISPATCHED"
+      ? "The document service did not confirm the result."
+      : untouched
+        ? "The request did not reach the document service."
+        : "Earlier steps completed, but the last one did not reach the document service.");
   return untouched
     ? `${reason} Nothing changed; try again.`
     : `${reason} Recover the saved draft before continuing.`;
@@ -91,6 +92,8 @@ export class OfficeEditorController {
   private closed = false;
   private renewalPending = false;
   private modificationEpoch = 0;
+  /** Whether a request of the action in flight has already succeeded. */
+  private progressed = false;
   constructor(
     private readonly options: {
       selection: { versionId: string; draftId: string; editorId: string };
@@ -136,6 +139,7 @@ export class OfficeEditorController {
       throw new Error("Office connection changed");
     if ("error" in reply.value)
       throw new Refused(reply.value.error.code, reply.value.error.outcome);
+    this.progressed = true;
     return reply.value as OfficeResponseMap[R];
   }
   /** Resolves true only when the work completed; a refusal, an abort or a lost connection resolve false. */
@@ -147,6 +151,7 @@ export class OfficeEditorController {
     const controller = new AbortController(),
       port = this.transport;
     this.work = controller;
+    this.progressed = false;
     this.update({ busy: label, notice: "" });
     try {
       await work(port, controller.signal);
@@ -155,11 +160,13 @@ export class OfficeEditorController {
       if (controller.signal.aborted || this.closed || port !== this.transport)
         return false;
       const refusal = error instanceof Refused ? error : null;
-      this.closeFrame();
+      // Nothing reached the service: an open editor keeps its frame and unsaved edits, and the action stays retryable.
+      const untouched =
+        refusal?.outcome === "NOT_DISPATCHED" && !this.progressed;
+      if (!untouched) this.closeFrame();
       this.update({
-        uncertain:
-          refusal?.outcome === "NOT_DISPATCHED" ? this.state.uncertain : true,
-        notice: failureNotice(refusal),
+        uncertain: untouched ? this.state.uncertain : true,
+        notice: failureNotice(refusal, untouched),
       });
       return false;
     } finally {
