@@ -109,28 +109,50 @@ export function Sidebar({
           Search conversations
         </Button>
       )}
-      <div className={styles.divider} />
-      {/* The library sits under the conversation entry points; the recent chats follow it. */}
-      <h2 className={styles.libraryLabel} id="meri-library-label">
-        Library
-      </h2>
-      <SidebarDestinations
-        assetSet={assetSet}
-        fixture={fixture}
-        section={section}
-        pendingApprovals={pendingApprovals}
-        // On the chat-first canvas recent chats are the chat navigation, Runs is reachable from the
-        // Tools panel, and workspace-wide Approvals has no ordinary route (SDK decisions stay
-        // inline in the conversation). Other pages keep their existing destinations.
-        exclude={chat ? ["conversations", "runs", "approvals"] : undefined}
-      />
-      <div className={styles.divider} />
-      <SidebarRecents
-        fixture={fixture}
-        enabled={
-          conversationEnabled && capabilities.conversations.status === "on"
-        }
-      />
+      <div
+        className={styles.sidebarScroll}
+        aria-label="Library and recent conversations"
+      >
+        <div className={styles.divider} />
+        {/* The library sits under the conversation entry points; the recent chats follow it. */}
+        <h2 className={styles.libraryLabel} id="meri-library-label">
+          Library
+        </h2>
+        <SidebarDestinations
+          assetSet={assetSet}
+          fixture={fixture}
+          section={section}
+          pendingApprovals={pendingApprovals}
+          // Recent chats and All conversations own history navigation; Runs remains in Tools.
+          exclude={chat ? ["conversations", "runs"] : undefined}
+        />
+        <div className={styles.divider} />
+        <SidebarRecents
+          fixture={fixture}
+          enabled={
+            conversationEnabled && capabilities.conversations.status === "on"
+          }
+        />
+        {chat &&
+          (fixture || capabilities.conversations.navigation === "on") && (
+            <Button
+              asChild
+              variant="ghost"
+              className={`${styles.navButton} ${styles.allConversations}`}
+            >
+              <Link
+                href={
+                  fixture
+                    ? "/meri/fixture/conversation-history"
+                    : conversationSearchHref(searchClient).replace(/#.*$/, "")
+                }
+              >
+                <DesignIcon name="conversations" assetSet={assetSet} />
+                All conversations
+              </Link>
+            </Button>
+          )}
+      </div>
       <SidebarPreferences fixture={fixture} section={section} />
     </aside>
   );
@@ -159,10 +181,18 @@ function SidebarPreferences({
       >
         {href ? (
           <Link href={href} aria-current={current ? "page" : undefined}>
+            <span className={styles.preferencesIcon}>
+              <DesignIcon name="preferences" />
+            </span>
             Preferences
           </Link>
         ) : (
-          "Preferences"
+          <>
+            <span className={styles.preferencesIcon}>
+              <DesignIcon name="preferences" />
+            </span>
+            Preferences
+          </>
         )}
       </Button>
     </div>

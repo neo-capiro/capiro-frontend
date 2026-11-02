@@ -16,20 +16,11 @@ import { RichBlockControls } from "./RichBlockControls";
 import { renderDraft } from "./RichPreview";
 import { WorkspacePreview } from "./WorkspacePreview";
 import { RichStructure } from "./RichStructure";
+import { Eye, X } from "lucide-react";
 import {
-  LayoutGrid,
-  Layers,
-  Paintbrush,
-  Sparkles,
-  Monitor,
-  Smartphone,
-  Undo2,
-  Redo2,
-  Eye,
-  X,
-  ArrowLeft,
-  MessageSquare,
-} from "lucide-react";
+  NewsletterWorkspace,
+  NewsletterWorkbench,
+} from "./NewsletterWorkspace";
 import { NewsletterCanvas } from "./NewsletterCanvas";
 import { WorkspacePalette } from "./WorkspacePalette";
 import { WorkspaceSections } from "./WorkspaceSections";
@@ -58,7 +49,7 @@ import {
   type BasicConversionCandidate,
 } from "../newsletter/BasicConversion";
 
-export function RichNewsletterEditor({
+export function RichNewsletterSession({
   onClose,
   documentId,
   conversionCandidate,
@@ -254,41 +245,28 @@ export function RichNewsletterEditor({
       <BrandWorkspace key={`brand:${ownerEpoch}`} kit={brand} owner={owner} />
       <SurveyWorkspace key={`surveys:${ownerEpoch}`} survey={surveys} />
       <div hidden={brand.open}>
-        <section className={workspace.root} aria-label="Newsletter workspace">
-          <header className={workspace.header}>
-            <button
-              aria-label="Back to Workspace"
-              disabled={Boolean(history.pending)}
-              onClick={() => setClosing(true)}
-            >
-              <ArrowLeft size={20} />
-            </button>
-            <div className={workspace.title}>
-              <input
-                aria-label="Newsletter name"
-                value={draft.name}
-                maxLength={200}
-                disabled={disabled || !available}
-                onChange={(event) =>
-                  commit((current) => ({
-                    ...current,
-                    name: event.target.value,
-                  }))
-                }
-              />
-              <span role="status">
-                {history.pending
-                  ? "Working…"
-                  : history.recovery.phase !== "ready"
-                    ? "Review saved request"
-                    : history.saved
-                      ? hasRichChanges(history)
-                        ? "Unsaved changes"
-                        : "Saved newsletter"
-                      : "Local draft"}
-              </span>
-            </div>
-            <div className={workspace.headerActions}>
+        <NewsletterWorkspace
+          name={draft.name}
+          rename={
+            disabled || !available
+              ? undefined
+              : (name) => commit((current) => ({ ...current, name }))
+          }
+          status={
+            history.pending
+              ? "Working…"
+              : history.recovery.phase !== "ready"
+                ? "Review saved request"
+                : history.saved
+                  ? hasRichChanges(history)
+                    ? "Unsaved changes"
+                    : "Saved newsletter"
+                  : "Local draft"
+          }
+          close={() => setClosing(true)}
+          closingDisabled={Boolean(history.pending)}
+          actions={
+            <>
               <button
                 disabled={!available}
                 onClick={() => {
@@ -345,8 +323,9 @@ export function RichNewsletterEditor({
               >
                 Stage in Outreach →
               </button>
-            </div>
-          </header>
+            </>
+          }
+        >
           {closeNotice}
           {conversionCandidate && (
             <BasicConversionApply
@@ -422,268 +401,206 @@ export function RichNewsletterEditor({
             />
           )}
           {available && (
-            <fieldset
-              className={workspace.workbench}
+            <NewsletterWorkbench
               disabled={disabled}
-              inert={disabled}
-            >
-              <nav className={workspace.rail} aria-label="Newsletter tools">
-                {(
-                  [
-                    ["Blocks", LayoutGrid],
-                    ["Sections", Layers],
-                    ["Styles", Paintbrush],
-                    ["Optimize", Sparkles],
-                  ] as const
-                ).map(([name, Icon]) => (
-                  <button
-                    key={name}
-                    aria-pressed={rail === name}
-                    onClick={() => {
-                      setRail(name);
-                      clearSelection();
-                      library.closeBrowse();
-                    }}
-                  >
-                    <Icon size={22} />
-                    <span>{name}</span>
-                  </button>
-                ))}
-              </nav>
-              <aside
-                className={workspace.sidebar}
-                aria-label="Newsletter settings"
-              >
-                {library.browsing === "template" ? (
-                  <SavedTemplates
-                    library={library}
-                    close={() => {
-                      library.closeBrowse();
-                      libraryOpener.current?.focus();
-                    }}
-                    apply={(item) => {
-                      if (library.apply(item)) {
-                        clearSelection();
-                        setRail("Blocks");
+              rail={rail}
+              selectRail={(name) => {
+                setRail(name);
+                clearSelection();
+                library.closeBrowse();
+              }}
+              mobile={mobile}
+              setMobile={setMobile}
+              undo={history.past.length ? owner.undo : undefined}
+              redo={history.future.length ? owner.redo : undefined}
+              comments={
+                history.saved ? () => setReviewId(history.saved!.id) : undefined
+              }
+              preview={() => {
+                setPreviewOpen(true);
+                setPlainText(false);
+              }}
+              sidebar={
+                <>
+                  {library.browsing === "template" ? (
+                    <SavedTemplates
+                      library={library}
+                      close={() => {
+                        library.closeBrowse();
                         libraryOpener.current?.focus();
-                      }
-                    }}
-                  />
-                ) : library.browsing === "section" && rail !== "Sections" ? (
-                  <SavedSections
-                    library={library}
-                    close={() => {
-                      library.closeBrowse();
-                      libraryOpener.current?.focus();
-                    }}
-                    insert={(item) => {
-                      if (library.insert(item)) libraryOpener.current?.focus();
-                    }}
-                  />
-                ) : rail === "Styles" ? (
-                  <DesignStyles
-                    design={draft.design}
-                    change={(styles) =>
-                      commit((current) => ({
-                        ...current,
-                        design: { ...current.design, styles },
-                      }))
-                    }
-                  />
-                ) : rail === "Optimize" ? (
-                  <>
-                    <h2>Optimize</h2>
-                    <p className={workspace.muted}>
-                      Review links and check your saved email before staging.
-                    </p>
-                    <PreviewLinks
-                      links={newsletterPreviewLinks(renderDraft(draft))}
-                    />
-                    <button onClick={() => setLifecycleOpen(true)}>
-                      Review saved HTML checks
-                    </button>
-                    <p>
-                      Save and verify the newsletter before running a
-                      compatibility check.
-                    </p>
-                  </>
-                ) : rail === "Sections" ? (
-                  <WorkspaceSections
-                    design={draft.design}
-                    change={structure}
-                    edit={editSection}
-                    save={library.startSave}
-                    savedIds={
-                      history.saved?.design.sections.map(
-                        (section) => section.id,
-                      ) ?? []
-                    }
-                    browse={(opener) => {
-                      libraryOpener.current = opener;
-                      void library.browse();
-                    }}
-                    saved={
-                      <SavedSections
-                        library={library}
-                        close={() => {
-                          library.closeBrowse();
-                          setRail("Blocks");
-                        }}
-                        insert={(item) => {
-                          library.insert(item);
-                        }}
-                      />
-                    }
-                    tree={
-                      <RichStructure
-                        design={draft.design}
-                        selectedId={selectedId}
-                        select={selectBlock}
-                        change={structure}
-                        editSection={editSection}
-                        savedSectionIds={
-                          history.saved?.design.sections.map(
-                            (section) => section.id,
-                          ) ?? []
-                        }
-                        saveSection={library.startSave}
-                        browse={(opener) => {
-                          libraryOpener.current = opener;
-                          void library.browse();
-                        }}
-                      />
-                    }
-                  />
-                ) : selected || selectedSection ? (
-                  <>
-                    <div className={workspace.panelBack}>
-                      <button
-                        aria-label="Back to blocks"
-                        onClick={clearSelection}
-                      >
-                        <X size={20} />
-                      </button>
-                    </div>
-                    {selectedSection ? (
-                      <SectionSettings
-                        key={selectedSection.id}
-                        section={selectedSection}
-                        change={(next) =>
-                          commit((current) => ({
-                            ...current,
-                            design: {
-                              ...current.design,
-                              sections: current.design.sections.map(
-                                (section) =>
-                                  section.id === next.id ? next : section,
-                              ),
-                            },
-                          }))
-                        }
-                      />
-                    ) : (
-                      selected && (
-                        <RichBlockControls
-                          key={`${history.editorRevision}:${selected.id}`}
-                          block={selected}
-                          documentId={
-                            history.current && !history.fence
-                              ? history.saved?.id
-                              : undefined
-                          }
-                          design={draft.design}
-                          structure={structure}
-                          update={update}
-                          remove={() => remove(selected.id)}
-                        />
-                      )
-                    )}
-                  </>
-                ) : null}
-                <div
-                  hidden={Boolean(
-                    library.browsing ||
-                    rail !== "Blocks" ||
-                    selected ||
-                    selectedSection,
-                  )}
-                >
-                  <WorkspacePalette
-                    design={draft.design}
-                    change={structure}
-                    ai={ai}
-                  />
-                </div>
-              </aside>
-              <main className={workspace.canvasArea}>
-                <div className={workspace.canvasTools}>
-                  <div>
-                    <button
-                      aria-label="Desktop canvas"
-                      aria-pressed={!mobile}
-                      onClick={() => setMobile(false)}
-                    >
-                      <Monitor size={18} />
-                    </button>
-                    <button
-                      aria-label="Mobile canvas"
-                      aria-pressed={mobile}
-                      onClick={() => setMobile(true)}
-                    >
-                      <Smartphone size={18} />
-                    </button>
-                    <button
-                      aria-label="Undo"
-                      disabled={!history.past.length}
-                      onClick={owner.undo}
-                    >
-                      <Undo2 size={18} />
-                    </button>
-                    <button
-                      aria-label="Redo"
-                      disabled={!history.future.length}
-                      onClick={owner.redo}
-                    >
-                      <Redo2 size={18} />
-                    </button>
-                  </div>
-                  <div>
-                    <button
-                      disabled={!history.saved}
-                      onClick={() =>
-                        history.saved && setReviewId(history.saved.id)
-                      }
-                    >
-                      <MessageSquare size={17} />
-                      Comments
-                    </button>
-                    <button
-                      onClick={() => {
-                        setPreviewOpen(true);
-                        setPlainText(false);
                       }}
-                    >
-                      <Eye size={17} />
-                      Preview
-                    </button>
+                      apply={(item) => {
+                        if (library.apply(item)) {
+                          clearSelection();
+                          setRail("Blocks");
+                          libraryOpener.current?.focus();
+                        }
+                      }}
+                    />
+                  ) : library.browsing === "section" && rail !== "Sections" ? (
+                    <SavedSections
+                      library={library}
+                      close={() => {
+                        library.closeBrowse();
+                        libraryOpener.current?.focus();
+                      }}
+                      insert={(item) => {
+                        if (library.insert(item))
+                          libraryOpener.current?.focus();
+                      }}
+                    />
+                  ) : rail === "Styles" ? (
+                    <DesignStyles
+                      design={draft.design}
+                      change={(styles) =>
+                        commit((current) => ({
+                          ...current,
+                          design: { ...current.design, styles },
+                        }))
+                      }
+                    />
+                  ) : rail === "Optimize" ? (
+                    <>
+                      <h2>Optimize</h2>
+                      <p className={workspace.muted}>
+                        Review links and check your saved email before staging.
+                      </p>
+                      <PreviewLinks
+                        links={newsletterPreviewLinks(renderDraft(draft))}
+                      />
+                      <button onClick={() => setLifecycleOpen(true)}>
+                        Review saved HTML checks
+                      </button>
+                      <p>
+                        Save and verify the newsletter before running a
+                        compatibility check.
+                      </p>
+                    </>
+                  ) : rail === "Sections" ? (
+                    <WorkspaceSections
+                      design={draft.design}
+                      change={structure}
+                      edit={editSection}
+                      save={library.startSave}
+                      savedIds={
+                        history.saved?.design.sections.map(
+                          (section) => section.id,
+                        ) ?? []
+                      }
+                      browse={(opener) => {
+                        libraryOpener.current = opener;
+                        void library.browse();
+                      }}
+                      saved={
+                        <SavedSections
+                          library={library}
+                          close={() => {
+                            library.closeBrowse();
+                            setRail("Blocks");
+                          }}
+                          insert={(item) => {
+                            library.insert(item);
+                          }}
+                        />
+                      }
+                      tree={
+                        <RichStructure
+                          design={draft.design}
+                          selectedId={selectedId}
+                          select={selectBlock}
+                          change={structure}
+                          editSection={editSection}
+                          savedSectionIds={
+                            history.saved?.design.sections.map(
+                              (section) => section.id,
+                            ) ?? []
+                          }
+                          saveSection={library.startSave}
+                          browse={(opener) => {
+                            libraryOpener.current = opener;
+                            void library.browse();
+                          }}
+                        />
+                      }
+                    />
+                  ) : selected || selectedSection ? (
+                    <>
+                      <div className={workspace.panelBack}>
+                        <button
+                          aria-label="Back to blocks"
+                          onClick={clearSelection}
+                        >
+                          <X size={20} />
+                        </button>
+                      </div>
+                      {selectedSection ? (
+                        <SectionSettings
+                          key={selectedSection.id}
+                          section={selectedSection}
+                          change={(next) =>
+                            commit((current) => ({
+                              ...current,
+                              design: {
+                                ...current.design,
+                                sections: current.design.sections.map(
+                                  (section) =>
+                                    section.id === next.id ? next : section,
+                                ),
+                              },
+                            }))
+                          }
+                        />
+                      ) : (
+                        selected && (
+                          <RichBlockControls
+                            key={`${history.editorRevision}:${selected.id}`}
+                            block={selected}
+                            documentId={
+                              history.current && !history.fence
+                                ? history.saved?.id
+                                : undefined
+                            }
+                            design={draft.design}
+                            structure={structure}
+                            update={update}
+                            remove={() => remove(selected.id)}
+                          />
+                        )
+                      )}
+                    </>
+                  ) : null}
+                  <div
+                    hidden={Boolean(
+                      library.browsing ||
+                      rail !== "Blocks" ||
+                      selected ||
+                      selectedSection,
+                    )}
+                  >
+                    <WorkspacePalette
+                      design={draft.design}
+                      change={structure}
+                      ai={ai}
+                    />
                   </div>
-                </div>
-                <NewsletterCanvas
-                  key={ownerEpoch}
-                  draft={draft}
-                  mobile={mobile}
-                  selectedId={selected?.id ?? null}
-                  actions={{
-                    select: selectBlock,
-                    editSection,
-                    change: structure,
-                    remove,
-                  }}
-                />
-              </main>
-            </fieldset>
+                </>
+              }
+            >
+              <NewsletterCanvas
+                key={ownerEpoch}
+                draft={draft}
+                mobile={mobile}
+                selectedId={selected?.id ?? null}
+                actions={{
+                  select: selectBlock,
+                  editSection,
+                  change: structure,
+                  remove,
+                }}
+              />
+            </NewsletterWorkbench>
           )}
-        </section>
+        </NewsletterWorkspace>
       </div>
     </>
   );

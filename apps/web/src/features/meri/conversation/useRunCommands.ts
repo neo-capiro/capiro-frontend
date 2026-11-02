@@ -134,6 +134,12 @@ export function useRunCommands(
     if (journal.read().submit?.state !== "unknown" || active.current) return;
     return perform(() => reconcileStoredRequest(port, record, stored));
   };
+  /** Control confirmed this run admitted no message, or the person discarded it: drop the retained one. */
+  const release = () =>
+    perform(async () => {
+      const { submit, ...rest } = record.read();
+      if (submit?.state === "unknown") record.write(rest);
+    });
   // The receipt is not the run's status; keep observing for run.status either way.
   const cancel = () =>
     perform(() => requestStop(port, record)).then(() => {
@@ -155,6 +161,7 @@ export function useRunCommands(
     submitInitial,
     recover,
     reconcile,
+    release,
     cancel,
   };
 }

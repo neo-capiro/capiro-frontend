@@ -1,4 +1,9 @@
 /* Figma 01.04 Conversation history on the live route: filters, table, selected-row actions and receipts. */
+.searchEntry {
+  /* Reserve the viewport above this page-local fragment, including responsive shell chrome.
+     Native fragment entry therefore keeps the app header and page heading visible. */
+  scroll-margin-top: 100vh;
+}
 .list {
   display: flex;
   flex-direction: column;

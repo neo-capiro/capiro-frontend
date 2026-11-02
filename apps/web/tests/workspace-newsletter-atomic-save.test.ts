@@ -1,3 +1,4 @@
+import { savedNewsletterFixture as createNewsletter } from "./saved-newsletter-fixture";
 import { expect, it } from "vitest";
 import {
   ordinary,
@@ -7,10 +8,7 @@ import {
   scope,
   receipt,
 } from "./workspace-ordinary-save-fixtures";
-import {
-  createNewsletter,
-  newsletterDocumentBlocks,
-} from "../src/features/modules/workspace/newsletter/newsletter-model";
+import { newsletterDocumentBlocks } from "../src/features/modules/workspace/newsletter/newsletter-model";
 import { newsletterSaveModel } from "../src/features/modules/workspace/newsletter/newsletter-atomic-save";
 import {
   bindOrdinaryReceipt,
@@ -186,4 +184,44 @@ it("upgrades only the exact old social projection while preserving extra fields 
   expect(() =>
     newsletterSaveModel.capture(f.current, input, requestId),
   ).toThrow("outside this newsletter editor");
+});
+it("opens the untouched primary tab of an interrupted first save as an empty newsletter", () => {
+  // The retired editor created the Newsletter draft, then wrote its body in a
+  // separate request; a failure in between left Core's created `{ blocks: [] }` tab.
+  const row = ordinary();
+  row.product = "Newsletter";
+  row.documents[0]!.body = {
+    blocks: [],
+  } as unknown as (typeof row.documents)[0]["body"];
+  const before = structuredClone(row);
+  const current = state(row);
+  const input = newsletterSaveModel.input(current);
+  expect(input).toEqual({
+    title: row.docTitle,
+    documentId: row.documents[0]!.id,
+    body: createNewsletter("blank"),
+  });
+  expect(row).toEqual(before);
+  input.body = createNewsletter("weekly");
+  const retained = newsletterSaveModel.capture(current, input, requestId);
+  expect(retained.body).toMatchObject({
+    documents: [{ id: row.documents[0]!.id, body: { newsletter: input.body } }],
+  });
+  for (const body of [
+    { blocks: [], unknown: { preserved: true } },
+    { blocks: [{ id: "body", type: "section", content: "Saved body" }] },
+  ]) {
+    row.documents[0]!.body =
+      body as unknown as (typeof row.documents)[0]["body"];
+    expect(() => newsletterSaveModel.input(state(row))).toThrow(
+      "one supported primary",
+    );
+  }
+  row.documents[0]!.body = {
+    blocks: [],
+  } as unknown as (typeof row.documents)[0]["body"];
+  row.documents.push({ ...row.documents[0]!, id: otherId });
+  expect(() => newsletterSaveModel.input(state(row))).toThrow(
+    "one supported primary",
+  );
 });

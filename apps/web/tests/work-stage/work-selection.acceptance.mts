@@ -462,7 +462,8 @@ it("mounts Start Work / Delegate through the real composer and labels the applie
         storageError: undefined,
         start: async () => false,
         retry: async () => false,
-        readMapping: async () => false,
+        check: async () => false,
+        discard: async () => false,
       },
     } as unknown as Session;
     return composer({ channel, session, scope: "Synthetic client" });
@@ -498,7 +499,8 @@ it("mounts Start Work / Delegate through the real composer and labels the applie
         storageError: undefined,
         start: async () => false,
         retry: async () => false,
-        readMapping: async () => false,
+        check: async () => false,
+        discard: async () => false,
       },
     } as unknown as Session,
     scope: "Synthetic client",

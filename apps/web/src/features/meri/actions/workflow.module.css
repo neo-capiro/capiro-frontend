@@ -6,6 +6,26 @@
   min-width: 0;
   color: var(--foreground);
 }
+.coverageDetails {
+  min-width: 0;
+}
+.coverageDetails summary {
+  cursor: pointer;
+  width: fit-content;
+  min-height: 44px;
+  align-content: center;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+}
+.coverageDetails summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.coverageDetails p {
+  margin-top: 12px;
+}
 .heading h1 {
   font-size: 26px;
   line-height: 1.4;

@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
 import { RequireSession } from "../../src/shared/session/SessionContext";
 import { NotificationsHost } from "../../src/features/meri/notifications/NotificationsHost";
+import "../../src/app/globals.css";
+import "./font.css";
 
 const host = (
   <ApplicationBoundary publishableKey="pk_test_YQ==">

@@ -7,7 +7,7 @@ import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import styles from "./live.module.css";
 import { matchesStoredRequest } from "./run-commands";
 import { controlReconnectingMessage } from "./control-reachability";
-import { describeSkillRefusal } from "./skill-refusal";
+import { describeSendRefusal } from "./skill-refusal";
 
 /**
  * Connection, delivery and stop feedback for the current run; never a run outcome by itself. A
@@ -47,7 +47,7 @@ export function RunStatus({
     <>
       {run.refusal && (
         <p role="alert" className={styles.muted}>
-          {describeSkillRefusal(run.refusal)}
+          {describeSendRefusal(run.refusal)}
         </p>
       )}
       {run.error && !run.failure && !run.refusal && (

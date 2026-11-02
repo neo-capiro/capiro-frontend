@@ -170,7 +170,7 @@ test("local rich editor formats content, undoes, previews mobile and plain text 
   page,
 }, info) => {
   const observed = await setup(page);
-  await page.goto("/modules/workspace?view=rich-newsletter");
+  await page.goto("/modules/workspace?view=newsletter");
   await expect(
     page.getByRole("heading", { name: "Rich newsletter editor preview" }),
   ).toBeVisible();
@@ -243,7 +243,7 @@ test("preview isolates untrusted HTML, external images and links", async ({
   page,
 }) => {
   const observed = await setup(page);
-  await page.goto("/modules/workspace?view=rich-newsletter");
+  await page.goto("/modules/workspace?view=newsletter");
   await page.getByText("Add block to Body", { exact: true }).click();
   await page.getByRole("button", { name: "Code", exact: true }).click();
   await page.getByRole("button", { name: "Code", exact: true }).first().click();
@@ -267,7 +267,7 @@ test("scope replacement and sign-out clear the local editor", async ({
   page,
 }) => {
   const observed = await setup(page);
-  await page.goto("/modules/workspace?view=rich-newsletter");
+  await page.goto("/modules/workspace?view=newsletter");
   await page.getByLabel("Newsletter name").fill("Prior tenant local draft");
   await page.evaluate(() =>
     window.dispatchEvent(

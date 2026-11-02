@@ -1,7 +1,10 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import type { FundingRecord } from "../../../shared/capiro/operations/intelligence-funding";
+import {
+  fundingSource,
+  type FundingRecord,
+} from "../../../shared/capiro/operations/intelligence-funding";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -13,11 +16,27 @@ import {
 } from "../../../shared/module-ui";
 import { FundingDetail } from "./FundingDetail";
 import styles from "./intelligence.module.css";
+const sources: readonly string[] = fundingSource.options;
 export function FundingOpportunities() {
   const params = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const clientId = params.get("clientId") || undefined;
   const [q, setQ] = useState("");
-  const [source, setSource] = useState("");
+  // The source filter is a URL selection (?source=agency_forecast) so a link
+  // to one feed opens on it; an unknown value is no filter.
+  const [source, setSource] = useState(() => {
+    const hint = params.get("source") ?? "";
+    return sources.includes(hint) ? hint : "";
+  });
+  const selectSource = (next: string) => {
+    setSource(next);
+    setPage(1);
+    const search = new URLSearchParams(params);
+    if (next) search.set("source", next);
+    else search.delete("source");
+    router.replace(`${pathname}?${search}`, { scroll: false });
+  };
   const [lifecycle, setLifecycle] = useState("active");
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState<FundingRecord>();
@@ -60,20 +79,10 @@ export function FundingOpportunities() {
           className={styles.select}
           aria-label="Source"
           value={source}
-          onChange={(e) => {
-            setSource(e.target.value);
-            setPage(1);
-          }}
+          onChange={(e) => selectSource(e.target.value)}
         >
           <option value="">Source · Any</option>
-          {[
-            "grants_gov",
-            "sam_gov",
-            "agency_forecast",
-            "dibbs",
-            "sbir_sttr",
-            "ca_portal",
-          ].map((s) => (
+          {sources.map((s) => (
             <option key={s}>{s}</option>
           ))}
         </select>
@@ -93,9 +102,8 @@ export function FundingOpportunities() {
         <ActionButton
           onClick={() => {
             setQ("");
-            setSource("");
             setLifecycle("active");
-            setPage(1);
+            selectSource("");
           }}
         >
           Clear all

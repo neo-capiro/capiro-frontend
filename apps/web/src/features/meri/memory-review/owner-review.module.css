@@ -19,7 +19,8 @@
   gap: 12px;
 }
 
-.cardHeading h2 {
+.cardHeading h3 {
+  margin: 0;
   font-size: 17px;
   font-weight: 600;
   overflow-wrap: anywhere;

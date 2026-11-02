@@ -198,7 +198,7 @@ describe("notification category and delivery mapping", () => {
     expect(notificationCategory("connections").key).toBeNull();
     expect(notificationCategory("connections").control).toBe("unsupported");
     expect(notificationCategory("connections").reason).toMatch(
-      /never mapped to memoryReviewed/,
+      /cannot turn connection updates on or off/,
     );
     expect(notificationCategory("run-outcomes").key).toBe("runCompleted");
     expect(notificationCategory("memory-review").key).toBe("memoryReviewed");
@@ -842,8 +842,10 @@ describe("revisioned controls rendering", () => {
     expect(html).not.toContain('data-control="unavailable"');
     expect(html).toContain('data-category="connections"');
     expect(html).toContain('data-control="unsupported"');
-    expect(html).toContain("Always delivered");
-    expect(html).toContain("never mapped to memoryReviewed");
+    expect(html).toContain(
+      "Pending approvals, security notices and workspace broadcasts are not suppressed by personal notification preferences.",
+    );
+    expect(html).toContain("cannot turn connection updates on or off");
     expect(html).toContain("visible runs currently waiting for approval");
     expect(html).not.toMatch(/caught up|all caught up|preview/i);
     expect(html).toMatch(/aria-pressed="false"/);

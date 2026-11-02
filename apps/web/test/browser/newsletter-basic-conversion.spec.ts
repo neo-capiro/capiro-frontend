@@ -1,3 +1,4 @@
+import { openNewsletterDetails } from "./newsletter-workspace-fixtures";
 import { expect, test, type Page } from "@playwright/test";
 import { fileURLToPath } from "node:url";
 import {
@@ -89,6 +90,7 @@ async function setup(page: Page, code = false) {
     }),
   );
   await page.goto(ordinaryEditorUrl);
+  await openNewsletterDetails(page);
   await expect(page.getByLabel("Subject", { exact: true })).toBeEditable();
   await page.evaluate(() => document.fonts.ready);
   expect(
@@ -122,6 +124,8 @@ for (const width of [1440, 390])
       path: info.outputPath(`basic-preview-${width}.png`),
       fullPage: true,
     });
+    if (await button(page, "Back to blocks").isVisible())
+      await button(page, "Back to blocks").click();
     await button(page, "Convert to rich newsletter").click();
     const dialog = page.getByRole("dialog", { name: "Review rich conversion" });
     await expect(
@@ -147,6 +151,8 @@ test("explicit conversion applies locally, preserves undo and original basic edi
   await page
     .getByLabel("Subject", { exact: true })
     .fill("Current local subject — café");
+  if (await button(page, "Back to blocks").isVisible())
+    await button(page, "Back to blocks").click();
   await button(page, "Convert to rich newsletter").click();
   await expect(
     page
@@ -167,6 +173,7 @@ test("explicit conversion applies locally, preserves undo and original basic edi
   await expect(page.getByLabel("Newsletter name")).toHaveValue(
     "Saved newsletter name",
   );
+  await openNewsletterDetails(page);
   await expect(page.getByLabel("Subject", { exact: true })).toHaveValue(
     "Current local subject — café",
   );
@@ -183,8 +190,9 @@ test("explicit conversion applies locally, preserves undo and original basic edi
     path: info.outputPath("conversion-applied.png"),
     fullPage: true,
   });
-  await button(page, "Close preview").click();
+  await button(page, "Back to Workspace").click();
   await button(page, "Discard and leave").click();
+  await openNewsletterDetails(page);
   await expect(page.getByLabel("Subject", { exact: true })).toHaveValue(
     "Current local subject — café",
   );
@@ -194,11 +202,11 @@ test("explicit conversion applies locally, preserves undo and original basic edi
   expect(rich.control.errors).toEqual([]);
 });
 
-test("explicit issue date is saved once and survives reopen without changing existing newsletter fields", async ({
+test("a stored issue date survives save and reopen without changing existing newsletter fields", async ({
   page,
 }) => {
   const { basic, rich } = await setup(page);
-  await button(page, "Issue date").click();
+
   await button(page, "Save draft").click();
   await expect(
     page.getByText(
@@ -209,19 +217,18 @@ test("explicit issue date is saved once and survives reopen without changing exi
   const savedBody = structuredClone(
     basic.current().documents[0]!.body.newsletter!,
   );
-  expect(savedBody.blocks.at(-1)!.text).toMatch(
-    /^Issue date: \d{4}-\d{2}-\d{2}$/,
-  );
+  expect(savedBody.blocks[0]!.text).toBe("Issue date: 2026-10-20");
   expect(savedBody.subject).toBe("Saved email subject");
   expect(savedBody.blocks.find((b) => b.id === "social")!.href).toBe(
     "https://never-fetch.example.test/social",
   );
   await page.reload();
+  await openNewsletterDetails(page);
   await expect(page.getByLabel("Subject", { exact: true })).toBeEditable();
   await expect(
     page
       .locator("article")
-      .getByText(savedBody.blocks.at(-1)!.text, { exact: true }),
+      .getByText(savedBody.blocks[0]!.text, { exact: true }),
   ).toBeVisible();
   expect(basic.current().documents[0]!.body.newsletter).toEqual(savedBody);
   expect(basic.saves).toHaveLength(1);
@@ -232,6 +239,8 @@ test("converted content reaches the existing explicit saved-document and rich te
   page,
 }) => {
   const { basic, rich } = await setup(page);
+  if (await button(page, "Back to blocks").isVisible())
+    await button(page, "Back to blocks").click();
   await button(page, "Convert to rich newsletter").click();
   await button(page, "Open rich editor").click();
   await button(page, "Apply converted draft").click();
@@ -298,6 +307,8 @@ test("conversion cannot replace a separately adopted saved document or survive s
 }) => {
   const { basic, rich } = await setup(page);
   rich.control.current.config.clientId = null;
+  if (await button(page, "Back to blocks").isVisible())
+    await button(page, "Back to blocks").click();
   await button(page, "Convert to rich newsletter").click();
   await button(page, "Open rich editor").click();
   await button(page, "Load saved newsletters").click();

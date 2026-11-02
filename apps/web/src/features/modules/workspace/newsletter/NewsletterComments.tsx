@@ -12,7 +12,7 @@ import {
   TextArea,
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
-import parity from "./newsletter-figma.module.css";
+import parity from "./newsletter-review.module.css";
 
 export function NewsletterComments({
   documentId,

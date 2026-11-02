@@ -211,6 +211,14 @@ export function conversationTurnJournal(
       cache.setQueryData(key, Object.freeze({}));
       return true;
     },
+    /** Control confirmed nothing was admitted for the retained turn, or the person discarded it. */
+    discard() {
+      const intent = read();
+      if (!intent) return undefined;
+      retained.record?.clear();
+      cache.setQueryData(key, Object.freeze({}));
+      return intent;
+    },
     start(
       source: RunBinding,
       prompt: string,
@@ -291,6 +299,38 @@ export async function recoverConversationTurn(
     journal.write({ ...intent, state: "unknown" });
     throw cause;
   }
+}
+
+/**
+ * "Check again" for a pending next message: replay the exact source mapping (one immutable target per
+ * source) of the retained turn, or of the reservation control reported when this tab kept none.
+ * RESERVED is control's own answer that the target admitted no message, so the retained turn is
+ * released. ACCEPTED leaves it, with its receipt, for recovery of that exact target and request id.
+ * A failure leaves everything as it was.
+ */
+export async function checkConversationTurn(
+  journal: ReturnType<typeof conversationTurnJournal>,
+  reported: Pick<RunBinding, "conversationId" | "runId"> | undefined,
+  reserve: (input: {
+    conversationId: string;
+    sourceRunId: string;
+  }) => Promise<ConversationTurnReceipt>,
+  signal?: AbortSignal,
+) {
+  const retained = journal.read();
+  if (!retained && !reported) return undefined;
+  const receipt = retained
+    ? (await recoverConversationTurn(journal, reserve, signal)).receipt!
+    : await reserve({
+        conversationId: reported!.conversationId,
+        sourceRunId: reported!.runId,
+      });
+  signal?.throwIfAborted();
+  if (!retained && receipt.sourceBinding.runId !== reported!.runId)
+    throw new Error("Turn binding changed");
+  return receipt.state === "RESERVED"
+    ? { target: receipt.targetBinding, released: journal.discard() }
+    : { target: receipt.targetBinding, retained: journal.read() };
 }
 
 /** Only this explicit refusal proves that no next turn was dispatched. */

@@ -107,6 +107,7 @@ export const moduleCatalog: readonly ModuleDescriptor[] = [
       { label: "LegiWatch", view: "legiwatch" },
       { label: "Defense Budget", view: "defense" },
       { label: "Funding Opportunities", view: "funding" },
+      { label: "Forecasts", view: "forecasts" },
       { label: "District Nexus", view: "district-nexus" },
     ],
     profile: "Intelligence and Opportunities, matched to that client",

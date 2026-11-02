@@ -25,6 +25,7 @@ import {
   type TurnView,
 } from "./conversation-view";
 import { useLiveRun } from "./useLiveRun";
+import { settledRefreshDue } from "./saved-turns";
 import { shouldShowPrompt } from "./prompt-identity";
 import type { InitialDraftOwner } from "./initial-draft";
 import styles from "./live.module.css";
@@ -99,6 +100,8 @@ export function composerAvailability(
   nextTurnBlocked: string | undefined,
   nextTurnVerified: boolean,
   pendingDraft: boolean,
+  /** Control confirmed this reserved run admitted no message, or the person discarded it. */
+  reservedOpen = false,
 ) {
   const { intent, busy } = run;
   const refused = run.failure === "refused";
@@ -107,10 +110,15 @@ export function composerAvailability(
     !intent.submit &&
     !initialPrompt &&
     !earlier.length &&
-    !initialBlocked;
-  // Control refused the reserved next message outright (a typed skill refusal): nothing was
-  // dispatched to this reserved run, so a changed message may be sent to it as an ordinary request.
-  const resend = !turn && !intent.submit && !!initialPrompt && !!run.refusal;
+    !initialBlocked &&
+    !reservedOpen;
+  // Control refused the reserved next message outright (a typed skill refusal), or confirmed that
+  // this reserved run admitted none: nothing was dispatched to it, so a changed message may be sent
+  // to it as an ordinary request.
+  const resend =
+    !turn &&
+    !intent.submit &&
+    ((!!initialPrompt && !!run.refusal) || reservedOpen);
   const firstBlocked =
     !turn && !intent.submit && !initial && !resend
       ? (initialBlocked ?? "Check your last message before sending another.")
@@ -171,21 +179,37 @@ function useDraftAcknowledgement(
 }
 
 /**
- * A definitive refusal released the retained request: the captured text goes back to the box so the
- * person can change the selection or the conversation and send again.
+ * A definitive refusal released the retained request, or control confirmed this reserved run admitted
+ * nothing (or the person discarded its message): a request still retained for it is dropped, and the
+ * captured text goes back to the box so the person can change it and send again.
  */
 function useRefusalRelease(
   initialDraft: InitialDraftOwner,
   port: MeriConversationPort,
   run: ReturnType<typeof useLiveRun>,
+  reservedOpen: boolean,
 ) {
-  const released = !!run.refusal && !run.intent.submit;
+  const { release } = run;
+  const retained =
+    reservedOpen &&
+    run.intent.submit?.state === "unknown" &&
+    !run.busy &&
+    run.snapshot.submit !== "pending" &&
+    run.snapshot.submit !== "unknown";
+  const released = (!!run.refusal || reservedOpen) && !run.intent.submit;
+  // Once per mounted run: a release that fails leaves its storage error, never a retry loop.
+  const releasing = useRef(false);
+  useEffect(() => {
+    if (!retained || releasing.current) return;
+    releasing.current = true;
+    void release();
+  }, [retained, release]);
   useEffect(() => {
     if (released) initialDraft.release(port.context);
   }, [released, initialDraft, port.context]);
 }
 
-/** Refresh saved history once this mounted run reaches a terminal state. */
+/** Refresh saved history once this mounted run reaches a terminal state the saved read does not show yet. */
 function useSettledRefresh(finished: boolean, onSettled: () => void) {
   const announced = useRef(false);
   useEffect(() => {
@@ -327,6 +351,7 @@ export function MeriLiveConversation({
   onLifecycleTarget,
   onBrowserTarget,
   historyUnavailable = false,
+  reservedOpen = false,
 }: {
   port: MeriConversationPort;
   initialPrompt: string | undefined;
@@ -360,6 +385,8 @@ export function MeriLiveConversation({
   onBrowserTarget?: ((target: LifecycleTarget) => void) | undefined;
   /** The saved-history read failed: an empty-looking hero must not stand in for that failure. */
   historyUnavailable?: boolean;
+  /** This reserved run admitted no message (control's answer, or the person discarded it). */
+  reservedOpen?: boolean;
 }) {
   const run = useLiveRun(
     port,
@@ -406,8 +433,8 @@ export function MeriLiveConversation({
   )
     setBrowserRunId(port.context.runId);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
-  useRefusalRelease(initialDraft, port, run);
-  useSettledRefresh(finished, onSettled);
+  useRefusalRelease(initialDraft, port, run, reservedOpen);
+  useSettledRefresh(settledRefreshDue(turn, savedCurrent), onSettled);
   const availability = composerAvailability(
     run,
     turn,
@@ -418,6 +445,7 @@ export function MeriLiveConversation({
     nextTurnBlocked,
     nextTurnVerified,
     initialDraft.hasPending(port.context),
+    reservedOpen,
   );
   const retentionError =
     storageError ?? initialDraft.error() ?? run.storageError;
@@ -454,6 +482,7 @@ export function MeriLiveConversation({
           nextTurnBlocked,
           nextTurnVerified,
           initialDraft.hasPending(port.context),
+          reservedOpen,
         ).sendBlocked
       : availability.sendBlocked);
   const send = () => {

@@ -19,6 +19,10 @@ const proposeCorrection = (page: Page) =>
     .getByRole("article", { name: item.title, exact: true })
     .getByRole("button", { name: "Propose a correction", exact: true })
     .click();
+const correctionTrigger = (page: Page) =>
+  page
+    .getByRole("article", { name: item.title, exact: true })
+    .getByRole("button", { name: "Propose a correction", exact: true });
 async function memoryFixture(page: Page, enabled = true) {
   const fixture = await setupConversation(page);
   if (enabled)
@@ -93,6 +97,10 @@ test("pending correction freezes its captured draft and confirms review without 
   await expect(draft).toBeDisabled();
   await expect(draft).toHaveValue("Proposed synthetic correction");
   await expect(
+    page.getByRole("button", { name: "Cancel", exact: true }),
+  ).toBeDisabled();
+  await expect(correctionTrigger(page)).toBeDisabled();
+  await expect(
     page.getByRole("button", { name: "Refresh current memory" }),
   ).toBeDisabled();
   expect(writes).toEqual([
@@ -142,6 +150,19 @@ test("uncertain correction keeps its draft and prevents resubmission after reloa
     "Held synthetic correction",
   );
   await expect(
+    page.getByRole("button", { name: "Cancel", exact: true }),
+  ).toBeDisabled();
+  await expect(correctionTrigger(page)).toBeDisabled();
+  await page
+    .getByRole("button", { name: "Cancel", exact: true })
+    .evaluate((button: HTMLButtonElement) => button.click());
+  await correctionTrigger(page).evaluate((button: HTMLButtonElement) =>
+    button.click(),
+  );
+  await expect(page.getByLabel("Corrected text")).toHaveValue(
+    "Held synthetic correction",
+  );
+  await expect(
     page.getByRole("button", { name: "Submit correction for review" }),
   ).toBeDisabled();
   await page.reload();
@@ -151,10 +172,115 @@ test("uncertain correction keeps its draft and prevents resubmission after reloa
     }),
   ).toBeVisible();
   await proposeCorrection(page);
+  await expect(
+    page.getByRole("button", { name: "Cancel", exact: true }),
+  ).toBeDisabled();
+  await expect(correctionTrigger(page)).toBeDisabled();
   await page.getByLabel("Corrected text").fill("Another attempted correction");
   await expect(
     page.getByRole("button", { name: "Submit correction for review" }),
   ).toBeDisabled();
   expect(writes).toBe(1);
   expect(fixture.unexpected).toEqual([]);
+});
+
+for (const width of [1440, 390]) {
+  test(`local correction Cancel ${width}: unchanged, blank and edited drafts close without submission`, async ({
+    page,
+  }, info) => {
+    await page.setViewportSize({ width, height: 900 });
+    const fixture = await memoryFixture(page);
+    let writes = 0;
+    await page.route(
+      `**/api/memory/owner/items/${itemId}/corrections`,
+      (route) => {
+        writes++;
+        return route.fulfill({ status: 500, json: {} });
+      },
+    );
+    await page.goto("/meri/memory");
+    const trigger = correctionTrigger(page);
+    const draft = page.getByLabel("Corrected text");
+    const cancel = page.getByRole("button", { name: "Cancel", exact: true });
+    const submit = page.getByRole("button", {
+      name: "Submit correction for review",
+      exact: true,
+    });
+    for (const text of [item.value, "", "Edited synthetic local draft"]) {
+      await trigger.focus();
+      await page.keyboard.press("Enter");
+      await expect(trigger).toHaveAttribute("aria-pressed", "true");
+      await draft.fill(text);
+      if (text === "Edited synthetic local draft")
+        await expect(submit).toBeEnabled();
+      else await expect(submit).toBeDisabled();
+      await expect(cancel).toBeEnabled();
+      await expect(cancel).toHaveAttribute("type", "button");
+      if (text === item.value)
+        await draft
+          .locator("..")
+          .locator("..")
+          .screenshot({
+            path: info.outputPath(`correction-cancel-${width}.png`),
+          });
+      await cancel.focus();
+      await page.keyboard.press("Space");
+      await expect(draft).toHaveCount(0);
+      await expect(trigger).toHaveAttribute("aria-pressed", "false");
+      await expect(trigger).toBeFocused();
+    }
+    expect(writes).toBe(0);
+    expect(fixture.unexpected).toEqual([]);
+  });
+}
+
+test("same correction trigger dismisses edited draft and Cancel restores local focus without scrolling", async ({
+  page,
+}) => {
+  await memoryFixture(page);
+  let writes = 0;
+  await page.route(
+    `**/api/memory/owner/items/${itemId}/corrections`,
+    (route) => {
+      writes++;
+      return route.fulfill({ status: 500, json: {} });
+    },
+  );
+  await page.goto("/meri/memory");
+  const trigger = correctionTrigger(page);
+  const draft = page.getByLabel("Corrected text");
+  for (const key of ["Enter", "Space"]) {
+    await trigger.focus();
+    await page.keyboard.press(key);
+    await draft.fill("Edited local draft must close, not reset while open");
+    await trigger.focus();
+    await page.keyboard.press(key);
+    await expect(draft).toHaveCount(0);
+    await expect(trigger).toHaveAttribute("aria-pressed", "false");
+    await expect(trigger).toBeFocused();
+  }
+  await trigger.click();
+  await page.evaluate(() => {
+    document.body.style.minHeight = "2500px";
+    window.scrollTo(0, 1000);
+  });
+  const cancel = page.getByRole("button", { name: "Cancel", exact: true });
+  await cancel.evaluate((button: HTMLButtonElement) =>
+    button.focus({ preventScroll: true }),
+  );
+  const before = await page.evaluate(() => window.scrollY);
+  await page.keyboard.press("Enter");
+  await expect(trigger).toBeFocused();
+  expect(await page.evaluate(() => window.scrollY)).toBe(before);
+  await trigger.click();
+  await page
+    .getByRole("searchbox", { name: "Search memory" })
+    .fill("zzzzunmatchedmemory");
+  await expect(trigger).toHaveCount(0);
+  await cancel.click();
+  await expect(draft).toHaveCount(0);
+  await expect(
+    page.getByRole("searchbox", { name: "Search memory" }),
+  ).toBeFocused();
+  expect(writes).toBe(0);
 });

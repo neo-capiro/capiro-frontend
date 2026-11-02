@@ -98,6 +98,19 @@ export const calendarHearingSchema = z.object({
   location: z.string().nullable(),
   officialPageUrl: z.string().nullable(),
   officialPlaybackUrl: z.string().nullable(),
+  officialWatchMedia: z
+    .object({
+      url: z.string(),
+      type: z.enum([
+        "video/mp4",
+        "video/webm",
+        "application/vnd.apple.mpegurl",
+      ]),
+      officialPageUrl: z.string(),
+      expiresAt: z.string().nullable(),
+    })
+    .nullable()
+    .optional(),
   officialPlaybackKind: z
     .enum(["official_player_page", "official_listing_page"])
     .nullable(),
