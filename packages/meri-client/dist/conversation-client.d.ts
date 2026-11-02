@@ -1,11 +1,11 @@
 import type { ConversationSubmitRequest, ConversationHistoryRequest, ConversationCancelledResponse, ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
-import { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED } from "./conversation-network.js";
+import { ConversationUnavailable, ORIGINAL_INPUT_CLOSED, DEFINITIVE_REFUSALS, EDGE_REFUSED } from "./conversation-network.js";
 import type { ConversationRefusalDetail } from "./conversation-network.js";
 import type { ConversationLifetime } from "./conversation-network.js";
 import type { ConversationObservationSnapshot } from "./conversation-observation.js";
 import type { ConversationChat } from "./conversation-chat.js";
 import type { ConversationLifecycleControlRequest, ConversationCheckpointInspectionRequest } from "@capiro/meri-contracts/conversation-lifecycle";
-export { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED };
+export { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED, ORIGINAL_INPUT_CLOSED, };
 export type { ConversationRefusalDetail };
 export type { ConversationLifetime, ConversationObservationSnapshot, ConversationChat, };
 export interface MeriConversationSnapshot {
@@ -23,6 +23,7 @@ export declare function createMeriConversation(options: ConversationLifetime): R
     submit: (input: ConversationSubmitRequest) => Promise<MeriConversationSnapshot>;
     submitInitial: (input: ConversationSubmitRequest) => Promise<MeriConversationSnapshot>;
     retrySubmit: () => Promise<MeriConversationSnapshot>;
+    releaseSubmit: () => void;
     history: (input?: ConversationHistoryRequest) => Promise<MeriConversationSnapshot>;
     cancel: () => Promise<Readonly<ConversationCancelledResponse>>;
     control: (input: ConversationLifecycleControlRequest) => Promise<import("@capiro/meri-contracts/conversation-lifecycle").ConversationLifecycleResponse<"control">>;

@@ -47,6 +47,8 @@ import { DailyQuote } from "../quote/DailyQuote";
 import { inputRefusedMessage } from "./control-reachability";
 import { useBoundedCheck, useQueuedSend } from "./queued-send";
 import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
+import { ORIGINAL_INPUT_CLOSED } from "./skill-refusal";
+import type { SendInNewConversation } from "./useSendInNewConversation";
 
 /** The current admitted segment, or the exact immutable request whose ACK is still pending. */
 function LiveTurn({
@@ -108,13 +110,18 @@ export function composerAvailability(
 ) {
   const { intent, busy } = run;
   const refused = run.failure === "refused";
+  // The conversation's original input is closed to the first message (it expired, or belongs to another one):
+  // sending it here again could only be refused, so it goes to a new conversation instead.
+  const originalClosed =
+    !turn && !earlier.length && run.refusal?.code === ORIGINAL_INPUT_CLOSED;
   const initial =
     !turn &&
     !intent.submit &&
     !initialPrompt &&
     !earlier.length &&
     !initialBlocked &&
-    !reservedOpen;
+    !reservedOpen &&
+    !originalClosed;
   // Control refused the reserved next message outright (a typed skill refusal), or confirmed that
   // this reserved run admitted none: nothing was dispatched to it, so a changed message may be sent
   // to it as an ordinary request.
@@ -122,8 +129,9 @@ export function composerAvailability(
     !turn &&
     !intent.submit &&
     ((!!initialPrompt && !!run.refusal) || reservedOpen);
-  const firstBlocked =
-    !turn && !intent.submit && !initial && !resend
+  const firstBlocked = originalClosed
+    ? "This conversation can no longer start with a new message. Send it in a new conversation."
+    : !turn && !intent.submit && !initial && !resend
       ? (initialBlocked ?? "Check your last message before sending another.")
       : undefined;
   const sendBlocked =
@@ -140,10 +148,15 @@ export function composerAvailability(
           ? intent.submit.state === "observed"
             ? "Reload the transcript to verify the current run."
             : "Your request is being sent."
-          : undefined);
+          : // A finished run whose own message is still being confirmed takes no new one yet: Enter says
+            // so instead of reaching a send that would do nothing.
+            !initial && !resend && isTerminal(turn?.runState) && pendingDraft
+            ? "Your last message is still being confirmed."
+            : undefined);
   return {
     initial,
     resend,
+    originalClosed,
     sendBlocked,
     readyForNext:
       nextTurnVerified &&
@@ -179,6 +192,44 @@ function useDraftAcknowledgement(
       initialDraft.fail();
     }
   }, [initialDraft, port.context, submit, draft, onDraft]);
+}
+
+/**
+ * A capture whose run already finished can never be acknowledged by a later send; left in place it made every later
+ * Enter in this run do nothing (and clear the box). The run's admitted request settles it: delivered, or never
+ * admitted (released, so the text stays the person's). Only once nothing is in flight for this run.
+ */
+function useTerminalCaptureSettlement(
+  initialDraft: InitialDraftOwner,
+  port: MeriConversationPort,
+  finished: boolean,
+  submit: ReturnType<typeof useLiveRun>["intent"]["submit"],
+  admittedRequestId: string | undefined,
+  onDraft: (value: string) => void,
+) {
+  useEffect(() => {
+    if (
+      !finished ||
+      !admittedRequestId ||
+      submit?.state === "pending" ||
+      submit?.state === "unknown" ||
+      !initialDraft.hasPending(port.context)
+    )
+      return;
+    try {
+      if (initialDraft.settleTerminal(port.context, admittedRequestId))
+        onDraft("");
+    } catch {
+      initialDraft.fail();
+    }
+  }, [
+    initialDraft,
+    port.context,
+    finished,
+    submit,
+    admittedRequestId,
+    onDraft,
+  ]);
 }
 
 /**
@@ -269,6 +320,43 @@ function useExternalRunRefresh(
   }, [port, refreshRunStatus, busy, observing, cancelIntent, lifecycleBlocked]);
 }
 
+/** One explicit move of the unsent first message to a new conversation; a failure says so and may be tried again. */
+function SendInNewConversationButton({
+  send,
+}: {
+  send: (signal: AbortSignal) => Promise<void>;
+}) {
+  const [state, setState] = useState<"idle" | "busy" | "failed">("idle");
+  const inflight = useRef<AbortController | null>(null);
+  useEffect(() => () => inflight.current?.abort(), []);
+  return (
+    <div className={styles.statusRow}>
+      <Button
+        type="button"
+        variant="outline"
+        className={ui.outline}
+        disabled={state === "busy"}
+        onClick={() => {
+          const controller = new AbortController();
+          inflight.current = controller;
+          setState("busy");
+          send(controller.signal).catch(() => {
+            if (!controller.signal.aborted) setState("failed");
+          });
+        }}
+      >
+        Send in a new conversation
+      </Button>
+      {state === "failed" && (
+        <p role="alert" className={styles.muted}>
+          A new conversation could not be opened. Your text is still here; try
+          again.
+        </p>
+      )}
+    </div>
+  );
+}
+
 /**
  * Storage uncertainty disables mutation controls while the transcript remains readable. A
  * transcript read that control did not answer is read again on a backed-off schedule owned here,
@@ -280,12 +368,18 @@ function CurrentRunStatus({
   active,
   acceptedRequest,
   onDiscardUnrecoverable,
+  onDiscardUncertain,
+  onSendInNewConversation,
 }: {
   run: ReturnType<typeof useLiveRun>;
   retentionError: string | undefined;
   active: boolean;
   acceptedRequest: ConversationStoredRequest | undefined;
   onDiscardUnrecoverable?: (() => void) | undefined;
+  onDiscardUncertain?: (() => void) | undefined;
+  onSendInNewConversation?:
+    | ((signal: AbortSignal) => Promise<void>)
+    | undefined;
 }) {
   const reconnect = useReconnectSchedule(
     run.transcript === "unavailable" && run.failure === "unreachable"
@@ -326,7 +420,11 @@ function CurrentRunStatus({
         active={active}
         acceptedRequest={acceptedRequest}
         onRetry={reconnect.reset}
+        onDiscardUncertain={onDiscardUncertain}
       />
+      {onSendInNewConversation && (
+        <SendInNewConversationButton send={onSendInNewConversation} />
+      )}
     </>
   );
 }
@@ -369,6 +467,7 @@ export function MeriLiveConversation({
   acceptedRequest,
   storageError,
   onDiscardUnrecoverable,
+  onSendInNewConversation,
   modelSelection,
   modelBlocked,
   skillSelection,
@@ -404,6 +503,8 @@ export function MeriLiveConversation({
   storageError?: string | undefined;
   /** Give up a message this tab could not save or recover, so a new one can be sent. */
   onDiscardUnrecoverable?: (() => void) | undefined;
+  /** Moves an unsent first message this conversation can no longer take to a new conversation. */
+  onSendInNewConversation?: SendInNewConversation | undefined;
   modelSelection?: ConversationStoredRequest["modelSelection"];
   modelBlocked?: string | undefined;
   skillSelection?: ConversationSkillSelection;
@@ -460,6 +561,14 @@ export function MeriLiveConversation({
   )
     setBrowserRunId(port.context.runId);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
+  useTerminalCaptureSettlement(
+    initialDraft,
+    port,
+    finished,
+    intent.submit,
+    applied?.requestId,
+    onDraft,
+  );
   useRefusalRelease(initialDraft, port, run, reservedOpen);
   useSettledRefresh(settledRefreshDue(turn, savedCurrent), onSettled);
   const availability = composerAvailability(
@@ -597,7 +706,7 @@ export function MeriLiveConversation({
       // edge-refused message already says so in the transcript, once.
       notice:
         queue.released ??
-        (        intent.submit?.state === "unknown" && run.failure !== "refused"
+        (intent.submit?.state === "unknown" && run.failure !== "refused"
           ? "Your last request is still unconfirmed. Retry it above before sending another."
           : undefined),
       modelSelection:
@@ -659,6 +768,16 @@ export function MeriLiveConversation({
             active={active}
             acceptedRequest={acceptedRequest}
             onDiscardUnrecoverable={onDiscardUnrecoverable}
+            onDiscardUncertain={() =>
+              void run.release().then((released) => {
+                if (released) initialDraft.release(port.context);
+              })
+            }
+            onSendInNewConversation={
+              availability.originalClosed && onSendInNewConversation
+                ? (signal) => onSendInNewConversation(draft, signal)
+                : undefined
+            }
           />
           {/* A pending control with no turn to host it (nothing observed yet) still needs its recovery. */}
           {!turn && controls}

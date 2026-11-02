@@ -28,6 +28,7 @@ import {
 import {
   ConversationNetwork,
   ConversationUnavailable,
+  ORIGINAL_INPUT_CLOSED,
   DEFINITIVE_REFUSALS,
   EDGE_REFUSED,
 } from "./conversation-network.js";
@@ -50,13 +51,19 @@ import type {
   ConversationCheckpointInspectionRequest,
 } from "@capiro/meri-contracts/conversation-lifecycle";
 
-export { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED };
+export {
+  ConversationUnavailable,
+  DEFINITIVE_REFUSALS,
+  EDGE_REFUSED,
+  ORIGINAL_INPUT_CLOSED,
+};
 export type { ConversationRefusalDetail };
 
 /** Only the two documented detail fields travel with a refusal; nothing else from the body is retained. */
 function refusal(
   status: number,
   error: { code: string } & Record<string, unknown>,
+  originalClosed = false,
 ) {
   const detail: {
     sources?: readonly string[];
@@ -70,7 +77,12 @@ function refusal(
     detail.sources = Object.freeze([...(error.sources as string[])]);
   if (error.requiredScope === "client" || error.requiredScope === "general")
     detail.requiredScope = error.requiredScope;
-  return new ConversationUnavailable(error.code, status, Object.freeze(detail));
+  return new ConversationUnavailable(
+    error.code,
+    status,
+    Object.freeze(detail),
+    originalClosed,
+  );
 }
 
 /**
@@ -326,6 +338,20 @@ class ConversationConnection {
     );
     return this.sendRetained();
   };
+  /**
+   * Control answered that this run admitted no message (its reservation is still RESERVED), or the person gave
+   * up a message whose delivery stayed uncertain: the retained request is dropped and nothing is sent. Without
+   * this, the next message of the same run was refused here as a second retained request.
+   */
+  releaseSubmit = () => {
+    if (this.state.submit === "pending")
+      throw new ConversationUnavailable("submit-in-flight");
+    if (this.state.submit !== "unknown") return;
+    this.intent = undefined;
+    this.initialIntent = undefined;
+    this.allocation = undefined;
+    this.publish({ submit: "idle" });
+  };
   retrySubmit = async () => {
     if (!this.intent || this.state.submit !== "unknown")
       throw new ConversationUnavailable("no-unknown-submit");
@@ -369,7 +395,14 @@ class ConversationConnection {
     ) {
       throw new ConversationUnavailable("superseded-allocation-receipt");
     }
-    if ("error" in value) throw refusal(response.status, value.error);
+    // The receiver admitted this code at this status; its outcome says whether anything was dispatched.
+    if ("error" in value)
+      throw refusal(
+        response.status,
+        value.error,
+        ORIGINAL_INPUT_CLOSED.has(value.error.code) &&
+          value.error.outcome === "NOT_DISPATCHED",
+      );
     if (
       previous &&
       stableStringify(previous.allocation) !== stableStringify(value.allocation)
@@ -576,6 +609,7 @@ export function createMeriConversation(options: ConversationLifetime) {
     submit: connection.submit,
     submitInitial: connection.submitInitial,
     retrySubmit: connection.retrySubmit,
+    releaseSubmit: connection.releaseSubmit,
     history: connection.history,
     cancel: connection.cancel,
     control: connection.control,

@@ -138,6 +138,12 @@ export function MeriComposer({
         globalDrop={false}
         onSubmit={(_message, event) => {
           event.preventDefault();
+          // PromptInput resets its form before it calls here, and this textarea is controlled: React does not
+          // restore a value it did not change, so a send that did not go out left an empty box over kept text
+          // (2 Nov preview: "the second Enter cleared the composer with nothing sent"). Put the text back; a
+          // send that goes out clears it through the draft.
+          const area = textareaRef.current;
+          if (area && area.value !== draft) area.value = draft;
           setRefused(null);
           if (canSend) live.onSend();
           else if (live?.onQueue && draft.trim()) live.onQueue();

@@ -1,4 +1,7 @@
-import { ConversationUnavailable } from "@capiro/meri-client/conversation";
+import {
+  ConversationUnavailable,
+  ORIGINAL_INPUT_CLOSED as originalInputClosed,
+} from "@capiro/meri-client/conversation";
 
 /**
  * A typed skill refusal control answers on allocate, admit or submit before any run exists
@@ -25,18 +28,23 @@ export function skillRefusal(cause: unknown): SkillRefusal | undefined {
 
 /** Run admission refused: this month's spend reached the workspace's monthly Meri cap (contracts 0.1.51). */
 export const MONTHLY_CAP_REACHED = "TENANT_MONTHLY_CAP_REACHED";
+/**
+ * This conversation's original (first) input can never be this message: its allocation expired before
+ * Meri started it, or it belongs to another message (contracts 0.1.53). Nothing was dispatched.
+ */
+export const ORIGINAL_INPUT_CLOSED = "ORIGINAL_INPUT_CLOSED";
 /** A refusal control decided before any run exists; the composer keeps the text and offers no retry. */
 export type SendRefusal =
   | SkillRefusal
-  | Readonly<{ code: typeof MONTHLY_CAP_REACHED }>;
+  | Readonly<{ code: typeof MONTHLY_CAP_REACHED }>
+  | Readonly<{ code: typeof ORIGINAL_INPUT_CLOSED }>;
 
 export function sendRefusal(cause: unknown): SendRefusal | undefined {
-  if (
-    cause instanceof ConversationUnavailable &&
-    cause.definitive &&
-    cause.code === MONTHLY_CAP_REACHED
-  )
-    return { code: MONTHLY_CAP_REACHED };
+  if (!(cause instanceof ConversationUnavailable) || !cause.definitive)
+    return undefined;
+  if (cause.code === MONTHLY_CAP_REACHED) return { code: MONTHLY_CAP_REACHED };
+  if (originalInputClosed.has(cause.code))
+    return { code: ORIGINAL_INPUT_CLOSED };
   return skillRefusal(cause);
 }
 
@@ -108,5 +116,7 @@ export function describeSkillRefusal(refusal: SkillRefusal) {
 export function describeSendRefusal(refusal: SendRefusal) {
   return refusal.code === MONTHLY_CAP_REACHED
     ? "Your workspace has reached its monthly Meri limit. An admin can raise it in Settings → Meri workspace preferences → Usage and limits."
-    : describeSkillRefusal(refusal);
+    : refusal.code === ORIGINAL_INPUT_CLOSED
+      ? "Meri could not start this message in time, and it was not sent. Your text is back in the box."
+      : describeSkillRefusal(refusal);
 }

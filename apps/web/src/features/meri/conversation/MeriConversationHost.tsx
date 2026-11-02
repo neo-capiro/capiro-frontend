@@ -13,6 +13,7 @@ import { resolveFirstChatConversation } from "../../../shared/meri-conversations
 import { conversationHref } from "../../../shared/meri-conversations/conversation-navigation";
 import { conversationSelection } from "../../../shared/meri-conversations/selection";
 import { useConversationSession } from "./useConversationSession";
+import { useSendInNewConversation } from "./useSendInNewConversation";
 import { researchRoute } from "../../../shared/meri-conversations/research-context";
 import { ResearchConversationHost } from "./ResearchConversationHost";
 import { ConversationView } from "./ConversationView";
@@ -296,11 +297,17 @@ function ConnectedConversation({
   scopeControl?: React.ReactNode;
 }) {
   const session = useConversationSession(account, clientId, conversationId);
+  const sendInNewConversation = useSendInNewConversation(
+    account,
+    clientId,
+    session.selectedId,
+  );
   return (
     <ConversationView
       session={session}
       scope={scope}
       scopeControl={scopeControl}
+      onSendInNewConversation={sendInNewConversation}
     />
   );
 }

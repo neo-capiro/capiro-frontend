@@ -1174,6 +1174,34 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "ui-stream 0.1.36 admits @capiro/meri-contracts 0.1.52 as a peer; no stream behaviour change."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.53-688f992a-fa10a54f616e.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.53",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "688f992a7d3f2239cec252504fc957b293a99483",
+   "sourceTree": "88556945c88fccf002f881a52ab99e931b281c6a",
+   "bytes": 2203479,
+   "sha256": "fa10a54f616e3fda2eb1da96cd49122a94527b9885fe23857ab98e1fc55633d7",
+   "integrity": "sha512-aO9eowvcJbdAamZIsriAVoK1bJSiOmAbHV/ISzfVWSr16j89LOxGpW8+U3ZTkGL+tFtjbsP5uevtMTB1mDJcyw==",
+   "regularEntryCount": 123,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "A request whose conversation's original input allocation expired answers its own 409 INITIAL_INPUT_EXPIRED on admit and submit (allocate: 409, outcome NOT_DISPATCHED; 408 still admitted) instead of 502 CONVERSATION_UNAVAILABLE (conversation-application 0.1.18, conversation-input 0.1.10, conversation-initial-input 0.1.13; neo-capiro/meri-greenfield#571). Also carries 0.1.52's office launch TTL sentinel (#570)."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.37-688f992a-9d2bc6e4962a.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.37",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "688f992a7d3f2239cec252504fc957b293a99483",
+   "sourceTree": "88556945c88fccf002f881a52ab99e931b281c6a",
+   "bytes": 3864,
+   "sha256": "9d2bc6e4962a25d70c49698a3f81ae912776fe93e3046e777f378f15c4bcc268",
+   "integrity": "sha512-kOoXLP6BATtYOzgA53GJWbxkDURbOq8aG4TUMvjTXA0jTVCSfJ3lGV+GnatKfWgEP5SiImNp9cvrOCbndnJ77A==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "ui-stream 0.1.37 admits @capiro/meri-contracts 0.1.52 and 0.1.53 as peers; no stream behaviour change."
   }
  ]
 }

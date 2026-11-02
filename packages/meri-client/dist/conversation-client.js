@@ -1,14 +1,14 @@
 import { conversationApplicationMetadata as protocol, receiveConversationRequest, receiveConversationResponse, } from "@capiro/meri-contracts/conversation-application";
 import { conversationInputMetadata, conversationInputView, receiveConversationInputRequest, receiveConversationInputResponse, } from "@capiro/meri-contracts/conversation-input";
 import { conversationInitialInputMetadata, receiveConversationInitialInputRequest, receiveConversationInitialInputResponse, receiveAllocatedConversationInputResponse, } from "@capiro/meri-contracts/conversation-initial-input";
-import { ConversationNetwork, ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED, } from "./conversation-network.js";
+import { ConversationNetwork, ConversationUnavailable, ORIGINAL_INPUT_CLOSED, DEFINITIVE_REFUSALS, EDGE_REFUSED, } from "./conversation-network.js";
 import { ConversationObservation } from "./conversation-observation.js";
 import { conversationChat } from "./conversation-chat.js";
 import { stableStringify } from "./json-identity.js";
 import { conversationLifecycleMetadata, receiveConversationLifecycleRequest, receiveConversationLifecycleResponse, } from "@capiro/meri-contracts/conversation-lifecycle";
-export { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED };
+export { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED, ORIGINAL_INPUT_CLOSED, };
 /** Only the two documented detail fields travel with a refusal; nothing else from the body is retained. */
-function refusal(status, error) {
+function refusal(status, error, originalClosed = false) {
     const detail = {};
     if (Array.isArray(error.sources) &&
         error.sources.length &&
@@ -16,7 +16,7 @@ function refusal(status, error) {
         detail.sources = Object.freeze([...error.sources]);
     if (error.requiredScope === "client" || error.requiredScope === "general")
         detail.requiredScope = error.requiredScope;
-    return new ConversationUnavailable(error.code, status, Object.freeze(detail));
+    return new ConversationUnavailable(error.code, status, Object.freeze(detail), originalClosed);
 }
 /**
  * An error answer the contract does not admit (a gateway page, an unexpected status/code pair)
@@ -227,6 +227,21 @@ class ConversationConnection {
         this.initialIntent = this.retain(input, receiveConversationInitialInputRequest);
         return this.sendRetained();
     };
+    /**
+     * Control answered that this run admitted no message (its reservation is still RESERVED), or the person gave
+     * up a message whose delivery stayed uncertain: the retained request is dropped and nothing is sent. Without
+     * this, the next message of the same run was refused here as a second retained request.
+     */
+    releaseSubmit = () => {
+        if (this.state.submit === "pending")
+            throw new ConversationUnavailable("submit-in-flight");
+        if (this.state.submit !== "unknown")
+            return;
+        this.intent = undefined;
+        this.initialIntent = undefined;
+        this.allocation = undefined;
+        this.publish({ submit: "idle" });
+    };
     retrySubmit = async () => {
         if (!this.intent || this.state.submit !== "unknown")
             throw new ConversationUnavailable("no-unknown-submit");
@@ -253,8 +268,10 @@ class ConversationConnection {
             this.view !== current) {
             throw new ConversationUnavailable("superseded-allocation-receipt");
         }
+        // The receiver admitted this code at this status; its outcome says whether anything was dispatched.
         if ("error" in value)
-            throw refusal(response.status, value.error);
+            throw refusal(response.status, value.error, ORIGINAL_INPUT_CLOSED.has(value.error.code) &&
+                value.error.outcome === "NOT_DISPATCHED");
         if (previous &&
             stableStringify(previous.allocation) !== stableStringify(value.allocation)) {
             throw new ConversationUnavailable("INITIAL_INPUT_RECEIPT_DRIFT");
@@ -420,6 +437,7 @@ export function createMeriConversation(options) {
         submit: connection.submit,
         submitInitial: connection.submitInitial,
         retrySubmit: connection.retrySubmit,
+        releaseSubmit: connection.releaseSubmit,
         history: connection.history,
         cancel: connection.cancel,
         control: connection.control,

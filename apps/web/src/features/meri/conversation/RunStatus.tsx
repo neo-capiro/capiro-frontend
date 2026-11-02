@@ -18,6 +18,7 @@ export function RunStatus({
   active,
   acceptedRequest,
   onRetry,
+  onDiscardUncertain,
 }: {
   run: ReturnType<typeof useLiveRun>;
   /** The run has not reached a terminal status. */
@@ -25,6 +26,8 @@ export function RunStatus({
   acceptedRequest?: ConversationStoredRequest | undefined;
   /** An explicit Retry restarts the owner's automatic re-read schedule. */
   onRetry?: (() => void) | undefined;
+  /** Give up the uncertain request: nothing is sent, and its text and files come back to the composer. */
+  onDiscardUncertain?: (() => void) | undefined;
 }) {
   const { snapshot, intent, busy } = run;
   const uncertain = intent.submit?.state === "unknown";
@@ -77,6 +80,19 @@ export function RunStatus({
           >
             Retry same request
           </Button>
+          {/* Once a retry was answered and still failed, the request never locks the thread: the person may
+              give it up. Only this tab's copy is forgotten; a message that already reached Meri may still be answered. */}
+          {run.error && !run.failure && onDiscardUncertain && (
+            <Button
+              type="button"
+              variant="outline"
+              className={ui.outline}
+              disabled={busy}
+              onClick={onDiscardUncertain}
+            >
+              Discard and write a new message
+            </Button>
+          )}
         </div>
       )}
       {canContinue && (
