@@ -37,6 +37,10 @@ export function ConversationPanels({
     <ConversationArtifacts
       artifacts={conversationFiles(published, items)}
       access={port.artifacts}
+      scope={{
+        conversationId: port.context.conversationId,
+        clientId: port.context.selectedClientId,
+      }}
     />
   );
   return (

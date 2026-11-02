@@ -18,7 +18,13 @@ import { unavailableResources } from "../../../shared/meri-resources/unavailable
 import { DocumentInspectionSummary } from "../files/DocumentInspectionSummary";
 import { DocumentSourcePanel } from "../files/DocumentSourcePanel";
 import { DocumentDownloadUrl } from "../files/download-url";
+import { OfficeWorkspaceLink } from "../office/OfficeWorkspaceLink";
 import { StatusPill } from "../ui/StatusPill";
+import {
+  artifactCardSummary,
+  officeTargetFor,
+  type ArtifactCardScope,
+} from "./artifact-card";
 import type { ConversationFile as Listed } from "./intents/prepared-files";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./live.module.css";
@@ -28,20 +34,17 @@ type Status =
   | { kind: "working"; action: "preview" | "download" }
   | { kind: "failed"; action: "preview" | "download"; code: string }
   | { kind: "downloaded"; filename: string };
-const sizes = (bytes: number) =>
-  bytes < 1024
-    ? `${bytes} B`
-    : bytes < 1024 * 1024
-      ? `${(bytes / 1024).toFixed(1)} KB`
-      : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 
 /** Published files and prepared drafts; every read goes through the current artifact owner. */
 export function ConversationArtifacts({
   artifacts,
   access,
+  scope,
 }: {
   artifacts: readonly Listed[];
   access: ArtifactAccess;
+  /** The conversation the files belong to; a General conversation has no client. */
+  scope: ArtifactCardScope;
 }) {
   // Nothing published or prepared: the conversation stays quiet; Library is the file entry point.
   if (artifacts.length === 0) return null;
@@ -51,7 +54,11 @@ export function ConversationArtifacts({
       <ul className={styles.fileList}>
         {artifacts.map((artifact) => (
           <li key={artifact.versionId}>
-            <ConversationArtifact artifact={artifact} access={access} />
+            <ConversationArtifact
+              artifact={artifact}
+              access={access}
+              scope={scope}
+            />
           </li>
         ))}
       </ul>
@@ -62,7 +69,11 @@ export function ConversationArtifacts({
   );
 }
 
-/** Preview and download for one listed version; the newest command supersedes an older one. */
+/**
+ * Details and download for one listed version; the newest command supersedes an older one. The details
+ * are read once when the card mounts, so the card names the file, its kind, size and version without a
+ * click; a read the owner refuses leaves the card with its version identity and the person's retry.
+ */
 function useArtifactActions(access: ArtifactAccess, versionId: string) {
   const [preview, setPreview] = useState<ArtifactPreview | null>(null);
   const [status, setStatus] = useState<Status>({ kind: "idle" });
@@ -114,12 +125,17 @@ function useArtifactActions(access: ArtifactAccess, versionId: string) {
     link.click();
     setStatus({ kind: "downloaded", filename: reply.value.filename });
   };
+  // One read per mounted card (per version and access owner); a renewed owner reads again.
+  useEffect(() => {
+    void inspect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- inspect is stable for a given access/versionId
+  }, [access, versionId]);
   return { preview, status, inspect, download };
 }
 
 const outcome = (status: Status) =>
   status.kind === "failed"
-    ? `${status.action === "preview" ? "Preview" : "Download"} unavailable (${status.code}). Nothing was substituted.`
+    ? `${status.action === "preview" ? "File details" : "Download"} unavailable (${status.code}). Nothing was substituted.`
     : status.kind === "downloaded"
       ? `Downloaded ${status.filename}; its bytes matched the inspected version.`
       : "";
@@ -127,44 +143,43 @@ const outcome = (status: Status) =>
 function ConversationArtifact({
   artifact,
   access,
+  scope,
 }: {
   artifact: Listed;
   access: ArtifactAccess;
+  scope: ArtifactCardScope;
 }) {
   const { preview, status, inspect, download } = useArtifactActions(
     access,
     artifact.versionId,
   );
-  const name =
-    preview?.filename ?? `File version ${artifact.versionId.slice(0, 8)}`;
+  const [details, setDetails] = useState(false);
+  const { title, description } = artifactCardSummary(
+    artifact.versionId,
+    preview,
+  );
+  const office = officeTargetFor(scope, artifact.versionId, preview);
   const working = (action: "preview" | "download") =>
     status.kind === "working" && status.action === action;
+  const failedRead = status.kind === "failed" && status.action === "preview";
   return (
-    <Artifact className={styles.file} role="group" aria-label={name}>
+    <Artifact className={styles.file} role="group" aria-label={title}>
       <ArtifactHeader className={styles.fileHeader}>
         <FileText aria-hidden />
         <div>
-          <ArtifactTitle>{name}</ArtifactTitle>
+          <ArtifactTitle>{title}</ArtifactTitle>
           <ArtifactDescription className={styles.muted}>
-            {preview
-              ? `${preview.mimeType} · ${sizes(preview.bytes)}`
-              : "Preview to load its details from the service."}
+            {working("preview") ? "Reading the file details…" : description}
           </ArtifactDescription>
         </div>
       </ArtifactHeader>
       {artifact.prepared && (
-        <p className={styles.muted}>Prepared draft · Not filed or shared</p>
+        <p className={styles.muted}>
+          Prepared draft · Saved under Files
+          {scope.clientId ? "" : " (My files)"}; not filed to a client
+        </p>
       )}
       <ArtifactActions className={styles.fileActions}>
-        <Button
-          type="button"
-          variant="outline"
-          className={ui.outline}
-          disabled={status.kind === "working"}
-          onClick={() => void inspect()}
-        >
-          {working("preview") ? "Loading preview…" : "Preview"}
-        </Button>
         <Button
           type="button"
           variant="outline"
@@ -174,11 +189,34 @@ function ConversationArtifact({
         >
           {working("download") ? "Preparing download…" : "Download"}
         </Button>
+        {office && <OfficeWorkspaceLink version={office} />}
+        {preview ? (
+          <Button
+            type="button"
+            variant="outline"
+            className={ui.outline}
+            disabled={status.kind === "working"}
+            onClick={() => setDetails((open) => !open)}
+          >
+            {details ? "Hide details" : "Details"}
+          </Button>
+        ) : (
+          failedRead && (
+            <Button
+              type="button"
+              variant="outline"
+              className={ui.outline}
+              onClick={() => void inspect()}
+            >
+              Read details again
+            </Button>
+          )
+        )}
       </ArtifactActions>
       <div role="status" className={styles.muted}>
         {outcome(status)}
       </div>
-      {preview && (
+      {preview && details && (
         <div className={styles.preview}>
           {preview.kind === "native-file" ? (
             <>

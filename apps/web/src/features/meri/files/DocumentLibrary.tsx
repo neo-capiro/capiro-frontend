@@ -24,6 +24,7 @@ import {
 } from "../../../shared/meri-documents/library-access";
 import { SessionLifetimeController } from "../../../shared/meri-actions/opaque-session-controller";
 import { DocumentLibraryController } from "./document-library-state";
+import { libraryConnectionPhase, retryDelayMs } from "./library-connection";
 import { isOfficeTarget } from "../office/OfficeWorkspaceLink";
 import styles from "./files.module.css";
 
@@ -206,40 +207,88 @@ function LibraryConnection({
     host.getSnapshot,
     host.getSnapshot,
   );
-  if (state.status === "ready")
-    return (
-      <>
-        <NativeResultFiles
-          key={`results:${state.lifetimeKey}`}
-          port={state.port}
-        />
-        <LibraryPages
-          key={state.lifetimeKey}
-          port={state.port}
-          account={account}
-          officeOpen={officeOpen}
-          {...(anchor ? { anchor } : {})}
-        />
-      </>
-    );
+  // The last ready port stays mounted through the session's own renewal (Meri ends each file-access session
+  // before its cap and issues the next) and through an issuance the control did not answer; see
+  // `libraryConnectionPhase`. Only a refusal clears it.
+  const [shown, setShown] = useState<{
+    port: DocumentLibraryAccess;
+    lifetimeKey: string;
+  } | null>(null);
+  if (state.status === "ready" && shown?.port !== state.port)
+    setShown({ port: state.port, lifetimeKey: state.lifetimeKey });
+  const phase = libraryConnectionPhase(
+    state.status,
+    host.getExpirationReason(),
+    host.getIssuanceStatus(),
+    shown !== null,
+  );
+  if (phase === "lost" && shown !== null) setShown(null);
+  const attempt = useRef(0);
+  if (phase === "ready") attempt.current = 0;
+  useEffect(() => {
+    if (phase === "renewing" && state.status === "expired") {
+      void host.connect();
+      return;
+    }
+    if (phase !== "retrying" && !(phase === "connecting" && state.status === "unavailable"))
+      return;
+    const delay = retryDelayMs(attempt.current);
+    if (delay === null) return;
+    const timer = setTimeout(() => {
+      attempt.current += 1;
+      void host.connect();
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [phase, state.status, host]);
+  const label = anchor ? "Version history connection" : "File library connection";
+  const askAgain = phase === "lost" ||
+    (state.status === "unavailable" && retryDelayMs(attempt.current) === null);
+  const notice =
+    phase === "renewing"
+      ? "Renewing file access…"
+      : phase === "retrying"
+        ? "File access could not be checked just now; checking again."
+        : phase === "connecting"
+          ? state.status === "unavailable"
+            ? "File access could not be checked just now; checking again."
+            : "Checking current file access…"
+          : phase === "lost"
+            ? "Current file access is unavailable. Previously loaded details have been cleared."
+            : null;
   return (
-    <section
-      className={styles.panel}
-      aria-label={
-        anchor ? "Version history connection" : "File library connection"
-      }
-    >
-      <p role="status">
-        {state.status === "idle" || state.status === "connecting"
-          ? "Checking current file access…"
-          : "Current file access is unavailable. Previously loaded details have been cleared."}
-      </p>
-      {state.status !== "idle" && state.status !== "connecting" && (
-        <Button variant="outline" onClick={() => void host.connect()}>
-          Check access again
-        </Button>
+    <>
+      {notice && (
+        <section className={styles.panel} aria-label={label}>
+          <p role="status">{notice}</p>
+          {askAgain && (
+            <Button
+              variant="outline"
+              onClick={() => {
+                attempt.current = 0;
+                void host.connect();
+              }}
+            >
+              Check access again
+            </Button>
+          )}
+        </section>
       )}
-    </section>
+      {shown && (
+        <>
+          <NativeResultFiles
+            key={`results:${shown.lifetimeKey}`}
+            port={shown.port}
+          />
+          <LibraryPages
+            key={shown.lifetimeKey}
+            port={shown.port}
+            account={account}
+            officeOpen={officeOpen}
+            {...(anchor ? { anchor } : {})}
+          />
+        </>
+      )}
+    </>
   );
 }
 
@@ -322,6 +371,8 @@ function LibraryPage({
     () => new DocumentLibraryController(port, query),
   );
   useLayoutEffect(() => controller.attach(), [controller]);
+  // A renewed session's port replaces the disposed one for the same context; the loaded page stays.
+  useEffect(() => controller.bind(port), [controller, port]);
   useEffect(() => {
     void controller.loadMore();
   }, [controller]);

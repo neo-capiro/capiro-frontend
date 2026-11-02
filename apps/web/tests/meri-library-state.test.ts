@@ -208,3 +208,28 @@ it("release denial removes prior metadata and downloads; reload starts with a ne
   expect(vi.mocked(p.list).mock.lastCall?.[0].cursor).toBeNull();
   c.attach()();
 });
+
+it("binds a renewed port for the same context without clearing the loaded page, and refuses another context", async () => {
+  const first = port();
+  const controller = new DocumentLibraryController(first, { scope: "owner" });
+  const detach = controller.attach();
+  await controller.loadMore();
+  expect(controller.getSnapshot().versions).toHaveLength(1);
+  const renewed = port();
+  controller.bind(renewed);
+  expect(controller.getSnapshot().versions).toHaveLength(1);
+  expect(controller.getSnapshot().problem).toBeNull();
+  controller.select(controller.getSnapshot().versions[0]!);
+  await controller.download();
+  expect(renewed.download).toHaveBeenCalledTimes(1);
+  expect(first.download).not.toHaveBeenCalled();
+  // Binding the same port again is a no-op; a port for another conversation is never accepted.
+  controller.bind(renewed);
+  expect(() =>
+    controller.bind({
+      ...port(),
+      context: { ...session.context, tenantId: "another-tenant" },
+    }),
+  ).toThrow("Library context changed");
+  detach();
+});
