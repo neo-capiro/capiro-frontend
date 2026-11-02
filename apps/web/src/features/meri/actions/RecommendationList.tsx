@@ -16,22 +16,28 @@ export function RecommendationList({
   return (
     <section className={styles.panel} aria-label="Returned recommendations">
       <h2>Recommendations</h2>
+      {page.items.length === 0 && (
+        <h3>No recommendations returned on this page</h3>
+      )}
       <p className={styles.muted}>
         These recommendations are not accepted tasks.
       </p>
-      {page.coverageNotes.length > 0 && (
+      {(page.coverageSummary ?? page.coverageNotes).length > 0 && (
         <div className={styles.notice} aria-label="Recommendation coverage">
-          {page.coverageNotes.map((note, index) => (
+          {(page.coverageSummary ?? page.coverageNotes).map((note, index) => (
             <p key={index}>{note}</p>
           ))}
         </div>
       )}
-      {page.items.length === 0 ? (
-        <p>
-          No recommendations were returned. This does not establish complete
-          coverage or absence.
-        </p>
-      ) : (
+      {page.coverageSummary && page.coverageNotes.length > 0 && (
+        <details className={styles.coverageDetails}>
+          <summary>Coverage details</summary>
+          {page.coverageNotes.map((note, index) => (
+            <p key={index}>{note}</p>
+          ))}
+        </details>
+      )}
+      {page.items.length > 0 && (
         <ul className={styles.recommendations}>
           {page.items.map((item) => (
             <li key={item.key}>

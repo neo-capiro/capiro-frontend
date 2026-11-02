@@ -75,11 +75,10 @@ export const NOTIFICATION_CATEGORIES: readonly NotificationCategory[] =
     {
       id: "connections",
       label: "Connection changes",
-      description: "Not connected to a notification preference.",
+      description: "Connection updates are not available here yet.",
       key: null,
       control: "unsupported",
-      reason:
-        "no canonical notification key exists for connection changes and this category is never mapped to memoryReviewed",
+      reason: "You cannot turn connection updates on or off here yet.",
     },
   ]);
 
@@ -227,7 +226,7 @@ export function projectUpdates(input: {
           detail:
             delivery === "optional-outcome"
               ? "A memory proposal you submitted was reviewed. This outcome notice does not require another action."
-              : "A memory review assignment or requested change. Open the current review to check available actions; these notices are always delivered.",
+              : "Open the current review to check the request and available actions. Required notices stay available.",
           occurredAt: row.createdAt,
           read: row.readAt !== null,
           delivery: delivery === "required" ? "required" : "optional",
@@ -250,8 +249,8 @@ export function projectUpdates(input: {
             source,
             title: waiting ? "Run waiting for approval" : "Run completed",
             detail: waiting
-              ? "A visible run is waiting for approval. This notice does not establish that you can approve it; approval actions check current authority. It has no per-row read record."
-              : "A run you can see reached a completed state. This optional notice has no per-row read record.",
+              ? "Open the run to check the request and current approval authority. This notice does not establish that you can approve it."
+              : "Completed is the recorded status. Open the run for current details; this does not confirm that work has stopped.",
             occurredAt: run.statusAt,
             read: null,
             delivery: "optional",

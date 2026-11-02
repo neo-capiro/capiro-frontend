@@ -94,7 +94,8 @@ export function Header({
 }
 
 function MeriBrand() {
-  const { expanded, toggle } = useMeriSidebarVisibility();
+  const { expanded, toggle, workspaceOpen, setWorkspaceOpen, workspaceId } =
+    useMeriSidebarVisibility();
   return (
     <div className={styles.brand}>
       <Link href="/" className={styles.wordmark} aria-label="Capiro Home">
@@ -106,6 +107,7 @@ function MeriBrand() {
         />
       </Link>
       <button
+        id="meri-sidebar-toggle"
         type="button"
         className={styles.sidebarToggle}
         aria-label="Toggle Meri sidebar"
@@ -115,6 +117,18 @@ function MeriBrand() {
       >
         <PanelLeft size={18} aria-hidden="true" />
       </button>
+      <Button
+        variant="outline"
+        className={styles.workspaceToggle}
+        aria-label="Workspace menu"
+        aria-haspopup="dialog"
+        aria-expanded={workspaceOpen}
+        aria-controls={workspaceId}
+        onClick={() => setWorkspaceOpen(!workspaceOpen)}
+      >
+        <PanelLeft size={16} aria-hidden="true" />
+        Workspace
+      </Button>
     </div>
   );
 }

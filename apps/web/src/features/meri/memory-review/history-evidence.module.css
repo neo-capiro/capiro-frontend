@@ -1,0 +1,50 @@
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  padding: 24px;
+  scroll-margin-top: 24px;
+}
+.heading {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.action {
+  min-height: 44px;
+}
+.version,
+.unavailable {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  overflow-wrap: anywhere;
+}
+.version h3,
+.unavailable h3 {
+  font-size: 17px;
+  font-weight: 600;
+}
+.version > *,
+.unavailable > * {
+  margin: 0;
+}
+.version pre {
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .history {
+    padding: 16px 0;
+  }
+}

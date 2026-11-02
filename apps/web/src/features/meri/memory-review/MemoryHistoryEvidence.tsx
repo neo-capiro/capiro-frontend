@@ -11,6 +11,8 @@ import {
   type OwnerReadKind,
 } from "./owner-history";
 import ui from "../ui/meri-ui.module.css";
+import styles from "./history-evidence.module.css";
+import { historyTime, historyVersionTitle } from "./history-presentation";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 
 /** Keyed by authenticated scope and item so old results disappear synchronously. */
@@ -18,10 +20,12 @@ export function MemoryHistoryEvidence({
   reference,
   clientId,
   revision,
+  label,
 }: {
   reference: OwnerMemoryRef;
   clientId: string | null;
   revision: string;
+  label: string;
 }) {
   const { userId, orgId } = useAuth();
   const selected = useSelectedClient();
@@ -37,10 +41,16 @@ export function MemoryHistoryEvidence({
   return userId &&
     (selected.state === "no-selection" ||
       selected.state === "authorized-client") ? (
-    <OwnerDetails key={key} reference={reference} />
+    <OwnerDetails key={key} reference={reference} label={label} />
   ) : null;
 }
-function OwnerDetails({ reference }: { reference: OwnerMemoryRef }) {
+function OwnerDetails({
+  reference,
+  label,
+}: {
+  reference: OwnerMemoryRef;
+  label: string;
+}) {
   const [page, setPage] = useState<HistoryPage | null>(null);
   const [state, setState] = useState<
     "idle" | "loading" | "ready" | "changed" | "unavailable" | "error"
@@ -108,11 +118,14 @@ function OwnerDetails({ reference }: { reference: OwnerMemoryRef }) {
     <section
       id={`memory-details-${reference.id}`}
       aria-label="Memory history and evidence"
+      className={styles.history}
     >
+      <h2 className={styles.heading}>History for {label}</h2>
       <div className={ui.row}>
         <button
           type="button"
-          className={ui.outline}
+          className={`${kind === "versions" ? ui.primary : ui.outline} ${styles.action}`}
+          aria-pressed={kind === "versions"}
           disabled={state === "loading"}
           onClick={() => void read("versions")}
         >
@@ -120,7 +133,8 @@ function OwnerDetails({ reference }: { reference: OwnerMemoryRef }) {
         </button>
         <button
           type="button"
-          className={ui.outline}
+          className={`${kind === "evidence" ? ui.primary : ui.outline} ${styles.action}`}
+          aria-pressed={kind === "evidence"}
           disabled={state === "loading"}
           onClick={() => void read("evidence")}
         >
@@ -139,9 +153,16 @@ function OwnerDetails({ reference }: { reference: OwnerMemoryRef }) {
         </p>
       ) : null}
       {state === "unavailable" ? (
-        <p role="status">
-          This memory read is unavailable or access has changed.
-        </p>
+        <div role="status" className={styles.unavailable}>
+          <h3>
+            {kind === "evidence"
+              ? "Evidence unavailable"
+              : "History unavailable"}
+          </h3>
+          <p className={ui.muted}>
+            This memory read is unavailable or access has changed.
+          </p>
+        </div>
       ) : null}
       {state === "error" ? (
         <p role="alert">The request failed. Try again.</p>
@@ -165,7 +186,10 @@ function OwnerDetails({ reference }: { reference: OwnerMemoryRef }) {
           >
             Open source conversation
           </Link>{" "}
-          � Approved {source.observedAt}
+          · Approved{" "}
+          <time dateTime={source.observedAt}>
+            {historyTime(source.observedAt)}
+          </time>
         </p>
       ))}
       {page?.availability === "available" && kind === "versions" ? (
@@ -174,18 +198,16 @@ function OwnerDetails({ reference }: { reference: OwnerMemoryRef }) {
             <p>No retained versions are available in this page.</p>
           ) : null}
           {page.entries.map((entry) => (
-            <article key={entry.id}>
-              <h3>{entry.title}</h3>
-              <p>
+            <article key={entry.id} className={styles.version}>
+              <h3>{historyVersionTitle(entry)}</h3>
+              <p className={ui.muted}>
                 {entry.status === "current" ? "Current" : "Superseded"} ·{" "}
-                {entry.createdAt}
+                <time dateTime={entry.createdAt}>
+                  {historyTime(entry.createdAt)}
+                </time>
               </p>
               {entry.content.availability === "available" ? (
-                <pre
-                  style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}
-                >
-                  {entry.content.text}
-                </pre>
+                <pre>{entry.content.text}</pre>
               ) : (
                 <p>
                   Content unavailable:{" "}

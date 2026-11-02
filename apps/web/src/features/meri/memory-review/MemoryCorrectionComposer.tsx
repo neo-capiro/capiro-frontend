@@ -103,6 +103,7 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
   const [draft, setDraft] = useState("");
   const [query, setQuery] = useState("");
   const search = useRef<HTMLInputElement>(null);
+  const memoryList = useRef<HTMLDivElement>(null);
   const ready = items.state === "ready" ? items : undefined;
   const selected = ready?.items.find((item) => item.id === selectedId);
   const results =
@@ -111,6 +112,26 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
       return matches(display.title, display.fact, query);
     }) ?? [];
   const count = ready?.items.length;
+  const dismissBlocked =
+    workingId !== null || (selectedId !== null && unknownIds.has(selectedId));
+  const submitBlocked =
+    !selected ||
+    holdStatus !== "ready" ||
+    unknownIds.has(selected.id) ||
+    workingId !== null ||
+    !draft.trim() ||
+    draft.trim() === selected.value.trim();
+  function dismissCorrection() {
+    if (dismissBlocked || selectedId === null) return;
+    const trigger = memoryList.current?.querySelector<HTMLButtonElement>(
+      `[aria-labelledby="${CSS.escape(`memory-${selectedId}`)}"] button[aria-pressed]`,
+    );
+    setSelectedId(null);
+    setDraft("");
+    (trigger?.isConnected ? trigger : search.current)?.focus({
+      preventScroll: true,
+    });
+  }
   return (
     <section
       className={`${ui.page} ${phone.page}`}
@@ -224,6 +245,7 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
                 shown in current memory
               </p>
               <div
+                ref={memoryList}
                 className={memory.memoryList}
                 role="group"
                 aria-label="Current personal memories"
@@ -249,8 +271,13 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
                         },
                         correction: {
                           selected: selectedId === item.id,
-                          disabled: !!workingId,
+                          disabled: dismissBlocked,
                           onSelect: () => {
+                            if (dismissBlocked) return;
+                            if (selectedId === item.id) {
+                              dismissCorrection();
+                              return;
+                            }
                             setSelectedId(item.id);
                             setDraft(item.value);
                           },
@@ -259,6 +286,7 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
                     />
                     {item.reference ? (
                       <MemoryHistoryEvidence
+                        label={memoryPresentation(item).title}
                         reference={item.reference}
                         clientId={item.clientId}
                         revision={item.updatedAt}
@@ -320,21 +348,30 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
                   onChange={(event) => setDraft(event.target.value)}
                 />
               </label>
-              <button
-                type="submit"
-                className={ui.primary}
-                disabled={
-                  holdStatus !== "ready" ||
-                  unknownIds.has(selected.id) ||
-                  workingId !== null ||
-                  !draft.trim() ||
-                  draft.trim() === selected.value.trim()
-                }
-              >
-                {workingId === selected.id
-                  ? "Submitting…"
-                  : "Submit correction for review"}
-              </button>
+              <div className={ui.row}>
+                <button
+                  type="submit"
+                  className={ui.primary}
+                  style={{ minHeight: 44, opacity: submitBlocked ? 0.4 : 1 }}
+                  disabled={submitBlocked}
+                >
+                  {workingId === selected.id
+                    ? "Submitting…"
+                    : "Submit correction for review"}
+                </button>
+                <button
+                  type="button"
+                  className={ui.outline}
+                  style={{ minHeight: 44, opacity: dismissBlocked ? 0.4 : 1 }}
+                  disabled={dismissBlocked}
+                  onClick={dismissCorrection}
+                >
+                  Cancel
+                </button>
+              </div>
+              <p className={ui.muted}>
+                Cancel closes this local draft. Current memory stays unchanged.
+              </p>
             </form>
           ) : null}
         </>

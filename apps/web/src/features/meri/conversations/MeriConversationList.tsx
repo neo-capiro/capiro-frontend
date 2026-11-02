@@ -11,6 +11,7 @@ import {
 import ui from "../ui/meri-ui.module.css";
 import cards from "../ui/phone-cards.module.css";
 import phone from "../ui/phone-page.module.css";
+import styles from "./conversation-history.module.css";
 
 type Props = {
   enabled: boolean;
@@ -38,7 +39,17 @@ export function MeriConversationList(props: Props) {
     />
   );
   return (
-    <div className={`${ui.page} ${phone.page} ${cards.cards}`}>
+    <div
+      id="chat-title-search"
+      tabIndex={-1}
+      onFocus={(event) => {
+        if (event.target === event.currentTarget)
+          event.currentTarget
+            .querySelector<HTMLInputElement>('input[type="search"]')
+            ?.focus({ preventScroll: true });
+      }}
+      className={`${ui.page} ${phone.page} ${cards.cards} ${styles.searchEntry}`}
+    >
       <MeriPageHeading
         title="Conversations"
         description="Find previous work, including runs that are still active."
