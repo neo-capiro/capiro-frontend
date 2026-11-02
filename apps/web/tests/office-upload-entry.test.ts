@@ -13,6 +13,7 @@ import { session, ids } from "./meri-document-public-fixtures";
 function render(
   change: Partial<UploadItem> = {},
   receipt: Partial<NonNullable<UploadItem["receipt"]>> = {},
+  slotChange: Partial<ComposerAttachments> = {},
 ) {
   const queries = new QueryClient(),
     lifetime = new AbortController();
@@ -58,13 +59,17 @@ function render(
     items: [item],
     incoming: [],
     busy: false,
+    checking: false,
+    overdue: () => false,
     sendArgument: [],
     onPick: noop,
     onCheck: noop,
     onRemove: noop,
     onCancel: noop,
+    onDismiss: noop,
     onToggleIncoming: noop,
     limit: 8,
+    ...slotChange,
   };
   try {
     return renderToStaticMarkup(
@@ -85,7 +90,10 @@ describe("upload row Office entry", () => {
   it("offers the clean original even when text extraction is unavailable", () => {
     const html = render();
     expect(html).toContain("Open in Workspace");
-    expect(html).toContain("EXTRACTION_UNAVAILABLE");
+    // The chip says it plainly; the service's own code travels in the tooltip, never as the state.
+    expect(html).toContain("Could not read this file");
+    expect(html).toContain("text: unavailable");
+    expect(html).not.toContain("EXTRACTION_UNAVAILABLE");
   });
   it.each(["docx", "xlsx", "pptx"])(
     "offers %s retained originals",
@@ -106,5 +114,34 @@ describe("upload row Office entry", () => {
     expect(render({ filename: "Original.pdf" })).not.toContain(
       "Open in Workspace",
     );
+  });
+});
+
+describe("attachment row controls", () => {
+  const stillChecking: Partial<NonNullable<UploadItem["receipt"]>> = {
+    scanStatus: "pending",
+    originalBytesAvailable: false,
+    extraction: { status: "pending", limitations: [] },
+  };
+  it("offers Check again once a stored row's check has outrun the bounded wait", () => {
+    expect(render({}, stillChecking)).not.toContain("Check again");
+    const html = render({}, stillChecking, { overdue: () => true });
+    expect(html).toContain("Still checking — send without it or remove it");
+    expect(html).toContain("Check again");
+    expect(html).not.toContain("Check status<");
+  });
+  it("names a file this conversation already holds without any part of its upload id", () => {
+    const html = render(
+      {},
+      {},
+      {
+        incoming: [
+          { uploadId: ids.other, sha256: "b".repeat(64), selected: false },
+        ],
+      },
+    );
+    expect(html).toContain("File 1");
+    expect(html).toContain("Already in this conversation");
+    expect(html).not.toContain(ids.other.slice(0, 8));
   });
 });

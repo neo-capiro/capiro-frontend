@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   UPLOAD_LIMITS,
   UploadResponseError,
@@ -10,7 +10,13 @@ import {
   type AdmittedUploadRequest,
   type UploadReceipt,
 } from "../../src/shared/meri-uploads/facade";
-import { createUploadController } from "../../src/shared/meri-uploads/upload-controller";
+import {
+  UPLOAD_CHECK_INTERVAL_MS,
+  UPLOAD_CHECK_WAIT_MS,
+  createUploadController,
+  type UploadItem,
+} from "../../src/shared/meri-uploads/upload-controller";
+import { attachmentWording } from "../../src/shared/meri-uploads/attachment-wording";
 import { createUploadWire } from "../../src/shared/meri-uploads/upload-wire";
 
 const encoder = new TextEncoder();
@@ -291,14 +297,9 @@ describe("uploads consumer", () => {
     expect(writes[0]?.body).toEqual(pdf);
     expect(writes[0]?.session).toBe(credential);
 
-    // The digest this page declared is the real digest, and the argument adds nothing else.
-    expect(controller.sendArgument()).toEqual([
-      { uploadId: attempt.uploadId, sha256: pdfSha256 },
-    ]);
-    expect(Object.keys(controller.sendArgument()[0] as object)).toEqual([
-      "uploadId",
-      "sha256",
-    ]);
+    // Stored but not yet checked: the service has not said it is clean and readable, so the
+    // message does not carry it yet.
+    expect(controller.sendArgument()).toEqual([]);
 
     // A later read re-resolves custody and availability; nothing is re-written.
     server.settling((current) =>
@@ -310,6 +311,14 @@ describe("uploads consumer", () => {
       scanStatus: "clean",
       originalBytesAvailable: true,
     });
+    // The digest this page declared is the real digest, and the argument adds nothing else.
+    expect(controller.sendArgument()).toEqual([
+      { uploadId: attempt.uploadId, sha256: pdfSha256 },
+    ]);
+    expect(Object.keys(controller.sendArgument()[0] as object)).toEqual([
+      "uploadId",
+      "sha256",
+    ]);
     const reads = server.calls.filter(
       (call) => call.url === "/api/uploads/status",
     );
@@ -359,9 +368,10 @@ describe("uploads consumer", () => {
     );
 
     // Only a status read may re-resolve this attempt; it never re-writes the original.
-    // The write had in fact landed before the reply was lost, which only the service can say.
+    // The write had in fact landed before the reply was lost, and the service has since checked
+    // it, which only the service can say.
     server.settling((current) =>
-      storedPending(current.uploadId, current.requestId, current.original),
+      storedClean(current.uploadId, current.requestId, current.original),
     );
     await controller.check(item?.requestId as string);
     expect(controller.items()[0]?.state).toBe("stored");
@@ -623,5 +633,249 @@ describe("the public receiver refuses what this consumer must never invent", () 
         ),
       ),
     ).toBe("INVALID_UPLOAD_OUTCOME");
+  });
+});
+
+describe("attachment readiness: the page re-reads a pending check, waits a bounded time, and says it plainly", () => {
+  const removing = (
+    uploadId: string,
+    requestId: string,
+    original: Original,
+  ): UploadReceipt => ({
+    uploadId,
+    requestId,
+    original: { ...original, versionId: "version-1" },
+    storageStatus: "removing",
+    scanStatus: "unavailable",
+    scanReason: "UPLOAD_DEFINITIONS_UNAVAILABLE",
+    extraction: { status: "unavailable", limitations: ["SCAN_UNAVAILABLE"] },
+    originalBytesAvailable: false,
+  });
+  const statusReads = (server: ReturnType<typeof createUploadServer>) =>
+    server.calls.filter((call) => call.url === "/api/uploads/status").length;
+
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date"] });
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("re-reads the status while the service is still checking, and Send waits only until the verdict lands", async () => {
+    const server = createUploadServer();
+    const { controller } = controllerFor(server);
+    await controller.add([file()]);
+    const item = controller.items()[0]!;
+    expect(item.state).toBe("stored");
+    expect(item.receipt?.scanStatus).toBe("pending");
+    // Stored but unscanned: the chip waits, Send waits, and nothing is offered to the message yet.
+    expect(attachmentWording(item)).toMatchObject({
+      label: "Checking the file…",
+      waiting: true,
+    });
+    expect(controller.checking()).toBe(true);
+    expect(controller.sendArgument()).toEqual([]);
+    expect(statusReads(server)).toBe(0);
+    // One read per interval, never more; the write is never repeated.
+    await vi.advanceTimersByTimeAsync(UPLOAD_CHECK_INTERVAL_MS);
+    expect(statusReads(server)).toBe(1);
+    expect(controller.checking()).toBe(true);
+    server.settling((current) =>
+      storedClean(current.uploadId, current.requestId, current.original),
+    );
+    await vi.advanceTimersByTimeAsync(UPLOAD_CHECK_INTERVAL_MS);
+    expect(statusReads(server)).toBe(2);
+    const ready = controller.items()[0]!;
+    expect(ready.receipt?.scanStatus).toBe("clean");
+    expect(attachmentWording(ready)).toMatchObject({
+      label: "Ready",
+      waiting: false,
+    });
+    expect(controller.checking()).toBe(false);
+    expect(controller.sendArgument()).toEqual([
+      { uploadId: ready.uploadId, sha256: pdfSha256 },
+    ]);
+    // Settled: no further reads are scheduled.
+    await vi.advanceTimersByTimeAsync(UPLOAD_CHECK_INTERVAL_MS * 10);
+    expect(statusReads(server)).toBe(2);
+    expect(server.calls.filter((call) => call.method === "PUT")).toHaveLength(
+      1,
+    );
+  });
+
+  it("a check that outruns the bounded wait stops holding Send and leaves the attachment out of the message", async () => {
+    const server = createUploadServer();
+    const { controller } = controllerFor(server);
+    await controller.add([file()]);
+    const requestId = controller.items()[0]!.requestId;
+    await vi.advanceTimersByTimeAsync(UPLOAD_CHECK_WAIT_MS - 1);
+    expect(controller.checking()).toBe(true);
+    expect(controller.overdue(requestId)).toBe(false);
+    await vi.advanceTimersByTimeAsync(UPLOAD_CHECK_INTERVAL_MS + 1);
+    expect(controller.overdue(requestId)).toBe(true);
+    expect(controller.checking()).toBe(false);
+    expect(controller.sendArgument()).toEqual([]);
+    expect(attachmentWording(controller.items()[0]!, true)).toMatchObject({
+      label: "Still checking — send without it or remove it",
+      waiting: false,
+    });
+    const reads = statusReads(server);
+    expect(reads).toBeGreaterThanOrEqual(
+      UPLOAD_CHECK_WAIT_MS / UPLOAD_CHECK_INTERVAL_MS - 1,
+    );
+    expect(reads).toBeLessThanOrEqual(
+      UPLOAD_CHECK_WAIT_MS / UPLOAD_CHECK_INTERVAL_MS + 1,
+    );
+    // The bounded wait is over: no more automatic reads.
+    await vi.advanceTimersByTimeAsync(UPLOAD_CHECK_INTERVAL_MS * 10);
+    expect(statusReads(server)).toBe(reads);
+    // A manual check still works and a late verdict still lands.
+    server.settling((current) =>
+      storedClean(current.uploadId, current.requestId, current.original),
+    );
+    await controller.check(requestId);
+    expect(controller.sendArgument()).toHaveLength(1);
+    expect(controller.overdue(requestId)).toBe(false);
+  });
+
+  it("an unavailable verdict is settled: nothing waits on it and it is never sent as if it were ready", async () => {
+    const server = createUploadServer();
+    const { controller } = controllerFor(server);
+    await controller.add([file()]);
+    server.settling((current) =>
+      scanUnavailable(current.uploadId, current.requestId, current.original),
+    );
+    await vi.advanceTimersByTimeAsync(UPLOAD_CHECK_INTERVAL_MS);
+    const item = controller.items()[0]!;
+    expect(item.state).toBe("stored");
+    expect(item.receipt?.scanStatus).toBe("unavailable");
+    expect(controller.checking()).toBe(false);
+    expect(controller.sendArgument()).toEqual([]);
+    const wording = attachmentWording(item);
+    // The scanner is at fault, not the file: the chip must not blame the file.
+    expect(wording.label).toBe(
+      "The safety check is unavailable right now — remove the file to send, or try again later",
+    );
+    expect(wording.detail).toContain("SCANNER_OFFLINE");
+    await vi.advanceTimersByTimeAsync(UPLOAD_CHECK_INTERVAL_MS * 10);
+    expect(statusReads(server)).toBe(1);
+  });
+
+  it("a held removal is reported as removed from this message, releases the recovery locator, and can be dismissed", async () => {
+    const released: string[] = [];
+    const recovery = {
+      list: () => [],
+      retain: () => undefined,
+      release: (requestId: string) => {
+        released.push(requestId);
+      },
+    };
+    const server: ReturnType<typeof createUploadServer> = createUploadServer({
+      // The service stopped serving the original but its storage hold defers physical deletion.
+      fault: (route) =>
+        route === "remove"
+          ? respond(
+              removing(
+                server.latest().uploadId,
+                server.latest().requestId,
+                server.latest().original,
+              ),
+            )
+          : undefined,
+    });
+    const lifetime = new AbortController();
+    const wire = createUploadWire(credential, lifetime.signal, server.fetcher);
+    const controller = createUploadController({
+      wire,
+      recovery,
+      isCurrent: () => true,
+    });
+    await controller.add([file()]);
+    const requestId = controller.items()[0]!.requestId;
+    expect(released).toEqual([]);
+    await controller.remove(requestId);
+    const held = controller.items()[0]!;
+    expect(held.state).toBe("removing");
+    expect(controller.checking()).toBe(false);
+    expect(controller.sendArgument()).toEqual([]);
+    expect(attachmentWording(held).label).toBe("Removed from this message");
+    expect(released).toEqual([requestId]);
+    // Dismissing drops the row locally; custody is not written again.
+    const writes = server.calls.length;
+    controller.dismiss(requestId);
+    expect(controller.items()).toEqual([]);
+    expect(server.calls.length).toBe(writes);
+    // A row still being checked cannot be dismissed: it keeps its Remove control instead.
+    await controller.add([file()]);
+    const pending = controller.items()[0]!.requestId;
+    controller.dismiss(pending);
+    expect(controller.items()).toHaveLength(1);
+  });
+
+  it("the chip never shows a raw code as its state", () => {
+    const base = {
+      requestId: "r",
+      uploadId: "u",
+      filename: "a.pdf",
+      mimeType: "application/pdf",
+      bytes: 1,
+      sha256: "s",
+    } as const;
+    const receipt = (
+      scanStatus: UploadReceipt["scanStatus"],
+      extraction: UploadReceipt["extraction"],
+      scanReason: string | null = null,
+    ) => ({
+      uploadId: "u",
+      bytes: 1,
+      sha256: "s",
+      storageStatus: "stored" as const,
+      scanStatus,
+      scanReason,
+      extraction,
+      originalBytesAvailable: scanStatus === "clean",
+    });
+    const stored = (
+      scanStatus: UploadReceipt["scanStatus"],
+      extraction: UploadReceipt["extraction"],
+      scanReason: string | null = null,
+    ): UploadItem => ({
+      ...base,
+      state: "stored",
+      receipt: receipt(scanStatus, extraction, scanReason),
+    });
+    const cases: readonly [UploadItem, string][] = [
+      [{ ...base, state: "declaring" }, "Uploading…"],
+      [stored("pending", pendingExtraction), "Checking the file…"],
+      [stored("clean", pendingExtraction), "Reading the text…"],
+      [
+        stored("clean", { status: "partial", limitations: ["OCR_LOW_CONFIDENCE"] }),
+        "Ready (parts could not be read)",
+      ],
+      [
+        stored("infected", { status: "blocked", limitations: ["MALWARE"] }, "MALWARE_DETECTED"),
+        "Blocked by the safety check",
+      ],
+      [
+        stored("unavailable", { status: "unavailable", limitations: [] }, "UPLOAD_DEFINITIONS_UNAVAILABLE"),
+        "The safety check is unavailable right now — remove the file to send, or try again later",
+      ],
+      [
+        { ...base, state: "unknown", refusal: { code: "UPLOAD_PUT_UNKNOWN", uncertain: true } },
+        "Status unknown — check it",
+      ],
+      [{ ...base, state: "refused", refusal: { code: "UPLOAD_SIZE" } }, "Could not upload this file"],
+      [{ ...base, state: "removed" }, "Removed"],
+    ];
+    for (const [item, label] of cases) {
+      const wording = attachmentWording(item);
+      expect(wording.label).toBe(label);
+      expect(wording.label).not.toMatch(/[A-Z]{2,}_[A-Z_]+/u);
+    }
+    expect(
+      attachmentWording(
+        stored("unavailable", { status: "unavailable", limitations: [] }, "UPLOAD_DEFINITIONS_UNAVAILABLE"),
+      ).detail,
+    ).toBe("scan: unavailable · UPLOAD_DEFINITIONS_UNAVAILABLE · text: unavailable");
   });
 });

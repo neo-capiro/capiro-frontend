@@ -8,13 +8,16 @@ import type { MeriConversationPort } from "../src/shared/meri-conversations/host
  * available yet…". The composer showed the unavailable copy as the picker's tooltip because the slot
  * carried it unconditionally. The copy belongs only to a slot with no bound access.
  */
-const unavailable = "Not available yet: Attaching files to a message is not available yet.";
+const unavailable =
+  "Not available yet: Attaching files to a message is not available yet.";
 
 function portWithUploads(): MeriConversationPort {
   const uploads = {
     items: () => [],
     incoming: () => [],
     pending: () => false,
+    checking: () => true,
+    overdue: (requestId: string) => requestId === "late",
     sendArgument: () => [],
     version: () => 1,
     subscribe: () => () => undefined,
@@ -22,6 +25,7 @@ function portWithUploads(): MeriConversationPort {
     check: async () => undefined,
     remove: async () => undefined,
     cancel: () => undefined,
+    dismiss: () => undefined,
     toggle: () => undefined,
   };
   return {
@@ -42,10 +46,15 @@ it("carries the unavailable copy only while no conversation port has bound an up
   expect(absent.unavailable).toBe(unavailable);
   expect(absent.items).toEqual([]);
   expect(absent.busy).toBe(false);
+  expect(absent.checking).toBe(false);
+  expect(absent.overdue("late")).toBe(false);
 
   const bound = composerAttachmentSlot(portWithUploads(), unavailable);
   expect(bound.available).toBe(true);
   expect("unavailable" in bound).toBe(false);
+  expect(bound.checking).toBe(true);
+  expect(bound.overdue("late")).toBe(true);
+  expect(bound.overdue("other")).toBe(false);
   expect(bound.selectedTab?.context.conversationId).toBe(
     "00000000-0000-4000-8000-000000000001",
   );

@@ -27,6 +27,10 @@ export type ComposerAttachments = Readonly<{
   incoming: readonly IncomingUpload[];
   /** A bounded write or read of this conversation is in flight. */
   busy: boolean;
+  /** The service is still checking a stored attachment, within the bounded wait; Send waits for it. */
+  checking: boolean;
+  /** Whether one attachment's check has outrun the bounded wait. */
+  overdue: (requestId: string) => boolean;
   /** The exact ordered ids and digests the next message would carry. */
   sendArgument: readonly UploadSendArgument[];
   onPick: (files: readonly File[]) => void;
@@ -34,6 +38,8 @@ export type ComposerAttachments = Readonly<{
   onRemove: (requestId: string) => void;
   /** Aborts this page's own in-flight attempt for one row; it never undoes service custody. */
   onCancel: (requestId: string) => void;
+  /** Drops a row the service already stopped serving from this message; custody is untouched. */
+  onDismiss: (requestId: string) => void;
   onToggleIncoming: (uploadId: string) => void;
   limit: number;
 }>;

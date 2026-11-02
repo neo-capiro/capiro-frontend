@@ -15,6 +15,18 @@ import type {
   UploadRefusal,
   UploadWire,
 } from "./upload-wire";
+import { attachmentChecking, attachmentReady } from "./attachment-wording";
+
+/**
+ * While the service is still checking a stored attachment (scan, then text extraction) the page
+ * re-reads its status on this cadence, for at most the bounded wait. The service inspects the
+ * original in a cold sandbox session with its own budget, so a single read right after the write
+ * never sees the verdict; without these reads the chip sat on "checking" until a manual check.
+ */
+export const UPLOAD_CHECK_INTERVAL_MS = 3000;
+/** After this long a still-pending check no longer holds Send: the person may send without the
+ * attachment (it is left out of the message) or remove it. */
+export const UPLOAD_CHECK_WAIT_MS = 120_000;
 
 /**
  * States this page can observe. `unknown` is the contract's uncertain case: a dispatched original
@@ -98,12 +110,18 @@ export function createUploadController(options: {
   const ledger = createUploadLedger();
   const items = new Map<string, UploadItem>();
   const attempts = new Map<string, AbortController>();
+  /** One bounded status re-read schedule per attachment the service is still checking. */
+  const checks = new Map<
+    string,
+    { since: number; timer: ReturnType<typeof setTimeout> | null }
+  >();
   const chosen = new Set<string>();
   const lifetime = new AbortController();
   const listeners = new Set<() => void>();
   let version = 0;
   let disposed = false;
   let recoveryUnavailable = false;
+  const now = () => Date.now();
   try {
     if (options.isCurrent())
       for (const requestId of options.recovery?.list() ?? []) {
@@ -130,8 +148,43 @@ export function createUploadController(options: {
     options.onChange?.();
     for (const listener of listeners) listener();
   };
+  /** True once this attachment's check has outrun the bounded wait; it then no longer holds Send. */
+  const overdue = (requestId: string) => {
+    const check = checks.get(requestId);
+    return !!check && now() - check.since >= UPLOAD_CHECK_WAIT_MS;
+  };
+  const stopCheck = (requestId: string) => {
+    const check = checks.get(requestId);
+    if (check?.timer) clearTimeout(check.timer);
+    checks.delete(requestId);
+  };
+  /** Re-arm or retire the bounded status re-read for one attachment after each published state. */
+  const schedule = (requestId: string, item: UploadItem) => {
+    if (!attachmentChecking(item) || !current()) {
+      stopCheck(requestId);
+      return;
+    }
+    const entry = checks.get(requestId) ?? { since: now(), timer: null };
+    if (entry.timer) clearTimeout(entry.timer);
+    entry.timer =
+      now() - entry.since >= UPLOAD_CHECK_WAIT_MS
+        ? null
+        : setTimeout(() => {
+            entry.timer = null;
+            // A read already in flight for this row re-publishes its own state and re-arms from
+            // there; the re-arm is published too, so an expired wait is seen without a new reply.
+            if (!attempts.has(requestId)) void check(requestId);
+            else {
+              schedule(requestId, items.get(requestId) ?? item);
+              changed();
+            }
+          }, UPLOAD_CHECK_INTERVAL_MS);
+    checks.set(requestId, entry);
+  };
   const update = (requestId: string, next: UploadItem) => {
-    if (next.state === "removed") {
+    // A removed original, and one the service stopped serving while a hold defers its physical
+    // deletion, both need no further action from this page: the locator is released either way.
+    if (next.state === "removed" || next.state === "removing") {
       try {
         options.recovery?.release(requestId);
       } catch {
@@ -139,6 +192,7 @@ export function createUploadController(options: {
       }
     }
     items.set(requestId, Object.freeze(next));
+    schedule(requestId, next);
     changed();
   };
   /** A late reply for a conversation that is no longer on screen is discarded, not published. */
@@ -440,6 +494,25 @@ export function createUploadController(options: {
    * file was never allocated is simply dropped, and an allocated row keeps its canonical Check and
    * Remove operations instead of a local cancellation pretending to undo custody.
    */
+  /**
+   * Drops a row the service has already stopped serving (removed, or removing while a hold defers
+   * the physical deletion) from this message. Custody is unchanged: nothing is written, and a row
+   * whose state is still uncertain keeps its Check and Remove controls instead.
+   */
+  function dismiss(requestId: string) {
+    const item = items.get(requestId);
+    if (
+      !current() ||
+      !item ||
+      attempts.has(requestId) ||
+      (item.state !== "removing" && item.state !== "removed")
+    )
+      return;
+    stopCheck(requestId);
+    items.delete(requestId);
+    changed();
+  }
+
   function cancel(requestId: string) {
     const running = attempts.get(requestId);
     if (running) {
@@ -479,8 +552,9 @@ export function createUploadController(options: {
     /**
      * The exact ordered argument for the canonical conversation input: distinct upload ids with the
      * digest this page declared, established sources first in the order the conversation reported
-     * them. Only a stored attempt may enter it, so an uncertain write can never be sent as if it were
-     * stored; custody, scan and extraction stay the service's decision.
+     * them. Only a stored attempt the service reported scanned clean and readable may enter it, so
+     * neither an uncertain write nor one still being checked, blocked or unreadable is sent as if it
+     * were ready; custody, scan and extraction stay the service's decision, re-resolved at send.
      */
     sendArgument: (): readonly UploadSendArgument[] => {
       // A disposed or revoked session offers no argument: nothing may be sent from it.
@@ -488,7 +562,7 @@ export function createUploadController(options: {
       const argument: UploadSendArgument[] = [];
       const seen = new Set<string>();
       const stored = Array.from(items.values())
-        .filter((item) => item.state === "stored" && item.uploadId !== null)
+        .filter((item) => attachmentReady(item) && item.uploadId !== null)
         .map((item) => ({
           uploadId: item.uploadId as string,
           sha256: item.sha256,
@@ -510,10 +584,20 @@ export function createUploadController(options: {
     check,
     remove,
     cancel,
+    dismiss,
     pending: () => options.wire.pending() || attempts.size > 0,
+    /** A stored attachment the service is still checking, within the bounded wait: Send waits for it. */
+    checking: () =>
+      current() &&
+      Array.from(items.values()).some(
+        (item) => attachmentChecking(item) && !overdue(item.requestId),
+      ),
+    /** Whether this attachment's check has outrun the bounded wait. */
+    overdue,
     dispose() {
       if (disposed) return;
       disposed = true;
+      for (const requestId of Array.from(checks.keys())) stopCheck(requestId);
       for (const running of attempts.values()) running.abort();
       attempts.clear();
       lifetime.abort();
