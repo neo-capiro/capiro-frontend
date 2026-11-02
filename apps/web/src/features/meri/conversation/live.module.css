@@ -183,24 +183,75 @@
   font-size: 12px;
   line-height: 1.4;
 }
-/* Pause/steer, recovery and checkpoint actions; folded away while a run is simply running. */
+/* The working status and the run's controls share the right side of the answer heading. */
+.answerStatus {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px 12px;
+  font-size: 13px;
+}
+/* With a second control line open, the identity stays level with the first line. */
+.answerHeading:has(.steerField, .fullRow) {
+  align-items: flex-start;
+}
+.answerHeading:has(.steerField, .fullRow) > .answerStatus {
+  min-height: 28px;
+}
+/* A control row that needs the whole line under the status: steer field, recovery, checkpoint. */
+.fullRow {
+  flex: 1 1 100%;
+}
+.inlineRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+/* Compact variants of the shared button styles, sized to the heading line. */
+.inlineRow .inlineButton,
+.steerField .inlineButton,
+.statusRow .inlineButton {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+.steerField {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.inlineInput {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--input);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.inlineInput::placeholder {
+  color: var(--muted-foreground);
+  opacity: 1;
+}
+.inlineInput:focus {
+  outline: none;
+  border-color: var(--foreground);
+}
+/* A finished run's checkpoint actions inside the conversation details. */
 .runControls {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
   font-size: 13px;
-}
-.runControls > summary {
-  cursor: pointer;
-  color: var(--muted-foreground);
-  font-size: 12px;
-}
-.runControls label {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: min(480px, 100%);
 }
 /* A finished run's checkpoint is audit material behind the details: a quiet link, not a call to action. */
 .textLink {

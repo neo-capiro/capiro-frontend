@@ -331,7 +331,7 @@ function ComposerAction({
         }
         title={
           live
-            ? (live.stopBlocked ?? "Ask Meri to stop this run")
+            ? (live.stopBlocked ?? "Stop asks Meri to end this answer")
             : "Stopping a run requires a connected, authorized run"
         }
       >

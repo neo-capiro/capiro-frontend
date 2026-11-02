@@ -3,8 +3,8 @@ import type {
   ConversationSummary,
 } from "./history-client";
 
-/** A summary labels only the same canonical discovered row and immutable client scope. */
-export function recentTitle(
+/** The owned summary that names a discovered conversation: the same canonical row and immutable client scope. */
+export function recentSummary(
   conversation: ConversationListPage["conversations"][number],
   summaries: readonly ConversationSummary[] | undefined,
 ) {
@@ -23,5 +23,5 @@ export function recentTitle(
         conversation.scopes[0]?.kind === "private-user" &&
         conversation.scopes[0]?.resourceId === conversation.owner.actorId
       : clients.length === 1 && clients[0]?.resourceId === row.clientId;
-  return sameScope ? row.title : undefined;
+  return sameScope ? row : undefined;
 }

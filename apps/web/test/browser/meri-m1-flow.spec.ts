@@ -131,7 +131,6 @@ for (const viewport of [
       ).toBeVisible();
       // Finished turns carry no pause, steer or recovery block at all.
       await expect(page.getByText("Pause and recovery")).toHaveCount(0);
-      await expect(page.getByText("Pause or steer this run")).toHaveCount(0);
       await expect(
         page.getByRole("button", {
           name: /^(Pause|Steer|Resume from checkpoint|Retry from checkpoint|Fork conversation)$/,

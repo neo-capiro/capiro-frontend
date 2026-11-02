@@ -6,6 +6,7 @@ import { ConversationEvidence } from "../src/features/meri/conversation/evidence
 import {
   CheckpointActions,
   RunLifecycleControls,
+  guidanceCommand,
 } from "../src/features/meri/conversation/lifecycle/RunLifecycleControls";
 import { ConversationFrame } from "../src/features/meri/conversation/ConversationFrame";
 import {
@@ -191,19 +192,54 @@ describe("run controls appear only while there is something to control or recove
     expect(controls(null)).toBe("");
   });
 
-  it("folds pause and steer away while a run is simply running", () => {
+  it("offers Pause and a closed Steer affordance inline while a run is running", () => {
     const html = controls(turn("running"));
-    expect(html).toMatch(/^<details/);
-    expect(html).toContain("Pause or steer this run");
+    expect(html).not.toContain("<details");
+    expect(html).not.toContain("Pause or steer this run");
     expect(html).toContain(">Pause</button>");
-    expect(html).toContain("Send guidance");
+    expect(html).toMatch(
+      /<button[^>]*aria-expanded="false"[^>]*>Steer<\/button>/,
+    );
+    // The guidance field opens on demand; nothing is typed into until then.
+    expect(html).not.toContain("Steer this run");
+    expect(html).not.toContain("Send guidance");
     expect(html).not.toContain("No verified checkpoint");
+    expect(html).not.toContain("Leaving this page");
+  });
+
+  it("renders beside the working status inside the current answer's heading", () => {
+    const html = renderToStaticMarkup(
+      createElement(ConversationTurn, {
+        turn: turn("running"),
+        label: "Current turn",
+        controls: createElement("span", null, "synthetic run controls"),
+      }),
+    );
+    const heading = html.slice(
+      html.indexOf("Meri is working"),
+      html.indexOf("synthetic run controls"),
+    );
+    expect(heading.length).toBeGreaterThan(0);
+    // One status container holds the working text and the controls: no transcript markup between.
+    expect(heading).not.toContain("<p");
+    expect(html.indexOf("synthetic run controls")).toBeLessThan(
+      html.indexOf("Synthetic answer."),
+    );
+  });
+
+  it("sends only trimmed guidance as a steer control", () => {
+    expect(guidanceCommand("  keep the selected window  ")).toEqual({
+      intent: "steer",
+      text: "keep the selected window",
+    });
+    for (const empty of ["", "   ", "\n\t"])
+      expect(guidanceCommand(empty)).toBeUndefined();
   });
 
   it("keeps a paused run, a pending control and an error in plain view", () => {
     const paused = controls(turn("paused"));
-    expect(paused).toMatch(/^<section/);
     expect(paused).toContain("No verified checkpoint is available yet.");
+    expect(paused).not.toContain(">Pause</button>");
     const pending = controls(
       turn("completed"),
       idle({ command: { controlId: "c", intent: "pause" } as never }),

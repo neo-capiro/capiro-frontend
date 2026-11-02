@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState, type FormEvent } from "react";
 import { Button } from "@capiro/ui/button";
 import type { useRunLifecycle } from "./useRunLifecycle";
 import type { TurnView } from "../conversation-view";
@@ -6,10 +6,11 @@ import ui from "../../ui/meri-ui.module.css";
 import styles from "../live.module.css";
 
 type Lifecycle = ReturnType<typeof useRunLifecycle>;
+const inlineButton = `${ui.outline} ${styles.inlineButton}`;
 
 function LifecycleError({ lifecycle }: { lifecycle: Lifecycle }) {
   return lifecycle.error ? (
-    <p role="alert" className={styles.muted}>
+    <p role="alert" className={`${styles.muted} ${styles.fullRow}`}>
       {lifecycle.error}
     </p>
   ) : null;
@@ -28,7 +29,7 @@ function VerifiedCheckpoint({
   const checkpoint = lifecycle.checkpoint;
   if (!checkpoint) return null;
   return (
-    <div className={styles.statusRow}>
+    <div className={`${styles.statusRow} ${styles.fullRow}`}>
       <p role="status">
         Checkpoint verified for this run. Meri will recheck access when
         continuing.
@@ -36,7 +37,7 @@ function VerifiedCheckpoint({
       {resumable && (
         <Button
           type="button"
-          className={ui.outline}
+          className={inlineButton}
           disabled={held}
           onClick={() =>
             lifecycle.send({
@@ -51,7 +52,7 @@ function VerifiedCheckpoint({
       )}
       <Button
         type="button"
-        className={ui.outline}
+        className={inlineButton}
         disabled={held}
         onClick={() =>
           lifecycle.send({
@@ -67,9 +68,16 @@ function VerifiedCheckpoint({
   );
 }
 
+/** The steer control a typed guidance becomes: trimmed text only, never an empty control. */
+export function guidanceCommand(text: string) {
+  const guidance = text.trim();
+  return guidance ? ({ intent: "steer", text: guidance } as const) : undefined;
+}
+
 /**
- * Controls for a run that is still going or paused, plus recovery of a pending control. A
- * finished turn renders nothing here; its checkpoint lives in the conversation details.
+ * Controls for a run that is still going or paused, plus recovery of a pending control. They sit
+ * in the current answer's heading beside its working status; a finished turn renders nothing here
+ * and its checkpoint lives in the conversation details.
  */
 export function RunLifecycleControls({
   lifecycle,
@@ -81,6 +89,8 @@ export function RunLifecycleControls({
   disabled: boolean;
 }) {
   const [text, setText] = useState("");
+  const [steering, setSteering] = useState(false);
+  const fieldId = useId();
   const checkpointId =
     lifecycle.receipt?.checkpointId ?? turn?.checkpointIds.at(-1);
   const held = disabled || lifecycle.busy || !lifecycle.available;
@@ -89,11 +99,19 @@ export function RunLifecycleControls({
   const mutable = !held && !lifecycle.command && running;
   if (!lifecycle.command && !lifecycle.error && !running && !paused)
     return null;
-  const content = (
+  const sendGuidance = (event: FormEvent) => {
+    event.preventDefault();
+    const command = guidanceCommand(text);
+    if (!command || !mutable) return;
+    lifecycle.send(command);
+    setText("");
+    setSteering(false);
+  };
+  return (
     <>
       <LifecycleError lifecycle={lifecycle} />
       {lifecycle.command ? (
-        <div className={styles.statusRow}>
+        <div className={`${styles.statusRow} ${styles.fullRow}`}>
           <p role="status">
             {lifecycle.receipt?.state === "APPLIED"
               ? "The control applied. Recover its destination."
@@ -101,7 +119,7 @@ export function RunLifecycleControls({
           </p>
           <Button
             type="button"
-            className={ui.outline}
+            className={inlineButton}
             disabled={held}
             onClick={lifecycle.retry}
           >
@@ -111,44 +129,61 @@ export function RunLifecycleControls({
       ) : (
         <>
           {running && (
-            <>
+            <div className={styles.inlineRow} aria-label="Run controls">
               <Button
                 type="button"
-                className={ui.outline}
+                className={inlineButton}
                 disabled={!mutable}
                 onClick={() => lifecycle.send({ intent: "pause" })}
               >
                 Pause
               </Button>
-              <label>
-                Steer this run
-                <textarea
-                  value={text}
-                  disabled={!mutable}
-                  onChange={(event) => setText(event.target.value)}
-                />
-              </label>
               <Button
                 type="button"
-                className={ui.outline}
-                disabled={!mutable || !text.trim()}
-                onClick={() =>
-                  lifecycle.send({ intent: "steer", text: text.trim() })
-                }
+                className={inlineButton}
+                disabled={!mutable}
+                aria-expanded={steering}
+                aria-controls={fieldId}
+                onClick={() => setSteering((open) => !open)}
+              >
+                Steer
+              </Button>
+            </div>
+          )}
+          {running && steering && (
+            <form
+              id={fieldId}
+              className={styles.steerField}
+              onSubmit={sendGuidance}
+            >
+              <input
+                type="text"
+                className={styles.inlineInput}
+                aria-label="Steer this run"
+                placeholder="Guidance for the rest of this answer"
+                value={text}
+                disabled={!mutable}
+                autoFocus
+                onChange={(event) => setText(event.target.value)}
+              />
+              <Button
+                type="submit"
+                className={`${ui.primary} ${styles.inlineButton}`}
+                disabled={!mutable || !guidanceCommand(text)}
               >
                 Send guidance
               </Button>
-            </>
+            </form>
           )}
           {checkpointId ? (
-            <Button
+            <button
               type="button"
-              className={ui.outline}
+              className={styles.textLink}
               disabled={held}
               onClick={() => void lifecycle.inspect(checkpointId)}
             >
               Inspect latest checkpoint
-            </Button>
+            </button>
           ) : (
             paused && (
               <p className={styles.muted}>
@@ -164,17 +199,6 @@ export function RunLifecycleControls({
         </>
       )}
     </>
-  );
-  // A healthy running run keeps its controls folded; a pause, an error or a pending control stays open.
-  return running && !lifecycle.command && !lifecycle.error ? (
-    <details className={styles.runControls}>
-      <summary>Pause or steer this run</summary>
-      {content}
-    </details>
-  ) : (
-    <section className={styles.runControls} aria-label="Run controls">
-      {content}
-    </section>
   );
 }
 

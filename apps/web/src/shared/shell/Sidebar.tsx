@@ -110,14 +110,7 @@ export function Sidebar({
         </Button>
       )}
       <div className={styles.divider} />
-      {/* Real recent conversations sit before the destinations, as in the chat-first layout. */}
-      <SidebarRecents
-        fixture={fixture}
-        enabled={
-          conversationEnabled && capabilities.conversations.status === "on"
-        }
-      />
-      <div className={styles.divider} />
+      {/* The library sits under the conversation entry points; the recent chats follow it. */}
       <h2 className={styles.libraryLabel} id="meri-library-label">
         Library
       </h2>
@@ -130,6 +123,13 @@ export function Sidebar({
         // Tools panel, and workspace-wide Approvals has no ordinary route (SDK decisions stay
         // inline in the conversation). Other pages keep their existing destinations.
         exclude={chat ? ["conversations", "runs", "approvals"] : undefined}
+      />
+      <div className={styles.divider} />
+      <SidebarRecents
+        fixture={fixture}
+        enabled={
+          conversationEnabled && capabilities.conversations.status === "on"
+        }
       />
       <SidebarPreferences fixture={fixture} section={section} />
     </aside>

@@ -319,7 +319,9 @@ test("a completed run keeps its verified checkpoint inspection entry", async ({
   await expect(page.getByText("First answer", { exact: true })).toBeVisible();
   // A finished turn shows no recovery block; its checkpoint waits behind the closed details.
   await expect(page.getByText("Pause and recovery")).toHaveCount(0);
-  await expect(page.getByText("Pause or steer this run")).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: /^(Pause|Steer)$/ }),
+  ).toHaveCount(0);
   const inspect = page.getByRole("button", {
     name: "Inspect latest checkpoint",
     exact: true,
@@ -429,7 +431,6 @@ test("existing conversation keeps its transcript and never shows the empty-chat 
     "You can send your next message.",
     "Write next message",
     "Pause and recovery",
-    "Pause or steer this run",
     "Earlier run 1",
     "Current run",
     "View recorded usage",

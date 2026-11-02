@@ -1,5 +1,11 @@
 "use client";
-import { useEffect, useRef, useState, type RefObject } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
@@ -41,10 +47,12 @@ function LiveTurn({
   turn,
   intent,
   earlier,
+  controls,
 }: {
   turn: TurnView | null;
   intent: ReturnType<typeof useLiveRun>["intent"];
   earlier: readonly TurnView[];
+  controls: ReactNode;
 }) {
   if (turn)
     return (
@@ -52,6 +60,7 @@ function LiveTurn({
         turn={turn}
         label="Current turn"
         showPrompt={shouldShowPrompt(turn, earlier)}
+        controls={controls}
       />
     );
   if (!intent.submit) return null;
@@ -461,6 +470,13 @@ export function MeriLiveConversation({
   });
   // The landing identity belongs to this owner's own admitted state: no saved turn, no captured or
   // unresolved request, no current turn. Nothing here re-reads the URL or observes the DOM.
+  const controls = (
+    <RunLifecycleControls
+      lifecycle={lifecycle}
+      turn={turn}
+      disabled={controlsHeld}
+    />
+  );
   const emptyConversation =
     !turn &&
     !intent.submit &&
@@ -479,7 +495,12 @@ export function MeriLiveConversation({
               <DailyQuote />
             </div>
           )}
-          <LiveTurn turn={turn} intent={intent} earlier={earlier} />
+          <LiveTurn
+            turn={turn}
+            intent={intent}
+            earlier={earlier}
+            controls={controls}
+          />
         </>
       }
       status={
@@ -494,11 +515,8 @@ export function MeriLiveConversation({
             active={active}
             acceptedRequest={acceptedRequest}
           />
-          <RunLifecycleControls
-            lifecycle={lifecycle}
-            turn={turn}
-            disabled={controlsHeld}
-          />
+          {/* A pending control with no turn to host it (nothing observed yet) still needs its recovery. */}
+          {!turn && controls}
         </>
       }
       files={

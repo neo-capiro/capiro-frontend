@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Message, MessageContent } from "@capiro/ui/message";
 import { MarkdownContent } from "../../../shared/markdown/MarkdownContent";
 import { DesignIcon } from "../../../shared/shell/DesignIcon";
@@ -37,12 +38,15 @@ export function ConversationTurn({
   turn,
   label,
   showPrompt = true,
+  controls,
 }: {
   turn: TurnView;
   /** Accessible name of the turn, e.g. "Current turn". */
   label: string;
   /** Resumed segments retain their output/status while their logical prompt is shown once. */
   showPrompt?: boolean;
+  /** The current run's pause, steer and recovery controls, beside the working status. */
+  controls?: ReactNode;
 }) {
   const tone = attentionTones[turn.runState];
   const silent =
@@ -66,17 +70,20 @@ export function ConversationTurn({
               <DesignIcon name="assistant-sparkle" assetSet="cited-answer" />
               Meri
             </span>
-            {tone ? (
-              <StatusPill tone={tone}>
-                {runStateLabels[turn.runState]}
-              </StatusPill>
-            ) : (
-              activeStates.has(turn.runState) && (
-                <span role="status" className={styles.working}>
-                  Meri is working…
-                </span>
-              )
-            )}
+            <div className={styles.answerStatus}>
+              {tone ? (
+                <StatusPill tone={tone}>
+                  {runStateLabels[turn.runState]}
+                </StatusPill>
+              ) : (
+                activeStates.has(turn.runState) && (
+                  <span role="status" className={styles.working}>
+                    Meri is working…
+                  </span>
+                )
+              )}
+              {controls}
+            </div>
           </div>
           {turn.omittedPrefix && (
             <p className={styles.muted}>

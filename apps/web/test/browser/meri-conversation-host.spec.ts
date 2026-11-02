@@ -225,11 +225,10 @@ test("repeated failed reconnects stop with an explicit Reconnect that resumes th
   await expect(
     page.getByText("the run keeps going", { exact: false }),
   ).toHaveCount(0);
+  // The only explanation of leaving or stopping is the Stop button's own tooltip.
   await expect(
-    page.getByText(
-      "Leaving this page stops watching and does not cancel the run. Use Stop to request cancellation.",
-    ),
-  ).toBeVisible();
+    page.getByText("Leaving this page", { exact: false }),
+  ).toHaveCount(0);
   recover = true;
   await page.getByRole("button", { name: "Reconnect", exact: true }).click();
   await expect(page.getByText("Recovered", { exact: true })).toBeVisible();
