@@ -27,6 +27,9 @@ function savedTurn(
       turn.run.binding.conversationId,
       turn.promptLineage.logicalRequestId,
     ),
+    ...(turn.request.modelSelection
+      ? { modelSelection: turn.request.modelSelection }
+      : {}),
     incompleteHistory: events.at(-1)?.sequence !== turn.lastSequence,
   };
 }

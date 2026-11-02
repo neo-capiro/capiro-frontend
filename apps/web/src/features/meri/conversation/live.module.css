@@ -183,6 +183,13 @@
   font-size: 12px;
   line-height: 1.4;
 }
+/* A finished answer's model and effort: as quiet as the working status, never a pill. */
+.modelLabel {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
 /* The working status and the run's controls share the right side of the answer heading. */
 .answerStatus {
   display: flex;

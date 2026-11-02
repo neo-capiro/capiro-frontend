@@ -10,6 +10,8 @@ import { runStateLabels } from "../workspace/workspace-view";
 import { isTerminal, type TurnView } from "./conversation-view";
 import { describeRunFailure } from "./run-failure";
 import { useIntentApprovalsEnabled } from "./intents/approvals-enabled";
+import { useModelCatalogContext } from "../model-selection/ModelCatalogContext";
+import { runModelLabel } from "../model-selection/model-selection";
 import answer from "../cited-answer.module.css";
 import styles from "./live.module.css";
 import { TurnFeedback } from "./feedback/TurnFeedback";
@@ -49,6 +51,13 @@ export function ConversationTurn({
   controls?: ReactNode;
 }) {
   const tone = attentionTones[turn.runState];
+  // A finished answer names the model and effort that produced it, from the admitted request and
+  // the catalog already read for the picker; an unlabelled or unknown model shows nothing.
+  const catalog = useModelCatalogContext();
+  const modelLabel =
+    turn.runState === "completed"
+      ? runModelLabel(catalog, turn.modelSelection)
+      : undefined;
   const silent =
     isTerminal(turn.runState) &&
     turn.messages.length === 0 &&
@@ -81,6 +90,11 @@ export function ConversationTurn({
                     Meri is working…
                   </span>
                 )
+              )}
+              {modelLabel && (
+                <span className={styles.modelLabel} title="Model that answered">
+                  {modelLabel}
+                </span>
               )}
               {controls}
             </div>

@@ -15,6 +15,9 @@ import {
 } from "../src/features/meri/conversation/conversation-view";
 import type { ConversationReads } from "../src/shared/meri-conversations/current-reads";
 import type { MeriUploadAccess } from "../src/shared/meri-uploads/access";
+import { ModelCatalogContext } from "../src/features/meri/model-selection/ModelCatalogContext";
+import { runModelLabel } from "../src/features/meri/model-selection/model-selection";
+import { modelCatalog } from "./meri-user-preferences-fixtures";
 
 const binding = { runId: "30000000-0000-4000-8000-000000000001" };
 const turn = (
@@ -288,4 +291,62 @@ it("the conversation frame announces nothing when there is no history status", (
   const html = renderToStaticMarkup(createElement(ConversationFrame, frame));
   expect(html).not.toContain("Saved history requires");
   expect(html).not.toContain("Reconnect to read earlier turns");
+});
+
+describe("a finished answer names the model that produced it", () => {
+  const selection = {
+    provider: "bedrock",
+    modelId: "synthetic-model",
+    effort: "high",
+  } as const;
+  const provided = (view: TurnView, catalog: typeof modelCatalog | undefined) =>
+    renderToStaticMarkup(
+      createElement(
+        ModelCatalogContext.Provider,
+        { value: catalog },
+        createElement(ConversationTurn, { turn: view, label: "Current turn" }),
+      ),
+    );
+  const labelled = (view: TurnView) => provided(view, modelCatalog);
+
+  it("shows the catalog label and the picker's effort label, never the raw model id", () => {
+    const html = labelled(turn("completed", { modelSelection: selection }));
+    expect(html).toContain("Synthetic model · High");
+    expect(html).not.toContain("synthetic-model");
+    expect(html).not.toContain("data-tone=");
+    expect(
+      labelled(
+        turn("completed", { modelSelection: { ...selection, effort: null } }),
+      ),
+    ).toContain("Synthetic model · Model default");
+  });
+
+  it("stays hidden when the record has no selection, the catalog lacks the model or the run is not finished", () => {
+    expect(labelled(turn("completed"))).not.toContain("Synthetic model");
+    expect(
+      labelled(
+        turn("completed", {
+          modelSelection: { ...selection, modelId: "synthetic-unlisted" },
+        }),
+      ),
+    ).not.toContain("synthetic-unlisted");
+    // The catalog has not loaded: the admitted selection waits rather than showing a raw id.
+    expect(
+      provided(turn("completed", { modelSelection: selection }), undefined),
+    ).not.toContain("Synthetic model");
+    for (const state of ["running", "failed", "cancelled"] as const)
+      expect(
+        labelled(turn(state, { modelSelection: selection })),
+      ).not.toContain("Synthetic model");
+    expect(
+      render(turn("completed", { modelSelection: selection })),
+    ).not.toContain("Synthetic model");
+  });
+
+  it("carries the admitted request's selection into a saved turn", () => {
+    expect(runModelLabel(modelCatalog, selection)).toBe(
+      "Synthetic model · High",
+    );
+    expect(runModelLabel(modelCatalog, undefined)).toBeUndefined();
+  });
 });
