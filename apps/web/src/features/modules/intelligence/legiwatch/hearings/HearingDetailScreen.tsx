@@ -230,6 +230,7 @@ export function HearingDetailScreen({ hearingId }: { hearingId: string }) {
             <>
               <OfficialHearingPlayer
                 sourceUrl={sourceUrl}
+                watchMedia={room.data?.event.officialWatchMedia}
                 listing={
                   room.data?.event.officialPlaybackKind ===
                   "official_listing_page"
