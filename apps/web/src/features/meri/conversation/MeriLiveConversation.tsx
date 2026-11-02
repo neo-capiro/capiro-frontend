@@ -424,19 +424,24 @@ export function MeriLiveConversation({
     onLifecycleTarget,
   );
   useExternalRunRefresh(port, run, lifecycle.busy || !!lifecycle.command);
+  // The applied request is the admitted one: its model selection labels the answer, and a website
+  // task in it mounts the browser controls. The composer's pending selection is not a run.
+  const applied = snapshot.acceptedRequest ?? acceptedRequest;
   const observed = displayedObservation
     ? {
         ...turnFromObservation(displayedObservation, port.context.runId),
         ...(promptKey ? { promptKey } : {}),
+        ...(applied?.modelSelection
+          ? { modelSelection: applied.modelSelection }
+          : {}),
       }
     : null;
   const turn = currentTurnView(observed, savedCurrent);
   const finished = isTerminal(turn?.runState);
   const active = !!turn && !finished;
   // Browser controls belong to a run that used the browser: an admitted receipt, or this run's
-  // applied request naming a website task. The composer's pending selection is not a run. Once
-  // mounted for a run they stay mounted for that run, so a live session is never recreated.
-  const applied = snapshot.acceptedRequest ?? acceptedRequest;
+  // applied request naming a website task. Once mounted for a run they stay mounted for that run,
+  // so a live session is never recreated.
   const [browserRunId, setBrowserRunId] = useState<string>();
   if (
     browserRunId !== port.context.runId &&

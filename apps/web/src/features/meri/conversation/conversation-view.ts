@@ -9,6 +9,7 @@ import {
   buildWorkspaceView,
   type WorkspaceView,
 } from "../workspace/workspace-view";
+import type { ModelSelection } from "../model-selection/model-selection";
 
 /**
  * The canonical upload source event, taken from the generated conversation-event union: the app
@@ -57,6 +58,8 @@ export type TurnView = Readonly<
     throughSequence?: number;
     /** UI key derived from admitted conversation + logical request identity; never prompt text. */
     promptKey?: string;
+    /** The admitted request's model selection, for the answer's label; absent when the record has none. */
+    modelSelection?: ModelSelection;
     nativeSources: readonly NativeSourceEvent[];
     browserReceipts: readonly BrowserReceipt[];
   } & Pick<
