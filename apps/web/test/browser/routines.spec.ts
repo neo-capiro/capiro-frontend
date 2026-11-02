@@ -7,13 +7,6 @@ test("presentation first routine connection failure stays distinct from idle and
 }, info) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await setup(page, { general: true });
-  await operationFixtures(page, {
-    "me.read": {
-      ...testIdentity,
-      user: { ...testIdentity.user, id: id(2) },
-      tenant: { ...testIdentity.tenant, id: id(1) },
-    },
-  });
   let attempts = 0;
   let release!: () => void;
   const held = new Promise<void>((resolve) => {
@@ -87,7 +80,7 @@ const id = (n: number) =>
   `20000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
 async function setup(
   page: Page,
-  { lose = false, general = false, chat = false } = {},
+  { lose = false, general = false, chat = false, stale = false } = {},
 ) {
   const f = original();
   // The canonical synthetic server fixture uses opaque actor strings. Core bootstrap requires native UUID identities.
@@ -118,6 +111,15 @@ async function setup(
       },
     }),
   );
+  // The shell reads identity through the operation route as well. Registered first, so the specific routes below
+  // take precedence over this operation catch-all.
+  await operationFixtures(page, {
+    "me.read": () => ({
+      ...testIdentity,
+      user: { ...testIdentity.user, id: actorId },
+      tenant: { ...testIdentity.tenant, id: f.context.tenantId },
+    }),
+  });
   await page.route("**/api/backend/core/clients/*", (route) =>
     route.fulfill({
       json: {
@@ -231,8 +233,24 @@ async function setup(
       return route.fulfill({ json: current });
     }
     if (operation === "routine-approve") {
-      approved = true;
       expect(body.proposalId).toBe(current.proposal.proposalId);
+      // A proposal that no longer matches the current routine settings is refused before any schedule mutation.
+      if (stale) {
+        if (loseApprove) {
+          loseApprove = false;
+          return route.abort("failed");
+        }
+        return route.fulfill({
+          status: 409,
+          json: {
+            error: {
+              code: "SCHEDULE_CONTEXT_STALE",
+              outcome: "NOT_DISPATCHED",
+            },
+          },
+        });
+      }
+      approved = true;
       if (loseApprove) {
         loseApprove = false;
         return route.abort("failed");
@@ -260,12 +278,9 @@ async function setup(
             },
           })
         : route.fulfill({
-            status: 502,
+            status: 409,
             json: {
-              error: {
-                code: "SCHEDULE_RECONCILE_FAILED",
-                outcome: "UNRESOLVED",
-              },
+              error: { code: "ROUTINES_STALE", outcome: "NOT_DISPATCHED" },
             },
           });
     if (operation === "routine-list") return route.fulfill({ json: f.listed });
@@ -457,6 +472,46 @@ test("chat routine uses schedule approval only and restores saved unknown approv
       ["routine-approve", "routine-reconcile"].includes(call.operation),
     ),
   ).toBe(true);
+  expect(f.errors).toEqual([]);
+});
+
+test("chat routine approval that was never applied settles back to an approvable or discardable proposal", async ({
+  page,
+}) => {
+  const f = await setup(page, { chat: true, lose: true, stale: true });
+  await page.goto(f.url);
+  await page.getByRole("checkbox", { name: /I reviewed/ }).check();
+  await page.getByRole("button", { name: "Approve routine change" }).click();
+  // The lost answer leaves the exact approval saved with an unknown outcome.
+  await expect(
+    page.getByRole("button", { name: "Check schedule result" }),
+  ).toBeEnabled();
+  // The schedule owner holds no intent for the proposal: nothing was applied, so the marker is released.
+  await page.getByRole("button", { name: "Check schedule result" }).click();
+  await expect(page.getByRole("alert")).toHaveText(
+    "This approval was never applied, so no routine was created. Approve it again or discard it.",
+  );
+  await expect(
+    page.getByRole("button", { name: "Check schedule result" }),
+  ).toHaveCount(0);
+  await page.reload();
+  await expect(
+    page.getByRole("button", { name: "Approve routine change" }),
+  ).toBeDisabled();
+  await page.getByRole("checkbox", { name: /I reviewed/ }).check();
+  await page.getByRole("button", { name: "Approve routine change" }).click();
+  await expect(page.getByRole("alert")).toHaveText(
+    "No routine was created: this proposal no longer matches the current routine settings. Ask Meri to prepare the routine again, then discard this one.",
+  );
+  await expect(
+    page.getByRole("button", { name: "Discard unapproved preparation" }),
+  ).toBeEnabled();
+  expect(
+    f.calls.filter((call) => call.operation === "routine-approve"),
+  ).toHaveLength(2);
+  expect(
+    f.calls.filter((call) => call.operation === "routine-reconcile"),
+  ).toHaveLength(1);
   expect(f.errors).toEqual([]);
 });
 

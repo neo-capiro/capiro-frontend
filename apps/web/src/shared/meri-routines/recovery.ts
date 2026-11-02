@@ -146,6 +146,8 @@ export async function receiveSavedRoutine(raw: Stored): Promise<SavedRoutine> {
 const contract = {
   schema: savedSchema,
   requestId: (value: Stored) => value.requestId,
+  // The approval marker may be released only when the schedule owner proved nothing was applied (workflow `unapplied`);
+  // a saved result still requires it, so an acknowledged change can never lose its marker.
   validateUpdate(previous: Stored, next: Stored) {
     if (
       previous.requestId !== next.requestId ||
@@ -153,7 +155,6 @@ const contract = {
       !sameJson(previous.prepare, next.prepare) ||
       (previous.proposal !== undefined &&
         !sameJson(previous.proposal, next.proposal)) ||
-      (previous.approving && !next.approving) ||
       (previous.result !== undefined && !sameJson(previous.result, next.result))
     )
       throw new Error("The original routine request cannot change.");
