@@ -14,8 +14,11 @@ import {
 import ui from "../ui/meri-ui.module.css";
 import styles from "../screens/settings/settings.module.css";
 
-/** The application boundary replaces this view on session/organization changes. */
-export function TenantModelSettings() {
+/** The application boundary replaces this view on session/organization changes. `onSaved` runs after
+ * the owner confirms a limits save, so a mounted usage view can re-read the policy it reports. */
+export function TenantModelSettings({
+  onSaved,
+}: { onSaved?: () => void } = {}) {
   const identity = useCapiroQuery("me.read", {});
   if (identity.error || !identity.data)
     return (
@@ -28,11 +31,12 @@ export function TenantModelSettings() {
   return (
     <OwnedSettings
       key={JSON.stringify([identity.data.tenant.id, identity.data.user.id])}
+      onSaved={onSaved}
     />
   );
 }
 
-function OwnedSettings() {
+function OwnedSettings({ onSaved }: { onSaved?: (() => void) | undefined }) {
   const [controller] = useState(() => new TenantSettingsController());
   useEffect(() => controller.attach(), [controller]);
   const view = useSyncExternalStore(
@@ -51,7 +55,9 @@ function OwnedSettings() {
           document={view.document}
           editable={view.status === "ready"}
           save={(model) => {
-            void controller.save(model);
+            void controller.save(model).then((saved) => {
+              if (saved) onSaved?.();
+            });
           }}
         />
       ) : null}

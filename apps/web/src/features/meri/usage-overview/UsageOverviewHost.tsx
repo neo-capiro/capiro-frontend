@@ -20,7 +20,12 @@ import { StateMessage } from "../ui/StateMessage";
 import { projectUsageOverview, usageSnapshotNotice } from "./projection";
 import ui from "../ui/meri-ui.module.css";
 
-type Props = { chrome: SettingsChrome; configurationContent?: ReactNode };
+type Props = {
+  chrome: SettingsChrome;
+  /** Workspace policy editor, given the usage re-read so a confirmed save also refreshes the
+   * policy, cap and remaining amount shown here. */
+  configuration?: (onSaved: () => void) => ReactNode;
+};
 function PendingUsage({
   chrome,
   detail,
@@ -93,7 +98,7 @@ export function UsageOverviewHost(props: Props) {
 
 function ConnectedUsage({
   chrome,
-  configurationContent,
+  configuration,
   queueHref,
 }: Props & { queueHref?: string | undefined }) {
   const [denied, setDenied] = useState(false),
@@ -124,6 +129,11 @@ function ConnectedUsage({
     };
   }, []);
   const snapshot = useCurrentRead("tenant-usage", read);
+  // A re-read keeps the last received snapshot on screen until its successor arrives, so a refresh
+  // (or a policy save) never unmounts the editor below. A failed re-read still shows no totals.
+  const [shown, setShown] = useState(snapshot.value);
+  if (snapshot.value && snapshot.value !== shown) setShown(snapshot.value);
+  const value = snapshot.value ?? (snapshot.loading ? shown : undefined);
   if (denied)
     return (
       <PendingUsage
@@ -140,7 +150,7 @@ function ConnectedUsage({
       Refresh usage
     </button>
   );
-  if (!snapshot.value)
+  if (!value)
     return (
       <PendingUsage
         chrome={chrome}
@@ -158,10 +168,10 @@ function ConnectedUsage({
       <UsageLimitsScreen
         chrome={{
           ...chrome,
-          notice: usageSnapshotNotice(snapshot.value, clock),
+          notice: usageSnapshotNotice(value, clock),
         }}
-        view={projectUsageOverview(snapshot.value, queueHref)}
-        configurationContent={configurationContent}
+        view={projectUsageOverview(value, queueHref)}
+        configurationContent={configuration?.(snapshot.reload)}
       />
     </>
   );

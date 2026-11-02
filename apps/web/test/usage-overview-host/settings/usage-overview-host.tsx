@@ -8,6 +8,7 @@
 import { createRoot } from "react-dom/client";
 import { ApplicationBoundary } from "../../../src/shared/session/ApplicationBoundary";
 import { UsageOverviewHost } from "../../../src/features/meri/usage-overview/UsageOverviewHost";
+import { TenantModelSettings } from "../../../src/features/meri/tenant-settings/TenantModelSettings";
 import type { SettingsChrome } from "../../../src/features/meri/screens/settings/settings-view";
 import { SyntheticMeriCapabilities } from "../../browser/meri-capability-profile";
 
@@ -23,7 +24,15 @@ const chrome: SettingsChrome = {
 createRoot(document.getElementById("root")!).render(
   <ApplicationBoundary publishableKey="pk_test_YQ==">
     <SyntheticMeriCapabilities>
-      <UsageOverviewHost chrome={chrome} />
+      <UsageOverviewHost
+        chrome={chrome}
+        configuration={
+          // `?editor` mounts the production policy editor exactly as the settings panel does.
+          new URLSearchParams(location.search).has("editor")
+            ? (onSaved) => <TenantModelSettings onSaved={onSaved} />
+            : undefined
+        }
+      />
     </SyntheticMeriCapabilities>
   </ApplicationBoundary>,
 );

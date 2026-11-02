@@ -34,12 +34,15 @@ async function boundaries(
 ) {
   const reads: Read[] = [];
   let identityCalls = 0;
-  await page.route("**/api/backend/core/me", async (route) => {
+  // The account is read through both the Core proxy and the Capiro procedure endpoint.
+  const identity = async (route: Route) => {
     identityCalls += 1;
     await route.fulfill({
       json: (options.identity ?? (() => testIdentity))(identityCalls),
     });
-  });
+  };
+  await page.route("**/api/backend/core/me", identity);
+  await page.route("**/api/capiro/me.read*", identity);
   await page.route("**/api/backend/core/clients/*", (route) =>
     route.fulfill({ json: syntheticClient }),
   );
@@ -183,6 +186,95 @@ test("Refresh runs the same read again through the host and replaces the shown f
     "Jobs with usable accounting": "0 recorded · 0 without usable accounting",
     "Monthly admission cap": "$100.00",
   });
+});
+
+test("a confirmed limits save keeps the editor usable and re-reads the admission ledger", async ({
+  page,
+}) => {
+  await onlyLocalRequests(page);
+  const model = (monthly: number, perQuery: number, maxTurns: number) => ({
+    monthlyCapMicroUsd: monthly * 1_000_000,
+    maxBudgetMicroUsd: perQuery * 1_000_000,
+    maxTurns,
+  });
+  const settings = (revision: number, limits: ReturnType<typeof model>) => ({
+    revision,
+    defaultTimezone: "UTC",
+    capabilityStatus: "resolved",
+    effectiveCapabilities: {},
+    capabilityPolicy: {},
+    model: limits,
+  });
+  const usage = (revision: number, limits: ReturnType<typeof model>) => {
+    const body = usageOverviewFixture();
+    const spent = 31_750_000;
+    return {
+      ...body,
+      policy: { status: "configured", revision, ...limits },
+      monthlyAdmission: {
+        ...body.monthlyAdmission,
+        knownChargeMicroUsd: spent,
+        remainingKnownMicroUsd: limits.monthlyCapMicroUsd - spent,
+        reached: false,
+      },
+    };
+  };
+  const before = model(60, 2, 20),
+    after = model(1000, 50, 500);
+  await boundaries(page, {
+    read: (call, route) =>
+      route.fulfill({ json: call === 1 ? usage(2, before) : usage(3, after) }),
+  });
+  const saves: unknown[] = [];
+  await page.route("**/api/settings/tenant/read", (route) =>
+    route.fulfill({ json: settings(2, before) }),
+  );
+  await page.route("**/api/settings/tenant/save", async (route) => {
+    const body = JSON.parse(route.request().postData() ?? "{}");
+    saves.push(body);
+    await route.fulfill(
+      body.expectedRevision === 2
+        ? { json: settings(3, body.settings.model) }
+        : {
+            status: 409,
+            json: { error: { code: "SETTINGS_REVISION_CONFLICT" } },
+          },
+    );
+  });
+  await page.goto(`${harnessPath}&editor`);
+  await expect(
+    page.getByText("$31.75 known recorded this month · $28.25 remaining"),
+  ).toBeVisible();
+  const monthly = page.getByLabel("Monthly model budget (USD)"),
+    perQuery = page.getByLabel("Per-query model budget (USD)"),
+    turns = page.getByLabel("Maximum turns per query"),
+    save = page.getByRole("button", { name: "Save workspace limits" });
+  await expect(page.getByText("Saved revision 2.")).toBeVisible();
+  await monthly.fill("1000");
+  await perQuery.fill("50");
+  await turns.fill("500");
+  await save.click();
+  await expect(page.getByText("Saved revision 3.")).toBeVisible();
+  await expect(
+    page.getByText("Workspace limits saved as revision 3."),
+  ).toBeVisible();
+  // The editor stays usable at the saved values and the ledger now reports the saved cap.
+  for (const field of [monthly, perQuery, turns])
+    await expect(field).toBeEnabled();
+  await expect(save).toBeEnabled();
+  await expect(monthly).toHaveValue("1000");
+  await expect(turns).toHaveValue("500");
+  await expect(perQuery).toHaveValue("50");
+  // The editor replaces the read-only policy list; the re-read ledger reports the saved cap.
+  await expect(
+    page.getByText("$31.75 known recorded this month · $968.25 remaining"),
+  ).toBeVisible();
+  expect(saves).toEqual([
+    {
+      expectedRevision: 2,
+      settings: { defaultTimezone: "UTC", capabilityPolicy: {}, model: after },
+    },
+  ]);
 });
 
 test("a denied read withholds every total and retires the read", async ({
