@@ -83,8 +83,14 @@ export function attachmentWording(
       : { label: "Checking the file…", detail, waiting: true };
   if (receipt.scanStatus === "infected")
     return { label: "Blocked by the safety check", detail, waiting: false };
+  // The scanner, not the file, is at fault: say so rather than blaming the file.
   if (receipt.scanStatus === "unavailable")
-    return { label: "Could not read this file", detail, waiting: false };
+    return {
+      label:
+        "The safety check is unavailable right now — remove the file to send, or try again later",
+      detail,
+      waiting: false,
+    };
   switch (receipt.extraction.status) {
     case "pending":
       return overdue
@@ -97,7 +103,11 @@ export function attachmentWording(
     case "available":
       return { label: "Ready", detail, waiting: false };
     case "partial":
-      return { label: "Ready (parts could not be read)", detail, waiting: false };
+      return {
+        label: "Ready (parts could not be read)",
+        detail,
+        waiting: false,
+      };
     default:
       return { label: "Could not read this file", detail, waiting: false };
   }

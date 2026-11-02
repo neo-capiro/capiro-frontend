@@ -752,7 +752,10 @@ describe("attachment readiness: the page re-reads a pending check, waits a bound
     expect(controller.checking()).toBe(false);
     expect(controller.sendArgument()).toEqual([]);
     const wording = attachmentWording(item);
-    expect(wording.label).toBe("Could not read this file");
+    // The scanner is at fault, not the file: the chip must not blame the file.
+    expect(wording.label).toBe(
+      "The safety check is unavailable right now — remove the file to send, or try again later",
+    );
     expect(wording.detail).toContain("SCANNER_OFFLINE");
     await vi.advanceTimersByTimeAsync(UPLOAD_CHECK_INTERVAL_MS * 10);
     expect(statusReads(server)).toBe(1);
@@ -855,7 +858,7 @@ describe("attachment readiness: the page re-reads a pending check, waits a bound
       ],
       [
         stored("unavailable", { status: "unavailable", limitations: [] }, "UPLOAD_DEFINITIONS_UNAVAILABLE"),
-        "Could not read this file",
+        "The safety check is unavailable right now — remove the file to send, or try again later",
       ],
       [
         { ...base, state: "unknown", refusal: { code: "UPLOAD_PUT_UNKNOWN", uncertain: true } },

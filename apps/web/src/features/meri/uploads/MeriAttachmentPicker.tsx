@@ -72,7 +72,7 @@ export function MeriAttachmentPicker({
             width: "100%",
           }}
         >
-          {slot.incoming.map((source) => (
+          {slot.incoming.map((source, index) => (
             <li
               key={source.uploadId}
               style={{
@@ -82,7 +82,8 @@ export function MeriAttachmentPicker({
                 flexWrap: "wrap",
               }}
             >
-              <span>{`file in this conversation: ${source.uploadId.slice(0, 8)}`}</span>
+              {/* The conversation's echo carries no file name; never show part of an upload id. */}
+              <span>{`File ${index + 1}`}</span>
               <span role="status">Already in this conversation</span>
               <button
                 type="button"
@@ -115,10 +116,8 @@ export function MeriAttachmentPicker({
           }}
         >
           {slot.items.map((item) => {
-            const wording = attachmentWording(
-              item,
-              slot.overdue(item.requestId),
-            );
+            const overdue = slot.overdue(item.requestId);
+            const wording = attachmentWording(item, overdue);
             const settledOut =
               item.state === "removing" || item.state === "removed";
             return (
@@ -174,6 +173,15 @@ export function MeriAttachmentPicker({
                     aria-label={`Check the status of ${item.filename}`}
                   >
                     Check status
+                  </button>
+                ) : item.state === "stored" && overdue ? (
+                  // Automatic re-reads stopped at the bounded wait; the person may still ask once more.
+                  <button
+                    type="button"
+                    onClick={() => slot.onCheck(item.requestId)}
+                    aria-label={`Check the status of ${item.filename} again`}
+                  >
+                    Check again
                   </button>
                 ) : null}
                 {settledOut ? (
