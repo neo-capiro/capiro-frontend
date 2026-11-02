@@ -1076,6 +1076,20 @@
    "regularEntryCount": 123,
    "status": "source-committed-consumer-pinned",
    "purpose": "Same-document Office bridge (propose_office_edit, office_edit intents item and office_edit_decided answer) after review: part-digest proposals and a durable reject; numbered after skill admission (0.1.47) and the discoverability cohort (0.1.48); actual package/consumer qualification recorded separately."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.33-657b6412-9f32b89cb156.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.33",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "657b64121a51e4b3d82fd8d6bdff70cdf8e5c6b8",
+   "sourceTree": "5acbe40c8a24bf7b163fc8bcf76aea97df108c7c",
+   "bytes": 3850,
+   "sha256": "9f32b89cb156bc8a8a2c35a605d0acfc407cd9e3120bf8d0913c914bf222d1c3",
+   "integrity": "sha512-JfcTtM8qXHiRvyTBFAft+PsrGaqxj+IvTWNYT2IkrOoPrg+vLnpW+wknc11Xc5ITKGWCgWRaQn6kuoN1xQM6Tw==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "ui-stream 0.1.33 admits @capiro/meri-contracts 0.1.49 as a peer (neo-capiro/meri-greenfield#500); no stream behaviour change."
   }
  ]
 }
