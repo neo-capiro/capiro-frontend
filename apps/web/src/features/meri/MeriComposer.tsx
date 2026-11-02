@@ -27,6 +27,13 @@ export type LiveComposer = Readonly<{
   onStop?: () => void;
   /** Why Send is unavailable right now; the draft stays editable either way. */
   sendBlocked?: string | undefined;
+  /**
+   * Present only while Meri is busy with the last message and nothing else blocks: Enter or Send keeps
+   * the draft as the one queued message, which is sent when the run finishes.
+   */
+  onQueue?: (() => void) | undefined;
+  /** The draft is queued; Cancel keeps it in the box as an ordinary draft. */
+  queued?: Readonly<{ onCancel: () => void }> | undefined;
   /** A block the person must act on (a retained request to retry); shown in place of the key hint. */
   notice?: string | undefined;
   /** Exact conversation selection is required before a durable draft can be entered. */
@@ -133,6 +140,7 @@ export function MeriComposer({
           event.preventDefault();
           setRefused(null);
           if (canSend) live.onSend();
+          else if (live?.onQueue && draft.trim()) live.onQueue();
         }}
       >
         {chips.length > 0 && (
@@ -181,7 +189,8 @@ export function MeriComposer({
                 event.nativeEvent.keyCode !== 229
               ) {
                 event.preventDefault();
-                if (!running) setRefused(blockedReason ?? null);
+                if (live.onQueue && draft.trim()) live.onQueue();
+                else if (!running) setRefused(blockedReason ?? null);
               }
             }}
             aria-label={live ? "Meri message" : "Message draft"}
@@ -210,7 +219,18 @@ export function MeriComposer({
           />
         </PromptInputFooter>
         <p className={styles.keyboardHint} id={helpId}>
-          {refused ? (
+          {live?.queued ? (
+            <span role="status">
+              Queued: sends when Meri finishes.{" "}
+              <button
+                type="button"
+                className={styles.queuedCancel}
+                onClick={live.queued.onCancel}
+              >
+                Cancel
+              </button>
+            </span>
+          ) : refused ? (
             <span role="status">{refused}</span>
           ) : (
             <>
@@ -345,7 +365,7 @@ function ComposerAction({
     <Button
       type="submit"
       className={styles.send}
-      disabled={!canSend}
+      disabled={!canSend && !live?.onQueue}
       aria-describedby={helpId}
       aria-label={
         live ? "Send message" : "Send unavailable: disconnected fixture"

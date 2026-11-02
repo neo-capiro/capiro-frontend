@@ -195,6 +195,31 @@ function useSettledRefresh(finished: boolean, onSettled: () => void) {
   }, [finished, onSettled]);
 }
 
+/**
+ * The composer's one queued message. `waiting`: Meri is still busy with the last message. `ready`: a new
+ * message may be sent now. `released`: something other than the run blocks (or the box is empty), so the
+ * queue is dropped and the text stays an ordinary draft. Nothing is sent twice: the queue clears first.
+ */
+export function useQueuedSend(
+  waiting: boolean,
+  ready: boolean,
+  released: boolean,
+  send: () => void,
+) {
+  const [queued, setQueued] = useState(false);
+  if (queued && released) setQueued(false);
+  useEffect(() => {
+    if (!queued || !ready || released) return;
+    setQueued(false);
+    send();
+  }, [queued, ready, released, send]);
+  return {
+    onQueue:
+      waiting && !released && !queued ? () => setQueued(true) : undefined,
+    queued: queued ? { onCancel: () => setQueued(false) } : undefined,
+  };
+}
+
 /** Tab return reads current status; paired focus/visibility events never start a polling loop. */
 function useExternalRunRefresh(
   port: MeriConversationPort,
@@ -476,11 +501,26 @@ export function MeriLiveConversation({
     )
       onNextTurn(prompt, turn);
   };
+  // One pending message: while Meri is busy with the last one and nothing else blocks, the draft waits
+  // in the box as the queued message and is sent once the run finishes; a genuine block releases it.
+  const genuineBlock =
+    !!(retentionError ?? lifecycle.blocked ?? modelBlocked ?? newIntentBlocked) ||
+    intent.submit?.state === "unknown";
+  const queue = useQueuedSend(
+    active || run.busy || (!!intent.submit && !turn),
+    !genuineBlock &&
+      (availability.readyForNext ||
+        (availability.initial && !availability.sendBlocked)),
+    genuineBlock || !draft.trim(),
+    send,
+  );
   useLiveComposer(composer, {
     port,
     running: active,
     controls: {
       onSend: send,
+      onQueue: queue.onQueue,
+      queued: queue.queued,
       onStop: () => void run.cancel(),
       sendBlocked:
         retentionError ??
