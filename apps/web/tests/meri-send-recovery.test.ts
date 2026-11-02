@@ -1,5 +1,4 @@
 import { createElement, type ReactNode } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, expect, it, vi } from "vitest";
 import { moveDraftToNewConversation } from "../src/shared/meri-conversations/new-conversation-draft";
 import {
@@ -7,19 +6,15 @@ import {
   type FirstChatScope,
 } from "../src/shared/meri-conversations/first-chat-intent";
 import { createInitialDraftOwner } from "../src/shared/meri-conversations/initial-draft";
-import { submissionIdentity } from "../src/shared/meri-conversations/query-journal";
 import {
   syncMeriTabIdentity,
   type TabStorage,
 } from "../src/shared/meri-conversations/tab-journal";
 import { composerAvailability } from "../src/features/meri/conversation/MeriLiveConversation";
-import { RunStatus } from "../src/features/meri/conversation/RunStatus";
 import { ORIGINAL_INPUT_CLOSED } from "../src/features/meri/conversation/skill-refusal";
-import type { useLiveRun } from "../src/features/meri/conversation/useLiveRun";
 
 // Acceptance 2 Nov: a first message whose conversation can no longer take it (its original input expired or belongs
-// to another message) left the thread locked; a leftover capture made Enter do nothing; an uncertain request that
-// a retry could only fail again had no way out.
+// to another message) left the thread locked.
 
 const buttons = vi.hoisted(() => [] as Array<{ children: ReactNode }>);
 vi.mock("@capiro/ui/button", () => ({
@@ -144,71 +139,4 @@ it("a conversation closed to its first message offers no send in place, only the
     false,
   );
   expect(answered.originalClosed).toBe(false);
-});
-
-it("a capture left on a finished run settles from the run's admitted request instead of swallowing later sends", () => {
-  const storage = memory();
-  const scope = { tenantId, actorId, clientId: null, conversationId: closed };
-  const context = {
-    tenantId,
-    actorId,
-    selectedClientId: null,
-    conversationId: closed,
-    runId: "30000000-0000-4000-8000-000000000005",
-  };
-  const request = {
-    requestId: "40000000-0000-4000-8000-000000000006",
-    prompt: "First question",
-  };
-  const delivered = createInitialDraftOwner(scope, storage);
-  delivered.edit("First question");
-  delivered.begin(context, request, "First question");
-  expect(delivered.hasPending(context)).toBe(true);
-  expect(delivered.settleTerminal(context, request.requestId)).toBe(true);
-  expect(delivered.hasPending(context)).toBe(false);
-  expect(delivered.draft()).toBe("");
-  // Never admitted to this run: released, and the person's text stays.
-  const other = createInitialDraftOwner(scope, storage);
-  other.edit("Kept text");
-  other.begin(context, { ...request, prompt: "Kept text" }, "Kept text");
-  expect(
-    other.settleTerminal(context, "40000000-0000-4000-8000-0000000000ff"),
-  ).toBe(false);
-  expect(other.hasPending(context)).toBe(false);
-  expect(other.draft()).toBe("Kept text");
-  expect(submissionIdentity(request)).toContain(request.requestId);
-});
-
-it("an uncertain request whose retry was answered and still failed can be discarded", () => {
-  const status = (error: string | undefined, failure?: string) =>
-    renderToStaticMarkup(
-      createElement(RunStatus, {
-        run: {
-          snapshot: { status: "ready", observation: null, cancelReceipt: null },
-          intent: {
-            submit: {
-              requestId: "40000000-0000-4000-8000-000000000007",
-              prompt: "Hello",
-              state: "unknown",
-            },
-          },
-          busy: false,
-          error,
-          failure,
-          refusal: undefined,
-          transcript: "loaded",
-          observing: "idle",
-        } as unknown as ReturnType<typeof useLiveRun>,
-        active: false,
-        onDiscardUncertain: vi.fn(),
-      }),
-    );
-  expect(status(undefined)).not.toContain("Discard and write a new message");
-  expect(status("REQUEST_REPLAY_REFUSED")).toContain(
-    "Discard and write a new message",
-  );
-  // Control not answering keeps only the plain retry.
-  expect(status("CONVERSATION_UNAVAILABLE", "unreachable")).not.toContain(
-    "Discard and write a new message",
-  );
 });

@@ -49,6 +49,8 @@ export function researchLaunchOwner(
   account: { tenantId: string; actorId: string },
   portfolioId: string,
   storage: TabStorage,
+  /** One launch per key: the portfolio's first conversation, or the replacement of one closed conversation. */
+  key = "research-launch",
 ) {
   const receipt = z.discriminatedUnion("state", [
     z.strictObject({ state: z.literal("unknown") }),
@@ -58,7 +60,7 @@ export function researchLaunchOwner(
     { ...account, clientId: null, conversationId: portfolioId },
     "selection",
     (value) => receipt.parse(value),
-    "research-launch",
+    key,
     storage,
   );
   return {

@@ -68,6 +68,11 @@ export class ConversationUnavailable extends Error {
     readonly detail: ConversationRefusalDetail = {},
     /** Allocate's own NOT_DISPATCHED answer that this conversation's original input is closed to the request. */
     readonly originalClosed = false,
+    /**
+     * The answer came to a retry of a request whose earlier attempt was uncertain (or that history showed accepted):
+     * an earlier attempt may have been dispatched, so no answer to the retry proves that nothing was.
+     */
+    readonly afterUncertain = false,
   ) {
     super(code);
     this.name = "ConversationUnavailable";
@@ -75,10 +80,21 @@ export class ConversationUnavailable extends Error {
   /** Control refused this exact request outright; nothing was dispatched and nothing is in flight. */
   get definitive() {
     return (
-      this.originalClosed ||
-      (DEFINITIVE_REFUSALS.has(this.code) &&
-        this.status !== undefined &&
-        !!errorStatuses[this.code]?.includes(this.status))
+      !this.afterUncertain &&
+      (this.originalClosed ||
+        (DEFINITIVE_REFUSALS.has(this.code) &&
+          this.status !== undefined &&
+          !!errorStatuses[this.code]?.includes(this.status)))
+    );
+  }
+  /** The same answer, read as a reply to a retry after an uncertain attempt: never definitive. */
+  afterUncertainAttempt() {
+    return new ConversationUnavailable(
+      this.code,
+      this.status,
+      this.detail,
+      false,
+      true,
     );
   }
 }

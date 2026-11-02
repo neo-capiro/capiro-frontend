@@ -51,12 +51,24 @@ export declare class ConversationUnavailable extends Error {
     readonly detail: ConversationRefusalDetail;
     /** Allocate's own NOT_DISPATCHED answer that this conversation's original input is closed to the request. */
     readonly originalClosed: boolean;
+    /**
+     * The answer came to a retry of a request whose earlier attempt was uncertain (or that history showed accepted):
+     * an earlier attempt may have been dispatched, so no answer to the retry proves that nothing was.
+     */
+    readonly afterUncertain: boolean;
     /** `status` is the HTTP answer that carried a closed error code, when one did. */
     constructor(code: string, status?: number | undefined, detail?: ConversationRefusalDetail, 
     /** Allocate's own NOT_DISPATCHED answer that this conversation's original input is closed to the request. */
-    originalClosed?: boolean);
+    originalClosed?: boolean, 
+    /**
+     * The answer came to a retry of a request whose earlier attempt was uncertain (or that history showed accepted):
+     * an earlier attempt may have been dispatched, so no answer to the retry proves that nothing was.
+     */
+    afterUncertain?: boolean);
     /** Control refused this exact request outright; nothing was dispatched and nothing is in flight. */
     get definitive(): boolean;
+    /** The same answer, read as a reply to a retry after an uncertain attempt: never definitive. */
+    afterUncertainAttempt(): ConversationUnavailable;
 }
 /**
  * The shared edge answered a request route with 403 before Meri saw it (its WAF rules refuse some

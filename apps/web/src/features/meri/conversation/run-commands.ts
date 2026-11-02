@@ -1,4 +1,7 @@
-import { ConversationUnavailable } from "@capiro/meri-client/conversation";
+import {
+  ConversationUnavailable,
+  ORIGINAL_INPUT_CLOSED,
+} from "@capiro/meri-client/conversation";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationIntent } from "../../../shared/meri-conversations/query-journal";
 import {
@@ -153,7 +156,15 @@ export async function sendRequest(
     });
     // The admitted request now holds its files; the composer stops offering them as new attachments.
     if (request.uploads?.length) port.uploads?.sent(request.uploads);
-  } catch (cause) {
+  } catch (caught) {
+    // A retry resends a request that already left once (uncertain, or recovered from history that showed it
+    // accepted): an original-input refusal cannot prove that attempt was not dispatched, so it stays uncertain.
+    const cause =
+      retry &&
+      caught instanceof ConversationUnavailable &&
+      ORIGINAL_INPUT_CLOSED.has(caught.code)
+        ? caught.afterUncertainAttempt()
+        : caught;
     // Control's definitive refusal means nothing was dispatched: the retained identity is released
     // so the person can change the selection and send again; every other failure stays uncertain.
     if (cause instanceof ConversationUnavailable && cause.definitive) {

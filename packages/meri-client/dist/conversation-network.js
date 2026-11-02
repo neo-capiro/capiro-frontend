@@ -25,23 +25,35 @@ export class ConversationUnavailable extends Error {
     status;
     detail;
     originalClosed;
+    afterUncertain;
     /** `status` is the HTTP answer that carried a closed error code, when one did. */
     constructor(code, status, detail = {}, 
     /** Allocate's own NOT_DISPATCHED answer that this conversation's original input is closed to the request. */
-    originalClosed = false) {
+    originalClosed = false, 
+    /**
+     * The answer came to a retry of a request whose earlier attempt was uncertain (or that history showed accepted):
+     * an earlier attempt may have been dispatched, so no answer to the retry proves that nothing was.
+     */
+    afterUncertain = false) {
         super(code);
         this.code = code;
         this.status = status;
         this.detail = detail;
         this.originalClosed = originalClosed;
+        this.afterUncertain = afterUncertain;
         this.name = "ConversationUnavailable";
     }
     /** Control refused this exact request outright; nothing was dispatched and nothing is in flight. */
     get definitive() {
-        return (this.originalClosed ||
-            (DEFINITIVE_REFUSALS.has(this.code) &&
-                this.status !== undefined &&
-                !!errorStatuses[this.code]?.includes(this.status)));
+        return (!this.afterUncertain &&
+            (this.originalClosed ||
+                (DEFINITIVE_REFUSALS.has(this.code) &&
+                    this.status !== undefined &&
+                    !!errorStatuses[this.code]?.includes(this.status))));
+    }
+    /** The same answer, read as a reply to a retry after an uncertain attempt: never definitive. */
+    afterUncertainAttempt() {
+        return new ConversationUnavailable(this.code, this.status, this.detail, false, true);
     }
 }
 /**

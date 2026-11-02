@@ -124,23 +124,6 @@ it("allocate's NOT_DISPATCHED answer for an expired or foreign original input cl
   expect(client.getSnapshot().submit).toBe("unknown");
 });
 
-it("a released uncertain request leaves the client too, so the next message is not refused locally", async () => {
-  const { client, paths } = conversation(() =>
-    json(503, { error: { code: "CONVERSATION_UNAVAILABLE" } }),
-  );
-  await rejection(client.submit(request("5")));
-  expect(client.getSnapshot().submit).toBe("unknown");
-  // Before: the retained request blocked every later message of this run as "retained-submit-intent".
-  expect((await rejection(client.submit(request("6")))).code).toBe(
-    "retained-submit-intent",
-  );
-  client.releaseSubmit();
-  expect(client.getSnapshot().submit).toBe("idle");
-  paths.length = 0;
-  await rejection(client.submit(request("7")));
-  expect(paths).toEqual(["/api/conversations/input/admit"]);
-});
-
 it("the composer says it plainly, with no Retry and no raw code, and offers a new conversation", async () => {
   const refusal = sendRefusal(
     new ConversationUnavailable("INITIAL_INPUT_EXPIRED", 409),
@@ -169,4 +152,93 @@ it("the composer says it plainly, with no Retry and no raw code, and offers a ne
     /INITIAL_INPUT|not reachable|Retry|could not finish/,
   );
   expect(buttons).toHaveLength(0);
+});
+
+// Review of #520/#571: an original-input refusal answered to a retry cannot prove "not sent". An earlier attempt may
+// have been accepted and dispatched (a lost acknowledgement, then the allocation expired or a deploy changed the run
+// versions), so the request stays retained and uncertain: never "not sent", never moved to a new conversation.
+it("a retry after an uncertain first send stays uncertain across expiry and across a deploy", async () => {
+  for (const code of ["INITIAL_INPUT_EXPIRED", "INITIAL_INPUT_CONFLICT"]) {
+    let answer = json(503, {
+      error: { code: "INITIAL_INPUT_UNAVAILABLE", outcome: "UNKNOWN" },
+    });
+    const { client, paths } = conversation(() => answer);
+    await rejection(client.submitInitial(request("8")));
+    expect(client.getSnapshot().submit).toBe("unknown");
+    answer = json(409, { error: { code, outcome: "NOT_DISPATCHED" } });
+    const cause = await rejection(client.retrySubmit());
+    expect(cause.code).toBe(code);
+    expect(cause.definitive, code).toBe(false);
+    expect(sendRefusal(cause)).toBeUndefined();
+    expect(client.getSnapshot().submit, code).toBe("unknown");
+    expect(paths).toEqual([
+      "/api/conversations/input/allocate",
+      "/api/conversations/input/allocate",
+    ]);
+  }
+});
+
+it("Continue accepted request answered with an original-input refusal keeps the request uncertain", async () => {
+  const { QueryClient } = await import("@tanstack/react-query");
+  const { conversationIntentJournal } =
+    await import("../src/shared/meri-conversations/query-journal");
+  const { syncMeriTabIdentity } =
+    await import("../src/shared/meri-conversations/tab-journal");
+  const { recoverRequest } =
+    await import("../src/features/meri/conversation/run-commands");
+  const values = new Map<string, string>();
+  const storage = {
+    get length() {
+      return values.size;
+    },
+    key: (index: number) => [...values.keys()][index] ?? null,
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      values.set(key, value);
+    },
+    removeItem: (key: string) => {
+      values.delete(key);
+    },
+  };
+  syncMeriTabIdentity("synthetic-original-input", storage);
+  for (const status of [409, 408]) {
+    const journal = conversationIntentJournal(
+      new QueryClient(),
+      {
+        ...context,
+        runId: `30000000-0000-4000-8000-00000000010${status % 10}`,
+      },
+      storage,
+    );
+    const record = { read: journal.read, write: journal.write };
+    const port = {
+      context,
+      getSnapshot: () => ({
+        status: "ready",
+        submit: "idle",
+        observation: { runState: "queued" },
+      }),
+      uploads: { sendArgument: () => [], offer: vi.fn() },
+      submit: vi.fn(async () => {
+        throw new ConversationUnavailable("INITIAL_INPUT_EXPIRED", status);
+      }),
+      submitInitial: vi.fn(),
+    } as never;
+    const stored = {
+      requestId: "40000000-0000-4000-8000-000000000009",
+      prompt: "Summarize the attached PDF",
+      skill: null,
+      window: null,
+      windowRequest: null,
+    } as never;
+    const cause = (await recoverRequest(port, record, stored).catch(
+      (error: unknown) => error,
+    )) as ConversationUnavailable;
+    expect(cause.definitive).toBe(false);
+    expect(sendRefusal(cause)).toBeUndefined();
+    expect(journal.read().submit).toMatchObject({
+      requestId: "40000000-0000-4000-8000-000000000009",
+      state: "unknown",
+    });
+  }
 });

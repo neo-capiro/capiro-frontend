@@ -323,7 +323,14 @@ class ConversationConnection {
             this.publish({ submit: "observed" });
             return this.getSnapshot();
         }
-        catch (error) {
+        catch (caught) {
+            // A retry of an uncertain attempt is never released by an original-input refusal: the earlier attempt may
+            // have been accepted and dispatched, so the request stays retained and uncertain.
+            const error = previouslyUnknown &&
+                caught instanceof ConversationUnavailable &&
+                ORIGINAL_INPUT_CLOSED.has(caught.code)
+                ? caught.afterUncertainAttempt()
+                : caught;
             // A definitive refusal is control's own answer that nothing was dispatched: the retained
             // request is released so a changed one can follow, exactly as if it had never left.
             const refused = error instanceof ConversationUnavailable && error.definitive;
