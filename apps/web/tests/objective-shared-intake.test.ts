@@ -9,6 +9,7 @@ import {
 import {
   emptyFields,
   objectiveReadiness,
+  objectiveSavedStatusNote,
   objectiveSchema,
   objectiveFieldsSchema,
   sameObjectiveFields,
@@ -17,6 +18,7 @@ import {
 import { saveObjective } from "../src/features/portfolio/objectives/writer";
 import type { ApiClient } from "../src/shared/portfolio/api/http";
 import { ObjectiveFields } from "../src/features/portfolio/objectives/ObjectiveFields";
+import { ObjectiveReadiness } from "../src/features/portfolio/objectives/ObjectiveReadiness";
 import { StrategyIntakeFields } from "../src/shared/strategy-intake/StrategyIntakeFields";
 
 vi.mock("../src/shared/capiro/queries", () => ({
@@ -211,5 +213,44 @@ describe("one shared Strategy intake", () => {
       ),
     ).rejects.toThrow();
     expect(calls).toBe(1);
+  });
+});
+
+describe("editor status line", () => {
+  it("agrees with the readiness note once a complete intake draft is saved", () => {
+    const saved = record();
+    const readinessNote = renderToStaticMarkup(
+      createElement(ObjectiveReadiness, { fields: saved }),
+    );
+    expect(readinessNote).toContain(
+      "3 of 3 required fields complete. Ready for review or confirmation.",
+    );
+    expect(objectiveSavedStatusNote(saved)).toBe(
+      "Required fields saved. Request review or confirm ready.",
+    );
+  });
+
+  it("asks for the required fields only while the saved draft is incomplete", () => {
+    const incomplete = { ...fields, strategyIntake: { ...intake, goal: " " } };
+    const saved = record({
+      strategyIntake: incomplete.strategyIntake,
+      readiness: objectiveReadiness(incomplete),
+    });
+    expect(saved.readiness.isReady).toBe(false);
+    expect(objectiveSavedStatusNote(saved)).toBe(
+      "Complete the required fields before review or ready.",
+    );
+    expect(objectiveSavedStatusNote(undefined)).toBe(
+      "Complete the required fields before review or ready.",
+    );
+  });
+
+  it("reports the saved review and ready states", () => {
+    expect(objectiveSavedStatusNote(record({ status: "in_review" }))).toBe(
+      "Review requested. Confirm ready when approved.",
+    );
+    expect(objectiveSavedStatusNote(record({ status: "ready" }))).toBe(
+      "Confirmed ready.",
+    );
   });
 });

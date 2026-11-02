@@ -1,6 +1,10 @@
 "use client";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
-import { statusLabels, type Objective } from "./contracts";
+import {
+  objectiveSavedStatusNote,
+  statusLabels,
+  type Objective,
+} from "./contracts";
 import { ObjectiveFields } from "./ObjectiveFields";
 import { ObjectiveReadiness } from "./ObjectiveReadiness";
 import {
@@ -52,7 +56,7 @@ export function ObjectiveEditor({
           <span className="chip">
             {session.record ? statusLabels[session.record.status] : "Draft"}
           </span>
-          <small>Complete the required fields before review or ready.</small>
+          <small>{objectiveSavedStatusNote(session.record)}</small>
         </div>
         <ObjectiveFields
           fields={session.fields}
