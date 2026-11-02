@@ -140,7 +140,11 @@ export function composerAvailability(
           ? intent.submit.state === "observed"
             ? "Reload the transcript to verify the current run."
             : "Your request is being sent."
-          : undefined);
+          : // A finished run whose own message is still being confirmed takes no new one yet: Enter says
+            // so instead of reaching a send that would do nothing.
+            !initial && !resend && isTerminal(turn?.runState) && pendingDraft
+            ? "Your last message is still being confirmed."
+            : undefined);
   return {
     initial,
     resend,
@@ -179,6 +183,44 @@ function useDraftAcknowledgement(
       initialDraft.fail();
     }
   }, [initialDraft, port.context, submit, draft, onDraft]);
+}
+
+/**
+ * A capture whose run already finished can never be acknowledged by a later send; left in place it made every later
+ * Enter in this run do nothing (and clear the box). The run's admitted request settles it: delivered, or never
+ * admitted (released, so the text stays the person's). Only once nothing is in flight for this run.
+ */
+function useTerminalCaptureSettlement(
+  initialDraft: InitialDraftOwner,
+  port: MeriConversationPort,
+  finished: boolean,
+  submit: ReturnType<typeof useLiveRun>["intent"]["submit"],
+  admittedRequestId: string | undefined,
+  onDraft: (value: string) => void,
+) {
+  useEffect(() => {
+    if (
+      !finished ||
+      !admittedRequestId ||
+      submit?.state === "pending" ||
+      submit?.state === "unknown" ||
+      !initialDraft.hasPending(port.context)
+    )
+      return;
+    try {
+      if (initialDraft.settleTerminal(port.context, admittedRequestId))
+        onDraft("");
+    } catch {
+      initialDraft.fail();
+    }
+  }, [
+    initialDraft,
+    port.context,
+    finished,
+    submit,
+    admittedRequestId,
+    onDraft,
+  ]);
 }
 
 /**
@@ -280,12 +322,14 @@ function CurrentRunStatus({
   active,
   acceptedRequest,
   onDiscardUnrecoverable,
+  onDiscardUncertain,
 }: {
   run: ReturnType<typeof useLiveRun>;
   retentionError: string | undefined;
   active: boolean;
   acceptedRequest: ConversationStoredRequest | undefined;
   onDiscardUnrecoverable?: (() => void) | undefined;
+  onDiscardUncertain?: (() => void) | undefined;
 }) {
   const reconnect = useReconnectSchedule(
     run.transcript === "unavailable" && run.failure === "unreachable"
@@ -326,6 +370,7 @@ function CurrentRunStatus({
         active={active}
         acceptedRequest={acceptedRequest}
         onRetry={reconnect.reset}
+        onDiscardUncertain={onDiscardUncertain}
       />
     </>
   );
@@ -460,6 +505,14 @@ export function MeriLiveConversation({
   )
     setBrowserRunId(port.context.runId);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
+  useTerminalCaptureSettlement(
+    initialDraft,
+    port,
+    finished,
+    intent.submit,
+    applied?.requestId,
+    onDraft,
+  );
   useRefusalRelease(initialDraft, port, run, reservedOpen);
   useSettledRefresh(settledRefreshDue(turn, savedCurrent), onSettled);
   const availability = composerAvailability(
@@ -597,7 +650,7 @@ export function MeriLiveConversation({
       // edge-refused message already says so in the transcript, once.
       notice:
         queue.released ??
-        (        intent.submit?.state === "unknown" && run.failure !== "refused"
+        (intent.submit?.state === "unknown" && run.failure !== "refused"
           ? "Your last request is still unconfirmed. Retry it above before sending another."
           : undefined),
       modelSelection:
@@ -659,6 +712,11 @@ export function MeriLiveConversation({
             active={active}
             acceptedRequest={acceptedRequest}
             onDiscardUnrecoverable={onDiscardUnrecoverable}
+            onDiscardUncertain={() =>
+              void run.release().then((released) => {
+                if (released) initialDraft.release(port.context);
+              })
+            }
           />
           {/* A pending control with no turn to host it (nothing observed yet) still needs its recovery. */}
           {!turn && controls}

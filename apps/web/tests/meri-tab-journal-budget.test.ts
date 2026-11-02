@@ -9,6 +9,8 @@ import {
   type TabStorage,
 } from "../src/shared/meri-conversations/tab-journal";
 import { contextInScope } from "../src/features/meri/conversation/useConversationLocalState";
+import { QueryClient } from "@tanstack/react-query";
+import { conversationIntentJournal } from "../src/shared/meri-conversations/query-journal";
 
 const id = (n: number) =>
   `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
@@ -144,4 +146,54 @@ it("a context from another scope is skipped by the draft owner, never treated as
   expect(contextInScope({ ...context, selectedClientId: null } as never, owned)).toBe(false);
   expect(contextInScope({ ...context, conversationId: id(8) } as never, owned)).toBe(false);
   expect(contextInScope(context as never, undefined)).toBe(true);
+});
+
+// 2 Nov preview: "THIS TAB COULD NOT SAFELY SAVE OR RECOVER THE MESSAGE" after a long day in one tab. The run
+// journal's own receiver stored every request as "unknown", so no finished run's record ever counted as settled
+// and none could make room: the 129th run's record (and every later save) failed. The fill above writes through a
+// pass-through receiver and did not see it; this one writes through the actual run journal.
+it("finished runs written through the actual run journal make room for a new run's request", () => {
+  const storage = memory();
+  const cache = new QueryClient();
+  const journal = (conversation: number, run: number) =>
+    conversationIntentJournal(
+      cache,
+      {
+        tenantId: id(1),
+        actorId: id(2),
+        selectedClientId: id(3),
+        conversationId: id(1000 + conversation),
+        runId: id(5000 + run),
+      },
+      storage,
+    );
+  const submit = (run: number, state: "pending" | "observed") => ({
+    requestId: id(9000 + run),
+    prompt: `Message ${run}`,
+    state,
+  });
+  for (let run = 0; run < 128; run++) {
+    const owner = journal(run % 4, run);
+    owner.write({ submit: submit(run, "pending") });
+    owner.write({ submit: submit(run, "observed") });
+  }
+  const next = journal(9, 300);
+  expect(() => next.write({ submit: submit(300, "pending") })).not.toThrow();
+  expect(keys(storage)).toHaveLength(128);
+  // A reload still reads a stored request as unknown until server history resolves it.
+  expect(journal(9, 300).read().submit?.state).toBe("unknown");
+  expect(
+    conversationIntentJournal(
+      new QueryClient(),
+      {
+        tenantId: id(1),
+        actorId: id(2),
+        selectedClientId: id(3),
+        conversationId: id(1003),
+        runId: id(5127),
+      },
+      storage,
+    ).read().submit,
+  ).toMatchObject({ requestId: id(9127), state: "unknown" });
+  cache.clear();
 });

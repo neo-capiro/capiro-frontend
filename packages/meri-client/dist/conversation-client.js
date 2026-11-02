@@ -227,6 +227,21 @@ class ConversationConnection {
         this.initialIntent = this.retain(input, receiveConversationInitialInputRequest);
         return this.sendRetained();
     };
+    /**
+     * Control answered that this run admitted no message (its reservation is still RESERVED), or the person gave
+     * up a message whose delivery stayed uncertain: the retained request is dropped and nothing is sent. Without
+     * this, the next message of the same run was refused here as a second retained request.
+     */
+    releaseSubmit = () => {
+        if (this.state.submit === "pending")
+            throw new ConversationUnavailable("submit-in-flight");
+        if (this.state.submit !== "unknown")
+            return;
+        this.intent = undefined;
+        this.initialIntent = undefined;
+        this.allocation = undefined;
+        this.publish({ submit: "idle" });
+    };
     retrySubmit = async () => {
         if (!this.intent || this.state.submit !== "unknown")
             throw new ConversationUnavailable("no-unknown-submit");
@@ -420,6 +435,7 @@ export function createMeriConversation(options) {
         submit: connection.submit,
         submitInitial: connection.submitInitial,
         retrySubmit: connection.retrySubmit,
+        releaseSubmit: connection.releaseSubmit,
         history: connection.history,
         cancel: connection.cancel,
         control: connection.control,
