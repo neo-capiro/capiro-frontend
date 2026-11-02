@@ -28,8 +28,10 @@ import {
 import {
   ConversationNetwork,
   ConversationUnavailable,
+  DEFINITIVE_REFUSALS,
   EDGE_REFUSED,
 } from "./conversation-network.js";
+import type { ConversationRefusalDetail } from "./conversation-network.js";
 import type { ConversationLifetime } from "./conversation-network.js";
 import { ConversationObservation } from "./conversation-observation.js";
 import type { ConversationObservationSnapshot } from "./conversation-observation.js";
@@ -48,7 +50,28 @@ import type {
   ConversationCheckpointInspectionRequest,
 } from "@capiro/meri-contracts/conversation-lifecycle";
 
-export { ConversationUnavailable, EDGE_REFUSED };
+export { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED };
+export type { ConversationRefusalDetail };
+
+/** Only the two documented detail fields travel with a refusal; nothing else from the body is retained. */
+function refusal(
+  status: number,
+  error: { code: string } & Record<string, unknown>,
+) {
+  const detail: {
+    sources?: readonly string[];
+    requiredScope?: "client" | "general";
+  } = {};
+  if (
+    Array.isArray(error.sources) &&
+    error.sources.length &&
+    error.sources.every((source) => typeof source === "string" && source)
+  )
+    detail.sources = Object.freeze([...(error.sources as string[])]);
+  if (error.requiredScope === "client" || error.requiredScope === "general")
+    detail.requiredScope = error.requiredScope;
+  return new ConversationUnavailable(error.code, status, Object.freeze(detail));
+}
 
 /**
  * An error answer the contract does not admit (a gateway page, an unexpected status/code pair)
@@ -274,8 +297,7 @@ class ConversationConnection {
     this.network.check();
     if (this.disposed || this.view !== current)
       throw new ConversationUnavailable("superseded-response");
-    if ("error" in value)
-      throw new ConversationUnavailable(value.error.code, response.status);
+    if ("error" in value) throw refusal(response.status, value.error);
     return value;
   }
   private retain<T extends AdmittedConversationRequest<"submit">>(
@@ -347,8 +369,7 @@ class ConversationConnection {
     ) {
       throw new ConversationUnavailable("superseded-allocation-receipt");
     }
-    if ("error" in value)
-      throw new ConversationUnavailable(value.error.code, response.status);
+    if ("error" in value) throw refusal(response.status, value.error);
     if (
       previous &&
       stableStringify(previous.allocation) !== stableStringify(value.allocation)
@@ -397,8 +418,7 @@ class ConversationConnection {
       this.allocation !== allocation
     )
       throw new ConversationUnavailable("superseded-input-receipt");
-    if ("error" in value)
-      throw new ConversationUnavailable(value.error.code, response.status);
+    if ("error" in value) throw refusal(response.status, value.error);
     this.inputReceipt = value;
     this.publish({ acceptedRequest: requestSnapshot(value.request) });
   }
@@ -428,13 +448,18 @@ class ConversationConnection {
       this.publish({ submit: "observed" });
       return this.getSnapshot();
     } catch (error) {
-      if (!dispatched && !previouslyUnknown) {
+      // A definitive refusal is control's own answer that nothing was dispatched: the retained
+      // request is released so a changed one can follow, exactly as if it had never left.
+      const refused =
+        error instanceof ConversationUnavailable && error.definitive;
+      if (refused || (!dispatched && !previouslyUnknown)) {
         this.intent = undefined;
         this.initialIntent = undefined;
         this.allocation = undefined;
       }
       this.publish({
-        submit: dispatched || previouslyUnknown ? "unknown" : "idle",
+        submit:
+          !refused && (dispatched || previouslyUnknown) ? "unknown" : "idle",
       });
       throw error;
     } finally {

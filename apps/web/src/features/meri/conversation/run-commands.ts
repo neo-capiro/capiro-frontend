@@ -139,10 +139,17 @@ export async function sendRequest(
       submit: { ...journal, state: "observed" },
     });
   } catch (cause) {
-    intent.write({
-      ...intent.read(),
-      submit: { ...journal, state: "unknown" },
-    });
+    // Control's definitive refusal means nothing was dispatched: the retained identity is released
+    // so the person can change the selection and send again; every other failure stays uncertain.
+    if (cause instanceof ConversationUnavailable && cause.definitive) {
+      const { submit, ...rest } = intent.read();
+      void submit;
+      intent.write(rest);
+    } else
+      intent.write({
+        ...intent.read(),
+        submit: { ...journal, state: "unknown" },
+      });
     throw cause;
   }
 }

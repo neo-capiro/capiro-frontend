@@ -61,6 +61,7 @@ export function useRunCommands(
     busy,
     error,
     failure,
+    refusal,
     perform,
     active,
   } = useRunCommandJournal(port, initialPrompt, alive);
@@ -88,8 +89,25 @@ export function useRunCommands(
       if (isSettled(port.getSnapshot().observation?.runState))
         await loadHistory();
     }).then(thenObserve);
-  const submit = (prompt: string, retry = false) =>
-    send(() => sendRequest(port, record, prompt, retry));
+  const submit = (
+    prompt: string,
+    retry = false,
+    onRecorded?: (request: ConversationSubmitRequest) => void,
+    modelSelection?: ConversationSubmitRequest["modelSelection"],
+    selection?: ConversationSkillSelection,
+  ) =>
+    send(() =>
+      sendRequest(
+        port,
+        record,
+        prompt,
+        retry,
+        false,
+        onRecorded,
+        modelSelection,
+        selection,
+      ),
+    );
   const submitInitial = (
     prompt: string,
     onRecorded?: (request: ConversationSubmitRequest) => void,
@@ -127,6 +145,7 @@ export function useRunCommands(
     busy,
     error,
     failure,
+    refusal,
     storageError,
     transcript,
     history,
