@@ -101,7 +101,7 @@ export function officeEditExplanation(
   return "";
 }
 
-/** The version Meri published, in the shape the Office editor opens. */
+/** The version Meri published, in the shape the Workspace link opens. */
 function officeVersion(
   proposal: OfficeEditProposal,
   result: OfficeEditResult,
@@ -116,7 +116,6 @@ function officeVersion(
     mimeType: mimeTypes[proposal.document.format],
     binding: proposal.binding,
     scopes: proposal.scopes,
-    note: `New version of ${result.version.filename}, saved from Meri's edit`,
   };
 }
 

@@ -18,10 +18,10 @@ export class OfficeFrameHost implements OfficeFrame {
     if (!container?.isConnected)
       throw new Error("Editor container unavailable");
     const frame = container.ownerDocument.createElement("iframe");
-    frame.title = "Private Office draft editor";
+    frame.title = "Office document editor";
     frame.name = `meri-office-${crypto.randomUUID()}`;
     frame.referrerPolicy = "no-referrer";
-    frame.allow = "fullscreen";
+    frame.allow = "fullscreen; clipboard-read; clipboard-write";
     container.append(frame);
     this.frame = frame;
     try {
@@ -37,7 +37,11 @@ export class OfficeFrameHost implements OfficeFrame {
       frame.onload = () => {
         if (this.channel === channel) channel.handshake();
       };
-      submitCodeLaunch(frame, value);
+      submitCodeLaunch(
+        frame,
+        value,
+        container.ownerDocument.defaultView?.navigator.language,
+      );
     } catch (error) {
       this.dispose();
       throw error;

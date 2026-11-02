@@ -10,7 +10,14 @@ import { WorkspaceScreen } from "./workspace/WorkspaceScreen";
 import { ObjectiveDestinationRoute } from "./objective-destinations/ObjectiveDestinationRoute";
 
 /** Public composition boundary; each module owns its screens and state. */
-export function ModuleScreen({ module }: { module: ModuleSlug }) {
+export function ModuleScreen({
+  module,
+  officeEnabled = false,
+}: {
+  module: ModuleSlug;
+  /** Server-decided (readOfficeConfig); only the Workspace reads it. */
+  officeEnabled?: boolean;
+}) {
   switch (module) {
     case "directory":
       return (
@@ -39,7 +46,7 @@ export function ModuleScreen({ module }: { module: ModuleSlug }) {
     case "workspace":
       return (
         <ObjectiveDestinationRoute kind="workspace_saved_revision">
-          <WorkspaceScreen />
+          <WorkspaceScreen officeEnabled={officeEnabled} />
         </ObjectiveDestinationRoute>
       );
   }

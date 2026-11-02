@@ -24,6 +24,7 @@ import {
 } from "../../../shared/meri-documents/library-access";
 import { SessionLifetimeController } from "../../../shared/meri-actions/opaque-session-controller";
 import { DocumentLibraryController } from "./document-library-state";
+import { isOfficeTarget } from "../office/OfficeWorkspaceLink";
 import styles from "./files.module.css";
 
 type Account = { tenantId: string; actorId: string };
@@ -33,9 +34,12 @@ type Origin = { conversationId: string; clientId: string | null };
 export function DocumentLibrary({
   account,
   clientId,
+  office = false,
 }: {
   account: Account;
   clientId?: string;
+  /** Only Word, Excel and PowerPoint versions: the Workspace's Office documents. */
+  office?: boolean;
 }) {
   const [rows, setRows] = useState<ConversationListPage["conversations"]>([]);
   const [before, setBefore] =
@@ -152,6 +156,7 @@ export function DocumentLibrary({
           key={JSON.stringify(origin)}
           account={account}
           origin={origin}
+          office={office}
         />
       )}
     </section>
@@ -162,10 +167,12 @@ function LibraryConnection({
   account,
   origin,
   anchor,
+  office = false,
 }: {
   account: Account;
   origin: Origin;
   anchor?: LibraryVersion;
+  office?: boolean;
 }) {
   const [host] = useState(
     () =>
@@ -203,6 +210,7 @@ function LibraryConnection({
           key={state.lifetimeKey}
           port={state.port}
           account={account}
+          office={office}
           {...(anchor ? { anchor } : {})}
         />
       </>
@@ -232,10 +240,12 @@ function LibraryPages({
   port,
   account,
   anchor,
+  office = false,
 }: {
   port: DocumentLibraryAccess;
   account: Account;
   anchor?: LibraryVersion;
+  office?: boolean;
 }) {
   const [scope, setScope] = useState<LibraryScope>(
     port.context.selectedClientId === null ? "owner" : "client",
@@ -268,6 +278,7 @@ function LibraryPages({
         key={anchor?.versionId ?? scope}
         port={port}
         query={anchor ? { anchor } : { scope }}
+        office={office}
         onHistory={setSelected}
       />
       {!anchor && selected && (
@@ -275,6 +286,7 @@ function LibraryPages({
           key={selected.versionId}
           account={account}
           anchor={selected}
+          office={office}
           origin={{
             conversationId: selected.binding.conversationId,
             clientId:
@@ -291,10 +303,12 @@ function LibraryPages({
 function LibraryPage({
   port,
   query,
+  office = false,
   onHistory,
 }: {
   port: DocumentLibraryAccess;
   query: { scope: LibraryScope } | { anchor: LibraryVersion };
+  office?: boolean;
   onHistory: (version: LibraryVersion) => void;
 }) {
   const [controller] = useState(
@@ -310,6 +324,9 @@ function LibraryPage({
     controller.getSnapshot,
   );
   const history = "anchor" in query;
+  const versions = office
+    ? state.versions.filter(isOfficeTarget)
+    : state.versions;
   return (
     <section
       className={styles.panel}
@@ -329,17 +346,19 @@ function LibraryPage({
         </Button>
       )}
       <LibraryVersions
-        versions={state.versions}
+        versions={versions}
         busy={state.busy}
         history={history}
         onSelect={(version) =>
           history ? controller.select(version) : onHistory(version)
         }
       />
-      {state.loaded && state.versions.length === 0 && (
+      {state.loaded && versions.length === 0 && (
         <p role="status">
           {state.nextCursor === null
-            ? "No files are currently available in this scope."
+            ? office
+              ? "No Office document is currently available in this scope."
+              : "No files are currently available in this scope."
             : "No available files on this page. Continue to check later pages."}
         </p>
       )}

@@ -12,7 +12,7 @@ import ui from "../../../features/meri/ui/meri-ui.module.css";
 import { MeriPageHeading } from "../../../features/meri/ui/MeriPageHeading";
 import { MeriFilesWorkflow } from "../../../features/meri/files/MeriFilesWorkflow";
 import { DocumentLibrary } from "../../../features/meri/files/DocumentLibrary";
-import { OfficeEditing } from "../../../features/meri/office/OfficeEditing";
+import { OfficeWorkspaceLinks } from "../../../features/meri/office/OfficeWorkspaceLink";
 import { LegacyReportLibrary } from "../../../features/meri/files/LegacyReportLibrary";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { scopedHref } from "../../../shared/session/client-route";
@@ -61,8 +61,6 @@ export function MeriFilesHost({
     selected.state === "authorized-client" ? selected.requestedId : undefined;
   const available =
     selected.state === "no-selection" || selected.state === "authorized-client";
-  // A publication from the editor remounts the library below it, so version history shows the new head.
-  const [libraryKey, setLibraryKey] = useState(0);
   return (
     <>
       {account && available && (
@@ -73,18 +71,17 @@ export function MeriFilesHost({
       )}
       {readEnabled &&
         (account && available ? (
-          <OfficeEditing
-            key={JSON.stringify([account.tenantId, account.actorId, clientId])}
-            enabled={officeEnabled}
-            account={account}
-            onPublished={() => setLibraryKey((key) => key + 1)}
-          >
+          <OfficeWorkspaceLinks enabled={officeEnabled}>
             <DocumentLibrary
-              key={libraryKey}
+              key={JSON.stringify([
+                account.tenantId,
+                account.actorId,
+                clientId,
+              ])}
               account={account}
               {...(clientId ? { clientId } : {})}
             />
-          </OfficeEditing>
+          </OfficeWorkspaceLinks>
         ) : (
           <p role="status">
             Current account and client access must be verified before loading

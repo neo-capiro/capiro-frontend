@@ -1,7 +1,7 @@
 import { Button } from "@capiro/ui/button";
 import { DocumentPreviewPanel } from "./DocumentPreviewPanel";
 import { DocumentRevisionLink } from "./DocumentRevisionLink";
-import { OfficeEditButton, isOfficeTarget } from "../office/OfficeEditing";
+import { OfficeWorkspaceLink } from "../office/OfficeWorkspaceLink";
 import type {
   DocumentLibraryAccess,
   LibraryVersion,
@@ -31,9 +31,7 @@ export function LibrarySelectedVersion({
         Selected version: {selected.versionId}
       </p>
       <div className={styles.controls}>
-        {latest && (
-          <OfficeEditButton version={selected} disabled={state.busy} />
-        )}
+        <OfficeWorkspaceLink version={selected} />
         <Button
           variant="outline"
           disabled={state.busy}
@@ -92,7 +90,6 @@ function GeneratedVersion({
           key={`revision:${selected.versionId}`}
           port={port}
           versionId={selected.versionId}
-          office={isOfficeTarget(selected)}
         />
       ) : (
         <p>

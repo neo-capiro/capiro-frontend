@@ -7,7 +7,7 @@ import styles from "./home.module.css";
 import { MeriConversationHost } from "./conversation/MeriConversationHost";
 import { IntentApprovalsEnabled } from "./conversation/intents/approvals-enabled";
 import { MeriClientSelector } from "./MeriClientSelector";
-import { OfficeEditing } from "./office/OfficeEditing";
+import { OfficeWorkspaceLinks } from "./office/OfficeWorkspaceLink";
 
 /** Ordinary Meri entry shows verified service data, never design fixture records. */
 export function MeriHome({
@@ -20,7 +20,7 @@ export function MeriHome({
   /** Server-decided (readIntentsConfig); approvals stay dark unless true. */
   intentApprovalsEnabled?: boolean;
   firstChatBootstrapEnabled?: boolean;
-  /** Server-decided (readOfficeConfig); an applied Office proposal can reopen its version here only when true. */
+  /** Server-decided (readOfficeConfig); an applied Office proposal links to the Workspace only when true. */
   officeEnabled?: boolean;
 }) {
   const capabilities = useMeriCapabilities();
@@ -50,14 +50,7 @@ export function MeriHome({
             capabilities.conversationApprovals.status === "on"
           }
         >
-          <OfficeEditing
-            enabled={officeEnabled}
-            account={
-              current?.tenant?.id
-                ? { tenantId: current.tenant.id, actorId: current.user.id }
-                : null
-            }
-          >
+          <OfficeWorkspaceLinks enabled={officeEnabled}>
             <MeriConversationHost
               enabled={conversationAvailable}
               firstChatBootstrapEnabled={
@@ -71,7 +64,7 @@ export function MeriHome({
               }
               scopeControl={<MeriClientSelector scope={clientScope} />}
             />
-          </OfficeEditing>
+          </OfficeWorkspaceLinks>
         </IntentApprovalsEnabled.Provider>
       </div>
     </div>

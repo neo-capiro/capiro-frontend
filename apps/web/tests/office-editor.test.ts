@@ -116,12 +116,14 @@ function fixture() {
     },
   };
   const published = vi.fn(),
-    discarded = vi.fn();
+    discarded = vi.fn(),
+    closed = vi.fn();
   const editor = new OfficeEditorController({
     selection,
     frame,
     onPublished: published,
     onDiscarded: discarded,
+    onClosed: closed,
   });
   editor.bind(port);
   return {
@@ -131,6 +133,7 @@ function fixture() {
     calls,
     published,
     discarded,
+    closed,
     setSaved: (value: OfficeSnapshot) => {
       saved = value;
     },
@@ -402,5 +405,67 @@ describe("attended Office state", () => {
     expect(f.frame.launch).not.toHaveBeenCalled();
     expect(f.discarded).toHaveBeenCalledTimes(1);
     expect(f.editor.getSnapshot().snapshot).toBeNull();
+  });
+  it("CODE's Save As publishes the next revision through the same confirmed Save, release and publish sequence", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    f.frame.save.mockImplementationOnce(async () => {
+      f.setSaved(snapshot(1, selection.editorId));
+    });
+    await f.editor.publishRevision();
+    expect(f.calls.map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "read",
+      "read",
+      "release",
+      "publish",
+    ]);
+    expect(f.frame.save).toHaveBeenCalledTimes(1);
+    expect(f.published).toHaveBeenCalledTimes(1);
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      notice: "Revision published.",
+    });
+    // Nothing more to publish from this draft: a repeated request neither saves nor publishes again.
+    await f.editor.publishRevision();
+    expect(f.published).toHaveBeenCalledTimes(1);
+    expect(f.calls.filter((c) => c.route === "publish")).toHaveLength(1);
+  });
+  it("CODE's close saves pending changes, releases the editor and reports the close; an unmodified close only releases", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    f.frame.save.mockImplementationOnce(async () => {
+      f.setSaved(snapshot(1, selection.editorId));
+    });
+    await f.editor.close();
+    expect(f.calls.map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "read",
+      "read",
+      "release",
+    ]);
+    expect(f.closed).toHaveBeenCalledTimes(1);
+    expect(f.frame.dispose).toHaveBeenCalled();
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      modified: false,
+    });
+    expect(f.published).not.toHaveBeenCalled();
+    await f.editor.open();
+    f.editor.ready();
+    await f.editor.close();
+    // A released lease is gone: reopening acquires a new launch, and an unmodified close only releases.
+    expect(f.calls.slice(5).map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "release",
+    ]);
+    expect(f.closed).toHaveBeenCalledTimes(2);
   });
 });

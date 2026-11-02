@@ -41,9 +41,12 @@ class Refused extends Error {
     super(code);
   }
 }
+type Port = OfficeTransport;
 
 /** Local interaction state only. Core owns every draft, sequence and lease. A
- * frame acknowledgement only triggers a fresh read; it never triggers Publish. */
+ * frame acknowledgement only triggers a fresh read; it never triggers Publish.
+ * CODE's own controls (Save, Save As, close) arrive as requests and run the same
+ * confirmed sequences as the host's buttons. */
 export class OfficeEditorController {
   private state = initial;
   private listeners = new Set<() => void>();
@@ -58,6 +61,8 @@ export class OfficeEditorController {
       frame: OfficeFrame;
       onPublished?: (document: OfficeDocument) => void;
       onDiscarded?: () => void;
+      /** The editor was released on request (CODE's close or the host's Close editor). */
+      onClosed?: () => void;
     },
   ) {}
   getSnapshot = () => this.state;
@@ -203,7 +208,7 @@ export class OfficeEditorController {
       ) {
         this.update({
           notice:
-            "This draft is open in another editor. Take over only when you want to replace that editor.",
+            "This document is open in another editor. Take over only when you want to replace that editor.",
         });
         return;
       }
@@ -257,28 +262,92 @@ export class OfficeEditorController {
       this.options.frame.renew(result.launch);
       this.keep(result);
     });
+  /** CODE's Save acknowledgement, then the canonical draft read that confirms a newer stored revision. */
+  private async saveWith(port: Port, signal: AbortSignal) {
+    const epoch = this.modificationEpoch,
+      modified = this.state.modified,
+      before = await this.request(port, "read", this.key(), signal);
+    if (before.editor.editorId !== this.options.selection.editorId)
+      throw new Error("Editor lease changed");
+    await this.options.frame.save(signal);
+    signal.throwIfAborted();
+    const saved = await confirmOfficeSave({
+      before,
+      read: (readSignal) => this.request(port, "read", this.key(), readSignal),
+      modified: () => modified || this.modificationEpoch !== epoch,
+      signal,
+    });
+    this.keep(saved);
+  }
+  private async releaseWith(port: Port, signal: AbortSignal) {
+    const editor = this.state.snapshot?.editor;
+    if (!editor?.editorId) throw new Error("Editor lease unavailable");
+    this.closeFrame();
+    this.keep(
+      await this.request(
+        port,
+        "release",
+        {
+          ...this.key(),
+          editorId: editor.editorId,
+          expectedEpoch: editor.epoch,
+        },
+        signal,
+      ),
+    );
+  }
+  private async publishWith(port: Port, signal: AbortSignal) {
+    const saved = this.state.snapshot;
+    if (
+      this.state.frame ||
+      !saved ||
+      saved.editor.editorId !== null ||
+      !saved.draft.sha256 ||
+      saved.draft.sequence < 1 ||
+      saved.draft.state === "published"
+    )
+      throw new Error("No released saved draft to publish");
+    const result = await this.request(
+      port,
+      "publish",
+      {
+        ...this.key(),
+        sequence: saved.draft.sequence,
+        sha256: saved.draft.sha256,
+      },
+      signal,
+    );
+    this.update({
+      snapshot: { ...saved, draft: result.draft },
+      publication: result.publication,
+      uncertain: false,
+      notice: "Revision published.",
+    });
+    this.options.onPublished?.(result.publication);
+  }
   save = () => {
     if (!this.state.frame || !this.state.ready) return Promise.resolve();
-    return this.run("Saving private draft…", async (port, signal) => {
-      const epoch = this.modificationEpoch,
-        modified = this.state.modified,
-        before = await this.request(port, "read", this.key(), signal);
-      if (before.editor.editorId !== this.options.selection.editorId)
-        throw new Error("Editor lease changed");
-      await this.options.frame.save(signal);
-      signal.throwIfAborted();
-      const saved = await confirmOfficeSave({
-        before,
-        read: (readSignal) =>
-          this.request(port, "read", this.key(), readSignal),
-        modified: () => modified || this.modificationEpoch !== epoch,
-        signal,
-      });
-      this.keep(saved);
+    return this.run("Saving…", async (port, signal) => {
+      await this.saveWith(port, signal);
       this.update({
         notice:
           "Private Save confirmed by the service. Publish remains a separate action.",
       });
+    });
+  };
+  /** Close on request (CODE's close control or the host): pending changes are saved first, then the editor is released. */
+  close = () => {
+    if (
+      (this.state.frame && !this.state.ready) ||
+      this.state.snapshot?.editor.editorId !== this.options.selection.editorId
+    )
+      return Promise.resolve();
+    return this.run("Closing editor…", async (port, signal) => {
+      if (this.state.frame && this.state.modified)
+        await this.saveWith(port, signal);
+      await this.releaseWith(port, signal);
+      this.update({ notice: "Editor closed. The saved draft stays private." });
+      this.options.onClosed?.();
     });
   };
   finish = () => {
@@ -289,24 +358,9 @@ export class OfficeEditorController {
     )
       return Promise.resolve();
     return this.run("Releasing editor…", async (port, signal) => {
-      const editor = this.state.snapshot?.editor;
-      if (!editor?.editorId) throw new Error("Editor lease unavailable");
-      this.closeFrame();
-      this.keep(
-        await this.request(
-          port,
-          "release",
-          {
-            ...this.key(),
-            editorId: editor.editorId,
-            expectedEpoch: editor.epoch,
-          },
-          signal,
-        ),
-      );
+      await this.releaseWith(port, signal);
       this.update({
-        notice:
-          "Editor released. The saved draft is ready for explicit Publish.",
+        notice: "Editor released. The saved draft is ready to publish.",
       });
     });
   };
@@ -322,24 +376,25 @@ export class OfficeEditorController {
       this.state.uncertain
     )
       return Promise.resolve();
-    return this.run("Publishing saved revision…", async (port, signal) => {
-      const result = await this.request(
-        port,
-        "publish",
-        {
-          ...this.key(),
-          sequence: saved.draft.sequence,
-          sha256: saved.draft.sha256!,
-        },
-        signal,
-      );
-      this.update({
-        snapshot: { ...saved, draft: result.draft },
-        publication: result.publication,
-        uncertain: false,
-        notice: "Saved revision published.",
-      });
-      this.options.onPublished?.(result.publication);
+    return this.run("Publishing revision…", (port, signal) =>
+      this.publishWith(port, signal),
+    );
+  };
+  /** CODE's Save As, or the host's Publish while editing: save pending changes, release the editor, publish the
+   * saved draft as the next immutable revision. Each step is the same confirmed sequence as its own action. */
+  publishRevision = () => {
+    if (
+      this.state.uncertain ||
+      (this.state.frame && !this.state.ready) ||
+      this.state.snapshot?.draft.state === "published"
+    )
+      return Promise.resolve();
+    if (!this.state.frame) return this.publish();
+    return this.run("Publishing revision…", async (port, signal) => {
+      if (this.state.modified || this.state.snapshot!.draft.sequence < 1)
+        await this.saveWith(port, signal);
+      await this.releaseWith(port, signal);
+      await this.publishWith(port, signal);
     });
   };
   discard = () => {
