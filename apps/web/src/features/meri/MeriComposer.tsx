@@ -21,8 +21,8 @@ import styles from "./home.module.css";
 type AssetSet = "home" | "cited-answer";
 /** Connected composer behaviour. Without it the composer is the disconnected fixture. */
 export type LiveComposer = Readonly<{
-  /** Sends the current draft. Called only when Send is enabled and the draft has text. */
-  onSend: () => void;
+  /** Sends the current draft. Called only when Send is enabled and the draft has text; false when nothing was sent. */
+  onSend: () => boolean | void;
   /** Requests durable cancellation of the running run. */
   onStop?: () => void;
   /** Why Send is unavailable right now; the draft stays editable either way. */
@@ -32,8 +32,8 @@ export type LiveComposer = Readonly<{
    * the draft as the one queued message, which is sent when the run finishes.
    */
   onQueue?: (() => void) | undefined;
-  /** The draft is queued; Cancel keeps it in the box as an ordinary draft. */
-  queued?: Readonly<{ onCancel: () => void }> | undefined;
+  /** The draft is queued; Cancel keeps it in the box as an ordinary draft. `until` says what it waits for. */
+  queued?: Readonly<{ onCancel: () => void; until?: string }> | undefined;
   /** A block the person must act on (a retained request to retry); shown in place of the key hint. */
   notice?: string | undefined;
   /** Exact conversation selection is required before a durable draft can be entered. */
@@ -229,7 +229,7 @@ export function MeriComposer({
           <span role="status">
             {live?.queued ? (
               <>
-                Queued: sends when Meri finishes.{" "}
+                Queued: sends when {live.queued.until ?? "Meri finishes"}.{" "}
                 <button
                   type="button"
                   className={styles.queuedCancel}

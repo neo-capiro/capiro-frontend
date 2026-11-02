@@ -64,6 +64,8 @@ export function sessionHistoryState(
   history: {
     saved?: ReturnType<typeof transcriptPages> | undefined;
     current?: ConversationTranscriptPage | undefined;
+    /** The saved history is being read for the first time or read again (a re-read hides the admitted pages). */
+    reading?: boolean;
   },
   runId: string | undefined,
   localTurns: readonly TurnView[],
@@ -143,6 +145,8 @@ export function sessionHistoryState(
         : nextChecking
           ? "Capiro is checking this conversation before you can send again."
           : undefined;
+  // While the saved history is read (a re-read hides the admitted pages) an existing conversation would otherwise
+  // look empty and take a second first message (allocate refuses it, and the person saw "Delivery is uncertain").
   const initialBlocked =
     busy ||
     retained ||
@@ -151,7 +155,9 @@ export function sessionHistoryState(
     history.saved?.latest ||
     localTurns.length
       ? "This conversation already has a message in progress. Check it before sending another."
-      : undefined;
+      : history.reading
+        ? "Loading this conversation…"
+        : undefined;
   return {
     logicalKey,
     acceptedRequest: admitted?.request

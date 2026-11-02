@@ -132,13 +132,14 @@ function explicitSend() {
 const sendButton = (html: string) =>
   html.match(/<button[^>]*aria-label="Send message"[^>]*>/i)?.[0];
 
-it("connecting and unpublished ready views preserve the draft and refuse even an explicit form submit", () => {
+it("connecting and unpublished ready views preserve the draft and only queue it, even on an explicit form submit", () => {
   const channel = createConversationComposer();
   for (const value of [session(), session(port())]) {
     const html = render(channel, value);
     expect(html).toContain("Typed during connection</textarea>");
     expect(html.match(/<textarea[^>]*>/i)?.[0]).not.toMatch(/readonly/i);
-    expect(sendButton(html)).toMatch(/\sdisabled(?:=|\s|>)/i);
+    // Send queues the message until the session's run controls mount (acceptance 2 Nov); nothing is sent here.
+    expect(sendButton(html)).not.toMatch(/\sdisabled(?:=|\s|>)/i);
     expect(html).toContain("Connecting to Meri.");
     explicitSend();
     expect(value.setDraft).not.toHaveBeenCalled();
@@ -246,7 +247,10 @@ it.each(["renewed", "expired", "revoked", "superseded"])(
         writerFence: 2,
       };
     const html = render(channel, value);
-    expect(sendButton(html)).toMatch(/\sdisabled(?:=|\s|>)/i);
+    // A renewed session is still connecting: Send only queues. The others are blocked outright.
+    if (state === "renewed")
+      expect(sendButton(html)).not.toMatch(/\sdisabled(?:=|\s|>)/i);
+    else expect(sendButton(html)).toMatch(/\sdisabled(?:=|\s|>)/i);
     expect(html).not.toContain('aria-label="Stop run"');
     if (state === "revoked") expect(html).not.toContain(value.draft);
     else expect(html).toContain(value.draft);
@@ -306,7 +310,8 @@ it("publishes only after commit and old cleanup cannot retire newer controls for
   expect(notified).toHaveBeenCalledTimes(2);
   retire();
   expect(channel.read()).toBeNull();
-  expect(sendButton(render(channel, session(current)))).toMatch(
+  // Retired controls leave the session connecting: Send only queues, and neither retired control sends.
+  expect(sendButton(render(channel, session(current)))).not.toMatch(
     /\sdisabled(?:=|\s|>)/i,
   );
   explicitSend();
@@ -343,7 +348,8 @@ it("a genuine block (no queue offered) still refuses Enter and keeps the draft",
   const current = port();
   const handlers = {
     ...controls(),
-    sendBlocked: "Delivery of your last request is uncertain. Retry it before sending another.",
+    sendBlocked:
+      "Delivery of your last request is uncertain. Retry it before sending another.",
   };
   channel.publish({ port: current, controls: handlers, running: false });
   const html = render(channel, session(current));
