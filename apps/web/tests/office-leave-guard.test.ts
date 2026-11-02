@@ -104,7 +104,8 @@ describe("Office workbench leave guard", () => {
     expect(v.history.pushState).toHaveBeenCalledTimes(1);
     guard.sync(true);
     guard.dispose();
-    expect(v.history.go).toHaveBeenCalledTimes(2);
+    // Disposal is not a navigation: the listeners go, the history is left as it is.
+    expect(v.history.go).toHaveBeenCalledTimes(1);
     expect(v.listeners.get("document:click")).toEqual([]);
     expect(v.listeners.get("window:popstate")).toEqual([]);
   });

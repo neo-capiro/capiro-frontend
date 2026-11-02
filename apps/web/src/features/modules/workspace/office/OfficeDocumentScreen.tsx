@@ -39,7 +39,8 @@ export function OfficeDocumentScreen({
       onPublished: (document) => onOpenVersion(document.version.versionId),
       onClosed: onClose,
       onDiscarded: onClose,
-      navigate: (href) => router.push(href),
+      // The guard navigates from its trap entry: replacing it leaves one office entry behind, not two.
+      navigate: (href) => router.replace(href),
     });
   const draft = state.snapshot?.draft;
   const filename = draft?.filename ?? "Office document";

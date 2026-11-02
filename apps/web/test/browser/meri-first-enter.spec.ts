@@ -10,12 +10,14 @@ import {
   reply,
   runFor,
   setupConversation,
+  stopButton,
 } from "./meri-conversation-fixtures";
 import { installInitialInput } from "./meri-initial-input-fixtures";
 import {
   installCurrentRun,
   installHistory,
   installReservation,
+  reserved,
   selectedUrl,
 } from "./meri-history-fixtures";
 
@@ -122,4 +124,78 @@ test("first Enter in a reloaded thread sends once the latest-run check completes
       .getByText(/Second message/),
   ).toBeVisible();
   await expect(composer(page)).toHaveValue("");
+});
+
+test("a message waits on the conversation check only for a bounded time, then the check's refusal shows and nothing is sent", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await setupConversation(page, undefined, [context, contextFor(nextBinding)]);
+  const { native } = await installHistory(page);
+  await installCurrentRun(page, native);
+  await installReservation(page, native);
+  let reservations = 0;
+  page.on("request", (request) => {
+    if (request.url().endsWith("/api/conversations/next-turn"))
+      reservations += 1;
+  });
+  // The latest-run read never answers within the wait.
+  const release = await holdFirst(page, "**/api/conversations/transcript");
+
+  await page.goto(selectedUrl);
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await composer(page).fill("Second message");
+  await composer(page).press("Enter");
+  await expect(page.getByText(/Queued: sends when Meri finishes/)).toBeVisible();
+
+  await page.clock.fastForward(9_000);
+  await expect(page.getByText(/Queued: sends when Meri finishes/)).toHaveCount(0);
+  await expect(
+    page.getByText(
+      "Capiro is checking this conversation before you can send again.",
+    ),
+  ).toBeVisible();
+  await expect(composer(page)).toHaveValue("Second message");
+  expect(reservations).toBe(0);
+
+  // The released message is the person's again: a late check does not send it on its own.
+  release();
+  await page.clock.fastForward(1_000);
+  expect(reservations).toBe(0);
+  await expect(composer(page)).toHaveValue("Second message");
+});
+
+test("a message queued during a run longer than the check wait is still sent once when the run finishes", async ({
+  page,
+}) => {
+  test.setTimeout(60_000);
+  await setupConversation(page, undefined, [context, contextFor(nextBinding)]);
+  let running = true;
+  const native = await installInitialInput(page, () => running);
+  let reservations = 0;
+  await page.route("**/api/conversations/next-turn", (route) => {
+    reservations += 1;
+    return reply(route, { ...reserved, replayed: false });
+  });
+  // The queued message's own admission after the reservation is outside this fixture's single allocation.
+  await page.route("**/api/conversations/input/admit", (route) =>
+    reservations > 0 ? route.abort() : route.fallback(),
+  );
+  await page.goto(`/meri?clientId=${clientId}`);
+  await composer(page).fill("First message");
+  await composer(page).press("Enter");
+  await expect(stopButton(page)).toBeEnabled();
+  expect(native.calls.submit).toHaveLength(1);
+  await composer(page).fill("Second message");
+  await composer(page).press("Enter");
+  await expect(page.getByText(/Queued: sends when Meri finishes/)).toBeVisible();
+
+  // The run takes ten seconds, longer than the conversation-check wait; it must not use up that wait.
+  await page.waitForTimeout(10_000);
+  await expect(page.getByText(/Queued: sends when Meri finishes/)).toBeVisible();
+  expect(reservations).toBe(0);
+  running = false;
+  await expect.poll(() => reservations, { timeout: 20_000 }).toBe(1);
+  await page.waitForTimeout(1_000);
+  expect(reservations).toBe(1);
 });

@@ -18,6 +18,7 @@ import { useQuickActionCatalog } from "./useQuickActionCatalog";
 import { newIntentRefusal, type QuickActionGate } from "./quick-action-gate";
 import { ClientHandoffDraft } from "./ClientHandoffDraft";
 import { FeedbackContext } from "./feedback/FeedbackContext";
+import { ModelCatalogContext } from "../model-selection/ModelCatalogContext";
 import { SessionTools } from "./SessionTools";
 import { composerChips } from "./composer-chips";
 import styles from "./live.module.css";
@@ -186,66 +187,74 @@ export function ConversationView({
   );
   return (
     <FeedbackContext.Provider value={displayed?.port ?? null}>
-      <div className={styles.chat} data-tools={toolsOpen ? "open" : undefined}>
-        <ConversationFrame
-          scope={scope}
-          historyStatus={
-            session.accessLost || (!session.selectedId && !displayed) ? null : (
-              <ConversationHistoryStatus session={session} />
-            )
-          }
-          notice={
-            unverified && displayed ? (
-              <UnverifiedAccessNotice session={session} />
-            ) : null
-          }
-          composer={
-            <SessionComposer
-              session={session}
-              scope={scope}
-              channel={composer}
-              gate={quickActions.gate}
-              toolsOpen={toolsOpen}
-              onToggleTools={toggleTools}
-              scopeControl={scopeControl}
-            />
-          }
+      <ModelCatalogContext.Provider
+        value={session.modelCatalog?.document?.modelCatalog}
+      >
+        <div
+          className={styles.chat}
+          data-tools={toolsOpen ? "open" : undefined}
         >
-          {displayed ? (
-            <MeriLiveConversation
-              key={displayed.lifetimeKey}
-              port={displayed.port}
-              composer={composer}
-              initialPrompt={session.connection.pending}
-              earlier={session.earlier}
-              scope={scope}
-              draft={session.draft}
-              onDraft={session.setDraft}
-              initialDraft={session.initialDraft}
-              storageError={session.storageError}
-              modelSelection={session.modelSelection}
-              skillSelection={session.skillSelection}
-              newIntentBlocked={newIntentBlocked}
-              modelBlocked={session.modelBlocked}
-              textareaRef={session.textarea}
-              onNextTurn={session.startNext}
-              onLifecycleTarget={session.openLifecycleTarget}
-              onBrowserTarget={session.openBrowserTarget}
-              historyUnavailable={session.history.unavailable}
-              nextTurnBlocked={session.nextBlocked}
-              nextTurnChecking={session.nextChecking}
-              nextTurnVerified={!!session.source && !session.nextBlocked}
-              initialBlocked={session.initialBlocked}
-              promptKey={session.logicalKey}
-              savedCurrent={session.savedCurrent}
-              acceptedRequest={session.acceptedRequest}
-              onSettled={session.refresh}
-            />
-          ) : (
-            <ConnectionPending session={session} />
-          )}
-        </ConversationFrame>
-      </div>
+          <ConversationFrame
+            scope={scope}
+            historyStatus={
+              session.accessLost ||
+              (!session.selectedId && !displayed) ? null : (
+                <ConversationHistoryStatus session={session} />
+              )
+            }
+            notice={
+              unverified && displayed ? (
+                <UnverifiedAccessNotice session={session} />
+              ) : null
+            }
+            composer={
+              <SessionComposer
+                session={session}
+                scope={scope}
+                channel={composer}
+                gate={quickActions.gate}
+                toolsOpen={toolsOpen}
+                onToggleTools={toggleTools}
+                scopeControl={scopeControl}
+              />
+            }
+          >
+            {displayed ? (
+              <MeriLiveConversation
+                key={displayed.lifetimeKey}
+                port={displayed.port}
+                composer={composer}
+                initialPrompt={session.connection.pending}
+                earlier={session.earlier}
+                scope={scope}
+                draft={session.draft}
+                onDraft={session.setDraft}
+                initialDraft={session.initialDraft}
+                storageError={session.storageError}
+                modelSelection={session.modelSelection}
+                skillSelection={session.skillSelection}
+                newIntentBlocked={newIntentBlocked}
+                modelBlocked={session.modelBlocked}
+                textareaRef={session.textarea}
+                onNextTurn={session.startNext}
+                onLifecycleTarget={session.openLifecycleTarget}
+                onBrowserTarget={session.openBrowserTarget}
+                historyUnavailable={session.history.unavailable}
+                nextTurnBlocked={session.nextBlocked}
+                nextTurnChecking={session.nextChecking}
+                nextTurnVerified={!!session.source && !session.nextBlocked}
+                initialBlocked={session.initialBlocked}
+                promptKey={session.logicalKey}
+                savedCurrent={session.savedCurrent}
+                acceptedRequest={session.acceptedRequest}
+                onSettled={session.refresh}
+              />
+            ) : (
+              <ConnectionPending session={session} />
+            )}
+          </ConversationFrame>
+        </div>
+      </ModelCatalogContext.Provider>
     </FeedbackContext.Provider>
   );
 }

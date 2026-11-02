@@ -50,6 +50,7 @@ import {
   researchActionFields,
   researchActionRow,
 } from "./research-action-view";
+import { intentOperationLabel } from "./intent-labels";
 import {
   isMailSendProposal,
   isNativeMailOutcome,
@@ -73,17 +74,6 @@ export type {
   IntentRow,
   Viewer,
 } from "./intent-view-types";
-const operationLabels: Readonly<Record<string, string>> = {
-  create_task: "Create a task",
-  create_word: "Prepare a document",
-  create_excel: "Prepare a spreadsheet",
-  create_powerpoint: "Prepare a presentation",
-  update_task: "Update a task",
-  save_memory: "Save to memory",
-  save_chat_attachments: "File chat attachments",
-  request_document: "Prepare a document",
-  request_analysis: "Prepare an analysis",
-};
 const actionLabels: Readonly<Record<string, string>> = {
   "task.create": "Create a task",
   "task.update": "Update a task",
@@ -275,6 +265,19 @@ function filingLook(execution: Completed): Look | null {
   };
 }
 const nothing = "Nothing was approved or executed.";
+/** Plain words for a preparation the journal recorded as failed before any effect. The code shows only when no words exist. */
+const failureText: Readonly<Record<string, string>> = {
+  REFUSED: "The service that prepares this kind of request refused it.",
+  UNAVAILABLE:
+    "The service that prepares this kind of request could not be reached.",
+  ACCESS_DENIED: "Your current access does not allow this request.",
+  INVALID_ARGUMENTS:
+    "Meri sent a request that could not be accepted as written, so nothing was prepared.",
+  DEADLINE: "Preparing this request took too long and was stopped.",
+  CANCELLED: "Preparing this request was cancelled.",
+  CONFLICT:
+    "A different version of this request was already recorded, so this one was not prepared.",
+};
 /** Journal states and withheld or non-command items: shown, never decidable, no content. */
 const plainLooks = {
   pending: {
@@ -285,7 +288,7 @@ const plainLooks = {
   unknown: {
     status: "Result uncertain",
     tone: "warning",
-    detail: `Meri could not confirm whether this request was prepared. ${nothing}`,
+    detail: `Meri sent this request but could not confirm the outcome. ${nothing} Check Approvals; if nothing is there, ask again.`,
   },
   withheldDraft: {
     status: "Withheld",
@@ -376,7 +379,7 @@ const awaitingLooks = {
 const base = (item: IntentsItem) => ({
   deliveryId: item.deliveryId,
   createdAt: item.createdAt,
-  title: operationLabels[item.operation.id] ?? humanize(item.operation.id),
+  title: intentOperationLabel(item.operation.id),
   proposal: null,
   fields: [] as readonly IntentField[],
   result: [] as readonly IntentField[],
@@ -435,9 +438,9 @@ export function intentRow(
     return closed(plainLooks[item.state]);
   if (item.state === "failed")
     return closed({
-      status: "Failed",
+      status: "Not prepared",
       tone: "danger",
-      detail: `Preparation failed (${item.code}). No preparation result was confirmed.`,
+      detail: `${failureText[item.code] ?? `Preparation failed before anything was prepared (${item.code}).`} ${nothing}`,
     });
   if (item.kind === "draft")
     return closed(

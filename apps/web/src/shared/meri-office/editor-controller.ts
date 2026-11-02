@@ -363,6 +363,12 @@ export class OfficeEditorController {
       this.state.snapshot?.editor.editorId !== this.options.selection.editorId
     )
       return Promise.resolve(false);
+    const busy = this.state.busy;
+    if (busy) {
+      // Leaving waits for the operation in flight; say so instead of refusing silently.
+      this.update({ notice: `${busy} Wait for it to finish before leaving.` });
+      return Promise.resolve(false);
+    }
     return this.run("Closing editor…", async (port, signal) => {
       const editing = this.state.frame && this.state.mode === "edit";
       if (editing && this.state.modified) await this.saveWith(port, signal);
