@@ -16,6 +16,7 @@ const fixture = vi.hoisted(() => ({
   selected: true,
   unavailable: false,
   loading: false,
+  parked: false,
   createdAt: "2026-10-13T00:00:00Z",
   discovery: vi.fn(),
   search: "",
@@ -42,7 +43,8 @@ vi.mock("../src/shared/meri-conversations/history-queries", () => ({
     fixture.discovery(...args);
     return {
       query: {
-        isPending: fixture.loading,
+        isPending: fixture.loading || fixture.parked,
+        isFetching: fixture.loading,
         isRefetching: false,
         hasNextPage: false,
       },
@@ -184,6 +186,15 @@ it("loading or unavailable discovery does not expose a retained dated link", () 
   fixture.unavailable = true;
   expect(render()).toContain("Recent conversations unavailable.");
   expect(render()).not.toContain("Conversation ·");
+});
+
+it("a parked discovery reports unavailable instead of loading forever", () => {
+  // A cancelled or disabled discovery is `isPending` without fetching; it must
+  // not leave the sidebar on its loading line with no way out.
+  fixture.parked = true;
+  expect(render()).not.toContain("Loading recent conversations.");
+  expect(render()).toContain("Recent conversations unavailable.");
+  fixture.parked = false;
 });
 
 it("keeps General discovery and reopen links explicitly separate from client scope", () => {

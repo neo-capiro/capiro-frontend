@@ -1,5 +1,6 @@
 "use client";
 import { ApiError } from "../api/http";
+import { errorText } from "../../error-text";
 import Link from "next/link";
 export function QueryState({
   pending,
@@ -25,7 +26,7 @@ export function QueryState({
       <p>
         {error instanceof ApiError && error.status === 403
           ? "You do not have permission for this operation."
-          : error.message}
+          : errorText(error)}
       </p>
       {error instanceof ApiError && error.status === 401 ? (
         <Link className="button" href="/sign-in">
