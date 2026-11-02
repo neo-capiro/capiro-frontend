@@ -25,14 +25,29 @@ export interface ConversationLifetime {
   credentialHeader?: "x-meri-action-session" | "authorization";
 }
 
+/** The detail a typed skill refusal carries next to its code (contracts 0.1.47). */
+export type ConversationRefusalDetail = Readonly<{
+  sources?: readonly string[];
+  requiredScope?: "client" | "general";
+}>;
+/** A 400 refusal decided before any run exists: the request was not dispatched and may be changed. */
+export const DEFINITIVE_REFUSALS: ReadonlySet<string> = new Set([
+  "SKILL_SOURCES_UNAVAILABLE",
+  "SKILL_SCOPE_REFUSED",
+]);
 export class ConversationUnavailable extends Error {
   /** `status` is the HTTP answer that carried a closed error code, when one did. */
   constructor(
     readonly code: string,
     readonly status?: number,
+    readonly detail: ConversationRefusalDetail = {},
   ) {
     super(code);
     this.name = "ConversationUnavailable";
+  }
+  /** Control refused this exact request outright; nothing was dispatched and nothing is in flight. */
+  get definitive() {
+    return this.status === 400 && DEFINITIVE_REFUSALS.has(this.code);
   }
 }
 /**

@@ -1,12 +1,23 @@
 import { conversationApplicationMetadata as protocol, receiveConversationRequest, receiveConversationResponse, } from "@capiro/meri-contracts/conversation-application";
 import { conversationInputMetadata, conversationInputView, receiveConversationInputRequest, receiveConversationInputResponse, } from "@capiro/meri-contracts/conversation-input";
 import { conversationInitialInputMetadata, receiveConversationInitialInputRequest, receiveConversationInitialInputResponse, receiveAllocatedConversationInputResponse, } from "@capiro/meri-contracts/conversation-initial-input";
-import { ConversationNetwork, ConversationUnavailable, EDGE_REFUSED, } from "./conversation-network.js";
+import { ConversationNetwork, ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED, } from "./conversation-network.js";
 import { ConversationObservation } from "./conversation-observation.js";
 import { conversationChat } from "./conversation-chat.js";
 import { stableStringify } from "./json-identity.js";
 import { conversationLifecycleMetadata, receiveConversationLifecycleRequest, receiveConversationLifecycleResponse, } from "@capiro/meri-contracts/conversation-lifecycle";
-export { ConversationUnavailable, EDGE_REFUSED };
+export { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED };
+/** Only the two documented detail fields travel with a refusal; nothing else from the body is retained. */
+function refusal(status, error) {
+    const detail = {};
+    if (Array.isArray(error.sources) &&
+        error.sources.length &&
+        error.sources.every((source) => typeof source === "string" && source))
+        detail.sources = Object.freeze([...error.sources]);
+    if (error.requiredScope === "client" || error.requiredScope === "general")
+        detail.requiredScope = error.requiredScope;
+    return new ConversationUnavailable(error.code, status, Object.freeze(detail));
+}
 /**
  * An error answer the contract does not admit (a gateway page, an unexpected status/code pair)
  * keeps only its status, so a caller can still tell control not answering from a refusal. A 200
@@ -193,7 +204,7 @@ class ConversationConnection {
         if (this.disposed || this.view !== current)
             throw new ConversationUnavailable("superseded-response");
         if ("error" in value)
-            throw new ConversationUnavailable(value.error.code, response.status);
+            throw refusal(response.status, value.error);
         return value;
     }
     retain(input, receive) {
@@ -243,7 +254,7 @@ class ConversationConnection {
             throw new ConversationUnavailable("superseded-allocation-receipt");
         }
         if ("error" in value)
-            throw new ConversationUnavailable(value.error.code, response.status);
+            throw refusal(response.status, value.error);
         if (previous &&
             stableStringify(previous.allocation) !== stableStringify(value.allocation)) {
             throw new ConversationUnavailable("INITIAL_INPUT_RECEIPT_DRIFT");
@@ -266,7 +277,7 @@ class ConversationConnection {
             this.allocation !== allocation)
             throw new ConversationUnavailable("superseded-input-receipt");
         if ("error" in value)
-            throw new ConversationUnavailable(value.error.code, response.status);
+            throw refusal(response.status, value.error);
         this.inputReceipt = value;
         this.publish({ acceptedRequest: requestSnapshot(value.request) });
     }
@@ -296,13 +307,16 @@ class ConversationConnection {
             return this.getSnapshot();
         }
         catch (error) {
-            if (!dispatched && !previouslyUnknown) {
+            // A definitive refusal is control's own answer that nothing was dispatched: the retained
+            // request is released so a changed one can follow, exactly as if it had never left.
+            const refused = error instanceof ConversationUnavailable && error.definitive;
+            if (refused || (!dispatched && !previouslyUnknown)) {
                 this.intent = undefined;
                 this.initialIntent = undefined;
                 this.allocation = undefined;
             }
             this.publish({
-                submit: dispatched || previouslyUnknown ? "unknown" : "idle",
+                submit: !refused && (dispatched || previouslyUnknown) ? "unknown" : "idle",
             });
             throw error;
         }

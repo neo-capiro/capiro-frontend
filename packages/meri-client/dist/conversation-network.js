@@ -1,13 +1,24 @@
 import { conversationApplicationMetadata as protocol } from "@capiro/meri-contracts/conversation-application";
+/** A 400 refusal decided before any run exists: the request was not dispatched and may be changed. */
+export const DEFINITIVE_REFUSALS = new Set([
+    "SKILL_SOURCES_UNAVAILABLE",
+    "SKILL_SCOPE_REFUSED",
+]);
 export class ConversationUnavailable extends Error {
     code;
     status;
+    detail;
     /** `status` is the HTTP answer that carried a closed error code, when one did. */
-    constructor(code, status) {
+    constructor(code, status, detail = {}) {
         super(code);
         this.code = code;
         this.status = status;
+        this.detail = detail;
         this.name = "ConversationUnavailable";
+    }
+    /** Control refused this exact request outright; nothing was dispatched and nothing is in flight. */
+    get definitive() {
+        return this.status === 400 && DEFINITIVE_REFUSALS.has(this.code);
     }
 }
 /**

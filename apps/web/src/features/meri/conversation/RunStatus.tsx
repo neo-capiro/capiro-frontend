@@ -7,6 +7,7 @@ import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import styles from "./live.module.css";
 import { matchesStoredRequest } from "./run-commands";
 import { controlReconnectingMessage } from "./control-reachability";
+import { describeSkillRefusal } from "./skill-refusal";
 
 /**
  * Connection, delivery and stop feedback for the current run; never a run outcome by itself. A
@@ -44,7 +45,12 @@ export function RunStatus({
       (uncertain && matchesStoredRequest(intent.submit, acceptedRequest)));
   return (
     <>
-      {run.error && !run.failure && (
+      {run.refusal && (
+        <p role="alert" className={styles.muted}>
+          {describeSkillRefusal(run.refusal)}
+        </p>
+      )}
+      {run.error && !run.failure && !run.refusal && (
         <p role="alert" className={styles.muted}>
           Capiro could not finish this message.
         </p>

@@ -20,11 +20,21 @@ export interface ConversationLifetime {
      */
     credentialHeader?: "x-meri-action-session" | "authorization";
 }
+/** The detail a typed skill refusal carries next to its code (contracts 0.1.47). */
+export type ConversationRefusalDetail = Readonly<{
+    sources?: readonly string[];
+    requiredScope?: "client" | "general";
+}>;
+/** A 400 refusal decided before any run exists: the request was not dispatched and may be changed. */
+export declare const DEFINITIVE_REFUSALS: ReadonlySet<string>;
 export declare class ConversationUnavailable extends Error {
     readonly code: string;
     readonly status?: number | undefined;
+    readonly detail: ConversationRefusalDetail;
     /** `status` is the HTTP answer that carried a closed error code, when one did. */
-    constructor(code: string, status?: number | undefined);
+    constructor(code: string, status?: number | undefined, detail?: ConversationRefusalDetail);
+    /** Control refused this exact request outright; nothing was dispatched and nothing is in flight. */
+    get definitive(): boolean;
 }
 /**
  * The shared edge answered a request route with 403 before Meri saw it (its WAF rules refuse some

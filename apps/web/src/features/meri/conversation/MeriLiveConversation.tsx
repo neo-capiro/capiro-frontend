@@ -99,8 +99,11 @@ export function composerAvailability(
     !initialPrompt &&
     !earlier.length &&
     !initialBlocked;
+  // Control refused the reserved next message outright (a typed skill refusal): nothing was
+  // dispatched to this reserved run, so a changed message may be sent to it as an ordinary request.
+  const resend = !turn && !intent.submit && !!initialPrompt && !!run.refusal;
   const firstBlocked =
-    !turn && !intent.submit && !initial
+    !turn && !intent.submit && !initial && !resend
       ? (initialBlocked ?? "Check your last message before sending another.")
       : undefined;
   const sendBlocked =
@@ -120,6 +123,7 @@ export function composerAvailability(
           : undefined);
   return {
     initial,
+    resend,
     sendBlocked,
     readyForNext:
       nextTurnVerified &&
@@ -155,6 +159,21 @@ function useDraftAcknowledgement(
       initialDraft.fail();
     }
   }, [initialDraft, port.context, submit, draft, onDraft]);
+}
+
+/**
+ * A definitive refusal released the retained request: the captured text goes back to the box so the
+ * person can change the selection or the conversation and send again.
+ */
+function useRefusalRelease(
+  initialDraft: InitialDraftOwner,
+  port: MeriConversationPort,
+  run: ReturnType<typeof useLiveRun>,
+) {
+  const released = !!run.refusal && !run.intent.submit;
+  useEffect(() => {
+    if (released) initialDraft.release(port.context);
+  }, [released, initialDraft, port.context]);
 }
 
 /** Refresh saved history once this mounted run reaches a terminal state. */
@@ -370,6 +389,7 @@ export function MeriLiveConversation({
   )
     setBrowserRunId(port.context.runId);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
+  useRefusalRelease(initialDraft, port, run);
   useSettledRefresh(finished, onSettled);
   const availability = composerAvailability(
     run,
@@ -442,6 +462,14 @@ export function MeriLiveConversation({
       );
       void run.submitInitial(
         prompt,
+        (request) => initialDraft.begin(port.context, request, draft),
+        modelSelection,
+        skillSelection,
+      );
+    } else if (availability.resend) {
+      void run.submit(
+        prompt,
+        false,
         (request) => initialDraft.begin(port.context, request, draft),
         modelSelection,
         skillSelection,

@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { ConversationUnavailable } from "@capiro/meri-client/conversation";
 import { TabJournalUnavailable } from "../../../shared/meri-conversations/tab-journal";
 import { controlFailure, type ControlFailure } from "./control-reachability";
+import { skillRefusal, type SkillRefusal } from "./skill-refusal";
 
 const code = (cause: unknown) =>
   cause instanceof TabJournalUnavailable
@@ -24,6 +25,7 @@ export function useCommandGate(
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string>();
   const [failure, setFailure] = useState<ControlFailure>();
+  const [refusal, setRefusal] = useState<SkillRefusal>();
   const active = useRef(false);
   async function perform(operation: () => Promise<unknown>) {
     if (active.current) return false;
@@ -31,6 +33,7 @@ export function useCommandGate(
     setBusy(true);
     setError(undefined);
     setFailure(undefined);
+    setRefusal(undefined);
     try {
       await operation();
       return true;
@@ -38,6 +41,7 @@ export function useCommandGate(
       if (alive.current) {
         setError(code(cause));
         setFailure(controlFailure(cause));
+        setRefusal(skillRefusal(cause));
       }
       return false;
     } finally {
@@ -48,5 +52,5 @@ export function useCommandGate(
       }
     }
   }
-  return { busy, error, failure, perform, active };
+  return { busy, error, failure, refusal, perform, active };
 }
