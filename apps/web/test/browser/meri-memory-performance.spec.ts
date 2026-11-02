@@ -7,6 +7,14 @@ import { setupConversation } from "./meri-conversation-fixtures";
  * DOM mutations) and the same frame rate on every page, including a static site: the environment,
  * not the page. This guard keeps it that way: 25 records and 25 proposals arrive with exactly two
  * reads, render promptly, and the page then settles with no further mutations.
+ *
+ * Re-measured on 2 November 2026 (frontend revision 72, the acceptance tester's Chrome over remote
+ * desktop, General and client scope, 25 records, 514 nodes): requestAnimationFrame ticked at exactly
+ * ~1000 ms gaps while the main thread stayed idle (0 ms long-animation-frame blocking, 6-38 ms of
+ * script per 4 s, 0 DOM mutations, no CSS animations). The same 1 Hz cadence and CDP screenshot
+ * timeout appeared on Approvals, Conversations and Files, and on example.com in the same tab, and
+ * persisted with document.body hidden; a fresh Chrome on the same host rendered the routes at the
+ * display's 32 fps. The tab's compositor, not this page, starves the frames.
  */
 const updatedAt = "2026-10-21T12:00:00.123456Z";
 const id = (prefix: string, index: number) =>
