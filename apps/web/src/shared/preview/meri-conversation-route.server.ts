@@ -1,10 +1,33 @@
+import packageJson from "../../../package.json";
 import { readRequestOrigin } from "../request-origin";
 import { portfolioPreviewFrontendOrigin } from "../meri-conversations/frontend-origin";
 
 type Environment = Record<string, string | undefined>;
 
-/** The app's pinned @capiro/meri-contracts distribution (the installed package's own version). */
-export const previewMeriContractsPackageVersion = "0.1.27";
+const vendoredContractsPin =
+  /^file:\.\.\/\.\.\/vendor\/capiro-meri-contracts-(\d+\.\d+\.\d+)-[0-9a-f]{8}-[0-9a-f]{12}\.tgz$/;
+
+/**
+ * The app's pinned @capiro/meri-contracts distribution, read from the vendored
+ * tarball this package.json installs, so re-vendoring cannot leave the preview
+ * conversation gate on a stale hand-written version. An unexpected pin yields no
+ * version: the preview conversation gate stays closed instead of failing every
+ * importing route at module load.
+ */
+export const previewMeriContractsPackageVersion: string | undefined =
+  vendoredContractsVersion(packageJson.dependencies["@capiro/meri-contracts"]);
+
+export function vendoredContractsVersion(
+  pin: string | undefined,
+): string | undefined {
+  const version =
+    pin === undefined ? undefined : vendoredContractsPin.exec(pin)?.[1];
+  if (!version)
+    console.error(
+      "@capiro/meri-contracts is not pinned to a vendored release tarball; preview Meri conversation routes stay closed",
+    );
+  return version;
+}
 const sourceCommit = /^[0-9a-f]{40}$/;
 const imageDigest = /^sha256:[0-9a-f]{64}$/;
 const meriHost =
@@ -59,6 +82,7 @@ function configuredRuntimeBinding(env: Environment): boolean {
     !/^0+$/.test(source) &&
     imageDigest.test(image) &&
     !/^sha256:0+$/.test(image) &&
+    previewMeriContractsPackageVersion !== undefined &&
     env.CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION ===
       previewMeriContractsPackageVersion
   );
