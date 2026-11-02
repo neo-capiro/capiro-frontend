@@ -23,6 +23,9 @@ const h = vi.hoisted(() => ({
   resolution: vi.fn(),
   context: vi.fn(),
   generation: vi.fn(),
+  office: vi.fn(),
+  officeList: vi.fn(),
+  replace: vi.fn(),
   values: [] as unknown[],
   index: 0,
 }));
@@ -42,7 +45,28 @@ vi.mock("react", async (original) => ({
 }));
 vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(h.query),
-  useRouter: () => ({ push: h.push }),
+  useRouter: () => ({ push: h.push, replace: h.replace }),
+}));
+vi.mock(
+  "../src/features/modules/workspace/office/OfficeDocumentScreen",
+  () => ({
+    OfficeDocumentScreen: (props: unknown) => {
+      h.office(props);
+      return null;
+    },
+  }),
+);
+vi.mock("../src/features/modules/workspace/office/OfficeDocuments", () => ({
+  OfficeDocuments: (props: unknown) => {
+    h.officeList(props);
+    return null;
+  },
+}));
+vi.mock("../src/shared/portfolio/auth/identity", () => ({
+  useIdentity: () => ({
+    data: { tenant: { id: "tenant" }, user: { id: "actor" } },
+    error: null,
+  }),
 }));
 vi.mock("../src/features/modules/workspace/WorkspaceDraft", () => ({
   WorkspaceDraft: (props: unknown) => {
@@ -170,10 +194,12 @@ vi.mock("@capiro/ui/dropdown-menu", () => ({
     return createElement("button", null, props.children);
   },
 }));
-const render = (query = "") => {
+const render = (query = "", officeEnabled = false) => {
   h.index = 0;
   h.query = query;
-  return renderToStaticMarkup(createElement(WorkspaceScreen));
+  return renderToStaticMarkup(
+    createElement(WorkspaceScreen, { officeEnabled }),
+  );
 };
 beforeEach(() => {
   vi.clearAllMocks();
@@ -421,4 +447,42 @@ it.each([
     h.push,
   ])
     expect(receiver).not.toHaveBeenCalled();
+});
+it("opens an Office document in the Workspace editor only when Office is enabled, and lists Office documents beside the library", () => {
+  const html = render(
+    `officeVersionId=${draft.id}&officeConversationId=${otherId}&clientId=${prospectId}`,
+    true,
+  );
+  expect(html).toBe("");
+  expect(h.office.mock.lastCall![0]).toMatchObject({
+    account: { tenantId: "tenant", actorId: "actor" },
+    target: {
+      versionId: draft.id,
+      conversationId: otherId,
+      clientId: prospectId,
+      runId: undefined,
+    },
+  });
+  h.office.mock.lastCall![0].onClose();
+  expect(h.push).toHaveBeenLastCalledWith(
+    `/modules/workspace?clientId=${prospectId}`,
+  );
+  h.office.mock.lastCall![0].onOpenVersion(otherId);
+  expect(h.replace).toHaveBeenLastCalledWith(
+    `/modules/workspace?clientId=${prospectId}&officeVersionId=${otherId}&officeConversationId=${otherId}`,
+  );
+  expect(h.officeList).not.toHaveBeenCalled();
+  expect(
+    render(
+      `officeVersionId=${draft.id}&officeConversationId=${otherId}`,
+      false,
+    ),
+  ).toContain("Office editing is not enabled for this deployment.");
+  render(`clientId=${otherId}`, true);
+  expect(h.officeList.mock.lastCall![0]).toMatchObject({
+    account: { tenantId: "tenant", actorId: "actor" },
+    clientId: otherId,
+  });
+  render(`clientId=${otherId}`, false);
+  expect(h.officeList).toHaveBeenCalledTimes(1);
 });

@@ -1,5 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { CodeFrameChannel } from "../src/shared/meri-office/code-frame";
+import {
+  CodeFrameChannel,
+  codeFrameAllow,
+  codeLaunchUrl,
+} from "../src/shared/meri-office/code-frame";
 import type { OfficeLaunch } from "@capiro/meri-contracts/office-application";
 
 const cleanup: (() => void)[] = [];
@@ -26,6 +30,10 @@ function fixture() {
     modified: vi.fn(),
     renew: vi.fn(),
     unavailable: vi.fn(),
+    saveRequested: vi.fn(),
+    saveAsRequested: vi.fn(),
+    historyRequested: vi.fn(),
+    closeRequested: vi.fn(),
   };
   const owner = new CodeFrameChannel({
     origin: "https://office.example.test",
@@ -90,6 +98,8 @@ describe("CODE frame channel", () => {
     await save;
     expect(f.messages.map((m) => m.MessageId)).toEqual([
       "Host_PostmessageReady",
+      "Disable_Default_UIAction",
+      "Disable_Default_UIAction",
       "Action_Save",
     ]);
     expect(
@@ -193,5 +203,72 @@ describe("CODE frame channel", () => {
       );
     expect(f.callbacks.ready).not.toHaveBeenCalled();
     expect(f.callbacks.modified).not.toHaveBeenCalled();
+  });
+  it("repeats the handshake on Frame_Ready and takes over CODE's Save and close once the document is loaded", () => {
+    const f = fixture();
+    f.receive("App_LoadingStatus", { Status: "Frame_Ready" });
+    expect(f.messages.map((m) => m.MessageId)).toEqual([
+      "Host_PostmessageReady",
+    ]);
+    for (const id of ["UI_Save", "UI_SaveAs", "UI_FileVersions", "UI_Close"])
+      f.receive(id);
+    expect(f.callbacks.saveRequested).not.toHaveBeenCalled();
+    expect(f.callbacks.closeRequested).not.toHaveBeenCalled();
+    f.ready();
+    expect(f.messages.slice(1)).toMatchObject([
+      {
+        MessageId: "Disable_Default_UIAction",
+        Values: { action: "UI_Save", disable: true },
+        origin: "https://office.example.test",
+      },
+      {
+        MessageId: "Disable_Default_UIAction",
+        Values: { action: "UI_Close", disable: true },
+        origin: "https://office.example.test",
+      },
+    ]);
+    f.receive("UI_Save");
+    f.receive("UI_SaveAs", { format: "docx" });
+    f.receive("UI_FileVersions");
+    f.receive("UI_Close", { EverModified: true });
+    expect(f.callbacks.saveRequested).toHaveBeenCalledTimes(1);
+    expect(f.callbacks.saveAsRequested).toHaveBeenCalledTimes(1);
+    expect(f.callbacks.historyRequested).toHaveBeenCalledTimes(1);
+    expect(f.callbacks.closeRequested).toHaveBeenCalledTimes(1);
+    // CODE's close is a request, not an ended channel; a close from another origin is ignored.
+    expect(f.callbacks.unavailable).not.toHaveBeenCalled();
+    f.receive("UI_Close", {}, "https://attacker.example.test");
+    expect(f.callbacks.closeRequested).toHaveBeenCalledTimes(1);
+    f.receive("Session_Closed", { Reason: "OwnerTermination" });
+    expect(f.callbacks.unavailable).toHaveBeenCalledWith("closed");
+  });
+  it("the launch URL asks for the full notebookbar UI with CODE's close and revision controls, on the service's URL", () => {
+    const action =
+      "https://office.example.test/browser/abc/cool.html?WOPISrc=https%3A%2F%2Fmeri.example.test%2Fapi%2Fmeri%2Foffice%2Fwopi%2Ffiles%2Fdraft";
+    const url = new URL(codeLaunchUrl(action, "en-GB"));
+    expect(url.origin + url.pathname).toBe(
+      "https://office.example.test/browser/abc/cool.html",
+    );
+    expect(url.searchParams.getAll("WOPISrc")).toEqual([
+      "https://meri.example.test/api/meri/office/wopi/files/draft",
+    ]);
+    expect(url.searchParams.get("ui_defaults")).toBe(
+      "UIMode=notebookbar;SavedUIState=false",
+    );
+    expect(url.searchParams.get("closebutton")).toBe("1");
+    expect(url.searchParams.get("revisionhistory")).toBe("1");
+    expect(url.searchParams.get("lang")).toBe("en-GB");
+    expect(url.searchParams.has("access_token")).toBe(false);
+    expect(
+      new URL(codeLaunchUrl(action, "not a tag")).searchParams.has("lang"),
+    ).toBe(false);
+  });
+  it("grants the frame's features to the editor origin explicitly, since a form-posted frame has no src to match", () => {
+    expect(codeFrameAllow("https://office.example.test")).toBe(
+      "fullscreen https://office.example.test; clipboard-read https://office.example.test; clipboard-write https://office.example.test",
+    );
+    expect(
+      codeFrameAllow("https://office.example.test/browser/x/cool.html"),
+    ).toBe(codeFrameAllow("https://office.example.test"));
   });
 });

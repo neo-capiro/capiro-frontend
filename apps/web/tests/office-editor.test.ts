@@ -83,6 +83,15 @@ function fixture() {
       calls.push({ route, input });
       if (route === "launch" || route === "renew")
         saved = { ...saved, editor: snapshot(0, selection.editorId).editor };
+      if (route === "publish")
+        saved = {
+          ...saved,
+          draft: {
+            ...saved.draft,
+            state: "published",
+            publishedVersionId: "published",
+          },
+        };
       if (route === "release")
         saved = {
           ...saved,
@@ -116,12 +125,14 @@ function fixture() {
     },
   };
   const published = vi.fn(),
-    discarded = vi.fn();
+    discarded = vi.fn(),
+    closed = vi.fn();
   const editor = new OfficeEditorController({
     selection,
     frame,
     onPublished: published,
     onDiscarded: discarded,
+    onClosed: closed,
   });
   editor.bind(port);
   return {
@@ -131,6 +142,7 @@ function fixture() {
     calls,
     published,
     discarded,
+    closed,
     setSaved: (value: OfficeSnapshot) => {
       saved = value;
     },
@@ -140,7 +152,7 @@ function fixture() {
 describe("attended Office state", () => {
   beforeEach(() => vi.useFakeTimers());
   afterEach(() => vi.useRealTimers());
-  it("Save waits for frame acknowledgement and a current Core read; Publish needs a separate released-editor action", async () => {
+  it("Save waits for frame acknowledgement and a current Core read; closing publishes the saved draft once and Publish never repeats it", async () => {
     const f = fixture();
     await f.editor.open();
     f.editor.ready();
@@ -164,14 +176,15 @@ describe("attended Office state", () => {
     expect(JSON.stringify(f.editor.getSnapshot())).not.toContain(
       "synthetic-secret",
     );
-    f.editor.modified(true);
-    await f.editor.finish();
-    expect(f.calls.at(-1)?.route).toBe("read");
     f.editor.modified(false);
-    await f.editor.finish();
-    expect(f.calls.at(-1)?.route).toBe("release");
+    await f.editor.close();
+    expect(f.calls.slice(-2).map((c) => c.route)).toEqual([
+      "release",
+      "publish",
+    ]);
+    // The close published the saved draft without telling the route to reopen; the person only closed.
     expect(f.published).not.toHaveBeenCalled();
-    await f.editor.publish();
+    expect(f.closed).toHaveBeenCalledTimes(1);
     expect(f.calls.at(-1)).toEqual({
       route: "publish",
       input: {
@@ -181,9 +194,9 @@ describe("attended Office state", () => {
         sha256: "b".repeat(64),
       },
     });
-    expect(f.published).toHaveBeenCalledTimes(1);
     await f.editor.publish();
-    expect(f.published).toHaveBeenCalledTimes(1);
+    expect(f.calls.filter((c) => c.route === "publish")).toHaveLength(1);
+    expect(f.published).not.toHaveBeenCalled();
   });
   it("a successful frame response cannot invent a saved revision", async () => {
     const f = fixture();
@@ -349,7 +362,7 @@ describe("attended Office state", () => {
     const f = fixture();
     f.setSaved(snapshot(1, "another-editor"));
     await f.editor.open();
-    await f.editor.finish();
+    await f.editor.close();
     expect(f.calls.map((c) => c.route)).toEqual(["open"]);
     expect(f.editor.ownsEditor()).toBe(false);
     await f.editor.open(true);
@@ -402,5 +415,136 @@ describe("attended Office state", () => {
     expect(f.frame.launch).not.toHaveBeenCalled();
     expect(f.discarded).toHaveBeenCalledTimes(1);
     expect(f.editor.getSnapshot().snapshot).toBeNull();
+  });
+  it("CODE's Save As publishes the next revision through the same confirmed Save, release and publish sequence", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    f.frame.save.mockImplementationOnce(async () => {
+      f.setSaved(snapshot(1, selection.editorId));
+    });
+    await f.editor.publishRevision();
+    expect(f.calls.map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "read",
+      "read",
+      "release",
+      "publish",
+    ]);
+    expect(f.frame.save).toHaveBeenCalledTimes(1);
+    expect(f.published).toHaveBeenCalledTimes(1);
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      notice: "Revision published.",
+    });
+    // Nothing more to publish from this draft: a repeated request neither saves nor publishes again.
+    await f.editor.publishRevision();
+    expect(f.published).toHaveBeenCalledTimes(1);
+    expect(f.calls.filter((c) => c.route === "publish")).toHaveLength(1);
+  });
+  it("CODE's close saves pending changes, releases the editor and reports the close; an unmodified close only releases", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    f.frame.save.mockImplementationOnce(async () => {
+      f.setSaved(snapshot(1, selection.editorId));
+    });
+    await f.editor.close();
+    expect(f.calls.map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "read",
+      "read",
+      "release",
+      "publish",
+    ]);
+    expect(f.closed).toHaveBeenCalledTimes(1);
+    expect(f.frame.dispose).toHaveBeenCalled();
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      modified: false,
+    });
+    expect(f.published).not.toHaveBeenCalled();
+    await f.editor.open();
+    f.editor.ready();
+    await f.editor.close();
+    // A released lease is gone: reopening acquires a new launch; a published, unmodified draft only releases.
+    expect(f.calls.slice(6).map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "release",
+    ]);
+    expect(f.closed).toHaveBeenCalledTimes(2);
+  });
+  it("the leave guard's close keeps the host's navigation out and reports whether it was confirmed; edits count as unsaved while a Save is in flight", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    const ack = deferred<void>();
+    f.frame.save.mockImplementationOnce(() => ack.promise);
+    const closing = f.editor.close(false);
+    await vi.waitFor(() => expect(f.frame.save).toHaveBeenCalledTimes(1));
+    expect(f.editor.getSnapshot().saving).toBe(true);
+    f.setSaved(snapshot(1, selection.editorId));
+    ack.resolve();
+    await expect(closing).resolves.toBe(true);
+    expect(f.editor.getSnapshot().saving).toBe(false);
+    expect(f.closed).not.toHaveBeenCalled();
+    expect(f.calls.map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "read",
+      "read",
+      "release",
+      "publish",
+    ]);
+    // A close the service did not confirm resolves false, closes the frame and leaves the recovery notice.
+    const g = fixture();
+    await g.editor.open();
+    g.editor.ready();
+    g.editor.modified(true);
+    const failing = g.editor.close(false);
+    await vi.advanceTimersByTimeAsync(5_000);
+    await expect(failing).resolves.toBe(false);
+    expect(g.closed).not.toHaveBeenCalled();
+    expect(g.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      uncertain: true,
+      saving: false,
+    });
+    expect(g.calls.filter((c) => c.route === "release")).toHaveLength(0);
+    // A Save without modified edits never counts as unsaved work.
+    const h = fixture();
+    await h.editor.open();
+    h.editor.ready();
+    const ready = deferred<void>();
+    h.frame.save.mockImplementationOnce(() => ready.promise);
+    const saving = h.editor.save();
+    await vi.waitFor(() => expect(h.frame.save).toHaveBeenCalledTimes(1));
+    expect(h.editor.getSnapshot().saving).toBe(false);
+    h.setSaved(snapshot(1, selection.editorId));
+    ready.resolve();
+    await saving;
+  });
+  it("an earlier revision opens read-only: a view launch, and Save, Save As and Publish do nothing", async () => {
+    const f = fixture();
+    await f.editor.open(false, "view");
+    expect(f.calls.at(-1)).toMatchObject({
+      route: "launch",
+      input: { mode: "view", operation: "acquire" },
+    });
+    f.editor.ready();
+    expect(f.editor.getSnapshot().mode).toBe("view");
+    await f.editor.save();
+    await f.editor.publishRevision();
+    expect(f.frame.save).not.toHaveBeenCalled();
+    expect(f.calls.filter((c) => c.route === "publish")).toHaveLength(0);
+    await f.editor.close();
+    expect(f.calls.map((c) => c.route)).toEqual(["open", "launch", "release"]);
+    expect(f.closed).toHaveBeenCalledTimes(1);
   });
 });

@@ -45,5 +45,4 @@ export type OfficeVersionTarget = Readonly<{
   mimeType: string;
   binding: Readonly<{ conversationId: string }>;
   scopes: readonly Readonly<{ kind: string; resourceId: string }>[];
-  note: string;
 }>;
