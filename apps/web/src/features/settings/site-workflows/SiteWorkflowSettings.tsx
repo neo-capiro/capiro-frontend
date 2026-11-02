@@ -26,12 +26,17 @@ export function SiteWorkflowSettings({
       error={query.error}
       onRetry={query.reload}
     >
-      <SettingsButton small onClick={query.reload}>Refresh workflows</SettingsButton>
+      <SettingsButton small onClick={query.reload}>
+        Refresh workflows
+      </SettingsButton>
       <SettingsNotice title="Website workflows for this workspace">
         Configure the websites and named tasks Meri may use. Enabling a workflow
         requires recorded terms review and website qualification. Browser host
-        readiness and the platform's destination restrictions still apply.
+        readiness and the platform&apos;s destination restrictions still apply.
       </SettingsNotice>
+      {query.data && !query.data.workflows.length && (
+        <p className={styles.empty}>No site workflows yet. Create one below.</p>
+      )}
       <SettingField label="Workflow">
         <select
           className={styles.input}

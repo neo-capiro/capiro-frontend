@@ -27,6 +27,16 @@ type Item = OperationResponse<
   (typeof analystOperations)["settings.analyst.reconciliation.list"]
 >["data"][number];
 
+const deltaPct = new Intl.NumberFormat("en-US", {
+  maximumFractionDigits: 2,
+  signDisplay: "negative",
+});
+
+export function formatDeltaPct(value: Item["deltaPct"]) {
+  const number = value === null || value === "" ? NaN : Number(value);
+  return Number.isFinite(number) ? `${deltaPct.format(number)}%` : "—";
+}
+
 export function ReconciliationQueue() {
   const { api, action, pending, reconcile, locked } = useSettingsMutation(
     "analyst-reconciliation",
@@ -123,8 +133,7 @@ export function ReconciliationQueue() {
               {
                 key: "delta",
                 label: "Δ%",
-                render: (row) =>
-                  row.deltaPct === null ? "—" : `${row.deltaPct}%`,
+                render: (row) => formatDeltaPct(row.deltaPct),
               },
               {
                 key: "status",
