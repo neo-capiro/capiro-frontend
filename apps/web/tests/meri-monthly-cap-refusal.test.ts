@@ -39,7 +39,7 @@ afterEach(() => {
 });
 
 const message =
-  "Your workspace has reached its monthly Meri limit. An admin can raise it in Settings → Usage.";
+  "Your workspace has reached its monthly Meri limit. An admin can raise it in Settings → Meri workspace preferences → Usage and limits.";
 const capReached = new ConversationUnavailable(MONTHLY_CAP_REACHED, 429);
 const context = {
   tenantId: "synthetic-tenant",
@@ -161,7 +161,9 @@ it("a reached cap releases the retained request but keeps the draft, and shows t
     }),
   );
   expect(html).toContain("Your workspace has reached its monthly Meri limit.");
-  expect(html).toContain("An admin can raise it in Settings → Usage.");
+  expect(html).toContain(
+    "An admin can raise it in Settings → Meri workspace preferences → Usage and limits.",
+  );
   expect(html).not.toContain(MONTHLY_CAP_REACHED);
   expect(html).not.toMatch(/not reachable|Retry|could not finish/);
   expect(buttons).toHaveLength(0);

@@ -107,6 +107,6 @@ export function describeSkillRefusal(refusal: SkillRefusal) {
 /** The one sentence shown next to the composer for any send refusal; the raw code never appears. */
 export function describeSendRefusal(refusal: SendRefusal) {
   return refusal.code === MONTHLY_CAP_REACHED
-    ? "Your workspace has reached its monthly Meri limit. An admin can raise it in Settings → Usage."
+    ? "Your workspace has reached its monthly Meri limit. An admin can raise it in Settings → Meri workspace preferences → Usage and limits."
     : describeSkillRefusal(refusal);
 }
