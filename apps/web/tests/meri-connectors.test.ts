@@ -12,6 +12,8 @@ import {
   cardCommand,
   connectGate,
   connectedServiceRow,
+  connectedServiceRows,
+  connectorTitle,
   connectionEndAction,
   libraryCards,
   libraryNotice,
@@ -275,11 +277,38 @@ describe("stored connectors", () => {
     });
   });
 
-  it("names the row by its library entry, falling back to the stored name", () => {
+  it("names the row by its library entry, else by a title derived from the stored id", () => {
     expect(connectedServiceRow(storedRow(), "Notion").service).toBe("Notion");
-    expect(connectedServiceRow(storedRow({ name: "notion-mcp" })).service).toBe(
-      "notion-mcp",
+    expect(
+      connectedServiceRow(storedRow({ name: "notion-mcp", catalogId: null }))
+        .service,
+    ).toBe("Notion MCP");
+    expect(
+      connectedServiceRows(
+        [storedRow({ name: "meriv3-airtable", catalogId: "meriv3-airtable" })],
+        [{ id: "meriv3-airtable", name: "Airtable (reviewed)" } as never],
+      )[0]!.service,
+    ).toBe("Airtable (reviewed)");
+    expect(
+      connectedServiceRows(
+        [storedRow({ name: "meriv3-airtable", catalogId: "meriv3-airtable" })],
+        [],
+      )[0]!.service,
+    ).toBe("Airtable");
+  });
+
+  it("derives a readable title from a catalog id and never shows the raw id", () => {
+    const title = (name: string, catalogId: string | null = name) =>
+      connectorTitle({ name, catalogId });
+    expect(title("meriv3-airtable")).toBe("Airtable");
+    expect(title("meriv3-google-drive")).toBe("Google Drive");
+    expect(title("meriv3-github")).toBe("GitHub");
+    expect(title("hubspot_crm")).toBe("HubSpot CRM");
+    expect(title("notion", null)).toBe("Notion");
+    expect(title("My Notion workspace", "meriv3-notion")).toBe(
+      "My Notion workspace",
     );
+    expect(title("meriv3-")).toBe("meriv3-");
   });
 });
 

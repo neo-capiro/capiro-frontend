@@ -363,3 +363,83 @@ test("synthetic General mixed selectors never bootstrap or issue a session", asy
 
   expect(f.unexpected).toEqual([]);
 });
+
+const newConversation = (page: Page) =>
+  page.getByRole("button", { name: "New conversation", exact: true });
+
+test("a send whose delivery is uncertain makes the bare General link a new conversation", async ({
+  page,
+}) => {
+  const f = await general(page);
+  const request = (index: number) =>
+    (f.bootstrap[index] as { requestId: string }).requestId;
+  await page.route("**/api/conversations/submit", (route) => route.abort());
+
+  await page.goto("/meri?scope=general");
+  await expect(page).toHaveURL(
+    new RegExp(`conversationId=${binding.conversationId}`),
+  );
+  await composer(page).fill("Unconfirmed request");
+  await expect(sendButton(page)).toBeEnabled();
+  await sendButton(page).click();
+  await expect(
+    page.getByText("Delivery is uncertain", { exact: false }),
+  ).toBeVisible();
+
+  // Attempted is enough: the bare link never reopens a conversation holding an unconfirmed send.
+  await page.goto("/meri?scope=general");
+  await expect.poll(() => f.bootstrap.length).toBe(2);
+  expect(request(1)).not.toBe(request(0));
+  expect(f.unexpected).toEqual([]);
+});
+
+test("New conversation from a conversation with a message opens a new one", async ({
+  page,
+}) => {
+  const f = await general(page);
+  const request = (index: number) =>
+    (f.bootstrap[index] as { requestId: string }).requestId;
+
+  await page.goto("/meri?scope=general");
+  await composer(page).fill("General synthetic request");
+  await expect(sendButton(page)).toBeEnabled();
+  await sendButton(page).click();
+  await expect(
+    page.getByText("Initial synthetic answer", { exact: true }),
+  ).toBeVisible();
+
+  await newConversation(page).click();
+  await expect.poll(() => f.bootstrap.length).toBe(2);
+  expect(request(1)).not.toBe(request(0));
+  await expect(page).toHaveURL(
+    new RegExp(`scope=general&conversationId=${binding.conversationId}`),
+  );
+  expect(f.unexpected).toEqual([]);
+});
+
+test("New conversation from the still-empty conversation reopens it with the composer ready", async ({
+  page,
+}) => {
+  const f = await general(page);
+  const request = (index: number) =>
+    (f.bootstrap[index] as { requestId: string }).requestId;
+
+  await page.goto("/meri?scope=general");
+  await expect(page).toHaveURL(
+    new RegExp(`scope=general&conversationId=${binding.conversationId}`),
+  );
+  await expect(composer(page)).toBeFocused();
+  await newConversation(page).focus();
+  await expect(composer(page)).not.toBeFocused();
+
+  await newConversation(page).click();
+  await expect.poll(() => f.bootstrap.length).toBe(2);
+  expect(request(1)).toBe(request(0));
+  await expect(page).toHaveURL(
+    new RegExp(`scope=general&conversationId=${binding.conversationId}`),
+  );
+  await expect(composer(page)).toBeFocused();
+  await expect(composer(page)).toHaveValue("");
+  expect(f.native.calls.allocate).toEqual([]);
+  expect(f.unexpected).toEqual([]);
+});

@@ -2,6 +2,10 @@ import { ConversationUnavailable } from "@capiro/meri-client/conversation";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationIntent } from "../../../shared/meri-conversations/query-journal";
 import {
+  firstChatScopeOf,
+  markFirstChatIntentUsed,
+} from "../../../shared/meri-conversations/first-chat-intent";
+import {
   storedSubmission,
   submissionIdentity,
   skillSelectionFields,
@@ -87,6 +91,8 @@ export async function sendRequest(
   onRecorded?: (request: ConversationSubmitRequest) => void,
   modelSelection?: ConversationSubmitRequest["modelSelection"],
   selection: ConversationSkillSelection = {},
+  /** Where the scope's first-chat intent lives; the conversation counts as used from here on. */
+  intentStorage?: Pick<Storage, "getItem" | "setItem">,
 ) {
   const retained = intent.read().submit;
   if ((!retry && retained) || (retry && !retained))
@@ -122,6 +128,13 @@ export async function sendRequest(
     ...request,
     ...(workflow ? { workflow: "initial" as const } : {}),
   };
+  // Attempted is enough: a scope opening must never reuse a conversation whose send is unconfirmed.
+  if (intentStorage)
+    markFirstChatIntentUsed(
+      firstChatScopeOf(port.context),
+      port.context.conversationId,
+      intentStorage,
+    );
   intent.write({ ...intent.read(), submit: { ...journal, state: "pending" } });
   try {
     if (!retry) onRecorded?.(request);

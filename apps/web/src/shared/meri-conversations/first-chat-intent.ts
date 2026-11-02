@@ -18,6 +18,18 @@ export const firstChatScope = z.union([
 const scopeSchema = firstChatScope;
 export type FirstChatScope = z.infer<typeof scopeSchema>;
 
+/** The scope a bound conversation context belongs to: General, or the selected client. */
+export function firstChatScopeOf(context: {
+  tenantId: string;
+  actorId: string;
+  selectedClientId: string | null;
+}): FirstChatScope {
+  const { tenantId, actorId, selectedClientId } = context;
+  return selectedClientId === null
+    ? { tenantId, actorId, scopeKind: "general", clientId: null }
+    : { tenantId, actorId, clientId: selectedClientId };
+}
+
 const identity = {
   version: z.literal(1),
   scope: scopeSchema,
@@ -29,7 +41,7 @@ const intentSchema = z.discriminatedUnion("state", [
     ...identity,
     state: z.literal("confirmed"),
     conversationId: uuid,
-    /** The conversation received its first message; the next opening of the scope is a new one. */
+    /** A message was sent to the conversation; the next opening of the scope is a new one. */
     used: z.boolean().optional(),
   }),
 ]);
@@ -104,9 +116,9 @@ function freshId(issueId: () => string) {
 
 /**
  * The one request identity for opening a scope: a request whose outcome is unknown is replayed,
- * a confirmed conversation that has not received a message yet is reopened (reload, a second
- * visit, New conversation while it is still empty), and anything else is a new request. Persist
- * and read back before the Core POST.
+ * a confirmed conversation no message was sent to yet is reopened (reload, a second visit, New
+ * conversation while it is still empty), and anything else is a new request. Persist and read
+ * back before the Core POST.
  */
 export function reserveFirstChatIntent(
   scope: FirstChatScope,
@@ -164,8 +176,33 @@ export function confirmFirstChatIntent(
 }
 
 /**
- * The conversation received its first message (or Core refused to reopen it): the scope's next
- * opening starts a new one. Storage trouble here costs at most one extra conversation later.
+ * New conversation. The scope's still-empty confirmed conversation is reopened only while the
+ * person is in it; any other confirmed record is superseded so the opening is a new request. A
+ * pending record (an outcome still unknown) is kept for the resolver to replay, never rotated.
+ * Storage trouble here costs at most one reopened empty conversation.
+ */
+export function prepareNewConversation(
+  scope: FirstChatScope,
+  currentConversationId: string | null,
+  storage: IntentStorage,
+  issueId: () => string = () => crypto.randomUUID(),
+): "reopen" | "new" {
+  try {
+    const existing = readFirstChatIntent(scope, storage);
+    if (!existing || existing.state === "pending") return "new";
+    if (!existing.used && existing.conversationId === currentConversationId)
+      return "reopen";
+    supersedeFirstChatIntent(scope, storage, issueId);
+  } catch {
+    // The resolver reports storage it cannot read or write.
+  }
+  return "new";
+}
+
+/**
+ * A message was sent to the conversation, whatever its outcome (or Core refused to reopen it):
+ * the scope's next opening starts a new one. Storage trouble here costs at most one extra
+ * conversation later.
  */
 export function markFirstChatIntentUsed(
   scope: FirstChatScope,

@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { testIdentity } from "./fixtures";
 import {
   binding,
@@ -10,48 +10,53 @@ import {
 
 const first = binding.conversationId;
 const second = "30000000-0000-4000-8000-000000000014";
-const third = "30000000-0000-4000-8000-000000000015";
 
-async function enableFirstChat(page: import("@playwright/test").Page) {
+async function enableFirstChat(page: Page) {
   await page.addInitScript(() =>
     sessionStorage.setItem("meri-first-chat-enabled", "true"),
   );
 }
 
-test("synthetic: desktop and phone New conversation each bootstrap a fresh client-bound intent", async ({
-  page,
-}) => {
-  const fixture = await setupConversation(page, undefined, [
-    contextFor(binding),
-    contextFor({ ...binding, conversationId: second }),
-    contextFor({ ...binding, conversationId: third }),
-  ]);
-  await enableFirstChat(page);
-  const requests: Array<{ requestId: string; clientId: string }> = [];
-  const conversations = [first, second, third];
+/** Core creates one conversation per request id and reopens it for the same id. */
+async function bootstrap(page: Page, conversations: readonly string[]) {
+  const requests: string[] = [];
+  const byRequest = new Map<string, string>();
   await page.route("**/api/capiro/meri.conversation.bootstrap", (route) => {
     const { body } = route.request().postDataJSON() as {
       body: { schemaVersion: 1; requestId: string; clientId: string };
     };
-    requests.push(body);
+    requests.push(body.requestId);
+    if (!byRequest.has(body.requestId))
+      byRequest.set(body.requestId, conversations[byRequest.size]!);
     return reply(route, {
       schemaVersion: 1,
       requestId: body.requestId,
-      conversationId: conversations[requests.length - 1],
+      conversationId: byRequest.get(body.requestId),
       tenantId: testIdentity.tenant.id,
       actorId: testIdentity.user.id,
       clientId: body.clientId,
     });
   });
+  return requests;
+}
+
+const newConversation = (page: Page) =>
+  page.getByRole("button", { name: "New conversation", exact: true });
+
+test("synthetic: desktop and phone New conversation reopen the still-empty client conversation", async ({
+  page,
+}) => {
+  const fixture = await setupConversation(page, undefined, [contextFor()]);
+  await enableFirstChat(page);
+  const requests = await bootstrap(page, [first, second]);
 
   await page.goto(`/meri?clientId=${clientId}`);
+  await expect(page).toHaveURL(new RegExp(`conversationId=${first}$`));
   await expect.poll(() => fixture.hints.length).toBe(1);
-  const desktop = page.getByRole("button", {
-    name: "New conversation",
-    exact: true,
-  });
-  await expect(desktop).toBeEnabled();
-  await desktop.click();
+  await expect(newConversation(page)).toBeEnabled();
+  await newConversation(page).click();
+  await expect.poll(() => requests.length).toBe(2);
+  await expect(page).toHaveURL(new RegExp(`conversationId=${first}$`));
   await expect.poll(() => fixture.hints.length).toBe(2);
 
   await page.setViewportSize({ width: 390, height: 844 });
@@ -61,23 +66,19 @@ test("synthetic: desktop and phone New conversation each bootstrap a fresh clien
     .getByRole("button", { name: "New conversation", exact: true });
   await expect(phone).toBeEnabled();
   await phone.click();
+  await expect.poll(() => requests.length).toBe(3);
+  await expect(page).toHaveURL(new RegExp(`conversationId=${first}$`));
   await expect.poll(() => fixture.hints.length).toBe(3);
 
-  expect(requests.map((request) => request.clientId)).toEqual([
-    clientId,
-    clientId,
-    clientId,
-  ]);
-  expect(new Set(requests.map((request) => request.requestId)).size).toBe(3);
-  expect(fixture.hints).toEqual([
-    { clientId, conversationId: first },
-    { clientId, conversationId: second },
-    { clientId, conversationId: third },
-  ]);
+  expect(new Set(requests).size).toBe(1);
+  // A reopened conversation resumes with its run; the first opening has none yet.
+  expect(fixture.hints[0]).toEqual({ clientId, conversationId: first });
+  for (const hint of fixture.hints.slice(1))
+    expect(hint).toMatchObject({ clientId, conversationId: first });
   expect(fixture.unexpected).toEqual([]);
 });
 
-test("synthetic: New conversation leaves a selected history link and does not rotate an unknown bootstrap", async ({
+test("synthetic: New conversation from a selected history link opens a new conversation", async ({
   page,
 }) => {
   const fixture = await setupConversation(page, undefined, [
@@ -85,34 +86,22 @@ test("synthetic: New conversation leaves a selected history link and does not ro
     contextFor({ ...binding, conversationId: second }),
   ]);
   await enableFirstChat(page);
-  let requests = 0;
-  await page.route("**/api/capiro/meri.conversation.bootstrap", (route) => {
-    requests++;
-    const { body } = route.request().postDataJSON() as {
-      body: { requestId: string; clientId: string };
-    };
-    return reply(route, {
-      schemaVersion: 1,
-      requestId: body.requestId,
-      conversationId: second,
-      tenantId: testIdentity.tenant.id,
-      actorId: testIdentity.user.id,
-      clientId: body.clientId,
-    });
-  });
+  const requests = await bootstrap(page, [second]);
+
   await page.goto(`/meri?clientId=${clientId}&conversationId=${first}`);
   await expect.poll(() => fixture.hints.length).toBe(1);
-  await page
-    .getByRole("button", { name: "New conversation", exact: true })
-    .click();
+  expect(requests).toHaveLength(0);
+  await newConversation(page).click();
   await expect.poll(() => fixture.hints.length).toBe(2);
-  await expect(page).toHaveURL(new RegExp(`/meri\\?clientId=${clientId}$`));
-  expect(requests).toBe(1);
+  await expect(page).toHaveURL(
+    new RegExp(`/meri\\?clientId=${clientId}&conversationId=${second}$`),
+  );
+  expect(requests).toHaveLength(1);
   expect(fixture.hints[1]).toEqual({ clientId, conversationId: second });
   expect(fixture.unexpected).toEqual([]);
 });
 
-test("synthetic: an unknown Core bootstrap outcome keeps its request ID and refuses New conversation", async ({
+test("synthetic: an unknown Core bootstrap outcome keeps its request ID through New conversation and retry", async ({
   page,
 }) => {
   await setupConversation(page);
@@ -125,17 +114,17 @@ test("synthetic: an unknown Core bootstrap outcome keeps its request ID and refu
     requests.push(body.requestId);
     return reply(route, { message: "Service unavailable" }, 503);
   });
+
   await page.goto(`/meri?clientId=${clientId}`);
-  await expect(
-    page.getByRole("heading", { name: "Conversation connection unavailable" }),
-  ).toBeVisible();
-  await page
-    .getByRole("button", { name: "New conversation", exact: true })
-    .click();
-  await expect(
-    page.getByRole("alert").filter({
-      hasText: "previous conversation request has an unknown outcome",
-    }),
-  ).toBeVisible();
+  const unavailable = page.getByRole("heading", {
+    name: "Conversation connection unavailable",
+  });
+  await expect(unavailable).toBeVisible();
+  await newConversation(page).click();
+  await expect(unavailable).toBeVisible();
   expect(requests).toHaveLength(1);
+
+  await page.getByRole("button", { name: "Retry conversation" }).click();
+  await expect.poll(() => requests.length).toBe(2);
+  expect(new Set(requests).size).toBe(1);
 });

@@ -11,6 +11,12 @@ import {
 } from "../src/features/meri/conversation/run-commands";
 import type { MeriConversationPort } from "../src/shared/meri-conversations/host-controller";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
+import {
+  confirmFirstChatIntent,
+  firstChatScopeOf,
+  readFirstChatIntent,
+  reserveFirstChatIntent,
+} from "../src/shared/meri-conversations/first-chat-intent";
 
 const context = {
   tenantId: "synthetic-tenant",
@@ -322,5 +328,52 @@ it("history with changed request identity, prompt, requested window or selected 
     ).rejects.toMatchObject({ code: "retained-submit-mismatch" });
     expect(journal.read().submit).toEqual(input);
   }
+  cache.clear();
+});
+
+it("an attempted send marks the scope's first-chat conversation used before it is dispatched", async () => {
+  const cache = new QueryClient(),
+    journal = conversationIntentJournal(cache, context);
+  const entries = new Map<string, string>();
+  const storage = {
+    getItem: (key: string) => entries.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      entries.set(key, value);
+    },
+  };
+  const scope = firstChatScopeOf(context);
+  const requestId = "50000000-0000-4000-8000-000000000005";
+  reserveFirstChatIntent(scope, storage, () => requestId);
+  confirmFirstChatIntent(scope, requestId, context.conversationId, storage);
+  const submitInitial = vi.fn(async () => {
+    expect(readFirstChatIntent(scope, storage)).toMatchObject({ used: true });
+    throw new Error("lost ACK");
+  });
+  const port = {
+    context,
+    submit: vi.fn(),
+    submitInitial,
+    getSnapshot: () => ({ submit: "idle" }),
+  } as unknown as MeriConversationPort;
+  await expect(
+    sendRequest(
+      port,
+      journal,
+      "First attempt",
+      false,
+      true,
+      undefined,
+      undefined,
+      {},
+      storage,
+    ),
+  ).rejects.toThrow("lost ACK");
+  expect(submitInitial).toHaveBeenCalledOnce();
+  expect(journal.read().submit).toMatchObject({ state: "unknown" });
+  expect(readFirstChatIntent(scope, storage)).toMatchObject({
+    state: "confirmed",
+    conversationId: context.conversationId,
+    used: true,
+  });
   cache.clear();
 });

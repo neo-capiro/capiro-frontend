@@ -23,7 +23,6 @@ import { shouldShowPrompt } from "./prompt-identity";
 import type { InitialDraftOwner } from "./initial-draft";
 import styles from "./live.module.css";
 import type { ConversationSkillSelection } from "../../../shared/meri-conversations/query-journal";
-import { markFirstChatIntentUsed } from "../../../shared/meri-conversations/first-chat-intent";
 import {
   useRunLifecycle,
   type LifecycleTarget,
@@ -275,8 +274,8 @@ function CurrentRunStatus({
 }
 
 /**
- * A finished run needs no announcement: the composer is already open. If nothing else holds focus,
- * the cursor returns to it so the next message can be typed at once.
+ * A finished run or a newly opened empty conversation needs no announcement: the composer is
+ * already open. If nothing else holds focus, the cursor goes to it so a message can be typed at once.
  */
 function useComposerReturn(
   ready: boolean,
@@ -405,7 +404,10 @@ export function MeriLiveConversation({
   const retentionError =
     storageError ?? initialDraft.error() ?? run.storageError;
   useComposerReturn(
-    availability.readyForNext && !retentionError && !lifecycle.blocked,
+    (availability.readyForNext ||
+      (availability.initial && !availability.sendBlocked)) &&
+      !retentionError &&
+      !lifecycle.blocked,
     textareaRef,
   );
   const controlsHeld =
@@ -443,23 +445,6 @@ export function MeriLiveConversation({
     if (newIntentBlocked) return;
     const prompt = draft.trim();
     if (availability.initial) {
-      // The scope's next opening starts a new conversation once this one has a message.
-      markFirstChatIntentUsed(
-        port.context.selectedClientId === null
-          ? {
-              tenantId: port.context.tenantId,
-              actorId: port.context.actorId,
-              scopeKind: "general",
-              clientId: null,
-            }
-          : {
-              tenantId: port.context.tenantId,
-              actorId: port.context.actorId,
-              clientId: port.context.selectedClientId,
-            },
-        port.context.conversationId,
-        window.sessionStorage,
-      );
       void run.submitInitial(
         prompt,
         (request) => initialDraft.begin(port.context, request, draft),

@@ -5,10 +5,8 @@ import {
 } from "../src/shared/build/build-identity.server";
 
 const frontend = "1234567890abcdef1234567890abcdef12345678";
-const core = "abcdef1234567890abcdef1234567890abcdef12";
-const meri = "fedcba0987654321fedcba0987654321fedcba09";
 
-it("prints the frontend commit always and Core/Meri only when configured", () => {
+it("prints the frontend commit only, never the configured Core or Meri sources", () => {
   expect(buildIdentityLine(readBuildIdentity({ GIT_SHA: frontend }))).toBe(
     "frontend 12345678",
   );
@@ -16,32 +14,15 @@ it("prints the frontend commit always and Core/Meri only when configured", () =>
     buildIdentityLine(
       readBuildIdentity({
         GIT_SHA: ` ${frontend} `,
-        CAPIRO_PREVIEW_READ_BACKEND_SOURCE: core,
-        CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE: core,
-        CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE: meri,
+        CAPIRO_PREVIEW_READ_BACKEND_SOURCE: "abcdef1234567890abcdef12",
+        CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE: "abcdef1234567890abcdef12",
+        CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE: "fedcba0987654321fedcba09",
       }),
     ),
-  ).toBe("frontend 12345678 · core abcdef12 · meri fedcba09");
-  expect(
-    buildIdentityLine(
-      readBuildIdentity({
-        GIT_SHA: frontend,
-        CAPIRO_PREVIEW_READ_BACKEND_SOURCE: core,
-        CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE: meri,
-        CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE: "",
-      }),
-    ),
-  ).toBe("frontend 12345678 · core abcdef12/fedcba09");
+  ).toBe("frontend 12345678");
 });
 
 it("prints nothing when the image did not record its commit", () => {
   expect(buildIdentityLine(readBuildIdentity({}))).toBeNull();
-  expect(
-    buildIdentityLine(
-      readBuildIdentity({
-        GIT_SHA: "  ",
-        CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE: meri,
-      }),
-    ),
-  ).toBeNull();
+  expect(buildIdentityLine(readBuildIdentity({ GIT_SHA: "  " }))).toBeNull();
 });
