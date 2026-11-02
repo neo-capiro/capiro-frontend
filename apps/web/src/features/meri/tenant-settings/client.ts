@@ -8,9 +8,12 @@ import {
 // No tenant-settings contract is exported by meri-contracts 0.1.39. Policies
 // remain opaque; the editor projects fields and the canonical owner validates.
 const positive = z.number().int().min(1).max(Number.MAX_SAFE_INTEGER);
+/** Platform ceiling for turns per query; the canonical owner refuses above it
+ * (meri-greenfield packages/contracts/run-limits.mjs MAX_RUN_TURNS). */
+export const MAX_TURNS = 1000;
 const modelSchema = z.object({
   monthlyCapMicroUsd: positive.nullable(),
-  maxTurns: positive.max(100),
+  maxTurns: positive.max(MAX_TURNS),
   maxBudgetMicroUsd: positive,
 });
 const responseSchema = z.object({
@@ -97,7 +100,7 @@ export function modelDraft(
     maxBudgetMicroUsd === null ||
     !Number.isInteger(maxTurns) ||
     maxTurns < 1 ||
-    maxTurns > 100
+    maxTurns > MAX_TURNS
   )
     return null;
   return { monthlyCapMicroUsd, maxBudgetMicroUsd, maxTurns };
