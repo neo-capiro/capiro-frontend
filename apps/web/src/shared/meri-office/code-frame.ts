@@ -105,8 +105,10 @@ export class CodeFrameChannel {
     clearTimeout(this.renewal);
     const renewIn = Math.max(1, remaining - Math.min(30_000, remaining / 2));
     this.expiry = setTimeout(() => this.stop("expired"), remaining);
-    // The launch form's TTL is the WOPI zero sentinel, so CODE runs no expiry countdown and posts no token warnings:
-    // this timer, armed from the signed expiry, is the one renewal request per token.
+    // This timer, armed from the signed expiry, is the only renewal request: one per token. The launch form's TTL is the
+    // WOPI zero sentinel, so CODE runs no expiry countdown and never posts App_TokenExpiring. CODE still posts
+    // App_TokenExpired when a save upload gets a 401 (with any TTL; it then waits 60 s for a new token and retries up to
+    // three times); the host ignores it, since this timer renews before the signed expiry and always fires first.
     this.renewal = setTimeout(() => this.options.callbacks.renew(), renewIn);
   }
   /** Both fields are mandatory. Sending does not establish that CODE accepted them. */
