@@ -65,6 +65,21 @@ function deferred<T>() {
   });
   return { promise, resolve };
 }
+/** The next request for `route` is refused before it reaches the service; every other request passes through. */
+function refuseOnce(port: OfficeTransport, route: OfficeRoute) {
+  const request = port.request;
+  port.request = (async (r, input, signal) => {
+    if (r !== route) return request(r, input, signal);
+    port.request = request;
+    return {
+      status: 502,
+      value: {
+        schema: "meri.office-application/1",
+        error: { code: "REFUSED", outcome: "NOT_DISPATCHED" },
+      },
+    };
+  }) as OfficeTransport["request"];
+}
 function fixture() {
   const frame = {
     launch: vi.fn(),
@@ -387,6 +402,118 @@ describe("attended Office state", () => {
     f.port.request = request;
     await f.editor.recover();
     expect(f.editor.getSnapshot().uncertain).toBe(false);
+  });
+  it("a refusal the service never received names its reason and asks for a retry, not a recovery", async () => {
+    const f = fixture();
+    const request = f.port.request;
+    f.port.request = vi.fn(async () => ({
+      status: 502,
+      value: {
+        schema: "meri.office-application/1",
+        error: { code: "REFUSED", outcome: "NOT_DISPATCHED" },
+      },
+    })) as OfficeTransport["request"];
+    await expect(f.editor.open()).resolves.toBe(false);
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      uncertain: false,
+      notice:
+        "The request did not reach the document service. Nothing changed; try again.",
+    });
+    f.port.request = request;
+    await expect(f.editor.open()).resolves.toBe(true);
+    expect(f.frame.launch).toHaveBeenCalledTimes(1);
+    // A refusal after dispatch may have taken effect: it names its reason and still needs recovery.
+    const g = fixture();
+    g.port.request = vi.fn(async () => ({
+      status: 503,
+      value: {
+        schema: "meri.office-application/1",
+        error: { code: "UNAVAILABLE", outcome: "UNKNOWN" },
+      },
+    })) as OfficeTransport["request"];
+    await g.editor.open();
+    expect(g.editor.getSnapshot()).toMatchObject({
+      uncertain: true,
+      notice:
+        "Document editing is unavailable right now. Recover the saved draft before continuing.",
+    });
+  });
+  it("a Save whose first request never reached the service keeps the open editor and its edits, and stays retryable", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    refuseOnce(f.port, "read");
+    await expect(f.editor.save()).resolves.toBe(false);
+    expect(f.frame.dispose).not.toHaveBeenCalled();
+    expect(f.frame.save).not.toHaveBeenCalled();
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: true,
+      ready: true,
+      modified: true,
+      uncertain: false,
+      notice:
+        "The request did not reach the document service. Nothing changed; try again.",
+    });
+    f.frame.save.mockImplementationOnce(async () => {
+      f.setSaved(snapshot(1, selection.editorId));
+    });
+    await expect(f.editor.save()).resolves.toBe(true);
+    expect(f.editor.getSnapshot().snapshot?.draft.sequence).toBe(1);
+    expect(f.editor.getSnapshot().notice).toContain("Save confirmed");
+  });
+  it("a close whose release never reached the service after a confirmed Save needs recovery, not a retry", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    f.frame.save.mockImplementationOnce(async () => {
+      f.setSaved(snapshot(1, selection.editorId));
+    });
+    refuseOnce(f.port, "release");
+    await expect(f.editor.close()).resolves.toBe(false);
+    expect(f.closed).not.toHaveBeenCalled();
+    expect(f.calls.map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "read",
+      "read",
+    ]);
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      uncertain: true,
+      notice:
+        "Earlier steps completed, but the last one did not reach the document service. Recover the saved draft before continuing.",
+    });
+    expect(f.editor.getSnapshot().snapshot?.draft.sequence).toBe(1);
+  });
+  it("Save As whose publish never reached the service after the Save and release needs recovery", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    f.frame.save.mockImplementationOnce(async () => {
+      f.setSaved(snapshot(1, selection.editorId));
+    });
+    refuseOnce(f.port, "publish");
+    await f.editor.publishRevision();
+    expect(f.calls.map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "read",
+      "read",
+      "release",
+    ]);
+    expect(f.published).not.toHaveBeenCalled();
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      uncertain: true,
+      notice:
+        "Earlier steps completed, but the last one did not reach the document service. Recover the saved draft before continuing.",
+    });
+    await f.editor.publish();
+    expect(f.calls.filter((c) => c.route === "publish")).toHaveLength(0);
   });
   it("frame expiry retires a pending operation before its fresh metadata can return", async () => {
     const f = fixture();
