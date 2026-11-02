@@ -1,4 +1,5 @@
 import type { ReconnectState } from "../../../shared/meri-conversations/reconnect-schedule";
+import type { ExpirationReason } from "../../../shared/meri-actions/opaque-session-controller";
 
 /**
  * How the Files page treats its session owner's state. Meri ends every file-access session itself shortly
@@ -20,7 +21,8 @@ export type LibraryConnectionPhase =
   | "lost";
 
 type Status = "idle" | "connecting" | "ready" | "unavailable" | "expired";
-type Reason = "renewal" | "expiry" | "access-lost" | undefined;
+// A file-access port never asks for a refused-credential renewal ("refused"); were it to, it reads as lost.
+type Reason = ExpirationReason | undefined;
 
 const transientStatus = (status: number | undefined) =>
   status !== undefined && (status === 408 || status === 429 || status >= 500);
