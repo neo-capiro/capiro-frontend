@@ -22,16 +22,16 @@ it("keeps both official IDs in the same calendar and preserves precise starts", 
     floridaHearing.id,
   ]);
   expect(rows.map((row) => row.calendarId)).toEqual(["US", "FL"]);
-  expect(rows[0].start.toString()).toContain("10:37:00-05:00");
-  expect(rows[1].start.toString()).toContain("13:45:00-05:00");
+  expect(rows[0]!.start.toString()).toContain("10:37:00-05:00");
+  expect(rows[1]!.start.toString()).toContain("13:45:00-05:00");
 });
 
 it("keeps unknown time on the official calendar date without inventing a start", () => {
   const [row] = calendarEvents([
     { ...floridaHearing, date: "2026-11-02", startsAt: null, time: null },
   ]);
-  expect(row.start.toString()).toBe("2026-11-02");
-  expect(row.title).toContain("Florida · Time TBA");
+  expect(row!.start.toString()).toBe("2026-11-02");
+  expect(row!.title).toContain("Florida · Time TBA");
 });
 
 it("preserves published hour-only times and rejects invalid clock values", () => {
