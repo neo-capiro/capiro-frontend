@@ -31,12 +31,9 @@ function documentTone(status: string) {
 
 export function WorkflowCards({
   onStart,
-  clientId,
 }: {
   clientId?: string;
-  onStart: (
-    view: "hillday" | "newsletter" | "rich-newsletter" | "templates",
-  ) => void;
+  onStart: (view: "hillday" | "newsletter" | "templates") => void;
 }) {
   return (
     <div>
@@ -55,15 +52,8 @@ export function WorkflowCards({
           </p>
           <footer>
             <p>Template → Edit → Review</p>
-            <ActionButton
-              onClick={() =>
-                onStart(clientId ? "newsletter" : "rich-newsletter")
-              }
-            >
-              Start
-            </ActionButton>
             <ActionButton onClick={() => onStart("newsletter")}>
-              Template gallery
+              Start
             </ActionButton>
           </footer>
         </article>

@@ -53,7 +53,6 @@ describe("Workspace native document navigation", () => {
     "templates",
     "hillday",
     "newsletter",
-    "rich-newsletter",
   ] as const)("restores the %s view from the current URL", (view) => {
     expect(read(`view=${view}&clientId=${otherId}`)).toEqual({
       kind: "view",
@@ -135,5 +134,12 @@ describe("Workspace native document navigation", () => {
     `officeRunId=${prospectId}`,
   ])("refuses malformed or conflicting route %s", (query) => {
     expect(read(query)).toEqual({ kind: "invalid" });
+  });
+});
+
+it("normalizes a historical rich link to the single Newsletter receiver", () => {
+  expect(read("view=rich-newsletter")).toEqual({
+    kind: "view",
+    view: "newsletter",
   });
 });

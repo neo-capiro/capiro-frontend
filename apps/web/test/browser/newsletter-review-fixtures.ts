@@ -6,7 +6,7 @@ import {
 } from "../../tests/newsletter-review-fixtures";
 
 export const reviewUrl = (id = reviewId) =>
-  `/modules/workspace?view=rich-newsletter&newsletterId=${id}`;
+  `/modules/workspace?view=newsletter&newsletterId=${id}`;
 export async function reviewPage(page: Page, role = "viewer") {
   const document = await documentFixture(page);
   const current = reviewFixture(role);

@@ -1,3 +1,4 @@
+import { openNewsletterDetails } from "./newsletter-workspace-fixtures";
 import { expect, test } from "@playwright/test";
 import {
   ordinarySaveFixture,
@@ -133,8 +134,9 @@ for (const width of [1440, 390]) {
     });
     await presentationFont(page);
     await page.goto(ordinaryEditorUrl);
+    await openNewsletterDetails(page);
     await page
-      .getByLabel("Document name", { exact: true })
+      .getByLabel("Newsletter name", { exact: true })
       .fill("Synthetic newsletter retained name");
     await page
       .getByLabel("Subject", { exact: true })

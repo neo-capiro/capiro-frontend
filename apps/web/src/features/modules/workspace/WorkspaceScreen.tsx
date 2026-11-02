@@ -14,7 +14,7 @@ import type { WorkspaceLibraryDocument } from "../../../shared/capiro/operations
 import { ActionButton, Modal } from "../../../shared/module-ui";
 import { HillDayEditor } from "./hillday/HillDayEditor";
 import { HillDayResume, HillDayWizard } from "./hillday/HillDayWizard";
-import { NewsletterWorkflow } from "./newsletter/NewsletterWorkflow";
+import { NewsletterEditor } from "./newsletter/NewsletterEditor";
 import { TemplateStudio } from "./templates/TemplateStudio";
 import { DocumentTemplateLibrary } from "./document-templates/DocumentTemplateLibrary";
 import styles from "./workspace.module.css";
@@ -23,7 +23,6 @@ import { WorkspaceDraft } from "./WorkspaceDraft";
 import { WorkspaceShares } from "./WorkspaceShares";
 import { WorkspaceInvitationEntry } from "./collaboration/WorkspaceInvitationInbox";
 import { ProspectWorkspace } from "./prospects/ProspectWorkspace";
-import { RichNewsletterEditor } from "./rich-newsletter/RichNewsletterEditor";
 import { NewsletterReviewEntry } from "./rich-newsletter/review/NewsletterReviewEntry";
 import { BriefCopyRoute } from "./brief-copy/BriefCopyRoute";
 import { EngagementTaskDetail } from "./EngagementTaskDetail";
@@ -212,10 +211,6 @@ export function WorkspaceScreen({
       </>
     );
   const view = route.view;
-  if (view === "rich-newsletter")
-    return (
-      <RichNewsletterEditor key={clientId ?? "unassigned"} onClose={back} />
-    );
   if (view === "hillday")
     return (
       <HillDayWizard
@@ -234,7 +229,7 @@ export function WorkspaceScreen({
       />
     );
   if (view === "newsletter")
-    return <NewsletterWorkflow initialClientId={clientId} onClose={back} />;
+    return <NewsletterEditor key={clientId ?? "unassigned"} onClose={back} />;
   if (view === "templates")
     return <TemplateStudio initialClientId={clientId} onClose={back} />;
   if (view === "document-templates")
@@ -271,9 +266,6 @@ export function WorkspaceScreen({
                 }
               >
                 Meri files
-              </DropdownMenuItem>
-              <DropdownMenuItem onSelect={() => navigate("rich-newsletter")}>
-                Rich newsletter preview
               </DropdownMenuItem>
               <DropdownMenuItem onSelect={() => navigate("templates")}>
                 Template Studio
@@ -352,18 +344,10 @@ export function WorkspaceScreen({
           <ActionButton
             onClick={() => {
               setNewDocument(false);
-              navigate(clientId ? "newsletter" : "rich-newsletter");
-            }}
-          >
-            Newsletter
-          </ActionButton>
-          <ActionButton
-            onClick={() => {
-              setNewDocument(false);
               navigate("newsletter");
             }}
           >
-            Newsletter template gallery
+            Newsletter
           </ActionButton>
           <ActionButton
             onClick={() => {

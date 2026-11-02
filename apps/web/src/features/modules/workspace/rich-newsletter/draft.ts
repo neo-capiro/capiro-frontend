@@ -8,16 +8,17 @@ import {
 } from "@capiro/shared/newsletter";
 
 /** Local starter uses public factories; saved drafts enter through the receiving adapter. */
-export function newRichDraft() {
+export function newRichDraft(clientId: string | null = null) {
   const design = createNewsletterLayout(1);
   // The starter's text-only logo should inherit the readable body color.
   for (const section of design.sections)
     for (const block of section.blocks)
       if (block.kind === "logo") block.style.color = design.styles.text.p.color;
+  design.sourceClientIds = clientId ? [clientId] : [];
   return {
     name: "Untitled newsletter",
     design,
-    config: defaultNewsletterConfig(),
+    config: { ...defaultNewsletterConfig(), clientId },
   };
 }
 export type RichDraft = ReturnType<typeof newRichDraft>;

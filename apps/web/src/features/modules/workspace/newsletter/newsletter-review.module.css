@@ -1,0 +1,115 @@
+/* Saved newsletter comments and staging. */
+.tabs {
+  min-width: 0;
+}
+.tabs > [role="tablist"] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0;
+}
+.tabs [role="tab"] {
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tabs [role="tab"][aria-selected="true"] {
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.tabs [role="tab"]:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.panel {
+  padding: 17px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.panelTitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.panelHint {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  height: 27px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #efe9ef;
+  color: #5e4560;
+  font-size: 12px;
+  font-weight: 500;
+}
+.statusBadgeMuted {
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
+.commentItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 12px;
+  background: var(--muted);
+  border-radius: 10px;
+}
+.commentBody {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.commentTime {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.commentActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.commentActions button {
+  border-radius: 10px;
+}
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+.commentForm label {
+  font-size: 13px;
+  color: var(--foreground);
+}
+.stagePanelTitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+.stagePanelText {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}

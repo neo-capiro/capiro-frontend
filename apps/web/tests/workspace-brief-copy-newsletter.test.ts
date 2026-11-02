@@ -1,7 +1,7 @@
+import { savedNewsletterFixture as createNewsletter } from "./saved-newsletter-fixture";
 import { expect, it } from "vitest";
 import { copyBody, copySource, copyIds } from "./workspace-brief-copy-fixtures";
 import { ordinary, state, requestId } from "./workspace-ordinary-save-fixtures";
-import { createNewsletter } from "../src/features/modules/workspace/newsletter/newsletter-model";
 import { newsletterSaveModel } from "../src/features/modules/workspace/newsletter/newsletter-atomic-save";
 
 it("newsletter capture excludes a preceding bound tab with arbitrary newsletter metadata", () => {

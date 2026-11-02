@@ -2,7 +2,6 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createElement, type ReactElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { draft } from "./prospect-resources-fixtures";
-import { useNewsletter } from "../src/features/modules/workspace/newsletter/use-newsletter";
 import {
   workspaceDocumentOperations,
   workspaceDraft,
@@ -14,7 +13,6 @@ import {
 } from "../src/shared/capiro/operations/workspace-schemas";
 import { DraftClientAssociation } from "../src/features/modules/workspace/DraftClientAssociation";
 import { DocumentsLibrary } from "../src/features/modules/workspace/WorkspaceLibrary";
-import { NewsletterWorkflow } from "../src/features/modules/workspace/newsletter/NewsletterWorkflow";
 
 const h = vi.hoisted(() => ({
   clients: [] as { id: string; name: string }[],
@@ -63,12 +61,21 @@ vi.mock("react", async (importOriginal) => {
   };
 });
 vi.mock("../src/shared/capiro/queries", () => ({
-  useCapiroQuery: (key: string) => ({
+  useCapiroQuery: (
+    key: string,
+    request?: { query?: { clientId?: string } },
+  ) => ({
     data:
       key === "workspace.clients"
         ? { items: h.clients }
         : key === "workspace.documents"
-          ? { items: h.library }
+          ? {
+              items: request?.query?.clientId
+                ? h.library.filter(
+                    (row) => row.clientId === request.query!.clientId,
+                  )
+                : h.library,
+            }
           : { tenant: { name: "Firm" }, user: { clerkUserId: "owner" } },
     loading: false,
     reload: vi.fn(),
@@ -78,39 +85,6 @@ vi.mock("../src/shared/capiro/queries", () => ({
     pending: false,
   }),
 }));
-vi.mock("../src/features/modules/workspace/newsletter/NewsletterPaper", () => ({
-  NewsletterPaper: () => null,
-}));
-// Existing static presentation witnesses do not mount journal/auth lifetimes.
-// The newsletter atomic-save browser suite covers the real owner and binding.
-vi.mock(
-  "../src/features/modules/workspace/newsletter/ExistingNewsletterSave",
-  () => ({
-    ExistingNewsletterSave: ({
-      editor,
-      ...props
-    }: import("react").ComponentProps<
-      typeof import("../src/features/modules/workspace/newsletter/ExistingNewsletterSave").ExistingNewsletterSave
-    >) => createElement(editor, props),
-  }),
-);
-vi.mock(
-  "../src/features/modules/workspace/newsletter/NewsletterComments",
-  () => ({ NewsletterComments: () => null }),
-);
-vi.mock(
-  "../src/features/modules/workspace/newsletter/NewsletterTemplates",
-  () => ({ SelectTemplate: () => null }),
-);
-vi.mock(
-  "../src/features/modules/workspace/newsletter/NewsletterStaging",
-  () => ({
-    NewsletterStaging: () => {
-      h.staging();
-      return null;
-    },
-  }),
-);
 vi.mock("../src/shared/module-ui", () => ({
   Modal: () => null,
   UnavailableAction: () => null,
@@ -171,19 +145,10 @@ const record: WorkspaceDraftDocument = {
   clientId: A,
   docTitle: "Newsletter",
 };
-const capture = vi.fn<(view: ReturnType<typeof useNewsletter>) => void>();
-function Projection(props: Parameters<typeof useNewsletter>[0]) {
-  capture(useNewsletter(props));
-  return null;
-}
 function renderElement(element: ReactElement) {
   h.stateIndex = 0;
   h.refIndex = 0;
   return renderToStaticMarkup(element);
-}
-function render(props: Parameters<typeof useNewsletter>[0]) {
-  renderElement(createElement(Projection, props));
-  return capture.mock.lastCall![0];
 }
 beforeEach(() => {
   h.clients = [
@@ -196,63 +161,8 @@ beforeEach(() => {
   h.staging.mockClear();
   h.select.mockClear();
   h.button.mockClear();
-  capture.mockClear();
   for (const run of Object.values(h.run)) run.mockReset().mockResolvedValue({});
   h.run["workspace.draft.create"].mockResolvedValue(record);
-});
-
-describe("newsletter client authority", () => {
-  it("creates a General gallery draft without adopting a listed client", async () => {
-    h.run["workspace.draft.create"].mockResolvedValue({
-      ...record,
-      clientId: null,
-    });
-    await render({ initialClientId: "", onClose: vi.fn() }).save();
-    expect(h.run["workspace.draft.create"]).toHaveBeenCalledWith({
-      body: expect.objectContaining({ clientId: null }),
-    });
-    expect(h.run["workspace.draft.snapshot"]).toHaveBeenCalledOnce();
-  });
-  it("creates with the selected UUID despite duplicate names", async () => {
-    const props = { initialClientId: A, onClose: vi.fn() };
-    await render(props).save();
-    expect(h.run["workspace.draft.create"]).toHaveBeenCalledWith({
-      body: expect.objectContaining({ clientId: A }),
-    });
-    expect(h.run["workspace.draft.snapshot"]).toHaveBeenCalledOnce();
-  });
-  it("holds a removed client before create", async () => {
-    h.clients = [];
-    const props = { initialClientId: A, onClose: vi.fn() };
-    await render(props).save();
-    expect(h.run["workspace.draft.create"]).not.toHaveBeenCalled();
-    expect(render(props).error?.message).toContain("unavailable");
-  });
-  it("reopens using the saved UUID and refuses reassignment", async () => {
-    const props = { initialClientId: B, existing: record, onClose: vi.fn() };
-    const view = render(props);
-    expect(view.clientId).toBe(A);
-    view.setClientId(B);
-    await render(props).save();
-    expect(h.run["workspace.document.update"]).not.toHaveBeenCalled();
-    expect(render(props).error?.message).toContain("different client");
-  });
-  it("discards a pending create after the local client changes", async () => {
-    let finish!: (value: WorkspaceDraftDocument) => void;
-    h.run["workspace.draft.create"].mockReturnValue(
-      new Promise<WorkspaceDraftDocument>((resolve) => {
-        finish = resolve;
-      }),
-    );
-    const props = { initialClientId: A, onClose: vi.fn() };
-    const view = render(props);
-    const saving = view.save();
-    view.setClientId(B);
-    finish(record);
-    await saving;
-    expect(render(props).draft).toBeUndefined();
-    expect(h.run["workspace.document.update"]).not.toHaveBeenCalled();
-  });
 });
 
 const held: WorkspaceDraftDocument = {
@@ -343,33 +253,6 @@ describe("held draft client recovery", () => {
     expect(
       renderElement(createElement(DraftClientAssociation, props)),
     ).toContain("not confirmed");
-  });
-  it("keeps local edits but refuses existing save without the atomic owner", async () => {
-    const props = { initialClientId: "", existing: held, onClose: vi.fn() };
-    let view = render(props);
-    view.setTitle("Unsaved title");
-    view.edit({ ...view.body, subject: "Unsaved subject" });
-    view = render(props);
-    view.acceptClientAssociation({ ...record, clientId: A });
-    view = render(props);
-    expect(view.clientId).toBe(A);
-    expect(view.title).toBe("Unsaved title");
-    expect(view.body.subject).toBe("Unsaved subject");
-    await view.save();
-    expect(h.run["workspace.document.update"]).not.toHaveBeenCalled();
-    expect(render(props).error?.message).toContain(
-      "verify its atomic save state",
-    );
-  });
-  it("refuses to mount staging for a held newsletter even on the stage view", () => {
-    const props = { existing: held, onClose: vi.fn() };
-    const first = renderElement(createElement(NewsletterWorkflow, props));
-    expect(first).toContain('disabled="">Stage in Outreach');
-    h.values[0] = "stage";
-    expect(renderElement(createElement(NewsletterWorkflow, props))).toContain(
-      "Choose a client to continue",
-    );
-    expect(h.staging).not.toHaveBeenCalled();
   });
   it("labels held library rows and excludes them from a client-filtered surface", () => {
     h.library = [
