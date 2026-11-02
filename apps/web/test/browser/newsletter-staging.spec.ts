@@ -1,3 +1,4 @@
+import { openNewsletterDetails } from "./newsletter-workspace-fixtures";
 import { test, expect, type Page, type TestInfo } from "@playwright/test";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 import { moduleRouteFixtures } from "./module-route-fixtures";
@@ -70,6 +71,7 @@ async function setup(page: Page) {
 }
 async function open(page: Page) {
   await page.goto(route);
+  await openNewsletterDetails(page);
   await page
     .getByRole("button", { name: "Stage in Outreach", exact: true })
     .click();
@@ -236,6 +238,7 @@ test("Figma original and confirmed states retain the original request across dis
     },
   };
   await page.goto(route);
+  await openNewsletterDetails(page);
   await seedHistoricalRequest(page, original);
   await page.route("**/api/capiro/workspace.newsletter.stage", (r) => {
     const result = receipt(r.request().postDataJSON().body, true);
@@ -295,6 +298,7 @@ test("modal dismissal and mobile scrolling preserve unsaved content and trap key
 }, info) => {
   const { writes, errors } = await setup(page);
   await page.goto(route);
+  await openNewsletterDetails(page);
   await page
     .getByRole("textbox", { name: "Subject", exact: true })
     .fill("Unsaved editor subject");
@@ -732,6 +736,7 @@ test("historical unpinned recovery holds on missing current client before recove
     },
   };
   await page.goto(route);
+  await openNewsletterDetails(page);
   await seedHistoricalRequest(page, original);
   await page.route("**/api/capiro/workspace.newsletter.stage", (r) =>
     r.fulfill({ json: receipt(r.request().postDataJSON().body, true) }),
@@ -883,6 +888,7 @@ test("storage refusal blocks selection and replacement writes", async ({
     Object.defineProperty(window, "indexedDB", { value: undefined }),
   );
   await page.goto(route);
+  await openNewsletterDetails(page);
   // The newer base now fences the ordinary editor before staging can open.
   await expect(page.getByRole("alert")).toContainText(
     "recovery is unavailable",

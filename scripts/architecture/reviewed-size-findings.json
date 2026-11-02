@@ -1244,15 +1244,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
-    "kind": "function",
-    "symbol": "StagingSelection",
-    "fingerprint": "0c97c921767a7c6effbc7664dedc5ecd5f5ad1c29a49c9f78fbf3cd4a77b8dcc",
-    "reason": "The existing four-state staging modal keeps transaction, journal, authorization and immutable receipt verification in its existing owners. This change only adds the introductory delivery panel and scoped presentation. Splitting this coherent view solely for its size would scatter the retained lifecycle. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
-    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
-    "reviewedOn": "2026-10-31"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
     "kind": "function",
     "symbol": "useNewsletterStaging",
@@ -1858,15 +1849,6 @@
     "reviewedOn": "2026-10-13"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
-    "kind": "function",
-    "symbol": "WorkspaceScreen",
-    "fingerprint": "db874d47834f35abda3528c4ff4b3f097759a7e1e2bb4febffa24967162a9f5d",
-    "reason": "One Workspace route and entry dispatcher; changed Newsletter destinations retain the selected client on the supported gallery path and expose explicit gallery navigation. Persistence, recovery, document authorization and editor state stay in existing owners. No new domain or lifecycle responsibility is embedded here.",
-    "reviewedBy": "Codex independent Newsletter435 successor reviewer /root/independent_review",
-    "reviewedOn": "2026-11-01"
-  },
-  {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "function",
     "symbol": "OutreachForm",
@@ -1874,64 +1856,6 @@
     "reason": "Independent Codex outreach_review inspected the 100-line ordinary create/update form. One submit lifetime owns its existing payload, local fields and pending/error display. Disabling fields/Cancel and notifying parent pending state keeps submitted input and close intent stable until settlement. Native uncertainty and unmount/replay semantics are unchanged, not newly qualified. See docs/outreach-pending-20261014/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
     "reviewedOn": "2026-10-14"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
-    "kind": "function",
-    "symbol": "createRichDocumentController",
-    "line": 93,
-    "nonblank": 502,
-    "fingerprint": "2e80a0571f5fbf98bc9b048578a7971c96f111e3e90fbfd01880d62bbefcb14f",
-    "reason": "The closure holds one mounted document session, serialized operation and write-recovery state. Both new entry methods reuse its existing read/denial machinery, so private state and retained outcomes are not split across competing lifetimes. Review rendering and raw receiving stay in dedicated modules; no independent domain is added to this closure.",
-    "reviewedBy": "Codex independent Ordinary reviewer; PR202 source responsibility review",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
-    "kind": "file",
-    "symbol": "<module>",
-    "line": 1,
-    "nonblank": 515,
-    "fingerprint": "3058bf641206afae6e854e93cd3a618af343149c2ae061782d92dc6ea393b940",
-    "reason": "One retained saved-document-controller characterization module. The three added cases exercise known-ID explicit read/adoption, foreign/refused detail, and private-state clearing using the existing controller/adapter fixture. Existing recovery/stage assertions remain. Splitting those cases solely to reduce length would duplicate the same fixture and obscure the shared transaction invariants.",
-    "reviewedBy": "Codex independent Ordinary reviewer; PR202 source responsibility review",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
-    "kind": "function",
-    "symbol": "<anonymous> #2",
-    "fingerprint": "5496570484a4410e1114e700b0af9b0e1a1b50d46ec1c2631c79e25c10f0ef07",
-    "reason": "The existing controller suite now keeps current-read, preview, stage and disposal assertions while removing superseded create/save semantics. One isolated setup owner supplies the canonical adapter and a recovery stub only for these retained controller responsibilities; durable recovery itself is covered by the real mounted browser owner. Nested describe bodies group independent positive/negative cases, not application responsibilities. Exact-source acceptance includes the visible reduction and replacement mapping, not a generic test exemption.",
-    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
-    "kind": "function",
-    "symbol": "<anonymous> #3",
-    "fingerprint": "50f2f0619f1e0f8f3d35345f943247e0f6a942c10387723bea9378dc6ab0a460",
-    "reason": "Accept the grouped current-read, saved-preview and stage controls. They distinguish server-only preview from local content, deny stale actionable reads, preserve UUID-case identity and retain same-revision stage uncertainty through adoption.",
-    "reviewedBy": "core_intake_review (independent)",
-    "reviewedOn": "2026-10-13"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
-    "kind": "function",
-    "symbol": "<anonymous> #4",
-    "fingerprint": "d1cb42a2c7eaff30411b31970421aaec53eb975980504757b9350855bbd53923",
-    "reason": "The existing controller suite now keeps current-read, preview, stage and disposal assertions while removing superseded create/save semantics. One isolated setup owner supplies the canonical adapter and a recovery stub only for these retained controller responsibilities; durable recovery itself is covered by the real mounted browser owner. Nested describe bodies group independent positive/negative cases, not application responsibilities. Exact-source acceptance includes the visible reduction and replacement mapping, not a generic test exemption.",
-    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
-    "kind": "function",
-    "symbol": "<anonymous> #5",
-    "fingerprint": "cb766c68b0291b1e5c5c0e5d0879fabbdfa8ecb9b54ecf4251755f73fbaa4e91",
-    "reason": "Accept the grouped navigation-journal controls. Actual QueryClient and adapter observations verify pending-before-dispatch, same-cache fences, explicit save review, both cleanup orders, no refetch/GC and reentrant settlement disposal. Preserved failures demonstrate the regression assertions exercise real incorrect prior behavior.",
-    "reviewedBy": "core_intake_review (independent)",
-    "reviewedOn": "2026-10-13"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/write-journal.ts",
@@ -2384,15 +2308,6 @@
     "reviewedOn": "2026-11-01"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
-    "kind": "function",
-    "symbol": "DraftEditor",
-    "fingerprint": "7319356f666d0def5c211b2299e580756e8f43214b4099452930802a4198889d",
-    "reason": "Replacement for the earlier DraftEditor record at fingerprint 0d8b6312761bd50cbb8833c58733b34cae33291362e8b264e4fe3f111a697273; that record must be replaced, not duplicated. The delta adds five lines to this editor: the GenerationPanelHost mount for an ordinary saved draft plus the guard that keeps it off prospect drafts. Save, export, recovery, identity keying and the stored Blueprint label keep their existing owners, the host owns its own reads and dispatch, and the editor gains no new authority beyond rendering one child panel for a saved draft.",
-    "reviewedBy": "Hermes Agent source review 20261028_042649_c62845",
-    "reviewedOn": "2026-10-28"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/rich-document/DocumentLink.tsx",
     "kind": "function",
     "symbol": "DocumentLink",
@@ -2814,15 +2729,6 @@
     "reason": "Retain this feature-local component as the single held-draft association interaction. Its client query, selected UUID, write exclusion, draft-lifetime counter, exact returned draft/client checks and refusal rendering all belong to one explicit binding attempt. It calls the existing workspace.draft.update operation and returns the confirmed draft through onBound; it does not write editor content, own the editor save sequence, infer an association from a display name, or implement server authorization. Keeping receipt validation beside the callback prevents consumers from adopting an unconfirmed binding. Ordinary and newsletter editors both reuse this component, avoiding two binding implementations. Extracting its small form or moving its attempt state into a generic helper would add indirection without separating an independent responsibility.",
     "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
     "reviewedOn": "2026-10-22"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
-    "kind": "function",
-    "symbol": "DocumentsLibrary",
-    "fingerprint": "6405938b92a6a3cbc24212f2eed3ab8c27c4b93c37099166b10388b2f560d45c",
-    "reason": "  Verdict ACCEPTABLE (the one signal requiring independent review/binding). This is a single documents-library\n  surface: a filter bar (ownership pills, search, client filter, type and status selects), a StatusPanel, a\n  6-column DataTable and a paging footer. It owns no transport, cursor semantics, tenant scope or authorization\n  â€” query state is owned by useLibraryQuery (filters + opaque cursor, reset-before-receiver-change), typed\n  transport by useCapiroQuery(\"workspace.documents\"), and the client picker by LibraryClientFilter. The added\n  status label Map is module-scope display policy. The 163 nonblank lines are render-heavy JSX for one cohesive\n  responsibility, not multiple concerns fused. Threshold alone is not a failure; no concrete extraction is\n  required or requested. (Non-blocking observation, no source change requested: the filter bar is the most\n  separable sub-block and would be the natural candidate if this body later grows.)",
-    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
-    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/InviteMember.tsx",
@@ -3896,15 +3802,6 @@
     "reviewedOn": "2026-10-26"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
-    "kind": "function",
-    "symbol": "WorkspaceDraft",
-    "fingerprint": "87d432ab93156c11b79ba3e5151b07f9a582179bd0094c05554a1fd89e121e31",
-    "reason": "One route/data selection boundary retains identity keying and existing prospect/newsletter branches. There is no independent responsibility requiring a new module. The original scoped PR171 acceptance was rechecked against final corrected source. This record replaces the earlier87-line pre171 composition body. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
-    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
-    "reviewedOn": "2026-10-26"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
     "kind": "function",
     "symbol": "HillDayWizard",
@@ -3957,53 +3854,6 @@
     "reason": "The existing encrypted recovery journal remains the sole durable attempt owner. This change adds one narrowly typed Objective Question refusal code and a retirement wrapper that validates the original command request ID plus exact refusal marker before delegating to the existing locked retireRecovery path. It does not create new storage or command execution. The independently reviewed Question session requires a definitive original-request refusal and fresh current source read before explicit acknowledgment; unknown or failed reads stay pending. Existing journal regression tests and new Question recovery tests cover this integration.",
     "reviewedBy": "Independent Codex area10 parent; not Question journal change author",
     "reviewedOn": "2026-11-01"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
-    "kind": "file",
-    "symbol": "<module>",
-    "line": 1,
-    "nonblank": 596,
-    "fingerprint": "3f310a6f474e0bfbd31746c2ba3a489619dd2d7540f6f48ab76eaddca3e3d23c",
-    "reason": "One canonical editable-document transaction and lifetime owner. openKnown delegates to existing reviewDocument; clearEditableAccess delegates to existing denied-state clearing. The change creates no new persistence, transport, authority, receipt, replay or draft model; active work, retention, fences and adoption remain serialized by this owner.",
-    "reviewedBy": "Codex independent Ordinary reviewer; PR202 source responsibility review",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "1f0c87922f3e52761e86c285786618c723c710b3232ca20f29b7c0934ec927a4",
-    "reason": "One basic-newsletter presentation composes the existing editor, save/recovery, conversion, comment and staging owners. New layout and shared keyboard tabs do not change persistence or authority. The review query is owned once and supplied to Comments so displayed counts and rows refresh together. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
-    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
-    "reviewedOn": "2026-10-31"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
-    "kind": "function",
-    "symbol": "NewsletterEditor",
-    "fingerprint": "fe111da6fab1945fadeb048eb207eb85f54e04af41cc2bdd42414885484cee5b",
-    "reason": "One basic-newsletter presentation composes the existing editor, save/recovery, conversion, comment and staging owners. New layout and shared keyboard tabs do not change persistence or authority. The review query is owned once and supplied to Comments so displayed counts and rows refresh together. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
-    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
-    "reviewedOn": "2026-10-31"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
-    "kind": "function",
-    "symbol": "useNewsletter",
-    "fingerprint": "2d4f82b6ba6d403020e31eaf34d6097ca5e8c5cc5761d09366125fb178cee581",
-    "reason": "One newsletter session owns local edit history, current title/body, association and save event selection. Existing-draft persistence/recovery is delegated to the ordinary owner; preset/projection conversion stays in newsletter-model. No second journal or permission model is introduced. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
-    "kind": "function",
-    "symbol": "useNewsletter > save",
-    "fingerprint": "a4a0e41ddfcc32f06240a39bf5e04985a6a9812df8afd7bb0e4950cd897b9823",
-    "reason": "A bounded existing-draft delegation/return precedes the retained new-creation sequence. Both answer one explicit save action; extracting an alternative persistence abstraction would duplicate ownership. This acceptance does not qualify the separately excluded creation recovery gap. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
-    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/ordinary-save/useOrdinaryDraftSave.ts",
@@ -4076,15 +3926,6 @@
     "reason": "Domain start/control/readback glue reuses journal/query APIs; no alternate persistence, serializer, scheduler or authority layer. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
     "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
     "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "ae9c47df5ea95eab0e0358b7061286cd383343a3fb4e90bff16de14c75405c54",
-    "reason": "The existing four-state staging modal keeps transaction, journal, authorization and immutable receipt verification in its existing owners. This change only adds the introductory delivery panel and scoped presentation. Splitting this coherent view solely for its size would scatter the retained lifecycle. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
-    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
-    "reviewedOn": "2026-10-31"
   },
   {
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx",
@@ -7459,33 +7300,6 @@
     "reviewedOn": "2026-10-31"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/newsletter/newsletter-figma.module.css",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "2e28e59ba8e5861c476763167584c8b94b327e5146c8ff3b8e93551d1fd26f8b",
-    "reason": "One feature-scoped visual contract owns template, builder, review and stage geometry. It composes existing shared controls without changing shell/global tokens. Unused new selectors were removed; splitting by line count would obscure this four-frame contract. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
-    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
-    "reviewedOn": "2026-10-31"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterComments.tsx",
-    "kind": "function",
-    "symbol": "NewsletterComments",
-    "fingerprint": "131892c4f766ed936bfd4969408fe7a675b8b3f72bf27f81505372b04a71d41e",
-    "reason": "One comment interaction renders open/resolved rows and delegates reads and mutations to the existing fixed operation boundary. When composed by the workflow it uses the parent query, so counts and rows share reload ownership; standalone use keeps its original query. No alternate persistence or authority is introduced. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
-    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
-    "reviewedOn": "2026-10-31"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterTemplates.tsx",
-    "kind": "function",
-    "symbol": "SelectTemplate",
-    "fingerprint": "1738595f3b5615727224dcb1fa6c7183957d002577bb54fe73e79da6c1f28e42",
-    "reason": "One template selection interaction filters the existing preset catalog. Shared Tabs own keyboard behavior; library tabs link to canonical Workspace/Templates surfaces without duplicate reads or truncated listings. It creates no persistence or authorization mechanism. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
-    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
-    "reviewedOn": "2026-10-31"
-  },
-  {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflowFrame.tsx",
     "kind": "function",
     "symbol": "OutreachWorkflowFrame",
@@ -7798,38 +7612,11 @@
     "reviewedOn": "2026-11-01"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "d9f26a0607b2b3531df1f577db11c9a4a3bb86fa9aa0fbd4cf433051bd051efe",
-    "reason": "Single Newsletter workspace composition around the existing controller. Owns local view/selection state and composes the header, tool rail, inspector, canvas and preview. Persistence, CAS, retained requests, authorization, provider proposals and libraries remain in their existing owners. The source-reference layout needs these views to share the same local selection and document lifecycle; no second save owner or agent loop was introduced.",
-    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
-    "reviewedOn": "2026-11-01"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
-    "kind": "function",
-    "symbol": "RichNewsletterEditor",
-    "fingerprint": "6b7d479b98c95f6dec9806f4b725caabf3785ffaccc59a4041c4b205efc9bb21",
-    "reason": "Single Newsletter workspace composition around the existing controller. Owns local view/selection state and composes the header, tool rail, inspector, canvas and preview. Persistence, CAS, retained requests, authorization, provider proposals and libraries remain in their existing owners. The source-reference layout needs these views to share the same local selection and document lifecycle; no second save owner or agent loop was introduced.",
-    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
-    "reviewedOn": "2026-11-01"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/DesignStyles.tsx",
     "kind": "function",
     "symbol": "DesignStyles",
     "fingerprint": "872a419f29d6c258158ca616e357e82df84a70a6b05ab2907659142608799676",
     "reason": "One email design inspector. Category buttons replace the select field; canonical design values and mutation callback are unchanged.",
-    "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
-    "reviewedOn": "2026-11-01"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/WorkspacePalette.tsx",
-    "kind": "function",
-    "symbol": "WorkspacePalette",
-    "fingerprint": "642cc27a2966e5da38509055e85acbdd94c77e5982d56255cbb621c864ad9242",
-    "reason": "Single bounded Newsletter presentation responsibility; domain and authority owners remain unchanged.",
     "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
     "reviewedOn": "2026-11-01"
   },
@@ -7868,5 +7655,158 @@
     "reason": "Scoped internal Newsletter workspace styles derived from the pinned OS reference. This module intentionally groups the related rail/sidebar/canvas/preview geometry and responsive rules; no global shell or token mutation.",
     "reviewedBy": "Codex Newsletter implementation design review; independent exact-head review pending",
     "reviewedOn": "2026-11-01"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+    "kind": "function",
+    "symbol": "DraftEditor",
+    "fingerprint": "e6ea22a746ae59597adc9dc273f84076868893c63b3110906257ad7fa8236274",
+    "reason": "Existing stored-document dispatch and save admission. Only the Newsletter component reference changes; the current client/draft/prospect checks and all non-Newsletter behavior remain unchanged.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+    "kind": "function",
+    "symbol": "WorkspaceDraft",
+    "fingerprint": "5da71f50f9014c12f09f753780e631ef63c090f9b0e2161613abcda2d43250d3",
+    "reason": "Existing stored-document dispatch and save admission. Only the Newsletter component reference changes; the current client/draft/prospect checks and all non-Newsletter behavior remain unchanged.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+    "kind": "function",
+    "symbol": "DocumentsLibrary",
+    "fingerprint": "6405938b92a6a3cbc24212f2eed3ab8c27c4b93c37099166b10388b2f560d45c",
+    "reason": "  Verdict ACCEPTABLE (the one signal requiring independent review/binding). This is a single documents-library\n  surface: a filter bar (ownership pills, search, client filter, type and status selects), a StatusPanel, a\n  6-column DataTable and a paging footer. It owns no transport, cursor semantics, tenant scope or authorization\n  â€” query state is owned by useLibraryQuery (filters + opaque cursor, reset-before-receiver-change), typed\n  transport by useCapiroQuery(\"workspace.documents\"), and the client picker by LibraryClientFilter. The added\n  status label Map is module-scope display policy. The 163 nonblank lines are render-heavy JSX for one cohesive\n  responsibility, not multiple concerns fused. Threshold alone is not a failure; no concrete extraction is\n  required or requested. (Non-blocking observation, no source change requested: the filter bar is the most\n  separable sub-block and would be the natural candidate if this body later grows.)",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+    "kind": "function",
+    "symbol": "WorkspaceScreen",
+    "fingerprint": "f40892135814cf0e11f84f3fc5bb217fa81fdeca1358e8f240d50508e3ccef87",
+    "reason": "Canonical Workspace dispatch and navigation. Newsletter entries converge on one component; the inbound historical view alias normalizes in the route parser. Existing draft IDs still pass through WorkspaceDraft and its access checks.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterComments.tsx",
+    "kind": "function",
+    "symbol": "NewsletterComments",
+    "fingerprint": "131892c4f766ed936bfd4969408fe7a675b8b3f72bf27f81505372b04a71d41e",
+    "reason": "One comment interaction renders open/resolved rows and delegates reads and mutations to the existing fixed operation boundary. When composed by the workflow it uses the parent query, so counts and rows share reload ownership; standalone use keeps its original query. No alternate persistence or authority is introduced. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
+    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "c7540772dfe0e05556b71529029493f2429f3fed8cea038dcc81616972520742",
+    "reason": "Bounded canonical Newsletter presentation change; existing persistence and authority owners retained.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
+    "kind": "function",
+    "symbol": "StagingSelection",
+    "fingerprint": "0c97c921767a7c6effbc7664dedc5ecd5f5ad1c29a49c9f78fbf3cd4a77b8dcc",
+    "reason": "The existing four-state staging modal keeps transaction, journal, authorization and immutable receipt verification in its existing owners. This change only adds the introductory delivery panel and scoped presentation. Splitting this coherent view solely for its size would scatter the retained lifecycle. Evidence: docs/newsletter-figma34-parity-20261031/README.md#responsibility-review.",
+    "reviewedBy": "Independent Codex /root/lane5_review, newsletter source/responsibility review 2026-10-31",
+    "reviewedOn": "2026-10-31"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "6b43048a7e6c71dac43a83c12d322e9cbc4e3ecc22aa95eb064d2831339048ff",
+    "reason": "Bounded canonical Newsletter presentation change; existing persistence and authority owners retained.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "f332d655a7d02dd4c964e9a0ef7a9b29a8d694823b0027fa616294c6e47ae5f6",
+    "reason": "Bounded canonical Newsletter presentation change; existing persistence and authority owners retained.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "5496570484a4410e1114e700b0af9b0e1a1b50d46ec1c2631c79e25c10f0ef07",
+    "reason": "The existing controller suite now keeps current-read, preview, stage and disposal assertions while removing superseded create/save semantics. One isolated setup owner supplies the canonical adapter and a recovery stub only for these retained controller responsibilities; durable recovery itself is covered by the real mounted browser owner. Nested describe bodies group independent positive/negative cases, not application responsibilities. Exact-source acceptance includes the visible reduction and replacement mapping, not a generic test exemption.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #4",
+    "fingerprint": "d1cb42a2c7eaff30411b31970421aaec53eb975980504757b9350855bbd53923",
+    "reason": "The existing controller suite now keeps current-read, preview, stage and disposal assertions while removing superseded create/save semantics. One isolated setup owner supplies the canonical adapter and a recovery stub only for these retained controller responsibilities; durable recovery itself is covered by the real mounted browser owner. Nested describe bodies group independent positive/negative cases, not application responsibilities. Exact-source acceptance includes the visible reduction and replacement mapping, not a generic test exemption.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "2fa6b4c325d767a00db54a602153a7f8f6c6f5aee6cf41debf4811cbcffd5cdf",
+    "reason": "Existing rich document lifecycle owner. The only behavior change is an optional authorized-client seed for new local drafts and resets. Retained writes, server adoption, CAS and unknown outcomes keep their original payloads and lifecycle; no request contract or authority bypass is added.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
+    "kind": "function",
+    "symbol": "createRichDocumentController",
+    "fingerprint": "dff6f91ed05fa2bba8c6c30b94c46eb3b57a654f5716cf12c3e1065acf75bfdb",
+    "reason": "Existing rich document lifecycle owner. The only behavior change is an optional authorized-client seed for new local drafts and resets. Retained writes, server adoption, CAS and unknown outcomes keep their original payloads and lifecycle; no request contract or authority bypass is added.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/SavedNewsletterPanel.tsx",
+    "kind": "function",
+    "symbol": "SavedNewsletterPanel",
+    "fingerprint": "81d7fc07b0ba187c101b1d4e14a4b7fb429023e0d3a124eaf75c9d58657e089e",
+    "reason": "Single inspector for persisted original-format fields. Uses the canonical icon palette and workspace sidebar; supported block edits preserve the strict basic body. Unsupported rich capabilities use the existing explicit reviewed-copy flow, never flatten or rewrite an existing document.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/SavedNewsletterSession.tsx",
+    "kind": "function",
+    "symbol": "SavedNewsletterSession",
+    "fingerprint": "1e665604b4d71c6c203f13a232ce459fdcf0dd8379274afbbceb5af7e38fb776",
+    "reason": "Original-format session adapter for the canonical Newsletter workspace. Local selection/history and dialog state compose the existing atomic save, client association, comments and staging owners. It never creates a basic draft or silently migrates a saved draft. Keeping the atomic owner mounted during explicit rich-copy review preserves unsaved original-format input.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterSession.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "89b7680de0923e05bba1d399db57609bd904fb87f797d8516a1df95d987f7961",
+    "reason": "Existing rich session composed into the canonical shared Newsletter workspace. Maintains its original document controller, provider proposal mounting, library, preview and review owners. Route-specific old editor and duplicate shell are removed; shared presentation receives local view state and callbacks.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterSession.tsx",
+    "kind": "function",
+    "symbol": "RichNewsletterSession",
+    "fingerprint": "272bc21c90e0d3479725957b5214e83ff19c312aec0550a62181934f245d0b63",
+    "reason": "Existing rich session composed into the canonical shared Newsletter workspace. Maintains its original document controller, provider proposal mounting, library, preview and review owners. Route-specific old editor and duplicate shell are removed; shared presentation receives local view state and callbacks.",
+    "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
+    "reviewedOn": "2026-11-02"
   }
 ]

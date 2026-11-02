@@ -57,7 +57,10 @@ function deferred() {
   });
   return { resolve, promise };
 }
-async function setup(queryClient = new QueryClient()) {
+async function setup(
+  queryClient = new QueryClient(),
+  initialClientId: string | null = null,
+) {
   const fetcher = vi.fn<typeof fetch>();
   const adapter = createRichNewsletterAdapter(
     createCapiroApi(richNewsletterOperations, { fetcher }),
@@ -69,7 +72,12 @@ async function setup(queryClient = new QueryClient()) {
     reconcile: vi.fn(),
     resolve: vi.fn(),
   };
-  const owner = createRichDocumentController(adapter, journal, recovery);
+  const owner = createRichDocumentController(
+    adapter,
+    journal,
+    recovery,
+    initialClientId,
+  );
   const dispose = owner.mount();
   await vi.waitFor(() =>
     expect(owner.getSnapshot().recovery.phase).toBe("ready"),
@@ -92,6 +100,26 @@ const input = (
 ) => JSON.parse(String(fetcher.mock.calls[index]![1]?.body));
 
 describe("explicit rich saved-document intent", () => {
+  it("seeds a new draft with its authorized client without rewriting an explicitly adopted saved document", async () => {
+    const fixture = await setup(new QueryClient(), different);
+    expect(fixture.owner.getSnapshot().draft.config.clientId).toBe(different);
+    expect(fixture.owner.getSnapshot().draft.design.sourceClientIds).toEqual([
+      different,
+    ]);
+    expect(fixture.fetcher).not.toHaveBeenCalled();
+    const saved = await fixture.open();
+    expect(fixture.owner.getSnapshot().draft.config).toEqual(saved.config);
+    expect(fixture.owner.getSnapshot().draft.design).toEqual(saved.design);
+    fixture.dispose();
+  });
+  it("keeps a General starter unassigned", async () => {
+    const fixture = await setup();
+    expect(fixture.owner.getSnapshot().draft.config.clientId).toBeNull();
+    expect(fixture.owner.getSnapshot().draft.design.sourceClientIds).toEqual(
+      [],
+    );
+    fixture.dispose();
+  });
   it("rechecks a known review ID through detail without a list or automatic adoption", async () => {
     const { owner, reply, fetcher, dispose } = await setup();
     owner.edit((draft) => ({ ...draft, name: "Keep unsaved work" }));

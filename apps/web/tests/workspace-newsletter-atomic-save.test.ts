@@ -1,3 +1,4 @@
+import { savedNewsletterFixture as createNewsletter } from "./saved-newsletter-fixture";
 import { expect, it } from "vitest";
 import {
   ordinary,
@@ -7,10 +8,7 @@ import {
   scope,
   receipt,
 } from "./workspace-ordinary-save-fixtures";
-import {
-  createNewsletter,
-  newsletterDocumentBlocks,
-} from "../src/features/modules/workspace/newsletter/newsletter-model";
+import { newsletterDocumentBlocks } from "../src/features/modules/workspace/newsletter/newsletter-model";
 import { newsletterSaveModel } from "../src/features/modules/workspace/newsletter/newsletter-atomic-save";
 import {
   bindOrdinaryReceipt,

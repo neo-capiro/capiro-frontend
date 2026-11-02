@@ -8,7 +8,6 @@ const views = [
   "document-templates",
   "hillday",
   "newsletter",
-  "rich-newsletter",
 ] as const;
 export type WorkspaceView = (typeof views)[number];
 type Query = Pick<URLSearchParams, "get" | "getAll" | "has">;
@@ -58,7 +57,10 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
   )
     return { kind: "invalid" };
   const rawView = query.get("view") ?? "documents";
-  const view = views.find((candidate) => candidate === rawView);
+  const view = views.find(
+    (candidate) =>
+      candidate === (rawView === "rich-newsletter" ? "newsletter" : rawView),
+  );
   if (!view) return { kind: "invalid" };
   const clientId = query.get("clientId") ?? undefined;
   const draftId = query.get("draftId") ?? undefined;
@@ -83,7 +85,7 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
   if (query.has("hilldayPhase") && (!phase || !hilldayId || view !== "hillday"))
     return { kind: "invalid" };
   if (newsletterId)
-    return view === "rich-newsletter" &&
+    return view === "newsletter" &&
       !hilldayId &&
       !draftId &&
       !prospectId &&
@@ -127,7 +129,7 @@ export function workspaceHref(destination: Destination & Scope) {
     if (destination.phase) query.set("hilldayPhase", destination.phase);
   }
   if (destination.kind === "newsletter-review") {
-    query.set("view", "rich-newsletter");
+    query.set("view", "newsletter");
     query.set("newsletterId", destination.newsletterId);
   }
   const suffix = query.toString();

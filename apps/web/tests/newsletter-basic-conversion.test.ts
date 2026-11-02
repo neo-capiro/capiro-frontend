@@ -1,10 +1,8 @@
+import { savedNewsletterFixture as createNewsletter } from "./saved-newsletter-fixture";
 import { describe, expect, it, vi } from "vitest";
 import { renderNewsletterDesign } from "@capiro/shared/newsletter-render";
 import { convertBasicNewsletter } from "../src/features/modules/workspace/newsletter/basic-rich-conversion";
-import {
-  createNewsletter,
-  newsletterDocumentBlocks,
-} from "../src/features/modules/workspace/newsletter/newsletter-model";
+import { newsletterDocumentBlocks } from "../src/features/modules/workspace/newsletter/newsletter-model";
 import type { NewsletterBody } from "../src/shared/capiro/operations/workspace-documents";
 
 const body = (): NewsletterBody => ({

@@ -5,7 +5,7 @@ import { moduleRouteFixtures } from "./module-route-fixtures";
 test("text-only logo controls match the public renderer", async ({ page }) => {
   await onlyLocalRequests(page);
   await operationFixtures(page, moduleRouteFixtures);
-  await page.goto("/modules/workspace?view=rich-newsletter");
+  await page.goto("/modules/workspace?view=newsletter");
   await page.getByRole("button", { name: "Logo · YOUR FIRM" }).click();
   await expect(
     page.getByRole("toolbar", { name: "Text formatting" }),
@@ -23,7 +23,7 @@ test("typing after Undo retains editor focus and the complete new branch", async
 }) => {
   await onlyLocalRequests(page);
   await operationFixtures(page, moduleRouteFixtures);
-  await page.goto("/modules/workspace?view=rich-newsletter");
+  await page.goto("/modules/workspace?view=newsletter");
   await page
     .getByRole("button", { name: /^Heading · This week in policy/ })
     .click();

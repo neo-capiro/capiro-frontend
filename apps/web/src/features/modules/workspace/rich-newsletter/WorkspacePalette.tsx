@@ -25,15 +25,15 @@ import type { StructureAction } from "./content/structure";
 import styles from "./workspace.module.css";
 
 const palette = [
+  ["image", Image],
   ["heading", Type],
   ["paragraph", AlignLeft],
-  ["image", Image],
-  ["logo", Flag],
   ["button", MousePointer2],
   ["divider", Minus],
   ["spacer", MoveVertical],
   ["video", Video],
   ["social", Share2],
+  ["logo", Flag],
   ["code", Code],
   ["apps", Plug],
   ["footer", PanelBottom],
@@ -73,22 +73,7 @@ export function WorkspacePalette({
           Add your first section
         </button>
       )}
-      <div className={styles.blockGrid}>
-        {palette.map(([kind, Icon]) => (
-          <button
-            key={kind}
-            disabled={!section}
-            draggable
-            onDragStart={(event) =>
-              startBlockDrag(event.dataTransfer, { type: "add", kind })
-            }
-            onClick={() => add(kind)}
-          >
-            <Icon size={24} aria-hidden="true" />
-            <span>{NEWSLETTER_BLOCK_LABELS[kind]}</span>
-          </button>
-        ))}
-      </div>
+      <ContentBlocks disabled={!section} draggable add={add} />
       <div className={styles.aiGrid}>{ai}</div>
       <h3>Columns</h3>
       <div className={styles.ratioGrid}>
@@ -131,5 +116,39 @@ export function WorkspacePalette({
         ))}
       </div>
     </>
+  );
+}
+
+export function ContentBlocks({
+  disabled,
+  draggable = false,
+  kinds,
+  add,
+}: {
+  disabled: boolean;
+  draggable?: boolean;
+  kinds?: readonly NewsletterBlockKind[];
+  add: (kind: NewsletterBlockKind) => void;
+}) {
+  return (
+    <div className={styles.blockGrid}>
+      {palette
+        .filter(([kind]) => !kinds || kinds.includes(kind))
+        .map(([kind, Icon]) => (
+          <button
+            key={kind}
+            disabled={disabled}
+            draggable={draggable}
+            onDragStart={(event) =>
+              draggable &&
+              startBlockDrag(event.dataTransfer, { type: "add", kind })
+            }
+            onClick={() => add(kind)}
+          >
+            <Icon size={24} aria-hidden="true" />
+            <span>{NEWSLETTER_BLOCK_LABELS[kind]}</span>
+          </button>
+        ))}
+    </div>
   );
 }

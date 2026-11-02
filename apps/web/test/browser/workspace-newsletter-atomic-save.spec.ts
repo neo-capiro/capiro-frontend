@@ -1,3 +1,4 @@
+import { openNewsletterDetails } from "./newsletter-workspace-fixtures";
 import { expect, test, type Page } from "@playwright/test";
 import {
   ordinarySaveFixture,
@@ -7,21 +8,26 @@ import {
 const button = (page: Page, name: string) =>
   page.getByRole("button", { name, exact: true });
 const subject = (page: Page) => page.getByLabel("Subject", { exact: true });
-const title = (page: Page) => page.getByLabel("Document name", { exact: true });
+const title = (page: Page) =>
+  page.getByLabel("Newsletter name", { exact: true });
 const saved =
   "Saved. The immutable version and current saved content are confirmed.";
 async function open(page: Page) {
   await page.goto(ordinaryEditorUrl);
+  await openNewsletterDetails(page);
   await expect(subject(page)).toBeEditable();
 }
 async function edit(page: Page, suffix = "local") {
   await title(page).fill(`Newsletter name ${suffix}`);
   await subject(page).fill(`Email subject ${suffix} — café`);
-  await button(page, "Edit").click();
+  await page
+    .getByRole("button", { name: "Select paragraph block", exact: true })
+    .click();
   await page
     .getByLabel("Content", { exact: true })
     .fill(`Newsletter body ${suffix} — résumé`);
-  await button(page, "Save block").click();
+  await button(page, "Apply content").click();
+  await openNewsletterDetails(page);
 }
 test("existing newsletter saves title and full body in one atomic request and preserves unrelated fields", async ({
   page,
@@ -100,6 +106,7 @@ test("newsletter lost committed response survives reload and replays the exact f
   await expect(page.getByText(/Save unconfirmed/)).toBeVisible();
   const original = structuredClone(f.saves[0]);
   await page.reload();
+  await openNewsletterDetails(page);
   await expect(subject(page)).toHaveValue("Email subject local — café");
   await button(page, "Read current saved content").click();
   await expect(button(page, "Adopt current saved content")).toHaveCount(0);
@@ -232,6 +239,7 @@ test("newsletter held-client binding carries edits made during association into 
   await subject(page).fill("Typed during association");
   f.release();
   await expect(button(page, "Rebase retained edits")).toBeVisible();
+  await openNewsletterDetails(page);
   await expect(subject(page)).toHaveValue("Typed during association");
   await expect(button(page, "Save draft")).toBeDisabled();
   await button(page, "Rebase retained edits").click();
