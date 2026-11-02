@@ -1,6 +1,7 @@
 import type {
   OfficeSnapshot,
   OfficeDocument,
+  OfficeFailure,
   OfficeLaunch,
   OfficeRoute,
   OfficeResponseMap,
@@ -43,10 +44,39 @@ const initial: OfficeEditorState = Object.freeze({
   mode: "edit",
   saving: false,
 });
+type OfficeError = OfficeFailure["error"];
 class Refused extends Error {
-  constructor(readonly code: string) {
+  constructor(
+    readonly code: OfficeError["code"],
+    readonly outcome: OfficeError["outcome"],
+  ) {
     super(code);
   }
+}
+const reasons: Partial<Record<OfficeError["code"], string>> = {
+  NOT_FOUND: "This document or its private draft is no longer available.",
+  UNAVAILABLE: "Document editing is unavailable right now.",
+  DEADLINE: "The document service did not answer in time.",
+  TOO_LARGE: "The document is too large for the editor.",
+  PUBLISH_UNRESOLVED: "The publication could not be resolved.",
+};
+/** The plain reason for a failed action. Only an action none of whose requests reached the service changed nothing,
+ * so it asks for a retry; once an earlier step succeeded, the stored draft moved on and needs recovering first. */
+function failureNotice(refusal: Refused | null, untouched: boolean) {
+  if (refusal?.code === "CONFLICT")
+    return "The draft or editor changed. Recover its current state before continuing.";
+  if (!refusal)
+    return "The operation was not confirmed. Recover the saved draft before continuing.";
+  const reason =
+    reasons[refusal.code] ??
+    (refusal.outcome !== "NOT_DISPATCHED"
+      ? "The document service did not confirm the result."
+      : untouched
+        ? "The request did not reach the document service."
+        : "Earlier steps completed, but the last one did not reach the document service.");
+  return untouched
+    ? `${reason} Nothing changed; try again.`
+    : `${reason} Recover the saved draft before continuing.`;
 }
 type Port = OfficeTransport;
 
@@ -62,6 +92,8 @@ export class OfficeEditorController {
   private closed = false;
   private renewalPending = false;
   private modificationEpoch = 0;
+  /** Whether a request of the action in flight has already succeeded. */
+  private progressed = false;
   constructor(
     private readonly options: {
       selection: { versionId: string; draftId: string; editorId: string };
@@ -105,7 +137,9 @@ export class OfficeEditorController {
     signal.throwIfAborted();
     if (port !== this.transport || this.closed)
       throw new Error("Office connection changed");
-    if ("error" in reply.value) throw new Refused(reply.value.error.code);
+    if ("error" in reply.value)
+      throw new Refused(reply.value.error.code, reply.value.error.outcome);
+    this.progressed = true;
     return reply.value as OfficeResponseMap[R];
   }
   /** Resolves true only when the work completed; a refusal, an abort or a lost connection resolve false. */
@@ -117,6 +151,7 @@ export class OfficeEditorController {
     const controller = new AbortController(),
       port = this.transport;
     this.work = controller;
+    this.progressed = false;
     this.update({ busy: label, notice: "" });
     try {
       await work(port, controller.signal);
@@ -124,13 +159,14 @@ export class OfficeEditorController {
     } catch (error) {
       if (controller.signal.aborted || this.closed || port !== this.transport)
         return false;
-      this.closeFrame();
+      const refusal = error instanceof Refused ? error : null;
+      // Nothing reached the service: an open editor keeps its frame and unsaved edits, and the action stays retryable.
+      const untouched =
+        refusal?.outcome === "NOT_DISPATCHED" && !this.progressed;
+      if (!untouched) this.closeFrame();
       this.update({
-        uncertain: true,
-        notice:
-          error instanceof Refused && error.code === "CONFLICT"
-            ? "The draft or editor changed. Recover its current state before continuing."
-            : "The operation was not confirmed. Recover the saved draft before continuing.",
+        uncertain: untouched ? this.state.uncertain : true,
+        notice: failureNotice(refusal, untouched),
       });
       return false;
     } finally {

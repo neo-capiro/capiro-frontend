@@ -75,5 +75,10 @@ export const config = {
     "/api/memory/owner/:path*",
     "/api/uploads/:path*",
     "/api/meri/notifications",
+    // The Office editor, browser viewer and outreach-start handlers call Clerk auth() too; without these
+    // entries auth() throws and each proxy answers its own pre-dispatch refusal (502 REFUSED).
+    "/api/meri/office/:path*",
+    "/api/meri/browser/:path*",
+    "/api/outreach-generation/:path*",
   ],
 };
