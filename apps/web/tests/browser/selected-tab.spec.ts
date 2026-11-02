@@ -121,7 +121,7 @@ test("keyboard connection, exact attachment and native session loss", async ({
   await page.evaluate(() => window.__tabFixture.share());
   await expect(page.getByText("shared-tab.txt", { exact: true })).toBeVisible();
   await expect(
-    page.getByRole("status").filter({ hasText: "SCAN_PENDING" }),
+    page.getByRole("status").filter({ hasText: "Checking the file…" }),
   ).toBeVisible();
   expect(writes).toHaveLength(1);
   expect(writes[0]!.toString("utf8")).toBe(
@@ -146,7 +146,7 @@ test("lost acknowledgement is checked through existing attachment controls witho
     .getByRole("button", { name: "Check the status of shared-tab.txt" })
     .click();
   await expect(
-    page.getByRole("status").filter({ hasText: "SCAN_PENDING" }),
+    page.getByRole("status").filter({ hasText: "Checking the file…" }),
   ).toBeVisible();
   expect(writes).toHaveLength(1);
   await page.getByRole("button", { name: "Pause sharing" }).click();

@@ -2,7 +2,7 @@
 import { useId, useRef } from "react";
 import { PromptInputButton } from "@capiro/ui/prompt-input";
 import { UPLOAD_MIME } from "../../../shared/meri-uploads/facade";
-import type { UploadItem } from "../../../shared/meri-uploads/upload-controller";
+import { attachmentWording } from "../../../shared/meri-uploads/attachment-wording";
 import { DesignIcon } from "../../../shared/shell/DesignIcon";
 import styles from "../home.module.css";
 import type { ComposerAttachments } from "./attachment-slot";
@@ -15,41 +15,7 @@ const size = (bytes: number) =>
     ? `${(bytes / (1024 * 1024)).toFixed(1)} MiB`
     : `${Math.max(1, Math.round(bytes / 1024))} KiB`;
 
-/** Presentation of the state this page observed; it never claims a scan or extraction result. */
-function describe(item: UploadItem) {
-  if (item.refusal?.recoveryCleanupFailed)
-    return `${item.refusal.code}: recovery reference could not be cleared`;
-  if (item.state === "refused" || item.state === "unknown")
-    return `${item.refusal?.code ?? "UNKNOWN_OUTCOME"}${item.refusal?.uncertain ? " — outcome unverified" : ""}`;
-  if (item.state === "declaring") return "DECLARING";
-  if (item.state === "uploading") return "WRITING_ORIGINAL";
-  if (item.state === "removing") return "REMOVING";
-  if (item.state === "removed") return "REMOVED";
-  const receipt = item.receipt;
-  if (!receipt) return "STORED";
-  const scan = {
-    pending: "SCAN_PENDING",
-    clean: "SCAN_CLEAN",
-    infected: `SCAN_INFECTED${receipt.scanReason ? `:${receipt.scanReason}` : ""}`,
-    unavailable: `SCAN_UNAVAILABLE${receipt.scanReason ? `:${receipt.scanReason}` : ""}`,
-  }[receipt.scanStatus];
-  const extraction = {
-    pending: "EXTRACTION_PENDING",
-    available: "EXTRACTION_AVAILABLE",
-    partial: `EXTRACTION_PARTIAL:${receipt.extraction.limitations.join("+")}`,
-    unavailable: `EXTRACTION_UNAVAILABLE${receipt.extraction.limitations.length ? `:${receipt.extraction.limitations.join("+")}` : ""}`,
-    blocked: `EXTRACTION_BLOCKED${receipt.extraction.limitations.length ? `:${receipt.extraction.limitations.join("+")}` : ""}`,
-  }[receipt.extraction.status];
-  return [
-    scan,
-    extraction,
-    receipt.originalBytesAvailable
-      ? "ORIGINAL_AVAILABLE"
-      : "ORIGINAL_UNAVAILABLE",
-  ].join(" · ");
-}
-
-/** The composer's one attachment control: pick, show what the service said, check status, remove. */
+/** The composer's one attachment control: pick, show what the service said in plain words, check status, remove. */
 export function MeriAttachmentPicker({
   slot,
   assetSet,
@@ -117,7 +83,7 @@ export function MeriAttachmentPicker({
               }}
             >
               <span>{`file in this conversation: ${source.uploadId.slice(0, 8)}`}</span>
-              <span role="status">IN_CONVERSATION</span>
+              <span role="status">Already in this conversation</span>
               <button
                 type="button"
                 aria-pressed={source.selected}
@@ -148,68 +114,88 @@ export function MeriAttachmentPicker({
             width: "100%",
           }}
         >
-          {slot.items.map((item) => (
-            <li
-              key={item.requestId}
-              style={{
-                display: "flex",
-                gap: 8,
-                alignItems: "center",
-                flexWrap: "wrap",
-              }}
-            >
-              <span>{item.filename}</span>
-              <span>
-                {item.bytes > 0 ? size(item.bytes) : "Awaiting status"}
-              </span>
-              <span role="status">{describe(item)}</span>
-              {slot.selectedTab &&
-                item.receipt?.originalBytesAvailable &&
-                item.receipt.scanStatus === "clean" &&
-                item.receipt.storageStatus === "stored" &&
-                item.state !== "removed" &&
-                item.state !== "removing" &&
-                /\.(docx|xlsx|pptx)$/iu.test(item.filename) && (
-                  <OfficeUploadButton
-                    key={`${JSON.stringify(slot.selectedTab.context)}:${item.receipt.uploadId}:${item.receipt.sha256}`}
-                    context={slot.selectedTab.context}
-                    filename={item.filename}
-                    selection={{
-                      uploadId: item.receipt.uploadId,
-                      sha256: item.receipt.sha256,
-                    }}
-                  />
-                )}
-              {item.state === "declaring" || item.state === "uploading" ? (
-                <button
-                  type="button"
-                  onClick={() => slot.onCancel(item.requestId)}
-                  aria-label={`Cancel the upload of ${item.filename}`}
+          {slot.items.map((item) => {
+            const wording = attachmentWording(
+              item,
+              slot.overdue(item.requestId),
+            );
+            const settledOut =
+              item.state === "removing" || item.state === "removed";
+            return (
+              <li
+                key={item.requestId}
+                style={{
+                  display: "flex",
+                  gap: 8,
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <span>{item.filename}</span>
+                <span>
+                  {item.bytes > 0 ? size(item.bytes) : "Awaiting status"}
+                </span>
+                <span
+                  role="status"
+                  aria-busy={wording.waiting}
+                  title={wording.detail || undefined}
                 >
-                  Cancel
-                </button>
-              ) : null}
-              {item.state === "unknown" || item.state === "removing" ? (
-                <button
-                  type="button"
-                  onClick={() => slot.onCheck(item.requestId)}
-                  aria-label={`Check the status of ${item.filename}`}
-                >
-                  Check status
-                </button>
-              ) : null}
-              {item.state !== "removed" &&
-              (item.uploadId || item.state === "refused") ? (
-                <button
-                  type="button"
-                  onClick={() => slot.onRemove(item.requestId)}
-                  aria-label={`Remove ${item.filename}`}
-                >
-                  Remove
-                </button>
-              ) : null}
-            </li>
-          ))}
+                  {wording.label}
+                </span>
+                {slot.selectedTab &&
+                  item.receipt?.originalBytesAvailable &&
+                  item.receipt.scanStatus === "clean" &&
+                  item.receipt.storageStatus === "stored" &&
+                  !settledOut &&
+                  /\.(docx|xlsx|pptx)$/iu.test(item.filename) && (
+                    <OfficeUploadButton
+                      key={`${JSON.stringify(slot.selectedTab.context)}:${item.receipt.uploadId}:${item.receipt.sha256}`}
+                      context={slot.selectedTab.context}
+                      filename={item.filename}
+                      selection={{
+                        uploadId: item.receipt.uploadId,
+                        sha256: item.receipt.sha256,
+                      }}
+                    />
+                  )}
+                {item.state === "declaring" || item.state === "uploading" ? (
+                  <button
+                    type="button"
+                    onClick={() => slot.onCancel(item.requestId)}
+                    aria-label={`Cancel the upload of ${item.filename}`}
+                  >
+                    Cancel
+                  </button>
+                ) : null}
+                {item.state === "unknown" ? (
+                  <button
+                    type="button"
+                    onClick={() => slot.onCheck(item.requestId)}
+                    aria-label={`Check the status of ${item.filename}`}
+                  >
+                    Check status
+                  </button>
+                ) : null}
+                {settledOut ? (
+                  <button
+                    type="button"
+                    onClick={() => slot.onDismiss(item.requestId)}
+                    aria-label={`Dismiss ${item.filename}`}
+                  >
+                    Dismiss
+                  </button>
+                ) : item.uploadId || item.state === "refused" ? (
+                  <button
+                    type="button"
+                    onClick={() => slot.onRemove(item.requestId)}
+                    aria-label={`Remove ${item.filename}`}
+                  >
+                    Remove
+                  </button>
+                ) : null}
+              </li>
+            );
+          })}
         </ul>
       )}
     </>

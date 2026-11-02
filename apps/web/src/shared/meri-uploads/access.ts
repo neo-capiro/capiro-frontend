@@ -29,10 +29,16 @@ export type MeriUploadAccess = Readonly<{
   pending: UploadController["pending"];
   /** The exact ordered argument the next message of this session would carry. */
   sendArgument: UploadController["sendArgument"];
+  /** The service is still checking a stored attachment within the bounded wait; Send waits for it. */
+  checking: UploadController["checking"];
+  /** Whether one attachment's check has outrun the bounded wait. */
+  overdue: UploadController["overdue"];
   add: UploadController["add"];
   check: UploadController["check"];
   remove: UploadController["remove"];
   cancel: UploadController["cancel"];
+  /** Drops a row the service already stopped serving from this message; custody is untouched. */
+  dismiss: UploadController["dismiss"];
   /**
    * The current read of an upload the conversation already holds, under this same session: a saved
    * upload source event names an original, and only this owner may re-query it.

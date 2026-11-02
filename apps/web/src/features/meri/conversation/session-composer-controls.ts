@@ -9,6 +9,10 @@ import { selectionAvailable } from "../model-selection/model-selection";
 
 type Session = ReturnType<typeof useConversationSession>;
 
+/** Why Send waits while an attachment is still being checked. */
+export const ATTACHMENT_CHECK_BLOCKED =
+  "Checking your attachment… You can remove it to send now.";
+
 /**
  * The composer's session-bound controls, read once per mounted conversation so the compact composer
  * and the tools panel present the same exact state without duplicating subscriptions.
@@ -47,12 +51,19 @@ export function useComposerControls(
     !!session.continuation.busy;
   const selection =
     current?.controls.modelSelection ?? session.modelSelection ?? null;
-  const live = current?.controls ?? pendingConversationComposer(session, scope);
+  const controls =
+    current?.controls ?? pendingConversationComposer(session, scope);
   // The attachment slot follows the displayed conversation; a replaced port discards its results.
   const attachments = useComposerAttachments(
     current?.port ?? null,
-    live.attachUnavailable,
+    controls.attachUnavailable,
   );
+  // Send waits only while the service is genuinely still checking an attachment, and only for the
+  // controller's bounded wait; after it the person may send without the attachment or remove it.
+  const live =
+    attachments.checking && !controls.sendBlocked
+      ? { ...controls, sendBlocked: ATTACHMENT_CHECK_BLOCKED }
+      : controls;
   // A clarifying question is durable run state: it is re-derived from this conversation's own events on every render,
   // survives a refresh, and is answered with one lifecycle control.
   const question = useRunQuestion(current?.port ?? null);

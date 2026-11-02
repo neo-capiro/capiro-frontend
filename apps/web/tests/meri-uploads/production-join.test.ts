@@ -134,6 +134,22 @@ const stored = (
   originalBytesAvailable: false,
 });
 
+/** The verdict the service's own inspection lands after the write; a status read observes it. */
+const checked = (
+  uploadId: string,
+  requestId: string,
+  original: Original,
+): UploadReceipt => ({
+  uploadId,
+  requestId,
+  original: { ...original, versionId: "version-1" },
+  storageStatus: "stored",
+  scanStatus: "clean",
+  scanReason: null,
+  extraction: { status: "available", limitations: [] },
+  originalBytesAvailable: true,
+});
+
 const failed = (code: string, outcome: string) =>
   respond({ error: { code, outcome } }, 400);
 
@@ -247,6 +263,16 @@ function createJoinServer(
               (value) => value.requestId === id.requestId,
             );
       if (!attempt) return failed("UPLOAD_NOT_FOUND", "READ_UNAVAILABLE");
+      if (url.endsWith("status") && attempt.receipt.storageStatus === "stored") {
+        // The service inspected the stored original meanwhile; the read sees the clean verdict.
+        const verdict = checked(
+          attempt.uploadId,
+          attempt.requestId,
+          attempt.original,
+        );
+        attempts.set(attempt.uploadId, { ...attempt, receipt: verdict });
+        return respond(verdict);
+      }
       return respond(attempt.receipt);
     }
     return failed("INVALID_COMMAND", "NOT_DISPATCHED");
@@ -296,6 +322,9 @@ describe("the session's own attachment access", () => {
 
     expect(port.uploads.items()).toEqual([]);
     await port.uploads.add([file()]);
+    // The write stores the original; the service's inspection lands afterwards and one status read
+    // observes the clean verdict that makes the attachment sendable.
+    await port.uploads.check(port.uploads.items()[0]!.requestId);
     const argument = port.uploads.sendArgument();
     expect(argument).toHaveLength(1);
     expect(argument[0]?.sha256).toBe(pdfSha256);
@@ -323,6 +352,9 @@ describe("the session's own attachment access", () => {
     const server = createJoinServer();
     const { port, detach } = await connectedPort(server);
     await port.uploads.add([file()]);
+    // The write stores the original; the service's inspection lands afterwards and one status read
+    // observes the clean verdict that makes the attachment sendable.
+    await port.uploads.check(port.uploads.items()[0]!.requestId);
     const argument = port.uploads.sendArgument();
     const requestId = "33333333-3333-4333-8333-333333333333";
     const retained = {
@@ -472,6 +504,9 @@ describe("the session's own attachment access", () => {
     const server = createJoinServer();
     const { controller, detach, port } = await connectedPort(server);
     await port.uploads.add([file()]);
+    // The write stores the original; the service's inspection lands afterwards and one status read
+    // observes the clean verdict that makes the attachment sendable.
+    await port.uploads.check(port.uploads.items()[0]!.requestId);
     const Harness = ({ binding }: { binding: MeriConversationPort }) => {
       const slot = useComposerAttachments(
         binding,

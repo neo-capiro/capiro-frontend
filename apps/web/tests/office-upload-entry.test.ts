@@ -57,11 +57,14 @@ function render(
     items: [item],
     incoming: [],
     busy: false,
+    checking: false,
+    overdue: () => false,
     sendArgument: [],
     onPick: noop,
     onCheck: noop,
     onRemove: noop,
     onCancel: noop,
+    onDismiss: noop,
     onToggleIncoming: noop,
     limit: 8,
   };
@@ -84,7 +87,10 @@ describe("upload row Office entry", () => {
   it("offers the clean original even when text extraction is unavailable", () => {
     const html = render();
     expect(html).toContain("Open in editor");
-    expect(html).toContain("EXTRACTION_UNAVAILABLE");
+    // The chip says it plainly; the service's own code travels in the tooltip, never as the state.
+    expect(html).toContain("Could not read this file");
+    expect(html).toContain("text: unavailable");
+    expect(html).not.toContain("EXTRACTION_UNAVAILABLE");
   });
   it.each(["docx", "xlsx", "pptx"])(
     "offers %s retained originals",

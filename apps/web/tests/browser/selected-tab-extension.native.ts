@@ -183,7 +183,7 @@ test("native extension hands exact bytes to the real composer and reconciles a l
       .getByRole("button", { name: "Check the status of shared-tab.txt" })
       .click();
     await expect(
-      app.getByRole("status").filter({ hasText: "SCAN_PENDING" }),
+      app.getByRole("status").filter({ hasText: "Checking the file…" }),
     ).toBeVisible();
     await expect
       .poll(() =>
