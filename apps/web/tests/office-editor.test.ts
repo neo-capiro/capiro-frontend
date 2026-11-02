@@ -23,7 +23,7 @@ const launch: OfficeLaunch = {
   method: "POST",
   fields: {
     access_token: "synthetic-secret",
-    access_token_ttl: "1800000060000",
+    access_token_ttl: "0",
   },
   expiresAtMs: 1800000060000,
 };
