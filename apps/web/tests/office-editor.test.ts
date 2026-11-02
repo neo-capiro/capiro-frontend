@@ -517,6 +517,23 @@ describe("attended Office state", () => {
       saving: false,
     });
     expect(g.calls.filter((c) => c.route === "release")).toHaveLength(0);
+    // A leave while a Save is in flight is refused with the busy notice, never silently.
+    const i = fixture();
+    await i.editor.open();
+    i.editor.ready();
+    i.editor.modified(true);
+    const held = deferred<void>();
+    i.frame.save.mockImplementationOnce(() => held.promise);
+    const inFlight = i.editor.save();
+    await vi.waitFor(() => expect(i.frame.save).toHaveBeenCalledTimes(1));
+    await expect(i.editor.close(false)).resolves.toBe(false);
+    expect(i.editor.getSnapshot().notice).toBe(
+      "Saving… Wait for it to finish before leaving.",
+    );
+    expect(i.closed).not.toHaveBeenCalled();
+    i.setSaved(snapshot(1, selection.editorId));
+    held.resolve();
+    await inFlight;
     // A Save without modified edits never counts as unsaved work.
     const h = fixture();
     await h.editor.open();
