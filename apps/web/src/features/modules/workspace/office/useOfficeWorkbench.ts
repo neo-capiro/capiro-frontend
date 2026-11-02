@@ -13,6 +13,8 @@ export type OfficeWorkspaceTarget = Readonly<{
   /** Only for a freshly imported original, which is editable before any submitted chat turn. */
   runId?: string | undefined;
 }>;
+/** Where the opened version stands in its lineage, read from the immutable history before the editor opens. */
+export type OfficeHead = Readonly<{ latest: boolean; headVersionId: string }>;
 
 /** Connects the mounted workbench to the account cache and session lifetime. CODE's own controls arrive through
  * the frame channel and run the controller's confirmed sequences; the revision panel opens on CODE's request.
@@ -30,6 +32,7 @@ export function useOfficeWorkbench(
   const queries = useQueryClient(),
     container = useRef<HTMLDivElement>(null);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [head, setHead] = useState<OfficeHead | null>(null);
   const [host] = useState(() => {
     const origin = {
       conversationId: target.conversationId,
@@ -78,18 +81,41 @@ export function useOfficeWorkbench(
     host.session.getSnapshot,
     host.session.getSnapshot,
   );
-  // The route opened this document: the editor opens as soon as current access is confirmed, once.
+  // The route opened this document: once current access is confirmed, the history says whether this version is
+  // still the head. The head opens for editing; an older revision opens read-only, since a publication from it
+  // could only be refused as a stale parent after the person had edited.
   const opened = useRef(false);
   useEffect(() => {
     if (connection.status !== "ready" || opened.current) return;
     opened.current = true;
-    void host.editor.open();
-  }, [connection.status, host]);
+    const request = new AbortController();
+    void (async () => {
+      let latest = true,
+        headVersionId = target.versionId;
+      try {
+        const reply = await connection.port.history(
+          target.versionId,
+          request.signal,
+        );
+        if (reply.ok) {
+          headVersionId = reply.value.headVersionId;
+          latest = headVersionId === target.versionId;
+        }
+      } catch {
+        // Unknown lineage opens for editing; the service still refuses a stale publication.
+      }
+      if (request.signal.aborted) return;
+      setHead({ latest, headVersionId });
+      void host.editor.open(false, latest ? "edit" : "view");
+    })();
+    return () => request.abort();
+  }, [connection, host, target.versionId]);
   return {
     host,
     state,
     connection,
     container,
+    head,
     history: { open: historyOpen, setOpen: setHistoryOpen },
   };
 }

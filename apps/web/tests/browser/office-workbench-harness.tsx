@@ -136,7 +136,11 @@ function Harness() {
     <main style={{ padding: 24 }}>
       <h1>Office workbench</h1>
       <div className={styles.actions}>
-        <OfficeDraftControls editor={owner.editor} state={state} />
+        <OfficeDraftControls
+          editor={owner.editor}
+          state={state}
+          readOnly={false}
+        />
       </div>
       {state.busy && <p role="status">{state.busy}</p>}
       {state.notice && <p role="status">{state.notice}</p>}

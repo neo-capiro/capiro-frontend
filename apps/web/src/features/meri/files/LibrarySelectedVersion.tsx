@@ -1,7 +1,6 @@
 import { Button } from "@capiro/ui/button";
 import { DocumentPreviewPanel } from "./DocumentPreviewPanel";
 import { DocumentRevisionLink } from "./DocumentRevisionLink";
-import { OfficeWorkspaceLink } from "../office/OfficeWorkspaceLink";
 import type {
   DocumentLibraryAccess,
   LibraryVersion,
@@ -18,11 +17,14 @@ export function LibrarySelectedVersion({
   controller,
   state,
   selected,
+  officeOpen,
 }: {
   port: DocumentLibraryAccess;
   controller: DocumentLibraryController;
   state: DocumentLibraryState;
   selected: LibraryVersion;
+  /** In the Workspace's Office list: opens this version in the Office editor. */
+  officeOpen?: ((version: LibraryVersion) => void) | undefined;
 }) {
   const latest = selected.versionId === state.versions[0]?.versionId;
   return (
@@ -31,7 +33,15 @@ export function LibrarySelectedVersion({
         Selected version: {selected.versionId}
       </p>
       <div className={styles.controls}>
-        <OfficeWorkspaceLink version={selected} />
+        {officeOpen && (
+          <Button
+            variant="outline"
+            disabled={state.busy}
+            onClick={() => officeOpen(selected)}
+          >
+            Open in Workspace
+          </Button>
+        )}
         <Button
           variant="outline"
           disabled={state.busy}

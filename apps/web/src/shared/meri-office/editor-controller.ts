@@ -14,6 +14,7 @@ export interface OfficeFrame {
   save(signal: AbortSignal): Promise<void>;
   dispose(): void;
 }
+export type OfficeEditorMode = "edit" | "view";
 export type OfficeEditorState = Readonly<{
   connected: boolean;
   busy: string | null;
@@ -24,6 +25,8 @@ export type OfficeEditorState = Readonly<{
   modified: boolean;
   uncertain: boolean;
   notice: string;
+  /** The mode the open frame was launched with; a non-head revision is viewed, never edited. */
+  mode: OfficeEditorMode;
 }>;
 const initial: OfficeEditorState = Object.freeze({
   connected: false,
@@ -35,6 +38,7 @@ const initial: OfficeEditorState = Object.freeze({
   modified: false,
   uncertain: false,
   notice: "",
+  mode: "edit",
 });
 class Refused extends Error {
   constructor(readonly code: string) {
@@ -194,7 +198,8 @@ export class OfficeEditorController {
       this.keep(await this.request(port, "read", this.key(), signal));
       this.update({ notice: "Current saved draft loaded." });
     });
-  open = (takeover = false) =>
+  /** Opens the frame; `view` for a revision that is no longer the head, whose edits could never publish. */
+  open = (takeover = false, mode: OfficeEditorMode = "edit") =>
     this.run("Opening editor…", async (port, signal) => {
       if (this.state.frame) return;
       const opened = await this.request(port, "open", this.key(), signal);
@@ -217,12 +222,7 @@ export class OfficeEditorController {
           ? await this.request(
               port,
               "renew",
-              {
-                ...this.key(),
-                editorId,
-                expectedEpoch: editor.epoch,
-                mode: "edit",
-              },
+              { ...this.key(), editorId, expectedEpoch: editor.epoch, mode },
               signal,
             )
           : await this.request(
@@ -232,14 +232,14 @@ export class OfficeEditorController {
                 ...this.key(),
                 editorId,
                 expectedEpoch: editor.epoch,
-                mode: "edit",
+                mode,
                 operation: takeover ? "takeover" : "acquire",
               },
               signal,
             );
       if (!result.launch) throw new Error("Editor launch missing");
       this.keep(result);
-      this.update({ frame: true, ready: false, modified: false });
+      this.update({ frame: true, ready: false, modified: false, mode });
       this.options.frame.launch(result.launch);
     });
   private renew = () =>
@@ -254,7 +254,7 @@ export class OfficeEditorController {
           ...this.key(),
           editorId: editor.editorId,
           expectedEpoch: editor.epoch,
-          mode: "edit",
+          mode: this.state.mode,
         },
         signal,
       );
@@ -296,24 +296,28 @@ export class OfficeEditorController {
       ),
     );
   }
-  private async publishWith(port: Port, signal: AbortSignal) {
+  /** A saved, released, not yet published draft: what Publish turns into the next revision. */
+  private unpublishedDraft() {
     const saved = this.state.snapshot;
-    if (
-      this.state.frame ||
-      !saved ||
-      saved.editor.editorId !== null ||
-      !saved.draft.sha256 ||
-      saved.draft.sequence < 1 ||
-      saved.draft.state === "published"
-    )
-      throw new Error("No released saved draft to publish");
+    return !this.state.frame &&
+      saved !== null &&
+      saved.editor.editorId === null &&
+      !!saved.draft.sha256 &&
+      saved.draft.sequence > 0 &&
+      saved.draft.state !== "published"
+      ? saved
+      : null;
+  }
+  private async publishWith(port: Port, signal: AbortSignal, notify = true) {
+    const saved = this.unpublishedDraft();
+    if (!saved) throw new Error("No released saved draft to publish");
     const result = await this.request(
       port,
       "publish",
       {
         ...this.key(),
         sequence: saved.draft.sequence,
-        sha256: saved.draft.sha256,
+        sha256: saved.draft.sha256!,
       },
       signal,
     );
@@ -323,10 +327,11 @@ export class OfficeEditorController {
       uncertain: false,
       notice: "Revision published.",
     });
-    this.options.onPublished?.(result.publication);
+    if (notify) this.options.onPublished?.(result.publication);
   }
   save = () => {
-    if (!this.state.frame || !this.state.ready) return Promise.resolve();
+    if (!this.state.frame || !this.state.ready || this.state.mode !== "edit")
+      return Promise.resolve();
     return this.run("Saving…", async (port, signal) => {
       await this.saveWith(port, signal);
       this.update({
@@ -335,7 +340,9 @@ export class OfficeEditorController {
       });
     });
   };
-  /** Close on request (CODE's close control or the host): pending changes are saved first, then the editor is released. */
+  /** Close on request (CODE's close, the host's Close editor, leaving the page): pending changes are saved, the editor
+   * is released, and a draft with saves since the last publication becomes a revision, so no private work is left
+   * unpublished behind a closed editor. The caller learns of the close, not of a publication it did not ask for. */
   close = () => {
     if (
       (this.state.frame && !this.state.ready) ||
@@ -343,38 +350,21 @@ export class OfficeEditorController {
     )
       return Promise.resolve();
     return this.run("Closing editor…", async (port, signal) => {
-      if (this.state.frame && this.state.modified)
-        await this.saveWith(port, signal);
+      const editing = this.state.frame && this.state.mode === "edit";
+      if (editing && this.state.modified) await this.saveWith(port, signal);
       await this.releaseWith(port, signal);
-      this.update({ notice: "Editor closed. The saved draft stays private." });
+      if (editing && this.unpublishedDraft())
+        await this.publishWith(port, signal, false);
+      this.update({
+        notice: this.state.publication
+          ? "Editor closed; your saved changes were published as a revision."
+          : "Editor closed.",
+      });
       this.options.onClosed?.();
     });
   };
-  finish = () => {
-    if (
-      (this.state.frame && !this.state.ready) ||
-      this.state.modified ||
-      this.state.snapshot?.editor.editorId !== this.options.selection.editorId
-    )
-      return Promise.resolve();
-    return this.run("Releasing editor…", async (port, signal) => {
-      await this.releaseWith(port, signal);
-      this.update({
-        notice: "Editor released. The saved draft is ready to publish.",
-      });
-    });
-  };
   publish = () => {
-    const saved = this.state.snapshot;
-    if (
-      this.state.frame ||
-      !saved ||
-      saved.editor.editorId !== null ||
-      !saved.draft.sha256 ||
-      saved.draft.sequence < 1 ||
-      saved.draft.state === "published" ||
-      this.state.uncertain
-    )
+    if (!this.unpublishedDraft() || this.state.uncertain)
       return Promise.resolve();
     return this.run("Publishing revision…", (port, signal) =>
       this.publishWith(port, signal),
@@ -386,6 +376,7 @@ export class OfficeEditorController {
     if (
       this.state.uncertain ||
       (this.state.frame && !this.state.ready) ||
+      this.state.mode !== "edit" ||
       this.state.snapshot?.draft.state === "published"
     )
       return Promise.resolve();

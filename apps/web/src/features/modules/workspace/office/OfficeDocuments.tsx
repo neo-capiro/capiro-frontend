@@ -1,6 +1,7 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { DocumentLibrary } from "../../../meri/files/DocumentLibrary";
-import { OfficeWorkspaceLinks } from "../../../meri/office/OfficeWorkspaceLink";
+import { officeWorkspaceHref } from "../../../meri/office/OfficeWorkspaceLink";
 import styles from "./office-workspace.module.css";
 
 /** The Workspace's Office documents: the immutable Word, Excel and PowerPoint versions Meri generated or a person
@@ -12,6 +13,7 @@ export function OfficeDocuments({
   account: { tenantId: string; actorId: string };
   clientId?: string;
 }) {
+  const router = useRouter();
   return (
     <section aria-label="Office documents">
       <h2 className={styles.sectionHeading}>Office documents</h2>
@@ -20,13 +22,11 @@ export function OfficeDocuments({
         Each revision is immutable; Save keeps a private draft and Publish
         revision creates the next one.
       </p>
-      <OfficeWorkspaceLinks enabled>
-        <DocumentLibrary
-          account={account}
-          {...(clientId ? { clientId } : {})}
-          office
-        />
-      </OfficeWorkspaceLinks>
+      <DocumentLibrary
+        account={account}
+        {...(clientId ? { clientId } : {})}
+        officeOpen={(version) => router.push(officeWorkspaceHref(version))}
+      />
     </section>
   );
 }

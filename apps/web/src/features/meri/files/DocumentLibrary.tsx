@@ -34,12 +34,13 @@ type Origin = { conversationId: string; clientId: string | null };
 export function DocumentLibrary({
   account,
   clientId,
-  office = false,
+  officeOpen,
 }: {
   account: Account;
   clientId?: string;
-  /** Only Word, Excel and PowerPoint versions: the Workspace's Office documents. */
-  office?: boolean;
+  /** The Workspace's Office documents: only Word, Excel and PowerPoint versions, each opened by this action.
+   * Absent (the Files library), those versions are not listed here at all. */
+  officeOpen?: ((version: LibraryVersion) => void) | undefined;
 }) {
   const [rows, setRows] = useState<ConversationListPage["conversations"]>([]);
   const [before, setBefore] =
@@ -156,7 +157,7 @@ export function DocumentLibrary({
           key={JSON.stringify(origin)}
           account={account}
           origin={origin}
-          office={office}
+          officeOpen={officeOpen}
         />
       )}
     </section>
@@ -167,12 +168,12 @@ function LibraryConnection({
   account,
   origin,
   anchor,
-  office = false,
+  officeOpen,
 }: {
   account: Account;
   origin: Origin;
   anchor?: LibraryVersion;
-  office?: boolean;
+  officeOpen?: ((version: LibraryVersion) => void) | undefined;
 }) {
   const [host] = useState(
     () =>
@@ -210,7 +211,7 @@ function LibraryConnection({
           key={state.lifetimeKey}
           port={state.port}
           account={account}
-          office={office}
+          officeOpen={officeOpen}
           {...(anchor ? { anchor } : {})}
         />
       </>
@@ -240,12 +241,12 @@ function LibraryPages({
   port,
   account,
   anchor,
-  office = false,
+  officeOpen,
 }: {
   port: DocumentLibraryAccess;
   account: Account;
   anchor?: LibraryVersion;
-  office?: boolean;
+  officeOpen?: ((version: LibraryVersion) => void) | undefined;
 }) {
   const [scope, setScope] = useState<LibraryScope>(
     port.context.selectedClientId === null ? "owner" : "client",
@@ -278,7 +279,7 @@ function LibraryPages({
         key={anchor?.versionId ?? scope}
         port={port}
         query={anchor ? { anchor } : { scope }}
-        office={office}
+        officeOpen={officeOpen}
         onHistory={setSelected}
       />
       {!anchor && selected && (
@@ -286,7 +287,7 @@ function LibraryPages({
           key={selected.versionId}
           account={account}
           anchor={selected}
-          office={office}
+          officeOpen={officeOpen}
           origin={{
             conversationId: selected.binding.conversationId,
             clientId:
@@ -303,12 +304,12 @@ function LibraryPages({
 function LibraryPage({
   port,
   query,
-  office = false,
+  officeOpen,
   onHistory,
 }: {
   port: DocumentLibraryAccess;
   query: { scope: LibraryScope } | { anchor: LibraryVersion };
-  office?: boolean;
+  officeOpen?: ((version: LibraryVersion) => void) | undefined;
   onHistory: (version: LibraryVersion) => void;
 }) {
   const [controller] = useState(
@@ -324,9 +325,10 @@ function LibraryPage({
     controller.getSnapshot,
   );
   const history = "anchor" in query;
-  const versions = office
-    ? state.versions.filter(isOfficeTarget)
-    : state.versions;
+  const office = officeOpen !== undefined;
+  const versions = state.versions.filter(
+    (version) => isOfficeTarget(version) === office,
+  );
   return (
     <section
       className={styles.panel}
@@ -386,6 +388,7 @@ function LibraryPage({
           controller={controller}
           state={state}
           selected={state.selected}
+          officeOpen={officeOpen}
         />
       )}
     </section>

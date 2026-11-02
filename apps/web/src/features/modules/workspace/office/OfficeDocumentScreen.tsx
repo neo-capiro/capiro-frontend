@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { ActionButton } from "../../../../shared/module-ui";
 import { OfficeAskMeri } from "../../../meri/office/OfficeAskMeri";
@@ -16,7 +17,8 @@ import styles from "./office-workspace.module.css";
 
 /** One Office document opened in the Workspace: Collabora's full workbench in the page, the host's revision and
  * draft actions beside it, the immutable revision history and the Ask Meri entry. CODE's Save, Save As and close
- * controls post to the host and run the confirmed Save, publish and release sequences. */
+ * controls post to the host and run the confirmed Save, publish and release sequences. Leaving with an open
+ * editor goes through the same close: pending changes are saved and published before the page is left. */
 export function OfficeDocumentScreen({
   account,
   target,
@@ -30,18 +32,30 @@ export function OfficeDocumentScreen({
   /** Reopen the Workspace on another revision of this document. */
   onOpenVersion(versionId: string): void;
 }) {
-  const { host, state, connection, container, history } = useOfficeWorkbench(
-    account,
-    target,
-    {
+  const { host, state, connection, container, head, history } =
+    useOfficeWorkbench(account, target, {
       onPublished: (document) => onOpenVersion(document.version.versionId),
       onClosed: onClose,
       onDiscarded: onClose,
-    },
-  );
+    });
   const draft = state.snapshot?.draft;
   const filename = draft?.filename ?? "Office document";
   const published = draft?.state === "published";
+  const readOnly = head !== null && !head.latest;
+  // Leaving with unsaved or in-flight work: the browser asks before unload; the host's own exits save first.
+  const guarded = state.frame && (state.modified || state.busy !== null);
+  useEffect(() => {
+    if (!guarded) return;
+    const warn = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [guarded]);
+  const leave = () => {
+    if (state.frame && state.ready) void host.editor.close();
+    else onClose();
+  };
   const askBlocked = state.frame
     ? "Close the editor and publish the revision before asking Meri: Meri reads the published revision, not an open editor."
     : draft && draft.sequence > 0 && !published
@@ -55,20 +69,31 @@ export function OfficeDocumentScreen({
     <section className={styles.screen} aria-label="Office document">
       <header className={styles.heading}>
         <div>
-          <button type="button" className={styles.back} onClick={onClose}>
+          <button
+            type="button"
+            className={styles.back}
+            disabled={state.busy !== null}
+            onClick={leave}
+          >
             <ArrowLeft size={14} aria-hidden="true" /> Documents
           </button>
           <h1>{filename}</h1>
           <p>
-            {draft
-              ? draft.sequence > 0
-                ? `Private draft saved ${new Date(draft.savedAt).toLocaleString()} · expires ${new Date(draft.expiresAt).toLocaleString()}`
-                : "No private save yet. Save keeps a private draft; Publish revision creates the next immutable revision."
-              : "Checking the current document…"}
+            {readOnly
+              ? "An earlier revision, shown read-only."
+              : draft
+                ? draft.sequence > 0
+                  ? `Private draft saved ${new Date(draft.savedAt).toLocaleString()} · expires ${new Date(draft.expiresAt).toLocaleString()}`
+                  : "No private save yet. Save keeps a private draft; Publish revision creates the next immutable revision."
+                : "Checking the current document…"}
           </p>
         </div>
         <div className={styles.actions}>
-          <OfficeDraftControls editor={host.editor} state={state} />
+          <OfficeDraftControls
+            editor={host.editor}
+            state={state}
+            readOnly={readOnly}
+          />
           <ActionButton
             aria-pressed={history.open}
             onClick={() => history.setOpen(!history.open)}
@@ -78,6 +103,18 @@ export function OfficeDocumentScreen({
         </div>
       </header>
       <div className={styles.status}>
+        {readOnly && (
+          <p role="status">
+            A newer revision of this document exists. Open the latest revision
+            to edit it.{" "}
+            <ActionButton
+              disabled={state.busy !== null}
+              onClick={() => onOpenVersion(head!.headVersionId)}
+            >
+              Open latest
+            </ActionButton>
+          </p>
+        )}
         {!state.connected && (
           <p role="status">
             {connection.status === "connecting" || connection.status === "idle"
@@ -102,7 +139,7 @@ export function OfficeDocumentScreen({
         {state.modified && (
           <p role="status">
             Changes not yet saved. Save in the editor keeps them as your private
-            draft.
+            draft; closing saves and publishes them.
           </p>
         )}
         {published && state.publication && (
@@ -125,9 +162,11 @@ export function OfficeDocumentScreen({
               <p>
                 {state.busy
                   ? state.busy
-                  : published
-                    ? "This revision is published. Open the newest revision to keep editing."
-                    : "The editor is closed. Open it to continue editing this private draft."}
+                  : readOnly
+                    ? "This earlier revision is closed. Open the latest revision to edit the document."
+                    : published
+                      ? "This revision is published. Open the newest revision to keep editing."
+                      : "The editor is closed. Open it to continue editing this private draft."}
               </p>
             </div>
           )}

@@ -41,6 +41,12 @@ export function codeLaunchUrl(actionUrl: string, lang?: string | null) {
     url.searchParams.set("lang", lang);
   return url.href;
 }
+/** The frame's permissions policy, granted to the editor origin explicitly: a frame navigated by a form POST has no
+ * `src`, so a bare feature name would grant nothing inside CODE. */
+export const codeFrameAllow = (editorOrigin: string) =>
+  ["fullscreen", "clipboard-read", "clipboard-write"]
+    .map((feature) => `${feature} ${new URL(editorOrigin).origin}`)
+    .join("; ");
 /** UI events whose default CODE action the host takes over once the document is loaded. */
 const HOST_OWNED_ACTIONS = ["UI_Save", "UI_Close"] as const;
 

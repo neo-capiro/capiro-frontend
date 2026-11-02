@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   CodeFrameChannel,
+  codeFrameAllow,
   codeLaunchUrl,
 } from "../src/shared/meri-office/code-frame";
 import type { OfficeLaunch } from "@capiro/meri-contracts/office-application";
@@ -261,5 +262,13 @@ describe("CODE frame channel", () => {
     expect(
       new URL(codeLaunchUrl(action, "not a tag")).searchParams.has("lang"),
     ).toBe(false);
+  });
+  it("grants the frame's features to the editor origin explicitly, since a form-posted frame has no src to match", () => {
+    expect(codeFrameAllow("https://office.example.test")).toBe(
+      "fullscreen https://office.example.test; clipboard-read https://office.example.test; clipboard-write https://office.example.test",
+    );
+    expect(
+      codeFrameAllow("https://office.example.test/browser/x/cool.html"),
+    ).toBe(codeFrameAllow("https://office.example.test"));
   });
 });

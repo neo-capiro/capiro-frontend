@@ -4,12 +4,17 @@ import type {
   OfficeEditorState,
 } from "../../../../shared/meri-office/editor-controller";
 
-type Props = { editor: OfficeEditorController; state: OfficeEditorState };
+type Props = {
+  editor: OfficeEditorController;
+  state: OfficeEditorState;
+  /** The opened version is not the head: it is viewed, never edited or published. */
+  readOnly: boolean;
+};
 
 /** The host's few explicit actions beside CODE's own toolbar: publishing an immutable revision, and the draft-level
  * actions (open, recover, discard, take over) CODE has no control for. Saving and closing are CODE's controls, which
  * post to the host; the same sequences are reachable here for a closed frame. */
-export function OfficeDraftControls({ editor, state }: Props) {
+export function OfficeDraftControls({ editor, state, readOnly }: Props) {
   const snapshot = state.snapshot,
     draft = snapshot?.draft;
   const disabled = !state.connected || state.busy !== null;
@@ -24,6 +29,12 @@ export function OfficeDraftControls({ editor, state }: Props) {
     !published &&
     !state.uncertain;
   const editing = state.frame && state.ready;
+  if (readOnly)
+    return editing ? (
+      <ActionButton disabled={disabled} onClick={() => void editor.close()}>
+        Close
+      </ActionButton>
+    ) : null;
   return (
     <>
       {editing && (

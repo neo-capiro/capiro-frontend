@@ -107,7 +107,7 @@ test("CODE's Save As publishes the saved draft as the next immutable revision an
   ).toBeDisabled();
 });
 
-test("CODE's close saves pending changes, releases the editor and reports the close", async ({
+test("CODE's close saves pending changes, releases the editor, publishes the saved draft and reports the close", async ({
   page,
 }) => {
   await setup(page);
@@ -117,12 +117,21 @@ test("CODE's close saves pending changes, releases the editor and reports the cl
   await frameOf(page).locator("#modify").click();
   await frameOf(page).locator("#close").click();
   await expect(page.getByLabel("Service operations")).toHaveText(
-    "open,launch,read,read,release,closed",
+    "open,launch,read,read,release,publish,closed",
   );
   await expect(page.locator("iframe")).toHaveCount(0);
   await expect(
+    page.locator("p[role=status]").filter({
+      hasText: "your saved changes were published as a revision",
+    }),
+  ).toBeVisible();
+  // The draft is published: nothing is left to open or publish from it.
+  await expect(
     page.getByRole("button", { name: "Open editor", exact: true }),
-  ).toBeEnabled();
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Publish revision", exact: true }),
+  ).toBeDisabled();
 });
 
 test("parent-window spoof cannot mark the cross-origin frame ready", async ({

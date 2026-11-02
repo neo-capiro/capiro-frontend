@@ -1,4 +1,8 @@
-import { CodeFrameChannel, submitCodeLaunch } from "./code-frame";
+import {
+  CodeFrameChannel,
+  codeFrameAllow,
+  submitCodeLaunch,
+} from "./code-frame";
 import type { OfficeFrame } from "./editor-controller";
 import type { OfficeLaunch } from "@capiro/meri-contracts/office-application";
 
@@ -21,7 +25,7 @@ export class OfficeFrameHost implements OfficeFrame {
     frame.title = "Office document editor";
     frame.name = `meri-office-${crypto.randomUUID()}`;
     frame.referrerPolicy = "no-referrer";
-    frame.allow = "fullscreen; clipboard-read; clipboard-write";
+    frame.allow = codeFrameAllow(value.editorOrigin);
     container.append(frame);
     this.frame = frame;
     try {
