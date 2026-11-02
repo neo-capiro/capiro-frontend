@@ -92,7 +92,16 @@ async function request<R extends HistoryRoute>(
       response.status,
       body,
       admitted,
-    );
+    ).catch((cause: unknown) => {
+      // An error answer the contract does not admit (an edge or gateway page, an unexpected
+      // status/code pair) keeps only its status: the caller can tell an unanswered request from a
+      // refusal without any upstream text.
+      if (response.status === 200) throw cause;
+      throw new ConversationHistoryUnavailable(
+        response.status,
+        "CONVERSATION_RESPONSE_INVALID",
+      );
+    });
     current.throwIfAborted();
     if ("error" in value)
       throw new ConversationHistoryUnavailable(

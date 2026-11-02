@@ -14,6 +14,10 @@ import {
   type IntentScope,
   type ListState,
 } from "./useConversationIntents";
+import {
+  useReconnectSchedule,
+  type ReconnectState,
+} from "../../../../shared/meri-conversations/reconnect-schedule";
 import styles from "./intents.module.css";
 import ui from "../../ui/meri-ui.module.css";
 import { ConversationRoutine } from "../../routines/ConversationRoutine";
@@ -278,7 +282,6 @@ function Rows({
   list,
   rows,
   attempts,
-  retry,
   loadMore,
   decide,
   refresh,
@@ -290,26 +293,7 @@ function Rows({
   if (list.status === "disabled") return null;
   if (list.status === "loading")
     return <p className={styles.muted}>Reading the actions Meri prepared…</p>;
-  if (list.status === "unavailable")
-    return (
-      <div className={styles.panel} role="status">
-        <p className={styles.muted}>
-          Prepared actions could not be read right now. Their outcomes remain
-          unconfirmed.
-        </p>
-        <div className={styles.actions}>
-          <Button
-            type="button"
-            variant="outline"
-            className={ui.outline}
-            onClick={retry}
-          >
-            Try again
-          </Button>
-        </div>
-      </div>
-    );
-  if (rows.length === 0) return null;
+  if (list.status !== "ready" || rows.length === 0) return null;
   return (
     <>
       <ul className={styles.list}>
@@ -366,9 +350,10 @@ function Rows({
 }
 
 /**
- * The panel itself. It exists only while there is a proposal, a one-time result or a failed read to
- * show; a conversation without prepared actions announces nothing. A refresh of a list that had
- * proposals keeps the panel mounted rather than blinking it away.
+ * The panel itself. It exists only while there is a proposal or a one-time result to show; a
+ * conversation without prepared actions announces nothing, and neither does a read that failed
+ * before anything was loaded (the next approval or file activity reads the list again). A refresh
+ * of a list that had proposals keeps the panel mounted rather than blinking it away.
  */
 function Body({
   retained,
@@ -379,7 +364,6 @@ function Body({
   retained: ListState;
 }) {
   const shown =
-    state.list.status === "unavailable" ||
     state.rows.length > 0 ||
     state.oneTimeResults.length > 0 ||
     (state.list.status === "loading" &&
@@ -413,11 +397,19 @@ function Body({
   );
 }
 
+/** Which automatic re-read state a list read is in; exported for its tests only. */
+export const approvalsReadState = (list: ListState): ReconnectState =>
+  list.status === "unavailable" && !list.accessLost
+    ? "failing"
+    : list.status === "loading"
+      ? "busy"
+      : "ok";
+
 /**
  * The conversation's prepared actions. Everything shown is read from Meri's durable intent list; a
  * decision is recorded only by Meri's decision owner, and nothing here approves on its own. The
- * panel exists only while there is a proposal, a one-time result or a failed read to show; a
- * conversation without prepared actions announces nothing.
+ * panel exists only while there is a proposal or a one-time result to show; a conversation
+ * without prepared actions announces nothing.
  */
 export function ConversationIntents({
   access,
@@ -457,8 +449,24 @@ export function ConversationIntents({
       : state.list;
   return (
     <>
+      <ApprovalsReread list={state.list} refresh={state.refresh} />
       <Body {...state} access={access} retained={displayed} />
       {children?.(displayed.status === "ready" ? displayed.items : [])}
     </>
   );
+}
+
+/**
+ * A read that failed before anything was loaded shows no panel; it is read again on the same
+ * backed-off schedule as the transcript. A lost membership waits for reauthorization instead.
+ */
+function ApprovalsReread({
+  list,
+  refresh,
+}: {
+  list: ListState;
+  refresh: () => Promise<void>;
+}) {
+  useReconnectSchedule(approvalsReadState(list), () => void refresh());
+  return null;
 }

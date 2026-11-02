@@ -190,10 +190,11 @@ test("synthetic partial history keeps an admitted current prompt visible while n
       : route.fallback(),
   );
   await page.goto(selectedUrl);
+  // Control did not answer the latest-turn read: one plain notice that re-reads on its own.
   await expect(
-    page.getByText(
-      "The latest turn could not be verified. Reload saved history before starting another turn.",
-    ),
+    page
+      .getByRole("region", { name: "Saved conversation history" })
+      .getByText(/we'll reconnect automatically/),
   ).toBeVisible();
   await expect(
     page
@@ -236,16 +237,14 @@ test("synthetic hard reload with RESERVED and no immutable submit identity can o
   });
   await page.goto(selectedUrl);
   await expect(
-    page.getByText(/original message identity is unavailable/),
+    page.getByText(/cannot tell whether your last message was sent/),
   ).toBeVisible();
   await composer(page).fill("A different request");
   await expect(sendButton(page)).toBeDisabled();
-  await page
-    .getByRole("button", { name: "Check reserved turn", exact: true })
-    .click();
+  await page.getByRole("button", { name: "Check again", exact: true }).click();
   await page.reload();
   await expect(
-    page.getByText(/original message identity is unavailable/),
+    page.getByText(/cannot tell whether your last message was sent/),
   ).toBeVisible();
   await expect(sendButton(page)).toBeDisabled();
   expect(mappings).toEqual([
@@ -356,8 +355,10 @@ test("synthetic lost reservation and submit ACKs preserve source, exact target a
   await composer(page).fill("Second question");
   await expect(sendButton(page)).toBeEnabled();
   await sendButton(page).click();
+  // Control did not answer the reservation: the same check runs again on request.
   await page
-    .getByRole("button", { name: "Recover same turn", exact: true })
+    .getByRole("region", { name: "Saved conversation history" })
+    .getByRole("button", { name: "Try again", exact: true })
     .click();
   await page
     .getByRole("button", { name: "Retry same request", exact: true })

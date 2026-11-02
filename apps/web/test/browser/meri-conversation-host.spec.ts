@@ -403,11 +403,18 @@ for (const status of [401, 403, 502])
     );
     await connect(page).catch(() => undefined);
     if (status === 502) {
-      await expect(page.getByRole("alert")).toContainText(
+      // Control did not answer: one plain notice with its Retry, never the raw code.
+      await expect(
+        page
+          .getByRole("status")
+          .filter({ hasText: "we'll reconnect automatically" })
+          .first(),
+      ).toBeVisible();
+      await expect(page.locator("body")).not.toContainText(
         "CONVERSATION_UNAVAILABLE",
       );
       await expect(
-        page.getByRole("button", { name: "Reload transcript", exact: true }),
+        page.getByRole("button", { name: "Retry", exact: true }).first(),
       ).toBeVisible();
     } else
       await expect(
@@ -691,7 +698,8 @@ test("idle renewal preserves an open feedback draft, uses fresh credentials, and
     hints.push(r.request().postDataJSON());
     const attempt = hints.length;
     if (attempt === 2) await held;
-    if (attempt === 3)
+    // The denial persists: the one automatic recheck meets it again and the manual check remains.
+    if (attempt >= 3)
       return reply(r, { error: { code: "SESSION_REFUSED" } }, 403);
     return reply(r, {
       credential: `action_session_${String(attempt).repeat(43)}`,
@@ -754,9 +762,18 @@ test("idle renewal preserves an open feedback draft, uses fresh credentials, and
     { clientId, conversationId: binding.conversationId, runId: binding.runId },
   ]);
   await expect.poll(() => hints.length, { timeout: 10_000 }).toBe(3);
+  await expect(dialog).toHaveCount(0);
+  await expect(page.getByText("Before expiry", { exact: true })).toHaveCount(0);
+  // Access loss rechecks itself once (attempt 4) and then waits for the person.
+  await expect.poll(() => hints.length, { timeout: 10_000 }).toBe(4);
   await expect(
     page.getByRole("heading", { name: "Conversation access unavailable" }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Check access again", exact: true }),
+  ).toBeVisible();
+  await page.waitForTimeout(2_500);
+  expect(hints).toHaveLength(4);
   await expect(dialog).toHaveCount(0);
   await expect(page.getByText("Before expiry", { exact: true })).toHaveCount(0);
   expect(f.unexpected).toEqual([]);

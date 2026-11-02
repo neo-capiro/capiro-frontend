@@ -99,7 +99,7 @@ export function useConversationIntents(
   const now = options.now ?? Date.now;
   const onDecisionSettled = options.onDecisionSettled;
   const { conversationId, tenantId, actorId } = scope;
-  const { list, refresh, retry, loadMore } = useIntentList(
+  const { list, refresh, loadMore } = useIntentList(
     access,
     conversationId,
     options.refreshKey,
@@ -420,7 +420,6 @@ export function useConversationIntents(
     rows,
     attempts,
     refresh,
-    retry,
     loadMore,
     decide,
     decisionsReady: ready,

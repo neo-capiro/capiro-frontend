@@ -60,6 +60,7 @@ export function useRunCommands(
     storageError,
     busy,
     error,
+    failure,
     perform,
     active,
   } = useRunCommandJournal(port, initialPrompt, alive);
@@ -125,6 +126,7 @@ export function useRunCommands(
     intent,
     busy,
     error,
+    failure,
     storageError,
     transcript,
     history,

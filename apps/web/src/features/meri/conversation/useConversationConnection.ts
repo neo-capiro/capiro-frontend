@@ -14,6 +14,7 @@ import {
 } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationContext } from "../../../shared/meri-conversations/session";
 import { useConversationSelection } from "./useConversationSelection";
+import { transientStatus } from "./control-reachability";
 
 type Hints = ConstructorParameters<
   typeof ConversationHostController
@@ -261,6 +262,11 @@ export function useConversationConnection(
           (state.status === "idle" || state.status === "connecting"))),
     storageError,
     ...renewal,
+    /** Issuance ended on a gateway/overload answer: control did not answer, nothing was refused. */
+    unreachable:
+      !storageError &&
+      state.status === "unavailable" &&
+      transientStatus(host.getIssuanceStatus()),
     conversationId:
       bound.last()?.context.conversationId ?? opening.hints.conversationId,
     runId: bound.last()?.context.runId ?? opening.hints.runId,

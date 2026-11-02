@@ -134,9 +134,15 @@ export async function sendRequest(
         await port.submitInitial(request);
       else await port.submit(request);
     }
-    intent.write({ ...intent.read(), submit: { ...journal, state: "observed" } });
+    intent.write({
+      ...intent.read(),
+      submit: { ...journal, state: "observed" },
+    });
   } catch (cause) {
-    intent.write({ ...intent.read(), submit: { ...journal, state: "unknown" } });
+    intent.write({
+      ...intent.read(),
+      submit: { ...journal, state: "unknown" },
+    });
     throw cause;
   }
 }

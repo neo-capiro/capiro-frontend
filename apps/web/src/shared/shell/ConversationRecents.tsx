@@ -70,7 +70,8 @@ function RecentLinks({
     account,
     clientId,
   );
-  const loading = query.isPending || query.isRefetching;
+  // Only the first read announces loading; a re-read keeps the last list on screen.
+  const loading = query.isPending;
   const summaries = useRecentConversationTitles(account);
   const selectedConversationId = useSearchParams().get("conversationId");
   return (

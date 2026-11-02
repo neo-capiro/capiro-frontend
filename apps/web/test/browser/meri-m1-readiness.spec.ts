@@ -118,7 +118,7 @@ test("M1 synthetic Ready can be refused: 409 saves the immutable turn and only a
     "Meri is still finishing up. Your message is saved; try again in a moment.",
   );
   const retry = page.getByRole("button", {
-    name: "Retry same turn",
+    name: "Check again",
     exact: true,
   });
   await expect(retry).toBeEnabled();
@@ -143,7 +143,7 @@ test("M1 synthetic Ready can be refused: 409 saves the immutable turn and only a
   await expect.poll(() => flow.pending.length).toBe(2);
   await expect(
     page.getByRole("button", {
-      name: /^(Retry same turn|Recover same turn)$/,
+      name: /^Check again$/,
       disabled: false,
     }),
   ).toHaveCount(0);

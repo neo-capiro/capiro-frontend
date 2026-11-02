@@ -1,10 +1,38 @@
 import { conversationApplicationMetadata as protocol } from "@capiro/meri-contracts/conversation-application";
 export class ConversationUnavailable extends Error {
     code;
-    constructor(code) {
+    status;
+    /** `status` is the HTTP answer that carried a closed error code, when one did. */
+    constructor(code, status) {
         super(code);
         this.code = code;
+        this.status = status;
         this.name = "ConversationUnavailable";
+    }
+}
+/**
+ * The shared edge answered a request route with 403 before Meri saw it (its WAF rules refuse some
+ * message text): an HTML page or an empty block, never control's JSON error envelope. Nothing was
+ * admitted and the session's membership did not change, so the request is reported as refused and
+ * the same request may be retried; it is never a revocation. Control's own 403 still revokes.
+ */
+export const EDGE_REFUSED = "request-refused-at-edge";
+const JSON_MEDIA = /^application\/json(?:;\s*charset=utf-8)?$/i;
+/** True when the bytes are control's error envelope: `{ "error": { "code": "…" } }`. */
+function errorEnvelope(bytes) {
+    try {
+        const value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+        const error = value !== null && typeof value === "object" && "error" in value
+            ? value.error
+            : undefined;
+        return (error !== null &&
+            typeof error === "object" &&
+            "code" in error &&
+            typeof error.code === "string" &&
+            error.code.length > 0);
+    }
+    catch {
+        return false;
     }
 }
 const STREAM_BYTES = 8 * 1024 * 1024;
@@ -191,7 +219,7 @@ export class ConversationNetwork {
         };
         return { signal, done };
     }
-    async dispatch(path, init, signal, onDispatch) {
+    async dispatch(path, init, signal, onDispatch, forbidden = "revoke") {
         this.check();
         signal.throwIfAborted();
         const headers = new Headers(init.headers);
@@ -211,7 +239,9 @@ export class ConversationNetwork {
         try {
             this.check();
             signal.throwIfAborted();
-            if (response.status === 401 || response.status === 403)
+            // A 403 on an edge-filtered input route is decided by its body in `json`.
+            if (response.status === 401 ||
+                (response.status === 403 && forbidden !== "refuse"))
                 this.revoke();
             this.check();
             signal.throwIfAborted();
@@ -224,7 +254,9 @@ export class ConversationNetwork {
             throw error;
         }
     }
-    async json(path, body, onDispatch, budget) {
+    async json(path, body, onDispatch, budget, 
+    /** Request routes the edge may refuse outright; a 403 there is not a membership change. */
+    forbidden = "revoke") {
         if (body.byteLength >
             Math.min(protocol.limits.requestBytes, budget?.requestBytes ?? protocol.limits.requestBytes)) {
             throw new ConversationUnavailable("request-byte-limit");
@@ -235,12 +267,27 @@ export class ConversationNetwork {
                 method: "POST",
                 body: new TextDecoder("utf-8", { fatal: true }).decode(body),
                 headers: { "content-type": "application/json" },
-            }, lease.signal, onDispatch);
-            if (!/^application\/json(?:;\s*charset=utf-8)?$/i.test(response.headers.get("content-type") ?? "")) {
-                discard(response);
-                throw new ConversationUnavailable("invalid-json-media");
-            }
+            }, lease.signal, onDispatch, forbidden);
             const limit = Math.min(protocol.limits.responseBytes, budget?.responseBytes ?? protocol.limits.responseBytes);
+            const jsonMedia = JSON_MEDIA.test(response.headers.get("content-type") ?? "");
+            if (response.status === 403 && forbidden === "refuse") {
+                // Control's refusal is a JSON error envelope and revokes as always; the edge's block
+                // (an HTML page, an empty body, anything else) refused this request, not the session.
+                const envelope = jsonMedia &&
+                    errorEnvelope(new Uint8Array(await new Response(boundedBody(response, lease.signal, this.check, limit, () => { })).arrayBuffer()));
+                if (!jsonMedia)
+                    discard(response);
+                if (envelope) {
+                    this.revoke();
+                    this.check();
+                    throw new ConversationUnavailable("current-context-unavailable", 403);
+                }
+                throw new ConversationUnavailable(EDGE_REFUSED, 403);
+            }
+            if (!jsonMedia) {
+                discard(response);
+                throw new ConversationUnavailable("invalid-json-media", response.status);
+            }
             const bounded = boundedBody(response, lease.signal, this.check, limit, () => { });
             const bytes = new Uint8Array(await new Response(bounded).arrayBuffer());
             this.check();
