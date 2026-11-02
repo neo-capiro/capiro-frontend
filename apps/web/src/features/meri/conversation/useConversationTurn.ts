@@ -29,11 +29,19 @@ import {
   type TurnIntent,
 } from "../../../shared/meri-conversations/turn-journal";
 import { useCommandGate } from "./useCommandGate";
-import type { UploadSendArgument } from "../../../shared/meri-uploads/upload-controller";
+import type { MeriUploadAccess } from "../../../shared/meri-uploads/access";
 import {
   requireMeriTabStorage,
   TabJournalUnavailable,
 } from "../../../shared/meri-conversations/tab-journal";
+
+/** The current composer's files: what the next message carries, and where they leave once it is retained. */
+type ComposerAttachments = Pick<MeriUploadAccess, "sendArgument" | "sent">;
+/** Puts a released message back in the composer: its text and the files it carried. */
+type Restore = (
+  prompt: string | undefined,
+  uploads?: TurnIntent["uploads"],
+) => void;
 
 export type ConversationTurnTarget = {
   conversationId: string;
@@ -120,12 +128,13 @@ async function requestTurn(
     capture?: (request: ConversationDraftRequest) => void;
     modelSelection?: ConversationSubmitRequest["modelSelection"];
     selection?: ConversationSkillSelection;
-    uploads?: readonly UploadSendArgument[];
+    attachments?: ComposerAttachments;
   },
 ) {
-  const { source, prompt, capture, modelSelection, selection, uploads } =
+  const { source, prompt, capture, modelSelection, selection, attachments } =
     options;
   if (source && prompt) {
+    const uploads = attachments?.sendArgument();
     const request = Object.freeze({
       requestId: crypto.randomUUID(),
       prompt,
@@ -152,6 +161,8 @@ async function requestTurn(
       selection,
       request.uploads,
     );
+    // The retained turn now holds the files, so they leave the composer; every release path offers them again.
+    if (request.uploads) attachments?.sent(request.uploads);
   }
   const retained = await recoverConversationTurn(
     journal,
@@ -278,7 +289,7 @@ export function useConversationTurn(
     capture?: (request: ConversationDraftRequest) => void,
     modelSelection?: ConversationSubmitRequest["modelSelection"],
     selection?: ConversationSkillSelection,
-    uploads?: readonly UploadSendArgument[],
+    attachments?: ComposerAttachments,
   ) =>
     command(async (journal, controller) => {
       try {
@@ -288,7 +299,7 @@ export function useConversationTurn(
           ...(capture ? { capture } : {}),
           ...(modelSelection ? { modelSelection } : {}),
           ...(selection ? { selection } : {}),
-          ...(uploads ? { uploads } : {}),
+          ...(attachments ? { attachments } : {}),
         });
         open(prepareTarget(cache, clientId, retained));
       } catch (cause) {
@@ -299,14 +310,14 @@ export function useConversationTurn(
         throw cause;
       }
     });
-  /** The released text goes back to the composer through `restore`; nothing is sent. */
+  /** The released text and files go back to the composer through `restore`; nothing is sent. */
   const release = (
     target: string | undefined,
     released: TurnIntent | undefined,
-    restore: (prompt: string | undefined) => void,
+    restore: Restore,
   ) => {
     if (target && alive.current) setOpened(target);
-    restore(released?.prompt);
+    restore(released?.prompt, released?.uploads);
   };
   return {
     intent,
@@ -327,8 +338,9 @@ export function useConversationTurn(
       capture: (request: ConversationDraftRequest) => void,
       modelSelection?: ConversationSubmitRequest["modelSelection"],
       selection?: ConversationSkillSelection,
-      uploads?: readonly UploadSendArgument[],
-    ) => perform(source, prompt, capture, modelSelection, selection, uploads),
+      attachments?: ComposerAttachments,
+    ) =>
+      perform(source, prompt, capture, modelSelection, selection, attachments),
     retry: () => perform(),
     /** Target run id of the reservation that is open for a new message in this page. */
     opened,
@@ -337,10 +349,7 @@ export function useConversationTurn(
      * is that reservation's source). No run for it: the message is released. A run: its exact
      * target opens, replaying the same request id. No answer: everything stays as it was.
      */
-    check: (
-      reported: RunBinding | undefined,
-      restore: (prompt: string | undefined) => void,
-    ) =>
+    check: (reported: RunBinding | undefined, restore: Restore) =>
       command(async (journal, controller) => {
         const result = await checkConversationTurn(
           journal,
@@ -356,10 +365,7 @@ export function useConversationTurn(
           open(prepareTarget(cache, clientId, result.retained));
       }),
     /** The person gives up an unconfirmed message: it is released without sending anything. */
-    discard: (
-      target: string | undefined,
-      restore: (prompt: string | undefined) => void,
-    ) =>
+    discard: (target: string | undefined, restore: Restore) =>
       command(async (journal) => {
         release(target, journal.discard(), restore);
       }),

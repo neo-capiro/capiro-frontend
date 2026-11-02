@@ -160,6 +160,8 @@ export async function sendRequest(
       const { submit, ...rest } = intent.read();
       void submit;
       intent.write(rest);
+      // A follow-up's files left the composer when its turn was retained; they come back with the released message.
+      if (request.uploads?.length) port.uploads?.offer(request.uploads);
     } else
       intent.write({
         ...intent.read(),

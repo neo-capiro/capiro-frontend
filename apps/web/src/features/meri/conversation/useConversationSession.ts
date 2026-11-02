@@ -30,6 +30,7 @@ import { requireMeriTabStorage } from "../../../shared/meri-conversations/tab-jo
 import { conversationHref } from "../../../shared/meri-conversations/conversation-navigation";
 import type { LifecycleTarget } from "./lifecycle/useRunLifecycle";
 import { createAccessRecheck } from "./access-recheck";
+import type { UploadSendArgument } from "../../../shared/meri-uploads/upload-controller";
 
 /**
  * The first access loss of an episode rechecks itself once after a short delay; the manual check
@@ -208,9 +209,14 @@ export function useConversationSession(
     (view.acceptedRequest
       ? skillSelectionFields(storedSubmission(view.acceptedRequest))
       : {});
-  // A released message's text goes back to an empty box; text the person kept or typed stays.
-  const restoreDraft = (prompt: string | undefined) => {
+  // A released message's text goes back to an empty box; text the person kept or typed stays. Its files are offered
+  // again in the current composer.
+  const restoreDraft = (
+    prompt: string | undefined,
+    uploads?: readonly UploadSendArgument[],
+  ) => {
     if (prompt && !local.initialDraft.draft().trim()) local.setDraft(prompt);
+    if (uploads) ready?.port.uploads.offer(uploads);
   };
   const startNext = (prompt: string, finished: TurnView) => {
     if (
@@ -222,17 +228,13 @@ export function useConversationSession(
     )
       return;
     // The next message opens a new session (and a new composer), so the files offered here travel in its request.
-    const uploads = ready?.port.uploads.sendArgument() ?? [];
     void continuation.start(
       view.source,
       prompt,
-      (request) => {
-        local.retainNext(finished, request);
-        if (request.uploads) ready?.port.uploads.sent(request.uploads);
-      },
+      (request) => local.retainNext(finished, request),
       local.modelSelection,
       skillSelection,
-      uploads,
+      ready?.port.uploads,
     );
   };
   const openLifecycleTarget = (target: LifecycleTarget, browser = false) => {

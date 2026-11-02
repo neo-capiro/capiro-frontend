@@ -7,6 +7,7 @@ import { conversationTurnJournal } from "../src/shared/meri-conversations/turn-j
 import { conversationIntentJournal } from "../src/shared/meri-conversations/query-journal";
 import { ConversationUnavailable } from "@capiro/meri-client/conversation";
 import { sendRequest } from "../src/features/meri/conversation/run-commands";
+import { MONTHLY_CAP_REACHED } from "../src/features/meri/conversation/skill-refusal";
 import type { MeriConversationPort } from "../src/shared/meri-conversations/host-controller";
 import {
   syncMeriTabIdentity,
@@ -93,9 +94,17 @@ it("a follow-up message carries the composer's files to its reserved target, and
   const cache = new QueryClient(),
     { command, open } = mount(cache),
     capture = vi.fn();
+  // The rows leave the composer only once the turn journal holds the files.
+  const retainedAtRelease: unknown[] = [];
+  const attachments = {
+    sendArgument: () => uploads,
+    sent: vi.fn(() => retainedAtRelease.push(journal(cache).read()?.uploads)),
+  };
   expect(
-    await command.start(binding, prompt, capture, undefined, {}, uploads),
+    await command.start(binding, prompt, capture, undefined, {}, attachments),
   ).toBe(true);
+  expect(attachments.sent).toHaveBeenCalledExactlyOnceWith(uploads);
+  expect(retainedAtRelease).toEqual([uploads]);
   // The captured message, the opened target and the request the target port submits all name the same files.
   expect(capture.mock.calls[0]![0]).toMatchObject({ prompt, uploads });
   expect(open).toHaveBeenCalledExactlyOnceWith(
@@ -110,6 +119,53 @@ it("a follow-up message carries the composer's files to its reserved target, and
   // A reload restores the retained turn with its files from tab storage, not from this page's memory.
   expect(journal(new QueryClient()).read()).toMatchObject({ prompt, uploads });
   cache.clear();
+});
+
+it("a turn that cannot be retained keeps the files in the composer", async () => {
+  const reserve = vi.spyOn(transport, "reserveConversationTurn");
+  const cache = new QueryClient(),
+    { command } = mount(cache),
+    attachments = { sendArgument: () => uploads, sent: vi.fn() };
+  storage.setItem = () => {
+    throw Error("synthetic full storage");
+  };
+  expect(
+    await command.start(binding, prompt, vi.fn(), undefined, {}, attachments),
+  ).toBe(false);
+  expect(attachments.sent).not.toHaveBeenCalled();
+  expect(reserve).not.toHaveBeenCalled();
+  cache.clear();
+});
+
+it("check and discard of a released follow-up give back its text and its files", async () => {
+  for (const path of ["check", "discard"] as const) {
+    const cache = new QueryClient(),
+      turns = journal(cache);
+    turns.discard();
+    turns.start(
+      binding,
+      prompt,
+      "a0000000-0000-4000-8000-00000000000b",
+      undefined,
+      {},
+      uploads,
+    );
+    vi.spyOn(transport, "reserveConversationTurn").mockResolvedValue({
+      schema: "meri.conversation-turn/1",
+      sourceBinding: binding,
+      targetBinding: nextBinding,
+      state: "RESERVED",
+      replayed: true,
+    });
+    const { command } = mount(cache),
+      restore = vi.fn();
+    if (path === "check") await command.check(undefined, restore);
+    else await command.discard(nextBinding.runId, restore);
+    expect(restore, path).toHaveBeenCalledExactlyOnceWith(prompt, uploads);
+    expect(turns.read()).toBeUndefined();
+    vi.restoreAllMocks();
+    cache.clear();
+  }
 });
 
 it("a follow-up without files sends none, and a completed turn is acknowledged only with its exact files", async () => {
@@ -162,7 +218,7 @@ it("a follow-up without files sends none, and a completed turn is acknowledged o
   cache.clear();
 });
 
-it("an admitted message takes its files out of the composer; a refused one leaves them for a changed resend", async () => {
+it("an admitted message takes its files out of the composer; a refused one offers them again", async () => {
   vi.stubGlobal("crypto", {
     randomUUID: () => "a0000000-0000-4000-8000-00000000000c",
   });
@@ -174,7 +230,8 @@ it("an admitted message takes its files out of the composer; a refused one leave
       context,
       storage,
     );
-    const sent = vi.fn();
+    const sent = vi.fn(),
+      offer = vi.fn();
     const port = {
       context,
       getSnapshot: () => ({
@@ -182,10 +239,10 @@ it("an admitted message takes its files out of the composer; a refused one leave
         submit: "idle",
         observation: null,
       }),
-      uploads: { sendArgument: () => uploads, sent },
+      uploads: { sendArgument: () => uploads, sent, offer },
       submitInitial: vi.fn(async () => {
         if (outcome === "refused")
-          throw new ConversationUnavailable("MONTHLY_CAP_REACHED", 429);
+          throw new ConversationUnavailable(MONTHLY_CAP_REACHED, 429);
       }),
       submit: vi.fn(),
     } as unknown as MeriConversationPort;
@@ -201,7 +258,13 @@ it("an admitted message takes its files out of the composer; a refused one leave
     expect(port.submitInitial).toHaveBeenCalledWith(
       expect.objectContaining({ uploads }),
     );
-    if (outcome === "admitted") expect(sent).toHaveBeenCalledWith(uploads);
-    else expect(sent).not.toHaveBeenCalled();
+    if (outcome === "admitted") {
+      expect(sent).toHaveBeenCalledWith(uploads);
+      expect(offer).not.toHaveBeenCalled();
+    } else {
+      // A refused target submit gives the follow-up's files back to the composer that now shows the message.
+      expect(sent).not.toHaveBeenCalled();
+      expect(offer).toHaveBeenCalledWith(uploads);
+    }
   }
 });
