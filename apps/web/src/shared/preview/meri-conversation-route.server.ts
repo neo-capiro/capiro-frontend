@@ -1,10 +1,29 @@
+import packageJson from "../../../package.json";
 import { readRequestOrigin } from "../request-origin";
 import { portfolioPreviewFrontendOrigin } from "../meri-conversations/frontend-origin";
 
 type Environment = Record<string, string | undefined>;
 
-/** The app's pinned @capiro/meri-contracts distribution (the installed package's own version). */
-export const previewMeriContractsPackageVersion = "0.1.27";
+const vendoredContractsPin =
+  /^file:\.\.\/\.\.\/vendor\/capiro-meri-contracts-(\d+\.\d+\.\d+)-[0-9a-f]{8}-[0-9a-f]{12}\.tgz$/;
+
+/**
+ * The app's pinned @capiro/meri-contracts distribution, read from the vendored
+ * tarball this package.json installs, so re-vendoring cannot leave the preview
+ * conversation gate on a stale hand-written version.
+ */
+export const previewMeriContractsPackageVersion = vendoredContractsVersion(
+  packageJson.dependencies["@capiro/meri-contracts"],
+);
+
+function vendoredContractsVersion(pin: string): string {
+  const version = vendoredContractsPin.exec(pin)?.[1];
+  if (!version)
+    throw new Error(
+      "@capiro/meri-contracts must be pinned to a vendored release tarball",
+    );
+  return version;
+}
 const sourceCommit = /^[0-9a-f]{40}$/;
 const imageDigest = /^sha256:[0-9a-f]{64}$/;
 const meriHost =

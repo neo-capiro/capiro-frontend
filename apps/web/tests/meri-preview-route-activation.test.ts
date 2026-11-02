@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
+import { dirname, join } from "node:path";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { NextRequest, type NextFetchEvent } from "next/server";
 import packageJson from "../package.json";
@@ -151,14 +154,20 @@ it("refuses a paired but unreviewed preview public origin", () => {
   }
 });
 
-it("binds the preview conversation gate to the app's pinned contract package", () => {
-  const tarball = packageJson.dependencies["@capiro/meri-contracts"];
-  const version =
-    /^file:\.\.\/\.\.\/vendor\/capiro-meri-contracts-(\d+\.\d+\.\d+)(?:-[0-9a-f]{8}-[0-9a-f]{12})?\.tgz$/.exec(
-      tarball,
-    )?.[1];
-  expect(version).toBeDefined();
-  expect(previewMeriContractsPackageVersion).toBe(version);
+it("binds the preview conversation gate to the installed contract package", () => {
+  // The gate derives its version from the vendored tarball pin; the installed
+  // package is what that pin actually resolves to.
+  const contractsRoot = dirname(
+    createRequire(import.meta.url).resolve("@capiro/meri-contracts/node"),
+  );
+  const installed = JSON.parse(
+    readFileSync(join(contractsRoot, "package.json"), "utf8"),
+  ) as { name: string; version: string };
+  expect(installed.name).toBe("@capiro/meri-contracts");
+  expect(previewMeriContractsPackageVersion).toBe(installed.version);
+  expect(packageJson.dependencies["@capiro/meri-contracts"]).toContain(
+    `/vendor/capiro-meri-contracts-${installed.version}-`,
+  );
 });
 
 it.each([
