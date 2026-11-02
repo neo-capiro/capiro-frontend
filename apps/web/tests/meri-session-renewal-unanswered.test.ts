@@ -26,6 +26,8 @@ const state = vi.hoisted(() => ({
   bind: true,
   /** The connection's clock: each binding is recorded at it. */
   clock: 0,
+  /** The run each new host's session binds. */
+  run: 5,
 }));
 vi.mock("react", async (original) => {
   const memo = (make: () => unknown, deps: unknown[]) => {
@@ -98,7 +100,7 @@ vi.mock("../src/shared/meri-conversations/host-controller", () => ({
           ...account,
           selectedClientId: clientId,
           conversationId,
-          runId: id(5),
+          runId: id(state.run),
         });
     };
     subscribe = () => () => {};
@@ -162,6 +164,7 @@ beforeEach(() => {
   state.issuance = undefined;
   state.bind = true;
   state.clock = 0;
+  state.run = 5;
   const data = new Map<string, string>();
   const storage = {
     get length() {
@@ -239,11 +242,12 @@ it("the reconnect ladder outlives each attempt's host: 2 s, 4 s, 8 s between att
   expect(hosts()).toBe(before + 1);
 });
 
-it("an older control's 401 for the same case keeps the transcript with the manual check, as before", () => {
+it("control's 401 SESSION_REFUSED on an ordinary renewal is a definitive refusal: it hides the conversation", () => {
+  // Serving control answers 503 for an authority that did not answer and 401 only for a definitive refusal.
   renewalAnswered(401);
-  expect(connection.unverified).toBe(true);
+  expect(connection.unverified).toBe(false);
   expect(connection.unreachable).toBe(false);
-  expect(connection.accessLost).toBe(false);
+  expect(connection.accessLost).toBe(true);
   expect(connection.reconnecting).toBe(false);
 });
 
@@ -345,13 +349,36 @@ it("a refused credential whose renewal issuance found the authority unavailable 
   expect(connection.unverified).toBe(true);
 });
 
-it("an ordinary renewal answered 401 keeps its existing unverified handling", () => {
+it("an ordinary renewal after a refused one: 401 is lost access, 503 stays unverified", () => {
   render();
   render();
   ended("refused");
   renewedReady();
   ended("renewal");
-  renewalFails(401);
+  renewalFails(503);
   expect(connection.accessLost).toBe(false);
   expect(connection.unverified).toBe(true);
+  renewalFails(401);
+  expect(connection.accessLost).toBe(true);
+  expect(connection.unverified).toBe(false);
+});
+
+it("a session bound to another run forgets the refused binding: returning to the first run renews once again", () => {
+  render();
+  render();
+  ended("refused");
+  renewedReady();
+  // The person opens another run, then returns to the first one: each binding is a fresh session.
+  for (const run of [6, 5]) {
+    state.run = run;
+    state.clock += 1_000;
+    state.status = "connecting";
+    connection.reopen({ target: { conversationId, runId: id(run) } });
+    render();
+    renewedReady();
+  }
+  const hosts = state.hints.length;
+  ended("refused");
+  expect(state.hints).toHaveLength(hosts + 1);
+  expect(connection.accessLost).toBe(false);
 });
