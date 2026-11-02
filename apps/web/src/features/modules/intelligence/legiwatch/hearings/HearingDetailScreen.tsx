@@ -25,10 +25,11 @@ import { FollowHearingDialog } from "./FollowHearingDialog";
 import { HearingWorkDialog } from "./HearingWorkDialog";
 import { IntelligencePanel } from "./IntelligencePanel";
 import { TranscriptPanel } from "./TranscriptPanel";
+import { OfficialHearingPlayer } from "./OfficialHearingPlayer";
 
 const tabs = [
   { id: "overview", label: "Overview" },
-  { id: "live", label: "Live & Capture" },
+  { id: "live", label: "Watch & Capture" },
   { id: "transcript", label: "Transcript" },
   { id: "intelligence", label: "Intelligence" },
   { id: "relevance", label: "Client relevance" },
@@ -80,7 +81,7 @@ export function HearingDetailScreen({ hearingId }: { hearingId: string }) {
       onRetry={detail.reload}
     >
       {detail.data && (
-        <div className={styles.screen} data-figma-node="916:169513">
+        <div className={styles.screen} data-figma-node="1064:263495">
           <h1 className={styles.header}>{detail.data.hearing.title}</h1>
           <p className={styles.description}>
             {detail.data.hearing.committeeName} · {detail.data.hearing.chamber}
@@ -107,6 +108,9 @@ export function HearingDetailScreen({ hearingId }: { hearingId: string }) {
             </ActionButton>
             <ActionButton primary onClick={() => setAttendanceOpen(true)}>
               Attend & capture
+            </ActionButton>
+            <ActionButton onClick={() => setTab("live")}>
+              Watch / replay hearing
             </ActionButton>
             <Badge>{detail.data.hearing.visibility} hearing</Badge>
           </div>
@@ -224,29 +228,19 @@ export function HearingDetailScreen({ hearingId }: { hearingId: string }) {
             <TranscriptPanel hearingId={hearingId} />
           ) : tab === "live" ? (
             <>
-              <section className={styles.card}>
-                <h2>Watch the official hearing</h2>
-                <SourceLink href={sourceUrl}>
-                  Open official live / replay tab
-                </SourceLink>
-                <p>
-                  Play the public stream in its official tab. To record its
-                  audio, open browser attendance and share that tab with audio.
+              <OfficialHearingPlayer
+                sourceUrl={sourceUrl}
+                listing={
+                  room.data?.event.officialPlaybackKind ===
+                  "official_listing_page"
+                }
+              />
+              {room.error && (
+                <p role="status">
+                  The current player link could not be checked. The official
+                  hearing page remains available.
                 </p>
-                {room.data?.event.officialPlaybackKind ===
-                  "official_listing_page" && (
-                  <p>
-                    The publisher provides a listing. Select this hearing’s
-                    stream there.
-                  </p>
-                )}
-                {room.error && (
-                  <p role="status">
-                    The current player link could not be checked. The official
-                    hearing page remains available.
-                  </p>
-                )}
-              </section>
+              )}
               <section className={styles.card}>
                 <h2>Capture status</h2>
                 <Badge>

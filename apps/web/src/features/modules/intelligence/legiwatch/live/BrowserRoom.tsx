@@ -11,7 +11,8 @@ import {
   StatusPanel,
   TextArea,
 } from "../../../../../shared/module-ui";
-import { SourceLink, timecode } from "../components";
+import { timecode } from "../components";
+import { OfficialHearingPlayer } from "../hearings/OfficialHearingPlayer";
 import { AttendanceDialog } from "../hearings/AttendanceDialog";
 import styles from "../legiwatch.module.css";
 import { useLegiWatchRoute } from "../use-legiwatch-route";
@@ -134,16 +135,7 @@ function ConnectedBrowserRoom({
       )}
       <div className={styles.room}>
         <section className={styles.card}>
-          <div className={styles.officialSource}>
-            <span>Official hearing stream</span>
-            <SourceLink href={session.sourceUrl}>
-              Open official source tab ↗
-            </SourceLink>
-            <p>
-              Play the official stream in its source tab. Share that tab with
-              audio to transcribe.
-            </p>
-          </div>
+          <OfficialHearingPlayer sourceUrl={session.sourceUrl} />
           {capture.segments.length > 0 && (
             <div className={styles.transcript}>
               {capture.segments.map((segment) => (

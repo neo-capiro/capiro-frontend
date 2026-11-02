@@ -1,0 +1,28 @@
+.calendar {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  overflow: auto;
+}
+.calendar :global(.sx-react-calendar-wrapper) {
+  min-width: 780px;
+  height: 640px;
+}
+.calendar :global(.sx__calendar-header) {
+  display: none;
+}
+.calendar :global(.sx__calendar) {
+  --sx-color-background: var(--card);
+  --sx-color-on-background: var(--foreground);
+  --sx-color-outline: var(--border);
+  border: 0;
+  font-family: inherit;
+}
+.calendar :global(.sx__event) {
+  cursor: pointer;
+}
+.note {
+  padding: 0 16px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
