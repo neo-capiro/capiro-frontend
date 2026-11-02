@@ -34,6 +34,37 @@ it("keeps unknown time on the official calendar date without inventing a start",
   expect(row.title).toContain("Florida · Time TBA");
 });
 
+it("preserves published hour-only times and rejects invalid clock values", () => {
+  for (const [time, hour] of [
+    ["10 AM", "10"],
+    ["2 PM", "14"],
+    ["10", "10"],
+  ]) {
+    const [row] = calendarEvents([
+      { ...federalHearing, startsAt: null, time: time! },
+    ]);
+    expect(row!.start.toString()).toContain(`T${hour}:00`);
+  }
+  for (const time of ["25:00", "13 PM", "10:75"]) {
+    const [row] = calendarEvents([{ ...federalHearing, startsAt: null, time }]);
+    expect(row!.title).toContain("Time TBA");
+  }
+});
+
+it("rejects local network media destinations before metadata requests", () => {
+  for (const host of [
+    "127.0.0.1",
+    "10.1.2.3",
+    "[::1]",
+    "localhost",
+    "printer.local",
+    "video.internal",
+  ])
+    expect(officialMedia(`https://${host}/hearing.mp4`).kind).toBe(
+      "unavailable",
+    );
+});
+
 it("supports supplied archived media without a live-status restriction", () => {
   expect(
     officialMedia(

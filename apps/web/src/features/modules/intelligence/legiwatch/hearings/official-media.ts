@@ -12,6 +12,15 @@ export function officialMedia(source?: string | null): OfficialMedia {
   if (!source) return { kind: "unavailable" };
   try {
     const url = new URL(source);
+    const host = url.hostname.toLowerCase();
+    // Reject clearly nonpublic destinations before requesting media metadata.
+    if (
+      !host.includes(".") ||
+      host.includes(":") ||
+      /^[\d.]+$/.test(host) ||
+      /(^|\.)(localhost|local|internal|test|invalid)$/.test(host)
+    )
+      return { kind: "unavailable" };
     if (url.protocol !== "https:" || url.username || url.password || url.port)
       return { kind: "unavailable" };
     const extension = url.pathname.toLowerCase().split(".").at(-1);

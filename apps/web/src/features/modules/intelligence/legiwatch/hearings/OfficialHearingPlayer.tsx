@@ -81,6 +81,7 @@ function SupportedVideo({
   source: Extract<ReturnType<typeof officialMedia>, { kind: "video" }>;
 }) {
   const [video, setVideo] = useState<HTMLVideoElement | null>(null);
+  const [controller, setController] = useState<HTMLElement | null>(null);
   const [failed, setFailed] = useState(false);
   const rateId = useId();
   const store = useMemo(
@@ -96,14 +97,31 @@ function SupportedVideo({
   );
   useEffect(() => {
     store.dispatch({ type: "mediaelementchangerequest", detail: video });
+    store.dispatch({ type: "documentelementchangerequest", detail: document });
+    store.dispatch({
+      type: "fullscreenelementchangerequest",
+      detail: controller,
+    });
     return () => {
       video?.pause();
       store.dispatch({ type: "mediaelementchangerequest", detail: undefined });
+      store.dispatch({
+        type: "documentelementchangerequest",
+        detail: undefined,
+      });
+      store.dispatch({
+        type: "fullscreenelementchangerequest",
+        detail: undefined,
+      });
     };
-  }, [video, store]);
+  }, [video, controller, store]);
   return (
     <>
-      <MediaController mediaStore={store} className={styles.controls}>
+      <MediaController
+        ref={setController}
+        mediaStore={store}
+        className={styles.controls}
+      >
         <MediaPlayer
           slot="media"
           src={{ src: source.url, type: source.type }}
