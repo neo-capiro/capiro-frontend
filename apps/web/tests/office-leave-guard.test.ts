@@ -60,7 +60,7 @@ function click(
           hasAttribute: (name: string) =>
             name === "download" ? Boolean(extra.download) : false,
         };
-  const event = {
+  return {
     defaultPrevented: false,
     button: extra.button ?? 0,
     metaKey: extra.metaKey ?? false,
@@ -71,33 +71,53 @@ function click(
     preventDefault: vi.fn(),
     stopImmediatePropagation: vi.fn(),
   };
-  return event;
 }
+const confirmed = () => vi.fn(async () => true);
+
 describe("Office workbench leave guard", () => {
-  it("traps the history entry on install and leaves nothing installed after dispose", () => {
+  it("arms one trap when edits appear, steps back off it when they are saved, and never touches history otherwise", () => {
     const v = view();
-    const dispose = installLeaveGuard({
+    const guard = installLeaveGuard({
       view: v.target,
-      leave: vi.fn(async () => {}),
+      leave: confirmed(),
       navigate: vi.fn(),
     });
+    guard.sync(false);
+    expect(v.history.pushState).not.toHaveBeenCalled();
+    guard.sync(true);
+    guard.sync(true);
+    expect(v.history.pushState).toHaveBeenCalledTimes(1);
     expect(v.history.pushState).toHaveBeenCalledWith(
       { tree: "router" },
       "",
       v.target.location.href,
     );
-    dispose();
+    guard.sync(false);
+    expect(v.history.go).toHaveBeenCalledWith(-1);
+    guard.sync(false);
+    expect(v.history.go).toHaveBeenCalledTimes(1);
+    // Back on an unarmed guard is the router's; a click is the router's.
+    v.fire("window", "popstate", {});
+    const event = click("/elsewhere");
+    v.fire("document", "click", event);
+    expect(event.preventDefault).not.toHaveBeenCalled();
+    expect(v.history.pushState).toHaveBeenCalledTimes(1);
+    guard.sync(true);
+    guard.dispose();
+    expect(v.history.go).toHaveBeenCalledTimes(2);
     expect(v.listeners.get("document:click")).toEqual([]);
     expect(v.listeners.get("window:popstate")).toEqual([]);
   });
-  it("a same-origin link click runs the close first, then the navigation with the link's own href", async () => {
+  it("a same-origin link click runs the close first, then owns the navigation with the link's own href", async () => {
     const v = view();
     const order: string[] = [];
     const leave = vi.fn(async () => {
       order.push("leave");
+      return true;
     });
     const navigate = vi.fn((href: string) => order.push(`navigate:${href}`));
-    installLeaveGuard({ view: v.target, leave, navigate });
+    const guard = installLeaveGuard({ view: v.target, leave, navigate });
+    guard.sync(true);
     const event = click("/meri?clientId=c#top");
     v.fire("document", "click", event);
     expect(event.preventDefault).toHaveBeenCalled();
@@ -106,11 +126,20 @@ describe("Office workbench leave guard", () => {
     await vi.waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
     expect(order).toEqual(["leave", "navigate:/meri?clientId=c#top"]);
     expect(leave).toHaveBeenCalledTimes(1);
+    // Once leaving, the trap is left in place for the navigation to replace; nothing steps back.
+    guard.sync(false);
+    guard.dispose();
+    expect(v.history.go).not.toHaveBeenCalled();
   });
   it("ignores clicks the browser or router should handle untouched", () => {
     const v = view();
-    const leave = vi.fn(async () => {});
-    installLeaveGuard({ view: v.target, leave, navigate: vi.fn() });
+    const leave = confirmed();
+    const guard = installLeaveGuard({
+      view: v.target,
+      leave,
+      navigate: vi.fn(),
+    });
+    guard.sync(true);
     for (const event of [
       click(null),
       click("https://other.example.test/x"),
@@ -125,12 +154,15 @@ describe("Office workbench leave guard", () => {
     }
     expect(leave).not.toHaveBeenCalled();
   });
-  it("Back re-traps the entry, closes, then goes past the trap; a failed close still lets the person leave", async () => {
+  it("Back re-traps the entry, closes, then goes past the trap to the previous page", async () => {
     const v = view();
-    const leave = vi.fn(async () => {
-      throw new Error("not confirmed");
+    const leave = confirmed();
+    const guard = installLeaveGuard({
+      view: v.target,
+      leave,
+      navigate: vi.fn(),
     });
-    installLeaveGuard({ view: v.target, leave, navigate: vi.fn() });
+    guard.sync(true);
     v.history.pushState.mockClear();
     v.fire("window", "popstate", {});
     expect(v.history.pushState).toHaveBeenCalledTimes(1);
@@ -138,5 +170,32 @@ describe("Office workbench leave guard", () => {
     await vi.waitFor(() => expect(v.history.go).toHaveBeenCalledWith(-2));
     expect(leave).toHaveBeenCalledTimes(1);
     expect(v.history.go).toHaveBeenCalledTimes(1);
+  });
+  it("a close that is not confirmed keeps the person on the page: no navigation, no Back, the trap released once edits are gone", async () => {
+    const v = view();
+    const navigate = vi.fn();
+    const leave = vi.fn(async () => false);
+    const guard = installLeaveGuard({ view: v.target, leave, navigate });
+    guard.sync(true);
+    v.fire("document", "click", click("/elsewhere"));
+    await vi.waitFor(() => expect(leave).toHaveBeenCalledTimes(1));
+    await new Promise((settled) => setTimeout(settled, 0));
+    expect(navigate).not.toHaveBeenCalled();
+    v.fire("window", "popstate", {});
+    await vi.waitFor(() => expect(leave).toHaveBeenCalledTimes(2));
+    await new Promise((settled) => setTimeout(settled, 0));
+    expect(v.history.go).not.toHaveBeenCalledWith(-2);
+    // The failed close closed the frame (unsaved edits are gone from the host's view): the trap is stepped back off.
+    guard.sync(false);
+    expect(v.history.go).toHaveBeenCalledWith(-1);
+    const rejecting = installLeaveGuard({
+      view: view().target,
+      leave: vi.fn(async () => {
+        throw new Error("lost");
+      }),
+      navigate,
+    });
+    rejecting.sync(true);
+    expect(navigate).not.toHaveBeenCalled();
   });
 });

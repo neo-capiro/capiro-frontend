@@ -4,7 +4,7 @@ import type { OfficeDocument } from "@capiro/meri-contracts/office-application";
 import { officeDraftSelection } from "../../../../shared/meri-office/draft-selection";
 import { createOfficeEditorHost } from "../../../../shared/meri-office/editor-host";
 import { OfficeFrameHost } from "../../../../shared/meri-office/frame-host";
-import { installLeaveGuard } from "./leave-guard";
+import { installLeaveGuard, type LeaveGuard } from "./leave-guard";
 
 /** The Office document the Workspace route opens: one artifact version in its conversation's scope. */
 export type OfficeWorkspaceTarget = Readonly<{
@@ -117,16 +117,25 @@ export function useOfficeWorkbench(
       if (!done) opened.current = false;
     };
   }, [port, host, target.versionId]);
-  // In-app navigation while the editor holds unsaved or in-flight work goes through the same close first.
-  const guarded = state.frame && (state.modified || state.busy !== null);
+  // In-app navigation while the editor holds unsaved edits goes through the same close first; the guard owns the
+  // destination afterwards, so the host's own after-close navigation is skipped. One guard per mount; its history
+  // trap is armed only while edits are unsaved, so an unmodified editor, a Save or a renewal never changes history.
+  const guard = useRef<LeaveGuard | null>(null);
   useEffect(() => {
-    if (!guarded) return;
-    return installLeaveGuard({
+    const installed = installLeaveGuard({
       view: window,
-      leave: () => host.editor.close(),
+      leave: () => host.editor.close(false),
       navigate: host.navigate,
     });
-  }, [guarded, host]);
+    guard.current = installed;
+    return () => {
+      installed.dispose();
+      if (guard.current === installed) guard.current = null;
+    };
+  }, [host]);
+  const unsaved =
+    state.frame && state.mode === "edit" && (state.modified || state.saving);
+  useEffect(() => guard.current?.sync(unsaved), [unsaved]);
   return {
     host,
     state,

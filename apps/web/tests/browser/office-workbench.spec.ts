@@ -107,7 +107,7 @@ test("CODE's Save As publishes the saved draft as the next immutable revision an
   ).toBeDisabled();
 });
 
-test("CODE's close saves pending changes, releases the editor, publishes the saved draft and reports the close", async ({
+test("CODE's close saves pending changes, releases the editor, publishes the saved draft and hands the host its navigation", async ({
   page,
 }) => {
   await setup(page);
@@ -117,7 +117,7 @@ test("CODE's close saves pending changes, releases the editor, publishes the sav
   await frameOf(page).locator("#modify").click();
   await frameOf(page).locator("#close").click();
   await expect(page.getByLabel("Service operations")).toHaveText(
-    "open,launch,read,read,release,publish,closed",
+    "open,launch,read,read,release,publish,closed,navigated:/documents",
   );
   await expect(page.locator("iframe")).toHaveCount(0);
   await expect(
@@ -134,7 +134,7 @@ test("CODE's close saves pending changes, releases the editor, publishes the sav
   ).toBeDisabled();
 });
 
-test("in-app navigation mid-edit runs the close first: save, release, publish, then the navigation", async ({
+test("in-app navigation mid-edit runs the close first and owns the destination: no second navigation from the host", async ({
   page,
 }) => {
   await setup(page);
@@ -144,10 +144,57 @@ test("in-app navigation mid-edit runs the close first: save, release, publish, t
   await frameOf(page).locator("#modify").click();
   await page.getByRole("link", { name: "Sidebar link" }).click();
   await expect(page.getByLabel("Service operations")).toHaveText(
-    "open,launch,read,read,release,publish,closed,navigated:/leave-target?view=shares",
+    "open,launch,read,read,release,publish,navigated:/leave-target?view=shares",
   );
   await expect(page.locator("iframe")).toHaveCount(0);
   expect(new URL(page.url()).pathname).toBe("/office-workbench.html");
+});
+
+test("the history stays flat on open, Save and renewal; edits arm one trap, which a Save steps back off", async ({
+  page,
+}) => {
+  await setup(page);
+  await expect(
+    page.getByRole("button", { name: "Publish revision", exact: true }),
+  ).toBeEnabled();
+  const length = () => page.evaluate(() => history.length);
+  const flat = await length();
+  await page.getByRole("button", { name: "Simulate native renewal" }).click();
+  await expect(frameOf(page).locator("#renewed")).toHaveText(
+    "Token and TTL renewed",
+  );
+  await frameOf(page).locator("#save").click();
+  await expect(page.getByLabel("Service operations")).toHaveText(
+    "open,launch,renew,read,read",
+  );
+  expect(await length()).toBe(flat);
+  await frameOf(page).locator("#modify").click();
+  await expect.poll(length).toBe(flat + 1);
+  await frameOf(page).locator("#save").click();
+  await expect(page.getByLabel("Service operations")).toHaveText(
+    "open,launch,renew,read,read,read,read",
+  );
+  // Stepped back off the trap: the page is still here and Back is no longer trapped.
+  await expect(page.locator("iframe")).toHaveCount(1);
+  expect(new URL(page.url()).pathname).toBe("/office-workbench.html");
+});
+
+test("Back after an edit saves, releases and publishes, then lands on the previous page", async ({
+  page,
+}) => {
+  await page.goto("/office-workbench.html?previous=1", { timeout: 120_000 });
+  await setup(page);
+  await expect(
+    page.getByRole("button", { name: "Publish revision", exact: true }),
+  ).toBeEnabled();
+  await frameOf(page).locator("#modify").click();
+  await page.goBack();
+  await page.waitForURL(/previous=1/);
+  expect(
+    await page.evaluate(() =>
+      sessionStorage.getItem("office-workbench-events"),
+    ),
+  ).toBe("open,launch,read,read,release,publish");
 });
 
 test("parent-window spoof cannot mark the cross-origin frame ready", async ({

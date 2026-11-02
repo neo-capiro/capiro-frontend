@@ -47,7 +47,8 @@ export function OfficeDocumentScreen({
   const readOnly = head !== null && !head.latest;
   // Leaving with unsaved or in-flight work: the browser asks before unload; in-app navigation and the host's own
   // exits run the close first (the workbench installs the guard).
-  const guarded = state.frame && (state.modified || state.busy !== null);
+  const guarded =
+    state.frame && state.mode === "edit" && (state.modified || state.saving);
   useEffect(() => {
     if (!guarded) return;
     const warn = (event: BeforeUnloadEvent) => {

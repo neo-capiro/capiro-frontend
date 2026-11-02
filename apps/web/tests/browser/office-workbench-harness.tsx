@@ -24,6 +24,11 @@ import styles from "../../src/features/modules/workspace/office/office-workspace
 function Harness() {
   const container = useRef<HTMLDivElement>(null);
   const [events, setEvents] = useState<string[]>([]);
+  // The page under test may be left by a guarded navigation: the record survives in the tab for the next page.
+  useEffect(() => {
+    if (events.length)
+      sessionStorage.setItem("office-workbench-events", events.join(","));
+  }, [events]);
   const [historyRequests, setHistoryRequests] = useState(0);
   const [owner] = useState(() => {
     let snapshot = officeWireSnapshot();
@@ -120,7 +125,8 @@ function Harness() {
           ...old,
           `published:${document.version.versionId.slice(-4)}`,
         ]),
-      onClosed: () => setEvents((old) => [...old, "closed"]),
+      onClosed: () =>
+        setEvents((old) => [...old, "closed", "navigated:/documents"]),
     });
     return { editor, port };
   });
@@ -133,16 +139,23 @@ function Harness() {
     owner.editor.getSnapshot,
     owner.editor.getSnapshot,
   );
-  // The workbench installs the same guard while the editor holds unsaved or in-flight work.
-  const guarded = state.frame && (state.modified || state.busy !== null);
+  // The workbench's guard: one per mount, armed only while edits are unsaved, owning the destination afterwards.
+  const guard = useRef<ReturnType<typeof installLeaveGuard> | null>(null);
   useEffect(() => {
-    if (!guarded) return;
-    return installLeaveGuard({
+    const installed = installLeaveGuard({
       view: window,
-      leave: () => owner.editor.close(),
+      leave: () => owner.editor.close(false),
       navigate: (href) => setEvents((old) => [...old, `navigated:${href}`]),
     });
-  }, [guarded, owner]);
+    guard.current = installed;
+    return () => {
+      installed.dispose();
+      if (guard.current === installed) guard.current = null;
+    };
+  }, [owner]);
+  const unsaved =
+    state.frame && state.mode === "edit" && (state.modified || state.saving);
+  useEffect(() => guard.current?.sync(unsaved), [unsaved]);
   return (
     <main style={{ padding: 24 }}>
       <h1>Office workbench</h1>

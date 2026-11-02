@@ -27,6 +27,8 @@ export type OfficeEditorState = Readonly<{
   notice: string;
   /** The mode the open frame was launched with; a non-head revision is viewed, never edited. */
   mode: OfficeEditorMode;
+  /** A Save of modified edits is in flight: they are not yet confirmed stored, so they still count as unsaved. */
+  saving: boolean;
 }>;
 const initial: OfficeEditorState = Object.freeze({
   connected: false,
@@ -39,6 +41,7 @@ const initial: OfficeEditorState = Object.freeze({
   uncertain: false,
   notice: "",
   mode: "edit",
+  saving: false,
 });
 class Refused extends Error {
   constructor(readonly code: string) {
@@ -105,20 +108,22 @@ export class OfficeEditorController {
     if ("error" in reply.value) throw new Refused(reply.value.error.code);
     return reply.value as OfficeResponseMap[R];
   }
+  /** Resolves true only when the work completed; a refusal, an abort or a lost connection resolve false. */
   private async run(
     label: string,
     work: (port: OfficeTransport, signal: AbortSignal) => Promise<void>,
-  ) {
-    if (this.closed || this.work || !this.transport) return;
+  ): Promise<boolean> {
+    if (this.closed || this.work || !this.transport) return false;
     const controller = new AbortController(),
       port = this.transport;
     this.work = controller;
     this.update({ busy: label, notice: "" });
     try {
       await work(port, controller.signal);
+      return true;
     } catch (error) {
       if (controller.signal.aborted || this.closed || port !== this.transport)
-        return;
+        return false;
       this.closeFrame();
       this.update({
         uncertain: true,
@@ -127,6 +132,7 @@ export class OfficeEditorController {
             ? "The draft or editor changed. Recover its current state before continuing."
             : "The operation was not confirmed. Recover the saved draft before continuing.",
       });
+      return false;
     } finally {
       if (this.work === controller) {
         this.work = null;
@@ -269,15 +275,21 @@ export class OfficeEditorController {
       before = await this.request(port, "read", this.key(), signal);
     if (before.editor.editorId !== this.options.selection.editorId)
       throw new Error("Editor lease changed");
-    await this.options.frame.save(signal);
-    signal.throwIfAborted();
-    const saved = await confirmOfficeSave({
-      before,
-      read: (readSignal) => this.request(port, "read", this.key(), readSignal),
-      modified: () => modified || this.modificationEpoch !== epoch,
-      signal,
-    });
-    this.keep(saved);
+    this.update({ saving: modified });
+    try {
+      await this.options.frame.save(signal);
+      signal.throwIfAborted();
+      const saved = await confirmOfficeSave({
+        before,
+        read: (readSignal) =>
+          this.request(port, "read", this.key(), readSignal),
+        modified: () => modified || this.modificationEpoch !== epoch,
+        signal,
+      });
+      this.keep(saved);
+    } finally {
+      this.update({ saving: false });
+    }
   }
   private async releaseWith(port: Port, signal: AbortSignal) {
     const editor = this.state.snapshot?.editor;
@@ -343,12 +355,14 @@ export class OfficeEditorController {
   /** Close on request (CODE's close, the host's Close editor, leaving the page): pending changes are saved, the editor
    * is released, and a draft with saves since the last publication becomes a revision, so no private work is left
    * unpublished behind a closed editor. The caller learns of the close, not of a publication it did not ask for. */
-  close = () => {
+  /** `notify: false` is the leave guard's close: the guard owns the destination, so the host's after-close navigation
+   * is skipped. Resolves true only when the close was confirmed. */
+  close = (notify = true) => {
     if (
       (this.state.frame && !this.state.ready) ||
       this.state.snapshot?.editor.editorId !== this.options.selection.editorId
     )
-      return Promise.resolve();
+      return Promise.resolve(false);
     return this.run("Closing editor…", async (port, signal) => {
       const editing = this.state.frame && this.state.mode === "edit";
       if (editing && this.state.modified) await this.saveWith(port, signal);
@@ -360,7 +374,7 @@ export class OfficeEditorController {
           ? "Editor closed; your saved changes were published as a revision."
           : "Editor closed.",
       });
-      this.options.onClosed?.();
+      if (notify) this.options.onClosed?.();
     });
   };
   publish = () => {

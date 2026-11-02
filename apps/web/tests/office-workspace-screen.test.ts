@@ -53,6 +53,7 @@ const editorState = (patch: Partial<OfficeEditorState>): OfficeEditorState => ({
   uncertain: false,
   notice: "",
   mode: "edit",
+  saving: false,
   ...patch,
 });
 const target = {

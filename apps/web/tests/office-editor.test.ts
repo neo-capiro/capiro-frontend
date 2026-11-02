@@ -479,6 +479,57 @@ describe("attended Office state", () => {
     ]);
     expect(f.closed).toHaveBeenCalledTimes(2);
   });
+  it("the leave guard's close keeps the host's navigation out and reports whether it was confirmed; edits count as unsaved while a Save is in flight", async () => {
+    const f = fixture();
+    await f.editor.open();
+    f.editor.ready();
+    f.editor.modified(true);
+    const ack = deferred<void>();
+    f.frame.save.mockImplementationOnce(() => ack.promise);
+    const closing = f.editor.close(false);
+    await vi.waitFor(() => expect(f.frame.save).toHaveBeenCalledTimes(1));
+    expect(f.editor.getSnapshot().saving).toBe(true);
+    f.setSaved(snapshot(1, selection.editorId));
+    ack.resolve();
+    await expect(closing).resolves.toBe(true);
+    expect(f.editor.getSnapshot().saving).toBe(false);
+    expect(f.closed).not.toHaveBeenCalled();
+    expect(f.calls.map((c) => c.route)).toEqual([
+      "open",
+      "launch",
+      "read",
+      "read",
+      "release",
+      "publish",
+    ]);
+    // A close the service did not confirm resolves false, closes the frame and leaves the recovery notice.
+    const g = fixture();
+    await g.editor.open();
+    g.editor.ready();
+    g.editor.modified(true);
+    const failing = g.editor.close(false);
+    await vi.advanceTimersByTimeAsync(5_000);
+    await expect(failing).resolves.toBe(false);
+    expect(g.closed).not.toHaveBeenCalled();
+    expect(g.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      uncertain: true,
+      saving: false,
+    });
+    expect(g.calls.filter((c) => c.route === "release")).toHaveLength(0);
+    // A Save without modified edits never counts as unsaved work.
+    const h = fixture();
+    await h.editor.open();
+    h.editor.ready();
+    const ready = deferred<void>();
+    h.frame.save.mockImplementationOnce(() => ready.promise);
+    const saving = h.editor.save();
+    await vi.waitFor(() => expect(h.frame.save).toHaveBeenCalledTimes(1));
+    expect(h.editor.getSnapshot().saving).toBe(false);
+    h.setSaved(snapshot(1, selection.editorId));
+    ready.resolve();
+    await saving;
+  });
   it("an earlier revision opens read-only: a view launch, and Save, Save As and Publish do nothing", async () => {
     const f = fixture();
     await f.editor.open(false, "view");
