@@ -388,6 +388,42 @@ describe("attended Office state", () => {
     await f.editor.recover();
     expect(f.editor.getSnapshot().uncertain).toBe(false);
   });
+  it("a refusal the service never received names its reason and asks for a retry, not a recovery", async () => {
+    const f = fixture();
+    const request = f.port.request;
+    f.port.request = vi.fn(async () => ({
+      status: 502,
+      value: {
+        schema: "meri.office-application/1",
+        error: { code: "REFUSED", outcome: "NOT_DISPATCHED" },
+      },
+    })) as OfficeTransport["request"];
+    await expect(f.editor.open()).resolves.toBe(false);
+    expect(f.editor.getSnapshot()).toMatchObject({
+      frame: false,
+      uncertain: false,
+      notice:
+        "The request did not reach the document service. Nothing changed; try again.",
+    });
+    f.port.request = request;
+    await expect(f.editor.open()).resolves.toBe(true);
+    expect(f.frame.launch).toHaveBeenCalledTimes(1);
+    // A refusal after dispatch may have taken effect: it names its reason and still needs recovery.
+    const g = fixture();
+    g.port.request = vi.fn(async () => ({
+      status: 503,
+      value: {
+        schema: "meri.office-application/1",
+        error: { code: "UNAVAILABLE", outcome: "UNKNOWN" },
+      },
+    })) as OfficeTransport["request"];
+    await g.editor.open();
+    expect(g.editor.getSnapshot()).toMatchObject({
+      uncertain: true,
+      notice:
+        "Document editing is unavailable right now. Recover the saved draft before continuing.",
+    });
+  });
   it("frame expiry retires a pending operation before its fresh metadata can return", async () => {
     const f = fixture();
     await f.editor.open();
