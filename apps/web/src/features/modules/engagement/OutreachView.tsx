@@ -179,7 +179,7 @@ export function OutreachView({
         initialCategory={category}
         onCreate={() => open({ id: "new", kind: "campaign", overview: false })}
         onCampaign={(id) => open({ id, kind: "campaign", overview: true })}
-        onRecord={(row) => open({ id: row.id, kind: "draft", overview: true })}
+        onRecord={(id) => open({ id, kind: "draft", overview: true })}
       />
     </>
   );

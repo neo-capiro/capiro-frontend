@@ -15,6 +15,8 @@ export type CampaignListRow = {
   recordedSend: string | null;
   category: CampaignCategory;
   sentAt: string | null;
+  /** An outreach record that has not entered the campaign workflow keeps its record editor. */
+  opens: "campaign" | "record";
 };
 export function recordedCategory(status: string | null): CampaignCategory {
   if (!status || status === "draft") return "drafts";
@@ -32,11 +34,16 @@ export function canonicalListRow(
     id: row.id,
     title: row.state.title,
     goal: row.state.decisions?.goal ?? null,
-    workflow: row.status === "draft" ? "active" : row.status,
+    workflow: !row.hasWorkflow
+      ? "not started"
+      : row.status === "draft"
+        ? "active"
+        : row.status,
     targets: row.recipientCount,
     recordedSend: row.recordedSendStatus,
     category: row.category,
     sentAt: row.sentAt,
+    opens: row.hasWorkflow ? "campaign" : "record",
   };
 }
 export function recordTypeLabel(type: string) {
