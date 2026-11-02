@@ -2,6 +2,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import { retirableConversationRequestId } from "./query-journal";
 import {
   clearMeriConversationScope,
+  discardMeriConversationMessages,
   type TabScope,
   type TabStorage,
 } from "./tab-journal";
@@ -47,6 +48,24 @@ export function clearMeriConversationRecovery(
     // Removing the owned query objects also fences late writers, including memory-only owners.
     cache.removeQueries({
       predicate: (query) =>
+        matchesRecovery(query.queryKey, query.state.data, scope),
+    });
+  }
+}
+
+/** "Discard and write a new message": drop this conversation's unrecoverable message records and their
+ * cached owners; the selection is kept, so the same conversation stays open for the new message. */
+export function discardMeriConversationRecovery(
+  cache: QueryClient,
+  scope: TabScope,
+  storage?: TabStorage,
+) {
+  try {
+    discardMeriConversationMessages(scope, storage);
+  } finally {
+    cache.removeQueries({
+      predicate: (query) =>
+        query.queryKey[0] !== "meri-conversation-selection" &&
         matchesRecovery(query.queryKey, query.state.data, scope),
     });
   }

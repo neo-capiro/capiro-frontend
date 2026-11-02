@@ -49,6 +49,8 @@ function useDraftState(
   context: ConversationContext | undefined,
   accessLost: boolean,
   scope?: TabScope,
+  /** Advanced when the person discards a message this tab could not save or recover. */
+  epoch = 0,
 ) {
   // Callers build the scope per render; the owner and the effects below key on its fields, never on
   // its identity, so a render can never re-run them by itself (an effect that resets the owner and
@@ -60,22 +62,25 @@ function useDraftState(
   );
   const owner = useMemo(
     () => draftOwner(stableScope, accessLost),
-    [stableScope, accessLost],
+    // The epoch replaces an owner whose record was discarded; it is not read by the factory.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [stableScope, accessLost, epoch],
   );
-  const previous = useRef({ owner, scoped: !!stableScope });
+  const previous = useRef({ owner, scoped: !!stableScope, epoch });
   useSyncExternalStore(owner.subscribe, owner.snapshot, owner.snapshot);
   useEffect(() => {
     const prior = previous.current;
     if (prior.owner === owner) return;
-    if (!prior.scoped && prior.owner.draft()) {
+    // Unscoped text moves into the conversation; so does text typed while the discarded record was locked.
+    if ((!prior.scoped || prior.epoch !== epoch) && prior.owner.draft()) {
       try {
         owner.edit(prior.owner.draft());
       } catch {
         /* Text stays mounted; commands fail closed. */
       }
     }
-    previous.current = { owner, scoped: !!stableScope };
-  }, [owner, stableScope]);
+    previous.current = { owner, scoped: !!stableScope, epoch };
+  }, [owner, stableScope, epoch]);
   useEffect(() => {
     if (accessLost) owner.reset();
     // A context of another scope (a client switch or a port still bound to the previous route) is
@@ -107,8 +112,9 @@ export function useConversationLocalState(
   context: ConversationContext | undefined,
   accessLost: boolean,
   scope?: TabScope,
+  epoch = 0,
 ) {
-  const { owner, edit } = useDraftState(context, accessLost, scope);
+  const { owner, edit } = useDraftState(context, accessLost, scope, epoch);
   const [modelDraft, setModelDraft] = useState<{
     owner: typeof owner;
     value: ConversationSubmitRequest["modelSelection"];

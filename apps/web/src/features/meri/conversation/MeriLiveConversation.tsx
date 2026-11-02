@@ -6,7 +6,10 @@ import {
   type ReactNode,
   type RefObject,
 } from "react";
+import { Button } from "@capiro/ui/button";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
+import { TabJournalUnavailable } from "../../../shared/meri-conversations/tab-journal";
+import ui from "../ui/meri-ui.module.css";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { UserMessage } from "../screens/conversation/UserMessage";
@@ -276,11 +279,13 @@ function CurrentRunStatus({
   retentionError,
   active,
   acceptedRequest,
+  onDiscardUnrecoverable,
 }: {
   run: ReturnType<typeof useLiveRun>;
   retentionError: string | undefined;
   active: boolean;
   acceptedRequest: ConversationStoredRequest | undefined;
+  onDiscardUnrecoverable?: (() => void) | undefined;
 }) {
   const reconnect = useReconnectSchedule(
     run.transcript === "unavailable" && run.failure === "unreachable"
@@ -297,6 +302,18 @@ function CurrentRunStatus({
           {retentionError}
         </p>
       )}
+      {/* Whatever this tab could not save or recover, the person can always give it up and write anew. */}
+      {retentionError === new TabJournalUnavailable().message &&
+        onDiscardUnrecoverable && (
+          <Button
+            type="button"
+            variant="outline"
+            className={ui.outline}
+            onClick={onDiscardUnrecoverable}
+          >
+            Discard and write a new message
+          </Button>
+        )}
       <RunStatus
         run={{ ...run, busy: run.busy || !!retentionError }}
         active={active}
@@ -344,6 +361,7 @@ export function MeriLiveConversation({
   savedCurrent,
   acceptedRequest,
   storageError,
+  onDiscardUnrecoverable,
   modelSelection,
   modelBlocked,
   skillSelection,
@@ -377,6 +395,8 @@ export function MeriLiveConversation({
   savedCurrent?: TurnView | undefined;
   acceptedRequest?: ConversationStoredRequest | undefined;
   storageError?: string | undefined;
+  /** Give up a message this tab could not save or recover, so a new one can be sent. */
+  onDiscardUnrecoverable?: (() => void) | undefined;
   modelSelection?: ConversationStoredRequest["modelSelection"];
   modelBlocked?: string | undefined;
   skillSelection?: ConversationSkillSelection;
@@ -631,6 +651,7 @@ export function MeriLiveConversation({
             retentionError={retentionError}
             active={active}
             acceptedRequest={acceptedRequest}
+            onDiscardUnrecoverable={onDiscardUnrecoverable}
           />
           {/* A pending control with no turn to host it (nothing observed yet) still needs its recovery. */}
           {!turn && controls}

@@ -146,7 +146,32 @@ it.each([
   "waiting-for-approval",
   "failed",
   "cancelled",
-] as const)("%s observation does not settle retirement", async (runState) => {
+] as const)(
+  "%s observation of the exact accepted request settles retirement",
+  async (runState) => {
+    // The run on screen when access was lost may still be running, or may end failed or cancelled; its
+    // request was accepted all the same, and nothing else may lock the tab (2 Nov preview, M37 and R02).
+    const f = fixture();
+    f.retire();
+    const fresh = f.fresh(),
+      port = await completedPort(),
+      snapshot = port.getSnapshot();
+    expect(
+      fresh.acknowledgeCompletedRetirement({
+        ...port,
+        getSnapshot: () => ({
+          ...snapshot,
+          observation: { ...snapshot.observation!, runState },
+        }),
+      }),
+    ).toBe(true);
+    expect(fresh.current()).toBe(true);
+    expect(fresh.recoveryBlocked).toBe(false);
+    expect(fresh.read().submit?.state).toBe("observed");
+  },
+);
+
+it("history without an observation of the run does not settle retirement", async () => {
   const f = fixture();
   f.retire();
   const fresh = f.fresh(),
@@ -155,10 +180,7 @@ it.each([
   expect(
     fresh.acknowledgeCompletedRetirement({
       ...port,
-      getSnapshot: () => ({
-        ...snapshot,
-        observation: { ...snapshot.observation!, runState },
-      }),
+      getSnapshot: () => ({ ...snapshot, observation: null }),
     }),
   ).toBe(false);
   expect(fresh.current()).toBe(false);

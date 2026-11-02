@@ -348,7 +348,12 @@ export function conversationIntentJournal(
     get recoveryBlocked() {
       return recoveryBlocked;
     },
-    /** Only this freshly authorized port's admitted, completed history can resolve retirement.
+    /** Only this freshly authorized port's admitted history can resolve retirement: the exact retired
+     * request accepted for this run, in any run state. An access loss retires the request of a run that
+     * is still running, or of one that then failed or was cancelled, as well as a completed one; requiring
+     * "completed" left a healthy run, and every next message after a failed run, locked behind "This tab
+     * could not safely save or recover the message" (2 Nov preview, M37 and R02). A record that could not
+     * be read at all stays blocked here; the person can discard it ("Discard and write a new message").
      * It does not restore the old draft, assume non-delivery, or dispatch a command. */
     acknowledgeCompletedRetirement(port: {
       context: ConversationContext;
@@ -372,7 +377,7 @@ export function conversationIntentJournal(
       const snapshot = port.getSnapshot();
       if (
         snapshot.status !== "ready" ||
-        snapshot.observation?.runState !== "completed" ||
+        !snapshot.observation ||
         !snapshot.acceptedRequest ||
         snapshot.acceptedRequest.requestId !== retiredRequestId ||
         snapshot.submit === "pending" ||

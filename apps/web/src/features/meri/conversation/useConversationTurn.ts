@@ -152,6 +152,7 @@ function useRetainedTurn(
   account: ConversationAccount,
   clientId: string | null,
   conversationId?: string,
+  epoch = 0,
 ) {
   const retention = useMemo(
     () => {
@@ -177,7 +178,8 @@ function useRetainedTurn(
     },
     // Identity values, rather than the presentation object's allocation, define this lifetime.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [cache, account.tenantId, account.actorId, clientId, conversationId],
+    // The epoch replaces a journal whose record the person discarded.
+    [cache, account.tenantId, account.actorId, clientId, conversationId, epoch],
   );
   const journal = retention.journal;
   const intent = useSyncExternalStore(
@@ -213,13 +215,14 @@ export function useConversationTurn(
   conversationId: string | undefined,
   open: (target: ConversationTurnTarget) => void,
   completedHistory?: ConversationTranscriptPage,
+  epoch = 0,
 ) {
   const cache = useQueryClient();
   const {
     journal,
     intent,
     error: retentionError,
-  } = useRetainedTurn(cache, account, clientId, conversationId);
+  } = useRetainedTurn(cache, account, clientId, conversationId, epoch);
   const { active, alive, gate } = useTurnLifetime(journal);
   const [notReady, setNotReady] = useState(false);
   // The reserved target control confirmed admitted no message, or whose message the person discarded.

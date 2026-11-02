@@ -42,7 +42,10 @@ function memoryStorage(): TabStorage {
 }
 
 /** Existing canonical synthetic service handlers, exercised through the actual public SDK. */
-async function service(running: boolean) {
+async function service(
+  running: boolean,
+  terminal: "completed" | "failed" | "cancelled" = "completed",
+) {
   const handlers = new Map<string, (route: Route) => unknown>();
   const native = await installInitialInput(
     {
@@ -51,6 +54,8 @@ async function service(running: boolean) {
       },
     } as unknown as Page,
     running,
+    false,
+    terminal,
   );
   let denied = false;
   const calls: string[] = [];
@@ -169,15 +174,24 @@ it.each(["unverified", "unreadable"])(
   },
 );
 
-it.each([false, true])(
-  "first manual send, access loss and exact reauthorization only recover after completed history (running=%s)",
-  async (running) => {
+// An access loss retires the request of the run on screen whatever its state. Fresh history that shows that exact
+// request accepted resolves it for a running, failed or cancelled run too: before, only "completed" did, so a healthy
+// run showed "This tab could not safely save or recover the message" and the next message after a failed run never went
+// out (2 Nov preview, M37 and R02).
+it.each([
+  [false, "completed"],
+  [true, "completed"],
+  [false, "failed"],
+  [false, "cancelled"],
+] as const)(
+  "first manual send, access loss and exact reauthorization recover from fresh accepted history (running=%s, ends %s)",
+  async (running, terminal) => {
     const storage = memoryStorage(),
       cache = new QueryClient();
     cleanup.push(() => cache.clear());
     syncMeriTabIdentity("synthetic-retirement-session", storage);
     vi.stubGlobal("window", { sessionStorage: storage });
-    const native = await service(running);
+    const native = await service(running, terminal);
     const oldPort = portFor(native.fetchImpl, () =>
       clearMeriConversationRecovery(cache, scope, storage),
     );
@@ -236,18 +250,20 @@ it.each([false, true])(
       !running,
       false,
     );
+    // Nothing locks the tab: the retired request is the run's observed one again.
+    expect(fresh.commands.storageError).toBeUndefined();
+    expect(fresh.commands.intent.submit?.state).toBe("observed");
+    expect(fresh.commands.intent.submit?.requestId).toBe(
+      port.getSnapshot().acceptedRequest?.requestId,
+    );
+    expect(port.getSnapshot().observation?.runState).toBe(
+      running ? "running" : terminal,
+    );
     if (running) {
-      expect(fresh.commands.storageError).toContain(
-        "This tab could not safely save or recover",
-      );
-      expect(fresh.commands.intent).toEqual({});
+      // The run itself still holds the next message until it ends; storage does not.
       expect(availability.readyForNext).toBe(false);
     } else {
-      expect(fresh.commands.storageError).toBeUndefined();
-      expect(fresh.commands.intent.submit?.state).toBe("observed");
-      expect(fresh.commands.intent.submit?.requestId).toBe(
-        port.getSnapshot().acceptedRequest?.requestId,
-      );
+      // Completed, failed or cancelled: the next message can be sent.
       expect(availability.sendBlocked).toBeUndefined();
       expect(availability.readyForNext).toBe(true);
       expect(createInitialDraftOwner(scope, storage).draft()).toBe("");

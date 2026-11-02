@@ -221,7 +221,8 @@ export function ConversationView({
           >
             {displayed ? (
               <MeriLiveConversation
-                key={displayed.lifetimeKey}
+                // A discarded unrecoverable message remounts the run with a fresh request journal.
+                key={`${displayed.lifetimeKey}:${session.recoveryEpoch}`}
                 port={displayed.port}
                 composer={composer}
                 initialPrompt={session.connection.pending}
@@ -231,6 +232,7 @@ export function ConversationView({
                 onDraft={session.setDraft}
                 initialDraft={session.initialDraft}
                 storageError={session.storageError}
+                onDiscardUnrecoverable={session.discardUnrecoverable}
                 modelSelection={session.modelSelection}
                 skillSelection={session.skillSelection}
                 newIntentBlocked={newIntentBlocked}
