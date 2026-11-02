@@ -1146,6 +1146,34 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "ui-stream 0.1.35 admits @capiro/meri-contracts 0.1.51 as a peer; no stream behaviour change."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.52-9e2a6b65-275bb9a41ed2.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.52",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "9e2a6b656e5a17e8c286f3bf5a0aae64abad1e7f",
+   "sourceTree": "e11f95773a2305a75a6782da4bc865530a386f39",
+   "bytes": 2202884,
+   "sha256": "275bb9a41ed24783807bd90e331fc8762a8d565098a625b2529fb657ac76f3af",
+   "integrity": "sha512-GWxxwJlxDMW1XCu4ulFI3DffVOntAIe6T2cQOYJTUAMT19ELXXDd7Hf3C8pyn4w441DBg+07nCPE28MMDog3Pw==",
+   "regularEntryCount": 123,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Office launch and renew forms carry access_token_ttl \"0\" (the WOPI no-client-expiry sentinel) so CODE shows no expiry countdown; expiresAtMs stays the real expiry the host enforces. No other wire change."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.36-9e2a6b65-c6ff47357161.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.36",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "9e2a6b656e5a17e8c286f3bf5a0aae64abad1e7f",
+   "sourceTree": "e11f95773a2305a75a6782da4bc865530a386f39",
+   "bytes": 3861,
+   "sha256": "c6ff47357161e6185f21bad61c510b9604a2e4291076a24bbcdcb5ded1824386",
+   "integrity": "sha512-CfPX1ZAA8+ziXl9gF6rCxGBFbco5egW4XfkvL5Rbyu/4nB2n7k9fnNJDvofHczQt67PgIBQ1Z7XxACI7P+eyEQ==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "ui-stream 0.1.36 admits @capiro/meri-contracts 0.1.52 as a peer; no stream behaviour change."
   }
  ]
 }
