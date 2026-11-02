@@ -2,7 +2,9 @@ import { expect, it } from "vitest";
 import {
   confirmFirstChatIntent,
   FirstChatIntentStorageError,
+  firstChatScopeOf,
   markFirstChatIntentUsed,
+  prepareNewConversation,
   readFirstChatIntent,
   reserveFirstChatIntent,
   type FirstChatScope,
@@ -203,4 +205,89 @@ it("does not confirm a mismatched request or replace a confirmed conversation", 
     state: "confirmed",
     conversationId: conversationA,
   });
+});
+
+it("New conversation reopens the still-empty conversation unless the person is in another one of the scope", () => {
+  const storage = memoryStorage();
+  expect(prepareNewConversation(scope, null, storage, () => requestB)).toBe(
+    "new",
+  );
+  expect(storage.entries.size).toBe(0);
+
+  reserveFirstChatIntent(scope, storage, () => requestA);
+  // An unknown outcome is replayed by the resolver, never rotated here.
+  expect(prepareNewConversation(scope, null, storage, () => requestB)).toBe(
+    "new",
+  );
+  expect(readFirstChatIntent(scope, storage)).toMatchObject({
+    state: "pending",
+    requestId: requestA,
+  });
+
+  const confirmed = confirmFirstChatIntent(
+    scope,
+    requestA,
+    conversationA,
+    storage,
+  );
+  expect(
+    prepareNewConversation(scope, conversationA, storage, () => requestB),
+  ).toBe("reopen");
+  // From another page or scope (no conversation of this scope in the address) as well.
+  expect(prepareNewConversation(scope, null, storage, () => requestB)).toBe(
+    "reopen",
+  );
+  expect(readFirstChatIntent(scope, storage)).toEqual(confirmed);
+  expect(reserveFirstChatIntent(scope, storage, () => requestB)).toEqual(
+    confirmed,
+  );
+
+  // From a different conversation of the scope the empty one is left behind for a new request.
+  expect(
+    prepareNewConversation(
+      scope,
+      "dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+      storage,
+      () => requestB,
+    ),
+  ).toBe("new");
+  expect(readFirstChatIntent(scope, storage)).toMatchObject({
+    state: "pending",
+    requestId: requestB,
+  });
+});
+
+it("New conversation from a conversation a send was attempted in is always a new request", () => {
+  const storage = memoryStorage();
+  reserveFirstChatIntent(scope, storage, () => requestA);
+  confirmFirstChatIntent(scope, requestA, conversationA, storage);
+  markFirstChatIntentUsed(scope, conversationA, storage);
+
+  expect(
+    prepareNewConversation(scope, conversationA, storage, () => requestB),
+  ).toBe("new");
+  expect(readFirstChatIntent(scope, storage)).toMatchObject({
+    state: "pending",
+    requestId: requestB,
+  });
+  expect(
+    prepareNewConversation(scope, conversationA, {
+      getItem: () => {
+        throw new Error("storage denied");
+      },
+      setItem: () => undefined,
+    }),
+  ).toBe("new");
+});
+
+it("maps a bound context to its General or client scope", () => {
+  const account = { tenantId: "tenant-a", actorId: "actor-a" };
+  expect(firstChatScopeOf({ ...account, selectedClientId: null })).toEqual({
+    ...account,
+    scopeKind: "general",
+    clientId: null,
+  });
+  expect(
+    firstChatScopeOf({ ...account, selectedClientId: scope.clientId }),
+  ).toEqual(scope);
 });

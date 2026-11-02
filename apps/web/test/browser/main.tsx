@@ -73,12 +73,30 @@ function RoutedApp() {
       </div>
     );
   if (path === "/routines") return <RoutinesProbe />;
-  if (path === "/meri/conversations")
-    return (
+  // Opened for a client, the list carries the production shell so its sidebar controls are
+  // exercised; the bare list keeps the lifecycle probes' direct mount.
+  if (path === "/meri/conversations") {
+    const list = (
       <RequireSession>
         <ConversationHistoryList />
       </RequireSession>
     );
+    return search.has("clientId") ? (
+      <ProductShell
+        section="conversations"
+        conversationEnabled={
+          sessionStorage.getItem("meri-conversation-enabled") === "true"
+        }
+        firstChatBootstrapEnabled={
+          sessionStorage.getItem("meri-first-chat-enabled") === "true"
+        }
+      >
+        {list}
+      </ProductShell>
+    ) : (
+      list
+    );
+  }
   if (isOnboardPath(path) && search.get("onboard-boundary") === "1")
     return <OnboardBoundaryProbe />;
   if (isOnboardPath(path)) {

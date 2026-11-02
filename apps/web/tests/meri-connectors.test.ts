@@ -12,6 +12,8 @@ import {
   cardCommand,
   connectGate,
   connectedServiceRow,
+  connectedServiceRows,
+  connectorTitle,
   connectionEndAction,
   libraryCards,
   libraryNotice,
@@ -275,11 +277,45 @@ describe("stored connectors", () => {
     });
   });
 
-  it("names the row by its library entry, falling back to the stored name", () => {
+  it("names the row by its library entry, else by a title derived from the stored id", () => {
     expect(connectedServiceRow(storedRow(), "Notion").service).toBe("Notion");
-    expect(connectedServiceRow(storedRow({ name: "notion-mcp" })).service).toBe(
-      "notion-mcp",
+    expect(
+      connectedServiceRow(storedRow({ name: "notion-mcp", catalogId: null }))
+        .service,
+    ).toBe("Notion MCP");
+    expect(
+      connectedServiceRows(
+        [storedRow({ name: "meriv3-airtable", catalogId: "meriv3-airtable" })],
+        [{ id: "meriv3-airtable", name: "Airtable (reviewed)" } as never],
+      )[0]!.service,
+    ).toBe("Airtable (reviewed)");
+    expect(
+      connectedServiceRows(
+        [storedRow({ name: "meriv3-airtable", catalogId: "meriv3-airtable" })],
+        [],
+      )[0]!.service,
+    ).toBe("Airtable");
+  });
+
+  it("derives a readable title from a catalog id and never shows the raw id", () => {
+    const title = (name: string, catalogId: string | null = name) =>
+      connectorTitle({ name, catalogId });
+    expect(title("meriv3-airtable")).toBe("Airtable");
+    expect(title("meriv3-google-drive")).toBe("Google Drive");
+    expect(title("meriv3-github")).toBe("GitHub");
+    expect(title("hubspot_crm", null)).toBe("HubSpot CRM");
+    expect(title("notion")).toBe("Notion");
+    expect(title("meriv3-")).toBe("meriv3-");
+    // A stored name that reads as one is kept, whatever the catalog id says.
+    expect(title("Salesforce", "meriv3-salesforce")).toBe("Salesforce");
+    expect(title("My Notion workspace", "meriv3-notion")).toBe(
+      "My Notion workspace",
     );
+    expect(title("acme-crm", null)).toBe("Acme CRM");
+    expect(
+      title("connector 11111111-1111-4111-8111-111111111111", "meriv3-slack"),
+    ).toBe("Slack");
+    expect(title("meriv3-slack", "meriv3-slack-mcp")).toBe("Slack MCP");
   });
 });
 

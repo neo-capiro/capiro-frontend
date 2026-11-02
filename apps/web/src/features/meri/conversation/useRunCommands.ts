@@ -106,6 +106,7 @@ export function useRunCommands(
         onRecorded,
         modelSelection,
         selection,
+        window.sessionStorage,
       ),
     );
   const submitInitial = (
@@ -124,6 +125,7 @@ export function useRunCommands(
         onRecorded,
         modelSelection,
         selection,
+        window.sessionStorage,
       ),
     );
   const recover = (stored: ConversationStoredRequest) =>
