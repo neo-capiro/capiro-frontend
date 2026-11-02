@@ -8,6 +8,7 @@ import type { ConversationAccount } from "../../../shared/meri-conversations/hos
 import { requireMeriTabStorage } from "../../../shared/meri-conversations/tab-journal";
 import { conversationHref } from "../../../shared/meri-conversations/conversation-navigation";
 import {
+  definiteCreateRefusal,
   receiveResearchConversation,
   researchLaunchOwner,
 } from "./research-launch";
@@ -117,7 +118,10 @@ function useResearchLaunch({
       return undefined;
     }
   });
-  const [state, setState] = useState(() => {
+  const [refusal, setRefusal] = useState("");
+  const [state, setState] = useState<
+    "new" | "unknown" | "created" | "refused" | "unavailable"
+  >(() => {
     try {
       return owner ? (owner.read()?.state ?? "new") : "unavailable";
     } catch {
@@ -159,13 +163,17 @@ function useResearchLaunch({
         setState("created");
         open(result.conversationId);
       }
-    } catch {
-      if (!signal.aborted) setState("unknown");
+    } catch (error) {
+      if (signal.aborted) return;
+      if (definiteCreateRefusal(error)) {
+        setRefusal(error.message);
+        setState("refused");
+      } else setState("unknown");
     } finally {
       sending.current = false;
     }
   }
-  return { owner, state, open, create };
+  return { owner, state, refusal, open, create, retry: () => setState("new") };
 }
 
 function CreateResearchConversation({
@@ -175,7 +183,7 @@ function CreateResearchConversation({
   account: ConversationAccount;
   portfolioId: string;
 }) {
-  const { owner, state, open, create } = useResearchLaunch({
+  const { owner, state, refusal, open, create, retry } = useResearchLaunch({
     account,
     portfolioId,
   });
@@ -195,6 +203,11 @@ function CreateResearchConversation({
         >
           Open Research conversation
         </button>
+      ) : state === "refused" ? (
+        <div role="alert">
+          <p>Meri could not start this conversation. {refusal}</p>
+          <button onClick={retry}>Try again</button>
+        </div>
       ) : (
         <p role="status">
           {state === "unavailable"
