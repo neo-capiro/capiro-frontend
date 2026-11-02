@@ -354,6 +354,7 @@ export function MeriLiveConversation({
   textareaRef,
   onNextTurn,
   nextTurnBlocked,
+  nextTurnChecking = false,
   nextTurnVerified = false,
   initialBlocked,
   composer,
@@ -381,6 +382,8 @@ export function MeriLiveConversation({
   /** The run finished: send `prompt` as the conversation's next run. */
   onNextTurn: (prompt: string, finished: TurnView) => void;
   nextTurnBlocked?: string | undefined;
+  /** The latest-run check is still in flight: a message typed now waits for it instead of being refused. */
+  nextTurnChecking?: boolean | undefined;
   /** Current exact-run history is re-verified and permits a client-side next-turn attempt. */
   nextTurnVerified?: boolean | undefined;
   initialBlocked?: string | undefined;
@@ -524,8 +527,11 @@ export function MeriLiveConversation({
   // waits in the box as the queued message and is sent once the run finishes. A block other than the run,
   // a block that remains once the run ended (for example a refused skill or a next-turn refusal) or an
   // emptied box releases it, keeping the text and showing why.
+  // The latest-run check of a fresh or reloaded thread counts too: a first Enter waits for it (X15).
   const waiting =
-    active || (!!intent.submit && intent.submit.state !== "unknown" && !turn);
+    active ||
+    nextTurnChecking ||
+    (!!intent.submit && intent.submit.state !== "unknown" && !turn);
   const blocking =
     retentionError ??
     lifecycle.blocked ??

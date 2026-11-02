@@ -233,6 +233,7 @@ export function ConversationView({
               onBrowserTarget={session.openBrowserTarget}
               historyUnavailable={session.history.unavailable}
               nextTurnBlocked={session.nextBlocked}
+              nextTurnChecking={session.nextChecking}
               nextTurnVerified={!!session.source && !session.nextBlocked}
               initialBlocked={session.initialBlocked}
               promptKey={session.logicalKey}
