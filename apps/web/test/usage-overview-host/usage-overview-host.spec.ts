@@ -34,12 +34,15 @@ async function boundaries(
 ) {
   const reads: Read[] = [];
   let identityCalls = 0;
-  await page.route("**/api/backend/core/me", async (route) => {
+  // The account is read through both the Core proxy and the Capiro procedure endpoint.
+  const identity = async (route: Route) => {
     identityCalls += 1;
     await route.fulfill({
       json: (options.identity ?? (() => testIdentity))(identityCalls),
     });
-  });
+  };
+  await page.route("**/api/backend/core/me", identity);
+  await page.route("**/api/capiro/me.read*", identity);
   await page.route("**/api/backend/core/clients/*", (route) =>
     route.fulfill({ json: syntheticClient }),
   );
@@ -183,6 +186,165 @@ test("Refresh runs the same read again through the host and replaces the shown f
     "Jobs with usable accounting": "0 recorded · 0 without usable accounting",
     "Monthly admission cap": "$100.00",
   });
+});
+
+/** Workspace policy and the usage snapshot that reports it, for the policy-editor cases. */
+const model = (monthly: number, perQuery: number, maxTurns: number) => ({
+  monthlyCapMicroUsd: monthly * 1_000_000,
+  maxBudgetMicroUsd: perQuery * 1_000_000,
+  maxTurns,
+});
+const settings = (revision: number, limits: ReturnType<typeof model>) => ({
+  revision,
+  defaultTimezone: "UTC",
+  capabilityStatus: "resolved",
+  effectiveCapabilities: {},
+  capabilityPolicy: {},
+  model: limits,
+});
+const usage = (revision: number, limits: ReturnType<typeof model>) => {
+  const body = usageOverviewFixture();
+  const spent = 31_750_000;
+  return {
+    ...body,
+    policy: { status: "configured", revision, ...limits },
+    monthlyAdmission: {
+      ...body.monthlyAdmission,
+      knownChargeMicroUsd: spent,
+      remainingKnownMicroUsd: limits.monthlyCapMicroUsd - spent,
+      reached: false,
+    },
+  };
+};
+const before = model(60, 2, 20),
+  after = model(1000, 50, 500);
+/** One stored tenant record: reads answer the current revision, a save at that revision advances it. */
+async function tenantSettingsOwner(page: Page) {
+  let current = settings(2, before);
+  const saves: { expectedRevision: number; settings: { model: unknown } }[] =
+    [];
+  await page.route("**/api/settings/tenant/read", (route) =>
+    route.fulfill({ json: current }),
+  );
+  await page.route("**/api/settings/tenant/save", async (route) => {
+    const body = JSON.parse(route.request().postData() ?? "{}");
+    saves.push(body);
+    if (body.expectedRevision !== current.revision)
+      return route.fulfill({
+        status: 409,
+        json: { error: { code: "SETTINGS_REVISION_CONFLICT" } },
+      });
+    current = settings(current.revision + 1, body.settings.model);
+    return route.fulfill({ json: current });
+  });
+  return saves;
+}
+const limitFields = (page: Page) => ({
+  monthly: page.getByLabel("Monthly model budget (USD)"),
+  perQuery: page.getByLabel("Per-query model budget (USD)"),
+  turns: page.getByLabel("Maximum turns per query"),
+  save: page.getByRole("button", { name: "Save workspace limits" }),
+});
+
+test("a confirmed limits save keeps the editor usable and re-reads the admission ledger", async ({
+  page,
+}) => {
+  await onlyLocalRequests(page);
+  await boundaries(page, {
+    read: (call, route) =>
+      route.fulfill({ json: call === 1 ? usage(2, before) : usage(3, after) }),
+  });
+  const saves = await tenantSettingsOwner(page);
+  await page.goto(`${harnessPath}&editor`);
+  await expect(
+    page.getByText("$31.75 known recorded this month · $28.25 remaining"),
+  ).toBeVisible();
+  const { monthly, perQuery, turns, save } = limitFields(page);
+  await expect(page.getByText("Saved revision 2.")).toBeVisible();
+  await monthly.fill("1000");
+  await perQuery.fill("50");
+  await turns.fill("500");
+  await save.click();
+  await expect(page.getByText("Saved revision 3.")).toBeVisible();
+  await expect(
+    page.getByText("Workspace limits saved as revision 3."),
+  ).toBeVisible();
+  // The editor stays usable at the saved values and the ledger now reports the saved cap.
+  for (const field of [monthly, perQuery, turns])
+    await expect(field).toBeEnabled();
+  await expect(save).toBeEnabled();
+  await expect(monthly).toHaveValue("1000");
+  await expect(turns).toHaveValue("500");
+  await expect(perQuery).toHaveValue("50");
+  // The editor replaces the read-only policy list; the re-read ledger reports the saved cap.
+  await expect(
+    page.getByText("$31.75 known recorded this month · $968.25 remaining"),
+  ).toBeVisible();
+  expect(saves).toEqual([
+    {
+      expectedRevision: 2,
+      settings: { defaultTimezone: "UTC", capabilityPolicy: {}, model: after },
+    },
+  ]);
+});
+
+test("a failed re-read after a save keeps the editor and never brings back the earlier ledger", async ({
+  page,
+}) => {
+  await onlyLocalRequests(page);
+  let release!: () => void;
+  const third = new Promise<void>((done) => {
+    release = done;
+  });
+  await boundaries(page, {
+    read: async (call, route) => {
+      if (call === 1) return route.fulfill({ json: usage(2, before) });
+      if (call === 2)
+        return route.fulfill({
+          status: 503,
+          json: { error: { code: "USAGE_OVERVIEW_UNAVAILABLE" } },
+        });
+      await third;
+      return route.fulfill({ json: usage(3, after) });
+    },
+  });
+  const saves = await tenantSettingsOwner(page);
+  await page.goto(`${harnessPath}&editor`);
+  const { monthly, perQuery, turns, save } = limitFields(page);
+  await expect(
+    page.getByText("$31.75 known recorded this month · $28.25 remaining"),
+  ).toBeVisible();
+  await monthly.fill("1000");
+  await perQuery.fill("50");
+  await turns.fill("500");
+  await save.click();
+  // The usage re-read fails: no totals are shown, but the editor stays at the saved revision.
+  await expect(
+    page
+      .getByText(
+        "Usage could not be read. No totals or limits are inferred from this failure.",
+      )
+      .first(),
+  ).toBeVisible();
+  await expect(page.getByText("Saved revision 3.")).toBeVisible();
+  for (const field of [monthly, perQuery, turns])
+    await expect(field).toBeEnabled();
+  await expect(save).toBeEnabled();
+  await expect(turns).toHaveValue("500");
+  await expect(page.getByText(/\$28\.25 remaining/)).toHaveCount(0);
+  // A later refresh shows nothing from before the failure while it waits.
+  await page
+    .getByRole("button", { name: "Refresh usage", exact: true })
+    .click();
+  await expect(
+    page.getByText("Reading current tenant usage…").first(),
+  ).toBeVisible();
+  await expect(page.getByText(/\$28\.25 remaining/)).toHaveCount(0);
+  release();
+  await expect(
+    page.getByText("$31.75 known recorded this month · $968.25 remaining"),
+  ).toBeVisible();
+  expect(saves.map((body) => body.expectedRevision)).toEqual([2]);
 });
 
 test("a denied read withholds every total and retires the read", async ({

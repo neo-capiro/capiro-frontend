@@ -94,8 +94,10 @@ export function MeriPreferencesPanel({
         return (
           <UsageOverviewHost
             chrome={chrome}
-            configurationContent={
-              tenantSettingsEnabled ? <TenantModelSettings /> : undefined
+            configuration={
+              tenantSettingsEnabled
+                ? (onSaved) => <TenantModelSettings onSaved={onSaved} />
+                : undefined
             }
           />
         );
