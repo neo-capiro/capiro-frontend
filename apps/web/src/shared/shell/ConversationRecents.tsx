@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState, type FormEvent } from "react";
+import { useContext, useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Pencil } from "lucide-react";
@@ -80,6 +80,9 @@ function RecentLinks({
   const loading = query.isPending;
   const summaries = useRecentConversationTitles(account);
   const selectedConversationId = useSearchParams().get("conversationId");
+  // The row whose rename control takes focus back once its editor closes. Held here because the
+  // rows remount while the discovery list refetches after a saved change.
+  const [returnFocusTo, setReturnFocusTo] = useState<string | null>(null);
   return (
     <>
       {loading ? (
@@ -98,6 +101,9 @@ function RecentLinks({
               key={conversation.conversationId}
               conversation={conversation}
               summary={recentSummary(conversation, summaries)}
+              summariesCurrent={summaries !== undefined}
+              returnFocus={returnFocusTo === conversation.conversationId}
+              onReturnFocus={setReturnFocusTo}
               account={account}
               current={selectedConversationId === conversation.conversationId}
               href={`/meri?${new URLSearchParams({ ...(clientId === null ? { scope: "general" } : { clientId }), conversationId: conversation.conversationId })}`}
@@ -144,6 +150,9 @@ function RecentLinks({
 function RecentConversation({
   conversation,
   summary,
+  summariesCurrent,
+  returnFocus,
+  onReturnFocus,
   account,
   current,
   href,
@@ -152,18 +161,38 @@ function RecentConversation({
 }: Pick<Props, "className" | "onNavigate"> & {
   conversation: ConversationListPage["conversations"][number];
   summary: ConversationSummary | undefined;
+  /** The summaries read is current: an absent summary means the row has none. */
+  summariesCurrent: boolean;
+  /** This row's rename control takes focus as soon as it is rendered. */
+  returnFocus: boolean;
+  onReturnFocus: (conversationId: string | null) => void;
   account: ConversationAccount;
   current: boolean;
   href: string;
 }) {
   const [renaming, setRenaming] = useState(false);
-  const title = summary?.title ?? conversationLabel(conversation.createdAt);
-  if (summary && renaming)
+  // The owned title and its rename control stay while the summaries refetch; a row never flashes
+  // back to its creation receipt between two current reads.
+  const [known, setKnown] = useState(summary);
+  if (summariesCurrent && summary !== known) setKnown(summary);
+  const row = summary ?? known;
+  const pencil = useRef<HTMLButtonElement>(null);
+  // Leaving the editor (Escape or a saved name) puts focus back on the row's rename control.
+  useEffect(() => {
+    if (!returnFocus || renaming || !pencil.current) return;
+    pencil.current.focus();
+    onReturnFocus(null);
+  }, [returnFocus, renaming, onReturnFocus]);
+  const title = row?.title ?? conversationLabel(conversation.createdAt);
+  if (row && renaming)
     return (
       <RecentRename
-        row={summary}
+        row={row}
         account={account}
-        onDone={() => setRenaming(false)}
+        onDone={() => {
+          onReturnFocus(conversation.conversationId);
+          setRenaming(false);
+        }}
       />
     );
   return (
@@ -177,9 +206,10 @@ function RecentConversation({
       >
         <span className={styles.recentTitle}>{title}</span>
       </Link>
-      {summary && (
+      {row && (
         <button
           type="button"
+          ref={pencil}
           className={styles.recentRename}
           title="Rename conversation"
           aria-label={`Rename ${title}`}
@@ -192,7 +222,11 @@ function RecentConversation({
   );
 }
 
-/** Enter saves through the same management command owner as the history page; Escape leaves the name as it was. */
+/**
+ * Enter saves through the same management command owner as the history page; Escape leaves the
+ * name as it was. An empty name is refused: the contract needs a title, so the previous name stays
+ * and nothing is sent.
+ */
 function RecentRename({
   row,
   account,

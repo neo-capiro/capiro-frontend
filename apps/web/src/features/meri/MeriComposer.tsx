@@ -61,7 +61,9 @@ export function sendBlockedReason(
 ) {
   if (!live) return "Sending is unavailable in this disconnected fixture.";
   if (running)
-    return `A run is in progress. ${live.stopBlocked ?? "Use Stop to request cancellation; your draft stays editable."}`;
+    return live.stopBlocked
+      ? `Meri is still answering. ${live.stopBlocked}`
+      : "Meri is still answering.";
   return (
     live.draftBlocked ??
     live.notice ??

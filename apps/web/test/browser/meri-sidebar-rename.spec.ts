@@ -105,6 +105,14 @@ test("the sidebar lists the library before recent chats, names a chat from its s
   await page.keyboard.press("Escape");
   await expect(field).toHaveCount(0);
   await expect(recent).toBeVisible();
+  await expect(rename).toBeFocused();
+  // An empty name is refused: the previous name stays and nothing is sent.
+  await rename.click();
+  await field.fill("   ");
+  await page.keyboard.press("Enter");
+  await expect(field).toHaveCount(0);
+  await expect(recent).toBeVisible();
+  await expect(rename).toBeFocused();
   expect(manages).toEqual([]);
 
   // Enter saves through the management route with the row's exact revision; the list shows the receipt's title.
@@ -116,6 +124,12 @@ test("the sidebar lists the library before recent chats, names a chat from its s
     sidebar.getByRole("link", { name: "Defense budget outlook", exact: true }),
   ).toBeVisible();
   await expect(field).toHaveCount(0);
+  await expect(
+    sidebar.getByRole("button", {
+      name: "Rename Defense budget outlook",
+      exact: true,
+    }),
+  ).toBeFocused();
   expect(manages).toHaveLength(1);
   expect(manages[0]).toMatchObject({
     version: MANAGEMENT_VERSION,

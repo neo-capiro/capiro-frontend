@@ -271,6 +271,8 @@ describe("run controls appear only while there is something to control or recove
     expect(html).toMatch(
       /<button type="button" class="[^"]*textLink[^"]*"[^>]*>Inspect latest checkpoint<\/button>/,
     );
+    expect(html).toContain("Progress saved.");
+    expect(html).not.toContain("Checkpoint verified");
     expect(html).toContain("Fork into new chat");
     expect(html).not.toContain(">Resume</button>");
   });

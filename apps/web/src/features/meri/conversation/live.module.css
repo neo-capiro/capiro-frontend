@@ -227,8 +227,11 @@
 .inlineInput {
   flex: 1;
   min-width: 0;
-  height: 28px;
-  padding: 0 10px;
+  min-height: 28px;
+  max-height: 120px;
+  padding: 4px 10px;
+  resize: none;
+  field-sizing: content;
   border: 1px solid var(--input);
   border-radius: 8px;
   background: var(--card);

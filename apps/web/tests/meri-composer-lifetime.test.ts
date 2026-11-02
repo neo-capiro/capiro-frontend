@@ -166,8 +166,11 @@ it("names the reason Enter is refused, in the person's words, and none once send
     ),
   ).toBe("Choose a conversation first.");
   expect(sendBlockedReason(live, true, "Typed")).toBe(
-    "A run is in progress. Use Stop to request cancellation; your draft stays editable.",
+    "Meri is still answering.",
   );
+  expect(
+    sendBlockedReason({ ...live, stopBlocked: "Verify the run." }, true, "x"),
+  ).toBe("Meri is still answering. Verify the run.");
   expect(sendBlockedReason(live, false, "   ")).toBe("Type a message to send.");
   expect(sendBlockedReason(live, false, "Typed")).toBeUndefined();
   expect(

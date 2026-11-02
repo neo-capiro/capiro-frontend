@@ -1,4 +1,4 @@
-import { useId, useState, type FormEvent } from "react";
+import { useId, useState, type FormEvent, type KeyboardEvent } from "react";
 import { Button } from "@capiro/ui/button";
 import type { useRunLifecycle } from "./useRunLifecycle";
 import type { TurnView } from "../conversation-view";
@@ -30,10 +30,7 @@ function VerifiedCheckpoint({
   if (!checkpoint) return null;
   return (
     <div className={`${styles.statusRow} ${styles.fullRow}`}>
-      <p role="status">
-        Checkpoint verified for this run. Meri will recheck access when
-        continuing.
-      </p>
+      <p role="status">Progress saved.</p>
       {resumable && (
         <Button
           type="button"
@@ -99,13 +96,26 @@ export function RunLifecycleControls({
   const mutable = !held && !lifecycle.command && running;
   if (!lifecycle.command && !lifecycle.error && !running && !paused)
     return null;
+  // Any other control closes the guidance field so it never reopens with stale text.
+  const send: Lifecycle["send"] = (command) => {
+    setSteering(false);
+    setText("");
+    return lifecycle.send(command);
+  };
   const sendGuidance = (event: FormEvent) => {
     event.preventDefault();
     const command = guidanceCommand(text);
     if (!command || !mutable) return;
-    lifecycle.send(command);
-    setText("");
-    setSteering(false);
+    send(command);
+  };
+  const guidanceKey = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (
+      event.key !== "Enter" ||
+      event.shiftKey ||
+      event.nativeEvent.isComposing
+    )
+      return;
+    sendGuidance(event);
   };
   return (
     <>
@@ -134,7 +144,7 @@ export function RunLifecycleControls({
                 type="button"
                 className={inlineButton}
                 disabled={!mutable}
-                onClick={() => lifecycle.send({ intent: "pause" })}
+                onClick={() => send({ intent: "pause" })}
               >
                 Pause
               </Button>
@@ -156,15 +166,16 @@ export function RunLifecycleControls({
               className={styles.steerField}
               onSubmit={sendGuidance}
             >
-              <input
-                type="text"
+              <textarea
                 className={styles.inlineInput}
                 aria-label="Steer this run"
-                placeholder="Guidance for the rest of this answer"
+                placeholder="Guidance for the rest of this answer (Enter sends, Shift+Enter for a new line)"
+                rows={1}
                 value={text}
                 disabled={!mutable}
                 autoFocus
                 onChange={(event) => setText(event.target.value)}
+                onKeyDown={guidanceKey}
               />
               <Button
                 type="submit"
@@ -192,7 +203,7 @@ export function RunLifecycleControls({
             )
           )}
           <VerifiedCheckpoint
-            lifecycle={lifecycle}
+            lifecycle={{ ...lifecycle, send }}
             held={held}
             resumable={paused}
           />

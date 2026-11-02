@@ -250,7 +250,7 @@ test("synthetic desktop Enter during an active run preserves draft and compositi
   });
   expect(prevented).toBe(false);
   await expect(stopButton(page)).toHaveAccessibleDescription(
-    /A run is in progress/,
+    /Meri is still answering/,
   );
   expect(native.calls.allocate).toHaveLength(1);
   expect(native.calls.submit).toHaveLength(1);

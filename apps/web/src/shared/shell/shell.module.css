@@ -346,6 +346,12 @@
   background: var(--card);
   color: var(--foreground);
 }
+/* No hover on touch: the control is always shown. */
+@media (hover: none) {
+  .recentRename {
+    opacity: 1;
+  }
+}
 .recentRenameForm {
   display: flex;
   flex-direction: column;
