@@ -18,6 +18,7 @@ import styles from "../legiwatch.module.css";
 import { useLegiWatchRoute } from "../use-legiwatch-route";
 import { RetainedAudioPanel } from "./RetainedAudioPanel";
 import { useBrowserCapture } from "./use-browser-capture";
+import { supportsVideoRecording } from "./capture-media";
 
 export function BrowserRoom({ sessionId }: { sessionId: string }) {
   const query = useCapiroQuery("legiwatch.session", {
@@ -48,8 +49,18 @@ function ConnectedBrowserRoom({
   >;
   reload: () => void;
 }) {
+  const capability = useCapiroQuery("legiwatch.recording.capability", {
+    params: { id: session.id },
+  });
+  const videoAvailable = supportsVideoRecording(capability.data);
+  const [video, setVideo] = useState(false);
   const route = useLegiWatchRoute(),
-    capture = useBrowserCapture(session.id, session.recordingPolicy, reload);
+    capture = useBrowserCapture(
+      session.id,
+      session.recordingPolicy,
+      reload,
+      capability.data,
+    );
   const [consent, setConsent] = useState(false),
     [transcriptOnly, setTranscriptOnly] = useState(false),
     [attestation, setAttestation] = useState(""),
@@ -107,7 +118,7 @@ function ConnectedBrowserRoom({
             onClick={() => void capture.stop()}
           >
             {capture.phase === "stopping"
-              ? "Confirming final audio…"
+              ? "Confirming final media…"
               : "Stop capture"}
           </ActionButton>
         )}
@@ -164,7 +175,10 @@ function ConnectedBrowserRoom({
           <RetainedAudioPanel
             sessionId={session.id}
             capturing={capture.active}
-            onPolicyChanged={reload}
+            onPolicyChanged={() => {
+              reload();
+              capability.reload();
+            }}
           />
           <section className={styles.card}>
             <Badge>
@@ -187,28 +201,62 @@ function ConnectedBrowserRoom({
                   disabled={capture.active}
                   onChange={(event) => setTranscriptOnly(event.target.checked)}
                 />
-                Continue with transcript only. Audio will not be saved for
-                replay.
+                Continue with transcript only. Audio and video will not be saved
+                for replay.
               </label>
             ) : (
               <p>
-                Audio and transcript will be retained according to the available
-                recording policy.
+                {video ? "Video, audio and transcript" : "Audio and transcript"}{" "}
+                will be retained according to the available recording policy.
               </p>
+            )}
+            {session.recordingPolicy === "audio_and_transcript" && (
+              <>
+                {(videoAvailable || video) && (
+                  <label className={styles.check}>
+                    <input
+                      type="checkbox"
+                      checked={video}
+                      disabled={capture.active || !videoAvailable}
+                      onChange={(event) => setVideo(event.target.checked)}
+                    />
+                    I choose to record the shared official tab’s video and audio
+                  </label>
+                )}
+                <p className={styles.description}>
+                  {videoAvailable
+                    ? "Video uses up to 720p and 24 fps. Saved media is limited to 1 GiB per capture attempt."
+                    : "Video recording is unavailable from this backend. Audio-only capture remains an explicit option."}
+                </p>
+                {capability.error && (
+                  <p role="status">
+                    Recording capability could not be checked.
+                  </p>
+                )}
+                <ActionButton
+                  disabled={capture.active}
+                  onClick={capability.reload}
+                >
+                  Refresh recording capability
+                </ActionButton>
+              </>
             )}
             <ActionButton
               primary
               disabled={
                 capture.active ||
                 !consentReady ||
+                (video && !videoAvailable) ||
                 (session.recordingPolicy === "transcript_only" &&
                   !transcriptOnly)
               }
-              onClick={() => void capture.connect()}
+              onClick={() => void capture.connect(video)}
             >
               {capture.active
                 ? "Capture in progress"
-                : "Connect and share tab audio"}
+                : video
+                  ? "Connect and record tab video + audio"
+                  : "Connect and share tab audio"}
             </ActionButton>
             <ActionButton
               disabled={capture.active}
@@ -226,10 +274,11 @@ function ConnectedBrowserRoom({
           {capture.active && (
             <section className={styles.card}>
               <p>
-                Audio sent · {(capture.bytesSent / 1024 / 1024).toFixed(2)} MB
+                {video ? "Video + audio" : "Audio"} sent ·{" "}
+                {(capture.bytesSent / 1024 / 1024).toFixed(2)} MB
               </p>
               <p>
-                Saved audio ·{" "}
+                Saved {video ? "video + audio" : "audio"} ·{" "}
                 {capture.saved
                   ? `${timecode(capture.saved.durableEndMs)} · ${(capture.saved.durableBytes / 1024 / 1024).toFixed(2)} MB`
                   : session.recordingPolicy === "transcript_only"
@@ -237,7 +286,7 @@ function ConnectedBrowserRoom({
                     : "No durable acknowledgement yet"}
               </p>
               <p className={styles.description}>
-                Coverage is partial until final audio is confirmed.
+                Coverage is partial until final media is confirmed.
               </p>
             </section>
           )}

@@ -14,6 +14,60 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 describe("retained hearing audio transport", () => {
+  it("drains separate ordered AV and transcription tails without saving audio-lane bytes as video", async () => {
+    vi.stubGlobal("WebSocket", { OPEN: 1 });
+    const { connection, frames } = socket();
+    const transport = new HearingRecordingTransport(
+      connection,
+      "video-epoch",
+      vi.fn(),
+      2,
+    );
+    const retained = transport.enqueue(new Blob(["synthetic-video"]), 1000);
+    const audio = transport.enqueueTranscription(
+      new Blob(["synthetic-opus"]),
+      1000,
+    );
+    await vi.waitFor(() => expect(frames).toHaveLength(1));
+    expect(new TextDecoder().decode(frames[0]!.slice(0, 4))).toBe("LWV5");
+    transport.acknowledge({
+      epochId: "video-epoch",
+      sequence: 0,
+      durableBytes: 15,
+      durableEndMs: 1000,
+    });
+    await Promise.all([retained, audio]);
+    await transport.drain();
+    expect(frames).toHaveLength(2);
+    expect(new TextDecoder().decode(frames[1]!.slice(0, 4))).toBe("LWT5");
+    expect(transport.finalSequence).toBe(0);
+    expect(transport.finalTranscriptionSequence).toBe(0);
+  });
+  it("retries an unknown AV save result in the same epoch with identical bytes", async () => {
+    vi.stubGlobal("WebSocket", { OPEN: 1 });
+    vi.useFakeTimers();
+    const { connection, frames } = socket();
+    const transport = new HearingRecordingTransport(
+      connection,
+      "original-epoch",
+      vi.fn(),
+      2,
+    );
+    const pending = transport.enqueue(new Blob(["video-tail"]), 1001);
+    await vi.waitFor(() => expect(frames).toHaveLength(1));
+    await vi.advanceTimersByTimeAsync(10001);
+    expect(frames).toHaveLength(2);
+    expect(new Uint8Array(frames[1]!)).toEqual(new Uint8Array(frames[0]!));
+    expect(transport.epochId).toBe("original-epoch");
+    expect(transport.finalSequence).toBe(-1);
+    transport.acknowledge({
+      epochId: "original-epoch",
+      sequence: 0,
+      durableBytes: 10,
+      durableEndMs: 1001,
+    });
+    await pending;
+  });
   it("commits ordered frames only after a matching durable acknowledgement", async () => {
     vi.stubGlobal("WebSocket", { OPEN: 1 });
     const { connection, frames } = socket(),

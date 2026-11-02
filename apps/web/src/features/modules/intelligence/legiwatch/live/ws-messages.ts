@@ -1,5 +1,5 @@
 import { z } from "zod";
-// Matches apps/intel-api/src/hearing/hearing.types.ts at the pinned backend commit.
+// Matches apps/intel-api/src/hearing/hearing.types.ts at c19d4d43d21f18e32e40b69eb17719204ec6279f.
 const segment = z.object({
   startMs: z.number(),
   endMs: z.number(),
@@ -13,6 +13,8 @@ export const hearingWsMessageSchema = z.discriminatedUnion("type", [
     recordingId: z.string(),
     epochId: z.string(),
     startMs: z.number(),
+    recordingProtocol: z.number().int().optional(),
+    mimeType: z.string().optional(),
   }),
   z.object({
     type: z.literal("audio_saved"),
