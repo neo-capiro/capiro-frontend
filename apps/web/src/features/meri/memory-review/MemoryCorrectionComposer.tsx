@@ -259,6 +259,7 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
                     />
                     {item.reference ? (
                       <MemoryHistoryEvidence
+                        label={memoryPresentation(item).title}
                         reference={item.reference}
                         clientId={item.clientId}
                         revision={item.updatedAt}

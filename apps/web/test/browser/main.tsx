@@ -1,4 +1,5 @@
 import { TaskDetailRefreshProbe } from "./TaskDetailRefreshProbe";
+import { MeriRunsHost } from "../../src/features/meri/runs/MeriRunsHost";
 import { ConversationHistoryList } from "../../src/features/meri/conversations/ConversationHistoryList";
 import { MeriConversationList } from "../../src/features/meri/conversations/MeriConversationList";
 import { SyntheticMeriCapabilities } from "./meri-capability-profile";
@@ -74,6 +75,22 @@ function RoutedApp() {
       </div>
     );
   if (path === "/routines") return <RoutinesProbe />;
+  if (path === "/meri/runs" && search.get("navigation-audit") === "1") {
+    const conversationId = search.get("conversationId"),
+      runId = search.get("runId");
+    return (
+      <ProductShell section="runs">
+        <RequireSession>
+          <MeriRunsHost
+            enabled
+            selection={
+              conversationId && runId ? { conversationId, runId } : undefined
+            }
+          />
+        </RequireSession>
+      </ProductShell>
+    );
+  }
   // Opened for a client, the list carries the production shell so its sidebar controls are
   // exercised; the bare list keeps the lifecycle probes' direct mount.
   if (path === "/meri/conversations") {

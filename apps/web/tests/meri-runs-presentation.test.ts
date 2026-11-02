@@ -47,7 +47,7 @@ const client = {
 } satisfies RunsClient;
 
 it("shows recorded zero, missing usage and partial estimates as different outcomes", () => {
-  expect(usageSummary(run.usage)).toBe("$0 USD");
+  expect(usageSummary(run.usage)).toBe("$0.00 USD");
   expect(
     usageSummary({
       ...run.usage,
@@ -68,7 +68,34 @@ it("shows recorded zero, missing usage and partial estimates as different outcom
       recording: "unavailable",
       sdkEstimateUsd: 0.5,
     }),
-  ).toBe("$0.5 USD (partial)");
+  ).toBe("$0.50 USD (partial)");
+});
+
+it("rounds already-USD amounts only for display and never rounds tiny positive usage to zero", () => {
+  for (const [amount, display] of [
+    [0.26785095, "$0.27 USD"],
+    [0.01, "$0.01 USD"],
+    [0.0000001, "< $0.01 USD"],
+    [1.23456, "$1.23 USD"],
+  ] as const) {
+    const usage = { ...run.usage, sdkEstimateUsd: amount };
+    expect(usageSummary(usage)).toBe(display);
+    expect(usage.sdkEstimateUsd).toBe(amount);
+  }
+  const html = renderToStaticMarkup(
+    createElement(RunRecordDetails, {
+      value: {
+        ...detailResponse,
+        run: { ...run, usage: { ...run.usage, sdkEstimateUsd: 0.26785095 } },
+      },
+      client,
+      clientId: null,
+    }),
+  );
+  expect(html).toContain("<summary>Exact estimate</summary>");
+  expect(html).toContain("Recorded SDK estimate: 0.26785095 USD");
+  expect(html).toContain("$0.27 USD");
+  expect(html).toContain("not a provider-billed charge");
 });
 
 it("presents observed timestamps, exact run links and scoped empty-page limits", () => {
@@ -77,7 +104,7 @@ it("presents observed timestamps, exact run links and scoped empty-page limits",
   );
   expect(html).toContain("Recorded status");
   expect(html).toContain("UTC");
-  expect(html).toContain("$0 USD");
+  expect(html).toContain("$0.00 USD");
   expect(html).toContain(runRecordHref(run, null).replaceAll("&", "&amp;"));
   expect(html).toContain("No further page in this observation");
   const empty = renderToStaticMarkup(
@@ -101,10 +128,8 @@ it("keeps failed/cancelled records visible without claiming physical stop or mak
         clientId: null,
       }),
     );
-    expect(html).toContain(state);
-    expect(html).toContain(
-      "does not verify that a worker has physically stopped",
-    );
+    expect(html).toContain(state[0]!.toUpperCase() + state.slice(1));
+    expect(html).toContain("not confirmation that work has stopped");
     expect(html).toContain(`conversationId=${run.conversationId}`);
     expect(html).toContain("scope=general");
     expect(html).not.toContain("Run again");
