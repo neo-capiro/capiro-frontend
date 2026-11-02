@@ -486,3 +486,46 @@ it("opens an Office document in the Workspace editor only when Office is enabled
   render(`clientId=${otherId}`, false);
   expect(h.officeList).toHaveBeenCalledTimes(1);
 });
+
+it("lists Office documents at once in the Workspace and offers Word, Excel and PowerPoint under + New document", () => {
+  const screen = (query: string) => {
+    h.index = 0;
+    h.query = query;
+    return renderToStaticMarkup(
+      createElement(WorkspaceScreen, {
+        officeEnabled: true,
+        documentOperation: "create_word",
+      }),
+    );
+  };
+  screen(`clientId=${otherId}`);
+  // The Office section opens the newest saved conversation itself; no conversation choice is needed first.
+  expect(h.officeList.mock.lastCall![0]).toMatchObject({
+    account: { tenantId: "tenant", actorId: "actor" },
+    clientId: otherId,
+  });
+  h.buttons.mock.calls
+    .find(([props]) => props.children === "+ New document")![0]
+    .onClick();
+  screen(`clientId=${otherId}`);
+  const entry = (label: string) =>
+    h.buttons.mock.calls.find(([props]) => props.children === label)?.[0];
+  entry("Word document")!.onClick();
+  expect(h.push).toHaveBeenLastCalledWith(`/meri/files?clientId=${otherId}`);
+  entry("Excel workbook (ask Meri in chat)")!.onClick();
+  expect(h.push).toHaveBeenLastCalledWith(`/meri?clientId=${otherId}`);
+  entry("PowerPoint deck (ask Meri in chat)")!.onClick();
+  expect(h.push).toHaveBeenLastCalledWith(`/meri?clientId=${otherId}`);
+  // Office off: no Office entries and no Office list, the workflow entries stay.
+  h.buttons.mockClear();
+  h.officeList.mockClear();
+  render(`clientId=${otherId}`, false);
+  h.buttons.mock.calls
+    .find(([props]) => props.children === "+ New document")![0]
+    .onClick();
+  render(`clientId=${otherId}`, false);
+  expect(entry("Word document")).toBeUndefined();
+  expect(entry("PowerPoint deck (ask Meri in chat)")).toBeUndefined();
+  expect(entry("Hill Day Schedule")).toBeDefined();
+  expect(h.officeList).not.toHaveBeenCalled();
+});

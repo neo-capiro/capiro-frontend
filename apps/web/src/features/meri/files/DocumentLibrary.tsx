@@ -42,12 +42,15 @@ export function DocumentLibrary({
   account,
   clientId,
   officeOpen,
+  autoOpen = false,
 }: {
   account: Account;
   clientId?: string;
   /** The Workspace's Office documents: only Word, Excel and PowerPoint versions, each opened by this action.
    * Absent (the Files library), those versions are not listed here at all. */
   officeOpen?: ((version: LibraryVersion) => void) | undefined;
+  /** Load the saved conversations at once and open the newest one, so the files list without a click. */
+  autoOpen?: boolean;
 }) {
   const [rows, setRows] = useState<ConversationListPage["conversations"]>([]);
   const [before, setBefore] =
@@ -102,6 +105,23 @@ export function DocumentLibrary({
       if (!current.signal.aborted) setBusy(false);
     }
   }
+  // The Workspace lists the person's Office documents without a conversation choice first: the newest saved
+  // conversation (in this client, or any) opens the library in its owner or client scope.
+  const opened = useRef(false);
+  useEffect(() => {
+    if (!autoOpen || opened.current) return;
+    opened.current = true;
+    void load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one discovery read when the library mounts
+  }, [autoOpen]);
+  useEffect(() => {
+    const first = rows[0];
+    if (!autoOpen || origin !== null || !first) return;
+    setOrigin({
+      conversationId: first.conversationId,
+      clientId: libraryOriginClient(first, account),
+    });
+  }, [autoOpen, origin, rows, account]);
   return (
     <section className={styles.files} aria-label="Saved file library">
       <h2>Saved files and version history</h2>
@@ -226,11 +246,21 @@ function LibraryConnection({
   const attempt = useRef(0);
   if (phase === "ready") attempt.current = 0;
   useEffect(() => {
-    if (phase === "renewing" && state.status === "expired") {
+    // The planned early end reconnects at once; a hard-cap expiry (a session that could not renew in time) and
+    // an unanswered issuance wait on the bounded ladder, so a short-lived receipt can never drive a request storm.
+    if (
+      phase === "renewing" &&
+      state.status === "expired" &&
+      host.getExpirationReason() === "renewal"
+    ) {
       void host.connect();
       return;
     }
-    if (phase !== "retrying" && !(phase === "connecting" && state.status === "unavailable"))
+    if (
+      !(phase === "renewing" && state.status === "expired") &&
+      phase !== "retrying" &&
+      !(phase === "connecting" && state.status === "unavailable")
+    )
       return;
     const delay = retryDelayMs(attempt.current);
     if (delay === null) return;
