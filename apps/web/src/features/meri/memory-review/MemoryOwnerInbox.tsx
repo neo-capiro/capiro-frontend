@@ -32,6 +32,7 @@ export function MemoryOwnerInbox({ enabled }: { enabled: boolean }) {
     <div className={ui.page}>
       <MeriPageHeading
         title="Personal memory review"
+        level={2}
         description="Decide your own pending personal memory submissions. Core checks current ownership for every decision."
         action={
           <button
@@ -174,7 +175,7 @@ function CandidateCard({
   return (
     <article className={styles.card} id={`memory-candidate-${candidate.id}`}>
       <div className={styles.cardHeading}>
-        <h2>{ownerCandidateTitle(candidate)}</h2>
+        <h3>{ownerCandidateTitle(candidate)}</h3>
         <span className={styles.kind}>{candidate.kind}</span>
       </div>
       <p className={styles.value}>{candidate.value}</p>
