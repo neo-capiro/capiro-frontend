@@ -13,6 +13,7 @@ import { previewBackendRejection } from "../src/shared/preview/backend-policy.se
 import {
   previewMeriContractsPackageVersion,
   previewMeriConversationRoute,
+  vendoredContractsVersion,
 } from "../src/shared/preview/meri-conversation-route.server";
 
 const clerk = vi.hoisted(() => ({ auth: vi.fn(), middleware: vi.fn() }));
@@ -168,6 +169,35 @@ it("binds the preview conversation gate to the installed contract package", () =
   expect(packageJson.dependencies["@capiro/meri-contracts"]).toContain(
     `/vendor/capiro-meri-contracts-${installed.version}-`,
   );
+});
+
+it("keeps the preview conversation gate closed on an unexpected contracts pin instead of throwing", async () => {
+  const error = vi.spyOn(console, "error").mockImplementation(() => {});
+  try {
+    expect(vendoredContractsVersion("^0.1.51")).toBeUndefined();
+    expect(vendoredContractsVersion(undefined)).toBeUndefined();
+    expect(error).toHaveBeenCalledTimes(2);
+    vi.resetModules();
+    vi.doMock("../package.json", () => ({
+      default: { dependencies: { "@capiro/meri-contracts": "^0.1.51" } },
+    }));
+    const route =
+      await import("../src/shared/preview/meri-conversation-route.server");
+    expect(route.previewMeriContractsPackageVersion).toBeUndefined();
+    // An unset deployment version must not match the missing pin version.
+    const env: Record<string, string | undefined> = { ...environment };
+    delete env.CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION;
+    expect(
+      route.previewMeriConversationRoute(
+        env,
+        request("/api/conversations/history"),
+      ),
+    ).toBe(false);
+  } finally {
+    vi.doUnmock("../package.json");
+    vi.resetModules();
+    error.mockRestore();
+  }
 });
 
 it.each([

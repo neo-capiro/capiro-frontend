@@ -338,9 +338,6 @@ test('current ARM release pins refuse retired runtime and consumer substitutions
   const changed = p.parameters.map(item => item.ParameterKey === 'CapiroPreviewMeriContractPackageVersion'
     ? { ...item, ParameterValue: '0.1.10' } : item);
   assert.throws(() => validatePreviewParameters(changed, active), /PREVIEW_PARAMETER_MISMATCH/);
-  const runtime = readFileSync('apps/web/src/shared/preview/meri-conversation-route.server.ts', 'utf8');
-  assert.equal(runtime.match(/previewMeriContractsPackageVersion = "([^"]+)"/)?.[1],
-    p.environment.CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION);
   assert.match(template, /CpuArchitecture: ARM64\n +OperatingSystemFamily: LINUX/);
   assert.doesNotMatch(template, /CpuArchitecture: X86_64/);
 });
