@@ -325,11 +325,33 @@ it("an ordinary renewal in between lets a later refusal renew again", () => {
   expect(connection.accessLost).toBe(false);
 });
 
-it("a refused credential whose renewal issuance is refused (403) still hides the conversation", () => {
+it("a refused credential whose renewal issuance control refuses (401 SESSION_REFUSED) hides the conversation", () => {
+  // Control's stream owner answers every definitive recheck failure (changed identity or member fact, removed
+  // client) as SESSION_REFUSED, and its issuance refuses definitively with 401: a revoked member is not kept.
   render();
   render();
   ended("refused");
-  renewalFails(403);
+  renewalFails(401);
   expect(connection.accessLost).toBe(true);
   expect(connection.unverified).toBe(false);
+});
+
+it("a refused credential whose renewal issuance found the authority unavailable (503) is unverified, not revoked", () => {
+  render();
+  render();
+  ended("refused");
+  renewalFails(503);
+  expect(connection.accessLost).toBe(false);
+  expect(connection.unverified).toBe(true);
+});
+
+it("an ordinary renewal answered 401 keeps its existing unverified handling", () => {
+  render();
+  render();
+  ended("refused");
+  renewedReady();
+  ended("renewal");
+  renewalFails(401);
+  expect(connection.accessLost).toBe(false);
+  expect(connection.unverified).toBe(true);
 });
