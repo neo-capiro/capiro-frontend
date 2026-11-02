@@ -104,6 +104,32 @@ const cardColumns = phoneCardColumns(columns, {
   tone: (row) => (row.status === "Active" ? "success" : "neutral"),
 });
 
+/** The read's own empty and coverage answer: an empty page is "none yet", never "none exist" while coverage is partial. */
+export function RoutineListStatus({
+  page,
+}: {
+  page: Pick<Page, "rows" | "coverage">;
+}) {
+  return (
+    <>
+      {page.rows.length === 0 && (
+        <div role="status">
+          <p>No routines yet.</p>
+          <p className={styles.muted}>
+            Ask Meri in a conversation to set up a recurring routine; approved
+            routines appear here.
+          </p>
+        </div>
+      )}
+      {!page.coverage.complete && (
+        <p className={styles.muted}>
+          Some routines may not be shown yet. Refresh routines to read again.
+        </p>
+      )}
+    </>
+  );
+}
+
 export function RoutinesWorkspace({
   port,
   preserveNewDraft = false,
@@ -255,11 +281,7 @@ export function RoutinesWorkspace({
           recent activity.
         </p>
       )}
-      {page?.rows.length === 0 && (
-        <p className={styles.muted}>
-          No routines were returned for the current account and scope.
-        </p>
-      )}
+      {page && <RoutineListStatus page={page} />}
       {rows.length > 0 && (
         <>
           <DataTable
