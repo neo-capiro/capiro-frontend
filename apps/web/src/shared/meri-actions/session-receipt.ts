@@ -21,6 +21,14 @@ const receipt = z.strictObject({
 export type ActionSessionReceipt = Readonly<z.infer<typeof receipt>>;
 export type ActionContext = Readonly<ActionSessionReceipt["context"]>;
 
+/**
+ * This client never holds a session longer than Meri's own cap (sessions.maxTtlMs, 300 s). Meri's receipt expiry is the
+ * minimum of the Clerk token's exp, Core's receipt and that cap, all on server clocks, so with the 300 s identity token
+ * it sits at this bound to within the issuance latency: a browser clock a second or two behind would otherwise refuse
+ * every receipt. The bound is applied, not refused; the server-side expiry stays wherever Meri set it.
+ */
+export const SESSION_RECEIPT_MAX_TTL_MS = 300_000;
+
 export function receiveSessionReceipt(
   text: string,
   now: number,
@@ -30,9 +38,12 @@ export function receiveSessionReceipt(
     !Number.isSafeInteger(now) ||
     now < 0 ||
     value.expiresAtMs <= now ||
-    value.expiresAtMs > now + 300_000 ||
     new TextEncoder().encode(JSON.stringify(value)).byteLength > 4096
   )
     throw new Error("Action session is unavailable");
-  return Object.freeze({ ...value, context: Object.freeze(value.context) });
+  return Object.freeze({
+    ...value,
+    expiresAtMs: Math.min(value.expiresAtMs, now + SESSION_RECEIPT_MAX_TTL_MS),
+    context: Object.freeze(value.context),
+  });
 }
