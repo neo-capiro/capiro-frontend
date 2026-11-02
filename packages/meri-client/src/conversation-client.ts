@@ -28,6 +28,7 @@ import {
 import {
   ConversationNetwork,
   ConversationUnavailable,
+  ORIGINAL_INPUT_CLOSED,
   DEFINITIVE_REFUSALS,
   EDGE_REFUSED,
 } from "./conversation-network.js";
@@ -50,13 +51,19 @@ import type {
   ConversationCheckpointInspectionRequest,
 } from "@capiro/meri-contracts/conversation-lifecycle";
 
-export { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED };
+export {
+  ConversationUnavailable,
+  DEFINITIVE_REFUSALS,
+  EDGE_REFUSED,
+  ORIGINAL_INPUT_CLOSED,
+};
 export type { ConversationRefusalDetail };
 
 /** Only the two documented detail fields travel with a refusal; nothing else from the body is retained. */
 function refusal(
   status: number,
   error: { code: string } & Record<string, unknown>,
+  originalClosed = false,
 ) {
   const detail: {
     sources?: readonly string[];
@@ -70,7 +77,12 @@ function refusal(
     detail.sources = Object.freeze([...(error.sources as string[])]);
   if (error.requiredScope === "client" || error.requiredScope === "general")
     detail.requiredScope = error.requiredScope;
-  return new ConversationUnavailable(error.code, status, Object.freeze(detail));
+  return new ConversationUnavailable(
+    error.code,
+    status,
+    Object.freeze(detail),
+    originalClosed,
+  );
 }
 
 /**
@@ -383,7 +395,14 @@ class ConversationConnection {
     ) {
       throw new ConversationUnavailable("superseded-allocation-receipt");
     }
-    if ("error" in value) throw refusal(response.status, value.error);
+    // The receiver admitted this code at this status; its outcome says whether anything was dispatched.
+    if ("error" in value)
+      throw refusal(
+        response.status,
+        value.error,
+        ORIGINAL_INPUT_CLOSED.has(value.error.code) &&
+          value.error.outcome === "NOT_DISPATCHED",
+      );
     if (
       previous &&
       stableStringify(previous.allocation) !== stableStringify(value.allocation)
@@ -461,7 +480,15 @@ class ConversationConnection {
       else this.bind(view);
       this.publish({ submit: "observed" });
       return this.getSnapshot();
-    } catch (error) {
+    } catch (caught) {
+      // A retry of an uncertain attempt is never released by an original-input refusal: the earlier attempt may
+      // have been accepted and dispatched, so the request stays retained and uncertain.
+      const error =
+        previouslyUnknown &&
+        caught instanceof ConversationUnavailable &&
+        ORIGINAL_INPUT_CLOSED.has(caught.code)
+          ? caught.afterUncertainAttempt()
+          : caught;
       // A definitive refusal is control's own answer that nothing was dispatched: the retained
       // request is released so a changed one can follow, exactly as if it had never left.
       const refused =

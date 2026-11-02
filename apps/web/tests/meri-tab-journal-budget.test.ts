@@ -58,9 +58,9 @@ const fill = (storage: TabStorage, state: "observed" | "pending") => {
     });
 };
 const keys = (storage: TabStorage) =>
-  Array.from({ length: storage.length }, (_, index) => storage.key(index)).filter(
-    (key): key is string => !!key?.startsWith("capiro-meri-chat-v1:"),
-  );
+  Array.from({ length: storage.length }, (_, index) =>
+    storage.key(index),
+  ).filter((key): key is string => !!key?.startsWith("capiro-meri-chat-v1:"));
 const has = (storage: TabStorage, conversation: number, run: number) =>
   keys(storage).some(
     (key) =>
@@ -81,18 +81,27 @@ it("a new run's request is recorded in a full tab, mid-run, without the recovery
   expect(keys(storage)).toHaveLength(128);
   // The oldest settled record made room; every conversation's current-run request stays.
   expect(has(storage, 0, 0)).toBe(false);
-  for (const [conversation, run] of [[0, 124], [1, 125], [2, 126], [3, 127]] as const)
+  for (const [conversation, run] of [
+    [0, 124],
+    [1, 125],
+    [2, 126],
+    [3, 127],
+  ] as const)
     expect(has(storage, conversation, run)).toBe(true);
 });
 
 it("each conversation's current-run request is kept even when it is the oldest settled record", () => {
   const storage = memory();
-  request(storage, 50, 1).write({ submit: { requestId: id(9500), state: "observed" } });
+  request(storage, 50, 1).write({
+    submit: { requestId: id(9500), state: "observed" },
+  });
   for (let run = 0; run < 127; run++)
     request(storage, 51, 100 + run).write({
       submit: { requestId: id(9600 + run), state: "observed" },
     });
-  request(storage, 52, 400).write({ submit: { requestId: id(9900), state: "pending" } });
+  request(storage, 52, 400).write({
+    submit: { requestId: id(9900), state: "pending" },
+  });
   expect(has(storage, 50, 1)).toBe(true);
   expect(has(storage, 51, 100)).toBe(false);
 });
@@ -101,7 +110,11 @@ it("unresolved requests, unsent drafts and drafts holding a selection are never 
   const storage = memory();
   fill(storage, "pending");
   expect(() =>
-    tabRecord(scope(200), "draft", pass, "", storage).write({ ...emptyDraft, draft: "next", revision: 1 }),
+    tabRecord(scope(200), "draft", pass, "", storage).write({
+      ...emptyDraft,
+      draft: "next",
+      revision: 1,
+    }),
   ).toThrow(TabJournalUnavailable);
 
   const selected = memory();
@@ -111,14 +124,25 @@ it("unresolved requests, unsent drafts and drafts holding a selection are never 
       selection: { skill: { id: "meri-bill-watch" } },
     });
   expect(() =>
-    tabRecord(scope(300), "draft", pass, "", selected).write({ ...emptyDraft, draft: "next", revision: 1 }),
+    tabRecord(scope(300), "draft", pass, "", selected).write({
+      ...emptyDraft,
+      draft: "next",
+      revision: 1,
+    }),
   ).toThrow(TabJournalUnavailable);
   expect(keys(selected)).toHaveLength(128);
 
   const cleared = memory();
   for (let n = 0; n < 128; n++)
-    tabRecord(scope(n), "draft", pass, "", cleared).write({ ...emptyDraft, selection: {} });
-  tabRecord(scope(300), "draft", pass, "", cleared).write({ ...emptyDraft, draft: "next", revision: 1 });
+    tabRecord(scope(n), "draft", pass, "", cleared).write({
+      ...emptyDraft,
+      selection: {},
+    });
+  tabRecord(scope(300), "draft", pass, "", cleared).write({
+    ...emptyDraft,
+    draft: "next",
+    revision: 1,
+  });
   expect(keys(cleared)).toHaveLength(128);
 });
 
@@ -143,8 +167,12 @@ it("a context from another scope is skipped by the draft owner, never treated as
       runId: id(7),
     };
   expect(contextInScope(context as never, owned)).toBe(true);
-  expect(contextInScope({ ...context, selectedClientId: null } as never, owned)).toBe(false);
-  expect(contextInScope({ ...context, conversationId: id(8) } as never, owned)).toBe(false);
+  expect(
+    contextInScope({ ...context, selectedClientId: null } as never, owned),
+  ).toBe(false);
+  expect(
+    contextInScope({ ...context, conversationId: id(8) } as never, owned),
+  ).toBe(false);
   expect(contextInScope(context as never, undefined)).toBe(true);
 });
 

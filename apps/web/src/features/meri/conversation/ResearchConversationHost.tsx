@@ -14,6 +14,7 @@ import {
 } from "./research-launch";
 import { useConversationSession } from "./useConversationSession";
 import { ConversationView } from "./ConversationView";
+import { useSendInNewResearchConversation } from "./useSendInNewConversation";
 import type { ResearchSelection } from "../../../shared/meri-conversations/research-context";
 
 export function ResearchConversationHost(props: {
@@ -91,10 +92,15 @@ function ConnectedResearchConversation({
     research.conversationId,
     research,
   );
+  const sendInNewConversation = useSendInNewResearchConversation(
+    account,
+    research,
+  );
   return (
     <ConversationView
       session={session}
       scope={`Research · ${research.scope.researchPortfolioName}`}
+      onSendInNewConversation={sendInNewConversation}
     />
   );
 }

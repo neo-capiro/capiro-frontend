@@ -1174,6 +1174,34 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "ui-stream 0.1.36 admits @capiro/meri-contracts 0.1.52 as a peer; no stream behaviour change."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.53-def39308-320ebd2f2b9f.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.53",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "def3930862fdc1ae6e99ac503ac4e00e1d67aeeb",
+   "sourceTree": "7dfc4f186493d6085e287e52a0d5c22f976b82c3",
+   "bytes": 2203547,
+   "sha256": "320ebd2f2b9f746a478766a5afa1e63b5a233e75f3dfa411421081b4cd9a75fb",
+   "integrity": "sha512-BRwubNhof4YDR5N8CtQ3XpQdF3i3GlfuWQ4ClV6U+0ptlZiBsM9cvXLHuvLmM+YKenPFRu/4PFs04+X8OJM8/Q==",
+   "regularEntryCount": 123,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "A request whose conversation's original input allocation expired before it was ever accepted answers its own 409 INITIAL_INPUT_EXPIRED on admit and submit (allocate: 409, outcome NOT_DISPATCHED; 408 still admitted) instead of 502 CONVERSATION_UNAVAILABLE; an accepted original input is replayed, or answered 503 INITIAL_INPUT_UNAVAILABLE / UNKNOWN on allocate (conversation-application 0.1.18, conversation-input 0.1.10, conversation-initial-input 0.1.13; neo-capiro/meri-greenfield#571). Also carries 0.1.52's office launch TTL sentinel (#570)."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.37-688f992a-9d2bc6e4962a.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.37",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "688f992a7d3f2239cec252504fc957b293a99483",
+   "sourceTree": "88556945c88fccf002f881a52ab99e931b281c6a",
+   "bytes": 3864,
+   "sha256": "9d2bc6e4962a25d70c49698a3f81ae912776fe93e3046e777f378f15c4bcc268",
+   "integrity": "sha512-kOoXLP6BATtYOzgA53GJWbxkDURbOq8aG4TUMvjTXA0jTVCSfJ3lGV+GnatKfWgEP5SiImNp9cvrOCbndnJ77A==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "ui-stream 0.1.37 admits @capiro/meri-contracts 0.1.52 and 0.1.53 as peers; no stream behaviour change."
   }
  ]
 }

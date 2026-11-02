@@ -40,13 +40,23 @@ export type ConversationRefusalDetail = Readonly<{
 }>;
 /**
  * A refusal decided before any run exists, answered with its own contract status (400 for the typed
- * skill refusals, 429 for a reached monthly cap, contracts 0.1.51): the request was not dispatched
- * and may be changed or sent again.
+ * skill refusals, 429 for a reached monthly cap, contracts 0.1.51; 409 for an expired original input,
+ * contracts 0.1.53): the request was not dispatched and may be changed or sent again.
  */
 export const DEFINITIVE_REFUSALS: ReadonlySet<string> = new Set([
   "SKILL_SOURCES_UNAVAILABLE",
   "SKILL_SCOPE_REFUSED",
   "TENANT_MONTHLY_CAP_REACHED",
+  "INITIAL_INPUT_EXPIRED",
+]);
+/**
+ * The conversation's original (first) input can never be this request: its allocation expired, or it
+ * belongs to another request. Allocate answers both with outcome NOT_DISPATCHED, so the retained first
+ * message is released and the person sends it again in a new conversation.
+ */
+export const ORIGINAL_INPUT_CLOSED: ReadonlySet<string> = new Set([
+  "INITIAL_INPUT_EXPIRED",
+  "INITIAL_INPUT_CONFLICT",
 ]);
 const errorStatuses: Readonly<Record<string, readonly number[]>> =
   protocol.errorStatuses;
@@ -56,6 +66,13 @@ export class ConversationUnavailable extends Error {
     readonly code: string,
     readonly status?: number,
     readonly detail: ConversationRefusalDetail = {},
+    /** Allocate's own NOT_DISPATCHED answer that this conversation's original input is closed to the request. */
+    readonly originalClosed = false,
+    /**
+     * The answer came to a retry of a request whose earlier attempt was uncertain (or that history showed accepted):
+     * an earlier attempt may have been dispatched, so no answer to the retry proves that nothing was.
+     */
+    readonly afterUncertain = false,
   ) {
     super(code);
     this.name = "ConversationUnavailable";
@@ -63,9 +80,21 @@ export class ConversationUnavailable extends Error {
   /** Control refused this exact request outright; nothing was dispatched and nothing is in flight. */
   get definitive() {
     return (
-      DEFINITIVE_REFUSALS.has(this.code) &&
-      this.status !== undefined &&
-      !!errorStatuses[this.code]?.includes(this.status)
+      !this.afterUncertain &&
+      (this.originalClosed ||
+        (DEFINITIVE_REFUSALS.has(this.code) &&
+          this.status !== undefined &&
+          !!errorStatuses[this.code]?.includes(this.status)))
+    );
+  }
+  /** The same answer, read as a reply to a retry after an uncertain attempt: never definitive. */
+  afterUncertainAttempt() {
+    return new ConversationUnavailable(
+      this.code,
+      this.status,
+      this.detail,
+      false,
+      true,
     );
   }
 }

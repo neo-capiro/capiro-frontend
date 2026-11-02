@@ -1,4 +1,5 @@
 "use client";
+import type { SendInNewConversation } from "./useSendInNewConversation";
 import { useCallback, useState } from "react";
 import { DocumentRevisionDraft } from "./DocumentRevisionDraft";
 import { MeriComposer, type ComposerChip } from "../MeriComposer";
@@ -152,10 +153,13 @@ export function ConversationView({
   session,
   scope,
   scopeControl,
+  onSendInNewConversation,
 }: {
   session: Session;
   scope: string;
   scopeControl?: React.ReactNode;
+  /** Moves an unsent first message the conversation can no longer take to a new conversation. */
+  onSendInNewConversation?: SendInNewConversation | undefined;
 }) {
   const [composer] = useState(createConversationComposer);
   const ready =
@@ -233,6 +237,7 @@ export function ConversationView({
                 initialDraft={session.initialDraft}
                 storageError={session.storageError}
                 onDiscardUnrecoverable={session.discardUnrecoverable}
+                onSendInNewConversation={onSendInNewConversation}
                 modelSelection={session.modelSelection}
                 skillSelection={session.skillSelection}
                 newIntentBlocked={newIntentBlocked}
