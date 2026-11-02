@@ -2,6 +2,7 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { ReactElement } from "react";
 import { ResearchConversationHost } from "../src/features/meri/conversation/ResearchConversationHost";
 import { syncMeriTabIdentity } from "../src/shared/meri-conversations/tab-journal";
+import { CapiroApiError } from "../src/shared/capiro/http";
 // The existing controlled-hook pattern exercises real host/client/read callbacks without a browser.
 const hooks = vi.hoisted(() => ({
   cursor: 0,
@@ -114,6 +115,12 @@ function elements(node: any): any[] {
   if (Array.isArray(node)) return node.flatMap(elements);
   return [node, ...elements(node.props?.children)];
 }
+function textOf(node: any): string {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (!node || typeof node !== "object") return "";
+  if (Array.isArray(node)) return node.map(textOf).join("");
+  return textOf(node.props?.children);
+}
 function click(label: string) {
   const button = elements(tree).find(
     (n) => n.type === "button" && n.props.children === label,
@@ -194,6 +201,71 @@ it("a lost reply survives remount and offers history without retrying create", a
   ).toBe(true);
   expect(state.request).toHaveBeenCalledTimes(1);
   expect(state.replace).not.toHaveBeenCalled();
+});
+it("a 5xx reply stays uncertain: Core may have written the row before its response failed", async () => {
+  state.request.mockRejectedValue(
+    new CapiroApiError(500, "The service is unavailable. Please retry."),
+  );
+  render();
+  click("Start Research conversation");
+  await Promise.resolve();
+  await Promise.resolve();
+  await Promise.resolve();
+  render();
+  const text = textOf(tree);
+  expect(text).toContain("Creation has not been confirmed here");
+  expect(
+    elements(tree).some(
+      (n) => n.type === "button" && n.props.children === "Try again",
+    ),
+  ).toBe(false);
+});
+it("a definite 4xx refusal says so, clears the tab record and allows one new attempt", async () => {
+  state.request.mockRejectedValueOnce(
+    new CapiroApiError(
+      404,
+      "The requested action or record is unavailable from the current service.",
+    ),
+  );
+  render();
+  click("Start Research conversation");
+  await Promise.resolve();
+  await Promise.resolve();
+  await Promise.resolve();
+  render();
+  const text = textOf(tree);
+  expect(text).toContain("Meri could not start this conversation.");
+  expect(text).not.toContain("Creation has not been confirmed here");
+  // The refusal survives no uncertainty: a remount offers a fresh start.
+  unmount();
+  render();
+  click("Start Research conversation");
+  await Promise.resolve();
+  await Promise.resolve();
+  await Promise.resolve();
+  expect(state.request).toHaveBeenCalledTimes(2);
+  expect(state.replace).toHaveBeenCalledWith(
+    `/meri?scope=research_portfolio&conversationId=${id(4)}`,
+  );
+});
+it("Try again after a refusal returns to the start button", async () => {
+  state.request.mockRejectedValueOnce(new CapiroApiError(403, "Denied."));
+  render();
+  click("Start Research conversation");
+  await Promise.resolve();
+  await Promise.resolve();
+  await Promise.resolve();
+  render();
+  click("Try again");
+  render();
+  expect(
+    elements(tree).some(
+      (n) =>
+        n.type === "button" &&
+        n.props.children === "Start Research conversation",
+    ),
+  ).toBe(true);
+  expect(state.request).toHaveBeenCalledTimes(1);
 });
 it("unmount/account lifetime abort withholds late create navigation", async () => {
   let resolve!: (v: unknown) => void;
