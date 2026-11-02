@@ -29,6 +29,7 @@ import {
   type TurnIntent,
 } from "../../../shared/meri-conversations/turn-journal";
 import { useCommandGate } from "./useCommandGate";
+import type { UploadSendArgument } from "../../../shared/meri-uploads/upload-controller";
 import {
   requireMeriTabStorage,
   TabJournalUnavailable,
@@ -43,6 +44,7 @@ export type ConversationTurnTarget = {
   skill?: ConversationSubmitRequest["skill"];
   windowRequest?: ConversationSubmitRequest["windowRequest"];
   work?: ConversationSkillSelection["work"];
+  uploads?: ConversationSubmitRequest["uploads"];
 };
 
 /** Seed the existing canonical command journal before exact target session issuance. */
@@ -68,6 +70,7 @@ function prepareTarget(
     requestId: retained.requestId,
     prompt: retained.prompt,
     ...skillSelectionFields(retained),
+    ...(retained.uploads ? { uploads: retained.uploads } : {}),
     ...(retained.modelSelection
       ? { modelSelection: retained.modelSelection }
       : {}),
@@ -82,6 +85,7 @@ function prepareTarget(
         windowRequest: previous.submit.windowRequest,
         work: previous.submit.work,
         modelSelection: previous.submit.modelSelection,
+        uploads: previous.submit.uploads,
       }) !== submissionIdentity(request))
   )
     throw new Error("Target request identity changed");
@@ -99,6 +103,7 @@ function prepareTarget(
     pending: retained.prompt,
     requestId: retained.requestId,
     ...skillSelectionFields(retained),
+    ...(retained.uploads ? { uploads: retained.uploads } : {}),
     ...(retained.modelSelection
       ? { modelSelection: retained.modelSelection }
       : {}),
@@ -115,14 +120,25 @@ async function requestTurn(
     capture?: (request: ConversationDraftRequest) => void;
     modelSelection?: ConversationSubmitRequest["modelSelection"];
     selection?: ConversationSkillSelection;
+    uploads?: readonly UploadSendArgument[];
   },
 ) {
-  const { source, prompt, capture, modelSelection, selection } = options;
+  const { source, prompt, capture, modelSelection, selection, uploads } =
+    options;
   if (source && prompt) {
     const request = Object.freeze({
       requestId: crypto.randomUUID(),
       prompt,
       ...skillSelectionFields(selection ?? {}),
+      // The files the composer offered travel with the next message, as they do with the first one. The public
+      // receiver admits the exact list when the turn is journaled (turn-persistence.ts), and control re-admits it.
+      ...(uploads?.length
+        ? {
+            uploads: [...uploads] as NonNullable<
+              ConversationSubmitRequest["uploads"]
+            >,
+          }
+        : {}),
       ...(modelSelection
         ? { modelSelection: Object.freeze({ ...modelSelection }) }
         : {}),
@@ -134,6 +150,7 @@ async function requestTurn(
       request.requestId,
       request.modelSelection,
       selection,
+      request.uploads,
     );
   }
   const retained = await recoverConversationTurn(
@@ -261,6 +278,7 @@ export function useConversationTurn(
     capture?: (request: ConversationDraftRequest) => void,
     modelSelection?: ConversationSubmitRequest["modelSelection"],
     selection?: ConversationSkillSelection,
+    uploads?: readonly UploadSendArgument[],
   ) =>
     command(async (journal, controller) => {
       try {
@@ -270,6 +288,7 @@ export function useConversationTurn(
           ...(capture ? { capture } : {}),
           ...(modelSelection ? { modelSelection } : {}),
           ...(selection ? { selection } : {}),
+          ...(uploads ? { uploads } : {}),
         });
         open(prepareTarget(cache, clientId, retained));
       } catch (cause) {
@@ -308,7 +327,8 @@ export function useConversationTurn(
       capture: (request: ConversationDraftRequest) => void,
       modelSelection?: ConversationSubmitRequest["modelSelection"],
       selection?: ConversationSkillSelection,
-    ) => perform(source, prompt, capture, modelSelection, selection),
+      uploads?: readonly UploadSendArgument[],
+    ) => perform(source, prompt, capture, modelSelection, selection, uploads),
     retry: () => perform(),
     /** Target run id of the reservation that is open for a new message in this page. */
     opened,

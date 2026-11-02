@@ -80,6 +80,7 @@ function useTurnOpening(
           requestId: target.requestId,
           prompt: target.pending,
           ...skillSelectionFields(target),
+          ...(target.uploads ? { uploads: target.uploads } : {}),
           ...(target.modelSelection
             ? { modelSelection: target.modelSelection }
             : {}),
@@ -220,12 +221,18 @@ export function useConversationSession(
       modelBlocked
     )
       return;
+    // The next message opens a new session (and a new composer), so the files offered here travel in its request.
+    const uploads = ready?.port.uploads.sendArgument() ?? [];
     void continuation.start(
       view.source,
       prompt,
-      (request) => local.retainNext(finished, request),
+      (request) => {
+        local.retainNext(finished, request);
+        if (request.uploads) ready?.port.uploads.sent(request.uploads);
+      },
       local.modelSelection,
       skillSelection,
+      uploads,
     );
   };
   const openLifecycleTarget = (target: LifecycleTarget, browser = false) => {

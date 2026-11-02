@@ -32,9 +32,16 @@ export type TurnIntent = Readonly<{
   work?: ConversationSkillSelection["work"];
   procedure?: ConversationSubmitRequest["procedure"];
   siteWorkflow?: ConversationSubmitRequest["siteWorkflow"];
+  /** Files the next message carries: the exact ids and digests the composer offered when it was sent. */
+  uploads?: ConversationSubmitRequest["uploads"];
   state: "reserving" | "unknown" | "ready";
   receipt?: ConversationTurnReceipt;
 }>;
+
+const frozenUploads = (uploads: NonNullable<TurnIntent["uploads"]>) =>
+  Object.freeze(
+    uploads.map((upload) => Object.freeze({ ...upload })),
+  ) as NonNullable<TurnIntent["uploads"]>;
 
 /** Keep retained command identity independent of later response-object mutations. */
 function snapshotIntent(intent: TurnIntent) {
@@ -52,6 +59,7 @@ function snapshotIntent(intent: TurnIntent) {
     ...(intent.modelSelection
       ? { modelSelection: Object.freeze({ ...intent.modelSelection }) }
       : {}),
+    ...(intent.uploads ? { uploads: frozenUploads(intent.uploads) } : {}),
     ...(receipt ? { receipt } : {}),
   });
 }
@@ -123,6 +131,7 @@ function completedRequest(
       requestId: intent.requestId,
       prompt: intent.prompt,
       ...skillSelectionFields(intent),
+      ...(intent.uploads ? { uploads: intent.uploads } : {}),
       ...(intent.modelSelection
         ? { modelSelection: intent.modelSelection }
         : {}),
@@ -185,12 +194,14 @@ export function conversationTurnJournal(
         prompt: intent.prompt,
         ...skillSelectionFields(previous),
         modelSelection: previous.modelSelection,
+        uploads: previous.uploads,
       }) !==
         submissionIdentity({
           requestId: intent.requestId,
           prompt: intent.prompt,
           ...skillSelectionFields(intent),
           modelSelection: intent.modelSelection,
+          uploads: intent.uploads,
         }) ||
       previous.source.runId !== intent.source.runId
     )
@@ -225,6 +236,7 @@ export function conversationTurnJournal(
       requestId: string,
       modelSelection?: ConversationSubmitRequest["modelSelection"],
       selection: ConversationSkillSelection = {},
+      uploads?: ConversationSubmitRequest["uploads"],
     ) {
       if (
         !current() ||
@@ -242,6 +254,7 @@ export function conversationTurnJournal(
         ...(modelSelection
           ? { modelSelection: Object.freeze({ ...modelSelection }) }
           : {}),
+        ...(uploads?.length ? { uploads: frozenUploads(uploads) } : {}),
         state: "reserving",
       });
       store(intent);

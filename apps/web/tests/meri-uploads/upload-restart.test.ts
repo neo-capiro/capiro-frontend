@@ -281,6 +281,50 @@ describe("durable upload attempt references", () => {
     expect(restored.sendArgument()).toEqual([]);
     expect(store.values.size).toBe(1);
   });
+  it("a sent file leaves the composer: no status-unknown row on the next session and no second send", async () => {
+    const store = storage(),
+      service = server(null),
+      established = {
+        uploadId: "33333333-3333-4333-8333-333333333333",
+        sha256: "c".repeat(64),
+      };
+    const life = new AbortController();
+    const first = createUploadController({
+      wire: createUploadWire(
+        "action_session_" + "A".repeat(43),
+        life.signal,
+        service.fetcher,
+      ),
+      isCurrent: () => true,
+      recovery: createUploadAttemptReferences(scope, () => store),
+      established: () => [established],
+    });
+    await first.add([file()]);
+    const requestId = first.items()[0]!.requestId;
+    service.receipt = {
+      ...service.receipt!,
+      scanStatus: "clean",
+      extraction: { status: "available", limitations: [] },
+      originalBytesAvailable: true,
+    };
+    await first.check(requestId);
+    first.toggle(established.uploadId);
+    const argument = first.sendArgument();
+    expect(argument.map((entry) => entry.uploadId)).toEqual([
+      established.uploadId,
+      uploadId,
+    ]);
+    first.sent(argument);
+    expect(first.items()).toEqual([]);
+    expect(first.sendArgument()).toEqual([]);
+    expect(first.incoming()).toEqual([{ ...established, selected: false }]);
+    expect(store.values.size).toBe(0);
+    first.dispose();
+    // The next session's composer (a renewal or the next turn's port) restores nothing for a file already sent.
+    const next = controller(store, service);
+    expect(next.items()).toEqual([]);
+    expect(next.sendArgument()).toEqual([]);
+  });
   it("refuses dispatch on denied, full, corrupt or nonretaining storage", async () => {
     for (const fault of ["denied", "full", "corrupt", "discard"] as const) {
       const store = storage(),

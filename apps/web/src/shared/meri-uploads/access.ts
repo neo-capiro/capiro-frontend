@@ -29,6 +29,8 @@ export type MeriUploadAccess = Readonly<{
   pending: UploadController["pending"];
   /** The exact ordered argument the next message of this session would carry. */
   sendArgument: UploadController["sendArgument"];
+  /** The message carrying this argument is recorded for sending; its rows leave this composer. */
+  sent: UploadController["sent"];
   /** The service is still checking a stored attachment within the bounded wait; Send waits for it. */
   checking: UploadController["checking"];
   /** Whether one attachment's check has outrun the bounded wait. */

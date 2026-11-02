@@ -84,6 +84,7 @@ export function persistedTurn(scope: TabScope, storage?: TabStorage) {
             requestId: intent.requestId,
             prompt: intent.prompt,
             ...skillSelectionFields(intent),
+            ...(intent.uploads ? { uploads: intent.uploads } : {}),
             ...(intent.modelSelection
               ? { modelSelection: intent.modelSelection }
               : {}),

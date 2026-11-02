@@ -151,6 +151,8 @@ export async function sendRequest(
       ...intent.read(),
       submit: { ...journal, state: "observed" },
     });
+    // The admitted request now holds its files; the composer stops offering them as new attachments.
+    if (request.uploads?.length) port.uploads?.sent(request.uploads);
   } catch (cause) {
     // Control's definitive refusal means nothing was dispatched: the retained identity is released
     // so the person can change the selection and send again; every other failure stays uncertain.

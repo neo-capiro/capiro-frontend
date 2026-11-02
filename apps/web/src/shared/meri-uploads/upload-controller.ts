@@ -489,6 +489,29 @@ export function createUploadController(options: {
   }
 
   /**
+   * The message carrying this argument is now recorded for sending: its files belong to the conversation (offered again
+   * as established sources) and to the request journal that may resend it, so this composer drops their rows, their
+   * recovery locators and their selection. Without this, a sent file came back on the next session as a status-unknown
+   * row, and a stored one would have been attached to every later message.
+   */
+  function sent(argument: readonly UploadSendArgument[]) {
+    if (disposed || !argument.length) return;
+    const ids = new Set(argument.map((entry) => entry.uploadId));
+    for (const item of Array.from(items.values())) {
+      if (item.uploadId === null || !ids.has(item.uploadId)) continue;
+      try {
+        options.recovery?.release(item.requestId);
+      } catch {
+        // A locator that cannot be released restores a status-unknown row only; Check status still resolves it.
+      }
+      stopCheck(item.requestId);
+      items.delete(item.requestId);
+    }
+    for (const uploadId of ids) chosen.delete(uploadId);
+    changed();
+  }
+
+  /**
    * Cancels this page's own operation for one row. An attempt already in flight is aborted; if it had
    * reached the service its row becomes uncertain and only a status read may resolve it. A row whose
    * file was never allocated is simply dropped, and an allocated row keeps its canonical Check and
@@ -583,6 +606,7 @@ export function createUploadController(options: {
     add,
     check,
     remove,
+    sent,
     cancel,
     dismiss,
     pending: () => options.wire.pending() || attempts.size > 0,
