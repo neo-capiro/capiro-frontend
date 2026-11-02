@@ -355,7 +355,7 @@ export function conversationIntentJournal(
      * could not safely save or recover the message" (2 Nov preview, M37 and R02). A record that could not
      * be read at all stays blocked here; the person can discard it ("Discard and write a new message").
      * It does not restore the old draft, assume non-delivery, or dispatch a command. */
-    acknowledgeCompletedRetirement(port: {
+    acknowledgeAcceptedRetirement(port: {
       context: ConversationContext;
       getSnapshot: () => MeriConversationSnapshot;
     }) {

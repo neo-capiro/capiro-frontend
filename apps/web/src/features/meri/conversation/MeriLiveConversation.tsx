@@ -305,14 +305,21 @@ function CurrentRunStatus({
       {/* Whatever this tab could not save or recover, the person can always give it up and write anew. */}
       {retentionError === new TabJournalUnavailable().message &&
         onDiscardUnrecoverable && (
-          <Button
-            type="button"
-            variant="outline"
-            className={ui.outline}
-            onClick={onDiscardUnrecoverable}
-          >
-            Discard and write a new message
-          </Button>
+          <>
+            {/* Discarding forgets only this tab's copy: a message or Stop already sent may still take effect. */}
+            <p className={styles.muted}>
+              If your last message already reached Meri, it may still be
+              answered.
+            </p>
+            <Button
+              type="button"
+              variant="outline"
+              className={ui.outline}
+              onClick={onDiscardUnrecoverable}
+            >
+              Discard and write a new message
+            </Button>
+          </>
         )}
       <RunStatus
         run={{ ...run, busy: run.busy || !!retentionError }}

@@ -300,7 +300,8 @@ export function useConversationSession(
     /**
      * "Discard and write a new message": whenever this tab cannot save or recover a message, the person can
      * give it up and keep writing. Nothing is sent and nothing is marked delivered; text typed meanwhile stays
-     * in the box. A storage that cannot be opened at all keeps its error.
+     * in the box. Only this tab's copy is forgotten: a message or Stop that already reached Meri may still take
+     * effect, and the button says so. A storage that cannot be opened at all keeps its error.
      */
     discardUnrecoverable: () => {
       if (!selectedId || accessLost) return;

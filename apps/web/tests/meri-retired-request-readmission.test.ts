@@ -157,7 +157,7 @@ it.each(["unverified", "unreadable"])(
       "could not safely save or recover",
     );
     await view.commands.history();
-    expect(view.commands.journal.acknowledgeCompletedRetirement(port)).toBe(
+    expect(view.commands.journal.acknowledgeAcceptedRetirement(port)).toBe(
       false,
     );
     expect(view.commands.journal.recoveryBlocked).toBe(true);

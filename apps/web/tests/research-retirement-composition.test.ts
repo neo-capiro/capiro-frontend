@@ -105,7 +105,7 @@ it.each(["completed", "running"] as const)(
     await sdk.history({ after: 0, limit: 100 });
     // The exact request accepted for this run settles it while the run is still running too.
     expect(
-      fresh.acknowledgeCompletedRetirement({ ...sdk, context: bound }),
+      fresh.acknowledgeAcceptedRetirement({ ...sdk, context: bound }),
     ).toBe(true);
     expect(fresh.recoveryBlocked).toBe(false);
     expect(fresh.read().submit?.requestId).toBe(request.requestId);
