@@ -15,8 +15,13 @@ import { installInitialInput } from "./meri-initial-input-fixtures";
 
 const generalContext = { ...context, selectedClientId: null };
 
-async function general(page: Page, running = false) {
-  const fixture = await setupConversation(page, undefined, [generalContext]);
+async function general(page: Page, running = false, lifetimeMs?: number) {
+  const fixture = await setupConversation(
+    page,
+    undefined,
+    [generalContext],
+    lifetimeMs,
+  );
 
   const native = await installInitialInput(page, running, true);
 
@@ -441,5 +446,127 @@ test("New conversation from the still-empty conversation reopens it with the com
   await expect(composer(page)).toBeFocused();
   await expect(composer(page)).toHaveValue("");
   expect(f.native.calls.allocate).toEqual([]);
+  expect(f.unexpected).toEqual([]);
+});
+
+test("New conversation from a conversation holding an unconfirmed send opens a new one and leaves that send in its own thread", async ({
+  page,
+}) => {
+  const f = await general(page);
+  const first = binding.conversationId;
+  const second = "30000000-0000-4000-8000-000000000033";
+  // Core creates one conversation per request id and reopens it for the same id.
+  const requests: string[] = [];
+  const byRequest = new Map<string, string>();
+  await page.route("**/api/capiro/meri.conversation.bootstrap.v2", (route) => {
+    const { body } = route.request().postDataJSON() as {
+      body: { requestId: string };
+    };
+    requests.push(body.requestId);
+    if (!byRequest.has(body.requestId))
+      byRequest.set(body.requestId, [first, second][byRequest.size]!);
+    return reply(route, {
+      ...body,
+      tenantId: binding.tenantId,
+      actorId: binding.actorId,
+      conversationId: byRequest.get(body.requestId),
+    });
+  });
+  // Each session is issued for the conversation the page asks for.
+  await page.route("**/api/action-followthrough/session", (route) => {
+    const hint = route.request().postDataJSON() as { conversationId: string };
+    return reply(route, {
+      credential: `action_session_${"s".repeat(43)}`,
+      expiresAtMs: Date.now() + 60_000,
+      context: { ...generalContext, conversationId: hint.conversationId },
+    });
+  });
+  await page.route("**/api/conversations/submit", (route) => route.abort());
+
+  await page.goto("/meri?scope=general");
+  await expect(page).toHaveURL(
+    new RegExp(`scope=general&conversationId=${first}$`),
+  );
+  await composer(page).fill("Unconfirmed request");
+  await expect(sendButton(page)).toBeEnabled();
+  await sendButton(page).click();
+  await expect(
+    page.getByText("Delivery is uncertain", { exact: false }),
+  ).toBeVisible();
+
+  // Never a no-op: a new request opens a new, clean conversation.
+  await newConversation(page).click();
+  await expect(page).toHaveURL(
+    new RegExp(`scope=general&conversationId=${second}$`),
+  );
+  expect(requests).toHaveLength(2);
+  expect(requests[1]).not.toBe(requests[0]);
+  await expect(composer(page)).toBeFocused();
+  await expect(composer(page)).toHaveValue("");
+  await expect(page.getByText(/Unconfirmed request/)).toHaveCount(0);
+  await expect(
+    page.getByText("Your last request is still unconfirmed", { exact: false }),
+  ).toHaveCount(0);
+
+  // The bare link reopens that still-empty conversation, never the one left behind.
+  await page.goto("/meri?scope=general");
+  await expect(page).toHaveURL(new RegExp(`conversationId=${second}$`));
+  await expect.poll(() => requests.length).toBe(3);
+  expect(requests[2]).toBe(requests[1]);
+
+  // The unconfirmed send is kept in its own thread, with its recovery; nothing was discarded.
+  await page.goto(`/meri?scope=general&conversationId=${first}`);
+  await expect(page.getByText(/Unconfirmed request/)).toBeVisible();
+  await expect(
+    page.getByText("Your last request is still unconfirmed", { exact: false }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", {
+      name: /Retry same request|Continue accepted request/,
+    }),
+  ).toBeVisible();
+  expect(requests).toHaveLength(3);
+  expect(f.unexpected).toEqual([]);
+});
+
+test("an idle General conversation is confirmed once: a session renewal reissues the session for the same conversation and leaves the address alone", async ({
+  page,
+}) => {
+  // Short synthetic session cap: the owner renews halfway through, so one renewal happens while idle.
+  const f = await general(page, false, 12_000);
+
+  await page.goto("/meri?scope=general");
+  await expect(page).toHaveURL(
+    new RegExp(`scope=general&conversationId=${binding.conversationId}$`),
+  );
+  await expect(composer(page)).toBeFocused();
+  const address = page.url();
+  expect(f.bootstrap).toHaveLength(1);
+  expect(f.hints).toHaveLength(1);
+  await composer(page).evaluate((element) => {
+    element.dataset["idleMarker"] = "planted";
+  });
+
+  // Nothing happens on the page until the renewal; the only idle request is that one issuance,
+  // for the exact conversation and run already bound.
+  await expect.poll(() => f.hints.length, { timeout: 15_000 }).toBe(2);
+  expect(f.hints[1]).toEqual({
+    clientId: null,
+    conversationId: binding.conversationId,
+    runId: binding.runId,
+  });
+  await expect(composer(page)).toBeEditable();
+  await page.waitForTimeout(3_000);
+  expect(f.hints).toHaveLength(2);
+  expect(f.bootstrap).toHaveLength(1);
+  expect(page.url()).toBe(address);
+  await expect(
+    page.getByRole("heading", { name: "Preparing conversation" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", { name: "Conversation connection unavailable" }),
+  ).toHaveCount(0);
+  // The same document and composer: a renewal never remounts what the person is looking at.
+  await expect(composer(page)).toHaveAttribute("data-idle-marker", "planted");
   expect(f.unexpected).toEqual([]);
 });

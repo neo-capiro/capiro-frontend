@@ -175,9 +175,10 @@ export function ConversationView({
   // Core owns the QuickActions rollout. One read per mounted conversation decides both which skills
   // a NEW selection may offer and whether a NEW first submission or next turn may be dispatched:
   // an applied-but-never-submitted draft is refused while the current catalog is closed, and the
-  // selection itself is left intact for correction or retry.
+  // selection itself is left intact for correction or retry. The displayed port keys the read, so
+  // a credential renewal of the same conversation neither re-reads nor closes the catalog.
   const quickActions = useQuickActionCatalog(
-    session.ready?.port.context.tenantId ?? null,
+    displayed?.port.context.tenantId ?? null,
   );
   const newIntentBlocked = newIntentRefusal(
     quickActions.gate,
