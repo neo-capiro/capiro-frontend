@@ -1,22 +1,23 @@
 "use client";
 import { useMemo, useRef, useState } from "react";
-import { announceManagementReceipt } from "../../../shared/meri-conversations/management-refresh";
+import { announceManagementReceipt } from "./management-refresh";
 import {
   ConversationHistoryUnavailable,
   MANAGEMENT_VERSION,
   type ConversationSummary,
   type ConversationHistoryManageRequest,
-} from "../../../shared/meri-conversations/history-client";
+} from "./history-client";
 import {
   managementJournal,
   submitManagementChange,
-} from "../../../shared/meri-conversations/management-journal";
+} from "./management-journal";
 
 export type ManagedChatProps = {
   row: ConversationSummary;
   account: { tenantId: string; actorId: string };
   available: boolean;
-  refresh(): void;
+  /** Called after every attempt; `confirmed` only when the receipt verified the change. */
+  refresh(confirmed: boolean): void;
 };
 /** Lost replies retry the persisted command through the same canonical receipt owner. */
 export function useManagedChange({
@@ -65,7 +66,7 @@ export function useManagedChange({
       setIntent(null);
       setMessage("Chat change confirmed.");
       announceManagementReceipt(account);
-      refresh();
+      refresh(true);
     } catch (error) {
       if (
         error instanceof ConversationHistoryUnavailable &&
@@ -84,7 +85,7 @@ export function useManagedChange({
         setMessage(
           "The change is not confirmed. Retry the same change to recover its result.",
         );
-      refresh();
+      refresh(false);
     } finally {
       sending.current = false;
       setBusy(false);

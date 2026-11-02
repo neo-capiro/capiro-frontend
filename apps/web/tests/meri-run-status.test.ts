@@ -46,9 +46,9 @@ it.each(["queued", "running"] as const)(
     );
     expect(markup).not.toContain("The run continues on the service.");
     expect(markup).not.toContain("the run keeps going");
-    expect(markup).toContain(
-      "Leaving this page stops watching and does not cancel the run. Use Stop to request cancellation.",
-    );
+    // The Stop button's own tooltip carries the one explanation; nothing is repeated under the composer.
+    expect(markup).not.toContain("Leaving this page");
+    expect(markup).not.toContain("Waiting for Meri updates.");
     expect(markup).toMatch(/<button[^>]*>Refresh run status<\/button>/);
   },
 );

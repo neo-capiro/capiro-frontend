@@ -13,7 +13,8 @@ import {
 
 const delayed =
   "Updates are delayed. Reconnecting from the last received update…";
-const waiting = "Waiting for Meri updates.";
+// A healthy or quietly reconnecting stream shows only the turn's working status.
+const working = "Meri is working…";
 
 /** Real React reconciliation and timers; only the service responses are synthetic. */
 async function recovering(page: Page) {
@@ -40,7 +41,7 @@ async function recovering(page: Page) {
     { error: { code: "CONVERSATION_UNAVAILABLE" } },
     502,
   );
-  await expect(page.getByText(waiting, { exact: true })).toBeVisible();
+  await expect(page.getByText(working, { exact: true })).toBeVisible();
   await page.clock.runFor(1_000);
   await expect.poll(() => attempts.length).toBe(2);
   return { ...fixture, attempts };
@@ -54,7 +55,7 @@ test("real React gives each recovery a fresh grace period and removes feedback a
   await expect(page.getByText(delayed, { exact: true })).toBeVisible();
   await sse(fixture.attempts[1]!, [event(2, "Preserved answer")]);
   await expect.poll(() => fixture.attempts.length).toBe(3);
-  await expect(page.getByText(waiting, { exact: true })).toBeVisible();
+  await expect(page.getByText(working, { exact: true })).toBeVisible();
   await expect(page.getByText(delayed, { exact: true })).toHaveCount(0);
 
   await reply(
@@ -75,7 +76,7 @@ test("real React gives each recovery a fresh grace period and removes feedback a
   ).toHaveAttribute("data-run-state", "completed");
   await page.clock.runFor(5_000);
   await expect(page.getByText(delayed, { exact: true })).toHaveCount(0);
-  await expect(page.getByText(waiting, { exact: true })).toHaveCount(0);
+  await expect(page.getByText(working, { exact: true })).toHaveCount(0);
   await expect(page.getByText("Preserved answer", { exact: true })).toHaveCount(
     1,
   );
@@ -95,7 +96,7 @@ test("real React retires pending recovery feedback when the conversation unmount
     window.history.pushState({}, "", "/modules");
     window.dispatchEvent(new PopStateEvent("popstate"));
   });
-  await expect(page.getByText(waiting, { exact: true })).toHaveCount(0);
+  await expect(page.getByText(working, { exact: true })).toHaveCount(0);
   await page.clock.runFor(5_000);
   await expect(page.getByText(delayed, { exact: true })).toHaveCount(0);
   await sse(fixture.attempts[1]!, [event(2, "Retired response")]).catch(
@@ -107,7 +108,7 @@ test("real React retires pending recovery feedback when the conversation unmount
     window.dispatchEvent(new PopStateEvent("popstate"));
   }, clientId);
   await expect.poll(() => fixture.attempts.length).toBe(3);
-  await expect(page.getByText(waiting, { exact: true })).toBeVisible();
+  await expect(page.getByText(working, { exact: true })).toBeVisible();
   await expect(page.getByText(delayed, { exact: true })).toHaveCount(0);
   await expect(page.getByText("Retired response", { exact: true })).toHaveCount(
     0,

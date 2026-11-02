@@ -6,7 +6,7 @@ import { conversationHref } from "../../../shared/meri-conversations/conversatio
 import { DeleteConversationDialog } from "../screens/conversation/DeleteConversationDialog";
 import { RenameConversationDialog } from "./RenameConversationDialog";
 import { SavedChatTranscript } from "./SavedChatTranscript";
-import { useManagedChange } from "./useManagedChange";
+import { useManagedChange } from "../../../shared/meri-conversations/useManagedChange";
 import { ConversationExportAction } from "./ConversationExportAction";
 import ui from "../ui/meri-ui.module.css";
 import conversation from "../screens/conversation/conversation.module.css";

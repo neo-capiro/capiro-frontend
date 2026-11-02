@@ -308,6 +308,87 @@
   overflow: hidden;
   overflow-wrap: anywhere;
 }
+/* A recent chat row: the link fills it; the rename control appears on hover or keyboard focus. */
+.recentRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.recentRow > a {
+  flex: 1;
+  min-width: 0;
+  padding-right: 34px;
+}
+.recentRename {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted-foreground);
+  transform: translateY(-50%);
+  opacity: 0;
+}
+.recentRow:hover .recentRename,
+.recentRow:focus-within .recentRename,
+.recentRename:focus-visible {
+  opacity: 1;
+}
+.recentRename:hover,
+.recentRename:focus-visible {
+  background: var(--card);
+  color: var(--foreground);
+}
+/* No hover on touch: the control is always shown. */
+@media (hover: none) {
+  .recentRename {
+    opacity: 1;
+  }
+}
+.recentRenameForm {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 10px;
+}
+.recentRenameForm input {
+  width: 100%;
+  min-width: 0;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--input);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.recentRenameForm input:focus {
+  outline: none;
+  border-color: var(--foreground);
+}
+.recentRenameForm p {
+  padding: 0;
+}
+.recentRetry {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .navButton:hover:not(:disabled),
 .recents a[aria-current="page"] {
   background: var(--card);

@@ -23,7 +23,7 @@ import {
   conversationHistoryRoute,
   proxyConversationHistory,
 } from "../src/shared/meri-conversations/history-proxy";
-import { recentTitle } from "../src/shared/meri-conversations/recent-titles";
+import { recentSummary } from "../src/shared/meri-conversations/recent-titles";
 import { conversation } from "../test/browser/meri-history-fixtures";
 
 const id = (n: number) =>
@@ -480,9 +480,11 @@ describe("fixed history transport and Recents titles", () => {
       fetcher,
     );
     expect(fetcher).toHaveBeenCalledTimes(1);
-    expect(recentTitle(conversation, result.conversations)).toBe(row.title);
+    expect(recentSummary(conversation, result.conversations)?.title).toBe(
+      row.title,
+    );
     expect(
-      recentTitle(conversation, [{ ...row, title: "Changed title" }]),
+      recentSummary(conversation, [{ ...row, title: "Changed title" }])?.title,
     ).toBe("Changed title");
     for (const summaries of [
       undefined,
@@ -490,13 +492,12 @@ describe("fixed history transport and Recents titles", () => {
       [{ ...row, clientId: id(9) }],
       [{ ...row, conversationId: id(9) }],
     ])
-      expect(recentTitle(conversation, summaries)).toBeUndefined();
+      expect(recentSummary(conversation, summaries)).toBeUndefined();
     const scheduled = { ...conversation, conversationId: id(8) };
     const discovery = [conversation, scheduled];
-    expect(discovery.map((c) => recentTitle(c, result.conversations))).toEqual([
-      row.title,
-      undefined,
-    ]);
+    expect(
+      discovery.map((c) => recentSummary(c, result.conversations)?.title),
+    ).toEqual([row.title, undefined]);
     expect(discovery[1]).toBe(scheduled);
   });
   it("General labels require the actual actor private-user scope", () => {
@@ -511,9 +512,9 @@ describe("fixed history transport and Recents titles", () => {
       ],
     };
     const title = { ...row, scopeKind: "general" as const, clientId: null };
-    expect(recentTitle(general, [title])).toBe(row.title);
+    expect(recentSummary(general, [title])?.title).toBe(row.title);
     expect(
-      recentTitle(
+      recentSummary(
         { ...general, owner: { ...general.owner, actorId: "another-actor" } },
         [title],
       ),
