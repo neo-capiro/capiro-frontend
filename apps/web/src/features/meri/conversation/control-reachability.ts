@@ -46,10 +46,11 @@ export function controlFailure(cause: unknown): ControlFailure | undefined {
       : transientStatus(cause.status)
         ? "unreachable"
         : undefined;
+  // A definitive refusal (a reached monthly cap answers 429) is control's own answer, never unreachable.
   if (cause instanceof ConversationUnavailable)
     return cause.code === EDGE_REFUSED
       ? "refused"
-      : transientStatus(cause.status)
+      : !cause.definitive && transientStatus(cause.status)
         ? "unreachable"
         : undefined;
   // fetch rejects with a TypeError when the network fails; the request deadline aborts.

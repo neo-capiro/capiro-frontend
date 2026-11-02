@@ -44,8 +44,8 @@ vi.mock(
   () => ({ ProspectDraftExport: () => null }),
 );
 vi.mock(
-  "../src/features/modules/workspace/newsletter/NewsletterWorkflow",
-  () => ({ NewsletterWorkflow: () => null }),
+  "../src/features/modules/workspace/newsletter/NewsletterEditor",
+  () => ({ NewsletterEditor: () => null }),
 );
 import { WorkspaceDraft } from "../src/features/modules/workspace/WorkspaceDraft";
 const render = (expectedClientId?: string) =>

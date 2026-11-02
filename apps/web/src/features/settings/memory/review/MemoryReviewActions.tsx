@@ -22,6 +22,20 @@ export function MemoryReviewActions({
   const [reason, setReason] = useState("");
   const [confirmed, confirm] = useState(false);
   const eligible = review.capabilities[choice];
+  // Core grants neither decision once the item is decided or the viewer is not its reviewer;
+  // the detail then shows the recorded status and reviewer only, without an inert form.
+  if (!review.capabilities.approve && !review.capabilities.reject)
+    return (
+      <>
+        {review.status === "pending" && (
+          <p>
+            No decision is currently permitted. Core checks current access,
+            reviewer assignment and item state.
+          </p>
+        )}
+        <DecisionStatus writer={writer} refresh={refresh} />
+      </>
+    );
   return (
     <>
       <form
@@ -70,12 +84,6 @@ export function MemoryReviewActions({
           eligible={eligible}
         />
       </form>
-      {!review.capabilities.approve && !review.capabilities.reject && (
-        <p>
-          No decision is currently permitted. Core checks current access,
-          reviewer assignment and item state.
-        </p>
-      )}
       <DecisionStatus writer={writer} refresh={refresh} />
     </>
   );

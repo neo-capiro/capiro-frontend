@@ -39,6 +39,7 @@ export function useRichDocument() {
           clientId,
         };
       }),
+      clientId,
     );
   }, [api, queryClient, userId, clientId, available]);
   useLayoutEffect(() => owner.mount(), [owner]);

@@ -12,6 +12,8 @@ export type RecommendationView = Readonly<{
 export type RecommendationPage = Readonly<{
   items: readonly RecommendationView[];
   coverageNotes: readonly string[];
+  /** Concise display facts and all limitations; absent for older local adapters. */
+  coverageSummary?: readonly string[];
 }>;
 
 export type DraftView = TaskEdits & Readonly<{ handle: object }>;

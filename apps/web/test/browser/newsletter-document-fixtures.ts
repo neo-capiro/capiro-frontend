@@ -13,7 +13,7 @@ import { client, otherClient, clientId } from "./next-modules-fixtures";
 export { clientId, otherClientId, navigate } from "./next-modules-fixtures";
 export const documentId = "b2222222-2222-7222-8222-222222222222";
 export const stageId = "a1111111-1111-4111-8111-111111111111";
-export const editorUrl = "/modules/workspace?view=rich-newsletter";
+export const editorUrl = "/modules/workspace?view=newsletter";
 export const button = (page: Page, name: string) =>
   page.getByRole("button", { name, exact: true });
 export function savedDocument(): NewsletterCampaign {
@@ -203,13 +203,13 @@ export async function adoptDocument(page: Page) {
   );
 }
 export async function closeAndReopen(page: Page) {
-  await button(page, "Close preview").click();
+  await button(page, "Back to Workspace").click();
   await button(page, "Discard and leave").click();
   await expect(
     page.getByRole("heading", { name: "Workspace", exact: true }),
   ).toBeVisible();
-  await button(page, "Workspace tools").click();
-  await page.getByRole("menuitem", { name: "Rich newsletter preview" }).click();
+  await button(page, "+ New document").click();
+  await button(page, "Newsletter").click();
   await expect(page.getByLabel("Newsletter name")).toHaveValue(
     "Untitled newsletter",
   );

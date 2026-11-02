@@ -22,6 +22,7 @@ import {
   type ConversationSkillSelection,
 } from "../../../shared/meri-conversations/query-journal";
 import {
+  checkConversationTurn,
   conversationTurnJournal,
   recoverConversationTurn,
   conversationTurnNotReady,
@@ -111,21 +112,12 @@ async function requestTurn(
   options: {
     source?: RunBinding | undefined;
     prompt?: string | undefined;
-    readOnly: boolean;
     capture?: (request: ConversationDraftRequest) => void;
     modelSelection?: ConversationSubmitRequest["modelSelection"];
     selection?: ConversationSkillSelection;
   },
 ) {
-  const { source, prompt, readOnly, capture, modelSelection, selection } =
-    options;
-  if (readOnly && source) {
-    await reserveConversationTurn(
-      { conversationId: source.conversationId, sourceRunId: source.runId },
-      controller.signal,
-    );
-    return undefined;
-  }
+  const { source, prompt, capture, modelSelection, selection } = options;
   if (source && prompt) {
     const request = Object.freeze({
       requestId: crypto.randomUUID(),
@@ -230,6 +222,8 @@ export function useConversationTurn(
   } = useRetainedTurn(cache, account, clientId, conversationId);
   const { active, alive, gate } = useTurnLifetime(journal);
   const [notReady, setNotReady] = useState(false);
+  // The reserved target control confirmed admitted no message, or whose message the person discarded.
+  const [opened, setOpened] = useState<string>();
   useEffect(() => {
     if (
       completedHistory &&
@@ -243,13 +237,12 @@ export function useConversationTurn(
     // Observe only fresh scoped history and the current immutable intent; this performs no network operation.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completedHistory, journal, intent, gate.busy, gate.error]);
-  const perform = (
-    source?: RunBinding,
-    prompt?: string,
-    readOnly = false,
-    capture?: (request: ConversationDraftRequest) => void,
-    modelSelection?: ConversationSubmitRequest["modelSelection"],
-    selection?: ConversationSkillSelection,
+  /** One reservation command at a time, cancelled with its journal owner. */
+  const command = (
+    operation: (
+      journal: ReturnType<typeof conversationTurnJournal>,
+      controller: AbortController,
+    ) => Promise<void>,
   ) =>
     gate.perform(async () => {
       if (!journal?.current()) throw new TabJournalUnavailable();
@@ -257,25 +250,45 @@ export function useConversationTurn(
       active.current = controller;
       setNotReady(false);
       try {
-        const retained = await requestTurn(journal, controller, {
-          source,
-          prompt,
-          readOnly,
-          ...(capture ? { capture } : {}),
-          ...(modelSelection ? { modelSelection } : {}),
-          ...(selection ? { selection } : {}),
-        });
-        if (retained) open(prepareTarget(cache, clientId, retained));
-      } catch (cause) {
-        if (!readOnly && conversationTurnNotReady(cause)) {
-          if (alive.current) setNotReady(true);
-          return;
-        }
-        throw cause;
+        await operation(journal, controller);
       } finally {
         if (active.current === controller) active.current = null;
       }
     });
+  const perform = (
+    source?: RunBinding,
+    prompt?: string,
+    capture?: (request: ConversationDraftRequest) => void,
+    modelSelection?: ConversationSubmitRequest["modelSelection"],
+    selection?: ConversationSkillSelection,
+  ) =>
+    command(async (journal, controller) => {
+      try {
+        const retained = await requestTurn(journal, controller, {
+          source,
+          prompt,
+          ...(capture ? { capture } : {}),
+          ...(modelSelection ? { modelSelection } : {}),
+          ...(selection ? { selection } : {}),
+        });
+        open(prepareTarget(cache, clientId, retained));
+      } catch (cause) {
+        if (conversationTurnNotReady(cause)) {
+          if (alive.current) setNotReady(true);
+          return;
+        }
+        throw cause;
+      }
+    });
+  /** The released text goes back to the composer through `restore`; nothing is sent. */
+  const release = (
+    target: string | undefined,
+    released: TurnIntent | undefined,
+    restore: (prompt: string | undefined) => void,
+  ) => {
+    if (target && alive.current) setOpened(target);
+    restore(released?.prompt);
+  };
   return {
     intent,
     busy: gate.busy,
@@ -295,8 +308,40 @@ export function useConversationTurn(
       capture: (request: ConversationDraftRequest) => void,
       modelSelection?: ConversationSubmitRequest["modelSelection"],
       selection?: ConversationSkillSelection,
-    ) => perform(source, prompt, false, capture, modelSelection, selection),
+    ) => perform(source, prompt, capture, modelSelection, selection),
     retry: () => perform(),
-    readMapping: (source: RunBinding) => perform(source, undefined, true),
+    /** Target run id of the reservation that is open for a new message in this page. */
+    opened,
+    /**
+     * Ask control about the retained message, or about the reservation it reported (`reported`
+     * is that reservation's source). No run for it: the message is released. A run: its exact
+     * target opens, replaying the same request id. No answer: everything stays as it was.
+     */
+    check: (
+      reported: RunBinding | undefined,
+      restore: (prompt: string | undefined) => void,
+    ) =>
+      command(async (journal, controller) => {
+        const result = await checkConversationTurn(
+          journal,
+          reported,
+          (input) => reserveConversationTurn(input, controller.signal),
+          controller.signal,
+        );
+        if (!result) return;
+        if (!journal.current()) throw new TabJournalUnavailable();
+        if ("released" in result)
+          release(result.target.runId, result.released, restore);
+        else if (result.retained)
+          open(prepareTarget(cache, clientId, result.retained));
+      }),
+    /** The person gives up an unconfirmed message: it is released without sending anything. */
+    discard: (
+      target: string | undefined,
+      restore: (prompt: string | undefined) => void,
+    ) =>
+      command(async (journal) => {
+        release(target, journal.discard(), restore);
+      }),
   };
 }

@@ -14,7 +14,10 @@ import {
   savedHistory,
   savedTranscriptQuery,
 } from "../src/shared/meri-conversations/history-queries";
-import { sessionHistoryState } from "../src/features/meri/conversation/saved-turns";
+import {
+  sessionHistoryState,
+  settledRefreshDue,
+} from "../src/features/meri/conversation/saved-turns";
 import {
   binding,
   clientId,
@@ -316,7 +319,8 @@ function failedContinuation(error: unknown) {
     continuation: { intent: undefined, failed: false, notReady: false },
     recoveryNeeded: false,
     unknownReservation: false,
-    readReservation: vi.fn(),
+    checkPending: vi.fn(),
+    discardPending: vi.fn(),
   };
   const html = renderToStaticMarkup(
     createElement(ConversationHistoryStatus, {
@@ -354,4 +358,50 @@ it("a continuation control did not answer re-reads only that page on the ladder;
   buttons[0]!.onClick();
   expect(refused.query.fetchNextPage).toHaveBeenCalledOnce();
   expect(refused.session.history.refresh).not.toHaveBeenCalled();
+});
+
+it("a reopened run the saved read already reports finished does not re-read and hide the saved pages", async () => {
+  const reads = serve();
+  const client = new QueryClient();
+  const { observer, unsubscribe } = observe(client);
+  try {
+    await vi.waitFor(() => expect(settled(observer)).toBe(true));
+    const result = observer.getCurrentResult();
+    const { saved } = savedHistory(result, true, account, clientId);
+    const view = sessionHistoryState(
+      { saved, current: transcript(102, 100) as never },
+      thirdBinding.runId,
+      [],
+      undefined,
+      false,
+    );
+    const reopened = view.savedCurrent!;
+    expect(reopened.runState).toBe("completed");
+    // The live replay of that same finished run asks for no second read.
+    expect(settledRefreshDue(reopened, reopened)).toBe(false);
+    expect(reads).toEqual([0, 100]);
+    // A re-read would hide every admitted page until all of them are read again.
+    expect(
+      savedHistory({ ...result, isRefetching: true }, true, account, clientId)
+        .saved,
+    ).toBeUndefined();
+    // A run this view watched finish, or one the saved read has not reached, is read again.
+    expect(
+      settledRefreshDue(reopened, { ...reopened, runState: "running" }),
+    ).toBe(true);
+    expect(settledRefreshDue(reopened, undefined)).toBe(true);
+    // A terminal saved copy whose events stop short of its last sequence is read again once.
+    expect(
+      settledRefreshDue(reopened, { ...reopened, incompleteHistory: true }),
+    ).toBe(true);
+    expect(
+      settledRefreshDue(reopened, { ...reopened, runId: binding.runId }),
+    ).toBe(true);
+    expect(
+      settledRefreshDue({ ...reopened, runState: "running" }, undefined),
+    ).toBe(false);
+  } finally {
+    unsubscribe();
+    client.clear();
+  }
 });

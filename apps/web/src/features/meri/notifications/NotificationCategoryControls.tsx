@@ -1,7 +1,6 @@
 "use client";
 import type { UserPreferences } from "@capiro/meri-client/user-preferences";
 import {
-  MANDATORY_NOTIFICATION_CLASSES,
   NOTIFICATION_CATEGORIES,
   optionalNoticePresented,
   type NotificationPreferenceKey,
@@ -66,7 +65,6 @@ export function NotificationCategoryControls({
         );
       })}
       <p className={styles.meta} role="note">
-        {`Always delivered regardless of these switches: ${MANDATORY_NOTIFICATION_CLASSES.join(", ")}. `}
         Pending approvals, security notices and workspace broadcasts are not
         suppressed by personal notification preferences.
       </p>

@@ -91,3 +91,16 @@
   justify-self: start;
   border-radius: 10px;
 }
+
+.selectable {
+  cursor: pointer;
+  outline: 1px solid transparent;
+  padding: 8px;
+}
+.selectable:hover,
+.selectable:focus-visible {
+  outline-color: #007c89;
+}
+.selectable[aria-pressed="true"] {
+  outline: 2px solid #007c89;
+}

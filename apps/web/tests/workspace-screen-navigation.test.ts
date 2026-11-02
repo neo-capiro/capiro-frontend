@@ -12,7 +12,6 @@ const h = vi.hoisted(() => ({
   wizard: vi.fn(),
   newsletter: vi.fn(),
   prospect: vi.fn(),
-  rich: vi.fn(),
   copy: vi.fn(),
   library: vi.fn(),
   buttons: vi.fn(),
@@ -122,9 +121,9 @@ vi.mock("../src/shared/capiro/queries", () => ({
   }),
 }));
 vi.mock(
-  "../src/features/modules/workspace/newsletter/NewsletterWorkflow",
+  "../src/features/modules/workspace/newsletter/NewsletterEditor",
   () => ({
-    NewsletterWorkflow: (props: unknown) => {
+    NewsletterEditor: (props: unknown) => {
       h.newsletter(props);
       return null;
     },
@@ -135,15 +134,6 @@ vi.mock(
   () => ({
     ProspectWorkspace: (props: unknown) => {
       h.prospect(props);
-      return null;
-    },
-  }),
-);
-vi.mock(
-  "../src/features/modules/workspace/rich-newsletter/RichNewsletterEditor",
-  () => ({
-    RichNewsletterEditor: (props: unknown) => {
-      h.rich(props);
       return null;
     },
   }),
@@ -376,19 +366,13 @@ it("makes explicit template and rich-library entry actions durable", () => {
   expect(h.push).toHaveBeenLastCalledWith(
     `/modules/workspace?clientId=${otherId}&view=templates`,
   );
-  h.menuItems.mock.calls
-    .find(([props]) => props.children === "Rich newsletter preview")![0]
-    .onSelect();
-  expect(h.push).toHaveBeenLastCalledWith(
-    `/modules/workspace?clientId=${otherId}&view=rich-newsletter`,
-  );
 });
 
 it.each([undefined, otherId])(
-  "keeps both normal newsletter entries and the gallery reachable in scope %s",
+  "uses the canonical newsletter entry from both workflow and new document in scope %s",
   (clientId) => {
     const query = clientId ? `clientId=${clientId}` : "";
-    const destination = clientId ? "newsletter" : "rich-newsletter";
+    const destination = "newsletter";
     const openLastDestination = () => {
       const url = new URL(
         h.push.mock.lastCall![0],
@@ -403,13 +387,8 @@ it.each([undefined, otherId])(
       .find(([props]) => props.children === "Start")![0]
       .onClick();
     expect(openLastDestination().searchParams.get("view")).toBe(destination);
-    h.buttons.mock.calls
-      .find(([props]) => props.children === "Template gallery")![0]
-      .onClick();
-    const gallery = openLastDestination();
-    expect(gallery.searchParams.get("view")).toBe("newsletter");
-    render(gallery.searchParams.toString());
-    expect(h.newsletter.mock.lastCall![0].initialClientId).toBe(clientId);
+    render(openLastDestination().searchParams.toString());
+    expect(h.newsletter).toHaveBeenCalled();
     render(query);
     h.buttons.mock.calls
       .find(([props]) => props.children === "+ New document")![0]
@@ -419,10 +398,6 @@ it.each([undefined, otherId])(
       .find(([props]) => props.children === "Newsletter")![0]
       .onClick();
     expect(openLastDestination().searchParams.get("view")).toBe(destination);
-    h.buttons.mock.calls
-      .find(([props]) => props.children === "Newsletter template gallery")![0]
-      .onClick();
-    expect(openLastDestination().searchParams.get("view")).toBe("newsletter");
     expect(h.create).not.toHaveBeenCalled();
     expect(h.update).not.toHaveBeenCalled();
   },
@@ -441,7 +416,6 @@ it.each([
     h.wizard,
     h.newsletter,
     h.prospect,
-    h.rich,
     h.copy,
     h.library,
     h.push,
