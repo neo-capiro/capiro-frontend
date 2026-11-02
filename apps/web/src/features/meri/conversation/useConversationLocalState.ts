@@ -50,18 +50,19 @@ function useDraftState(
   accessLost: boolean,
   scope?: TabScope,
 ) {
-  const owner = useMemo(
-    () => draftOwner(scope, accessLost),
+  // Callers build the scope per render; the owner and the effects below key on its fields, never on
+  // its identity, so a render can never re-run them by itself (an effect that resets the owner and
+  // thereby re-renders would otherwise loop).
+  const stableScope = useMemo(
+    () => scope,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      scope?.tenantId,
-      scope?.actorId,
-      scope?.clientId,
-      scope?.conversationId,
-      accessLost,
-    ],
+    [scope?.tenantId, scope?.actorId, scope?.clientId, scope?.conversationId],
   );
-  const previous = useRef({ owner, scoped: !!scope });
+  const owner = useMemo(
+    () => draftOwner(stableScope, accessLost),
+    [stableScope, accessLost],
+  );
+  const previous = useRef({ owner, scoped: !!stableScope });
   useSyncExternalStore(owner.subscribe, owner.snapshot, owner.snapshot);
   useEffect(() => {
     const prior = previous.current;
@@ -73,20 +74,20 @@ function useDraftState(
         /* Text stays mounted; commands fail closed. */
       }
     }
-    previous.current = { owner, scoped: !!scope };
-  }, [owner, scope]);
+    previous.current = { owner, scoped: !!stableScope };
+  }, [owner, stableScope]);
   useEffect(() => {
     if (accessLost) owner.reset();
     // A context of another scope (a client switch or a port still bound to the previous route) is
     // not a storage failure: this owner is replaced with the scope, so it must not lock itself.
-    else if (context && contextInScope(context, scope)) {
+    else if (context && contextInScope(context, stableScope)) {
       try {
         owner.select(context);
       } catch {
         owner.fail();
       }
     }
-  }, [context, accessLost, owner, scope]);
+  }, [context, accessLost, owner, stableScope]);
   const edit = useCallback(
     (value: string) => {
       if (accessLost) return;
