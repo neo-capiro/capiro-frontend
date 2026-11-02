@@ -13,6 +13,8 @@ import {
 import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 
 type Session = ReturnType<typeof useConversationSession>;
+/** The conversation session is being issued (or its run controls are mounting): a message can wait for it. */
+export const CONNECTING_TO_MERI = "Connecting to Meri.";
 
 /** Keep the selected draft editable while sends wait for current session/run controls. */
 export function pendingConversationComposer(
@@ -31,7 +33,7 @@ export function pendingConversationComposer(
         (status === "idle" ||
         status === "connecting" ||
         (status === "ready" && !session.latestTarget)
-          ? "Connecting to Meri."
+          ? CONNECTING_TO_MERI
           : session.connection.unreachable
             ? controlUnreachableMessage
             : "Reconnect to Meri before sending.")),
@@ -108,21 +110,20 @@ function ConnectionStatus({
 }
 
 /**
- * The access check was not answered, so nothing is known to be refused: the transcript stays on screen
- * and only sending waits for a fresh check. A renewal that control did not answer (5xx) is asked again on
- * the backed-off reconnect schedule as well; an unanswered access check (401) keeps the manual check only.
- * A real refusal replaces the view instead (ConnectionStatus).
+ * A renewal that control did not answer (5xx: an authority that did not answer, or control unreachable), so
+ * nothing is known to be refused: the transcript stays on screen, only sending waits, and the renewal is asked
+ * again on the connection's backed-off schedule. Control answers 401 only for a definitive refusal, which
+ * replaces the view instead (ConnectionStatus).
  */
 export function UnverifiedAccessNotice({ session }: { session: Session }) {
   const { connection } = session;
   // The automatic schedule is the connection's own (useConversationConnection); this is presentation.
-  const unreachable = !!connection.unreachable;
   return (
     <section role="status" className={styles.accessNotice}>
       <p className={styles.muted}>
-        {unreachable
-          ? "Capiro is not reachable right now. Everything above is unchanged; we'll reconnect automatically and sending resumes once the connection is back."
-          : "Meri could not confirm your access to this conversation just now. Everything above is unchanged; sending resumes once access is checked."}
+        Capiro is not reachable right now. Everything above is unchanged;
+        we&apos;ll reconnect automatically and sending resumes once the
+        connection is back.
       </p>
       <Button
         type="button"
@@ -134,7 +135,7 @@ export function UnverifiedAccessNotice({ session }: { session: Session }) {
           session.history.refresh();
         }}
       >
-        {unreachable ? "Retry now" : "Check access again"}
+        Retry now
       </Button>
     </section>
   );

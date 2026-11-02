@@ -1,8 +1,17 @@
 "use client";
-import { useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useEffectEvent,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { useRunQuestion } from "./useRunQuestion";
 import { useComposerAttachments } from "../uploads/useComposerAttachments";
-import { pendingConversationComposer } from "./ConnectionPending";
+import {
+  CONNECTING_TO_MERI,
+  pendingConversationComposer,
+} from "./ConnectionPending";
+import type { LiveComposer } from "../MeriComposer";
 import type { ConversationComposerChannel } from "./conversation-composer";
 import type { useConversationSession } from "./useConversationSession";
 import { selectionAvailable } from "../model-selection/model-selection";
@@ -12,6 +21,75 @@ type Session = ReturnType<typeof useConversationSession>;
 /** Why Send waits while an attachment is still being checked. */
 export const ATTACHMENT_CHECK_BLOCKED =
   "Checking your attachment… You can remove it to send now.";
+
+/** How long one Enter waits for the conversation session before the reason it is not ready shows instead. */
+export const CONNECT_WAIT_MS = 20_000;
+
+/**
+ * Acceptance 2 Nov: after a reload the saved transcript shows before the conversation session is issued, and the
+ * first Enter in that window was refused ("Connecting to Meri.") while a second one sent. An Enter while connecting
+ * now waits as the one queued message: when the session's run controls mount it is handed to them (their own queue
+ * while the conversation is still being checked, otherwise sent), and if the session does not come within
+ * CONNECT_WAIT_MS, or connecting turns into another block, the queue lets go and says why.
+ */
+function useConnectingQueue(
+  pending: LiveComposer,
+  current: { controls: LiveComposer } | null,
+  draft: string,
+) {
+  const [queued, setQueued] = useState(false);
+  const [released, setReleased] = useState<{ reason: string; draft: string }>();
+  const [handoffs, setHandoffs] = useState(0);
+  const connecting = !current && pending.sendBlocked === CONNECTING_TO_MERI;
+  // Render-phase transitions: the run controls arrived (hand the message over once, after this render
+  // commits), or connecting became another block such as unreachable, access or storage (let go, say it).
+  if (queued && current) {
+    setQueued(false);
+    const live = current.controls;
+    if (live.onQueue || (!live.sendBlocked && !live.draftBlocked))
+      setHandoffs(handoffs + 1);
+    else setReleased({ reason: live.sendBlocked ?? live.draftBlocked!, draft });
+  } else if (queued && !connecting) {
+    setQueued(false);
+    setReleased({ reason: pending.sendBlocked ?? CONNECTING_TO_MERI, draft });
+  }
+  const handOff = useEffectEvent(() => {
+    const live = current?.controls;
+    if (live?.onQueue) live.onQueue();
+    else if (live && !live.sendBlocked && !live.draftBlocked) live.onSend();
+  });
+  useEffect(() => {
+    if (handoffs > 0) handOff();
+  }, [handoffs]);
+  useEffect(() => {
+    if (!queued) return;
+    const timer = setTimeout(() => {
+      setQueued(false);
+      setReleased({ reason: CONNECTING_TO_MERI, draft });
+    }, CONNECT_WAIT_MS);
+    return () => clearTimeout(timer);
+  }, [queued, draft]);
+  // A released reason stays until the person changes the text or queues again.
+  const notice =
+    released && released.draft === draft ? released.reason : undefined;
+  return {
+    pending: {
+      ...pending,
+      onQueue:
+        connecting && !queued && draft.trim()
+          ? () => {
+              setReleased(undefined);
+              setQueued(true);
+            }
+          : undefined,
+      queued: queued
+        ? { onCancel: () => setQueued(false), until: "Meri connects" }
+        : undefined,
+      ...(notice ? { notice } : {}),
+    } satisfies LiveComposer,
+    notice,
+  };
+}
 
 /**
  * The composer's session-bound controls, read once per mounted conversation so the compact composer
@@ -51,8 +129,16 @@ export function useComposerControls(
     !!session.continuation.busy;
   const selection =
     current?.controls.modelSelection ?? session.modelSelection ?? null;
-  const controls =
-    current?.controls ?? pendingConversationComposer(session, scope);
+  const connectingQueue = useConnectingQueue(
+    pendingConversationComposer(session, scope),
+    current,
+    session.draft,
+  );
+  const controls = current
+    ? connectingQueue.notice
+      ? { ...current.controls, notice: connectingQueue.notice }
+      : current.controls
+    : connectingQueue.pending;
   // The attachment slot follows the displayed conversation; a replaced port discards its results.
   const attachments = useComposerAttachments(
     current?.port ?? null,

@@ -40,22 +40,12 @@ it("a renewal control did not answer keeps the transcript notice, reconnects aut
   expect(html).toContain("Capiro is not reachable right now.");
   expect(html).toContain("Everything above is unchanged");
   expect(html).toContain("we'll reconnect automatically");
-  expect(html).not.toContain("could not confirm your access");
   expect(buttons).toHaveLength(1);
   expect(buttons[0]!.children).toBe("Retry now");
   buttons[0]!.onClick();
   expect(s.connection.resetReconnect).toHaveBeenCalledExactlyOnceWith();
   expect(s.connection.retry).toHaveBeenCalledExactlyOnceWith();
   expect(s.history.refresh).toHaveBeenCalledExactlyOnceWith();
-});
-
-it("an unanswered access check keeps the manual check alone", () => {
-  const html = renderToStaticMarkup(
-    createElement(UnverifiedAccessNotice, { session: session(false) }),
-  );
-  expect(html).toContain("could not confirm your access");
-  expect(html).not.toContain("reconnect automatically");
-  expect(buttons[0]!.children).toBe("Check access again");
 });
 
 it("the reconnect schedule retries only while control did not answer and no attempt is in flight", () => {
