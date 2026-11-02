@@ -1,5 +1,6 @@
 import { TaskDetailRefreshProbe } from "./TaskDetailRefreshProbe";
 import { ConversationHistoryList } from "../../src/features/meri/conversations/ConversationHistoryList";
+import { MeriConversationList } from "../../src/features/meri/conversations/MeriConversationList";
 import { SyntheticMeriCapabilities } from "./meri-capability-profile";
 import { ProposalRefreshProbe } from "./ProposalRefreshProbe";
 import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
@@ -76,6 +77,18 @@ function RoutedApp() {
   // Opened for a client, the list carries the production shell so its sidebar controls are
   // exercised; the bare list keeps the lifecycle probes' direct mount.
   if (path === "/meri/conversations") {
+    if (search.get("navigation-audit") === "1")
+      return (
+        <ProductShell
+          section="conversations"
+          conversationEnabled
+          firstChatBootstrapEnabled
+        >
+          <RequireSession>
+            <MeriConversationList enabled firstChatBootstrapEnabled />
+          </RequireSession>
+        </ProductShell>
+      );
     const list = (
       <RequireSession>
         <ConversationHistoryList />

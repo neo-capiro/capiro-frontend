@@ -1,9 +1,19 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ChevronDown } from "lucide-react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { PanelLeft } from "lucide-react";
+import { Button } from "@capiro/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTitle,
+} from "@capiro/ui/dialog";
+import { useMeriSidebarVisibility } from "./MeriSidebarVisibility";
+import { conversationSearchHref } from "../meri-conversations/conversation-navigation";
+import { researchRoute } from "../meri-conversations/research-context";
 import { useSelectedClient } from "../session/SelectedClient";
 import { scopedHref } from "../session/client-route";
 import { useMeriCapabilities } from "../meri-resources/CapabilityContext";
@@ -139,7 +149,10 @@ function MobileWorkflowLinks({
   fixture,
   clientId,
   onNavigate,
-}: Pick<MenuProps, "fixture" | "clientId" | "onNavigate">) {
+  preferences = false,
+}: Pick<MenuProps, "fixture" | "clientId" | "onNavigate"> & {
+  preferences?: boolean;
+}) {
   const pathname = usePathname();
   const capabilities = useMeriCapabilities();
   return (
@@ -150,38 +163,42 @@ function MobileWorkflowLinks({
           ["taskUpdates", "Task updates", "draft-client-task"],
           ["preferences", "Preferences", "personal-preferences"],
         ] as const
-      ).map(([id, label, screen]) => {
-        const href = fixture
-          ? `/meri/fixture/${screen}`
-          : meriCapabilityHref(id, capabilities);
-        return href ? (
-          <Link
-            key={id}
-            href={scopedHref(href, clientId)}
-            className={styles.mobileItem}
-            aria-current={pathname === href ? "page" : undefined}
-            onClick={onNavigate}
-            title={fixture ? "Open disconnected synthetic fixture" : undefined}
-          >
-            {label}
-          </Link>
-        ) : (
-          <UnavailableControlReason
-            key={id}
-            label={label}
-            reason={capabilities[id].reason}
-          >
-            <button
-              type="button"
+      )
+        .filter(([id]) => (id === "preferences") === preferences)
+        .map(([id, label, screen]) => {
+          const href = fixture
+            ? `/meri/fixture/${screen}`
+            : meriCapabilityHref(id, capabilities);
+          return href ? (
+            <Link
+              key={id}
+              href={scopedHref(href, clientId)}
               className={styles.mobileItem}
-              disabled
-              title={capabilities[id].reason}
+              aria-current={pathname === href ? "page" : undefined}
+              onClick={onNavigate}
+              title={
+                fixture ? "Open disconnected synthetic fixture" : undefined
+              }
             >
               {label}
-            </button>
-          </UnavailableControlReason>
-        );
-      })}
+            </Link>
+          ) : (
+            <UnavailableControlReason
+              key={id}
+              label={label}
+              reason={capabilities[id].reason}
+            >
+              <button
+                type="button"
+                className={styles.mobileItem}
+                disabled
+                title={capabilities[id].reason}
+              >
+                {label}
+              </button>
+            </UnavailableControlReason>
+          );
+        })}
     </>
   );
 }
@@ -200,6 +217,18 @@ function MobileMenu({
 }: MenuProps) {
   const pathname = usePathname();
   const capabilities = useMeriCapabilities();
+  const params = useSearchParams();
+  const historyHref = fixture
+    ? "/meri/fixture/conversation-history"
+    : conversationSearchHref(
+        researchRoute(params)
+          ? undefined
+          : params.getAll("scope").length === 1 &&
+              params.get("scope") === "general" &&
+              !params.has("clientId")
+            ? null
+            : clientId,
+      );
   const current = (href: string, itemSection?: MeriSection) =>
     section
       ? itemSection === section
@@ -208,61 +237,112 @@ function MobileMenu({
         : href === pathname;
   return (
     <nav id={id} className={styles.mobileMenu} aria-label="Meri sections">
-      <MobileNewConversation
-        assetSet={assetSet}
-        fixture={fixture}
-        conversationEnabled={conversationEnabled}
-        firstChatBootstrapEnabled={firstChatBootstrapEnabled}
-        onNavigate={onNavigate}
-      />
-      {destinations.map((item) => {
-        const href = destinationHref(item, fixture, capabilities);
-        const label = destinationLabel(item.label, pendingApprovals);
-        const icon = <DesignIcon name={item.icon} assetSet={assetSet} />;
-        return href ? (
+      <div className={styles.mobilePrimary}>
+        <MobileNewConversation
+          assetSet={assetSet}
+          fixture={fixture}
+          conversationEnabled={conversationEnabled}
+          firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+          onNavigate={onNavigate}
+        />
+        {fixture || capabilities.conversations.status === "on" ? (
           <Link
-            key={item.label}
-            href={scopedHref(href, clientId)}
-            className={styles.mobileItem}
-            aria-current={current(href, item.section) ? "page" : undefined}
+            href={historyHref}
+            className={styles.mobileSearch}
             onClick={onNavigate}
           >
-            {icon}
-            {label}
+            <DesignIcon name="search" assetSet={assetSet} />
+            Search conversations
           </Link>
         ) : (
-          <UnavailableControlReason
-            key={item.label}
-            label={label}
-            reason={unavailableDestinationTitle(item, capabilities)}
+          <Button
+            disabled
+            className={styles.mobileSearch}
+            title={capabilities.conversations.reason}
           >
-            <button
-              type="button"
-              className={styles.mobileItem}
-              disabled
-              title={unavailableDestinationTitle(item, capabilities)}
-            >
-              {icon}
-              {label}
-            </button>
-          </UnavailableControlReason>
-        );
-      })}
-      <MobileWorkflowLinks
-        fixture={fixture}
-        clientId={clientId}
-        onNavigate={onNavigate}
-      />
-      <MobileRecents
-        fixture={fixture}
-        conversationEnabled={conversationEnabled}
-        onNavigate={onNavigate}
-      />
+            Search conversations
+          </Button>
+        )}
+      </div>
+      <div className={styles.mobileScroll}>
+        <h2 className={styles.mobileRecentLabel}>Library</h2>
+        {destinations
+          .filter((item) => item.section !== "conversations")
+          .map((item) => {
+            const href = destinationHref(item, fixture, capabilities);
+            const label = destinationLabel(item.label, pendingApprovals);
+            const icon = <DesignIcon name={item.icon} assetSet={assetSet} />;
+            return href ? (
+              <Link
+                key={item.label}
+                href={scopedHref(href, clientId)}
+                className={styles.mobileItem}
+                aria-current={current(href, item.section) ? "page" : undefined}
+                onClick={onNavigate}
+              >
+                {icon}
+                {label}
+              </Link>
+            ) : (
+              <UnavailableControlReason
+                key={item.label}
+                label={label}
+                reason={unavailableDestinationTitle(item, capabilities)}
+              >
+                <button
+                  type="button"
+                  className={styles.mobileItem}
+                  disabled
+                  title={unavailableDestinationTitle(item, capabilities)}
+                >
+                  {icon}
+                  {label}
+                </button>
+              </UnavailableControlReason>
+            );
+          })}
+        <MobileWorkflowLinks
+          fixture={fixture}
+          clientId={clientId}
+          onNavigate={onNavigate}
+        />
+        <MobileRecents
+          fixture={fixture}
+          conversationEnabled={conversationEnabled}
+          onNavigate={onNavigate}
+        />
+        {fixture || capabilities.conversations.navigation === "on" ? (
+          <Link
+            href={historyHref.replace(/#.*$/, "")}
+            className={styles.mobileItem}
+            onClick={onNavigate}
+          >
+            <DesignIcon name="conversations" assetSet={assetSet} />
+            All conversations
+          </Link>
+        ) : (
+          <Button
+            disabled
+            className={styles.mobileItem}
+            title={capabilities.conversations.reason}
+          >
+            All conversations
+          </Button>
+        )}
+      </div>
+      <div className={styles.mobilePreferences}>
+        <MobileWorkflowLinks
+          fixture={fixture}
+          clientId={clientId}
+          onNavigate={onNavigate}
+          preferences
+        />
+      </div>
     </nav>
   );
 }
 
-/** Figma 10.19 phone "Workspace menu" disclosure; the sidebar is hidden at this width. */
+/** Tablet/phone Workspace drawer; the existing dialog owns focus containment and Escape. */
 export function MeriMobileNavigation({
   assetSet = "home",
   fixture = false,
@@ -279,41 +359,81 @@ export function MeriMobileNavigation({
   pendingApprovals?: number | undefined;
 }) {
   const capabilities = useMeriCapabilities();
-  const pathname = usePathname();
   const selected = useSelectedClient();
   const clientId =
     selected.state === "authorized-client" ? selected.client.id : undefined;
-  // The menu belongs to the page it was opened on; navigating closes it.
-  const [openOn, setOpenOn] = useState<string | null>(null);
-  const open = openOn === pathname;
-  const menuId = useId();
+  const {
+    workspaceOpen: open,
+    setWorkspaceOpen,
+    workspaceId,
+  } = useMeriSidebarVisibility();
   const toggle = useRef<HTMLButtonElement>(null);
+  const opener = useRef<HTMLElement | null>(null);
+  const close = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (!open) return;
-    const close = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      setOpenOn(null);
-      toggle.current?.focus();
+    const desktop = window.matchMedia("(min-width: 1101px)");
+    const dismissOnDesktop = () => {
+      if (desktop.matches) setWorkspaceOpen(false);
     };
-    document.addEventListener("keydown", close);
-    return () => document.removeEventListener("keydown", close);
-  }, [open]);
+    desktop.addEventListener("change", dismissOnDesktop);
+    return () => desktop.removeEventListener("change", dismissOnDesktop);
+  }, [open, setWorkspaceOpen]);
   return (
-    <div className={styles.mobileNavigation}>
-      <button
-        ref={toggle}
-        type="button"
-        className={styles.menuToggle}
-        aria-expanded={open}
-        aria-controls={menuId}
-        onClick={() => setOpenOn(open ? null : pathname)}
+    <Dialog open={open} onOpenChange={setWorkspaceOpen}>
+      <div className={styles.mobileNavigation}>
+        <Button
+          ref={toggle}
+          type="button"
+          className={styles.menuToggle}
+          variant="outline"
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          aria-controls={workspaceId}
+          onClick={() => setWorkspaceOpen(!open)}
+        >
+          <PanelLeft size={16} aria-hidden />
+          Workspace menu
+        </Button>
+      </div>
+      <DialogContent
+        id={workspaceId}
+        className={styles.workspaceDrawer}
+        showCloseButton={false}
+        aria-describedby={undefined}
+        onOpenAutoFocus={(event) => {
+          event.preventDefault();
+          opener.current =
+            document.activeElement instanceof HTMLElement
+              ? document.activeElement
+              : null;
+          close.current?.focus();
+        }}
+        onCloseAutoFocus={(event) => {
+          event.preventDefault();
+          const target = opener.current;
+          const visible = target?.isConnected && target.getClientRects().length;
+          (visible
+            ? target
+            : document.getElementById("meri-sidebar-toggle")
+          )?.focus({ preventScroll: true });
+        }}
       >
-        <ChevronDown aria-hidden />
-        Workspace menu
-      </button>
-      {open ? (
+        <div className={styles.workspaceHeading}>
+          <DialogTitle className={styles.workspaceTitle}>Workspace</DialogTitle>
+          <DialogClose asChild>
+            <Button
+              ref={close}
+              variant="ghost"
+              className={styles.workspaceClose}
+              aria-label="Close Workspace"
+            >
+              Close
+            </Button>
+          </DialogClose>
+        </div>
         <MobileMenu
-          id={menuId}
+          id={`${workspaceId}-sections`}
           assetSet={assetSet}
           fixture={fixture}
           conversationEnabled={
@@ -326,9 +446,9 @@ export function MeriMobileNavigation({
           section={section}
           pendingApprovals={pendingApprovals}
           clientId={clientId}
-          onNavigate={() => setOpenOn(null)}
+          onNavigate={() => setWorkspaceOpen(false)}
         />
-      ) : null}
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

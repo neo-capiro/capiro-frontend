@@ -21,6 +21,10 @@ export function SyntheticMeriCapabilities({
           actions: true,
           taskUpdates: true,
           conversationApprovals: true,
+          approvals: search.get("navigation-audit") === "1",
+          routines: search.get("navigation-audit") === "1",
+          runs: search.get("navigation-audit") === "1",
+          dataAccess: search.get("navigation-audit") === "1",
           memory:
             sessionStorage.getItem("memory-owner-review-enabled") === "true",
           preferences: true,
