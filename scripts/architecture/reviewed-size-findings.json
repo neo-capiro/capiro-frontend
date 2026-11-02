@@ -7786,8 +7786,8 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/SavedNewsletterSession.tsx",
     "kind": "function",
     "symbol": "SavedNewsletterSession",
-    "fingerprint": "1e665604b4d71c6c203f13a232ce459fdcf0dd8379274afbbceb5af7e38fb776",
-    "reason": "Original-format session adapter for the canonical Newsletter workspace. Local selection/history and dialog state compose the existing atomic save, client association, comments and staging owners. It never creates a basic draft or silently migrates a saved draft. Keeping the atomic owner mounted during explicit rich-copy review preserves unsaved original-format input.",
+    "fingerprint": "4855bc2800db64fb4ac0edb8a87fdbe9bb05a82d1f9b37bc1ccd9525b97d2681",
+    "reason": "Original-format session adapter for the canonical Newsletter workspace. Local selection/history and dialog state compose the existing atomic save, client association, comments and staging owners. It never creates a basic draft or silently migrates a saved draft. Keeping the atomic owner mounted during explicit rich-copy review preserves unsaved original-format input. R1 adds only the existing bounded canvasScroll wrapper around the editable saved paper; toolbar, inspector and atomic owner remain unchanged.",
     "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
     "reviewedOn": "2026-11-02"
   },

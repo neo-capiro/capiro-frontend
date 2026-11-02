@@ -8,6 +8,8 @@ import {
 import { createRoot } from "react-dom/client";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
+import { readFileSync } from "node:fs";
+import workspace from "../../src/features/modules/workspace/rich-newsletter/workspace.module.css";
 import { WorkspaceScreen } from "../../src/features/modules/workspace/WorkspaceScreen";
 import { createRichDocumentController } from "../../src/features/modules/workspace/rich-newsletter/document-controller";
 import { createRichWriteJournal } from "../../src/features/modules/workspace/rich-newsletter/write-journal";
@@ -298,6 +300,65 @@ it("opens a saved basic draft through actual dispatch and saves its original ID/
     clientId: null,
   });
   expect(h.record).toEqual(before);
+  expect(h.fetcher).not.toHaveBeenCalled();
+});
+
+it("contains a long saved draft in the shared scroll viewport while toolbar and inspector stay outside it", async () => {
+  h.query = `draftId=${h.record!.id}`;
+  h.record!.documents[0]!.body.newsletter!.blocks = Array.from(
+    { length: 100 },
+    (_, index) => ({
+      id: `saved-block-${index}`,
+      kind: "paragraph",
+      text: `Saved paragraph ${index}\n${"Long stored content. ".repeat(25)}`,
+    }),
+  );
+  await mount();
+  const main = document.querySelector("main")!;
+  const paper = main.querySelector("article")!;
+  const viewport = paper.parentElement!;
+  expect(viewport.classList.contains(workspace.canvasScroll!)).toBe(true);
+  expect(viewport.parentElement).toBe(main);
+  expect(
+    viewport.querySelectorAll('[aria-label="Select paragraph block"]'),
+  ).toHaveLength(100);
+  expect(viewport.contains(document.querySelector('[aria-label="Undo"]'))).toBe(
+    false,
+  );
+  expect(
+    viewport.contains(
+      document.querySelector('[aria-label="Newsletter settings"]'),
+    ),
+  ).toBe(false);
+  // JSDOM has no layout/scroll geometry. Verify the real shared CSS contract
+  // and DOM ownership, without pretending this is rendered browser acceptance.
+  const css = readFileSync(
+    new URL(
+      "../../src/features/modules/workspace/rich-newsletter/workspace.module.css",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+  const rule = css.match(/\.canvasScroll\s*\{([^}]+)\}/)![1]!;
+  expect(rule).toMatch(/overflow:\s*auto\s*;/);
+  expect(rule).toMatch(/flex:\s*1\s*;/);
+  await act(async () =>
+    viewport
+      .querySelectorAll<HTMLElement>(
+        '[aria-label="Select paragraph block"]',
+      )[99]!
+      .click(),
+  );
+  expect(
+    document.querySelector<HTMLTextAreaElement>("textarea")?.value,
+  ).toContain("Saved paragraph 99");
+  await click("Move up");
+  await click("Save draft");
+  const blocks =
+    h.save.mock.lastCall![0].body.documents[0].body.newsletter.blocks;
+  expect(blocks).toHaveLength(100);
+  expect(blocks[98].id).toBe("saved-block-99");
+  expect(blocks[99].id).toBe("saved-block-98");
   expect(h.fetcher).not.toHaveBeenCalled();
 });
 

@@ -205,16 +205,18 @@ export function SavedNewsletterSession({
             />
           }
         >
-          <NewsletterPaper
-            body={input.body}
-            mobile={mobile}
-            selectedId={selectedId}
-            select={(id) => {
-              select(id);
-              setDetails(false);
-              setRail("Blocks");
-            }}
-          />
+          <div className={workspace.canvasScroll}>
+            <NewsletterPaper
+              body={input.body}
+              mobile={mobile}
+              selectedId={selectedId}
+              select={(id) => {
+                select(id);
+                setDetails(false);
+                setRail("Blocks");
+              }}
+            />
+          </div>
         </NewsletterWorkbench>
       </NewsletterWorkspace>
       <Modal
