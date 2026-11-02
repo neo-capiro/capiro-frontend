@@ -114,7 +114,8 @@ export function ConversationHistoryList({
   const [chosenClient, setClient] = useState<string | null>(
     initialClient === GENERAL_CLIENT_FILTER ? GENERAL_CLIENT_FILTER : null,
   );
-  const [selectedId, setSelectedId] = useState<string | undefined>();
+  // Undefined keeps initial selection; null is an explicit Clear until a row is chosen.
+  const [selectedId, setSelectedId] = useState<string | null | undefined>();
   const search = useRef<HTMLInputElement>(null);
   useEffect(() => {
     const focusSearch = () => {
@@ -160,13 +161,16 @@ export function ConversationHistoryList({
         .filter((name) => name !== GENERAL_CLIENT_FILTER),
     ),
   ];
-  const selected = visible.find((row) => row.id === selectedId) ?? visible[0];
+  const selected =
+    selectedId === null
+      ? undefined
+      : (visible.find((row) => row.id === selectedId) ?? visible[0]);
   const filtered = Boolean(title.trim() || client || statusKey);
   const clear = () => {
     setTitle("");
     setClient("");
     setStatusKey("");
-    setSelectedId(undefined);
+    setSelectedId(null);
     search.current?.focus({ preventScroll: true });
   };
   return (
@@ -203,7 +207,7 @@ export function ConversationHistoryList({
           value={statusKey}
           onChange={(value) => {
             setStatusKey(value as keyof typeof STATUS_FILTER);
-            setSelectedId(undefined);
+            setSelectedId((value) => (value === null ? null : undefined));
           }}
         />
       </div>
