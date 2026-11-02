@@ -78,15 +78,26 @@ function useSessionRenewal({
   const accessLost = revoked || (denied && status !== "ready");
 
   const renewed = useRef<string | null>(null);
+  // The binding whose credential control refused and this tab renewed once; an ordinary renewal clears it.
+  const refusedOnce = useRef<string | null>(null);
   useEffect(() => {
     const last = bound.last();
     if (status !== "expired" || !last) return;
     const reason = host.getExpirationReason();
-    if (reason !== "renewal" && reason !== "expiry") return;
+    if (reason !== "renewal" && reason !== "expiry" && reason !== "refused")
+      return;
     const key = JSON.stringify(last.context) + last.at;
     if (renewed.current === key) return;
     renewed.current = key;
-    reopen({ renewal: reason === "renewal" });
+    const binding = JSON.stringify(last.context);
+    if (reason === "refused") {
+      // Control no longer held the credential (SESSION_REFUSED on the event stream): renew it once for the same
+      // exact binding; issuance rechecks identity and membership and its own 403 still hides the conversation. The
+      // renewed credential refused again before an ordinary renewal is access lost, never another renewal.
+      if (refusedOnce.current === binding) return host.revoke();
+      refusedOnce.current = binding;
+    } else refusedOnce.current = null;
+    reopen({ renewal: reason !== "expiry" });
   }, [status, reopen, bound, host]);
 
   return {
@@ -276,7 +287,8 @@ export function useConversationConnection(
     renewing:
       !storageError &&
       ((state.status === "expired" &&
-        host.getExpirationReason() === "renewal") ||
+        (host.getExpirationReason() === "renewal" ||
+          host.getExpirationReason() === "refused")) ||
         (!!opening.renewal &&
           (state.status === "idle" || state.status === "connecting"))),
     storageError,

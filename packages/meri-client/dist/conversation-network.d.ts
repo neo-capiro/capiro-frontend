@@ -10,6 +10,14 @@ export interface ConversationLifetime {
     signal: AbortSignal;
     isCurrent: () => boolean;
     onAccessLost: () => void;
+    /**
+     * The session owner's existing early renewal: it ends this session so a fresh one is issued for the same exact
+     * binding, and answers whether it did. An event-stream (re)connect asks for it instead of dispatching when the
+     * credential is about to expire ("near-expiry", declined while the owner has a write in flight), and when control
+     * answers the stream 403 SESSION_REFUSED ("refused": control no longer holds this credential). Omitted, both keep
+     * the previous behaviour: dispatch, and revoke on that 403.
+     */
+    requestRenewal?: (reason: "near-expiry" | "refused") => boolean;
     now?: () => number;
     fetchImpl?: typeof fetch;
     /** Trusted connection configuration; omitted means the current browser origin. */
@@ -47,6 +55,12 @@ export declare class ConversationUnavailable extends Error {
  * the same request may be retried; it is never a revocation. Control's own 403 still revokes.
  */
 export declare const EDGE_REFUSED = "request-refused-at-edge";
+/**
+ * An event-stream (re)connect this close to the credential's expiry asks the session owner to renew first: control
+ * refuses a credential it no longer holds (SESSION_REFUSED) before any recheck, and the browser's clock is not
+ * control's. Never more than a quarter of the issued lifetime, so a fresh session is never "near expiry".
+ */
+export declare const RECONNECT_RENEW_LEAD_MS = 10000;
 /** Owns only this connection's observation resources, never durable cancellation. */
 export declare class ConversationNetwork {
     private readonly onDispose;
@@ -57,11 +71,17 @@ export declare class ConversationNetwork {
     private stream;
     private revoked;
     private readonly options;
+    private readonly renewLeadMs;
     readonly origin: string;
     private readonly credentialHeader;
     constructor(options: ConversationLifetime, onDispose: () => void);
     check: () => void;
     revoke(): void;
+    /**
+     * Asks the session owner for its early renewal (see `ConversationLifetime.requestRenewal`). True when it ended this
+     * session for a fresh one; this connection is then disposed and must not dispatch.
+     */
+    private renew;
     dispose: () => void;
     stopObservation(): void;
     private lease;

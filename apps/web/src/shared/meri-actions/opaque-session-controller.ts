@@ -11,6 +11,12 @@ type Options<P, R extends SessionLifetime> = {
     session: R;
     signal: AbortSignal;
     onAccessLost: () => void;
+    /**
+     * The early renewal below, on the port's request: "near-expiry" ends the session for a fresh one unless the
+     * port is busy (answers false then; the renewal timer and the hard cap still apply), "refused" (control no
+     * longer holds the credential) always does. True when this session ended for renewal.
+     */
+    requestRenewal: (reason: "near-expiry" | "refused") => boolean;
     isCurrent: () => boolean;
     now: () => number;
   }) => P;
@@ -48,7 +54,11 @@ const transientIssuance = (error: unknown) =>
     error.status === 429 ||
     error.status >= 500);
 const defaultRetryDelaysMs = Object.freeze([1_000, 3_000]);
-type ExpirationReason = "renewal" | "expiry" | "access-lost";
+/**
+ * "refused": control refused the credential itself (SESSION_REFUSED) while it was still within its lifetime. The
+ * owner renews it once for the same binding; a second refusal before an ordinary renewal is access lost.
+ */
+export type ExpirationReason = "renewal" | "expiry" | "refused" | "access-lost";
 
 /** Owns one in-memory connection and observation lifetime; never admits a run. */
 export class SessionLifetimeController<
@@ -164,21 +174,28 @@ export class SessionLifetimeController<
         this.clear();
         this.publish({ status: "expired" });
       };
+      const busy = this.options.busy;
+      let created: P | undefined;
       const port = this.options.createPort({
         session,
         signal: lifetime.signal,
         // The port's own expiry timer can run before this owner's timer.
         onAccessLost: () =>
           expire(this.now() >= session.expiresAtMs ? "expiry" : "access-lost"),
+        requestRenewal: (reason) => {
+          if (!current() || !created || this.port !== created) return false;
+          if (reason === "near-expiry" && busy?.(created)) return false;
+          expire(reason === "refused" ? "refused" : "renewal");
+          return true;
+        },
         isCurrent: () => this.clientAvailable,
         now: this.now,
       });
-      this.port = port;
+      this.port = created = port;
       this.expiry = setTimeout(
         () => expire("expiry"),
         session.expiresAtMs - this.now(),
       );
-      const busy = this.options.busy;
       const renew = () => {
         if (!current()) return;
         if (busy?.(port)) this.renewal = setTimeout(renew, RENEW_RECHECK_MS);
