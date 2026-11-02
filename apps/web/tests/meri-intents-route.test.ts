@@ -57,3 +57,38 @@ it("forwards the native Clerk session token, never the capiro template token", a
     new Headers(fetcher.mock.calls[0]![1]!.headers).get("authorization"),
   ).toBe("Bearer synthetic-native-bearer");
 });
+
+/**
+ * The approvals badge reads its count from the same native-auth family as the inbox page.
+ * It used to miss every branch in the route, fall through to the list/decide adapter and be
+ * refused as an unknown operation (404 FRONTEND_INTENTS_UNAVAILABLE), so the badge never
+ * loaded a number even with approvals enabled.
+ */
+it("forwards the badge count read instead of refusing it as an unknown operation", async () => {
+  for (const [key, value] of Object.entries(env)) vi.stubEnv(key, value);
+  const getToken = vi.fn(async () => "synthetic-native-bearer");
+  clerk.auth.mockResolvedValue({ userId: "synthetic-user", getToken });
+  const fetcher = vi.fn<typeof fetch>(async () =>
+    Response.json(
+      { open: 0, checkedAt: "2026-11-02T12:00:00.000Z" },
+      { status: 200 },
+    ),
+  );
+  vi.stubGlobal("fetch", fetcher);
+  const response = await POST(
+    new Request(`${origin}/api/conversations/intents/inbox-count`, {
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+        Origin: origin,
+        [actionSessionHeader]: `action_session_${"s".repeat(43)}`,
+      },
+    }),
+    { params: Promise.resolve({ operation: "inbox-count" }) },
+  );
+  expect(response.status).toBe(200);
+  expect(fetcher.mock.calls[0]![0]).toBe(
+    `${env.MERI_API_BASE_URL}/api/conversations/intents/inbox-count`,
+  );
+});

@@ -35,8 +35,23 @@ export function coreSessionAuthentication(
   method: string,
   path: string,
 ): "clerk-session" | undefined {
+  // The strategy aggregate binds the caller's current session (`scope: actor`, asOf/observedAt
+  // from the request) and the strategy service answers 503 to the capiro template credential,
+  // which carries no Clerk session id. Measured against the preview strategy service: the same
+  // GET is 200 with the session credential and 503 with the template one, while the plan list
+  // accepts both — so this is the one strategy path that needs the session.
+  if (
+    service === "strategy" &&
+    method === "GET" &&
+    path === "/strategies/metrics/active"
+  )
+    return "clerk-session";
   if (service !== "core") return undefined;
-  if (/^\/capiro-admin\/impersonate(?:\/(?:end|[0-9a-f-]{36})(?:\/workspace)?)?$/.test(path))
+  if (
+    /^\/capiro-admin\/impersonate(?:\/(?:end|[0-9a-f-]{36})(?:\/workspace)?)?$/.test(
+      path,
+    )
+  )
     return "clerk-session";
   // Saved layouts require Core's current-session proof on every configured target.
   if (path === "/me/portfolio-layout" && (method === "GET" || method === "PUT"))

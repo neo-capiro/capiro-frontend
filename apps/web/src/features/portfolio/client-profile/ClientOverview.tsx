@@ -98,8 +98,9 @@ export function ClientOverview({
                   </span>
                 </div>
                 <small>
-                  {clientSectorLabel(value) ?? "Sector not specified"}
-                  {location && ` · ${location}`}
+                  {clientSectorLabel(value)
+                    ? `${clientSectorLabel(value)}${location ? ` · ${location}` : ""}`
+                    : "Sector not specified"}
                   {website && (
                     <>
                       {" "}
