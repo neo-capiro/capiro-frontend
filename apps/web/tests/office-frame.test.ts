@@ -122,7 +122,7 @@ describe("CODE frame channel", () => {
       f.messages.filter((m) => m.MessageId === "Action_Save"),
     ).toHaveLength(1);
   });
-  it("renewal sends both token and absolute TTL and never stores or publishes a document", async () => {
+  it("renewal sends the token with the zero TTL and never stores or publishes a document", async () => {
     const f = fixture();
     f.ready();
     await vi.advanceTimersByTimeAsync(30_000);
@@ -132,14 +132,24 @@ describe("CODE frame channel", () => {
       expiresAtMs: Date.now() + 60_000,
       fields: {
         access_token: "synthetic-token",
-        access_token_ttl: String(Date.now() + 60_000),
+        access_token_ttl: "0",
       },
     } as OfficeLaunch;
     f.owner.renew(launch);
     expect(f.messages.at(-1)).toMatchObject({
       MessageId: "Reset_Access_Token",
-      Values: { token: "synthetic-token", ttl: launch.fields.access_token_ttl },
+      Values: { token: "synthetic-token", ttl: "0" },
     });
+    // A renewal carrying a real TTL would restart CODE's own countdown; it is refused.
+    expect(() =>
+      f.owner.renew({
+        ...launch,
+        fields: {
+          ...launch.fields,
+          access_token_ttl: String(launch.expiresAtMs),
+        },
+      } as unknown as OfficeLaunch),
+    ).toThrow();
     await vi.advanceTimersByTimeAsync(30_000);
     expect(f.callbacks.unavailable).not.toHaveBeenCalled();
     await vi.advanceTimersByTimeAsync(30_000);
@@ -162,29 +172,23 @@ describe("CODE frame channel", () => {
     f.owner.dispose();
     expect(f.callbacks.unavailable).toHaveBeenCalledTimes(1);
   });
-  it("early CODE token warnings cannot create a renewal loop after each reset", async () => {
+  it("CODE token messages never drive renewal; the signed expiry arms one renewal request per token", async () => {
     const f = fixture();
     f.ready();
-    for (let n = 0; n < 20; n++)
-      f.receive("App_TokenExpiring", { Timeout: 60_000 });
+    for (const id of ["App_TokenExpiring", "App_TokenExpired"])
+      for (let n = 0; n < 20; n++) f.receive(id, { Timeout: 1_000 });
     expect(f.callbacks.renew).not.toHaveBeenCalled();
     await vi.advanceTimersByTimeAsync(30_000);
-    for (let n = 0; n < 20; n++)
-      f.receive("App_TokenExpiring", { Timeout: 30_000 });
     expect(f.callbacks.renew).toHaveBeenCalledTimes(1);
     const expiresAtMs = Date.now() + 180_000;
     f.owner.renew({
       editorOrigin: "https://office.example.test",
       expiresAtMs,
-      fields: {
-        access_token: "synthetic-renewal",
-        access_token_ttl: String(expiresAtMs),
-      },
+      fields: { access_token: "synthetic-renewal", access_token_ttl: "0" },
     } as OfficeLaunch);
-    for (let n = 0; n < 20; n++)
-      f.receive("App_TokenExpiring", { Timeout: 180_000 });
+    await vi.advanceTimersByTimeAsync(149_000);
     expect(f.callbacks.renew).toHaveBeenCalledTimes(1);
-    await vi.advanceTimersByTimeAsync(150_000);
+    await vi.advanceTimersByTimeAsync(1_000);
     expect(f.callbacks.renew).toHaveBeenCalledTimes(2);
   });
   it("malformed or oversized messages convey no ready, modified or Save acknowledgement", () => {

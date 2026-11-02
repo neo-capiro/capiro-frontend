@@ -58,8 +58,6 @@ export class CodeFrameChannel {
   private save: Save | null = null;
   private expiry: ReturnType<typeof setTimeout> | undefined;
   private renewal: ReturnType<typeof setTimeout> | undefined;
-  private renewAt = 0;
-  private renewalRequested = false;
   private readonly now: () => number;
   constructor(
     private readonly options: {
@@ -105,19 +103,11 @@ export class CodeFrameChannel {
       throw new Error("Editor token expired");
     clearTimeout(this.expiry);
     clearTimeout(this.renewal);
-    this.renewalRequested = false;
     const renewIn = Math.max(1, remaining - Math.min(30_000, remaining / 2));
-    this.renewAt = this.now() + renewIn;
     this.expiry = setTimeout(() => this.stop("expired"), remaining);
-    this.renewal = setTimeout(() => this.requestRenewal(), renewIn);
-  }
-  private requestRenewal() {
-    // CODE warns immediately for short tokens, including after every reset.
-    // The host's signed expiry determines one renewal window per token.
-    if (this.closed || this.renewalRequested || this.now() < this.renewAt)
-      return;
-    this.renewalRequested = true;
-    this.options.callbacks.renew();
+    // The launch form's TTL is the WOPI zero sentinel, so CODE runs no expiry countdown and posts no token warnings:
+    // this timer, armed from the signed expiry, is the one renewal request per token.
+    this.renewal = setTimeout(() => this.options.callbacks.renew(), renewIn);
   }
   /** Both fields are mandatory. Sending does not establish that CODE accepted them. */
   renew(launch: OfficeLaunch) {
@@ -125,7 +115,7 @@ export class CodeFrameChannel {
       !this.ready ||
       this.closed ||
       launch.editorOrigin !== this.options.origin ||
-      launch.fields.access_token_ttl !== String(launch.expiresAtMs)
+      launch.fields.access_token_ttl !== "0"
     )
       throw new Error("Editor renewal unavailable");
     if (
@@ -206,11 +196,6 @@ export class CodeFrameChannel {
       typeof fields.Modified === "boolean"
     )
       callbacks.modified(fields.Modified);
-    else if (
-      message.MessageId === "App_TokenExpiring" ||
-      message.MessageId === "App_TokenExpired"
-    )
-      this.requestRenewal();
     else if (message.MessageId === "UI_Save" && this.ready)
       callbacks.saveRequested();
     else if (message.MessageId === "UI_SaveAs" && this.ready)

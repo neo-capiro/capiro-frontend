@@ -93,7 +93,7 @@ function Harness() {
           method: "POST",
           fields: {
             access_token: `synthetic.${"a".repeat(43)}`,
-            access_token_ttl: String(expiresAtMs),
+            access_token_ttl: "0",
           },
           expiresAtMs,
         };
