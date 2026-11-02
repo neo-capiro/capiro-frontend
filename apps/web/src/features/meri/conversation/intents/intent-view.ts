@@ -5,6 +5,11 @@ import {
   legislativeDocumentFields,
   legislativeDocumentRow,
 } from "./legislative-document-view";
+import {
+  isOfficeEditProposal,
+  officeEditFields,
+  officeEditRow,
+} from "./office-edit-view";
 import { savedNoteRow } from "./note-view";
 import {
   type BrowserItem,
@@ -114,6 +119,7 @@ export function proposalFields(
   if (isMailSendProposal(proposal)) return mailFields(proposal);
   if (isLegislativeDocumentProposal(proposal))
     return legislativeDocumentFields(proposal);
+  if (isOfficeEditProposal(proposal)) return officeEditFields(proposal);
   const command = proposal.command;
   if (isMemoryProposal(proposal)) return memoryProposalFields(proposal);
   const args = command.arguments as Record<string, unknown>;
@@ -448,6 +454,7 @@ export function intentRow(
   if (item.kind === "legiwatch_action") return legiwatchRow(item, now, viewer);
   if (item.kind === "legislative_document_action")
     return legislativeDocumentRow(item, now, viewer);
+  if (item.kind === "office_edit") return officeEditRow(item, now, viewer);
   if (item.kind === "saved_note") return savedNoteRow(item);
   if (item.kind === "client_record_action")
     return clientRecordRow(item, now, viewer);
@@ -561,6 +568,10 @@ const refusalText: Readonly<Record<string, string>> = {
     "A different decision was already recorded for this proposal. Refresh to see it.",
   INTENT_APPROVALS_DISABLED:
     "Approval decisions are not enabled for this deployment.",
+  EXECUTION_OWNER_UNAVAILABLE:
+    "The owner that would carry this out is not enabled for this deployment. Nothing was changed.",
+  EXECUTION_AUTHORITY_REFUSED:
+    "Your current access does not allow this to be carried out. Nothing was changed.",
 };
 /** Plain words for a definite refusal; the code stays visible so support can read it. */
 export const refusalMessage = (code: string) =>

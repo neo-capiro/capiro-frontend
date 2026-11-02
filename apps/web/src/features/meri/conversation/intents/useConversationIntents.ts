@@ -18,6 +18,7 @@ import {
   isLegislativeDocumentProposal,
   legislativeDocumentSettled,
 } from "./legislative-document-view";
+import { isOfficeEditProposal } from "./office-edit-view";
 import {
   isClientRecordProposal,
   clientRecordSettled,
@@ -98,7 +99,7 @@ export function useConversationIntents(
   const now = options.now ?? Date.now;
   const onDecisionSettled = options.onDecisionSettled;
   const { conversationId, tenantId, actorId } = scope;
-  const { list, refresh, retry, loadMore } = useIntentList(
+  const { list, refresh, loadMore } = useIntentList(
     access,
     conversationId,
     options.refreshKey,
@@ -279,7 +280,8 @@ export function useConversationIntents(
           isClientRecordProposal(proposal) ||
           isMailSendProposal(proposal) ||
           isMemoryProposal(proposal) ||
-          isLegislativeDocumentProposal(proposal))
+          isLegislativeDocumentProposal(proposal) ||
+          isOfficeEditProposal(proposal))
       ) {
         try {
           guard();
@@ -292,13 +294,18 @@ export function useConversationIntents(
       // A browser decision binds the SUBJECT digest and its delivery domain; every other intent keeps its
       // command digest exactly as before.
       const request: IntentsDecideRequest = isBrowserProposal(proposal)
-        ? (browserDecideRequest(row, conversationId, decision) as IntentsDecideRequest)
+        ? (browserDecideRequest(
+            row,
+            conversationId,
+            decision,
+          ) as IntentsDecideRequest)
         : {
             conversationId,
             deliveryId: row.deliveryId,
             proposalId: id,
-            commandSha256: (proposal as Exclude<typeof proposal, { kind: "browser_action" }>)
-              .commandSha256,
+            commandSha256: (
+              proposal as Exclude<typeof proposal, { kind: "browser_action" }>
+            ).commandSha256,
             decision,
           };
       pending.current.set(id, access);
@@ -376,7 +383,8 @@ export function useConversationIntents(
             isResearchActionProposal(proposal) ||
             isLegiwatchProposal(proposal) ||
             isClientRecordProposal(proposal) ||
-            isLegislativeDocumentProposal(proposal)
+            isLegislativeDocumentProposal(proposal) ||
+            isOfficeEditProposal(proposal)
             ? proposal.binding.runId
             : proposal.command.binding.runId,
         );
@@ -412,7 +420,6 @@ export function useConversationIntents(
     rows,
     attempts,
     refresh,
-    retry,
     loadMore,
     decide,
     decisionsReady: ready,

@@ -1062,6 +1062,34 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "ui-stream 0.1.32 admits @capiro/meri-contracts 0.1.45–0.1.48 as peers (neo-capiro/meri-greenfield#504); no stream behaviour change."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.49-d4d81cce-396ed0311b91.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.49",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "d4d81ccec9a511586aeb0e83961f94e3464d7d7e",
+   "sourceTree": "df9f3b6f0308e14032d5c9416debd76f1e110190",
+   "bytes": 2200971,
+   "sha256": "396ed0311b9102cfab0705e4936469efc9e76ec6de6d3816b255c6282623c663",
+   "integrity": "sha512-OzYvh9vkQZPHG3lXQhpKCgu1qUjC5eI5bm5GxPMcmhxy5olvNU7GgfRnjfDvhKobWrl3gkiFJjUkYY+9YSpWWg==",
+   "regularEntryCount": 123,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Same-document Office bridge (propose_office_edit, office_edit intents item and office_edit_decided answer) after review: part-digest proposals and a durable reject; numbered after skill admission (0.1.47) and the discoverability cohort (0.1.48); actual package/consumer qualification recorded separately."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.33-657b6412-9f32b89cb156.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.33",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "657b64121a51e4b3d82fd8d6bdff70cdf8e5c6b8",
+   "sourceTree": "5acbe40c8a24bf7b163fc8bcf76aea97df108c7c",
+   "bytes": 3850,
+   "sha256": "9f32b89cb156bc8a8a2c35a605d0acfc407cd9e3120bf8d0913c914bf222d1c3",
+   "integrity": "sha512-JfcTtM8qXHiRvyTBFAft+PsrGaqxj+IvTWNYT2IkrOoPrg+vLnpW+wknc11Xc5ITKGWCgWRaQn6kuoN1xQM6Tw==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "ui-stream 0.1.33 admits @capiro/meri-contracts 0.1.49 as a peer (neo-capiro/meri-greenfield#500); no stream behaviour change."
   }
  ]
 }

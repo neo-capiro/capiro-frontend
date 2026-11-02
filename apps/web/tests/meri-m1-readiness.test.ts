@@ -436,7 +436,7 @@ it("empty saved history does not dismiss an uncertain current turn or trigger re
     "No saved turns were returned by the last history check",
   );
   expect(html).not.toContain("shown below has its own delivery status");
-  expect(html).toContain("A turn may already be in flight");
+  expect(html).toContain("Your last message may still be in progress");
   expect(html).not.toContain("No saved turns yet.");
   expect(session.continuation.retry).not.toHaveBeenCalled();
   expect(session.readReservation).not.toHaveBeenCalled();
@@ -462,9 +462,9 @@ it("a not-ready turn refusal is a saved-message status with only explicit same-t
     );
     expect(html).toContain('role="status"');
     expect(html).not.toContain('role="alert"');
-    expect(html).not.toContain("A turn may already be in flight");
-    expect(html).not.toContain("Turn recovery unavailable");
-    const retry = button("Retry same turn");
+    expect(html).not.toContain("Your last message may still be in progress");
+    expect(html).not.toContain("could not check your last message");
+    const retry = button("Check again");
     expect(retry).toBeDefined();
     expect(!!retry?.disabled).toBe(busy);
     expect(session.continuation.retry).not.toHaveBeenCalled();
@@ -480,14 +480,14 @@ it("a not-ready turn refusal is a saved-message status with only explicit same-t
 it("other unknown turn recovery keeps its prior uncertainty and error controls", () => {
   const session = historySession(false);
   const html = renderHistory(session);
-  expect(html).toContain("A turn may already be in flight");
+  expect(html).toContain("Your last message may still be in progress");
   expect(html).toContain('role="alert"');
   expect(html).toContain(
-    "Turn recovery unavailable. No replacement turn was requested.",
+    "Capiro could not check your last message. Nothing new was sent.",
   );
   expect(html).not.toContain("Your message is saved; try again in a moment.");
-  expect(button("Retry same turn")).toBeUndefined();
-  button("Recover same turn")!.onClick();
+  expect(html).not.toMatch(/turn|recover/i);
+  button("Check again")!.onClick();
   expect(session.continuation.retry).toHaveBeenCalledExactlyOnceWith();
 });
 
@@ -497,13 +497,81 @@ it("not-ready without a retained message checks the reserved turn without claimi
   session.recoveryNeeded = false;
   session.unknownReservation = true;
   const html = renderHistory(session);
-  expect(html).toContain("The original message identity is unavailable");
+  expect(html).toContain("cannot tell whether your last message was sent");
   expect(html).not.toContain("Your message is saved; try again in a moment.");
-  expect(button("Retry same turn")).toBeUndefined();
-  const check = button("Check reserved turn");
+  const check = button("Check again");
   expect(check).toBeDefined();
   expect(session.readReservation).not.toHaveBeenCalled();
   check!.onClick();
   expect(session.readReservation).toHaveBeenCalledExactlyOnceWith();
   expect(session.continuation.retry).not.toHaveBeenCalled();
+});
+
+it.each([
+  ["unreachable", "Capiro is not reachable right now. Try again in a moment."],
+  ["refused", "Capiro could not accept this message. Try again in a moment."],
+] as const)(
+  "a next-message check that control did not answer (%s) is one plain retry line, never the in-flight lock",
+  (failure, line) => {
+    for (const busy of [false, true]) {
+      harness.buttons.length = 0;
+      const session = historySession(false, busy);
+      session.continuation.failure = failure;
+      const html = renderHistory(session);
+      expect(html).toContain(line);
+      expect(html).toContain('role="status"');
+      expect(html).not.toContain('role="alert"');
+      expect(html).not.toContain("Your last message may still be in progress");
+      expect(html).not.toContain("could not check your last message");
+      expect(button("Check again")).toBeUndefined();
+      const retry = button("Try again");
+      expect(retry).toBeDefined();
+      expect(!!retry?.disabled).toBe(busy);
+      if (!busy) {
+        retry!.onClick();
+        // The same retained check runs again: one reservation of the same request, nothing new.
+        expect(session.continuation.retry).toHaveBeenCalledExactlyOnceWith();
+        expect(session.readReservation).not.toHaveBeenCalled();
+      }
+    }
+  },
+);
+
+it("control's own reservation report keeps the hard lock even after an unanswered check", () => {
+  const session = historySession(false);
+  session.continuation.failure = "unreachable";
+  session.continuation.intent = undefined;
+  session.recoveryNeeded = false;
+  session.unknownReservation = true;
+  const html = renderHistory(session);
+  expect(html).toContain("Your last message may still be in progress");
+  expect(html).not.toContain("Capiro is not reachable right now.");
+  expect(button("Try again")).toBeUndefined();
+  expect(button("Check again")).toBeDefined();
+});
+
+it("an edge-refused message is one plain line with the same-request retry, not a delivery-uncertainty lock", () => {
+  const props = liveProps();
+  props.savedCurrent = undefined;
+  harness.run!.intent = { submit: { ...request, state: "unknown" } };
+  harness.run!.error = "request-refused-at-edge";
+  harness.run!.failure = "refused";
+  const html = renderLive(props);
+  const line = "Capiro could not accept this message. Try again in a moment.";
+  expect(html).toContain(request.prompt);
+  expect(html.split(line)).toHaveLength(2);
+  expect(html).not.toContain("Delivery is uncertain.");
+  expect(html).not.toContain("could not finish this message");
+  expect(html).not.toContain('role="alert"');
+  expect(harness.composer?.sendBlocked).toBe(line);
+  expect(
+    (harness.composer as { notice?: string } | undefined)?.notice,
+  ).toBeUndefined();
+  button("Retry same request")!.onClick();
+  expect(harness.run!.submit).toHaveBeenCalledExactlyOnceWith(
+    request.prompt,
+    true,
+  );
+  expect(harness.run!.submitInitial).not.toHaveBeenCalled();
+  expect(props.onNextTurn).not.toHaveBeenCalled();
 });

@@ -41,6 +41,8 @@ import {
 import { SelectedRequestReceipt } from "./SelectedRequestReceipt";
 import { ConnectedBrowserViewer } from "../browser/ConnectedBrowserViewer";
 import { DailyQuote } from "../quote/DailyQuote";
+import { inputRefusedMessage } from "./control-reachability";
+import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 
 /** The current admitted segment, or the exact immutable request whose ACK is still pending. */
 function LiveTurn({
@@ -48,11 +50,14 @@ function LiveTurn({
   intent,
   earlier,
   controls,
+  refused = false,
 }: {
   turn: TurnView | null;
   intent: ReturnType<typeof useLiveRun>["intent"];
   earlier: readonly TurnView[];
   controls: ReactNode;
+  /** The edge refused the retained message before Capiro saw it; it was not sent. */
+  refused?: boolean;
 }) {
   if (turn)
     return (
@@ -72,7 +77,9 @@ function LiveTurn({
       <UserMessage>{intent.submit.prompt}</UserMessage>
       <p className={styles.muted}>
         {intent.submit.state === "unknown"
-          ? "Delivery is uncertain. Retry sends exactly the same request; nothing is duplicated."
+          ? refused
+            ? inputRefusedMessage
+            : "Delivery is uncertain. Retry sends exactly the same request; nothing is duplicated."
           : intent.submit.state === "observed"
             ? "Message accepted. Reload the transcript to check its current status."
             : "Sending to Meri."}
@@ -94,16 +101,19 @@ export function composerAvailability(
   pendingDraft: boolean,
 ) {
   const { intent, busy } = run;
+  const refused = run.failure === "refused";
   const initial =
     !turn &&
     !intent.submit &&
     !initialPrompt &&
     !earlier.length &&
     !initialBlocked;
+  // Control refused the reserved next message outright (a typed skill refusal): nothing was
+  // dispatched to this reserved run, so a changed message may be sent to it as an ordinary request.
+  const resend = !turn && !intent.submit && !!initialPrompt && !!run.refusal;
   const firstBlocked =
-    !turn && !intent.submit && !initial
-      ? (initialBlocked ??
-        "Recover the original message identity before sending.")
+    !turn && !intent.submit && !initial && !resend
+      ? (initialBlocked ?? "Check your last message before sending another.")
       : undefined;
   const sendBlocked =
     newIntentBlocked ??
@@ -112,7 +122,9 @@ export function composerAvailability(
     (busy
       ? "Meri is still handling your last command."
       : intent.submit?.state === "unknown"
-        ? "Delivery of your last request is uncertain. Retry it before sending another."
+        ? refused
+          ? inputRefusedMessage
+          : "Delivery of your last request is uncertain. Retry it before sending another."
         : intent.submit && !turn
           ? intent.submit.state === "observed"
             ? "Reload the transcript to verify the current run."
@@ -120,6 +132,7 @@ export function composerAvailability(
           : undefined);
   return {
     initial,
+    resend,
     sendBlocked,
     readyForNext:
       nextTurnVerified &&
@@ -155,6 +168,21 @@ function useDraftAcknowledgement(
       initialDraft.fail();
     }
   }, [initialDraft, port.context, submit, draft, onDraft]);
+}
+
+/**
+ * A definitive refusal released the retained request: the captured text goes back to the box so the
+ * person can change the selection or the conversation and send again.
+ */
+function useRefusalRelease(
+  initialDraft: InitialDraftOwner,
+  port: MeriConversationPort,
+  run: ReturnType<typeof useLiveRun>,
+) {
+  const released = !!run.refusal && !run.intent.submit;
+  useEffect(() => {
+    if (released) initialDraft.release(port.context);
+  }, [released, initialDraft, port.context]);
 }
 
 /** Refresh saved history once this mounted run reaches a terminal state. */
@@ -214,7 +242,11 @@ function useExternalRunRefresh(
   }, [port, refreshRunStatus, busy, observing, cancelIntent, lifecycleBlocked]);
 }
 
-/** Storage uncertainty disables mutation controls while the transcript remains readable. */
+/**
+ * Storage uncertainty disables mutation controls while the transcript remains readable. A
+ * transcript read that control did not answer is read again on a backed-off schedule owned here,
+ * so the schedule outlives the notice that comes and goes with each attempt.
+ */
 function CurrentRunStatus({
   run,
   retentionError,
@@ -226,6 +258,14 @@ function CurrentRunStatus({
   active: boolean;
   acceptedRequest: ConversationStoredRequest | undefined;
 }) {
+  const reconnect = useReconnectSchedule(
+    run.transcript === "unavailable" && run.failure === "unreachable"
+      ? "failing"
+      : run.transcript === "loading" || run.busy
+        ? "busy"
+        : "ok",
+    run.history,
+  );
   return (
     <>
       {retentionError && (
@@ -237,6 +277,7 @@ function CurrentRunStatus({
         run={{ ...run, busy: run.busy || !!retentionError }}
         active={active}
         acceptedRequest={acceptedRequest}
+        onRetry={reconnect.reset}
       />
     </>
   );
@@ -357,6 +398,7 @@ export function MeriLiveConversation({
   )
     setBrowserRunId(port.context.runId);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
+  useRefusalRelease(initialDraft, port, run);
   useSettledRefresh(finished, onSettled);
   const availability = composerAvailability(
     run,
@@ -433,6 +475,14 @@ export function MeriLiveConversation({
         modelSelection,
         skillSelection,
       );
+    } else if (availability.resend) {
+      void run.submit(
+        prompt,
+        false,
+        (request) => initialDraft.begin(port.context, request, draft),
+        modelSelection,
+        skillSelection,
+      );
     } else if (
       !initialDraft.hasPending(port.context) &&
       turn &&
@@ -452,9 +502,10 @@ export function MeriLiveConversation({
         lifecycle.blocked ??
         availability.sendBlocked ??
         modelBlocked,
-      // A retained request is the person's to resolve; the key hint says so until it is.
+      // A retained request is the person's to resolve; the key hint says so until it is. An
+      // edge-refused message already says so in the transcript, once.
       notice:
-        intent.submit?.state === "unknown"
+        intent.submit?.state === "unknown" && run.failure !== "refused"
           ? "Your last request is still unconfirmed. Retry it above before sending another."
           : undefined,
       modelSelection:
@@ -500,6 +551,7 @@ export function MeriLiveConversation({
             intent={intent}
             earlier={earlier}
             controls={controls}
+            refused={run.failure === "refused"}
           />
         </>
       }

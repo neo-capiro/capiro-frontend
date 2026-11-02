@@ -1,7 +1,7 @@
 import { Button } from "@capiro/ui/button";
 import { DocumentPreviewPanel } from "./DocumentPreviewPanel";
 import { DocumentRevisionLink } from "./DocumentRevisionLink";
-import { OfficeEditButton } from "../office/OfficeEditing";
+import { OfficeEditButton, isOfficeTarget } from "../office/OfficeEditing";
 import type {
   DocumentLibraryAccess,
   LibraryVersion,
@@ -92,6 +92,7 @@ function GeneratedVersion({
           key={`revision:${selected.versionId}`}
           port={port}
           versionId={selected.versionId}
+          office={isOfficeTarget(selected)}
         />
       ) : (
         <p>

@@ -102,14 +102,10 @@ export function useIntentList(
     void read(null);
   }, [read, refreshKey]);
   const refresh = useCallback(() => read(null), [read]);
-  const retry = useCallback(() => {
-    setList({ status: "loading" });
-    void read(null);
-  }, [read, setList]);
   const loadMore = useCallback(() => {
     if (list.status !== "ready" || !list.next) return;
     setList({ ...list, loadingMore: true });
     void read(list.next);
   }, [list, read, setList]);
-  return { list, refresh, retry, loadMore, alive };
+  return { list, refresh, loadMore, alive };
 }

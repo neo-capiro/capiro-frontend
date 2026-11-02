@@ -94,6 +94,7 @@ function session(current?: MeriConversationPort): Session {
       intent: undefined,
       busy: false,
       failed: false,
+      failure: undefined,
       notReady: false,
       storageError: undefined,
       start: vi.fn(async () => false),

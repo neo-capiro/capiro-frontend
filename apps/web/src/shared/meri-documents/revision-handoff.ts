@@ -1,5 +1,4 @@
 import { z } from "zod";
-import type { ConversationContext } from "../meri-conversations/session";
 import { receiveSkillSelection } from "../meri-conversations/query-journal";
 import {
   requireMeriTabStorage,
@@ -22,11 +21,15 @@ const receive = (value: unknown) => {
   return { filename: parsed.filename, selection };
 };
 export type RevisionHandoff = ReturnType<typeof receive>;
+/** The tab scope a handoff is written under; a library session or an office editor origin supplies it too. */
+export type HandoffContext = Readonly<{
+  tenantId: string;
+  actorId: string;
+  conversationId: string;
+  selectedClientId: string | null;
+}>;
 /** Unsent navigation hints scoped to the original conversation. Current runtime re-reads the selected source. */
-export function revisionHandoff(
-  context: ConversationContext,
-  storage?: TabStorage,
-) {
+export function revisionHandoff(context: HandoffContext, storage?: TabStorage) {
   const ready = requireMeriTabStorage(storage);
   if (!ready) throw new TabJournalUnavailable();
   const record = tabRecord(
@@ -38,8 +41,19 @@ export function revisionHandoff(
   );
   return {
     read: record.read,
-    write(inspection: ArtifactPreview) {
-      if (inspection.kind !== "generated")
+    /** Exactly one immutable version: its artifact, version and bytes digest, read again by the service on use.
+     * A generated or Office version qualifies; a native file has no artifact identity to revise. */
+    write(
+      inspection:
+        | ArtifactPreview
+        | {
+            artifactId: string;
+            versionId: string;
+            objectSha256: string;
+            filename: string;
+          },
+    ) {
+      if ("kind" in inspection && inspection.kind !== "generated")
         throw new Error("Native revision unavailable");
       record.write(
         receive({

@@ -229,6 +229,12 @@ class DraftOwner {
   }
   hasPending = (context: ConversationContext) =>
     this.state.pending?.run === runKey(context);
+  /** Control refused the captured attempt outright: the text returns to the box for a changed send. */
+  release(context: ConversationContext) {
+    if (this.state.pending?.run !== runKey(context)) return;
+    this.check(context);
+    this.save({ ...this.state, pending: null });
+  }
   /**
    * The text a still-unacknowledged attempt captured, while the person has not typed since: the
    * transcript shows it with its retry, so the box must not. Once they type, the box is theirs,

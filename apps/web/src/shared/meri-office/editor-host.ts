@@ -2,6 +2,7 @@ import { SessionLifetimeController } from "../meri-actions/opaque-session-contro
 import { bootstrapLibrarySession } from "../meri-documents/library-session";
 import { bootstrapConversationSession } from "../meri-conversations/session";
 import { OfficeEditorController, type OfficeFrame } from "./editor-controller";
+import type { OfficeDocument } from "@capiro/meri-contracts/office-application";
 import { createOfficeBrowserPort } from "./file-access";
 import type { officeDraftSelection } from "./draft-selection";
 
@@ -15,6 +16,7 @@ export function createOfficeEditorHost(options: {
   /** A freshly imported original can be edited before a submitted chat turn. */
   sessionRunId?: string;
   onDiscarded?: () => void;
+  onPublished?: (document: OfficeDocument) => void;
 }) {
   const editor = new OfficeEditorController({
     selection: options.recovery.selection,
@@ -23,6 +25,7 @@ export function createOfficeEditorHost(options: {
       options.recovery.forget();
       options.onDiscarded?.();
     },
+    ...(options.onPublished ? { onPublished: options.onPublished } : {}),
   });
   const session = new SessionLifetimeController({
     issue: (signal) =>

@@ -1,10 +1,12 @@
 import type { ConversationSubmitRequest, ConversationHistoryRequest, ConversationCancelledResponse, ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
-import { ConversationUnavailable } from "./conversation-network.js";
+import { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED } from "./conversation-network.js";
+import type { ConversationRefusalDetail } from "./conversation-network.js";
 import type { ConversationLifetime } from "./conversation-network.js";
 import type { ConversationObservationSnapshot } from "./conversation-observation.js";
 import type { ConversationChat } from "./conversation-chat.js";
 import type { ConversationLifecycleControlRequest, ConversationCheckpointInspectionRequest } from "@capiro/meri-contracts/conversation-lifecycle";
-export { ConversationUnavailable };
+export { ConversationUnavailable, DEFINITIVE_REFUSALS, EDGE_REFUSED };
+export type { ConversationRefusalDetail };
 export type { ConversationLifetime, ConversationObservationSnapshot, ConversationChat, };
 export interface MeriConversationSnapshot {
     readonly status: "idle" | "loading" | "ready" | "unavailable" | "disposed";

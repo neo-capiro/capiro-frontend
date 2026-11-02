@@ -24,5 +24,18 @@ export type IntentRow = Readonly<{
     fileName: string;
   }>[];
   researchDraft?: Readonly<{ artifactId: string; portfolioId: string }>;
+  /** Present once an Office proposal was applied: the new version of the same document. */
+  officeVersion?: OfficeVersionTarget | undefined;
 }>;
 export type Viewer = Readonly<{ tenantId: string; actorId: string }>;
+/** The version an applied Office proposal published, in the shape the Office editor opens. */
+export type OfficeVersionTarget = Readonly<{
+  artifactId: string;
+  versionId: string;
+  parentVersionId: string;
+  filename: string;
+  mimeType: string;
+  binding: Readonly<{ conversationId: string }>;
+  scopes: readonly Readonly<{ kind: string; resourceId: string }>[];
+  note: string;
+}>;

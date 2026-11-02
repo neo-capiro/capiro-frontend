@@ -161,3 +161,58 @@ it("holds archived clients, refreshing accounts and signed-out sessions", () => 
     expect(mocks.push).not.toHaveBeenCalled();
   }
 });
+
+it("navigates even while this tab cannot save the conversation's message, and leaves the retained draft in place", async () => {
+  const { createInitialDraftOwner } =
+    await import("../src/shared/meri-conversations/initial-draft");
+  const { syncMeriTabIdentity, TabJournalUnavailable } =
+    await import("../src/shared/meri-conversations/tab-journal");
+  const values = new Map<string, string>();
+  let writable = true;
+  const storage = {
+    get length() {
+      return values.size;
+    },
+    key: (index: number) => [...values.keys()][index] ?? null,
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      if (!writable) throw new Error("Synthetic quota failure");
+      values.set(key, value);
+    },
+    removeItem: (key: string) => {
+      values.delete(key);
+    },
+  };
+  vi.stubGlobal("window", { sessionStorage: storage });
+  try {
+    syncMeriTabIdentity("synthetic-native-session", storage);
+    const scope = {
+      tenantId: "11111111-1111-4111-8111-111111111111",
+      actorId: "22222222-2222-4222-8222-222222222222",
+      clientId: mocks.clientId,
+      conversationId: "44444444-4444-4444-8444-444444444444",
+    };
+    createInitialDraftOwner(scope, storage).edit("Unsent draft text");
+    // The tab can no longer save: the conversation's composer reports the storage failure.
+    writable = false;
+    const owner = createInitialDraftOwner(scope, storage);
+    expect(() => owner.edit("Unsent draft text, continued")).toThrow(
+      TabJournalUnavailable,
+    );
+    expect(owner.error()).toBe(new TabJournalUnavailable().message);
+    mocks.search = `clientId=${mocks.clientId}`;
+    const b = button();
+    expect(b.disabled).toBe(false);
+    b.onClick!();
+    expect(mocks.push).toHaveBeenCalledExactlyOnceWith(
+      `/meri?clientId=${mocks.clientId}`,
+    );
+    // Nothing on the way out touched the retained draft: the same scope reads it back.
+    writable = true;
+    expect(createInitialDraftOwner(scope, storage).draft()).toBe(
+      "Unsent draft text",
+    );
+  } finally {
+    vi.unstubAllGlobals();
+  }
+});

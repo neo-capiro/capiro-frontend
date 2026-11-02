@@ -280,6 +280,8 @@ export function useConversationTurn(
     intent,
     busy: gate.busy,
     failed: !!gate.error,
+    /** The last check could not reach control or was refused at the edge; nothing is known to be in flight. */
+    failure: gate.failure,
     notReady,
     storageError:
       retentionError ??

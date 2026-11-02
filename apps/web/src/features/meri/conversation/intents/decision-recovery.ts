@@ -2,6 +2,7 @@ import { isWatchProposal } from "./watch-view";
 import { isBrowserProposal } from "./browser-view";
 import { isBizdevProposal } from "./bizdev-view";
 import { isLegislativeDocumentProposal } from "./legislative-document-view";
+import { isOfficeEditProposal } from "./office-edit-view";
 import { isClientRecordProposal } from "./client-record-view";
 import { isLegiwatchProposal } from "./legiwatch-view";
 import { z } from "zod";
@@ -78,7 +79,8 @@ export function intentDecisionRecovery(
       isResearchActionProposal(proposal) ||
       isLegiwatchProposal(proposal) ||
       isClientRecordProposal(proposal) ||
-      isLegislativeDocumentProposal(proposal);
+      isLegislativeDocumentProposal(proposal) ||
+      isOfficeEditProposal(proposal);
     if (isBrowserProposal(proposal)) {
       // A browser decision is bound to the retained subject, its own binding and the intended approver.
       if (
@@ -100,7 +102,8 @@ export function intentDecisionRecovery(
     const binding = sharing ? proposal.binding : proposal.command.binding;
     const approver = sharing ? proposal.binding : proposal.requiredApprover;
     const digestMatches =
-      "commandSha256" in request && request.commandSha256 === proposal.commandSha256;
+      "commandSha256" in request &&
+      request.commandSha256 === proposal.commandSha256;
     if (
       proposal.proposalId !== proposalId ||
       !digestMatches ||

@@ -7,17 +7,21 @@ import styles from "./home.module.css";
 import { MeriConversationHost } from "./conversation/MeriConversationHost";
 import { IntentApprovalsEnabled } from "./conversation/intents/approvals-enabled";
 import { MeriClientSelector } from "./MeriClientSelector";
+import { OfficeEditing } from "./office/OfficeEditing";
 
 /** Ordinary Meri entry shows verified service data, never design fixture records. */
 export function MeriHome({
   conversationEnabled = false,
   intentApprovalsEnabled = false,
   firstChatBootstrapEnabled = false,
+  officeEnabled = false,
 }: {
   conversationEnabled?: boolean;
   /** Server-decided (readIntentsConfig); approvals stay dark unless true. */
   intentApprovalsEnabled?: boolean;
   firstChatBootstrapEnabled?: boolean;
+  /** Server-decided (readOfficeConfig); an applied Office proposal can reopen its version here only when true. */
+  officeEnabled?: boolean;
 }) {
   const capabilities = useMeriCapabilities();
   const conversationAvailable =
@@ -46,19 +50,28 @@ export function MeriHome({
             capabilities.conversationApprovals.status === "on"
           }
         >
-          <MeriConversationHost
-            enabled={conversationAvailable}
-            firstChatBootstrapEnabled={
-              firstChatBootstrapEnabled &&
-              capabilities.newConversation.status === "on"
-            }
+          <OfficeEditing
+            enabled={officeEnabled}
             account={
               current?.tenant?.id
                 ? { tenantId: current.tenant.id, actorId: current.user.id }
-                : undefined
+                : null
             }
-            scopeControl={<MeriClientSelector scope={clientScope} />}
-          />
+          >
+            <MeriConversationHost
+              enabled={conversationAvailable}
+              firstChatBootstrapEnabled={
+                firstChatBootstrapEnabled &&
+                capabilities.newConversation.status === "on"
+              }
+              account={
+                current?.tenant?.id
+                  ? { tenantId: current.tenant.id, actorId: current.user.id }
+                  : undefined
+              }
+              scopeControl={<MeriClientSelector scope={clientScope} />}
+            />
+          </OfficeEditing>
         </IntentApprovalsEnabled.Provider>
       </div>
     </div>
