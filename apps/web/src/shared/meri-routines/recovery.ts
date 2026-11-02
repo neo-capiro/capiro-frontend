@@ -43,6 +43,8 @@ const savedSchema = z.strictObject({
   prepare: z.unknown(),
   proposal: z.unknown().optional(),
   approving: z.boolean(),
+  /** When the latest approval was sent; absent on approvals saved before it was recorded. */
+  approvalSentAtMs: z.number().int().nonnegative().optional(),
   result: z
     .strictObject({
       route: z.enum(["approve", "reconcile"]),
@@ -146,8 +148,6 @@ export async function receiveSavedRoutine(raw: Stored): Promise<SavedRoutine> {
 const contract = {
   schema: savedSchema,
   requestId: (value: Stored) => value.requestId,
-  // The approval marker may be released only when the schedule owner proved nothing was applied (workflow `unapplied`);
-  // a saved result still requires it, so an acknowledged change can never lose its marker.
   validateUpdate(previous: Stored, next: Stored) {
     if (
       previous.requestId !== next.requestId ||
@@ -155,6 +155,10 @@ const contract = {
       !sameJson(previous.prepare, next.prepare) ||
       (previous.proposal !== undefined &&
         !sameJson(previous.proposal, next.proposal)) ||
+      // The approval marker is released (workflow `unapplied`) only while no result exists.
+      (previous.approving &&
+        !next.approving &&
+        (previous.result !== undefined || next.result !== undefined)) ||
       (previous.result !== undefined && !sameJson(previous.result, next.result))
     )
       throw new Error("The original routine request cannot change.");

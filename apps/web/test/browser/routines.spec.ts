@@ -278,9 +278,12 @@ async function setup(
             },
           })
         : route.fulfill({
-            status: 409,
+            status: 502,
             json: {
-              error: { code: "ROUTINES_STALE", outcome: "NOT_DISPATCHED" },
+              error: {
+                code: "ROUTINES_NOT_APPLIED",
+                outcome: "NOT_DISPATCHED",
+              },
             },
           });
     if (operation === "routine-list") return route.fulfill({ json: f.listed });
@@ -479,6 +482,7 @@ test("chat routine approval that was never applied settles back to an approvable
   page,
 }) => {
   const f = await setup(page, { chat: true, lose: true, stale: true });
+  await page.clock.install();
   await page.goto(f.url);
   await page.getByRole("checkbox", { name: /I reviewed/ }).check();
   await page.getByRole("button", { name: "Approve routine change" }).click();
@@ -486,7 +490,16 @@ test("chat routine approval that was never applied settles back to an approvable
   await expect(
     page.getByRole("button", { name: "Check schedule result" }),
   ).toBeEnabled();
-  // The schedule owner holds no intent for the proposal: nothing was applied, so the marker is released.
+  // No stored intent right after the send proves only "not applied yet": the lost request could still land.
+  await page.getByRole("button", { name: "Check schedule result" }).click();
+  await expect(page.getByRole("alert")).toHaveText(
+    "This approval has not been applied yet and may still be in progress. Check the schedule result again in a minute.",
+  );
+  await expect(
+    page.getByRole("button", { name: "Check schedule result" }),
+  ).toBeEnabled();
+  // Once the earlier send can no longer land, "not applied" is final and the marker is released.
+  await page.clock.fastForward(61_000);
   await page.getByRole("button", { name: "Check schedule result" }).click();
   await expect(page.getByRole("alert")).toHaveText(
     "This approval was never applied, so no routine was created. Approve it again or discard it.",
@@ -511,7 +524,7 @@ test("chat routine approval that was never applied settles back to an approvable
   ).toHaveLength(2);
   expect(
     f.calls.filter((call) => call.operation === "routine-reconcile"),
-  ).toHaveLength(1);
+  ).toHaveLength(2);
   expect(f.errors).toEqual([]);
 });
 

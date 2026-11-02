@@ -64,6 +64,14 @@ type Options = {
   seed?: SavedRoutine;
 };
 
+/**
+ * Meri bounds one routine request at 30 s (control `limits.requestMs`); with transport margin, an approval sent longer ago than
+ * this can no longer claim its intent, so "not applied" is then final.
+ */
+export const APPROVAL_LANDING_MS = 60_000;
+const landed = (sentAtMs: number) =>
+  Date.now() - sentAtMs > APPROVAL_LANDING_MS;
+
 /** Explicit routine prepare/approve/reconcile over the existing encrypted command journal. */
 export class RoutineWorkflow {
   private state: RoutineState = {
@@ -325,8 +333,14 @@ export class RoutineWorkflow {
       let saved = await this.exact();
       if (!saved.proposal || saved.result)
         throw new Error("A reviewed unresolved routine proposal is required.");
+      // An earlier send of this exact approval may still be applying until it can no longer land.
+      const earlier = saved.approving ? (saved.approvalSentAtMs ?? 0) : null;
       // This marker is committed before any approval HTTP, including an exact retry after a lost acknowledgement.
-      saved = await this.journal().update({ ...saved, approving: true });
+      saved = await this.journal().update({
+        ...saved,
+        approving: true,
+        approvalSentAtMs: Date.now(),
+      });
       this.publish({ saved });
       const request = routineApproval(saved);
       const response = await this.exchange("approve", request, {
@@ -334,7 +348,10 @@ export class RoutineWorkflow {
         proposal: saved.proposal!,
       });
       if ("error" in response) {
-        if (response.error.outcome === "NOT_DISPATCHED")
+        if (
+          response.error.outcome === "NOT_DISPATCHED" &&
+          (earlier === null || landed(earlier))
+        )
           await this.unapplied(
             saved,
             /(?:^|_)STALE$/.test(response.error.code)
@@ -362,11 +379,21 @@ export class RoutineWorkflow {
         request,
         proposal: saved.proposal,
       });
-      if ("error" in response && response.error.outcome === "NOT_DISPATCHED")
-        await this.unapplied(
-          saved,
-          "This approval was never applied, so no routine was created. Approve it again or discard it.",
+      // No stored intent proves only "not applied yet": the saved send must be past the point where it could still land.
+      if (
+        "error" in response &&
+        response.error.code === "ROUTINES_NOT_APPLIED" &&
+        response.error.outcome === "NOT_DISPATCHED"
+      ) {
+        if (landed(saved.approvalSentAtMs ?? 0))
+          await this.unapplied(
+            saved,
+            "This approval was never applied, so no routine was created. Approve it again or discard it.",
+          );
+        throw new Error(
+          "This approval has not been applied yet and may still be in progress. Check the schedule result again in a minute.",
         );
+      }
       if ("error" in response || response.outcome !== "ACKNOWLEDGED")
         throw new Error(
           "The schedule owner has not confirmed this change. The exact approval remains saved; no replacement routine was created.",
@@ -379,9 +406,8 @@ export class RoutineWorkflow {
       this.publish({ saved: next });
     });
   /**
-   * The schedule owner proved this approval was never applied (it holds no intent for the proposal), so no routine exists
-   * and the saved approval marker is released: the reviewed proposal can be approved again or discarded. A stale proposal
-   * no longer matches the current routine settings and can only be prepared again.
+   * The schedule owner proved this approval was never applied, so no routine exists and the saved approval marker is
+   * released: the reviewed proposal can be approved again or discarded.
    */
   private async unapplied(
     saved: SavedRoutine,
