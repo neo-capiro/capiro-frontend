@@ -21,8 +21,6 @@ const providerLabels: Readonly<Record<string, string>> = {
   microsoft_graph: "Microsoft 365",
 };
 
-type MailArguments =
-  Canonical_MailSendApprovalProposalC6Ab2C41["command"]["arguments"];
 type MailFile = Readonly<{
   attachmentId: string;
   fileName: string;
@@ -84,20 +82,10 @@ const bodyText = (html: string) =>
     .replace(/\n{3,}/g, "\n\n")
     .trim();
 
-/** The original operation's exact message and revision, only where the command carries it. */
-const originalFields = (args: MailArguments): readonly IntentField[] => {
-  if (args.mode === "send" || args.original === null) return [];
-  return [
-    { label: "Original thread", value: args.original.threadId },
-    { label: "Original message", value: args.original.messageId },
-    { label: "Original revision", value: args.original.updatedAt },
-    ...(args.original.bodySha256 === null
-      ? []
-      : [{ label: "Original body hash", value: args.original.bodySha256 }]),
-  ];
-};
-
-/** The retained command as the person must see it before deciding: nothing summarized away. */
+/**
+ * The retained command as the person must see it before deciding: every recipient, the subject, the
+ * whole message and its files. Internal identifiers (thread, message, scope, hashes) stay internal.
+ */
 export function mailFields(
   proposal: Canonical_MailSendApprovalProposalC6Ab2C41,
 ): readonly IntentField[] {
@@ -113,7 +101,6 @@ export function mailFields(
     { label: "Bcc", value: addressList(args.bcc) },
     { label: "Subject", value: args.subject },
     { label: "Message", value: body === "" ? "None" : body },
-    ...originalFields(args),
     ...(files.length === 0
       ? []
       : [
@@ -124,18 +111,7 @@ export function mailFields(
               .join(", "),
           },
         ]),
-    ...(proposal.command.scopes.length === 0
-      ? []
-      : [
-          {
-            label: "Scope",
-            value: proposal.command.scopes
-              .map((scope) => `${scope.kind} ${scope.resourceId}`)
-              .join("; "),
-          },
-        ]),
     { label: "Expires", value: proposal.expiresAt },
-    { label: "Command hash", value: proposal.commandSha256 },
   ];
 }
 
@@ -166,7 +142,7 @@ export function mailResultFields(
       { label: "State", value: "Not sent" },
       { label: "Result", value: "Send request rejected" },
     ];
-  const fields: IntentField[] = [
+  return [
     { label: "State", value: "Accepted by provider" },
     {
       label: "Provider",
@@ -189,13 +165,6 @@ export function mailResultFields(
             : "Not requested",
     },
   ];
-  if (result.original)
-    fields.push(
-      { label: "Original thread", value: result.original.threadId },
-      { label: "Original message", value: result.original.messageId },
-      { label: "Original revision", value: result.original.updatedAt },
-    );
-  return fields;
 }
 
 /** A mail proposal row: durable phase plus the exact command content. */
@@ -311,6 +280,6 @@ export function mailRow(
       ? "The approval period has expired. Refresh to read any recorded outcome."
       : item.phase === "approved"
         ? "Your approval is recorded. Execution has not been confirmed yet."
-        : "Nothing happens unless you approve this exact action. Sending does not happen during preview.",
+        : "Nothing is sent unless you approve this exact message.",
   };
 }
