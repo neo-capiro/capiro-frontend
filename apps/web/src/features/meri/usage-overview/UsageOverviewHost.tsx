@@ -15,6 +15,7 @@ import { createUsageOverviewClient } from "../../../shared/meri-usage/client";
 import { useCurrentRead } from "../conversation/evidence/useCurrentRead";
 import { SettingsLayout } from "../screens/settings/SettingsLayout";
 import { UsageLimitsScreen } from "../screens/settings/UsageLimitsScreen";
+import { SettingsCard } from "../screens/settings/SettingsCard";
 import type { SettingsChrome } from "../screens/settings/settings-view";
 import { StateMessage } from "../ui/StateMessage";
 import { projectUsageOverview, usageSnapshotNotice } from "./projection";
@@ -30,7 +31,8 @@ function PendingUsage({
   chrome,
   detail,
   action,
-}: Props & { detail: string; action?: ReactNode }) {
+  editor,
+}: Props & { detail: string; action?: ReactNode; editor?: ReactNode }) {
   return (
     <SettingsLayout
       chrome={{ ...chrome, notice: { title: "Workspace usage", detail } }}
@@ -39,14 +41,19 @@ function PendingUsage({
         description: "Current tenant accounting.",
       }}
       primary={
-        <StateMessage
-          title="Usage data unavailable"
-          status="Not loaded"
-          announce
-          action={action}
-        >
-          {detail}
-        </StateMessage>
+        <>
+          <StateMessage
+            title="Usage data unavailable"
+            status="Not loaded"
+            announce
+            action={action}
+          >
+            {detail}
+          </StateMessage>
+          {editor ? (
+            <SettingsCard title="Workspace limits">{editor}</SettingsCard>
+          ) : null}
+        </>
       }
       supporting={
         <p>
@@ -130,9 +137,11 @@ function ConnectedUsage({
   }, []);
   const snapshot = useCurrentRead("tenant-usage", read);
   // A re-read keeps the last received snapshot on screen until its successor arrives, so a refresh
-  // (or a policy save) never unmounts the editor below. A failed re-read still shows no totals.
+  // (or a policy save) never unmounts the editor below. A settled failure discards it, so no later
+  // re-read can bring back totals or a policy older than that failure.
   const [shown, setShown] = useState(snapshot.value);
   if (snapshot.value && snapshot.value !== shown) setShown(snapshot.value);
+  if (snapshot.error && shown) setShown(undefined);
   const value = snapshot.value ?? (snapshot.loading ? shown : undefined);
   if (denied)
     return (
@@ -160,6 +169,9 @@ function ConnectedUsage({
             : "Usage could not be read. No totals or limits are inferred from this failure."
         }
         action={refresh}
+        // The policy editor does not depend on the usage read, so a failed read (for example the
+        // re-read after a save) leaves it available at its own current revision.
+        editor={snapshot.error ? configuration?.(snapshot.reload) : undefined}
       />
     );
   return (
