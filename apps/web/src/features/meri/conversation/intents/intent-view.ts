@@ -72,6 +72,11 @@ export type {
   IntentRow,
   Viewer,
 } from "./intent-view-types";
+/**
+ * The person's name for every request Meri can prepare, keyed by the catalog's operation id. A row
+ * that never reached a proposal (preparing, failed, uncertain) has only this id to title itself with,
+ * so each advertised intent is named here; an id outside the catalog falls back to a readable form.
+ */
 const operationLabels: Readonly<Record<string, string>> = {
   create_task: "Create a task",
   create_word: "Prepare a document",
@@ -82,6 +87,34 @@ const operationLabels: Readonly<Record<string, string>> = {
   save_chat_attachments: "File chat attachments",
   request_document: "Prepare a document",
   request_analysis: "Prepare an analysis",
+  run_analysis: "Prepare an analysis",
+  save_note: "Save a note",
+  watch_action: "Change a watch",
+  create_client: "Create a client",
+  update_client_profile: "Update a client profile",
+  save_legiwatch_relevance: "Save a LegiWatch relevance suggestion",
+  apply_legiwatch_suggestion: "Apply a LegiWatch suggestion",
+  mail_send: "Send an email",
+  save_business_development_brief: "Save a business-development brief",
+  prepare_legiwatch_briefing: "Prepare a legislative briefing",
+  save_legislative_research: "Save legislative research",
+  publish_research_portfolio_share_link: "Share a Research Portfolio",
+  revoke_research_portfolio_share_link: "Revoke a Research Portfolio share link",
+  manage_research_portfolio: "Research Portfolio management action",
+  create_research_portfolio_snapshot: "Research Portfolio snapshot",
+  request_research_portfolio_output: "Research Portfolio CSV output",
+  save_research_portfolio_output_to_client:
+    "Save a Research Portfolio output to Client Files",
+  watch_research_portfolio: "Research Portfolio watch",
+  update_research_portfolio_change_state: "Research Portfolio change state",
+  create_research_portfolio_bookmark: "Research Portfolio bookmark",
+  add_research_portfolio_review_note: "Research Portfolio review note",
+  prepare_research_portfolio_brief: "Research Portfolio brief draft",
+  prepare_research_portfolio_meeting: "Research Portfolio meeting draft",
+  propose_office_edit: "Edit an Office document",
+  schedule_task: "Schedule a routine",
+  update_scheduled_task: "Update a routine",
+  cancel_scheduled_task: "Cancel a routine",
 };
 const actionLabels: Readonly<Record<string, string>> = {
   "task.create": "Create a task",
@@ -103,6 +136,9 @@ const plainValue = (value: unknown): string =>
         : cap(JSON.stringify(value));
 const humanize = (key: string) =>
   key.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (c) => c.toUpperCase());
+/** A readable title for an operation id the label map does not know: words, not an identifier. */
+const readableOperation = (id: string) =>
+  id.replaceAll("_", " ").replace(/^./, (c) => c.toUpperCase());
 const day = (iso: string) => iso.slice(0, 10);
 
 /** The retained command, as the person must see it before deciding: nothing summarized away. */
@@ -279,6 +315,19 @@ function filingLook(execution: Completed): Look | null {
   };
 }
 const nothing = "Nothing was approved or executed.";
+/** Plain words for a preparation the journal recorded as failed before any effect; the code stays visible for support. */
+const failureText: Readonly<Record<string, string>> = {
+  REFUSED: "The owner that prepares this kind of request refused it.",
+  UNAVAILABLE:
+    "The owner that prepares this kind of request could not be reached.",
+  ACCESS_DENIED: "Your current access does not allow this request.",
+  INVALID_ARGUMENTS:
+    "Meri sent a request its owner could not accept, so nothing was prepared.",
+  DEADLINE: "Preparing this request took too long and was stopped.",
+  CANCELLED: "Preparing this request was cancelled.",
+  CONFLICT:
+    "A different request was already recorded under this delivery, so this one was not prepared.",
+};
 /** Journal states and withheld or non-command items: shown, never decidable, no content. */
 const plainLooks = {
   pending: {
@@ -289,7 +338,7 @@ const plainLooks = {
   unknown: {
     status: "Result uncertain",
     tone: "warning",
-    detail: `Meri could not confirm whether this request was prepared. ${nothing}`,
+    detail: `Meri sent this request to its owner but did not get a confirmed answer, so it cannot say whether a proposal was prepared. ${nothing} If one was prepared, refresh and it appears here for your decision; Meri will not send this request again.`,
   },
   withheldDraft: {
     status: "Withheld",
@@ -380,7 +429,7 @@ const awaitingLooks = {
 const base = (item: IntentsItem) => ({
   deliveryId: item.deliveryId,
   createdAt: item.createdAt,
-  title: operationLabels[item.operation.id] ?? humanize(item.operation.id),
+  title: operationLabels[item.operation.id] ?? readableOperation(item.operation.id),
   proposal: null,
   fields: [] as readonly IntentField[],
   result: [] as readonly IntentField[],
@@ -439,9 +488,9 @@ export function intentRow(
     return closed(plainLooks[item.state]);
   if (item.state === "failed")
     return closed({
-      status: "Failed",
+      status: "Not prepared",
       tone: "danger",
-      detail: `Preparation failed (${item.code}). No preparation result was confirmed.`,
+      detail: `${failureText[item.code] ?? "Preparation failed before anything was prepared."} ${nothing} (${item.code})`,
     });
   if (item.kind === "draft")
     return closed(
