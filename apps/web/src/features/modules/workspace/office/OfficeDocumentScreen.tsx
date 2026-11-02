@@ -1,5 +1,6 @@
 "use client";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { ActionButton } from "../../../../shared/module-ui";
 import { OfficeAskMeri } from "../../../meri/office/OfficeAskMeri";
@@ -32,17 +33,20 @@ export function OfficeDocumentScreen({
   /** Reopen the Workspace on another revision of this document. */
   onOpenVersion(versionId: string): void;
 }) {
+  const router = useRouter();
   const { host, state, connection, container, head, history } =
     useOfficeWorkbench(account, target, {
       onPublished: (document) => onOpenVersion(document.version.versionId),
       onClosed: onClose,
       onDiscarded: onClose,
+      navigate: (href) => router.push(href),
     });
   const draft = state.snapshot?.draft;
   const filename = draft?.filename ?? "Office document";
   const published = draft?.state === "published";
   const readOnly = head !== null && !head.latest;
-  // Leaving with unsaved or in-flight work: the browser asks before unload; the host's own exits save first.
+  // Leaving with unsaved or in-flight work: the browser asks before unload; in-app navigation and the host's own
+  // exits run the close first (the workbench installs the guard).
   const guarded = state.frame && (state.modified || state.busy !== null);
   useEffect(() => {
     if (!guarded) return;
@@ -93,6 +97,7 @@ export function OfficeDocumentScreen({
             editor={host.editor}
             state={state}
             readOnly={readOnly}
+            pending={head === null}
           />
           <ActionButton
             aria-pressed={history.open}

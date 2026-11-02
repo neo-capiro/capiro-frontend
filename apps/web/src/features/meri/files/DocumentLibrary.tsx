@@ -30,6 +30,12 @@ import styles from "./files.module.css";
 type Account = { tenantId: string; actorId: string };
 type Origin = { conversationId: string; clientId: string | null };
 
+/** The Workspace's Office list shows only Word, Excel and PowerPoint versions; the Files library shows none of them. */
+export const libraryRows = (
+  versions: readonly LibraryVersion[],
+  office: boolean,
+) => versions.filter((version) => isOfficeTarget(version) === office);
+
 /** Opens saved contexts only; no conversation or run is created to browse retained files. */
 export function DocumentLibrary({
   account,
@@ -326,9 +332,7 @@ function LibraryPage({
   );
   const history = "anchor" in query;
   const office = officeOpen !== undefined;
-  const versions = state.versions.filter(
-    (version) => isOfficeTarget(version) === office,
-  );
+  const versions = libraryRows(state.versions, office);
   return (
     <section
       className={styles.panel}

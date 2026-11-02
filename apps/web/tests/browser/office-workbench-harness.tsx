@@ -9,6 +9,7 @@ import { createRoot } from "react-dom/client";
 import { OfficeEditorController } from "../../src/shared/meri-office/editor-controller";
 import { OfficeFrameHost } from "../../src/shared/meri-office/frame-host";
 import { OfficeDraftControls } from "../../src/features/modules/workspace/office/OfficeDraftControls";
+import { installLeaveGuard } from "../../src/features/modules/workspace/office/leave-guard";
 import type { OfficeTransport } from "../../src/shared/meri-office/transport";
 import type {
   OfficeResponseMap,
@@ -132,9 +133,22 @@ function Harness() {
     owner.editor.getSnapshot,
     owner.editor.getSnapshot,
   );
+  // The workbench installs the same guard while the editor holds unsaved or in-flight work.
+  const guarded = state.frame && (state.modified || state.busy !== null);
+  useEffect(() => {
+    if (!guarded) return;
+    return installLeaveGuard({
+      view: window,
+      leave: () => owner.editor.close(),
+      navigate: (href) => setEvents((old) => [...old, `navigated:${href}`]),
+    });
+  }, [guarded, owner]);
   return (
     <main style={{ padding: 24 }}>
       <h1>Office workbench</h1>
+      <nav>
+        <a href="/leave-target?view=shares">Sidebar link</a>
+      </nav>
       <div className={styles.actions}>
         <OfficeDraftControls
           editor={owner.editor}

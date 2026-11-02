@@ -9,12 +9,19 @@ type Props = {
   state: OfficeEditorState;
   /** The opened version is not the head: it is viewed, never edited or published. */
   readOnly: boolean;
+  /** The lineage is still being read: no editor opens until the head is known. */
+  pending?: boolean;
 };
 
 /** The host's few explicit actions beside CODE's own toolbar: publishing an immutable revision, and the draft-level
  * actions (open, recover, discard, take over) CODE has no control for. Saving and closing are CODE's controls, which
  * post to the host; the same sequences are reachable here for a closed frame. */
-export function OfficeDraftControls({ editor, state, readOnly }: Props) {
+export function OfficeDraftControls({
+  editor,
+  state,
+  readOnly,
+  pending = false,
+}: Props) {
   const snapshot = state.snapshot,
     draft = snapshot?.draft;
   const disabled = !state.connected || state.busy !== null;
@@ -51,7 +58,7 @@ export function OfficeDraftControls({ editor, state, readOnly }: Props) {
           </ActionButton>
         </>
       )}
-      {!state.frame && !published && !recoveringPublish && (
+      {!state.frame && !pending && !published && !recoveringPublish && (
         <ActionButton
           disabled={disabled || state.uncertain}
           onClick={() => void editor.open()}

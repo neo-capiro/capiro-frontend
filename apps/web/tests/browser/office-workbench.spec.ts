@@ -134,6 +134,22 @@ test("CODE's close saves pending changes, releases the editor, publishes the sav
   ).toBeDisabled();
 });
 
+test("in-app navigation mid-edit runs the close first: save, release, publish, then the navigation", async ({
+  page,
+}) => {
+  await setup(page);
+  await expect(
+    page.getByRole("button", { name: "Publish revision", exact: true }),
+  ).toBeEnabled();
+  await frameOf(page).locator("#modify").click();
+  await page.getByRole("link", { name: "Sidebar link" }).click();
+  await expect(page.getByLabel("Service operations")).toHaveText(
+    "open,launch,read,read,release,publish,closed,navigated:/leave-target?view=shares",
+  );
+  await expect(page.locator("iframe")).toHaveCount(0);
+  expect(new URL(page.url()).pathname).toBe("/office-workbench.html");
+});
+
 test("parent-window spoof cannot mark the cross-origin frame ready", async ({
   page,
 }) => {
