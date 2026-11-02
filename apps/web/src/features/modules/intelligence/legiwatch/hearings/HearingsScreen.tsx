@@ -97,7 +97,7 @@ export function HearingsScreen() {
     }
   };
   return (
-    <div className={styles.screen}>
+    <div className={styles.screen} data-figma-node="1064:262702">
       <LegiWatchTabs
         value={list}
         onChange={setList}
@@ -177,7 +177,10 @@ export function HearingsScreen() {
             </ActionButton>
             <ActionButton
               primary={layout === "week"}
-              onClick={() => setLayout("week")}
+              onClick={() => {
+                setFrom(weekStart(from));
+                setLayout("week");
+              }}
             >
               Week calendar
             </ActionButton>
@@ -238,14 +241,17 @@ export function HearingsScreen() {
           >
             {calendar.data && (
               <>
-                {layout === "week" && (
+                {layout === "agenda" ? (
+                  <HearingAgenda rows={calendar.data.rows} onOpen={open} />
+                ) : (
                   <HearingCalendar
+                    key={`${layout}:${from}`}
+                    view={layout === "day" ? "day" : "week"}
                     from={from}
                     rows={calendar.data.rows}
                     onOpen={open}
                   />
                 )}
-                <HearingAgenda rows={calendar.data.rows} onOpen={open} />
                 <p>
                   {calendar.data.rows.length} hearings loaded in this range.
                 </p>
@@ -292,7 +298,12 @@ export function HearingsScreen() {
             type="date"
             value={from}
             onChange={(event) => {
-              if (event.target.value) setFrom(event.target.value);
+              if (event.target.value)
+                setFrom(
+                  layout === "week"
+                    ? weekStart(event.target.value)
+                    : event.target.value,
+                );
             }}
           />
         </Field>
