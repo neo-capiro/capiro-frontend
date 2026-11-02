@@ -100,3 +100,22 @@ export function selectionLabel(
   );
   return `${providerLabel[selection.provider]} / ${model?.label ?? selection.modelId} / ${effortLabel(selection.effort)}`;
 }
+
+/**
+ * The quiet label of the model that answered a run: the catalog's label and the picker's effort
+ * label ("Model default" for a null effort). Nothing when the record carries no selection or the
+ * catalog does not list the model; a raw model id is never shown.
+ */
+export function runModelLabel(
+  catalog: ModelCatalog | undefined,
+  selection: ModelSelection | undefined,
+) {
+  if (!selection) return undefined;
+  const model = catalog?.models.find(
+    (row) =>
+      row.provider === selection.provider && row.modelId === selection.modelId,
+  );
+  return model
+    ? `${model.label} · ${effortLabel(selection.effort)}`
+    : undefined;
+}
