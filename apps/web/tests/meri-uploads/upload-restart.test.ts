@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   createUploadAttemptReferences,
   type UploadAttemptScope,
@@ -280,6 +280,98 @@ describe("durable upload attempt references", () => {
     expect(restored.items()[0]!.state).toBe("unknown");
     expect(restored.sendArgument()).toEqual([]);
     expect(store.values.size).toBe(1);
+  });
+  it("a sent file leaves the composer: no status-unknown row on the next session and no second send", async () => {
+    const store = storage(),
+      service = server(null),
+      established = {
+        uploadId: "33333333-3333-4333-8333-333333333333",
+        sha256: "c".repeat(64),
+      };
+    const life = new AbortController();
+    const first = createUploadController({
+      wire: createUploadWire(
+        "action_session_" + "A".repeat(43),
+        life.signal,
+        service.fetcher,
+      ),
+      isCurrent: () => true,
+      recovery: createUploadAttemptReferences(scope, () => store),
+      established: () => [established],
+    });
+    await first.add([file()]);
+    const requestId = first.items()[0]!.requestId;
+    service.receipt = {
+      ...service.receipt!,
+      scanStatus: "clean",
+      extraction: { status: "available", limitations: [] },
+      originalBytesAvailable: true,
+    };
+    await first.check(requestId);
+    first.toggle(established.uploadId);
+    const argument = first.sendArgument();
+    expect(argument.map((entry) => entry.uploadId)).toEqual([
+      established.uploadId,
+      uploadId,
+    ]);
+    first.sent(argument);
+    expect(first.items()).toEqual([]);
+    expect(first.sendArgument()).toEqual([]);
+    expect(first.incoming()).toEqual([{ ...established, selected: false }]);
+    expect(store.values.size).toBe(0);
+    first.dispose();
+    // The next session's composer (a renewal or the next turn's port) restores nothing for a file already sent.
+    const next = controller(store, service);
+    expect(next.items()).toEqual([]);
+    expect(next.sendArgument()).toEqual([]);
+  });
+  it("files of an undelivered message come back: an established one selected, another read again from custody", async () => {
+    const store = storage(),
+      service = server(null),
+      established = {
+        uploadId: "33333333-3333-4333-8333-333333333333",
+        sha256: "c".repeat(64),
+      };
+    const first = controller(store, service);
+    await first.add([file()]);
+    service.receipt = {
+      ...service.receipt!,
+      scanStatus: "clean",
+      extraction: { status: "available", limitations: [] },
+      originalBytesAvailable: true,
+    };
+    await first.check(first.items()[0]!.requestId);
+    const offered = first.sendArgument();
+    first.sent(offered);
+    first.dispose();
+    const life = new AbortController();
+    const next = createUploadController({
+      wire: createUploadWire(
+        "action_session_" + "A".repeat(43),
+        life.signal,
+        service.fetcher,
+      ),
+      isCurrent: () => true,
+      recovery: createUploadAttemptReferences(scope, () => store),
+      established: () => [established],
+    });
+    const calls = service.calls.length;
+    next.offer([established, ...offered]);
+    await vi.waitFor(() => expect(next.items()[0]?.state).toBe("stored"));
+    expect(next.items()[0]).toMatchObject({
+      uploadId,
+      filename: "private-name.txt",
+    });
+    expect(service.calls.slice(calls)).toEqual(["/api/uploads/status"]);
+    expect(next.incoming()).toEqual([{ ...established, selected: true }]);
+    expect(next.sendArgument().map((entry) => entry.uploadId)).toEqual([
+      established.uploadId,
+      uploadId,
+    ]);
+    // Offering the same files again changes nothing, and nothing is written to custody or recovery.
+    next.offer([established, ...offered]);
+    expect(next.items()).toHaveLength(1);
+    expect(store.values.size).toBe(0);
   });
   it("refuses dispatch on denied, full, corrupt or nonretaining storage", async () => {
     for (const fault of ["denied", "full", "corrupt", "discard"] as const) {
