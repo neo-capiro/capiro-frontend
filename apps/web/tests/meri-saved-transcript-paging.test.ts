@@ -319,7 +319,8 @@ function failedContinuation(error: unknown) {
     continuation: { intent: undefined, failed: false, notReady: false },
     recoveryNeeded: false,
     unknownReservation: false,
-    readReservation: vi.fn(),
+    checkPending: vi.fn(),
+    discardPending: vi.fn(),
   };
   const html = renderToStaticMarkup(
     createElement(ConversationHistoryStatus, {

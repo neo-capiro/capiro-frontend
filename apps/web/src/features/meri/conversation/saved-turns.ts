@@ -70,8 +70,14 @@ export function sessionHistoryState(
   retained: TurnIntent | undefined,
   busy: boolean,
   failure?: ControlFailure,
+  /** Target run id of a reservation control confirmed admitted no message, or that the person discarded. */
+  opened?: string,
 ) {
   const metadata = history.current;
+  const reservation = metadata?.pendingTurn;
+  // Its source admits an ordinary next message again: the reservation replays to the same target.
+  const reservationOpen =
+    !!reservation && reservation.targetBinding.runId === opened;
   const latestAccepted = metadata?.turns.find(
     (turn) => turn.run.binding.runId === metadata.latestRun.binding.runId,
   );
@@ -96,16 +102,17 @@ export function sessionHistoryState(
     runId &&
     metadata.latestRun.binding.runId === runId &&
     isTerminal(metadata.latestRun.state) &&
-    !metadata.pendingTurn
+    (!reservation || reservationOpen)
       ? metadata.latestRun.binding
       : undefined;
-  const reservation = metadata?.pendingTurn;
   const recoveryNeeded =
     !!retained &&
     (retained.state === "unknown" ||
       retained.receipt?.targetBinding.runId !== runId);
   const unknownReservation =
-    !!reservation && retained?.source.runId !== reservation.sourceBinding.runId;
+    !!reservation &&
+    !reservationOpen &&
+    retained?.source.runId !== reservation.sourceBinding.runId;
   const loaded = savedTurns(history.saved);
   const savedCurrent =
     loaded.find((turn) => turn.runId === runId) ??
@@ -122,7 +129,11 @@ export function sessionHistoryState(
   // answered (or that the edge refused) keeps the retained request for a plain retry instead.
   // The latest-run read has not answered yet: a transient check, not something the person resolves.
   const nextChecking =
-    !busy && !recoveryNeeded && !unknownReservation && !source;
+    !busy &&
+    !recoveryNeeded &&
+    !unknownReservation &&
+    !source &&
+    !reservationOpen;
   const nextBlocked = busy
     ? "Checking your last message…"
     : recoveryNeeded && !unknownReservation && failure
@@ -151,6 +162,7 @@ export function sessionHistoryState(
       : undefined,
     source,
     reservation,
+    openedTarget: reservationOpen ? opened : undefined,
     earlier,
     savedCurrent,
     latestTarget,

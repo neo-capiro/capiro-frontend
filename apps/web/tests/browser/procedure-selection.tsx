@@ -207,7 +207,8 @@ function Harness() {
       storageError: undefined,
       start: async () => false,
       retry: async () => false,
-      readMapping: async () => false,
+      check: async () => false,
+      discard: async () => false,
     },
   } as unknown as Session;
   return (

@@ -11,7 +11,25 @@ import { useReconnectSchedule } from "../../../shared/meri-conversations/reconne
 
 type Session = ReturnType<typeof useConversationSession>;
 
-/** Unresolved writes keep recovery controls until exact completed-request history acknowledges them. */
+/** An answer that stays uncertain never locks the thread: the person may give up the message. */
+function DiscardPending({ session }: { session: Session }) {
+  return (
+    <Button
+      type="button"
+      variant="outline"
+      className={ui.outline}
+      disabled={session.continuation.busy}
+      onClick={() => session.discardPending()}
+    >
+      Discard and write a new message
+    </Button>
+  );
+}
+
+/**
+ * Unresolved writes keep recovery controls until control answers for them: "Check again" asks about
+ * the exact pending message, and an answer that stays uncertain offers an explicit discard.
+ */
 function TurnRecoveryStatus({ session }: { session: Session }) {
   const { continuation } = session;
   // Control never answered the check (or the edge refused it): the retained message is kept and the
@@ -52,6 +70,7 @@ function TurnRecoveryStatus({ session }: { session: Session }) {
           >
             Try again
           </Button>
+          <DiscardPending session={session} />
         </div>
       ) : (
         (session.recoveryNeeded || session.unknownReservation) && (
@@ -71,13 +90,11 @@ function TurnRecoveryStatus({ session }: { session: Session }) {
               variant="outline"
               className={ui.outline}
               disabled={continuation.busy}
-              onClick={() => {
-                if (session.recoveryNeeded) void continuation.retry();
-                else void session.readReservation();
-              }}
+              onClick={() => void session.checkPending()}
             >
               Check again
             </Button>
+            {continuation.failed && <DiscardPending session={session} />}
           </div>
         )
       )}

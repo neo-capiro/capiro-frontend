@@ -240,6 +240,9 @@ export function ConversationView({
                 onLifecycleTarget={session.openLifecycleTarget}
                 onBrowserTarget={session.openBrowserTarget}
                 historyUnavailable={session.history.unavailable}
+                reservedOpen={
+                  session.openedTarget === displayed.port.context.runId
+                }
                 nextTurnBlocked={session.nextBlocked}
                 nextTurnChecking={session.nextChecking}
                 nextTurnVerified={!!session.source && !session.nextBlocked}
