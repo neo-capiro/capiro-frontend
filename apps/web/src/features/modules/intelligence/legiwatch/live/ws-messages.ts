@@ -1,5 +1,5 @@
 import { z } from "zod";
-// Matches apps/intel-api/src/hearing/hearing.types.ts at c19d4d43d21f18e32e40b69eb17719204ec6279f.
+// Matches apps/intel-api/src/hearing/hearing.types.ts at d627fc1e862b32605799c78c0fc721facd74b23a.
 const segment = z.object({
   startMs: z.number(),
   endMs: z.number(),

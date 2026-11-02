@@ -53,7 +53,7 @@ const params = z.object({ params: hearingIdParams }).strict();
 const source =
   "apps/intel-api/src/hearing/hearing.controller.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace";
 const recording =
-  "apps/intel-api/src/hearing/recording/recording.controller.ts @c19d4d43d21f18e32e40b69eb17719204ec6279f";
+  "apps/intel-api/src/hearing/recording/recording.controller.ts @d627fc1e862b32605799c78c0fc721facd74b23a";
 const ticketSchema = z.object({
   ticket: z.string().min(1).max(2000),
   expiresAt: z.iso.datetime(),

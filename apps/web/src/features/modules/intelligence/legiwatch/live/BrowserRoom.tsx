@@ -53,6 +53,13 @@ function ConnectedBrowserRoom({
     params: { id: session.id },
   });
   const videoAvailable = supportsVideoRecording(capability.data);
+  const hearing = useCapiroQuery(
+    "legiwatch.room",
+    {
+      params: { id: session.hearingId ?? "" },
+    },
+    { enabled: Boolean(session.hearingId) },
+  );
   const [video, setVideo] = useState(false);
   const route = useLegiWatchRoute(),
     capture = useBrowserCapture(
@@ -146,7 +153,10 @@ function ConnectedBrowserRoom({
       )}
       <div className={styles.room}>
         <section className={styles.card}>
-          <OfficialHearingPlayer sourceUrl={session.sourceUrl} />
+          <OfficialHearingPlayer
+            sourceUrl={session.sourceUrl}
+            watchMedia={hearing.data?.event.officialWatchMedia}
+          />
           {capture.segments.length > 0 && (
             <div className={styles.transcript}>
               {capture.segments.map((segment) => (
