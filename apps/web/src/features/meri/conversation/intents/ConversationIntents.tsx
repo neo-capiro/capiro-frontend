@@ -14,6 +14,10 @@ import {
   type IntentScope,
   type ListState,
 } from "./useConversationIntents";
+import {
+  useReconnectSchedule,
+  type ReconnectState,
+} from "../../../../shared/meri-conversations/reconnect-schedule";
 import styles from "./intents.module.css";
 import ui from "../../ui/meri-ui.module.css";
 import { ConversationRoutine } from "../../routines/ConversationRoutine";
@@ -386,6 +390,14 @@ function Body({
   );
 }
 
+/** Which automatic re-read state a list read is in; exported for its tests only. */
+export const approvalsReadState = (list: ListState): ReconnectState =>
+  list.status === "unavailable" && !list.accessLost
+    ? "failing"
+    : list.status === "loading"
+      ? "busy"
+      : "ok";
+
 /**
  * The conversation's prepared actions. Everything shown is read from Meri's durable intent list; a
  * decision is recorded only by Meri's decision owner, and nothing here approves on its own. The
@@ -430,8 +442,24 @@ export function ConversationIntents({
       : state.list;
   return (
     <>
+      <ApprovalsReread list={state.list} refresh={state.refresh} />
       <Body {...state} access={access} retained={displayed} />
       {children?.(displayed.status === "ready" ? displayed.items : [])}
     </>
   );
+}
+
+/**
+ * A read that failed before anything was loaded shows no panel; it is read again on the same
+ * backed-off schedule as the transcript. A lost membership waits for reauthorization instead.
+ */
+function ApprovalsReread({
+  list,
+  refresh,
+}: {
+  list: ListState;
+  refresh: () => Promise<void>;
+}) {
+  useReconnectSchedule(approvalsReadState(list), () => void refresh());
+  return null;
 }

@@ -44,7 +44,7 @@ afterEach(() => {
 /** Static markup escapes the notice's apostrophe. */
 const text = (html: string) => html.replace(/&#x27;/g, "'");
 const hardLock =
-  "A turn may already be in flight. Recover its status before sending.";
+  "Your last message may still be in progress. Check again before sending.";
 const history = (status: number, code: string, outcome?: string) =>
   new ConversationHistoryUnavailable(status, code, outcome);
 
@@ -135,7 +135,7 @@ it("an unanswered next-message check keeps the retained message behind a plain r
   expect(
     sessionHistoryState({}, source.runId, [], retained, true, "unreachable")
       .nextBlocked,
-  ).toBe("Meri is recovering the next turn.");
+  ).toBe("Checking your last message…");
   const reported = sessionHistoryState(
     { current: reservedElsewhere },
     source.runId,
@@ -294,7 +294,7 @@ it("a read that control did not answer is one plain notice with one Retry: no co
   );
   expect(text(html)).toContain(controlReconnectingMessage);
   expect(html).not.toContain("CONVERSATION_UNAVAILABLE");
-  expect(html).not.toContain("Conversation operation unavailable");
+  expect(html).not.toContain("could not finish this message");
   expect(html).not.toContain("The current transcript could not be loaded.");
   expect(html).not.toContain("Refresh run status");
   expect(html).not.toContain("Loading this conversation");
@@ -328,11 +328,11 @@ it("a read that control did not answer is one plain notice with one Retry: no co
     error: "retained-submit-mismatch",
     transcript: "loaded",
   } as unknown as Run;
-  expect(
-    renderToStaticMarkup(
-      createElement(RunStatus, { run: refused, active: false }),
-    ),
-  ).toContain("Conversation operation unavailable: retained-submit-mismatch");
+  const generic = renderToStaticMarkup(
+    createElement(RunStatus, { run: refused, active: false }),
+  );
+  expect(generic).toContain("Capiro could not finish this message.");
+  expect(generic).not.toContain("retained-submit-mismatch");
 });
 
 type HistorySession = ComponentProps<
@@ -469,4 +469,62 @@ it("automatic re-reads back off from 2 s to a 30 s ceiling, pause while one is i
   expect(fired.at(-1)).toBe(2_000);
   schedule.dispose();
   expect(vi.getTimerCount()).toBe(0);
+});
+
+import { composerAvailability } from "../src/features/meri/conversation/MeriLiveConversation";
+import { turnFromEvents } from "../src/features/meri/conversation/conversation-view";
+import { approvalsReadState } from "../src/features/meri/conversation/intents/ConversationIntents";
+
+it("a reservation that control itself reports still blocks sending, even after an unanswered check", () => {
+  const reported = sessionHistoryState(
+    { current: reservedElsewhere },
+    source.runId,
+    [],
+    retained,
+    false,
+    "unreachable",
+  );
+  const finished = turnFromEvents(
+    [],
+    source,
+    "First question",
+    "completed",
+    false,
+  );
+  const availability = composerAvailability(
+    {
+      intent: {},
+      busy: false,
+      failure: undefined,
+      refusal: undefined,
+      snapshot: { status: "ready", observation: null },
+    } as never,
+    finished,
+    [finished],
+    undefined,
+    undefined,
+    undefined,
+    reported.nextBlocked,
+    !!reported.source && !reported.nextBlocked,
+    false,
+  );
+  expect(availability.sendBlocked).toBe(hardLock);
+  expect(availability.readyForNext).toBe(false);
+});
+
+it("a failed first approvals read is re-read on the backed-off schedule; a lost membership is not", () => {
+  expect(approvalsReadState({ status: "unavailable" })).toBe("failing");
+  expect(approvalsReadState({ status: "unavailable", accessLost: true })).toBe(
+    "ok",
+  );
+  expect(approvalsReadState({ status: "loading" })).toBe("busy");
+  expect(
+    approvalsReadState({
+      status: "ready",
+      items: [],
+      next: null,
+      loadingMore: false,
+    }),
+  ).toBe("ok");
+  expect(approvalsReadState({ status: "disabled" })).toBe("ok");
 });

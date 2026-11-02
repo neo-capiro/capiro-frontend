@@ -101,13 +101,13 @@ export function sessionHistoryState(
   // Only control's own report of a reservation holds the hard lock. A check that control never
   // answered (or that the edge refused) keeps the retained request for a plain retry instead.
   const nextBlocked = busy
-    ? "Meri is recovering the next turn."
+    ? "Checking your last message…"
     : recoveryNeeded && !unknownReservation && failure
       ? controlFailureMessage(failure)
       : recoveryNeeded || unknownReservation
-        ? "A turn may already be in flight. Recover its status before sending."
+        ? "Your last message may still be in progress. Check again before sending."
         : !source
-          ? "Verify the current conversation history before starting another turn."
+          ? "Capiro is checking this conversation before you can send again."
           : undefined;
   const initialBlocked =
     busy ||
@@ -116,7 +116,7 @@ export function sessionHistoryState(
     metadata ||
     history.saved?.latest ||
     localTurns.length
-      ? "This conversation has an existing or reserved turn. Recover its original message before sending."
+      ? "This conversation already has a message in progress. Check it before sending another."
       : undefined;
   return {
     logicalKey,

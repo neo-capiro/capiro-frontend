@@ -25,7 +25,7 @@ import {
 
 const unreachable = "Capiro is not reachable right now. Try again in a moment.";
 const refused = "Capiro could not accept this message. Try again in a moment.";
-const inFlight = "A turn may already be in flight";
+const inFlight = "Your last message may still be in progress";
 
 /** A finished first turn whose next-message check and send are held for the test to answer. */
 async function installNextMessageFlow(page: Page) {
@@ -110,7 +110,7 @@ test("control answering 502, then an edge 403, to the next-message check shows o
   await expect(line.locator("p")).toHaveText(unreachable);
   await expect(page.locator("body")).not.toContainText(inFlight);
   await expect(page.locator("body")).not.toContainText(
-    "Turn recovery unavailable",
+    "could not check your last message",
   );
   const retry = page.getByRole("button", { name: "Try again", exact: true });
   await expect(retry).toBeEnabled();
@@ -192,7 +192,7 @@ test("an edge 403 on the message itself is refused, not a lost membership: the t
   );
   await expect(page.locator("body")).not.toContainText("Delivery is uncertain");
   await expect(page.locator("body")).not.toContainText(
-    "Conversation operation unavailable",
+    "could not finish this message",
   );
   await expect(page.locator("body")).not.toContainText(inFlight);
   await expect(sendButton(page)).toBeDisabled();
@@ -311,7 +311,7 @@ test("a transcript read that control answers 503 is one plain notice with one Re
     "CONVERSATION_UNAVAILABLE",
   );
   await expect(page.locator("body")).not.toContainText(
-    "Conversation operation unavailable",
+    "could not finish this message",
   );
   await expect(page.locator("body")).not.toContainText("Refresh run status");
   await expect(page.locator("body")).not.toContainText(

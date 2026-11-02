@@ -28,8 +28,9 @@ export declare class ConversationUnavailable extends Error {
 }
 /**
  * The shared edge answered a request route with 403 before Meri saw it (its WAF rules refuse some
- * message text). Nothing was admitted and the session's membership did not change, so the request
- * is reported as refused and the same request may be retried; it is never a revocation.
+ * message text): an HTML page or an empty block, never control's JSON error envelope. Nothing was
+ * admitted and the session's membership did not change, so the request is reported as refused and
+ * the same request may be retried; it is never a revocation. Control's own 403 still revokes.
  */
 export declare const EDGE_REFUSED = "request-refused-at-edge";
 /** Owns only this connection's observation resources, never durable cancellation. */

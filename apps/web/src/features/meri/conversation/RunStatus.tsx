@@ -46,8 +46,7 @@ export function RunStatus({
     <>
       {run.error && !run.failure && (
         <p role="alert" className={styles.muted}>
-          Conversation operation unavailable: {run.error}. No sample response
-          was substituted.
+          Capiro could not finish this message.
         </p>
       )}
       {unreachable && <UnreachableNotice run={run} onRetry={onRetry} />}

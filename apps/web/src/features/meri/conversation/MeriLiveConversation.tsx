@@ -101,8 +101,7 @@ export function composerAvailability(
     !initialBlocked;
   const firstBlocked =
     !turn && !intent.submit && !initial
-      ? (initialBlocked ??
-        "Recover the original message identity before sending.")
+      ? (initialBlocked ?? "Check your last message before sending another.")
       : undefined;
   const sendBlocked =
     newIntentBlocked ??

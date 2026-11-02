@@ -45,7 +45,6 @@ function render(items: readonly IntentsItem[], unavailable = false) {
     oneTimeResults: [],
     dismissOneTime: vi.fn(),
     refresh: vi.fn(),
-    retry: vi.fn(),
     loadMore: vi.fn(),
     decide: vi.fn(),
     decisionsReady: true,
