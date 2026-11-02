@@ -1,4 +1,8 @@
 "use client";
+/**
+ * The /portfolio Portfolio pulse panel (bill-watch coverage and the count tiles). Meri answers "what does this metric mean" from a copy of these definitions in neo-capiro/meri-greenfield
+ * apps/worker/conversation/product-definitions.mjs: change that file in the same change.
+ */
 import { usePortfolioMetrics } from "./usePortfolioMetrics";
 import { PortfolioMetricDefinitions } from "./PortfolioMetricDefinitions";
 import type { PortfolioMetrics } from "./metrics";

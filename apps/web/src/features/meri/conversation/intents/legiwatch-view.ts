@@ -4,6 +4,7 @@ import type {
   IntentsLegiwatchProposal,
 } from "@capiro/meri-client/intents";
 import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 
 export function isLegiwatchProposal(
   proposal: IntentsProposal,
@@ -51,7 +52,7 @@ export function legiwatchFields(
       },
       { label: "Verified quote", value: request.quote },
       { label: "Preview hash", value: request.previewHash },
-      { label: "Expires", value: proposal.expiresAt },
+      { label: "Expires", value: expiresLabel(proposal.expiresAt) },
     ];
   return [
     { label: "Action", value: actions[request.action] },
@@ -61,7 +62,7 @@ export function legiwatchFields(
     { label: "Session", value: request.sessionKey },
     { label: "Suggestion", value: request.suggestionId },
     { label: "Expected version", value: String(request.expectedVersion) },
-    { label: "Expires", value: proposal.expiresAt },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   ];
 }
 

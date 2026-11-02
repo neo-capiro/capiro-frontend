@@ -28,6 +28,14 @@ export type IntentRow = Readonly<{
   officeVersion?: OfficeVersionTarget | undefined;
 }>;
 export type Viewer = Readonly<{ tenantId: string; actorId: string }>;
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+/** A proposal's expiry in words, the same on every card and for every viewer (UTC). */
+export function expiresLabel(iso: string) {
+  const at = new Date(iso);
+  if (Number.isNaN(at.getTime())) return iso;
+  const two = (n: number) => String(n).padStart(2, "0");
+  return `${at.getUTCDate()} ${MONTHS[at.getUTCMonth()]} ${at.getUTCFullYear()}, ${two(at.getUTCHours())}:${two(at.getUTCMinutes())} UTC`;
+}
 /** The version an applied Office proposal published, in the shape the Office editor opens. */
 export type OfficeVersionTarget = Readonly<{
   artifactId: string;

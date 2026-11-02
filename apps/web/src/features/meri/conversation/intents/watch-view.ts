@@ -1,5 +1,6 @@
 import type { IntentsItem, IntentsProposal } from "@capiro/meri-client/intents";
 import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 
 type WatchProposal = Extract<IntentsProposal, { kind: "watch_action" }>;
 export function isWatchProposal(
@@ -99,8 +100,7 @@ export function watchFields(proposal: WatchProposal): readonly IntentField[] {
           },
         ]
       : []),
-    { label: "Expires", value: proposal.expiresAt },
-    { label: "Command hash", value: proposal.commandSha256 },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   ];
 }
 

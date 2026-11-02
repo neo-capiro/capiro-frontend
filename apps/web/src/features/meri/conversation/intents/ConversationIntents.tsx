@@ -50,7 +50,6 @@ function FieldList({
         <div key={field.label}>
           <dt>{field.label}</dt>
           <dd
-            className={field.label === "Command hash" ? styles.hash : undefined}
             style={
               field.label === "Exact proposed content"
                 ? { whiteSpace: "pre-wrap" }

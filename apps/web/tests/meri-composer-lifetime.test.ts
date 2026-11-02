@@ -314,3 +314,38 @@ it("publishes only after commit and old cleanup cannot retire newer controls for
   channel.publish(old);
   expect(notified).toHaveBeenCalledTimes(3);
 });
+
+it("a message typed while Meri is still answering is queued once, never dropped, and the queue can be cancelled", () => {
+  const channel = createConversationComposer();
+  const current = port();
+  const onQueue = vi.fn();
+  const handlers = { ...controls(), onQueue };
+  channel.publish({ port: current, controls: handlers, running: true });
+  render(channel, session(current));
+  expect(enter()).toHaveBeenCalledOnce();
+  expect(onQueue).toHaveBeenCalledOnce();
+  expect(handlers.onSend).not.toHaveBeenCalled();
+  const onCancel = vi.fn();
+  channel.publish({
+    port: current,
+    controls: { ...controls(), queued: { onCancel } },
+    running: true,
+  });
+  const html = render(channel, session(current));
+  expect(html).toContain("Queued: sends when Meri finishes.");
+  expect(html).toContain("Typed during connection</textarea>");
+});
+
+it("a genuine block (no queue offered) still refuses Enter and keeps the draft", () => {
+  const channel = createConversationComposer();
+  const current = port();
+  const handlers = {
+    ...controls(),
+    sendBlocked: "Delivery of your last request is uncertain. Retry it before sending another.",
+  };
+  channel.publish({ port: current, controls: handlers, running: false });
+  const html = render(channel, session(current));
+  expect(sendButton(html)).toMatch(/\sdisabled(?:=|\s|>)/i);
+  expect(enter()).toHaveBeenCalledOnce();
+  expect(handlers.onSend).not.toHaveBeenCalled();
+});

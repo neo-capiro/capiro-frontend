@@ -283,10 +283,10 @@ export function useConversationTurn(
     /** The last check could not reach control or was refused at the edge; nothing is known to be in flight. */
     failure: gate.failure,
     notReady,
+    // As in useRunCommandJournal: a failed save does not lock later messages; recovery loss does.
     storageError:
       retentionError ??
-      (journal?.recoveryBlocked ||
-      gate.error === new TabJournalUnavailable().message
+      (journal?.recoveryBlocked
         ? new TabJournalUnavailable().message
         : undefined),
     start: (

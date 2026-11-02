@@ -352,6 +352,17 @@
   color: var(--muted-foreground);
   font-weight: 500;
 }
+.queuedCancel {
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--foreground);
+  text-decoration: underline;
+  cursor: pointer;
+}
 .suggestions {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

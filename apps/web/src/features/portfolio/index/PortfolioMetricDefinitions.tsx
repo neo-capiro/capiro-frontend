@@ -1,3 +1,7 @@
+/**
+ * Metric definitions shown under the Portfolio pulse panel. Meri answers "what does this metric mean" from a copy of these definitions in neo-capiro/meri-greenfield
+ * apps/worker/conversation/product-definitions.mjs: change that file in the same change.
+ */
 export function PortfolioMetricDefinitions() {
   return (
     <details style={{ marginBottom: 20 }}>

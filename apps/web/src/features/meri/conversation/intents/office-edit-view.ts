@@ -5,6 +5,7 @@ import type {
   OfficeVersionTarget,
   Viewer,
 } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 
 export type OfficeEditProposal = Extract<
   IntentsProposal,
@@ -80,7 +81,7 @@ export function officeEditFields(
         value: operation.after ?? "(removed)",
       },
     ]),
-    { label: "Expires", value: proposal.expiresAt },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   ];
 }
 

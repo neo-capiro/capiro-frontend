@@ -38,11 +38,13 @@ it("actual public receiver presents all five exact sections and private versus l
     ).toBe("1, 0, 1");
     for (const section of Object.values(item.proposal.request.sections))
       expect(row.fields.some((f) => f.value === section.text)).toBe(true);
-    expect(row.fields.find((f) => f.label === "Scope")?.value).toBe(
-      linked
-        ? `Client ${item.proposal.context.linkedClientId}`
-        : "Private to the current actor",
-    );
+    // Internal identifiers stay internal: no scope resource, prospect reference or command hash.
+    for (const internal of ["Scope", "Prospect reference", "Command hash"])
+      expect(row.fields.some((f) => f.label === internal)).toBe(false);
+    if (linked)
+      expect(JSON.stringify(row.fields)).not.toContain(
+        item.proposal.context.linkedClientId,
+      );
   }
 });
 it("only exact saved version receipts display saved; substituted successor and context are refused", async () => {
