@@ -47,9 +47,11 @@ const makeAllocation = (
 
 export async function installInitialInput(
   page: Page,
-  running = false,
+  /** A run that stays running, or a getter so a test can finish it later. */
+  running: boolean | (() => boolean) = false,
   general = false,
 ) {
+  const isRunning = () => (typeof running === "function" ? running() : running);
   const selectedScopes = general ? generalScopes : scopes;
   const selectedRun = (...args: Parameters<typeof runFor>) => ({
     ...runFor(...args),
@@ -70,7 +72,7 @@ export async function installInitialInput(
   };
   const events = () =>
     (native.submitted
-      ? running
+      ? isRunning()
         ? [status(1, "queued"), status(2, "running")]
         : [
             status(1, "queued"),
@@ -81,7 +83,7 @@ export async function installInitialInput(
     ).map((item) => ({ ...item, scopes: selectedScopes }));
   const state = () =>
     native.submitted
-      ? running
+      ? isRunning()
         ? ("running" as const)
         : ("completed" as const)
       : ("queued" as const);

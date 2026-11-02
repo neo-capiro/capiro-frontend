@@ -4,6 +4,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useId,
   useRef,
   useState,
   type CSSProperties,
@@ -11,11 +12,15 @@ import {
   type PointerEvent,
   type ReactNode,
 } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./shell.module.css";
 
 type SidebarVisibility = {
   expanded: boolean;
   toggle: () => void;
+  workspaceOpen: boolean;
+  setWorkspaceOpen: (open: boolean) => void;
+  workspaceId: string;
 };
 
 const SidebarVisibilityContext = createContext<SidebarVisibility | null>(null);
@@ -38,9 +43,18 @@ function saveWidth(width: number) {
 /** Meri's desktop sidebar state is local to one mounted product shell. */
 export function MeriSidebarVisibility({ children }: { children: ReactNode }) {
   const [expanded, setExpanded] = useState(true);
+  const pathname = usePathname();
+  const [workspacePath, setWorkspacePath] = useState<string | null>(null);
+  const workspaceId = useId();
   return (
     <SidebarVisibilityContext.Provider
-      value={{ expanded, toggle: () => setExpanded((value) => !value) }}
+      value={{
+        expanded,
+        toggle: () => setExpanded((value) => !value),
+        workspaceOpen: workspacePath === pathname,
+        setWorkspaceOpen: (open) => setWorkspacePath(open ? pathname : null),
+        workspaceId,
+      }}
     >
       {children}
     </SidebarVisibilityContext.Provider>

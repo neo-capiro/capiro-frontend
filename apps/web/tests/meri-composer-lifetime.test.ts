@@ -99,7 +99,9 @@ function session(current?: MeriConversationPort): Session {
       storageError: undefined,
       start: vi.fn(async () => false),
       retry: vi.fn(async () => false),
-      readMapping: vi.fn(async () => false),
+      opened: undefined,
+      check: vi.fn(async () => false),
+      discard: vi.fn(async () => false),
     } satisfies Session["continuation"],
   } as unknown as Session;
 }
@@ -166,8 +168,11 @@ it("names the reason Enter is refused, in the person's words, and none once send
     ),
   ).toBe("Choose a conversation first.");
   expect(sendBlockedReason(live, true, "Typed")).toBe(
-    "A run is in progress. Use Stop to request cancellation; your draft stays editable.",
+    "Meri is still answering.",
   );
+  expect(
+    sendBlockedReason({ ...live, stopBlocked: "Verify the run." }, true, "x"),
+  ).toBe("Meri is still answering. Verify the run.");
   expect(sendBlockedReason(live, false, "   ")).toBe("Type a message to send.");
   expect(sendBlockedReason(live, false, "Typed")).toBeUndefined();
   expect(
@@ -310,4 +315,39 @@ it("publishes only after commit and old cleanup cannot retire newer controls for
   detach();
   channel.publish(old);
   expect(notified).toHaveBeenCalledTimes(3);
+});
+
+it("a message typed while Meri is still answering is queued once, never dropped, and the queue can be cancelled", () => {
+  const channel = createConversationComposer();
+  const current = port();
+  const onQueue = vi.fn();
+  const handlers = { ...controls(), onQueue };
+  channel.publish({ port: current, controls: handlers, running: true });
+  render(channel, session(current));
+  expect(enter()).toHaveBeenCalledOnce();
+  expect(onQueue).toHaveBeenCalledOnce();
+  expect(handlers.onSend).not.toHaveBeenCalled();
+  const onCancel = vi.fn();
+  channel.publish({
+    port: current,
+    controls: { ...controls(), queued: { onCancel } },
+    running: true,
+  });
+  const html = render(channel, session(current));
+  expect(html).toContain("Queued: sends when Meri finishes.");
+  expect(html).toContain("Typed during connection</textarea>");
+});
+
+it("a genuine block (no queue offered) still refuses Enter and keeps the draft", () => {
+  const channel = createConversationComposer();
+  const current = port();
+  const handlers = {
+    ...controls(),
+    sendBlocked: "Delivery of your last request is uncertain. Retry it before sending another.",
+  };
+  channel.publish({ port: current, controls: handlers, running: false });
+  const html = render(channel, session(current));
+  expect(sendButton(html)).toMatch(/\sdisabled(?:=|\s|>)/i);
+  expect(enter()).toHaveBeenCalledOnce();
+  expect(handlers.onSend).not.toHaveBeenCalled();
 });

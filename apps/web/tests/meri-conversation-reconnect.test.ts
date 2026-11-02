@@ -349,6 +349,55 @@ it("an idle session renews itself 45 s before Meri's cap instead of running into
   }
 });
 
+it("an idle tab holds one session per 255 s against Meri's 300 s cap and a refused renewal ends it", async () => {
+  clock();
+  // Meri's receipt expiry is min(Clerk token exp, Core receipt, sessions.maxTtlMs): 300 s with the 300 s identity token
+  // and Core PR 408; the renewal 45 s before it is the only issuance an idle tab makes in each 255 s.
+  let revoked = false;
+  const fetcher = vi.fn<typeof fetch>(async () =>
+    revoked ? refused(403) : session(context, 300_000),
+  );
+  const host = new ConversationHostController({
+    hints: exactHints,
+    account,
+    fetcher,
+  });
+  // useConversationConnection reopens the conversation on a renewal expiry.
+  const unsubscribe = host.subscribe(() => {
+    if (
+      host.getSnapshot().status === "expired" &&
+      host.getExpirationReason() === "renewal"
+    )
+      void Promise.resolve().then(() => host.connect());
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    expect(fetcher).toHaveBeenCalledTimes(1);
+    for (let renewal = 1; renewal <= 3; renewal++) {
+      await vi.advanceTimersByTimeAsync(255_000 - 1);
+      expect(fetcher).toHaveBeenCalledTimes(renewal);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(fetcher).toHaveBeenCalledTimes(renewal + 1);
+      expect(host.getSnapshot().status).toBe("ready");
+    }
+    // 765 s idle: four issuances, none of them answered from an earlier receipt.
+    expect(fetcher).toHaveBeenCalledTimes(4);
+    // The user is revoked at Core: the next renewal is refused, the tab loses access and asks no more.
+    revoked = true;
+    await vi.advanceTimersByTimeAsync(255_000);
+    expect(fetcher).toHaveBeenCalledTimes(5);
+    expect(host.getSnapshot().status).toBe("unavailable");
+    expect(host.getIssuanceStatus()).toBe(403);
+    expect(host.getExpirationReason()).toBe("access-lost");
+    await vi.advanceTimersByTimeAsync(600_000);
+    expect(fetcher).toHaveBeenCalledTimes(5);
+  } finally {
+    unsubscribe();
+    detach();
+  }
+});
+
 it("a request in flight defers the early renewal until it settles", async () => {
   clock();
   const history = heldResponse();

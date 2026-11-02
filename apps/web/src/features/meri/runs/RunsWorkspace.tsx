@@ -1,6 +1,13 @@
 "use client";
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useId, useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@capiro/ui/select";
 import type {
   RunIndexListRequest,
   RunIndexSummary,
@@ -20,6 +27,7 @@ import {
   usageSummary,
 } from "./RunRecord";
 import ui from "../ui/meri-ui.module.css";
+import styles from "./runs.module.css";
 
 const statuses = [
   { id: "all", label: "All" },
@@ -34,6 +42,7 @@ type Props = {
 };
 
 export function RunsWorkspace(props: Props) {
+  const scopeId = useId();
   const [scope, setScope] = useState<RunIndexListRequest["scope"]>(
     props.clientId
       ? { kind: "client", clientId: props.clientId }
@@ -44,26 +53,37 @@ export function RunsWorkspace(props: Props) {
     return <RunRecord {...props} selection={props.selection} />;
   return (
     <>
-      <div className={ui.row}>
-        <label>
-          Run scope{" "}
-          <select
+      <div className={styles.filters}>
+        <div className={styles.scope}>
+          <label htmlFor={scopeId}>Run scope</label>
+          <Select
             value={scope.kind}
-            onChange={(event) =>
+            onValueChange={(value) =>
               setScope(
-                event.target.value === "client" && props.clientId
+                value === "client" && props.clientId
                   ? { kind: "client", clientId: props.clientId }
-                  : { kind: event.target.value === "all" ? "all" : "general" },
+                  : { kind: value === "all" ? "all" : "general" },
               )
             }
           >
-            {props.clientId && (
-              <option value="client">{props.clientName}</option>
-            )}
-            <option value="general">General</option>
-            <option value="all">All my permitted scopes</option>
-          </select>
-        </label>
+            <SelectTrigger id={scopeId} className={styles.scopeTrigger}>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className={styles.scopeContent}>
+              {props.clientId && (
+                <SelectItem className={styles.scopeItem} value="client">
+                  {props.clientName}
+                </SelectItem>
+              )}
+              <SelectItem className={styles.scopeItem} value="general">
+                General
+              </SelectItem>
+              <SelectItem className={styles.scopeItem} value="all">
+                All my permitted scopes
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         <SegmentedTabs
           label="Run status"
           options={statuses}
@@ -102,7 +122,7 @@ function RunPages({
       <div className={ui.row}>
         <button
           type="button"
-          className={ui.outline}
+          className={`${ui.outline} ${styles.action}`}
           onClick={() => {
             setCursors([null]);
             result.reload();
@@ -110,7 +130,7 @@ function RunPages({
         >
           Refresh runs
         </button>
-        <span>
+        <span className={ui.muted}>
           Recorded status is not a worker heartbeat. Pages may change between
           reads.
         </span>
@@ -130,7 +150,7 @@ function RunPages({
       <nav className={ui.row} aria-label="Run pages">
         <button
           type="button"
-          className={ui.outline}
+          className={`${ui.outline} ${styles.action}`}
           disabled={result.loading || cursors.length === 1}
           onClick={() => setCursors((values) => values.slice(0, -1))}
         >
@@ -139,7 +159,7 @@ function RunPages({
         <span>Page {cursors.length}</span>
         <button
           type="button"
-          className={ui.outline}
+          className={`${ui.outline} ${styles.action}`}
           disabled={result.loading || !result.value?.nextCursor}
           onClick={() => {
             const next = result.value?.nextCursor;
@@ -166,7 +186,7 @@ export function RunPage({
       label: "Run",
       width: 30,
       render: (run) => (
-        <Link href={runRecordHref(run, clientId)}>
+        <Link className={styles.runLink} href={runRecordHref(run, clientId)}>
           Run started {runTime(run.createdAt)}
         </Link>
       ),
@@ -194,14 +214,17 @@ export function RunPage({
     },
     {
       key: "usage",
-      label: "SDK estimate",
+      label: "SDK estimate · USD",
       width: 20,
       render: (run) => usageSummary(run.usage),
     },
   ];
   return (
-    <section aria-label="Recorded runs">
-      <p>
+    <section
+      aria-label="Recorded runs"
+      className={`${styles.stack} ${styles.list}`}
+    >
+      <p className={ui.muted}>
         Observed {runTime(value.observedAt)}.{" "}
         {value.nextCursor
           ? "More permitted runs are available."
@@ -223,7 +246,7 @@ export function RunPage({
           </p>
         </StateMessage>
       )}
-      <p>
+      <p className={ui.muted}>
         SDK estimates are not provider-billed charges. Missing records are not
         zero usage.
       </p>

@@ -21,6 +21,7 @@ const sessionSchema = z.object({
 export type BrowserHearingSession = z.infer<typeof sessionSchema>;
 const epochSchema = z.object({
   id: z.string(),
+  mimeType: z.enum(["audio/webm", "video/webm"]).optional(),
   startMs: z.number(),
   durableEndMs: z.number(),
   durableSequence: z.number(),
@@ -52,7 +53,7 @@ const params = z.object({ params: hearingIdParams }).strict();
 const source =
   "apps/intel-api/src/hearing/hearing.controller.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace";
 const recording =
-  "apps/intel-api/src/hearing/recording/recording.controller.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace";
+  "apps/intel-api/src/hearing/recording/recording.controller.ts @3e74d6be495494cde366ab3f09f10c4fe375b096";
 const ticketSchema = z.object({
   ticket: z.string().min(1).max(2000),
   expiresAt: z.iso.datetime(),
@@ -197,6 +198,11 @@ export const legiwatchSessionOperations = {
     request: params,
     response: z.object({
       available: z.boolean(),
+      recordingProtocols: z.array(z.number().int()).optional(),
+      videoMimeType: z.string().optional(),
+      videoAvailable: z.boolean().optional(),
+      canEnableVideo: z.boolean().optional(),
+      maxRecordingBytes: z.number().int().positive().optional(),
       retentionDays: z.number().nullable(),
       reason: z.string().nullable(),
     }),
@@ -207,6 +213,19 @@ export const legiwatchSessionOperations = {
     method: "POST",
     path: "/hearings/:id/recording/enable",
     request: params,
+    response: z.object({ recordingPolicy: z.literal("audio_and_transcript") }),
+    source: recording,
+  }),
+  "legiwatch.recording.enableVideo": defineOperation({
+    service: "intelligence",
+    method: "POST",
+    path: "/hearings/:id/recording/enable-video",
+    request: z
+      .object({
+        params: hearingIdParams,
+        body: z.object({ videoAudioAcknowledged: z.literal(true) }).strict(),
+      })
+      .strict(),
     response: z.object({ recordingPolicy: z.literal("audio_and_transcript") }),
     source: recording,
   }),
@@ -225,6 +244,7 @@ export const legiwatchSessionOperations = {
       url: z.url(),
       expiresAt: z.string(),
       epochId: z.string(),
+      mimeType: z.enum(["audio/webm", "video/webm"]).optional(),
       startMs: z.number(),
       durationMs: z.number(),
     }),

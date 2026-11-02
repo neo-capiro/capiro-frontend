@@ -1,5 +1,8 @@
 import { TaskDetailRefreshProbe } from "./TaskDetailRefreshProbe";
+import { PresentationAuditProbe } from "./PresentationAuditProbe";
+import { MeriRunsHost } from "../../src/features/meri/runs/MeriRunsHost";
 import { ConversationHistoryList } from "../../src/features/meri/conversations/ConversationHistoryList";
+import { MeriConversationList } from "../../src/features/meri/conversations/MeriConversationList";
 import { SyntheticMeriCapabilities } from "./meri-capability-profile";
 import { ProposalRefreshProbe } from "./ProposalRefreshProbe";
 import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
@@ -63,6 +66,14 @@ function SessionProbe() {
 function RoutedApp() {
   const path = usePathname();
   const search = useSearchParams();
+  if (path === "/__test/presentation-audit")
+    return (
+      <ProductShell section="memory">
+        <RequireSession>
+          <PresentationAuditProbe reviewId={search.get("reviewId")} />
+        </RequireSession>
+      </ProductShell>
+    );
   // Dedicated synthetic harness mounts for the governed lifecycle and routine suites.
   // No production route uses these paths; "/" is otherwise only addressed by them.
   if (path === "/") return <SelectedLifecycleProbe />;
@@ -73,12 +84,58 @@ function RoutedApp() {
       </div>
     );
   if (path === "/routines") return <RoutinesProbe />;
-  if (path === "/meri/conversations")
+  if (path === "/meri/runs" && search.get("navigation-audit") === "1") {
+    const conversationId = search.get("conversationId"),
+      runId = search.get("runId");
     return (
+      <ProductShell section="runs">
+        <RequireSession>
+          <MeriRunsHost
+            enabled
+            selection={
+              conversationId && runId ? { conversationId, runId } : undefined
+            }
+          />
+        </RequireSession>
+      </ProductShell>
+    );
+  }
+  // Opened for a client, the list carries the production shell so its sidebar controls are
+  // exercised; the bare list keeps the lifecycle probes' direct mount.
+  if (path === "/meri/conversations") {
+    if (search.get("navigation-audit") === "1")
+      return (
+        <ProductShell
+          section="conversations"
+          conversationEnabled
+          firstChatBootstrapEnabled
+        >
+          <RequireSession>
+            <MeriConversationList enabled firstChatBootstrapEnabled />
+          </RequireSession>
+        </ProductShell>
+      );
+    const list = (
       <RequireSession>
         <ConversationHistoryList />
       </RequireSession>
     );
+    return search.has("clientId") ? (
+      <ProductShell
+        section="conversations"
+        conversationEnabled={
+          sessionStorage.getItem("meri-conversation-enabled") === "true"
+        }
+        firstChatBootstrapEnabled={
+          sessionStorage.getItem("meri-first-chat-enabled") === "true"
+        }
+      >
+        {list}
+      </ProductShell>
+    ) : (
+      list
+    );
+  }
   if (isOnboardPath(path) && search.get("onboard-boundary") === "1")
     return <OnboardBoundaryProbe />;
   if (isOnboardPath(path)) {

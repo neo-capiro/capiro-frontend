@@ -9,7 +9,7 @@ import {
   updatedLabel,
 } from "../src/features/meri/conversations/ConversationHistoryList";
 import { SavedChatTranscript } from "../src/features/meri/conversations/SavedChatTranscript";
-import { useManagedChange } from "../src/features/meri/conversations/useManagedChange";
+import { useManagedChange } from "../src/shared/meri-conversations/useManagedChange";
 import {
   MANAGEMENT_VERSION,
   type ConversationSummary,

@@ -12,6 +12,9 @@ import { useCurrentRead } from "../conversation/evidence/useCurrentRead";
 import { RecordedUsageView } from "../conversation/evidence/RecordedUsageView";
 import { StateMessage } from "../ui/StateMessage";
 import ui from "../ui/meri-ui.module.css";
+import styles from "./runs.module.css";
+import { usageSummary } from "./usage-presentation";
+export { usageSummary } from "./usage-presentation";
 
 export const runTime = (value: string) =>
   new Date(value).toLocaleString("en", {
@@ -20,12 +23,7 @@ export const runTime = (value: string) =>
     timeZone: "UTC",
   }) + " UTC";
 export const runStatus = (value: RunIndexSummary["state"]) =>
-  value.replaceAll("-", " ");
-export function usageSummary(usage: RunIndexSummary["usage"]) {
-  if (usage.recording === "not-recorded") return "Not recorded";
-  if (usage.sdkEstimateUsd === null) return "Unavailable";
-  return `$${String(usage.sdkEstimateUsd)} USD${usage.recording === "unavailable" ? " (partial)" : ""}`;
-}
+  value[0]!.toUpperCase() + value.slice(1).replaceAll("-", " ");
 export function runRecordHref(
   run: Pick<RunIndexSummary, "conversationId" | "runId">,
   clientId: string | null,
@@ -54,10 +52,17 @@ export function RunRecord({
   return (
     <>
       <div className={ui.row}>
-        <Link href={scopedHref("/meri/runs", clientId ?? undefined)}>
+        <Link
+          className={`${ui.ghost} ${styles.action}`}
+          href={scopedHref("/meri/runs", clientId ?? undefined)}
+        >
           Back to runs
         </Link>
-        <button type="button" className={ui.outline} onClick={result.reload}>
+        <button
+          type="button"
+          className={`${ui.outline} ${styles.action}`}
+          onClick={result.reload}
+        >
           Refresh run
         </button>
       </div>
@@ -104,25 +109,60 @@ export function RunRecordDetails({
       ? clientId
       : (run.clientIds[0] ?? null);
   return (
-    <section aria-label="Run record">
-      <h2>Run started {runTime(run.createdAt)}</h2>
-      <dl>
-        <dt>Recorded status</dt>
-        <dd>{runStatus(run.state)}</dd>
-        <dt>Status time</dt>
-        <dd>{runTime(run.statusAt)}</dd>
-        <dt>Observed</dt>
-        <dd>{runTime(value.observedAt)}</dd>
-        <dt>SDK estimate</dt>
-        <dd>{usageSummary(run.usage)}</dd>
-      </dl>
-      <p>
-        A recorded terminal status does not verify that a worker has physically
-        stopped. Check the conversation for current work, approvals, completed
-        outputs and available controls.
+    <section aria-label="Run record" className={styles.stack}>
+      <div>
+        <h2 className={styles.title}>Run started {runTime(run.createdAt)}</h2>
+        <p className={ui.muted}>
+          {run.clientIds.length
+            ? `${run.clientIds.length} permitted client ${run.clientIds.length === 1 ? "scope" : "scopes"}`
+            : "General"}
+        </p>
+      </div>
+      <div className={styles.summary}>
+        <dl className={styles.metadata}>
+          <div>
+            <dt>Recorded status</dt>
+            <dd>{runStatus(run.state)}</dd>
+          </div>
+          <div>
+            <dt>Status time</dt>
+            <dd>
+              <time dateTime={run.statusAt}>{runTime(run.statusAt)}</time>
+            </dd>
+          </div>
+          <div>
+            <dt>Observed</dt>
+            <dd>
+              <time dateTime={value.observedAt}>
+                {runTime(value.observedAt)}
+              </time>
+            </dd>
+          </div>
+          <div>
+            <dt>SDK estimate · USD</dt>
+            <dd className={styles.estimate}>{usageSummary(run.usage)}</dd>
+          </div>
+        </dl>
+        {run.usage.recording !== "not-recorded" &&
+        run.usage.sdkEstimateUsd !== null ? (
+          <details className={styles.exact}>
+            <summary>Exact estimate</summary>
+            <p>
+              Recorded SDK estimate: {String(run.usage.sdkEstimateUsd)} USD
+              {run.usage.recording === "unavailable" ? " (partial)" : ""}
+              <br />
+              This is the exact received estimate; it is not a provider-billed
+              charge.
+            </p>
+          </details>
+        ) : null}
+      </div>
+      <p className={ui.muted}>
+        Recorded status is a saved update, not confirmation that work has
+        stopped. Open the conversation for current work, approvals and outputs.
       </p>
       <Link
-        className={ui.outline}
+        className={`${ui.outline} ${styles.action}`}
         href={conversationHref(anchor, run.conversationId)}
       >
         Open this conversation

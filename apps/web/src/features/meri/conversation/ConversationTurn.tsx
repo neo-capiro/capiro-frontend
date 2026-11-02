@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Message, MessageContent } from "@capiro/ui/message";
 import { MarkdownContent } from "../../../shared/markdown/MarkdownContent";
 import { DesignIcon } from "../../../shared/shell/DesignIcon";
@@ -9,6 +10,8 @@ import { runStateLabels } from "../workspace/workspace-view";
 import { isTerminal, type TurnView } from "./conversation-view";
 import { describeRunFailure } from "./run-failure";
 import { useIntentApprovalsEnabled } from "./intents/approvals-enabled";
+import { useModelCatalogContext } from "../model-selection/ModelCatalogContext";
+import { runModelLabel } from "../model-selection/model-selection";
 import answer from "../cited-answer.module.css";
 import styles from "./live.module.css";
 import { TurnFeedback } from "./feedback/TurnFeedback";
@@ -37,14 +40,24 @@ export function ConversationTurn({
   turn,
   label,
   showPrompt = true,
+  controls,
 }: {
   turn: TurnView;
   /** Accessible name of the turn, e.g. "Current turn". */
   label: string;
   /** Resumed segments retain their output/status while their logical prompt is shown once. */
   showPrompt?: boolean;
+  /** The current run's pause, steer and recovery controls, beside the working status. */
+  controls?: ReactNode;
 }) {
   const tone = attentionTones[turn.runState];
+  // A finished answer names the model and effort that produced it, from the admitted request and
+  // the catalog already read for the picker; an unlabelled or unknown model shows nothing.
+  const catalog = useModelCatalogContext();
+  const modelLabel =
+    turn.runState === "completed"
+      ? runModelLabel(catalog, turn.modelSelection)
+      : undefined;
   const silent =
     isTerminal(turn.runState) &&
     turn.messages.length === 0 &&
@@ -66,17 +79,25 @@ export function ConversationTurn({
               <DesignIcon name="assistant-sparkle" assetSet="cited-answer" />
               Meri
             </span>
-            {tone ? (
-              <StatusPill tone={tone}>
-                {runStateLabels[turn.runState]}
-              </StatusPill>
-            ) : (
-              activeStates.has(turn.runState) && (
-                <span role="status" className={styles.working}>
-                  Meri is working…
+            <div className={styles.answerStatus}>
+              {tone ? (
+                <StatusPill tone={tone}>
+                  {runStateLabels[turn.runState]}
+                </StatusPill>
+              ) : (
+                activeStates.has(turn.runState) && (
+                  <span role="status" className={styles.working}>
+                    Meri is working…
+                  </span>
+                )
+              )}
+              {modelLabel && (
+                <span className={styles.modelLabel} title="Model that answered">
+                  {modelLabel}
                 </span>
-              )
-            )}
+              )}
+              {controls}
+            </div>
           </div>
           {turn.omittedPrefix && (
             <p className={styles.muted}>

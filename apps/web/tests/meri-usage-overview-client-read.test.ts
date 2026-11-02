@@ -89,6 +89,17 @@ it("the real client reads the /2 aggregate through the contract server", async (
   expect(server.fetcher).toHaveBeenCalledOnce();
 });
 
+it("receives and renders a tenant policy above the former 100-turn ceiling through the published /2 receiver", async () => {
+  const value = usageOverviewFixture();
+  const body = {
+    ...value,
+    policy: { ...value.policy, maxTurns: 1000 } as typeof value.policy,
+  };
+  const { received } = await readOnce(body);
+  expect(received).toEqual(body);
+  expect(renderScreen(body)).toContain("1000");
+});
+
 it("renders the received body as distinct successful, partial, failed and unclosed facts", async () => {
   const { received } = await readOnce(usageOverviewFixture());
   const html = renderScreen(received);

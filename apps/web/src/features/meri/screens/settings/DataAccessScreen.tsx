@@ -122,9 +122,10 @@ export function DataAccessScreen({
           </SettingsCard>
           <SettingsCard
             title="Connections"
-            description="Mailbox reads use your own provider connection; connected services list the connectors Meri can call. Connect or repair them on their own pages."
+            description="Mailbox reads use your own provider connection: connect it, and run Sync now after it stops synchronizing, under Capiro Settings > Integrations. Connected services list the connectors Meri can call. Connect or repair them on their own pages."
           >
             <p className={ui.row}>
+              <Link href="/settings/integrations">Integrations (mailbox sync)</Link>
               <Link href="/settings/preferences?page=connections">
                 Connections
               </Link>

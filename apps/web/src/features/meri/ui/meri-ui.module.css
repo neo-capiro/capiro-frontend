@@ -17,7 +17,8 @@
   flex-direction: column;
   gap: 6px;
 }
-.headingCopy h1 {
+.headingCopy h1,
+.headingCopy h2 {
   font-size: 26px;
   line-height: 39px;
   font-weight: 600;

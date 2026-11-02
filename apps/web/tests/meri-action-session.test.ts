@@ -74,7 +74,14 @@ describe("Meri minimal server-selected session receipt", () => {
       expect(receiveSessionReceipt(JSON.stringify(value), now)).toEqual(value);
     },
   );
-  it.each([-1, 0, 300_001])("refuses expired or excessive TTL %i", (ttl) => {
+  it("applies its own 300 s bound to a receipt that reaches past it instead of refusing it", () => {
+    const value = { ...receipt(), expiresAtMs: now + 300_001 };
+    expect(receiveSessionReceipt(JSON.stringify(value), now)).toEqual({
+      ...value,
+      expiresAtMs: now + 300_000,
+    });
+  });
+  it.each([-1, 0])("refuses expired TTL %i", (ttl) => {
     expect(() =>
       receiveSessionReceipt(
         JSON.stringify({ ...receipt(), expiresAtMs: now + ttl }),

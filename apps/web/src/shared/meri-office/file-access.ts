@@ -1,6 +1,8 @@
 import { receiveOfficeDownload } from "@capiro/meri-contracts/office-application";
 import { withActionDeadline } from "../meri-actions/bounded-json";
+import type { ConversationContext } from "../meri-conversations/session";
 import { createLinkTransport } from "../meri-documents/link-transport";
+import { createDocumentLibraryAccess } from "../meri-documents/library-access";
 import { createOfficeTransport, type OfficeTransport } from "./transport";
 
 async function downloadFile(
@@ -45,9 +47,12 @@ async function downloadFile(
 }
 
 /** Same native session and existing signed-link owner. Office's public receiver
- * admits the truthful edited-XLSX inspection and verifies the immutable bytes. */
+ * admits the truthful edited-XLSX inspection and verifies the immutable bytes;
+ * the revision history is the same immutable artifact history the library reads. */
 export function createOfficeBrowserPort(
-  options: Parameters<typeof createOfficeTransport>[0],
+  options: Parameters<typeof createOfficeTransport>[0] & {
+    context: ConversationContext;
+  },
 ) {
   const local = new AbortController(),
     lifetime = AbortSignal.any([options.lifetime, local.signal]);
@@ -57,35 +62,56 @@ export function createOfficeBrowserPort(
     lifetime,
     options.fetcher,
   );
+  const library = createDocumentLibraryAccess({
+    credential: options.credential,
+    context: options.context,
+    lifetime,
+    onAccessLost: options.onAccessLost,
+    ...(options.fetcher ? { fetcher: options.fetcher } : {}),
+  });
   let active = 0;
+  const bounded = <T>(
+    caller: AbortSignal,
+    work: (signal: AbortSignal, check: () => void) => Promise<T>,
+  ) =>
+    withActionDeadline([caller, lifetime], (signal) => {
+      const check = () => {
+        signal.throwIfAborted();
+        if (!options.isCurrent()) throw new Error("Office context changed");
+      };
+      check();
+      return work(signal, check);
+    });
   return {
     request: port.request,
-    pending: () => active > 0 || port.pending(),
+    pending: () => active > 0 || port.pending() || library.pending(),
     dispose() {
       local.abort();
+      library.dispose();
       port.dispose();
     },
     async download(versionId: string, caller: AbortSignal) {
       active++;
       try {
-        return await withActionDeadline([caller, lifetime], (signal) => {
-          const check = () => {
-            signal.throwIfAborted();
-            if (!options.isCurrent()) throw new Error("Office context changed");
-          };
-          check();
-          return downloadFile(
+        return await bounded(caller, (signal, check) =>
+          downloadFile(
             port,
             links,
             versionId,
             signal,
             check,
             options.onAccessLost,
-          );
-        });
+          ),
+        );
       } finally {
         active--;
       }
+    },
+    /** The immutable revisions of the opened version's artifact, newest first, from the same owner the library reads. */
+    history(versionId: string, caller: AbortSignal) {
+      return bounded(caller, (signal) =>
+        library.history({ versionId, limit: 50, cursor: null }, signal),
+      );
     },
   };
 }

@@ -148,6 +148,19 @@ export function useConversationSession(
     connection.retry,
     history.refresh,
   );
+  // A renewal that control did not answer reconnects on the connection's own schedule; the transcript
+  // is read again once when the connection is back, never per attempt (ConversationHistoryStatus owns
+  // the history ladder).
+  const unansweredRenewal = connection.unverified && !!connection.unreachable;
+  const recovering = useRef(false);
+  const { refresh } = history;
+  useEffect(() => {
+    if (unansweredRenewal) recovering.current = true;
+    else if (recovering.current && connection.state.status === "ready") {
+      recovering.current = false;
+      refresh();
+    }
+  }, [unansweredRenewal, connection.state.status, refresh]);
   const modelCatalog = useModelCatalog(account, !accessLost);
   const local = useConversationLocalState(
     boundReady?.port.context,
@@ -187,12 +200,17 @@ export function useConversationSession(
     accessLost ? undefined : continuation.intent,
     continuation.busy,
     continuation.failure,
+    continuation.opened,
   );
   const skillSelection =
     local.skillSelection ??
     (view.acceptedRequest
       ? skillSelectionFields(storedSubmission(view.acceptedRequest))
       : {});
+  // A released message's text goes back to an empty box; text the person kept or typed stays.
+  const restoreDraft = (prompt: string | undefined) => {
+    if (prompt && !local.initialDraft.draft().trim()) local.setDraft(prompt);
+  };
   const startNext = (prompt: string, finished: TurnView) => {
     if (
       !view.source ||
@@ -282,10 +300,16 @@ export function useConversationSession(
     openLatest: () => {
       if (view.latestTarget) connection.reopen({ target: view.latestTarget });
     },
-    readReservation: async () => {
-      if (view.reservation)
-        await continuation.readMapping(view.reservation.sourceBinding);
+    /** Ask control about the pending message; the saved history is read again either way. */
+    checkPending: async () => {
+      await continuation.check(view.reservation?.sourceBinding, restoreDraft);
       history.refresh();
     },
+    /** Give up a message whose delivery stays uncertain; nothing is sent. */
+    discardPending: () =>
+      void continuation.discard(
+        view.reservation?.targetBinding.runId,
+        restoreDraft,
+      ),
   };
 }

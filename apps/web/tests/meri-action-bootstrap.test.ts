@@ -119,7 +119,6 @@ describe("Meri bootstrap admits only the bounded canonical receipt", () => {
     { credential: `action_session_${"x".repeat(42)}+` },
     { expiresAtMs: now },
     { expiresAtMs: now - 1 },
-    { expiresAtMs: now + 300_001 },
     { expiresAtMs: now + 0.5 },
     { expiresAtMs: Number.MAX_SAFE_INTEGER + 1 },
     { authority: "browser-approved" },
@@ -133,6 +132,15 @@ describe("Meri bootstrap admits only the bounded canonical receipt", () => {
     await expect(
       bootstrapActionSession({}, signal(), fetcher, () => now),
     ).rejects.toThrow();
+    expect(fetcher).toHaveBeenCalledOnce();
+  });
+  it("applies the client's own 300 s bound to a receipt that reaches past it instead of refusing it", async () => {
+    const fetcher = vi.fn(async () =>
+      Response.json({ ...receipt(), expiresAtMs: now + 300_001 }),
+    );
+    await expect(
+      bootstrapActionSession({}, signal(), fetcher, () => now),
+    ).resolves.toEqual({ ...receipt(), expiresAtMs: now + 300_000 });
     expect(fetcher).toHaveBeenCalledOnce();
   });
   it("uses the clock after receiving, so a receipt expiring during a held fetch is rejected", async () => {

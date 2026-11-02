@@ -149,7 +149,7 @@ export function stamp(value: string | null | undefined): string | undefined {
  */
 export function connectedServiceRow(
   row: ConnectorRow,
-  name = row.name,
+  name = connectorTitle(row),
   admin = false,
 ): ConnectedServiceRow {
   const scope =
@@ -184,10 +184,59 @@ export function connectedServiceRows(
   return rows.map((row) =>
     connectedServiceRow(
       row,
-      connectors.find((entry) => entry.id === row.catalogId)?.name ?? row.name,
+      connectors.find((entry) => entry.id === row.catalogId)?.name ??
+        connectorTitle(row),
       admin,
     ),
   );
+}
+
+const catalogPrefix = /^meriv3-/;
+/** Brands whose casing a capital first letter would get wrong. */
+const brandCasing: Record<string, string> = {
+  api: "API",
+  crm: "CRM",
+  docusign: "DocuSign",
+  github: "GitHub",
+  gitlab: "GitLab",
+  hubspot: "HubSpot",
+  linkedin: "LinkedIn",
+  mcp: "MCP",
+  onedrive: "OneDrive",
+  pacer: "PACER",
+  quickbooks: "QuickBooks",
+  sharepoint: "SharePoint",
+  youtube: "YouTube",
+};
+
+const uuid = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
+/** A catalog id, a UUID, or lowercase tokens joined by hyphens or underscores. */
+const looksLikeId = (name: string, catalogId: string | null) =>
+  name === catalogId ||
+  catalogPrefix.test(name) ||
+  uuid.test(name) ||
+  /^[a-z0-9]+(?:[-_][a-z0-9]+)+$/.test(name);
+
+/**
+ * A readable service name for a row whose catalog entry is not in the library read: the stored
+ * name unless it looks like an id, otherwise a title from the catalog id ("meriv3-google-drive"
+ * is "Google Drive"). An id is never shown as a name.
+ */
+export function connectorTitle(row: Pick<ConnectorRow, "name" | "catalogId">) {
+  const stored = row.name.trim();
+  if (!looksLikeId(stored, row.catalogId)) return stored;
+  const words = (row.catalogId ?? stored)
+    .replace(catalogPrefix, "")
+    .split(/[-_]+/)
+    .filter(Boolean);
+  if (!words.length) return stored;
+  return words
+    .map(
+      (word) =>
+        brandCasing[word.toLowerCase()] ??
+        word.charAt(0).toUpperCase() + word.slice(1),
+    )
+    .join(" ");
 }
 
 /** The inputs the connect step must collect before it can be sent. */

@@ -16,7 +16,7 @@ import {
 } from "./staging-model";
 import { useNewsletterStaging } from "./useNewsletterStaging";
 import styles from "./newsletter-staging.module.css";
-import parity from "./newsletter-figma.module.css";
+import parity from "./newsletter-review.module.css";
 
 export function NewsletterStaging({
   draftId,

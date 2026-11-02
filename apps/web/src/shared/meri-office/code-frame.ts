@@ -6,6 +6,14 @@ type Callbacks = {
   modified(value: boolean): void;
   renew(): void;
   unavailable(reason: "closed" | "expired" | "save-unknown" | "disposed"): void;
+  /** CODE's own Save control. Its default action is disabled, so the host runs the confirmed Save. */
+  saveRequested(): void;
+  /** CODE's File › Save As. The WOPI file never writes relative files; the host publishes a revision instead. */
+  saveAsRequested(): void;
+  /** CODE's revision-history item (`revisionhistory=1`). */
+  historyRequested(): void;
+  /** CODE's close control (`closebutton=1`). Its default action is disabled, so the host releases the editor. */
+  closeRequested(): void;
 };
 type Save = {
   resolve(): void;
@@ -19,6 +27,28 @@ const getter = (key: "origin" | "source" | "data") =>
 const originGetter = getter("origin"),
   sourceGetter = getter("source"),
   dataGetter = getter("data");
+
+/** The host's UI preferences for the CODE page: the full notebookbar workbench with CODE's close and revision
+ * history controls posting to the host. These are presentation hints on the service-composed launch URL; the
+ * `WOPISrc` and the token fields stay the service's. */
+export const CODE_UI_DEFAULTS = "UIMode=notebookbar;SavedUIState=false";
+export function codeLaunchUrl(actionUrl: string, lang?: string | null) {
+  const url = new URL(actionUrl);
+  url.searchParams.set("ui_defaults", CODE_UI_DEFAULTS);
+  url.searchParams.set("closebutton", "1");
+  url.searchParams.set("revisionhistory", "1");
+  if (lang && /^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/u.test(lang))
+    url.searchParams.set("lang", lang);
+  return url.href;
+}
+/** The frame's permissions policy, granted to the editor origin explicitly: a frame navigated by a form POST has no
+ * `src`, so a bare feature name would grant nothing inside CODE. */
+export const codeFrameAllow = (editorOrigin: string) =>
+  ["fullscreen", "clipboard-read", "clipboard-write"]
+    .map((feature) => `${feature} ${new URL(editorOrigin).origin}`)
+    .join("; ");
+/** UI events whose default CODE action the host takes over once the document is loaded. */
+const HOST_OWNED_ACTIONS = ["UI_Save", "UI_Close"] as const;
 
 /** CODE messages are hints from this exact frame, never an authority or a Publish
  * receipt. After Save succeeds the caller must read the canonical private draft. */
@@ -61,6 +91,7 @@ export class CodeFrameChannel {
       this.options.origin,
     );
   }
+  /** Sent on frame load and again on `Frame_Ready`: CODE drops host messages until it has seen it. */
   handshake() {
     this.send("Host_PostmessageReady");
   }
@@ -161,29 +192,34 @@ export class CodeFrameChannel {
       values && typeof values === "object" && !Array.isArray(values)
         ? (values as Record<string, unknown>)
         : {};
-    if (
-      message.MessageId === "App_LoadingStatus" &&
-      fields.Status === "Document_Loaded"
-    ) {
-      if (!this.ready) {
+    const callbacks = this.options.callbacks;
+    if (message.MessageId === "App_LoadingStatus") {
+      if (fields.Status === "Frame_Ready") this.handshake();
+      else if (fields.Status === "Document_Loaded" && !this.ready) {
         this.ready = true;
-        this.options.callbacks.ready();
+        for (const action of HOST_OWNED_ACTIONS)
+          this.send("Disable_Default_UIAction", { action, disable: true });
+        callbacks.ready();
       }
     } else if (
       message.MessageId === "Doc_ModifiedStatus" &&
       typeof fields.Modified === "boolean"
     )
-      this.options.callbacks.modified(fields.Modified);
+      callbacks.modified(fields.Modified);
     else if (
       message.MessageId === "App_TokenExpiring" ||
       message.MessageId === "App_TokenExpired"
     )
       this.requestRenewal();
-    else if (
-      message.MessageId === "UI_Close" ||
-      message.MessageId === "Session_Closed"
-    )
-      this.stop("closed");
+    else if (message.MessageId === "UI_Save" && this.ready)
+      callbacks.saveRequested();
+    else if (message.MessageId === "UI_SaveAs" && this.ready)
+      callbacks.saveAsRequested();
+    else if (message.MessageId === "UI_FileVersions" && this.ready)
+      callbacks.historyRequested();
+    else if (message.MessageId === "UI_Close" && this.ready)
+      callbacks.closeRequested();
+    else if (message.MessageId === "Session_Closed") this.stop("closed");
     else if (message.MessageId === "Action_Save_Resp" && this.save) {
       if (fields.success === true) this.settleSave(true);
       else this.stop("save-unknown");
@@ -209,6 +245,7 @@ export class CodeFrameChannel {
 export function submitCodeLaunch(
   frame: HTMLIFrameElement,
   launch: OfficeLaunch,
+  lang?: string | null,
 ) {
   if (
     !frame.isConnected ||
@@ -222,7 +259,7 @@ export function submitCodeLaunch(
   if (!frame.name) frame.name = `meri-office-${crypto.randomUUID()}`;
   frame.referrerPolicy = "no-referrer";
   form.method = "POST";
-  form.action = launch.actionUrl;
+  form.action = codeLaunchUrl(launch.actionUrl, lang);
   form.target = frame.name;
   form.hidden = true;
   for (const [name, value] of Object.entries(launch.fields)) {

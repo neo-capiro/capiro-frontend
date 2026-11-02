@@ -12,8 +12,7 @@ import {
 } from "./newsletter-atomic-save";
 
 export type NewsletterEditorProps = {
-  existing?: WorkspaceDraftDocument;
-  initialClientId?: string;
+  existing: WorkspaceDraftDocument;
   onClose: () => void;
   saveOwner?: NewsletterSave;
   onAtomicBound?: (draft: WorkspaceDraftDocument) => void;

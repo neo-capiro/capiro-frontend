@@ -9,24 +9,22 @@ export { MAX_COMPOSER_UPLOADS };
 const noSubscription = () => () => undefined;
 const noVersion = () => 0;
 
-export function useComposerAttachments(
+/**
+ * The slot the composer presents for one displayed conversation port. The unavailable copy travels
+ * only while no port has bound an upload access: a bound access is the Attach control itself, so
+ * its tooltip must never repeat "Not available yet" beside a working file input.
+ */
+export function composerAttachmentSlot(
   port: MeriConversationPort | null,
   unavailable: string,
 ): ComposerAttachments {
   const uploads = port?.uploads ?? null;
-  // The access is the port's own member, so presenting it needs no second controller, no credential
-  // and no shape assertion; a replaced session disposes it and its version stops moving.
-  useSyncExternalStore(
-    uploads?.subscribe ?? noSubscription,
-    uploads?.version ?? noVersion,
-    uploads?.version ?? noVersion,
-  );
   return {
     ...(port
       ? { selectedTab: { access: port.selectedTab, context: port.context } }
       : {}),
     available: uploads !== null,
-    unavailable,
+    ...(uploads === null ? { unavailable } : {}),
     items: uploads?.items() ?? [],
     incoming: uploads?.incoming() ?? [],
     busy: uploads?.pending() ?? false,
@@ -41,4 +39,19 @@ export function useComposerAttachments(
     onToggleIncoming: (uploadId) => uploads?.toggle(uploadId),
     limit: MAX_COMPOSER_UPLOADS,
   };
+}
+
+export function useComposerAttachments(
+  port: MeriConversationPort | null,
+  unavailable: string,
+): ComposerAttachments {
+  const uploads = port?.uploads ?? null;
+  // The access is the port's own member, so presenting it needs no second controller, no credential
+  // and no shape assertion; a replaced session disposes it and its version stops moving.
+  useSyncExternalStore(
+    uploads?.subscribe ?? noSubscription,
+    uploads?.version ?? noVersion,
+    uploads?.version ?? noVersion,
+  );
+  return composerAttachmentSlot(port, unavailable);
 }

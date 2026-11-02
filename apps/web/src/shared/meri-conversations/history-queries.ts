@@ -2,6 +2,7 @@
 import type { ResearchSelection } from "./research-context";
 import { useEffect } from "react";
 import {
+  infiniteQueryOptions,
   useInfiniteQuery,
   useQuery,
   useQueryClient,
@@ -13,6 +14,7 @@ import {
   listConversations,
   readConversationTranscript,
   type ConversationListPage,
+  type ConversationTranscriptPage,
   ConversationHistoryUnavailable,
   summarizeConversations,
   MANAGEMENT_VERSION,
@@ -92,6 +94,9 @@ async function scopedTranscript(
     !conversationInClient(page.conversation, account, clientId, research)
   )
     throw new Error("Conversation client mismatch");
+  // A page that claims more without moving the cursor is a failed read, never a silent end.
+  if (page.hasMore && page.nextSequence <= (after ?? protocol.defaults.after))
+    throw new Error("Transcript page did not advance");
   return page;
 }
 
@@ -192,21 +197,15 @@ export function useConversationDiscovery(
   return { query, conversations, unavailable: !!query.error || invalid };
 }
 
-/** History and latest-run lineage use conversation cursors, never the SDK stream cursor. */
-export function useConversationHistory(
+/** Saved pages are read forward from the first event, one bounded page per request. */
+export function savedTranscriptQuery(
   account: ConversationAccount,
   clientId: string | null,
-  conversationId?: string,
-  enabled = true,
+  conversationId: string | undefined,
+  enabled: boolean,
   research?: ResearchSelection,
 ) {
-  const cache = useQueryClient();
-  const { tenantId, actorId } = account;
-  useEffect(() => {
-    if (!enabled)
-      clearConversationReads(cache, { tenantId, actorId }, clientId);
-  }, [cache, tenantId, actorId, clientId, enabled]);
-  const query = useInfiniteQuery({
+  return infiniteQueryOptions({
     queryKey: transcriptKey(account, clientId, conversationId, research),
     enabled: enabled && !!conversationId,
     initialPageParam: protocol.defaults.after as number,
@@ -224,15 +223,85 @@ export function useConversationHistory(
     staleTime: 0,
     refetchOnMount: "always",
   });
+}
+
+type SavedTranscriptQuery = {
+  data: { pages: ConversationTranscriptPage[] } | undefined;
+  error: unknown;
+  hasNextPage: boolean;
+  isFetching: boolean;
+  isFetchNextPageError: boolean;
+  isRefetching: boolean;
+};
+
+/**
+ * The first page stops at the page size, not at the conversation's end, while the latest run is
+ * read on its own: shown together they would skip every turn in between, so the read continues
+ * by itself until the whole saved transcript is loaded. Only a continuation that failed waits
+ * for a manual retry.
+ */
+export const nextSavedPageDue = (
+  query: Pick<SavedTranscriptQuery, "hasNextPage" | "isFetching" | "error">,
+) => query.hasNextPage && !query.isFetching && !query.error;
+
+/** Pages already admitted by this read stay on screen while the rest loads or after a continuation failed. */
+export function savedHistory(
+  query: SavedTranscriptQuery,
+  enabled: boolean,
+  account: ConversationAccount,
+  clientId: string | null,
+  research?: ResearchSelection,
+) {
+  const moreFailed =
+    !!query.error && query.isFetchNextPageError && !accessDenied(query.error);
   let saved: ReturnType<typeof transcriptPages> | undefined,
     invalid = false;
-  if (enabled && query.data && !query.error && !query.isRefetching) {
+  // A re-read of the admitted pages hides them until the owner admits them again.
+  if (
+    enabled &&
+    query.data &&
+    (!query.error || moreFailed) &&
+    !query.isRefetching
+  ) {
     try {
       saved = transcriptPages(query.data.pages, account, clientId, research);
     } catch {
       invalid = true;
     }
   }
+  return { saved, invalid, moreFailed };
+}
+
+/** History and latest-run lineage use conversation cursors, never the SDK stream cursor. */
+export function useConversationHistory(
+  account: ConversationAccount,
+  clientId: string | null,
+  conversationId?: string,
+  enabled = true,
+  research?: ResearchSelection,
+) {
+  const cache = useQueryClient();
+  const { tenantId, actorId } = account;
+  useEffect(() => {
+    if (!enabled)
+      clearConversationReads(cache, { tenantId, actorId }, clientId);
+  }, [cache, tenantId, actorId, clientId, enabled]);
+  const query = useInfiniteQuery(
+    savedTranscriptQuery(account, clientId, conversationId, enabled, research),
+  );
+  const { hasNextPage, isFetching, error, fetchNextPage } = query;
+  const selected = enabled && !!conversationId;
+  useEffect(() => {
+    if (selected && nextSavedPageDue({ hasNextPage, isFetching, error }))
+      void fetchNextPage();
+  }, [selected, hasNextPage, isFetching, error, fetchNextPage]);
+  const { saved, invalid, moreFailed } = savedHistory(
+    query,
+    enabled,
+    account,
+    clientId,
+    research,
+  );
   const latestBase = saved?.latest?.latestSequenceBase;
   const tail = useLatestTranscript(
     account,
@@ -256,7 +325,9 @@ export function useConversationHistory(
     selected: !!conversationId,
     /** No turn has run yet; there is no saved history to show, which is not a failure. */
     empty,
-    unavailable: (!!query.error && !empty) || invalid || denied,
+    /** The pages after those shown could not be read; the shown pages are kept. */
+    moreFailed: moreFailed && !denied,
+    unavailable: (!!query.error && !empty && !moreFailed) || invalid || denied,
     refresh: () => {
       if (enabled && conversationId) void query.refetch();
       if (enabled && latestBase !== undefined) void tail.refetch();

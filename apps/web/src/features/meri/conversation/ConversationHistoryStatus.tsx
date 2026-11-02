@@ -11,7 +11,25 @@ import { useReconnectSchedule } from "../../../shared/meri-conversations/reconne
 
 type Session = ReturnType<typeof useConversationSession>;
 
-/** Unresolved writes keep recovery controls until exact completed-request history acknowledges them. */
+/** An answer that stays uncertain never locks the thread: the person may give up the message. */
+function DiscardPending({ session }: { session: Session }) {
+  return (
+    <Button
+      type="button"
+      variant="outline"
+      className={ui.outline}
+      disabled={session.continuation.busy}
+      onClick={() => session.discardPending()}
+    >
+      Discard and write a new message
+    </Button>
+  );
+}
+
+/**
+ * Unresolved writes keep recovery controls until control answers for them: "Check again" asks about
+ * the exact pending message, and an answer that stays uncertain offers an explicit discard.
+ */
 function TurnRecoveryStatus({ session }: { session: Session }) {
   const { continuation } = session;
   // Control never answered the check (or the edge refused it): the retained message is kept and the
@@ -52,6 +70,7 @@ function TurnRecoveryStatus({ session }: { session: Session }) {
           >
             Try again
           </Button>
+          <DiscardPending session={session} />
         </div>
       ) : (
         (session.recoveryNeeded || session.unknownReservation) && (
@@ -71,13 +90,11 @@ function TurnRecoveryStatus({ session }: { session: Session }) {
               variant="outline"
               className={ui.outline}
               disabled={continuation.busy}
-              onClick={() => {
-                if (session.recoveryNeeded) void continuation.retry();
-                else void session.readReservation();
-              }}
+              onClick={() => void session.checkPending()}
             >
               Check again
             </Button>
+            {continuation.failed && <DiscardPending session={session} />}
           </div>
         )
       )}
@@ -108,12 +125,24 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
   const unreachableSaved =
     history.unavailable &&
     controlFailure(history.query.error) === "unreachable";
+  // A continuation control did not answer continues from the page that failed, never from the
+  // first page again; a continuation control refused waits for the person.
+  const unreachableMore =
+    history.moreFailed && controlFailure(history.query.error) === "unreachable";
   const unreachableLatest =
-    !unreachableSaved && controlFailure(history.tail.error) === "unreachable";
-  const unreachable = unreachableSaved || unreachableLatest;
+    !unreachableSaved &&
+    !unreachableMore &&
+    controlFailure(history.tail.error) === "unreachable";
+  const unreachable = unreachableSaved || unreachableMore || unreachableLatest;
   const { refetch: refetchLatest } = history.tail;
+  const { fetchNextPage } = history.query;
+  const retryUnreachable = unreachableSaved
+    ? history.refresh
+    : unreachableMore
+      ? () => void fetchNextPage()
+      : () => void refetchLatest();
   const reconnect = useReconnectSchedule(
-    unreachableSaved
+    unreachableSaved || unreachableMore
       ? history.query.isFetching
         ? "busy"
         : "failing"
@@ -122,7 +151,7 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
           ? "busy"
           : "failing"
         : "ok",
-    unreachableSaved ? history.refresh : () => void refetchLatest(),
+    retryUnreachable,
   );
   const recovered = !loading && history.selected && !history.unavailable;
   // A healthy conversation restores itself; the manual re-read and diagnostics stay behind a
@@ -145,7 +174,7 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
             disabled={history.query.isFetching}
             onClick={() => {
               reconnect.reset();
-              history.refresh();
+              retryUnreachable();
             }}
           >
             Retry
@@ -167,23 +196,26 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
             Reload saved history
           </Button>
         </div>
+      ) : history.moreFailed ? (
+        // Control refused the pages after the ones shown; the rest waits for a manual retry.
+        <div role="status" className={styles.historyIssue}>
+          <p>Part of the saved conversation is shown.</p>
+          {recovered && (
+            <Button
+              type="button"
+              variant="outline"
+              className={ui.outline}
+              disabled={history.query.isFetching}
+              onClick={() => void history.query.fetchNextPage()}
+            >
+              Load more saved turns
+            </Button>
+          )}
+        </div>
       ) : history.query.hasNextPage ? (
-        // Only a partial view is worth saying; a fully restored history is just the transcript.
-        <p role="status">Part of the saved conversation is shown.</p>
+        // The read continues by itself; a fully restored history is just the transcript.
+        <p role="status">Loading the rest of the saved conversation.</p>
       ) : null}
-      {recovered && history.query.hasNextPage && (
-        <>
-          <Button
-            type="button"
-            variant="outline"
-            className={ui.outline}
-            disabled={history.query.isFetching}
-            onClick={() => void history.query.fetchNextPage()}
-          >
-            Load more saved turns
-          </Button>
-        </>
-      )}
       {history.tail.error && !history.unavailable && !unreachable && (
         <p role="status">
           The latest turn could not be verified. Reload saved history before

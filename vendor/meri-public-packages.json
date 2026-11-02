@@ -1090,6 +1090,62 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "ui-stream 0.1.33 admits @capiro/meri-contracts 0.1.49 as a peer (neo-capiro/meri-greenfield#500); no stream behaviour change."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.50-14b7c65d-4e83dd96d9b2.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.50",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "14b7c65d35eb86dd5fbc70bd708af158c208d9fa",
+   "sourceTree": "1319bf758560f8a6b2b3cffdc79de4bb4e8a9eb9",
+   "bytes": 2201601,
+   "sha256": "4e83dd96d9b2088b99e00d1177756eeb6a955dbee4f86034903f58b1325d9c95",
+   "integrity": "sha512-qt+lhtaAU6UOU2nlWrCrDaWYxJKKcd+c2T7lOU4tvAzsTo266qQyfcD/zkmBs5zTF2rGih0rLo2yc37D3oaYOA==",
+   "regularEntryCount": 123,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Usage overview /2 admits policy.maxTurns up to the 1000-turn platform ceiling (MAX_RUN_TURNS, neo-capiro/meri-greenfield#533) instead of the former literal 100, so a tenant above 100 turns still receives its Usage page; run-limits.mjs joins the usage generator provenance. No other wire change; actual package/consumer qualification recorded separately."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.34-14b7c65d-52a0daf02549.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.34",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "14b7c65d35eb86dd5fbc70bd708af158c208d9fa",
+   "sourceTree": "1319bf758560f8a6b2b3cffdc79de4bb4e8a9eb9",
+   "bytes": 3855,
+   "sha256": "52a0daf02549d54aafa262f57703a990c09259ece680f6ac7393ceb825b4afcd",
+   "integrity": "sha512-j77DpVWug48y+I3RW7yPosGKnGGT/Az1AjsbbQmyfW0pwDpvTv7EaDm1p6aCT0NMcwUSet4NK+dhuWc8fPpSdg==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "ui-stream 0.1.34 admits @capiro/meri-contracts 0.1.50 as a peer (neo-capiro/meri-greenfield#533); no stream behaviour change."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.51-82cd23f1-78e6a310f437.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.51",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "82cd23f177afaf2c8b4191bdaeec219d1633d466",
+   "sourceTree": "704b62bc5182d762eb20e292842f6d1c6189461b",
+   "bytes": 2202262,
+   "sha256": "78e6a310f437fd18cae6a787fe0461db79b647a163c3c48ef785eb1f6d1077f8",
+   "integrity": "sha512-sgzS1cSOgn0bJGGTVreJghJOrDFXsuEpL2lqNpbtSQ5EMoxgHNDrK5JT3MwqaRDcidLsCq/jJe3UERTRurSaWg==",
+   "regularEntryCount": 123,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Run admission that finds the tenant's monthly cap reached answers its own 429 TENANT_MONTHLY_CAP_REACHED on submit and admit (allocate: outcome NOT_DISPATCHED) instead of 502 CONVERSATION_UNAVAILABLE (conversation-application 0.1.17, conversation-input 0.1.9, conversation-initial-input 0.1.12). No other wire change; conversation metadata provenance refreshed."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.35-82cd23f1-b94ec419a6c0.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.35",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "82cd23f177afaf2c8b4191bdaeec219d1633d466",
+   "sourceTree": "704b62bc5182d762eb20e292842f6d1c6189461b",
+   "bytes": 3856,
+   "sha256": "b94ec419a6c06a09f977fa2da27ac68ea4ea4524f1649f212c3a8cf9822a3369",
+   "integrity": "sha512-QKjB97Twtnmrm5Mw/ivdgz01ahLtXnCWChGrh5gQB9enjMaaMhYjSeZUElq7H2Wz09VyBxxlu2HGjUuoF7622w==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "ui-stream 0.1.35 admits @capiro/meri-contracts 0.1.51 as a peer; no stream behaviour change."
   }
  ]
 }

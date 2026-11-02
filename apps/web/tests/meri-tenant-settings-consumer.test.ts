@@ -200,7 +200,8 @@ describe("canonical tenant settings consumer", () => {
   });
   it("rejects unsafe or rounded monetary input and round-trips exact microUSD", () => {
     expect(modelDraft("1", "0.25", "5")).toEqual(model);
-    for (const turns of ["0", "101", "1.5", "NaN", "1e1"])
+    expect(modelDraft("1", "0.25", "1000")).toEqual({ ...model, maxTurns: 1000 });
+    for (const turns of ["0", "1001", "1.5", "NaN", "1e1"])
       expect(modelDraft("1", "0.25", turns)).toBeNull();
     for (const value of [
       "",

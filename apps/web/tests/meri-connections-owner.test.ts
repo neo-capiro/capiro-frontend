@@ -168,8 +168,20 @@ describe("Meri connections owner projection", () => {
     expect(degraded.detail).toContain("Mail source degraded");
     expect(degraded.detail).toContain("More mail remains to import");
     expect(degraded.detail).toContain("Retention repair is still required");
-    // The provider reason code is not user-facing copy.
+    // The provider reason code is not user-facing copy: each reason is a sentence, an unknown one is still incomplete coverage.
     expect(degraded.detail).not.toContain("mail_sync_stale");
+    expect(degraded.detail).toContain("Stored mail has not synchronized recently; recent messages may be missing.");
+    const folders = coverageNotice(
+      connection({ mailCoverage: coverage({ sourceStatus: "degraded", reason: "mail_folders_not_synced" }) }),
+    );
+    expect(folders.detail).toContain("Mail folders have not finished syncing yet; try again later.");
+    expect(folders.detail).not.toContain("mail_folders_not_synced");
+    expect(folders.detail).not.toContain("mail folders not synced");
+    const unknownReason = coverageNotice(
+      connection({ mailCoverage: coverage({ sourceStatus: "degraded", reason: "mail_new_reason_from_core" }) }),
+    );
+    expect(unknownReason.detail).toContain("Mail coverage for this mailbox is incomplete.");
+    expect(unknownReason.detail).not.toContain("mail_new_reason_from_core");
 
     const unavailable = coverageNotice(
       connection({ mailCoverage: coverage({ sourceStatus: "unavailable" }) }),

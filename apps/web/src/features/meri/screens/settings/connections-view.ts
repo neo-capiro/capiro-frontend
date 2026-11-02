@@ -101,6 +101,29 @@ export function connectionRows(
 }
 
 /**
+ * Core's mail coverage reasons (capiro-backend apps/api/src/engagement/mail-sync-coverage.ts) as sentences. A reason this
+ * copy does not know is still reported as incomplete coverage, never shown as its code.
+ */
+const MAIL_COVERAGE_REASON_COPY: Readonly<Record<string, string>> = {
+  mailbox_not_connected: "The mailbox is not connected, so stored mail stops at its last synchronization.",
+  mail_sync_failed: "The last mail synchronization failed; recent messages may be missing.",
+  mail_sync_incomplete: "Mail synchronization has not finished; recent messages may still be missing.",
+  mail_never_synced: "This mailbox has never synchronized mail yet.",
+  mail_sync_coverage_unknown: "How much of this mailbox is stored is unknown.",
+  mail_capture_repair_required: "Mail capture needs repair before stored mail is complete.",
+  mail_replay_folder_unavailable: "Some mail folders could not be read during synchronization; their messages are missing.",
+  mail_messages_skipped_after_provider_errors: "Some messages were skipped after provider errors and are missing from stored mail.",
+  mail_folder_enumeration_incomplete: "Not all mail folders have been discovered yet; try again later.",
+  mail_folders_not_synced: "Mail folders have not finished syncing yet; try again later.",
+  mail_sync_timestamp_in_future: "The mailbox's synchronization time is unreliable; treat coverage as unknown.",
+  mail_sync_stale: "Stored mail has not synchronized recently; recent messages may be missing.",
+};
+export function mailCoverageReasonCopy(reason: string | null | undefined): string {
+  if (!reason) return "";
+  return MAIL_COVERAGE_REASON_COPY[reason] ?? "Mail coverage for this mailbox is incomplete.";
+}
+
+/**
  * Coverage sentences come from Core's mail coverage, resource health and
  * subscription projections. A missing coverage object, a connected status, or an
  * absent reason code must not be presented as complete import coverage.
@@ -132,8 +155,7 @@ export function coverageNotice(
       ? "The configured backfill is not complete."
       : "",
     coverage?.hasMore ? "More mail remains to import." : "",
-    connection.lastError ||
-      (coverage?.reason ? `${coverage.reason.replaceAll("_", " ")}.` : ""),
+    connection.lastError || mailCoverageReasonCopy(coverage?.reason),
     coverage?.captureRepair === "required"
       ? "Retention repair is still required before coverage is complete."
       : "",

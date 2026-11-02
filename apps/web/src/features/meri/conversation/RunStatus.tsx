@@ -7,7 +7,7 @@ import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import styles from "./live.module.css";
 import { matchesStoredRequest } from "./run-commands";
 import { controlReconnectingMessage } from "./control-reachability";
-import { describeSkillRefusal } from "./skill-refusal";
+import { describeSendRefusal } from "./skill-refusal";
 
 /**
  * Connection, delivery and stop feedback for the current run; never a run outcome by itself. A
@@ -47,7 +47,7 @@ export function RunStatus({
     <>
       {run.refusal && (
         <p role="alert" className={styles.muted}>
-          {describeSkillRefusal(run.refusal)}
+          {describeSendRefusal(run.refusal)}
         </p>
       )}
       {run.error && !run.failure && !run.refusal && (
@@ -105,12 +105,6 @@ export function RunStatus({
         </div>
       )}
       <StopStatus run={run} active={active} />
-      {active && (
-        <p className={styles.muted}>
-          Leaving this page stops watching and does not cancel the run. Use Stop
-          to request cancellation.
-        </p>
-      )}
     </>
   );
 }
@@ -237,7 +231,10 @@ function StopStatus({
   );
 }
 
-/** Watching an unfinished run: receiving, resuming from the cursor, or stopped trying. */
+/**
+ * Watching an unfinished run: a healthy stream says nothing (the turn's working status already
+ * does); a delayed recovery or a stalled stream is announced.
+ */
 function ObservationStatus({ run }: { run: ReturnType<typeof useLiveRun> }) {
   const { observing } = run;
   const [delayed, setDelayed] = useState(false);
@@ -249,11 +246,9 @@ function ObservationStatus({ run }: { run: ReturnType<typeof useLiveRun> }) {
   }, [observing]);
   return (
     <>
-      {(observing === "live" || observing === "reconnecting") && (
+      {observing === "reconnecting" && delayed && (
         <p role="status" className={styles.muted}>
-          {observing === "reconnecting" && delayed
-            ? "Updates are delayed. Reconnecting from the last received update…"
-            : "Waiting for Meri updates."}
+          Updates are delayed. Reconnecting from the last received update…
         </p>
       )}
       {observing === "stalled" && (

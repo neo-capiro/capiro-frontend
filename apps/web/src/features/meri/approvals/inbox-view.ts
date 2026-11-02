@@ -1,5 +1,9 @@
 import type { IntentsInboxRow } from "@capiro/meri-client/intents";
 import {
+  INTENT_OPERATION_LABELS,
+  intentOperationLabel,
+} from "../conversation/intents/intent-labels";
+import {
   conversationHref,
   conversationLabel,
 } from "../../../shared/meri-conversations/conversation-navigation";
@@ -27,28 +31,6 @@ export type InboxContext = {
   now: number;
 };
 
-const operationLabels: Readonly<Record<string, string>> = {
-  create_task: "Create a task",
-  update_task: "Update a task",
-  create_word: "Prepare a document",
-  create_excel: "Prepare a spreadsheet",
-  create_powerpoint: "Prepare a presentation",
-  request_document: "Prepare a document",
-  save_memory: "Save to memory",
-  save_chat_attachments: "File chat attachments",
-  send_mail: "Send an email",
-  browser_action: "Browser action",
-  watch_action: "Watch change",
-  apply_legiwatch_suggestion: "Apply LegiWatch suggestion",
-  save_legiwatch_relevance: "Save LegiWatch relevance",
-  create_client: "Create a client",
-  update_client_profile: "Update a client profile",
-  save_business_development_brief: "Save a business development brief",
-  prepare_legiwatch_briefing: "Prepare a LegiWatch briefing",
-  save_legislative_research: "Save legislative research",
-  publish_research_portfolio_share_link: "Publish a research share link",
-  revoke_research_portfolio_share_link: "Revoke a research share link",
-};
 const kindLabels: Readonly<Record<IntentsInboxRow["kind"], string>> = {
   proposal: "Proposal",
   browser_action: "Browser action",
@@ -60,15 +42,12 @@ const kindLabels: Readonly<Record<IntentsInboxRow["kind"], string>> = {
   research_action: "Research action",
   research_share: "Research share link",
 };
-const humanize = (id: string) =>
-  id.replaceAll("_", " ").replace(/^./, (c) => c.toUpperCase());
-
 /** The proposal column: the operation the person would approve, in the conversation list's words. */
 export function proposalLabel(row: IntentsInboxRow) {
   return (
-    operationLabels[row.operation.id] ??
+    INTENT_OPERATION_LABELS[row.operation.id] ??
     (row.kind === "proposal"
-      ? humanize(row.operation.id)
+      ? intentOperationLabel(row.operation.id)
       : kindLabels[row.kind])
   );
 }

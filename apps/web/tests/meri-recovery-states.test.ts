@@ -360,7 +360,8 @@ function historySession(
     continuation: { intent: undefined, failed: false, notReady: false },
     recoveryNeeded: false,
     unknownReservation: false,
-    readReservation: vi.fn(),
+    checkPending: vi.fn(),
+    discardPending: vi.fn(),
   } as unknown as HistorySession;
 }
 const renderHistory = (session: HistorySession) =>

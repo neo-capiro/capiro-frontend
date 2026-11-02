@@ -1,0 +1,89 @@
+.review {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.meta {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.review fieldset {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 16px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.review legend {
+  padding: 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.review label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.review label:has(input[type="checkbox"]) {
+  flex-wrap: nowrap;
+  min-height: 44px;
+}
+.review select {
+  max-width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+}
+.review button[type="submit"] {
+  min-height: 44px;
+  width: fit-content;
+}
+.timeline {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.details summary,
+.action {
+  min-height: 44px;
+  padding: 10px 14px;
+  width: fit-content;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  font-size: 14px;
+  cursor: pointer;
+}
+.action {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.details summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.details dl {
+  padding: 16px;
+  background: var(--muted);
+  font-size: 13px;
+}
+.details dl > div {
+  margin-bottom: 12px;
+}
+.details dt {
+  color: var(--muted-foreground);
+}
+.details dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}

@@ -88,7 +88,8 @@ function session(bound: MeriConversationPort): Session {
       storageError: undefined,
       start: vi.fn(async () => false),
       retry: vi.fn(async () => false),
-      readMapping: vi.fn(async () => false),
+      check: vi.fn(async () => false),
+      discard: vi.fn(async () => false),
     },
   } as unknown as Session;
 }

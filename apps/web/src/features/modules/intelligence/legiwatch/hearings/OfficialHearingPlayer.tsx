@@ -18,7 +18,11 @@ import {
 } from "media-chrome/react/menu";
 import { createMediaStore } from "media-chrome/media-store/media-store";
 import { SourceLink } from "../components";
-import { officialMedia } from "./official-media";
+import {
+  officialMedia,
+  officialWatchSource,
+  type OfficialWatchMedia,
+} from "./official-media";
 import styles from "./official-player.module.css";
 
 function Icon({ name, size = 24 }: { name: string; size?: number }) {
@@ -36,12 +40,14 @@ function Icon({ name, size = 24 }: { name: string; size?: number }) {
 
 export function OfficialHearingPlayer({
   sourceUrl,
+  watchMedia,
   listing = false,
 }: {
   sourceUrl?: string | null;
+  watchMedia?: OfficialWatchMedia | null;
   listing?: boolean;
 }) {
-  const source = officialMedia(sourceUrl);
+  const source = officialWatchSource(sourceUrl, watchMedia);
   return (
     <section
       className={styles.panel}
@@ -50,11 +56,17 @@ export function OfficialHearingPlayer({
     >
       <div className={styles.heading}>
         <strong>Official hearing stream</strong>
-        <SourceLink href={sourceUrl}>
+        <SourceLink
+          href={
+            source.kind === "video" && watchMedia
+              ? watchMedia.officialPageUrl
+              : sourceUrl
+          }
+        >
           Official source <Icon name="external-link" />
         </SourceLink>
       </div>
-      {source.kind === "video" && !listing ? (
+      {source.kind === "video" ? (
         <SupportedVideo key={source.url} source={source} />
       ) : (
         <div className={styles.fallback}>

@@ -17,7 +17,7 @@ import {
 import { useProspectDraftSave } from "./prospects/useProspectDraftSave";
 import type { ProspectWriter } from "./prospects/recovery-authority";
 import { ProspectSaveRecovery } from "./prospects/ProspectSaveRecovery";
-import { NewsletterWorkflow } from "./newsletter/NewsletterWorkflow";
+import { NewsletterEditor } from "./newsletter/NewsletterEditor";
 import { DocumentPreview } from "./rich-document/DocumentPreview";
 import { SectionEditor } from "./rich-document/SectionEditor";
 import { sectionSizeError } from "./rich-document/content";
@@ -348,7 +348,7 @@ export function WorkspaceDraft({
     !query.data?.prospectId &&
     query.data?.product === "Newsletter"
   )
-    return <NewsletterWorkflow onClose={onClose} existing={query.data} />;
+    return <NewsletterEditor onClose={onClose} existing={query.data} />;
   return (
     <StatusPanel
       loading={query.loading || me.loading}

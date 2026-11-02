@@ -5,6 +5,7 @@ import type {
   IntentsNativeProposal,
 } from "@capiro/meri-client/intents";
 import type { IntentField, IntentRow } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 
 export function isMemoryProposal(
   proposal: IntentsProposal,
@@ -71,10 +72,6 @@ export function memoryResultFields(
 ): readonly IntentField[] {
   const { result, execution } = outcome;
   return [
-    { label: "Candidate reference", value: result.candidateId },
-    { label: "Candidate hash", value: result.candidateSha256 },
-    // reviewId is a submission correlation, not a routable review-request ID.
-    { label: "Submission reference", value: result.reviewId },
     { label: "Submitted", value: execution.completedAt },
     { label: "Review checked", value: result.review.checkedAt },
     ...(result.review.decidedAt === null
@@ -128,7 +125,6 @@ export function memoryProposalFields(
       value:
         "Approval submits this exact content for memory review. Submission does not activate or publish memory.",
     },
-    { label: "Expires", value: proposal.expiresAt },
-    { label: "Command hash", value: proposal.commandSha256 },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   ];
 }

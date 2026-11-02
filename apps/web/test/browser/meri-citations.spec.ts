@@ -95,9 +95,20 @@ async function savedSources(
     })),
   });
   await installCurrentRun(page, native);
+  // The read continues past the page size by itself; the partial view is held until released.
+  let release: () => void = () => undefined;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  if (partial)
+    await page.route("**/api/conversations/transcript", async (route) => {
+      const input = route.request().postDataJSON() as { after: number };
+      if (input.after > 0) await held;
+      await route.fallback();
+    });
   await page.goto(selectedUrl);
   await expect(disclosure(page)).toBeVisible();
-  return { fixture, native };
+  return { fixture, native, release };
 }
 
 async function capture(page: Page, info: TestInfo, name: string) {
@@ -234,7 +245,7 @@ test("saved references start collapsed, support keyboard disclosure and retain b
 test("incomplete saved history keeps its references and does not claim zero sources", async ({
   page,
 }, info) => {
-  const { fixture } = await savedSources(page, true);
+  const { fixture, release } = await savedSources(page, true);
   await expect(page.getByText(incomplete, { exact: true })).toBeVisible();
   await expect(
     page.getByText("More saved updates for this run have not been loaded.", {
@@ -254,9 +265,7 @@ test("incomplete saved history keeps its references and does not claim zero sour
     page.getByText("No source references were provided.", { exact: true }),
   ).toHaveCount(0);
   await expectAccessibleHome(page, info);
-  await page
-    .getByRole("button", { name: "Load more saved turns", exact: true })
-    .click();
+  release();
   await expect(page.getByText(incomplete, { exact: true })).toHaveCount(0);
   await expectNeutralReferences(page);
   expect(fixture.unexpected).toEqual([]);

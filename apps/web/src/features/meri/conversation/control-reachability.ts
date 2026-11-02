@@ -25,6 +25,20 @@ export const controlReconnectingMessage =
 export const transientStatus = (status: number | undefined) =>
   status !== undefined && (status === 408 || status === 429 || status >= 500);
 
+/**
+ * What the reconnect schedule should do for a connection: keep retrying while control did not answer
+ * ("failing"), wait while an attempt is in flight ("busy"), and stand down otherwise ("ok").
+ */
+export const reconnectState = (
+  unreachable: boolean,
+  status: "idle" | "connecting" | "unavailable" | "expired" | "ready",
+) =>
+  unreachable
+    ? "failing"
+    : status === "connecting" || status === "idle"
+      ? "busy"
+      : "ok";
+
 export function controlFailure(cause: unknown): ControlFailure | undefined {
   if (cause instanceof ConversationHistoryUnavailable)
     return cause.status === 403
@@ -32,10 +46,11 @@ export function controlFailure(cause: unknown): ControlFailure | undefined {
       : transientStatus(cause.status)
         ? "unreachable"
         : undefined;
+  // A definitive refusal (a reached monthly cap answers 429) is control's own answer, never unreachable.
   if (cause instanceof ConversationUnavailable)
     return cause.code === EDGE_REFUSED
       ? "refused"
-      : transientStatus(cause.status)
+      : !cause.definitive && transientStatus(cause.status)
         ? "unreachable"
         : undefined;
   // fetch rejects with a TypeError when the network fails; the request deadline aborts.

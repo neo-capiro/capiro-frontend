@@ -1,5 +1,11 @@
 "use client";
-import { useEffect, useRef, useState, type RefObject } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
@@ -19,11 +25,11 @@ import {
   type TurnView,
 } from "./conversation-view";
 import { useLiveRun } from "./useLiveRun";
+import { settledRefreshDue } from "./saved-turns";
 import { shouldShowPrompt } from "./prompt-identity";
 import type { InitialDraftOwner } from "./initial-draft";
 import styles from "./live.module.css";
 import type { ConversationSkillSelection } from "../../../shared/meri-conversations/query-journal";
-import { markFirstChatIntentUsed } from "../../../shared/meri-conversations/first-chat-intent";
 import {
   useRunLifecycle,
   type LifecycleTarget,
@@ -36,6 +42,7 @@ import { SelectedRequestReceipt } from "./SelectedRequestReceipt";
 import { ConnectedBrowserViewer } from "../browser/ConnectedBrowserViewer";
 import { DailyQuote } from "../quote/DailyQuote";
 import { inputRefusedMessage } from "./control-reachability";
+import { useBoundedCheck, useQueuedSend } from "./queued-send";
 import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 
 /** The current admitted segment, or the exact immutable request whose ACK is still pending. */
@@ -43,11 +50,13 @@ function LiveTurn({
   turn,
   intent,
   earlier,
+  controls,
   refused = false,
 }: {
   turn: TurnView | null;
   intent: ReturnType<typeof useLiveRun>["intent"];
   earlier: readonly TurnView[];
+  controls: ReactNode;
   /** The edge refused the retained message before Capiro saw it; it was not sent. */
   refused?: boolean;
 }) {
@@ -57,6 +66,7 @@ function LiveTurn({
         turn={turn}
         label="Current turn"
         showPrompt={shouldShowPrompt(turn, earlier)}
+        controls={controls}
       />
     );
   if (!intent.submit) return null;
@@ -90,6 +100,8 @@ export function composerAvailability(
   nextTurnBlocked: string | undefined,
   nextTurnVerified: boolean,
   pendingDraft: boolean,
+  /** Control confirmed this reserved run admitted no message, or the person discarded it. */
+  reservedOpen = false,
 ) {
   const { intent, busy } = run;
   const refused = run.failure === "refused";
@@ -98,10 +110,15 @@ export function composerAvailability(
     !intent.submit &&
     !initialPrompt &&
     !earlier.length &&
-    !initialBlocked;
-  // Control refused the reserved next message outright (a typed skill refusal): nothing was
-  // dispatched to this reserved run, so a changed message may be sent to it as an ordinary request.
-  const resend = !turn && !intent.submit && !!initialPrompt && !!run.refusal;
+    !initialBlocked &&
+    !reservedOpen;
+  // Control refused the reserved next message outright (a typed skill refusal), or confirmed that
+  // this reserved run admitted none: nothing was dispatched to it, so a changed message may be sent
+  // to it as an ordinary request.
+  const resend =
+    !turn &&
+    !intent.submit &&
+    ((!!initialPrompt && !!run.refusal) || reservedOpen);
   const firstBlocked =
     !turn && !intent.submit && !initial && !resend
       ? (initialBlocked ?? "Check your last message before sending another.")
@@ -162,21 +179,37 @@ function useDraftAcknowledgement(
 }
 
 /**
- * A definitive refusal released the retained request: the captured text goes back to the box so the
- * person can change the selection or the conversation and send again.
+ * A definitive refusal released the retained request, or control confirmed this reserved run admitted
+ * nothing (or the person discarded its message): a request still retained for it is dropped, and the
+ * captured text goes back to the box so the person can change it and send again.
  */
 function useRefusalRelease(
   initialDraft: InitialDraftOwner,
   port: MeriConversationPort,
   run: ReturnType<typeof useLiveRun>,
+  reservedOpen: boolean,
 ) {
-  const released = !!run.refusal && !run.intent.submit;
+  const { release } = run;
+  const retained =
+    reservedOpen &&
+    run.intent.submit?.state === "unknown" &&
+    !run.busy &&
+    run.snapshot.submit !== "pending" &&
+    run.snapshot.submit !== "unknown";
+  const released = (!!run.refusal || reservedOpen) && !run.intent.submit;
+  // Once per mounted run: a release that fails leaves its storage error, never a retry loop.
+  const releasing = useRef(false);
+  useEffect(() => {
+    if (!retained || releasing.current) return;
+    releasing.current = true;
+    void release();
+  }, [retained, release]);
   useEffect(() => {
     if (released) initialDraft.release(port.context);
   }, [released, initialDraft, port.context]);
 }
 
-/** Refresh saved history once this mounted run reaches a terminal state. */
+/** Refresh saved history once this mounted run reaches a terminal state the saved read does not show yet. */
 function useSettledRefresh(finished: boolean, onSettled: () => void) {
   const announced = useRef(false);
   useEffect(() => {
@@ -275,8 +308,8 @@ function CurrentRunStatus({
 }
 
 /**
- * A finished run needs no announcement: the composer is already open. If nothing else holds focus,
- * the cursor returns to it so the next message can be typed at once.
+ * A finished run or a newly opened empty conversation needs no announcement: the composer is
+ * already open. If nothing else holds focus, the cursor goes to it so a message can be typed at once.
  */
 function useComposerReturn(
   ready: boolean,
@@ -302,6 +335,7 @@ export function MeriLiveConversation({
   textareaRef,
   onNextTurn,
   nextTurnBlocked,
+  nextTurnChecking = false,
   nextTurnVerified = false,
   initialBlocked,
   composer,
@@ -317,6 +351,7 @@ export function MeriLiveConversation({
   onLifecycleTarget,
   onBrowserTarget,
   historyUnavailable = false,
+  reservedOpen = false,
 }: {
   port: MeriConversationPort;
   initialPrompt: string | undefined;
@@ -329,6 +364,8 @@ export function MeriLiveConversation({
   /** The run finished: send `prompt` as the conversation's next run. */
   onNextTurn: (prompt: string, finished: TurnView) => void;
   nextTurnBlocked?: string | undefined;
+  /** The latest-run check is still in flight: a message typed now waits for it instead of being refused. */
+  nextTurnChecking?: boolean | undefined;
   /** Current exact-run history is re-verified and permits a client-side next-turn attempt. */
   nextTurnVerified?: boolean | undefined;
   initialBlocked?: string | undefined;
@@ -348,6 +385,8 @@ export function MeriLiveConversation({
   onBrowserTarget?: ((target: LifecycleTarget) => void) | undefined;
   /** The saved-history read failed: an empty-looking hero must not stand in for that failure. */
   historyUnavailable?: boolean;
+  /** This reserved run admitted no message (control's answer, or the person discarded it). */
+  reservedOpen?: boolean;
 }) {
   const run = useLiveRun(
     port,
@@ -369,19 +408,24 @@ export function MeriLiveConversation({
     onLifecycleTarget,
   );
   useExternalRunRefresh(port, run, lifecycle.busy || !!lifecycle.command);
+  // The applied request is the admitted one: its model selection labels the answer, and a website
+  // task in it mounts the browser controls. The composer's pending selection is not a run.
+  const applied = snapshot.acceptedRequest ?? acceptedRequest;
   const observed = displayedObservation
     ? {
         ...turnFromObservation(displayedObservation, port.context.runId),
         ...(promptKey ? { promptKey } : {}),
+        ...(applied?.modelSelection
+          ? { modelSelection: applied.modelSelection }
+          : {}),
       }
     : null;
   const turn = currentTurnView(observed, savedCurrent);
   const finished = isTerminal(turn?.runState);
   const active = !!turn && !finished;
   // Browser controls belong to a run that used the browser: an admitted receipt, or this run's
-  // applied request naming a website task. The composer's pending selection is not a run. Once
-  // mounted for a run they stay mounted for that run, so a live session is never recreated.
-  const applied = snapshot.acceptedRequest ?? acceptedRequest;
+  // applied request naming a website task. Once mounted for a run they stay mounted for that run,
+  // so a live session is never recreated.
   const [browserRunId, setBrowserRunId] = useState<string>();
   if (
     browserRunId !== port.context.runId &&
@@ -389,8 +433,8 @@ export function MeriLiveConversation({
   )
     setBrowserRunId(port.context.runId);
   useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
-  useRefusalRelease(initialDraft, port, run);
-  useSettledRefresh(finished, onSettled);
+  useRefusalRelease(initialDraft, port, run, reservedOpen);
+  useSettledRefresh(settledRefreshDue(turn, savedCurrent), onSettled);
   const availability = composerAvailability(
     run,
     turn,
@@ -401,11 +445,15 @@ export function MeriLiveConversation({
     nextTurnBlocked,
     nextTurnVerified,
     initialDraft.hasPending(port.context),
+    reservedOpen,
   );
   const retentionError =
     storageError ?? initialDraft.error() ?? run.storageError;
   useComposerReturn(
-    availability.readyForNext && !retentionError && !lifecycle.blocked,
+    (availability.readyForNext ||
+      (availability.initial && !availability.sendBlocked)) &&
+      !retentionError &&
+      !lifecycle.blocked,
     textareaRef,
   );
   const controlsHeld =
@@ -434,6 +482,7 @@ export function MeriLiveConversation({
           nextTurnBlocked,
           nextTurnVerified,
           initialDraft.hasPending(port.context),
+          reservedOpen,
         ).sendBlocked
       : availability.sendBlocked);
   const send = () => {
@@ -443,23 +492,6 @@ export function MeriLiveConversation({
     if (newIntentBlocked) return;
     const prompt = draft.trim();
     if (availability.initial) {
-      // The scope's next opening starts a new conversation once this one has a message.
-      markFirstChatIntentUsed(
-        port.context.selectedClientId === null
-          ? {
-              tenantId: port.context.tenantId,
-              actorId: port.context.actorId,
-              scopeKind: "general",
-              clientId: null,
-            }
-          : {
-              tenantId: port.context.tenantId,
-              actorId: port.context.actorId,
-              clientId: port.context.selectedClientId,
-            },
-        port.context.conversationId,
-        window.sessionStorage,
-      );
       void run.submitInitial(
         prompt,
         (request) => initialDraft.begin(port.context, request, draft),
@@ -482,12 +514,53 @@ export function MeriLiveConversation({
     )
       onNextTurn(prompt, turn);
   };
+  // One pending message: while a run is in flight for the last message and nothing else blocks, the draft
+  // waits in the box as the queued message and is sent once the run finishes. A block other than the run,
+  // a block that remains once the run ended (for example a refused skill or a next-turn refusal) or an
+  // emptied box releases it, keeping the text and showing why.
+  // The latest-run check of a fresh or reloaded thread counts too: a first Enter waits for it (X15).
+  // A message waits on the conversation check only for a bounded time; then the check's own refusal shows.
+  // The check counts only once no run is active: a run in flight has no terminal source yet, and its own
+  // length must not use up the wait.
+  const checking = useBoundedCheck(nextTurnChecking && !active);
+  const waiting =
+    active ||
+    checking ||
+    (!!intent.submit && intent.submit.state !== "unknown" && !turn);
+  const blocking =
+    retentionError ??
+    lifecycle.blocked ??
+    modelBlocked ??
+    newIntentBlocked ??
+    (intent.submit?.state === "unknown" || availability.resend
+      ? (availability.sendBlocked ?? "")
+      : !waiting && !run.busy
+        ? availability.sendBlocked
+        : undefined);
+  const queue = useQueuedSend(
+    waiting,
+    blocking === undefined &&
+      (availability.readyForNext ||
+        (availability.initial && !availability.sendBlocked)),
+    // Only text typed since the last capture may be queued: a captured attempt is already in the
+    // transcript and its box is shown empty, so queueing it would send the same message twice.
+    blocking ??
+      (initialDraft.pendingDraft(port.context) === null && draft.trim()
+        ? false
+        : ""),
+    send,
+  );
   useLiveComposer(composer, {
     port,
     running: active,
     controls: {
       onSend: send,
-      onStop: () => void run.cancel(),
+      onQueue: queue.onQueue,
+      queued: queue.queued,
+      onStop: () => {
+        queue.stop();
+        void run.cancel();
+      },
       sendBlocked:
         retentionError ??
         lifecycle.blocked ??
@@ -496,9 +569,10 @@ export function MeriLiveConversation({
       // A retained request is the person's to resolve; the key hint says so until it is. An
       // edge-refused message already says so in the transcript, once.
       notice:
-        intent.submit?.state === "unknown" && run.failure !== "refused"
+        queue.released ??
+        (        intent.submit?.state === "unknown" && run.failure !== "refused"
           ? "Your last request is still unconfirmed. Retry it above before sending another."
-          : undefined,
+          : undefined),
       modelSelection:
         intent.submit?.state !== "observed" && intent.submit
           ? intent.submit.modelSelection
@@ -512,6 +586,13 @@ export function MeriLiveConversation({
   });
   // The landing identity belongs to this owner's own admitted state: no saved turn, no captured or
   // unresolved request, no current turn. Nothing here re-reads the URL or observes the DOM.
+  const controls = (
+    <RunLifecycleControls
+      lifecycle={lifecycle}
+      turn={turn}
+      disabled={controlsHeld}
+    />
+  );
   const emptyConversation =
     !turn &&
     !intent.submit &&
@@ -534,6 +615,7 @@ export function MeriLiveConversation({
             turn={turn}
             intent={intent}
             earlier={earlier}
+            controls={controls}
             refused={run.failure === "refused"}
           />
         </>
@@ -550,11 +632,8 @@ export function MeriLiveConversation({
             active={active}
             acceptedRequest={acceptedRequest}
           />
-          <RunLifecycleControls
-            lifecycle={lifecycle}
-            turn={turn}
-            disabled={controlsHeld}
-          />
+          {/* A pending control with no turn to host it (nothing observed yet) still needs its recovery. */}
+          {!turn && controls}
         </>
       }
       files={

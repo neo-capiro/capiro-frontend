@@ -58,6 +58,13 @@ test("General shows installed sources only, one Capiro data row, plain labels, a
       .locator("tbody tr")
       .first(),
   ).toContainText("Congress bills");
+  // The mailbox sync control (Sync now) lives on Capiro Integrations; the page names and links it directly.
+  await expect(
+    page.getByRole("link", { name: "Integrations (mailbox sync)" }),
+  ).toHaveAttribute("href", "/settings/integrations");
+  await expect(page.getByRole("main")).toContainText(
+    "run Sync now after it stops synchronizing, under Capiro Settings > Integrations",
+  );
   await expect(page.getByRole("link", { name: "Connections" })).toHaveAttribute(
     "href",
     "/settings/preferences?page=connections",

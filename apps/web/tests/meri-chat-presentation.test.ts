@@ -6,6 +6,7 @@ import { ConversationEvidence } from "../src/features/meri/conversation/evidence
 import {
   CheckpointActions,
   RunLifecycleControls,
+  guidanceCommand,
 } from "../src/features/meri/conversation/lifecycle/RunLifecycleControls";
 import { ConversationFrame } from "../src/features/meri/conversation/ConversationFrame";
 import {
@@ -14,6 +15,10 @@ import {
 } from "../src/features/meri/conversation/conversation-view";
 import type { ConversationReads } from "../src/shared/meri-conversations/current-reads";
 import type { MeriUploadAccess } from "../src/shared/meri-uploads/access";
+import { ModelCatalogContext } from "../src/features/meri/model-selection/ModelCatalogContext";
+import { runModelLabel } from "../src/features/meri/model-selection/model-selection";
+import { modelCatalog } from "./meri-user-preferences-fixtures";
+import { savedTurns } from "../src/features/meri/conversation/saved-turns";
 
 const binding = { runId: "30000000-0000-4000-8000-000000000001" };
 const turn = (
@@ -191,19 +196,54 @@ describe("run controls appear only while there is something to control or recove
     expect(controls(null)).toBe("");
   });
 
-  it("folds pause and steer away while a run is simply running", () => {
+  it("offers Pause and a closed Steer affordance inline while a run is running", () => {
     const html = controls(turn("running"));
-    expect(html).toMatch(/^<details/);
-    expect(html).toContain("Pause or steer this run");
+    expect(html).not.toContain("<details");
+    expect(html).not.toContain("Pause or steer this run");
     expect(html).toContain(">Pause</button>");
-    expect(html).toContain("Send guidance");
+    expect(html).toMatch(
+      /<button[^>]*aria-expanded="false"[^>]*>Steer<\/button>/,
+    );
+    // The guidance field opens on demand; nothing is typed into until then.
+    expect(html).not.toContain("Steer this run");
+    expect(html).not.toContain("Send guidance");
     expect(html).not.toContain("No verified checkpoint");
+    expect(html).not.toContain("Leaving this page");
+  });
+
+  it("renders beside the working status inside the current answer's heading", () => {
+    const html = renderToStaticMarkup(
+      createElement(ConversationTurn, {
+        turn: turn("running"),
+        label: "Current turn",
+        controls: createElement("span", null, "synthetic run controls"),
+      }),
+    );
+    const heading = html.slice(
+      html.indexOf("Meri is working"),
+      html.indexOf("synthetic run controls"),
+    );
+    expect(heading.length).toBeGreaterThan(0);
+    // One status container holds the working text and the controls: no transcript markup between.
+    expect(heading).not.toContain("<p");
+    expect(html.indexOf("synthetic run controls")).toBeLessThan(
+      html.indexOf("Synthetic answer."),
+    );
+  });
+
+  it("sends only trimmed guidance as a steer control", () => {
+    expect(guidanceCommand("  keep the selected window  ")).toEqual({
+      intent: "steer",
+      text: "keep the selected window",
+    });
+    for (const empty of ["", "   ", "\n\t"])
+      expect(guidanceCommand(empty)).toBeUndefined();
   });
 
   it("keeps a paused run, a pending control and an error in plain view", () => {
     const paused = controls(turn("paused"));
-    expect(paused).toMatch(/^<section/);
     expect(paused).toContain("No verified checkpoint is available yet.");
+    expect(paused).not.toContain(">Pause</button>");
     const pending = controls(
       turn("completed"),
       idle({ command: { controlId: "c", intent: "pause" } as never }),
@@ -235,6 +275,8 @@ describe("run controls appear only while there is something to control or recove
     expect(html).toMatch(
       /<button type="button" class="[^"]*textLink[^"]*"[^>]*>Inspect latest checkpoint<\/button>/,
     );
+    expect(html).toContain("Progress saved.");
+    expect(html).not.toContain("Checkpoint verified");
     expect(html).toContain("Fork into new chat");
     expect(html).not.toContain(">Resume</button>");
   });
@@ -250,4 +292,80 @@ it("the conversation frame announces nothing when there is no history status", (
   const html = renderToStaticMarkup(createElement(ConversationFrame, frame));
   expect(html).not.toContain("Saved history requires");
   expect(html).not.toContain("Reconnect to read earlier turns");
+});
+
+describe("a finished answer names the model that produced it", () => {
+  const selection = {
+    provider: "bedrock",
+    modelId: "synthetic-model",
+    effort: "high",
+  } as const;
+  const provided = (view: TurnView, catalog: typeof modelCatalog | undefined) =>
+    renderToStaticMarkup(
+      createElement(
+        ModelCatalogContext.Provider,
+        { value: catalog },
+        createElement(ConversationTurn, { turn: view, label: "Current turn" }),
+      ),
+    );
+  const labelled = (view: TurnView) => provided(view, modelCatalog);
+
+  it("shows the catalog label and the picker's effort label, never the raw model id", () => {
+    const html = labelled(turn("completed", { modelSelection: selection }));
+    expect(html).toContain("Synthetic model · High");
+    expect(html).not.toContain("synthetic-model");
+    expect(html).not.toContain("data-tone=");
+    expect(
+      labelled(
+        turn("completed", { modelSelection: { ...selection, effort: null } }),
+      ),
+    ).toContain("Synthetic model · Model default");
+  });
+
+  it("stays hidden when the record has no selection, the catalog lacks the model or the run is not finished", () => {
+    expect(labelled(turn("completed"))).not.toContain("Synthetic model");
+    expect(
+      labelled(
+        turn("completed", {
+          modelSelection: { ...selection, modelId: "synthetic-unlisted" },
+        }),
+      ),
+    ).not.toContain("synthetic-unlisted");
+    // The catalog has not loaded: the admitted selection waits rather than showing a raw id.
+    expect(
+      provided(turn("completed", { modelSelection: selection }), undefined),
+    ).not.toContain("Synthetic model");
+    for (const state of ["running", "failed", "cancelled"] as const)
+      expect(
+        labelled(turn(state, { modelSelection: selection })),
+      ).not.toContain("Synthetic model");
+    expect(
+      render(turn("completed", { modelSelection: selection })),
+    ).not.toContain("Synthetic model");
+  });
+
+  it("carries the admitted request's selection into a saved turn and labels it", () => {
+    // Only the already-admitted fields consumed by the saved-turn fold.
+    const saved = (request: Record<string, unknown>) =>
+      savedTurns({
+        latest: {},
+        turns: [
+          {
+            run: { binding, state: "completed" },
+            request: { prompt: "Synthetic saved question", ...request },
+            promptLineage: { logicalRequestId: "synthetic-request" },
+            lastSequence: 0,
+          },
+        ],
+        events: [],
+      } as unknown as NonNullable<Parameters<typeof savedTurns>[0]>)[0]!;
+    const withModel = saved({ modelSelection: selection });
+    expect(withModel.modelSelection).toEqual(selection);
+    expect(
+      labelled({ ...withModel, messages: turn("completed").messages }),
+    ).toContain("Synthetic model · High");
+    const without = saved({});
+    expect("modelSelection" in without).toBe(false);
+    expect(runModelLabel(modelCatalog, without.modelSelection)).toBeUndefined();
+  });
 });

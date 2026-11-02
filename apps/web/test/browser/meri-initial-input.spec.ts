@@ -58,11 +58,12 @@ test("synthetic desktop held admission rejects repeated keyboard dispatch while 
   ).toBeVisible();
   await expect(sendButton(page)).toBeDisabled();
   await composer(page).fill("Edited draft while pending");
+  // While the first request is admitted, the next message is queued once, never dispatched beside it.
   await composer(page).press("Enter");
   await composer(page).press("Enter");
   await expect(composer(page)).toHaveValue("Edited draft while pending");
   await expect(composer(page)).toHaveAccessibleDescription(
-    /still handling your last command/,
+    /Queued: sends when Meri finishes/,
   );
   const description = await composer(page).getAttribute("aria-describedby");
   expect(description).toBeTruthy();
@@ -249,8 +250,9 @@ test("synthetic desktop Enter during an active run preserves draft and compositi
     return event.defaultPrevented;
   });
   expect(prevented).toBe(false);
+  // Enter during the run queues the draft for when Meri finishes; nothing is sent beside the run.
   await expect(stopButton(page)).toHaveAccessibleDescription(
-    /A run is in progress/,
+    /Queued: sends when Meri finishes/,
   );
   expect(native.calls.allocate).toHaveLength(1);
   expect(native.calls.submit).toHaveLength(1);

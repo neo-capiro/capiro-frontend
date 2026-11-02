@@ -1,5 +1,6 @@
 import type { IntentsItem, IntentsProposal } from "@capiro/meri-client/intents";
 import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 
 type BizdevProposal = Extract<IntentsProposal, { kind: "bizdev_action" }>;
 
@@ -34,13 +35,6 @@ export function bizdevFields(proposal: BizdevProposal): readonly IntentField[] {
   return [
     { label: "Action", value: "Save a business-development brief version" },
     { label: "Prospect", value: context.prospectName },
-    { label: "Prospect reference", value: context.prospectId },
-    {
-      label: "Scope",
-      value: context.linkedClientId
-        ? `Client ${context.linkedClientId}`
-        : "Private to the current actor",
-    },
     { label: "Title", value: request.title ?? "Keep the current brief title" },
     {
       label: "Expected current version",
@@ -58,8 +52,7 @@ export function bizdevFields(proposal: BizdevProposal): readonly IntentField[] {
         },
       ];
     }),
-    { label: "Expires", value: proposal.expiresAt },
-    { label: "Command hash", value: proposal.commandSha256 },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   ];
 }
 

@@ -12,7 +12,6 @@ const h = vi.hoisted(() => ({
   wizard: vi.fn(),
   newsletter: vi.fn(),
   prospect: vi.fn(),
-  rich: vi.fn(),
   copy: vi.fn(),
   library: vi.fn(),
   buttons: vi.fn(),
@@ -23,6 +22,9 @@ const h = vi.hoisted(() => ({
   resolution: vi.fn(),
   context: vi.fn(),
   generation: vi.fn(),
+  office: vi.fn(),
+  officeList: vi.fn(),
+  replace: vi.fn(),
   values: [] as unknown[],
   index: 0,
 }));
@@ -42,7 +44,28 @@ vi.mock("react", async (original) => ({
 }));
 vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(h.query),
-  useRouter: () => ({ push: h.push }),
+  useRouter: () => ({ push: h.push, replace: h.replace }),
+}));
+vi.mock(
+  "../src/features/modules/workspace/office/OfficeDocumentScreen",
+  () => ({
+    OfficeDocumentScreen: (props: unknown) => {
+      h.office(props);
+      return null;
+    },
+  }),
+);
+vi.mock("../src/features/modules/workspace/office/OfficeDocuments", () => ({
+  OfficeDocuments: (props: unknown) => {
+    h.officeList(props);
+    return null;
+  },
+}));
+vi.mock("../src/shared/portfolio/auth/identity", () => ({
+  useIdentity: () => ({
+    data: { tenant: { id: "tenant" }, user: { id: "actor" } },
+    error: null,
+  }),
 }));
 vi.mock("../src/features/modules/workspace/WorkspaceDraft", () => ({
   WorkspaceDraft: (props: unknown) => {
@@ -98,9 +121,9 @@ vi.mock("../src/shared/capiro/queries", () => ({
   }),
 }));
 vi.mock(
-  "../src/features/modules/workspace/newsletter/NewsletterWorkflow",
+  "../src/features/modules/workspace/newsletter/NewsletterEditor",
   () => ({
-    NewsletterWorkflow: (props: unknown) => {
+    NewsletterEditor: (props: unknown) => {
       h.newsletter(props);
       return null;
     },
@@ -111,15 +134,6 @@ vi.mock(
   () => ({
     ProspectWorkspace: (props: unknown) => {
       h.prospect(props);
-      return null;
-    },
-  }),
-);
-vi.mock(
-  "../src/features/modules/workspace/rich-newsletter/RichNewsletterEditor",
-  () => ({
-    RichNewsletterEditor: (props: unknown) => {
-      h.rich(props);
       return null;
     },
   }),
@@ -170,10 +184,12 @@ vi.mock("@capiro/ui/dropdown-menu", () => ({
     return createElement("button", null, props.children);
   },
 }));
-const render = (query = "") => {
+const render = (query = "", officeEnabled = false) => {
   h.index = 0;
   h.query = query;
-  return renderToStaticMarkup(createElement(WorkspaceScreen));
+  return renderToStaticMarkup(
+    createElement(WorkspaceScreen, { officeEnabled }),
+  );
 };
 beforeEach(() => {
   vi.clearAllMocks();
@@ -350,19 +366,13 @@ it("makes explicit template and rich-library entry actions durable", () => {
   expect(h.push).toHaveBeenLastCalledWith(
     `/modules/workspace?clientId=${otherId}&view=templates`,
   );
-  h.menuItems.mock.calls
-    .find(([props]) => props.children === "Rich newsletter preview")![0]
-    .onSelect();
-  expect(h.push).toHaveBeenLastCalledWith(
-    `/modules/workspace?clientId=${otherId}&view=rich-newsletter`,
-  );
 });
 
 it.each([undefined, otherId])(
-  "keeps both normal newsletter entries and the gallery reachable in scope %s",
+  "uses the canonical newsletter entry from both workflow and new document in scope %s",
   (clientId) => {
     const query = clientId ? `clientId=${clientId}` : "";
-    const destination = clientId ? "newsletter" : "rich-newsletter";
+    const destination = "newsletter";
     const openLastDestination = () => {
       const url = new URL(
         h.push.mock.lastCall![0],
@@ -377,13 +387,8 @@ it.each([undefined, otherId])(
       .find(([props]) => props.children === "Start")![0]
       .onClick();
     expect(openLastDestination().searchParams.get("view")).toBe(destination);
-    h.buttons.mock.calls
-      .find(([props]) => props.children === "Template gallery")![0]
-      .onClick();
-    const gallery = openLastDestination();
-    expect(gallery.searchParams.get("view")).toBe("newsletter");
-    render(gallery.searchParams.toString());
-    expect(h.newsletter.mock.lastCall![0].initialClientId).toBe(clientId);
+    render(openLastDestination().searchParams.toString());
+    expect(h.newsletter).toHaveBeenCalled();
     render(query);
     h.buttons.mock.calls
       .find(([props]) => props.children === "+ New document")![0]
@@ -393,10 +398,6 @@ it.each([undefined, otherId])(
       .find(([props]) => props.children === "Newsletter")![0]
       .onClick();
     expect(openLastDestination().searchParams.get("view")).toBe(destination);
-    h.buttons.mock.calls
-      .find(([props]) => props.children === "Newsletter template gallery")![0]
-      .onClick();
-    expect(openLastDestination().searchParams.get("view")).toBe("newsletter");
     expect(h.create).not.toHaveBeenCalled();
     expect(h.update).not.toHaveBeenCalled();
   },
@@ -415,10 +416,47 @@ it.each([
     h.wizard,
     h.newsletter,
     h.prospect,
-    h.rich,
     h.copy,
     h.library,
     h.push,
   ])
     expect(receiver).not.toHaveBeenCalled();
+});
+it("opens an Office document in the Workspace editor only when Office is enabled, and lists Office documents beside the library", () => {
+  const html = render(
+    `officeVersionId=${draft.id}&officeConversationId=${otherId}&clientId=${prospectId}`,
+    true,
+  );
+  expect(html).toBe("");
+  expect(h.office.mock.lastCall![0]).toMatchObject({
+    account: { tenantId: "tenant", actorId: "actor" },
+    target: {
+      versionId: draft.id,
+      conversationId: otherId,
+      clientId: prospectId,
+      runId: undefined,
+    },
+  });
+  h.office.mock.lastCall![0].onClose();
+  expect(h.push).toHaveBeenLastCalledWith(
+    `/modules/workspace?clientId=${prospectId}`,
+  );
+  h.office.mock.lastCall![0].onOpenVersion(otherId);
+  expect(h.replace).toHaveBeenLastCalledWith(
+    `/modules/workspace?clientId=${prospectId}&officeVersionId=${otherId}&officeConversationId=${otherId}`,
+  );
+  expect(h.officeList).not.toHaveBeenCalled();
+  expect(
+    render(
+      `officeVersionId=${draft.id}&officeConversationId=${otherId}`,
+      false,
+    ),
+  ).toContain("Office editing is not enabled for this deployment.");
+  render(`clientId=${otherId}`, true);
+  expect(h.officeList.mock.lastCall![0]).toMatchObject({
+    account: { tenantId: "tenant", actorId: "actor" },
+    clientId: otherId,
+  });
+  render(`clientId=${otherId}`, false);
+  expect(h.officeList).toHaveBeenCalledTimes(1);
 });

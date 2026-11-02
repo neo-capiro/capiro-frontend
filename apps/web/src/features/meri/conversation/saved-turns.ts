@@ -27,6 +27,9 @@ function savedTurn(
       turn.run.binding.conversationId,
       turn.promptLineage.logicalRequestId,
     ),
+    ...(turn.request.modelSelection
+      ? { modelSelection: turn.request.modelSelection }
+      : {}),
     incompleteHistory: events.at(-1)?.sequence !== turn.lastSequence,
   };
 }
@@ -39,6 +42,23 @@ export function savedTurns(
   return history.turns.map((turn) => savedTurn(turn, history.events));
 }
 
+/**
+ * A run this view watched reach a terminal state needs the saved history read again. A reopened run
+ * that the saved read already reports terminal does not: re-reading it hides every admitted page
+ * until all of them are read again, so a reloaded long conversation showed one turn meanwhile. A saved copy
+ * whose events stop short of its last sequence is still read again once.
+ */
+export const settledRefreshDue = (
+  turn: Pick<TurnView, "runId" | "runState"> | null | undefined,
+  saved: Pick<TurnView, "runId" | "runState" | "incompleteHistory"> | undefined,
+) =>
+  isTerminal(turn?.runState) &&
+  !(
+    saved?.runId === turn?.runId &&
+    isTerminal(saved?.runState) &&
+    !saved?.incompleteHistory
+  );
+
 /** Reading history constrains UI actions; trusted session/admission owners still decide every write. */
 export function sessionHistoryState(
   history: {
@@ -50,8 +70,14 @@ export function sessionHistoryState(
   retained: TurnIntent | undefined,
   busy: boolean,
   failure?: ControlFailure,
+  /** Target run id of a reservation control confirmed admitted no message, or that the person discarded. */
+  opened?: string,
 ) {
   const metadata = history.current;
+  const reservation = metadata?.pendingTurn;
+  // Its source admits an ordinary next message again: the reservation replays to the same target.
+  const reservationOpen =
+    !!reservation && reservation.targetBinding.runId === opened;
   const latestAccepted = metadata?.turns.find(
     (turn) => turn.run.binding.runId === metadata.latestRun.binding.runId,
   );
@@ -76,16 +102,17 @@ export function sessionHistoryState(
     runId &&
     metadata.latestRun.binding.runId === runId &&
     isTerminal(metadata.latestRun.state) &&
-    !metadata.pendingTurn
+    (!reservation || reservationOpen)
       ? metadata.latestRun.binding
       : undefined;
-  const reservation = metadata?.pendingTurn;
   const recoveryNeeded =
     !!retained &&
     (retained.state === "unknown" ||
       retained.receipt?.targetBinding.runId !== runId);
   const unknownReservation =
-    !!reservation && retained?.source.runId !== reservation.sourceBinding.runId;
+    !!reservation &&
+    !reservationOpen &&
+    retained?.source.runId !== reservation.sourceBinding.runId;
   const loaded = savedTurns(history.saved);
   const savedCurrent =
     loaded.find((turn) => turn.runId === runId) ??
@@ -100,13 +127,20 @@ export function sessionHistoryState(
   ].filter((turn) => !!latestTarget || turn.runId !== runId);
   // Only control's own report of a reservation holds the hard lock. A check that control never
   // answered (or that the edge refused) keeps the retained request for a plain retry instead.
+  // The latest-run read has not answered yet: a transient check, not something the person resolves.
+  const nextChecking =
+    !busy &&
+    !recoveryNeeded &&
+    !unknownReservation &&
+    !source &&
+    !reservationOpen;
   const nextBlocked = busy
     ? "Checking your last message…"
     : recoveryNeeded && !unknownReservation && failure
       ? controlFailureMessage(failure)
       : recoveryNeeded || unknownReservation
         ? "Your last message may still be in progress. Check again before sending."
-        : !source
+        : nextChecking
           ? "Capiro is checking this conversation before you can send again."
           : undefined;
   const initialBlocked =
@@ -128,12 +162,14 @@ export function sessionHistoryState(
       : undefined,
     source,
     reservation,
+    openedTarget: reservationOpen ? opened : undefined,
     earlier,
     savedCurrent,
     latestTarget,
     recoveryNeeded,
     unknownReservation,
     nextBlocked,
+    nextChecking,
     initialBlocked,
   };
 }

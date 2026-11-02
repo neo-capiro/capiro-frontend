@@ -7,6 +7,33 @@ export type OfficialMedia =
   | { kind: "link"; url: string }
   | { kind: "unavailable" };
 
+export interface OfficialWatchMedia {
+  url: string;
+  type: "video/mp4" | "video/webm" | "application/vnd.apple.mpegurl";
+  officialPageUrl: string;
+  expiresAt: string | null;
+}
+
+/** The Core watch projection is separate from the stable recording source. */
+export function officialWatchSource(
+  sourceUrl?: string | null,
+  media?: OfficialWatchMedia | null,
+  now = Date.now(),
+): OfficialMedia {
+  if (media) {
+    const expiry =
+      media.expiresAt === null ? Infinity : Date.parse(media.expiresAt);
+    const candidate = officialMedia(media.url);
+    if (
+      expiry > now &&
+      candidate.kind === "video" &&
+      candidate.type === media.type
+    )
+      return candidate;
+  }
+  return officialMedia(sourceUrl);
+}
+
 /** Inspect only the supplied public source. Never scrape, proxy or invent media URLs. */
 export function officialMedia(source?: string | null): OfficialMedia {
   if (!source) return { kind: "unavailable" };
@@ -18,7 +45,9 @@ export function officialMedia(source?: string | null): OfficialMedia {
       !host.includes(".") ||
       host.includes(":") ||
       /^[\d.]+$/.test(host) ||
-      /(^|\.)(localhost|local|internal|lan|home|home\.arpa|test|invalid)$/.test(host)
+      /(^|\.)(localhost|local|internal|lan|home|home\.arpa|test|invalid)$/.test(
+        host,
+      )
     )
       return { kind: "unavailable" };
     if (url.protocol !== "https:" || url.username || url.password || url.port)

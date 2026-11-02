@@ -12,6 +12,7 @@ import type {
   IntentsDecideResponse,
 } from "@capiro/meri-client/intents";
 import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
+import { expiresLabel } from "./intent-view-types";
 
 export function isResearchShareProposal(
   proposal: IntentsProposal,
@@ -68,7 +69,7 @@ export function researchShareFields(
           },
         ]
       : [{ label: "Link", value: request.linkId }]),
-    { label: "Expires", value: proposal.expiresAt },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   ];
 }
 

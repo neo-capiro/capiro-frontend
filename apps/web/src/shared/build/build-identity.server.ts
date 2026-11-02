@@ -1,43 +1,120 @@
+import { readConfig } from "../portfolio/config/config";
+
 /**
- * The serving tuple a tester records from the Settings footer: this image's own commit, plus the
- * Core and Meri commits the deployment is configured against. Every value is a deployment input
- * read from the server environment; none is attested by the running services.
+ * The Settings footer binds an observation to the serving tuple: this image's own commit, the Core
+ * answering `CORE_API_BASE_URL` and the Meri answering `MERI_API_BASE_URL`. Core and Meri are read
+ * from the running services at render time, never from a deployment input: Core stamps
+ * `X-Capiro-Release-Sha` on every response, and Meri's public liveness document names the serving
+ * material's commit once the runtime publishes one. The configured Meri source is only a fallback
+ * for a runtime that publishes nothing, and the line says so; a configured value is never shown as
+ * the live one. Core has no configured fallback: the `CAPIRO_PREVIEW_*_BACKEND_SOURCE` inputs are
+ * route-admission pins, not the identity of the Core that answers.
  */
 type Env = Record<string, string | undefined>;
-const value = (raw: string | undefined) => raw?.trim() || null;
+type Fetcher = typeof fetch;
 
-export function readBuildIdentity(env: Env) {
+/** A service's source commit and where it was read. */
+export type SourceReading = { sha: string; origin: "live" | "configured" };
+export type BuildIdentity = {
+  frontend: string | null;
+  core: SourceReading | null;
+  meri: SourceReading | null;
+};
+
+/** Each probe is bounded so a slow or absent service never holds the Settings render. */
+export const SOURCE_PROBE_MS = 1500;
+const commit = /^[0-9a-f]{40}$/;
+const sha = (raw: unknown) =>
+  typeof raw === "string" && commit.test(raw.trim()) ? raw.trim() : null;
+
+async function probe(fetcher: Fetcher, url: string) {
+  try {
+    return await fetcher(url, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      credentials: "omit",
+      redirect: "error",
+      cache: "no-store",
+      signal: AbortSignal.timeout(SOURCE_PROBE_MS),
+    });
+  } catch {
+    return null;
+  }
+}
+
+/** Core's identity middleware stamps every response, a 401 included, so the probe needs no credential. */
+export async function readCoreSource(
+  base: string | undefined,
+  fetcher: Fetcher,
+): Promise<string | null> {
+  if (!base) return null;
+  const response = await probe(fetcher, `${base}/health`);
+  if (!response) return null;
+  void response.body?.cancel().catch(() => undefined);
+  return sha(response.headers.get("x-capiro-release-sha"));
+}
+
+/** Meri's public liveness document; `sourceCommit` is the serving material's commit when published. */
+export async function readMeriSource(
+  base: string | undefined,
+  fetcher: Fetcher,
+): Promise<string | null> {
+  if (!base) return null;
+  const response = await probe(fetcher, `${base}/health/live`);
+  if (!response) return null;
+  try {
+    if (!response.ok) throw new Error("not live");
+    const text = await response.text();
+    if (text.length > 4096) return null;
+    const document: unknown = JSON.parse(text);
+    return typeof document === "object" && document !== null
+      ? sha((document as { sourceCommit?: unknown }).sourceCommit)
+      : null;
+  } catch {
+    void response.body?.cancel().catch(() => undefined);
+    return null;
+  }
+}
+
+/** The serving tuple as read now: live sources first, the configured Meri input only when Meri publishes none. */
+export async function readBuildIdentity(
+  env: Env,
+  fetcher: Fetcher = fetch,
+): Promise<BuildIdentity> {
+  const frontend = env.GIT_SHA?.trim() || null;
+  const { services } = readConfig(env);
+  const [core, meri] = await Promise.all([
+    readCoreSource(services.core, fetcher),
+    readMeriSource(services.meri, fetcher),
+  ]);
+  const configuredMeri = sha(env.CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE);
   return {
-    frontend: value(env.GIT_SHA),
-    core: [
-      ...new Set(
-        [
-          env.CAPIRO_PREVIEW_READ_BACKEND_SOURCE,
-          env.CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE,
-          env.CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE,
-          env.CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE,
-        ]
-          .map(value)
-          .filter((sha): sha is string => sha !== null),
-      ),
-    ],
-    meri: value(env.CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE),
+    frontend,
+    core: core ? { sha: core, origin: "live" } : null,
+    meri: meri
+      ? { sha: meri, origin: "live" }
+      : configuredMeri
+        ? { sha: configuredMeri, origin: "configured" }
+        : null,
   };
 }
-export type BuildIdentity = ReturnType<typeof readBuildIdentity>;
 
-const short = (sha: string) => sha.slice(0, 8);
+const short = (value: string) => value.slice(0, 8);
+const part = (name: string, reading: SourceReading | null) =>
+  reading
+    ? `${name} ${short(reading.sha)}${reading.origin === "configured" ? " (configured)" : ""}`
+    : null;
 
 /**
- * The footer line, or null when the image did not record its own commit. Core and Meri appear
- * only when their inputs are configured; Core lists each distinct configured source.
+ * The footer line, or null when the image did not record its own commit. A service whose source
+ * could not be read is left out rather than guessed; a configured fallback is marked as such.
  */
 export function buildIdentityLine(identity: BuildIdentity) {
   if (!identity.frontend) return null;
   return [
     `frontend ${short(identity.frontend)}`,
-    identity.core.length ? `core ${identity.core.map(short).join("/")}` : null,
-    identity.meri ? `meri ${short(identity.meri)}` : null,
+    part("core", identity.core),
+    part("meri", identity.meri),
   ]
     .filter(Boolean)
     .join(" · ");

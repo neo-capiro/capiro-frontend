@@ -421,7 +421,8 @@ function historySession(notReady: boolean, busy = false): Session {
     },
     recoveryNeeded: true,
     unknownReservation: false,
-    readReservation: vi.fn(),
+    checkPending: vi.fn(),
+    discardPending: vi.fn(),
   } as unknown as Session;
 }
 const renderHistory = (session: Session) =>
@@ -439,7 +440,7 @@ it("empty saved history does not dismiss an uncertain current turn or trigger re
   expect(html).toContain("Your last message may still be in progress");
   expect(html).not.toContain("No saved turns yet.");
   expect(session.continuation.retry).not.toHaveBeenCalled();
-  expect(session.readReservation).not.toHaveBeenCalled();
+  expect(session.checkPending).not.toHaveBeenCalled();
 });
 
 it("unavailable history supersedes a previously empty result", () => {
@@ -468,11 +469,11 @@ it("a not-ready turn refusal is a saved-message status with only explicit same-t
     expect(retry).toBeDefined();
     expect(!!retry?.disabled).toBe(busy);
     expect(session.continuation.retry).not.toHaveBeenCalled();
-    expect(session.readReservation).not.toHaveBeenCalled();
+    expect(session.checkPending).not.toHaveBeenCalled();
     if (!busy) {
       retry!.onClick();
       expect(session.continuation.retry).toHaveBeenCalledExactlyOnceWith();
-      expect(session.readReservation).not.toHaveBeenCalled();
+      expect(session.checkPending).not.toHaveBeenCalled();
     }
   }
 });
@@ -487,8 +488,13 @@ it("other unknown turn recovery keeps its prior uncertainty and error controls",
   );
   expect(html).not.toContain("Your message is saved; try again in a moment.");
   expect(html).not.toMatch(/turn|recover/i);
+  // Check again asks about the exact pending message; it never replays or sends it.
   button("Check again")!.onClick();
-  expect(session.continuation.retry).toHaveBeenCalledExactlyOnceWith();
+  expect(session.checkPending).toHaveBeenCalledExactlyOnceWith();
+  expect(session.continuation.retry).not.toHaveBeenCalled();
+  // The failed check leaves the answer uncertain: the person may give the message up.
+  button("Discard and write a new message")!.onClick();
+  expect(session.discardPending).toHaveBeenCalledExactlyOnceWith();
 });
 
 it("not-ready without a retained message checks the reserved turn without claiming a saved input", () => {
@@ -501,9 +507,9 @@ it("not-ready without a retained message checks the reserved turn without claimi
   expect(html).not.toContain("Your message is saved; try again in a moment.");
   const check = button("Check again");
   expect(check).toBeDefined();
-  expect(session.readReservation).not.toHaveBeenCalled();
+  expect(session.checkPending).not.toHaveBeenCalled();
   check!.onClick();
-  expect(session.readReservation).toHaveBeenCalledExactlyOnceWith();
+  expect(session.checkPending).toHaveBeenCalledExactlyOnceWith();
   expect(session.continuation.retry).not.toHaveBeenCalled();
 });
 
@@ -531,7 +537,7 @@ it.each([
         retry!.onClick();
         // The same retained check runs again: one reservation of the same request, nothing new.
         expect(session.continuation.retry).toHaveBeenCalledExactlyOnceWith();
-        expect(session.readReservation).not.toHaveBeenCalled();
+        expect(session.checkPending).not.toHaveBeenCalled();
       }
     }
   },

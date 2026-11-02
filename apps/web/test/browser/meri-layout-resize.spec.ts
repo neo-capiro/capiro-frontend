@@ -183,10 +183,13 @@ for (const viewport of [
           (node) => node.scrollWidth <= node.clientWidth,
         ),
       ).toBe(true);
-      await sidebar(page).hover();
+      const library = sidebar(page).locator(
+        '[aria-label="Library and recent conversations"]',
+      );
+      await library.hover();
       await page.mouse.wheel(0, 900);
       await expect
-        .poll(() => sidebar(page).evaluate((node) => node.scrollTop))
+        .poll(() => library.evaluate((node) => node.scrollTop))
         .toBeGreaterThan(0);
       expect(
         await scroll.evaluate(
@@ -198,7 +201,7 @@ for (const viewport of [
       expect(
         (await page.locator("#main-content").boundingBox())!.width,
       ).toBeGreaterThanOrEqual(600);
-      await sidebar(page).evaluate((node) => {
+      await library.evaluate((node) => {
         node.scrollTop = 0;
       });
       await page.screenshot({
@@ -213,7 +216,7 @@ for (const viewport of [
       expect(
         await current.evaluate((node) => node.scrollWidth <= node.clientWidth),
       ).toBe(true);
-      await page.getByRole("button", { name: "Workspace menu" }).click();
+      await page.getByRole("button", { name: "Close Workspace" }).click();
     }
     await page.screenshot({
       path: info.outputPath(`meri-layout-${viewport.width}.png`),

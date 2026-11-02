@@ -8,7 +8,6 @@ const views = [
   "document-templates",
   "hillday",
   "newsletter",
-  "rich-newsletter",
 ] as const;
 export type WorkspaceView = (typeof views)[number];
 type Query = Pick<URLSearchParams, "get" | "getAll" | "has">;
@@ -28,7 +27,14 @@ type Destination =
   | { kind: "view"; view: WorkspaceView }
   | { kind: "draft"; draftId: string; prospectId?: string }
   | { kind: "hillday"; hilldayId: string; phase?: HillDayPhase }
-  | { kind: "prospect"; prospectId: string };
+  | { kind: "prospect"; prospectId: string }
+  /** An Office document (a Meri artifact version) opened in the Workspace editor; runId only for a freshly imported original. */
+  | {
+      kind: "office";
+      versionId: string;
+      conversationId: string;
+      runId?: string;
+    };
 export type WorkspaceRoute =
   | (Destination & Scope)
   | { kind: "brief-copy" }
@@ -43,6 +49,9 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
     "hilldayId",
     "newsletterId",
     "taskId",
+    "officeVersionId",
+    "officeConversationId",
+    "officeRunId",
   ];
   if (
     [
@@ -58,7 +67,10 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
   )
     return { kind: "invalid" };
   const rawView = query.get("view") ?? "documents";
-  const view = views.find((candidate) => candidate === rawView);
+  const view = views.find(
+    (candidate) =>
+      candidate === (rawView === "rich-newsletter" ? "newsletter" : rawView),
+  );
   if (!view) return { kind: "invalid" };
   const clientId = query.get("clientId") ?? undefined;
   const draftId = query.get("draftId") ?? undefined;
@@ -66,6 +78,29 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
   const hilldayId = query.get("hilldayId") ?? undefined;
   const newsletterId = query.get("newsletterId") ?? undefined;
   const taskId = query.get("taskId") ?? undefined;
+  const officeVersionId = query.get("officeVersionId") ?? undefined;
+  const officeConversationId = query.get("officeConversationId") ?? undefined;
+  const officeRunId = query.get("officeRunId") ?? undefined;
+  if (officeVersionId || officeConversationId || officeRunId)
+    return officeVersionId &&
+      officeConversationId &&
+      view === "documents" &&
+      !taskId &&
+      !draftId &&
+      !prospectId &&
+      !hilldayId &&
+      !newsletterId &&
+      !query.has("briefSource") &&
+      !query.has("copyDocumentId") &&
+      !query.has("hilldayPhase")
+      ? {
+          kind: "office",
+          versionId: officeVersionId,
+          conversationId: officeConversationId,
+          runId: officeRunId,
+          clientId,
+        }
+      : { kind: "invalid" };
   if (taskId)
     return view === "documents" &&
       !draftId &&
@@ -83,7 +118,7 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
   if (query.has("hilldayPhase") && (!phase || !hilldayId || view !== "hillday"))
     return { kind: "invalid" };
   if (newsletterId)
-    return view === "rich-newsletter" &&
+    return view === "newsletter" &&
       !hilldayId &&
       !draftId &&
       !prospectId &&
@@ -126,8 +161,13 @@ export function workspaceHref(destination: Destination & Scope) {
     query.set("hilldayId", destination.hilldayId);
     if (destination.phase) query.set("hilldayPhase", destination.phase);
   }
+  if (destination.kind === "office") {
+    query.set("officeVersionId", destination.versionId);
+    query.set("officeConversationId", destination.conversationId);
+    if (destination.runId) query.set("officeRunId", destination.runId);
+  }
   if (destination.kind === "newsletter-review") {
-    query.set("view", "rich-newsletter");
+    query.set("view", "newsletter");
     query.set("newsletterId", destination.newsletterId);
   }
   const suffix = query.toString();

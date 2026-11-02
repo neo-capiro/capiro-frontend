@@ -56,8 +56,11 @@ export type RichDocumentState = {
   recovery: RecoveryView;
 };
 
-const initialState = (writes: RichWriteState): RichDocumentState => ({
-  draft: newRichDraft(),
+const initialState = (
+  writes: RichWriteState,
+  clientId: string | null,
+): RichDocumentState => ({
+  draft: newRichDraft(clientId),
   past: [],
   future: [],
   current: false,
@@ -94,8 +97,9 @@ export function createRichDocumentController(
   adapter: Adapter,
   journal: RichWriteJournal,
   recovery: RichWriteRecovery,
+  clientId: string | null = null,
 ) {
-  let state = initialState(journal.read());
+  let state = initialState(journal.read(), clientId);
   let mounted = false;
   let active: AbortController | undefined;
   let activeWrite: ReturnType<RichWriteJournal["begin"]>;
@@ -150,7 +154,7 @@ export function createRichDocumentController(
       recovery: { ...state.recovery, phase: blocked ? "blocked" : "held" },
       ...(denied
         ? {
-            draft: newRichDraft(),
+            draft: newRichDraft(clientId),
             past: [],
             future: [],
             saved: undefined,
@@ -368,7 +372,7 @@ export function createRichDocumentController(
         activeWrite = undefined;
         retained = null;
         draftVisible = false;
-        state = initialState(journal.read());
+        state = initialState(journal.read(), clientId);
         listeners.forEach((listener) => listener());
       };
     },

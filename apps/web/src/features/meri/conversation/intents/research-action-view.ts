@@ -4,6 +4,8 @@ import type {
   IntentsResearchActionProposal,
 } from "@capiro/meri-client/intents";
 import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
+import { intentOperationLabel } from "./intent-labels";
+import { expiresLabel } from "./intent-view-types";
 
 type ResearchActionItem = Extract<IntentsItem, { kind: "research_action" }>;
 type Decided = Exclude<
@@ -28,19 +30,6 @@ export function researchActionSettled(status: string) {
   ].includes(status);
 }
 
-const operationLabels = {
-  manage_research_portfolio: "Research Portfolio management action",
-  create_research_portfolio_snapshot: "Research Portfolio snapshot",
-  request_research_portfolio_output: "Research Portfolio CSV output",
-  save_research_portfolio_output_to_client:
-    "Save a Research Portfolio output to Client Files",
-  watch_research_portfolio: "Research Portfolio watch",
-  update_research_portfolio_change_state: "Research Portfolio change state",
-  create_research_portfolio_bookmark: "Research Portfolio bookmark",
-  add_research_portfolio_review_note: "Research Portfolio review note",
-  prepare_research_portfolio_brief: "Research Portfolio brief draft",
-  prepare_research_portfolio_meeting: "Research Portfolio meeting draft",
-} satisfies Record<IntentsResearchActionProposal["operation"], string>;
 
 const cap = (value: string, length = 400) =>
   value.length > length ? `${value.slice(0, length)}…` : value;
@@ -69,7 +58,7 @@ export function researchActionFields(
   const request: object = proposal.request;
   const fields: IntentField[] = [
     { label: "Action", value: proposal.preview.label },
-    { label: "Operation", value: operationLabels[proposal.operation] },
+    { label: "Operation", value: intentOperationLabel(proposal.operation) },
     ...(proposal.preview.clientName
       ? [{ label: "Prepared for", value: proposal.preview.clientName }]
       : []),
@@ -97,18 +86,7 @@ export function researchActionFields(
     fields.push({ label: humanize(key), value: plain(value) });
   }
   fields.push(
-    {
-      label: "Scope",
-      value: proposal.scopes
-        .map((s) =>
-          s.kind === "private-user"
-            ? "Private to the current actor"
-            : `${s.kind} ${s.resourceId}`,
-        )
-        .join("; "),
-    },
-    { label: "Expires", value: proposal.expiresAt },
-    { label: "Command hash", value: proposal.commandSha256 },
+    { label: "Expires", value: expiresLabel(proposal.expiresAt) },
   );
   return fields;
 }

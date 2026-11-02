@@ -12,7 +12,6 @@ import ui from "../../../features/meri/ui/meri-ui.module.css";
 import { MeriPageHeading } from "../../../features/meri/ui/MeriPageHeading";
 import { MeriFilesWorkflow } from "../../../features/meri/files/MeriFilesWorkflow";
 import { DocumentLibrary } from "../../../features/meri/files/DocumentLibrary";
-import { OfficeEditing } from "../../../features/meri/office/OfficeEditing";
 import { LegacyReportLibrary } from "../../../features/meri/files/LegacyReportLibrary";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { scopedHref } from "../../../shared/session/client-route";
@@ -43,12 +42,10 @@ type Operation = "create_word" | "create_excel";
 export function MeriFilesHost({
   enabled,
   readEnabled = enabled,
-  officeEnabled = false,
   operation,
 }: {
   enabled: boolean;
   readEnabled?: boolean;
-  officeEnabled?: boolean;
   operation: Operation;
 }) {
   const selected = useSelectedClient();
@@ -61,8 +58,6 @@ export function MeriFilesHost({
     selected.state === "authorized-client" ? selected.requestedId : undefined;
   const available =
     selected.state === "no-selection" || selected.state === "authorized-client";
-  // A publication from the editor remounts the library below it, so version history shows the new head.
-  const [libraryKey, setLibraryKey] = useState(0);
   return (
     <>
       {account && available && (
@@ -73,18 +68,11 @@ export function MeriFilesHost({
       )}
       {readEnabled &&
         (account && available ? (
-          <OfficeEditing
+          <DocumentLibrary
             key={JSON.stringify([account.tenantId, account.actorId, clientId])}
-            enabled={officeEnabled}
             account={account}
-            onPublished={() => setLibraryKey((key) => key + 1)}
-          >
-            <DocumentLibrary
-              key={libraryKey}
-              account={account}
-              {...(clientId ? { clientId } : {})}
-            />
-          </OfficeEditing>
+            {...(clientId ? { clientId } : {})}
+          />
         ) : (
           <p role="status">
             Current account and client access must be verified before loading

@@ -117,8 +117,8 @@ vi.mock(
   () => ({ ProspectDraftExport: () => null }),
 );
 vi.mock(
-  "../src/features/modules/workspace/newsletter/NewsletterWorkflow",
-  () => ({ NewsletterWorkflow: () => null }),
+  "../src/features/modules/workspace/newsletter/NewsletterEditor",
+  () => ({ NewsletterEditor: () => null }),
 );
 vi.mock("../src/features/modules/workspace/brief-copy/CopiedTabs", () => ({
   CopiedTabs: () => null,

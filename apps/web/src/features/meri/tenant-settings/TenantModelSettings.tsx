@@ -5,6 +5,7 @@ import { FormField } from "../ui/FormField";
 import { TenantSettingsController } from "./controller";
 import { TenantBrowserSettings } from "./TenantBrowserSettings";
 import {
+  MAX_TURNS,
   microToUsd,
   modelDraft,
   type ModelLimits,
@@ -106,7 +107,7 @@ function ModelLimitsForm({
         const model = modelDraft(monthly, perQuery, turns);
         if (!model) {
           setError(
-            "Enter positive USD amounts with up to six decimal places and a whole turn limit from 1 to 100.",
+            `Enter positive USD amounts with up to six decimal places and a whole turn limit from 1 to ${MAX_TURNS}.`,
           );
           return;
         }
@@ -147,7 +148,7 @@ function ModelLimitsForm({
         value={turns}
         onChange={setTurns}
         inputMode="numeric"
-        maxLength={3}
+        maxLength={4}
         disabled={!editable}
         required
       />

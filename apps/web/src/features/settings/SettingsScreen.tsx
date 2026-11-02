@@ -112,7 +112,7 @@ export function SettingsScreen({
   meriPreferences: ReactNode;
   memoryReviewEnabled?: boolean;
   readOnlyPreview?: boolean;
-  /** The serving tuple line the route read from its environment; testers record it from here. */
+  /** The serving tuple the route read: this image's commit plus the Core and Meri answering now, recorded by testers. */
   build?: string;
 }) {
   const query = useCapiroQuery("me.read", {});
