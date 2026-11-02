@@ -105,3 +105,17 @@ it("a context from another scope is skipped by the draft owner, never treated as
   expect(contextInScope({ ...context, conversationId: id(8) } as never, owned)).toBe(false);
   expect(contextInScope(context as never, undefined)).toBe(true);
 });
+
+it("the in-flight run's own request save succeeds at the budget, so no recovery warning appears mid-run", () => {
+  const storage = memory();
+  fill(storage, "observed");
+  const current = tabRecord(scope(300), "request", pass, id(7300), storage);
+  // Submit records the pending request, then the observed one while the run is still answering.
+  current.write({ submit: { requestId: id(7301), state: "pending" } });
+  current.write({ submit: { requestId: id(7301), state: "observed" } });
+  expect(current.read()).toEqual({
+    submit: { requestId: id(7301), state: "observed" },
+  });
+  expect(current.current()).toBe(true);
+  expect(records(storage)).toBeLessThanOrEqual(128);
+});
