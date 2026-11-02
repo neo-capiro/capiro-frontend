@@ -133,15 +133,13 @@ test("synthetic saved transcript preserves resumed output, shows each logical pr
     events: [...initialEvents, ...resumedEvents, ...lastEvents],
   });
   await page.goto(selectedUrl);
+  // The read continues past the page size by itself; once every page is loaded the
+  // loading notice is gone, nothing replaces it and no manual control is offered.
   await expect(
-    page.getByText("Part of the saved conversation is shown."),
-  ).toBeVisible();
-  await page
-    .getByRole("button", { name: "Load more saved turns", exact: true })
-    .click();
-  // Once every page is loaded the partial-view notice is gone and nothing replaces it.
+    page.getByText("Loading the rest of the saved conversation."),
+  ).toHaveCount(0);
   await expect(
-    page.getByText("Part of the saved conversation is shown."),
+    page.getByRole("button", { name: "Load more saved turns", exact: true }),
   ).toHaveCount(0);
   await expect(
     page.getByText("Saved conversation history loaded."),

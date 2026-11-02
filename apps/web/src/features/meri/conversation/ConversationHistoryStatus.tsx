@@ -167,23 +167,26 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
             Reload saved history
           </Button>
         </div>
+      ) : history.moreFailed ? (
+        // The pages after the ones shown could not be read; the rest waits for a manual retry.
+        <div role="status" className={styles.historyIssue}>
+          <p>Part of the saved conversation is shown.</p>
+          {recovered && (
+            <Button
+              type="button"
+              variant="outline"
+              className={ui.outline}
+              disabled={history.query.isFetching}
+              onClick={() => void history.query.fetchNextPage()}
+            >
+              Load more saved turns
+            </Button>
+          )}
+        </div>
       ) : history.query.hasNextPage ? (
-        // Only a partial view is worth saying; a fully restored history is just the transcript.
-        <p role="status">Part of the saved conversation is shown.</p>
+        // The read continues by itself; a fully restored history is just the transcript.
+        <p role="status">Loading the rest of the saved conversation.</p>
       ) : null}
-      {recovered && history.query.hasNextPage && (
-        <>
-          <Button
-            type="button"
-            variant="outline"
-            className={ui.outline}
-            disabled={history.query.isFetching}
-            onClick={() => void history.query.fetchNextPage()}
-          >
-            Load more saved turns
-          </Button>
-        </>
-      )}
       {history.tail.error && !history.unavailable && !unreachable && (
         <p role="status">
           The latest turn could not be verified. Reload saved history before
