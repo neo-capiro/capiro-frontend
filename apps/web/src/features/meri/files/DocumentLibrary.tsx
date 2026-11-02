@@ -1,5 +1,6 @@
 "use client";
 import {
+  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -24,7 +25,12 @@ import {
 } from "../../../shared/meri-documents/library-access";
 import { SessionLifetimeController } from "../../../shared/meri-actions/opaque-session-controller";
 import { DocumentLibraryController } from "./document-library-state";
-import { libraryConnectionPhase, retryDelayMs } from "./library-connection";
+import {
+  immediateRenewal,
+  libraryConnectionPhase,
+  libraryReconnectState,
+} from "./library-connection";
+import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 import { isOfficeTarget } from "../office/OfficeWorkspaceLink";
 import styles from "./files.module.css";
 
@@ -114,14 +120,15 @@ export function DocumentLibrary({
     void load();
     // eslint-disable-next-line react-hooks/exhaustive-deps -- one discovery read when the library mounts
   }, [autoOpen]);
-  useEffect(() => {
-    const first = rows[0];
-    if (!autoOpen || origin !== null || !first) return;
-    setOrigin({
-      conversationId: first.conversationId,
-      clientId: libraryOriginClient(first, account),
-    });
-  }, [autoOpen, origin, rows, account]);
+  const first = rows[0];
+  const shownOrigin: Origin | null =
+    origin ??
+    (autoOpen && first
+      ? {
+          conversationId: first.conversationId,
+          clientId: libraryOriginClient(first, account),
+        }
+      : null);
   return (
     <section className={styles.files} aria-label="Saved file library">
       <h2>Saved files and version history</h2>
@@ -145,7 +152,7 @@ export function DocumentLibrary({
           <label className={styles.field}>
             <span>Saved conversation</span>
             <select
-              value={origin?.conversationId ?? ""}
+              value={shownOrigin?.conversationId ?? ""}
               onChange={(event) => {
                 const row = rows.find(
                   (item) => item.conversationId === event.target.value,
@@ -179,11 +186,11 @@ export function DocumentLibrary({
             : "No matching conversation on this page. Continue loading to check later pages."}
         </p>
       )}
-      {origin && (
+      {shownOrigin && (
         <LibraryConnection
-          key={JSON.stringify(origin)}
+          key={JSON.stringify(shownOrigin)}
           account={account}
-          origin={origin}
+          origin={shownOrigin}
           officeOpen={officeOpen}
         />
       )}
@@ -243,36 +250,22 @@ function LibraryConnection({
     shown !== null,
   );
   if (phase === "lost" && shown !== null) setShown(null);
-  const attempt = useRef(0);
-  if (phase === "ready") attempt.current = 0;
+  const reason = host.getExpirationReason();
+  // The planned early end reconnects at once. A hard-cap expiry (a session that could not renew in time) and an
+  // unanswered issuance go through the shared reconnect schedule, whose ladder (2 s doubling to 30 s) bounds the
+  // attempts, so a short-lived receipt can never drive a request storm.
   useEffect(() => {
-    // The planned early end reconnects at once; a hard-cap expiry (a session that could not renew in time) and
-    // an unanswered issuance wait on the bounded ladder, so a short-lived receipt can never drive a request storm.
-    if (
-      phase === "renewing" &&
-      state.status === "expired" &&
-      host.getExpirationReason() === "renewal"
-    ) {
-      void host.connect();
-      return;
-    }
-    if (
-      !(phase === "renewing" && state.status === "expired") &&
-      phase !== "retrying" &&
-      !(phase === "connecting" && state.status === "unavailable")
-    )
-      return;
-    const delay = retryDelayMs(attempt.current);
-    if (delay === null) return;
-    const timer = setTimeout(() => {
-      attempt.current += 1;
-      void host.connect();
-    }, delay);
-    return () => clearTimeout(timer);
-  }, [phase, state.status, host]);
-  const label = anchor ? "Version history connection" : "File library connection";
-  const askAgain = phase === "lost" ||
-    (state.status === "unavailable" && retryDelayMs(attempt.current) === null);
+    if (immediateRenewal(phase, state.status, reason)) void host.connect();
+  }, [phase, state.status, reason, host]);
+  const connect = useCallback(() => void host.connect(), [host]);
+  const schedule = useReconnectSchedule(
+    libraryReconnectState(phase, state.status, reason),
+    connect,
+  );
+  const label = anchor
+    ? "Version history connection"
+    : "File library connection";
+  const askAgain = phase === "lost" || state.status === "unavailable";
   const notice =
     phase === "renewing"
       ? "Renewing file access…"
@@ -294,7 +287,7 @@ function LibraryConnection({
             <Button
               variant="outline"
               onClick={() => {
-                attempt.current = 0;
+                schedule.reset();
                 void host.connect();
               }}
             >

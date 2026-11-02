@@ -1,8 +1,10 @@
 import {
+  ConversationHistoryUnavailable,
   listConversations,
   readConversationTranscript,
   type ConversationListPage,
 } from "../meri-conversations/history-client";
+import { ActionSessionUnavailable } from "../meri-actions/session-bootstrap";
 import { conversationInClient } from "../meri-conversations/history-pages";
 import { bootstrapConversationSession } from "../meri-conversations/session";
 
@@ -85,11 +87,22 @@ export async function bootstrapLibrarySession({
   fetcher?: typeof fetch;
   now?: () => number;
 }) {
-  const page = await readConversationTranscript(
-    { conversationId, limit: 1 },
-    signal,
-    fetcher,
-  );
+  // Both legs of this issuance answer the same owner: a transcript the control did not answer (5xx, 408, 429,
+  // or no answer at all) is as transient as an unanswered session issuance, and a refusal is as definitive.
+  let page;
+  try {
+    page = await readConversationTranscript(
+      { conversationId, limit: 1 },
+      signal,
+      fetcher,
+    );
+  } catch (error) {
+    if (error instanceof ConversationHistoryUnavailable)
+      throw new ActionSessionUnavailable(error.status);
+    if (error instanceof TypeError && !signal.aborted)
+      throw new ActionSessionUnavailable(503);
+    throw error;
+  }
   const binding = page.latestRun.binding;
   if (
     page.conversation.conversationId !== conversationId ||

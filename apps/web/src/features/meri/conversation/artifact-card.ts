@@ -28,20 +28,33 @@ const labels: Readonly<Record<string, string>> = {
 };
 export const mimeLabel = (mimeType: string) => labels[mimeType] ?? mimeType;
 
+const when = new Intl.DateTimeFormat(undefined, {
+  dateStyle: "medium",
+  timeStyle: "short",
+});
+/** "Original" or "Revision" for a generated version, "Captured" for a workspace file, with its creation time. */
+export const versionLabel = (preview: ArtifactPreview) =>
+  `${
+    preview.kind === "generated"
+      ? preview.parentVersionId === null
+        ? "Original"
+        : "Revision"
+      : "Captured"
+  }, ${when.format(new Date(preview.createdAt))}`;
+
 /** The card's title and one-line description: the file's own name, kind, size and version once its details are read. */
-export function artifactCardSummary(
-  versionId: string,
-  preview: ArtifactPreview | null,
-): { title: string; description: string } {
-  const version = `Version ${versionId.slice(0, 8)}`;
+export function artifactCardSummary(preview: ArtifactPreview | null): {
+  title: string;
+  description: string;
+} {
   if (!preview)
     return {
-      title: `File version ${versionId.slice(0, 8)}`,
+      title: "Generated file",
       description: "Reading the file details…",
     };
   return {
     title: preview.filename,
-    description: `${mimeLabel(preview.mimeType)} · ${formatBytes(preview.bytes)} · ${version}`,
+    description: `${mimeLabel(preview.mimeType)} · ${formatBytes(preview.bytes)} · ${versionLabel(preview)}`,
   };
 }
 

@@ -254,9 +254,15 @@ it("keeps at most one history request in flight per library; a renewal's port sw
           );
       }),
   );
-  const controller = new DocumentLibraryController(first, { anchor: original() });
+  const controller = new DocumentLibraryController(first, {
+    anchor: original(),
+  });
   const detach = controller.attach();
-  const reads = [controller.loadMore(), controller.loadMore(), controller.loadMore()];
+  const reads = [
+    controller.loadMore(),
+    controller.loadMore(),
+    controller.loadMore(),
+  ];
   expect(first.history).toHaveBeenCalledTimes(1);
   expect(controller.getSnapshot().busy).toBe(true);
   // The session renewed while the read was in flight: the old port's request is cut, nothing is re-issued on its own.

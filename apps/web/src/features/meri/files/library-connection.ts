@@ -1,3 +1,5 @@
+import type { ReconnectState } from "../../../shared/meri-conversations/reconnect-schedule";
+
 /**
  * How the Files page treats its session owner's state. Meri ends every file-access session itself shortly
  * before its cap (the cap follows the Core identity receipt, about a minute) and issues a new one; that
@@ -42,7 +44,28 @@ export function libraryConnectionPhase(
     : "lost";
 }
 
-/** Quiet backoff for an unanswered issuance; after the last delay the person is asked instead. */
-export const RETRY_DELAYS_MS = Object.freeze([2_000, 5_000, 10_000, 30_000]);
-export const retryDelayMs = (attempt: number) =>
-  attempt < RETRY_DELAYS_MS.length ? RETRY_DELAYS_MS[attempt]! : null;
+/**
+ * What the shared reconnect schedule sees. A planned early renewal reconnects at once and is not an episode;
+ * a hard-cap expiry (a session that could not renew in time) and an unanswered issuance are "failing", so the
+ * next attempt waits on the shared ladder (2 s doubling to 30 s) and a short-lived receipt can never drive a
+ * request storm; an attempt in flight is "busy"; a ready port ends the episode.
+ */
+export function libraryReconnectState(
+  phase: LibraryConnectionPhase,
+  status: Status,
+  reason: Reason,
+): ReconnectState {
+  if (status === "connecting") return "busy";
+  if (phase === "renewing" && status === "expired" && reason === "expiry")
+    return "failing";
+  if (phase === "retrying") return "failing";
+  if (phase === "connecting" && status === "unavailable") return "failing";
+  return "ok";
+}
+
+/** The planned early end of a session: reconnect now, outside the ladder. */
+export const immediateRenewal = (
+  phase: LibraryConnectionPhase,
+  status: Status,
+  reason: Reason,
+) => phase === "renewing" && status === "expired" && reason === "renewal";

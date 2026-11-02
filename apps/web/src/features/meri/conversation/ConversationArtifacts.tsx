@@ -125,11 +125,29 @@ function useArtifactActions(access: ArtifactAccess, versionId: string) {
     link.click();
     setStatus({ kind: "downloaded", filename: reply.value.filename });
   };
-  // One read per mounted card (per version and access owner); a renewed owner reads again.
+  // The details are read once for the version, when the card mounts with nothing read and nothing refused; a
+  // renewed access owner never re-reads a card already showing its details (no blink), and after a refusal or
+  // a denial only the person's "Read details again" asks once more.
   useEffect(() => {
-    void inspect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- inspect is stable for a given access/versionId
-  }, [access, versionId]);
+    if (preview !== null || status.kind !== "idle") return;
+    const controller = new AbortController();
+    work.current?.abort();
+    work.current = controller;
+    void access.inspect(versionId, controller.signal).then((reply) => {
+      if (work.current !== controller) return;
+      if (reply.ok) {
+        setPreview(reply.value);
+        setStatus({ kind: "idle" });
+        return;
+      }
+      if (reply.accessDenied) url.clear();
+      setStatus({ kind: "failed", action: "preview", code: reply.code });
+    });
+    return () => {
+      if (work.current === controller) work.current = null;
+      controller.abort();
+    };
+  }, [access, versionId, preview, status.kind, url]);
   return { preview, status, inspect, download };
 }
 
@@ -154,10 +172,7 @@ function ConversationArtifact({
     artifact.versionId,
   );
   const [details, setDetails] = useState(false);
-  const { title, description } = artifactCardSummary(
-    artifact.versionId,
-    preview,
-  );
+  const { title, description } = artifactCardSummary(preview);
   const office = officeTargetFor(scope, artifact.versionId, preview);
   const working = (action: "preview" | "download") =>
     status.kind === "working" && status.action === action;

@@ -17,7 +17,7 @@ import {
 
 const token = `${"c".repeat(40)}.${"m".repeat(43)}`;
 const fileBytes = "Synthetic document";
-const version = `Version ${ids.version.slice(0, 8)}`;
+const lineage = "Original,";
 
 /**
  * A published file in the transcript. The card reads the file's details as soon as it is shown (one
@@ -102,9 +102,15 @@ for (const format of accessFormats)
     const { f, seen } = await withArtifact(page, (r) => reply(r, receipt));
     const file = page.getByRole("group", { name: filename });
     await expect(file).toBeVisible();
-    // The details line names the kind, the size and the version with no click (M26/M23: a card, not a bare id).
-    await expect(file.getByText(`${receipt.version.object.bytes} B · ${version}`, { exact: false })).toBeVisible();
-    await expect(page.getByRole("group", { name: /^File version / })).toHaveCount(0);
+    // The details line names the kind, the size and the version's creation with no click (M26/M23: a card, not a bare id).
+    await expect(
+      file.getByText(`${receipt.version.object.bytes} B · ${lineage}`, {
+        exact: false,
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("group", { name: "Generated file" }),
+    ).toHaveCount(0);
     await links(page, receipt.version.mimeType, filename);
     await file.getByRole("button", { name: "Details", exact: true }).click();
     await expect(file.getByText("Generation: draft")).toBeVisible();
@@ -201,7 +207,7 @@ test("a refused inspection leaves the file without invented details, and the per
         )
       : reply(r, inspected()),
   );
-  const card = page.getByRole("group", { name: /^File version / });
+  const card = page.getByRole("group", { name: "Generated file" });
   await expect(card).toBeVisible();
   await expect(
     card.getByText(
@@ -216,7 +222,7 @@ test("a refused inspection leaves the file without invented details, and the per
     .click();
   const file = page.getByRole("group", { name: "Synthetic.txt" });
   await expect(file).toBeVisible();
-  await expect(file.getByText(version, { exact: false })).toBeVisible();
+  await expect(file.getByText(lineage, { exact: false })).toBeVisible();
   expect(seen.map((item) => item.path)).toEqual([
     "/api/documents/inspect",
     "/api/documents/inspect",
@@ -242,7 +248,9 @@ test("native workspace files show truthful path/bytes and download without gener
       /Generation:|Preview: pending|Visual inspection|Native opening/,
     ),
   ).toHaveCount(0);
-  await expect(file.getByRole("link", { name: "Open in Workspace" })).toHaveCount(0);
+  await expect(
+    file.getByRole("link", { name: "Open in Workspace" }),
+  ).toHaveCount(0);
   const pending = page.waitForEvent("download");
   await file.getByRole("button", { name: "Download", exact: true }).click();
   const download = await pending;
@@ -363,7 +371,7 @@ for (const kind of ["native", "generated"] as const)
           .soft(page.getByRole("group", { name: filename }))
           .toHaveCount(0);
         await expect
-          .soft(page.getByRole("group", { name: /^File version / }))
+          .soft(page.getByRole("group", { name: "Generated file" }))
           .toBeVisible();
         await expect
           .soft(

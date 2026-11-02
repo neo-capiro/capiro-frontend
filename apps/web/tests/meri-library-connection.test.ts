@@ -1,8 +1,8 @@
 import { expect, it } from "vitest";
 import {
+  immediateRenewal,
   libraryConnectionPhase,
-  retryDelayMs,
-  RETRY_DELAYS_MS,
+  libraryReconnectState,
 } from "../src/features/meri/files/library-connection";
 
 it("keeps the loaded files through the session's own renewal and its hard cap", () => {
@@ -33,9 +33,9 @@ it("keeps the loaded files through an issuance the control did not answer and as
   expect(libraryConnectionPhase("unavailable", undefined, 503, false)).toBe(
     "connecting",
   );
-  expect(libraryConnectionPhase("connecting", undefined, undefined, false)).toBe(
-    "connecting",
-  );
+  expect(
+    libraryConnectionPhase("connecting", undefined, undefined, false),
+  ).toBe("connecting");
   expect(libraryConnectionPhase("idle", undefined, undefined, false)).toBe(
     "connecting",
   );
@@ -61,10 +61,29 @@ it("clears the loaded files only on a refusal, a lost membership or a changed or
   ).toBe("lost");
 });
 
-it("backs off a bounded number of times, then leaves the retry to the person", () => {
-  expect(RETRY_DELAYS_MS.map((_, index) => retryDelayMs(index))).toEqual([
-    2_000, 5_000, 10_000, 30_000,
-  ]);
-  expect(retryDelayMs(RETRY_DELAYS_MS.length)).toBeNull();
-  expect(retryDelayMs(99)).toBeNull();
+it("reconnects at once only for the planned renewal; the hard cap and unanswered issuance go through the shared ladder", () => {
+  expect(immediateRenewal("renewing", "expired", "renewal")).toBe(true);
+  expect(immediateRenewal("renewing", "expired", "expiry")).toBe(false);
+  expect(immediateRenewal("renewing", "connecting", "renewal")).toBe(false);
+  expect(libraryReconnectState("renewing", "expired", "renewal")).toBe("ok");
+  expect(libraryReconnectState("renewing", "expired", "expiry")).toBe(
+    "failing",
+  );
+  expect(libraryReconnectState("retrying", "unavailable", undefined)).toBe(
+    "failing",
+  );
+  expect(libraryReconnectState("connecting", "unavailable", undefined)).toBe(
+    "failing",
+  );
+  // An attempt in flight neither schedules another nor resets the ladder; a ready port ends the episode.
+  expect(libraryReconnectState("renewing", "connecting", "expiry")).toBe(
+    "busy",
+  );
+  expect(libraryReconnectState("connecting", "connecting", undefined)).toBe(
+    "busy",
+  );
+  expect(libraryReconnectState("ready", "ready", undefined)).toBe("ok");
+  expect(libraryReconnectState("lost", "unavailable", "access-lost")).toBe(
+    "ok",
+  );
 });

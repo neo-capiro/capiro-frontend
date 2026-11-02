@@ -10,6 +10,7 @@ import {
   libraryOriginClient,
   listLibraryContexts,
 } from "../src/shared/meri-documents/library-session";
+import { ActionSessionUnavailable } from "../src/shared/meri-actions/session-bootstrap";
 import { conversation, turn } from "../test/browser/meri-history-fixtures";
 import {
   binding,
@@ -171,4 +172,50 @@ it("a saved completed run can request a derived preview explicitly without a new
     "/api/documents/inspect",
     "/api/documents/preview",
   ]);
+});
+
+it("reports a transcript the control did not answer like an unanswered session issuance, so the owner retries it", async () => {
+  const { page, receipt } = fixture("completed");
+  const transcript = vi.fn<typeof fetch>(async (url) => {
+    if (String(url) === "/api/conversations/transcript")
+      return Response.json(
+        { error: { code: "CONVERSATION_UNAVAILABLE" } },
+        { status: 503 },
+      );
+    if (String(url) === "/api/action-followthrough/session")
+      return Response.json(receipt);
+    throw Error("Unexpected request");
+  });
+  const open = (fetcher: typeof fetch) =>
+    bootstrapLibrarySession({
+      account,
+      clientId,
+      conversationId: binding.conversationId,
+      signal: signal(),
+      fetcher,
+    });
+  await expect(open(transcript)).rejects.toMatchObject({
+    name: "Error",
+    status: 503,
+  });
+  await expect(open(transcript)).rejects.toBeInstanceOf(
+    ActionSessionUnavailable,
+  );
+  // A network failure before any answer (fetch rejects with a TypeError) is the same transient class.
+  const network = vi.fn<typeof fetch>(async () => {
+    throw new TypeError("Failed to fetch");
+  });
+  await expect(open(network)).rejects.toBeInstanceOf(ActionSessionUnavailable);
+  await expect(open(network)).rejects.toMatchObject({ status: 503 });
+  // A refused transcript keeps its own status: 403 is definitive for the owner.
+  const refused = vi.fn<typeof fetch>(async (url) => {
+    if (String(url) === "/api/conversations/transcript")
+      return Response.json(
+        { error: { code: "ACCESS_DENIED" } },
+        { status: 403 },
+      );
+    return Response.json(page);
+  });
+  await expect(open(refused)).rejects.toMatchObject({ status: 403 });
+  expect(receipt.credential.startsWith("action_session_")).toBe(true);
 });

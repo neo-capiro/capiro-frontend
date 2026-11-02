@@ -50,18 +50,26 @@ const tabs: { id: WorkspaceView; label: string }[] = [
  */
 export function officeCreations(
   operation: "create_word" | "create_excel" | null,
-): readonly { kind: "word" | "excel" | "powerpoint"; label: string; href: string }[] {
+): readonly {
+  kind: "word" | "excel" | "powerpoint";
+  label: string;
+  href: string;
+}[] {
   const editor = (kind: "word" | "excel") =>
     (kind === "word" ? "create_word" : "create_excel") === operation;
   return [
     {
       kind: "word",
-      label: editor("word") ? "Word document" : "Word document (ask Meri in chat)",
+      label: editor("word")
+        ? "Word document"
+        : "Word document (ask Meri in chat)",
       href: editor("word") ? "/meri/files" : "/meri",
     },
     {
       kind: "excel",
-      label: editor("excel") ? "Excel workbook" : "Excel workbook (ask Meri in chat)",
+      label: editor("excel")
+        ? "Excel workbook"
+        : "Excel workbook (ask Meri in chat)",
       href: editor("excel") ? "/meri/files" : "/meri",
     },
     {
