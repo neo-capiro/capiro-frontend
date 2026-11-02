@@ -27,6 +27,8 @@ import { isBrowserProposal } from "./browser-view";
 import { isBizdevProposal } from "./bizdev-view";
 import { isMailSendProposal } from "./mail-view";
 import { isMemoryProposal } from "./memory-view";
+import { isOfficeEditProposal } from "./office-edit-view";
+import { OfficeOpenVersionButton } from "../../office/OfficeEditing";
 import { ResearchShareReview } from "./ResearchShareReview";
 import { ResearchShareResult } from "./ResearchShareResult";
 
@@ -83,6 +85,8 @@ function uncertainOutcome(row: IntentRow): string | null {
     return "The Research Portfolio action outcome is not confirmed. Check the current recorded status; the action will not be sent again.";
   if (isMailSendProposal(p))
     return "The message outcome is not confirmed. Check the current recorded status; the message will not be sent again.";
+  if (isOfficeEditProposal(p))
+    return "Whether the new document version was published is not confirmed. Refresh to read the recorded result; the proposal is never applied twice.";
   return null;
 }
 
@@ -231,6 +235,9 @@ function IntentCard({
             Open saved research draft
           </Link>
         </Button>
+      )}
+      {row.officeVersion && (
+        <OfficeOpenVersionButton version={row.officeVersion} />
       )}
       {row.task && (
         <Button variant="outline" asChild>
