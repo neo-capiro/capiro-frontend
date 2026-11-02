@@ -1,9 +1,15 @@
 import { conversationApplicationMetadata as protocol } from "@capiro/meri-contracts/conversation-application";
-/** A 400 refusal decided before any run exists: the request was not dispatched and may be changed. */
+/**
+ * A refusal decided before any run exists, answered with its own contract status (400 for the typed
+ * skill refusals, 429 for a reached monthly cap, contracts 0.1.51): the request was not dispatched
+ * and may be changed or sent again.
+ */
 export const DEFINITIVE_REFUSALS = new Set([
     "SKILL_SOURCES_UNAVAILABLE",
     "SKILL_SCOPE_REFUSED",
+    "TENANT_MONTHLY_CAP_REACHED",
 ]);
+const errorStatuses = protocol.errorStatuses;
 export class ConversationUnavailable extends Error {
     code;
     status;
@@ -18,7 +24,9 @@ export class ConversationUnavailable extends Error {
     }
     /** Control refused this exact request outright; nothing was dispatched and nothing is in flight. */
     get definitive() {
-        return this.status === 400 && DEFINITIVE_REFUSALS.has(this.code);
+        return (DEFINITIVE_REFUSALS.has(this.code) &&
+            this.status !== undefined &&
+            !!errorStatuses[this.code]?.includes(this.status));
     }
 }
 /**
