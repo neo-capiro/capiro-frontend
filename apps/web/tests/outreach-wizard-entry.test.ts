@@ -150,7 +150,7 @@ describe("New Outreach enters the existing campaign owner", () => {
       metadata: null,
       client: { id: clientId },
     };
-    invoke(render({ clientId }), OutreachList, "onRecord", harness.row);
+    invoke(render({ clientId }), OutreachList, "onRecord", id);
     expect(find(render({ clientId }), OutreachDraft)?.props.record).toBe(
       harness.row,
     );
