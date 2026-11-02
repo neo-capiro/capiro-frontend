@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
   useSyncExternalStore,
+  type ReactNode,
 } from "react";
 import { NativeResultFiles } from "./NativeResultFiles";
 import { LibrarySelectedVersion } from "./LibrarySelectedVersion";
@@ -26,9 +27,11 @@ import {
 import { SessionLifetimeController } from "../../../shared/meri-actions/opaque-session-controller";
 import { DocumentLibraryController } from "./document-library-state";
 import {
+  LIBRARY_RECONNECT_ATTEMPTS,
   immediateRenewal,
   libraryConnectionPhase,
   libraryReconnectState,
+  type LibraryConnectionPhase,
 } from "./library-connection";
 import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 import { isOfficeTarget } from "../office/OfficeWorkspaceLink";
@@ -261,23 +264,27 @@ function LibraryConnection({
   const schedule = useReconnectSchedule(
     libraryReconnectState(phase, state.status, reason),
     connect,
+    LIBRARY_RECONNECT_ATTEMPTS,
   );
   const label = anchor
     ? "Version history connection"
     : "File library connection";
-  const askAgain = phase === "lost" || state.status === "unavailable";
+  const askAgain =
+    phase === "lost" || state.status === "unavailable" || schedule.stopped;
   const notice =
-    phase === "renewing"
-      ? "Renewing file access…"
-      : phase === "retrying"
-        ? "File access could not be checked just now; checking again."
-        : phase === "connecting"
-          ? state.status === "unavailable"
-            ? "File access could not be checked just now; checking again."
-            : "Checking current file access…"
-          : phase === "lost"
-            ? "Current file access is unavailable. Previously loaded details have been cleared."
-            : null;
+    schedule.stopped && phase !== "lost" && phase !== "ready"
+      ? "File access could not be checked for several minutes. Automatic checks have stopped."
+      : phase === "renewing"
+        ? "Renewing file access…"
+        : phase === "retrying"
+          ? "File access could not be checked just now; checking again."
+          : phase === "connecting"
+            ? state.status === "unavailable"
+              ? "File access could not be checked just now; checking again."
+              : "Checking current file access…"
+            : phase === "lost"
+              ? "Current file access is unavailable. Previously loaded details have been cleared."
+              : null;
   return (
     <>
       {notice && (
@@ -298,13 +305,16 @@ function LibraryConnection({
       )}
       {shown && (
         <>
-          <NativeResultFiles
-            key={`results:${shown.lifetimeKey}`}
-            port={shown.port}
-          />
+          <LibraryActions phase={phase}>
+            <NativeResultFiles
+              key={`results:${shown.lifetimeKey}`}
+              port={shown.port}
+            />
+          </LibraryActions>
           <LibraryPages
             key={shown.lifetimeKey}
             port={shown.port}
+            phase={phase}
             account={account}
             officeOpen={officeOpen}
             {...(anchor ? { anchor } : {})}
@@ -315,13 +325,34 @@ function LibraryConnection({
   );
 }
 
+/**
+ * The shown files act on the displayed session's port. While that session is renewed or asked again it is
+ * closed, so every control inside stays disabled until a current port is mounted; a click would otherwise
+ * send on the closed session and the page would clear its list.
+ */
+export function LibraryActions({
+  phase,
+  children,
+}: {
+  phase: LibraryConnectionPhase;
+  children?: ReactNode;
+}) {
+  return (
+    <fieldset disabled={phase !== "ready"} className={styles.actions}>
+      {children}
+    </fieldset>
+  );
+}
+
 function LibraryPages({
   port,
+  phase,
   account,
   anchor,
   officeOpen,
 }: {
   port: DocumentLibraryAccess;
+  phase: LibraryConnectionPhase;
   account: Account;
   anchor?: LibraryVersion;
   officeOpen?: ((version: LibraryVersion) => void) | undefined;
@@ -332,34 +363,36 @@ function LibraryPages({
   const [selected, setSelected] = useState<LibraryVersion | null>(null);
   return (
     <>
-      {!anchor && (
-        <label className={styles.field}>
-          <span>Files to show</span>
-          <select
-            value={scope}
-            onChange={(event) => {
-              setSelected(null);
-              setScope(event.target.value as LibraryScope);
-            }}
-          >
-            <option value="conversation">This conversation</option>
-            <option
-              value="client"
-              disabled={port.context.selectedClientId === null}
+      <LibraryActions phase={phase}>
+        {!anchor && (
+          <label className={styles.field}>
+            <span>Files to show</span>
+            <select
+              value={scope}
+              onChange={(event) => {
+                setSelected(null);
+                setScope(event.target.value as LibraryScope);
+              }}
             >
-              This client
-            </option>
-            <option value="owner">My files</option>
-          </select>
-        </label>
-      )}
-      <LibraryPage
-        key={anchor?.versionId ?? scope}
-        port={port}
-        query={anchor ? { anchor } : { scope }}
-        officeOpen={officeOpen}
-        onHistory={setSelected}
-      />
+              <option value="conversation">This conversation</option>
+              <option
+                value="client"
+                disabled={port.context.selectedClientId === null}
+              >
+                This client
+              </option>
+              <option value="owner">My files</option>
+            </select>
+          </label>
+        )}
+        <LibraryPage
+          key={anchor?.versionId ?? scope}
+          port={port}
+          query={anchor ? { anchor } : { scope }}
+          officeOpen={officeOpen}
+          onHistory={setSelected}
+        />
+      </LibraryActions>
       {!anchor && selected && (
         <LibraryConnection
           key={selected.versionId}

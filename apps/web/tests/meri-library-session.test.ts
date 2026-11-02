@@ -11,6 +11,8 @@ import {
   listLibraryContexts,
 } from "../src/shared/meri-documents/library-session";
 import { ActionSessionUnavailable } from "../src/shared/meri-actions/session-bootstrap";
+import { SessionLifetimeController } from "../src/shared/meri-actions/opaque-session-controller";
+import { libraryConnectionPhase } from "../src/features/meri/files/library-connection";
 import { conversation, turn } from "../test/browser/meri-history-fixtures";
 import {
   binding,
@@ -218,4 +220,75 @@ it("reports a transcript the control did not answer like an unanswered session i
   });
   await expect(open(refused)).rejects.toMatchObject({ status: 403 });
   expect(receipt.credential.startsWith("action_session_")).toBe(true);
+});
+
+it("treats a transcript the control never answered before its deadline like an unanswered issuance", async () => {
+  vi.useFakeTimers();
+  try {
+    const silent = vi.fn<typeof fetch>(() => new Promise<Response>(() => {}));
+    const opened = bootstrapLibrarySession({
+      account,
+      clientId,
+      conversationId: binding.conversationId,
+      signal: signal(),
+      fetcher: silent,
+    });
+    const settled = expect(opened).rejects.toMatchObject({
+      status: 408,
+      refused: false,
+    });
+    await vi.advanceTimersByTimeAsync(30_000);
+    await settled;
+    await expect(opened).rejects.toBeInstanceOf(ActionSessionUnavailable);
+    // A request the caller itself cancelled is not reported as unanswered.
+    const cancelled = new AbortController();
+    const aborted = bootstrapLibrarySession({
+      account,
+      clientId,
+      conversationId: binding.conversationId,
+      signal: cancelled.signal,
+      fetcher: silent,
+    });
+    cancelled.abort();
+    await expect(aborted).rejects.not.toBeInstanceOf(ActionSessionUnavailable);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+it("a transcript 401 is definitive at once: the session owner does not ask again", async () => {
+  vi.useFakeTimers();
+  const transcript = vi.fn<typeof fetch>(async () =>
+    Response.json({ error: { code: "UNAUTHENTICATED" } }, { status: 401 }),
+  );
+  const issue = vi.fn((lifetime: AbortSignal) =>
+    bootstrapLibrarySession({
+      account,
+      clientId,
+      conversationId: binding.conversationId,
+      signal: lifetime,
+      fetcher: transcript,
+    }),
+  );
+  const host = new SessionLifetimeController({
+    issue,
+    createPort: () => ({ dispose: () => undefined }),
+    retryDelaysMs: [1_000, 3_000],
+  });
+  const detach = host.attach();
+  try {
+    const connected = host.connect();
+    await vi.advanceTimersByTimeAsync(10_000);
+    await connected;
+    expect(host.getSnapshot().status).toBe("unavailable");
+    expect(host.getIssuanceStatus()).toBe(401);
+    expect(issue).toHaveBeenCalledOnce();
+    expect(transcript).toHaveBeenCalledOnce();
+    expect(libraryConnectionPhase("unavailable", undefined, 401, true)).toBe(
+      "lost",
+    );
+  } finally {
+    detach();
+    vi.useRealTimers();
+  }
 });

@@ -1,5 +1,10 @@
-import { expect, it } from "vitest";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { expect, it, vi } from "vitest";
+import { LibraryActions } from "../src/features/meri/files/DocumentLibrary";
+import { createReconnectSchedule } from "../src/shared/meri-conversations/reconnect-schedule";
 import {
+  LIBRARY_RECONNECT_ATTEMPTS,
   immediateRenewal,
   libraryConnectionPhase,
   libraryReconnectState,
@@ -86,4 +91,62 @@ it("reconnects at once only for the planned renewal; the hard cap and unanswered
   expect(libraryReconnectState("lost", "unavailable", "access-lost")).toBe(
     "ok",
   );
+});
+
+it("disables the shown files' actions unless a current port is mounted", () => {
+  const render = (phase: Parameters<typeof LibraryActions>[0]["phase"]) =>
+    renderToStaticMarkup(
+      createElement(
+        LibraryActions,
+        { phase },
+        createElement("button", { type: "button" }, "Load more files"),
+      ),
+    );
+  // Renewing or asked again, the displayed session is closed: Load more, Reload, Inspect and Download wait.
+  for (const phase of ["renewing", "retrying", "connecting", "lost"] as const)
+    expect(render(phase)).toMatch(/<fieldset[^>]* disabled=""/);
+  expect(render("ready")).not.toContain("disabled");
+});
+
+it("stops polling a steady unanswered issuance after a bounded number of attempts", () => {
+  vi.useFakeTimers();
+  try {
+    const run = vi.fn();
+    const schedule = createReconnectSchedule(
+      undefined,
+      undefined,
+      LIBRARY_RECONNECT_ATTEMPTS,
+    );
+    let elapsed = 0;
+    for (let attempt = 0; attempt < LIBRARY_RECONNECT_ATTEMPTS; attempt++) {
+      schedule.observe("failing", run);
+      expect(schedule.pending()).toBe(true);
+      while (schedule.pending()) {
+        vi.advanceTimersByTime(1_000);
+        elapsed += 1_000;
+      }
+      schedule.observe("busy", run);
+    }
+    expect(run).toHaveBeenCalledTimes(LIBRARY_RECONNECT_ATTEMPTS);
+    // About five minutes of quiet re-asks, then the person is asked instead.
+    expect(elapsed).toBeGreaterThanOrEqual(4 * 60_000);
+    expect(elapsed).toBeLessThanOrEqual(5 * 60_000);
+    schedule.observe("failing", run);
+    expect(schedule.stopped()).toBe(true);
+    expect(schedule.pending()).toBe(false);
+    vi.advanceTimersByTime(60 * 60_000);
+    expect(run).toHaveBeenCalledTimes(LIBRARY_RECONNECT_ATTEMPTS);
+    // "Check access again" starts the ladder over.
+    schedule.reset();
+    expect(schedule.stopped()).toBe(false);
+    schedule.observe("failing", run);
+    expect(schedule.pending()).toBe(true);
+    // A success also ends the stop.
+    vi.advanceTimersByTime(2_000);
+    schedule.observe("ok", run);
+    expect(schedule.stopped()).toBe(false);
+    expect(schedule.attempts()).toBe(0);
+  } finally {
+    vi.useRealTimers();
+  }
 });

@@ -42,15 +42,74 @@ export const versionLabel = (preview: ArtifactPreview) =>
       : "Captured"
   }, ${when.format(new Date(preview.createdAt))}`;
 
+/** The card's own command; the newest command supersedes an older one. */
+export type ArtifactCardStatus =
+  | { kind: "idle" }
+  | { kind: "working"; action: "preview" | "download" }
+  | { kind: "failed"; action: "preview" | "download"; code: string }
+  | { kind: "downloaded"; filename: string; inspected: boolean };
+
+/**
+ * Where the card's details stand. The mount read runs only while the card is idle with nothing read; a
+ * Download started before it answered cancels it, so after that download (or any failure) the details are
+ * unread until the person asks again.
+ */
+export type ArtifactDetails = "read" | "reading" | "refused" | "unread";
+export function artifactDetails(
+  preview: ArtifactPreview | null,
+  status: ArtifactCardStatus,
+): ArtifactDetails {
+  if (preview) return "read";
+  if (
+    status.kind === "idle" ||
+    (status.kind === "working" && status.action === "preview")
+  )
+    return "reading";
+  if (status.kind === "failed" && status.action === "preview") return "refused";
+  return "unread";
+}
+
+/** "Read details again" is offered whenever nothing is read and no command is in flight. */
+export const offersReadAgain = (
+  preview: ArtifactPreview | null,
+  status: ArtifactCardStatus,
+) => {
+  const details = artifactDetails(preview, status);
+  return (
+    (details === "refused" || details === "unread") && status.kind !== "working"
+  );
+};
+
+/** The card's outcome line; a download only claims a match with an inspected version when one was read. */
+export const artifactOutcome = (status: ArtifactCardStatus) =>
+  status.kind === "failed"
+    ? `${status.action === "preview" ? "File details" : "Download"} unavailable (${status.code}). Nothing was substituted.`
+    : status.kind === "downloaded"
+      ? status.inspected
+        ? `Downloaded ${status.filename}; its bytes matched the inspected version.`
+        : `Downloaded ${status.filename}.`
+      : "";
+
+const unreadDescription: Readonly<
+  Record<Exclude<ArtifactDetails, "read">, string>
+> = {
+  reading: "Reading the file details…",
+  refused: "The file details could not be read.",
+  unread: "The file details have not been read.",
+};
+
 /** The card's title and one-line description: the file's own name, kind, size and version once its details are read. */
-export function artifactCardSummary(preview: ArtifactPreview | null): {
+export function artifactCardSummary(
+  preview: ArtifactPreview | null,
+  details: Exclude<ArtifactDetails, "read"> = "reading",
+): {
   title: string;
   description: string;
 } {
   if (!preview)
     return {
       title: "Generated file",
-      description: "Reading the file details…",
+      description: unreadDescription[details],
     };
   return {
     title: preview.filename,

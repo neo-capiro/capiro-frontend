@@ -185,3 +185,12 @@
   font-size: 12px;
   line-height: 1.5;
 }
+
+/* Groups a shown session's controls so they can be disabled together; adds no box of its own. */
+.actions {
+  display: contents;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}

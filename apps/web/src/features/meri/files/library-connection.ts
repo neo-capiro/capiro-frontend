@@ -63,6 +63,13 @@ export function libraryReconnectState(
   return "ok";
 }
 
+/**
+ * Automatic re-asks of an unanswered issuance or a hard-cap expiry before the person is asked instead: on the
+ * shared ladder (2 s doubling to 30 s) these take about four and a half minutes, then polling stops and the page
+ * offers "Check access again".
+ */
+export const LIBRARY_RECONNECT_ATTEMPTS = 12;
+
 /** The planned early end of a session: reconnect now, outside the ladder. */
 export const immediateRenewal = (
   phase: LibraryConnectionPhase,

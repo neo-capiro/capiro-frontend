@@ -88,7 +88,9 @@ export async function bootstrapLibrarySession({
   now?: () => number;
 }) {
   // Both legs of this issuance answer the same owner: a transcript the control did not answer (5xx, 408, 429,
-  // or no answer at all) is as transient as an unanswered session issuance, and a refusal is as definitive.
+  // or no answer at all: a network failure or the request's own deadline) is as transient as an unanswered
+  // session issuance, and a refusal is as definitive. The transcript route's 401 is the native credential's own
+  // refusal, never an older control's unanswered authority, so the owner does not ask again.
   let page;
   try {
     page = await readConversationTranscript(
@@ -98,9 +100,11 @@ export async function bootstrapLibrarySession({
     );
   } catch (error) {
     if (error instanceof ConversationHistoryUnavailable)
-      throw new ActionSessionUnavailable(error.status);
-    if (error instanceof TypeError && !signal.aborted)
-      throw new ActionSessionUnavailable(503);
+      throw new ActionSessionUnavailable(error.status, error.status === 401);
+    if (signal.aborted) throw error;
+    if (error instanceof TypeError) throw new ActionSessionUnavailable(503);
+    if (error instanceof DOMException && error.name === "AbortError")
+      throw new ActionSessionUnavailable(408);
     throw error;
   }
   const binding = page.latestRun.binding;

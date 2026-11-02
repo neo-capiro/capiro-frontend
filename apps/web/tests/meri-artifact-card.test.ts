@@ -2,6 +2,9 @@ import { expect, it } from "vitest";
 import type { ArtifactPreview } from "../src/shared/meri-documents/artifact-access";
 import {
   artifactCardSummary,
+  artifactDetails,
+  artifactOutcome,
+  offersReadAgain,
   formatBytes,
   mimeLabel,
   officeTargetFor,
@@ -122,4 +125,57 @@ it("offers no Workspace route before the details are read or for a captured work
       currentBytesVerified: true,
     }),
   ).toBeNull();
+});
+
+it("a Download before the mount read answers leaves the card able to read its details, without claiming an inspection", () => {
+  // Mounted, the read in flight: nothing to offer yet.
+  expect(artifactDetails(null, { kind: "idle" })).toBe("reading");
+  expect(offersReadAgain(null, { kind: "idle" })).toBe(false);
+  // Download cancels that read; while it runs nothing is offered and the card does not claim to be reading.
+  const downloading = { kind: "working", action: "download" } as const;
+  expect(offersReadAgain(null, downloading)).toBe(false);
+  expect(artifactDetails(null, downloading)).toBe("unread");
+  expect(artifactCardSummary(null, "unread").description).toBe(
+    "The file details have not been read.",
+  );
+  // After the download, succeeded or failed, the card offers "Read details again".
+  const downloaded = {
+    kind: "downloaded",
+    filename: "Note.docx",
+    inspected: false,
+  } as const;
+  const failed = {
+    kind: "failed",
+    action: "download",
+    code: "ARTIFACT_UNAVAILABLE",
+  } as const;
+  for (const status of [downloaded, failed]) {
+    expect(artifactDetails(null, status)).toBe("unread");
+    expect(offersReadAgain(null, status)).toBe(true);
+  }
+  expect(artifactOutcome(downloaded)).toBe("Downloaded Note.docx.");
+  expect(artifactOutcome({ ...downloaded, inspected: true })).toBe(
+    "Downloaded Note.docx; its bytes matched the inspected version.",
+  );
+  // Once the details are read nothing more is offered.
+  expect(offersReadAgain(generated(), downloaded)).toBe(false);
+});
+
+it("a refused read says so instead of still reading", () => {
+  const refused = {
+    kind: "failed",
+    action: "preview",
+    code: "ARTIFACT_ACCESS_DENIED",
+  } as const;
+  expect(artifactDetails(null, refused)).toBe("refused");
+  expect(offersReadAgain(null, refused)).toBe(true);
+  expect(artifactCardSummary(null, "refused").description).toBe(
+    "The file details could not be read.",
+  );
+  expect(artifactCardSummary(null, "refused").description).not.toContain(
+    "Reading",
+  );
+  expect(artifactDetails(null, { kind: "working", action: "preview" })).toBe(
+    "reading",
+  );
 });

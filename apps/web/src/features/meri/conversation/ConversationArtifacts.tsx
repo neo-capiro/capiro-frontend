@@ -22,18 +22,16 @@ import { OfficeWorkspaceLink } from "../office/OfficeWorkspaceLink";
 import { StatusPill } from "../ui/StatusPill";
 import {
   artifactCardSummary,
+  artifactDetails,
+  artifactOutcome,
+  offersReadAgain,
   officeTargetFor,
   type ArtifactCardScope,
+  type ArtifactCardStatus as Status,
 } from "./artifact-card";
 import type { ConversationFile as Listed } from "./intents/prepared-files";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./live.module.css";
-
-type Status =
-  | { kind: "idle" }
-  | { kind: "working"; action: "preview" | "download" }
-  | { kind: "failed"; action: "preview" | "download"; code: string }
-  | { kind: "downloaded"; filename: string };
 
 /** Published files and prepared drafts; every read goes through the current artifact owner. */
 export function ConversationArtifacts({
@@ -123,11 +121,15 @@ function useArtifactActions(access: ArtifactAccess, versionId: string) {
     link.download = reply.value.filename;
     link.rel = "noopener";
     link.click();
-    setStatus({ kind: "downloaded", filename: reply.value.filename });
+    setStatus({
+      kind: "downloaded",
+      filename: reply.value.filename,
+      inspected: preview !== null,
+    });
   };
   // The details are read once for the version, when the card mounts with nothing read and nothing refused; a
-  // renewed access owner never re-reads a card already showing its details (no blink), and after a refusal or
-  // a denial only the person's "Read details again" asks once more.
+  // renewed access owner never re-reads a card already showing its details (no blink). After a refusal, a
+  // denial, or a Download that cancelled this read, only the person's "Read details again" asks once more.
   useEffect(() => {
     if (preview !== null || status.kind !== "idle") return;
     const controller = new AbortController();
@@ -151,13 +153,6 @@ function useArtifactActions(access: ArtifactAccess, versionId: string) {
   return { preview, status, inspect, download };
 }
 
-const outcome = (status: Status) =>
-  status.kind === "failed"
-    ? `${status.action === "preview" ? "File details" : "Download"} unavailable (${status.code}). Nothing was substituted.`
-    : status.kind === "downloaded"
-      ? `Downloaded ${status.filename}; its bytes matched the inspected version.`
-      : "";
-
 function ConversationArtifact({
   artifact,
   access,
@@ -172,11 +167,14 @@ function ConversationArtifact({
     artifact.versionId,
   );
   const [details, setDetails] = useState(false);
-  const { title, description } = artifactCardSummary(preview);
+  const read = artifactDetails(preview, status);
+  const { title, description } = artifactCardSummary(
+    preview,
+    read === "read" ? undefined : read,
+  );
   const office = officeTargetFor(scope, artifact.versionId, preview);
   const working = (action: "preview" | "download") =>
     status.kind === "working" && status.action === action;
-  const failedRead = status.kind === "failed" && status.action === "preview";
   return (
     <Artifact className={styles.file} role="group" aria-label={title}>
       <ArtifactHeader className={styles.fileHeader}>
@@ -184,7 +182,7 @@ function ConversationArtifact({
         <div>
           <ArtifactTitle>{title}</ArtifactTitle>
           <ArtifactDescription className={styles.muted}>
-            {working("preview") ? "Reading the file details…" : description}
+            {description}
           </ArtifactDescription>
         </div>
       </ArtifactHeader>
@@ -216,7 +214,7 @@ function ConversationArtifact({
             {details ? "Hide details" : "Details"}
           </Button>
         ) : (
-          failedRead && (
+          offersReadAgain(preview, status) && (
             <Button
               type="button"
               variant="outline"
@@ -229,7 +227,7 @@ function ConversationArtifact({
         )}
       </ArtifactActions>
       <div role="status" className={styles.muted}>
-        {outcome(status)}
+        {artifactOutcome(status)}
       </div>
       {preview && details && (
         <div className={styles.preview}>
