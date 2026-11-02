@@ -202,7 +202,10 @@ export function useConversationSession(
     recoveryEpoch,
   );
   const view = sessionHistoryState(
-    history,
+    {
+      ...history,
+      reading: history.query.isPending || history.query.isRefetching,
+    },
     ready?.port.context.runId,
     local.turns,
     accessLost ? undefined : continuation.intent,
@@ -224,6 +227,7 @@ export function useConversationSession(
     if (prompt && !local.initialDraft.draft().trim()) local.setDraft(prompt);
     if (uploads) ready?.port.uploads.offer(uploads);
   };
+  /** Starts the next message; false when it could not start (nothing was sent). */
   const startNext = (prompt: string, finished: TurnView) => {
     if (
       !view.source ||
@@ -232,7 +236,7 @@ export function useConversationSession(
       local.storageError ||
       modelBlocked
     )
-      return;
+      return false;
     // The next message opens a new session (and a new composer), so the files offered here travel in its request.
     void continuation.start(
       view.source,
@@ -242,6 +246,7 @@ export function useConversationSession(
       skillSelection,
       ready?.port.uploads,
     );
+    return true;
   };
   const openLifecycleTarget = (target: LifecycleTarget, browser = false) => {
     if (

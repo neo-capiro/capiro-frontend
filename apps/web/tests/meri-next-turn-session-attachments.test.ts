@@ -52,6 +52,7 @@ vi.mock(
 );
 vi.mock("../src/shared/meri-conversations/history-queries", () => ({
   useConversationHistory: () => ({
+    query: { isPending: false, isRefetching: false },
     denied: false,
     current: undefined,
     refresh: vi.fn(),

@@ -21,8 +21,8 @@ import styles from "./home.module.css";
 type AssetSet = "home" | "cited-answer";
 /** Connected composer behaviour. Without it the composer is the disconnected fixture. */
 export type LiveComposer = Readonly<{
-  /** Sends the current draft. Called only when Send is enabled and the draft has text. */
-  onSend: () => void;
+  /** Sends the current draft. Called only when Send is enabled and the draft has text; false when nothing was sent. */
+  onSend: () => boolean | void;
   /** Requests durable cancellation of the running run. */
   onStop?: () => void;
   /** Why Send is unavailable right now; the draft stays editable either way. */

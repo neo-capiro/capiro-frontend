@@ -432,7 +432,7 @@ export function MeriLiveConversation({
   initialDraft: InitialDraftOwner;
   textareaRef: RefObject<HTMLTextAreaElement | null>;
   /** The run finished: send `prompt` as the conversation's next run. */
-  onNextTurn: (prompt: string, finished: TurnView) => void;
+  onNextTurn: (prompt: string, finished: TurnView) => boolean;
   nextTurnBlocked?: string | undefined;
   /** The latest-run check is still in flight: a message typed now waits for it instead of being refused. */
   nextTurnChecking?: boolean | undefined;
@@ -565,12 +565,14 @@ export function MeriLiveConversation({
           reservedOpen,
         ).sendBlocked
       : availability.sendBlocked);
+  /** Sends the draft; false when nothing was sent, so a caller handing a waiting message over can say so. */
   const send = () => {
-    if (retentionError || modelBlocked || lifecycle.blocked) return;
+    if (retentionError || modelBlocked || lifecycle.blocked) return false;
     // A new intent carrying a skill the current rollout does not admit is refused here, before the
     // first request or next-turn reservation is recorded. The selection itself is left intact.
-    if (newIntentBlocked) return;
+    if (newIntentBlocked) return false;
     const prompt = draft.trim();
+    if (!prompt) return false;
     if (availability.initial) {
       void run.submitInitial(
         prompt,
@@ -578,6 +580,7 @@ export function MeriLiveConversation({
         modelSelection,
         skillSelection,
       );
+      return true;
     } else if (availability.resend) {
       void run.submit(
         prompt,
@@ -586,13 +589,15 @@ export function MeriLiveConversation({
         modelSelection,
         skillSelection,
       );
+      return true;
     } else if (
       !initialDraft.hasPending(port.context) &&
       turn &&
       finished &&
       !nextTurnBlocked
     )
-      onNextTurn(prompt, turn);
+      return onNextTurn(prompt, turn);
+    return false;
   };
   // One pending message: while a run is in flight for the last message and nothing else blocks, the draft
   // waits in the box as the queued message and is sent once the run finishes. A block other than the run,

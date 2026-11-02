@@ -25,10 +25,12 @@ async function setup(page: Page) {
   const { native } = await installHistory(page);
   await installCurrentRun(page, native);
   await installReservation(page, native);
-  let reservations = 0;
+  let reservations = 0,
+    submits = 0;
   page.on("request", (request) => {
     if (request.url().endsWith("/api/conversations/next-turn"))
       reservations += 1;
+    if (request.url().endsWith("/api/conversations/submit")) submits += 1;
   });
   await page.route("**/api/conversations/submit", (route) => {
     const input = route.request().postDataJSON() as { requestId: string };
@@ -39,20 +41,21 @@ async function setup(page: Page) {
       replayed: false,
     });
   });
-  return { reservations: () => reservations };
+  return { reservations: () => reservations, submits: () => submits };
 }
 
-/** Holds every session issuance until released; the saved transcript is not held. */
+/** Holds every session issuance until released (or refused); the saved transcript is not held. */
 async function holdSessions(page: Page) {
-  let release!: () => void;
-  const held = new Promise<void>((resolve) => {
-    release = resolve;
+  let release!: (refuse?: boolean) => void;
+  const held = new Promise<boolean>((resolve) => {
+    release = (refuse = false) => resolve(refuse);
   });
   await page.route("**/api/action-followthrough/session", async (route) => {
-    await held;
+    if (await held)
+      return reply(route, { error: { code: "SESSION_REFUSED" } }, 403);
     return route.fallback();
   });
-  return () => release();
+  return release;
 }
 
 test("the first Enter while the session is still connecting waits for it and sends once", async ({
@@ -79,6 +82,84 @@ test("the first Enter while the session is still connecting waits for it and sen
       .getByText(/Second message/),
   ).toBeVisible();
   await expect(composer(page)).toHaveValue("");
+  // Exactly one message went out.
+  await page.waitForTimeout(1_500);
+  expect(fixture.reservations()).toBe(1);
+  expect(fixture.submits()).toBe(1);
+});
+
+test("a message that waited for the session is handed to the conversation check's own queue and sent once", async ({
+  page,
+}) => {
+  const fixture = await setup(page);
+  const release = await holdSessions(page);
+  // The saved transcript and its latest-run read are slow too: the session arrives while the conversation is
+  // still being checked.
+  let releaseCheck!: () => void;
+  const check = new Promise<void>((resolve) => {
+    releaseCheck = resolve;
+  });
+  await page.route("**/api/conversations/transcript", async (route) => {
+    await check;
+    return route.fallback();
+  });
+  await page.goto(selectedUrl);
+  await composer(page).fill("Second message");
+  await composer(page).press("Enter");
+  await expect(
+    page.getByText(/Queued: sends when Meri connects/),
+  ).toBeVisible();
+  release();
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText(/Queued: sends when Meri finishes/),
+  ).toBeVisible();
+  expect(fixture.reservations()).toBe(0);
+  releaseCheck();
+  await expect.poll(fixture.reservations).toBe(1);
+  await expect(composer(page)).toHaveValue("");
+  await page.waitForTimeout(1_500);
+  expect(fixture.reservations()).toBe(1);
+  expect(fixture.submits()).toBe(1);
+});
+
+test("access refused while the message waits lets it go; nothing is sent", async ({
+  page,
+}) => {
+  const fixture = await setup(page);
+  const release = await holdSessions(page);
+  await page.goto(selectedUrl);
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await composer(page).fill("Second message");
+  await composer(page).press("Enter");
+  await expect(
+    page.getByText(/Queued: sends when Meri connects/),
+  ).toBeVisible();
+  release(true);
+  await expect(page.getByText(/Queued: sends when/)).toHaveCount(0);
+  await page.waitForTimeout(1_500);
+  expect(fixture.reservations()).toBe(0);
+  expect(fixture.submits()).toBe(0);
+});
+
+test("emptying the box while the message waits releases the wait; nothing is sent", async ({
+  page,
+}) => {
+  const fixture = await setup(page);
+  const release = await holdSessions(page);
+  await page.goto(selectedUrl);
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await composer(page).fill("Second message");
+  await composer(page).press("Enter");
+  await expect(
+    page.getByText(/Queued: sends when Meri connects/),
+  ).toBeVisible();
+  await composer(page).fill("");
+  await expect(page.getByText(/Queued: sends when/)).toHaveCount(0);
+  release();
+  await page.waitForTimeout(2_000);
+  expect(fixture.reservations()).toBe(0);
+  expect(fixture.submits()).toBe(0);
 });
 
 test("a queued Enter can be cancelled while connecting; then nothing is sent", async ({
