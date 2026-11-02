@@ -134,11 +134,17 @@ export function useRunCommands(
     if (journal.read().submit?.state !== "unknown" || active.current) return;
     return perform(() => reconcileStoredRequest(port, record, stored));
   };
-  /** Control confirmed this run admitted no message, or the person discarded it: drop the retained one. */
+  /**
+   * Control confirmed this run admitted no message, or the person discarded it: drop the retained one, here and in
+   * the session's client, so the next message is an ordinary new request. Its files go back to the composer.
+   */
   const release = () =>
     perform(async () => {
       const { submit, ...rest } = record.read();
-      if (submit?.state === "unknown") record.write(rest);
+      if (submit?.state !== "unknown") return;
+      port.releaseSubmit();
+      record.write(rest);
+      if (submit.uploads?.length) port.uploads?.offer(submit.uploads);
     });
   // The receipt is not the run's status; keep observing for run.status either way.
   const cancel = () =>

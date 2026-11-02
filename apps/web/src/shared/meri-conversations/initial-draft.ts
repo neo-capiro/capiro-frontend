@@ -248,6 +248,36 @@ class DraftOwner {
     this.state.pending?.run === runKey(context) && !this.state.pending.edited
       ? this.state.pending.draft
       : null;
+  /**
+   * The run this capture was sent to is terminal, so it takes no further message and the capture can never be
+   * acknowledged by a later send. Its admitted request (`admittedRequestId`) decides what the capture was: the same
+   * request id means the message was delivered, settled as an acknowledgement (the box clears only if unchanged
+   * since); any other means it was never admitted to this run, so it is released and the text stays the person's.
+   * Returns whether the box should clear.
+   */
+  settleTerminal(context: ConversationContext, admittedRequestId: string) {
+    const pending = this.state.pending;
+    if (!pending || pending.run !== runKey(context)) return false;
+    this.check(context);
+    let delivered = false;
+    try {
+      delivered =
+        (JSON.parse(pending.request) as { requestId?: unknown }).requestId ===
+        admittedRequestId;
+    } catch {
+      delivered = false;
+    }
+    const clear =
+      delivered &&
+      pending.revision === this.state.revision &&
+      this.state.draft === pending.draft;
+    this.save({
+      ...this.state,
+      draft: clear ? "" : this.state.draft,
+      pending: null,
+    });
+    return clear;
+  }
   acknowledge(
     context: ConversationContext,
     submit: ConversationIntent["submit"],

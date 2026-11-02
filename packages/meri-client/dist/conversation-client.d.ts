@@ -23,6 +23,7 @@ export declare function createMeriConversation(options: ConversationLifetime): R
     submit: (input: ConversationSubmitRequest) => Promise<MeriConversationSnapshot>;
     submitInitial: (input: ConversationSubmitRequest) => Promise<MeriConversationSnapshot>;
     retrySubmit: () => Promise<MeriConversationSnapshot>;
+    releaseSubmit: () => void;
     history: (input?: ConversationHistoryRequest) => Promise<MeriConversationSnapshot>;
     cancel: () => Promise<Readonly<ConversationCancelledResponse>>;
     control: (input: ConversationLifecycleControlRequest) => Promise<import("@capiro/meri-contracts/conversation-lifecycle").ConversationLifecycleResponse<"control">>;

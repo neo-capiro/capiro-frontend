@@ -261,7 +261,11 @@ function snapshotSubmit(submit: NonNullable<ConversationIntent["submit"]>) {
   if (copy.uploads) for (const upload of copy.uploads) Object.freeze(upload);
   return Object.freeze(copy);
 }
-/** Only canonical request fields and local uncertainty survive reload; no receipt grants authority. */
+/**
+ * Only canonical request fields and this tab's own write state are stored; no receipt grants authority. The stored
+ * state is what lets a settled record (observed, no cancellation outstanding) make room at the tab's record budget;
+ * it is never trusted after a reload, where recovery reads every request as unknown (see `recoveredIntent`).
+ */
 function receiveIntent(value: unknown): ConversationIntent {
   const raw = z
     .strictObject({
@@ -281,9 +285,20 @@ function receiveIntent(value: unknown): ConversationIntent {
     ...raw,
     submit: {
       ...request,
-      state: "unknown",
+      state: state as "pending" | "unknown" | "observed",
       ...(workflow ? { workflow: "initial" } : {}),
     },
+  };
+}
+
+/** A reloaded request is unknown until positive server history resolves it, whatever this tab last wrote. */
+function recoveredIntent(stored: ConversationIntent): ConversationIntent {
+  return {
+    ...stored,
+    ...(stored.submit
+      ? { submit: { ...stored.submit, state: "unknown" as const } }
+      : {}),
+    ...(stored.cancel ? { cancel: "unknown" as const } : {}),
   };
 }
 
@@ -326,8 +341,7 @@ export function conversationIntentJournal(
       context.runId,
       storage ?? null,
     );
-    recovered = persistence.read() ?? {};
-    if (recovered.cancel) recovered = { ...recovered, cancel: "unknown" };
+    recovered = recoveredIntent(persistence.read() ?? {});
   } catch (error) {
     recoveryBlocked = true;
     if (error instanceof TabJournalRetired) retiredRequestId = error.requestId;
