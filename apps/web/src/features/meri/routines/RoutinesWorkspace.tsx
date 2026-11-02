@@ -104,6 +104,20 @@ const cardColumns = phoneCardColumns(columns, {
   tone: (row) => (row.status === "Active" ? "success" : "neutral"),
 });
 
+/** The read answered no rows for the current account and scope. */
+export function RoutinesEmpty({ rows }: { rows: number }) {
+  if (rows !== 0) return null;
+  return (
+    <div role="status">
+      <p>No routines yet.</p>
+      <p className={styles.muted}>
+        Ask Meri in a conversation to set up a recurring routine; approved
+        routines appear here.
+      </p>
+    </div>
+  );
+}
+
 export function RoutinesWorkspace({
   port,
   preserveNewDraft = false,
@@ -255,11 +269,7 @@ export function RoutinesWorkspace({
           recent activity.
         </p>
       )}
-      {page?.rows.length === 0 && (
-        <p className={styles.muted}>
-          No routines were returned for the current account and scope.
-        </p>
-      )}
+      {page && <RoutinesEmpty rows={page.rows.length} />}
       {rows.length > 0 && (
         <>
           <DataTable

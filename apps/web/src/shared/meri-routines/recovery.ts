@@ -43,6 +43,8 @@ const savedSchema = z.strictObject({
   prepare: z.unknown(),
   proposal: z.unknown().optional(),
   approving: z.boolean(),
+  /** When the latest approval was sent; absent on approvals saved before it was recorded. */
+  approvalSentAtMs: z.number().int().nonnegative().optional(),
   result: z
     .strictObject({
       route: z.enum(["approve", "reconcile"]),
@@ -153,7 +155,10 @@ const contract = {
       !sameJson(previous.prepare, next.prepare) ||
       (previous.proposal !== undefined &&
         !sameJson(previous.proposal, next.proposal)) ||
-      (previous.approving && !next.approving) ||
+      // The approval marker is released (workflow `unapplied`) only while no result exists.
+      (previous.approving &&
+        !next.approving &&
+        (previous.result !== undefined || next.result !== undefined)) ||
       (previous.result !== undefined && !sameJson(previous.result, next.result))
     )
       throw new Error("The original routine request cannot change.");
