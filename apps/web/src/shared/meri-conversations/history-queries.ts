@@ -94,6 +94,9 @@ async function scopedTranscript(
     !conversationInClient(page.conversation, account, clientId, research)
   )
     throw new Error("Conversation client mismatch");
+  // A page that claims more without moving the cursor is a failed read, never a silent end.
+  if (page.hasMore && page.nextSequence <= (after ?? protocol.defaults.after))
+    throw new Error("Transcript page did not advance");
   return page;
 }
 
@@ -215,9 +218,7 @@ export function savedTranscriptQuery(
         signal,
         research,
       ),
-    // A page that does not move the cursor ends the read rather than repeating it.
-    getNextPageParam: (page, _pages, after) =>
-      page.hasMore && page.nextSequence > after ? page.nextSequence : undefined,
+    getNextPageParam: (page) => (page.hasMore ? page.nextSequence : undefined),
     retry: false,
     staleTime: 0,
     refetchOnMount: "always",

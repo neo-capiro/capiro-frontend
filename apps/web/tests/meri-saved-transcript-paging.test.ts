@@ -1,6 +1,14 @@
-import { afterEach, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { createElement, type ComponentProps, type ReactNode } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { InfiniteQueryObserver, QueryClient } from "@tanstack/react-query";
 import type { UIEvent } from "@capiro/meri-contracts";
+import { ConversationHistoryStatus } from "../src/features/meri/conversation/ConversationHistoryStatus";
+import {
+  controlFailure,
+  controlReconnectingMessage,
+} from "../src/features/meri/conversation/control-reachability";
+import { ConversationHistoryUnavailable } from "../src/shared/meri-conversations/history-client";
 import {
   nextSavedPageDue,
   savedHistory,
@@ -27,6 +35,25 @@ import {
  * crosses the page size, driven by the same options and continuation rule the screen uses.
  * No live service, browser or database is involved.
  */
+const buttons = vi.hoisted(
+  () => [] as Array<{ onClick: () => void; children: ReactNode }>,
+);
+vi.mock("@capiro/ui/button", () => ({
+  Button: (props: { onClick: () => void; children: ReactNode }) => {
+    buttons.push(props);
+    return createElement("button", { onClick: props.onClick }, props.children);
+  },
+}));
+// The backed-off schedule is covered on its own; here only what the status hands it matters.
+const ladder = vi.hoisted(
+  () => [] as Array<{ state: string; run: () => void }>,
+);
+vi.mock("../src/shared/meri-conversations/reconnect-schedule", () => ({
+  useReconnectSchedule: (state: string, run: () => void) => {
+    ladder.push({ state, run });
+    return { pending: false, reset: vi.fn() };
+  },
+}));
 const account = { tenantId: binding.tenantId, actorId: binding.actorId };
 const thirdBinding = {
   ...nextBinding,
@@ -89,7 +116,7 @@ function transcript(after: number, limit: number) {
 }
 
 /** Every transcript request the screen would make, answered through the real receiver. */
-function serve(failAfter?: number) {
+function serve(failAfter?: number, stallAfter?: number) {
   const reads: number[] = [];
   vi.stubGlobal(
     "fetch",
@@ -103,6 +130,13 @@ function serve(failAfter?: number) {
           { error: { code: "CONVERSATION_UNAVAILABLE" } },
           { status: 503 },
         );
+      // A page that claims more without moving the cursor.
+      if (input.after === stallAfter)
+        return Response.json({
+          ...transcript(input.after, 0),
+          nextSequence: input.after,
+          hasMore: true,
+        });
       return Response.json(transcript(input.after, input.limit));
     }),
   );
@@ -126,6 +160,10 @@ const settled = (observer: ReturnType<typeof observe>["observer"]) => {
   return result.isSuccess && !result.isFetching && !result.hasNextPage;
 };
 
+beforeEach(() => {
+  buttons.length = 0;
+  ladder.length = 0;
+});
 afterEach(() => {
   vi.unstubAllGlobals();
 });
@@ -225,4 +263,95 @@ it("never continues a read that is still in flight, failed or finished", () => {
       { hasNextPage: false, isFetching: false, error: null },
     ].map(nextSavedPageDue),
   ).toEqual([true, false, false, false]);
+});
+
+it("a page that claims more without moving the cursor is a failed continuation, never a silent end", async () => {
+  const reads = serve(undefined, 100);
+  const client = new QueryClient();
+  const { observer, unsubscribe } = observe(client);
+  try {
+    await vi.waitFor(() =>
+      expect(observer.getCurrentResult().isFetchNextPageError).toBe(true),
+    );
+    const result = observer.getCurrentResult();
+    expect(reads).toEqual([0, 100]);
+    expect(nextSavedPageDue(result)).toBe(false);
+    const partial = savedHistory(result, true, account, clientId);
+    expect(partial.moreFailed).toBe(true);
+    expect(partial.saved?.turns.map((row) => row.request.prompt)).toEqual([
+      "First question",
+    ]);
+    // Not something control failed to answer: it waits for the person, not the ladder.
+    expect(controlFailure(result.error)).toBeUndefined();
+  } finally {
+    unsubscribe();
+    client.clear();
+  }
+});
+
+type HistorySession = ComponentProps<
+  typeof ConversationHistoryStatus
+>["session"];
+function failedContinuation(error: unknown) {
+  const query = {
+    isPending: false,
+    isRefetching: false,
+    isFetching: false,
+    hasNextPage: true,
+    isFetchNextPageError: true,
+    error,
+    fetchNextPage: vi.fn(),
+    refetch: vi.fn(),
+  };
+  const session = {
+    history: {
+      selected: true,
+      unavailable: false,
+      moreFailed: true,
+      empty: false,
+      query,
+      tail: { refetch: vi.fn() },
+      refresh: vi.fn(),
+    },
+    continuation: { intent: undefined, failed: false, notReady: false },
+    recoveryNeeded: false,
+    unknownReservation: false,
+    readReservation: vi.fn(),
+  };
+  const html = renderToStaticMarkup(
+    createElement(ConversationHistoryStatus, {
+      session: session as unknown as HistorySession,
+    }),
+  );
+  return { html: html.replace(/&#x27;/g, "'"), query, session };
+}
+
+it("a continuation control did not answer re-reads only that page on the ladder; a refused one waits for the person", () => {
+  const unreachable = failedContinuation(
+    new ConversationHistoryUnavailable(503, "CONVERSATION_UNAVAILABLE"),
+  );
+  expect(unreachable.html).toContain(controlReconnectingMessage);
+  expect(unreachable.html).not.toContain("Part of the saved conversation");
+  expect(ladder.map((entry) => entry.state)).toEqual(["failing"]);
+  ladder[0]!.run();
+  expect(buttons.map((button) => button.children)).toEqual(["Retry"]);
+  buttons[0]!.onClick();
+  expect(unreachable.query.fetchNextPage).toHaveBeenCalledTimes(2);
+  expect(unreachable.query.refetch).not.toHaveBeenCalled();
+  expect(unreachable.session.history.refresh).not.toHaveBeenCalled();
+  expect(unreachable.session.history.tail.refetch).not.toHaveBeenCalled();
+  buttons.length = 0;
+  ladder.length = 0;
+  const refused = failedContinuation(
+    new Error("Transcript page did not advance"),
+  );
+  expect(refused.html).toContain("Part of the saved conversation is shown.");
+  expect(refused.html).not.toContain(controlReconnectingMessage);
+  expect(ladder.map((entry) => entry.state)).toEqual(["ok"]);
+  expect(buttons.map((button) => button.children)).toEqual([
+    "Load more saved turns",
+  ]);
+  buttons[0]!.onClick();
+  expect(refused.query.fetchNextPage).toHaveBeenCalledOnce();
+  expect(refused.session.history.refresh).not.toHaveBeenCalled();
 });
