@@ -25,7 +25,11 @@ export type ConversationRefusalDetail = Readonly<{
     sources?: readonly string[];
     requiredScope?: "client" | "general";
 }>;
-/** A 400 refusal decided before any run exists: the request was not dispatched and may be changed. */
+/**
+ * A refusal decided before any run exists, answered with its own contract status (400 for the typed
+ * skill refusals, 429 for a reached monthly cap, contracts 0.1.51): the request was not dispatched
+ * and may be changed or sent again.
+ */
 export declare const DEFINITIVE_REFUSALS: ReadonlySet<string>;
 export declare class ConversationUnavailable extends Error {
     readonly code: string;

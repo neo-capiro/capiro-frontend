@@ -23,6 +23,23 @@ export function skillRefusal(cause: unknown): SkillRefusal | undefined {
   return undefined;
 }
 
+/** Run admission refused: this month's spend reached the workspace's monthly Meri cap (contracts 0.1.51). */
+export const MONTHLY_CAP_REACHED = "TENANT_MONTHLY_CAP_REACHED";
+/** A refusal control decided before any run exists; the composer keeps the text and offers no retry. */
+export type SendRefusal =
+  | SkillRefusal
+  | Readonly<{ code: typeof MONTHLY_CAP_REACHED }>;
+
+export function sendRefusal(cause: unknown): SendRefusal | undefined {
+  if (
+    cause instanceof ConversationUnavailable &&
+    cause.definitive &&
+    cause.code === MONTHLY_CAP_REACHED
+  )
+    return { code: MONTHLY_CAP_REACHED };
+  return skillRefusal(cause);
+}
+
 /** Plain family names for the source ids the retrieval catalog declares; anything else reads as words. */
 const sourceNames: Readonly<Record<string, string>> = {
   mail: "mail",
@@ -85,4 +102,11 @@ export function describeSkillRefusal(refusal: SkillRefusal) {
   return `This skill needs data Meri cannot reach in this conversation: ${list(
     refusal.sources.map(sourceName),
   )}. Try without the skill or in a client conversation.`;
+}
+
+/** The one sentence shown next to the composer for any send refusal; the raw code never appears. */
+export function describeSendRefusal(refusal: SendRefusal) {
+  return refusal.code === MONTHLY_CAP_REACHED
+    ? "Your workspace has reached its monthly Meri limit. An admin can raise it in Settings → Usage."
+    : describeSkillRefusal(refusal);
 }
