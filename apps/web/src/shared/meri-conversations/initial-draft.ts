@@ -222,8 +222,12 @@ class DraftOwner {
       throw new TabJournalUnavailable();
   }
   /** Revocation already removed the exact scope; never recreate its record from a late response. */
+  /** Idempotent: a repeated reset changes nothing and tells nobody, so an effect may call it freely. */
   reset() {
-    this.state = empty();
+    const next = empty();
+    if (this.blocked && JSON.stringify(this.state) === JSON.stringify(next))
+      return;
+    this.state = next;
     this.blocked = true;
     this.changed();
   }
