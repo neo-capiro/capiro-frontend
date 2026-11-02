@@ -2,29 +2,36 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
 import { useConversationConnection } from "../src/features/meri/conversation/useConversationConnection";
 import { syncMeriTabIdentity } from "../src/shared/meri-conversations/tab-journal";
+import type { ConversationContext } from "../src/shared/meri-conversations/session";
 // The existing controlled-hook pattern (research-routing-renewal.test.ts) exercises the real hook without a browser.
+type Slot = { deps: unknown[]; value: unknown };
 const hooks = vi.hoisted(() => ({
   cursor: 0,
-  slots: [] as any[],
+  slots: [] as unknown[],
   pending: [] as Array<() => void>,
   cleanups: new Map<number, () => void>(),
   dirty: false,
 }));
+type Hints = Readonly<{
+  conversationId?: string;
+  runId?: string;
+  clientId: string | null;
+}>;
 const state = vi.hoisted(() => ({
-  cache: null as any,
+  cache: null as QueryClient | null,
   status: "ready",
   reason: "expiry" as string | undefined,
   issuance: undefined as number | undefined,
-  hints: [] as any[],
+  hints: [] as Hints[],
   bind: true,
 }));
 vi.mock("react", async (original) => {
   const memo = (make: () => unknown, deps: unknown[]) => {
     const i = hooks.cursor++,
-      old = hooks.slots[i];
+      old = hooks.slots[i] as Slot | undefined;
     if (!old || !deps.every((v, n) => Object.is(v, old.deps[n])))
       hooks.slots[i] = { deps, value: make() };
-    return hooks.slots[i].value;
+    return (hooks.slots[i] as Slot).value;
   };
   return {
     ...(await original<typeof import("react")>()),
@@ -39,18 +46,24 @@ vi.mock("react", async (original) => {
     useState: (initial: unknown) => {
       const i = hooks.cursor++;
       if (!(i in hooks.slots))
-        hooks.slots[i] = typeof initial === "function" ? initial() : initial;
+        hooks.slots[i] =
+          typeof initial === "function"
+            ? (initial as () => unknown)()
+            : initial;
       return [
         hooks.slots[i],
-        (v: any) => {
-          hooks.slots[i] = typeof v === "function" ? v(hooks.slots[i]) : v;
+        (v: unknown) => {
+          hooks.slots[i] =
+            typeof v === "function"
+              ? (v as (previous: unknown) => unknown)(hooks.slots[i])
+              : v;
           hooks.dirty = true;
         },
       ];
     },
     useEffect: (run: () => void | (() => void), deps: unknown[]) => {
       const i = hooks.cursor++,
-        old = hooks.slots[i];
+        old = hooks.slots[i] as unknown[] | undefined;
       if (old && deps.every((v, n) => Object.is(v, old[n]))) return;
       hooks.slots[i] = deps;
       hooks.pending.push(() => {
@@ -67,8 +80,11 @@ vi.mock("@tanstack/react-query", async (original) => ({
 }));
 vi.mock("../src/shared/meri-conversations/host-controller", () => ({
   ConversationHostController: class {
-    options: any;
-    constructor(options: any) {
+    options: { hints: Hints; onBound: (context: ConversationContext) => void };
+    constructor(options: {
+      hints: Hints;
+      onBound: (context: ConversationContext) => void;
+    }) {
       this.options = options;
       state.hints.push(structuredClone(options.hints));
     }
@@ -102,6 +118,8 @@ let connection: ReturnType<typeof useConversationConnection>;
 function render() {
   hooks.cursor = 0;
   hooks.dirty = false;
+  // The controlled-hook harness above replaces React's hooks, so the hook runs outside a component.
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   connection = useConversationConnection(
     account,
     clientId,
@@ -109,6 +127,16 @@ function render() {
     conversationId,
   );
   hooks.pending.splice(0).forEach((run) => run());
+}
+/** The renewal issuance of the held conversation answers `status` after the controller's own bounded retries. */
+function renewalFails(status: number) {
+  state.bind = false;
+  state.status = "unavailable";
+  state.reason = status === 401 || status === 403 ? "access-lost" : undefined;
+  state.issuance = status;
+  // The second pass lets the connection's own schedule observe the failed state (an effect) before it is read.
+  render();
+  render();
 }
 /** The tab holds the conversation, its session reaches its renewal lead, and the renewal issuance answers `status`. */
 function renewalAnswered(status: number) {
@@ -119,11 +147,7 @@ function renewalAnswered(status: number) {
   render();
   render();
   expect(state.hints.at(-1)).toMatchObject({ conversationId, runId: id(5) });
-  state.bind = false;
-  state.status = "unavailable";
-  state.reason = status === 401 || status === 403 ? "access-lost" : undefined;
-  state.issuance = status;
-  render();
+  renewalFails(status);
 }
 beforeEach(() => {
   hooks.slots = [];
@@ -155,6 +179,7 @@ beforeEach(() => {
 afterEach(() => {
   hooks.cleanups.forEach((c) => c());
   vi.unstubAllGlobals();
+  vi.useRealTimers();
 });
 
 it("a renewal that control did not answer (503) keeps the held conversation readable and reconnecting, never access lost", () => {
@@ -163,13 +188,52 @@ it("a renewal that control did not answer (503) keeps the held conversation read
   expect(connection.unverified).toBe(true);
   expect(connection.unreachable).toBe(true);
   expect(connection.accessLost).toBe(false);
+  expect(connection.reconnecting).toBe(true);
   expect(connection.conversationId).toBe(conversationId);
-  // The automatic retry asks for exactly the bound conversation and run again, on a fresh host.
+  // An explicit retry asks for exactly the bound conversation and run again, on a fresh host.
   const hosts = state.hints.length;
+  connection.resetReconnect();
   connection.retry();
   render();
   expect(state.hints).toHaveLength(hosts + 1);
   expect(state.hints.at(-1)).toMatchObject({ conversationId, runId: id(5) });
+});
+
+it("the reconnect ladder outlives each attempt's host: 2 s, 4 s, 8 s between attempts, reset by success", () => {
+  vi.useFakeTimers();
+  renewalAnswered(503);
+  const hosts = () => state.hints.length;
+  for (const delayMs of [2000, 4000, 8000]) {
+    expect(connection.reconnecting).toBe(true);
+    const before = hosts();
+    vi.advanceTimersByTime(delayMs - 1);
+    expect(hosts()).toBe(before);
+    vi.advanceTimersByTime(1);
+    expect(hosts()).toBe(before + 1);
+    expect(state.hints.at(-1)).toMatchObject({ conversationId, runId: id(5) });
+    // The attempt is in flight on its new host (idle → connecting): nothing else is scheduled...
+    state.status = "connecting";
+    render();
+    expect(connection.reconnecting).toBe(false);
+    expect(connection.unverified).toBe(false);
+    // ...and the next unanswered renewal continues the same ladder instead of starting at 2 s again.
+    renewalFails(503);
+  }
+  state.status = "ready";
+  state.bind = true;
+  render();
+  render();
+  expect(connection.state.status).toBe("ready");
+  expect(connection.reconnecting).toBe(false);
+  // A later outage starts the ladder over.
+  state.status = "expired";
+  state.reason = "renewal";
+  render();
+  render();
+  renewalFails(503);
+  const before = hosts();
+  vi.advanceTimersByTime(2000);
+  expect(hosts()).toBe(before + 1);
 });
 
 it("an older control's 401 for the same case keeps the transcript with the manual check, as before", () => {
@@ -177,6 +241,7 @@ it("an older control's 401 for the same case keeps the transcript with the manua
   expect(connection.unverified).toBe(true);
   expect(connection.unreachable).toBe(false);
   expect(connection.accessLost).toBe(false);
+  expect(connection.reconnecting).toBe(false);
 });
 
 it("a refusal (403) on renewal still hides the conversation", () => {
@@ -184,17 +249,15 @@ it("a refusal (403) on renewal still hides the conversation", () => {
   expect(connection.unverified).toBe(false);
   expect(connection.unreachable).toBe(false);
   expect(connection.accessLost).toBe(true);
+  expect(connection.reconnecting).toBe(false);
 });
 
 it("a first open that control did not answer has nothing to keep: it stays the reconnect panel", () => {
-  state.bind = false;
-  state.status = "unavailable";
-  state.reason = undefined;
-  state.issuance = 503;
-  render();
+  renewalFails(503);
   expect(connection.state.status).toBe("unavailable");
   expect(connection.unverified).toBe(false);
   expect(connection.unreachable).toBe(true);
   expect(connection.accessLost).toBe(false);
+  expect(connection.reconnecting).toBe(false);
   expect(state.hints).toHaveLength(1);
 });

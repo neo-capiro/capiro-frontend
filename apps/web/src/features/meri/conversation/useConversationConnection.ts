@@ -14,7 +14,8 @@ import {
 } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationContext } from "../../../shared/meri-conversations/session";
 import { useConversationSelection } from "./useConversationSelection";
-import { transientStatus } from "./control-reachability";
+import { reconnectState, transientStatus } from "./control-reachability";
+import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
 
 type Hints = ConstructorParameters<
   typeof ConversationHostController
@@ -70,8 +71,7 @@ function useSessionRenewal({
   const issuance = host.getIssuanceStatus();
   const unverified =
     status === "unavailable" &&
-    (issuance === 401 ||
-      (transientStatus(issuance) && bound.last() !== null));
+    (issuance === 401 || (transientStatus(issuance) && bound.last() !== null));
   const revoked = host.getExpirationReason() === "access-lost" && !unverified;
   if (revoked && !denied) setDenied(true);
   else if (status === "ready" && denied) setDenied(false);
@@ -257,6 +257,19 @@ export function useConversationConnection(
     clear,
   ]);
 
+  /** Issuance ended on a gateway/overload answer: control did not answer, nothing was refused. */
+  const unreachable =
+    !storageError &&
+    state.status === "unavailable" &&
+    transientStatus(host.getIssuanceStatus());
+  // A renewal that control did not answer is asked again on a backed-off schedule owned here, where it
+  // outlives the host each attempt creates and the notice that comes and goes with it; the notice only
+  // presents it. A first open has its own schedule in the status panel. Success resets the ladder.
+  const reconnect = useReconnectSchedule(
+    reconnectState(unreachable && renewal.unverified, state.status),
+    useCallback(() => retry(state.status), [retry, state.status]),
+  );
+
   return {
     state: storageError ? { status: "unavailable" as const } : state,
     // Display continuity only: the disposed port still cannot issue any request.
@@ -268,11 +281,10 @@ export function useConversationConnection(
           (state.status === "idle" || state.status === "connecting"))),
     storageError,
     ...renewal,
-    /** Issuance ended on a gateway/overload answer: control did not answer, nothing was refused. */
-    unreachable:
-      !storageError &&
-      state.status === "unavailable" &&
-      transientStatus(host.getIssuanceStatus()),
+    unreachable,
+    /** An automatic renewal attempt is scheduled; an explicit retry starts the ladder over. */
+    reconnecting: reconnect.pending,
+    resetReconnect: reconnect.reset,
     conversationId:
       bound.last()?.context.conversationId ?? opening.hints.conversationId,
     runId: bound.last()?.context.runId ?? opening.hints.runId,

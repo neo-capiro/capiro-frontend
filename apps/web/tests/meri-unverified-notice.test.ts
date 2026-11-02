@@ -25,6 +25,7 @@ const session = (unreachable: boolean): Session =>
       unreachable,
       unverified: true,
       retry: vi.fn(),
+      resetReconnect: vi.fn(),
     },
     history: { refresh: vi.fn() },
   }) as unknown as Session;
@@ -43,6 +44,7 @@ it("a renewal control did not answer keeps the transcript notice, reconnects aut
   expect(buttons).toHaveLength(1);
   expect(buttons[0]!.children).toBe("Retry now");
   buttons[0]!.onClick();
+  expect(s.connection.resetReconnect).toHaveBeenCalledExactlyOnceWith();
   expect(s.connection.retry).toHaveBeenCalledExactlyOnceWith();
   expect(s.history.refresh).toHaveBeenCalledExactlyOnceWith();
 });

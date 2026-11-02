@@ -148,6 +148,19 @@ export function useConversationSession(
     connection.retry,
     history.refresh,
   );
+  // A renewal that control did not answer reconnects on the connection's own schedule; the transcript
+  // is read again once when the connection is back, never per attempt (ConversationHistoryStatus owns
+  // the history ladder).
+  const unansweredRenewal = connection.unverified && !!connection.unreachable;
+  const recovering = useRef(false);
+  const { refresh } = history;
+  useEffect(() => {
+    if (unansweredRenewal) recovering.current = true;
+    else if (recovering.current && connection.state.status === "ready") {
+      recovering.current = false;
+      refresh();
+    }
+  }, [unansweredRenewal, connection.state.status, refresh]);
   const modelCatalog = useModelCatalog(account, !accessLost);
   const local = useConversationLocalState(
     boundReady?.port.context,

@@ -115,14 +115,8 @@ function ConnectionStatus({
  */
 export function UnverifiedAccessNotice({ session }: { session: Session }) {
   const { connection } = session;
+  // The automatic schedule is the connection's own (useConversationConnection); this is presentation.
   const unreachable = !!connection.unreachable;
-  const reconnect = useReconnectSchedule(
-    reconnectState(unreachable, connection.state.status),
-    () => {
-      connection.retry();
-      session.history.refresh();
-    },
-  );
   return (
     <section role="status" className={styles.accessNotice}>
       <p className={styles.muted}>
@@ -135,7 +129,7 @@ export function UnverifiedAccessNotice({ session }: { session: Session }) {
         variant="outline"
         className={ui.outline}
         onClick={() => {
-          reconnect.reset();
+          connection.resetReconnect();
           connection.retry();
           session.history.refresh();
         }}
