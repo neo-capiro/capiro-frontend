@@ -317,7 +317,8 @@ export function useConversationTurn(
     restore: Restore,
   ) => {
     if (target && alive.current) setOpened(target);
-    restore(released?.prompt, released?.uploads);
+    if (released?.uploads) restore(released.prompt, released.uploads);
+    else restore(released?.prompt);
   };
   return {
     intent,
