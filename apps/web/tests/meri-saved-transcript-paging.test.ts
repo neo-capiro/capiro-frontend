@@ -389,6 +389,10 @@ it("a reopened run the saved read already reports finished does not re-read and 
       settledRefreshDue(reopened, { ...reopened, runState: "running" }),
     ).toBe(true);
     expect(settledRefreshDue(reopened, undefined)).toBe(true);
+    // A terminal saved copy whose events stop short of its last sequence is read again once.
+    expect(
+      settledRefreshDue(reopened, { ...reopened, incompleteHistory: true }),
+    ).toBe(true);
     expect(
       settledRefreshDue(reopened, { ...reopened, runId: binding.runId }),
     ).toBe(true);
