@@ -493,13 +493,13 @@ test("chat routine approval that was never applied settles back to an approvable
   // No stored intent right after the send proves only "not applied yet": the lost request could still land.
   await page.getByRole("button", { name: "Check schedule result" }).click();
   await expect(page.getByRole("alert")).toHaveText(
-    "This approval has not been applied yet and may still be in progress. Check the schedule result again in a minute.",
+    "This approval has not been applied yet and may still be in progress. Check the schedule result again in a minute or two.",
   );
   await expect(
     page.getByRole("button", { name: "Check schedule result" }),
   ).toBeEnabled();
   // Once the earlier send can no longer land, "not applied" is final and the marker is released.
-  await page.clock.fastForward(61_000);
+  await page.clock.fastForward(91_000);
   await page.getByRole("button", { name: "Check schedule result" }).click();
   await expect(page.getByRole("alert")).toHaveText(
     "This approval was never applied, so no routine was created. Approve it again or discard it.",

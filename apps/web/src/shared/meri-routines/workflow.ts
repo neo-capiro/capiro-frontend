@@ -68,7 +68,7 @@ type Options = {
  * Meri bounds one routine request at 30 s (control `limits.requestMs`); with transport margin, an approval sent longer ago than
  * this can no longer claim its intent, so "not applied" is then final.
  */
-export const APPROVAL_LANDING_MS = 60_000;
+export const APPROVAL_LANDING_MS = 90_000;
 const landed = (sentAtMs: number) =>
   Date.now() - sentAtMs > APPROVAL_LANDING_MS;
 
@@ -391,7 +391,7 @@ export class RoutineWorkflow {
             "This approval was never applied, so no routine was created. Approve it again or discard it.",
           );
         throw new Error(
-          "This approval has not been applied yet and may still be in progress. Check the schedule result again in a minute.",
+          "This approval has not been applied yet and may still be in progress. Check the schedule result again in a minute or two.",
         );
       }
       if ("error" in response || response.outcome !== "ACKNOWLEDGED")
