@@ -60,12 +60,18 @@ function useSessionRenewal({
   bound: ReturnType<typeof boundContext>;
   reopen: (options?: Reopening) => void;
 }) {
-  // Keep private data hidden through explicit retry until a fresh receipt is validated. A 401 that
-  // persisted through the bounded retries is an authority that did not answer, not a refusal: what this
-  // tab already holds stays readable, and only an explicit 403 or a port-level denial hides it.
+  // Keep private data hidden through explicit retry until a fresh receipt is validated. An issuance that
+  // persisted through the bounded retries without an answer is not a refusal: control answers 503 when an
+  // authority owner did not answer (older controls answered 401 for the same case) and the same-origin
+  // proxy answers 5xx for an unreachable control. For a conversation this tab already holds, what it holds
+  // stays readable while the renewal is asked again on the reconnect schedule; a first open has nothing to
+  // keep and stays the reconnect panel. Only an explicit 403 or a port-level denial hides the conversation.
   const [denied, setDenied] = useState(false);
+  const issuance = host.getIssuanceStatus();
   const unverified =
-    status === "unavailable" && host.getIssuanceStatus() === 401;
+    status === "unavailable" &&
+    (issuance === 401 ||
+      (transientStatus(issuance) && bound.last() !== null));
   const revoked = host.getExpirationReason() === "access-lost" && !unverified;
   if (revoked && !denied) setDenied(true);
   else if (status === "ready" && denied) setDenied(false);
