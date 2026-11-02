@@ -27,6 +27,7 @@ import {
   conversationSelectionOwner,
 } from "../../../shared/meri-conversations/query-journal";
 import { requireMeriTabStorage } from "../../../shared/meri-conversations/tab-journal";
+import { discardMeriConversationRecovery } from "../../../shared/meri-conversations/conversation-recovery";
 import { conversationHref } from "../../../shared/meri-conversations/conversation-navigation";
 import type { LifecycleTarget } from "./lifecycle/useRunLifecycle";
 import { createAccessRecheck } from "./access-recheck";
@@ -164,12 +165,16 @@ export function useConversationSession(
     }
   }, [unansweredRenewal, connection.state.status, refresh]);
   const modelCatalog = useModelCatalog(account, !accessLost);
+  // Advanced when the person discards a message this tab could not save or recover: every local owner of
+  // that conversation's message (draft, retained next turn, the open run's request) starts again, empty.
+  const [recoveryEpoch, setRecoveryEpoch] = useState(0);
   const local = useConversationLocalState(
     boundReady?.port.context,
     accessLost,
     selectedId
       ? { ...account, clientId, conversationId: selectedId }
       : undefined,
+    recoveryEpoch,
   );
   const { bindNext } = local;
   const modelBlocked = selectionAvailable(
@@ -194,6 +199,7 @@ export function useConversationSession(
     ready?.port.context.runId === history.current?.latestRun.binding.runId
       ? history.current
       : undefined,
+    recoveryEpoch,
   );
   const view = sessionHistoryState(
     history,
@@ -299,6 +305,26 @@ export function useConversationSession(
       local.storageError ??
       connection.storageError ??
       continuation.storageError,
+    recoveryEpoch,
+    /**
+     * "Discard and write a new message": whenever this tab cannot save or recover a message, the person can
+     * give it up and keep writing. Nothing is sent and nothing is marked delivered; text typed meanwhile stays
+     * in the box. Only this tab's copy is forgotten: a message or Stop that already reached Meri may still take
+     * effect, and the button says so. A storage that cannot be opened at all keeps its error.
+     */
+    discardUnrecoverable: () => {
+      if (!selectedId || accessLost) return;
+      try {
+        discardMeriConversationRecovery(
+          cache,
+          { ...account, clientId, conversationId: selectedId },
+          requireMeriTabStorage(),
+        );
+      } catch {
+        /* The fresh owners below report the storage that still cannot be opened. */
+      }
+      setRecoveryEpoch((value) => value + 1);
+    },
     textarea,
     ...view,
     startNext,

@@ -43,7 +43,7 @@ function storage(): TabStorage {
 }
 
 it.each(["completed", "running"] as const)(
-  "Research retirement retains capture and requires completed SDK history (%s)",
+  "Research retirement retains capture and is settled by fresh accepted SDK history (%s)",
   async (state) => {
     const cache = new QueryClient(),
       store = storage();
@@ -103,13 +103,12 @@ it.each(["completed", "running"] as const)(
     });
     cleanup.push(() => sdk.dispose());
     await sdk.history({ after: 0, limit: 100 });
+    // The exact request accepted for this run settles it while the run is still running too.
     expect(
-      fresh.acknowledgeCompletedRetirement({ ...sdk, context: bound }),
-    ).toBe(state === "completed");
-    expect(fresh.recoveryBlocked).toBe(state !== "completed");
-    expect(fresh.read().submit?.requestId).toBe(
-      state === "completed" ? request.requestId : undefined,
-    );
+      fresh.acknowledgeAcceptedRetirement({ ...sdk, context: bound }),
+    ).toBe(true);
+    expect(fresh.recoveryBlocked).toBe(false);
+    expect(fresh.read().submit?.requestId).toBe(request.requestId);
     expect(bound.scope).toEqual(capture);
     expect(fetcher).toHaveBeenCalledTimes(1);
     expect(String(fetcher.mock.calls.at(0)?.[0])).toContain("/history");

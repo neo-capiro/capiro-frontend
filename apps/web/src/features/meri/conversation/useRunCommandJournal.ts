@@ -27,7 +27,7 @@ function retainedCommands(
     return {
       current: () => false,
       recoveryBlocked: true,
-      acknowledgeCompletedRetirement: () => false,
+      acknowledgeAcceptedRetirement: () => false,
       read: (): ConversationIntent => ({}),
       write: (value: ConversationIntent): boolean => {
         void value;

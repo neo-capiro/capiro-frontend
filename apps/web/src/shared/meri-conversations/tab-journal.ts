@@ -395,6 +395,37 @@ export function clearMeriConversationScope(
   }
 }
 
+/**
+ * The person gives up whatever message this tab could not save or recover in one conversation: its draft,
+ * captured and retained requests and next-turn record are removed (nothing is sent, nothing is marked as
+ * delivered) and every owner still holding them stops writing. Feedback and the remembered selection stay.
+ * Fresh owners then start empty, so a new message can be written and sent.
+ */
+export function discardMeriConversationMessages(
+  scope: TabScope,
+  storage = browserTabStorage(),
+) {
+  if (!storage) return;
+  const expected = tabScopeKey(scope);
+  retireScope(storage, expected);
+  for (let index = storage.length - 1; index >= 0; index--) {
+    const key = storage.key(index);
+    if (!key?.startsWith(prefix)) continue;
+    let parts: unknown;
+    try {
+      parts = JSON.parse(key.slice(prefix.length));
+    } catch {
+      continue;
+    }
+    if (
+      Array.isArray(parts) &&
+      parts[0] === expected &&
+      ["draft", "draft-capture", "request", "turn"].includes(parts[1])
+    )
+      storage.removeItem(key);
+  }
+}
+
 function retireRequest(
   raw: string | null,
   scope: string,

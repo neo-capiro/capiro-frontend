@@ -109,10 +109,10 @@ it.each(["pending", "unknown", "observed"] as const)(
     expect(fresh.recoveryBlocked).toBe(true);
     expect(fresh.read()).toEqual({});
     expect(() => fresh.write({})).toThrow(TabJournalUnavailable);
-    expect(fresh.acknowledgeCompletedRetirement(port)).toBe(true);
+    expect(fresh.acknowledgeAcceptedRetirement(port)).toBe(true);
     expect(fresh.current()).toBe(true);
     expect(fresh.read().submit).toEqual({ ...request, state: "observed" });
-    expect(fresh.acknowledgeCompletedRetirement(port)).toBe(false);
+    expect(fresh.acknowledgeAcceptedRetirement(port)).toBe(false);
     expect(f.old.current()).toBe(false);
     expect(() => f.old.write({})).toThrow(TabJournalUnavailable);
     expect(port.fetcher).toHaveBeenCalledTimes(1);
@@ -131,7 +131,7 @@ it.each([
   const fresh = f.fresh(),
     port = await completedPort();
   expect(
-    fresh.acknowledgeCompletedRetirement({
+    fresh.acknowledgeAcceptedRetirement({
       ...port,
       context: { ...context, [field]: "foreign-synthetic" },
     }),
@@ -146,19 +146,41 @@ it.each([
   "waiting-for-approval",
   "failed",
   "cancelled",
-] as const)("%s observation does not settle retirement", async (runState) => {
+] as const)(
+  "%s observation of the exact accepted request settles retirement",
+  async (runState) => {
+    // The run on screen when access was lost may still be running, or may end failed or cancelled; its
+    // request was accepted all the same, and nothing else may lock the tab (2 Nov preview, M37 and R02).
+    const f = fixture();
+    f.retire();
+    const fresh = f.fresh(),
+      port = await completedPort(),
+      snapshot = port.getSnapshot();
+    expect(
+      fresh.acknowledgeAcceptedRetirement({
+        ...port,
+        getSnapshot: () => ({
+          ...snapshot,
+          observation: { ...snapshot.observation!, runState },
+        }),
+      }),
+    ).toBe(true);
+    expect(fresh.current()).toBe(true);
+    expect(fresh.recoveryBlocked).toBe(false);
+    expect(fresh.read().submit?.state).toBe("observed");
+  },
+);
+
+it("history without an observation of the run does not settle retirement", async () => {
   const f = fixture();
   f.retire();
   const fresh = f.fresh(),
     port = await completedPort(),
     snapshot = port.getSnapshot();
   expect(
-    fresh.acknowledgeCompletedRetirement({
+    fresh.acknowledgeAcceptedRetirement({
       ...port,
-      getSnapshot: () => ({
-        ...snapshot,
-        observation: { ...snapshot.observation!, runState },
-      }),
+      getSnapshot: () => ({ ...snapshot, observation: null }),
     }),
   ).toBe(false);
   expect(fresh.current()).toBe(false);
@@ -173,7 +195,7 @@ it.each(["idle", "loading", "unavailable", "disposed"] as const)(
       port = await completedPort(),
       snapshot = port.getSnapshot();
     expect(
-      fresh.acknowledgeCompletedRetirement({
+      fresh.acknowledgeAcceptedRetirement({
         ...port,
         getSnapshot: () => ({ ...snapshot, status: state }),
       }),
@@ -191,7 +213,7 @@ it.each(["pending", "unknown"] as const)(
       f.retire();
       const fresh = f.fresh();
       expect(
-        fresh.acknowledgeCompletedRetirement({
+        fresh.acknowledgeAcceptedRetirement({
           ...port,
           getSnapshot: () => ({ ...snapshot, [operation]: state }),
         }),
@@ -200,7 +222,7 @@ it.each(["pending", "unknown"] as const)(
     const cancelled = fixture("observed", state);
     cancelled.retire();
     expect(cancelled.storage.getItem(cancelled.key)).toBe("null");
-    expect(cancelled.fresh().acknowledgeCompletedRetirement(port)).toBe(false);
+    expect(cancelled.fresh().acknowledgeAcceptedRetirement(port)).toBe(false);
   },
 );
 
@@ -213,7 +235,7 @@ it.each(["observation", "acceptedRequest"] as const)(
       port = await completedPort(),
       snapshot = port.getSnapshot();
     expect(
-      fresh.acknowledgeCompletedRetirement({
+      fresh.acknowledgeAcceptedRetirement({
         ...port,
         getSnapshot: () => ({ ...snapshot, [field]: null }),
       }),
@@ -253,7 +275,7 @@ it.each(["legacy-null", "json", "version", "extra", "scope", "key", "payload"])(
     expect(f.fresh().recoveryBlocked).toBe(true);
     f.retire();
     const fresh = f.fresh();
-    expect(fresh.acknowledgeCompletedRetirement(await completedPort())).toBe(
+    expect(fresh.acknowledgeAcceptedRetirement(await completedPort())).toBe(
       false,
     );
     expect(fresh.recoveryBlocked).toBe(true);
@@ -272,7 +294,7 @@ it.each(["scope", "identity", "cache"])(
     if (kind === "identity")
       syncMeriTabIdentity("synthetic-replacement", f.storage);
     if (kind === "cache") f.cache.clear();
-    expect(fresh.acknowledgeCompletedRetirement(port)).toBe(false);
+    expect(fresh.acknowledgeAcceptedRetirement(port)).toBe(false);
     expect(fresh.current()).toBe(false);
   },
 );
@@ -286,7 +308,7 @@ it("completed request readback leaves feedback uncertainty closed", async () => 
   });
   f.retire();
   const fresh = f.fresh();
-  expect(fresh.acknowledgeCompletedRetirement(await completedPort())).toBe(
+  expect(fresh.acknowledgeAcceptedRetirement(await completedPort())).toBe(
     true,
   );
   expect(feedback.current()).toBe(false);
@@ -303,7 +325,7 @@ it("a failed verified storage write cannot unblock retirement", async () => {
   f.storage.setItem = () => {
     throw new Error("Synthetic storage failure");
   };
-  expect(() => fresh.acknowledgeCompletedRetirement(port)).toThrow(
+  expect(() => fresh.acknowledgeAcceptedRetirement(port)).toThrow(
     TabJournalUnavailable,
   );
   expect(fresh.recoveryBlocked).toBe(true);
@@ -321,7 +343,7 @@ it.each(["version", "requestId", "scope", "key", "retired", "extra", "value"])(
       JSON.stringify({ ...marker, [field]: "changed-synthetic" }),
     );
     const fresh = f.fresh();
-    expect(fresh.acknowledgeCompletedRetirement(await completedPort())).toBe(
+    expect(fresh.acknowledgeAcceptedRetirement(await completedPort())).toBe(
       false,
     );
     expect(fresh.recoveryBlocked).toBe(true);
@@ -340,7 +362,7 @@ it("same-identity reload still requires positive history for the original reques
   const port = await completedPort(),
     snapshot = port.getSnapshot();
   expect(
-    fresh.acknowledgeCompletedRetirement({
+    fresh.acknowledgeAcceptedRetirement({
       ...port,
       getSnapshot: () => ({
         ...snapshot,
@@ -351,6 +373,6 @@ it("same-identity reload still requires positive history for the original reques
       }),
     }),
   ).toBe(false);
-  expect(fresh.acknowledgeCompletedRetirement(port)).toBe(true);
+  expect(fresh.acknowledgeAcceptedRetirement(port)).toBe(true);
   expect(fresh.read().submit).toEqual({ ...request, state: "observed" });
 });

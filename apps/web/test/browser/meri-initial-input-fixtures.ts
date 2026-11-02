@@ -50,6 +50,8 @@ export async function installInitialInput(
   /** A run that stays running, or a getter so a test can finish it later. */
   running: boolean | (() => boolean) = false,
   general = false,
+  /** How the run ends once it stops running. */
+  terminal: "completed" | "failed" | "cancelled" = "completed",
 ) {
   const isRunning = () => (typeof running === "function" ? running() : running);
   const selectedScopes = general ? generalScopes : scopes;
@@ -77,7 +79,7 @@ export async function installInitialInput(
         : [
             status(1, "queued"),
             event(2, "Initial synthetic answer"),
-            status(3, "completed"),
+            status(3, terminal),
           ]
       : [status(1, "queued")]
     ).map((item) => ({ ...item, scopes: selectedScopes }));
@@ -85,7 +87,7 @@ export async function installInitialInput(
     native.submitted
       ? isRunning()
         ? ("running" as const)
-        : ("completed" as const)
+        : terminal
       : ("queued" as const);
   const capture = (
     route: Route,
