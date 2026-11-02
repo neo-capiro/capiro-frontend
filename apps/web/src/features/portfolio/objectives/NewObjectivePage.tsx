@@ -18,14 +18,17 @@ import { useObjectiveEditorSession } from "./useObjectiveEditorSession";
 import styles from "./objective-intake.module.css";
 import readinessStyles from "./objectives.module.css";
 import type { Objective } from "./contracts";
+import type { ObjectiveIntakeSeed } from "./intake-seed";
 
 type Props = {
   clientId: string;
+  /** Answers carried by Meri's "Start the objective intake" link; the user reviews and saves them here. */
+  seed?: ObjectiveIntakeSeed;
   onClose: () => void;
   onSaved?: (objective: Objective) => void;
 };
 
-export function NewObjectivePage({ clientId, onClose, onSaved }: Props) {
+export function NewObjectivePage({ clientId, seed, onClose, onSaved }: Props) {
   const query = useClient(clientId);
   if (
     query.isPending ||
@@ -52,6 +55,7 @@ export function NewObjectivePage({ clientId, onClose, onSaved }: Props) {
     <ObjectiveIntake
       key={clientId}
       client={query.data}
+      seed={seed}
       onClose={onClose}
       onSaved={onSaved}
     />
@@ -60,10 +64,12 @@ export function NewObjectivePage({ clientId, onClose, onSaved }: Props) {
 
 function ObjectiveIntake({
   client,
+  seed,
   onClose,
   onSaved,
 }: {
   client: Client;
+  seed?: ObjectiveIntakeSeed;
   onClose: () => void;
   onSaved?: (objective: Objective) => void;
 }) {
@@ -71,6 +77,7 @@ function ObjectiveIntake({
   const cardHeading = useId();
   const session = useObjectiveEditorSession({
     clientId: client.id,
+    seed,
     onSaved: onSaved ?? onClose,
   });
   return (
