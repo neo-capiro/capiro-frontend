@@ -259,7 +259,9 @@ it("a mapping-only refusal stays a recovery failure without claiming a saved mes
   const reserve = vi
     .spyOn(historyClient, "reserveConversationTurn")
     .mockRejectedValue(settling());
-  expect(await turn.readMapping(source)).toBe(false);
+  const restore = vi.fn();
+  expect(await turn.check(source, restore)).toBe(false);
+  expect(restore).not.toHaveBeenCalled();
   expect(reserve).toHaveBeenCalledExactlyOnceWith(
     { conversationId: source.conversationId, sourceRunId: source.runId },
     expect.any(AbortSignal),
