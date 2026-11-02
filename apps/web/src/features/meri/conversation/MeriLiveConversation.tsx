@@ -335,6 +335,7 @@ export function MeriLiveConversation({
   textareaRef,
   onNextTurn,
   nextTurnBlocked,
+  nextTurnChecking = false,
   nextTurnVerified = false,
   initialBlocked,
   composer,
@@ -362,6 +363,8 @@ export function MeriLiveConversation({
   /** The run finished: send `prompt` as the conversation's next run. */
   onNextTurn: (prompt: string, finished: TurnView) => void;
   nextTurnBlocked?: string | undefined;
+  /** The latest-run check is still in flight: a message typed now waits for it instead of being refused. */
+  nextTurnChecking?: boolean | undefined;
   /** Current exact-run history is re-verified and permits a client-side next-turn attempt. */
   nextTurnVerified?: boolean | undefined;
   initialBlocked?: string | undefined;
@@ -504,10 +507,14 @@ export function MeriLiveConversation({
   // One pending message: while Meri is busy with the last one and nothing else blocks, the draft waits
   // in the box as the queued message and is sent once the run finishes; a genuine block releases it.
   const genuineBlock =
-    !!(retentionError ?? lifecycle.blocked ?? modelBlocked ?? newIntentBlocked) ||
-    intent.submit?.state === "unknown";
+    !!(
+      retentionError ??
+      lifecycle.blocked ??
+      modelBlocked ??
+      newIntentBlocked
+    ) || intent.submit?.state === "unknown";
   const queue = useQueuedSend(
-    active || run.busy || (!!intent.submit && !turn),
+    active || run.busy || (!!intent.submit && !turn) || nextTurnChecking,
     !genuineBlock &&
       (availability.readyForNext ||
         (availability.initial && !availability.sendBlocked)),
