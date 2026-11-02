@@ -10,6 +10,20 @@ const nativeClientWrite = new RegExp(
   `^/clients/${clientId}(?:/account-owners)?$`,
 );
 const nativeClientDelete = new RegExp(`^/clients/${clientId}$`);
+// Core handlers that bind its application-authority session (Clerk `sid`). The
+// capiro template token carries no `sid`, so Core refuses it on every
+// deployment, not only the preview target: site workflows and analyst links
+// answer 401, governed Objective generation answers NOT_AVAILABLE.
+// Either hex case, as the operations' z.uuid() admits; Core validates the value.
+const uuid =
+  "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
+const objectiveGeneration = `clients/${uuid}/objectives/${uuid}/generation`;
+const authorityReads = new RegExp(
+  `^/(?:clio/site-workflows|capiro-admin/analyst-links/(?:(?:provision|sam)(?:/${uuid})?|receipts/${uuid})|${objectiveGeneration}(?:/outputs)?)$`,
+);
+const authorityWrites = new RegExp(
+  `^/(?:clio/site-workflows(?:/catalog|/requests/read)?|capiro-admin/analyst-links/(?:provision|sam)/${uuid}/decision|${objectiveGeneration}/(?:commands|strategy-commands))$`,
+);
 
 /** Match the existing Core native-session handlers on their configured origin.
  * This chooses a credential only; Core still validates route, membership and scope.
@@ -26,6 +40,11 @@ export function coreSessionAuthentication(
     return "clerk-session";
   // Saved layouts require Core's current-session proof on every configured target.
   if (path === "/me/portfolio-layout" && (method === "GET" || method === "PUT"))
+    return "clerk-session";
+  if (
+    (method === "GET" && authorityReads.test(path)) ||
+    (method === "POST" && authorityWrites.test(path))
+  )
     return "clerk-session";
   if (base !== nativeCoreBase) return undefined;
   const native =
