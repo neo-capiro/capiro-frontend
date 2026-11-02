@@ -15,22 +15,61 @@
 
 .row {
   border: 1px solid var(--border, rgba(0, 0, 0, 0.12));
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.75rem;
-}
-
-.rowHead {
+  border-radius: 10px;
+  padding: 20px;
   display: flex;
-  gap: 0.5rem;
-  align-items: baseline;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  background: var(--card);
+  font-size: 14px;
 }
-
-.required {
-  font-size: 0.75rem;
+.row > * {
+  margin: 0;
+}
+.row h3 {
+  font-size: 17px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+}
+.action {
+  min-height: 44px;
+}
+.action:disabled {
+  opacity: 0.4;
+}
+.details {
+  min-width: 0;
+}
+.details[open] {
+  flex-basis: 100%;
+}
+.details summary {
+  cursor: pointer;
+  min-height: 44px;
+  align-content: center;
+  padding: 0 14px;
+  width: fit-content;
+  border-radius: 10px;
+}
+.details summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.details dl {
+  background: var(--muted);
+  padding: 16px;
+  font-size: 13px;
+}
+.details dl > div {
+  margin-bottom: 8px;
+}
+.details dt {
+  color: var(--muted-foreground);
+}
+.details dd {
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .meta {

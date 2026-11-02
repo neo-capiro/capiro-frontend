@@ -1,4 +1,5 @@
 import { TaskDetailRefreshProbe } from "./TaskDetailRefreshProbe";
+import { PresentationAuditProbe } from "./PresentationAuditProbe";
 import { MeriRunsHost } from "../../src/features/meri/runs/MeriRunsHost";
 import { ConversationHistoryList } from "../../src/features/meri/conversations/ConversationHistoryList";
 import { MeriConversationList } from "../../src/features/meri/conversations/MeriConversationList";
@@ -65,6 +66,14 @@ function SessionProbe() {
 function RoutedApp() {
   const path = usePathname();
   const search = useSearchParams();
+  if (path === "/__test/presentation-audit")
+    return (
+      <ProductShell section="memory">
+        <RequireSession>
+          <PresentationAuditProbe reviewId={search.get("reviewId")} />
+        </RequireSession>
+      </ProductShell>
+    );
   // Dedicated synthetic harness mounts for the governed lifecycle and routine suites.
   // No production route uses these paths; "/" is otherwise only addressed by them.
   if (path === "/") return <SelectedLifecycleProbe />;

@@ -1,6 +1,77 @@
 import { test, expect, type Page } from "@playwright/test";
 import { readFileSync } from "node:fs";
-import { onlyLocalRequests } from "./fixtures";
+import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
+
+test("presentation first routine connection failure stays distinct from idle and denial", async ({
+  page,
+}, info) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await setup(page, { general: true });
+  await operationFixtures(page, {
+    "me.read": {
+      ...testIdentity,
+      user: { ...testIdentity.user, id: id(2) },
+      tenant: { ...testIdentity.tenant, id: id(1) },
+    },
+  });
+  let attempts = 0;
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route(
+    "**/api/action-followthrough/routine-session",
+    async (route) => {
+      attempts++;
+      if (attempts === 1) await held;
+      await route.fulfill({
+        status: attempts === 1 ? 400 : 403,
+        json: { message: "Synthetic refusal" },
+      });
+    },
+  );
+  await page.goto("/routines");
+  const connect = page.getByRole("button", {
+    name: "Connect routines",
+    exact: true,
+  });
+  await expect(
+    page.getByText("Connect to review routines", { exact: true }),
+  ).toBeVisible();
+  await connect.click();
+  await expect(
+    page.getByText("Connecting to the current routine context…", {
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(connect).toBeDisabled();
+  release();
+  await expect(
+    page.getByText("Could not connect to routines", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("status").filter({ hasText: "Routine scope: General" }),
+  ).toContainText("Connecting does not approve or run a routine.");
+  await expect(connect).toBeEnabled();
+  expect(attempts).toBe(1);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await page.screenshot({
+    path: info.outputPath("routines-first-failure-phone.png"),
+    fullPage: true,
+  });
+  await connect.click();
+  await expect(
+    page.getByText("Routine access was denied", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Could not connect to routines", { exact: true }),
+  ).toHaveCount(0);
+  expect(attempts).toBe(2);
+});
 
 const original = () =>
   JSON.parse(

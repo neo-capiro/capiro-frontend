@@ -220,18 +220,25 @@ function Connected({
           title: "Connecting to the current routine context…",
           detail: "",
         }
-      : lastReady
+      : state.status === "unavailable" && !lastReady
         ? {
             tone: "neutral" as const,
-            title: "Routine connection unavailable",
+            title: "Could not connect to routines",
             detail:
-              "Connect again to continue. Connecting does not prepare or approve a routine.",
+              "The connection could not be verified. Connect again to check current access. Connecting does not approve or run a routine.",
           }
-        : {
-            tone: "neutral" as const,
-            title: "Connect to review routines",
-            detail: "Connecting does not approve or run a routine.",
-          };
+        : lastReady
+          ? {
+              tone: "neutral" as const,
+              title: "Routine connection unavailable",
+              detail:
+                "Connect again to continue. Connecting does not prepare or approve a routine.",
+            }
+          : {
+              tone: "neutral" as const,
+              title: "Connect to review routines",
+              detail: "Connecting does not approve or run a routine.",
+            };
   const gated = state.status !== "ready" || !available;
   return (
     <section aria-label="Routines">

@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { NoticeRow } from "./NoticeRow";
 import {
   useCallback,
   useEffect,
@@ -24,9 +24,7 @@ import {
   applyNotificationPreference,
   projectUpdates,
   type NotificationPreferenceKey,
-  type ProjectedNotice,
 } from "../../../shared/meri-notifications/projection";
-import { runRecordHref } from "../runs/RunRecord";
 import { NotificationCategoryControls } from "./NotificationCategoryControls";
 import { useUpdatesFeed } from "./useUpdatesFeed";
 import { useMemoryNotificationActions } from "./useMemoryNotificationActions";
@@ -412,61 +410,9 @@ function OwnedUpdates({
         />
       ) : null}
       <p className={styles.meta}>
-        Revisioned preferences are saved once with the captured revision and
-        read back to confirm the stored value. These switches govern optional
-        in-app notices only; Core keeps its event log, approvals and
-        obligations.
+        These switches control optional in-app notices. They do not change
+        required notices, the event log, approval requirements or obligations.
       </p>
     </section>
-  );
-}
-
-function NoticeRow({
-  notice,
-  clientId,
-  markRead,
-  readDisabled,
-}: {
-  notice: ProjectedNotice;
-  clientId: string | null;
-  markRead: (id: string) => void;
-  readDisabled: boolean;
-}) {
-  return (
-    <li className={styles.row} data-source={notice.source}>
-      <div className={styles.rowHead}>
-        <span>{notice.title}</span>
-        {notice.delivery === "required" ? (
-          <span className={styles.required}>Required in-app notice</span>
-        ) : null}
-      </div>
-      <p className={styles.meta}>{notice.detail}</p>
-      <p className={styles.meta}>
-        {notice.occurredAt}
-        {notice.read === null
-          ? " · no per-row read record"
-          : notice.read
-            ? " · read"
-            : " · not read"}
-      </p>
-      {notice.run ? (
-        <Link href={runRecordHref(notice.run, clientId)}>Open run</Link>
-      ) : null}
-      {notice.reviewRequestId && (
-        <Link href={`/meri/memory/review/${notice.reviewRequestId}`}>
-          Open memory review
-        </Link>
-      )}
-      {notice.source === "memory-review" && notice.read === false && (
-        <button
-          type="button"
-          className={ui.outline}
-          disabled={readDisabled}
-          onClick={() => markRead(notice.id.slice("memory-review:".length))}
-        >
-          Mark read
-        </button>
-      )}
-    </li>
   );
 }
