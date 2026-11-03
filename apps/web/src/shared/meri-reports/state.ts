@@ -4,6 +4,13 @@ import type {
   LegacyReportClient,
 } from "./client";
 
+/**
+ * Outcome of the last list request this view admitted. `ordinal` counts completed list requests
+ * in this view (a local check count, not a backend page number or a cursor position); `added` is
+ * how many reports that response made newly visible.
+ */
+export type LegacyReportCheck = { ordinal: number; added: number };
+
 type State = {
   reports: CompletedReportSummary[];
   cursor: string | null;
@@ -11,6 +18,7 @@ type State = {
   busy: boolean;
   selected: CompletedReport | null;
   problem: string | null;
+  lastCheck: LegacyReportCheck | null;
 };
 const initial = (): State => ({
   reports: [],
@@ -19,6 +27,7 @@ const initial = (): State => ({
   busy: false,
   selected: null,
   problem: null,
+  lastCheck: null,
 });
 
 /** One mounted account/client view. No cross-account cache or stored report body. */
@@ -81,6 +90,10 @@ export class LegacyReportController {
         reports: [...prior, ...page.reports],
         cursor: page.nextCursor,
         loaded: true,
+        lastCheck: {
+          ordinal: (this.state.lastCheck?.ordinal ?? 0) + 1,
+          added: page.reports.length,
+        },
       });
     } catch {
       if (!request.signal.aborted && this.mounted)

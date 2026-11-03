@@ -24,6 +24,7 @@ const report = {
 };
 const { markdown: _markdown, ...summary } = report;
 const cursor = "A".repeat(80);
+const nextCursor = "B".repeat(80);
 const config = {
   services: { core: "https://core.example.test/api" },
   authConfigured: true,
@@ -279,9 +280,113 @@ describe("completed report lifecycle", () => {
       reports: [],
       loaded: false,
       selected: null,
+      lastCheck: null,
     });
     expect(f.controller.snapshot().problem).not.toBeNull();
     expect(await f.controller.open(report.artifactId)).toBeNull();
     expect(f.client.read).not.toHaveBeenCalled();
+  });
+
+  it("does not check for reports until an explicit request", () => {
+    const f = fixture();
+    expect(f.client.list).not.toHaveBeenCalled();
+    expect(f.controller.snapshot()).toMatchObject({
+      loaded: false,
+      lastCheck: null,
+    });
+  });
+
+  it("acknowledges each admitted empty window with a local check count", async () => {
+    const f = fixture();
+    vi.mocked(f.client.list)
+      .mockResolvedValueOnce({ reports: [], nextCursor: cursor })
+      .mockResolvedValueOnce({ reports: [], nextCursor: nextCursor })
+      .mockResolvedValueOnce({ reports: [summary], nextCursor: null });
+    await f.controller.load();
+    expect(f.controller.snapshot()).toMatchObject({
+      reports: [],
+      cursor,
+      lastCheck: { ordinal: 1, added: 0 },
+    });
+    await f.controller.load();
+    expect(f.controller.snapshot()).toMatchObject({
+      reports: [],
+      cursor: nextCursor,
+      lastCheck: { ordinal: 2, added: 0 },
+    });
+    expect(f.client.list).toHaveBeenNthCalledWith(
+      2,
+      cursor,
+      expect.any(AbortSignal),
+    );
+    await f.controller.load();
+    expect(f.controller.snapshot()).toMatchObject({
+      reports: [summary],
+      cursor: null,
+      lastCheck: { ordinal: 3, added: 1 },
+    });
+  });
+
+  it("resets the local check count and the accumulated list on refresh", async () => {
+    const f = fixture();
+    vi.mocked(f.client.list)
+      .mockResolvedValueOnce({ reports: [], nextCursor: cursor })
+      .mockResolvedValueOnce({ reports: [], nextCursor: nextCursor })
+      .mockResolvedValueOnce({ reports: [summary], nextCursor: null });
+    await f.controller.load();
+    await f.controller.load();
+    expect(f.controller.snapshot().lastCheck).toEqual({ ordinal: 2, added: 0 });
+    await f.controller.load(true);
+    expect(f.client.list).toHaveBeenLastCalledWith(
+      null,
+      expect.any(AbortSignal),
+    );
+    expect(f.controller.snapshot()).toMatchObject({
+      reports: [summary],
+      cursor: null,
+      lastCheck: { ordinal: 1, added: 1 },
+    });
+  });
+
+  it("clears the acknowledgement when a later check is refused", async () => {
+    const f = fixture();
+    vi.mocked(f.client.list).mockResolvedValueOnce({
+      reports: [],
+      nextCursor: cursor,
+    });
+    await f.controller.load();
+    expect(f.controller.snapshot().lastCheck).toEqual({ ordinal: 1, added: 0 });
+    vi.mocked(f.client.list).mockRejectedValueOnce(Error("revoked"));
+    await f.controller.load();
+    expect(f.controller.snapshot()).toMatchObject({
+      reports: [],
+      cursor: null,
+      loaded: false,
+      lastCheck: null,
+    });
+    expect(f.controller.snapshot().problem).toContain("current access");
+  });
+
+  it("discards a pending check and its acknowledgement when the scope unmounts", async () => {
+    const f = fixture();
+    let resolve!: (
+      page: Awaited<ReturnType<LegacyReportClient["list"]>>,
+    ) => void;
+    vi.mocked(f.client.list).mockImplementationOnce(
+      () =>
+        new Promise((r) => {
+          resolve = r;
+        }),
+    );
+    const pending = f.controller.load();
+    f.unmount();
+    resolve({ reports: [], nextCursor: cursor });
+    await pending;
+    expect(f.controller.snapshot()).toMatchObject({
+      reports: [],
+      loaded: false,
+      lastCheck: null,
+    });
+    expect(vi.mocked(f.client.list).mock.calls[0]![1].aborted).toBe(true);
   });
 });
