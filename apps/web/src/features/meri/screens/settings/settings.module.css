@@ -41,6 +41,9 @@
   flex-direction: column;
   gap: 16px;
   padding: 24px 28px;
+  /* The content columns must answer to the width this page actually has: inside Capiro
+     Settings the 232px rail and the main pane padding leave far less than the viewport. */
+  container-type: inline-size;
 }
 /* Inside the Capiro Settings frame the host supplies the page padding. */
 .page[data-embedded] {
@@ -96,6 +99,14 @@
   grid-template-columns: minmax(0, 650fr) minmax(0, 482fr);
   gap: 20px;
   align-items: start;
+}
+/* Figma 10.34 keeps both columns; stack them once this page cannot hold two readable
+   columns. A viewport breakpoint cannot express that, because the host rail and padding
+   take up to 280px of it. */
+@container (max-width: 599px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 .column {
   min-width: 0;
@@ -248,7 +259,7 @@
   align-items: flex-start;
   gap: 12px;
 }
-/* Figma 10.34 tablet keeps both columns; 10.33 phone stacks them under one scrolling tab row. */
+/* Figma 10.33 phone: one scrolling tab row, stacked columns and single-column metrics/policy. */
 @media (max-width: 680px) {
   .page {
     padding: 16px;
