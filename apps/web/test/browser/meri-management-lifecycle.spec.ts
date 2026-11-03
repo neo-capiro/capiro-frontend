@@ -190,9 +190,10 @@ test("access denial removes cached rows and unsaved private state", async ({
   denied = true;
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
   await expect(
-    page
-      .getByRole("alert")
-      .filter({ hasText: "Your saved chat titles are unavailable" }),
+    page.getByRole("alert").filter({
+      hasText:
+        "You cannot open your saved chat titles with your current access.",
+    }),
   ).toBeVisible();
   await expect(rename(page)).toHaveCount(0);
   await expect(

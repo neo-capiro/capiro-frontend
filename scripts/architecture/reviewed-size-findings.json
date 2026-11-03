@@ -6139,10 +6139,10 @@
     "file": "apps/web/src/features/meri/conversations/ConversationHistoryList.tsx",
     "kind": "function",
     "symbol": "ConversationHistoryList",
-    "fingerprint": "b07d3aae782a8d11d1d49eaf93504bf267b4e9cc9ca2f0c8f5aa069cd65ed8de",
-    "reason": "The conversation history list screen: rows, selection and paging. Single list-surface responsibility for the meri conversations owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "32b0d51bf1d1074c8872332c5a5529c786e91be644910dab31af4279f17eb031",
+    "reason": "Exact-source independent VQA005 review: this 198-line function composes one conversation-history list surface (filters, selection, current-read presentation and paging). The changed error paragraph calls the narrow local titleReadFailure presenter, which reuses the existing shared accessDenied predicate without duplicating authority or transport policy. Queries, identity, receiving, revocation and management commands retain their canonical owners; no new lifecycle or unrelated responsibility is introduced. Splitting this render-only change would not separate a distinct responsibility. Focused local tests and synthetic mounted denial, recovery, paging and session-replacement assertions preserve the lifecycle boundaries.",
+    "reviewedBy": "Codex independent VQA005 reviewer (GPT-6 Astra Ultra); exact source bc8e77ef4fa1dc32160b9c3fe37a78138837d4d0; vqa-005-independent-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/conversations/SelectedConversationActions.tsx",

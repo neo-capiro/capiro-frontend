@@ -25,7 +25,8 @@ import {
   discoveryConversations,
   transcriptPages,
 } from "./history-pages";
-const accessDenied = (error: unknown) =>
+/** The closed access refusal of a history read: the person's access, never a missing feature. */
+export const accessDenied = (error: unknown) =>
   error instanceof ConversationHistoryUnavailable &&
   ([401, 403].includes(error.status) || error.code === "MEMBERSHIP_CHANGED");
 /** Empty-history presentation only; not-found never proves ownership or grants admission. */
