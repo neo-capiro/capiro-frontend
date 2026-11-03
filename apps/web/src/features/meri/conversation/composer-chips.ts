@@ -4,6 +4,7 @@ import {
   type ConversationSkillSelection,
 } from "../../../shared/meri-conversations/query-journal";
 import type { ComposerChip } from "../MeriComposer";
+import { procedureName } from "./procedure-presentation";
 import { skillSelectionLabel } from "./SkillSelectionPicker";
 
 type Change = (selection: ConversationSkillSelection) => void;
@@ -63,11 +64,7 @@ export function composerChips(
   if (selection.procedure)
     chips.push({
       key: "procedure",
-      label: `Procedure · ${
-        selection.procedure.source === "firm"
-          ? selection.procedure.recordId
-          : selection.procedure.id
-      }`,
+      label: `Procedure · ${procedureName(selection.procedure)}`,
       onRemove: () =>
         remove(selection, (next) => delete next.procedure, onChange),
     });
