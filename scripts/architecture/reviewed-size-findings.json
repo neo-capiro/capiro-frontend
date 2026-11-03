@@ -3342,10 +3342,10 @@
     "file": "apps/web/src/features/meri/conversation/useConversationSession.ts",
     "kind": "function",
     "symbol": "useConversationSession",
-    "fingerprint": "46eb007ea969c661b3934b6c6d004763293bd8d0ad32d88b6e5f0ed524546c3d",
-    "reason": "Composes existing history, session, next-turn and local-state owners; Research only adds immutable capture correlation and refuses cross-conversation targets. Splitting by line count would scatter the shared lifetime and currentness checks.",
-    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
-    "reviewedOn": "2026-11-01"
+    "fingerprint": "428eb48ce0182fc29dd14fc8388c78003298f0c21ff5dde79a6004cfff74afdc",
+    "reason": "Independent VQA-002 responsibility review at product head 3fae7f2eecf84b57a32fa6bfe25231c494c60623. This hook remains the composition boundary joining the existing connection, history, local draft, model and continuation owners. useProcedureName receives the same effective selection exposed to the picker and composer, including the accepted-request fallback, and binds display metadata to the current draft owner and exact selector. It never writes the label into a request/journal, grants access or duplicates a catalog read. The 232 nonblank body lines compose related session lifetimes rather than adding a second domain implementation. Mounted saved-selection, custom-name, scope, removal, access-loss and owner-reset/fresh-read cases passed.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa002 (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/engagement/CampaignSession.tsx",
@@ -6067,10 +6067,10 @@
     "file": "apps/web/src/features/meri/conversation/ConversationView.tsx",
     "kind": "function",
     "symbol": "SessionComposer",
-    "fingerprint": "73cce771e0364584df51b1d16406345c24e877fbe46b796c45ecb0c199167ed1",
-    "reason": "Author responsibility assessment in docs/site-workflow-catalog.md: existing composer presentation and cohesive current catalog selection; no new authority, transport or persistence owner. This is not an independent review.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "1afbef3508665674f3fe48d7c6943e64aa41d055584cd0b87b4c8960843e5ff8",
+    "reason": "Independent VQA-002 responsibility review at product head 3fae7f2eecf84b57a32fa6bfe25231c494c60623. This component coherently composes the current conversation's controls, captured draft, attachments, questions, model/procedure chips and Tools panel. The change passes an already resolved presentation label to the chip; it introduces no transport, authorization, persistence or send owner. Existing domain work stays with the named hooks/components. Its 107 nonblank body lines are one composer composition, so splitting solely for the threshold would scatter the shared current-session rendering. Mounted custom-label, scope, removal and access-loss checks passed.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa002 (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/conversation/SkillSelectionPicker.tsx",
@@ -7021,10 +7021,10 @@
     "file": "apps/web/src/features/meri/conversation/ProcedureSelectionPicker.tsx",
     "kind": "function",
     "symbol": "ProcedureSelectionPicker",
-    "fingerprint": "d06d530c57e04f622b5d9ac513932a1cabbbc30f6e936001d6402836a37a31b5",
-    "reason": "New native procedure control mounted by the real SessionComposer. One responsibility: list what Core currently offers this account and tenant (the six canonical built-ins plus the eligible firm procedures) with Core's own label, purpose and scopes, and retain the exact closed selector {source, id or recordId, version, manifestDigest} on the unsent draft. It owns only the lifetime-keyed read through the existing useCurrentRead owner, the closed catalog receiver, the display of the applied selector, the retirement notice when a chosen procedure stops being listed exactly, and a refresh that is always a fresh read. It holds no request, store, run, occurrence, budget, tool or approval authority; admission is delegated to the canonical submit receiver, and Core re-resolves the exact procedure, version, digest and client access when the message is sent. The 186 nonblank lines are the inline form, the option groups and the closed-reader and retirement states, which should not be separated from the control they constrain.",
-    "reviewedBy": "Hermes independent source review session 20261028_071126_e8a975 (configured-default Hermes)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "e344c9f0a763b258943ec8eaa2b4a0bd3cd708443e760d4680dd1ba27c0e9470",
+    "reason": "Independent VQA-002 responsibility review at product head 3fae7f2eecf84b57a32fa6bfe25231c494c60623. One native procedure control lists an accepted tenant catalog, retains only the exact source/id/version/digest selector, retires a choice absent from a fresh catalog, and displays refresh/loading/refusal states. useCurrentRead remains the lifetime and cancellation owner; the canonical receiver and Core retain eligibility and authorization. The new callback reports display text only for the exact applied selector, while the shared presentation module owns readable naming. Its 190 nonblank body lines remain one cohesive control. Mounted custom names, retirement, mutual exclusion, stale-read and fresh-catalog reset checks passed; no wire or send contract changed.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa002 (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
@@ -7808,5 +7808,14 @@
     "reason": "Existing rich session composed into the canonical shared Newsletter workspace. Maintains its original document controller, provider proposal mounting, library, preview and review owners. Route-specific old editor and duplicate shell are removed; shared presentation receives local view state and callbacks.",
     "reviewedBy": "Codex Newsletter author design rationale; Root independent exact-head review pending",
     "reviewedOn": "2026-11-02"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/SessionTools.tsx",
+    "kind": "function",
+    "symbol": "SessionTools",
+    "fingerprint": "a756993b0cedaa6e9d76d1f7ab8c3eb601b1795082fcfeec2b17f28bfd41677b",
+    "reason": "Independent VQA-002 responsibility review at product head 3fae7f2eecf84b57a32fa6bfe25231c494c60623. This component owns the optional Tools panel's composition and focus/dismissal behavior, and delegates each existing picker to its domain owner. The change passes the same session's display-name reporter to ProcedureSelectionPicker; it adds no catalog fetch, state store, authorization or execution path. Scope and exact selector remain with the existing session/picker owners. Its 166 nonblank body lines largely express the panel and current availability states; arbitrary JSX splitting would not improve responsibility ownership. Mounted procedure selection, current label, scope and access-loss checks passed.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa002 (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-11-03"
   }
 ]

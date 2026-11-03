@@ -4,6 +4,7 @@ import {
   type ConversationSkillSelection,
 } from "../../../shared/meri-conversations/query-journal";
 import type { ComposerChip } from "../MeriComposer";
+import { procedureName } from "./procedure-presentation";
 import { skillSelectionLabel } from "./SkillSelectionPicker";
 
 type Change = (selection: ConversationSkillSelection) => void;
@@ -27,10 +28,15 @@ function remove(
  * The unsent choices the next message will carry, as compact removable chips. Clearing the skill
  * also clears its time window (the window needs a skill) and keeps an additive work definition or
  * website workflow, exactly as the picker's own clear does.
+ *
+ * `procedureLabel` is the name the current catalog reported for the applied procedure, already keyed
+ * to that exact selector by its owner. It is display only: the chip removes the same selector the
+ * journal and the request carry.
  */
 export function composerChips(
   selection: ConversationSkillSelection,
   onChange: Change,
+  procedureLabel?: string,
 ): readonly ComposerChip[] {
   const chips: ComposerChip[] = [];
   if (selection.skill)
@@ -63,11 +69,7 @@ export function composerChips(
   if (selection.procedure)
     chips.push({
       key: "procedure",
-      label: `Procedure · ${
-        selection.procedure.source === "firm"
-          ? selection.procedure.recordId
-          : selection.procedure.id
-      }`,
+      label: `Procedure · ${procedureLabel ?? procedureName(selection.procedure)}`,
       onRemove: () =>
         remove(selection, (next) => delete next.procedure, onChange),
     });

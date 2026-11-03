@@ -135,6 +135,7 @@ export function SessionTools({
           selection={session.skillSelection}
           disabled={modelDisabled}
           onChange={session.setSkillSelection}
+          onProcedureName={session.rememberProcedureName}
         />
       )}
       {!session.accessLost && session.modelCatalog && (

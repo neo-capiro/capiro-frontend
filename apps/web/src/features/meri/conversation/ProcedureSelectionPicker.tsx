@@ -14,16 +14,22 @@ import {
   type ConversationSkillSelection,
 } from "../../../shared/meri-conversations/query-journal";
 import { useCurrentRead } from "./evidence/useCurrentRead";
+import {
+  procedureDetail,
+  procedureName,
+  procedureOptionLabel,
+} from "./procedure-presentation";
 import styles from "../model-selection/model-selection.module.css";
 
 /**
  * The native procedure control in the conversation composer — Wave5 MO01/ST16.
  *
  * It lists exactly what Core currently offers this account and tenant: the six canonical built-ins and
- * the eligible firm procedures, with Core's own label, purpose and scopes, and the exact selector as
- * the value. Choosing here is never execution — nothing is dispatched until the ordinary send path
- * runs, and Core re-resolves the procedure, its version, its digest and the caller's client access at
- * that point. The catalog grants no tools, no budget and no approval.
+ * the eligible firm procedures, with a readable name, Core's own purpose and scopes for a firm
+ * procedure, and the exact selector as the value only. Choosing here is never execution — nothing is
+ * dispatched until the ordinary send path runs, and Core re-resolves the procedure, its version, its
+ * digest and the caller's client access at that point. The catalog grants no tools, no budget and no
+ * approval.
  *
  * The read belongs to one account, tenant, client and session lifetime: a newer lifetime starts a new
  * read, a late answer for an older one is dropped, and a chosen procedure that the current catalog no
@@ -36,12 +42,18 @@ export function ProcedureSelectionPicker({
   selection,
   disabled,
   onChange,
+  onProcedureName,
 }: {
   tenantId: string;
   lifetime: string;
   selection: ConversationSkillSelection;
   disabled: boolean;
   onChange: (selection: ConversationSkillSelection) => void;
+  /**
+   * Reports the accepted catalog's own name for the applied procedure, keyed to its exact selector,
+   * so the composer chip can show that name. Presentation only: the selection itself is unchanged.
+   */
+  onProcedureName?: (identity: string, name: string) => void;
 }) {
   const api = useCapiro();
   const [retiredChoice, setRetiredChoice] = useState<string>();
@@ -107,6 +119,22 @@ export function ProcedureSelectionPicker({
   const appliedEntry = catalog?.entries.find(
     (entry) => selectorIdentity(entry.selector) === appliedIdentity,
   );
+  /**
+   * The catalog is the only source of a procedure's name, so the name it gives for exactly the
+   * applied selector is reported to the owner of the chip that shows it. Presentation only: the
+   * selector, its identity and the sent request are untouched.
+   */
+  const appliedName = appliedEntry
+    ? procedureName(appliedEntry.selector, appliedEntry.display.label)
+    : undefined;
+  const report = useRef(onProcedureName);
+  useEffect(() => {
+    report.current = onProcedureName;
+  });
+  useEffect(() => {
+    if (appliedIdentity && appliedName)
+      report.current?.(appliedIdentity, appliedName);
+  }, [appliedIdentity, appliedName]);
 
   function choose(identity: string) {
     setRetiredChoice(undefined);
@@ -121,11 +149,9 @@ export function ProcedureSelectionPicker({
     if (entry) onChange(withProcedureSelection(selection, entry.selector));
   }
 
-  const chosen = appliedEntry
-    ? `${appliedEntry.display.label} (${appliedEntry.selector.source})`
-    : applied
-      ? `${applied.source === "builtin" ? applied.id : applied.recordId} (not listed now)`
-      : "No procedure";
+  const chosen =
+    appliedName ??
+    (applied ? `${procedureName(applied)} (not listed now)` : "No procedure");
   const problem = error
     ? error === "PROCEDURE_CATALOG_FOREIGN_TENANT"
       ? "This catalog came back for a different tenant, so nothing is listed."
@@ -141,10 +167,7 @@ export function ProcedureSelectionPicker({
   const firm = (catalog?.entries ?? []).filter(
     (entry) => entry.selector.source === "firm",
   );
-  const option = (entry: (typeof builtins)[number]) =>
-    entry.display.scopes.length > 0
-      ? `${entry.display.label} · ${entry.display.scopes.join(", ")}`
-      : entry.display.label;
+  const detail = appliedEntry ? procedureDetail(appliedEntry) : undefined;
 
   return (
     <details className={styles.picker}>
@@ -156,9 +179,8 @@ export function ProcedureSelectionPicker({
         <ChevronDown aria-hidden />
       </summary>
       <p className={styles.help}>
-        A procedure is a named native capability. Listing it is not
-        authorization: Core resolves the exact procedure, version, digest and
-        your client access when you send, and it may still refuse.
+        A procedure shapes how Meri handles your next message. Your access is
+        checked when you send, and Meri may still decline.
       </p>
       {loading ? (
         <p className={styles.help} role="status">
@@ -187,7 +209,7 @@ export function ProcedureSelectionPicker({
                     key={selectorIdentity(entry.selector)}
                     value={selectorIdentity(entry.selector)}
                   >
-                    {option(entry)}
+                    {procedureOptionLabel(entry)}
                   </option>
                 ))}
               </optgroup>
@@ -199,7 +221,7 @@ export function ProcedureSelectionPicker({
                     key={selectorIdentity(entry.selector)}
                     value={selectorIdentity(entry.selector)}
                   >
-                    {option(entry)}
+                    {procedureOptionLabel(entry)}
                   </option>
                 ))}
               </optgroup>
@@ -207,13 +229,7 @@ export function ProcedureSelectionPicker({
           </select>
         </label>
       ) : null}
-      {appliedEntry ? (
-        <p className={styles.help}>
-          {appliedEntry.display.purpose ?? "No stated purpose"} · scopes:{" "}
-          {appliedEntry.display.scopes.join(", ") || "none"} · exact selector:{" "}
-          {appliedIdentity}
-        </p>
-      ) : null}
+      {detail ? <p className={styles.help}>{detail}</p> : null}
       {retiredChoice ? (
         <p className={styles.help} role="alert">
           That procedure is no longer offered to this account, so it was removed

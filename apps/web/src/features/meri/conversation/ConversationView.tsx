@@ -127,7 +127,11 @@ export function SessionComposer({
         live={live}
         attachments={attachments}
         chips={[
-          ...composerChips(session.skillSelection, session.setSkillSelection),
+          ...composerChips(
+            session.skillSelection,
+            session.setSkillSelection,
+            session.procedureLabel,
+          ),
           ...modelChip,
         ]}
         scopeControl={scopeControl}

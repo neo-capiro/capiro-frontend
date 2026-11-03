@@ -26,6 +26,7 @@ import {
   storedSubmission,
   conversationSelectionOwner,
 } from "../../../shared/meri-conversations/query-journal";
+import { useProcedureName } from "./useProcedureName";
 import { requireMeriTabStorage } from "../../../shared/meri-conversations/tab-journal";
 import { discardMeriConversationRecovery } from "../../../shared/meri-conversations/conversation-recovery";
 import { conversationHref } from "../../../shared/meri-conversations/conversation-navigation";
@@ -218,6 +219,11 @@ export function useConversationSession(
     (view.acceptedRequest
       ? skillSelectionFields(storedSubmission(view.acceptedRequest))
       : {});
+  const procedure = useProcedureName(
+    local.initialDraft,
+    accessLost,
+    skillSelection,
+  );
   // A released message's text goes back to an empty box; text the person kept or typed stays. Its files are offered
   // again in the current composer.
   const restoreDraft = (
@@ -301,6 +307,13 @@ export function useConversationSession(
     setDraft: local.setDraft,
     skillSelection,
     setSkillSelection: local.setSkillSelection,
+    /**
+     * The applied procedure's catalog name for the effective selection of this draft and lifetime,
+     * and the way a picker reports one. Presentation only: the selector stays the whole identity in
+     * the selection, journal and request.
+     */
+    procedureLabel: procedure.procedureLabel,
+    rememberProcedureName: procedure.rememberProcedureName,
     modelCatalog,
     modelSelection: local.modelSelection,
     setModelSelection: local.setModelSelection,
