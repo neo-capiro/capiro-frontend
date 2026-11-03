@@ -268,29 +268,93 @@ async function readMessage(code: string) {
   return message;
 }
 /** Synthetic self-consistent refusal envelope, pinned to the published error statuses. */
-function refusedPreview(code: string, status: number) {
-  const fetcher = vi.fn<typeof fetch>(async (url) =>
+function refusalFetcher(body: unknown, status: number, init?: ResponseInit) {
+  return vi.fn<typeof fetch>(async (url) =>
     String(url).endsWith("/inspect")
       ? Response.json(previewSource())
-      : Response.json(
-          { error: { code, outcome: "NOT_DISPATCHED" } },
-          { status },
-        ),
+      : Response.json(body, { ...init, status }),
   );
-  return createPreviewAccess(session.credential, signal(), fetcher);
 }
-/**
- * Records the admitted read boundary rather than the ideal one: the published contract exposes no
- * read-refusal receiver, so a recorded 409/503 refusal can only arrive as an uncompleted read. If a
- * read-refusal receiver is added, these two cases must start asserting their own words instead.
- */
+function refusedPreview(
+  code: string,
+  status: number,
+  outcome = "NOT_DISPATCHED",
+) {
+  return createPreviewAccess(
+    session.credential,
+    signal(),
+    refusalFetcher({ error: { code, outcome } }, status),
+  );
+}
+const uncompletedRead =
+  "The preview read did not complete, so no preview result is known.";
 it.each([
-  ["ARTIFACT_PREVIEW_PENDING", 409],
-  ["PREVIEW_UNAVAILABLE", 503],
+  [
+    "ARTIFACT_PREVIEW_PENDING",
+    409,
+    "READ_UNAVAILABLE",
+    "No stored preview record exists for this saved version. A missing record does not prove that a publication is not in flight.",
+  ],
+  [
+    "PREVIEW_UNAVAILABLE",
+    503,
+    "NOT_DISPATCHED",
+    "PDF preview is not configured for this environment.",
+  ],
 ])(
-  "a preview read refused as %s is stated as an uncompleted read, never as a stored record",
-  async (code, status) => {
-    const port = refusedPreview(code, status);
+  "a %s read refusal keeps its admitted code and is stated as that state",
+  async (code, status, outcome, stated) => {
+    const port = refusedPreview(code, status, outcome);
+    expect(await port.readPreview(ids.version, signal())).toEqual({
+      ok: false,
+      code,
+      outcome,
+    });
+    const c = new DocumentPreviewController(
+      port,
+      session.context,
+      ids.version,
+      memoryStorage(),
+    );
+    const detach = c.attach();
+    await c.read();
+    expect(c.getSnapshot().message).toBe(stated);
+    expect(c.getSnapshot().url).toBeNull();
+    expect(c.getSnapshot().publication).not.toBe("complete");
+    detach();
+  },
+);
+it.each([
+  [
+    "a frontend-local refusal code the contract does not close",
+    { error: { code: "FRONTEND_DOCUMENT_UNAVAILABLE" } },
+    502,
+  ],
+  [
+    "a status that disagrees with the admitted code",
+    { error: { code: "PREVIEW_UNAVAILABLE", outcome: "NOT_DISPATCHED" } },
+    502,
+  ],
+  [
+    "an unknown closed code",
+    { error: { code: "SOMETHING_NEW", outcome: "READ_UNAVAILABLE" } },
+    409,
+  ],
+  [
+    "an error envelope sent as if it were bytes",
+    {
+      error: { code: "ARTIFACT_PREVIEW_PENDING", outcome: "READ_UNAVAILABLE" },
+    },
+    200,
+  ],
+])(
+  "an answer carrying %s keeps the conservative unread wording",
+  async (_, body, status) => {
+    const port = createPreviewAccess(
+      session.credential,
+      signal(),
+      refusalFetcher(body, status),
+    );
     expect(await port.readPreview(ids.version, signal())).toEqual({
       ok: false,
       code: "PREVIEW_READ_UNAVAILABLE",
@@ -303,17 +367,54 @@ it.each([
     );
     const detach = c.attach();
     await c.read();
-    expect(c.getSnapshot().message).toBe(
-      "The preview read did not complete, so no preview result is known.",
-    );
-    expect(c.getSnapshot().message).not.toMatch(
-      /no stored preview|not configured/i,
-    );
-    expect(c.getSnapshot().url).toBeNull();
-    expect(c.getSnapshot().publication).not.toBe("complete");
+    expect(c.getSnapshot().message).toBe(uncompletedRead);
     detach();
   },
 );
+it("a non-JSON refusal keeps the conservative unread wording", async () => {
+  const fetcher = vi.fn<typeof fetch>(async (url) =>
+    String(url).endsWith("/inspect")
+      ? Response.json(previewSource())
+      : new Response("upstream unavailable", {
+          status: 502,
+          headers: { "content-type": "text/plain" },
+        }),
+  );
+  const port = createPreviewAccess(session.credential, signal(), fetcher);
+  expect(await port.readPreview(ids.version, signal())).toEqual({
+    ok: false,
+    code: "PREVIEW_READ_UNAVAILABLE",
+  });
+});
+it("a real pending read refusal leaves an unresolved publication fence standing", async () => {
+  const storage = memoryStorage();
+  const port = refusedPreview(
+    "ARTIFACT_PREVIEW_PENDING",
+    409,
+    "READ_UNAVAILABLE",
+  );
+  const publish = vi.fn(async () => ({
+    ok: false as const,
+    code: "PREVIEW_PUBLICATION_UNKNOWN",
+  }));
+  const c = new DocumentPreviewController(
+    { ...port, publishPreview: publish },
+    session.context,
+    ids.version,
+    storage,
+  );
+  const detach = c.attach();
+  await c.publish();
+  expect(c.getSnapshot().publication).toBe("unresolved");
+  await c.read();
+  expect(c.getSnapshot().message).toMatch(/No stored preview record exists/);
+  expect(c.getSnapshot().message).not.toMatch(/retry|safe to|prepare/i);
+  expect(c.getSnapshot().publication).toBe("unresolved");
+  expect(c.getSnapshot().url).toBeNull();
+  await c.publish();
+  expect(publish).toHaveBeenCalledTimes(1);
+  detach();
+});
 it.each([
   [
     "PREVIEW_UNAVAILABLE",
