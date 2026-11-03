@@ -199,11 +199,10 @@ function useConversationOpening(
     retry: (status: string) => {
       const target =
         exactTarget(bound.last()?.context) ?? exactTarget(opening.hints);
-      if (status === "expired")
-        return reopen({
-          target,
-          pending: opening.pending,
-        });
+      // A recovery opening is read-only: it reauthorizes this exact binding and reads. The prompt of the
+      // authorized send it replaces is not re-supplied, so the recovered port cannot submit that message
+      // again; the draft, request and turn journals keep their own state.
+      if (status === "expired") return reopen({ target });
       const hints = target
         ? {
             ...opening.hints,
@@ -211,7 +210,11 @@ function useConversationOpening(
             runId: target.runId,
           }
         : opening.hints;
-      setOpening({ ...opening, host: create(hints), hints });
+      setOpening({
+        host: create(hints),
+        hints,
+        ...(opening.renewal ? { renewal: true } : {}),
+      });
     },
   };
 }
