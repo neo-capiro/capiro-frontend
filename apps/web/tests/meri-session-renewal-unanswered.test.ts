@@ -382,3 +382,80 @@ it("a session bound to another run forgets the refused binding: returning to the
   expect(state.hints).toHaveLength(hosts + 1);
   expect(connection.accessLost).toBe(false);
 });
+
+// A recovery opening is read-only. The retry paths recover the last exact binding; they must never
+// re-supply the prompt of an authorized send opening they replaced, or the recovered port can submit
+// that message again with no user action. The journals, drafts and UNKNOWN stay exactly as they were.
+const retainedPrompt = "Synthetic retained prompt";
+
+/** An authorized send opens the reserved target with the prompt that waits for its session. */
+function openedForSend() {
+  render();
+  render();
+  state.status = "connecting";
+  connection.reopen({
+    target: { conversationId, runId: id(5) },
+    pending: retainedPrompt,
+  });
+  render();
+  expect(connection.pending).toBe(retainedPrompt);
+}
+
+it("a recovery after expiry reopens the exact binding without the send prompt", () => {
+  openedForSend();
+  const hosts = state.hints.length;
+  // An expired session whose renewal this tab has not scheduled yet: the retry ladder asks control for
+  // the exact binding again, and that recovery must stay read-only.
+  state.status = "expired";
+  state.reason = undefined;
+  connection.retry();
+  render();
+  expect(state.hints).toHaveLength(hosts + 1);
+  expect(state.hints).toHaveLength(hosts + 1);
+  // The recovered opening reads the same exact conversation and run...
+  expect(state.hints.at(-1)).toMatchObject({ conversationId, runId: id(5) });
+  // ...and hands the consumer no initial prompt to submit.
+  expect(connection.pending).toBeUndefined();
+});
+
+it("a recovery on an unreachable renewal also drops the send prompt", () => {
+  openedForSend();
+  const hosts = state.hints.length;
+  state.status = "unavailable";
+  state.reason = undefined;
+  state.issuance = 503;
+  connection.retry();
+  render();
+  expect(state.hints).toHaveLength(hosts + 1);
+  expect(state.hints.at(-1)).toMatchObject({ conversationId, runId: id(5) });
+  expect(connection.pending).toBeUndefined();
+});
+
+it("the automatic renewal ladder never carries the prompt either", () => {
+  openedForSend();
+  const hosts = state.hints.length;
+  state.status = "expired";
+  state.reason = "renewal";
+  render();
+  render();
+  expect(state.hints).toHaveLength(hosts + 1);
+  expect(state.hints.at(-1)).toMatchObject({ conversationId, runId: id(5) });
+  expect(connection.pending).toBeUndefined();
+});
+
+it("an ordinary authorized send opening still carries its own prompt", () => {
+  render();
+  render();
+  state.status = "connecting";
+  connection.reopen({
+    target: { conversationId, runId: id(6) },
+    pending: retainedPrompt,
+  });
+  render();
+  expect(connection.pending).toBe(retainedPrompt);
+  // Opening without a prompt stays without one.
+  state.status = "connecting";
+  connection.reopen({ target: { conversationId, runId: id(6) } });
+  render();
+  expect(connection.pending).toBeUndefined();
+});

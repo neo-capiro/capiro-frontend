@@ -31,6 +31,8 @@ type Reopening = {
   target?: { conversationId: string; runId: string };
   pending?: string;
   renewal?: boolean;
+  /** Recovering this binding, not opening a new one: the exact requested run is mandatory. */
+  recovery?: boolean;
 };
 const exactTarget = (hints: Hints | ConversationContext | undefined) =>
   hints?.conversationId && hints.runId
@@ -109,7 +111,7 @@ function useSessionRenewal({
       if (refusedOnce.current === binding) return host.revoke();
       refusedOnce.current = binding;
     } else refusedOnce.current = null;
-    reopen({ renewal: reason !== "expiry" });
+    reopen({ renewal: reason !== "expiry", recovery: true });
   }, [status, reopen, bound, host]);
 
   return {
@@ -137,10 +139,13 @@ function useConversationOpening(
 ) {
   const { selection, storageError, record } = retention;
   const create = useCallback(
-    (hints: Hints) =>
+    // A recovery reopens what this binding already holds: it says so, so the host can refuse a
+    // different run before anything is recorded or exposed.
+    (hints: Hints, recovery = false) =>
       new ConversationHostController({
         account,
         hints,
+        ...(recovery ? { recovery: true } : {}),
         onBound: (context) => {
           record(context);
           bound.record(context, now());
@@ -178,7 +183,7 @@ function useConversationOpening(
           }
         : selection.hints;
       setOpening({
-        host: create(hints),
+        host: create(hints, options.recovery === true),
         hints,
         ...(options.renewal ? { renewal: true } : {}),
         ...(options.pending ? { pending: options.pending } : {}),
@@ -199,11 +204,10 @@ function useConversationOpening(
     retry: (status: string) => {
       const target =
         exactTarget(bound.last()?.context) ?? exactTarget(opening.hints);
-      if (status === "expired")
-        return reopen({
-          target,
-          pending: opening.pending,
-        });
+      // A recovery opening is read-only: it reauthorizes this exact binding and reads. The prompt of the
+      // authorized send it replaces is not re-supplied, so the recovered port cannot submit that message
+      // again; the draft, request and turn journals keep their own state.
+      if (status === "expired") return reopen({ target, recovery: true });
       const hints = target
         ? {
             ...opening.hints,
@@ -211,7 +215,11 @@ function useConversationOpening(
             runId: target.runId,
           }
         : opening.hints;
-      setOpening({ ...opening, host: create(hints), hints });
+      setOpening({
+        host: create(hints, true),
+        hints,
+        ...(opening.renewal ? { renewal: true } : {}),
+      });
     },
   };
 }

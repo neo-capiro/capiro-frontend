@@ -26,11 +26,18 @@ export class ConversationHostController extends SessionLifetimeController<
     origin?: string;
     onBound?: (context: ConversationContext) => void;
     retryDelaysMs?: readonly number[];
+    /**
+     * This host reopens a binding the tab already holds. Canonical issuance may answer a conversation
+     * with a correlated successor, which is legitimate for a new opening but never for a recovery: the
+     * recovered run is the exact one being recovered, so a different run is refused before publication.
+     */
+    recovery?: boolean;
   }) {
     const hints = structuredClone(
       conversationSessionHints.parse(options.hints),
     );
     const account = Object.freeze({ ...options.account });
+    const recoveredRunId = options.recovery === true ? hints.runId : undefined;
     const { fetcher, now, origin, onBound, retryDelaysMs } = options;
     super({
       issue: (signal) =>
@@ -62,6 +69,11 @@ export class ConversationHostController extends SessionLifetimeController<
           { fetcher, origin },
         );
         try {
+          // Refuse a rebound recovery before onBound records the selection and before the hints are
+          // pinned: a recovery may reopen the exact run it asked for or it fails closed. The port above
+          // is disposed by the catch below, so nothing of the refused binding is published.
+          if (recoveredRunId && session.context.runId !== recoveredRunId)
+            throw new Error("Recovery cannot reopen another run");
           onBound?.(session.context);
           signal.throwIfAborted();
           if (!lifetime.isCurrent())

@@ -7900,5 +7900,14 @@
     "reason": "Independent exact storage-owner review at 58d476a5. This existing module owns scoped bounded session-storage envelopes, verified sign-in/generation fences, conservative request retirement, budget eviction and scope/message cleanup. VQA006 adds only optional turn-open and turn-claim families to that owner: recordFacts marks both evictable and explicit message discard removes them. Real unresolved request/turn identities and newest-request protection remain unchanged; no alternate quota manager or persistence owner is introduced. Optional claims are no longer classified as protected commands, and absent hints create no retirement records. Focused budget tests and the independent 130-conversation start/discard counterexample pass, alongside scope/access-lifetime recovery cases. Exact module size is accepted for this cohesive storage boundary, not as a blanket exemption or live acceptance claim.",
     "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA006 product 58d476a5726c47ab31376ded1162bbd267d6de86; outputs/vqa-006-independent-final-review.json",
     "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useConversationConnection.ts",
+    "kind": "function",
+    "symbol": "useConversationOpening",
+    "fingerprint": "4940af3716013fbde45abd047f556e3d26326b9701fbc7a17a38b6d16237d33c",
+    "reason": "One selected conversation opening owner constructs hosts from captured hints, keeps an authorized send's pending prompt separate, and marks renewal/retry as read-only recovery. The 86-line function delegates canonical receipt admission and pre-publication exact-run refusal to the existing host; commands, durable journals and history remain separate owners. No unrelated responsibility, duplicate authority protocol or framework is introduced.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa003; PR554 product 7a6c0a1dd4e4b548e8fc13a0f856707b1311ed57; outputs/vqa-006-read-only-recovery-r1-independent-review.json",
+    "reviewedOn": "2026-11-03"
   }
 ]

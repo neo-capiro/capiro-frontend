@@ -304,3 +304,87 @@ it("preserves Meri Authorization for a configured trusted direct origin", async 
     detach();
   }
 });
+
+// Exact-run recovery. Canonical issuance may answer a conversation with a correlated successor
+// (initialRunRebind); that is legitimate for a new opening, never for a recovery, which reopens the
+// exact run the tab already holds. The refusal must precede onBound's selection record and the hint
+// pinning, and must dispose the port it already created.
+const rebindContext = {
+  ...context,
+  runId: "30000000-0000-4000-8000-000000000002",
+};
+const correlatedRebind = {
+  ...receipt,
+  context: rebindContext,
+  initialRunRebind: {
+    sourceRunId: context.runId,
+    targetRunId: rebindContext.runId,
+  },
+};
+const exactRunHints = {
+  clientId,
+  conversationId: context.conversationId,
+  runId: context.runId,
+};
+
+it("an exact-run recovery refuses a correlated rebind before publishing it", async () => {
+  const bound: unknown[] = [];
+  const host = new ConversationHostController({
+    hints: exactRunHints,
+    account,
+    recovery: true,
+    fetcher: async () => Response.json(correlatedRebind),
+    onBound: (value) => bound.push(value),
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    const snapshot = host.getSnapshot();
+    expect(snapshot.status).not.toBe("ready");
+    expect("port" in snapshot).toBe(false);
+    // Selection and the last-bound context are recorded from onBound: refusing before it means the
+    // rebound run was never published, and the port created for it was disposed.
+    expect(bound).toHaveLength(0);
+  } finally {
+    detach();
+  }
+});
+
+it("the same correlated rebind is admitted for an ordinary authorized opening", async () => {
+  const bound: { runId?: string }[] = [];
+  const host = new ConversationHostController({
+    hints: exactRunHints,
+    account,
+    fetcher: async () => Response.json(correlatedRebind),
+    onBound: (value) => bound.push(value as { runId?: string }),
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    expect(host.getSnapshot().status).toBe("ready");
+    expect(bound).toHaveLength(1);
+    expect(bound[0]?.runId).toBe(rebindContext.runId);
+  } finally {
+    detach();
+  }
+});
+
+it("an exact-run recovery opens the requested run when issuance matches it", async () => {
+  const bound: { runId?: string }[] = [];
+  const host = new ConversationHostController({
+    hints: exactRunHints,
+    account,
+    recovery: true,
+    fetcher: async () => Response.json(receipt),
+    onBound: (value) => bound.push(value as { runId?: string }),
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    expect(host.getSnapshot().status).toBe("ready");
+    expect(bound).toHaveLength(1);
+    expect(bound[0]?.runId).toBe(context.runId);
+  } finally {
+    detach();
+  }
+});
