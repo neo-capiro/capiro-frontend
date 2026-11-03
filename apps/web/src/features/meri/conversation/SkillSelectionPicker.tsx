@@ -51,6 +51,37 @@ const utcInput = (value: string) => {
     throw Error("Timestamp required");
   return new Date(value).toISOString();
 };
+
+/** Published `conversation-application` schema bound for `relative-duration.days` (integer 1…3660). */
+export const WINDOW_DAYS_MAX = 3660;
+
+/**
+ * Precise local feedback for the typed time window. An invalid draft is refused before Apply instead of
+ * only reaching the receiver's generic message; the canonical server still validates the window itself.
+ */
+export const windowDraftError = (
+  basis: Window["basis"],
+  draft: { days: number; start: string; end: string },
+): string | undefined => {
+  if (
+    basis === "relative-duration" &&
+    !(
+      Number.isInteger(draft.days) &&
+      draft.days >= 1 &&
+      draft.days <= WINDOW_DAYS_MAX
+    )
+  )
+    return `Enter a whole number of days from 1 to ${WINDOW_DAYS_MAX}.`;
+  if (basis === "explicit") {
+    try {
+      if (Date.parse(utcInput(draft.end)) <= Date.parse(utcInput(draft.start)))
+        return "The end must be after the start.";
+    } catch {
+      // An unfinished timestamp keeps Apply's existing timestamp feedback.
+    }
+  }
+  return undefined;
+};
 export const skillSelectionLabel = (selection: ConversationSkillSelection) => {
   const skill = CONVERSATION_SKILLS.find(
     (item) => item.skillId === selection.skill?.skillId,
@@ -111,6 +142,11 @@ export function SkillSelectionPicker({
     saved?.basis === "explicit" ? saved.endExclusive : "",
   );
   const [error, setError] = useState<string>();
+  // Derived from the typed draft, so invalid days or a reversed window are visible before Apply.
+  const draftError = selected
+    ? windowDraftError(basis, { days, start, end })
+    : undefined;
+  const feedback = draftError ?? error;
   const apply = () => {
     if (disabled) return;
     if (skillId && !newSelectionAllowed(gate, skillId)) {
@@ -130,6 +166,7 @@ export function SkillSelectionPicker({
       return;
     }
     if (!selected || !selected.windowBases.includes(basis)) return;
+    if (draftError) return;
     try {
       const windowRequest: Window =
         basis === "unbounded"
@@ -280,6 +317,8 @@ export function SkillSelectionPicker({
                   disabled={disabled}
                   type="number"
                   min={1}
+                  max={WINDOW_DAYS_MAX}
+                  aria-invalid={draftError ? true : undefined}
                   value={days}
                   onChange={(event) => setDays(Number(event.target.value))}
                 />
@@ -301,6 +340,7 @@ export function SkillSelectionPicker({
                 Start, inclusive
                 <input
                   disabled={disabled}
+                  aria-invalid={draftError ? true : undefined}
                   value={start}
                   onChange={(event) => setStart(event.target.value)}
                   placeholder="2026-10-01T00:00:00-04:00"
@@ -310,6 +350,7 @@ export function SkillSelectionPicker({
                 End, exclusive
                 <input
                   disabled={disabled}
+                  aria-invalid={draftError ? true : undefined}
                   value={end}
                   onChange={(event) => setEnd(event.target.value)}
                   placeholder="2026-11-01T00:00:00-04:00"
@@ -344,10 +385,10 @@ export function SkillSelectionPicker({
             : ""}
         </p>
       )}
-      {error && <p role="alert">{error}</p>}
+      {feedback && <p role="alert">{feedback}</p>}
       <button
         type="button"
-        disabled={disabled || (!!skillId && !selected)}
+        disabled={disabled || (!!skillId && !selected) || !!draftError}
         onClick={apply}
       >
         Apply to draft
