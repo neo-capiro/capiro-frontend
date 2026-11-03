@@ -99,7 +99,9 @@ export function DistrictMap({
                     d ? d.districtKey === selectedDistrictKey : undefined
                   }
                   aria-label={
-                    d ? `${f.id}, score ${d.score ?? "unavailable"}` : undefined
+                    d
+                      ? `${f.id}, score ${d.score ?? "Not reported"}`
+                      : undefined
                   }
                   onKeyDown={(e) => {
                     if (d && (e.key === "Enter" || e.key === " ")) {
@@ -111,7 +113,7 @@ export function DistrictMap({
                   <title>
                     {f.id}
                     {d
-                      ? ` · ${d.clientCount} clients · ${d.score == null ? "Score unavailable" : `${d.score}/100`}`
+                      ? ` · ${d.clientCount} clients · ${d.score == null ? "Not reported" : `${d.score}/100`}`
                       : " · No metrics in current scope"}
                   </title>
                 </path>

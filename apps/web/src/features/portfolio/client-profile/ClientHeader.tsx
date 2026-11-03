@@ -84,8 +84,9 @@ export function ClientHeader({ client }: { client: Client }) {
           <div className={styles.identity}>
             <strong>{client.name}</strong>
             <p className="muted">
-              {clientSectorLabel(client) ?? "Sector not specified"}
-              {location && ` · ${location}`}
+              {clientSectorLabel(client)
+                ? `${clientSectorLabel(client)}${location ? ` · ${location}` : ""}`
+                : "Sector not specified"}
             </p>
           </div>
           <span className="chip">

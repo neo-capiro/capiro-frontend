@@ -120,7 +120,10 @@ it("forwards the current-session credential to the exact native Core metrics tar
       headers: { Origin: origin },
     }),
     {
-      params: Promise.resolve({ service: "core", path: ["clients", "metrics"] }),
+      params: Promise.resolve({
+        service: "core",
+        path: ["clients", "metrics"],
+      }),
     },
   );
   expect(response.status).toBe(200);
@@ -138,7 +141,10 @@ it("makes no upstream metrics fetch without a current session", async () => {
       headers: { Origin: origin },
     }),
     {
-      params: Promise.resolve({ service: "core", path: ["clients", "metrics"] }),
+      params: Promise.resolve({
+        service: "core",
+        path: ["clients", "metrics"],
+      }),
     },
   );
   expect(response.status).toBe(401);
@@ -158,7 +164,10 @@ it("keeps an upstream metrics denial a denial without a scope or tenant fallback
       headers: { Origin: origin },
     }),
     {
-      params: Promise.resolve({ service: "core", path: ["clients", "metrics"] }),
+      params: Promise.resolve({
+        service: "core",
+        path: ["clients", "metrics"],
+      }),
     },
   );
   expect(response.status).toBe(403);
@@ -417,4 +426,34 @@ it("selects the current session for every application-authority route", () => {
         coreSessionAuthentication(service!, target, method!, path!),
       ).toBeUndefined();
   }
+});
+
+/**
+ * The strategy aggregate is the one strategy path that binds the caller's current session.
+ * Measured against the preview strategy service: `GET /strategies/metrics/active` answers 200
+ * with the session credential and 503 with the capiro template credential, while
+ * `GET /strategies` accepts both. Without this the Module hub Strategies card cannot load.
+ */
+it("sends the current-session credential to the strategy aggregate read", () => {
+  const strategyBase =
+    "https://first-chat-preview.app-dev.capiro.ai/strategy-api";
+  expect(
+    coreSessionAuthentication(
+      "strategy",
+      strategyBase,
+      "GET",
+      "/strategies/metrics/active",
+    ),
+  ).toBe("clerk-session");
+  for (const [service, method, path] of [
+    ["strategy", "POST", "/strategies/metrics/active"],
+    ["strategy", "GET", "/strategies/metrics/active/"],
+    ["strategy", "GET", "/strategies"],
+    ["strategy", "GET", "/strategies/metrics"],
+    ["strategy", "GET", "/clients/metrics"],
+    ["core", "GET", "/strategies/metrics/active"],
+  ] as const)
+    expect(
+      coreSessionAuthentication(service, strategyBase, method, path),
+    ).toBeUndefined();
 });
