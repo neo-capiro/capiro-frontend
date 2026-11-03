@@ -1,4 +1,5 @@
 import { SettingsLayout } from "../../src/features/meri/screens/settings/SettingsLayout";
+import { DataAccessScreen } from "../../src/features/meri/screens/settings/DataAccessScreen";
 import type { SettingsChrome } from "../../src/features/meri/screens/settings/settings-view";
 
 function body(id: string) {
@@ -20,7 +21,28 @@ export const UserPreferencesHost = body("personal");
 export const PersonalPreferencesScreen = body("personal");
 export const ConnectorAccountsHost = body("connections");
 export const ConnectorLibraryHost = body("connected-services");
-export const DataAccessHost = body("data-access");
+// The real Data access body so its own Connections / Connected services Next links are
+// the navigation entry points under test; only its data is synthetic.
+export function DataAccessHost({ chrome }: { chrome: SettingsChrome }) {
+  return (
+    <div data-testid="page-body" data-page="data-access">
+      <DataAccessScreen
+        chrome={chrome}
+        page={
+          {
+            version: "synthetic",
+            generalReads: true,
+            checkedAt: "2026-11-03T00:00:00Z",
+            families: [],
+            relations: [],
+          } as never
+        }
+        clientName="Synthetic General"
+        connections={{ status: "ready", connections: [] } as never}
+      />
+    </div>
+  );
+}
 export const UsageOverviewHost = body("usage");
 export const UsageLimitsScreen = body("usage");
 export const SkillsTemplatesScreen = body("skills");

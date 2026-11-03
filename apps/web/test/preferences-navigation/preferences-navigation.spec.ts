@@ -85,3 +85,41 @@ test("rapid distinct selections settle on the last target", async ({
   await shown(page, "help");
   await expect(page).toHaveURL(/page=help&tab=audit/);
 });
+
+// VQA-015 residual: the Data access body's own Next link starts the navigation, so no tab
+// handler is involved. Holding only that link's RSC response leaves the panel on Data
+// access; the later click on the still-selected tab must supersede the link, not lose to it.
+test("a current tab click supersedes a pending in-page link navigation", async ({
+  page,
+}) => {
+  await page.route(/[?&]_rsc=/, async (route) => {
+    if (route.request().url().includes("page=connections"))
+      await new Promise((resolve) => setTimeout(resolve, 800));
+    await route.continue();
+  });
+  await page.goto("/settings/preferences?page=data-access&reviewDelay=1");
+  await shown(page, "data-access");
+  const outgoing = page.waitForRequest(
+    (request) =>
+      request.url().includes("page=connections") &&
+      request.url().includes("_rsc="),
+  );
+  await page.getByRole("link", { name: "Connections", exact: true }).click();
+  await outgoing;
+  await expect(tab(page, "data-access")).toHaveAttribute(
+    "aria-selected",
+    "true",
+  );
+  await tab(page, "data-access").click();
+  await page.waitForTimeout(2200);
+  await shown(page, "data-access");
+  await expect(page).toHaveURL(/page=data-access/);
+});
+
+test("an in-page link navigation still opens its page", async ({ page }) => {
+  await page.goto("/settings/preferences?page=data-access");
+  await shown(page, "data-access");
+  await page.getByRole("link", { name: "Connections", exact: true }).click();
+  await shown(page, "connections");
+  await expect(page).toHaveURL(/page=connections/);
+});

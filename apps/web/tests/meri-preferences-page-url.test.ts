@@ -7,13 +7,14 @@ const state = vi.hoisted(() => ({
   search: "",
   pathname: "/settings/preferences",
   push: vi.fn(),
+  replace: vi.fn(),
   selects: new Map<string, (id: string) => void>(),
 }));
 
 vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(state.search),
   usePathname: () => state.pathname,
-  useRouter: () => ({ push: state.push }),
+  useRouter: () => ({ push: state.push, replace: state.replace }),
 }));
 
 // Each page body stands in for its canonical host so the test can observe which page the
@@ -114,6 +115,7 @@ function selectFrom(page: string, id: string) {
 
 beforeEach(() => {
   state.push.mockClear();
+  state.replace.mockClear();
   state.search = "";
 });
 
@@ -168,20 +170,23 @@ it("falls back to Personal defaults for an unknown page id", () => {
   expect(state.push).not.toHaveBeenCalled();
 });
 
-it("ignores a selection it does not own and does not re-push the current page", () => {
+it("replaces the current entry for a current-page click and ignores an unowned id", () => {
   expect(shownPage(render("page=data-access"))).toBe("data-access");
   selectFrom("data-access", "data-access");
   selectFrom("data-access", "not-a-page");
   expect(state.push).not.toHaveBeenCalled();
+  // Replacement keeps the history entry count unchanged while still acting on the click,
+  // so a pending navigation started by any other entry point is cancelled.
+  expect(state.replace.mock.calls.map(([target]) => target)).toEqual([
+    "/settings/preferences?page=data-access",
+  ]);
 });
 
-it("lets the last click win while a different navigation is pending", () => {
+it("acts on a current-page click without sourcing pending navigation from one entry point", () => {
   expect(shownPage(render("page=data-access&tab=audit"))).toBe("data-access");
-  // The address has not reached Privacy yet, so this later click must supersede it.
-  selectFrom("data-access", "privacy");
   selectFrom("data-access", "data-access");
-  expect(state.push.mock.calls.map(([target]) => target)).toEqual([
-    "/settings/preferences?page=privacy&tab=audit",
+  expect(state.push).not.toHaveBeenCalled();
+  expect(state.replace.mock.calls.map(([target]) => target)).toEqual([
     "/settings/preferences?page=data-access&tab=audit",
   ]);
 });

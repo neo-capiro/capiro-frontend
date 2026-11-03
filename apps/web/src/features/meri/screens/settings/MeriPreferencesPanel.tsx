@@ -1,5 +1,5 @@
 "use client";
-import { useRef, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { UserPreferencesHost } from "../../user-preferences/UserPreferencesHost";
 import { TenantModelSettings } from "../../tenant-settings/TenantModelSettings";
@@ -55,24 +55,22 @@ export function MeriPreferencesPanel({
   const page: PreferencePageId = pages.some((item) => item.id === requested)
     ? (requested as PreferencePageId)
     : "personal";
-  // Next keeps rendering the committed page until a push's response arrives, so `page`
-  // alone cannot tell a settled tab click from one that must supersede a navigation
-  // already in flight. Remember the page the last click asked for: while it differs from
-  // the rendered page, that navigation is still pending and a later click must win.
-  const requestedPage = useRef<PreferencePageId | null>(null);
   const address = params.toString();
   const chrome: SettingsChrome = {
     nav: pages.map((item) => ({ ...item, current: item.id === page })),
     select: (id) => {
       const next = pages.find((item) => item.id === id)?.id;
       if (!next) return;
-      const pending =
-        requestedPage.current !== null && requestedPage.current !== page;
-      if (next === page && !pending) return;
       const query = new URLSearchParams(address);
       query.set("page", next);
-      requestedPage.current = next;
-      router.push(`${pathname}?${query.toString()}`, { scroll: false });
+      const target = `${pathname}?${query.toString()}`;
+      // A click on the page already on screen still has to cancel whatever navigation is
+      // in flight — another tab, an in-page Next link, or Back/Forward — because Next keeps
+      // rendering the committed page until that response arrives. Replacing the current
+      // entry does that without adding a history entry or inventing a pending-navigation
+      // source; any other click is an ordinary push.
+      if (next === page) router.replace(target, { scroll: false });
+      else router.push(target, { scroll: false });
     },
     embedded: true,
     notice: {
