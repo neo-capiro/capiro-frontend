@@ -445,10 +445,16 @@ export function conversationIntentJournal(
 }
 
 /**
- * The ordinary request this tab retained for one exact target run, read without claiming that
- * journal (no cache entry, no generation fence): a caller deciding whether an older answer still
- * holds needs the fact, not the run's command owner.
+ * What this tab can say about the ordinary request for one exact target run: it holds one, it holds
+ * none, or it cannot be read. "Cannot be read" is not "none": an unreadable or retired record still
+ * means a newer request exists, so a caller must stay conservative rather than trust an older answer.
  */
+export type RetainedRequest =
+  | Readonly<{ state: "absent" }>
+  | Readonly<{ state: "retained"; intent: ConversationIntent }>
+  | Readonly<{ state: "unreadable" }>;
+
+/** The ordinary request retained for one target run, read without claiming that journal. */
 export function retainedRequest(
   scope: {
     tenantId: string;
@@ -458,17 +464,18 @@ export function retainedRequest(
   },
   runId: string,
   storage?: TabStorage,
-): ConversationIntent | undefined {
+): RetainedRequest {
   try {
-    return tabRecord(
+    const intent = tabRecord(
       scope,
       "request",
       receiveIntent,
       runId,
       storage ?? null,
     ).read();
+    return intent ? { state: "retained", intent } : { state: "absent" };
   } catch {
-    return undefined;
+    return { state: "unreadable" };
   }
 }
 

@@ -114,25 +114,47 @@ type OpenedReservation =
       targetRunId: string;
     }>;
 
+/** The durable half of the answer, in its own record: a later owner can retire it without the answer. */
+type OpenedClaim =
+  | Readonly<{ state: "retired" }>
+  | Readonly<{
+      state: "confirmed";
+      sourceRunId: string;
+      targetRunId: string;
+    }>;
+
 /**
  * The next reservation control itself confirmed admitted no message, from this tab. The saved read
  * cannot settle it: one immutable target per source keeps the reservation row after the check, so
  * every later page still reports it. Only this tab's own answer is kept, and only for the exact
  * source and target Core bound.
+ *
+ * The answer is only trusted while its claim record agrees with it. The claim lives in its own
+ * record, so retirement is durable even for a tab that cannot rewrite or delete the answer, and an
+ * unreadable answer or claim is never read as "nothing was sent".
  */
 export function persistedOpenedReservation(
   scope: TabScope,
   storage?: TabStorage,
 ) {
-  const record = tabRecord<OpenedReservation>(
+  const answer = tabRecord<OpenedReservation>(
     scope,
     "turn-open",
     (value) => receiveOpenedReservation(scope, value),
     "",
     storage ?? null,
   );
-  const read = (): { sourceRunId: string; targetRunId: string } | undefined => {
-    const value = record.read();
+  const claim = tabRecord<OpenedClaim>(
+    scope,
+    "turn",
+    (value) => receiveOpenedClaim(value),
+    "open-claim",
+    storage ?? null,
+  );
+  const readAnswer = ():
+    | { sourceRunId: string; targetRunId: string }
+    | undefined => {
+    const value = answer.read();
     return value && "source" in value
       ? {
           sourceRunId: value.source.sourceRunId,
@@ -140,9 +162,26 @@ export function persistedOpenedReservation(
         }
       : undefined;
   };
+  const read = (): { sourceRunId: string; targetRunId: string } | undefined => {
+    try {
+      const kept = readAnswer();
+      const held = claim.read();
+      return kept &&
+        held?.state === "confirmed" &&
+        held.sourceRunId === kept.sourceRunId &&
+        held.targetRunId === kept.targetRunId
+        ? kept
+        : undefined;
+    } catch {
+      // An answer or claim this page cannot read proves nothing about the message.
+      return undefined;
+    }
+  };
   const write = (target: { sourceRunId: string; targetRunId: string }) => {
     if (!storage) return;
-    record.write({
+    claim.write({ state: "confirmed", ...target });
+    if (claim.read()?.state !== "confirmed") throw new TabJournalUnavailable();
+    answer.write({
       source: {
         conversationId: scope.conversationId,
         sourceRunId: target.sourceRunId,
@@ -151,26 +190,51 @@ export function persistedOpenedReservation(
     });
   };
   /**
-   * Retirement is a durable fact, not a caught assumption: a tombstone replaces the answer and is
-   * read back, because a removal that throws or leaves its bytes is not invalidation. Returns
-   * whether no confirmation can be read any more.
+   * Retirement is a durable fact, not a caught assumption: the claim record is the half that is
+   * written here, so an answer this tab can neither rewrite nor delete is still retired for every
+   * later owner of this scope. The answer bytes are then cleared when that is possible. Returns
+   * whether the retirement was verified.
    */
   const retire = () => {
-    if (read() === undefined) return true;
+    let retired = false;
     try {
-      record.write({ retired: true });
-    } catch {
-      /* Removal below is the only remaining way to stop trusting the old bytes. */
-    }
-    if (read() === undefined) return true;
-    try {
-      record.clear();
+      claim.write({ state: "retired" });
     } catch {
       /* Verified below. */
     }
-    return read() === undefined;
+    try {
+      retired = claim.read()?.state === "retired";
+    } catch {
+      retired = false;
+    }
+    try {
+      if (readAnswer() !== undefined) {
+        answer.write({ retired: true });
+        if (readAnswer() !== undefined) answer.clear();
+      }
+    } catch {
+      /* The claim above already decides what a later page may trust. */
+    }
+    return retired;
   };
   return { read, write, retire };
+}
+
+/** A claim names one reservation, or records that it was retired; anything else is not a claim. */
+function receiveOpenedClaim(value: unknown): OpenedClaim {
+  const local = z
+    .union([
+      z.strictObject({ state: z.literal("retired") }),
+      z.strictObject({
+        state: z.literal("confirmed"),
+        sourceRunId: z.string().min(1),
+        targetRunId: z.string().min(1),
+      }),
+    ])
+    .parse(value);
+  if (local.state === "confirmed" && local.sourceRunId === local.targetRunId)
+    throw new TabJournalUnavailable();
+  return local;
 }
 
 /** The stored source is admitted by the public next-turn receiver, scoped to this conversation. */

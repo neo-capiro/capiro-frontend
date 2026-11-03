@@ -541,3 +541,89 @@ it("an ordinary message into the confirmed reserved target supersedes the empty 
   expect(journal(new QueryClient()).openedTarget()).toBeUndefined();
   expect(mount(new QueryClient()).command.opened).toBeUndefined();
 });
+
+// Revision after the third review: the answer is only as good as the evidence that nothing newer
+// exists, and its retirement must not depend on the record it is written in.
+const requestKey = () =>
+  Array.from({ length: storage.length }, (_, i) => storage.key(i)!).find(
+    (key) => key.includes('"request"'),
+  )!;
+const claimKey = () =>
+  Array.from({ length: storage.length }, (_, i) => storage.key(i)!).find(
+    (key) => key.includes("open-claim"),
+  )!;
+async function ordinaryReservedTargetRequest() {
+  const commands = conversationIntentJournal(
+    new QueryClient(),
+    {
+      tenantId: nextBinding.tenantId,
+      actorId: nextBinding.actorId,
+      conversationId: nextBinding.conversationId,
+      runId: nextBinding.runId,
+      selectedClientId: clientId,
+    },
+    storage,
+  );
+  expect(
+    commands.write({
+      submit: {
+        requestId: "a0000000-0000-4000-8000-00000000000b",
+        prompt: "Synthetic reserved-target message",
+        state: "unknown",
+      },
+    }),
+  ).toBe(true);
+  return commands;
+}
+
+it("a newer request this tab cannot read makes the confirmation unusable", async () => {
+  const key = await confirmedOnce();
+  const record = JSON.parse(storage.getItem(key)!);
+  const commands = await ordinaryReservedTargetRequest();
+  // A retained request settles nothing, even when it cannot be read back.
+  const request = requestKey();
+  const bytes = storage.getItem(request)!;
+  storage.setItem(request, "{broken");
+  expect(journal(new QueryClient()).openedTarget()).toBeUndefined();
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+  storage.setItem(request, bytes);
+  const read = storage.getItem;
+  storage.getItem = (k) => {
+    if (k.includes('"request"')) throw new Error("denied");
+    return read(k);
+  };
+  expect(journal(new QueryClient()).openedTarget()).toBeUndefined();
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+  storage.getItem = read;
+  // The canonical request is untouched: it still reads as the unknown submit it was.
+  expect(commands.read().submit?.state).toBe("unknown");
+  expect(JSON.parse(storage.getItem(key)!).value.source.sourceRunId).toBe(
+    binding.runId,
+  );
+  expect(record).toBeDefined();
+});
+
+it("a confirmation this tab can neither rewrite nor delete stays retired for the next page", async () => {
+  await confirmedOnce();
+  const claim = claimKey();
+  const write = storage.setItem;
+  const remove = storage.removeItem;
+  storage.setItem = (k, v) => {
+    if (k.includes('"turn-open"')) throw new Error("synthetic write denied");
+    write(k, v);
+  };
+  storage.removeItem = (k) => {
+    if (k.includes('"turn-open"')) throw new Error("synthetic removal denied");
+    remove(k);
+  };
+  const cache = new QueryClient();
+  journal(cache).start(binding, prompt, nextRequestId);
+  expect(journal(cache).discard()).toBeDefined();
+  // The answer record is still readable, and its own durable claim retires it for a later owner.
+  expect(storage.getItem(confirmationKey())).not.toBeNull();
+  expect(JSON.parse(storage.getItem(claim)!).value.state).toBe("retired");
+  expect(journal(new QueryClient()).openedTarget()).toBeUndefined();
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+  storage.setItem = write;
+  storage.removeItem = remove;
+});

@@ -258,7 +258,8 @@ export function conversationTurnJournal(
      * Target run id of the reservation control already confirmed admitted no message in this tab,
      * unless something newer owns that target. One immutable target per source identifies the
      * reservation; an ordinary message sent into that same target is the request journal's from then
-     * on, so control's earlier answer no longer settles it.
+     * on, so control's earlier answer no longer settles it - and a request this page cannot read
+     * proves no absence either.
      */
     openedTarget: () => {
       if (openedRetired) return undefined;
@@ -274,9 +275,7 @@ export function conversationTurnJournal(
         confirmed.targetRunId,
         storage,
       );
-      return request?.submit || request?.cancel
-        ? undefined
-        : confirmed.targetRunId;
+      return request.state === "absent" ? confirmed.targetRunId : undefined;
     },
     /**
      * Keep control's own RESERVED answer: that exact source's successor admitted no message. The
