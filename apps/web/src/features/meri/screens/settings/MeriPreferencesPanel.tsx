@@ -59,11 +59,11 @@ export function MeriPreferencesPanel({
   // This panel outlives the page switch, while the tab list that takes the selection does
   // not: it is rendered by whichever page body is current. The request recorded here is
   // what lets the re-rendered list put focus back on the tab the user selected.
-  const pendingTabFocus = useRef<string | null>(null);
+  const pendingTabFocusRef = useRef<string | null>(null);
   useEffect(() => {
     // Any committed page change ends the request: the new list either claimed it while it
     // rendered, or the selection was superseded and nothing may take focus.
-    pendingTabFocus.current = null;
+    pendingTabFocusRef.current = null;
   }, [page]);
   const chrome: SettingsChrome = {
     nav: pages.map((item) => ({ ...item, current: item.id === page })),
@@ -72,7 +72,7 @@ export function MeriPreferencesPanel({
       if (!next) return;
       // Selecting the page already on screen re-uses the mounted tab list, so it needs no
       // focus request and must not leave one behind for a later page.
-      pendingTabFocus.current = next === page ? null : next;
+      pendingTabFocusRef.current = next === page ? null : next;
       const query = new URLSearchParams(address);
       query.set("page", next);
       const target = `${pathname}?${query.toString()}`;
@@ -84,7 +84,7 @@ export function MeriPreferencesPanel({
       if (next === page) router.replace(target, { scroll: false });
       else router.push(target, { scroll: false });
     },
-    pendingTabFocus,
+    pendingTabFocusRef,
     embedded: true,
     notice: {
       title: "Meri preferences connection unavailable",

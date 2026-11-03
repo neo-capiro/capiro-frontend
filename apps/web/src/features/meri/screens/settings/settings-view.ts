@@ -18,7 +18,7 @@ export type SettingsChrome = {
    * exists in the tree that follows; the host keeps the request and the tab owner clears
    * it when it renders that tab.
    */
-  pendingTabFocus?: { current: string | null } | undefined;
+  pendingTabFocusRef?: { current: string | null } | undefined;
   /** Hosted inside the Capiro Settings frame, which supplies the page title. */
   embedded?: boolean | undefined;
   notice: SettingsNotice;

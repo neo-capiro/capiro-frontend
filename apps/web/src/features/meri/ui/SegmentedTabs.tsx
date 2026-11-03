@@ -8,14 +8,14 @@ export function SegmentedTabs<T extends string>({
   options,
   value,
   onChange,
-  focusRequest,
+  focusRequestRef,
 }: {
   label: string;
   options: readonly { id: T; label: string }[];
   value: T;
   onChange: (id: T) => void;
   /** Selection whose page switch replaced the tab list; the selected tab takes focus. */
-  focusRequest?: { current: string | null } | undefined;
+  focusRequestRef?: { current: string | null } | undefined;
 }) {
   const refs = useRef(new Map<T, HTMLButtonElement>());
   const move = (event: KeyboardEvent, index: number) => {
@@ -29,7 +29,22 @@ export function SegmentedTabs<T extends string>({
     refs.current.get(next.id)?.focus();
   };
   return (
-    <div className={styles.tabs} role="tablist" aria-label={label}>
+    <div
+      className={styles.tabs}
+      role="tablist"
+      aria-label={label}
+      onBlur={(event) => {
+        // Focus leaving this list before the pending page renders supersedes the handoff:
+        // the page that is still loading must not take focus back from the control the
+        // user moved to. Moving between the tabs stays inside the list and keeps it.
+        const next = event.relatedTarget;
+        if (
+          focusRequestRef &&
+          !(next instanceof Node && event.currentTarget.contains(next))
+        )
+          focusRequestRef.current = null;
+      }}
+    >
       {options.map((option, index) => (
         <button
           key={option.id}
@@ -42,8 +57,8 @@ export function SegmentedTabs<T extends string>({
             // A page switch replaces this tab list, so the button that started the switch
             // is gone by the time the next page renders. The selected tab claims the
             // request its host recorded instead of leaving focus on the document body.
-            if (focusRequest?.current === option.id && value === option.id) {
-              focusRequest.current = null;
+            if (focusRequestRef?.current === option.id && value === option.id) {
+              focusRequestRef.current = null;
               node.focus();
             }
           }}

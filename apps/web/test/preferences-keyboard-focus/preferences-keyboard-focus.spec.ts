@@ -38,6 +38,35 @@ async function focused(page: Page) {
   });
 }
 
+/** Hold this page's own RSC response so a real navigation stays pending until released. */
+async function holdPageResponse(page: Page, id: string) {
+  let release!: () => void;
+  let started!: () => void;
+  const hold = new Promise<void>((resolve) => (release = resolve));
+  const pending = new Promise<void>((resolve) => (started = resolve));
+  const matches = (url: string) => {
+    const target = new URL(url);
+    return (
+      target.hostname === "127.0.0.1" &&
+      target.searchParams.get("page") === id &&
+      target.searchParams.has("_rsc")
+    );
+  };
+  await page.route(
+    (url) => matches(url.toString()),
+    async (route) => {
+      started();
+      await hold;
+      await route.continue();
+    },
+  );
+  return {
+    pending,
+    release,
+    answered: () => page.waitForResponse((response) => matches(response.url())),
+  };
+}
+
 test.beforeEach(async ({ page }) => {
   await page.route("**/*", (route) =>
     new URL(route.request().url()).hostname === "127.0.0.1"
@@ -184,4 +213,61 @@ test("a superseded selection leaves no later focus request", async ({
   await shown(page, "connections");
   const after = await focused(page);
   expect(after.role).not.toBe("tab");
+});
+
+// Reviewer R1: a pending page must not take focus back from a control the user
+// deliberately moved to while that page was still loading.
+test("a pending keyboard selection leaves focus with a header control the user moved to", async ({
+  page,
+}) => {
+  await page.goto("/settings/preferences?page=help");
+  await shown(page, "help");
+  const held = await holdPageResponse(page, "personal");
+  await tab(page, "help").focus();
+  await page.keyboard.press("ArrowRight");
+  await held.pending;
+  // The arrow moved focus inside the list, so the handoff is still current here.
+  await expect(tab(page, "personal")).toBeFocused();
+  await page.keyboard.press("Shift+Tab");
+  const outside = page.getByRole("textbox", {
+    name: "Persistent header input",
+  });
+  await expect(outside).toBeFocused();
+  await outside.fill("mine");
+  await expect(outside).toHaveValue("mine");
+
+  const answered = held.answered();
+  held.release();
+  await answered;
+  await shown(page, "personal");
+  await expect(outside).toHaveValue("mine");
+  await expect(outside).toBeFocused();
+});
+
+test("a pending click selection leaves focus with a footer control the user tabbed to", async ({
+  page,
+}) => {
+  await page.goto("/settings/preferences?page=data-access");
+  await shown(page, "data-access");
+  const held = await holdPageResponse(page, "privacy");
+  await tab(page, "privacy").click();
+  await held.pending;
+  // Leave the list through the still-rendered page body, never a forced focus.
+  await page.keyboard.press("Tab");
+  await expect(page.getByTestId("page-editor")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(
+    page.getByRole("link", { name: "Open connections page" }),
+  ).toBeFocused();
+  await page.keyboard.press("Tab");
+  const outside = page.getByRole("textbox", {
+    name: "Persistent footer input",
+  });
+  await expect(outside).toBeFocused();
+
+  const answered = held.answered();
+  held.release();
+  await answered;
+  await shown(page, "privacy");
+  await expect(outside).toBeFocused();
 });
