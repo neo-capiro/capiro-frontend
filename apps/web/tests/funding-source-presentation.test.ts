@@ -31,14 +31,18 @@ describe("coverage state labels", () => {
   it("words every state the backend can emit", () => {
     expect(fundingStateLabel("current")).toBe("Up to date");
     expect(fundingStateLabel("stale")).toBe("Update overdue");
-    expect(fundingStateLabel("initial_partial")).toBe("Initial sync incomplete");
+    expect(fundingStateLabel("initial_partial")).toBe(
+      "Initial sync incomplete",
+    );
     expect(fundingStateLabel("error_cached")).toBe(
       "Latest update incomplete; showing saved data",
     );
     expect(fundingStateLabel("degraded")).toBe("No usable coverage yet");
     expect(fundingStateLabel("never_synced")).toBe("Not synced yet");
     expect(fundingStateLabel("unavailable")).toBe("Status unavailable");
-    expect(fundingStateLabel("not_enabled")).toBe("Not enabled for this workspace");
+    expect(fundingStateLabel("not_enabled")).toBe(
+      "Not enabled for this workspace",
+    );
     expect(fundingStateLabel("unknown")).toBe("Status unknown");
     for (const raw of Object.keys(FUNDING_STATE_LABELS)) {
       expect(fundingStateLabel(raw)).not.toBe(raw);
@@ -93,7 +97,9 @@ describe("freshness presentation", () => {
     });
     expect(view.sourceLabel).toBe("SBIR/STTR");
     expect(view.stateLabel).toBe("Update overdue");
-    expect(view.successLabel).toBe("Last successful update Oct 22, 2026, 01:21 UTC");
+    expect(view.successLabel).toBe(
+      "Last successful update Oct 22, 2026, 01:21 UTC",
+    );
     // Repeating the success instant as an attempt would imply a second event.
     expect(view.attemptLabel).toBeNull();
   });
@@ -115,7 +121,9 @@ describe("freshness presentation", () => {
       lastSyncedAt: "garbage",
       latestAttemptAt: "also-garbage",
     });
-    expect(view.stateLabel).toBe("Latest update incomplete; showing saved data");
+    expect(view.stateLabel).toBe(
+      "Latest update incomplete; showing saved data",
+    );
     // An unparseable date proves nothing about history.
     expect(view.successLabel).toBe("Last successful update unavailable");
     expect(view.attemptLabel).toBeNull();
@@ -126,15 +134,21 @@ describe("absent success timestamp wording", () => {
   it.each(["never_synced", "initial_partial", "degraded"])(
     "a state that proves no success (%s) says so plainly",
     (state) => {
-      expect(describeFundingFreshness({ source: "dibbs", state, lastSyncedAt: null }).successLabel)
-        .toBe("No successful update yet");
+      expect(
+        describeFundingFreshness({ source: "dibbs", state, lastSyncedAt: null })
+          .successLabel,
+      ).toBe("No successful update yet");
     },
   );
 
   it.each(["unavailable", "unknown", "not_enabled"])(
     "a state that says nothing about history (%s) never claims no success",
     (state) => {
-      const label = describeFundingFreshness({ source: "sbir_sttr", state, lastSyncedAt: null }).successLabel;
+      const label = describeFundingFreshness({
+        source: "sbir_sttr",
+        state,
+        lastSyncedAt: null,
+      }).successLabel;
       expect(label).toBe("Last successful update unavailable");
       expect(label).not.toContain("No successful");
     },

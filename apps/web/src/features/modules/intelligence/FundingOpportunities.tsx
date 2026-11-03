@@ -153,7 +153,7 @@ export function FundingOpportunities() {
                     >
                       <strong>{r.title}</strong>
                       <div className={styles.muted}>
-                        {r.agency} · {r.source}
+                        {r.agency} · {fundingSourceLabel(r.source)}
                       </div>
                     </button>
                   ),

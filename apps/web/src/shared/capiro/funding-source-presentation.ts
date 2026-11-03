@@ -36,7 +36,9 @@ export type FundingHealthState =
   | "not_enabled"
   | "unknown";
 
-export const FUNDING_STATE_LABELS: Readonly<Record<FundingHealthState, string>> = {
+export const FUNDING_STATE_LABELS: Readonly<
+  Record<FundingHealthState, string>
+> = {
   current: "Up to date",
   stale: "Update overdue",
   initial_partial: "Initial sync incomplete",
@@ -54,7 +56,9 @@ export function fundingSourceLabel(source: string | null | undefined): string {
   const known = FUNDING_SOURCE_LABELS[source];
   if (known) return known;
   const words = source.replaceAll("_", " ").trim();
-  return words ? words.charAt(0).toUpperCase() + words.slice(1) : "Unknown source";
+  return words
+    ? words.charAt(0).toUpperCase() + words.slice(1)
+    : "Unknown source";
 }
 
 /** A readable coverage state. Never returns the raw enum. */
@@ -78,7 +82,9 @@ const timestampFormat = new Intl.DateTimeFormat("en-US", {
  * Returning null (rather than throwing or printing "Invalid Date") lets each
  * caller choose its own honest wording.
  */
-export function formatFundingTimestamp(value: string | null | undefined): string | null {
+export function formatFundingTimestamp(
+  value: string | null | undefined,
+): string | null {
   if (!value) return null;
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) return null;
@@ -106,24 +112,33 @@ export interface FundingFreshnessPresentation {
 }
 
 /** States that PROVE no successful run has completed. */
-const PROVEN_NO_SUCCESS_STATES = new Set(["never_synced", "initial_partial", "degraded"]);
+const PROVEN_NO_SUCCESS_STATES = new Set([
+  "never_synced",
+  "initial_partial",
+  "degraded",
+]);
 
-export function describeFundingFreshness(facts: FundingFreshnessFacts): FundingFreshnessPresentation {
-  const success = formatFundingTimestamp(facts.lastSuccessAt ?? facts.lastSyncedAt ?? null);
+export function describeFundingFreshness(
+  facts: FundingFreshnessFacts,
+): FundingFreshnessPresentation {
+  const success = formatFundingTimestamp(
+    facts.lastSuccessAt ?? facts.lastSyncedAt ?? null,
+  );
   const attempt = formatFundingTimestamp(facts.latestAttemptAt ?? null);
   const successLabel = success
     ? `Last successful update ${success}`
     : PROVEN_NO_SUCCESS_STATES.has(facts.state)
       ? "No successful update yet"
-      // The state does not say whether a success ever happened, so the absence
-      // of a date is reported as unavailable rather than as a claim.
-      : "Last successful update unavailable";
+      : // The state does not say whether a success ever happened, so the absence
+        // of a date is reported as unavailable rather than as a claim.
+        "Last successful update unavailable";
   return {
     sourceLabel: fundingSourceLabel(facts.source),
     stateLabel: fundingStateLabel(facts.state),
     successLabel,
     // Only shown when it is a distinct, known time: repeating the success time
     // as an "attempt" would imply a second, separate event.
-    attemptLabel: attempt && attempt !== success ? `Latest attempt ${attempt}` : null,
+    attemptLabel:
+      attempt && attempt !== success ? `Latest attempt ${attempt}` : null,
   };
 }
