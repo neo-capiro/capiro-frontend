@@ -158,6 +158,8 @@ type Session = ComponentProps<typeof SessionComposer>["session"];
 
 function Harness() {
   const [selection, setSelection] = useState<ConversationSkillSelection>({});
+  /** The composer owns the panel's open state, so Escape closing it unmounts the picker exactly as it does in the product. */
+  const [toolsOpen, setToolsOpen] = useState(true);
   const [draft, setDraft] = useState("Summarise the hearing");
   const [client, setClient] = useState(scope.clientId);
   const [channel] = useState(createConversationComposer);
@@ -179,6 +181,10 @@ function Harness() {
           conversationId: scope.conversationId,
           runId: "synthetic-run",
         },
+        /** No run is live in this host: the composer's question/receipt readers see an idle snapshot. */
+        getSnapshot: () => ({ status: "ready" as const }),
+        /** No live run can produce an observation event here. */
+        subscribe: () => () => undefined,
       }) as unknown as MeriConversationPort,
     [client],
   );
@@ -215,8 +221,8 @@ function Harness() {
     <main style={{ padding: 24 }}>
       <h1>Synthetic native procedure composer</h1>
       <SessionComposer
-        toolsOpen
-        onToggleTools={() => undefined}
+        toolsOpen={toolsOpen}
+        onToggleTools={() => setToolsOpen((open) => !open)}
         channel={channel}
         session={session}
         scope="Synthetic client"

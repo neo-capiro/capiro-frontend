@@ -35,6 +35,11 @@ import styles from "../model-selection/model-selection.module.css";
  * read, a late answer for an older one is dropped, and a chosen procedure that the current catalog no
  * longer lists exactly — disabled, removed, or carrying a new version or digest — leaves the draft
  * instead of standing.
+ *
+ * A choice made here is staged in the panel until Apply to draft, the same before-Send boundary the
+ * Skill control uses. Staging changes nothing the composer will send: closing the panel, Escape and an
+ * ordinary Send all ignore a staged choice, and only a choice that is still listed when it is applied
+ * reaches the canonical receiver.
  */
 export function ProcedureSelectionPicker({
   tenantId,
@@ -58,6 +63,12 @@ export function ProcedureSelectionPicker({
   const api = useCapiro();
   const [retiredChoice, setRetiredChoice] = useState<string>();
   /**
+   * The choice the panel is holding but has not applied. "" is a staged "no procedure". Nothing here
+   * reaches the composer's selection, its chip or a sent request until Apply to draft.
+   */
+  const [stagedIdentity, setStagedIdentity] = useState<string>();
+  const [stagedNotice, setStagedNotice] = useState<string>();
+  /**
    * The read is issued once per account, tenant, client and session lifetime, and what it does when it
    * answers is decided against the selection that is current at that moment — so a refresh can never
    * race a choice the person has just made, and the read's identity never changes with the selection.
@@ -65,12 +76,13 @@ export function ProcedureSelectionPicker({
   const latest = useRef({
     selection,
     appliedIdentity: undefined as string | undefined,
+    stagedIdentity: undefined as string | undefined,
     onChange,
   });
   const applied = selection.procedure;
   const appliedIdentity = applied ? selectorIdentity(applied) : undefined;
   useEffect(() => {
-    latest.current = { selection, appliedIdentity, onChange };
+    latest.current = { selection, appliedIdentity, stagedIdentity, onChange };
   });
   const read = useCallback(
     async (signal: AbortSignal) => {
@@ -93,9 +105,23 @@ export function ProcedureSelectionPicker({
           );
         throw error;
       });
-      // A fresh catalog is the current owner: a chosen procedure it no longer lists exactly — disabled,
-      // removed, or carrying a new version or digest — leaves the draft, and the person is told why.
+      // A fresh catalog is the current owner of what may still be applied or staged.
       const current = latest.current;
+      // A staged choice it no longer lists exactly — disabled, removed, or a new version or digest — is
+      // dropped here instead of being applied later, and the person is told why.
+      if (
+        current.stagedIdentity &&
+        !catalog.entries.some(
+          (entry) =>
+            selectorIdentity(entry.selector) === current.stagedIdentity,
+        )
+      ) {
+        setStagedIdentity(undefined);
+        setStagedNotice(
+          "That procedure is no longer offered to this account, so it was not applied.",
+        );
+      }
+      // A chosen procedure it no longer lists exactly leaves the draft, and the person is told why.
       if (
         current.appliedIdentity &&
         !catalog.entries.some(
@@ -136,8 +162,27 @@ export function ProcedureSelectionPicker({
       report.current?.(appliedIdentity, appliedName);
   }, [appliedIdentity, appliedName]);
 
-  function choose(identity: string) {
+  /** Choosing stages the panel only: only what the current catalog offers can be staged. */
+  function stage(identity: string) {
     setRetiredChoice(undefined);
+    setStagedNotice(undefined);
+    if (identity === "") {
+      setStagedIdentity("");
+      return;
+    }
+    const entry = catalog?.entries.find(
+      (candidate) => selectorIdentity(candidate.selector) === identity,
+    );
+    if (entry) setStagedIdentity(identity);
+  }
+
+  /** Apply is the one point where a staged choice becomes the composer's selection. */
+  function apply() {
+    if (disabled || loading || stagedIdentity === undefined) return;
+    setRetiredChoice(undefined);
+    setStagedNotice(undefined);
+    const identity = stagedIdentity;
+    setStagedIdentity(undefined);
     if (identity === "") {
       onChange(withProcedureSelection(selection, undefined));
       return;
@@ -145,8 +190,13 @@ export function ProcedureSelectionPicker({
     const entry = catalog?.entries.find(
       (candidate) => selectorIdentity(candidate.selector) === identity,
     );
-    // Only what the current catalog actually offers can be selected.
-    if (entry) onChange(withProcedureSelection(selection, entry.selector));
+    if (!entry) {
+      setStagedNotice(
+        "That procedure is no longer offered to this account, so it was not applied.",
+      );
+      return;
+    }
+    onChange(withProcedureSelection(selection, entry.selector));
   }
 
   const chosen =
@@ -197,9 +247,9 @@ export function ProcedureSelectionPicker({
           <span>Procedure for the next message</span>
           <select
             className={styles.trigger}
-            value={appliedIdentity ?? ""}
+            value={stagedIdentity ?? appliedIdentity ?? ""}
             disabled={disabled || loading}
-            onChange={(event) => choose(event.target.value)}
+            onChange={(event) => stage(event.target.value)}
           >
             <option value="">No procedure — ordinary conversation</option>
             {builtins.length > 0 ? (
@@ -228,6 +278,26 @@ export function ProcedureSelectionPicker({
             ) : null}
           </select>
         </label>
+      ) : null}
+      {stagedIdentity !== undefined ? (
+        <p className={styles.help}>
+          Not applied yet. Press Apply to draft to use this choice.
+        </p>
+      ) : null}
+      {stagedNotice ? (
+        <p className={styles.help} role="alert">
+          {stagedNotice}
+        </p>
+      ) : null}
+      {catalog ? (
+        <button
+          className={styles.trigger}
+          type="button"
+          disabled={disabled || loading || stagedIdentity === undefined}
+          onClick={apply}
+        >
+          Apply to draft
+        </button>
       ) : null}
       {detail ? <p className={styles.help}>{detail}</p> : null}
       {retiredChoice ? (

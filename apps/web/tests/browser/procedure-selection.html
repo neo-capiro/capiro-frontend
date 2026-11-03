@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <title>Synthetic native procedure picker regression</title>
+    <script>
+      // The component stage runs the product tree without a bundler-time env, so the one build-time
+      // public value the mounted composer reads is supplied here as an ordinary empty public env.
+      window.process = { env: {} };
+    </script>
   </head>
   <body>
     <div id="root"></div>
