@@ -15,6 +15,7 @@ import { OnboardBoundaryProbe } from "./OnboardBoundaryProbe";
 import { RoutinesProbe } from "./RoutinesProbe";
 import { SelectedLifecycleProbe } from "./SelectedLifecycleProbe";
 import { ClientHandoffProbe } from "./ClientHandoffProbe";
+import { Vqa029HandoffProfile } from "./vqa029-handoff-profile";
 import { isOnboardPath } from "../../src/shared/session/onboard-route";
 import { RequireSession } from "../../src/shared/session/SessionContext";
 import { PortfolioIndex } from "../../src/features/portfolio/index/PortfolioIndex";
@@ -77,6 +78,14 @@ function RoutedApp() {
   // Dedicated synthetic harness mounts for the governed lifecycle and routine suites.
   // No production route uses these paths; "/" is otherwise only addressed by them.
   if (path === "/") return <SelectedLifecycleProbe />;
+  // The real client-profile producer on the root tab session, so its record survives the /meri
+  // navigation the dialog performs (VQA-029 reviewed-draft lifecycle).
+  if (path === "/__test/client-handoff")
+    return (
+      <div data-portfolio-root>
+        <Vqa029HandoffProfile />
+      </div>
+    );
   if (path === "/profile")
     return (
       <div data-portfolio-root>

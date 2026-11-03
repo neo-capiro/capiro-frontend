@@ -84,10 +84,12 @@ export function SessionComposer({
           onCheckAgain={question.retryable ? question.reconcile : undefined}
         />
       )}
-      {/* These two only synchronise an admitted handoff/revision selection into the draft owner. */}
+      {/* These two only synchronise an admitted handoff/revision selection into the draft owner.
+          They sit in one children list, so their keys must stay distinct: with an identical key
+          React re-mounted the pair on every composer render and left one more card in the dock. */}
       {session.ready && (
         <ClientHandoffDraft
-          key={JSON.stringify(session.ready.port.context)}
+          key={`handoff:${JSON.stringify(session.ready.port.context)}`}
           context={session.ready.port.context}
           draft={session.draft}
           onDraft={(text) => {
@@ -103,7 +105,7 @@ export function SessionComposer({
       )}
       {session.ready && (
         <DocumentRevisionDraft
-          key={JSON.stringify(session.ready.port.context)}
+          key={`revision:${JSON.stringify(session.ready.port.context)}`}
           context={session.ready.port.context}
           selection={session.skillSelection}
           disabled={controls.modelDisabled}
