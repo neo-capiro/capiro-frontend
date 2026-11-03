@@ -3,6 +3,7 @@ import { afterEach, expect, it, vi } from "vitest";
 import { receiveDocumentRequest } from "@capiro/meri-contracts/document-application";
 import { readDocumentConfig } from "../src/shared/meri-documents/config";
 import { proxyDocumentRequest } from "../src/shared/meri-documents/proxy";
+import { createDocumentProxyDiagnostics } from "../src/shared/meri-documents/proxy-diagnostics";
 import { POST as actionPost } from "../src/app/api/action-followthrough/[operation]/route";
 import { POST as documentPost } from "../src/app/api/documents/[operation]/route";
 
@@ -840,4 +841,179 @@ it("actual document route obtains capiro authentication but forwards only opaque
   );
   expect(getToken).toHaveBeenCalledOnce();
   expect(fetcher).toHaveBeenCalledOnce();
+});
+
+/** A document diagnostic the test can read, with no console noise and a fixed window. */
+const diagnosed = () => {
+  const lines: string[] = [];
+  const begin = createDocumentProxyDiagnostics({
+    write: (line) => lines.push(line),
+    now: () => 1_000,
+  });
+  const line = () =>
+    lines.length === 0
+      ? undefined
+      : (JSON.parse(lines[0]!) as Record<string, unknown>);
+  return { begin, lines, line };
+};
+const expectLocal = (
+  diagnostic: ReturnType<typeof diagnosed>,
+  response: Response,
+  expected: Record<string, unknown>,
+) => {
+  expect(response.status).toBe(expected.status);
+  expect(diagnostic.line()).toMatchObject({
+    event: "MERI_DOCUMENT_FE",
+    outcome: "local_response",
+    upstreamStatus: 0,
+    ...expected,
+  });
+};
+
+it("records the closed stage where this edge ended a refusal, without an identifier", async () => {
+  const route = diagnosed();
+  expectLocal(
+    route,
+    await proxyDocumentRequest(
+      request(),
+      "session",
+      config,
+      async () => "native-token",
+      vi.fn<typeof fetch>(),
+      route.begin,
+    ),
+    { stage: "request", status: 404 },
+  );
+  expect(route.line()).not.toHaveProperty("operation");
+
+  const origin = diagnosed();
+  expectLocal(
+    origin,
+    await proxyDocumentRequest(
+      boundRequest("https://foreign.test"),
+      "create",
+      boundConfig,
+      async () => "native-token",
+      vi.fn<typeof fetch>(),
+      origin.begin,
+    ),
+    { stage: "request", status: 400 },
+  );
+
+  const disabled = diagnosed();
+  expectLocal(
+    disabled,
+    await proxyDocumentRequest(
+      request(),
+      "create",
+      readDocumentConfig({
+        ...env,
+        MERI_DOCUMENT_WORKFLOW_ENABLED: "false",
+        MERI_ACTION_WORKFLOW_ENABLED: "true",
+      }),
+      async () => "native-token",
+      vi.fn<typeof fetch>(),
+      disabled.begin,
+    ),
+    { stage: "configuration", status: 503 },
+  );
+
+  const noToken = diagnosed();
+  expectLocal(
+    noToken,
+    await proxyDocumentRequest(
+      request(),
+      "create",
+      config,
+      async () => null,
+      vi.fn<typeof fetch>(),
+      noToken.begin,
+    ),
+    { stage: "session", status: 401, operation: "/api/documents/create" },
+  );
+
+  const noSession = diagnosed();
+  expectLocal(
+    noSession,
+    await proxyDocumentRequest(
+      request("create", { headers: { "X-Meri-Action-Session": "" } }),
+      "create",
+      config,
+      async () => "native-token",
+      vi.fn<typeof fetch>(),
+      noSession.begin,
+    ),
+    { stage: "session", status: 401 },
+  );
+});
+
+it("records a Meri answer as an upstream response, never as a local failure", async () => {
+  const body = JSON.stringify({
+    error: { code: "DOCUMENT_REFUSED", outcome: "READ_UNAVAILABLE" },
+  });
+  const diagnostic = diagnosed();
+  const response = await proxyDocumentRequest(
+    request("inspect"),
+    "inspect",
+    config,
+    async () => "native-token",
+    vi.fn<typeof fetch>(
+      async () =>
+        new Response(body, {
+          status: 502,
+          headers: { "Content-Type": "application/json" },
+        }),
+    ),
+    diagnostic.begin,
+  );
+  expect(response.status).toBe(502);
+  expect(await response.text()).toBe(body);
+  expect(diagnostic.line()).toMatchObject({
+    event: "MERI_DOCUMENT_FE",
+    operation: "/api/documents/inspect",
+    stage: "receive",
+    outcome: "upstream_response",
+    status: 502,
+    upstreamStatus: 502,
+  });
+});
+
+it("records an unanswered upstream without inventing an answer", async () => {
+  const diagnostic = diagnosed();
+  const response = await proxyDocumentRequest(
+    request("inspect"),
+    "inspect",
+    config,
+    async () => "native-token",
+    vi.fn<typeof fetch>(async () => {
+      throw new TypeError("synthetic network failure");
+    }),
+    diagnostic.begin,
+  );
+  expect(response.status).toBe(502);
+  expect(diagnostic.line()).toMatchObject({
+    stage: "fetch",
+    outcome: "failure",
+    status: 502,
+    upstreamStatus: 0,
+  });
+});
+
+it("a diagnostic writer failure cannot change a refusal or its disposition", async () => {
+  const begin = createDocumentProxyDiagnostics({
+    write: () => {
+      throw new Error("synthetic writer failure");
+    },
+  });
+  await unavailable(
+    await proxyDocumentRequest(
+      request(),
+      "create",
+      config,
+      async () => null,
+      vi.fn<typeof fetch>(),
+      begin,
+    ),
+    401,
+  );
 });
