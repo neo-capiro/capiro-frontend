@@ -16,12 +16,9 @@ import {
   withActionDeadline,
 } from "../meri-actions/bounded-json";
 import { receivedActionSession } from "../meri-actions/session-header";
+import { beginDocumentTransportDiagnostic } from "../meri-conversations/history-diagnostics";
 import { sameRequestOrigin } from "../request-origin";
 import type { readDocumentConfig } from "./config";
-import {
-  beginDocumentProxyDiagnostic,
-  type BeginDocumentProxyDiagnostic,
-} from "./proxy-diagnostics";
 
 const routes = new Set<string>([
   "create",
@@ -64,8 +61,8 @@ export async function proxyDocumentRequest(
   config: ReturnType<typeof readDocumentConfig>,
   getNativeToken: () => Promise<string | null>,
   fetcher: typeof fetch = fetch,
-  // Closed transport diagnostic only; a test or another edge may supply its own recorder.
-  beginDiagnostic: BeginDocumentProxyDiagnostic = beginDocumentProxyDiagnostic,
+  // Closed transport diagnostic only; a test may supply its own recorder.
+  beginDiagnostic = beginDocumentTransportDiagnostic,
 ) {
   const diagnostic = beginDiagnostic(
     routes.has(operation) ? `/api/documents/${operation}` : undefined,

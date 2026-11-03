@@ -3,7 +3,7 @@ import { afterEach, expect, it, vi } from "vitest";
 import { receiveDocumentRequest } from "@capiro/meri-contracts/document-application";
 import { readDocumentConfig } from "../src/shared/meri-documents/config";
 import { proxyDocumentRequest } from "../src/shared/meri-documents/proxy";
-import { createDocumentProxyDiagnostics } from "../src/shared/meri-documents/proxy-diagnostics";
+import { createHistoryTransportDiagnostics } from "../src/shared/meri-conversations/history-diagnostics";
 import { POST as actionPost } from "../src/app/api/action-followthrough/[operation]/route";
 import { POST as documentPost } from "../src/app/api/documents/[operation]/route";
 
@@ -846,7 +846,8 @@ it("actual document route obtains capiro authentication but forwards only opaque
 /** A document diagnostic the test can read, with no console noise and a fixed window. */
 const diagnosed = () => {
   const lines: string[] = [];
-  const begin = createDocumentProxyDiagnostics({
+  const begin = createHistoryTransportDiagnostics({
+    event: "MERI_DOCUMENT_FE",
     write: (line) => lines.push(line),
     now: () => 1_000,
   });
@@ -947,7 +948,7 @@ it("records the closed stage where this edge ended a refusal, without an identif
   );
 });
 
-it("records a Meri answer as an upstream response, never as a local failure", async () => {
+it("records a forwarded status as an upstream response, never as a local failure", async () => {
   const body = JSON.stringify({
     error: { code: "DOCUMENT_REFUSED", outcome: "READ_UNAVAILABLE" },
   });
@@ -1000,7 +1001,8 @@ it("records an unanswered upstream without inventing an answer", async () => {
 });
 
 it("a diagnostic writer failure cannot change a refusal or its disposition", async () => {
-  const begin = createDocumentProxyDiagnostics({
+  const begin = createHistoryTransportDiagnostics({
+    event: "MERI_DOCUMENT_FE",
     write: () => {
       throw new Error("synthetic writer failure");
     },

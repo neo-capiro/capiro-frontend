@@ -1,13 +1,18 @@
 import { describe, expect, it } from "vitest";
-import { createDocumentProxyDiagnostics } from "../src/shared/meri-documents/proxy-diagnostics";
+import { createHistoryTransportDiagnostics } from "../src/shared/meri-conversations/history-diagnostics";
 
-/** A closed line per attempt; nothing private, nothing that claims a cause. */
-const recorder = (now: () => number, limit = 20) => {
+/**
+ * The documents proxy reuses the canonical transport recorder; these cover only what the document
+ * caller adds (its closed route label) and the shared guarantees it depends on: one terminal line per
+ * attempt, the 20 + 1 cap, no private content, and writer/clock/trace fail-safety. Synthetic only.
+ */
+const documentEvent = "MERI_DOCUMENT_FE";
+const recorder = (now: () => number) => {
   const lines: string[] = [];
-  const begin = createDocumentProxyDiagnostics({
+  const begin = createHistoryTransportDiagnostics({
+    event: documentEvent,
     write: (line) => lines.push(line),
     now,
-    limit,
   });
   const attempt = (operation?: string) => {
     const from = lines.length;
@@ -24,14 +29,15 @@ const recorder = (now: () => number, limit = 20) => {
 };
 
 describe("document proxy transport diagnostic", () => {
-  it("writes one closed line for an answer this edge produced itself", () => {
+  it("records the document route and the stage this edge reached", () => {
     const { lines, attempt } = recorder(() => 1_000);
-    const { entry } = attempt("/api/documents/inspect");
+    const { entry, line } = attempt("/api/documents/inspect");
     entry.stage("session");
     entry.finish(401, "response");
     expect(lines).toHaveLength(1);
-    expect(JSON.parse(lines[0]!)).toEqual({
-      event: "MERI_DOCUMENT_FE",
+    expect(line()).toEqual({
+      event: documentEvent,
+      trace: expect.stringMatching(/^h1_[0-9a-f]{32}$/u),
       operation: "/api/documents/inspect",
       stage: "session",
       outcome: "local_response",
@@ -40,51 +46,67 @@ describe("document proxy transport diagnostic", () => {
     });
   });
 
-  it("names an upstream answer, a failure and the last stage reached", () => {
+  it("records a forwarded status without claiming the answer was admitted", () => {
     const { attempt } = recorder(() => 1_000);
-    const answered = attempt("/api/documents/inspect");
-    answered.entry.stage("fetch");
-    answered.entry.stage("receive");
-    answered.entry.received(502);
-    answered.entry.finish(502, "response");
-    expect(answered.line()).toMatchObject({
+    const forwarded = (status: number) => {
+      const { entry, line } = attempt("/api/documents/inspect");
+      entry.stage("receive");
+      entry.received(status);
+      entry.finish(status, "response");
+      return line();
+    };
+    // A canonical session refusal and malformed bytes with the same status are indistinguishable here:
+    // the proxy forwards bounded bytes and never parses the response DTO.
+    const refusal = forwarded(403);
+    const malformed = forwarded(403);
+    expect(refusal).toMatchObject({
       stage: "receive",
       outcome: "upstream_response",
-      status: 502,
-      upstreamStatus: 502,
+      status: 403,
+      upstreamStatus: 403,
     });
-    const failed = attempt("/api/documents/download");
-    failed.entry.stage("receive");
-    failed.entry.finish(502, "failure");
-    expect(failed.line()).toMatchObject({
-      stage: "receive",
+    expect({ ...malformed, trace: "same" }).toEqual({
+      ...refusal,
+      trace: "same",
+    });
+    const unanswered = attempt("/api/documents/download");
+    unanswered.entry.stage("fetch");
+    unanswered.entry.finish(502, "failure");
+    expect(unanswered.line()).toMatchObject({
+      stage: "fetch",
       outcome: "failure",
       status: 502,
       upstreamStatus: 0,
     });
   });
 
-  it("keeps only a closed public operation, never a selector, query or identifier", () => {
+  it("keeps only a closed public document route, never a selector or identifier", () => {
+    // The grammar is the shared recorder's; the documents caller narrows it further by passing a label
+    // only for its own admitted fixed routes (asserted through the proxy).
     const { attempt } = recorder(() => 1_000);
     for (const operation of [
       undefined,
       "",
       "/api/documents/",
       "/api/documents/Inspect",
-      "/api/documents/inspect?versionId=12345678-1234-4234-8234-123456789012",
+      "/api/documents/inspect?versionId=synthetic",
       "/api/documents/..%2Fcreate",
       `/api/documents/inspect/${"a".repeat(64)}`,
-      "12345678-1234-4234-8234-123456789012",
+      "synthetic-version-selector",
     ]) {
-      const { entry, line } = attempt(operation);
-      entry.finish(404, "response");
-      expect(line()).not.toHaveProperty("operation");
+      const refused = attempt(operation);
+      refused.entry.finish(404, "response");
+      expect(refused.line()).not.toHaveProperty("operation");
     }
-    const accepted = attempt("/api/documents/preview-publish");
-    accepted.entry.finish(200, "response");
-    expect(accepted.line()).toMatchObject({
-      operation: "/api/documents/preview-publish",
-    });
+    for (const operation of [
+      "/api/documents/inspect",
+      "/api/documents/preview-publish",
+      "/api/documents/federal-prepare",
+    ]) {
+      const accepted = attempt(operation);
+      accepted.entry.finish(200, "response");
+      expect(accepted.line()).toMatchObject({ operation });
+    }
   });
 
   it("ignores a stage outside the closed vocabulary and a status outside HTTP", () => {
@@ -103,9 +125,9 @@ describe("document proxy transport diagnostic", () => {
     expect(refused.line()).toBeUndefined();
   });
 
-  it("records one terminal line per attempt and bounds the lines per window", () => {
+  it("keeps one terminal line per attempt and the 20 + 1 cap with a minute reset", () => {
     let at = 1_000;
-    const { lines, attempt } = recorder(() => at, 1);
+    const { lines, attempt } = recorder(() => at);
     const first = attempt("/api/documents/inspect");
     first.entry.finish(401, "response");
     first.entry.finish(502, "failure");
@@ -117,18 +139,19 @@ describe("document proxy transport diagnostic", () => {
       stage: "request",
       outcome: "local_response",
     });
-    for (let index = 0; index < 2; index += 1)
+    for (let index = 0; index < 20; index += 1)
       attempt("/api/documents/inspect").entry.finish(401, "response");
-    expect(lines).toHaveLength(2);
-    expect(lines[1]).toBe("MERI_DOCUMENT_FE_SUPPRESSED");
+    expect(lines).toHaveLength(21);
+    expect(lines[20]).toBe("MERI_DOCUMENT_FE_SUPPRESSED");
     at += 60_000;
     attempt("/api/documents/inspect").entry.finish(401, "response");
-    expect(lines).toHaveLength(3);
-    expect(JSON.parse(lines[2]!)).toMatchObject({ status: 401 });
+    expect(lines).toHaveLength(22);
+    expect(JSON.parse(lines[21]!)).toMatchObject({ status: 401 });
   });
 
-  it("cannot throw into the transport when the writer or the clock fails", () => {
-    const throwing = createDocumentProxyDiagnostics({
+  it("cannot throw into the transport when the writer, clock or trace fails", () => {
+    const throwing = createHistoryTransportDiagnostics({
+      event: documentEvent,
       write: () => {
         throw new Error("synthetic writer failure");
       },
@@ -142,5 +165,12 @@ describe("document proxy transport diagnostic", () => {
       entry.received(403);
       entry.finish(403, "response");
     }).not.toThrow();
+    const untraceable = createHistoryTransportDiagnostics({
+      event: documentEvent,
+      newTrace: () => {
+        throw new Error("synthetic trace failure");
+      },
+    });
+    expect(untraceable("/api/documents/inspect")).toBeUndefined();
   });
 });
