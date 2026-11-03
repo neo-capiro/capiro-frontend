@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import type { DirectoryContact } from "../../../shared/capiro/operations/directory-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
@@ -14,6 +15,8 @@ import { ContactPreview } from "./ContactPreview";
 import { DirectoryPagination } from "./DirectoryPagination";
 import { MemberPhoto } from "./MemberPhoto";
 import { MemberProfile } from "./MemberProfile";
+import { StaffProfile } from "./StaffProfile";
+import type { StaffProfileRoute } from "./staff-profile-route";
 import styles from "./directory.module.css";
 
 const filterLabels = {
@@ -25,8 +28,10 @@ const filterLabels = {
 } as const;
 export function CongressionalContacts({
   favoritesOnly = false,
+  staffRoute,
 }: {
   favoritesOnly?: boolean;
+  staffRoute?: StaffProfileRoute;
 }) {
   const [filters, setFilters] = useState({
     q: "",
@@ -74,14 +79,30 @@ export function CongressionalContacts({
     setPage(1);
     setSelected(undefined);
   }
+  const staffProfile =
+    staffRoute?.id !== null && staffRoute?.id !== undefined ? (
+      <StaffProfile
+        key={staffRoute.id}
+        id={staffRoute.id}
+        onBack={staffRoute.back}
+        parentName={profile?.fullName}
+      />
+    ) : null;
   if (profile)
     return (
-      <MemberProfile
-        contact={profile}
-        onBack={() => setProfile(undefined)}
-        favorites={favorites}
-      />
+      <>
+        {staffProfile}
+        <div hidden={!!staffProfile}>
+          <MemberProfile
+            contact={profile}
+            onBack={() => setProfile(undefined)}
+            favorites={favorites}
+            staffHref={staffRoute?.href}
+          />
+        </div>
+      </>
     );
+  if (staffProfile) return staffProfile;
   const options = {
     chamber: data?.availableFilters.chambers || [],
     state: data?.availableFilters.states || [],
@@ -205,20 +226,33 @@ export function CongressionalContacts({
                         </button>
                       </div>
                       {expanded.has(c.id) &&
-                        c.staff.map((s) => (
-                          <div key={s.id} className={styles.staff}>
-                            <span>
-                              {s.fullName}
-                              <div className={styles.muted}>{s.title}</div>
-                            </span>
-                            <span className={styles.muted}>
-                              {s.officeLocation}
-                            </span>
-                            <span className={styles.muted}>
-                              {s.email || "Not provided"}
-                            </span>
-                          </div>
-                        ))}
+                        c.staff.map((s) => {
+                          const href = staffRoute?.href(s.id);
+                          return (
+                            <div key={s.id} className={styles.staff}>
+                              <span>
+                                {href ? (
+                                  <Link
+                                    className={styles.link}
+                                    href={href}
+                                    scroll={false}
+                                  >
+                                    {s.fullName}
+                                  </Link>
+                                ) : (
+                                  s.fullName
+                                )}
+                                <div className={styles.muted}>{s.title}</div>
+                              </span>
+                              <span className={styles.muted}>
+                                {s.officeLocation}
+                              </span>
+                              <span className={styles.muted}>
+                                {s.email || "Not provided"}
+                              </span>
+                            </div>
+                          );
+                        })}
                     </div>
                   ),
                 },

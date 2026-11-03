@@ -95,6 +95,32 @@ beforeEach(() => {
   driver.results = {};
 });
 
+it("groups dates, audience and creation above categories while preserving search and scope controls", () => {
+  const { tree, markup } = render();
+  const filters = find(
+    tree,
+    (props) => props["aria-label"] === "Outreach filters",
+  );
+  const controls = filters.children as ReactNode;
+  expect(
+    find(controls, (props) => props["aria-label"] === "From"),
+  ).toBeDefined();
+  expect(find(controls, (props) => props["aria-label"] === "To")).toBeDefined();
+  expect(
+    find(controls, (_props, type) => type === OutreachAudienceFilter),
+  ).toBeDefined();
+  const create = find(
+    controls,
+    (candidate) => candidate.onClick === props.onCreate,
+  );
+  (create.onClick as () => void)();
+  expect(props.onCreate).toHaveBeenCalled();
+  expect(markup.indexOf('aria-label="Outreach filters"')).toBeLessThan(
+    markup.indexOf('aria-label="Campaign categories"'),
+  );
+  expect(markup).toContain('aria-label="Search outreach"');
+});
+
 it("All preserves existing sources and omits the selector; Client and External send both canonical selectors", () => {
   render();
   expect(driver.calls.every((call) => !("direction" in call.input.query))).toBe(

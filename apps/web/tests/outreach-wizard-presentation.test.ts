@@ -52,6 +52,43 @@ function rail(tree: ReactNode) {
 }
 
 describe("existing workflow with an ordered rail and progress footer", () => {
+  it("keeps exit, back, save, progress and continuation in the Classic footer order", () => {
+    const onExit = vi.fn(),
+      onSave = vi.fn(),
+      onStep = vi.fn();
+    const footer = elements(frame({ onExit, onSave, onStep })).find(
+      (element) => element.type === "footer",
+    );
+    const controls = elements(footer).filter(
+      (element) => typeof element.props.onClick === "function",
+    );
+    expect(controls.map((element) => element.props.children)).toEqual([
+      "All outreach",
+      "Back",
+      "Save draft",
+      "Continue",
+    ]);
+    for (const control of controls) (control.props.onClick as () => void)();
+    expect(onExit).toHaveBeenCalledOnce();
+    expect(onSave).toHaveBeenCalledOnce();
+    expect(onStep.mock.calls).toEqual([[1], [3]]);
+  });
+  it("lets the send owner place its review action in the same footer, without a second continuation", () => {
+    const review = createElement("button", { disabled: true }, "Review send");
+    const markup = renderToStaticMarkup(
+      frame({
+        step: 7,
+        renderFinalStep: (footer) =>
+          createElement("div", null, "Saved message review", footer(review)),
+      }),
+    );
+    expect(markup.match(/<footer/g)).toHaveLength(1);
+    expect(markup).toContain("Review send");
+    expect(markup).not.toContain(">Continue<");
+    expect(markup.indexOf("Saved message review")).toBeLessThan(
+      markup.indexOf("<footer"),
+    );
+  });
   it("renders all seven steps and only one current step in an accessible named navigation", () => {
     const markup = renderToStaticMarkup(frame());
     expect(markup).toContain('aria-label="Outreach steps"');
@@ -133,6 +170,24 @@ describe("existing workflow with an ordered rail and progress footer", () => {
 });
 
 describe("Direction and template gallery preserve existing input contracts", () => {
+  it("starts from the introductory call to action without changing the campaign inputs", () => {
+    const onStart = vi.fn(),
+      update = vi.fn();
+    const tree = CampaignDirection({
+      state: newCampaign(),
+      update,
+      disabled: false,
+      clients: [],
+      onStart,
+    });
+    const start = elements(tree).find(
+      (element) => element.props.onClick === onStart,
+    );
+    expect(start?.props.disabled).toBe(false);
+    (start?.props.onClick as () => void)();
+    expect(onStart).toHaveBeenCalledOnce();
+    expect(update).not.toHaveBeenCalled();
+  });
   it("explains three recipient modes without promising automatic sending", () => {
     const markup = renderToStaticMarkup(
       createElement(CampaignDirection, {

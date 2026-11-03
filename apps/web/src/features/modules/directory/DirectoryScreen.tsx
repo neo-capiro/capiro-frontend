@@ -12,6 +12,7 @@ import { CongressionalContacts } from "./CongressionalContacts";
 import { PersonnelDirectory } from "./PersonnelDirectory";
 import { readPersonnelId } from "./personnel-selection";
 import { StateDirectory } from "./StateDirectory";
+import { staffProfileHref } from "./staff-profile-route";
 export function DirectoryScreen() {
   const params = useSearchParams();
   const pathname = usePathname();
@@ -26,6 +27,7 @@ export function DirectoryScreen() {
     const next = new URLSearchParams(params.toString());
     next.set("view", nextView);
     next.delete("personnelId");
+    next.delete("staffId");
     next.delete("personnelPreviewId");
     next.delete("committeeId");
     next.delete("jurisdiction");
@@ -55,7 +57,19 @@ export function DirectoryScreen() {
         </>
       )}
       {view === "congressional-staff" && (
-        <CongressionalContacts key={view} favoritesOnly={favorites} />
+        <CongressionalContacts
+          key={view}
+          favoritesOnly={favorites}
+          staffRoute={{
+            id: params.get("staffId"),
+            href: (id) => staffProfileHref(pathname, params.toString(), id),
+            back: () =>
+              router.push(
+                staffProfileHref(pathname, params.toString(), null)!,
+                { scroll: false },
+              ),
+          }}
+        />
       )}{" "}
       {view === "committee-staff" && <CommitteeDirectory />}
       {view === "department-of-war" && (

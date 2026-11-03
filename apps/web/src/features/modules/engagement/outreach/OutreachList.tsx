@@ -198,26 +198,86 @@ export function OutreachList({
       <PageHeader
         title="Outreach"
         description="Plan campaigns and review recorded outreach across your permitted clients."
-        actions={
-          <ActionButton primary onClick={onCreate}>
-            + New outreach
-          </ActionButton>
-        }
       />
-      <OutreachAudienceFilter
-        value={audience}
-        supported={capabilities.outreachAudienceVersion === 1}
-        onChange={(value) => {
-          setAudience(value);
-          setCursor(undefined);
-          setRecordCursor(undefined);
-          setSessionOffset(0);
-        }}
-      />
-      <p className={styles.hint}>
-        Audience applies to saved outreach records and canonical campaigns.
-        Counts show this loaded page, not population totals.
-      </p>
+      <section className={styles.filterCard} aria-label="Outreach filters">
+        <div className={styles.filters}>
+          <span className={styles.hint}>Date range</span>
+          <label className={styles.dateFilter}>
+            <span>From · {from || "Any date"}</span>
+            <input
+              type="date"
+              aria-label="From"
+              value={from}
+              onChange={(event) => {
+                setFrom(event.target.value);
+                setCursor(undefined);
+                setRecordCursor(undefined);
+              }}
+            />
+          </label>
+          <label className={styles.dateFilter}>
+            <span>To · {to || "Any date"}</span>
+            <input
+              type="date"
+              aria-label="To"
+              value={to}
+              onChange={(event) => {
+                setTo(event.target.value);
+                setCursor(undefined);
+                setRecordCursor(undefined);
+              }}
+            />
+          </label>
+          <label className={styles.deleted}>
+            <input
+              type="checkbox"
+              aria-label="Deleted only"
+              checked={deleted}
+              onChange={(event) => {
+                setDeleted(event.target.checked);
+                setCursor(undefined);
+                setRecordCursor(undefined);
+              }}
+            />
+            Deleted only
+          </label>
+          <div className={styles.filterActions}>
+            <OutreachAudienceFilter
+              value={audience}
+              supported={capabilities.outreachAudienceVersion === 1}
+              onChange={(value) => {
+                setAudience(value);
+                setCursor(undefined);
+                setRecordCursor(undefined);
+                setSessionOffset(0);
+              }}
+            />
+            <ActionButton primary onClick={onCreate}>
+              + New outreach
+            </ActionButton>
+          </div>
+        </div>
+        <div className={styles.filters}>
+          <TextInput
+            type="search"
+            aria-label="Search outreach"
+            placeholder="Search outreach records"
+            value={search}
+            maxLength={160}
+            onChange={(event) => {
+              setSearch(event.target.value);
+              setCursor(undefined);
+              setRecordCursor(undefined);
+              setSessionOffset(0);
+            }}
+          />
+          {scopeControl}
+        </div>
+        <p className={styles.hint}>
+          Audience applies to saved outreach records and canonical campaigns.
+          Counts show this loaded page, not population totals.
+        </p>
+      </section>
       <Tabs
         label="Campaign categories"
         value={category}
@@ -229,61 +289,6 @@ export function OutreachList({
           }),
         )}
       />
-      <div className={styles.filters}>
-        <TextInput
-          type="search"
-          aria-label="Search outreach"
-          placeholder="Search outreach records"
-          value={search}
-          maxLength={160}
-          onChange={(event) => {
-            setSearch(event.target.value);
-            setCursor(undefined);
-            setRecordCursor(undefined);
-            setSessionOffset(0);
-          }}
-        />
-        {scopeControl}
-        <label className={styles.dateFilter}>
-          <span>From · {from || "Any date"}</span>
-          <input
-            type="date"
-            aria-label="From"
-            value={from}
-            onChange={(event) => {
-              setFrom(event.target.value);
-              setCursor(undefined);
-              setRecordCursor(undefined);
-            }}
-          />
-        </label>
-        <label className={styles.dateFilter}>
-          <span>To · {to || "Any date"}</span>
-          <input
-            type="date"
-            aria-label="To"
-            value={to}
-            onChange={(event) => {
-              setTo(event.target.value);
-              setCursor(undefined);
-              setRecordCursor(undefined);
-            }}
-          />
-        </label>
-        <label className={styles.deleted}>
-          <input
-            type="checkbox"
-            aria-label="Deleted only"
-            checked={deleted}
-            onChange={(event) => {
-              setDeleted(event.target.checked);
-              setCursor(undefined);
-              setRecordCursor(undefined);
-            }}
-          />
-          Deleted only
-        </label>
-      </div>
       <StatusPanel
         loading={canonicalLoading}
         error={canonicalError}

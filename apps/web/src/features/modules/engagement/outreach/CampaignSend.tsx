@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import { sendingMailboxesSchema } from "../../../portfolio/relationships/public";
 import {
@@ -15,8 +15,10 @@ import { campaignUnits, savedEnvelope, sameEnvelope } from "./campaign-model";
 import styles from "./outreach-workflow.module.css";
 export function CampaignSend({
   owner,
+  renderFooter,
 }: {
   owner: ReturnType<typeof useOutreachCampaign>;
+  renderFooter?: (action?: ReactNode) => ReactNode;
 }) {
   const mailboxes = useCapiroQuery("engagement.newsletter.mailboxes", {});
   const parsed = sendingMailboxesSchema.safeParse(mailboxes.data);
@@ -58,265 +60,281 @@ export function CampaignSend({
     versions.every((row) => row.version?.sendable && row.matches);
   if (owner.pending === "send")
     return (
-      <Panel
-        title={owner.send?.testMode ? "Test delivery" : "Delivery status"}
-        description="This reads the existing request. Checking status never sends it again."
-      >
-        <div className={styles.fields}>
-          {!owner.send ? (
-            <p role="status">
-              The send outcome is not confirmed yet. No result does not prove it
-              did not start.
-            </p>
-          ) : (
-            <>
-              <Badge>{owner.send.status}</Badge>
-              {owner.send.testMode && (
-                <p>
-                  This test goes to your account email, without recipient
-                  Cc/Bcc.
-                </p>
-              )}
-              <p className={styles.hint}>
-                Sent means the mail provider accepted the message. It does not
-                confirm delivery to the recipient.
+      <>
+        <Panel
+          title={owner.send?.testMode ? "Test delivery" : "Delivery status"}
+          description="This reads the existing request. Checking status never sends it again."
+        >
+          <div className={styles.fields}>
+            {!owner.send ? (
+              <p role="status">
+                The send outcome is not confirmed yet. No result does not prove
+                it did not start.
               </p>
-              {owner.send.deliveries.map((row) => (
-                <div className={styles.selected} key={row.id}>
-                  <strong>
-                    {row.to.map((recipient) => recipient.email).join(", ")}
-                  </strong>
-                  <p>{row.subject}</p>
-                  <Badge>{row.status}</Badge>
-                  {row.status === "unknown" ? (
-                    <p>Awaiting confirmation. Do not resend this email.</p>
-                  ) : (
-                    row.errorMessage && <p>{row.errorMessage}</p>
-                  )}
-                  {!!row.cc.length && <p>Cc: {row.cc.join(", ")}</p>}
-                  {!!row.bcc.length && <p>Bcc: {row.bcc.join(", ")}</p>}
-                </div>
-              ))}
-            </>
-          )}
-          <div className={styles.actions}>
-            <ActionButton primary disabled={owner.busy} onClick={owner.refresh}>
-              Check status
-            </ActionButton>
-            {owner.send && (
-              <ActionButton
-                disabled={
-                  owner.busy ||
-                  !owner.send.deliveries.some((row) => row.status === "pending")
-                }
-                onClick={owner.cancelSend}
-              >
-                Cancel remaining
-              </ActionButton>
+            ) : (
+              <>
+                <Badge>{owner.send.status}</Badge>
+                {owner.send.testMode && (
+                  <p>
+                    This test goes to your account email, without recipient
+                    Cc/Bcc.
+                  </p>
+                )}
+                <p className={styles.hint}>
+                  Sent means the mail provider accepted the message. It does not
+                  confirm delivery to the recipient.
+                </p>
+                {owner.send.deliveries.map((row) => (
+                  <div className={styles.selected} key={row.id}>
+                    <strong>
+                      {row.to.map((recipient) => recipient.email).join(", ")}
+                    </strong>
+                    <p>{row.subject}</p>
+                    <Badge>{row.status}</Badge>
+                    {row.status === "unknown" ? (
+                      <p>Awaiting confirmation. Do not resend this email.</p>
+                    ) : (
+                      row.errorMessage && <p>{row.errorMessage}</p>
+                    )}
+                    {!!row.cc.length && <p>Cc: {row.cc.join(", ")}</p>}
+                    {!!row.bcc.length && <p>Bcc: {row.bcc.join(", ")}</p>}
+                  </div>
+                ))}
+              </>
             )}
-            {owner.send?.testMode &&
-              !owner.send.deliveries.some((row) =>
-                ["unknown", "sending", "pending"].includes(row.status),
-              ) && (
-                <ActionButton disabled={owner.busy} onClick={owner.finishTest}>
-                  Back to send review
+            <div className={styles.actions}>
+              <ActionButton
+                primary
+                disabled={owner.busy}
+                onClick={owner.refresh}
+              >
+                Check status
+              </ActionButton>
+              {owner.send && (
+                <ActionButton
+                  disabled={
+                    owner.busy ||
+                    !owner.send.deliveries.some(
+                      (row) => row.status === "pending",
+                    )
+                  }
+                  onClick={owner.cancelSend}
+                >
+                  Cancel remaining
                 </ActionButton>
               )}
+              {owner.send?.testMode &&
+                !owner.send.deliveries.some((row) =>
+                  ["unknown", "sending", "pending"].includes(row.status),
+                ) && (
+                  <ActionButton
+                    disabled={owner.busy}
+                    onClick={owner.finishTest}
+                  >
+                    Back to send review
+                  </ActionButton>
+                )}
+            </div>
           </div>
-        </div>
-      </Panel>
+        </Panel>
+        {renderFooter?.()}
+      </>
     );
+  const reviewAction = (
+    <ActionButton primary disabled={!eligible} onClick={() => setConfirm(true)}>
+      Review send
+    </ActionButton>
+  );
   return (
-    <div className={styles.grid}>
-      <Panel
-        title="Prepared messages"
-        description="Review the saved messages, sender and destinations. Sending uses these versions."
-      >
-        <div className={styles.fields}>
-          <Field label="Preview for" htmlFor="send-preview">
-            <SelectInput
-              id="send-preview"
-              value={current?.unit.key ?? ""}
-              options={versions.map((row) => ({
-                value: row.unit.key,
-                label: row.unit.name,
-              }))}
-              onValueChange={setPreview}
-            />
-          </Field>
-          {current && (
-            <>
-              <div className={styles.envelope}>
-                <p>
-                  <strong>To</strong>{" "}
-                  {current.unit.to.map((row) => row.email).join(", ")}
-                </p>
-                {!!current.unit.cc.length && (
+    <>
+      <div className={styles.grid}>
+        <Panel
+          title="Prepared messages"
+          description="Review the saved messages, sender and destinations. Sending uses these versions."
+        >
+          <div className={styles.fields}>
+            <Field label="Preview for" htmlFor="send-preview">
+              <SelectInput
+                id="send-preview"
+                value={current?.unit.key ?? ""}
+                options={versions.map((row) => ({
+                  value: row.unit.key,
+                  label: row.unit.name,
+                }))}
+                onValueChange={setPreview}
+              />
+            </Field>
+            {current && (
+              <>
+                <div className={styles.envelope}>
                   <p>
-                    <strong>Cc</strong> {current.unit.cc.join(", ")}
+                    <strong>To</strong>{" "}
+                    {current.unit.to.map((row) => row.email).join(", ")}
                   </p>
-                )}
-                {!!current.unit.bcc.length && (
-                  <p>
-                    <strong>Bcc</strong> {current.unit.bcc.join(", ")}
-                  </p>
-                )}
-              </div>
-              {current.version ? (
-                <>
-                  <h3 className={styles.subject}>{current.version.subject}</h3>
-                  <div className={styles.message}>{current.version.body}</div>
-                  <p className={styles.hint}>
-                    Saved version {current.version.version}
-                  </p>
-                  {!current.matches && (
-                    <p role="status">
-                      The saved destinations differ from your current
-                      selections. Remove and re-add the changed recipient, then
-                      generate a new draft before sending.
+                  {!!current.unit.cc.length && (
+                    <p>
+                      <strong>Cc</strong> {current.unit.cc.join(", ")}
                     </p>
                   )}
-                </>
-              ) : (
-                <p>No saved message for this recipient.</p>
-              )}
-            </>
-          )}
-        </div>
-      </Panel>
-      <Panel
-        title="Review and send"
-        description="Nothing is sent until you explicitly confirm."
-      >
-        <div className={styles.fields}>
-          <Field label="From" htmlFor="outreach-sender">
-            <SelectInput
-              id="outreach-sender"
-              disabled={owner.busy || !!owner.pending || mailboxes.loading}
-              value={owner.state.sender.connectionId ?? ""}
-              options={[
-                { value: "", label: "Select a connected mailbox" },
-                ...choices.map((row) => ({
-                  value: row.id,
-                  label: `${row.displayName ? row.displayName + " · " : ""}${row.accountEmail}`,
-                })),
-              ]}
-              onValueChange={(value) =>
-                owner.update({
-                  sender: {
-                    ...owner.state.sender,
-                    connectionId: value || null,
-                  },
-                })
-              }
-            />
-          </Field>
-          {mailboxes.error && (
-            <p role="alert">Sending mailboxes could not be loaded.</p>
-          )}
-          {!mailboxes.loading && !choices.length && (
-            <p role="status">
-              Connect an eligible sending mailbox in Settings before sending.
-            </p>
-          )}
-          <p className={styles.hint}>
-            Your saved email signature is included when it is enabled in your
-            account.
-          </p>
-          <p>
-            {versions.length} {versions.length === 1 ? "message" : "messages"} ·{" "}
-            {owner.state.attachmentIds.length} attachments
-          </p>
-          {owner.dirty && (
-            <p role="status">
-              Save your sender and campaign changes before sending.
-            </p>
-          )}
-          <ActionButton
-            primary
-            disabled={!testEligible}
-            onClick={() =>
-              selected &&
-              current &&
-              owner.sendDrafts(true, selected, current.unit.key)
-            }
-          >
-            Send test to my inbox
-          </ActionButton>
-          <p className={styles.hint}>
-            This sends a real test email to your account email address.
-          </p>
-          <ActionButton
-            primary
-            disabled={!eligible}
-            onClick={() => setConfirm(true)}
-          >
-            Review send
-          </ActionButton>
-        </div>
-        {confirm && (
-          <Modal
-            open
-            className={styles.confirmation}
-            onOpenChange={setConfirm}
-            title="Send this outreach?"
-            footer={
-              <>
-                <ActionButton
-                  disabled={owner.busy}
-                  onClick={() => setConfirm(false)}
-                >
-                  Cancel
-                </ActionButton>
-                <ActionButton
-                  primary
-                  disabled={!eligible}
-                  onClick={() => {
-                    setConfirm(false);
-                    if (selected) owner.sendDrafts(false, selected);
-                  }}
-                >
-                  Send {versions.length}{" "}
-                  {versions.length === 1 ? "message" : "messages"}
-                </ActionButton>
-              </>
-            }
-          >
-            <div className={styles.fields}>
-              <p className={styles.hint}>
-                This sends the reviewed saved copies to the destinations below.
-                Messages already accepted by the provider cannot be recalled
-                here.
-              </p>
-              <ConfirmationField
-                label="From"
-                value={selected?.accountEmail ?? ""}
-              />
-              {versions.map(({ unit }) => (
-                <div className={styles.fields} key={unit.key}>
-                  <ConfirmationField
-                    label={`${unit.name} · To`}
-                    value={unit.to.map((row) => row.email).join(", ")}
-                  />
-                  {!!unit.cc.length && (
-                    <ConfirmationField
-                      label={`${unit.name} · Cc`}
-                      value={unit.cc.join(", ")}
-                    />
-                  )}
-                  {!!unit.bcc.length && (
-                    <ConfirmationField
-                      label={`${unit.name} · Bcc`}
-                      value={unit.bcc.join(", ")}
-                    />
+                  {!!current.unit.bcc.length && (
+                    <p>
+                      <strong>Bcc</strong> {current.unit.bcc.join(", ")}
+                    </p>
                   )}
                 </div>
-              ))}
-            </div>
-          </Modal>
-        )}
-      </Panel>
-    </div>
+                {current.version ? (
+                  <>
+                    <h3 className={styles.subject}>
+                      {current.version.subject}
+                    </h3>
+                    <div className={styles.message}>{current.version.body}</div>
+                    <p className={styles.hint}>
+                      Saved version {current.version.version}
+                    </p>
+                    {!current.matches && (
+                      <p role="status">
+                        The saved destinations differ from your current
+                        selections. Remove and re-add the changed recipient,
+                        then generate a new draft before sending.
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <p>No saved message for this recipient.</p>
+                )}
+              </>
+            )}
+          </div>
+        </Panel>
+        <Panel
+          title="Review and send"
+          description="Nothing is sent until you explicitly confirm."
+        >
+          <div className={styles.fields}>
+            <Field label="From" htmlFor="outreach-sender">
+              <SelectInput
+                id="outreach-sender"
+                disabled={owner.busy || !!owner.pending || mailboxes.loading}
+                value={owner.state.sender.connectionId ?? ""}
+                options={[
+                  { value: "", label: "Select a connected mailbox" },
+                  ...choices.map((row) => ({
+                    value: row.id,
+                    label: `${row.displayName ? row.displayName + " · " : ""}${row.accountEmail}`,
+                  })),
+                ]}
+                onValueChange={(value) =>
+                  owner.update({
+                    sender: {
+                      ...owner.state.sender,
+                      connectionId: value || null,
+                    },
+                  })
+                }
+              />
+            </Field>
+            {mailboxes.error && (
+              <p role="alert">Sending mailboxes could not be loaded.</p>
+            )}
+            {!mailboxes.loading && !choices.length && (
+              <p role="status">
+                Connect an eligible sending mailbox in Settings before sending.
+              </p>
+            )}
+            <p className={styles.hint}>
+              Your saved email signature is included when it is enabled in your
+              account.
+            </p>
+            <p>
+              {versions.length} {versions.length === 1 ? "message" : "messages"}{" "}
+              · {owner.state.attachmentIds.length} attachments
+            </p>
+            {owner.dirty && (
+              <p role="status">
+                Save your sender and campaign changes before sending.
+              </p>
+            )}
+            <ActionButton
+              primary
+              disabled={!testEligible}
+              onClick={() =>
+                selected &&
+                current &&
+                owner.sendDrafts(true, selected, current.unit.key)
+              }
+            >
+              Send test to my inbox
+            </ActionButton>
+            <p className={styles.hint}>
+              This sends a real test email to your account email address.
+            </p>
+            {!renderFooter && reviewAction}
+          </div>
+          {confirm && (
+            <Modal
+              open
+              className={styles.confirmation}
+              onOpenChange={setConfirm}
+              title="Send this outreach?"
+              footer={
+                <>
+                  <ActionButton
+                    disabled={owner.busy}
+                    onClick={() => setConfirm(false)}
+                  >
+                    Cancel
+                  </ActionButton>
+                  <ActionButton
+                    primary
+                    disabled={!eligible}
+                    onClick={() => {
+                      setConfirm(false);
+                      if (selected) owner.sendDrafts(false, selected);
+                    }}
+                  >
+                    Send {versions.length}{" "}
+                    {versions.length === 1 ? "message" : "messages"}
+                  </ActionButton>
+                </>
+              }
+            >
+              <div className={styles.fields}>
+                <p className={styles.hint}>
+                  This sends the reviewed saved copies to the destinations
+                  below. Messages already accepted by the provider cannot be
+                  recalled here.
+                </p>
+                <ConfirmationField
+                  label="From"
+                  value={selected?.accountEmail ?? ""}
+                />
+                {versions.map(({ unit }) => (
+                  <div className={styles.fields} key={unit.key}>
+                    <ConfirmationField
+                      label={`${unit.name} · To`}
+                      value={unit.to.map((row) => row.email).join(", ")}
+                    />
+                    {!!unit.cc.length && (
+                      <ConfirmationField
+                        label={`${unit.name} · Cc`}
+                        value={unit.cc.join(", ")}
+                      />
+                    )}
+                    {!!unit.bcc.length && (
+                      <ConfirmationField
+                        label={`${unit.name} · Bcc`}
+                        value={unit.bcc.join(", ")}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Modal>
+          )}
+        </Panel>
+      </div>
+      {renderFooter?.(reviewAction)}
+    </>
   );
 }
 function ConfirmationField({ label, value }: { label: string; value: string }) {
