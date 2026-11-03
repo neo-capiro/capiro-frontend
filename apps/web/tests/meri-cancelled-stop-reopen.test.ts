@@ -27,6 +27,12 @@ import {
 } from "../test/browser/meri-conversation-fixtures";
 
 /**
+ * SSR/unit harness (NOT mounted proof): React effects are collected by a mock and invoked by hand,
+ * and every `renderToStaticMarkup` call builds fresh refs and state, so this file cannot observe a
+ * real commit/batching/lifecycle race. The genuine mounted composition - real React DOM, real
+ * client/journal/commands/RunStatus/production composerAvailability, including StrictMode - is
+ * apps/web/tests/browser/vqa028-stop-reopen.spec.ts. These cases pin the boundary rules in isolation.
+ *
  * VQA-028: a definitively cancelled run that is reopened must not keep asking the person to repeat
  * a Stop that has nothing left to stop. A stop record belongs to one exact run and ends with it;
  * only that run's admitted terminal state retires it, and only a receipt may say what Stop did.
@@ -187,16 +193,14 @@ function mount(options: {
         expect(["ready", "unavailable"]).toContain(port.getSnapshot().status),
       );
     },
-    /** Re-render the settled state and run the command boundaries again, never a re-read. */
+    /** Re-render the settled state and run the command boundary again; the read is not repeated. */
     async settle() {
       render();
-      // useLiveRun declares its mount read first and its command boundaries last (stop settlement,
-      // then accepted-request reconciliation); only those two run again against the settled state.
-      for (const effect of harness.effects.splice(0).slice(-2)) {
-        effect();
-        // One command at a time: the next boundary must not be dropped as a concurrent command.
-        await new Promise((resolve) => setTimeout(resolve, 25));
-      }
+      // One declaration order only: the command boundary is the last effect useLiveRun declares.
+      const queued = harness.effects.splice(0);
+      queued.at(-1)?.();
+      // Let the boundary's queued journal write land before the assertions read the record.
+      await new Promise((resolve) => setTimeout(resolve, 25));
     },
     stopCard(active: boolean) {
       render();

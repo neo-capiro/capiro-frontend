@@ -36,8 +36,7 @@ export function useLiveRun(
   const [statusRefresh, setStatusRefresh] = useState(0);
   const requested = useRef(0);
   const handled = useRef(0),
-    generation = useRef(0),
-    cancelSettled = useRef<MeriConversationPort | null>(null);
+    generation = useRef(0);
   const refreshGeneration = generation.current;
   const refreshRunStatus = () => {
     if (alive.current && generation.current === refreshGeneration)
@@ -91,36 +90,23 @@ export function useLiveRun(
     if (
       snapshot.status !== "ready" ||
       !snapshot.observation ||
-      !isTerminal(snapshot.observation.runState) ||
-      commands.intent.cancel !== "unknown" ||
-      commands.storageError ||
       commands.busy ||
-      cancelSettled.current === port
+      commands.error
     )
       return;
-    // One attempt per mounted port: a write that cannot land leaves its own storage error instead
-    // of scheduling another attempt, and a settled run needs no further command.
-    cancelSettled.current = port;
-    void commands.settleCancel();
-    // The exact bound run's admitted terminal state is the only evidence that retires a Stop.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    snapshot.status,
-    snapshot.observation?.runState,
-    commands.intent.cancel,
-    commands.storageError,
-    commands.busy,
-  ]);
-
-  useEffect(() => {
-    if (
-      acceptedRequest &&
-      snapshot.status === "ready" &&
-      snapshot.observation &&
+    // A settled run ends its unresolved stop record.
+    const settlesStop =
+      isTerminal(snapshot.observation.runState) &&
+      commands.intent.cancel === "unknown" &&
+      !commands.storageError;
+    // Positive history for a non-queued run also confirms the accepted request this read admitted.
+    const confirmsRequest =
+      !!acceptedRequest &&
       snapshot.observation.runState !== "queued" &&
-      !commands.busy &&
-      !commands.error
-    )
+      commands.intent.submit?.state === "unknown";
+    // One command does both, in that order: the single-command gate can never drop one of them, and
+    // neither waits on a later busy transition that React may batch away.
+    if (settlesStop || confirmsRequest)
       void commands.reconcile(acceptedRequest);
     // Reconcile only positive server history; never resend a restored command.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -128,6 +114,9 @@ export function useLiveRun(
     acceptedRequest,
     snapshot.status,
     snapshot.observation?.runState,
+    commands.intent.cancel,
+    commands.intent.submit?.state,
+    commands.storageError,
     commands.busy,
     commands.error,
   ]);

@@ -131,14 +131,17 @@ export function useRunCommands(
     );
   const recover = (stored: ConversationStoredRequest) =>
     send(() => recoverRequest(port, record, stored));
-  const reconcile = (stored: ConversationStoredRequest) => {
-    if (journal.read().submit?.state !== "unknown" || active.current) return;
-    return perform(() => reconcileStoredRequest(port, record, stored));
-  };
-  /** A settled run ends its stop record: admitted terminal history for this exact run, not a retry. */
-  const settleCancel = () =>
-    perform(async () => {
+  /**
+   * Confirms what one positive history read proved for this exact run, in one command: a settled
+   * run ends its unresolved stop record, and the request this read admitted is acknowledged. They
+   * are sequenced here, not in separate commands, so the single-command gate cannot drop either.
+   */
+  const reconcile = (stored?: ConversationStoredRequest) =>
+    perform(() => {
       reconcileStoredCancel(port, record);
+      return stored && journal.read().submit?.state === "unknown"
+        ? reconcileStoredRequest(port, record, stored)
+        : Promise.resolve();
     });
   /**
    * Control confirmed this run admitted no message, or the person discarded it: drop the retained one, here and in
@@ -173,7 +176,6 @@ export function useRunCommands(
     submitInitial,
     recover,
     reconcile,
-    settleCancel,
     release,
     cancel,
   };
