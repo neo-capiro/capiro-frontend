@@ -6671,29 +6671,29 @@
     "kind": "file",
     "symbol": "<module>",
     "line": 1,
-    "nonblank": 437,
-    "fingerprint": "4bc9e3f19e6a0b0218294d41a369d1b54216ad49060f3f9c4912ae2a76a15a77",
-    "reason": "reviewed-accept - the same single feature-local Files library surface, 437 nonblank, +7 over the recorded base body (430 at 657c9458, which is the reviewed 0b7636bd fingerprint). The whole delta is the narrow mount of the additive native-result surface: one import plus one NativeResultFiles element rendered as a sibling above LibraryPages inside the same already-reviewed ready branch, keyed `results:${state.lifetimeKey}` on the same session lifetime key and receiving the same host `state.port` (the accepted DocumentLibraryAccess) that LibraryPages already uses. No function body in this module changed: DocumentLibrary (d422e510...) and LibraryPage (1b8f2cad...) are byte-identical to their accepted records. The module still owns no transport, storage, session, model, run, approval or permission authority, and adds no second lifetime, request, cursor or error owner. The 437 lines remain one JSX module over the reviewed controller/session-lifetime/port owners; extracting the mount into another file would move one import and one element without removing any coupling.",
-    "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_075000_8b6a19)",
-    "reviewedOn": "2026-10-28"
+    "nonblank": 572,
+    "fingerprint": "239d9507a3233ab098e84110d99ca7aae70e78b82549e4f7a03bc1c5c0eb820b",
+    "reason": "Exact-source independent VQA011 review: the 572-line module composes one saved-file discovery and reading surface shared by Files and Workspace Office documents. Local views connect saved-context discovery, an existing SessionLifetimeController, scope selection and a DocumentLibraryController-backed page; transport, receiving, session credentials and authorization remain with their existing owners. The VQA011 delta adds a pure loaded/filtered/continuation notice classifier and consumer-specific wording, plus an export for a rendered regression. It introduces no second read, cursor, lifetime, generation, model or permission owner. These presentation decisions use the same already-admitted versions and Office split. Keeping the local composition together preserves its explicit port/phase/query handoffs; this bounded copy correction does not warrant a new abstraction. The unchanged LibraryConnection function retains its separate existing size-review status and is not waived by this module record.",
+    "reviewedBy": "Codex independent VQA011 reviewer (GPT-6 Astra Ultra); exact source 9784628129d0c08f7610e2ec3a2c7f76f9f8add4; vqa-011-independent-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/files/DocumentLibrary.tsx",
     "kind": "function",
     "symbol": "DocumentLibrary",
-    "fingerprint": "d422e510db9f0a4a5718e4a9baa17d457a14e4be66aab66da3d46fbeec6fdac6",
-    "reason": "One bounded discovery surface: saved-conversation paging state (rows/before/loaded/busy/problem), repeated-page refusal, explicit unavailable state, and origin selection whose rows are selectors only. It issues no authority and no run; the selected origin is handed to the connection host.",
-    "reviewedBy": "Hermes Agent source review 20261027_214341_2f2a4b",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "073d082e0379ddc3dba20595b7c510b72b3544c884e557e238dfc7e66864aac3",
+    "reason": "Exact-source independent VQA011 review: this 151-line function remains one saved-conversation discovery and origin-selection surface. It owns the bounded discovery rows/cursor/loading/refusal display and chooses an origin for the existing connection host; canonical listLibraryContexts/libraryOriginClient keep account and scope admission. The changed header explains the existing Files versus Office split only in Files mode, with a conditional Workspace direction. It does not start conversations, generate files or create authority. General/client behavior and failure clearing retain their current owners; extracting a paragraph would not separate an independent responsibility.",
+    "reviewedBy": "Codex independent VQA011 reviewer (GPT-6 Astra Ultra); exact source 9784628129d0c08f7610e2ec3a2c7f76f9f8add4; vqa-011-independent-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/files/DocumentLibrary.tsx",
     "kind": "function",
     "symbol": "LibraryPage",
-    "fingerprint": "1b8f2cad9e7bb506c56121e343d758ad859c0d9c8d33451aa0a623b0f820f789",
-    "reason": "Library/history renderer. It composes the bounded preview panel and the revision link behind the canonical head check (the public history receiver enforces versions[0] === headVersionId on the first page), so no client-selected base version, write grant or model choice is introduced; earlier versions stay inspect/download only. 144 nonblank lines are one render responsibility.",
-    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "eb3721d29d34bbe0d2de2eee0d1f1b26725525456feef74cfeedad46ea3e0fa2",
+    "reason": "Exact-source independent VQA011 review: this 108-line function is one library/history renderer over a borrowed DocumentLibraryAccess and the existing DocumentLibraryController. It subscribes to that controller, filters admitted versions for the consumer, presents empty/filtered/continuation/end/refusal states, and forwards existing selection/history actions. The new pure notice classification has no transport or permission logic; the corrected filtered-empty branch preserves Office-specific availability while Files explains excluded formats. Immutable-history, retry and selection owners are unchanged. Three mounted consumer cases and focused rendered regressions verify the mode distinction; the prior exact-base failure proof established the corrected regression. Splitting these adjacent render states would scatter one presentation decision rather than remove coupling.",
+    "reviewedBy": "Codex independent VQA011 reviewer (GPT-6 Astra Ultra); exact source 9784628129d0c08f7610e2ec3a2c7f76f9f8add4; vqa-011-independent-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
