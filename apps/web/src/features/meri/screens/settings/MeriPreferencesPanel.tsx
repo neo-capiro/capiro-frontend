@@ -1,5 +1,5 @@
 "use client";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { UserPreferencesHost } from "../../user-preferences/UserPreferencesHost";
 import { TenantModelSettings } from "../../tenant-settings/TenantModelSettings";
@@ -56,11 +56,23 @@ export function MeriPreferencesPanel({
     ? (requested as PreferencePageId)
     : "personal";
   const address = params.toString();
+  // This panel outlives the page switch, while the tab list that takes the selection does
+  // not: it is rendered by whichever page body is current. The request recorded here is
+  // what lets the re-rendered list put focus back on the tab the user selected.
+  const pendingTabFocusRef = useRef<string | null>(null);
+  useEffect(() => {
+    // Any committed page change ends the request: the new list either claimed it while it
+    // rendered, or the selection was superseded and nothing may take focus.
+    pendingTabFocusRef.current = null;
+  }, [page]);
   const chrome: SettingsChrome = {
     nav: pages.map((item) => ({ ...item, current: item.id === page })),
     select: (id) => {
       const next = pages.find((item) => item.id === id)?.id;
       if (!next) return;
+      // Selecting the page already on screen re-uses the mounted tab list, so it needs no
+      // focus request and must not leave one behind for a later page.
+      pendingTabFocusRef.current = next === page ? null : next;
       const query = new URLSearchParams(address);
       query.set("page", next);
       const target = `${pathname}?${query.toString()}`;
@@ -72,6 +84,7 @@ export function MeriPreferencesPanel({
       if (next === page) router.replace(target, { scroll: false });
       else router.push(target, { scroll: false });
     },
+    pendingTabFocusRef,
     embedded: true,
     notice: {
       title: "Meri preferences connection unavailable",

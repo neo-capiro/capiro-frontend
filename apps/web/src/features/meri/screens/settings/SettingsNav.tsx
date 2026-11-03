@@ -15,6 +15,7 @@ export function SettingsNav({ chrome }: { chrome: SettingsChrome }) {
           options={nav}
           value={nav.find((item) => item.current)?.id ?? ""}
           onChange={select}
+          focusRequestRef={chrome.pendingTabFocusRef}
         />
       </div>
     );

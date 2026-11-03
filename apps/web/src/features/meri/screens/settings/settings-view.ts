@@ -12,6 +12,13 @@ export type SettingsChrome = {
   nav: readonly SettingsNavItem[];
   /** Switches pages locally (tabs) instead of navigating between routes. */
   select?: ((id: string) => void) | undefined;
+  /**
+   * Tab the host's last selection has to move focus to once the next page has rendered.
+   * A page switch replaces the tab list, so the button that started the switch no longer
+   * exists in the tree that follows; the host keeps the request and the tab owner clears
+   * it when it renders that tab.
+   */
+  pendingTabFocusRef?: { current: string | null } | undefined;
   /** Hosted inside the Capiro Settings frame, which supplies the page title. */
   embedded?: boolean | undefined;
   notice: SettingsNotice;
