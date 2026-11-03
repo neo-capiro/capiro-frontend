@@ -34,8 +34,9 @@ const refused =
 const unsupported = "This file does not support a PDF preview.";
 /**
  * Each admitted reply code keeps its own meaning; only an unrecognised code is a bare failure.
- * The publication receipt admits every error code, while a preview read admits bytes only, so a
- * read refusal arrives here as PREVIEW_READ_UNAVAILABLE and is never quoted as a stored record.
+ * Both preview answers carry closed error codes: the publication receipt, and since the read
+ * refusal receiver a read that is not 200 bytes. An admitted absence or configuration refusal is
+ * therefore quoted as itself, and only an unadmitted answer reads as an uncompleted read.
  */
 const messages: Readonly<Record<string, string>> = {
   ARTIFACT_RENDERER_UNAVAILABLE:

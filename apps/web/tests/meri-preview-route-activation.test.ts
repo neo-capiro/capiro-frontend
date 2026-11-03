@@ -171,6 +171,38 @@ it("binds the preview conversation gate to the installed contract package", () =
   );
 });
 
+it("reads both the legacy eight-character and the immutable twelve-character vendored pin", () => {
+  const error = vi.spyOn(console, "error").mockImplementation(() => {});
+  try {
+    const digest = "c".repeat(12);
+    for (const commit of ["a".repeat(8), "a".repeat(12)])
+      expect(
+        vendoredContractsVersion(
+          `file:../../vendor/capiro-meri-contracts-0.1.53-${commit}-${digest}.tgz`,
+        ),
+      ).toBe("0.1.53");
+    // Every other component length, upper-case hex, a short digest and a foreign path stay closed.
+    for (const pin of [
+      `file:../../vendor/capiro-meri-contracts-0.1.53-${"a".repeat(7)}-${digest}.tgz`,
+      `file:../../vendor/capiro-meri-contracts-0.1.53-${"a".repeat(9)}-${digest}.tgz`,
+      `file:../../vendor/capiro-meri-contracts-0.1.53-${"a".repeat(11)}-${digest}.tgz`,
+      `file:../../vendor/capiro-meri-contracts-0.1.53-${"a".repeat(13)}-${digest}.tgz`,
+      `file:../../vendor/capiro-meri-contracts-0.1.53-${"A".repeat(12)}-${digest}.tgz`,
+      `file:../../vendor/capiro-meri-contracts-0.1.53-${"a".repeat(12)}-${"c".repeat(11)}.tgz`,
+      `file:../vendor/capiro-meri-contracts-0.1.53-${"a".repeat(12)}-${digest}.tgz`,
+    ])
+      expect(vendoredContractsVersion(pin)).toBeUndefined();
+    // The shipped pin is content-addressed and resolves through the real gate to a version.
+    const shipped = packageJson.dependencies["@capiro/meri-contracts"] ?? "";
+    expect(shipped).toMatch(
+      /\/vendor\/capiro-meri-contracts-\d+\.\d+\.\d+-[0-9a-f]{8}(?:[0-9a-f]{4})?-[0-9a-f]{12}\.tgz$/,
+    );
+    expect(previewMeriContractsPackageVersion).toBe("0.1.53");
+  } finally {
+    error.mockRestore();
+  }
+});
+
 it("keeps the preview conversation gate closed on an unexpected contracts pin instead of throwing", async () => {
   const error = vi.spyOn(console, "error").mockImplementation(() => {});
   try {
