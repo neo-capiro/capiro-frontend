@@ -78,6 +78,10 @@ vi.mock("../src/shared/meri-conversations/useManagedConversations", () => ({
     },
     scope: { tenantId: "synthetic-tenant", actorId: "synthetic-actor" },
     current: false,
+    // No admitted page in this fixture: nothing to retain and nothing to show.
+    retained: false,
+    shown: false,
+    summaries: [],
   }),
 }));
 vi.mock("../src/shared/portfolio/api/clients", () => ({

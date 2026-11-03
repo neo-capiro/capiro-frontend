@@ -140,7 +140,8 @@ export function ConversationHistoryList({
     return () => window.removeEventListener("hashchange", focusSearch);
   }, []);
   const status = STATUS_FILTER[statusKey];
-  const { query, scope, current } = useManagedConversations(title, status);
+  const { query, scope, current, retained, shown, summaries } =
+    useManagedConversations(title, status);
   const roster = useClients({
     enabled: Boolean(scope),
     scope: scope
@@ -157,12 +158,8 @@ export function ConversationHistoryList({
     (initialClient && initialClient !== GENERAL_CLIENT_FILTER
       ? (names.get(initialClient) ?? "")
       : "");
-  // Keep local row state during revalidation, but hide it until the read is current.
-  // A failed read or account replacement removes the rows and their private state.
-  const summaries =
-    scope && !query.error
-      ? (query.data?.pages.flatMap((page) => page.conversations) ?? [])
-      : [];
+  // Admitted rows belong to the read that returned them: a page fetch or a timed-out next page
+  // keeps them, and every other failure or replacement removes them with their private state.
   const rows = historyRows(summaries, (id) => names.get(id) ?? "Client");
   const visible = client ? rows.filter((row) => row.client === client) : rows;
   const clientOptions = [
@@ -234,7 +231,7 @@ export function ConversationHistoryList({
         <p role="status">Verify your account to load your chats.</p>
       ) : query.isFetching && !query.data ? (
         <p role="status">Loading your chats…</p>
-      ) : query.error ? (
+      ) : query.error && !retained ? (
         <div role="alert" className={ui.row}>
           <p>{titleReadFailure(query.error)}</p>
           <button
@@ -274,6 +271,24 @@ export function ConversationHistoryList({
           </StateMessage>
         )
       ) : null}
+      {retained && (
+        // The rows already admitted stay; only the next page failed, and only the next page is
+        // asked for again. This is a manual continuation, never a re-read of the whole list.
+        <div role="status" className={ui.row}>
+          <p>
+            Part of your saved chat titles could not be loaded. The
+            conversations already listed are unchanged.
+          </p>
+          <button
+            type="button"
+            className={ui.outline}
+            disabled={query.isFetching}
+            onClick={() => void query.fetchNextPage()}
+          >
+            Try the next page again
+          </button>
+        </div>
+      )}
       {status === "trashed" && (
         <p className={ui.muted}>
           Restore within 30 days. After that, deletion follows the workspace
@@ -282,7 +297,9 @@ export function ConversationHistoryList({
       )}
       {scope && visible.length > 0 && (
         // The attribute wins over no class: a layout class here would override hidden.
-        <div hidden={!current}>
+        // Display currency only: a page fetch or a retained page failure keeps admitted rows on
+        // screen, while a revalidation still hides them until the read is current again.
+        <div hidden={!shown}>
           <section aria-label="Conversation history">
             <DataTable
               caption="Conversations"
@@ -302,7 +319,7 @@ export function ConversationHistoryList({
               refresh={() => void query.refetch()}
             />
           )}
-          {query.hasNextPage && (
+          {!retained && query.hasNextPage && (
             <button
               type="button"
               className={ui.outline}
