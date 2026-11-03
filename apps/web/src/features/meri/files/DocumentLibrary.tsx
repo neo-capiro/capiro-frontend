@@ -460,7 +460,8 @@ function LibraryPages({
   );
 }
 
-function LibraryPage({
+/** The results page both library consumers share; exported so a consumer regression can mount it. */
+export function LibraryPage({
   port,
   query,
   officeOpen,
@@ -529,8 +530,14 @@ function LibraryPage({
       )}
       {notice === "empty-filtered" && (
         <p role="status">
-          No PDF or other non-Office file is currently available in this scope.{" "}
-          {OFFICE_POINTER}
+          {office ? (
+            "No Office document is currently available in this scope."
+          ) : (
+            <>
+              No PDF or other non-Office file is currently available in this
+              scope. {OFFICE_POINTER}
+            </>
+          )}
         </p>
       )}
       {notice === "page-empty" && (
