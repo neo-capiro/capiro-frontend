@@ -1,5 +1,8 @@
 .workflow {
   display: grid;
+  /* The form must not widen its own column: its contents' intrinsic width is larger than
+     the column at tablet widths, and an auto track would grow to it and overlap the next. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 .workflow > button {
@@ -48,6 +51,10 @@
   border-radius: 6px;
   color: inherit;
   background: transparent;
+  /* A native select is as wide as its longest option, so the fieldset's intrinsic width must
+     not be allowed to widen these controls past the panel. */
+  width: 100%;
+  min-width: 0;
   max-width: 100%;
 }
 .panel p {
