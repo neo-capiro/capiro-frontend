@@ -1,6 +1,6 @@
 "use client";
-import { useState, type ReactNode } from "react";
-import { useSearchParams } from "next/navigation";
+import type { ReactNode } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { UserPreferencesHost } from "../../user-preferences/UserPreferencesHost";
 import { TenantModelSettings } from "../../tenant-settings/TenantModelSettings";
 import { ConnectorAccountsHost } from "./ConnectorAccountsHost";
@@ -44,18 +44,26 @@ export function MeriPreferencesPanel({
   reportContent?: ReactNode;
 }) {
   const params = useSearchParams();
-  // The OAuth callback returns to `/settings/meri-preferences?page=connected-services` (Core's
-  // CLIO_MCP_OAUTH_SUCCESS_REDIRECT). Only a known page id is honoured, so a stray value cannot
-  // select anything the panel does not own.
+  const pathname = usePathname();
+  const router = useRouter();
+  // The address owns the selection. The OAuth callback returns to
+  // `/settings/preferences?page=connected-services` (Core's
+  // CLIO_MCP_OAUTH_SUCCESS_REDIRECT), and reload, direct links, in-page links and
+  // back/forward all have to show the page the URL names. Only a known page id is
+  // honoured, so a stray value cannot select anything the panel does not own.
   const requested = params.get("page");
-  const [page, setPage] = useState<PreferencePageId>(() =>
-    pages.some((item) => item.id === requested)
-      ? (requested as PreferencePageId)
-      : "personal",
-  );
+  const page: PreferencePageId = pages.some((item) => item.id === requested)
+    ? (requested as PreferencePageId)
+    : "personal";
   const chrome: SettingsChrome = {
     nav: pages.map((item) => ({ ...item, current: item.id === page })),
-    select: (id) => setPage(pages.find((item) => item.id === id)?.id ?? page),
+    select: (id) => {
+      const next = pages.find((item) => item.id === id)?.id;
+      if (!next || next === page) return;
+      const query = new URLSearchParams(params.toString());
+      query.set("page", next);
+      router.push(`${pathname}?${query.toString()}`, { scroll: false });
+    },
     embedded: true,
     notice: {
       title: "Meri preferences connection unavailable",
