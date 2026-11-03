@@ -301,6 +301,13 @@ export function useConversationSession(
     setDraft: local.setDraft,
     skillSelection,
     setSkillSelection: local.setSkillSelection,
+    /**
+     * The applied procedure's catalog name for this draft and lifetime, and the way a picker reports
+     * one. Presentation only: the selector stays the whole identity in the selection, journal and
+     * request.
+     */
+    procedureLabel: local.procedureLabel,
+    rememberProcedureName: local.rememberProcedureName,
     modelCatalog,
     modelSelection: local.modelSelection,
     setModelSelection: local.setModelSelection,

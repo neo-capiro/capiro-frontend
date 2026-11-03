@@ -42,12 +42,18 @@ export function ProcedureSelectionPicker({
   selection,
   disabled,
   onChange,
+  onProcedureName,
 }: {
   tenantId: string;
   lifetime: string;
   selection: ConversationSkillSelection;
   disabled: boolean;
   onChange: (selection: ConversationSkillSelection) => void;
+  /**
+   * Reports the accepted catalog's own name for the applied procedure, keyed to its exact selector,
+   * so the composer chip can show that name. Presentation only: the selection itself is unchanged.
+   */
+  onProcedureName?: (identity: string, name: string) => void;
 }) {
   const api = useCapiro();
   const [retiredChoice, setRetiredChoice] = useState<string>();
@@ -113,6 +119,22 @@ export function ProcedureSelectionPicker({
   const appliedEntry = catalog?.entries.find(
     (entry) => selectorIdentity(entry.selector) === appliedIdentity,
   );
+  /**
+   * The catalog is the only source of a procedure's name, so the name it gives for exactly the
+   * applied selector is reported to the owner of the chip that shows it. Presentation only: the
+   * selector, its identity and the sent request are untouched.
+   */
+  const appliedName = appliedEntry
+    ? procedureName(appliedEntry.selector, appliedEntry.display.label)
+    : undefined;
+  const report = useRef(onProcedureName);
+  useEffect(() => {
+    report.current = onProcedureName;
+  });
+  useEffect(() => {
+    if (appliedIdentity && appliedName)
+      report.current?.(appliedIdentity, appliedName);
+  }, [appliedIdentity, appliedName]);
 
   function choose(identity: string) {
     setRetiredChoice(undefined);
@@ -127,11 +149,9 @@ export function ProcedureSelectionPicker({
     if (entry) onChange(withProcedureSelection(selection, entry.selector));
   }
 
-  const chosen = appliedEntry
-    ? procedureName(appliedEntry.selector, appliedEntry.display.label)
-    : applied
-      ? `${procedureName(applied)} (not listed now)`
-      : "No procedure";
+  const chosen =
+    appliedName ??
+    (applied ? `${procedureName(applied)} (not listed now)` : "No procedure");
   const problem = error
     ? error === "PROCEDURE_CATALOG_FOREIGN_TENANT"
       ? "This catalog came back for a different tenant, so nothing is listed."

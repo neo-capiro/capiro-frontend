@@ -19,6 +19,7 @@ import type {
   ConversationDraftRequest,
   ConversationSkillSelection,
 } from "../../../shared/meri-conversations/query-journal";
+import { currentProcedureLabel } from "./procedure-presentation";
 
 function draftOwner(scope: TabScope | undefined, accessLost: boolean) {
   if (accessLost) {
@@ -107,6 +108,46 @@ function useDraftState(
   return { owner, edit };
 }
 
+/**
+ * Presentation only, never part of the draft or the request: the name the current catalog reported
+ * for one exact procedure selector. It belongs to the draft owner that was current when it was
+ * reported, so a scope or lifetime change drops it, and it is only read while the applied selection
+ * is still that same selector.
+ */
+function useProcedureName(
+  owner: ReturnType<typeof createInitialDraftOwner>,
+  accessLost: boolean,
+  selection: ConversationSkillSelection | undefined,
+) {
+  const [reported, setReported] = useState<{
+    owner: typeof owner;
+    identity: string;
+    text: string;
+  }>();
+  const rememberProcedureName = useCallback(
+    (identity: string, text: string) => {
+      if (accessLost) return;
+      setReported((current) =>
+        current?.owner === owner &&
+        current.identity === identity &&
+        current.text === text
+          ? current
+          : { owner, identity, text },
+      );
+    },
+    [owner, accessLost],
+  );
+  return {
+    procedureLabel:
+      !accessLost &&
+      reported?.owner === owner &&
+      selection?.procedure !== undefined
+        ? currentProcedureLabel(selection.procedure, reported)
+        : undefined,
+    rememberProcedureName,
+  };
+}
+
 /** Raw text and rendered turns share the exact selected conversation's access lifetime. */
 export function useConversationLocalState(
   context: ConversationContext | undefined,
@@ -131,11 +172,16 @@ export function useConversationLocalState(
     },
     [owner],
   );
+  const selection = accessLost ? undefined : owner.selection();
+  const procedure = useProcedureName(owner, accessLost, selection);
   return {
     draft: accessLost ? "" : owner.draft(),
     turns: accessLost ? [] : turns,
     setDraft: edit,
-    skillSelection: accessLost ? undefined : owner.selection(),
+    skillSelection: selection,
+    /** The applied procedure's catalog name for this draft and lifetime. Presentation only. */
+    procedureLabel: procedure.procedureLabel,
+    rememberProcedureName: procedure.rememberProcedureName,
     setSkillSelection: (value: ConversationSkillSelection) => {
       if (accessLost) return;
       try {

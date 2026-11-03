@@ -1,4 +1,7 @@
-import type { ProcedureSelector } from "../../../shared/capiro/operations/meri-procedures";
+import {
+  selectorIdentity,
+  type ProcedureSelector,
+} from "../../../shared/capiro/operations/meri-procedures";
 
 type BuiltinProcedureId = Extract<
   ProcedureSelector,
@@ -41,16 +44,45 @@ const listWords = (values: readonly string[]) =>
     : `${values.slice(0, -1).join(", ")} and ${values.at(-1)!}`;
 
 /**
- * The readable name of one procedure: our own name for a built-in, and Core's own label for a firm
- * procedure. A firm procedure with no label is named by what it is, never by its record id.
+ * A label that is only a machine token rather than a name: lower-case words joined by separators, or
+ * the same words spelled as the raw id ("Bill analysis", "BILL ANALYSIS", "bill.analysis").
+ */
+const machineName = /^[a-z0-9]+(?:[_.:-][a-z0-9]+)*$/;
+const asId = (value: string) => value.toLowerCase().replace(/[\s_.:-]+/g, "_");
+
+/**
+ * The readable name of one procedure.
+ *
+ * A firm procedure keeps Core's own label, which is the firm's name for it, and never falls back to
+ * its record id. A built-in keeps Core's label as well whenever that label is a real name rather than
+ * the raw identifier — "Executive briefing" survives, while briefing, bill_analysis and BILL_ANALYSIS
+ * all read as the raw id and fall back to the product's own name. A label is presentation only: no
+ * selector, eligibility or authority is ever derived from it.
  */
 export function procedureName(
   selector: ProcedureSelector,
   label?: string | null,
 ): string {
-  if (selector.source === "builtin")
-    return builtinNames[selector.id] ?? words(selector.id);
-  return label?.trim() || "Your firm procedure";
+  const stated = label?.trim();
+  if (selector.source === "firm") return stated || "Your firm procedure";
+  if (stated && !machineName.test(stated) && asId(stated) !== selector.id)
+    return stated;
+  return builtinNames[selector.id] ?? words(selector.id);
+}
+
+/**
+ * The name to show for an applied procedure: the name the current catalog reported, but only while
+ * it belongs to exactly this selector — same source, id or record id, version and digest. A refreshed
+ * catalog that changed any of those cannot leave an old name standing, and the caller falls back to
+ * the readable name the selector itself carries.
+ */
+export function currentProcedureLabel(
+  selector: ProcedureSelector,
+  reported?: { readonly identity: string; readonly text: string },
+): string | undefined {
+  return reported && selectorIdentity(selector) === reported.identity
+    ? reported.text
+    : undefined;
 }
 
 /** The option text: the readable name, plus Core's scopes when it states any. */
