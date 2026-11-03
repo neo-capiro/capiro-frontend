@@ -6139,9 +6139,11 @@
     "file": "apps/web/src/features/meri/conversations/ConversationHistoryList.tsx",
     "kind": "function",
     "symbol": "ConversationHistoryList",
-    "fingerprint": "32b0d51bf1d1074c8872332c5a5529c786e91be644910dab31af4279f17eb031",
-    "reason": "Exact-source independent VQA005 review: this 198-line function composes one conversation-history list surface (filters, selection, current-read presentation and paging). The changed error paragraph calls the narrow local titleReadFailure presenter, which reuses the existing shared accessDenied predicate without duplicating authority or transport policy. Queries, identity, receiving, revocation and management commands retain their canonical owners; no new lifecycle or unrelated responsibility is introduced. Splitting this render-only change would not separate a distinct responsibility. Focused local tests and synthetic mounted denial, recovery, paging and session-replacement assertions preserve the lifecycle boundaries.",
-    "reviewedBy": "Codex independent VQA005 reviewer (GPT-6 Astra Ultra); exact source bc8e77ef4fa1dc32160b9c3fe37a78138837d4d0; vqa-005-independent-review.json",
+    "line": 114,
+    "nonblank": 215,
+    "fingerprint": "2dac76038ae1aecbe15d5558dfe82d40350f0dfd5a587c113b4d57338d9f438d",
+    "reason": "Independent exact-head VQA005 pagination review at cbd53c06df11fae0b3b3a8e00f2e780fbde06183. This 215-nonblank-line function composes one conversation-history surface: filters, selection, current-read presentation and explicit pagination. The new retained continuation message and display flag reuse the existing infinite query; only an admitted 408 DEADLINE next-page error retains rows. The unchanged strict current-read flag still governs mutation/export availability. Identity, typed receiving, cache disposal, management journals and transport remain with their existing canonical owners; no second row store, automatic page retry or authorization layer is added. Keeping these presentation branches together makes display versus write currency inspectable; splitting solely for size would scatter one list lifecycle. Independent qualified Linux evidence: 33 focused tests and 14 real mounted React/Query/contract lifecycle cases, then all 3 existing lifecycle cases on this test-only successor. The corrected existing test requires visible retained rows and disabled actions while preserving full-revalidation hiding and draft/disclosure/access/session assertions. B010 actual HTTP/code/cause remain unknown; no live or 502/503 prevention claim.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; vqa-005-pagination-independent-final-review.json",
     "reviewedOn": "2026-11-03"
   },
   {
