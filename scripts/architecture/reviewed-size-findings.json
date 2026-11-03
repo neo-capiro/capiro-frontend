@@ -2374,10 +2374,10 @@
     "file": "apps/web/src/shared/portfolio/api/proxy.ts",
     "kind": "function",
     "symbol": "proxyRequest",
-    "fingerprint": "3d6fcd87f69a07c05c0d0f40ab995e55a1ca71e3ef995516e2151db1d98687e5",
-    "reason": "Exact-body cohesion review, 2026-11-01: remains the single canonical Portfolio request boundary, with ordered service/path and endpoint admission, release-version/selected-owner/query checks before credentials, existing origin/session checks, one bounded upstream forward and masked no-store response handling. New health/material/coverage checks are narrow static route/configuration admission within that lifecycle; metric algorithms, data authorization, DTO receiving and persistence stay with existing owners. Existing refusal and session-authentication helpers are reused. At 215 nonblank body lines the conditional growth warrants explicit review, but no independent domain workflow or second proxy is introduced; precredential order stays directly auditable. ACCEPT only this fingerprint, not unreviewed future route-family growth or other architecture findings.",
-    "reviewedBy": "Codex independent frontend closure reviewer",
-    "reviewedOn": "2026-11-01"
+    "fingerprint": "6cf0ee54b291e0bbe0041bf13efa08f0dbfa5fd80d578460dfc33b1b2b961d51",
+    "reason": "The canonical Portfolio forwarding boundary keeps existing service/path/origin/configuration gates, credential acquisition, bounded upstream forwarding and response shaping in one request lifetime. Three fixed labels annotate the pre-existing credential exception, no-token and upstream401 branches. Independent base/head comparison preserves status/body/other headers across all four producers, including this one, while arbitrary code fields are not inspected. At229 nonblank lines the function remains one transport owner; no new scope decision, logger, retry, persistence or generic auth framework is added. Existing branch order and upstream diagnostic replacement are explicit.",
+    "reviewedBy": "Codex independent VQA-021 exact-source review of 3ceefc27f8202fcb14364e4cc8d0dc5edd7d62d8",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
@@ -4291,10 +4291,10 @@
     "file": "apps/web/src/shared/capiro/gateway-errors.ts",
     "kind": "function",
     "symbol": "serviceErrorResponse",
-    "fingerprint": "e8409dcb217e17dc0e366130be0b0305d719f9fb07925108282efad95320c31d",
-    "reason": "One bounded service-error translation owner: it recognizes the exact known refusal envelopes of the operation families this app calls and otherwise redacts by status. This change adds a single cohesive family behind the existing operation, method and public-capability fences and delegates the restricted-widget grammar and 10-reason vocabulary to its own leaf, research-share-errors.ts. The bounded 4096-byte read, the abort rethrow and the status-to-message redaction ladder remain shared in one place; no authority, write-outcome proof, retry or generic error-body relay is added. A size-based split is refused because extracting the per-family recognitions would separate the family dispatch from the shared bounded read and the single redaction ladder and duplicate the read per family. Independent decision: work/hermes-review/final-fe-consumer-binding/WIDGET-REFUSAL-REVIEW.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "f98dac67f824a574b5dea4ae4f63d3c6dc4a06c3f45964fb8b5676647ca843cb",
+    "reason": "One existing bounded service-error translation owner. Fixed upstream-rejected diagnostics now cover both the generic401 return and the canonical objective-association401 early return, preserving admitted envelopes, status, other headers and non401 behavior. Prior operation-specific readers,4096-byte bounds, abort rethrow and public-capability fences remain unchanged. The133 nonblank lines retain one response-translation responsibility; an extra error framework or policy split would duplicate the shared receiving/redaction lifecycle. Labels come from the shared closed vocabulary, never from body/exception/token/identifier data. Two unchanged independent early-return regressions and45 focused cases pass; no new authorization, retry or write-outcome authority.",
+    "reviewedBy": "Codex independent VQA-021 exact-source review of 3ceefc27f8202fcb14364e4cc8d0dc5edd7d62d8",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayMeetingFactsDialog.tsx",
@@ -5235,10 +5235,10 @@
     "file": "apps/web/src/shared/capiro/gateway.ts",
     "kind": "function",
     "symbol": "handleCapiroRequest",
-    "fingerprint": "e0a31e2ff456199d7aaba100c434dfaa7beb3db009190b963112905679baab37",
-    "reason": "The signed-in gateway function is byte-identical to the accepted current-main implementation; the new public operation uses a separate thin wrapper over the existing closed public gateway. Its prior file-based review is invalidated only by the additive wrapper. Authenticated token/scoping, deadline, bounded input and response validation behavior remain unchanged.",
-    "reviewedBy": "Codex independent PR240 original-source reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "b7f9f60f3442b1682ce3f16d34651d7ac4c1ebe5d3445c3d138a226be2ff2cf2",
+    "reason": "The existing signed-in gateway still owns ordered route/config/input admission, credential acquisition and dispatch. The only new responsibility is naming existing401 credential-exception and absent-credential branches with constant diagnostic classes; abort/deadline408/504, status/body and authority decisions are unchanged. At90 nonblank lines the request lifetime stays directly auditable. The diagnostic uses the existing error shaper and shared finite vocabulary, rather than introducing a duplicate authentication protocol or policy owner.",
+    "reviewedBy": "Codex independent VQA-021 exact-source review of 3ceefc27f8202fcb14364e4cc8d0dc5edd7d62d8",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/task-updates/MeriTaskUpdates.tsx",
