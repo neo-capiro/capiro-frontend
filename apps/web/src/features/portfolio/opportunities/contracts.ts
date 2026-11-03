@@ -94,6 +94,10 @@ export const searchResponseSchema = z.object({
         "unknown",
       ]),
       lastSyncedAt: z.string().nullable(),
+      // Optional for backward compatibility: older responses only carried
+      // lastSyncedAt, which stays the success fallback.
+      lastSuccessAt: z.string().nullable().optional(),
+      latestAttemptAt: z.string().nullable().optional(),
     }),
   ),
   profileGaps: z

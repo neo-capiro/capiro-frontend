@@ -4,6 +4,7 @@ import {
   opportunityDate,
   opportunityAmount,
 } from "./presentation";
+import { describeFundingFreshness } from "../../../shared/capiro/funding-source-presentation";
 import styles from "./opportunities.module.css";
 export function OpportunityResults({
   data,
@@ -26,14 +27,15 @@ export function OpportunityResults({
       <details className={styles.health}>
         <summary>Source status</summary>
         <ul>
-          {data.freshness.map((item) => (
-            <li key={item.source}>
-              {item.source.replaceAll("_", " ")} ·{" "}
-              {item.state.replaceAll("_", " ")}
-              {item.lastSyncedAt &&
-                ` · last synced ${opportunityDate(item.lastSyncedAt)}`}
-            </li>
-          ))}
+          {data.freshness.map((item) => {
+            const view = describeFundingFreshness(item);
+            return (
+              <li key={item.source}>
+                {view.sourceLabel} · {view.stateLabel} · {view.successLabel}
+                {view.attemptLabel ? ` · ${view.attemptLabel}` : ""}
+              </li>
+            );
+          })}
         </ul>
       </details>
       {unscoredCount != null && unscoredCount > 0 && (
