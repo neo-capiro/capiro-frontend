@@ -19,6 +19,7 @@ import type {
   ConversationSubmitRequest,
 } from "@capiro/meri-contracts/conversation-application";
 import { receiveConversationInputRequest } from "@capiro/meri-contracts/conversation-input";
+import { isTerminal } from "./conversation-view";
 
 /**
  * Meri answers the contract's 404 NOT_FOUND for a session's history before the conversation's
@@ -48,6 +49,32 @@ export function matchesStoredRequest(
   // Only an originally explicit choice is part of the retained input identity.
   if (request.modelSelection === undefined) delete saved.modelSelection;
   return submissionIdentity(request) === submissionIdentity(saved);
+}
+
+/**
+ * A stop's own record ends with the run it was sent to. Admitted terminal history for the exact
+ * bound run is the outcome the person can see, so an unresolved local stop has nothing left to
+ * resolve there: the turn's terminal state is the record, and offering the request again would ask
+ * them to stop a run that already ended. A receipt is exact evidence of what Stop did and keeps
+ * saying so. Nothing here claims the stop arrived; a run that has not settled keeps its uncertainty.
+ */
+export function reconcileStoredCancel(
+  port: MeriConversationPort,
+  intent: IntentRecord,
+) {
+  const snapshot = port.getSnapshot();
+  if (
+    snapshot.status !== "ready" ||
+    !snapshot.observation ||
+    !isTerminal(snapshot.observation.runState) ||
+    snapshot.cancel === "pending" ||
+    snapshot.cancelReceipt
+  )
+    return false;
+  const { cancel, ...rest } = intent.read();
+  if (cancel !== "unknown") return false;
+  intent.write(rest);
+  return true;
 }
 
 /** Positive exact-run history can resolve delivery uncertainty without sending anything. */

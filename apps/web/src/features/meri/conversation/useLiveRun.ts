@@ -4,6 +4,7 @@ import type { MeriConversationPort } from "../../../shared/meri-conversations/ho
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { useRunCommands } from "./useRunCommands";
 import { useRunObservation } from "./useRunObservation";
+import { isTerminal } from "./conversation-view";
 
 export type { TranscriptState } from "./useRunCommands";
 
@@ -35,7 +36,8 @@ export function useLiveRun(
   const [statusRefresh, setStatusRefresh] = useState(0);
   const requested = useRef(0);
   const handled = useRef(0),
-    generation = useRef(0);
+    generation = useRef(0),
+    cancelSettled = useRef<MeriConversationPort | null>(null);
   const refreshGeneration = generation.current;
   const refreshRunStatus = () => {
     if (alive.current && generation.current === refreshGeneration)
@@ -84,6 +86,31 @@ export function useLiveRun(
     // Runs once per mounted port; later commands are explicit.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [port]);
+
+  useEffect(() => {
+    if (
+      snapshot.status !== "ready" ||
+      !snapshot.observation ||
+      !isTerminal(snapshot.observation.runState) ||
+      commands.intent.cancel !== "unknown" ||
+      commands.storageError ||
+      commands.busy ||
+      cancelSettled.current === port
+    )
+      return;
+    // One attempt per mounted port: a write that cannot land leaves its own storage error instead
+    // of scheduling another attempt, and a settled run needs no further command.
+    cancelSettled.current = port;
+    void commands.settleCancel();
+    // The exact bound run's admitted terminal state is the only evidence that retires a Stop.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    snapshot.status,
+    snapshot.observation?.runState,
+    commands.intent.cancel,
+    commands.storageError,
+    commands.busy,
+  ]);
 
   useEffect(() => {
     if (

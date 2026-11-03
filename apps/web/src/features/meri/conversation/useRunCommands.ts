@@ -8,6 +8,7 @@ export type { TranscriptState } from "./useRunCommandJournal";
 import {
   historyNotStarted,
   recoverRequest,
+  reconcileStoredCancel,
   reconcileStoredRequest,
   requestStop,
   sendRequest,
@@ -134,6 +135,11 @@ export function useRunCommands(
     if (journal.read().submit?.state !== "unknown" || active.current) return;
     return perform(() => reconcileStoredRequest(port, record, stored));
   };
+  /** A settled run ends its stop record: admitted terminal history for this exact run, not a retry. */
+  const settleCancel = () =>
+    perform(async () => {
+      reconcileStoredCancel(port, record);
+    });
   /**
    * Control confirmed this run admitted no message, or the person discarded it: drop the retained one, here and in
    * the session's client, so the next message is an ordinary new request. Its files go back to the composer.
@@ -167,6 +173,7 @@ export function useRunCommands(
     submitInitial,
     recover,
     reconcile,
+    settleCancel,
     release,
     cancel,
   };
