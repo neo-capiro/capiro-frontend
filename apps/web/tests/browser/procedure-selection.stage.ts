@@ -11,7 +11,7 @@ import { expect, test, type Page } from "@playwright/test";
 const picker = (page: Page) =>
   page
     .locator("details")
-    .filter({ hasText: "A procedure is a named native capability" });
+    .filter({ hasText: "A procedure shapes how Meri handles" });
 const list = (page: Page) =>
   picker(page).getByLabel("Procedure for the next message");
 const applied = (page: Page) => page.getByLabel("Applied selection");
@@ -49,12 +49,11 @@ test("mounts the native procedure control with the six built-ins and the eligibl
     '"procedure":{"source":"builtin","id":"briefing"',
   );
   await expect(picker(page).locator("summary")).toHaveText(
-    /Procedure · briefing \(builtin\)/,
+    /Procedure · Briefing/,
   );
-  await expect(picker(page)).toContainText("Built-in briefing");
-  await expect(picker(page)).toContainText(
-    "exact selector: builtin:briefing:1:",
-  );
+  await expect(picker(page)).toContainText("Available for general");
+  // The exact selector stays the value and the applied request, never the visible label.
+  await expect(picker(page)).not.toContainText("builtin:briefing");
   await expect(picker(page).getByRole("alert")).toHaveCount(0);
   // The changed layout is the one new visual surface this lane adds, so keep a current capture.
   await page.screenshot({ path: "test-results/procedure-picker-mounted.png" });
@@ -96,7 +95,7 @@ test("retires a chosen procedure the refreshed catalog no longer lists exactly",
     '"procedure":{"source":"builtin","id":"briefing"',
   );
   await expect(picker(page).locator("summary")).toHaveText(
-    /Procedure · briefing \(builtin\)/,
+    /Procedure · Briefing/,
   );
   // The refreshed catalog carries briefing at version 2 and no firm row: the applied choice leaves.
   await picker(page)
