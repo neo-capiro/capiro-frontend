@@ -1,4 +1,5 @@
 "use client";
+import { type RefObject } from "react";
 import { MeriDialog } from "../ui/MeriDialog";
 import { FormField } from "../ui/FormField";
 import ui from "../ui/meri-ui.module.css";
@@ -13,6 +14,7 @@ export function RenameConversationDialog({
   onDraft,
   disabled,
   onSave,
+  opener,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -22,6 +24,8 @@ export function RenameConversationDialog({
   onDraft: (value: string) => void;
   disabled: boolean;
   onSave: (title: string) => void;
+  /** The selected-row control that opened this dialog; focus returns to it when it closes. */
+  opener?: RefObject<HTMLButtonElement | null>;
 }) {
   const title = draft.trim();
   return (
@@ -31,6 +35,7 @@ export function RenameConversationDialog({
       title="Rename conversation"
       description="The new title applies to this conversation only. Its scope, history and receipts do not change."
       width="compact"
+      opener={opener}
     >
       <FormField
         label="Title"

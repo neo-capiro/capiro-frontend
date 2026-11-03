@@ -44,6 +44,7 @@ export function SelectedConversationActions({
     setDraft((value) => (value === previous ? row.title : value));
   }, [row.title]);
   const [renaming, setRenaming] = useState(false);
+  const renameTrigger = useRef<HTMLButtonElement>(null);
   const [deleting, setDeleting] = useState(false);
   const [now, setNow] = useState(() => Date.now());
   const restoreDeadline = row.restoreUntil
@@ -90,6 +91,7 @@ export function SelectedConversationActions({
         <button
           type="button"
           className={ui.outline}
+          ref={renameTrigger}
           disabled={locked || row.status === "trashed"}
           aria-haspopup="dialog"
           onClick={() => setRenaming(true)}
@@ -157,6 +159,7 @@ export function SelectedConversationActions({
       <RenameConversationDialog
         open={renaming && current}
         onOpenChange={setRenaming}
+        opener={renameTrigger}
         current={row.title}
         draft={draft}
         onDraft={setDraft}

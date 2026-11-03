@@ -6150,10 +6150,12 @@
     "file": "apps/web/src/features/meri/conversations/SelectedConversationActions.tsx",
     "kind": "function",
     "symbol": "SelectedConversationActions",
-    "fingerprint": "dd5ff777f91542eeba68fe732f8aadb2ec3aab562c4e5e7b842b54e957183613",
-    "reason": "Existing selected-row management surface delegates all mutations to its canonical management owner; Research navigation is explicit and lifecycle canManage remains unchanged.",
-    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
-    "reviewedOn": "2026-11-01"
+    "line": 19,
+    "nonblank": 155,
+    "fingerprint": "4b7901e8647ebf3937b83c1e4fb9e0fe0008906dba7ea3f3af5277c25b1bc889",
+    "reason": "Independent exact-head VQA031 review at 5a34fe8870f505b97ec0a776d191aaa5e4dd121c. This 155-nonblank-line selected-row action component composes the canonical management hook, revision-sensitive local draft, expiry state, action controls and their dialogs for one selected conversation/account lifetime. The three added lines bind the actual Rename button ref and pass it through the existing Rename dialog; no save, journal, availability, selection or transport ownership changes. The narrowly optional MeriDialog opener takes precedence only when connected, enabled and laid out; default captured-target/fallback behavior is unchanged. Keeping the concrete trigger with its existing action/dialog owner makes the same-node lifetime explicit and does not justify splitting by size. Independent qualified Linux review passes seven focused cases and six full-history cases covering Escape/Cancel/Close, containment, retained draft, no save, disabled/hidden/disconnected/replaced triggers, account/unmount fences and explicit dismissal followed by refetch. A separately preserved undismissed-intent revalidation case reopens identically on the exact product base and head; it is not claimed fixed or treated as global green. B012 live event ordering remains unproved; local acceptance and the author process incidents are documented separately.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; vqa-031-independent-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/conversations/useManagedChange.ts",
