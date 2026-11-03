@@ -49,6 +49,11 @@ export const fundingSearchResponse = z.object({
       source: fundingSource,
       state: z.string(),
       lastSyncedAt: z.string().nullable(),
+      // Newer responses carry the success and attempt instants separately. Both
+      // optional so an older payload still parses; lastSyncedAt remains the
+      // backward-compatible success fallback.
+      lastSuccessAt: z.string().nullable().optional(),
+      latestAttemptAt: z.string().nullable().optional(),
       recordCount: z.number().nullable(),
     }),
   ),

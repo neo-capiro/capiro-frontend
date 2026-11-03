@@ -7,6 +7,10 @@ import {
 } from "../../../shared/capiro/operations/intelligence-funding";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
+  describeFundingFreshness,
+  fundingSourceLabel,
+} from "../../../shared/capiro/funding-source-presentation";
+import {
   ActionButton,
   Badge,
   DataTable,
@@ -83,7 +87,11 @@ export function FundingOpportunities() {
         >
           <option value="">Source · Any</option>
           {sources.map((s) => (
-            <option key={s}>{s}</option>
+            // The VALUE stays the raw enum so the filter contract is unchanged;
+            // only the visible label is human.
+            <option key={s} value={s}>
+              {fundingSourceLabel(s)}
+            </option>
           ))}
         </select>
         <select
@@ -145,7 +153,7 @@ export function FundingOpportunities() {
                     >
                       <strong>{r.title}</strong>
                       <div className={styles.muted}>
-                        {r.agency} · {r.source}
+                        {r.agency} · {fundingSourceLabel(r.source)}
                       </div>
                     </button>
                   ),
@@ -205,7 +213,7 @@ export function FundingOpportunities() {
             >
               <dl className={styles.details}>
                 {[
-                  ["Source", selected.source],
+                  ["Source", fundingSourceLabel(selected.source)],
                   ["Deadline", selected.deadline],
                   ["Eligibility", selected.eligibility?.state],
                   ["Status", selected.lifecycle],
@@ -228,12 +236,16 @@ export function FundingOpportunities() {
           )}
         </div>
         <div className={styles.content}>
-          {d?.freshness.map((f) => (
-            <p key={f.source}>
-              {f.source} · {f.state} ·{" "}
-              {f.lastSyncedAt || "Freshness unavailable"}
-            </p>
-          ))}
+          {d?.freshness.map((f) => {
+            const view = describeFundingFreshness(f);
+            return (
+              <p key={f.source}>
+                <strong>{view.sourceLabel}</strong> · {view.stateLabel} ·{" "}
+                {view.successLabel}
+                {view.attemptLabel ? ` · ${view.attemptLabel}` : ""}
+              </p>
+            );
+          })}
         </div>
       </StatusPanel>
     </>
