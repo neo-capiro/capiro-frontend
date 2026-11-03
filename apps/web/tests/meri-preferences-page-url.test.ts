@@ -175,6 +175,17 @@ it("ignores a selection it does not own and does not re-push the current page", 
   expect(state.push).not.toHaveBeenCalled();
 });
 
+it("lets the last click win while a different navigation is pending", () => {
+  expect(shownPage(render("page=data-access&tab=audit"))).toBe("data-access");
+  // The address has not reached Privacy yet, so this later click must supersede it.
+  selectFrom("data-access", "privacy");
+  selectFrom("data-access", "data-access");
+  expect(state.push.mock.calls.map(([target]) => target)).toEqual([
+    "/settings/preferences?page=privacy&tab=audit",
+    "/settings/preferences?page=data-access&tab=audit",
+  ]);
+});
+
 it("keeps one current navigation item for the resolved page", () => {
   const markup = render("page=usage");
   expect(attribute(markup, "data-nav-size")).toBe("9");
