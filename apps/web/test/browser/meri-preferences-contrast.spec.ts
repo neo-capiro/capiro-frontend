@@ -38,6 +38,11 @@ const clients = [
 ];
 
 async function open(page: Page, width: number, colorScheme: "light" | "dark") {
+  const diagnostics: string[] = [];
+  page.on("console", (message) => {
+    if (message.type() === "error") diagnostics.push(message.text());
+  });
+  page.on("pageerror", (error) => diagnostics.push(String(error)));
   await page.setViewportSize({ width, height: 854 });
   await page.emulateMedia({ colorScheme });
   await onlyLocalRequests(page);
@@ -70,6 +75,7 @@ async function open(page: Page, width: number, colorScheme: "light" | "dark") {
     page.getByRole("heading", { name: "Personal settings", level: 2 }),
   ).toBeVisible();
   await page.mouse.move(2, 2);
+  return diagnostics;
 }
 
 type ContrastProbe = {
@@ -191,7 +197,7 @@ for (const { name, theme, colorScheme, readable } of cases)
     page,
   }, testInfo) => {
     test.setTimeout(120_000);
-    await open(page, 727, colorScheme);
+    const diagnostics = await open(page, 727, colorScheme);
     await page.getByRole("combobox", { name: "Theme" }).selectOption(theme);
     await expect(page.locator(`form[data-theme="${theme}"]`)).toBeVisible();
     await page.mouse.move(2, 2);
@@ -255,12 +261,15 @@ for (const { name, theme, colorScheme, readable } of cases)
           helper: measured,
           timezoneHelp: body,
           layout,
+          diagnostics,
         },
         null,
         2,
       ),
     );
 
+    // No console or page errors on the route being measured.
+    expect(diagnostics).toEqual([]);
     // Rendered, not inferred: helper text is 12px normal weight, so AA normal text applies.
     expect(measured.opacity).toBe(1);
     expect(measured.fontSize).toBe("12px");
