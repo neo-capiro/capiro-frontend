@@ -150,9 +150,10 @@ export function RoutinesWorkspace({
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [viewPort, setViewPort] = useState(port);
   const current = useRef<RoutineWorkflow | null>(port);
-  /** The connection whose authorized list this view already started, and the read in flight for it. */
+  /** The connection this view has read the list for, the read in flight for it, and the one it refused or failed. */
   const listed = useRef<RoutineWorkflow | null>(null);
   const reading = useRef<RoutineWorkflow | null>(null);
+  const failed = useRef<RoutineWorkflow | null>(null);
   useLayoutEffect(() => {
     current.current = port;
     return () => {
@@ -162,14 +163,24 @@ export function RoutinesWorkspace({
   useEffect(() => {
     void port.load();
   }, [port]);
-  // A connected port is authorized once its journal is restored, so the bounded list starts there: the connected
-  // workspace shows its current definitions without an extra manual Refresh. One read per connection.
+  // The host keeps this exact port and hides it while the identity/client is briefly revalidated, so the
+  // connection's own lifetime can discard a read that is still owed. That re-entry changes no prop and no
+  // journal state this view receives, so this runs after every render and the refs, not a dependency list,
+  // decide. It starts the one authorized read per connection, resumes an owed first read once the connection
+  // is available again, and leaves a read that actually failed or was refused to the explicit Refresh. A
+  // discarded read publishes no state, so it cannot schedule the next attempt by itself: no deps, no timer,
+  // no retry loop and no new authority.
   useEffect(() => {
-    if (!state.ready || state.accessDenied || listed.current === port) return;
-    listed.current = port;
+    if (
+      !state.ready ||
+      state.accessDenied ||
+      listed.current === port ||
+      failed.current === port ||
+      reading.current === port
+    )
+      return;
     void read();
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- one authorized read per connected port
-  }, [port, state.ready, state.accessDenied]);
+  });
   // Service pages and existing-routine edits never carry across a connection. An unsent new draft
   // may stay within its keyed owner; the host hides it until fresh authorization and unmounts on denial.
   if (viewPort !== port || (state.accessDenied && (page || editor))) {
@@ -188,11 +199,17 @@ export function RoutinesWorkspace({
   async function read(more = false) {
     if (reading.current === port) return;
     reading.current = port;
+    if (failed.current === port) failed.current = null;
+    // An owed first read keeps its in-progress note when the connection's own lifetime discards the answer, so
+    // the discarded attempt publishes no state and cannot schedule the retry by itself.
+    const owed = !more && page === null;
+    let discarded = false;
     setLoading(port);
     setError(null);
     try {
       const response = await port.list(more ? page?.nextAfterScheduleId : null);
       if (current.current !== port) return;
+      listed.current = port;
       setPage((previous) =>
         more && previous
           ? {
@@ -203,14 +220,17 @@ export function RoutinesWorkspace({
       );
     } catch (error) {
       if (current.current !== port) return;
-      // The connection's own lifetime ended this read; it is not a failed list and stays unreported.
-      if ((error as { name?: string } | null)?.name === "AbortError") return;
-      setError(
-        "Current routines could not be read. Previously shown results are not current authority.",
-      );
+      // The connection's own lifetime ended this read; it is not a failed list and stays unreported and owed.
+      discarded = (error as { name?: string } | null)?.name === "AbortError";
+      if (!discarded) {
+        failed.current = port;
+        setError(
+          "Current routines could not be read. Previously shown results are not current authority.",
+        );
+      }
     } finally {
       if (reading.current === port) reading.current = null;
-      if (current.current === port) setLoading(null);
+      if (current.current === port && !(discarded && owed)) setLoading(null);
     }
   }
   const disabled = !state.ready || state.busy || Boolean(state.saved);

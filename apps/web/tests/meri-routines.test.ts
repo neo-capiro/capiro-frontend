@@ -764,13 +764,61 @@ it("a lifetime ended during the authorized read reports no list failure and appl
   expect(renderWorkspace(port)).toContain("Reading current routines");
   lifetime.abort();
   release.resolve();
-  await vi.waitFor(() =>
-    expect(renderWorkspace(port)).not.toContain("Reading current routines"),
-  );
+  await new Promise((resolve) => setTimeout(resolve, 0));
   const html = renderWorkspace(port);
   // Ending the connection is not a failed list: nothing is reported and no page is admitted.
   expect(html).not.toContain("could not be read");
   expect(html).not.toContain(f.listed.page.rows[0].projection.destinationId);
+});
+
+it("an initial read discarded by a temporary revalidation resumes when the connection is available again", async () => {
+  let available = true;
+  const started = barrier(),
+    release = barrier(),
+    lifetime = new AbortController();
+  const fetch = vi.fn<typeof globalThis.fetch>(async () => {
+    started.resolve();
+    await release.promise;
+    return Response.json(f.listed);
+  });
+  const port = new RoutineWorkflow({
+    context: f.context,
+    access: createRoutinesAccess("synthetic", lifetime.signal, fetch),
+    signal: lifetime.signal,
+    isCurrent: () => available,
+  });
+  await port.load();
+  view.captureEffects = true;
+  renderWorkspace(port);
+  runEffects();
+  await started.promise;
+  // The host retains and hides this exact port while the identity/client is revalidated.
+  available = false;
+  renderWorkspace(port);
+  runEffects();
+  release.resolve();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  expect(fetch).toHaveBeenCalledOnce();
+  // The discarded answer is not a failure and admits no page; the first read stays owed.
+  expect(renderWorkspace(port)).not.toContain("could not be read");
+  expect(renderWorkspace(port)).not.toContain(
+    f.listed.page.rows[0].projection.destinationId,
+  );
+  // Availability returns on the same port: the owed read resumes without a manual Refresh.
+  available = true;
+  renderWorkspace(port);
+  runEffects();
+  await vi.waitFor(() =>
+    expect(renderWorkspace(port)).toContain(
+      f.listed.page.rows[0].projection.destinationId,
+    ),
+  );
+  expect(fetch).toHaveBeenCalledTimes(2);
+  // The resumed read fulfils the obligation: another lifecycle pass reads nothing more.
+  renderWorkspace(port);
+  runEffects();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  expect(fetch).toHaveBeenCalledTimes(2);
 });
 
 it("a list answered for a former connection never replaces the current connection's page", async () => {
