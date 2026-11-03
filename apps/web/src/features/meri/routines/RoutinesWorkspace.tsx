@@ -218,10 +218,14 @@ export function RoutinesWorkspace({
             }
           : response.page,
       );
-    } catch (error) {
+    } catch {
       if (current.current !== port) return;
-      // The connection's own lifetime ended this read; it is not a failed list and stays unreported and owed.
-      discarded = (error as { name?: string } | null)?.name === "AbortError";
+      // The connection's own lifetime decides what a failed answer means. If the port can no longer authorize a
+      // read (temporary identity/client revalidation, or the session ended), the reply was discarded, not refused:
+      // nothing is reported, nothing is admitted, and the read stays owed. If the port is still current, the
+      // request itself ended — the transport's own deadline or a broken transport — and that is a real failure
+      // the view must report and settle so explicit Refresh can recover it.
+      discarded = !port.current;
       if (!discarded) {
         failed.current = port;
         setError(

@@ -794,6 +794,7 @@ it("an initial read discarded by a temporary revalidation resumes when the conne
   await started.promise;
   // The host retains and hides this exact port while the identity/client is revalidated.
   available = false;
+  expect(port.current).toBe(false);
   renderWorkspace(port);
   runEffects();
   release.resolve();
@@ -806,6 +807,7 @@ it("an initial read discarded by a temporary revalidation resumes when the conne
   );
   // Availability returns on the same port: the owed read resumes without a manual Refresh.
   available = true;
+  expect(port.current).toBe(true);
   renderWorkspace(port);
   runEffects();
   await vi.waitFor(() =>
@@ -819,6 +821,37 @@ it("an initial read discarded by a temporary revalidation resumes when the conne
   runEffects();
   await new Promise((resolve) => setTimeout(resolve, 0));
   expect(fetch).toHaveBeenCalledTimes(2);
+});
+
+it("a first read ended by the transport deadline fails visibly instead of latching the read", async () => {
+  const late = vi.fn(() => new Promise<Response>(() => undefined));
+  const port = workflow(late as unknown as typeof globalThis.fetch);
+  await port.load();
+  vi.useFakeTimers();
+  try {
+    view.captureEffects = true;
+    renderWorkspace(port);
+    runEffects();
+    // The existing 30 s action deadline ends the request while this connection still authorizes reads.
+    await vi.advanceTimersByTimeAsync(31_000);
+    expect(port.current).toBe(true);
+    const html = renderWorkspace(port);
+    // A request that ended on a usable connection is a real failure: reported, and the read is settled.
+    expect(html).toContain("Current routines could not be read");
+    expect(html).not.toContain("Reading current routines");
+  } finally {
+    vi.useRealTimers();
+  }
+  // A failed read is never retried automatically, not even by an unrelated lifecycle pass.
+  renderWorkspace(port);
+  runEffects();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  expect(late).toHaveBeenCalledOnce();
+  // Explicit recovery is the person's Refresh.
+  late.mockImplementation(async () => Response.json(f.listed));
+  const html = await readWorkspace(port);
+  expect(html).toContain(f.listed.page.rows[0].projection.destinationId);
+  expect(late).toHaveBeenCalledTimes(2);
 });
 
 it("a list answered for a former connection never replaces the current connection's page", async () => {
