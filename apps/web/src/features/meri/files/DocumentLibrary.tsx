@@ -46,6 +46,43 @@ export const libraryRows = (
   office: boolean,
 ) => versions.filter((version) => isOfficeTarget(version) === office);
 
+/** Where the formats this library leaves out are listed; the Workspace's Office section is the only list of them. */
+const OFFICE_POINTER =
+  "Word, Excel and PowerPoint documents are listed in Modules → Workspace under Office documents when Office editing is enabled.";
+
+/**
+ * What a loaded page has to say about itself once its rows are filtered: a scope with nothing, a page whose
+ * returned versions are all a format this library does not list, a page with later pages left, or the end.
+ */
+export type LibraryPageNotice =
+  | "empty"
+  | "empty-filtered"
+  | "page-empty"
+  | "end"
+  | null;
+export function libraryPageNotice({
+  loaded,
+  nextCursor,
+  returned,
+  listed,
+}: {
+  loaded: boolean;
+  nextCursor: string | null;
+  /** Every version this page returned, before the Office split. */
+  returned: number;
+  /** The versions this library lists. */
+  listed: number;
+}): LibraryPageNotice {
+  if (!loaded) return null;
+  if (listed === 0)
+    return nextCursor !== null
+      ? "page-empty"
+      : returned === 0
+        ? "empty"
+        : "empty-filtered";
+  return nextCursor === null ? "end" : null;
+}
+
 /** Opens saved contexts only; no conversation or run is created to browse retained files. */
 export function DocumentLibrary({
   account,
@@ -136,8 +173,19 @@ export function DocumentLibrary({
     <section className={styles.files} aria-label="Saved file library">
       <h2>Saved files and version history</h2>
       <p className={styles.muted}>
-        Choose a saved conversation to browse your currently available files.
-        Opening this library does not start a chat or generate a file.
+        {officeOpen === undefined ? (
+          <>
+            Choose a saved conversation to browse its currently available PDF
+            and other non-Office files. {OFFICE_POINTER} Opening this library
+            does not start a chat or generate a file.
+          </>
+        ) : (
+          <>
+            Choose a saved conversation to browse your currently available
+            files. Opening this library does not start a chat or generate a
+            file.
+          </>
+        )}
       </p>
       <div className={styles.controls}>
         <Button
@@ -440,6 +488,12 @@ function LibraryPage({
   const history = "anchor" in query;
   const office = officeOpen !== undefined;
   const versions = libraryRows(state.versions, office);
+  const notice = libraryPageNotice({
+    loaded: state.loaded,
+    nextCursor: state.nextCursor,
+    returned: state.versions.length,
+    listed: versions.length,
+  });
   return (
     <section
       className={styles.panel}
@@ -466,13 +520,25 @@ function LibraryPage({
           history ? controller.select(version) : onHistory(version)
         }
       />
-      {state.loaded && versions.length === 0 && (
+      {notice === "empty" && (
         <p role="status">
-          {state.nextCursor === null
-            ? office
-              ? "No Office document is currently available in this scope."
-              : "No files are currently available in this scope."
-            : "No available files on this page. Continue to check later pages."}
+          {office
+            ? "No Office document is currently available in this scope."
+            : "No files are currently available in this scope."}
+        </p>
+      )}
+      {notice === "empty-filtered" && (
+        <p role="status">
+          No PDF or other non-Office file is currently available in this scope.{" "}
+          {OFFICE_POINTER}
+        </p>
+      )}
+      {notice === "page-empty" && (
+        <p role="status">
+          {office
+            ? "No available files on this page."
+            : "No PDF or other non-Office file on this page."}{" "}
+          Continue to check later pages.
         </p>
       )}
       {state.nextCursor !== null && (
@@ -485,14 +551,15 @@ function LibraryPage({
         </Button>
       )}
       {state.busy && <p role="status">Checking current file access…</p>}
-      {state.loaded &&
-        state.nextCursor === null &&
-        state.versions.length > 0 && (
-          <p className={styles.muted}>
-            End of the currently available{" "}
-            {history ? "version history" : "library"}.
-          </p>
-        )}
+      {notice === "end" && (
+        <p className={styles.muted}>
+          {history
+            ? "End of the currently available version history."
+            : office
+              ? "End of the currently available library."
+              : "End of the currently available PDF and other non-Office files."}
+        </p>
+      )}
       {history && state.selected && (
         <LibrarySelectedVersion
           port={port}
