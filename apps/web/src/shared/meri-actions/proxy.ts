@@ -78,8 +78,9 @@ export async function proxyActionRequest(
     request.headers.has("content-encoding")
   )
     return local(400);
-  if (!config.enabled || !config.baseUrl) return local(503);
+  // Configuration is the stage that is being consulted here: the 503 below is a configuration refusal.
   diagnostic?.stage("configuration");
+  if (!config.enabled || !config.baseUrl) return local(503);
   try {
     return await withActionDeadline([request.signal], async (signal) => {
       diagnostic?.stage("session");
@@ -95,6 +96,8 @@ export async function proxyActionRequest(
           : (receivedActionSession(request) ??
             (routine ? receivedRoutineManagementSession(request) : null));
       if (!credential) return local(401);
+      // The credential was admitted; everything from here is receiving and validating this request.
+      diagnostic?.stage("request");
       const body = await boundedJsonText(
         new Response(request.body, { headers: request.headers }),
         signal,

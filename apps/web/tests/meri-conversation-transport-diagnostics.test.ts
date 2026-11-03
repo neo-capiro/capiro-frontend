@@ -299,4 +299,77 @@ describe("conversation proxy transport diagnostics", () => {
     });
     expect(lines).toHaveLength(1);
   });
+
+  it("records a post-credential request failure as the request stage", async () => {
+    // The reviewer's reproduced case: a valid native credential and a malformed body.
+    const malformed = new Request(
+      `${origin}/api/action-followthrough/session`,
+      {
+        method: "POST",
+        body: "{",
+        headers: { Origin: origin, "Content-Type": "application/json" },
+      },
+    );
+    const { begin, lines } = recorder();
+    const response = await proxyActionRequest(
+      malformed,
+      "session",
+      actionConfig,
+      token,
+      fetchFails,
+      begin,
+    );
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({
+      error: { code: "FRONTEND_ACTION_UNAVAILABLE" },
+    });
+    expect(response.headers.get("cache-control")).toBe("no-store");
+    expect(parsed(lines)[0]).toMatchObject({
+      operation: "/api/action-followthrough/session",
+      stage: "request",
+      outcome: "failure",
+      status: 502,
+      upstreamStatus: 0,
+    });
+  });
+
+  it("records the disabled action configuration as the configuration stage", async () => {
+    const { begin, lines } = recorder();
+    const response = await proxyActionRequest(
+      actionRequest(),
+      "session",
+      { ...actionConfig, enabled: false },
+      token,
+      fetchFails,
+      begin,
+    );
+    expect(response.status).toBe(503);
+    expect(await response.json()).toEqual({
+      error: { code: "FRONTEND_ACTION_UNAVAILABLE" },
+    });
+    expect(parsed(lines)[0]).toMatchObject({
+      stage: "configuration",
+      outcome: "local_response",
+      status: 503,
+    });
+  });
+
+  it("records the disabled read configuration as the configuration stage", async () => {
+    const { begin, lines } = recorder();
+    const response = await proxyConversationHistory(
+      historyRequest("transcript", selector),
+      "transcript",
+      { ...historyConfig, enabled: false },
+      token,
+      fetchFails,
+      begin,
+    );
+    expect(response.status).toBe(503);
+    expect(parsed(lines)[0]).toMatchObject({
+      operation: "/api/conversations/transcript",
+      stage: "configuration",
+      outcome: "local_response",
+      status: 503,
+    });
+  });
 });

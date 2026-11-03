@@ -146,8 +146,9 @@ export async function proxyConversationNativeRead(
     config.frontendOrigin,
     config.requestOrigin,
   );
-  if (!origin || !frontendOrigin) return answer(503);
+  // The configuration refusal below is decided here, so this is the stage to record it on.
   diagnostic?.stage("configuration");
+  if (!origin || !frontendOrigin) return answer(503);
   let dispatched = false;
   try {
     return await withActionDeadline([request.signal], async (signal) => {
