@@ -15,6 +15,7 @@ import {
   routineManagementSessionPath,
   receiveRoutineManagementSessionRequest,
 } from "../meri-routines/canonical-receiver";
+import { beginConversationTransportDiagnostic } from "../meri-conversations/history-diagnostics";
 import {
   objectiveGenerationStartMetadata,
   requireObjectiveGenerationStartRequest,
@@ -55,12 +56,18 @@ export async function proxyActionRequest(
   config: ReturnType<typeof readActionConfig>,
   getNativeToken: () => Promise<string | null>,
   fetcher: typeof fetch = fetch,
+  beginDiagnostic = beginConversationTransportDiagnostic,
 ) {
   const routine = routineRoute(route);
   const managementSession = route === "routine-session";
   const browserSession = route === "browser-session";
   if (!routes.has(route) && !routine) return unavailable(404);
   if (request.method !== "POST") return unavailable(405);
+  const diagnostic = beginDiagnostic(`/api/action-followthrough/${route}`);
+  const local = (status: number) => {
+    diagnostic?.finish(status, "response");
+    return unavailable(status);
+  };
   const url = new URL(request.url);
   if (
     url.pathname !== `/api/action-followthrough/${route}` ||
@@ -70,13 +77,15 @@ export async function proxyActionRequest(
     request.headers.has("authorization") ||
     request.headers.has("content-encoding")
   )
-    return unavailable(400);
-  if (!config.enabled || !config.baseUrl) return unavailable(503);
+    return local(400);
+  if (!config.enabled || !config.baseUrl) return local(503);
+  diagnostic?.stage("configuration");
   try {
     return await withActionDeadline([request.signal], async (signal) => {
+      diagnostic?.stage("session");
       const nativeToken = await getNativeToken();
       signal.throwIfAborted();
-      if (!nativeToken) return unavailable(401);
+      if (!nativeToken) return local(401);
       const credential =
         route === "session" ||
         browserSession ||
@@ -85,7 +94,7 @@ export async function proxyActionRequest(
           ? nativeToken
           : (receivedActionSession(request) ??
             (routine ? receivedRoutineManagementSession(request) : null));
-      if (!credential) return unavailable(401);
+      if (!credential) return local(401);
       const body = await boundedJsonText(
         new Response(request.body, { headers: request.headers }),
         signal,
@@ -103,7 +112,7 @@ export async function proxyActionRequest(
           .parse(JSON.parse(body));
       if (browserSession) {
         const hints = conversationSessionSelector.parse(JSON.parse(body));
-        if (!hints.conversationId || !hints.runId) return unavailable(400);
+        if (!hints.conversationId || !hints.runId) return local(400);
       }
       if (routine) await receiveRequest(routine, body);
       if (managementSession) receiveRoutineManagementSessionRequest(body);
@@ -112,6 +121,7 @@ export async function proxyActionRequest(
           ? requireObjectiveGenerationStartRequest(JSON.parse(body))
           : undefined;
       signal.throwIfAborted();
+      diagnostic?.stage("fetch");
       const response = await fetcher(
         `${config.baseUrl}${managementSession ? routineManagementSessionPath : routine ? routinePaths[routine] : objective ? objectiveGenerationStartMetadata.path : `/api/action-followthrough/${route}`}`,
         {
@@ -127,6 +137,8 @@ export async function proxyActionRequest(
           signal,
         },
       );
+      diagnostic?.stage("receive");
+      diagnostic?.received(response.status);
       const text = await boundedJsonText(
         response,
         signal,
@@ -145,10 +157,12 @@ export async function proxyActionRequest(
           text,
           objective.generationJobId,
         );
+      diagnostic?.finish(response.status, "response");
       return new Response(text, { status: response.status, headers });
     });
   } catch {
     // No dispatch disposition is invented: a request may already have reached Meri.
+    diagnostic?.finish(502, "failure");
     return unavailable(502);
   }
 }
