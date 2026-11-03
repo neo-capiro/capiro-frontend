@@ -143,6 +143,9 @@ export function persistedOpenedReservation(
         targetRunId: target.targetRunId,
       });
     },
+    clear() {
+      record.clear();
+    },
   };
 }
 
@@ -169,13 +172,40 @@ function receiveOpenedReservation(scope: TabScope, value: unknown) {
   };
 }
 
-/** A record this page cannot read only means it asks control again; it never blocks recovery. */
+/**
+ * The optional confirmation's own boundary. A record this page cannot read, save or retire only
+ * means it asks control again; it must never fail the page, and a general journal refusal keeps its
+ * own owner (`recoverPersistedTurn` still reports it as closed recovery).
+ */
 export function recoverOpenedReservation(
   scope: TabScope,
   storage?: TabStorage,
 ) {
   try {
-    return persistedOpenedReservation(scope, storage);
+    const record = persistedOpenedReservation(scope, storage);
+    return {
+      read() {
+        try {
+          return record.read();
+        } catch {
+          return undefined;
+        }
+      },
+      write(target: { sourceRunId: string; targetRunId: string }) {
+        try {
+          record.write(target);
+        } catch {
+          /* Nothing durable was kept: the next page asks again. */
+        }
+      },
+      retire() {
+        try {
+          record.clear();
+        } catch {
+          /* Nothing stale can be read back either. */
+        }
+      },
+    };
   } catch {
     return undefined;
   }

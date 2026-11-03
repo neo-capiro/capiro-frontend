@@ -370,3 +370,111 @@ it("a retained message still replays the same target and its text comes back", a
   expect(journal(new QueryClient()).read()).toBeUndefined();
   expect(journal(new QueryClient()).openedTarget()).toBe(nextBinding.runId);
 });
+
+// Revision after independent review: the optional confirmation is a hint that must never fail a
+// page, and it only establishes that one target was empty when control answered, so newer work in
+// the same journal supersedes it.
+const confirmationKey = () =>
+  Array.from({ length: storage.length }, (_, i) => storage.key(i)!).find(
+    (key) => key.includes('"turn-open"'),
+  )!;
+async function confirmedOnce() {
+  const cache = new QueryClient();
+  vi.spyOn(transport, "reserveConversationTurn").mockResolvedValue(
+    receipt("RESERVED"),
+  );
+  expect(await mount(cache).command.check(binding, vi.fn())).toBe(true);
+  expect(journal(cache).openedTarget()).toBe(nextBinding.runId);
+  return confirmationKey();
+}
+
+it("an unreadable optional confirmation asks again instead of failing the page", async () => {
+  const key = await confirmedOnce();
+  const record = JSON.parse(storage.getItem(key)!);
+  // Malformed JSON, a rejected public source, and a denied read of this one record are all the same
+  // thing to this page: it cannot say the message was not sent, so it asks control again.
+  for (const broken of [
+    "{broken",
+    JSON.stringify({
+      ...record,
+      value: {
+        ...record.value,
+        source: { ...record.value.source, sourceRunId: "invalid" },
+      },
+    }),
+  ]) {
+    storage.setItem(key, broken);
+    expect(() => mount(new QueryClient())).not.toThrow();
+    expect(mount(new QueryClient()).command.opened).toBeUndefined();
+  }
+  storage.setItem(key, JSON.stringify(record));
+  const read = storage.getItem;
+  storage.getItem = (k) => {
+    if (k.includes('"turn-open"')) throw new Error("denied");
+    return read(k);
+  };
+  expect(() => mount(new QueryClient())).not.toThrow();
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+  expect(reservedTargetView().unknownReservation).toBe(true);
+});
+
+it("a general journal failure keeps the existing recovery refusal instead of hiding it", () => {
+  const read = storage.getItem;
+  storage.getItem = () => {
+    throw new Error("denied");
+  };
+  const { command } = mount(new QueryClient());
+  expect(command.opened).toBeUndefined();
+  // The optional hint never speaks for the journal: a tab that cannot read its own message still
+  // reports the ordinary closed recovery the person already had.
+  expect(command.storageError).toBeTruthy();
+  storage.getItem = read;
+});
+
+it("a newer message retires the earlier empty-reservation answer", async () => {
+  const cache = new QueryClient();
+  await confirmedOnce();
+  journal(cache).start(binding, prompt, nextRequestId);
+  expect(journal(cache).openedTarget()).toBeUndefined();
+  // The next page asks again unless control answers about the newer message.
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+});
+
+it("a failed check followed by an explicit give-up leaves no durable confirmation", async () => {
+  const cache = new QueryClient();
+  await confirmedOnce();
+  journal(cache).start(binding, prompt, nextRequestId);
+  vi.spyOn(transport, "reserveConversationTurn").mockRejectedValue(
+    new transport.ConversationHistoryUnavailable(
+      502,
+      "CONVERSATION_UNAVAILABLE",
+    ),
+  );
+  const { command } = mount(cache);
+  expect(await command.check(binding, vi.fn())).toBe(false);
+  expect(await command.discard(nextBinding.runId, vi.fn())).toBe(true);
+  expect(journal(cache).read()).toBeUndefined();
+  expect(journal(cache).openedTarget()).toBeUndefined();
+  // Giving up in one view is not control settling the message: the next page still reports it.
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+  expect(reservedTargetView().unknownReservation).toBe(true);
+});
+
+it("control's ACCEPTED answer retires the earlier empty-reservation answer", async () => {
+  const cache = new QueryClient();
+  await confirmedOnce();
+  journal(cache).start(binding, prompt, nextRequestId);
+  vi.spyOn(transport, "reserveConversationTurn").mockResolvedValue(
+    receipt("ACCEPTED"),
+  );
+  const { command, open } = mount(cache);
+  expect(await command.check(binding, vi.fn())).toBe(true);
+  expect(open).toHaveBeenCalledExactlyOnceWith(
+    expect.objectContaining({
+      runId: nextBinding.runId,
+      requestId: nextRequestId,
+    }),
+  );
+  expect(journal(cache).openedTarget()).toBeUndefined();
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+});

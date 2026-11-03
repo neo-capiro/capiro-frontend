@@ -168,6 +168,12 @@ export function conversationTurnJournal(
     { ...account, clientId, conversationId },
     storage,
   );
+  /**
+   * A newer message, a newer admission or an explicit give-up supersedes that answer: it only ever
+   * established that one target was empty when control answered, so it must not outlive its
+   * lifecycle and silently settle a later uncertainty.
+   */
+  const retireOpened = () => openedReservation?.retire();
   cache.setQueryData<{ intent?: TurnIntent }>(
     key,
     (previous) =>
@@ -188,6 +194,8 @@ export function conversationTurnJournal(
   const store = (intent: TurnIntent) => {
     if (retained.blocked) throw new TabJournalUnavailable();
     if (!current()) return false;
+    // This tab now holds a newer message: an earlier "nothing admitted" answer no longer settles it.
+    retireOpened();
     retained.record?.write(intent);
     cache.setQueryData(key, Object.freeze({ intent: snapshotIntent(intent) }));
     return true;
@@ -234,6 +242,8 @@ export function conversationTurnJournal(
     /** Control confirmed nothing was admitted for the retained turn, or the person discarded it. */
     discard() {
       const intent = read();
+      // This view's give-up unlocks the composer; it never claims control settled a later message.
+      retireOpened();
       if (!intent) return undefined;
       retained.record?.clear();
       cache.setQueryData(key, Object.freeze({}));
@@ -251,22 +261,19 @@ export function conversationTurnJournal(
     confirmOpened(
       receipt: Pick<ConversationTurnReceipt, "sourceBinding" | "targetBinding">,
     ) {
-      try {
-        for (const binding of [receipt.sourceBinding, receipt.targetBinding])
-          if (
-            binding.tenantId !== account.tenantId ||
-            binding.actorId !== account.actorId ||
-            binding.conversationId !== conversationId
-          )
-            return;
-        openedReservation?.write({
-          sourceRunId: receipt.sourceBinding.runId,
-          targetRunId: receipt.targetBinding.runId,
-        });
-      } catch {
-        // A tab that cannot save the answer asks again on its next page; nothing is sent by it.
-      }
+      for (const binding of [receipt.sourceBinding, receipt.targetBinding])
+        if (
+          binding.tenantId !== account.tenantId ||
+          binding.actorId !== account.actorId ||
+          binding.conversationId !== conversationId
+        )
+          return;
+      openedReservation?.write({
+        sourceRunId: receipt.sourceBinding.runId,
+        targetRunId: receipt.targetBinding.runId,
+      });
     },
+    retireOpened,
     start(
       source: RunBinding,
       prompt: string,
@@ -378,8 +385,11 @@ export async function checkConversationTurn(
   signal?.throwIfAborted();
   if (!retained && receipt.sourceBinding.runId !== reported!.runId)
     throw new Error("Turn binding changed");
-  if (receipt.state !== "RESERVED")
+  if (receipt.state !== "RESERVED") {
+    // Control reports a target for this message: nothing here is an unconfirmed empty reservation.
+    journal.retireOpened();
     return { target: receipt.targetBinding, retained: journal.read() };
+  }
   const released = journal.discard();
   // This tab asked about this exact reservation and control answered that nothing was admitted: a
   // reload of the same page reopens it instead of asking the same question again.
