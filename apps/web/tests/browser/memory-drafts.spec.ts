@@ -157,7 +157,7 @@ test("preview blocks writes and an expired session removes the editor", async ({
   owner.control.expire = true;
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(page.getByLabel("Private draft editor")).toHaveCount(0);
   expect(owner.counts()).toEqual({ saves: 0, submissions: 0 });

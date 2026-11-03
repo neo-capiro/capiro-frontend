@@ -245,7 +245,7 @@ test("expired session uses the existing sign-in boundary without a write", async
   });
   await page.goto(path);
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "Sign in" })).toHaveAttribute(
     "href",

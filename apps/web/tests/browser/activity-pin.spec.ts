@@ -293,7 +293,7 @@ test("session expiry at preflight dispatches no activity write", async ({
   await page.goto(`/portfolio/${clientId}`);
   await menu(page);
   await expect(
-    page.getByRole("heading", { name: "Your session expired", exact: true }),
+    page.getByRole("heading", { name: "We couldn't verify your session", exact: true }),
   ).toBeVisible();
   expect(writes).toBe(0);
   expect(unexpected).toEqual([]);

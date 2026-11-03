@@ -178,7 +178,7 @@ test("Library surfaces failure/retry, empty results, scoped receipt rejection an
   mode = "expired";
   await page.getByRole("button", { name: "Retry", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   expect(unexpected).toEqual([]);
 });

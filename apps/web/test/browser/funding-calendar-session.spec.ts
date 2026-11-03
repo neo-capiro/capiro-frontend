@@ -186,7 +186,7 @@ for (const replacement of replacements) {
         page.getByRole("heading", { name: `${former.title} ↗`, exact: true }),
       ).toHaveCount(0);
       await expect(
-        page.getByRole("heading", { name: "Your session expired" }),
+        page.getByRole("heading", { name: "We couldn't verify your session" }),
       ).toHaveCount(0);
       if (replacement === "sign-out")
         await expect(
@@ -283,7 +283,7 @@ test("displayed funding clears across every boundary and returns only after the 
   expect(observed.searches).toHaveLength(6);
   expect(observed.details).toHaveLength(6);
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toHaveCount(0);
   assertNoEffects(observed);
 });

@@ -97,7 +97,7 @@ test("provider loaded and auth loaded remain separate; backend refusal still exp
     ),
   );
   await expect(
-    page.getByRole("heading", { name: "Your session expired", exact: true }),
+    page.getByRole("heading", { name: "We couldn't verify your session", exact: true }),
   ).toBeVisible();
   await expect(page.getByTestId("identity")).toHaveCount(0);
   expect(reads).toBe(1);

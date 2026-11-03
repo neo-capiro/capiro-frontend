@@ -47,7 +47,7 @@ for (const identity of identities) {
         page.getByRole("heading", { name: "Current access unavailable" }),
       ).toHaveCount(0);
       await expect(
-        page.getByRole("heading", { name: "Your session expired" }),
+        page.getByRole("heading", { name: "We couldn't verify your session" }),
       ).toHaveCount(0);
       expect(fixture.calls("session")).toHaveLength(1);
       expect(fixture.calls("query")).toHaveLength(1);
@@ -106,7 +106,7 @@ for (const status of [200, 401]) {
       page.getByRole("heading", { name: "Task creation confirmed" }),
     ).toHaveCount(0);
     await expect(
-      page.getByRole("heading", { name: "Your session expired" }),
+      page.getByRole("heading", { name: "We couldn't verify your session" }),
     ).toHaveCount(0);
     expect(fixture.calls("session")).toHaveLength(1);
     expect(fixture.calls("execute")).toHaveLength(1);

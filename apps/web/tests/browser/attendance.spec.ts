@@ -434,7 +434,7 @@ test("Meeting privacy errors and session expiry never expose a successful-lookin
   status = 401;
   await panel.getByRole("button", { name: "Retry", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   expect(state.sends).toEqual([]);
   expect(unexpected).toEqual([]);

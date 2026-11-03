@@ -3,6 +3,10 @@ import { sameRequestOrigin } from "../../request-origin";
 import { portfolioCommandRefusal } from "./portfolio-command-refusals";
 import { incomingMailFilesReadRefusal } from "./incoming-mail-files-refusal";
 import { coreSessionAuthentication } from "../../preview/core-session-authentication";
+import {
+  authFailureHeaders,
+  type AuthFailureClass,
+} from "../../session/auth-failure";
 const permittedRoots: Record<Service, readonly string[]> = {
   core: [
     "clients",
@@ -26,10 +30,19 @@ const permittedRoots: Record<Service, readonly string[]> = {
   intelligence: ["clients", "legiwatch", "opportunities", "tracker"],
   meri: [],
 };
-const jsonError = (status: number, message: string) =>
+const jsonError = (
+  status: number,
+  message: string,
+  failure?: AuthFailureClass,
+) =>
   Response.json(
     { message },
-    { status, headers: { "Cache-Control": "no-store" } },
+    {
+      status,
+      headers: failure
+        ? authFailureHeaders(failure, { "Cache-Control": "no-store" })
+        : { "Cache-Control": "no-store" },
+    },
   );
 export async function proxyRequest(
   request: Request,
@@ -181,9 +194,13 @@ export async function proxyRequest(
       ),
     );
   } catch {
-    return jsonError(401, "Your session could not be verified. Sign in again.");
+    return jsonError(
+      401,
+      "Your session could not be verified. Sign in again.",
+      "credential-unverified",
+    );
   }
-  if (!token) return jsonError(401, "Sign in to continue.");
+  if (!token) return jsonError(401, "Sign in to continue.", "no-session");
   const url = new URL(`${base}/${path.map(encodeURIComponent).join("/")}`);
   url.search = new URL(request.url).search;
   try {
@@ -246,7 +263,11 @@ export async function proxyRequest(
         )
           message = detail.join(" ").slice(0, 1000);
       }
-      return jsonError(response.status, message);
+      return jsonError(
+        response.status,
+        message,
+        response.status === 401 ? "upstream-rejected" : undefined,
+      );
     }
     return new Response(response.status === 204 ? null : response.body, {
       status: response.status,

@@ -309,7 +309,7 @@ for (const status of [403, 401])
     await expect(page.getByRole("button", { name: /Download/ })).toHaveCount(0);
     if (status === 401) {
       await expect(
-        page.getByRole("heading", { name: "Your session expired" }),
+        page.getByRole("heading", { name: "We couldn't verify your session" }),
       ).toBeVisible();
       await expect(
         page.getByRole("link", { name: "Sign in", exact: true }),

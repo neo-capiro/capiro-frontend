@@ -180,14 +180,14 @@ test("Core expiry clears the application, does not replay and cannot be escaped 
     .getByRole("button", { name: "Check synthetic Core session" })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await page.evaluate((id) => {
     history.pushState({}, "", `/modules?clientId=${id}`);
     dispatchEvent(new PopStateEvent("popstate"));
   }, otherId);
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(page.getByLabel("Scope draft")).toHaveCount(0);
   expect(calls).toBe(1);

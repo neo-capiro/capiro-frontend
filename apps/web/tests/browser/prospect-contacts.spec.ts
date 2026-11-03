@@ -372,7 +372,7 @@ test("wrong-client edit receipt and permission denial preserve draft;401 exits t
     .getByRole("button", { name: "Save contact", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired", exact: true }),
+    page.getByRole("heading", { name: "We couldn't verify your session", exact: true }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Sign in", exact: true }),

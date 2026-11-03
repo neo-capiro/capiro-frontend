@@ -329,7 +329,7 @@ test("session expiry refuses the catalog rather than showing cached success", as
   );
   await page.goto(path);
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   expect(writes).toEqual([]);

@@ -309,7 +309,7 @@ test("expired creation sends one original request and clears the authenticated e
     .fill("Private unsaved text");
   await page.getByRole("button", { name: "Create manual draft" }).click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(page.getByLabel("New prospect document title")).toHaveCount(0);
   await expect(

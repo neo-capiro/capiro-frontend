@@ -12,6 +12,7 @@ import {
 import { SessionContext } from "./SessionContext";
 import { SelectedClientProvider } from "./SelectedClient";
 import { routeClientId } from "./client-route";
+import type { AuthFailureClass } from "./auth-failure";
 import { isOnboardPath, isPublicOnboardPath } from "./onboard-route";
 import { ImpersonationBoundary } from "../impersonation/ImpersonationBoundary";
 
@@ -49,18 +50,24 @@ function SessionData({
   identity: string;
   onSessionExpired: () => void;
 }) {
-  const [expired, setExpired] = useState(false);
+  // The admitted class of the 401 that ended this identity's session. The first
+  // one wins: it is the stimulus, and later reports cannot re-describe it.
+  const [expired, setExpired] = useState<AuthFailureClass | null>(null);
   const [actingScope, setActingScope] = useState<string | null>(null);
   const onScope = useCallback((id: string | null) => setActingScope(id), []);
-  const expire = useCallback(() => {
-    onSessionExpired();
-    setExpired(true);
-  }, [onSessionExpired]);
+  const expire = useCallback(
+    (failure: AuthFailureClass) => {
+      onSessionExpired();
+      setExpired((previous) => previous ?? failure);
+    },
+    [onSessionExpired],
+  );
   if (expired)
     return (
       <SessionContext.Provider value="expired">
-        <section role="alert">
-          <h2>Your session expired</h2>
+        {/* The class is the fixed diagnostic vocabulary; the copy claims no cause. */}
+        <section role="alert" data-auth-class={expired}>
+          <h2>We couldn&apos;t verify your session</h2>
           <p>Sign in again to continue.</p>
           {/* A fresh document must discard the expired session before reauthentication. */}
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}

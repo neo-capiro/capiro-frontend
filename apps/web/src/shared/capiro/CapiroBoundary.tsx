@@ -16,6 +16,7 @@ import {
   UNKNOWN_CAPABILITIES,
 } from "./capabilities";
 import { createCapiroApi, type CapiroApi } from "./http";
+import type { AuthFailureClass } from "../session/auth-failure";
 import { capiroOperations } from "./registry";
 import type { OperationRegistry } from "./contracts";
 import { publicOnboardOperations } from "./operations/onboard-public";
@@ -30,14 +31,14 @@ export function CapiroDataProvider({
   onSessionExpired,
 }: {
   children: ReactNode;
-  onSessionExpired: () => void;
+  onSessionExpired: (failure: AuthFailureClass) => void;
 }) {
   const [scope] = useState(createRequestLifetime);
   const [api] = useState(() =>
     createCapiroApi(capiroOperations, {
-      onSessionExpired: () => {
+      onSessionExpired: (failure) => {
         scope.abort();
-        onSessionExpired();
+        onSessionExpired(failure);
       },
       scopeSignal: scope.signal,
     }),

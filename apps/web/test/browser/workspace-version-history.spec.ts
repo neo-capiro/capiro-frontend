@@ -448,7 +448,7 @@ test("already populated saved detail clears when a later read expires the sessio
   await expect(history(page)).toHaveCount(0);
   await page.getByRole("button", { name: "History", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(history(page)).toHaveCount(0);
   await expect(
