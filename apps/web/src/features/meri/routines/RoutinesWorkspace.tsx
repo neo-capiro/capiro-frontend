@@ -150,6 +150,10 @@ export function RoutinesWorkspace({
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [viewPort, setViewPort] = useState(port);
   const current = useRef<RoutineWorkflow | null>(port);
+  /** The connection this view has read the list for, the read in flight for it, and the one it refused or failed. */
+  const listed = useRef<RoutineWorkflow | null>(null);
+  const reading = useRef<RoutineWorkflow | null>(null);
+  const failed = useRef<RoutineWorkflow | null>(null);
   useLayoutEffect(() => {
     current.current = port;
     return () => {
@@ -159,6 +163,24 @@ export function RoutinesWorkspace({
   useEffect(() => {
     void port.load();
   }, [port]);
+  // The host keeps this exact port and hides it while the identity/client is briefly revalidated, so the
+  // connection's own lifetime can discard a read that is still owed. That re-entry changes no prop and no
+  // journal state this view receives, so this runs after every render and the refs, not a dependency list,
+  // decide. It starts the one authorized read per connection, resumes an owed first read once the connection
+  // is available again, and leaves a read that actually failed or was refused to the explicit Refresh. A
+  // discarded read publishes no state, so it cannot schedule the next attempt by itself: no deps, no timer,
+  // no retry loop and no new authority.
+  useEffect(() => {
+    if (
+      !state.ready ||
+      state.accessDenied ||
+      listed.current === port ||
+      failed.current === port ||
+      reading.current === port
+    )
+      return;
+    void read();
+  });
   // Service pages and existing-routine edits never carry across a connection. An unsent new draft
   // may stay within its keyed owner; the host hides it until fresh authorization and unmounts on denial.
   if (viewPort !== port || (state.accessDenied && (page || editor))) {
@@ -175,12 +197,19 @@ export function RoutinesWorkspace({
   }
   if (state.saved && editor) setEditor(null);
   async function read(more = false) {
-    if (loading) return;
+    if (reading.current === port) return;
+    reading.current = port;
+    if (failed.current === port) failed.current = null;
+    // An owed first read keeps its in-progress note when the connection's own lifetime discards the answer, so
+    // the discarded attempt publishes no state and cannot schedule the retry by itself.
+    const owed = !more && page === null;
+    let discarded = false;
     setLoading(port);
     setError(null);
     try {
       const response = await port.list(more ? page?.nextAfterScheduleId : null);
       if (current.current !== port) return;
+      listed.current = port;
       setPage((previous) =>
         more && previous
           ? {
@@ -190,12 +219,22 @@ export function RoutinesWorkspace({
           : response.page,
       );
     } catch {
-      if (current.current === port)
+      if (current.current !== port) return;
+      // The connection's own lifetime decides what a failed answer means. If the port can no longer authorize a
+      // read (temporary identity/client revalidation, or the session ended), the reply was discarded, not refused:
+      // nothing is reported, nothing is admitted, and the read stays owed. If the port is still current, the
+      // request itself ended — the transport's own deadline or a broken transport — and that is a real failure
+      // the view must report and settle so explicit Refresh can recover it.
+      discarded = !port.current;
+      if (!discarded) {
+        failed.current = port;
         setError(
           "Current routines could not be read. Previously shown results are not current authority.",
         );
+      }
     } finally {
-      if (current.current === port) setLoading(null);
+      if (reading.current === port) reading.current = null;
+      if (current.current === port && !(discarded && owed)) setLoading(null);
     }
   }
   const disabled = !state.ready || state.busy || Boolean(state.saved);

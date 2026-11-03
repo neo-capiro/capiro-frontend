@@ -3713,12 +3713,12 @@
     "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
     "kind": "function",
     "symbol": "RoutinesWorkspace",
-    "line": 98,
-    "nonblank": 278,
-    "fingerprint": "1b557e37a06d72e19adee12768a2655bc2876b74a15e9f40b281ea9b9137647e",
-    "reason": "One current-connection routines view: it holds list/paging, selected-row and editor state, delegates authority and mutations to the workflow port, and composes the existing form, cancellation, review and activity surfaces. The MR04 delta adds only the selected routine's ConsentReview with the existing disabled predicate; that child owns the explicit review interaction and the canonical workflow owns request custody. Account/port retirement, late-result fencing and management-versus-execution delegation remain in the same existing view lifetime. Splitting this render solely for size would not separate a second responsibility. Accepted exact body; source-stage public receiving and final installed-package/deployed checks remain distinct.",
-    "reviewedBy": "Codex bounded exact-body validation, reusing independent Hermes consent-consumer review beb06061feee5ea7bbf0d732e53aac90848e902c2c08898abf65a5687272e89d section 5",
-    "reviewedOn": "2026-10-28"
+    "line": 121,
+    "nonblank": 313,
+    "fingerprint": "864e91ef0252842260f03370db506da22513902d290c3b88a8c8c6b6284ab7fb",
+    "reason": "One current-connection routines view owns page/cursor, selected row, editor and read affordances while composing existing form/review/consent children. The once-successful, in-flight and failed refs are local read lifecycle bookkeeping: they deduplicate StrictMode and repeated render passes, allow the existing host re-entry to resume an unfulfilled read, and leave real failures for explicit Refresh. Workflow.current only classifies discarded lifetime replies versus current-port request failures; transport deadlines settle loading, and new ports fence late results and reset pages. The effect issues only the existing bounded list read; it never prepares, approves, renews, executes or recovers a command. The sizeable body is cohesive UI composition with one captured port lifetime, not a second orchestration owner. Exact c859bab9 body independently reviewed; nine mounted cases pass for first load, StrictMode, paging, manual failure/deadline recovery, refusal, stale former port and revalidation.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA013 product c859bab93a00361ab0f1908d8c38f13eb0fd34fc; outputs/vqa-013-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
@@ -7058,11 +7058,11 @@
     "kind": "file",
     "symbol": "<module>",
     "line": 1,
-    "nonblank": 497,
-    "fingerprint": "ed3aac1805f3d0cc161749be5766f27531e4354b25982f6918396563b86383c8",
-    "reason": "One current-context RoutineWorkflow owns the view lifetime and serializes prepare, approval, recovery and consent renewal through the same access port and journal lock. The physical-package correction changes only the retained review type import to the full published contract; the runtime review, approval expectation, same-decision retry, currentness guards and retirement behavior remain unchanged. No transport, durable store, scheduling executor or authority owner is added. Per-action methods remain bounded and receiving, correlation and persistence remain delegated. Accepted exact module after full-body and delta review, retaining the prior single-lifecycle rationale and the physical-package consent proof.",
-    "reviewedBy": "Codex M7 bounded full-module review of physical MR04 correction, reusing the accepted M5 module review at 96d3a436 and actual canonical-package consent tests",
-    "reviewedOn": "2026-10-28"
+    "nonblank": 564,
+    "fingerprint": "c3cef21da33b8ec13d9202185c36ee6f8f42811ac97649c7a065dde031cbda1c",
+    "reason": "One RoutineWorkflow owns a current opaque-session lifetime, subscribable UI state and explicit routine prepare/approve/reconcile/consent operations through the existing canonical access and encrypted journal lock. Receiving, correlation, persistence, session issuance and scheduling execution remain separate owners. The VQA013 delta adds only a read-only current getter over disposed, lifetime signal and the existing isCurrent callback; it publishes/writes nothing and grants no authority. The existing guard still independently rejects access denial, aborted/disposed lifetime and unavailable context before protected work. The UI uses the getter solely to distinguish a current-port transport deadline from a discarded response during revalidation; no request identity, approval/retry custody, retention, route or wire contract changes. Reviewed the exact c859bab9 module and delta, retaining explicit command ownership and bounded per-action methods. Real deadline/revalidation, refusal and stale-port mounted cases pass; full release and live acceptance are not implied.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA013 product c859bab93a00361ab0f1908d8c38f13eb0fd34fc; outputs/vqa-013-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/screens/settings/UsageLimitsScreen.tsx",
@@ -7834,6 +7834,17 @@
     "fingerprint": "a756993b0cedaa6e9d76d1f7ab8c3eb601b1795082fcfeec2b17f28bfd41677b",
     "reason": "Independent VQA-002 responsibility review at product head 3fae7f2eecf84b57a32fa6bfe25231c494c60623. This component owns the optional Tools panel's composition and focus/dismissal behavior, and delegates each existing picker to its domain owner. The change passes the same session's display-name reporter to ProcedureSelectionPicker; it adds no catalog fetch, state store, authorization or execution path. Scope and exact selector remain with the existing session/picker owners. Its 166 nonblank body lines largely express the panel and current availability states; arbitrary JSX splitting would not improve responsibility ownership. Mounted procedure selection, current label, scope and access-loss checks passed.",
     "reviewedBy": "Codex independent reviewer /root/review_vqa002 (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 442,
+    "fingerprint": "386bdc5b66cab369985fe2f505d77f489ed1dc97dae767d5b7d3b59e70da7f5d",
+    "reason": "One routines presentation module maps bounded canonical rows, renders the truthful empty result, and composes one current-port workspace. Read/paging, row selection and editor state stay in that workspace; forms, cancellation, consent review and saved-result recovery remain delegated to their existing components and workflow. The VQA013 change adds only the initial authorized list lifecycle: a successful page fulfils it, a hidden same-port discard remains owed, a current-port deadline/failure requires explicit Refresh, and former-port answers are fenced. This module creates no routine authority, request journal, transport or execution path. The adjacent pure mapping and empty-state helpers share this one presentation responsibility; splitting solely at the line threshold would not improve ownership. Independently inspected exact c859bab9 source and nine mounted synthetic cases, including both prior reviewer failures; deployed acceptance remains separate.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA013 product c859bab93a00361ab0f1908d8c38f13eb0fd34fc; outputs/vqa-013-independent-final-review.json",
     "reviewedOn": "2026-11-03"
   }
 ]

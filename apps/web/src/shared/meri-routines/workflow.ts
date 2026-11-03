@@ -89,6 +89,16 @@ export class RoutineWorkflow {
     this.observeLifetime();
   }
   getSnapshot = () => this.state;
+  /**
+   * The same lifetime this port's guard enforces: an answer it cannot authorize (the identity or client is being
+   * revalidated, or the session ended) is not this request failing. A request that ends while this is true — the
+   * transport's own deadline or a broken transport — is a real read failure the view must report and settle.
+   */
+  get current() {
+    return (
+      !this.disposed && !this.options.signal.aborted && this.options.isCurrent()
+    );
+  }
   /** UI affordance only; the server independently enforces the management vocabulary. */
   get managementOnly() {
     return isRoutineManagement(this.options.context);
