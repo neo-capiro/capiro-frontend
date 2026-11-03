@@ -150,6 +150,9 @@ export function RoutinesWorkspace({
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [viewPort, setViewPort] = useState(port);
   const current = useRef<RoutineWorkflow | null>(port);
+  /** The connection whose authorized list this view already started, and the read in flight for it. */
+  const listed = useRef<RoutineWorkflow | null>(null);
+  const reading = useRef<RoutineWorkflow | null>(null);
   useLayoutEffect(() => {
     current.current = port;
     return () => {
@@ -159,6 +162,14 @@ export function RoutinesWorkspace({
   useEffect(() => {
     void port.load();
   }, [port]);
+  // A connected port is authorized once its journal is restored, so the bounded list starts there: the connected
+  // workspace shows its current definitions without an extra manual Refresh. One read per connection.
+  useEffect(() => {
+    if (!state.ready || state.accessDenied || listed.current === port) return;
+    listed.current = port;
+    void read();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one authorized read per connected port
+  }, [port, state.ready, state.accessDenied]);
   // Service pages and existing-routine edits never carry across a connection. An unsent new draft
   // may stay within its keyed owner; the host hides it until fresh authorization and unmounts on denial.
   if (viewPort !== port || (state.accessDenied && (page || editor))) {
@@ -175,7 +186,8 @@ export function RoutinesWorkspace({
   }
   if (state.saved && editor) setEditor(null);
   async function read(more = false) {
-    if (loading) return;
+    if (reading.current === port) return;
+    reading.current = port;
     setLoading(port);
     setError(null);
     try {
@@ -189,12 +201,15 @@ export function RoutinesWorkspace({
             }
           : response.page,
       );
-    } catch {
-      if (current.current === port)
-        setError(
-          "Current routines could not be read. Previously shown results are not current authority.",
-        );
+    } catch (error) {
+      if (current.current !== port) return;
+      // The connection's own lifetime ended this read; it is not a failed list and stays unreported.
+      if ((error as { name?: string } | null)?.name === "AbortError") return;
+      setError(
+        "Current routines could not be read. Previously shown results are not current authority.",
+      );
     } finally {
+      if (reading.current === port) reading.current = null;
       if (current.current === port) setLoading(null);
     }
   }

@@ -706,6 +706,105 @@ it("replacement connection cannot inherit a page, cursor or unsaved editor", asy
   ).toBeNull();
 });
 
+it("a connected workspace reads its authorized list once when the restored journal makes the port ready", async () => {
+  const fetch = fetcher(() => Response.json(f.listed)),
+    port = workflow(fetch);
+  // Mounting the workspace is not authorization: the existing journal restore decides when a read may start.
+  view.captureEffects = true;
+  renderWorkspace(port);
+  runEffects();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  expect(fetch).not.toHaveBeenCalled();
+  expect(renderWorkspace(port)).toContain(
+    "Refresh routines to read the current schedule definitions",
+  );
+  await vi.waitFor(() => expect(port.getSnapshot().ready).toBe(true));
+  // The connected workspace lists itself: a first read no longer waits for a manual Refresh.
+  renderWorkspace(port);
+  runEffects();
+  await vi.waitFor(() =>
+    expect(renderWorkspace(port)).toContain(
+      f.listed.page.rows[0].projection.destinationId,
+    ),
+  );
+  expect(fetch).toHaveBeenCalledOnce();
+  expect(JSON.parse(String(fetch.mock.calls[0]![1]?.body))).toEqual({
+    afterScheduleId: null,
+    limit: 20,
+    historyLimit: 10,
+    observation: "consent",
+  });
+  // A further lifecycle pass for the same connection never issues a second authorized read.
+  renderWorkspace(port);
+  runEffects();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  expect(fetch).toHaveBeenCalledOnce();
+});
+
+it("a lifetime ended during the authorized read reports no list failure and applies no page", async () => {
+  const started = barrier(),
+    release = barrier(),
+    lifetime = new AbortController();
+  const fetch = vi.fn<typeof globalThis.fetch>(async () => {
+    started.resolve();
+    await release.promise;
+    return Response.json(f.listed);
+  });
+  const port = new RoutineWorkflow({
+    context: f.context,
+    access: createRoutinesAccess("synthetic", lifetime.signal, fetch),
+    signal: lifetime.signal,
+    isCurrent: () => true,
+  });
+  await port.load();
+  view.captureEffects = true;
+  renderWorkspace(port);
+  runEffects();
+  await started.promise;
+  expect(renderWorkspace(port)).toContain("Reading current routines");
+  lifetime.abort();
+  release.resolve();
+  await vi.waitFor(() =>
+    expect(renderWorkspace(port)).not.toContain("Reading current routines"),
+  );
+  const html = renderWorkspace(port);
+  // Ending the connection is not a failed list: nothing is reported and no page is admitted.
+  expect(html).not.toContain("could not be read");
+  expect(html).not.toContain(f.listed.page.rows[0].projection.destinationId);
+});
+
+it("a list answered for a former connection never replaces the current connection's page", async () => {
+  const former = structuredClone(f.listed);
+  former.page.rows[0]!.projection.destinationId = "former-inbox";
+  const released = barrier();
+  const formerFetch = fetcher(async () => {
+    await released.promise;
+    return Response.json(former);
+  });
+  const formerPort = workflow(formerFetch);
+  await formerPort.load();
+  view.captureEffects = true;
+  renderWorkspace(formerPort);
+  runEffects();
+  const currentFetch = fetcher(() => Response.json(f.listed));
+  const currentPort = workflow(currentFetch);
+  await currentPort.load();
+  renderWorkspace(currentPort);
+  runEffects();
+  await vi.waitFor(() =>
+    expect(renderWorkspace(currentPort)).toContain(
+      f.listed.page.rows[0].projection.destinationId,
+    ),
+  );
+  released.resolve();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  const html = renderWorkspace(currentPort);
+  // The replaced connection's late answer is admitted nowhere: the current connection keeps its own page.
+  expect(html).toContain(f.listed.page.rows[0].projection.destinationId);
+  expect(html).not.toContain("former-inbox");
+  expect(currentFetch).toHaveBeenCalledOnce();
+});
+
 it("denial during a held prepare fences late UI publication but retains the exact journal", async () => {
   const started = barrier(),
     release = barrier();
