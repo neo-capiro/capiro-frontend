@@ -10,6 +10,8 @@ import { z } from "zod";
 import { proxyRequest } from "../src/shared/portfolio/api/proxy";
 import { readConfig } from "../src/shared/portfolio/config/config";
 import { handleCapiroRequest } from "../src/shared/capiro/gateway";
+import { serviceErrorResponse } from "../src/shared/capiro/gateway-errors";
+import { objectiveOperationalOperations } from "../src/shared/capiro/operations/objective-operational";
 import { defineOperation } from "../src/shared/capiro/contracts";
 import type { CapiroConfig } from "../src/shared/capiro/config";
 import { proxyPreviewRead } from "../src/shared/preview/read-proxy.server";
@@ -406,5 +408,71 @@ describe("transports admit only the closed class", () => {
     );
     await expect(client.request("core", "me", z.unknown())).rejects.toThrow();
     expect(expired).not.toHaveBeenCalled();
+  });
+});
+
+/**
+ * The objective-association branch of the Capiro gateway returns the native refusal
+ * envelope before the generic error shaper. The public Error contract admits 401
+ * UNAUTHENTICATED there, so that existing early return is itself a producer boundary.
+ */
+describe("admitted association refusal names its upstream 401", () => {
+  const unauthorized = {
+    schemaVersion: 1,
+    status: 401,
+    code: "UNAUTHENTICATED",
+    outcome: "rejected",
+    requestId: null,
+  };
+  const malformed = {
+    schemaVersion: 1,
+    status: 400,
+    code: "MALFORMED_REQUEST",
+    outcome: "rejected",
+    requestId: null,
+  };
+  it.each([
+    "objectives.operational.link",
+    "objectives.operational.receipt",
+  ] as const)(
+    "%s keeps its admitted 401 envelope and names upstream-rejected",
+    async (key) => {
+      const response = await serviceErrorResponse(
+        Response.json(unauthorized, {
+          status: 401,
+          headers: { [authFailureHeader]: "no-session" },
+        }),
+        objectiveOperationalOperations[key],
+        new AbortController().signal,
+        false,
+      );
+      expect(response.status).toBe(401);
+      expect(await response.json()).toEqual(unauthorized);
+      expect(klass(response)).toBe("upstream-rejected");
+      expect(response.headers.get("Cache-Control")).toBe("no-store");
+      expect(response.headers.get("Referrer-Policy")).toBe("no-referrer");
+      // Owned header only: no upstream value, nothing else added.
+      expect([...response.headers.keys()].sort()).toEqual([
+        "cache-control",
+        "content-type",
+        "referrer-policy",
+        "x-capiro-auth-class",
+      ]);
+    },
+  );
+
+  it.each([
+    "objectives.operational.link",
+    "objectives.operational.receipt",
+  ] as const)("%s: a non-401 admitted refusal stays unmarked", async (key) => {
+    const response = await serviceErrorResponse(
+      Response.json(malformed, { status: 400 }),
+      objectiveOperationalOperations[key],
+      new AbortController().signal,
+      false,
+    );
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual(malformed);
+    expect(klass(response)).toBeNull();
   });
 });

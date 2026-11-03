@@ -127,13 +127,21 @@ export async function serviceErrorResponse(
         response.status,
         payload,
       );
+      // This admitted refusal can itself be the upstream 401 (the public Error
+      // contract permits UNAUTHENTICATED), so it names its class too.
       if (failure)
         return Response.json(failure, {
           status: response.status,
-          headers: {
-            "Cache-Control": "no-store",
-            "Referrer-Policy": "no-referrer",
-          },
+          headers:
+            response.status === 401
+              ? authFailureHeaders("upstream-rejected", {
+                  "Cache-Control": "no-store",
+                  "Referrer-Policy": "no-referrer",
+                })
+              : {
+                  "Cache-Control": "no-store",
+                  "Referrer-Policy": "no-referrer",
+                },
         });
     } catch (error) {
       if (signal.aborted) throw error;
