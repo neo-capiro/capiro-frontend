@@ -5026,10 +5026,10 @@
     "file": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
     "kind": "function",
     "symbol": "CongressionalContacts",
-    "fingerprint": "bd3f37f3285ba49ad0a0444442eab257a0d411e744263487a61ee1a695d20e77",
-    "reason": "Independent full-body review of PR267: one congressional directory list composition owns filters, paging, expansion and selected-contact navigation. Replacing inline initials with MemberPhoto delegates decorative image rendering and per-URL failure state to its focused component. Existing query, favorites, selection and permission boundaries are unchanged. The function remains cohesive; no extraction is required for this presentation-only change.",
-    "reviewedBy": "Codex Wave5 orchestrator independent PR267 source review",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "3224cd087a12dc8d8247c35854f7ccf71d979c4e5a0a8e596c8f448a3bf7f223",
+    "reason": "Exact 1071741d review: one congressional-directory collection/detail owner retains its existing filter, page, expansion and selected-member state. The new staff route composes a separately owned read-only StaffProfile and keeps MemberProfile mounted in a hidden sibling; it does not add transport, authorization or another cache. Existing row/preview components and canonical queries remain the boundaries. Size is predominantly declarative list rendering; splitting the local state owner would obscure the preserved navigation lifetime.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/directory/StateDirectory.tsx",
@@ -7125,10 +7125,10 @@
     "file": "apps/web/src/features/modules/directory/MemberProfile.tsx",
     "kind": "function",
     "symbol": "MemberProfile",
-    "fingerprint": "aa78b42a282faf52f6373fc7430512e029d861a3a48340153b4e854ea09bb6ef",
-    "reason": "Independent full-body review of PR267: one member-profile composition owns tabs and existing typed notes, favorites, news and FEC views. The new title accessory delegates only decorative photo/fallback rendering to MemberPhoto. Existing API calls, state transitions, explicit mutations and unavailable capabilities are unchanged. This is a coherent profile surface with no new authorization, persistence or domain policy; splitting it for this small presentation delta is unnecessary.",
-    "reviewedBy": "Codex Wave5 orchestrator independent PR267 source review",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "51ad6dbcf4a67f15d2dab9eb0c763b4bb9803f3c03af8dcc85926ce36faf43e4",
+    "reason": "Exact 1071741d review: one existing member profile owns its tabs, local note form and favorite callbacks. The delta supplies validated staff deep links without replacing the member identity, query owner or write handlers. Staff data/rendering is owned by separate StaffProfile components. The long body is the coherent member-profile tab projection; no new business policy or unrelated lifecycle is added.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/conversation/SiteWorkflowPicker.tsx",
@@ -7215,19 +7215,19 @@
     "file": "apps/web/src/features/modules/engagement/outreach/CampaignSend.tsx",
     "kind": "function",
     "symbol": "CampaignSend",
-    "fingerprint": "2f00f61530686eb0e0bb00f66e6d974c002d73ec1063c7861c2b36771ce43530",
-    "reason": "This existing send-review component binds the current saved versions, recipient envelopes and selected sending mailbox to one explicit confirmation. The scoped modal presentation retains the existing owner preflight, version/envelope checks, test-send selection and uncertain-outcome read controls. It does not become a delivery owner or infer sending from local UI state.",
-    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-10-30"
+    "fingerprint": "4f842fa6571cb98b17ccae3e00bf80b3ddd90d06d5e6ecd1fecc14c88d71e6bc",
+    "reason": "Exact 1071741d review: the existing final outreach step retains selected mailbox, saved-envelope matching, draft eligibility, confirmation, test-send and uncertain-delivery recovery ownership. Independent AST comparison verifies the four eligibility/mapping declarations, two send invocations and three recovery callback references against FE36. The new footer render slot relocates the same review action without introducing another send owner, effect or retry. Preview and confirmation remain one cohesive final-step presentation.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/outreach-overview.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "c63f0c6dfc68969491099e300adbe4150180b9b8b97bf03418f42ba2b7a14729",
-    "reason": "This stylesheet scopes the Outreach list, draft form and overview visual primitives, including responsive table/form layouts and keyboard focus states. It shares the same card, status, field and action styles across those adjacent views, uses existing design tokens, and contains no application state or behavior. Splitting the cohesive visual primitives would duplicate selectors without isolating a domain owner.",
-    "reviewedBy": "Codex independent Outreach audit (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-10-30"
+    "fingerprint": "d2c6885be7896cd8b14fbcea310d847bd03a655fa2ce0b9c96688ff21f269415",
+    "reason": "Exact 1071741d review: scoped outreach overview styles remain limited to list/header/filter/table presentation using current Capiro tokens. New filter-card layout and wrapping rules regroup existing controls; no global selectors, authority decisions or hidden action substitution are introduced. One domain stylesheet remains cohesive at this size.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachDraft.tsx",
@@ -7243,33 +7243,33 @@
     "kind": "file",
     "symbol": "<module>",
     "line": 1,
-    "nonblank": 562,
-    "fingerprint": "f9dfab6f5142c8dd91100b02a4b382ef663b01d803504d3785c94632f8d2e4a4",
+    "nonblank": 561,
+    "fingerprint": "92c47bef01f040720864444bd5bdcb0cd2c49f1190f9f47ea67ee4bdb07a7d6b",
     "disposition": "APPROVE_EXACT_RESPONSIBILITY",
-    "reason": "OutreachList module owns one outreach-list presentation and local view interaction, with a local row renderer. Query transport, audience policy and category normalization remain in existing separate owners. The corrected hint adds no domain, authority, mutation or parallel data owner; splitting for line count would separate this view from its loading/error/pagination explanation.",
-    "reviewedBy": "Independent reviewer /root/legislative_review",
-    "reviewedOn": "2026-11-01"
+    "reason": "Exact 1071741d review: this module remains the single outreach overview presentation and its local row rendering helpers. Canonical campaign/record reads, ancillary session capability handling, client mismatch checks, categories and pagination retain their existing owners. Only filter/header hierarchy is rearranged. The file does not acquire a new domain or provider responsibility; CSS and list-model policy remain separately owned.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
     "kind": "function",
     "symbol": "OutreachList",
-    "line": 31,
-    "nonblank": 462,
-    "fingerprint": "a16ea73e92b351726dd5f4f012f7299ee434980b4ff89d2e44d39867b73bbda7",
+    "line": 30,
+    "nonblank": 460,
+    "fingerprint": "6871169f8d19c737769002099564222acac4068102f4e76b5bd5747e1ed29c45",
     "disposition": "APPROVE_EXACT_RESPONSIBILITY",
-    "reason": "OutreachList function composes the independent campaign, record and ancillary-session query states into one filterable/paged view. This exact change only explains their existing count semantics; no count, query, policy or mutation logic changes. Keeping the hint adjacent to the tabs preserves one presentation responsibility; no extraction is required for this bounded delta.",
-    "reviewedBy": "Independent reviewer /root/legislative_review",
-    "reviewedOn": "2026-11-01"
+    "reason": "Exact 1071741d review: one list controller owns local overview filters and the composition of canonical campaigns/records with explicitly ancillary sessions. Independent AST comparison preserves all 15 selected query/scope/mismatch/category/pagination/reset expressions from FE36. The delta moves existing controls and their callbacks into the filter card; it adds no second query/filter engine or mutation path. The long body is cohesive list rendering with its existing row helpers.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflow.tsx",
     "kind": "function",
     "symbol": "OutreachWorkflow",
-    "fingerprint": "55d64b1bfd2f86435c83e4acac73b7472d59845e34c8ec6c6130d7d63b51372a",
-    "reason": "Existing seven-stage composer changes by one callback prop. It passes its existing query reload and introduces no parallel query or campaign lifecycle.",
-    "reviewedBy": "Codex independent HIGH Classic Outreach template review; OUTREACH-CLASSIC-TEMPLATES-INDEPENDENT-REVIEW-20261101.txt SHA256 070b24be8d35dcd2da9b611c3615092c6d59c099c8ac0c1bab90525f3ad3115e",
-    "reviewedOn": "2026-11-01"
+    "fingerprint": "e797086d64169c7bfd130eb3d2f019e63b2c6244dcd0a052b6dc0a80b3c5f52b",
+    "reason": "Exact 1071741d review: one seven-step composition delegates durable state/actions to useOutreachCampaign and step rendering to existing components. Validation and onStep guards remain in place. The final-step render callback passes the frame footer into CampaignSend, preserving one final action owner and rendering the existing status children. No new lifecycle, transport or dispatch policy is added.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/useOutreachCampaign.ts",
@@ -7329,10 +7329,10 @@
     "file": "apps/web/src/features/modules/engagement/outreach/OutreachWorkflowFrame.tsx",
     "kind": "function",
     "symbol": "OutreachWorkflowFrame",
-    "fingerprint": "40bed35e41671ed05e2815a67feaea3ab2ef68eeb35ff750004bdd0e8d5c1409",
-    "reason": "The existing seven-step frame owns navigation presentation, progress and footer controls. Step descriptions and destination labels are data in the same module; busy/fenced/nextDisabled and read-only save behavior remain intact. It invokes supplied callbacks and introduces no campaign lifecycle or service ownership. Its cohesive accessible layout does not warrant fragmentation for the 103-line size signal.",
-    "reviewedBy": "Codex independent FE reviewer (non-author)",
-    "reviewedOn": "2026-11-01"
+    "fingerprint": "785562673e388265bc18d0f8c67622adf9dfb918ba0a03a5c9e3d91b5cabc0a2",
+    "reason": "Exact 1071741d review: stateless seven-step rail, status region and footer layout consume explicit props. Busy, fenced, read-only, sequence and next-disabled guards remain on the existing callbacks. The render slot composes the final review action into this same footer, and visited markers are presentation only. This is one coherent workflow frame with no persistence, provider or business-state owner.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/CampaignSetup.tsx",
@@ -7347,10 +7347,10 @@
     "file": "apps/web/src/features/modules/engagement/outreach/outreach-workflow.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "f34823239c86097278fe5fe7cb09f2bf2fbc355420926d24d177c0dfe98aaa03",
-    "reason": "This feature-local CSS module styles the existing Outreach wizard and its new generation brief/recipient review layout. New selectors are scoped to named local classes, reuse existing tokens, preserve the horizontal mobile rail and collapse review/brief columns at the existing breakpoint. Recipient/purpose overflow is bounded. No global shell styles, service behavior or unrelated feature ownership is introduced.",
-    "reviewedBy": "Codex independent FE reviewer (non-author)",
-    "reviewedOn": "2026-11-01"
+    "fingerprint": "8d60d3732d375cb213eee72ba4d6322821bb5a3a24d3a72027442639d433e2fa",
+    "reason": "Exact 1071741d review: scoped outreach wizard styles cover the existing rail, steps, draft review and footer. The delta adds recipient-explainer layout, completed-step markers and footer spacing while retaining token-based styling and responsive rules. No global style framework or behavioral visibility policy is introduced; one wizard stylesheet remains the clear owner.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/engagement/outreach/CampaignTemplates.tsx",
@@ -7908,6 +7908,24 @@
     "fingerprint": "4940af3716013fbde45abd047f556e3d26326b9701fbc7a17a38b6d16237d33c",
     "reason": "One selected conversation opening owner constructs hosts from captured hints, keeps an authorized send's pending prompt separate, and marks renewal/retry as read-only recovery. The 86-line function delegates canonical receipt admission and pre-publication exact-run refusal to the existing host; commands, durable journals and history remain separate owners. No unrelated responsibility, duplicate authority protocol or framework is introduced.",
     "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa003; PR554 product 7a6c0a1dd4e4b548e8fc13a0f856707b1311ed57; outputs/vqa-006-read-only-recovery-r1-independent-review.json",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/StaffProfileContent.tsx",
+    "kind": "function",
+    "symbol": "StaffProfileContent",
+    "fingerprint": "7f0535c696dd50dd876dc851a8af6f3ac1595a1fc48ec4bd65153f27258991d7",
+    "reason": "Exact 1071741d review: read-only projection of one received canonical staff detail into identity, bio, roles, contact, office, position and association sections. It owns no requests, authority, mutation, persistence or workflow. Shared controls, photo and URL validation are reused; associations remain text where native destinations are unallocated. The 178-line declarative projection is cohesive and does not warrant a generic profile framework.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/outreach/CampaignSetup.tsx",
+    "kind": "function",
+    "symbol": "CampaignDirection",
+    "fingerprint": "d942113a4a2f15e593a5604e82bfe488248a3b040b6557bc349ab5fc93646af4",
+    "reason": "Exact 1071741d review: introductory recipient guidance and the existing campaign direction/client controls form one first-step presentation. The new start callback delegates to the same parent navigation guard; direction updates and fixed-client disabling remain unchanged. No new workflow state, transport, eligibility rule or generic rendering layer is introduced.",
+    "reviewedBy": "Codex independent reviewer /root/review_vqa003 (GPT-6 Astra Ultra); thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a3bc-d1dc-77e1-81e0-41bf6d949548",
     "reviewedOn": "2026-11-03"
   }
 ]
