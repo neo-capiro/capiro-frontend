@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { MANAGEMENT_VERSION } from "@capiro/meri-contracts/conversation-history";
 import { installFixtures, json } from "../../tests/browser/fixtures";
-import { testIdentity } from "./fixtures";
+import { operationFixtures, testIdentity } from "./fixtures";
 
 const row = {
   conversationId: "30000000-0000-4000-8000-000000000003",
@@ -22,6 +22,9 @@ async function setup(page: Page) {
     Object.defineProperty(window, "BroadcastChannel", { value: undefined });
   });
   await installFixtures(page);
+  // The signed-in identity is read through the existing capped /api/capiro operation; without its
+  // canonical fixture the application boundary renders its failure view instead of the list.
+  await operationFixtures(page, { "me.read": testIdentity });
   await page.route("**/api/backend/core/me", (route) =>
     json(route, testIdentity),
   );
@@ -61,7 +64,7 @@ async function open(page: Page) {
   await expect(title(page)).toHaveCount(0);
 }
 
-test("pagination and receipt revalidation retain mounted drafts and disclosure while hiding unverified rows", async ({
+test("pagination keeps admitted rows with disabled actions while a receipt revalidation still hides them, preserving mounted drafts and disclosure", async ({
   page,
 }) => {
   await setup(page);
@@ -94,11 +97,26 @@ test("pagination and receipt revalidation retain mounted drafts and disclosure w
     .first();
   hold = true;
   await page.getByRole("button", { name: "Load more" }).click();
-  await expect(rename(page)).toBeHidden();
+  // A continuation keeps the admitted row and its actions on screen; a page read in flight is
+  // display currency only, so every mutation and export stays disabled until the read is current.
+  await expect(
+    page.getByRole("cell", { name: row.title, exact: true }),
+  ).toBeVisible();
+  await expect(rename(page)).toBeVisible();
+  await expect(rename(page)).toBeDisabled();
+  await expect(
+    page.getByRole("button", { name: "Restore", exact: true }),
+  ).toBeDisabled();
+  await expect(
+    page.getByRole("button", { name: "Delete", exact: true }),
+  ).toBeDisabled();
+  await expect(
+    page.getByRole("button", { name: "Export messages", exact: true }),
+  ).toBeDisabled();
   await expect.poll(() => Boolean(release)).toBe(true);
   hold = false;
   release!();
-  await expect(rename(page)).toBeVisible();
+  await expect(rename(page)).toBeEnabled();
   await expect(disclosure).toHaveAttribute("open", "");
   release = undefined;
   hold = true;
