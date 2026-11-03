@@ -275,10 +275,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx",
     "kind": "function",
     "symbol": "ClientHeader",
-    "fingerprint": "3ab9c2fb4f7b65fa1a9565b0334e28ca8e8ff2b40b4508175298c388138b3190",
-    "reason": "One client header composes breadcrumbs, view switcher and client action entry points using shared descriptors. Destination implementations remain in child owners; the shared monogram renders the identity avatar contents only. No new data or policy is computed by this header.",
-    "reviewedBy": "Hermes Agent independent source review",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "a2633e2a76b288a6190ae67e48ec1bd133457536cf1a102e91de0420d973a04e",
+    "reason": "Exact PR528 body review: one client header composes breadcrumbs, view switching, existing quick-add/action entries and an identity strip. Shared descriptors and child components retain navigation and action implementations. The changed sector/location expression is identity presentation only and adds no data, policy or workflow ownership. An extra extraction solely for size would fragment this cohesive header. Accept only this fingerprint.",
+    "reviewedBy": "Codex Astra independent PR528 reviewer",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx",
@@ -1427,10 +1427,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
     "kind": "function",
     "symbol": "ClientOverview",
-    "fingerprint": "0c1f4dd4621905a9c6eef262d573e18b671af97fb4f85d13ff44e600655aacac",
-    "reason": "Exact-body cohesion review, 2026-11-01: composes the single client overview from existing public feature entries and local cards/dialogs. It owns presentation values and local team/notes/quick-log visibility plus URL cleanup, while existing hooks and named child owners retain reads and workflows. RecordedActivity receives only clientId/version and owns its contract/query/status rendering; no activity calculation, new transport, mutation or backend authorization is embedded here. Its 183 nonblank body lines are predominantly overview layout and explicit child wiring. Existing separation is cohesive; no size-only extraction is warranted. ACCEPT only this fingerprint.",
-    "reviewedBy": "Codex independent frontend closure reviewer",
-    "reviewedOn": "2026-11-01"
+    "fingerprint": "27739f1542424c4c5f10efad8616c8a032a0d1696211244e773cdc5358b429ff",
+    "reason": "Exact PR528 body review: one client overview composes existing public feature entries, named cards/dialogs and query hooks, retaining local team/notes visibility and URL cleanup. Reads, recorded activity, metrics and destination workflows stay with their existing owners. The changed sector/location expression only formats the identity subtitle; it adds no transport, mutation, authorization or new responsibility. Existing separation remains cohesive; no size-only extraction is warranted. Accept only this fingerprint.",
+    "reviewedBy": "Codex Astra independent PR528 reviewer",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
@@ -5181,28 +5181,28 @@
     "file": "apps/web/src/features/modules/intelligence/DistrictMap.tsx",
     "kind": "function",
     "symbol": "DistrictMap",
-    "fingerprint": "94913d589db055b6288773ea1c998d1621e5fdafed91ddcf40340b7a9ccf22a3",
-    "reason": "This function remains the current-district map presentation and official-boundary adapter. It reuses the canonical typed binary read, geometry helpers and cancellation lifetime. The added color dimension and selected key are parent-provided display inputs; zoom/layers stay local and no client authority, data aggregation or mutation ownership is introduced. Keeping these cohesive map interactions together avoids an artificial split.",
-    "reviewedBy": "Codex independent PR239 reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "f1074e75167fd63e7bb7d87b8e4c07730727ab6ea053a2843d6a8822268cf2b0",
+    "reason": "Exact PR528 body review: this component owns one district-map presentation and official-boundary read lifetime, using the existing typed download and geometry helpers. Parent-provided district rows, display dimension and selected key remain inputs; local zoom and layers remain presentation state. The change only aligns missing-score accessible names and tooltips. No authority, aggregation, persistence or new responsibility is introduced; no size-only extraction is warranted. Accept only this fingerprint.",
+    "reviewedBy": "Codex Astra independent PR528 reviewer",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "20ddb1006ef51937e9d598eabb82ef5a8bf71bf96a40e14634ddd75bd6cd7a3b",
-    "reason": "This module remains the single read-only District Nexus screen, composing existing query, status, select, table and map owners. The selected-state predicate now narrows the returned district rows before all local cards, map, list and selection derive from them, while retaining the server state query. It handles cross-state award rows honestly without changing Core authorization, data ownership, persistence or unrelated domains.",
-    "reviewedBy": "Codex independent PR239 state-filter reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "68ba6b3b82ab77a49925dcfc322be3a1eae0b2fef1689e5875a5ab88b39b4846",
+    "reason": "Exact PR528 module review: one read-only District Nexus screen composes existing query, status, select, table and map owners with local formatting and scope/filter options. The null-aware numeric formatters and score/legend labels remain presentation of canonical returned data. Query authority, contracts and map geometry retain their existing owners. The file has one coherent screen responsibility; label changes require no new abstraction or size-only split. Accept only this fingerprint.",
+    "reviewedBy": "Codex Astra independent PR528 reviewer",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
     "kind": "function",
     "symbol": "DistrictNexus",
-    "fingerprint": "5a9f45e89a4c56cd94a07fd2afc2667d1e9290fb06ff7623218d1220a5e49f12",
-    "reason": "This component coordinates one district read and its local display scope. Filtering returned rows by the existing selected state belongs beside the existing inScope derivation; summaries, presentation filters and valid selection then share that set. Core remains the source and authorization owner, useCapiroQuery retains replaced-read admission, and DistrictMap owns boundaries. The actual mounted all-state-response regression proves the prior mismatch and the correction, including null summaries and stale-selection retirement; no artificial split or new state owner is needed.",
-    "reviewedBy": "Codex independent PR239 state-filter reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "4f288dbb90a25c9e6ce79030cabcb2334b53a109ad97572b6640e28e02fed971",
+    "reason": "Exact PR528 body review: this component coordinates a single district read scope, local presentation filters/sorting, valid selection and matching summary/map/table/detail rendering. useCapiroQuery owns reads and replacement admission; Core owns data authorization; DistrictMap owns boundaries. This change only replaces missing-value and score labels, preserving null-versus-zero semantics and existing scope/selection behavior. No independent lifecycle or domain is added, so keeping this screen composition together is cohesive. Accept only this fingerprint.",
+    "reviewedBy": "Codex Astra independent PR528 reviewer",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-conversations/host-controller.ts",
