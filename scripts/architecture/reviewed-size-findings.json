@@ -6746,10 +6746,10 @@
     "file": "apps/web/src/features/meri/files/LegacyReportLibrary.tsx",
     "kind": "function",
     "symbol": "LegacyReportLibrary",
-    "fingerprint": "6d30835092219fa9686d13e986939bb4395093831e3438ea8be7fbd3ed638d12",
-    "reason": "reviewed-accept - one account/client-scoped completed legacy reports list-and-reader view. It owns only presentation and user intent: one Load/Refresh plus conditional Load-more, status/alert and empty-page messaging, the report list, and one selected-report article with a current-authorized Download and Close. Transport is in the dedicated createLegacyReportClient canonical registered Capiro GET operations and paging/correlation/lifetime are in the dedicated LegacyReportController; the host keys this by [tenantId, actorId, clientId] and unmount abandons in-flight reads. It holds no authority decision (Core owns current source/client/held authorization), no cross-account cache or stored report body, no model loop, renderer or job settlement, and no second transport. The two JSX regions share one view state and one component lifecycle; a split would add indirection rather than reduce coupling.",
-    "reviewedBy": "Hermes Agent independent architecture review (session 20261028_001012_2888e9)",
-    "reviewedOn": "2026-10-28"
+    "fingerprint": "274d9d7a7b66b188ec930e83df2008889caee70a7c0f5998fce7421c71c25fe6",
+    "reason": "reviewed-accept - PR543 exact product efb9dda26bdcbae04ece62eea8a87f60230c7347. One account/client-scoped completed-report list-and-reader presentation: explicit Load/Refresh/Load-more, completion/status/error and empty-window text, retained report rows, and selected report Download/Close. The new completion line formats the existing controller's admitted list outcome; it counts local successful checks and newly displayed rows, never backend pages, hidden rows, total reports or authority. Canonical typed GET client, receiving schemas and controller still own transport, cursor/duplicate checks, access failure and request lifetime; the keyed host owns account/client replacement. Eleven independent mounted cases exercise the real controller/client/receiver with synthetic transport, including consecutive empty windows, refresh, refusal, malformed/cursor/duplicate/scope errors, cancellation and explicit read. No automatic read/drain/open, persistence, second authority or model loop. Keeping the cohesive list/reader JSX together preserves its single state and lifetime; splitting for the 101-line signal would add indirection.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/usage-overview/projection.ts",
