@@ -94,6 +94,7 @@ type Kind =
   | "request"
   | "turn"
   | "turn-open"
+  | "turn-claim"
   | "selection"
   | "management"
   | "lifecycle"
@@ -179,8 +180,9 @@ function recordFacts(name: string, raw: string | null) {
           "state" in value.submit &&
           value.submit.state === "observed" &&
           (!("cancel" in value) || value.cancel === "observed")
-        : kind === "turn-open"
-          ? // Control's answer about one reservation: losing it only asks the check again.
+        : kind === "turn-open" || kind === "turn-claim"
+          ? // An optional answer about one reservation: losing it only asks the check again, so the
+            // bounded journal may take it instead of a real unresolved command.
             true
           : kind === "draft" &&
             "draft" in value &&
@@ -424,9 +426,14 @@ export function discardMeriConversationMessages(
     if (
       Array.isArray(parts) &&
       parts[0] === expected &&
-      ["draft", "draft-capture", "request", "turn", "turn-open"].includes(
-        parts[1],
-      )
+      [
+        "draft",
+        "draft-capture",
+        "request",
+        "turn",
+        "turn-open",
+        "turn-claim",
+      ].includes(parts[1])
     )
       storage.removeItem(key);
   }

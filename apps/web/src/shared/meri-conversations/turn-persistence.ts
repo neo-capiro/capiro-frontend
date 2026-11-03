@@ -146,7 +146,7 @@ export function persistedOpenedReservation(
   );
   const claim = tabRecord<OpenedClaim>(
     scope,
-    "turn",
+    "turn-claim",
     (value) => receiveOpenedClaim(value),
     "open-claim",
     storage ?? null,
@@ -190,28 +190,50 @@ export function persistedOpenedReservation(
     });
   };
   /**
-   * Retirement is a durable fact, not a caught assumption: the claim record is the half that is
-   * written here, so an answer this tab can neither rewrite nor delete is still retired for every
-   * later owner of this scope. The answer bytes are then cleared when that is possible. Returns
-   * whether the retirement was verified.
+   * Retirement is a durable fact, not a caught assumption, and each way of making it durable is
+   * attempted on its own: a write that cannot allocate (quota) must not skip a removal that works.
+   * Nothing is written when there is no answer or claim to retire, so a conversation that was never
+   * confirmed leaves no record behind. Returns whether the retirement was verified.
    */
   const retire = () => {
+    let pending = true;
+    try {
+      pending = readAnswer() !== undefined || claim.read() !== undefined;
+    } catch {
+      /* Unreadable: attempt retirement rather than assume it was never written. */
+    }
+    if (!pending) return true;
     let retired = false;
     try {
       claim.write({ state: "retired" });
     } catch {
-      /* Verified below. */
+      /* Removal below may still work. */
     }
     try {
       retired = claim.read()?.state === "retired";
     } catch {
       retired = false;
     }
-    try {
-      if (readAnswer() !== undefined) {
-        answer.write({ retired: true });
-        if (readAnswer() !== undefined) answer.clear();
+    if (!retired) {
+      try {
+        claim.clear();
+      } catch {
+        /* Verified below. */
       }
+      try {
+        retired = claim.read() === undefined;
+      } catch {
+        retired = false;
+      }
+    }
+    // The answer is optional once the claim is gone, but leave nothing readable when that is possible.
+    try {
+      if (readAnswer() !== undefined) answer.write({ retired: true });
+    } catch {
+      /* Removal below may still work. */
+    }
+    try {
+      if (readAnswer() !== undefined) answer.clear();
     } catch {
       /* The claim above already decides what a later page may trust. */
     }

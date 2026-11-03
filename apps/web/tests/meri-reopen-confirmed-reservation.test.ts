@@ -6,7 +6,10 @@ import { useConversationTurn } from "../src/features/meri/conversation/useConver
 import { sessionHistoryState } from "../src/features/meri/conversation/saved-turns";
 import { composerAvailability } from "../src/features/meri/conversation/MeriLiveConversation";
 import { ConversationHistoryStatus } from "../src/features/meri/conversation/ConversationHistoryStatus";
-import { conversationTurnJournal } from "../src/shared/meri-conversations/turn-journal";
+import {
+  checkConversationTurn,
+  conversationTurnJournal,
+} from "../src/shared/meri-conversations/turn-journal";
 import {
   discardMeriConversationMessages,
   syncMeriTabIdentity,
@@ -626,4 +629,54 @@ it("a confirmation this tab can neither rewrite nor delete stays retired for the
   expect(mount(new QueryClient()).command.opened).toBeUndefined();
   storage.setItem = write;
   storage.removeItem = remove;
+});
+
+// Revision after the fourth review: retirement must survive a write-only failure using the removal
+// that still works, and an unconfirmed conversation must not leave optional records behind.
+it("a storage that cannot write but can remove still retires the answer", async () => {
+  await journal(new QueryClient()).confirmOpened({
+    sourceBinding: binding,
+    targetBinding: nextBinding,
+  });
+  expect(mount(new QueryClient()).command.opened).toBe(nextBinding.runId);
+  const write = storage.setItem;
+  storage.setItem = () => {
+    throw new DOMException("Synthetic quota", "QuotaExceededError");
+  };
+  expect(
+    await checkConversationTurn(journal(new QueryClient()), binding, async () =>
+      receipt("ACCEPTED"),
+    ),
+  ).not.toBeUndefined();
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+  storage.setItem = write;
+});
+
+it("an optional claim never crowds the bounded journal for conversations that were not confirmed", () => {
+  const storageBefore = storage.length;
+  for (let index = 1; index <= 130; index += 1) {
+    const source = {
+      ...binding,
+      conversationId: `30000000-0000-4000-8000-${String(index).padStart(12, "0")}`,
+    };
+    const owner = conversationTurnJournal(
+      new QueryClient(),
+      account,
+      clientId,
+      source.conversationId,
+      storage,
+    );
+    expect(
+      () => owner.start(source, prompt, nextRequestId),
+      `conversation ${index}`,
+    ).not.toThrow();
+    owner.discard();
+  }
+  // Nothing is left behind: no optional record, and no unresolved command either.
+  expect(storage.length).toBe(storageBefore);
+  expect(
+    Array.from({ length: storage.length }, (_, i) => storage.key(i)!).filter(
+      (key) => key.startsWith("capiro-meri-chat-v1:"),
+    ),
+  ).toEqual([]);
 });
