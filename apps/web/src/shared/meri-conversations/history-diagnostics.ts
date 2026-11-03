@@ -27,7 +27,7 @@ export function createHistoryTransportDiagnostics({
     count = 0;
   // Closed operation grammar: the public route itself, never a selector, id or query.
   const operations =
-    /^\/api\/(?:conversations|action-followthrough)\/[a-z][a-z-]*$/;
+    /^\/api\/(?:conversations|action-followthrough|documents)\/[a-z][a-z-]*$/;
   return (operation?: string) => {
     try {
       const trace = newTrace();
@@ -112,3 +112,11 @@ export const beginHistoryTransportDiagnostic =
 /** The conversation and action proxies reuse this recorder; `operation` names the exact public route. */
 export const beginConversationTransportDiagnostic =
   createHistoryTransportDiagnostics({ event: "MERI_CONVERSATION_FE" });
+/**
+ * The documents proxy reuses the same recorder and the same closed vocabulary. Its line names the stage
+ * this edge reached plus the status it answered or forwarded; it never proves an answer was admitted,
+ * because that proxy forwards bounded bytes without parsing the response DTO, and a suppressed or
+ * absent line never proves an attempt did not happen.
+ */
+export const beginDocumentTransportDiagnostic =
+  createHistoryTransportDiagnostics({ event: "MERI_DOCUMENT_FE" });
