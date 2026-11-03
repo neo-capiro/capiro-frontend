@@ -10,6 +10,17 @@ import {
 } from "@capiro/ui/dialog";
 import styles from "./meri-dialog.module.css";
 
+/** A close target is only usable while it is still the mounted, visible, enabled control. */
+function usable(node: HTMLElement | null | undefined): node is HTMLElement {
+  return Boolean(
+    node &&
+    node !== document.body &&
+    node.isConnected &&
+    !node.hasAttribute("disabled") &&
+    node.getClientRects().length > 0,
+  );
+}
+
 /** Meri dialog panel (Figma 3.4 "Dialog · …"): title, close, guidance and body. */
 export function MeriDialog({
   open,
@@ -21,6 +32,7 @@ export function MeriDialog({
   hint = false,
   clearBackdrop = false,
   returnFocus,
+  opener,
   children,
 }: {
   open: boolean;
@@ -37,9 +49,14 @@ export function MeriDialog({
   clearBackdrop?: boolean;
   /** Receives focus on close when the dialog was not opened from a control (open on load). */
   returnFocus?: RefObject<HTMLElement | null>;
+  /**
+   * The control that opened this dialog. Focus returns to it on close ahead of anything observed when
+   * the dialog opened, and only while it is still mounted, visible and enabled.
+   */
+  opener?: RefObject<HTMLElement | null>;
   children: ReactNode;
 }) {
-  const opener = useRef<HTMLElement | null>(null);
+  const captured = useRef<HTMLElement | null>(null);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
@@ -49,17 +66,19 @@ export function MeriDialog({
         data-clear-backdrop={clearBackdrop ? "" : undefined}
         showCloseButton={false}
         onOpenAutoFocus={() => {
-          opener.current =
+          captured.current =
             document.activeElement instanceof HTMLElement
               ? document.activeElement
               : null;
         }}
         onCloseAutoFocus={(event) => {
-          const opened = opener.current;
-          opener.current = null;
-          const target =
-            opened?.isConnected && opened !== document.body
-              ? opened
+          const wanted = opener?.current;
+          const observed = captured.current;
+          captured.current = null;
+          const target = usable(wanted)
+            ? wanted
+            : observed?.isConnected && observed !== document.body
+              ? observed
               : returnFocus?.current;
           if (target) {
             event.preventDefault();
