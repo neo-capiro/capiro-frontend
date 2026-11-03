@@ -8,11 +8,14 @@ export function SegmentedTabs<T extends string>({
   options,
   value,
   onChange,
+  focusRequest,
 }: {
   label: string;
   options: readonly { id: T; label: string }[];
   value: T;
   onChange: (id: T) => void;
+  /** Selection whose page switch replaced the tab list; the selected tab takes focus. */
+  focusRequest?: { current: string | null } | undefined;
 }) {
   const refs = useRef(new Map<T, HTMLButtonElement>());
   const move = (event: KeyboardEvent, index: number) => {
@@ -31,8 +34,18 @@ export function SegmentedTabs<T extends string>({
         <button
           key={option.id}
           ref={(node) => {
-            if (node) refs.current.set(option.id, node);
-            else refs.current.delete(option.id);
+            if (!node) {
+              refs.current.delete(option.id);
+              return;
+            }
+            refs.current.set(option.id, node);
+            // A page switch replaces this tab list, so the button that started the switch
+            // is gone by the time the next page renders. The selected tab claims the
+            // request its host recorded instead of leaving focus on the document body.
+            if (focusRequest?.current === option.id && value === option.id) {
+              focusRequest.current = null;
+              node.focus();
+            }
           }}
           type="button"
           role="tab"
