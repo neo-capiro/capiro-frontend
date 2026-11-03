@@ -1,10 +1,11 @@
 import { z } from "zod";
 import type { RunBinding } from "@capiro/meri-contracts";
-import {
-  receiveConversationRequest,
-} from "@capiro/meri-contracts/conversation-application";
+import { receiveConversationRequest } from "@capiro/meri-contracts/conversation-application";
 import { receiveConversationHistoryRequest } from "@capiro/meri-contracts/conversation-history";
-import { skillSelectionFields, type ConversationDraftRequest } from "./query-journal";
+import {
+  skillSelectionFields,
+  type ConversationDraftRequest,
+} from "./query-journal";
 import {
   tabRecord,
   TabJournalUnavailable,
@@ -102,5 +103,80 @@ export function recoverPersistedTurn(scope: TabScope, storage?: TabStorage) {
     return { record, intent: record.read(), blocked: false };
   } catch {
     return { record: undefined, intent: undefined, blocked: true };
+  }
+}
+
+/**
+ * The next reservation control itself confirmed admitted no message, from this tab. The saved read
+ * cannot settle it: one immutable target per source keeps the reservation row after the check, so
+ * every later page still reports it. Only this tab's own answer is kept, and only for the exact
+ * source and target Core bound.
+ */
+export function persistedOpenedReservation(
+  scope: TabScope,
+  storage?: TabStorage,
+) {
+  const record = tabRecord(
+    scope,
+    "turn-open",
+    (value) => receiveOpenedReservation(scope, value),
+    "",
+    storage ?? null,
+  );
+  return {
+    read() {
+      const value = record.read();
+      return value
+        ? {
+            sourceRunId: value.source.sourceRunId,
+            targetRunId: value.targetRunId,
+          }
+        : undefined;
+    },
+    write(target: { sourceRunId: string; targetRunId: string }) {
+      if (!storage) return;
+      record.write({
+        source: {
+          conversationId: scope.conversationId,
+          sourceRunId: target.sourceRunId,
+        },
+        targetRunId: target.targetRunId,
+      });
+    },
+  };
+}
+
+/** The stored source is admitted by the public next-turn receiver, scoped to this conversation. */
+function receiveOpenedReservation(scope: TabScope, value: unknown) {
+  const local = z
+    .strictObject({ source: z.unknown(), targetRunId: z.string().min(1) })
+    .parse(value);
+  const source = receiveConversationHistoryRequest(
+    "nextTurn",
+    bytes(local.source),
+  );
+  if (
+    source.conversationId !== scope.conversationId ||
+    source.sourceRunId === local.targetRunId
+  )
+    throw new TabJournalUnavailable();
+  return {
+    source: {
+      conversationId: source.conversationId,
+      sourceRunId: source.sourceRunId,
+    },
+    targetRunId: local.targetRunId,
+  };
+}
+
+/** A record this page cannot read only means it asks control again; it never blocks recovery. */
+export function recoverOpenedReservation(
+  scope: TabScope,
+  storage?: TabStorage,
+) {
+  try {
+    return persistedOpenedReservation(scope, storage);
+  } catch {
+    return undefined;
   }
 }

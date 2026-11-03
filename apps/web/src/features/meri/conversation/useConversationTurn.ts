@@ -253,8 +253,12 @@ export function useConversationTurn(
   } = useRetainedTurn(cache, account, clientId, conversationId, epoch);
   const { active, alive, gate } = useTurnLifetime(journal);
   const [notReady, setNotReady] = useState(false);
-  // The reserved target control confirmed admitted no message, or whose message the person discarded.
-  const [opened, setOpened] = useState<string>();
+  // The reserved target control confirmed admitted no message in this tab, or whose message the person
+  // discarded. A confirmation this tab kept is restored here: the reservation itself outlives the
+  // check, so without it every reopened page would ask the same question again.
+  const [opened, setOpened] = useState<string | undefined>(() =>
+    journal?.openedTarget(),
+  );
   useEffect(() => {
     if (
       completedHistory &&
