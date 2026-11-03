@@ -5127,10 +5127,10 @@
     "file": "apps/web/src/features/meri/conversation/useLiveRun.ts",
     "kind": "function",
     "symbol": "useLiveRun",
-    "fingerprint": "7c5f75a63e80490efe8d93c5f9d9e188e778b8c7ed176c4c6942b40cc2c0ba0d",
-    "reason": "Hook composing the session-bound live run state. Single responsibility - bind the live run to the active session - for the meri conversation owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "dd2b964cb47a29de8cc47ee46439dac6a8dd8f3b396540ca3087c8b9db1625b2",
+    "reason": "One mounted session-bound run coordinator owns read admission, observation lifetime, explicit refresh and positive journal reconciliation. Stop retirement and accepted-request confirmation now use one existing command gate, driven by durable intent and admitted observation. The closed local-storage failure stays fenced while a prior Stop transport failure can be resolved by an admitted terminal stream event. Public client binding, storage/currentness checks, pending controls and receipts remain with their canonical owners. At 128 nonblank lines this is still one coordinated run lifetime; splitting the predicate from its effect would obscure sequencing without separating a domain. Independent real mounted cold recovery, StrictMode, streamed-terminal, currentness and storage-refusal checks pass. No new queue, retry, dispatch, persistence owner or run authority is introduced.",
+    "reviewedBy": "Codex independent VQA-028 exact-source review of 54510625a9719817001a8e0f162705b526759494",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useRunObservation.ts",
@@ -6130,10 +6130,10 @@
     "file": "apps/web/src/features/meri/conversation/useRunCommands.ts",
     "kind": "function",
     "symbol": "useRunCommands",
-    "fingerprint": "0f3148a62807b996268ffa12df443a4d67f289e89883e289a7fd559e36301e0b",
-    "reason": "This hook already sequences session-bound explicit commands, transcript reads and observation. The two added lines complete that same history lifecycle by notifying its journal after readback, behind alive and command-gate fences. Persistence, canonical receiving and authorization remain in their existing owners. Extracting this two-line completion would obscure the history-before-ack ordering without separating a new responsibility. No second scheduler, retry loop or admission logic is added.",
-    "reviewedBy": "Codex independent Meri FE65 journal source/design review; MERI-FE65-JOURNAL-CORRECTION-INDEPENDENT-REVIEW-20261031.txt SHA256 cf2e2d7c7965683f1ac5fd6a908d3beeb445b383861db4833a050639dbb6bf03",
-    "reviewedOn": "2026-10-31"
+    "fingerprint": "6454381146fb68cee1acffd6f920bd322d238f3dc7c5c89ac2d12986d8056c2d",
+    "reason": "One existing session-bound command coordinator sequences explicit operations, transcript reads and observation callbacks through useCommandGate. Positive read reconciliation retires an obsolete Stop and then confirms the accepted request inside that same gate, preventing competing effects from dropping one transition. localWriteFailed derives only the existing TabJournalUnavailable closed failure; it adds no state machine, new error vocabulary or write authority. Durable storage and currentness remain in the journal, and exact run/event admission remains in the public client. At 135 nonblank lines these are cohesive command-lifetime responsibilities, not unrelated workflows requiring extraction. Independent mounted tests preserve receipts, active Stop ownership, access/unmount fences and refusal to retry a failed save; successful terminal observation causes no history, Stop or submit replay.",
+    "reviewedBy": "Codex independent VQA-028 exact-source review of 54510625a9719817001a8e0f162705b526759494",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/conversations/ConversationHistoryList.tsx",
