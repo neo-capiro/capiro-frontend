@@ -4,8 +4,24 @@ import { Button } from "@capiro/ui/button";
 import { MarkdownContent } from "../../../shared/markdown/MarkdownContent";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { createLegacyReportClient } from "../../../shared/meri-reports/client";
-import { LegacyReportController } from "../../../shared/meri-reports/state";
+import {
+  LegacyReportController,
+  type LegacyReportCheck,
+} from "../../../shared/meri-reports/state";
 import styles from "./files.module.css";
+
+/**
+ * Plain-language acknowledgement of one admitted list request. The count is the number of checks
+ * this view has completed, not a report total, a backend page number or a cursor position.
+ */
+function checkSummary({ ordinal, added }: LegacyReportCheck) {
+  const times = ordinal === 1 ? "time" : "times";
+  const reports =
+    added === 0
+      ? "no reports"
+      : `${added} ${added === 1 ? "report" : "reports"}`;
+  return `Checked ${ordinal} ${times} in this view. This check added ${reports}.`;
+}
 
 /** The host keys this by current account/client and unmounts it during revocation. */
 export function LegacyReportLibrary({ clientId }: { clientId?: string }) {
@@ -59,6 +75,9 @@ export function LegacyReportLibrary({ clientId }: { clientId?: string }) {
           )}
         </div>
         {state.busy && <p role="status">Checking current report access…</p>}
+        {!state.busy && state.lastCheck && (
+          <p role="status">{checkSummary(state.lastCheck)}</p>
+        )}
         {state.problem && <p role="alert">{state.problem}</p>}
         {state.loaded && state.reports.length === 0 && (
           <p>
