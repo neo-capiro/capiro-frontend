@@ -1190,6 +1190,20 @@
    "purpose": "A request whose conversation's original input allocation expired before it was ever accepted answers its own 409 INITIAL_INPUT_EXPIRED on admit and submit (allocate: 409, outcome NOT_DISPATCHED; 408 still admitted) instead of 502 CONVERSATION_UNAVAILABLE; an accepted original input is replayed, or answered 503 INITIAL_INPUT_UNAVAILABLE / UNKNOWN on allocate (conversation-application 0.1.18, conversation-input 0.1.10, conversation-initial-input 0.1.13; neo-capiro/meri-greenfield#571). Also carries 0.1.52's office launch TTL sentinel (#570)."
   },
   {
+   "file": "capiro-meri-contracts-0.1.53-32197ad29b5f-26722f2c4333.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.53",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "32197ad29b5f1f75f076ef7f089dc94201ec78cc",
+   "sourceTree": "d31aa68e0b4cced6af000144ab1157e74cffd846",
+   "bytes": 2203942,
+   "sha256": "26722f2c43330225aebbad4946bf9938d2e289a4fad0755340ef86ac33dd71fa",
+   "integrity": "sha512-3VE6oLpey1bbql23GwN5UxHhhUAf+ddetkVI/u2B/JBqWtHc/pIUSEbSc+KeQ/MV4Z7rRP14kn5srwwL4VdzGw==",
+   "regularEntryCount": 123,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Preview read answers that are not bytes were unreadable to the public receiver: this build also exports receiveDocumentPreviewReadRefusal, so a read's own closed refusal (no stored preview record, or preview configuration absent) is admitted with its status, code and outcome instead of collapsing into an unreadable success. No publication, authority, cancellation or preview fence behaviour changes, and the remainder of the document-access distribution matches 0.1.53-def39308. Source accepted at neo-capiro/meri-greenfield#596."
+  },
+  {
    "file": "capiro-meri-ui-stream-0.1.37-688f992a-9d2bc6e4962a.tgz",
    "name": "@capiro/meri-ui-stream",
    "version": "0.1.37",

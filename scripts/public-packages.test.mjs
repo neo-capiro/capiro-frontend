@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { verifyPackageInputs, verifyActiveMeriPackages } from './public-packages.mjs';
 
 const record = { file: 'fixture-0.1.0.tgz', sourceCommit: 'a'.repeat(40), bytes: 3, sha256: 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad' };
@@ -80,4 +81,35 @@ test('same-version contracts and ui-stream archives bind source and content suff
   assert.deepEqual(verifyActiveMeriPackages([stream], consumeStream(stream.file)), [stream]);
   for (const changed of [{ ...stream, sourceCommit: 'b'.repeat(40) }, { ...stream, sha256: 'b'.repeat(64) }, { ...stream, sha256: undefined }])
     assert.throws(() => verifyActiveMeriPackages([changed], consumeStream(stream.file)), /Content-addressed.*mismatch/);
+});
+
+test('a twelve-character source prefix binds to its exact manifest record', () => {
+  const prefix = 'abcdef012345', digest = record.sha256.slice(0, 12);
+  const sourceCommit = prefix + 'f'.repeat(28);
+  const file = `capiro-meri-contracts-0.1.15-${prefix}-${digest}.tgz`;
+  const current = { ...record, file, sourceCommit };
+  const consume = name => [{ dependencies: { '@capiro/meri-contracts': `file:../../vendor/${name}` } }];
+  assert.deepEqual(verifyActiveMeriPackages([current], consume(file)), [current]);
+  // A prefix that first differs after the eighth character must still be a mismatch, not a truncation match.
+  assert.throws(() => verifyActiveMeriPackages([{ ...current, sourceCommit: 'abcdef012346' + 'f'.repeat(28) }], consume(file)), /Content-addressed.*mismatch/);
+  // Neither seven, nine, eleven nor thirteen hexadecimal characters are an admitted component.
+  for (const length of [7, 9, 11, 13]) {
+    const name = `capiro-meri-contracts-0.1.15-${(prefix + 'a'.repeat(13)).slice(0, length)}-${digest}.tgz`;
+    assert.throws(() => verifyActiveMeriPackages([{ ...current, file: name }], consume(name)), /Invalid active/);
+  }
+});
+
+test('the repository pin and the canonical provenance record name one artifact', () => {
+  const vendor = new URL('../vendor/', import.meta.url);
+  const manifest = JSON.parse(readFileSync(new URL('meri-public-packages.json', vendor), 'utf8'));
+  const records = verifyPackageInputs(manifest, name => readFileSync(new URL(name, vendor)));
+  const consumers = ['apps/web', 'packages/meri-client', 'packages/qualification-transport']
+    .map(name => JSON.parse(readFileSync(new URL(`../${name}/package.json`, import.meta.url), 'utf8')));
+  const active = verifyActiveMeriPackages(records, consumers);
+  const contracts = active.find(item => item.file.startsWith('capiro-meri-contracts-'));
+  assert.ok(contracts, 'no active contracts artifact');
+  const parts = /-([0-9a-f]{8}(?:[0-9a-f]{4})?)-([0-9a-f]{12})\.tgz$/.exec(contracts.file);
+  assert.ok(parts, `active contracts artifact is not content-addressed: ${contracts.file}`);
+  assert.equal(contracts.sourceCommit.slice(0, parts[1].length), parts[1]);
+  assert.equal(contracts.sha256.slice(0, 12), parts[2]);
 });

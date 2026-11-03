@@ -16,6 +16,7 @@ import {
   type AdmittedDocumentPreviewRequest,
   receiveDocumentPreview,
   receiveDocumentPreviewPublication,
+  receiveDocumentPreviewReadRefusal,
   receiveNativeResultsRequest,
   receiveNativeResultsResponse,
 } from "@capiro/meri-client/document-access";
@@ -274,10 +275,17 @@ export function documentPreviewTransport(
       signal: AbortSignal,
     ) =>
       receive("preview", request, signal, async (response, current) =>
-        receiveDocumentPreview(response, version, {
-          signal: current,
-          maxBytes: 8 * 1024 * 1024,
-        }),
+        // A 200 answer is the canonical PDF; anything else is this read's own closed refusal.
+        response.status === 200
+          ? receiveDocumentPreview(response, version, {
+              signal: current,
+              maxBytes: 8 * 1024 * 1024,
+            })
+          : receiveDocumentPreviewReadRefusal(
+              response.status,
+              await boundedJsonBytes(response, current, 65536),
+              request,
+            ),
       ),
   };
 }

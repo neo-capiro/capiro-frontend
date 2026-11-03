@@ -4,8 +4,13 @@ import { portfolioPreviewFrontendOrigin } from "../meri-conversations/frontend-o
 
 type Environment = Record<string, string | undefined>;
 
+/*
+ * The commit component is either the established eight-character form or the immutable
+ * twelve-character release form; a content-addressed artifact always carries its twelve-character
+ * digest. Nothing else is admitted, and an unrecognised pin still yields no version.
+ */
 const vendoredContractsPin =
-  /^file:\.\.\/\.\.\/vendor\/capiro-meri-contracts-(\d+\.\d+\.\d+)-[0-9a-f]{8}-[0-9a-f]{12}\.tgz$/;
+  /^file:\.\.\/\.\.\/vendor\/capiro-meri-contracts-(\d+\.\d+\.\d+)-[0-9a-f]{8}(?:[0-9a-f]{4})?-[0-9a-f]{12}\.tgz$/;
 
 /**
  * The app's pinned @capiro/meri-contracts distribution, read from the vendored
