@@ -6076,10 +6076,10 @@
     "file": "apps/web/src/features/meri/conversation/SkillSelectionPicker.tsx",
     "kind": "function",
     "symbol": "SkillSelectionPicker",
-    "fingerprint": "c5d282bf5e91074a1828c03dd48a8a04359def39d6a7809f16e43519be9be0fb",
-    "reason": "Author structural assessment for source-only A3 continuation: the existing skill/window picker now preserves the independently selected website task when applying or clearing a skill, just as it preserves Work. The existing inline window form remains one selection concern; no catalog, authority, session or website execution owner is added. Mounted checks exercise the preservation through reload. No independent review is claimed; see docs/site-workflow-selection-20261029.md.",
-    "reviewedBy": "Codex implementation author; structural assessment only, independent review explicitly excluded",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "91540823441ee16d67833cb104670e5775e01fc084ee751005e34480f1a25777",
+    "reason": "Independent exact-source VQA026 responsibility review: this 292-nonblank-line function remains one local Skill and typed time-window draft form. Its field state, per-basis controls, admitted catalog choices and explicit Apply share one draft lifetime; the ten-line function growth derives early feedback from a small pure helper and closes Apply before the existing public receiveSkillSelection call. The published day bound and instant ordering supply presentation feedback, not a new authorization or server-validation owner. Canonical receiving, catalog admission, additive Work/site-workflow preservation and prompt submission remain with their existing owners. Five real React/Chromium fixture cases cover invalid drafts, corrected boundaries/offsets, canonical malformed-input refusal, remount/clear and catalog/busy preservation. Splitting adjacent fields solely for the size threshold would scatter this single selection concern; no independent transport, persistence, execution or permission responsibility was added.",
+    "reviewedBy": "Codex independent VQA026 reviewer (GPT-6 Astra Ultra); exact source 9bcaa62bbc9f3ff3ce64f59fa554ba5b79a26593; vqa-026-independent-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/conversation/feedback/FeedbackFields.tsx",
