@@ -1,6 +1,6 @@
 "use client";
-import { useState, type ReactNode } from "react";
-import { useSearchParams } from "next/navigation";
+import type { ReactNode } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { UserPreferencesHost } from "../../user-preferences/UserPreferencesHost";
 import { TenantModelSettings } from "../../tenant-settings/TenantModelSettings";
 import { ConnectorAccountsHost } from "./ConnectorAccountsHost";
@@ -44,18 +44,34 @@ export function MeriPreferencesPanel({
   reportContent?: ReactNode;
 }) {
   const params = useSearchParams();
-  // The OAuth callback returns to `/settings/meri-preferences?page=connected-services` (Core's
-  // CLIO_MCP_OAUTH_SUCCESS_REDIRECT). Only a known page id is honoured, so a stray value cannot
-  // select anything the panel does not own.
+  const pathname = usePathname();
+  const router = useRouter();
+  // The address owns the selection. The OAuth callback returns to
+  // `/settings/preferences?page=connected-services` (Core's
+  // CLIO_MCP_OAUTH_SUCCESS_REDIRECT), and reload, direct links, in-page links and
+  // back/forward all have to show the page the URL names. Only a known page id is
+  // honoured, so a stray value cannot select anything the panel does not own.
   const requested = params.get("page");
-  const [page, setPage] = useState<PreferencePageId>(() =>
-    pages.some((item) => item.id === requested)
-      ? (requested as PreferencePageId)
-      : "personal",
-  );
+  const page: PreferencePageId = pages.some((item) => item.id === requested)
+    ? (requested as PreferencePageId)
+    : "personal";
+  const address = params.toString();
   const chrome: SettingsChrome = {
     nav: pages.map((item) => ({ ...item, current: item.id === page })),
-    select: (id) => setPage(pages.find((item) => item.id === id)?.id ?? page),
+    select: (id) => {
+      const next = pages.find((item) => item.id === id)?.id;
+      if (!next) return;
+      const query = new URLSearchParams(address);
+      query.set("page", next);
+      const target = `${pathname}?${query.toString()}`;
+      // A click on the page already on screen still has to cancel whatever navigation is
+      // in flight — another tab, an in-page Next link, or Back/Forward — because Next keeps
+      // rendering the committed page until that response arrives. Replacing the current
+      // entry does that without adding a history entry or inventing a pending-navigation
+      // source; any other click is an ordinary push.
+      if (next === page) router.replace(target, { scroll: false });
+      else router.push(target, { scroll: false });
+    },
     embedded: true,
     notice: {
       title: "Meri preferences connection unavailable",
