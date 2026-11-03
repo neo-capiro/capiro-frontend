@@ -7039,9 +7039,9 @@
     "file": "apps/web/src/features/meri/conversation/ProcedureSelectionPicker.tsx",
     "kind": "function",
     "symbol": "ProcedureSelectionPicker",
-    "fingerprint": "e344c9f0a763b258943ec8eaa2b4a0bd3cd708443e760d4680dd1ba27c0e9470",
-    "reason": "Independent VQA-002 responsibility review at product head 3fae7f2eecf84b57a32fa6bfe25231c494c60623. One native procedure control lists an accepted tenant catalog, retains only the exact source/id/version/digest selector, retires a choice absent from a fresh catalog, and displays refresh/loading/refusal states. useCurrentRead remains the lifetime and cancellation owner; the canonical receiver and Core retain eligibility and authorization. The new callback reports display text only for the exact applied selector, while the shared presentation module owns readable naming. Its 190 nonblank body lines remain one cohesive control. Mounted custom names, retirement, mutual exclusion, stale-read and fresh-catalog reset checks passed; no wire or send contract changed.",
-    "reviewedBy": "Codex independent reviewer /root/review_vqa002 (GPT-6 Astra Ultra)",
+    "fingerprint": "3951b28aaad78b2d42bbaa0f7459b1d045aa6185309a5612871c6f78909873f0",
+    "reason": "Independent exact-source VQA023 responsibility review: this 254-nonblank-line function remains one native procedure draft control. It displays the accepted tenant catalog, keeps an unapplied exact selector locally, commits it only through explicit Apply and the existing withProcedureSelection receiver, and removes applied or staged selectors absent from a fresh catalog. The added staging, Apply guard and notice share this control's draft/catalog lifetime; useCurrentRead owns read generations and cancellation, SessionTools owns close/Escape/focus and keyed scope lifetime, shared procedure presentation owns readable names, and Core owns eligibility and authorization. Ten distinct real mounted cases cover explicit commit/removal, custom labels, Send seeing only the retained selection, close/reopen, catalog refresh/refusal/retirement, mutual exclusion and scope/late-answer protection. No transport, persistence, wire, prompt-dispatch or authorization owner was added. Extracting the adjacent staged/applied transitions solely for the threshold would split one local interaction without removing independent responsibility.",
+    "reviewedBy": "Codex independent VQA023 reviewer (GPT-6 Astra Ultra); exact source 471e9148003c604eac1ff284303d9d9cbfb6c0f7; vqa-023-independent-review.json",
     "reviewedOn": "2026-11-03"
   },
   {
