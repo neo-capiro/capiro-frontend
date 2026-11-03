@@ -19,6 +19,7 @@ import type {
 } from "@capiro/meri-contracts/conversation-application";
 import type { useRunObservation } from "./useRunObservation";
 import { isSettled } from "./conversation-view";
+import { TabJournalUnavailable } from "../../../shared/meri-conversations/tab-journal";
 import type { ConversationSkillSelection } from "../../../shared/meri-conversations/query-journal";
 
 /** Reads the run's transcript; false when the conversation has no run yet to observe. */
@@ -132,6 +133,12 @@ export function useRunCommands(
   const recover = (stored: ConversationStoredRequest) =>
     send(() => recoverRequest(port, record, stored));
   /**
+   * The one failure this tab must never retry by itself: its own record could not be saved, which
+   * leaves exactly the state that would ask again. A control or transport failure says nothing
+   * about local storage, and a settled run still ends its stop record then.
+   */
+  const localWriteFailed = error === new TabJournalUnavailable().message;
+  /**
    * Confirms what one positive history read proved for this exact run, in one command: a settled
    * run ends its unresolved stop record, and the request this read admitted is acknowledged. They
    * are sequenced here, not in separate commands, so the single-command gate cannot drop either.
@@ -170,6 +177,7 @@ export function useRunCommands(
     failure,
     refusal,
     storageError,
+    localWriteFailed,
     transcript,
     history,
     submit,

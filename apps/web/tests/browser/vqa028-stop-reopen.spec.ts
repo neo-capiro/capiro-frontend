@@ -38,6 +38,23 @@ const inspect = (page: Page): Promise<Inspect> =>
   );
 const commands = (state: Inspect) =>
   state.calls.filter((path) => /\/(cancel|submit)$/.test(path));
+const observationCalls = (state: Inspect) =>
+  state.calls.filter(
+    (path) => path.includes("/events") || path.includes("/subscribe"),
+  ).length;
+/** Explicit person actions on the mounted page; the harness exposes only these. */
+const stopCommand = (page: Page) =>
+  page.evaluate(() => {
+    void (
+      window as unknown as { vqa028: { stop: () => Promise<void> } }
+    ).vqa028.stop();
+  });
+const terminalEvent = (page: Page) =>
+  page.evaluate(() => {
+    (
+      window as unknown as { vqa028: { terminalEvent: () => void } }
+    ).vqa028.terminalEvent();
+  });
 
 /**
  * Both journal transitions, the visible card, readiness and the dispatch guarantee. A case that
@@ -211,4 +228,71 @@ test("control's own receipt still says what Stop did", async ({ page }) => {
   const state = await inspect(page);
   expect(state.journal.cancel).toBe("observed");
   expect(state.receipt?.state).toBe("completed");
+});
+
+/**
+ * R2: a lost Stop may not be retired by another command. The run's own observation stream then
+ * admits the exact same-run terminal state, and that alone must end the obsolete local record.
+ */
+test("a lost Stop retires on the run's own terminal observation without a second command", async ({
+  page,
+}) => {
+  await start(page, { state: "running", noStoredCancel: true, cancel: "lost" });
+  await expect(page.getByTestId("state")).toHaveText("running");
+  await stopCommand(page);
+  await expect
+    .poll(async () => (await inspect(page)).journal.cancel)
+    .toBe("unknown");
+  // The observation loop is already subscribed; nothing asks control for the state.
+  await expect
+    .poll(async () => observationCalls(await inspect(page)))
+    .toBeGreaterThan(0);
+  await terminalEvent(page);
+  await expect(page.getByTestId("state")).toHaveText("cancelled");
+  const state = await confirmed(page, { cancel: 1 });
+  // One read, one Stop, no streamed replacement command.
+  expect(state.calls.filter((path) => path.endsWith("/history"))).toHaveLength(
+    1,
+  );
+  expect(state.calls.filter((path) => path.endsWith("/cancel"))).toHaveLength(
+    1,
+  );
+  expect(state.calls.filter((path) => path.endsWith("/submit"))).toEqual([]);
+});
+
+test("a refused local write after that terminal admission is never retried by itself", async ({
+  page,
+}) => {
+  await start(page, { state: "running", noStoredCancel: true, cancel: "lost" });
+  await expect(page.getByTestId("state")).toHaveText("running");
+  await stopCommand(page);
+  await expect
+    .poll(async () => (await inspect(page)).journal.cancel)
+    .toBe("unknown");
+  // This tab can no longer save: the retirement must stop at its own failure, not loop.
+  await page.evaluate(() =>
+    (
+      window as unknown as { vqa028: { failWrites: (next: boolean) => void } }
+    ).vqa028.failWrites(true),
+  );
+  await terminalEvent(page);
+  await expect(page.getByTestId("state")).toHaveText("cancelled");
+  await expect.poll(async () => (await inspect(page)).error).not.toBe(null);
+  const refused = await inspect(page);
+  expect(refused.journal.cancel).toBe("unknown");
+  expect(refused.ready).toBe(false);
+  expect(refused.controlsHeld).toBe(true);
+  await page.evaluate(() => {
+    (window as unknown as { vqa028: { force: () => void } }).vqa028.force();
+  });
+  await page.waitForTimeout(200);
+  const after = await inspect(page);
+  expect(after.writes).toBe(refused.writes);
+  expect(after.calls.filter((path) => path.endsWith("/history"))).toHaveLength(
+    1,
+  );
+  expect(after.calls.filter((path) => path.endsWith("/cancel"))).toHaveLength(
+    1,
+  );
+  expect(after.calls.filter((path) => path.endsWith("/submit"))).toEqual([]);
 });

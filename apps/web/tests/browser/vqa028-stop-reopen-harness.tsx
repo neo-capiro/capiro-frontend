@@ -75,6 +75,7 @@ let journal: ReturnType<typeof conversationIntentJournal>;
 let cleanup = () => {};
 let live = true;
 let refuseWrites = false;
+let emitTerminal: (() => void) | undefined;
 let writes = 0;
 const calls: string[] = [];
 
@@ -134,6 +135,21 @@ function historyResponse() {
     lastSequence: 1,
     hasMore: false,
   };
+}
+
+/** The producer's own UI-message-stream frames; the public client admits the event inside them. */
+function sseFrames(event: unknown) {
+  const frames = [
+    { type: "start", messageId: "90000000-0000-4000-8000-000000000009" },
+    {
+      type: "data-meri-event",
+      transient: true,
+      id: (event as { eventId: string }).eventId,
+      data: event,
+    },
+    { type: "finish" },
+  ];
+  return `${frames.map((frame) => `data: ${JSON.stringify(frame)}\n\n`).join("")}data: [DONE]\n\n`;
 }
 
 function Probe() {
@@ -238,7 +254,7 @@ const api = {
           return Response.json({ state: next.cancel ?? "cancelled" });
         }
         if (path.includes("/events") || path.includes("/subscribe"))
-          return new Promise<Response>((_, reject) => {
+          return new Promise<Response>((resolve, reject) => {
             const signal = init?.signal;
             if (signal?.aborted)
               reject(new DOMException("aborted", "AbortError"));
@@ -248,6 +264,24 @@ const api = {
                 () => reject(new DOMException("aborted", "AbortError")),
                 { once: true },
               );
+            // The run's own observation stream: one exact same-run terminal event, admitted by the
+            // public client exactly as a live producer would, then the producer's finish frames.
+            emitTerminal = () => {
+              const event = {
+                ...historyResponse().events[0],
+                eventId: "70000000-0000-4000-8000-000000000002",
+                sequence: 2,
+                data: { state: "cancelled", reasonCode: null },
+              };
+              resolve(
+                new Response(sseFrames(event), {
+                  headers: {
+                    "content-type": "text/event-stream",
+                    "x-vercel-ai-ui-message-stream": "v1",
+                  },
+                }),
+              );
+            };
           });
         throw new Error(`Unexpected synthetic route ${path}`);
       },
@@ -284,6 +318,14 @@ const api = {
   },
   async stop() {
     await probe().vqa028Probe?.run.cancel();
+  },
+  /** The exact same-run terminal event the run's own observation stream would deliver next. */
+  terminalEvent() {
+    emitTerminal?.();
+  },
+  /** Refuse this tab's journal writes from now on, without touching real storage. */
+  failWrites(next: boolean) {
+    refuseWrites = next;
   },
   async history(state?: string) {
     if (state) options = { ...options, state };

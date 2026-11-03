@@ -87,23 +87,24 @@ export function useLiveRun(
   }, [port]);
 
   useEffect(() => {
-    if (
-      snapshot.status !== "ready" ||
-      !snapshot.observation ||
-      commands.busy ||
-      commands.error
-    )
+    if (snapshot.status !== "ready" || !snapshot.observation || commands.busy)
       return;
-    // A settled run ends its unresolved stop record.
+    // A settled run ends its unresolved stop record. The one failure that must never retry itself is
+    // this tab's own save: a stopped write leaves exactly the state that would ask again. A lost Stop
+    // or an unanswered read says nothing about local storage, so the run's own admitted terminal
+    // state still retires the record the person can no longer act on.
     const settlesStop =
       isTerminal(snapshot.observation.runState) &&
       commands.intent.cancel === "unknown" &&
-      !commands.storageError;
-    // Positive history for a non-queued run also confirms the accepted request this read admitted.
+      !commands.storageError &&
+      !commands.localWriteFailed;
+    // Positive history for a non-queued run also confirms the accepted request this read admitted,
+    // and that confirmation keeps its own failure fence: a failed command is not re-run here.
     const confirmsRequest =
       !!acceptedRequest &&
       snapshot.observation.runState !== "queued" &&
-      commands.intent.submit?.state === "unknown";
+      commands.intent.submit?.state === "unknown" &&
+      !commands.error;
     // One command does both, in that order: the single-command gate can never drop one of them, and
     // neither waits on a later busy transition that React may batch away.
     if (settlesStop || confirmsRequest)
@@ -117,6 +118,7 @@ export function useLiveRun(
     commands.intent.cancel,
     commands.intent.submit?.state,
     commands.storageError,
+    commands.localWriteFailed,
     commands.busy,
     commands.error,
   ]);
