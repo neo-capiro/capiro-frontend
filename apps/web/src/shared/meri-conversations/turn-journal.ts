@@ -122,28 +122,25 @@ function completedRequest(
       ))
   )
     return false;
-  const expected = {
-    requestId: intent.requestId,
-    prompt: intent.prompt,
-    ...skillSelectionFields(intent),
-    ...(intent.uploads ? { uploads: intent.uploads } : {}),
-    ...(intent.modelSelection ? { modelSelection: intent.modelSelection } : {}),
+  const actual = {
+    ...storedSubmission({
+      ...target.request,
+      windowRequest: target.request.windowRequest ?? null,
+    }),
   };
-  const submission = storedSubmission({
-    ...target.request,
-    windowRequest: target.request.windowRequest ?? null,
-  });
-  // Control preserves the source request's default skill/window content into a successor's request,
-  // so the stored row is not the submitted body. Only the fields this message actually submitted are
-  // its identity: an inherited default never identifies a different message, while the request id,
-  // the prompt and every selection the person made must still match exactly.
-  const actual = Object.fromEntries(
-    Object.keys(expected).map((field) => [
-      field,
-      (submission as unknown as Record<string, unknown>)[field],
-    ]),
+  if (intent.modelSelection === undefined) delete actual.modelSelection;
+  return (
+    submissionIdentity(actual) ===
+    submissionIdentity({
+      requestId: intent.requestId,
+      prompt: intent.prompt,
+      ...skillSelectionFields(intent),
+      ...(intent.uploads ? { uploads: intent.uploads } : {}),
+      ...(intent.modelSelection
+        ? { modelSelection: intent.modelSelection }
+        : {}),
+    })
   );
-  return submissionIdentity(actual) === submissionIdentity(expected);
 }
 
 /** Same-tab identity survives reload; unresolved reservation mappings need explicit recovery. */

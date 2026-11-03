@@ -96,7 +96,10 @@ const turnOf = (options: {
   sequenceBase: number;
   sequenceEnd?: number | null;
   lastSequence: number;
+  /** A stored choice the retained message never submitted: the canonical receiver refuses to pair
+   * it with that input, so the journal must keep the intent and the page protected. */
   storedWindow?: object | null;
+  storedUploads?: { uploadId: string; sha256: string }[];
 }) => ({
   run: runOf(options.binding, "completed"),
   request: {
@@ -104,8 +107,8 @@ const turnOf = (options: {
     prompt: options.prompt,
     skill: null,
     window: null,
-    // Control preserves the source request's default window content into the successor's request.
     windowRequest: options.storedWindow ?? null,
+    ...(options.storedUploads ? { uploads: options.storedUploads } : {}),
   },
   promptLineage: {
     kind: "submission" as const,
@@ -178,9 +181,11 @@ const reservedTurn = () => ({
 /** Control admits the reserved successor and it completes: the ordinary next-turn outcome. */
 let submitted: { requestId: string; prompt: string } | null = null;
 const message = "Synthetic rewrite";
-const windowState: { stored: object | null; selection?: object } = {
-  stored: null,
-};
+const windowState: {
+  storedWindow: object | null;
+  storedUploads?: { uploadId: string; sha256: string }[];
+  selection?: object;
+} = { storedWindow: null };
 function admitSecond() {
   const first = world.turns[0]!;
   first.sequenceEnd = first.sequenceBase + first.lastSequence;
@@ -193,7 +198,8 @@ function admitSecond() {
       prompt: submitted?.prompt ?? message,
       sequenceBase: base,
       lastSequence: 2,
-      storedWindow: windowState.stored,
+      storedWindow: windowState.storedWindow,
+      storedUploads: windowState.storedUploads,
     }),
   );
   world.events = [
@@ -314,6 +320,9 @@ type Review = {
   reopen: (runId: string) => void;
   admit: () => void;
   controlStores: (windowRequest: object | null) => void;
+  controlStoresUploads: (
+    uploads: { uploadId: string; sha256: string }[] | undefined,
+  ) => void;
   composer: (selection: object | undefined) => void;
 };
 
@@ -474,7 +483,10 @@ page.observed = observed;
 (window as unknown as { __vqa006: Review }).__vqa006 = page;
 page.admit = admitSecond;
 page.controlStores = (windowRequest: object | null) => {
-  windowState.stored = windowRequest;
+  windowState.storedWindow = windowRequest;
+};
+page.controlStoresUploads = (uploads) => {
+  windowState.storedUploads = uploads;
 };
 page.composer = (selection: object | undefined) => {
   windowState.selection = selection;
