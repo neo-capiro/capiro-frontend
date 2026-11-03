@@ -67,11 +67,16 @@
 .panel[data-density="compact"] .fields {
   gap: 10px;
 }
+/* The shared muted token is tuned for light surfaces (#756e69 on white reads 5.0:1); on this
+   dark preview surface it only reaches 3.2:1 for 12px helper text such as the model picker's
+   configured-default description. Re-point it at the existing subtle tone for this panel only,
+   so shared consumers and the light preview keep the global value. */
 .panel[data-theme="dark"] {
   color-scheme: dark;
   color: #eef2f7;
   background: #172235;
   border-color: #657187;
+  --muted-foreground: var(--subtle-foreground);
 }
 @media (prefers-color-scheme: dark) {
   .panel[data-theme="system"] {
@@ -79,5 +84,6 @@
     color: #eef2f7;
     background: #172235;
     border-color: #657187;
+    --muted-foreground: var(--subtle-foreground);
   }
 }
