@@ -6220,9 +6220,9 @@
     "file": "apps/web/src/shared/meri-conversations/history-diagnostics.ts",
     "kind": "function",
     "symbol": "createHistoryTransportDiagnostics",
-    "fingerprint": "889c937a0be9bc8749fe68f05020f529575246e3941c64c120633ed49743d593",
-    "reason": "One ephemeral terminal recorder owns opaque Web Crypto correlation, closed phase/outcome/status values, trusted public-route labels and its bounded writer. The second internal event name reuses this implementation rather than creating another logging framework. Each instance emits at most 20 records plus one suppression marker per minute; sink, clock or randomness failure cannot alter transport. No payload, credential, customer identifier, exception text, authority, timer or persistent store is introduced. The 84-line function remains one cohesive diagnostic responsibility.",
-    "reviewedBy": "Codex independent VQA-003 exact-source review of efce196d0839cdcce82140fc44e9d4e4e53b95db",
+    "fingerprint": "a030f9a4a5e714363e2ecae8f3aabded16f7af60ddf29810e02b85c3c7d7a329",
+    "reason": "One ephemeral terminal recorder owns opaque Web Crypto correlation, closed phase/outcome/status values, trusted public-route labels and its bounded writer. History, conversation/action and document instances reuse this implementation; the document caller supplies only its admitted fixed routes. Each instance emits at most 20 records plus one suppression marker per minute; sink, clock or randomness failure cannot alter transport. The narrow document-route grammar extension changes this exact fingerprint but adds no policy, payload, credential, customer identifier, exception text, authority, timer or persistent store. The 84-line function remains one cohesive diagnostic responsibility.",
+    "reviewedBy": "Codex independent VQA-009 exact-source review of 07174e63a6a55efbad4123afac13198c7091f82e",
     "reviewedOn": "2026-11-03"
   },
   {
@@ -6717,10 +6717,10 @@
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest",
-    "fingerprint": "2d83ea3378cb9e2140909dddaf7108505c40dd5aa3d69b8ea72f353f7103b6e7",
-    "reason": "Author structural assessment in docs/federal-workbench.md: Existing fixed native document forwarding adds the published import route and requires enabled Word generation for both federal writes. Session, origin, deadline and bounded receiving owners remain unchanged; no new authority or credential path. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "d81e40f12edc8e2b5002f0ac9049e1c9cebbeafa8a49dc7addb05d0970e0b4ac",
+    "reason": "Existing fixed-route document forwarding owner. The bounded diagnostic attaches stage and HTTP outcome to the same attempt through the canonical recorder; the duplicate recorder is deleted. Origin, native credential, opaque action session, configuration, deadline, request body and response bounds remain with their existing owners. No response DTO admission, public field, new header, retry, authorization or retention decision is introduced. Its 141 nonblank body lines keep one request lifetime together; mechanically splitting the route flow would obscure that lifetime rather than remove a separate responsibility.",
+    "reviewedBy": "Codex independent VQA-009 exact-source review of 07174e63a6a55efbad4123afac13198c7091f82e",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-documents/library-access.ts",
@@ -7021,10 +7021,10 @@
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest > <anonymous>",
-    "fingerprint": "c248b08f1815c976cf6331373df33d5a5500c7683bd7206dcb74146891c8d83c",
-    "reason": "Author structural assessment in docs/federal-workbench.md: Existing fixed native document forwarding adds the published import route and requires enabled Word generation for both federal writes. Session, origin, deadline and bounded receiving owners remain unchanged; no new authority or credential path. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "1e66c1440d8cc3bf5755e9aba8132c7ffed8f2d50bbeaa6a20a12328dd030cbc",
+    "reason": "One bounded forwarding callback covers request receiving, configuration admission, upstream fetch and response release under the existing action deadline. Diagnostic markers precede the work they describe and use the canonical terminal recorder. Fixed route selection, credential forwarding, redirect refusal, JSON byte bounds and allowlisted binary headers preserve prior behavior; a forwarded HTTP status does not claim a valid or admitted DTO. The 91 nonblank lines remain one cohesive transport attempt with no duplicate verifier, hidden retry, new authority or independent service lifecycle.",
+    "reviewedBy": "Codex independent VQA-009 exact-source review of 07174e63a6a55efbad4123afac13198c7091f82e",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/work/WorkSelectionPicker.tsx",
