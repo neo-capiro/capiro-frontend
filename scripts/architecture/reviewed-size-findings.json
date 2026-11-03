@@ -6067,9 +6067,9 @@
     "file": "apps/web/src/features/meri/conversation/ConversationView.tsx",
     "kind": "function",
     "symbol": "SessionComposer",
-    "fingerprint": "1afbef3508665674f3fe48d7c6943e64aa41d055584cd0b87b4c8960843e5ff8",
-    "reason": "Independent VQA-002 responsibility review at product head 3fae7f2eecf84b57a32fa6bfe25231c494c60623. This component coherently composes the current conversation's controls, captured draft, attachments, questions, model/procedure chips and Tools panel. The change passes an already resolved presentation label to the chip; it introduces no transport, authorization, persistence or send owner. Existing domain work stays with the named hooks/components. Its 107 nonblank body lines are one composer composition, so splitting solely for the threshold would scatter the shared current-session rendering. Mounted custom-label, scope, removal and access-loss checks passed.",
-    "reviewedBy": "Codex independent reviewer /root/review_vqa002 (GPT-6 Astra Ultra)",
+    "fingerprint": "1342dfbbbbb6c6fdf0361e94f5a2c5821d90e21ddd4511bf80cc7e6ead68a5c6",
+    "reason": "Independent exact-source VQA029 responsibility review: this 109-nonblank-line function remains one current-conversation composer composition over existing controls, captured draft, attachments, questions, chips and Tools. The only behavior change gives its ClientHandoffDraft and DocumentRevisionDraft siblings distinct React key prefixes while preserving the full admitted context in each lifetime key. This repairs reconciliation identity without adding a deduplication store, handoff collection, persistence, transport, authorization or Send owner. Existing child components and canonical draft/handoff receivers retain adoption, current-draft, newer-record and scope/session checks. Seven production-React mounted fixture cases use the real profile dialog and Meri component composition: one card, one Dismiss, explicit adoption, later intentional same-text handoff, stale-clear protection, document-revision coexistence and session replacement pass. The exact base naturally grows3/5/7 cards through the same navigation path. Splitting this two-key correction would scatter one composition without separating responsibility. Unchanged ConversationView has its own separate size-review status and is not waived by this record.",
+    "reviewedBy": "Codex independent VQA029 reviewer (GPT-6 Astra Ultra); exact source 1ca5e42c1220544538dd58b5ebe11280f6a51812; vqa-029-independent-review.json",
     "reviewedOn": "2026-11-03"
   },
   {
