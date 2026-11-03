@@ -237,9 +237,9 @@ export const skills: SkillsTemplatesView = {
         "A skill or template cannot grant permissions or add arbitrary instructions as authority.",
     },
     {
-      title: "No approved templates",
+      title: "Approved templates unavailable",
       detail:
-        "When no permitted template is available, show an empty state and keep attachment unavailable.",
+        "Approved templates cannot be shown here yet, so attaching a template is unavailable.",
     },
   ],
 };
