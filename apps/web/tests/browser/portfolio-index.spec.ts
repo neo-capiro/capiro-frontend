@@ -396,7 +396,7 @@ test("permission and expired-session errors remain explicit and disable profile 
   );
   await page.reload();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Sign in", exact: true }),

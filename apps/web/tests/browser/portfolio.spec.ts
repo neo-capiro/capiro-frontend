@@ -233,7 +233,7 @@ test("navigation, permissions, session expiry and mobile layout use real feature
   );
   await page.reload();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   expect(unexpected).toEqual([]);
 });

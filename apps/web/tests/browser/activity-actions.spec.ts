@@ -324,7 +324,7 @@ test("expired authentication during removal uses the shared session boundary", a
     .getByRole("button", { name: "Remove activity", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired", exact: true }),
+    page.getByRole("heading", { name: "We couldn't verify your session", exact: true }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Sign in", exact: true }),

@@ -59,7 +59,7 @@ for (const status of [401, 503]) {
     await retry.release();
     await expectPlan(page);
     await expect(
-      page.getByRole("heading", { name: "Your session expired" }),
+      page.getByRole("heading", { name: "We couldn't verify your session" }),
     ).toHaveCount(0);
     expect(fixture.calls("public-onboard.config")).toHaveLength(2);
     expect(fixture.calls("onboard.funnel.session")).toHaveLength(1);

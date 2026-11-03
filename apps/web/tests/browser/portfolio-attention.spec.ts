@@ -288,7 +288,7 @@ test("expired alert session uses the shared sign-in recovery", async ({
   );
   await page.goto("/portfolio");
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Sign in", exact: true }),

@@ -325,7 +325,7 @@ test("member-read session expiry removes owner labels and Work through the share
   );
   await openWork(page, true);
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Client work" })).toHaveCount(
     0,

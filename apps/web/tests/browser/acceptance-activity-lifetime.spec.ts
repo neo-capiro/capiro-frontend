@@ -169,7 +169,7 @@ test("activity expired preflight cannot dispatch a write after filter reappearan
   );
   await chooseActivityPin(page);
   await expect(
-    page.getByRole("heading", { name: "Your session expired", exact: true }),
+    page.getByRole("heading", { name: "We couldn't verify your session", exact: true }),
   ).toBeVisible();
   expect(fixture.writes).toEqual([]);
   expect(fixture.unexpected).toEqual([]);

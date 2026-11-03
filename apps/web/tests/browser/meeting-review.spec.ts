@@ -708,7 +708,7 @@ test("source GET failures support deliberate read retry and session expiry never
     .getByRole("button", { name: "Refresh notes", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired", exact: true }),
+    page.getByRole("heading", { name: "We couldn't verify your session", exact: true }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Sign in", exact: true }),

@@ -162,7 +162,7 @@ test("session expiry returns to sign-in without retaining private detail", async
   state.status = 401;
   await open(page);
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "Sign in" })).toHaveAttribute(
     "href",

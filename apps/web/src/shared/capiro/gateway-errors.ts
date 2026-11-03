@@ -18,6 +18,10 @@ import {
 } from "./workspace-ordinary-save-errors";
 import { readBoundedJson } from "./gateway-input";
 import {
+  authFailureHeaders,
+  type AuthFailureClass,
+} from "../session/auth-failure";
+import {
   isObjectiveAssociationOperation,
   objectiveAssociationFailure,
 } from "./objective-association-errors";
@@ -39,15 +43,21 @@ export const jsonError = (
     | OrdinarySaveConflictCode
     | PublicationConflictCode
     | GenerationConflictCode,
+  failure?: AuthFailureClass,
 ) =>
   Response.json(
     { message, ...(code ? { code } : {}) },
     {
       status,
-      headers: {
-        "Cache-Control": "no-store",
-        "Referrer-Policy": "no-referrer",
-      },
+      headers: failure
+        ? authFailureHeaders(failure, {
+            "Cache-Control": "no-store",
+            "Referrer-Policy": "no-referrer",
+          })
+        : {
+            "Cache-Control": "no-store",
+            "Referrer-Policy": "no-referrer",
+          },
     },
   );
 
@@ -117,13 +127,21 @@ export async function serviceErrorResponse(
         response.status,
         payload,
       );
+      // This admitted refusal can itself be the upstream 401 (the public Error
+      // contract permits UNAUTHENTICATED), so it names its class too.
       if (failure)
         return Response.json(failure, {
           status: response.status,
-          headers: {
-            "Cache-Control": "no-store",
-            "Referrer-Policy": "no-referrer",
-          },
+          headers:
+            response.status === 401
+              ? authFailureHeaders("upstream-rejected", {
+                  "Cache-Control": "no-store",
+                  "Referrer-Policy": "no-referrer",
+                })
+              : {
+                  "Cache-Control": "no-store",
+                  "Referrer-Policy": "no-referrer",
+                },
         });
     } catch (error) {
       if (signal.aborted) throw error;
@@ -175,5 +193,10 @@ export async function serviceErrorResponse(
               : response.status >= 500
                 ? "The service is unavailable. Please retry."
                 : "The operation was rejected.";
-  return jsonError(response.status, message, code);
+  return jsonError(
+    response.status,
+    message,
+    code,
+    response.status === 401 ? "upstream-rejected" : undefined,
+  );
 }

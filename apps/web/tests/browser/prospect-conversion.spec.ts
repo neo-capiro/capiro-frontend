@@ -157,7 +157,7 @@ test("mismatched success is refused and session expiry retains the existing glob
   expect(writes).toBe(1);
   await dialog.getByRole("button", { name: "Confirm link" }).click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   expect(writes).toBe(2);
   expect(unexpected).toEqual([]);

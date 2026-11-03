@@ -9,6 +9,7 @@ import {
 } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ApiError, createApiClient, type ApiClient } from "./http";
+import type { AuthFailureClass } from "../../session/auth-failure";
 import Link from "next/link";
 const ApiContext = createContext<ApiClient | null>(null);
 export function DataProvider({
@@ -18,7 +19,7 @@ export function DataProvider({
 }: {
   children: ReactNode;
   api?: ApiClient;
-  onSessionExpired?: () => void;
+  onSessionExpired?: (failure: AuthFailureClass) => void;
 }) {
   const [scope] = useState(createRequestLifetime);
   const [client] = useState(
@@ -36,15 +37,15 @@ export function DataProvider({
         },
       }),
   );
-  const [expired, setExpired] = useState(false);
+  const [expired, setExpired] = useState<AuthFailureClass | null>(null);
   const [defaultApi] = useState(() =>
     createApiClient(
       fetch,
-      () => {
+      (failure) => {
         scope.abort();
         client.clear();
-        setExpired(true);
-        onSessionExpired?.();
+        setExpired((previous) => previous ?? failure);
+        onSessionExpired?.(failure);
       },
       scope.signal,
     ),
@@ -59,8 +60,8 @@ export function DataProvider({
   }, [client, scope]);
   if (expired)
     return (
-      <main className="centered">
-        <h1>Your session expired</h1>
+      <main className="centered" data-auth-class={expired}>
+        <h1>We couldn&apos;t verify your session</h1>
         <p>Sign in again to continue.</p>
         <Link className="button primary" href="/sign-in">
           Sign in

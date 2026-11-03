@@ -60,7 +60,7 @@ test("401 removes protected content and asks for sign-in without replaying a req
   });
   await page.goto("/__test/session");
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(page.getByTestId("identity")).toHaveCount(0);
   expect(requests).toBe(1);

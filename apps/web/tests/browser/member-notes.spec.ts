@@ -581,7 +581,7 @@ test("session expiry at preflight cannot send a note", async ({ page }) => {
   await draft(page);
   await saveButton(page).click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   expect(writes).toEqual([]);
 });

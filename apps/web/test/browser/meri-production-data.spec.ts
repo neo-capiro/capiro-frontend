@@ -123,7 +123,7 @@ for (const status of [401, 403, 503])
     if (status === 401)
       await expect(
         page.getByRole("heading", {
-          name: "Your session expired",
+          name: "We couldn't verify your session",
           exact: true,
         }),
       ).toBeVisible();

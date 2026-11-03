@@ -16,6 +16,11 @@ import type {
   OperationRequest,
   OperationResponse,
 } from "./contracts";
+import {
+  admitAuthFailure,
+  authFailureHeader,
+  type AuthFailureClass,
+} from "../session/auth-failure";
 import { validateUploadFiles, type CapiroUploadFile } from "./multipart";
 import {
   workspaceBriefConflictCode,
@@ -99,7 +104,7 @@ function readableCode(payload: unknown): string | undefined {
 
 type ApiOptions = {
   fetcher?: typeof fetch;
-  onSessionExpired?: () => void;
+  onSessionExpired?: (failure: AuthFailureClass) => void;
   scopeSignal?: () => AbortSignal;
   credentials?: "same-origin" | "omit";
 };
@@ -168,7 +173,9 @@ async function responsePayload(
   assertCurrent(signals);
   if (!response.ok) {
     if (response.status === 401 && options.credentials !== "omit")
-      options.onSessionExpired?.();
+      options.onSessionExpired?.(
+        admitAuthFailure(response.headers.get(authFailureHeader)),
+      );
     throw new CapiroApiError(
       response.status,
       response.status === 401 && options.credentials !== "omit"

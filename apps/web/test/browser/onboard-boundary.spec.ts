@@ -216,7 +216,7 @@ test("current public401 on register preserves signed-in scope and permits authen
     "Current signed-in private draft",
   );
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toHaveCount(0);
   expect(fixture.calls("public-onboard.config")).toHaveLength(1);
   expect(fixture.writes).toEqual([]);
@@ -294,7 +294,7 @@ test("current authenticated401 expires the Onboard application without replaying
   );
   await page.getByRole("button", { name: "Read authenticated legal" }).click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(page.getByLabel("Onboard scope draft")).toHaveCount(0);
   await expect(page.getByTestId("onboard-receipt")).toHaveCount(0);

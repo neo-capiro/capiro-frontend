@@ -648,7 +648,7 @@ test("401 clears protected export state without replay", async ({ page }) => {
   });
   await open(page);
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(dialog(page)).toHaveCount(0);
   expect(state.creates()).toHaveLength(1);

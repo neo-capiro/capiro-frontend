@@ -382,9 +382,15 @@ export async function handleCapiroRequest(
         request.signal.aborted ? 408 : 504,
         "The session request was cancelled or timed out.",
       );
-    return jsonError(401, "Your session could not be verified. Sign in again.");
+    return jsonError(
+      401,
+      "Your session could not be verified. Sign in again.",
+      undefined,
+      "credential-unverified",
+    );
   }
-  if (!token) return jsonError(401, "Sign in to continue.");
+  if (!token)
+    return jsonError(401, "Sign in to continue.", undefined, "no-session");
   if (request.signal.aborted)
     return jsonError(408, "The request was cancelled.");
   return dispatch(

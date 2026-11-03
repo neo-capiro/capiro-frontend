@@ -10,16 +10,23 @@ import {
   previewServicePrefixes,
   type PreviewReadRoute,
 } from "./read-route.server";
+import {
+  authFailureHeaders,
+  type AuthFailureClass,
+} from "../session/auth-failure";
 
 const headers = {
   "Cache-Control": "private, no-store",
   "X-Content-Type-Options": "nosniff",
   "Referrer-Policy": "no-referrer",
 };
-function failure(status: number): Response {
+function failure(status: number, failure?: AuthFailureClass): Response {
   return Response.json(
     { message: "The preview read is unavailable." },
-    { status, headers },
+    {
+      status,
+      headers: failure ? authFailureHeaders(failure, headers) : headers,
+    },
   );
 }
 
@@ -32,6 +39,7 @@ async function receive(
     void response.body?.cancel().catch(() => undefined);
     return failure(
       [401, 403, 404, 429].includes(response.status) ? response.status : 502,
+      response.status === 401 ? "upstream-rejected" : undefined,
     );
   }
   const payload: unknown = JSON.parse(
@@ -66,7 +74,7 @@ export async function proxyPreviewRead(
     return await withActionDeadline([request.signal], async (signal) => {
       const token = await abortable(getToken(), signal);
       signal.throwIfAborted();
-      if (!token) return failure(401);
+      if (!token) return failure(401, "no-session");
       const response = await abortable(
         fetcher(url, {
           method: "GET",

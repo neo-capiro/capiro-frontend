@@ -1,5 +1,10 @@
 import { z } from "zod";
 import type { Service } from "../config/config";
+import {
+  admitAuthFailure,
+  authFailureHeader,
+  type AuthFailureClass,
+} from "../../session/auth-failure";
 export class ApiError extends Error {
   constructor(
     public readonly status: number,
@@ -20,7 +25,7 @@ export interface ApiClient {
 }
 export function createApiClient(
   fetcher: typeof fetch = fetch,
-  onSessionExpired?: () => void,
+  onSessionExpired?: (failure: AuthFailureClass) => void,
   scopeSignal?: () => AbortSignal,
 ): ApiClient {
   return {
@@ -49,7 +54,10 @@ export function createApiClient(
           : await response.json().catch(() => null);
       signal?.throwIfAborted();
       if (!response.ok) {
-        if (response.status === 401) onSessionExpired?.();
+        if (response.status === 401)
+          onSessionExpired?.(
+            admitAuthFailure(response.headers.get(authFailureHeader)),
+          );
         const detail = z
           .object({ message: z.union([z.string(), z.array(z.string())]) })
           .safeParse(data);

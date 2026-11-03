@@ -312,7 +312,7 @@ test("Planner401 expires the shared session without replay or retained task cont
     .getByRole("button", { name: "Recheck current Objective destination" })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Your session expired" }),
+    page.getByRole("heading", { name: "We couldn't verify your session" }),
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: item.title, exact: true }),

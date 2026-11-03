@@ -14,7 +14,7 @@ export function PortfolioHarnessProviders({
   if (expired)
     return (
       <main className="centered">
-        <h1>Your session expired</h1>
+        <h1>We couldn&apos;t verify your session</h1>
         <p>Sign in again to continue.</p>
         <Link className="button primary" href="/sign-in">
           Sign in

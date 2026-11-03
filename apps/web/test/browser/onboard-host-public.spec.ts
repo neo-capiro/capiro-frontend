@@ -42,7 +42,7 @@ for (const status of [200, 401]) {
       page.getByText("Late synthetic token A", { exact: false }),
     ).toHaveCount(0);
     await expect(
-      page.getByRole("heading", { name: "Your session expired" }),
+      page.getByRole("heading", { name: "We couldn't verify your session" }),
     ).toHaveCount(0);
     await expect(
       page.getByRole("button", { name: "Connect with Microsoft" }),
