@@ -2,12 +2,16 @@ import type { QueryClient } from "@tanstack/react-query";
 import type { RunBinding } from "@capiro/meri-contracts";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 import {
-  storedSubmission,
-  submissionIdentity,
+  retainedRequest,
   skillSelectionFields,
   type ConversationSkillSelection,
+  storedSubmission,
+  submissionIdentity,
 } from "./query-journal";
-import { recoverPersistedTurn } from "./turn-persistence";
+import {
+  recoverOpenedReservation,
+  recoverPersistedTurn,
+} from "./turn-persistence";
 import { TabJournalUnavailable, type TabStorage } from "./tab-journal";
 import { conversationInClient } from "./history-pages";
 import type { ConversationAccount } from "./host-controller";
@@ -159,6 +163,22 @@ export function conversationTurnJournal(
     { ...account, clientId, conversationId },
     storage,
   );
+  // Control's own answer that one reservation admitted no message belongs to this tab's exact
+  // conversation; without it every later page asks the same question again.
+  const openedReservation = recoverOpenedReservation(
+    { ...account, clientId, conversationId },
+    storage,
+  );
+  /**
+   * A newer message, a newer admission or an explicit give-up supersedes that answer: it only ever
+   * established that one target was empty when control answered, so it must not outlive its
+   * lifecycle and silently settle a later uncertainty. A retirement this tab could not make durable
+   * is not a retirement, so an unretired answer stops being trusted too.
+   */
+  let openedRetired = false;
+  const retireOpened = () => {
+    if (openedReservation && !openedReservation.retire()) openedRetired = true;
+  };
   cache.setQueryData<{ intent?: TurnIntent }>(
     key,
     (previous) =>
@@ -179,6 +199,8 @@ export function conversationTurnJournal(
   const store = (intent: TurnIntent) => {
     if (retained.blocked) throw new TabJournalUnavailable();
     if (!current()) return false;
+    // This tab now holds a newer message: an earlier "nothing admitted" answer no longer settles it.
+    retireOpened();
     retained.record?.write(intent);
     cache.setQueryData(key, Object.freeze({ intent: snapshotIntent(intent) }));
     return true;
@@ -225,11 +247,56 @@ export function conversationTurnJournal(
     /** Control confirmed nothing was admitted for the retained turn, or the person discarded it. */
     discard() {
       const intent = read();
+      // This view's give-up unlocks the composer; it never claims control settled a later message.
+      retireOpened();
       if (!intent) return undefined;
       retained.record?.clear();
       cache.setQueryData(key, Object.freeze({}));
       return intent;
     },
+    /**
+     * Target run id of the reservation control already confirmed admitted no message in this tab,
+     * unless something newer owns that target. One immutable target per source identifies the
+     * reservation; an ordinary message sent into that same target is the request journal's from then
+     * on, so control's earlier answer no longer settles it - and a request this page cannot read
+     * proves no absence either.
+     */
+    openedTarget: () => {
+      if (openedRetired) return undefined;
+      const confirmed = openedReservation?.read();
+      if (!confirmed) return undefined;
+      const request = retainedRequest(
+        {
+          tenantId: account.tenantId,
+          actorId: account.actorId,
+          clientId,
+          conversationId,
+        },
+        confirmed.targetRunId,
+        storage,
+      );
+      return request.state === "absent" ? confirmed.targetRunId : undefined;
+    },
+    /**
+     * Keep control's own RESERVED answer: that exact source's successor admitted no message. The
+     * answer outlives this page in this tab only; the saved read still reports the reservation.
+     */
+    confirmOpened(
+      receipt: Pick<ConversationTurnReceipt, "sourceBinding" | "targetBinding">,
+    ) {
+      for (const binding of [receipt.sourceBinding, receipt.targetBinding])
+        if (
+          binding.tenantId !== account.tenantId ||
+          binding.actorId !== account.actorId ||
+          binding.conversationId !== conversationId
+        )
+          return;
+      openedReservation?.write({
+        sourceRunId: receipt.sourceBinding.runId,
+        targetRunId: receipt.targetBinding.runId,
+      });
+    },
+    retireOpened,
     start(
       source: RunBinding,
       prompt: string,
@@ -318,8 +385,8 @@ export async function recoverConversationTurn(
  * "Check again" for a pending next message: replay the exact source mapping (one immutable target per
  * source) of the retained turn, or of the reservation control reported when this tab kept none.
  * RESERVED is control's own answer that the target admitted no message, so the retained turn is
- * released. ACCEPTED leaves it, with its receipt, for recovery of that exact target and request id.
- * A failure leaves everything as it was.
+ * released and this tab keeps the answer; ACCEPTED leaves it, with its receipt, for recovery of that
+ * exact target and request id. A failure leaves everything as it was.
  */
 export async function checkConversationTurn(
   journal: ReturnType<typeof conversationTurnJournal>,
@@ -341,9 +408,16 @@ export async function checkConversationTurn(
   signal?.throwIfAborted();
   if (!retained && receipt.sourceBinding.runId !== reported!.runId)
     throw new Error("Turn binding changed");
-  return receipt.state === "RESERVED"
-    ? { target: receipt.targetBinding, released: journal.discard() }
-    : { target: receipt.targetBinding, retained: journal.read() };
+  if (receipt.state !== "RESERVED") {
+    // Control reports a target for this message: nothing here is an unconfirmed empty reservation.
+    journal.retireOpened();
+    return { target: receipt.targetBinding, retained: journal.read() };
+  }
+  const released = journal.discard();
+  // This tab asked about this exact reservation and control answered that nothing was admitted: a
+  // reload of the same page reopens it instead of asking the same question again.
+  journal.confirmOpened(receipt);
+  return { target: receipt.targetBinding, released };
 }
 
 /** Only this explicit refusal proves that no next turn was dispatched. */

@@ -6238,10 +6238,12 @@
     "file": "apps/web/src/shared/meri-conversations/turn-journal.ts",
     "kind": "function",
     "symbol": "conversationTurnJournal",
-    "fingerprint": "9f7d99baa50797e84e4bb0199b59277c1f729beb224e077a58b56aaf740b0f31",
-    "reason": "The conversation turn journal reader/writer. One storage concern for the meri-conversations owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
-    "reviewedOn": "2026-10-27"
+    "line": 147,
+    "nonblank": 179,
+    "fingerprint": "c5d70c3403172430ca770e6cd73d8e5d730bbfcf26d2af27e844308e59bedf39",
+    "reason": "Independent exact-closure VQA006 review at 58d476a5. One captured account/client/conversation cache key and storage generation own immutable intent read/write/start/discard/acknowledgement. Optional opened-answer persistence uses that same scope and is superseded by existing lifecycle operations; openedTarget consults the existing canonical target request reader without claiming or mutating its cache. Only positive absence permits the hint; retained, retired, malformed or denied request evidence cannot settle newer uncertainty. confirmOpened validates both receipt bindings before recording the control answer. The body is a cohesive owner closure whose methods share currentness and retirement invariants, not an additional send/authority layer. Mounted delayed scope, client/conversation switch, real discard, ACCEPTED, ordinary submit, remount and storage-failure counterexamples now pass.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA006 product 58d476a5726c47ab31376ded1162bbd267d6de86; outputs/vqa-006-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-feedback/access.ts",
@@ -7048,10 +7050,12 @@
     "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "e369768359f333debfbe56357139618d3bab8608619221745dbb3d83f1b522a1",
-    "reason": "Exact previously accepted505-line Research/retirement journal e3697683; one persistence/cache ownership boundary preserves both original function families. No product body change from acceptedf2f525e6.",
-    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
-    "reviewedOn": "2026-11-01"
+    "line": 1,
+    "nonblank": 556,
+    "fingerprint": "3d143bd7820001bc885553b161d7ee72012dee737c1658e9300f8b40644a6bc1",
+    "reason": "Independent exact-module VQA006 review at 58d476a5. Canonically received immutable draft/selection helpers and scoped request/selection QueryClient adapters remain the local conversation-state owner; public receivers still determine admissible wire fields and eligibility. The only VQA006 addition is a read-only retainedRequest accessor for one exact target run, returning absent, retained or unreadable. It creates no cache entry, sends nothing, and does not rewrite uncertainty or claim another command owner. That result lets the optional older empty-reservation hint stay conservative without duplicating request recovery. Existing journal currentness, retirement acknowledgement, pending-to-unknown restoration and selector fences were inspected in the exact module; they remain unchanged. Module size reflects cohesive state adapters and canonical field copying, with transport and authority outside it.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA006 product 58d476a5726c47ab31376ded1162bbd267d6de86; outputs/vqa-006-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-routines/workflow.ts",
@@ -7375,10 +7379,12 @@
     "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
     "kind": "function",
     "symbol": "conversationIntentJournal",
-    "fingerprint": "8d3e755849a4e99f768e4822a165ba3a1999d37b73e5f57a7ac6495cf2d382fe",
-    "reason": "Construction, current/read/write and acknowledgement share one captured persistence generation, owned cache entry and retired request identity. Keeping reconciliation in that owner prevents a second object from independently clearing the block or losing these fences. The method's ordered guards, canonical conversion, verified persistence, cache update and final unblock form one synchronous state transition; there is no new async lifetime or command side effect. Predicate extraction solely to lower line count would not improve ownership. This exact extension is cohesive and proportionate.",
-    "reviewedBy": "Codex independent Meri FE65 journal source/design review; MERI-FE65-JOURNAL-CORRECTION-INDEPENDENT-REVIEW-20261031.txt SHA256 cf2e2d7c7965683f1ac5fd6a908d3beeb445b383861db4833a050639dbb6bf03",
-    "reviewedOn": "2026-10-31"
+    "line": 318,
+    "nonblank": 124,
+    "fingerprint": "00f2bf95d00b12e6ec3a13df72cf43a474398bea861e6e9b1b61d7f72f3e7d9a",
+    "reason": "Independent exact-function responsibility review at 58d476a5; this body is unchanged against the PR base but its older register fingerprint was stale within the touched module. One exact tenant/actor/client/conversation/run cache entry and storage generation own read/write recovery. Pending submits and cancellations restore as unknown; unreadable or retired records block recovery until the existing positive accepted-history path matches the exact context and request. Writes preserve canonical request identity and immutable snapshots, while currentness rejects replaced cache/storage owners. The 124-line closure keeps its mutually dependent current/read/write/retirement invariants together and delegates encoding/storage to existing helpers. VQA006 uses a separate read-only accessor and does not alter this owner or its send contract. Focused retained-request, corruption/denial and budget checks passed.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA006 product 58d476a5726c47ab31376ded1162bbd267d6de86; outputs/vqa-006-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-conversations/proxy.ts",
@@ -7845,6 +7851,50 @@
     "fingerprint": "386bdc5b66cab369985fe2f505d77f489ed1dc97dae767d5b7d3b59e70da7f5d",
     "reason": "One routines presentation module maps bounded canonical rows, renders the truthful empty result, and composes one current-port workspace. Read/paging, row selection and editor state stay in that workspace; forms, cancellation, consent review and saved-result recovery remain delegated to their existing components and workflow. The VQA013 change adds only the initial authorized list lifecycle: a successful page fulfils it, a hidden same-port discard remains owed, a current-port deadline/failure requires explicit Refresh, and former-port answers are fenced. This module creates no routine authority, request journal, transport or execution path. The adjacent pure mapping and empty-state helpers share this one presentation responsibility; splitting solely at the line threshold would not improve ownership. Independently inspected exact c859bab9 source and nine mounted synthetic cases, including both prior reviewer failures; deployed acceptance remains separate.",
     "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA013 product c859bab93a00361ab0f1908d8c38f13eb0fd34fc; outputs/vqa-013-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useConversationTurn.ts",
+    "kind": "function",
+    "symbol": "useConversationTurn",
+    "line": 240,
+    "nonblank": 143,
+    "fingerprint": "009113d2285344d7151b871f10afda0814422cf16d988c91e0fbf69938c7b821",
+    "reason": "Independent exact-body VQA006 review at 58d476a5. This hook composes one scoped retained-turn journal, existing command gate, explicit reservation/recovery operations and current-view release affordances; session issuance and actual submit remain separate. The new opened hint is restored only from that journal and local releases carry the journal identity, so delayed context, conversation/client replacement and discard epoch cannot inherit a former owner. Mount does not reserve, send or retry; fresh completed-history acknowledgement remains a local journal operation. The sizeable function is one hook lifetime with explicit callbacks, not a second protocol owner. Twenty mounted cases cover remount, scope/epoch, unknown retention, explicit discard, malformed/denied storage, ordinary target submit and quota retirement. Live causality/acceptance remain unverified.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA006 product 58d476a5726c47ab31376ded1162bbd267d6de86; outputs/vqa-006-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/turn-journal.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 419,
+    "fingerprint": "aede7b9bee2fa65d78f49473bf8f4adfda378cca30b82cb25092eafe7282b90f",
+    "reason": "Independent exact-module VQA006 review at 58d476a5. This module owns immutable next-turn identity, canonical completed-history matching and explicit reserve/check recovery for one account/client/conversation. Snapshot/matching helpers and the journal closure support that same lifecycle; persistence and canonical request ownership remain delegated. The added opened-reservation hint is presentation memory of a positive control RESERVED answer, retired on newer retained intent, ACCEPTED or explicit give-up, and suppressed unless the exact target request is positively absent. It neither dispatches an ordinary message nor treats browser state as authority. Separating the cohesive matching/recovery helpers solely for file size would obscure the same ownership boundary. Focused journal/budget and mounted cases passed without changing wire identities or request uncertainty.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA006 product 58d476a5726c47ab31376ded1162bbd267d6de86; outputs/vqa-006-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/turn-persistence.ts",
+    "kind": "function",
+    "symbol": "persistedOpenedReservation",
+    "line": 136,
+    "nonblank": 105,
+    "fingerprint": "ce719d38704ab367f3a5b2a68c8ed5560441c6dc30bc4a5e3d38c4dc15138252",
+    "reason": "Independent exact persistence-owner review at 58d476a5. This function owns one optional confirmation represented by a scoped answer and matching scoped claim; neither is a request receipt or authority. Read requires both records to agree, and the existing bounded tabRecord owner validates generation, envelope, scope and write readback. Retirement independently attempts claim write/removal and answer write/removal, so quota-style failed writes cannot skip usable deletion; it verifies retirement and creates no tombstone when nothing exists. Both record families are evictable hints, so losing either asks for a fresh check and cannot consume protected unresolved-command capacity. Keeping read/write/retire together makes the pair invariant inspectable; the 105-line size reflects failure handling, not unrelated responsibility. Quota remount, selective denial, optional write fallback and bounded-budget regressions pass. No transport, command retry or global storage layer added.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA006 product 58d476a5726c47ab31376ded1162bbd267d6de86; outputs/vqa-006-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/tab-journal.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 481,
+    "fingerprint": "dce77ceb6b8c8e24293ab105657870046c4639ef16c7b30a186cc9947741fa84",
+    "reason": "Independent exact storage-owner review at 58d476a5. This existing module owns scoped bounded session-storage envelopes, verified sign-in/generation fences, conservative request retirement, budget eviction and scope/message cleanup. VQA006 adds only optional turn-open and turn-claim families to that owner: recordFacts marks both evictable and explicit message discard removes them. Real unresolved request/turn identities and newest-request protection remain unchanged; no alternate quota manager or persistence owner is introduced. Optional claims are no longer classified as protected commands, and absent hints create no retirement records. Focused budget tests and the independent 130-conversation start/discard counterexample pass, alongside scope/access-lifetime recovery cases. Exact module size is accepted for this cohesive storage boundary, not as a blanket exemption or live acceptance claim.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA006 product 58d476a5726c47ab31376ded1162bbd267d6de86; outputs/vqa-006-independent-final-review.json",
     "reviewedOn": "2026-11-03"
   }
 ]

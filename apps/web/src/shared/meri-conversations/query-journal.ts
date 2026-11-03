@@ -444,6 +444,41 @@ export function conversationIntentJournal(
   };
 }
 
+/**
+ * What this tab can say about the ordinary request for one exact target run: it holds one, it holds
+ * none, or it cannot be read. "Cannot be read" is not "none": an unreadable or retired record still
+ * means a newer request exists, so a caller must stay conservative rather than trust an older answer.
+ */
+export type RetainedRequest =
+  | Readonly<{ state: "absent" }>
+  | Readonly<{ state: "retained"; intent: ConversationIntent }>
+  | Readonly<{ state: "unreadable" }>;
+
+/** The ordinary request retained for one target run, read without claiming that journal. */
+export function retainedRequest(
+  scope: {
+    tenantId: string;
+    actorId: string;
+    clientId: string | null;
+    conversationId: string;
+  },
+  runId: string,
+  storage?: TabStorage,
+): RetainedRequest {
+  try {
+    const intent = tabRecord(
+      scope,
+      "request",
+      receiveIntent,
+      runId,
+      storage ?? null,
+    ).read();
+    return intent ? { state: "retained", intent } : { state: "absent" };
+  } catch {
+    return { state: "unreadable" };
+  }
+}
+
 /** Reopening constrains issuance to the last observed run; a failed rebind never chooses another. */
 export function conversationSelectionOwner(
   client: QueryClient,

@@ -253,8 +253,20 @@ export function useConversationTurn(
   } = useRetainedTurn(cache, account, clientId, conversationId, epoch);
   const { active, alive, gate } = useTurnLifetime(journal);
   const [notReady, setNotReady] = useState(false);
-  // The reserved target control confirmed admitted no message, or whose message the person discarded.
-  const [opened, setOpened] = useState<string>();
+  // The reserved target control confirmed admitted no message in this tab, or whose message the person
+  // discarded. A confirmation this tab kept is restored here: the reservation itself outlives the
+  // check, so without it every reopened page would ask the same question again.
+  const keptOpen = useMemo(() => journal?.openedTarget(), [journal]);
+  // What this view released, bound to the journal that released it: a replaced conversation, client
+  // or message owner starts from its own record instead of inheriting this one.
+  const [releasedTarget, setReleasedTarget] = useState<{
+    journal?: ReturnType<typeof conversationTurnJournal>;
+    target?: string;
+  }>();
+  const opened =
+    releasedTarget && releasedTarget.journal === journal
+      ? releasedTarget.target
+      : keptOpen;
   useEffect(() => {
     if (
       completedHistory &&
@@ -319,7 +331,7 @@ export function useConversationTurn(
     released: TurnIntent | undefined,
     restore: Restore,
   ) => {
-    if (target && alive.current) setOpened(target);
+    if (target && alive.current) setReleasedTarget({ journal, target });
     if (released?.uploads) restore(released.prompt, released.uploads);
     else restore(released?.prompt);
   };

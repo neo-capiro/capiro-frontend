@@ -93,6 +93,8 @@ type Kind =
   | "draft-capture"
   | "request"
   | "turn"
+  | "turn-open"
+  | "turn-claim"
   | "selection"
   | "management"
   | "lifecycle"
@@ -178,18 +180,22 @@ function recordFacts(name: string, raw: string | null) {
           "state" in value.submit &&
           value.submit.state === "observed" &&
           (!("cancel" in value) || value.cancel === "observed")
-        : kind === "draft" &&
-          "draft" in value &&
-          value.draft === "" &&
-          "pending" in value &&
-          value.pending === null &&
-          "reserved" in value &&
-          value.reserved === null &&
-          (!("selection" in value) ||
-            value.selection === undefined ||
-            (!!value.selection &&
-              typeof value.selection === "object" &&
-              Object.keys(value.selection).length === 0));
+        : kind === "turn-open" || kind === "turn-claim"
+          ? // An optional answer about one reservation: losing it only asks the check again, so the
+            // bounded journal may take it instead of a real unresolved command.
+            true
+          : kind === "draft" &&
+            "draft" in value &&
+            value.draft === "" &&
+            "pending" in value &&
+            value.pending === null &&
+            "reserved" in value &&
+            value.reserved === null &&
+            (!("selection" in value) ||
+              value.selection === undefined ||
+              (!!value.selection &&
+                typeof value.selection === "object" &&
+                Object.keys(value.selection).length === 0));
     return { name, scope, kind, at, settled };
   } catch {
     return null;
@@ -420,7 +426,14 @@ export function discardMeriConversationMessages(
     if (
       Array.isArray(parts) &&
       parts[0] === expected &&
-      ["draft", "draft-capture", "request", "turn"].includes(parts[1])
+      [
+        "draft",
+        "draft-capture",
+        "request",
+        "turn",
+        "turn-open",
+        "turn-claim",
+      ].includes(parts[1])
     )
       storage.removeItem(key);
   }
