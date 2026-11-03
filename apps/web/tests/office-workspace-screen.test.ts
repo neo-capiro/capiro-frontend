@@ -3,7 +3,11 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import { OfficeDocumentScreen } from "../src/features/modules/workspace/office/OfficeDocumentScreen";
 import { OfficeDraftControls } from "../src/features/modules/workspace/office/OfficeDraftControls";
-import { libraryRows } from "../src/features/meri/files/DocumentLibrary";
+import {
+  DocumentLibrary,
+  libraryPageNotice,
+  libraryRows,
+} from "../src/features/meri/files/DocumentLibrary";
 import { LibrarySelectedVersion } from "../src/features/meri/files/LibrarySelectedVersion";
 import type { OfficeEditorState } from "../src/shared/meri-office/editor-controller";
 import type { LibraryVersion } from "../src/shared/meri-documents/library-access";
@@ -158,6 +162,50 @@ describe("Office documents and the Files library", () => {
   it("the Workspace lists only Office versions and Files lists none of them", () => {
     expect(libraryRows([docx, text], true)).toEqual([docx]);
     expect(libraryRows([docx, text], false)).toEqual([text]);
+  });
+  it("a Files page holding only Office versions is not reported as an empty scope", () => {
+    const notice = (
+      versions: LibraryVersion[],
+      office: boolean,
+      nextCursor: string | null = null,
+    ) =>
+      libraryPageNotice({
+        loaded: true,
+        nextCursor,
+        returned: versions.length,
+        listed: libraryRows(versions, office).length,
+      });
+    // The scope returned the Word document, which this library does not list: not an empty scope.
+    expect(notice([docx], false)).toBe("empty-filtered");
+    // The same page is the Office list's last page.
+    expect(notice([docx], true)).toBe("end");
+    // Nothing was returned in this scope at all.
+    expect(notice([], false)).toBe("empty");
+    // A Files page whose returned versions are all Office versions, with later pages still to load.
+    expect(notice([docx], false, "next")).toBe("page-empty");
+    // A listed version with later pages left is mid-list; the last page ends it.
+    expect(notice([text], false, "next")).toBeNull();
+    expect(notice([text], false)).toBe("end");
+    // Before the page is loaded there is nothing to say.
+    expect(
+      libraryPageNotice({
+        loaded: false,
+        nextCursor: null,
+        returned: 0,
+        listed: 0,
+      }),
+    ).toBeNull();
+  });
+  it("the Files library names where the Office documents it omits are listed", () => {
+    const render = (officeOpen?: (version: LibraryVersion) => void) =>
+      renderToStaticMarkup(
+        createElement(DocumentLibrary, {
+          account: { tenantId: viewer.tenantId, actorId: viewer.actorId },
+          ...(officeOpen ? { officeOpen } : {}),
+        }),
+      );
+    expect(render()).toContain("Modules → Workspace under Office documents");
+    expect(render(() => {})).not.toContain("Modules → Workspace");
   });
   it("a selected Office version opens in the Workspace only from the Workspace's own list", () => {
     const render = (officeOpen?: (version: LibraryVersion) => void) =>
