@@ -5,11 +5,13 @@
  * elsewhere and are unchanged here.
  */
 import { expect, it } from "vitest";
+import { CONVERSATION_SKILLS } from "@capiro/meri-contracts/conversation-application";
 import { composerChips } from "../src/features/meri/conversation/composer-chips";
 import {
   currentProcedureLabel,
   procedureName,
   procedureOptionLabel,
+  rememberedProcedureLabel,
 } from "../src/features/meri/conversation/procedure-presentation";
 import {
   selectorIdentity,
@@ -33,23 +35,36 @@ const firm = (version = 3) =>
     manifestDigest: digest("b"),
   }) as unknown as ProcedureSelector;
 
-it("keeps a name Core authored and only replaces the raw identifier", () => {
+it("keeps every label Core answered except the raw identifier itself", () => {
+  // The raw id in another case or separator is still the id: the product's name is shown.
   expect(procedureName(builtin("bill_analysis"), "bill_analysis")).toBe(
     "Bill analysis",
   );
   expect(procedureName(builtin("bill_analysis"), "BILL_ANALYSIS")).toBe(
     "Bill analysis",
   );
+  expect(procedureName(builtin("briefing"), "briefing")).toBe("Briefing");
+  // Any other name is Core's, including one lowercase word and a multiword name.
+  expect(procedureName(builtin("briefing"), "overview")).toBe("overview");
   expect(procedureName(builtin("hearing_prep"), "Executive briefing")).toBe(
     "Executive briefing",
   );
+  // An absent or blank label falls back to the product's own name.
   expect(procedureName(builtin("briefing"))).toBe("Briefing");
-  // The same name reaches the option text, with Core's scopes beside it.
-  const entry = {
-    selector: builtin("hearing_prep"),
-    display: { label: "Executive briefing", purpose: null, scopes: ["client"] },
-  };
-  expect(procedureOptionLabel(entry)).toBe("Executive briefing · client");
+  expect(procedureName(builtin("briefing"), "   ")).toBe("Briefing");
+  // The same words reach the option text, with Core's scopes beside them.
+  expect(
+    procedureOptionLabel({
+      selector: builtin("briefing"),
+      display: { label: "overview", purpose: null, scopes: ["general"] },
+    }),
+  ).toBe("overview · general");
+  expect(
+    procedureOptionLabel({
+      selector: builtin("briefing"),
+      display: { label: "briefing", purpose: null, scopes: [] },
+    }),
+  ).toBe("Briefing");
 });
 
 it("keeps a firm procedure's own label and never shows its record id", () => {
@@ -72,6 +87,47 @@ it("applies a catalog name only to the exact selector it was reported for", () =
     currentProcedureLabel(
       { ...firm(), manifestDigest: digest("c") } as ProcedureSelector,
       { identity, text: "Case brief" },
+    ),
+  ).toBeUndefined();
+});
+
+it("resolves the name against the effective selection, not a local draft", () => {
+  const owner = { draft: "first" };
+  const remembered = {
+    owner,
+    identity: selectorIdentity(firm()),
+    text: "Case brief",
+  };
+  const local: ConversationSkillSelection = { procedure: firm() };
+  // A fresh draft has no local selection; the session composes the saved accepted request instead,
+  // and that effective selection still finds the name the picker reported.
+  const accepted: ConversationSkillSelection = { procedure: firm() };
+  expect(rememberedProcedureLabel(accepted, owner, remembered)).toBe(
+    "Case brief",
+  );
+  // A local selection of the same procedure resolves the same way.
+  expect(rememberedProcedureLabel(local, owner, remembered)).toBe("Case brief");
+  // Clearing the procedure leaves no name to show.
+  expect(rememberedProcedureLabel({}, owner, remembered)).toBeUndefined();
+  // A replaced draft owner (scope switch, expiry, discard) never resurrects the old name.
+  expect(
+    rememberedProcedureLabel(accepted, { draft: "second" }, remembered),
+  ).toBeUndefined();
+  // A different version or digest is a different procedure.
+  expect(
+    rememberedProcedureLabel({ procedure: firm(4) }, owner, remembered),
+  ).toBeUndefined();
+  // A skill-only selection carries no procedure name.
+  expect(
+    rememberedProcedureLabel(
+      {
+        skill: {
+          skillId: CONVERSATION_SKILLS[0]!.skillId,
+          skillVersion: CONVERSATION_SKILLS[0]!.version,
+        },
+      },
+      owner,
+      remembered,
     ),
   ).toBeUndefined();
 });

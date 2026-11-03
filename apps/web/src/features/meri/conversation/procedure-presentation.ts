@@ -2,6 +2,7 @@ import {
   selectorIdentity,
   type ProcedureSelector,
 } from "../../../shared/capiro/operations/meri-procedures";
+import type { ConversationSkillSelection } from "../../../shared/meri-conversations/query-journal";
 
 type BuiltinProcedureId = Extract<
   ProcedureSelector,
@@ -44,20 +45,20 @@ const listWords = (values: readonly string[]) =>
     : `${values.slice(0, -1).join(", ")} and ${values.at(-1)!}`;
 
 /**
- * A label that is only a machine token rather than a name: lower-case words joined by separators, or
- * the same words spelled as the raw id ("Bill analysis", "BILL ANALYSIS", "bill.analysis").
+ * A label spelled as this procedure's raw identifier: the id itself, or the same words in another
+ * case or separator ("bill_analysis", "BILL_ANALYSIS", "bill.analysis"). Only that equivalence is
+ * replaced; any other name — including a single lower-case word such as "overview" — is Core's.
  */
-const machineName = /^[a-z0-9]+(?:[_.:-][a-z0-9]+)*$/;
 const asId = (value: string) => value.toLowerCase().replace(/[\s_.:-]+/g, "_");
 
 /**
  * The readable name of one procedure.
  *
  * A firm procedure keeps Core's own label, which is the firm's name for it, and never falls back to
- * its record id. A built-in keeps Core's label as well whenever that label is a real name rather than
- * the raw identifier — "Executive briefing" survives, while briefing, bill_analysis and BILL_ANALYSIS
- * all read as the raw id and fall back to the product's own name. A label is presentation only: no
- * selector, eligibility or authority is ever derived from it.
+ * its record id. A built-in keeps Core's label too unless that label is the raw identifier itself:
+ * "Executive briefing" and "overview" survive, bill_analysis does not. The product's own name is used
+ * only when Core has no label. A label is presentation only: no selector, eligibility or authority is
+ * ever derived from it.
  */
 export function procedureName(
   selector: ProcedureSelector,
@@ -65,8 +66,7 @@ export function procedureName(
 ): string {
   const stated = label?.trim();
   if (selector.source === "firm") return stated || "Your firm procedure";
-  if (stated && !machineName.test(stated) && asId(stated) !== selector.id)
-    return stated;
+  if (stated && asId(stated) !== selector.id) return stated;
   return builtinNames[selector.id] ?? words(selector.id);
 }
 
@@ -83,6 +83,27 @@ export function currentProcedureLabel(
   return reported && selectorIdentity(selector) === reported.identity
     ? reported.text
     : undefined;
+}
+
+/**
+ * The name for the selection actually shown, when the remembered name belongs to it: the same
+ * effective selection the picker and the composer render (a local draft choice, or the saved accepted
+ * request the session composes when the draft has none), the same draft owner, and the exact selector
+ * identity. A removed choice, another owner's lifetime, a new version or a new digest yields no name,
+ * so an old label is never resurrected.
+ */
+export function rememberedProcedureLabel(
+  selection: ConversationSkillSelection | undefined,
+  owner: object,
+  remembered?: {
+    readonly owner: object;
+    readonly identity: string;
+    readonly text: string;
+  },
+): string | undefined {
+  if (!remembered || remembered.owner !== owner || !selection?.procedure)
+    return undefined;
+  return currentProcedureLabel(selection.procedure, remembered);
 }
 
 /** The option text: the readable name, plus Core's scopes when it states any. */
