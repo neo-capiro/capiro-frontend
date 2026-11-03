@@ -6202,10 +6202,28 @@
     "file": "apps/web/src/shared/meri-actions/proxy.ts",
     "kind": "function",
     "symbol": "proxyActionRequest",
-    "fingerprint": "216a7ea364fd53c039c535a2634916dcd97e36ef0a02bb73d3cdcac63d1eaf4c",
-    "reason": "A fixed same-origin adapter validates canonical public request selectors and forwards once within the existing deadline; it creates no authority or alternate transport. Research selector support stays inside the established boundary.",
-    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
-    "reviewedOn": "2026-11-01"
+    "fingerprint": "a31d183fd768f6cec736191dc6c724f191097dca8889f9a542bba5b7df3ef37c",
+    "reason": "One fixed same-origin action forwarding lifecycle owns route admission, existing credential selection, bounded receiving and response translation. Diagnostics only mark the current phase and terminal scalar status through the existing fail-safe recorder; they add no authorization, dispatch, retry or persistence owner. Independent synthetic checks preserve auth, response bytes and headers under diagnostic failures and distinguish request/configuration refusals. The cohesive lifecycle remains reviewable at 112 nonblank lines without extracting a duplicate proxy.",
+    "reviewedBy": "Codex independent VQA-003 exact-source review of efce196d0839cdcce82140fc44e9d4e4e53b95db",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/shared/meri-actions/proxy.ts",
+    "kind": "function",
+    "symbol": "proxyActionRequest > <anonymous>",
+    "fingerprint": "ec1cbe5a3fa5d6f50f0e159447d1539964d2e7479370b48a4bcf5ebccaf2dcad",
+    "reason": "The existing deadline callback is one ordered action exchange: acquire the selected credential, receive the public request, dispatch once and receive the answer under the same cancellation budget. The request-stage marker and its explanation bring it to 81 nonblank lines; they introduce no independent responsibility, state machine or transport. Keeping the callback together preserves the visible order of authentication, receiving, dispatch and cancellation. Canonical public receivers retain validation ownership.",
+    "reviewedBy": "Codex independent VQA-003 exact-source review of efce196d0839cdcce82140fc44e9d4e4e53b95db",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/history-diagnostics.ts",
+    "kind": "function",
+    "symbol": "createHistoryTransportDiagnostics",
+    "fingerprint": "889c937a0be9bc8749fe68f05020f529575246e3941c64c120633ed49743d593",
+    "reason": "One ephemeral terminal recorder owns opaque Web Crypto correlation, closed phase/outcome/status values, trusted public-route labels and its bounded writer. The second internal event name reuses this implementation rather than creating another logging framework. Each instance emits at most 20 records plus one suppression marker per minute; sink, clock or randomness failure cannot alter transport. No payload, credential, customer identifier, exception text, authority, timer or persistent store is introduced. The 84-line function remains one cohesive diagnostic responsibility.",
+    "reviewedBy": "Codex independent VQA-003 exact-source review of efce196d0839cdcce82140fc44e9d4e4e53b95db",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-actions/task-recovery.ts",
