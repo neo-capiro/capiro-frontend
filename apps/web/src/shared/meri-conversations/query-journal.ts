@@ -444,6 +444,34 @@ export function conversationIntentJournal(
   };
 }
 
+/**
+ * The ordinary request this tab retained for one exact target run, read without claiming that
+ * journal (no cache entry, no generation fence): a caller deciding whether an older answer still
+ * holds needs the fact, not the run's command owner.
+ */
+export function retainedRequest(
+  scope: {
+    tenantId: string;
+    actorId: string;
+    clientId: string | null;
+    conversationId: string;
+  },
+  runId: string,
+  storage?: TabStorage,
+): ConversationIntent | undefined {
+  try {
+    return tabRecord(
+      scope,
+      "request",
+      receiveIntent,
+      runId,
+      storage ?? null,
+    ).read();
+  } catch {
+    return undefined;
+  }
+}
+
 /** Reopening constrains issuance to the last observed run; a failed rebind never chooses another. */
 export function conversationSelectionOwner(
   client: QueryClient,

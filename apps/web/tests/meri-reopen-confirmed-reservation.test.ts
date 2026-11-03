@@ -13,6 +13,7 @@ import {
   type TabStorage,
 } from "../src/shared/meri-conversations/tab-journal";
 import * as transport from "../src/shared/meri-conversations/history-client";
+import { conversationIntentJournal } from "../src/shared/meri-conversations/query-journal";
 import {
   binding,
   nextBinding,
@@ -476,5 +477,67 @@ it("control's ACCEPTED answer retires the earlier empty-reservation answer", asy
     }),
   );
   expect(journal(cache).openedTarget()).toBeUndefined();
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+});
+
+// Revision after the second review: retirement is only invalidation when it is durable, and an
+// ordinary message into the confirmed reserved target is newer than control's answer.
+it("a confirmation this tab cannot remove is retired by a verified tombstone, not by a caught error", async () => {
+  const key = await confirmedOnce();
+  const remove = storage.removeItem;
+  storage.removeItem = (k) => {
+    if (k.includes('"turn-open"')) throw new Error("synthetic removal denied");
+    remove(k);
+  };
+  const cache = new QueryClient();
+  journal(cache).start(binding, prompt, nextRequestId);
+  // The newer message superseded it even though the old bytes could not be deleted.
+  expect(journal(cache).openedTarget()).toBeUndefined();
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+  // The record is still there, and it no longer reads as a confirmation.
+  expect(storage.getItem(key)).not.toBeNull();
+  expect(JSON.parse(storage.getItem(key)!).value.retired).toBe(true);
+  storage.removeItem = remove;
+});
+
+it("a removal that leaves the bytes cannot let a later accepted receipt look empty", async () => {
+  await confirmedOnce();
+  const remove = storage.removeItem;
+  storage.removeItem = (k) => {
+    if (!k.includes('"turn-open"')) remove(k);
+  };
+  vi.spyOn(transport, "reserveConversationTurn").mockResolvedValue(
+    receipt("ACCEPTED"),
+  );
+  expect(await mount(new QueryClient()).command.check(binding, vi.fn())).toBe(
+    true,
+  );
+  expect(mount(new QueryClient()).command.opened).toBeUndefined();
+  storage.removeItem = remove;
+});
+
+it("an ordinary message into the confirmed reserved target supersedes the empty answer", async () => {
+  await confirmedOnce();
+  const commands = conversationIntentJournal(
+    new QueryClient(),
+    {
+      tenantId: nextBinding.tenantId,
+      actorId: nextBinding.actorId,
+      conversationId: nextBinding.conversationId,
+      runId: nextBinding.runId,
+      selectedClientId: clientId,
+    },
+    storage,
+  );
+  commands.write({
+    submit: {
+      requestId: "a0000000-0000-4000-8000-00000000000b",
+      prompt: "Synthetic reserved-target message",
+      state: "unknown",
+    },
+  });
+  // The request journal keeps its own uncertainty; the older empty answer stops settling it.
+  expect(commands.read().submit?.state).toBe("unknown");
+  expect(journal(new QueryClient()).openedTarget()).toBeUndefined();
   expect(mount(new QueryClient()).command.opened).toBeUndefined();
 });

@@ -106,6 +106,14 @@ export function recoverPersistedTurn(scope: TabScope, storage?: TabStorage) {
   }
 }
 
+/** What this tab may hold for one reservation: an answer, or the tombstone that retired it. */
+type OpenedReservation =
+  | Readonly<{ retired: true }>
+  | Readonly<{
+      source: Readonly<{ conversationId: string; sourceRunId: string }>;
+      targetRunId: string;
+    }>;
+
 /**
  * The next reservation control itself confirmed admitted no message, from this tab. The saved read
  * cannot settle it: one immutable target per source keeps the reservation row after the check, so
@@ -116,44 +124,67 @@ export function persistedOpenedReservation(
   scope: TabScope,
   storage?: TabStorage,
 ) {
-  const record = tabRecord(
+  const record = tabRecord<OpenedReservation>(
     scope,
     "turn-open",
     (value) => receiveOpenedReservation(scope, value),
     "",
     storage ?? null,
   );
-  return {
-    read() {
-      const value = record.read();
-      return value
-        ? {
-            sourceRunId: value.source.sourceRunId,
-            targetRunId: value.targetRunId,
-          }
-        : undefined;
-    },
-    write(target: { sourceRunId: string; targetRunId: string }) {
-      if (!storage) return;
-      record.write({
-        source: {
-          conversationId: scope.conversationId,
-          sourceRunId: target.sourceRunId,
-        },
-        targetRunId: target.targetRunId,
-      });
-    },
-    clear() {
-      record.clear();
-    },
+  const read = (): { sourceRunId: string; targetRunId: string } | undefined => {
+    const value = record.read();
+    return value && "source" in value
+      ? {
+          sourceRunId: value.source.sourceRunId,
+          targetRunId: value.targetRunId,
+        }
+      : undefined;
   };
+  const write = (target: { sourceRunId: string; targetRunId: string }) => {
+    if (!storage) return;
+    record.write({
+      source: {
+        conversationId: scope.conversationId,
+        sourceRunId: target.sourceRunId,
+      },
+      targetRunId: target.targetRunId,
+    });
+  };
+  /**
+   * Retirement is a durable fact, not a caught assumption: a tombstone replaces the answer and is
+   * read back, because a removal that throws or leaves its bytes is not invalidation. Returns
+   * whether no confirmation can be read any more.
+   */
+  const retire = () => {
+    if (read() === undefined) return true;
+    try {
+      record.write({ retired: true });
+    } catch {
+      /* Removal below is the only remaining way to stop trusting the old bytes. */
+    }
+    if (read() === undefined) return true;
+    try {
+      record.clear();
+    } catch {
+      /* Verified below. */
+    }
+    return read() === undefined;
+  };
+  return { read, write, retire };
 }
 
 /** The stored source is admitted by the public next-turn receiver, scoped to this conversation. */
-function receiveOpenedReservation(scope: TabScope, value: unknown) {
+function receiveOpenedReservation(
+  scope: TabScope,
+  value: unknown,
+): OpenedReservation {
   const local = z
-    .strictObject({ source: z.unknown(), targetRunId: z.string().min(1) })
+    .union([
+      z.strictObject({ retired: z.literal(true) }),
+      z.strictObject({ source: z.unknown(), targetRunId: z.string().min(1) }),
+    ])
     .parse(value);
+  if ("retired" in local) return { retired: true };
   const source = receiveConversationHistoryRequest(
     "nextTurn",
     bytes(local.source),
@@ -200,9 +231,10 @@ export function recoverOpenedReservation(
       },
       retire() {
         try {
-          record.clear();
+          return record.retire();
         } catch {
-          /* Nothing stale can be read back either. */
+          // A hint this page could not retire must not be trusted as if it had been.
+          return false;
         }
       },
     };

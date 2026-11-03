@@ -2,10 +2,11 @@ import type { QueryClient } from "@tanstack/react-query";
 import type { RunBinding } from "@capiro/meri-contracts";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 import {
-  storedSubmission,
-  submissionIdentity,
+  retainedRequest,
   skillSelectionFields,
   type ConversationSkillSelection,
+  storedSubmission,
+  submissionIdentity,
 } from "./query-journal";
 import {
   recoverOpenedReservation,
@@ -171,9 +172,13 @@ export function conversationTurnJournal(
   /**
    * A newer message, a newer admission or an explicit give-up supersedes that answer: it only ever
    * established that one target was empty when control answered, so it must not outlive its
-   * lifecycle and silently settle a later uncertainty.
+   * lifecycle and silently settle a later uncertainty. A retirement this tab could not make durable
+   * is not a retirement, so an unretired answer stops being trusted too.
    */
-  const retireOpened = () => openedReservation?.retire();
+  let openedRetired = false;
+  const retireOpened = () => {
+    if (openedReservation && !openedReservation.retire()) openedRetired = true;
+  };
   cache.setQueryData<{ intent?: TurnIntent }>(
     key,
     (previous) =>
@@ -250,10 +255,29 @@ export function conversationTurnJournal(
       return intent;
     },
     /**
-     * Target run id of the reservation control already confirmed admitted no message in this tab.
-     * One immutable target per source, so an equal target identifies that same reservation.
+     * Target run id of the reservation control already confirmed admitted no message in this tab,
+     * unless something newer owns that target. One immutable target per source identifies the
+     * reservation; an ordinary message sent into that same target is the request journal's from then
+     * on, so control's earlier answer no longer settles it.
      */
-    openedTarget: () => openedReservation?.read()?.targetRunId,
+    openedTarget: () => {
+      if (openedRetired) return undefined;
+      const confirmed = openedReservation?.read();
+      if (!confirmed) return undefined;
+      const request = retainedRequest(
+        {
+          tenantId: account.tenantId,
+          actorId: account.actorId,
+          clientId,
+          conversationId,
+        },
+        confirmed.targetRunId,
+        storage,
+      );
+      return request?.submit || request?.cancel
+        ? undefined
+        : confirmed.targetRunId;
+    },
     /**
      * Keep control's own RESERVED answer: that exact source's successor admitted no message. The
      * answer outlives this page in this tab only; the saved read still reports the reservation.
