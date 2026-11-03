@@ -16,6 +16,7 @@ import {
   withActionDeadline,
 } from "../meri-actions/bounded-json";
 import { receivedActionSession } from "../meri-actions/session-header";
+import { beginDocumentTransportDiagnostic } from "../meri-conversations/history-diagnostics";
 import { sameRequestOrigin } from "../request-origin";
 import type { readDocumentConfig } from "./config";
 
@@ -60,9 +61,19 @@ export async function proxyDocumentRequest(
   config: ReturnType<typeof readDocumentConfig>,
   getNativeToken: () => Promise<string | null>,
   fetcher: typeof fetch = fetch,
+  // Closed transport diagnostic only; a test may supply its own recorder.
+  beginDiagnostic = beginDocumentTransportDiagnostic,
 ) {
-  if (!routes.has(operation)) return unavailable(404);
-  if (request.method !== "POST") return unavailable(405);
+  const diagnostic = beginDiagnostic(
+    routes.has(operation) ? `/api/documents/${operation}` : undefined,
+  );
+  /** A response this edge produced itself; the recorded stage names where the attempt stood. */
+  const local = (status: number) => {
+    diagnostic?.finish(status, "response");
+    return unavailable(status);
+  };
+  if (!routes.has(operation)) return local(404);
+  if (request.method !== "POST") return local(405);
   const url = new URL(request.url);
   if (
     url.pathname !== `/api/documents/${operation}` ||
@@ -72,7 +83,7 @@ export async function proxyDocumentRequest(
     request.headers.has("authorization") ||
     request.headers.has("content-encoding")
   )
-    return unavailable(400);
+    return local(400);
   const route = operation as
     | FederalRoute
     | DocumentRoute
@@ -87,20 +98,24 @@ export async function proxyDocumentRequest(
     route === "revise" ||
     route === "federal-publish" ||
     route === "federal-import";
+  diagnostic?.stage("configuration");
   if (!(write ? config.enabled && config.operation : config.readEnabled))
-    return unavailable(503);
+    return local(503);
   if (
     (route === "federal-publish" || route === "federal-import") &&
     config.operation !== "create_word"
   )
-    return unavailable(503);
+    return local(503);
   try {
     return await withActionDeadline([request.signal], async (signal) => {
+      diagnostic?.stage("session");
       const nativeToken = await getNativeToken();
       signal.throwIfAborted();
-      if (!nativeToken) return unavailable(401);
+      if (!nativeToken) return local(401);
       const session = receivedActionSession(request);
-      if (!session) return unavailable(401);
+      if (!session) return local(401);
+      // The body belongs to the request, so a malformed or oversized body is attributed to it.
+      diagnostic?.stage("request");
       const body = await boundedJsonBytes(
         new Response(request.body, { headers: request.headers }),
         signal,
@@ -122,8 +137,9 @@ export async function proxyDocumentRequest(
         "request" in admitted &&
         admitted.request.operation !== config.operation
       )
-        return unavailable(400);
+        return local(400);
       signal.throwIfAborted();
+      diagnostic?.stage("fetch");
       const response = await fetcher(
         `${config.baseUrl}/api/documents/${route}`,
         {
@@ -139,6 +155,8 @@ export async function proxyDocumentRequest(
           signal,
         },
       );
+      diagnostic?.stage("receive");
+      diagnostic?.received(response.status);
       try {
         signal.throwIfAborted();
         if (response.redirected)
@@ -173,6 +191,7 @@ export async function proxyDocumentRequest(
             const value = response.headers.get(name);
             if (value !== null) headers.set(name, value);
           }
+        diagnostic?.finish(response.status, "response");
         return new Response(bytes, { status: response.status, headers });
       } finally {
         if (!response.bodyUsed)
@@ -181,6 +200,7 @@ export async function proxyDocumentRequest(
     });
   } catch {
     // An interrupted write may have reached Meri; no dispatch outcome is invented.
+    diagnostic?.finish(502, "failure");
     return unavailable(502);
   }
 }

@@ -113,8 +113,9 @@ export function ProfileCard({
             </Link>
           </h2>
           <small id={descriptionId}>
-            {sector ?? "Sector not specified"}
-            {location && ` · ${location}`}
+            {sector
+              ? `${sector}${location ? ` · ${location}` : ""}`
+              : "Sector not specified"}
           </small>
         </div>
       </div>

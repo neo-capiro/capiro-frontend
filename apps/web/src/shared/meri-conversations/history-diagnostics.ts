@@ -16,6 +16,7 @@ const outcomes: readonly string[] = ["response", "failure"];
 export function createHistoryTransportDiagnostics({
   write = (line: string) => console.warn(line),
   now = () => performance.now(),
+  event = "MERI_HISTORY_FE",
   newTrace = () =>
     `h1_${Array.from(
       globalThis.crypto.getRandomValues(new Uint8Array(16)),
@@ -24,9 +25,16 @@ export function createHistoryTransportDiagnostics({
 } = {}) {
   let windowStart = -Infinity,
     count = 0;
-  return () => {
+  // Closed operation grammar: the public route itself, never a selector, id or query.
+  const operations =
+    /^\/api\/(?:conversations|action-followthrough|documents)\/[a-z][a-z-]*$/;
+  return (operation?: string) => {
     try {
       const trace = newTrace();
+      const label =
+        typeof operation === "string" && operations.test(operation)
+          ? operation
+          : undefined;
       if (
         typeof trace !== "string" ||
         trace.length !== 35 ||
@@ -68,7 +76,7 @@ export function createHistoryTransportDiagnostics({
             }
             if (count > 20) return;
             if (count++ === 20) {
-              write("MERI_HISTORY_FE_SUPPRESSED");
+              write(`${event}_SUPPRESSED`);
               return;
             }
             const result =
@@ -79,8 +87,9 @@ export function createHistoryTransportDiagnostics({
                   : "local_response";
             write(
               JSON.stringify({
-                event: "MERI_HISTORY_FE",
+                event,
                 trace,
+                ...(label ? { operation: label } : {}),
                 stage,
                 outcome: result,
                 status,
@@ -100,3 +109,14 @@ export function createHistoryTransportDiagnostics({
 
 export const beginHistoryTransportDiagnostic =
   createHistoryTransportDiagnostics();
+/** The conversation and action proxies reuse this recorder; `operation` names the exact public route. */
+export const beginConversationTransportDiagnostic =
+  createHistoryTransportDiagnostics({ event: "MERI_CONVERSATION_FE" });
+/**
+ * The documents proxy reuses the same recorder and the same closed vocabulary. Its line names the stage
+ * this edge reached plus the status it answered or forwarded; it never proves an answer was admitted,
+ * because that proxy forwards bounded bytes without parsing the response DTO, and a suppressed or
+ * absent line never proves an attempt did not happen.
+ */
+export const beginDocumentTransportDiagnostic =
+  createHistoryTransportDiagnostics({ event: "MERI_DOCUMENT_FE" });

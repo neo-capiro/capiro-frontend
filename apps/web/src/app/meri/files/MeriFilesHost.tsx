@@ -105,10 +105,13 @@ function DocumentCreationHost({
   if (selected.state === "no-selection")
     return (
       <section role="status">
-        <h1>Choose a client</h1>
-        <p>
-          Select a currently available client in Portfolio to open document
-          files.
+        <MeriPageHeading
+          title="Files"
+          description="Saved files you can already access are available without a client. Creating a new document needs a selected client."
+        />
+        <p className={ui.muted}>
+          Choose a currently available client in Portfolio to create a new
+          document. Browsing the saved library above does not need one.
         </p>
       </section>
     );

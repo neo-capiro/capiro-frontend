@@ -29,15 +29,32 @@ type State = Readonly<{
   pages: number | null;
   message: string | null;
 }>;
+const refused =
+  "Current authority refused this preview action. Reading an existing preview and publishing a new one have separate permissions.";
+const unsupported = "This file does not support a PDF preview.";
+/**
+ * Each admitted reply code keeps its own meaning; only an unrecognised code is a bare failure.
+ * The publication receipt admits every error code, while a preview read admits bytes only, so a
+ * read refusal arrives here as PREVIEW_READ_UNAVAILABLE and is never quoted as a stored record.
+ */
+const messages: Readonly<Record<string, string>> = {
+  ARTIFACT_RENDERER_UNAVAILABLE:
+    "A qualified preview renderer is not available for this file.",
+  ARTIFACT_PREVIEW_UNSUPPORTED: unsupported,
+  NATIVE_PREVIEW_UNSUPPORTED: unsupported,
+  ARTIFACT_PREVIEW_PENDING:
+    "No stored preview record exists for this saved version. A missing record does not prove that a publication is not in flight.",
+  PREVIEW_UNAVAILABLE: "PDF preview is not configured for this environment.",
+  PREVIEW_READ_UNAVAILABLE:
+    "The preview read did not complete, so no preview result is known.",
+  DOCUMENT_CONFIGURATION:
+    "Document access is misconfigured for this environment.",
+  ACCESS_DENIED: refused,
+  SESSION_REFUSED: refused,
+  UNAUTHENTICATED: refused,
+};
 const messageFor = (code: string) =>
-  code === "ARTIFACT_RENDERER_UNAVAILABLE"
-    ? "A qualified preview renderer is not available for this file."
-    : code === "ARTIFACT_PREVIEW_UNSUPPORTED" ||
-        code === "NATIVE_PREVIEW_UNSUPPORTED"
-      ? "This file does not support a PDF preview."
-      : code === "ACCESS_DENIED" || code === "SESSION_REFUSED"
-        ? "Current authority refused this preview action. Reading an existing preview and publishing a new one have separate permissions."
-        : "No verified preview result was returned.";
+  messages[code] ?? "No verified preview result was returned.";
 
 /** Bounded read/display state and a persisted publication fence; a missing read is never proof of no effect. */
 export class DocumentPreviewController {

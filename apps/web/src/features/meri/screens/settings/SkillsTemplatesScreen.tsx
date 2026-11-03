@@ -42,6 +42,12 @@ const columns: readonly DataColumn<TemplateRow>[] = [
   { key: "output", label: "Output", width: 120, render: (row) => row.output },
 ];
 
+/**
+ * Plain disabled-action explanation for this page. The shared chrome string names an internal
+ * settings contract; here the user only needs to know the action is not available yet.
+ */
+const unavailableAction = "Not available here yet.";
+
 /** 09.04 Skills and artifact templates: workspace-approved starting points; none grants permission. */
 export function SkillsTemplatesScreen({
   chrome,
@@ -74,7 +80,7 @@ export function SkillsTemplatesScreen({
                       type="button"
                       className={ui.outline}
                       disabled
-                      title={chrome.unavailable}
+                      title={unavailableAction}
                     >
                       Use skill
                     </button>
@@ -101,7 +107,7 @@ export function SkillsTemplatesScreen({
               type="button"
               className={ui.outline}
               disabled
-              title={chrome.unavailable}
+              title={unavailableAction}
             >
               Attach a permitted template
             </button>

@@ -275,10 +275,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx",
     "kind": "function",
     "symbol": "ClientHeader",
-    "fingerprint": "3ab9c2fb4f7b65fa1a9565b0334e28ca8e8ff2b40b4508175298c388138b3190",
-    "reason": "One client header composes breadcrumbs, view switcher and client action entry points using shared descriptors. Destination implementations remain in child owners; the shared monogram renders the identity avatar contents only. No new data or policy is computed by this header.",
-    "reviewedBy": "Hermes Agent independent source review",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "a2633e2a76b288a6190ae67e48ec1bd133457536cf1a102e91de0420d973a04e",
+    "reason": "Exact PR528 body review: one client header composes breadcrumbs, view switching, existing quick-add/action entries and an identity strip. Shared descriptors and child components retain navigation and action implementations. The changed sector/location expression is identity presentation only and adds no data, policy or workflow ownership. An extra extraction solely for size would fragment this cohesive header. Accept only this fingerprint.",
+    "reviewedBy": "Codex Astra independent PR528 reviewer",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx",
@@ -1427,10 +1427,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
     "kind": "function",
     "symbol": "ClientOverview",
-    "fingerprint": "0c1f4dd4621905a9c6eef262d573e18b671af97fb4f85d13ff44e600655aacac",
-    "reason": "Exact-body cohesion review, 2026-11-01: composes the single client overview from existing public feature entries and local cards/dialogs. It owns presentation values and local team/notes/quick-log visibility plus URL cleanup, while existing hooks and named child owners retain reads and workflows. RecordedActivity receives only clientId/version and owns its contract/query/status rendering; no activity calculation, new transport, mutation or backend authorization is embedded here. Its 183 nonblank body lines are predominantly overview layout and explicit child wiring. Existing separation is cohesive; no size-only extraction is warranted. ACCEPT only this fingerprint.",
-    "reviewedBy": "Codex independent frontend closure reviewer",
-    "reviewedOn": "2026-11-01"
+    "fingerprint": "27739f1542424c4c5f10efad8616c8a032a0d1696211244e773cdc5358b429ff",
+    "reason": "Exact PR528 body review: one client overview composes existing public feature entries, named cards/dialogs and query hooks, retaining local team/notes visibility and URL cleanup. Reads, recorded activity, metrics and destination workflows stay with their existing owners. The changed sector/location expression only formats the identity subtitle; it adds no transport, mutation, authorization or new responsibility. Existing separation remains cohesive; no size-only extraction is warranted. Accept only this fingerprint.",
+    "reviewedBy": "Codex Astra independent PR528 reviewer",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
@@ -3713,12 +3713,12 @@
     "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
     "kind": "function",
     "symbol": "RoutinesWorkspace",
-    "line": 98,
-    "nonblank": 278,
-    "fingerprint": "1b557e37a06d72e19adee12768a2655bc2876b74a15e9f40b281ea9b9137647e",
-    "reason": "One current-connection routines view: it holds list/paging, selected-row and editor state, delegates authority and mutations to the workflow port, and composes the existing form, cancellation, review and activity surfaces. The MR04 delta adds only the selected routine's ConsentReview with the existing disabled predicate; that child owns the explicit review interaction and the canonical workflow owns request custody. Account/port retirement, late-result fencing and management-versus-execution delegation remain in the same existing view lifetime. Splitting this render solely for size would not separate a second responsibility. Accepted exact body; source-stage public receiving and final installed-package/deployed checks remain distinct.",
-    "reviewedBy": "Codex bounded exact-body validation, reusing independent Hermes consent-consumer review beb06061feee5ea7bbf0d732e53aac90848e902c2c08898abf65a5687272e89d section 5",
-    "reviewedOn": "2026-10-28"
+    "line": 121,
+    "nonblank": 313,
+    "fingerprint": "864e91ef0252842260f03370db506da22513902d290c3b88a8c8c6b6284ab7fb",
+    "reason": "One current-connection routines view owns page/cursor, selected row, editor and read affordances while composing existing form/review/consent children. The once-successful, in-flight and failed refs are local read lifecycle bookkeeping: they deduplicate StrictMode and repeated render passes, allow the existing host re-entry to resume an unfulfilled read, and leave real failures for explicit Refresh. Workflow.current only classifies discarded lifetime replies versus current-port request failures; transport deadlines settle loading, and new ports fence late results and reset pages. The effect issues only the existing bounded list read; it never prepares, approves, renews, executes or recovers a command. The sizeable body is cohesive UI composition with one captured port lifetime, not a second orchestration owner. Exact c859bab9 body independently reviewed; nine mounted cases pass for first load, StrictMode, paging, manual failure/deadline recovery, refusal, stale former port and revalidation.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA013 product c859bab93a00361ab0f1908d8c38f13eb0fd34fc; outputs/vqa-013-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
@@ -5181,28 +5181,28 @@
     "file": "apps/web/src/features/modules/intelligence/DistrictMap.tsx",
     "kind": "function",
     "symbol": "DistrictMap",
-    "fingerprint": "94913d589db055b6288773ea1c998d1621e5fdafed91ddcf40340b7a9ccf22a3",
-    "reason": "This function remains the current-district map presentation and official-boundary adapter. It reuses the canonical typed binary read, geometry helpers and cancellation lifetime. The added color dimension and selected key are parent-provided display inputs; zoom/layers stay local and no client authority, data aggregation or mutation ownership is introduced. Keeping these cohesive map interactions together avoids an artificial split.",
-    "reviewedBy": "Codex independent PR239 reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "f1074e75167fd63e7bb7d87b8e4c07730727ab6ea053a2843d6a8822268cf2b0",
+    "reason": "Exact PR528 body review: this component owns one district-map presentation and official-boundary read lifetime, using the existing typed download and geometry helpers. Parent-provided district rows, display dimension and selected key remain inputs; local zoom and layers remain presentation state. The change only aligns missing-score accessible names and tooltips. No authority, aggregation, persistence or new responsibility is introduced; no size-only extraction is warranted. Accept only this fingerprint.",
+    "reviewedBy": "Codex Astra independent PR528 reviewer",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "20ddb1006ef51937e9d598eabb82ef5a8bf71bf96a40e14634ddd75bd6cd7a3b",
-    "reason": "This module remains the single read-only District Nexus screen, composing existing query, status, select, table and map owners. The selected-state predicate now narrows the returned district rows before all local cards, map, list and selection derive from them, while retaining the server state query. It handles cross-state award rows honestly without changing Core authorization, data ownership, persistence or unrelated domains.",
-    "reviewedBy": "Codex independent PR239 state-filter reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "68ba6b3b82ab77a49925dcfc322be3a1eae0b2fef1689e5875a5ab88b39b4846",
+    "reason": "Exact PR528 module review: one read-only District Nexus screen composes existing query, status, select, table and map owners with local formatting and scope/filter options. The null-aware numeric formatters and score/legend labels remain presentation of canonical returned data. Query authority, contracts and map geometry retain their existing owners. The file has one coherent screen responsibility; label changes require no new abstraction or size-only split. Accept only this fingerprint.",
+    "reviewedBy": "Codex Astra independent PR528 reviewer",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
     "kind": "function",
     "symbol": "DistrictNexus",
-    "fingerprint": "5a9f45e89a4c56cd94a07fd2afc2667d1e9290fb06ff7623218d1220a5e49f12",
-    "reason": "This component coordinates one district read and its local display scope. Filtering returned rows by the existing selected state belongs beside the existing inScope derivation; summaries, presentation filters and valid selection then share that set. Core remains the source and authorization owner, useCapiroQuery retains replaced-read admission, and DistrictMap owns boundaries. The actual mounted all-state-response regression proves the prior mismatch and the correction, including null summaries and stale-selection retirement; no artificial split or new state owner is needed.",
-    "reviewedBy": "Codex independent PR239 state-filter reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "4f288dbb90a25c9e6ce79030cabcb2334b53a109ad97572b6640e28e02fed971",
+    "reason": "Exact PR528 body review: this component coordinates a single district read scope, local presentation filters/sorting, valid selection and matching summary/map/table/detail rendering. useCapiroQuery owns reads and replacement admission; Core owns data authorization; DistrictMap owns boundaries. This change only replaces missing-value and score labels, preserving null-versus-zero semantics and existing scope/selection behavior. No independent lifecycle or domain is added, so keeping this screen composition together is cohesive. Accept only this fingerprint.",
+    "reviewedBy": "Codex Astra independent PR528 reviewer",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-conversations/host-controller.ts",
@@ -6139,10 +6139,10 @@
     "file": "apps/web/src/features/meri/conversations/ConversationHistoryList.tsx",
     "kind": "function",
     "symbol": "ConversationHistoryList",
-    "fingerprint": "b07d3aae782a8d11d1d49eaf93504bf267b4e9cc9ca2f0c8f5aa069cd65ed8de",
-    "reason": "The conversation history list screen: rows, selection and paging. Single list-surface responsibility for the meri conversations owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "32b0d51bf1d1074c8872332c5a5529c786e91be644910dab31af4279f17eb031",
+    "reason": "Exact-source independent VQA005 review: this 198-line function composes one conversation-history list surface (filters, selection, current-read presentation and paging). The changed error paragraph calls the narrow local titleReadFailure presenter, which reuses the existing shared accessDenied predicate without duplicating authority or transport policy. Queries, identity, receiving, revocation and management commands retain their canonical owners; no new lifecycle or unrelated responsibility is introduced. Splitting this render-only change would not separate a distinct responsibility. Focused local tests and synthetic mounted denial, recovery, paging and session-replacement assertions preserve the lifecycle boundaries.",
+    "reviewedBy": "Codex independent VQA005 reviewer (GPT-6 Astra Ultra); exact source bc8e77ef4fa1dc32160b9c3fe37a78138837d4d0; vqa-005-independent-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/conversations/SelectedConversationActions.tsx",
@@ -6202,10 +6202,28 @@
     "file": "apps/web/src/shared/meri-actions/proxy.ts",
     "kind": "function",
     "symbol": "proxyActionRequest",
-    "fingerprint": "216a7ea364fd53c039c535a2634916dcd97e36ef0a02bb73d3cdcac63d1eaf4c",
-    "reason": "A fixed same-origin adapter validates canonical public request selectors and forwards once within the existing deadline; it creates no authority or alternate transport. Research selector support stays inside the established boundary.",
-    "reviewedBy": "Codex root independent Area7 composition/design review; RESEARCH-FE-COMPOSITION-INDEPENDENT-REVIEW-20261101.txt",
-    "reviewedOn": "2026-11-01"
+    "fingerprint": "a31d183fd768f6cec736191dc6c724f191097dca8889f9a542bba5b7df3ef37c",
+    "reason": "One fixed same-origin action forwarding lifecycle owns route admission, existing credential selection, bounded receiving and response translation. Diagnostics only mark the current phase and terminal scalar status through the existing fail-safe recorder; they add no authorization, dispatch, retry or persistence owner. Independent synthetic checks preserve auth, response bytes and headers under diagnostic failures and distinguish request/configuration refusals. The cohesive lifecycle remains reviewable at 112 nonblank lines without extracting a duplicate proxy.",
+    "reviewedBy": "Codex independent VQA-003 exact-source review of efce196d0839cdcce82140fc44e9d4e4e53b95db",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/shared/meri-actions/proxy.ts",
+    "kind": "function",
+    "symbol": "proxyActionRequest > <anonymous>",
+    "fingerprint": "ec1cbe5a3fa5d6f50f0e159447d1539964d2e7479370b48a4bcf5ebccaf2dcad",
+    "reason": "The existing deadline callback is one ordered action exchange: acquire the selected credential, receive the public request, dispatch once and receive the answer under the same cancellation budget. The request-stage marker and its explanation bring it to 81 nonblank lines; they introduce no independent responsibility, state machine or transport. Keeping the callback together preserves the visible order of authentication, receiving, dispatch and cancellation. Canonical public receivers retain validation ownership.",
+    "reviewedBy": "Codex independent VQA-003 exact-source review of efce196d0839cdcce82140fc44e9d4e4e53b95db",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/history-diagnostics.ts",
+    "kind": "function",
+    "symbol": "createHistoryTransportDiagnostics",
+    "fingerprint": "a030f9a4a5e714363e2ecae8f3aabded16f7af60ddf29810e02b85c3c7d7a329",
+    "reason": "One ephemeral terminal recorder owns opaque Web Crypto correlation, closed phase/outcome/status values, trusted public-route labels and its bounded writer. History, conversation/action and document instances reuse this implementation; the document caller supplies only its admitted fixed routes. Each instance emits at most 20 records plus one suppression marker per minute; sink, clock or randomness failure cannot alter transport. The narrow document-route grammar extension changes this exact fingerprint but adds no policy, payload, credential, customer identifier, exception text, authority, timer or persistent store. The 84-line function remains one cohesive diagnostic responsibility.",
+    "reviewedBy": "Codex independent VQA-009 exact-source review of 07174e63a6a55efbad4123afac13198c7091f82e",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-actions/task-recovery.ts",
@@ -6701,10 +6719,10 @@
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest",
-    "fingerprint": "2d83ea3378cb9e2140909dddaf7108505c40dd5aa3d69b8ea72f353f7103b6e7",
-    "reason": "Author structural assessment in docs/federal-workbench.md: Existing fixed native document forwarding adds the published import route and requires enabled Word generation for both federal writes. Session, origin, deadline and bounded receiving owners remain unchanged; no new authority or credential path. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "d81e40f12edc8e2b5002f0ac9049e1c9cebbeafa8a49dc7addb05d0970e0b4ac",
+    "reason": "Existing fixed-route document forwarding owner. The bounded diagnostic attaches stage and HTTP outcome to the same attempt through the canonical recorder; the duplicate recorder is deleted. Origin, native credential, opaque action session, configuration, deadline, request body and response bounds remain with their existing owners. No response DTO admission, public field, new header, retry, authorization or retention decision is introduced. Its 141 nonblank body lines keep one request lifetime together; mechanically splitting the route flow would obscure that lifetime rather than remove a separate responsibility.",
+    "reviewedBy": "Codex independent VQA-009 exact-source review of 07174e63a6a55efbad4123afac13198c7091f82e",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/shared/meri-documents/library-access.ts",
@@ -7005,10 +7023,10 @@
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest > <anonymous>",
-    "fingerprint": "c248b08f1815c976cf6331373df33d5a5500c7683bd7206dcb74146891c8d83c",
-    "reason": "Author structural assessment in docs/federal-workbench.md: Existing fixed native document forwarding adds the published import route and requires enabled Word generation for both federal writes. Session, origin, deadline and bounded receiving owners remain unchanged; no new authority or credential path. Independent review remains held.",
-    "reviewedBy": "Codex implementation author (independent review held)",
-    "reviewedOn": "2026-10-29"
+    "fingerprint": "1e66c1440d8cc3bf5755e9aba8132c7ffed8f2d50bbeaa6a20a12328dd030cbc",
+    "reason": "One bounded forwarding callback covers request receiving, configuration admission, upstream fetch and response release under the existing action deadline. Diagnostic markers precede the work they describe and use the canonical terminal recorder. Fixed route selection, credential forwarding, redirect refusal, JSON byte bounds and allowlisted binary headers preserve prior behavior; a forwarded HTTP status does not claim a valid or admitted DTO. The 91 nonblank lines remain one cohesive transport attempt with no duplicate verifier, hidden retry, new authority or independent service lifecycle.",
+    "reviewedBy": "Codex independent VQA-009 exact-source review of 07174e63a6a55efbad4123afac13198c7091f82e",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/work/WorkSelectionPicker.tsx",
@@ -7044,11 +7062,11 @@
     "kind": "file",
     "symbol": "<module>",
     "line": 1,
-    "nonblank": 497,
-    "fingerprint": "ed3aac1805f3d0cc161749be5766f27531e4354b25982f6918396563b86383c8",
-    "reason": "One current-context RoutineWorkflow owns the view lifetime and serializes prepare, approval, recovery and consent renewal through the same access port and journal lock. The physical-package correction changes only the retained review type import to the full published contract; the runtime review, approval expectation, same-decision retry, currentness guards and retirement behavior remain unchanged. No transport, durable store, scheduling executor or authority owner is added. Per-action methods remain bounded and receiving, correlation and persistence remain delegated. Accepted exact module after full-body and delta review, retaining the prior single-lifecycle rationale and the physical-package consent proof.",
-    "reviewedBy": "Codex M7 bounded full-module review of physical MR04 correction, reusing the accepted M5 module review at 96d3a436 and actual canonical-package consent tests",
-    "reviewedOn": "2026-10-28"
+    "nonblank": 564,
+    "fingerprint": "c3cef21da33b8ec13d9202185c36ee6f8f42811ac97649c7a065dde031cbda1c",
+    "reason": "One RoutineWorkflow owns a current opaque-session lifetime, subscribable UI state and explicit routine prepare/approve/reconcile/consent operations through the existing canonical access and encrypted journal lock. Receiving, correlation, persistence, session issuance and scheduling execution remain separate owners. The VQA013 delta adds only a read-only current getter over disposed, lifetime signal and the existing isCurrent callback; it publishes/writes nothing and grants no authority. The existing guard still independently rejects access denial, aborted/disposed lifetime and unavailable context before protected work. The UI uses the getter solely to distinguish a current-port transport deadline from a discarded response during revalidation; no request identity, approval/retry custody, retention, route or wire contract changes. Reviewed the exact c859bab9 module and delta, retaining explicit command ownership and bounded per-action methods. Real deadline/revalidation, refusal and stale-port mounted cases pass; full release and live acceptance are not implied.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA013 product c859bab93a00361ab0f1908d8c38f13eb0fd34fc; outputs/vqa-013-independent-final-review.json",
+    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/meri/screens/settings/UsageLimitsScreen.tsx",
@@ -7822,6 +7840,17 @@
     "fingerprint": "a756993b0cedaa6e9d76d1f7ab8c3eb601b1795082fcfeec2b17f28bfd41677b",
     "reason": "Independent VQA-002 responsibility review at product head 3fae7f2eecf84b57a32fa6bfe25231c494c60623. This component owns the optional Tools panel's composition and focus/dismissal behavior, and delegates each existing picker to its domain owner. The change passes the same session's display-name reporter to ProcedureSelectionPicker; it adds no catalog fetch, state store, authorization or execution path. Scope and exact selector remain with the existing session/picker owners. Its 166 nonblank body lines largely express the panel and current availability states; arbitrary JSX splitting would not improve responsibility ownership. Mounted procedure selection, current label, scope and access-loss checks passed.",
     "reviewedBy": "Codex independent reviewer /root/review_vqa002 (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 442,
+    "fingerprint": "386bdc5b66cab369985fe2f505d77f489ed1dc97dae767d5b7d3b59e70da7f5d",
+    "reason": "One routines presentation module maps bounded canonical rows, renders the truthful empty result, and composes one current-port workspace. Read/paging, row selection and editor state stay in that workspace; forms, cancellation, consent review and saved-result recovery remain delegated to their existing components and workflow. The VQA013 change adds only the initial authorized list lifecycle: a successful page fulfils it, a hidden same-port discard remains owed, a current-port deadline/failure requires explicit Refresh, and former-port answers are fenced. This module creates no routine authority, request journal, transport or execution path. The adjacent pure mapping and empty-state helpers share this one presentation responsibility; splitting solely at the line threshold would not improve ownership. Independently inspected exact c859bab9 source and nine mounted synthetic cases, including both prior reviewer failures; deployed acceptance remains separate.",
+    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa002; VQA013 product c859bab93a00361ab0f1908d8c38f13eb0fd34fc; outputs/vqa-013-independent-final-review.json",
     "reviewedOn": "2026-11-03"
   },
   {

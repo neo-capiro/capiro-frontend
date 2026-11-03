@@ -6,6 +6,7 @@ import type { ConversationSummary } from "../../../shared/meri-conversations/his
 import { useManagedConversations } from "../../../shared/meri-conversations/useManagedConversations";
 import { conversationHref } from "../../../shared/meri-conversations/conversation-navigation";
 import { useClients } from "../../../shared/portfolio/api/clients";
+import { accessDenied } from "../../../shared/meri-conversations/history-queries";
 import { DataTable, type DataColumn } from "../ui/DataTable";
 import { FormField } from "../ui/FormField";
 import { StateMessage } from "../ui/StateMessage";
@@ -97,6 +98,17 @@ const cardColumns = phoneCardColumns(columns, {
   key: "status",
   tone: (row) => (row.summary.status === "active" ? "success" : "neutral"),
 });
+
+/**
+ * The summaries read fails only with the closed history refusal or a transport error. An access
+ * refusal is the person's own access and is never reported as a missing feature; every other
+ * failure is stated as a failed read that proves nothing about the saved conversations.
+ */
+export function titleReadFailure(error: unknown) {
+  return accessDenied(error)
+    ? "You cannot open your saved chat titles with your current access."
+    : "Saved chat titles could not be loaded. This does not mean your conversations are gone.";
+}
 
 /** Current account-owned discovery (Figma 01.04); Core rechecks each chat's immutable scope and client wall. */
 export function ConversationHistoryList({
@@ -224,7 +236,7 @@ export function ConversationHistoryList({
         <p role="status">Loading your chats…</p>
       ) : query.error ? (
         <div role="alert" className={ui.row}>
-          <p>Your saved chat titles are unavailable in this environment.</p>
+          <p>{titleReadFailure(query.error)}</p>
           <button
             type="button"
             className={ui.outline}

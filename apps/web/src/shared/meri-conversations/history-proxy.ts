@@ -11,6 +11,7 @@ import { sameRequestOrigin } from "../request-origin";
 import type { ConversationProxyConfig } from "./proxy";
 import type { HistoryRoute } from "./history-client";
 import { trustedConversationFrontendOrigin } from "./frontend-origin";
+import { beginConversationTransportDiagnostic } from "./history-diagnostics";
 import type { CurrentReadOperation } from "./current-reads";
 export { conversationCurrentReadOperation } from "./current-reads";
 
@@ -95,6 +96,7 @@ export async function proxyConversationHistory(
   config: ConversationProxyConfig,
   getNativeToken: () => Promise<string | null>,
   fetcher: typeof fetch = fetch,
+  beginDiagnostic = beginConversationTransportDiagnostic,
 ) {
   return proxyConversationNativeRead(
     request,
@@ -112,6 +114,7 @@ export async function proxyConversationHistory(
     getNativeToken,
     fetcher,
     route === "nextTurn" || route === "manage",
+    beginDiagnostic,
   );
 }
 
@@ -123,22 +126,37 @@ export async function proxyConversationNativeRead(
   getNativeToken: () => Promise<string | null>,
   fetcher: typeof fetch = fetch,
   mutation = false,
+  beginDiagnostic = beginConversationTransportDiagnostic,
 ) {
   if (request.method !== "POST") return unavailable(405);
   if (!validRequest(request, operation, config)) return unavailable(400);
+  const diagnostic = beginDiagnostic(operation.path);
+  const answer = (status: number, body?: Uint8Array<ArrayBuffer>) => {
+    diagnostic?.finish(status, "response");
+    return body
+      ? new Response(body, {
+          status,
+          headers: { ...headers, "Content-Type": "application/json" },
+        })
+      : unavailable(status);
+  };
   const origin = configuredOrigin(config);
   const frontendOrigin = trustedConversationFrontendOrigin(
     request,
     config.frontendOrigin,
     config.requestOrigin,
   );
-  if (!origin || !frontendOrigin) return unavailable(503);
+  // The configuration refusal below is decided here, so this is the stage to record it on.
+  diagnostic?.stage("configuration");
+  if (!origin || !frontendOrigin) return answer(503);
   let dispatched = false;
   try {
     return await withActionDeadline([request.signal], async (signal) => {
+      diagnostic?.stage("session");
       const token = await getNativeToken();
       signal.throwIfAborted();
-      if (!token) return unavailable(401);
+      if (!token) return answer(401);
+      diagnostic?.stage("request");
       let bytes: Uint8Array<ArrayBuffer>;
       let receive: Awaited<ReturnType<CurrentReadOperation<unknown>["admit"]>>;
       try {
@@ -150,10 +168,11 @@ export async function proxyConversationNativeRead(
         receive = await operation.admit(bytes);
       } catch {
         signal.throwIfAborted();
-        return unavailable(400);
+        return answer(400);
       }
       signal.throwIfAborted();
       dispatched = true;
+      diagnostic?.stage("fetch");
       const response = await fetcher(`${origin}${operation.path}`, {
         method: "POST",
         body: bytes,
@@ -167,6 +186,8 @@ export async function proxyConversationNativeRead(
         cache: "no-store",
         signal,
       });
+      diagnostic?.stage("receive");
+      diagnostic?.received(response.status);
       if (response.redirected || response.headers.has("content-encoding")) {
         void response.body?.cancel().catch(() => undefined);
         throw new Error("Unexpected native history response");
@@ -178,12 +199,10 @@ export async function proxyConversationNativeRead(
       );
       await receive(response.status, body);
       signal.throwIfAborted();
-      return new Response(body, {
-        status: response.status,
-        headers: { ...headers, "Content-Type": "application/json" },
-      });
+      return answer(response.status, body);
     });
   } catch {
+    diagnostic?.finish(502, "failure");
     return unavailable(502, dispatched && mutation);
   }
 }

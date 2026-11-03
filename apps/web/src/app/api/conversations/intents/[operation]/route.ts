@@ -3,7 +3,10 @@ import { previewBackendRejection } from "../../../../../shared/preview/backend-p
 import { readConversationConfig } from "../../../../../shared/meri-conversations/config";
 import { proxyConversationNativeRead } from "../../../../../shared/meri-conversations/history-proxy";
 import { readIntentsConfig } from "../../../../../shared/meri-intents/config";
-import { inboxReadOperation } from "../../../../../shared/meri-intents/inbox";
+import {
+  inboxCountReadOperation,
+  inboxReadOperation,
+} from "../../../../../shared/meri-intents/inbox";
 import { proxyIntentsRequest } from "../../../../../shared/meri-intents/proxy";
 
 // Meri's membership-gated product routes verify the native Clerk session token through Core,
@@ -28,6 +31,16 @@ export async function POST(
     return proxyConversationNativeRead(
       request,
       inboxReadOperation,
+      readConversationConfig(process.env),
+      nativeToken,
+    );
+  // The approvals badge reads its count through this same native-auth family. Without this
+  // branch the read fell through to the list/decide adapter below, which refuses any other
+  // operation as unknown (404 FRONTEND_INTENTS_UNAVAILABLE) — so the count never loaded.
+  if (operation === "inbox-count")
+    return proxyConversationNativeRead(
+      request,
+      inboxCountReadOperation,
       readConversationConfig(process.env),
       nativeToken,
     );

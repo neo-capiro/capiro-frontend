@@ -15,7 +15,7 @@ import { US_STATE_CODES } from "./us-states";
 import styles from "./intelligence.module.css";
 const dollars = (n: number | null) =>
   n == null
-    ? "Not available"
+    ? "—"
     : n.toLocaleString("en-US", {
         style: "currency",
         currency: "USD",
@@ -24,7 +24,7 @@ const dollars = (n: number | null) =>
 /** Figma 1064:241658 shows compact card figures ($1.9B, $212M), not full amounts. */
 const compact = (n: number | null) =>
   n == null
-    ? "–"
+    ? "—"
     : n.toLocaleString("en-US", {
         style: "currency",
         currency: "USD",
@@ -300,7 +300,8 @@ export function DistrictNexus({ tabs }: { tabs?: ReactNode }) {
             />
             <ul className={styles.legend}>
               <li>
-                <span className={styles.swatch} data-tone="none" /> No data
+                <span className={styles.swatch} data-tone="none" />
+                <span>N/A</span>
               </li>
               <li>
                 <span className={styles.swatch} data-tone="resolved" /> Resolved
@@ -355,11 +356,11 @@ export function DistrictNexus({ tabs }: { tabs?: ReactNode }) {
                     label: "Nexus",
                     render: (r) =>
                       r.score == null
-                        ? "Unknown"
+                        ? "Not reported"
                         : r.score >= 60
                           ? "High"
                           : r.score >= 30
-                            ? "Med"
+                            ? "Medium"
                             : "Low",
                   },
                   {
@@ -396,7 +397,7 @@ export function DistrictNexus({ tabs }: { tabs?: ReactNode }) {
                     [
                       "Nexus score",
                       selected.score == null
-                        ? "Unknown"
+                        ? "Not reported"
                         : `${selected.score}/100`,
                     ],
                     ["Evidence coverage", `${selected.coveragePercent}%`],
