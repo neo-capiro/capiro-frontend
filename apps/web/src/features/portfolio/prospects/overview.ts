@@ -6,9 +6,26 @@ import {
   type StageCatalog,
 } from "./contracts";
 
-export function prospectHistoryRows(rows: ProspectActivity[], kind = "") {
+export function prospectHistoryRows(
+  rows: ProspectActivity[],
+  kind = "",
+  search = "",
+  after = "",
+  before = "",
+) {
+  const phrase = search.trim().toLocaleLowerCase();
+  const from = after ? new Date(`${after}T00:00:00`).getTime() : -Infinity;
+  const through = before
+    ? new Date(`${before}T23:59:59.999`).getTime()
+    : Infinity;
   return rows
-    .filter((row) => !kind || row.kind === kind)
+    .filter(
+      (row) =>
+        (!kind || row.kind === kind) &&
+        (!phrase || row.body.toLocaleLowerCase().includes(phrase)) &&
+        Date.parse(row.createdAt) >= from &&
+        Date.parse(row.createdAt) <= through,
+    )
     .toSorted(
       (a, b) =>
         Date.parse(b.createdAt) - Date.parse(a.createdAt) ||

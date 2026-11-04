@@ -81,7 +81,7 @@ test("All files retains search, source and sort while leaving a folder", async (
   await page.getByLabel("Search files", { exact: true }).fill("Gamma");
   const source = page
     .getByRole("group", { name: "File source", exact: true })
-    .getByRole("button", { name: "workspace", exact: true });
+    .getByRole("button", { name: "Workspace", exact: true });
   await source.click();
   await page.getByLabel("Sort files", { exact: true }).selectOption("name");
   await expect(page.getByText("No files match this view.")).toBeVisible();
@@ -215,7 +215,7 @@ test("empty filtered results disclose and clear hidden selection without changin
   ).toBeDisabled();
   await expect(
     page.getByRole("button", { name: "New folder", exact: true }),
-  ).toBeDisabled();
+  ).toBeEnabled();
   await expect(
     page.getByText("0 files · 0 selected", { exact: true }),
   ).toBeVisible();

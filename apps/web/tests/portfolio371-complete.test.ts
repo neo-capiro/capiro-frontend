@@ -27,6 +27,7 @@ const START = "2026-10-01T12:00:00.000Z";
 
 const metrics = {
   definition: "portfolio-recorded-baseline-v1",
+  trackerBackend: "core",
   tenantId: TENANT,
   observedAt: END,
   activityWindow: { start: START, end: END, timezone: "UTC" },

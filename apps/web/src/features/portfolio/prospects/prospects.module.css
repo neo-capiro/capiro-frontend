@@ -145,6 +145,39 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+.activityFilters label {
+  flex: 1 1 130px;
+  min-width: 0;
+  font-size: 12px;
+}
+.activityFilters input {
+  width: 100%;
+  min-width: 0;
+}
+.activityFooter {
+  padding: 14px 24px;
+  border-top: 1px solid var(--border);
+}
+.lifecycle {
+  padding: 20px 24px;
+  gap: 14px;
+  border-radius: 12px;
+}
+.lifecycle p {
+  font-size: 14px;
+  font-weight: 500;
+}
+.lifecycle small {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.sectionLinks a {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px;
+  background: var(--card);
+  font-size: 12px;
+}
 .filterChip {
   border: 1px solid var(--border);
   border-radius: 999px;

@@ -19,6 +19,11 @@ import {
 } from "./contracts";
 import { ProspectEditor } from "./ProspectEditor";
 import { ProspectPipeline } from "./ProspectPipeline";
+import {
+  prospectDetailHref,
+  rememberProspectListScroll,
+  restoreProspectListScroll,
+} from "./list-navigation";
 import styles from "./prospects.module.css";
 export function ProspectsIndex({
   destinations,
@@ -41,6 +46,11 @@ export function ProspectsIndex({
       : undefined;
   const catalog = useStageCatalog();
   const owners = useMemberOptions();
+  const listUrl = `/portfolio/prospects?${params}`;
+  const listReady = Boolean(data);
+  useEffect(() => {
+    if (listReady) restoreProspectListScroll(listUrl);
+  }, [listReady, listUrl]);
   useEffect(() => {
     if (!query.error || (!params.has("new") && !params.has("pipeline"))) return;
     const next = new URLSearchParams(params);
@@ -157,7 +167,8 @@ export function ProspectsIndex({
                 <Link
                   className={styles.card}
                   key={prospect.id}
-                  href={`/portfolio/prospects/${prospect.id}`}
+                  href={prospectDetailHref(prospect.id, listUrl)}
+                  onNavigate={() => rememberProspectListScroll(listUrl)}
                 >
                   <div className="row">
                     <span className={styles.monogram}>
@@ -205,6 +216,7 @@ export function ProspectsIndex({
           <ProspectPipeline
             data={data}
             catalog={catalog.data}
+            returnTo={listUrl}
             error={catalog.error}
             onClose={() => set("pipeline", "")}
           />

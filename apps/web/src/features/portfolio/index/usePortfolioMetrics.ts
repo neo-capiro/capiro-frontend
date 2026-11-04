@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import type { TrackerBackend } from "@/shared/portfolio/config/config";
 import { useApi } from "@/shared/portfolio/api/provider";
 import {
   assertCurrentActor,
@@ -18,9 +19,15 @@ export function portfolioMetricsQueryOptions(
   api: ReturnType<typeof useApi>,
   actor: ReturnType<typeof useCurrentActor>,
   cache: ReturnType<typeof useQueryClient>,
+  trackerBackend: TrackerBackend = "core",
 ) {
   return {
-    queryKey: ["portfolio", "baseline-metrics", currentActorKey(actor)],
+    queryKey: [
+      "portfolio",
+      "baseline-metrics",
+      currentActorKey(actor),
+      trackerBackend,
+    ],
     enabled: Boolean(actor),
     staleTime: 60_000,
     refetchInterval: 60_000,
@@ -30,8 +37,8 @@ export function portfolioMetricsQueryOptions(
       assertCurrentActor(cache, actor);
       const result = await api.request(
         "core",
-        "clients/metrics",
-        portfolioMetricsFor(actor.tenantId),
+        `clients/metrics?trackerBackend=${trackerBackend}`,
+        portfolioMetricsFor(actor.tenantId, trackerBackend),
         { signal },
       );
       signal.throwIfAborted();
@@ -40,7 +47,7 @@ export function portfolioMetricsQueryOptions(
     },
   };
 }
-export function usePortfolioMetrics() {
+export function usePortfolioMetrics(trackerBackend: TrackerBackend = "core") {
   const api = useApi(),
     actor = useCurrentActor(),
     cache = useQueryClient();
@@ -49,7 +56,9 @@ export function usePortfolioMetrics() {
     const timer = setInterval(() => setNow(Date.now()), 10000);
     return () => clearInterval(timer);
   }, []);
-  const query = useQuery(portfolioMetricsQueryOptions(api, actor, cache));
+  const query = useQuery(
+    portfolioMetricsQueryOptions(api, actor, cache, trackerBackend),
+  );
   // A remount inside the 60s window serves successful cached data WITHOUT fetching, so
   // isFetchedAfterMount stays false for the new observer. The snapshot is still the current
   // actor's, succeeded, and carries no error, so it is displayed rather than reported as

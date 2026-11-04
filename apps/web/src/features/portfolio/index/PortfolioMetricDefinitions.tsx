@@ -27,9 +27,12 @@ export function PortfolioMetricDefinitions() {
           feeds are not added.
         </li>
         <li>
-          Bill-watch coverage: active clients with at least one saved bill watch
-          divided by all visible active clients. Duplicate watches do not
-          increase the client count. An empty population has no percentage.
+          Tracked-bill coverage: active clients with at least one tracked bill
+          in the configured Bill Tracker source divided by all visible active
+          clients. Tracking more bills does not increase a client’s
+          contribution. Saved targeting topics alone do not count; add a bill in
+          a client’s Bill Tracker to include that client. An empty population
+          has no percentage.
         </li>
       </ul>
       <p>

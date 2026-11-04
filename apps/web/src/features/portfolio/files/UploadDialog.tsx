@@ -7,6 +7,7 @@ import { uploadParentFile, type UploadAttempt } from "./upload";
 import { fileValidation } from "./contracts";
 import { currentFilesKey, filesKey } from "./file-reader";
 import { useFileScope, type FileExecution } from "./file-scope";
+import styles from "./file-dialog.module.css";
 type Job = {
   id: string;
   file: File;
@@ -18,6 +19,8 @@ type UploadDialogProps = {
   clientId: string;
   onClose: () => void;
   source?: string;
+  folder?: string | null;
+  folderNames?: string[];
   beforeDispatch?: () => void;
 };
 
@@ -30,14 +33,18 @@ function UploadFiles({
   clientId,
   onClose,
   source = "manual",
+  folder = null,
+  folderNames,
   beforeDispatch,
   scope,
 }: UploadDialogProps & { scope: ReturnType<typeof useFileScope> }) {
   const api = useApi();
   const cache = useQueryClient();
   const [jobs, setJobs] = useState<Job[]>([]);
+  const [destination, setDestination] = useState(folder ?? "");
   const [busy, setBusy] = useState(false);
   const lock = useRef(false);
+  const fileInput = useRef<HTMLInputElement>(null);
   const attempts = useRef(
     new Map<
       string,
@@ -70,7 +77,7 @@ function UploadFiles({
       patch(job.id, { error: undefined });
       await uploadParentFile(
         api,
-        { clientId },
+        { clientId, folder: destination || null },
         job.file,
         attempt,
         (stage) => {
@@ -115,34 +122,57 @@ function UploadFiles({
         if (!open && !busy) onClose();
       }}
       title="Upload files"
-      description="Up to 25 MiB per file. Server verification and scan policy determine when a file can be opened."
+      description="Files will be saved in the destination you choose."
+      className={styles.dialog}
     >
-      <div className="stack">
+      <div className={styles.body}>
+        <label>
+          Destination folder
+          <select
+            value={destination}
+            disabled={busy || jobs.some((job) => job.stage !== "Ready")}
+            onChange={(event) => setDestination(event.target.value)}
+          >
+            <option value="">Unfiled</option>
+            {[
+              ...new Set([...(folderNames ?? []), ...(folder ? [folder] : [])]),
+            ].map((name) => (
+              <option key={name} value={name}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <small>
+          Choose files to upload into {destination || "Unfiled"}. Up to 25 MiB
+          per file.
+        </small>
         {!scope.canWrite && (
           <p role="status">
             Uploads are unavailable in this view. Close this dialog and refresh
             the client files.
           </p>
         )}
-        <label>
-          Select files
-          <input
-            type="file"
-            multiple
-            disabled={busy || !scope.canWrite}
-            onChange={(event) =>
-              setJobs((jobs) => [
-                ...jobs,
-                ...Array.from(event.target.files ?? []).map((file) => ({
-                  id: crypto.randomUUID(),
-                  file,
-                  stage: "Ready",
-                  error: fileValidation(file) ?? undefined,
-                })),
-              ])
-            }
-          />
-        </label>
+        <input
+          ref={fileInput}
+          className="srOnly"
+          aria-label="Select files"
+          tabIndex={-1}
+          type="file"
+          multiple
+          disabled={busy || !scope.canWrite}
+          onChange={(event) =>
+            setJobs((jobs) => [
+              ...jobs,
+              ...Array.from(event.target.files ?? []).map((file) => ({
+                id: crypto.randomUUID(),
+                file,
+                stage: "Ready",
+                error: fileValidation(file) ?? undefined,
+              })),
+            ])
+          }
+        />
         {jobs.map((job) => (
           <article className="card stack" key={job.id}>
             <strong>{job.file.name}</strong>
@@ -161,10 +191,19 @@ function UploadFiles({
             )}
           </article>
         ))}
-        <button className="button" disabled={busy} onClick={onClose}>
-          Done
-        </button>
       </div>
+      <footer className={styles.footer}>
+        <button className="button" disabled={busy} onClick={onClose}>
+          {jobs.length ? "Done" : "Cancel"}
+        </button>
+        <button
+          className="button primary"
+          disabled={busy || !scope.canWrite}
+          onClick={() => fileInput.current?.click()}
+        >
+          Choose files
+        </button>
+      </footer>
     </Dialog>
   );
 }

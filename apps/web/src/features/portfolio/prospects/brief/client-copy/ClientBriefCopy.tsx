@@ -96,6 +96,11 @@ function CopySession({
         </button>
       )}
       {flow.contextError && <p role="alert">{flow.contextError}</p>}
+      {flow.recovery.loading && (
+        <p role="status">
+          Checking linked-client access and saved brief-copy recovery…
+        </p>
+      )}
       {flow.recovery.error && (
         <div role="alert">
           <p>{flow.recovery.error}</p>

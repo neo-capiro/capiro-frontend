@@ -3,6 +3,8 @@
  * The /portfolio Portfolio pulse panel (bill-watch coverage and the count tiles). Meri answers "what does this metric mean" from a copy of these definitions in neo-capiro/meri-greenfield
  * apps/worker/conversation/product-definitions.mjs: change that file in the same change.
  */
+import type { TrackerBackend } from "@/shared/portfolio/config/config";
+import { portfolioTimestamp } from "@/shared/portfolio/domain/display";
 import { usePortfolioMetrics } from "./usePortfolioMetrics";
 import { PortfolioMetricDefinitions } from "./PortfolioMetricDefinitions";
 import type { PortfolioMetrics } from "./metrics";
@@ -10,19 +12,28 @@ import styles from "./portfolio.module.css";
 
 type MetricState = ReturnType<typeof usePortfolioMetrics>;
 
-export function PortfolioPulse({ fiscalYear }: { fiscalYear: number }) {
-  const query = usePortfolioMetrics();
+export function PortfolioPulse({
+  fiscalYear,
+  trackerBackend,
+}: {
+  fiscalYear: number;
+  trackerBackend?: TrackerBackend;
+}) {
+  const query = usePortfolioMetrics(trackerBackend);
   return (
     <section aria-label="Portfolio pulse">
       <div className={styles.pulse} data-testid="portfolio-metric-panel">
         <BillWatchCoverage
-          data={query.data}
+          data={trackerBackend ? query.data : undefined}
           pending={query.pending}
           fiscalYear={fiscalYear}
         />
         <PortfolioCounts data={query.data} pending={query.pending} />
       </div>
-      <MetricSnapshot query={query} />
+      <MetricSnapshot
+        query={query}
+        trackerConfigured={Boolean(trackerBackend)}
+      />
       <PortfolioMetricDefinitions />
     </section>
   );
@@ -100,7 +111,8 @@ function BillWatchCoverage({
         </strong>
         <small>
           active clients with
-          <br />a saved bill watch
+          <br />
+          at least one tracked bill
         </small>
       </div>
       <small>
@@ -114,7 +126,13 @@ function BillWatchCoverage({
   );
 }
 
-function MetricSnapshot({ query }: { query: MetricState }) {
+function MetricSnapshot({
+  query,
+  trackerConfigured,
+}: {
+  query: MetricState;
+  trackerConfigured: boolean;
+}) {
   const { data } = query;
   const partial =
     data &&
@@ -128,14 +146,13 @@ function MetricSnapshot({ query }: { query: MetricState }) {
           <>
             {query.stale ? "Stale snapshot" : "Snapshot"} ·{" "}
             <time dateTime={data.observedAt}>
-              {new Date(data.observedAt).toLocaleString(undefined, {
-                timeZone: "UTC",
-              })}{" "}
-              UTC
+              {portfolioTimestamp(data.observedAt)}
             </time>
-            {partial
-              ? " · Some sources unavailable"
-              : " · Complete recorded populations"}
+            {!trackerConfigured
+              ? " · Partial snapshot: Bill Tracker source not configured"
+              : partial
+                ? " · Some sources unavailable"
+                : " · Complete recorded populations"}
           </>
         ) : query.pending ? (
           "Loading portfolio metrics…"

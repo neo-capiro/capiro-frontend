@@ -1,4 +1,5 @@
 "use client";
+import { identityBasisLabel } from "@/shared/portfolio/domain/display";
 import { useQuery } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
@@ -91,7 +92,8 @@ export function BriefSource({
           <section className="stack">
             <h3>Saved snapshot</h3>
             <small>
-              Identity basis: {version.sourceSnapshot.identityBasis}
+              Identity match:{" "}
+              {identityBasisLabel(version.sourceSnapshot.identityBasis)}
             </small>
             <small>
               Snapshot built{" "}

@@ -1,5 +1,10 @@
+import {
+  portfolioSourceLabel,
+  portfolioTimestamp,
+} from "@/shared/portfolio/domain/display";
 import type { Preparation } from "./schema";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
+import { preparationReview } from "./review";
 import { prepFields } from "./editing";
 import styles from "./preparation.module.css";
 import type { Meeting } from "../contracts";
@@ -13,10 +18,10 @@ function EmailEvidenceContent({ item }: { item: EmailEvidence }) {
       <p>{item.summary}</p>
       {href ? (
         <a href={href} target="_blank" rel="noopener noreferrer">
-          Source {item.sourceId}
+          View email source
         </a>
       ) : (
-        <span>Source {item.sourceId}</span>
+        <span>Email source link unavailable</span>
       )}
     </>
   );
@@ -33,12 +38,34 @@ const sectionLabels: Record<string, string> = {
   commitments: "What we committed to doing",
 };
 export function PreparationContent({ prep }: { prep: Preparation }) {
+  const review = preparationReview(prep);
   const briefing = !prep.generatedFrom?.grounding?.contentEdited
     ? prep.generatedFrom?.briefing
     : undefined;
   if (briefing && typeof briefing === "object")
     return (
       <div className={styles.content}>
+        {(review.issues.length > 0 || review.hasLimitations) && (
+          <aside
+            className="status"
+            role="note"
+            aria-label="Saved preparation review"
+          >
+            <strong>
+              {review.issues.length > 0
+                ? "Saved preparation needs review"
+                : "Source limitations to review"}
+            </strong>
+            <p>
+              {review.issues.length > 0
+                ? "The saved evidence and briefing do not fully agree. Review the sources before relying on or sharing this preparation, even if its saved status is approved."
+                : "This saved briefing includes source limitations. Review them alongside the populated sections before relying on or sharing it."}
+            </p>
+            {review.issues.map((issue) => (
+              <p key={issue}>{issue}</p>
+            ))}
+          </aside>
+        )}
         <section>
           <h3>Key takeaways</h3>
           <ul>
@@ -65,11 +92,20 @@ export function PreparationContent({ prep }: { prep: Preparation }) {
           {briefing.coverage.reviewedFactCount} extracted facts checked. This
           does not establish that every possible source was available.
         </p>
-        {briefing.limitations.map((value, index) => (
-          <p role="note" key={index}>
-            {value}
-          </p>
-        ))}
+        {briefing.limitations.length > 0 && (
+          <section aria-label="Saved source limitations">
+            <h3>Saved source limitations</h3>
+            <p>
+              These are the original saved caveats. They have not been
+              reconciled with the narrative by this view.
+            </p>
+            {briefing.limitations.map((value, index) => (
+              <p role="note" key={index}>
+                {value}
+              </p>
+            ))}
+          </section>
+        )}
       </div>
     );
   return (
@@ -159,8 +195,9 @@ export function PreparationSources({
           <article className={styles.source} key={source.id}>
             <h3>{source.title}</h3>
             <small>
-              {source.kind}
-              {source.observedAt && ` · ${source.observedAt}`}
+              {portfolioSourceLabel(source.kind)}
+              {source.observedAt &&
+                ` · ${portfolioTimestamp(source.observedAt)}`}
             </small>
             <p>{source.excerpt}</p>
             {grounding.references

@@ -1,14 +1,20 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Plus } from "lucide-react";
-import type { Destinations } from "@/shared/portfolio/config/config";
+import type {
+  Destinations,
+  TrackerBackend,
+} from "@/shared/portfolio/config/config";
 import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
 import { Shell } from "@/shared/portfolio/shell/Shell";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useClients, useAccountOwners, useMemberOptions } from "./queries";
-import { useProspects } from "@/features/portfolio/prospects/public";
+import {
+  restoreProspectListScroll,
+  useProspects,
+} from "@/features/portfolio/prospects/public";
 import {
   clearPortfolioFilters,
   portfolioHref,
@@ -46,8 +52,10 @@ function portfolioWeekLabel(today: Date) {
 
 export function PortfolioIndex({
   destinations,
+  trackerBackend,
 }: {
   destinations: Destinations;
+  trackerBackend?: TrackerBackend;
 }) {
   const params = useSearchParams();
   const state = readPortfolioState(params);
@@ -74,6 +82,12 @@ export function PortfolioIndex({
   const identity = useIdentity();
   const router = useRouter();
   const pathname = usePathname();
+  const returnTo = `${pathname}${params.size ? `?${params}` : ""}`;
+  const listReady =
+    Boolean(records) && (!includeProspects || Boolean(prospectData));
+  useEffect(() => {
+    if (listReady) restoreProspectListScroll(returnTo);
+  }, [returnTo, listReady]);
   const [creating, setCreating] = useState(false);
   const [customizing, setCustomizing] = useState(false);
   const objectiveTrigger = useRef<HTMLButtonElement>(null);
@@ -149,20 +163,22 @@ export function PortfolioIndex({
               <input
                 aria-label="Search profiles"
                 autoFocus={params.has("search")}
-                placeholder="Search clients"
+                placeholder="Search profiles"
                 value={state.search}
                 disabled={customizing}
                 onChange={(e) => set("q", e.target.value)}
               />
             </label>
-            <button
-              className={`button ${styles.customize}`}
-              ref={customizeTrigger}
-              aria-expanded={customizing}
-              onClick={() => setCustomizing(true)}
-            >
-              Customize
-            </button>
+            {state.type !== "PROSPECT" && (
+              <button
+                className={`button ${styles.customize}`}
+                ref={customizeTrigger}
+                aria-expanded={customizing}
+                onClick={() => setCustomizing(true)}
+              >
+                Customize
+              </button>
+            )}
             <button
               className={`button primary ${styles.createProfile}`}
               disabled={!permitted}
@@ -180,7 +196,12 @@ export function PortfolioIndex({
         {identity.data && !permitted && !identity.error && (
           <p className="muted">Your role does not allow creating profiles.</p>
         )}
-        <PortfolioPulse fiscalYear={fiscalYear} />
+        {state.type !== "PROSPECT" && (
+          <PortfolioPulse
+            fiscalYear={fiscalYear}
+            trackerBackend={trackerBackend}
+          />
+        )}
         {state.unsupportedSort && (
           <p className="status" role="status">
             This sort is unavailable. Showing most recently added profiles.{" "}
@@ -206,8 +227,14 @@ export function PortfolioIndex({
             retry={() => void prospectOwners.refetch()}
           />
         )}
-        <div className={styles.columns}>
-          {records && <PortfolioAttention clients={records} />}
+        <div
+          className={
+            state.type === "PROSPECT" ? styles.prospectColumns : styles.columns
+          }
+        >
+          {state.type !== "PROSPECT" && records && (
+            <PortfolioAttention clients={records} />
+          )}
           <section className="stack" aria-label="Portfolio profiles">
             <IndexNavigation
               records={records}
@@ -282,6 +309,7 @@ export function PortfolioIndex({
                       !customizing ? (
                         <ProspectResults
                           coreRows={rows}
+                          returnTo={returnTo}
                           rows={visibleProspects}
                           sort={state.sort}
                           view={state.view}
@@ -292,6 +320,7 @@ export function PortfolioIndex({
                       ) : (
                         <PortfolioProfiles
                           catalog={records ?? []}
+                          returnTo={returnTo}
                           customizing={customizing}
                           onFinishCustomizing={finishCustomizing}
                           rows={rows}
@@ -336,6 +365,7 @@ export function PortfolioIndex({
                       </div>
                     ) : null}
                     {!customizing &&
+                      state.type !== "PROSPECT" &&
                       rows.length + visibleProspects.length > 0 &&
                       (state.view !== "cards" ||
                         state.sort !== "saved" ||
@@ -386,6 +416,7 @@ export function PortfolioIndex({
           prospectData && (
             <IndexPipeline
               data={prospectData}
+              returnTo={returnTo}
               onClose={() => set("pipeline", "")}
             />
           )}

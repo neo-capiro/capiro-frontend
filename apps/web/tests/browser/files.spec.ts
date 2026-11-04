@@ -54,9 +54,11 @@ test("Files keeps quarantined bytes unavailable and persists folder moves", asyn
   ).toBeDisabled();
   await preview.getByRole("button", { name: "Close", exact: true }).click();
   await page.getByRole("checkbox", { name: `Select ${file.fileName}` }).check();
-  await page.getByRole("button", { name: "New folder", exact: true }).click();
-  await page.getByLabel("Folder name").fill("Archive");
-  await page.getByRole("button", { name: "Create folder & move file" }).click();
+  await page
+    .getByRole("button", { name: "Move to folder", exact: true })
+    .click();
+  await page.getByLabel("Destination folder").fill("Archive");
+  await page.getByRole("button", { name: "Move file", exact: true }).click();
   await expect(
     page.getByRole("cell", { name: "Archive", exact: true }),
   ).toBeVisible();

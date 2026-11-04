@@ -112,7 +112,18 @@ function App() {
         <PublicEventCalendarHarness />
       </Shell>
     );
-  if (!clientId) return <PortfolioIndex destinations={destinations} />;
+  if (!clientId)
+    return (
+      <PortfolioIndex
+        destinations={destinations}
+        trackerBackend={
+          new URLSearchParams(window.location.search).get("testBackend") ===
+          "intelligence"
+            ? "intelligence"
+            : "core"
+        }
+      />
+    );
   const content =
     tab === "opportunities" ? (
       <OpportunitiesPage clientId={clientId} destinations={destinations} />

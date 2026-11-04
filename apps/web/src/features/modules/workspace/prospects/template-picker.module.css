@@ -1,0 +1,55 @@
+/* Portfolio 3.4 proposal selection frame, using the Workspace Modal owner. */
+.dialog.dialog {
+  width: min(520px, calc(100vw - 32px));
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow:
+    0 16px 40px -12px rgba(12, 10, 9, 0.18),
+    0 2px 6px rgba(12, 10, 9, 0.05);
+}
+.dialog > header {
+  padding: 22px 28px 14px;
+}
+.dialog > header h2 {
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: -0.07px;
+  font-weight: 600;
+}
+.dialog > header button {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  line-height: 20px;
+  color: var(--muted-foreground);
+}
+.dialog > [data-slot="modal-body"] {
+  padding: 18px 28px;
+}
+.dialog > footer {
+  padding: 16px 28px;
+  gap: 10px;
+  background: var(--muted);
+}
+.dialog > footer button {
+  min-height: 34px;
+  padding: 8px 14px;
+  font-size: 14px;
+  line-height: 1.2;
+  border-radius: 8px;
+}
+.catalog {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.catalog > p,
+.catalog > details {
+  color: var(--muted-foreground);
+}
+.catalog h3 {
+  font-size: 14px;
+  line-height: 1.4;
+}

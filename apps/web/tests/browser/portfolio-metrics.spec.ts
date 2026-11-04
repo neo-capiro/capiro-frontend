@@ -24,7 +24,7 @@ test("counts the full population independently of one displayed client and expla
   page,
 }) => {
   const unexpected = await setup(page);
-  await page.route("**/core/clients/metrics", (route) =>
+  await page.route("**/core/clients/metrics?*", (route) =>
     json(route, portfolioMetricsFixture()),
   );
   await page.goto("/portfolio");
@@ -67,7 +67,9 @@ test("partial sources preserve true zeros and empty coverage has no percentage",
       distinctBills: 0,
     },
   };
-  await page.route("**/core/clients/metrics", (route) => json(route, fixture));
+  await page.route("**/core/clients/metrics?*", (route) =>
+    json(route, fixture),
+  );
   await page.goto("/portfolio");
   await expect(
     pulse(page).getByRole("group", {
@@ -88,7 +90,7 @@ test("labels stale snapshots and removes previous counts after access loss", asy
 }) => {
   const unexpected = await setup(page);
   let revoked = false;
-  await page.route("**/core/clients/metrics", (route) =>
+  await page.route("**/core/clients/metrics?*", (route) =>
     revoked
       ? json(route, { message: "Access denied" }, 403)
       : json(route, portfolioMetricsFixture(Date.now() - 180000)),
@@ -109,7 +111,7 @@ test("rejects another tenant's metrics and refresh recovers the current account"
 }) => {
   const unexpected = await setup(page);
   let foreign = true;
-  await page.route("**/core/clients/metrics", (route) =>
+  await page.route("**/core/clients/metrics?*", (route) =>
     json(route, {
       ...portfolioMetricsFixture(),
       tenantId: foreign
@@ -129,7 +131,7 @@ test("rejects another tenant's metrics and refresh recovers the current account"
 test("keeps counts and refresh usable on a narrow screen", async ({ page }) => {
   const unexpected = await setup(page);
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.route("**/core/clients/metrics", (route) =>
+  await page.route("**/core/clients/metrics?*", (route) =>
     json(route, portfolioMetricsFixture()),
   );
   await page.goto("/portfolio");
@@ -142,5 +144,30 @@ test("keeps counts and refresh usable on a narrow screen", async ({ page }) => {
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(390);
+  expect(unexpected).toEqual([]);
+});
+
+test("uses the configured Intelligence tracker source and refuses counts from Core", async ({
+  page,
+}) => {
+  const unexpected = await setup(page);
+  let wrongOwner = false;
+  const owners: Array<string | null> = [];
+  await page.route("**/core/clients/metrics?*", (route) => {
+    owners.push(
+      new URL(route.request().url()).searchParams.get("trackerBackend"),
+    );
+    return json(route, {
+      ...portfolioMetricsFixture(),
+      trackerBackend: wrongOwner ? "core" : "intelligence",
+    });
+  });
+  await page.goto("/portfolio?testBackend=intelligence");
+  await expect(pulse(page).getByText("50%", { exact: true })).toBeVisible();
+  expect(owners).toEqual(["intelligence"]);
+  wrongOwner = true;
+  await pulse(page).getByRole("button", { name: "Refresh metrics" }).click();
+  await expect(pulse(page)).toContainText("Portfolio metrics unavailable.");
+  await expect(pulse(page).getByText("50%", { exact: true })).toHaveCount(0);
   expect(unexpected).toEqual([]);
 });

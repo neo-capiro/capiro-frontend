@@ -185,13 +185,15 @@ test("a mismatched folder-save receipt keeps the edit open and does not claim su
   });
   await page.goto(`/portfolio/${clientId}/files`);
   await page.getByRole("checkbox", { name: `Select ${file.fileName}` }).check();
-  await page.getByRole("button", { name: "New folder", exact: true }).click();
-  const dialog = page.getByRole("dialog", { name: "New folder" });
-  await dialog.getByLabel("Folder name").fill("Reviewed folder");
-  await dialog
-    .getByRole("button", { name: "Create folder & move file" })
+  await page
+    .getByRole("button", { name: "Move to folder", exact: true })
     .click();
+  const dialog = page.getByRole("dialog", { name: "Move to folder" });
+  await dialog.getByLabel("Destination folder").fill("Reviewed folder");
+  await dialog.getByRole("button", { name: "Move file", exact: true }).click();
   await expect(dialog.getByRole("alert")).toContainText("unexpected response");
-  await expect(dialog.getByLabel("Folder name")).toHaveValue("Reviewed folder");
+  await expect(dialog.getByLabel("Destination folder")).toHaveValue(
+    "Reviewed folder",
+  );
   expect(unexpected).toEqual([]);
 });

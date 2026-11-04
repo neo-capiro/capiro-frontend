@@ -65,14 +65,16 @@ export function IndexNavigation({
         </Link>
       )}
       <div className={styles.secondaryActions}>
-        <button
-          ref={objectiveTrigger}
-          className="button"
-          disabled={!permitted}
-          onClick={onObjective}
-        >
-          New objective
-        </button>
+        {state.type !== "PROSPECT" && (
+          <button
+            ref={objectiveTrigger}
+            className="button"
+            disabled={!permitted}
+            onClick={onObjective}
+          >
+            New objective
+          </button>
+        )}
         <details
           className={styles.tools}
           onKeyDown={(event) => {

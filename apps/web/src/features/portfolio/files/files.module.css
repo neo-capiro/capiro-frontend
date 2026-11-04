@@ -298,11 +298,6 @@
   border: 0;
   border-radius: 0;
 }
-.folderHint {
-  font-size: 12px;
-  color: var(--muted-foreground);
-  padding: 10px 20px;
-}
 .folderGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));

@@ -4,11 +4,15 @@ import styles from "./files.module.css";
 export function FolderCards({
   files,
   onOpen,
+  folderNames = [],
 }: {
   files: Attachment[];
   onOpen: (folder: string) => void;
+  folderNames?: string[];
 }) {
-  const folders = [...new Set(files.map((file) => file.folder ?? ""))].sort();
+  const folders = [
+    ...new Set([...folderNames, ...files.map((file) => file.folder ?? "")]),
+  ].sort();
   return (
     <div className={styles.folderGrid} aria-label="File folders">
       {folders.map((folder) => {

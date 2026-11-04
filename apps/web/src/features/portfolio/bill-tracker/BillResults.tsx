@@ -1,3 +1,4 @@
+import { billActionDate } from "./hearings";
 import type { TrackedBill } from "./contracts";
 import styles from "./bills.module.css";
 export function BillResults({
@@ -66,7 +67,7 @@ export function BillResults({
               // separator and the empty placeholder follow what is displayed so
               // the text and date can never run together.
               const latestAction = bill.latestActionText ?? bill.changeLabel;
-              const latestDate = bill.latestActionDate?.slice(0, 10);
+              const latestDate = billActionDate(bill.latestActionDate);
               return (
                 <tr key={bill.billId}>
                   <td>

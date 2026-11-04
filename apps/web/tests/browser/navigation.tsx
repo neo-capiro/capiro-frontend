@@ -24,8 +24,11 @@ export default function Link({
   href,
   children,
   onClick,
+  onNavigate,
   ...props
-}: ComponentProps<"a">) {
+}: ComponentProps<"a"> & {
+  onNavigate?: (event: { preventDefault: () => void }) => void;
+}) {
   return (
     <a
       {...props}
@@ -34,12 +37,25 @@ export default function Link({
         onClick?.(event);
         if (
           href?.startsWith("/") &&
+          !href.startsWith("//") &&
           !event.defaultPrevented &&
           !event.metaKey &&
-          !event.ctrlKey
+          !event.ctrlKey &&
+          !event.shiftKey &&
+          !event.altKey &&
+          event.button === 0 &&
+          (!props.target || props.target === "_self") &&
+          props.download === undefined
         ) {
           event.preventDefault();
-          navigate(href);
+          // Match Next Link's documented same-origin client navigation hook.
+          let prevented = false;
+          onNavigate?.({
+            preventDefault: () => {
+              prevented = true;
+            },
+          });
+          if (!prevented) navigate(href);
         }
       }}
     >

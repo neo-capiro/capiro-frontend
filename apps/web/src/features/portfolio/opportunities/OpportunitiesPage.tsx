@@ -47,6 +47,10 @@ export function OpportunitiesPage({
       : undefined;
   const programResult =
     programs.isSuccess && !programs.error ? programs.data : undefined;
+  const opportunityUnknown = opportunities.isPending
+    ? "Loading…"
+    : "Unavailable";
+  const programUnknown = programs.isPending ? "Loading…" : "Unavailable";
   const workflows = result
     ? pageWorkflowCounts(result.opportunities)
     : undefined;
@@ -68,16 +72,16 @@ export function OpportunitiesPage({
       <section className={styles.stats} aria-label="Opportunity summary">
         {[
           [
-            result?.counts.active ?? "Unavailable",
+            result?.counts.active ?? opportunityUnknown,
             "Available active opportunities",
           ],
-          [workflows?.pursuing ?? "Unavailable", "Pursuing · this page"],
-          [workflows?.saved ?? "Unavailable", "Saved · this page"],
-          [programResult?.data.length ?? "Unavailable", "Programs shown"],
+          [workflows?.pursuing ?? opportunityUnknown, "Pursuing · this page"],
+          [workflows?.saved ?? opportunityUnknown, "Saved · this page"],
+          [programResult?.data.length ?? programUnknown, "Programs shown"],
           [
             result?.opportunities.length
               ? opportunityDate(result.opportunities[0]?.deadline ?? null)
-              : "Unavailable",
+              : opportunityUnknown,
             "First deadline · this page",
           ],
         ].map(([value, label]) => (

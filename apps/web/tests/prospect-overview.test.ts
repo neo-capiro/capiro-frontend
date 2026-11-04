@@ -19,6 +19,30 @@ const catalog = stageCatalogSchema.parse({
   stages: portfolioStages.map((value) => ({ value, label: value })),
 });
 describe("prospect overview read boundary", () => {
+  it("combines activity kind, text and inclusive local date range without dropping matching history", () => {
+    const rows = [
+      "2026-10-11T00:00:00",
+      "2026-10-11T23:59:59",
+      "2026-10-12T00:00:00",
+    ].map((createdAt, index) => ({
+      id: String(index),
+      kind: "note",
+      body: "Reviewed proposal",
+      createdAt,
+      actorUserId: null,
+    }));
+    expect(
+      prospectHistoryRows(
+        rows,
+        "note",
+        "PROPOSAL",
+        "2026-10-11",
+        "2026-10-11",
+      ).map((row) => row.id),
+    ).toEqual(["1", "0"]);
+    expect(prospectHistoryRows(rows, "stage", "proposal")).toEqual([]);
+    expect(prospectHistoryRows(rows, "", "missing")).toEqual([]);
+  });
   it("rejects a well-shaped record returned for another prospect", () => {
     expect(prospectForIdSchema(prospectId).parse(prospect).id).toBe(prospectId);
     expect(

@@ -19,6 +19,7 @@ export interface UploadAttempt {
 export interface UploadParent {
   clientId?: string | null;
   meetingId?: string;
+  folder?: string | null;
 }
 export async function uploadFile(
   api: ApiClient,
@@ -60,7 +61,10 @@ export async function uploadParentFile(
     fileName: file.name,
     contentType: contentType(file)!,
   };
-  const scope = JSON.stringify({ ...metadata, source });
+  const folder = parent.folder?.trim() || null;
+  if (folder && folder.length > 120)
+    throw new Error("Folder names must be 120 characters or fewer.");
+  const scope = JSON.stringify({ ...metadata, source, folder });
   if (
     (attempt.scope && attempt.scope !== scope) ||
     (attempt.file && attempt.file !== file)
@@ -135,6 +139,7 @@ export async function uploadParentFile(
         (!parent.meetingId || receipt.meetingId === parent.meetingId) &&
         receipt.s3Key === attempt.ticket?.s3Key &&
         receipt.source === source &&
+        receipt.folder === folder &&
         (!attempt.actor || receipt.uploadedByUserId === attempt.actor.userId) &&
         receipt.fileName === metadata.fileName &&
         receipt.contentType === metadata.contentType,
@@ -145,7 +150,12 @@ export async function uploadParentFile(
     receiptSchema,
     {
       method: "POST",
-      body: { ...metadata, s3Key: attempt.ticket.s3Key, source },
+      body: {
+        ...metadata,
+        s3Key: attempt.ticket.s3Key,
+        source,
+        ...(folder ? { folder } : {}),
+      },
     },
   );
   attempt.bytesUploaded = true;

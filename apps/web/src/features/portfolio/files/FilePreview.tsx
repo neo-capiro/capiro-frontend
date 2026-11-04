@@ -42,6 +42,10 @@ export function FilePreview({
       }}
     >
       <div className="stack">
+        <details>
+          <summary>Source details</summary>
+          <p>{file.source}</p>
+        </details>
         {file.scanDisclosure && <p role="status">{file.scanDisclosure}</p>}
         {!file.usable ? (
           <p role="alert">
@@ -89,8 +93,16 @@ export function FilePreview({
           disabled={!file.usable || !extract.canReadText || extract.isPending}
           onClick={() => extract.mutate()}
         >
-          {extract.isPending ? "Reading text…" : "Read extracted text"}
+          {extract.isPending
+            ? "Reading text…"
+            : extract.error
+              ? "Recheck extracted text"
+              : "Read extracted text"}
         </button>
+        <small>
+          Reads saved text without starting transcription or other paid
+          processing.
+        </small>
         <QueryState error={extract.error} />
         {file.usable && extract.isSuccess && extract.data && (
           <>

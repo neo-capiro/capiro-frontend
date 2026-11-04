@@ -23,6 +23,8 @@ import { DocumentState } from "./DocumentState";
 import { useLinkedFileArrival } from "./linked-arrival";
 import { MeriArtifactStarterDialog } from "./MeriArtifactStarterDialog";
 import styles from "./files.module.css";
+import { useFileFolders } from "./folders";
+import { CreateFolder } from "./CreateFolder";
 export function FilesPage({
   clientId,
   destinations,
@@ -33,6 +35,7 @@ export function FilesPage({
   linkedFileId?: string;
 }) {
   const query = useFiles(clientId);
+  const folderQuery = useFileFolders(clientId);
   const arrival = useLinkedFileArrival(clientId, linkedFileId, query);
   const client = useClient(clientId);
   const [filters, setFilters] = useState<{
@@ -72,11 +75,15 @@ export function FilesPage({
   const selected = checked?.view === query.readerScope ? checked.ids : [];
   const [requestedAction, setAction] = useState<{
     view: string;
-    kind: FileAction | "new-folder";
+    kind: FileAction;
     id: string;
     deleteFile?: Attachment;
   }>();
-  const [uploadView, setUploadView] = useState<string>();
+  const [uploadView, setUploadView] = useState<{
+    view: string;
+    folder: string | null;
+  }>();
+  const [creatingFolder, setCreatingFolder] = useState<string>();
   const [meriStarter, setMeriStarter] = useState(false);
   const [folderAccess, setFolderAccess] = useState<{
     view: string;
@@ -84,7 +91,7 @@ export function FilesPage({
     files: Attachment[];
     operation: "file-access" | "folder-access";
   }>();
-  const requestAction = (kind: FileAction | "new-folder", id: string) => {
+  const requestAction = (kind: FileAction, id: string) => {
     arrival.dismiss();
     if (kind === "access") {
       const file = query.data?.find((item) => item.id === id);
@@ -125,7 +132,12 @@ export function FilesPage({
       : undefined;
   const rows = filterFiles(files, search, folder, source, sort);
   const folders = [
-    ...new Set(files.flatMap((file) => (file.folder ? [file.folder] : []))),
+    ...new Set([
+      ...files.flatMap((file) => (file.folder ? [file.folder] : [])),
+      ...(folderQuery.isSuccess && !folderQuery.error
+        ? folderQuery.data.flatMap((row) => (row.folder ? [row.folder] : []))
+        : []),
+    ]),
   ].sort();
   const chosen = files.filter((f) => selected.includes(f.id));
   return (
@@ -135,11 +147,8 @@ export function FilesPage({
         <div className={`row ${styles.pageActions}`}>
           <button
             className="button"
-            disabled={chosen.length !== 1}
-            title="Select one file to create a shared folder label"
-            onClick={() => {
-              if (chosen[0]) requestAction("new-folder", chosen[0].id);
-            }}
+            disabled={!available}
+            onClick={() => setCreatingFolder(query.readerScope)}
           >
             New folder
           </button>
@@ -147,7 +156,10 @@ export function FilesPage({
             className="button"
             onClick={() => {
               arrival.dismiss();
-              setUploadView(query.readerScope);
+              setUploadView({
+                view: query.readerScope,
+                folder: folder || null,
+              });
             }}
             disabled={!available}
           >
@@ -260,6 +272,10 @@ export function FilesPage({
               Access
             </button>
           </header>
+          <QueryState
+            error={folderQuery.error}
+            retry={() => void folderQuery.refetch()}
+          />
           {available ? (
             <>
               <button
@@ -317,28 +333,34 @@ export function FilesPage({
                 </div>
                 <button
                   className="button"
-                  disabled={!available || Boolean(folder)}
-                  title={
-                    folder
-                      ? "Upload first, then move the saved file into this folder."
-                      : undefined
-                  }
+                  disabled={!available}
                   onClick={() => {
                     arrival.dismiss();
-                    setUploadView(query.readerScope);
+                    setUploadView({
+                      view: query.readerScope,
+                      folder: folder || null,
+                    });
                   }}
                 >
                   Upload here
                 </button>
               </header>
-              {folder && (
-                <p className={styles.folderHint}>
-                  Upload first, then use Move to folder. Uploads cannot be
-                  placed directly in a named folder.
-                </p>
-              )}
               {mode === "folders" ? (
-                <FolderCards files={rows} onOpen={setFolder} />
+                <FolderCards
+                  files={rows}
+                  folderNames={
+                    source
+                      ? []
+                      : folders.filter(
+                          (name) =>
+                            !search ||
+                            name
+                              .toLocaleLowerCase()
+                              .includes(search.toLocaleLowerCase()),
+                        )
+                  }
+                  onOpen={setFolder}
+                />
               ) : (
                 <>
                   <FileSelectionBar
@@ -400,18 +422,17 @@ export function FilesPage({
           onClose={() => setFolderAccess(undefined)}
         />
       )}
-      {(action?.kind === "move" || action?.kind === "new-folder") && (
+      {action?.kind === "move" && (
         <MoveFile
           clientId={clientId}
           file={action.file}
           folders={folders}
-          creating={action.kind === "new-folder"}
           onClose={close}
         />
       )}
       {batch?.view === query.readerScope && available && (
         <MoveFiles
-          key={query.readerScope}
+          key={`move:${query.readerScope}`}
           clientId={clientId}
           files={batch.files}
           currentFiles={files}
@@ -424,7 +445,7 @@ export function FilesPage({
         />
       )}
       <DeleteFile
-        key={query.readerScope}
+        key={`delete:${query.readerScope}`}
         clientId={clientId}
         file={
           requestedAction?.kind === "delete" &&
@@ -434,9 +455,22 @@ export function FilesPage({
         }
         onClose={close}
       />
-      {uploadView === query.readerScope && available && (
+      {creatingFolder === query.readerScope && (
+        <CreateFolder
+          key={`create-folder:${query.readerScope}`}
+          clientId={clientId}
+          onClose={() => setCreatingFolder(undefined)}
+          onCreated={(name) => {
+            setCreatingFolder(undefined);
+            setFolder(name);
+          }}
+        />
+      )}
+      {uploadView?.view === query.readerScope && available && (
         <UploadDialog
           clientId={clientId}
+          folder={uploadView.folder}
+          folderNames={folders}
           onClose={() => setUploadView(undefined)}
         />
       )}

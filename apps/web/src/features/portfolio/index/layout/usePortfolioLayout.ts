@@ -83,12 +83,11 @@ export function usePortfolioLayout(clientIds: readonly string[]) {
     queryKey: key,
     enabled: Boolean(actor),
     retry: false,
-    queryFn: async ({ signal }) => {
-      guard();
-      const receipt = await readPortfolioLayout(api, actor!, clientIds, signal);
-      guard();
-      return receipt;
-    },
+    // The read is authorized by Core and its receipt is actor-bound. A query
+    // may start before the effect installs the mutation lifetime; applying the
+    // write guard here incorrectly turned that initial read into a denial.
+    queryFn: ({ signal }) =>
+      readPortfolioLayout(api, actor!, clientIds, signal),
   });
   // Roster metadata is not a wall grant. The actor-bound GET owns the complete
   // current reorderable catalog; never append roster IDs omitted by its order.
@@ -259,11 +258,17 @@ export function usePortfolioLayout(clientIds: readonly string[]) {
     catalogKnown,
     orderedIds: query.data && !query.error ? catalogIds : [...clientIds],
     receipt: actor && !query.error ? query.data : undefined,
-    pending: identity.isPending || (Boolean(actor) && query.isPending),
+    pending:
+      identity.isPending ||
+      identity.isFetching ||
+      identityInvalidated ||
+      (Boolean(actor) && query.isPending),
     error: issue ?? identity.error ?? query.error,
     permissionDenied:
       Boolean(identity.data) &&
       !identity.error &&
+      !identity.isFetching &&
+      !identityInvalidated &&
       !["standard_user", "user_admin", "capiro_admin"].includes(
         identity.data?.role ?? "",
       ),

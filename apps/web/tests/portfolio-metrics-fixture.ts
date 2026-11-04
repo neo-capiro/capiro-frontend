@@ -3,6 +3,7 @@ export const portfolioTenantId = "30000000-0000-4000-8000-000000000001";
 export function portfolioMetricsFixture(now = Date.now()): PortfolioMetrics {
   return {
     definition: "portfolio-recorded-baseline-v1",
+    trackerBackend: "core",
     tenantId: portfolioTenantId,
     observedAt: new Date(now).toISOString(),
     activityWindow: {

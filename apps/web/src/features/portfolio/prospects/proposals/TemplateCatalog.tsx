@@ -28,7 +28,7 @@ export function TemplateCatalog({
     <Dialog
       open
       title="Workspace templates"
-      description="Browse templates from all Workspace products. Previewing a template does not generate or save a document."
+      description="Browse templates from all Workspace products. To select a published proposal blueprint, open prospect Workspace and choose a proposal template."
       onOpenChange={(open) => {
         if (!open) onClose();
       }}

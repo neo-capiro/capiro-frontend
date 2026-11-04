@@ -61,7 +61,7 @@ async function preview(page: Page) {
   await page.getByLabel("Proposal template", { exact: true }).click();
   await page
     .getByRole("option", {
-      name: "Synthetic policy brief · Capiro",
+      name: "Synthetic policy brief · Brief · Capiro · v3 draft",
       exact: true,
     })
     .click();
@@ -172,7 +172,7 @@ test("unavailable template content offers no adoption action and preview cannot 
   await page.getByLabel("Proposal template", { exact: true }).click();
   await page
     .getByRole("option", {
-      name: "Synthetic policy brief · Capiro",
+      name: "Synthetic policy brief · Brief · Capiro · v3 draft",
       exact: true,
     })
     .click();
@@ -182,5 +182,55 @@ test("unavailable template content offers no adoption action and preview cannot 
   await expect(
     page.getByRole("button", { name: /^Use template version/ }),
   ).toHaveCount(0);
+  expect(state.writes).toEqual([]);
+});
+
+test("untitled proposals use distinct readable names and preview the selected published version", async ({
+  page,
+}, info) => {
+  const state = await fixture(page);
+  const records = catalog().map((row, index) => ({
+    ...row,
+    name: "Untitled blueprint",
+    slug: index ? "federal-budget-consulting" : "defense-advocacy-retainer",
+    versions: index ? [] : [versions[1]!],
+  }));
+  await page.route("**/api/capiro/workspace.blueprints.list?*", (route) =>
+    route.fulfill({ json: records }),
+  );
+  await page.route("**/api/capiro/workspace.blueprints.detail?*", (route) =>
+    route.fulfill({
+      json: { ...blueprint, name: records[0]!.name, slug: records[0]!.slug },
+    }),
+  );
+  await page.goto(url);
+  await page.getByRole("button", { name: "Choose proposal template" }).click();
+  await page.getByLabel("Proposal template", { exact: true }).click();
+  await expect(
+    page.getByRole("option", {
+      name: "Federal budget consulting · Letters · Firm · No published version",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await page
+    .getByRole("option", {
+      name: "Defense advocacy retainer · Brief · Capiro · v2 published",
+      exact: true,
+    })
+    .click();
+  await page.getByLabel("Published template version", { exact: true }).click();
+  await page.getByRole("option", { name: "Version 2", exact: true }).click();
+  await expect(
+    page.getByRole("region", { name: "Saved blueprint sections" }),
+  ).toContainText("Executive summary");
+  await page.screenshot({
+    path: info.outputPath("proposal-template-readable-preview.png"),
+  });
+  await page
+    .getByRole("button", { name: "Use template version 2", exact: true })
+    .click();
+  await expect(
+    page.getByRole("region", { name: "Proposal template selection" }),
+  ).toContainText("Defense advocacy retainer · version 2");
   expect(state.writes).toEqual([]);
 });

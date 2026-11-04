@@ -44,11 +44,7 @@ function CompactFit({
       <div className={styles.fitCopy}>
         <p>Where capabilities create fit</p>
         <details className={styles.fitDetails}>
-          <summary>
-            {result
-              ? `${result.matches.length} fit ${result.matches.length === 1 ? "match" : "matches"} available`
-              : "Capability fit"}
-          </summary>
+          <summary>{fitHeading(result)}</summary>
           {result && (
             <div className={styles.fitExpanded}>
               <small>
@@ -139,9 +135,7 @@ function FullFit({
       <header className="row between">
         <div>
           <p className="eyebrow">Where capabilities create fit</p>
-          <h3>
-            {result ? `${result.matches.length} fit matches` : "Capability fit"}
-          </h3>
+          <h3>{fitHeading(result)}</h3>
         </div>
         <button
           className="button"
@@ -193,6 +187,7 @@ function FullFit({
 function FitCoverage({ result }: { result: z.infer<typeof fitSchema> }) {
   const labels = {
     ready: "Fit results available",
+    not_computed: "Not scored",
     empty: "No fit results",
     profile_too_thin: "More profile detail needed",
     stale: "Saved results may be outdated",
@@ -202,7 +197,13 @@ function FitCoverage({ result }: { result: z.infer<typeof fitSchema> }) {
   return (
     <div className="stack" aria-label="Fit coverage">
       {!(result.status === "empty" && result.emptyReason) && (
-        <p className="muted">{labels[result.status]}</p>
+        <p className="muted">
+          {!result.computedAt &&
+          result.matches.length === 0 &&
+          result.status === "empty"
+            ? "Not scored"
+            : labels[result.status]}
+        </p>
       )}
       {result.emptyReason && <p className="status">{result.emptyReason}</p>}
       {result.sources ? (
@@ -235,4 +236,11 @@ function FitCoverage({ result }: { result: z.infer<typeof fitSchema> }) {
       )}
     </div>
   );
+}
+
+function fitHeading(result: z.infer<typeof fitSchema> | undefined) {
+  if (!result) return "Capability fit";
+  if (result.status === "unavailable") return "Capability fit unavailable";
+  if (result.matches.length === 0 && !result.computedAt) return "Not scored";
+  return `${result.matches.length} fit ${result.matches.length === 1 ? "match" : "matches"} available`;
 }

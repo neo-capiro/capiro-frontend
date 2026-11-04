@@ -84,3 +84,20 @@ it("requires the approved 30-day UTC window and exposes staleness and clock skew
     portfolioMetricFreshness(portfolioMetricsFixture(now + 120001), now),
   ).toBe("stale");
 });
+
+it("requires the requested tracker source before admitting its counts", () => {
+  const fixture = portfolioMetricsFixture();
+  expect(
+    portfolioMetricsFor(portfolioTenantId, "intelligence").safeParse(fixture)
+      .success,
+  ).toBe(false);
+  expect(
+    portfolioMetricsFor(portfolioTenantId, "intelligence").parse({
+      ...fixture,
+      trackerBackend: "intelligence",
+    }).trackerBackend,
+  ).toBe("intelligence");
+  expect(
+    schema.safeParse({ ...fixture, trackerBackend: undefined }).success,
+  ).toBe(false);
+});

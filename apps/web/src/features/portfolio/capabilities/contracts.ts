@@ -30,6 +30,7 @@ export type CapabilityInput = z.infer<typeof capabilityInputSchema>;
 export const fitSchema = z.object({
   status: z.enum([
     "ready",
+    "not_computed",
     "empty",
     "profile_too_thin",
     "stale",

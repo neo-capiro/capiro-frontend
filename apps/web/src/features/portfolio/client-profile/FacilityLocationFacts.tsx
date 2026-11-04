@@ -29,7 +29,9 @@ export function FacilityLocationFacts({
     facility.city?.trim() &&
     facility.state?.trim(),
   );
+  const district = facilityDistrict(facility);
   const verifiedGeography =
+    Boolean(district) &&
     hasFullAddress &&
     facility.geocodeStatus === "matched" &&
     facility.districtSource === "geocoded";
@@ -85,7 +87,7 @@ export function FacilityLocationFacts({
             <div>
               <dt>House district</dt>
               <dd>
-                {facilityDistrict(facility) ?? "Not supplied"}
+                {district ?? "District unresolved"}
                 <small>
                   {verifiedGeography
                     ? "Resolved from the saved address; review source and boundary below."

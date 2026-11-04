@@ -18,6 +18,7 @@ export function PortfolioProfiles({
   filtered,
   owners,
   onRefreshCatalog,
+  returnTo,
 }: {
   catalog: Client[];
   customizing: boolean;
@@ -29,6 +30,7 @@ export function PortfolioProfiles({
   filtered: boolean;
   owners?: Record<string, { accountOwner: Member | null }>;
   onRefreshCatalog: () => void;
+  returnTo: string;
 }) {
   const currentCatalog = catalog.filter(
     (client) => client.status !== "archived",
@@ -87,6 +89,7 @@ export function PortfolioProfiles({
       {prospects.length > 0 && (
         <ProspectResults
           rows={prospects}
+          returnTo={returnTo}
           sort={state.sort}
           view={state.view}
           owners={prospectOwners}

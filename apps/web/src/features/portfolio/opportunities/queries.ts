@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { queryString } from "@/shared/portfolio/api/http";
+import { readOpportunitySource } from "./read";
 import { clientSearchSchema, programResponseSchema } from "./contracts";
 export function useMatchedOpportunities(
   clientId: string,
@@ -12,13 +13,16 @@ export function useMatchedOpportunities(
   return useQuery({
     queryKey: ["matched-opportunities", clientId, page, query],
     queryFn: ({ signal }) =>
-      api.request(
-        "core",
-        `intelligence/opportunities/v2/search?${queryString({ mode: "matched", clientId, page, pageSize: 20, sort: "deadline", direction: "asc", query, queryMatch: "keywords", lifecycle: "active" })}`,
-        clientSearchSchema(clientId, page),
-        { signal },
+      readOpportunitySource("Opportunities", signal, (boundedSignal) =>
+        api.request(
+          "core",
+          `intelligence/opportunities/v2/search?${queryString({ mode: "matched", clientId, page, pageSize: 20, sort: "deadline", direction: "asc", query, queryMatch: "keywords", lifecycle: "active" })}`,
+          clientSearchSchema(clientId, page),
+          { signal: boundedSignal },
+        ),
       ),
     enabled: !!clientId,
+    retry: false,
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
   });
@@ -28,16 +32,22 @@ export function useRelevantPrograms(clientId: string, page: number) {
   return useQuery({
     queryKey: ["client-program-relevance", clientId, page],
     queryFn: ({ signal }) =>
-      api.request(
-        "core",
-        `intelligence/clients/${encodeURIComponent(clientId)}/pe-relevance?${queryString({ page, limit: 20 })}`,
-        programResponseSchema.refine(
-          (result) => result.page === page,
-          "Program page mismatch",
-        ),
-        { signal },
+      readOpportunitySource(
+        "Relevant budget programs",
+        signal,
+        (boundedSignal) =>
+          api.request(
+            "core",
+            `intelligence/clients/${encodeURIComponent(clientId)}/pe-relevance?${queryString({ page, limit: 20 })}`,
+            programResponseSchema.refine(
+              (result) => result.page === page,
+              "Program page mismatch",
+            ),
+            { signal: boundedSignal },
+          ),
       ),
     enabled: !!clientId,
+    retry: false,
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
   });
