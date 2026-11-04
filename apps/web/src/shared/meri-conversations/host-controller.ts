@@ -26,6 +26,10 @@ export class ConversationHostController extends SessionLifetimeController<
     origin?: string;
     onBound?: (context: ConversationContext) => void;
     retryDelaysMs?: readonly number[];
+    openingCapture?: {
+      start: (hints: ConversationSessionHints, signal: AbortSignal) => void;
+      admitted: (receipt: ConversationSessionReceipt) => void;
+    };
     /**
      * This host reopens a binding the tab already holds. Canonical issuance may answer a conversation
      * with a correlated successor, which is legitimate for a new opening but never for a recovery: the
@@ -40,8 +44,16 @@ export class ConversationHostController extends SessionLifetimeController<
     const recoveredRunId = options.recovery === true ? hints.runId : undefined;
     const { fetcher, now, origin, onBound, retryDelaysMs } = options;
     super({
-      issue: (signal) =>
-        bootstrapConversationSession(hints, account, signal, fetcher, now),
+      issue: (signal) => {
+        options.openingCapture?.start(hints, signal);
+        return bootstrapConversationSession(
+          hints,
+          account,
+          signal,
+          fetcher,
+          now,
+        );
+      },
       fetcher,
       now,
       ...(retryDelaysMs ? { retryDelaysMs } : {}),
@@ -91,6 +103,7 @@ export class ConversationHostController extends SessionLifetimeController<
           port.dispose();
           throw cause;
         }
+        options.openingCapture?.admitted(session);
         return port;
       },
     });
