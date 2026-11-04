@@ -23,7 +23,7 @@ test("Engagement opens directly to Outreach with no obsolete sections or meeting
     page.getByRole("heading", { name: "Saved outreach records" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "+ New outreach" }).first(),
+    page.getByRole("button", { name: "New outreach", exact: true }).first(),
   ).toBeVisible();
   await expect(
     page.getByRole("tablist", { name: "Campaign categories" }),
@@ -243,6 +243,7 @@ test("Show deleted requests deleted-only rows and never opens a deleted draft", 
   await expect(
     page.getByRole("button", { name: `Open draft: ${record.title}` }),
   ).toBeVisible();
+  await page.getByText("More filters", { exact: true }).click();
   await page.getByRole("checkbox", { name: "Deleted only" }).check();
   await expect.poll(() => inputs.at(-1)?.query.deleted).toBe("true");
   await expect(
@@ -287,7 +288,7 @@ test("client scope does not fetch or show owner-only campaign sessions", async (
   ).toBeVisible();
   await expect(page.getByText("Synthetic owner campaign")).toHaveCount(0);
   await expect(
-    page.getByRole("table", { name: "Outreach campaigns" }),
+    page.getByRole("list", { name: "Outreach campaigns" }),
   ).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: "+ New campaign" }),

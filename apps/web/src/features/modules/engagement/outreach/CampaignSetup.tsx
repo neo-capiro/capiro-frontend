@@ -25,99 +25,57 @@ export function CampaignDirection({
   disabled,
   clients,
   fixedClient = false,
-  onStart,
 }: Props & {
   clients: readonly { id: string; name: string }[];
   fixedClient?: boolean;
-  onStart?: () => void;
 }) {
   return (
     <>
-      <div className={styles.directionIntro}>
-        <div>
-          <span className={styles.eyebrow}>New outreach campaign</span>
-          <h2>Reach the right people with the right message.</h2>
-          <p>
-            Choose your recipients, add context, and review each draft before
-            sending.
-          </p>
-          {onStart && (
-            <ActionButton primary disabled={disabled} onClick={onStart}>
-              Create your outreach →
-            </ActionButton>
-          )}
-        </div>
-        <ul className={styles.audienceGuide} aria-label="Recipient options">
-          <li>
-            <strong>Individual</strong>
-            <span>One personalized email per contact</span>
-          </li>
-          <li>
-            <strong>List</strong>
-            <span>Saved contacts, each emailed individually</span>
-          </li>
-          <li>
-            <strong>Group</strong>
-            <span>All contacts receive one shared email</span>
-          </li>
-        </ul>
-      </div>
-      <Panel
-        title="Mix and match in a single campaign"
-        description="Add individual contacts, apply a saved list, and create a group in the same outreach."
-      >
-        <div className={styles.recipientExplainers}>
-          <div>
-            <h3>Individual</h3>
-            <p>Write a personalized message for each contact you add.</p>
-          </div>
-          <div>
-            <h3>List</h3>
-            <p>
-              Reuse a saved list and prepare a separate message for each
-              recipient.
-            </p>
-          </div>
-          <div>
-            <h3>Group</h3>
-            <p>
-              Keep contacts together on one shared message, with its own To, Cc
-              and Bcc.
-            </p>
-          </div>
-        </div>
-      </Panel>
-      <Panel
-        title="Who is this outreach for?"
-        description="Choose the direction and the client context for this campaign."
-      >
+      <Panel title="Who is this outreach for?">
         <div className={styles.fields}>
           <div
-            className={styles.actions}
+            className={styles.directionChoices}
             role="group"
             aria-label="Outreach direction"
           >
             <ActionButton
               disabled={disabled}
-              primary={state.direction === "on-behalf"}
+              className={styles.directionChoice}
               aria-pressed={state.direction === "on-behalf"}
               onClick={() => update({ direction: "on-behalf" })}
             >
-              On behalf of a client
+              <span className={styles.directionTitle}>
+                <span className={styles.directionPortrait} aria-hidden="true" />
+                <strong>On behalf of a client</strong>
+              </span>
+              <span>
+                Reach offices, partners, or other contacts for a client or your
+                firm.
+              </span>
             </ActionButton>
             <ActionButton
               disabled={disabled}
-              primary={state.direction === "to-clients"}
+              className={styles.directionChoice}
               aria-pressed={state.direction === "to-clients"}
               onClick={() => update({ direction: "to-clients" })}
             >
-              To clients
+              <span className={styles.directionTitle}>
+                <span className={styles.directionGroup} aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                </span>
+                <strong>To clients</strong>
+              </span>
+              <span>
+                Send updates and communications directly to your clients.
+              </span>
             </ActionButton>
           </div>
           <Field
             label="Client context"
             htmlFor="outreach-client"
-            description="Only information you are allowed to access is available to this campaign."
+            description="Choose My firm / no client for firm-level outreach."
           >
             <SelectInput
               id="outreach-client"
@@ -135,6 +93,30 @@ export function CampaignDirection({
           </Field>
         </div>
       </Panel>
+      <section className={styles.recipientGuide}>
+        <h3>Choose recipients in the next steps</h3>
+        <ul
+          className={styles.recipientExplainers}
+          aria-label="Recipient options"
+        >
+          <li>
+            <strong>Individual</strong>
+            <span>One email per contact.</span>
+          </li>
+          <li>
+            <strong>List</strong>
+            <span>A saved audience, with separate emails.</span>
+          </li>
+          <li>
+            <strong>Group</strong>
+            <span>One shared email with To, Cc and Bcc.</span>
+          </li>
+        </ul>
+        <p className={styles.hint}>
+          You can mix individuals, lists and groups in one campaign. Review each
+          draft before sending.
+        </p>
+      </section>
     </>
   );
 }
@@ -150,12 +132,13 @@ export function CampaignSetup({
   onTemplatesReload?: () => void;
 }) {
   return (
-    <Panel
-      title="Name your campaign"
-      description="A working name for this outreach, never shown to recipients."
-    >
+    <Panel>
       <div className={styles.fields}>
-        <Field label="Campaign name" htmlFor="outreach-name">
+        <Field
+          label="Campaign name"
+          htmlFor="outreach-name"
+          description="Internal name · recipients will not see this."
+        >
           <TextInput
             id="outreach-name"
             maxLength={240}
@@ -214,9 +197,13 @@ export function CampaignContextPlan({ state, update, disabled }: Props) {
   return (
     <Panel
       title="What should this campaign accomplish?"
-      description="Keep the main idea separate from the facts and recipient-specific notes you add next."
+      description="Tell us the main idea and what you want recipients to do."
     >
-      <Field label="Main idea" htmlFor="outreach-main-idea">
+      <Field
+        label="Main idea"
+        htmlFor="outreach-main-idea"
+        description="Include your purpose, the ask, and why now."
+      >
         <TextArea
           id="outreach-main-idea"
           maxLength={8000}
@@ -226,6 +213,30 @@ export function CampaignContextPlan({ state, update, disabled }: Props) {
           onChange={(event) => update({ mainIdea: event.target.value })}
         />
       </Field>
+      <ul
+        className={styles.recipientExplainers}
+        aria-label="Campaign planning guidance"
+      >
+        <li>
+          <strong>Purpose</strong>
+          <span>What do you want to discuss?</span>
+        </li>
+        <li>
+          <strong>Ask</strong>
+          <span>What should the recipient do?</span>
+        </li>
+        <li>
+          <strong>Timing</strong>
+          <span>Why is this relevant now?</span>
+        </li>
+      </ul>
+      <div className={styles.contextHint}>
+        <strong>Add facts in the next step</strong>
+        <p>
+          Supporting documents, bills, and past emails belong in Context
+          builder. Personal notes can be added to recipients.
+        </p>
+      </div>
     </Panel>
   );
 }

@@ -66,7 +66,7 @@ export function CampaignTemplates({
   return (
     <>
       <fieldset className={styles.templateGallery} disabled={disabled}>
-        <legend>Choose a template</legend>
+        <legend>Choose a starting point</legend>
         <p className={styles.hint}>
           Preview a saved example or create your own instructions.
         </p>
@@ -78,6 +78,11 @@ export function CampaignTemplates({
               checked={!selectedId}
               onChange={() => onSelect(null)}
             />
+            <span className={styles.templateIllustration} aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </span>
             <span>
               <strong>Start from scratch</strong>
               <span>Use your own campaign context.</span>
@@ -93,6 +98,14 @@ export function CampaignTemplates({
                   checked={selectedId === template.id}
                   onChange={() => onSelect(template.id)}
                 />
+                <span
+                  className={styles.templateIllustration}
+                  aria-hidden="true"
+                >
+                  <i />
+                  <i />
+                  <i />
+                </span>
                 <span>
                   <strong>{template.name}</strong>
                   {template.description && <span>{template.description}</span>}

@@ -105,7 +105,9 @@ for (const width of [1440, 390])
     ] as const) {
       await page.goto(`/modules/engagement?session=${recordId}&step=${step}`);
       await expect(
-        page.getByRole("navigation", { name: "Outreach steps" }),
+        width === 390
+          ? page.getByRole("combobox", { name: "Outreach step", exact: true })
+          : page.getByRole("navigation", { name: "Outreach steps" }),
       ).toBeVisible();
       await expect(page.locator('[aria-current="step"]')).toHaveCount(1);
       if (step === 7)

@@ -184,103 +184,7 @@ export function CampaignContext({
           ? programs.data?.total
           : undefined;
   return (
-    <div className={styles.grid}>
-      <Panel
-        title="Selected context"
-        description="Facts and writing instructions stay distinct. Choose who each item applies to."
-      >
-        <div className={styles.fields}>
-          {!state.contextItems.length && !state.contextSelections?.length && (
-            <p className={styles.hint}>
-              No sources selected. Add supporting information or a personal
-              note.
-            </p>
-          )}
-          {!!state.contextSelections?.length && (
-            <p className={styles.hint}>
-              {state.contextSelections.length} sources imported with this
-              campaign are retained and checked again before generation.
-            </p>
-          )}
-          {state.contextItems.map((item, index) => (
-            <div
-              key={`${item.kind}:${item.id}:${index}`}
-              className={styles.selected}
-            >
-              <strong>
-                {item.kind === "note"
-                  ? item.noteUse === "instruction"
-                    ? "Writing instruction"
-                    : "Custom fact"
-                  : (sourceTitles[`${item.kind}:${item.id}`] ??
-                    sources.find((row) => row.id === item.id)?.title ??
-                    item.kind.replace(/([A-Z])/g, " $1"))}
-              </strong>
-              {item.customNoteText && (
-                <p className={styles.previewText}>{item.customNoteText}</p>
-              )}
-              <Field label="Applies to" htmlFor={`context-scope-${index}`}>
-                <SelectInput
-                  id={`context-scope-${index}`}
-                  value={item.scope}
-                  disabled={disabled}
-                  options={
-                    scopes.some((row) => row.value === item.scope)
-                      ? scopes
-                      : [
-                          ...scopes,
-                          {
-                            value: item.scope,
-                            label: "Previously selected recipient",
-                          },
-                        ]
-                  }
-                  onValueChange={(value) =>
-                    update({
-                      contextItems: state.contextItems.map((row, i) =>
-                        i === index ? { ...row, scope: value } : row,
-                      ),
-                    })
-                  }
-                />
-              </Field>
-              <Field
-                label="How to use this source"
-                htmlFor={`context-guidance-${index}`}
-              >
-                <TextArea
-                  id={`context-guidance-${index}`}
-                  rows={2}
-                  maxLength={2000}
-                  disabled={disabled}
-                  value={item.userInstruction ?? ""}
-                  onChange={(event) =>
-                    update({
-                      contextItems: state.contextItems.map((row, i) =>
-                        i === index
-                          ? { ...row, userInstruction: event.target.value }
-                          : row,
-                      ),
-                    })
-                  }
-                />
-              </Field>
-              <ActionButton
-                disabled={disabled}
-                onClick={() =>
-                  update({
-                    contextItems: state.contextItems.filter(
-                      (_, i) => i !== index,
-                    ),
-                  })
-                }
-              >
-                Remove source
-              </ActionButton>
-            </div>
-          ))}
-        </div>
-      </Panel>
+    <div className={styles.selectionGrid}>
       <Panel
         title="Context library"
         description="Select saved sources and add personal or shared notes."
@@ -432,6 +336,102 @@ export function CampaignContext({
               )}
             </>
           )}
+        </div>
+      </Panel>
+      <Panel
+        title="Selected context"
+        description="Facts and writing instructions stay distinct. Choose who each item applies to."
+      >
+        <div className={styles.fields}>
+          {!state.contextItems.length && !state.contextSelections?.length && (
+            <p className={styles.hint}>
+              No sources selected. Add supporting information or a personal
+              note.
+            </p>
+          )}
+          {!!state.contextSelections?.length && (
+            <p className={styles.hint}>
+              {state.contextSelections.length} sources imported with this
+              campaign are retained and checked again before generation.
+            </p>
+          )}
+          {state.contextItems.map((item, index) => (
+            <div
+              key={`${item.kind}:${item.id}:${index}`}
+              className={styles.selected}
+            >
+              <strong>
+                {item.kind === "note"
+                  ? item.noteUse === "instruction"
+                    ? "Writing instruction"
+                    : "Custom fact"
+                  : (sourceTitles[`${item.kind}:${item.id}`] ??
+                    sources.find((row) => row.id === item.id)?.title ??
+                    item.kind.replace(/([A-Z])/g, " $1"))}
+              </strong>
+              {item.customNoteText && (
+                <p className={styles.previewText}>{item.customNoteText}</p>
+              )}
+              <Field label="Applies to" htmlFor={`context-scope-${index}`}>
+                <SelectInput
+                  id={`context-scope-${index}`}
+                  value={item.scope}
+                  disabled={disabled}
+                  options={
+                    scopes.some((row) => row.value === item.scope)
+                      ? scopes
+                      : [
+                          ...scopes,
+                          {
+                            value: item.scope,
+                            label: "Previously selected recipient",
+                          },
+                        ]
+                  }
+                  onValueChange={(value) =>
+                    update({
+                      contextItems: state.contextItems.map((row, i) =>
+                        i === index ? { ...row, scope: value } : row,
+                      ),
+                    })
+                  }
+                />
+              </Field>
+              <Field
+                label="How to use this source"
+                htmlFor={`context-guidance-${index}`}
+              >
+                <TextArea
+                  id={`context-guidance-${index}`}
+                  rows={2}
+                  maxLength={2000}
+                  disabled={disabled}
+                  value={item.userInstruction ?? ""}
+                  onChange={(event) =>
+                    update({
+                      contextItems: state.contextItems.map((row, i) =>
+                        i === index
+                          ? { ...row, userInstruction: event.target.value }
+                          : row,
+                      ),
+                    })
+                  }
+                />
+              </Field>
+              <ActionButton
+                disabled={disabled}
+                onClick={() =>
+                  update({
+                    contextItems: state.contextItems.filter(
+                      (_, i) => i !== index,
+                    ),
+                  })
+                }
+              >
+                Remove source
+              </ActionButton>
+            </div>
+          ))}
         </div>
       </Panel>
     </div>

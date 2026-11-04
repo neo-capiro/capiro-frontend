@@ -57,10 +57,10 @@ const props = {
   onCampaign: vi.fn(),
   onRecord: vi.fn(),
 };
-function render(clientId = "") {
+function render(clientId = "", scopeControl?: ReactNode) {
   driver.index = 0;
   driver.calls = [];
-  const tree = OutreachList({ ...props, clientId });
+  const tree = OutreachList({ ...props, clientId, scopeControl });
   return { tree, markup: renderToStaticMarkup(tree) };
 }
 function find(
@@ -95,7 +95,7 @@ beforeEach(() => {
   driver.results = {};
 });
 
-it("groups dates, audience and creation above categories while preserving search and scope controls", () => {
+it("keeps date and audience filters above categories and creation in the Outreach heading", () => {
   const { tree, markup } = render();
   const filters = find(
     tree,
@@ -110,15 +110,49 @@ it("groups dates, audience and creation above categories while preserving search
     find(controls, (_props, type) => type === OutreachAudienceFilter),
   ).toBeDefined();
   const create = find(
-    controls,
-    (candidate) => candidate.onClick === props.onCreate,
+    tree,
+    (candidate) => candidate.onCreate === props.onCreate,
   );
-  (create.onClick as () => void)();
+  (create.onCreate as () => void)();
   expect(props.onCreate).toHaveBeenCalled();
   expect(markup.indexOf('aria-label="Outreach filters"')).toBeLessThan(
     markup.indexOf('aria-label="Campaign categories"'),
   );
   expect(markup).toContain('aria-label="Search outreach"');
+});
+
+it("keeps the client selector and query contracts in the Figma Outreach toolbar", () => {
+  const scope = createElement(
+    "select",
+    { "aria-label": "Engagement client scope" },
+    createElement("option", {}, "Synthetic client"),
+  );
+  const { markup } = render("synthetic-client", scope);
+  expect(markup).toContain("<h1>Outreach</h1>");
+  expect(markup.indexOf('aria-label="Outreach filters"')).toBeLessThan(
+    markup.indexOf('aria-label="Engagement client scope"'),
+  );
+  expect(markup.indexOf('aria-label="Engagement client scope"')).toBeLessThan(
+    markup.indexOf('aria-label="Campaign categories"'),
+  );
+  expect(markup).toContain("More filters");
+  expect(markup).not.toContain('aria-label="Engagement destinations"');
+  expect(driver.calls.map((call) => call.key)).toEqual([
+    "engagement.outreach.records",
+    "engagement.campaigns",
+    "engagement.sessions",
+  ]);
+});
+
+it("retains the unsupported audience notice once outside its compact group with accessible linkage", () => {
+  driver.version = undefined;
+  const { markup } = render();
+  expect(markup).toContain('aria-describedby="outreach-audience-availability"');
+  expect(markup).toContain('id="outreach-audience-availability"');
+  expect(markup.match(/awaiting the Core update/g)).toHaveLength(1);
+  expect(markup.match(/disabled=""/g)).toHaveLength(2);
+  expect(markup).toContain('aria-label="Search outreach"');
+  expect(markup).toContain('aria-label="Campaign categories"');
 });
 
 it("All preserves existing sources and omits the selector; Client and External send both canonical selectors", () => {

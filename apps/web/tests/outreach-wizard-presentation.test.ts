@@ -52,7 +52,7 @@ function rail(tree: ReactNode) {
 }
 
 describe("existing workflow with an ordered rail and progress footer", () => {
-  it("keeps exit, back, save, progress and continuation in the Classic footer order", () => {
+  it("keeps exit in the heading and back, save, progress and continuation in the workbench footer", () => {
     const onExit = vi.fn(),
       onSave = vi.fn(),
       onStep = vi.fn();
@@ -63,12 +63,18 @@ describe("existing workflow with an ordered rail and progress footer", () => {
       (element) => typeof element.props.onClick === "function",
     );
     expect(controls.map((element) => element.props.children)).toEqual([
-      "All outreach",
       "Back",
       "Save draft",
       "Continue",
     ]);
     for (const control of controls) (control.props.onClick as () => void)();
+    const tree = frame({ onExit });
+    const header = elements(tree).find((element) => element.props.actions);
+    const exit = elements(header?.props.actions as ReactNode).find(
+      (element) => element.props.onClick === onExit,
+    );
+    expect(exit?.props.disabled).toBe(false);
+    (exit?.props.onClick as () => void)();
     expect(onExit).toHaveBeenCalledOnce();
     expect(onSave).toHaveBeenCalledOnce();
     expect(onStep.mock.calls).toEqual([[1], [3]]);
@@ -134,6 +140,35 @@ describe("existing workflow with an ordered rail and progress footer", () => {
       ).toBe(true);
     },
   );
+  it.each([
+    {},
+    { busy: true },
+    { fenced: true },
+    { readOnly: true },
+    { nextDisabled: "Name your campaign." },
+    { step: 6 as const },
+  ])(
+    "keeps mobile navigation aligned with desktop admission: %j",
+    (overrides) => {
+      const onStep = vi.fn();
+      const tree = frame({ ...overrides, onStep });
+      const mobile = elements(tree).find(
+        (element) => element.props["aria-label"] === "Outreach step",
+      );
+      expect(mobile).toBeDefined();
+      const options = mobile!.props.options as {
+        value: string;
+        disabled: boolean;
+      }[];
+      expect(
+        options.map((option) =>
+          Boolean(mobile!.props.disabled || option.disabled),
+        ),
+      ).toEqual(rail(tree).map((item) => Boolean(item.props.disabled)));
+      (mobile!.props.onValueChange as (value: string) => void)("3");
+      expect(onStep).toHaveBeenCalledExactlyOnceWith(3);
+    },
+  );
   it("does not admit forward navigation when the owner reports missing required input", () => {
     const steps = rail(frame({ nextDisabled: "Name your campaign." }));
     expect(steps.map((step) => Boolean(step.props.disabled))).toEqual([
@@ -170,23 +205,15 @@ describe("existing workflow with an ordered rail and progress footer", () => {
 });
 
 describe("Direction and template gallery preserve existing input contracts", () => {
-  it("starts from the introductory call to action without changing the campaign inputs", () => {
-    const onStart = vi.fn(),
-      update = vi.fn();
-    const tree = CampaignDirection({
-      state: newCampaign(),
-      update,
-      disabled: false,
-      clients: [],
-      onStart,
-    });
-    const start = elements(tree).find(
-      (element) => element.props.onClick === onStart,
+  it("continues from Direction through the existing footer callback without changing inputs", () => {
+    const onStep = vi.fn();
+    const tree = frame({ step: 1, onStep });
+    const next = elements(tree).find(
+      (element) => element.props.children === "Continue",
     );
-    expect(start?.props.disabled).toBe(false);
-    (start?.props.onClick as () => void)();
-    expect(onStart).toHaveBeenCalledOnce();
-    expect(update).not.toHaveBeenCalled();
+    expect(next?.props.disabled).toBe(false);
+    (next?.props.onClick as () => void)();
+    expect(onStep).toHaveBeenCalledExactlyOnceWith(2);
   });
   it("explains three recipient modes without promising automatic sending", () => {
     const markup = renderToStaticMarkup(
@@ -202,7 +229,7 @@ describe("Direction and template gallery preserve existing input contracts", () 
       "Individual",
       "List",
       "Group",
-      "review each draft before sending",
+      "Review each draft before sending",
       "Client context",
       "To clients",
     ])

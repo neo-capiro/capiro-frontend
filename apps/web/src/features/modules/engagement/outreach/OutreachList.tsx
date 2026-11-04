@@ -4,7 +4,6 @@ import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import { useCapiroCapabilities } from "../../../../shared/capiro/capabilities";
 import {
   ActionButton,
-  PageHeader,
   StatusPanel,
   Tabs,
   TextInput,
@@ -21,7 +20,11 @@ import {
   type CampaignListRow,
 } from "./outreach-list-model";
 import styles from "./outreach-overview.module.css";
-import { OutreachAudienceFilter } from "./OutreachAudienceFilter";
+import {
+  OutreachAudienceFilter,
+  OutreachAudienceNotice,
+} from "./OutreachAudienceFilter";
+import { OutreachListHeader } from "./OutreachListHeader";
 import {
   audienceSelection,
   type OutreachAudience,
@@ -195,88 +198,109 @@ export function OutreachList({
   };
   return (
     <section className={styles.screen} aria-label="Outreach">
-      <PageHeader
-        title="Outreach"
-        description="Plan campaigns and review recorded outreach across your permitted clients."
-      />
+      <OutreachListHeader onCreate={onCreate} />
       <section className={styles.filterCard} aria-label="Outreach filters">
         <div className={styles.filters}>
-          <span className={styles.hint}>Date range</span>
-          <label className={styles.dateFilter}>
-            <span>From · {from || "Any date"}</span>
-            <input
-              type="date"
-              aria-label="From"
-              value={from}
+          <label className={styles.searchFilter}>
+            <span>Search</span>
+            <TextInput
+              type="search"
+              aria-label="Search outreach"
+              placeholder="Search campaigns…"
+              value={search}
+              maxLength={160}
               onChange={(event) => {
-                setFrom(event.target.value);
-                setCursor(undefined);
-                setRecordCursor(undefined);
-              }}
-            />
-          </label>
-          <label className={styles.dateFilter}>
-            <span>To · {to || "Any date"}</span>
-            <input
-              type="date"
-              aria-label="To"
-              value={to}
-              onChange={(event) => {
-                setTo(event.target.value);
-                setCursor(undefined);
-                setRecordCursor(undefined);
-              }}
-            />
-          </label>
-          <label className={styles.deleted}>
-            <input
-              type="checkbox"
-              aria-label="Deleted only"
-              checked={deleted}
-              onChange={(event) => {
-                setDeleted(event.target.checked);
-                setCursor(undefined);
-                setRecordCursor(undefined);
-              }}
-            />
-            Deleted only
-          </label>
-          <div className={styles.filterActions}>
-            <OutreachAudienceFilter
-              value={audience}
-              supported={capabilities.outreachAudienceVersion === 1}
-              onChange={(value) => {
-                setAudience(value);
+                setSearch(event.target.value);
                 setCursor(undefined);
                 setRecordCursor(undefined);
                 setSessionOffset(0);
               }}
             />
-            <ActionButton primary onClick={onCreate}>
-              + New outreach
-            </ActionButton>
+          </label>
+          {scopeControl && (
+            <div className={styles.scopePicker}>
+              <span>Client</span>
+              {scopeControl}
+            </div>
+          )}
+          <div className={styles.dateRange}>
+            <span>Date range</span>
+            <details className={styles.filterDisclosure}>
+              <summary>
+                {from || to
+                  ? `${from || "Any date"} – ${to || "Any date"}`
+                  : "Any date"}
+              </summary>
+              <div className={styles.filterPopover}>
+                <label className={styles.dateFilter}>
+                  <span>From · {from || "Any date"}</span>
+                  <input
+                    type="date"
+                    aria-label="From"
+                    value={from}
+                    onChange={(event) => {
+                      setFrom(event.target.value);
+                      setCursor(undefined);
+                      setRecordCursor(undefined);
+                    }}
+                  />
+                </label>
+                <label className={styles.dateFilter}>
+                  <span>To · {to || "Any date"}</span>
+                  <input
+                    type="date"
+                    aria-label="To"
+                    value={to}
+                    onChange={(event) => {
+                      setTo(event.target.value);
+                      setCursor(undefined);
+                      setRecordCursor(undefined);
+                    }}
+                  />
+                </label>
+              </div>
+            </details>
           </div>
-        </div>
-        <div className={styles.filters}>
-          <TextInput
-            type="search"
-            aria-label="Search outreach"
-            placeholder="Search outreach records"
-            value={search}
-            maxLength={160}
-            onChange={(event) => {
-              setSearch(event.target.value);
-              setCursor(undefined);
-              setRecordCursor(undefined);
-              setSessionOffset(0);
-            }}
-          />
-          {scopeControl}
+          <details className={styles.moreFilters}>
+            <summary>More filters</summary>
+            <div className={styles.filterPopover}>
+              <OutreachAudienceFilter
+                noticeId="outreach-audience-availability"
+                value={audience}
+                supported={capabilities.outreachAudienceVersion === 1}
+                onChange={(value) => {
+                  setAudience(value);
+                  setCursor(undefined);
+                  setRecordCursor(undefined);
+                  setSessionOffset(0);
+                }}
+              />
+
+              <label className={styles.deleted}>
+                <input
+                  type="checkbox"
+                  aria-label="Deleted only"
+                  checked={deleted}
+                  onChange={(event) => {
+                    setDeleted(event.target.checked);
+                    setCursor(undefined);
+                    setRecordCursor(undefined);
+                  }}
+                />
+                Deleted only
+              </label>
+
+              <ActionButton onClick={clear}>Clear filters</ActionButton>
+            </div>
+          </details>
         </div>
         <p className={styles.hint}>
           Audience applies to saved outreach records and canonical campaigns.
           Counts show this loaded page, not population totals.
         </p>
+        {capabilities.outreachAudienceVersion !== 1 ? (
+          <OutreachAudienceNotice id="outreach-audience-availability" />
+        ) : null}
       </section>
       <Tabs
         label="Campaign categories"
@@ -297,7 +321,10 @@ export function OutreachList({
       {!canonicalLoading && !canonicalError && (
         <>
           {!selection.sessionsInScope && (
-            <div className={styles.card} role="status">
+            <div
+              className={`${styles.card} ${styles.capabilityNotice}`}
+              role="status"
+            >
               <h2>Campaign sessions are outside this audience filter</h2>
               <p className={styles.hint}>
                 The separate session source does not support audience filtering.
@@ -316,7 +343,10 @@ export function OutreachList({
             </div>
           )}
           {!sessionsSupported && (
-            <div className={styles.card} role="status">
+            <div
+              className={`${styles.card} ${styles.capabilityNotice}`}
+              role="status"
+            >
               <h2>Campaign sessions are not available</h2>
               <p className={styles.hint}>
                 This workspace is not configured for campaign sessions, so no
@@ -327,7 +357,11 @@ export function OutreachList({
             </div>
           )}
           {sessionsSupported && sessionsUnavailable && (
-            <div className={styles.card} role="status" aria-live="polite">
+            <div
+              className={`${styles.card} ${styles.capabilityNotice}`}
+              role="status"
+              aria-live="polite"
+            >
               <h2>
                 Campaign sessions are{" "}
                 {sessionsLoading ? "loading" : "unavailable"}
@@ -346,10 +380,19 @@ export function OutreachList({
           )}
           {!deleted && (
             <section
-              className={styles.card}
+              className={styles.campaignSection}
               aria-labelledby="campaign-list-heading"
             >
-              <h2 id="campaign-list-heading">{categoryLabels[category]}</h2>
+              <h2 id="campaign-list-heading" className={styles.visuallyHidden}>
+                {categoryLabels[category]}
+              </h2>
+              <div className={styles.campaignNotice}>
+                <strong>Continue where you left off</strong>
+                <p>
+                  Campaign progress and delivery status are shown separately.
+                  Drafts are never sent automatically.
+                </p>
+              </div>
               <CampaignRows
                 rows={allCampaigns.filter((row) => row.category === category)}
                 onOpen={(row) =>
@@ -510,53 +553,55 @@ function CampaignRows({
 }) {
   if (!rows.length) return null;
   return (
-    <table className={styles.table}>
-      <caption className="sr-only">Outreach campaigns</caption>
-      <thead>
-        <tr>
-          <th>Campaign</th>
-          <th>Targets</th>
-          <th>Recorded send</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => (
-          <tr key={row.id}>
-            <td>
-              <div className={styles.identity}>
-                <button className={styles.name} onClick={() => onOpen(row)}>
-                  {row.title}
-                </button>
+    <ul className={styles.campaignCards} aria-label="Outreach campaigns">
+      {rows.map((row) => (
+        <li className={styles.campaignCard} key={row.id}>
+          <div className={styles.identity}>
+            <button className={styles.name} onClick={() => onOpen(row)}>
+              {row.title}
+            </button>
+            <span className={styles.subtitle}>
+              {row.clientName ? `${row.clientName} · ` : ""}
+              {row.targets} targets
+            </span>
+          </div>
+          <div className={styles.campaignProgress}>
+            <strong>Workflow {row.workflow}</strong>
+            {row.lastStep && (
+              <>
+                <div className={styles.progressSegments} aria-hidden="true">
+                  {[1, 2, 3, 4, 5, 6, 7].map((step) => (
+                    <span
+                      key={step}
+                      data-complete={step <= row.lastStep! || undefined}
+                    />
+                  ))}
+                </div>
                 <span className={styles.subtitle}>
-                  {row.goal ? `${row.goal} · ` : ""}Workflow {row.workflow}
+                  Step {row.lastStep} of 7
                 </span>
-              </div>
-            </td>
-            <td data-label="Targets">{row.targets}</td>
-            <td data-label="Recorded send">
-              <span
-                className={`${styles.status} ${row.category === "attention" ? styles.attention : row.category === "sent" ? styles.sent : ""}`}
-              >
-                {row.category === "sent"
-                  ? "Sent"
-                  : readableStatus(row.recordedSend)}
-              </span>
-            </td>
-            <td>
-              <ActionButton onClick={() => onOpen(row)}>
-                {row.category === "drafts"
-                  ? row.opens === "record"
-                    ? "Open draft"
-                    : "Open campaign"
-                  : row.category === "sent"
-                    ? "View sent record"
-                    : "Review status"}
-              </ActionButton>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+              </>
+            )}
+            {row.goal && <span className={styles.subtitle}>{row.goal}</span>}
+          </div>
+          <span
+            className={`${styles.status} ${row.category === "attention" ? styles.attention : row.category === "sent" ? styles.sent : ""}`}
+          >
+            {row.category === "sent"
+              ? "Sent"
+              : readableStatus(row.recordedSend)}
+          </span>
+          <ActionButton onClick={() => onOpen(row)}>
+            {row.category === "drafts"
+              ? row.opens === "record"
+                ? "Open draft"
+                : "Open campaign"
+              : row.category === "sent"
+                ? "View sent record"
+                : "Review status"}
+          </ActionButton>
+        </li>
+      ))}
+    </ul>
   );
 }

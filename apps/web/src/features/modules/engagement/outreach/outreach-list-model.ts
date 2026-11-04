@@ -10,6 +10,9 @@ export type CampaignListRow = {
   id: string;
   title: string;
   goal: string | null;
+  /** Display-only metadata already present in the canonical response. */
+  lastStep?: number;
+  clientName?: string;
   workflow: string;
   targets: number;
   recordedSend: string | null;
@@ -34,6 +37,8 @@ export function canonicalListRow(
     id: row.id,
     title: row.state.title,
     goal: row.state.decisions?.goal ?? null,
+    lastStep: row.hasWorkflow ? row.state.lastStep : undefined,
+    clientName: row.client?.name,
     workflow: !row.hasWorkflow
       ? "not started"
       : row.status === "draft"
