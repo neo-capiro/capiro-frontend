@@ -667,3 +667,16 @@ export function createUploadController(options: {
 }
 
 export type UploadController = ReturnType<typeof createUploadController>;
+
+/**
+ * A row restored from a durable attempt reference has no identity of its own, and nothing in the
+ * composer will ever ask about it on the person's behalf. Reading custody once for each resolves
+ * what the service already holds — the reply is the service's own state, never a local assumption —
+ * so a reconnected conversation cannot leave a stored file stuck behind a "Status unknown" row that
+ * also blocks Send and refuses Remove.
+ */
+export function resolveRecoveredAttempts(uploads: UploadController): void {
+  for (const item of uploads.items())
+    if (item.uploadId === null && item.state === "unknown")
+      void uploads.check(item.requestId);
+}
