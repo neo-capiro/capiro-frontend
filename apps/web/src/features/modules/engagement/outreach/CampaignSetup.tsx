@@ -25,9 +25,11 @@ export function CampaignDirection({
   disabled,
   clients,
   fixedClient = false,
+  onStart,
 }: Props & {
   clients: readonly { id: string; name: string }[];
   fixedClient?: boolean;
+  onStart?: () => void;
 }) {
   return (
     <>
@@ -39,6 +41,11 @@ export function CampaignDirection({
             Choose your recipients, add context, and review each draft before
             sending.
           </p>
+          {onStart && (
+            <ActionButton primary disabled={disabled} onClick={onStart}>
+              Create your outreach →
+            </ActionButton>
+          )}
         </div>
         <ul className={styles.audienceGuide} aria-label="Recipient options">
           <li>
@@ -55,6 +62,31 @@ export function CampaignDirection({
           </li>
         </ul>
       </div>
+      <Panel
+        title="Mix and match in a single campaign"
+        description="Add individual contacts, apply a saved list, and create a group in the same outreach."
+      >
+        <div className={styles.recipientExplainers}>
+          <div>
+            <h3>Individual</h3>
+            <p>Write a personalized message for each contact you add.</p>
+          </div>
+          <div>
+            <h3>List</h3>
+            <p>
+              Reuse a saved list and prepare a separate message for each
+              recipient.
+            </p>
+          </div>
+          <div>
+            <h3>Group</h3>
+            <p>
+              Keep contacts together on one shared message, with its own To, Cc
+              and Bcc.
+            </p>
+          </div>
+        </div>
+      </Panel>
       <Panel
         title="Who is this outreach for?"
         description="Choose the direction and the client context for this campaign."

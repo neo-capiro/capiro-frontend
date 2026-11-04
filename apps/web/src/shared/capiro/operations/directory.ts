@@ -1,6 +1,11 @@
 import { z } from "zod";
 import { defineOperation, type OperationInput } from "../contracts";
 import * as s from "./directory-schemas";
+import {
+  staffContactTrips,
+  staffProfileDetail,
+  staffProfileId,
+} from "./directory-staff-schemas";
 
 const source =
   "apps/api/src/directory/directory.controller.ts @ 4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace";
@@ -22,6 +27,28 @@ const read = <
   });
 const contactParams = z.object({ contactId: s.directoryId }).strict();
 export const directoryOperations = {
+  "directory.staffDetail": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/directory/staffers/:staffId",
+    request: z
+      .object({ params: z.object({ staffId: staffProfileId }).strict() })
+      .strict(),
+    response: staffProfileDetail,
+    source:
+      "Core DirectoryController.staffDetail / DirectoryService.getStaffDetail @ 5a762d7789577d00a36b7b5a72d78457c1d65720",
+  }),
+  "directory.staffTrips": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/directory/contacts/:contactId/trips",
+    request: z
+      .object({ params: z.object({ contactId: staffProfileId }).strict() })
+      .strict(),
+    response: staffContactTrips,
+    source:
+      "Core DirectoryController.contactTrips / DirectoryService.getContactTrips @ 5a762d7789577d00a36b7b5a72d78457c1d65720",
+  }),
   "directory.metrics": defineOperation({
     service: "core",
     method: "GET",

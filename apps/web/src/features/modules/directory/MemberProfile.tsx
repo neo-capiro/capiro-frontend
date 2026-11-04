@@ -29,10 +29,12 @@ export function MemberProfile({
   contact,
   onBack,
   favorites,
+  staffHref,
 }: {
   contact: DirectoryContact;
   onBack: () => void;
   favorites: { data?: { directoryContactId: string }[]; reload: () => void };
+  staffHref?: (id: string) => string | null;
 }) {
   const api = useCapiro();
   const [tab, setTab] = useState("Contact");
@@ -93,14 +95,23 @@ export function MemberProfile({
   }
   const staff = (
     <Panel title="Staff" description={`${contact.staff.length} staffers`}>
-      {contact.staff.map((s) => (
-        <div key={s.id} className={styles.row}>
-          <span>{s.fullName}</span>
-          <span>
-            {s.title} {s.email && <a href={`mailto:${s.email}`}>{s.email}</a>}
-          </span>
-        </div>
-      ))}
+      {contact.staff.map((s) => {
+        const href = staffHref?.(s.id);
+        return (
+          <div key={s.id} className={styles.row}>
+            {href ? (
+              <Link className={styles.link} href={href} scroll={false}>
+                {s.fullName}
+              </Link>
+            ) : (
+              <span>{s.fullName}</span>
+            )}
+            <span>
+              {s.title} {s.email && <a href={`mailto:${s.email}`}>{s.email}</a>}
+            </span>
+          </div>
+        );
+      })}
     </Panel>
   );
   return (

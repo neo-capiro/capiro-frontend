@@ -73,6 +73,11 @@ export function OutreachWorkflow({
       onExit={onExit}
       onStep={onStep}
       onSave={owner.save}
+      renderFinalStep={
+        step === 7
+          ? (footer) => <CampaignSend owner={owner} renderFooter={footer} />
+          : undefined
+      }
     >
       {owner.pending === "save" && (
         <div role="status">
@@ -104,6 +109,7 @@ export function OutreachWorkflow({
           disabled={disabled}
           clients={clients.data ?? []}
           fixedClient={!!clientId}
+          onStart={() => onStep(2)}
         />
       )}
       {step === 2 && (
@@ -144,7 +150,6 @@ export function OutreachWorkflow({
         </>
       )}
       {step === 6 && <CampaignDrafts owner={owner} />}
-      {step === 7 && <CampaignSend owner={owner} />}
     </OutreachWorkflowFrame>
   );
 }

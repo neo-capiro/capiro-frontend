@@ -97,20 +97,7 @@ const method = z.object({
   value: z.string(),
   updatedAt: z.string().nullable().optional(),
 });
-export const staffDetailSchema = z.object({
-  id: z.string(),
-  kind: z.literal("staff"),
-  emails: z.array(method),
-  positions: z.array(
-    z.object({
-      title: z.string().nullable(),
-      officeName: z.string().nullable(),
-      isCurrent: z.boolean(),
-      startDate: z.string().nullable(),
-      endDate: z.string().nullable(),
-    }),
-  ),
-});
+export { staffContactDetail as staffDetailSchema } from "../../../shared/capiro/operations/directory-staff-schemas";
 export const memberDetailSchema = z.object({
   id: z.string(),
   kind: z.literal("member"),

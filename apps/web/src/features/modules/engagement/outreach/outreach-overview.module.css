@@ -46,6 +46,29 @@
   flex-wrap: wrap;
   gap: 12px;
 }
+.filterCard {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.filterCard > p {
+  margin: 0;
+}
+.filterActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-left: auto;
+}
+.filterActions [role="group"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
 .filters input[type="search"] {
   width: 193px;
   height: 36px;
