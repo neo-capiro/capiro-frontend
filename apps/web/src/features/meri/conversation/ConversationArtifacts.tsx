@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Artifact,
   ArtifactActions,
@@ -9,6 +9,7 @@ import {
 } from "@capiro/ui/artifact";
 import { Button } from "@capiro/ui/button";
 import { FileText } from "lucide-react";
+import { useDocumentCanvas } from "../canvas/CanvasWorkspace";
 import type {
   ArtifactAccess,
   ArtifactPreview,
@@ -38,11 +39,13 @@ export function ConversationArtifacts({
   artifacts,
   access,
   scope,
+  publishedNow = [],
 }: {
   artifacts: readonly Listed[];
   access: ArtifactAccess;
   /** The conversation the files belong to; a General conversation has no client. */
   scope: ArtifactCardScope;
+  publishedNow?: readonly string[];
 }) {
   // Nothing published or prepared: the conversation stays quiet; Library is the file entry point.
   if (artifacts.length === 0) return null;
@@ -56,6 +59,7 @@ export function ConversationArtifacts({
               artifact={artifact}
               access={access}
               scope={scope}
+              autoOpen={publishedNow.includes(artifact.versionId)}
             />
           </li>
         ))}
@@ -157,16 +161,34 @@ function ConversationArtifact({
   artifact,
   access,
   scope,
+  autoOpen,
 }: {
   artifact: Listed;
   access: ArtifactAccess;
   scope: ArtifactCardScope;
+  autoOpen: boolean;
 }) {
   const { preview, status, inspect, download } = useArtifactActions(
     access,
     artifact.versionId,
   );
   const [details, setDetails] = useState(false);
+  const canvas = useDocumentCanvas();
+  const canvasSelection = useMemo(
+    () =>
+      preview?.kind === "generated" &&
+      (preview.filename.endsWith(".docx") || preview.filename.endsWith(".txt"))
+        ? {
+            artifactId: preview.artifactId,
+            versionId: preview.versionId,
+            objectSha256: preview.objectSha256,
+          }
+        : null,
+    [preview],
+  );
+  useEffect(() => {
+    if (autoOpen && canvasSelection) canvas?.offer(canvasSelection);
+  }, [autoOpen, canvas, canvasSelection]);
   const read = artifactDetails(preview, status);
   const { title, description } = artifactCardSummary(
     preview,
@@ -193,6 +215,16 @@ function ConversationArtifact({
         </p>
       )}
       <ArtifactActions className={styles.fileActions}>
+        {canvas && canvasSelection && (
+          <Button
+            type="button"
+            variant="outline"
+            className={ui.outline}
+            onClick={() => void canvas.open(canvasSelection)}
+          >
+            Open document
+          </Button>
+        )}
         <Button
           type="button"
           variant="outline"

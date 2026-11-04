@@ -1,6 +1,7 @@
 import { createMeriConversation } from "@capiro/meri-client/conversation";
 import type { ConversationSessionReceipt } from "@capiro/meri-contracts/conversation-session";
 import { createArtifactAccess } from "../meri-documents/artifact-access";
+import { createCanvasAccess } from "../meri-documents/canvas-access";
 import { createUploadAccess } from "../meri-uploads/access";
 import { createIntentsAccess } from "../meri-intents/access";
 import { createFeedbackAccess } from "../meri-feedback/access";
@@ -80,6 +81,14 @@ export function createConversationPort(
         fetcher,
       ),
       artifacts: createArtifactAccess(session.credential, signal, fetcher),
+      canvas: createCanvasAccess({
+        session,
+        lifetime: signal,
+        isCurrent: lifetime.isCurrent,
+        onAccessLost: lifetime.onAccessLost,
+        now: lifetime.now,
+        ...(fetcher ? { fetcher } : {}),
+      }),
       intents: createIntentsAccess(
         session.credential,
         signal,

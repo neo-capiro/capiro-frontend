@@ -1216,6 +1216,22 @@
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned",
    "purpose": "ui-stream 0.1.37 admits @capiro/meri-contracts 0.1.52 and 0.1.53 as peers; no stream behaviour change."
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.54-7b2778b20ff3-3d6b83ec86e7.tgz",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "7b2778b20ff3db639d73f3b01ea578317a6f9507",
+   "bytes": 2430404,
+   "sha256": "3d6b83ec86e7e4f1da3c7bace8c90b2595b0acc4a10563e2c7ed620ac1f921a0",
+   "status": "author-validated-pending-independent-review"
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.38-a940fd3e7cc5-1d7a928152ee.tgz",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "a940fd3e7cc5c45452f818f4e9ee4dcaa2251466",
+   "bytes": 3864,
+   "sha256": "1d7a928152ee8e00e9e5b6a94a0bb1e6ad4bd9f0c589df352382f030800b23bc",
+   "status": "peer-metadata-only-pending-independent-review"
   }
  ]
 }

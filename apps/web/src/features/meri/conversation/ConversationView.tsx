@@ -2,6 +2,8 @@
 import type { SendInNewConversation } from "./useSendInNewConversation";
 import { useCallback, useState } from "react";
 import { DocumentRevisionDraft } from "./DocumentRevisionDraft";
+import { CanvasWorkspace } from "../canvas/CanvasWorkspace";
+import { withDocumentRevision } from "../../../shared/meri-conversations/query-journal";
 import { MeriComposer, type ComposerChip } from "../MeriComposer";
 import { QuestionCard } from "./QuestionCard";
 import { ConnectionPending, UnverifiedAccessNotice } from "./ConnectionPending";
@@ -204,71 +206,92 @@ export function ConversationView({
           className={styles.chat}
           data-tools={toolsOpen ? "open" : undefined}
         >
-          <ConversationFrame
-            scope={scope}
-            historyStatus={
-              session.accessLost ||
-              (!session.selectedId && !displayed) ? null : (
-                <ConversationHistoryStatus session={session} />
+          <CanvasWorkspace
+            key={`${session.selectedId ?? "new"}:${session.accessLost ? "revoked" : "active"}`}
+            access={ready?.port.canvas ?? null}
+            context={displayed?.port.context ?? null}
+            revoked={session.accessLost}
+            conversationId={session.selectedId ?? null}
+            onRevision={(selection) => {
+              const next = withDocumentRevision(session.skillSelection, {
+                documentRevision: selection,
+              });
+              session.setSkillSelection(next);
+              if (
+                session.initialDraft.error() ||
+                JSON.stringify(session.initialDraft.selection()) !==
+                  JSON.stringify(next)
               )
-            }
-            notice={
-              unverified && displayed ? (
-                <UnverifiedAccessNotice session={session} />
-              ) : null
-            }
-            composer={
-              <SessionComposer
-                session={session}
-                scope={scope}
-                channel={composer}
-                gate={quickActions.gate}
-                toolsOpen={toolsOpen}
-                onToggleTools={toggleTools}
-                scopeControl={scopeControl}
-              />
-            }
+                throw Error("Document selection could not be retained");
+              session.textarea.current?.focus();
+            }}
           >
-            {displayed ? (
-              <MeriLiveConversation
-                // A discarded unrecoverable message remounts the run with a fresh request journal.
-                key={`${displayed.lifetimeKey}:${session.recoveryEpoch}`}
-                port={displayed.port}
-                composer={composer}
-                initialPrompt={session.connection.pending}
-                earlier={session.earlier}
-                scope={scope}
-                draft={session.draft}
-                onDraft={session.setDraft}
-                initialDraft={session.initialDraft}
-                storageError={session.storageError}
-                onDiscardUnrecoverable={session.discardUnrecoverable}
-                onSendInNewConversation={onSendInNewConversation}
-                modelSelection={session.modelSelection}
-                skillSelection={session.skillSelection}
-                newIntentBlocked={newIntentBlocked}
-                modelBlocked={session.modelBlocked}
-                textareaRef={session.textarea}
-                onNextTurn={session.startNext}
-                onLifecycleTarget={session.openLifecycleTarget}
-                onBrowserTarget={session.openBrowserTarget}
-                historyUnavailable={session.history.unavailable}
-                reservedOpen={
-                  session.openedTarget === displayed.port.context.runId
-                }
-                nextTurnBlocked={session.nextBlocked}
-                nextTurnChecking={session.nextChecking}
-                nextTurnVerified={!!session.source && !session.nextBlocked}
-                initialBlocked={session.initialBlocked}
-                promptKey={session.logicalKey}
-                savedCurrent={session.savedCurrent}
-                acceptedRequest={session.acceptedRequest}
-                onSettled={session.refresh}
-              />
-            ) : (
-              <ConnectionPending session={session} />
-            )}
-          </ConversationFrame>
+            <ConversationFrame
+              scope={scope}
+              historyStatus={
+                session.accessLost ||
+                (!session.selectedId && !displayed) ? null : (
+                  <ConversationHistoryStatus session={session} />
+                )
+              }
+              notice={
+                unverified && displayed ? (
+                  <UnverifiedAccessNotice session={session} />
+                ) : null
+              }
+              composer={
+                <SessionComposer
+                  session={session}
+                  scope={scope}
+                  channel={composer}
+                  gate={quickActions.gate}
+                  toolsOpen={toolsOpen}
+                  onToggleTools={toggleTools}
+                  scopeControl={scopeControl}
+                />
+              }
+            >
+              {displayed ? (
+                <MeriLiveConversation
+                  // A discarded unrecoverable message remounts the run with a fresh request journal.
+                  key={`${displayed.lifetimeKey}:${session.recoveryEpoch}`}
+                  port={displayed.port}
+                  composer={composer}
+                  initialPrompt={session.connection.pending}
+                  earlier={session.earlier}
+                  scope={scope}
+                  draft={session.draft}
+                  onDraft={session.setDraft}
+                  initialDraft={session.initialDraft}
+                  storageError={session.storageError}
+                  onDiscardUnrecoverable={session.discardUnrecoverable}
+                  onSendInNewConversation={onSendInNewConversation}
+                  modelSelection={session.modelSelection}
+                  skillSelection={session.skillSelection}
+                  newIntentBlocked={newIntentBlocked}
+                  modelBlocked={session.modelBlocked}
+                  textareaRef={session.textarea}
+                  onNextTurn={session.startNext}
+                  onLifecycleTarget={session.openLifecycleTarget}
+                  onBrowserTarget={session.openBrowserTarget}
+                  historyUnavailable={session.history.unavailable}
+                  reservedOpen={
+                    session.openedTarget === displayed.port.context.runId
+                  }
+                  nextTurnBlocked={session.nextBlocked}
+                  nextTurnChecking={session.nextChecking}
+                  nextTurnVerified={!!session.source && !session.nextBlocked}
+                  initialBlocked={session.initialBlocked}
+                  promptKey={session.logicalKey}
+                  savedCurrent={session.savedCurrent}
+                  acceptedRequest={session.acceptedRequest}
+                  onSettled={session.refresh}
+                />
+              ) : (
+                <ConnectionPending session={session} />
+              )}
+            </ConversationFrame>
+          </CanvasWorkspace>
         </div>
       </ModelCatalogContext.Provider>
     </FeedbackContext.Provider>

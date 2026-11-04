@@ -1,0 +1,179 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  color: var(--foreground);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+.control,
+.select {
+  min-width: 32px;
+  min-height: 32px;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--foreground);
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.control:hover:not(:disabled),
+.control[aria-pressed="true"] {
+  background: var(--muted);
+  border-color: var(--border);
+}
+.select {
+  border-color: var(--input);
+  background: var(--card);
+  max-width: 145px;
+}
+.control:focus-visible,
+.select:focus-visible,
+.textarea:focus-visible {
+  outline: 2px solid var(--muted-foreground);
+  outline-offset: 2px;
+}
+.control:disabled,
+.select:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.page {
+  padding: 24px;
+  overflow: auto;
+  min-height: 240px;
+}
+.document {
+  min-height: 420px;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 40px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 2px 8px #0c0a0908;
+  font-size: 14px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.document:focus {
+  outline: none;
+}
+.document:focus-visible {
+  border-color: var(--border-strong);
+  box-shadow: 0 0 0 2px var(--border);
+}
+.document p,
+.document h1,
+.document h2,
+.document h3 {
+  margin: 0 0 12px;
+  margin-left: calc(var(--canvas-quote-depth, 0) * 16px);
+}
+.document h1 {
+  font-size: 28px;
+  line-height: 1.25;
+}
+.document h2 {
+  font-size: 22px;
+  line-height: 1.35;
+}
+.document h3 {
+  font-size: 18px;
+  line-height: 1.4;
+}
+.document [data-canvas-style="List Bullet"] {
+  position: relative;
+  padding-left: 20px;
+}
+.document [data-canvas-style="List Bullet"]::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+}
+.document [data-quote-depth]:not([data-quote-depth="0"]) {
+  border-left: 2px solid var(--border-strong);
+  padding-left: 12px;
+}
+.document table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: 16px 0;
+}
+.document td,
+.document th {
+  position: relative;
+  border: 1px solid var(--border-strong);
+  padding: 8px;
+  vertical-align: top;
+}
+.document td p {
+  margin: 0;
+}
+.document :global(.selectedCell) {
+  background: var(--muted);
+}
+.hint {
+  margin: 0;
+  padding: 8px 16px 12px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.textarea {
+  display: block;
+  width: 100%;
+  min-height: 420px;
+  padding: 24px;
+  resize: vertical;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--foreground);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.65;
+  tab-size: 4;
+}
+.readonly {
+  padding: 20px;
+}
+.readonly p {
+  color: var(--muted-foreground);
+  font-size: 13px;
+}
+.readonly pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: inherit;
+}
+@media (max-width: 640px) {
+  .toolbar {
+    padding: 8px;
+  }
+  .page {
+    padding: 12px;
+  }
+  .document {
+    padding: 20px;
+  }
+}

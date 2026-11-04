@@ -1,0 +1,93 @@
+.workspace {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  gap: 16px;
+  width: 100%;
+}
+.conversation {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+.workspace[data-open="true"] .conversation {
+  flex: 0 1 42%;
+}
+.canvas {
+  display: flex;
+  flex: 1 1 58%;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--background);
+  overflow: auto;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.heading {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+}
+.muted {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  margin: 4px 0 0;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.actions button {
+  font-size: 12px;
+}
+.body {
+  flex: 1;
+  padding: 16px;
+  min-height: 0;
+}
+.notice {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+.reopen {
+  align-self: flex-start;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+@media (max-width: 1000px) {
+  .workspace[data-open="true"] {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .workspace[data-open="true"] .conversation {
+    flex: 0 0 auto;
+    min-height: 420px;
+  }
+  .canvas {
+    flex: 0 0 auto;
+    min-height: 500px;
+  }
+  .header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}

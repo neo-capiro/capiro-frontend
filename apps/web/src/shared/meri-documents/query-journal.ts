@@ -20,6 +20,30 @@ export function documentQueryJournal(
     context.runId,
     context.selectedClientId,
   ];
+  return queryJournal(client, key);
+}
+
+/** Canvas uncertainty belongs to the conversation, including across a new Meri turn. */
+export function canvasQueryJournal(
+  client: QueryClient,
+  context: Omit<ActionContext, "selectedClientId" | "runId"> & {
+    selectedClientId: string | null;
+  },
+) {
+  return queryJournal(client, [
+    "meri",
+    "canvas-attempt",
+    context.tenantId,
+    context.actorId,
+    context.conversationId,
+    context.selectedClientId,
+  ]);
+}
+
+function queryJournal(
+  client: QueryClient,
+  key: readonly (string | null)[],
+): DocumentAttemptJournal {
   client.setQueryDefaults(key, { gcTime: Infinity, structuralSharing: false });
   client.setQueryData<DocumentAttempt>(
     key,

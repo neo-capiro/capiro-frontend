@@ -1,4 +1,8 @@
 import { receiveDocumentRequest } from "@capiro/meri-contracts/document-application";
+import {
+  receiveCanvasRequest,
+  type CanvasRoute,
+} from "@capiro/meri-contracts/document-canvas";
 import type { DocumentRoute } from "@capiro/meri-contracts/document-application";
 import {
   receiveFederalRequest,
@@ -30,6 +34,8 @@ const routes = new Set<string>([
   "preview",
   "preview-publish",
   "results",
+  "canvas-read",
+  "canvas-save",
   "federal-prepare",
   "federal-load",
   "federal-publish",
@@ -90,7 +96,8 @@ export async function proxyDocumentRequest(
     | DocumentAccessRoute
     | "preview"
     | "preview-publish"
-    | "results";
+    | "results"
+    | CanvasRoute;
   // Generation needs the bound document family. Preview publication is an explicit derived write
   // with its own current remote permission; readEnabled only enables forwarding, never grants it.
   const write =
@@ -121,19 +128,23 @@ export async function proxyDocumentRequest(
         signal,
         2 * 1024 * 1024,
       );
-      const admitted = route.startsWith("federal-")
-        ? receiveFederalRequest(route as FederalRoute, body)
-        : route === "results"
-          ? receiveNativeResultsRequest(body)
-          : route === "preview" || route === "preview-publish"
-            ? receiveDocumentPreviewRequest(
-                route === "preview" ? "read" : "publish",
-                body,
-              )
-            : write
-              ? receiveDocumentRequest(route as "create" | "revise", body)
-              : receiveAccessRequest(route as DocumentAccessRoute, body);
+      const admitted =
+        route === "canvas-read" || route === "canvas-save"
+          ? receiveCanvasRequest(route, body)
+          : route.startsWith("federal-")
+            ? receiveFederalRequest(route as FederalRoute, body)
+            : route === "results"
+              ? receiveNativeResultsRequest(body)
+              : route === "preview" || route === "preview-publish"
+                ? receiveDocumentPreviewRequest(
+                    route === "preview" ? "read" : "publish",
+                    body,
+                  )
+                : write
+                  ? receiveDocumentRequest(route as "create" | "revise", body)
+                  : receiveAccessRequest(route as DocumentAccessRoute, body);
       if (
+        write &&
         "request" in admitted &&
         admitted.request.operation !== config.operation
       )
