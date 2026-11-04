@@ -6,6 +6,7 @@ import {
   hearingHref,
   fullBoardHref,
   billDate,
+  billActionDate,
   mentionTime,
 } from "../src/features/portfolio/bill-tracker/hearings";
 import {
@@ -226,4 +227,23 @@ describe("bill hearing contract", () => {
         probability: 0.62,
       });
   });
+});
+
+it("keeps official action day consistent across civil-date and API timestamp forms", () => {
+  const zone = process.env.TZ;
+  try {
+    for (const timeZone of [
+      "America/New_York",
+      "America/Los_Angeles",
+      "Pacific/Auckland",
+    ]) {
+      process.env.TZ = timeZone;
+      expect(billActionDate("2025-09-17T00:00:00.000Z")).toBe(
+        billActionDate("2025-09-17"),
+      );
+      expect(billActionDate("2025-09-17")).toContain("17");
+    }
+  } finally {
+    process.env.TZ = zone;
+  }
 });

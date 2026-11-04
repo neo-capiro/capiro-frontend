@@ -36,7 +36,7 @@ function CurrentProjectionHarness() {
       <ClientOverview clientId={clientId} />
     </ClientFrame>
   ) : (
-    <PortfolioIndex destinations={destinations} />
+    <PortfolioIndex destinations={destinations} trackerBackend="core" />
   );
 }
 

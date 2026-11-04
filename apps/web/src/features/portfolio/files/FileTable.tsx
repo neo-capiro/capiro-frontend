@@ -2,6 +2,7 @@
 import { DropdownMenu } from "radix-ui";
 import { fileStatus, type Attachment } from "./contracts";
 import styles from "./files.module.css";
+import { portfolioSourceLabel } from "@/shared/portfolio/domain/display";
 export type FileAction = "preview" | "move" | "access" | "delete";
 export function FileTable({
   files,
@@ -86,7 +87,7 @@ export function FileTable({
                   </span>
                   {file.fileName}
                 </button>
-                <small>{file.source}</small>
+                <small>{portfolioSourceLabel(file.source)}</small>
                 {file.scanDisclosure && (
                   <small className={styles.scanDisclosure}>
                     {file.scanDisclosure}

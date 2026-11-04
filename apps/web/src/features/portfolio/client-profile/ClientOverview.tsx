@@ -15,6 +15,7 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { FacilitiesCard } from "./FacilitiesCard";
 import { ClientDetails, GovernmentSummary } from "./ClientDetails";
+import { ClientCompleteness } from "./ClientCompleteness";
 import { ClientMonogram } from "./ClientMonogram";
 import { DeadlineAndRequests, EngagementPulse } from "./OverviewSignals";
 import { RecordedActivity } from "./RecordedActivity";
@@ -116,6 +117,7 @@ export function ClientOverview({
             <p className="muted">
               {value.description ?? "No organization description yet."}
             </p>
+            <ClientCompleteness client={value} />
             <FocusTags clientId={clientId} />
             <div className={styles.profileMeta}>
               <span>

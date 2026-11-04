@@ -74,6 +74,21 @@ describe("capability fit source coverage", () => {
     expect(fitSchema.parse(fit)).not.toHaveProperty("sources");
   });
   for (const compact of [false, true]) {
+    it(`does not label uncomputed fit as zero (compact=${compact})`, () => {
+      for (const status of ["not_computed", "empty"]) {
+        const html = render(
+          { ...fit, status, matches: [], computedAt: null },
+          compact,
+        );
+        expect(html).toContain("Not scored");
+        expect(html).not.toContain("0 fit matches");
+      }
+      const computed = render(
+        { ...fit, status: "empty", matches: [] },
+        compact,
+      );
+      expect(computed).toContain("0 fit matches");
+    });
     it(`shows partial explanation with matches and source contributions (compact=${compact})`, () => {
       const html = render(partial, compact);
       expect(html).toContain("Partial coverage");

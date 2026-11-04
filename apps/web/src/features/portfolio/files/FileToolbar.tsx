@@ -1,5 +1,6 @@
 "use client";
 import styles from "./files.module.css";
+import { portfolioSourceLabel } from "@/shared/portfolio/domain/display";
 export function FileToolbar({
   search,
   source,
@@ -38,7 +39,7 @@ export function FileToolbar({
             aria-pressed={source === value}
             onClick={() => onSource(value)}
           >
-            {value || "All"}
+            {value ? portfolioSourceLabel(value) : "All"}
           </button>
         ))}
       </div>

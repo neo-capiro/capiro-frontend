@@ -1,3 +1,4 @@
+import { normalizeProfileDistrict } from "./profile-evidence-contracts";
 import type { Facility } from "./contracts";
 
 export function facilityCoordinates(
@@ -20,9 +21,11 @@ export function facilityCoordinates(
     : null;
 }
 export function facilityDistrict(facility: Facility): string | null {
-  return facility.state && facility.congressionalDistrict
-    ? `${facility.state}-${facility.congressionalDistrict.padStart(2, "0")}`
-    : null;
+  const district = normalizeProfileDistrict({
+    state: facility.state,
+    districtCode: facility.congressionalDistrict,
+  });
+  return district ? `${district.state}-${district.districtCode}` : null;
 }
 export function facilityAddress(facility: Facility): string {
   return (

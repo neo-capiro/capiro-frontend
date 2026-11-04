@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { TrackerBackend } from "@/shared/portfolio/config/config";
 const count = z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER);
 const group = <T extends z.ZodType>(counts: T) =>
   z.discriminatedUnion("status", [
@@ -13,6 +14,7 @@ export const portfolioMetricsSchema = z
   .object({
     definition: z.literal("portfolio-recorded-baseline-v1"),
     tenantId: z.uuid(),
+    trackerBackend: z.enum(["core", "intelligence"]),
     observedAt: z.iso.datetime(),
     activityWindow: z.object({
       start: z.iso.datetime(),
@@ -55,10 +57,13 @@ export const portfolioMetricsSchema = z
         30 * 86400000,
   );
 export type PortfolioMetrics = z.infer<typeof portfolioMetricsSchema>;
-export const portfolioMetricsFor = (tenantId: string) =>
+export const portfolioMetricsFor = (
+  tenantId: string,
+  trackerBackend: TrackerBackend = "core",
+) =>
   portfolioMetricsSchema.refine(
-    (v) => v.tenantId === tenantId,
-    "Metrics belong to another tenant",
+    (v) => v.tenantId === tenantId && v.trackerBackend === trackerBackend,
+    "Metrics belong to another tenant or Bill Tracker source",
   );
 export const portfolioMetricFreshness = (
   data: PortfolioMetrics,

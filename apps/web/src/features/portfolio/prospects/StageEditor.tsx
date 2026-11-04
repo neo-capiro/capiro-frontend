@@ -43,6 +43,13 @@ export function StageEditor({
         }}
       >
         <p>Current stage: {stageLabel(record.stage)}</p>
+        {available && !isPortfolioStage(record.stage) && (
+          <p role="status">
+            Choose the current pipeline stage that fits this prospect. The
+            previous stage remains in activity; no stage is selected
+            automatically.
+          </p>
+        )}
         {!available && (
           <p role="status">
             Stage updates are unavailable for this prospect. Its existing stage

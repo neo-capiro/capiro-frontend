@@ -1,0 +1,79 @@
+/* Portfolio 3.4 file dialogs: scoped to these workflows, not the shared Dialog. */
+.dialog.dialog {
+  width: min(520px, calc(100vw - 32px));
+  padding: 0;
+  gap: 0;
+  border-radius: 12px;
+  box-shadow:
+    0 16px 40px -12px rgba(12, 10, 9, 0.18),
+    0 2px 6px rgba(12, 10, 9, 0.05);
+}
+.dialog > header {
+  padding: 22px 28px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.dialog > header h2 {
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: -0.07px;
+  font-weight: 600;
+}
+.dialog > header button {
+  min-height: 20px;
+  width: 20px;
+  padding: 0;
+  color: var(--muted-foreground);
+}
+.dialog > :global(.muted) {
+  padding: 18px 28px 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.form {
+  display: grid;
+  gap: 0;
+}
+.body {
+  display: grid;
+  gap: 16px;
+  padding: 16px 28px 18px;
+}
+.body label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+.body input:not([type="file"]),
+.body select {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  color: var(--foreground);
+  background: var(--card);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.body small {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 28px;
+  background: var(--muted);
+  border-top: 1px solid var(--border);
+}
+.footer button {
+  padding: 8px 14px;
+  min-height: 34px;
+  font-size: 14px;
+  line-height: 1.2;
+  border-radius: 8px;
+}

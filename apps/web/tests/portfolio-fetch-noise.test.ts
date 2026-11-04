@@ -17,6 +17,7 @@ const START = "2026-10-01T12:00:00.000Z";
 /** A valid "everything unavailable" metrics payload: the cheapest legal shape. */
 const metrics = {
   definition: "portfolio-recorded-baseline-v1",
+  trackerBackend: "core",
   tenantId: TENANT,
   observedAt: END,
   activityWindow: { start: START, end: END, timezone: "UTC" },
@@ -160,4 +161,27 @@ describe("one /clients/{id} read per client profile", () => {
     expect(options.staleTime).toBe(30_000);
     expect(options).not.toHaveProperty("refetchOnMount");
   });
+});
+
+it("separates Core and Intelligence tracker populations in requests and cache", async () => {
+  const cache = seededClient();
+  const paths: string[] = [];
+  const api = createApiClient(async (path) => {
+    paths.push(String(path));
+    const trackerBackend = new URL(
+      String(path),
+      "https://synthetic.invalid",
+    ).searchParams.get("trackerBackend");
+    return Response.json({ ...metrics, trackerBackend });
+  });
+  const core = portfolioMetricsQueryOptions(api, actor, cache, "core");
+  const intel = portfolioMetricsQueryOptions(api, actor, cache, "intelligence");
+  expect(core.queryKey).not.toEqual(intel.queryKey);
+  expect((await cache.fetchQuery(core)).trackerBackend).toBe("core");
+  expect((await cache.fetchQuery(intel)).trackerBackend).toBe("intelligence");
+  expect(paths).toEqual([
+    "/api/backend/core/clients/metrics?trackerBackend=core",
+    "/api/backend/core/clients/metrics?trackerBackend=intelligence",
+  ]);
+  cache.clear();
 });

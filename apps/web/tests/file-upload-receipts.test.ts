@@ -34,6 +34,54 @@ const receipt = {
 };
 
 describe("capability upload native receipts", () => {
+  it("confirms the chosen folder and refuses changing it during an unknown upload", async () => {
+    const request = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(Response.json(ticket))
+      .mockResolvedValueOnce(Response.json({ ...receipt, folder: "Hearings" }));
+    const transport = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(new Response(null, { status: 503 }));
+    const attempt: UploadAttempt = { actor };
+    const api = createApiClient(request);
+    await expect(
+      uploadParentFile(
+        api,
+        { clientId, folder: "Hearings" },
+        file,
+        attempt,
+        () => {},
+        source,
+        transport,
+      ),
+    ).rejects.toThrow("completion is unknown");
+    await expect(
+      uploadParentFile(
+        api,
+        { clientId, folder: "Other" },
+        file,
+        attempt,
+        () => {},
+        source,
+        transport,
+      ),
+    ).rejects.toThrow("another file or parent");
+    await expect(
+      uploadParentFile(
+        api,
+        { clientId, folder: "Hearings" },
+        file,
+        attempt,
+        () => {},
+        source,
+        transport,
+      ),
+    ).resolves.toMatchObject({ folder: "Hearings" });
+    expect(JSON.parse(String(request.mock.calls[1]?.[1]?.body)).folder).toBe(
+      "Hearings",
+    );
+    expect(transport).toHaveBeenCalledOnce();
+  });
   it("refuses a ticket whose posted storage key disagrees with its confirmation key before sending bytes", async () => {
     const request = vi
       .fn<typeof fetch>()

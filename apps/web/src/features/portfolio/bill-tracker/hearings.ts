@@ -81,6 +81,11 @@ export function billDate(value: string | null | undefined): string | undefined {
   }).format(date);
 }
 
+/** Legislative action dates are civil dates, including API midnight timestamps. */
+export function billActionDate(value: string | null | undefined) {
+  return billDate(value?.slice(0, 10));
+}
+
 export function mentionTime(milliseconds: number): string {
   const seconds = Math.floor(milliseconds / 1000);
   return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;

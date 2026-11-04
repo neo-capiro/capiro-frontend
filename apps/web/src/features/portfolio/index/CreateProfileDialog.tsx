@@ -41,6 +41,7 @@ function ProfileChoiceSession({
     event.preventDefault();
     if (opener?.isConnected) opener.focus();
   };
+  const checkingAccess = identity.isPending || identity.isFetching;
   const permitted =
     identity.isSuccess &&
     !identity.isFetching &&
@@ -82,11 +83,11 @@ function ProfileChoiceSession({
       }}
     >
       <QueryState
-        pending={identity.isPending}
+        pending={checkingAccess}
         error={identity.error}
         retry={() => void identity.refetch()}
       />
-      {identity.data && !permitted && !identity.error && (
+      {identity.data && !checkingAccess && !permitted && !identity.error && (
         <p className="status">Your role does not allow creating profiles.</p>
       )}
       <div className={styles.choiceGroup}>
@@ -123,9 +124,17 @@ function ProfileChoiceSession({
         </button>
         {!permitted || !capacity.allowed ? (
           <small id="profile-create-status">
-            {!permitted
-              ? "Your role does not allow creating profiles."
-              : "Your plan does not allow another profile right now."}
+            {checkingAccess
+              ? "Checking access…"
+              : identity.error
+                ? "Access could not be confirmed. Retry above."
+                : !permitted
+                  ? "Your role does not allow creating profiles."
+                  : capacity.query.error
+                    ? "Profile capacity could not be confirmed. Retry above."
+                    : !capacity.ready
+                      ? "Checking profile capacity…"
+                      : capacity.issue}
           </small>
         ) : null}
         <p className="eyebrow">Prospect</p>

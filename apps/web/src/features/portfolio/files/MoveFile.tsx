@@ -7,13 +7,11 @@ export function MoveFile({
   file,
   folders,
   onClose,
-  creating = false,
 }: {
   clientId: string;
   file: Attachment;
   folders: string[];
   onClose: () => void;
-  creating?: boolean;
 }) {
   const [review] = useState(() => structuredClone(file));
   return (
@@ -22,8 +20,7 @@ export function MoveFile({
       files={[review]}
       currentFiles={[file]}
       folders={folders}
-      creating={creating}
-      initialFolder={creating ? "" : (review.folder ?? "")}
+      initialFolder={review.folder ?? ""}
       onClose={onClose}
       onSaved={onClose}
     />

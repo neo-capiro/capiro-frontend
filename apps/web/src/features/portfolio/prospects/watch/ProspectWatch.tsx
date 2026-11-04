@@ -1,8 +1,22 @@
 "use client";
 import { useEffect, useState } from "react";
-import { refusalOf, useProspectAlerts, useProspectWatch, useWatchActions, type Outcome } from "./api";
+import {
+  refusalOf,
+  useProspectAlerts,
+  useProspectWatch,
+  useWatchActions,
+  type Outcome,
+} from "./api";
 import type { AlertsPage, WatchAlert, WatchResponse } from "./contracts";
 import { categoryLabel } from "./contracts";
+import {
+  memberName,
+  useMemberOptions,
+} from "@/features/portfolio/index/public";
+import {
+  portfolioSourceLabel,
+  portfolioTimestamp,
+} from "@/shared/portfolio/domain/display";
 
 /**
  * Prospect watch and alert review — the user entry for the existing Core owner.
@@ -20,6 +34,7 @@ export function ProspectWatch({ prospectId }: { prospectId: string }) {
 
 function ProspectWatchForProspect({ prospectId }: { prospectId: string }) {
   const watch = useProspectWatch(prospectId);
+  const members = useMemberOptions();
   const alerts = useProspectAlerts(prospectId);
   const [outcome, setOutcome] = useState<Outcome>();
   const [recovering, setRecovering] = useState(false);
@@ -27,11 +42,17 @@ function ProspectWatchForProspect({ prospectId }: { prospectId: string }) {
 
   // Keep the rows the user is reviewing: a failed re-read must not blank the list that the recovery
   // lock is protecting. The set is still Core's own pages, never synthesised.
-  const [retained, setRetained] = useState<{ prospectId: string; pages: AlertsPage[] }>();
+  const [retained, setRetained] = useState<{
+    prospectId: string;
+    pages: AlertsPage[];
+  }>();
   useEffect(() => {
-    if (alerts.data?.pages) setRetained({ prospectId, pages: alerts.data.pages });
+    if (alerts.data?.pages)
+      setRetained({ prospectId, pages: alerts.data.pages });
   }, [alerts.data, prospectId]);
-  const pages = alerts.data?.pages ?? (retained?.prospectId === prospectId ? retained.pages : []);
+  const pages =
+    alerts.data?.pages ??
+    (retained?.prospectId === prospectId ? retained.pages : []);
   const items = pages.flatMap((page) => page.items);
   const unread = pages[0]?.unreadCount ?? 0;
 
@@ -41,6 +62,13 @@ function ProspectWatchForProspect({ prospectId }: { prospectId: string }) {
       pending={watch.isPending}
       failed={watch.isError}
       record={watch.data}
+      ownerName={
+        members.isSuccess && !members.error
+          ? members.data.find(
+              (member) => member.id === watch.data?.watch?.ownerUserId,
+            )
+          : undefined
+      }
       items={items}
       unread={unread}
       alertsPending={alerts.isPending}
@@ -109,6 +137,7 @@ export function WatchView({
   pending,
   failed,
   record,
+  ownerName,
   items,
   unread,
   alertsPending,
@@ -130,6 +159,7 @@ export function WatchView({
   pending: boolean;
   failed: boolean;
   record: WatchResponse | undefined;
+  ownerName?: Parameters<typeof memberName>[0];
   items: WatchAlert[];
   unread: number;
   alertsPending: boolean;
@@ -190,13 +220,15 @@ export function WatchView({
     <section aria-label="Prospect watch">
       <h2>Watch</h2>
       {failed && (
-        <p role="alert">The last successful watch read is shown; the newest read failed.</p>
+        <p role="alert">
+          The last successful watch read is shown; the newest read failed.
+        </p>
       )}
       {!current ? (
         <>
           <p>
-            Watch this prospect for material award, opportunity, lobbying and entity changes. Alerts
-            appear here for review.
+            Watch this prospect for material award, opportunity, lobbying and
+            entity changes. Alerts appear here for review.
           </p>
           <button type="button" disabled={locked} onClick={onStart}>
             Start watch
@@ -206,7 +238,9 @@ export function WatchView({
         <>
           <p>
             Status: {current.status}
-            {current.mutedUntil ? ` · muted until ${current.mutedUntil}` : ""}
+            {current.mutedUntil
+              ? ` · muted until ${portfolioTimestamp(current.mutedUntil)}`
+              : ""}
           </p>
           <p>
             Categories:{" "}
@@ -215,30 +249,51 @@ export function WatchView({
               : "All categories"}
           </p>
           <p>
-            Owner: {current.ownerUserId ? "assigned member" : "unassigned"} · Last completed check:{" "}
-            {record.lastCompletedCheckAt ?? "not yet"}
+            Owner:{" "}
+            {ownerName
+              ? memberName(ownerName)
+              : current.ownerUserId
+                ? "Name unavailable"
+                : "Unassigned"}{" "}
+            · Last completed check:{" "}
+            {portfolioTimestamp(record.lastCompletedCheckAt)}
           </p>
           <ul aria-label="Source health">
             {record.sources.map((source) => (
               <li key={source.source}>
-                {source.source}: {source.health}
-                {source.lastCheckedAt ? ` · ${source.lastCheckedAt}` : ""}
+                {portfolioSourceLabel(source.source)}:{" "}
+                {categoryLabel(source.health)}
+                {source.lastCheckedAt
+                  ? ` · ${portfolioTimestamp(source.lastCheckedAt)}`
+                  : ""}
                 {source.detail ? ` · ${source.detail}` : ""}
               </li>
             ))}
           </ul>
           <div>
             {current.status === "active" ? (
-              <button type="button" disabled={locked} onClick={() => onStatus("paused")}>
+              <button
+                type="button"
+                disabled={locked}
+                onClick={() => onStatus("paused")}
+              >
                 Pause watch
               </button>
             ) : (
-              <button type="button" disabled={locked} onClick={() => onStatus("active")}>
+              <button
+                type="button"
+                disabled={locked}
+                onClick={() => onStatus("active")}
+              >
                 Resume watch
               </button>
             )}
             {current.status !== "ended" && (
-              <button type="button" disabled={locked} onClick={() => onStatus("ended")}>
+              <button
+                type="button"
+                disabled={locked}
+                onClick={() => onStatus("ended")}
+              >
                 End watch
               </button>
             )}
@@ -247,12 +302,19 @@ export function WatchView({
       )}
 
       {message && (
-        <p aria-label="Watch change outcome" role={unresolved ? "alert" : "status"}>
+        <p
+          aria-label="Watch change outcome"
+          role={unresolved ? "alert" : "status"}
+        >
           {message}
           {unresolved && (
             <>
               {" "}
-              <button type="button" disabled={recovering} onClick={onRetryReadback}>
+              <button
+                type="button"
+                disabled={recovering}
+                onClick={onRetryReadback}
+              >
                 {recovering ? "Checking current state…" : "Retry"}
               </button>
             </>
@@ -264,14 +326,21 @@ export function WatchView({
         <div>
           <h3>Alerts</h3>
           {alertsPending && <p>Loading alerts…</p>}
-          {alertsFailed && <p role="alert">Alerts are unavailable right now.</p>}
+          {alertsFailed && (
+            <p role="alert">Alerts are unavailable right now.</p>
+          )}
           {!alertsPending && (
             <>
               <p>
                 {unread} unread · {items.length} shown
               </p>
               {items.length === 0 ? (
-                alertsFailed ? null : <p>No alerts yet. The next completed check will record changes here.</p>
+                alertsFailed ? null : (
+                  <p>
+                    No alerts yet. The next completed check will record changes
+                    here.
+                  </p>
+                )
               ) : (
                 <ul aria-label="Prospect alerts">
                   {items.map((alert) => (
@@ -286,7 +355,11 @@ export function WatchView({
                 </ul>
               )}
               {hasNext && !alertsFailed && (
-                <button type="button" disabled={loadingNext} onClick={onLoadMore}>
+                <button
+                  type="button"
+                  disabled={loadingNext}
+                  onClick={onLoadMore}
+                >
                   {loadingNext ? "Loading older alerts…" : "Load older alerts"}
                 </button>
               )}
@@ -320,19 +393,29 @@ function AlertRow({
       {alert.summary && <p>{alert.summary}</p>}
       {alert.implication && <p>{alert.implication}</p>}
       <p>
-        {alert.sourceFamily ? `${alert.sourceFamily} · ` : ""}
-        {alert.firstObservedAt ?? "observed time unavailable"}
+        {alert.sourceFamily
+          ? `${portfolioSourceLabel(alert.sourceFamily)} · `
+          : ""}
+        {portfolioTimestamp(alert.firstObservedAt)}
         {alert.dismissedAt
-          ? ` · dismissed ${alert.dismissedAt}`
+          ? ` · dismissed ${portfolioTimestamp(alert.dismissedAt)}`
           : alert.readAt
-            ? ` · read ${alert.readAt}`
+            ? ` · read ${portfolioTimestamp(alert.readAt)}`
             : " · unread"}
       </p>
       <div>
-        <button type="button" disabled={busy || !!alert.readAt} onClick={onRead}>
+        <button
+          type="button"
+          disabled={busy || !!alert.readAt}
+          onClick={onRead}
+        >
           Mark read
         </button>
-        <button type="button" disabled={busy || !!alert.dismissedAt} onClick={onDismiss}>
+        <button
+          type="button"
+          disabled={busy || !!alert.dismissedAt}
+          onClick={onDismiss}
+        >
           Dismiss
         </button>
       </div>

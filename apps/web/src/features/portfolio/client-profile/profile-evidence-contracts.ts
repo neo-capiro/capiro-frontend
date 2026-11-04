@@ -420,7 +420,11 @@ export function normalizeProfileDistrict(input: {
   let code = input.districtCode?.trim().toUpperCase();
   if (!state || !/^[A-Z]{2}$/.test(state) || !code) return null;
   if (code.startsWith(state + "-")) code = code.slice(3);
-  if (code === "AL") code = "00";
+  if (
+    code === "AL" ||
+    (code === "98" && ["DC", "AS", "GU", "MP", "PR", "VI"].includes(state))
+  )
+    code = "00";
   if (!/^\d{1,2}$/.test(code) || Number(code) >= 90) return null;
   return { state, districtCode: String(Number(code)).padStart(2, "0") };
 }

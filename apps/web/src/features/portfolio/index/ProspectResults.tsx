@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { useId } from "react";
-import type { Prospect } from "@/features/portfolio/prospects/public";
+import {
+  prospectDetailHref,
+  rememberProspectListScroll,
+  type Prospect,
+} from "@/features/portfolio/prospects/public";
 import {
   clientLocation,
   initials,
@@ -21,6 +25,7 @@ export function ProspectResults({
   coreOwners,
   showAdd = false,
   sort = "saved",
+  returnTo = "/portfolio",
 }: {
   coreRows?: readonly Client[];
   rows: readonly Prospect[];
@@ -29,6 +34,7 @@ export function ProspectResults({
   coreOwners?: Record<string, { accountOwner: Member | null }>;
   showAdd?: boolean;
   sort?: PortfolioIndexState["sort"];
+  returnTo?: string;
 }) {
   const ordered = sortProspectProfiles(coreRows, rows, sort);
   return view === "cards" ? (
@@ -44,6 +50,7 @@ export function ProspectResults({
           <ProspectCard
             key={`prospect:${row.record.id}`}
             prospect={row.record}
+            returnTo={returnTo}
             owner={owners[row.record.ownerUserId ?? ""]}
           />
         ),
@@ -91,7 +98,10 @@ export function ProspectResults({
             return (
               <tr key={`prospect:${prospect.id}`}>
                 <td>
-                  <Link href={`/portfolio/prospects/${prospect.id}`}>
+                  <Link
+                    href={prospectDetailHref(prospect.id, returnTo)}
+                    onClick={() => rememberProspectListScroll(returnTo)}
+                  >
                     {prospect.displayName}
                   </Link>
                 </td>
@@ -114,9 +124,11 @@ export function ProspectResults({
 export function ProspectCard({
   prospect,
   owner,
+  returnTo = "/portfolio",
 }: {
   prospect: Prospect;
   owner?: Member;
+  returnTo?: string;
 }) {
   const descriptionId = useId();
   const description = [prospect.serviceHypothesis, prospect.geography]
@@ -135,7 +147,8 @@ export function ProspectCard({
           <h2>
             <Link
               className={styles.profileLink}
-              href={`/portfolio/prospects/${prospect.id}`}
+              href={prospectDetailHref(prospect.id, returnTo)}
+              onClick={() => rememberProspectListScroll(returnTo)}
               aria-label={`Open prospect ${prospect.displayName}`}
               aria-describedby={descriptionId}
             >

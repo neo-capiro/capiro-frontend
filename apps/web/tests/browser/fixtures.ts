@@ -302,6 +302,7 @@ export async function installFixtures(page: Page) {
       [`core/clients/${clientId}/advocacy-matters`]: [],
       [`core/clients/${clientId}/advocacy-matters/timeline`]: [],
       [`core/clients/${clientId}/capabilities`]: [capability],
+      [`core/clients/${clientId}/files/folders`]: [],
       [`core/clients/${clientId}/submission-history`]: [],
       [`core/clients/${clientId}/capability-fit`]: {
         status: "empty",

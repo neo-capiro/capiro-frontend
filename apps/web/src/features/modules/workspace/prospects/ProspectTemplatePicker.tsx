@@ -12,9 +12,15 @@ import {
   Field,
   SelectInput,
   StatusPanel,
+  Modal,
 } from "@/shared/module-ui";
 import { BlueprintDefinitionRead } from "../document-templates/BlueprintDefinitionRead";
 import { blueprintPin } from "../document-templates/blueprint-adoption";
+import {
+  blueprintChoiceLabel,
+  blueprintDisplayName,
+} from "../document-templates/blueprint-display";
+import styles from "./template-picker.module.css";
 
 type Pin = ProspectDraftCreate["blueprintPin"];
 export function ProspectTemplatePicker({
@@ -27,11 +33,12 @@ export function ProspectTemplatePicker({
   onChange: (pin: Pin) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const [selectedName, setSelectedName] = useState("");
   return (
     <section aria-label="Proposal template selection">
       <p>
         {pin
-          ? `Selected published template · version ${pin.version}`
+          ? `${selectedName || "Selected published template"} · version ${pin.version}`
           : "No template selected. Create a blank manual draft or choose a published template."}
       </p>
       <ActionButton
@@ -45,24 +52,48 @@ export function ProspectTemplatePicker({
           Clear template selection
         </ActionButton>
       )}
-      {open && !disabled && (
-        <TemplateCatalog
-          onChoose={(value) => {
-            onChange(value);
-            setOpen(false);
-          }}
-        />
-      )}
+      <Modal
+        open={open && !disabled}
+        onOpenChange={setOpen}
+        title="Choose proposal template"
+        className={styles.dialog}
+        footer={
+          <ActionButton onClick={() => setOpen(false)}>Cancel</ActionButton>
+        }
+      >
+        {open && !disabled && (
+          <TemplateCatalog
+            onChoose={(value, name) => {
+              onChange(value);
+              setSelectedName(name);
+              setOpen(false);
+            }}
+          />
+        )}
+      </Modal>
     </section>
   );
 }
 
-function TemplateCatalog({ onChoose }: { onChoose: (pin: Pin) => void }) {
+function TemplateCatalog({
+  onChoose,
+}: {
+  onChoose: (pin: Pin, name: string) => void;
+}) {
   const query = useCapiroQuery("workspace.blueprints.list", {});
   const [id, setId] = useState("");
   const listed = query.data?.some((row) => row.id === id);
   return (
-    <div>
+    <div className={styles.catalog}>
+      <p>Preview the published template before choosing it.</p>
+      <details>
+        <summary>About template catalogs</summary>
+        <p>
+          Choose a document blueprint, then review a published version below.
+          The profile’s Browse templates catalog includes other Workspace
+          products and is separate from this selectable catalog.
+        </p>
+      </details>
       <StatusPanel
         loading={query.loading}
         error={query.error}
@@ -75,9 +106,9 @@ function TemplateCatalog({ onChoose }: { onChoose: (pin: Pin) => void }) {
               value={listed ? id : ""}
               onValueChange={setId}
               placeholder="Choose a template"
-              options={query.data.map((row) => ({
+              options={query.data.map((row, ordinal) => ({
                 value: row.id,
-                label: `${row.name} · ${row.scope === "firm" ? "Firm" : "Capiro"}`,
+                label: blueprintChoiceLabel(row, ordinal),
               }))}
             />
           </Field>
@@ -85,7 +116,16 @@ function TemplateCatalog({ onChoose }: { onChoose: (pin: Pin) => void }) {
           <p>No templates are available.</p>
         )}
         {listed && !query.error && !query.loading && (
-          <TemplateVersions key={id} id={id} onChoose={onChoose} />
+          <TemplateVersions
+            key={id}
+            id={id}
+            onChoose={(pin) =>
+              onChoose(
+                pin,
+                blueprintDisplayName(query.data!.find((row) => row.id === id)!),
+              )
+            }
+          />
         )}
       </StatusPanel>
     </div>
@@ -124,6 +164,11 @@ function TemplateVersions({
     >
       {detail && (
         <>
+          <h3>{blueprintDisplayName(detail)}</h3>
+          <p>
+            {detail.product}
+            {detail.description ? ` · ${detail.description}` : ""}
+          </p>
           {versions.length ? (
             <Field
               label="Published template version"

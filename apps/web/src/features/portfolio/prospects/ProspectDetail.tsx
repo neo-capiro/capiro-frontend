@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Shell } from "@/shared/portfolio/shell/Shell";
 import type { Destinations } from "@/shared/portfolio/config/config";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
@@ -17,6 +17,8 @@ import { stageLabel } from "./contracts";
 import { ProspectEditor } from "./ProspectEditor";
 import { NextStepEditor } from "./NextStepEditor";
 import { ProspectHistory } from "./ProspectHistory";
+import { ProspectLifecycle } from "./ProspectLifecycle";
+import { ProspectCompleteness } from "./ProspectCompleteness";
 import { ProspectNotes } from "./ProspectNotes";
 import { ProspectWatch } from "./watch/ProspectWatch";
 import { ProspectStageProgress } from "./ProspectStageProgress";
@@ -28,6 +30,7 @@ import { ProspectBrief } from "./brief/public";
 import { ProspectProposals } from "./proposals/public";
 import { ProspectFiles } from "@/features/portfolio/files/public";
 import styles from "./prospects.module.css";
+import { prospectReturnTo } from "./list-navigation";
 export function ProspectDetail({
   id,
   destinations,
@@ -39,13 +42,15 @@ export function ProspectDetail({
   const catalog = useStageCatalog();
   const owners = useMemberOptions();
   const router = useRouter();
+  const params = useSearchParams();
+  const returnTo = prospectReturnTo(params.get("returnTo"));
   const [editing, setEditing] = useState(false);
   const [next, setNext] = useState(false);
   const [archive, setArchive] = useState(false);
   const [stage, setStage] = useState(false);
   const visibility = useProspectVisibility(id, () => {
     setArchive(false);
-    router.push("/portfolio/prospects");
+    router.push(returnTo);
   });
   const record = query.isSuccess && !query.error ? query.data : undefined;
   const owner =
@@ -61,7 +66,7 @@ export function ProspectDetail({
     <Shell destinations={destinations}>
       <div className={`page stack ${styles.overview}`}>
         <nav className="row" aria-label="Breadcrumb">
-          <Link href="/portfolio/prospects">← Prospects</Link>
+          <Link href={returnTo}>← Prospects</Link>
           <span>/</span>
           <span>{record?.displayName ?? "Company details"}</span>
         </nav>
@@ -85,7 +90,11 @@ export function ProspectDetail({
                     width={5}
                     height={5}
                   />
-                  Prospect
+                  {record.status === "dismissed"
+                    ? "Archived"
+                    : record.convertedAt
+                      ? "Converted"
+                      : "Prospect"}
                 </span>
               </div>
               <div className="row">
@@ -107,6 +116,22 @@ export function ProspectDetail({
                 </button>
               </div>
             </header>
+            <ProspectLifecycle
+              record={record}
+              onRestore={() => setArchive(true)}
+            />
+            <nav
+              className={`row ${styles.sectionLinks}`}
+              aria-label="Prospect sections"
+            >
+              <a href="#prospect-activity">Activity</a>
+              <a href="#prospect-brief">Brief</a>
+              <a href="#prospect-files">Files</a>
+              <a href="#prospect-next-step">Next step</a>
+              <a href="#prospect-contacts">Contacts</a>
+              <a href="#prospect-notes">Notes</a>
+              <a href="#prospect-watch">Watch</a>
+            </nav>
             <div className={styles.columns}>
               <div className="stack">
                 <section className={`card stack ${styles.companyCard}`}>
@@ -156,16 +181,22 @@ export function ProspectDetail({
                     catalog={catalog.data}
                   />
                 </section>
-                <ProspectHistory id={id} />
-                <ProspectBrief prospectId={id} />
-                <ProspectFiles
-                  prospectId={id}
-                  available={
-                    query.isSuccess && !query.error && !query.isFetching
-                  }
-                  active={record.status === "active"}
-                  clientId={record.convertedAt ? record.linkedClientId : null}
-                />
+                <div id="prospect-activity">
+                  <ProspectHistory id={id} />
+                </div>
+                <div id="prospect-brief">
+                  <ProspectBrief prospectId={id} />
+                </div>
+                <div id="prospect-files">
+                  <ProspectFiles
+                    prospectId={id}
+                    available={
+                      query.isSuccess && !query.error && !query.isFetching
+                    }
+                    active={record.status === "active"}
+                    clientId={record.convertedAt ? record.linkedClientId : null}
+                  />
+                </div>
                 <section className="card stack" aria-label="Prospect Workspace">
                   <h2>Workspace documents</h2>
                   <p>
@@ -190,7 +221,12 @@ export function ProspectDetail({
                 />
               </div>
               <div className="stack">
-                <section className="card stack">
+                <ProspectCompleteness
+                  record={record}
+                  onDetails={() => setEditing(true)}
+                  onNext={() => setNext(true)}
+                />
+                <section className="card stack" id="prospect-next-step">
                   <header className="row between">
                     <h2>Next step</h2>
                     <button
@@ -210,14 +246,20 @@ export function ProspectDetail({
                   )}
                   <small>Owner {ownerLabel}</small>
                 </section>
-                <ProspectContacts prospectId={id} />
-                <ProspectNotes id={id} />
-                <ProspectWatch prospectId={id} />
-                <button className="button" onClick={() => setArchive(true)}>
-                  {record.status === "dismissed"
-                    ? "Restore prospect"
-                    : "Archive prospect"}
-                </button>
+                <div id="prospect-contacts">
+                  <ProspectContacts prospectId={id} />
+                </div>
+                <div id="prospect-notes">
+                  <ProspectNotes id={id} />
+                </div>
+                <div id="prospect-watch">
+                  <ProspectWatch prospectId={id} />
+                </div>
+                {record.status !== "dismissed" && (
+                  <button className="button" onClick={() => setArchive(true)}>
+                    Archive prospect
+                  </button>
+                )}
               </div>
             </div>
             {editing && (

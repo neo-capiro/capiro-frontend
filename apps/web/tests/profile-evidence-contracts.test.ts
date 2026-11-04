@@ -209,6 +209,11 @@ describe("Profile evidence receiving subsets", () => {
     expect(
       normalizeProfileDistrict({ state: "WY", districtCode: "AL" }),
     ).toEqual({ state: "WY", districtCode: "00" });
+    for (const state of ["DC", "AS", "GU", "MP", "PR", "VI"])
+      expect(normalizeProfileDistrict({ state, districtCode: "98" })).toEqual({
+        state,
+        districtCode: "00",
+      });
     for (const code of ["MD-08", "90", "98", "ZZ", "", "../08"])
       expect(
         normalizeProfileDistrict({ state: "VA", districtCode: code }),

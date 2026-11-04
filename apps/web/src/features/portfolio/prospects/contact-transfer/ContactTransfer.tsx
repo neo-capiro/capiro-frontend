@@ -80,9 +80,19 @@ function TransferSession({ record }: { record: Prospect }) {
         {pending ? "Recover contact carry-over" : "Review contact carry-over"}
       </button>
       {flow.contextError && <p role="alert">{flow.contextError}</p>}
+      {flow.recovery.loading && (
+        <p role="status">
+          Checking linked-client access and saved contact recovery…
+        </p>
+      )}
       {flow.recovery.error && (
         <div role="alert">
           <p>{flow.recovery.error}</p>
+          <p>
+            Contact carry-over requires an available linked client and access to
+            both sets of contacts. Retrying checks those prerequisites without
+            sending a transfer.
+          </p>
           <button className="button" onClick={flow.recovery.retry}>
             Retry contact recovery
           </button>

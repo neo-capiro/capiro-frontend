@@ -19,6 +19,10 @@ import {
 import type { DragEvent, ReactNode } from "react";
 import type { z } from "zod";
 import { StageEditor } from "./StageEditor";
+import {
+  prospectDetailHref,
+  rememberProspectListScroll,
+} from "./list-navigation";
 import styles from "./pipeline.module.css";
 type PipelineData = z.infer<typeof prospectListSchema>;
 
@@ -73,11 +77,13 @@ export function ProspectPipeline({
   catalog,
   error,
   onClose,
+  returnTo = "/portfolio/prospects?pipeline=1",
 }: {
   data: PipelineData;
   catalog: StageCatalog | null | undefined;
   error: Error | null;
   onClose: () => void;
+  returnTo?: string;
 }) {
   const [moving, setMoving] = useState<{ record: Prospect; stage?: string }>();
   const [dragId, setDragId] = useState<string>();
@@ -119,7 +125,10 @@ export function ProspectPipeline({
       >
         <div className={styles.pipelineCardHeading}>
           <h3>
-            <Link href={`/portfolio/prospects/${record.id}`}>
+            <Link
+              href={prospectDetailHref(record.id, returnTo)}
+              onNavigate={() => rememberProspectListScroll(returnTo)}
+            >
               {record.displayName}
             </Link>
           </h3>

@@ -12,6 +12,7 @@ import {
 } from "./contracts";
 import { ClientMonogram } from "../client-profile/public";
 import styles from "./portfolio.module.css";
+import { isProspectRecord } from "@/shared/portfolio/domain/profile-type";
 export function ProfileResults({
   rows,
   view,
@@ -21,13 +22,14 @@ export function ProfileResults({
   view: "list" | "cards";
   owners?: Record<string, { accountOwner: Member | null }>;
 }) {
+  if (rows.length === 0) return null;
   return view === "list" ? (
     <div className="tableWrap">
       <table aria-label="Portfolio profiles">
         <thead>
           <tr>
             <th>Organization</th>
-            <th>Type</th>
+            <th>Profile type</th>
             <th>Sector</th>
             <th>Account owner</th>
             <th>Status</th>
@@ -50,7 +52,9 @@ export function ProfileResults({
                   </span>
                 </Link>
               </td>
-              <td>{client.profileType ?? "—"}</td>
+              <td>
+                {isProspectRecord(client.profileType) ? "Prospect" : "Client"}
+              </td>
               <td>{clientSectorLabel(client) ?? "—"}</td>
               <td>
                 {owners?.[client.id]

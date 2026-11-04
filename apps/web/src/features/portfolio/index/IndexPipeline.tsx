@@ -8,9 +8,11 @@ import {
 export function IndexPipeline({
   data,
   onClose,
+  returnTo,
 }: {
   data: NonNullable<ReturnType<typeof useProspects>["data"]>;
   onClose: () => void;
+  returnTo: string;
 }) {
   const catalog = useStageCatalog();
   return (
@@ -19,6 +21,7 @@ export function IndexPipeline({
       catalog={catalog.data}
       error={catalog.error}
       onClose={onClose}
+      returnTo={returnTo}
     />
   );
 }

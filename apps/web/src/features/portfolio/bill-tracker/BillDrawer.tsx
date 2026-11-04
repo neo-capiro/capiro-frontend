@@ -9,7 +9,7 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { TrackedBill } from "./contracts";
 import { useTrackBill } from "./queries";
 import { BillHearings } from "./BillHearings";
-import { billDate, fullBoardHref } from "./hearings";
+import { billDate, billActionDate, fullBoardHref } from "./hearings";
 import styles from "./bill-updates.module.css";
 export function BillDrawer({
   bill,
@@ -30,7 +30,7 @@ export function BillDrawer({
   );
   const untrack = useTrackBill(clientId, backend, onClose);
   const trackedDate = billDate(bill.trackedAt);
-  const actionDate = billDate(bill.latestActionDate);
+  const actionDate = billActionDate(bill.latestActionDate);
   const board = fullBoardHref(destinations.externalApp, clientId);
   // `/bills/[billId]` is served by this app, so Bill 360 keeps the existing app.
   const detail = destinations.existingApp

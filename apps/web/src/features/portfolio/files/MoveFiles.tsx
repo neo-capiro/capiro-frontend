@@ -13,7 +13,6 @@ export function MoveFiles({
   folders,
   onClose,
   onSaved,
-  creating = false,
   initialFolder = "",
 }: {
   clientId: string;
@@ -22,7 +21,6 @@ export function MoveFiles({
   currentFiles: readonly Attachment[];
   onClose: () => void;
   onSaved: () => void;
-  creating?: boolean;
   initialFolder?: string;
 }) {
   const move = useBatchMove(clientId, onSaved);
@@ -33,13 +31,7 @@ export function MoveFiles({
   return (
     <Dialog
       open
-      title={
-        creating
-          ? "New folder"
-          : count === 1
-            ? "Move to folder"
-            : "Move selected files"
-      }
+      title={count === 1 ? "Move to folder" : "Move selected files"}
       description={
         count === 1
           ? "Review this file before moving it."
@@ -76,11 +68,10 @@ export function MoveFiles({
           ))}
         </ul>
         <label>
-          {creating ? "Folder name" : "Destination folder"}
+          Destination folder
           <input
             list="batch-move-folders"
             maxLength={120}
-            required={creating}
             disabled={!move.canStart}
             value={held ? (held.folder ?? "") : folder}
             onChange={(event) => setFolder(event.target.value)}
@@ -92,8 +83,8 @@ export function MoveFiles({
           ))}
         </datalist>
         <p className="muted">
-          Leave blank for Unfiled. Folders are shared labels. All selected files
-          move together; no physical copies are created.
+          Leave blank for Unfiled, or enter a new folder name. All selected
+          files move together; no physical copies are created.
         </p>
         <QueryState error={error ?? move.error} />
         {held && (
@@ -140,18 +131,9 @@ export function MoveFiles({
         ) : (
           <button
             className="button primary"
-            disabled={
-              !move.canStart ||
-              count < 1 ||
-              count > 100 ||
-              (creating && !folder.trim())
-            }
+            disabled={!move.canStart || count < 1 || count > 100}
           >
-            {creating
-              ? "Create folder & move file"
-              : count === 1
-                ? "Move file"
-                : `Move ${count} files`}
+            {count === 1 ? "Move file" : `Move ${count} files`}
           </button>
         )}
       </form>

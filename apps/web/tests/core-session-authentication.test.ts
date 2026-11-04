@@ -114,25 +114,33 @@ it.each([
 // read has no registered /api/capiro gateway operation, so the shared selector
 // is proven through the backend proxy and the registration tables above stay
 // unchanged rather than gaining a contract invented for the test.
-it("forwards the current-session credential to the exact native Core metrics target", async () => {
-  const response = await backend.GET(
-    new Request(`${origin}/api/backend/core/clients/metrics`, {
-      headers: { Origin: origin },
-    }),
-    {
-      params: Promise.resolve({
-        service: "core",
-        path: ["clients", "metrics"],
-      }),
-    },
-  );
-  expect(response.status).toBe(200);
-  expect(getToken).toHaveBeenCalledExactlyOnceWith();
-  expect(String(fetcher.mock.calls[0]![0])).toBe(`${base}/clients/metrics`);
-  expect(
-    new Headers(fetcher.mock.calls[0]![1]?.headers).get("authorization"),
-  ).toBe("Bearer synthetic-session");
-});
+it.each(["core", "intelligence"])(
+  "forwards the selected %s tracker source with the current-session credential to native Core metrics",
+  async (trackerBackend) => {
+    const response = await backend.GET(
+      new Request(
+        `${origin}/api/backend/core/clients/metrics?trackerBackend=${trackerBackend}`,
+        {
+          headers: { Origin: origin },
+        },
+      ),
+      {
+        params: Promise.resolve({
+          service: "core",
+          path: ["clients", "metrics"],
+        }),
+      },
+    );
+    expect(response.status).toBe(200);
+    expect(getToken).toHaveBeenCalledExactlyOnceWith();
+    expect(String(fetcher.mock.calls[0]![0])).toBe(
+      `${base}/clients/metrics?trackerBackend=${trackerBackend}`,
+    );
+    expect(
+      new Headers(fetcher.mock.calls[0]![1]?.headers).get("authorization"),
+    ).toBe("Bearer synthetic-session");
+  },
+);
 
 it("makes no upstream metrics fetch without a current session", async () => {
   clerk.auth.mockResolvedValueOnce({ userId: null, getToken });
