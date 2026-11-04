@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import type { Prospect } from "../../src/features/portfolio/prospects/contracts";
 import { clientId, json, prospect, prospectId } from "./fixtures";
 import { prospectList, qaFixtures } from "./portfolio-qa-fixtures";
 
@@ -147,7 +148,7 @@ test("converted header exposes linked client and filtered prospect return preser
   page,
 }, info) => {
   const unexpected = await qaFixtures(page);
-  const record = {
+  const record: Prospect = {
     ...prospect,
     stage: "outreach",
     ownerUserId: "owner-test",
