@@ -5100,10 +5100,10 @@
     "file": "apps/web/src/features/meri/conversation/useLiveRun.ts",
     "kind": "function",
     "symbol": "useLiveRun",
-    "fingerprint": "dd2b964cb47a29de8cc47ee46439dac6a8dd8f3b396540ca3087c8b9db1625b2",
-    "reason": "One mounted session-bound run coordinator owns read admission, observation lifetime, explicit refresh and positive journal reconciliation. Stop retirement and accepted-request confirmation now use one existing command gate, driven by durable intent and admitted observation. The closed local-storage failure stays fenced while a prior Stop transport failure can be resolved by an admitted terminal stream event. Public client binding, storage/currentness checks, pending controls and receipts remain with their canonical owners. At 128 nonblank lines this is still one coordinated run lifetime; splitting the predicate from its effect would obscure sequencing without separating a domain. Independent real mounted cold recovery, StrictMode, streamed-terminal, currentness and storage-refusal checks pass. No new queue, retry, dispatch, persistence owner or run authority is introduced.",
-    "reviewedBy": "Codex independent VQA-028 exact-source review of 54510625a9719817001a8e0f162705b526759494",
-    "reviewedOn": "2026-11-03"
+    "fingerprint": "21535663a45dcca481e028a4cedd3cd65ced23db40b9a9c67f895d775b89530b",
+    "reason": "One session-bound hook coordinates initial read, observation and terminal reconciliation. Its 136 nonblank lines retain one cohesive run lifetime. The added per-port lifetime identity prevents retired replies and finalizers from altering the replacement owner's state without introducing another authority or control loop. Independent reviewer003 inspected the exact source and caller renewal seam: recovery drops pending-send input and therefore admits history without replaying an uncertain mutation. Source acceptance is static; author-reported local tests and incomplete full-application typechecking retain their stated limits.",
+    "reviewedBy": "Codex independent reviewer003 exact PR563 source review 21cf41f39007dc9c61b2d9d9b3756cb6c2776731; receipt SHA256 5d77249c5c8feade57432d508d7277b0033711f003f0f3dfa30ab393df8c82f7",
+    "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useRunObservation.ts",
@@ -6103,10 +6103,10 @@
     "file": "apps/web/src/features/meri/conversation/useRunCommands.ts",
     "kind": "function",
     "symbol": "useRunCommands",
-    "fingerprint": "6454381146fb68cee1acffd6f920bd322d238f3dc7c5c89ac2d12986d8056c2d",
-    "reason": "One existing session-bound command coordinator sequences explicit operations, transcript reads and observation callbacks through useCommandGate. Positive read reconciliation retires an obsolete Stop and then confirms the accepted request inside that same gate, preventing competing effects from dropping one transition. localWriteFailed derives only the existing TabJournalUnavailable closed failure; it adds no state machine, new error vocabulary or write authority. Durable storage and currentness remain in the journal, and exact run/event admission remains in the public client. At 135 nonblank lines these are cohesive command-lifetime responsibilities, not unrelated workflows requiring extraction. Independent mounted tests preserve receipts, active Stop ownership, access/unmount fences and refusal to retry a failed save; successful terminal observation causes no history, Stop or submit replay.",
-    "reviewedBy": "Codex independent VQA-028 exact-source review of 54510625a9719817001a8e0f162705b526759494",
-    "reviewedOn": "2026-11-03"
+    "fingerprint": "6226221915b640569fbcf01e93a62192c25df2bc12681d7e375724b5758f4485",
+    "reason": "One session-bound command facade keeps explicit operations, transcript reads and observation callbacks under the existing gate and journal. Its 136 nonblank lines remain cohesive command-lifetime responsibilities. The added alive check belongs at the post-await send boundary and fences late retired-port work; it adds no queue, retry, persistence owner or authority. Independent reviewer003 inspected the exact source and caller seams and found no blocking design or behavior issue. Static acceptance does not imply a fresh test run or authenticated incident closure.",
+    "reviewedBy": "Codex independent reviewer003 exact PR563 source review 21cf41f39007dc9c61b2d9d9b3756cb6c2776731; receipt SHA256 5d77249c5c8feade57432d508d7277b0033711f003f0f3dfa30ab393df8c82f7",
+    "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/features/meri/conversations/ConversationHistoryList.tsx",
