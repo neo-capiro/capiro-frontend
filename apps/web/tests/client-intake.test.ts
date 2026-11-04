@@ -41,12 +41,10 @@ const client = clientSchema.parse({
   },
 });
 describe("client intake domain", () => {
-  it("requires Figma company fields, checks only real dates and bounds priorities", () => {
+  it("requires a company name, checks only real dates and bounds priorities", () => {
     const empty = clientToIntake();
-    expect(validateIntake(empty)).toMatchObject({
+    expect(validateIntake(empty)).toEqual({
       name: expect.any(String),
-      website: expect.any(String),
-      description: expect.any(String),
     });
     const valid = clientToIntake(client);
     expect(validateIntake(valid)).toEqual({});
@@ -72,6 +70,25 @@ describe("client intake domain", () => {
       internalNotes: expect.any(String),
       ein: expect.any(String),
     });
+  });
+  it("allows name-only manual entry without inventing website or description", () => {
+    const values = { ...clientToIntake(), name: "Synthetic manual company" };
+    expect(validateIntake(values)).toEqual({});
+    const body = intakePayload(values);
+    expect(body.name).toBe("Synthetic manual company");
+    expect(body).not.toHaveProperty("website");
+    expect(body).not.toHaveProperty("description");
+    expect(
+      validateIntake({ ...values, website: "javascript:alert(1)" }).website,
+    ).toBeDefined();
+    expect(validateIntake({ ...values, website: "example.com" })).toEqual({});
+    expect(
+      validateIntake({ ...values, primaryContactEmail: "not-an-email" })
+        .primaryContactEmail,
+    ).toBeDefined();
+    expect(
+      validateIntake({ ...values, description: "x".repeat(601) }).description,
+    ).toBeDefined();
   });
   it("preserves unchanged legacy field values but rejects a newly invalid EIN", () => {
     const legacy = clientToIntake(

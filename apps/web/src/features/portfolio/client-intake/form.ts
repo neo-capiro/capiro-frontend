@@ -9,9 +9,8 @@ export const intakeFormSchema = z.object({
   website: z
     .string()
     .trim()
-    .min(1, "Website is required.")
-    .refine((v) => Boolean(safeWebsite(v)), "Enter a valid website."),
-  description: z.string().trim().min(1, "Company description is required."),
+    .refine((v) => !v || Boolean(safeWebsite(v)), "Enter a valid website."),
+  description: z.string().trim(),
   primaryContactEmail: z.union([z.email(), z.literal("")]),
   primaryContactPhone: z.string(),
   primaryContactName: z.string(),
