@@ -1,12 +1,9 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
-import { publicFormToken } from "./planner-public-forms";
 import {
   calendarDate,
   plannerId,
-  plannerTask,
   project,
-  read,
   recordParams,
 } from "./planner-schemas";
 const source =
@@ -58,62 +55,6 @@ export const plannerManagementOperations = {
     response: copyResponse,
     source,
   }),
-  "planner.template.instantiate": defineOperation({
-    service: "strategy",
-    method: "POST",
-    path: "/planner/templates/:id/instantiate",
-    request: z
-      .object({
-        params: recordParams,
-        body: z
-          .object({
-            name: z.string().trim().min(1).max(500),
-            anchorOn: calendarDate.optional(),
-          })
-          .strict(),
-      })
-      .strict(),
-    response: copyResponse,
-    source,
-  }),
-  "planner.form.share": defineOperation({
-    service: "strategy",
-    method: "POST",
-    path: "/planner/forms/:id/share",
-    request: z
-      .object({
-        params: recordParams,
-        body: z
-          .object({
-            version: z.number().int().nonnegative(),
-            enabled: z.boolean(),
-          })
-          .strict(),
-      })
-      .strict(),
-    response: z.object({ token: publicFormToken.nullable() }),
-    source,
-  }),
-  "planner.form.submit": defineOperation({
-    service: "strategy",
-    method: "POST",
-    path: "/planner/forms/:id/submit",
-    request: z
-      .object({
-        params: recordParams,
-        body: z.record(
-          plannerId,
-          z.union([
-            z.string().max(50000),
-            z.number(),
-            z.array(z.string()).max(100),
-          ]),
-        ),
-      })
-      .strict(),
-    response: plannerTask,
-    source,
-  }),
   "planner.report.widget": defineOperation({
     service: "strategy",
     method: "GET",
@@ -137,41 +78,6 @@ export const plannerManagementOperations = {
       })
       .strict(),
     response: reportResponse,
-    source,
-  }),
-  "planner.time.preferences": defineOperation({
-    service: "strategy",
-    method: "GET",
-    path: "/planner/time/preferences",
-    request: read,
-    response: z
-      .object({
-        version: z.number().int().nonnegative(),
-        autoAddDueTasks: z.boolean(),
-      })
-      .strip(),
-    source,
-  }),
-  "planner.time.preferences.update": defineOperation({
-    service: "strategy",
-    method: "PATCH",
-    path: "/planner/time/preferences",
-    request: z
-      .object({
-        body: z
-          .object({
-            version: z.number().int().nonnegative(),
-            autoAddDueTasks: z.boolean(),
-          })
-          .strict(),
-      })
-      .strict(),
-    response: z
-      .object({
-        version: z.number().int().nonnegative(),
-        autoAddDueTasks: z.boolean(),
-      })
-      .strip(),
     source,
   }),
 };

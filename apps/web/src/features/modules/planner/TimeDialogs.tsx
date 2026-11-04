@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { PlannerProject } from "../../../shared/capiro/operations/planner-schemas";
 import {
   useCapiroMutation,
@@ -10,7 +9,6 @@ import {
   ActionButton,
   Field,
   Modal,
-  StatusPanel,
   TextArea,
   TextInput,
 } from "../../../shared/module-ui";
@@ -18,7 +16,7 @@ import styles from "./planner.module.css";
 export function AddTimeDialog(props: {
   open: boolean;
   onClose: () => void;
-  taskId?: string;
+  taskId: string;
   projectId: string | null;
   projects: PlannerProject[];
   onSaved: () => void;
@@ -54,7 +52,7 @@ function AddTimeForm({
   onClose,
   onPendingChange,
 }: {
-  taskId?: string;
+  taskId: string;
   projectId: string | null;
   projects: PlannerProject[];
   onSaved: () => void;
@@ -96,7 +94,6 @@ function AddTimeForm({
               id="time-project"
               className={styles.select}
               value={project}
-              required={!taskId}
               onChange={(event) => setProject(event.target.value)}
             >
               <option value="">Personal work</option>
@@ -154,82 +151,6 @@ function AddTimeForm({
     </form>
   );
 }
-export function PersonalTimeSettings({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
-  const api = useCapiro();
-  const query = useCapiroQuery(
-    "planner.time.preferences",
-    {},
-    { enabled: open },
-  );
-  const [selected, setSelected] = useState<boolean | null>(null),
-    [error, setError] = useState<string>(),
-    [busy, setBusy] = useState(false);
-  const save = async () => {
-    if (!query.data) return;
-    setBusy(true);
-    setError(undefined);
-    try {
-      await api.request("planner.time.preferences.update", {
-        body: {
-          version: query.data.version,
-          autoAddDueTasks: selected ?? query.data.autoAddDueTasks,
-        },
-      });
-      onClose();
-    } catch (cause) {
-      setError(
-        cause instanceof Error ? cause.message : "Unable to save preferences.",
-      );
-    } finally {
-      setBusy(false);
-    }
-  };
-  return (
-    <Modal
-      open={open}
-      onOpenChange={(next) => {
-        if (!next) onClose();
-      }}
-      title="My timesheet settings"
-    >
-      <StatusPanel
-        loading={query.loading}
-        error={query.error}
-        onRetry={query.reload}
-      >
-        <div className={styles.stack}>
-          <label className={styles.checkbox}>
-            <input
-              type="checkbox"
-              checked={selected ?? query.data?.autoAddDueTasks ?? false}
-              onChange={(event) => setSelected(event.target.checked)}
-            />
-            Automatically add tasks assigned and due this week
-          </label>
-          {error && (
-            <p role="alert" className={styles.error}>
-              {error}
-            </p>
-          )}
-          <ActionButton
-            primary
-            disabled={busy || !query.data}
-            onClick={() => void save()}
-          >
-            Save
-          </ActionButton>
-        </div>
-      </StatusPanel>
-    </Modal>
-  );
-}
-
 function TimeDuration({
   workedOn,
   onWorkedOn: setWorkedOn,
@@ -269,14 +190,13 @@ function TimeDuration({
 }
 
 function useAddTime(
-  taskId: string | undefined,
+  taskId: string,
   projectId: string | null,
   onSaved: () => void,
   onClose: () => void,
   onPendingChange: (owner: object, value: boolean) => void,
 ) {
   const taskMutation = useCapiroMutation("planner.time.add");
-  const projectMutation = useCapiroMutation("planner.time.project.add");
   const pending = useRef(false);
   const owner = useRef({});
   const [project, setProject] = useState(projectId ?? ""),
@@ -285,21 +205,15 @@ function useAddTime(
     ),
     [minutes, setMinutes] = useState(60),
     [billable, setBillable] = useState(false),
-    [text, setText] = useState(""),
-    [error, setError] = useState<string>();
+    [text, setText] = useState("");
   const settings = useCapiroQuery("planner.time.settings", {});
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (pending.current) return;
-    if (!taskId && !project) {
-      setError("Choose a project.");
-      return;
-    }
+
     pending.current = true;
     onPendingChange(owner.current, true);
     taskMutation.reset();
-    projectMutation.reset();
-    setError(undefined);
     try {
       const body = {
         kind: "time" as const,
@@ -315,12 +229,7 @@ function useAddTime(
           category: "",
         },
       };
-      if (taskId) await taskMutation.run({ params: { id: taskId }, body });
-      else if (project)
-        await projectMutation.run({
-          params: { id: project },
-          body,
-        });
+      await taskMutation.run({ params: { id: taskId }, body });
       onSaved();
       onClose();
     } catch {
@@ -341,9 +250,8 @@ function useAddTime(
     setBillable,
     text,
     setText,
-    busy: taskMutation.pending || projectMutation.pending,
-    error:
-      error ?? taskMutation.error?.message ?? projectMutation.error?.message,
+    busy: taskMutation.pending,
+    error: taskMutation.error?.message,
     submit,
     isPending: () => pending.current,
   };

@@ -18,7 +18,6 @@ import {
   parseMultipartRequest,
   type CapiroUploadFile,
 } from "./multipart";
-import { publicPlannerFormOperations } from "./operations/planner-public-forms";
 import { publicOnboardOperations } from "./operations/onboard-public";
 import { publicResearchShareOperations } from "./operations/research-share-public";
 import { publicShareOperations } from "./operations/share-public";
@@ -244,21 +243,6 @@ async function handlePublicOperationRequest(
 }
 
 /** The public surfaces remain separate reviewed capability allowlists. */
-export function handlePublicPlannerFormRequest(
-  request: Request,
-  key: string,
-  config: CapiroConfig,
-  fetcher: typeof fetch = fetch,
-) {
-  return handlePublicOperationRequest(
-    request,
-    key,
-    publicPlannerFormOperations,
-    config,
-    fetcher,
-  );
-}
-
 export function handlePublicOnboardRequest(
   request: Request,
   key: string,

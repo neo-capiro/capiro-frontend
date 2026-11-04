@@ -13,7 +13,6 @@ import {
   StatusPanel,
   Tabs,
 } from "../../../shared/module-ui";
-import { CapacityView } from "./CapacityView";
 import styles from "./planner.module.css";
 import { PlannerInbox } from "./PlannerInbox";
 import { ProjectCatalog } from "./ProjectCatalog";
@@ -21,8 +20,6 @@ import { canReadCurrentProjectLink } from "./current-project-link";
 import { ResourceCatalog } from "./ResourceCatalog";
 import { taskViews, type TaskView } from "./task-presentation";
 import { TaskWorkspace } from "./TaskWorkspace";
-import { TimesheetsView } from "./TimesheetsView";
-import { WorkloadView } from "./WorkloadView";
 const sections = [
   "My tasks",
   "All tasks",
@@ -30,13 +27,7 @@ const sections = [
   "Inbox",
   "Portfolios",
   "Goals",
-  "Workload",
-  "Capacity",
   "Reporting",
-  "Timesheets",
-  "Templates",
-  "Rules",
-  "Forms",
 ].map((label) => ({ id: label.toLowerCase().replaceAll(" ", "-"), label }));
 export function PlannerScreen() {
   const params = useSearchParams(),
@@ -90,8 +81,12 @@ export function PlannerScreen() {
   }
   if (routeView !== requestedView) {
     setRouteView(requestedView);
-    if (sections.some((section) => section.id === requestedView))
-      setSection(requestedView!);
+    setSection(
+      sections.some((section) => section.id === requestedView)
+        ? requestedView!
+        : "my-tasks",
+    );
+    setProjectId(null);
   }
   if (linkedProject)
     return (
@@ -124,7 +119,7 @@ export function PlannerScreen() {
     <div className={styles.screen}>
       <PageHeader
         title="Planner"
-        description="Coordinate tasks, projects and capacity across your permitted work."
+        description="Coordinate tasks and projects across your permitted work."
         actions={
           <>
             {section === "all-tasks" && (
@@ -320,18 +315,6 @@ function PlannerContent({
       />
     );
   if (section === "inbox") return <PlannerInbox />;
-  if (section === "workload") return <WorkloadView people={data.people} />;
-  if (section === "capacity")
-    return <CapacityView people={data.people} projects={data.projects} />;
-  if (section === "timesheets")
-    return (
-      <TimesheetsView
-        people={data.people}
-        projects={data.projects}
-        me={data.me}
-        timeAdmin={data.timeAdmin ?? false}
-      />
-    );
   return (
     <ResourceCatalog
       section={section}

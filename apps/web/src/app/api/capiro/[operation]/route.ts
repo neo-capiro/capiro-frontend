@@ -7,7 +7,6 @@ import {
 } from "../../../../shared/capiro/config";
 import {
   handleCapiroRequest,
-  handlePublicPlannerFormRequest,
   handlePublicOnboardRequest,
   handlePublicResearchShareRequest,
   handlePublicShareRequest,
@@ -31,12 +30,6 @@ async function handle(request: Request, context: Context) {
         const session = await auth();
         return session.userId ? session.getToken() : null;
       },
-    );
-  if (operation.startsWith("public-form."))
-    return handlePublicPlannerFormRequest(
-      request,
-      operation,
-      readCapiroConfig(process.env),
     );
   if (operation.startsWith("public-onboard."))
     return handlePublicOnboardRequest(

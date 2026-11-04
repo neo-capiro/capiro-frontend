@@ -1010,57 +1010,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/planner/CapacityRecordDialog.tsx",
-    "sha256": "382e43337af022e1ef2cadad81984dd6dc740368324c8618fa442985ba48c841",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "CapacityRecordDialog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "useRecord",
-        "nonblankLines": 91
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/CapacityRecordDialog.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/CapacityView.tsx",
-    "sha256": "c177dc48d6430d2e1ae77cdc01f0b50402ba1f857fd62115114e24f0588344d7",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "CapacityView.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "CapacityView",
-        "nonblankLines": 112
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/CapacityView.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/CopyProjectDialog.tsx",
-    "sha256": "bebb0bba8ffa437f9d61551cd8b2896f75f8bb91549182c6967260b61a9861b6",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "CopyProjectDialog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "CopyProjectDialog",
-        "nonblankLines": 83
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/CopyProjectDialog.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/planner/DashboardEditor.tsx",
     "sha256": "45468acd8ae9e7eeb750d0c07642a63ad58cd88337c3d65d2022cc3d3b46572a",
     "reviewer": "Codex implementation review",
@@ -1075,40 +1024,6 @@
     ],
     "signals": [
       "apps/web/src/features/modules/planner/DashboardEditor.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/FormPreview.tsx",
-    "sha256": "e54989c16dd063c4cf6ce8c2dd39b415635aa54a35cf154e2a9c13e4c19a5527",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "FormPreview.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "FormPreview",
-        "nonblankLines": 105
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/FormPreview.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/FormQuestions.tsx",
-    "sha256": "7f617e7d14f4aabdd3f3f9d34a10fc9d944b77c51ee1fe2432e02ffe39e5b1f7",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "FormQuestions.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "FormQuestions",
-        "nonblankLines": 119
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/FormQuestions.tsx: function over80 nonblank lines requires review"
     ]
   },
   {
@@ -1163,62 +1078,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/planner/ProjectCatalog.tsx",
-    "sha256": "d7c892ec95d0452aa6c12d1fee6665d4391be82b37f0ae0d1320ae9d612d7a9c",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "The catalog and its project form keep separate presentation responsibilities in one cohesive project module. Stable project keys repair React identity; JSX text is preserved.",
-    "functions": [
-      {
-        "name": "ProjectCatalog",
-        "nonblankLines": 93
-      },
-      {
-        "name": "ProjectForm",
-        "nonblankLines": 89
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/ProjectCatalog.tsx: function over80 nonblank lines requires review",
-      "apps/web/src/features/modules/planner/ProjectCatalog.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/ResourceEditor.tsx",
-    "sha256": "d68c5f2ee915af38335c716cb3b5e2b663f8a564372b03d9e1471362ae3bab36",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "One resource-edit form remains behind its registered operation. The integration changes only JSX apostrophe escaping.",
-    "functions": [
-      {
-        "name": "ResourceForm",
-        "nonblankLines": 93
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/ResourceEditor.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/ResourceTypeFields.tsx",
-    "sha256": "f935b51513af1535915d2d3dc5449ca63aae07c7e5bb53b6af55657c05a760b1",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "ResourceTypeFields.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "GoalFields",
-        "nonblankLines": 91
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/ResourceTypeFields.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/planner/TaskAttachments.tsx",
     "sha256": "7796268ddc188370495670dac8b5646d81d67ae7b45bf9c0feaf04f2790c2b6c",
     "reviewer": "Codex implementation review",
@@ -1255,108 +1114,6 @@
     "signals": [
       "apps/web/src/features/modules/planner/TaskEditor.tsx: function over80 nonblank lines requires review",
       "apps/web/src/features/modules/planner/TaskEditor.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/TimeDialogs.tsx",
-    "sha256": "dca90f8d31ad25a163edce5b567a9c1ff9121065029d51c4d4a25763fdb30576",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "TimeDialogs.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "AddTimeForm",
-        "nonblankLines": 82
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/TimeDialogs.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
-    "sha256": "5ab7ed0026f62896cf44b7bc7e7b4131622a6d32229ff3fe7a158998b213a412",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "TimeExportDialog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "TimeExportDialog",
-        "nonblankLines": 175
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/TimeExportDialog.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/TimeSettings.tsx",
-    "sha256": "04eb52bad5f290e3af19198bda07ee96db61e7d0c4f8bea33a75f35fcde30a8c",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "TimeSettings.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "SettingsForm",
-        "nonblankLines": 101
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/TimeSettings.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/TimesheetWorkDialog.tsx",
-    "sha256": "79b4429e8e53c4265e25f22d420e86b6231de01ab4887f7388714c96f1b5168c",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "TimesheetWorkDialog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "TimesheetWorkDialog",
-        "nonblankLines": 111
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/TimesheetWorkDialog.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/resource-data.ts",
-    "sha256": "fdca3f43e7d9d1d5c70c4e418fcb657d9a247bcc8f96633691b566500ba97d8c",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "The bounded Planner resource-kind catalog owns initial editor data. Its kind branches produce declarative defaults only; rendering and persistence are separate. New resource domains require another review.",
-    "functions": [
-      {
-        "name": "initialResourceData",
-        "nonblankLines": 84
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/resource-data.ts: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/use-timesheets.ts",
-    "sha256": "ffc313d5311880aee591808ca2eb219eb99b694a44f91231c80c747960c61f68",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "One timesheet state model owns selected week/person, reads and optimistic review actions; toolbar, tables and dialogs are separate presentation components. Backend version and revision remain execution authority.",
-    "functions": [
-      {
-        "name": "useTimesheets",
-        "nonblankLines": 97
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/use-timesheets.ts: function over80 nonblank lines requires review"
     ]
   },
   {
@@ -2741,23 +2498,6 @@
     ]
   },
   {
-    "path": "apps/web/src/shared/capiro/operations/planner-contracts.test.ts",
-    "sha256": "ecc37913adba62639ef06e301d78f0fa845e92f2d6bdc9d5212168204349f4bb",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#tests",
-    "rationale": "planner-contracts.test.ts groups independent observable boundary assertions with synthetic fixtures. The long suite callback is test organization, with no added runtime responsibility or omitted assertions.",
-    "functions": [
-      {
-        "name": "callback at line 5",
-        "nonblankLines": 107
-      }
-    ],
-    "signals": [
-      "apps/web/src/shared/capiro/operations/planner-contracts.test.ts: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/shared/capiro/operations/settings.ts",
     "sha256": "4b67eafda33f2dc9c245bf9cb53eb93300899c0a6ff8727616333c9f72d3e2b9",
     "reviewer": "Codex implementation review",
@@ -2952,23 +2692,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
-    "sha256": "ed102f7fec21c728f1d049b83142223482ed300c97e162461531a110b28f9a5e",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "Existing public submit state, conditional displayed answers and attachment collection remain one cohesive form lifecycle. This patch changes only card headings, fieldset styling and alert/button placement; transport validation, abort lifetime, in-flight guard and input retention stay canonical and unchanged.",
-    "functions": [
-      {
-        "name": "PublicFormQuestions",
-        "nonblankLines": 107
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/PublicForm.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/planner/TaskViews.tsx",
     "sha256": "87bef46fbafa2e42329fd9461de0400655b771270d1299cec9da34831228dd71",
     "reviewer": "Codex shared frontend integration review",
@@ -3048,23 +2771,6 @@
     ],
     "signals": [
       "apps/web/src/features/modules/planner/ObjectivePreparedPlan.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
-    "sha256": "bb1c5488e60dadd1733f1ae2e484fcb1d4ab0dda70c34ae0b7f77e4aebc06287",
-    "reviewer": "Codex independent coherent integration source review",
-    "reviewedAt": "2026-10-17",
-    "evidence": "docs/non-meri-continuation-20261016/COHERENT-NONMERI-SIZE-REVIEW-20261017.md",
-    "rationale": "One Planner page composes existing sections and the held current-project receiver. A pure helper determines link eligibility; the child link checks selected client and a fresh project read before opening the workspace.",
-    "functions": [
-      {
-        "name": "PlannerScreen",
-        "nonblankLines": 148
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/PlannerScreen.tsx: function over80 nonblank lines requires review"
     ]
   },
   {

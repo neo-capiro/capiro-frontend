@@ -2617,37 +2617,10 @@
     "file": "apps/web/src/features/modules/planner/TimeDialogs.tsx",
     "kind": "function",
     "symbol": "AddTimeForm",
-    "fingerprint": "1d843d2916cdfc1fc03548fcc1de6f2081d818cf32c70bae42dee836a8f38f6f",
-    "reason": "This is the sole time-entry form assembly. It delegates draft, synchronous dispatch admission and generation retirement to canonical useAddTime and useCapiroMutation owners. The disabled native fieldset and guarded Cancel render the same pending transaction; project selection, duration, description and billable fields constrain that transaction. No parallel request or lifetime implementation is introduced.",
-    "reviewedBy": "Codex outreach_review; Codex independent_fix_review",
-    "reviewedOn": "2026-10-14"
-  },
-  {
-    "file": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
-    "kind": "function",
-    "symbol": "TimeExportDialog",
-    "fingerprint": "ce458bf74c3c263fbdfcdb4dec11320f87033171d46b2191a3a1258137311b05",
-    "reason": "One existing export form owns a bounded read-pagination-to-CSV workflow. Canonical API validates authority, request and receipts. Its synchronous attempt identity, cancellation, pending inputs and output admission constrain this same export; no second transport or unrelated domain is added.",
-    "reviewedBy": "Codex independent_fix_review",
-    "reviewedOn": "2026-10-14"
-  },
-  {
-    "file": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
-    "kind": "function",
-    "symbol": "TimeExportDialog > run",
-    "fingerprint": "060871eaf28a89f4d2cb9fe7e87cb1ff0f525771796c516ad85139c9b6d253fd",
-    "reason": "One bounded export-attempt lifecycle captures one input and revision, reads at most100pages, and emits one CSV only while its cancellation and active-attempt identity remain current. Every post-await and output boundary checks the same owner; final cleanup cannot release a newer reopened export. Canonical API owns validated receipts and authority.",
-    "reviewedBy": "Codex independent_fix_review",
-    "reviewedOn": "2026-10-14"
-  },
-  {
-    "file": "apps/web/test/browser/planner-time-export-lifetime.spec.ts",
-    "kind": "function",
-    "symbol": "<anonymous>",
-    "fingerprint": "fedd38c18dd9596c4846223172004951f782683368955d33605afd66d5c28f4b",
-    "reason": "One real CSV pagination/download control shares setup, exact request assertions, duplicate native submission admission and escaping/readback. These assertions observe the same export transaction and receipt; no unrelated behavior is mixed in, and splitting solely by line count would fragment its ordered evidence.",
-    "reviewedBy": "Codex outreach_review",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "7b6568afd573cc8f8e66c5e703a8024c551a08f255ff1b5844b4393cc7eeecc0",
+    "reason": "One task-scoped time-entry form captures minutes, date, project and billable fields for the existing planner.time.add operation. Removing project-only Timesheet mode leaves the same task mutation, keyed pending owner, currentness and cancel guards. It introduces no retry, alternate time store or authorization owner.",
+    "reviewedBy": "Codex independent review_vqa003; thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a4bf-96a8-7f02-8ca0-91352a6da7ce",
+    "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/features/modules/planner/useTaskEditor.ts",
@@ -7962,6 +7935,42 @@
     "fingerprint": "5d80e163ff55d8196a25d12a02474a284b1e822dc440079442920e667d277b4a",
     "reason": "One session-scoped capability covering read, save and uncertain-save reconciliation. The methods share lifetime checks, response correlation and the attempt journal. Recovery reuses artifact inspection and canvas reads; transport and contracts retain their owners. Separating these methods would duplicate the same capability invariants.",
     "reviewedBy": "Codex independent Acceptance; exact-source review 473e4be2a4a5a824833e3011b883a2c76978154b000dfc5ac9c31aa4c3b58fba",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+    "kind": "function",
+    "symbol": "PlannerScreen",
+    "fingerprint": "4112a5e59b1b324571f2977231ea8c4512b9369701a993c8eeb2ade495c4fe9d",
+    "reason": "One Planner page composes existing task, project and objective views and their selected-state navigation. Removed sections recover to My tasks; typed operations and child components retain data access, currentness and authorization. The remaining branches serve one page responsibility and do not add transport or persistence authority.",
+    "reviewedBy": "Codex independent review_vqa003; thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a4bf-96a8-7f02-8ca0-91352a6da7ce",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/ProjectCatalog.tsx",
+    "kind": "function",
+    "symbol": "ProjectCatalog",
+    "fingerprint": "1f6a7550e1cc85110ea9c3b55ad23fc98406833915f2f034924cd1943c333e8f",
+    "reason": "One project catalog presents its list and existing create, edit, archive and duplicate entry points. The copy dialog now has only the project responsibility; typed operations and versioned editor retain persistence and access checks. Splitting the bounded catalog presentation would not remove a separate owner.",
+    "reviewedBy": "Codex independent review_vqa003; thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a4bf-96a8-7f02-8ca0-91352a6da7ce",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/ProjectCatalog.tsx",
+    "kind": "function",
+    "symbol": "ProjectForm",
+    "fingerprint": "5559adbc53117284b32ed154084b890ec57ccfc521e272820c88f6a4b8998e38",
+    "reason": "Independently reviewed unchanged function body within the changed ProjectCatalog file. This is one versioned project create/edit form with existing fields, privacy/admin controls and pending/error handling. Canonical operations own validation and persistence; the form adds no independent authorization or unrelated workflow.",
+    "reviewedBy": "Codex independent review_vqa003; thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a4bf-96a8-7f02-8ca0-91352a6da7ce",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/ResourceTypeFields.tsx",
+    "kind": "function",
+    "symbol": "GoalFields",
+    "fingerprint": "405ae0a3f87cb2e36ec9ac8976a1ddd6ce7977007cfab74738614de5e1f93b63",
+    "reason": "Independently reviewed unchanged function body within the changed ResourceTypeFields file. These are stateless inputs for one goal resource, sharing its update callback and field dependencies. ResourceEditor retains persistence and mutation lifetime; removing RuleFields does not introduce another domain or owner here.",
+    "reviewedBy": "Codex independent review_vqa003; thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a4bf-96a8-7f02-8ca0-91352a6da7ce",
     "reviewedOn": "2026-11-04"
   }
 ]

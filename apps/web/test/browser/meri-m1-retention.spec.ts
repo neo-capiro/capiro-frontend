@@ -6,6 +6,7 @@ import {
   sendButton,
 } from "./meri-conversation-fixtures";
 import { installM1Flow } from "./meri-m1-flow-fixtures";
+import { publicConfig } from "./onboard-boundary-fixtures";
 import {
   answerFor,
   installRetentionConversations,
@@ -126,6 +127,10 @@ test("M1 retention: public-route reload then a different sign-in clears old reco
   page,
 }) => {
   const native = await installRetentionConversations(page);
+  await page.route(/\/api\/capiro\/public-onboard\.config(?:\?|$)/, (route) => {
+    expect(route.request().method()).toBe("GET");
+    return route.fulfill({ json: publicConfig });
+  });
   await page.goto(url());
   await expect(
     page.getByText(answerFor(binding), { exact: true }),
@@ -133,9 +138,9 @@ test("M1 retention: public-route reload then a different sign-in clears old reco
   await composer(page).fill("First account private draft");
   const retained = await recoveryEntries(page);
   expect(JSON.stringify(retained)).toContain("First account private draft");
-  await page.goto("/forms/invalid");
+  await page.goto("/it/error?reason=state");
   await expect(
-    page.getByRole("region", { name: "Public request form" }),
+    page.getByRole("heading", { name: "We couldn't verify the connection" }),
   ).toBeVisible();
   expect(await recoveryEntries(page)).toEqual(retained);
   await page.evaluate(

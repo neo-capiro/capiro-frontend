@@ -28,7 +28,14 @@ export const plannerResourceOperations = {
     method: "GET",
     path: "/planner/resources",
     request: read,
-    response: z.array(resource),
+    response: z
+      .array(z.object({ kind: z.string() }).passthrough())
+      .transform((items) =>
+        items.filter((item) =>
+          resourceKinds.some((kind) => kind === item.kind),
+        ),
+      )
+      .pipe(z.array(resource)),
     source,
   }),
   "planner.resource.create": defineOperation({
