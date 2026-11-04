@@ -45,7 +45,7 @@ export function useRunCommandJournal(
   const cache = useQueryClient();
   const [journal] = useState(() => retainedCommands(cache, port));
   const [intent, setIntent] = useState(journal.read);
-  const [transcript, setTranscript] = useState<TranscriptState>(() =>
+  const [transcript, updateTranscript] = useState<TranscriptState>(() =>
     initialPrompt
       ? "loaded"
       : journal.read().submit?.state === "unknown"
@@ -72,7 +72,9 @@ export function useRunCommandJournal(
     journal,
     intent,
     transcript,
-    setTranscript,
+    setTranscript: (state: TranscriptState) => {
+      if (alive.current) updateTranscript(state);
+    },
     record,
     storageError,
     ...gate,

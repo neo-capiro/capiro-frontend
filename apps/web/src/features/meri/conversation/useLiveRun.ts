@@ -1,5 +1,11 @@
 "use client";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { useRunCommands } from "./useRunCommands";
@@ -19,8 +25,16 @@ export function useLiveRun(
   initialPrompt: string | undefined,
   acceptedRequest?: ConversationStoredRequest,
 ) {
-  const alive = useRef(true),
-    started = useRef<MeriConversationPort | null>(null);
+  const currentPort = useRef<MeriConversationPort | null>(port);
+  const alive = useMemo(
+    () => ({
+      get current() {
+        return currentPort.current === port;
+      },
+    }),
+    [port],
+  );
+  const started = useRef<MeriConversationPort | null>(null);
   const observation = useRunObservation(port, alive);
   const { journal, active, ...commands } = useRunCommands(
     port,
@@ -67,7 +81,7 @@ export function useLiveRun(
   }, [statusRefresh, commands.busy]);
 
   useEffect(() => {
-    alive.current = true;
+    currentPort.current = port;
     if (started.current !== port) {
       started.current = port;
       const retained = journal.read().submit;
@@ -79,7 +93,7 @@ export function useLiveRun(
       else void commands.history();
     } else if (!active.current) observation.observe();
     return () => {
-      alive.current = false;
+      currentPort.current = null;
       observation.stop();
     };
     // Runs once per mounted port; later commands are explicit.

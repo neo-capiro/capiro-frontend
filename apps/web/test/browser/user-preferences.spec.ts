@@ -300,3 +300,149 @@ test("access loss removes drafts and never redispatches a known withheld save", 
   ).toHaveCount(0);
   expect(writes).toBe(1);
 });
+
+test("an unavailable account can be rechecked before any preferences are exposed", async ({
+  page,
+}) => {
+  await identity(page);
+  let accountAvailable = true;
+  let holdIdentity = false;
+  let accountReads = 0;
+  let preferenceReads = 0;
+  let writes = 0;
+  let releaseIdentity: (() => void) | undefined;
+  await page.route("**/api/capiro/me.read*", async (route) => {
+    accountReads++;
+    if (!accountAvailable)
+      return route.fulfill({
+        status: 503,
+        json: { error: { message: "Synthetic identity outage" } },
+      });
+    if (holdIdentity)
+      await new Promise<void>((resolve) => {
+        releaseIdentity = resolve;
+      });
+    return route.fulfill({
+      json: {
+        ...testIdentity,
+        user: { ...testIdentity.user, id: captured.read.owner.actorId },
+        tenant: { ...testIdentity.tenant, id: captured.read.owner.tenantId },
+      },
+    });
+  });
+  await page.route(endpoint, (route) => {
+    if (route.request().url().endsWith("/read")) preferenceReads++;
+    else writes++;
+    return route.fulfill({ json: captured.read });
+  });
+  // The outer account checks have their own retry. Admit those first, then fail
+  // the fresh identity read owned by Preferences when the person navigates there.
+  await page.goto("/settings/personal");
+  await expect(
+    page.getByRole("heading", { name: "Personal", exact: true }),
+  ).toBeVisible();
+  accountAvailable = false;
+  await navigate(page, "/settings/preferences");
+  await expect(
+    page.getByRole("button", { name: "Check current account", exact: true }),
+  ).toBeVisible();
+  expect(preferenceReads).toBe(0);
+  expect(writes).toBe(0);
+  const initialReads = accountReads;
+  accountAvailable = true;
+  holdIdentity = true;
+  await page
+    .getByRole("button", { name: "Check current account", exact: true })
+    .click();
+  await expect.poll(() => accountReads).toBe(initialReads + 1);
+  await expect(
+    page.getByText("Verifying your current account.", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Load current preferences", exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", {
+      name: "Save personal preferences",
+      exact: true,
+    }),
+  ).toHaveCount(0);
+  releaseIdentity!();
+  await page
+    .getByRole("button", { name: "Load current preferences", exact: true })
+    .click();
+  await expect(
+    page.getByRole("combobox", { name: "Theme", exact: true }),
+  ).toBeEnabled();
+  expect(preferenceReads).toBe(1);
+  expect(writes).toBe(0);
+});
+
+test("a late preferences reply cannot replace a newly verified account", async ({
+  page,
+}) => {
+  await identity(page);
+  let secondOwner = false;
+  let reads = 0;
+  let writes = 0;
+  let releaseOld: (() => void) | undefined;
+  const replacement = {
+    ...structuredClone(captured.read),
+    owner: {
+      ...captured.read.owner,
+      actorId: "20000000-0000-4000-8000-000000000099",
+    },
+    preferences: { ...captured.read.preferences, theme: "dark" },
+  };
+  await page.route("**/api/capiro/me.read*", (route) =>
+    route.fulfill({
+      json: {
+        ...testIdentity,
+        user: {
+          ...testIdentity.user,
+          id: secondOwner
+            ? replacement.owner.actorId
+            : captured.read.owner.actorId,
+        },
+        tenant: { ...testIdentity.tenant, id: captured.read.owner.tenantId },
+      },
+    }),
+  );
+  await page.route(endpoint, async (route) => {
+    if (!route.request().url().endsWith("/read")) {
+      writes++;
+      return route.abort();
+    }
+    reads++;
+    if (reads === 1) {
+      await new Promise<void>((resolve) => {
+        releaseOld = resolve;
+      });
+      return route.fulfill({ json: captured.read });
+    }
+    return route.fulfill({ json: replacement });
+  });
+  await page.goto("/settings/preferences");
+  await page
+    .getByRole("button", { name: "Load current preferences", exact: true })
+    .click();
+  await expect.poll(() => reads).toBe(1);
+  await navigate(page, "/settings/personal");
+  await expect(
+    page.getByRole("button", { name: "Load current preferences", exact: true }),
+  ).toHaveCount(0);
+  secondOwner = true;
+  await navigate(page, "/settings/preferences");
+  await page
+    .getByRole("button", { name: "Load current preferences", exact: true })
+    .click();
+  await expect(
+    page.getByRole("combobox", { name: "Theme", exact: true }),
+  ).toHaveValue("dark");
+  releaseOld!();
+  await expect(
+    page.getByRole("combobox", { name: "Theme", exact: true }),
+  ).toHaveValue("dark");
+  expect(reads).toBe(2);
+  expect(writes).toBe(0);
+});
