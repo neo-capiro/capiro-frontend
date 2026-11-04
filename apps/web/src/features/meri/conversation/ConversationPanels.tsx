@@ -37,6 +37,7 @@ export function ConversationPanels({
     <ConversationArtifacts
       artifacts={conversationFiles(published, items)}
       access={port.artifacts}
+      publishedNow={turn?.artifacts.map((artifact) => artifact.versionId) ?? []}
       scope={{
         conversationId: port.context.conversationId,
         clientId: port.context.selectedClientId,

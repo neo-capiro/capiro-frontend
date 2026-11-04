@@ -1,4 +1,9 @@
 import {
+  receiveCanvasResponse,
+  type CanvasRoute,
+  type AdmittedCanvasRequest,
+} from "@capiro/meri-contracts/document-canvas";
+import {
   receiveDocumentResponse,
   receiveDocumentDownload,
   type AdmittedDocumentRequest,
@@ -82,7 +87,8 @@ function documentReceiver(
       | FederalRoute
       | "preview"
       | "preview-publish"
-      | "results",
+      | "results"
+      | CanvasRoute,
     request: unknown,
     caller: AbortSignal,
     decode: (response: Response, signal: AbortSignal) => Promise<T>,
@@ -98,6 +104,8 @@ function documentReceiver(
         "preview",
         "preview-publish",
         "results",
+        "canvas-read",
+        "canvas-save",
         "federal-prepare",
         "federal-load",
         "federal-publish",
@@ -174,6 +182,28 @@ export function documentTransport(
       );
     },
   };
+}
+
+/** Canvas uses the same bounded authenticated document connection and public receiver. */
+export function canvasTransport(
+  credential: string,
+  lifetime: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  const receive = documentReceiver(credential, lifetime, fetcher);
+  return <R extends CanvasRoute>(
+    route: R,
+    request: AdmittedCanvasRequest<R>,
+    signal: AbortSignal,
+  ) =>
+    receive(route, request, signal, async (response, current) =>
+      receiveCanvasResponse(
+        route,
+        response.status,
+        await boundedJsonBytes(response, current, 16 * 1024 * 1024),
+        request,
+      ),
+    );
 }
 
 /** Uses the existing authenticated, bounded document transport. */

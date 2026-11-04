@@ -6723,10 +6723,10 @@
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest",
-    "fingerprint": "d81e40f12edc8e2b5002f0ac9049e1c9cebbeafa8a49dc7addb05d0970e0b4ac",
-    "reason": "Existing fixed-route document forwarding owner. The bounded diagnostic attaches stage and HTTP outcome to the same attempt through the canonical recorder; the duplicate recorder is deleted. Origin, native credential, opaque action session, configuration, deadline, request body and response bounds remain with their existing owners. No response DTO admission, public field, new header, retry, authorization or retention decision is introduced. Its 141 nonblank body lines keep one request lifetime together; mechanically splitting the route flow would obscure that lifetime rather than remove a separate responsibility.",
-    "reviewedBy": "Codex independent VQA-009 exact-source review of 07174e63a6a55efbad4123afac13198c7091f82e",
-    "reviewedOn": "2026-11-03"
+    "fingerprint": "dcb9dc6248f991fb53bfd1cdc6931169ec4d4d1c79cf9dec0c452f689af5fba0",
+    "reason": "One bounded document HTTP forwarding boundary. Route-specific validation delegates to published receivers without implementing document business rules. Canvas extends the fixed route set without creating another transport or authority layer.",
+    "reviewedBy": "Codex author implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/shared/meri-documents/library-access.ts",
@@ -7027,10 +7027,10 @@
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest > <anonymous>",
-    "fingerprint": "1e66c1440d8cc3bf5755e9aba8132c7ffed8f2d50bbeaa6a20a12328dd030cbc",
-    "reason": "One bounded forwarding callback covers request receiving, configuration admission, upstream fetch and response release under the existing action deadline. Diagnostic markers precede the work they describe and use the canonical terminal recorder. Fixed route selection, credential forwarding, redirect refusal, JSON byte bounds and allowlisted binary headers preserve prior behavior; a forwarded HTTP status does not claim a valid or admitted DTO. The 91 nonblank lines remain one cohesive transport attempt with no duplicate verifier, hidden retry, new authority or independent service lifecycle.",
-    "reviewedBy": "Codex independent VQA-009 exact-source review of 07174e63a6a55efbad4123afac13198c7091f82e",
-    "reviewedOn": "2026-11-03"
+    "fingerprint": "618e71ebc160bb13b0c5c90b6aa6ac0ecfebcb4ded08a77ed1b752c7febd6967",
+    "reason": "Owns one request deadline, credential acquisition, bounded request and response transfer, and response-body cleanup. Keeping try/finally beside the acquired response makes resource ownership explicit. It executes the same proxy responsibility rather than introducing another subsystem.",
+    "reviewedBy": "Codex author implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/features/meri/work/WorkSelectionPicker.tsx",
@@ -7909,5 +7909,41 @@
     "reason": "One selected conversation opening owner constructs hosts from captured hints, keeps an authorized send's pending prompt separate, and marks renewal/retry as read-only recovery. The 86-line function delegates canonical receipt admission and pre-publication exact-run refusal to the existing host; commands, durable journals and history remain separate owners. No unrelated responsibility, duplicate authority protocol or framework is introduced.",
     "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa003; PR554 product 7a6c0a1dd4e4b548e8fc13a0f856707b1311ed57; outputs/vqa-006-read-only-recovery-r1-independent-review.json",
     "reviewedOn": "2026-11-03"
+  },
+  {
+    "file": "apps/web/src/features/meri/canvas/CanvasWorkspace.tsx",
+    "kind": "function",
+    "symbol": "CanvasWorkspace",
+    "fingerprint": "2b80df2c446aec08875ccf1dc05a5c30f41e91ac965284330879765bcdad47fa",
+    "reason": "Owns one canvas view mounting, cached draft lifetime, navigation protection and controls. CanvasController owns state transitions; canvas-content owns conversion; the session access owns transport. Extracting JSX or effects only to reduce size would not establish a separate responsibility.",
+    "reviewedBy": "Codex author implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/ConversationArtifacts.tsx",
+    "kind": "function",
+    "symbol": "ConversationArtifact",
+    "fingerprint": "91f5a0232110b0ad439507162d14f2d4c2197a630ee837457a017b3ddfa90812",
+    "reason": "Presents one immutable artifact and its available actions. Reads and downloads remain in useArtifactActions; canvas receives only a version selector. No generation, authorization or persistence responsibility moves into the card.",
+    "reviewedBy": "Codex author implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/ConversationView.tsx",
+    "kind": "function",
+    "symbol": "ConversationView",
+    "fingerprint": "144286afa1f2a22b78f25a6e51ba9dacbb79b714c01aca027dfcf8b1a09f3eb1",
+    "reason": "Composes the admitted conversation, retained display, composer and canvas. The added callback transfers an exact document selection to the existing draft owner. Revision behavior and canvas state keep their existing owners. SessionComposer is outside this record.",
+    "reviewedBy": "Codex author implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/shared/meri-documents/canvas-access.ts",
+    "kind": "function",
+    "symbol": "createCanvasAccess",
+    "fingerprint": "5d80e163ff55d8196a25d12a02474a284b1e822dc440079442920e667d277b4a",
+    "reason": "One session-scoped capability covering read, save and uncertain-save reconciliation. The methods share lifetime checks, response correlation and the attempt journal. Recovery reuses artifact inspection and canvas reads; transport and contracts retain their owners. Separating these methods would duplicate the same capability invariants.",
+    "reviewedBy": "Codex author implementation design review; independent exact-head review pending",
+    "reviewedOn": "2026-11-04"
   }
 ]
