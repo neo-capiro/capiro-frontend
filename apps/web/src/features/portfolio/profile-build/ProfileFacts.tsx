@@ -2,6 +2,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
+import { ApiError } from "@/shared/portfolio/api/http";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { safeWebsite } from "@/features/portfolio/index/public";
 import { refreshAppliedSurfaces } from "./review-effects";
@@ -146,17 +147,26 @@ export function ProfileFacts({ subject }: { subject: ProfileSubject }) {
     },
   });
   const denied = isProfileAccessDenied(resolve.error);
+  const staleRefusal =
+    resolve.error instanceof ApiError && resolve.error.status === 409;
   const profile = denied ? undefined : query.data;
   const canResolve = writableSnapshot && !denied;
   const refreshSnapshot = async () => {
-    const current = await query.refetch();
-    if (current.isSuccess) resolve.reset();
+    const refused = staleRefusal ? attempt : undefined;
+    const refreshed = await query.refetch();
+    if (refreshed.isSuccess && !refreshed.error && current.current === actor) {
+      if (refused)
+        setAttempt((pending) => (pending === refused ? undefined : pending));
+      // A read cannot resolve an uncertain write. Keep its exact retry available.
+      if (!attempt || refused) resolve.reset();
+    }
   };
   const decide = (
     fact: ProfileFact,
     version: number,
     resolution: "keep_current" | "accept_proposed",
   ) => {
+    if (!canResolve || resolve.isPending || attempt) return;
     const input = {
       factId: fact.id,
       requestId: crypto.randomUUID(),
@@ -185,10 +195,17 @@ export function ProfileFacts({ subject }: { subject: ProfileSubject }) {
       {attempt && resolve.isError && (
         <button
           className="button"
-          disabled={!canResolve || attempt.actor !== actor}
-          onClick={() => resolve.mutate(attempt)}
+          disabled={
+            attempt.actor !== actor ||
+            (staleRefusal ? !canEdit || query.isFetching : !canResolve)
+          }
+          onClick={() =>
+            staleRefusal ? void refreshSnapshot() : resolve.mutate(attempt)
+          }
         >
-          Check or retry this decision
+          {staleRefusal
+            ? "Refresh current conflicts"
+            : "Check or retry this decision"}
         </button>
       )}
       {profile?.conflicts

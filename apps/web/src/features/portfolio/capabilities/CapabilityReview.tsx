@@ -16,8 +16,11 @@ export function CapabilityReview({ clientId }: { clientId: string }) {
   const [status, setStatus] = useState("proposed");
   const [selected, setSelected] = useState<string[]>([]);
   const [unit, setUnit] = useState("");
-  const [editing, setEditing] = useState<CapabilityProposal>();
-  const [splitting, setSplitting] = useState<CapabilityProposal>();
+  const [editing, setEditing] = useState<{ id: string; reviewed: string }>();
+  const [splitting, setSplitting] = useState<{
+    id: string;
+    reviewed: string;
+  }>();
   const [merging, setMerging] = useState(false);
   const results = useDiscoveryResults(clientId, unit || undefined);
   const proposals =
@@ -32,6 +35,20 @@ export function CapabilityReview({ clientId }: { clientId: string }) {
   const selectedProposals = proposals.filter(
     (p) => selected.includes(p.id) && p.status === "proposed",
   );
+  const currentProposal = (selection: typeof editing) =>
+    selection && query.isSuccess && !query.error
+      ? proposals.find(
+          (p) =>
+            p.id === selection.id &&
+            p.status === "proposed" &&
+            JSON.stringify(p) === selection.reviewed,
+        )
+      : undefined;
+  const editingProposal = currentProposal(editing);
+  const splittingProposal = currentProposal(splitting);
+  // Retire the selection, so a later response cannot reopen an old review.
+  if (editing && !editingProposal) setEditing(undefined);
+  if (splitting && !splittingProposal) setSplitting(undefined);
   return (
     <section
       className={styles.section}
@@ -114,8 +131,18 @@ export function CapabilityReview({ clientId }: { clientId: string }) {
                       : current.filter((id) => id !== proposal.id),
                   )
                 }
-                onEdit={() => setEditing(proposal)}
-                onSplit={() => setSplitting(proposal)}
+                onEdit={() =>
+                  setEditing({
+                    id: proposal.id,
+                    reviewed: JSON.stringify(proposal),
+                  })
+                }
+                onSplit={() =>
+                  setSplitting({
+                    id: proposal.id,
+                    reviewed: JSON.stringify(proposal),
+                  })
+                }
               />
             ))}
           </div>
@@ -138,28 +165,20 @@ export function CapabilityReview({ clientId }: { clientId: string }) {
           )}
         </>
       )}
-      {editing &&
-        query.isSuccess &&
-        !query.error &&
-        results.isSuccess &&
-        !results.error && (
-          <CapabilityProposalEditor
-            clientId={clientId}
-            proposal={editing}
-            onClose={() => setEditing(undefined)}
-          />
-        )}
-      {splitting &&
-        query.isSuccess &&
-        !query.error &&
-        results.isSuccess &&
-        !results.error && (
-          <SplitCapability
-            clientId={clientId}
-            proposal={splitting}
-            onClose={() => setSplitting(undefined)}
-          />
-        )}
+      {editingProposal && (
+        <CapabilityProposalEditor
+          clientId={clientId}
+          proposal={editingProposal}
+          onClose={() => setEditing(undefined)}
+        />
+      )}
+      {splittingProposal && (
+        <SplitCapability
+          clientId={clientId}
+          proposal={splittingProposal}
+          onClose={() => setSplitting(undefined)}
+        />
+      )}
       {merging && selectedProposals.length >= 2 && (
         <MergeCapabilities
           clientId={clientId}

@@ -1,5 +1,34 @@
 # Portfolio onboarding frontend implementation and validation
 
+## Evidence correction — 2026-11-04
+
+The implementation and validation statements below are retained historical
+author claims. They are not newly verified evidence for PR 564 at
+`e1212f47f9ed33be3cd1071c75be6e8543ca02c0`. The reported 219 tests, build,
+browser checks and 72 architecture record changes do not have an exact-source
+independent acceptance binding in the transferred evidence. Their presence in
+the repository must not be read as a new reviewer attestation.
+
+Reviewer 003 actually inspected that head in turn
+`01a1a816-0b1f-7501-b710-c7fa139cfbde` and returned three P2 source findings,
+`PR564-SRC-01` through `PR564-SRC-03`, with verdict
+`CHANGES_REQUIRED_SOURCE_ONLY`. The independent receipt is
+`PR564-E1212F47-INDEPENDENT-SOURCE-REVIEW-20261104.json`, SHA256
+`31b45325cfccb7c7c102dbb17529f6ff88afcf48e6c223681d324829ef0d953c`.
+Its focused source coverage is distinct from runtime or deployment acceptance.
+
+The present correction retires changed capability dialog selections, adds an
+explicit current-profile review after a prospect profile 409, and releases a
+refused fact attempt only after a successful current snapshot read. Unknown
+503 outcomes retain their original commands. The mounted regression fixture
+uses the existing local Playwright/Vite facility and synthetic intercepted
+requests. Source preparation does not claim that those browser checks ran.
+Independent review of this correction and actual mounted results must be bound
+to its sealed commit/tree in the subsequent QA receipts. No historical review
+labels or architecture fingerprints are restamped as accepted here.
+
+## Historical implementation account
+
 The frontend now connects client and prospect entry, sourced research, manual
 facts, capabilities and office relationships through the existing Portfolio
 owners. A saved profile opens into a durable task ledger and review workflow.

@@ -21,6 +21,7 @@ import {
   previewProfileIdentity,
   type IdentityPreview,
   type PersonProfileInput,
+  type ProfileSnapshot,
 } from "@/features/portfolio/profile-build/public";
 import {
   prospectInputSchema,
@@ -66,6 +67,11 @@ function ProspectEditorSession({ record, onClose, onSaved }: Props) {
   const [error, setError] = useState<Error>();
   const [uncertain, setUncertain] = useState(false);
   const [saved, setSaved] = useState<Prospect>();
+  const [profileRefused, setProfileRefused] = useState(false);
+  const [profileReview, setProfileReview] = useState<{
+    current: ProfileSnapshot;
+    changes: PersonProfileInput["fields"];
+  }>();
   const [match, setMatch] = useState<IdentityPreview>();
   const [identitySelection, setIdentitySelection] =
     useState<IdentitySelection>();
@@ -82,8 +88,34 @@ function ProspectEditorSession({ record, onClose, onSaved }: Props) {
     }
     setValues((current) => ({ ...current, [key]: value }));
   };
+  async function reviewCurrentProfile() {
+    if (busy || !saved || !profileRefused) return;
+    setBusy(true);
+    setError(undefined);
+    setProfileReview(undefined);
+    try {
+      const authority = scope.current ?? capture();
+      authority.assert();
+      const latest = await readProfile(
+        api,
+        { kind: "prospect", id: saved.id },
+        authority.signal,
+      );
+      authority.assert();
+      setProfileReview({ current: latest, changes: command.current?.fields });
+    } catch (failure) {
+      setError(
+        failure instanceof Error
+          ? failure
+          : new Error("Current profile details could not be read."),
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
   async function submit() {
     if (busy || uncertain || (!record && !catalog.data)) return;
+    if (profileRefused && !profileReview) return;
     if (
       values.description.length > 600 &&
       values.description !== record?.description
@@ -163,8 +195,20 @@ function ProspectEditorSession({ record, onClose, onSaved }: Props) {
         }
         authority.assert();
         setSaved(receipt);
+        await cache.invalidateQueries({ queryKey: ["prospects"] });
+        await cache.invalidateQueries({ queryKey: ["prospect", receipt.id] });
       }
       const subject = { kind: "prospect" as const, id: receipt.id };
+      if (profileRefused && profileReview && command.current) {
+        // Only this explicit save adopts the reviewed version and a new command.
+        command.current = {
+          ...command.current,
+          requestId: crypto.randomUUID(),
+          expectedVersion: profileReview.current.version,
+        };
+        setProfileRefused(false);
+        setProfileReview(undefined);
+      }
       if (!command.current) {
         const latest = await readProfile(api, subject, authority.signal);
         authority.assert();
@@ -185,10 +229,22 @@ function ProspectEditorSession({ record, onClose, onSaved }: Props) {
         };
       }
       authority.assert();
-      await savePersonProfile(api, subject, command.current, authority.signal);
+      try {
+        await savePersonProfile(
+          api,
+          subject,
+          command.current,
+          authority.signal,
+        );
+      } catch (failure) {
+        if (failure instanceof ApiError && failure.status === 409) {
+          authority.assert();
+          setProfileRefused(true);
+          setProfileReview(undefined);
+        }
+        throw failure;
+      }
       authority.assert();
-      await cache.invalidateQueries({ queryKey: ["prospects"] });
-      await cache.invalidateQueries({ queryKey: ["prospect", receipt.id] });
       await cache.invalidateQueries({
         queryKey: ["profile-build", "prospect", receipt.id],
       });
@@ -201,6 +257,7 @@ function ProspectEditorSession({ record, onClose, onSaved }: Props) {
       ) {
         setMatch(undefined);
         setIdentitySelection(undefined);
+        setProfileReview(undefined);
       }
       setError(
         failure instanceof Error
@@ -309,11 +366,53 @@ function ProspectEditorSession({ record, onClose, onSaved }: Props) {
             creating another record.
           </p>
         )}
-        {saved && error && (
+        {saved && error && !profileRefused && (
           <p role="status">
             The prospect was saved. Retry to finish its profile using the same
             saved record.
           </p>
+        )}
+        {saved && profileRefused && (
+          <section
+            className="stack"
+            aria-label="Review current profile details"
+          >
+            <p role="status">
+              The prospect was saved, but its profile changed before your
+              details could be applied. Review the current details before saving
+              again.
+            </p>
+            {profileReview && (
+              <dl>
+                {Object.entries(profileReview.changes ?? {}).map(
+                  ([field, value]) => (
+                    <div key={field}>
+                      <dt>{field}</dt>
+                      <dd>
+                        Current:{" "}
+                        {String(
+                          profileReview.current.fields[field] ?? "Not provided",
+                        )}
+                      </dd>
+                      <dd>
+                        Your saved change: {String(value ?? "Not provided")}
+                      </dd>
+                    </div>
+                  ),
+                )}
+              </dl>
+            )}
+            <button
+              type="button"
+              className="button"
+              disabled={busy}
+              onClick={() => void reviewCurrentProfile()}
+            >
+              {profileReview
+                ? "Refresh current profile details"
+                : "Review current profile details"}
+            </button>
+          </section>
         )}
         <footer className="row">
           <button
@@ -326,17 +425,24 @@ function ProspectEditorSession({ record, onClose, onSaved }: Props) {
           </button>
           <button
             className="button primary"
-            disabled={busy || uncertain || (!record && !catalog.data)}
+            disabled={
+              busy ||
+              uncertain ||
+              (profileRefused && !profileReview) ||
+              (!record && !catalog.data)
+            }
           >
             {busy
               ? "Saving…"
-              : binding.locked
-                ? "Retry company confirmation"
-                : saved
-                  ? "Retry profile details"
-                  : record
-                    ? "Save company details"
-                    : "Create prospect"}
+              : profileRefused
+                ? "Save reviewed profile details"
+                : binding.locked
+                  ? "Retry company confirmation"
+                  : saved
+                    ? "Retry profile details"
+                    : record
+                      ? "Save company details"
+                      : "Create prospect"}
           </button>
         </footer>
       </form>
