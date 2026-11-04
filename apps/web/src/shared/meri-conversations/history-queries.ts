@@ -1,5 +1,6 @@
 "use client";
 import type { ResearchSelection } from "./research-context";
+import type { OpeningCapture } from "./opening-capture";
 import { useEffect } from "react";
 import {
   infiniteQueryOptions,
@@ -85,6 +86,7 @@ async function scopedTranscript(
   after: number | undefined,
   signal: AbortSignal,
   research?: ResearchSelection,
+  capture?: OpeningCapture,
 ) {
   const page = await readConversationTranscript(
     { conversationId, after, limit: protocol.limits.pageItems },
@@ -98,6 +100,7 @@ async function scopedTranscript(
   // A page that claims more without moving the cursor is a failed read, never a silent end.
   if (page.hasMore && page.nextSequence <= (after ?? protocol.defaults.after))
     throw new Error("Transcript page did not advance");
+  capture?.history(page);
   return page;
 }
 
@@ -131,6 +134,7 @@ function useLatestTranscript(
   after: number | undefined,
   enabled: boolean,
   research?: ResearchSelection,
+  capture?: OpeningCapture,
 ) {
   return useQuery({
     queryKey: [
@@ -147,6 +151,7 @@ function useLatestTranscript(
         after,
         signal,
         research,
+        capture,
       ),
     retry: false,
     staleTime: 0,
@@ -205,6 +210,7 @@ export function savedTranscriptQuery(
   conversationId: string | undefined,
   enabled: boolean,
   research?: ResearchSelection,
+  capture?: OpeningCapture,
 ) {
   return infiniteQueryOptions({
     queryKey: transcriptKey(account, clientId, conversationId, research),
@@ -218,6 +224,7 @@ export function savedTranscriptQuery(
         after,
         signal,
         research,
+        capture,
       ),
     getNextPageParam: (page) => (page.hasMore ? page.nextSequence : undefined),
     retry: false,
@@ -280,6 +287,7 @@ export function useConversationHistory(
   conversationId?: string,
   enabled = true,
   research?: ResearchSelection,
+  capture?: OpeningCapture,
 ) {
   const cache = useQueryClient();
   const { tenantId, actorId } = account;
@@ -288,7 +296,14 @@ export function useConversationHistory(
       clearConversationReads(cache, { tenantId, actorId }, clientId);
   }, [cache, tenantId, actorId, clientId, enabled]);
   const query = useInfiniteQuery(
-    savedTranscriptQuery(account, clientId, conversationId, enabled, research),
+    savedTranscriptQuery(
+      account,
+      clientId,
+      conversationId,
+      enabled,
+      research,
+      capture,
+    ),
   );
   const { hasNextPage, isFetching, error, fetchNextPage } = query;
   const selected = enabled && !!conversationId;
@@ -311,6 +326,7 @@ export function useConversationHistory(
     latestBase,
     enabled,
     research,
+    capture,
   );
   const current =
     saved && !tail.error && !tail.isFetching ? tail.data : undefined;

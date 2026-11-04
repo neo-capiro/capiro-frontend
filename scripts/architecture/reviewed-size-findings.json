@@ -3058,10 +3058,10 @@
     "file": "apps/web/src/features/meri/conversation/useConversationConnection.ts",
     "kind": "function",
     "symbol": "useConversationConnection",
-    "fingerprint": "2e5a4319e45b503bc023529ae40eaa2d94b60463548ac6360a5ae68b471b4650",
-    "reason": "One selected account and client owns host attachment, exact-run reopening, and the bounded session renewal lifetime. The explicit next-turn target is projected to clientId, conversationId and runId before strict session validation; the UI-only pending prompt remains separate. History, admission and transport have other owners, so the 84-line hook does not combine independent workflows. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
-    "reviewedBy": "Codex PR60 root and independent source reviewers",
-    "reviewedOn": "2026-10-16"
+    "fingerprint": "d959f147806f78431f8df60ff6d71e073fb75a1fd69d1974c2c684c14fc73654",
+    "reason": "One mounted account/client/conversation owner attaches its host and composes existing renewal/reconnect lifetimes. The added default-off capture is created once for an ordinary selected conversation and stopped with storage loss or host cleanup, sharing this existing lifetime. No flag enters a request, query key or recovery selector. The 100-line body delegates all metadata projection/budgets to one diagnostic object and all authority/transport to their existing owners.",
+    "reviewedBy": "Codex independent review_vqa003; thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a4ce-9553-78c2-9460-4a642dfd971f",
+    "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/features/meri/conversation/saved-turns.ts",
@@ -3315,10 +3315,10 @@
     "file": "apps/web/src/features/meri/conversation/useConversationSession.ts",
     "kind": "function",
     "symbol": "useConversationSession",
-    "fingerprint": "428eb48ce0182fc29dd14fc8388c78003298f0c21ff5dde79a6004cfff74afdc",
-    "reason": "Independent VQA-002 responsibility review at product head 3fae7f2eecf84b57a32fa6bfe25231c494c60623. This hook remains the composition boundary joining the existing connection, history, local draft, model and continuation owners. useProcedureName receives the same effective selection exposed to the picker and composer, including the accepted-request fallback, and binds display metadata to the current draft owner and exact selector. It never writes the label into a request/journal, grants access or duplicates a catalog read. The 232 nonblank body lines compose related session lifetimes rather than adding a second domain implementation. Mounted saved-selection, custom-name, scope, removal, access-loss and owner-reset/fresh-read cases passed.",
-    "reviewedBy": "Codex independent reviewer /root/review_vqa002 (GPT-6 Astra Ultra)",
-    "reviewedOn": "2026-11-03"
+    "fingerprint": "9974f0997d47ea821f4758f543bd733f2da298b1b3a5fa756a61e6b8ece69e1b",
+    "reason": "This remains the selected-session composition boundary for existing connection, history, local draft, model and continuation owners. The added committed effect projects a bounded metadata subset from the same render beside sessionHistoryState; it never changes that predicate, starts a read, writes a journal or grants settlement. Projection bounds/privacy live in opening-capture; authority and commands remain with their canonical owners. The 254-line composition adds no independent model/transport/recovery implementation, and separating this same-render read into another state owner would obscure ordering.",
+    "reviewedBy": "Codex independent review_vqa003; thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a4ce-9553-78c2-9460-4a642dfd971f",
+    "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/features/modules/engagement/CampaignSession.tsx",
@@ -7860,10 +7860,10 @@
     "file": "apps/web/src/features/meri/conversation/useConversationConnection.ts",
     "kind": "function",
     "symbol": "useConversationOpening",
-    "fingerprint": "4940af3716013fbde45abd047f556e3d26326b9701fbc7a17a38b6d16237d33c",
-    "reason": "One selected conversation opening owner constructs hosts from captured hints, keeps an authorized send's pending prompt separate, and marks renewal/retry as read-only recovery. The 86-line function delegates canonical receipt admission and pre-publication exact-run refusal to the existing host; commands, durable journals and history remain separate owners. No unrelated responsibility, duplicate authority protocol or framework is introduced.",
-    "reviewedBy": "GPT-6 Astra Ultra independent reviewer /root/review_vqa003; PR554 product 7a6c0a1dd4e4b548e8fc13a0f856707b1311ed57; outputs/vqa-006-read-only-recovery-r1-independent-review.json",
-    "reviewedOn": "2026-11-03"
+    "fingerprint": "0279f9af7b6de0751621fe1e7190240baeedf150ee2f0d24854ac3042508ae67",
+    "reason": "One selected-conversation opening owner constructs the initial host and exact authorized reopenings. The optional bounded capture is passed only to initial host construction; retry, renewal and target-opening creation remain unchanged and do not receive it. Selection recording, exact recovery hints and pending prompt separation retain their existing owners. The 89-line body does not add admission authority, a second recovery protocol or a new workflow.",
+    "reviewedBy": "Codex independent review_vqa003; thread 01a19ef3-d046-74c1-ad7c-593b15256088; turn 01a1a4ce-9553-78c2-9460-4a642dfd971f",
+    "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/features/modules/directory/StaffProfileContent.tsx",

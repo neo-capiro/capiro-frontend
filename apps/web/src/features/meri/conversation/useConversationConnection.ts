@@ -16,6 +16,10 @@ import type { ConversationContext } from "../../../shared/meri-conversations/ses
 import { useConversationSelection } from "./useConversationSelection";
 import { reconnectState, transientStatus } from "./control-reachability";
 import { useReconnectSchedule } from "../../../shared/meri-conversations/reconnect-schedule";
+import {
+  createOpeningCapture,
+  type OpeningCapture,
+} from "../../../shared/meri-conversations/opening-capture";
 
 type Hints = ConstructorParameters<
   typeof ConversationHostController
@@ -136,15 +140,17 @@ function useConversationOpening(
     ReturnType<typeof useConversationSelection>,
     "selection" | "storageError" | "record"
   >,
+  capture?: OpeningCapture,
 ) {
   const { selection, storageError, record } = retention;
   const create = useCallback(
     // A recovery reopens what this binding already holds: it says so, so the host can refuse a
     // different run before anything is recorded or exposed.
-    (hints: Hints, recovery = false) =>
+    (hints: Hints, recovery = false, openingCapture?: OpeningCapture) =>
       new ConversationHostController({
         account,
         hints,
+        ...(openingCapture ? { openingCapture } : {}),
         ...(recovery ? { recovery: true } : {}),
         onBound: (context) => {
           record(context);
@@ -159,6 +165,8 @@ function useConversationOpening(
         clientId,
         ...(conversationId ? { conversationId } : {}),
       },
+      false,
+      capture,
     ),
     hints: selection?.hints ?? {
       clientId,
@@ -235,6 +243,11 @@ export function useConversationConnection(
   conversationId?: string,
   research?: ResearchSelection,
 ) {
+  const [capture] = useState(() =>
+    !research && conversationId && typeof window !== "undefined"
+      ? createOpeningCapture(window.location.search)
+      : undefined,
+  );
   const { selection, storageError, record, clear } = useConversationSelection(
     account,
     clientId,
@@ -249,12 +262,17 @@ export function useConversationConnection(
     now,
     bound,
     { selection, storageError, record },
+    capture,
   );
   const { host } = opening;
   useLayoutEffect(() => {
     host.setClientAvailable(!storageError);
-    return () => host.setClientAvailable(false);
-  }, [host, storageError]);
+    if (storageError) capture?.stop();
+    return () => {
+      host.setClientAvailable(false);
+      capture?.stop();
+    };
+  }, [host, storageError, capture]);
   useEffect(() => {
     if (storageError) return;
     const detach = host.attach();
@@ -302,6 +320,8 @@ export function useConversationConnection(
   );
 
   return {
+    capture,
+    captureHints: { ...(selection?.hints ?? opening.hints) },
     state: storageError ? { status: "unavailable" as const } : state,
     // Display continuity only: the disposed port still cannot issue any request.
     renewing:

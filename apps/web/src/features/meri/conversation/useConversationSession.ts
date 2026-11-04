@@ -117,7 +117,8 @@ function useSelectedHistory(
     clientId,
     selectedId,
     !connection.accessLost,
-    ...(research ? ([research] as const) : ([] as const)),
+    research,
+    connection.capture,
   );
   const accessLost = connection.accessLost || history.denied;
   const ready = accessLost ? undefined : boundReady;
@@ -214,6 +215,28 @@ export function useConversationSession(
     continuation.failure,
     continuation.opened,
   );
+  useEffect(() => {
+    connection.capture?.projection({
+      hints: connection.captureHints,
+      current: history.current,
+      savedTurns: history.saved?.turns ?? [],
+      query: history.query,
+      tail: history.tail,
+      intent: accessLost ? undefined : continuation.intent,
+      opened: continuation.opened,
+      runId: ready?.port.context.runId,
+      unknownReservation: view.unknownReservation,
+      shown: [
+        ...view.earlier,
+        ...(view.savedCurrent ? [view.savedCurrent] : []),
+      ].map((turn) => ({
+        runId: turn.runId,
+        runState: turn.runState,
+        throughSequence: turn.throughSequence,
+        hasMessages: turn.messages.length > 0,
+      })),
+    });
+  });
   const skillSelection =
     local.skillSelection ??
     (view.acceptedRequest
