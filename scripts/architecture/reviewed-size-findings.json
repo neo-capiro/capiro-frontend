@@ -3067,10 +3067,10 @@
     "file": "apps/web/src/features/meri/conversation/saved-turns.ts",
     "kind": "function",
     "symbol": "sessionHistoryState",
-    "fingerprint": "71ed2508b56c429cf005b8903fce81ff3fddec939aff13cb8de50ce5c8a4ca22",
-    "reason": "One pure projection combines admitted saved/current runs, retained intent and local turns into display and action-blocking state. Fetching, event conversion and write admission remain with separate owners. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
-    "reviewedBy": "Codex PR60 root and independent source reviewers",
-    "reviewedOn": "2026-10-16"
+    "fingerprint": "0e1b7fb42e25e96a4669437b9e8b10c500738e7b13a2f81efcf8f795df756eb5",
+    "reason": "One pure session-history projection combines admitted saved/current runs, retained intent and local turns into display and action-blocking state. This exact successor changes only the initial-submit explanation; all source/reservation/currentness predicates, recovery/UNKNOWN behavior, imports and interfaces are byte-preserved. Fetching, event conversion and trusted write admission retain their existing owners. The unchanged105-line body has one cohesive responsibility; no extraction or new branch is required. Independent exact-delta review: outputs/COMPLETED-CONVERSATION-STATUS-INDEPENDENT-REVIEW-20261104.json in reviewer003 workspace.",
+    "reviewedBy": "Codex independent review_003; thread 01a1a4d7-f531-7510-9ca1-3e9737c7d4df; turn 01a1a6e9-1157-7952-80ee-e586d2a93254",
+    "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/features/modules/strategies/context/StrategyContext.tsx",
