@@ -201,160 +201,7 @@ export function CampaignRecipients({
         ? states.data?.total
         : undefined;
   return (
-    <div className={styles.grid}>
-      <Panel
-        title="Selected recipients"
-        description="Each individual and list member gets a separate draft. A group shares one message."
-      >
-        <div className={styles.fields}>
-          {!state.recipients.length && (
-            <p className={styles.hint}>
-              Add recipients from your directories or enter an email address.
-            </p>
-          )}
-          {state.recipients.map((row) => (
-            <div className={styles.selected} key={row.id}>
-              <div className={styles.actions}>
-                {row.kind === "individual" && (
-                  <input
-                    type="checkbox"
-                    aria-label={`Include ${row.name} in list or group`}
-                    checked={bundle.includes(row.id)}
-                    disabled={disabled}
-                    onChange={(event) =>
-                      setBundle((values) =>
-                        event.target.checked
-                          ? [...values, row.id]
-                          : values.filter((id) => id !== row.id),
-                      )
-                    }
-                  />
-                )}
-                <strong>{row.name || row.email}</strong>
-                <span className={styles.hint}>
-                  {row.kind === "individual"
-                    ? row.email
-                    : `${row.members?.length ?? 0} members · ${row.kind}`}
-                </span>
-                <ActionButton
-                  disabled={disabled}
-                  onClick={() =>
-                    update({
-                      recipients: state.recipients.filter(
-                        (item) => item !== row,
-                      ),
-                    })
-                  }
-                  aria-label={`Remove ${row.name}`}
-                >
-                  Remove
-                </ActionButton>
-              </div>
-              {row.kind === "individual" && (
-                <SelectInput
-                  aria-label={`Recipient role for ${row.name}`}
-                  value={row.role}
-                  disabled={disabled}
-                  options={["to", "cc", "bcc"].map((value) => ({
-                    value,
-                    label: value.toUpperCase(),
-                  }))}
-                  onValueChange={(value) =>
-                    update({
-                      recipients: state.recipients.map((item) =>
-                        item === row
-                          ? { ...item, role: value as typeof role }
-                          : item,
-                      ),
-                    })
-                  }
-                />
-              )}
-              {!!row.cc?.length && <p>Cc: {row.cc.join(", ")}</p>}
-              {!!row.bcc?.length && <p>Bcc: {row.bcc.join(", ")}</p>}
-              {row.members?.map((member) => (
-                <div className={styles.actions} key={member.id}>
-                  <span>
-                    {member.name} · {member.email}
-                    {member.cc?.length ? ` · Cc: ${member.cc.join(", ")}` : ""}
-                    {member.bcc?.length
-                      ? ` · Bcc: ${member.bcc.join(", ")}`
-                      : ""}
-                  </span>
-                  <SelectInput
-                    aria-label={`Role for ${member.name} in ${row.name}`}
-                    value={member.role}
-                    disabled={disabled}
-                    options={["to", "cc", "bcc"].map((value) => ({
-                      value,
-                      label: value.toUpperCase(),
-                    }))}
-                    onValueChange={(value) =>
-                      update({
-                        recipients: state.recipients.map((item) =>
-                          item === row
-                            ? {
-                                ...item,
-                                members: item.members?.map((m) =>
-                                  m === member
-                                    ? { ...m, role: value as typeof role }
-                                    : m,
-                                ),
-                              }
-                            : item,
-                        ),
-                      })
-                    }
-                  />
-                </div>
-              ))}
-              <Field label="Personal note" htmlFor={`note-${row.id}`}>
-                <TextInput
-                  id={`note-${row.id}`}
-                  maxLength={500}
-                  value={row.personalNote ?? ""}
-                  disabled={disabled}
-                  onChange={(event) =>
-                    update({
-                      recipients: state.recipients.map((item) =>
-                        item === row
-                          ? { ...item, personalNote: event.target.value }
-                          : item,
-                      ),
-                    })
-                  }
-                />
-              </Field>
-            </div>
-          ))}
-          {!!bundle.length && (
-            <div className={styles.fields}>
-              <Field label="List or group name" htmlFor="bundle-name">
-                <TextInput
-                  id="bundle-name"
-                  value={bundleName}
-                  onChange={(event) => setBundleName(event.target.value)}
-                  maxLength={240}
-                />
-              </Field>
-              <div className={styles.actions}>
-                <ActionButton
-                  disabled={disabled || !bundleName.trim()}
-                  onClick={() => makeBundle("list")}
-                >
-                  Create list
-                </ActionButton>
-                <ActionButton
-                  disabled={disabled || !bundleName.trim()}
-                  onClick={() => makeBundle("group")}
-                >
-                  Create group
-                </ActionButton>
-              </div>
-            </div>
-          )}
-        </div>
-      </Panel>
+    <div className={styles.selectionGrid}>
       <Panel
         title="Find recipients"
         description="Choose a current directory contact, saved audience or manual address."
@@ -539,6 +386,159 @@ export function CampaignRecipients({
                 </p>
               )}
             </>
+          )}
+        </div>
+      </Panel>
+      <Panel
+        title="Selected recipients"
+        description="Each individual and list member gets a separate draft. A group shares one message."
+      >
+        <div className={styles.fields}>
+          {!state.recipients.length && (
+            <p className={styles.hint}>
+              Add recipients from your directories or enter an email address.
+            </p>
+          )}
+          {state.recipients.map((row) => (
+            <div className={styles.selected} key={row.id}>
+              <div className={styles.actions}>
+                {row.kind === "individual" && (
+                  <input
+                    type="checkbox"
+                    aria-label={`Include ${row.name} in list or group`}
+                    checked={bundle.includes(row.id)}
+                    disabled={disabled}
+                    onChange={(event) =>
+                      setBundle((values) =>
+                        event.target.checked
+                          ? [...values, row.id]
+                          : values.filter((id) => id !== row.id),
+                      )
+                    }
+                  />
+                )}
+                <strong>{row.name || row.email}</strong>
+                <span className={styles.hint}>
+                  {row.kind === "individual"
+                    ? row.email
+                    : `${row.members?.length ?? 0} members · ${row.kind}`}
+                </span>
+                <ActionButton
+                  disabled={disabled}
+                  onClick={() =>
+                    update({
+                      recipients: state.recipients.filter(
+                        (item) => item !== row,
+                      ),
+                    })
+                  }
+                  aria-label={`Remove ${row.name}`}
+                >
+                  Remove
+                </ActionButton>
+              </div>
+              {row.kind === "individual" && (
+                <SelectInput
+                  aria-label={`Recipient role for ${row.name}`}
+                  value={row.role}
+                  disabled={disabled}
+                  options={["to", "cc", "bcc"].map((value) => ({
+                    value,
+                    label: value.toUpperCase(),
+                  }))}
+                  onValueChange={(value) =>
+                    update({
+                      recipients: state.recipients.map((item) =>
+                        item === row
+                          ? { ...item, role: value as typeof role }
+                          : item,
+                      ),
+                    })
+                  }
+                />
+              )}
+              {!!row.cc?.length && <p>Cc: {row.cc.join(", ")}</p>}
+              {!!row.bcc?.length && <p>Bcc: {row.bcc.join(", ")}</p>}
+              {row.members?.map((member) => (
+                <div className={styles.actions} key={member.id}>
+                  <span>
+                    {member.name} · {member.email}
+                    {member.cc?.length ? ` · Cc: ${member.cc.join(", ")}` : ""}
+                    {member.bcc?.length
+                      ? ` · Bcc: ${member.bcc.join(", ")}`
+                      : ""}
+                  </span>
+                  <SelectInput
+                    aria-label={`Role for ${member.name} in ${row.name}`}
+                    value={member.role}
+                    disabled={disabled}
+                    options={["to", "cc", "bcc"].map((value) => ({
+                      value,
+                      label: value.toUpperCase(),
+                    }))}
+                    onValueChange={(value) =>
+                      update({
+                        recipients: state.recipients.map((item) =>
+                          item === row
+                            ? {
+                                ...item,
+                                members: item.members?.map((m) =>
+                                  m === member
+                                    ? { ...m, role: value as typeof role }
+                                    : m,
+                                ),
+                              }
+                            : item,
+                        ),
+                      })
+                    }
+                  />
+                </div>
+              ))}
+              <Field label="Personal note" htmlFor={`note-${row.id}`}>
+                <TextInput
+                  id={`note-${row.id}`}
+                  maxLength={500}
+                  value={row.personalNote ?? ""}
+                  disabled={disabled}
+                  onChange={(event) =>
+                    update({
+                      recipients: state.recipients.map((item) =>
+                        item === row
+                          ? { ...item, personalNote: event.target.value }
+                          : item,
+                      ),
+                    })
+                  }
+                />
+              </Field>
+            </div>
+          ))}
+          {!!bundle.length && (
+            <div className={styles.fields}>
+              <Field label="List or group name" htmlFor="bundle-name">
+                <TextInput
+                  id="bundle-name"
+                  value={bundleName}
+                  onChange={(event) => setBundleName(event.target.value)}
+                  maxLength={240}
+                />
+              </Field>
+              <div className={styles.actions}>
+                <ActionButton
+                  disabled={disabled || !bundleName.trim()}
+                  onClick={() => makeBundle("list")}
+                >
+                  Create list
+                </ActionButton>
+                <ActionButton
+                  disabled={disabled || !bundleName.trim()}
+                  onClick={() => makeBundle("group")}
+                >
+                  Create group
+                </ActionButton>
+              </div>
+            </div>
           )}
         </div>
       </Panel>

@@ -1,7 +1,11 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { ActionButton, PageHeader } from "../../../../shared/module-ui";
+import {
+  ActionButton,
+  PageHeader,
+  SelectInput,
+} from "../../../../shared/module-ui";
 import styles from "./outreach-workflow.module.css";
 
 export const outreachSteps = [
@@ -84,18 +88,35 @@ export function OutreachWorkflowFrame({
   const nextStage = outreachSteps.find((item) => Number(item.id) === step + 1);
   const footer = (action?: ReactNode) => (
     <footer className={styles.footer}>
-      <ActionButton disabled={busy} onClick={onExit}>
-        All outreach
-      </ActionButton>
+      {step === 1 && (
+        <ActionButton
+          variant="ghost"
+          className={styles.quietAction}
+          disabled={busy}
+          onClick={onExit}
+        >
+          Cancel
+        </ActionButton>
+      )}
       {step > 1 && (
         <ActionButton
+          variant="ghost"
+          className={styles.quietAction}
           disabled={busy || fenced}
           onClick={() => onStep((step - 1) as OutreachStep)}
         >
           Back
         </ActionButton>
       )}
+      <span className={styles.saveStatus}>
+        {fenced
+          ? "Confirmation needed"
+          : saved
+            ? "Draft saved"
+            : "Unsaved changes"}
+      </span>
       <ActionButton
+        className={styles.saveAction}
         disabled={busy || fenced || readOnly || saved}
         onClick={onSave}
       >
@@ -126,7 +147,22 @@ export function OutreachWorkflowFrame({
   return (
     <section className={styles.workflow} aria-label="Outreach campaign">
       <PageHeader
+        eyebrow={
+          title && title !== "New outreach"
+            ? `Outreach / ${title}`
+            : "Outreach / New campaign"
+        }
         title={title || "New outreach"}
+        actions={
+          <ActionButton
+            variant="ghost"
+            className={styles.quietAction}
+            disabled={busy}
+            onClick={onExit}
+          >
+            All outreach
+          </ActionButton>
+        }
         description={
           readOnly
             ? "View saved messages and delivery status."
@@ -135,9 +171,24 @@ export function OutreachWorkflowFrame({
               : "Unsaved changes"
         }
       />
+      <div className={styles.mobileSteps}>
+        <SelectInput
+          aria-label="Outreach step"
+          value={String(step)}
+          disabled={busy || fenced}
+          options={outreachSteps.map((item, index) => ({
+            value: item.id,
+            label: `Step ${item.id} of 7 · ${item.label}`,
+            disabled:
+              (!readOnly && index + 1 > step + 1) ||
+              (index + 1 > step && Boolean(nextDisabled)),
+          }))}
+          onValueChange={(value) => onStep(Number(value) as OutreachStep)}
+        />
+      </div>
       <div className={styles.workspace}>
         <nav className={styles.stepRail} aria-label="Outreach steps">
-          <p className={styles.railTitle}>Create your outreach</p>
+          <p className={styles.railTitle}>YOUR CAMPAIGN</p>
           <ol>
             {outreachSteps.map((item, index) => (
               <li key={item.id} data-visited={index + 1 < step || undefined}>
@@ -159,6 +210,11 @@ export function OutreachWorkflowFrame({
               </li>
             ))}
           </ol>
+          <div className={styles.railSummary}>
+            <span>{readOnly ? "CAMPAIGN" : "DRAFT"}</span>
+            <strong>Review before sending</strong>
+            <p>Your progress stays with this campaign.</p>
+          </div>
         </nav>
         <div className={styles.workPane}>
           <header className={styles.stageHeader}>
@@ -166,7 +222,7 @@ export function OutreachWorkflowFrame({
               Step {step} of {outreachSteps.length}
             </p>
             <h2>{stage.label}</h2>
-            <p>{stage.description}</p>
+            <p className={styles.stageDescription}>{stage.description}</p>
           </header>
           {error && (
             <p className={styles.error} role="alert">

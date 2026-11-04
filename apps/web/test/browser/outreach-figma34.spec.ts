@@ -89,7 +89,7 @@ for (const width of [1440, 390])
       page.getByRole("tab", { name: "Campaign drafts · 1" }),
     ).toHaveCSS("font-weight", "500");
     await expect(
-      page.getByRole("button", { name: "+ New outreach", exact: true }),
+      page.getByRole("button", { name: "New outreach", exact: true }),
     ).toHaveCSS("font-weight", "500");
     await expect(
       page.getByText("No recorded send", { exact: true }),
@@ -513,6 +513,7 @@ test("deleted canonical records remain visible without reopening actions", async
     });
   });
   await page.goto("/modules/engagement");
+  await page.getByText("More filters", { exact: true }).click();
   await page.getByRole("checkbox", { name: "Deleted only" }).check();
   await expect(page.getByText(record.title, { exact: false })).toBeVisible();
   await expect(
@@ -622,6 +623,7 @@ test("invalid date windows hide both campaign and record rows until corrected", 
   await expect(
     page.getByRole("button", { name: "Open campaign", exact: true }),
   ).toBeVisible();
+  await page.getByText("Any date", { exact: true }).click();
   await page.getByLabel("From", { exact: true }).fill("2026-10-20");
   await page.getByLabel("To", { exact: true }).fill("2026-10-10");
   await expect(page.getByRole("alert")).toContainText(

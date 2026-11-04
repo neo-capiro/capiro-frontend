@@ -147,7 +147,7 @@ export function CampaignSend({
   );
   return (
     <>
-      <div className={styles.grid}>
+      <div className={styles.sendGrid}>
         <Panel
           title="Prepared messages"
           description="Review the saved messages, sender and destinations. Sending uses these versions."

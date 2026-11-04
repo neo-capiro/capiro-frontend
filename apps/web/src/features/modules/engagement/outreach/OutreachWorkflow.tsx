@@ -109,7 +109,6 @@ export function OutreachWorkflow({
           disabled={disabled}
           clients={clients.data ?? []}
           fixedClient={!!clientId}
-          onStart={() => onStep(2)}
         />
       )}
       {step === 2 && (
