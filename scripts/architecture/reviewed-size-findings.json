@@ -7919,9 +7919,9 @@
     "file": "apps/web/src/features/portfolio/capabilities/CapabilityReview.tsx",
     "kind": "function",
     "symbol": "CapabilityReview",
-    "fingerprint": "087e598f7f4c877d60fbce590849415d4ddc8aca57492aa7b768de23e1bb8b12",
-    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Owns discovery-result paging, status/business-unit filtering, local duplicate selection and child edit/split/merge dialogs. Network paging and mutation ownership stay in depth-api. Current-read gates remove stale source dialogs on failure; selections clear on unit/status changes. The long function is a review-screen composition rather than mixed service responsibilities.",
-    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "fingerprint": "1357d75949fe2e2ab2e02e4ea89be096cca8160986d418187098fef674c2ba3c",
+    "reason": "Owns one capability-discovery review view and its current selection lifetime. The changed id-plus-reviewed-projection comparison keeps dialog visibility tied to current results; card, editor, split/merge and API effects remain separately owned.",
+    "reviewedBy": "Codex independent review_003 (01a1a4d7-f531-7510-9ca1-3e9737c7d4df)",
     "reviewedOn": "2026-11-04"
   },
   {
@@ -8252,9 +8252,9 @@
     "file": "apps/web/src/features/portfolio/profile-build/ProfileFacts.tsx",
     "kind": "function",
     "symbol": "ProfileFacts",
-    "fingerprint": "26e2eadee866074528dd3012e1fbd883b6f210c7da08f5eb19404db79138b996",
-    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. One sourced-facts/conflict surface. Snapshot reads gate unavailable data, conflict saves preserve their existing command flow, and automatic rejection delegates to AutomaticFactReview. The new local selection state stores only which approved fact is being reviewed and adds no duplicate fact-write path.",
-    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "fingerprint": "be6db2fc5aa6ad02924a2553fe21a0d724d5b8fe2128df23854a066e677e02d2",
+    "reason": "Owns one profile fact-review surface and one active decision attempt. The changed refresh path retires only a known 409 after a successful same-actor snapshot read; uncertain attempts preserve the existing decision lock and retry, while fact presentation and automatic review remain delegated.",
+    "reviewedBy": "Codex independent review_003 (01a1a4d7-f531-7510-9ca1-3e9737c7d4df)",
     "reviewedOn": "2026-11-04"
   },
   {
@@ -8452,18 +8452,18 @@
     "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
     "kind": "function",
     "symbol": "ProspectEditorSession",
-    "fingerprint": "3b63a55dd3d1dc1e537fda254b4eefb1f9f8e28992562e8c7a7da36269ba39eb",
-    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. One prospect editor with actor/subject-scoped state. A new prospect uses explicit source identity confirmation before the existing create command, and retained person details continue on the same saved prospect. Existing editing, source labels and denial handling stay within the editor lifecycle.",
-    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "fingerprint": "07fb9b87d11e3cd0baf9a642e2b5d09be22de072775d3918dc2d6de976a2880f",
+    "reason": "Owns the prospect editor session from company confirmation through the existing prospect write and profile continuation. The same saved prospect and retained command connect the 409 review branch and 503 recovery branch, with rendering of their explicit states in this component.",
+    "reviewedBy": "Codex independent review_003 (01a1a4d7-f531-7510-9ca1-3e9737c7d4df)",
     "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
     "kind": "function",
     "symbol": "ProspectEditorSession > submit",
-    "fingerprint": "8adcb58217030847ce41211465359505e9382ccf64663a1ec5d477055657d2c2",
-    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. One ordered prospect save continuation. Source confirmation is required before creation when applicable, uncertain create results stay blocked, and later person-save retries retain the already-created prospect. Source callbacks are guarded before and after each boundary.",
-    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "fingerprint": "51161914abe9845911af7ee7fe39eb6e72e6770463503dd75c7038c090523ca3",
+    "reason": "Implements one ordered submit transaction: validate the form, confirm identity if needed, obtain or reuse the prospect receipt, prepare or explicitly revise the profile command, then save and finish. Known version refusal and unknown retry remain branches of that same continuation, with writes delegated to existing API owners.",
+    "reviewedBy": "Codex independent review_003 (01a1a4d7-f531-7510-9ca1-3e9737c7d4df)",
     "reviewedOn": "2026-11-04"
   },
   {
@@ -8526,6 +8526,51 @@
     "fingerprint": "2de625a9e32768fcb5d2d4ec0f2035d7247a92d9f5ac91f1d3f76871d7e7a445",
     "reason": "Independent exact-body review at frontend 32573b0170eca7269f7705d5d5983f935ca65b6b. One candidate renderer keeps its radio choice, provenance and selected-company claim checkboxes together. Explicit typed selection still flows through the parent callback; it does not fetch, save or infer identity. The only production delta is scoped layout classes, with source text stacked and wrapped without changing radio or claim behavior. Extraction solely to reduce line count would obscure the per-candidate interaction.",
     "reviewedBy": "Codex independent final_spacing_review",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "242213df43a5cb6ecba4c0584b678b1f1273e11dd8887da2f213b5c308bb4323",
+    "reason": "This module contains the actor-keyed wrapper and one prospect editor session. Its fields, first-write receipt, refused-profile review and exact-command recovery implement one form lifecycle; the added version-review controls do not introduce another domain owner.",
+    "reviewedBy": "Codex independent review_003 (01a1a4d7-f531-7510-9ca1-3e9737c7d4df)",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/tests/browser/portfolio-review-recovery-fixtures.ts",
+    "kind": "function",
+    "symbol": "installRecovery",
+    "fingerprint": "33c634c04a7bd33ea13f4e80f7e8567b7a7136b88f0443bb2614f6a340f05268",
+    "reason": "Installs one context-level synthetic route boundary and returns access to its scenario state. It centralizes same-origin asset admission, explicit mocked API responses and unexpected-request recording for the bounded mounted fixture; it does not implement production services.",
+    "reviewedBy": "Codex independent review_003 (01a1a4d7-f531-7510-9ca1-3e9737c7d4df)",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/tests/browser/portfolio-review-recovery-fixtures.ts",
+    "kind": "function",
+    "symbol": "installRecovery > <anonymous>",
+    "fingerprint": "1e4ace606327d18893f8cbb8ac8cb504add3f41c2ae21078525491db2d456c5d",
+    "reason": "This callback is the single request classifier and response owner for the synthetic recovery fixture. Its explicit route branches share one scenario state and keep intended writes mocked while rejecting external or unmapped requests.",
+    "reviewedBy": "Codex independent review_003 (01a1a4d7-f531-7510-9ca1-3e9737c7d4df)",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/tests/browser/portfolio-review-recovery.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "7b9487c17040c350660159555528c4b250714c5da331212ec09b18445656ea86",
+    "reason": "Owns one allocated mounted test with one page, one fixture, shared action/observation counters and a finally-attached result record. The configurable scenario list runs sequentially under the same limits; this responsibility approval does not attest that any browser case ran.",
+    "reviewedBy": "Codex independent review_003 (01a1a4d7-f531-7510-9ca1-3e9737c7d4df)",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/tests/browser/portfolio-review-recovery.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous> > <anonymous>",
+    "fingerprint": "4c036ab3556672a8f30343f5949221c12859d2b48b293c665dc7ca0de44c9c27",
+    "reason": "Executes one selected scenario in the bounded recovery matrix. Proposal, prospect and fact branches directly assert the three reported recovery defects and their known/unknown controls, using the shared fixture and budget owner without creating another executor.",
+    "reviewedBy": "Codex independent review_003 (01a1a4d7-f531-7510-9ca1-3e9737c7d4df)",
     "reviewedOn": "2026-11-04"
   }
 ]
