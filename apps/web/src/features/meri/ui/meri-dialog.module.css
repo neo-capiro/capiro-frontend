@@ -10,6 +10,9 @@
 }
 .dialog {
   position: fixed;
+  /* This module owns geometry; cancel the primitive's independent centering and width cap. */
+  translate: none;
+  max-width: none;
   z-index: 101;
   /* Aligns with the workspace beside the sidebar; the rail narrows it on tablets. */
   --dialog-left: 260px;

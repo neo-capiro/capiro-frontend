@@ -1,14 +1,12 @@
 /*
- * The adopted primitives in packages/ui are written against Tailwind utilities. Only the theme and
- * utility layers are imported: preflight is left out on purpose, because every application surface
- * here is CSS modules over the tokens below and a global reset would restyle it. `@source` keeps the
- * scan scoped to the primitives — no application file carries a utility class.
+ * Generate utilities from the adopted shadcn primitives only. Preflight is omitted to preserve
+ * existing application defaults. Generated selectors still apply globally wherever their classes
+ * occur, including application markup and wrappers around ai-elements or reui components.
  */
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
-/* Only the shadcn primitives take part: the ai-elements and reui families are already laid out by
- * the application's CSS modules, and giving them their utility classes reflows the composer. */
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+/* Explicit candidate generation boundary; this does not scope selector application. */
 @source "../../../../packages/ui/src/shadcn";
 
 /* shadcn token names the primitives use, bridged onto the Capiro palette above. */
@@ -74,13 +72,17 @@
 body {
   margin: 0;
 }
-button,
-textarea,
-input {
-  font: inherit;
-}
-button {
-  color: inherit;
+/* Defaults yield to primitive typography/foreground utilities and module-owned styles. */
+@layer base {
+  button,
+  textarea,
+  input {
+    font: inherit;
+  }
+  button,
+  a {
+    color: inherit;
+  }
 }
 button:not(:disabled) {
   cursor: pointer;
@@ -109,9 +111,6 @@ textarea:focus-visible {
     transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
-}
-a {
-  color: inherit;
 }
 p,
 h1,
