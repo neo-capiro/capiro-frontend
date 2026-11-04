@@ -76,8 +76,10 @@ it("General keeps the saved library and scopes the client requirement to creatio
   expect(html).toContain('data-legacy-library="general"');
   // Creation is the only part that needs a client, and the copy says so.
   expect(html).toMatch(/<h1>Files<\/h1>/);
-  expect(html).toContain(
-    "Saved files you can already access are available without a client. Creating a new document needs a selected client.",
+  expect(html).toContain("Saved files and drafts you can access.");
+  // 03.01: the page title leads the surface instead of trailing the libraries it describes.
+  expect(html.indexOf("<h1>Files</h1>")).toBeLessThan(
+    html.indexOf('data-legacy-library="general"'),
   );
   expect(html).toContain(
     "Choose a currently available client in Portfolio to create a new document.",

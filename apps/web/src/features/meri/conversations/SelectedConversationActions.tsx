@@ -172,6 +172,7 @@ export function SelectedConversationActions({
       <DeleteConversationDialog
         open={deleting && current}
         onOpenChange={setDeleting}
+        title={`Delete “${row.title.trim() || "this conversation"}”?`}
         explanation="It moves to Trash, where you can restore it for 30 days. After that, permanent deletion follows your workspace retention rules. Filed client records, action receipts and legally retained records follow their own rules."
         confirmLabel="Delete conversation"
         disabled={locked || !row.canManage}

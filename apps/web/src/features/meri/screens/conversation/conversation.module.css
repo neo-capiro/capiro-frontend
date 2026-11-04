@@ -64,6 +64,14 @@
 .historyActions[data-selection="none"] > button {
   opacity: 0.5;
 }
+/* The bar acts on the selected row, so it stays reachable while the list scrolls. */
+.historyActions {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  background: var(--background);
+  padding-block: 12px;
+}
 /* 01.05 command palette */
 .paletteHeading {
   display: flex;

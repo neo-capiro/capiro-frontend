@@ -1,7 +1,10 @@
 "use client";
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
-import { MAX_COMPOSER_UPLOADS } from "../../../shared/meri-uploads/upload-controller";
+import {
+  MAX_COMPOSER_UPLOADS,
+  resolveRecoveredAttempts,
+} from "../../../shared/meri-uploads/upload-controller";
 import type { ComposerAttachments } from "./attachment-slot";
 
 export { MAX_COMPOSER_UPLOADS };
@@ -53,5 +56,12 @@ export function useComposerAttachments(
     uploads?.version ?? noVersion,
     uploads?.version ?? noVersion,
   );
+  // A recovered attempt is only a reference: a reconnect replaces the conversation port and its
+  // uploads, so the row that was just uploaded comes back as an identity-less "awaiting status".
+  // Reading custody once when the access appears resolves it to the file the service already stores,
+  // exactly as a failed-send row is resolved when it is offered back to the composer.
+  useEffect(() => {
+    if (uploads) resolveRecoveredAttempts(uploads);
+  }, [uploads]);
   return composerAttachmentSlot(port, unavailable);
 }

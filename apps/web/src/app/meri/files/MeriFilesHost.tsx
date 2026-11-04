@@ -60,6 +60,17 @@ export function MeriFilesHost({
     selected.state === "no-selection" || selected.state === "authorized-client";
   return (
     <>
+      {/* Figma 03.01: the page title leads the surface, above the libraries it describes. */}
+      <section className={ui.page} aria-label="Files">
+        <MeriPageHeading
+          title="Files"
+          description={
+            selected.state === "authorized-client"
+              ? `Client: ${selected.client.name}.`
+              : "Saved files and drafts you can access."
+          }
+        />
+      </section>
       {account && available && (
         <LegacyReportLibrary
           key={JSON.stringify([account.tenantId, account.actorId, clientId])}
@@ -105,10 +116,6 @@ function DocumentCreationHost({
   if (selected.state === "no-selection")
     return (
       <section role="status">
-        <MeriPageHeading
-          title="Files"
-          description="Saved files you can already access are available without a client. Creating a new document needs a selected client."
-        />
         <p className={ui.muted}>
           Choose a currently available client in Portfolio to create a new
           document. Browsing the saved library above does not need one.
@@ -248,7 +255,6 @@ function ConnectedFiles({
     );
   return (
     <section className={ui.page} aria-label="Document connection">
-      <MeriPageHeading title="Files" description={`Client: ${clientName}.`} />
       <p className={ui.muted}>
         Document creation uses a saved request from this tab’s current client
         chat. Connecting checks that context; it does not start a request.

@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import {
   useEffect,
   useLayoutEffect,
@@ -7,6 +8,7 @@ import {
 } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@capiro/ui/button";
+import ui from "../../../features/meri/ui/meri-ui.module.css";
 import { MeriActionWorkflow } from "../../../features/meri/actions/MeriActionWorkflow";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { ActionHostController } from "../../../shared/meri-actions/host-controller";
@@ -36,6 +38,9 @@ export function MeriActionHost({ enabled }: { enabled: boolean }) {
           Select a currently available client in Portfolio to open this
           workflow.
         </p>
+        <Link className={ui.primary} href="/portfolio">
+          Open Portfolio
+        </Link>
       </section>
     );
   if (!identity.data?.tenant?.id || identity.error)

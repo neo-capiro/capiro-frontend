@@ -104,16 +104,8 @@ export function MeriAttachmentPicker({
       )}
       {slot.items.length > 0 && (
         <ul
-          className={styles.tools}
-          style={{
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
-            display: "flex",
-            flexDirection: "column",
-            gap: 4,
-            width: "100%",
-          }}
+          className={styles.attachmentList}
+          aria-label="Files in this message"
         >
           {slot.items.map((item) => {
             const overdue = slot.overdue(item.requestId);
@@ -121,25 +113,19 @@ export function MeriAttachmentPicker({
             const settledOut =
               item.state === "removing" || item.state === "removed";
             return (
-              <li
-                key={item.requestId}
-                style={{
-                  display: "flex",
-                  gap: 8,
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                <span>{item.filename}</span>
-                <span>
-                  {item.bytes > 0 ? size(item.bytes) : "Awaiting status"}
+              <li key={item.requestId} className={styles.attachmentRow}>
+                <span className={styles.attachmentName} title={item.filename}>
+                  {item.filename}
                 </span>
                 <span
+                  className={styles.attachmentMeta}
                   role="status"
                   aria-busy={wording.waiting}
                   title={wording.detail || undefined}
                 >
-                  {wording.label}
+                  {item.bytes > 0
+                    ? `${size(item.bytes)} · ${wording.label}`
+                    : wording.label}
                 </span>
                 {slot.selectedTab &&
                   item.receipt?.originalBytesAvailable &&
@@ -160,6 +146,7 @@ export function MeriAttachmentPicker({
                 {item.state === "declaring" || item.state === "uploading" ? (
                   <button
                     type="button"
+                    className={styles.attachmentAction}
                     onClick={() => slot.onCancel(item.requestId)}
                     aria-label={`Cancel the upload of ${item.filename}`}
                   >
@@ -169,6 +156,7 @@ export function MeriAttachmentPicker({
                 {item.state === "unknown" ? (
                   <button
                     type="button"
+                    className={styles.attachmentAction}
                     onClick={() => slot.onCheck(item.requestId)}
                     aria-label={`Check the status of ${item.filename}`}
                   >
@@ -178,6 +166,7 @@ export function MeriAttachmentPicker({
                   // Automatic re-reads stopped at the bounded wait; the person may still ask once more.
                   <button
                     type="button"
+                    className={styles.attachmentAction}
                     onClick={() => slot.onCheck(item.requestId)}
                     aria-label={`Check the status of ${item.filename} again`}
                   >
@@ -187,6 +176,7 @@ export function MeriAttachmentPicker({
                 {settledOut ? (
                   <button
                     type="button"
+                    className={styles.attachmentAction}
                     onClick={() => slot.onDismiss(item.requestId)}
                     aria-label={`Dismiss ${item.filename}`}
                   >
@@ -195,6 +185,7 @@ export function MeriAttachmentPicker({
                 ) : item.uploadId || item.state === "refused" ? (
                   <button
                     type="button"
+                    className={styles.attachmentAction}
                     onClick={() => slot.onRemove(item.requestId)}
                     aria-label={`Remove ${item.filename}`}
                   >
