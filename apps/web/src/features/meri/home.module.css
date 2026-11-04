@@ -354,6 +354,9 @@
   width: 100%;
   padding: 0;
   gap: 8px;
+  /* The primitive's own utilities arrive now that the utility layer exists; this surface keeps its
+     own order and padding so the hint stays under the tools row. */
+  order: 0;
 }
 .tools {
   display: flex;
@@ -399,6 +402,9 @@
   opacity: 0.4;
 }
 .keyboardHint {
+  /* The composer owns its hint alignment; the primitive's utilities must not right-align it. */
+  text-align: left;
+  align-self: stretch;
   font-size: 11px;
   line-height: 1.3;
   letter-spacing: 0.66px;

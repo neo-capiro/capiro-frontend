@@ -1,5 +1,8 @@
 .content {
   position: fixed;
+  /* Keep module centering/drawer geometry independent of the primitive's utility defaults. */
+  translate: none;
+  max-width: none;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
