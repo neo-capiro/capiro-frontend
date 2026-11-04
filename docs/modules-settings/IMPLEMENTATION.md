@@ -43,7 +43,7 @@ Install using Node 24 and the root npm lock (`npm ci`, npm 11.9). Start with `np
 | `ONBOARD_API_BASE_URL`      | Approved HTTPS origin plus `/onboard-api`; billing               |
 | `NEXT_PUBLIC_PORTFOLIO_URL` | Approved HTTPS URL for the separately running Portfolio frontend |
 
-Missing service/session configuration is rendered explicitly and issues no protected requests. Public forms require the Strategy service origin; their capability URL is the credential and must not be placed in analytics/referrer logs. Production routing, Clerk application configuration and live service feature flags must be qualified in the designated environment.
+Missing service/session configuration is rendered explicitly and issues no protected requests. Capability credentials must not be placed in analytics/referrer logs. Production routing, Clerk application configuration and live service feature flags must be qualified in the designated environment.
 
 ## Backend gaps and intentional unavailable actions
 
