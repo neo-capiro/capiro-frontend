@@ -88,6 +88,16 @@ export class DocumentPreviewController {
       this.listeners.delete(fn);
     };
   };
+  /** Replace an expired connection for the same saved version without replaying a publication. */
+  bind(port: PreviewAccess, context: ConversationContext) {
+    if (JSON.stringify(context) !== JSON.stringify(this.context))
+      throw new Error("Preview context changed");
+    if (port === this.port) return;
+    this.request.abort();
+    this.request = new AbortController();
+    this.port = port;
+    this.update({ busy: false });
+  }
   private update(value: Partial<State>) {
     this.state = { ...this.state, ...value };
     for (const fn of this.listeners) fn();

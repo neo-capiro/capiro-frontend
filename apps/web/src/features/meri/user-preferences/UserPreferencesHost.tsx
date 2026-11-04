@@ -42,11 +42,22 @@ export function UserPreferencesHost({ chrome }: { chrome: SettingsChrome }) {
         owner && !identity.loading && !identity.error ? (
           <OwnedPreferences key={JSON.stringify(owner)} owner={owner} />
         ) : (
-          <p role="status">
-            {identity.error
-              ? "Current account could not be verified. Personal preferences are unavailable."
-              : "Verifying your current account."}
-          </p>
+          <section aria-label="Personal preferences account recovery">
+            <p role="status" aria-live="polite">
+              {identity.error
+                ? "Current account could not be verified. Check your account again to load personal preferences."
+                : "Verifying your current account."}
+            </p>
+            {identity.error ? (
+              <button
+                type="button"
+                className={ui.outline}
+                onClick={identity.reload}
+              >
+                Check current account
+              </button>
+            ) : null}
+          </section>
         )
       }
       supporting={

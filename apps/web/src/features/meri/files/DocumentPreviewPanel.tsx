@@ -16,6 +16,10 @@ export function DocumentPreviewPanel({
     () => new DocumentPreviewController(port, port.context, versionId),
   );
   useLayoutEffect(() => controller.attach(), [controller]);
+  useLayoutEffect(
+    () => controller.bind(port, port.context),
+    [controller, port],
+  );
   const state = useSyncExternalStore(
     controller.subscribe,
     controller.getSnapshot,

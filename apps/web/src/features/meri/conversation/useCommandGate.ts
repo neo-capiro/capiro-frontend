@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { ConversationUnavailable } from "@capiro/meri-client/conversation";
 import { TabJournalUnavailable } from "../../../shared/meri-conversations/tab-journal";
 import { controlFailure, type ControlFailure } from "./control-reachability";
@@ -12,6 +12,14 @@ const code = (cause: unknown) =>
       ? cause.code
       : "CONVERSATION_UNAVAILABLE";
 
+type CommandState = {
+  owner: { readonly current: boolean };
+  busy: boolean;
+  error?: string;
+  failure?: ControlFailure;
+  refusal?: SendRefusal;
+};
+
 /**
  * Runs one explicit command at a time and reports its closed failure code. Commands issued while
  * another is in flight are ignored, never queued. `settled` runs after every command. `failure`
@@ -22,35 +30,57 @@ export function useCommandGate(
   alive: { readonly current: boolean },
   settled: () => void,
 ) {
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string>();
-  const [failure, setFailure] = useState<ControlFailure>();
-  const [refusal, setRefusal] = useState<SendRefusal>();
-  const active = useRef(false);
+  const [state, setState] = useState<CommandState>({
+    owner: alive,
+    busy: false,
+  });
+  // A renewed port may arrive before its retired command settles. Its read must not
+  // inherit that command's gate, and a late completion must not change the new view.
+  const activeOwner = useRef<typeof alive | null>(null);
+  const active = useMemo(
+    () => ({
+      get current() {
+        return activeOwner.current === alive;
+      },
+    }),
+    [alive],
+  );
   async function perform(operation: () => Promise<unknown>) {
-    if (active.current) return false;
-    active.current = true;
-    setBusy(true);
-    setError(undefined);
-    setFailure(undefined);
-    setRefusal(undefined);
+    if (!alive.current || active.current) return false;
+    activeOwner.current = alive;
+    setState({ owner: alive, busy: true });
     try {
       await operation();
       return true;
     } catch (cause) {
       if (alive.current) {
-        setError(code(cause));
-        setFailure(controlFailure(cause));
-        setRefusal(sendRefusal(cause));
+        setState({
+          owner: alive,
+          busy: true,
+          error: code(cause),
+          failure: controlFailure(cause),
+          refusal: sendRefusal(cause),
+        });
       }
       return false;
     } finally {
-      active.current = false;
+      if (activeOwner.current === alive) activeOwner.current = null;
       if (alive.current) {
-        setBusy(false);
+        setState((value) =>
+          value.owner === alive ? { ...value, busy: false } : value,
+        );
         settled();
       }
     }
   }
-  return { busy, error, failure, refusal, perform, active };
+  const visible: Omit<CommandState, "owner"> =
+    state.owner === alive ? state : { busy: false };
+  return {
+    busy: visible.busy,
+    error: visible.error,
+    failure: visible.failure,
+    refusal: visible.refusal,
+    perform,
+    active,
+  };
 }

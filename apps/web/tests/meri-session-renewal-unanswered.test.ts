@@ -179,7 +179,10 @@ beforeEach(() => {
       data.delete(k);
     },
   };
-  vi.stubGlobal("window", { sessionStorage: storage });
+  vi.stubGlobal("window", {
+    sessionStorage: storage,
+    location: { search: "" },
+  });
   syncMeriTabIdentity("synthetic", storage);
 });
 afterEach(() => {

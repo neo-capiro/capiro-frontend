@@ -85,6 +85,7 @@ export function useRunCommands(
   const send = (operation: () => Promise<unknown>) =>
     perform(async () => {
       await operation();
+      if (!alive.current) return;
       setTranscript("loaded");
       // A replayed ACK may already be terminal and contain no output events. Read its exact
       // run-local transcript before the observation loop sees that there is nothing left to watch.
