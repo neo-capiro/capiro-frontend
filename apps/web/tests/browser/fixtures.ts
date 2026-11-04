@@ -234,6 +234,79 @@ export async function installFixtures(page: Page) {
     const url = new URL(route.request().url());
     const path = url.pathname.replace("/api/backend/", "");
     const method = route.request().method();
+    const profileMatch =
+      /^core\/(clients|business-development\/prospects)\/([a-f0-9-]+)\/profile-build\/(profile|setup|latest)$/.exec(
+        path,
+      );
+    if (profileMatch) {
+      const subject = {
+        kind: profileMatch[1] === "clients" ? "client" : "prospect",
+        id: profileMatch[2],
+      };
+      const owner = {
+        clientId: subject.kind === "client" ? subject.id : null,
+        prospectId: subject.kind === "prospect" ? subject.id : null,
+        subject,
+      };
+      if (profileMatch[3] === "latest" && method === "GET")
+        return json(route, null);
+      if (profileMatch[3] === "setup" && method === "GET")
+        return json(route, {
+          ...owner,
+          clientName: "Synthetic company",
+          website: null,
+          selectedIdentities: [],
+          suggestedIdentities: [],
+          taskPreview: [],
+        });
+      if (profileMatch[3] === "profile" && ["GET", "PUT"].includes(method)) {
+        const body = method === "PUT" ? route.request().postDataJSON() : {};
+        if (
+          method === "PUT" &&
+          (!body.requestId || body.expectedVersion !== "a".repeat(64))
+        )
+          return json(
+            route,
+            { message: "Synthetic stale profile command" },
+            409,
+          );
+        return json(route, {
+          subject,
+          version: "a".repeat(64),
+          fields: body.fields ?? {},
+          facts: [],
+          conflicts: [],
+          completeness: { completed: 0, total: 6, missing: [], sections: [] },
+          sections: {
+            locations: body.locations ?? [],
+            leadership: body.leadership ?? [],
+            capabilities: body.capabilities ?? [],
+            advocacy: body.advocacy ?? null,
+            notes: [],
+            documents: [],
+          },
+        });
+      }
+    }
+    if (
+      path === "core/clients/profile-build/identity-preview" &&
+      method === "POST"
+    )
+      return json(route, {
+        status: "none",
+        entity: null,
+        candidates: [],
+        duplicate: null,
+      });
+    if (path === "core/clients/profile-build/references" && method === "GET")
+      return json(route, {
+        items:
+          url.searchParams.get("kind") === "naics"
+            ? [{ code: "541330", label: "Synthetic engineering services" }]
+            : url.searchParams.get("kind") === "psc"
+              ? [{ code: "R425", label: "Synthetic technical support" }]
+              : [{ code: "DEF", label: "Synthetic defense issues" }],
+      });
     if (method !== "GET") {
       unexpected.push(`${method} ${path}`);
       return json(route, { message: "Unexpected test mutation" }, 500);
@@ -290,6 +363,16 @@ export async function installFixtures(page: Page) {
       },
       [`core/business-development/prospects/${prospectId}`]: prospect,
       [`core/business-development/prospects/${prospectId}/history`]: [],
+      [`core/business-development/prospects/${prospectId}/watch`]: {
+        watch: null,
+        sources: [],
+        lastCompletedCheckAt: null,
+      },
+      [`core/business-development/prospects/${prospectId}/alerts`]: {
+        items: [],
+        nextCursor: null,
+        unreadCount: 0,
+      },
       [`core/business-development/prospects/${prospectId}/brief`]: {
         brief: null,
         currentVersion: null,
@@ -302,6 +385,23 @@ export async function installFixtures(page: Page) {
       [`core/clients/${clientId}/advocacy-matters`]: [],
       [`core/clients/${clientId}/advocacy-matters/timeline`]: [],
       [`core/clients/${clientId}/capabilities`]: [capability],
+      [`core/clients/${clientId}/portfolio/depth`]: {
+        capabilities: [capability],
+        proposals: [],
+        terms: [],
+        tracking: [],
+        relationships: [],
+        supports: [],
+        memberView: { fields: [], gaps: [] },
+        sectorAnchors: [],
+        businessUnits: [],
+        relationshipConflicts: [],
+      },
+      [`core/clients/${clientId}/capabilities/discovery/results`]: {
+        proposals: [],
+        hasMore: false,
+        nextCursor: null,
+      },
       [`core/clients/${clientId}/files/folders`]: [],
       [`core/clients/${clientId}/submission-history`]: [],
       [`core/clients/${clientId}/capability-fit`]: {
@@ -341,7 +441,7 @@ export async function installFixtures(page: Page) {
           ...file,
           id: "60000000-0000-4000-8000-000000000002",
           fileName: "Program overview.txt",
-          lifecycleStatus: "available",
+          lifecycleStatus: "ready",
           scanStatus: "clean",
           extractionStatus: "extracted",
           usable: true,

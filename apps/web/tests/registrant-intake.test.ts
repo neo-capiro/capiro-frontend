@@ -15,6 +15,7 @@ import {
   validateSelection,
   canReadRegistrant,
 } from "../src/features/portfolio/intake/registrant/domain";
+import { importJobSchema } from "../src/features/portfolio/intake/registrant/ImportQueue";
 import { importReceiptSchema } from "../src/features/portfolio/intake/registrant/contracts";
 
 const candidate = {
@@ -174,6 +175,7 @@ describe("retained firm LDA intake contract", () => {
     expect(fetcher.mock.calls[2]?.[0]).toBe("/api/backend/core/firm/import");
     expect(JSON.parse(fetcher.mock.calls[2]?.[1].body)).toEqual({
       ldaClientIds: [8],
+      requestId: expect.stringMatching(/^[a-f0-9-]{36}$/),
     });
   });
   it("preserves documented per-row skips and checks the complete ID partition", () => {
@@ -246,4 +248,58 @@ describe("retained firm LDA intake contract", () => {
     expect(canReadRegistrant("standard_user")).toBe(true);
     expect(canReadRegistrant("unknown")).toBe(false);
   });
+});
+
+it("binds selected company websites into the durable import request and reads them after reload", async () => {
+  const fetcher = vi
+    .fn()
+    .mockResolvedValueOnce(Response.json(anchor))
+    .mockResolvedValueOnce(Response.json(feed))
+    .mockResolvedValueOnce(Response.json(receipt));
+  const requestId = "10000000-0000-4000-8000-000000000001";
+  await importClients(createApiClient(fetcher), 12, [8], undefined, requestId, {
+    8: "company.example",
+    9: "unselected.example",
+  });
+  expect(JSON.parse(fetcher.mock.calls[2]?.[1].body)).toEqual({
+    ldaClientIds: [8],
+    requestId,
+    websites: { "8": "https://company.example/" },
+  });
+  const saved = importJobSchema.parse({
+    id: requestId,
+    requestId,
+    status: "completed",
+    counts: {
+      total: 1,
+      processed: 1,
+      successful: 1,
+      rejected: 0,
+      outstanding: 0,
+      created: 1,
+      alreadyPresent: 0,
+    },
+    stale: false,
+    items: [
+      {
+        ldaClientId: 8,
+        outcome: "created",
+        code: null,
+        clientId: "client-a",
+        clientName: "Synthetic Co",
+        website: "https://company.example/",
+        processedAt: null,
+      },
+    ],
+  });
+  expect(saved.items?.[0]?.website).toBe("https://company.example/");
+});
+it("rejects unsafe website inputs before an import is dispatched", async () => {
+  const fetcher = vi.fn();
+  await expect(
+    importClients(createApiClient(fetcher), 12, [8], undefined, undefined, {
+      8: "javascript://unsafe",
+    }),
+  ).rejects.toMatchObject({ uncertain: false });
+  expect(fetcher).not.toHaveBeenCalled();
 });

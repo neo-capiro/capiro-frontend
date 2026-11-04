@@ -10,11 +10,7 @@ import { useLayoutEffect, useRef } from "react";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { ApiError } from "@/shared/portfolio/api/http";
-import {
-  targetSchema,
-  recommendationsSchema,
-  type GovernmentTarget,
-} from "./target-contracts";
+import { targetSchema, type GovernmentTarget } from "./target-contracts";
 export const targetsKey = (clientId: string) => ["client-targets", clientId];
 const base = (clientId: string) =>
   `clients/${encodeURIComponent(clientId)}/targets`;
@@ -43,8 +39,14 @@ type TargetWrite =
       sourceDirectory: GovernmentTarget["sourceDirectory"];
       source: "manual" | "meri";
     }
-  | { kind: "tier"; memberId: string; tier: number | null }
-  | { kind: "remove"; memberId: string };
+  | { kind: "tier"; memberId: string; targetId: string; tier: number | null }
+  | { kind: "remove"; memberId: string; targetId: string };
+const targetWriteIdentity = (write: TargetWrite | undefined) =>
+  !write
+    ? undefined
+    : write.kind === "add"
+      ? `${write.sourceDirectory}:${write.memberId}`
+      : write.targetId;
 export function useTargetMutation(
   clientId: string,
   onSaved?: () => void,
@@ -60,7 +62,8 @@ export function useTargetMutation(
     mutationKey,
     predicate: (entry) =>
       Boolean(targetId) &&
-      (entry.state.variables as TargetWrite | undefined)?.memberId === targetId,
+      targetWriteIdentity(entry.state.variables as TargetWrite | undefined) ===
+        targetId,
   });
   const lifetime = useRef({ active: false });
   useLayoutEffect(() => {
@@ -91,8 +94,9 @@ export function useTargetMutation(
         cache.isMutating({
           mutationKey,
           predicate: (entry) =>
-            (entry.state.variables as TargetWrite | undefined)?.memberId ===
-            write.memberId,
+            targetWriteIdentity(
+              entry.state.variables as TargetWrite | undefined,
+            ) === targetWriteIdentity(write),
         }) > 1
       )
         throw new ApiError(
@@ -102,7 +106,7 @@ export function useTargetMutation(
       if (write.kind === "remove") {
         await api.request(
           "core",
-          `${base(clientId)}?${new URLSearchParams({ memberId: write.memberId })}`,
+          `${base(clientId)}/${encodeURIComponent(write.targetId)}`,
           z.object({ deleted: z.literal(true) }),
           { method: "DELETE" },
         );
@@ -112,15 +116,21 @@ export function useTargetMutation(
         (row) =>
           row.clientId === clientId &&
           row.memberId === write.memberId &&
+          (write.kind === "add" || row.id === write.targetId) &&
           (write.kind !== "add" ||
             row.sourceDirectory === write.sourceDirectory),
         "Target association mismatch",
       );
       if (write.kind === "tier")
-        await api.request("core", `${base(clientId)}/tier`, schema, {
-          method: "PATCH",
-          body: { memberId: write.memberId, tier: write.tier },
-        });
+        await api.request(
+          "core",
+          `${base(clientId)}/${encodeURIComponent(write.targetId)}/tier`,
+          schema,
+          {
+            method: "PATCH",
+            body: { tier: write.tier },
+          },
+        );
       else
         await api.request("core", base(clientId), schema, {
           method: "POST",
@@ -133,37 +143,11 @@ export function useTargetMutation(
     },
     onSuccess: async (_result, _write, scope) => {
       await cache.invalidateQueries({ queryKey: targetsKey(clientId) });
+      await cache.invalidateQueries({
+        queryKey: ["portfolio-depth", "client", clientId],
+      });
       if (scope?.active) onSaved?.();
     },
   });
   return { ...mutation, isPending: mutation.isPending || pendingTarget > 0 };
-}
-export function useTargetRecommendations(clientId: string) {
-  const api = useApi();
-  return useQuery({
-    queryKey: ["target-recommendations", clientId],
-    queryFn: ({ signal }) =>
-      api.request(
-        "core",
-        `clients/${clientId}/target-recommendations`,
-        recommendationsSchema,
-        { signal },
-      ),
-  });
-}
-export function useRefreshTargetRecommendations(clientId: string) {
-  const api = useApi();
-  const cache = useQueryClient();
-  return useMutation({
-    mutationFn: () =>
-      api.request(
-        "core",
-        `clients/${clientId}/target-recommendations/refresh`,
-        recommendationsSchema,
-        { method: "POST", body: {} },
-      ),
-    onSuccess: (result) => {
-      cache.setQueryData(["target-recommendations", clientId], result);
-    },
-  });
 }

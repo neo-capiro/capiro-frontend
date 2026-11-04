@@ -29,6 +29,9 @@ export const candidatesSchema = z.object({
   candidates: z.array(candidateSchema),
 });
 export const importReceiptSchema = z.object({
+  job: z
+    .object({ id: z.uuid(), requestId: z.string(), status: z.string() })
+    .optional(),
   created: z.number().int().nonnegative(),
   items: z.array(
     z.object({ id: z.string().min(1), name: z.string(), ldaClientId: id }),

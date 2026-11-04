@@ -57,7 +57,7 @@ export function PriorityTarget({
       </dl>
       <button
         className={`button ghost ${styles.openTarget}`}
-        onClick={() => onOpen(target.memberId)}
+        onClick={() => onOpen(target.id)}
       >
         Open target →
       </button>

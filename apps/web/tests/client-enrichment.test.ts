@@ -4,21 +4,22 @@ import { createApiClient } from "../src/shared/portfolio/api/http";
 import {
   assertReviewAccess,
   executeReviewAction,
-} from "../src/features/portfolio/client-profile/enrichment/actions";
+} from "../src/features/portfolio/profile-build/actions";
 import {
   canSelectFinding,
   runSchema,
   safeEvidenceUrl,
-} from "../src/features/portfolio/client-profile/enrichment/contracts";
+} from "../src/features/portfolio/profile-build/contracts";
 import {
   loadRun,
   latestReviewKey,
   setupKey,
-} from "../src/features/portfolio/client-profile/enrichment/queries";
+} from "../src/features/portfolio/profile-build/queries";
 const clientId = "10000000-0000-4000-8000-000000000001";
 const runId = "10000000-0000-4000-8000-000000000002";
 const findingId = "10000000-0000-4000-8000-000000000003";
 const raw = {
+  subject: { kind: "client" as const, id: clientId },
   id: runId,
   clientId,
   clientRevision: "a".repeat(64),
@@ -50,6 +51,7 @@ const raw = {
   ],
 };
 const snapshot = (value = raw) => ({
+  subject: { kind: "client" as const, id: value.clientId },
   clientId: value.clientId,
   runId: value.id,
   clientRevision: value.clientRevision,
@@ -126,14 +128,15 @@ describe("enrichment contracts and scoped actions", () => {
       vi.fn().mockResolvedValue(
         response({
           ...raw,
+          subject: { kind: "client", id: runId },
           clientId: runId,
           findings: raw.findings.map((f) => ({ ...f, clientId: runId })),
         }),
       ),
     );
-    await expect(loadRun(api, clientId, runId)).rejects.toThrow(
-      "different client",
-    );
+    await expect(
+      loadRun(api, { kind: "client", id: clientId }, runId),
+    ).rejects.toThrow("different client");
   });
   it("freshly rechecks changed values and makes zero writes", async () => {
     const changed = {
@@ -147,7 +150,7 @@ describe("enrichment contracts and scoped actions", () => {
     await expect(
       executeReviewAction(
         createApiClient(fetcher),
-        clientId,
+        { kind: "client", id: clientId },
         review(),
         { kind: "apply", findingIds: [findingId] },
         () => {},
@@ -170,7 +173,7 @@ describe("enrichment contracts and scoped actions", () => {
     await expect(
       executeReviewAction(
         createApiClient(fetcher),
-        clientId,
+        { kind: "client", id: clientId },
         review(),
         { kind: "apply", findingIds: [findingId] },
         () => {},
@@ -200,7 +203,7 @@ describe("enrichment contracts and scoped actions", () => {
     const dispatched = vi.fn();
     const result = await executeReviewAction(
       createApiClient(fetcher),
-      clientId,
+      { kind: "client", id: clientId },
       review(),
       { kind: "apply", findingIds: [findingId] },
       () => {},
@@ -239,7 +242,7 @@ describe("enrichment contracts and scoped actions", () => {
       );
     const result = await executeReviewAction(
       createApiClient(fetcher),
-      clientId,
+      { kind: "client", id: clientId },
       review(),
       { kind: "reject", findingId, reason: " Wrong source " },
       () => {},
@@ -260,7 +263,7 @@ describe("enrichment contracts and scoped actions", () => {
     await expect(
       executeReviewAction(
         createApiClient(fetcher),
-        clientId,
+        { kind: "client", id: clientId },
         review(),
         { kind: "apply", findingIds: [findingId] },
         () => {},
@@ -297,15 +300,26 @@ describe("enrichment contracts and scoped actions", () => {
     const first = { tenantId: "tenant-a", userId: "user-a" };
     const second = { tenantId: "tenant-a", userId: "user-b" };
     const other = { tenantId: "tenant-b", userId: "user-a" };
-    cache.setQueryData(latestReviewKey(clientId, first), review());
-    cache.setQueryData(setupKey(clientId, first), { clientId });
+    cache.setQueryData(
+      latestReviewKey({ kind: "client", id: clientId }, first),
+      review(),
+    );
+    cache.setQueryData(setupKey({ kind: "client", id: clientId }, first), {
+      clientId,
+    });
     expect(
-      cache.getQueryData(latestReviewKey(clientId, second)),
+      cache.getQueryData(
+        latestReviewKey({ kind: "client", id: clientId }, second),
+      ),
     ).toBeUndefined();
     expect(
-      cache.getQueryData(latestReviewKey(clientId, other)),
+      cache.getQueryData(
+        latestReviewKey({ kind: "client", id: clientId }, other),
+      ),
     ).toBeUndefined();
-    expect(cache.getQueryData(setupKey(clientId, second))).toBeUndefined();
+    expect(
+      cache.getQueryData(setupKey({ kind: "client", id: clientId }, second)),
+    ).toBeUndefined();
   });
   it("refuses an actor switch while preflight is in flight with zero POST", async () => {
     const cache = new QueryClient();
@@ -326,7 +340,7 @@ describe("enrichment contracts and scoped actions", () => {
     await expect(
       executeReviewAction(
         createApiClient(fetcher),
-        clientId,
+        { kind: "client", id: clientId },
         review(),
         { kind: "apply", findingIds: [findingId] },
         () => assertReviewAccess(cache, actor, true),
@@ -366,7 +380,7 @@ describe("enrichment contracts and scoped actions", () => {
     await expect(
       executeReviewAction(
         createApiClient(fetcher),
-        clientId,
+        { kind: "client", id: clientId },
         review(),
         { kind: "cancel" },
         () => {},
@@ -387,7 +401,7 @@ describe("enrichment contracts and scoped actions", () => {
     await expect(
       executeReviewAction(
         createApiClient(fetcher),
-        clientId,
+        { kind: "client", id: clientId },
         review(),
         { kind: "reject", findingId, reason: "" },
         () => {},

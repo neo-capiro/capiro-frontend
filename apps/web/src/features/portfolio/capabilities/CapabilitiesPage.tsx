@@ -11,6 +11,7 @@ import { maturity } from "./contracts";
 import { CapabilityEditor } from "./CapabilityEditor";
 import { CapabilityFit } from "./CapabilityFit";
 import { Registrations } from "./Registrations";
+import { CapabilityReview } from "./CapabilityReview";
 import styles from "./capabilities.module.css";
 export function CapabilitiesPage({
   clientId,
@@ -60,6 +61,7 @@ export function CapabilitiesPage({
         error={query.error}
         retry={() => void query.refetch()}
       />
+      <CapabilityReview clientId={clientId} />
       <div className={styles.surface}>
         {records && (
           <section className={styles.areas}>

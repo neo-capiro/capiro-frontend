@@ -1,3 +1,4 @@
+import { finishManualIdentity } from "./profile-intake-helpers";
 import { expect, test, type Page, type Locator } from "@playwright/test";
 import { client, installFixtures, json } from "./fixtures";
 const state = {
@@ -39,13 +40,13 @@ async function fillProfile(dialog: Locator) {
     .getByLabel("Legal name *", { exact: true })
     .fill("Capacity Test");
   await dialog
-    .getByLabel("Website *", { exact: true })
+    .getByLabel("Website (optional)", { exact: true })
     .fill("capacity.example.test");
   await dialog
-    .getByLabel("Company description *", { exact: true })
+    .getByLabel("Company description", { exact: true })
     .fill("Synthetic intercepted capacity test");
   await dialog
-    .getByRole("button", { name: "3. Sector & Tracks", exact: true })
+    .getByRole("button", { name: "6. Advocacy profile", exact: true })
     .click();
 }
 test("tenant slot count blocks client creation and leaves prospect and LDA browsing reachable", async ({
@@ -145,15 +146,14 @@ test("fresh create preflight catches a slot consumed while the form was open and
   await dialog
     .getByRole("button", { name: "Create profile", exact: true })
     .click();
+  await finishManualIdentity(dialog);
   await expect(
     dialog.getByRole("button", { name: "Create profile", exact: true }),
   ).toBeDisabled();
   await expect(
     dialog.getByText(/All client slots are in use/).first(),
   ).toBeVisible();
-  await dialog
-    .getByRole("button", { name: "1. Company Info", exact: true })
-    .click();
+  await dialog.getByRole("button", { name: "1. Company", exact: true }).click();
   await expect(dialog.getByLabel("Legal name *", { exact: true })).toHaveValue(
     "Capacity Test",
   );
@@ -190,6 +190,7 @@ for (const event of ["capacity-invalidate-actor", "capacity-unmount"])
     await dialog
       .getByRole("button", { name: "Create profile", exact: true })
       .click();
+    await finishManualIdentity(dialog);
     await expect.poll(() => reads).toBe(2);
     await page.evaluate((name) => window.dispatchEvent(new Event(name)), event);
     release();
@@ -233,6 +234,7 @@ test("unknown create reply freezes repeat creation and retains the completed for
   await dialog
     .getByRole("button", { name: "Create profile", exact: true })
     .click();
+  await finishManualIdentity(dialog);
   await expect(
     dialog.getByText(/No automatic retry will be sent/),
   ).toBeVisible();
@@ -313,6 +315,7 @@ for (const event of ["capacity-invalidate-actor", "capacity-unmount"])
       await dialog
         .getByRole("button", { name: "Create profile", exact: true })
         .click();
+      await finishManualIdentity(dialog);
       await expect.poll(() => reached).toBe(true);
       await page.evaluate(
         (name) => window.dispatchEvent(new Event(name)),

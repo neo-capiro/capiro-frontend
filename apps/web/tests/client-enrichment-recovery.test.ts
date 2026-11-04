@@ -1,13 +1,13 @@
 import "./command-recovery-platform";
 import { describe, expect, it, vi } from "vitest";
 import { installPlatform, db, local } from "./command-recovery-platform";
-import { reviewRecovery } from "../src/features/portfolio/client-profile/enrichment/review-recovery";
+import { reviewRecovery } from "../src/features/portfolio/profile-build/review-recovery";
 import {
   applicationAttemptSchema,
   applicationResponse,
   type ApplicationResult,
-} from "../src/features/portfolio/client-profile/enrichment/review-contracts";
-import { sendApplication } from "../src/features/portfolio/client-profile/enrichment/application-api";
+} from "../src/features/portfolio/profile-build/review-contracts";
+import { sendApplication } from "../src/features/portfolio/profile-build/application-api";
 import { createApiClient } from "../src/shared/portfolio/api/http";
 installPlatform();
 const clientId = "10000000-0000-4000-8000-000000000001";
@@ -37,7 +37,8 @@ const success = (): ApplicationResult => ({
   replayed: false,
 });
 const guard = () => {};
-const journal = () => reviewRecovery(clientId, actor, guard);
+const journal = () =>
+  reviewRecovery({ kind: "client", id: clientId }, actor, guard);
 
 describe("enrichment application recovery", () => {
   it("retains the original selection, revision and private target encrypted across lifetimes", async () => {
@@ -49,12 +50,18 @@ describe("enrichment application recovery", () => {
       );
     expect(
       await reviewRecovery(
-        clientId,
+        { kind: "client", id: clientId },
         { ...actor, userId: "other" },
         guard,
       ).load(),
     ).toBeNull();
-    expect(await reviewRecovery(otherId, actor, guard).load()).toBeNull();
+    expect(
+      await reviewRecovery(
+        { kind: "client", id: otherId },
+        actor,
+        guard,
+      ).load(),
+    ).toBeNull();
   });
   it("two tabs cannot replace an unresolved selection or request identity", async () => {
     const original = attempt();
@@ -129,7 +136,7 @@ describe("enrichment application recovery", () => {
     const saved = (await journal().load())!;
     const result = await sendApplication(
       createApiClient(fetcher),
-      clientId,
+      { kind: "client", id: clientId },
       saved.attempt,
       guard,
       new AbortController().signal,
@@ -154,7 +161,7 @@ describe("enrichment application recovery", () => {
       journal().received(original, { ...success(), requestId: otherId }),
     ).rejects.toThrow();
     await expect(
-      reviewRecovery(clientId, actor, () => {
+      reviewRecovery({ kind: "client", id: clientId }, actor, () => {
         throw new Error("Revoked");
       }).acknowledge(requestId),
     ).rejects.toThrow();
@@ -169,7 +176,11 @@ describe("enrichment application recovery", () => {
     const current = () => {
       if (!active) throw new Error("Session changed");
     };
-    const owner = reviewRecovery(clientId, actor, current);
+    const owner = reviewRecovery(
+      { kind: "client", id: clientId },
+      actor,
+      current,
+    );
     await owner.reserve(original);
     const api = createApiClient(async () => {
       active = false;
@@ -178,7 +189,7 @@ describe("enrichment application recovery", () => {
     await expect(
       sendApplication(
         api,
-        clientId,
+        { kind: "client", id: clientId },
         original,
         current,
         new AbortController().signal,
@@ -188,7 +199,7 @@ describe("enrichment application recovery", () => {
     expect((await journal().load())?.outcome).toEqual(success());
     expect(
       await reviewRecovery(
-        clientId,
+        { kind: "client", id: clientId },
         { ...actor, userId: "new actor" },
         guard,
       ).load(),

@@ -1,5 +1,9 @@
 import { z } from "zod";
 import { quickLogDetailReceiptFields } from "./quick-log/contracts";
+import {
+  locationFields,
+  geographicResolutionSchema,
+} from "./location-contracts";
 export const activitySchema = z.object({
   id: z.string(),
   kind: z.string(),
@@ -21,6 +25,7 @@ export const activityEditSchema = z.object({
 });
 export type ActivityEdit = z.infer<typeof activityEditSchema>;
 export const facilitySchema = z.object({
+  ...locationFields,
   id: z.string(),
   name: z.string(),
   clientId: z.string(),
@@ -55,6 +60,8 @@ export const facilitySchema = z.object({
         state: z.string().nullable(),
         latitude: z.number().nullable(),
         longitude: z.number().nullable(),
+        congressionalDistrictCongress: z.number().int().nullable().optional(),
+        resolution: geographicResolutionSchema.nullable().optional(),
       }),
     )
     .nullable()

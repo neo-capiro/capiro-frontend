@@ -1,3 +1,4 @@
+import { safeWebsite } from "@/shared/portfolio/domain/website";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import {
   candidatesSchema,
@@ -67,10 +68,23 @@ export async function importClients(
   registrantId: number,
   ids: number[],
   assertBeforeDispatch?: () => void | Promise<void>,
+  requestId = crypto.randomUUID(),
+  websites: Record<number, string> = {},
 ) {
   const selected = [...ids];
+  const savedWebsites: Record<string, string> = {};
   try {
     validateSelection(selected);
+    for (const id of selected) {
+      const input = websites[id]?.trim();
+      if (!input) continue;
+      const url = safeWebsite(input);
+      if (!url || url.length > 500)
+        throw new Error(
+          "Review each selected company website before importing.",
+        );
+      savedWebsites[String(id)] = url;
+    }
     const anchor = await fetchRegistrant(api);
     if (anchor.ldaRegistrantId !== registrantId)
       throw new Error(
@@ -93,7 +107,16 @@ export async function importClients(
         (result) => receiptMatches(result, selected),
         "Import receipt mismatch",
       ),
-      { method: "POST", body: { ldaClientIds: selected } },
+      {
+        method: "POST",
+        body: {
+          ldaClientIds: selected,
+          requestId,
+          ...(Object.keys(savedWebsites).length
+            ? { websites: savedWebsites }
+            : {}),
+        },
+      },
     );
   } catch (error) {
     // A transport/5xx/invalid-receipt failure can follow committed rows.

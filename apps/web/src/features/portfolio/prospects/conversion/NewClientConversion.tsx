@@ -54,7 +54,11 @@ function ConversionSession({
       <button
         className="button"
         ref={trigger}
-        disabled={!flow.ready || (!flow.pending && record.status !== "active")}
+        disabled={
+          !flow.ready ||
+          (!flow.pending &&
+            (record.status !== "active" || record.stage !== "closed_won"))
+        }
         onClick={() => {
           setReviewed(false);
           setOpen(true);
@@ -62,7 +66,9 @@ function ConversionSession({
       >
         {flow.pending
           ? "Recover new-client conversion"
-          : "Create client from prospect"}
+          : record.stage === "closed_won"
+            ? "Convert to client"
+            : "Convert after Closed won"}
       </button>
       {flow.error && <p role="alert">{flow.error}</p>}
       {open && (
@@ -73,7 +79,7 @@ function ConversionSession({
               ? "Recover new-client conversion"
               : `Create client from ${record.displayName}`
           }
-          description="Review one new client. Conversion consumes one available client slot and makes no purchase. Contacts, files and research stay with the prospect."
+          description="Review one new client. Conversion consumes one available client slot and makes no purchase. Approved profile facts, sites, leadership, capabilities, notes and documents carry their source history to the client."
           onOpenChange={(value) => {
             if (!flow.action.isPending) setOpen(value);
           }}
@@ -234,8 +240,8 @@ function ConversionSession({
             {flow.receipt && (
               <div className="stack" role="status">
                 <p>
-                  Client created. Contacts, files and research remain
-                  prospect-scoped.
+                  Client created. Approved profile details and linked documents
+                  are available on the client with their source history.
                 </p>
                 <Link
                   className="button"

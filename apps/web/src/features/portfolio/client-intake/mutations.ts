@@ -33,9 +33,11 @@ export function useSaveIntake(
     mutationFn: async ({
       values,
       initial,
+      canonicalEntityId,
     }: {
       values: IntakeForm;
       initial?: IntakeForm;
+      canonicalEntityId?: string;
     }) => {
       const scope = capture();
       if (!client)
@@ -46,6 +48,7 @@ export function useSaveIntake(
         initial,
         client,
         scope.assert,
+        canonicalEntityId,
       );
       try {
         scope.assert();

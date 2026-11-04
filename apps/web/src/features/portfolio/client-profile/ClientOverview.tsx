@@ -15,6 +15,10 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { FacilitiesCard } from "./FacilitiesCard";
 import { ClientDetails, GovernmentSummary } from "./ClientDetails";
+import {
+  ProfileBuildPanel,
+  ProfileFacts,
+} from "@/features/portfolio/profile-build/public";
 import { ClientCompleteness } from "./ClientCompleteness";
 import { ClientMonogram } from "./ClientMonogram";
 import { DeadlineAndRequests, EngagementPulse } from "./OverviewSignals";
@@ -160,6 +164,8 @@ export function ClientOverview({
           <ObjectiveSummary clientId={clientId} />
         </div>
       </div>
+      <ProfileBuildPanel subject={{ kind: "client", id: clientId }} />
+      <ProfileFacts subject={{ kind: "client", id: clientId }} />
       <ActivityTimeline clientId={clientId} />
       <div className={styles.supplemental}>
         <ClientDetails key={value.id} client={value} />

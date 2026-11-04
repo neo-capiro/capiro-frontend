@@ -1,16 +1,16 @@
 import "./command-recovery-platform";
 import { expect, it, vi } from "vitest";
 import { installPlatform, db, local } from "./command-recovery-platform";
-import { researchRecovery } from "../src/features/portfolio/client-profile/enrichment/research-recovery";
+import { researchRecovery } from "../src/features/portfolio/profile-build/research-recovery";
 import {
   researchCommandSchema,
   validateResearchSelection,
   canResearchFile,
-} from "../src/features/portfolio/client-profile/enrichment/research-contracts";
+} from "../src/features/portfolio/profile-build/research-contracts";
 import {
   prepareResearch,
   sendResearch,
-} from "../src/features/portfolio/client-profile/enrichment/research-api";
+} from "../src/features/portfolio/profile-build/research-api";
 import { createApiClient } from "../src/shared/portfolio/api/http";
 import type { Attachment } from "../src/features/portfolio/files/public";
 installPlatform();
@@ -26,8 +26,10 @@ const input = {
   ldaClientIds: [],
 };
 const command = () => researchCommandSchema.parse({ requestId, input });
-const journal = () => researchRecovery(clientId, actor, guard);
+const journal = () =>
+  researchRecovery({ kind: "client", id: clientId }, actor, guard);
 const setup = {
+  subject: { kind: "client" as const, id: clientId },
   clientId,
   clientName: "Client",
   website: "https://saved.example/",
@@ -36,6 +38,7 @@ const setup = {
   taskPreview: [],
 };
 const run = {
+  subject: { kind: "client" as const, id: clientId },
   id: requestId,
   clientId,
   status: "running",
@@ -46,6 +49,7 @@ const run = {
   startedAt: "2026-10-29T10:00:00Z",
   completedAt: null,
   findings: [],
+  setup: { website: input.website },
 };
 
 it("encrypts the exact research choices and separates clients and actors", async () => {
@@ -55,10 +59,16 @@ it("encrypts the exact research choices and separates clients and actors", async
     expect(JSON.stringify([...records.values()])).not.toContain(
       "private.example",
     );
-  expect(await researchRecovery(otherId, actor, guard).load()).toBeNull();
   expect(
     await researchRecovery(
-      clientId,
+      { kind: "client", id: otherId },
+      actor,
+      guard,
+    ).load(),
+  ).toBeNull();
+  expect(
+    await researchRecovery(
+      { kind: "client", id: clientId },
       { ...actor, userId: "other" },
       guard,
     ).load(),
@@ -85,16 +95,24 @@ it("a lost response retains the request and recovery repeats only the original U
   const api = createApiClient(fetcher),
     signal = new AbortController().signal;
   await expect(
-    sendResearch(api, clientId, command(), guard, signal, journal().received),
+    sendResearch(
+      api,
+      { kind: "client", id: clientId },
+      command(),
+      guard,
+      signal,
+      journal().received,
+    ),
   ).rejects.toThrow("Disconnected");
   await expect(journal().acknowledge(requestId)).rejects.toThrow(
     "exact saved run",
   );
   const saved = (await journal().load())!;
-  if (!("input" in saved.command)) throw new Error("Expected a saved research start");
+  if (!("input" in saved.command))
+    throw new Error("Expected a saved research start");
   await sendResearch(
     api,
-    clientId,
+    { kind: "client", id: clientId },
     saved.command,
     guard,
     signal,
@@ -122,7 +140,7 @@ it.each([
     await expect(
       sendResearch(
         createApiClient(async () => Response.json(wrong)),
-        clientId,
+        { kind: "client", id: clientId },
         command(),
         guard,
         new AbortController().signal,
@@ -137,7 +155,11 @@ it("a validated late result stays in its original scope without granting display
   const active = () => {
     if (!current) throw Error("Session changed");
   };
-  const owner = researchRecovery(clientId, actor, active);
+  const owner = researchRecovery(
+    { kind: "client", id: clientId },
+    actor,
+    active,
+  );
   await owner.reserve(command());
   const api = createApiClient(async () => {
     current = false;
@@ -146,7 +168,7 @@ it("a validated late result stays in its original scope without granting display
   await expect(
     sendResearch(
       api,
-      clientId,
+      { kind: "client", id: clientId },
       command(),
       active,
       new AbortController().signal,
@@ -160,7 +182,7 @@ it("preflight refuses changed identity choices before reserving or posting", asy
   await expect(
     prepareResearch(
       createApiClient(fetcher),
-      clientId,
+      { kind: "client", id: clientId },
       { ...input, ldaClientIds: [42] },
       guard,
       new AbortController().signal,
@@ -176,7 +198,8 @@ it("document selection requires a currently available file in the selected clien
     id: otherId,
     clientId,
     usable: true,
-    lifecycleStatus: "available",
+    viewerMode: "all",
+    lifecycleStatus: "ready",
     extractionStatus: "extracted",
   } as Attachment;
   expect(
@@ -186,13 +209,27 @@ it("document selection requires a currently available file in the selected clien
       [file],
     ).sources,
   ).toEqual([]);
+  expect(
+    canResearchFile(
+      {
+        ...file,
+        lifecycleStatus: "legacy_ready",
+        extractionStatus: "truncated",
+      },
+      { kind: "client", id: clientId },
+    ),
+  ).toBe(true);
   for (const changed of [
     { ...file, usable: false },
+    { ...file, viewerMode: "restricted" as const },
+    { ...file, lifecycleStatus: "available" },
     { ...file, clientId: otherId },
     { ...file, lifecycleStatus: "deleted" },
     { ...file, extractionStatus: "pending" },
   ]) {
-    expect(canResearchFile(changed, clientId)).toBe(false);
+    expect(canResearchFile(changed, { kind: "client", id: clientId })).toBe(
+      false,
+    );
     expect(() =>
       validateResearchSelection({ ...input, attachmentIds: [otherId] }, setup, [
         changed,
@@ -209,7 +246,7 @@ it("missing recovery storage or access cannot dispatch a replacement start", asy
   await expect(
     sendResearch(
       createApiClient(fetcher),
-      clientId,
+      { kind: "client", id: clientId },
       command(),
       () => {
         throw Error("Revoked");
@@ -219,4 +256,31 @@ it("missing recovery storage or access cannot dispatch a replacement start", asy
     ),
   ).rejects.toThrow("Revoked");
   expect(fetcher).not.toHaveBeenCalled();
+});
+
+it("retains approved business unit scope in the exact durable request and excludes it from prospects", () => {
+  const scoped = { ...input, businessUnitId: otherId };
+  expect(
+    researchCommandSchema.parse({ requestId, input: scoped }).input
+      .businessUnitId,
+  ).toBe(otherId);
+  expect(
+    validateResearchSelection(
+      scoped,
+      { ...setup, availableSources: ["public_web"] },
+      [],
+    ).businessUnitId,
+  ).toBe(otherId);
+  expect(() =>
+    validateResearchSelection(
+      scoped,
+      {
+        ...setup,
+        subject: { kind: "prospect", id: clientId },
+        clientId: null,
+        prospectId: clientId,
+      },
+      [],
+    ),
+  ).toThrow("Business unit research requires a client");
 });

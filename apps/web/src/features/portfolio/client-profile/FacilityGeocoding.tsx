@@ -8,6 +8,12 @@ import {
 } from "./profile-access";
 import { FacilityActionStatus } from "./FacilityActionStatus";
 import styles from "./facility-map.module.css";
+import { LocationResolution } from "./LocationResolution";
+import {
+  usDistrictCountries,
+  hasPhysicalFacilityAddress,
+  candidateHasCurrentBoundary,
+} from "./location-resolution";
 
 export function FacilityGeocoding({
   clientId,
@@ -46,13 +52,13 @@ function CurrentFacilityGeocoding({
   compact: boolean;
 }) {
   const mutation = useFacilityAction(clientId, facility, actor, !disabled);
-  const hasAddress = Boolean(
-    facility.addressLine?.trim() &&
-    facility.city?.trim() &&
-    facility.state?.trim(),
-  );
+  const hasAddress = hasPhysicalFacilityAddress(facility);
+  const canResolve =
+    (hasAddress || Boolean(facility.verifiedPoint)) &&
+    (!facility.country || usDistrictCountries.has(facility.country));
   return (
     <section className="stack" aria-label="Address resolution">
+      <LocationResolution facility={facility} />
       {!compact && <h3>Address resolution</h3>}
       <p className="muted">
         Geocoder:{" "}
@@ -88,12 +94,18 @@ function CurrentFacilityGeocoding({
                 {candidate.congressionalDistrict
                   ? ` · District ${candidate.congressionalDistrict}`
                   : ""}
+                {candidate.congressionalDistrictCongress
+                  ? ` · Congress ${candidate.congressionalDistrictCongress}`
+                  : " · Boundary term unavailable"}
+                {!candidateHasCurrentBoundary(facility, candidate) &&
+                  " · Rerun the lookup to resolve the serving boundary before selecting."}
               </span>
               <button
                 className="button"
                 disabled={
                   !mutation.canAct ||
                   !candidate.matchedAddress ||
+                  !candidateHasCurrentBoundary(facility, candidate) ||
                   !facility.geocodeCandidateRevision
                 }
                 onClick={() => {
@@ -118,7 +130,7 @@ function CurrentFacilityGeocoding({
         <div className="row">
           <button
             className="button"
-            disabled={!mutation.canAct || !hasAddress}
+            disabled={!mutation.canAct || !canResolve}
             onClick={() =>
               void mutation.run({
                 kind: "resolve-district",
@@ -132,7 +144,7 @@ function CurrentFacilityGeocoding({
           </button>
           <button
             className="button ghost"
-            disabled={!mutation.canAct || !hasAddress}
+            disabled={!mutation.canAct || !canResolve}
             onClick={() =>
               void mutation.run({ kind: "geocode", facilityId: facility.id })
             }
@@ -141,9 +153,10 @@ function CurrentFacilityGeocoding({
           </button>
         </div>
       )}
-      {!hasAddress && (
+      {!hasAddress && !facility.verifiedPoint && (
         <p className="muted">
-          Enter a street address, city and state before geocoding.
+          Enter a street address with ZIP or city and state, or a verified site
+          point.
         </p>
       )}
       <FacilityActionStatus

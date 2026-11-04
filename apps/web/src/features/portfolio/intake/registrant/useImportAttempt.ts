@@ -33,7 +33,7 @@ export function useImportAttempt({
   const [readbackError, setReadbackError] = useState<Error>();
   const [reading, setReading] = useState(false);
   const lock = useRef(false);
-  async function apply(selected: number[]) {
+  async function apply(selected: number[], websites?: Record<number, string>) {
     if (
       !canSubmit ||
       registrantId === null ||
@@ -49,7 +49,11 @@ export function useImportAttempt({
     const ids = [...selected];
     let result: ImportReceipt | undefined;
     try {
-      const outcome = await mutation.mutateAsync({ registrantId, ids });
+      const outcome = await mutation.mutateAsync({
+        registrantId,
+        ids,
+        websites: { ...websites },
+      });
       // onSettled waits for read-model refreshes. Recheck after that final await.
       outcome.assertCurrent();
       result = outcome.receipt;

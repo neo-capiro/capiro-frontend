@@ -57,6 +57,18 @@ export function CapabilityIdentityFields({
           </span>
         </label>
       </div>
+      <label>
+        Lifecycle
+        <select
+          name="lifecycle"
+          defaultValue={capability?.lifecycle ?? "unspecified"}
+        >
+          <option value="unspecified">Not specified</option>
+          <option value="in_service">In service</option>
+          <option value="in_development">In development</option>
+          <option value="planned">Planned</option>
+        </select>
+      </label>
       {!capability && (
         <>
           <datalist id={`${listId}-types`}>

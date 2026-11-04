@@ -25,13 +25,13 @@ test("existing intake keeps stacked token geometry and Enter, comma, blur and re
     .getByLabel("Legal name *", { exact: true })
     .fill("Synthetic token layout");
   await intake
-    .getByLabel("Website *", { exact: true })
+    .getByLabel("Website (optional)", { exact: true })
     .fill("tokens.example.test");
   await intake
-    .getByLabel("Company description *", { exact: true })
+    .getByLabel("Company description", { exact: true })
     .fill("Synthetic shared primitive check");
   await intake
-    .getByRole("button", { name: "3. Sector & Tracks", exact: true })
+    .getByRole("button", { name: "6. Advocacy profile", exact: true })
     .click();
   const input = intake.getByLabel("Funding priorities", { exact: true });
   await input.fill("  Research  ");

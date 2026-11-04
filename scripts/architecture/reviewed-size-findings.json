@@ -234,26 +234,6 @@
     "reviewedOn": "2026-10-25"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
-    "kind": "function",
-    "symbol": "IntakeSession",
-    "fingerprint": "304c03dbb084f602a302cfc83415670f49770369ff012eaca893bae94d295e8a",
-    "reason": "Exact-head structure review at frontend 4830ae34f6677fee3a609f8a3578f37c2f751ec0 (317 nonblank), replacing the 2026-10-27 record whose fingerprint e83ab41e no longer describes these bytes. The module keeps a thin entry component and one IntakeSession that owns a single client-intake draft: fields, validation, step, submit and its outcome, with transport/schemas in the existing intake api and contracts. The M1 change here only stops routing the stored logo path through the website normalizer (the prior failed-logo-URL tracking concern is unchanged: a logo failure still degrades to the monogram). One draft lifecycle, no second domain responsibility: no split warranted.",
-    "reviewedBy": "Hermes successor coordinator 20261031_022200_fd1df0 (independent exact-head review; fingerprint computed from these bytes, not copied from the prior approval)",
-    "reviewedOn": "2026-10-31"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-intake/form.ts",
-    "kind": "function",
-    "symbol": "intakePayload",
-    "line": 186,
-    "nonblank": 86,
-    "fingerprint": "4470f84bb85f11bb2f8a1dbacaffa1680ba6bfcb2995d692a10f2df6e292af55",
-    "reason": "Owns the pure dirty-field merge required by whole-object `intakeData` semantics. It applies only changed wizard keys over the fresh record, preserves unrelated data and merges known business flags without deleting unknown flags. Retain this one serialization rule; splitting top-level and intake edits into unrelated writers would increase lost-update risk.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/activity-mutations.ts",
     "kind": "function",
     "symbol": "useChangeActivity",
@@ -318,7 +298,7 @@
     "kind": "function",
     "symbol": "FindingReview",
     "fingerprint": "9d78cde94f4f86573a0c98b7584d7b451fd9fa9b322985a8038c18da6db64c5d",
-    "reason": "9d78cde94f4f86573a0c98b7584d7b451fd9fa9b322985a8038c18da6db64c5d FindingReview fn, l137, 152 nb ACCEPTABLE â€” one finding-review card; new gate is a derived boolean, no new state/effect or coupling.",
+    "reason": "9d78cde94f4f86573a0c98b7584d7b451fd9fa9b322985a8038c18da6db64c5d FindingReview fn, l137, 152 nb ACCEPTABLE \u00e2\u20ac\u201d one finding-review card; new gate is a derived boolean, no new state/effect or coupling.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -422,7 +402,7 @@
     "kind": "function",
     "symbol": "FocusTagSession",
     "fingerprint": "c88ba0cd670ca981066ca675c297b864251d3c495325e2eef98ef146443343f5",
-    "reason": "reviewed-accept â€” placeholder only",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d placeholder only",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -442,7 +422,7 @@
     "kind": "function",
     "symbol": "FileTable",
     "fingerprint": "0f33c8972da83f6a94bb260ea161a1cb1a7bb26834600d87e4fed0b5b08dd6c7",
-    "reason": "Exact-body ground truth (canonical scanner, my run): head 124/0f33c897â€¦; base 120/e2040cc4â€¦; recorded transfer baseline (commit 02c02d95) 109/2a4413a0â€¦. One cohesive responsibility: render one file row â€” selection checkbox state, name/source/disclosure cell, folder/date/owner, status chip, and the canonical four-action dropdown â€” driven only by props (files, selected, onSelect, onAction) plus contracts.fileStatus; the sole mutable DOM write is input.indeterminate, which is intrinsic to select-all. Coupling is prop-only and one-directional; the change is a 4-line relocation of an existing disclosure string, and the Status cell becomes chip-only by design. Bounded responsibility is acceptable: the count is dominated by JSX markup, and extracting the dropdown would not reduce real coupling. Reason the delta must still be reviewed: the transfer-baseline fingerprint no longer matches, so status changed-since-review is expected, not a new cohesion defect.",
+    "reason": "Exact-body ground truth (canonical scanner, my run): head 124/0f33c897\u00e2\u20ac\u00a6; base 120/e2040cc4\u00e2\u20ac\u00a6; recorded transfer baseline (commit 02c02d95) 109/2a4413a0\u00e2\u20ac\u00a6. One cohesive responsibility: render one file row \u00e2\u20ac\u201d selection checkbox state, name/source/disclosure cell, folder/date/owner, status chip, and the canonical four-action dropdown \u00e2\u20ac\u201d driven only by props (files, selected, onSelect, onAction) plus contracts.fileStatus; the sole mutable DOM write is input.indeterminate, which is intrinsic to select-all. Coupling is prop-only and one-directional; the change is a 4-line relocation of an existing disclosure string, and the Status cell becomes chip-only by design. Bounded responsibility is acceptable: the count is dominated by JSX markup, and extracting the dropdown would not reduce real coupling. Reason the delta must still be reviewed: the transfer-baseline fingerprint no longer matches, so status changed-since-review is expected, not a new cohesion defect.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -512,15 +492,6 @@
     "reviewedOn": "2026-11-01"
   },
   {
-    "file": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
-    "kind": "function",
-    "symbol": "ClientLinkDialog",
-    "fingerprint": "3bf00cb1effe0b231d1df399b7c08ff6c1a07e67e1f330d3730e80341ee5446d",
-    "reason": "Existing cohesive search/select/confirm link interaction; only explanatory carry-over copy changed. The new workflow is composed outside this dialog through its public feature entry.",
-    "reviewedBy": "/root/settings_source_audit",
-    "reviewedOn": "2026-10-25"
-  },
-  {
     "file": "apps/web/src/features/portfolio/prospects/NextStepEditor.tsx",
     "kind": "function",
     "symbol": "NextStepEditor",
@@ -539,26 +510,6 @@
     "nonblank": 118,
     "fingerprint": "cc2646107da24b49a6d15929d1306ceccc333ebfa0641c4ce5d62d3f2119f46c",
     "reason": "Owns a tenant-scoped template browse/filter/preview selection and focus return. Filtering is a domain function; fetching and exact selected-template validation live in hooks/preview modules. Retain; it must not accumulate proposal generation, sending or version binding under this catalog interface.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
-    "kind": "function",
-    "symbol": "ProspectDetail",
-    "fingerprint": "5e2f741ec15131e3ce658cb1ba7c706177886f0296a35c8fbb6db0a6933ff613",
-    "reason": "The existing prospect detail page remains a composition of separately owned feature surfaces. The only changed responsibility is passing linkedClientId to ProspectFiles when the already loaded prospect has convertedAt; the copy feature independently rechecks current conversion/link/access. It adds no file command, receipt, storage or recovery logic to the page. This exact one-prop composition preserves the existing cohesion decision.",
-    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
-    "reviewedOn": "2026-10-25"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
-    "kind": "function",
-    "symbol": "ProspectEditor",
-    "line": 9,
-    "nonblank": 106,
-    "fingerprint": "1ca69dda8efcdd5621641c0641890ef20f9dfe7199685e0c87a3f6bc81ce7ca3",
-    "reason": "Owns basic company field input and form feedback. `prospectInputSchema`, stage capability discovery and `useSaveProspect` own validation/discovery/persistence. Its create-versus-edit branch is the same field surface with different capability requirements. Retain; full registration or logo functionality should be a separate bounded addition when a service contract exists.",
     "reviewedBy": "Codex portfolio_prospects_files",
     "reviewedOn": "2026-10-11"
   },
@@ -621,7 +572,7 @@
     "kind": "function",
     "symbol": "ContactMail",
     "fingerprint": "d6bcd81c051904f4094202b8438cfda71ba1dee0291e845f895ab46197c928e5",
-    "reason": "2. ContactMail.tsx:12 function ContactMail â€” 232 nonblank, fp d6bcd81c051904f4094202b8438cfda71ba1dee0291e845f895ab46197c928e5 (base a953d7b2â€¦), changed. Owner of the contact message-history drawer, the selected thread body and compose; the change adds two classNames and a small dedicated style module rather than growing an existing shared sheet. ACCEPT.",
+    "reason": "2. ContactMail.tsx:12 function ContactMail \u00e2\u20ac\u201d 232 nonblank, fp d6bcd81c051904f4094202b8438cfda71ba1dee0291e845f895ab46197c928e5 (base a953d7b2\u00e2\u20ac\u00a6), changed. Owner of the contact message-history drawer, the selected thread body and compose; the change adds two classNames and a small dedicated style module rather than growing an existing shared sheet. ACCEPT.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -680,15 +631,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
-    "kind": "function",
-    "symbol": "GovernmentRelationships",
-    "fingerprint": "61d68a89dab78d5413adade51ac766af5c644a666d072f2fcaa0a3ae01736b5a",
-    "reason": "The current client target roster, target selection and add-target entry composition. Filtering targets into priority/committee/state groups is presentation of the same roster. URL selection, failure disposal and AddTargetDialog admission all depend on that current roster. TargetTable, recommendations, Directory and TargetDrawer remain separate owners. Retain the page composition; no provider, mail implementation or mutation algorithm was added to this container.",
-    "reviewedBy": "Codex independent prospects_review",
-    "reviewedOn": "2026-10-13"
-  },
-  {
     "file": "apps/web/src/features/portfolio/relationships/HierarchyEditor.tsx",
     "kind": "function",
     "symbol": "HierarchyEditor",
@@ -732,15 +674,6 @@
     "reason": "OrganizationRelationships owns the current client roster, search, route selection and hierarchy-review navigation. Recovery display and Add-contact admission consume the existing create hook; the chart, drawer, mutation, durable recovery and Core authorization owners stay separate. No independent write or storage subsystem is embedded in this page composition. Independent review: a/review-contact-create-928e/REPORT.md at frontend2a9b90e0.",
     "reviewedBy": "Codex A independent contact-create source review",
     "reviewedOn": "2026-10-24"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
-    "kind": "function",
-    "symbol": "TargetDrawer",
-    "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved targetÃ¢â‚¬â„¢s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
-    "reviewedBy": "Codex independent prospects_review",
-    "reviewedOn": "2026-10-13"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/thread/TimelineMailThread.tsx",
@@ -882,7 +815,7 @@
     "kind": "function",
     "symbol": "UploadFiles",
     "fingerprint": "b7a27ab808a892cd98a7726849f897a3ad94713c571e8847c8631ab9bc2642be",
-    "reason": "One upload queue retains each jobÃ¢â‚¬â„¢s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful uploadÃ¢â‚¬â„¢s resulting state and adds no storage writer.",
+    "reason": "One upload queue retains each job\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u201e\u00a2s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u201e\u00a2s resulting state and adds no storage writer.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
@@ -899,10 +832,12 @@
     "file": "apps/web/src/features/portfolio/files/upload.ts",
     "kind": "function",
     "symbol": "uploadParentFile",
-    "fingerprint": "68b13c43fd701fcac533d2fee7d48d9cbe52825a4bbb7df5286c04ff1546edaa",
-    "reason": "Owns the existing sequential native ticket, storage-byte and confirmation pipeline for one frozen parent/file/source attempt. Its ticket check binds posted fields.key to s3Key; confirmation binds client/meeting/source/key/metadata and the supplied initiating uploader. Unknown storage and mismatched 200 outcomes preserve the key for confirmation-only retry. All parent authorization remains through beforeDispatch and the service; splitting these coupled stages would scatter the retry state rather than isolate another responsibility.",
-    "reviewedBy": "Codex portfolio_prospects_files; independent root integration review",
-    "reviewedOn": "2026-10-11"
+    "line": 44,
+    "nonblank": 143,
+    "fingerprint": "545d388a36410d15134d6e79419060b60660d582f43b5e4b3ca48893deeba1f4",
+    "reason": "One retryable byte-upload and confirmation operation keeps storage key, file, uploader and parent receipt binding together. The new identity-only branch constrains an unlinked private upload; server attachment and lifecycle owners remain authoritative. Splitting its transport state would obscure uncertain-byte recovery.",
+    "reviewedBy": "Codex independent backend_audit review of frontend-depth-producers 98a4c692",
+    "reviewedOn": "2026-11-04"
   },
   {
     "file": "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
@@ -1116,17 +1051,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx",
-    "kind": "function",
-    "symbol": "ProfileChoiceSession",
-    "line": 27,
-    "nonblank": 157,
-    "fingerprint": "199204b5211dd5f426d6faba8438a5f926a4e380736e47d0984d735b77f3c09f",
-    "reason": "Profile create-choice session. The change adds the third create choice (Meri) exactly as the two existing choices are handled: one boolean state, one early-return that mounts the existing MeriProfileStarterDialog, and a replacement of the previously disabled placeholder button with the same ChoiceContent markup gated on role/capacity/destination. It owns only choice presentation and mount; it creates nothing, sends nothing and calls no model, and it reuses the existing dialog, capacity hook and focus-switch mechanics. The growth is cohesive form/status markup for one additional choice, not a new responsibility.",
-    "reviewedBy": "Hermes Agent independent source/design review (session 20261028_015918_5b9924)",
-    "reviewedOn": "2026-10-28"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
     "kind": "function",
     "symbol": "QuickLog",
@@ -1298,24 +1222,6 @@
     "reviewedOn": "2026-11-01"
   },
   {
-    "file": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
-    "kind": "function",
-    "symbol": "CapabilityEditor",
-    "fingerprint": "a1093d9e7ba03dc0b4cf15244fda82e07cc40c17a0024ca3a704822aad5babca",
-    "reason": "Owns the existing saved/create dialog and tabs. It forwards current-record suggestions to the create form without changing lifecycle, receipt, draft, document or focus ownership. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
-    "kind": "function",
-    "symbol": "CapabilityForm",
-    "fingerprint": "9b492ddd92a19d7b2f8e6829a6998adfa034f83bba04f3d3ee8bc9c2d586ca49",
-    "reason": "Owns the existing native capability form and fields. It forwards optional suggestions only to creation identity fields; form parsing, mutation boundaries and arbitrary type/sector strings remain canonical. Saved Details still renders the authored variant. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/OwnerCards.tsx",
     "kind": "function",
     "symbol": "OwnerCards",
@@ -1361,15 +1267,6 @@
     "reviewedOn": "2026-10-14"
   },
   {
-    "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
-    "kind": "function",
-    "symbol": "CapabilitiesPage",
-    "fingerprint": "3255317709ca53ae48f14e22b21ffd4472efdafc9d52cab382f97c647a82dc50",
-    "reason": "One URL-selected capability list presents a read and delegates editor, registrations, fit, and past-performance content to existing owners. The page's local codes dialog flag adds no capability write or independent data lifecycle.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
-  },
-  {
     "file": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
     "kind": "function",
     "symbol": "Registrations",
@@ -1413,24 +1310,6 @@
     "reason": "Owns one in-flight rewrite, verified result and one local Undo under the same draft/source and captured-authority lifetime. Atomic MailBody replaces the old string snapshot so formatting-only edits revoke pending/previous rewrites and Undo restores text plus HTML together. Existing transport, cancellation, source revision and identity checks remain unchanged.",
     "reviewedBy": "Codex shared frontend integration review",
     "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx",
-    "kind": "function",
-    "symbol": "RegistrationStep",
-    "fingerprint": "a511873c1e2ada4defedaac8654c59cc2866f45b5321ea92641f36257f954e12",
-    "reason": "Cohesive existing registration form. The sole behavior-neutral addition selects the certifications presentation variant; fields, values, unknown-code preservation and payload owner are unchanged. Crossing 80 by one line does not justify splitting the form into arbitrary fragments.",
-    "reviewedBy": "Codex shared frontend integration review with independent core_profile_review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
-    "kind": "function",
-    "symbol": "ClientOverview",
-    "fingerprint": "27739f1542424c4c5f10efad8616c8a032a0d1696211244e773cdc5358b429ff",
-    "reason": "Exact PR528 body review: one client overview composes existing public feature entries, named cards/dialogs and query hooks, retaining local team/notes visibility and URL cleanup. Reads, recorded activity, metrics and destination workflows stay with their existing owners. The changed sector/location expression only formats the identity subtitle; it adds no transport, mutation, authorization or new responsibility. Existing separation remains cohesive; no size-only extraction is warranted. Accept only this fingerprint.",
-    "reviewedBy": "Codex Astra independent PR528 reviewer",
-    "reviewedOn": "2026-11-03"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
@@ -1501,24 +1380,6 @@
     "symbol": "CurrentFacilitiesManager",
     "fingerprint": "08d7bc0f241e37c60771df546df15f54f6eabc62ed5583407ebc843abef53c92",
     "reason": "One actor/client-scoped facilities dialog composes saved cards, selection, canonical editor/removal/geocoding owners and footer actions. It keeps draft snapshots until explicitly admitted review, then adopts only the actual matching current facility. Writer/query/uncertain-attempt implementation is reused, not duplicated.",
-    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
-    "kind": "function",
-    "symbol": "FacilityFields",
-    "fingerprint": "29a51391739b3163a8903b000750ae6ad53b08fc0910bd0ed987ceb92327de6f",
-    "reason": "Declarative native field catalog for one facility record, retaining field names/defaults/constraints and a canonical SelectField with unknown-existing state preservation. No query, dispatch, actor or recovery state is introduced.",
-    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
-    "kind": "function",
-    "symbol": "CurrentFacilityGeocoding",
-    "fingerprint": "fae28b9d6e908889e5a695dc1ee95081dd2b6f82dbfcbf7451b2bfe6eda7acb4",
-    "reason": "Existing single facility resolution flow uses canonical useFacilityAction/current-source controls. Compact manager presentation changes matched controls without adding a service owner, permission inference or new endpoint.",
     "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
     "reviewedOn": "2026-10-12"
   },
@@ -2254,15 +2115,6 @@
     "reviewedOn": "2026-10-24"
   },
   {
-    "file": "apps/web/src/features/portfolio/relationships/target-queries.ts",
-    "kind": "function",
-    "symbol": "useTargetMutation",
-    "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hookÃ¢â‚¬â„¢s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
-    "reviewedBy": "Codex independent prospects_review",
-    "reviewedOn": "2026-10-13"
-  },
-  {
     "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
     "kind": "file",
     "symbol": "<module>",
@@ -2978,7 +2830,7 @@
     "kind": "function",
     "symbol": "IntegrationSettings",
     "fingerprint": "c769de7c96b62a59c8ac637f17377df6a15f8a25e45f70d01be7826611c299a3",
-    "reason": "5. IntegrationSettings.tsx:55 function IntegrationSettings â€” 531 nonblank, fp c769de7c96b62a59c8ac637f17377df6a15f8a25e45f70d01be7826611c299a3 (base 57789cefâ€¦), changed. Large container; the delta is two lines of truthful copy that do not add a responsibility, dependency or state. ACCEPT WITH NOTE (same bound as 4); no extraction is required by this change.",
+    "reason": "5. IntegrationSettings.tsx:55 function IntegrationSettings \u00e2\u20ac\u201d 531 nonblank, fp c769de7c96b62a59c8ac637f17377df6a15f8a25e45f70d01be7826611c299a3 (base 57789cef\u00e2\u20ac\u00a6), changed. Large container; the delta is two lines of truthful copy that do not add a responsibility, dependency or state. ACCEPT WITH NOTE (same bound as 4); no extraction is required by this change.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -3204,20 +3056,11 @@
     "reviewedOn": "2026-10-19"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-profile/FacilityLocationFacts.tsx",
-    "kind": "function",
-    "symbol": "FacilityLocationFacts",
-    "fingerprint": "3b92fb4a54718254bce7e6218228dd00d4becec6dea285c94ddbf94fcdfe8569",
-    "reason": "One facility-location fact panel labels saved address and district provenance beside separately identified public roster/source details. Geocoding and persistence remain delegated, avoiding a second location writer.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/overview.module.css",
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "8068cf99a5d601daeb3378d4383918decfd33982a9391165cd5c3b7662d9d18e",
-    "reason": "reviewed-accept for source; visual effect NOT verified here (min-height/overflow visible â†’ combined visual run)",
+    "reason": "reviewed-accept for source; visual effect NOT verified here (min-height/overflow visible \u00e2\u2020\u2019 combined visual run)",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -3253,7 +3096,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "16a3ed0e347f7a5a7d20b43c5db90a26320c4bcf81854812536fdf7df8262da2",
-    "reason": "4. IntegrationSettings.tsx:1 <module> â€” 581 nonblank, fp 16a3ed0e347f7a5a7d20b43c5db90a26320c4bcf81854812536fdf7df8262da2 (base 5cd78d6bâ€¦), changed. File-level signal already over the 400 threshold before this change; the delta is copy inside an existing provider render callback. ACCEPT WITH NOTE: the file is well past the threshold and any future addition should extract provider blocks rather than extend it.",
+    "reason": "4. IntegrationSettings.tsx:1 <module> \u00e2\u20ac\u201d 581 nonblank, fp 16a3ed0e347f7a5a7d20b43c5db90a26320c4bcf81854812536fdf7df8262da2 (base 5cd78d6b\u00e2\u20ac\u00a6), changed. File-level signal already over the 400 threshold before this change; the delta is copy inside an existing provider render callback. ACCEPT WITH NOTE: the file is well past the threshold and any future addition should extract provider blocks rather than extend it.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -3271,7 +3114,7 @@
     "kind": "function",
     "symbol": "TeamSettings",
     "fingerprint": "4de41891f35570ba32380c6900ab16df65aadee44f0eee316230cd28fb482438",
-    "reason": "4de41891f35570ba32380c6900ab16df65aadee44f0eee316230cd28fb482438 TeamSettings fn, l31, 393 nb ACCEPTABLE for this delta â€” a large settings screen whose size predates the change; this commit adds ~15 presentational lines (tooltip). No new state/effect. Non-blocking: extract the member/billing cell if it grows.",
+    "reason": "4de41891f35570ba32380c6900ab16df65aadee44f0eee316230cd28fb482438 TeamSettings fn, l31, 393 nb ACCEPTABLE for this delta \u00e2\u20ac\u201d a large settings screen whose size predates the change; this commit adds ~15 presentational lines (tooltip). No new state/effect. Non-blocking: extract the member/billing cell if it grows.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -5263,7 +5106,7 @@
     "kind": "function",
     "symbol": "NativeMailReply",
     "fingerprint": "8d1b157a548ae17637d306f48670b2e5637f38471c1971c904a184897b5f1460",
-    "reason": "reviewed-accept (function size, 201 nonblank) â€” the composer now guards the recipient explicitly: the reply/reply-all controls require a real recipient before opening and the open-state effect bails out when the reply has no usable address, with an added regression test covering an empty to list. This is the requested UI robustness guard; Core already rejects an unsupported empty To, so no server crash is claimed or relied on.",
+    "reason": "reviewed-accept (function size, 201 nonblank) \u00e2\u20ac\u201d the composer now guards the recipient explicitly: the reply/reply-all controls require a real recipient before opening and the open-state effect bails out when the reply has no usable address, with an added regression test covering an empty to list. This is the requested UI robustness guard; Core already rejects an unsupported empty To, so no server crash is claimed or relied on.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -5272,7 +5115,7 @@
     "kind": "function",
     "symbol": "DecisionControls",
     "fingerprint": "66fb493c28e0e13de099ec29d0f2230a4a561594067a7702f8e7782bd548c7cf",
-    "reason": "reviewed-accept â€” refactor to one uncertainOutcome table; no authority change",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d refactor to one uncertainOutcome table; no authority change",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -5281,7 +5124,7 @@
     "kind": "function",
     "symbol": "intentDecisionRecovery",
     "fingerprint": "06a6a2a7b1c751faf289ac7cbbd33466028411580987d237733f826cdb985d88",
-    "reason": "reviewed-accept â€” adds research_action to the read-only recovery set",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d adds research_action to the read-only recovery set",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -5290,7 +5133,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "1008ca06e7faef749095109fd3f214f463fc7791cc3d8b5629942b61a3ed0302",
-    "reason": "reviewed-accept â€” file was already >400 nonblank (509â†’536); the added unit is filingLinks, one pure projection of the retained filing outcome beside the existing filing receipt projection. Single proposalâ†’row registry retained; no new domain or authority owner.",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d file was already >400 nonblank (509\u00e2\u2020\u2019536); the added unit is filingLinks, one pure projection of the retained filing outcome beside the existing filing receipt projection. Single proposal\u00e2\u2020\u2019row registry retained; no new domain or authority owner.",
     "reviewedBy": "Hermes Agent source review 20261027_154620_698336",
     "reviewedOn": "2026-10-27"
   },
@@ -5299,7 +5142,7 @@
     "kind": "function",
     "symbol": "intentRow",
     "fingerprint": "e6b74bb9372b3818bb9c505358f498ad75fb087d05f560479f92458da986de06",
-    "reason": "reviewed-accept â€” adds saved-file links to the existing native proposal row; the helper owns the filing completion projection (native-artifact-file). No new authority or domain owner.",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d adds saved-file links to the existing native proposal row; the helper owns the filing completion projection (native-artifact-file). No new authority or domain owner.",
     "reviewedBy": "Hermes Agent source review 20261027_154620_698336",
     "reviewedOn": "2026-10-27"
   },
@@ -5308,7 +5151,7 @@
     "kind": "function",
     "symbol": "useConversationIntents",
     "fingerprint": "953790a9678aa5073a5b51c9491267b03d7ab4d71ed1d2d6d4c441f2a35f68ab",
-    "reason": "reviewed-accept â€” terminal-status awareness only",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d terminal-status awareness only",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -5335,7 +5178,7 @@
     "kind": "function",
     "symbol": "ResearchSettings",
     "fingerprint": "578bf0ee226feddb9aabb0f54b37690af6f851b0c3ef6d45ba0b3e2f7a03b716",
-    "reason": "reviewed-accept â€” canManage vs editable split; grants stay visible",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d canManage vs editable split; grants stay visible",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -5416,7 +5259,7 @@
     "kind": "function",
     "symbol": "ShareLinks",
     "fingerprint": "098465269a8b1e000345aa73796e5c61ae5161623180c80c796733ac16e57d58",
-    "reason": "reviewed-accept â€” SH5 verified, degrades safely 2026-10-29 sharing keyboard-scroll correction: the two sharing tables now pass the opt-in scrollRegion prop, so an overflowing wrapper becomes a keyboard-reachable scroll region named from its caption and gets the ordinary focus outline; a table that fits adds no tab stop. No handler, state, query, copy, column or contract changed.",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d SH5 verified, degrades safely 2026-10-29 sharing keyboard-scroll correction: the two sharing tables now pass the opt-in scrollRegion prop, so an overflowing wrapper becomes a keyboard-reachable scroll region named from its caption and gets the ordinary focus outline; a table that fits adds no tab stop. No handler, state, query, copy, column or contract changed.",
     "reviewedBy": "Hermes Agent sharing keyboard-scroll correction review 20261029",
     "reviewedOn": "2026-10-29"
   },
@@ -5425,7 +5268,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "99332c10e118ace7c054ccd2f7d707f0e341964cee7ac1952c7bb0bbcd494564",
-    "reason": "One module stylesheet covering the dashboard grid, widget content, designer and\n    recipient page of a single visual surface family. It is pure presentation with no logic or\n    state; the recipient-vs-canvas distinction is expressed by the .recipientGrid container query\n    and the .canvas clip rules documented in Â§2.",
+    "reason": "One module stylesheet covering the dashboard grid, widget content, designer and\n    recipient page of a single visual surface family. It is pure presentation with no logic or\n    state; the recipient-vs-canvas distinction is expressed by the .recipientGrid container query\n    and the .canvas clip rules documented in \u00c2\u00a72.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -5533,7 +5376,7 @@
     "kind": "function",
     "symbol": "IncomingMailFiles",
     "fingerprint": "b7a05a5406f83c03a5df6e0a767084bd9ec49e7893920c22d0b0b3d47825a22e",
-    "reason": "3. IncomingMailFiles.tsx:21 function IncomingMailFiles â€” 271 nonblank, fp b7a05a5406f83c03a5df6e0a767084bd9ec49e7893920c22d0b0b3d47825a22e (base 325bc7d2â€¦), changed. Owner of the selected-message files panel: mount lifetime guard, manifest/handoff/import/receipt/stored states, and now the alert presentation. Delta is one className on the existing alert; no new state, effect or dependency. ACCEPT.",
+    "reason": "3. IncomingMailFiles.tsx:21 function IncomingMailFiles \u00e2\u20ac\u201d 271 nonblank, fp b7a05a5406f83c03a5df6e0a767084bd9ec49e7893920c22d0b0b3d47825a22e (base 325bc7d2\u00e2\u20ac\u00a6), changed. Owner of the selected-message files panel: mount lifetime guard, manifest/handoff/import/receipt/stored states, and now the alert presentation. Delta is one className on the existing alert; no new state, effect or dependency. ACCEPT.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -5672,7 +5515,7 @@
     "kind": "function",
     "symbol": "MoveFiles",
     "fingerprint": "afdae17ddc449025f18b70e3583a636e5811c89c420279b820e81afe54e78120",
-    "reason": "Ground truth: head 134/afdae17dâ€¦; base 130/560cdc14â€¦; no transfer-baseline record (hence \"new\"). One cohesive responsibility: the batch-move dialog â€” authoritative count from the held command before local selection, title/description copy, the start try/catch and its revision precondition message, the pending/refusal/unconfirmed status copy, the check/retry/retire controls and the primary submit gate keyed to move.canStart plus count bounds. All authority stays in useBatchMove/batchMoveCommand (untouched); no new state or effect path was added, so extraction candidates (held-command control block, file list) would re-thread the same context without reducing responsibility. Bounded responsibility acceptable. Note: this body is a preserved donor byte snapshot; any future edit is a new change, not a donor carry-over.",
+    "reason": "Ground truth: head 134/afdae17d\u00e2\u20ac\u00a6; base 130/560cdc14\u00e2\u20ac\u00a6; no transfer-baseline record (hence \"new\"). One cohesive responsibility: the batch-move dialog \u00e2\u20ac\u201d authoritative count from the held command before local selection, title/description copy, the start try/catch and its revision precondition message, the pending/refusal/unconfirmed status copy, the check/retry/retire controls and the primary submit gate keyed to move.canStart plus count bounds. All authority stays in useBatchMove/batchMoveCommand (untouched); no new state or effect path was added, so extraction candidates (held-command control block, file list) would re-thread the same context without reducing responsibility. Bounded responsibility acceptable. Note: this body is a preserved donor byte snapshot; any future edit is a new change, not a donor carry-over.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -5700,15 +5543,6 @@
     "symbol": "saveFileAccess > <anonymous>",
     "fingerprint": "697cd905b07769c2da5fc11c1dbb12417e43c6830f91f0386a94b5dc47eb4e64",
     "reason": "Inline locked transaction body of saveFileAccess passed to recovery.lock. It holds the access-command state machine inside that same single-responsibility executor; it is a closure for lock scoping, not a separate owner.",
-    "reviewedBy": "Hermes Agent architecture lane 1",
-    "reviewedOn": "2026-10-27"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/prospects/conversion/NewClientConversion.tsx",
-    "kind": "function",
-    "symbol": "ConversionSession",
-    "fingerprint": "7e0f787d0801a43b17d0c28113bc71795c71e3b6dfd70756bd6637229049820d",
-    "reason": "Owns the new-client conversion review dialog: duplicate-review acknowledgement, capacity gating, retained-attempt/recover/refusal/acknowledge surfaces and focus return. Command authority and execution remain with useNewClientConversion and new-client-command.",
     "reviewedBy": "Hermes Agent architecture lane 1",
     "reviewedOn": "2026-10-27"
   },
@@ -5866,15 +5700,6 @@
     "reviewedOn": "2026-10-27"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-profile/ClientMeriActions.tsx",
-    "kind": "function",
-    "symbol": "ClientMeriActions",
-    "fingerprint": "ae3e490544ece8b671faa347acb017a3e6514f31227152c652f1fc62d60bf7ea",
-    "reason": "The client-header 'Meri actions' dropdown: it renders the three Meri entry items and owns only their dialog open-state, deriving availability from useMeriCapabilities and useSelectedClient. The handoff, enrichment and attendance dialogs are delegated to their own components. One responsibility (the Meri action menu for one client) under the client-profile owner.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/quick-log/useActivityCommand.ts",
     "kind": "function",
     "symbol": "useActivityCommand",
@@ -5987,7 +5812,7 @@
     "kind": "function",
     "symbol": "IntegrationSettings > <anonymous> #3",
     "fingerprint": "0ac0ea06ba31378a56e38b1b527b45102bfe5cbdda70871af16d8f20a0f1ca91",
-    "reason": "6. IntegrationSettings.tsx:190 anon #3 â€” 257 nonblank, fp 0ac0ea06ba31378a56e38b1b527b45102bfe5cbdda70871af16d8f20a0f1ca91 (base 653a6d73â€¦), changed. The per-provider render callback (status, saved rows, missing-configuration explanation, guarded connect/reconnect notices). Bounded to one provider's block; the change is the conditional saved-records sentence. ACCEPT WITH NOTE.",
+    "reason": "6. IntegrationSettings.tsx:190 anon #3 \u00e2\u20ac\u201d 257 nonblank, fp 0ac0ea06ba31378a56e38b1b527b45102bfe5cbdda70871af16d8f20a0f1ca91 (base 653a6d73\u00e2\u20ac\u00a6), changed. The per-provider render callback (status, saved rows, missing-configuration explanation, guarded connect/reconnect notices). Bounded to one provider's block; the change is the conditional saved-records sentence. ACCEPT WITH NOTE.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
@@ -6005,7 +5830,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "bc3423591e5b8bd365faf801ddf63a665e83288f47a70f8e2e27cc0853a55c38",
-    "reason": "bc3423591e5b8bd365faf801ddf63a665e83288f47a70f8e2e27cc0853a55c38 TeamSettings file, 426 nb ACCEPTABLE â€” module holds schema types, a query hook and the component; single settings responsibility.",
+    "reason": "bc3423591e5b8bd365faf801ddf63a665e83288f47a70f8e2e27cc0853a55c38 TeamSettings file, 426 nb ACCEPTABLE \u00e2\u20ac\u201d module holds schema types, a query hook and the component; single settings responsibility.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -6236,7 +6061,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "0a53f2b49d2ac97ec531577080f9d20c099f7b5494e73294f637bec5ea2b7edb",
-    "reason": "reviewed-accept (file size, 406 nonblank) â€” module scope is limited to the dataset registry, filter-state helpers that write through to the URL, the page-size/export-size constants and the route component; helpers are pure and already unit-covered by intelligence-location/explorer-export tests, so no further cohesive unit can be carved out without fragmenting the URL-owned state machine.",
+    "reason": "reviewed-accept (file size, 406 nonblank) \u00e2\u20ac\u201d module scope is limited to the dataset registry, filter-state helpers that write through to the URL, the page-size/export-size constants and the route component; helpers are pure and already unit-covered by intelligence-location/explorer-export tests, so no further cohesive unit can be carved out without fragmenting the URL-owned state machine.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6245,7 +6070,7 @@
     "kind": "function",
     "symbol": "DataExplorer",
     "fingerprint": "b319017b2498b5ba5a2751dcee87f0c07602bc673dbce562f8306836499ba9ae",
-    "reason": "reviewed-accept (function size, 353 nonblank) â€” one route component for /modules/intelligence; it owns the URL-derived dataset/filter/page/record state through useIntelligenceLocation and renders the fixed typed Explorer queries, faceted filter controls, list and selected-record panel. Growth is declarative query/results markup plus location wiring, not hidden branching; extracting the JSX would separate the URL contract from the single surface that must honour it while leaving every decision in place.",
+    "reason": "reviewed-accept (function size, 353 nonblank) \u00e2\u20ac\u201d one route component for /modules/intelligence; it owns the URL-derived dataset/filter/page/record state through useIntelligenceLocation and renders the fixed typed Explorer queries, faceted filter controls, list and selected-record panel. Growth is declarative query/results markup plus location wiring, not hidden branching; extracting the JSX would separate the URL contract from the single surface that must honour it while leaving every decision in place.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6254,7 +6079,7 @@
     "kind": "function",
     "symbol": "DefenseBudget",
     "fingerprint": "065db1d936c3e0298678b0b4a527b7f48e8f2add037378e6bf7c95991be4e255",
-    "reason": "reviewed-accept (function size, 133 nonblank) â€” the component now derives its filters, page and search text from useIntelligenceLocation so reload and Back/Forward restore the same view; the body is the existing filter/list/detail markup plus the fixed intelligence.defense queries. No authority, mutation or aggregation logic is introduced by the URL wiring.",
+    "reason": "reviewed-accept (function size, 133 nonblank) \u00e2\u20ac\u201d the component now derives its filters, page and search text from useIntelligenceLocation so reload and Back/Forward restore the same view; the body is the existing filter/list/detail markup plus the fixed intelligence.defense queries. No authority, mutation or aggregation logic is introduced by the URL wiring.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6263,7 +6088,7 @@
     "kind": "function",
     "symbol": "ProgramElementProfile",
     "fingerprint": "2be620da57586cb13d90f8f8c8907b38efd04f8137f5c01524bc25a60ad373a4",
-    "reason": "reviewed-accept (function size, 97 nonblank) â€” the growth is the URL-owned Program Element identity and its existing five tabs (peTab/dossier) plus the mounted dossier/context/office/acquisition/funding readers; tab selection is read from and written to the location, so a split would duplicate that contract across components without removing a decision.",
+    "reason": "reviewed-accept (function size, 97 nonblank) \u00e2\u20ac\u201d the growth is the URL-owned Program Element identity and its existing five tabs (peTab/dossier) plus the mounted dossier/context/office/acquisition/funding readers; tab selection is read from and written to the location, so a split would duplicate that contract across components without removing a decision.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6290,7 +6115,7 @@
     "kind": "function",
     "symbol": "ContextRecords",
     "fingerprint": "a6ef6a79b3664388a2d2615a32a139f79c829c5314855661aa54e50504d36403",
-    "reason": "reviewed-accept (function size, 147 nonblank) â€” list/detail pair over defenseResearch.context and .context.detail with URL-owned selection; revisions, sections and coverageReason are rendered with availability/provenance rather than as zeroed values. No new operation or state model.",
+    "reason": "reviewed-accept (function size, 147 nonblank) \u00e2\u20ac\u201d list/detail pair over defenseResearch.context and .context.detail with URL-owned selection; revisions, sections and coverageReason are rendered with availability/provenance rather than as zeroed values. No new operation or state model.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6299,7 +6124,7 @@
     "kind": "function",
     "symbol": "DossierDetail",
     "fingerprint": "73011372c1cd58ae1554970d8ff597e5006b6c39ef8355af8369342a161a5151",
-    "reason": "reviewed-accept (function size, 235 nonblank) â€” the dossier panel renders the four fixed DTO sections (identity, fields, funding matrix, coverage). Size comes from per-section table markup; funding cells use 'Not available' plus the disposition badge and Core's stated reason so a missing observation is never displayed as zero, and the component holds no client-side authority or recomputation.",
+    "reason": "reviewed-accept (function size, 235 nonblank) \u00e2\u20ac\u201d the dossier panel renders the four fixed DTO sections (identity, fields, funding matrix, coverage). Size comes from per-section table markup; funding cells use 'Not available' plus the disposition badge and Core's stated reason so a missing observation is never displayed as zero, and the component holds no client-side authority or recomputation.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6308,7 +6133,7 @@
     "kind": "function",
     "symbol": "OfficeRecords",
     "fingerprint": "3ddb330c2611d3033fd44e8a47dbe9d5464adbf416495a7b977a9df1325bf18c",
-    "reason": "reviewed-accept (function size, 151 nonblank) â€” list/detail over defenseResearch.offices/.office with URL-owned query, page and selected office; mission/responsibilities/scope are projected from the wider Core office DTO (unknown fields deliberately stripped) and the panel renders availability/evidence rather than inferring values.",
+    "reason": "reviewed-accept (function size, 151 nonblank) \u00e2\u20ac\u201d list/detail over defenseResearch.offices/.office with URL-owned query, page and selected office; mission/responsibilities/scope are projected from the wider Core office DTO (unknown fields deliberately stripped) and the panel renders availability/evidence rather than inferring values.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6317,7 +6142,7 @@
     "kind": "function",
     "symbol": "ImportWorksheet",
     "fingerprint": "6fc771e0641857825589341fcf0f03e7fda0ac6c7e39fb21e1c905e99e2a7ca1",
-    "reason": "reviewed-accept (function size, 196 nonblank) â€” the import worksheet now retains one exact captured action request together with its operationKey and reuses both only while the semantic params/body are byte-identical (identity excludes the key), clearing on success and distinguishing refused from uncertain outcomes; this is the bounded same-key recovery requested for the P3 retry guard and introduces no automatic retry or new pipeline.",
+    "reason": "reviewed-accept (function size, 196 nonblank) \u00e2\u20ac\u201d the import worksheet now retains one exact captured action request together with its operationKey and reuses both only while the semantic params/body are byte-identical (identity excludes the key), clearing on success and distinguishing refused from uncertain outcomes; this is the bounded same-key recovery requested for the P3 retry guard and introduces no automatic retry or new pipeline.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6326,7 +6151,7 @@
     "kind": "function",
     "symbol": "ResearchContributions",
     "fingerprint": "e7592981cb717dc3990c393b8a19f0076728230416e0f2c9122d35f7f7676813",
-    "reason": "reviewed-accept (function size, 178 nonblank) â€” read-only contribution ledger over the extended research.analytics reader: member/target/disposition/totals filters, per-contribution basis, value, disposition, overlap link and evidence. It renders totals and contribution counts exactly as returned and states that it does not recalculate them, so a missing basis value is shown as absent rather than zero.",
+    "reason": "reviewed-accept (function size, 178 nonblank) \u00e2\u20ac\u201d read-only contribution ledger over the extended research.analytics reader: member/target/disposition/totals filters, per-contribution basis, value, disposition, overlap link and evidence. It renders totals and contribution counts exactly as returned and states that it does not recalculate them, so a missing basis value is shown as absent rather than zero.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6335,7 +6160,7 @@
     "kind": "function",
     "symbol": "ComparisonCapture",
     "fingerprint": "950051cc71a61f28357ad67efb400ee5c8f422fa6fdff590da89b338d299598b",
-    "reason": "reviewed-accept (function size, 199 nonblank) â€” capture form that serialises the save body from the live preview projection (not from editable strings), refuses context subjects without a single exact revision plus native-section evidence, validates the selection subset and basis/metric shape before POST, and retains the exact body plus idempotencyKey so an uncertain save is retried identically while a refused (2xx/4xx) outcome clears it.",
+    "reason": "reviewed-accept (function size, 199 nonblank) \u00e2\u20ac\u201d capture form that serialises the save body from the live preview projection (not from editable strings), refuses context subjects without a single exact revision plus native-section evidence, validates the selection subset and basis/metric shape before POST, and retains the exact body plus idempotencyKey so an uncertain save is retried identically while a refused (2xx/4xx) outcome clears it.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6344,7 +6169,7 @@
     "kind": "function",
     "symbol": "ComparisonEditor",
     "fingerprint": "60cb84d8f1c6c82ee7ae6ce9f80e94221932880d3d15e2c58c35e8b1fced08eb",
-    "reason": "reviewed-accept (function size, 184 nonblank) â€” subject chooser for the fixed research.comparisons.preview reader; it only renders capture controls when the preview token matches the current typed inputs, excludes member kinds Core cannot compare, refuses ids containing the delimiter, and mirrors Core's 2-5 subject and basis/metric constraints locally so the form cannot submit a shape Core would reject.",
+    "reason": "reviewed-accept (function size, 184 nonblank) \u00e2\u20ac\u201d subject chooser for the fixed research.comparisons.preview reader; it only renders capture controls when the preview token matches the current typed inputs, excludes member kinds Core cannot compare, refuses ids containing the delimiter, and mirrors Core's 2-5 subject and basis/metric constraints locally so the form cannot submit a shape Core would reject.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6353,7 +6178,7 @@
     "kind": "function",
     "symbol": "ComparisonProjection",
     "fingerprint": "b5b6dd98db242c1a67435cefa993c7c3f12ffc1676fdab5bbc161e4f0ed51f3f",
-    "reason": "reviewed-accept (function size, 100 nonblank) â€” presentational table of subjects x metrics from the frozen comparison projection; cells show the value or 'Unavailable' with the disposition badge and Core's reason, the caption states that missing values are not zero, and alignments render their state/reason. No client-side arithmetic or authority.",
+    "reason": "reviewed-accept (function size, 100 nonblank) \u00e2\u20ac\u201d presentational table of subjects x metrics from the frozen comparison projection; cells show the value or 'Unavailable' with the disposition badge and Core's reason, the caption states that missing values are not zero, and alignments render their state/reason. No client-side arithmetic or authority.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6362,7 +6187,7 @@
     "kind": "function",
     "symbol": "ResearchComparisons",
     "fingerprint": "eee4902ea8789e61f06a775f8b727ab4784993050202d021f8693f7b6894c22a",
-    "reason": "reviewed-accept (function size, 153 nonblank) â€” saved-comparison browser that reads list/read/version through the fixed gateway, refuses a selection that is not a subset of the named capture, hides comparisons belonging to another portfolio, and preserves unrelated URL params while forcing the portfolio/view scope. The 50-item list limit and version-by-id semantics are disclosed rather than inferred from a number.",
+    "reason": "reviewed-accept (function size, 153 nonblank) \u00e2\u20ac\u201d saved-comparison browser that reads list/read/version through the fixed gateway, refuses a selection that is not a subset of the named capture, hides comparisons belonging to another portfolio, and preserves unrelated URL params while forcing the portfolio/view scope. The 50-item list limit and version-by-id semantics are disclosed rather than inferred from a number.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6371,7 +6196,7 @@
     "kind": "function",
     "symbol": "SavedComparisonView",
     "fingerprint": "de4e5c5f5873c786949304041a6c4c289c3e2c10deb7fc036bfb3612a3818c6e",
-    "reason": "reviewed-accept (function size, 190 nonblank) â€” immutable-version viewer plus the add-selection/archive/restore actions. Actions are gated on lifecycle/myRole only as hints, every write sends expectedRevision (and expectedPortfolioRevision plus idempotencyKey for add) with the exact selection, and an uncertain failure retains one exact Attempt that is retried verbatim while a definitive 4xx clears it and reports the refusal.",
+    "reason": "reviewed-accept (function size, 190 nonblank) \u00e2\u20ac\u201d immutable-version viewer plus the add-selection/archive/restore actions. Actions are gated on lifecycle/myRole only as hints, every write sends expectedRevision (and expectedPortfolioRevision plus idempotencyKey for add) with the exact selection, and an uncertain failure retains one exact Attempt that is retried verbatim while a definitive 4xx clears it and reports the refusal.",
     "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
@@ -6380,7 +6205,7 @@
     "kind": "function",
     "symbol": "ScopedResearchCreate",
     "fingerprint": "2566172b98c33b62fecc9954260bfcb70052d41c9572cbc53f446d8e2055d46b",
-    "reason": "reviewed-accept â€” three-step wizard on the existing typed create-intent owner; unknown result keeps the keyed body",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d three-step wizard on the existing typed create-intent owner; unknown result keeps the keyed body",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6389,7 +6214,7 @@
     "kind": "function",
     "symbol": "ResearchOverview",
     "fingerprint": "c5c0b1a02168230756628cff7c1eaa18cdda7cd34105d46829defd6725a514c7",
-    "reason": "reviewed-accept â€” explicit fit refresh, role/lifecycle guarded",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d explicit fit refresh, role/lifecycle guarded",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6398,7 +6223,7 @@
     "kind": "function",
     "symbol": "ResearchSnapshots",
     "fingerprint": "5f7230b4395b44fdd7037dcf8c5d618835bbc91c3dd0fe005f946a7ad07efd3d",
-    "reason": "reviewed-accept â€” create gated active+non-viewer",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d create gated active+non-viewer",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6407,7 +6232,7 @@
     "kind": "function",
     "symbol": "<anonymous>",
     "fingerprint": "cf70f4356b131f6f9b7e3cc0f601c8c921f49cdf75e0f08b4f2426ad2e845754",
-    "reason": "reviewed-accept â€” recovery regression test",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d recovery regression test",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6416,7 +6241,7 @@
     "kind": "function",
     "symbol": "ResearchBookmarks",
     "fingerprint": "eb8a96f589f7b8e42f494aac4abcd6a5c1c8ec5bf3eb418c30e0beceb798f9ea",
-    "reason": "reviewed-accept â€” key retained across failure",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d key retained across failure",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6434,7 +6259,7 @@
     "kind": "function",
     "symbol": "ResearchImports",
     "fingerprint": "6113eeb9ce9334c74753e372dbd3e7a0ca8c0ac1a9a6c717dd9aa1db3e3a7d07",
-    "reason": "reviewed-accept â€” key retained; conditional on P1",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d key retained; conditional on P1",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6443,7 +6268,7 @@
     "kind": "function",
     "symbol": "ResearchOutputs",
     "fingerprint": "c6fa745177e777c79c5a684bb45d979cc61451c11652cd797955a39a088e3a6b",
-    "reason": "reviewed-accept â€” same-request retry retained",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d same-request retry retained",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6452,7 +6277,7 @@
     "kind": "function",
     "symbol": "OutputReceipt",
     "fingerprint": "a3ed3189b1bd4caae14e5502028e7d25bc1a60368b39899a7cfed26d4d20f72e",
-    "reason": "reviewed-accept â€” artifact-id identity verified",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d artifact-id identity verified",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6461,7 +6286,7 @@
     "kind": "function",
     "symbol": "ResearchReviewTools",
     "fingerprint": "4def25aa836b2ba3f357f39f7df1bd80f9778357ba4810812975c942286e2ebc",
-    "reason": "reviewed-accept â€” note key retained",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d note key retained",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6470,7 +6295,7 @@
     "kind": "function",
     "symbol": "ResearchRuleEditor",
     "fingerprint": "6218d90bd29046bd6dec913ce031523a289982eb8b9c54b079e3ea66f2ffa643",
-    "reason": "reviewed-accept â€” depth/clause limits match Core",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d depth/clause limits match Core",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6488,7 +6313,7 @@
     "kind": "function",
     "symbol": "ResearchWatchConversion",
     "fingerprint": "befa5effba3dec57833487f9cfc735c2c27dfac070d225c263ff9949a94e11ad",
-    "reason": "reviewed-accept â€” preview hash/revision bound, no auto-enable",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d preview hash/revision bound, no auto-enable",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
@@ -6497,7 +6322,7 @@
     "kind": "function",
     "symbol": "BudgetChanges",
     "fingerprint": "3430a0bebb8b65ba650f6f011fcbb432ff00ac2042b4216a95d1912376aeb372",
-    "reason": "reviewed-accept (function size, 158 nonblank) â€” one Changes/Budget tab: URL-owned filters (changesBudgetPe/changesFy/changesScore/changesBudgetPage), the two mutually exclusive fixed delta reads (attention vs per-PE), the per-row peCode cross-check that withholds mismatched rows, and the fixed table plus paging. Growth is declarative rendering plus location wiring; no authority, mutation or aggregation is added, and splitting would separate the URL contract from its single owner.",
+    "reason": "reviewed-accept (function size, 158 nonblank) \u00e2\u20ac\u201d one Changes/Budget tab: URL-owned filters (changesBudgetPe/changesFy/changesScore/changesBudgetPage), the two mutually exclusive fixed delta reads (attention vs per-PE), the per-row peCode cross-check that withholds mismatched rows, and the fixed table plus paging. Growth is declarative rendering plus location wiring; no authority, mutation or aggregation is added, and splitting would separate the URL contract from its single owner.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6506,7 +6331,7 @@
     "kind": "function",
     "symbol": "ClientWatchList",
     "fingerprint": "258473a5e4b0d6d01ebc325e0bba067e58ed4ae0fa0df52b952afc1d91aa0ca7",
-    "reason": "reviewed-accept (function size, 98 nonblank) â€” the selected-client watch surface: one fixed watches read, a client identity cross-check on every watch and event, the newest subscription-event state derivation, the disclosed first-100 display for an unpaginated owner, and the retained-event panel for the URL-selected watch. One reader, one presentation decision.",
+    "reason": "reviewed-accept (function size, 98 nonblank) \u00e2\u20ac\u201d the selected-client watch surface: one fixed watches read, a client identity cross-check on every watch and event, the newest subscription-event state derivation, the disclosed first-100 display for an unpaginated owner, and the retained-event panel for the URL-selected watch. One reader, one presentation decision.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6515,7 +6340,7 @@
     "kind": "function",
     "symbol": "PortfolioActions",
     "fingerprint": "f9a49b54bc64cd39a69ef42bc07d1a99db7a30c089800c03b287f8c8619fe9fb",
-    "reason": "reviewed-accept (function size, 98 nonblank) â€” the Actions tab: authorized portfolio list with cursor paging (research.list), one detail read admitted only when the returned id equals the routed id, and the native review queue mounted through the reviews-public presentation boundary. It adds no authority; Core still re-checks grant, lifecycle and revision.",
+    "reason": "reviewed-accept (function size, 98 nonblank) \u00e2\u20ac\u201d the Actions tab: authorized portfolio list with cursor paging (research.list), one detail read admitted only when the returned id equals the routed id, and the native review queue mounted through the reviews-public presentation boundary. It adds no authority; Core still re-checks grant, lifecycle and revision.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6524,7 +6349,7 @@
     "kind": "function",
     "symbol": "ResearchBulkReviews",
     "fingerprint": "64afe94982748b03c1b3a19e03158a637af49953f473c42e9fea4a4067560164",
-    "reason": "reviewed-accept (function size, 340 nonblank) â€” one bounded bulk-decision form and its recovery state machine over the fixed research.reviews.bulk owner: revision-bound per-row selection (â‰¤50), one decision and reason, explicit per-row evidence, a pre-send 1 MB bound matching the declared operation limit, exact parsed-request and key retention across an unknown outcome, receipt identity validation (portfolioId plus exactly one outcome per selected review), and the per-row outcome table. The draft, the retained request/key and the receipt are one machine; extracting the retention logic would separate the byte-identical request from the state that must reproduce it.",
+    "reason": "reviewed-accept (function size, 340 nonblank) \u00e2\u20ac\u201d one bounded bulk-decision form and its recovery state machine over the fixed research.reviews.bulk owner: revision-bound per-row selection (\u00e2\u2030\u00a450), one decision and reason, explicit per-row evidence, a pre-send 1 MB bound matching the declared operation limit, exact parsed-request and key retention across an unknown outcome, receipt identity validation (portfolioId plus exactly one outcome per selected review), and the per-row outcome table. The draft, the retained request/key and the receipt are one machine; extracting the retention logic would separate the byte-identical request from the state that must reproduce it.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6542,7 +6367,7 @@
     "kind": "function",
     "symbol": "ResearchMembers",
     "fingerprint": "eccbb7f0df26799d3d375ecc33f74507d134d38a167ae7005c4eee7b1dccaf4a",
-    "reason": "reviewed-accept (function size, 208 nonblank) â€” the native membership tab: bounded selection (â‰¤100), explicit include/exclude decisions, unresolved rows routed to Resolve instead of Include, the decision receipt table keyed by member identity, and the two mounted member dialogs. One table plus one decision owner; the dialogs already own their own request/retention logic.",
+    "reason": "reviewed-accept (function size, 208 nonblank) \u00e2\u20ac\u201d the native membership tab: bounded selection (\u00e2\u2030\u00a4100), explicit include/exclude decisions, unresolved rows routed to Resolve instead of Include, the decision receipt table keyed by member identity, and the two mounted member dialogs. One table plus one decision owner; the dialogs already own their own request/retention logic.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6551,7 +6376,7 @@
     "kind": "function",
     "symbol": "ResearchReviews",
     "fingerprint": "cf8c4f5cadc81bd4371695881d181b100767209c41a627903953d8a6833c211f",
-    "reason": "reviewed-accept (function size, 276 nonblank, replaces the 253-nonblank record) â€” the review owner: URL-owned lane, the lane queue read with per-row portfolio identity verification, the single-decision modal bound to the captured review revision, and the mounted bulk-decision surface. It remains the single place where review decisions are released, so the lane state, queue verification and both decision paths belong together.",
+    "reason": "reviewed-accept (function size, 276 nonblank, replaces the 253-nonblank record) \u00e2\u20ac\u201d the review owner: URL-owned lane, the lane queue read with per-row portfolio identity verification, the single-decision modal bound to the captured review revision, and the mounted bulk-decision surface. It remains the single place where review decisions are released, so the lane state, queue verification and both decision paths belong together.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6560,7 +6385,7 @@
     "kind": "function",
     "symbol": "MemberDecision",
     "fingerprint": "172c68c1346982fbfeaa24069f2775687d90715dc20cd64f1706f6acf00050d1",
-    "reason": "reviewed-accept (function size, 106 nonblank) â€” the explicit multi-member include/exclude modal: one reason applied to every selected member, the captured exact request and key retained across an unknown outcome with manual same-request retry only, a refused 4xx clearing retention, and the atomic-batch disclosure. One mutation with one recovery rule.",
+    "reason": "reviewed-accept (function size, 106 nonblank) \u00e2\u20ac\u201d the explicit multi-member include/exclude modal: one reason applied to every selected member, the captured exact request and key retained across an unknown outcome with manual same-request retry only, a refused 4xx clearing retention, and the atomic-batch disclosure. One mutation with one recovery rule.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6569,7 +6394,7 @@
     "kind": "function",
     "symbol": "MemberDiscovery",
     "fingerprint": "15c952eadca724f49d7beb1967f38a59cae77ce1cb3bedc6af95f1a0137fec77",
-    "reason": "reviewed-accept (function size, 281 nonblank) â€” the add/resolve modal: canonical typed discovery (search restricted to the four domain families with UUID gating except PE codes, awards through the existing 20-row paged reader), already-existing members disabled, same-request retention for unknown outcomes, and the resolve path reusing the same captured body. Both entry modes share one request owner; splitting add from resolve would duplicate that retention logic.",
+    "reason": "reviewed-accept (function size, 281 nonblank) \u00e2\u20ac\u201d the add/resolve modal: canonical typed discovery (search restricted to the four domain families with UUID gating except PE codes, awards through the existing 20-row paged reader), already-existing members disabled, same-request retention for unknown outcomes, and the resolve path reusing the same captured body. Both entry modes share one request owner; splitting add from resolve would duplicate that retention logic.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   },
@@ -6578,7 +6403,7 @@
     "kind": "function",
     "symbol": "CongressionalChanges",
     "fingerprint": "a163132241b9eefa65da60b3e39c6867ab695a8adc33cdace39eb2f849326ca1",
-    "reason": "reviewed-accept (function size, 107 nonblank, replaces the 105-nonblank record) â€” one Changes/Congressional tab: the required PE input (trimmed, max 16) that also resets the retained evidence cursor, one fixed bill-actions read with its disclosed 200-action / 40-bill / 60-per-bill bound, the action table, and the existing ProgramBills plus the new PE-scoped Federal evidence revisions panel composed under the same validated PE. The added lines are one URL-state reset and one composition; no authority, mutation, occurrence association or fiscal-year filter is invented, and splitting would separate the PE/URL contract from its single owner.",
+    "reason": "reviewed-accept (function size, 107 nonblank, replaces the 105-nonblank record) \u00e2\u20ac\u201d one Changes/Congressional tab: the required PE input (trimmed, max 16) that also resets the retained evidence cursor, one fixed bill-actions read with its disclosed 200-action / 40-bill / 60-per-bill bound, the action table, and the existing ProgramBills plus the new PE-scoped Federal evidence revisions panel composed under the same validated PE. The added lines are one URL-state reset and one composition; no authority, mutation, occurrence association or fiscal-year filter is invented, and splitting would separate the PE/URL contract from its single owner.",
     "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
     "reviewedOn": "2026-10-27"
   },
@@ -6587,7 +6412,7 @@
     "kind": "function",
     "symbol": "FederalEvidenceTimeline",
     "fingerprint": "0b94b713d1f526b11082e292c8e9c8a24c2b73bf860664e02f0972e120a5d417",
-    "reason": "reviewed-accept (function size, 125 nonblank, new) â€” one fixed GET /federal-evidence/timeline reader: strict bounded request (PE from the existing Congressional context, limit 25, cursor, optional ISO knowledge time), URL-owned cursor and knowledge time with reset on PE or time change, non-submit Refresh/Latest controls, historical-evidence disclosure, and the per-event Before/After composition whose sides are independently admitted from their own event revision and content hash. It holds no authority and creates no event-to-occurrence association; request construction, gating and presentation are one read contract that would fragment if split.",
+    "reason": "reviewed-accept (function size, 125 nonblank, new) \u00e2\u20ac\u201d one fixed GET /federal-evidence/timeline reader: strict bounded request (PE from the existing Congressional context, limit 25, cursor, optional ISO knowledge time), URL-owned cursor and knowledge time with reset on PE or time change, non-submit Refresh/Latest controls, historical-evidence disclosure, and the per-event Before/After composition whose sides are independently admitted from their own event revision and content hash. It holds no authority and creates no event-to-occurrence association; request construction, gating and presentation are one read contract that would fragment if split.",
     "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
     "reviewedOn": "2026-10-27"
   },
@@ -6596,7 +6421,7 @@
     "kind": "function",
     "symbol": "ResearchCoverage",
     "fingerprint": "e7714751449668907bf072b3861ecaf01327a3adedc7d93a21c6bb84fc038cb9",
-    "reason": "reviewed-accept (function size, 189 nonblank, replaces the 188-nonblank record from df77d9701e1d60740fa1cae23a8b5b7f0f8bdd9e) â€” the coverage owner: URL-owned filters and fiscal year, one fixed product-coverage read, the denominator-known disclosure, the cohort table with its separate denominator / counts / status columns, the new read-only Recorded source outcomes column, and the Clear filters control now carrying an explicit type=\"button\" so clearing cannot be re-submitted with stale filter values (the untyped button previously defaulted to submit inside the filter form). Growth is one declarative column plus one button type; counts, publication status, denominator knowledge, tenant filter ownership and the no-ingestion refresh disclosure are unchanged, and the rows/columns/filter contract belongs to this single view.",
+    "reason": "reviewed-accept (function size, 189 nonblank, replaces the 188-nonblank record from df77d9701e1d60740fa1cae23a8b5b7f0f8bdd9e) \u00e2\u20ac\u201d the coverage owner: URL-owned filters and fiscal year, one fixed product-coverage read, the denominator-known disclosure, the cohort table with its separate denominator / counts / status columns, the new read-only Recorded source outcomes column, and the Clear filters control now carrying an explicit type=\"button\" so clearing cannot be re-submitted with stale filter values (the untyped button previously defaulted to submit inside the filter form). Growth is one declarative column plus one button type; counts, publication status, denominator knowledge, tenant filter ownership and the no-ingestion refresh disclosure are unchanged, and the rows/columns/filter contract belongs to this single view.",
     "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
     "reviewedOn": "2026-10-27"
   },
@@ -6605,7 +6430,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "a982a37ae1d4e454604d59fae3283fa23c1ef8a63e308d9b2c744de3c644a174",
-    "reason": "reviewed-accept â€” composed 421-nonblank module (411 at the Wave4 base plus the 10-line saved-filing receipt link block in IntentCard). IntentCard is byte-identical to the reviewed c462f484 card (2baf8e7câ€¦), Body and DecisionControls are byte-identical to the reviewed 2146faae bodies (9cc9ac3bâ€¦, 66fb493câ€¦), and the only other delta vs the reviewed MF19 tree is the already-reviewed Wave4 unavailable-panel/Refresh ui.outline styling. Content stays in one bounded prepared-action domain â€” classification predicates, DecisionControls, IntentCard, Body, container â€” with no new domain, effect, lifecycle owner, authority owner, dependency direction or shared-file write surface; a split is not required.",
+    "reason": "reviewed-accept \u00e2\u20ac\u201d composed 421-nonblank module (411 at the Wave4 base plus the 10-line saved-filing receipt link block in IntentCard). IntentCard is byte-identical to the reviewed c462f484 card (2baf8e7c\u00e2\u20ac\u00a6), Body and DecisionControls are byte-identical to the reviewed 2146faae bodies (9cc9ac3b\u00e2\u20ac\u00a6, 66fb493c\u00e2\u20ac\u00a6), and the only other delta vs the reviewed MF19 tree is the already-reviewed Wave4 unavailable-panel/Refresh ui.outline styling. Content stays in one bounded prepared-action domain \u00e2\u20ac\u201d classification predicates, DecisionControls, IntentCard, Body, container \u00e2\u20ac\u201d with no new domain, effect, lifecycle owner, authority owner, dependency direction or shared-file write surface; a split is not required.",
     "reviewedBy": "Hermes Agent source review 20261027_205545_91530e",
     "reviewedOn": "2026-10-27"
   },
@@ -6623,7 +6448,7 @@
     "kind": "function",
     "symbol": "RunLedger",
     "fingerprint": "8c1ebf36f6668b174470ab56994ff730fc9f1c4707da02820f422176f844bdb5",
-    "reason": "8c1ebf36f6668b174470ab56994ff730fc9f1c4707da02820f422176f844bdb5 RunLedger fn, l4, 91 nb ACCEPTABLE / IMPROVED â€” responsibility for source naming and outcome projection moved OUT of RunLedger into SourceOutcome (single owner of the label map, previously duplicated inline). No state added.",
+    "reason": "8c1ebf36f6668b174470ab56994ff730fc9f1c4707da02820f422176f844bdb5 RunLedger fn, l4, 91 nb ACCEPTABLE / IMPROVED \u00e2\u20ac\u201d responsibility for source naming and outcome projection moved OUT of RunLedger into SourceOutcome (single owner of the label map, previously duplicated inline). No state added.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -7680,7 +7505,7 @@
     "kind": "function",
     "symbol": "DocumentsLibrary",
     "fingerprint": "6405938b92a6a3cbc24212f2eed3ab8c27c4b93c37099166b10388b2f560d45c",
-    "reason": "  Verdict ACCEPTABLE (the one signal requiring independent review/binding). This is a single documents-library\n  surface: a filter bar (ownership pills, search, client filter, type and status selects), a StatusPanel, a\n  6-column DataTable and a paging footer. It owns no transport, cursor semantics, tenant scope or authorization\n  â€” query state is owned by useLibraryQuery (filters + opaque cursor, reset-before-receiver-change), typed\n  transport by useCapiroQuery(\"workspace.documents\"), and the client picker by LibraryClientFilter. The added\n  status label Map is module-scope display policy. The 163 nonblank lines are render-heavy JSX for one cohesive\n  responsibility, not multiple concerns fused. Threshold alone is not a failure; no concrete extraction is\n  required or requested. (Non-blocking observation, no source change requested: the filter bar is the most\n  separable sub-block and would be the natural candidate if this body later grows.)",
+    "reason": "  Verdict ACCEPTABLE (the one signal requiring independent review/binding). This is a single documents-library\n  surface: a filter bar (ownership pills, search, client filter, type and status selects), a StatusPanel, a\n  6-column DataTable and a paging footer. It owns no transport, cursor semantics, tenant scope or authorization\n  \u00e2\u20ac\u201d query state is owned by useLibraryQuery (filters + opaque cursor, reset-before-receiver-change), typed\n  transport by useCapiroQuery(\"workspace.documents\"), and the client picker by LibraryClientFilter. The added\n  status label Map is module-scope display policy. The 163 nonblank lines are render-heavy JSX for one cohesive\n  responsibility, not multiple concerns fused. Threshold alone is not a failure; no concrete extraction is\n  required or requested. (Non-blocking observation, no source change requested: the filter bar is the most\n  separable sub-block and would be the natural candidate if this body later grows.)",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -8052,6 +7877,655 @@
     "disposition": "APPROVE_EXACT_RESPONSIBILITY",
     "reason": "This is the selected-recipient row renderer, including existing role/member/personal-note controls, nested inside CampaignRecipients. The complete callback is byte-identical to a base callback; panel movement changes its scanner ordinal to #18. It adds no new handler, source query or state owner. Keeping one recipient row and its related edits together remains cohesive.",
     "reviewedBy": "Codex independent review_003; thread 01a1a4d7-f531-7510-9ca1-3e9737c7d4df; turn 01a1a737-9e53-7692-880a-37a41a794077",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+    "kind": "function",
+    "symbol": "CapabilitiesPage",
+    "fingerprint": "59a43cdb71ce9f2d45a6f3d159daa4567d14d9229287824dd4b17e12e304339c",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Composes the canonical capability list, selected capability URL and existing fit, registrations and document surfaces. The new discovery review is a child; this page introduces no transport or authorization owner. Records and editor availability require a successful current read. Its length is the single screen composition.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx",
+    "kind": "function",
+    "symbol": "CapabilityIdentityFields",
+    "fingerprint": "c6db765d34e5c67bba110cf565d05958f8b7010247974bf19de2ff3e2a72c465",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Stateless identity/lifecycle fields and datalist choices for one capability form. It has no fetch, write, session or cross-domain state. The lifecycle addition belongs with the existing name/type/sector fields; declarative inputs account for the size.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+    "kind": "function",
+    "symbol": "CapabilityForm",
+    "fingerprint": "12383fa7c163c385f957180241764f2fd24cc5f820971877db353436ade245d5",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Owns one capability draft and one onSave payload, including lifecycle, tags, program numbers, keywords and readiness. Transport, session lifetime and canonical authorization remain outside this component. Existing field components separate identity/readiness/details; one form submission and its pending/error controls remain cohesive.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityProposalEditor.tsx",
+    "kind": "function",
+    "symbol": "CapabilityProposalEditor",
+    "fingerprint": "13a08b41dfbb2805298d54e228ae4fb680045ce1896cdfecbf53a5c8a53211c1",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Owns the edit dialog for one captured proposal/version. The structured payload is parsed by the capability contract and retains the supplied evidence; the shared command owner handles scoped transport and invalidation. Inputs, local validation error and dialog lifecycle are one bounded edit, with no second proposal store.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityReview.tsx",
+    "kind": "function",
+    "symbol": "CapabilityReview",
+    "fingerprint": "087e598f7f4c877d60fbce590849415d4ddc8aca57492aa7b768de23e1bb8b12",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Owns discovery-result paging, status/business-unit filtering, local duplicate selection and child edit/split/merge dialogs. Network paging and mutation ownership stay in depth-api. Current-read gates remove stale source dialogs on failure; selections clear on unit/status changes. The long function is a review-screen composition rather than mixed service responsibilities.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityTracking.tsx",
+    "kind": "function",
+    "symbol": "CapabilityTracking",
+    "fingerprint": "c619e46bfbaf2eed74dc260d70eea85ecba39606e51c1f89ded335b368be244a",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Owns one capability tracking feed, approved-term eligibility, source/status filters and refresh/dismiss/restore controls. Typed read/command hooks own transport and scoped invalidation; source gaps and truncated results are visible. The render and two small command descriptors concern the same feed, with no client-wide tracking takeover.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/SectorAnchors.tsx",
+    "kind": "function",
+    "symbol": "BusinessUnitSelection",
+    "fingerprint": "fe25885932f48318b34c1ca10622d9eb2f33ff888444072b59cc7928bc45538c",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Owns one approved business-unit selector and its sourced-unit proposal form. It composes existing evidence and review controls and uses the shared command hook; no annual-report extraction or model loop occurs here. Selector and creation affordance are one bounded local interaction.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/SectorAnchors.tsx",
+    "kind": "function",
+    "symbol": "SectorAnchorForm",
+    "fingerprint": "14d40adfc0c7795187d103b0cd99e22b3aec736ce73ebc6b3c0e43ea14e0c79a",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Owns one typed sector-anchor proposal form. Defense, health and agriculture variants are validated through the discriminated payload schema; maturity and source evidence are captured for that proposal only. Shared transport and canonical review remain separate, so the conditional fields do not create multiple workflow owners.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+    "kind": "function",
+    "symbol": "FacilityFields",
+    "fingerprint": "4a1d9e3f692b9317cf9e5ea41bfe07e13463494849f2bdecf94ab4ec0a21564f",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Stateless fields for one facility identity, physical address, site role/status, confirmation and manual district overrides. It delegates generic inputs to existing primitives and owns no resolution or persistence. The additions belong to the existing facility form; their declarative size does not require splitting authority.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+    "kind": "function",
+    "symbol": "CurrentFacilityGeocoding",
+    "fingerprint": "b6a8721e948179040012214a8fda490b9f387ce2bd98eb39d7e272d42cdd7e88",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Owns one facility resolution action surface, candidate review and status feedback. Existing facility action lifetime/CAS ownership remains canonical. Shared address eligibility admits street+ZIP or city/state and verified points; candidate buttons require current boundary metadata. Source status and local controls are one cohesive interaction.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityLocationFacts.tsx",
+    "kind": "function",
+    "symbol": "FacilityLocationFacts",
+    "fingerprint": "395abfa96498725028e329d79e601091502357c7d9cf7680a33d4054fbf73c05",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Read presentation of one facility address, district evidence, roster context and source details, composing the existing geocoding action surface. The changed role/status display uses saved fields and does not infer occupancy. No new transport or mutation owner is introduced; the large declarative panel remains scoped to the facility.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityRepresentation.tsx",
+    "kind": "function",
+    "symbol": "FacilityRepresentation",
+    "fingerprint": "56c60dae05e969e2d8773c371306bb28b35fd89daebe11367ae730a2912ee790",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Read-only presentation of one representation result. Explicit unresolved reasons, federal roster matches and unverified state-term current-role context remain distinct. The function contains no lookup or assignment logic; keeping these mutually exclusive result states together prevents misleading term claims.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
+    "kind": "function",
+    "symbol": "GovernmentRelationships",
+    "fingerprint": "237209e5aad702b275565d334d34b18a57626ec700d83bd4607c69e7ce5379e2",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Canonical relationship-screen composition with one URL selection adapter, priority/grouped saved targets and independent office/recommendation children. Selection uses saved target ID first and permits a member-ID fallback only when unique. Failed reads hide editors and clear navigation; transport remains in existing hooks.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/MemberStatementForm.tsx",
+    "kind": "function",
+    "symbol": "MemberStatementForm",
+    "fingerprint": "df371782da96089f2d3944e7a1bbfced3e1413631fc3d0c37a6836a441f8b474",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. One sourced official-statement proposal form. Saved-office selection binds member and directory; the explicit term/date and evidence fields are sent through the shared command hook. It performs no member lookup, model inference or approval locally. Its state and markup remain a single bounded intake interaction.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/OfficeRelationships.tsx",
+    "kind": "function",
+    "symbol": "OfficeRelationships",
+    "fingerprint": "20634f36ed7c8acf4c7a32427a0cefbc6f20b9ef57c462e6dd8c9d6e7f48046b",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Composes one client office-relationship screen: scoped filters, map/geographic/list/gap views, conflicts and separate edit/support/member dialogs. Coverage calculations and card/map presentation are separate helpers. Failed depth reads hide content and dialogs. Remaining local view state and JSX belong to one screen rather than duplicate authorization or data ownership.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/RelationshipEditor.tsx",
+    "kind": "function",
+    "symbol": "RelationshipEditor",
+    "fingerprint": "b8835b08ccd2533db7dd4013b4b60b45beb17a30c04230c3ea65173933aa61a3",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Owns one versioned parent office relationship edit. Status/stance/owner/contact/next step share a payload; establishing an unknown term requires dated evidence and an already-known term is read-only. The shared command and member-option owners provide transport. This remains one coherent form despite its explicit evidence fields.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
+    "kind": "function",
+    "symbol": "TargetDrawer",
+    "fingerprint": "9a3565addbf67201dc8127533a1d436bdf3c5d03d592d8027925ec4c362169ea",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Existing saved-target detail dialog, contact data, tier/removal confirmation and composed context/mail/note surfaces. Changed mutations carry unique targetId rather than ambiguous memberId. Contact read errors hide stale details and selection; mutation hooks own persistence. The dialog composition and pending close guards remain cohesive.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/target-queries.ts",
+    "kind": "function",
+    "symbol": "useTargetMutation",
+    "fingerprint": "822999aad1538e68902c2fb2ec6fa14a76c83552c6c1f72571f6835b7b5efe93",
+    "reason": "Independent exact-body review at c1ae120af91e6e0daf92ccb1ab73e4ab63cd583d. Canonical saved-target write hook for add/tier/remove. The change identifies existing records by targetId, checks returned association and invalidates both target and depth projections. Existing view lifetime and per-target pending checks remain together; it adds no second authority/proxy layer. The bounded alternatives are operations on one aggregate.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CaseForSupport.tsx",
+    "kind": "function",
+    "symbol": "CaseForSupport",
+    "fingerprint": "8bf0fc7fdd3c7e6d3a0b9145a69ad3c3fdfcf26d31ba793edecc6fa99e16763a",
+    "reason": "Independent exact-body followup review at 5432e7f0. The final addition passes the exact capability/member/directory/term context and its current proposals into a keyed child form, so switching context resets a replacement draft. Approved case projection and review remain separate from command transport; staff-specific forms stay unavailable. This remains one case view.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CaseForSupport.tsx",
+    "kind": "function",
+    "symbol": "CaseFactForm",
+    "fingerprint": "fddf14f34457fa44f30c921c3702a67da86641473ede3d1659b99b533ee3fa47",
+    "reason": "Independent exact-body followup review at 5432e7f0. One sourced case-field proposal form now requires explicit selection of a prior approved fact when replacing an occupied field. Candidate replacement filtering preserves capability, field, member, directory and term identity and excludes facility-scoped records. The canonical backend owns supersession; this form only submits the selected prior ID with evidence. Bound context and current field selection form one coherent edit.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/LocationResolution.tsx",
+    "kind": "function",
+    "symbol": "LocationResolution",
+    "fingerprint": "03d5346504c0f8892c2edaaff3d479e65f3f48cf279f9d9a7f2fabefaeeb327a",
+    "reason": "Independent exact-body followup review at 0bf288fb. One stateless location evidence view. The final delta distinguishes unavailable source metadata from missing evidence, keeps approved site and impact values visible, and reuses the existing district history display. It neither reconstructs redacted excerpts nor performs writes.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityEvidenceFields.tsx",
+    "kind": "function",
+    "symbol": "FacilityEvidenceFields",
+    "fingerprint": "9727c50691547c4a8915adfff593ae13213c7cb8dac2071ebaa3016afff07477",
+    "reason": "Independent exact-body followup review at 0bf288fb. One facility evidence form section. Source-withdrawal notes explain why unchanged approved fields can be retained and why new evidence is required for changes; field collection remains separate from validation and transport.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/facility-evidence-input.ts",
+    "kind": "function",
+    "symbol": "facilityEvidenceBody",
+    "fingerprint": "8b65e747cbc639e42a48d62525e424f48ae6dc26f6c6365055ecf94b2bf25a9a",
+    "reason": "Independent exact-body followup review at 0bf288fb. One facility evidence command serializer. The final delta permits unrelated edits of an already verified source-redacted facility without inventing fresh evidence. Unchanged source and impact objects are omitted; actual changes retain source/date validation. Backend preserves hidden source history under partial evidence writes.",
+    "reviewedBy": "Codex independent backend_geo_sdk reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "12e04bc501b8e02af651b56967b06a3ee9454ce7f410e4940cea3c5c96bb1f9b",
+    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. The module owns the manual intake dialog wrappers and session; data projection, sourced suggestions, source confirmation and save APIs remain external domain owners.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
+    "kind": "function",
+    "symbol": "IntakeSession",
+    "fingerprint": "7a642bf103fd82cbf45b8e7ba9faef925dac792448df3cf141ae4fd77cf4f832",
+    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. One manual intake session. The new sourced identity selection delegates source confirmation to useIdentityBinding before the existing canonical profile save, then retains the original person-save continuation. Actor-keyed remount and current-read presentation prevent prior source quotes from carrying into a different account.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
+    "kind": "function",
+    "symbol": "IntakeSession > submit",
+    "fingerprint": "068805fdf44ae079e8459170a9757a194d1d48cdfa3e03875181de83a5afb4fe",
+    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. One ordered manual save continuation. Current identity/capacity preflight precedes explicit global source confirmation, then the existing client create and retained person details. No secondary apply, retry identity or hidden client path was introduced.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/ManualSectionSteps.tsx",
+    "kind": "function",
+    "symbol": "SitesStep",
+    "fingerprint": "29e232e60ed7053ffc7c9789936833fbd9c0215d58e4fe84407354076dad9904",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. A controlled repeated-site editor delegates its complete values to the parent form and performs no transport or research. The function contains site labels, canonical role/status choices, address fields, and local add/remove controls. Saved rows remain editable with deletion delegated to the canonical profile section. Repetition of declarative site markup explains the size; no independent workflow owner is hidden here. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/ManualSectionSteps.tsx",
+    "kind": "function",
+    "symbol": "SitesStep > <anonymous>",
+    "fingerprint": "8f8ad1138cd872d0cfe31d750d2d93f2413ec1a80eaee5ebf1667af544e99639",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. This map callback renders one site fieldset: name, role, status, address parts, and unsaved-row removal. Its index and patch callback refer only to the parent controlled locations array. It introduces no effect, request, or authority decision. The repeated markup is one meaningful row boundary and keeping it together preserves label/control association. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/ManualSectionSteps.tsx",
+    "kind": "function",
+    "symbol": "LeadershipStep",
+    "fingerprint": "7bc3a5388cd55e3f4d6a74864a373e3e83ef7a538b40ceb39655b3a289c24b1f",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. This controlled section owns only repeated leadership contact fields and unsaved-row add/remove controls. Names, titles, and emails remain draft values, with validation supplied by the parent. It does not infer reporting lines or perform person writes. Its fieldset markup and one local array-patch helper are a cohesive form responsibility. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/ManualSectionSteps.tsx",
+    "kind": "function",
+    "symbol": "ManualCapabilitiesStep",
+    "fingerprint": "9b924f8a44a4428f2e36242c0c30da4699a1d62ea3dae47381b71d2fc556be6b",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. This controlled section collects explicitly named capabilities with canonical type and bounded description. It delegates saving, approval, and domain validation to the enclosing profile flow and server. Local add/remove actions apply only to unsaved drafts, and it makes no discovery or classification calls. Declarative repeated controls account for the length. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx",
+    "kind": "function",
+    "symbol": "RegistrationStep",
+    "fingerprint": "9046c078e7956191da447eda073af0d6f365b99c4857430c69c10928c6a38938",
+    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. Declarative composition of the registration fields. ManualCodeSuggestions owns inference request/review and CodeSelector owns reference search; this component only binds existing form values and acceptance callbacks. Its JSX length does not hide a second side effect.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/form.ts",
+    "kind": "function",
+    "symbol": "intakePayload",
+    "fingerprint": "4470f84bb85f11bb2f8a1dbacaffa1680ba6bfcb2995d692a10f2df6e292af55",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. A pure dirty-field mapper for the existing whole-object client write contract. It normalizes explicit identity values, preserves unrelated latest intake keys, merges only changed business flags, and intentionally distinguishes clear from omission. The loops handle distinct scalar/list/intake storage shapes of one payload. Keeping them together makes preservation behavior reviewable and avoids separate competing merge owners. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx",
+    "kind": "function",
+    "symbol": "ProfileChoiceSession",
+    "fingerprint": "511ef533e0f89ac5669db9d22e34cb11235c170347d455f0848a586ba8c1f507",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. The session composes one Add profile chooser, current identity/capacity presentation, the sourced starter, and explicit switches into manual or LDA flows. It retains only dialog selection and opener focus; the child flows own all writes. Billing state and role checks remain existing owners. The three choices are one navigation and focus lifecycle, not separate workflows implemented in this function. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/SourcedProfileStart.tsx",
+    "kind": "function",
+    "symbol": "CurrentSourcedProfileStart",
+    "fingerprint": "84155f3c57c322459c08bb0a07f6d745efba8a21fc168df5bd70e8e24a41e9f3",
+    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. One source-first intake flow spanning preview, explicit company confirmation, profile creation and same-attachment linking. Upload/readiness and source confirmation delegate to separate owners; the file remains private unless the unchecked sharing choice is explicitly selected. A lost link response preserves the created profile and retries the same attachment/target. Post-create research starts only from shared usable extracted sources.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/intake/registrant/CandidateReview.tsx",
+    "kind": "function",
+    "symbol": "CandidateReview",
+    "fingerprint": "f5dad80012b28bfe31be15a9f5621b499fedebfd5a82b6a57194bb43fa2abb1c",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. A controlled LDA candidate review groups filing aliases under the canonical client ID, filters the visible rows, shows source counts/spend, enforces the visible100-selection boundary, and collects one optional website per selected client. Import mutation, capacity, and firm authority remain outside the component. The lengthy repeated row markup is one candidate-selection view. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/intake/registrant/ImportQueue.tsx",
+    "kind": "function",
+    "symbol": "ImportQueue",
+    "fingerprint": "0cac29a162edc21ac3f5301f81c8ca3838224714854b49de2ad36779d2a2a4bf",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. A single saved-queue view observes cursor-paginated jobs and one selected detail under current actor/read success gates. It delegates imported-company identity and website confirmation to LdaCompanyResearch. Persisted job item IDs and websites are the typed source of handoff values; importing and worker execution remain existing server owners. List, selected detail, next-page controls and per-item handoff describe one durable receipt view and contain no import replay. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/intake/registrant/LdaCompanyResearch.tsx",
+    "kind": "function",
+    "symbol": "CompanyConfirmation",
+    "fingerprint": "794c4a405caa916fe6291e84d1bd23eaee80408bd88d48bbff32891d1e726187",
+    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. One queued LDA company identity confirmation before research. The global source confirmation is distinct from attaching canonical identity to the existing client; both retain their existing command identities. The staged source selection is frozen after uncertain dispatch and the current actor/read guards remain in place.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/intake/registrant/RegistrantImportDialog.tsx",
+    "kind": "function",
+    "symbol": "RegistrantSession",
+    "fingerprint": "5c854d6972769c1d6fad58472ee462b3542c9527e872f4eaf42ebe76c019e2c5",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. One firm import session owns search/review/receipt/recovery presentation and the selected canonical LDA IDs. Existing useFirmLink and useImportAttempt own mutation, locking, and uncertain outcomes; capacity is read by the canonical billing hook. The session coordinates explicit firm choice, candidate limits, optional websites, and the queue, which share one dialog lifetime. The larger JSX composition is cohesive and does not create a new import authority. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/intake/registrant/useImportAttempt.ts",
+    "kind": "function",
+    "symbol": "useImportAttempt",
+    "fingerprint": "37264e0afacd3fc5283843b844dbc750723c129b911a5984ae9e44eb1957ec2e",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. The hook owns one import attempt, its retained uncertain receipt state, and read-only reconciliation with the currently linked firm. It copies selected IDs and website inputs before dispatch, locks concurrent attempts and delegates canonical request identity, authorization, capacity and transport to useImportClients. It does not replay an uncertain import. The initial attempt and observed recovery are one lifecycle rather than a second import service. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/CodeSelector.tsx",
+    "kind": "function",
+    "symbol": "CodeSelector",
+    "fingerprint": "99ed6ec3440859f09de42711248558a2072ef6efadcdef933c44f6e5e7585a48",
+    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. One reference search and selected-code field. This change adds a React child slot for sourced suggestions and updates its guidance; it adds no transport branch or inference responsibility. Existing reference search behavior is outside the reviewed automatic-suggestion delta.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/FindingReview.tsx",
+    "kind": "function",
+    "symbol": "FindingReview",
+    "fingerprint": "6f1261ca6c6ebeff8ec698aa944b1861805da7f931982d90c97f02ebbc7b5621",
+    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. One finding card with source disclosure and status-specific review actions. The new automatic label and Not right action use shared acceptance predicates; status/revision validation and dispatch remain in actions. Its length is related conditional review presentation, not an independent policy implementation.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/ProfileFacts.tsx",
+    "kind": "function",
+    "symbol": "ProfileFacts",
+    "fingerprint": "26e2eadee866074528dd3012e1fbd883b6f210c7da08f5eb19404db79138b996",
+    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. One sourced-facts/conflict surface. Snapshot reads gate unavailable data, conflict saves preserve their existing command flow, and automatic rejection delegates to AutomaticFactReview. The new local selection state stores only which approved fact is being reviewed and adds no duplicate fact-write path.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/RunLedger.tsx",
+    "kind": "function",
+    "symbol": "RunLedger",
+    "fingerprint": "c1209466d9d0040790f939914b403628671a44b275b6522c5d06bd9ecf74eb86",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. A presentation-only ledger shows saved run/task statuses, attempt counts, source outcomes, and scoped retry/cancel intentions. It does not initiate transport and intentionally keeps raw diagnostic text out of the user flow. Status labels and retry availability derive from the supplied run. The repeated task rows and saved-scope details form one cohesive audit view. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/actions.ts",
+    "kind": "function",
+    "symbol": "executeReviewAction",
+    "fingerprint": "4a31c1ea3b52f74cac0b2fe11a390d4d8093a2bc0d03c4e3e7fc1dddaabed41a",
+    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. One guarded transition dispatcher for the established review protocol. It reads current run/review before dispatch, compares selected findings, checks automatic acceptance rather than the caller hint, and verifies the saved post-state. The changed reject eligibility is cohesive with these existing transition invariants.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/useResearchCommands.ts",
+    "kind": "function",
+    "symbol": "useResearchCommands",
+    "fingerprint": "1ca3168a557f3eac10d1ca94e9e67a53a7c325fb3581da628f12962dc329c8b7",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. This hook owns the mounted start/retry/recovery command lifecycle. The established retained-intent owner stores request identity and scopes verification; researchOperations owns exact dispatch and reconciliation; API schemas verify subject identity. Guards fence all dispatch and display, denied mutations reset only subject read caches, and uncertain outcomes preserve the retained command. The small start/retry branching and shared recovery settlement belong together because they have one journal and presentation lifetime. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/useReviewAction.ts",
+    "kind": "function",
+    "symbol": "useReviewAction",
+    "fingerprint": "e3e34a728373110540d232da0675a3dbfdf8943fa8cdb129e4de3d5e7238c3c5",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. The hook owns mounted review-command lifetime and retained recovery state. It delegates preflight/wire execution to executeReviewAction/sendApplication and journal persistence/locking to reviewRecovery. Actor/tenant/subject guards fence continuations; late exact acknowledgements remain in their original journal scope. Denied apply/recovery resets scoped reads without clearing journals. Settlement, retry, feedback and recovery all describe the same command lifetime and introduce no parallel authorization or persistence owner. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
+    "kind": "function",
+    "symbol": "ProspectDetail",
+    "fingerprint": "9ad66b8713dbbc94f4329d1061a275433507c3cae16dfc0f34c99c885732dfe9",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. This route-level feature view renders one successfully read prospect and composes existing stage, owner, history, files, contacts, research, facts, and conversion owners. It withholds the record on query failure and keeps only local dialog visibility. Domain mutation and durable conversion remain delegated. Its size is page composition, not a new data or authorization service. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
+    "kind": "function",
+    "symbol": "ProspectEditor",
+    "fingerprint": "61b70f656e159fbe12522b7b5177f0b7a76ca057bb7187133c58516bc1a01412",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. One prospect editor owns a short-form draft, identity confirmation, retained initial creation receipt and follow-up person-fact save. It validates new/changed descriptions to600 before dispatch and omits unchanged legacy longer descriptions from the person command. The captured command and saved prospect survive uncertain continuations. Data contracts, identity/stage reads and authority capture remain existing owners. Form and continuation share one mounted lifetime and responsibility. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
+    "kind": "function",
+    "symbol": "ProspectEditor > submit",
+    "fingerprint": "a9d1f783b61e98566037090b541aa61ce94512518561d3da049f68231c8bc586",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. This sequential submission validates the draft, confirms identity before new creation, preserves the resulting prospect, captures one exact person-fact request, and invalidates affected read models. New/changed description limits are enforced before the first write; unchanged legacy text is omitted. Scope checks fence every continuation, and uncertain initial creation is not automatically replayed. Keeping this two-write sequence in one function makes ordering and receipt retention explicit. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/ProspectProfileSections.tsx",
+    "kind": "function",
+    "symbol": "ProspectSection",
+    "fingerprint": "25a250ac43db2cfbdfae9884182d709e80439baefdfb2f1fc86b99ee385dc093",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. A read-only section composes completeness, reference-only coverage, typed approved facts, source attribution and section-specific empty-state wording. Reference results are labelled separately from approved profile facts. The current snapshot gate lives in the parent hook, source markup delegates to FactSource, and nested record display has its own bounded helper. The branches describe one section card and contain no transport or mutation responsibility. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/conversion/NewClientConversion.tsx",
+    "kind": "function",
+    "symbol": "ConversionSession",
+    "fingerprint": "d9fab9a88fe3e434586b5cd352a9519e3da6cfaafbb7eee96378ada29d04d0cd",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. A single explicit conversion-review dialog owns editable client details, current capacity/duplicate review, and confirmation. Durable creation, recovery, refusal retirement, and acknowledgement are delegated to useNewClientConversion. The actor/prospect-keyed wrapper resets local presentation correctly. The numerous receipt/refusal branches describe one retained conversion rather than introducing another persistence owner. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
+    "kind": "function",
+    "symbol": "ClientLinkDialog",
+    "fingerprint": "3bf00cb1effe0b231d1df399b7c08ff6c1a07e67e1f330d3730e80341ee5446d",
+    "reason": "Independent exact-body design review at eb0deb810b779108ba5438ada8b53a9bc7ad0985. One existing-client linking dialog owns search, a selection bound to the exact search term and current returned client identity, explicit confirmation, and focus restoration. Current query failure revokes selection/presentation; mutation and canonical authority are delegated. The search/results/confirmation markup and reset logic are one cohesive choice lifecycle. Accepted for cohesive responsibility at this exact fingerprint; runtime/build qualification remains separate.",
+    "reviewedBy": "Codex independent reference_catalogs reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/BusinessUnitSelection.tsx",
+    "kind": "function",
+    "symbol": "BusinessUnitSelection",
+    "fingerprint": "25dbceef07d4f463bcbf4791f6e36b6867dfdb7dcf6961fa6415f58fb16c98ce",
+    "reason": "Independent exact-body review at 9ded2910 (producer commit c8855bc1). One business-unit selection and approval surface. The dropdown uses approved proposals only; sourced manual entry and proposal actions remain separate shared owners. The new explicit research launcher delegates to the common durable profile-build panel. Its length is the related form and evidence presentation, not another inference, transport or authorization engine.",
+    "reviewedBy": "Codex independent backend_audit reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityAlignment.tsx",
+    "kind": "function",
+    "symbol": "CapabilityAlignment",
+    "fingerprint": "2a2b7c92a1eeff04d5ae422ac966f1a1679a5ae874c50e9b7ca43f197c3f4016",
+    "reason": "Independent exact-body review at 9ded2910 (producer commit c8855bc1). One capability-scoped alignment review screen. Sourced discovery delegates to PortfolioResearch; term eligibility, individual program-line approval, evidence rendering and mutation ownership remain typed shared helpers. The selected-approval collection and its display form one interaction; classification proposals stay excluded from watch terms.",
+    "reviewedBy": "Codex independent backend_audit reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+    "kind": "function",
+    "symbol": "CapabilityEditor",
+    "fingerprint": "d92440b5ff0cb059c09655cbc46b8af30439f1fa734cfc94ae5f06966d1bdbd3",
+    "reason": "Independent exact-body review at 9ded2910 (producer commit c8855bc1). One modal composition for an existing capability. The added document research launcher passes the exact capabilityId into the shared source chooser; editing, documents and support remain child surfaces. Focus restoration and confirmation belong to the modal lifecycle and introduce no new model or authorization path.",
+    "reviewedBy": "Codex independent backend_audit reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/ProfileBuildPanel.tsx",
+    "kind": "function",
+    "symbol": "CurrentProfileBuild",
+    "fingerprint": "8622000d19bc28a44f5934ddd50eb21442054bf2dfc2bfba4141e1be08ed20f2",
+    "reason": "Independent exact-body review at 9ded2910 (producer commit c8855bc1). One profile research screen coordinating established access, retained-command, review and task-ledger hooks. Added purpose/capability/unit props reset component identity and flow into the same source chooser; durable scheduling and transport remain external. Denied/current-read checks suppress content and actions. Separate response-binding defect is tracked in the research-contract helper, not hidden by this size acceptance.",
+    "reviewedBy": "Codex independent backend_audit reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/ResearchRequest.tsx",
+    "kind": "function",
+    "symbol": "ResearchRequest",
+    "fingerprint": "70a711ad3ce4c4d4938fdc57a72e81032713aba0409d0f637ff0befe53102449",
+    "reason": "Independent exact-body review at 9ded2910 (producer commit c8855bc1). One explicit source-selection form. Scope defaults are prepared by initialResearchInput and typed validation; actual request ownership stays in the retained-command hook. Its JSX groups source, document and scope disclosures without starting model work on render.",
+    "reviewedBy": "Codex independent backend_audit reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/SectorStep.tsx",
+    "kind": "function",
+    "symbol": "SectorStep",
+    "fingerprint": "da3c6313c1cc7202af94507e7ca4638893aaaef57113341f596c351417429a3a",
+    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. One advocacy form step. The new LDA code suggestion slot uses the shared source review component and existing setter. Funding, sectors and engagement fields remain form presentation without independent transport.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/person-profile.ts",
+    "kind": "function",
+    "symbol": "personProfileInput",
+    "fingerprint": "be56e7be10dd1bbd16dff691da60a33ade53deb7e2d1f3034585617426b9887e",
+    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. One deterministic projection from current and original manual form values to the canonical person-save command. Accepted citations are filtered against selected codes and changed fields; removed/unmodified selections do not resend old evidence. This is the appropriate normalization boundary before a retained command is created.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/AutomaticFactReview.tsx",
+    "kind": "function",
+    "symbol": "AutomaticFactReview",
+    "fingerprint": "d5d141a5874b2c2344d3ce052f24085928df65bdf928fda46f0ad476b930c555",
+    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. One confirmation dialog for rejecting a sourced automatic fact. Current run loading and review mutation/recovery are delegated to existing shared owners. Controls are gated on current readable results, automatic lineage and admin edit authority; the action refetches before writing and cannot turn a UI hint into automatic status.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/CodeSuggestions.tsx",
+    "kind": "function",
+    "symbol": "SuggestionSession",
+    "fingerprint": "51b7af59cb6223af59ae268a4ad99eb675159f9b9d63104d9f6d6fa98845fee9",
+    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. One bounded manual suggestion interaction from explicit click through source disclosure and explicit acceptance. Actor/context remount, abort lifetime, current access guards and failed-result hiding belong to this lifecycle. Transport, response validation and accepted-evidence persistence remain separate owners. Followup b1d2bb63 aligns minimum name and document limits.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/useProfileIdentityDocument.ts",
+    "kind": "function",
+    "symbol": "useProfileIdentityDocument",
+    "line": 25,
+    "nonblank": 129,
+    "fingerprint": "23b555969c9fd6b87fbae378213721a8239fb14ce6c0ff12d88b3a5096d9f5be",
+    "reason": "One mounted intake hook owns the selected-file upload attempt, current readiness read, cancellation, actor-bound recovery and visible progress. Each execution captures fresh authorization scope while the upload receipt stays bound to its original actor; the pure read/link transport and display component are separate owners.",
+    "reviewedBy": "Codex independent backend_audit review of frontend-depth-producers e6d1de97",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/SourcedProfileStart.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "446ddca6b1a8591e4e9c97fe1a9b6b1f9f7090c5f17efe7b8e2272c72b2e12db",
+    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. The module composes the actor-keyed source intake and saved-profile access wrapper. Existing upload, source confirmation, canonical attachment linking and durable research remain separate owners.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
+    "kind": "function",
+    "symbol": "ProspectEditorSession",
+    "fingerprint": "3b63a55dd3d1dc1e537fda254b4eefb1f9f8e28992562e8c7a7da36269ba39eb",
+    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. One prospect editor with actor/subject-scoped state. A new prospect uses explicit source identity confirmation before the existing create command, and retained person details continue on the same saved prospect. Existing editing, source labels and denial handling stay within the editor lifecycle.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
+    "kind": "function",
+    "symbol": "ProspectEditorSession > submit",
+    "fingerprint": "8adcb58217030847ce41211465359505e9382ccf64663a1ec5d477055657d2c2",
+    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. One ordered prospect save continuation. Source confirmation is required before creation when applicable, uncertain create results stay blocked, and later person-save retries retain the already-created prospect. Source callbacks are guarded before and after each boundary.",
+    "reviewedBy": "Codex independent frontend_depth reviewer",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/OfficeRelationshipCard.tsx",
+    "kind": "function",
+    "symbol": "OfficeRelationshipCard",
+    "line": 9,
+    "nonblank": 95,
+    "fingerprint": "d704d374ac173e158e33261f16061ae77a4b85e343ba08bd51aef743e3fd42c4",
+    "reason": "One saved office relationship card presents its canonical parent status/owner/contact/next step and capability association evidence/history. Unknown current and historical stances have neutral labels and never infer interest from recommendation fit. Event callbacks remain parent-owned; evidence rendering stays in the shared primitive. The added labels do not add another data or mutation owner.",
+    "reviewedBy": "Codex independent backend_audit review of frontend current root 8c7fbb5f / neutral-stance delta 09367884",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/TargetRecommendations.tsx",
+    "kind": "function",
+    "symbol": "TargetRecommendations",
+    "line": 19,
+    "nonblank": 219,
+    "fingerprint": "c97c4c8f8c8e6c56c321dd057f097f9d686919229e3ea796226e36b57a46939c",
+    "reason": "One client-scoped recommendation review panel composes current read state, capability/status filters, explicit refresh and statement entry. Fit rating/rationale, entry point, cautions, exact office term, neutral unknown stance and human-readable suggested owner describe the same proposal review. Read errors hide saved proposals; mutation authority and versioned approval remain in existing hooks/actions. Splitting these rows would fragment a single review decision without separating a new responsibility.",
+    "reviewedBy": "Codex independent backend_audit review of frontend current root 8c7fbb5f / neutral-stance delta 09367884",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ClientMeriActions.tsx",
+    "kind": "function",
+    "symbol": "ClientMeriActions",
+    "line": 14,
+    "nonblank": 82,
+    "fingerprint": "859fec3c68d816efe426ce9f7beb0400a4a5c2207c020040a5bbcff632d3162a",
+    "reason": "One client-header menu launches the existing conversation handoff and attendance preference dialogs and restores trigger focus on close. The standalone fill action is removed. Capability/current-client gating remains on the conversation entry, while each child retains fresh authorization and its own mutation or handoff behavior. This is one bounded action-menu presentation; the changed body adds no provider, research, or persistence owner.",
+    "reviewedBy": "Codex independent backend_audit review of frontend 0ec70dd4 exact source and final architecture v3 report",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+    "kind": "function",
+    "symbol": "ClientOverview",
+    "line": 33,
+    "nonblank": 187,
+    "fingerprint": "3d395f8f86f186a0b15ac4354a92d0fcfb2a676b97a1b0014babba1efd967fb1",
+    "reason": "One authorized client overview composes identity, team, facilities, activity, objectives, calendar, and the shared profile-build/fact panels. The client read fails closed before the profile body renders. New research and source/news review are delegated by explicit client subject to their existing public owners; the overview creates no runner, provider, fact store, or approval path. Its remaining local state only opens the existing team/notes/log dialogs and synchronizes navigation. Keeping the composition together preserves a coherent overview without duplicating the children\u2019s responsibilities.",
+    "reviewedBy": "Codex independent backend_audit review of frontend 0ec70dd4 exact source and final architecture v3 report",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/IdentityMatch.tsx",
+    "kind": "function",
+    "symbol": "IdentityMatch",
+    "fingerprint": "65d6c289d204413d9e7406c3b1280a2285e8aa0ceacd22061228a5f604ba34f1",
+    "reason": "Independent exact-body review at frontend 32573b0170eca7269f7705d5d5983f935ca65b6b. One controlled company identity-choice form owns candidate, source-evidence and optional claim presentation. Candidate normalization, typed selection and URL safety retain their existing owners; the component performs no transport or persistence. The spacing-only change adds scoped grid classes while preserving labels, disabled fieldset semantics, selected-key binding and selection callbacks. Separating this cohesive form merely for its line count would not clarify a responsibility boundary.",
+    "reviewedBy": "Codex independent final_spacing_review",
+    "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/IdentityMatch.tsx",
+    "kind": "function",
+    "symbol": "IdentityMatch > <anonymous>",
+    "fingerprint": "2de625a9e32768fcb5d2d4ec0f2035d7247a92d9f5ac91f1d3f76871d7e7a445",
+    "reason": "Independent exact-body review at frontend 32573b0170eca7269f7705d5d5983f935ca65b6b. One candidate renderer keeps its radio choice, provenance and selected-company claim checkboxes together. Explicit typed selection still flows through the parent callback; it does not fetch, save or infer identity. The only production delta is scoped layout classes, with source text stacked and wrapped without changing radio or claim behavior. Extraction solely to reduce line count would obscure the per-candidate interaction.",
+    "reviewedBy": "Codex independent final_spacing_review",
     "reviewedOn": "2026-11-04"
   }
 ]
