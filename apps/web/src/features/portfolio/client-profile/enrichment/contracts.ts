@@ -150,15 +150,4 @@ const applyable = new Set([
 ]);
 export const canSelectFinding = (f: Finding) =>
   f.status === "pending" && applyable.has(f.kind);
-export const safeEvidenceUrl = (value: string | null | undefined) => {
-  try {
-    const url = new URL(value ?? "");
-    return ["http:", "https:"].includes(url.protocol) &&
-      !url.username &&
-      !url.password
-      ? url.href
-      : undefined;
-  } catch {
-    return undefined;
-  }
-};
+export { safeEvidenceUrl } from "@/features/portfolio/profile-build/public";

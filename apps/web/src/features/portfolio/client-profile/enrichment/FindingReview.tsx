@@ -2,12 +2,8 @@
 import { useState } from "react";
 import { useMatters } from "@/features/portfolio/advocacy/public";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
-import {
-  canSelectFinding,
-  safeEvidenceUrl,
-  type Finding,
-  type JsonValue,
-} from "./contracts";
+import { canSelectFinding, type Finding, type JsonValue } from "./contracts";
+import { ProfileSourceList } from "@/features/portfolio/profile-build/public";
 import type { ReviewAction } from "./actions";
 import { ProfileCompletionOutcome } from "./SourceOutcome";
 import styles from "./enrichment.module.css";
@@ -219,35 +215,17 @@ export function FindingReview({
           Service confidence: {finding.confidence}. This is a source assessment,
           not a guarantee.
         </p>
-        {finding.evidence.map((e, i) => {
-          const url = safeEvidenceUrl(e.url);
-          return (
-            <blockquote key={i}>
-              <p>
-                {url ? (
-                  <a href={url} target="_blank" rel="noreferrer">
-                    {e.label}
-                  </a>
-                ) : (
-                  e.label
-                )}
-              </p>
-              {e.excerpt && <p>{e.excerpt}</p>}
-              {e.source && <cite>{e.source}</cite>}
-              {e.metadata && (
-                <details>
-                  <summary>Source metadata</summary>
-                  <FindingValue value={e.metadata} />
-                </details>
-              )}
-              {e.observedAt && (
-                <p>
-                  Observed: <time dateTime={e.observedAt}>{e.observedAt}</time>
-                </p>
-              )}
-            </blockquote>
-          );
-        })}
+        <ProfileSourceList
+          evidence={finding.evidence}
+          details={(e) =>
+            e.metadata ? (
+              <details>
+                <summary>Source metadata</summary>
+                <FindingValue value={e.metadata} />
+              </details>
+            ) : null
+          }
+        />
       </details>
       {finding.rejectionReason && (
         <p className="muted">Ignored: {finding.rejectionReason}</p>

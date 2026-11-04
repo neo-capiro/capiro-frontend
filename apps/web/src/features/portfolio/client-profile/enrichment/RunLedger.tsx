@@ -1,6 +1,6 @@
 import type { FillRun } from "./contracts";
 import { SourceOutcome, sourceName } from "./SourceOutcome";
-import styles from "./enrichment.module.css";
+import { ProfileBuildProgress } from "@/features/portfolio/profile-build/public";
 export function RunLedger({
   run,
   busy,
@@ -13,11 +13,29 @@ export function RunLedger({
   onRetry?: (task: NonNullable<FillRun["tasks"]>[number]) => void;
 }) {
   return (
-    <section className={styles.ledger} aria-label="Task ledger">
-      <div className="row between">
-        <h3>{run.stage?.replaceAll("_", " ") ?? run.status}</h3>
-        <span className={styles.badge}>{run.status}</span>
-      </div>
+    <ProfileBuildProgress
+      status={run.status}
+      tasks={(run.tasks ?? []).map((task) => ({
+        id: task.id,
+        label: sourceName(task.taskType) ?? "Unrecognized source",
+        status: task.status,
+        attempt: task.attempt,
+        maxAttempts: task.maxAttempts,
+        reportedError: Boolean(task.errorMessage),
+        retryAllowed: (run.workflowVersion ?? 1) >= 2,
+      }))}
+      busy={busy}
+      onCancel={onCancel}
+      onRetry={
+        onRetry
+          ? (id) => {
+              const task = run.tasks?.find((candidate) => candidate.id === id);
+              if (task) onRetry(task);
+            }
+          : undefined
+      }
+    >
+      {run.stage && <p>Current stage: {run.stage.replaceAll("_", " ")}</p>}
       <p className="muted">
         Started{" "}
         <time dateTime={run.startedAt} title={run.startedAt}>
@@ -28,49 +46,6 @@ export function RunLedger({
         <p role="alert">
           This saved run reported a problem. Review the task statuses and
           available findings.
-        </p>
-      )}
-      {run.tasks?.map((task) => (
-        <div className={styles.task} key={task.id}>
-          <span aria-hidden="true">
-            {task.status === "completed"
-              ? "✓"
-              : task.status === "running"
-                ? "●"
-                : "○"}
-          </span>
-          <div>
-            {sourceName(task.taskType)}
-            <small>
-              Attempt {task.attempt} of {task.maxAttempts}
-              {task.errorMessage
-                ? task.status === "failed"
-                  ? " · This task could not complete."
-                  : " · An earlier attempt reported a problem."
-                : ""}
-            </small>
-          </div>
-          <span>{task.status}</span>
-          {task.status === "failed" && (
-            <button
-              className="button"
-              disabled={
-                busy ||
-                !onRetry ||
-                run.status === "cancelled" ||
-                (run.workflowVersion ?? 1) < 2
-              }
-              onClick={() => onRetry?.(task)}
-            >
-              Retry task
-            </button>
-          )}
-        </div>
-      ))}
-      {!run.tasks?.length && (
-        <p className="muted">
-          This saved run has no task ledger. Source outcomes remain available
-          below.
         </p>
       )}
       {(run.error ||
@@ -103,11 +78,6 @@ export function RunLedger({
           </div>
         ))}
       </details>
-      {run.status === "running" && (
-        <button className="button" disabled={busy} onClick={onCancel}>
-          Cancel run
-        </button>
-      )}
-    </section>
+    </ProfileBuildProgress>
   );
 }
