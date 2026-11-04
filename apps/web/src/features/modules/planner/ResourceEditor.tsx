@@ -14,10 +14,9 @@ import {
   TextInput,
 } from "../../../shared/module-ui";
 import { DashboardEditor } from "./DashboardEditor";
-import { FormQuestions } from "./FormQuestions";
 import styles from "./planner.module.css";
 import { initialResourceData, strings } from "./resource-data";
-import { GoalFields, RuleFields } from "./ResourceTypeFields";
+import { GoalFields } from "./ResourceTypeFields";
 type Props = {
   open: boolean;
   kind: PlannerResource["kind"];
@@ -52,9 +51,8 @@ function ResourceForm({
   const create = useCapiroMutation("planner.resource.create"),
     save = useCapiroMutation("planner.resource.update");
   const [name, setName] = useState(resource?.name ?? ""),
-    [projectId, setProjectId] = useState(resource?.projectId ?? ""),
     [data, setData] = useState<Record<string, unknown>>(
-      resource?.data ?? initialResourceData(kind, ""),
+      resource?.data ?? initialResourceData(kind),
     ),
     [error, setError] = useState<string>(),
     [busy, setBusy] = useState(false);
@@ -65,21 +63,14 @@ function ResourceForm({
     setBusy(true);
     setError(undefined);
     try {
-      const next =
-        kind === "template"
-          ? {
-              ...data,
-              project: { ...(data.project as Record<string, unknown>), name },
-            }
-          : data;
       if (resource)
         await save.run({
           params: { id: resource.id },
-          body: { version: resource.version, name, data: next },
+          body: { version: resource.version, name, data },
         });
       else
         await create.run({
-          body: { kind, name, projectId: projectId || null, data: next },
+          body: { kind, name, projectId: null, data },
         });
       onSaved();
       onClose();
@@ -95,29 +86,18 @@ function ResourceForm({
     <form className={styles.stack} onSubmit={(event) => void submit(event)}>
       <ResourceBasics
         kind={kind}
-        resource={resource}
         projects={projects}
         name={name}
         setName={setName}
-        projectId={projectId}
-        setProjectId={setProjectId}
         data={data}
         update={update}
       />
       {kind === "goal" && (
         <GoalFields data={data} update={update} people={people} />
       )}{" "}
-      {kind === "rule" && <RuleFields data={data} update={update} />}{" "}
-      {kind === "form" && <FormQuestions data={data} onChange={setData} />}{" "}
       {kind === "dashboard" && (
         <DashboardEditor data={data} onChange={setData} />
       )}{" "}
-      {kind === "template" && (
-        <p className={styles.note}>
-          A new template starts with an empty project. Task configuration
-          remains on the template&apos;s reviewed resource.
-        </p>
-      )}
       {error && (
         <p role="alert" className={styles.error}>
           {error}
@@ -143,22 +123,16 @@ function ResourceForm({
 }
 function ResourceBasics({
   kind,
-  resource,
   projects,
   name,
   setName,
-  projectId,
-  setProjectId,
   data,
   update,
 }: {
   kind: Props["kind"];
-  resource?: PlannerResource;
   projects: PlannerProject[];
   name: string;
   setName: (name: string) => void;
-  projectId: string;
-  setProjectId: (id: string) => void;
   data: Record<string, unknown>;
   update: (key: string, value: unknown) => void;
 }) {
@@ -173,48 +147,21 @@ function ResourceBasics({
           maxLength={500}
         />
       </Field>
-      {!["rule"].includes(kind) && (
-        <Field label="Description" htmlFor="resource-description">
-          <TextArea
-            id="resource-description"
-            value={String(data.description ?? "")}
-            onChange={(event) => update("description", event.target.value)}
-            maxLength={50000}
-          />
-        </Field>
-      )}
-      {["rule", "form"].includes(kind) && (
-        <Field label="Project" htmlFor="resource-project">
-          <select
-            id="resource-project"
-            className={styles.select}
-            value={projectId}
-            onChange={(event) => setProjectId(event.target.value)}
-            required
-            disabled={!!resource}
-          >
-            <option value="">Select project</option>
-            {projects
-              .filter(
-                (project) =>
-                  !project.archived &&
-                  ["admin", "editor"].includes(project.access),
-              )
-              .map((project) => (
-                <option key={project.id} value={project.id}>
-                  {project.name}
-                </option>
-              ))}
-          </select>
-        </Field>
-      )}
+      <Field label="Description" htmlFor="resource-description">
+        <TextArea
+          id="resource-description"
+          value={String(data.description ?? "")}
+          onChange={(event) => update("description", event.target.value)}
+          maxLength={50000}
+        />
+      </Field>
       <ResourceProjectSelection
         kind={kind}
         data={data}
         projects={projects}
         update={update}
       />
-      {["portfolio", "goal", "template", "dashboard"].includes(kind) && (
+      {["portfolio", "goal", "dashboard"].includes(kind) && (
         <Field label="Privacy" htmlFor="resource-privacy">
           <select
             className={styles.select}

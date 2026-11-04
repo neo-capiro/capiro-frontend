@@ -99,6 +99,37 @@ beforeEach(() => {
   };
 });
 
+describe("Planner section navigation", () => {
+  it.each([
+    "timesheets",
+    "templates",
+    "rules",
+    "forms",
+    "capacity",
+    "workload",
+  ])(
+    "opens My tasks for a retired %s deep link without requesting its data",
+    (view) => {
+      state.params = `view=${view}`;
+      const html = render("project");
+      expect(html).toContain("Project work");
+      expect(html).toMatch(/aria-selected="true"[^>]*>My tasks</);
+      for (const label of [
+        "Timesheets",
+        "Templates",
+        "Rules",
+        "Forms",
+        "Capacity",
+        "Workload",
+      ])
+        expect(html).not.toContain(`>${label}</button>`);
+      expect(
+        state.reads.filter((read) => read.enabled).map((read) => read.key),
+      ).toEqual(["planner.bootstrap"]);
+    },
+  );
+});
+
 describe("ordinary current-resource links", () => {
   it("opens the normal current Strategy only for its exact returned ID and client", () => {
     select("strategy");

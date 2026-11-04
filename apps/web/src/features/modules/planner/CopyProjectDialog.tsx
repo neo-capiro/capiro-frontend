@@ -10,36 +10,26 @@ import {
 import styles from "./planner.module.css";
 export function CopyProjectDialog({
   resource,
-  kind,
   onClose,
   onCreated,
 }: {
-  resource: { id: string; name: string; data?: Record<string, unknown> };
-  kind: "project" | "template";
+  resource: { id: string; name: string };
   onClose: () => void;
   onCreated: (id: string) => void;
 }) {
   const api = useCapiro();
   const [name, setName] = useState(`${resource.name} copy`),
-    [anchor, setAnchor] = useState(""),
     [busy, setBusy] = useState(false),
     [error, setError] = useState<string>();
-  const scheduled = kind === "template" && !!resource.data?.schedule;
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     setBusy(true);
     setError(undefined);
     try {
-      const result =
-        kind === "project"
-          ? await api.request("planner.project.duplicate", {
-              params: { id: resource.id },
-              body: { name },
-            })
-          : await api.request("planner.template.instantiate", {
-              params: { id: resource.id },
-              body: { name, ...(scheduled ? { anchorOn: anchor } : {}) },
-            });
+      const result = await api.request("planner.project.duplicate", {
+        params: { id: resource.id },
+        body: { name },
+      });
       onCreated(result.id);
       onClose();
     } catch (cause) {
@@ -56,11 +46,7 @@ export function CopyProjectDialog({
       onOpenChange={(open) => {
         if (!open) onClose();
       }}
-      title={
-        kind === "project"
-          ? "Duplicate project"
-          : "Create project from template"
-      }
+      title="Duplicate project"
       description="The new project starts private; the service checks source access."
     >
       <form className={styles.stack} onSubmit={(event) => void submit(event)}>
@@ -73,17 +59,6 @@ export function CopyProjectDialog({
             onChange={(event) => setName(event.target.value)}
           />
         </Field>
-        {scheduled && (
-          <Field label="Reference date" htmlFor="copy-anchor">
-            <TextInput
-              type="date"
-              id="copy-anchor"
-              required
-              value={anchor}
-              onChange={(event) => setAnchor(event.target.value)}
-            />
-          </Field>
-        )}
         {error && (
           <p role="alert" className={styles.error}>
             {error}

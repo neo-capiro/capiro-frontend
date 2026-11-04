@@ -60,7 +60,6 @@ retains its explicit `TRACKER_BACKEND` choice and conditional legacy deep-link
 adapters; their URL variables are not needed for shared mode navigation. Consult
 [Portfolio configuration](apps/web/PORTFOLIO.md) and the
 [Modules configuration/operation map](docs/modules-settings/INTEGRATION-MAP.md).
-Public Planner capability forms retain their separate unauthenticated contract.
 Missing configuration refuses protected requests.
 
 The [Modules handover](docs/modules-settings/HANDOVER.md) and

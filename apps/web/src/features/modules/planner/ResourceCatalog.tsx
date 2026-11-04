@@ -14,8 +14,6 @@ import {
   StatusPanel,
   TextInput,
 } from "../../../shared/module-ui";
-import { CopyProjectDialog } from "./CopyProjectDialog";
-import { FormPreview } from "./FormPreview";
 import styles from "./planner.module.css";
 import { ReportingDashboard } from "./ReportingDashboard";
 import { resourceSectionKinds, strings } from "./resource-data";
@@ -38,7 +36,6 @@ function useCatalog({ section }: Props) {
     [archived, setArchived] = useState(false),
     [edit, setEdit] = useState<EditorTarget | null>(null),
     [opened, setOpened] = useState<PlannerResource | null>(null),
-    [template, setTemplate] = useState<PlannerResource | null>(null),
     [error, setError] = useState<string>(),
     [busy, setBusy] = useState(false);
   const kind = resourceSectionKinds[section]!;
@@ -49,10 +46,7 @@ function useCatalog({ section }: Props) {
         item.archived === archived &&
         item.name.toLowerCase().includes(search.toLowerCase()),
     ) ?? [];
-  const update = async (
-    resource: PlannerResource,
-    data?: Record<string, unknown>,
-  ) => {
+  const update = async (resource: PlannerResource) => {
     setBusy(true);
     setError(undefined);
     try {
@@ -60,7 +54,7 @@ function useCatalog({ section }: Props) {
         params: { id: resource.id },
         body: {
           version: resource.version,
-          ...(data ? { data } : { archived: !resource.archived }),
+          archived: !resource.archived,
         },
       });
       query.reload();
@@ -84,8 +78,6 @@ function useCatalog({ section }: Props) {
       setEdit({ kind: resource?.kind ?? kind, resource }),
     opened,
     setOpened,
-    template,
-    setTemplate,
     error,
     busy,
     kind,
@@ -208,17 +200,6 @@ function ResourceCard({
             </div>
           </>
         )}
-        {resource.kind === "rule" && (
-          <p className={styles.muted}>
-            {resource.data.enabled ? "Enabled" : "Paused"} ·{" "}
-            {String(resource.data.trigger ?? "").replaceAll("_", " ")}
-          </p>
-        )}
-        {resource.kind === "form" && (
-          <Badge tone={resource.data.enabled ? "success" : "neutral"}>
-            {resource.data.enabled ? "Open" : "Closed"}
-          </Badge>
-        )}
         <ResourceActions resource={resource} props={props} model={m} />
       </div>
     </Panel>
@@ -235,19 +216,9 @@ function ResourceActions({
 }) {
   return (
     <div className={styles.footer}>
-      {m.kind === "template" && (
-        <ActionButton onClick={() => m.setTemplate(resource)}>
-          Use template
-        </ActionButton>
-      )}
       {m.kind === "dashboard" && (
         <ActionButton onClick={() => m.setOpened(resource)}>
           Open dashboard
-        </ActionButton>
-      )}
-      {resource.kind === "form" && (
-        <ActionButton onClick={() => m.setOpened(resource)}>
-          Open form
         </ActionButton>
       )}
       {resource.kind === "portfolio" &&
@@ -263,19 +234,6 @@ function ResourceActions({
       >
         {resource.kind === "goal" ? "Goal details" : "Edit"}
       </ActionButton>
-      {resource.kind === "rule" && (
-        <ActionButton
-          disabled={!["admin", "editor"].includes(resource.access) || m.busy}
-          onClick={() =>
-            void m.update(resource, {
-              ...resource.data,
-              enabled: !resource.data.enabled,
-            })
-          }
-        >
-          {resource.data.enabled ? "Pause" : "Enable"}
-        </ActionButton>
-      )}
       <ActionButton
         disabled={!["admin", "editor"].includes(resource.access) || m.busy}
         onClick={() => void m.update(resource)}
@@ -302,26 +260,6 @@ function ResourceDialogs({ props, model: m }: { props: Props; model: Model }) {
           m.query.reload();
         }}
       />
-      {m.template && (
-        <CopyProjectDialog
-          resource={m.template}
-          kind="template"
-          onClose={() => m.setTemplate(null)}
-          onCreated={(id) => {
-            m.setTemplate(null);
-            props.onOpenProject(id);
-          }}
-        />
-      )}
-      {m.opened?.kind === "form" && (
-        <FormPreview
-          resource={m.opened}
-          onClose={() => {
-            m.setOpened(null);
-            m.query.reload();
-          }}
-        />
-      )}
     </>
   );
 }

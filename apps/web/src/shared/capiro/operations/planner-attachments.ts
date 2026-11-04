@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { binaryDownloadSchema, defineOperation } from "../contracts";
-import { identity, plannerId, plannerTask } from "./planner-schemas";
+import { identity, plannerId } from "./planner-schemas";
 const source =
-  "capirov2@4be13b0 planner-attachments.controller.ts + planner-attachments.service.ts + planner-form-upload.ts";
+  "capirov2@4be13b0 planner-attachments.controller.ts + planner-attachments.service.ts";
 const attachment = z.object({
   id: plannerId,
   taskId: plannerId,
@@ -64,45 +64,6 @@ export const plannerAttachmentOperations = {
       contentTypes: ["application/octet-stream"],
       maxBytes: limit,
       filename: "attachment.bin",
-    },
-    source,
-  }),
-  "planner.form.upload": defineOperation({
-    service: "strategy",
-    method: "POST",
-    path: "/planner/forms/:id/submit",
-    request: z
-      .object({
-        params: z.object({ id: plannerId }).strict(),
-        body: z
-          .object({
-            answers: z.record(
-              plannerId,
-              z.union([
-                z.string().max(50000),
-                z.number(),
-                z.array(z.string()).max(100),
-              ]),
-            ),
-          })
-          .strict(),
-      })
-      .strict(),
-    response: plannerTask,
-    encoding: "multipart",
-    multipart: {
-      files: [
-        {
-          fieldPattern:
-            "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
-          maxCount: 10,
-          maxBytes: limit,
-        },
-      ],
-      bodyFields: { answers: "json" },
-      maxFileBytes: limit,
-      maxMetadataBytes: 250000,
-      maxTotalBytes: 28000000,
     },
     source,
   }),

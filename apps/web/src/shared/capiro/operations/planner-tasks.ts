@@ -13,7 +13,6 @@ import {
   taskPage,
   version,
 } from "./planner-schemas";
-import { timeOptions } from "./planner-time-options";
 const source =
   "capirov2@4be13b0 apps/api-strategy/src/planner/planner.controller.ts + planner.validation.ts + strategy-verifier/planner.ts";
 const mutation = z
@@ -40,8 +39,6 @@ export const plannerTaskOperations = {
       me: person,
       people: z.array(person),
       projects: z.array(project),
-      timeAdmin: z.boolean().optional(),
-      timeOptions: timeOptions.optional(),
     }),
     source,
   }),

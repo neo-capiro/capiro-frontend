@@ -28,7 +28,7 @@ const registry = {
   "upload.file": defineOperation({
     service: "strategy",
     method: "POST",
-    path: "/planner/forms/:id/submit",
+    path: "/synthetic/uploads/:id",
     encoding: "multipart",
     multipart: policy,
     request: z
@@ -92,7 +92,7 @@ const config = {
   issues: [],
 };
 const input = {
-  params: { id: "form-1" },
+  params: { id: "upload-1" },
   body: { answers: { question: "Test answer" } },
 };
 const file = () =>
@@ -124,7 +124,7 @@ it("forwards the authorized multipart fields and derived bearer, with automatic 
   expect(response.status).toBe(200);
   const [url, init] = fetcher.mock.calls[0] as unknown as [URL, RequestInit];
   expect(url.href).toBe(
-    "https://api.example.test/strategy-api/planner/forms/form-1/submit",
+    "https://api.example.test/strategy-api/synthetic/uploads/upload-1",
   );
   expect(init.headers).toEqual({
     Authorization: "Bearer trusted-token",

@@ -3,11 +3,7 @@ import {
   calendarDate,
   identity,
   plannerId,
-  priority,
-  projectData,
   role,
-  taskData,
-  taskStatus,
 } from "./planner-core-schemas";
 const sharing = {
   description: z.string().max(50000),
@@ -106,135 +102,6 @@ const myTasks = z
       )
       .max(20000),
     rules: z.array(personalRule).max(100).optional(),
-  })
-  .strict();
-const rule = z
-  .object({
-    enabled: z.boolean(),
-    trigger: z.enum([
-      "created",
-      "status_changed",
-      "section_changed",
-      "priority_changed",
-      "due_approaching",
-      "overdue",
-    ]),
-    schedule: z
-      .object({
-        amount: z.number().nonnegative(),
-        unit: z.enum(["days", "hours", "minutes"]),
-      })
-      .strict()
-      .optional(),
-    conditions: z
-      .object({
-        status: taskStatus.optional(),
-        priority: priority.optional(),
-        sectionId: plannerId.nullable().optional(),
-      })
-      .strict(),
-    actions: z
-      .object({
-        status: taskStatus.optional(),
-        priority: priority.optional(),
-        sectionId: plannerId.nullable().optional(),
-        assigneeId: identity.nullable().optional(),
-        notify: z.boolean().optional(),
-      })
-      .strict(),
-  })
-  .strict();
-export const plannerFormField = z
-  .object({
-    id: plannerId,
-    label: z.string().min(1).max(500),
-    description: z.string().optional(),
-    type: z.enum([
-      "text",
-      "paragraph",
-      "email",
-      "date",
-      "number",
-      "select",
-      "multi_select",
-      "attachment",
-    ]),
-    required: z.boolean(),
-    options: z.array(z.string()).max(100),
-    showWhen: z
-      .object({ questionId: plannerId, values: z.array(z.string()) })
-      .strict()
-      .optional(),
-    multiple: z.boolean().optional(),
-    maxLength: z.number().int().positive().optional(),
-    taskField: z
-      .enum([
-        "name",
-        "description",
-        "startOn",
-        "dueOn",
-        "priority",
-        "estimateMinutes",
-        "custom",
-        "attachments",
-      ])
-      .nullable(),
-    customFieldId: plannerId.optional(),
-  })
-  .strict();
-const form = z
-  .object({
-    description: z.string().max(50000),
-    enabled: z.boolean(),
-    fields: z.array(plannerFormField).max(100),
-    defaults: z
-      .object({
-        assigneeId: identity.nullable(),
-        priority,
-        status: taskStatus,
-        estimateMinutes: z.number().int().nonnegative(),
-      })
-      .strict(),
-    sectionId: plannerId.nullable().optional(),
-    titleFieldId: plannerId.nullable().optional(),
-    copyAnswersToDescription: z.boolean().optional(),
-    confirmationMessage: z.string().optional(),
-    allowAnotherSubmission: z.boolean().optional(),
-    addSubmitterAsCollaborator: z.boolean().optional(),
-    audience: z.enum(["organization", "public"]).optional(),
-  })
-  .strict();
-const template = z
-  .object({
-    ...sharing,
-    project: projectData,
-    tasks: z.array(taskData).max(1000),
-    layout: z
-      .array(
-        z
-          .object({
-            sectionId: plannerId.nullable(),
-            parentIndex: z.number().int().nullable(),
-            dependencyIndices: z.array(z.number().int()),
-          })
-          .strict(),
-      )
-      .optional(),
-    schedule: z
-      .object({
-        anchor: z.enum(["start", "due"]),
-        skipWeekends: z.boolean(),
-        dates: z.array(
-          z
-            .object({
-              startOffset: z.number().nullable(),
-              dueOffset: z.number().nullable(),
-            })
-            .strict(),
-        ),
-      })
-      .strict()
-      .optional(),
   })
   .strict();
 const chart = z
@@ -348,46 +215,20 @@ const viewPreferences = z
     hideUnscheduled: z.boolean(),
   })
   .strict();
-const capacity = z
-  .object({
-    userId: identity,
-    weeklyMinutes: z.number().int().min(0).max(10080),
-  })
-  .strict();
-export const resourceDataSchema = z.union([
-  portfolio,
-  goal,
-  myTasks,
-  rule,
-  form,
-  template,
-  dashboard,
-  savedView,
-  viewPreferences,
-  capacity,
-]);
 export const resourcePatchSchema = z.union([
   portfolio.partial(),
   goal.partial(),
   myTasks.partial(),
-  rule.partial(),
-  form.partial(),
-  template.partial(),
   dashboard.partial(),
   savedView.partial(),
   viewPreferences.partial(),
-  capacity.partial(),
 ]);
 
 export const resourceDataSchemas = {
   portfolio,
   goal,
-  template,
-  rule,
-  form,
   saved_view: savedView,
   view_preferences: viewPreferences,
-  capacity,
   my_tasks: myTasks,
   dashboard,
 } as const;

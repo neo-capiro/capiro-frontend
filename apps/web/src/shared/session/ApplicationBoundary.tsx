@@ -164,10 +164,9 @@ export function ApplicationBoundary({
   authenticatedContent?: ReactNode;
 }) {
   const pathname = usePathname();
-  // Revocable Planner capability forms and Research Portfolio client share links
-  // have independent public contracts (link token, plus the portfolio PIN for research).
-  if (pathname.startsWith("/forms/") || pathname.startsWith("/share/"))
-    return children;
+  // Client share links have independent public contracts
+  // (link token, plus the portfolio PIN for research).
+  if (pathname.startsWith("/share/")) return children;
   // IT tokens, including invalid/expired ones, do not depend on Clerk startup.
   // Replacing that capability discards its private cache and pending observation.
   if (isPublicOnboardPath(pathname))

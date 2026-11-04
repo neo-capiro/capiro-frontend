@@ -3,16 +3,11 @@ import { engagementOperations } from "./engagement";
 import { plannerOperations } from "./planner";
 const id = "51000000-0000-4000-8000-000000000001";
 describe("Planner and engagement wire boundaries", () => {
-  it("requires current versions for explicitly versioned financial and staffing writes", () => {
+  it("requires current versions for explicitly versioned financial writes", () => {
     expect(
       plannerOperations["planner.project.budget.update"].request.safeParse({
         params: { id },
         body: { data: { budgetMinutes: 600 } },
-      }).success,
-    ).toBe(false);
-    expect(
-      plannerOperations["planner.capacity.allocation.save"].request.safeParse({
-        body: { planId: id, changes: [{ id, projectId: id }] },
       }).success,
     ).toBe(false);
   });
@@ -40,21 +35,10 @@ describe("Planner and engagement wire boundaries", () => {
       }).success,
     ).toBe(false);
   });
-  it("rejects invalid calendar dates and gates timesheet actions on a revision", () => {
+  it("rejects invalid calendar dates", () => {
     expect(
       plannerOperations["planner.task.create"].request.safeParse({
         body: { data: { name: "Review", dueOn: "2026-02-30" } },
-      }).success,
-    ).toBe(false);
-    expect(
-      plannerOperations["planner.timesheet.status"].request.safeParse({
-        body: {
-          week: "2026-10-05",
-          userId: "user_test",
-          version: 0,
-          action: "submit",
-          notes: "",
-        },
       }).success,
     ).toBe(false);
   });
@@ -64,9 +48,36 @@ describe("Planner and engagement wire boundaries", () => {
     expect(operation.multipart?.files).toEqual([
       { field: "file", minCount: 1, maxCount: 1, maxBytes: 25 * 1024 * 1024 },
     ]);
+  });
+  it("reads retained resources alongside saved unsupported kinds without accepting malformed active records", () => {
+    const portfolio = {
+      id,
+      kind: "portfolio",
+      projectId: null,
+      ownerId: "user_test",
+      name: "Synthetic portfolio",
+      version: 1,
+      archived: false,
+      access: "admin",
+      data: {
+        description: "",
+        privacy: "private",
+        members: [],
+        projectIds: [],
+      },
+    };
+    const schema = plannerOperations["planner.resources"].response;
     expect(
-      plannerOperations["planner.form.upload"].multipart?.files[0]?.maxCount,
-    ).toBe(10);
+      schema.parse([
+        portfolio,
+        ...["template", "rule", "form", "capacity"].map((kind) => ({
+          kind,
+          data: {},
+        })),
+      ]),
+    ).toEqual([portfolio]);
+    expect(schema.safeParse([{ ...portfolio, data: {} }]).success).toBe(false);
+    expect(schema.safeParse([{ data: {} }]).success).toBe(false);
   });
 });
 

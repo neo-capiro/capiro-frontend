@@ -133,9 +133,9 @@ test("M1 retention: public-route reload then a different sign-in clears old reco
   await composer(page).fill("First account private draft");
   const retained = await recoveryEntries(page);
   expect(JSON.stringify(retained)).toContain("First account private draft");
-  await page.goto("/forms/invalid");
+  await page.goto("/it/error?reason=state");
   await expect(
-    page.getByRole("region", { name: "Public request form" }),
+    page.getByRole("heading", { name: "We couldn't verify the connection" }),
   ).toBeVisible();
   expect(await recoveryEntries(page)).toEqual(retained);
   await page.evaluate(

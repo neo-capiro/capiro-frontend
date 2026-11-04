@@ -104,7 +104,6 @@ export function ProjectCatalog({
       {copy && (
         <CopyProjectDialog
           resource={copy}
-          kind="project"
           onClose={() => setCopy(null)}
           onCreated={() => {
             setCopy(null);

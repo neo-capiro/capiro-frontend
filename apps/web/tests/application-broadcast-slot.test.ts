@@ -64,12 +64,12 @@ describe("Authenticated recipient slot", () => {
       expect(render()).toContain("Recipient in signed-in");
     },
   );
-  it.each(["signed-out", "loading", "unconfigured", "public-form"])(
+  it.each(["signed-out", "loading", "unconfigured", "public-share"])(
     "does not mount the recipient in %s",
     (mode) => {
       if (mode === "signed-out") state.userId = "";
       if (mode === "loading") state.loaded = false;
-      if (mode === "public-form") state.pathname = "/forms/synthetic";
+      if (mode === "public-share") state.pathname = "/share/synthetic";
       expect(
         render(mode === "unconfigured" ? "" : "synthetic-key"),
       ).not.toContain("Recipient in");

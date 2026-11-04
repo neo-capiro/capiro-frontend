@@ -35,7 +35,6 @@ import { MemoryCorrectionComposer } from "../../src/features/meri/memory-review/
 import "../../src/shared/portfolio/styles.css";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
 import { StrictMode } from "react";
-import { PublicForm } from "../../src/features/modules/planner/PublicForm";
 import { createRoot } from "react-dom/client";
 import { CapiroBoundary } from "../../src/shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../src/shared/capiro/queries";
@@ -196,15 +195,6 @@ function RoutedApp() {
           <MeriActionHost enabled={search.get("actions-disabled") !== "1"} />
         </RequireSession>
       </ProductShell>
-    );
-  if (path.startsWith("/forms/"))
-    return (
-      <>
-        <PublicForm token={path.split("/")[2] ?? ""} />
-        <aside className="test-notice" aria-label="Local test fixture">
-          Explicit local test fixture · synthetic form
-        </aside>
-      </>
     );
   if (path === "/meri/fixture/home")
     return (

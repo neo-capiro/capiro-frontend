@@ -10,7 +10,6 @@ import { z } from "zod";
 import { defineOperation } from "../src/shared/capiro/contracts";
 import {
   handleCapiroRequest,
-  handlePublicPlannerFormRequest,
   handlePublicOnboardRequest,
 } from "../src/shared/capiro/gateway";
 import { readCapiroConfig } from "../src/shared/capiro/config";
@@ -59,9 +58,7 @@ function adaptedRequest(origin: string | null = publicOrigin, hostile = false) {
     url: "/api/capiro/synthetic.create",
     headers: {
       host: hostile ? "hostile.example" : "app.capiro.ai",
-      "x-forwarded-host": hostile
-        ? "hostile.example"
-        : "app.capiro.ai",
+      "x-forwarded-host": hostile ? "hostile.example" : "app.capiro.ai",
       "x-forwarded-proto": "https",
       "x-forwarded-port": "443",
       "content-type": "application/json",
@@ -209,10 +206,9 @@ it("keeps browser Origin authoritative only by equality, never hostile Host or f
   expect(upstream).not.toHaveBeenCalled();
 });
 
-it("keeps both public capability mutation surfaces fail closed before body/dispatch", async () => {
+it("keeps public onboarding mutations fail closed before body/dispatch", async () => {
   const upstream = vi.fn();
   for (const [key, handler] of [
-    ["public-form.submit", handlePublicPlannerFormRequest],
     ["public-onboard.consent", handlePublicOnboardRequest],
   ] as const) {
     const request = adaptedRequest("https://hostile.example", true).web;
