@@ -109,6 +109,47 @@ afterEach(() => {
 });
 
 it.each([false, true])(
+  "existing conversation status stays truthful and guarded (unresolved reservation: %s)",
+  async (unresolved) => {
+    let page = await completedPage();
+    if (unresolved)
+      page = {
+        ...page,
+        pendingTurn: {
+          sourceBinding: nextBinding,
+          targetBinding: {
+            ...nextBinding,
+            runId: "a0000000-0000-4000-8000-00000000000f",
+          },
+          state: "RESERVED",
+        },
+      };
+    const view = sessionHistoryState(
+      { current: page },
+      nextBinding.runId,
+      [],
+      undefined,
+      false,
+    );
+    expect(view.savedCurrent?.runState).toBe("completed");
+    expect(view.initialBlocked).toBe(
+      "Check this conversation's latest state before sending another message.",
+    );
+    expect(view.unknownReservation).toBe(unresolved);
+    if (unresolved) {
+      expect(view.source).toBeUndefined();
+      expect(view.reservation).toBe(page.pendingTurn);
+      expect(view.nextBlocked).toBe(
+        "Your last message may still be in progress. Check again before sending.",
+      );
+    } else {
+      expect(view.source).toEqual(nextBinding);
+      expect(view.nextBlocked).toBeUndefined();
+    }
+  },
+);
+
+it.each([false, true])(
   "scope/reload automatically acknowledges the exact completed request without writes (explicit model: %s)",
   async (explicit) => {
     const storage = memory(),

@@ -154,7 +154,7 @@ export function sessionHistoryState(
     metadata ||
     history.saved?.latest ||
     localTurns.length
-      ? "This conversation already has a message in progress. Check it before sending another."
+      ? "Check this conversation's latest state before sending another message."
       : history.reading
         ? "Loading this conversation…"
         : undefined;
