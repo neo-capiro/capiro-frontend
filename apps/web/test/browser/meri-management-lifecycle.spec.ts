@@ -64,6 +64,116 @@ async function open(page: Page) {
   await expect(title(page)).toHaveCount(0);
 }
 
+async function installSearchFixture(page: Page) {
+  await setup(page);
+  const first = {
+    ...row,
+    title: "Synthetic Atlas planning",
+    status: "active",
+    archivedAt: null,
+  };
+  const second = {
+    ...first,
+    conversationId: "30000000-0000-4000-8000-000000000004",
+    title: "Synthetic Atlas follow-up",
+    updatedAt: "2026-10-24T11:00:00.000Z",
+  };
+  const unrelated = {
+    ...first,
+    conversationId: "30000000-0000-4000-8000-000000000005",
+    title: "Synthetic briefing notes",
+    updatedAt: "2026-10-24T13:00:00.000Z",
+  };
+  const cursor = {
+    updatedAt: first.updatedAt,
+    conversationId: first.conversationId,
+  };
+  const reads: { title: string; status: string; before: unknown }[] = [];
+  const otherRequests: string[] = [];
+  page.on("request", (request) => {
+    const path = new URL(request.url()).pathname;
+    if (
+      path.startsWith("/api/conversations/") &&
+      path !== "/api/conversations/summaries"
+    )
+      otherRequests.push(path);
+  });
+  await page.route("**/api/conversations/summaries", (route) => {
+    const request = route.request().postDataJSON();
+    reads.push(request);
+    const matches = [unrelated, first, second].filter((item) =>
+      item.title.toLowerCase().includes(request.title.toLowerCase()),
+    );
+    const start = request.before
+      ? matches.findIndex(
+          (item) => item.conversationId === request.before.conversationId,
+        ) + 1
+      : 0;
+    const conversations = matches.slice(start, start + 1);
+    const last = conversations[0];
+    return json(route, {
+      version: MANAGEMENT_VERSION,
+      conversations,
+      nextBefore:
+        last && start + 1 < matches.length
+          ? { updatedAt: last.updatedAt, conversationId: last.conversationId }
+          : null,
+    });
+  });
+  return { first, second, unrelated, cursor, reads, otherRequests };
+}
+
+test("saved-title search pages through eligible chats and clearing starts a fresh unfiltered list", async ({
+  page,
+}) => {
+  const { first, second, unrelated, cursor, reads, otherRequests } =
+    await installSearchFixture(page);
+  await page.goto("/meri/conversations");
+  const cell = (name: string) => page.getByRole("cell", { name, exact: true });
+  await expect(cell(unrelated.title)).toBeVisible();
+  await page
+    .getByRole("searchbox", { name: "Search", exact: true })
+    .fill("  Atlas  ");
+  await expect(cell(first.title)).toBeVisible();
+  await expect(cell(unrelated.title)).toHaveCount(0);
+  await page.getByRole("button", { name: "Load more", exact: true }).click();
+  await expect(cell(first.title)).toBeVisible();
+  await expect(cell(second.title)).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Load more", exact: true }),
+  ).toHaveCount(0);
+  expect(reads.filter((read) => read.title === "Atlas")).toEqual([
+    {
+      version: MANAGEMENT_VERSION,
+      title: "Atlas",
+      status: "active",
+      before: null,
+    },
+    {
+      version: MANAGEMENT_VERSION,
+      title: "Atlas",
+      status: "active",
+      before: cursor,
+    },
+  ]);
+  await expect(
+    page.getByRole("link", { name: second.title, exact: true }),
+  ).toHaveAttribute(
+    "href",
+    `/meri?scope=general&conversationId=${second.conversationId}`,
+  );
+  await page.getByRole("searchbox", { name: "Search", exact: true }).fill("");
+  await expect(cell(unrelated.title)).toBeVisible();
+  await expect(cell(second.title)).toHaveCount(0);
+  expect(reads.at(-1)).toEqual({
+    version: MANAGEMENT_VERSION,
+    title: "",
+    status: "active",
+    before: null,
+  });
+  expect(otherRequests).toEqual([]);
+});
+
 test("pagination keeps admitted rows with disabled actions while a receipt revalidation still hides them, preserving mounted drafts and disclosure", async ({
   page,
 }) => {

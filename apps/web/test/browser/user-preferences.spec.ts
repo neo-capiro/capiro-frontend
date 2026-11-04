@@ -305,7 +305,8 @@ test("an unavailable account can be rechecked before any preferences are exposed
   page,
 }) => {
   await identity(page);
-  let accountAvailable = false;
+  let accountAvailable = true;
+  let holdIdentity = false;
   let accountReads = 0;
   let preferenceReads = 0;
   let writes = 0;
@@ -317,9 +318,10 @@ test("an unavailable account can be rechecked before any preferences are exposed
         status: 503,
         json: { error: { message: "Synthetic identity outage" } },
       });
-    await new Promise<void>((resolve) => {
-      releaseIdentity = resolve;
-    });
+    if (holdIdentity)
+      await new Promise<void>((resolve) => {
+        releaseIdentity = resolve;
+      });
     return route.fulfill({
       json: {
         ...testIdentity,
@@ -333,7 +335,14 @@ test("an unavailable account can be rechecked before any preferences are exposed
     else writes++;
     return route.fulfill({ json: captured.read });
   });
-  await page.goto("/settings/preferences");
+  // The outer account checks have their own retry. Admit those first, then fail
+  // the fresh identity read owned by Preferences when the person navigates there.
+  await page.goto("/settings/personal");
+  await expect(
+    page.getByRole("heading", { name: "Personal", exact: true }),
+  ).toBeVisible();
+  accountAvailable = false;
+  await navigate(page, "/settings/preferences");
   await expect(
     page.getByRole("button", { name: "Check current account", exact: true }),
   ).toBeVisible();
@@ -341,6 +350,7 @@ test("an unavailable account can be rechecked before any preferences are exposed
   expect(writes).toBe(0);
   const initialReads = accountReads;
   accountAvailable = true;
+  holdIdentity = true;
   await page
     .getByRole("button", { name: "Check current account", exact: true })
     .click();
