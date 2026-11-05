@@ -645,7 +645,7 @@ Resources:
       ServiceName: capiro-portfolio-preview
       TaskDefinition: !Ref PreviewTaskDefinition
       LaunchType: FARGATE
-      DesiredCount: 1
+      DesiredCount: 2
       HealthCheckGracePeriodSeconds: 90
       DeploymentConfiguration:
         MinimumHealthyPercent: 100
