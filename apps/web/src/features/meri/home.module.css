@@ -20,6 +20,19 @@
   flex-direction: column;
   min-height: 0;
 }
+.startConversation {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+}
+.startConversation h2 {
+  margin: 0;
+}
 /* Figma 04.03 Attachment status, at composer scale: one line per file, name then size · state. */
 .attachmentList {
   list-style: none;
