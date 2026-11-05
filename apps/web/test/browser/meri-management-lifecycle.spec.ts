@@ -123,7 +123,7 @@ async function installSearchFixture(page: Page) {
   return { first, second, unrelated, cursor, reads, otherRequests };
 }
 
-test("saved-title search pages through eligible chats and clearing starts a fresh unfiltered list", async ({
+test("saved-title search filters admitted display titles across pages without delegating stored-title filtering", async ({
   page,
 }) => {
   const { first, second, unrelated, cursor, reads, otherRequests } =
@@ -131,6 +131,8 @@ test("saved-title search pages through eligible chats and clearing starts a fres
   await page.goto("/meri/conversations");
   const cell = (name: string) => page.getByRole("cell", { name, exact: true });
   await expect(cell(unrelated.title)).toBeVisible();
+  await page.getByRole("button", { name: "Load more", exact: true }).click();
+  await expect(cell(first.title)).toBeVisible();
   await page
     .getByRole("searchbox", { name: "Search", exact: true })
     .fill("  Atlas  ");
@@ -142,16 +144,25 @@ test("saved-title search pages through eligible chats and clearing starts a fres
   await expect(
     page.getByRole("button", { name: "Load more", exact: true }),
   ).toHaveCount(0);
-  expect(reads.filter((read) => read.title === "Atlas")).toEqual([
+  expect(reads).toEqual([
     {
       version: MANAGEMENT_VERSION,
-      title: "Atlas",
+      title: "",
       status: "active",
       before: null,
     },
     {
       version: MANAGEMENT_VERSION,
-      title: "Atlas",
+      title: "",
+      status: "active",
+      before: {
+        updatedAt: unrelated.updatedAt,
+        conversationId: unrelated.conversationId,
+      },
+    },
+    {
+      version: MANAGEMENT_VERSION,
+      title: "",
       status: "active",
       before: cursor,
     },
@@ -164,12 +175,12 @@ test("saved-title search pages through eligible chats and clearing starts a fres
   );
   await page.getByRole("searchbox", { name: "Search", exact: true }).fill("");
   await expect(cell(unrelated.title)).toBeVisible();
-  await expect(cell(second.title)).toHaveCount(0);
+  await expect(cell(second.title)).toBeVisible();
   expect(reads.at(-1)).toEqual({
     version: MANAGEMENT_VERSION,
     title: "",
     status: "active",
-    before: null,
+    before: cursor,
   });
   expect(otherRequests).toEqual([]);
 });
@@ -204,12 +215,13 @@ for (const width of [390, 1440])
     const second = {
       ...first,
       conversationId: "30000000-0000-4000-8000-000000000004",
-      title: "Later General conversation",
+      // Meri supplies the visible first-prompt title while Core stores a placeholder.
+      title: "can you find grants for anduril",
       scopeKind: "general" as const,
       clientId: null,
       updatedAt: "2026-10-24T11:00:00.000Z",
     };
-    const reads: { before: unknown }[] = [];
+    const reads: { title: string; before: unknown }[] = [];
     await page.route("**/api/conversations/summaries", (route) => {
       const request = route.request().postDataJSON();
       reads.push(request);
@@ -247,6 +259,9 @@ for (const width of [390, 1440])
     await page.screenshot({
       path: info.outputPath(`sparse-first-${width}.png`),
     });
+    await page
+      .getByRole("searchbox", { name: "Search", exact: true })
+      .fill("  grants for anduril  ");
     await more.click();
     await expect(
       page.getByRole("cell", { name: second.title, exact: true }),
@@ -263,6 +278,7 @@ for (const width of [390, 1440])
         },
       },
     ]);
+    expect(reads.every((read) => read.title === "")).toBe(true);
     await page.screenshot({
       path: info.outputPath(`client-result-${width}.png`),
     });

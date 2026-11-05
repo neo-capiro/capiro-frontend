@@ -140,8 +140,10 @@ export function ConversationHistoryList({
     return () => window.removeEventListener("hashchange", focusSearch);
   }, []);
   const status = STATUS_FILTER[statusKey];
+  // Core filters its stored title before Meri derives the visible first-prompt title. Keep
+  // the admitted Core pages intact (including their cursor) and filter only the displayed rows.
   const { query, scope, current, retained, shown, summaries } =
-    useManagedConversations(title, status);
+    useManagedConversations("", status);
   const roster = useClients({
     enabled: Boolean(scope),
     scope: scope
@@ -161,7 +163,12 @@ export function ConversationHistoryList({
   // Admitted rows belong to the read that returned them: a page fetch or a timed-out next page
   // keeps them, and every other failure or replacement removes them with their private state.
   const rows = historyRows(summaries, (id) => names.get(id) ?? "Client");
-  const visible = client ? rows.filter((row) => row.client === client) : rows;
+  const needle = title.trim().toLocaleLowerCase();
+  const visible = rows.filter(
+    (row) =>
+      (!client || row.client === client) &&
+      (!needle || row.title.toLocaleLowerCase().includes(needle)),
+  );
   const clientOptions = [
     GENERAL_CLIENT_FILTER,
     ...new Set(
