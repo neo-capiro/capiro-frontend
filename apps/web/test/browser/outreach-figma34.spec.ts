@@ -514,7 +514,11 @@ test("deleted canonical records remain visible without reopening actions", async
   });
   await page.goto("/modules/engagement");
   await page.getByText("More filters", { exact: true }).click();
-  await page.getByRole("checkbox", { name: "Deleted only" }).check();
+  await page.getByRole("combobox", { name: "Records", exact: true }).click();
+  await page.getByRole("option", { name: "Deleted only", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Apply filters", exact: true })
+    .click();
   await expect(page.getByText(record.title, { exact: false })).toBeVisible();
   await expect(
     page.getByRole("button", { name: /Open draft|Open record|Open campaign/ }),
@@ -635,7 +639,13 @@ test("invalid date windows hide both campaign and record rows until corrected", 
   await expect(
     page.getByRole("button", { name: `Open draft: ${record.title}` }),
   ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Apply filters", exact: true }),
+  ).toBeDisabled();
   await page.getByLabel("To", { exact: true }).fill("2026-10-25");
+  await page
+    .getByRole("button", { name: "Apply filters", exact: true })
+    .click();
   await expect(
     page.getByRole("button", { name: "Open campaign", exact: true }),
   ).toBeVisible();

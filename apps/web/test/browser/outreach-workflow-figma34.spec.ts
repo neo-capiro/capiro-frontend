@@ -1,56 +1,14 @@
 import { expect, test } from "@playwright/test";
-import { setupOutreach, recordId, clientId } from "./core109-outreach-fixtures";
-import { newCampaign } from "../../src/features/modules/engagement/outreach/campaign-model";
-import { expectAccessibleHome } from "../accessibility";
-
-const mailboxId = "80000000-0000-4000-8000-000000000008";
-const artifactId = "90000000-0000-4000-8000-000000000009";
-const recipient = {
-  id: "synthetic-staff",
-  name: "Synthetic staff contact",
-  email: "staff@example.test",
-  kind: "individual",
-  role: "to",
-};
-const generationKey = `individual:${recipient.id}`;
-const campaign = {
-  id: recordId,
-  revision: 3,
-  updatedAt: "2026-10-27T00:00:00Z",
-  status: "draft",
-  state: {
-    ...newCampaign(clientId),
-    title: "Synthetic staff briefing",
-    mainIdea: "Request a briefing about district impact.",
-    recipients: [recipient],
-    sender: { connectionId: mailboxId, signature: "" },
-    lastStep: 7,
-  },
-};
-const current = {
-  id: "90000000-0000-4000-8000-000000000010",
+import { setupOutreach, recordId } from "./core109-outreach-fixtures";
+import {
+  campaign,
+  current,
+  recipient,
+  mailboxId,
   artifactId,
-  outreachRecordId: recordId,
-  version: 1,
-  sourceVersionId: null,
   generationKey,
-  recipientKey: recipient.id,
-  audienceKind: "individual",
-  subject: "Request for a district briefing",
-  body: "Hello,\n\nI would welcome a short briefing on current district priorities. Please let me know a convenient time.\n\nThank you.",
-  contentHash: "synthetic-content-hash",
-  generationStatus: "generated",
-  auditStatus: "passed",
-  approvalStatus: "not_required",
-  auditDecision: null,
-  auditChecks: [],
-  reviewRequestId: null,
-  provider: null,
-  model: null,
-  promptSpecVersion: null,
-  sendable: true,
-  createdAt: "2026-10-27T00:00:00Z",
-};
+} from "./outreach-visual-data";
+import { expectAccessibleHome } from "../accessibility";
 
 for (const width of [1440, 390])
   test(`companion workflow and explicit send confirmation are accessible at ${width}px`, async ({
@@ -115,6 +73,7 @@ for (const width of [1440, 390])
           page.getByRole("button", { name: "Review send", exact: true }),
         ).toBeEnabled();
       if (step === 6) {
+        await page.getByText("Improve & versions", { exact: true }).click();
         await expect(
           page.getByText("Ready to send", { exact: true }),
         ).toHaveCSS("font-size", "14px");
@@ -140,6 +99,17 @@ for (const width of [1440, 390])
     await expect(
       page.getByRole("button", { name: "Send 1 message", exact: true }),
     ).toHaveCSS("font-weight", "500");
+    const confirmation = page.getByRole("dialog", { name: "Send this outreach?" });
+    const bounds = await confirmation.boundingBox();
+    expect(bounds).not.toBeNull();
+    if (!bounds) throw new Error("Send confirmation has no bounds");
+    expect(bounds.x).toBeGreaterThanOrEqual(0);
+    expect(bounds.y).toBeGreaterThanOrEqual(0);
+    expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
+    expect(bounds.y + bounds.height).toBeLessThanOrEqual(1040);
+    for (const name of ["Cancel", "Send 1 message"]) {
+      await expect(confirmation.getByRole("button", { name, exact: true })).toBeInViewport({ ratio: 1 });
+    }
     await expectAccessibleHome(page, info);
     await page.screenshot({
       path: info.outputPath(`outreach-workflow-confirmation-${width}.png`),

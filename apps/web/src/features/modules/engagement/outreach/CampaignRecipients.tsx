@@ -272,6 +272,7 @@ export function CampaignRecipients({
             <>
               <TextInput
                 aria-label="Search recipients"
+                placeholder="Search recipients…"
                 type="search"
                 value={search}
                 onChange={(event) => {
