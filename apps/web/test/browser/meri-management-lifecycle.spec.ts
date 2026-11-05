@@ -238,6 +238,9 @@ for (const width of [390, 1440])
     await expect(
       page.getByText("No matching conversations", { exact: true }),
     ).toHaveCount(0);
+    await expect(
+      page.getByRole("region", { name: "Conversation history" }),
+    ).toHaveCount(0);
     const more = page.getByRole("button", { name: "Load more", exact: true });
     await expect(more).toBeVisible();
     await page.evaluate(() => document.fonts.ready);

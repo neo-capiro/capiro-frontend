@@ -61,10 +61,13 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 
-function plan({
-  query: queryOverrides,
-  ...overrides
-}: Partial<View> & { query?: Record<string, unknown> }) {
+function plan(
+  {
+    query: queryOverrides,
+    ...overrides
+  }: Partial<View> & { query?: Record<string, unknown> },
+  initialClient?: string,
+) {
   state.view = {
     ...overrides,
     query: {
@@ -85,7 +88,9 @@ function plan({
     shown: overrides.shown ?? true,
     summaries: overrides.summaries ?? [row(1), row(2)],
   };
-  return renderToStaticMarkup(createElement(ConversationHistoryList, {}));
+  return renderToStaticMarkup(
+    createElement(ConversationHistoryList, { initialClient }),
+  );
 }
 
 const button = (html: string, label: string) =>
@@ -193,4 +198,15 @@ it("keeps the empty state when an admitted read returns nothing", () => {
   });
   expect(html).toContain("No conversations yet");
   expect(html).toContain("Start a conversation");
+});
+
+it("keeps an empty visible page continuable without rendering a blank history region", () => {
+  const html = plan(
+    { summaries: [{ ...row(1), scopeKind: "client", clientId: ID(5) }] },
+    "General",
+  );
+  expect(html).toContain("More conversations may be on a later page.");
+  expect(button(html, "Load more")).toBeDefined();
+  expect(html).not.toContain("No matching conversations");
+  expect(html).not.toContain('aria-label="Conversation history"');
 });
