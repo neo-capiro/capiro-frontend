@@ -1,9 +1,11 @@
 "use client";
+import { useRouter, useSearchParams } from "next/navigation";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { AttentionClient } from "./contracts";
 import { accessibleAlerts } from "./model";
 import { usePortfolioAttention } from "./query";
 import { AttentionItem } from "./AttentionItem";
+import { AttentionDetail } from "./AttentionDetail";
 import styles from "./attention.module.css";
 
 export function PortfolioAttention({
@@ -12,8 +14,12 @@ export function PortfolioAttention({
   clients: readonly AttentionClient[];
 }) {
   const { identity, permitted, alerts } = usePortfolioAttention(clients);
+  const params = useSearchParams();
+  const router = useRouter();
   const data = permitted && !alerts.error ? alerts.data : undefined;
   const rows = data ? accessibleAlerts(data.alerts, clients) : [];
+  const selectedId = params.get("alert");
+  const selected = rows.find((row) => row.id === selectedId);
   return (
     <aside className={styles.card} aria-label="Needs attention">
       <header className={styles.header}>
@@ -32,7 +38,7 @@ export function PortfolioAttention({
         </span>
       </header>
       <p className={styles.description}>
-        Updates automatically. Open an item in its client profile.
+        Review each alert&apos;s source record and available destinations.
       </p>
       <QueryState
         pending={identity.isPending}
@@ -54,6 +60,18 @@ export function PortfolioAttention({
       )}
       {data && (
         <>
+          {selectedId && (
+            <AttentionDetail
+              alert={selected}
+              onClose={() => {
+                const next = new URLSearchParams(params.toString());
+                next.delete("alert");
+                router.replace(`/portfolio${next.size ? `?${next}` : ""}`, {
+                  scroll: false,
+                });
+              }}
+            />
+          )}
           {rows.length ? (
             <ul className={styles.list} aria-label="Reported client alerts">
               {rows.map((alert) => (

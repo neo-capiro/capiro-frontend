@@ -1,4 +1,5 @@
 import type { AttentionClient, PortfolioAlert } from "./contracts";
+import { normalizeBillId } from "@/shared/capiro/operations/intelligence";
 
 const categoryLabels: Readonly<Record<string, string>> = {
   comment_deadline: "Comment deadline",
@@ -26,6 +27,24 @@ export function alertCategory(type: string) {
 
 export function alertClientHref(clientId: string) {
   return `/portfolio/${encodeURIComponent(clientId)}`;
+}
+
+export function alertRecordHref(alert: PortfolioAlert) {
+  return `/portfolio?alert=${encodeURIComponent(alert.id)}`;
+}
+
+export function alertSourceReference(alert: PortfolioAlert) {
+  return alert.id.slice(`${alert.clientId}:`.length);
+}
+
+export function alertSourceHref(alert: PortfolioAlert) {
+  const prefix = `${alert.clientId}:bill:`;
+  const billId = alert.id.startsWith(prefix)
+    ? normalizeBillId(alert.id.slice(prefix.length))
+    : null;
+  // Only Bill 360 has a verified identifier receiver here. Other source hrefs
+  // may point at retired routes and must not be promoted into working links.
+  return billId ? `/bills/${encodeURIComponent(billId)}` : undefined;
 }
 
 export function alertTiming(alert: PortfolioAlert) {
