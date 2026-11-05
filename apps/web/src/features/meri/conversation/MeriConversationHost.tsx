@@ -18,6 +18,7 @@ import { researchRoute } from "../../../shared/meri-conversations/research-conte
 import { ResearchConversationHost } from "./ResearchConversationHost";
 import { ConversationView } from "./ConversationView";
 import { DefaultScopeOpening } from "./DefaultScopeOpening";
+import homeStyles from "../home.module.css";
 
 export function MeriConversationHost({
   enabled,
@@ -198,10 +199,11 @@ type CoreResolution =
 const replaceGraceMs = 5_000;
 
 /**
- * A scope opened without a conversation id reopens its still-empty conversation or starts a new
- * one. Core's receipt is verified, then its id goes into the address so a reload or a shared link
- * reopens this conversation; the host mounts the session from that link. A replace that does not
- * take effect leaves this mounted, which is reported as the ordinary failure with its retry.
+ * A scope opened without a conversation id waits for an explicit Start action, then reopens
+ * its still-empty conversation or starts a new one. Core's receipt is verified, then its id
+ * goes into the address so a reload or shared link reopens this conversation; the host mounts
+ * the session from that link. A replace that does not take effect leaves this mounted,
+ * which is reported as the ordinary failure with its retry.
  */
 function CoreResolvedConversation({
   account,
@@ -214,6 +216,7 @@ function CoreResolvedConversation({
 }) {
   const api = useCapiro();
   const router = useRouter();
+  const [started, setStarted] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [resolution, setResolution] = useState<CoreResolution>({
     state: "pending",
@@ -229,6 +232,7 @@ function CoreResolvedConversation({
     return () => clearTimeout(stalled);
   }, [router, clientId, resolution]);
   useEffect(() => {
+    if (!started) return;
     const controller = new AbortController();
     void Promise.resolve()
       .then(() =>
@@ -253,8 +257,21 @@ function CoreResolvedConversation({
         if (!controller.signal.aborted) setResolution({ state: "error" });
       });
     return () => controller.abort();
-  }, [api, tenantId, actorId, clientId, attempt]);
+  }, [api, tenantId, actorId, clientId, attempt, started]);
 
+  if (!started)
+    return (
+      <section
+        className={homeStyles.startConversation}
+        aria-labelledby="start-conversation-heading"
+      >
+        <h2 id="start-conversation-heading">Start a conversation</h2>
+        <Button type="button" onClick={() => setStarted(true)}>
+          Start conversation
+        </Button>
+        {scopeControl}
+      </section>
+    );
   if (resolution.state === "error")
     return (
       <section role="alert">
