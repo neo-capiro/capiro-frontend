@@ -156,7 +156,7 @@ test("Portfolio pipeline matches the desktop overlay geometry with source-backed
   const dialog = page.getByRole("dialog", { name: "Pipeline" });
   await expect(dialog).toBeVisible();
   await expect(
-    dialog.getByText("Weighted pipeline and win rate unavailable"),
+    dialog.getByText("Weighted pipeline and win rate not calculated"),
   ).toBeVisible();
   await expect(dialog).not.toContainText("$1.1M");
   await expect(dialog.getByText("Archived · 2")).toBeVisible();
@@ -296,6 +296,9 @@ test("sparse pipeline cards explain missing details and lead to the editor", asy
     ),
   ).toBe(true);
   await hint.scrollIntoViewIfNeeded();
+  await expect(
+    dialog.getByText("Weighted pipeline and win rate not calculated"),
+  ).toBeVisible();
   const hintBox = await hint.boundingBox();
   expect(hintBox).not.toBeNull();
   expect(hintBox!.x).toBeGreaterThanOrEqual(0);

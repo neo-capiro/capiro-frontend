@@ -173,7 +173,7 @@ export function ProspectPipeline({
         eyebrow="Portfolio prospects"
         headerActions={
           <span className={styles.pipelineSummary}>
-            Weighted pipeline and win rate unavailable
+            Weighted pipeline and win rate not calculated
           </span>
         }
         className={styles.pipelineDialog}
