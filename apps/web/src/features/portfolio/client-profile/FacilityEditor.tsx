@@ -5,6 +5,7 @@ import type { ProfileActor } from "./profile-access";
 import { facilityFormBody } from "./facility-map-model";
 import { useFacilityWriter } from "./useFacilityWriter";
 import { FacilityFields } from "./FacilityFields";
+import { FacilityEvidenceFields } from "./FacilityEvidenceFields";
 import { FacilityWriteStatus } from "./FacilityWriteStatus";
 import styles from "./facilities-manager.module.css";
 
@@ -70,6 +71,7 @@ export function FacilityEditor({
       >
         <legend className="srOnly">Facility details</legend>
         <FacilityFields facility={initial} />
+        <FacilityEvidenceFields clientId={clientId} facility={initial} />
       </fieldset>
       {validation && (
         <p className="danger" role="alert">

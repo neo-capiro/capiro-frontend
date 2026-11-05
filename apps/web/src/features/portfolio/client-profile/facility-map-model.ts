@@ -1,5 +1,9 @@
 import { normalizeProfileDistrict } from "./profile-evidence-contracts";
 import type { Facility } from "./contracts";
+import {
+  facilityEvidenceBody,
+  isFacilityEvidenceField,
+} from "./facility-evidence-input";
 
 export function facilityCoordinates(
   facility: Facility,
@@ -21,6 +25,11 @@ export function facilityCoordinates(
     : null;
 }
 export function facilityDistrict(facility: Facility): string | null {
+  if (
+    facility.geographicResolution &&
+    facility.geographicResolution.status !== "resolved"
+  )
+    return null;
   const district = normalizeProfileDistrict({
     state: facility.state,
     districtCode: facility.congressionalDistrict,
@@ -37,11 +46,14 @@ export function facilityAddress(facility: Facility): string {
 export function facilityFormBody(
   raw: Record<string, FormDataEntryValue>,
   facility?: Facility,
-): Record<string, string | number | null> {
-  const body: Record<string, string | number | null> = {};
+): Record<string, unknown> {
+  const body: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(raw)) {
+    if (isFacilityEvidenceField(key)) continue;
     if (typeof value !== "string") continue;
-    const trimmed = key === "state" ? value.trim().toUpperCase() : value.trim();
+    const trimmed = ["state", "country"].includes(key)
+      ? value.trim().toUpperCase()
+      : value.trim();
     if (
       key === "employeeCount" &&
       trimmed &&
@@ -59,5 +71,21 @@ export function facilityFormBody(
     !String(raw.state ?? "").trim()
   )
     throw new Error("Pick a state before setting a district.");
-  return body;
+  const addressChanged =
+    facility &&
+    ["addressLine", "city", "state", "zip", "country"].some(
+      (field) =>
+        field in body &&
+        body[field] !== (facility[field as keyof Facility] ?? null),
+    );
+  if (addressChanged)
+    for (const field of [
+      "congressionalDistrict",
+      "stateHouseDistrict",
+      "stateSenateDistrict",
+    ] as const) {
+      if (field in body && body[field] === (facility[field] ?? null))
+        delete body[field];
+    }
+  return { ...body, ...facilityEvidenceBody(raw, facility) };
 }

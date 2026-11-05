@@ -36,8 +36,8 @@ export function TargetDrawer({
     setReadError(details.error);
     if (details.error) setSelectedEmail("");
   }
-  const save = useTargetMutation(clientId, undefined, target.memberId);
-  const remove = useTargetMutation(clientId, onClose, target.memberId);
+  const save = useTargetMutation(clientId, undefined, target.id);
+  const remove = useTargetMutation(clientId, onClose, target.id);
   const emails = [
     ...new Set(
       (currentDetails?.emails ?? []).filter(
@@ -87,6 +87,7 @@ export function TargetDrawer({
             save.mutate({
               kind: "tier",
               memberId: target.memberId,
+              targetId: target.id,
               tier: event.target.value ? Number(event.target.value) : null,
             })
           }
@@ -186,7 +187,11 @@ export function TargetDrawer({
           className="button danger"
           disabled={remove.isPending}
           onClick={() =>
-            remove.mutate({ kind: "remove", memberId: target.memberId })
+            remove.mutate({
+              kind: "remove",
+              memberId: target.memberId,
+              targetId: target.id,
+            })
           }
         >
           {remove.isPending ? "Removing…" : "Confirm removal"}

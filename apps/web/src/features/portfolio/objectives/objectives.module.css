@@ -65,6 +65,12 @@
   letter-spacing: 0.66px;
   text-transform: uppercase;
 }
+.stats dd.unavailableMetric {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: normal;
+}
 .catalogColumn {
   min-width: 0;
 }

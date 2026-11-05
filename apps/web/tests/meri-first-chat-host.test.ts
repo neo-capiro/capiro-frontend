@@ -55,7 +55,7 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
-it("with first-chat bootstrap selected, does not mount a Meri session before Core resolution", () => {
+it("with first-chat bootstrap selected, shows Start conversation on passive mount without Core POST", () => {
   const html = renderToStaticMarkup(
     createElement(MeriConversationHost, {
       enabled: true,
@@ -63,8 +63,10 @@ it("with first-chat bootstrap selected, does not mount a Meri session before Cor
       firstChatBootstrapEnabled: true,
     }),
   );
-  expect(html).toContain("Preparing conversation");
+  expect(html).toContain("Start conversation");
+  expect(html).not.toContain("Preparing conversation");
   expect(mocks.session).not.toHaveBeenCalled();
+  expect(mocks.coreRequest).not.toHaveBeenCalled();
 });
 
 it("preserves explicit conversation links without a Core create call", () => {
@@ -89,8 +91,26 @@ it("preserves explicit conversation links without a Core create call", () => {
 it.each([
   "33333333-3333-4333-8333-333333333333",
   "66666666-6666-4666-8666-666666666666",
-])("lets each verified active client reach Core resolution: %s", (clientId) => {
-  mocks.clientId = clientId;
+])(
+  "shows Start conversation on passive entry for verified active client: %s",
+  (clientId) => {
+    mocks.clientId = clientId;
+    const html = renderToStaticMarkup(
+      createElement(MeriConversationHost, {
+        enabled: true,
+        account,
+        firstChatBootstrapEnabled: true,
+      }),
+    );
+    expect(html).toContain("Start conversation");
+    expect(html).not.toContain("Preparing conversation");
+    expect(mocks.session).not.toHaveBeenCalled();
+    expect(mocks.coreRequest).not.toHaveBeenCalled();
+  },
+);
+
+it("shows Start conversation on passive General scope entry without Core POST", () => {
+  mocks.search = "scope=general";
   const html = renderToStaticMarkup(
     createElement(MeriConversationHost, {
       enabled: true,
@@ -98,8 +118,10 @@ it.each([
       firstChatBootstrapEnabled: true,
     }),
   );
-  expect(html).toContain("Preparing conversation");
+  expect(html).toContain("Start conversation");
+  expect(html).not.toContain("Preparing conversation");
   expect(mocks.session).not.toHaveBeenCalled();
+  expect(mocks.coreRequest).not.toHaveBeenCalled();
 });
 
 it.each(["unavailable", "loading"])(
@@ -228,6 +250,7 @@ it("refuses an archived client before any Core bootstrap or Meri session", () =>
       );
       expect(html).toContain("Conversations unavailable for this client");
       expect(html).not.toContain("Preparing conversation");
+      expect(html).not.toContain("Start conversation");
       expect(html).not.toContain("Meri session pending");
     }
   }
@@ -244,5 +267,6 @@ it("only the exact Core archived literal is refused", () => {
       firstChatBootstrapEnabled: true,
     }),
   );
-  expect(html).toContain("Preparing conversation");
+  expect(html).toContain("Start conversation");
+  expect(html).not.toContain("Preparing conversation");
 });

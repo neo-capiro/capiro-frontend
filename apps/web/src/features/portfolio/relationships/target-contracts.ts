@@ -43,19 +43,3 @@ export function targetProfileLink(
         : "staff";
   return `${base}/directory/${section}/${encodeURIComponent(target.memberId)}`;
 }
-export const recommendationsSchema = z.object({
-  computedAt: z.string().nullable(),
-  recommendations: z.array(
-    z.object({
-      memberId: z.string(),
-      office: z.string(),
-      party: z.string().nullable(),
-      state: z.string().nullable(),
-      chamber: z.string().nullable(),
-      committee: z.string().nullable(),
-      score: z.number().min(0).max(1),
-      tags: z.array(z.string()),
-      billCount: z.number().int().nonnegative(),
-    }),
-  ),
-});

@@ -395,7 +395,30 @@
 }
 
 @media (max-width: 680px) {
+  .clientPage table tbody th,
+  .clientPage table tbody td {
+    height: auto;
+  }
   .clientHeader {
     flex-wrap: wrap;
+  }
+  .clientActions,
+  .clientCalendarTop,
+  .clientCalendarTopRight,
+  .clientPeriodNavigation,
+  .clientAgendaToolbar,
+  .clientSourceRow {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .clientCalendarTopRight {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .clientCalendarCount {
+    white-space: normal;
+  }
+  .clientSourceRow > span {
+    text-align: left;
   }
 }

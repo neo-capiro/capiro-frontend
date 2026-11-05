@@ -1,3 +1,4 @@
+import { hasPhysicalFacilityAddress } from "./location-resolution";
 import type { QueryClient } from "@tanstack/react-query";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import type { Facility } from "./contracts";
@@ -45,6 +46,9 @@ export const facilityActionRevision = (facility: Facility) =>
     facility.geocodeAttemptCount,
     facility.geocodeCandidateRevision,
     facility.geocodeCandidates,
+    facility.geographicResolution,
+    facility.country,
+    facility.verifiedPoint,
   ]);
 
 export function assertFacilityAction(
@@ -86,14 +90,10 @@ export function assertFacilityAction(
         409,
         "The displayed address choice is unavailable or changed. Review the current candidates.",
       );
-  } else if (
-    !current.addressLine?.trim() ||
-    !current.city?.trim() ||
-    !current.state?.trim()
-  ) {
+  } else if (!current.verifiedPoint && !hasPhysicalFacilityAddress(current)) {
     throw new ApiError(
       400,
-      "Enter a street address, city and state before geocoding.",
+      "Enter a street address with ZIP or city and state, or a verified site point.",
     );
   }
 }

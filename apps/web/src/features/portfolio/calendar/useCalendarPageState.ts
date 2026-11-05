@@ -1,10 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Temporal } from "temporal-polyfill";
 import { useClients } from "@/features/portfolio/index/public";
-import { calendarRange, validDay, zones, type CalendarView } from "./range";
+import {
+  calendarRange,
+  initialCalendarView,
+  validDay,
+  zones,
+  type CalendarView,
+} from "./range";
 import { useCalendarFeeds } from "./queries";
 import { matchesMeetingFilter, type MeetingFilter } from "./lifecycle";
 import { deduplicate } from "./feeds";
@@ -14,19 +20,13 @@ import { useMeetingClock } from "./useMeetingClock";
 function readSelection(
   params: ReturnType<typeof useSearchParams>,
   clientId?: string,
+  mobile = false,
 ) {
   const zone =
     zones.find((zone) => zone === params.get("zone")) ?? "America/New_York";
   const date =
     validDay(params.get("date")) ?? Temporal.Now.plainDateISO(zone).toString();
-  const view: CalendarView =
-    params.get("view") === "week"
-      ? "week"
-      : params.get("view") === "day"
-        ? "day"
-        : params.get("view") === "agenda"
-          ? "agenda"
-          : "month";
+  const view: CalendarView = initialCalendarView(params.get("view"), mobile);
   const scope = clientId ?? params.get("clientId") ?? undefined;
   const meetingFilter: MeetingFilter =
     params.get("meetingFilter") === "needs-prep"
@@ -36,6 +36,13 @@ function readSelection(
         : "all";
   return { zone, date, view, scope, meetingFilter };
 }
+const mobileCalendarQuery = "(max-width: 680px)";
+const subscribeMobileCalendar = (notify: () => void) => {
+  const media = window.matchMedia(mobileCalendarQuery);
+  media.addEventListener("change", notify);
+  return () => media.removeEventListener("change", notify);
+};
+const isMobileCalendar = () => window.matchMedia(mobileCalendarQuery).matches;
 
 function visibleItems(
   all: CalendarItem[],
@@ -63,6 +70,11 @@ function visibleItems(
 
 export function useCalendarPageState(clientId?: string) {
   const now = useMeetingClock();
+  const mobile = useSyncExternalStore(
+    subscribeMobileCalendar,
+    isMobileCalendar,
+    () => false,
+  );
   const params = useSearchParams();
   const router = useRouter();
   const path = usePathname();
@@ -71,6 +83,7 @@ export function useCalendarPageState(clientId?: string) {
   const { zone, date, view, scope, meetingFilter } = readSelection(
     params,
     clientId,
+    mobile,
   );
   const meetingScopeAvailable =
     Boolean(clientId) ||

@@ -1,4 +1,10 @@
 import { z } from "zod";
+export const capabilityLifecycleSchema = z.enum([
+  "in_service",
+  "in_development",
+  "planned",
+  "unspecified",
+]);
 export const capabilitySchema = z.object({
   id: z.string().uuid(),
   name: z.string(),
@@ -13,6 +19,7 @@ export const capabilitySchema = z.object({
   peNumbers: z.array(z.string()),
   keywords: z.array(z.string()),
   notes: z.string().nullable(),
+  lifecycle: capabilityLifecycleSchema.optional(),
 });
 export type Capability = z.infer<typeof capabilitySchema>;
 export const capabilityInputSchema = capabilitySchema

@@ -1,18 +1,18 @@
 import "./command-recovery-platform";
 import { expect, it, vi } from "vitest";
 import { installPlatform } from "./command-recovery-platform";
-import { researchRecovery } from "../src/features/portfolio/client-profile/enrichment/research-recovery";
-import { researchOperations } from "../src/features/portfolio/client-profile/enrichment/research-operations";
+import { researchRecovery } from "../src/features/portfolio/profile-build/research-recovery";
+import { researchOperations } from "../src/features/portfolio/profile-build/research-operations";
 import {
   sendRetry,
   prepareRetry,
-} from "../src/features/portfolio/client-profile/enrichment/retry-api";
+} from "../src/features/portfolio/profile-build/retry-api";
 import {
   retryResponse,
   type RetryCommand,
-} from "../src/features/portfolio/client-profile/enrichment/retry-contracts";
+} from "../src/features/portfolio/profile-build/retry-contracts";
 import { createApiClient } from "../src/shared/portfolio/api/http";
-import { runSchema } from "../src/features/portfolio/client-profile/enrichment/contracts";
+import { runSchema } from "../src/features/portfolio/profile-build/contracts";
 installPlatform();
 const clientId = "10000000-0000-4000-8000-000000000001",
   runId = "10000000-0000-4000-8000-000000000002";
@@ -27,10 +27,12 @@ const command: RetryCommand = {
   expectedAttempt: 3,
   expectedTaskType: "public_web",
 };
-const journal = () => researchRecovery(clientId, actor, guard);
+const journal = () =>
+  researchRecovery({ kind: "client", id: clientId }, actor, guard);
 const receipt = { ...command, status: "queued" as const, reason: null };
 const run = () =>
   runSchema.parse({
+    subject: { kind: "client" as const, id: clientId },
     id: runId,
     clientId,
     status: "partial",
@@ -68,13 +70,20 @@ it("an interrupted task retry retains its original attempt and replays exactly",
   const api = createApiClient(fetcher),
     signal = new AbortController().signal;
   await expect(
-    sendRetry(api, clientId, command, guard, signal, journal().receivedRetry),
+    sendRetry(
+      api,
+      { kind: "client", id: clientId },
+      command,
+      guard,
+      signal,
+      journal().receivedRetry,
+    ),
   ).rejects.toThrow("Disconnected");
   const saved = (await journal().load())!;
   expect(saved.command).toEqual(command);
   await sendRetry(
     api,
-    clientId,
+    { kind: "client", id: clientId },
     command,
     guard,
     signal,
@@ -138,13 +147,19 @@ it("once the receipt is saved, recovery reads current progress without another r
   const fetcher = vi.fn<typeof fetch>(async (url) =>
     Response.json(
       String(url).endsWith("/review")
-        ? { clientId, runId, clientRevision: "a".repeat(64), findings: [] }
+        ? {
+            subject: { kind: "client" as const, id: clientId },
+            clientId,
+            runId,
+            clientRevision: "a".repeat(64),
+            findings: [],
+          }
         : current,
     ),
   );
   const result = await researchOperations({
     api: createApiClient(fetcher),
-    clientId,
+    subject: { kind: "client", id: clientId },
     actor,
     guard,
     signal: () => new AbortController().signal,
@@ -167,14 +182,20 @@ it("changed task preflight refuses before reserving or dispatching a retry", asy
   const fetcher = vi.fn<typeof fetch>(async (url) =>
     Response.json(
       String(url).endsWith("/review")
-        ? { clientId, runId, clientRevision: "a".repeat(64), findings: [] }
+        ? {
+            subject: { kind: "client" as const, id: clientId },
+            clientId,
+            runId,
+            clientRevision: "a".repeat(64),
+            findings: [],
+          }
         : current,
     ),
   );
   await expect(
     prepareRetry(
       createApiClient(fetcher),
-      clientId,
+      { kind: "client", id: clientId },
       { runId, task: shown.tasks![0]! },
       guard,
       new AbortController().signal,

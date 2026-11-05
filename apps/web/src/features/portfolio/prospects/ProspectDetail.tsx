@@ -14,11 +14,16 @@ import {
 } from "@/features/portfolio/index/public";
 import { useProspect, useStageCatalog } from "./queries";
 import { stageLabel } from "./contracts";
+import { ProspectProfileSections } from "./ProspectProfileSections";
 import { ProspectEditor } from "./ProspectEditor";
 import { NextStepEditor } from "./NextStepEditor";
 import { ProspectHistory } from "./ProspectHistory";
 import { ProspectLifecycle } from "./ProspectLifecycle";
-import { ProspectCompleteness } from "./ProspectCompleteness";
+import {
+  ProfileBuildPanel,
+  ProfileFacts,
+  ProfileCompleteness,
+} from "@/features/portfolio/profile-build/public";
 import { ProspectNotes } from "./ProspectNotes";
 import { ProspectWatch } from "./watch/ProspectWatch";
 import { ProspectStageProgress } from "./ProspectStageProgress";
@@ -103,7 +108,7 @@ export function ProspectDetail({
                   onClick={() => setStage(true)}
                   aria-label={`Stage: ${stageLabel(record.stage)}`}
                 >
-                  <span className="eyebrow">Stage</span>
+                  <span className="eyebrow">Stage: </span>{" "}
                   {stageLabel(record.stage)}
                   <span aria-hidden="true">⌄</span>
                 </button>
@@ -132,6 +137,9 @@ export function ProspectDetail({
               <a href="#prospect-notes">Notes</a>
               <a href="#prospect-watch">Watch</a>
             </nav>
+            <ProfileBuildPanel subject={{ kind: "prospect", id }} />
+            <ProspectProfileSections id={id} />
+            <ProfileFacts subject={{ kind: "prospect", id }} />
             <div className={styles.columns}>
               <div className="stack">
                 <section className={`card stack ${styles.companyCard}`}>
@@ -221,10 +229,9 @@ export function ProspectDetail({
                 />
               </div>
               <div className="stack">
-                <ProspectCompleteness
-                  record={record}
-                  onDetails={() => setEditing(true)}
-                  onNext={() => setNext(true)}
+                <ProfileCompleteness
+                  subject={{ kind: "prospect", id }}
+                  onEdit={() => setEditing(true)}
                 />
                 <section className="card stack" id="prospect-next-step">
                   <header className="row between">

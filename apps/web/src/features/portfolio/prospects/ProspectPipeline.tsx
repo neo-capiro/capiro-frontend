@@ -146,7 +146,7 @@ export function ProspectPipeline({
           </button>
         </div>
         <p className={styles.pipelineCardSummary}>
-          {summary || "Company details unavailable"}
+          {summary || "No company details saved — open prospect to add them"}
         </p>
         <div className={styles.pipelineCardMeta}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -173,7 +173,7 @@ export function ProspectPipeline({
         eyebrow="Portfolio prospects"
         headerActions={
           <span className={styles.pipelineSummary}>
-            Weighted pipeline and win rate unavailable
+            Weighted pipeline and win rate not calculated
           </span>
         }
         className={styles.pipelineDialog}

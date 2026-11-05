@@ -11,6 +11,7 @@ import { TargetRecommendations } from "./TargetRecommendations";
 import { PriorityTarget } from "./PriorityTarget";
 import { RelationshipTypeNavigation } from "./RelationshipTypeNavigation";
 import styles from "./targets.module.css";
+import { OfficeRelationships } from "./OfficeRelationships";
 export function GovernmentRelationships({
   clientId,
   destinations,
@@ -30,7 +31,12 @@ export function GovernmentRelationships({
   }
   const records = query.isSuccess && !query.error ? query.data : undefined;
   const selected = params.get("target");
-  const target = records?.find((row) => row.memberId === selected);
+  const candidates = records?.filter(
+    (row) => row.id === selected || row.memberId === selected,
+  );
+  const target =
+    records?.find((row) => row.id === selected) ??
+    (candidates?.length === 1 ? candidates[0] : undefined);
   function open(id: string | null) {
     if (id && (!records || query.isFetching)) return;
     const next = new URLSearchParams(params);
@@ -91,6 +97,11 @@ export function GovernmentRelationships({
       />
       {records && (
         <>
+          <OfficeRelationships
+            clientId={clientId}
+            targets={targets}
+            onOpen={open}
+          />
           <section className={styles.prioritySection}>
             <header className="row between">
               <h2>Priority targets</h2>
@@ -140,7 +151,7 @@ export function GovernmentRelationships({
       )}
       {target && (
         <TargetDrawer
-          key={target.memberId}
+          key={target.id}
           clientId={clientId}
           target={target}
           base={destinations.externalApp}
@@ -198,7 +209,7 @@ function TargetTable({
                 <td>
                   <button
                     className="button ghost"
-                    onClick={() => onOpen(row.memberId)}
+                    onClick={() => onOpen(row.id)}
                   >
                     {row.memberName ?? row.memberId}
                   </button>

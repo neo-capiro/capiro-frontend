@@ -3,15 +3,20 @@ import type { Client } from "@/features/portfolio/index/public";
 import { safeWebsite } from "@/shared/portfolio/domain/website";
 import { validDay } from "@/shared/portfolio/date/civil";
 import { businessFlags } from "./catalog";
+import {
+  manualLocationSchema,
+  manualLeaderSchema,
+  manualCapabilitySchema,
+  codeFormat,
+} from "./manual-sections";
 
 export const intakeFormSchema = z.object({
   name: z.string().trim().min(1, "Legal name is required.").max(200),
   website: z
     .string()
     .trim()
-    .min(1, "Website is required.")
-    .refine((v) => Boolean(safeWebsite(v)), "Enter a valid website."),
-  description: z.string().trim().min(1, "Company description is required."),
+    .refine((v) => !v || Boolean(safeWebsite(v)), "Enter a valid website."),
+  description: z.string().trim(),
   primaryContactEmail: z.union([z.email(), z.literal("")]),
   primaryContactPhone: z.string(),
   primaryContactName: z.string(),
@@ -40,6 +45,9 @@ export const intakeFormSchema = z.object({
   engagementStartDate: z.string(),
   internalNotes: z.string(),
   sbClassification: z.record(z.string(), z.boolean()),
+  locations: z.array(manualLocationSchema).max(100),
+  leadership: z.array(manualLeaderSchema).max(100),
+  capabilities: z.array(manualCapabilitySchema).max(100),
 });
 export type IntakeForm = z.infer<typeof intakeFormSchema>;
 export type IntakeField = keyof IntakeForm;
@@ -64,6 +72,9 @@ export const stepFields: readonly (readonly IntakeField[])[] = [
     "applicantTypes",
     "setAsideCertifications",
   ],
+  ["locations"],
+  ["leadership"],
+  ["capabilities"],
   [
     "sectors",
     "fundingPriorities",
@@ -121,6 +132,9 @@ export function clientToIntake(client?: Client): IntakeForm {
           business[key] === 1,
       ]),
     ),
+    locations: [],
+    leadership: [],
+    capabilities: [],
   };
 }
 export function validateIntake(
@@ -132,7 +146,16 @@ export function validateIntake(
   if (!result.success)
     for (const issue of result.error.issues) {
       const key = issue.path[0];
-      if (typeof key === "string" && key in values)
+      if (
+        typeof key === "string" &&
+        key in values &&
+        !(
+          initial &&
+          ["locations", "leadership", "capabilities"].includes(key) &&
+          JSON.stringify(values[key as IntakeField]) ===
+            JSON.stringify(initial[key as IntakeField])
+        )
+      )
         errors[key as IntakeField] ??= issue.message;
     }
   if (
@@ -155,6 +178,19 @@ export function validateIntake(
   for (const key of ["samExpirationDate", "engagementStartDate"] as const)
     if (values[key] && !validDay(values[key]))
       errors[key] = "Enter a valid date.";
+  for (const [key, kind] of [
+    ["naicsCodes", "naics"],
+    ["pscCodes", "psc"],
+    ["issueCodes", "lda"],
+  ] as const)
+    if (
+      values[key].some(
+        (code) =>
+          !codeFormat(kind, code.trim().toUpperCase()) &&
+          !initial?.[key].includes(code),
+      )
+    )
+      errors[key] = `Review the ${kind.toUpperCase()} code format.`;
   return errors;
 }
 export interface ClientProfileInput {

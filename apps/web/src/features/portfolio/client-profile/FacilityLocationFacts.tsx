@@ -168,7 +168,11 @@ export function FacilityLocationFacts({
           </div>
           <div>
             <dt>Facility type</dt>
-            <dd>Unavailable from the saved facility record.</dd>
+            <dd>
+              {facility.siteRole ?? "Not supplied"} ·{" "}
+              {facility.siteStatus?.replaceAll("_", " ") ??
+                "Status not supplied"}
+            </dd>
           </div>
           <div>
             <dt>District source</dt>

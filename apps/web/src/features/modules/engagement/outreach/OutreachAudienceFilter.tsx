@@ -5,8 +5,9 @@ import styles from "./outreach-overview.module.css";
 export function OutreachAudienceNotice({ id }: { id?: string }) {
   return (
     <p id={id} className={styles.audienceNotice} role="status">
-      Audience filtering is awaiting the Core update. All audiences remain
-      available.
+      Client and External filters are not available here yet. Use All to see
+      outreach you can access. Ask a workspace administrator when audience
+      filtering will be available.
     </p>
   );
 }

@@ -8,6 +8,8 @@ import {
   ProfileCapacityStatus,
   useProfileCapacity,
 } from "@/features/portfolio/billing/public";
+import { safeWebsite } from "@/features/portfolio/index/public";
+import { ImportQueue } from "./ImportQueue";
 import type { ImportReceipt } from "./contracts";
 import { canReadRegistrant } from "./domain";
 import { registrantKey, useCandidates, useRegistrant } from "./queries";
@@ -48,6 +50,8 @@ function RegistrantSession({
   const permitted = ready && canAdminister(identity.data?.role);
   const anchor = useRegistrant(readable);
   const [searching, setSearching] = useState(false);
+  const [websites, setWebsites] = useState<Record<number, string>>({});
+  const [showQueue, setShowQueue] = useState(false);
   const [selection, setSelection] = useState<{
     registrantId: number | null;
     ids: number[];
@@ -66,7 +70,10 @@ function RegistrantSession({
     !candidates.error &&
     !anchor.isFetching &&
     !anchor.error &&
-    capacity.allowed;
+    capacity.allowed &&
+    selected.every(
+      (id) => !websites[id]?.trim() || Boolean(safeWebsite(websites[id])),
+    );
   const attempt = useImportAttempt({
     canSubmit,
     readable,
@@ -132,6 +139,10 @@ function RegistrantSession({
           ← Back
         </button>
       )}
+      <button className="button ghost" onClick={() => setShowQueue(!showQueue)}>
+        {showQueue ? "Back to import" : "View saved import queue"}
+      </button>
+      {showQueue && <ImportQueue />}
       <div className={styles.notice}>
         Firm-wide setup
         {anchor.data?.ldaRegistrantName
@@ -163,7 +174,16 @@ function RegistrantSession({
       {readable && anchor.isSuccess && !anchor.error && (
         <>
           {attempt.receipt ? (
-            <ImportResult receipt={attempt.receipt} />
+            <>
+              <ImportResult receipt={attempt.receipt} />
+              {attempt.receipt.job && (
+                <ImportQueue
+                  jobId={attempt.receipt.job.id}
+                  websites={websites}
+                  autoStart
+                />
+              )}
+            </>
           ) : attempt.frozen ? (
             <ImportRecovery
               frozen={attempt.frozen}
@@ -194,6 +214,10 @@ function RegistrantSession({
               {candidates.isSuccess && !candidates.error && (
                 <CandidateReview
                   data={candidates.data}
+                  websites={websites}
+                  onWebsite={(id, website) =>
+                    setWebsites((current) => ({ ...current, [id]: website }))
+                  }
                   selected={selected}
                   disabled={
                     busy ||
@@ -269,7 +293,7 @@ function RegistrantSession({
           <button
             className="button primary"
             disabled={!canSubmit || busy || !selected.length || firm.reading}
-            onClick={() => void attempt.apply(selected)}
+            onClick={() => void attempt.apply(selected, websites)}
           >
             {attempt.mutation.isPending
               ? "Importing…"

@@ -1,3 +1,4 @@
+import { finishManualIdentity } from "./profile-intake-helpers";
 import { test, expect } from "@playwright/test";
 import { client, clientId, installFixtures, json } from "./fixtures";
 
@@ -51,13 +52,13 @@ async function company(dialog: import("@playwright/test").Locator) {
     .getByLabel("Legal name *", { exact: true })
     .fill("Test Intake Organization");
   await dialog
-    .getByLabel("Website *", { exact: true })
+    .getByLabel("Website (optional)", { exact: true })
     .fill("intake.example.test");
   await dialog
-    .getByLabel("Company description *", { exact: true })
+    .getByLabel("Company description", { exact: true })
     .fill("Synthetic client created only through intercepted requests.");
 }
-test("three intake steps validate, preserve input, send canonical fields and explicit intake data", async ({
+test("six intake steps validate, preserve input, send canonical fields and explicit intake data", async ({
   page,
 }) => {
   const unexpected = await installFixtures(page);
@@ -83,8 +84,10 @@ test("three intake steps validate, preserve input, send canonical fields and exp
   await dialog.getByLabel("CAGE Code", { exact: true }).fill("1ab2c");
   await dialog.getByLabel("UEI", { exact: true }).fill("abc123def456");
   await dialog.getByLabel("EIN", { exact: true }).fill("12-3456789");
-  await dialog.getByLabel("NAICS codes", { exact: true }).fill("541330");
-  await dialog.getByLabel("NAICS codes", { exact: true }).press("Enter");
+  await dialog.getByLabel("Search NAICS codes", { exact: true }).fill("541330");
+  await dialog
+    .getByRole("button", { name: /541330 Synthetic engineering services/ })
+    .click();
   await dialog.getByLabel("8A", { exact: true }).check();
   await dialog
     .getByRole("button", { name: "Organization types", exact: true })
@@ -99,7 +102,9 @@ test("three intake steps validate, preserve input, send canonical fields and exp
   await expect(dialog.getByLabel("EIN", { exact: true })).toHaveValue(
     "12-3456789",
   );
-  await dialog.getByRole("button", { name: "Next", exact: true }).click();
+  await dialog
+    .getByRole("button", { name: "6. Advocacy profile", exact: true })
+    .click();
   await dialog
     .getByRole("button", { name: "Sector tags", exact: true })
     .click();
@@ -130,6 +135,7 @@ test("three intake steps validate, preserve input, send canonical fields and exp
   await dialog
     .getByRole("button", { name: "Create profile", exact: true })
     .click();
+  await finishManualIdentity(dialog);
   await expect(dialog).not.toBeVisible();
   expect(posts).toHaveLength(1);
   expect(posts[0]).toMatchObject({
@@ -164,17 +170,16 @@ test("create failure keeps all entered fields and never shows success", async ({
   const dialog = await openCreate(page);
   await company(dialog);
   await dialog
-    .getByRole("button", { name: "3. Sector & Tracks", exact: true })
+    .getByRole("button", { name: "6. Advocacy profile", exact: true })
     .click();
   await dialog
     .getByRole("button", { name: "Create profile", exact: true })
     .click();
+  await finishManualIdentity(dialog);
   await expect(dialog.getByRole("alert")).toContainText(
     "No client slots available",
   );
-  await dialog
-    .getByRole("button", { name: "1. Company Info", exact: true })
-    .click();
+  await dialog.getByRole("button", { name: "1. Company", exact: true }).click();
   await expect(dialog.getByLabel("Legal name *", { exact: true })).toHaveValue(
     "Test Intake Organization",
   );
@@ -240,11 +245,12 @@ test("logo confirmation failure retries without duplicate profile creation or st
     buffer: Buffer.from("Synthetic image bytes; storage is intercepted"),
   });
   await dialog
-    .getByRole("button", { name: "3. Sector & Tracks", exact: true })
+    .getByRole("button", { name: "6. Advocacy profile", exact: true })
     .click();
   await dialog
     .getByRole("button", { name: "Create profile", exact: true })
     .click();
+  await finishManualIdentity(dialog);
   await expect(dialog.getByRole("status")).toContainText("profile was saved");
   await dialog.getByRole("button", { name: "Retry logo", exact: true }).click();
   await expect(dialog).not.toBeVisible();
@@ -302,7 +308,7 @@ test("client header edit merges fresh remote siblings, preserves unchanged field
     exact: true,
   });
   await dialog
-    .getByRole("button", { name: "3. Sector & Tracks", exact: true })
+    .getByRole("button", { name: "6. Advocacy profile", exact: true })
     .click();
   await dialog
     .getByLabel("Internal notes", { exact: true })
@@ -311,7 +317,8 @@ test("client header edit merges fresh remote siblings, preserves unchanged field
     .getByRole("button", { name: "Save changes", exact: true })
     .click();
   await expect(dialog).not.toBeVisible();
-  expect(reads).toBe(2);
+  // Initial detail, fresh merge input, and the shared profile read after saving.
+  expect(reads).toBe(3);
   expect(saved).toEqual({
     intakeData: {
       profileNotes: "Remote update",
@@ -356,7 +363,7 @@ test("rejected client edit remains open with entered data and unchanged profile"
     .getByLabel("Legal name *", { exact: true })
     .fill("Unsaved rename");
   await dialog
-    .getByRole("button", { name: "3. Sector & Tracks", exact: true })
+    .getByRole("button", { name: "6. Advocacy profile", exact: true })
     .click();
   await dialog
     .getByRole("button", { name: "Save changes", exact: true })
@@ -364,9 +371,7 @@ test("rejected client edit remains open with entered data and unchanged profile"
   await expect(dialog.getByRole("alert")).toContainText(
     "do not have permission",
   );
-  await dialog
-    .getByRole("button", { name: "1. Company Info", exact: true })
-    .click();
+  await dialog.getByRole("button", { name: "1. Company", exact: true }).click();
   await expect(dialog.getByLabel("Legal name *", { exact: true })).toHaveValue(
     "Unsaved rename",
   );
@@ -383,6 +388,7 @@ test("standard member cannot edit but can confirm archive; rejected receipt neve
   await page.route("**/api/backend/core/me", (route) =>
     json(route, {
       user: { id: "user-test", email: "test@example.test" },
+      tenant: { id: "tenant-test", name: "UI tests" },
       role: "standard_user",
     }),
   );
@@ -424,3 +430,85 @@ test("standard member cannot edit but can confirm archive; rejected receipt neve
   await expect(page).toHaveURL(/\/portfolio$/);
   expect(archives).toBe(2);
 });
+
+for (const status of [400, 503]) {
+  test(`manual details ${status} preserve the created client and enforce safe retry`, async ({
+    page,
+  }) => {
+    const unexpected = await installFixtures(page);
+    let creates = 0;
+    const commands: { requestId: string; fields: { description: string } }[] =
+      [];
+    await page.route("**/api/backend/core/clients", (route) => {
+      if (route.request().method() !== "POST") return json(route, [client]);
+      creates++;
+      return json(route, { ...client, ...route.request().postDataJSON() });
+    });
+    await page.route(
+      `**/api/backend/core/clients/${clientId}/profile-build/profile`,
+      (route) => {
+        if (route.request().method() !== "PUT") return route.fallback();
+        commands.push(route.request().postDataJSON());
+        if (commands.length === 1)
+          return json(
+            route,
+            {
+              message:
+                status === 400 ? "Details rejected" : "Save result unavailable",
+            },
+            status,
+          );
+        return route.fallback();
+      },
+    );
+    const dialog = await openCreate(page);
+    await company(dialog);
+    await dialog
+      .getByRole("button", { name: "6. Advocacy profile", exact: true })
+      .click();
+    await dialog
+      .getByRole("button", { name: "Create profile", exact: true })
+      .click();
+    await finishManualIdentity(dialog);
+    await expect(
+      dialog.getByRole("button", {
+        name: "Retry profile details",
+        exact: true,
+      }),
+    ).toBeEnabled();
+    if (status === 400) {
+      await dialog
+        .getByRole("button", { name: "Edit rejected details", exact: true })
+        .click();
+      await dialog
+        .getByLabel("Company description", { exact: true })
+        .fill("Corrected approved description");
+      await dialog
+        .getByRole("button", { name: "Save profile", exact: true })
+        .click();
+    } else {
+      await expect(
+        dialog.getByRole("button", {
+          name: "Edit rejected details",
+          exact: true,
+        }),
+      ).toHaveCount(0);
+      await expect(
+        dialog.getByRole("button", { name: "1. Company", exact: true }),
+      ).toBeDisabled();
+      await dialog
+        .getByRole("button", { name: "Retry profile details", exact: true })
+        .click();
+    }
+    await expect(dialog).not.toBeVisible();
+    expect(creates).toBe(1);
+    expect(commands).toHaveLength(2);
+    if (status === 400) {
+      expect(commands[1]!.requestId).not.toBe(commands[0]!.requestId);
+      expect(commands[1]!.fields.description).toBe(
+        "Corrected approved description",
+      );
+    } else expect(commands[1]).toEqual(commands[0]);
+    expect(unexpected).toEqual([]);
+  });
+}

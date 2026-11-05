@@ -170,7 +170,7 @@ export function OutreachList({
     : [];
   const canonicalLoading = records.loading || campaigns.loading;
   const canonicalError = selection.blocked
-    ? "Audience filtering requires the current Core update. Select All audiences."
+    ? "Audience filtering is not available here yet. Select All audiences, or ask a workspace administrator about availability."
     : invalid
       ? "The end date must be on or after the start date."
       : mismatch || campaignMismatch
@@ -380,10 +380,10 @@ export function OutreachList({
             >
               <h2>Campaign sessions are not available</h2>
               <p className={styles.hint}>
-                This workspace is not configured for campaign sessions, so no
-                session-only campaigns are shown here. Saved outreach records
-                and canonical campaigns are filtered at their source; counts and
-                results below exclude session-only campaigns.
+                Saved outreach records and canonical campaigns are shown, but
+                session-only campaigns are not. Counts and results below exclude
+                those campaigns. Ask a workspace administrator about
+                campaign-session availability.
               </p>
             </div>
           )}

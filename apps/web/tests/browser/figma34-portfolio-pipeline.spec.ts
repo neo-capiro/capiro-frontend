@@ -156,7 +156,7 @@ test("Portfolio pipeline matches the desktop overlay geometry with source-backed
   const dialog = page.getByRole("dialog", { name: "Pipeline" });
   await expect(dialog).toBeVisible();
   await expect(
-    dialog.getByText("Weighted pipeline and win rate unavailable"),
+    dialog.getByText("Weighted pipeline and win rate not calculated"),
   ).toBeVisible();
   await expect(dialog).not.toContainText("$1.1M");
   await expect(dialog.getByText("Archived · 2")).toBeVisible();
@@ -217,4 +217,102 @@ test("Portfolio pipeline matches the desktop overlay geometry with source-backed
     page.getByRole("dialog", { name: "Add prospect" }),
   ).toBeVisible();
   expect(unexpected).toEqual([]);
+});
+
+test("sparse pipeline cards explain missing details and lead to the editor", async ({
+  page,
+}, testInfo) => {
+  const unexpected = await installFixtures(page);
+  const pageErrors: string[] = [];
+  const consoleErrors: string[] = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") consoleErrors.push(message.text());
+  });
+  const sparse = {
+    ...prospect,
+    description: null,
+    serviceHypothesis: null,
+    geography: null,
+    nextAction: null,
+  };
+  await page.route("**/business-development/prospects**", (route) => {
+    const path = new URL(route.request().url()).pathname;
+    if (path.endsWith("/prospects"))
+      return json(route, {
+        prospects: [sparse],
+        counts: {
+          visible: 1,
+          total: 1,
+          active: 1,
+          dismissed: 0,
+          byStage: { proposal: 1 },
+        },
+      });
+    if (path.endsWith(`/prospects/${prospect.id}`)) return json(route, sparse);
+    return route.fallback();
+  });
+  await page.route(
+    `**/business-development/prospects/${prospect.id}/watch`,
+    (route) =>
+      json(route, { watch: null, sources: [], lastCompletedCheckAt: null }),
+  );
+  await page.route(
+    `**/business-development/prospects/${prospect.id}/alerts*`,
+    (route) => json(route, { items: [], nextCursor: null, unreadCount: 0 }),
+  );
+  await page.route(
+    `**/business-development/prospects/${prospect.id}/contacts`,
+    (route) =>
+      json(route, {
+        prospectId: prospect.id,
+        readOnly: false,
+        contacts: [],
+        nextCursor: null,
+      }),
+  );
+  await page.route("**/business-development/prospect-stages", (route) =>
+    json(route, {
+      version: "portfolio-3.1",
+      createStage: "identified",
+      legacyMapping: "pending",
+      allowLegacyTransitions: false,
+      stages: stages.map((value) => ({
+        value,
+        label: value.replaceAll("_", " "),
+      })),
+    }),
+  );
+  await page.goto("/portfolio?type=PROSPECT&pipeline=1");
+  const dialog = page.getByRole("dialog", { name: "Pipeline" });
+  const hint = dialog.getByText(
+    "No company details saved — open prospect to add them",
+  );
+  await expect(hint).toBeVisible();
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await hint.scrollIntoViewIfNeeded();
+  await expect(
+    dialog.getByText("Weighted pipeline and win rate not calculated"),
+  ).toBeVisible();
+  const hintBox = await hint.boundingBox();
+  expect(hintBox).not.toBeNull();
+  expect(hintBox!.x).toBeGreaterThanOrEqual(0);
+  expect(hintBox!.x + hintBox!.width).toBeLessThanOrEqual(390);
+  await page.evaluate(() => document.fonts.ready);
+  await page.screenshot({
+    path: testInfo.outputPath("sparse-pipeline-mobile.png"),
+  });
+  await dialog.getByRole("link", { name: "Test Prospect" }).click();
+  await page.getByRole("button", { name: "Edit details" }).click();
+  await expect(
+    page.getByRole("dialog", { name: "Edit company details" }),
+  ).toBeVisible();
+  expect(unexpected).toEqual([]);
+  expect(pageErrors).toEqual([]);
+  expect(consoleErrors).toEqual([]);
 });

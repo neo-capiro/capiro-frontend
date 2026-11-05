@@ -1,12 +1,12 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
-import { RunLedger } from "../src/features/portfolio/client-profile/enrichment/RunLedger";
-import { FindingReview } from "../src/features/portfolio/client-profile/enrichment/FindingReview";
+import { RunLedger } from "../src/features/portfolio/profile-build/RunLedger";
+import { FindingReview } from "../src/features/portfolio/profile-build/FindingReview";
 import {
   runSchema,
   type Finding,
-} from "../src/features/portfolio/client-profile/enrichment/contracts";
+} from "../src/features/portfolio/profile-build/contracts";
 
 const clientId = "10000000-0000-4000-8000-000000000001";
 const runId = "10000000-0000-4000-8000-000000000002";
@@ -14,6 +14,7 @@ const diagnostic =
   "Invalid prisma.$executeRawUnsafe() invocation: PostgreSQL 22001 character varying(160); synthetic-private-detail";
 const savedRun = () =>
   runSchema.parse({
+    subject: { kind: "client" as const, id: clientId },
     id: runId,
     clientId,
     status: "partial",
@@ -85,7 +86,7 @@ const finding = (): Finding => ({
 const review = (value = finding()) =>
   renderToStaticMarkup(
     createElement(FindingReview, {
-      clientId,
+      subject: { kind: "client", id: clientId },
       finding: value,
       checked: false,
       onSelect: vi.fn(),
@@ -116,9 +117,7 @@ describe("saved enrichment outcome presentation", () => {
     expect(html).toContain("failed");
     expect(html).toContain("partial");
     expect(html).toContain('dateTime="2026-09-03T17:31:41Z"');
-    expect(html).toMatch(
-      /<button[^>]*disabled=""[^>]*>Retry task<\/button>/,
-    );
+    expect(html).toMatch(/<button[^>]*disabled=""[^>]*>Retry task<\/button>/);
     expect(html).toContain("Contact support");
     expect(run).toEqual(before);
   });

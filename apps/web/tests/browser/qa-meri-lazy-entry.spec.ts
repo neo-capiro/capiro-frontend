@@ -1,0 +1,175 @@
+import { expect, test, type Page } from "@playwright/test";
+import { clientId, installFixtures, json } from "./fixtures";
+
+const account = {
+  tenantId: "11111111-1111-4111-8111-111111111111",
+  actorId: "22222222-2222-4222-8222-222222222222",
+};
+const conversationId = "88888888-8888-4888-8888-888888888888";
+
+async function setup(
+  page: Page,
+  firstBootstrapFails = false,
+  beforeReply?: (attempt: number) => Promise<void>,
+) {
+  const unexpected = await installFixtures(page);
+  const bootstraps: unknown[] = [];
+  const pageErrors: string[] = [];
+  const consoleErrors: string[] = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") consoleErrors.push(message.text());
+  });
+  await page.route("**/api/capiro/**", (route) =>
+    json(route, { error: { code: "NOT_CONFIGURED" } }, 503),
+  );
+  await page.route("**/api/conversations/**", (route) =>
+    json(route, { error: { code: "NOT_CONFIGURED" } }, 503),
+  );
+  await page.route(
+    "**/api/capiro/meri.conversation.bootstrap.v2",
+    async (route) => {
+      const body = route.request().postDataJSON().body;
+      bootstraps.push(body);
+      await beforeReply?.(bootstraps.length);
+      if (firstBootstrapFails && bootstraps.length === 1)
+        return json(route, { error: { code: "CORE_UNAVAILABLE" } }, 503);
+      return json(route, {
+        ...body,
+        tenantId: account.tenantId,
+        actorId: account.actorId,
+        conversationId,
+      });
+    },
+  );
+  await page.route(
+    "**/api/capiro/meri.conversation.bootstrap",
+    async (route) => {
+      const body = route.request().postDataJSON().body;
+      bootstraps.push(body);
+      await beforeReply?.(bootstraps.length);
+      if (firstBootstrapFails && bootstraps.length === 1)
+        return json(route, { error: { code: "CORE_UNAVAILABLE" } }, 503);
+      return json(route, {
+        ...body,
+        tenantId: account.tenantId,
+        actorId: account.actorId,
+        conversationId,
+      });
+    },
+  );
+  return { bootstraps, unexpected, pageErrors, consoleErrors };
+}
+
+test("General Meri entry stays read-only until explicit Start", async ({
+  page,
+}, testInfo) => {
+  const { bootstraps, unexpected, pageErrors, consoleErrors } =
+    await setup(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/meri-lazy-entry.html?scope=general");
+  const start = page.getByRole("button", { name: "Start conversation" });
+  await expect(start).toBeVisible();
+  const panel = page.getByRole("region", { name: "Start a conversation" });
+  const panelBox = await panel.boundingBox();
+  expect(panelBox).not.toBeNull();
+  expect(panelBox!.y + panelBox!.height / 2).toBeGreaterThan(260);
+  const buttonBox = await start.boundingBox();
+  expect(buttonBox).not.toBeNull();
+  expect(Math.abs(buttonBox!.x + buttonBox!.width / 2 - 195)).toBeLessThan(50);
+  // Cover the full five-second post-replace grace interval without an explicit Start.
+  await page.waitForTimeout(6_000);
+  await expect(start).toBeVisible();
+  await expect(page).not.toHaveURL(/conversationId=/);
+  expect(bootstraps).toHaveLength(0);
+  expect(unexpected).toEqual([]);
+  expect(pageErrors).toEqual([]);
+  expect(consoleErrors).toEqual([]);
+  await page.evaluate(() => document.fonts.ready);
+  await page.screenshot({
+    path: testInfo.outputPath("mobile-general-before-start.png"),
+  });
+  await start.click();
+  await expect.poll(() => bootstraps.length).toBe(1);
+  await expect(page).toHaveURL(new RegExp(`conversationId=${conversationId}`));
+  expect(bootstraps).toHaveLength(1);
+});
+
+test("client Meri entry does not bootstrap on route load", async ({
+  page,
+}, testInfo) => {
+  const { bootstraps, unexpected, pageErrors, consoleErrors } =
+    await setup(page);
+  await page.setViewportSize({ width: 1440, height: 1040 });
+  await page.goto(`/meri-lazy-entry.html?clientId=${clientId}`);
+  await expect(
+    page.getByRole("button", { name: "Start conversation" }),
+  ).toBeVisible();
+  await page.waitForTimeout(400);
+  expect(bootstraps).toHaveLength(0);
+  expect(unexpected).toEqual([]);
+  expect(pageErrors).toEqual([]);
+  expect(consoleErrors).toEqual([]);
+  await page.screenshot({
+    path: testInfo.outputPath("desktop-client-before-start.png"),
+  });
+  await page.getByRole("button", { name: "Start conversation" }).click();
+  await expect.poll(() => bootstraps.length).toBe(1);
+  expect(bootstraps[0]).toMatchObject({ clientId });
+  await expect(page).toHaveURL(new RegExp(`conversationId=${conversationId}`));
+});
+
+test("a failed explicit Start can retry the same Core intent", async ({
+  page,
+}, testInfo) => {
+  const { bootstraps } = await setup(page, true);
+  await page.goto("/meri-lazy-entry.html?scope=general");
+  await page.getByRole("button", { name: "Start conversation" }).click();
+  const errorPanel = page.getByRole("alert");
+  await expect(errorPanel).toContainText("Conversation connection unavailable");
+  const errorBox = await errorPanel.boundingBox();
+  expect(errorBox).not.toBeNull();
+  expect(errorBox!.y + errorBox!.height / 2).toBeGreaterThan(250);
+  expect(bootstraps).toHaveLength(1);
+  await page.screenshot({
+    path: testInfo.outputPath("general-start-error.png"),
+  });
+  await page.getByRole("button", { name: "Retry conversation" }).click();
+  await expect.poll(() => bootstraps.length).toBe(2);
+  expect(bootstraps[1]).toEqual(bootstraps[0]);
+  await expect(page).toHaveURL(new RegExp(`conversationId=${conversationId}`));
+});
+
+test("actor replacement during Start does not bootstrap the new actor passively", async ({
+  page,
+}) => {
+  let releaseFirst!: () => void;
+  const firstReply = new Promise<void>((resolve) => {
+    releaseFirst = resolve;
+  });
+  const { bootstraps } = await setup(page, false, (attempt) =>
+    attempt === 1 ? firstReply : Promise.resolve(),
+  );
+  await page.goto("/meri-lazy-entry.html?scope=general");
+  const start = page.getByRole("button", { name: "Start conversation" });
+  try {
+    await start.click();
+    await expect.poll(() => bootstraps.length).toBe(1);
+    await page.evaluate(() =>
+      window.dispatchEvent(new Event("qa:switch-actor")),
+    );
+    await expect(start).toBeVisible();
+    expect(bootstraps).toHaveLength(1);
+  } finally {
+    releaseFirst();
+  }
+  await page.waitForTimeout(150);
+  await expect(start).toBeVisible();
+  await expect(page).not.toHaveURL(/conversationId=/);
+  expect(bootstraps).toHaveLength(1);
+  await start.click();
+  await expect.poll(() => bootstraps.length).toBe(2);
+  expect((bootstraps[1] as { requestId: string }).requestId).not.toBe(
+    (bootstraps[0] as { requestId: string }).requestId,
+  );
+});

@@ -67,15 +67,18 @@ export function RecordedActivity({
   version?: 1;
 }) {
   const { data, pending } = useRecordedActivity(clientId, version);
-  const message = pending
-    ? "Loading recorded activity…"
-    : !data
-      ? "Recorded activity unavailable"
-      : data.status === "complete"
-        ? `${data.trend[0]?.toUpperCase()}${data.trend.slice(1)} · prior 7 days`
-        : data.reason === "capacity"
-          ? "Incomplete · source capacity exceeded"
-          : "Incomplete · source records changed";
+  const message =
+    version !== 1
+      ? "Recorded activity is not configured for this environment."
+      : pending
+        ? "Loading recorded activity…"
+        : !data
+          ? "Activity index unavailable; recent timeline is separate"
+          : data.status === "complete"
+            ? `${data.trend[0]?.toUpperCase()}${data.trend.slice(1)} · prior 7 days`
+            : data.reason === "capacity"
+              ? "Incomplete · source capacity exceeded"
+              : "Incomplete · source records changed";
   return (
     <section className={`card ${styles.health}`} aria-label="Recorded activity">
       <div className="row between">

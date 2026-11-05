@@ -13,7 +13,7 @@ export function CompanyStep({ values, set, errors }: StepProps) {
           error={errors.name}
         />
         <TextField
-          label="Website *"
+          label="Website (optional)"
           value={values.website}
           onChange={(e) => set("website", e.target.value)}
           error={errors.website}
@@ -21,14 +21,14 @@ export function CompanyStep({ values, set, errors }: StepProps) {
         />
       </div>
       <TextField
-        label="Company description *"
+        label="Company description"
         multiline
         value={values.description}
         onChange={(e) => set("description", e.target.value)}
         error={errors.description}
       />
       <small className="muted">
-        Required · Maximum 600 characters · {values.description.length}/600
+        Optional · Maximum 600 characters · {values.description.length}/600
       </small>
       <div className={styles.columns}>
         <TextField

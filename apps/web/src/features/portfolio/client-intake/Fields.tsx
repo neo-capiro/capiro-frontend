@@ -1,8 +1,18 @@
 import { useId, type ChangeEvent, type InputHTMLAttributes } from "react";
+import type {
+  CodeSuggestion,
+  RegistrationCodeField,
+  ProfileSubject,
+} from "@/features/portfolio/profile-build/public";
 import type { IntakeForm, IntakeField } from "./form";
 import { Popover } from "radix-ui";
 import styles from "./intake.module.css";
 export interface StepProps {
+  suggestionSubject?: ProfileSubject;
+  onAcceptCode?: (
+    field: RegistrationCodeField,
+    suggestion: CodeSuggestion,
+  ) => void;
   values: IntakeForm;
   set: <K extends IntakeField>(key: K, value: IntakeForm[K]) => void;
   errors: Partial<Record<IntakeField, string>>;
