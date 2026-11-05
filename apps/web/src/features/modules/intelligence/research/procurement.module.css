@@ -1,3 +1,33 @@
+.readPanel {
+  min-width: 0;
+}
+.accountObservation {
+  min-width: 0;
+  border: 1px solid var(--border, #e7e5e4);
+  border-radius: 8px;
+}
+.accountObservation > summary {
+  padding: 14px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.accountTable {
+  min-width: 0;
+}
+.accountTable table {
+  min-width: 1100px;
+}
+.accountScrollHint {
+  display: none;
+  font-size: 12px;
+}
+@media (max-width: 650px) {
+  .accountScrollHint {
+    display: block;
+    padding-bottom: 8px;
+  }
+}
 .selection,
 .content {
   padding: 18px 20px;
@@ -50,6 +80,7 @@
 .evidence {
   display: grid;
   gap: 8px;
+  overflow-wrap: anywhere;
 }
 .evidence details {
   padding: 10px 0;
@@ -77,30 +108,23 @@
   font-weight: 400;
   margin-top: 4px;
 }
-.divider {
-  border: none;
-  border-top: 1px solid var(--border, #e7e5e4);
-  margin: 0;
+.content table {
+  /* Keep financial columns readable; DataTable owns the accessible horizontal scroll region. */
+  min-width: 960px;
 }
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
+.actionAmount {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
-.modalContent {
-  background: var(--surface, #fff);
-  border-radius: 8px;
-  padding: 24px;
-  max-width: 480px;
-  width: 100%;
-  display: grid;
-  gap: 12px;
+.exportDialog {
+  /* Module Modal already centers with transform; neutralize the UI primitive's second translation. */
+  translate: none;
 }
 @media (max-width: 650px) {
+  .readPanel > section > header {
+    flex-direction: column;
+    align-items: stretch;
+  }
   .measures {
     grid-template-columns: 1fr;
   }

@@ -1,5 +1,5 @@
 import type {
-  ProcurementMoneyFlow,
+  ProcurementMoneyFlowResult,
   ProcurementScopeRequest,
 } from "@capiro/shared";
 import { procurementScope } from "../../../../shared/capiro/operations/procurement-money-flow";
@@ -61,7 +61,10 @@ export function procurementHref(
 
 export function sameProcurementScope(
   expected: ProcurementScopeRequest,
-  actual: Pick<ProcurementMoneyFlow, "scope" | "knownAt" | "sourceThrough">,
+  actual: Pick<
+    ProcurementMoneyFlowResult,
+    "scope" | "knownAt" | "sourceThrough"
+  >,
 ) {
   const left = [...expected.awardIdentityKeys].sort();
   const right = [...actual.scope.awardIdentityKeys].sort();
@@ -84,4 +87,21 @@ export function procurementUsd(value: string | null) {
 export function selectableAward(identityKey: string) {
   return procurementScope.safeParse({ awardIdentityKeys: [identityKey] })
     .success;
+}
+
+/** Existing local evidence export; it does not save or mutate a client record. */
+export function downloadProcurementEvidence(
+  filename: string,
+  payload: unknown,
+) {
+  const url = URL.createObjectURL(
+    new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }),
+  );
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
 }

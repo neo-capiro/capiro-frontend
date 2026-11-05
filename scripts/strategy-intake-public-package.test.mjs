@@ -10,11 +10,16 @@ const root = fileURLToPath(new URL('../', import.meta.url)), require = createReq
 const json = name => JSON.parse(readFileSync(path.join(root, name), 'utf8'));
 function inputs() {
   const manifest = json('vendor/strategy-intake-public-package.json');
+  const successor = json('vendor/procurement-public-packages.json').artifacts[0];
   return { manifest, baseBytes: readFileSync(path.join(root, 'vendor', manifest.base.file)),
     archiveBytes: readFileSync(path.join(root, 'vendor', manifest.artifact.file)),
-    web: json('apps/web/package.json'), lock: json('package-lock.json'), ts: require('typescript') };
+    web: json('apps/web/package.json'), lock: json('package-lock.json'), ts: require('typescript'),
+    predecessorBytes: readFileSync(path.join(root, 'vendor', 'capiro-shared-0.0.2-defproc-release1.0-07582f2e4c97-f0e81ef0861d.tgz')),
+    successor, successorBytes: readFileSync(path.join(root, 'vendor', successor.file)) };
 }
 test('active packed package preserves predecessor and resolves every web entry exactly', () => {
+  const direct = verifyStrategyIntakePackage(inputs());
+  assert.equal(direct.activeArtifact, inputs().successor.file);
   assert.equal(checkStrategyIntakePackage().preservedEntries, 291);
 });
 test('web manifest, workspace and nested resolved/integrity bindings fail closed', () => {
@@ -51,5 +56,13 @@ test('packed public declarations resolve through exports in NodeNext and Bundler
     host.fileExists = file => path.resolve(file) === probe || exists(file);
     const diagnostics = ts.getPreEmitDiagnostics(ts.createProgram([probe], options, host));
     assert.deepEqual(diagnostics.map(d => ts.flattenDiagnosticMessageText(d.messageText, '\n')), []);
+  }
+});
+
+test('type-only successor refuses wrong producer, archive or base bindings', () => {
+  for (const field of ['sourceCommit', 'baseSha256', 'sha256', 'integrity', 'version']) {
+    const value = inputs();
+    value.successor[field] = 'wrong';
+    assert.throws(() => verifyStrategyIntakePackage(value), /successor/);
   }
 });

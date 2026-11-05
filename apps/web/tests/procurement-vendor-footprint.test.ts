@@ -2,12 +2,16 @@ import { describe, expect, it } from "vitest";
 import {
   sumDecimalStrings,
   aggregateByVendor,
-  ProcurementVendorFootprint,
+  filterProcurementGroups,
+  procurementGroupTotals,
 } from "../src/features/modules/intelligence/research/ProcurementVendorFootprint";
 import { renderToString } from "react-dom/server";
 import { createElement } from "react";
 import { vi } from "vitest";
-import type { ProcurementMoneyFlow, ProcurementFlowGroup } from "@capiro/shared";
+import type {
+  ProcurementMoneyFlow,
+  ProcurementFlowGroup,
+} from "@capiro/shared";
 import { ProcurementResult } from "../src/features/modules/intelligence/research/ProcurementResult";
 import { first, second, populated } from "./fixtures/procurement-consumer";
 
@@ -114,8 +118,20 @@ describe("sumDecimalStrings exact-cent aggregation", () => {
 describe("aggregateByVendor grouping", () => {
   it("aggregates same-UEI groups across fiscal years", () => {
     const groups: ProcurementFlowGroup[] = [
-      { ...baseGroup(), fiscalYear: 2025, obligationUsd: "1.50", actions: "2", obligationKnown: "2" },
-      { ...baseGroup(), fiscalYear: 2026, obligationUsd: "0.50", actions: "1", obligationKnown: "1" },
+      {
+        ...baseGroup(),
+        fiscalYear: 2025,
+        obligationUsd: "1.50",
+        actions: "2",
+        obligationKnown: "2",
+      },
+      {
+        ...baseGroup(),
+        fiscalYear: 2026,
+        obligationUsd: "0.50",
+        actions: "1",
+        obligationKnown: "1",
+      },
     ];
     const vendors = aggregateByVendor(groups);
     expect(vendors).toHaveLength(1);
@@ -126,8 +142,24 @@ describe("aggregateByVendor grouping", () => {
 
   it("keeps different UEIs separate even if same contractor name", () => {
     const groups: ProcurementFlowGroup[] = [
-      { ...baseGroup(), vendorKey: "uei:SYNTH1234567A", recipientUei: "SYNTH1234567A", contractorName: "Same Name", actions: "1", obligationUsd: "1.00", obligationKnown: "1" },
-      { ...baseGroup(), vendorKey: "uei:OTHER1234567B", recipientUei: "OTHER1234567B", contractorName: "Same Name", actions: "1", obligationUsd: "2.00", obligationKnown: "1" },
+      {
+        ...baseGroup(),
+        vendorKey: "uei:SYNTH1234567A",
+        recipientUei: "SYNTH1234567A",
+        contractorName: "Same Name",
+        actions: "1",
+        obligationUsd: "1.00",
+        obligationKnown: "1",
+      },
+      {
+        ...baseGroup(),
+        vendorKey: "uei:OTHER1234567B",
+        recipientUei: "OTHER1234567B",
+        contractorName: "Same Name",
+        actions: "1",
+        obligationUsd: "2.00",
+        obligationKnown: "1",
+      },
     ];
     const vendors = aggregateByVendor(groups);
     expect(vendors).toHaveLength(2);
@@ -139,12 +171,27 @@ describe("aggregateByVendor grouping", () => {
 
   it("retains name variants when same UEI reported under different contractor names", () => {
     const groups: ProcurementFlowGroup[] = [
-      { ...baseGroup(), contractorName: "Vendor Name A", actions: "1", obligationUsd: "1.00", obligationKnown: "1" },
-      { ...baseGroup(), contractorName: "Vendor Name B", actions: "1", obligationUsd: "1.00", obligationKnown: "1" },
+      {
+        ...baseGroup(),
+        contractorName: "Vendor Name A",
+        actions: "1",
+        obligationUsd: "1.00",
+        obligationKnown: "1",
+      },
+      {
+        ...baseGroup(),
+        contractorName: "Vendor Name B",
+        actions: "1",
+        obligationUsd: "1.00",
+        obligationKnown: "1",
+      },
     ];
     const vendors = aggregateByVendor(groups);
     expect(vendors).toHaveLength(1);
-    expect(vendors[0]!.nameVariants).toEqual(["Vendor Name A", "Vendor Name B"]);
+    expect(vendors[0]!.nameVariants).toEqual([
+      "Vendor Name A",
+      "Vendor Name B",
+    ]);
   });
 
   it("keeps unresolved distinct awards as separate vendor entries", () => {
@@ -230,7 +277,9 @@ describe("vendor footprint view and filtering", () => {
 
   it("source clocks display in observation order without conversion", () => {
     const data = populated();
-    expect(data.groups[0]?.latestSourceRevision).toBe("2026-10-30T00:00:00.000001Z");
+    expect(data.groups[0]?.latestSourceRevision).toBe(
+      "2026-10-30T00:00:00.000001Z",
+    );
     const html = render(data);
     expect(html).toContain("2026-10-30T00:00:00.000001Z");
     expect(html).toContain("2026-10-31T00:00:00.000002Z");
@@ -248,7 +297,13 @@ describe("vendor footprint view and filtering", () => {
 describe("vendor footprint filter behavior", () => {
   it("FY2025 filter excludes FY2026 groups from totals computation", () => {
     const fy2025Groups: ProcurementFlowGroup[] = [
-      { ...baseGroup(), fiscalYear: 2025, obligationUsd: "100.00", actions: "1", obligationKnown: "1" },
+      {
+        ...baseGroup(),
+        fiscalYear: 2025,
+        obligationUsd: "100.00",
+        actions: "1",
+        obligationKnown: "1",
+      },
     ];
     const vendors = aggregateByVendor(fy2025Groups);
     expect(vendors[0]!.obligationUsd).toBe("100.00");
@@ -257,11 +312,33 @@ describe("vendor footprint filter behavior", () => {
 
   it("FY2025-2026 combined filter includes both fiscal years but excludes undated", () => {
     const groups: ProcurementFlowGroup[] = [
-      { ...baseGroup(), fiscalYear: 2025, obligationUsd: "100.00", actions: "1", obligationKnown: "1" },
-      { ...baseGroup(), fiscalYear: 2026, obligationUsd: "200.00", actions: "1", obligationKnown: "1" },
-      { ...baseGroup(), vendorKey: "uei:OTHER1234567C", recipientUei: "OTHER1234567C", fiscalYear: null, obligationUsd: "50.00", actions: "1", obligationKnown: "1" },
+      {
+        ...baseGroup(),
+        fiscalYear: 2025,
+        obligationUsd: "100.00",
+        actions: "1",
+        obligationKnown: "1",
+      },
+      {
+        ...baseGroup(),
+        fiscalYear: 2026,
+        obligationUsd: "200.00",
+        actions: "1",
+        obligationKnown: "1",
+      },
+      {
+        ...baseGroup(),
+        vendorKey: "uei:OTHER1234567C",
+        recipientUei: "OTHER1234567C",
+        fiscalYear: null,
+        obligationUsd: "50.00",
+        actions: "1",
+        obligationKnown: "1",
+      },
     ];
-    const combined = groups.filter((g) => g.fiscalYear === 2025 || g.fiscalYear === 2026);
+    const combined = groups.filter(
+      (g) => g.fiscalYear === 2025 || g.fiscalYear === 2026,
+    );
     const vendors = aggregateByVendor(combined);
     expect(vendors).toHaveLength(1);
     expect(vendors[0]!.obligationUsd).toBe("300.00");
@@ -284,22 +361,27 @@ describe("vendor footprint filter behavior", () => {
 
 describe("filtered totals vs pagination", () => {
   it("filtered total reflects ALL matching vendors not just first page of 20", () => {
-    const groups: ProcurementFlowGroup[] = Array.from({ length: 25 }, (_, i) => ({
-      ...baseGroup(),
-      vendorKey: `uei:SYNTH${String(i).padStart(11, "0")}A`,
-      recipientUei: `SYNTH${String(i).padStart(11, "0")}A`,
-      fiscalYear: 2025,
-      obligationUsd: "10.00",
-      actions: "1",
-      obligationKnown: "1",
-      latestSourceRevision: "2026-10-30T00:00:00.000001Z",
-      latestSourceObservedAt: "2026-10-31T00:00:00.000002Z",
-      latestRecordedAt: "2026-10-31T00:01:00.000003Z",
-      latestAttributeRecordedAt: "2026-10-31T00:00:00.000000Z",
-    }));
+    const groups: ProcurementFlowGroup[] = Array.from(
+      { length: 25 },
+      (_, i) => ({
+        ...baseGroup(),
+        vendorKey: `uei:SYNTH${String(i).padStart(11, "0")}A`,
+        recipientUei: `SYNTH${String(i).padStart(11, "0")}A`,
+        fiscalYear: 2025,
+        obligationUsd: "10.00",
+        actions: "1",
+        obligationKnown: "1",
+        latestSourceRevision: "2026-10-30T00:00:00.000001Z",
+        latestSourceObservedAt: "2026-10-31T00:00:00.000002Z",
+        latestRecordedAt: "2026-10-31T00:01:00.000003Z",
+        latestAttributeRecordedAt: "2026-10-31T00:00:00.000000Z",
+      }),
+    );
     const vendors = aggregateByVendor(groups);
     expect(vendors).toHaveLength(25);
-    const totalObligation = sumDecimalStrings(vendors.map((v) => v.obligationUsd));
+    const totalObligation = sumDecimalStrings(
+      vendors.map((v) => v.obligationUsd),
+    );
     expect(totalObligation).toBe("250.00");
   });
 });
@@ -319,34 +401,39 @@ describe("export action for evidence finding", () => {
     expect(html).toContain("Download evidence finding");
   });
 
-  it("source coverage disclosures include AWARD A/B/C/D and 90-day delay in vendor footprint view", () => {
-    const data = populated();
-    // The disclosures are in ProcurementVendorFootprint rendered in footprint view.
-    const fpHtml = renderToString(createElement(ProcurementVendorFootprint, {
-      groups: data.groups,
-      totalActions: data.totals?.actions ?? "0",
-      totalObligationUsd: data.totals?.obligationUsd ?? null,
-      totalOutlayUsd: null,
-      obligationKnown: data.totals?.obligationKnown ?? "0",
-      outlayKnown: "0",
-      sourceThrough: data.sourceThrough,
-    }));
-    expect(fpHtml).toContain("AWARD A/B/C/D");
-    expect(fpHtml).toContain("90-day");
+  it("source disclosures apply to both views, not only the footprint", () => {
+    const html = render(populated());
+    expect(html).toContain("AWARD A/B/C/D");
+    expect(html).toContain("90-day");
+    expect(html).toContain("open.gsa.gov/api/contract-awards");
   });
 
-  it("source coverage references GSA open.gsa.gov documentation in vendor footprint view", () => {
-    const data = populated();
-    const fpHtml2 = renderToString(createElement(ProcurementVendorFootprint, {
-      groups: data.groups,
-      totalActions: data.totals?.actions ?? "0",
-      totalObligationUsd: data.totals?.obligationUsd ?? null,
-      totalOutlayUsd: null,
-      obligationKnown: data.totals?.obligationKnown ?? "0",
-      outlayKnown: "0",
-      sourceThrough: data.sourceThrough,
-    }));
-    expect(fpHtml2).toContain("open.gsa.gov/api/contract-awards");
+  it("vendor filtering selects one source identity with all its name variants", () => {
+    const groups = [
+      { ...baseGroup(), contractorName: "First label", obligationUsd: "2.00" },
+      {
+        ...baseGroup(),
+        contractorName: "Second label",
+        obligationUsd: "-0.50",
+      },
+      {
+        ...baseGroup(),
+        vendorKey: `award:${second}`,
+        contractorName: "Different",
+        obligationUsd: "100.00",
+      },
+    ];
+    const subset = filterProcurementGroups(groups, {
+      fiscalYear: "2025",
+      vendor: "First label",
+    });
+    expect(subset).toHaveLength(2);
+    expect(procurementGroupTotals(subset)?.obligationUsd).toBe("1.50");
+    expect(
+      procurementGroupTotals(
+        filterProcurementGroups(groups, { fiscalYear: "2026", vendor: "" }),
+      ),
+    ).toBeNull();
   });
 
   it("no stale export: export button absent when no groups", () => {

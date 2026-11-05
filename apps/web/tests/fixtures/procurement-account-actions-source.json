@@ -1,0 +1,33 @@
+{
+  "scope": {
+    "awardIdentityKeys": [
+      "usaspending|award|CONT_AWD_N0002412C2115_9700_-NONE-_-NONE-",
+      "usaspending|award|CONT_AWD_N0002413C2305_9700_-NONE-_-NONE-",
+      "usaspending|award|CONT_AWD_N0002421C2106_9700_-NONE-_-NONE-"
+    ],
+    "includesDescendants": false
+  },
+  "state": "unavailable",
+  "groups": [],
+  "totals": null,
+  "knownAt": "2026-11-05T15:13:53.258615Z",
+  "measure": "qualified_observed_actions",
+  "sources": [
+    {
+      "system": "sam_gov",
+      "semantics": "qualified observed signed action obligations; no reported action outlays",
+      "documentationUrl": "https://open.gsa.gov/api/contract-awards/"
+    },
+    {
+      "system": "usaspending",
+      "semantics": "latest known original-source award attributes; UEI is source-reported, not parent-company consolidation",
+      "documentationUrl": "https://www.usaspending.gov/"
+    }
+  ],
+  "contract": "defproc-scoped-money-flow/v1",
+  "coverage": {},
+  "currency": "USD",
+  "provenance": [],
+  "actionDetails": [],
+  "sourceThrough": null
+}
