@@ -70,7 +70,7 @@ export function RecordedActivity({
   const message = pending
     ? "Loading recorded activity…"
     : !data
-      ? "Recorded activity unavailable"
+      ? "Activity index unavailable; recent timeline is separate"
       : data.status === "complete"
         ? `${data.trend[0]?.toUpperCase()}${data.trend.slice(1)} · prior 7 days`
         : data.reason === "capacity"

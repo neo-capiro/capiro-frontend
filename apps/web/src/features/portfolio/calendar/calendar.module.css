@@ -129,6 +129,9 @@
 }
 
 @media (max-width: 680px) {
+  .meetingTable {
+    display: block;
+  }
   .meetingTable thead {
     display: none;
   }
@@ -142,9 +145,10 @@
     padding: 12px;
     border-bottom: 1px solid var(--border);
   }
-  .meetingTable tbody th,
+  .meetingTable tbody tr th[scope="row"],
   .meetingTable td {
     min-width: 0;
+    width: 100%;
     padding: 4px 0;
     border: 0;
     overflow-wrap: anywhere;

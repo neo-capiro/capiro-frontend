@@ -270,6 +270,10 @@ describe("Outreach list campaign-session capability admission", () => {
     expect(calls.length).toBeGreaterThan(0);
     expect(calls.every((call) => call.options.enabled === false)).toBe(true);
     expect(markup).toContain("Campaign sessions are not available");
+    expect(markup).toContain(
+      "Ask a workspace administrator about campaign-session availability",
+    );
+    expect(markup).not.toContain("not configured for campaign sessions");
     expect(markup).toContain("Saved outreach record");
     expect(markup).toContain("Canonical campaign");
     // No retry control exists in this state, so no interaction can dispatch the request.

@@ -395,6 +395,10 @@
 }
 
 @media (max-width: 680px) {
+  .clientPage table tbody th,
+  .clientPage table tbody td {
+    height: auto;
+  }
   .clientHeader {
     flex-wrap: wrap;
   }
