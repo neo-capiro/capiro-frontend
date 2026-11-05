@@ -7,6 +7,8 @@ import {
   StatusPanel,
   Tabs,
   TextInput,
+  Field,
+  SelectInput,
 } from "../../../../shared/module-ui";
 import {
   canonicalListRow,
@@ -54,6 +56,7 @@ export function OutreachList({
   const [recordCursor, setRecordCursor] = useState<string>();
   const [sessionOffset, setSessionOffset] = useState(0);
   const [audience, setAudience] = useState<OutreachAudience>("all");
+  const [filtersExpanded, setFiltersExpanded] = useState(false);
   const capabilities = useCapiroCapabilities();
   const selection = audienceSelection(
     audience,
@@ -196,6 +199,93 @@ export function OutreachList({
     setRecordCursor(undefined);
     setSessionOffset(0);
   };
+  if (filtersExpanded)
+    return (
+      <section className={styles.screen} aria-label="Outreach">
+        <OutreachListHeader onCreate={onCreate} filtering />
+        <section className={styles.filterPanel} aria-label="Outreach filters">
+          {scopeControl && (
+            <div className={styles.scopePicker}>
+              <span>Client</span>
+              {scopeControl}
+            </div>
+          )}
+          <div className={styles.filterDates}>
+            {" "}
+            <label className={styles.dateFilter}>
+              <span>From</span>
+              <input
+                type="date"
+                aria-label="From"
+                value={from}
+                onChange={(event) => {
+                  setFrom(event.target.value);
+                  setCursor(undefined);
+                  setRecordCursor(undefined);
+                }}
+              />
+            </label>
+            <label className={styles.dateFilter}>
+              <span>To</span>
+              <input
+                type="date"
+                aria-label="To"
+                value={to}
+                onChange={(event) => {
+                  setTo(event.target.value);
+                  setCursor(undefined);
+                  setRecordCursor(undefined);
+                }}
+              />
+            </label>
+          </div>
+          <Field label="Audience" htmlFor="outreach-audience">
+            <OutreachAudienceFilter
+              noticeId="outreach-audience-availability"
+              value={audience}
+              supported={capabilities.outreachAudienceVersion === 1}
+              onChange={(value) => {
+                setAudience(value);
+                setCursor(undefined);
+                setRecordCursor(undefined);
+                setSessionOffset(0);
+              }}
+            />
+          </Field>
+          {capabilities.outreachAudienceVersion !== 1 && (
+            <OutreachAudienceNotice id="outreach-audience-availability" />
+          )}
+          <Field label="Records" htmlFor="outreach-records">
+            <SelectInput
+              id="outreach-records"
+              value={deleted ? "deleted" : "active"}
+              options={[
+                { value: "active", label: "Active records" },
+                { value: "deleted", label: "Deleted only" },
+              ]}
+              onValueChange={(value) => {
+                setDeleted(value === "deleted");
+                setCursor(undefined);
+                setRecordCursor(undefined);
+              }}
+            />
+          </Field>
+          {canonicalError && (
+            <StatusPanel error={canonicalError} onRetry={reload} />
+          )}
+          <div className={styles.actions}>
+            <ActionButton onClick={clear}>Clear filters</ActionButton>
+            <ActionButton
+              primary
+              disabled={invalid || selection.blocked}
+              onClick={() => setFiltersExpanded(false)}
+            >
+              Apply filters
+            </ActionButton>
+          </div>
+        </section>
+      </section>
+    );
   return (
     <section className={styles.screen} aria-label="Outreach">
       <OutreachListHeader onCreate={onCreate} />
@@ -225,74 +315,15 @@ export function OutreachList({
           )}
           <div className={styles.dateRange}>
             <span>Date range</span>
-            <details className={styles.filterDisclosure}>
-              <summary>
-                {from || to
-                  ? `${from || "Any date"} – ${to || "Any date"}`
-                  : "Any date"}
-              </summary>
-              <div className={styles.filterPopover}>
-                <label className={styles.dateFilter}>
-                  <span>From · {from || "Any date"}</span>
-                  <input
-                    type="date"
-                    aria-label="From"
-                    value={from}
-                    onChange={(event) => {
-                      setFrom(event.target.value);
-                      setCursor(undefined);
-                      setRecordCursor(undefined);
-                    }}
-                  />
-                </label>
-                <label className={styles.dateFilter}>
-                  <span>To · {to || "Any date"}</span>
-                  <input
-                    type="date"
-                    aria-label="To"
-                    value={to}
-                    onChange={(event) => {
-                      setTo(event.target.value);
-                      setCursor(undefined);
-                      setRecordCursor(undefined);
-                    }}
-                  />
-                </label>
-              </div>
-            </details>
+            <ActionButton onClick={() => setFiltersExpanded(true)}>
+              {from || to
+                ? `${from || "Any date"} – ${to || "Any date"}`
+                : "Any date"}
+            </ActionButton>
           </div>
-          <details className={styles.moreFilters}>
-            <summary>More filters</summary>
-            <div className={styles.filterPopover}>
-              <OutreachAudienceFilter
-                noticeId="outreach-audience-availability"
-                value={audience}
-                supported={capabilities.outreachAudienceVersion === 1}
-                onChange={(value) => {
-                  setAudience(value);
-                  setCursor(undefined);
-                  setRecordCursor(undefined);
-                  setSessionOffset(0);
-                }}
-              />
-
-              <label className={styles.deleted}>
-                <input
-                  type="checkbox"
-                  aria-label="Deleted only"
-                  checked={deleted}
-                  onChange={(event) => {
-                    setDeleted(event.target.checked);
-                    setCursor(undefined);
-                    setRecordCursor(undefined);
-                  }}
-                />
-                Deleted only
-              </label>
-
-              <ActionButton onClick={clear}>Clear filters</ActionButton>
-            </div>
-          </details>
+          <ActionButton onClick={() => setFiltersExpanded(true)}>
+            More filters
+          </ActionButton>
         </div>
         <p className={styles.hint}>
           Audience applies to saved outreach records and canonical campaigns.

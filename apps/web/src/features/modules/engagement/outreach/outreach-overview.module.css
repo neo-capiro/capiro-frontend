@@ -85,47 +85,6 @@
   border-radius: 8px;
   background: var(--card);
 }
-.filterDisclosure,
-.moreFilters {
-  position: relative;
-}
-.filterDisclosure summary,
-.moreFilters summary {
-  display: flex;
-  align-items: center;
-  min-height: 47px;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--card);
-  font-size: 14px;
-  cursor: pointer;
-  list-style: none;
-}
-.moreFilters summary {
-  min-height: 40px;
-  margin-bottom: 3px;
-  border-radius: 10px;
-}
-.filterDisclosure summary::-webkit-details-marker,
-.moreFilters summary::-webkit-details-marker {
-  display: none;
-}
-.filterPopover {
-  position: absolute;
-  z-index: 5;
-  right: 0;
-  top: calc(100% + 8px);
-  width: max-content;
-  max-width: min(400px, calc(100vw - 48px));
-  display: grid;
-  gap: 16px;
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--card);
-  box-shadow: 0 2px 8px #0c0a0914;
-}
 .dateFilter {
   display: grid;
   gap: 6px;
@@ -140,23 +99,10 @@
   border: 1px solid var(--border);
   border-radius: 8px;
 }
-.deleted {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-}
-.deleted input {
-  accent-color: var(--foreground);
-}
 .audienceFilter {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-}
-.audienceFilter button[aria-pressed="true"] {
-  background: var(--foreground);
-  color: var(--background);
 }
 .audienceNotice {
   margin: 0;
@@ -479,16 +425,58 @@
   .filters {
     grid-template-columns: minmax(0, 1fr);
   }
-  .filterPopover {
-    left: 0;
-    right: auto;
-    max-width: 100%;
-  }
   .campaignCard {
     grid-template-columns: minmax(0, 1fr);
   }
   .campaignCard > button,
   .campaignCard > .status {
     justify-self: start;
+  }
+}
+
+.filterPanel {
+  display: grid;
+  gap: 20px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow:
+    0 2px 8px -2px #0c0a090a,
+    0 1px 2px #0c0a090a;
+}
+.filterDates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.filterPanel label,
+.dateFilter > span {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  font-weight: 400;
+}
+.filterPanel [role="combobox"],
+.dateRange button {
+  width: 100%;
+  min-height: 47px;
+  justify-content: space-between;
+  border-color: var(--border);
+  border-radius: 8px;
+}
+.filterPanel .dateFilter input {
+  width: 100%;
+  min-height: 47px;
+  font-size: 14px;
+}
+.filterPanel .audienceFilter {
+  display: block;
+}
+@media (max-width: 700px) {
+  .filterPanel {
+    padding: 20px;
+  }
+  .filterDates {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
