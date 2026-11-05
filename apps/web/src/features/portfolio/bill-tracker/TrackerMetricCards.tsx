@@ -96,7 +96,7 @@ export function TrackerMetricCards({
   if (version !== 1)
     return (
       <p className="status" role="status">
-        Tracker metrics aren&apos;t available right now.
+        Tracker metrics are not configured for this environment.
       </p>
     );
   return (

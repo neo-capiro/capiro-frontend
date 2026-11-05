@@ -1,6 +1,11 @@
 import Link from "next/link";
 import type { PortfolioAlert } from "./contracts";
-import { alertCategory, alertClientHref, alertTiming } from "./model";
+import {
+  alertCategory,
+  alertRecordHref,
+  alertSourceReference,
+  alertTiming,
+} from "./model";
 import styles from "./attention.module.css";
 
 export function AttentionItem({ alert }: { alert: PortfolioAlert }) {
@@ -10,11 +15,7 @@ export function AttentionItem({ alert }: { alert: PortfolioAlert }) {
     Boolean(alert.canonicalMissingFields?.length);
   return (
     <li className={styles.item}>
-      <Link
-        href={alertClientHref(alert.clientId)}
-        className={styles.link}
-        aria-label={`${alert.title || "Untitled alert"} — open ${alert.clientName}`}
-      >
+      <Link href={alertRecordHref(alert)} className={styles.link}>
         <div className={styles.meta}>
           <span
             className={styles.severity}
@@ -43,8 +44,11 @@ export function AttentionItem({ alert }: { alert: PortfolioAlert }) {
           <span>
             {alert.clientName} · {alertCategory(alert.type)}
           </span>
-          <span className={styles.open}>Open ↗</span>
+          <span className={styles.open}>Review alert ↗</span>
         </div>
+        <p className={styles.note}>
+          Source record: {alertSourceReference(alert)}
+        </p>
         {(incomplete || alert.state === "acknowledged") && (
           <p className={styles.note}>
             {incomplete && "Source details incomplete"}

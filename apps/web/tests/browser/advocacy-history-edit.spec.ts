@@ -44,16 +44,22 @@ test("baseline: dated timeline reveals only withheld loaded events and preserves
   const { unexpected } = await installAdvocacyHistory(page);
   await page.goto(pagePath);
   await expect(events(page).getByRole("listitem")).toHaveCount(5);
-  await expect(history(page)).toContainText("6 loaded events");
+  await expect(history(page)).toContainText("6 recent events");
   await expect(events(page)).toContainText("Oct 9, 2026");
   await expect(events(page)).toContainText("INFERRED · Confidence 74%");
   await expect(
     events(page).getByRole("button", { name: /Synthetic unassigned record/ }),
   ).toHaveCount(0);
+  // F07: review candidates remain accessible, but no longer occupy the
+  // established-history list or its expansion denominator.
   await history(page)
-    .getByRole("button", { name: "View all 6 loaded events" })
+    .getByText("Attribution review · 1 candidate", { exact: true })
     .click();
-  await expect(events(page).getByRole("listitem")).toHaveCount(6);
+  await expect(
+    history(page).getByRole("list", { name: "Attribution review candidates" }),
+  ).toContainText("Synthetic unassigned record");
+  await expect(events(page)).not.toContainText("Synthetic unassigned record");
+  await expect(events(page).getByRole("listitem")).toHaveCount(5);
   await expect(events(page)).toContainText("Undated");
   await expect(
     history(page).getByRole("button", { name: /View all/ }),

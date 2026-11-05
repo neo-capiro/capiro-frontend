@@ -142,8 +142,9 @@ describe("metric availability", () => {
   });
   it("replaces the cards with one status line when no metrics version is set", () => {
     const html = render({});
-    expect(html).toContain(unavailableLine);
-    expect(html).toContain("available right now.");
+    expect(html).toContain(
+      "Tracker metrics are not configured for this environment.",
+    );
     expect(html).toContain('role="status"');
     expect(html).not.toContain(materialGroup);
     expect(html).not.toContain(coverageGroup);
