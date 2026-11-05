@@ -7,7 +7,11 @@ const account = {
 };
 const conversationId = "88888888-8888-4888-8888-888888888888";
 
-async function setup(page: Page, firstBootstrapFails = false) {
+async function setup(
+  page: Page,
+  firstBootstrapFails = false,
+  beforeReply?: (attempt: number) => Promise<void>,
+) {
   const unexpected = await installFixtures(page);
   const bootstraps: unknown[] = [];
   const pageErrors: string[] = [];
@@ -22,30 +26,38 @@ async function setup(page: Page, firstBootstrapFails = false) {
   await page.route("**/api/conversations/**", (route) =>
     json(route, { error: { code: "NOT_CONFIGURED" } }, 503),
   );
-  await page.route("**/api/capiro/meri.conversation.bootstrap.v2", (route) => {
-    const body = route.request().postDataJSON().body;
-    bootstraps.push(body);
-    if (firstBootstrapFails && bootstraps.length === 1)
-      return json(route, { error: { code: "CORE_UNAVAILABLE" } }, 503);
-    return json(route, {
-      ...body,
-      tenantId: account.tenantId,
-      actorId: account.actorId,
-      conversationId,
-    });
-  });
-  await page.route("**/api/capiro/meri.conversation.bootstrap", (route) => {
-    const body = route.request().postDataJSON().body;
-    bootstraps.push(body);
-    if (firstBootstrapFails && bootstraps.length === 1)
-      return json(route, { error: { code: "CORE_UNAVAILABLE" } }, 503);
-    return json(route, {
-      ...body,
-      tenantId: account.tenantId,
-      actorId: account.actorId,
-      conversationId,
-    });
-  });
+  await page.route(
+    "**/api/capiro/meri.conversation.bootstrap.v2",
+    async (route) => {
+      const body = route.request().postDataJSON().body;
+      bootstraps.push(body);
+      await beforeReply?.(bootstraps.length);
+      if (firstBootstrapFails && bootstraps.length === 1)
+        return json(route, { error: { code: "CORE_UNAVAILABLE" } }, 503);
+      return json(route, {
+        ...body,
+        tenantId: account.tenantId,
+        actorId: account.actorId,
+        conversationId,
+      });
+    },
+  );
+  await page.route(
+    "**/api/capiro/meri.conversation.bootstrap",
+    async (route) => {
+      const body = route.request().postDataJSON().body;
+      bootstraps.push(body);
+      await beforeReply?.(bootstraps.length);
+      if (firstBootstrapFails && bootstraps.length === 1)
+        return json(route, { error: { code: "CORE_UNAVAILABLE" } }, 503);
+      return json(route, {
+        ...body,
+        tenantId: account.tenantId,
+        actorId: account.actorId,
+        conversationId,
+      });
+    },
+  );
   return { bootstraps, unexpected, pageErrors, consoleErrors };
 }
 
@@ -123,4 +135,38 @@ test("a failed explicit Start can retry the same Core intent", async ({
   await expect.poll(() => bootstraps.length).toBe(2);
   expect(bootstraps[1]).toEqual(bootstraps[0]);
   await expect(page).toHaveURL(new RegExp(`conversationId=${conversationId}`));
+});
+
+test("actor replacement during Start does not bootstrap the new actor passively", async ({
+  page,
+}) => {
+  let releaseFirst!: () => void;
+  const firstReply = new Promise<void>((resolve) => {
+    releaseFirst = resolve;
+  });
+  const { bootstraps } = await setup(page, false, (attempt) =>
+    attempt === 1 ? firstReply : Promise.resolve(),
+  );
+  await page.goto("/meri-lazy-entry.html?scope=general");
+  const start = page.getByRole("button", { name: "Start conversation" });
+  try {
+    await start.click();
+    await expect.poll(() => bootstraps.length).toBe(1);
+    await page.evaluate(() =>
+      window.dispatchEvent(new Event("qa:switch-actor")),
+    );
+    await expect(start).toBeVisible();
+    expect(bootstraps).toHaveLength(1);
+  } finally {
+    releaseFirst();
+  }
+  await page.waitForTimeout(150);
+  await expect(start).toBeVisible();
+  await expect(page).not.toHaveURL(/conversationId=/);
+  expect(bootstraps).toHaveLength(1);
+  await start.click();
+  await expect.poll(() => bootstraps.length).toBe(2);
+  expect((bootstraps[1] as { requestId: string }).requestId).not.toBe(
+    (bootstraps[0] as { requestId: string }).requestId,
+  );
 });
