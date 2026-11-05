@@ -158,21 +158,33 @@ export function ConversationHistoryList({
   const client =
     chosenClient ??
     (initialClient && initialClient !== GENERAL_CLIENT_FILTER
-      ? (names.get(initialClient) ?? "")
+      ? (names.get(initialClient) ?? "Selected client")
       : "");
+  // Keep the entry link's client scope even when the separate roster read is pending or fails.
+  // An unknown display name must never turn a client-scoped entry into All clients.
+  const entryClientId =
+    chosenClient === null && initialClient !== GENERAL_CLIENT_FILTER
+      ? initialClient
+      : undefined;
   // Admitted rows belong to the read that returned them: a page fetch or a timed-out next page
   // keeps them, and every other failure or replacement removes them with their private state.
   const rows = historyRows(summaries, (id) => names.get(id) ?? "Client");
   const needle = title.trim().toLowerCase();
   const visible = rows.filter(
     (row) =>
-      (!client || row.client === client) &&
+      (entryClientId
+        ? row.summary.clientId === entryClientId
+        : !client || row.client === client) &&
       (!needle || row.title.toLowerCase().includes(needle)),
   );
   const clientOptions = [
     GENERAL_CLIENT_FILTER,
     ...new Set(
       rows
+        .filter(
+          (row) =>
+            row.summary.clientId === null || names.has(row.summary.clientId),
+        )
         .map((row) => row.client)
         .filter((name) => name !== GENERAL_CLIENT_FILTER),
     ),
@@ -211,7 +223,15 @@ export function ConversationHistoryList({
           icon={<ChevronDown aria-hidden />}
           options={clientOptions}
           value={client}
-          onChange={setClient}
+          onChange={(value) =>
+            // Re-selecting the entry client's name must not turn its exact ID into
+            // a name filter that also matches another client with the same name.
+            setClient(
+              entryClientId && value === names.get(entryClientId)
+                ? null
+                : value,
+            )
+          }
         />
         <FilterMenu
           title="Filter by status"
@@ -227,6 +247,11 @@ export function ConversationHistoryList({
           }}
         />
       </div>
+      {scope && entryClientId && !names.has(entryClientId) && (
+        <p role="status" className={ui.muted}>
+          Client filter is active; client name unavailable.
+        </p>
+      )}
       {scope && (
         <UnconfirmedChatChanges
           key={`${scope.tenantId}:${scope.actorId}:${Math.max(query.dataUpdatedAt, query.errorUpdatedAt)}`}

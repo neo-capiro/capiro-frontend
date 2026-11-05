@@ -1,6 +1,11 @@
 import { expect, test, type Page } from "@playwright/test";
 import { MANAGEMENT_VERSION } from "@capiro/meri-contracts/conversation-history";
-import { clientId, installFixtures, json } from "../../tests/browser/fixtures";
+import {
+  client as fixtureClient,
+  clientId,
+  installFixtures,
+  json,
+} from "../../tests/browser/fixtures";
 import { operationFixtures, testIdentity } from "./fixtures";
 
 const row = {
@@ -184,6 +189,161 @@ test("saved-title search filters admitted display titles across pages without de
   });
   expect(otherRequests).toEqual([]);
 });
+
+for (const width of [390, 1440])
+  test(`client entry stays scoped by id without a roster name at ${width}px`, async ({
+    page,
+  }, info) => {
+    const errors: string[] = [];
+    const consoleErrors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    page.on("console", (message) => {
+      if (message.type() === "error") consoleErrors.push(message.text());
+    });
+    await setup(page);
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 1040 });
+    await page.route("**/api/backend/core/clients", (route) => json(route, []));
+    await page.route(
+      "**/api/backend/core/clients/10000000-0000-4000-8000-000000000009",
+      (route) =>
+        route.request().method() === "GET"
+          ? json(route, {
+              ...fixtureClient,
+              id: "10000000-0000-4000-8000-000000000009",
+              name: "Synthetic other client",
+            })
+          : route.fallback(),
+    );
+    // The production wrapper also makes these two read-only POSTs; keep the fixture
+    // scoped to their exact paths rather than hiding unexpected writes or 404s.
+    await page.route("**/api/conversations/list", (route) =>
+      route.request().method() === "POST"
+        ? json(route, {
+            schema: "meri.conversation-list/1",
+            conversations: [],
+            nextBefore: null,
+          })
+        : route.fallback(),
+    );
+    await page.route("**/api/conversations/intents/inbox-count", (route) =>
+      route.request().method() === "POST"
+        ? json(route, { open: 0, checkedAt: "2026-11-05T07:00:00.000Z" })
+        : route.fallback(),
+    );
+    const focused = {
+      ...row,
+      title: "Synthetic selected client chat",
+      status: "active" as const,
+      archivedAt: null,
+      scopeKind: "client" as const,
+      clientId,
+    };
+    const another = {
+      ...focused,
+      conversationId: "30000000-0000-4000-8000-000000000009",
+      title: "Synthetic other client chat",
+      clientId: "10000000-0000-4000-8000-000000000009",
+      updatedAt: "2026-10-24T11:00:00.000Z",
+    };
+    await page.route("**/api/conversations/summaries", (route) =>
+      json(route, {
+        version: MANAGEMENT_VERSION,
+        conversations: [focused, another],
+        nextBefore: null,
+      }),
+    );
+    // Only this harness mode mounts the production wrapper that reads the entry scope.
+    await page.goto(
+      `/meri/conversations?clientId=${clientId}&navigation-audit=1`,
+    );
+    await expect(
+      page.getByRole("button", { name: "Filter by client: Selected client" }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Client filter is active; client name unavailable."),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("cell", { name: focused.title, exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("cell", { name: another.title, exact: true }),
+    ).toHaveCount(0);
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBeLessThanOrEqual(width + 1);
+    await page.evaluate(() => document.fonts.ready);
+    await page.screenshot({
+      path: info.outputPath("client-scoped-no-roster.png"),
+    });
+    await page
+      .getByRole("button", { name: "Filter by client: Selected client" })
+      .click();
+    await expect(
+      page.getByRole("menuitemradio", { name: "Client", exact: true }),
+    ).toHaveCount(0);
+    await page.getByRole("menuitemradio", { name: "All clients" }).click();
+    await expect(
+      page.getByRole("cell", { name: another.title, exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Client filter is active; client name unavailable."),
+    ).toHaveCount(0);
+    // Explicit All clients is valid on this URL; a soft navigation to another
+    // permitted client must mount the newly selected client's scoped list.
+    await page.evaluate((nextClientId) => {
+      window.history.pushState(
+        {},
+        "",
+        `/meri/conversations?clientId=${nextClientId}&navigation-audit=1`,
+      );
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    }, another.clientId);
+    await expect(
+      page.getByRole("button", { name: "Filter by client: Selected client" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("cell", { name: focused.title, exact: true }),
+    ).toHaveCount(0);
+    await expect(
+      page.getByRole("cell", { name: another.title, exact: true }),
+    ).toBeVisible();
+    await page.evaluate((originalClientId) => {
+      window.history.pushState(
+        {},
+        "",
+        `/meri/conversations?clientId=${originalClientId}&navigation-audit=1`,
+      );
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    }, clientId);
+    await expect(
+      page.getByRole("cell", { name: another.title, exact: true }),
+    ).toHaveCount(0);
+    // A new load with two equally named clients must not widen the entry filter
+    // merely because the person reselects its name in the menu.
+    const sharedName = "Synthetic same-name client";
+    await page.route("**/api/backend/core/clients", (route) =>
+      json(route, [
+        { ...fixtureClient, name: sharedName },
+        { ...fixtureClient, id: another.clientId, name: sharedName },
+      ]),
+    );
+    await page.reload();
+    await expect(
+      page.getByRole("button", { name: `Filter by client: ${sharedName}` }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("cell", { name: another.title, exact: true }),
+    ).toHaveCount(0);
+    await page
+      .getByRole("button", { name: `Filter by client: ${sharedName}` })
+      .click();
+    await page.getByRole("menuitemradio", { name: sharedName }).click();
+    await expect(
+      page.getByRole("cell", { name: another.title, exact: true }),
+    ).toHaveCount(0);
+    expect(errors).toEqual([]);
+    expect(consoleErrors).toEqual([]);
+  });
 
 for (const width of [390, 1440])
   test(`General-scoped history reaches a matching later page when the first page has no visible rows at ${width}px`, async ({

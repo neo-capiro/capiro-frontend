@@ -96,6 +96,24 @@ function plan(
 const button = (html: string, label: string) =>
   html.match(new RegExp(`<button([^>]*)>${label}</button>`))?.[1];
 
+it("keeps a client entry scoped by id while the client roster has no name", () => {
+  const selectedId = ID(11);
+  const html = plan(
+    {
+      summaries: [
+        { ...row(1), scopeKind: "client", clientId: selectedId },
+        { ...row(2), scopeKind: "client", clientId: ID(12) },
+      ],
+      query: { hasNextPage: false },
+    },
+    selectedId,
+  );
+  expect(html).toContain("Synthetic chat 1");
+  expect(html).not.toContain("Synthetic chat 2");
+  expect(html).toContain('aria-label="Filter by client: Selected client"');
+  expect(html).toContain("Client filter is active; client name unavailable.");
+});
+
 it("keeps the admitted rows, says only the next page failed, and offers that page again", () => {
   const html = plan({
     current: false,
