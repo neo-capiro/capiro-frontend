@@ -274,7 +274,7 @@ function CoreResolvedConversation({
     );
   if (resolution.state === "error")
     return (
-      <section role="alert">
+      <section className={homeStyles.startConversation} role="alert">
         <h2>Conversation connection unavailable</h2>
         <p>The current conversation could not be confirmed.</p>
         <Button
@@ -291,7 +291,7 @@ function CoreResolvedConversation({
       </section>
     );
   return (
-    <section role="status">
+    <section className={homeStyles.startConversation} role="status">
       <h2>Preparing conversation</h2>
       <p>Confirming the current conversation.</p>
       {scopeControl}

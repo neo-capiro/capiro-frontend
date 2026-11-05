@@ -7,7 +7,7 @@ const account = {
 };
 const conversationId = "88888888-8888-4888-8888-888888888888";
 
-async function setup(page: Page) {
+async function setup(page: Page, firstBootstrapFails = false) {
   const unexpected = await installFixtures(page);
   const bootstraps: unknown[] = [];
   const pageErrors: string[] = [];
@@ -25,6 +25,8 @@ async function setup(page: Page) {
   await page.route("**/api/capiro/meri.conversation.bootstrap.v2", (route) => {
     const body = route.request().postDataJSON().body;
     bootstraps.push(body);
+    if (firstBootstrapFails && bootstraps.length === 1)
+      return json(route, { error: { code: "CORE_UNAVAILABLE" } }, 503);
     return json(route, {
       ...body,
       tenantId: account.tenantId,
@@ -35,6 +37,8 @@ async function setup(page: Page) {
   await page.route("**/api/capiro/meri.conversation.bootstrap", (route) => {
     const body = route.request().postDataJSON().body;
     bootstraps.push(body);
+    if (firstBootstrapFails && bootstraps.length === 1)
+      return json(route, { error: { code: "CORE_UNAVAILABLE" } }, 503);
     return json(route, {
       ...body,
       tenantId: account.tenantId,
@@ -97,5 +101,26 @@ test("client Meri entry does not bootstrap on route load", async ({
   await page.getByRole("button", { name: "Start conversation" }).click();
   await expect.poll(() => bootstraps.length).toBe(1);
   expect(bootstraps[0]).toMatchObject({ clientId });
+  await expect(page).toHaveURL(new RegExp(`conversationId=${conversationId}`));
+});
+
+test("a failed explicit Start can retry the same Core intent", async ({
+  page,
+}, testInfo) => {
+  const { bootstraps } = await setup(page, true);
+  await page.goto("/meri-lazy-entry.html?scope=general");
+  await page.getByRole("button", { name: "Start conversation" }).click();
+  const errorPanel = page.getByRole("alert");
+  await expect(errorPanel).toContainText("Conversation connection unavailable");
+  const errorBox = await errorPanel.boundingBox();
+  expect(errorBox).not.toBeNull();
+  expect(errorBox!.y + errorBox!.height / 2).toBeGreaterThan(250);
+  expect(bootstraps).toHaveLength(1);
+  await page.screenshot({
+    path: testInfo.outputPath("general-start-error.png"),
+  });
+  await page.getByRole("button", { name: "Retry conversation" }).click();
+  await expect.poll(() => bootstraps.length).toBe(2);
+  expect(bootstraps[1]).toEqual(bootstraps[0]);
   await expect(page).toHaveURL(new RegExp(`conversationId=${conversationId}`));
 });
