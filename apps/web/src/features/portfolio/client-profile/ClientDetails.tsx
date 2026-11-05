@@ -52,7 +52,6 @@ export function GovernmentSummary({ client }: { client: Client }) {
         className={governmentStyles.entry}
         onClick={() => setGovernment(true)}
         aria-haspopup="dialog"
-        aria-label="Government & federal profile"
       >
         <span className={governmentStyles.entryHeading}>
           <img src="/design/411-47028-imgIconLandmark.svg" alt="" />

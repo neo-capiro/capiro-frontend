@@ -162,3 +162,17 @@ button.eventCard:hover {
 .matter .row {
   flex-wrap: wrap;
 }
+.review {
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.review summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+.review > p {
+  margin: 12px 0;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}

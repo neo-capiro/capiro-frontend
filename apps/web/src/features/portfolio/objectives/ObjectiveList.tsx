@@ -16,20 +16,31 @@ export function ObjectiveStats({ records }: { records: Objective[] }) {
   const stats = [
     ["Objectives", records.length],
     // These operational totals are not present in the objective list response.
-    ["Active", "—"],
-    ["Strategy ready", "—"],
-    ["Decisions waiting", "—"],
-    ["Next cycle", "—"],
+    ["Active", "Not available"],
+    ["Strategy ready", "Not available"],
+    ["Decisions waiting", "Not available"],
+    ["Next cycle", "Not available"],
   ] as const;
   return (
-    <dl className={styles.stats} aria-label="Objective summary">
-      {stats.map(([label, value]) => (
-        <div key={label}>
-          <dt>{label}</dt>
-          <dd>{value}</dd>
-        </div>
-      ))}
-    </dl>
+    <>
+      <dl className={styles.stats} aria-label="Objective summary">
+        {stats.map(([label, value]) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd
+              className={
+                typeof value === "string" ? styles.unavailableMetric : undefined
+              }
+            >
+              {value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <p className="muted">
+        Operational summaries are not supplied by the current objective service.
+      </p>
+    </>
   );
 }
 

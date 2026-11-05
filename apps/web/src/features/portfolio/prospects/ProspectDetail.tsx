@@ -108,7 +108,7 @@ export function ProspectDetail({
                   onClick={() => setStage(true)}
                   aria-label={`Stage: ${stageLabel(record.stage)}`}
                 >
-                  <span className="eyebrow">Stage</span>
+                  <span className="eyebrow">Stage: </span>{" "}
                   {stageLabel(record.stage)}
                   <span aria-hidden="true">⌄</span>
                 </button>

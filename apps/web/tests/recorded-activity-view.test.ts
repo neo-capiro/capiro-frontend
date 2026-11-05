@@ -56,6 +56,17 @@ const render = () =>
   );
 beforeEach(() => Object.assign(state, { pending: false, data: undefined }));
 describe("existing card recorded activity presentation", () => {
+  it("distinguishes a disabled capability from a failed configured read", () => {
+    const html = renderToStaticMarkup(
+      createElement(RecordedActivity, { clientId: "client-a" }),
+    );
+    expect(html).toContain(
+      "Recorded activity is not configured for this environment.",
+    );
+    expect(html).not.toContain("Recorded activity unavailable");
+    expect(html).not.toContain("/100");
+  });
+
   it("shows literal returned index, source counts and both exact rolling windows", () => {
     state.data = complete();
     const html = render();
