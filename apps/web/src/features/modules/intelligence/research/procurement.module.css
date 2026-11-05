@@ -77,6 +77,29 @@
   font-weight: 400;
   margin-top: 4px;
 }
+.divider {
+  border: none;
+  border-top: 1px solid var(--border, #e7e5e4);
+  margin: 0;
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.modalContent {
+  background: var(--surface, #fff);
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 480px;
+  width: 100%;
+  display: grid;
+  gap: 12px;
+}
 @media (max-width: 650px) {
   .measures {
     grid-template-columns: 1fr;

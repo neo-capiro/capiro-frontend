@@ -7,12 +7,58 @@ import { ActionButton, Badge, DataTable } from "../../../../shared/module-ui";
 import { SourceLink } from "./ResearchEvidence";
 import { procurementUsd } from "./procurement-selection";
 import styles from "./procurement.module.css";
+import { ProcurementVendorFootprint } from "./ProcurementVendorFootprint";
 
 export function ProcurementResult({
   result,
 }: {
   result: ProcurementMoneyFlow | ProcurementHubSummary;
 }) {
+  const [view, setView] = useState<"groups" | "footprint">("groups");
+  const [exportNote, setExportNote] = useState("");
+  const [showExportModal, setShowExportModal] = useState(false);
+
+  const handleExport = () => {
+    const payload = {
+      scope: result.scope,
+      snapshot: {
+        knownAt: result.knownAt,
+        sourceThrough: result.sourceThrough,
+      },
+      totals: result.totals || null,
+      groups: "groups" in result ? result.groups : [],
+      view: "groups" in result ? view : null,
+      filters: "groups" in result ? { fiscalYear: "all" } : null,
+      provenance: result.provenance,
+      sources: result.sources,
+      analystNote: exportNote || null,
+      caveats: {
+        samSupportedTypes: "AWARD A/B/C/D only",
+        idvOtaExcluded: true,
+        relatedAwardsExcluded: true,
+        partialActionsObserved: true,
+        dodaFundedDelay90Days: true,
+        noFundingAccountLinkage: true,
+      },
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `evidence-finding-${new Date().toISOString().slice(0, 19)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    setShowExportModal(false);
+    setExportNote("");
+  };
+
+  const hasGroups = "groups" in result && result.groups.length > 0;
+  const canExport = "groups" in result && result.groups.length > 0;
+
   return (
     <>
       <div className={styles.content}>
@@ -20,6 +66,9 @@ export function ProcurementResult({
           {result.state === "partial"
             ? "Partial source coverage"
             : "Unavailable"}
+        </Badge>
+        <Badge>
+          {"groups" in result ? result.groups.length : (result as ProcurementHubSummary).groupCount} groups
         </Badge>
         <p>
           {result.scope.awardIdentityKeys.length} explicitly selected awards ·
@@ -65,8 +114,8 @@ export function ProcurementResult({
             </p>
             {"groupCount" in result && (
               <p>
-                {result.groupCount} fiscal year, agency and vendor groups. Open
-                Money Flow for group detail and observation clocks.
+                {result.groupCount} fiscal year, agency and vendor groups.
+                Use the view switch for Vendor Footprint detail.
               </p>
             )}
           </>
@@ -90,13 +139,72 @@ export function ProcurementResult({
             ))}
           </ul>
         </details>
+        {hasGroups && (
+          <div className={styles.actions}>
+            <ActionButton
+              onClick={() => setView("groups")}
+              disabled={view === "groups"}
+            >
+              Money Flow
+            </ActionButton>
+            <ActionButton
+              onClick={() => setView("footprint")}
+              disabled={view === "footprint"}
+            >
+              Vendor Footprint
+            </ActionButton>
+            <ActionButton
+              onClick={() => setShowExportModal(true)}
+              disabled={!canExport}
+            >
+              Download evidence finding
+            </ActionButton>
+          </div>
+        )}
+        <hr className={styles.divider} />
+        {hasGroups && view === "footprint" ? (
+          <ProcurementVendorFootprint
+            groups={[...(result as ProcurementMoneyFlow).groups]}
+            totalActions={(result as ProcurementMoneyFlow).totals?.actions || "0"}
+            totalObligationUsd={(result as ProcurementMoneyFlow).totals?.obligationUsd || null}
+            totalOutlayUsd={(result as ProcurementMoneyFlow).totals?.outlayUsd || null}
+            obligationKnown={(result as ProcurementMoneyFlow).totals?.obligationKnown || "0"}
+            outlayKnown={(result as ProcurementMoneyFlow).totals?.outlayKnown || "0"}
+            sourceThrough={(result as ProcurementMoneyFlow).sourceThrough}
+          />
+        ) : hasGroups ? (
+          <ProcurementGroups groups={(result as ProcurementMoneyFlow).groups} />
+        ) : null}
       </div>
-      {"groups" in result && result.groups.length > 0 && (
-        <ProcurementGroups groups={result.groups} />
-      )}
       <ProcurementProvenance result={result} />
-    </>
-  );
+        {showExportModal && (
+          <div className={styles.modal} role="dialog" aria-modal="true">
+            <div className={styles.modalContent}>
+              <h3>Download evidence finding</h3>
+              <p>
+                This creates a local JSON file for your records. It does not save
+                to the client or attach to any external system.
+              </p>
+              <textarea
+                placeholder="Optional follow-up note (visible in export, labeled as analyst judgment)"
+                value={exportNote}
+                onChange={(e) => setExportNote(e.target.value)}
+                rows={4}
+                style={{ width: "100%", marginTop: "8px", resize: "vertical" }}
+              />
+              <div className={styles.actions}>
+                <ActionButton onClick={() => setShowExportModal(false)}>
+                  Cancel
+                </ActionButton>
+                <ActionButton onClick={handleExport}>
+                  Download JSON
+                </ActionButton>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
 }
 
 function ProcurementGroups({
