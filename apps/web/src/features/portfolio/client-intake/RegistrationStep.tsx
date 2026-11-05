@@ -1,25 +1,37 @@
-import { TokenInput } from "@/shared/portfolio/ui/TokenInput";
+import { ManualCodeSuggestions } from "./ManualCodeSuggestions";
+import { CodeSelector } from "@/features/portfolio/profile-build/public";
 import { certifications, organizationTypes, samStatuses } from "./catalog";
 import { ChoiceList, ChoiceSelect, TextField, type StepProps } from "./Fields";
 import styles from "./intake.module.css";
-export function RegistrationStep({ values, set, errors }: StepProps) {
+export function RegistrationStep(props: StepProps) {
+  const { values, set, errors } = props;
   return (
     <div className={styles.fields}>
       <div className={styles.columns}>
-        <TextField
-          label="CAGE Code"
-          value={values.cageCode}
-          maxLength={5}
-          onChange={(e) => set("cageCode", e.target.value)}
-          error={errors.cageCode}
-        />
-        <TextField
-          label="UEI"
-          value={values.uei}
-          maxLength={12}
-          onChange={(e) => set("uei", e.target.value)}
-          error={errors.uei}
-        />
+        <div className={styles.field}>
+          <TextField
+            label="CAGE Code"
+            value={values.cageCode}
+            maxLength={5}
+            onChange={(e) => set("cageCode", e.target.value)}
+            error={errors.cageCode}
+          />
+          <ManualCodeSuggestions
+            {...props}
+            field="cageCode"
+            label="CAGE code"
+          />
+        </div>
+        <div className={styles.field}>
+          <TextField
+            label="UEI"
+            value={values.uei}
+            maxLength={12}
+            onChange={(e) => set("uei", e.target.value)}
+            error={errors.uei}
+          />
+          <ManualCodeSuggestions {...props} field="uei" label="UEI" />
+        </div>
         <label>
           SAM.gov status
           <select
@@ -56,16 +68,32 @@ export function RegistrationStep({ values, set, errors }: StepProps) {
           error={errors.ein}
           placeholder="XX-XXXXXXX"
         />
-        <TokenInput
+        <CodeSelector
+          kind="naics"
+          error={errors.naicsCodes}
           label="NAICS codes"
           value={values.naicsCodes}
           onChange={(v) => set("naicsCodes", v)}
-        />
-        <TokenInput
+        >
+          <ManualCodeSuggestions
+            {...props}
+            field="naicsCodes"
+            label="NAICS codes"
+          />
+        </CodeSelector>
+        <CodeSelector
+          kind="psc"
+          error={errors.pscCodes}
           label="PSC codes"
           value={values.pscCodes}
           onChange={(v) => set("pscCodes", v)}
-        />
+        >
+          <ManualCodeSuggestions
+            {...props}
+            field="pscCodes"
+            label="PSC codes"
+          />
+        </CodeSelector>
       </div>
       <ChoiceSelect
         label="Organization types"

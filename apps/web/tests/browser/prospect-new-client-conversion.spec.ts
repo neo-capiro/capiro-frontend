@@ -2,25 +2,35 @@ import { createHash } from "node:crypto";
 import { test, expect, type Page } from "@playwright/test";
 import {
   clientId,
-  installFixtures,
+  installFixtures as installBaseFixtures,
   json,
-  prospect,
+  prospect as baseProspect,
   prospectId,
 } from "./fixtures";
+
+const prospect = { ...baseProspect, stage: "closed_won" as const };
 
 const commandPath = `**/business-development/prospects/${prospectId}/conversion-commands`;
 const receiptPath = `${commandPath}/*`;
 const currentPath = `**/business-development/prospects/${prospectId}`;
 const matchesPath = "**/business-development/search/clients?**";
 
+async function installFixtures(page: Page) {
+  const unexpected = await installBaseFixtures(page);
+  await page.route(currentPath, (route) => json(route, prospect));
+  return unexpected;
+}
+
 async function openReview(page: Page) {
   await page.goto(`/portfolio/prospects/${prospectId}`);
   await page
-    .getByRole("button", { name: "Create client from prospect", exact: true })
+    .getByRole("button", { name: "Convert to client", exact: true })
     .click();
-  const dialog = page.getByRole("dialog", {
-    name: `Create client from ${prospect.displayName}`,
-  });
+  // Keep the same dialog locator when a retained command changes its title to recovery.
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toHaveAccessibleName(
+    `Create client from ${prospect.displayName}`,
+  );
   await expect(
     dialog.getByRole("button", { name: "Create reviewed client" }),
   ).toBeDisabled();
@@ -93,7 +103,7 @@ test("lost new-client response retains the exact original conversion across relo
     .getByLabel("Website", { exact: true })
     .fill("https://reviewed.example.test");
   await dialog
-    .getByLabel("Description", { exact: true })
+    .getByRole("textbox", { name: "Description", exact: true })
     .fill("Reviewed synthetic intake");
   await dialog
     .getByRole("checkbox", { name: /I reviewed the possible matches/ })
@@ -110,11 +120,11 @@ test("lost new-client response retains the exact original conversion across relo
     name: "Recover new-client conversion",
     exact: true,
   });
-  await expect(dialog.getByLabel("Description", { exact: true })).toHaveValue(
-    "Reviewed synthetic intake",
-  );
   await expect(
-    dialog.getByLabel("Description", { exact: true }),
+    dialog.getByRole("textbox", { name: "Description", exact: true }),
+  ).toHaveValue("Reviewed synthetic intake");
+  await expect(
+    dialog.getByRole("textbox", { name: "Description", exact: true }),
   ).toBeDisabled();
   expect(reads).toBe(0);
   await dialog
@@ -228,7 +238,7 @@ test("exact rollback refusal survives reload and explicit fresh review permits a
   });
   let dialog = await openReview(page);
   await dialog
-    .getByLabel("Description", { exact: true })
+    .getByRole("textbox", { name: "Description", exact: true })
     .fill("Retained intake");
   await dialog
     .getByRole("checkbox", { name: /I reviewed the possible matches/ })
@@ -246,7 +256,7 @@ test("exact rollback refusal survives reload and explicit fresh review permits a
     exact: true,
   });
   await expect(
-    dialog.getByLabel("Description", { exact: true }),
+    dialog.getByRole("textbox", { name: "Description", exact: true }),
   ).toBeDisabled();
   expect(commands).toHaveLength(1);
   expect(reads).not.toContain("receipt");
@@ -257,10 +267,12 @@ test("exact rollback refusal survives reload and explicit fresh review permits a
   dialog = page.getByRole("dialog", {
     name: `Create client from ${prospect.displayName}`,
   });
-  await expect(dialog.getByLabel("Description", { exact: true })).toBeEnabled();
-  await expect(dialog.getByLabel("Description", { exact: true })).toHaveValue(
-    "Retained intake",
-  );
+  await expect(
+    dialog.getByRole("textbox", { name: "Description", exact: true }),
+  ).toBeEnabled();
+  await expect(
+    dialog.getByRole("textbox", { name: "Description", exact: true }),
+  ).toHaveValue("Retained intake");
   await expect(
     dialog.getByRole("checkbox", { name: /I reviewed the possible matches/ }),
   ).not.toBeChecked();

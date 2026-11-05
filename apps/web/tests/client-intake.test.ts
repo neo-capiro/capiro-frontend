@@ -41,12 +41,10 @@ const client = clientSchema.parse({
   },
 });
 describe("client intake domain", () => {
-  it("requires Figma company fields, checks only real dates and bounds priorities", () => {
+  it("requires only company name, checks real dates and bounds priorities", () => {
     const empty = clientToIntake();
     expect(validateIntake(empty)).toMatchObject({
       name: expect.any(String),
-      website: expect.any(String),
-      description: expect.any(String),
     });
     const valid = clientToIntake(client);
     expect(validateIntake(valid)).toEqual({});

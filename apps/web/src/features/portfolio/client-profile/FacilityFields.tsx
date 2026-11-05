@@ -24,6 +24,62 @@ export function FacilityFields({ facility }: { facility?: Facility }) {
       </label>
       <div className={styles.locality}>
         <label>
+          Country code
+          <input
+            name="country"
+            autoComplete="country"
+            pattern="[A-Za-z]{2}"
+            maxLength={2}
+            defaultValue={facility?.country ?? "US"}
+            required
+          />
+        </label>
+        <SelectField
+          label="Site role"
+          name="siteRole"
+          defaultValue={facility?.siteRole ?? "other"}
+        >
+          {[
+            "headquarters",
+            "manufacturing",
+            "research",
+            "engineering",
+            "testing",
+            "office",
+            "other",
+          ].map((role) => (
+            <option key={role}>{role}</option>
+          ))}
+        </SelectField>
+        <SelectField
+          label="Operating status"
+          name="siteStatus"
+          defaultValue={facility?.siteStatus ?? "unknown"}
+        >
+          <option value="unknown">Not supplied</option>
+          <option value="proposed">Proposed</option>
+          <option value="operating">Operating</option>
+          <option value="announced">Announced</option>
+          <option value="under_construction">Under construction</option>
+          <option value="closed">Closed</option>
+        </SelectField>
+      </div>
+      <SelectField
+        label="Site confirmation"
+        name="siteVerificationStatus"
+        defaultValue={facility?.siteVerificationStatus ?? "unverified"}
+      >
+        <option value="unverified">Unconfirmed</option>
+        <option value="proposed">Proposed site</option>
+        <option value="verified">Confirmed from site evidence</option>
+        <option value="closed">Closed</option>
+      </SelectField>
+      <p className="muted">
+        Confirm the company operates this site using evidence. A district match
+        or job posting alone does not confirm occupancy.
+      </p>
+      <div className={styles.locality}>
+        <label>
           City
           <input
             name="city"

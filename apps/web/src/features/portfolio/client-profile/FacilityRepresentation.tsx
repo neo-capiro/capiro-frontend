@@ -15,9 +15,19 @@ export function FacilityRepresentation({
   if (value.unresolved)
     return (
       <p className="muted">
-        {value.reason === "no_state"
-          ? "Add a state to resolve elected representation."
-          : "Resolve or enter a district to find elected representation."}
+        {
+          {
+            no_state: "Add a state to resolve elected representation.",
+            no_geocode:
+              "Resolve or enter a district to find elected representation.",
+            stale_boundary:
+              "Office links need re-resolution for the serving boundary term.",
+            needs_review:
+              "Review the resolved physical point before assigning representation.",
+            not_applicable:
+              "US representation is not applicable for this international site.",
+          }[value.reason]
+        }
       </p>
     );
   const facts = [
@@ -33,21 +43,53 @@ export function FacilityRepresentation({
     ],
     [
       "State House",
-      value.state.lower?.name ?? "No matching legislator in the current roster",
+      value.stateOfficeTermStatus === "unverified"
+        ? "Office term not verified"
+        : (value.state.lower?.name ??
+          "No matching legislator in the current roster"),
     ],
     [
       "State Senate",
-      value.state.upper?.name ?? "No matching legislator in the current roster",
+      value.stateOfficeTermStatus === "unverified"
+        ? "Office term not verified"
+        : (value.state.upper?.name ??
+          "No matching legislator in the current roster"),
     ],
   ];
   return (
-    <dl className={styles.facts}>
-      {facts.map(([label, text]) => (
-        <div key={label}>
-          <dt>{label}</dt>
-          <dd>{text}</dd>
+    <div className="stack">
+      <dl className={styles.facts}>
+        {facts.map(([label, text]) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd>{text}</dd>
+          </div>
+        ))}
+      </dl>
+      {value.stateOfficeTermStatus === "unverified" && (
+        <div role="note">
+          <strong>State office term unverified</strong>
+          <p className="muted">
+            Current directory roles are context only; their terms have not been
+            matched to this boundary.
+          </p>
+          {value.stateCurrentRole && (
+            <p>
+              {[
+                value.stateCurrentRole.lower?.name,
+                value.stateCurrentRole.upper?.name,
+              ]
+                .filter(Boolean)
+                .join(" · ") || "No current directory role available."}
+            </p>
+          )}
         </div>
-      ))}
-    </dl>
+      )}
+      {value.officeStatus === "unresolved_office" && (
+        <p className="muted">
+          No matching federal office is available for this serving term.
+        </p>
+      )}
+    </div>
   );
 }

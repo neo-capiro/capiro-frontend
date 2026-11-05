@@ -8,10 +8,8 @@ import {
 } from "./client-enrichment-fixtures";
 async function openReview(page: Page) {
   await page.goto(`/portfolio/${clientId}`);
-  await page.getByRole("button", { name: "Meri actions", exact: true }).click();
-  await page.getByRole("menuitem", { name: "Fill with Meri" }).click();
-  const drawer = page.getByRole("dialog", {
-    name: "Fill with Meri",
+  const drawer = page.getByRole("region", {
+    name: "Profile research",
     exact: true,
   });
   await expect(drawer).toBeVisible();
@@ -75,10 +73,10 @@ test("saved run current/proposed, sources, selection and explicit partial apply"
   await expect(
     drawer.getByRole("link", { name: "Synthetic company source" }).first(),
   ).toHaveAttribute("href", "https://example.test/source");
-  await drawer.getByRole("button", { name: "Select all new" }).click();
+  await drawer.getByRole("button", { name: "Select eligible" }).click();
   await expect(drawer.getByRole("checkbox").nth(2)).not.toBeChecked();
   await drawer
-    .getByRole("button", { name: "Apply 2 selected", exact: true })
+    .getByRole("button", { name: "Approve 2 selected", exact: true })
     .click();
   expect(state.posts).toHaveLength(0);
   await drawer
@@ -192,25 +190,19 @@ test("lost apply response survives reload and recovers the exact original reques
   const { state } = await installEnrichment(page);
   state.mode = "lost";
   let drawer = await openReview(page);
-  await drawer.getByRole("button", { name: "Select all new" }).click();
+  await drawer.getByRole("button", { name: "Select eligible" }).click();
   await drawer
-    .getByRole("button", { name: "Apply 2 selected", exact: true })
+    .getByRole("button", { name: "Approve 2 selected", exact: true })
     .click();
   await drawer
     .getByRole("button", { name: "Confirm apply", exact: true })
     .click();
   await expect(drawer).toContainText("The request may have saved changes");
-  await drawer.getByRole("button", { name: "Close review" }).click();
-  await expect(
-    page.getByRole("button", { name: "Meri actions", exact: true }),
-  ).toBeFocused();
-  await page.getByRole("button", { name: "Meri actions", exact: true }).click();
-  await page.getByRole("menuitem", { name: "Fill with Meri" }).click();
-  drawer = page.getByRole("dialog", { name: "Fill with Meri", exact: true });
+  drawer = await openReview(page);
   await expect(drawer).toContainText("The request may have saved changes");
   await drawer.getByRole("button", { name: "Refresh saved review" }).click();
   await expect(
-    drawer.getByRole("button", { name: "Select all new" }),
+    drawer.getByRole("button", { name: "Select eligible" }),
   ).toBeDisabled();
   expect(state.posts).toHaveLength(1);
   drawer = await openReview(page);
@@ -221,8 +213,24 @@ test("lost apply response survives reload and recovers the exact original reques
   await expect(drawer).toContainText("Application completed: 2 applied");
   expect(state.posts).toHaveLength(2);
   expect(state.posts[1]).toEqual(state.posts[0]);
+  await expect(drawer).not.toContainText("The request may have saved changes");
+  for (const name of [
+    "Finding description",
+    "Finding Synthetic advocacy matter",
+  ])
+    await expect(
+      drawer.getByRole("article", { name, exact: true }),
+    ).toContainText("accepted");
   await expect(
-    drawer.getByRole("button", { name: "Select all new" }),
+    drawer.getByRole("button", { name: "Select eligible" }),
+  ).toBeDisabled();
+  await expect(
+    drawer
+      .getByRole("article", {
+        name: "Finding Ignored synthetic finding",
+        exact: true,
+      })
+      .getByRole("button", { name: "Restore", exact: true }),
   ).toBeEnabled();
 });
 test("changed finding preflight preserves review and prevents POST", async ({
@@ -230,9 +238,9 @@ test("changed finding preflight preserves review and prevents POST", async ({
 }) => {
   const { state } = await installEnrichment(page);
   const drawer = await openReview(page);
-  await drawer.getByRole("button", { name: "Select all new" }).click();
+  await drawer.getByRole("button", { name: "Select eligible" }).click();
   await drawer
-    .getByRole("button", { name: "Apply 2 selected", exact: true })
+    .getByRole("button", { name: "Approve 2 selected", exact: true })
     .click();
   state.mode = "drift";
   await drawer
@@ -244,9 +252,9 @@ test("changed finding preflight preserves review and prevents POST", async ({
 test("closing during preflight aborts before POST", async ({ page }) => {
   const { state } = await installEnrichment(page);
   const drawer = await openReview(page);
-  await drawer.getByRole("button", { name: "Select all new" }).click();
+  await drawer.getByRole("button", { name: "Select eligible" }).click();
   await drawer
-    .getByRole("button", { name: "Apply 2 selected", exact: true })
+    .getByRole("button", { name: "Approve 2 selected", exact: true })
     .click();
   let release = () => {};
   state.runGate = new Promise<void>((r) => {
@@ -256,7 +264,7 @@ test("closing during preflight aborts before POST", async ({ page }) => {
     .getByRole("button", { name: "Confirm apply", exact: true })
     .click();
   await expect.poll(() => state.runGets).toBe(1);
-  await drawer.getByRole("button", { name: "Close review" }).click();
+  await page.goto("/portfolio");
   release();
   await expect(drawer).toBeHidden();
   expect(state.posts).toHaveLength(0);
@@ -267,7 +275,7 @@ test("standard user can read but cannot apply or ignore", async ({ page }) => {
   const drawer = await openReview(page);
   await expect(drawer).toContainText("Applying needs an admin");
   await expect(
-    drawer.getByRole("button", { name: "Select all new" }),
+    drawer.getByRole("button", { name: "Select eligible" }),
   ).toBeDisabled();
   await expect(
     drawer.getByRole("button", { name: "Ignore", exact: true }).first(),
@@ -337,7 +345,14 @@ test("starting research submits only the selected sources, offered identities an
     .getByRole("checkbox", { name: "Program overview.txt · Ready" })
     .check();
   await drawer.getByRole("button", { name: "Start selected research" }).click();
-  await expect(drawer).toContainText("Research is still running");
+  await expect(
+    drawer
+      .getByRole("region", { name: "Task ledger" })
+      .getByText("running", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    drawer.getByRole("button", { name: "Cancel run", exact: true }),
+  ).toBeEnabled();
   expect(state.posts).toHaveLength(1);
   expect(state.posts[0]?.body).toEqual({
     requestId: expect.any(String),
@@ -347,7 +362,7 @@ test("starting research submits only the selected sources, offered identities an
     attachmentIds: ["60000000-0000-4000-8000-000000000002"],
   });
   await expect(
-    drawer.getByRole("button", { name: "Run again" }),
+    drawer.getByRole("button", { name: "Research missing details" }),
   ).toBeDisabled();
   expect(unexpected).toEqual([]);
 });
@@ -369,7 +384,7 @@ test("a lost start response survives reload and recovers the same request", asyn
   await page.reload();
   drawer = await openReview(page);
   await expect(
-    drawer.getByRole("button", { name: "Run again" }),
+    drawer.getByRole("button", { name: "Research missing details" }),
   ).toBeDisabled();
   await drawer
     .getByRole("button", { name: "Recover research request" })
@@ -387,7 +402,9 @@ test("run again opens saved choices and creates a new run only after submission"
   const { state } = await installEnrichment(page);
   const priorId = state.run!.id;
   const drawer = await openReview(page);
-  await drawer.getByRole("button", { name: "Run again", exact: true }).click();
+  await drawer
+    .getByRole("button", { name: "Research missing details", exact: true })
+    .click();
   await expect(
     drawer.getByRole("checkbox", { name: "Public web", exact: true }),
   ).toBeChecked();
@@ -396,7 +413,14 @@ test("run again opens saved choices and creates a new run only after submission"
   ).toBeChecked();
   expect(state.posts).toHaveLength(0);
   await drawer.getByRole("button", { name: "Start selected research" }).click();
-  await expect(drawer).toContainText("Research is still running");
+  await expect(
+    drawer
+      .getByRole("region", { name: "Task ledger" })
+      .getByText("running", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    drawer.getByRole("button", { name: "Cancel run", exact: true }),
+  ).toBeEnabled();
   expect(state.posts).toHaveLength(1);
   expect(state.posts[0]?.body.requestId).not.toBe(priorId);
 });
@@ -415,14 +439,14 @@ test("closing during research preflight prevents the start POST", async ({
   const gate = new Promise<void>((resolve) => {
     release = resolve;
   });
-  await page.route("**/fill-with-meri/setup", async (route) => {
+  await page.route("**/profile-build/setup", async (route) => {
     entered = true;
     await gate;
     await route.fallback().catch(() => {});
   });
   await drawer.getByRole("button", { name: "Start selected research" }).click();
   await expect.poll(() => entered).toBe(true);
-  await drawer.getByRole("button", { name: "Close review" }).click();
+  await page.goto("/portfolio");
   release();
   await expect(drawer).toBeHidden();
   expect(state.posts).toHaveLength(0);
@@ -526,17 +550,15 @@ test("wrong-client response hides review; unavailable read can retry", async ({
   await expect(drawer.getByRole("article")).toHaveCount(4);
   expect(state.posts).toHaveLength(0);
 });
-test("drawer follows desktop geometry and mobile dark layout", async ({
+test("inline profile research fits desktop and mobile dark layout", async ({
   page,
 }) => {
   const { unexpected } = await installEnrichment(page);
   const drawer = await openReview(page);
   await page.evaluate(() => document.fonts.ready);
   const bounds = await drawer.boundingBox();
-  expect(bounds?.x).toBe(820);
-  expect(bounds?.y).toBe(0);
-  expect(bounds?.width).toBe(620);
-  expect(bounds?.height).toBe(1040);
+  expect(bounds?.width).toBeGreaterThan(500);
+  expect(bounds?.width).toBeLessThanOrEqual(1440);
   await page.screenshot({
     path: "work/enrichment-evidence/review-desktop-light.png",
     fullPage: false,
@@ -554,8 +576,8 @@ test("drawer follows desktop geometry and mobile dark layout", async ({
     ),
   ).toBe(true);
   await expect(
-    drawer.getByRole("button", { name: "Close review" }),
-  ).toBeInViewport();
+    drawer.getByRole("button", { name: "Research missing details" }),
+  ).toBeVisible();
   expect(unexpected).toEqual([]);
 });
 test("canonical upload is explicit, validates empty files and never starts research", async ({

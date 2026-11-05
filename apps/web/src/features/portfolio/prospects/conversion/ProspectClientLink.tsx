@@ -48,7 +48,11 @@ export function ProspectClientLink({ record }: { record: Prospect }) {
       <button
         ref={trigger}
         className="button"
-        disabled={!permitted || record.status !== "active"}
+        disabled={
+          !permitted ||
+          record.status !== "active" ||
+          record.stage !== "closed_won"
+        }
         onClick={() => setOpen(true)}
       >
         Link existing client

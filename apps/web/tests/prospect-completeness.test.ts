@@ -1,35 +1,87 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { expect, it, vi } from "vitest";
-import { ProspectCompleteness } from "../src/features/portfolio/prospects/ProspectCompleteness";
-import { prospect } from "./browser/fixtures";
+import { ProfileCompleteness } from "../src/features/portfolio/profile-build/ProfileCompleteness";
 const state = vi.hoisted(() => ({
-  data: null as null | { contacts: unknown[] },
+  data: undefined as unknown,
+  error: null as Error | null,
 }));
-vi.mock("../src/features/portfolio/prospects/contacts/queries", () => ({
-  useContacts: () => ({ isSuccess: true, error: null, data: state.data }),
+vi.mock("../src/features/portfolio/profile-build/profile-queries", () => ({
+  useProfileSnapshot: () => ({
+    isPending: false,
+    data: state.data,
+    error: state.error,
+    refetch: vi.fn(),
+  }),
 }));
-it("does not mistake unavailable contacts for missing saved data", () => {
-  state.data = null;
-  const html = renderToStaticMarkup(
-    createElement(ProspectCompleteness, {
-      record: prospect,
-      onDetails: () => {},
-      onNext: () => {},
+const render = () =>
+  renderToStaticMarkup(
+    createElement(ProfileCompleteness, {
+      subject: { kind: "prospect", id: "10000000-0000-4000-8000-000000000001" },
+      onEdit: () => {},
     }),
   );
-  expect(html).toBe("");
+it("does not present unavailable profile data as missing saved information", () => {
+  state.data = undefined;
+  state.error = Error("Unavailable");
+  const html = render();
+  expect(html).toContain("Unavailable");
+  expect(html).not.toContain("Not researched");
 });
-it("offers contextual edits for confirmed missing values", () => {
-  state.data = { contacts: [] };
-  const html = renderToStaticMarkup(
-    createElement(ProspectCompleteness, {
-      record: { ...prospect, description: null, nextAction: null },
-      onDetails: () => {},
-      onNext: () => {},
-    }),
-  );
-  expect(html).toContain("Add company description");
-  expect(html).toContain("Add next step");
-  expect(html).toContain("Add a prospect contact");
+it("keeps completion, research provenance and review state distinct across six prospect sections", () => {
+  state.error = null;
+  state.data = {
+    completeness: {
+      completed: 1,
+      total: 6,
+      sections: [
+        {
+          key: "company",
+          status: "complete",
+          researched: false,
+          reviewCount: 0,
+        },
+        {
+          key: "registration",
+          status: "partial",
+          researched: true,
+          reviewCount: 0,
+        },
+        {
+          key: "leadership",
+          status: "missing",
+          researched: false,
+          reviewCount: 0,
+        },
+        {
+          key: "lobbying",
+          status: "missing",
+          researched: true,
+          reviewCount: 0,
+        },
+        {
+          key: "federal_footprint",
+          status: "partial",
+          researched: true,
+          reviewCount: 2,
+        },
+        { key: "news", status: "missing", researched: false, reviewCount: 0 },
+      ],
+    },
+  };
+  const html = render();
+  for (const label of [
+    "Company basics",
+    "Federal registration",
+    "Leadership",
+    "Lobbying history",
+    "Federal footprint",
+    "News",
+    "Complete",
+    "Partial",
+    "Not researched",
+    "Not provided",
+    "2 to review",
+  ])
+    expect(html).toContain(label);
 });

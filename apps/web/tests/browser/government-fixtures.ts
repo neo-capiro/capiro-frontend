@@ -66,8 +66,42 @@ export async function installGovernmentFixtures(page: Page) {
   await page.route(`**/clients/${clientId}/targets`, (route) =>
     json(route, [governmentTarget, stateTarget]),
   );
-  await page.route(`**/clients/${clientId}/target-recommendations`, (route) =>
-    json(route, { recommendations: [], computedAt: null }),
+  await page.route(`**/clients/${clientId}/targets/*/context?**`, (route) => {
+    const url = new URL(route.request().url());
+    const targetId = url.pathname.split("/").at(-2);
+    if (![governmentTarget.id, stateTarget.id].includes(targetId ?? ""))
+      return route.fallback();
+    return json(route, {
+      schemaVersion: 1,
+      clientId,
+      targetId,
+      section: url.searchParams.get("section"),
+      items: [],
+      nextCursor: null,
+    });
+  });
+  await page.route(`**/clients/${clientId}/portfolio/depth`, (route) =>
+    json(route, {
+      capabilities: [],
+      proposals: [],
+      terms: [],
+      tracking: [],
+      relationships: [governmentTarget, stateTarget].map((target) => ({
+        ...target,
+        relationshipStatus: "uncontacted",
+        ownerUserId: null,
+        lastContactAt: null,
+        nextStep: null,
+        stance: "unknown",
+        officeTerm: null,
+        version: 1,
+      })),
+      supports: [],
+      memberView: { fields: [], gaps: [] },
+      sectorAnchors: [],
+      businessUnits: [],
+      relationshipConflicts: [],
+    }),
   );
   await page.route("**/directory/staffers/staff-12", (route) =>
     json(route, staffDetail),

@@ -19,6 +19,10 @@ const stableFields = [
   "notes",
   "stateHouseDistrict",
   "stateSenateDistrict",
+  "country",
+  "siteRole",
+  "siteStatus",
+  "siteVerificationStatus",
 ] as const;
 export const facilityDraftRevision = (facility: Facility) =>
   JSON.stringify(

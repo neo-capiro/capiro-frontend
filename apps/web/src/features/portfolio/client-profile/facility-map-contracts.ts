@@ -28,10 +28,24 @@ export const representationSchema = z.array(
     representation: z.discriminatedUnion("unresolved", [
       z.object({
         unresolved: z.literal(true),
-        reason: z.enum(["no_geocode", "no_state"]),
+        reason: z.enum([
+          "no_geocode",
+          "no_state",
+          "stale_boundary",
+          "needs_review",
+          "not_applicable",
+        ]),
       }),
       z.object({
         unresolved: z.literal(false),
+        officeStatus: z.enum(["resolved", "unresolved_office"]).optional(),
+        stateOfficeTermStatus: z.literal("unverified").optional(),
+        stateCurrentRole: z
+          .object({
+            lower: stateMember.nullable(),
+            upper: stateMember.nullable(),
+          })
+          .optional(),
         federal: z.object({
           house: federalMember.nullable(),
           senate: z.array(federalMember),

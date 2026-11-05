@@ -174,7 +174,7 @@ test("CI-04 choice groups retain their distinct desktop layouts", async ({
   expect(new Set(y.map(Math.round)).size).toBe(1);
   await page.screenshot({ path: info.outputPath("registration-choices.png") });
   await dialog
-    .getByRole("button", { name: "3. Sector & Tracks", exact: true })
+    .getByRole("button", { name: "6. Advocacy profile", exact: true })
     .click();
   const tracks = dialog
     .getByRole("group", { name: "Active submission tracks" })
@@ -314,9 +314,9 @@ test("CI-04 all three choice groups stack without horizontal overflow on mobile"
   await page.getByRole("button", { name: /Manual entry/ }).click();
   const dialog = page.getByRole("dialog", { name: "Add profile", exact: true });
   for (const [tab, group] of [
-    ["1. Company Info", "Small Business Classification"],
+    ["1. Company", "Small Business Classification"],
     ["2. Government Registration", "Federal set-aside certifications"],
-    ["3. Sector & Tracks", "Active submission tracks"],
+    ["6. Advocacy profile", "Active submission tracks"],
   ] as const) {
     await dialog.getByRole("button", { name: tab, exact: true }).click();
     const boxes = await dialog

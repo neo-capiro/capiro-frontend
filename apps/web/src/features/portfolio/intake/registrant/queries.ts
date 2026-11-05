@@ -107,9 +107,11 @@ export function useImportClients() {
     mutationFn: async ({
       registrantId,
       ids,
+      websites,
     }: {
       registrantId: number;
       ids: number[];
+      websites?: Record<number, string>;
     }) => {
       const scope = lifetime.current;
       if (!scope.active)
@@ -128,10 +130,17 @@ export function useImportClients() {
             "Your session changed. Refresh and review before importing.",
           );
       };
-      const result = await importClients(api, registrantId, ids, async () => {
-        await verifyProfileCapacity(api, ids.length, guard);
-        guard();
-      });
+      const result = await importClients(
+        api,
+        registrantId,
+        ids,
+        async () => {
+          await verifyProfileCapacity(api, ids.length, guard);
+          guard();
+        },
+        undefined,
+        websites,
+      );
       const assertCurrent = () => {
         try {
           guard();

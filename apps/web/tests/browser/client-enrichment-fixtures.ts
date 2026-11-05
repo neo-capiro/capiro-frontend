@@ -1,19 +1,19 @@
 import type { Page } from "@playwright/test";
-import type { RetryResult } from "../../src/features/portfolio/client-profile/enrichment/retry-contracts";
+import type { RetryResult } from "../../src/features/portfolio/profile-build/retry-contracts";
 import { clientId, installFixtures, json } from "./fixtures";
 import {
   runSchema,
-  type FillRun,
-} from "../../src/features/portfolio/client-profile/enrichment/contracts";
+  type ProfileBuildRun,
+} from "../../src/features/portfolio/profile-build/contracts";
 import {
   applicationResultSchema,
   type ApplicationResult,
-} from "../../src/features/portfolio/client-profile/enrichment/review-contracts";
+} from "../../src/features/portfolio/profile-build/review-contracts";
 export const runId = "e0000000-0000-4000-8000-000000000001";
 export const findingId = "e0000000-0000-4000-8000-000000000002";
 export const advocacyId = "e0000000-0000-4000-8000-000000000003";
 export const matterId = "e0000000-0000-4000-8000-000000000004";
-export function syntheticRun(): FillRun {
+export function syntheticRun(): ProfileBuildRun {
   const finding = {
     id: findingId,
     revision: "b".repeat(64),
@@ -39,6 +39,7 @@ export function syntheticRun(): FillRun {
     createdAt: "2026-10-11T07:00:00Z",
   };
   return runSchema.parse({
+    subject: { kind: "client" as const, id: clientId },
     id: runId,
     clientRevision: "a".repeat(64),
     clientId,
@@ -119,7 +120,7 @@ export function syntheticRun(): FillRun {
 export async function installEnrichment(page: Page) {
   const unexpected = await installFixtures(page);
   const state = {
-    run: syntheticRun() as FillRun | null,
+    run: syntheticRun() as ProfileBuildRun | null,
     posts: [] as { path: string; body: Record<string, unknown> }[],
     mode: "normal" as
       | "normal"
@@ -134,7 +135,7 @@ export async function installEnrichment(page: Page) {
     latestGets: 0,
     role: "user_admin",
     receipts: new Map<string, ApplicationResult>(),
-    starts: new Map<string, FillRun>(),
+    starts: new Map<string, ProfileBuildRun>(),
     dropStartOnce: false,
     retries: new Map<string, RetryResult>(),
     dropRetryOnce: false,
@@ -168,15 +169,33 @@ export async function installEnrichment(page: Page) {
       ]),
   );
   await page.route(
-    `**/api/backend/core/clients/${clientId}/fill-with-meri/**`,
+    `**/api/backend/core/clients/${clientId}/profile-build/**`,
     async (route) => {
       const path =
-        new URL(route.request().url()).pathname.split("/fill-with-meri/")[1] ??
+        new URL(route.request().url()).pathname.split("/profile-build/")[1] ??
         "";
       if (route.request().method() === "GET") {
+        if (path === "profile")
+          return json(route, {
+            subject: { kind: "client", id: clientId },
+            version: "a".repeat(64),
+            fields: {},
+            facts: [],
+            conflicts: [],
+            completeness: { completed: 0, total: 6, missing: [], sections: [] },
+            sections: {
+              locations: [],
+              leadership: [],
+              capabilities: [],
+              advocacy: null,
+              notes: [],
+              documents: [],
+            },
+          });
         if (path === "latest") state.latestGets++;
         if (path === "setup")
           return json(route, {
+            subject: { kind: "client" as const, id: clientId },
             clientId,
             clientName: "Test Aerospace",
             website: "https://example.test",
@@ -207,6 +226,7 @@ export async function installEnrichment(page: Page) {
         const run = structuredClone(state.run);
         if (run && state.mode === "wrong-client") {
           run.clientId = runId;
+          run.subject = { kind: "client", id: runId };
           run.findings = run.findings.map((f) => ({ ...f, clientId: runId }));
           run.tasks = run.tasks?.map((t) => ({ ...t, clientId: runId }));
         }
@@ -214,6 +234,7 @@ export async function installEnrichment(page: Page) {
           run.findings[0]!.proposedValue = "Changed after review";
         if (run && path.endsWith("/review"))
           return json(route, {
+            subject: { kind: "client" as const, id: run.clientId },
             clientId: run.clientId,
             runId: run.id,
             clientRevision: run.clientRevision,

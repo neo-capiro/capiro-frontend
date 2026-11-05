@@ -1,8 +1,11 @@
+import { ManualCodeSuggestions } from "./ManualCodeSuggestions";
+import { CodeSelector } from "@/features/portfolio/profile-build/public";
 import { TokenInput } from "@/shared/portfolio/ui/TokenInput";
 import { sectors, tracks } from "./catalog";
 import { ChoiceList, ChoiceSelect, TextField, type StepProps } from "./Fields";
 import styles from "./intake.module.css";
-export function SectorStep({ values, set, errors }: StepProps) {
+export function SectorStep(props: StepProps) {
+  const { values, set, errors } = props;
   return (
     <div className={styles.fields}>
       <ChoiceSelect
@@ -47,11 +50,19 @@ export function SectorStep({ values, set, errors }: StepProps) {
         value={values.submissionTracks}
         onChange={(v) => set("submissionTracks", v)}
       />
-      <TokenInput
+      <CodeSelector
+        kind="lda"
+        error={errors.issueCodes}
         label="LDA issue codes (bill/policy matching)"
         value={values.issueCodes}
         onChange={(v) => set("issueCodes", v)}
-      />
+      >
+        <ManualCodeSuggestions
+          {...props}
+          field="issueCodes"
+          label="LDA issue codes"
+        />
+      </CodeSelector>
       <div className={styles.columns}>
         <TextField
           label="Engagement start date"

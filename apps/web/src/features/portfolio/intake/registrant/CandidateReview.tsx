@@ -20,12 +20,16 @@ export function CandidateReview({
   disabled,
   onToggle,
   onChangeFirm,
+  websites,
+  onWebsite,
 }: {
   data: Candidates;
   selected: number[];
   disabled: boolean;
   onToggle: (id: number) => void;
   onChangeFirm: () => void;
+  websites: Record<number, string>;
+  onWebsite: (id: number, website: string) => void;
 }) {
   const [filter, setFilter] = useState("");
   const groups = groupCandidates(data.candidates);
@@ -114,6 +118,24 @@ export function CandidateReview({
                   </span>
                 )}
               </label>
+              {selected.includes(group.ldaClientId) && (
+                <label>
+                  Company website{" "}
+                  <small className="muted">
+                    Optional · improves the company match
+                  </small>
+                  <input
+                    aria-label={`Website for ${group.aliases[0]?.name ?? group.ldaClientId}`}
+                    value={websites[group.ldaClientId] ?? ""}
+                    maxLength={500}
+                    placeholder="company.com"
+                    disabled={disabled}
+                    onChange={(event) =>
+                      onWebsite(group.ldaClientId, event.target.value)
+                    }
+                  />
+                </label>
+              )}
             </li>
           ))}
         </ul>

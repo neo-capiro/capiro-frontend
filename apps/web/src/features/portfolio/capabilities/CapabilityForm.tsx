@@ -4,6 +4,7 @@ import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import { TokenInput } from "@/shared/portfolio/ui/TokenInput";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { Capability, CapabilityInput } from "./contracts";
+import { capabilityLifecycleSchema } from "./contracts";
 import {
   CapabilityDetails,
   CapabilityIdentityFields,
@@ -60,6 +61,7 @@ export function CapabilityForm({
           peNumbers: pes,
           keywords,
           notes: String(form.get("notes") ?? ""),
+          lifecycle: capabilityLifecycleSchema.parse(form.get("lifecycle")),
         });
       }}
     >

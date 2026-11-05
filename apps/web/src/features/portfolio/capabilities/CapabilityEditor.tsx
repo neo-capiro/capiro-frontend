@@ -8,6 +8,8 @@ import type { Capability } from "./contracts";
 import { useCapabilityMutation } from "./mutations";
 import { CapabilityForm } from "./CapabilityForm";
 import styles from "./capability-editor.module.css";
+import { CapabilityDepth } from "./CapabilityDepth";
+import { PortfolioResearch } from "./PortfolioResearch";
 
 export function CapabilityEditor({
   clientId,
@@ -89,12 +91,19 @@ export function CapabilityEditor({
             <Tabs.Trigger value="documents" className={styles.tab}>
               Documents
             </Tabs.Trigger>
+            <Tabs.Trigger value="context" className={styles.tab}>
+              Alignment &amp; support
+            </Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="profile" forceMount className={styles.tabPanel}>
             {form}
           </Tabs.Content>
           <Tabs.Content value="documents" className={styles.tabPanel}>
             <div className={styles.documents}>
+              <PortfolioResearch
+                clientId={clientId}
+                scope={{ purpose: "capabilities", capabilityId: capability.id }}
+              />
               <EntityDocuments
                 clientId={clientId}
                 source={`capability:${capability.id}`}
@@ -102,6 +111,9 @@ export function CapabilityEditor({
                 emptyMessage="No documents yet for this capability."
               />
             </div>
+          </Tabs.Content>
+          <Tabs.Content value="context" className={styles.tabPanel}>
+            <CapabilityDepth clientId={clientId} capabilityId={capability.id} />
           </Tabs.Content>
         </Tabs.Root>
       ) : (
