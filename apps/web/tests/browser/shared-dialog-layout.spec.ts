@@ -95,7 +95,8 @@ async function expectDialogGeometry(
       const header = dialog.locator(":scope > header");
       const content = [
         header.getByRole("heading", { name: "Pipeline", exact: true }),
-        header.getByText("Weighted pipeline and win rate unavailable", {
+        // No weighted-value producer exists; this is not a failed metric read.
+        header.getByText("Weighted pipeline and win rate not calculated", {
           exact: true,
         }),
         header.getByRole("button", { name: "Close", exact: true }),
@@ -198,6 +199,25 @@ for (const viewport of viewports) {
                   contacts: [],
                   nextCursor: null,
                 })
+              : route.fallback(),
+        );
+        await page.route(
+          `**/business-development/prospects/${prospectId}/watch`,
+          (route) =>
+            route.request().method() === "GET"
+              ? json(route, {
+                  watch: null,
+                  sources: [],
+                  lastCompletedCheckAt: null,
+                })
+              : route.fallback(),
+        );
+        await page.route(
+          `**/business-development/prospects/${prospectId}/alerts*`,
+          (route) =>
+            route.request().method() === "GET" &&
+            new URL(route.request().url()).pathname.endsWith("/alerts")
+              ? json(route, { items: [], nextCursor: null, unreadCount: 0 })
               : route.fallback(),
         );
       }
