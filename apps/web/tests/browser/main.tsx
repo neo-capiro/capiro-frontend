@@ -52,6 +52,7 @@ import "./test-font.css";
 // Deliberately only loopback destinations; intercepts cannot reach live APIs.
 const destinations = {
   existingApp: "http://127.0.0.1:5191/existing",
+  externalApp: "http://127.0.0.1:5191/existing",
   meri: "http://127.0.0.1:5191/meri",
 };
 function App() {

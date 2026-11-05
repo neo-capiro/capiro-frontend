@@ -26,7 +26,7 @@ test("explicit existing-client link preserves failures and confirms a scoped no-
   page,
 }) => {
   const unexpected = await installFixtures(page);
-  let record = { ...prospect };
+  let record = { ...prospect, stage: "closed_won" as const };
   let writes = 0;
   await page.route(
     "**/business-development/search/clients?**",
@@ -92,7 +92,7 @@ test("lost link response reads the actual committed association without a second
   page,
 }) => {
   const unexpected = await installFixtures(page);
-  let record = { ...prospect };
+  let record = { ...prospect, stage: "closed_won" as const };
   let writes = 0;
   await page.route("**/business-development/search/clients?**", (route) =>
     json(route, { results: [choice] }),
@@ -124,6 +124,9 @@ test("mismatched success is refused and session expiry retains the existing glob
   page,
 }) => {
   const unexpected = await installFixtures(page);
+  await page.route(`**/business-development/prospects/${prospectId}`, (route) =>
+    json(route, { ...prospect, stage: "closed_won" }),
+  );
   let writes = 0;
   await page.route("**/business-development/search/clients?**", (route) =>
     json(route, { results: [choice] }),

@@ -12,6 +12,7 @@ import {
   useProfileCapacity,
 } from "@/features/portfolio/billing/public";
 import { BillingSummaryPanel } from "@/features/portfolio/billing/summary-public";
+import { SourcedProfileStart } from "./SourcedProfileStart";
 import styles from "./portfolio.module.css";
 
 interface CreateProfileDialogProps {
@@ -75,7 +76,7 @@ function ProfileChoiceSession({
       open={open}
       onOpenChange={onOpenChange}
       title="Add profile"
-      description="How would you like to start?"
+      description="Enter a company to build a sourced profile, or choose another way to start."
       className={styles.profileChooser}
       onCloseAutoFocus={(event) => {
         if (switching.current) event.preventDefault();
@@ -91,9 +92,11 @@ function ProfileChoiceSession({
         <p className="status">Your role does not allow creating profiles.</p>
       )}
       <div className={styles.choiceGroup}>
-        <p className="eyebrow">New client</p>
+        <p className="eyebrow">Build a client profile</p>
         {permitted && <ProfileCapacityStatus capacity={capacity} />}
         <BillingSummaryPanel enabled={open} />
+        <SourcedProfileStart allowed={permitted && capacity.allowed} />
+        <p className="eyebrow">Other ways to start</p>
         <button
           className={styles.profileChoice}
           disabled={!permitted || !capacity.allowed}

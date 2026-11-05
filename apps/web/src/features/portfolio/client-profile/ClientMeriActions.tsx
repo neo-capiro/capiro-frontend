@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import { DropdownMenu } from "radix-ui";
 import type { Client } from "@/features/portfolio/index/public";
 import { ClientAttendancePreferences } from "@/features/portfolio/calendar/attendance/public";
-import { ClientEnrichmentDialog } from "./enrichment/public";
 import headerStyles from "./client-header.module.css";
 import styles from "./client-meri-actions.module.css";
 import { useMeriCapabilities } from "@/shared/meri-resources/CapabilityContext";
@@ -15,7 +14,6 @@ import { ClientMeriHandoffDialog } from "./ClientMeriHandoffDialog";
 export function ClientMeriActions({ client }: { client: Client }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const [preferences, setPreferences] = useState(false);
-  const [enrichment, setEnrichment] = useState(false);
   const [handoff, setHandoff] = useState(false);
   const capabilities = useMeriCapabilities(),
     selected = useSelectedClient();
@@ -43,7 +41,7 @@ export function ClientMeriActions({ client }: { client: Client }) {
             align="end"
             sideOffset={8}
             onCloseAutoFocus={(event) => {
-              if (preferences || enrichment || handoff) event.preventDefault();
+              if (preferences || handoff) event.preventDefault();
             }}
           >
             <DropdownMenu.Item
@@ -58,16 +56,6 @@ export function ClientMeriActions({ client }: { client: Client }) {
             >
               <span>✦ Ask Meri about this client</span>
               <small>Open Meri with this client in context.</small>
-            </DropdownMenu.Item>
-            <DropdownMenu.Item
-              className={styles.item}
-              onSelect={() => setEnrichment(true)}
-            >
-              <span>✦ Fill with Meri</span>
-              <small>
-                Review saved suggestions from connected sources before applying
-                selected findings.
-              </small>
             </DropdownMenu.Item>
             <DropdownMenu.Item
               className={styles.item}
@@ -90,15 +78,6 @@ export function ClientMeriActions({ client }: { client: Client }) {
           }}
         />
       )}
-      <ClientEnrichmentDialog
-        clientId={client.id}
-        open={enrichment}
-        onOpenChange={setEnrichment}
-        onCloseAutoFocus={(event) => {
-          event.preventDefault();
-          trigger.current?.focus();
-        }}
-      />
       {preferences && (
         <ClientAttendancePreferences
           clientId={client.id}

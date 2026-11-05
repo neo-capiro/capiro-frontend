@@ -24,11 +24,15 @@ export async function saveClientProfile(
   initial?: IntakeForm,
   client?: Client,
   assertBeforeDispatch?: () => void,
+  canonicalEntityId?: string,
 ) {
   const path = client ? `clients/${encodeURIComponent(client.id)}` : "clients";
   const schema = client ? clientReceipt(client.id) : clientSchema;
   const latest = client ? await api.request("core", path, schema) : undefined;
-  const body = intakePayload(values, initial, latest);
+  const body = {
+    ...intakePayload(values, initial, latest),
+    ...(!client && canonicalEntityId ? { canonicalEntityId } : {}),
+  };
   if (latest && !Object.keys(body).length) return latest;
   assertBeforeDispatch?.();
   try {

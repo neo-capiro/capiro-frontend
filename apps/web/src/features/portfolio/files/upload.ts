@@ -50,10 +50,19 @@ export async function uploadParentFile(
   source = "manual",
   transport: typeof fetch = fetch,
   beforeDispatch?: () => void,
+  signal?: AbortSignal,
 ) {
   const invalid = fileValidation(file);
   if (invalid) throw new Error(invalid);
-  if (!parent.clientId && !parent.meetingId)
+  const identityDocument = source === "profile_identity";
+  if (
+    identityDocument &&
+    (parent.clientId || parent.meetingId || !attempt.actor)
+  )
+    throw new Error(
+      "Identity documents require an uploader-owned unlinked upload.",
+    );
+  if (!parent.clientId && !parent.meetingId && !identityDocument)
     throw new Error("Choose a client or meeting before uploading.");
   const metadata = {
     ...(parent.clientId ? { clientId: parent.clientId } : {}),
@@ -85,7 +94,11 @@ export async function uploadParentFile(
           Boolean(ticket.s3Key.trim()) && ticket.fields.key === ticket.s3Key,
         "Unexpected upload storage reference",
       ),
-      { method: "POST", body: { ...metadata, contentLength: file.size } },
+      {
+        method: "POST",
+        body: { ...metadata, contentLength: file.size },
+        signal,
+      },
     );
     const url = signedUrl(ticket.url);
     if (!url)
@@ -104,7 +117,9 @@ export async function uploadParentFile(
         body: form,
         credentials: "omit",
         redirect: "error",
-        signal: AbortSignal.timeout(60_000),
+        signal: signal
+          ? AbortSignal.any([signal, AbortSignal.timeout(60_000)])
+          : AbortSignal.timeout(60_000),
       });
     } catch {
       attempt.storageUnknown = true;
@@ -132,6 +147,9 @@ export async function uploadParentFile(
     .extend({
       s3Key: uploadTicketSchema.shape.s3Key,
       meetingId: attachmentSchema.shape.id.nullable().optional(),
+      prospectId: attachmentSchema.shape.id.nullable().optional(),
+      mailMessageId: attachmentSchema.shape.id.nullable().optional(),
+      tenantId: attachmentSchema.shape.id.optional(),
     })
     .refine(
       (receipt) =>
@@ -144,12 +162,26 @@ export async function uploadParentFile(
         receipt.fileName === metadata.fileName &&
         receipt.contentType === metadata.contentType,
     );
+  const expectedReceipt = identityDocument
+    ? receiptSchema.refine(
+        (receipt) =>
+          receipt.tenantId === attempt.actor?.tenantId &&
+          !receipt.meetingId &&
+          !receipt.prospectId &&
+          !receipt.mailMessageId &&
+          receipt.viewerMode === "restricted" &&
+          receipt.viewerUserIds.length === 1 &&
+          receipt.viewerUserIds[0] === attempt.actor?.userId,
+        "Identity documents must remain private to their uploader.",
+      )
+    : receiptSchema;
   const receipt = await api.request(
     "core",
     "engagement/attachments/confirm",
-    receiptSchema,
+    expectedReceipt,
     {
       method: "POST",
+      signal,
       body: {
         ...metadata,
         s3Key: attempt.ticket.s3Key,

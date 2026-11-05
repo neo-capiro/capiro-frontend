@@ -1,0 +1,56 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.card h4 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.07px;
+}
+.card p {
+  margin: 0;
+}
+.card [data-state="resolved"] {
+  color: var(--success);
+}
+.evidence {
+  padding: 16px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.evidence article + article {
+  margin-top: 16px;
+}
+.evidence summary {
+  cursor: pointer;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 0;
+}
+.facts dt {
+  color: var(--muted-foreground);
+}
+.facts dd {
+  margin: 4px 0 0;
+}
+@media (max-width: 600px) {
+  .card {
+    padding: 16px;
+  }
+  .facts {
+    grid-template-columns: 1fr;
+  }
+}

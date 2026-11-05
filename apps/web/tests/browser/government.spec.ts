@@ -226,18 +226,26 @@ test("state target details preserve encoded identity; tier clearing, reviewed ma
   });
   await page.route(`**/clients/${clientId}/targets**`, (route) => {
     const method = route.request().method();
+    const requestPath = new URL(route.request().url()).pathname;
+    if (
+      method === "GET" &&
+      requestPath !== `/api/backend/core/clients/${clientId}/targets`
+    )
+      return route.fallback();
     if (method === "PATCH") {
       expect(route.request().postDataJSON()).toEqual({
-        memberId: statePersonId,
         tier: null,
       });
+      expect(new URL(route.request().url()).pathname).toBe(
+        `/api/backend/core/clients/${clientId}/targets/${target.id}/tier`,
+      );
       target = { ...target, tier: null };
       return json(route, target);
     }
     if (method === "DELETE") {
       removals++;
-      expect(new URL(route.request().url()).searchParams.get("memberId")).toBe(
-        statePersonId,
+      expect(new URL(route.request().url()).pathname).toBe(
+        `/api/backend/core/clients/${clientId}/targets/${target.id}`,
       );
       return json(route, { message: "Removal unavailable" }, 503);
     }
