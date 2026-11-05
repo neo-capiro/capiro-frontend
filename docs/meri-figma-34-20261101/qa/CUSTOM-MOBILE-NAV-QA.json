@@ -1,0 +1,32 @@
+{
+  "mutatedNodeIds": [
+    "3219:50470"
+  ],
+  "id": "3219:50470",
+  "reactions": [
+    {
+      "action": {
+        "type": "NODE",
+        "destinationId": "1064:149061",
+        "navigation": "NAVIGATE",
+        "transition": null,
+        "resetVideoPosition": false,
+        "resetScrollPosition": true
+      },
+      "actions": [
+        {
+          "type": "NODE",
+          "destinationId": "1064:149061",
+          "navigation": "NAVIGATE",
+          "transition": null,
+          "resetVideoPosition": false,
+          "resetScrollPosition": true
+        }
+      ],
+      "trigger": {
+        "type": "ON_CLICK"
+      }
+    }
+  ],
+  "destination": "1064:149061"
+}
