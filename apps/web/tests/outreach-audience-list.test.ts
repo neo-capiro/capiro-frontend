@@ -80,12 +80,25 @@ function find(
   }
   throw new Error("Required control missing");
 }
+function openFilters() {
+  const first = render();
+  if (!driver.values[9])
+    (
+      find(first.tree, (props) => props.children === "More filters")
+        .onClick as () => void
+    )();
+  return render();
+}
 function select(value: OutreachAudience) {
   const control = find(
-    render().tree,
+    openFilters().tree,
     (_props, type) => type === OutreachAudienceFilter,
   );
   (control.onChange as (value: OutreachAudience) => void)(value);
+  (
+    find(render().tree, (props) => props.children === "Apply filters")
+      .onClick as () => void
+  )();
 }
 beforeEach(() => {
   driver.values = [];
@@ -95,8 +108,8 @@ beforeEach(() => {
   driver.results = {};
 });
 
-it("keeps date and audience filters above categories and creation in the Outreach heading", () => {
-  const { tree, markup } = render();
+it("opens the full filter panel with creation, dates and audience, then returns to categories", () => {
+  const { tree, markup } = openFilters();
   const filters = find(
     tree,
     (props) => props["aria-label"] === "Outreach filters",
@@ -115,10 +128,13 @@ it("keeps date and audience filters above categories and creation in the Outreac
   );
   (create.onCreate as () => void)();
   expect(props.onCreate).toHaveBeenCalled();
-  expect(markup.indexOf('aria-label="Outreach filters"')).toBeLessThan(
-    markup.indexOf('aria-label="Campaign categories"'),
-  );
-  expect(markup).toContain('aria-label="Search outreach"');
+  expect(markup).toContain("<h1>Filter outreach</h1>");
+  expect(markup).not.toContain('aria-label="Campaign categories"');
+  (
+    find(tree, (props) => props.children === "Apply filters")
+      .onClick as () => void
+  )();
+  expect(render().markup).toContain('aria-label="Campaign categories"');
 });
 
 it("keeps the client selector and query contracts in the Figma Outreach toolbar", () => {
@@ -144,15 +160,14 @@ it("keeps the client selector and query contracts in the Figma Outreach toolbar"
   ]);
 });
 
-it("retains the unsupported audience notice once outside its compact group with accessible linkage", () => {
+it("retains the unsupported audience notice once in the full filter panel", () => {
   driver.version = undefined;
-  const { markup } = render();
+  const { markup } = openFilters();
   expect(markup).toContain('aria-describedby="outreach-audience-availability"');
   expect(markup).toContain('id="outreach-audience-availability"');
   expect(markup.match(/awaiting the Core update/g)).toHaveLength(1);
-  expect(markup.match(/disabled=""/g)).toHaveLength(2);
-  expect(markup).toContain('aria-label="Search outreach"');
-  expect(markup).toContain('aria-label="Campaign categories"');
+  expect(markup).toContain('aria-label="Outreach audience"');
+  expect(markup).toContain("Apply filters");
 });
 
 it("All preserves existing sources and omits the selector; Client and External send both canonical selectors", () => {
@@ -259,14 +274,24 @@ it("retains empty continuation pages and canonical errors without falling back t
     driver.calls.find((call) => call.key === "engagement.sessions")?.enabled,
   ).toBe(false);
 });
-it("displays disabled Client/External controls while keeping All usable", () => {
-  const markup = renderToStaticMarkup(
-    createElement(OutreachAudienceFilter, {
-      value: "all",
-      supported: false,
-      onChange: vi.fn(),
-    }),
-  );
-  expect(markup.match(/disabled=""/g)).toHaveLength(2);
-  expect(markup).toContain("awaiting the Core update");
+it("disables Client/External options while keeping All usable", () => {
+  const onChange = vi.fn();
+  const tree = OutreachAudienceFilter({
+    value: "all",
+    supported: false,
+    onChange,
+  });
+  const select = find(tree, (props) => Array.isArray(props.options));
+  expect(
+    (select.options as { value: string; disabled?: boolean }[]).map(
+      (option) => [option.value, !!option.disabled],
+    ),
+  ).toEqual([
+    ["all", false],
+    ["to-clients", true],
+    ["on-behalf", true],
+  ]);
+  (select.onValueChange as (value: string) => void)("all");
+  expect(onChange).toHaveBeenCalledExactlyOnceWith("all");
+  expect(renderToStaticMarkup(tree)).toContain("awaiting the Core update");
 });

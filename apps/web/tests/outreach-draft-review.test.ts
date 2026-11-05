@@ -110,8 +110,9 @@ describe("recipient review keeps selection separate from generation and delivery
     const markup = renderToStaticMarkup(
       CampaignDrafts({ owner: owner({ drafts: [removed] }) }),
     );
-    expect(markup).toContain("0 of 2 saved.");
-    expect(markup).not.toContain("1 of 2 saved.");
+    expect(markup).toContain("0 saved · 2 need a draft");
+    expect(markup).toContain("0 of 2 messages saved");
+    expect(markup).not.toContain("1 of 2 messages saved");
   });
   it.each(["save", "send"] as const)(
     "keeps generation disabled while a %s result is unresolved",
@@ -142,4 +143,28 @@ describe("recipient review keeps selection separate from generation and delivery
     ).toBeUndefined();
     expect(model.generate).not.toHaveBeenCalled();
   });
+});
+
+it("mobile review switches the same selected recipient without generation", () => {
+  const model = owner();
+  const tree = CampaignDrafts({ owner: model });
+  const selector = elements(tree).find(
+    (row) => row.props.id === "outreach-review-message",
+  );
+  expect(selector).toBeDefined();
+  (selector!.props.onValueChange as (value: string) => void)("individual:b");
+  const next = CampaignDrafts({ owner: model });
+  expect(
+    elements(next).find((row) => row.props.title === "Draft for Blair"),
+  ).toBeDefined();
+  expect(model.generate).not.toHaveBeenCalled();
+});
+it("places recipient messages before the retained generation brief", () => {
+  const markup = renderToStaticMarkup(CampaignDrafts({ owner: owner() }));
+  expect(markup.indexOf("Draft for Alex")).toBeLessThan(
+    markup.indexOf("Your generation brief"),
+  );
+  expect(markup).toContain("Generation brief &amp; options");
+  expect(markup).toContain("Edit purpose");
+  expect(markup).toContain("Review context");
 });
