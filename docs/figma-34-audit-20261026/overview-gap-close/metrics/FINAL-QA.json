@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-26",
+  "scope": "DG-05 approved definition update",
+  "status": "PASS",
+  "frames": 32,
+  "fonts": [
+    "Geist"
+  ],
+  "nodeTypeCounts": {
+    "INSTANCE": 1664,
+    "FRAME": 918,
+    "RECTANGLE": 223,
+    "VECTOR": 1517,
+    "ELLIPSE": 192,
+    "TEXT": 1488
+  },
+  "wordmarkImages": 32,
+  "imageConstraint": "Only existing 77x26 Capiro wordmarks; no screenshot-as-layout",
+  "textHorizontalOverflow": [],
+  "statusCardOverflow": [],
+  "obsoleteAwaitingReplyOrDefinitionPendingCopy": [],
+  "brokenPrototypeTargets": [],
+  "totalPrototypeLinksIncludingInherited": 1011,
+  "visualCheck": {
+    "method": "Native Figma screenshot",
+    "frame": "3134:81399",
+    "scale": 0.8,
+    "result": "PASS",
+    "notes": [
+      "Approved definitions notice visible",
+      "Three summary cards fit evenly",
+      "Last-eight-calendar-week chart fits and labels current week correctly",
+      "Overdue work uses reporting snapshot instead of last-30-day touch period",
+      "No clipping in visible content; below-fold content uses vertical scroll"
+    ]
+  },
+  "lastStructuralCheck": "All 32 active frames after the approved update",
+  "lastMutation": {
+    "mutatedNodeIds": [
+      "I3145:85494;3109:58749",
+      "I3145:85628;3109:58749"
+    ],
+    "proof": [
+      {
+        "frame": "3134:81064",
+        "node": "I3145:85494;3109:58749",
+        "text": "Anduril · Open Planner work with a past due date\nComplete fixture · as of 26 Oct 2026, 10:00 ET"
+      },
+      {
+        "frame": "3134:81399",
+        "node": "I3145:85628;3109:58749",
+        "text": "Anduril · Open Planner work with a past due date\nComplete fixture · as of 26 Oct 2026, 10:00 ET"
+      }
+    ]
+  },
+  "finalVisualCheckAfterLastMutation": true,
+  "applicationChecks": "Not applicable; no application code or service contract implemented."
+}

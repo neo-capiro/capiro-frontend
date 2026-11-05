@@ -1,0 +1,106 @@
+{
+  "sectionId": "3137:83718",
+  "counts": {
+    "COMPONENT": 2,
+    "TEXT": 495,
+    "FRAME": 272,
+    "RECTANGLE": 52,
+    "INSTANCE": 391,
+    "VECTOR": 281,
+    "ELLIPSE": 30
+  },
+  "horizontalTextOverflow": [],
+  "fontMismatches": [],
+  "missingDestinations": [],
+  "reactionActions": 253,
+  "remainingOriginalAwaitingCards": [],
+  "editedDialogs": [
+    {
+      "id": "3139:86353",
+      "closeTargets": [
+        "3139:86358",
+        "3139:86392"
+      ]
+    },
+    {
+      "id": "3139:86463",
+      "closeTargets": [
+        "3139:86468",
+        "3139:86504"
+      ]
+    },
+    {
+      "id": "3139:86592",
+      "closeTargets": [
+        "3139:86597",
+        "3139:86631"
+      ]
+    }
+  ],
+  "anchor": {
+    "trigger": [
+      {
+        "action": {
+          "type": "NODE",
+          "destinationId": "3146:86070",
+          "navigation": "OVERLAY",
+          "transition": null,
+          "resetVideoPosition": false
+        },
+        "actions": [
+          {
+            "type": "NODE",
+            "destinationId": "3146:86070",
+            "navigation": "OVERLAY",
+            "transition": null,
+            "resetVideoPosition": false
+          }
+        ],
+        "trigger": {
+          "type": "ON_CLICK"
+        }
+      }
+    ],
+    "menu": {
+      "x": 1096,
+      "y": 130
+    }
+  },
+  "note": "28 view/dialog frames + 3 anchored overlay wrappers + 2 component masters. Historical source metric changes cover18 Overview variants.",
+  "headerPolish": {
+    "mutatedNodeIds": [
+      "1064:158913",
+      "1064:158914",
+      "1064:158912",
+      "3146:86073",
+      "3139:87645"
+    ],
+    "actionChildren": [
+      {
+        "id": "1064:158913",
+        "x": 0,
+        "w": 98
+      },
+      {
+        "id": "1064:158914",
+        "x": 106,
+        "w": 122
+      },
+      {
+        "id": "1064:158915",
+        "x": 236,
+        "w": 154
+      },
+      {
+        "id": "3139:87645",
+        "x": 398,
+        "w": 36
+      }
+    ],
+    "menu": {
+      "id": "3146:86073",
+      "x": 1096,
+      "y": 130
+    }
+  }
+}
