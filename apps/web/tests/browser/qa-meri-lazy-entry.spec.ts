@@ -77,7 +77,10 @@ test("General Meri entry stays read-only until explicit Start", async ({
   const buttonBox = await start.boundingBox();
   expect(buttonBox).not.toBeNull();
   expect(Math.abs(buttonBox!.x + buttonBox!.width / 2 - 195)).toBeLessThan(50);
-  await page.waitForTimeout(400);
+  // Cover the full five-second post-replace grace interval without an explicit Start.
+  await page.waitForTimeout(6_000);
+  await expect(start).toBeVisible();
+  await expect(page).not.toHaveURL(/conversationId=/);
   expect(bootstraps).toHaveLength(0);
   expect(unexpected).toEqual([]);
   expect(pageErrors).toEqual([]);
