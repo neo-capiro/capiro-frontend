@@ -135,7 +135,7 @@ test("saved-title search filters admitted display titles across pages without de
   await expect(cell(first.title)).toBeVisible();
   await page
     .getByRole("searchbox", { name: "Search", exact: true })
-    .fill("  Atlas  ");
+    .fill("  aTLaS  ");
   await expect(cell(first.title)).toBeVisible();
   await expect(cell(unrelated.title)).toHaveCount(0);
   await page.getByRole("button", { name: "Load more", exact: true }).click();

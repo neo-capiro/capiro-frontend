@@ -163,11 +163,11 @@ export function ConversationHistoryList({
   // Admitted rows belong to the read that returned them: a page fetch or a timed-out next page
   // keeps them, and every other failure or replacement removes them with their private state.
   const rows = historyRows(summaries, (id) => names.get(id) ?? "Client");
-  const needle = title.trim().toLocaleLowerCase();
+  const needle = title.trim().toLowerCase();
   const visible = rows.filter(
     (row) =>
       (!client || row.client === client) &&
-      (!needle || row.title.toLocaleLowerCase().includes(needle)),
+      (!needle || row.title.toLowerCase().includes(needle)),
   );
   const clientOptions = [
     GENERAL_CLIENT_FILTER,
