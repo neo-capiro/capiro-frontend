@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { MANAGEMENT_VERSION } from "@capiro/meri-contracts/conversation-history";
-import { installFixtures, json } from "../../tests/browser/fixtures";
+import { clientId, installFixtures, json } from "../../tests/browser/fixtures";
 import { operationFixtures, testIdentity } from "./fixtures";
 
 const row = {
@@ -173,6 +173,98 @@ test("saved-title search pages through eligible chats and clearing starts a fres
   });
   expect(otherRequests).toEqual([]);
 });
+
+for (const width of [390, 1440])
+  test(`General-scoped history reaches a matching later page when the first page has no visible rows at ${width}px`, async ({
+    page,
+  }, info) => {
+    const errors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    await setup(page);
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 1040 });
+    const first = {
+      ...row,
+      status: "active" as const,
+      archivedAt: null,
+      scopeKind: "client" as const,
+      clientId,
+    };
+    // Core emits 20 rows per nonterminal page, all hidden by the General filter.
+    const firstPage = Array.from({ length: 20 }, (_, index) => ({
+      ...first,
+      conversationId:
+        index === 0
+          ? first.conversationId
+          : `30000000-0000-4000-8000-${String(index + 100).padStart(12, "0")}`,
+      updatedAt: new Date(
+        Date.parse(first.updatedAt) - index * 60_000,
+      ).toISOString(),
+    }));
+    const last = firstPage.at(-1)!;
+    const second = {
+      ...first,
+      conversationId: "30000000-0000-4000-8000-000000000004",
+      title: "Later General conversation",
+      scopeKind: "general" as const,
+      clientId: null,
+      updatedAt: "2026-10-24T11:00:00.000Z",
+    };
+    const reads: { before: unknown }[] = [];
+    await page.route("**/api/conversations/summaries", (route) => {
+      const request = route.request().postDataJSON();
+      reads.push(request);
+      return json(route, {
+        version: MANAGEMENT_VERSION,
+        conversations: request.before ? [second] : firstPage,
+        nextBefore: request.before
+          ? null
+          : {
+              updatedAt: last.updatedAt,
+              conversationId: last.conversationId,
+            },
+      });
+    });
+    // This harness route mounts the production list wrapper (and reads its entry scope).
+    await page.goto("/meri/conversations?scope=general&navigation-audit=1");
+    await expect(
+      page.getByRole("button", { name: "Filter by client: General" }),
+    ).toBeVisible();
+    await expect
+      .poll(() => reads.some((read) => read.before === null))
+      .toBe(true);
+    await expect(
+      page.getByRole("cell", { name: first.title, exact: true }),
+    ).toHaveCount(0);
+    await expect(
+      page.getByText("No matching conversations", { exact: true }),
+    ).toHaveCount(0);
+    const more = page.getByRole("button", { name: "Load more", exact: true });
+    await expect(more).toBeVisible();
+    await page.evaluate(() => document.fonts.ready);
+    await page.screenshot({
+      path: info.outputPath(`sparse-first-${width}.png`),
+    });
+    await more.click();
+    await expect(
+      page.getByRole("cell", { name: second.title, exact: true }),
+    ).toBeVisible();
+    await expect(more).toHaveCount(0);
+    expect(reads.filter((read) => read.before !== null)).toEqual([
+      {
+        version: MANAGEMENT_VERSION,
+        status: "active",
+        title: "",
+        before: {
+          updatedAt: last.updatedAt,
+          conversationId: last.conversationId,
+        },
+      },
+    ]);
+    await page.screenshot({
+      path: info.outputPath(`client-result-${width}.png`),
+    });
+    expect(errors).toEqual([]);
+  });
 
 test("pagination keeps admitted rows with disabled actions while a receipt revalidation still hides them, preserving mounted drafts and disclosure", async ({
   page,

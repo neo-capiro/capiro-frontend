@@ -242,7 +242,7 @@ export function ConversationHistoryList({
             Retry
           </button>
         </div>
-      ) : current && !visible.length ? (
+      ) : current && !visible.length && !query.hasNextPage ? (
         filtered ? (
           <StateMessage
             title="No matching conversations"
@@ -319,17 +319,24 @@ export function ConversationHistoryList({
               refresh={() => void query.refetch()}
             />
           )}
-          {!retained && query.hasNextPage && (
-            <button
-              type="button"
-              className={ui.outline}
-              disabled={query.isFetching}
-              onClick={() => void query.fetchNextPage()}
-            >
-              Load more
-            </button>
-          )}
         </div>
+      )}
+      {scope && shown && !retained && query.hasNextPage && (
+        <>
+          {!visible.length && (
+            <p role="status" className={ui.muted}>
+              More conversations may be on a later page.
+            </p>
+          )}
+          <button
+            type="button"
+            className={ui.outline}
+            disabled={query.isFetching}
+            onClick={() => void query.fetchNextPage()}
+          >
+            Load more
+          </button>
+        </>
       )}
     </div>
   );

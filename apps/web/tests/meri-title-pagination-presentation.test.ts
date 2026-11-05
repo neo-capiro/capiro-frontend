@@ -141,6 +141,7 @@ it("removes the rows and states the access refusal when access is refused", () =
   expect(button(html, "Retry")).toBeDefined();
   expect(html).not.toContain("Synthetic chat 1");
   expect(html).not.toContain("Part of your saved chat titles");
+  expect(html).not.toContain(">Load more</button>");
 });
 
 it("states a non-retained failure as a failed read", () => {
@@ -181,10 +182,15 @@ it("still hides admitted rows during a revalidation that is not a page continuat
   });
   expect(html).toContain("Synthetic chat 1");
   expect(html).toContain("<div hidden");
+  expect(html).not.toContain(">Load more</button>");
 });
 
 it("keeps the empty state when an admitted read returns nothing", () => {
-  const html = plan({ summaries: [], query: { data: { pages: [] } } });
+  // A terminal empty read differs from a sparse page with a continuation.
+  const html = plan({
+    summaries: [],
+    query: { data: { pages: [] }, hasNextPage: false },
+  });
   expect(html).toContain("No conversations yet");
   expect(html).toContain("Start a conversation");
 });
