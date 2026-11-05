@@ -165,7 +165,12 @@ it("retains the unsupported audience notice once in the full filter panel", () =
   const { markup } = openFilters();
   expect(markup).toContain('aria-describedby="outreach-audience-availability"');
   expect(markup).toContain('id="outreach-audience-availability"');
-  expect(markup.match(/awaiting the Core update/g)).toHaveLength(1);
+  expect(
+    markup.match(
+      /Ask a workspace administrator when audience filtering will be available/g,
+    ),
+  ).toHaveLength(1);
+  expect(markup).not.toContain("Core update");
   expect(markup).toContain('aria-label="Outreach audience"');
   expect(markup).toContain("Apply filters");
 });
@@ -229,6 +234,10 @@ it("capability removal never downgrades a selected audience into an unlabeled Al
     driver.calls.every((call) => !call.enabled && !call.input.query.direction),
   ).toBe(true);
   expect(result.markup).toContain("Select All audiences");
+  expect(result.markup).not.toContain("Core update");
+  expect(result.markup).toContain(
+    "ask a workspace administrator about availability",
+  );
   select("all");
   render();
   expect(driver.calls[0]?.enabled).toBe(true);
@@ -293,5 +302,7 @@ it("disables Client/External options while keeping All usable", () => {
   ]);
   (select.onValueChange as (value: string) => void)("all");
   expect(onChange).toHaveBeenCalledExactlyOnceWith("all");
-  expect(renderToStaticMarkup(tree)).toContain("awaiting the Core update");
+  expect(renderToStaticMarkup(tree)).toContain(
+    "Ask a workspace administrator when audience filtering will be available",
+  );
 });

@@ -10,6 +10,19 @@ export const zones = [
 ] as const;
 export type CalendarZone = (typeof zones)[number];
 export type CalendarView = "month" | "week" | "day" | "agenda";
+export function initialCalendarView(
+  value: string | null,
+  mobile: boolean,
+): CalendarView {
+  return value === "month" ||
+    value === "week" ||
+    value === "day" ||
+    value === "agenda"
+    ? value
+    : mobile
+      ? "agenda"
+      : "month";
+}
 export function calendarRange(
   date: string,
   view: CalendarView,

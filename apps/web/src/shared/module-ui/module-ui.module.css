@@ -414,6 +414,8 @@
   }
   .tabs {
     gap: 16px;
+    flex-wrap: wrap;
+    overflow-x: visible;
   }
   .modalBody {
     padding: 18px;

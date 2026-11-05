@@ -117,7 +117,9 @@ describe("existing card recorded activity presentation", () => {
       state.pending = pending;
       const html = render();
       expect(html).toContain(
-        pending ? "Loading recorded activity" : "Recorded activity unavailable",
+        pending
+          ? "Loading recorded activity"
+          : "Activity index unavailable; recent timeline is separate",
       );
       expect(html).not.toContain("/100");
       expect(html).not.toContain("Counts and timing");
