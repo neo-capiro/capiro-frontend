@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-01",
+  "fileKey": "IXJzJUkXcUTkySHir5JNea",
+  "scope": "Visual inspection only. No Figma mutations or prototype simulation.",
+  "screens": [
+    {
+      "nodeId": "3230:73693",
+      "name": "Tools available",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3230-73693",
+      "image": "tools-available-final.png",
+      "result": "PASS",
+      "findings": [
+        "No clipped text or overlapping controls.",
+        "Tools panel, five selectors and remaining secondary actions fit inside the viewport.",
+        "Transcript and persistent composer remain separate from the Tools panel.",
+        "No Runs launcher is visible."
+      ]
+    },
+    {
+      "nodeId": "3229:75327",
+      "name": "Recorded usage",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3229-75327",
+      "image": "recorded-usage-final.png",
+      "result": "PASS",
+      "findings": [
+        "No clipped text or overlapping controls.",
+        "Recorded estimate, token counts, recorded-turn count and estimate qualification are readable.",
+        "View sources action and persistent composer are fully visible."
+      ]
+    }
+  ]
+}

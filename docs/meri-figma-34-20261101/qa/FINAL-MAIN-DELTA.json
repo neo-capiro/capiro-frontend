@@ -1,0 +1,89 @@
+{
+  "checkedAt": "2026-11-01",
+  "repository_full_name": "neo-capiro/capiro-frontend",
+  "base": "580f4478eaa732c084858b4e764443e79b9782c9",
+  "head": "e05d950a6a50cd3f2b344ac84ef3b9233c3448ca",
+  "status": "ahead",
+  "ahead_by": 6,
+  "behind_by": 0,
+  "total_commits": 6,
+  "too_large": null,
+  "base_commit": {
+    "sha": "580f4478eaa732c084858b4e764443e79b9782c9",
+    "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/commits/580f4478eaa732c084858b4e764443e79b9782c9",
+    "html_url": "https://github.com/neo-capiro/capiro-frontend/commit/580f4478eaa732c084858b4e764443e79b9782c9"
+  },
+  "merge_base_commit": {
+    "sha": "580f4478eaa732c084858b4e764443e79b9782c9",
+    "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/commits/580f4478eaa732c084858b4e764443e79b9782c9",
+    "html_url": "https://github.com/neo-capiro/capiro-frontend/commit/580f4478eaa732c084858b4e764443e79b9782c9"
+  },
+  "files": [
+    {
+      "filename": "apps/web/src/features/meri/memory-review/MemoryCorrectionComposer.tsx",
+      "status": "modified",
+      "additions": 37,
+      "deletions": 1,
+      "changes": 38,
+      "previous_filename": null
+    },
+    {
+      "filename": "apps/web/src/features/modules/engagement/outreach/OutreachList.tsx",
+      "status": "modified",
+      "additions": 11,
+      "deletions": 1,
+      "changes": 12,
+      "previous_filename": null
+    },
+    {
+      "filename": "apps/web/src/features/portfolio/calendar/CalendarPageControls.tsx",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 1,
+      "changes": 3,
+      "previous_filename": null
+    },
+    {
+      "filename": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 1,
+      "changes": 4,
+      "previous_filename": null
+    },
+    {
+      "filename": "apps/web/tests/calendar-toolbar-presentation.test.ts",
+      "status": "added",
+      "additions": 92,
+      "deletions": 0,
+      "changes": 92,
+      "previous_filename": null
+    },
+    {
+      "filename": "apps/web/tests/meri-memory-presentation.test.ts",
+      "status": "modified",
+      "additions": 89,
+      "deletions": 0,
+      "changes": 89,
+      "previous_filename": null
+    },
+    {
+      "filename": "apps/web/tests/outreach-list-sessions.test.ts",
+      "status": "modified",
+      "additions": 109,
+      "deletions": 5,
+      "changes": 114,
+      "previous_filename": null
+    },
+    {
+      "filename": "scripts/architecture/reviewed-size-findings.json",
+      "status": "modified",
+      "additions": 43,
+      "deletions": 10,
+      "changes": 53,
+      "previous_filename": null
+    }
+  ],
+  "reviewedMeriProductDelta": "MemoryCorrectionComposer.tsx: readable title projection; no change to memory mutation, shell or interaction contracts.",
+  "result": "Current mockup readable headings remain compatible; data-derived title fallback recorded in source reconciliation."
+}

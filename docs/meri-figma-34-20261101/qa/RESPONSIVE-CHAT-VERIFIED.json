@@ -1,0 +1,414 @@
+{
+  "qa": [
+    {
+      "id": "1064:148902",
+      "name": "10.04 · Mobile home",
+      "width": 390,
+      "height": 844,
+      "headerHeight": 108,
+      "workspaceControl": {
+        "id": "I3237:76538;3242:80543",
+        "width": 128,
+        "height": 36,
+        "reactions": [
+          {
+            "action": {
+              "type": "NODE",
+              "destinationId": "1064:149061",
+              "navigation": "NAVIGATE",
+              "transition": null,
+              "resetVideoPosition": false,
+              "resetScrollPosition": true
+            },
+            "actions": [
+              {
+                "type": "NODE",
+                "destinationId": "1064:149061",
+                "navigation": "NAVIGATE",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              }
+            ],
+            "trigger": {
+              "type": "ON_CLICK"
+            }
+          }
+        ]
+      },
+      "transcript": null,
+      "canvas": {
+        "width": 390,
+        "scroll": "NONE",
+        "clipped": true
+      },
+      "composer": {
+        "id": "3237:76601",
+        "width": 358,
+        "height": 104
+      },
+      "sidebar": null,
+      "textOverflow": [],
+      "badFonts": [],
+      "noisyMenuLabels": []
+    },
+    {
+      "id": "1064:148941",
+      "name": "10.05 · Mobile conversation",
+      "width": 390,
+      "height": 844,
+      "headerHeight": 108,
+      "workspaceControl": {
+        "id": "I3237:76640;3242:80543",
+        "width": 128,
+        "height": 36,
+        "reactions": [
+          {
+            "action": {
+              "type": "NODE",
+              "destinationId": "1064:149061",
+              "navigation": "NAVIGATE",
+              "transition": null,
+              "resetVideoPosition": false,
+              "resetScrollPosition": true
+            },
+            "actions": [
+              {
+                "type": "NODE",
+                "destinationId": "1064:149061",
+                "navigation": "NAVIGATE",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              }
+            ],
+            "trigger": {
+              "type": "ON_CLICK"
+            }
+          }
+        ]
+      },
+      "transcript": {
+        "id": "3237:76698",
+        "width": 358,
+        "height": 547,
+        "scroll": "VERTICAL",
+        "clipped": true
+      },
+      "canvas": {
+        "width": 390,
+        "scroll": "NONE",
+        "clipped": true
+      },
+      "composer": {
+        "id": "3237:76704",
+        "width": 358,
+        "height": 104,
+        "scope": "Anduril"
+      },
+      "sidebar": null,
+      "textOverflow": [],
+      "badFonts": [],
+      "noisyMenuLabels": []
+    },
+    {
+      "id": "1064:149061",
+      "name": "10.08 · Mobile navigation",
+      "width": 390,
+      "height": 844,
+      "headerHeight": 108,
+      "workspaceControl": {
+        "id": "I3237:76739;3242:80543",
+        "width": 128,
+        "height": 36,
+        "reactions": [
+          {
+            "action": {
+              "type": "NODE",
+              "destinationId": "1064:148902",
+              "navigation": "NAVIGATE",
+              "transition": null,
+              "resetVideoPosition": false,
+              "resetScrollPosition": true
+            },
+            "actions": [
+              {
+                "type": "NODE",
+                "destinationId": "1064:148902",
+                "navigation": "NAVIGATE",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              }
+            ],
+            "trigger": {
+              "type": "ON_CLICK"
+            }
+          }
+        ]
+      },
+      "transcript": null,
+      "canvas": null,
+      "composer": null,
+      "sidebar": null,
+      "textOverflow": [],
+      "badFonts": [],
+      "noisyMenuLabels": []
+    },
+    {
+      "id": "1064:148772",
+      "name": "10.02 · Tablet conversation",
+      "width": 1024,
+      "height": 1100,
+      "headerHeight": 64,
+      "workspaceControl": null,
+      "transcript": {
+        "id": "3237:76934",
+        "width": 760,
+        "height": 799,
+        "scroll": "VERTICAL",
+        "clipped": true
+      },
+      "canvas": {
+        "width": 952,
+        "scroll": "NONE",
+        "clipped": true
+      },
+      "composer": {
+        "id": "3237:76950",
+        "width": 760,
+        "height": 112,
+        "scope": "Anduril"
+      },
+      "sidebar": {
+        "id": "3240:76411",
+        "width": 72,
+        "visible": true,
+        "boundVisible": null
+      },
+      "textOverflow": [],
+      "badFonts": [],
+      "noisyMenuLabels": []
+    },
+    {
+      "id": "3237:77050",
+      "name": "17.34 · Conversation · Sidebar collapsed",
+      "width": 1440,
+      "height": 1040,
+      "headerHeight": 64,
+      "workspaceControl": null,
+      "transcript": {
+        "id": "3237:77059",
+        "width": 760,
+        "height": 739,
+        "scroll": "VERTICAL",
+        "clipped": true
+      },
+      "canvas": {
+        "width": 1440,
+        "scroll": "NONE",
+        "clipped": true
+      },
+      "composer": {
+        "id": "3237:77075",
+        "width": 760,
+        "height": 112,
+        "scope": "Anduril"
+      },
+      "sidebar": {
+        "id": "3237:77054",
+        "width": 232,
+        "visible": false,
+        "boundVisible": null
+      },
+      "textOverflow": [],
+      "badFonts": [],
+      "noisyMenuLabels": []
+    },
+    {
+      "id": "3237:77473",
+      "name": "17.31 · First message · Delivery uncertain · Phone 390",
+      "width": 390,
+      "height": 844,
+      "headerHeight": 108,
+      "workspaceControl": {
+        "id": "I3237:77474;3242:80543",
+        "width": 128,
+        "height": 36,
+        "reactions": [
+          {
+            "action": {
+              "type": "NODE",
+              "destinationId": "1064:149061",
+              "navigation": "NAVIGATE",
+              "transition": null,
+              "resetVideoPosition": false,
+              "resetScrollPosition": true
+            },
+            "actions": [
+              {
+                "type": "NODE",
+                "destinationId": "1064:149061",
+                "navigation": "NAVIGATE",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              }
+            ],
+            "trigger": {
+              "type": "ON_CLICK"
+            }
+          }
+        ]
+      },
+      "transcript": {
+        "id": "3237:77480",
+        "width": 358,
+        "height": 545,
+        "scroll": "VERTICAL",
+        "clipped": true
+      },
+      "canvas": {
+        "width": 390,
+        "scroll": "NONE",
+        "clipped": true
+      },
+      "composer": {
+        "id": "3237:77590",
+        "width": 358,
+        "height": 106,
+        "scope": "Anduril"
+      },
+      "sidebar": null,
+      "textOverflow": [],
+      "badFonts": [],
+      "noisyMenuLabels": []
+    },
+    {
+      "id": "3237:77616",
+      "name": "17.32 · Answer · Sources and usage · Phone 390",
+      "width": 390,
+      "height": 844,
+      "headerHeight": 108,
+      "workspaceControl": {
+        "id": "I3237:77617;3242:80543",
+        "width": 128,
+        "height": 36,
+        "reactions": [
+          {
+            "action": {
+              "type": "NODE",
+              "destinationId": "1064:149061",
+              "navigation": "NAVIGATE",
+              "transition": null,
+              "resetVideoPosition": false,
+              "resetScrollPosition": true
+            },
+            "actions": [
+              {
+                "type": "NODE",
+                "destinationId": "1064:149061",
+                "navigation": "NAVIGATE",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              }
+            ],
+            "trigger": {
+              "type": "ON_CLICK"
+            }
+          }
+        ]
+      },
+      "transcript": {
+        "id": "3237:77623",
+        "width": 358,
+        "height": 545,
+        "scroll": "VERTICAL",
+        "clipped": true
+      },
+      "canvas": {
+        "width": 390,
+        "scroll": "NONE",
+        "clipped": true
+      },
+      "composer": {
+        "id": "3237:77741",
+        "width": 358,
+        "height": 106,
+        "scope": "Anduril"
+      },
+      "sidebar": null,
+      "textOverflow": [],
+      "badFonts": [],
+      "noisyMenuLabels": []
+    },
+    {
+      "id": "3237:77767",
+      "name": "17.33 · SDK question · Phone 390",
+      "width": 390,
+      "height": 844,
+      "headerHeight": 108,
+      "workspaceControl": {
+        "id": "I3237:77768;3242:80543",
+        "width": 128,
+        "height": 36,
+        "reactions": [
+          {
+            "action": {
+              "type": "NODE",
+              "destinationId": "1064:149061",
+              "navigation": "NAVIGATE",
+              "transition": null,
+              "resetVideoPosition": false,
+              "resetScrollPosition": true
+            },
+            "actions": [
+              {
+                "type": "NODE",
+                "destinationId": "1064:149061",
+                "navigation": "NAVIGATE",
+                "transition": null,
+                "resetVideoPosition": false,
+                "resetScrollPosition": true
+              }
+            ],
+            "trigger": {
+              "type": "ON_CLICK"
+            }
+          }
+        ]
+      },
+      "transcript": {
+        "id": "3237:77774",
+        "width": 358,
+        "height": 545,
+        "scroll": "VERTICAL",
+        "clipped": true
+      },
+      "canvas": {
+        "width": 390,
+        "scroll": "NONE",
+        "clipped": true
+      },
+      "composer": {
+        "id": "3237:77898",
+        "width": 358,
+        "height": 106,
+        "scope": "Anduril"
+      },
+      "sidebar": null,
+      "textOverflow": [],
+      "badFonts": [],
+      "noisyMenuLabels": []
+    }
+  ],
+  "createdNodeIds": [],
+  "mutatedNodeIds": [
+    "I3237:76704;3162:43173",
+    "I3237:77590;3162:43173",
+    "I3237:77741;3162:43173",
+    "I3237:77898;3162:43173"
+  ],
+  "removedNodeIds": []
+}

@@ -1,0 +1,4339 @@
+{
+  "fileKey": "IXJzJUkXcUTkySHir5JNea",
+  "date": "2026-11-01",
+  "scope": "Retained FRAME roots on the main prototype page after cleanup; reusable COMPONENT masters are not counted. Role distinguishes core coverage, supporting UI and design aids.",
+  "implementationRule": "Start with FRAME-REGISTER.json and the current Figma entry points. Supporting views are details/overlays for those flows, not new module routes. Design-support frames are not application pages. Source gates and permissions still apply.",
+  "frameCount": 526,
+  "frames": [
+    {
+      "nodeId": "3219:58547",
+      "title": "17.01 · Connecting to Meri",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-58547",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3219:58759",
+      "title": "17.02 · Access check pending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-58759",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3219:58968",
+      "title": "17.03 · Access removed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-58968",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3219:59173",
+      "title": "17.04 · First message · Sending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-59173",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3219:59380",
+      "title": "17.05 · First message · Accepted",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-59380",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3219:59582",
+      "title": "17.06 · First message · Delivery uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-59582",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01",
+        "02"
+      ]
+    },
+    {
+      "nodeId": "3219:59791",
+      "title": "17.07 · First message · Checking original",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-59791",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3219:59998",
+      "title": "17.08 · Recovery · Retry unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-59998",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01",
+        "02"
+      ]
+    },
+    {
+      "nodeId": "3219:60206",
+      "title": "17.09 · History · Loading older messages",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-60206",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3219:60417",
+      "title": "17.10 · History · Older messages unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-60417",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3219:65294",
+      "title": "17.33 · Conversation · Account changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-65294",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3219:65499",
+      "title": "17.34 · Answer · Long response and table",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-65499",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "1064:144075",
+      "title": "01.01 · Home · Chat-first",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144075",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "1064:144239",
+      "title": "01.02 · Conversation · Chat-first",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144239",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "1064:144332",
+      "title": "01.03 · Choose client and data scope",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144332",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "1064:144425",
+      "title": "01.04 · Conversation history",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144425",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "1064:143196",
+      "title": "Meri · Conversation · Phone 390 · Chat-first",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-143196",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "1064:148697",
+      "title": "Home · Dark appearance preview · Local only",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148697",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "1064:148902",
+      "title": "10.04 · Mobile home",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-148902",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "1064:148941",
+      "title": "10.05 · Mobile conversation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-148941",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "1064:149061",
+      "title": "10.08 · Mobile navigation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-149061",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "1064:148772",
+      "title": "10.02 · Tablet conversation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-148772",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3237:77050",
+      "title": "17.34 · Conversation · Sidebar collapsed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3237-77050",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3237:77473",
+      "title": "17.31 · First message · Delivery uncertain · Phone 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3237-77473",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "01"
+      ]
+    },
+    {
+      "nodeId": "3219:60630",
+      "title": "17.11 · Answer · Sources and usage",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-60630",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "02"
+      ]
+    },
+    {
+      "nodeId": "3219:60847",
+      "title": "17.12 · Answer · Usage unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-60847",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "02"
+      ]
+    },
+    {
+      "nodeId": "3219:61060",
+      "title": "17.13 · Answer · Partial source access",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-61060",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "02"
+      ]
+    },
+    {
+      "nodeId": "3219:61277",
+      "title": "17.14 · Answer · Feedback saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-61277",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "02"
+      ]
+    },
+    {
+      "nodeId": "3219:61480",
+      "title": "17.15 · Answer · Feedback not saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-61480",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "02"
+      ]
+    },
+    {
+      "nodeId": "3229:75327",
+      "title": "17.51 · Recorded usage",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-75327",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "02",
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3229:75531",
+      "title": "17.52 · Some usage is not available",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-75531",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "02",
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3229:75741",
+      "title": "17.53 · Usage may be out of date",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-75741",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "02",
+        "03"
+      ]
+    },
+    {
+      "nodeId": "1064:146948",
+      "title": "05.03 · Freshness, partial and historical results",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146948",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "02"
+      ]
+    },
+    {
+      "nodeId": "3237:77616",
+      "title": "17.32 · Answer · Sources and usage · Phone 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3237-77616",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "02"
+      ]
+    },
+    {
+      "nodeId": "3219:62762",
+      "title": "17.21 · Tools · Selection changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-62762",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03",
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3219:62986",
+      "title": "17.22 · Message · Limit refusal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-62986",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3219:63194",
+      "title": "17.23 · Message · Capacity unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-63194",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3219:65075",
+      "title": "17.32 · Tools · Model catalog unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-65075",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3022:29587",
+      "title": "09.01 · Personal defaults · Current contract",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-29587",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3022:30398",
+      "title": "09.03 · Usage and limits · Unknown accounting",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-30398",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3218:49212",
+      "title": "19.17 · Personal defaults · Model catalog unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3218-49212",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3218:49454",
+      "title": "19.18 · Personal defaults · Revision conflict",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3218-49454",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3218:49665",
+      "title": "19.19 · Personal defaults · Unknown or withheld save",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3218-49665",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3218:49884",
+      "title": "19.20 · Workspace model limits · Administrator",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3218-49884",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3219:68277",
+      "title": "19.26 · Personal defaults · Save accepted awaiting readback",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-68277",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3219:68477",
+      "title": "19.27 · Personal defaults · Access changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-68477",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3219:68676",
+      "title": "19.28 · Workspace model limits · Save uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-68676",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3219:68878",
+      "title": "19.29 · Workspace model limits · Administrator required",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-68878",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3219:69077",
+      "title": "19.30 · Usage · Complete zero accounting",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-69077",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "03"
+      ]
+    },
+    {
+      "nodeId": "3219:61689",
+      "title": "17.16 · Question · Answer required",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-61689",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3219:61918",
+      "title": "17.17 · Question · Submitting answer",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-61918",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3219:62124",
+      "title": "17.18 · Question · Canceled",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-62124",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3224:68756",
+      "title": "17.35 · Question · Client leadership selected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-68756",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3224:68946",
+      "title": "17.37 · Question · Internal account team selected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-68946",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3224:69136",
+      "title": "17.38 · Question · Submitting Internal account team",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-69136",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3224:69311",
+      "title": "17.39 · Question · Meeting participants selected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-69311",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3224:69501",
+      "title": "17.40 · Question · Submitting Meeting participants",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-69501",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3224:69676",
+      "title": "17.41 · Question · Custom answer entered",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-69676",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3224:69866",
+      "title": "17.42 · Question · Submitting Board and leadership team",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-69866",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "1064:147397",
+      "title": "06.01 · Conversation · Proposed action review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147397",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3032:30415",
+      "title": "10.20 · Phone · Contextual action review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-30415",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3032:31529",
+      "title": "10.25 · Tablet · Contextual action review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-31529",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3219:53115",
+      "title": "06.09 · Governed action · Submitting exact decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-53115",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3219:53311",
+      "title": "06.10 · Governed action · Unknown outcome",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-53311",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "1064:147820",
+      "title": "06.06 · Governed action · Recorded execution",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147820",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3219:53716",
+      "title": "06.11 · Governed action · Stale or expired proposal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-53716",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3219:53918",
+      "title": "06.12 · Governed action · Authority lost",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-53918",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3219:54108",
+      "title": "06.13 · Governed save note · Direct receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-54108",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3219:54469",
+      "title": "06.14 · Governed action · Exact proposal acknowledged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-54469",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3163:42177",
+      "title": "01.02A · Conversation · Approval required",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3163-42177",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3243:78175",
+      "title": "Phone · Governed action · Exact proposal acknowledged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78175",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3243:78307",
+      "title": "Tablet · Governed action · Exact proposal acknowledged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78307",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3246:78899",
+      "title": "Phone · Governed action · Submitting exact decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78899",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3246:79022",
+      "title": "Tablet · Governed action · Submitting exact decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-79022",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3237:77767",
+      "title": "17.33 · SDK question · Phone 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3237-77767",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "04"
+      ]
+    },
+    {
+      "nodeId": "3229:73641",
+      "title": "17.43 · Working on your brief",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-73641",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3229:73850",
+      "title": "17.44 · Stopping the current work",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-73850",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3229:74053",
+      "title": "17.45 · Stop is not confirmed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-74053",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3229:74258",
+      "title": "17.46 · Work stopped",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-74258",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3229:75950",
+      "title": "17.54 · Checking original stop request",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-75950",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3032:30166",
+      "title": "10.19 · Phone · Routines management",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-30166",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3032:31859",
+      "title": "10.26 · Tablet · Routines management",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-31859",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "1064:148241",
+      "title": "08.01 · Routines · Current management",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148241",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "1064:148440",
+      "title": "08.03 · Routine · Read consent detail",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148440",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3219:55030",
+      "title": "08.05 · Routine · Review exact consent renewal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-55030",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3219:55222",
+      "title": "08.06 · Routine · Renewal recorded without resume",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-55222",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3219:55397",
+      "title": "08.07 · Routine · Unknown exact approval",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-55397",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "1064:148534",
+      "title": "08.04 · Routine · Bounded recent activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148534",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3219:55769",
+      "title": "08.08 · Routine · Current authority unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-55769",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3219:55935",
+      "title": "08.09 · Routine · Consent not observable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-55935",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3024:31809",
+      "title": "08.04C · Routine · Cancellation acknowledged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3024-31809",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3219:56281",
+      "title": "08.10 · Routine · Original identity unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-56281",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "1064:144923",
+      "title": "Conversation · Pause, steer and stop",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144923",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "1064:144982",
+      "title": "Conversation · Verified checkpoint and resume",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144982",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "1064:145144",
+      "title": "Conversation · Interruption and fork",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145144",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3243:77701",
+      "title": "Phone · Routine · Read consent detail",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77701",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3243:77808",
+      "title": "Tablet · Routine · Read consent detail",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77808",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3243:77933",
+      "title": "Phone · Routine · Bounded recent activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77933",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3243:78045",
+      "title": "Tablet · Routine · Bounded recent activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78045",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3246:78640",
+      "title": "Phone · Routine · Review exact consent renewal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78640",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3246:78761",
+      "title": "Tablet · Routine · Review exact consent renewal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78761",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "05"
+      ]
+    },
+    {
+      "nodeId": "3219:62326",
+      "title": "17.19 · Tools · Catalog loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-62326",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3219:62543",
+      "title": "17.20 · Tools · Catalog unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-62543",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3229:74463",
+      "title": "17.47 · No tools are available for this selection",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-74463",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3229:74673",
+      "title": "17.48 · Applied to your draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-74673",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3229:74895",
+      "title": "17.49 · Review your selection",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-74895",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3229:75117",
+      "title": "17.50 · Selection cleared",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-75117",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3230:73693",
+      "title": "Tools available · Conversation side column",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3230-73693",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3022:30883",
+      "title": "09.04 · Skills and templates · Source-qualified",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-30883",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3163:41975",
+      "title": "01.01T · Home · Tools open",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3163-41975",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3163:42365",
+      "title": "01.01MT · Tools sheet · Phone 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3163-42365",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3180:43587",
+      "title": "A3.01 · Choose a website task",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-43587",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3180:43763",
+      "title": "A3.02 · Configure a website workflow",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-43763",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3180:43948",
+      "title": "A3.03 · Review this website action",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-43948",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3180:44130",
+      "title": "A3.04 · Website workflow stopped",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44130",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "06"
+      ]
+    },
+    {
+      "nodeId": "3022:30009",
+      "title": "09.02 · Connections · Provider accounts",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-30009",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3213:47223",
+      "title": "19.01 · Connected services · Directory",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3213-47223",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3214:46753",
+      "title": "19.02 · Connected services · Service details",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3214-46753",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3214:47004",
+      "title": "19.03 · Connected services · OAuth setup",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3214-47004",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3214:47238",
+      "title": "19.04 · Connected services · Authorization pending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3214-47238",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3214:47459",
+      "title": "19.05 · Connected services · Required API key fields",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3214-47459",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3214:47685",
+      "title": "19.06 · Connected services · Creation uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3214-47685",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3215:47585",
+      "title": "19.07 · Connected services · No tools available",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3215-47585",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3215:47816",
+      "title": "19.08 · Connected services · Discovery unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3215-47816",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3215:48037",
+      "title": "19.09 · Connected services · Authorization revoked",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3215-48037",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3215:48254",
+      "title": "19.10 · Connected services · Firm managed access",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3215-48254",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3215:48477",
+      "title": "19.11 · Connected services · Search and categories",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3215-48477",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3217:48424",
+      "title": "19.12 · Connected services · Loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3217-48424",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3217:48620",
+      "title": "19.13 · Connected services · Empty",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3217-48620",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3217:48820",
+      "title": "19.14 · Connected services · No matches",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3217-48820",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3217:49032",
+      "title": "19.15 · Connected services · Unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3217-49032",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3217:49234",
+      "title": "19.16 · Connected services · Access denied",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3217-49234",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3219:50034",
+      "title": "19.22 · Connected services · Manual OAuth requirements",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-50034",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3219:50261",
+      "title": "19.23 · Connected services · OAuth unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-50261",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3219:50467",
+      "title": "19.24 · Connected services · Mobile 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-50467",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3219:50519",
+      "title": "19.25 · Connected services · Tablet 1024",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-50519",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3227:70967",
+      "title": "19.31 · Connected services · API key removed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3227-70967",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3227:71184",
+      "title": "19.32 · Connected services · Allowed tool list",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3227-71184",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3227:71419",
+      "title": "19.33 · Connected services · Tool or resource access denied",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3227-71419",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3227:71640",
+      "title": "19.34 · Connected services · Saved API key connection",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3227-71640",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "07"
+      ]
+    },
+    {
+      "nodeId": "3219:64451",
+      "title": "17.29 · Selected tab · Capture uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-64451",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3219:64659",
+      "title": "17.30 · Browser · Origin unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-64659",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3219:64867",
+      "title": "17.31 · Browser · Session access removed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-64867",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3234:76660",
+      "title": "23.01 · The selected tab could not be verified",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-76660",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3234:76872",
+      "title": "23.02 · Capture a fresh copy of this page",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-76872",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3234:77084",
+      "title": "23.03 · Tab sharing is paused",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-77084",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3177:42928",
+      "title": "A2.01 · Take control of the browser",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-42928",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3177:43098",
+      "title": "A2.02 · You control the browser",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-43098",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3177:43269",
+      "title": "A2.03 · Review before Meri continues",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-43269",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3177:43447",
+      "title": "A2.04 · Browser connection interrupted",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-43447",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3177:43622",
+      "title": "A2.05 · Download confirmation recovered",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-43622",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3180:44302",
+      "title": "A4.01 · Share a tab with Meri",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44302",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3180:44331",
+      "title": "A4.02 · Review the captured text",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44331",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3180:44363",
+      "title": "A4.03 · Selected tab added to the conversation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44363",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3180:44541",
+      "title": "A4.04 · Tab sharing has stopped",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44541",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3180:44710",
+      "title": "A4.05 · Shared tab",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3180-44710",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "08"
+      ]
+    },
+    {
+      "nodeId": "3219:63402",
+      "title": "17.24 · Attachments · Processing",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-63402",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3219:63610",
+      "title": "17.25 · Attachments · Partial extraction",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-63610",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3219:63824",
+      "title": "17.26 · Attachments · File not accepted",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-63824",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3219:64035",
+      "title": "17.27 · Attachments · Confirmation uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-64035",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3219:64243",
+      "title": "17.28 · Attachments · Removed from draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-64243",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3219:57976",
+      "title": "Original file ready",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57976",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3222:66614",
+      "title": "Some source content is unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-66614",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3222:66781",
+      "title": "This upload is not ready to attach",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-66781",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3234:77296",
+      "title": "23.04 · This file is too large to attach",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-77296",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3234:77508",
+      "title": "23.05 · This file cannot be used as a source",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-77508",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3234:77723",
+      "title": "23.06 · Some extracted text needs review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-77723",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3234:77941",
+      "title": "23.07 · Upload canceled before it started",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-77941",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3234:78156",
+      "title": "23.08 · This attachment is no longer accessible",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-78156",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "1064:146204",
+      "title": "04.01 · Upload and attachment menu",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146204",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "1064:146271",
+      "title": "04.02 · Attach an authorized Capiro file",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146271",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "1064:152220",
+      "title": "12.16 · Exact file extraction coverage",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152220",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "09"
+      ]
+    },
+    {
+      "nodeId": "3219:57774",
+      "title": "Files",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57774",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "10"
+      ]
+    },
+    {
+      "nodeId": "3219:67051",
+      "title": "Meeting brief.docx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-67051",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "10"
+      ]
+    },
+    {
+      "nodeId": "3222:66957",
+      "title": "Analysis output needs review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-66957",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "10"
+      ]
+    },
+    {
+      "nodeId": "3222:67119",
+      "title": "Download verification unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-67119",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "10"
+      ]
+    },
+    {
+      "nodeId": "3222:68873",
+      "title": "Computation status is not confirmed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-68873",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "10"
+      ]
+    },
+    {
+      "nodeId": "1064:145886",
+      "title": "03.07 · Code and execution activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145886",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "10"
+      ]
+    },
+    {
+      "nodeId": "1064:145939",
+      "title": "03.08 · Analysis outputs",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145939",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "10"
+      ]
+    },
+    {
+      "nodeId": "1064:151469",
+      "title": "12.06 · Code & reproducible analysis",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-151469",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "10"
+      ]
+    },
+    {
+      "nodeId": "3219:72316",
+      "title": "Creating the briefing document",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72316",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "11"
+      ]
+    },
+    {
+      "nodeId": "3219:72472",
+      "title": "The document could not be completed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72472",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "11"
+      ]
+    },
+    {
+      "nodeId": "3219:72638",
+      "title": "A newer document version is available",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72638",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "11"
+      ]
+    },
+    {
+      "nodeId": "3219:72814",
+      "title": "Client filing is not yet confirmed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72814",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "11"
+      ]
+    },
+    {
+      "nodeId": "3219:72990",
+      "title": "Meeting brief.docx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72990",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "11",
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3222:67295",
+      "title": "Version 3 is published",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-67295",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "11",
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3222:67472",
+      "title": "Document filed to the client",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-67472",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "11"
+      ]
+    },
+    {
+      "nodeId": "1064:146038",
+      "title": "03.09 · Versions and comparison",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146038",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "11"
+      ]
+    },
+    {
+      "nodeId": "1064:146126",
+      "title": "03.10 · Revise an artifact",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146126",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "11"
+      ]
+    },
+    {
+      "nodeId": "1064:146428",
+      "title": "04.04 · File artifact to client",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146428",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "11"
+      ]
+    },
+    {
+      "nodeId": "3219:58178",
+      "title": "Opening private editor",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-58178",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3219:58340",
+      "title": "Meeting brief.docx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-58340",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3219:65732",
+      "title": "Saving your private draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-65732",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3219:65933",
+      "title": "Private draft saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-65933",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3219:66134",
+      "title": "Review saved revision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-66134",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3219:66341",
+      "title": "Publication confirmation delayed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-66341",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3219:66517",
+      "title": "This draft has an active editor",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-66517",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3219:66699",
+      "title": "The editor session expired",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-66699",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3219:66875",
+      "title": "Reconnect to your private draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-66875",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3219:73928",
+      "title": "Files",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-73928",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3219:74124",
+      "title": "Private draft saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-74124",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3222:67648",
+      "title": "Save changes before closing?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-67648",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3222:67824",
+      "title": "Discard this private draft?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-67824",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3222:68000",
+      "title": "Publishing saved revision 3",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-68000",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3224:72156",
+      "title": "Client update.pptx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-72156",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12",
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3224:72335",
+      "title": "Presentation draft saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-72335",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12",
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3224:72514",
+      "title": "Review the saved presentation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3224-72514",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12",
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3182:45642",
+      "title": "A7.01 · Meeting brief.docx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-45642",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3182:45855",
+      "title": "A7.02 · Checking whether your draft was saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-45855",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3182:46025",
+      "title": "A7.03 · Publish the saved draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-46025",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3182:46207",
+      "title": "A7.04 · Version 3 is published",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-46207",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3182:46386",
+      "title": "A7.05 · Document access ended",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-46386",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12"
+      ]
+    },
+    {
+      "nodeId": "3182:46555",
+      "title": "A7.06 · Review a document compatibility issue",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3182-46555",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "12",
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3219:72139",
+      "title": "Meeting brief.pdf",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-72139",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3219:73167",
+      "title": "Funding analysis.xlsx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-73167",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3219:73405",
+      "title": "Client update.pptx",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-73405",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3219:73590",
+      "title": "Document preview is unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-73590",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3219:73752",
+      "title": "PDF export could not be confirmed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-73752",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3222:68171",
+      "title": "Spreadsheet draft saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-68171",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3222:68403",
+      "title": "Review the saved workbook",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-68403",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "13"
+      ]
+    },
+    {
+      "nodeId": "3222:68635",
+      "title": "Workbook version 5 published",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3222-68635",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "13"
+      ]
+    },
+    {
+      "nodeId": "1064:147042",
+      "title": "05.04 · Personal memory · Current approved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147042",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3225:71023",
+      "title": "10.35 · Tablet · Current personal memory",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3225-71023",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "1064:147204",
+      "title": "05.06 · Personal memory · Correction draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147204",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3019:28977",
+      "title": "05.11 · Personal memory · Pending correction",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-28977",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "1064:147483",
+      "title": "06.02 · Personal memory · Owner decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147483",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3019:23613",
+      "title": "05.08A · Personal memory · Approved successor",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-23613",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3019:29174",
+      "title": "05.12 · Personal memory · Reject correction",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-29174",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3219:51433",
+      "title": "05.23 · Personal memory · Rejected receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-51433",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3019:30750",
+      "title": "05.20 · Personal memory · Revision conflict",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-30750",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3019:30356",
+      "title": "05.18 · Personal memory · Decision outcome uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-30356",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3019:23371",
+      "title": "05.04B · Personal memory · Retained history page",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-23371",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3219:52117",
+      "title": "05.24 · Personal memory · History page loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-52117",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3219:52281",
+      "title": "05.25 · Personal memory · History page unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-52281",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "1064:147112",
+      "title": "05.05 · Personal memory · Source evidence",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147112",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3219:52618",
+      "title": "05.26 · Personal memory · Evidence unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-52618",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "1064:147272",
+      "title": "05.07 · Personal memory · Current access changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147272",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3219:54298",
+      "title": "06.02D · Personal memory · Confirm owner approval",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-54298",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3220:65986",
+      "title": "05.32 · Personal memory · Loading current records",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3220-65986",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3220:66136",
+      "title": "05.33 · Personal memory · Complete empty",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3220-66136",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3220:66286",
+      "title": "05.34 · Personal memory · Read failed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3220-66286",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3220:66436",
+      "title": "05.35 · Personal memory · Search no matches",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3220-66436",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3032:30630",
+      "title": "10.21 · Phone · Current personal memory",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-30630",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3022:31622",
+      "title": "09.06 · Privacy and retention · Installed memory policy",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-31622",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3218:50112",
+      "title": "19.21 · Privacy · Retention policy and restrictions",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3218-50112",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:76662",
+      "title": "Phone · Personal memory · Loading current records",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-76662",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:76740",
+      "title": "Tablet · Personal memory · Loading current records",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-76740",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:76836",
+      "title": "Phone · Personal memory · Retained history page",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-76836",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:76940",
+      "title": "Tablet · Personal memory · Retained history page",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-76940",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:77061",
+      "title": "Phone · Personal memory · Source evidence",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77061",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:77157",
+      "title": "Tablet · Personal memory · Source evidence",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77157",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:77271",
+      "title": "Phone · Personal memory · Correction draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77271",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:77370",
+      "title": "Tablet · Personal memory · Correction draft",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77370",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:77487",
+      "title": "Phone · Personal memory · Owner decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77487",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:77585",
+      "title": "Tablet · Personal memory · Owner decision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-77585",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:78458",
+      "title": "Phone · Personal memory · History page loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78458",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:78550",
+      "title": "Tablet · Personal memory · History page loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78550",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:78660",
+      "title": "Phone · Personal memory · Pending correction",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78660",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:78759",
+      "title": "Tablet · Personal memory · Pending correction",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78759",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:78876",
+      "title": "Phone · Personal memory · Confirm owner approval",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78876",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:78975",
+      "title": "Tablet · Personal memory · Confirm owner approval",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-78975",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:79092",
+      "title": "Phone · Personal memory · Confirm correction rejection",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-79092",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3243:79194",
+      "title": "Tablet · Personal memory · Confirm correction rejection",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3243-79194",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3246:78230",
+      "title": "Phone · Personal memory · Approved successor",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78230",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3246:78325",
+      "title": "Tablet · Personal memory · Approved successor",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78325",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3246:78438",
+      "title": "Phone · Personal memory · Rejected receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78438",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3246:78530",
+      "title": "Tablet · Personal memory · Rejected receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3246-78530",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "14"
+      ]
+    },
+    {
+      "nodeId": "3022:32579",
+      "title": "22.01 · Updates panel · Current unread notices",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32579",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "15"
+      ]
+    },
+    {
+      "nodeId": "3229:71790",
+      "title": "22.02 · Updates panel · Read acknowledged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-71790",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "15"
+      ]
+    },
+    {
+      "nodeId": "3229:71838",
+      "title": "22.03 · Updates panel · Partial page / total unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-71838",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "15"
+      ]
+    },
+    {
+      "nodeId": "3229:71904",
+      "title": "22.04 · Updates panel · Read acknowledgment pending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-71904",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "15"
+      ]
+    },
+    {
+      "nodeId": "3229:71958",
+      "title": "22.05 · Updates panel · Acknowledgment uncertain",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-71958",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "15"
+      ]
+    },
+    {
+      "nodeId": "3229:72018",
+      "title": "22.06 · Updates panel · Recovery read failed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3229-72018",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "15"
+      ]
+    },
+    {
+      "nodeId": "3022:31261",
+      "title": "09.05 · Workspace updates · Preferences",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-31261",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "15"
+      ]
+    },
+    {
+      "nodeId": "1064:146715",
+      "title": "05.01 · Cited answer · Bounded source result",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146715",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "16"
+      ]
+    },
+    {
+      "nodeId": "3219:56645",
+      "title": "05.28 · Source reader · Saved passage",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-56645",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "16"
+      ]
+    },
+    {
+      "nodeId": "3219:56829",
+      "title": "05.29 · Source reader · Current source changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-56829",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "16"
+      ]
+    },
+    {
+      "nodeId": "3219:57013",
+      "title": "05.30 · Search · Denied scope is not empty",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57013",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "16"
+      ]
+    },
+    {
+      "nodeId": "3219:57200",
+      "title": "05.31 · Structured result · Bounded / unavailable values",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57200",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "16"
+      ]
+    },
+    {
+      "nodeId": "3234:78371",
+      "title": "23.09 · Which period should I use?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-78371",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "16"
+      ]
+    },
+    {
+      "nodeId": "3234:78586",
+      "title": "23.10 · No matching meetings were found",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-78586",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "16"
+      ]
+    },
+    {
+      "nodeId": "3234:78807",
+      "title": "23.11 · This search could not complete",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-78807",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "16"
+      ]
+    },
+    {
+      "nodeId": "3234:79022",
+      "title": "23.12 · Your revised request is ready",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-79022",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "16"
+      ]
+    },
+    {
+      "nodeId": "3234:79231",
+      "title": "23.13 · Searching recorded meetings…",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3234-79231",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "16"
+      ]
+    },
+    {
+      "nodeId": "3219:57386",
+      "title": "21.01 · Research · Scoped conversation entry",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57386",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "17"
+      ]
+    },
+    {
+      "nodeId": "3219:57584",
+      "title": "21.02 · Research · Receiver or access unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-57584",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "17"
+      ]
+    },
+    {
+      "nodeId": "1064:152370",
+      "title": "12.20 · Company research & capture roadmap",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152370",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "17"
+      ]
+    },
+    {
+      "nodeId": "3219:69631",
+      "title": "21.03 · Procurement · Evidence-backed result",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-69631",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "18"
+      ]
+    },
+    {
+      "nodeId": "3219:69829",
+      "title": "21.04 · Procurement · Producer unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-69829",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "18"
+      ]
+    },
+    {
+      "nodeId": "3181:45398",
+      "title": "A6.01 · Explore the evidence graph",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-45398",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "18"
+      ]
+    },
+    {
+      "nodeId": "3181:45593",
+      "title": "A6.02 · Compare relevant buyers",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-45593",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "18"
+      ]
+    },
+    {
+      "nodeId": "3181:45775",
+      "title": "A6.03 · Review funding paths and next steps",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-45775",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "18"
+      ]
+    },
+    {
+      "nodeId": "3219:70016",
+      "title": "21.05 · Legislative draft · Result and review handoff",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70016",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "19"
+      ]
+    },
+    {
+      "nodeId": "3219:70215",
+      "title": "21.06 · Legislative draft · Source mismatch / stale review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70215",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "19"
+      ]
+    },
+    {
+      "nodeId": "3181:44472",
+      "title": "A5.01 · Draft against an exact source",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-44472",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "19"
+      ]
+    },
+    {
+      "nodeId": "3181:44670",
+      "title": "A5.02 · Compare the exact text change",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-44670",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "19"
+      ]
+    },
+    {
+      "nodeId": "3181:44862",
+      "title": "A5.03 · Resolve drafting findings",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-44862",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "19"
+      ]
+    },
+    {
+      "nodeId": "3181:45035",
+      "title": "A5.04 · The source changed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-45035",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "19"
+      ]
+    },
+    {
+      "nodeId": "3181:45207",
+      "title": "A5.05 · Review this draft revision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3181-45207",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "19"
+      ]
+    },
+    {
+      "nodeId": "3219:70408",
+      "title": "21.07 · Meeting · Notes and partial media result",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70408",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "20"
+      ]
+    },
+    {
+      "nodeId": "3219:70607",
+      "title": "21.08 · Meeting · Association repair needed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70607",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "20"
+      ]
+    },
+    {
+      "nodeId": "3086:39853",
+      "title": "14.17 · Meeting context · loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-39853",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "20"
+      ]
+    },
+    {
+      "nodeId": "3086:40039",
+      "title": "14.18 · Meeting context · available",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-40039",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "20"
+      ]
+    },
+    {
+      "nodeId": "3086:40237",
+      "title": "14.19 · Meeting context · no accessible meeting",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-40237",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "20"
+      ]
+    },
+    {
+      "nodeId": "3086:40436",
+      "title": "14.20 · Meeting context · access removed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-40436",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "20"
+      ]
+    },
+    {
+      "nodeId": "3086:40635",
+      "title": "14.21 · Meeting context · read error",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-40635",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "20"
+      ]
+    },
+    {
+      "nodeId": "3219:70794",
+      "title": "21.09 · Outreach · Immutable draft handoff",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70794",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "21"
+      ]
+    },
+    {
+      "nodeId": "3219:70992",
+      "title": "21.10 · Outreach · Delivery unknown / source gated",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-70992",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "21"
+      ]
+    },
+    {
+      "nodeId": "1064:151858",
+      "title": "12.10 · Relationship & mail history",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-151858",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "21"
+      ]
+    },
+    {
+      "nodeId": "3219:71181",
+      "title": "21.11 · Strategy · Separate Planner consent",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-71181",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "22"
+      ]
+    },
+    {
+      "nodeId": "3219:71377",
+      "title": "21.12 · Planner · Continuation gated",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-71377",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "22"
+      ]
+    },
+    {
+      "nodeId": "1064:147566",
+      "title": "06.03 · Draft a client task",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147566",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "22"
+      ]
+    },
+    {
+      "nodeId": "1064:147638",
+      "title": "06.04 · Review exact task action",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147638",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "22"
+      ]
+    },
+    {
+      "nodeId": "3219:71564",
+      "title": "21.13 · Forecast and Hub · Snapshot result",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-71564",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "23"
+      ]
+    },
+    {
+      "nodeId": "1064:151930",
+      "title": "12.11 · Client & portfolio changes",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-151930",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "23"
+      ]
+    },
+    {
+      "nodeId": "1064:152468",
+      "title": "12.21 · Portfolio overlap matrix",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152468",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "23"
+      ]
+    },
+    {
+      "nodeId": "3219:71754",
+      "title": "21.14 · Newsletter · Workspace handoff",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-71754",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "24"
+      ]
+    },
+    {
+      "nodeId": "3219:71950",
+      "title": "21.15 · Newsletter / CRM · Provider unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3219-71950",
+      "role": "inventory coverage",
+      "coverageGroups": [
+        "24"
+      ]
+    },
+    {
+      "nodeId": "1064:140889",
+      "title": "Color palette (bound to variables)",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-140889",
+      "role": "design support",
+      "sectionId": "1064:140888"
+    },
+    {
+      "nodeId": "1064:141068",
+      "title": "Overlay · Global search (desktop)",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-141068",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141067"
+    },
+    {
+      "nodeId": "1064:141241",
+      "title": "Overlay · Global search (tablet)",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-141241",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141067"
+    },
+    {
+      "nodeId": "1064:141406",
+      "title": "Overlay · Global search (phone)",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-141406",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141067"
+    },
+    {
+      "nodeId": "1064:141557",
+      "title": "Search · Anduril meeting result",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-141557",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141067"
+    },
+    {
+      "nodeId": "1064:141591",
+      "title": "Meri logo",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-141591",
+      "role": "design support",
+      "sectionId": "1064:141584"
+    },
+    {
+      "nodeId": "1064:141600",
+      "title": "Overlay · Quick log · Client",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-141600",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141599"
+    },
+    {
+      "nodeId": "1064:141773",
+      "title": "Overlay · Quick log · Client · Objective menu",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-141773",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141599"
+    },
+    {
+      "nodeId": "1064:141959",
+      "title": "Overlay · Quick log · Client · Commitment and task",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-141959",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141599"
+    },
+    {
+      "nodeId": "1064:142178",
+      "title": "Overlay · Quick log · Member · Search",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-142178",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141599"
+    },
+    {
+      "nodeId": "1064:142381",
+      "title": "Overlay · Quick log · Member · Choose staff",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-142381",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141599"
+    },
+    {
+      "nodeId": "1064:142586",
+      "title": "Overlay · Quick log · Member · Ready",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-142586",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141599"
+    },
+    {
+      "nodeId": "1064:142772",
+      "title": "Overlay · Quick log · Logged",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-142772",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141599"
+    },
+    {
+      "nodeId": "1064:142879",
+      "title": "Overlay · Quick log (tablet)",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-142879",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141599"
+    },
+    {
+      "nodeId": "1064:143044",
+      "title": "Overlay · Quick log (phone sheet)",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-143044",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:141599"
+    },
+    {
+      "nodeId": "1064:144151",
+      "title": "02.01 · Conversation · Working",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144151",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:144529",
+      "title": "01.05 · Search and command palette",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144529",
+      "role": "design support",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:144601",
+      "title": "02.02 · Parallel specialist activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-144601",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:145061",
+      "title": "02.07 · Tool activity and receipts",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145061",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:145204",
+      "title": "03.01 · Workspace files",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145204",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:145316",
+      "title": "03.02 · Word document workspace",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145316",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:145426",
+      "title": "03.03 · PDF and multi-page preview",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145426",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:145539",
+      "title": "03.04 · Spreadsheet preview",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145539",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:145690",
+      "title": "03.05 · Presentation preview",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145690",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:145787",
+      "title": "03.06 · Generated web preview",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-145787",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:146356",
+      "title": "04.03 · Upload and extraction progress",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146356",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:146498",
+      "title": "04.05 · Download exact artifact version",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146498",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:146561",
+      "title": "04.06 · Revision progress and verification",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146561",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:146629",
+      "title": "04.07 · Filing and download receipts",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-146629",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:147320",
+      "title": "05.08 · Approved memory outcome",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147320",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:147729",
+      "title": "06.05 · Review artifact filing",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147729",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:147899",
+      "title": "06.07 · Reject or request changes",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147899",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:147956",
+      "title": "07.01 · Public browser activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-147956",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:148036",
+      "title": "07.02 · Site connection and sign-in",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148036",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:148104",
+      "title": "07.03 · Browser files and receipts",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148104",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:148185",
+      "title": "07.04 · Browser connection states",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148185",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:148347",
+      "title": "08.02 · Create or edit routine",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148347",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:148633",
+      "title": "09.08 · Conversation management and branches",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148633",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:148841",
+      "title": "10.03 · Tablet artifact drawer",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148841",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:148985",
+      "title": "10.06 · Mobile artifact",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-148985",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149090",
+      "title": "10.17 · Mobile filing receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149090",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149120",
+      "title": "10.18 · Mobile revision progress",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149120",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149158",
+      "title": "10.09 · Mobile sources",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149158",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149191",
+      "title": "10.10 · Mobile artifact actions",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149191",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149225",
+      "title": "10.11 · Mobile artifact revision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149225",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149254",
+      "title": "10.12 · Mobile versions",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149254",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149286",
+      "title": "10.13 · Mobile filing review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149286",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149316",
+      "title": "10.14 · Mobile scope picker",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149316",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149346",
+      "title": "10.15 · Mobile upload",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149346",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149375",
+      "title": "10.16 · Mobile research progress",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149375",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149425",
+      "title": "11.01 · Run and recovery state board",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149425",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149528",
+      "title": "11.02 · File and artifact error state board",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149528",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149631",
+      "title": "11.03 · Approval and permission state board",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149631",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149734",
+      "title": "11.04 · Conversation and memory lifecycle states",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149734",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149837",
+      "title": "11.05 · Empty, search and success states",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149837",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149940",
+      "title": "Overlay · Copied",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149940",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149944",
+      "title": "Overlay · Saved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149944",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149948",
+      "title": "Overlay · Download ready",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149948",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149952",
+      "title": "Overlay · Conversation deleted",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149952",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149956",
+      "title": "Overlay · Routine paused",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149956",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149962",
+      "title": "Overlay · Cancel future runs?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149962",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149967",
+      "title": "Overlay · Research account connected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149967",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149972",
+      "title": "Overlay · Stop remaining work?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149972",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149977",
+      "title": "Overlay · Task created",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149977",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149982",
+      "title": "Overlay · Artifact filed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149982",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:149987",
+      "title": "05.09 · Funding evidence detail",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-149987",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150073",
+      "title": "Overlay · Run cancelled",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150073",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150079",
+      "title": "Overlay · Revise funding analysis",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150079",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150093",
+      "title": "Overlay · File funding analysis",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150093",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150134",
+      "title": "Overlay · Revising funding analysis",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150134",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150145",
+      "title": "Overlay · Funding analysis filed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150145",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150152",
+      "title": "Overlay · Revise client update",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150152",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150166",
+      "title": "Overlay · File client update",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150166",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150207",
+      "title": "Overlay · Revising client update",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150207",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150218",
+      "title": "Overlay · Client update filed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150218",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150225",
+      "title": "Overlay · Revise signal summary",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150225",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150239",
+      "title": "Overlay · File signal summary",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150239",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150280",
+      "title": "Overlay · Revising signal summary",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150280",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150291",
+      "title": "Overlay · Signal summary filed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150291",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150298",
+      "title": "Overlay · Download Funding analysis",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150298",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150304",
+      "title": "Overlay · Download ready sheet",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150304",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150308",
+      "title": "Overlay · Download Client update",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150308",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150315",
+      "title": "Overlay · Download ready slides",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150315",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150319",
+      "title": "Overlay · Download Signal summary",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150319",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:150325",
+      "title": "Overlay · Download ready html",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-150325",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3019:27976",
+      "title": "11.06 · Retention and deletion states",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-27976",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3019:28267",
+      "title": "11.07 · Session and availability states",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-28267",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3019:28559",
+      "title": "04.08 · Artifact sharing and source scopes",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-28559",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3019:28780",
+      "title": "05.10 · Memory proposal — submitting",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-28780",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3019:29765",
+      "title": "05.15 · Memory proposals — loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-29765",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3019:29962",
+      "title": "05.16 · Memory proposals — load error",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-29962",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3019:30159",
+      "title": "05.17 · Memory proposal — submission error",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-30159",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3019:30553",
+      "title": "05.19 · Memory review — access restricted",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3019-30553",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:31991",
+      "title": "09.07 · Help and feedback · Clear support path",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-31991",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:32395",
+      "title": "Overlay · Preferences save accepted · Readback required",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32395",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:32411",
+      "title": "Overlay · Connection disconnected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32411",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:32427",
+      "title": "Overlay · Problem report sent",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32427",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:32443",
+      "title": "Overlay · Export ready",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32443",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:32459",
+      "title": "Overlay · Deletion requested",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32459",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:32475",
+      "title": "Overlay · Signed out",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32475",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:32491",
+      "title": "Overlay · Clear personal defaults?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32491",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:32509",
+      "title": "Overlay · Disconnect the research portal?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32509",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:32527",
+      "title": "Overlay · Delete this conversation?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32527",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3022:32545",
+      "title": "Overlay · Account menu",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3022-32545",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3024:26544",
+      "title": "04.08A · Source access review requested",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3024-26544",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3024:26758",
+      "title": "06.08 · Source access approval review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3024-26758",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3024:31132",
+      "title": "08.02A · Edit routine",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3024-31132",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3024:31351",
+      "title": "08.04A · Routine paused",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3024-31351",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3024:31580",
+      "title": "08.04B · Routine automatically disabled",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3024-31580",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3024:32057",
+      "title": "07.03A · Public browser download receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3024-32057",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3024:32269",
+      "title": "07.02A · Research account connected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3024-32269",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3026:27513",
+      "title": "05.21 · Sources loading",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3026-27513",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3026:27760",
+      "title": "05.22 · Sources unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3026-27760",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3026:32155",
+      "title": "03.04A · Spreadsheet source data",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3026-32155",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3026:32465",
+      "title": "03.04B · Spreadsheet references",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3026-32465",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3026:32814",
+      "title": "03.07A · Generated web verification activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3026-32814",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3027:28579",
+      "title": "02.07A · Expanded tool activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3027-28579",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:28357",
+      "title": "03.02A · DOCX brief page 2",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-28357",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:28703",
+      "title": "03.02B · DOCX brief page 3",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-28703",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:29048",
+      "title": "03.02C · DOCX brief page 4",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-29048",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:33544",
+      "title": "03.03A · PDF brief page 2",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-33544",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:33809",
+      "title": "03.03B · PDF brief page 3",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-33809",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:34074",
+      "title": "03.03C · PDF brief page 4",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-34074",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:34357",
+      "title": "03.05A · Presentation slide 2",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-34357",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:34599",
+      "title": "03.05B · Presentation slide 3",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-34599",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:34846",
+      "title": "03.05C · Presentation slide 4",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-34846",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:35087",
+      "title": "03.05D · Presentation slide 5",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-35087",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3031:35328",
+      "title": "03.05E · Presentation slide 6",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3031-35328",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3032:31071",
+      "title": "10.23 · Phone conversation history",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-31071",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3032:31325",
+      "title": "10.24 · Phone browser activity",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-31325",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3032:32204",
+      "title": "10.27 · Tablet workspace files",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-32204",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3032:33402",
+      "title": "10.30 · Dark workspace files",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3032-33402",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3033:31453",
+      "title": "10.31 · Dark memory recall",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3033-31453",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3033:31843",
+      "title": "10.32 · Dark routines",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3033-31843",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3033:32256",
+      "title": "10.33 · Phone personal preferences",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3033-32256",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3033:32515",
+      "title": "10.34 · Tablet personal preferences",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3033-32515",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3033:32900",
+      "title": "10.35 · Phone artifact sharing",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3033-32900",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3033:33089",
+      "title": "10.36 · Tablet artifact sharing",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3033-33089",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3034:32186",
+      "title": "01.04A · Empty conversation history",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3034-32186",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3034:32443",
+      "title": "01.04B · No matching conversations",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3034-32443",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3034:36844",
+      "title": "01.04C · Completed conversation filter",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3034-36844",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3034:37090",
+      "title": "01.04D · Anduril conversation filter",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3034-37090",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3034:37336",
+      "title": "01.04E · General conversation filter",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3034-37336",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3034:37582",
+      "title": "13.21 · Conversation client filter menu",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3034-37582",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3034:37596",
+      "title": "13.22 · Conversation status filter menu",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3034-37596",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3034:37692",
+      "title": "01.03A · Scope picker no matches",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3034-37692",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3034:37943",
+      "title": "01.05A · Command palette no matches",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3034-37943",
+      "role": "design support",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3034:38179",
+      "title": "13.23 · Copy unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3034-38179",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3035:33134",
+      "title": "Overlay · Delete conversation from history?",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3035-33134",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3036:33325",
+      "title": "06.07C · Task proposal rejected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3036-33325",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3036:33519",
+      "title": "06.07D · Task changes requested",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3036-33519",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3036:33726",
+      "title": "06.04A · Executed task proposal",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3036-33726",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3036:38314",
+      "title": "06.07B · Artifact filing changes requested",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3036-38314",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3036:38540",
+      "title": "06.07A · Request artifact filing changes",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3036-38540",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3036:38733",
+      "title": "06.05A · Artifact filing rejected",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3036-38733",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3043:38316",
+      "title": "01.04H · History after selected conversation deletion",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3043-38316",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3048:34348",
+      "title": "01.04F · Running conversation filter",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3048-34348",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3048:34602",
+      "title": "01.04G · Archived conversation filter",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3048-34602",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3050:34741",
+      "title": "05.08B · Superseded briefing preference",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3050-34741",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3062:34870",
+      "title": "05.16B · Memory proposals — retry loading in progress",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3062-34870",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3062:35082",
+      "title": "05.18A · Memory review — status confirmed",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3062-35082",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3062:35293",
+      "title": "05.20A · Memory proposal — refreshed to latest revision",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3062-35293",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3062:39648",
+      "title": "05.22A · Sources — retry in progress",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3062-39648",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3062:39816",
+      "title": "05.04C · Institutional Memory history — no matching history",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3062-39816",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3063:35905",
+      "title": "06.08C · Source access review — source owner perspective",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3063-35905",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3063:36079",
+      "title": "06.08A · Source access approved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3063-36079",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3063:36239",
+      "title": "06.08B · Source access denied",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3063-36239",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3064:40160",
+      "title": "Overlay · Download source bundle",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3064-40160",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3064:40166",
+      "title": "Overlay · Download PDF",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3064-40166",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3064:40201",
+      "title": "04.08B · Artifact sharing opened from document workspace",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3064-40201",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3067:40614",
+      "title": "01.04I · Client filter menu open",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3067-40614",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3067:40882",
+      "title": "01.04J · Status filter menu open",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3067-40882",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3147:41265",
+      "title": "Overlay · Rename conversation",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3147-41265",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "3149:41265",
+      "title": "08.01A · Routines · connect required",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3149-41265",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:143240"
+    },
+    {
+      "nodeId": "1064:151177",
+      "title": "12.02 · Commitments & Deliverables",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-151177",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:151091"
+    },
+    {
+      "nodeId": "1064:151397",
+      "title": "12.05 · Artifact formats",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-151397",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:151091"
+    },
+    {
+      "nodeId": "1064:151682",
+      "title": "12.09 · Funding & federal market",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-151682",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:151091"
+    },
+    {
+      "nodeId": "1064:151762",
+      "title": "12.12 · Budget lines & exact comparison",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-151762",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:151091"
+    },
+    {
+      "nodeId": "1064:152002",
+      "title": "12.13 · Government watch",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152002",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:151091"
+    },
+    {
+      "nodeId": "1064:152069",
+      "title": "12.14 · Memory conflict & lifecycle",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152069",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:151091"
+    },
+    {
+      "nodeId": "1064:152144",
+      "title": "12.15 · Clarify subject & context",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152144",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:151091"
+    },
+    {
+      "nodeId": "1064:152281",
+      "title": "12.17 · Browser permissions & qualification",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152281",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:151091"
+    },
+    {
+      "nodeId": "1064:152575",
+      "title": "12.18 · Artifact verification",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152575",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:151091"
+    },
+    {
+      "nodeId": "1064:152635",
+      "title": "12.22 · Exact source record",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152635",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:151091"
+    },
+    {
+      "nodeId": "1064:152717",
+      "title": "Meri · Commitments & Deliverables · Phone",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152717",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:152691"
+    },
+    {
+      "nodeId": "1064:152981",
+      "title": "Task · Draft from commitment",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-152981",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:152952"
+    },
+    {
+      "nodeId": "1064:153002",
+      "title": "Task · Review exact source action",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-153002",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:152952"
+    },
+    {
+      "nodeId": "1064:153038",
+      "title": "Task · Source creation receipt",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-153038",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:152952"
+    },
+    {
+      "nodeId": "1064:153081",
+      "title": "Task · Canonical source record",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1064-153081",
+      "role": "supporting view or overlay",
+      "sectionId": "1064:152952"
+    },
+    {
+      "nodeId": "3086:36889",
+      "title": "14.02 · Allocation pending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-36889",
+      "role": "supporting view or overlay",
+      "sectionId": "3085:36751"
+    },
+    {
+      "nodeId": "3086:37078",
+      "title": "14.03 · Admission pending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-37078",
+      "role": "supporting view or overlay",
+      "sectionId": "3085:36751"
+    },
+    {
+      "nodeId": "3086:37656",
+      "title": "14.06 · Same-request retry pending",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-37656",
+      "role": "supporting view or overlay",
+      "sectionId": "3085:36751"
+    },
+    {
+      "nodeId": "3086:38035",
+      "title": "14.08 · Refresh recovery · original unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-38035",
+      "role": "supporting view or overlay",
+      "sectionId": "3085:36751"
+    },
+    {
+      "nodeId": "3086:38436",
+      "title": "14.10 · Refresh recovery · history unavailable",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-38436",
+      "role": "supporting view or overlay",
+      "sectionId": "3085:36751"
+    },
+    {
+      "nodeId": "3086:38647",
+      "title": "14.11 · Refresh recovery · reserved turn unresolved",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-38647",
+      "role": "supporting view or overlay",
+      "sectionId": "3085:36751"
+    },
+    {
+      "nodeId": "3086:38858",
+      "title": "14.12 · Refresh recovery · stored input recovered",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-38858",
+      "role": "supporting view or overlay",
+      "sectionId": "3085:36751"
+    },
+    {
+      "nodeId": "3086:39057",
+      "title": "14.13 · Partial history · load more",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-39057",
+      "role": "supporting view or overlay",
+      "sectionId": "3085:36751"
+    },
+    {
+      "nodeId": "3086:39659",
+      "title": "14.16 · Partial history · loaded",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3086-39659",
+      "role": "supporting view or overlay",
+      "sectionId": "3085:36751"
+    },
+    {
+      "nodeId": "1103:280953",
+      "title": "Shared interaction patterns · Review",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=1103-280953",
+      "role": "design support",
+      "sectionId": "1103:280888"
+    },
+    {
+      "nodeId": "3141:40968",
+      "title": "Capiro 3.4 / Motion / Implementation specification",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3141-40968",
+      "role": "design support",
+      "sectionId": "1103:280888"
+    },
+    {
+      "nodeId": "3162:43520",
+      "title": "01.01M · New chat · Phone 390",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3162-43520",
+      "role": "supporting view or overlay",
+      "sectionId": "3162:43020"
+    },
+    {
+      "nodeId": "3163:42499",
+      "title": "01.02R · Conversation · Read failure recovery",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3163-42499",
+      "role": "supporting view or overlay",
+      "sectionId": "3162:43020"
+    },
+    {
+      "nodeId": "3177:42579",
+      "title": "A1.01 · Choose what the research assistant can read",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-42579",
+      "role": "supporting view or overlay",
+      "sectionId": "3176:42593"
+    },
+    {
+      "nodeId": "3177:42756",
+      "title": "A1.02 · Review the delegated research",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3177-42756",
+      "role": "supporting view or overlay",
+      "sectionId": "3176:42593"
+    },
+    {
+      "nodeId": "3208:46493",
+      "title": "17.00 · Daily quote · Source",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3208-46493",
+      "role": "supporting view or overlay",
+      "sectionId": "3208:46492"
+    },
+    {
+      "nodeId": "3244:78203",
+      "title": "START HERE · Meri 3.4 · Current screens",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3244-78203",
+      "role": "supporting view or overlay",
+      "sectionId": "3208:46492"
+    },
+    {
+      "nodeId": "3212:46507",
+      "title": "Office presentation components",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3212-46507",
+      "role": "design support",
+      "sectionId": "3212:46506"
+    },
+    {
+      "nodeId": "3236:76422",
+      "title": "Implementation boundary · Source and owner handoffs",
+      "url": "https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea?node-id=3236-76422",
+      "role": "design support",
+      "sectionId": "3215:48715"
+    }
+  ]
+}
