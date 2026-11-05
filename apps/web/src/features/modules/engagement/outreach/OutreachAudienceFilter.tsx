@@ -1,4 +1,4 @@
-import { ActionButton } from "../../../../shared/module-ui";
+import { SelectInput } from "../../../../shared/module-ui";
 import type { OutreachAudience } from "./outreach-audience-model";
 import styles from "./outreach-overview.module.css";
 
@@ -20,7 +20,7 @@ export function OutreachAudienceFilter({
   value: OutreachAudience;
   supported: boolean;
   onChange: (value: OutreachAudience) => void;
-  /** A containing toolbar can render the same notice outside the compact button group. */
+  /** The containing filter panel can render this notice beside the audience selector. */
   noticeId?: string;
 }) {
   return (
@@ -30,22 +30,17 @@ export function OutreachAudienceFilter({
       aria-label="Outreach audience"
       aria-describedby={!supported ? noticeId : undefined}
     >
-      {(
-        [
-          ["all", "All"],
-          ["to-clients", "Client"],
-          ["on-behalf", "External"],
-        ] as const
-      ).map(([id, label]) => (
-        <ActionButton
-          key={id}
-          aria-pressed={value === id}
-          disabled={id !== "all" && !supported}
-          onClick={() => onChange(id)}
-        >
-          {label}
-        </ActionButton>
-      ))}
+      <SelectInput
+        id="outreach-audience"
+        aria-label="Outreach audience"
+        value={value}
+        onValueChange={(next) => onChange(next as OutreachAudience)}
+        options={[
+          { value: "all", label: "All audiences" },
+          { value: "to-clients", label: "Client", disabled: !supported },
+          { value: "on-behalf", label: "External", disabled: !supported },
+        ]}
+      />
       {!supported && !noticeId && <OutreachAudienceNotice />}
     </div>
   );

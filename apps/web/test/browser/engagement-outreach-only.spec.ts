@@ -153,6 +153,7 @@ test("Outreach date filters send UTC start and exclusive end for the chosen incl
     return route.fulfill({ json: { items: [], nextCursor: null } });
   });
   await page.goto("/modules/engagement");
+  await page.getByRole("button", { name: "More filters", exact: true }).click();
   await page.getByLabel("To", { exact: true }).fill("2026-10-12");
   await page.getByLabel("From", { exact: true }).fill("2026-10-10");
   await expect
@@ -188,6 +189,7 @@ test("an inverted Outreach date window hides rows without issuing a read for tha
   await expect(
     page.getByRole("button", { name: `Open draft: ${record.title}` }),
   ).toBeVisible();
+  await page.getByRole("button", { name: "More filters", exact: true }).click();
   await page.getByLabel("From", { exact: true }).fill("2026-10-09");
   await page.getByLabel("To", { exact: true }).fill("2026-10-10");
   await expect
@@ -244,7 +246,11 @@ test("Show deleted requests deleted-only rows and never opens a deleted draft", 
     page.getByRole("button", { name: `Open draft: ${record.title}` }),
   ).toBeVisible();
   await page.getByText("More filters", { exact: true }).click();
-  await page.getByRole("checkbox", { name: "Deleted only" }).check();
+  await page.getByRole("combobox", { name: "Records", exact: true }).click();
+  await page.getByRole("option", { name: "Deleted only", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Apply filters", exact: true })
+    .click();
   await expect.poll(() => inputs.at(-1)?.query.deleted).toBe("true");
   await expect(
     page.getByRole("heading", { name: "Deleted outreach" }),
