@@ -140,8 +140,10 @@ export function ConversationHistoryList({
     return () => window.removeEventListener("hashchange", focusSearch);
   }, []);
   const status = STATUS_FILTER[statusKey];
+  // Core filters its stored title before Meri derives the visible first-prompt title. Keep
+  // the admitted Core pages intact (including their cursor) and filter only the displayed rows.
   const { query, scope, current, retained, shown, summaries } =
-    useManagedConversations(title, status);
+    useManagedConversations("", status);
   const roster = useClients({
     enabled: Boolean(scope),
     scope: scope
@@ -156,16 +158,33 @@ export function ConversationHistoryList({
   const client =
     chosenClient ??
     (initialClient && initialClient !== GENERAL_CLIENT_FILTER
-      ? (names.get(initialClient) ?? "")
+      ? (names.get(initialClient) ?? "Selected client")
       : "");
+  // Keep the entry link's client scope even when the separate roster read is pending or fails.
+  // An unknown display name must never turn a client-scoped entry into All clients.
+  const entryClientId =
+    chosenClient === null && initialClient !== GENERAL_CLIENT_FILTER
+      ? initialClient
+      : undefined;
   // Admitted rows belong to the read that returned them: a page fetch or a timed-out next page
   // keeps them, and every other failure or replacement removes them with their private state.
   const rows = historyRows(summaries, (id) => names.get(id) ?? "Client");
-  const visible = client ? rows.filter((row) => row.client === client) : rows;
+  const needle = title.trim().toLowerCase();
+  const visible = rows.filter(
+    (row) =>
+      (entryClientId
+        ? row.summary.clientId === entryClientId
+        : !client || row.client === client) &&
+      (!needle || row.title.toLowerCase().includes(needle)),
+  );
   const clientOptions = [
     GENERAL_CLIENT_FILTER,
     ...new Set(
       rows
+        .filter(
+          (row) =>
+            row.summary.clientId === null || names.has(row.summary.clientId),
+        )
         .map((row) => row.client)
         .filter((name) => name !== GENERAL_CLIENT_FILTER),
     ),
@@ -204,7 +223,15 @@ export function ConversationHistoryList({
           icon={<ChevronDown aria-hidden />}
           options={clientOptions}
           value={client}
-          onChange={setClient}
+          onChange={(value) =>
+            // Re-selecting the entry client's name must not turn its exact ID into
+            // a name filter that also matches another client with the same name.
+            setClient(
+              entryClientId && value === names.get(entryClientId)
+                ? null
+                : value,
+            )
+          }
         />
         <FilterMenu
           title="Filter by status"
@@ -220,6 +247,11 @@ export function ConversationHistoryList({
           }}
         />
       </div>
+      {scope && entryClientId && !names.has(entryClientId) && (
+        <p role="status" className={ui.muted}>
+          Client filter is active; client name unavailable.
+        </p>
+      )}
       {scope && (
         <UnconfirmedChatChanges
           key={`${scope.tenantId}:${scope.actorId}:${Math.max(query.dataUpdatedAt, query.errorUpdatedAt)}`}
@@ -242,7 +274,7 @@ export function ConversationHistoryList({
             Retry
           </button>
         </div>
-      ) : current && !visible.length ? (
+      ) : current && !visible.length && !query.hasNextPage ? (
         filtered ? (
           <StateMessage
             title="No matching conversations"
@@ -319,17 +351,24 @@ export function ConversationHistoryList({
               refresh={() => void query.refetch()}
             />
           )}
-          {!retained && query.hasNextPage && (
-            <button
-              type="button"
-              className={ui.outline}
-              disabled={query.isFetching}
-              onClick={() => void query.fetchNextPage()}
-            >
-              Load more
-            </button>
-          )}
         </div>
+      )}
+      {scope && shown && !retained && query.hasNextPage && (
+        <>
+          {!visible.length && (
+            <p role="status" className={ui.muted}>
+              More conversations may be on a later page.
+            </p>
+          )}
+          <button
+            type="button"
+            className={ui.outline}
+            disabled={query.isFetching}
+            onClick={() => void query.fetchNextPage()}
+          >
+            Load more
+          </button>
+        </>
       )}
     </div>
   );
