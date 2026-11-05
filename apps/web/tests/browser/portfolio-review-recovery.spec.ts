@@ -280,6 +280,11 @@ test("PR564 mounted review recovery, bounded synthetic matrix", async ({
             await check(() => expect(state.factWrites[1]).toEqual(original));
         } else throw new Error(`Unknown recovery case: ${scenario}`);
         await check(() => expect(state.unexpected).toEqual([]));
+        await page.evaluate(() => document.fonts.ready);
+        await testInfo.attach(`recovery-${scenario.replace(":", "-")}`, {
+          body: await page.screenshot({ animations: "disabled" }),
+          contentType: "image/png",
+        });
         results.push(scenario);
       });
     }
