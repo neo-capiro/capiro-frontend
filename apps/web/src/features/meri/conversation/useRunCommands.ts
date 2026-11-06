@@ -6,7 +6,6 @@ import {
 } from "./useRunCommandJournal";
 export type { TranscriptState } from "./useRunCommandJournal";
 import {
-  historyNotStarted,
   recoverRequest,
   reconcileStoredCancel,
   reconcileStoredRequest,
@@ -30,14 +29,11 @@ async function readTranscript(
   setTranscript("loading");
   try {
     // `after` first keeps the body clear of the edge WAF rule that blocks a bare `{"limit":n}`.
-    await port.history({ after: 0, limit: 100 });
-    setTranscript("loaded");
-    return true;
+    const snapshot = await port.history({ after: 0, limit: 100 });
+    const started = snapshot.observation !== null;
+    setTranscript(started ? "loaded" : "empty");
+    return started;
   } catch (cause) {
-    if (historyNotStarted(cause)) {
-      setTranscript("empty");
-      return false;
-    }
     setTranscript("unavailable");
     throw cause;
   }

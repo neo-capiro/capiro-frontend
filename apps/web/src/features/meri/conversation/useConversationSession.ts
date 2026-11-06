@@ -16,7 +16,7 @@ import {
   useConversationTurn,
   type ConversationTurnTarget,
 } from "./useConversationTurn";
-import { sessionHistoryState } from "./saved-turns";
+import { emptyReservedTarget, sessionHistoryState } from "./saved-turns";
 import type { TurnView } from "./conversation-view";
 import { useConversationLocalState } from "./useConversationLocalState";
 import { useModelCatalog } from "../model-selection/useModelCatalog";
@@ -33,6 +33,9 @@ import { conversationHref } from "../../../shared/meri-conversations/conversatio
 import type { LifecycleTarget } from "./lifecycle/useRunLifecycle";
 import { createAccessRecheck } from "./access-recheck";
 import type { UploadSendArgument } from "../../../shared/meri-uploads/upload-controller";
+
+const noRunSnapshot = () => undefined;
+const noRunSubscription = () => () => {};
 
 /**
  * The first access loss of an episode rechecks itself once after a short delay; the manual check
@@ -147,6 +150,13 @@ export function useConversationSession(
   );
   const { boundReady, selectedId, history, accessLost, ready } =
     useSelectedHistory(account, clientId, conversationId, connection, research);
+  // The SDK publishes ready without an observation only after accepting explicit empty history.
+  // A new port, an in-flight read, a positive run or lost access immediately removes this evidence.
+  const runSnapshot = useSyncExternalStore(
+    ready?.port.subscribe ?? noRunSubscription,
+    ready?.port.getSnapshot ?? noRunSnapshot,
+    noRunSnapshot,
+  );
   const { reopen } = connection;
   const accessRechecking = useAccessRecheck(
     accessLost,
@@ -214,6 +224,7 @@ export function useConversationSession(
     continuation.busy,
     continuation.failure,
     continuation.opened,
+    emptyReservedTarget(history.current, ready?.port.context, runSnapshot),
   );
   useEffect(() => {
     connection.capture?.projection({

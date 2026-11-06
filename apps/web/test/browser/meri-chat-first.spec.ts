@@ -4,6 +4,7 @@ import { expect, test, type Page } from "@playwright/test";
 import type { UIEvent } from "@capiro/meri-contracts";
 import { newWorkflow } from "../../src/features/settings/site-workflows/form";
 import { CONVERSATION_SKILLS } from "@capiro/meri-contracts/conversation-application";
+import { MANAGEMENT_VERSION } from "@capiro/meri-contracts/conversation-history";
 import {
   clientId,
   context,
@@ -21,7 +22,7 @@ import {
   selectedUrl,
   turn,
 } from "./meri-history-fixtures";
-import { reply, runFor } from "./meri-conversation-fixtures";
+import { reply } from "./meri-conversation-fixtures";
 import { binding } from "./meri-conversation-fixtures";
 import { json } from "../../tests/browser/fixtures";
 import { testIdentity } from "./fixtures";
@@ -61,13 +62,20 @@ const quoteOn = (year: number, month: number, day: number) => {
 
 /**
  * The healthy empty conversation: admitted identity/client/session plus the canonical not-started
- * history (404 NOT_FOUND), empty conversation list and permitted skill catalog. No mocked failure
+ * successful empty history, empty conversation list and permitted skill catalog. No mocked failure
  * stands in for the landing state.
  */
 async function healthy(page: Page, lifetimeMs?: number) {
   // A faked page clock must not expire the synthetic session receipt unless the case says so.
   await setupConversation(page, undefined, undefined, lifetimeMs);
   await installInitialInput(page);
+  await page.route("**/api/conversations/summaries", (route) =>
+    json(route, {
+      version: MANAGEMENT_VERSION,
+      conversations: [],
+      nextBefore: null,
+    }),
+  );
   await page.route("**/api/capiro/meri.quickActions.list*", (route) =>
     json(route, {
       version: 1,
@@ -108,7 +116,23 @@ test("desktop healthy empty conversation: quiet hero, one composer, no failure c
 }) => {
   await page.setViewportSize({ width: 1440, height: 1040 });
   const pageErrors: string[] = [];
+  const consoleErrors: string[] = [],
+    historyStatuses: Array<{ path: string; status: number }> = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") consoleErrors.push(message.text());
+  });
+  page.on("response", (response) => {
+    if (
+      /\/api\/conversations\/(history|transcript)$/.test(
+        new URL(response.url()).pathname,
+      )
+    )
+      historyStatuses.push({
+        path: new URL(response.url()).pathname,
+        status: response.status(),
+      });
+  });
   await healthy(page);
   await page.goto(`/meri?clientId=${clientId}`);
   await shellReady(page);
@@ -154,6 +178,11 @@ test("desktop healthy empty conversation: quiet hero, one composer, no failure c
     page.getByRole("button", { name: "Send message", exact: true }),
   ).toBeDisabled();
   expect(pageErrors).toEqual([]);
+  await expect
+    .poll(() => new Set(historyStatuses.map(({ path }) => path)).size)
+    .toBe(2);
+  expect(consoleErrors).toEqual([]);
+  expect(historyStatuses.every(({ status }) => status === 200)).toBe(true);
 
   // Default capture: Source collapsed, initial scroll position.
   expect(await page.evaluate(() => window.scrollY)).toBe(0);

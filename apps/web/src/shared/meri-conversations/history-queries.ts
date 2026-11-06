@@ -4,6 +4,7 @@ import type { OpeningCapture } from "./opening-capture";
 import { useEffect } from "react";
 import {
   infiniteQueryOptions,
+  queryOptions,
   useInfiniteQuery,
   useQuery,
   useQueryClient,
@@ -15,7 +16,8 @@ import {
   listConversations,
   readConversationTranscript,
   type ConversationListPage,
-  type ConversationTranscriptPage,
+  type ConversationTranscriptResult,
+  isEmptyTranscript,
   ConversationHistoryUnavailable,
   summarizeConversations,
   MANAGEMENT_VERSION,
@@ -30,12 +32,6 @@ import {
 export const accessDenied = (error: unknown) =>
   error instanceof ConversationHistoryUnavailable &&
   ([401, 403].includes(error.status) || error.code === "MEMBERSHIP_CHANGED");
-/** Empty-history presentation only; not-found never proves ownership or grants admission. */
-export const historyNotStarted = (error: unknown) =>
-  error instanceof ConversationHistoryUnavailable &&
-  error.status === 404 &&
-  (error.code === "NOT_FOUND" || error.code === "CONVERSATION_NOT_FOUND");
-
 /** One bounded title page enriches Recents without replacing scheduled discovery. */
 export function useRecentConversationTitles(account: ConversationAccount) {
   useManagementRefresh(account, true);
@@ -97,6 +93,7 @@ async function scopedTranscript(
     !conversationInClient(page.conversation, account, clientId, research)
   )
     throw new Error("Conversation client mismatch");
+  if (isEmptyTranscript(page)) return page;
   // A page that claims more without moving the cursor is a failed read, never a silent end.
   if (page.hasMore && page.nextSequence <= (after ?? protocol.defaults.after))
     throw new Error("Transcript page did not advance");
@@ -127,7 +124,7 @@ export function clearConversationReads(
 }
 
 /** Read the latest run's lineage even when earlier conversation pages remain unloaded. */
-function useLatestTranscript(
+export function latestTranscriptQuery(
   account: ConversationAccount,
   clientId: string | null,
   conversationId: string | undefined,
@@ -136,15 +133,15 @@ function useLatestTranscript(
   research?: ResearchSelection,
   capture?: OpeningCapture,
 ) {
-  return useQuery({
+  return queryOptions({
     queryKey: [
       ...transcriptKey(account, clientId, conversationId, research),
       "latest",
       after,
     ],
     enabled: enabled && after !== undefined,
-    queryFn: ({ signal }) =>
-      scopedTranscript(
+    queryFn: async ({ signal }) => {
+      const page = await scopedTranscript(
         account,
         clientId,
         conversationId,
@@ -152,7 +149,12 @@ function useLatestTranscript(
         signal,
         research,
         capture,
-      ),
+      );
+      // A positive saved page already identified a run, even when its sequence base is zero.
+      if (isEmptyTranscript(page))
+        throw new Error("Latest saved run unavailable");
+      return page;
+    },
     retry: false,
     staleTime: 0,
   });
@@ -226,7 +228,8 @@ export function savedTranscriptQuery(
         research,
         capture,
       ),
-    getNextPageParam: (page) => (page.hasMore ? page.nextSequence : undefined),
+    getNextPageParam: (page) =>
+      !isEmptyTranscript(page) && page.hasMore ? page.nextSequence : undefined,
     retry: false,
     staleTime: 0,
     refetchOnMount: "always",
@@ -234,7 +237,7 @@ export function savedTranscriptQuery(
 }
 
 type SavedTranscriptQuery = {
-  data: { pages: ConversationTranscriptPage[] } | undefined;
+  data: { pages: ConversationTranscriptResult[] } | undefined;
   error: unknown;
   hasNextPage: boolean;
   isFetching: boolean;
@@ -263,7 +266,8 @@ export function savedHistory(
   const moreFailed =
     !!query.error && query.isFetchNextPageError && !accessDenied(query.error);
   let saved: ReturnType<typeof transcriptPages> | undefined,
-    invalid = false;
+    invalid = false,
+    empty = false;
   // A re-read of the admitted pages hides them until the owner admits them again.
   if (
     enabled &&
@@ -272,12 +276,26 @@ export function savedHistory(
     !query.isRefetching
   ) {
     try {
-      saved = transcriptPages(query.data.pages, account, clientId, research);
+      const pages = query.data.pages;
+      const populated = pages.filter((page) => !isEmptyTranscript(page));
+      if (populated.length !== pages.length) {
+        if (
+          pages.length !== 1 ||
+          !conversationInClient(
+            pages[0]!.conversation,
+            account,
+            clientId,
+            research,
+          )
+        )
+          throw new Error("Empty transcript changed across pages");
+        empty = true;
+      } else saved = transcriptPages(populated, account, clientId, research);
     } catch {
       invalid = true;
     }
   }
-  return { saved, invalid, moreFailed };
+  return { saved, invalid, moreFailed, empty };
 }
 
 /** History and latest-run lineage use conversation cursors, never the SDK stream cursor. */
@@ -311,7 +329,7 @@ export function useConversationHistory(
     if (selected && nextSavedPageDue({ hasNextPage, isFetching, error }))
       void fetchNextPage();
   }, [selected, hasNextPage, isFetching, error, fetchNextPage]);
-  const { saved, invalid, moreFailed } = savedHistory(
+  const { saved, invalid, moreFailed, empty } = savedHistory(
     query,
     enabled,
     account,
@@ -319,20 +337,23 @@ export function useConversationHistory(
     research,
   );
   const latestBase = saved?.latest?.latestSequenceBase;
-  const tail = useLatestTranscript(
-    account,
-    clientId,
-    conversationId,
-    latestBase,
-    enabled,
-    research,
-    capture,
+  const tail = useQuery(
+    latestTranscriptQuery(
+      account,
+      clientId,
+      conversationId,
+      latestBase,
+      enabled,
+      research,
+      capture,
+    ),
   );
   const current =
-    saved && !tail.error && !tail.isFetching ? tail.data : undefined;
+    saved && !tail.error && !tail.isFetching && tail.data
+      ? tail.data
+      : undefined;
   const denied =
     enabled && (accessDenied(query.error) || accessDenied(tail.error));
-  const empty = !!conversationId && historyNotStarted(query.error);
   return {
     query,
     tail,

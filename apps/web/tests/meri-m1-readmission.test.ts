@@ -13,6 +13,7 @@ import {
 } from "../src/shared/meri-conversations/tab-journal";
 import type { MeriConversationPort } from "../src/shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
+import { EMPTY_HISTORY_SCHEMA } from "@capiro/meri-contracts/conversation-application";
 import type { Page, Route } from "@playwright/test";
 import { installInitialInput } from "../test/browser/meri-initial-input-fixtures";
 import {
@@ -21,6 +22,7 @@ import {
   event,
   history,
   runFor,
+  scopes,
   status,
 } from "../test/browser/meri-conversation-fixtures";
 
@@ -225,6 +227,42 @@ async function acceptedInputFixture(submitted = true) {
   };
   return { ...native, input, fetchImpl };
 }
+
+it("successful empty readmission preserves an uncertain request without observing or resending", async () => {
+  const response = () =>
+    Response.json({ schema: EMPTY_HISTORY_SCHEMA, binding, scopes });
+  const mounted = mount(response, {
+    initial: true,
+    savedRequest: false,
+    fetchImpl: async () => response(),
+  });
+  const original = structuredClone(mounted.journal.read().submit);
+  for (const effect of harness.effects.splice(0)) effect();
+  await vi.waitFor(() =>
+    expect(mounted.port.getSnapshot().status).toBe("ready"),
+  );
+  expect(mounted.port.getSnapshot().observation).toBeNull();
+  expect(mounted.calls).toEqual(["/api/conversations/history"]);
+  expect(mounted.journal.read().submit).toEqual(original);
+  expect(harness.observe).not.toHaveBeenCalled();
+});
+
+it("a genuine missing run leaves readmission unavailable instead of empty", async () => {
+  const response = () =>
+    Response.json({ error: { code: "NOT_FOUND" } }, { status: 404 });
+  const mounted = mount(response, {
+    initial: true,
+    savedRequest: false,
+    fetchImpl: async () => response(),
+  });
+  const original = structuredClone(mounted.journal.read().submit);
+  for (const effect of harness.effects.splice(0)) effect();
+  await vi.waitFor(() =>
+    expect(mounted.port.getSnapshot().status).toBe("unavailable"),
+  );
+  expect(mounted.journal.read().submit).toEqual(original);
+  expect(harness.observe).not.toHaveBeenCalled();
+});
 
 it.each([
   { initial: false, readable: true },

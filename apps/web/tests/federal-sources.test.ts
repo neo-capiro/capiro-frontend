@@ -85,3 +85,16 @@ it("discards late history after its lifetime is cancelled", async () => {
     }),
   ).rejects.toThrow();
 });
+
+it("an owned empty conversation has no saved federal source choices", async () => {
+  const result = await readFederalSources(
+    context,
+    0,
+    new AbortController().signal,
+    async () => ({
+      schema: "meri.conversation-transcript-empty/1",
+      conversation: page().conversation,
+    }),
+  );
+  expect(result).toEqual({ sources: [], nextAfter: null });
+});

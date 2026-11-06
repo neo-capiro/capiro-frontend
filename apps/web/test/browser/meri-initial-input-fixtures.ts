@@ -147,7 +147,11 @@ export async function installInitialInput(
   );
   await page.route("**/api/conversations/history", (route) =>
     !native.accepted
-      ? reply(route, { error: { code: "NOT_FOUND" } }, 404)
+      ? reply(route, {
+          schema: "meri.conversation-history-empty/1",
+          binding,
+          scopes: selectedScopes,
+        })
       : reply(route, {
           ...history(events(), {
             state: state(),
@@ -166,7 +170,10 @@ export async function installInitialInput(
   );
   await page.route("**/api/conversations/transcript", (route) => {
     if (!native.accepted)
-      return reply(route, { error: { code: "CONVERSATION_NOT_FOUND" } }, 404);
+      return reply(route, {
+        schema: "meri.conversation-transcript-empty/1",
+        conversation: selectedConversation,
+      });
     const input = route.request().postDataJSON();
     const all = events(),
       page = all
