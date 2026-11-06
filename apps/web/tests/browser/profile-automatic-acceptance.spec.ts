@@ -69,6 +69,9 @@ test("an exact official fact is labeled automatic and Not right records rejectio
       }),
   );
   await page.goto(`/portfolio/${clientId}`);
+  await page
+    .getByRole("button", { name: "Profile activity", exact: true })
+    .click();
   const sources = page.getByRole("region", {
     name: "Sources and review",
     exact: true,

@@ -2226,10 +2226,10 @@
     "file": "apps/web/src/shared/portfolio/api/proxy.ts",
     "kind": "function",
     "symbol": "proxyRequest",
-    "fingerprint": "6cf0ee54b291e0bbe0041bf13efa08f0dbfa5fd80d578460dfc33b1b2b961d51",
-    "reason": "The canonical Portfolio forwarding boundary keeps existing service/path/origin/configuration gates, credential acquisition, bounded upstream forwarding and response shaping in one request lifetime. Three fixed labels annotate the pre-existing credential exception, no-token and upstream401 branches. Independent base/head comparison preserves status/body/other headers across all four producers, including this one, while arbitrary code fields are not inspected. At229 nonblank lines the function remains one transport owner; no new scope decision, logger, retry, persistence or generic auth framework is added. Existing branch order and upstream diagnostic replacement are explicit.",
-    "reviewedBy": "Codex independent VQA-021 exact-source review of 3ceefc27f8202fcb14364e4cc8d0dc5edd7d62d8",
-    "reviewedOn": "2026-11-03"
+    "fingerprint": "bccd98fd02c21f350ba33a2c8366b66d544f52e6712ab9928d68650f67a5f653",
+    "reason": "Exact-source Profile activity review: this 228-line function remains the single narrow Portfolio service adapter. The delta makes its existing exact retired metric GET refusal permanent and removes the obsolete activation flag. Service allowlists, case-sensitive client identity, credentials, mutation-origin checks, deadlines, response shaping and unrelated intelligence forwarding retain their existing owners and semantics. Extracting the small retired-route condition would scatter the same transport boundary without separating a new responsibility.",
+    "reviewedBy": "Codex independent profile_review",
+    "reviewedOn": "2026-11-06"
   },
   {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
@@ -3059,10 +3059,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/overview.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "8068cf99a5d601daeb3378d4383918decfd33982a9391165cd5c3b7662d9d18e",
-    "reason": "reviewed-accept for source; visual effect NOT verified here (min-height/overflow visible \u00e2\u2020\u2019 combined visual run)",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "738a79de57a38140a4d88c1ef2e5b16d343d51d3b952ffe32152e463bfd79a51",
+    "reason": "Exact-source Profile activity review: this 501-line stylesheet retains the existing overview and timeline presentation responsibility. The bounded delta deletes the obsolete recorded-index card selectors; new profile activity styles have their own cohesive component stylesheet. No layout, data or lifecycle responsibility is duplicated or broadened.",
+    "reviewedBy": "Codex independent profile_review",
+    "reviewedOn": "2026-11-06"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/quick-log/QuickLogDetailFields.tsx",
@@ -8503,12 +8503,12 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
     "kind": "function",
     "symbol": "ClientOverview",
-    "line": 33,
-    "nonblank": 187,
-    "fingerprint": "3d395f8f86f186a0b15ac4354a92d0fcfb2a676b97a1b0014babba1efd967fb1",
-    "reason": "One authorized client overview composes identity, team, facilities, activity, objectives, calendar, and the shared profile-build/fact panels. The client read fails closed before the profile body renders. New research and source/news review are delegated by explicit client subject to their existing public owners; the overview creates no runner, provider, fact store, or approval path. Its remaining local state only opens the existing team/notes/log dialogs and synchronizes navigation. Keeping the composition together preserves a coherent overview without duplicating the children\u2019s responsibilities.",
-    "reviewedBy": "Codex independent backend_audit review of frontend 0ec70dd4 exact source and final architecture v3 report",
-    "reviewedOn": "2026-11-04"
+    "line": 28,
+    "nonblank": 200,
+    "fingerprint": "57a488f42fef5cca875d39f236ad352dfc5f067b929f33a4d8a6ab4119e49962",
+    "reason": "Exact-source Profile activity review: this 200-line function remains one client overview composition. It adds only disclosure visibility, a stable disclosure ID and trigger-focus ownership while moving existing completeness/research/facts presentation into ProfileActivity. Canonical public profile-build components retain data access, research lifecycle, review and uncertain retries; no new transport or authority owner is introduced. Keeping these local UI states beside the overview composition is cohesive.",
+    "reviewedBy": "Codex independent profile_review",
+    "reviewedOn": "2026-11-06"
   },
   {
     "file": "apps/web/src/features/portfolio/profile-build/IdentityMatch.tsx",
@@ -8625,6 +8625,24 @@
     "fingerprint": "3723d3082f984a85a5a7b666ec951522cb0a762f0999cbc9d8313848ad1e30d4",
     "reason": "Owns one route, canonical query, selection and dialog composition for both authorized module and client-profile scopes. Transport, evidence, context editing, results, metrics and retained mutations stay in their existing owners.",
     "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "reviewedOn": "2026-11-06"
+  },
+  {
+    "file": "apps/web/tests/browser/profile-activity.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "9eee6f29259d64082f0e731ee2d19521971d0d35881507a6671f8f504de4779a",
+    "reason": "Exact-source Profile activity review: this 157-line browser scenario exercises one disclosure interaction at desktop and mobile widths with the canonical composed UI. The same fixture verifies server completion values, six section statuses, hidden content, keyboard focus, nested editing, retained research selection, scoped accessibility and overflow. These assertions characterize one interaction lifecycle rather than unrelated subsystems; keeping their ordered transitions together makes lost-state regressions observable.",
+    "reviewedBy": "Codex independent profile_review",
+    "reviewedOn": "2026-11-06"
+  },
+  {
+    "file": "apps/web/tests/browser/profile-activity.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "723af9ff1f22f48e4e5899a5a7bb9f299e3d800192c61d63b8e27997548f3b1d",
+    "reason": "Exact-source Profile activity review: this 98-line browser scenario owns one uncertain conflict-decision lifecycle, including its explicit synthetic snapshot and request capture. It verifies that a 503 followed by collapse/reopen preserves the exact requestId, expectedVersion and resolution for retry and clears the attempt only on a verified response. Keeping the fixture and sequential assertions together avoids obscuring the behavior being preserved; it introduces no production owner.",
+    "reviewedBy": "Codex independent profile_review",
     "reviewedOn": "2026-11-06"
   }
 ]

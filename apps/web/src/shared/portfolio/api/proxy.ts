@@ -94,8 +94,8 @@ export async function proxyRequest(
     if (request.method !== "GET")
       return jsonError(405, "Forecast source access is read-only.");
   }
-  // This URL also exists on legacy Core. Reject before credentials or upstream
-  // reads until Release qualifies the versioned, actor-scoped producer.
+  // The recorded index was retired from the client profile. Keep its legacy
+  // endpoint outside this proxy's surface, before credentials or upstream reads.
   // Static segments match the backend's case-insensitive router; IDs stay exact.
   if (
     selected === "core" &&
@@ -103,10 +103,9 @@ export async function proxyRequest(
     path.length === 4 &&
     path[0] === "intelligence" &&
     path[1]?.toLowerCase() === "clients" &&
-    path[3]?.toLowerCase() === "health-score" &&
-    config.recordedActivityVersion !== 1
+    path[3]?.toLowerCase() === "health-score"
   )
-    return jsonError(503, "Recorded activity is unavailable.");
+    return jsonError(404, "This profile metric is no longer available.");
   // Match backend-equivalent static spellings without changing roots or IDs.
   const trackerMetricRead =
     request.method === "GET" &&

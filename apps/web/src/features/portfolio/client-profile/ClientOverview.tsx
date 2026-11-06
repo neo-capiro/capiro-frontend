@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useId, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowUpRight, NotebookPen, Plus, Users } from "lucide-react";
@@ -15,14 +15,9 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { FacilitiesCard } from "./FacilitiesCard";
 import { ClientDetails, GovernmentSummary } from "./ClientDetails";
-import {
-  ProfileBuildPanel,
-  ProfileFacts,
-} from "@/features/portfolio/profile-build/public";
-import { ClientCompleteness } from "./ClientCompleteness";
 import { ClientMonogram } from "./ClientMonogram";
 import { DeadlineAndRequests, EngagementPulse } from "./OverviewSignals";
-import { RecordedActivity } from "./RecordedActivity";
+import { ProfileActivityCard, ProfileActivityDetails } from "./ProfileActivity";
 import { TeamDialog } from "./TeamDialog";
 import { NotesDialog } from "./NotesDialog";
 import { QuickLog } from "./QuickLog";
@@ -30,13 +25,7 @@ import { FocusTags } from "./tags/public";
 import { useTeam, useActivity } from "./queries";
 import { useActivityMetrics } from "./useActivityMetrics";
 import styles from "./overview.module.css";
-export function ClientOverview({
-  clientId,
-  recordedActivityVersion,
-}: {
-  clientId: string;
-  recordedActivityVersion?: 1;
-}) {
+export function ClientOverview({ clientId }: { clientId: string }) {
   const client = useClient(clientId);
   const team = useTeam(clientId);
   const activity = useActivity(clientId);
@@ -47,6 +36,9 @@ export function ClientOverview({
   const router = useRouter();
   const [showTeam, setShowTeam] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
+  const [showProfileActivity, setShowProfileActivity] = useState(false);
+  const profileActivityId = useId();
+  const profileActivityButton = useRef<HTMLButtonElement>(null);
   if (!client.isSuccess || client.error || !client.data)
     return (
       <QueryState
@@ -121,7 +113,6 @@ export function ClientOverview({
             <p className="muted">
               {value.description ?? "No organization description yet."}
             </p>
-            <ClientCompleteness client={value} />
             <FocusTags clientId={clientId} />
             <div className={styles.profileMeta}>
               <span>
@@ -145,9 +136,12 @@ export function ClientOverview({
         <div className={`${styles.tile} ${styles.rightTile}`}>
           <div className={styles.rightTop}>
             <GovernmentSummary key={value.id} client={value} />
-            <RecordedActivity
+            <ProfileActivityCard
               clientId={clientId}
-              version={recordedActivityVersion}
+              open={showProfileActivity}
+              detailsId={profileActivityId}
+              buttonRef={profileActivityButton}
+              onToggle={() => setShowProfileActivity((open) => !open)}
             />
           </div>
         </div>
@@ -164,8 +158,16 @@ export function ClientOverview({
           <ObjectiveSummary clientId={clientId} />
         </div>
       </div>
-      <ProfileBuildPanel subject={{ kind: "client", id: clientId }} />
-      <ProfileFacts subject={{ kind: "client", id: clientId }} />
+      <ProfileActivityDetails
+        key={clientId}
+        client={value}
+        open={showProfileActivity}
+        id={profileActivityId}
+        onClose={() => {
+          setShowProfileActivity(false);
+          profileActivityButton.current?.focus();
+        }}
+      />
       <ActivityTimeline clientId={clientId} />
       <div className={styles.supplemental}>
         <ClientDetails key={value.id} client={value} />

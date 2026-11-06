@@ -20,6 +20,11 @@ export function useProfileSnapshot(subject: ProfileSubject) {
   });
   return {
     ...query,
+    isPending:
+      !identity.error &&
+      (identity.isPending ||
+        identity.isFetching ||
+        (canRead && query.isPending)),
     data: canRead && query.isSuccess && !query.error ? query.data : undefined,
   };
 }
