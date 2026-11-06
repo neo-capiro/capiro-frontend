@@ -8595,27 +8595,27 @@
     "file": "apps/web/src/features/portfolio/bill-tracker/BillDrawer.tsx",
     "kind": "function",
     "symbol": "BillDrawer",
-    "fingerprint": "b88fd5415b0a2bd7b2a12d8449860d02bf26e5768d36a828f237443ceebb2c4f",
-    "reason": "Owns the single selected client/bill detail lifecycle, async refresh status and retained untrack confirmation. Evidence, source details and context editing remain extracted cohesive panes; denied reads or mutations conceal private detail and controls.",
-    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "fingerprint": "fc3d13a6e066ff5b56022a9b3889a22c062467e6058c723e733332596d1a0321",
+    "reason": "Independent exact-source review of 9892e242: one selected bill-detail composition and lifetime owner. Fetching, writes, formatting, evidence, context editing and hearings are delegated to existing cohesive owners; the status-label change adds no responsibility.",
+    "reviewedBy": "Codex independent backend_review",
     "reviewedOn": "2026-11-06"
   },
   {
     "file": "apps/web/src/features/portfolio/bill-tracker/BillImpactEvidence.tsx",
     "kind": "function",
     "symbol": "BillImpactEvidence",
-    "fingerprint": "523ad5e8fe931beabe0c8e325d4b0faba1a7b961c8fb11d3e41964b737b47268",
-    "reason": "Presents one structured source-backed impact record with provision/client citations, conditions, missing facts and next actions. It does not acquire evidence, infer missing values or own analysis dispatch.",
-    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "fingerprint": "ac870cb81572a4a5c6fb2e43477ddf2d02af92ad7c541615f72881a585d053ea",
+    "reason": "Independent exact-source review of 9892e242: one read-only assessment renderer. Overall direction, findings, conditions and missing facts remain one presentation; citations and structured fact/revision formatting are delegated. No transport or persistence is introduced.",
+    "reviewedBy": "Codex independent backend_review",
     "reviewedOn": "2026-11-06"
   },
   {
     "file": "apps/web/src/features/portfolio/bill-tracker/BillResults.tsx",
     "kind": "function",
     "symbol": "BillResults",
-    "fingerprint": "8a59e0075708757439543fe85de7956202c005320415bbb295a1eff95d6e0e7c",
-    "reason": "Presents one authorized row dataset in table or board form; both views preserve client/bill association keys, native evidence state and the same detail action. Separate transport or authority responsibility is not introduced.",
-    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "fingerprint": "3f35fb80c4c10b341c54a005139e46515d562b54db5d7b50e69ae9eeef1a39e7",
+    "reason": "Independent exact-source review of 9892e242: one typed bill collection presented as table or board with the same onOpen action. Keyboard scrolling and source-label formatting add no second state, fetch or authorization owner.",
+    "reviewedBy": "Codex independent backend_review",
     "reviewedOn": "2026-11-06"
   },
   {

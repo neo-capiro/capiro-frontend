@@ -227,12 +227,14 @@ test("a pending context write cannot restore a drawer after identity invalidatio
   );
   let release!: () => void;
   let writing = false;
+  let finished = false;
   await page.route("**/api/capiro/legiwatch.bill.context", async (route) => {
     writing = true;
     await new Promise<void>((resolve) => {
       release = resolve;
     });
     await json(route, impactDetail({ ...bill, note: "Late saved context" }));
+    finished = true;
   });
   const drawer = await openBill(page);
   await drawer.getByRole("tab", { name: "Position and notes" }).click();
@@ -244,6 +246,7 @@ test("a pending context write cannot restore a drawer after identity invalidatio
   );
   await expect(drawer).toHaveCount(0);
   release();
+  await expect.poll(() => finished).toBe(true);
   await expect(
     page.getByText("Late saved context", { exact: true }),
   ).toHaveCount(0);

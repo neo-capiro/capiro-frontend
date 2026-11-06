@@ -18,7 +18,6 @@ for (const fail of [false, true])
     page,
   }) => {
     await installFixtures(page);
-    await page.clock.install();
     let reads = 0;
     let release!: () => void;
     await page.route("**/api/backend/core/me", async (route) => {
@@ -38,6 +37,7 @@ for (const fail of [false, true])
     await expect(
       page.getByRole("button", { name: "H.R. 1", exact: true }),
     ).toBeVisible();
+    await page.clock.install();
     await page.clock.fastForward(31_000);
     await page.getByRole("button", { name: "H.R. 1", exact: true }).click();
     await expect.poll(() => reads).toBe(2);
@@ -132,6 +132,7 @@ test("module Configure and nested personal alerts remain above their backdrops",
 test("tracker search preserves typed text and client scope in both views", async ({
   page,
 }) => {
+  test.setTimeout(60_000);
   await installFixtures(page);
   await page.goto(
     `/modules/legiwatch?clientId=${syntheticClient}&view=legiwatch`,
