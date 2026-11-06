@@ -1,9 +1,13 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   createUploadAttemptReferences,
   type UploadAttemptScope,
 } from "../../src/shared/meri-uploads/upload-attempt-storage";
-import { createUploadController } from "../../src/shared/meri-uploads/upload-controller";
+import {
+  createUploadController,
+  resolveRecoveredAttempts,
+  UPLOAD_CHECK_WAIT_MS,
+} from "../../src/shared/meri-uploads/upload-controller";
 import { createUploadWire } from "../../src/shared/meri-uploads/upload-wire";
 import {
   receiveUploadRequest,
@@ -45,6 +49,7 @@ function server(lost: "initiate" | "put" | "remove" | null) {
   let receipt: UploadReceipt | undefined;
   let release: (() => void) | undefined;
   let hold = false;
+  let unavailable = false;
   const fetcher: typeof fetch = async (input, init) => {
     const url = String(input);
     calls.push(url);
@@ -75,6 +80,7 @@ function server(lost: "initiate" | "put" | "remove" | null) {
       return respond(receipt);
     }
     if (url.endsWith("/status")) {
+      if (unavailable) throw Error("synthetic status transport loss");
       const q = receiveUploadRequest("status", bytes);
       if (hold)
         await new Promise<void>((resolve) => {
@@ -114,6 +120,9 @@ function server(lost: "initiate" | "put" | "remove" | null) {
     },
     set receipt(value) {
       receipt = value;
+    },
+    statusUnavailable(value: boolean) {
+      unavailable = value;
     },
     hold() {
       hold = true;
@@ -230,7 +239,7 @@ describe("durable upload attempt references", () => {
       expect(
         service.calls.filter((p) => p.includes("/original/")),
       ).toHaveLength(1);
-      expect(store.values.size).toBe(lost === "put" ? 1 : 0);
+      expect(store.values.size).toBe(lost === "put" ? 2 : 0);
     }
   });
   it("keeps no-record replies unresolved without creating a new attempt", async () => {
@@ -395,6 +404,167 @@ describe("durable upload attempt references", () => {
       expect(instance.items().at(-1)?.refusal?.code).toBe(
         "UPLOAD_RECOVERY_UNAVAILABLE",
       );
+    }
+  });
+});
+
+// The v1 entry remains the only locator; v2 stores display timing for that exact retained attempt.
+const waitEntry = (store: ReturnType<typeof storage>) => {
+  const entry = [...store.values.entries()].find(([key]) =>
+    key.startsWith("capiro-meri-upload-attempt-wait-v2:"),
+  );
+  if (!entry) throw Error("expected pending wait metadata");
+  return entry;
+};
+
+describe("pending upload wait across renewed controllers", () => {
+  beforeEach(() =>
+    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date"] }),
+  );
+  afterEach(() => vi.useRealTimers());
+
+  it("retains the original wait through renewal and a later restart without reuploading or admitting pending bytes", async () => {
+    const store = storage(),
+      service = server(null);
+    let instance = controller(store, service);
+    try {
+      await instance.add([file()]);
+      const id = instance.items()[0]!.requestId;
+      const savedAt = JSON.parse(waitEntry(store)[1]).firstPendingAtMs;
+      await vi.advanceTimersByTimeAsync(110_000);
+      instance.dispose();
+      instance = controller(store, service);
+      expect(instance.items()[0]!.state).toBe("unknown");
+      expect(instance.sendArgument()).toEqual([]);
+      resolveRecoveredAttempts(instance);
+      await vi.advanceTimersByTimeAsync(0);
+      expect(instance.items()[0]).toMatchObject({
+        requestId: id,
+        state: "stored",
+      });
+      expect(instance.checking()).toBe(true);
+      await vi.advanceTimersByTimeAsync(10_001);
+      expect(instance.overdue(id)).toBe(true);
+      expect(instance.checking()).toBe(false);
+      instance.dispose();
+      instance = controller(store, service);
+      resolveRecoveredAttempts(instance);
+      await vi.advanceTimersByTimeAsync(0);
+      expect(instance.overdue(id)).toBe(true);
+      expect(instance.checking()).toBe(false);
+      expect(instance.sendArgument()).toEqual([]);
+      expect(JSON.parse(waitEntry(store)[1]).firstPendingAtMs).toBe(savedAt);
+      expect(
+        service.calls.filter((path) => path.includes("/original/")),
+      ).toHaveLength(1);
+    } finally {
+      instance.dispose();
+    }
+  });
+
+  it("keeps the elapsed wait over an uncertain read and clears timing only after canonical readiness", async () => {
+    const store = storage(),
+      service = server(null),
+      instance = controller(store, service);
+    try {
+      await instance.add([file()]);
+      const id = instance.items()[0]!.requestId;
+      await vi.advanceTimersByTimeAsync(110_000);
+      service.statusUnavailable(true);
+      await instance.check(id);
+      expect(instance.items()[0]!.state).toBe("unknown");
+      expect(instance.sendArgument()).toEqual([]);
+      await vi.advanceTimersByTimeAsync(10_001);
+      service.statusUnavailable(false);
+      await instance.check(id);
+      expect(instance.overdue(id)).toBe(true);
+      expect(instance.checking()).toBe(false);
+      expect(instance.sendArgument()).toEqual([]);
+      service.receipt = {
+        ...service.receipt!,
+        scanStatus: "clean",
+        extraction: { status: "available", limitations: [] },
+        originalBytesAvailable: true,
+      };
+      await instance.check(id);
+      expect(instance.sendArgument()).toEqual([
+        { uploadId, sha256: service.receipt.original.sha256 },
+      ]);
+      expect(
+        [...store.values.keys()].some((key) => key.includes("wait-v2:")),
+      ).toBe(false);
+      expect(createUploadAttemptReferences(scope, () => store).list()).toEqual([
+        id,
+      ]);
+    } finally {
+      instance.dispose();
+    }
+  });
+
+  it.each(["future", "nonfinite", "other-scope", "other-request"] as const)(
+    "untrusted %s timing cannot extend waiting or make the attachment ready",
+    async (fault) => {
+      const store = storage(),
+        service = server(null);
+      let instance = controller(store, service);
+      try {
+        await instance.add([file()]);
+        const id = instance.items()[0]!.requestId;
+        const [key, raw] = waitEntry(store),
+          saved = JSON.parse(raw);
+        if (fault === "future")
+          saved.firstPendingAtMs = Date.now() + UPLOAD_CHECK_WAIT_MS;
+        if (fault === "nonfinite") saved.firstPendingAtMs = Infinity;
+        if (fault === "other-scope")
+          saved.scope.actorId = "foreign-synthetic-actor";
+        if (fault === "other-request") saved.requestId = uploadId;
+        store.values.set(key, JSON.stringify(saved));
+        instance.dispose();
+        instance = controller(store, service);
+        resolveRecoveredAttempts(instance);
+        await vi.advanceTimersByTimeAsync(0);
+        expect(instance.items()[0]!.state).toBe("stored");
+        expect(instance.overdue(id)).toBe(true);
+        expect(instance.checking()).toBe(false);
+        expect(instance.sendArgument()).toEqual([]);
+        expect(
+          service.calls.filter((path) => path.includes("/original/")),
+        ).toHaveLength(1);
+      } finally {
+        instance.dispose();
+      }
+    },
+  );
+
+  it("does not revive an attempt deleted by an old tab that knows only the v1 locator", async () => {
+    const store = storage(),
+      service = server(null),
+      first = controller(store, service);
+    await first.add([file()]);
+    const id = first.items()[0]!.requestId;
+    first.dispose();
+    const originalKey = [...store.values.keys()].find((key) =>
+      key.startsWith("capiro-meri-upload-attempt-v1:"),
+    )!;
+    store.removeItem(originalKey);
+    expect(store.values.size).toBe(1); // An old tab cannot know about the newer timing key.
+    const restored = controller(store, service),
+      before = service.calls.length;
+    try {
+      resolveRecoveredAttempts(restored);
+      await vi.advanceTimersByTimeAsync(0);
+      expect(restored.items()).toEqual([]);
+      expect(restored.sendArgument()).toEqual([]);
+      expect(service.calls).toHaveLength(before);
+      const refs = createUploadAttemptReferences(scope, () => store);
+      expect(() => refs.pendingSince!(id, Date.now())).toThrow();
+      refs.retain(id);
+      expect(store.values.size).toBe(1); // Re-retaining a locator discards any orphan timing.
+      refs.pendingSince!(id, Date.now());
+      refs.release(id);
+      expect(store.values.size).toBe(0);
+    } finally {
+      restored.dispose();
     }
   });
 });
