@@ -5,7 +5,7 @@ import { ApiError } from "./http";
  * explicit read refusal gets two fresh attempts; no write uses this policy.
  * Other failures retain the provider's single transient-service retry.
  */
-export function retryNativeRead(failures: number, error: unknown) {
+export function retryNativeRead(failures: number, error: Error) {
   if (
     error instanceof ApiError &&
     error.status === 409 &&

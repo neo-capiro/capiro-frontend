@@ -1,8 +1,23 @@
 import { QueryClient } from "@tanstack/react-query";
-import { expect, it, vi } from "vitest";
+import { expect, expectTypeOf, it, vi } from "vitest";
 import { z } from "zod";
 import { createApiClient } from "../src/shared/portfolio/api/http";
 import { retryNativeRead } from "../src/shared/portfolio/api/native-read-retry";
+import type { useIdentity } from "../src/shared/portfolio/auth/identity";
+import type { useClients } from "../src/shared/portfolio/api/clients";
+import type { useClientRead } from "../src/shared/portfolio/api/client-read";
+
+it("preserves public query error types for existing error and retry views", () => {
+  expectTypeOf<
+    ReturnType<typeof useIdentity>["error"]
+  >().toEqualTypeOf<Error | null>();
+  expectTypeOf<
+    ReturnType<typeof useClients>["error"]
+  >().toEqualTypeOf<Error | null>();
+  expectTypeOf<
+    ReturnType<typeof useClientRead>["error"]
+  >().toEqualTypeOf<Error | null>();
+});
 
 const changed = "Current membership changed; reload";
 const read = (responses: Response[]) => {
