@@ -162,7 +162,7 @@ function ReadyStrategyIntake({
     disabled ||
     state.busy ||
     !state.ready ||
-    (!retained && !state.newSourceVerified) ||
+    (!retained && !state.newSourceVerified && !state.canRetry) ||
     (!retained && objective.status !== "ready");
   return (
     <section className="card stack" aria-label="Governed Strategy intake">
@@ -219,7 +219,27 @@ function ReadyStrategyIntake({
           custody.
         </p>
       )}
-      {!retained?.started && (
+      {state.canRetry && (
+        <>
+          <p>
+            The previous attempt{" "}
+            {state.job?.status === "failed" ? "failed" : "expired"}. Request new
+            generation to authorize another attempt. The service will verify the
+            previous work before starting.
+          </p>
+          <button
+            className="button primary"
+            type="button"
+            disabled={locked || !type}
+            onClick={() =>
+              void session.retry(type as (typeof strategyTypes)[number])
+            }
+          >
+            Request new generation
+          </button>
+        </>
+      )}
+      {!retained?.started && !state.canRetry && (
         <button
           className="button primary"
           type="button"
