@@ -1,9 +1,6 @@
-# Build context: repository root. This pinned Node 24 Alpine base uses a
-# vendor-fixed zlib package for CVE-2026-85091. Confirm the package version,
-# container behavior and image scan before runtime admission.
-FROM public.ecr.aws/docker/library/node:24.21.0-alpine3.23@sha256:9ec4a2e289874ed0d722e1772ec2de45d2801541db8612f3638b26f128c69ac2 AS base
-# Alpine's musl r24 backports the CVE-2026-107891 fix; keep the existing base/runtime.
-RUN apk add --no-cache --upgrade zlib=1.3.2-r1 musl=1.2.5-r24 ca-certificates
+# Reuse Core's qualified ARM64 Node24/Alpine3.24 runtime; keep the vendor-fixed zlib pin.
+FROM public.ecr.aws/docker/library/node:24.22.1-alpine3.24@sha256:398bcf38afb035ae76feb9ad3c7493a93feff4751351c65310811761e37bbfc7 AS base
+RUN apk add --no-cache --upgrade zlib=1.3.2-r1 ca-certificates
 WORKDIR /app
 
 FROM base AS build
