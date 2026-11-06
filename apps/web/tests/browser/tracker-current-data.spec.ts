@@ -218,6 +218,43 @@ test("identity invalidation conceals selected tracker data before any new respon
   expect(unexpected).toEqual([]);
 });
 
+test("a pending context write cannot restore a drawer after identity invalidation", async ({
+  page,
+}) => {
+  await install(page);
+  await page.route("**/api/capiro/legiwatch.tracker?**", (route) =>
+    json(route, impactPage([bill])),
+  );
+  let release!: () => void;
+  let writing = false;
+  let finished = false;
+  await page.route("**/api/capiro/legiwatch.bill.context", async (route) => {
+    writing = true;
+    await new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    await json(route, impactDetail({ ...bill, note: "Late saved context" }));
+    finished = true;
+  });
+  const drawer = await openBill(page);
+  await drawer.getByRole("tab", { name: "Position and notes" }).click();
+  await drawer.getByLabel("Analyst note").fill("Late saved context");
+  await drawer.getByRole("button", { name: "Save client context" }).click();
+  await expect.poll(() => writing).toBe(true);
+  await page.evaluate(() =>
+    window.dispatchEvent(new Event("tracker-test-invalidate-identity")),
+  );
+  await expect(drawer).toHaveCount(0);
+  release();
+  await expect.poll(() => finished).toBe(true);
+  await expect(
+    page.getByText("Late saved context", { exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "HB 1", exact: true }),
+  ).toHaveCount(0);
+});
+
 test("empty trackers use the canonical owner and close dialogs when that owner changes", async ({
   page,
 }) => {

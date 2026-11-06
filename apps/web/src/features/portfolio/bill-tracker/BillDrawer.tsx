@@ -10,6 +10,7 @@ import { BillImpactEvidence, EvidenceLink } from "./BillImpactEvidence";
 import { BillContextEditor } from "./BillContextEditor";
 import { BillSourceDetails } from "./BillSourceDetails";
 import { billDate, billActionDate } from "./hearings";
+import { billStatusLabel } from "./impact-presentation";
 import styles from "./impact-tracker.module.css";
 
 export function BillDrawer({
@@ -60,7 +61,7 @@ export function BillDrawer({
             <>
               <div className={styles.toolbar}>
                 <div>
-                  <strong>{detail.row.status ?? "Status unavailable"}</strong>
+                  <strong>{billStatusLabel(detail.row.status)}</strong>
                   <p>
                     {detail.row.latestActionText ??
                       "No latest action available"}

@@ -120,7 +120,9 @@ test("lazy linked hearing evidence uses canonical IDs and preserves board client
   await expect(
     drawer.getByText("Tracked Aug 3, 2026", { exact: true }),
   ).toBeVisible();
-  await expect(drawer.getByText("Sep 29, 2026", { exact: true })).toBeVisible();
+  await expect(
+    drawer.getByRole("listitem").getByText("Sep 29, 2026", { exact: true }),
+  ).toBeVisible();
   await drawer.getByRole("tab", { name: "Position and notes" }).click();
   await expect(drawer.getByLabel("Analyst note")).toHaveValue(bill.note);
   await drawer.getByRole("tab", { name: "Actions and text" }).click();

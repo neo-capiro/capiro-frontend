@@ -1,6 +1,12 @@
 import type { ImpactDetail } from "@/shared/capiro/operations/legiwatch-impact-schemas";
 import { EvidenceLink } from "./BillImpactEvidence";
 import styles from "./impact-tracker.module.css";
+import { billActionDate } from "./hearings";
+import {
+  ClientFactValue,
+  recordLabel,
+  SourceRevision,
+} from "./impact-presentation";
 
 export function BillSourceDetails({ detail }: { detail: ImpactDetail }) {
   return (
@@ -11,7 +17,9 @@ export function BillSourceDetails({ detail }: { detail: ImpactDetail }) {
           <ol className={styles.timeline}>
             {detail.actions.map((action, index) => (
               <li key={index}>
-                <strong>{action.date ?? "Date unavailable"}</strong>
+                <strong>
+                  {billActionDate(action.date) ?? "Date unavailable"}
+                </strong>
                 <p>{action.text}</p>
                 {action.sourceUrl && (
                   <EvidenceLink href={action.sourceUrl}>
@@ -35,13 +43,11 @@ export function BillSourceDetails({ detail }: { detail: ImpactDetail }) {
                 {version.current ? " · Current" : ""}
               </EvidenceLink>
               <p>
-                {version.publishedAt ?? "Publication date unavailable"} ·{" "}
-                {version.completeness}
+                {billActionDate(version.publishedAt) ??
+                  "Publication date unavailable"}{" "}
+                · {recordLabel(version.completeness)}
               </p>
-              <details>
-                <summary>Source revision</summary>
-                <p className={styles.hash}>{version.contentHash}</p>
-              </details>
+              <SourceRevision revision={version.contentHash} />
             </article>
           ))
         ) : (
@@ -54,16 +60,19 @@ export function BillSourceDetails({ detail }: { detail: ImpactDetail }) {
           detail.clientFacts.map((fact) => (
             <article className={styles.finding} key={fact.id}>
               <h4>{fact.label}</h4>
-              <p>{fact.value}</p>
-              <p className={styles.muted}>
-                {fact.kind} · Revision {fact.revision}
-              </p>
+              <ClientFactValue value={fact.value} />
+              <p className={styles.muted}>{recordLabel(fact.kind)}</p>
+              <SourceRevision revision={fact.revision} />
               {fact.citations.map((citation, index) => (
                 <div key={index}>
                   <EvidenceLink href={citation.sourceUrl}>
                     {citation.label}
                   </EvidenceLink>
-                  {citation.quote && <blockquote>{citation.quote}</blockquote>}
+                  {citation.quote && citation.quote !== fact.value && (
+                    <blockquote>
+                      <ClientFactValue value={citation.quote} />
+                    </blockquote>
+                  )}
                 </div>
               ))}
             </article>
