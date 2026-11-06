@@ -11,7 +11,6 @@ import {
   created,
   inspected,
   ids,
-  textContent,
   session,
   jsonResponse,
 } from "./meri-document-public-fixtures";
@@ -44,6 +43,7 @@ it("keeps a dirty draft when Meri publishes or another card opens, and only adop
     })),
     save: vi.fn(),
     checkSave: vi.fn(),
+    readLatest: vi.fn(),
   });
   await controller.open(canvasSelection(original));
   controller.edit({ ...original.request, title: "My local edit" });
@@ -72,6 +72,7 @@ it("adopts the canonical saved version before Ask Meri and preserves edits on an
     read: async () => ({ ok: true, value: original }),
     save,
     checkSave: vi.fn(),
+    readLatest: vi.fn(),
   });
   await controller.open(canvasSelection(original));
   controller.edit({ ...original.request, title: "Changed" });
@@ -99,6 +100,7 @@ it("ignores a source read completed after conversation access changes", async ()
       }),
     save: vi.fn(),
     checkSave: vi.fn(),
+    readLatest: vi.fn(),
   });
   const opening = controller.open(canvasSelection(original));
   controller.setAccess(null);
@@ -303,4 +305,61 @@ it("an unchanged head cannot clear an uncertain save", async () => {
     await access.checkSave(original, attempt, new AbortController().signal),
   ).toMatchObject({ ok: false, uncertain: true });
   expect(attempt.read().status).toBe("unresolved");
+});
+
+it("keeps uncertain-save fencing after discard and never dispatches latest-version discovery", async () => {
+  const controller = new CanvasController(),
+    original = source();
+  const readLatest = vi.fn();
+  controller.setAccess({
+    read: async () => ({ ok: true, value: original }),
+    readLatest,
+    save: async () => ({ ok: false, uncertain: true, message: "Unconfirmed" }),
+    checkSave: vi.fn(),
+  });
+  await controller.open(canvasSelection(original));
+  controller.edit({ ...original.request, title: "Unconfirmed change" });
+  await controller.save(journal());
+  controller.discard();
+  await controller.openLatest();
+  expect(readLatest).not.toHaveBeenCalled();
+  expect(controller.getSnapshot()).toMatchObject({
+    blocked: true,
+    dirty: false,
+    source: original,
+  });
+});
+
+it("ignores a late latest-version response after access replacement or disposal", async () => {
+  for (const dispose of [false, true]) {
+    const controller = new CanvasController(),
+      original = source(),
+      latest = source(ids.revision);
+    let finish!: (value: { ok: true; value: DocumentCanvasSource }) => void;
+    const readLatest = vi.fn(
+      () =>
+        new Promise<{ ok: true; value: DocumentCanvasSource }>((resolve) => {
+          finish = resolve;
+        }),
+    );
+    const access = {
+      read: async () => ({ ok: true as const, value: original }),
+      readLatest,
+      save: vi.fn(),
+      checkSave: vi.fn(),
+    };
+    controller.setAccess(access);
+    await controller.open(canvasSelection(original));
+    const pending = controller.openLatest();
+    await controller.openLatest();
+    expect(readLatest).toHaveBeenCalledOnce();
+    if (dispose) controller.dispose();
+    else controller.setAccess({ ...access });
+    finish({ ok: true, value: latest });
+    await pending;
+    expect(controller.getSnapshot()).toMatchObject({
+      source: original,
+      draft: original.request,
+    });
+  }
 });

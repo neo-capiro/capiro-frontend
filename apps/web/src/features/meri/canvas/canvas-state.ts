@@ -134,6 +134,29 @@ export class CanvasController {
         : { busy: null, message: result.message },
     );
   };
+  /** A saved revision is opened only after an explicit choice, never over local edits. */
+  openLatest = async () => {
+    const { source, busy, dirty, blocked } = this.#state;
+    if (!this.#access || !source || busy || dirty || blocked) return;
+    const access = this.#access,
+      work = new AbortController();
+    this.#work = work;
+    this.#set({ open: true, busy: "read", message: null });
+    const result = await access.readLatest(source, work.signal);
+    if (work.signal.aborted || this.#work !== work) return;
+    this.#work = null;
+    this.#set(
+      result.ok
+        ? {
+            source: result.value,
+            draft: result.value.request,
+            dirty: false,
+            busy: null,
+            message: null,
+          }
+        : { busy: null, message: result.message },
+    );
+  };
   save = async (
     journal: DocumentAttemptJournal,
   ): Promise<DocumentCanvasSource | null> => {

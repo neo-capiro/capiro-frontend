@@ -17,6 +17,10 @@ export type CanvasReply<T> =
   | { ok: true; value: T }
   | { ok: false; message: string; uncertain?: boolean };
 export interface CanvasAccess {
+  readLatest(
+    source: DocumentCanvasSource,
+    signal: AbortSignal,
+  ): Promise<CanvasReply<DocumentCanvasSource>>;
   checkSave(
     source: DocumentCanvasSource,
     journal: DocumentAttemptJournal,
@@ -110,39 +114,15 @@ export function createCanvasAccess({
       try {
         current(signal);
         const attempt = journal.read();
-        const original = await access.read(canvasSelection(source), signal);
-        if (!original.ok) return original;
-        if (original.value.headVersionId === source.version.versionId)
+        const latest = await access.readLatest(source, signal);
+        if (!latest.ok) return latest;
+        if (latest.value.version.versionId === source.version.versionId)
           return {
             ok: false,
             uncertain: true,
             message:
               "The save is still unconfirmed. Your draft is preserved; checking again will not send another save.",
           };
-        const head = await artifacts.inspect(
-          original.value.headVersionId,
-          signal,
-        );
-        current(signal);
-        if (!head.ok) {
-          if (head.accessDenied) onAccessLost();
-          throw Error("Read refused");
-        }
-        if (
-          head.value.kind !== "generated" ||
-          head.value.artifactId !== source.version.artifactId
-        )
-          throw Error("Different document");
-        const latest = await access.read(
-          {
-            artifactId: head.value.artifactId,
-            versionId: head.value.versionId,
-            objectSha256: head.value.objectSha256,
-          },
-          signal,
-        );
-        current(signal);
-        if (!latest.ok) return latest;
         const observed = await fingerprint({
           selection: canvasSelection(source),
           deliveryId: attempt.attemptId,
@@ -170,6 +150,57 @@ export function createCanvasAccess({
           ok: false,
           uncertain: true,
           message: "The save could not be checked. Your draft is preserved.",
+        };
+      }
+    },
+    async readLatest(source, signal) {
+      try {
+        current(signal);
+        admit(source);
+        const original = await access.read(canvasSelection(source), signal);
+        if (!original.ok) return original;
+        if (original.value.headVersionId === source.version.versionId)
+          return original;
+        const head = await artifacts.inspect(
+          original.value.headVersionId,
+          signal,
+        );
+        current(signal);
+        if (!head.ok) {
+          if (head.accessDenied) onAccessLost();
+          throw Error("Read refused");
+        }
+        if (
+          head.value.kind !== "generated" ||
+          head.value.artifactId !== source.version.artifactId
+        )
+          throw Error("Different document");
+        const latest = await access.read(
+          {
+            artifactId: head.value.artifactId,
+            versionId: head.value.versionId,
+            objectSha256: head.value.objectSha256,
+          },
+          signal,
+        );
+        current(signal);
+        if (
+          latest.ok &&
+          latest.value.headVersionId !== latest.value.version.versionId
+        )
+          return {
+            ok: false,
+            message:
+              "The saved version changed while opening it. Try opening the latest saved version again.",
+          };
+        return latest;
+      } catch (error) {
+        if (error instanceof DocumentAccessUnavailable && !lifetime.aborted)
+          onAccessLost();
+        return {
+          ok: false,
+          message:
+            "The latest saved version could not be loaded. Your current document is preserved.",
         };
       }
     },
