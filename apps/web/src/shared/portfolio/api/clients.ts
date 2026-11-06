@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { clientSchema } from "../../session/client-contract";
 import { useApi } from "./provider";
+import { retryNativeRead } from "./native-read-retry";
 
 export const clientsKey = ["portfolio", "clients"] as const;
 
@@ -15,6 +16,7 @@ export function useClients(options?: {
   const api = useApi();
   const scope = options?.scope;
   return useQuery({
+    retry: retryNativeRead,
     queryKey: scope
       ? [...clientsKey, scope.tenantId, scope.userId]
       : clientsKey,

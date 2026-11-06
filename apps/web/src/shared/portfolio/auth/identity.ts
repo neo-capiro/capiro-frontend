@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { useApi } from "../api/provider";
+import { retryNativeRead } from "../api/native-read-retry";
 export const identitySchema = z.object({
   user: z.object({
     id: z.string(),
@@ -20,6 +21,7 @@ export function useIdentity(
   const api = useApi();
   return useQuery({
     queryKey: ["identity"],
+    retry: retryNativeRead,
     queryFn: ({ signal }) =>
       api.request("core", "me", identitySchema, { signal }),
     ...options,

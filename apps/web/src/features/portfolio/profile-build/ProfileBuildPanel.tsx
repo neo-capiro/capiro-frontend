@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { UploadDialog } from "@/features/portfolio/files/public";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { ResearchInput } from "./research-contracts";
@@ -28,12 +28,14 @@ export function ProfileBuildPanel({
   businessUnitId,
   purpose,
   capabilityId,
+  onInitialResearchPendingChange,
 }: {
   subject: ProfileSubject;
   initialResearch?: ResearchInput;
   businessUnitId?: string;
   purpose?: ResearchInput["purpose"];
   capabilityId?: string;
+  onInitialResearchPendingChange?: (pending: boolean) => void;
 }) {
   const access = useProfileBuildAccess();
   return (
@@ -45,6 +47,7 @@ export function ProfileBuildPanel({
       businessUnitId={businessUnitId}
       purpose={purpose}
       capabilityId={capabilityId}
+      onInitialResearchPendingChange={onInitialResearchPendingChange}
     />
   );
 }
@@ -56,11 +59,13 @@ function CurrentProfileBuild({
   businessUnitId,
   purpose,
   capabilityId,
+  onInitialResearchPendingChange,
 }: {
   initialResearch?: ResearchInput;
   businessUnitId?: string;
   purpose?: ResearchInput["purpose"];
   capabilityId?: string;
+  onInitialResearchPendingChange?: (pending: boolean) => void;
   subject: ProfileSubject;
   access: ReturnType<typeof useProfileBuildAccess>;
 }) {
@@ -82,6 +87,27 @@ function CurrentProfileBuild({
   const [showRequest, setShowRequest] = useState(Boolean(purpose));
   const [upload, setUpload] = useState(false);
   const started = useRef(false);
+  // The intake host must not navigate away while its automatic start still
+  // exists only in this mounted view. A confirmed run or retained recovery
+  // command can travel through the existing profile/recovery owners. Settled
+  // read failures also leave deliberate navigation available for recovery.
+  const initialResearchPending = Boolean(
+    initialResearch &&
+    !latest.data &&
+    (research.busy ||
+      latest.isFetching ||
+      setup.isFetching ||
+      research.retained.loading ||
+      (!latest.error &&
+        !setup.error &&
+        !research.error &&
+        !research.retained.error &&
+        !research.mutation.isSuccess &&
+        !research.retained.record)),
+  );
+  useLayoutEffect(() => {
+    onInitialResearchPendingChange?.(initialResearchPending);
+  }, [initialResearchPending, onInitialResearchPendingChange]);
   useEffect(() => {
     if (
       !initialResearch ||
@@ -182,7 +208,11 @@ function CurrentProfileBuild({
         </p>
       )}
       <QueryState
-        pending={identity.isPending || (canRead && latest.isPending)}
+        pending={
+          identity.isPending ||
+          identity.isFetching ||
+          (canRead && latest.isPending)
+        }
         error={identity.error ?? latest.error ?? denied}
         retry={() => {
           void Promise.all([latest.refetch(), setup.refetch()]).then(
@@ -198,11 +228,14 @@ function CurrentProfileBuild({
           if (identity.error) void identity.refetch();
         }}
       />
-      {!identity.isPending && !identity.error && !canRead && (
-        <p role="status">
-          Your current session cannot access this profile review.
-        </p>
-      )}
+      {!identity.isPending &&
+        !identity.isFetching &&
+        !identity.error &&
+        !canRead && (
+          <p role="status">
+            Your current session cannot access this profile review.
+          </p>
+        )}
       {canRead && (
         <>
           {!canEdit && reviewAccessible && (
