@@ -2,6 +2,7 @@
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useProfileSnapshot } from "./profile-queries";
 import type { ProfileSubject } from "./subject";
+import type { ProfileSnapshot } from "./fact-contracts";
 import styles from "./profile-build.module.css";
 const labels: Record<string, string> = {
   company: "Company basics",
@@ -17,6 +18,40 @@ const labels: Record<string, string> = {
   notes: "Notes",
   documents: "Documents",
 };
+function CompletionProgress({
+  completeness,
+}: {
+  completeness: ProfileSnapshot["completeness"];
+}) {
+  return (
+    <div className={styles.completionProgress}>
+      <p>
+        {completeness.completed} of {completeness.total} details complete
+      </p>
+      <progress
+        value={completeness.completed}
+        max={Math.max(1, completeness.total)}
+        aria-label="Completed profile details"
+      />
+    </div>
+  );
+}
+export function ProfileCompletenessSummary({
+  subject,
+}: {
+  subject: ProfileSubject;
+}) {
+  const query = useProfileSnapshot(subject);
+  return query.data && !query.error ? (
+    <CompletionProgress completeness={query.data.completeness} />
+  ) : (
+    <p className="muted" role="status">
+      {query.isPending && !query.error
+        ? "Loading profile completeness…"
+        : "Profile completeness unavailable"}
+    </p>
+  );
+}
 export function ProfileCompleteness({
   subject,
   onEdit,
@@ -42,15 +77,7 @@ export function ProfileCompleteness({
       />
       {query.data && (
         <>
-          <p>
-            {query.data.completeness.completed} of{" "}
-            {query.data.completeness.total} details complete
-          </p>
-          <progress
-            value={query.data.completeness.completed}
-            max={Math.max(1, query.data.completeness.total)}
-            aria-label="Completed profile details"
-          />
+          <CompletionProgress completeness={query.data.completeness} />
           <ul className={styles.completenessRows}>
             {query.data.completeness.sections.map((section) => (
               <li key={section.key}>

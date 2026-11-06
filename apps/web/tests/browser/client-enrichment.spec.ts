@@ -8,6 +8,9 @@ import {
 } from "./client-enrichment-fixtures";
 async function openReview(page: Page) {
   await page.goto(`/portfolio/${clientId}`);
+  await page
+    .getByRole("button", { name: "Profile activity", exact: true })
+    .click();
   const drawer = page.getByRole("region", {
     name: "Profile research",
     exact: true,

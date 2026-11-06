@@ -12,7 +12,10 @@ export { readProfile, savePersonProfile } from "./profile-api";
 export { useProfileSnapshot } from "./profile-queries";
 export type { ProfileSnapshot, PersonProfileInput } from "./fact-contracts";
 export { ProfileFacts, FactSource } from "./ProfileFacts";
-export { ProfileCompleteness } from "./ProfileCompleteness";
+export {
+  ProfileCompleteness,
+  ProfileCompletenessSummary,
+} from "./ProfileCompleteness";
 export { IdentityMatch } from "./IdentityMatch";
 export {
   previewProfileIdentity,

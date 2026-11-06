@@ -209,7 +209,12 @@
   display: grid;
   gap: 12px;
 }
-.completeness progress {
+.completionProgress {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+.completionProgress progress {
   width: 100%;
   accent-color: var(--foreground);
 }

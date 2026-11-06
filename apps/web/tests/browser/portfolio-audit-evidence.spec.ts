@@ -103,17 +103,18 @@ for (const width of [390, 1440]) {
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(`/portfolio/${clientId}`);
     await expect(
-      page.getByText(
-        "Recorded activity is not configured for this environment.",
-      ),
+      page.getByRole("region", { name: "Profile activity", exact: true }),
     ).toBeVisible();
+    await expect(
+      page.getByRole("region", { name: "Profile activity", exact: true }),
+    ).toContainText("0 of 6 details complete");
     await page.evaluate(async () => {
       await document.fonts.ready;
     });
     await page
-      .getByRole("region", { name: "Recorded activity", exact: true })
+      .getByRole("region", { name: "Profile activity", exact: true })
       .screenshot({
-        path: info.outputPath(`recorded-activity-${width}.png`),
+        path: info.outputPath(`profile-activity-${width}.png`),
         animations: "disabled",
       });
     await page.goto(`/portfolio/${clientId}/objectives`);

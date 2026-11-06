@@ -134,20 +134,6 @@
 .latestItem span {
   overflow-wrap: anywhere;
 }
-.health:global(.card) {
-  min-height: 104px;
-  padding: 14px 16px;
-  display: grid;
-  align-content: start;
-  gap: 2px;
-  overflow: visible;
-}
-.health > strong {
-  font-size: 20px;
-}
-.health small {
-  line-height: 16px;
-}
 .deadlines:global(.card) {
   min-height: 344px;
   padding: 20px 16px;

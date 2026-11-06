@@ -22,6 +22,7 @@ const state = vi.hoisted(() => ({
   query: {
     data: { privateSource: "retained source excerpt" },
     isSuccess: true,
+    isPending: false,
     error: null as Error | null,
   },
   options: [] as { queryKey: unknown[]; enabled: boolean }[],
@@ -44,7 +45,7 @@ const subject = {
   id: "10000000-0000-4000-8000-000000000001",
 };
 function readHooks() {
-  let results: { data: unknown }[] = [];
+  let results: { data: unknown; isPending?: boolean }[] = [];
   function Probe() {
     results = [
       useProfileSnapshot(subject),
@@ -59,11 +60,28 @@ function readHooks() {
 }
 beforeEach(() => {
   state.identity.error = null;
+  state.identity.isPending = false;
   state.identity.isFetching = false;
   state.identity.data.role = "user_admin";
   state.query.error = null;
   state.query.isSuccess = true;
+  state.query.isPending = false;
   state.options = [];
+});
+it.each(["identity_denied", "role_revoked"])(
+  "does not leave a disabled profile read loading after %s",
+  (reason) => {
+    state.query.isPending = true;
+    state.query.isSuccess = false;
+    if (reason === "identity_denied")
+      state.identity.error = new Error("Denied");
+    else state.identity.data.role = "viewer";
+    expect(readHooks()[0]).toMatchObject({ data: undefined, isPending: false });
+  },
+);
+it("keeps profile loading while the initial session is being read", () => {
+  state.identity.isPending = true;
+  expect(readHooks()[0]).toMatchObject({ data: undefined, isPending: true });
 });
 it("scopes each successful source read to the subject and current actor", () => {
   for (const result of readHooks()) expect(result.data).toBe(state.query.data);
