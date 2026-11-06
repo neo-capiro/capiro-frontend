@@ -112,6 +112,10 @@ describe("saved generation operational card", () => {
   it("shows exact review and the separate action only after a matching successful read", () => {
     const html = render();
     expect(html).toContain("Review exact saved Strategy");
+    expect(html).toContain("Open in Strategies");
+    expect(html).toContain(
+      `href="/modules/strategies?clientId=${query.clientId}&amp;strategy=${value.selection.ids.strategyId}"`,
+    );
     expect(html).toContain("data-automation");
     expect(queryState.calls).toEqual([
       ["strategies.objectiveSavedGeneration", { query }],
@@ -137,6 +141,7 @@ describe("saved generation operational card", () => {
               };
       const html = render();
       expect(html).not.toContain("Review exact saved Strategy");
+      expect(html).not.toContain("Open in Strategies");
       expect(html).not.toContain("data-automation");
     },
   );

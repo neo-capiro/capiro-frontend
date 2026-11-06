@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { currentStrategyHref } from "@/shared/capiro/strategy-navigation";
 import type { ClientWriter } from "@/shared/portfolio/auth/client-writer";
 import {
   objectiveGenerationHref,
@@ -19,37 +20,27 @@ export function ObjectiveGenerationOutcome({
     <div className="stack" aria-label="Strategy generation result">
       <p role="status">Generation {job.status}.</p>
       {job.progressText && <p>{job.progressText}</p>}
-      <p>Context coverage: {receipt.context.state}.</p>
-      {receipt.context.compiledAt && (
-        <p>Compiled: {receipt.context.compiledAt}</p>
-      )}
-      {receipt.context.reobservedAt && (
-        <p>
-          Rechecked: {receipt.context.reobservedAt}. History reflects these
-          observations.
-        </p>
-      )}
-      {!!receipt.context.issues.length && (
-        <ul>
-          {receipt.context.issues.map((issue, index) => (
-            <li key={index}>
-              {issue.group}: {issue.message}
-            </li>
-          ))}
-        </ul>
-      )}
       {receipt.failure && <p role="alert">{receipt.failure.message}</p>}
       {job.status === "completed" && (
         <>
           <Link
             className="button primary"
+            href={currentStrategyHref(
+              receipt.source.clientId,
+              receipt.result!.strategyId,
+            )}
+          >
+            Open in Strategies
+          </Link>
+          <Link
+            className="button"
             href={objectiveGenerationHref({
               jobId: job.jobId,
               status: job.status,
               objectiveGeneration: job.objectiveGeneration,
             })}
           >
-            Open generated Strategy receipt
+            Review generated version
           </Link>
           <ObjectivePlannerAutomation
             selection={{
@@ -67,6 +58,42 @@ export function ObjectiveGenerationOutcome({
           />
         </>
       )}
+      {job.status === "completed" ? (
+        <details>
+          <summary>Generation details</summary>
+          <GenerationContext context={receipt.context} />
+        </details>
+      ) : (
+        <GenerationContext context={receipt.context} />
+      )}
     </div>
+  );
+}
+
+function GenerationContext({
+  context,
+}: {
+  context: ObjectiveGenerationJob["objectiveGeneration"]["context"];
+}) {
+  return (
+    <>
+      <p>Context coverage: {context.state}.</p>
+      {context.compiledAt && <p>Compiled: {context.compiledAt}</p>}
+      {context.reobservedAt && (
+        <p>
+          Rechecked: {context.reobservedAt}. History reflects these
+          observations.
+        </p>
+      )}
+      {!!context.issues.length && (
+        <ul>
+          {context.issues.map((issue, index) => (
+            <li key={index}>
+              {issue.group}: {issue.message}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }

@@ -10,6 +10,7 @@ import {
 import styles from "./objective-destinations.module.css";
 export function ObjectiveDestinationFrame({
   title,
+  description = "View an existing resource for this saved Objective. Creating resources or saving associations is not available here.",
   selected,
   loading,
   error,
@@ -17,6 +18,7 @@ export function ObjectiveDestinationFrame({
   children,
 }: {
   title: string;
+  description?: string;
   selected: ObjectiveDestinationQuery;
   loading: boolean;
   error?: Error;
@@ -30,10 +32,7 @@ export function ObjectiveDestinationFrame({
       >
         Back to current Objective
       </Link>
-      <PageHeader
-        title={title}
-        description="View an existing resource for this saved Objective. Creating resources or saving associations is not available here."
-      />
+      <PageHeader title={title} description={description} />
       <StatusPanel loading={loading} error={error} onRetry={reload}>
         {children}
       </StatusPanel>

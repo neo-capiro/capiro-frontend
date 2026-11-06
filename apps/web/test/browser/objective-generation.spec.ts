@@ -23,10 +23,16 @@ test("desktop generation validates the saved receipt and opens exact Strategy/ve
   expect(f.writes).toEqual([]);
   await generate(page);
   const open = page.getByRole("link", {
-    name: "Open generated Strategy receipt",
+    name: "Review generated version",
     exact: true,
   });
   await expect(open).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Open in Strategies", exact: true }),
+  ).toHaveAttribute(
+    "href",
+    `/modules/strategies?clientId=${clientId}&strategy=${strategyId}`,
+  );
   expect(f.writes).toHaveLength(1);
   expect(f.writes[0]).toMatchObject({
     params: { clientId, objectiveId: objective.id },
@@ -52,10 +58,21 @@ test("desktop generation validates the saved receipt and opens exact Strategy/ve
   );
   await expect(
     page.getByRole("heading", {
-      name: "Current authorized Strategy content",
+      name: "Generated Strategy",
       exact: true,
     }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Generated strategy roadmap" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(`Saved version: ${versionId}`, { exact: true }),
+  ).toBeHidden();
+  await page.screenshot({
+    path: info.outputPath("objective-generated-desktop-default.png"),
+    fullPage: true,
+  });
+  await page.getByText("Generation details", { exact: true }).click();
   await expect(
     page.getByText(`Saved version: ${versionId}`, { exact: true }),
   ).toBeVisible();
@@ -69,6 +86,83 @@ test("desktop generation validates the saved receipt and opens exact Strategy/ve
     path: info.outputPath("objective-generated-desktop.png"),
     fullPage: true,
   });
+  await page
+    .getByRole("link", { name: "Open in Strategies", exact: true })
+    .click();
+  await expect(page).toHaveURL(
+    new RegExp(`clientId=${clientId}&strategy=${strategyId}$`),
+  );
+  await expect(
+    page.getByRole("heading", { name: "Working timeline" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "PPBE", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Congress", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Add step", exact: true }),
+  ).toBeVisible();
+  expect(f.unexpected).toEqual([]);
+});
+
+test("saved roadmap stays read-only on mobile and exposes later fiscal years and archived step details", async ({
+  page,
+}, info) => {
+  const f = await fixture(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  const params = new URLSearchParams({
+    clientId,
+    objectiveId: objective.id,
+    objectiveVersion: String(objective.version),
+    strategyId,
+    generatedJobId: f.job().jobId,
+    strategyVersionId: f.saved().source.strategyVersionId,
+  });
+  await page.goto(`/modules/strategies?${params}`);
+  const roadmap = page.getByRole("region", {
+    name: "Generated strategy roadmap",
+  });
+  await expect(roadmap).toBeVisible();
+  await expect(
+    roadmap.getByText("Generated engagement plan", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    roadmap.getByText("Generated decision milestone", { exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Add step", exact: true }),
+  ).toHaveCount(0);
+  const year = page.getByRole("combobox", {
+    name: "Saved roadmap fiscal start year",
+  });
+  await year.focus();
+  await page.keyboard.press("Enter");
+  await page.getByRole("option", { name: "Start FY2029", exact: true }).click();
+  await expect(roadmap.getByText("FY2029", { exact: true })).toBeVisible();
+  await expect(
+    roadmap.getByText("Generated decision milestone", { exact: true }),
+  ).toBeVisible();
+  await page.getByText("Saved step details (2)", { exact: true }).click();
+  await expect(
+    page.getByText("Current source availability: archived", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Synthetic saved action details", { exact: true }),
+  ).toBeVisible();
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
+  await page.screenshot({
+    path: info.outputPath("objective-generated-mobile.png"),
+    fullPage: true,
+  });
+  expect(f.writes).toEqual([]);
+  expect(f.starts).toEqual([]);
+  expect(f.planWrites).toEqual([]);
   expect(f.unexpected).toEqual([]);
 });
 
@@ -93,7 +187,7 @@ test("lost submission survives reload and recovery reuses the frozen request wit
   await expect(page.getByLabel("Strategy type")).toBeDisabled();
   await recover.click();
   await expect(
-    page.getByRole("link", { name: "Open generated Strategy receipt" }),
+    page.getByRole("link", { name: "Review generated version" }),
   ).toBeVisible();
   expect(f.writes).toEqual([original, original]);
   expect(f.unexpected).toEqual([]);
@@ -113,7 +207,10 @@ test("incomplete coverage shows its issue and never exposes a saved Strategy lin
     page.getByText(/Required relationship fields do not fit/),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Open generated Strategy receipt" }),
+    page.getByRole("link", { name: "Review generated version" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("link", { name: "Open in Strategies", exact: true }),
   ).toHaveCount(0);
   await page
     .getByRole("button", { name: "Refresh saved intake and access" })
@@ -137,7 +234,7 @@ test("a forged saved version is refused at destination before current Strategy c
   });
   await page.goto(`/modules/strategies?${query}`);
   await expect(page.getByRole("alert")).toContainText(
-    "does not match this exact Strategy destination",
+    "does not match the selected generation and version",
   );
   await expect(
     page.getByRole("heading", {
