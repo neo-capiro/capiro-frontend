@@ -244,6 +244,32 @@ for (const status of [403, 404])
     await expect(drawer.getByRole("link")).toHaveCount(0);
   });
 
+test("mobile tracker columns remain readable with keyboard scrolling", async ({
+  page,
+}) => {
+  await install(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/modules/legiwatch");
+  const client = page.getByRole("cell", {
+    name: "Synthetic Aerospace",
+    exact: true,
+  });
+  await expect(client).toBeVisible();
+  expect((await client.boundingBox())!.width).toBeGreaterThanOrEqual(120);
+  const region = page.getByRole("region", {
+    name: "Tracked bills and client impact",
+    exact: true,
+  });
+  await region.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect
+    .poll(() => region.evaluate((element) => element.scrollLeft))
+    .toBeGreaterThan(0);
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(390);
+});
+
 test("source versions and mobile detail remain keyboard accessible", async ({
   page,
 }) => {

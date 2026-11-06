@@ -31,6 +31,9 @@
   border-radius: 12px;
   background: var(--card);
 }
+.card table {
+  min-width: 900px;
+}
 .toolbar {
   display: flex;
   flex-wrap: wrap;
