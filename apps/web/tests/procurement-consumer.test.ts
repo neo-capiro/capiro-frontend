@@ -8,6 +8,9 @@ import {
   populated,
 } from "./fixtures/procurement-consumer";
 import { procurementMoneyFlow } from "../src/shared/capiro/operations/procurement-money-flow";
+import nativeActions from "./fixtures/procurement-action-details-native.json";
+import { accountFixture } from "./fixtures/procurement-account-reports";
+import { procurementActionDetailsResponse } from "../src/shared/capiro/operations/procurement-action-details";
 import { ProcurementPanel } from "../src/features/modules/intelligence/research/ProcurementPanel";
 import { AcquisitionRecords } from "../src/features/modules/intelligence/research/AcquisitionRecords";
 import { useProcurementSelection } from "../src/features/modules/intelligence/research/useProcurementSelection";
@@ -25,6 +28,7 @@ const state = vi.hoisted(() => ({
   pushes: [] as string[],
   reads: [] as { key: string; input: unknown; enabled?: boolean }[],
   data: undefined as unknown,
+  accountData: undefined as unknown,
   error: undefined as Error | undefined,
   loading: false,
   acquisitions: [] as unknown[],
@@ -47,6 +51,8 @@ vi.mock("../src/shared/capiro/queries", () => ({
     options?: { enabled?: boolean },
   ) => {
     state.reads.push({ key, input, enabled: options?.enabled });
+    if (key === "procurement.accountReports")
+      return { data: state.accountData, loading: false, reload: vi.fn() };
     return key === "defenseResearch.acquisitions"
       ? {
           data: {
@@ -81,6 +87,7 @@ function selectionHook() {
 beforeEach(() => {
   state.params = new URLSearchParams({ procurementAward: first }).toString();
   state.data = procurementMoneyFlow.parse(populated());
+  state.accountData = undefined;
   state.error = undefined;
   state.loading = false;
   state.reads = [];
@@ -211,12 +218,78 @@ describe("exact selected-award navigation", () => {
 });
 
 describe("Money Flow and Hub mounted consumers", () => {
+  it("shows historical account rows separately, preserving negative, zero and unknown amounts", () => {
+    state.accountData = accountFixture();
+    const html = render();
+    expect(html).toContain("Reported accounts and outlays");
+    expect(html).toContain("-$1,700,000.00");
+    expect(html).toContain("$0.00");
+    expect(html).toContain("Not reported");
+    expect(html).toContain("Synthetic funding agency");
+    expect(html).toContain("Synthetic awarding agency");
+    expect(html).toContain("Only historical reporting periods");
+    expect(html).toContain("not full Treasury Account Symbols");
+    expect(html).toContain("Export account evidence");
+    expect(html).toContain("values are not summed");
+  });
+  it("withholds account facts from the wrong selection or while the snapshot refreshes", () => {
+    state.accountData = accountFixture(second);
+    expect(render()).not.toContain("-$1,700,000.00");
+    state.accountData = accountFixture();
+    state.loading = true;
+    expect(render()).not.toContain("-$1,700,000.00");
+  });
+  it("loads account reports independently with the same knowledge snapshot and no SAM cutoff", () => {
+    const scope = {
+      awardIdentityKeys: [first],
+      knownAt: snapshot,
+      sourceThrough: snapshot,
+    };
+    state.params = writeProcurementSelection(
+      new URLSearchParams(),
+      scope,
+    ).toString();
+    state.data = { ...populated(), sourceThrough: snapshot };
+    const html = render();
+    expect(state.reads).toContainEqual({
+      key: "procurement.accountReports",
+      input: { body: { awardIdentityKeys: [first], knownAt: snapshot } },
+      enabled: true,
+    });
+    expect(html).toContain("Reported accounts and outlays");
+    expect(html).toContain("SAM source cutoff does not apply");
+    state.reads = [];
+    render("hub");
+    expect(
+      state.reads.some((read) => read.key === "procurement.accountReports"),
+    ).toBe(false);
+  });
+  it("renders admitted funding and contracting action detail for the exact selected scope", () => {
+    state.params = writeProcurementSelection(new URLSearchParams(), {
+      awardIdentityKeys: nativeActions.scope.awardIdentityKeys,
+      knownAt: nativeActions.knownAt,
+    }).toString();
+    state.data = procurementActionDetailsResponse.parse(nativeActions);
+    const html = render();
+    expect(html).toContain("Funding organization");
+    expect(html).toContain("Contracting organization");
+    expect(html).toContain("1200-FUNDING");
+    expect(html).toContain("Inspect action");
+    expect(state.reads[0]?.key).toBe("procurement.observedActionDetails");
+  });
+
   it("uses the scoped POST operation with no inferred client or descendant authority", () => {
     state.params += "&clientId=synthetic-client";
     const html = render();
     expect(state.reads[0]).toEqual({
-      key: "procurement.moneyFlow",
-      input: { body: { awardIdentityKeys: [first] } },
+      key: "procurement.observedActionDetails",
+      input: {
+        body: {
+          awardIdentityKeys: [first],
+          revisionBasis: "latest_observed",
+          includeActionDetails: true,
+        },
+      },
       enabled: true,
     });
     expect(html).toContain("Partial source coverage");

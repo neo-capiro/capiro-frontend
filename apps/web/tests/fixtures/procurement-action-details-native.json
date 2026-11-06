@@ -1,0 +1,346 @@
+{
+  "scope": {
+    "awardIdentityKeys": [
+      "usaspending|award|CONT_AWD_0001_2100_-NONE-_-NONE-",
+      "usaspending|award|CONT_AWD_0001_9700_-NONE-_-NONE-"
+    ],
+    "includesDescendants": false
+  },
+  "state": "partial",
+  "groups": [
+    {
+      "actions": "2",
+      "outlayUsd": null,
+      "vendorKey": "uei:ABC123456DEF",
+      "fiscalYear": 2025,
+      "outlayKnown": "0",
+      "recipientUei": "ABC123456DEF",
+      "obligationUsd": "70368743677665.00",
+      "attributeState": "latest_known_catalog_observation",
+      "awardingAgency": "DEPT OF DEFENSE",
+      "contractorName": "TEST VENDOR INC",
+      "awardingSubTier": "DEPT OF THE ARMY",
+      "obligationKnown": "2",
+      "latestRecordedAt": "2025-07-12T00:00:00.000000Z",
+      "vendorIdentityState": "source_uei",
+      "latestSourceRevision": "2025-07-10T09:00:00.000000Z",
+      "latestSourceObservedAt": "2025-07-11T00:00:00.000000Z",
+      "latestAttributeRecordedAt": "2025-01-02T00:00:00.000000Z"
+    },
+    {
+      "actions": "1",
+      "outlayUsd": null,
+      "vendorKey": "award:usaspending|award|CONT_AWD_0001_2100_-NONE-_-NONE-",
+      "fiscalYear": 2025,
+      "outlayKnown": "0",
+      "recipientUei": null,
+      "obligationUsd": "800000.00",
+      "attributeState": "latest_known_catalog_observation",
+      "awardingAgency": "DEPT OF NAVY",
+      "contractorName": "TEST VENDOR 2 LLC",
+      "awardingSubTier": "NAVAIR",
+      "obligationKnown": "1",
+      "latestRecordedAt": "2025-09-03T00:00:00.000000Z",
+      "vendorIdentityState": "unresolved",
+      "latestSourceRevision": "2025-09-01T00:00:00.000000Z",
+      "latestSourceObservedAt": "2025-09-02T00:00:00.000000Z",
+      "latestAttributeRecordedAt": "2025-01-02T00:00:00.000000Z"
+    },
+    {
+      "actions": "1",
+      "outlayUsd": null,
+      "vendorKey": "uei:ABC123456DEF",
+      "fiscalYear": null,
+      "outlayKnown": "0",
+      "recipientUei": "ABC123456DEF",
+      "obligationUsd": "250000.00",
+      "attributeState": "latest_known_catalog_observation",
+      "awardingAgency": "DEPT OF DEFENSE",
+      "contractorName": "TEST VENDOR INC",
+      "awardingSubTier": "DEPT OF THE ARMY",
+      "obligationKnown": "1",
+      "latestRecordedAt": "2025-08-07T00:00:00.000000Z",
+      "vendorIdentityState": "source_uei",
+      "latestSourceRevision": "2025-08-05T06:00:00.000000Z",
+      "latestSourceObservedAt": "2025-08-06T00:00:00.000000Z",
+      "latestAttributeRecordedAt": "2025-01-02T00:00:00.000000Z"
+    }
+  ],
+  "totals": {
+    "actions": "4",
+    "outlayUsd": null,
+    "outlayKnown": "0",
+    "obligationUsd": "70368744727665.00",
+    "obligationKnown": "4"
+  },
+  "knownAt": "2026-11-01T00:00:00.000000Z",
+  "measure": "qualified_observed_actions",
+  "sources": [
+    {
+      "system": "sam_gov",
+      "semantics": "qualified observed signed action obligations; no reported action outlays",
+      "documentationUrl": "https://open.gsa.gov/api/contract-awards/"
+    },
+    {
+      "system": "usaspending",
+      "semantics": "latest known original-source award attributes; UEI is source-reported, not parent-company consolidation",
+      "documentationUrl": "https://www.usaspending.gov/"
+    }
+  ],
+  "contract": "defproc-scoped-money-flow/v1",
+  "coverage": {
+    "selected": "4"
+  },
+  "currency": "USD",
+  "provenance": [
+    {
+      "runId": "fixture-run-1",
+      "contract": "sam-contract-action/v2",
+      "targetId": "fixture-target-1",
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=0001",
+      "imageDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "producerCommit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selectedActions": "1",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_0001_2100_-NONE-_-NONE-",
+      "catalogSourceUrl": null,
+      "catalogRevisionId": "08e797fe-48fb-459d-b76b-95e88679bc9f",
+      "attributeRecordedAt": "2025-01-02T00:00:00.000000Z"
+    },
+    {
+      "runId": "fixture-run-1",
+      "contract": "sam-contract-action/v2",
+      "targetId": "fixture-target-1",
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=0001",
+      "imageDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "producerCommit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selectedActions": "3",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_0001_9700_-NONE-_-NONE-",
+      "catalogSourceUrl": null,
+      "catalogRevisionId": "72aea994-c1c2-4fe5-b1ca-d43a8c766891",
+      "attributeRecordedAt": "2025-01-02T00:00:00.000000Z"
+    }
+  ],
+  "actionDetails": [
+    {
+      "piid": "0001",
+      "awardType": "B",
+      "outlayUsd": null,
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=0001",
+      "vendorKey": "award:usaspending|award|CONT_AWD_0001_2100_-NONE-_-NONE-",
+      "actionDate": "2025-08-15",
+      "fiscalYear": 2025,
+      "parentPiid": null,
+      "recordedAt": "2025-09-03T00:00:00.000000Z",
+      "recipientUei": null,
+      "awardUniqueId": "CONT_AWD_0001_2100_-NONE-_-NONE-",
+      "obligationUsd": "800000.00",
+      "attributeState": "latest_known_catalog_observation",
+      "contractorName": "TEST VENDOR 2 LLC",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_0001_2100_-NONE-_-NONE-",
+      "parentAgencyCode": null,
+      "sourceObservedAt": "2025-09-02T00:00:00.000000Z",
+      "sourcePayloadHash": "4910122498d29868ce36a32b63df3f26737ca94416fcfe99a3b7341a78a957cf",
+      "transactionNumber": "1",
+      "modificationNumber": "P00001",
+      "selectedRevisionId": "4082bc51-c33e-4c98-8ef6-b6e5b4ec3bbd",
+      "fundingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": "9700S",
+          "name": "9700-FSUB"
+        },
+        "department": {
+          "code": "9700",
+          "name": "9700-FUNDING"
+        }
+      },
+      "sourceRevisionOrder": "2025-09-01T00:00:00.000000Z",
+      "vendorIdentityState": "unresolved",
+      "submittingAgencyCode": "2100",
+      "transactionIdentityKey": "sam_gov|modification|%5B%22sam-contract-action%2Fv2%22%2C%22usaspending%7Caward%7CCONT_AWD_0001_2100_-NONE-_-NONE-%22%2C%22P00001%22%2C%221%22%5D",
+      "contractingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": "2100S",
+          "name": "2100-CSUB"
+        },
+        "department": {
+          "code": "2100",
+          "name": "2100-CONTRACT"
+        }
+      }
+    },
+    {
+      "piid": "0001",
+      "awardType": "B",
+      "outlayUsd": null,
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=0001",
+      "vendorKey": "uei:ABC123456DEF",
+      "actionDate": "2025-06-01",
+      "fiscalYear": 2025,
+      "parentPiid": null,
+      "recordedAt": "2025-06-17T00:00:00.000000Z",
+      "recipientUei": "ABC123456DEF",
+      "awardUniqueId": "CONT_AWD_0001_9700_-NONE-_-NONE-",
+      "obligationUsd": "70368744177665.00",
+      "attributeState": "latest_known_catalog_observation",
+      "contractorName": "TEST VENDOR INC",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_0001_9700_-NONE-_-NONE-",
+      "parentAgencyCode": null,
+      "sourceObservedAt": "2025-06-16T00:00:00.000000Z",
+      "sourcePayloadHash": "3ff26f1841f636de76ed9e639dc5201b3cb0f61c427dda10112baf253bd0301e",
+      "transactionNumber": "1",
+      "modificationNumber": "P00001",
+      "selectedRevisionId": "4496c155-847b-439c-8182-fde7cfa89777",
+      "fundingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": "1200S",
+          "name": "1200-FSUB"
+        },
+        "department": {
+          "code": "1200",
+          "name": "1200-FUNDING"
+        }
+      },
+      "sourceRevisionOrder": "2025-06-15T12:00:00.000000Z",
+      "vendorIdentityState": "source_uei",
+      "submittingAgencyCode": "9700",
+      "transactionIdentityKey": "sam_gov|modification|%5B%22sam-contract-action%2Fv2%22%2C%22usaspending%7Caward%7CCONT_AWD_0001_9700_-NONE-_-NONE-%22%2C%22P00001%22%2C%221%22%5D",
+      "contractingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": "9700S",
+          "name": "9700-CSUB"
+        },
+        "department": {
+          "code": "9700",
+          "name": "9700-CONTRACT"
+        }
+      }
+    },
+    {
+      "piid": "0001",
+      "awardType": "B",
+      "outlayUsd": null,
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=0001",
+      "vendorKey": "uei:ABC123456DEF",
+      "actionDate": "2025-07-01",
+      "fiscalYear": 2025,
+      "parentPiid": null,
+      "recordedAt": "2025-07-12T00:00:00.000000Z",
+      "recipientUei": "ABC123456DEF",
+      "awardUniqueId": "CONT_AWD_0001_9700_-NONE-_-NONE-",
+      "obligationUsd": "-500000.00",
+      "attributeState": "latest_known_catalog_observation",
+      "contractorName": "TEST VENDOR INC",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_0001_9700_-NONE-_-NONE-",
+      "parentAgencyCode": null,
+      "sourceObservedAt": "2025-07-11T00:00:00.000000Z",
+      "sourcePayloadHash": "86c78e9b5cc2564409a7b2ff520dd23b1d5ea54932369b24cd4a32384eda6aa5",
+      "transactionNumber": "1",
+      "modificationNumber": "P00002",
+      "selectedRevisionId": "89ea7f02-e014-4ed7-a70e-3dd22737e75c",
+      "fundingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": "9700S",
+          "name": "9700-FSUB"
+        },
+        "department": {
+          "code": "9700",
+          "name": "9700-FUNDING"
+        }
+      },
+      "sourceRevisionOrder": "2025-07-10T09:00:00.000000Z",
+      "vendorIdentityState": "source_uei",
+      "submittingAgencyCode": "9700",
+      "transactionIdentityKey": "sam_gov|modification|%5B%22sam-contract-action%2Fv2%22%2C%22usaspending%7Caward%7CCONT_AWD_0001_9700_-NONE-_-NONE-%22%2C%22P00002%22%2C%221%22%5D",
+      "contractingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": "9700S",
+          "name": "9700-CSUB"
+        },
+        "department": {
+          "code": "9700",
+          "name": "9700-CONTRACT"
+        }
+      }
+    },
+    {
+      "piid": "0001",
+      "awardType": "B",
+      "outlayUsd": null,
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=0001",
+      "vendorKey": "uei:ABC123456DEF",
+      "actionDate": null,
+      "fiscalYear": null,
+      "parentPiid": null,
+      "recordedAt": "2025-08-07T00:00:00.000000Z",
+      "recipientUei": "ABC123456DEF",
+      "awardUniqueId": "CONT_AWD_0001_9700_-NONE-_-NONE-",
+      "obligationUsd": "250000.00",
+      "attributeState": "latest_known_catalog_observation",
+      "contractorName": "TEST VENDOR INC",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_0001_9700_-NONE-_-NONE-",
+      "parentAgencyCode": null,
+      "sourceObservedAt": "2025-08-06T00:00:00.000000Z",
+      "sourcePayloadHash": "e9640136c8bfa5ff6efa4cb83197cf5fe4bf5435ea74119e41b72db5126e395e",
+      "transactionNumber": "1",
+      "modificationNumber": "P00003",
+      "selectedRevisionId": "9270c71e-50f4-401f-9c71-053d164fe7ff",
+      "fundingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": "1200S",
+          "name": "1200-FSUB"
+        },
+        "department": {
+          "code": "1200",
+          "name": "1200-FUNDING"
+        }
+      },
+      "sourceRevisionOrder": "2025-08-05T06:00:00.000000Z",
+      "vendorIdentityState": "source_uei",
+      "submittingAgencyCode": "9700",
+      "transactionIdentityKey": "sam_gov|modification|%5B%22sam-contract-action%2Fv2%22%2C%22usaspending%7Caward%7CCONT_AWD_0001_9700_-NONE-_-NONE-%22%2C%22P00003%22%2C%221%22%5D",
+      "contractingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": "9700S",
+          "name": "9700-CSUB"
+        },
+        "department": {
+          "code": "9700",
+          "name": "9700-CONTRACT"
+        }
+      }
+    }
+  ],
+  "sourceThrough": null
+}

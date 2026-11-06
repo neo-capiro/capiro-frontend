@@ -1,0 +1,73 @@
+{
+  "scope": {
+    "awardIdentityKeys": [
+      "usaspending|award|CONT_AWD_0001_2100_-NONE-_-NONE-",
+      "usaspending|award|CONT_AWD_0001_9700_-NONE-_-NONE-"
+    ],
+    "includesDescendants": false
+  },
+  "knownAt": "2026-11-05T15:13:53.141762Z",
+  "reports": [
+    {
+      "rows": [
+        {
+          "objectClass": "25.1",
+          "accountTitle": "Synthetic account",
+          "federalAccount": "017-1804",
+          "sourceRowIndex": 0,
+          "objectClassName": "Synthetic object class",
+          "fundingAgencyName": "Synthetic funding agency",
+          "awardingAgencyName": "Synthetic awarding agency",
+          "programActivityCode": "0004",
+          "programActivityName": "Synthetic activity",
+          "reportingFiscalYear": 2024,
+          "reportingFiscalMonth": 12,
+          "isQuarterlySubmission": false,
+          "reportedObligationUsd": "-2.25",
+          "treasuryAccountSymbol": null,
+          "reportedGrossOutlayUsd": null,
+          "reportingFiscalQuarter": 4,
+          "disasterEmergencyFundCode": "Q"
+        },
+        {
+          "objectClass": "25.1",
+          "accountTitle": "Synthetic account",
+          "federalAccount": "017-1804",
+          "sourceRowIndex": 1,
+          "objectClassName": "Synthetic object class",
+          "fundingAgencyName": "Synthetic funding agency",
+          "awardingAgencyName": "Synthetic awarding agency",
+          "programActivityCode": "0004",
+          "programActivityName": "Synthetic activity",
+          "reportingFiscalYear": 2024,
+          "reportingFiscalMonth": 12,
+          "isQuarterlySubmission": false,
+          "reportedObligationUsd": null,
+          "treasuryAccountSymbol": null,
+          "reportedGrossOutlayUsd": "0.00",
+          "reportingFiscalQuarter": 4,
+          "disasterEmergencyFundCode": "Q"
+        }
+      ],
+      "state": "reported",
+      "sourceUrl": "https://www.usaspending.gov/award/CONT_AWD_0001_2100_-NONE-_-NONE-",
+      "recordedAt": "2026-11-05T15:13:53.135158Z",
+      "snapshotId": "bf84ddce-985c-4459-8e73-1b12db8d39d1",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_0001_2100_-NONE-_-NONE-",
+      "sourceObservedAt": "2026-11-02T00:00:00.000000Z",
+      "sourcePayloadSha256": "8dd335f22af47db034edda27f92159bd1178a9df7033c6d252e14a3c92cd7660"
+    },
+    {
+      "rows": [],
+      "state": "unavailable",
+      "sourceUrl": "https://www.usaspending.gov/award/CONT_AWD_0001_9700_-NONE-_-NONE-",
+      "recordedAt": null,
+      "snapshotId": null,
+      "awardIdentityKey": "usaspending|award|CONT_AWD_0001_9700_-NONE-_-NONE-",
+      "sourceObservedAt": null,
+      "sourcePayloadSha256": null
+    }
+  ],
+  "contract": "defproc-account-reports/v1",
+  "coverage": "source_reported_rows_only"
+}

@@ -1,18 +1,103 @@
 import type {
   ProcurementMoneyFlow,
   ProcurementHubSummary,
+  ProcurementMoneyFlowResult,
+  ProcurementObservedFlowGroup,
 } from "@capiro/shared";
-import { useState } from "react";
-import { ActionButton, Badge, DataTable } from "../../../../shared/module-ui";
+import { useId, useState } from "react";
+import {
+  ActionButton,
+  Badge,
+  DataTable,
+  Field,
+  Modal,
+  TextArea,
+  TextInput,
+} from "../../../../shared/module-ui";
 import { SourceLink } from "./ResearchEvidence";
-import { procurementUsd } from "./procurement-selection";
+import {
+  procurementUsd,
+  downloadProcurementEvidence,
+} from "./procurement-selection";
+import {
+  ProcurementVendorFootprint,
+  filterProcurementGroups,
+  procurementGroupTotals,
+  type ProcurementDisplayFilters,
+} from "./ProcurementVendorFootprint";
+import {
+  ProcurementActionTable,
+  filterProcurementActions,
+} from "./ProcurementActionTable";
 import styles from "./procurement.module.css";
+
+const fiscalFilters = [
+  ["all", "All"],
+  ["2025", "FY2025"],
+  ["2026", "FY2026"],
+  ["2025-2026", "FY2025–FY2026"],
+] as const;
 
 export function ProcurementResult({
   result,
 }: {
-  result: ProcurementMoneyFlow | ProcurementHubSummary;
+  result: ProcurementMoneyFlowResult | ProcurementHubSummary;
 }) {
+  const id = useId();
+  const isObserved = result.contract === "defproc-observed-money-flow/v1";
+  const [view, setView] = useState<"groups" | "footprint">("groups");
+  const [filters, setFilters] = useState<ProcurementDisplayFilters>({
+    fiscalYear: "all",
+    vendor: "",
+  });
+  const [exportNote, setExportNote] = useState("");
+  const [showExportModal, setShowExportModal] = useState(false);
+  const flow = "groups" in result ? result : null;
+  const groups = flow ? filterProcurementGroups(flow.groups, filters) : [];
+  const actions = flow?.actionDetails
+    ? filterProcurementActions(flow.actionDetails, groups)
+    : null;
+  const totals = flow ? procurementGroupTotals(groups) : result.totals;
+  const hasGroups = Boolean(flow?.groups.length);
+  const canExport = Boolean(flow && groups.length && totals);
+  const displayKey = JSON.stringify(filters);
+  const handleExport = () => {
+    if (!flow || !totals || !groups.length || exportNote.length > 4000) return;
+    const payload = {
+      contract: "procurement-evidence-finding/v1",
+      sourceSnapshot: flow,
+      display: {
+        view,
+        filters,
+        totals,
+        groups,
+        ...(actions ? { actions } : {}),
+      },
+      provenanceScope:
+        "sourceSnapshot contains the entire selected award cohort before display filters",
+      analystJudgment: exportNote.trim()
+        ? { kind: "analyst_judgment", followUp: exportNote }
+        : null,
+      caveats: [
+        "Local export, not saved to a client record.",
+        "Partial qualified observed actions; not complete federal or award spending.",
+        "This adapter supports AWARD A/B/C/D, not IDVs or OTAs; related awards are excluded.",
+        "DoD-funded and DoD-awarded records are subject to SAM's 90-day public disclosure delay.",
+        "Source-reported UEIs are not verified corporate ownership. Action outlays are unknown; no account allocation is inferred.",
+        ...(isObserved
+          ? [
+              "For observed contract data: publisher revision labels are verbatim source values, not certified UTC timestamps or chronological ordering.",
+            ]
+          : []),
+      ],
+    };
+    downloadProcurementEvidence(
+      `procurement-evidence-${result.knownAt.slice(0, 10)}.json`,
+      payload,
+    );
+    setShowExportModal(false);
+    setExportNote("");
+  };
   return (
     <>
       <div className={styles.content}>
@@ -27,35 +112,97 @@ export function ProcurementResult({
         </p>
         <p>
           Knowledge snapshot: <time>{result.knownAt}</time>
-          {result.sourceThrough
-            ? ` · Source cutoff: ${result.sourceThrough}`
-            : " · No source cutoff"}
+          {isObserved
+            ? " · Latest observed revision basis"
+            : result.sourceThrough
+              ? ` · Source cutoff: ${result.sourceThrough}`
+              : " · No source cutoff"}
         </p>
-        {result.totals ? (
+        {isObserved && (
+          <p className={styles.subtext}>
+            Observed: latest revision label per full action identity among
+            bounded observations. Publisher labels are verbatim and
+            uninterpreted — not certified publisher chronology or complete
+            history.
+          </p>
+        )}
+        {hasGroups && (
+          <>
+            <div
+              className={styles.actions}
+              aria-label="Procurement display filters"
+            >
+              <span>Fiscal year:</span>
+              {fiscalFilters.map(([value, label]) => (
+                <ActionButton
+                  key={value}
+                  aria-pressed={filters.fiscalYear === value}
+                  onClick={() =>
+                    setFilters((previous) => ({
+                      ...previous,
+                      fiscalYear: value,
+                    }))
+                  }
+                >
+                  {label}
+                </ActionButton>
+              ))}
+            </div>
+            <Field label="Filter vendors" htmlFor={`${id}-vendor`}>
+              <TextInput
+                id={`${id}-vendor`}
+                type="search"
+                value={filters.vendor}
+                maxLength={200}
+                onChange={(event) =>
+                  setFilters((previous) => ({
+                    ...previous,
+                    vendor: event.target.value,
+                  }))
+                }
+                placeholder="Name or vendor key"
+              />
+            </Field>
+            {(filters.vendor || filters.fiscalYear !== "all") && (
+              <div className={styles.actions}>
+                <ActionButton
+                  onClick={() => setFilters({ fiscalYear: "all", vendor: "" })}
+                >
+                  Clear filters
+                </ActionButton>
+              </div>
+            )}
+            <p>
+              Display subset: {groups.length} of {flow!.groups.length} observed
+              groups. These filters apply to both views and the export, not the
+              source acquisition scope.
+            </p>
+          </>
+        )}
+        {totals ? (
           <>
             <dl className={styles.measures}>
               <div>
                 <dt>Observed obligations (USD)</dt>
                 <dd>
-                  {procurementUsd(result.totals.obligationUsd)}
+                  {procurementUsd(totals.obligationUsd)}
                   <span className={styles.subtext}>
-                    {result.totals.obligationKnown} actions with reported
-                    obligations
+                    {totals.obligationKnown} actions with reported obligations
                   </span>
                 </dd>
               </div>
               <div>
                 <dt>Observed outlays (USD)</dt>
                 <dd>
-                  {procurementUsd(result.totals.outlayUsd)}
+                  {procurementUsd(totals.outlayUsd)}
                   <span className={styles.subtext}>
-                    {result.totals.outlayKnown} actions with reported outlays
+                    {totals.outlayKnown} actions with reported outlays
                   </span>
                 </dd>
               </div>
               <div>
                 <dt>Qualified actions</dt>
-                <dd>{result.totals.actions}</dd>
+                <dd>{totals.actions}</dd>
               </div>
             </dl>
             <p>
@@ -72,15 +219,17 @@ export function ProcurementResult({
           </>
         ) : (
           <p role="status">
-            No qualified actions are available for this selection and snapshot.
-            Spending totals are unavailable; this does not mean zero spending.
+            {hasGroups
+              ? "No observed actions match these display filters. The subset is unavailable; this does not mean zero spending."
+              : "No qualified actions are available for this selection and snapshot. Spending totals are unavailable; this does not mean zero spending."}
           </p>
         )}
         <details>
           <summary>Coverage counts</summary>
           <p>
-            Counts describe observed classifications; omitted categories do not
-            establish complete source coverage.
+            Counts describe the entire selected source cohort before display
+            filters; omitted categories do not establish complete source
+            coverage.
           </p>
           <ul className={styles.coverage}>
             {Object.entries(result.coverage).map(([name, count]) => (
@@ -90,19 +239,107 @@ export function ProcurementResult({
             ))}
           </ul>
         </details>
+        <p>
+          Public records both funded and awarded by DoD are subject to
+          SAM&apos;s 90-day disclosure delay. The source observation dates and
+          partial coverage still apply.
+        </p>
+        <details className={styles.evidence}>
+          <summary>Source coverage disclosures</summary>
+          <p>
+            This adapter supports AWARD A/B/C/D only. IDVs, OTAs and
+            related/descendant awards are excluded. SAM does not report action
+            outlays. Funding/account allocations must not be inferred from these
+            awarding-agency groups.
+          </p>
+          <SourceLink url="https://open.gsa.gov/api/contract-awards/">
+            GSA Contract Awards documentation
+          </SourceLink>
+        </details>
+        {hasGroups && (
+          <div className={styles.actions}>
+            <ActionButton
+              aria-pressed={view === "groups"}
+              onClick={() => setView("groups")}
+            >
+              Money Flow
+            </ActionButton>
+            <ActionButton
+              aria-pressed={view === "footprint"}
+              onClick={() => setView("footprint")}
+            >
+              Vendor Footprint
+            </ActionButton>
+            <ActionButton
+              onClick={() => setShowExportModal(true)}
+              disabled={!canExport}
+            >
+              Download evidence finding
+            </ActionButton>
+          </div>
+        )}
+        {groups.length > 0 &&
+          (view === "footprint" ? (
+            <ProcurementVendorFootprint key={displayKey} groups={groups} />
+          ) : actions ? (
+            <ProcurementActionTable key={displayKey} actions={actions} />
+          ) : (
+            <ProcurementGroups
+              key={displayKey}
+              groups={groups}
+              isObserved={isObserved}
+            />
+          ))}
       </div>
-      {"groups" in result && result.groups.length > 0 && (
-        <ProcurementGroups groups={result.groups} />
-      )}
       <ProcurementProvenance result={result} />
+      <Modal
+        className={styles.exportDialog}
+        open={showExportModal}
+        onOpenChange={setShowExportModal}
+        title="Download evidence finding"
+        description="This downloads a local JSON file with your display filters and the full source snapshot. It does not save to or attach to a client."
+        footer={
+          <>
+            <ActionButton onClick={() => setShowExportModal(false)}>
+              Cancel
+            </ActionButton>
+            <ActionButton
+              onClick={handleExport}
+              disabled={!canExport || exportNote.length > 4000}
+            >
+              Download JSON
+            </ActionButton>
+          </>
+        }
+      >
+        <Field
+          htmlFor={`${id}-note`}
+          label="Analyst follow-up (optional)"
+          description="Analyst judgment, not an additional source fact. Maximum 4,000 characters."
+        >
+          <TextArea
+            id={`${id}-note`}
+            value={exportNote}
+            onChange={(event) => setExportNote(event.target.value)}
+            rows={4}
+            maxLength={4000}
+            placeholder="Optional follow-up note (exported as analyst judgment)"
+          />
+        </Field>
+      </Modal>
     </>
   );
 }
 
 function ProcurementGroups({
   groups,
+  isObserved,
 }: {
-  groups: ProcurementMoneyFlow["groups"];
+  groups: readonly (
+    | ProcurementMoneyFlow["groups"][number]
+    | ProcurementObservedFlowGroup
+  )[];
+  isObserved: boolean;
 }) {
   const [page, setPage] = useState(0);
   const lastPage = Math.max(0, Math.ceil(groups.length / 20) - 1);
@@ -178,11 +415,14 @@ function ProcurementGroups({
             label: "Observation clocks (UTC)",
             render: (row) => (
               <>
+                {!isObserved && "latestSourceRevision" in row && (
+                  <span className={styles.subtext}>
+                    Source revision: {row.latestSourceRevision}
+                  </span>
+                )}
                 <span className={styles.subtext}>
-                  Source revision: {row.latestSourceRevision}
-                </span>
-                <span className={styles.subtext}>
-                  Observed: {row.latestSourceObservedAt}
+                  {isObserved ? "Retrieved" : "Observed"}:{" "}
+                  {row.latestSourceObservedAt}
                 </span>
                 <span className={styles.subtext}>
                   Recorded: {row.latestRecordedAt}
@@ -221,7 +461,7 @@ function ProcurementGroups({
 function ProcurementProvenance({
   result,
 }: {
-  result: ProcurementMoneyFlow | ProcurementHubSummary;
+  result: ProcurementMoneyFlowResult | ProcurementHubSummary;
 }) {
   return (
     <div className={styles.content}>

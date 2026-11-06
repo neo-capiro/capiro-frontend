@@ -1,0 +1,253 @@
+{
+  "scope": {
+    "awardIdentityKeys": [
+      "usaspending|award|CONT_AWD_OBSR1_9700_-NONE-_-NONE-"
+    ],
+    "includesDescendants": false
+  },
+  "state": "partial",
+  "groups": [
+    {
+      "actions": "3",
+      "outlayUsd": null,
+      "vendorKey": "uei:ZZZZZZZZZZZZ",
+      "fiscalYear": 2026,
+      "outlayKnown": "0",
+      "recipientUei": "ZZZZZZZZZZZZ",
+      "obligationUsd": "18.50",
+      "attributeState": "latest_known_catalog_observation",
+      "awardingAgency": "SYNTHETIC AGENCY",
+      "contractorName": "SYNTHETIC OBSERVED VENDOR",
+      "awardingSubTier": "SYNTHETIC SUBTIER",
+      "obligationKnown": "3",
+      "latestRecordedAt": "2026-11-03T00:00:00.000000Z",
+      "vendorIdentityState": "source_uei",
+      "latestSourceObservedAt": "2026-11-03T00:00:00.000000Z",
+      "latestAttributeRecordedAt": "2025-01-02T00:00:00.000000Z"
+    }
+  ],
+  "totals": {
+    "actions": "3",
+    "outlayUsd": null,
+    "outlayKnown": "0",
+    "obligationUsd": "18.50",
+    "obligationKnown": "3"
+  },
+  "knownAt": "2026-11-03T00:00:01.000000Z",
+  "measure": "latest_observed_actions",
+  "sources": [
+    {
+      "system": "sam_gov",
+      "semantics": "latest-observed version per full action identity within reviewed bounded observations; publisher labels are uninterpreted; not complete history or verified publisher chronology; no reported action outlays",
+      "documentationUrl": "https://open.gsa.gov/api/contract-awards/"
+    },
+    {
+      "system": "usaspending",
+      "semantics": "latest known original-source award attributes; UEI is source-reported, not parent-company consolidation",
+      "documentationUrl": "https://www.usaspending.gov/"
+    }
+  ],
+  "contract": "defproc-observed-money-flow/v1",
+  "coverage": {
+    "selected": "3",
+    "prior_observation": "2"
+  },
+  "currency": "USD",
+  "provenance": [
+    {
+      "runId": "synthetic-observed-3cb629ae-3186-4b62-bdbd-edce170672df",
+      "contract": "sam-contract-action/observed-v1",
+      "targetId": "fixture-target-1",
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=OBSR1",
+      "imageDigest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "producerCommit": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "selectedActions": "2",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_OBSR1_9700_-NONE-_-NONE-",
+      "catalogSourceUrl": null,
+      "catalogRevisionId": "1bb89995-4be6-47ef-9bf3-6324004eb35a",
+      "attributeRecordedAt": "2025-01-02T00:00:00.000000Z"
+    },
+    {
+      "runId": "synthetic-observed-80834295-fed2-4f76-b200-0c4f547b7aff",
+      "contract": "sam-contract-action/observed-v1",
+      "targetId": "fixture-target-1",
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=OBSR1",
+      "imageDigest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "producerCommit": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "selectedActions": "1",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_OBSR1_9700_-NONE-_-NONE-",
+      "catalogSourceUrl": null,
+      "catalogRevisionId": "1bb89995-4be6-47ef-9bf3-6324004eb35a",
+      "attributeRecordedAt": "2025-01-02T00:00:00.000000Z"
+    }
+  ],
+  "actionDetails": [
+    {
+      "piid": "OBSR1",
+      "awardType": "B",
+      "outlayUsd": null,
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=OBSR1",
+      "vendorKey": "uei:ZZZZZZZZZZZZ",
+      "actionDate": "2025-10-03",
+      "fiscalYear": 2026,
+      "parentPiid": null,
+      "recordedAt": "2026-11-03T00:00:00.000000Z",
+      "recipientUei": "ZZZZZZZZZZZZ",
+      "awardUniqueId": "CONT_AWD_OBSR1_9700_-NONE-_-NONE-",
+      "obligationUsd": "-1.50",
+      "attributeState": "latest_known_catalog_observation",
+      "contractorName": "SYNTHETIC OBSERVED VENDOR",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_OBSR1_9700_-NONE-_-NONE-",
+      "parentAgencyCode": null,
+      "sourceObservedAt": "2026-11-03T00:00:00.000000Z",
+      "sourcePayloadHash": "4ba01e9a0d82693d38426c2ef85b083ea1bea89ea325d373d5c66b0886fab62e",
+      "transactionNumber": "1",
+      "modificationNumber": "P1",
+      "selectedRevisionId": "1b49b7b3-6845-4903-93b0-76b96caaa5e2",
+      "fundingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": null,
+          "name": null
+        },
+        "department": {
+          "code": "1200",
+          "name": "SYNTHETIC FUNDING"
+        }
+      },
+      "sourceRevisionLabel": "1999-01-01 00:00:00",
+      "vendorIdentityState": "source_uei",
+      "submittingAgencyCode": "9700",
+      "transactionIdentityKey": "sam_gov|modification|%5B%22sam-contract-action%2Fobserved-v1%22%2C%22usaspending%7Caward%7CCONT_AWD_OBSR1_9700_-NONE-_-NONE-%22%2C%22P1%22%2C%221%22%5D",
+      "contractingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": null,
+          "name": null
+        },
+        "department": {
+          "code": "9700",
+          "name": "SYNTHETIC CONTRACTING"
+        }
+      }
+    },
+    {
+      "piid": "OBSR1",
+      "awardType": "B",
+      "outlayUsd": null,
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=OBSR1",
+      "vendorKey": "uei:ZZZZZZZZZZZZ",
+      "actionDate": "2025-10-03",
+      "fiscalYear": 2026,
+      "parentPiid": null,
+      "recordedAt": "2026-11-01T00:00:00.000000Z",
+      "recipientUei": "ZZZZZZZZZZZZ",
+      "awardUniqueId": "CONT_AWD_OBSR1_9700_-NONE-_-NONE-",
+      "obligationUsd": "20.00",
+      "attributeState": "latest_known_catalog_observation",
+      "contractorName": "SYNTHETIC OBSERVED VENDOR",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_OBSR1_9700_-NONE-_-NONE-",
+      "parentAgencyCode": null,
+      "sourceObservedAt": "2026-11-01T00:00:00.000000Z",
+      "sourcePayloadHash": "3d6ae20e75ffcdfc0dc0262431dac4792d673453d0087651a63972ab1ac6b6db",
+      "transactionNumber": "1",
+      "modificationNumber": "P2",
+      "selectedRevisionId": "dcbc3b87-d41d-4537-864f-586bcd26a100",
+      "fundingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": null,
+          "name": null
+        },
+        "department": {
+          "code": "1200",
+          "name": "SYNTHETIC FUNDING"
+        }
+      },
+      "sourceRevisionLabel": " 2026-08-13 15:30:52 ",
+      "vendorIdentityState": "source_uei",
+      "submittingAgencyCode": "9700",
+      "transactionIdentityKey": "sam_gov|modification|%5B%22sam-contract-action%2Fobserved-v1%22%2C%22usaspending%7Caward%7CCONT_AWD_OBSR1_9700_-NONE-_-NONE-%22%2C%22P2%22%2C%221%22%5D",
+      "contractingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": null,
+          "name": null
+        },
+        "department": {
+          "code": "9700",
+          "name": "SYNTHETIC CONTRACTING"
+        }
+      }
+    },
+    {
+      "piid": "OBSR1",
+      "awardType": "B",
+      "outlayUsd": null,
+      "sourceUrl": "https://api.sam.gov/contract-awards/v1/search?piid=OBSR1",
+      "vendorKey": "uei:ZZZZZZZZZZZZ",
+      "actionDate": "2025-10-03",
+      "fiscalYear": 2026,
+      "parentPiid": null,
+      "recordedAt": "2026-11-01T00:00:00.000000Z",
+      "recipientUei": "ZZZZZZZZZZZZ",
+      "awardUniqueId": "CONT_AWD_OBSR1_9700_-NONE-_-NONE-",
+      "obligationUsd": "0.00",
+      "attributeState": "latest_known_catalog_observation",
+      "contractorName": "SYNTHETIC OBSERVED VENDOR",
+      "awardIdentityKey": "usaspending|award|CONT_AWD_OBSR1_9700_-NONE-_-NONE-",
+      "parentAgencyCode": null,
+      "sourceObservedAt": "2026-11-01T00:00:00.000000Z",
+      "sourcePayloadHash": "f0ee3844d1ee307c09add9b0eaffd0fcc6040087b7d2a38e538c3468fc33b5c5",
+      "transactionNumber": "1",
+      "modificationNumber": "P3",
+      "selectedRevisionId": "99972519-1824-44c0-8e09-8c80317519c5",
+      "fundingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": null,
+          "name": null
+        },
+        "department": {
+          "code": "1200",
+          "name": "SYNTHETIC FUNDING"
+        }
+      },
+      "sourceRevisionLabel": null,
+      "vendorIdentityState": "source_uei",
+      "submittingAgencyCode": "9700",
+      "transactionIdentityKey": "sam_gov|modification|%5B%22sam-contract-action%2Fobserved-v1%22%2C%22usaspending%7Caward%7CCONT_AWD_OBSR1_9700_-NONE-_-NONE-%22%2C%22P3%22%2C%221%22%5D",
+      "contractingOrganization": {
+        "office": {
+          "code": null,
+          "name": null
+        },
+        "subtier": {
+          "code": null,
+          "name": null
+        },
+        "department": {
+          "code": "9700",
+          "name": "SYNTHETIC CONTRACTING"
+        }
+      }
+    }
+  ],
+  "revisionBasis": "latest_observed",
+  "sourceThrough": null
+}

@@ -58,7 +58,7 @@ const money = z
   .string()
   .regex(moneyPattern)
   .refine((value) => !/^-0(?:\.0+)?$/.test(value));
-function amountsAgree(
+export function amountsAgree(
   values: readonly (string | null)[],
   expected: string | null,
 ): boolean {
