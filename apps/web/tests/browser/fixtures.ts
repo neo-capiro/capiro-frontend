@@ -1,3 +1,8 @@
+import {
+  impactPage,
+  impactRow,
+  impactDetail,
+} from "../legiwatch-impact-fixtures";
 import { mailListFixture } from "../mail-read-fixture";
 import { effectivePage } from "../effective-date-fixtures";
 import { commentPage } from "../comment-calendar-fixtures";
@@ -230,6 +235,29 @@ export const sendingReceipt = {
 };
 export async function installFixtures(page: Page) {
   const unexpected: string[] = [];
+  await page.route("**/api/capiro/legiwatch.tracker?**", (route) => {
+    const input = JSON.parse(
+      new URL(route.request().url()).searchParams.get("input") ?? "{}",
+    );
+    return json(
+      route,
+      impactPage([impactRow({ clientId: input.query?.clientId ?? clientId })]),
+    );
+  });
+  await page.route("**/api/capiro/legiwatch.impact?**", (route) => {
+    const input = JSON.parse(
+      new URL(route.request().url()).searchParams.get("input") ?? "{}",
+    );
+    return json(
+      route,
+      impactDetail(
+        impactRow({
+          clientId: input.params?.clientId ?? clientId,
+          billId: input.params?.billId ?? "hr-1-119",
+        }),
+      ),
+    );
+  });
   await page.route("**/api/backend/**", async (route) => {
     const url = new URL(route.request().url());
     const path = url.pathname.replace("/api/backend/", "");

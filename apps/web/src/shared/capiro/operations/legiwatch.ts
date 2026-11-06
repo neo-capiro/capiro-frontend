@@ -1,4 +1,5 @@
 import { legiwatchFolderOperations } from "./legiwatch-folders";
+import { legiwatchImpactOperations } from "./legiwatch-impact";
 import { legiwatchDeliveryOperations } from "./legiwatch-delivery";
 import { legiwatchRolloutOperations } from "./legiwatch-rollout";
 import { legiwatchAnalyticsOperations } from "./legiwatch-analytics";
@@ -17,6 +18,7 @@ import { legiwatchSessionOperations } from "./legiwatch-sessions";
 import { legiwatchWorkOperations } from "./legiwatch-work";
 import { legiwatchWorkflowOperations } from "./legiwatch-workflows";
 export const legiwatchOperations = {
+  ...legiwatchImpactOperations,
   ...legiwatchFolderOperations,
   ...legiwatchDeliveryOperations,
   ...legiwatchRolloutOperations,

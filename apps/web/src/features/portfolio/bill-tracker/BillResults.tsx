@@ -1,109 +1,163 @@
+import { ActionButton, Badge, DataTable } from "@/shared/module-ui";
+import type { ImpactRow } from "@/shared/capiro/operations/legiwatch-impact-schemas";
 import { billActionDate } from "./hearings";
-import type { TrackedBill } from "./contracts";
-import styles from "./bills.module.css";
+import styles from "./impact-tracker.module.css";
+
+export const impactRowKey = (row: ImpactRow) =>
+  JSON.stringify([row.clientId, row.billId]);
+const directionLabel = {
+  positive: "Positive",
+  negative: "Negative",
+  mixed: "Mixed",
+  uncertain: "Uncertain",
+};
+export function ImpactBadge({ row }: { row: ImpactRow }) {
+  const impact = row.impact;
+  if (impact.stale) return <Badge tone="warning">Needs refresh</Badge>;
+  if (impact.status !== "ready")
+    return (
+      <Badge>
+        {impact.status === "needs_evidence" ? "Needs evidence" : "Unavailable"}
+      </Badge>
+    );
+  return (
+    <Badge
+      tone={
+        impact.direction === "negative"
+          ? "danger"
+          : impact.direction === "positive"
+            ? "success"
+            : "neutral"
+      }
+    >
+      {directionLabel[impact.direction]}
+    </Badge>
+  );
+}
 export function BillResults({
-  columns,
+  rows,
   view,
+  showClient,
   onOpen,
 }: {
-  columns: { id: string; label: string; bills: TrackedBill[] }[];
+  rows: ImpactRow[];
   view: "table" | "board";
-  onOpen: (bill: TrackedBill) => void;
+  showClient: boolean;
+  onOpen: (row: ImpactRow) => void;
 }) {
   if (view === "board")
     return (
       <div className={styles.board}>
-        {columns.map((column) => (
-          <section key={column.id} className={styles.lane}>
-            <header className="row between">
-              <h3>{column.label}</h3>
-              <span className="chip">{column.bills.length}</span>
-            </header>
-            {column.bills.map((bill) => (
-              <button
-                className={styles.billCard}
-                key={bill.billId}
-                onClick={() => onOpen(bill)}
-              >
-                <span className="row between">
-                  <strong className="mono">{bill.displayNum}</strong>
-                  <span>{Math.round(bill.probability * 100)}% estimate</span>
-                </span>
-                <span>{bill.title ?? "Title unavailable"}</span>
-                <small>{bill.canonicalStatus ?? column.label}</small>
-                {bill.terminalRisk && (
-                  <strong className="danger">Terminal risk</strong>
-                )}
-                {bill.changeLabel && <small>{bill.changeLabel}</small>}
-              </button>
-            ))}
-            {!column.bills.length && <p className="empty">No loaded bills</p>}
-          </section>
-        ))}
+        {(["introduced", "committee", "passed", "enacted", null] as const).map(
+          (stage) => (
+            <section className={styles.lane} key={stage ?? "unknown"}>
+              <h3>
+                {stage
+                  ? stage[0]!.toUpperCase() + stage.slice(1)
+                  : "Stage unavailable"}
+              </h3>
+              {rows
+                .filter((row) => row.stage === stage)
+                .map((row) => (
+                  <button
+                    type="button"
+                    className={styles.billCard}
+                    key={impactRowKey(row)}
+                    onClick={() => onOpen(row)}
+                  >
+                    <strong>{row.displayNum}</strong>
+                    <span>{row.title}</span>
+                    {showClient && <small>{row.clientName}</small>}
+                    <ImpactBadge row={row} />
+                    <small>
+                      {row.position ?? "No position"} ·{" "}
+                      {row.priority ?? "No priority"}
+                    </small>
+                  </button>
+                ))}
+              {!rows.some((row) => row.stage === stage) && (
+                <p className={styles.muted}>No loaded bills</p>
+              )}
+            </section>
+          ),
+        )}
       </div>
     );
   return (
-    <div className="tableWrap">
-      <table>
-        <caption className="srOnly">
-          Tracked bills and service passage estimates
-        </caption>
-        <thead>
-          <tr>
-            {["Bill", "Title", "Latest action", "Stage", "Pass estimate"].map(
-              (label) => (
-                <th scope="col" key={label}>
-                  {label}
-                </th>
-              ),
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {columns.flatMap((column) =>
-            column.bills.map((bill) => {
-              // The visible latest action is the action text or, when the
-              // service supplied only a change label, that label. Both the
-              // separator and the empty placeholder follow what is displayed so
-              // the text and date can never run together.
-              const latestAction = bill.latestActionText ?? bill.changeLabel;
-              const latestDate = billActionDate(bill.latestActionDate);
-              return (
-                <tr key={bill.billId}>
-                  <td>
-                    <button
-                      className="button ghost mono"
-                      onClick={() => onOpen(bill)}
-                    >
-                      {bill.displayNum}
-                    </button>
-                  </td>
-                  <td className={styles.titleCell}>
-                    {bill.title ?? "Title unavailable"}
-                    {bill.terminalRisk && (
-                      <small className="danger">Terminal risk</small>
-                    )}
-                  </td>
-                  <td>
-                    {latestAction ?? (latestDate ? null : "—")}
-                    {latestAction && latestDate ? " · " : null}
-                    {latestDate && <small>{latestDate}</small>}
-                  </td>
-                  <td>{bill.canonicalStatus ?? column.label}</td>
-                  <td>
-                    <span
-                      className="chip"
-                      title="Estimate supplied by the configured backend; not a confirmed outcome."
-                    >
-                      {Math.round(bill.probability * 100)}%
-                    </span>
-                  </td>
-                </tr>
-              );
-            }),
-          )}
-        </tbody>
-      </table>
-    </div>
+    <DataTable
+      rows={rows}
+      rowKey={impactRowKey}
+      caption="Tracked bills and client impact"
+      scrollRegion
+      emptyMessage="No tracked bills match this view."
+      columns={[
+        {
+          key: "bill",
+          label: "Bill",
+          render: (row) => (
+            <ActionButton onClick={() => onOpen(row)}>
+              {row.displayNum}
+            </ActionButton>
+          ),
+        },
+        ...(showClient
+          ? [
+              {
+                key: "client",
+                label: "Client",
+                render: (row: ImpactRow) => row.clientName,
+              },
+            ]
+          : []),
+        {
+          key: "title",
+          label: "Title / latest action",
+          render: (row) => (
+            <div className={styles.titleCell}>
+              <strong>{row.title}</strong>
+              <small>
+                {row.latestActionText ?? "No latest action available"}
+                {row.latestActionDate
+                  ? ` · ${billActionDate(row.latestActionDate) ?? row.latestActionDate}`
+                  : ""}
+              </small>
+            </div>
+          ),
+        },
+        {
+          key: "status",
+          label: "Status",
+          render: (row) => row.status ?? "Unavailable",
+        },
+        {
+          key: "position",
+          label: "Position / priority",
+          render: (row) => (
+            <div className={styles.titleCell}>
+              <span>{row.position ?? "Not set"}</span>
+              <small>
+                {row.priority === "med"
+                  ? "Medium"
+                  : (row.priority ?? "Not set")}
+              </small>
+            </div>
+          ),
+        },
+        {
+          key: "impact",
+          label: "Client impact",
+          render: (row) => (
+            <div className={styles.titleCell}>
+              <ImpactBadge row={row} />
+              <small>
+                {row.impact.status === "ready" && !row.impact.stale
+                  ? `${row.impact.confidence} confidence`
+                  : "Review sources"}
+              </small>
+            </div>
+          ),
+        },
+      ]}
+    />
   );
 }

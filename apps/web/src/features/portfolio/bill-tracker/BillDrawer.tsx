@@ -1,166 +1,196 @@
 "use client";
 import { useState } from "react";
-import type {
-  TrackerBackend,
-  Destinations,
-} from "@/shared/portfolio/config/config";
-import { Dialog } from "@/shared/portfolio/ui/Dialog";
-import { QueryState } from "@/shared/portfolio/ui/QueryState";
-import type { TrackedBill } from "./contracts";
-import { useTrackBill } from "./queries";
+import { ActionButton, Modal, StatusPanel, Tabs } from "@/shared/module-ui";
+import type { Destinations } from "@/shared/portfolio/config/config";
+import type { ImpactRow } from "@/shared/capiro/operations/legiwatch-impact-schemas";
 import { BillHearings } from "./BillHearings";
-import { billDate, billActionDate, fullBoardHref } from "./hearings";
-import styles from "./bill-updates.module.css";
+import { useTrackBill } from "./queries";
+import { useImpactDetail, useImpactWrite } from "./impact-queries";
+import { BillImpactEvidence, EvidenceLink } from "./BillImpactEvidence";
+import { BillContextEditor } from "./BillContextEditor";
+import { BillSourceDetails } from "./BillSourceDetails";
+import { billDate, billActionDate } from "./hearings";
+import styles from "./impact-tracker.module.css";
+
 export function BillDrawer({
   bill,
-  clientId,
-  backend,
   destinations,
   onClose,
 }: {
-  bill: TrackedBill;
-  clientId: string;
-  backend: TrackerBackend;
+  bill: ImpactRow;
   destinations: Destinations;
   onClose: () => void;
 }) {
-  const [confirm, setConfirm] = useState(false);
-  const [opener] = useState(() =>
-    typeof document === "undefined" ? null : document.activeElement,
+  const query = useImpactDetail(bill.clientId, bill.billId);
+  const write = useImpactWrite(bill.clientId, bill.billId, query.scope);
+  const untrack = useTrackBill(
+    bill.clientId,
+    query.current?.row.trackerBackend ?? bill.trackerBackend,
+    onClose,
   );
-  const untrack = useTrackBill(clientId, backend, onClose);
-  const trackedDate = billDate(bill.trackedAt);
-  const actionDate = billActionDate(bill.latestActionDate);
-  const board = fullBoardHref(destinations.externalApp, clientId);
-  // `/bills/[billId]` is served by this app, so Bill 360 keeps the existing app.
-  const detail = destinations.existingApp
-    ? `${destinations.existingApp}/bills/${encodeURIComponent(bill.billId)}?clientId=${encodeURIComponent(clientId)}`
-    : undefined;
+  const [tab, setTab] = useState("impact");
+  const [confirm, setConfirm] = useState(false);
+  const refusal = [write.error, untrack.error].find((error) =>
+    [403, 404].includes((error as { status?: number } | null)?.status ?? 0),
+  );
+  const detail = refusal ? undefined : query.current;
+  const refreshing = ["queued", "running"].includes(
+    detail?.refresh?.state ?? "",
+  );
+  const pending = write.isPending || untrack.isPending;
   return (
-    <Dialog
+    <Modal
       open
-      className={styles.dialog}
+      side="right"
+      className={styles.drawer}
       title={bill.displayNum}
-      description={bill.title ?? "Bill details"}
-      onCloseAutoFocus={(event) => {
-        if (opener instanceof HTMLElement && opener.isConnected) {
-          event.preventDefault();
-          opener.focus();
-        }
-      }}
+      description={`${bill.clientName} · ${bill.title}`}
+      closeDisabled={pending}
       onOpenChange={(open) => {
-        if (!open && !untrack.isPending) onClose();
+        if (!open && !pending) onClose();
       }}
     >
-      <div className={styles.body}>
-        <div className="row">
-          <span
-            className="chip"
-            title="Estimate supplied by the configured service, not a confirmed outcome."
-          >
-            {Math.round(bill.probability * 100)}% estimate
-          </span>
-          {bill.changeLabel && (
-            <span
-              className={`chip ${styles.change}`}
-              data-tone={bill.changeTone}
-            >
-              {bill.changeLabel}
-            </span>
+      <div className={styles.section}>
+        <StatusPanel
+          loading={query.isPending}
+          error={query.error ?? refusal}
+          onRetry={() => void query.refetch()}
+        >
+          {detail && (
+            <>
+              <div className={styles.toolbar}>
+                <div>
+                  <strong>{detail.row.status ?? "Status unavailable"}</strong>
+                  <p>
+                    {detail.row.latestActionText ??
+                      "No latest action available"}
+                  </p>
+                  {detail.row.latestActionDate && (
+                    <p className={styles.muted}>
+                      {billActionDate(detail.row.latestActionDate)}
+                    </p>
+                  )}
+                </div>
+                <EvidenceLink href={detail.row.sourceUrl}>
+                  Official bill
+                </EvidenceLink>
+              </div>
+              <Tabs
+                label="Bill detail views"
+                value={tab}
+                onChange={setTab}
+                items={[
+                  { id: "impact", label: "Client impact" },
+                  { id: "sources", label: "Actions and text" },
+                  { id: "context", label: "Position and notes" },
+                ]}
+              />
+              <StatusPanel error={write.error ?? untrack.error} />
+              {tab === "impact" && (
+                <>
+                  <div className={styles.toolbar}>
+                    <p className={styles.muted}>
+                      Grounded in bill provisions and this client’s evidence.
+                    </p>
+                    <ActionButton
+                      primary
+                      disabled={pending || refreshing || query.isFetching}
+                      onClick={() => write.mutate(undefined)}
+                    >
+                      {write.isPending || refreshing
+                        ? "Analysis queued…"
+                        : detail.row.impact.analyzedAt
+                          ? "Update impact"
+                          : "Analyze impact"}
+                    </ActionButton>
+                  </div>
+                  {refreshing && (
+                    <p role="status">
+                      {detail.refresh?.state === "running"
+                        ? "Analyzing bill provisions and client evidence…"
+                        : "Impact analysis is queued. This view will update when it is ready."}
+                    </p>
+                  )}
+                  {detail.refresh?.state === "failed" && (
+                    <p role="status">
+                      Impact refresh could not be completed. Review the
+                      available evidence or try updating again.
+                    </p>
+                  )}
+                  <p className={styles.notice}>
+                    Bill text:{" "}
+                    {detail.sourceCoverage.billText ? "available" : "missing"}.
+                    Client facts:{" "}
+                    {detail.sourceCoverage.clientFacts
+                      ? "available"
+                      : "missing"}
+                    . {detail.sourceCoverage.notes.join(" ")}
+                  </p>
+                  <BillImpactEvidence impact={detail.row.impact} />
+                </>
+              )}
+              {tab === "sources" && (
+                <>
+                  <BillSourceDetails detail={detail} />
+                  <BillHearings
+                    clientId={bill.clientId}
+                    billId={bill.billId}
+                    backend={detail.row.trackerBackend}
+                    externalApp={destinations.externalApp}
+                  />
+                </>
+              )}
+              {tab === "context" && (
+                <BillContextEditor
+                  key={JSON.stringify([
+                    detail.row.position,
+                    detail.row.priority,
+                    detail.row.note,
+                  ])}
+                  row={detail.row}
+                  pending={pending}
+                  onSave={(context) => write.mutate(context)}
+                />
+              )}
+              <section className={styles.section}>
+                <p className={styles.muted}>
+                  Tracked {billDate(detail.row.trackedAt) ?? "date unavailable"}
+                </p>
+                {confirm ? (
+                  <>
+                    <p>Remove this bill from {bill.clientName}’s tracker?</p>
+                    <div className={styles.actions}>
+                      <ActionButton
+                        disabled={pending}
+                        onClick={() => setConfirm(false)}
+                      >
+                        Cancel
+                      </ActionButton>
+                      <ActionButton
+                        disabled={pending}
+                        onClick={() =>
+                          untrack.mutate({ billId: bill.billId, track: false })
+                        }
+                      >
+                        {untrack.isPending ? "Removing…" : "Confirm untrack"}
+                      </ActionButton>
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    <ActionButton
+                      disabled={pending}
+                      onClick={() => setConfirm(true)}
+                    >
+                      Untrack bill
+                    </ActionButton>
+                  </div>
+                )}
+              </section>
+            </>
           )}
-          {bill.terminalRisk && <span className="danger">Terminal risk</span>}
-          {bill.jurisdiction && <span>{bill.jurisdiction}</span>}
-        </div>
-        <section className={styles.section}>
-          <h3>Latest update</h3>
-          <strong>{bill.canonicalStatus ?? bill.stage}</strong>
-          <p>{bill.latestActionText ?? "No latest action available."}</p>
-          {actionDate && (
-            <time dateTime={bill.latestActionDate ?? undefined}>
-              {actionDate}
-            </time>
-          )}
-        </section>
-        {bill.note && (
-          <section className={styles.section}>
-            <h3>Note</h3>
-            <p>{bill.note}</p>
-          </section>
-        )}
-        {bill.tags.length > 0 && (
-          <section className={styles.section}>
-            <h3>Matched topics</h3>
-            <div className="row">
-              {bill.tags.map((tag, index) => (
-                <span key={`${tag}-${index}`} className="chip">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </section>
-        )}
-        <BillHearings
-          clientId={clientId}
-          billId={bill.billId}
-          backend={backend}
-          externalApp={destinations.externalApp}
-        />
-        <footer className={styles.footer}>
-          {trackedDate ? (
-            <time dateTime={bill.trackedAt ?? undefined}>
-              Tracked {trackedDate}
-            </time>
-          ) : (
-            <span className="muted">Tracked date unavailable</span>
-          )}
-          {board ? (
-            <a href={board}>Open full board →</a>
-          ) : (
-            <span className="muted">
-              Full board is unavailable in this environment.
-            </span>
-          )}
-        </footer>
-        <div className={styles.secondary}>
-          {detail ? (
-            <a className="button" href={detail}>
-              Open Bill 360 ↗
-            </a>
-          ) : (
-            <p className="muted">
-              Bill 360 is unavailable in this environment.
-            </p>
-          )}
-        </div>
-        {confirm ? (
-          <>
-            <p>Remove this bill from the selected client tracker?</p>
-            <QueryState error={untrack.error} />
-            <div className="row">
-              <button
-                className="button"
-                disabled={untrack.isPending}
-                onClick={() => setConfirm(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="button"
-                disabled={untrack.isPending}
-                onClick={() =>
-                  untrack.mutate({ billId: bill.billId, track: false })
-                }
-              >
-                {untrack.isPending ? "Removing…" : "Confirm untrack"}
-              </button>
-            </div>
-          </>
-        ) : (
-          <button className="button" onClick={() => setConfirm(true)}>
-            Untrack bill
-          </button>
-        )}
+        </StatusPanel>
       </div>
-    </Dialog>
+    </Modal>
   );
 }

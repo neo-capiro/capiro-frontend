@@ -1,3 +1,8 @@
+import {
+  impactRow,
+  impactPage,
+  impactDetail,
+} from "../legiwatch-impact-fixtures";
 import { test, expect } from "@playwright/test";
 import { installFixtures, json, clientId, client } from "./fixtures";
 const billId = "hr-4455-119";
@@ -7,7 +12,7 @@ const bill = {
   billId,
   displayNum: "H.R. 4455",
   title: "Synthetic National Defense Act",
-  stage: "committee",
+  stage: "committee" as const,
   passageProbability: 0.62,
   matchedTags: ["counter-uas", "autonomy"],
   changeChip: { label: "Material change", tone: "notable" },
@@ -40,24 +45,50 @@ const hearing = {
 };
 async function install(page: Parameters<typeof installFixtures>[0]) {
   const unexpected = await installFixtures(page);
-  await page.route(
-    `**/intelligence/clients/${clientId}/tracker/board?**`,
-    (route) =>
-      json(route, {
-        columns: [{ id: "committee", label: "Committee", cards: [bill] }],
-        total: 1,
-        nextCursor: null,
-        hasMore: false,
-        withheld: 0,
-      }),
-  );
+  await page.route("**/api/capiro/legiwatch.tracker?**", (route) => {
+    const input = JSON.parse(
+      new URL(route.request().url()).searchParams.get("input") ?? "{}",
+    );
+    return json(
+      route,
+      impactPage([
+        impactRow({
+          ...bill,
+          clientId: input.query.clientId,
+          status: bill.canonicalStatus,
+          jurisdiction: "US",
+        }),
+      ]),
+    );
+  });
+  await page.route("**/api/capiro/legiwatch.impact?**", (route) => {
+    const input = JSON.parse(
+      new URL(route.request().url()).searchParams.get("input") ?? "{}",
+    );
+    return json(
+      route,
+      impactDetail(
+        impactRow({
+          ...bill,
+          clientId: input.params.clientId,
+          status: bill.canonicalStatus,
+          jurisdiction: "US",
+        }),
+      ),
+    );
+  });
   return unexpected;
 }
 async function open(page: Parameters<typeof installFixtures>[0]) {
   await page
     .getByRole("button", { name: bill.displayNum, exact: true })
     .click();
-  return page.getByRole("dialog", { name: bill.displayNum, exact: true });
+  const drawer = page.getByRole("dialog", {
+    name: bill.displayNum,
+    exact: true,
+  });
+  await drawer.getByRole("tab", { name: "Actions and text" }).click();
+  return drawer;
 }
 test("lazy linked hearing evidence uses canonical IDs and preserves board client scope and supplied latest details", async ({
   page,
@@ -81,12 +112,6 @@ test("lazy linked hearing evidence uses canonical IDs and preserves board client
     "href",
     "http://127.0.0.1:5191/existing/legiwatch/hearings/canonical-hearing",
   );
-  await expect(
-    drawer.getByRole("link", { name: "Open full board →" }),
-  ).toHaveAttribute(
-    "href",
-    `http://127.0.0.1:5191/existing/legiwatch?tab=bills&client=${clientId}`,
-  );
   await expect(drawer.getByText("12:41", { exact: true })).toBeVisible();
   await expect(
     drawer.getByText("Synthetic source statement.", { exact: true }),
@@ -96,10 +121,9 @@ test("lazy linked hearing evidence uses canonical IDs and preserves board client
     drawer.getByText("Tracked Aug 3, 2026", { exact: true }),
   ).toBeVisible();
   await expect(drawer.getByText("Sep 29, 2026", { exact: true })).toBeVisible();
-  await expect(
-    drawer.getByText("Material change", { exact: true }),
-  ).toBeVisible();
-  await expect(drawer.getByText(bill.note, { exact: true })).toBeVisible();
+  await drawer.getByRole("tab", { name: "Position and notes" }).click();
+  await expect(drawer.getByLabel("Analyst note")).toHaveValue(bill.note);
+  await drawer.getByRole("tab", { name: "Actions and text" }).click();
   expect(await drawer.locator('a[href*="capture-raw"]').count()).toBe(0);
   expect(reads).toBe(1);
   await page.keyboard.press("Escape");
@@ -175,26 +199,12 @@ test("Core owner never requests Intel hearings and retains its own board details
     hearingReads++;
     return json(route, { count: 0, hearings: [] });
   });
-  await page.route(
-    `**/core/intelligence/clients/${clientId}/tracker/board`,
-    (route) =>
-      json(route, {
-        columns: [
-          {
-            id: "committee",
-            label: "Committee",
-            bills: [
-              {
-                ...bill,
-                probability: 0.62,
-                tags: bill.matchedTags,
-                change: bill.changeChip,
-              },
-            ],
-          },
-        ],
-        total: 1,
-      }),
+  const coreBill = impactRow({ ...bill, clientId, trackerBackend: "core" });
+  await page.route("**/api/capiro/legiwatch.tracker?**", (route) =>
+    json(route, impactPage([coreBill])),
+  );
+  await page.route("**/api/capiro/legiwatch.impact?**", (route) =>
+    json(route, impactDetail(coreBill)),
   );
   await page.goto(`${path}?testBackend=core`);
   const drawer = await open(page);
@@ -325,17 +335,6 @@ test("changing client scope closes the prior bill and refuses a denied hearing r
   await page.route(`**/core/clients/${otherId}`, (route) =>
     json(route, { ...client, id: otherId, name: "Second synthetic client" }),
   );
-  await page.route(
-    `**/intelligence/clients/${otherId}/tracker/board?**`,
-    (route) =>
-      json(route, {
-        columns: [{ id: "committee", label: "Committee", cards: [bill] }],
-        total: 1,
-        nextCursor: null,
-        hasMore: false,
-        withheld: 0,
-      }),
-  );
   let deniedReads = 0;
   await page.route(
     `**/intelligence/clients/${otherId}/bills/${billId}/hearings`,
@@ -396,15 +395,15 @@ test("bill update dialog matches desktop sizing and remains scrollable in mobile
       ),
     ).toBe(1);
     const bounds = await drawer.boundingBox();
-    expect(Math.round(bounds!.width)).toBe(width === 1440 ? 560 : 358);
+    expect(Math.round(bounds!.width)).toBe(width === 1440 ? 760 : 390);
     expect(bounds!.x).toBeGreaterThanOrEqual(0);
     expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width);
-    expect(bounds!.height).toBeLessThanOrEqual(height - 32);
+    expect(bounds!.height).toBeLessThanOrEqual(height);
     await drawer
-      .getByRole("link", { name: "Open full board →" })
+      .getByRole("button", { name: "Untrack bill", exact: true })
       .scrollIntoViewIfNeeded();
     await expect(
-      drawer.getByRole("link", { name: "Open full board →" }),
+      drawer.getByRole("button", { name: "Untrack bill", exact: true }),
     ).toBeVisible();
     await drawer.screenshot({
       path: `${process.env.PORTFOLIO_BILL_HEARINGS_EVIDENCE_DIR ?? "work/bill-hearings"}/bill-updates-${width}-${theme}.png`,

@@ -101,11 +101,3 @@ export function hearingHref(
     ? `${externalApp.replace(/\/+$/, "")}/legiwatch/hearings/${encodeURIComponent(hearingId)}`
     : undefined;
 }
-export function fullBoardHref(
-  externalApp: string | undefined,
-  clientId: string,
-): string | undefined {
-  return externalApp
-    ? `${externalApp.replace(/\/+$/, "")}/legiwatch?tab=bills&client=${encodeURIComponent(clientId)}`
-    : undefined;
-}

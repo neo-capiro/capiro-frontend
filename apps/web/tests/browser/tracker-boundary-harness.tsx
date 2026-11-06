@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { useQueryClient } from "@tanstack/react-query";
-import { DataProvider } from "@/shared/portfolio/api/provider";
+import { PortfolioHarnessProviders } from "./portfolio-harness-providers";
 import { AlertPreferencesDialog } from "@/features/portfolio/bill-tracker/AlertPreferencesDialog";
 import { BillTrackerPage } from "@/features/portfolio/bill-tracker/BillTrackerPage";
 import { trackerClientId } from "../tracker-preference-fixtures";
@@ -30,7 +30,8 @@ function TrackerBoundaryHarness() {
       "tracker-test-unmount": () => setShown(false),
       "tracker-test-open": () => setShown(true),
       "tracker-test-refresh-board": () => {
-        void cache.invalidateQueries({ queryKey: ["bill-tracker"] });
+        void cache.invalidateQueries({ queryKey: ["legiwatch-tracker"] });
+        void cache.invalidateQueries({ queryKey: ["legiwatch-impact"] });
       },
       "tracker-test-refresh-preferences": () => {
         void cache.invalidateQueries({ queryKey: ["bill-alert-preferences"] });
@@ -73,7 +74,7 @@ function TrackerBoundaryHarness() {
   );
 }
 createRoot(document.getElementById("root")!).render(
-  <DataProvider>
+  <PortfolioHarnessProviders>
     <TrackerBoundaryHarness />
-  </DataProvider>,
+  </PortfolioHarnessProviders>,
 );

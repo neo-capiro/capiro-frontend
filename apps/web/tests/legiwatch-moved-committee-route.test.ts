@@ -56,3 +56,18 @@ it("keeps retained LegiWatch routes in place", () => {
   state.effects.forEach((effect) => effect());
   expect(state.replace).not.toHaveBeenCalled();
 });
+
+it("defaults LegiWatch to bills while preserving existing hearing deep links", () => {
+  state.search = "view=legiwatch";
+  expect(useLegiWatchRoute().section).toBe("bills");
+  state.search = "view=legiwatch&lw=bills&hearingId=synthetic-hearing";
+  expect(useLegiWatchRoute().section).toBe("bills");
+});
+
+it.each(["hearingId", "sessionId", "publicationSessionId"])(
+  "preserves a hearing deep link using %s",
+  (key) => {
+    state.search = `view=legiwatch&${key}=synthetic-hearing`;
+    expect(useLegiWatchRoute().section).toBe("hearings");
+  },
+);

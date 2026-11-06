@@ -8,18 +8,21 @@ import { ResearchPortfoliosScreen } from "./research-portfolios/ResearchPortfoli
 import { StrategiesScreen } from "./strategies/StrategiesScreen";
 import { WorkspaceScreen } from "./workspace/WorkspaceScreen";
 import { ObjectiveDestinationRoute } from "./objective-destinations/ObjectiveDestinationRoute";
+import type { TrackerRuntime } from "@/shared/portfolio/config/config";
 
 /** Public composition boundary; each module owns its screens and state. */
 export function ModuleScreen({
   module,
   officeEnabled = false,
   documentOperation = null,
+  trackerConfig,
 }: {
   module: ModuleSlug;
   /** Server-decided (readOfficeConfig); only the Workspace reads it. */
   officeEnabled?: boolean;
   /** Server-decided (readDocumentConfig); the Files editor's document family, only the Workspace reads it. */
   documentOperation?: "create_word" | "create_excel" | null;
+  trackerConfig?: TrackerRuntime;
 }) {
   switch (module) {
     case "directory":
@@ -31,7 +34,7 @@ export function ModuleScreen({
     case "engagement":
       return <EngagementScreen />;
     case "intelligence":
-      return <IntelligenceScreen />;
+      return <IntelligenceScreen trackerConfig={trackerConfig} />;
     case "planner":
       return (
         <ObjectiveDestinationRoute kind="planner_task">

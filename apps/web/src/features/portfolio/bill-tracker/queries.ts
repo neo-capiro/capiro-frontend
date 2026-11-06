@@ -35,11 +35,10 @@ export function useBillHearings(
 }
 export const boardKey = (clientId: string, backend: TrackerBackend) =>
   ["bill-tracker", backend, clientId] as const;
-export function useBillBoard(clientId: string, backend: TrackerBackend) {
-  const api = useApi();
+export function useTrackerReaderScope() {
   const cache = useQueryClient();
   useIdentity();
-  const scope = useSyncExternalStore(
+  return useSyncExternalStore(
     (notify) =>
       cache.getQueryCache().subscribe((event) => {
         if (event.query.queryKey[0] === "identity") notify();
@@ -47,6 +46,11 @@ export function useBillBoard(clientId: string, backend: TrackerBackend) {
     () => trackerReaderKey(cache),
     () => "",
   );
+}
+export function useBillBoard(clientId: string, backend: TrackerBackend) {
+  const api = useApi();
+  const cache = useQueryClient();
+  const scope = useTrackerReaderScope();
   const query = useInfiniteQuery({
     queryKey: [...boardKey(clientId, backend), scope],
     initialPageParam: null as string | null,
@@ -123,7 +127,20 @@ export function useTrackBill(
     },
     onSuccess: async () => {
       await cache.invalidateQueries({ queryKey: boardKey(clientId, backend) });
+      await cache.invalidateQueries({ queryKey: ["legiwatch-tracker"] });
+      await cache.invalidateQueries({
+        queryKey: ["legiwatch-impact", clientId],
+      });
       onSaved();
+    },
+    onError: async (error) => {
+      if (![403, 404].includes((error as { status?: number }).status ?? 0))
+        return;
+      cache.removeQueries({ queryKey: ["legiwatch-impact", clientId] });
+      await Promise.all([
+        cache.invalidateQueries({ queryKey: ["legiwatch-tracker"] }),
+        cache.invalidateQueries({ queryKey: boardKey(clientId, backend) }),
+      ]);
     },
   });
 }
