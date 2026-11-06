@@ -20,7 +20,7 @@ const selected = {
   query: { clientId: id(2), objectiveId: id(3), objectiveVersion: 2 },
   ids: { strategyId: id(5), strategyVersionId: id(6), generatedJobId: id(4) },
 };
-function fixture() {
+function fixture(): ReturnType<typeof objectiveSavedReview.parse> {
   return {
     destination: {
       kind: "strategy_saved_review",
