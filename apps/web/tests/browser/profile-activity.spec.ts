@@ -127,7 +127,7 @@ for (const width of [1440, 390]) {
       .getByRole("button", { name: "Edit details", exact: true })
       .click();
     const editor = page.getByRole("dialog", {
-      name: "Edit company details",
+      name: "Edit client details",
       exact: true,
     });
     await expect(editor).toBeVisible();
