@@ -238,6 +238,17 @@ export function CanvasWorkspace({
                 </Button>
               </div>
             )}
+            {state.source &&
+              state.source.headVersionId !== state.source.version.versionId && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  disabled={disabled || state.dirty}
+                  onClick={() => void controller.openLatest()}
+                >
+                  Open latest saved version
+                </Button>
+              )}
             {state.blocked && journal && (
               <Button
                 type="button"
