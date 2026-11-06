@@ -9,6 +9,8 @@ import {
 } from "../src/shared/capiro/operations/legiwatch-impact-schemas";
 import { assertImpactAssociation } from "../src/features/portfolio/bill-tracker/impact-queries";
 import { BillImpactEvidence } from "../src/features/portfolio/bill-tracker/BillImpactEvidence";
+import { BillSourceDetails } from "../src/features/portfolio/bill-tracker/BillSourceDetails";
+import { billStatusLabel } from "../src/features/portfolio/bill-tracker/impact-presentation";
 import {
   BillResults,
   impactRowKey,
@@ -115,6 +117,46 @@ describe("canonical LegiWatch tracker contract", () => {
 });
 
 describe("source-backed impact presentation", () => {
+  it("keeps the overall direction visible even without individual findings", () => {
+    const impact = {
+      ...impactRow().impact,
+      direction: "negative" as const,
+      findings: [],
+    };
+    const html = renderToStaticMarkup(
+      createElement(BillImpactEvidence, { impact }),
+    );
+    expect(html).toContain("Negative");
+    expect(html).toContain("medium");
+    expect(html).not.toContain("synthetic-model");
+  });
+  it("formats source status and civil dates and preserves structured facts without duplicating their quotation", () => {
+    expect(billStatusLabel("passed_chamber")).toBe("Passed one chamber");
+    expect(billStatusLabel("committee")).toBe("In committee");
+    expect(billStatusLabel(null)).toBe("Status unavailable");
+    const detail = impactDetail();
+    detail.actions[0]!.date = "2026-09-14 00:00:00+00";
+    const value = JSON.stringify({
+      productName: "Synthetic sensor",
+      supplier_origin: null,
+      priorities: ["Domestic supply"],
+    });
+    detail.clientFacts[0]!.value = value;
+    detail.clientFacts[0]!.citations = [
+      { ...detail.row.impact.findings[0]!.provisions[0]!, quote: value },
+    ];
+    const html = renderToStaticMarkup(
+      createElement(BillSourceDetails, { detail }),
+    );
+    expect(html).toContain("Sep 14, 2026");
+    expect(html).not.toContain("00:00:00+00");
+    expect(html).toContain("Product Name");
+    expect(html).toContain("Supplier origin");
+    expect(html).toContain("Unknown");
+    expect(html.match(/Synthetic sensor/g)).toHaveLength(1);
+    expect(html).toContain("profile-v2");
+    expect(html).toContain("<summary>Source revision</summary>");
+  });
   it("shows conditional mechanism, source quotations, revisions, uncertainty and next action", () => {
     const html = renderToStaticMarkup(
       createElement(BillImpactEvidence, { impact: impactRow().impact }),

@@ -1,6 +1,12 @@
 import { Badge } from "@/shared/module-ui";
 import type { ImpactAnalysis } from "@/shared/capiro/operations/legiwatch-impact-schemas";
 import styles from "./impact-tracker.module.css";
+import { billDate } from "./hearings";
+import {
+  ClientFactValue,
+  impactDirectionLabel,
+  SourceRevision,
+} from "./impact-presentation";
 
 export function EvidenceLink({
   href,
@@ -33,10 +39,13 @@ function Citations({
             <EvidenceLink href={citation.sourceUrl}>
               {citation.label}
             </EvidenceLink>
-            <p className={styles.muted}>
-              {citation.locator} · Revision {citation.revision}
-            </p>
-            {citation.quote && <blockquote>{citation.quote}</blockquote>}
+            <p className={styles.muted}>{citation.locator}</p>
+            {citation.quote && (
+              <blockquote>
+                <ClientFactValue value={citation.quote} />
+              </blockquote>
+            )}
+            <SourceRevision revision={citation.revision} />
           </article>
         ))
       ) : (
@@ -50,7 +59,10 @@ export function BillImpactEvidence({ impact }: { impact: ImpactAnalysis }) {
     <section className={styles.section} aria-label="Client impact analysis">
       <div className={styles.toolbar}>
         <h3>Client impact</h3>
-        <Badge>{impact.confidence} confidence</Badge>
+        <Badge>
+          {impactDirectionLabel[impact.direction]} · {impact.confidence}{" "}
+          confidence
+        </Badge>
       </div>
       {impact.stale && (
         <p role="status" className={styles.notice}>
@@ -72,8 +84,10 @@ export function BillImpactEvidence({ impact }: { impact: ImpactAnalysis }) {
       </p>
       {impact.analyzedAt && (
         <p className={styles.muted}>
-          Analyzed <time dateTime={impact.analyzedAt}>{impact.analyzedAt}</time>
-          {impact.model ? ` · ${impact.model}` : ""}
+          Analyzed{" "}
+          <time dateTime={impact.analyzedAt}>
+            {billDate(impact.analyzedAt) ?? "date unavailable"}
+          </time>
         </p>
       )}
       {impact.findings.map((finding, index) => (
@@ -81,7 +95,8 @@ export function BillImpactEvidence({ impact }: { impact: ImpactAnalysis }) {
           <div className={styles.toolbar}>
             <h4>{finding.title}</h4>
             <Badge>
-              {finding.direction} · {finding.confidence} confidence
+              {impactDirectionLabel[finding.direction]} · {finding.confidence}{" "}
+              confidence
             </Badge>
           </div>
           <p>{finding.mechanism}</p>

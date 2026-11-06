@@ -74,7 +74,10 @@ export function assertBillSearchSelection(
     );
 }
 
-/** A read scope, not write permission; native services still authorize each request. */
+/** A read scope, not write permission; native services still authorize each request.
+ * Ordinary revalidation keeps the last confirmed identity. Explicit invalidation,
+ * a failed read, or a different actor/tenant/role still retires the scope.
+ */
 export function trackerReaderKey(cache: QueryClient) {
   const state = cache.getQueryState(["identity"]);
   const identity = identitySchema.safeParse(state?.data);
@@ -82,7 +85,6 @@ export function trackerReaderKey(cache: QueryClient) {
     state?.status !== "success" ||
     state.error ||
     state.isInvalidated ||
-    state.fetchStatus !== "idle" ||
     !identity.success ||
     !identity.data.user.id.trim() ||
     !identity.data.tenant?.id.trim()

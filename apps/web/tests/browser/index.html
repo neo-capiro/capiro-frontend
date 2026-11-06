@@ -7,6 +7,10 @@
   </head>
   <body>
     <div id="root" data-portfolio-root></div>
+    <script>
+      if (window.location.pathname === "/modules/legiwatch")
+        document.getElementById("root").removeAttribute("data-portfolio-root");
+    </script>
     <script type="module" src="/main.tsx"></script>
   </body>
 </html>

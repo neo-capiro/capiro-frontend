@@ -40,6 +40,48 @@ const raw = {
   withheld: 7,
 };
 describe("current Bill Tracker reads", () => {
+  it("retains a confirmed identity during ordinary background revalidation and clears it on failure", async () => {
+    const cache = new QueryClient();
+    cache.setQueryData(["identity"], trackerIdentity);
+    const scope = trackerReaderKey(cache);
+    let fail!: (error: Error) => void;
+    const refresh = cache.fetchQuery({
+      queryKey: ["identity"],
+      staleTime: 0,
+      retry: false,
+      queryFn: () =>
+        new Promise((_, reject) => {
+          fail = reject;
+        }),
+    });
+    expect(cache.getQueryState(["identity"])?.fetchStatus).toBe("fetching");
+    expect(trackerReaderKey(cache)).toBe(scope);
+    expect(() => assertTrackerReader(cache, scope)).not.toThrow();
+    fail(new Error("Identity unavailable"));
+    await expect(refresh).rejects.toThrow("Identity unavailable");
+    expect(trackerReaderKey(cache)).toBe("");
+    expect(() => assertTrackerReader(cache, scope)).toThrow("session changed");
+  });
+  it.each(["tenant", "actor", "role"])(
+    "retires the previous scope when a revalidation changes %s",
+    async (change) => {
+      const cache = new QueryClient();
+      cache.setQueryData(["identity"], trackerIdentity);
+      const scope = trackerReaderKey(cache);
+      const identity = structuredClone(trackerIdentity);
+      if (change === "tenant") identity.tenant.id = "another-tenant";
+      if (change === "actor") identity.user.id = "another-actor";
+      if (change === "role") identity.role = "client_portal_user";
+      await cache.fetchQuery({
+        queryKey: ["identity"],
+        staleTime: 0,
+        queryFn: async () => identity,
+      });
+      expect(() => assertTrackerReader(cache, scope)).toThrow(
+        "session changed",
+      );
+    },
+  );
   it("conceals cached rows, columns and counts after a failed or pending read", () => {
     const page = intelBoard(intelBoardSchema.parse(raw));
     for (const source of [

@@ -403,7 +403,8 @@
   }
 }
 /* Keep the scoped portal layer stable when shared CSS is bundled later. */
-body:has([data-portfolio-root]) [data-slot="dialog-overlay"] {
+body:has([data-portfolio-root]) [data-slot="dialog-overlay"],
+[data-slot="dialog-overlay"]:has(+ [data-portfolio-dialog]) {
   position: fixed;
   inset: 0;
   background: #0a0a0a66;

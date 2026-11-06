@@ -1,16 +1,15 @@
 import { ActionButton, Badge, DataTable } from "@/shared/module-ui";
 import type { ImpactRow } from "@/shared/capiro/operations/legiwatch-impact-schemas";
 import { billActionDate } from "./hearings";
+import {
+  billStatusLabel,
+  impactDirectionLabel,
+  recordLabel,
+} from "./impact-presentation";
 import styles from "./impact-tracker.module.css";
 
 export const impactRowKey = (row: ImpactRow) =>
   JSON.stringify([row.clientId, row.billId]);
-const directionLabel = {
-  positive: "Positive",
-  negative: "Negative",
-  mixed: "Mixed",
-  uncertain: "Uncertain",
-};
 export function ImpactBadge({ row }: { row: ImpactRow }) {
   const impact = row.impact;
   if (impact.stale) return <Badge tone="warning">Needs refresh</Badge>;
@@ -30,7 +29,7 @@ export function ImpactBadge({ row }: { row: ImpactRow }) {
             : "neutral"
       }
     >
-      {directionLabel[impact.direction]}
+      {impactDirectionLabel[impact.direction]}
     </Badge>
   );
 }
@@ -47,7 +46,12 @@ export function BillResults({
 }) {
   if (view === "board")
     return (
-      <div className={styles.board}>
+      <div
+        className={styles.board}
+        role="region"
+        aria-label="Tracked bills by stage"
+        tabIndex={0}
+      >
         {(["introduced", "committee", "passed", "enacted", null] as const).map(
           (stage) => (
             <section className={styles.lane} key={stage ?? "unknown"}>
@@ -70,8 +74,13 @@ export function BillResults({
                     {showClient && <small>{row.clientName}</small>}
                     <ImpactBadge row={row} />
                     <small>
-                      {row.position ?? "No position"} ·{" "}
-                      {row.priority ?? "No priority"}
+                      {row.position ? recordLabel(row.position) : "No position"}{" "}
+                      ·{" "}
+                      {row.priority === "med"
+                        ? "Medium"
+                        : row.priority
+                          ? recordLabel(row.priority)
+                          : "No priority"}
                     </small>
                   </button>
                 ))}
@@ -127,18 +136,22 @@ export function BillResults({
         {
           key: "status",
           label: "Status",
-          render: (row) => row.status ?? "Unavailable",
+          render: (row) => billStatusLabel(row.status),
         },
         {
           key: "position",
           label: "Position / priority",
           render: (row) => (
             <div className={styles.titleCell}>
-              <span>{row.position ?? "Not set"}</span>
+              <span>
+                {row.position ? recordLabel(row.position) : "Not set"}
+              </span>
               <small>
                 {row.priority === "med"
                   ? "Medium"
-                  : (row.priority ?? "Not set")}
+                  : row.priority
+                    ? recordLabel(row.priority)
+                    : "Not set"}
               </small>
             </div>
           ),
