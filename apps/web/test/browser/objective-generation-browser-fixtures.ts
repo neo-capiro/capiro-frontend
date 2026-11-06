@@ -72,6 +72,72 @@ export async function fixture(page: Page, options: Options = {}) {
     value.strategyId = value.objectiveGeneration.result ? strategyId : null;
     return value;
   };
+  const nodes = [
+    {
+      id: "e0000000-0000-4000-8000-000000000001",
+      kind: "action",
+      subject: "deliverable",
+      title: "Generated engagement plan",
+      note: "Synthetic saved action details",
+      ownerUserId: null,
+      status: "draft",
+      startsOn: "2026-11-01",
+      endsOn: "2027-02-01",
+      openEnded: false,
+      dependsOnIds: [],
+    },
+    {
+      id: "e0000000-0000-4000-8000-000000000002",
+      kind: "milestone",
+      subject: "outcome",
+      title: "Generated decision milestone",
+      note: null,
+      ownerUserId: null,
+      status: "draft",
+      startsOn: "2030-11-01",
+      endsOn: null,
+      openEnded: false,
+      dependsOnIds: ["e0000000-0000-4000-8000-000000000001"],
+    },
+  ];
+  const saved = () => ({
+    destination: {
+      ...binding,
+      kind: "strategy_saved_review",
+      resourceId: strategyId,
+    },
+    source: {
+      ...binding,
+      generationJobId: job().jobId,
+      generationRequestId: job().objectiveGeneration.requestId,
+      strategyId,
+      strategyVersionId:
+        wire.completedPoll.body.objectiveGeneration.result.strategyVersionId,
+      snapshotDigest: "1".repeat(64),
+    },
+    savedAt: "2026-11-01T10:02:00.000Z",
+    context: {
+      state: "complete",
+      compiledAt: "2026-11-01T10:00:00.000Z",
+      reobservedAt: "2026-11-01T10:01:00.000Z",
+    },
+    snapshot: {
+      meta: {
+        id: strategyId,
+        clientId,
+        title: boundStrategy.strategy.title,
+        type: "regulatory",
+        goal: "Synthetic strategy goal",
+        targetDate: "2030-11-01",
+        ownerUserId: "test-user",
+      },
+      nodes,
+    },
+    currentNodes: nodes.map((node, index) => ({
+      sourceNodeId: node.id,
+      availability: index ? "archived" : "available",
+    })),
+  });
   const plan = () => {
     const value = structuredClone(
       options.partialPlan
@@ -216,6 +282,47 @@ export async function fixture(page: Page, options: Options = {}) {
     }),
     "objectives.governedStrategy.intake": intake,
     "strategies.objectiveDraftJob": () => job(),
+    "strategies.objectiveSavedReview": saved,
+    "strategies.objectiveSavedGeneration": () => ({
+      selection: {
+        query: {
+          clientId,
+          objectiveId: objective.id,
+          objectiveVersion: objective.version,
+        },
+        ids: {
+          strategyId,
+          strategyVersionId: saved().source.strategyVersionId,
+          generatedJobId: job().jobId,
+        },
+      },
+      objectiveRevisionId: binding.objectiveRevisionId,
+      savedAt: saved().savedAt,
+    }),
+    "strategies.detail": {
+      ...boundStrategy.strategy,
+      nodes: nodes.map((node) => ({
+        ...node,
+        strategyId,
+        updatedAt: "2026-11-01T10:02:00.000Z",
+      })),
+    },
+    "clients.list": [{ ...client, status: "ACTIVE", profileStatus: "ACTIVE" }],
+    "strategies.phases": [],
+    "strategies.calendars": {
+      congress: [],
+      ppbeLanes: [],
+      ppbeCurrentPhases: [],
+      source: {},
+    },
+    "strategies.watch.state": {
+      strategyId,
+      headVersionId: saved().source.strategyVersionId,
+      mission: null,
+      pendingCount: 0,
+      proposals: [],
+      lastRecheck: null,
+    },
     "strategies.objectiveDestination": boundStrategy,
     "planner.strategyMaterialization": () => plan(),
     "planner.bootstrap": () => ({ ...bootstrap, projects: projects() }),
@@ -261,7 +368,7 @@ export async function fixture(page: Page, options: Options = {}) {
       });
     },
   );
-  return { writes, starts, planWrites, job, plan, unexpected, options };
+  return { writes, starts, planWrites, job, plan, saved, unexpected, options };
 }
 export async function generate(page: Page) {
   await page

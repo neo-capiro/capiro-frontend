@@ -1,4 +1,6 @@
 "use client";
+import Link from "next/link";
+import { currentStrategyHref } from "@/shared/capiro/strategy-navigation";
 import { useCapiroQuery } from "@/shared/capiro/queries";
 import {
   requireSavedGenerationDiscovery,
@@ -52,9 +54,18 @@ export function ObjectiveSavedGenerationCard({
             {saved.selection.query.objectiveVersion}, saved{" "}
             {new Date(saved.savedAt).toLocaleString()}.
           </p>
-          <a className="button" href={savedGenerationDiscoveryHref(saved)}>
+          <Link
+            className="button primary"
+            href={currentStrategyHref(
+              saved.selection.query.clientId,
+              saved.selection.ids.strategyId,
+            )}
+          >
+            Open in Strategies
+          </Link>
+          <Link className="button" href={savedGenerationDiscoveryHref(saved)}>
             Review exact saved Strategy
-          </a>
+          </Link>
           <p className={styles.caption}>
             Later Strategy edits are separate. Reviewing this version creates no
             Planner work.

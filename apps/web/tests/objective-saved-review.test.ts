@@ -232,6 +232,18 @@ it("renders exact operative fields and explicit archive state using only the sav
   ])
     expect(html).toContain(text);
   expect(html).not.toContain("Current authorized Strategy content");
+  expect(html).toContain('aria-label="Generated strategy roadmap"');
+  expect(html).toContain("FISCAL WINDOW");
+  expect(html).toContain("FY2027");
+  expect(html).toContain(`<summary>Generation details</summary>`);
+  expect(html).toContain(
+    `href="/modules/strategies?clientId=${id(2)}&amp;strategy=${id(5)}"`,
+  );
+  expect(html).not.toContain("Add step");
+  expect(hooks.query.mock.calls.map(([operation]) => operation)).toEqual([
+    "strategies.objectiveSavedReview",
+    "strategies.objectiveSavedCitations",
+  ]);
   expect(hooks.query).toHaveBeenCalledWith("strategies.objectiveSavedReview", {
     params: { id: id(5) },
     query: {
@@ -258,6 +270,8 @@ it.each(["loading", "error", "wrong-job"])(
     );
     expect(html).not.toContain("Exact saved title");
     expect(html).not.toContain("Saved action");
+    expect(html).not.toContain("Open in Strategies");
+    expect(html).not.toContain('aria-label="Generated strategy roadmap"');
   },
 );
 it("an empty saved output stays visible without inventing work", () => {
@@ -268,4 +282,17 @@ it("an empty saved output stays visible without inventing work", () => {
   expect(
     renderToStaticMarkup(createElement(ObjectiveGeneratedStrategy, selected)),
   ).toContain("No saved steps.");
+});
+it("keeps unsorted saved nodes and archived steps in the canonical fiscal roadmap", () => {
+  const data = fixture();
+  data.snapshot.nodes[0]!.startsOn = "2030-11-01";
+  data.snapshot.nodes[0]!.endsOn = "2035-11-01";
+  hooks.query.mockReturnValue({ data, loading: false, reload: hooks.reload });
+  const html = renderToStaticMarkup(
+    createElement(ObjectiveGeneratedStrategy, selected),
+  );
+  expect(html).toContain("October 2026");
+  expect(html).toContain("Saved action");
+  expect(html).toContain("Saved risk");
+  expect(html).toContain("archived");
 });
