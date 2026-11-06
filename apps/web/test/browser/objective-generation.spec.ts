@@ -127,7 +127,10 @@ test("saved roadmap stays read-only on mobile and exposes later fiscal years and
   await expect(roadmap).toBeVisible();
   await expect(
     roadmap.getByText("Generated engagement plan", { exact: true }),
-  ).toHaveCount(2);
+  ).toBeVisible();
+  await expect(
+    roadmap.getByText("Generated decision milestone", { exact: true }),
+  ).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: "Add step", exact: true }),
   ).toHaveCount(0);
@@ -140,7 +143,7 @@ test("saved roadmap stays read-only on mobile and exposes later fiscal years and
   await expect(roadmap.getByText("FY2029", { exact: true })).toBeVisible();
   await expect(
     roadmap.getByText("Generated decision milestone", { exact: true }),
-  ).toHaveCount(2);
+  ).toBeVisible();
   await page.getByText("Saved step details (2)", { exact: true }).click();
   await expect(
     page.getByText("Current source availability: archived", { exact: true }),
