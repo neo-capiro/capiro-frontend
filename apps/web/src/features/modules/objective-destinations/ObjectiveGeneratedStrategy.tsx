@@ -6,7 +6,7 @@ import {
   type SavedStrategySelection,
 } from "../../../shared/capiro/operations/objective-saved-review";
 import { currentStrategyHref } from "../../../shared/capiro/strategy-navigation";
-import { Panel } from "../../../shared/module-ui";
+import { ActionButton, Panel } from "../../../shared/module-ui";
 import { StrategyRoadmap } from "../strategies/strategy-timeline-public";
 import { ObjectiveDestinationFrame } from "./ObjectiveDestinationFrame";
 import styles from "./objective-destinations.module.css";
@@ -41,6 +41,7 @@ export function ObjectiveGeneratedStrategy({
   return (
     <ObjectiveDestinationFrame
       title="Generated Strategy"
+      description="Review the generated roadmap, then open it in Strategies to continue working on the plan."
       selected={query}
       loading={read.loading}
       error={error}
@@ -68,15 +69,16 @@ function SavedStrategyContent({ saved }: { saved: SavedStrategy }) {
           Generated {new Date(saved.savedAt).toLocaleString()}. This roadmap
           shows the exact saved output.
         </p>
-        <Link
-          className="button primary"
-          href={currentStrategyHref(
-            saved.source.clientId,
-            saved.source.strategyId,
-          )}
-        >
-          Open in Strategies
-        </Link>
+        <ActionButton primary asChild>
+          <Link
+            href={currentStrategyHref(
+              saved.source.clientId,
+              saved.source.strategyId,
+            )}
+          >
+            Open in Strategies
+          </Link>
+        </ActionButton>
         <p>
           Open the working timeline to review and edit the current Strategy.
         </p>
