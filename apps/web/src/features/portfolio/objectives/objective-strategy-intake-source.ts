@@ -5,6 +5,8 @@ import {
 } from "@/shared/capiro/operations/objective-governed-generation";
 import type { Client } from "@/shared/session/client-contract";
 import type { Objective } from "./contracts";
+import type { GovernedObjectiveStrategyIntakeResponse } from "@/shared/capiro/operations/objective-governed-strategy-intake";
+import type { ObjectiveGenerationJob } from "@/shared/capiro/operations/objective-generation";
 
 export type StrategyIntakeObjective = Pick<
   Objective,
@@ -31,7 +33,7 @@ export function strategyIntakeReadRequest(
 }
 
 /** A read supplies current scope and CAS fields. Only Core can authorize intake. */
-export function requireInitialStrategyIntakeSource(
+export function requireStrategyIntakeSource(
   value: unknown,
   objective: StrategyIntakeObjective,
   client: StrategyIntakeClient,
@@ -43,10 +45,7 @@ export function requireInitialStrategyIntakeSource(
     read.objective.revision.version !== objective.version ||
     read.requestedSource.revision.id !== read.objective.revision.id ||
     read.requestedSource.revision.version !== read.objective.revision.version ||
-    read.control.version !== 0 ||
-    read.control.currentAuthorizationRequestId !== null ||
     read.control.cancelledAt !== null ||
-    read.consent !== null ||
     read.accounting !== null ||
     read.commandReceipt !== null
   )
@@ -55,5 +54,56 @@ export function requireInitialStrategyIntakeSource(
     );
   // A normal Core read can report outcome_unconfirmed without write-side
   // absence proof. This local guard is never a substitute for Core admission.
+  return read;
+}
+
+export function requireInitialStrategyIntakeSource(
+  value: unknown,
+  objective: StrategyIntakeObjective,
+  client: StrategyIntakeClient,
+) {
+  const read = requireStrategyIntakeSource(value, objective, client);
+  if (read.control.version !== 0 || read.consent !== null)
+    throw new Error(
+      "Current Strategy intake is unavailable. Refresh the saved Objective and work status.",
+    );
+  return read;
+}
+
+/** This only offers explicit consent. Core proves all prior work stopped before
+ * publication under its write locks; expiry or a GET is never absence proof. */
+export function requireRetryStrategyIntakeSource(
+  value: unknown,
+  objective: StrategyIntakeObjective,
+  client: StrategyIntakeClient,
+  accepted?: GovernedObjectiveStrategyIntakeResponse,
+  job?: ObjectiveGenerationJob,
+) {
+  const read = requireStrategyIntakeSource(value, objective, client);
+  const consent = read.consent;
+  if (
+    !consent ||
+    read.control.version < 1 ||
+    (accepted &&
+      (accepted.commandReceipt.authorizationRequestId !== consent.id ||
+        accepted.commandReceipt.controlVersionAfter !== read.control.version ||
+        accepted.commandReceipt.sourceRevision.id !==
+          read.requestedSource.revision.id ||
+        !job ||
+        job.jobId !== accepted.generationJobId))
+  )
+    throw new Error(
+      "Refresh the previous generation attempt before requesting another.",
+    );
+  const expired = consent.expired && (!job || job.status === "queued");
+  const failed =
+    accepted &&
+    job?.status === "failed" &&
+    job.objectiveGeneration.failure?.code === "OBJECTIVE_CONTEXT_INCOMPLETE" &&
+    job.objectiveGeneration.context.state === "incomplete";
+  if (job?.objectiveGeneration.result || (!expired && !failed))
+    throw new Error(
+      "The previous generation must be expired or confirmed failed before requesting another.",
+    );
   return read;
 }

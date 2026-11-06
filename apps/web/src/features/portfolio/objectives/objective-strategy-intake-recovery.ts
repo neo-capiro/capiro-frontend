@@ -14,6 +14,7 @@ import {
   reserveRecovery,
   updateRecovery,
   withRecoveryCommandLock,
+  acknowledgeRecovery,
 } from "@/shared/session/recovery/journal";
 import { governedObjectiveGenerationObservation } from "@/shared/capiro/operations/objective-governed-generation";
 import {
@@ -27,7 +28,7 @@ import type {
   StrategyIntakeClient,
   StrategyIntakeObjective,
 } from "./objective-strategy-intake-source";
-import { requireInitialStrategyIntakeSource } from "./objective-strategy-intake-source";
+import { requireStrategyIntakeSource } from "./objective-strategy-intake-source";
 
 const retainedSchema = z
   .strictObject({
@@ -40,7 +41,7 @@ const retainedSchema = z
   .refine((value) => {
     try {
       const request = value.request;
-      const origin = requireInitialStrategyIntakeSource(
+      const origin = requireStrategyIntakeSource(
         value.origin,
         {
           clientId: request.params.clientId,
@@ -52,7 +53,11 @@ const retainedSchema = z
       );
       if (
         origin.requestedSource.canonicalBindingVersion !==
-        request.body.command.expectedCanonicalBindingVersion
+          request.body.command.expectedCanonicalBindingVersion ||
+        origin.control.version !==
+          request.body.command.expectedControlVersion ||
+        origin.control.currentAuthorizationRequestId !==
+          request.body.command.targetAuthorizationRequestId
       )
         return false;
       if (value.accepted)
@@ -108,6 +113,7 @@ export interface StrategyIntakeRecovery {
     origin: RetainedStrategyIntake["origin"],
   ): Promise<RetainedStrategyIntake>;
   save(value: RetainedStrategyIntake): Promise<void>;
+  acknowledge(value: RetainedStrategyIntake): Promise<void>;
   lock<T>(action: () => Promise<T>): Promise<T>;
 }
 
@@ -190,6 +196,22 @@ export function createStrategyIntakeRecovery(
         contract,
         guard,
       ),
+    acknowledge: async (value) => {
+      const current = await readRecovery(scope, contract, guard);
+      if (
+        !value.accepted ||
+        !current?.accepted ||
+        JSON.stringify(current) !== JSON.stringify(value)
+      )
+        throw new Error(
+          "The original Strategy request must be confirmed before requesting another.",
+        );
+      await acknowledgeRecovery(
+        scope,
+        value.request.body.command.requestId,
+        guard,
+      );
+    },
     lock: (action) => withRecoveryCommandLock(scope, guard, action),
   };
 }

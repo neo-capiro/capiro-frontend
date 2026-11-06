@@ -368,7 +368,7 @@ export async function fixture(page: Page, options: Options = {}) {
       });
     },
   );
-  return { writes, starts, planWrites, job, plan, saved, unexpected, options };
+  return { writes, starts, planWrites, job, plan, saved, unexpected, options, source, intake };
 }
 export async function generate(page: Page) {
   await page
