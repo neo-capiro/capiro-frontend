@@ -51,10 +51,10 @@
     color-scheme: dark;
   }
 }
-:where(body:has([data-portfolio-root])) * {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) * {
   box-sizing: border-box;
 }
-:where(body:has([data-portfolio-root])) {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
@@ -62,136 +62,142 @@
     14px/1.45 var(--font-geist-sans),
     sans-serif;
 }
-:where(body:has([data-portfolio-root])) button,
-:where(body:has([data-portfolio-root])) input,
-:where(body:has([data-portfolio-root])) textarea,
-:where(body:has([data-portfolio-root])) select {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) button,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) input,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) textarea,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) select {
   font: inherit;
   color: inherit;
 }
-:where(body:has([data-portfolio-root])) button,
-:where(body:has([data-portfolio-root])) a,
-:where(body:has([data-portfolio-root])) input,
-:where(body:has([data-portfolio-root])) textarea,
-:where(body:has([data-portfolio-root])) select {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) button,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) a,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) input,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) textarea,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) select {
   -webkit-tap-highlight-color: transparent;
 }
-:where(body:has([data-portfolio-root])) button {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) button {
   cursor: pointer;
 }
-:where(body:has([data-portfolio-root])) button:disabled {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+  button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
-:where(body:has([data-portfolio-root])) a {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) a {
   color: inherit;
   text-decoration: none;
 }
-:where(body:has([data-portfolio-root])) a:hover {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) a:hover {
   text-decoration: underline;
 }
-:where(body:has([data-portfolio-root])) button:focus-visible,
-:where(body:has([data-portfolio-root])) a:focus-visible,
-:where(body:has([data-portfolio-root])) input:focus-visible,
-:where(body:has([data-portfolio-root])) textarea:focus-visible,
-:where(body:has([data-portfolio-root])) select:focus-visible {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+  button:focus-visible,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+  a:focus-visible,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+  input:focus-visible,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+  textarea:focus-visible,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+  select:focus-visible {
   outline: 2px solid var(--foreground);
   outline-offset: 3px;
 }
-:where(body:has([data-portfolio-root])) h1,
-:where(body:has([data-portfolio-root])) h2,
-:where(body:has([data-portfolio-root])) h3,
-:where(body:has([data-portfolio-root])) p {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) h1,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) h2,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) h3,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) p {
   margin: 0;
 }
-:where(body:has([data-portfolio-root])) h1 {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) h1 {
   font-size: 30px;
   line-height: 1.15;
   letter-spacing: -0.9px;
   font-weight: 600;
 }
-:where(body:has([data-portfolio-root])) h2 {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) h2 {
   font-size: 18px;
   letter-spacing: -0.36px;
   font-weight: 600;
 }
-:where(body:has([data-portfolio-root])) h3 {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) h3 {
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.15px;
 }
-:where(body:has([data-portfolio-root])) input,
-:where(body:has([data-portfolio-root])) textarea,
-:where(body:has([data-portfolio-root])) select {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) input,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) textarea,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) select {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
   padding: 9px 12px;
   max-width: 100%;
 }
-:where(body:has([data-portfolio-root])) textarea {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) textarea {
   resize: vertical;
   min-height: 100px;
 }
-:where(body:has([data-portfolio-root])) label {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) label {
   display: grid;
   gap: 6px;
   font-size: 13px;
   font-weight: 500;
 }
-:where(body:has([data-portfolio-root])) small,
-:where(body:has([data-portfolio-root])) .muted {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) small,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .muted {
   color: var(--muted-foreground);
 }
-:where(body:has([data-portfolio-root])) code {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) code {
   font-family: var(--font-geist-mono), monospace;
 }
-:where(body:has([data-portfolio-root])) .centered {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .centered {
   display: grid;
   place-content: center;
   min-height: 100vh;
   padding: 24px;
   gap: 20px;
 }
-:where(body:has([data-portfolio-root])) .page {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .page {
   padding: 28px 32px;
   max-width: 1680px;
   margin: auto;
 }
-:where(body:has([data-portfolio-root])) .pageHeader {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .pageHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
   margin-bottom: 24px;
 }
-:where(body:has([data-portfolio-root])) .stack {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .stack {
   display: grid;
   gap: 16px;
 }
-:where(body:has([data-portfolio-root])) .row {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .row {
   display: flex;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
 }
-:where(body:has([data-portfolio-root])) .between {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .between {
   justify-content: space-between;
 }
-:where(body:has([data-portfolio-root]))
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog])
   .grid:where(:not([data-slot="dialog-content"])) {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
-:where(body:has([data-portfolio-root])) .card {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
   box-shadow: var(--shadow);
   padding: 22px 24px;
 }
-:where(body:has([data-portfolio-root])) .button {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -205,29 +211,30 @@
   font-size: 14px;
   line-height: 1.2;
 }
-:where(body:has([data-portfolio-root])) .button:hover {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .button:hover {
   background: var(--accent);
   text-decoration: none;
 }
-:where(body:has([data-portfolio-root])) .primary {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .primary {
   background: var(--dark-gradient);
   background-color: #0a0a0a;
   border-color: #242424;
   color: #fff;
 }
-:where(body:has([data-portfolio-root])) .primary:hover {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+  .primary:hover {
   background: #343434;
 }
-:where(body:has([data-portfolio-root])) .ghost {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .ghost {
   background: transparent;
   border-color: transparent;
 }
-:where(body:has([data-portfolio-root])) .iconButton {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .iconButton {
   padding: 8px;
   width: 36px;
   height: 36px;
 }
-:where(body:has([data-portfolio-root])) .chip {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .chip {
   display: inline-flex;
   gap: 6px;
   align-items: center;
@@ -238,17 +245,17 @@
   font-size: 12px;
   font-weight: 500;
 }
-:where(body:has([data-portfolio-root])) .eyebrow {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .eyebrow {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.66px;
   text-transform: uppercase;
   color: var(--muted-foreground);
 }
-:where(body:has([data-portfolio-root])) .danger {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .danger {
   color: var(--danger);
 }
-:where(body:has([data-portfolio-root])) .status {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .status {
   padding: 24px;
   text-align: center;
   border: 1px dashed var(--border-strong);
@@ -257,46 +264,51 @@
   gap: 12px;
   justify-items: center;
 }
-:where(body:has([data-portfolio-root])) .error {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .error {
   border-color: var(--danger);
 }
-:where(body:has([data-portfolio-root])) .toolbar {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .toolbar {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
   margin-bottom: 20px;
 }
-:where(body:has([data-portfolio-root])) .toolbar input {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+  .toolbar
+  input {
   min-width: 180px;
 }
-:where(body:has([data-portfolio-root])) .tableWrap {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .tableWrap {
   position: relative;
   overflow: auto;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--card);
 }
-:where(body:has([data-portfolio-root])) table {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) table {
   border-collapse: collapse;
   width: 100%;
   text-align: left;
 }
-:where(body:has([data-portfolio-root])) th {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) th {
   font-weight: 500;
   font-size: 12px;
   color: var(--muted-foreground);
   background: var(--muted);
 }
-:where(body:has([data-portfolio-root])) td,
-:where(body:has([data-portfolio-root])) th {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) td,
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) th {
   padding: 14px 18px;
   border-bottom: 1px solid var(--border);
 }
-:where(body:has([data-portfolio-root])) tbody tr:last-child td {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+  tbody
+  tr:last-child
+  td {
   border-bottom: 0;
 }
-:where(body:has([data-portfolio-root])) .monogram {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .monogram {
   display: grid;
   place-content: center;
   width: 44px;
@@ -307,40 +319,40 @@
   border-radius: 10px;
   font-weight: 600;
 }
-:where(body:has([data-portfolio-root])) .truncate {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-:where(body:has([data-portfolio-root])) .empty {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .empty {
   padding: 36px;
   text-align: center;
   color: var(--muted-foreground);
 }
-:where(body:has([data-portfolio-root])) .formGrid {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .formGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
-:where(body:has([data-portfolio-root])) .formActions {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .formActions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-top: 12px;
 }
-:where(body:has([data-portfolio-root])) .divider {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .divider {
   border: 0;
   border-top: 1px solid var(--border);
   margin: 8px 0;
 }
-:where(body:has([data-portfolio-root])) .srOnly {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .srOnly {
   position: absolute;
   width: 1px;
   height: 1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
 }
-:where(body:has([data-portfolio-root])) .skip {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .skip {
   position: absolute;
   top: -100px;
   left: 16px;
@@ -348,41 +360,45 @@
   background: var(--card);
   padding: 12px;
 }
-:where(body:has([data-portfolio-root])) .skip:focus {
+:where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .skip:focus {
   top: 8px;
 }
 @media (max-width: 1100px) {
-  :where(body:has([data-portfolio-root]))
+  :where(body:has([data-portfolio-root]), [data-portfolio-dialog])
     .grid:where(:not([data-slot="dialog-content"])) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  :where(body:has([data-portfolio-root])) .page {
+  :where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .page {
     padding: 24px;
   }
 }
 @media (max-width: 680px) {
-  :where(body:has([data-portfolio-root])) .page {
+  :where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .page {
     padding: 20px 16px;
   }
-  :where(body:has([data-portfolio-root])) .pageHeader {
+  :where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .pageHeader {
     align-items: flex-start;
   }
-  :where(body:has([data-portfolio-root])) h1 {
+  :where(body:has([data-portfolio-root]), [data-portfolio-dialog]) h1 {
     font-size: 26px;
   }
-  :where(body:has([data-portfolio-root]))
+  :where(body:has([data-portfolio-root]), [data-portfolio-dialog])
     .grid:where(:not([data-slot="dialog-content"])),
-  :where(body:has([data-portfolio-root])) .formGrid {
+  :where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .formGrid {
     grid-template-columns: 1fr;
   }
-  :where(body:has([data-portfolio-root])) .card {
+  :where(body:has([data-portfolio-root]), [data-portfolio-dialog]) .card {
     padding: 18px;
   }
-  :where(body:has([data-portfolio-root])) .toolbar input {
+  :where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+    .toolbar
+    input {
     flex: 1;
     min-width: 120px;
   }
-  :where(body:has([data-portfolio-root])) .pageHeader .button {
+  :where(body:has([data-portfolio-root]), [data-portfolio-dialog])
+    .pageHeader
+    .button {
     font-size: 12px;
   }
 }

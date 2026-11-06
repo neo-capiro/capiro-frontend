@@ -10,6 +10,7 @@ import { LegiWatchScreen } from "./legiwatch/LegiWatchScreen";
 import { ResearchWorkspace } from "./research/ResearchWorkspace";
 import { ResearchCoverage } from "./research/ResearchCoverage";
 import { ChangesWorkspace } from "./changes/ChangesWorkspace";
+import type { TrackerRuntime } from "@/shared/portfolio/config/config";
 const views = [
   { id: "explorer", label: "Data Explorer" },
   { id: "legiwatch", label: "LegiWatch" },
@@ -22,7 +23,11 @@ const views = [
   { id: "coverage", label: "Research Coverage" },
   { id: "changes", label: "Changes" },
 ];
-export function IntelligenceScreen() {
+export function IntelligenceScreen({
+  trackerConfig,
+}: {
+  trackerConfig?: TrackerRuntime;
+}) {
   const params = useSearchParams();
   const hint = params.get("view");
   const router = useRouter(),
@@ -36,7 +41,8 @@ export function IntelligenceScreen() {
     if (clientId) search.set("clientId", clientId);
     router.push(`${pathname}?${search}`);
   };
-  if (view === "legiwatch") return <LegiWatchScreen />;
+  if (view === "legiwatch")
+    return <LegiWatchScreen trackerConfig={trackerConfig} />;
   // District Nexus owns its own header (Figma 3.4 1064:241658 puts the Scope,
   // Freshness and Data quality controls on the title row), so it composes the
   // header itself the same way LegiWatchScreen does. The tab strip is passed

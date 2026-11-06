@@ -33,6 +33,10 @@ export type RuntimeConfig = {
   issues: string[];
   requestOrigin?: string | null;
 };
+export type TrackerRuntime = Pick<
+  RuntimeConfig,
+  "trackerBackend" | "trackerMetricsVersion" | "destinations"
+>;
 const variables: Record<Service, string> = {
   core: "CORE_API_BASE_URL",
   strategy: "STRATEGY_API_BASE_URL",

@@ -1,3 +1,4 @@
+import { LegiWatchScreen } from "@/features/modules/intelligence/legiwatch/LegiWatchScreen";
 import { createRoot } from "react-dom/client";
 import { AcceptanceActivityAuthorityHarness } from "./acceptance-activity-authority-harness";
 import { AcceptanceBillSearchHarness } from "./acceptance-bill-search-harness";
@@ -58,6 +59,15 @@ const destinations = {
 function App() {
   const path = usePathname();
   const search = useSearchParams();
+  if (path === "/modules/legiwatch")
+    return (
+      <main style={{ padding: 24 }}>
+        <p>Synthetic LegiWatch fixture. All requests are intercepted.</p>
+        <LegiWatchScreen
+          trackerConfig={{ trackerBackend: "intelligence", destinations: {} }}
+        />
+      </main>
+    );
   if (path === "/__test/preview-clients")
     return <PreviewClientCatalog destinations={destinations} />;
   if (path === "/__test/preview-modules")

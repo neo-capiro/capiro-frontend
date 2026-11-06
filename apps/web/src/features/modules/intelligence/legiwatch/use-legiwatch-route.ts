@@ -3,7 +3,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { movedCommitteeDirectoryHref } from "../../directory/public";
 
-export type LegiWatchView = "hearings" | "updates" | "more";
+export type LegiWatchView = "bills" | "hearings" | "updates" | "more";
 export function useLegiWatchRoute() {
   const search = useSearchParams(),
     router = useRouter(),
@@ -17,18 +17,25 @@ export function useLegiWatchRoute() {
     }
     router.push(`${pathname}?${next}`, { scroll: false });
   };
-  const active = search.get("lw") ?? "hearings";
+  const hearingDetail =
+    search.get("hearingId") ||
+    search.get("sessionId") ||
+    search.get("publicationSessionId");
+  const active = search.get("lw") ?? (hearingDetail ? "hearings" : "bills");
   const movedCommitteeHref =
     active === "committees" ? movedCommitteeDirectoryHref(search) : null;
   useEffect(() => {
     if (movedCommitteeHref)
       router.replace(movedCommitteeHref, { scroll: false });
   }, [movedCommitteeHref, router]);
-  const section: LegiWatchView = ["hearings", "updates", "more"].includes(
-    active,
-  )
+  const section: LegiWatchView = [
+    "bills",
+    "hearings",
+    "updates",
+    "more",
+  ].includes(active)
     ? (active as LegiWatchView)
-    : "hearings";
+    : "bills";
   return {
     movedCommitteeHref,
     section,

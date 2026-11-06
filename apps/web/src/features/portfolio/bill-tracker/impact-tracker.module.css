@@ -1,0 +1,197 @@
+.page {
+  display: grid;
+  gap: 20px;
+  padding: 28px 32px;
+  font-size: 14px;
+  color: var(--foreground);
+}
+.embedded {
+  padding: 0;
+}
+.page h1 {
+  font-size: 20px;
+  font-weight: 500;
+}
+.page h2,
+.section h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.page h3,
+.section h4 {
+  font-size: 13px;
+  font-weight: 600;
+}
+.card {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.filters {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.filters > div {
+  min-width: 180px;
+}
+.filters input {
+  min-width: 240px;
+}
+.muted {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.metrics > div {
+  display: grid;
+  gap: 4px;
+  padding: 14px 20px;
+}
+.metrics strong {
+  font-size: 22px;
+}
+.titleCell {
+  display: grid;
+  gap: 5px;
+  min-width: 110px;
+  max-width: 300px;
+}
+.titleCell small {
+  color: var(--muted-foreground);
+  white-space: normal;
+}
+.board {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+.lane {
+  flex: 0 0 240px;
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  background: var(--muted);
+  border-radius: 12px;
+}
+.billCard {
+  display: grid;
+  gap: 10px;
+  text-align: left;
+  border: 1px solid var(--border);
+  background: var(--card);
+  padding: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.drawer {
+  width: min(760px, 100vw);
+  max-width: none;
+  background: var(--card);
+  color: var(--foreground);
+}
+.section {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.section + .section {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+.section ul,
+.section ol {
+  padding-left: 22px;
+}
+.section li {
+  margin-bottom: 8px;
+}
+.section a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.section blockquote {
+  margin: 8px 0;
+  padding: 8px 12px;
+  border-left: 3px solid var(--border);
+  color: var(--muted-foreground);
+  white-space: pre-wrap;
+}
+.finding {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.evidence {
+  display: grid;
+  gap: 10px;
+}
+.notice {
+  padding: 12px;
+  background: var(--muted);
+  border-radius: 8px;
+  font-size: 13px;
+}
+.timeline {
+  display: grid;
+  gap: 12px;
+}
+.hash {
+  overflow-wrap: anywhere;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+}
+.section input,
+.section textarea {
+  max-width: 100%;
+}
+@media (max-width: 680px) {
+  .page {
+    padding: 16px;
+  }
+  .embedded {
+    padding: 0;
+  }
+  .card {
+    padding: 12px;
+  }
+  .filters {
+    align-items: stretch;
+  }
+  .filters > div,
+  .filters input {
+    min-width: 0;
+    width: 100%;
+  }
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+}

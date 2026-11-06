@@ -23,7 +23,7 @@ test("an empty schedule still shows incomplete source coverage", async ({
     ...hearingFixtures,
     "legiwatch.calendar": { rows: [], total: 0, page: 1, pageSize: 200 },
   });
-  await page.goto("/modules/intelligence?view=legiwatch");
+  await page.goto("/modules/intelligence?view=legiwatch&lw=hearings");
   await expect(page.getByText("No hearings match these filters")).toBeVisible();
   await expect(
     page.getByText(
@@ -43,7 +43,7 @@ test("Florida filters use state committee IDs and clear when jurisdiction change
       return hearingFixtures["legiwatch.calendar"];
     },
   });
-  await page.goto("/modules/intelligence?view=legiwatch");
+  await page.goto("/modules/intelligence?view=legiwatch&lw=hearings");
   await page.getByLabel("Jurisdiction", { exact: true }).selectOption("FL");
   await page
     .getByLabel("Committee", { exact: true })
@@ -100,7 +100,7 @@ test("browser history follows its cursor to older recordings", async ({
       };
     },
   });
-  await page.goto("/modules/intelligence?view=legiwatch");
+  await page.goto("/modules/intelligence?view=legiwatch&lw=hearings");
   await page.getByRole("button", { name: "Recordings", exact: true }).click();
   await page.getByRole("button", { name: "My browser sessions" }).click();
   await expect(page.getByText("Synthetic latest room")).toBeVisible();

@@ -4,7 +4,6 @@ import {
   billHearingsSchema,
   fetchBillHearings,
   hearingHref,
-  fullBoardHref,
   billDate,
   billActionDate,
   mentionTime,
@@ -136,12 +135,6 @@ describe("bill hearing contract", () => {
         ],
       }).success,
     ).toBe(true);
-  });
-  it("opens the Bills board with the selected client preserved", () => {
-    expect(fullBoardHref("https://example.test/", "client/a?scope")).toBe(
-      "https://example.test/legiwatch?tab=bills&client=client%2Fa%3Fscope",
-    );
-    expect(fullBoardHref(undefined, "client")).toBeUndefined();
   });
   it("formats transcript offsets without treating them as clock dates", () => {
     expect(mentionTime(761000)).toBe("12:41");

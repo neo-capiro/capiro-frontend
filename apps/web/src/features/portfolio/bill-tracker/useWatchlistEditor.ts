@@ -146,6 +146,7 @@ export function useWatchlistEditor(
       setState({ base: result, draft: nextDraft, rejections, operation: id });
       if (kind === "save") {
         effectsCurrent();
+        void cache.invalidateQueries({ queryKey: ["legiwatch-tracker"] });
         void cache.invalidateQueries({
           queryKey: [
             ...boardKey(view.clientId, view.backend),

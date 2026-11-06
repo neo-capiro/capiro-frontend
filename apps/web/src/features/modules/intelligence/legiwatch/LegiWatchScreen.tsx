@@ -9,13 +9,20 @@ import { MoreScreen } from "./more/MoreScreen";
 import { PublicationWorkspace } from "./publications/PublicationWorkspace";
 import { UpdatesScreen } from "./updates/UpdatesScreen";
 import { useLegiWatchRoute } from "./use-legiwatch-route";
+import { BillTrackerScreen } from "./BillTrackerScreen";
+import type { TrackerRuntime } from "@/shared/portfolio/config/config";
 
 const tabs = [
-  { id: "hearings", label: "Hearings" },
+  { id: "bills", label: "Bill tracker" },
+  { id: "hearings", label: "Live hearings" },
   { id: "updates", label: "Updates" },
   { id: "more", label: "More" },
 ] as const;
-export function LegiWatchScreen() {
+export function LegiWatchScreen({
+  trackerConfig,
+}: {
+  trackerConfig?: TrackerRuntime;
+}) {
   const route = useLegiWatchRoute();
   const more = moreCatalog.find((item) => item.id === route.moreView);
   const publicationSessionId = route.search.get("publicationSessionId");
@@ -52,7 +59,9 @@ export function LegiWatchScreen() {
         : route.section === "more"
           ? (moreCatalog.find((item) => item.id === route.moreView)?.title ??
             "More LegiWatch")
-          : "Hearings";
+          : route.section === "bills"
+            ? "Bill tracker"
+            : "Live hearings";
   return (
     <div className={styles.screen} data-figma-node="411:123078">
       <LegiWatchHeader
@@ -62,7 +71,9 @@ export function LegiWatchScreen() {
             ? undefined
             : route.section === "more"
               ? more?.description
-              : "Discover federal and Florida proceedings. Follow updates or open a hearing to attend."
+              : route.section === "bills"
+                ? "Track bills across your clients and review what each bill could mean for them."
+                : "Discover federal and Florida proceedings. Follow updates or open a hearing to attend."
         }
       />
       <LegiWatchTabs
@@ -82,6 +93,8 @@ export function LegiWatchScreen() {
         <BrowserRoom sessionId={route.sessionId} />
       ) : route.hearingId ? (
         <HearingDetailScreen hearingId={route.hearingId} />
+      ) : route.section === "bills" ? (
+        <BillTrackerScreen config={trackerConfig} />
       ) : route.section === "hearings" ? (
         <HearingsScreen />
       ) : route.section === "updates" ? (

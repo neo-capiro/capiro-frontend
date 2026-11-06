@@ -9,6 +9,7 @@ import {
 import { useRef, type ComponentProps, type ReactNode } from "react";
 import { X } from "lucide-react";
 import styles from "./dialog.module.css";
+import "../styles.css";
 import { useDialogDisabledFocus } from "./dialog-focus";
 import {
   useDialogOverlayDismissal,
@@ -74,6 +75,7 @@ export function Dialog({
   return (
     <DialogRoot open={open} onOpenChange={onOpenChange}>
       <DialogContent
+        data-portfolio-dialog
         ref={content}
         onFocusCapture={rememberFocus}
         aria-modal="true"

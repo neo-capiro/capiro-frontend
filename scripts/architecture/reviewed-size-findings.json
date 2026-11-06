@@ -928,19 +928,19 @@
     "file": "apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
     "kind": "function",
     "symbol": "useWatchlistEditor",
-    "fingerprint": "2cc1d14d317e06ce727cc1cbd040a7f94329381b00e2aadde830c5cf2d10f58b",
-    "reason": "Owns one retained targeting draft and its explicit save/reload transaction. Native request projection and receipt parsing, current actor/client/source assertions, and synchronous interruption/uncertainty tracking have separate module owners. The remaining state and cache/UI effect sequence is one coupled editor lifetime: publishing a receipt, advancing the base version and retaining rejected edits must agree before closing this exact view.",
-    "reviewedBy": "Codex portfolio_objectives",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "4d9cf911f9b3b5f9fcbb8de7e7b1c1458a734ccdf8a9cb19a35eb31de4b5e233",
+    "reason": "Preserves one existing watchlist editing lifecycle. The added canonical-list invalidation occurs only inside the successful effectsCurrent-validated save path; dispatch, readback and error semantics are unchanged.",
+    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "reviewedOn": "2026-11-06"
   },
   {
     "file": "apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
     "kind": "function",
     "symbol": "useWatchlistEditor > execute",
-    "fingerprint": "4914c34f0a94cbff51f4dee37173c2710c0d855e293e85e2e32b30af1b669f99",
-    "reason": "Runs one selected save or read-only reload from a captured reviewed source through the same interruption latch, then checks the exact replacement source revision before each cache or UI effect. The two branches deliberately share lifetime and failure handling; native Core/Intel dispatch and receipt semantics are delegated to watchlist-writer. No unrelated service, global authorization owner or automatic retry flow is mixed into this transaction.",
-    "reviewedBy": "Codex portfolio_objectives",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "6fdf54f9e69c972ecf0b389950b70a63df4b7759c1e461938558ef6454a84fe2",
+    "reason": "Preserves the existing watchlist transaction and its current-view checks; the sole added effect invalidates the canonical tracker list after an accepted successful save without adding a second request or lifecycle owner.",
+    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "reviewedOn": "2026-11-06"
   },
   {
     "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/TestAlert.tsx",
@@ -8572,5 +8572,59 @@
     "reason": "Executes one selected scenario in the bounded recovery matrix. Proposal, prospect and fact branches directly assert the three reported recovery defects and their known/unknown controls, using the shared fixture and budget owner without creating another executor.",
     "reviewedBy": "Codex independent review_003 (01a1a4d7-f531-7510-9ca1-3e9737c7d4df)",
     "reviewedOn": "2026-11-04"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/legiwatch/LegiWatchScreen.tsx",
+    "kind": "function",
+    "symbol": "LegiWatchScreen",
+    "fingerprint": "06cf6646bfaede19e160bea946375500ecbfb3be027c5517c6ee07b9acff20b6",
+    "reason": "Owns one retained LegiWatch tab and route composition with a shared Bill tracker default and separate Live hearings section. Existing hearing/session/publication routing and lifecycle owners remain intact.",
+    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "reviewedOn": "2026-11-06"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/BillContextEditor.tsx",
+    "kind": "function",
+    "symbol": "BillContextEditor",
+    "fingerprint": "94dfeabaa7cd14e2faf5bc6046a0eb6ca32277346dc28c8318ebe1292e32dc20",
+    "reason": "Owns one controlled analyst context form and its explicit save boundary. Position, priority and note are validated together while transport and generated impact evidence remain separate.",
+    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "reviewedOn": "2026-11-06"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/BillDrawer.tsx",
+    "kind": "function",
+    "symbol": "BillDrawer",
+    "fingerprint": "b88fd5415b0a2bd7b2a12d8449860d02bf26e5768d36a828f237443ceebb2c4f",
+    "reason": "Owns the single selected client/bill detail lifecycle, async refresh status and retained untrack confirmation. Evidence, source details and context editing remain extracted cohesive panes; denied reads or mutations conceal private detail and controls.",
+    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "reviewedOn": "2026-11-06"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/BillImpactEvidence.tsx",
+    "kind": "function",
+    "symbol": "BillImpactEvidence",
+    "fingerprint": "523ad5e8fe931beabe0c8e325d4b0faba1a7b961c8fb11d3e41964b737b47268",
+    "reason": "Presents one structured source-backed impact record with provision/client citations, conditions, missing facts and next actions. It does not acquire evidence, infer missing values or own analysis dispatch.",
+    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "reviewedOn": "2026-11-06"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/BillResults.tsx",
+    "kind": "function",
+    "symbol": "BillResults",
+    "fingerprint": "8a59e0075708757439543fe85de7956202c005320415bbb295a1eff95d6e0e7c",
+    "reason": "Presents one authorized row dataset in table or board form; both views preserve client/bill association keys, native evidence state and the same detail action. Separate transport or authority responsibility is not introduced.",
+    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "reviewedOn": "2026-11-06"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+    "kind": "function",
+    "symbol": "BillTrackerPage",
+    "fingerprint": "3723d3082f984a85a5a7b666ec951522cb0a762f0999cbc9d8313848ad1e30d4",
+    "reason": "Owns one route, canonical query, selection and dialog composition for both authorized module and client-profile scopes. Transport, evidence, context editing, results, metrics and retained mutations stay in their existing owners.",
+    "reviewedBy": "Codex independent LegiWatch client-impact review",
+    "reviewedOn": "2026-11-06"
   }
 ]

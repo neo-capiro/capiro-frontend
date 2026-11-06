@@ -3,7 +3,7 @@
 import { ScopedLink } from "./ScopedLink";
 import { useSelectedClient } from "../session/SelectedClient";
 import { scopedHref } from "../session/client-route";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SelectInput } from "../module-ui";
 import { moduleCatalog, moduleHref, type ModuleSlug } from "./module-catalog";
 import { resolveDirectoryView } from "./directory-views";
@@ -13,7 +13,11 @@ export function ModuleBreadcrumb({ active }: { active: ModuleSlug }) {
   const router = useRouter();
   const selected = useSelectedClient();
   const params = useSearchParams();
-  if (active === "intelligence" && params.get("view") === "legiwatch")
+  const pathname = usePathname();
+  if (
+    active === "intelligence" &&
+    (params.get("view") === "legiwatch" || pathname === "/modules/legiwatch")
+  )
     return null;
   if (active === "engagement")
     return (

@@ -96,6 +96,46 @@ describe("existing acknowledged mutation effects reach metric admission", () => 
       }
     },
   );
+  it.each([403, 404])(
+    "denied untrack %s removes private detail and invalidates tracker sources",
+    async (status) => {
+      const { cache, view, key } = fixture();
+      const detailKey = [
+        "legiwatch-impact",
+        view.clientId,
+        "119-hr-1",
+        "synthetic-scope",
+      ];
+      const trackerKey = ["legiwatch-tracker", "synthetic-scope", "all", ""];
+      cache.setQueryData(detailKey, { privateEvidence: "synthetic evidence" });
+      cache.setQueryData(trackerKey, { pages: [] });
+      current.api = createApiClient(async () =>
+        Response.json({ message: "Synthetic denied mutation" }, { status }),
+      );
+      const saved = vi.fn();
+      let mutation: ReturnType<typeof useTrackBill> | undefined;
+      function Capture() {
+        mutation = useTrackBill(view.clientId, "core", saved);
+        return null;
+      }
+      renderToStaticMarkup(
+        createElement(
+          QueryClientProvider,
+          { client: cache },
+          createElement(Capture),
+        ),
+      );
+      if (!mutation) throw new Error("Missing mutation hook");
+      await expect(
+        mutation.mutateAsync({ track: false, billId: "119-hr-1" }),
+      ).rejects.toThrow();
+      expect(cache.getQueryData(detailKey)).toBeUndefined();
+      expect(cache.getQueryState(trackerKey)?.isInvalidated).toBe(true);
+      expect(cache.getQueryState(key)?.isInvalidated).toBe(true);
+      expect(saved).not.toHaveBeenCalled();
+      cache.clear();
+    },
+  );
   it.each([false, true])(
     "existing configure save failed=%s preserves the correct board/metric state",
     async (failed) => {
