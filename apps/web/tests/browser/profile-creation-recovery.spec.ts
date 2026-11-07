@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { clientId, json } from "./fixtures";
 import {
   buildSyntheticProfile,
@@ -15,9 +15,22 @@ function heldResponse() {
   return { promise, release };
 }
 
+function renderWarnings(page: Page) {
+  const errors: string[] = [];
+  page.on("console", (message) => {
+    if (
+      message.type() === "error" &&
+      message.text().includes("Cannot update a component")
+    )
+      errors.push(message.text());
+  });
+  return errors;
+}
+
 test("opening a newly created profile waits for initial research through roster, profile and setup reads", async ({
   page,
 }) => {
+  const renderErrors = renderWarnings(page);
   const fixture = await installCreationRecovery(page);
   const roster = heldResponse(),
     profile = heldResponse(),
@@ -92,6 +105,7 @@ test("opening a newly created profile waits for initial research through roster,
     ).toBeVisible();
     expect(reads.runs).toBe(1);
     expect(fixture.creation.creates).toHaveLength(1);
+    expect(renderErrors).toEqual([]);
   } finally {
     for (const hold of [roster, profile, setup, run]) hold.release();
   }
@@ -100,6 +114,7 @@ test("opening a newly created profile waits for initial research through roster,
 test("confirmed creation survives native membership refresh and updates the real saved-order catalog", async ({
   page,
 }) => {
+  const renderErrors = renderWarnings(page);
   const fixture = await installCreationRecovery(page);
   fixture.creation.identityConflicts = 2;
   fixture.creation.rosterConflicts = 1;
@@ -139,6 +154,7 @@ test("confirmed creation survives native membership refresh and updates the real
   await expect(
     page.getByText(/does not match the current profile catalog/),
   ).toHaveCount(0);
+  expect(renderErrors).toEqual([]);
 });
 
 test("exhausted membership refresh retains the confirmed profile and continues only after a fresh session", async ({

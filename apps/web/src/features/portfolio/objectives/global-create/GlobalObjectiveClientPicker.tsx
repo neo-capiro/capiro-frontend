@@ -5,7 +5,11 @@ import {
   type ComponentProps,
   type FormEvent,
 } from "react";
-import { useQueryClient, type QueryClient } from "@tanstack/react-query";
+import {
+  notifyManager,
+  useQueryClient,
+  type QueryClient,
+} from "@tanstack/react-query";
 import { ChevronDown } from "lucide-react";
 import { useClients, initials } from "@/features/portfolio/index/public";
 import {
@@ -32,9 +36,11 @@ type Props = {
 function useWriterToken(cache: QueryClient) {
   return useSyncExternalStore(
     (notify) =>
-      cache.getQueryCache().subscribe((event) => {
-        if (event.query.queryKey[0] === "identity") notify();
-      }),
+      cache.getQueryCache().subscribe(
+        notifyManager.batchCalls((event) => {
+          if (event.query.queryKey[0] === "identity") notify();
+        }),
+      ),
     () => {
       const actor = currentClientWriter(cache);
       return actor ? JSON.stringify([actor.tenantId, actor.userId]) : "";
@@ -94,9 +100,11 @@ function PickerSession({
   const encodedKey = JSON.stringify(key);
   const state = useSyncExternalStore(
     (notify) =>
-      cache.getQueryCache().subscribe((event) => {
-        if (JSON.stringify(event.query.queryKey) === encodedKey) notify();
-      }),
+      cache.getQueryCache().subscribe(
+        notifyManager.batchCalls((event) => {
+          if (JSON.stringify(event.query.queryKey) === encodedKey) notify();
+        }),
+      ),
     () => cache.getQueryState(key),
     () => undefined,
   );
