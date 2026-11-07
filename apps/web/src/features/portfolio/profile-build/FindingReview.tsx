@@ -199,6 +199,13 @@ export function FindingReview({
           </button>
         )}
       </header>
+      {finding.kind === "lda_identity" && finding.status === "pending" && (
+        <p>
+          Possible LDA identity — review this company match before researching
+          its lobbying history. Approving the match does not approve its
+          filings.
+        </p>
+      )}
       <div className={styles.comparison}>
         <div>
           <h4>Current</h4>

@@ -92,7 +92,7 @@ async function openProfile(page: Page) {
 test("a website-only entry creates only the company name returned by the selected source", async ({
   page,
 }) => {
-  const { creates, unexpected } = await sourceFixtures(page);
+  const { creates, state, unexpected } = await sourceFixtures(page);
   await page.route("**/clients/profile-build/identity-confirm", (route) => {
     const body = route.request().postDataJSON();
     return json(route, {
@@ -102,7 +102,14 @@ test("a website-only entry creates only the company name returned by the selecte
     });
   });
   const dialog = await openProfile(page);
+  await expect(dialog).toContainText("A website alone is enough");
   await dialog.getByLabel(/Website/).fill("https://example.test");
+  await expect(
+    dialog.getByLabel("Company name", { exact: true }),
+  ).not.toHaveAttribute("required");
+  await expect(dialog.getByLabel("Company name", { exact: true })).toHaveValue(
+    "",
+  );
   const request = page.waitForRequest((value) =>
     value.url().endsWith("clients/profile-build/identity-preview"),
   );
@@ -122,6 +129,18 @@ test("a website-only entry creates only the company name returned by the selecte
     name: "Synthetic Source Company",
     website: "https://example.test",
     canonicalEntityId,
+  });
+  await expect
+    .poll(() => state.posts.filter((entry) => entry.path === "runs").length)
+    .toBe(1);
+  expect(
+    state.posts.find((entry) => entry.path === "runs")?.body,
+  ).toMatchObject({
+    sources: ["public_web", "sam_gov", "lda"],
+    website: "https://example.test/",
+    attachmentIds: [],
+    ldaClientIds: [],
+    discoverLda: true,
   });
   expect(unexpected).toEqual([]);
 });

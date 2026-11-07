@@ -27,11 +27,22 @@ export const researchInputSchema = z
       .max(6),
     attachmentIds: z.array(z.uuid()).max(10),
     ldaClientIds: z.array(z.number().int().positive()).max(20),
+    discoverLda: z.boolean().optional(),
     website: z
       .string()
       .max(500)
       .refine((value) => !value || Boolean(safeEvidenceUrl(value))),
   })
+  .refine(
+    (value) =>
+      !value.discoverLda ||
+      (value.sources.includes("lda") &&
+        !value.purpose &&
+        !value.capabilityId &&
+        !value.businessUnitId &&
+        value.ldaClientIds.length === 0),
+    "Automatic LDA discovery requires LDA research without selected identities.",
+  )
   .refine(
     (value) => value.sources.length + value.attachmentIds.length > 0,
     "Choose a source or a ready document.",
@@ -76,6 +87,8 @@ export function validateResearchSelection(
   files: (Attachment | ProspectAttachment)[],
 ) {
   const parsed = researchInputSchema.parse(input);
+  if (parsed.discoverLda && setup.subject.kind !== "client")
+    throw new Error("Automatic LDA discovery requires a client profile.");
   if (
     (parsed.purpose || parsed.capabilityId) &&
     setup.subject.kind !== "client"
@@ -156,6 +169,7 @@ export function matchesResearchScope(
     input.purpose === run.setup?.purpose &&
     input.capabilityId === run.setup?.capabilityId &&
     input.businessUnitId === run.setup?.businessUnit?.id &&
+    (input.discoverLda === true) === (run.setup?.discoverLda === true) &&
     sameSelection(input.sources, run.requestedSources) &&
     sameSelection(input.attachmentIds, run.attachmentIds ?? []) &&
     (!run.setup?.sources || sameSelection(input.sources, run.setup.sources)) &&

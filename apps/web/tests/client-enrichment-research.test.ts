@@ -4,9 +4,12 @@ import { installPlatform, db, local } from "./command-recovery-platform";
 import { researchRecovery } from "../src/features/portfolio/profile-build/research-recovery";
 import {
   researchCommandSchema,
+  matchesResearchScope,
   validateResearchSelection,
   canResearchFile,
 } from "../src/features/portfolio/profile-build/research-contracts";
+import { runSchema } from "../src/features/portfolio/profile-build/contracts";
+import { initialResearchInput } from "../src/features/portfolio/profile-build/ResearchRequest";
 import {
   prepareResearch,
   sendResearch,
@@ -192,6 +195,88 @@ it("preflight refuses changed identity choices before reserving or posting", asy
     true,
   );
   expect(await journal().load()).toBeNull();
+});
+
+it("retains automatic LDA discovery through lost-response recovery and requires the matching run receipt", async () => {
+  const automaticInput = {
+    ...input,
+    sources: ["public_web" as const, "sam_gov" as const, "lda" as const],
+    discoverLda: true,
+  };
+  const prepared = await prepareResearch(
+    createApiClient(async () => Response.json(setup)),
+    { kind: "client", id: clientId },
+    automaticInput,
+    guard,
+    new AbortController().signal,
+  );
+  const automaticCommand = { ...prepared, requestId };
+  await journal().reserve(automaticCommand);
+  const savedRun = {
+    ...run,
+    requestedSources: automaticInput.sources,
+    selectedLdaIds: [],
+    setup: { ...run.setup, discoverLda: true },
+  };
+  const fetcher = vi
+    .fn<typeof fetch>()
+    .mockRejectedValueOnce(new Error("Disconnected"))
+    .mockResolvedValueOnce(Response.json(savedRun));
+  const send = (value: typeof automaticCommand) =>
+    sendResearch(
+      createApiClient(fetcher),
+      { kind: "client", id: clientId },
+      value,
+      guard,
+      new AbortController().signal,
+      journal().received,
+    );
+  await expect(send(automaticCommand)).rejects.toThrow("Disconnected");
+  const saved = (await journal().load())!;
+  if (!("input" in saved.command)) throw new Error("Expected a research start");
+  await send(saved.command);
+  expect(
+    fetcher.mock.calls.map((call) => JSON.parse(String(call[1]?.body))),
+  ).toEqual([
+    { requestId, ...automaticInput },
+    { requestId, ...automaticInput },
+  ]);
+  expect(
+    matchesResearchScope(
+      automaticInput,
+      runSchema.parse({ ...savedRun, setup: run.setup }),
+    ),
+  ).toBe(false);
+  const manual = initialResearchInput(setup, runSchema.parse(savedRun));
+  expect(manual.discoverLda).toBeUndefined();
+  expect(manual.ldaClientIds).toEqual([]);
+  await journal().acknowledge(requestId);
+});
+
+it("only client LDA research may request automatic identity discovery", () => {
+  const automatic = { ...input, sources: ["lda" as const], discoverLda: true };
+  expect(validateResearchSelection(automatic, setup, [])).toEqual(automatic);
+  expect(
+    validateResearchSelection({ ...automatic, discoverLda: false }, setup, [])
+      .discoverLda,
+  ).toBe(false);
+  expect(() =>
+    validateResearchSelection(
+      { ...automatic, sources: ["public_web"] },
+      setup,
+      [],
+    ),
+  ).toThrow("Automatic LDA discovery");
+  expect(() =>
+    validateResearchSelection({ ...automatic, ldaClientIds: [42] }, setup, []),
+  ).toThrow("Automatic LDA discovery");
+  expect(() =>
+    validateResearchSelection(
+      automatic,
+      { ...setup, subject: { kind: "prospect", id: clientId } },
+      [],
+    ),
+  ).toThrow("requires a client");
 });
 it("document selection requires a currently available file in the selected client", () => {
   const file = {

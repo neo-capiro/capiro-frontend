@@ -219,6 +219,7 @@ function CurrentSourcedProfileStart({
     sources: !file || researchWebsite ? ["public_web", "sam_gov", "lda"] : [],
     attachmentIds: ready ? [document.id] : [],
     ldaClientIds: [],
+    ...(!file || researchWebsite ? { discoverLda: true } : {}),
     website: researchWebsite,
   };
   const extractionFailed =
@@ -316,6 +317,10 @@ function CurrentSourcedProfileStart({
         mutation.mutate();
       }}
     >
+      <p className="muted">
+        Start with a company name, a website or a document. A website alone is
+        enough to find the company for you to confirm.
+      </p>
       <label>
         Company name
         <input

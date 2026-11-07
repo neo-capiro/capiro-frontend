@@ -79,6 +79,7 @@ export const runSchema = z
         sources: z.array(z.string()).optional(),
         attachmentIds: z.array(z.string().uuid()).optional(),
         selectedLdaIds: z.array(z.number().int()).optional(),
+        discoverLda: z.boolean().optional(),
       })
       .nullable()
       .optional(),
