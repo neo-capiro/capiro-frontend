@@ -3,7 +3,12 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useConversationTurn } from "../src/features/meri/conversation/useConversationTurn";
-import { sessionHistoryState } from "../src/features/meri/conversation/saved-turns";
+import {
+  emptyReservedTarget,
+  sessionHistoryState,
+} from "../src/features/meri/conversation/saved-turns";
+import { createMeriConversation } from "@capiro/meri-client/conversation";
+import { EMPTY_HISTORY_SCHEMA } from "@capiro/meri-contracts/conversation-application";
 import { composerAvailability } from "../src/features/meri/conversation/MeriLiveConversation";
 import { ConversationHistoryStatus } from "../src/features/meri/conversation/ConversationHistoryStatus";
 import {
@@ -21,6 +26,11 @@ import {
   binding,
   nextBinding,
   clientId,
+  contextFor,
+  scopes,
+  history,
+  event,
+  runFor,
 } from "../test/browser/meri-conversation-fixtures";
 import { nextRequestId } from "../test/browser/meri-history-fixtures";
 
@@ -173,6 +183,138 @@ const rendered = (
   renderToStaticMarkup(
     createElement(ConversationHistoryStatus, { session }),
   ).replace(/&#x27;/g, "'");
+
+it("fresh canonical empty history opens only the exact reserved successor without retaining a release", async () => {
+  const context = contextFor(nextBinding);
+  let response: unknown = {
+    schema: EMPTY_HISTORY_SCHEMA,
+    binding: nextBinding,
+    scopes,
+  };
+  let current = true;
+  const client = createMeriConversation({
+    context,
+    credential: `action_session_${"s".repeat(43)}`,
+    expiresAtMs: Date.now() + 60_000,
+    signal: new AbortController().signal,
+    isCurrent: () => current,
+    onAccessLost: () => {},
+    fetchImpl: async () => Response.json(response),
+  });
+  const target = () =>
+    emptyReservedTarget(reservedPage(), context, client.getSnapshot());
+  try {
+    expect(target()).toBeUndefined();
+    await client.history();
+    expect(target()).toBe(nextBinding.runId);
+    const view = sessionHistoryState(
+      { current: reservedPage() },
+      nextBinding.runId,
+      [],
+      undefined,
+      false,
+      undefined,
+      undefined,
+      target(),
+    );
+    expect(view.unknownReservation).toBe(false);
+    expect(view.nextBlocked).toBeUndefined();
+    expect(view.openedTarget).toBeUndefined();
+    expect(journal(new QueryClient()).openedTarget()).toBeUndefined();
+    expect(rendered(recoveryStatus(view))).not.toContain(
+      "cannot tell whether your last message was sent",
+    );
+    expect(
+      emptyReservedTarget(
+        reservedPage(laterBinding),
+        context,
+        client.getSnapshot(),
+      ),
+    ).toBeUndefined();
+    expect(
+      emptyReservedTarget(
+        {
+          ...reservedPage(),
+          pendingTurn: null,
+        },
+        context,
+        client.getSnapshot(),
+      ),
+    ).toBeUndefined();
+    for (const key of [
+      "tenantId",
+      "actorId",
+      "conversationId",
+      "runId",
+    ] as const)
+      expect(
+        emptyReservedTarget(
+          reservedPage(),
+          { ...context, [key]: "different" },
+          client.getSnapshot(),
+        ),
+      ).toBeUndefined();
+    response = {
+      ...history([event(1, "Accepted successor", nextBinding)]),
+      run: runFor("running", nextBinding),
+    };
+    const positive = client.history();
+    expect(target()).toBeUndefined();
+    await positive;
+    expect(target()).toBeUndefined();
+    current = false;
+    expect(target()).toBeUndefined();
+  } finally {
+    client.dispose();
+  }
+});
+
+it("a delayed empty response from a disposed port cannot open the replacement", async () => {
+  let release!: (response: Response) => void;
+  const context = contextFor(nextBinding);
+  const options = {
+    context,
+    credential: `action_session_${"s".repeat(43)}`,
+    expiresAtMs: Date.now() + 60_000,
+    signal: new AbortController().signal,
+    isCurrent: () => true,
+    onAccessLost: () => {},
+  };
+  const previous = createMeriConversation({
+    ...options,
+    fetchImpl: () =>
+      new Promise((resolve) => {
+        release = resolve;
+      }),
+  });
+  const replacement = createMeriConversation({
+    ...options,
+    fetchImpl: async () => {
+      throw Error("No replacement read");
+    },
+  });
+  try {
+    const pending = previous.history();
+    previous.dispose();
+    release(
+      Response.json({
+        schema: EMPTY_HISTORY_SCHEMA,
+        binding: nextBinding,
+        scopes,
+      }),
+    );
+    await expect(pending).rejects.toThrow();
+    expect(
+      emptyReservedTarget(reservedPage(), context, previous.getSnapshot()),
+    ).toBeUndefined();
+    expect(
+      emptyReservedTarget(reservedPage(), context, replacement.getSnapshot()),
+    ).toBeUndefined();
+  } finally {
+    previous.dispose();
+    replacement.dispose();
+  }
+});
 
 it("a reopened settled conversation whose reservation this tab confirmed reopens ready, without the same check again", async () => {
   const cache = new QueryClient();

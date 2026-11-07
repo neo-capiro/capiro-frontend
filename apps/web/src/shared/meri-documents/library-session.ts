@@ -2,6 +2,7 @@ import {
   ConversationHistoryUnavailable,
   listConversations,
   readConversationTranscript,
+  isEmptyTranscript,
   type ConversationListPage,
 } from "../meri-conversations/history-client";
 import { ActionSessionUnavailable } from "../meri-actions/session-bootstrap";
@@ -107,6 +108,7 @@ export async function bootstrapLibrarySession({
       throw new ActionSessionUnavailable(408);
     throw error;
   }
+  if (isEmptyTranscript(page)) throw new ActionSessionUnavailable(404);
   const binding = page.latestRun.binding;
   if (
     page.conversation.conversationId !== conversationId ||

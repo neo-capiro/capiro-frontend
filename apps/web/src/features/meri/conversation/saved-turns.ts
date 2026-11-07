@@ -3,6 +3,7 @@ import { turnFromEvents, isTerminal, type TurnView } from "./conversation-view";
 import { logicalPromptKey } from "./prompt-identity";
 import type { ConversationTranscriptPage } from "../../../shared/meri-conversations/history-client";
 import type { TurnIntent } from "../../../shared/meri-conversations/turn-journal";
+import type { MeriConversationPort } from "../../../shared/meri-conversations/port";
 import {
   controlFailureMessage,
   type ControlFailure,
@@ -59,6 +60,33 @@ export const settledRefreshDue = (
     !saved?.incompleteHistory
   );
 
+/** A successful empty read is current display evidence, never permission to release a retained command. */
+export function emptyReservedTarget(
+  history: ConversationTranscriptPage | undefined,
+  context: MeriConversationPort["context"] | undefined,
+  snapshot: ReturnType<MeriConversationPort["getSnapshot"]> | undefined,
+) {
+  const reservation = history?.pendingTurn;
+  if (
+    !context ||
+    !history ||
+    !isTerminal(history.latestRun.state) ||
+    reservation?.state !== "RESERVED" ||
+    snapshot?.status !== "ready" ||
+    snapshot.submit !== "idle" ||
+    snapshot.observation !== null ||
+    snapshot.acceptedRequest !== null
+  )
+    return undefined;
+  const target = reservation.targetBinding;
+  return target.tenantId === context.tenantId &&
+    target.actorId === context.actorId &&
+    target.conversationId === context.conversationId &&
+    target.runId === context.runId
+    ? target.runId
+    : undefined;
+}
+
 /** Reading history constrains UI actions; trusted session/admission owners still decide every write. */
 export function sessionHistoryState(
   history: {
@@ -74,12 +102,16 @@ export function sessionHistoryState(
   failure?: ControlFailure,
   /** Target run id of a reservation control confirmed admitted no message, or that the person discarded. */
   opened?: string,
+  /** The current authorized port just admitted explicit empty history for this exact target. */
+  emptyTarget?: string,
 ) {
   const metadata = history.current;
   const reservation = metadata?.pendingTurn;
   // Its source admits an ordinary next message again: the reservation replays to the same target.
   const reservationOpen =
     !!reservation && reservation.targetBinding.runId === opened;
+  const reservationEmpty =
+    !!reservation && reservation.targetBinding.runId === emptyTarget;
   const latestAccepted = metadata?.turns.find(
     (turn) => turn.run.binding.runId === metadata.latestRun.binding.runId,
   );
@@ -114,6 +146,7 @@ export function sessionHistoryState(
   const unknownReservation =
     !!reservation &&
     !reservationOpen &&
+    !reservationEmpty &&
     retained?.source.runId !== reservation.sourceBinding.runId;
   const loaded = savedTurns(history.saved);
   const savedCurrent =
@@ -135,7 +168,8 @@ export function sessionHistoryState(
     !recoveryNeeded &&
     !unknownReservation &&
     !source &&
-    !reservationOpen;
+    !reservationOpen &&
+    !reservationEmpty;
   const nextBlocked = busy
     ? "Checking your last message…"
     : recoveryNeeded && !unknownReservation && failure
@@ -169,6 +203,7 @@ export function sessionHistoryState(
     source,
     reservation,
     openedTarget: reservationOpen ? opened : undefined,
+    emptyTarget: reservationEmpty ? emptyTarget : undefined,
     earlier,
     savedCurrent,
     latestTarget,

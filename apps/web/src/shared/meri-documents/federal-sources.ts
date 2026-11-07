@@ -1,7 +1,10 @@
 import type { FederalNativeSelection } from "@capiro/meri-contracts/federal-workbench";
 import { conversationHistoryMetadata } from "@capiro/meri-contracts/conversation-history";
 import type { ActionSessionReceipt } from "../meri-actions/session-receipt";
-import { readConversationTranscript } from "../meri-conversations/history-client";
+import {
+  readConversationTranscript,
+  isEmptyTranscript,
+} from "../meri-conversations/history-client";
 import { conversationInClient } from "../meri-conversations/history-pages";
 
 export type FederalSourceChoice = Readonly<{
@@ -32,11 +35,13 @@ export async function readFederalSources(
   signal.throwIfAborted();
   if (
     page.conversation.conversationId !== context.conversationId ||
-    !conversationInClient(
-      page.conversation,
-      context,
-      context.selectedClientId,
-    ) ||
+    !conversationInClient(page.conversation, context, context.selectedClientId)
+  )
+    throw new Error(
+      "The source conversation changed. Reconnect to load sources.",
+    );
+  if (isEmptyTranscript(page)) return { sources: [], nextAfter: null };
+  if (
     page.nextSequence < after ||
     (page.hasMore && page.nextSequence === after)
   )

@@ -278,6 +278,9 @@ export function ConversationView({
                   reservedOpen={
                     session.openedTarget === displayed.port.context.runId
                   }
+                  reservedEmpty={
+                    session.emptyTarget === displayed.port.context.runId
+                  }
                   nextTurnBlocked={session.nextBlocked}
                   nextTurnChecking={session.nextChecking}
                   nextTurnVerified={!!session.source && !session.nextBlocked}

@@ -21,14 +21,6 @@ import type {
 import { receiveConversationInputRequest } from "@capiro/meri-contracts/conversation-input";
 import { isTerminal } from "./conversation-view";
 
-/**
- * Meri answers the contract's 404 NOT_FOUND for a session's history before the conversation's
- * first run (runtime H1). There is nothing to read or observe yet; it is not a failure. A 404
- * never revokes the session (the client revokes only on 401/403).
- */
-export const historyNotStarted = (cause: unknown) =>
-  cause instanceof ConversationUnavailable && cause.code === "NOT_FOUND";
-
 /** Reads and records nonsecret write uncertainty for the run's exact context. */
 export type IntentRecord = Readonly<{
   read: () => ConversationIntent;
