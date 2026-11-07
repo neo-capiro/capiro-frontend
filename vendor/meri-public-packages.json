@@ -1252,6 +1252,34 @@
    "sha256": "58860659d8951a32e08cca42fd358c3b933714b0ec7e7b5bb175c36ac2585daa",
    "regularEntryCount": 6,
    "status": "source-committed-consumer-pinned"
+  },
+  {
+   "file": "capiro-meri-contracts-0.1.60-fccfbd1c6897-2bc26ae17dfe.tgz",
+   "name": "@capiro/meri-contracts",
+   "version": "0.1.60",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "fccfbd1c689759e6a44ae7d933853122bf37bd11",
+   "sourceTree": "a7515a75cba94d650efc107c1c5fcfaf5c5f25e0",
+   "bytes": 2436206,
+   "sha256": "2bc26ae17dfedf6b2fab109b1929c96f205ada10ed173c1ddba329f38c1f6372",
+   "integrity": "sha512-GFpWsSDgtVEP3GgPgqU03CHw0c0LJOGIq53LoJLfN2lwGoSsKTFnaH5e5RNQZ959PVKvZKib1hvMdiJ4x/Wefw==",
+   "regularEntryCount": 126,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Align public receiving packages with the merged live-verification repairs; exact Git-byte archive and consumer qualification recorded separately."
+  },
+  {
+   "file": "capiro-meri-ui-stream-0.1.44-fccfbd1c6897-a3d5c4f1bda5.tgz",
+   "name": "@capiro/meri-ui-stream",
+   "version": "0.1.44",
+   "repository": "https://github.com/neo-capiro/meri-greenfield",
+   "sourceCommit": "fccfbd1c689759e6a44ae7d933853122bf37bd11",
+   "sourceTree": "a7515a75cba94d650efc107c1c5fcfaf5c5f25e0",
+   "bytes": 3881,
+   "sha256": "a3d5c4f1bda555da2c9914364d6e006440cd2158fc03e8b8729a3cc67a35e66c",
+   "integrity": "sha512-Mz/bVvKxQifYsI0hB9k+OEZApeBrsx1yKuuEP5JUK7lMN1mA99Ww8Y/VHgARJdFRCOot7x3wj+JaNevmEXOD5g==",
+   "regularEntryCount": 6,
+   "status": "source-committed-consumer-pinned",
+   "purpose": "Align public receiving packages with the merged live-verification repairs; exact Git-byte archive and consumer qualification recorded separately."
   }
  ]
 }
