@@ -13,16 +13,23 @@ import {
 export const governedObjectiveStrategyIntakeSource =
   "capiro-backend@eef7cd1b874549bc2115b313ebb00fe83e2e57da docs/objective-strategy-core-20261017/STRATEGY-INTAKE-CONTRACT.md";
 
-export const governedObjectiveStrategyIntakeCommand = z.strictObject({
-  schemaVersion: z.literal(1),
-  requestId: id,
-  command: z.literal("retry"),
-  workAction: z.literal("objective.strategy.draft"),
-  expectedObjectiveVersion: version,
-  expectedControlVersion: z.literal(0),
-  expectedCanonicalBindingVersion: version,
-  targetAuthorizationRequestId: z.null(),
-});
+export const governedObjectiveStrategyIntakeCommand = z
+  .strictObject({
+    schemaVersion: z.literal(1),
+    requestId: id,
+    command: z.literal("retry"),
+    workAction: z.literal("objective.strategy.draft"),
+    expectedObjectiveVersion: version,
+    expectedControlVersion: z.number().int().min(0).max(2147483647),
+    expectedCanonicalBindingVersion: version,
+    targetAuthorizationRequestId: id.nullable(),
+  })
+  .refine(
+    (value) =>
+      (value.expectedControlVersion === 0) ===
+      (value.targetAuthorizationRequestId === null),
+    "The selected intake must target the observed authorization.",
+  );
 
 export const governedObjectiveStrategyIntakeBody = z
   .strictObject({
@@ -83,9 +90,10 @@ export function requireGovernedObjectiveStrategyIntakeReceipt(
     observed.requestedSource.canonicalBindingVersion !==
       command.expectedCanonicalBindingVersion ||
     observed.control.version !== command.expectedControlVersion ||
-    observed.control.currentAuthorizationRequestId !== null ||
+    observed.control.currentAuthorizationRequestId !==
+      command.targetAuthorizationRequestId ||
     observed.control.cancelledAt !== null ||
-    observed.consent !== null ||
+    (observed.consent?.id ?? null) !== command.targetAuthorizationRequestId ||
     observed.accounting !== null ||
     observed.commandReceipt !== null ||
     receipt.clientId !== sent.params.clientId ||

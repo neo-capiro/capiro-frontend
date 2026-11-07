@@ -3185,50 +3185,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-recovery.ts",
-    "sha256": "6c4573593861084d2d900879dbadef4cae1d7bba131e51217ce69ba004826304",
-    "reviewer": "Codex independent coherent integration source review",
-    "reviewedAt": "2026-10-17",
-    "evidence": "docs/non-meri-continuation-20261016/COHERENT-OBJECTIVE-SIZE-REVIEW-20261017.md",
-    "rationale": "One tenant, actor, client and Objective scope fences the encrypted intake journal. The function rechecks identity, selected client and saved Objective before load, reserve and replay; shared journal code owns storage and locking, and Core owns admission.",
-    "functions": [
-      {
-        "name": "createStrategyIntakeRecovery",
-        "nonblankLines": 86
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/portfolio/objectives/objective-strategy-intake-recovery.ts: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
-    "sha256": "f5e219edb166cc05dc6973d537397553060c603bdde76ddcf5eecc1114db97de",
-    "reviewer": "Codex independent coherent integration source review",
-    "reviewedAt": "2026-10-17",
-    "evidence": "docs/non-meri-continuation-20261016/COHERENT-OBJECTIVE-SIZE-REVIEW-20261017.md",
-    "rationale": "The submit function and its two nested callbacks are one serialized v2 command lifecycle. It reloads exact saved requests before forming a new command, retains uncertain delivery, and keeps replay and new-write guards under one abort and journal lock.",
-    "functions": [
-      {
-        "name": "submit",
-        "nonblankLines": 90
-      },
-      {
-        "name": "submit > <anonymous>",
-        "nonblankLines": 90
-      },
-      {
-        "name": "submit > <anonymous> > <anonymous>",
-        "nonblankLines": 86
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts: function over80 nonblank lines requires review",
-      "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts: function over80 nonblank lines requires review",
-      "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/portfolio/objectives/ObjectiveGovernedPlanner.tsx",
     "sha256": "03c509c07edf326f7cbedebb71d14925e1a9c3c90890587590dc321caf73cc5d",
     "reviewer": "Codex independent coherent integration source review",
@@ -3243,23 +3199,6 @@
     ],
     "signals": [
       "apps/web/src/features/portfolio/objectives/ObjectiveGovernedPlanner.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/portfolio/objectives/ObjectiveStrategyIntake.tsx",
-    "sha256": "aa012180cac368fd22f7ce9deb11871769f4fef9c312a2927803934a201e6045",
-    "reviewer": "Codex independent coherent integration source review",
-    "reviewedAt": "2026-10-17",
-    "evidence": "docs/non-meri-continuation-20261016/COHERENT-OBJECTIVE-SIZE-REVIEW-20261017.md",
-    "rationale": "One selected actor and client panel owns type selection plus truthful retained, uncertain and unavailable display. Dedicated recovery and session modules own admission and replay; removed dead state and corrected copy avoid implying generated Strategy progress. The feature remains default off.",
-    "functions": [
-      {
-        "name": "ReadyStrategyIntake",
-        "nonblankLines": 129
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/portfolio/objectives/ObjectiveStrategyIntake.tsx: function over80 nonblank lines requires review"
     ]
   },
   {

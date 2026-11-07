@@ -5757,37 +5757,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveStrategyIntake.tsx",
     "kind": "function",
     "symbol": "ReadyStrategyIntake",
-    "fingerprint": "ea42c8aaf9a9e196673ac715eaef01b12f603e8f98cfe660d0bdfb04207370c7",
-    "reason": "Independent design review at c746e399: this function presents and observes one existing durable Strategy intake session for a fixed actor/client/Objective revision. The session and recovery modules retain request IDs, consent, generation ownership and exact retries; this view only binds lifecycle subscription, bounded observation polling and user controls. Shared intake seeds and displays the persisted type while retained requests continue to override type for exact recovery. Keeping effect cleanup and display of this same session together is cohesive. No additional model loop or authorization owner is introduced. Exact fingerprint only.",
-    "reviewedBy": "Codex independent reviewer /root/sdk_flow_map",
-    "reviewedOn": "2026-11-01"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
-    "kind": "function",
-    "symbol": "submit",
-    "fingerprint": "a37779a38f80020d1f94b5c767b0252b6519b64cdbd92b67afcdd047fa847be4",
-    "reason": "The single submit() operation on ObjectiveStrategyIntakeSession: it authorizes, loads or reserves the retained intake, builds the versioned strategy-intake request (frozen type/IDs), dispatches it, records the accepted Core job before any generation start, and starts/recovers that job. A bounded operation that shares the session's owner and state; not a separate responsibility.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
-    "kind": "function",
-    "symbol": "submit > <anonymous>",
-    "fingerprint": "29b6f413a5bf50a83d86ccd3a899d117420d6539776392f090633fba694cd990",
-    "reason": "The inline callback passed to recovery.lock inside submit() (the serialized transactional body that reads/authorizes/reserves/dispatches). A bounded step within submit(), sharing the ObjectiveStrategyIntakeSession owner and state.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
-    "kind": "function",
-    "symbol": "submit > <anonymous> > <anonymous>",
-    "fingerprint": "f3fc0751082d43ccc3e38a814a7af8c7c4219d0245550e3258d37c76a916b35f",
-    "reason": "A nested inline callback within submit()'s locked body (one further closure in the same transactional step). It shares the ObjectiveStrategyIntakeSession owner and state and adds no independent responsibility or owner boundary.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "914fb6ebf8be4732ace0d6c466066d50400daa43546cb54dd9e0c14338192ef3",
+    "reason": "This view only presents one durable intake session: subscription, bounded polling, controls and output. The explicit fresh-consent button delegates all decisions to the session and Core, retaining one presentation owner.",
+    "reviewedBy": "Codex independent reviewer /root/review_retry_final",
+    "reviewedOn": "2026-11-07"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/member-notes/useMemberNote.ts",
@@ -8644,5 +8617,23 @@
     "reason": "Exact-source Profile activity review: this 98-line browser scenario owns one uncertain conflict-decision lifecycle, including its explicit synthetic snapshot and request capture. It verifies that a 503 followed by collapse/reopen preserves the exact requestId, expectedVersion and resolution for retry and clears the attempt only on a verified response. Keeping the fixture and sequential assertions together avoids obscuring the behavior being preserved; it introduces no production owner.",
     "reviewedBy": "Codex independent profile_review",
     "reviewedOn": "2026-11-06"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "9492b7e0f31728815bd2c9cfcec08e773f64aa9593f22dc8eb72e0dc2a0121be",
+    "reason": "One fixed actor/client/Objective intake lifecycle shares request construction and dispatch between initial submission, exact recovery and explicit successor consent under the same journal, abort and current-owner checks. The former oversized submit was decomposed into requestFor and dispatch. No new authority or model owner is introduced.",
+    "reviewedBy": "Codex independent reviewer /root/review_retry_final",
+    "reviewedOn": "2026-11-07"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-recovery.ts",
+    "kind": "function",
+    "symbol": "createStrategyIntakeRecovery",
+    "fingerprint": "6c03aa50c67f3ed416bbf58f70875d780c6048016bcf8d8e63a56daa0b751830",
+    "reason": "One scoped encrypted journal contract retains existing current writer, client and Objective checks. Acknowledgement reuses canonical journal retirement and verifies an identical accepted payload; shared journal code continues to own storage and locking.",
+    "reviewedBy": "Codex independent reviewer /root/review_retry_final",
+    "reviewedOn": "2026-11-07"
   }
 ]
