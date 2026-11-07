@@ -294,7 +294,7 @@ export async function proxyRequest(
         ) ??
         (response.status === 404
           ? "The requested action or record is unavailable from the current service."
-          : response.status === 504
+          : identityPreview && response.status === 504
             ? "The service request timed out. Please retry."
             : response.status >= 500
               ? "The service is unavailable. Please retry."

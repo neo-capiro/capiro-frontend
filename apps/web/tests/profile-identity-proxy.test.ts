@@ -306,4 +306,36 @@ describe("identity preview HTTP lifetime", () => {
       message: "The service request timed out. Please retry.",
     });
   });
+
+  it.each([
+    ["core", "POST", entry, true],
+    ["core", "GET", entry, false],
+    ["intelligence", "POST", entry, false],
+    ["core", "POST", [...entry, "extra"], false],
+    ["core", "POST", ["clients", "profile-build", "identity-confirm"], false],
+  ] as const)(
+    "limits the upstream 504 timeout message to identity previews: %s %s %j",
+    async (service, method, path, identityPreview) => {
+      const fetcher = vi.fn<typeof fetch>(async () =>
+        Response.json(
+          { message: "Synthetic private upstream diagnostic" },
+          { status: 504 },
+        ),
+      );
+      const response = await forward(
+        fetcher,
+        request([...path], method),
+        [...path],
+        service,
+      );
+      expect(response.status).toBe(504);
+      expect(await response.json()).toEqual({
+        message: identityPreview
+          ? "The service request timed out. Please retry."
+          : "The service is unavailable. Please retry.",
+      });
+      expect(response.headers.get("cache-control")).toBe("no-store");
+      expect(fetcher).toHaveBeenCalledTimes(1);
+    },
+  );
 });
