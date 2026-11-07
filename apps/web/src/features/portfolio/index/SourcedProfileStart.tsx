@@ -214,11 +214,12 @@ function CurrentSourcedProfileStart({
     document.viewerMode === "all" &&
     saved &&
     canResearchFile(document, { kind: "client", id: saved.id });
+  const researchWebsite = safeWebsite(website.trim()) ?? "";
   const initialResearch: ResearchInput = {
-    sources: file ? [] : ["public_web", "sam_gov", "lda"],
+    sources: !file || researchWebsite ? ["public_web", "sam_gov", "lda"] : [],
     attachmentIds: ready ? [document.id] : [],
     ldaClientIds: [],
-    website: safeWebsite(website.trim()) ?? "",
+    website: researchWebsite,
   };
   const extractionFailed =
     Boolean(file) &&
@@ -287,7 +288,11 @@ function CurrentSourcedProfileStart({
             (!file || (uploaded && !shareDocument) || ready) && (
               <ProfileBuildPanel
                 subject={{ kind: "client", id: saved.id }}
-                initialResearch={!file || ready ? initialResearch : undefined}
+                initialResearch={
+                  !file || ready || researchWebsite
+                    ? initialResearch
+                    : undefined
+                }
                 onInitialResearchPendingChange={setInitialResearchPending}
               />
             )}
@@ -418,7 +423,7 @@ function CurrentSourcedProfileStart({
       </button>
       <small className="muted">
         {file
-          ? "The document uploads privately before company matching. Sharing is optional; shared documents can be used for profile research after you confirm the company."
+          ? "The document uploads privately before company matching. Sharing is optional; shared documents can be used for profile research after you confirm the company. If you add a website, research also uses it and official SAM.gov and LDA records."
           : "Research uses the company website and official SAM.gov and LDA records. Review proposed facts before approving them."}
       </small>
     </form>

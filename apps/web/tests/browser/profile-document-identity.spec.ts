@@ -7,8 +7,20 @@ const actor = {
   tenantId: "90000000-0000-4000-8000-000000000001",
   userId: "90000000-0000-4000-8000-000000000002",
 };
-for (const share of [false, true]) {
-  test(`document-only entry preserves the original private upload and ${share ? "researches only after explicit sharing" : "does not start document research"}`, async ({
+function heldResponse() {
+  let release!: () => void;
+  const promise = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  return { promise, release };
+}
+for (const { share, withWebsite } of [
+  { share: false, withWebsite: false },
+  { share: true, withWebsite: false },
+  { share: false, withWebsite: true },
+  { share: true, withWebsite: true },
+]) {
+  test(`${withWebsite ? "website and document" : "document-only"} entry preserves the original private upload and ${share ? "researches only after explicit sharing" : "does not start document research"}`, async ({
     page,
   }) => {
     await page.setViewportSize(
@@ -20,6 +32,18 @@ for (const share of [false, true]) {
     const creates: Record<string, unknown>[] = [];
     const links: Record<string, unknown>[] = [];
     const previews: Record<string, unknown>[] = [];
+    const extraction = heldResponse(),
+      run = heldResponse();
+    const waits = { extraction: 0, runs: 0 };
+    if (withWebsite)
+      await page.route(
+        `**/clients/${clientId}/profile-build/runs`,
+        async (route) => {
+          waits.runs++;
+          await run.promise;
+          return route.fallback();
+        },
+      );
     let uploadTickets = 0,
       uploadConfirmations = 0,
       storageWrites = 0,
@@ -80,9 +104,13 @@ for (const share of [false, true]) {
       });
       return json(route, document);
     });
-    await page.route("**/engagement/attachments?**", (route) =>
-      json(route, [document]),
-    );
+    await page.route("**/engagement/attachments?**", async (route) => {
+      if (withWebsite && share && document.clientId) {
+        waits.extraction++;
+        await extraction.promise;
+      }
+      return json(route, [document]);
+    });
     await page.route("**/clients/profile-build/identity-preview", (route) => {
       previews.push(route.request().postDataJSON());
       return json(route, {
@@ -160,6 +188,7 @@ for (const share of [false, true]) {
       name: "Add profile",
       exact: true,
     });
+    if (withWebsite) await dialog.getByLabel(/Website/).fill("example.test");
     await dialog.getByLabel(/Supporting document/).setInputFiles({
       name: "identity.txt",
       mimeType: "text/plain",
@@ -244,63 +273,122 @@ for (const share of [false, true]) {
       ).toBe("rgb(27, 27, 27)");
     await sharing.scrollIntoViewIfNeeded();
     await page.screenshot({
-      path: `test-results/profile-document-identity-review-${share ? "shared-desktop" : "private-phone-dark"}.png`,
+      path: `test-results/profile-document-identity-review-${share ? "shared-desktop" : "private-phone-dark"}${withWebsite ? "-website" : ""}.png`,
       fullPage: true,
     });
     await alias.check();
-    expect(previews).toEqual([{ attachmentId }]);
+    expect(previews).toEqual([
+      { attachmentId, ...(withWebsite ? { website: "example.test" } : {}) },
+    ]);
     expect(creates).toEqual([]);
     expect(state.posts).toEqual([]);
-    await dialog
-      .getByRole("button", { name: "Build profile", exact: true })
-      .click();
-    await expect(
-      dialog.getByRole("button", {
-        name: "Retry linking document",
-        exact: true,
-      }),
-    ).toBeEnabled();
-    expect(creates).toHaveLength(1);
-    expect(creates[0]).toMatchObject({
-      name: candidate.name,
-      canonicalEntityId,
-    });
-    expect(state.posts).toEqual([]);
-    await dialog
-      .getByRole("button", { name: "Retry linking document", exact: true })
-      .click();
-    await expect(
-      dialog.getByRole("button", {
-        name: "Retry linking document",
-        exact: true,
-      }),
-    ).not.toBeVisible();
-    expect(links).toHaveLength(2);
-    expect(links[1]).toEqual(links[0]);
-    expect(links[0]).toEqual({
-      clientId,
-      ...(share ? { shareWithProfile: true } : {}),
-    });
-    expect(creates).toHaveLength(1);
-    expect(uploadTickets).toBe(1);
-    expect(storageWrites).toBe(1);
-    expect(uploadConfirmations).toBe(1);
-    if (share) {
-      await expect
-        .poll(() => state.posts.filter((row) => row.path === "runs").length)
-        .toBe(1);
-      expect(
-        state.posts.find((row) => row.path === "runs")?.body,
-      ).toMatchObject({ sources: [], attachmentIds: [attachmentId] });
-    } else {
-      await expect(dialog).toContainText(
-        "The identity document remains private to you.",
-      );
-      await expect(dialog).toContainText(
-        "used only to confirm company identity",
-      );
+    try {
+      await dialog
+        .getByRole("button", { name: "Build profile", exact: true })
+        .click();
+      await expect(
+        dialog.getByRole("button", {
+          name: "Retry linking document",
+          exact: true,
+        }),
+      ).toBeEnabled();
+      expect(creates).toHaveLength(1);
+      expect(creates[0]).toMatchObject({
+        name: candidate.name,
+        canonicalEntityId,
+      });
       expect(state.posts).toEqual([]);
+      await dialog
+        .getByRole("button", { name: "Retry linking document", exact: true })
+        .click();
+      await expect(
+        dialog.getByRole("button", {
+          name: "Retry linking document",
+          exact: true,
+        }),
+      ).not.toBeVisible();
+      expect(links).toHaveLength(2);
+      expect(links[1]).toEqual(links[0]);
+      expect(links[0]).toEqual({
+        clientId,
+        ...(share ? { shareWithProfile: true } : {}),
+      });
+      expect(creates).toHaveLength(1);
+      expect(uploadTickets).toBe(1);
+      expect(storageWrites).toBe(1);
+      expect(uploadConfirmations).toBe(1);
+      if (withWebsite) {
+        const opening = dialog.getByRole("button", {
+          name: "Open profile",
+          exact: true,
+        });
+        const link = dialog.getByRole("link", {
+          name: "Open profile",
+          exact: true,
+        });
+        if (share) {
+          await expect.poll(() => waits.extraction).toBeGreaterThanOrEqual(1);
+          await expect(dialog).toContainText(
+            "Waiting for the shared document to be extracted.",
+          );
+          await expect(opening).toBeDisabled();
+          await expect(link).toHaveCount(0);
+          expect(waits.runs).toBe(0);
+          extraction.release();
+        }
+        await expect.poll(() => waits.runs).toBe(1);
+        await expect(opening).toBeDisabled();
+        await expect(link).toHaveCount(0);
+        expect(state.posts).toEqual([]);
+        run.release();
+        await expect(link).toHaveAttribute("href", `/portfolio/${clientId}`);
+        expect(state.posts.filter((row) => row.path === "runs")).toHaveLength(
+          1,
+        );
+        expect(
+          state.posts.find((row) => row.path === "runs")?.body,
+        ).toMatchObject({
+          website: "https://example.test/",
+          sources: ["public_web", "sam_gov", "lda"],
+          attachmentIds: share ? [attachmentId] : [],
+        });
+        if (!share) {
+          await expect(dialog).toContainText(
+            "The identity document remains private to you.",
+          );
+          expect(document.viewerMode).toBe("restricted");
+          expect(document.viewerUserIds).toEqual([actor.userId]);
+        }
+        await link.click();
+        await expect(page).toHaveURL(new RegExp(`/portfolio/${clientId}$`));
+        await expect(
+          page.getByRole("heading", { name: client.name, exact: true }),
+        ).toBeVisible();
+        expect(waits.runs).toBe(1);
+        expect(state.posts.filter((row) => row.path === "runs")).toHaveLength(
+          1,
+        );
+        expect(creates).toHaveLength(1);
+      } else if (share) {
+        await expect
+          .poll(() => state.posts.filter((row) => row.path === "runs").length)
+          .toBe(1);
+        expect(
+          state.posts.find((row) => row.path === "runs")?.body,
+        ).toMatchObject({ sources: [], attachmentIds: [attachmentId] });
+      } else {
+        await expect(dialog).toContainText(
+          "The identity document remains private to you.",
+        );
+        await expect(dialog).toContainText(
+          "used only to confirm company identity",
+        );
+        expect(state.posts).toEqual([]);
+      }
+      expect(unexpected).toEqual([]);
+    } finally {
+      extraction.release();
+      run.release();
     }
-    expect(unexpected).toEqual([]);
   });
 }
