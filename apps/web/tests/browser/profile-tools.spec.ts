@@ -120,13 +120,30 @@ test("actor and tenant change discards an open old tag draft", async ({
   await page
     .getByRole("textbox", { name: "Focus tag" })
     .fill("Old actor draft");
+  const nextTenantId = "10000000-0000-4000-8000-000000000004";
+  await page.route("**/api/backend/core/me", (request) =>
+    json(request, {
+      user: { id: "other-user", email: "other@example.test" },
+      tenant: { id: nextTenantId, name: "Other synthetic tenant" },
+      role: "user_admin",
+    }),
+  );
+  await page.route(`**/api/backend/core/clients/${toolsClient.id}`, (request) => {
+    if (request.request().method() !== "GET") return request.fallback();
+    return json(request, {
+      ...toolsClient,
+      tenantId: nextTenantId,
+      intakeData: { ...toolsClient.intakeData, tags: ["Other tenant focus"] },
+    });
+  });
   await page.evaluate(() =>
     window.dispatchEvent(new Event("profile-tools-actor-change")),
   );
   await expect(page.getByRole("dialog")).toHaveCount(0);
   expect(await previousFocus.evaluate((node) => node.isConnected)).toBe(false);
   expect(await previousFocus.boundingBox()).toBeNull();
-  await expect(focus).toContainText("Saved focus");
+  await expect(focus).toContainText("Other tenant focus");
+  await expect(focus).not.toContainText("Saved focus");
   await page.getByRole("button", { name: "+ Add focus tag" }).click();
   await expect(page.getByRole("textbox", { name: "Focus tag" })).toHaveValue(
     "",
