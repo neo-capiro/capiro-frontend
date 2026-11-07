@@ -8378,10 +8378,10 @@
     "file": "apps/web/src/features/portfolio/profile-build/ProfileBuildPanel.tsx",
     "kind": "function",
     "symbol": "CurrentProfileBuild",
-    "fingerprint": "8622000d19bc28a44f5934ddd50eb21442054bf2dfc2bfba4141e1be08ed20f2",
-    "reason": "Independent exact-body review at 9ded2910 (producer commit c8855bc1). One profile research screen coordinating established access, retained-command, review and task-ledger hooks. Added purpose/capability/unit props reset component identity and flow into the same source chooser; durable scheduling and transport remain external. Denied/current-read checks suppress content and actions. Separate response-binding defect is tracked in the research-contract helper, not hidden by this size acceptance.",
-    "reviewedBy": "Codex independent backend_audit reviewer",
-    "reviewedOn": "2026-11-04"
+    "fingerprint": "5ecd27624acc6e768be82f7345eedc3d7eb3839e3fb008fa184114b11fbc5482",
+    "reason": "Independent exact-body review: one profile research/review lifecycle composes canonical access, current/setup reads, durable command recovery and approval actions. The automatic start remains guarded by the existing started ref, current read and command owner; useLayoutEffect reports derived pending state to the intake host without starting a second loop. Denial/read errors, busy actions, source selection, findings and confirmation retain their existing owners and explicit outcomes. Presentation growth is cohesive, not an unrelated responsibility requiring a size-only split.",
+    "reviewedBy": "Codex independent profile_review reviewer",
+    "reviewedOn": "2026-11-07"
   },
   {
     "file": "apps/web/src/features/portfolio/profile-build/ResearchRequest.tsx",
@@ -8660,6 +8660,15 @@
     "symbol": "<anonymous>",
     "fingerprint": "4fe367f14b2efdadff6eb498c31194f64d936ba12e7075bb81b03ecb8539cabd",
     "reason": "One cohesive four-case browser contract retains the original document identity, privacy, upload/link retry, layout and document-only assertions. Added explicit-website cases hold extraction/start responses, assert navigation stays unavailable, preserve private attachment exclusion and verify one create/run after navigation. It reuses installEnrichment; fixed expected requests are independent of production selection logic. Finally releases both holds. No unrelated responsibility or size-only extraction is needed.",
+    "reviewedBy": "Codex independent profile_review reviewer",
+    "reviewedOn": "2026-11-07"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/ProfileBuildPanel.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "87c3bfcdcfc8b2d1c73ee771d181c9ea545aa3c5ca8c01f68f6c5a32961b21b9",
+    "reason": "Independent exact-source review of the canonical research/review panel and its finding-selection presentation. The actor/subject-keyed wrapper composes existing access, setup/latest reads, durable research/recovery, review actions, upload dialog, run ledger and confirmation owners. The intake pending callback reports existing lifecycle state before paint and adds no command, authorization or persistence owner. The file remains one cohesive profile-research surface; splitting solely at the size threshold would obscure its interaction contract.",
     "reviewedBy": "Codex independent profile_review reviewer",
     "reviewedOn": "2026-11-07"
   }

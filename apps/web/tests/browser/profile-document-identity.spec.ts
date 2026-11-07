@@ -301,6 +301,7 @@ for (const { share, withWebsite } of [
       await dialog
         .getByRole("button", { name: "Retry linking document", exact: true })
         .click();
+      await expect.poll(() => links.length).toBe(2);
       await expect(
         dialog.getByRole("button", {
           name: "Retry linking document",
