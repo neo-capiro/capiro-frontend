@@ -2226,10 +2226,10 @@
     "file": "apps/web/src/shared/portfolio/api/proxy.ts",
     "kind": "function",
     "symbol": "proxyRequest",
-    "fingerprint": "bccd98fd02c21f350ba33a2c8366b66d544f52e6712ab9928d68650f67a5f653",
-    "reason": "Exact-source Profile activity review: this 228-line function remains the single narrow Portfolio service adapter. The delta makes its existing exact retired metric GET refusal permanent and removes the obsolete activation flag. Service allowlists, case-sensitive client identity, credentials, mutation-origin checks, deadlines, response shaping and unrelated intelligence forwarding retain their existing owners and semantics. Extracting the small retired-route condition would scatter the same transport boundary without separating a new responsibility.",
-    "reviewedBy": "Codex independent profile_review",
-    "reviewedOn": "2026-11-06"
+    "fingerprint": "dd32a6bd7a966db4f30d507408f2f7339fb968da0284c1bc7b66121296070b8f",
+    "reason": "Exact-source identity timeout review at 17baab427ae5672b8a02ae29b9429237e9e0aef6 accepts this single ordered Portfolio service transport lifetime: scope, origin, credentials, deadline, full response body and error handling share one request and cancellation signal. The function has 280 nonblank body lines, 289 including its signature, within a 355-line module. The identity-only budget and precise cancellation/timeout classification extend the existing transport owner without adding authority, another model harness or a retry loop. A mechanical split would scatter the same ordered lifecycle rather than separate a new responsibility. The size signal remains visible and this acceptance applies only to the exact reviewed fingerprint.",
+    "reviewedBy": "Codex independent identity_timeout_review (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-11-07"
   },
   {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
