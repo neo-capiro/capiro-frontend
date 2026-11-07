@@ -215,8 +215,10 @@ class ConversationConnection {
       throw new ConversationUnavailable("operation-unavailable");
     this.busy = true;
   }
-  private bind(view: AdmittedConversationView) {
-    const binding = view.run.binding;
+  private assertContext({
+    binding,
+    scopes,
+  }: Pick<AdmittedConversationView["run"], "binding" | "scopes">) {
     for (const key of [
       "tenantId",
       "actorId",
@@ -226,7 +228,6 @@ class ConversationConnection {
       if (binding[key] !== this.context[key])
         throw new ConversationUnavailable("foreign-session-view");
     }
-    const scopes = view.run.scopes;
     const selected = this.context.selectedClientId;
     const matches =
       selected === null
@@ -241,6 +242,9 @@ class ConversationConnection {
               scope.resourceId === selected,
           );
     if (!matches) throw new ConversationUnavailable("foreign-client-view");
+  }
+  private bind(view: AdmittedConversationView) {
+    this.assertContext(view.run);
     if ("request" in view && this.intent) {
       const saved = view.request;
       const input = this.intent;
@@ -508,7 +512,10 @@ class ConversationConnection {
     }
   }
   history = async (input: ConversationHistoryRequest = {}) => {
-    const request = receiveConversationRequest("history", bytes(input));
+    const request = receiveConversationRequest(
+      "history",
+      bytes({ ...input, acceptEmpty: true }),
+    );
     this.start();
     this.detach();
     this.publish({
@@ -518,7 +525,16 @@ class ConversationConnection {
     });
     try {
       const view = await this.receive("history", request);
-      this.bind(view);
+      if (!("run" in view)) {
+        this.assertContext(view);
+        // Empty history admits no run, request or observation cursor. Retained write uncertainty is unchanged.
+        this.observation = undefined;
+        this.publish({
+          status: "ready",
+          observation: null,
+          acceptedRequest: null,
+        });
+      } else this.bind(view);
       return this.getSnapshot();
     } catch (error) {
       this.publish({

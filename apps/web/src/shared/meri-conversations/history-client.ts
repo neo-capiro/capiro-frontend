@@ -4,6 +4,7 @@ import {
   receiveConversationHistoryResponse,
   DISCOVERY_SCHEMA,
   HISTORY_SCHEMA,
+  EMPTY_TRANSCRIPT_SCHEMA,
   TURN_SCHEMA,
   EXPORT_SCHEMA,
   MANAGEMENT_VERSION,
@@ -31,6 +32,16 @@ export type ConversationTranscriptPage = Extract<
   Received,
   { schema: typeof HISTORY_SCHEMA }
 >;
+export type ConversationTranscriptResult = Extract<
+  Received,
+  { schema: typeof HISTORY_SCHEMA | typeof EMPTY_TRANSCRIPT_SCHEMA }
+>;
+export const isEmptyTranscript = (
+  page: ConversationTranscriptResult,
+): page is Extract<
+  ConversationTranscriptResult,
+  { schema: typeof EMPTY_TRANSCRIPT_SCHEMA }
+> => page.schema === EMPTY_TRANSCRIPT_SCHEMA;
 export type ConversationTurnReceipt = Extract<
   Received,
   { schema: typeof TURN_SCHEMA }
@@ -178,8 +189,14 @@ export async function readConversationTranscript(
   signal: AbortSignal,
   fetcher: typeof fetch = fetch,
 ) {
+  // Opt in per read so a server-first rollout keeps older cached clients on their existing response contract.
+  if (input !== null && typeof input === "object" && !Array.isArray(input))
+    input = { ...input, acceptEmpty: true };
   const value = await request("transcript", input, signal, fetcher);
-  if (value.schema !== HISTORY_SCHEMA)
+  if (
+    value.schema !== HISTORY_SCHEMA &&
+    value.schema !== EMPTY_TRANSCRIPT_SCHEMA
+  )
     throw new ConversationHistoryUnavailable(
       502,
       "CONVERSATION_RESPONSE_INVALID",

@@ -137,8 +137,7 @@ class ConversationConnection {
             throw new ConversationUnavailable("operation-unavailable");
         this.busy = true;
     }
-    bind(view) {
-        const binding = view.run.binding;
+    assertContext({ binding, scopes, }) {
         for (const key of [
             "tenantId",
             "actorId",
@@ -148,7 +147,6 @@ class ConversationConnection {
             if (binding[key] !== this.context[key])
                 throw new ConversationUnavailable("foreign-session-view");
         }
-        const scopes = view.run.scopes;
         const selected = this.context.selectedClientId;
         const matches = selected === null
             ? scopes.length === 1 &&
@@ -160,6 +158,9 @@ class ConversationConnection {
                 scope.resourceId === selected);
         if (!matches)
             throw new ConversationUnavailable("foreign-client-view");
+    }
+    bind(view) {
+        this.assertContext(view.run);
         if ("request" in view && this.intent) {
             const saved = view.request;
             const input = this.intent;
@@ -349,7 +350,7 @@ class ConversationConnection {
         }
     }
     history = async (input = {}) => {
-        const request = receiveConversationRequest("history", bytes(input));
+        const request = receiveConversationRequest("history", bytes({ ...input, acceptEmpty: true }));
         this.start();
         this.detach();
         this.publish({
@@ -359,7 +360,18 @@ class ConversationConnection {
         });
         try {
             const view = await this.receive("history", request);
-            this.bind(view);
+            if (!("run" in view)) {
+                this.assertContext(view);
+                // Empty history admits no run, request or observation cursor. Retained write uncertainty is unchanged.
+                this.observation = undefined;
+                this.publish({
+                    status: "ready",
+                    observation: null,
+                    acceptedRequest: null,
+                });
+            }
+            else
+                this.bind(view);
             return this.getSnapshot();
         }
         catch (error) {

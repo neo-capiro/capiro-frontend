@@ -341,6 +341,8 @@ it("a successful send clears the persisted text", async () => {
         pendingTurn: null,
       }),
   );
+  if (transport.isEmptyTranscript(page))
+    throw new Error("Expected populated successful-send transcript fixture");
   expect(journal(cache).acknowledgeCompleted(page)).toBe(true);
   expect(draft.draft()).toBe("");
   expect(stored(storage)).not.toContain(prompt);

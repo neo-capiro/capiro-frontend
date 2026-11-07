@@ -211,7 +211,7 @@ test("synthetic partial history keeps an admitted current prompt visible while n
   expect(f.unexpected).toEqual([]);
 });
 
-test("synthetic hard reload with RESERVED and no immutable submit identity can only replay that source mapping", async ({
+test("synthetic RESERVED without a submit identity requires one exact check and keeps its confirmed result across reload", async ({
   page,
 }) => {
   const f = await setupConversation(page);
@@ -240,11 +240,13 @@ test("synthetic hard reload with RESERVED and no immutable submit identity can o
   await composer(page).fill("A different request");
   await expect(sendButton(page)).toBeDisabled();
   await page.getByRole("button", { name: "Check again", exact: true }).click();
+  await expect(sendButton(page)).toBeEnabled();
   await page.reload();
+  // The positive check is retained for this exact mapping; reopening must not ask the same question again.
   await expect(
     page.getByText(/cannot tell whether your last message was sent/),
-  ).toBeVisible();
-  await expect(sendButton(page)).toBeDisabled();
+  ).toHaveCount(0);
+  await expect(sendButton(page)).toBeEnabled();
   expect(mappings).toEqual([
     { conversationId: binding.conversationId, sourceRunId: binding.runId },
   ]);
@@ -262,10 +264,14 @@ test("synthetic absent history never bypasses positive original allocation befor
 }) => {
   const f = await setupConversation(page);
   await page.route("**/api/conversations/transcript", (r) =>
-    reply(r, { error: { code: "CONVERSATION_NOT_FOUND" } }, 404),
+    reply(r, { schema: "meri.conversation-transcript-empty/1", conversation }),
   );
   await page.route("**/api/conversations/history", (r) =>
-    reply(r, { error: { code: "NOT_FOUND" } }, 404),
+    reply(r, {
+      schema: "meri.conversation-history-empty/1",
+      binding,
+      scopes: conversation.scopes,
+    }),
   );
   const allocations: unknown[] = [],
     admissions: unknown[] = [],
@@ -299,6 +305,65 @@ test("synthetic absent history never bypasses positive original allocation befor
   await page.reload();
   await expect(sendButton(page)).toBeDisabled();
   expect(allocations).toHaveLength(1);
+  expect(submits).toEqual([]);
+  expect(f.unexpected).toEqual([]);
+});
+
+test("a fresh empty reserved successor removes the false saved-answer warning and preserves an uncertain local request on reload", async ({
+  page,
+}) => {
+  const f = await setupConversation(page, undefined, [contextFor(nextBinding)]);
+  await installHistory(page, {
+    pendingTurn: {
+      sourceBinding: binding,
+      targetBinding: nextBinding,
+      state: "RESERVED",
+    },
+  });
+  await page.route("**/api/conversations/history", (r) =>
+    reply(r, {
+      schema: "meri.conversation-history-empty/1",
+      binding: nextBinding,
+      scopes: conversation.scopes,
+    }),
+  );
+  const admissions: unknown[] = [],
+    submits: unknown[] = [];
+  await page.route("**/api/conversations/input/admit", (r) => {
+    admissions.push(r.request().postDataJSON());
+    return reply(r, { error: { code: "CONVERSATION_UNAVAILABLE" } }, 503);
+  });
+  await page.route("**/api/conversations/submit", (r) => {
+    submits.push(r.request().postDataJSON());
+    return reply(r, {}, 500);
+  });
+  await page.goto(selectedUrl);
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await composer(page).fill("An uncertain successor message");
+  await expect(sendButton(page)).toBeEnabled();
+  await expect(
+    page.getByText(/cannot tell whether your last message was sent/),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Check again", exact: true }),
+  ).toHaveCount(0);
+  await sendButton(page).click();
+  await expect(
+    page.getByRole("button", { name: "Retry same request", exact: true }),
+  ).toBeVisible();
+  expect(admissions).toHaveLength(1);
+  await page.reload();
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Retry same request", exact: true }),
+  ).toBeVisible();
+  await expect(sendButton(page)).toBeDisabled();
+  expect(admissions).toHaveLength(1);
+  await page
+    .getByRole("button", { name: "Retry same request", exact: true })
+    .click();
+  await expect.poll(() => admissions.length).toBe(2);
+  expect(admissions[1]).toEqual(admissions[0]);
   expect(submits).toEqual([]);
   expect(f.unexpected).toEqual([]);
 });

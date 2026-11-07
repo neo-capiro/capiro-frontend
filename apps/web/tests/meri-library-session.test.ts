@@ -11,6 +11,7 @@ import {
   listLibraryContexts,
 } from "../src/shared/meri-documents/library-session";
 import { ActionSessionUnavailable } from "../src/shared/meri-actions/session-bootstrap";
+import { documentSessionContext } from "../src/shared/meri-documents/session-context";
 import { SessionLifetimeController } from "../src/shared/meri-actions/opaque-session-controller";
 import { libraryConnectionPhase } from "../src/features/meri/files/library-connection";
 import { conversation, turn } from "../test/browser/meri-history-fixtures";
@@ -105,6 +106,30 @@ it("stops before session issuance when history is revoked", async () => {
   f.fetcher.mockImplementation(async () => new Response(null, { status: 403 }));
   await expect(f.open()).rejects.toThrow();
   expect(f.fetcher).toHaveBeenCalledOnce();
+});
+
+it("an owned empty conversation cannot select a document or library run", async () => {
+  const f = fixture("completed");
+  f.fetcher.mockImplementation(async () =>
+    Response.json({
+      schema: "meri.conversation-transcript-empty/1",
+      conversation,
+    }),
+  );
+  await expect(f.open()).rejects.toMatchObject({ status: 404 });
+  await expect(
+    documentSessionContext({
+      account,
+      clientId,
+      conversationId: binding.conversationId,
+      signal: signal(),
+      fetcher: f.fetcher,
+    }),
+  ).rejects.toThrow("no available saved run");
+  expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([
+    "/api/conversations/transcript",
+    "/api/conversations/transcript",
+  ]);
 });
 
 it("retains a continuation for an empty client-filtered discovery page", async () => {

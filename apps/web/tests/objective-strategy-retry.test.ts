@@ -14,6 +14,91 @@ async function expiredAttempt() {
   return { ...fixture, first: session };
 }
 
+async function supersededAttempt() {
+  const s = await expiredAttempt();
+  s.control.source.control.version = 2;
+  s.control.source.control.currentAuthorizationRequestId = id(107);
+  s.control.source.consent!.id = id(107);
+  s.expire();
+  return s;
+}
+
+it("a later expired consent permits explicit retry after reload while preserving the earlier accepted receipt", async () => {
+  const s = await supersededAttempt();
+  const previous = structuredClone(s.first.snapshot().retained!);
+  const reopened = s.session();
+  await reopened.hydrate();
+  expect(reopened.snapshot().canRetry).toBe(true);
+  expect(reopened.snapshot().retained).toEqual(previous);
+  expect(s.writes).toHaveLength(1);
+  expect(s.starts).toHaveBeenCalledTimes(1);
+  await reopened.retry("appropriations");
+  expect(s.writes).toHaveLength(2);
+  expect(s.writes[1]!.body.command).toMatchObject({
+    expectedControlVersion: 2,
+    targetAuthorizationRequestId: id(107),
+  });
+  expect(s.writes[1]!.body.command.requestId).not.toBe(
+    previous.request.body.command.requestId,
+  );
+  expect(s.receipts.get(previous.request.body.command.requestId)).toEqual(
+    previous.accepted,
+  );
+  expect(s.starts.mock.calls.map(([job]) => job)).toEqual([id(20), id(21)]);
+});
+
+it.each([
+  "live",
+  "live-prior-failed",
+  "same-version",
+  "older-version",
+  "same-consent",
+  "running",
+  "receipt-mismatch",
+])(
+  "a superseded journal refuses %s without replacing its accepted request",
+  async (defect) => {
+    const s = await supersededAttempt();
+    const retained = structuredClone(s.first.snapshot().retained);
+    if (defect === "live" || defect === "live-prior-failed") {
+      s.control.source.consent!.expired = false;
+      s.control.source.observedAt = s.control.source.consent!.confirmedAt;
+      s.control.contextFailure = defect === "live-prior-failed";
+    }
+    if (defect === "same-version") s.control.source.control.version = 1;
+    if (defect === "older-version") s.control.source.control.version = 0;
+    if (defect === "same-consent") {
+      s.control.source.control.currentAuthorizationRequestId = id(7);
+      s.control.source.consent!.id = id(7);
+    }
+    if (defect === "running") s.control.running = true;
+    if (defect === "receipt-mismatch") s.control.receiptMismatch = true;
+    await s.first.retry("appropriations");
+    expect(s.writes).toHaveLength(1);
+    expect(s.first.snapshot().retained).toEqual(retained);
+    expect(s.starts).toHaveBeenCalledTimes(1);
+    expect(s.first.snapshot().error).toBeTruthy();
+  },
+);
+
+it("Core refusal of a superseded queued attempt never starts generation and retains the exact successor request", async () => {
+  const s = await supersededAttempt();
+  await s.first.refresh();
+  expect(s.first.snapshot().canRetry).toBe(true);
+  s.control.status = 409;
+  await s.first.retry("appropriations");
+  const successor = structuredClone(s.writes[1]!);
+  expect(s.first.snapshot().retained?.request).toEqual(successor);
+  expect(s.first.snapshot().retained?.accepted).toBeUndefined();
+  expect(s.starts).toHaveBeenCalledTimes(1);
+  const reopened = s.session();
+  await reopened.hydrate();
+  expect(reopened.snapshot().canRetry).toBe(false);
+  await reopened.submit("appropriations");
+  expect(s.writes).toEqual([s.writes[0], successor, successor]);
+  expect(s.starts).toHaveBeenCalledTimes(1);
+});
+
 it("explicit new consent preserves the original receipt and advances current CAS with fresh IDs", async () => {
   const s = await expiredAttempt();
   const previous = structuredClone(s.first.snapshot().retained!);

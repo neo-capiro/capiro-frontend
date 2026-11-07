@@ -1,4 +1,7 @@
-import { readConversationTranscript } from "../meri-conversations/history-client";
+import {
+  readConversationTranscript,
+  isEmptyTranscript,
+} from "../meri-conversations/history-client";
 import { conversationInClient } from "../meri-conversations/history-pages";
 
 /** Select only a saved run of this conversation; an unpinned session can reserve a new turn. */
@@ -21,6 +24,7 @@ export async function documentSessionContext({
     fetcher,
   );
   if (
+    isEmptyTranscript(page) ||
     page.conversation.conversationId !== conversationId ||
     !conversationInClient(page.conversation, account, clientId) ||
     page.pendingTurn ||

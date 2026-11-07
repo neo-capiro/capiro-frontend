@@ -7,6 +7,7 @@ import {
 import type { ConversationProxyConfig } from "../src/shared/meri-conversations/proxy";
 import {
   ConversationHistoryUnavailable,
+  isEmptyTranscript,
   listConversations,
   readConversationTranscript,
 } from "../src/shared/meri-conversations/history-client";
@@ -237,6 +238,10 @@ describe("synthetic native history proxy", () => {
         async () => response,
       );
       expect(received).toEqual(body);
+      if (isEmptyTranscript(received))
+        throw new Error(
+          "Expected populated model-selection transcript fixture",
+        );
       expect(Object.hasOwn(received.turns[0]!.request, "modelSelection")).toBe(
         modelSelection !== undefined,
       );

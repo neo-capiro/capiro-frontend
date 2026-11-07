@@ -476,6 +476,7 @@ export function MeriLiveConversation({
   onBrowserTarget,
   historyUnavailable = false,
   reservedOpen = false,
+  reservedEmpty = false,
 }: {
   port: MeriConversationPort;
   initialPrompt: string | undefined;
@@ -515,6 +516,8 @@ export function MeriLiveConversation({
   historyUnavailable?: boolean;
   /** This reserved run admitted no message (control's answer, or the person discarded it). */
   reservedOpen?: boolean;
+  /** A current empty read permits a new message only when this run has no retained request. */
+  reservedEmpty?: boolean;
 }) {
   const run = useLiveRun(
     port,
@@ -581,7 +584,7 @@ export function MeriLiveConversation({
     nextTurnBlocked,
     nextTurnVerified,
     initialDraft.hasPending(port.context),
-    reservedOpen,
+    reservedOpen || reservedEmpty,
   );
   const retentionError =
     storageError ?? initialDraft.error() ?? run.storageError;
@@ -618,7 +621,7 @@ export function MeriLiveConversation({
           nextTurnBlocked,
           nextTurnVerified,
           initialDraft.hasPending(port.context),
-          reservedOpen,
+          reservedOpen || reservedEmpty,
         ).sendBlocked
       : availability.sendBlocked);
   /** Sends the draft; false when nothing was sent, so a caller handing a waiting message over can say so. */
