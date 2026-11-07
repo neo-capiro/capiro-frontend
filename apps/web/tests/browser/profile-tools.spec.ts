@@ -112,6 +112,10 @@ test("actor and tenant change discards an open old tag draft", async ({
 }) => {
   const fixture = await installProfileTools(page);
   await page.goto(route);
+  const focus = page.getByLabel("Client focus tags");
+  await expect(focus).toContainText("Saved focus");
+  const previousFocus = await focus.elementHandle();
+  if (!previousFocus) throw new Error("Current actor has no focus row");
   await page.getByRole("button", { name: "+ Add focus tag" }).click();
   await page
     .getByRole("textbox", { name: "Focus tag" })
@@ -120,6 +124,9 @@ test("actor and tenant change discards an open old tag draft", async ({
     window.dispatchEvent(new Event("profile-tools-actor-change")),
   );
   await expect(page.getByRole("dialog")).toHaveCount(0);
+  expect(await previousFocus.evaluate((node) => node.isConnected)).toBe(false);
+  expect(await previousFocus.boundingBox()).toBeNull();
+  await expect(focus).toContainText("Saved focus");
   await page.getByRole("button", { name: "+ Add focus tag" }).click();
   await expect(page.getByRole("textbox", { name: "Focus tag" })).toHaveValue(
     "",

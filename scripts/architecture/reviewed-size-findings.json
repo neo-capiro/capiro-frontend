@@ -8662,5 +8662,14 @@
     "reason": "One scoped encrypted journal contract retains existing current writer, client and Objective checks. Acknowledgement reuses canonical journal retirement and verifies an identical accepted payload; shared journal code continues to own storage and locking.",
     "reviewedBy": "Codex independent reviewer /root/review_retry_final",
     "reviewedOn": "2026-11-07"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/global-create/GlobalObjectiveClientPicker.tsx",
+    "kind": "function",
+    "symbol": "PickerSession",
+    "fingerprint": "80fa281e489135191a50a05f57cf0da9c04580ef523c79f73f35b52312377d43",
+    "reason": "Exact-head design review of 682fe43a77ffbe980a8936f5a3c3ce84980b3bc7: this 176-nonblank-line body owns one objective-client chooser, its local search/selection and status-specific presentation. The change schedules the existing cache subscription through TanStack notifyManager.batchCalls, matching the canonical actor subscription and library observer pattern. Snapshot reads, actor-scoped keys, invalidation/error gating and synchronous assertObjectiveClient at submit remain unchanged, so deferred rendering cannot authorize a stale selection. Search, list readiness and selection share one form lifecycle; separating presentation solely to reduce size would not establish a new responsibility. No new authority, retry or cache owner is introduced.",
+    "reviewedBy": "Codex independent identity_timeout_review reviewer",
+    "reviewedOn": "2026-11-07"
   }
 ]

@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { clientId, json } from "./fixtures";
 import { installProfileTools, toolsTenantId } from "./profile-tools-fixtures";
 
-test("profile identity resolution replaces stale focus ownership and preserves editable layout", async ({
+test("cold profile identity resolution admits focus ownership and preserves editable layout", async ({
   page,
 }) => {
   const fixture = await installProfileTools(page);
@@ -26,18 +26,18 @@ test("profile identity resolution replaces stale focus ownership and preserves e
       name: "+ Add focus tag",
       exact: true,
     });
-    await expect(focus).toContainText("Saved focus");
-    await expect(add).toBeDisabled();
-    const previousFocus = await focus.elementHandle();
-    if (!previousFocus) throw new Error("Pending identity has no focus row");
-    await expect(owner).toBeVisible();
+    await expect(page.getByRole("main").getByRole("status")).toHaveText(
+      "Loading…",
+    );
+    await expect(focus).toHaveCount(0);
+    await expect(owner).toHaveCount(0);
+    await expect(add).toHaveCount(0);
+    expect(fixture.calls.gets).toBe(0);
     expect(fixture.calls.puts).toBe(0);
     releaseIdentity();
+    await expect(focus).toContainText("Saved focus");
     await expect(add).toBeEnabled();
-    expect(await previousFocus.evaluate((node) => node.isConnected)).toBe(
-      false,
-    );
-    expect(await previousFocus.boundingBox()).toBeNull();
+    await expect(owner).toBeVisible();
     const focusBox = await focus.boundingBox();
     const ownerBox = await owner.boundingBox();
     if (!focusBox || !ownerBox)
