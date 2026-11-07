@@ -8649,9 +8649,9 @@
     "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "9492b7e0f31728815bd2c9cfcec08e773f64aa9593f22dc8eb72e0dc2a0121be",
-    "reason": "One fixed actor/client/Objective intake lifecycle shares request construction and dispatch between initial submission, exact recovery and explicit successor consent under the same journal, abort and current-owner checks. The former oversized submit was decomposed into requestFor and dispatch. No new authority or model owner is introduced.",
-    "reviewedBy": "Codex independent reviewer /root/review_retry_final",
+    "fingerprint": "1ee61ebf7b65915f445b21f69acb521d2746ffa6b69af47413e5785a0eb07add",
+    "reason": "One fixed actor/client/Objective intake lifecycle shares request construction and dispatch under the same journal identity, abort and current-owner checks. Recovery of a queued job's transient control-read503 belongs within observe after exact job verification. It clears retry eligibility and leaves the existing bounded read-only timer active; it introduces no authority, command retry or model owner. The timer and effect-dispatch owners remain unchanged, so splitting this narrow observation change would obscure the cohesive lifecycle.",
+    "reviewedBy": "Codex independent Astra reviewer /root/review_directory_budget_astra",
     "reviewedOn": "2026-11-07"
   },
   {

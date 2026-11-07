@@ -1,4 +1,4 @@
-import type { CapiroApi } from "@/shared/capiro/http";
+import { CapiroApiError, type CapiroApi } from "@/shared/capiro/http";
 import { capiroOperations } from "@/shared/capiro/registry";
 import {
   governedObjectiveStrategyIntakeRequest,
@@ -431,8 +431,22 @@ export class ObjectiveStrategyIntakeSession {
       const retained = this.state.retained;
       if (retained?.accepted) {
         const job = await this.readJob(retained, signal);
-        if (job && ["queued", "failed"].includes(job.status))
-          this.availability(await this.readCurrent(signal), retained, job);
+        if (job && ["queued", "failed"].includes(job.status)) {
+          try {
+            this.availability(await this.readCurrent(signal), retained, job);
+          } catch (cause) {
+            if (
+              job.status !== "queued" ||
+              !(cause instanceof CapiroApiError) ||
+              cause.status !== 503
+            )
+              throw cause;
+            // The exact accepted job was just verified. A temporarily unavailable
+            // control read confers no retry authority; leave the existing bounded
+            // read-only polling active without repeating intake or start.
+            this.update({ canRetry: false, newSourceVerified: false });
+          }
+        }
       }
     });
 }
