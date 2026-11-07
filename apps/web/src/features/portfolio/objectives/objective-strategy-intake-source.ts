@@ -95,7 +95,8 @@ export function requireRetryStrategyIntakeSource(
     (accepted &&
       ((!laterExpiredConsent &&
         (accepted.commandReceipt.authorizationRequestId !== consent.id ||
-          accepted.commandReceipt.controlVersionAfter !== read.control.version)) ||
+          accepted.commandReceipt.controlVersionAfter !==
+            read.control.version)) ||
         accepted.commandReceipt.sourceRevision.id !==
           read.requestedSource.revision.id ||
         !job ||

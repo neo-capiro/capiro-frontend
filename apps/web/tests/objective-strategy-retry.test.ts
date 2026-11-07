@@ -38,12 +38,24 @@ it("a later expired consent permits explicit retry after reload while preserving
     expectedControlVersion: 2,
     targetAuthorizationRequestId: id(107),
   });
-  expect(s.writes[1]!.body.command.requestId).not.toBe(previous.request.body.command.requestId);
-  expect(s.receipts.get(previous.request.body.command.requestId)).toEqual(previous.accepted);
+  expect(s.writes[1]!.body.command.requestId).not.toBe(
+    previous.request.body.command.requestId,
+  );
+  expect(s.receipts.get(previous.request.body.command.requestId)).toEqual(
+    previous.accepted,
+  );
   expect(s.starts.mock.calls.map(([job]) => job)).toEqual([id(20), id(21)]);
 });
 
-it.each(["live", "live-prior-failed", "same-version", "older-version", "same-consent", "running", "receipt-mismatch"])(
+it.each([
+  "live",
+  "live-prior-failed",
+  "same-version",
+  "older-version",
+  "same-consent",
+  "running",
+  "receipt-mismatch",
+])(
   "a superseded journal refuses %s without replacing its accepted request",
   async (defect) => {
     const s = await supersededAttempt();
