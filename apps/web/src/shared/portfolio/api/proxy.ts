@@ -3,6 +3,7 @@ import { sameRequestOrigin } from "../../request-origin";
 import { portfolioCommandRefusal } from "./portfolio-command-refusals";
 import { incomingMailFilesReadRefusal } from "./incoming-mail-files-refusal";
 import { coreSessionAuthentication } from "../../preview/core-session-authentication";
+import { abortable, readBoundedJson } from "../../capiro/gateway-input";
 import {
   authFailureHeaders,
   type AuthFailureClass,
@@ -44,6 +45,28 @@ const jsonError = (
         : { "Cache-Control": "no-store" },
     },
   );
+
+function isIdentityPreview(service: Service, method: string, path: string[]) {
+  if (service !== "core" || method !== "POST") return false;
+  const route = path.map((segment) => segment.toLowerCase());
+  return (
+    (route.length === 3 &&
+      route[0] === "clients" &&
+      route[1] === "profile-build" &&
+      route[2] === "identity-preview") ||
+    (route.length === 5 &&
+      route[0] === "clients" &&
+      route[2] === "profile-build" &&
+      route[3] === "identity" &&
+      route[4] === "preview") ||
+    (route.length === 6 &&
+      route[0] === "business-development" &&
+      route[1] === "prospects" &&
+      route[3] === "profile-build" &&
+      route[4] === "identity" &&
+      route[5] === "preview")
+  );
+}
 export async function proxyRequest(
   request: Request,
   service: string,
@@ -182,6 +205,8 @@ export async function proxyRequest(
     !sameRequestOrigin(request, config.requestOrigin)
   )
     return jsonError(403, "Request origin is not allowed.");
+  if (request.signal.aborted)
+    return jsonError(408, "The request was cancelled.");
   let token: string | null;
   try {
     token = await getToken(
@@ -199,28 +224,53 @@ export async function proxyRequest(
       "credential-unverified",
     );
   }
+  if (request.signal.aborted)
+    return jsonError(408, "The request was cancelled.");
   if (!token) return jsonError(401, "Sign in to continue.", "no-session");
   const url = new URL(`${base}/${path.map(encodeURIComponent).join("/")}`);
   url.search = new URL(request.url).search;
+  const identityPreview = isIdentityPreview(selected, request.method, path);
+  const signal = AbortSignal.any([
+    request.signal,
+    // Core bounds the whole identity preview at 240s. Leave 10s for delivery;
+    // all other Portfolio operations retain their existing 30s deadline.
+    AbortSignal.timeout(identityPreview ? 250_000 : 30_000),
+  ]);
   try {
-    const body = request.method === "GET" ? undefined : await request.text();
+    const body =
+      request.method === "GET"
+        ? undefined
+        : await abortable(request.text(), signal);
+    signal.throwIfAborted();
     if (body && new TextEncoder().encode(body).length > 2_000_000)
       return jsonError(413, "Request is too large.");
-    const response = await fetcher(url, {
-      method: request.method,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body,
-      redirect: "error",
-      cache: "no-store",
-      signal: AbortSignal.any([request.signal, AbortSignal.timeout(30_000)]),
-    });
+    const response = await abortable(
+      fetcher(url, {
+        method: request.method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body,
+        redirect: "error",
+        cache: "no-store",
+        signal,
+      }).then((response) => {
+        if (signal.aborted) void response.body?.cancel().catch(() => undefined);
+        return response;
+      }),
+      signal,
+    );
+    signal.throwIfAborted();
     // Forward no cookies, redirects, server diagnostics or provider headers.
     if (!response.ok) {
-      const payload: unknown = await response.json().catch(() => null);
+      const payload: unknown = await (
+        identityPreview
+          ? abortable(readBoundedJson(response.body, 8_000_000, signal), signal)
+          : response.json()
+      ).catch(() => null);
+      signal.throwIfAborted();
       const refusal = portfolioCommandRefusal(
         selected,
         request.method,
@@ -244,9 +294,11 @@ export async function proxyRequest(
         ) ??
         (response.status === 404
           ? "The requested action or record is unavailable from the current service."
-          : response.status >= 500
-            ? "The service is unavailable. Please retry."
-            : "The operation was rejected.");
+          : response.status === 504
+            ? "The service request timed out. Please retry."
+            : response.status >= 500
+              ? "The service is unavailable. Please retry."
+              : "The operation was rejected.");
       if (
         response.status < 500 &&
         response.status !== 404 &&
@@ -268,7 +320,23 @@ export async function proxyRequest(
         response.status === 401 ? "upstream-rejected" : undefined,
       );
     }
-    return new Response(response.status === 204 ? null : response.body, {
+    let responseBody: BodyInit | null =
+      response.status === 204 ? null : response.body;
+    if (identityPreview && response.status !== 204) {
+      try {
+        responseBody = JSON.stringify(
+          await abortable(
+            readBoundedJson(response.body, 8_000_000, signal),
+            signal,
+          ),
+        );
+      } catch {
+        signal.throwIfAborted();
+        return jsonError(502, "The service returned an unexpected response.");
+      }
+      signal.throwIfAborted();
+    }
+    return new Response(responseBody, {
       status: response.status,
       headers: {
         "Content-Type": "application/json",
@@ -276,6 +344,13 @@ export async function proxyRequest(
       },
     });
   } catch {
+    if (signal.aborted)
+      return jsonError(
+        request.signal.aborted ? 408 : 504,
+        request.signal.aborted
+          ? "The request was cancelled."
+          : "The service request timed out. Please retry.",
+      );
     return jsonError(502, "The service could not be reached. Please retry.");
   }
 }
