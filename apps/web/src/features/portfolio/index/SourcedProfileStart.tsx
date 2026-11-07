@@ -30,6 +30,7 @@ import {
 } from "@/features/portfolio/files/public";
 import { clientSchema, type Client } from "./contracts";
 import { safeWebsite } from "./contracts";
+import { clientsKey } from "./queries";
 
 export function SourcedProfileStart({ allowed }: { allowed: boolean }) {
   const identity = useIdentity();
@@ -47,6 +48,8 @@ export function SourcedProfileStart({ allowed }: { allowed: boolean }) {
       actor={actor}
       allowed={allowed}
       active={active}
+      checking={identity.isPending || identity.isFetching}
+      refreshIdentity={() => identity.refetch({ throwOnError: true })}
     />
   );
 }
@@ -54,10 +57,14 @@ function CurrentSourcedProfileStart({
   allowed,
   actor,
   active,
+  checking,
+  refreshIdentity,
 }: {
   allowed: boolean;
   actor: string;
   active: boolean;
+  checking: boolean;
+  refreshIdentity: () => Promise<unknown>;
 }) {
   const api = useApi();
   const capture = useIntakeAuthority(false);
@@ -74,6 +81,7 @@ function CurrentSourcedProfileStart({
   const [uploaded, setUploaded] = useState<Attachment>();
   const [shareDocument, setShareDocument] = useState(false);
   const [uncertain, setUncertain] = useState(false);
+  const [initialResearchPending, setInitialResearchPending] = useState(true);
   const owner = useRef<ReturnType<typeof capture> | undefined>(undefined);
   const identityDocument = useProfileIdentityDocument({
     file,
@@ -145,10 +153,17 @@ function CurrentSourcedProfileStart({
             setUncertain(true);
           throw error;
         }
-        scope.assert();
+        // A validated POST receipt is already a confirmed creation. Preserve
+        // it before rechecking authority so a refresh failure cannot enable a
+        // second create. The actor-keyed component still owns its lifetime.
         setSaved(client);
-        await cache.invalidateQueries({ queryKey: ["clients"] });
       }
+      // Creation and background enrichment change Core's native membership
+      // snapshot. Continue only after a fresh authoritative read for this actor.
+      await refreshIdentity();
+      scope.assert();
+      await cache.invalidateQueries({ queryKey: clientsKey });
+      scope.assert();
       if (file && !uploaded) {
         if (!prepared)
           throw new Error(
@@ -199,27 +214,52 @@ function CurrentSourcedProfileStart({
     document.viewerMode === "all" &&
     saved &&
     canResearchFile(document, { kind: "client", id: saved.id });
+  const researchWebsite = safeWebsite(website.trim()) ?? "";
   const initialResearch: ResearchInput = {
-    sources: file ? [] : ["public_web", "sam_gov", "lda"],
+    sources: !file || researchWebsite ? ["public_web", "sam_gov", "lda"] : [],
     attachmentIds: ready ? [document.id] : [],
     ldaClientIds: [],
-    website: safeWebsite(website.trim()) ?? "",
+    website: researchWebsite,
   };
+  const extractionFailed =
+    Boolean(file) &&
+    ["failed", "unsupported", "empty"].includes(
+      document?.extractionStatus ?? "",
+    );
   if (!active)
-    return <p role="status">Checking the current profile session…</p>;
+    return (
+      <p role="status">
+        {checking
+          ? "Checking the current profile session…"
+          : "The current session cannot continue this profile."}
+      </p>
+    );
   if (saved)
     return (
-      <SavedProfileAccess id={saved.id}>
+      <SavedProfileAccess
+        id={saved.id}
+        busy={mutation.isPending}
+        researchPending={
+          initialResearchPending &&
+          !mutation.error &&
+          !extraction.error &&
+          !extractionFailed
+        }
+      >
         <div className="stack">
           <p role="status">
             {saved.name} is saved.{" "}
-            {file && !uploaded
-              ? "Linking the original private document to this profile."
-              : file && !shareDocument
-                ? "The identity document remains private to you."
-                : file && !ready
-                  ? "Waiting for the shared document to be extracted."
-                  : "Research continues with saved progress."}
+            {mutation.isPending
+              ? "Verifying access before continuing."
+              : mutation.error
+                ? "Continue below after access is verified."
+                : file && !uploaded
+                  ? "Linking the original private document to this profile."
+                  : file && !shareDocument
+                    ? "The identity document remains private to you."
+                    : file && !ready
+                      ? "Waiting for the shared document to be extracted."
+                      : "Research continues with saved progress."}
           </p>
           <QueryState error={mutation.error ?? extraction.error} />
           {mutation.isError && (
@@ -228,33 +268,34 @@ function CurrentSourcedProfileStart({
               disabled={mutation.isPending}
               onClick={() => mutation.mutate()}
             >
-              Retry linking document
+              {file ? "Retry linking document" : "Continue saved profile"}
             </button>
           )}
-          {file &&
-            ["failed", "unsupported", "empty"].includes(
-              document?.extractionStatus ?? "",
-            ) && (
-              <p role="alert">
-                The document has no usable extracted text. The profile is saved;
-                review its files or choose other sources.
-              </p>
-            )}
+          {extractionFailed && (
+            <p role="alert">
+              The document has no usable extracted text. The profile is saved;
+              review its files or choose other sources.
+            </p>
+          )}
           {file && uploaded && !shareDocument && (
             <p className="muted">
               The document was used only to confirm company identity. Review its
               sharing in Files before using it as a shared research source.
             </p>
           )}
-          {(!file || (uploaded && !shareDocument) || ready) && (
-            <ProfileBuildPanel
-              subject={{ kind: "client", id: saved.id }}
-              initialResearch={!file || ready ? initialResearch : undefined}
-            />
-          )}
-          <Link className="button primary" href={`/portfolio/${saved.id}`}>
-            Open profile
-          </Link>
+          {!mutation.isPending &&
+            !mutation.error &&
+            (!file || (uploaded && !shareDocument) || ready) && (
+              <ProfileBuildPanel
+                subject={{ kind: "client", id: saved.id }}
+                initialResearch={
+                  !file || ready || researchWebsite
+                    ? initialResearch
+                    : undefined
+                }
+                onInitialResearchPendingChange={setInitialResearchPending}
+              />
+            )}
         </div>
       </SavedProfileAccess>
     );
@@ -382,7 +423,7 @@ function CurrentSourcedProfileStart({
       </button>
       <small className="muted">
         {file
-          ? "The document uploads privately before company matching. Sharing is optional; shared documents can be used for profile research after you confirm the company."
+          ? "The document uploads privately before company matching. Sharing is optional; shared documents can be used for profile research after you confirm the company. If you add a website, research also uses it and official SAM.gov and LDA records."
           : "Research uses the company website and official SAM.gov and LDA records. Review proposed facts before approving them."}
       </small>
     </form>
@@ -391,19 +432,48 @@ function CurrentSourcedProfileStart({
 
 function SavedProfileAccess({
   id,
+  busy,
+  researchPending,
   children,
 }: {
   id: string;
+  busy: boolean;
+  researchPending: boolean;
   children: ReactNode;
 }) {
   const profile = useProfileSnapshot({ kind: "client", id });
-  if (!profile.data || profile.error)
-    return (
-      <QueryState
-        pending={profile.isPending}
-        error={profile.error}
-        retry={() => void profile.refetch()}
-      />
-    );
-  return children;
+  const denied =
+    profile.error instanceof ApiError &&
+    [401, 403, 404].includes(profile.error.status);
+  const pending =
+    busy ||
+    profile.isFetching ||
+    (!profile.error && (profile.isPending || researchPending));
+  return (
+    <div className="stack">
+      {!denied && (
+        <>
+          <p role="status">The profile was created.</p>
+          {pending ? (
+            <button className="button primary" disabled>
+              Open profile
+            </button>
+          ) : (
+            <Link className="button primary" href={`/portfolio/${id}`}>
+              Open profile
+            </Link>
+          )}
+        </>
+      )}
+      {profile.data && !profile.error ? (
+        children
+      ) : (
+        <QueryState
+          pending={profile.isPending}
+          error={profile.error}
+          retry={() => void profile.refetch()}
+        />
+      )}
+    </div>
+  );
 }

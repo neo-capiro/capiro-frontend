@@ -5,6 +5,7 @@ import {
   type QueryClient,
 } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
+import { retryNativeRead } from "./native-read-retry";
 import {
   assertCurrentReadActor,
   currentActorKey,
@@ -59,6 +60,7 @@ export function clientReadQueryOptions(
     // Never an unscoped key: the read is actor-admitted, so it waits for the actor.
     enabled: Boolean(actor),
     staleTime: 30_000,
+    retry: retryNativeRead,
     queryFn: async ({ signal }: { signal: AbortSignal }) => {
       if (!actor) throw new Error("A current session is required.");
       assertCurrentReadActor(cache, actor);

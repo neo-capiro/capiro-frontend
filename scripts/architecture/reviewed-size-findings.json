@@ -8153,10 +8153,10 @@
     "file": "apps/web/src/features/portfolio/index/SourcedProfileStart.tsx",
     "kind": "function",
     "symbol": "CurrentSourcedProfileStart",
-    "fingerprint": "84155f3c57c322459c08bb0a07f6d745efba8a21fc168df5bd70e8e24a41e9f3",
-    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. One source-first intake flow spanning preview, explicit company confirmation, profile creation and same-attachment linking. Upload/readiness and source confirmation delegate to separate owners; the file remains private unless the unchecked sharing choice is explicitly selected. A lost link response preserves the created profile and retries the same attachment/target. Post-create research starts only from shared usable extracted sources.",
-    "reviewedBy": "Codex independent frontend_depth reviewer",
-    "reviewedOn": "2026-11-04"
+    "fingerprint": "de52fe2686367dc4deef0ad4e11a5349806c8e742d00d3bfe02f8327f28bd544",
+    "reason": "The same local draft, confirmed create receipt and document continuation determine one automatic initial research request. An explicit valid website selects existing public-web/SAM/LDA sources; only canonical ready shared documents become attachment IDs. Existing private-document, extraction, actor lifetime, mutation and navigation gates remain in their canonical owners.",
+    "reviewedBy": "Codex independent profile_review reviewer",
+    "reviewedOn": "2026-11-07"
   },
   {
     "file": "apps/web/src/features/portfolio/intake/registrant/CandidateReview.tsx",
@@ -8351,10 +8351,10 @@
     "file": "apps/web/src/features/portfolio/profile-build/ProfileBuildPanel.tsx",
     "kind": "function",
     "symbol": "CurrentProfileBuild",
-    "fingerprint": "8622000d19bc28a44f5934ddd50eb21442054bf2dfc2bfba4141e1be08ed20f2",
-    "reason": "Independent exact-body review at 9ded2910 (producer commit c8855bc1). One profile research screen coordinating established access, retained-command, review and task-ledger hooks. Added purpose/capability/unit props reset component identity and flow into the same source chooser; durable scheduling and transport remain external. Denied/current-read checks suppress content and actions. Separate response-binding defect is tracked in the research-contract helper, not hidden by this size acceptance.",
-    "reviewedBy": "Codex independent backend_audit reviewer",
-    "reviewedOn": "2026-11-04"
+    "fingerprint": "5ecd27624acc6e768be82f7345eedc3d7eb3839e3fb008fa184114b11fbc5482",
+    "reason": "Independent exact-body review: one profile research/review lifecycle composes canonical access, current/setup reads, durable command recovery and approval actions. The automatic start remains guarded by the existing started ref, current read and command owner; useLayoutEffect reports derived pending state to the intake host without starting a second loop. Denial/read errors, busy actions, source selection, findings and confirmation retain their existing owners and explicit outcomes. Presentation growth is cohesive, not an unrelated responsibility requiring a size-only split.",
+    "reviewedBy": "Codex independent profile_review reviewer",
+    "reviewedOn": "2026-11-07"
   },
   {
     "file": "apps/web/src/features/portfolio/profile-build/ResearchRequest.tsx",
@@ -8416,10 +8416,10 @@
     "file": "apps/web/src/features/portfolio/index/SourcedProfileStart.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "446ddca6b1a8591e4e9c97fe1a9b6b1f9f7090c5f17efe7b8e2272c72b2e12db",
-    "reason": "Independent exact-body review of frontend_audit through 0f24f40d, including the e49c5b5b candidate identity correction. The module composes the actor-keyed source intake and saved-profile access wrapper. Existing upload, source confirmation, canonical attachment linking and durable research remain separate owners.",
-    "reviewedBy": "Codex independent frontend_depth reviewer",
-    "reviewedOn": "2026-11-04"
+    "fingerprint": "2c6344427ec248cf7996ab1b2b8f446e800ffce2bc832f718480cb7fdc650200",
+    "reason": "One actor-keyed source-first intake lifecycle composes existing identity, upload/linking, snapshot access and durable research owners. The mixed-input change reuses canonical safeWebsite and changes only the initial source selection plus explanatory copy. No new orchestration, authority owner or abstraction; no size-only split warranted.",
+    "reviewedBy": "Codex independent profile_review reviewer",
+    "reviewedOn": "2026-11-07"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
@@ -8617,6 +8617,33 @@
     "reason": "Exact-source Profile activity review: this 98-line browser scenario owns one uncertain conflict-decision lifecycle, including its explicit synthetic snapshot and request capture. It verifies that a 503 followed by collapse/reopen preserves the exact requestId, expectedVersion and resolution for retry and clears the attempt only on a verified response. Keeping the fixture and sequential assertions together avoids obscuring the behavior being preserved; it introduces no production owner.",
     "reviewedBy": "Codex independent profile_review",
     "reviewedOn": "2026-11-06"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/SourcedProfileStart.tsx",
+    "kind": "function",
+    "symbol": "CurrentSourcedProfileStart > mutationFn",
+    "fingerprint": "356eb448bc13567e9727b5c19f5f80b81f899841cdc9c7adcd0a5c0daca20d04",
+    "reason": "Unchanged from the preceding approved head. One sequential identity/create/refresh/link continuation retains the confirmed create receipt before identity refresh and retries linking the same attachment and saved profile. It delegates capacity, identity binding, attachment readiness and linking to canonical owners.",
+    "reviewedBy": "Codex independent profile_review reviewer",
+    "reviewedOn": "2026-11-07"
+  },
+  {
+    "file": "apps/web/tests/browser/profile-document-identity.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "1fa682b60beb16293342ff3f3a3ec77b8c8f4a29a25fd7edeff021cc5de9f0ee",
+    "reason": "One cohesive four-case browser contract retains the original document identity, privacy, upload/link retry, layout and document-only assertions. Added explicit-website cases hold extraction/start responses, assert navigation stays unavailable, preserve private attachment exclusion and verify one create/run after navigation. It reuses installEnrichment; fixed expected requests are independent of production selection logic. Finally releases both holds. No unrelated responsibility or size-only extraction is needed.",
+    "reviewedBy": "Codex independent profile_review reviewer",
+    "reviewedOn": "2026-11-07"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/profile-build/ProfileBuildPanel.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "87c3bfcdcfc8b2d1c73ee771d181c9ea545aa3c5ca8c01f68f6c5a32961b21b9",
+    "reason": "Independent exact-source review of the canonical research/review panel and its finding-selection presentation. The actor/subject-keyed wrapper composes existing access, setup/latest reads, durable research/recovery, review actions, upload dialog, run ledger and confirmation owners. The intake pending callback reports existing lifecycle state before paint and adds no command, authorization or persistence owner. The file remains one cohesive profile-research surface; splitting solely at the size threshold would obscure its interaction contract.",
+    "reviewedBy": "Codex independent profile_review reviewer",
+    "reviewedOn": "2026-11-07"
   },
   {
     "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
