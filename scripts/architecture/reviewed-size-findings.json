@@ -8658,7 +8658,7 @@
     "file": "apps/web/tests/browser/profile-document-identity.spec.ts",
     "kind": "function",
     "symbol": "<anonymous>",
-    "fingerprint": "4fe367f14b2efdadff6eb498c31194f64d936ba12e7075bb81b03ecb8539cabd",
+    "fingerprint": "1fa682b60beb16293342ff3f3a3ec77b8c8f4a29a25fd7edeff021cc5de9f0ee",
     "reason": "One cohesive four-case browser contract retains the original document identity, privacy, upload/link retry, layout and document-only assertions. Added explicit-website cases hold extraction/start responses, assert navigation stays unavailable, preserve private attachment exclusion and verify one create/run after navigation. It reuses installEnrichment; fixed expected requests are independent of production selection logic. Finally releases both holds. No unrelated responsibility or size-only extraction is needed.",
     "reviewedBy": "Codex independent profile_review reviewer",
     "reviewedOn": "2026-11-07"
