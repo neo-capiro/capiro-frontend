@@ -10,6 +10,7 @@ import type { ApiClient } from "../src/shared/portfolio/api/http";
 import { createStrategyIntakeRecovery } from "../src/features/portfolio/objectives/objective-strategy-intake-recovery";
 import { ObjectiveStrategyIntakeSession } from "../src/features/portfolio/objectives/objective-strategy-intake-session";
 import wire from "./objective-generation-wire-fixtures.json";
+import { objectiveGenerationJob } from "../src/shared/capiro/operations/objective-generation";
 import type {
   GovernedObjectiveStrategyIntakeRequest,
   GovernedObjectiveStrategyIntakeResponse,
@@ -114,7 +115,11 @@ export function setup() {
   const fetcher = vi.fn<typeof fetch>(async (url, init) => {
     const key = new URL(String(url), "https://example.invalid").pathname;
     if (key.endsWith("/objectives.governedGeneration.read")) {
-      const request = JSON.parse(new URL(String(url), "https://example.invalid").searchParams.get("input")!);
+      const request = JSON.parse(
+        new URL(String(url), "https://example.invalid").searchParams.get(
+          "input",
+        )!,
+      );
       const receipt =
         receipts.get(request.query?.requestId)?.commandReceipt ?? null;
       return Response.json({
@@ -126,10 +131,14 @@ export function setup() {
       });
     }
     if (key.endsWith("/strategies.objectiveDraftJob")) {
-      const job = structuredClone(
+      const job = objectiveGenerationJob.parse(
         control.complete ? wire.completedPoll.body : wire.pendingPoll.body,
       );
-      const request = JSON.parse(new URL(String(url), "https://example.invalid").searchParams.get("input")!);
+      const request = JSON.parse(
+        new URL(String(url), "https://example.invalid").searchParams.get(
+          "input",
+        )!,
+      );
       const receipt = [...receipts.values()].find(
         (r) => r.generationJobId === request.params.jobId,
       )!;
@@ -224,7 +233,7 @@ export function setup() {
         currentAuthorizationRequestId:
           receipt.commandReceipt.authorizationRequestId,
       },
-      consent: { ...receipt.commandReceipt.consent, expired: false },
+      consent: { ...receipt.commandReceipt.consent!, expired: false },
       observedAt: new Date(now + 2000).toISOString(),
     };
     if (control.lostReply) {
