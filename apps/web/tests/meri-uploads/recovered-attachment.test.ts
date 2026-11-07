@@ -86,7 +86,13 @@ function service() {
     }
     throw Error("unexpected route " + url);
   };
-  return { calls, fetcher, get receipt() { return receipt; } };
+  return {
+    calls,
+    fetcher,
+    get receipt() {
+      return receipt;
+    },
+  };
 }
 function controller(
   store: ReturnType<typeof storage>,
@@ -126,10 +132,13 @@ describe("a conversation reconnect must not abandon an uploaded file", () => {
     // The scanned-clean confirmation never arrived, so the file is not yet part of a message.
     expect(first.sendArgument()).toEqual([]);
 
-    // The reconnect: the port — and with it this controller — is replaced. The durable reference is
-    // all that survives, so the restored row has no identity of its own.
+    // The reconnect retains only the locator and its display wait, so the restored row has no
+    // identity or readiness of its own.
     first.dispose();
-    expect(store.values.size).toBe(1);
+    expect(store.values.size).toBe(2);
+    expect(
+      createUploadAttemptReferences(scope, () => store).list(),
+    ).toHaveLength(1);
     const restored = controller(store, fake);
     expect(restored.items()[0]).toMatchObject({
       filename: "Upload awaiting status",
@@ -148,7 +157,9 @@ describe("a conversation reconnect must not abandon an uploaded file", () => {
     });
     expect(resolved!.sha256).toHaveLength(64);
     // Only the two declarations of the first attempt plus the one read: nothing was re-declared.
-    expect(fake.calls.filter((url) => url.endsWith("/initiate"))).toHaveLength(1);
+    expect(fake.calls.filter((url) => url.endsWith("/initiate"))).toHaveLength(
+      1,
+    );
     expect(fake.calls.filter((url) => url.endsWith("/status"))).toHaveLength(1);
     // A stored-but-unchecked file is still not sent as if it were ready.
     expect(restored.sendArgument()).toEqual([]);

@@ -153,18 +153,47 @@ export function createUploadController(options: {
     const check = checks.get(requestId);
     return !!check && now() - check.since >= UPLOAD_CHECK_WAIT_MS;
   };
-  const stopCheck = (requestId: string) => {
+  const stopCheck = (requestId: string, forget = true) => {
     const check = checks.get(requestId);
     if (check?.timer) clearTimeout(check.timer);
-    checks.delete(requestId);
+    if (forget) checks.delete(requestId);
+    else if (check) check.timer = null;
   };
   /** Re-arm or retire the bounded status re-read for one attachment after each published state. */
   const schedule = (requestId: string, item: UploadItem) => {
-    if (!attachmentChecking(item) || !current()) {
+    if (!current()) {
       stopCheck(requestId);
       return;
     }
-    const entry = checks.get(requestId) ?? { since: now(), timer: null };
+    if (!attachmentChecking(item)) {
+      stopCheck(requestId, item.state !== "unknown");
+      if (
+        item.state === "stored" ||
+        item.state === "removed" ||
+        item.state === "removing"
+      ) {
+        try {
+          options.recovery?.clearPending?.(requestId);
+        } catch {
+          /* Timing grants no custody or readiness. */
+        }
+      }
+      return;
+    }
+    let entry = checks.get(requestId);
+    if (!entry) {
+      const at = now();
+      let since = at;
+      try {
+        since = options.recovery?.pendingSince?.(requestId, at) ?? at;
+        if (!Number.isSafeInteger(since) || since < 0 || since > at)
+          throw Error("UPLOAD_WAIT_UNAVAILABLE");
+      } catch {
+        // A missing/unusable display clock must not restart a full wait or make pending bytes ready.
+        since = at - UPLOAD_CHECK_WAIT_MS;
+      }
+      entry = { since, timer: null };
+    }
     if (entry.timer) clearTimeout(entry.timer);
     entry.timer =
       now() - entry.since >= UPLOAD_CHECK_WAIT_MS
