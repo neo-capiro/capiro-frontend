@@ -258,6 +258,7 @@ export async function installEnrichment(page: Page) {
           attachmentIds: body.attachmentIds,
           selectedLdaIds: [12, ...(body.ldaClientIds as number[])],
           setup: {
+            ...(body.discoverLda === true ? { discoverLda: true } : {}),
             website: body.website,
             sources: body.sources,
             attachmentIds: body.attachmentIds,

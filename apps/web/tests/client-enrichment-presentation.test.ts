@@ -107,6 +107,27 @@ function expectNoDiagnostics(html: string) {
 }
 
 describe("saved enrichment outcome presentation", () => {
+  it("labels a pending LDA match as identity review before researching its history", () => {
+    const html = review({
+      ...finding(),
+      kind: "lda_identity",
+      targetKey: "lda:73",
+      source: "lda",
+      factKind: "recommendation",
+      status: "pending",
+      confidence: 0.9,
+      proposedValue: {
+        externalId: "73",
+        externalName: "Synthetic source company",
+      },
+    });
+    expect(html).toContain("Possible LDA identity");
+    expect(html).toContain("review this company match before researching");
+    expect(html).toContain("Approving the match does not approve its filings");
+    expect(html).toContain("pending");
+    expect(html).not.toContain("Automatically accepted");
+    expect(html).not.toContain("No lobbying");
+  });
   it("hides saved run/task/source diagnostics while retaining failed-task context", () => {
     const run = savedRun();
     const before = structuredClone(run);

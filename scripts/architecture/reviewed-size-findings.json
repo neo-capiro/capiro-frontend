@@ -2226,10 +2226,10 @@
     "file": "apps/web/src/shared/portfolio/api/proxy.ts",
     "kind": "function",
     "symbol": "proxyRequest",
-    "fingerprint": "bccd98fd02c21f350ba33a2c8366b66d544f52e6712ab9928d68650f67a5f653",
-    "reason": "Exact-source Profile activity review: this 228-line function remains the single narrow Portfolio service adapter. The delta makes its existing exact retired metric GET refusal permanent and removes the obsolete activation flag. Service allowlists, case-sensitive client identity, credentials, mutation-origin checks, deadlines, response shaping and unrelated intelligence forwarding retain their existing owners and semantics. Extracting the small retired-route condition would scatter the same transport boundary without separating a new responsibility.",
-    "reviewedBy": "Codex independent profile_review",
-    "reviewedOn": "2026-11-06"
+    "fingerprint": "f81fab5517904cff2c606e66d88ee5feec1a2e6efe0c2f357be6eefce92dbc3f",
+    "reason": "Exact-source identity timeout review at 17baab427ae5672b8a02ae29b9429237e9e0aef6 accepts this single ordered Portfolio service transport lifetime: scope, origin, credentials, deadline, full response body and error handling share one request and cancellation signal. The function has 280 nonblank body lines, 287 including its signature, within a 355-line module. The identity-only budget and precise cancellation/timeout classification extend the existing transport owner without adding authority, another model harness or a retry loop. A mechanical split would scatter the same ordered lifecycle rather than separate a new responsibility. The size signal remains visible and this acceptance applies only to the exact reviewed fingerprint. Re-reviewed at 5625b2d0e7339803af0e7607742f585217b6724e: upstream HTTP 504 timeout wording is limited to the existing exact identity-preview predicate; ordinary upstream 504 responses retain their established service-unavailable wording. The added boundary matrix preserves status, diagnostic scrubbing, no-store and single dispatch. This remains the same cohesive transport lifetime and acceptance is limited to this exact fingerprint.",
+    "reviewedBy": "Codex independent identity_timeout_review (GPT-6 Astra Ultra)",
+    "reviewedOn": "2026-11-07"
   },
   {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
@@ -8153,9 +8153,9 @@
     "file": "apps/web/src/features/portfolio/index/SourcedProfileStart.tsx",
     "kind": "function",
     "symbol": "CurrentSourcedProfileStart",
-    "fingerprint": "de52fe2686367dc4deef0ad4e11a5349806c8e742d00d3bfe02f8327f28bd544",
-    "reason": "The same local draft, confirmed create receipt and document continuation determine one automatic initial research request. An explicit valid website selects existing public-web/SAM/LDA sources; only canonical ready shared documents become attachment IDs. Existing private-document, extraction, actor lifetime, mutation and navigation gates remain in their canonical owners.",
-    "reviewedBy": "Codex independent profile_review reviewer",
+    "fingerprint": "f30acf6f3534b76e9b3d1d0b82fc304167ed1192c11bc1dc23bd3272335c59ca",
+    "reason": "Exact-head design review of 33c254cebdb05995ed7e23fb914bcf28a6ec792f: the 369-nonblank-line body owns one local intake draft and its preview, explicit confirmation, confirmed creation receipt, same-file continuation and initial research presentation. The new discoverLda flag follows the existing public-source selection predicate; website-only copy adds no new state or lifecycle. Actor checks, uncertain creation, document sharing/readiness and pending-research navigation remain in their existing owners and branches. Keeping this continuation together preserves its state relationships without introducing an independent policy or orchestration layer.",
+    "reviewedBy": "Codex independent identity_timeout_review reviewer",
     "reviewedOn": "2026-11-07"
   },
   {
@@ -8216,10 +8216,10 @@
     "file": "apps/web/src/features/portfolio/profile-build/FindingReview.tsx",
     "kind": "function",
     "symbol": "FindingReview",
-    "fingerprint": "6f1261ca6c6ebeff8ec698aa944b1861805da7f931982d90c97f02ebbc7b5621",
-    "reason": "Independent exact-body review of frontend_audit32e70c21 plus b1d2bb63 bounds followup. One finding card with source disclosure and status-specific review actions. The new automatic label and Not right action use shared acceptance predicates; status/revision validation and dispatch remain in actions. Its length is related conditional review presentation, not an independent policy implementation.",
-    "reviewedBy": "Codex independent frontend_depth reviewer",
-    "reviewedOn": "2026-11-04"
+    "fingerprint": "fb4988652c047c6881e866a4a3a12cb67b0a18ad83b28b4c98de8d8617c45257",
+    "reason": "Exact-head design review of 33c254cebdb05995ed7e23fb914bcf28a6ec792f: this 173-nonblank-line body renders one finding card, its evidence and status-specific review controls. The new pending LDA explanation makes identity review and filing approval distinct; it does not dispatch approval, start research or interpret confidence as proof. Selection/automatic-status predicates and action execution remain shared owners. The conditional presentation is cohesive with the card and does not justify an isolated LDA component solely to reduce the line count.",
+    "reviewedBy": "Codex independent identity_timeout_review reviewer",
+    "reviewedOn": "2026-11-07"
   },
   {
     "file": "apps/web/src/features/portfolio/profile-build/ProfileFacts.tsx",
@@ -8416,9 +8416,9 @@
     "file": "apps/web/src/features/portfolio/index/SourcedProfileStart.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "2c6344427ec248cf7996ab1b2b8f446e800ffce2bc832f718480cb7fdc650200",
-    "reason": "One actor-keyed source-first intake lifecycle composes existing identity, upload/linking, snapshot access and durable research owners. The mixed-input change reuses canonical safeWebsite and changes only the initial source selection plus explanatory copy. No new orchestration, authority owner or abstraction; no size-only split warranted.",
-    "reviewedBy": "Codex independent profile_review reviewer",
+    "fingerprint": "723d15dc338ea6f4f5d5f0fbe1eea7442dafad6e2dbac4d0e6e91da02f68a696",
+    "reason": "Exact-head design review of 33c254cebdb05995ed7e23fb914bcf28a6ec792f: this 482-nonblank-line module composes one actor-keyed source-first intake lifecycle. Identity preview/confirmation, same-document linking, saved-profile access and durable research remain delegated to their existing owners. The LDA addition sets an opt-in flag on the existing automatic research input and explains website-only entry; it introduces no identity matching, approval or provider implementation in the UI. These related continuation and rendering branches remain cohesive; a size-only split would disperse the shared draft and confirmed receipt lifetime.",
+    "reviewedBy": "Codex independent identity_timeout_review reviewer",
     "reviewedOn": "2026-11-07"
   },
   {
@@ -8661,6 +8661,15 @@
     "fingerprint": "6c03aa50c67f3ed416bbf58f70875d780c6048016bcf8d8e63a56daa0b751830",
     "reason": "One scoped encrypted journal contract retains existing current writer, client and Objective checks. Acknowledgement reuses canonical journal retirement and verifies an identical accepted payload; shared journal code continues to own storage and locking.",
     "reviewedBy": "Codex independent reviewer /root/review_retry_final",
+    "reviewedOn": "2026-11-07"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/global-create/GlobalObjectiveClientPicker.tsx",
+    "kind": "function",
+    "symbol": "PickerSession",
+    "fingerprint": "80fa281e489135191a50a05f57cf0da9c04580ef523c79f73f35b52312377d43",
+    "reason": "Exact-head design review of 682fe43a77ffbe980a8936f5a3c3ce84980b3bc7: this 176-nonblank-line body owns one objective-client chooser, its local search/selection and status-specific presentation. The change schedules the existing cache subscription through TanStack notifyManager.batchCalls, matching the canonical actor subscription and library observer pattern. Snapshot reads, actor-scoped keys, invalidation/error gating and synchronous assertObjectiveClient at submit remain unchanged, so deferred rendering cannot authorize a stale selection. Search, list readiness and selection share one form lifecycle; separating presentation solely to reduce size would not establish a new responsibility. No new authority, retry or cache owner is introduced.",
+    "reviewedBy": "Codex independent identity_timeout_review reviewer",
     "reviewedOn": "2026-11-07"
   }
 ]
