@@ -81,12 +81,21 @@ export function requireRetryStrategyIntakeSource(
 ) {
   const read = requireStrategyIntakeSource(value, objective, client);
   const consent = read.consent;
+  // Another browser may have advanced consent while this journal still names
+  // its earlier accepted job. Offer explicit consent only after the current
+  // consent expires; Core must still prove all prior work stopped atomically.
+  const laterExpiredConsent =
+    accepted &&
+    consent?.expired &&
+    consent.id !== accepted.commandReceipt.authorizationRequestId &&
+    read.control.version > accepted.commandReceipt.controlVersionAfter;
   if (
     !consent ||
     read.control.version < 1 ||
     (accepted &&
-      (accepted.commandReceipt.authorizationRequestId !== consent.id ||
-        accepted.commandReceipt.controlVersionAfter !== read.control.version ||
+      ((!laterExpiredConsent &&
+        (accepted.commandReceipt.authorizationRequestId !== consent.id ||
+          accepted.commandReceipt.controlVersionAfter !== read.control.version)) ||
         accepted.commandReceipt.sourceRevision.id !==
           read.requestedSource.revision.id ||
         !job ||
