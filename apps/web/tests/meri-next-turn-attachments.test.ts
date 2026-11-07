@@ -182,7 +182,9 @@ it("a follow-up without files sends none, and a completed turn is acknowledged o
     {},
     uploads,
   );
-  const page = async (files: typeof uploads) => {
+  const page = async (
+    files: typeof uploads,
+  ): Promise<transport.ConversationTranscriptPage> => {
     const target = turn(
       nextBinding,
       "a0000000-0000-4000-8000-00000000000b",
@@ -191,7 +193,7 @@ it("a follow-up without files sends none, and a completed turn is acknowledged o
       2,
     );
     Object.assign(target.request, { uploads: files });
-    return transport.readConversationTranscript(
+    const received = await transport.readConversationTranscript(
       { conversationId: binding.conversationId, after: 2, limit: 100 },
       new AbortController().signal,
       async () =>
@@ -211,6 +213,9 @@ it("a follow-up without files sends none, and a completed turn is acknowledged o
           pendingTurn: null,
         }),
     );
+    if (transport.isEmptyTranscript(received))
+      throw new Error("Expected populated attachment transcript fixture");
+    return received;
   };
   const other: typeof uploads = [{ ...uploads[0], sha256: "b".repeat(64) }];
   expect(turns.canAcknowledgeCompleted(await page(other))).toBe(false);

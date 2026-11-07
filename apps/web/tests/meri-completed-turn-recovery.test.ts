@@ -63,7 +63,7 @@ function memory() {
   vi.stubGlobal("window", { sessionStorage: storage });
   return storage;
 }
-async function completedPage() {
+async function completedPage(): Promise<transport.ConversationTranscriptPage> {
   const target = turn(nextBinding, nextRequestId, prompt, 2, 2);
   target.request.modelSelection = selection;
   const value = {
@@ -81,11 +81,14 @@ async function completedPage() {
     hasMore: false,
     pendingTurn: null,
   };
-  return transport.readConversationTranscript(
+  const page = await transport.readConversationTranscript(
     { conversationId: binding.conversationId, after: 2, limit: 100 },
     new AbortController().signal,
     async () => Response.json(value),
   );
+  if (transport.isEmptyTranscript(page))
+    throw new Error("Expected populated completed-turn transcript fixture");
+  return page;
 }
 function mount(
   cache: QueryClient,
