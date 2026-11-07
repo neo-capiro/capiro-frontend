@@ -13,17 +13,42 @@ const identity = {
   tenant: { id: "tenant-test", name: "Synthetic tenant" },
   role: "standard_user",
 };
+const objectiveOwner = {
+  id: "synthetic-owner",
+  name: "Synthetic objective owner",
+};
 async function setup(page: Page) {
   const unexpected = await installFixtures(page);
   const writes: string[] = [];
   page.on("request", (request) => {
-    if (request.url().includes("/api/backend/") && request.method() !== "GET")
+    if (
+      /\/api\/(backend|capiro)\//.test(new URL(request.url()).pathname) &&
+      request.method() !== "GET"
+    )
       writes.push(`${request.method()} ${request.url()}`);
   });
   await page.route("**/api/backend/core/me", (route) =>
     route.fulfill({ json: identity }),
   );
   await page.route(endpoint, (route) => route.fulfill({ json: catalog }));
+  await page.route("**/api/capiro/planner.bootstrap?**", (route) => {
+    const request = route.request();
+    const url = new URL(request.url());
+    if (
+      request.method() !== "GET" ||
+      url.searchParams.size !== 1 ||
+      url.searchParams.get("input") !== "{}"
+    ) {
+      unexpected.push(`${request.method()} ${url.pathname}${url.search}`);
+      return route.fulfill({
+        status: 400,
+        json: { message: "Unexpected synthetic owner request" },
+      });
+    }
+    return route.fulfill({
+      json: { me: objectiveOwner, people: [objectiveOwner], projects: [] },
+    });
+  });
   return { unexpected, writes };
 }
 const continueButton = (page: Page) =>
@@ -89,7 +114,7 @@ test("visible Portfolio entry opens the guarded picker without losing filters an
   expect(unexpected).toEqual([]);
 });
 
-test("keyboard search chooses the real client and opens the existing empty four-field editor", async ({
+test("keyboard search chooses the real client and opens the existing empty strategy intake editor", async ({
   page,
 }) => {
   const { unexpected, writes } = await setup(page);
@@ -115,18 +140,30 @@ test("keyboard search chooses the real client and opens the existing empty four-
     name: "New objective",
     exact: true,
   });
-  await expect(editor.getByLabel("Outcome", { exact: false })).toHaveValue("");
+  const owner = editor.getByLabel("Owner · Required", { exact: true });
+  await expect(owner).toBeEnabled();
   await expect(
-    editor.getByLabel("Government problem", { exact: false }),
+    owner.getByRole("option", { name: objectiveOwner.name, exact: true }),
+  ).toHaveCount(1);
+  await expect(
+    editor.getByLabel("Objective type · Required", { exact: true }),
   ).toHaveValue("");
-  await expect(editor.getByRole("radio", { checked: true })).toHaveCount(0);
-  await expect(editor.getByLabel("Minimum win", { exact: false })).toHaveValue(
-    "",
-  );
+  await expect(
+    editor.getByLabel("Goal statement · Required", { exact: true }),
+  ).toHaveValue("");
+  await expect(owner).toHaveValue("");
+  await expect(
+    editor.getByLabel("Target outcome date · Optional", { exact: true }),
+  ).toHaveValue("");
+  await expect(
+    editor.getByLabel("Context for Meri · Optional", { exact: true }),
+  ).toHaveValue("");
   await editor
     .getByRole("button", { name: "Confirm ready", exact: true })
     .click();
-  await expect(editor.getByRole("alert")).toBeVisible();
+  await expect(editor.getByRole("alert")).toHaveText(
+    "Complete objective type, goal statement and owner.",
+  );
   expect(writes).toEqual([]);
   expect(unexpected).toEqual([]);
 });
